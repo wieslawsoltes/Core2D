@@ -21,8 +21,26 @@ namespace Test
         {
             InitializeComponent();
 
-            var container = new WpfContainer();
+            // initialize container
+
+            var container = new WpfContainer()
+            {
+                Layers = new ObservableCollection<ILayer>()
+            };
+
+            var layer = new Layer() 
+            { 
+                Shapes = new ObservableCollection<XShape>() 
+            };
+
+            container.Layers.Add(layer);
+            container.Current = layer;
+
+            // initialize editor
+
             var editor = new PortableEditor(container);
+
+            // initialize canvas
 
             canvas.Children.Add(container);
 
@@ -44,12 +62,14 @@ namespace Test
                 editor.Move(p.X, p.Y);
             };
 
+            // initialize demo
+
             //Demo(container);
         }
 
         private static void Demo(IContainer container)
         {
-            var layer = container.Layers.First();
+            var layer = container.Current;
 
             var style1 = new XStyle()
             {
@@ -114,8 +134,6 @@ namespace Test
 
     public class WpfContainer : FrameworkElement, IContainer
     {
-        public IList<ILayer> Layers { get; set;	}
-        
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
@@ -127,6 +145,15 @@ namespace Test
                     shape.Draw(drawingContext, this);
                 }
             }
+        }
+
+        public IList<ILayer> Layers { get; set;	}
+
+        private ILayer _layer;
+        public ILayer Current
+        {
+            get { return _layer; }
+            set { _layer = value; }
         }
 
         public void Invalidate()
@@ -305,6 +332,7 @@ namespace Test
     public interface IContainer
     {
         IList<ILayer> Layers { get; set; }
+        ILayer Current { get; set; }
         void Invalidate();
         void Draw(object dc, XLine line);
         void Draw(object dc, XRectangle rectangle);
@@ -418,24 +446,41 @@ namespace Test
             Two,
             Three
         }
-        
-        private readonly IContainer _container;
-        private ILayer _layer;
-        private XShape _temp;
-        private XStyle _style;
-        private bool _defaultIsFilled;
+
         private Tool _tool;
+        public Tool CurrentTool
+        {
+            get { return _tool; }
+            set { _tool = value; }
+        }
+
         private State _state;
-        
+        public State CurrentState
+        {
+            get { return _state; }
+            set { _state = value; }
+        }
+
+        private bool _defaultIsFilled;
+        public bool DefaultIsFilled
+        {
+            get { return _defaultIsFilled; }
+            set { _defaultIsFilled = value; }
+        }
+
+        private XStyle _style;
+        public XStyle CurrentStyle
+        {
+            get { return _style; }
+            set { _style = value; }
+        }
+
+        private readonly IContainer _container;
+        private XShape _temp;
+
         public PortableEditor(IContainer container)
         {
             _container = container;
-            _container.Layers = new ObservableCollection<ILayer>();
-            
-            _layer = new Layer();
-            _layer.Shapes = new ObservableCollection<XShape>();
-
-            _container.Layers.Add(_layer);
 
             _temp = null;
             
@@ -469,7 +514,7 @@ namespace Test
                             case State.None:
                                 {
                                     _temp = XLine.Create(x, y, _style);
-                                    _layer.Shapes.Add(_temp);
+                                    _container.Current.Shapes.Add(_temp);
                                     _container.Invalidate();
                                     _state = State.One;
                                 }
@@ -494,7 +539,7 @@ namespace Test
                             case State.None:
                                 {
                                     _temp = XRectangle.Create(x, y, _style, _defaultIsFilled);
-                                    _layer.Shapes.Add(_temp);
+                                    _container.Current.Shapes.Add(_temp);
                                     _container.Invalidate();
                                     _state = State.One;
                                 }
@@ -519,7 +564,7 @@ namespace Test
                             case State.None:
                                 {
                                     _temp = XEllipse.Create(x, y, _style, _defaultIsFilled);
-                                    _layer.Shapes.Add(_temp);
+                                    _container.Current.Shapes.Add(_temp);
                                     _container.Invalidate();
                                     _state = State.One;
                                 }
@@ -559,7 +604,7 @@ namespace Test
                                 break;
                             case State.One:	
                                 {
-                                    _layer.Shapes.Remove(_temp);
+                                    _container.Current.Shapes.Remove(_temp);
                                     _container.Invalidate();
                                     _state = State.None;
                                 }
@@ -578,7 +623,7 @@ namespace Test
                                 break;
                             case State.One:	
                                 {
-                                    _layer.Shapes.Remove(_temp);
+                                    _container.Current.Shapes.Remove(_temp);
                                     _container.Invalidate();
                                     _state = State.None;
                                 }
@@ -597,7 +642,7 @@ namespace Test
                                 break;
                             case State.One:	
                                 {
-                                    _layer.Shapes.Remove(_temp);
+                                    _container.Current.Shapes.Remove(_temp);
                                     _container.Invalidate();
                                     _state = State.None;
                                 }
