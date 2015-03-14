@@ -23,12 +23,12 @@ namespace Test
 
             // initialize container
 
-            var container = new WpfContainer()
+            var container = new XContainer()
             {
                 Layers = new ObservableCollection<ILayer>()
             };
 
-            var layer = new Layer() 
+            var layer = new XLayer() 
             { 
                 Shapes = new ObservableCollection<XShape>() 
             };
@@ -36,13 +36,19 @@ namespace Test
             container.Layers.Add(layer);
             container.Current = layer;
 
+            // initialize renderer
+
+            var renderer = new WpfRenderer(container);
+
+            container.Invalidate = () => renderer.Invalidate();
+
             // initialize editor
 
             var editor = new PortableEditor(container);
 
             // initialize canvas
 
-            canvas.Children.Add(container);
+            canvas.Children.Add(renderer);
 
             canvas.PreviewMouseLeftButtonDown += (s, e) =>
             {
@@ -127,7 +133,7 @@ namespace Test
         }
     }
 
-    public class WpfContainer : FrameworkElement, IContainer
+    public class WpfRenderer : FrameworkElement, IRenderer
     {
         protected override void OnRender(DrawingContext drawingContext)
         {
@@ -135,7 +141,7 @@ namespace Test
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
 
-            foreach (var layer in Layers)
+            foreach (var layer in _container.Layers)
             {
                 foreach (var shape in layer.Shapes)
                 {
@@ -147,13 +153,11 @@ namespace Test
             System.Diagnostics.Trace.WriteLine("OnRender: " + sw.Elapsed.TotalMilliseconds + "ms");
         }
 
-        public IList<ILayer> Layers { get; set;	}
+        private readonly IContainer _container;
 
-        private ILayer _current;
-        public ILayer Current
+        public WpfRenderer(IContainer container)
         {
-            get { return _current; }
-            set { _current = value; }
+            _container = container;
         }
 
         public void Invalidate()
@@ -321,7 +325,7 @@ namespace Test
     
     public abstract class XShape
     {
-        public abstract void Draw(object dc, IContainer renderer);
+        public abstract void Draw(object dc, IRenderer renderer);
     }
 
     public interface ILayer
@@ -333,6 +337,18 @@ namespace Test
     {
         IList<ILayer> Layers { get; set; }
         ILayer Current { get; set; }
+        Action Invalidate { get; set; }
+    }
+
+    public class XContainer : IContainer
+    {
+        public IList<ILayer> Layers { get; set; }
+        public ILayer Current { get; set; }
+        public Action Invalidate { get; set; }
+    }
+
+    public interface IRenderer
+    {
         void Invalidate();
         void Draw(object dc, XLine line);
         void Draw(object dc, XRectangle rectangle);
@@ -344,8 +360,8 @@ namespace Test
         public XStyle Style { get; set; }
         public XPoint Start { get; set; }
         public XPoint End { get; set; }
-        
-        public override void Draw(object dc, IContainer renderer)
+
+        public override void Draw(object dc, IRenderer renderer)
         {
             renderer.Draw(dc, this);
         }
@@ -372,8 +388,8 @@ namespace Test
         public XPoint TopLeft { get; set; }
         public XPoint BottomRight { get; set; }
         public bool IsFilled { get; set; }
-        
-        public override void Draw(object dc, IContainer renderer)
+
+        public override void Draw(object dc, IRenderer renderer)
         {
             renderer.Draw(dc, this);
         }
@@ -401,8 +417,8 @@ namespace Test
         public XPoint TopLeft { get; set; }
         public XPoint BottomRight { get; set; }
         public bool IsFilled { get; set; }
-        
-        public override void Draw(object dc, IContainer renderer)
+
+        public override void Draw(object dc, IRenderer renderer)
         {
             renderer.Draw(dc, this);
         }
@@ -424,7 +440,7 @@ namespace Test
         }
     }
     
-    public class Layer : ILayer
+    public class XLayer : ILayer
     {
         public IList<XShape> Shapes { get; set; }
     }
