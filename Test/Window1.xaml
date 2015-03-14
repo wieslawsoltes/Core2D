@@ -1,0 +1,9 @@
+﻿<Window x:Class="Test.Window1"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Title="Test" Height="700" Width="850"
+	WindowStartupLocation="CenterScreen" WindowState="Normal">
+	<Grid>
+		<Canvas x:Name="canvas" Width="800" Height="600" Background="LightGray"/>
+	</Grid>
+</Window>
