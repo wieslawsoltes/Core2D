@@ -141,16 +141,21 @@ namespace Test
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
 
+            Render(drawingContext);
+
+            sw.Stop();
+            System.Diagnostics.Trace.WriteLine("OnRender: " + sw.Elapsed.TotalMilliseconds + "ms");
+        }
+
+        private void Render(DrawingContext dc)
+        {
             foreach (var layer in _container.Layers)
             {
                 foreach (var shape in layer.Shapes)
                 {
-                    shape.Draw(drawingContext, this);
+                    shape.Draw(dc, this);
                 }
             }
-
-            sw.Stop();
-            System.Diagnostics.Trace.WriteLine("OnRender: " + sw.Elapsed.TotalMilliseconds + "ms");
         }
 
         private readonly IContainer _container;
