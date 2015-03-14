@@ -12,10 +12,8 @@ using System.Windows.Media.Animation;
 
 namespace Test
 {
-    //
     // Native
-    //
-    
+
     public partial class Window1 : Window
     {
         public Window1()
@@ -203,10 +201,8 @@ namespace Test
         }
     }
 
-    //
     // Portable
-    //
-    
+
     public class XColor
     {
         public byte A { get; set; }
@@ -393,10 +389,12 @@ namespace Test
         {
             switch (_tool) 
             {
+                // None
                 case Tool.None:
                     {
                     }
                     break;
+                // Line
                 case Tool.Line:
                     {
                         switch (_state) 
@@ -421,6 +419,7 @@ namespace Test
                         }
                     }
                     break;
+                // Rectangle
                 case Tool.Rectangle:
                     {
                         switch (_state) 
@@ -445,6 +444,7 @@ namespace Test
                         }
                     }
                     break;
+                // Ellipse
                 case Tool.Ellipse:
                     {
                         switch (_state) 
@@ -476,10 +476,12 @@ namespace Test
         {
             switch (_tool) 
             {
+                // None
                 case Tool.None:
                     {
                     }
                     break;
+                // Line
                 case Tool.Line:
                     {
                         switch (_state) 
@@ -498,6 +500,7 @@ namespace Test
                         }
                     }
                     break;
+                // Rectangle
                 case Tool.Rectangle:
                     {
                         switch (_state) 
@@ -516,6 +519,7 @@ namespace Test
                         }
                     }
                     break;
+                // Ellipse
                 case Tool.Ellipse:
                     {
                         switch (_state) 
@@ -541,10 +545,12 @@ namespace Test
         {
             switch (_tool) 
             {
+                // None
                 case Tool.None:
                     {
                     }
                     break;
+                // Line
                 case Tool.Line:
                     {
                         switch (_state) 
@@ -564,6 +570,7 @@ namespace Test
                         }
                     }
                     break;
+                // Rectangle
                 case Tool.Rectangle:
                     {
                         switch (_state) 
@@ -583,6 +590,7 @@ namespace Test
                         }
                     }
                     break;
+                // Ellipse
                 case Tool.Ellipse:
                     {
                         switch (_state) 
