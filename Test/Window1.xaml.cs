@@ -51,9 +51,23 @@ namespace Test
         {
             var layer = container.Layers.First();
 
-            var style = new XStyle()
+            var style1 = new XStyle()
             {
                 Stroke = new XColor() { A = 255, R = 255, G = 0, B = 0 },
+                Fill = new XColor() { A = 255, R = 255, G = 255, B = 255 },
+                Thickness = 2.0
+            };
+
+            var style2 = new XStyle()
+            {
+                Stroke = new XColor() { A = 255, R = 0, G = 255, B = 0 },
+                Fill = new XColor() { A = 255, R = 255, G = 255, B = 255 },
+                Thickness = 2.0
+            };
+
+            var style3 = new XStyle()
+            {
+                Stroke = new XColor() { A = 255, R = 0, G = 0, B = 255 },
                 Fill = new XColor() { A = 255, R = 255, G = 255, B = 255 },
                 Thickness = 2.0
             };
@@ -70,7 +84,7 @@ namespace Test
                 double y1 = rand.NextDouble() * height;
                 double x2 = rand.NextDouble() * width;
                 double y2 = rand.NextDouble() * height;
-                var l = XLine.Create(x1, y1, x2, y2, style);
+                var l = XLine.Create(x1, y1, x2, y2, style1);
                 layer.Shapes.Add(l);
             }
 
@@ -80,7 +94,7 @@ namespace Test
                 double y1 = rand.NextDouble() * height;
                 double x2 = rand.NextDouble() * width;
                 double y2 = rand.NextDouble() * height;
-                var r = XRectangle.Create(x1, y1, x2, y2, style);
+                var r = XRectangle.Create(x1, y1, x2, y2, style2);
                 layer.Shapes.Add(r);
             }
 
@@ -90,7 +104,7 @@ namespace Test
                 double y1 = rand.NextDouble() * height;
                 double x2 = rand.NextDouble() * width;
                 double y2 = rand.NextDouble() * height;
-                var e = XEllipse.Create(x1, y1, x2, y2, style);
+                var e = XEllipse.Create(x1, y1, x2, y2, style3);
                 layer.Shapes.Add(e);
             }
 
@@ -427,7 +441,7 @@ namespace Test
             
             _style = new XStyle()
             {
-                Stroke = new XColor() { A = 255, R = 255, G = 0, B = 0 },
+                Stroke = new XColor() { A = 255, R = 0, G = 0, B = 0 },
                 Fill = new XColor() { A = 255, R = 255, G = 255, B = 255 },
                 Thickness = 2.0
             };
