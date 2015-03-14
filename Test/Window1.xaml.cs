@@ -513,7 +513,8 @@ namespace Test
             };
             
             _defaultIsFilled = false;
-            _tool = Tool.Rectangle;
+
+            _tool = Tool.Line;
             
             _state = State.None;
         }
