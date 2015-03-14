@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,9 +23,9 @@ namespace Test
 
             var container = new WpfContainer();
             var editor = new PortableEditor(container);
-            
+
             canvas.Children.Add(container);
-            
+
             canvas.PreviewMouseLeftButtonDown += (s, e) =>
             {
                 var p = e.GetPosition(canvas);
@@ -42,6 +43,58 @@ namespace Test
                 var p = e.GetPosition(canvas);
                 editor.Move(p.X, p.Y);
             };
+
+            //Demo(container);
+        }
+
+        private static void Demo(IContainer container)
+        {
+            var layer = container.Layers.First();
+
+            var style = new XStyle()
+            {
+                Stroke = new XColor() { A = 255, R = 255, G = 0, B = 0 },
+                Fill = new XColor() { A = 255, R = 255, G = 255, B = 255 },
+                Thickness = 2.0
+            };
+
+            var rand = new Random(Guid.NewGuid().GetHashCode());
+
+            double width = 800;
+            double height = 600;
+            int shapes = 10;
+
+            for (int i = 0; i < shapes; i++)
+            {
+                double x1 = rand.NextDouble() * width;
+                double y1 = rand.NextDouble() * height;
+                double x2 = rand.NextDouble() * width;
+                double y2 = rand.NextDouble() * height;
+                var l = XLine.Create(x1, y1, x2, y2, style);
+                layer.Shapes.Add(l);
+            }
+
+            for (int i = 0; i < shapes; i++)
+            {
+                double x1 = rand.NextDouble() * width;
+                double y1 = rand.NextDouble() * height;
+                double x2 = rand.NextDouble() * width;
+                double y2 = rand.NextDouble() * height;
+                var r = XRectangle.Create(x1, y1, x2, y2, style);
+                layer.Shapes.Add(r);
+            }
+
+            for (int i = 0; i < shapes; i++)
+            {
+                double x1 = rand.NextDouble() * width;
+                double y1 = rand.NextDouble() * height;
+                double x2 = rand.NextDouble() * width;
+                double y2 = rand.NextDouble() * height;
+                var e = XEllipse.Create(x1, y1, x2, y2, style);
+                layer.Shapes.Add(e);
+            }
+
+            container.Invalidate();
         }
     }
 
