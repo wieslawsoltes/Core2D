@@ -64,13 +64,11 @@ namespace Test
 
             // initialize demo
 
-            //Demo(container);
+            //Demo(container, 800, 600, 10);
         }
 
-        private static void Demo(IContainer container)
+        private static void Demo(IContainer container, double width, double height, int shapes)
         {
-            var layer = container.Current;
-
             var style1 = new XStyle()
             {
                 Stroke = new XColor() { A = 255, R = 255, G = 0, B = 0 },
@@ -92,11 +90,8 @@ namespace Test
                 Thickness = 2.0
             };
 
+            var layer = container.Current;
             var rand = new Random(Guid.NewGuid().GetHashCode());
-
-            double width = 800;
-            double height = 600;
-            int shapes = 10;
 
             for (int i = 0; i < shapes; i++)
             {
@@ -137,7 +132,9 @@ namespace Test
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
-            
+
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+
             foreach (var layer in Layers)
             {
                 foreach (var shape in layer.Shapes)
@@ -145,15 +142,18 @@ namespace Test
                     shape.Draw(drawingContext, this);
                 }
             }
+
+            sw.Stop();
+            System.Diagnostics.Trace.WriteLine("OnRender: " + sw.Elapsed.TotalMilliseconds + "ms");
         }
 
         public IList<ILayer> Layers { get; set;	}
 
-        private ILayer _layer;
+        private ILayer _current;
         public ILayer Current
         {
-            get { return _layer; }
-            set { _layer = value; }
+            get { return _current; }
+            set { _current = value; }
         }
 
         public void Invalidate()
