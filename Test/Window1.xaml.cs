@@ -342,6 +342,11 @@ namespace Test
         Action Invalidate { get; set; }
     }
 
+    public class XLayer : ILayer
+    {
+        public IList<XShape> Shapes { get; set; }
+    }
+
     public class XContainer : IContainer
     {
         public IList<ILayer> Layers { get; set; }
@@ -459,11 +464,6 @@ namespace Test
         {
             return Create(x, y, x, y, style, isFilled);
         }
-    }
-    
-    public class XLayer : ILayer
-    {
-        public IList<XShape> Shapes { get; set; }
     }
 
     public class PortableEditor
