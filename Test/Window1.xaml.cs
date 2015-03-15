@@ -69,6 +69,7 @@ namespace Test
             toolLine.Click += (s, e) => editor.CurrentTool = PortableEditor.Tool.Line;
             toolRectangle.Click += (s, e) => editor.CurrentTool = PortableEditor.Tool.Rectangle;
             toolEllipse.Click += (s, e) => editor.CurrentTool = PortableEditor.Tool.Ellipse;
+            toolBezier.Click += (s, e) => editor.CurrentTool = PortableEditor.Tool.Bezier;
 
             optionsIsFilled.Click += (s, e) => editor.DefaultIsFilled = !editor.DefaultIsFilled;
 
@@ -82,6 +83,7 @@ namespace Test
             var style1 = XStyle.Create(255, 255, 0, 0, 255, 255, 255, 255, 2.0);
             var style2 = XStyle.Create(255, 0, 255, 0, 255, 255, 255, 255, 2.0);
             var style3 = XStyle.Create(255, 0, 0, 255, 255, 255, 255, 255, 2.0);
+            var style4 = XStyle.Create(255, 0, 255, 255, 255, 255, 255, 255, 2.0);
             var layer = container.Current;
             var rand = new Random(Guid.NewGuid().GetHashCode());
 
@@ -112,6 +114,20 @@ namespace Test
                 double x2 = rand.NextDouble() * width;
                 double y2 = rand.NextDouble() * height;
                 var e = XEllipse.Create(x1, y1, x2, y2, style3);
+                layer.Shapes.Add(e);
+            }
+
+            for (int i = 0; i < shapes; i++)
+            {
+                double x1 = rand.NextDouble() * width;
+                double y1 = rand.NextDouble() * height;
+                double x2 = rand.NextDouble() * width;
+                double y2 = rand.NextDouble() * height;
+                double x3 = rand.NextDouble() * width;
+                double y3 = rand.NextDouble() * height;
+                double x4 = rand.NextDouble() * width;
+                double y4 = rand.NextDouble() * height;
+                var e = XBezier.Create(x1, y1, x2, y2, x3, y3, x4, y4, style4);
                 layer.Shapes.Add(e);
             }
 
@@ -188,7 +204,8 @@ namespace Test
         }
         
         // Tuple<Brush, Pen>: Brush is used for Fill, Pen if used for Stroke
-        private readonly IDictionary<XStyle, Tuple<Brush, Pen>> _styleCache = new Dictionary<XStyle, Tuple<Brush, Pen>>();
+        private readonly IDictionary<XStyle, Tuple<Brush, Pen>> _styleCache = 
+            new Dictionary<XStyle, Tuple<Brush, Pen>>();
         private readonly bool _enableStyleCache = true;
         
         public void Draw(object dc, XLine line)
@@ -213,7 +230,7 @@ namespace Test
                 if (_enableStyleCache)
                     _styleCache.Add(line.Style, Tuple.Create(fill, stroke));
             }
-            
+
             _dc.DrawLine(
                 stroke,
                 new Point(line.Start.X, line.Start.Y), 
@@ -286,6 +303,65 @@ namespace Test
                 stroke, 
                 center,
                 rx, ry);
+        }
+
+        private readonly IDictionary<XBezier, PathGeometry> _bezierCache =
+            new Dictionary<XBezier, PathGeometry>();
+        private readonly bool _enableBezierCache = true;
+
+        public void Draw(object dc, XBezier bezier)
+        {
+            var _dc = dc as DrawingContext;
+            
+            Tuple<Brush, Pen> cache;
+            Brush fill;
+            Pen stroke;
+            if (_enableStyleCache && _styleCache.TryGetValue(bezier.Style, out cache))
+            {
+                fill = cache.Item1;
+                stroke = cache.Item2;
+            }
+            else
+            {
+                fill = CreateBrush(bezier.Style.Fill);
+                stroke = CreatePen(
+                    bezier.Style.Stroke,
+                    bezier.Style.Thickness);
+                
+                if (_enableStyleCache)
+                    _styleCache.Add(bezier.Style, Tuple.Create(fill, stroke));
+            }
+
+            PathGeometry pg;
+            if (_enableBezierCache && _bezierCache.TryGetValue(bezier, out pg))
+            {
+                var pf = pg.Figures[0];
+                pf.StartPoint = new Point(bezier.Point1.X, bezier.Point1.Y);
+                var bs = pf.Segments[0] as BezierSegment;
+                bs.Point1 = new Point(bezier.Point2.X, bezier.Point2.Y);
+                bs.Point2 = new Point(bezier.Point3.X, bezier.Point3.Y);
+                bs.Point3 = new Point(bezier.Point4.X, bezier.Point4.Y);
+            }
+            else
+            {
+                var pf = new PathFigure() { StartPoint = new Point(bezier.Point1.X, bezier.Point1.Y) };
+                var bs = new BezierSegment(
+                        new Point(bezier.Point2.X, bezier.Point2.Y),
+                        new Point(bezier.Point3.X, bezier.Point3.Y),
+                        new Point(bezier.Point4.X, bezier.Point4.Y),
+                        true);
+                //bs.Freeze();
+                pf.Segments.Add(bs);
+                //pf.Freeze();
+                pg = new PathGeometry();
+                pg.Figures.Add(pf);
+                //pg.Freeze();
+
+                if (_enableBezierCache)
+                    _bezierCache.Add(bezier, pg);
+            }
+
+            _dc.DrawGeometry(bezier.IsFilled ? fill : null, stroke, pg);
         }
     }
 
@@ -371,6 +447,7 @@ namespace Test
         void Draw(object dc, XLine line);
         void Draw(object dc, XRectangle rectangle);
         void Draw(object dc, XEllipse ellipse);
+        void Draw(object dc, XBezier bezier);
     }
 
     public class XLine : XShape
@@ -477,6 +554,48 @@ namespace Test
         }
     }
 
+    public class XBezier : XShape
+    {
+        public XStyle Style { get; set; }
+        public XPoint Point1 { get; set; }
+        public XPoint Point2 { get; set; }
+        public XPoint Point3 { get; set; }
+        public XPoint Point4 { get; set; }
+        public bool IsFilled { get; set; }
+
+        public override void Draw(object dc, IRenderer renderer)
+        {
+            renderer.Draw(dc, this);
+        }
+
+        public static XBezier Create(
+            double x1, double y1,
+            double x2, double y2,
+            double x3, double y3,
+            double x4, double y4,
+            XStyle style,
+            bool isFilled = false)
+        {
+            return new XBezier()
+            {
+                Style = style,
+                Point1 = XPoint.Create(x1, y1),
+                Point2 = XPoint.Create(x2, y2),
+                Point3 = XPoint.Create(x3, y3),
+                Point4 = XPoint.Create(x4, y4),
+                IsFilled = isFilled
+            };
+        }
+
+        public static XBezier Create(
+            double x, double y,
+            XStyle style,
+            bool isFilled = false)
+        {
+            return Create(x, y, x, y, x, y, x, y, style, isFilled);
+        }
+    }
+
     public class PortableEditor
     {
         public enum Tool
@@ -484,7 +603,8 @@ namespace Test
             None,
             Line,
             Rectangle,
-            Ellipse
+            Ellipse,
+            Bezier
         }
         
         public enum State
@@ -492,7 +612,8 @@ namespace Test
             None,
             One,
             Two,
-            Three
+            Three,
+            Four
         }
 
         private Tool _tool;
@@ -620,6 +741,55 @@ namespace Test
                         }
                     }
                     break;
+                // Bezier
+                case Tool.Bezier:
+                    {
+                        switch (_state)
+                        {
+                            case State.None:
+                                {
+                                    _temp = XBezier.Create(x, y, _style);
+                                    _container.Current.Shapes.Add(_temp);
+                                    _container.Invalidate();
+                                    _state = State.One;
+                                }
+                                break;
+                            case State.One:
+                                {
+                                    var bezier = _temp as XBezier;
+                                    bezier.Point2.X = x;
+                                    bezier.Point2.Y = y;
+                                    bezier.Point3.X = x;
+                                    bezier.Point3.Y = y;
+                                    bezier.Point4.X = x;
+                                    bezier.Point4.Y = y;
+                                    _container.Invalidate();
+                                    _state = State.Two;
+                                }
+                                break;
+                            case State.Two:
+                                {
+                                    var bezier = _temp as XBezier;
+                                    bezier.Point2.X = x;
+                                    bezier.Point2.Y = y;
+                                    bezier.Point3.X = x;
+                                    bezier.Point3.Y = y;
+                                    _container.Invalidate();
+                                    _state = State.Three;
+                                }
+                                break;
+                            case State.Three:
+                                {
+                                    var bezier = _temp as XBezier;
+                                    bezier.Point2.X = x;
+                                    bezier.Point2.Y = y;
+                                    _container.Invalidate();
+                                    _state = State.None;
+                                }
+                                break;
+                        }
+                    }
+                    break;
             }
         }
         
@@ -680,6 +850,27 @@ namespace Test
                                 }
                                 break;
                             case State.One:	
+                                {
+                                    _container.Current.Shapes.Remove(_temp);
+                                    _container.Invalidate();
+                                    _state = State.None;
+                                }
+                                break;
+                        }
+                    }
+                    break;
+                // Bezier
+                case Tool.Bezier:
+                    {
+                        switch (_state)
+                        {
+                            case State.None:
+                                {
+                                }
+                                break;
+                            case State.One:
+                            case State.Two:
+                            case State.Three:
                                 {
                                     _container.Current.Shapes.Remove(_temp);
                                     _container.Invalidate();
@@ -755,6 +946,48 @@ namespace Test
                                     var ellipse = _temp as XEllipse;
                                     ellipse.BottomRight.X = x;
                                     ellipse.BottomRight.Y = y;
+                                    _container.Invalidate();
+                                }
+                                break;
+                        }
+                    }
+                    break;
+                // Bezier
+                case Tool.Bezier:
+                    {
+                        switch (_state)
+                        {
+                            case State.None:
+                                {
+                                }
+                                break;
+                            case State.One:
+                                {
+                                    var bezier = _temp as XBezier;
+                                    bezier.Point2.X = x;
+                                    bezier.Point2.Y = y;
+                                    bezier.Point3.X = x;
+                                    bezier.Point3.Y = y;
+                                    bezier.Point4.X = x;
+                                    bezier.Point4.Y = y;
+                                    _container.Invalidate();
+                                }
+                                break;
+                            case State.Two:
+                                {
+                                    var bezier = _temp as XBezier;
+                                    bezier.Point2.X = x;
+                                    bezier.Point2.Y = y;
+                                    bezier.Point3.X = x;
+                                    bezier.Point3.Y = y;
+                                    _container.Invalidate();
+                                }
+                                break;
+                            case State.Three:
+                                {
+                                    var bezier = _temp as XBezier;
+                                    bezier.Point2.X = x;
+                                    bezier.Point2.Y = y;
                                     _container.Invalidate();
                                 }
                                 break;

@@ -25,6 +25,8 @@
                 <MenuItem x:Name="toolLine" Header="_Line"/>
                 <MenuItem x:Name="toolRectangle" Header="_Rectangle"/>
                 <MenuItem x:Name="toolEllipse" Header="_Ellipse"/>
+                <Separator/>
+                <MenuItem x:Name="toolBezier" Header="_Bezier"/>
             </MenuItem>
             <MenuItem Header="_Options">
                 <MenuItem x:Name="optionsIsFilled" Header="Toggle Filled"/>
