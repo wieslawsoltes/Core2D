@@ -23,15 +23,8 @@ namespace Test
 
             // initialize container
 
-            var container = new XContainer()
-            {
-                Layers = new ObservableCollection<ILayer>()
-            };
-
-            var layer = new XLayer() 
-            { 
-                Shapes = new ObservableCollection<XShape>() 
-            };
+            var container = new XContainer() { Layers = new ObservableCollection<ILayer>() };
+            var layer = new XLayer() { Shapes = new ObservableCollection<XShape>() };
 
             container.Layers.Add(layer);
             container.Current = layer;
@@ -75,27 +68,9 @@ namespace Test
 
         private static void Demo(IContainer container, double width, double height, int shapes)
         {
-            var style1 = new XStyle()
-            {
-                Stroke = new XColor() { A = 255, R = 255, G = 0, B = 0 },
-                Fill = new XColor() { A = 255, R = 255, G = 255, B = 255 },
-                Thickness = 2.0
-            };
-
-            var style2 = new XStyle()
-            {
-                Stroke = new XColor() { A = 255, R = 0, G = 255, B = 0 },
-                Fill = new XColor() { A = 255, R = 255, G = 255, B = 255 },
-                Thickness = 2.0
-            };
-
-            var style3 = new XStyle()
-            {
-                Stroke = new XColor() { A = 255, R = 0, G = 0, B = 255 },
-                Fill = new XColor() { A = 255, R = 255, G = 255, B = 255 },
-                Thickness = 2.0
-            };
-
+            var style1 = XStyle.Create(255, 255, 0, 0, 255, 255, 255, 255, 2.0);
+            var style2 = XStyle.Create(255, 0, 255, 0, 255, 255, 255, 255, 2.0);
+            var style3 = XStyle.Create(255, 0, 0, 255, 255, 255, 255, 255, 2.0);
             var layer = container.Current;
             var rand = new Random(Guid.NewGuid().GetHashCode());
 
@@ -299,8 +274,7 @@ namespace Test
                 ellipse.IsFilled ? fill : null,
                 stroke, 
                 center,
-                rx, 
-                ry);
+                rx, ry);
         }
     }
 
@@ -312,6 +286,11 @@ namespace Test
         public byte R { get; set; }
         public byte G { get; set; }
         public byte B { get; set; }
+
+        public static XColor Create(byte a, byte r, byte g, byte b)
+        {
+            return new XColor() { A = a, R = r, G = g, B = b };
+        }
     }
     
     public class XStyle
@@ -320,12 +299,30 @@ namespace Test
         public XColor Stroke { get; set; }
         public XColor Fill { get; set; }
         public double Thickness { get; set;	}
+
+        public static XStyle Create(
+            byte sa, byte sr, byte sg, byte sb,
+            byte fa, byte fr, byte fg, byte fb,
+            double thickness)
+        {
+            return new XStyle()
+            {
+                Stroke = XColor.Create(sa, sr, sg, sb),
+                Fill = XColor.Create(fa, fr, fg, fb),
+                Thickness = thickness
+            };
+        }
     }
     
     public class XPoint
     {
         public double X { get; set; }
         public double Y { get; set; }
+
+        public static XPoint Create(double x, double y)
+        {
+            return new XPoint() { X = x, Y = y };
+        }
     }
     
     public abstract class XShape
@@ -371,17 +368,22 @@ namespace Test
             renderer.Draw(dc, this);
         }
 
-        public static XLine Create(double x1, double y1, double x2, double y2, XStyle style)
+        public static XLine Create(
+            double x1, double y1, 
+            double x2, double y2, 
+            XStyle style)
         {
             return new XLine()
             {
                 Style = style,
-                Start = new XPoint() { X = x1, Y = y1 },
-                End = new XPoint() { X = x2, Y = y2 }
+                Start = XPoint.Create(x1, y1),
+                End = XPoint.Create(x2, y2)
             };
         }
         
-        public static XLine Create(double x, double y, XStyle style)
+        public static XLine Create(
+            double x, double y, 
+            XStyle style)
         {
             return Create(x, y, x, y, style);
         }
@@ -399,18 +401,25 @@ namespace Test
             renderer.Draw(dc, this);
         }
 
-        public static XRectangle Create(double x1, double y1, double x2, double y2, XStyle style, bool isFilled = false)
+        public static XRectangle Create(
+            double x1, double y1, 
+            double x2, double y2, 
+            XStyle style, 
+            bool isFilled = false)
         {
             return new XRectangle()
             {
                 Style = style,
-                TopLeft = new XPoint() { X = x1, Y = y1 },
-                BottomRight = new XPoint() { X = x2, Y = y2 },
+                TopLeft = XPoint.Create(x1, y1),
+                BottomRight = XPoint.Create(x2, y2),
                 IsFilled = isFilled
             };
         }
         
-        public static XRectangle Create(double x, double y, XStyle style, bool isFilled = false)
+        public static XRectangle Create(
+            double x, double y, 
+            XStyle style,
+            bool isFilled = false)
         {
             return Create(x, y, x, y, style, isFilled);
         }
@@ -428,18 +437,25 @@ namespace Test
             renderer.Draw(dc, this);
         }
 
-        public static XEllipse Create(double x1, double y1, double x2, double y2, XStyle style, bool isFilled = false)
+        public static XEllipse Create(
+            double x1, double y1, 
+            double x2, double y2, 
+            XStyle style, 
+            bool isFilled = false)
         {
             return new XEllipse()
             {
                 Style = style,
-                TopLeft = new XPoint() { X = x1, Y = y1 },
-                BottomRight = new XPoint() { X = x2, Y = y2 },
+                TopLeft = XPoint.Create(x1, y1),
+                BottomRight = XPoint.Create(x2, y2),
                 IsFilled = isFilled
             };
         }
         
-        public static XEllipse Create(double x, double y, XStyle style, bool isFilled = false)
+        public static XEllipse Create(
+            double x, double y, 
+            XStyle style, 
+            bool isFilled = false)
         {
             return Create(x, y, x, y, style, isFilled);
         }
@@ -502,20 +518,10 @@ namespace Test
         public PortableEditor(IContainer container)
         {
             _container = container;
-
             _temp = null;
-            
-            _style = new XStyle()
-            {
-                Stroke = new XColor() { A = 255, R = 0, G = 0, B = 0 },
-                Fill = new XColor() { A = 255, R = 255, G = 255, B = 255 },
-                Thickness = 2.0
-            };
-            
+            _style = XStyle.Create(255, 0, 0, 0, 255, 255, 255, 255, 2.0);
             _defaultIsFilled = false;
-
             _tool = Tool.Line;
-            
             _state = State.None;
         }
         
