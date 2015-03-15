@@ -3,7 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Test" 
         Height="700" Width="850"
-        WindowStartupLocation="CenterScreen" WindowState="Normal">
+        WindowStartupLocation="CenterScreen" 
+        WindowState="Normal"
+        UseLayoutRounding="True" SnapsToDevicePixels="True"
+        TextOptions.TextFormattingMode="Display"
+        TextOptions.TextHintingMode="Auto"
+        TextOptions.TextRenderingMode="Auto">
     <Grid>
         <Canvas x:Name="canvas" Width="800" Height="600" Background="LightGray"/>
     </Grid>
