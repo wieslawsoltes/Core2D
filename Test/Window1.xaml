@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Test" 
-        Height="700" Width="850"
+        Height="720" Width="870"
+        Background="LightGray"
         WindowStartupLocation="CenterScreen" 
         WindowState="Normal"
         UseLayoutRounding="True" SnapsToDevicePixels="True"
@@ -10,6 +11,25 @@
         TextOptions.TextHintingMode="Auto"
         TextOptions.TextRenderingMode="Auto">
     <Grid>
-        <Canvas x:Name="canvas" Width="800" Height="600" Background="LightGray"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Background="Transparent">
+            <MenuItem Header="_File">
+                <MenuItem x:Name="fileExit" Header="E_xit"/>
+            </MenuItem>
+            <MenuItem Header="_Tool">
+                <MenuItem x:Name="toolNone" Header="_None"/>
+                <Separator/>
+                <MenuItem x:Name="toolLine" Header="_Line"/>
+                <MenuItem x:Name="toolRectangle" Header="_Rectangle"/>
+                <MenuItem x:Name="toolEllipse" Header="_Ellipse"/>
+            </MenuItem>
+            <MenuItem Header="_Options">
+                <MenuItem x:Name="optionsIsFilled" Header="Toggle Filled"/>
+            </MenuItem>
+        </Menu>
+        <Canvas x:Name="canvas" Grid.Row="1" Width="800" Height="600" Background="DarkGray"/>
     </Grid>
 </Window>

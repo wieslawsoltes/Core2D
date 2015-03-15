@@ -61,6 +61,17 @@ namespace Test
                 editor.Move(p.X, p.Y);
             };
 
+            // initialize menu
+
+            fileExit.Click += (s, e) => this.Close();
+
+            toolNone.Click += (s, e) => editor.CurrentTool = PortableEditor.Tool.None;
+            toolLine.Click += (s, e) => editor.CurrentTool = PortableEditor.Tool.Line;
+            toolRectangle.Click += (s, e) => editor.CurrentTool = PortableEditor.Tool.Rectangle;
+            toolEllipse.Click += (s, e) => editor.CurrentTool = PortableEditor.Tool.Ellipse;
+
+            optionsIsFilled.Click += (s, e) => editor.DefaultIsFilled = !editor.DefaultIsFilled;
+
             // initialize demo
 
             //Demo(container, 800, 600, 10);
