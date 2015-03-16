@@ -19,6 +19,9 @@
             <MenuItem Header="_File">
                 <MenuItem x:Name="fileExit" Header="E_xit"/>
             </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem x:Name="editClear" Header="_Clear"/>
+            </MenuItem>
             <MenuItem Header="_Tool">
                 <MenuItem x:Name="toolNone" Header="_None"/>
                 <Separator/>
@@ -29,7 +32,10 @@
                 <MenuItem x:Name="toolBezier" Header="_Bezier"/>
             </MenuItem>
             <MenuItem Header="_Options">
-                <MenuItem x:Name="optionsIsFilled" Header="Toggle Filled"/>
+                <MenuItem x:Name="optionsIsFilled" Header="Toggle _Filled"/>
+            </MenuItem>
+            <MenuItem Header="_Styles">
+                <MenuItem x:Name="stylesEdit" Header="_Edit..."/>
             </MenuItem>
         </Menu>
         <Canvas x:Name="canvas" Grid.Row="1" Width="800" Height="600" Background="DarkGray"/>
