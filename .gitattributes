@@ -20,3 +20,13 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+
+# New lines
+* eol=crlf
+
+# Git files
+.gitattributes export-ignore
+.gitignore export-ignore
+
+# NuGet packages
+packages export-ignore
