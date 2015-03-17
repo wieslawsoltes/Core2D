@@ -45,7 +45,7 @@
         <Canvas x:Name="canvas" Grid.Row="1" Grid.Column="0" Width="800" Height="600" Background="DarkGray"/>
         <TabControl Grid.Row="1" Grid.Column="1">
             <TabItem Header="Layers">
-                <ListBox ItemsSource="{Binding Layers}">
+                <ListBox ItemsSource="{Binding Layers}" SelectedItem="{Binding CurrentLayer}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}"/>
@@ -54,10 +54,19 @@
                 </ListBox>
             </TabItem>
             <TabItem Header="Styles">
-                <ListBox ItemsSource="{Binding Styles}">
+                <ListBox ItemsSource="{Binding Styles}" SelectedItem="{Binding CurrentStyle}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+            <TabItem Header="Shapes">
+                <ListBox ItemsSource="{Binding CurrentLayer.Shapes}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
