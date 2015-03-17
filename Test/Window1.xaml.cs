@@ -27,35 +27,45 @@ namespace Test
                 Styles = new ObservableCollection<XStyle>()
             };
             
-            container.Layers.Add(new XLayer() { Name = "Current", Shapes = new ObservableCollection<XShape>() });
+            container.Layers.Add(new XLayer() { Name = "Layer1", Shapes = new ObservableCollection<XShape>() });
+            container.Layers.Add(new XLayer() { Name = "Layer2", Shapes = new ObservableCollection<XShape>() });
+            container.Layers.Add(new XLayer() { Name = "Layer3", Shapes = new ObservableCollection<XShape>() });
+            container.Layers.Add(new XLayer() { Name = "Layer4", Shapes = new ObservableCollection<XShape>() });
             container.Layers.Add(new XLayer() { Name = "Working", Shapes = new ObservableCollection<XShape>() });
             
-            container.CurrentLayer = container.Layers[0];
-            container.WorkingLayer = container.Layers[1];
+            container.CurrentLayer = container.Layers.FirstOrDefault();
+            container.WorkingLayer = container.Layers.LastOrDefault();
             
             container.Styles.Add(XStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
-            container.CurrentStyle = container.Styles[0];
+            container.Styles.Add(XStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
+            container.Styles.Add(XStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
+            container.Styles.Add(XStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
+            container.Styles.Add(XStyle.Create("Cyan", 255, 0, 255, 255, 255, 0, 255, 255, 2.0));
+
+            container.CurrentStyle = container.Styles.FirstOrDefault();
             
             // initialize renderer
 
             var renderer = new WpfRenderer();
 
-            // initialize elements
-            
-            var current = new WpfElement(container.CurrentLayer, renderer) { Width = 800, Height = 600 };
-            var working = new WpfElement(container.WorkingLayer, renderer) { Width = 800, Height = 600 };
-            
-            container.CurrentLayer.Invalidate = current.Invalidate;
-            container.WorkingLayer.Invalidate = working.Invalidate;
-            
             // initialize editor
 
             var editor = new PortableEditor(container);
 
             // initialize canvas
 
-            canvas.Children.Add(current);
-            canvas.Children.Add(working);
+            foreach (var layer in container.Layers)
+            {
+                var element = new WpfElement(layer, renderer) 
+                { 
+                    Width = 800,
+                    Height = 600 
+                };
+
+                layer.Invalidate = element.Invalidate;
+
+                canvas.Children.Add(element);
+            }
 
             canvas.PreviewMouseLeftButtonDown += (s, e) =>
             {
@@ -109,7 +119,7 @@ namespace Test
 
             // initialize bindings
 
-            DataContext = container;
+            this.DataContext = container;
         }
     }
 
@@ -117,17 +127,17 @@ namespace Test
     {
         public static void Create(IContainer container, double width, double height, int shapes)
         {
-            var style1 = XStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0);
-            var style2 = XStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0);
-            var style3 = XStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0);
-            var style4 = XStyle.Create("Cyan", 255, 0, 255, 255, 255, 0, 255, 255, 2.0);
-            container.Styles.Add(style1);
-            container.Styles.Add(style2);
-            container.Styles.Add(style3);
-            container.Styles.Add(style4);
+            var style1 = container.Styles[1];
+            var style2 = container.Styles[2];
+            var style3 = container.Styles[3];
+            var style4 = container.Styles[4];
             
-            var layer = container.CurrentLayer;
-            
+            //var layer = container.CurrentLayer;
+            var layer1 = container.Layers[0];
+            var layer2 = container.Layers[1];
+            var layer3 = container.Layers[2];
+            var layer4 = container.Layers[3];
+
             var rand = new Random(Guid.NewGuid().GetHashCode());
 
             for (int i = 0; i < shapes; i++)
@@ -137,7 +147,8 @@ namespace Test
                 double x2 = rand.NextDouble() * width;
                 double y2 = rand.NextDouble() * height;
                 var l = XLine.Create(x1, y1, x2, y2, style1);
-                layer.Shapes.Add(l);
+                //layer.Shapes.Add(l);
+                layer1.Shapes.Add(l);
             }
 
             for (int i = 0; i < shapes; i++)
@@ -147,7 +158,8 @@ namespace Test
                 double x2 = rand.NextDouble() * width;
                 double y2 = rand.NextDouble() * height;
                 var r = XRectangle.Create(x1, y1, x2, y2, style2);
-                layer.Shapes.Add(r);
+                //layer.Shapes.Add(r);
+                layer2.Shapes.Add(r);
             }
 
             for (int i = 0; i < shapes; i++)
@@ -157,7 +169,8 @@ namespace Test
                 double x2 = rand.NextDouble() * width;
                 double y2 = rand.NextDouble() * height;
                 var e = XEllipse.Create(x1, y1, x2, y2, style3);
-                layer.Shapes.Add(e);
+                //layer.Shapes.Add(e);
+                layer3.Shapes.Add(e);
             }
 
             for (int i = 0; i < shapes; i++)
@@ -170,11 +183,14 @@ namespace Test
                 double y3 = rand.NextDouble() * height;
                 double x4 = rand.NextDouble() * width;
                 double y4 = rand.NextDouble() * height;
-                var e = XBezier.Create(x1, y1, x2, y2, x3, y3, x4, y4, style4);
-                layer.Shapes.Add(e);
+                var b = XBezier.Create(x1, y1, x2, y2, x3, y3, x4, y4, style4);
+                //layer.Shapes.Add(b);
+                layer4.Shapes.Add(b);
             }
 
-            container.CurrentLayer.Invalidate();
+            //container.CurrentLayer.Invalidate();
+            foreach (var layer in container.Layers)
+                layer.Invalidate();
         }
     }
     
