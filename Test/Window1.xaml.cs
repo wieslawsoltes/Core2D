@@ -106,6 +106,10 @@ namespace Test
             // initialize demo
 
             //Demo.Create(container, 800, 600, 10);
+
+            // initialize bindings
+
+            DataContext = container;
         }
     }
 
