@@ -24,9 +24,10 @@ namespace Test
             var container = CreateContainer();
             var renderer = new WpfRenderer();
             var elements = CreateElements(container, renderer);
-            var editor = new ContainerEditor(container);
 
-            // initialize canvas
+            // initialize editor
+
+            var editor = new ContainerEditor(container);
 
             foreach (var element in elements)
             {
