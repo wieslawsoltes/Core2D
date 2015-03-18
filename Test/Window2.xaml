@@ -1,6 +1,7 @@
 <Window x:Class="Test.Window2"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:Test.Controls"
         Title="Edit Styles"
         Height="514" Width="340"
         SizeToContent="Height"
@@ -37,7 +38,7 @@
                                 <ColumnDefinition Width="70"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Name:" Margin="0,0,8,0" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBlock Text="" Margin="0,0,8,0" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
                             <ComboBox x:Name="stylesComboBox" ItemsSource="{Binding Styles}" SelectedItem="{Binding CurrentStyle, Mode=OneTime}" Grid.Column="1">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
@@ -46,87 +47,10 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                         </Grid>
-                        <Grid DataContext="{Binding ElementName=stylesComboBox, Path=SelectedItem}" Margin="0,8,0,8">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="" Margin="0,0,8,0" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
-                            <TextBox Text="{Binding Name}" Grid.Column="1" TextAlignment="Left" VerticalAlignment="Center"/>
-                        </Grid>
-                        <GroupBox Header="Stroke" Margin="0,0,0,2">
-                            <Grid Margin="4" DataContext="{Binding ElementName=stylesComboBox, Path=SelectedItem}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="60"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Alpha:" Margin="0,0,8,0" Grid.Row="0" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
-                                <TextBlock Text="Red:" Margin="0,0,8,0" Grid.Row="1" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
-                                <TextBlock Text="Green:" Margin="0,0,8,0" Grid.Row="2" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
-                                <TextBlock Text="Blue:" Margin="0,0,8,0" Grid.Row="3" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
-                                <Slider Value="{Binding Stroke.A}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="0" Grid.Column="1" Margin="1"/>
-                                <Slider Value="{Binding Stroke.R}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="1" Margin="1"/>
-                                <Slider Value="{Binding Stroke.G}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="2" Grid.Column="1" Margin="1"/>
-                                <Slider Value="{Binding Stroke.B}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="3" Grid.Column="1" Margin="1"/>
-                                <TextBlock Text="{Binding Stroke.A}" Grid.Row="0" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding Stroke.R}" Grid.Row="1" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding Stroke.G}" Grid.Row="2" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding Stroke.B}" Grid.Row="3" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
-                            </Grid>
-                        </GroupBox>
-                        <GroupBox Header="Fill" Margin="0,0,0,2">
-                            <Grid Margin="4" DataContext="{Binding ElementName=stylesComboBox, Path=SelectedItem}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="60"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Alpha:" Margin="0,0,8,0" Grid.Row="0" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
-                                <TextBlock Text="Red:" Margin="0,0,8,0" Grid.Row="1" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
-                                <TextBlock Text="Green:" Margin="0,0,8,0" Grid.Row="2" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
-                                <TextBlock Text="Blue:" Margin="0,0,8,0" Grid.Row="3" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
-                                <Slider Value="{Binding Fill.A}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="0" Grid.Column="1" Margin="1"/>
-                                <Slider Value="{Binding Fill.R}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="1" Margin="1"/>
-                                <Slider Value="{Binding Fill.G}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="2" Grid.Column="1" Margin="1"/>
-                                <Slider Value="{Binding Fill.B}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="3" Grid.Column="1" Margin="1"/>
-                                <TextBlock Text="{Binding Fill.A}" Grid.Row="0" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding Fill.R}" Grid.Row="1" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding Fill.G}" Grid.Row="2" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding Fill.B}" Grid.Row="3" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
-                            </Grid>
-                        </GroupBox>
-                        <GroupBox Header="Other" Margin="0,0,0,0">
-                            <Grid Margin="4" DataContext="{Binding ElementName=stylesComboBox, Path=SelectedItem}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="60"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Thickness:" Margin="0,0,8,0" Grid.Row="0" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
-                                <Slider Value="{Binding Thickness}" Minimum="0" Maximum="20" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="0" Grid.Column="1" Margin="1"/>
-                                <TextBlock Text="{Binding Thickness}" Grid.Row="0" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Center"/>
-                            </Grid>
-                        </GroupBox>
+                        <controls:StyleControl DataContext="{Binding ElementName=stylesComboBox, Path=SelectedItem}"/>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>
         </ScrollViewer>
     </Grid>
 </Window>
-    

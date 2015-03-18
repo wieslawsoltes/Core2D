@@ -74,6 +74,10 @@
       <SubType>Code</SubType>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\StyleControl.xaml.cs">
+      <DependentUpon>StyleControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Portable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Window1.xaml.cs">
@@ -86,11 +90,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\StyleControl.xaml" />
     <Page Include="Window1.xaml" />
     <Page Include="Window2.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
