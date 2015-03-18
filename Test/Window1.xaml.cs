@@ -56,16 +56,7 @@ namespace Test
 
             fileExit.Click += (s, e) => this.Close();
 
-            editClear.Click += (s, e) => 
-            {
-                foreach (var layer in container.Layers) 
-                {
-                    layer.Shapes.Clear();
-                    layer.Invalidate();
-                }
-                container.WorkingLayer.Shapes.Clear();
-                container.WorkingLayer.Invalidate();
-            };
+            editClear.Click += (s, e) => ClearLayers(container);
             
             toolNone.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.None;
             toolLine.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Line;
@@ -89,6 +80,18 @@ namespace Test
             // initialize bindings
 
             this.DataContext = container;
+        }
+
+        private void ClearLayers(IContainer container)
+        {
+            foreach (var layer in container.Layers)
+            {
+                layer.Shapes.Clear();
+                layer.Invalidate();
+            }
+
+            container.WorkingLayer.Shapes.Clear();
+            container.WorkingLayer.Invalidate();
         }
 
         private IContainer CreateContainer()
@@ -118,7 +121,6 @@ namespace Test
 
             return container;
         }
-
 
         private IList<WpfElement> CreateElements(IContainer container, IRenderer renderer)
         {
