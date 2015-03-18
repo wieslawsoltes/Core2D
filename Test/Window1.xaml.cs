@@ -48,17 +48,16 @@ namespace Test
 
             var renderer = new WpfRenderer();
 
-            // initialize editor
-
-            var editor = new ContainerEditor(container);
-
             // initialize layers
+
+            var elements = new List<WpfElement>();
 
             foreach (var layer in container.Layers)
             {
                 var element = new WpfElement(layer, renderer) { Width = 800, Height = 600 };
                 layer.Invalidate = element.Invalidate;
                 canvas.Children.Add(element);
+                elements.Add(element);
             }
 
             // initialize working layer
@@ -66,6 +65,11 @@ namespace Test
             var working = new WpfElement(container.WorkingLayer, renderer) { Width = 800, Height = 600 };
             container.WorkingLayer.Invalidate = working.Invalidate;
             canvas.Children.Add(working);
+            elements.Add(working);
+
+            // initialize editor
+
+            var editor = new ContainerEditor(container);
 
             // initialize canvas events
 
