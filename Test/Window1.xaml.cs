@@ -22,17 +22,18 @@ namespace Test
             // initialize container
 
             var container = CreateContainer();
+
+            // initialize canvas
+
             var renderer = new WpfRenderer();
             var elements = CreateElements(container, renderer);
-
-            // initialize editor
-
-            var editor = new ContainerEditor(container);
 
             foreach (var element in elements)
             {
                 canvas.Children.Add(element);
             }
+
+            var editor = new ContainerEditor(container);
 
             canvas.PreviewMouseLeftButtonDown += (s, e) =>
             {
@@ -73,25 +74,13 @@ namespace Test
                 window.Show();
             };
             
-            // initialize demo
+            // initialize examples
 
-            //Demo.Create(container, 800, 600, 10);
+            //Demo.Examples(container, 800, 600, 10);
 
             // initialize bindings
 
             this.DataContext = container;
-        }
-
-        private void ClearLayers(IContainer container)
-        {
-            foreach (var layer in container.Layers)
-            {
-                layer.Shapes.Clear();
-                layer.Invalidate();
-            }
-
-            container.WorkingLayer.Shapes.Clear();
-            container.WorkingLayer.Invalidate();
         }
 
         private IContainer CreateContainer()
@@ -138,6 +127,18 @@ namespace Test
             elements.Add(working);
 
             return elements;
+        }
+
+        private void ClearLayers(IContainer container)
+        {
+            foreach (var layer in container.Layers)
+            {
+                layer.Shapes.Clear();
+                layer.Invalidate();
+            }
+
+            container.WorkingLayer.Shapes.Clear();
+            container.WorkingLayer.Invalidate();
         }
     }
 

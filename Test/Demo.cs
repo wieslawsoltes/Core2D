@@ -8,7 +8,7 @@ namespace Test
 {
     public static class Demo
     {
-        public static void Create(IContainer container, double width, double height, int shapes)
+        public static void Examples(IContainer container, double width, double height, int shapes)
         {
             var style1 = container.Styles[1];
             var style2 = container.Styles[2];
