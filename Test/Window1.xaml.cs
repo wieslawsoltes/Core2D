@@ -21,57 +21,17 @@ namespace Test
 
             // initialize container
 
-            var container = new XContainer() 
-            { 
-                Layers = new ObservableCollection<ILayer>(),
-                Styles = new ObservableCollection<XStyle>()
-            };
-            
-            container.Layers.Add(new XLayer() { Name = "Layer1", Shapes = new ObservableCollection<XShape>() });
-            container.Layers.Add(new XLayer() { Name = "Layer2", Shapes = new ObservableCollection<XShape>() });
-            container.Layers.Add(new XLayer() { Name = "Layer3", Shapes = new ObservableCollection<XShape>() });
-            container.Layers.Add(new XLayer() { Name = "Layer4", Shapes = new ObservableCollection<XShape>() });
-
-            container.CurrentLayer = container.Layers.FirstOrDefault();
-
-            container.WorkingLayer = new XLayer() { Name = "Working", Shapes = new ObservableCollection<XShape>() };
-            
-            container.Styles.Add(XStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
-            container.Styles.Add(XStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
-            container.Styles.Add(XStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
-            container.Styles.Add(XStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
-            container.Styles.Add(XStyle.Create("Cyan", 255, 0, 255, 255, 255, 0, 255, 255, 2.0));
-
-            container.CurrentStyle = container.Styles.FirstOrDefault();
-            
-            // initialize renderer
-
+            var container = CreateContainer();
             var renderer = new WpfRenderer();
-
-            // initialize layers
-
-            var elements = new List<WpfElement>();
-
-            foreach (var layer in container.Layers)
-            {
-                var element = new WpfElement(layer, renderer) { Width = 800, Height = 600 };
-                layer.Invalidate = element.Invalidate;
-                canvas.Children.Add(element);
-                elements.Add(element);
-            }
-
-            // initialize working layer
-
-            var working = new WpfElement(container.WorkingLayer, renderer) { Width = 800, Height = 600 };
-            container.WorkingLayer.Invalidate = working.Invalidate;
-            canvas.Children.Add(working);
-            elements.Add(working);
-
-            // initialize editor
-
+            var elements = CreateElements(container, renderer);
             var editor = new ContainerEditor(container);
 
-            // initialize canvas events
+            // initialize canvas
+
+            foreach (var element in elements)
+            {
+                canvas.Children.Add(element);
+            }
 
             canvas.PreviewMouseLeftButtonDown += (s, e) =>
             {
@@ -128,6 +88,53 @@ namespace Test
             // initialize bindings
 
             this.DataContext = container;
+        }
+
+        private IContainer CreateContainer()
+        {
+            var container = new XContainer()
+            {
+                Layers = new ObservableCollection<ILayer>(),
+                Styles = new ObservableCollection<XStyle>()
+            };
+
+            container.Layers.Add(new XLayer() { Name = "Layer1", Shapes = new ObservableCollection<XShape>() });
+            container.Layers.Add(new XLayer() { Name = "Layer2", Shapes = new ObservableCollection<XShape>() });
+            container.Layers.Add(new XLayer() { Name = "Layer3", Shapes = new ObservableCollection<XShape>() });
+            container.Layers.Add(new XLayer() { Name = "Layer4", Shapes = new ObservableCollection<XShape>() });
+
+            container.CurrentLayer = container.Layers.FirstOrDefault();
+
+            container.WorkingLayer = new XLayer() { Name = "Working", Shapes = new ObservableCollection<XShape>() };
+
+            container.Styles.Add(XStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
+            container.Styles.Add(XStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
+            container.Styles.Add(XStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
+            container.Styles.Add(XStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
+            container.Styles.Add(XStyle.Create("Cyan", 255, 0, 255, 255, 255, 0, 255, 255, 2.0));
+
+            container.CurrentStyle = container.Styles.FirstOrDefault();
+
+            return container;
+        }
+
+
+        private IList<WpfElement> CreateElements(IContainer container, IRenderer renderer)
+        {
+            var elements = new List<WpfElement>();
+
+            foreach (var layer in container.Layers)
+            {
+                var element = new WpfElement(layer, renderer) { Width = 800, Height = 600 };
+                layer.Invalidate = element.Invalidate;
+                elements.Add(element);
+            }
+
+            var working = new WpfElement(container.WorkingLayer, renderer) { Width = 800, Height = 600 };
+            container.WorkingLayer.Invalidate = working.Invalidate;
+            elements.Add(working);
+
+            return elements;
         }
     }
 
