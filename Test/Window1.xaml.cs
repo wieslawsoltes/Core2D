@@ -31,10 +31,10 @@ namespace Test
             container.Layers.Add(new XLayer() { Name = "Layer2", Shapes = new ObservableCollection<XShape>() });
             container.Layers.Add(new XLayer() { Name = "Layer3", Shapes = new ObservableCollection<XShape>() });
             container.Layers.Add(new XLayer() { Name = "Layer4", Shapes = new ObservableCollection<XShape>() });
-            container.Layers.Add(new XLayer() { Name = "Working", Shapes = new ObservableCollection<XShape>() });
-            
+
             container.CurrentLayer = container.Layers.FirstOrDefault();
-            container.WorkingLayer = container.Layers.LastOrDefault();
+
+            container.WorkingLayer = new XLayer() { Name = "Working", Shapes = new ObservableCollection<XShape>() };
             
             container.Styles.Add(XStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
             container.Styles.Add(XStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
@@ -52,20 +52,22 @@ namespace Test
 
             var editor = new PortableEditor(container);
 
-            // initialize canvas
+            // initialize layers
 
             foreach (var layer in container.Layers)
             {
-                var element = new WpfElement(layer, renderer) 
-                { 
-                    Width = 800,
-                    Height = 600 
-                };
-
+                var element = new WpfElement(layer, renderer) { Width = 800, Height = 600 };
                 layer.Invalidate = element.Invalidate;
-
                 canvas.Children.Add(element);
             }
+
+            // initialize working layer
+
+            var working = new WpfElement(container.WorkingLayer, renderer) { Width = 800, Height = 600 };
+            container.WorkingLayer.Invalidate = working.Invalidate;
+            canvas.Children.Add(working);
+
+            // initialize canvas events
 
             canvas.PreviewMouseLeftButtonDown += (s, e) =>
             {
@@ -96,6 +98,8 @@ namespace Test
                     layer.Shapes.Clear();
                     layer.Invalidate();
                 }
+                container.WorkingLayer.Shapes.Clear();
+                container.WorkingLayer.Invalidate();
             };
             
             toolNone.Click += (s, e) => editor.CurrentTool = PortableEditor.Tool.None;
@@ -191,6 +195,7 @@ namespace Test
             //container.CurrentLayer.Invalidate();
             foreach (var layer in container.Layers)
                 layer.Invalidate();
+            container.WorkingLayer.Invalidate();
         }
     }
     

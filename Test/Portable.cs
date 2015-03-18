@@ -317,10 +317,10 @@ namespace Test
                                     line.End.Y = y;
                                     _container.WorkingLayer.Shapes.Remove(_temp);
                                     _container.CurrentLayer.Shapes.Add(_temp);
-                                    //_container.WorkingLayer.Invalidate();
                                     //_container.CurrentLayer.Invalidate();
                                     foreach (var layer in _container.Layers)
                                         layer.Invalidate();
+                                    _container.WorkingLayer.Invalidate();
                                     CurrentState = State.None;
                                 }
                                 break;
@@ -347,10 +347,10 @@ namespace Test
                                     rectangle.BottomRight.Y = y;
                                     _container.WorkingLayer.Shapes.Remove(_temp);
                                     _container.CurrentLayer.Shapes.Add(_temp);
-                                    //_container.WorkingLayer.Invalidate();
                                     //_container.CurrentLayer.Invalidate();
                                     foreach (var layer in _container.Layers)
                                         layer.Invalidate();
+                                    _container.WorkingLayer.Invalidate();
                                     CurrentState = State.None;
                                 }
                                 break;
@@ -377,10 +377,10 @@ namespace Test
                                     ellipse.BottomRight.Y = y;
                                     _container.WorkingLayer.Shapes.Remove(_temp);
                                     _container.CurrentLayer.Shapes.Add(_temp);
-                                    //_container.WorkingLayer.Invalidate();
                                     //_container.CurrentLayer.Invalidate();
                                     foreach (var layer in _container.Layers)
                                         layer.Invalidate();
+                                    _container.WorkingLayer.Invalidate();
                                     CurrentState = State.None;
                                 }
                                 break;
@@ -431,10 +431,10 @@ namespace Test
                                     bezier.Point2.Y = y;
                                     _container.WorkingLayer.Shapes.Remove(_temp);
                                     _container.CurrentLayer.Shapes.Add(_temp);
-                                    //_container.WorkingLayer.Invalidate();
                                     //_container.CurrentLayer.Invalidate();
                                     foreach (var layer in _container.Layers)
                                         layer.Invalidate();
+                                    _container.WorkingLayer.Invalidate();
                                     CurrentState = State.None;
                                 }
                                 break;
