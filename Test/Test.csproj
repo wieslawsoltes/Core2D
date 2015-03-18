@@ -78,6 +78,7 @@
       <DependentUpon>StyleControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Demo.cs" />
     <Compile Include="Portable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Window1.xaml.cs">
@@ -97,8 +98,6 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
