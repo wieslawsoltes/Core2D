@@ -15,7 +15,6 @@ namespace Test
             var style3 = container.Styles[3];
             var style4 = container.Styles[4];
 
-            //var layer = container.CurrentLayer;
             var layer1 = container.Layers[0];
             var layer2 = container.Layers[1];
             var layer3 = container.Layers[2];
@@ -30,7 +29,6 @@ namespace Test
                 double x2 = rand.NextDouble() * width;
                 double y2 = rand.NextDouble() * height;
                 var l = XLine.Create(x1, y1, x2, y2, style1);
-                //layer.Shapes.Add(l);
                 layer1.Shapes.Add(l);
             }
 
@@ -41,7 +39,6 @@ namespace Test
                 double x2 = rand.NextDouble() * width;
                 double y2 = rand.NextDouble() * height;
                 var r = XRectangle.Create(x1, y1, x2, y2, style2);
-                //layer.Shapes.Add(r);
                 layer2.Shapes.Add(r);
             }
 
@@ -52,7 +49,6 @@ namespace Test
                 double x2 = rand.NextDouble() * width;
                 double y2 = rand.NextDouble() * height;
                 var e = XEllipse.Create(x1, y1, x2, y2, style3);
-                //layer.Shapes.Add(e);
                 layer3.Shapes.Add(e);
             }
 
@@ -67,11 +63,9 @@ namespace Test
                 double x4 = rand.NextDouble() * width;
                 double y4 = rand.NextDouble() * height;
                 var b = XBezier.Create(x1, y1, x2, y2, x3, y3, x4, y4, style4);
-                //layer.Shapes.Add(b);
                 layer4.Shapes.Add(b);
             }
 
-            //container.CurrentLayer.Invalidate();
             foreach (var layer in container.Layers)
                 layer.Invalidate();
             container.WorkingLayer.Invalidate();
