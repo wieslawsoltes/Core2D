@@ -250,7 +250,7 @@ namespace Test
         }
     }
 
-    public class PortableEditor
+    public class ContainerEditor
     {
         public enum Tool
         {
@@ -277,7 +277,7 @@ namespace Test
         private readonly IContainer _container;
         private XShape _temp;
 
-        public PortableEditor(IContainer container)
+        public ContainerEditor(IContainer container)
         {
             _container = container;
             

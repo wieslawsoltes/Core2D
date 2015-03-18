@@ -50,7 +50,7 @@ namespace Test
 
             // initialize editor
 
-            var editor = new PortableEditor(container);
+            var editor = new ContainerEditor(container);
 
             // initialize layers
 
@@ -102,11 +102,11 @@ namespace Test
                 container.WorkingLayer.Invalidate();
             };
             
-            toolNone.Click += (s, e) => editor.CurrentTool = PortableEditor.Tool.None;
-            toolLine.Click += (s, e) => editor.CurrentTool = PortableEditor.Tool.Line;
-            toolRectangle.Click += (s, e) => editor.CurrentTool = PortableEditor.Tool.Rectangle;
-            toolEllipse.Click += (s, e) => editor.CurrentTool = PortableEditor.Tool.Ellipse;
-            toolBezier.Click += (s, e) => editor.CurrentTool = PortableEditor.Tool.Bezier;
+            toolNone.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.None;
+            toolLine.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Line;
+            toolRectangle.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Rectangle;
+            toolEllipse.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Ellipse;
+            toolBezier.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Bezier;
 
             optionsIsFilled.Click += (s, e) => editor.DefaultIsFilled = !editor.DefaultIsFilled;
 
