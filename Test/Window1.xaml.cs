@@ -73,10 +73,6 @@ namespace Test
                 window.DataContext = container;
                 window.Show();
             };
-            
-            // initialize examples
-
-            //Demo.Examples(container, 800, 600, 10);
 
             // initialize bindings
 
