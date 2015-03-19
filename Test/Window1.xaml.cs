@@ -19,12 +19,7 @@ namespace Test
         {
             InitializeComponent();
 
-            // initialize container
-
             var container = CreateContainer();
-
-            // initialize canvas
-
             var renderer = new WpfRenderer();
             var elements = CreateElements(container, renderer);
 
@@ -53,30 +48,24 @@ namespace Test
                 editor.Move(p.X, p.Y);
             };
 
-            // initialize menu
-
             fileExit.Click += (s, e) => this.Close();
-
             editClear.Click += (s, e) => ClearLayers(container);
-            
             toolNone.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.None;
             toolLine.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Line;
             toolRectangle.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Rectangle;
             toolEllipse.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Ellipse;
             toolBezier.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Bezier;
-
             optionsIsFilled.Click += (s, e) => editor.DefaultIsFilled = !editor.DefaultIsFilled;
-
-            stylesEdit.Click += (s, e) => 
-            {
-                var window = new Window2();
-                window.DataContext = container;
-                window.Show();
-            };
-
-            // initialize bindings
+            stylesEdit.Click += (s, e) => EditStyles(container);
 
             this.DataContext = container;
+        }
+
+        private void EditStyles(IContainer container)
+        {
+            var window = new Window2();
+            window.DataContext = container;
+            window.Show();
         }
 
         private IContainer CreateContainer()
@@ -158,18 +147,12 @@ namespace Test
         {
             base.OnRender(drawingContext);
 
-            //var sw = System.Diagnostics.Stopwatch.StartNew();
-
             _renderer.Render(drawingContext, _layer);
-
-            //sw.Stop();
-            //System.Diagnostics.Trace.WriteLine("[" + _layer.Name + "]" + " OnRender: " + sw.Elapsed.TotalMilliseconds + "ms");
         }
 	}
 	
     public class WpfRenderer : IRenderer
     {
-        // Tuple<Brush, Pen>: Brush is used for Fill, Pen if used for Stroke
         private IDictionary<XStyle, Tuple<Brush, Pen>> _styleCache;
         private readonly bool _enableStyleCache = true;
         
