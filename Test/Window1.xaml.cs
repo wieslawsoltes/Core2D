@@ -49,23 +49,49 @@ namespace Test
             };
 
             fileExit.Click += (s, e) => this.Close();
-            editClear.Click += (s, e) => ClearLayers(container);
+
+            editClear.Click += (s, e) =>
+            {
+                Clear(container);
+                Invalidate(container);
+            };
+
             toolNone.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.None;
             toolLine.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Line;
             toolRectangle.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Rectangle;
             toolEllipse.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Ellipse;
             toolBezier.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Bezier;
+
             optionsIsFilled.Click += (s, e) => editor.DefaultIsFilled = !editor.DefaultIsFilled;
-            stylesEdit.Click += (s, e) => EditStyles(container);
+
+            layersAdd.Click += (s, e) =>
+            {
+                container.Layers.Add(new XLayer() { Name = "New", Shapes = new ObservableCollection<XShape>() });
+            };
+
+            layersRemove.Click += (s, e) =>
+            {
+                container.Layers.Remove(container.CurrentLayer);
+                Invalidate(container);
+            };
+
+            stylesAdd.Click += (s, e) =>
+            {
+                container.Styles.Add(XStyle.Create("New", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
+            };
+
+            stylesRemove.Click += (s, e) =>
+            {
+                container.Styles.Remove(container.CurrentStyle);
+            };
+
+            shapesRemove.Click += (s, e) =>
+            {
+                container.CurrentLayer.Shapes.Remove(container.CurrentShape);
+                Invalidate(container);
+            };
 
             this.DataContext = container;
-        }
-
-        private void EditStyles(IContainer container)
-        {
-            var window = new Window2();
-            window.DataContext = container;
-            window.Show();
         }
 
         private IContainer CreateContainer()
@@ -114,15 +140,21 @@ namespace Test
             return elements;
         }
 
-        private void ClearLayers(IContainer container)
+        private void Clear(IContainer container)
         {
             foreach (var layer in container.Layers)
             {
                 layer.Shapes.Clear();
+            }
+            container.WorkingLayer.Shapes.Clear();
+        }
+
+        private void Invalidate(IContainer container)
+        {
+            foreach (var layer in container.Layers)
+            {
                 layer.Invalidate();
             }
-
-            container.WorkingLayer.Shapes.Clear();
             container.WorkingLayer.Invalidate();
         }
     }

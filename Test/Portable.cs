@@ -72,6 +72,7 @@ namespace Test
         ILayer WorkingLayer { get; set; }
         IList<XStyle> Styles { get; set; }
         XStyle CurrentStyle { get; set; }
+        XShape CurrentShape { get; set; }
     }
 
     public class XLayer : ILayer
@@ -88,6 +89,7 @@ namespace Test
         public ILayer WorkingLayer { get; set; }
         public IList<XStyle> Styles { get; set; }
         public XStyle CurrentStyle { get; set; }
+        public XShape CurrentShape { get; set; }
     }
 
     public interface IElement

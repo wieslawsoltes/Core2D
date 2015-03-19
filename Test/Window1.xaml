@@ -40,9 +40,6 @@
             <MenuItem Header="_Options">
                 <MenuItem x:Name="optionsIsFilled" Header="Toggle _Filled"/>
             </MenuItem>
-            <MenuItem Header="_Styles">
-                <MenuItem x:Name="stylesEdit" Header="_Edit..."/>
-            </MenuItem>
         </Menu>
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0" Margin="5,5,0,5">
             <Canvas x:Name="canvas" Width="800" Height="600" Background="DarkGray"/>
@@ -50,38 +47,77 @@
         <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" Background="Transparent" ResizeBehavior="PreviousAndNext"/>
         <TabControl Grid.Row="1" Grid.Column="2" Margin="0,5,5,5">
             <TabItem Header="Layers">
-                <ListBox ItemsSource="{Binding Layers}" SelectedItem="{Binding CurrentLayer}" BorderBrush="{x:Null}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </TabItem>
-            <TabItem Header="Styles">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <ListBox ItemsSource="{Binding Styles}" SelectedItem="{Binding CurrentStyle}" Grid.Row="0" BorderBrush="{x:Null}">
+                    <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
+                        <MenuItem x:Name="layersAdd" Header="_+"/>
+                        <MenuItem x:Name="layersRemove" Header="_-"/>
+                    </Menu>
+                    <ListBox ItemsSource="{Binding Layers}" SelectedItem="{Binding CurrentLayer}" BorderBrush="{x:Null}" Grid.Row="1">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name}"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <controls:StyleControl DataContext="{Binding CurrentStyle}" Grid.Row="1" Margin="2"/>
+                    <StackPanel Grid.Row="2" DataContext="{Binding CurrentLayer}" >
+                        <GroupBox Header="Name">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Text="{Binding Name}" TextAlignment="Left" VerticalAlignment="Center" Margin="1" BorderBrush="{x:Null}"/>
+                            </Grid>
+                        </GroupBox>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Styles">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
+                        <MenuItem x:Name="stylesAdd" Header="_+"/>
+                        <MenuItem x:Name="stylesRemove" Header="_-"/>
+                    </Menu>
+                    <ListBox ItemsSource="{Binding Styles}" SelectedItem="{Binding CurrentStyle}" Grid.Row="1" BorderBrush="{x:Null}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <controls:StyleControl DataContext="{Binding CurrentStyle}" Grid.Row="2" Margin="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Shapes">
-                <ListBox ItemsSource="{Binding CurrentLayer.Shapes}" BorderBrush="{x:Null}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
+                        <MenuItem x:Name="shapesRemove" Header="_-"/>
+                    </Menu>
+                    <ListBox ItemsSource="{Binding CurrentLayer.Shapes}" SelectedItem="{Binding CurrentShape}" BorderBrush="{x:Null}" Grid.Row="1">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
