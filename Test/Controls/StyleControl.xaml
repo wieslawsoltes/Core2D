@@ -22,14 +22,14 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="30"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="A" Margin="0,0,2,0" Grid.Row="0" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
-                <TextBlock Text="R" Margin="0,0,2,0" Grid.Row="1" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
-                <TextBlock Text="G" Margin="0,0,2,0" Grid.Row="2" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
-                <TextBlock Text="B" Margin="0,0,2,0" Grid.Row="3" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
+                <TextBlock Text="A" Margin="0,0,2,0" Grid.Row="0" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="R" Margin="0,0,2,0" Grid.Row="1" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="G" Margin="0,0,2,0" Grid.Row="2" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="B" Margin="0,0,2,0" Grid.Row="3" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center"/>
                 <Slider Value="{Binding Stroke.A}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="0" Grid.Column="1" Margin="1"/>
                 <Slider Value="{Binding Stroke.R}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="1" Margin="1"/>
                 <Slider Value="{Binding Stroke.G}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="2" Grid.Column="1" Margin="1"/>
@@ -49,14 +49,14 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="30"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="A" Margin="0,0,2,0" Grid.Row="0" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
-                <TextBlock Text="R" Margin="0,0,2,0" Grid.Row="1" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
-                <TextBlock Text="G" Margin="0,0,2,0" Grid.Row="2" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
-                <TextBlock Text="B" Margin="0,0,2,0" Grid.Row="3" Grid.Column="0" TextAlignment="Right" VerticalAlignment="Center"/>
+                <TextBlock Text="A" Margin="0,0,2,0" Grid.Row="0" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="R" Margin="0,0,2,0" Grid.Row="1" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="G" Margin="0,0,2,0" Grid.Row="2" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Text="B" Margin="0,0,2,0" Grid.Row="3" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center"/>
                 <Slider Value="{Binding Fill.A}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="0" Grid.Column="1" Margin="1"/>
                 <Slider Value="{Binding Fill.R}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="1" Margin="1"/>
                 <Slider Value="{Binding Fill.G}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="2" Grid.Column="1" Margin="1"/>
