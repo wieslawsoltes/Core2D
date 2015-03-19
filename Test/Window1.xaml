@@ -1,6 +1,7 @@
 ﻿<Window x:Class="Test.Window1"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:Test.Controls"
         Title="Test" 
         Height="720" Width="1080"
         Background="LightGray"
@@ -13,13 +14,14 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="180"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="Transparent">
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="Transparent">
             <MenuItem Header="_File">
                 <MenuItem x:Name="fileExit" Header="E_xit"/>
             </MenuItem>
@@ -42,10 +44,13 @@
                 <MenuItem x:Name="stylesEdit" Header="_Edit..."/>
             </MenuItem>
         </Menu>
-        <Canvas x:Name="canvas" Grid.Row="1" Grid.Column="0" Width="800" Height="600" Background="DarkGray"/>
-        <TabControl Grid.Row="1" Grid.Column="1">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0" Margin="5,5,0,5">
+            <Canvas x:Name="canvas" Width="800" Height="600" Background="DarkGray"/>
+        </ScrollViewer>
+        <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" Background="Transparent" ResizeBehavior="PreviousAndNext"/>
+        <TabControl Grid.Row="1" Grid.Column="2" Margin="0,5,5,5">
             <TabItem Header="Layers">
-                <ListBox ItemsSource="{Binding Layers}" SelectedItem="{Binding CurrentLayer}">
+                <ListBox ItemsSource="{Binding Layers}" SelectedItem="{Binding CurrentLayer}" BorderBrush="{x:Null}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}"/>
@@ -54,16 +59,23 @@
                 </ListBox>
             </TabItem>
             <TabItem Header="Styles">
-                <ListBox ItemsSource="{Binding Styles}" SelectedItem="{Binding CurrentStyle}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <ListBox ItemsSource="{Binding Styles}" SelectedItem="{Binding CurrentStyle}" Grid.Row="0" BorderBrush="{x:Null}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <controls:StyleControl DataContext="{Binding CurrentStyle}" Grid.Row="1" Margin="2"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Shapes">
-                <ListBox ItemsSource="{Binding CurrentLayer.Shapes}">
+                <ListBox ItemsSource="{Binding CurrentLayer.Shapes}" BorderBrush="{x:Null}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}"/>
