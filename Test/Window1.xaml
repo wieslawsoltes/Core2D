@@ -1,6 +1,8 @@
 ﻿<Window x:Class="Test.Window1"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:Test"
         xmlns:controls="clr-namespace:Test.Controls"
         Title="Test" 
         Height="720" Width="1080"
@@ -11,6 +13,13 @@
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextHintingMode="Auto"
         TextOptions.TextRenderingMode="Auto">
+    <Window.Resources>
+        <ObjectDataProvider MethodName="GetNames" ObjectType="{x:Type sys:Enum}" x:Key="EditorToolsKey">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:Tool" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -21,14 +30,23 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="Transparent">
+        <Menu x:Name="menu" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="Transparent">
             <MenuItem Header="_File">
-                <MenuItem x:Name="fileExit" Header="E_xit"/>
+                <MenuItem x:Name="fileExit" Header="E_xit">
+                    <MenuItem.Style>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="IsChecked" Value="False">
+                            </Setter>
+                        </Style>
+                    </MenuItem.Style>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="_Edit">
                 <MenuItem x:Name="editClear" Header="_Clear"/>
             </MenuItem>
-            <MenuItem Header="_Tool">
+            <MenuItem Header="_Tool" 
+                      ItemsSource="{Binding Source={StaticResource EditorToolsKey}}">
+                <!--
                 <MenuItem x:Name="toolNone" Header="_None"/>
                 <Separator/>
                 <MenuItem x:Name="toolLine" Header="_Line"/>
@@ -36,9 +54,12 @@
                 <MenuItem x:Name="toolEllipse" Header="_Ellipse"/>
                 <Separator/>
                 <MenuItem x:Name="toolBezier" Header="_Bezier"/>
+                -->
             </MenuItem>
             <MenuItem Header="_Options">
-                <MenuItem x:Name="optionsIsFilled" Header="Toggle _Filled"/>
+                <MenuItem x:Name="optionsDefaultIsFilled" Header="Default is _Filled" IsCheckable="True" IsChecked="{Binding DefaultIsFilled}"/>
+                <Separator/>
+                <MenuItem x:Name="optionsSnapToGrid" Header="_Snap to Grid" IsCheckable="True" IsChecked="{Binding SnapToGrid}"/>
             </MenuItem>
         </Menu>
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0" Margin="5,5,0,5">

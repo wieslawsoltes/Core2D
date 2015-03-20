@@ -56,13 +56,11 @@ namespace Test
                 Invalidate(container);
             };
 
-            toolNone.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.None;
-            toolLine.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Line;
-            toolRectangle.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Rectangle;
-            toolEllipse.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Ellipse;
-            toolBezier.Click += (s, e) => editor.CurrentTool = ContainerEditor.Tool.Bezier;
-
-            optionsIsFilled.Click += (s, e) => editor.DefaultIsFilled = !editor.DefaultIsFilled;
+            //toolNone.Click += (s, e) => editor.CurrentTool = Tool.None;
+            //toolLine.Click += (s, e) => editor.CurrentTool = Tool.Line;
+            //toolRectangle.Click += (s, e) => editor.CurrentTool = Tool.Rectangle;
+            //toolEllipse.Click += (s, e) => editor.CurrentTool = Tool.Ellipse;
+            //toolBezier.Click += (s, e) => editor.CurrentTool = Tool.Bezier;
 
             layersAdd.Click += (s, e) =>
             {
@@ -92,6 +90,7 @@ namespace Test
             };
 
             this.DataContext = container;
+            this.menu.DataContext = editor;
         }
 
         private IContainer CreateContainer()

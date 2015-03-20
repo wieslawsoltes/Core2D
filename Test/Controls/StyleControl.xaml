@@ -76,7 +76,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="30"/>
                 </Grid.ColumnDefinitions>
-                <Slider Value="{Binding Thickness}" Minimum="0" Maximum="20" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="0" Grid.Column="0" Margin="1"/>
+                <Slider Value="{Binding Thickness}" Minimum="0" Maximum="50" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="0" Grid.Column="0" Margin="1"/>
                 <TextBox Text="{Binding Thickness}" BorderBrush="{x:Null}" Grid.Row="0" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
         </GroupBox>
