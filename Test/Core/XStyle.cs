@@ -6,12 +6,64 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XStyle
+    public class XStyle : XObject
     {
-        public string Name { get; set; }
-        public XColor Stroke { get; set; }
-        public XColor Fill { get; set; }
-        public double Thickness { get; set; }
+        private string _name;
+        private XColor _stroke;
+        private XColor _fill;
+        private double _thickness;
+
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (value != _name)
+                {
+                    _name = value;
+                    Notify("Name");
+                }
+            }
+        }
+
+        public XColor Stroke
+        {
+            get { return _stroke; }
+            set
+            {
+                if (value != _stroke)
+                {
+                    _stroke = value;
+                    Notify("Stroke");
+                }
+            }
+        }
+
+        public XColor Fill
+        {
+            get { return _fill; }
+            set
+            {
+                if (value != _fill)
+                {
+                    _fill = value;
+                    Notify("Fill");
+                }
+            }
+        }
+
+        public double Thickness
+        {
+            get { return _thickness; }
+            set
+            {
+                if (value != _thickness)
+                {
+                    _thickness = value;
+                    Notify("Thickness");
+                }
+            }
+        }
 
         public static XStyle Create(
             string name,

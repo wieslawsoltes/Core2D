@@ -8,12 +8,90 @@ namespace Test.Core
 {
     public class XBezier : XShape
     {
-        public XStyle Style { get; set; }
-        public XPoint Point1 { get; set; }
-        public XPoint Point2 { get; set; }
-        public XPoint Point3 { get; set; }
-        public XPoint Point4 { get; set; }
-        public bool IsFilled { get; set; }
+        private XStyle _style;
+        private XPoint _point1;
+        private XPoint _point2;
+        private XPoint _point3;
+        private XPoint _point4;
+        private bool _isFilled;
+
+        public XStyle Style
+        {
+            get { return _style; }
+            set
+            {
+                if (value != _style)
+                {
+                    _style = value;
+                    Notify("Style");
+                }
+            }
+        }
+
+        public XPoint Point1
+        {
+            get { return _point1; }
+            set
+            {
+                if (value != _point1)
+                {
+                    _point1 = value;
+                    Notify("Point1");
+                }
+            }
+        }
+
+        public XPoint Point2
+        {
+            get { return _point2; }
+            set
+            {
+                if (value != _point2)
+                {
+                    _point2 = value;
+                    Notify("Point2");
+                }
+            }
+        }
+
+        public XPoint Point3
+        {
+            get { return _point3; }
+            set
+            {
+                if (value != _point3)
+                {
+                    _point3 = value;
+                    Notify("Point3");
+                }
+            }
+        }
+
+        public XPoint Point4
+        {
+            get { return _point4; }
+            set
+            {
+                if (value != _point4)
+                {
+                    _point4 = value;
+                    Notify("Point4");
+                }
+            }
+        }
+
+        public bool IsFilled
+        {
+            get { return _isFilled; }
+            set
+            {
+                if (value != _isFilled)
+                {
+                    _isFilled = value;
+                    Notify("IsFilled");
+                }
+            }
+        }
 
         public override void Draw(object dc, IRenderer renderer)
         {

@@ -91,6 +91,7 @@
     <Compile Include="Core\XEllipse.cs" />
     <Compile Include="Core\XLayer.cs" />
     <Compile Include="Core\XLine.cs" />
+    <Compile Include="Core\XObject.cs" />
     <Compile Include="Core\XPoint.cs" />
     <Compile Include="Core\XRectangle.cs" />
     <Compile Include="Core\XShape.cs" />

@@ -8,10 +8,62 @@ namespace Test.Core
 {
     public class XRectangle : XShape
     {
-        public XStyle Style { get; set; }
-        public XPoint TopLeft { get; set; }
-        public XPoint BottomRight { get; set; }
-        public bool IsFilled { get; set; }
+        private XStyle _style;
+        private XPoint _topLeft;
+        private XPoint _bottomRight;
+        private bool _isFilled;
+
+        public XStyle Style
+        {
+            get { return _style; }
+            set
+            {
+                if (value != _style)
+                {
+                    _style = value;
+                    Notify("Style");
+                }
+            }
+        }
+
+        public XPoint TopLeft
+        {
+            get { return _topLeft; }
+            set
+            {
+                if (value != _topLeft)
+                {
+                    _topLeft = value;
+                    Notify("TopLeft");
+                }
+            }
+        }
+
+        public XPoint BottomRight
+        {
+            get { return _bottomRight; }
+            set
+            {
+                if (value != _bottomRight)
+                {
+                    _bottomRight = value;
+                    Notify("BottomRight");
+                }
+            }
+        }
+
+        public bool IsFilled
+        {
+            get { return _isFilled; }
+            set
+            {
+                if (value != _isFilled)
+                {
+                    _isFilled = value;
+                    Notify("IsFilled");
+                }
+            }
+        }
 
         public override void Draw(object dc, IRenderer renderer)
         {

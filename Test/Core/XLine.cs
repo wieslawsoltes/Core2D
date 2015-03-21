@@ -8,9 +8,48 @@ namespace Test.Core
 {
     public class XLine : XShape
     {
-        public XStyle Style { get; set; }
-        public XPoint Start { get; set; }
-        public XPoint End { get; set; }
+        private XStyle _style;
+        private XPoint _start;
+        private XPoint _end;
+
+        public XStyle Style
+        {
+            get { return _style; }
+            set
+            {
+                if (value != _style)
+                {
+                    _style = value;
+                    Notify("Style");
+                }
+            }
+        }
+
+        public XPoint Start
+        {
+            get { return _start; }
+            set
+            {
+                if (value != _start)
+                {
+                    _start = value;
+                    Notify("Start");
+                }
+            }
+        }
+
+        public XPoint End
+        {
+            get { return _end; }
+            set
+            {
+                if (value != _end)
+                {
+                    _end = value;
+                    Notify("End");
+                }
+            }
+        }
 
         public override void Draw(object dc, IRenderer renderer)
         {

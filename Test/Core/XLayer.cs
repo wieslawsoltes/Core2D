@@ -6,10 +6,49 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XLayer : ILayer
+    public class XLayer : XObject, ILayer
     {
-        public string Name { get; set; }
-        public IList<XShape> Shapes { get; set; }
-        public Action Invalidate { get; set; }
+        public string _name;
+        public IList<XShape> _shapes;
+        public Action _invalidate;
+
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (value != _name)
+                {
+                    _name = value;
+                    Notify("Name");
+                }
+            }
+        }
+
+        public IList<XShape> Shapes
+        {
+            get { return _shapes; }
+            set
+            {
+                if (value != _shapes)
+                {
+                    _shapes = value;
+                    Notify("Shapes");
+                }
+            }
+        }
+
+        public Action Invalidate
+        {
+            get { return _invalidate; }
+            set
+            {
+                if (value != _invalidate)
+                {
+                    _invalidate = value;
+                    Notify("Invalidate");
+                }
+            }
+        }
     }
 }

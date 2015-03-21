@@ -7,20 +7,15 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class ContainerEditor : INotifyPropertyChanged
+    public class ContainerEditor : XObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void Notify(string propertyName)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
         private Tool _currentTool;
+        private State _currentState;
+        private bool _defaultIsFilled;
+        private bool _snapToGrid;
+        private double _snapX;
+        private double _snapY;
+
         public Tool CurrentTool
         {
             get { return _currentTool; }
@@ -34,11 +29,70 @@ namespace Test.Core
             }
         }
 
-        public State CurrentState { get; set; }
-        public bool DefaultIsFilled { get; set; }
-        public bool SnapToGrid { get; set; }
-        public double SnapX { get; set; }
-        public double SnapY { get; set; }
+        public State CurrentState
+        {
+            get { return _currentState; }
+            set
+            {
+                if (value != _currentState)
+                {
+                    _currentState = value;
+                    Notify("CurrentState");
+                }
+            }
+        }
+
+        public bool DefaultIsFilled
+        {
+            get { return _defaultIsFilled; }
+            set
+            {
+                if (value != _defaultIsFilled)
+                {
+                    _defaultIsFilled = value;
+                    Notify("DefaultIsFilled");
+                }
+            }
+        }
+
+        public bool SnapToGrid
+        {
+            get { return _snapToGrid; }
+            set
+            {
+                if (value != _snapToGrid)
+                {
+                    _snapToGrid = value;
+                    Notify("SnapToGrid");
+                }
+            }
+        }
+
+        public double SnapX
+        {
+            get { return _snapX; }
+            set
+            {
+                if (value != _snapX)
+                {
+                    _snapX = value;
+                    Notify("SnapX");
+                }
+            }
+        }
+
+        public double SnapY
+        {
+            get { return _snapY; }
+            set
+            {
+                if (value != _snapY)
+                {
+                    _snapY = value;
+                    Notify("SnapY");
+                }
+            }
+        }
 
         private readonly IContainer _container;
         private XShape _temp;
