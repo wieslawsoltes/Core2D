@@ -28,7 +28,15 @@ namespace Test
                 canvas.Children.Add(element);
             }
 
-            var editor = new ContainerEditor(container);
+            var editor = new ContainerEditor(container)
+            {
+                SnapToGrid = false,
+                SnapX = 15.0,
+                SnapY = 15.0,
+                DefaultIsFilled = false,
+                CurrentTool = Tool.Line,
+                CurrentState = State.None
+            };
 
             canvas.PreviewMouseLeftButtonDown += (s, e) =>
             {
