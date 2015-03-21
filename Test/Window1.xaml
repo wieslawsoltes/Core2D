@@ -110,6 +110,19 @@
                         </Style>
                     </MenuItem.Style>
                 </MenuItem>
+                <MenuItem x:Name="toolQBezier" Header="_QBezier">
+                    <MenuItem.Style>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="IsCheckable" Value="True"/>
+                            <Setter Property="IsChecked" Value="False"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CurrentTool}" Value="QBezier">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </MenuItem.Style>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="_Options">
                 <MenuItem x:Name="optionsDefaultIsFilled" 

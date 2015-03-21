@@ -12,6 +12,7 @@ namespace Test.Core
         Line,
         Rectangle,
         Ellipse,
-        Bezier
+        Bezier,
+        QBezier
     }
 }

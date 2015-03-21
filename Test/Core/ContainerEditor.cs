@@ -220,7 +220,7 @@ namespace Test.Core
                         {
                             case State.None:
                                 {
-                                    _temp = XBezier.Create(sx, sy, _container.CurrentStyle);
+                                    _temp = XBezier.Create(sx, sy, _container.CurrentStyle, DefaultIsFilled);
                                     _container.WorkingLayer.Shapes.Add(_temp);
                                     _container.WorkingLayer.Invalidate();
                                     CurrentState = State.One;
@@ -255,6 +255,44 @@ namespace Test.Core
                                     var bezier = _temp as XBezier;
                                     bezier.Point2.X = sx;
                                     bezier.Point2.Y = sy;
+                                    _container.WorkingLayer.Shapes.Remove(_temp);
+                                    _container.CurrentLayer.Shapes.Add(_temp);
+                                    _container.Invalidate();
+                                    CurrentState = State.None;
+                                }
+                                break;
+                        }
+                    }
+                    break;
+                // QBezier
+                case Tool.QBezier:
+                    {
+                        switch (CurrentState)
+                        {
+                            case State.None:
+                                {
+                                    _temp = XQBezier.Create(sx, sy, _container.CurrentStyle, DefaultIsFilled);
+                                    _container.WorkingLayer.Shapes.Add(_temp);
+                                    _container.WorkingLayer.Invalidate();
+                                    CurrentState = State.One;
+                                }
+                                break;
+                            case State.One:
+                                {
+                                    var qbezier = _temp as XQBezier;
+                                    qbezier.Point2.X = sx;
+                                    qbezier.Point2.Y = sy;
+                                    qbezier.Point3.X = sx;
+                                    qbezier.Point3.Y = sy;
+                                    _container.WorkingLayer.Invalidate();
+                                    CurrentState = State.Two;
+                                }
+                                break;
+                            case State.Two:
+                                {
+                                    var qbezier = _temp as XQBezier;
+                                    qbezier.Point2.X = sx;
+                                    qbezier.Point2.Y = sy;
                                     _container.WorkingLayer.Shapes.Remove(_temp);
                                     _container.CurrentLayer.Shapes.Add(_temp);
                                     _container.Invalidate();
@@ -347,6 +385,26 @@ namespace Test.Core
                             case State.One:
                             case State.Two:
                             case State.Three:
+                                {
+                                    _container.WorkingLayer.Shapes.Remove(_temp);
+                                    _container.WorkingLayer.Invalidate();
+                                    CurrentState = State.None;
+                                }
+                                break;
+                        }
+                    }
+                    break;
+                // QBezier
+                case Tool.QBezier:
+                    {
+                        switch (CurrentState)
+                        {
+                            case State.None:
+                                {
+                                }
+                                break;
+                            case State.One:
+                            case State.Two:
                                 {
                                     _container.WorkingLayer.Shapes.Remove(_temp);
                                     _container.WorkingLayer.Invalidate();
@@ -464,6 +522,36 @@ namespace Test.Core
                             case State.Three:
                                 {
                                     var bezier = _temp as XBezier;
+                                    bezier.Point2.X = sx;
+                                    bezier.Point2.Y = sy;
+                                    _container.WorkingLayer.Invalidate();
+                                }
+                                break;
+                        }
+                    }
+                    break;
+                // QBezier
+                case Tool.QBezier:
+                    {
+                        switch (CurrentState)
+                        {
+                            case State.None:
+                                {
+                                }
+                                break;
+                            case State.One:
+                                {
+                                    var bezier = _temp as XQBezier;
+                                    bezier.Point2.X = sx;
+                                    bezier.Point2.Y = sy;
+                                    bezier.Point3.X = sx;
+                                    bezier.Point3.Y = sy;
+                                    _container.WorkingLayer.Invalidate();
+                                }
+                                break;
+                            case State.Two:
+                                {
+                                    var bezier = _temp as XQBezier;
                                     bezier.Point2.X = sx;
                                     bezier.Point2.Y = sy;
                                     _container.WorkingLayer.Invalidate();

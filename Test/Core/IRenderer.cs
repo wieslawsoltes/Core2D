@@ -14,5 +14,6 @@ namespace Test.Core
         void Draw(object dc, XRectangle rectangle);
         void Draw(object dc, XEllipse ellipse);
         void Draw(object dc, XBezier bezier);
+        void Draw(object dc, XQBezier qbezier);
     }
 }

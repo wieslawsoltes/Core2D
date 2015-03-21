@@ -17,6 +17,9 @@ namespace Test
         private IDictionary<XBezier, PathGeometry> _bezierCache;
         private readonly bool _enableBezierCache = true;
 
+        private IDictionary<XQBezier, PathGeometry> _qbezierCache;
+        private readonly bool _enableQBezierCache = true;
+
         public WpfRenderer()
         {
             ClearCache();
@@ -26,6 +29,7 @@ namespace Test
         {
             _styleCache = new Dictionary<XStyle, Tuple<Brush, Pen>>();
             _bezierCache = new Dictionary<XBezier, PathGeometry>();
+            _qbezierCache = new Dictionary<XQBezier, PathGeometry>();
         }
 
         private Brush CreateBrush(XColor color)
@@ -194,6 +198,7 @@ namespace Test
             {
                 var pf = pg.Figures[0];
                 pf.StartPoint = new Point(bezier.Point1.X, bezier.Point1.Y);
+                pf.IsFilled = bezier.IsFilled;
                 var bs = pf.Segments[0] as BezierSegment;
                 bs.Point1 = new Point(bezier.Point2.X, bezier.Point2.Y);
                 bs.Point2 = new Point(bezier.Point3.X, bezier.Point3.Y);
@@ -203,7 +208,8 @@ namespace Test
             {
                 var pf = new PathFigure()
                 {
-                    StartPoint = new Point(bezier.Point1.X, bezier.Point1.Y)
+                    StartPoint = new Point(bezier.Point1.X, bezier.Point1.Y),
+                    IsFilled = bezier.IsFilled
                 };
                 var bs = new BezierSegment(
                         new Point(bezier.Point2.X, bezier.Point2.Y),
@@ -222,6 +228,65 @@ namespace Test
             }
 
             _dc.DrawGeometry(bezier.IsFilled ? fill : null, stroke, pg);
+        }
+
+        public void Draw(object dc, XQBezier qbezier)
+        {
+            var _dc = dc as DrawingContext;
+
+            Tuple<Brush, Pen> cache;
+            Brush fill;
+            Pen stroke;
+            if (_enableStyleCache && _styleCache.TryGetValue(qbezier.Style, out cache))
+            {
+                fill = cache.Item1;
+                stroke = cache.Item2;
+            }
+            else
+            {
+                fill = CreateBrush(qbezier.Style.Fill);
+                stroke = CreatePen(
+                    qbezier.Style.Stroke,
+                    qbezier.Style.Thickness);
+
+                if (_enableStyleCache)
+                    _styleCache.Add(qbezier.Style, Tuple.Create(fill, stroke));
+            }
+
+            PathGeometry pg;
+
+            if (_enableQBezierCache && _qbezierCache.TryGetValue(qbezier, out pg))
+            {
+                var pf = pg.Figures[0];
+                pf.StartPoint = new Point(qbezier.Point1.X, qbezier.Point1.Y);
+                pf.IsFilled = qbezier.IsFilled;
+                var qbs = pf.Segments[0] as QuadraticBezierSegment;
+                qbs.Point1 = new Point(qbezier.Point2.X, qbezier.Point2.Y);
+                qbs.Point2 = new Point(qbezier.Point3.X, qbezier.Point3.Y);
+            }
+            else
+            {
+                var pf = new PathFigure()
+                {
+                    StartPoint = new Point(qbezier.Point1.X, qbezier.Point1.Y),
+                    IsFilled = qbezier.IsFilled
+                };
+
+                var qbs = new QuadraticBezierSegment(
+                        new Point(qbezier.Point2.X, qbezier.Point2.Y),
+                        new Point(qbezier.Point3.X, qbezier.Point3.Y),
+                        true);
+                //bs.Freeze();
+                pf.Segments.Add(qbs);
+                //pf.Freeze();
+                pg = new PathGeometry();
+                pg.Figures.Add(pf);
+                //pg.Freeze();
+                if (_enableQBezierCache)
+                    _qbezierCache.Add(qbezier, pg);
+            }
+            
+            _dc.DrawGeometry(qbezier.IsFilled ? fill : null, stroke, pg);
         }
     }
 }

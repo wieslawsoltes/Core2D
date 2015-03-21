@@ -94,6 +94,7 @@
     <Compile Include="Core\XLine.cs" />
     <Compile Include="Core\XObject.cs" />
     <Compile Include="Core\XPoint.cs" />
+    <Compile Include="Core\XQBezier.cs" />
     <Compile Include="Core\XRectangle.cs" />
     <Compile Include="Core\XShape.cs" />
     <Compile Include="Core\XStyle.cs" />

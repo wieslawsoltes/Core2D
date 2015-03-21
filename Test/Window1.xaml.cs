@@ -70,6 +70,7 @@ namespace Test
             toolRectangle.Click += (s, e) => editor.CurrentTool = Tool.Rectangle;
             toolEllipse.Click += (s, e) => editor.CurrentTool = Tool.Ellipse;
             toolBezier.Click += (s, e) => editor.CurrentTool = Tool.Bezier;
+            toolQBezier.Click += (s, e) => editor.CurrentTool = Tool.QBezier;
 
             layersAdd.Click += (s, e) =>
             {
