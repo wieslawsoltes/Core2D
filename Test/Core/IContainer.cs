@@ -14,5 +14,7 @@ namespace Test.Core
         IList<XStyle> Styles { get; set; }
         XStyle CurrentStyle { get; set; }
         XShape CurrentShape { get; set; }
+        void Clear();
+        void Invalidate();
     }
 }

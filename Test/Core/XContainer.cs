@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -91,6 +92,51 @@ namespace Test.Core
                     Notify("CurrentShape");
                 }
             }
+        }
+
+        public void Clear()
+        {
+            foreach (var layer in Layers)
+            {
+                layer.Shapes.Clear();
+            }
+            WorkingLayer.Shapes.Clear();
+        }
+
+        public void Invalidate()
+        {
+            foreach (var layer in Layers)
+            {
+                layer.Invalidate();
+            }
+            WorkingLayer.Invalidate();
+        }
+
+        public static IContainer Create()
+        {
+            var c = new XContainer()
+            {
+                Layers = new ObservableCollection<ILayer>(),
+                Styles = new ObservableCollection<XStyle>()
+            };
+
+            c.Layers.Add(XLayer.Create("Layer1"));
+            c.Layers.Add(XLayer.Create("Layer2"));
+            c.Layers.Add(XLayer.Create("Layer3"));
+
+            c.CurrentLayer = c.Layers.FirstOrDefault();
+
+            c.WorkingLayer = XLayer.Create("Working");
+
+            c.Styles.Add(XStyle.Create("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
+            c.Styles.Add(XStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
+            c.Styles.Add(XStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
+            c.Styles.Add(XStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
+            c.Styles.Add(XStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
+
+            c.CurrentStyle = c.Styles.FirstOrDefault();
+
+            return c;
         }
     }
 }

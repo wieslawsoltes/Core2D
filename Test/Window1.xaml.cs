@@ -20,9 +20,8 @@ namespace Test
         {
             InitializeComponent();
 
-            var container = CreateContainer();
+            var container = XContainer.Create();
             var renderer = new WpfRenderer();
-
             var layers = new Dictionary<ILayer, WpfElement>();
 
             foreach (var layer in container.Layers)
@@ -67,8 +66,8 @@ namespace Test
 
             editClear.Click += (s, e) =>
             {
-                Clear(container);
-                Invalidate(container);
+                container.Clear();
+                container.Invalidate();
             };
 
             toolNone.Click += (s, e) => editor.CurrentTool = Tool.None;
@@ -100,7 +99,7 @@ namespace Test
                 canvasLayers.Children.Remove(element);
                 container.CurrentLayer = null;
                 container.CurrentLayer = container.Layers.FirstOrDefault();
-                Invalidate(container);
+                container.Invalidate();
             };
 
             stylesAdd.Click += (s, e) =>
@@ -117,68 +116,11 @@ namespace Test
             shapesRemove.Click += (s, e) =>
             {
                 container.CurrentLayer.Shapes.Remove(container.CurrentShape);
-                Invalidate(container);
+                container.Invalidate();
             };
 
             this.DataContext = container;
             this.menu.DataContext = editor;
-        }
-
-        private IContainer CreateContainer()
-        {
-            var container = new XContainer()
-            {
-                Layers = new ObservableCollection<ILayer>(),
-                Styles = new ObservableCollection<XStyle>()
-            };
-
-            container.Layers.Add(
-                new XLayer() 
-                { 
-                    Name = "Layer1", 
-                    Shapes = new ObservableCollection<XShape>() 
-                });
-            container.Layers.Add(
-                new XLayer() 
-                { 
-                    Name = "Layer2", 
-                    Shapes = new ObservableCollection<XShape>() 
-                });
-            container.Layers.Add(
-                new XLayer() 
-                { 
-                    Name = "Layer3", 
-                    Shapes = new ObservableCollection<XShape>() 
-                });
-            container.Layers.Add(
-                new XLayer() 
-                { 
-                    Name = "Layer4", 
-                    Shapes = new ObservableCollection<XShape>() 
-                });
-
-            container.CurrentLayer = container.Layers.FirstOrDefault();
-
-            container.WorkingLayer = new XLayer() 
-            { 
-                Name = "Working", 
-                Shapes = new ObservableCollection<XShape>() 
-            };
-
-            container.Styles.Add(
-                XStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
-            container.Styles.Add(
-                XStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
-            container.Styles.Add(
-                XStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
-            container.Styles.Add(
-                XStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
-            container.Styles.Add(
-                XStyle.Create("Cyan", 255, 0, 255, 255, 255, 0, 255, 255, 2.0));
-
-            container.CurrentStyle = container.Styles.FirstOrDefault();
-
-            return container;
         }
 
         private WpfElement CreateElement(IRenderer renderer, ILayer layer)
@@ -191,24 +133,6 @@ namespace Test
 
             layer.Invalidate = element.Invalidate;
             return element;
-        }
-
-        private void Clear(IContainer container)
-        {
-            foreach (var layer in container.Layers)
-            {
-                layer.Shapes.Clear();
-            }
-            container.WorkingLayer.Shapes.Clear();
-        }
-
-        private void Invalidate(IContainer container)
-        {
-            foreach (var layer in container.Layers)
-            {
-                layer.Invalidate();
-            }
-            container.WorkingLayer.Invalidate();
         }
     }
 }
