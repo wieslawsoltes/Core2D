@@ -78,7 +78,23 @@
       <DependentUpon>StyleControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Portable.cs" />
+    <Compile Include="Core\ContainerEditor.cs" />
+    <Compile Include="Core\IContainer.cs" />
+    <Compile Include="Core\IElement.cs" />
+    <Compile Include="Core\ILayer.cs" />
+    <Compile Include="Core\IRenderer.cs" />
+    <Compile Include="Core\State.cs" />
+    <Compile Include="Core\Tool.cs" />
+    <Compile Include="Core\XBezier.cs" />
+    <Compile Include="Core\XColor.cs" />
+    <Compile Include="Core\XContainer.cs" />
+    <Compile Include="Core\XEllipse.cs" />
+    <Compile Include="Core\XLayer.cs" />
+    <Compile Include="Core\XLine.cs" />
+    <Compile Include="Core\XPoint.cs" />
+    <Compile Include="Core\XRectangle.cs" />
+    <Compile Include="Core\XShape.cs" />
+    <Compile Include="Core\XStyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Window1.xaml.cs">
       <SubType>Code</SubType>
