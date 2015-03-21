@@ -261,17 +261,17 @@ namespace Test
         Bezier
     }
 
+    public enum State
+    {
+        None,
+        One,
+        Two,
+        Three,
+        Four
+    }
+
     public class ContainerEditor
     {
-        public enum State
-        {
-            None,
-            One,
-            Two,
-            Three,
-            Four
-        }
-
         public Tool CurrentTool { get; set; }
         public State CurrentState { get; set; }
         public bool DefaultIsFilled { get; set; }
