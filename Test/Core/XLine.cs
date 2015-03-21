@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Test.Core
+{
+    public class XLine : XShape
+    {
+        public XStyle Style { get; set; }
+        public XPoint Start { get; set; }
+        public XPoint End { get; set; }
+
+        public override void Draw(object dc, IRenderer renderer)
+        {
+            renderer.Draw(dc, this);
+        }
+
+        public static XLine Create(
+            double x1, double y1,
+            double x2, double y2,
+            XStyle style)
+        {
+            return new XLine()
+            {
+                Style = style,
+                Start = XPoint.Create(x1, y1),
+                End = XPoint.Create(x2, y2)
+            };
+        }
+
+        public static XLine Create(
+            double x, double y,
+            XStyle style)
+        {
+            return Create(x, y, x, y, style);
+        }
+    }
+}
