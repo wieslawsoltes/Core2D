@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -270,9 +271,33 @@ namespace Test
         Four
     }
 
-    public class ContainerEditor
+    public class ContainerEditor : INotifyPropertyChanged
     {
-        public Tool CurrentTool { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void Notify(string propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        private Tool _currentTool;
+        public Tool CurrentTool 
+        {
+            get { return _currentTool; } 
+            set
+            {
+                if (value != _currentTool)
+                {
+                    _currentTool = value;
+                    Notify("CurrentTool");
+                }
+            }
+        }
+
         public State CurrentState { get; set; }
         public bool DefaultIsFilled { get; set; }
         public bool SnapToGrid { get; set; }
@@ -285,16 +310,6 @@ namespace Test
         public ContainerEditor(IContainer container)
         {
             _container = container;
-            
-            _temp = null;
-
-            SnapToGrid = false;
-            SnapX = 15.0;
-            SnapY = 15.0;
-  
-            DefaultIsFilled = false;
-            CurrentTool = Tool.Line;
-            CurrentState = State.None;
         }
         
         public static double Snap(double value, double snap)
