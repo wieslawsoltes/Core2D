@@ -173,7 +173,8 @@ namespace Test
             {
                 var element = new WpfElement(layer, renderer) 
                 { 
-                    Width = 800, Height = 600
+                    Width = 800, 
+                    Height = 600
                 };
                 layer.Invalidate = element.Invalidate;
                 elements.Add(element);
