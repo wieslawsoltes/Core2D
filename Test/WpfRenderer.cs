@@ -19,10 +19,10 @@ namespace Test
 
         public WpfRenderer()
         {
-            Initialize();
+            ClearCache();
         }
 
-        public void Initialize()
+        public void ClearCache()
         {
             _styleCache = new Dictionary<XStyle, Tuple<Brush, Pen>>();
             _bezierCache = new Dictionary<XBezier, PathGeometry>();

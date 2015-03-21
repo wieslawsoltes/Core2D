@@ -8,6 +8,7 @@ namespace Test.Core
 {
     public interface IRenderer
     {
+        void ClearCache();
         void Render(object dc, ILayer layer);
         void Draw(object dc, XLine line);
         void Draw(object dc, XRectangle rectangle);
