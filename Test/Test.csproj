@@ -100,6 +100,8 @@
       <SubType>Code</SubType>
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WpfElement.cs" />
+    <Compile Include="WpfRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\StyleControl.xaml" />
