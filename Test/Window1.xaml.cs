@@ -110,6 +110,19 @@ namespace Test
 
             this.DataContext = container;
             this.menu.DataContext = editor;
+
+            GroupTest(container);
+        }
+
+        private static void GroupTest(IContainer container)
+        {
+            var g = XGroup.Create("g");
+            g.Shapes.Add(XLine.Create(30, 30, 30, 60, container.CurrentStyle));
+            g.Shapes.Add(XLine.Create(60, 30, 60, 60, container.CurrentStyle));
+            g.Shapes.Add(XLine.Create(30, 30, 60, 30, container.CurrentStyle));
+            g.Shapes.Add(XLine.Create(30, 60, 60, 60, container.CurrentStyle));
+            container.CurrentLayer.Shapes.Add(g);
+            container.Invalidate();
         }
     }
 }

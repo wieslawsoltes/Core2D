@@ -89,6 +89,7 @@
     <Compile Include="Core\XColor.cs" />
     <Compile Include="Core\XContainer.cs" />
     <Compile Include="Core\XEllipse.cs" />
+    <Compile Include="Core\XGroup.cs" />
     <Compile Include="Core\XLayer.cs" />
     <Compile Include="Core\XLine.cs" />
     <Compile Include="Core\XObject.cs" />
