@@ -20,7 +20,10 @@ namespace Test
         {
             InitializeComponent();
 
-            var container = XContainer.Create();
+            double width = 800;
+            double height = 600;
+
+            var container = XContainer.Create(width, height);
             var editor = ContainerEditor.Create(container);
 
             var renderer = new WpfRenderer();
@@ -28,12 +31,12 @@ namespace Test
 
             foreach (var layer in container.Layers)
             {
-                var element = CreateElement(renderer, layer);
+                var element = WpfElement.Create(renderer, layer, width, height);
                 layers.Add(layer, element);
                 canvasLayers.Children.Add(element);
             }
 
-            var workingElement = CreateElement(renderer, container.WorkingLayer);
+            var workingElement = WpfElement.Create(renderer, container.WorkingLayer, width, height);
             canvasWorking.Children.Add(workingElement);
 
             canvasWorking.PreviewMouseLeftButtonDown += (s, e) =>
@@ -72,7 +75,7 @@ namespace Test
             {
                 var layer = XLayer.Create("New");
                 container.Layers.Add(layer);
-                var element = CreateElement(renderer, layer);
+                var element = WpfElement.Create(renderer, layer, width, height);
                 layers.Add(layer, element);
                 canvasLayers.Children.Add(element);
             };
@@ -107,17 +110,6 @@ namespace Test
 
             this.DataContext = container;
             this.menu.DataContext = editor;
-        }
-
-        private WpfElement CreateElement(IRenderer renderer, ILayer layer)
-        {
-            var element = new WpfElement(layer, renderer)
-            {
-                Width = 800,
-                Height = 600
-            };
-            layer.Invalidate = element.Invalidate;
-            return element;
         }
     }
 }

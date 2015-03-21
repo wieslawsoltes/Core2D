@@ -129,15 +129,15 @@
                       Grid.Column="0" 
                       Margin="5,5,0,5">
             <Grid Background="DarkGray"
-                  Width="800" 
-                  Height="600">
+                  Width="{Binding Width}" 
+                  Height="{Binding Height}">
                 <Canvas x:Name="canvasLayers" 
-                        Width="800" 
-                        Height="600" 
+                        Width="{Binding Width}" 
+                        Height="{Binding Height}" 
                         Background="Transparent"/>
                 <Canvas x:Name="canvasWorking" 
-                        Width="800" 
-                        Height="600" 
+                        Width="{Binding Width}" 
+                        Height="{Binding Height}" 
                         Background="Transparent"/>
             </Grid>
         </ScrollViewer>

@@ -31,5 +31,22 @@ namespace Test
 
             _renderer.Render(drawingContext, _layer);
         }
+
+        public static WpfElement Create(
+            IRenderer renderer,
+            ILayer layer,
+            double width,
+            double height)
+        {
+            var element = new WpfElement(layer, renderer)
+            {
+                Width = width,
+                Height = height
+            };
+
+            layer.Invalidate = element.Invalidate;
+
+            return element;
+        }
     }
 }

@@ -8,6 +8,8 @@ namespace Test.Core
 {
     public interface IContainer
     {
+        double Width { get; set; }
+        double Height { get; set; }
         IList<ILayer> Layers { get; set; }
         ILayer CurrentLayer { get; set; }
         ILayer WorkingLayer { get; set; }

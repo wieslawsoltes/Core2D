@@ -9,12 +9,40 @@ namespace Test.Core
 {
     public class XContainer : XObject, IContainer
     {
+        private double _width;
+        private double _height;
         private IList<ILayer> _layers;
         private ILayer _currentLayer;
         private ILayer _workingLayer;
         private IList<XStyle> _styles;
         private XStyle _currentStyle;
         private XShape _currentShape;
+
+        public double Width
+        {
+            get { return _width; }
+            set
+            {
+                if (value != _width)
+                {
+                    _width = value;
+                    Notify("Width");
+                }
+            }
+        }
+
+        public double Height
+        {
+            get { return _height; }
+            set
+            {
+                if (value != _height)
+                {
+                    _height = value;
+                    Notify("Height");
+                }
+            }
+        }
 
         public IList<ILayer> Layers
         {
@@ -112,10 +140,12 @@ namespace Test.Core
             WorkingLayer.Invalidate();
         }
 
-        public static IContainer Create()
+        public static IContainer Create(double width, double height)
         {
             var c = new XContainer()
             {
+                Width = width,
+                Height = height,
                 Layers = new ObservableCollection<ILayer>(),
                 Styles = new ObservableCollection<XStyle>()
             };
