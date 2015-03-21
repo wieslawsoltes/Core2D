@@ -13,13 +13,6 @@
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextHintingMode="Auto"
         TextOptions.TextRenderingMode="Auto">
-    <Window.Resources>
-        <ObjectDataProvider MethodName="GetNames" ObjectType="{x:Type sys:Enum}" x:Key="EditorToolsKey">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="local:Tool" />
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
-    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -44,9 +37,7 @@
             <MenuItem Header="_Edit">
                 <MenuItem x:Name="editClear" Header="_Clear"/>
             </MenuItem>
-            <MenuItem Header="_Tool" 
-                      ItemsSource="{Binding Source={StaticResource EditorToolsKey}}">
-                <!--
+            <MenuItem Header="_Tool">
                 <MenuItem x:Name="toolNone" Header="_None"/>
                 <Separator/>
                 <MenuItem x:Name="toolLine" Header="_Line"/>
@@ -54,7 +45,6 @@
                 <MenuItem x:Name="toolEllipse" Header="_Ellipse"/>
                 <Separator/>
                 <MenuItem x:Name="toolBezier" Header="_Bezier"/>
-                -->
             </MenuItem>
             <MenuItem Header="_Options">
                 <MenuItem x:Name="optionsDefaultIsFilled" Header="Default is _Filled" IsCheckable="True" IsChecked="{Binding DefaultIsFilled}"/>

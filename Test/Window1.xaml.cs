@@ -56,11 +56,11 @@ namespace Test
                 Invalidate(container);
             };
 
-            //toolNone.Click += (s, e) => editor.CurrentTool = Tool.None;
-            //toolLine.Click += (s, e) => editor.CurrentTool = Tool.Line;
-            //toolRectangle.Click += (s, e) => editor.CurrentTool = Tool.Rectangle;
-            //toolEllipse.Click += (s, e) => editor.CurrentTool = Tool.Ellipse;
-            //toolBezier.Click += (s, e) => editor.CurrentTool = Tool.Bezier;
+            toolNone.Click += (s, e) => editor.CurrentTool = Tool.None;
+            toolLine.Click += (s, e) => editor.CurrentTool = Tool.Line;
+            toolRectangle.Click += (s, e) => editor.CurrentTool = Tool.Rectangle;
+            toolEllipse.Click += (s, e) => editor.CurrentTool = Tool.Ellipse;
+            toolBezier.Click += (s, e) => editor.CurrentTool = Tool.Bezier;
 
             layersAdd.Click += (s, e) =>
             {
