@@ -70,13 +70,8 @@ namespace Test
 
             layersAdd.Click += (s, e) =>
             {
-                var layer = new XLayer()
-                {
-                    Name = "New",
-                    Shapes = new ObservableCollection<XShape>()
-                };
+                var layer = XLayer.Create("New");
                 container.Layers.Add(layer);
-
                 var element = CreateElement(renderer, layer);
                 layers.Add(layer, element);
                 canvasLayers.Children.Add(element);
@@ -89,7 +84,6 @@ namespace Test
                 var element = layers[layer];
                 layers.Remove(layer);
                 canvasLayers.Children.Remove(element);
-                container.CurrentLayer = null;
                 container.CurrentLayer = container.Layers.FirstOrDefault();
                 container.Invalidate();
             };
@@ -122,7 +116,6 @@ namespace Test
                 Width = 800,
                 Height = 600
             };
-
             layer.Invalidate = element.Invalidate;
             return element;
         }
