@@ -64,7 +64,12 @@ namespace Test
 
             layersAdd.Click += (s, e) =>
             {
-                container.Layers.Add(new XLayer() { Name = "New", Shapes = new ObservableCollection<XShape>() });
+                container.Layers.Add(
+                    new XLayer() 
+                    { 
+                        Name = "New", 
+                        Shapes = new ObservableCollection<XShape>() 
+                    });
             };
 
             layersRemove.Click += (s, e) =>
@@ -75,7 +80,8 @@ namespace Test
 
             stylesAdd.Click += (s, e) =>
             {
-                container.Styles.Add(XStyle.Create("New", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
+                container.Styles.Add(
+                    XStyle.Create("New", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
             };
 
             stylesRemove.Click += (s, e) =>
@@ -101,20 +107,49 @@ namespace Test
                 Styles = new ObservableCollection<XStyle>()
             };
 
-            container.Layers.Add(new XLayer() { Name = "Layer1", Shapes = new ObservableCollection<XShape>() });
-            container.Layers.Add(new XLayer() { Name = "Layer2", Shapes = new ObservableCollection<XShape>() });
-            container.Layers.Add(new XLayer() { Name = "Layer3", Shapes = new ObservableCollection<XShape>() });
-            container.Layers.Add(new XLayer() { Name = "Layer4", Shapes = new ObservableCollection<XShape>() });
+            container.Layers.Add(
+                new XLayer() 
+                { 
+                    Name = "Layer1", 
+                    Shapes = new ObservableCollection<XShape>() 
+                });
+            container.Layers.Add(
+                new XLayer() 
+                { 
+                    Name = "Layer2", 
+                    Shapes = new ObservableCollection<XShape>() 
+                });
+            container.Layers.Add(
+                new XLayer() 
+                { 
+                    Name = "Layer3", 
+                    Shapes = new ObservableCollection<XShape>() 
+                });
+            container.Layers.Add(
+                new XLayer() 
+                { 
+                    Name = "Layer4", 
+                    Shapes = new ObservableCollection<XShape>() 
+                });
 
             container.CurrentLayer = container.Layers.FirstOrDefault();
 
-            container.WorkingLayer = new XLayer() { Name = "Working", Shapes = new ObservableCollection<XShape>() };
+            container.WorkingLayer = new XLayer() 
+            { 
+                Name = "Working", 
+                Shapes = new ObservableCollection<XShape>() 
+            };
 
-            container.Styles.Add(XStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
-            container.Styles.Add(XStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
-            container.Styles.Add(XStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
-            container.Styles.Add(XStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
-            container.Styles.Add(XStyle.Create("Cyan", 255, 0, 255, 255, 255, 0, 255, 255, 2.0));
+            container.Styles.Add(
+                XStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
+            container.Styles.Add(
+                XStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
+            container.Styles.Add(
+                XStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
+            container.Styles.Add(
+                XStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
+            container.Styles.Add(
+                XStyle.Create("Cyan", 255, 0, 255, 255, 255, 0, 255, 255, 2.0));
 
             container.CurrentStyle = container.Styles.FirstOrDefault();
 
@@ -127,12 +162,19 @@ namespace Test
 
             foreach (var layer in container.Layers)
             {
-                var element = new WpfElement(layer, renderer) { Width = 800, Height = 600 };
+                var element = new WpfElement(layer, renderer) 
+                { 
+                    Width = 800, Height = 600
+                };
                 layer.Invalidate = element.Invalidate;
                 elements.Add(element);
             }
 
-            var working = new WpfElement(container.WorkingLayer, renderer) { Width = 800, Height = 600 };
+            var working = new WpfElement(container.WorkingLayer, renderer) 
+            { 
+                Width = 800, 
+                Height = 600 
+            };
             container.WorkingLayer.Invalidate = working.Invalidate;
             elements.Add(working);
 
@@ -374,7 +416,10 @@ namespace Test
             }
             else
             {
-                var pf = new PathFigure() { StartPoint = new Point(bezier.Point1.X, bezier.Point1.Y) };
+                var pf = new PathFigure() 
+                { 
+                    StartPoint = new Point(bezier.Point1.X, bezier.Point1.Y) 
+                };
                 var bs = new BezierSegment(
                         new Point(bezier.Point2.X, bezier.Point2.Y),
                         new Point(bezier.Point3.X, bezier.Point3.Y),
