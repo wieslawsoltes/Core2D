@@ -22,12 +22,18 @@ namespace Test
 
             var container = CreateContainer();
             var renderer = new WpfRenderer();
-            var elements = CreateElements(container, renderer);
 
-            foreach (var element in elements)
+            var layers = new Dictionary<ILayer, WpfElement>();
+
+            foreach (var layer in container.Layers)
             {
-                canvas.Children.Add(element);
+                var element = CreateElement(renderer, layer);
+                layers.Add(layer, element);
+                canvasLayers.Children.Add(element);
             }
+
+            var workingElement = CreateElement(renderer, container.WorkingLayer);
+            canvasWorking.Children.Add(workingElement);
 
             var editor = new ContainerEditor(container)
             {
@@ -39,21 +45,21 @@ namespace Test
                 CurrentState = State.None
             };
 
-            canvas.PreviewMouseLeftButtonDown += (s, e) =>
+            canvasWorking.PreviewMouseLeftButtonDown += (s, e) =>
             {
-                var p = e.GetPosition(canvas);
+                var p = e.GetPosition(canvasWorking);
                 editor.Left(p.X, p.Y);
             };
-            
-            canvas.PreviewMouseRightButtonDown += (s, e) =>
+
+            canvasWorking.PreviewMouseRightButtonDown += (s, e) =>
             {
-                var p = e.GetPosition(canvas);
+                var p = e.GetPosition(canvasWorking);
                 editor.Right(p.X, p.Y);
             };
-            
-            canvas.PreviewMouseMove += (s, e) =>
+
+            canvasWorking.PreviewMouseMove += (s, e) =>
             {
-                var p = e.GetPosition(canvas);
+                var p = e.GetPosition(canvasWorking);
                 editor.Move(p.X, p.Y);
             };
 
@@ -73,17 +79,27 @@ namespace Test
 
             layersAdd.Click += (s, e) =>
             {
-                container.Layers.Add(
-                    new XLayer() 
-                    { 
-                        Name = "New", 
-                        Shapes = new ObservableCollection<XShape>() 
-                    });
+                var layer = new XLayer()
+                {
+                    Name = "New",
+                    Shapes = new ObservableCollection<XShape>()
+                };
+                container.Layers.Add(layer);
+
+                var element = CreateElement(renderer, layer);
+                layers.Add(layer, element);
+                canvasLayers.Children.Add(element);
             };
 
             layersRemove.Click += (s, e) =>
             {
-                container.Layers.Remove(container.CurrentLayer);
+                var layer = container.CurrentLayer;
+                container.Layers.Remove(layer);
+                var element = layers[layer];
+                layers.Remove(layer);
+                canvasLayers.Children.Remove(element);
+                container.CurrentLayer = null;
+                container.CurrentLayer = container.Layers.FirstOrDefault();
                 Invalidate(container);
             };
 
@@ -163,22 +179,6 @@ namespace Test
             container.CurrentStyle = container.Styles.FirstOrDefault();
 
             return container;
-        }
-
-        private IList<WpfElement> CreateElements(IContainer container, IRenderer renderer)
-        {
-            var elements = new List<WpfElement>();
-
-            foreach (var layer in container.Layers)
-            {
-                elements.Add(
-                    CreateElement(renderer, layer));
-            }
-
-            elements.Add(
-                CreateElement(renderer, container.WorkingLayer));
-
-            return elements;
         }
 
         private WpfElement CreateElement(IRenderer renderer, ILayer layer)

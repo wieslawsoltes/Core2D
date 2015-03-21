@@ -128,10 +128,18 @@
                       Grid.Row="1" 
                       Grid.Column="0" 
                       Margin="5,5,0,5">
-            <Canvas x:Name="canvas" 
-                    Width="800" 
-                    Height="600" 
-                    Background="DarkGray"/>
+            <Grid Background="DarkGray"
+                  Width="800" 
+                  Height="600">
+                <Canvas x:Name="canvasLayers" 
+                        Width="800" 
+                        Height="600" 
+                        Background="Transparent"/>
+                <Canvas x:Name="canvasWorking" 
+                        Width="800" 
+                        Height="600" 
+                        Background="Transparent"/>
+            </Grid>
         </ScrollViewer>
         <GridSplitter Grid.Row="1" 
                       Grid.Column="1" 
