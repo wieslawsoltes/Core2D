@@ -167,7 +167,7 @@
                              BorderBrush="{x:Null}" Grid.Row="1">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding Name}" Margin="0,5,0,5"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
@@ -210,7 +210,7 @@
                              BorderBrush="{x:Null}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding Name}" Margin="0,5,0,5"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
@@ -237,7 +237,7 @@
                              Grid.Row="1">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}"/>
+                                <TextBlock Text="{Binding}" Margin="0,5,0,5"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
