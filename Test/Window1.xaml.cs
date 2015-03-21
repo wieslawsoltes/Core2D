@@ -21,6 +21,8 @@ namespace Test
             InitializeComponent();
 
             var container = XContainer.Create();
+            var editor = ContainerEditor.Create(container);
+
             var renderer = new WpfRenderer();
             var layers = new Dictionary<ILayer, WpfElement>();
 
@@ -33,16 +35,6 @@ namespace Test
 
             var workingElement = CreateElement(renderer, container.WorkingLayer);
             canvasWorking.Children.Add(workingElement);
-
-            var editor = new ContainerEditor(container)
-            {
-                SnapToGrid = false,
-                SnapX = 15.0,
-                SnapY = 15.0,
-                DefaultIsFilled = false,
-                CurrentTool = Tool.Line,
-                CurrentState = State.None
-            };
 
             canvasWorking.PreviewMouseLeftButtonDown += (s, e) =>
             {

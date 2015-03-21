@@ -102,6 +102,19 @@ namespace Test.Core
             _container = container;
         }
 
+        public static ContainerEditor Create(IContainer container)
+        {
+            return new ContainerEditor(container)
+            {
+                SnapToGrid = false,
+                SnapX = 15.0,
+                SnapY = 15.0,
+                DefaultIsFilled = false,
+                CurrentTool = Tool.Line,
+                CurrentState = State.None
+            };
+        }
+
         public static double Snap(double value, double snap)
         {
             double r = value % snap;
