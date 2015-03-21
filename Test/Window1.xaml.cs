@@ -110,8 +110,6 @@ namespace Test
 
             this.DataContext = container;
             this.menu.DataContext = editor;
-
-            GroupTest(container);
         }
 
         private static void GroupTest(IContainer container)
