@@ -171,24 +171,26 @@ namespace Test
 
             foreach (var layer in container.Layers)
             {
-                var element = new WpfElement(layer, renderer) 
-                { 
-                    Width = 800, 
-                    Height = 600
-                };
-                layer.Invalidate = element.Invalidate;
-                elements.Add(element);
+                elements.Add(
+                    CreateElement(renderer, layer));
             }
 
-            var working = new WpfElement(container.WorkingLayer, renderer) 
-            { 
-                Width = 800, 
-                Height = 600 
-            };
-            container.WorkingLayer.Invalidate = working.Invalidate;
-            elements.Add(working);
+            elements.Add(
+                CreateElement(renderer, container.WorkingLayer));
 
             return elements;
+        }
+
+        private WpfElement CreateElement(IRenderer renderer, ILayer layer)
+        {
+            var element = new WpfElement(layer, renderer)
+            {
+                Width = 800,
+                Height = 600
+            };
+
+            layer.Invalidate = element.Invalidate;
+            return element;
         }
 
         private void Clear(IContainer container)
