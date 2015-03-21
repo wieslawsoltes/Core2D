@@ -5,11 +5,13 @@
         xmlns:local="clr-namespace:Test"
         xmlns:controls="clr-namespace:Test.Controls"
         Title="Test" 
-        Height="720" Width="1080"
+        Height="720" 
+        Width="1080"
         Background="LightGray"
         WindowStartupLocation="CenterScreen" 
         WindowState="Normal"
-        UseLayoutRounding="True" SnapsToDevicePixels="True"
+        UseLayoutRounding="True" 
+        SnapsToDevicePixels="True"
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextHintingMode="Auto"
         TextOptions.TextRenderingMode="Auto">
@@ -23,13 +25,16 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu x:Name="menu" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="Transparent">
+        <Menu x:Name="menu" 
+              Grid.Row="0" 
+              Grid.Column="0" 
+              Grid.ColumnSpan="3" 
+              Background="Transparent">
             <MenuItem Header="_File">
                 <MenuItem x:Name="fileExit" Header="E_xit">
                     <MenuItem.Style>
                         <Style TargetType="MenuItem">
-                            <Setter Property="IsChecked" Value="False">
-                            </Setter>
+                            <Setter Property="IsChecked" Value="False"/>
                         </Style>
                     </MenuItem.Style>
                 </MenuItem>
@@ -47,16 +52,35 @@
                 <MenuItem x:Name="toolBezier" Header="_Bezier"/>
             </MenuItem>
             <MenuItem Header="_Options">
-                <MenuItem x:Name="optionsDefaultIsFilled" Header="Default is _Filled" IsCheckable="True" IsChecked="{Binding DefaultIsFilled}"/>
+                <MenuItem x:Name="optionsDefaultIsFilled" 
+                          Header="Default is _Filled" 
+                          IsCheckable="True" 
+                          IsChecked="{Binding DefaultIsFilled}"/>
                 <Separator/>
-                <MenuItem x:Name="optionsSnapToGrid" Header="_Snap to Grid" IsCheckable="True" IsChecked="{Binding SnapToGrid}"/>
+                <MenuItem x:Name="optionsSnapToGrid" 
+                          Header="_Snap to Grid" 
+                          IsCheckable="True" 
+                          IsChecked="{Binding SnapToGrid}"/>
             </MenuItem>
         </Menu>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0" Margin="5,5,0,5">
-            <Canvas x:Name="canvas" Width="800" Height="600" Background="DarkGray"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                      HorizontalScrollBarVisibility="Auto" 
+                      Grid.Row="1" 
+                      Grid.Column="0" 
+                      Margin="5,5,0,5">
+            <Canvas x:Name="canvas" 
+                    Width="800" 
+                    Height="600" 
+                    Background="DarkGray"/>
         </ScrollViewer>
-        <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" Background="Transparent" ResizeBehavior="PreviousAndNext"/>
-        <TabControl Grid.Row="1" Grid.Column="2" Margin="0,5,5,5">
+        <GridSplitter Grid.Row="1" 
+                      Grid.Column="1" 
+                      Width="5" 
+                      Background="Transparent" 
+                      ResizeBehavior="PreviousAndNext"/>
+        <TabControl Grid.Row="1" 
+                    Grid.Column="2" 
+                    Margin="0,5,5,5">
             <TabItem Header="Layers">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -64,18 +88,23 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
+                    <Menu Background="Transparent" 
+                          HorizontalAlignment="Right" 
+                          Grid.Row="0">
                         <MenuItem x:Name="layersAdd" Header="_+"/>
                         <MenuItem x:Name="layersRemove" Header="_-"/>
                     </Menu>
-                    <ListBox ItemsSource="{Binding Layers}" SelectedItem="{Binding CurrentLayer}" BorderBrush="{x:Null}" Grid.Row="1">
+                    <ListBox ItemsSource="{Binding Layers}" 
+                             SelectedItem="{Binding CurrentLayer}" 
+                             BorderBrush="{x:Null}" Grid.Row="1">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name}"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <StackPanel Grid.Row="2" DataContext="{Binding CurrentLayer}" >
+                    <StackPanel Grid.Row="2" 
+                                DataContext="{Binding CurrentLayer}" >
                         <GroupBox Header="Name">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -84,7 +113,11 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox Text="{Binding Name}" TextAlignment="Left" VerticalAlignment="Center" Margin="1" BorderBrush="{x:Null}"/>
+                                <TextBox Text="{Binding Name}" 
+                                         TextAlignment="Left" 
+                                         VerticalAlignment="Center" 
+                                         Margin="1" 
+                                         BorderBrush="{x:Null}"/>
                             </Grid>
                         </GroupBox>
                     </StackPanel>
@@ -97,18 +130,25 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
+                    <Menu Background="Transparent" 
+                          HorizontalAlignment="Right" 
+                          Grid.Row="0">
                         <MenuItem x:Name="stylesAdd" Header="_+"/>
                         <MenuItem x:Name="stylesRemove" Header="_-"/>
                     </Menu>
-                    <ListBox ItemsSource="{Binding Styles}" SelectedItem="{Binding CurrentStyle}" Grid.Row="1" BorderBrush="{x:Null}">
+                    <ListBox ItemsSource="{Binding Styles}" 
+                             SelectedItem="{Binding CurrentStyle}" 
+                             Grid.Row="1" 
+                             BorderBrush="{x:Null}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name}"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <controls:StyleControl DataContext="{Binding CurrentStyle}" Grid.Row="2" Margin="2"/>
+                    <controls:StyleControl DataContext="{Binding CurrentStyle}" 
+                                           Grid.Row="2" 
+                                           Margin="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Shapes">
@@ -118,10 +158,15 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
+                    <Menu Background="Transparent" 
+                          HorizontalAlignment="Right" 
+                          Grid.Row="0">
                         <MenuItem x:Name="shapesRemove" Header="_-"/>
                     </Menu>
-                    <ListBox ItemsSource="{Binding CurrentLayer.Shapes}" SelectedItem="{Binding CurrentShape}" BorderBrush="{x:Null}" Grid.Row="1">
+                    <ListBox ItemsSource="{Binding CurrentLayer.Shapes}" 
+                             SelectedItem="{Binding CurrentShape}" 
+                             BorderBrush="{x:Null}" 
+                             Grid.Row="1">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding}"/>
