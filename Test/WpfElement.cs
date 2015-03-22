@@ -29,7 +29,10 @@ namespace Test
         {
             base.OnRender(drawingContext);
 
-            _renderer.Render(drawingContext, _layer);
+            if (_layer.IsVisible)
+            {
+                _renderer.Render(drawingContext, _layer);
+            }
         }
 
         public static WpfElement Create(

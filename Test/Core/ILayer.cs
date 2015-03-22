@@ -9,6 +9,7 @@ namespace Test.Core
     public interface ILayer
     {
         string Name { get; set; }
+        bool IsVisible { get; set; }
         IList<XShape> Shapes { get; set; }
         Action Invalidate { get; set; }
     }

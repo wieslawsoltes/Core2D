@@ -10,6 +10,7 @@ namespace Test.Core
     public class XLayer : XObject, ILayer
     {
         private string _name;
+        private bool _isVisible;
         private IList<XShape> _shapes;
         private Action _invalidate;
 
@@ -22,6 +23,21 @@ namespace Test.Core
                 {
                     _name = value;
                     Notify("Name");
+                }
+            }
+        }
+
+        public bool IsVisible
+        {
+            get { return _isVisible; }
+            set
+            {
+                if (value != _isVisible)
+                {
+                    _isVisible = value;
+                    if (Invalidate != null)
+                        Invalidate();
+                    Notify("IsVisible");
                 }
             }
         }
@@ -52,11 +68,12 @@ namespace Test.Core
             }
         }
 
-        public static ILayer Create(string name)
+        public static ILayer Create(string name, bool isVisible = true)
         {
             return new XLayer()
             {
                 Name = name,
+                IsVisible = isVisible,
                 Shapes = new ObservableCollection<XShape>()
             };
         }

@@ -180,7 +180,21 @@
                              BorderBrush="{x:Null}" Grid.Row="1">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}" Margin="0,5,0,5"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="25"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox IsChecked="{Binding IsVisible}" 
+                                              Margin="0,5,0,5"
+                                              Content="" 
+                                              VerticalAlignment="Stretch"
+                                              HorizontalAlignment="Stretch"
+                                              Grid.Column="0"/>
+                                    <TextBlock Text="{Binding Name}" 
+                                               Margin="0,5,0,5"
+                                               Grid.Column="1"/>
+                                </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
