@@ -9,9 +9,9 @@ namespace Test.Core
 {
     public class XLayer : XObject, ILayer
     {
-        public string _name;
-        public IList<XShape> _shapes;
-        public Action _invalidate;
+        private string _name;
+        private IList<XShape> _shapes;
+        private Action _invalidate;
 
         public string Name
         {
