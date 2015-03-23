@@ -51,14 +51,17 @@ namespace Test.Core
             }
         }
 
-        public override void Draw(object dc, IRenderer renderer)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy)
         {
-            _shape.Draw(dc, renderer);
+            if (_shape != null)
+            {
+                _shape.Draw(dc, renderer, dx, dy);
+            }
         }
 
-        public static XPoint Create(double x, double y)
+        public static XPoint Create(double x, double y, XShape shape)
         {
-            return new XPoint() { X = x, Y = y };
+            return new XPoint() { X = x, Y = y, Shape = shape };
         }
     }
 }

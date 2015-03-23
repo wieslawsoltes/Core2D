@@ -38,11 +38,11 @@ namespace Test.Core
             }
         }
 
-        public override void Draw(object dc, IRenderer renderer)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy)
         {
             foreach (var shape in Shapes)
             {
-                shape.Draw(dc, renderer);
+                shape.Draw(dc, renderer, dx, dy);
             }
         }
 

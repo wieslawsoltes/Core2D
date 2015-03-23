@@ -65,22 +65,28 @@ namespace Test.Core
             }
         }
 
-        public override void Draw(object dc, IRenderer renderer)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy)
         {
-            renderer.Draw(dc, this, 0, 0);
+            renderer.Draw(dc, this, dx, dy);
+            if (renderer.DrawPoints)
+            {
+                _topLeft.Draw(dc, renderer, _topLeft.X, _topLeft.Y);
+                _bottomRight.Draw(dc, renderer, _bottomRight.X, _bottomRight.Y);
+            }
         }
 
         public static XEllipse Create(
             double x1, double y1,
             double x2, double y2,
             XStyle style,
+            XShape point,
             bool isFilled = false)
         {
             return new XEllipse()
             {
                 Style = style,
-                TopLeft = XPoint.Create(x1, y1),
-                BottomRight = XPoint.Create(x2, y2),
+                TopLeft = XPoint.Create(x1, y1, point),
+                BottomRight = XPoint.Create(x2, y2, point),
                 IsFilled = isFilled
             };
         }
@@ -88,9 +94,10 @@ namespace Test.Core
         public static XEllipse Create(
             double x, double y,
             XStyle style,
+            XShape point,
             bool isFilled = false)
         {
-            return Create(x, y, x, y, style, isFilled);
+            return Create(x, y, x, y, style, point, isFilled);
         }
     }
 }

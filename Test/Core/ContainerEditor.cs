@@ -139,7 +139,10 @@ namespace Test.Core
                         {
                             case State.None:
                                 {
-                                    _temp = XLine.Create(sx, sy, _container.CurrentStyle);
+                                    _temp = XLine.Create(
+                                        sx, sy, 
+                                        _container.CurrentStyle,
+                                        _container.PointShape);
                                     _container.WorkingLayer.Shapes.Add(_temp);
                                     _container.WorkingLayer.Invalidate();
                                     CurrentState = State.One;
@@ -166,7 +169,11 @@ namespace Test.Core
                         {
                             case State.None:
                                 {
-                                    _temp = XRectangle.Create(sx, sy, _container.CurrentStyle, DefaultIsFilled);
+                                    _temp = XRectangle.Create(
+                                        sx, sy, 
+                                        _container.CurrentStyle, 
+                                        _container.PointShape,
+                                        DefaultIsFilled);
                                     _container.WorkingLayer.Shapes.Add(_temp);
                                     _container.WorkingLayer.Invalidate();
                                     CurrentState = State.One;
@@ -193,7 +200,11 @@ namespace Test.Core
                         {
                             case State.None:
                                 {
-                                    _temp = XEllipse.Create(sx, sy, _container.CurrentStyle, DefaultIsFilled);
+                                    _temp = XEllipse.Create(
+                                        sx, sy, 
+                                        _container.CurrentStyle, 
+                                        _container.PointShape,
+                                        DefaultIsFilled);
                                     _container.WorkingLayer.Shapes.Add(_temp);
                                     _container.WorkingLayer.Invalidate();
                                     CurrentState = State.One;
@@ -220,7 +231,11 @@ namespace Test.Core
                         {
                             case State.None:
                                 {
-                                    _temp = XBezier.Create(sx, sy, _container.CurrentStyle, DefaultIsFilled);
+                                    _temp = XBezier.Create(
+                                        sx, sy, 
+                                        _container.CurrentStyle, 
+                                        _container.PointShape,
+                                        DefaultIsFilled);
                                     _container.WorkingLayer.Shapes.Add(_temp);
                                     _container.WorkingLayer.Invalidate();
                                     CurrentState = State.One;
@@ -271,7 +286,11 @@ namespace Test.Core
                         {
                             case State.None:
                                 {
-                                    _temp = XQBezier.Create(sx, sy, _container.CurrentStyle, DefaultIsFilled);
+                                    _temp = XQBezier.Create(
+                                        sx, sy, 
+                                        _container.CurrentStyle, 
+                                        _container.PointShape,
+                                        DefaultIsFilled);
                                     _container.WorkingLayer.Shapes.Add(_temp);
                                     _container.WorkingLayer.Invalidate();
                                     CurrentState = State.One;

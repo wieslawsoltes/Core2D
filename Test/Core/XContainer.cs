@@ -17,6 +17,7 @@ namespace Test.Core
         private IList<XStyle> _styles;
         private XStyle _currentStyle;
         private XShape _currentShape;
+        private XShape _pointShape;
 
         public double Width
         {
@@ -122,6 +123,19 @@ namespace Test.Core
             }
         }
 
+        public XShape PointShape
+        {
+            get { return _pointShape; }
+            set
+            {
+                if (value != _pointShape)
+                {
+                    _pointShape = value;
+                    Notify("PointShape");
+                }
+            }
+        }
+
         public void Clear()
         {
             foreach (var layer in Layers)
@@ -165,6 +179,15 @@ namespace Test.Core
             c.Styles.Add(XStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
 
             c.CurrentStyle = c.Styles.FirstOrDefault();
+
+            c.PointShape = XEllipse.Create(-3, -3, 3, 3, c.CurrentStyle, null, true);
+            
+            //c.PointShape = XRectangle.Create(-3, -3, 3, 3, c.CurrentStyle, null, true);
+
+            //var g = XGroup.Create("PointShape");
+            //g.Shapes.Add(XLine.Create(-4, 0, 4, 0, c.CurrentStyle, null));
+            //g.Shapes.Add(XLine.Create(0, -4, 0, 4, c.CurrentStyle, null));
+            //c.PointShape = g;
 
             return c;
         }

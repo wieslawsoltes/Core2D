@@ -26,7 +26,11 @@ namespace Test
             var container = XContainer.Create(width, height);
             var editor = ContainerEditor.Create(container);
 
-            var renderer = new WpfRenderer();
+            var renderer = new WpfRenderer()
+            {
+                DrawPoints = false
+            };
+
             var layers = new Dictionary<ILayer, WpfElement>();
 
             foreach (var layer in container.Layers)
@@ -116,10 +120,10 @@ namespace Test
         private static void GroupTest(IContainer container)
         {
             var g = XGroup.Create("g");
-            g.Shapes.Add(XLine.Create(30, 30, 30, 60, container.CurrentStyle));
-            g.Shapes.Add(XLine.Create(60, 30, 60, 60, container.CurrentStyle));
-            g.Shapes.Add(XLine.Create(30, 30, 60, 30, container.CurrentStyle));
-            g.Shapes.Add(XLine.Create(30, 60, 60, 60, container.CurrentStyle));
+            g.Shapes.Add(XLine.Create(30, 30, 30, 60, container.CurrentStyle, container.PointShape));
+            g.Shapes.Add(XLine.Create(60, 30, 60, 60, container.CurrentStyle, container.PointShape));
+            g.Shapes.Add(XLine.Create(30, 30, 60, 30, container.CurrentStyle, container.PointShape));
+            g.Shapes.Add(XLine.Create(30, 60, 60, 60, container.CurrentStyle, container.PointShape));
             container.CurrentLayer.Shapes.Add(g);
             container.Invalidate();
         }

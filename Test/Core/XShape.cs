@@ -9,6 +9,6 @@ namespace Test.Core
 {
     public abstract class XShape : XObject
     {
-        public abstract void Draw(object dc, IRenderer renderer);
+        public abstract void Draw(object dc, IRenderer renderer, double dx, double dy);
     }
 }

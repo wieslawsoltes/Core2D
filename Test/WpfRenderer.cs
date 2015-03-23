@@ -9,8 +9,23 @@ using Test.Core;
 
 namespace Test
 {
-    public class WpfRenderer : IRenderer
+    public class WpfRenderer : XObject, IRenderer
     {
+        private bool _drawPoints;
+
+        public bool DrawPoints
+        {
+            get { return _drawPoints; }
+            set
+            {
+                if (value != _drawPoints)
+                {
+                    _drawPoints = value;
+                    Notify("DrawPoints");
+                }
+            }
+        }
+
         private IDictionary<XStyle, Tuple<Brush, Pen>> _styleCache;
         private readonly bool _enableStyleCache = true;
 
@@ -69,7 +84,7 @@ namespace Test
 
             foreach (var shape in layer.Shapes)
             {
-                shape.Draw(_dc, this);
+                shape.Draw(_dc, this, 0, 0);
             }
         }
 

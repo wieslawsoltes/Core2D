@@ -79,9 +79,15 @@ namespace Test.Core
             }
         }
 
-        public override void Draw(object dc, IRenderer renderer)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy)
         {
-            renderer.Draw(dc, this, 0, 0);
+            renderer.Draw(dc, this, dx, dy);
+            if (renderer.DrawPoints)
+            {
+                _point1.Draw(dc, renderer, _point1.X, _point1.Y);
+                _point2.Draw(dc, renderer, _point2.X, _point2.Y);
+                _point3.Draw(dc, renderer, _point3.X, _point3.Y);
+            }
         }
 
         public static XQBezier Create(
@@ -89,14 +95,15 @@ namespace Test.Core
             double x2, double y2,
             double x3, double y3,
             XStyle style,
+            XShape point,
             bool isFilled = false)
         {
             return new XQBezier()
             {
                 Style = style,
-                Point1 = XPoint.Create(x1, y1),
-                Point2 = XPoint.Create(x2, y2),
-                Point3 = XPoint.Create(x3, y3),
+                Point1 = XPoint.Create(x1, y1, point),
+                Point2 = XPoint.Create(x2, y2, point),
+                Point3 = XPoint.Create(x3, y3, point),
                 IsFilled = isFilled
             };
         }
@@ -104,9 +111,10 @@ namespace Test.Core
         public static XQBezier Create(
             double x, double y,
             XStyle style,
+            XShape point,
             bool isFilled = false)
         {
-            return Create(x, y, x, y, x, y, style, isFilled);
+            return Create(x, y, x, y, x, y, style, point, isFilled);
         }
     }
 }
