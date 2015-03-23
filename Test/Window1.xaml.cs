@@ -45,20 +45,29 @@ namespace Test
 
             canvasWorking.PreviewMouseLeftButtonDown += (s, e) =>
             {
-                var p = e.GetPosition(canvasWorking);
-                editor.Left(p.X, p.Y);
+                if (container.CurrentLayer != null)
+                {
+                    var p = e.GetPosition(canvasWorking);
+                    editor.Left(p.X, p.Y);
+                }
             };
 
             canvasWorking.PreviewMouseRightButtonDown += (s, e) =>
             {
-                var p = e.GetPosition(canvasWorking);
-                editor.Right(p.X, p.Y);
+                if (container.CurrentLayer != null)
+                {
+                    var p = e.GetPosition(canvasWorking);
+                    editor.Right(p.X, p.Y); 
+                }
             };
 
             canvasWorking.PreviewMouseMove += (s, e) =>
             {
-                var p = e.GetPosition(canvasWorking);
-                editor.Move(p.X, p.Y);
+                if (container.CurrentLayer != null)
+                {
+                    var p = e.GetPosition(canvasWorking);
+                    editor.Move(p.X, p.Y); 
+                }
             };
 
             fileExit.Click += (s, e) => this.Close();
