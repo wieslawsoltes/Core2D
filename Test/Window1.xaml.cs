@@ -85,6 +85,9 @@ namespace Test
             toolBezier.Click += (s, e) => editor.CurrentTool = Tool.Bezier;
             toolQBezier.Click += (s, e) => editor.CurrentTool = Tool.QBezier;
 
+            optionsDrawPoints.DataContext = renderer;
+            optionsDrawPoints.Click += (s, e) => container.Invalidate();
+
             layersAdd.Click += (s, e) =>
             {
                 var layer = XLayer.Create("New");

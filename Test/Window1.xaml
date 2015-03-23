@@ -134,6 +134,11 @@
                           Header="_Snap to Grid" 
                           IsCheckable="True" 
                           IsChecked="{Binding SnapToGrid}"/>
+                <Separator/>
+                <MenuItem x:Name="optionsDrawPoints" 
+                          Header="_Draw Points" 
+                          IsCheckable="True" 
+                          IsChecked="{Binding DrawPoints}"/>
             </MenuItem>
         </Menu>
         <ScrollViewer VerticalScrollBarVisibility="Auto" 
