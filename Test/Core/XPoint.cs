@@ -6,10 +6,24 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XPoint : XObject
+    public class XPoint : XShape
     {
+        private XShape _shape;
         private double _x;
         private double _y;
+
+        public XShape Shape
+        {
+            get { return _shape; }
+            set
+            {
+                if (value != _shape)
+                {
+                    _shape = value;
+                    Notify("Shape");
+                }
+            }
+        }
 
         public double X
         {
@@ -35,6 +49,11 @@ namespace Test.Core
                     Notify("Y");
                 }
             }
+        }
+
+        public override void Draw(object dc, IRenderer renderer)
+        {
+            _shape.Draw(dc, renderer);
         }
 
         public static XPoint Create(double x, double y)

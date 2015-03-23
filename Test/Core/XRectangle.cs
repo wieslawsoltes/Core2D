@@ -67,7 +67,7 @@ namespace Test.Core
 
         public override void Draw(object dc, IRenderer renderer)
         {
-            renderer.Draw(dc, this);
+            renderer.Draw(dc, this, 0, 0);
         }
 
         public static XRectangle Create(

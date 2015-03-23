@@ -10,10 +10,10 @@ namespace Test.Core
     {
         void ClearCache();
         void Render(object dc, ILayer layer);
-        void Draw(object dc, XLine line);
-        void Draw(object dc, XRectangle rectangle);
-        void Draw(object dc, XEllipse ellipse);
-        void Draw(object dc, XBezier bezier);
-        void Draw(object dc, XQBezier qbezier);
+        void Draw(object dc, XLine line, double dx, double dy);
+        void Draw(object dc, XRectangle rectangle, double dx, double dy);
+        void Draw(object dc, XEllipse ellipse, double dx, double dy);
+        void Draw(object dc, XBezier bezier, double dx, double dy);
+        void Draw(object dc, XQBezier qbezier, double dx, double dy);
     }
 }
