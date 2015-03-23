@@ -70,6 +70,16 @@ namespace Test
                 }
             };
 
+            fileOpen.Click += (s, e) =>
+            {
+
+            };
+
+            fileSaveAs.Click += (s, e) =>
+            {
+
+            };
+
             fileExit.Click += (s, e) => this.Close();
 
             editClear.Click += (s, e) =>

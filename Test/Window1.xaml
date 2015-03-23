@@ -31,6 +31,10 @@
               Grid.ColumnSpan="3" 
               Background="Transparent">
             <MenuItem Header="_File">
+                <MenuItem x:Name="fileOpen" Header="_Open..."/>
+                <Separator/>
+                <MenuItem x:Name="fileSaveAs" Header="Save _As..."/>
+                <Separator/>
                 <MenuItem x:Name="fileExit" Header="E_xit"/>
             </MenuItem>
             <MenuItem Header="_Edit">
