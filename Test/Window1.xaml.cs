@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,10 +22,7 @@ namespace Test
         {
             InitializeComponent();
 
-            double width = 800;
-            double height = 600;
-
-            var container = XContainer.Create(width, height);
+            var container = XContainer.Create(800, 600);
             var editor = ContainerEditor.Create(container);
 
             var renderer = new WpfRenderer()
@@ -31,17 +30,7 @@ namespace Test
                 DrawPoints = false
             };
 
-            var layers = new Dictionary<ILayer, WpfElement>();
-
-            foreach (var layer in container.Layers)
-            {
-                var element = WpfElement.Create(renderer, layer, width, height);
-                layers.Add(layer, element);
-                canvasLayers.Children.Add(element);
-            }
-
-            var workingElement = WpfElement.Create(renderer, container.WorkingLayer, width, height);
-            canvasWorking.Children.Add(workingElement);
+            var layers = CreateLayers(container, renderer);
 
             canvasWorking.PreviewMouseLeftButtonDown += (s, e) =>
             {
@@ -72,12 +61,65 @@ namespace Test
 
             fileOpen.Click += (s, e) =>
             {
+                var dlg = new OpenFileDialog()
+                {
+                    Filter = "Json Files (*.json)|*.json|All Files (*.*)|*.*",
+                    FilterIndex = 0
+                };
 
+                if (dlg.ShowDialog() == true)
+                {
+                    var json = System.IO.File.ReadAllText(dlg.FileName, Encoding.UTF8);
+
+                    var result = JsonConvert.DeserializeObject<XContainer>(
+                        json,
+                        new JsonSerializerSettings()
+                        {
+                            Formatting = Formatting.Indented,
+                            TypeNameHandling = TypeNameHandling.Objects,
+                            PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                            ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                            ContractResolver = new ListContractResolver()
+                        });
+
+                    canvasLayers.Children.Clear();
+                    canvasWorking.Children.Clear();
+
+                    container = result;
+                    editor.Container = container;
+
+                    this.DataContext = container;
+
+                    renderer.ClearCache();
+                    layers = CreateLayers(container, renderer);
+
+                    container.Invalidate();
+                }
             };
 
             fileSaveAs.Click += (s, e) =>
             {
+                var dlg = new SaveFileDialog()
+                {
+                    Filter = "Json Files (*.json)|*.json|All Files (*.*)|*.*",
+                    FilterIndex = 0,
+                    FileName = "container"
+                };
 
+                if (dlg.ShowDialog() == true)
+                {
+                    var json = JsonConvert.SerializeObject(
+                        container,
+                        new JsonSerializerSettings()
+                        {
+                            Formatting = Formatting.Indented,
+                            TypeNameHandling = TypeNameHandling.Objects,
+                            PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                            ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+                        });
+
+                    System.IO.File.WriteAllText(dlg.FileName, json, Encoding.UTF8);
+                }
             };
 
             fileExit.Click += (s, e) => this.Close();
@@ -102,7 +144,12 @@ namespace Test
             {
                 var layer = XLayer.Create("New");
                 container.Layers.Add(layer);
-                var element = WpfElement.Create(renderer, layer, width, height);
+
+                var element = WpfElement.Create(
+                    renderer, 
+                    layer, 
+                    container.Width, 
+                    container.Height);
                 layers.Add(layer, element);
                 canvasLayers.Children.Add(element);
             };
@@ -111,6 +158,7 @@ namespace Test
             {
                 var layer = container.CurrentLayer;
                 container.Layers.Remove(layer);
+
                 var element = layers[layer];
                 layers.Remove(layer);
                 canvasLayers.Children.Remove(element);
@@ -137,6 +185,31 @@ namespace Test
 
             this.DataContext = container;
             this.menu.DataContext = editor;
+        }
+
+        private IDictionary<ILayer, WpfElement> CreateLayers(IContainer container, IRenderer renderer)
+        {
+            var layers = new Dictionary<ILayer, WpfElement>();
+
+            foreach (var layer in container.Layers)
+            {
+                var element = WpfElement.Create(
+                    renderer,
+                    layer,
+                    container.Width,
+                    container.Height);
+                layers.Add(layer, element);
+                canvasLayers.Children.Add(element);
+            }
+
+            var workingElement = WpfElement.Create(
+                renderer,
+                container.WorkingLayer,
+                container.Width,
+                container.Height);
+            canvasWorking.Children.Add(workingElement);
+
+            return layers;
         }
 
         private static void GroupTest(IContainer container)

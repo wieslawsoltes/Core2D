@@ -9,12 +9,26 @@ namespace Test.Core
 {
     public class ContainerEditor : XObject
     {
+        private IContainer _container;
         private Tool _currentTool;
         private State _currentState;
         private bool _defaultIsFilled;
         private bool _snapToGrid;
         private double _snapX;
         private double _snapY;
+
+        public IContainer Container
+        {
+            get { return _container; }
+            set
+            {
+                if (value != _container)
+                {
+                    _container = value;
+                    Notify("Container");
+                }
+            }
+        }
 
         public Tool CurrentTool
         {
@@ -94,8 +108,7 @@ namespace Test.Core
             }
         }
 
-        private readonly IContainer _container;
-        private XShape _temp;
+        private XShape _shape;
 
         public ContainerEditor(IContainer container)
         {
@@ -139,22 +152,22 @@ namespace Test.Core
                         {
                             case State.None:
                                 {
-                                    _temp = XLine.Create(
+                                    _shape = XLine.Create(
                                         sx, sy, 
                                         _container.CurrentStyle,
                                         _container.PointShape);
-                                    _container.WorkingLayer.Shapes.Add(_temp);
+                                    _container.WorkingLayer.Shapes.Add(_shape);
                                     _container.WorkingLayer.Invalidate();
                                     CurrentState = State.One;
                                 }
                                 break;
                             case State.One:
                                 {
-                                    var line = _temp as XLine;
+                                    var line = _shape as XLine;
                                     line.End.X = sx;
                                     line.End.Y = sy;
-                                    _container.WorkingLayer.Shapes.Remove(_temp);
-                                    _container.CurrentLayer.Shapes.Add(_temp);
+                                    _container.WorkingLayer.Shapes.Remove(_shape);
+                                    _container.CurrentLayer.Shapes.Add(_shape);
                                     _container.Invalidate();
                                     CurrentState = State.None;
                                 }
@@ -169,23 +182,23 @@ namespace Test.Core
                         {
                             case State.None:
                                 {
-                                    _temp = XRectangle.Create(
+                                    _shape = XRectangle.Create(
                                         sx, sy, 
                                         _container.CurrentStyle, 
                                         _container.PointShape,
                                         DefaultIsFilled);
-                                    _container.WorkingLayer.Shapes.Add(_temp);
+                                    _container.WorkingLayer.Shapes.Add(_shape);
                                     _container.WorkingLayer.Invalidate();
                                     CurrentState = State.One;
                                 }
                                 break;
                             case State.One:
                                 {
-                                    var rectangle = _temp as XRectangle;
+                                    var rectangle = _shape as XRectangle;
                                     rectangle.BottomRight.X = sx;
                                     rectangle.BottomRight.Y = sy;
-                                    _container.WorkingLayer.Shapes.Remove(_temp);
-                                    _container.CurrentLayer.Shapes.Add(_temp);
+                                    _container.WorkingLayer.Shapes.Remove(_shape);
+                                    _container.CurrentLayer.Shapes.Add(_shape);
                                     _container.Invalidate();
                                     CurrentState = State.None;
                                 }
@@ -200,23 +213,23 @@ namespace Test.Core
                         {
                             case State.None:
                                 {
-                                    _temp = XEllipse.Create(
+                                    _shape = XEllipse.Create(
                                         sx, sy, 
                                         _container.CurrentStyle, 
                                         _container.PointShape,
                                         DefaultIsFilled);
-                                    _container.WorkingLayer.Shapes.Add(_temp);
+                                    _container.WorkingLayer.Shapes.Add(_shape);
                                     _container.WorkingLayer.Invalidate();
                                     CurrentState = State.One;
                                 }
                                 break;
                             case State.One:
                                 {
-                                    var ellipse = _temp as XEllipse;
+                                    var ellipse = _shape as XEllipse;
                                     ellipse.BottomRight.X = sx;
                                     ellipse.BottomRight.Y = sy;
-                                    _container.WorkingLayer.Shapes.Remove(_temp);
-                                    _container.CurrentLayer.Shapes.Add(_temp);
+                                    _container.WorkingLayer.Shapes.Remove(_shape);
+                                    _container.CurrentLayer.Shapes.Add(_shape);
                                     _container.Invalidate();
                                     CurrentState = State.None;
                                 }
@@ -231,19 +244,19 @@ namespace Test.Core
                         {
                             case State.None:
                                 {
-                                    _temp = XBezier.Create(
+                                    _shape = XBezier.Create(
                                         sx, sy, 
                                         _container.CurrentStyle, 
                                         _container.PointShape,
                                         DefaultIsFilled);
-                                    _container.WorkingLayer.Shapes.Add(_temp);
+                                    _container.WorkingLayer.Shapes.Add(_shape);
                                     _container.WorkingLayer.Invalidate();
                                     CurrentState = State.One;
                                 }
                                 break;
                             case State.One:
                                 {
-                                    var bezier = _temp as XBezier;
+                                    var bezier = _shape as XBezier;
                                     bezier.Point2.X = sx;
                                     bezier.Point2.Y = sy;
                                     bezier.Point3.X = sx;
@@ -256,7 +269,7 @@ namespace Test.Core
                                 break;
                             case State.Two:
                                 {
-                                    var bezier = _temp as XBezier;
+                                    var bezier = _shape as XBezier;
                                     bezier.Point2.X = sx;
                                     bezier.Point2.Y = sy;
                                     bezier.Point3.X = sx;
@@ -267,11 +280,11 @@ namespace Test.Core
                                 break;
                             case State.Three:
                                 {
-                                    var bezier = _temp as XBezier;
+                                    var bezier = _shape as XBezier;
                                     bezier.Point2.X = sx;
                                     bezier.Point2.Y = sy;
-                                    _container.WorkingLayer.Shapes.Remove(_temp);
-                                    _container.CurrentLayer.Shapes.Add(_temp);
+                                    _container.WorkingLayer.Shapes.Remove(_shape);
+                                    _container.CurrentLayer.Shapes.Add(_shape);
                                     _container.Invalidate();
                                     CurrentState = State.None;
                                 }
@@ -286,19 +299,19 @@ namespace Test.Core
                         {
                             case State.None:
                                 {
-                                    _temp = XQBezier.Create(
+                                    _shape = XQBezier.Create(
                                         sx, sy, 
                                         _container.CurrentStyle, 
                                         _container.PointShape,
                                         DefaultIsFilled);
-                                    _container.WorkingLayer.Shapes.Add(_temp);
+                                    _container.WorkingLayer.Shapes.Add(_shape);
                                     _container.WorkingLayer.Invalidate();
                                     CurrentState = State.One;
                                 }
                                 break;
                             case State.One:
                                 {
-                                    var qbezier = _temp as XQBezier;
+                                    var qbezier = _shape as XQBezier;
                                     qbezier.Point2.X = sx;
                                     qbezier.Point2.Y = sy;
                                     qbezier.Point3.X = sx;
@@ -309,11 +322,11 @@ namespace Test.Core
                                 break;
                             case State.Two:
                                 {
-                                    var qbezier = _temp as XQBezier;
+                                    var qbezier = _shape as XQBezier;
                                     qbezier.Point2.X = sx;
                                     qbezier.Point2.Y = sy;
-                                    _container.WorkingLayer.Shapes.Remove(_temp);
-                                    _container.CurrentLayer.Shapes.Add(_temp);
+                                    _container.WorkingLayer.Shapes.Remove(_shape);
+                                    _container.CurrentLayer.Shapes.Add(_shape);
                                     _container.Invalidate();
                                     CurrentState = State.None;
                                 }
@@ -346,7 +359,7 @@ namespace Test.Core
                                 break;
                             case State.One:
                                 {
-                                    _container.WorkingLayer.Shapes.Remove(_temp);
+                                    _container.WorkingLayer.Shapes.Remove(_shape);
                                     _container.WorkingLayer.Invalidate();
                                     CurrentState = State.None;
                                 }
@@ -365,7 +378,7 @@ namespace Test.Core
                                 break;
                             case State.One:
                                 {
-                                    _container.WorkingLayer.Shapes.Remove(_temp);
+                                    _container.WorkingLayer.Shapes.Remove(_shape);
                                     _container.WorkingLayer.Invalidate();
                                     CurrentState = State.None;
                                 }
@@ -384,7 +397,7 @@ namespace Test.Core
                                 break;
                             case State.One:
                                 {
-                                    _container.WorkingLayer.Shapes.Remove(_temp);
+                                    _container.WorkingLayer.Shapes.Remove(_shape);
                                     _container.WorkingLayer.Invalidate();
                                     CurrentState = State.None;
                                 }
@@ -405,7 +418,7 @@ namespace Test.Core
                             case State.Two:
                             case State.Three:
                                 {
-                                    _container.WorkingLayer.Shapes.Remove(_temp);
+                                    _container.WorkingLayer.Shapes.Remove(_shape);
                                     _container.WorkingLayer.Invalidate();
                                     CurrentState = State.None;
                                 }
@@ -425,7 +438,7 @@ namespace Test.Core
                             case State.One:
                             case State.Two:
                                 {
-                                    _container.WorkingLayer.Shapes.Remove(_temp);
+                                    _container.WorkingLayer.Shapes.Remove(_shape);
                                     _container.WorkingLayer.Invalidate();
                                     CurrentState = State.None;
                                 }
@@ -458,7 +471,7 @@ namespace Test.Core
                                 break;
                             case State.One:
                                 {
-                                    var line = _temp as XLine;
+                                    var line = _shape as XLine;
                                     line.End.X = sx;
                                     line.End.Y = sy;
                                     _container.WorkingLayer.Invalidate();
@@ -478,7 +491,7 @@ namespace Test.Core
                                 break;
                             case State.One:
                                 {
-                                    var rectangle = _temp as XRectangle;
+                                    var rectangle = _shape as XRectangle;
                                     rectangle.BottomRight.X = sx;
                                     rectangle.BottomRight.Y = sy;
                                     _container.WorkingLayer.Invalidate();
@@ -498,7 +511,7 @@ namespace Test.Core
                                 break;
                             case State.One:
                                 {
-                                    var ellipse = _temp as XEllipse;
+                                    var ellipse = _shape as XEllipse;
                                     ellipse.BottomRight.X = sx;
                                     ellipse.BottomRight.Y = sy;
                                     _container.WorkingLayer.Invalidate();
@@ -518,7 +531,7 @@ namespace Test.Core
                                 break;
                             case State.One:
                                 {
-                                    var bezier = _temp as XBezier;
+                                    var bezier = _shape as XBezier;
                                     bezier.Point2.X = sx;
                                     bezier.Point2.Y = sy;
                                     bezier.Point3.X = sx;
@@ -530,7 +543,7 @@ namespace Test.Core
                                 break;
                             case State.Two:
                                 {
-                                    var bezier = _temp as XBezier;
+                                    var bezier = _shape as XBezier;
                                     bezier.Point2.X = sx;
                                     bezier.Point2.Y = sy;
                                     bezier.Point3.X = sx;
@@ -540,7 +553,7 @@ namespace Test.Core
                                 break;
                             case State.Three:
                                 {
-                                    var bezier = _temp as XBezier;
+                                    var bezier = _shape as XBezier;
                                     bezier.Point2.X = sx;
                                     bezier.Point2.Y = sy;
                                     _container.WorkingLayer.Invalidate();
@@ -560,7 +573,7 @@ namespace Test.Core
                                 break;
                             case State.One:
                                 {
-                                    var bezier = _temp as XQBezier;
+                                    var bezier = _shape as XQBezier;
                                     bezier.Point2.X = sx;
                                     bezier.Point2.Y = sy;
                                     bezier.Point3.X = sx;
@@ -570,7 +583,7 @@ namespace Test.Core
                                 break;
                             case State.Two:
                                 {
-                                    var bezier = _temp as XQBezier;
+                                    var bezier = _shape as XQBezier;
                                     bezier.Point2.X = sx;
                                     bezier.Point2.Y = sy;
                                     _container.WorkingLayer.Invalidate();
