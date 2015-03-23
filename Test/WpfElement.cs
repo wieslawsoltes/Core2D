@@ -47,7 +47,7 @@ namespace Test
                 Height = height
             };
 
-            layer.Invalidate = element.Invalidate;
+            layer.SetInvalidate(element.Invalidate);
 
             return element;
         }

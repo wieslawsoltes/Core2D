@@ -11,13 +11,13 @@ namespace Test.Core
     {
         private double _width;
         private double _height;
+        private IList<XStyle> _styles;
+        private XStyle _currentStyle;
+        private XShape _pointShape;
         private IList<ILayer> _layers;
         private ILayer _currentLayer;
         private ILayer _workingLayer;
-        private IList<XStyle> _styles;
-        private XStyle _currentStyle;
         private XShape _currentShape;
-        private XShape _pointShape;
 
         public double Width
         {
@@ -41,6 +41,45 @@ namespace Test.Core
                 {
                     _height = value;
                     Notify("Height");
+                }
+            }
+        }
+
+        public IList<XStyle> Styles
+        {
+            get { return _styles; }
+            set
+            {
+                if (value != _styles)
+                {
+                    _styles = value;
+                    Notify("Styles");
+                }
+            }
+        }
+
+        public XStyle CurrentStyle
+        {
+            get { return _currentStyle; }
+            set
+            {
+                if (value != _currentStyle)
+                {
+                    _currentStyle = value;
+                    Notify("CurrentStyle");
+                }
+            }
+        }
+
+        public XShape PointShape
+        {
+            get { return _pointShape; }
+            set
+            {
+                if (value != _pointShape)
+                {
+                    _pointShape = value;
+                    Notify("PointShape");
                 }
             }
         }
@@ -84,32 +123,6 @@ namespace Test.Core
             }
         }
 
-        public IList<XStyle> Styles
-        {
-            get { return _styles; }
-            set
-            {
-                if (value != _styles)
-                {
-                    _styles = value;
-                    Notify("Styles");
-                }
-            }
-        }
-
-        public XStyle CurrentStyle
-        {
-            get { return _currentStyle; }
-            set
-            {
-                if (value != _currentStyle)
-                {
-                    _currentStyle = value;
-                    Notify("CurrentStyle");
-                }
-            }
-        }
-
         public XShape CurrentShape
         {
             get { return _currentShape; }
@@ -119,19 +132,6 @@ namespace Test.Core
                 {
                     _currentShape = value;
                     Notify("CurrentShape");
-                }
-            }
-        }
-
-        public XShape PointShape
-        {
-            get { return _pointShape; }
-            set
-            {
-                if (value != _pointShape)
-                {
-                    _pointShape = value;
-                    Notify("PointShape");
                 }
             }
         }

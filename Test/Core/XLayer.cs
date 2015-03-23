@@ -35,8 +35,7 @@ namespace Test.Core
                 if (value != _isVisible)
                 {
                     _isVisible = value;
-                    if (Invalidate != null)
-                        Invalidate();
+                    Invalidate();
                     Notify("IsVisible");
                 }
             }
@@ -55,16 +54,16 @@ namespace Test.Core
             }
         }
 
-        public Action Invalidate
+        public void SetInvalidate(Action invalidate)
         {
-            get { return _invalidate; }
-            set
+            _invalidate = invalidate;
+        }
+
+        public void Invalidate()
+        {
+            if (_invalidate != null)
             {
-                if (value != _invalidate)
-                {
-                    _invalidate = value;
-                    Notify("Invalidate");
-                }
+                _invalidate();
             }
         }
 
