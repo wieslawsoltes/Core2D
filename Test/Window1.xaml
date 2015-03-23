@@ -31,13 +31,7 @@
               Grid.ColumnSpan="3" 
               Background="Transparent">
             <MenuItem Header="_File">
-                <MenuItem x:Name="fileExit" Header="E_xit">
-                    <MenuItem.Style>
-                        <Style TargetType="MenuItem">
-                            <Setter Property="IsChecked" Value="False"/>
-                        </Style>
-                    </MenuItem.Style>
-                </MenuItem>
+                <MenuItem x:Name="fileExit" Header="E_xit"/>
             </MenuItem>
             <MenuItem Header="_Edit">
                 <MenuItem x:Name="editClear" Header="_Clear"/>
