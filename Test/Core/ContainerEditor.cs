@@ -10,6 +10,7 @@ namespace Test.Core
     public class ContainerEditor : XObject
     {
         private IContainer _container;
+        private XShape _shape;
         private Tool _currentTool;
         private State _currentState;
         private bool _defaultIsFilled;
@@ -107,8 +108,6 @@ namespace Test.Core
                 }
             }
         }
-
-        private XShape _shape;
 
         public ContainerEditor(IContainer container)
         {
