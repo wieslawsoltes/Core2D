@@ -52,7 +52,7 @@
                 <MenuItem Header="E_xit" Command="{Binding ExitCommand}" InputGestureText="Alt+F4"/>
             </MenuItem>
             <MenuItem Header="_Edit">
-                <MenuItem x:Name="editClear" Header="_Clear"/>
+                <MenuItem Header="_Clear" Command="{Binding ClearCommand}" InputGestureText=""/>
             </MenuItem>
             <MenuItem Header="_Tool">
                 <MenuItem Header="_None" Command="{Binding ToolNoneCommand}" InputGestureText="N">

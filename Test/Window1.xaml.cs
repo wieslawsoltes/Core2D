@@ -162,11 +162,11 @@ namespace Test
                 Close();
             });
 
-            editClear.Click += (s, e) =>
+            editor.ClearCommand = new DelegateCommand(() =>
             {
                 editor.Container.Clear();
                 editor.Container.Invalidate();
-            };
+            });
 
             editor.ToolNoneCommand = new DelegateCommand(() => editor.CurrentTool = Tool.None);
             editor.ToolLineCommand = new DelegateCommand(() => editor.CurrentTool = Tool.Line);
