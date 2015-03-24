@@ -24,6 +24,10 @@ namespace Test.Core
         public ICommand ToolBezierCommand { get; set; }
         public ICommand ToolQBezierCommand { get; set; }
 
+        public ICommand DefaultIsFilledCommand { get; set; }
+        public ICommand SnapToGridCommand { get; set; }
+        public ICommand DrawPointsCommand { get; set; }
+
         private IContainer _container;
         private IRenderer _renderer;
         private XShape _shape;

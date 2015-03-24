@@ -175,7 +175,13 @@ namespace Test
             editor.ToolBezierCommand = new DelegateCommand(() => editor.CurrentTool = Tool.Bezier);
             editor.ToolQBezierCommand = new DelegateCommand(() => editor.CurrentTool = Tool.QBezier);
 
-            optionsDrawPoints.Click += (s, e) => editor.Container.Invalidate();
+            editor.DefaultIsFilledCommand = new DelegateCommand(() => editor.DefaultIsFilled = !editor.DefaultIsFilled);
+            editor.SnapToGridCommand = new DelegateCommand(() => editor.SnapToGrid = !editor.SnapToGrid);
+            editor.DrawPointsCommand = new DelegateCommand(() => 
+            {
+                editor.Renderer.DrawPoints = !editor.Renderer.DrawPoints;
+                editor.Container.Invalidate();
+            });
 
             layersAdd.Click += (s, e) =>
             {

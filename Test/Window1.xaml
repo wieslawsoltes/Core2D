@@ -26,6 +26,8 @@
         <KeyBinding Command="{Binding ToolEllipseCommand}" Key="E"/>
         <KeyBinding Command="{Binding ToolBezierCommand}" Key="B"/>
         <KeyBinding Command="{Binding ToolQBezierCommand}" Key="Q"/>
+        <KeyBinding Command="{Binding DefaultIsFilledCommand}" Key="F"/>
+        <KeyBinding Command="{Binding SnapToGridCommand}" Key="G"/>
     </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -137,20 +139,20 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_Options">
-                <MenuItem x:Name="optionsDefaultIsFilled" 
-                          Header="Default is _Filled" 
+                <MenuItem Header="Default is _Filled" 
                           IsCheckable="True" 
-                          IsChecked="{Binding DefaultIsFilled}"/>
+                          IsChecked="{Binding DefaultIsFilled, Mode=OneWay}"
+                          Command="{Binding DefaultIsFilledCommand}" InputGestureText="F"/>
                 <Separator/>
-                <MenuItem x:Name="optionsSnapToGrid" 
-                          Header="_Snap to Grid" 
+                <MenuItem Header="_Snap to Grid" 
                           IsCheckable="True" 
-                          IsChecked="{Binding SnapToGrid}"/>
+                          IsChecked="{Binding SnapToGrid, Mode=OneWay}"
+                          Command="{Binding SnapToGridCommand}" InputGestureText="G"/>
                 <Separator/>
-                <MenuItem x:Name="optionsDrawPoints" 
-                          Header="_Draw Points" 
+                <MenuItem Header="_Draw Points" 
                           IsCheckable="True" 
-                          IsChecked="{Binding Renderer.DrawPoints}"/>
+                          IsChecked="{Binding Renderer.DrawPoints, Mode=OneWay}"
+                          Command="{Binding DrawPointsCommand}" InputGestureText=""/>
             </MenuItem>
         </Menu>
         <ScrollViewer VerticalScrollBarVisibility="Auto" 
