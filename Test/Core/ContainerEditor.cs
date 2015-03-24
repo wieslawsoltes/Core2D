@@ -4,11 +4,17 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Test.Core
 {
-    public class ContainerEditor : XObject, IContainerEditor
+    public class ContainerEditor : XObject
     {
+        public ICommand NewCommand { get; set; }
+        public ICommand OpenCommand { get; set; }
+        public ICommand SaveAsCommand { get; set; }
+        public ICommand ExitCommand { get; set; }
+
         private IContainer _container;
         private IRenderer _renderer;
         private XShape _shape;

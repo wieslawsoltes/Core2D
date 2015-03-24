@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.Practices.Prism.Commands;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -90,17 +91,17 @@ namespace Test
 
                 layers = createLayers();
 
-                DataContext = editor.Container;
-
                 editor.Container.Invalidate();
+
+                DataContext = editor;
             };
 
-            fileNew.Click += (s, e) =>
+            editor.NewCommand = new DelegateCommand(() =>
             {
                 loadContainer(XContainer.Create(800, 600));
-            };
+            });
 
-            fileOpen.Click += (s, e) =>
+            editor.OpenCommand = new DelegateCommand(() =>
             {
                 var dlg = new OpenFileDialog()
                 {
@@ -127,9 +128,9 @@ namespace Test
 
                     loadContainer(container);
                 }
-            };
+            });
 
-            fileSaveAs.Click += (s, e) =>
+            editor.SaveAsCommand = new DelegateCommand(() =>
             {
                 var dlg = new SaveFileDialog()
                 {
@@ -154,9 +155,12 @@ namespace Test
 
                     System.IO.File.WriteAllText(path, json, Encoding.UTF8);
                 }
-            };
+            });
 
-            fileExit.Click += (s, e) => Close();
+            editor.ExitCommand = new DelegateCommand(() =>
+            {
+                Close();
+            });
 
             editClear.Click += (s, e) =>
             {
@@ -221,9 +225,7 @@ namespace Test
                 editor.Container.Invalidate();
             };
 
-            menu.DataContext = editor;
-            optionsDrawPoints.DataContext = editor.Renderer;
-            DataContext = editor.Container;
+            DataContext = editor;
 
             //Action<IContainer> groupTest = (c) =>
             //{

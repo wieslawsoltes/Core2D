@@ -15,6 +15,12 @@
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextHintingMode="Auto"
         TextOptions.TextRenderingMode="Auto">
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding NewCommand}" Gesture="Ctrl+N"/>
+        <KeyBinding Command="{Binding OpenCommand}" Gesture="Ctrl+O"/>
+        <KeyBinding Command="{Binding SaveAsCommand}" Gesture="Ctrl+S"/>
+        <KeyBinding Command="{Binding ExitCommand}" Gesture="Alt+F4"/>
+    </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -31,13 +37,13 @@
               Grid.ColumnSpan="3" 
               Background="Transparent">
             <MenuItem Header="_File">
-                <MenuItem x:Name="fileNew" Header="_New..."/>
+                <MenuItem Header="_New" Command="{Binding NewCommand}" InputGestureText="Ctrl+N"/>
                 <Separator/>
-                <MenuItem x:Name="fileOpen" Header="_Open..."/>
+                <MenuItem Header="_Open..." Command="{Binding OpenCommand}" InputGestureText="Ctrl+O"/>
                 <Separator/>
-                <MenuItem x:Name="fileSaveAs" Header="Save _As..."/>
+                <MenuItem Header="Save _As..." Command="{Binding SaveAsCommand}" InputGestureText="Ctrl+S"/>
                 <Separator/>
-                <MenuItem x:Name="fileExit" Header="E_xit"/>
+                <MenuItem Header="E_xit" Command="{Binding ExitCommand}" InputGestureText="Alt+F4"/>
             </MenuItem>
             <MenuItem Header="_Edit">
                 <MenuItem x:Name="editClear" Header="_Clear"/>
@@ -138,7 +144,7 @@
                 <MenuItem x:Name="optionsDrawPoints" 
                           Header="_Draw Points" 
                           IsCheckable="True" 
-                          IsChecked="{Binding DrawPoints}"/>
+                          IsChecked="{Binding Renderer.DrawPoints}"/>
             </MenuItem>
         </Menu>
         <ScrollViewer VerticalScrollBarVisibility="Auto" 
@@ -147,15 +153,15 @@
                       Grid.Column="0" 
                       Margin="5,5,0,5">
             <Grid Background="DarkGray"
-                  Width="{Binding Width}" 
-                  Height="{Binding Height}">
+                  Width="{Binding Container.Width}" 
+                  Height="{Binding Container.Height}">
                 <Canvas x:Name="canvasLayers" 
-                        Width="{Binding Width}" 
-                        Height="{Binding Height}" 
+                        Width="{Binding Container.Width}" 
+                        Height="{Binding Container.Height}" 
                         Background="Transparent"/>
                 <Canvas x:Name="canvasWorking" 
-                        Width="{Binding Width}" 
-                        Height="{Binding Height}" 
+                        Width="{Binding Container.Width}" 
+                        Height="{Binding Container.Height}" 
                         Background="Transparent"/>
             </Grid>
         </ScrollViewer>
@@ -180,8 +186,8 @@
                         <MenuItem x:Name="layersAdd" Header="_+"/>
                         <MenuItem x:Name="layersRemove" Header="_-"/>
                     </Menu>
-                    <ListBox ItemsSource="{Binding Layers}" 
-                             SelectedItem="{Binding CurrentLayer}" 
+                    <ListBox ItemsSource="{Binding Container.Layers}" 
+                             SelectedItem="{Binding Container.CurrentLayer}" 
                              BorderBrush="{x:Null}" Grid.Row="1">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -204,7 +210,7 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                     <StackPanel Grid.Row="2" 
-                                DataContext="{Binding CurrentLayer}" >
+                                DataContext="{Binding Container.CurrentLayer}" >
                         <GroupBox Header="Name">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -236,8 +242,8 @@
                         <MenuItem x:Name="stylesAdd" Header="_+"/>
                         <MenuItem x:Name="stylesRemove" Header="_-"/>
                     </Menu>
-                    <ListBox ItemsSource="{Binding Styles}" 
-                             SelectedItem="{Binding CurrentStyle}" 
+                    <ListBox ItemsSource="{Binding Container.Styles}" 
+                             SelectedItem="{Binding Container.CurrentStyle}" 
                              Grid.Row="1" 
                              BorderBrush="{x:Null}">
                         <ListBox.ItemTemplate>
@@ -246,7 +252,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <controls:StyleControl DataContext="{Binding CurrentStyle}" 
+                    <controls:StyleControl DataContext="{Binding Container.CurrentStyle}" 
                                            Grid.Row="2" 
                                            Margin="2"/>
                 </Grid>
@@ -263,8 +269,8 @@
                           Grid.Row="0">
                         <MenuItem x:Name="shapesRemove" Header="_-"/>
                     </Menu>
-                    <ListBox ItemsSource="{Binding CurrentLayer.Shapes}" 
-                             SelectedItem="{Binding CurrentShape}" 
+                    <ListBox ItemsSource="{Binding Container.CurrentLayer.Shapes}" 
+                             SelectedItem="{Binding Container.CurrentShape}" 
                              BorderBrush="{x:Null}" 
                              Grid.Row="1">
                         <ListBox.ItemTemplate>
