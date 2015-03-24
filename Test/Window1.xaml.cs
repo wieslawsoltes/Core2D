@@ -168,12 +168,12 @@ namespace Test
                 editor.Container.Invalidate();
             };
 
-            toolNone.Click += (s, e) => editor.CurrentTool = Tool.None;
-            toolLine.Click += (s, e) => editor.CurrentTool = Tool.Line;
-            toolRectangle.Click += (s, e) => editor.CurrentTool = Tool.Rectangle;
-            toolEllipse.Click += (s, e) => editor.CurrentTool = Tool.Ellipse;
-            toolBezier.Click += (s, e) => editor.CurrentTool = Tool.Bezier;
-            toolQBezier.Click += (s, e) => editor.CurrentTool = Tool.QBezier;
+            editor.ToolNoneCommand = new DelegateCommand(() => editor.CurrentTool = Tool.None);
+            editor.ToolLineCommand = new DelegateCommand(() => editor.CurrentTool = Tool.Line);
+            editor.ToolRectangleCommand = new DelegateCommand(() => editor.CurrentTool = Tool.Rectangle);
+            editor.ToolEllipseCommand = new DelegateCommand(() => editor.CurrentTool = Tool.Ellipse);
+            editor.ToolBezierCommand = new DelegateCommand(() => editor.CurrentTool = Tool.Bezier);
+            editor.ToolQBezierCommand = new DelegateCommand(() => editor.CurrentTool = Tool.QBezier);
 
             optionsDrawPoints.Click += (s, e) => editor.Container.Invalidate();
 

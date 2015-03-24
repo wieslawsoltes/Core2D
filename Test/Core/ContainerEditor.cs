@@ -15,6 +15,13 @@ namespace Test.Core
         public ICommand SaveAsCommand { get; set; }
         public ICommand ExitCommand { get; set; }
 
+        public ICommand ToolNoneCommand { get; set; }
+        public ICommand ToolLineCommand { get; set; }
+        public ICommand ToolRectangleCommand { get; set; }
+        public ICommand ToolEllipseCommand { get; set; }
+        public ICommand ToolBezierCommand { get; set; }
+        public ICommand ToolQBezierCommand { get; set; }
+
         private IContainer _container;
         private IRenderer _renderer;
         private XShape _shape;
