@@ -83,7 +83,7 @@ namespace Test
                     container = result;
                     editor.Container = container;
 
-                    this.DataContext = container;
+                    DataContext = editor.Container;
 
                     renderer.ClearCache();
                     layers = CreateLayers(container, renderer);
@@ -117,7 +117,7 @@ namespace Test
                 }
             };
 
-            fileExit.Click += (s, e) => this.Close();
+            fileExit.Click += (s, e) => Close();
 
             editClear.Click += (s, e) =>
             {
@@ -132,7 +132,6 @@ namespace Test
             toolBezier.Click += (s, e) => editor.CurrentTool = Tool.Bezier;
             toolQBezier.Click += (s, e) => editor.CurrentTool = Tool.QBezier;
 
-            optionsDrawPoints.DataContext = renderer;
             optionsDrawPoints.Click += (s, e) => container.Invalidate();
 
             layersAdd.Click += (s, e) =>
@@ -146,6 +145,7 @@ namespace Test
                     container.Width, 
                     container.Height);
                 layers.Add(layer, element);
+
                 canvasLayers.Children.Add(element);
             };
 
@@ -156,7 +156,9 @@ namespace Test
 
                 var element = layers[layer];
                 layers.Remove(layer);
+
                 canvasLayers.Children.Remove(element);
+
                 container.CurrentLayer = container.Layers.FirstOrDefault();
                 container.Invalidate();
             };
@@ -170,16 +172,19 @@ namespace Test
             stylesRemove.Click += (s, e) =>
             {
                 container.Styles.Remove(container.CurrentStyle);
+                container.CurrentStyle = container.Styles.FirstOrDefault();
             };
 
             shapesRemove.Click += (s, e) =>
             {
                 container.CurrentLayer.Shapes.Remove(container.CurrentShape);
+                container.CurrentShape = container.CurrentLayer.Shapes.FirstOrDefault();
                 container.Invalidate();
             };
 
-            this.DataContext = container;
-            this.menu.DataContext = editor;
+            menu.DataContext = editor;
+            optionsDrawPoints.DataContext = renderer;
+            DataContext = editor.Container;
         }
 
         private IDictionary<ILayer, WpfElement> CreateLayers(IContainer container, IRenderer renderer)
