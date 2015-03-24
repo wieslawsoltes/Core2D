@@ -40,6 +40,14 @@ namespace Test
             ClearCache();
         }
 
+        public static IRenderer Create(bool drawPoints)
+        {
+            return new WpfRenderer()
+            {
+                DrawPoints = drawPoints
+            };
+        }
+
         public void ClearCache()
         {
             _styleCache = new Dictionary<XStyle, Tuple<Brush, Pen>>();

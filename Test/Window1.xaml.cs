@@ -22,14 +22,40 @@ namespace Test
         {
             InitializeComponent();
 
-            var container = XContainer.Create(800, 600);
-            var editor = ContainerEditor.Create(container);
-            var renderer = new WpfRenderer() { DrawPoints = false };
-            var layers = CreateLayers(container, renderer);
+            var editor = ContainerEditor.Create(
+                XContainer.Create(800, 600),
+                WpfRenderer.Create(false));
 
+            Func<IDictionary<ILayer, WpfElement>> createLayers = () =>
+            {
+                var dict = new Dictionary<ILayer, WpfElement>();
+
+                foreach (var layer in editor.Container.Layers)
+                {
+                    var element = WpfElement.Create(
+                        editor.Renderer,
+                        layer,
+                        editor.Container.Width,
+                        editor.Container.Height);
+                    dict.Add(layer, element);
+                    canvasLayers.Children.Add(element);
+                }
+
+                var workingElement = WpfElement.Create(
+                    editor.Renderer,
+                    editor.Container.WorkingLayer,
+                    editor.Container.Width,
+                    editor.Container.Height);
+                canvasWorking.Children.Add(workingElement);
+
+                return dict;
+            };
+
+            var layers = createLayers();
+            
             canvasWorking.PreviewMouseLeftButtonDown += (s, e) =>
             {
-                if (container.CurrentLayer != null)
+                if (editor.Container.CurrentLayer != null)
                 {
                     var p = e.GetPosition(canvasWorking);
                     editor.Left(p.X, p.Y);
@@ -38,7 +64,7 @@ namespace Test
 
             canvasWorking.PreviewMouseRightButtonDown += (s, e) =>
             {
-                if (container.CurrentLayer != null)
+                if (editor.Container.CurrentLayer != null)
                 {
                     var p = e.GetPosition(canvasWorking);
                     editor.Right(p.X, p.Y); 
@@ -47,27 +73,26 @@ namespace Test
 
             canvasWorking.PreviewMouseMove += (s, e) =>
             {
-                if (container.CurrentLayer != null)
+                if (editor.Container.CurrentLayer != null)
                 {
                     var p = e.GetPosition(canvasWorking);
                     editor.Move(p.X, p.Y); 
                 }
             };
 
-            Action<IContainer> loadContainer = (result) =>
+            Action<IContainer> loadContainer = (container) =>
             {
                 canvasLayers.Children.Clear();
                 canvasWorking.Children.Clear();
 
-                container = result;
+                editor.Renderer.ClearCache();
                 editor.Container = container;
+
+                layers = createLayers();
 
                 DataContext = editor.Container;
 
-                renderer.ClearCache();
-                layers = CreateLayers(container, renderer);
-
-                container.Invalidate();
+                editor.Container.Invalidate();
             };
 
             fileNew.Click += (s, e) =>
@@ -85,9 +110,11 @@ namespace Test
 
                 if (dlg.ShowDialog() == true)
                 {
-                    var json = System.IO.File.ReadAllText(dlg.FileName, Encoding.UTF8);
+                    var path = dlg.FileName;
 
-                    var result = JsonConvert.DeserializeObject<XContainer>(
+                    var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
+
+                    var container = JsonConvert.DeserializeObject<XContainer>(
                         json,
                         new JsonSerializerSettings()
                         {
@@ -98,7 +125,7 @@ namespace Test
                             ContractResolver = new ListContractResolver()
                         });
 
-                    loadContainer(result);
+                    loadContainer(container);
                 }
             };
 
@@ -113,8 +140,10 @@ namespace Test
 
                 if (dlg.ShowDialog() == true)
                 {
+                    var path = dlg.FileName;
+
                     var json = JsonConvert.SerializeObject(
-                        container,
+                        editor.Container,
                         new JsonSerializerSettings()
                         {
                             Formatting = Formatting.Indented,
@@ -123,7 +152,7 @@ namespace Test
                             ReferenceLoopHandling = ReferenceLoopHandling.Serialize
                         });
 
-                    System.IO.File.WriteAllText(dlg.FileName, json, Encoding.UTF8);
+                    System.IO.File.WriteAllText(path, json, Encoding.UTF8);
                 }
             };
 
@@ -131,8 +160,8 @@ namespace Test
 
             editClear.Click += (s, e) =>
             {
-                container.Clear();
-                container.Invalidate();
+                editor.Container.Clear();
+                editor.Container.Invalidate();
             };
 
             toolNone.Click += (s, e) => editor.CurrentTool = Tool.None;
@@ -142,18 +171,18 @@ namespace Test
             toolBezier.Click += (s, e) => editor.CurrentTool = Tool.Bezier;
             toolQBezier.Click += (s, e) => editor.CurrentTool = Tool.QBezier;
 
-            optionsDrawPoints.Click += (s, e) => container.Invalidate();
+            optionsDrawPoints.Click += (s, e) => editor.Container.Invalidate();
 
             layersAdd.Click += (s, e) =>
             {
                 var layer = XLayer.Create("New");
-                container.Layers.Add(layer);
+                editor.Container.Layers.Add(layer);
 
                 var element = WpfElement.Create(
-                    renderer, 
-                    layer, 
-                    container.Width, 
-                    container.Height);
+                    editor.Renderer, 
+                    layer,
+                    editor.Container.Width,
+                    editor.Container.Height);
                 layers.Add(layer, element);
 
                 canvasLayers.Children.Add(element);
@@ -161,76 +190,52 @@ namespace Test
 
             layersRemove.Click += (s, e) =>
             {
-                var layer = container.CurrentLayer;
-                container.Layers.Remove(layer);
+                var layer = editor.Container.CurrentLayer;
+                editor.Container.Layers.Remove(layer);
 
                 var element = layers[layer];
                 layers.Remove(layer);
 
                 canvasLayers.Children.Remove(element);
 
-                container.CurrentLayer = container.Layers.FirstOrDefault();
-                container.Invalidate();
+                editor.Container.CurrentLayer = editor.Container.Layers.FirstOrDefault();
+                editor.Container.Invalidate();
             };
 
             stylesAdd.Click += (s, e) =>
             {
-                container.Styles.Add(
+                editor.Container.Styles.Add(
                     XStyle.Create("New", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
             };
 
             stylesRemove.Click += (s, e) =>
             {
-                container.Styles.Remove(container.CurrentStyle);
-                container.CurrentStyle = container.Styles.FirstOrDefault();
+                editor.Container.Styles.Remove(editor.Container.CurrentStyle);
+                editor.Container.CurrentStyle = editor.Container.Styles.FirstOrDefault();
             };
 
             shapesRemove.Click += (s, e) =>
             {
-                container.CurrentLayer.Shapes.Remove(container.CurrentShape);
-                container.CurrentShape = container.CurrentLayer.Shapes.FirstOrDefault();
-                container.Invalidate();
+                editor.Container.CurrentLayer.Shapes.Remove(editor.Container.CurrentShape);
+                editor.Container.CurrentShape = editor.Container.CurrentLayer.Shapes.FirstOrDefault();
+                editor.Container.Invalidate();
             };
 
             menu.DataContext = editor;
-            optionsDrawPoints.DataContext = renderer;
+            optionsDrawPoints.DataContext = editor.Renderer;
             DataContext = editor.Container;
-        }
 
-        private IDictionary<ILayer, WpfElement> CreateLayers(IContainer container, IRenderer renderer)
-        {
-            var layers = new Dictionary<ILayer, WpfElement>();
-
-            foreach (var layer in container.Layers)
-            {
-                var element = WpfElement.Create(
-                    renderer,
-                    layer,
-                    container.Width,
-                    container.Height);
-                layers.Add(layer, element);
-                canvasLayers.Children.Add(element);
-            }
-
-            var workingElement = WpfElement.Create(
-                renderer,
-                container.WorkingLayer,
-                container.Width,
-                container.Height);
-            canvasWorking.Children.Add(workingElement);
-
-            return layers;
-        }
-
-        private static void GroupTest(IContainer container)
-        {
-            var g = XGroup.Create("g");
-            g.Shapes.Add(XLine.Create(30, 30, 30, 60, container.CurrentStyle, container.PointShape));
-            g.Shapes.Add(XLine.Create(60, 30, 60, 60, container.CurrentStyle, container.PointShape));
-            g.Shapes.Add(XLine.Create(30, 30, 60, 30, container.CurrentStyle, container.PointShape));
-            g.Shapes.Add(XLine.Create(30, 60, 60, 60, container.CurrentStyle, container.PointShape));
-            container.CurrentLayer.Shapes.Add(g);
-            container.Invalidate();
+            //Action<IContainer> groupTest = (c) =>
+            //{
+            //    var g = XGroup.Create("g");
+            //    g.Shapes.Add(XLine.Create(30, 30, 30, 60, c.CurrentStyle, c.PointShape));
+            //    g.Shapes.Add(XLine.Create(60, 30, 60, 60, c.CurrentStyle, c.PointShape));
+            //    g.Shapes.Add(XLine.Create(30, 30, 60, 30, c.CurrentStyle, c.PointShape));
+            //    g.Shapes.Add(XLine.Create(30, 60, 60, 60, c.CurrentStyle, c.PointShape));
+            //    c.CurrentLayer.Shapes.Add(g);
+            //    c.Invalidate();
+            //};
+            //groupTest(editor.Container);
         }
     }
 }

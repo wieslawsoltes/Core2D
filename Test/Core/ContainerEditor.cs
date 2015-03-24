@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class ContainerEditor : XObject
+    public class ContainerEditor : XObject, IContainerEditor
     {
         private IContainer _container;
+        private IRenderer _renderer;
         private XShape _shape;
         private Tool _currentTool;
         private State _currentState;
@@ -27,6 +28,19 @@ namespace Test.Core
                 {
                     _container = value;
                     Notify("Container");
+                }
+            }
+        }
+
+        public IRenderer Renderer
+        {
+            get { return _renderer; }
+            set
+            {
+                if (value != _renderer)
+                {
+                    _renderer = value;
+                    Notify("Renderer");
                 }
             }
         }
@@ -109,15 +123,14 @@ namespace Test.Core
             }
         }
 
-        public ContainerEditor(IContainer container)
+        public static ContainerEditor Create(
+            IContainer container, 
+            IRenderer renderer)
         {
-            _container = container;
-        }
-
-        public static ContainerEditor Create(IContainer container)
-        {
-            return new ContainerEditor(container)
+            return new ContainerEditor()
             {
+                Container = container,
+                Renderer = renderer,
                 SnapToGrid = false,
                 SnapX = 15.0,
                 SnapY = 15.0,
@@ -127,7 +140,7 @@ namespace Test.Core
             };
         }
 
-        public static double Snap(double value, double snap)
+        public double Snap(double value, double snap)
         {
             double r = value % snap;
             return r >= snap / 2.0 ? value + snap - r : value - r;
