@@ -180,13 +180,15 @@ namespace Test.Core
 
             c.CurrentStyle = c.Styles.FirstOrDefault();
 
-            c.PointShape = XEllipse.Create(-3, -3, 3, 3, c.CurrentStyle, null, true);
+            var pss = XStyle.Create("PointShape", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
             
-            //c.PointShape = XRectangle.Create(-3, -3, 3, 3, c.CurrentStyle, null, true);
-
+            c.PointShape = XEllipse.Create(-3, -3, 3, 3, pss, null, true);
+            //c.PointShape = XRectangle.Create(-3, -3, 3, 3, pss, null, true);
+            //c.PointShape = XRectangle.Create(-4, -4, 4, 4, pss, null, false);
+            
             //var g = XGroup.Create("PointShape");
-            //g.Shapes.Add(XLine.Create(-4, 0, 4, 0, c.CurrentStyle, null));
-            //g.Shapes.Add(XLine.Create(0, -4, 0, 4, c.CurrentStyle, null));
+            //g.Shapes.Add(XLine.Create(-4, 0, 4, 0, pss, null));
+            //g.Shapes.Add(XLine.Create(0, -4, 0, 4, pss, null));
             //c.PointShape = g;
 
             return c;
