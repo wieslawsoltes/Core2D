@@ -24,12 +24,7 @@ namespace Test
 
             var container = XContainer.Create(800, 600);
             var editor = ContainerEditor.Create(container);
-
-            var renderer = new WpfRenderer()
-            {
-                DrawPoints = false
-            };
-
+            var renderer = new WpfRenderer() { DrawPoints = false };
             var layers = CreateLayers(container, renderer);
 
             canvasWorking.PreviewMouseLeftButtonDown += (s, e) =>
