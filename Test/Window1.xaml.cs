@@ -54,6 +54,27 @@ namespace Test
                 }
             };
 
+            Action<IContainer> loadContainer = (result) =>
+            {
+                canvasLayers.Children.Clear();
+                canvasWorking.Children.Clear();
+
+                container = result;
+                editor.Container = container;
+
+                DataContext = editor.Container;
+
+                renderer.ClearCache();
+                layers = CreateLayers(container, renderer);
+
+                container.Invalidate();
+            };
+
+            fileNew.Click += (s, e) =>
+            {
+                loadContainer(XContainer.Create(800, 600));
+            };
+
             fileOpen.Click += (s, e) =>
             {
                 var dlg = new OpenFileDialog()
@@ -77,18 +98,7 @@ namespace Test
                             ContractResolver = new ListContractResolver()
                         });
 
-                    canvasLayers.Children.Clear();
-                    canvasWorking.Children.Clear();
-
-                    container = result;
-                    editor.Container = container;
-
-                    DataContext = editor.Container;
-
-                    renderer.ClearCache();
-                    layers = CreateLayers(container, renderer);
-
-                    container.Invalidate();
+                    loadContainer(result);
                 }
             };
 
