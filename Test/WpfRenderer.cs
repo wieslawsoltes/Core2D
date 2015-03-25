@@ -75,12 +75,12 @@ namespace Test
             return pen;
         }
 
-        private Rect CreateRect(XPoint topLeft, XPoint bottomRight, double dx, double dy)
+        private Rect CreateRect(XPoint tl, XPoint br, double dx, double dy)
         {
-            double tlx = Math.Min(topLeft.X, bottomRight.X);
-            double tly = Math.Min(topLeft.Y, bottomRight.Y);
-            double brx = Math.Max(topLeft.X, bottomRight.X);
-            double bry = Math.Max(topLeft.Y, bottomRight.Y);
+            double tlx = Math.Min(tl.X, br.X);
+            double tly = Math.Min(tl.Y, br.Y);
+            double brx = Math.Max(tl.X, br.X);
+            double bry = Math.Max(tl.Y, br.Y);
             return new Rect(
                 new Point(tlx + dx, tly + dy),
                 new Point(brx + dx, bry + dy));
@@ -103,7 +103,8 @@ namespace Test
             Tuple<Brush, Pen> cache;
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache && _styleCache.TryGetValue(line.Style, out cache))
+            if (_enableStyleCache 
+                && _styleCache.TryGetValue(line.Style, out cache))
             {
                 fill = cache.Item1;
                 stroke = cache.Item2;
@@ -132,7 +133,8 @@ namespace Test
             Tuple<Brush, Pen> cache;
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache && _styleCache.TryGetValue(rectangle.Style, out cache))
+            if (_enableStyleCache 
+                && _styleCache.TryGetValue(rectangle.Style, out cache))
             {
                 fill = cache.Item1;
                 stroke = cache.Item2;
@@ -165,7 +167,8 @@ namespace Test
             Tuple<Brush, Pen> cache;
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache && _styleCache.TryGetValue(ellipse.Style, out cache))
+            if (_enableStyleCache 
+                && _styleCache.TryGetValue(ellipse.Style, out cache))
             {
                 fill = cache.Item1;
                 stroke = cache.Item2;
@@ -202,7 +205,8 @@ namespace Test
             Tuple<Brush, Pen> cache;
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache && _styleCache.TryGetValue(bezier.Style, out cache))
+            if (_enableStyleCache 
+                && _styleCache.TryGetValue(bezier.Style, out cache))
             {
                 fill = cache.Item1;
                 stroke = cache.Item2;
@@ -219,7 +223,8 @@ namespace Test
             }
 
             PathGeometry pg;
-            if (_enableBezierCache && _bezierCache.TryGetValue(bezier, out pg))
+            if (_enableBezierCache 
+                && _bezierCache.TryGetValue(bezier, out pg))
             {
                 var pf = pg.Figures[0];
                 pf.StartPoint = new Point(bezier.Point1.X + dx, bezier.Point1.Y + dy);
@@ -262,7 +267,8 @@ namespace Test
             Tuple<Brush, Pen> cache;
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache && _styleCache.TryGetValue(qbezier.Style, out cache))
+            if (_enableStyleCache 
+                && _styleCache.TryGetValue(qbezier.Style, out cache))
             {
                 fill = cache.Item1;
                 stroke = cache.Item2;
@@ -280,7 +286,8 @@ namespace Test
 
             PathGeometry pg;
 
-            if (_enableQBezierCache && _qbezierCache.TryGetValue(qbezier, out pg))
+            if (_enableQBezierCache 
+                && _qbezierCache.TryGetValue(qbezier, out pg))
             {
                 var pf = pg.Figures[0];
                 pf.StartPoint = new Point(qbezier.Point1.X + dx, qbezier.Point1.Y + dy);
