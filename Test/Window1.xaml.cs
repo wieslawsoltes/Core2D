@@ -56,7 +56,8 @@ namespace Test
             
             canvasWorking.PreviewMouseLeftButtonDown += (s, e) =>
             {
-                if (editor.Container.CurrentLayer != null)
+                if (editor.Container.CurrentLayer != null
+                    && editor.Container.CurrentLayer.IsVisible)
                 {
                     var p = e.GetPosition(canvasWorking);
                     editor.Left(p.X, p.Y);
@@ -65,7 +66,8 @@ namespace Test
 
             canvasWorking.PreviewMouseRightButtonDown += (s, e) =>
             {
-                if (editor.Container.CurrentLayer != null)
+                if (editor.Container.CurrentLayer != null
+                    && editor.Container.CurrentLayer.IsVisible)
                 {
                     var p = e.GetPosition(canvasWorking);
                     editor.Right(p.X, p.Y); 
@@ -74,7 +76,8 @@ namespace Test
 
             canvasWorking.PreviewMouseMove += (s, e) =>
             {
-                if (editor.Container.CurrentLayer != null)
+                if (editor.Container.CurrentLayer != null
+                    && editor.Container.CurrentLayer.IsVisible)
                 {
                     var p = e.GetPosition(canvasWorking);
                     editor.Move(p.X, p.Y); 
