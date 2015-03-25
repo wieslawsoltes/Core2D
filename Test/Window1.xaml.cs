@@ -1,4 +1,6 @@
-﻿using Microsoft.Practices.Prism.Commands;
+﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
