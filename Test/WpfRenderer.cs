@@ -28,14 +28,13 @@ namespace Test
             }
         }
 
+        private bool _enableStyleCache = true;
+        private bool _enableBezierCache = true;
+        private bool _enableQBezierCache = true;
+
         private IDictionary<XStyle, Tuple<Brush, Pen>> _styleCache;
-        private readonly bool _enableStyleCache = true;
-
         private IDictionary<XBezier, PathGeometry> _bezierCache;
-        private readonly bool _enableBezierCache = true;
-
         private IDictionary<XQBezier, PathGeometry> _qbezierCache;
-        private readonly bool _enableQBezierCache = true;
 
         public WpfRenderer()
         {
