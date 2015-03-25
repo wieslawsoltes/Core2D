@@ -20,16 +20,16 @@
         <KeyBinding Command="{Binding OpenCommand}" Gesture="Ctrl+O"/>
         <KeyBinding Command="{Binding SaveAsCommand}" Gesture="Ctrl+S"/>
         <KeyBinding Command="{Binding ExitCommand}" Gesture="Alt+F4"/>
-        <KeyBinding Command="{Binding ToolNoneCommand}" Key="N"/>
-        <KeyBinding Command="{Binding ToolLineCommand}" Key="L"/>
-        <KeyBinding Command="{Binding ToolRectangleCommand}" Key="R"/>
-        <KeyBinding Command="{Binding ToolEllipseCommand}" Key="E"/>
-        <KeyBinding Command="{Binding ToolBezierCommand}" Key="B"/>
-        <KeyBinding Command="{Binding ToolQBezierCommand}" Key="Q"/>
-        <KeyBinding Command="{Binding DefaultIsFilledCommand}" Key="F"/>
-        <KeyBinding Command="{Binding SnapToGridCommand}" Key="G"/>
+        <KeyBinding Command="{Binding ToolNoneCommand}" Key="N" Modifiers=""/>
+        <KeyBinding Command="{Binding ToolLineCommand}" Key="L" Modifiers=""/>
+        <KeyBinding Command="{Binding ToolRectangleCommand}" Key="R" Modifiers=""/>
+        <KeyBinding Command="{Binding ToolEllipseCommand}" Key="E" Modifiers=""/>
+        <KeyBinding Command="{Binding ToolBezierCommand}" Key="B" Modifiers=""/>
+        <KeyBinding Command="{Binding ToolQBezierCommand}" Key="Q" Modifiers=""/>
+        <KeyBinding Command="{Binding DefaultIsFilledCommand}" Key="F" Modifiers=""/>
+        <KeyBinding Command="{Binding SnapToGridCommand}" Key="G" Modifiers=""/>
     </Window.InputBindings>
-    <Grid>
+    <Grid FocusVisualStyle="{x:Null}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
