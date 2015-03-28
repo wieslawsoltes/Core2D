@@ -14,7 +14,11 @@ namespace Test.Core
         private XColor _stroke;
         private XColor _fill;
         private double _thickness;
-
+        private string _fontName;
+        private double _fontSize;
+        private TextHAlignment _textHAlignment;
+        private TextVAlignment _textVAlignment;
+        
         public string Name
         {
             get { return _name; }
@@ -67,18 +71,78 @@ namespace Test.Core
             }
         }
 
+        public string FontName
+        {
+            get { return _fontName; }
+            set
+            {
+                if (value != _fontName)
+                {
+                    _fontName = value;
+                    Notify("FontName");
+                }
+            }
+        }
+
+        public double FontSize
+        {
+            get { return _fontSize; }
+            set
+            {
+                if (value != _fontSize)
+                {
+                    _fontSize = value;
+                    Notify("FontSize");
+                }
+            }
+        }
+
+        public TextHAlignment TextHAlignment
+        {
+            get { return _textHAlignment; }
+            set
+            {
+                if (value != _textHAlignment)
+                {
+                    _textHAlignment = value;
+                    Notify("TextHAlignment");
+                }
+            }
+        }
+        
+        public TextVAlignment TextVAlignment
+        {
+            get { return _textVAlignment; }
+            set
+            {
+                if (value != _textVAlignment)
+                {
+                    _textVAlignment = value;
+                    Notify("TextVAlignment");
+                }
+            }
+        }
+     
         public static XStyle Create(
             string name,
-            byte sa, byte sr, byte sg, byte sb,
-            byte fa, byte fr, byte fg, byte fb,
-            double thickness)
+            byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00,
+            byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00,
+            double thickness = 2.0,
+            string fontName = "Calibri", 
+            double fontSize = 12.0,
+            TextHAlignment textHAlignment = TextHAlignment.Center,
+            TextVAlignment textVAlignment = TextVAlignment.Center)
         {
             return new XStyle()
             {
                 Name = name,
                 Stroke = XColor.Create(sa, sr, sg, sb),
                 Fill = XColor.Create(fa, fr, fg, fb),
-                Thickness = thickness
+                Thickness = thickness,
+                FontName = fontName,
+                FontSize = fontSize,
+                TextHAlignment = textHAlignment,
+                TextVAlignment = textVAlignment
             };
         }
     }
