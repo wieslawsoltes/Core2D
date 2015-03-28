@@ -25,6 +25,7 @@ namespace Test.Core
         public ICommand ToolEllipseCommand { get; set; }
         public ICommand ToolBezierCommand { get; set; }
         public ICommand ToolQBezierCommand { get; set; }
+        public ICommand ToolTextCommand { get; set; }
 
         public ICommand DefaultIsFilledCommand { get; set; }
         public ICommand SnapToGridCommand { get; set; }
@@ -367,6 +368,38 @@ namespace Test.Core
                         }
                     }
                     break;
+                // Text
+                case Tool.Text:
+                    {
+                        switch (CurrentState)
+                        {
+                            case State.None:
+                                {
+                                    _shape = XText.Create(
+                                        sx, sy, 
+                                        _container.CurrentStyle, 
+                                        _container.PointShape,
+                                        "Text",
+                                        DefaultIsFilled);
+                                    _container.WorkingLayer.Shapes.Add(_shape);
+                                    _container.WorkingLayer.Invalidate();
+                                    CurrentState = State.One;
+                                }
+                                break;
+                            case State.One:
+                                {
+                                    var text = _shape as XText;
+                                    text.BottomRight.X = sx;
+                                    text.BottomRight.Y = sy;
+                                    _container.WorkingLayer.Shapes.Remove(_shape);
+                                    _container.CurrentLayer.Shapes.Add(_shape);
+                                    _container.Invalidate();
+                                    CurrentState = State.None;
+                                }
+                                break;
+                        }
+                    }
+                    break;
             }
         }
 
@@ -470,6 +503,25 @@ namespace Test.Core
                                 break;
                             case State.One:
                             case State.Two:
+                                {
+                                    _container.WorkingLayer.Shapes.Remove(_shape);
+                                    _container.WorkingLayer.Invalidate();
+                                    CurrentState = State.None;
+                                }
+                                break;
+                        }
+                    }
+                    break;
+                // Text
+                case Tool.Text:
+                    {
+                        switch (CurrentState)
+                        {
+                            case State.None:
+                                {
+                                }
+                                break;
+                            case State.One:
                                 {
                                     _container.WorkingLayer.Shapes.Remove(_shape);
                                     _container.WorkingLayer.Invalidate();
@@ -619,6 +671,26 @@ namespace Test.Core
                                     var bezier = _shape as XQBezier;
                                     bezier.Point2.X = sx;
                                     bezier.Point2.Y = sy;
+                                    _container.WorkingLayer.Invalidate();
+                                }
+                                break;
+                        }
+                    }
+                    break;
+                // Text
+                case Tool.Text:
+                    {
+                        switch (CurrentState)
+                        {
+                            case State.None:
+                                {
+                                }
+                                break;
+                            case State.One:
+                                {
+                                    var text = _shape as XText;
+                                    text.BottomRight.X = sx;
+                                    text.BottomRight.Y = sy;
                                     _container.WorkingLayer.Invalidate();
                                 }
                                 break;
