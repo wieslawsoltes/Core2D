@@ -19,7 +19,7 @@
                          BorderBrush="{x:Null}"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Stroke">
+        <Expander Header="Stroke" IsExpanded="False">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -113,8 +113,8 @@
                          TextAlignment="Center" 
                          VerticalAlignment="Center"/>
             </Grid>
-        </GroupBox>
-        <GroupBox Header="Fill">
+        </Expander>
+        <Expander Header="Fill" IsExpanded="False">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -208,8 +208,8 @@
                          TextAlignment="Center" 
                          VerticalAlignment="Center"/>
             </Grid>
-        </GroupBox>
-        <GroupBox Header="Thickness">
+        </Expander>
+        <Expander Header="Thickness" IsExpanded="False">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -235,6 +235,80 @@
                          TextAlignment="Center" 
                          VerticalAlignment="Center"/>
             </Grid>
-        </GroupBox>
+        </Expander>
+        <Expander Header="Text" IsExpanded="False">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Font" 
+                           Margin="0,0,2,0" 
+                           Grid.Row="0"
+                           Grid.Column="0" 
+                           TextAlignment="Left" 
+                           VerticalAlignment="Center"/>
+                <TextBlock Text="Size" 
+                           Margin="0,0,2,0" 
+                           Grid.Row="1" 
+                           Grid.Column="0" 
+                           TextAlignment="Left" 
+                           VerticalAlignment="Center"/>
+                <TextBlock Text="HAlignment" 
+                           Margin="0,0,2,0" 
+                           Grid.Row="2" 
+                           Grid.Column="0" 
+                           TextAlignment="Left" 
+                           VerticalAlignment="Center"/>
+                <TextBlock Text="VAlignment" 
+                           Margin="0,0,2,0" 
+                           Grid.Row="3" 
+                           Grid.Column="0" 
+                           TextAlignment="Left" 
+                           VerticalAlignment="Center"/>
+                <Slider Value="{Binding FontSize}" 
+                        Minimum="0" 
+                        Maximum="72" 
+                        TickFrequency="1" 
+                        IsSnapToTickEnabled="True" 
+                        Grid.Row="1" 
+                        Grid.Column="1" 
+                        Margin="1"/>
+                <TextBox Text="{Binding FontName}" 
+                         BorderBrush="{x:Null}" 
+                         Grid.Row="0" 
+                         Grid.Column="1" 
+                         Grid.ColumnSpan="2"
+                         TextAlignment="Left" 
+                         VerticalAlignment="Center"/>
+                <TextBox Text="{Binding FontSize}" 
+                         BorderBrush="{x:Null}" 
+                         Grid.Row="1" 
+                         Grid.Column="2" 
+                         TextAlignment="Center" 
+                         VerticalAlignment="Center"/>
+                <TextBox Text="{Binding TextHAlignment}" 
+                         BorderBrush="{x:Null}" 
+                         Grid.Row="2" 
+                         Grid.Column="1" 
+                         Grid.ColumnSpan="2"
+                         TextAlignment="Left" 
+                         VerticalAlignment="Center"/>
+                <TextBox Text="{Binding TextVAlignment}" 
+                         BorderBrush="{x:Null}" 
+                         Grid.Row="3" 
+                         Grid.Column="1" 
+                         Grid.ColumnSpan="2"
+                         TextAlignment="Left" 
+                         VerticalAlignment="Center"/>
+            </Grid>
+        </Expander>
     </StackPanel>
 </UserControl>
