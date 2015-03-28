@@ -59,7 +59,8 @@ namespace Test
             canvasWorking.PreviewMouseLeftButtonDown += (s, e) =>
             {
                 if (editor.Container.CurrentLayer != null
-                    && editor.Container.CurrentLayer.IsVisible)
+                    && editor.Container.CurrentLayer.IsVisible
+                    && editor.Container.CurrentStyle != null)
                 {
                     var p = e.GetPosition(canvasWorking);
                     editor.Left(p.X, p.Y);
@@ -69,7 +70,8 @@ namespace Test
             canvasWorking.PreviewMouseRightButtonDown += (s, e) =>
             {
                 if (editor.Container.CurrentLayer != null
-                    && editor.Container.CurrentLayer.IsVisible)
+                    && editor.Container.CurrentLayer.IsVisible
+                    && editor.Container.CurrentStyle != null)
                 {
                     var p = e.GetPosition(canvasWorking);
                     editor.Right(p.X, p.Y); 
@@ -79,7 +81,8 @@ namespace Test
             canvasWorking.PreviewMouseMove += (s, e) =>
             {
                 if (editor.Container.CurrentLayer != null
-                    && editor.Container.CurrentLayer.IsVisible)
+                    && editor.Container.CurrentLayer.IsVisible
+                    && editor.Container.CurrentStyle != null)
                 {
                     var p = e.GetPosition(canvasWorking);
                     editor.Move(p.X, p.Y); 
@@ -179,6 +182,7 @@ namespace Test
             editor.ToolEllipseCommand = new DelegateCommand(() => editor.CurrentTool = Tool.Ellipse);
             editor.ToolBezierCommand = new DelegateCommand(() => editor.CurrentTool = Tool.Bezier);
             editor.ToolQBezierCommand = new DelegateCommand(() => editor.CurrentTool = Tool.QBezier);
+            editor.ToolTextCommand = new DelegateCommand(() => editor.CurrentTool = Tool.Text);
 
             editor.DefaultIsFilledCommand = new DelegateCommand(() => editor.DefaultIsFilled = !editor.DefaultIsFilled);
             editor.SnapToGridCommand = new DelegateCommand(() => editor.SnapToGrid = !editor.SnapToGrid);

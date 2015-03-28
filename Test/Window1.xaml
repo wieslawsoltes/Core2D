@@ -28,6 +28,7 @@
         <KeyBinding Command="{Binding ToolEllipseCommand}" Key="E" Modifiers=""/>
         <KeyBinding Command="{Binding ToolBezierCommand}" Key="B" Modifiers=""/>
         <KeyBinding Command="{Binding ToolQBezierCommand}" Key="Q" Modifiers=""/>
+        <KeyBinding Command="{Binding ToolTextCommand}" Key="T" Modifiers=""/>
         <KeyBinding Command="{Binding DefaultIsFilledCommand}" Key="F" Modifiers=""/>
         <KeyBinding Command="{Binding SnapToGridCommand}" Key="G" Modifiers=""/>
     </Window.InputBindings>
@@ -133,6 +134,20 @@
                             <Setter Property="IsChecked" Value="False"/>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding CurrentTool}" Value="QBezier">
+                                    <Setter Property="IsChecked" Value="True"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </MenuItem.Style>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="_Text" Command="{Binding ToolTextCommand}" InputGestureText="T">
+                    <MenuItem.Style>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="IsCheckable" Value="True"/>
+                            <Setter Property="IsChecked" Value="False"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CurrentTool}" Value="Text">
                                     <Setter Property="IsChecked" Value="True"/>
                                 </DataTrigger>
                             </Style.Triggers>
