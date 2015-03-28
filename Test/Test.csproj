@@ -109,6 +109,8 @@
     <Compile Include="Core\ILayer.cs" />
     <Compile Include="Core\IRenderer.cs" />
     <Compile Include="Core\State.cs" />
+    <Compile Include="Core\TextHAlignment.cs" />
+    <Compile Include="Core\TextVAlignment.cs" />
     <Compile Include="Core\Tool.cs" />
     <Compile Include="Core\XBezier.cs" />
     <Compile Include="Core\XColor.cs" />
@@ -123,6 +125,7 @@
     <Compile Include="Core\XRectangle.cs" />
     <Compile Include="Core\XShape.cs" />
     <Compile Include="Core\XStyle.cs" />
+    <Compile Include="Core\XText.cs" />
     <Compile Include="ListContractResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Window1.xaml.cs">
