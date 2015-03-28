@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,10 +32,12 @@ namespace Test
         private bool _enableStyleCache = true;
         private bool _enableBezierCache = true;
         private bool _enableQBezierCache = true;
+        private bool _enableTextCache = true;
 
         private IDictionary<XStyle, Tuple<Brush, Pen>> _styleCache;
         private IDictionary<XBezier, PathGeometry> _bezierCache;
         private IDictionary<XQBezier, PathGeometry> _qbezierCache;
+        private IDictionary<XText, FormattedText> _textCache;
 
         public WpfRenderer()
         {
@@ -54,6 +57,7 @@ namespace Test
             _styleCache = new Dictionary<XStyle, Tuple<Brush, Pen>>();
             _bezierCache = new Dictionary<XBezier, PathGeometry>();
             _qbezierCache = new Dictionary<XQBezier, PathGeometry>();
+            _textCache = new Dictionary<XText, FormattedText>();
         }
 
         private Brush CreateBrush(XColor color)
@@ -320,6 +324,105 @@ namespace Test
             }
             
             _dc.DrawGeometry(qbezier.IsFilled ? fill : null, stroke, pg);
+        }
+
+        private Point GetTextOrigin(XStyle style, Rect rect, FormattedText ft)
+        {
+            double ox, oy;
+
+            switch (style.TextHAlignment)
+            {
+                case TextHAlignment.Left:
+                    ox = rect.TopLeft.X;
+                    break;
+                case TextHAlignment.Right:
+                    ox = rect.Right - ft.Width;
+                    break;
+                case TextHAlignment.Center:
+                default:
+                    ox = (rect.Left + rect.Width / 2.0) - (ft.Width / 2.0);
+                    break;
+            }
+
+            switch (style.TextVAlignment)
+            {
+                case TextVAlignment.Top:
+                    oy = rect.TopLeft.Y;
+                    break;
+                case TextVAlignment.Bottom:
+                    oy = rect.Bottom - ft.Height;
+                    break;
+                case TextVAlignment.Center:
+                default:
+                    oy = (rect.Bottom - rect.Height / 2.0) - (ft.Height / 2.0);
+                    break;
+            }
+
+            return new Point(ox, oy);
+        }
+        
+        public void Draw(object dc, XText text, double dx, double dy)
+        {
+            var _dc = dc as DrawingContext;
+
+            Tuple<Brush, Pen> cache;
+            Brush fill;
+            Pen stroke;
+            if (_enableStyleCache 
+                && _styleCache.TryGetValue(text.Style, out cache))
+            {
+                fill = cache.Item1;
+                stroke = cache.Item2;
+            }
+            else
+            {
+                fill = CreateBrush(text.Style.Fill);
+                stroke = CreatePen(
+                    text.Style.Stroke,
+                    text.Style.Thickness);
+
+                if (_enableStyleCache)
+                    _styleCache.Add(text.Style, Tuple.Create(fill, stroke));
+            }
+
+            var rect = CreateRect(
+                text.TopLeft,
+                text.BottomRight,
+                dx, dy);
+            _dc.DrawRectangle(
+                text.IsFilled ? fill : null,
+                null,
+                rect);
+
+            FormattedText ft;
+
+            if (_enableTextCache
+                && _textCache.TryGetValue(text, out ft))
+            {
+                _dc.DrawText(
+                    ft, 
+                    GetTextOrigin(text.Style, rect, ft));
+            }
+            else
+            {
+                var ci = CultureInfo.InvariantCulture;
+
+                ft = new FormattedText(
+                    text.Text,
+                    ci,
+                    ci.TextInfo.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight,
+                    new Typeface(
+                        new FontFamily(text.Style.FontName),
+                        FontStyles.Normal,
+                        FontWeights.Normal,
+                        FontStretches.Normal),
+                    text.Style.FontSize,
+                    stroke.Brush, null, TextFormattingMode.Ideal);
+
+                _dc.DrawText(
+                    ft, 
+                    GetTextOrigin(text.Style, rect, ft));
+            }
         }
     }
 }
