@@ -124,20 +124,8 @@ namespace Test
                 if (dlg.ShowDialog() == true)
                 {
                     var path = dlg.FileName;
-
                     var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
-
-                    var container = JsonConvert.DeserializeObject<XContainer>(
-                        json,
-                        new JsonSerializerSettings()
-                        {
-                            Formatting = Formatting.Indented,
-                            TypeNameHandling = TypeNameHandling.Objects,
-                            PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                            ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                            ContractResolver = new ListContractResolver()
-                        });
-
+                    var container = ContainerSerializer.Deserialize(json);
                     loadContainer(container);
                 }
             });
@@ -154,17 +142,7 @@ namespace Test
                 if (dlg.ShowDialog() == true)
                 {
                     var path = dlg.FileName;
-
-                    var json = JsonConvert.SerializeObject(
-                        editor.Container,
-                        new JsonSerializerSettings()
-                        {
-                            Formatting = Formatting.Indented,
-                            TypeNameHandling = TypeNameHandling.Objects,
-                            PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                            ReferenceLoopHandling = ReferenceLoopHandling.Serialize
-                        });
-
+                    var json = ContainerSerializer.Serialize(editor.Container);
                     System.IO.File.WriteAllText(path, json, Encoding.UTF8);
                 }
             });
@@ -213,16 +191,13 @@ namespace Test
 
             layersRemove.Click += (s, e) =>
             {
-                var layer = editor.Container.CurrentLayer;
-                editor.Container.Layers.Remove(layer);
-
-                var element = layers[layer];
-                layers.Remove(layer);
-
-                canvasLayers.Children.Remove(element);
-
-                editor.Container.CurrentLayer = editor.Container.Layers.FirstOrDefault();
-                editor.Container.Invalidate();
+                var layer = editor.RemoveCurrentLayer();
+                if (layer != null)
+                {
+                    var element = layers[layer];
+                    layers.Remove(layer);
+                    canvasLayers.Children.Remove(element);
+                }
             };
 
             stylesAdd.Click += (s, e) =>
@@ -233,15 +208,12 @@ namespace Test
 
             stylesRemove.Click += (s, e) =>
             {
-                editor.Container.Styles.Remove(editor.Container.CurrentStyle);
-                editor.Container.CurrentStyle = editor.Container.Styles.FirstOrDefault();
+                editor.RemoveCurrentStyle();
             };
 
             shapesRemove.Click += (s, e) =>
             {
-                editor.Container.CurrentLayer.Shapes.Remove(editor.Container.CurrentShape);
-                editor.Container.CurrentShape = editor.Container.CurrentLayer.Shapes.FirstOrDefault();
-                editor.Container.Invalidate();
+                editor.RemoveCurrentShape();
             };
 
             DataContext = editor;

@@ -99,6 +99,7 @@
       <SubType>Code</SubType>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ContainerSerializer.cs" />
     <Compile Include="Controls\StyleControl.xaml.cs">
       <DependentUpon>StyleControl.xaml</DependentUpon>
       <SubType>Code</SubType>

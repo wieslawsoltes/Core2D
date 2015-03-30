@@ -804,5 +804,31 @@ namespace Test.Core
                     break;
             }
         }
+
+        public ILayer RemoveCurrentLayer()
+        {
+            var layer = Container.CurrentLayer;
+            Container.Layers.Remove(layer);
+            Container.CurrentLayer = Container.Layers.FirstOrDefault();
+            Container.Invalidate();
+            return layer;
+        }
+
+        public XShape RemoveCurrentShape()
+        {
+            var shape = Container.CurrentShape;
+            Container.CurrentLayer.Shapes.Remove(shape);
+            Container.CurrentShape = Container.CurrentLayer.Shapes.FirstOrDefault();
+            Container.Invalidate();
+            return shape;
+        }
+
+        public XStyle RemoveCurrentStyle()
+        {
+            var style = Container.CurrentStyle;
+            Container.Styles.Remove(style);
+            Container.CurrentStyle = Container.Styles.FirstOrDefault();
+            return style;
+        }
     }
 }
