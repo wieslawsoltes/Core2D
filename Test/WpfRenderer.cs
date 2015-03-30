@@ -44,7 +44,7 @@ namespace Test
             ClearCache();
         }
 
-        public static IRenderer Create(bool drawPoints)
+        public static IRenderer Create(bool drawPoints = false)
         {
             return new WpfRenderer()
             {
