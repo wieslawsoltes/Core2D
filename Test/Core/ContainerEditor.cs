@@ -31,6 +31,14 @@ namespace Test.Core
         public ICommand SnapToGridCommand { get; set; }
         public ICommand DrawPointsCommand { get; set; }
 
+        public ICommand AddLayerCommand { get; set; }
+        public ICommand RemoveLayerCommand { get; set; }
+
+        public ICommand AddStyleCommand { get; set; }
+        public ICommand RemoveStyleCommand { get; set; }
+
+        public ICommand RemoveShapeCommand { get; set; }
+
         private IContainer _container;
         private IRenderer _renderer;
         private XShape _shape;
