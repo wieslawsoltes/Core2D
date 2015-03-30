@@ -55,6 +55,8 @@ namespace Test
             };
 
             var layers = createLayers();
+
+            var styleObserver = new StyleObserver(editor);
             
             canvasWorking.PreviewMouseLeftButtonDown += (s, e) =>
             {
@@ -101,6 +103,8 @@ namespace Test
 
                 editor.Container.Invalidate();
 
+                styleObserver = new StyleObserver(editor);
+                
                 DataContext = editor;
             };
 
