@@ -97,38 +97,38 @@ namespace Test
                 editor.Container.Invalidate();
             });
 
-            layersAdd.Click += (s, e) =>
+            editor.AddLayerCommand = new DelegateCommand(() =>
             {
                 var layer = XLayer.Create("New");
                 editor.Container.Layers.Add(layer);
 
                 Add(layer);
-            };
+            });
 
-            layersRemove.Click += (s, e) =>
+            editor.RemoveLayerCommand = new DelegateCommand(() =>
             {
                 var layer = editor.RemoveCurrentLayer();
                 if (layer != null)
                 {
                     Remove(layer);
                 }
-            };
+            });
 
-            stylesAdd.Click += (s, e) =>
+            editor.AddStyleCommand = new DelegateCommand(() =>
             {
                 editor.Container.Styles.Add(
                     XStyle.Create("New", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
-            };
+            });
 
-            stylesRemove.Click += (s, e) =>
+            editor.RemoveStyleCommand = new DelegateCommand(() =>
             {
                 editor.RemoveCurrentStyle();
-            };
+            });
 
-            shapesRemove.Click += (s, e) =>
+            editor.RemoveShapeCommand = new DelegateCommand(() =>
             {
                 editor.RemoveCurrentShape();
-            };
+            });
 
             canvasWorking.PreviewMouseLeftButtonDown += (s, e) =>
             {

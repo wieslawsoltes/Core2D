@@ -207,8 +207,8 @@
                     <Menu Background="Transparent" 
                           HorizontalAlignment="Right" 
                           Grid.Row="0">
-                        <MenuItem x:Name="layersAdd" Header="_+"/>
-                        <MenuItem x:Name="layersRemove" Header="_-"/>
+                        <MenuItem Command="{Binding AddLayerCommand}" Header="_+"/>
+                        <MenuItem Command="{Binding RemoveLayerCommand}" Header="_-"/>
                     </Menu>
                     <ListBox ItemsSource="{Binding Container.Layers}" 
                              SelectedItem="{Binding Container.CurrentLayer}" 
@@ -263,8 +263,8 @@
                     <Menu Background="Transparent" 
                           HorizontalAlignment="Right" 
                           Grid.Row="0">
-                        <MenuItem x:Name="stylesAdd" Header="_+"/>
-                        <MenuItem x:Name="stylesRemove" Header="_-"/>
+                        <MenuItem Command="{Binding AddStyleCommand}" Header="_+"/>
+                        <MenuItem Command="{Binding RemoveStyleCommand}" Header="_-"/>
                     </Menu>
                     <ListBox ItemsSource="{Binding Container.Styles}" 
                              SelectedItem="{Binding Container.CurrentStyle}" 
@@ -291,7 +291,7 @@
                     <Menu Background="Transparent" 
                           HorizontalAlignment="Right" 
                           Grid.Row="0">
-                        <MenuItem x:Name="shapesRemove" Header="_-"/>
+                        <MenuItem Command="{Binding RemoveShapeCommand}" Header="_-"/>
                     </Menu>
                     <ListBox ItemsSource="{Binding Container.CurrentLayer.Shapes}" 
                              SelectedItem="{Binding Container.CurrentShape}" 
