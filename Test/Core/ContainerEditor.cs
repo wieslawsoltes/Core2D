@@ -168,6 +168,27 @@ namespace Test.Core
             return r >= snap / 2.0 ? value + snap - r : value - r;
         }
 
+        public bool IsLeftAvailable()
+        {
+            return Container.CurrentLayer != null
+                && Container.CurrentLayer.IsVisible
+                && Container.CurrentStyle != null;
+        }
+
+        public bool IsRightAvailable()
+        {
+            return Container.CurrentLayer != null
+                && Container.CurrentLayer.IsVisible
+                && Container.CurrentStyle != null;
+        }
+
+        public bool IsMoveAvailable()
+        {
+            return Container.CurrentLayer != null
+                && Container.CurrentLayer.IsVisible
+                && Container.CurrentStyle != null;
+        }
+
         public void Left(double x, double y)
         {
             double sx = SnapToGrid ? Snap(x, SnapX) : x;

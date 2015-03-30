@@ -21,96 +21,19 @@ namespace Test
 {
     public partial class Window1 : Window
     {
+        private ContainerEditor editor;
+        private StyleObserver styleObserver;
+        private IDictionary<ILayer, WpfElement> layers;
+
         public Window1()
         {
             InitializeComponent();
 
-            var editor = ContainerEditor.Create(
-                XContainer.Create(800, 600),
-                WpfRenderer.Create(false));
-
-            Func<IDictionary<ILayer, WpfElement>> createLayers = () =>
-            {
-                var dict = new Dictionary<ILayer, WpfElement>();
-
-                foreach (var layer in editor.Container.Layers)
-                {
-                    var element = WpfElement.Create(
-                        editor.Renderer,
-                        layer,
-                        editor.Container.Width,
-                        editor.Container.Height);
-                    dict.Add(layer, element);
-                    canvasLayers.Children.Add(element);
-                }
-
-                var workingElement = WpfElement.Create(
-                    editor.Renderer,
-                    editor.Container.WorkingLayer,
-                    editor.Container.Width,
-                    editor.Container.Height);
-                canvasWorking.Children.Add(workingElement);
-
-                return dict;
-            };
-
-            var layers = createLayers();
-
-            var styleObserver = new StyleObserver(editor);
-            
-            canvasWorking.PreviewMouseLeftButtonDown += (s, e) =>
-            {
-                if (editor.Container.CurrentLayer != null
-                    && editor.Container.CurrentLayer.IsVisible
-                    && editor.Container.CurrentStyle != null)
-                {
-                    var p = e.GetPosition(canvasWorking);
-                    editor.Left(p.X, p.Y);
-                }
-            };
-
-            canvasWorking.PreviewMouseRightButtonDown += (s, e) =>
-            {
-                if (editor.Container.CurrentLayer != null
-                    && editor.Container.CurrentLayer.IsVisible
-                    && editor.Container.CurrentStyle != null)
-                {
-                    var p = e.GetPosition(canvasWorking);
-                    editor.Right(p.X, p.Y); 
-                }
-            };
-
-            canvasWorking.PreviewMouseMove += (s, e) =>
-            {
-                if (editor.Container.CurrentLayer != null
-                    && editor.Container.CurrentLayer.IsVisible
-                    && editor.Container.CurrentStyle != null)
-                {
-                    var p = e.GetPosition(canvasWorking);
-                    editor.Move(p.X, p.Y); 
-                }
-            };
-
-            Action<IContainer> loadContainer = (container) =>
-            {
-                canvasLayers.Children.Clear();
-                canvasWorking.Children.Clear();
-
-                editor.Renderer.ClearCache();
-                editor.Container = container;
-
-                layers = createLayers();
-
-                editor.Container.Invalidate();
-
-                styleObserver = new StyleObserver(editor);
-                
-                DataContext = editor;
-            };
+            editor = ContainerEditor.Create(XContainer.Create(800, 600), WpfRenderer.Create());
 
             editor.NewCommand = new DelegateCommand(() =>
             {
-                loadContainer(XContainer.Create(800, 600));
+                Load(XContainer.Create(800, 600));
             });
 
             editor.OpenCommand = new DelegateCommand(() =>
@@ -126,7 +49,7 @@ namespace Test
                     var path = dlg.FileName;
                     var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
                     var container = ContainerSerializer.Deserialize(json);
-                    loadContainer(container);
+                    Load(container);
                 }
             });
 
@@ -179,14 +102,7 @@ namespace Test
                 var layer = XLayer.Create("New");
                 editor.Container.Layers.Add(layer);
 
-                var element = WpfElement.Create(
-                    editor.Renderer, 
-                    layer,
-                    editor.Container.Width,
-                    editor.Container.Height);
-                layers.Add(layer, element);
-
-                canvasLayers.Children.Add(element);
+                Add(layer);
             };
 
             layersRemove.Click += (s, e) =>
@@ -194,9 +110,7 @@ namespace Test
                 var layer = editor.RemoveCurrentLayer();
                 if (layer != null)
                 {
-                    var element = layers[layer];
-                    layers.Remove(layer);
-                    canvasLayers.Children.Remove(element);
+                    Remove(layer);
                 }
             };
 
@@ -216,6 +130,37 @@ namespace Test
                 editor.RemoveCurrentShape();
             };
 
+            canvasWorking.PreviewMouseLeftButtonDown += (s, e) =>
+            {
+                if (editor.IsLeftAvailable())
+                {
+                    var p = e.GetPosition(canvasWorking);
+                    editor.Left(p.X, p.Y);
+                }
+            };
+
+            canvasWorking.PreviewMouseRightButtonDown += (s, e) =>
+            {
+                if (editor.IsRightAvailable())
+                {
+                    var p = e.GetPosition(canvasWorking);
+                    editor.Right(p.X, p.Y);
+                }
+            };
+
+            canvasWorking.PreviewMouseMove += (s, e) =>
+            {
+                if (editor.IsMoveAvailable())
+                {
+                    var p = e.GetPosition(canvasWorking);
+                    editor.Move(p.X, p.Y);
+                }
+            };
+
+            styleObserver = new StyleObserver(editor);
+
+            CreateLayers();
+
             DataContext = editor;
 
             //Action<IContainer> groupTest = (c) =>
@@ -229,6 +174,58 @@ namespace Test
             //    c.Invalidate();
             //};
             //groupTest(editor.Container);
+        }
+
+        private void CreateLayers()
+        {
+            layers = new Dictionary<ILayer, WpfElement>();
+
+            foreach (var layer in editor.Container.Layers)
+            {
+                Add(layer);
+            }
+
+            var workingElement = WpfElement.Create(
+                editor.Renderer,
+                editor.Container.WorkingLayer,
+                editor.Container.Width,
+                editor.Container.Height);
+            canvasWorking.Children.Add(workingElement);
+        }
+
+        private void Load(IContainer container)
+        {
+            canvasLayers.Children.Clear();
+            canvasWorking.Children.Clear();
+
+            editor.Renderer.ClearCache();
+            editor.Container = container;
+
+            styleObserver = new StyleObserver(editor);
+
+            CreateLayers();
+
+            editor.Container.Invalidate();
+
+            DataContext = editor;
+        }
+
+        private void Add(ILayer layer)
+        {
+            var element = WpfElement.Create(
+                editor.Renderer,
+                layer,
+                editor.Container.Width,
+                editor.Container.Height);
+            layers.Add(layer, element);
+            canvasLayers.Children.Add(element);
+        }
+
+        private void Remove(ILayer layer)
+        {
+            var element = layers[layer];
+            layers.Remove(layer);
+            canvasLayers.Children.Remove(element);
         }
     }
 }
