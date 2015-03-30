@@ -42,8 +42,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu x:Name="menu" 
-              Grid.Row="0" 
+        <Menu Grid.Row="0" 
               Grid.Column="0" 
               Grid.ColumnSpan="3" 
               Background="Transparent">
