@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Media;
 using Test.Core;
 
-namespace Test.Controls
+namespace Test
 {
     public class LayerElement : FrameworkElement
     {

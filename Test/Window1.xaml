@@ -176,7 +176,7 @@
             <Grid Width="{Binding Container.Width}" Height="{Binding Container.Height}" Background="DarkGray">
                 <controls:ContainerControl/>
                 <Canvas x:Name="canvas" Width="{Binding Container.Width}" Height="{Binding Container.Height}" Background="Transparent">
-                    <controls:LayerElement DataContext="{Binding Container.WorkingLayer}" Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"/>
+                    <local:LayerElement DataContext="{Binding Container.WorkingLayer}" Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"/>
                 </Canvas>
             </Grid>
         </ScrollViewer>

@@ -136,7 +136,7 @@
       <SubType>Code</SubType>
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LayerElement.cs" />
+    <Compile Include="LayerElement.cs" />
     <Compile Include="ShapeRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
