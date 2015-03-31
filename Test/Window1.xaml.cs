@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Win32;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,19 +20,18 @@ namespace Test
 {
     public partial class Window1 : Window
     {
-        private ContainerEditor editor;
-        private StyleObserver styleObserver;
-        private IDictionary<ILayer, WpfElement> layers;
-
         public Window1()
         {
             InitializeComponent();
 
-            editor = ContainerEditor.Create(XContainer.Create(800, 600), WpfRenderer.Create());
-
+            var editor = ContainerEditor.Create(XContainer.Create(800, 600), WpfRenderer.Create());
+            var observer = new StyleObserver(editor);
+            
             editor.NewCommand = new DelegateCommand(() =>
             {
-                Load(XContainer.Create(800, 600));
+                var container = XContainer.Create(800, 600);
+                editor.Load(container);
+                observer = new StyleObserver(editor);
             });
 
             editor.OpenCommand = new DelegateCommand(() =>
@@ -49,7 +47,8 @@ namespace Test
                     var path = dlg.FileName;
                     var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
                     var container = ContainerSerializer.Deserialize(json);
-                    Load(container);
+                    editor.Load(container);
+                    observer = new StyleObserver(editor);
                 }
             });
 
@@ -70,10 +69,7 @@ namespace Test
                 }
             });
 
-            editor.ExitCommand = new DelegateCommand(() =>
-            {
-                Close();
-            });
+            editor.ExitCommand = new DelegateCommand(() => Close());
 
             editor.ClearCommand = new DelegateCommand(() =>
             {
@@ -99,25 +95,17 @@ namespace Test
 
             editor.AddLayerCommand = new DelegateCommand(() =>
             {
-                var layer = XLayer.Create("New");
-                editor.Container.Layers.Add(layer);
-
-                Add(layer);
+                editor.Container.Layers.Add(XLayer.Create("New"));
             });
 
             editor.RemoveLayerCommand = new DelegateCommand(() =>
             {
-                var layer = editor.RemoveCurrentLayer();
-                if (layer != null)
-                {
-                    Remove(layer);
-                }
+                editor.RemoveCurrentLayer();
             });
 
             editor.AddStyleCommand = new DelegateCommand(() =>
             {
-                editor.Container.Styles.Add(
-                    XStyle.Create("New", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
+                editor.Container.Styles.Add(XStyle.Create("New", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
             });
 
             editor.RemoveStyleCommand = new DelegateCommand(() =>
@@ -130,36 +118,32 @@ namespace Test
                 editor.RemoveCurrentShape();
             });
 
-            canvasWorking.PreviewMouseLeftButtonDown += (s, e) =>
+            canvas.PreviewMouseLeftButtonDown += (s, e) =>
             {
                 if (editor.IsLeftAvailable())
                 {
-                    var p = e.GetPosition(canvasWorking);
+                    var p = e.GetPosition(canvas);
                     editor.Left(p.X, p.Y);
                 }
             };
 
-            canvasWorking.PreviewMouseRightButtonDown += (s, e) =>
+            canvas.PreviewMouseRightButtonDown += (s, e) =>
             {
                 if (editor.IsRightAvailable())
                 {
-                    var p = e.GetPosition(canvasWorking);
+                    var p = e.GetPosition(canvas);
                     editor.Right(p.X, p.Y);
                 }
             };
 
-            canvasWorking.PreviewMouseMove += (s, e) =>
+            canvas.PreviewMouseMove += (s, e) =>
             {
                 if (editor.IsMoveAvailable())
                 {
-                    var p = e.GetPosition(canvasWorking);
+                    var p = e.GetPosition(canvas);
                     editor.Move(p.X, p.Y);
                 }
             };
-
-            styleObserver = new StyleObserver(editor);
-
-            CreateLayers();
 
             DataContext = editor;
 
@@ -174,58 +158,6 @@ namespace Test
             //    c.Invalidate();
             //};
             //groupTest(editor.Container);
-        }
-
-        private void CreateLayers()
-        {
-            layers = new Dictionary<ILayer, WpfElement>();
-
-            foreach (var layer in editor.Container.Layers)
-            {
-                Add(layer);
-            }
-
-            var workingElement = WpfElement.Create(
-                editor.Renderer,
-                editor.Container.WorkingLayer,
-                editor.Container.Width,
-                editor.Container.Height);
-            canvasWorking.Children.Add(workingElement);
-        }
-
-        private void Load(IContainer container)
-        {
-            canvasLayers.Children.Clear();
-            canvasWorking.Children.Clear();
-
-            editor.Renderer.ClearCache();
-            editor.Container = container;
-
-            styleObserver = new StyleObserver(editor);
-
-            CreateLayers();
-
-            editor.Container.Invalidate();
-
-            DataContext = editor;
-        }
-
-        private void Add(ILayer layer)
-        {
-            var element = WpfElement.Create(
-                editor.Renderer,
-                layer,
-                editor.Container.Width,
-                editor.Container.Height);
-            layers.Add(layer, element);
-            canvasLayers.Children.Add(element);
-        }
-
-        private void Remove(ILayer layer)
-        {
-            var element = layers[layer];
-            layers.Remove(layer);
-            canvasLayers.Children.Remove(element);
         }
     }
 }
