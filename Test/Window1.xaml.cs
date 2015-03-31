@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Test.Core;
+using Test.Util;
 
 namespace Test
 {

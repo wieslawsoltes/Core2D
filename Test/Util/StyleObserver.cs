@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Test.Core;
 
-namespace Test
+namespace Test.Util
 {
     public class StyleObserver
     {
