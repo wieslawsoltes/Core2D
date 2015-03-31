@@ -121,6 +121,8 @@ namespace Test
 
             canvas.PreviewMouseLeftButtonDown += (s, e) =>
             {
+                canvas.Focus();
+
                 if (editor.IsLeftAvailable())
                 {
                     var p = e.GetPosition(canvas);
@@ -130,6 +132,8 @@ namespace Test
 
             canvas.PreviewMouseRightButtonDown += (s, e) =>
             {
+                canvas.Focus();
+
                 if (editor.IsRightAvailable())
                 {
                     var p = e.GetPosition(canvas);
@@ -139,6 +143,8 @@ namespace Test
 
             canvas.PreviewMouseMove += (s, e) =>
             {
+                canvas.Focus();
+
                 if (editor.IsMoveAvailable())
                 {
                     var p = e.GetPosition(canvas);
@@ -147,6 +153,8 @@ namespace Test
             };
 
             DataContext = editor;
+
+            Loaded += (s, e) => canvas.Focus();
 
             //Action<IContainer> groupTest = (c) =>
             //{

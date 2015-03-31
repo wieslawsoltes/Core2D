@@ -17,15 +17,6 @@
         <KeyBinding Command="{Binding OpenCommand}" Gesture="Ctrl+O"/>
         <KeyBinding Command="{Binding SaveAsCommand}" Gesture="Ctrl+S"/>
         <KeyBinding Command="{Binding ExitCommand}" Gesture="Alt+F4"/>
-        <KeyBinding Command="{Binding ToolNoneCommand}" Key="N" Modifiers=""/>
-        <KeyBinding Command="{Binding ToolLineCommand}" Key="L" Modifiers=""/>
-        <KeyBinding Command="{Binding ToolRectangleCommand}" Key="R" Modifiers=""/>
-        <KeyBinding Command="{Binding ToolEllipseCommand}" Key="E" Modifiers=""/>
-        <KeyBinding Command="{Binding ToolBezierCommand}" Key="B" Modifiers=""/>
-        <KeyBinding Command="{Binding ToolQBezierCommand}" Key="Q" Modifiers=""/>
-        <KeyBinding Command="{Binding ToolTextCommand}" Key="T" Modifiers=""/>
-        <KeyBinding Command="{Binding DefaultIsFilledCommand}" Key="F" Modifiers=""/>
-        <KeyBinding Command="{Binding SnapToGridCommand}" Key="G" Modifiers=""/>
     </Window.InputBindings>
     <Grid FocusVisualStyle="{x:Null}">
         <Grid.ColumnDefinitions>
@@ -42,10 +33,27 @@
                       HorizontalScrollBarVisibility="Auto" 
                       Grid.Row="1" 
                       Grid.Column="0" 
-                      Margin="5,5,0,5">
+                      Margin="5,5,0,5"
+                      Focusable="False">
             <Grid Width="{Binding Container.Width}" Height="{Binding Container.Height}" Background="DarkGray">
                 <controls:ContainerControl/>
-                <Canvas x:Name="canvas" Width="{Binding Container.Width}" Height="{Binding Container.Height}" Background="Transparent">
+                <Canvas x:Name="canvas" 
+                        Background="Transparent"
+                        Focusable="True"
+                        FocusVisualStyle="{x:Null}"
+                        Width="{Binding Container.Width}" 
+                        Height="{Binding Container.Height}">
+                    <Canvas.InputBindings>
+                        <KeyBinding Command="{Binding ToolNoneCommand}" Key="N" Modifiers=""/>
+                        <KeyBinding Command="{Binding ToolLineCommand}" Key="L" Modifiers=""/>
+                        <KeyBinding Command="{Binding ToolRectangleCommand}" Key="R" Modifiers=""/>
+                        <KeyBinding Command="{Binding ToolEllipseCommand}" Key="E" Modifiers=""/>
+                        <KeyBinding Command="{Binding ToolBezierCommand}" Key="B" Modifiers=""/>
+                        <KeyBinding Command="{Binding ToolQBezierCommand}" Key="Q" Modifiers=""/>
+                        <KeyBinding Command="{Binding ToolTextCommand}" Key="T" Modifiers=""/>
+                        <KeyBinding Command="{Binding DefaultIsFilledCommand}" Key="F" Modifiers=""/>
+                        <KeyBinding Command="{Binding SnapToGridCommand}" Key="G" Modifiers=""/>
+                    </Canvas.InputBindings>
                     <local:LayerElement DataContext="{Binding Container.WorkingLayer}" Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"/>
                 </Canvas>
             </Grid>
