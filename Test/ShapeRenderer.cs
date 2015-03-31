@@ -12,7 +12,7 @@ using Test.Core;
 
 namespace Test
 {
-    public class WpfRenderer : XObject, IRenderer
+    public class ShapeRenderer : XObject, IRenderer
     {
         private bool _drawPoints;
 
@@ -39,14 +39,14 @@ namespace Test
         private IDictionary<XQBezier, PathGeometry> _qbezierCache;
         private IDictionary<XText, FormattedText> _textCache;
 
-        public WpfRenderer()
+        public ShapeRenderer()
         {
             ClearCache();
         }
 
         public static IRenderer Create(bool drawPoints = false)
         {
-            return new WpfRenderer()
+            return new ShapeRenderer()
             {
                 DrawPoints = drawPoints
             };

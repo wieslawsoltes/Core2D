@@ -24,7 +24,7 @@ namespace Test
         {
             InitializeComponent();
 
-            var editor = ContainerEditor.Create(XContainer.Create(800, 600), WpfRenderer.Create());
+            var editor = ContainerEditor.Create(XContainer.Create(800, 600), ShapeRenderer.Create());
             var observer = new StyleObserver(editor);
             
             editor.NewCommand = new DelegateCommand(() =>
