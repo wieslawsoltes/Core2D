@@ -193,29 +193,7 @@
                         <MenuItem Command="{Binding AddLayerCommand}" Header="_+"/>
                         <MenuItem Command="{Binding RemoveLayerCommand}" Header="_-"/>
                     </Menu>
-                    <ListBox ItemsSource="{Binding Container.Layers}" 
-                             SelectedItem="{Binding Container.CurrentLayer}" 
-                             BorderBrush="{x:Null}" Grid.Row="1">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="25"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <CheckBox IsChecked="{Binding IsVisible}" 
-                                              Margin="0,5,0,5"
-                                              Content="" 
-                                              VerticalAlignment="Stretch"
-                                              HorizontalAlignment="Stretch"
-                                              Grid.Column="0"/>
-                                    <TextBlock Text="{Binding Name}" 
-                                               Margin="0,5,0,5"
-                                               Grid.Column="1"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                    <controls:LayersControl  Grid.Row="1"/>
                     <StackPanel Grid.Row="2" DataContext="{Binding Container.CurrentLayer}" >
                         <GroupBox Header="Name">
                             <Grid>
