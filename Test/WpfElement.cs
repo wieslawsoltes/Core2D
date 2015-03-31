@@ -11,47 +11,50 @@ using Test.Core;
 
 namespace Test
 {
-    public class WpfElement : FrameworkElement, IElement
+    public class WpfElement : FrameworkElement
     {
-        private readonly ILayer _layer;
-        private readonly IRenderer _renderer;
+        public static readonly DependencyProperty RendererProperty =
+            DependencyProperty.Register(
+                "Renderer", 
+                typeof(IRenderer), 
+                typeof(WpfElement),
+                new FrameworkPropertyMetadata(
+                    null, 
+                    FrameworkPropertyMetadataOptions.AffectsRender | 
+                    FrameworkPropertyMetadataOptions.AffectsMeasure |
+                    FrameworkPropertyMetadataOptions.AffectsArrange |
+                    FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
 
-        public WpfElement(ILayer layer, IRenderer renderer)
+        public IRenderer Renderer
         {
-            _layer = layer;
-            _renderer = renderer;
+            get { return (IRenderer) GetValue(RendererProperty); }
+            set { SetValue(RendererProperty, value); }
         }
 
-        public void Invalidate()
+        public WpfElement()
         {
-            this.InvalidateVisual();
+            DataContextChanged += (s, e) =>
+            {
+                var layer = DataContext as ILayer;
+                if (layer != null)
+                {
+                    layer.SetInvalidate(() => this.InvalidateVisual());
+                }
+            };
         }
 
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
 
-            if (_layer.IsVisible)
+            var layer = DataContext as ILayer;
+            if (layer != null && layer.IsVisible)
             {
-                _renderer.Render(drawingContext, _layer);
+                if (Renderer != null)
+                {
+                    Renderer.Render(drawingContext, layer);
+                }
             }
-        }
-
-        public static WpfElement Create(
-            IRenderer renderer,
-            ILayer layer,
-            double width,
-            double height)
-        {
-            var element = new WpfElement(layer, renderer)
-            {
-                Width = width,
-                Height = height
-            };
-
-            layer.SetInvalidate(element.Invalidate);
-
-            return element;
         }
     }
 }

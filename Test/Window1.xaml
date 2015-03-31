@@ -42,10 +42,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" 
-              Grid.Column="0" 
-              Grid.ColumnSpan="3" 
-              Background="Transparent">
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="Transparent">
             <MenuItem Header="_File">
                 <MenuItem Header="_New" Command="{Binding NewCommand}" InputGestureText="Ctrl+N"/>
                 <Separator/>
@@ -176,27 +173,32 @@
                       Grid.Row="1" 
                       Grid.Column="0" 
                       Margin="5,5,0,5">
-            <Grid Background="DarkGray"
-                  Width="{Binding Container.Width}" 
-                  Height="{Binding Container.Height}">
-                <Canvas x:Name="canvasLayers" 
-                        Width="{Binding Container.Width}" 
-                        Height="{Binding Container.Height}" 
-                        Background="Transparent"/>
-                <Canvas x:Name="canvasWorking" 
-                        Width="{Binding Container.Width}" 
-                        Height="{Binding Container.Height}" 
-                        Background="Transparent"/>
+            <Grid Background="DarkGray" Width="{Binding Container.Width}" Height="{Binding Container.Height}">
+                <ItemsControl ItemsSource="{Binding Container.Layers}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas Width="{Binding Container.Width}" Height="{Binding Container.Height}" Background="Transparent"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:WpfElement Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="ContentPresenter">
+                            <Setter Property="Width" Value="{Binding Path=DataContext.Container.Width, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}" />
+                            <Setter Property="Height" Value="{Binding Path=DataContext.Container.Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}" />
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                </ItemsControl>
+                <Canvas x:Name="canvas" Width="{Binding Container.Width}" Height="{Binding Container.Height}" Background="Transparent">
+                    <local:WpfElement DataContext="{Binding Container.WorkingLayer}" Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"/>
+                </Canvas>
             </Grid>
         </ScrollViewer>
-        <GridSplitter Grid.Row="1" 
-                      Grid.Column="1" 
-                      Width="5" 
-                      Background="Transparent" 
-                      ResizeBehavior="PreviousAndNext"/>
-        <TabControl Grid.Row="1" 
-                    Grid.Column="2" 
-                    Margin="0,5,5,5">
+        <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" Background="Transparent" ResizeBehavior="PreviousAndNext"/>
+        <TabControl Grid.Row="1" Grid.Column="2" Margin="0,5,5,5">
             <TabItem Header="Layers">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -204,9 +206,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Menu Background="Transparent" 
-                          HorizontalAlignment="Right" 
-                          Grid.Row="0">
+                    <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
                         <MenuItem Command="{Binding AddLayerCommand}" Header="_+"/>
                         <MenuItem Command="{Binding RemoveLayerCommand}" Header="_-"/>
                     </Menu>
@@ -233,8 +233,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <StackPanel Grid.Row="2" 
-                                DataContext="{Binding Container.CurrentLayer}" >
+                    <StackPanel Grid.Row="2" DataContext="{Binding Container.CurrentLayer}" >
                         <GroupBox Header="Name">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -260,9 +259,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Menu Background="Transparent" 
-                          HorizontalAlignment="Right" 
-                          Grid.Row="0">
+                    <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
                         <MenuItem Command="{Binding AddStyleCommand}" Header="_+"/>
                         <MenuItem Command="{Binding RemoveStyleCommand}" Header="_-"/>
                     </Menu>
@@ -276,9 +273,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <controls:StyleControl DataContext="{Binding Container.CurrentStyle}" 
-                                           Grid.Row="2" 
-                                           Margin="2"/>
+                    <controls:StyleControl DataContext="{Binding Container.CurrentStyle}" Grid.Row="2" Margin="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Shapes">
@@ -288,9 +283,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Menu Background="Transparent" 
-                          HorizontalAlignment="Right" 
-                          Grid.Row="0">
+                    <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
                         <MenuItem Command="{Binding RemoveShapeCommand}" Header="_-"/>
                     </Menu>
                     <ListBox ItemsSource="{Binding Container.CurrentLayer.Shapes}" 

@@ -106,7 +106,6 @@
     </Compile>
     <Compile Include="Core\ContainerEditor.cs" />
     <Compile Include="Core\IContainer.cs" />
-    <Compile Include="Core\IElement.cs" />
     <Compile Include="Core\ILayer.cs" />
     <Compile Include="Core\IRenderer.cs" />
     <Compile Include="Core\State.cs" />
