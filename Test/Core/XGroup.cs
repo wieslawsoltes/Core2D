@@ -11,8 +11,8 @@ namespace Test.Core
 {
     public class XGroup : XShape
     {
-        public string _name;
-        public IList<XShape> _shapes;
+        private string _name;
+        private IList<XShape> _shapes;
 
         public string Name
         {
