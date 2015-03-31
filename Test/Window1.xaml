@@ -69,23 +69,7 @@
                         <MenuItem Command="{Binding RemoveLayerCommand}" Header="_-"/>
                     </Menu>
                     <controls:LayersControl Grid.Row="1"/>
-                    <StackPanel Grid.Row="2" DataContext="{Binding Container.CurrentLayer}" >
-                        <GroupBox Header="Name">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBox Text="{Binding Name}" 
-                                         TextAlignment="Left" 
-                                         VerticalAlignment="Center" 
-                                         Margin="1" 
-                                         BorderBrush="{x:Null}"/>
-                            </Grid>
-                        </GroupBox>
-                    </StackPanel>
+                    <controls:LayerControl Grid.Row="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Styles">
