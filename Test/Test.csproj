@@ -102,6 +102,9 @@
     <Compile Include="Controls\LayersControl.xaml.cs">
       <DependentUpon>LayersControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\StylesControl.xaml.cs">
+      <DependentUpon>StylesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Util\ContainerSerializer.cs" />
     <Compile Include="Controls\ContainerControl.xaml.cs">
       <DependentUpon>ContainerControl.xaml</DependentUpon>
@@ -152,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\StyleControl.xaml" />
+    <Page Include="Controls\StylesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Window1.xaml" />
   </ItemGroup>
   <ItemGroup>

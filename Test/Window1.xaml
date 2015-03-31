@@ -224,16 +224,7 @@
                         <MenuItem Command="{Binding AddStyleCommand}" Header="_+"/>
                         <MenuItem Command="{Binding RemoveStyleCommand}" Header="_-"/>
                     </Menu>
-                    <ListBox ItemsSource="{Binding Container.Styles}" 
-                             SelectedItem="{Binding Container.CurrentStyle}" 
-                             Grid.Row="1" 
-                             BorderBrush="{x:Null}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}" Margin="0,5,0,5"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                    <controls:StylesControl Grid.Row="1"/>
                     <controls:StyleControl DataContext="{Binding Container.CurrentStyle}" Grid.Row="2" Margin="2"/>
                 </Grid>
             </TabItem>
