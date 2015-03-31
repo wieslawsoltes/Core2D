@@ -39,6 +39,9 @@ namespace Test.Core
 
         public ICommand RemoveShapeCommand { get; set; }
 
+        public ICommand GroupSelectedCommand { get; set; }
+        public ICommand GroupCurrentLayerCommand { get; set; }
+
         private IContainer _container;
         private IRenderer _renderer;
         private XShape _shape;
@@ -863,6 +866,25 @@ namespace Test.Core
             Renderer.ClearCache();
             Container = container;
             Container.Invalidate();
+        }
+
+        public void GroupSelected()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GroupCurrentLayer()
+        {
+            var group = XGroup.Create("g");
+            var layer = Container.CurrentLayer;
+            foreach (var shape in layer.Shapes.ToList())
+            {
+                group.Shapes.Add(shape);
+                layer.Shapes.Remove(shape);
+            }
+
+            layer.Shapes.Add(group);
+            layer.Invalidate();
         }
     }
 }

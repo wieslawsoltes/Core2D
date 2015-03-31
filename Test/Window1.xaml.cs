@@ -119,6 +119,10 @@ namespace Test
                 editor.RemoveCurrentShape();
             });
 
+            editor.GroupSelectedCommand = new DelegateCommand(() => editor.GroupSelected());
+
+            editor.GroupCurrentLayerCommand = new DelegateCommand(() => editor.GroupCurrentLayer());
+
             canvas.PreviewMouseLeftButtonDown += (s, e) =>
             {
                 canvas.Focus();

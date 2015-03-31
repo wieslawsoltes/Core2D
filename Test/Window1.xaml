@@ -17,6 +17,8 @@
         <KeyBinding Command="{Binding OpenCommand}" Gesture="Ctrl+O"/>
         <KeyBinding Command="{Binding SaveAsCommand}" Gesture="Ctrl+S"/>
         <KeyBinding Command="{Binding ExitCommand}" Gesture="Alt+F4"/>
+        <KeyBinding Command="{Binding GroupSelectedCommand}" Gesture="Ctrl+Shift+G"/>
+        <KeyBinding Command="{Binding GroupCurrentLayerCommand}" Gesture="Ctrl+Shift+G"/>
     </Window.InputBindings>
     <Grid FocusVisualStyle="{x:Null}">
         <Grid.ColumnDefinitions>
