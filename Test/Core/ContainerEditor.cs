@@ -153,9 +153,7 @@ namespace Test.Core
             }
         }
 
-        public static ContainerEditor Create(
-            IContainer container, 
-            IRenderer renderer)
+        public static ContainerEditor Create(IContainer container, IRenderer renderer)
         {
             return new ContainerEditor()
             {
@@ -858,6 +856,13 @@ namespace Test.Core
             Container.Styles.Remove(style);
             Container.CurrentStyle = Container.Styles.FirstOrDefault();
             return style;
+        }
+        
+        public void Load(IContainer container)
+        {
+            Renderer.ClearCache();
+            Container = container;
+            Container.Invalidate();
         }
     }
 }
