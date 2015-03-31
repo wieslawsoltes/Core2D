@@ -155,18 +155,6 @@ namespace Test
             DataContext = editor;
 
             Loaded += (s, e) => canvas.Focus();
-
-            //Action<IContainer> groupTest = (c) =>
-            //{
-            //    var g = XGroup.Create("g");
-            //    g.Shapes.Add(XLine.Create(30, 30, 30, 60, c.CurrentStyle, c.PointShape));
-            //    g.Shapes.Add(XLine.Create(60, 30, 60, 60, c.CurrentStyle, c.PointShape));
-            //    g.Shapes.Add(XLine.Create(30, 30, 60, 30, c.CurrentStyle, c.PointShape));
-            //    g.Shapes.Add(XLine.Create(30, 60, 60, 60, c.CurrentStyle, c.PointShape));
-            //    c.CurrentLayer.Shapes.Add(g);
-            //    c.Invalidate();
-            //};
-            //groupTest(editor.Container);
         }
     }
 }
