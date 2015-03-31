@@ -136,7 +136,7 @@
       <SubType>Code</SubType>
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WpfElement.cs" />
+    <Compile Include="Controls\LayerElement.cs" />
     <Compile Include="WpfRenderer.cs" />
   </ItemGroup>
   <ItemGroup>

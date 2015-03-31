@@ -9,15 +9,15 @@ using System.Windows;
 using System.Windows.Media;
 using Test.Core;
 
-namespace Test
+namespace Test.Controls
 {
-    public class WpfElement : FrameworkElement
+    public class LayerElement : FrameworkElement
     {
         public static readonly DependencyProperty RendererProperty =
             DependencyProperty.Register(
                 "Renderer", 
                 typeof(IRenderer), 
-                typeof(WpfElement),
+                typeof(LayerElement),
                 new FrameworkPropertyMetadata(
                     null, 
                     FrameworkPropertyMetadataOptions.AffectsRender | 
@@ -31,7 +31,7 @@ namespace Test
             set { SetValue(RendererProperty, value); }
         }
 
-        public WpfElement()
+        public LayerElement()
         {
             DataContextChanged += (s, e) =>
             {

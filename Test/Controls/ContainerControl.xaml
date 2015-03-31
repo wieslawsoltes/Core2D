@@ -5,7 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Test"
+             xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
     <ItemsControl ItemsSource="{Binding Container.Layers}">
@@ -16,7 +16,7 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <local:WpfElement Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"/>
+                <controls:LayerElement Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"/>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
         <ItemsControl.ItemContainerStyle>
