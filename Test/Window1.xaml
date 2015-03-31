@@ -238,16 +238,7 @@
                     <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
                         <MenuItem Command="{Binding RemoveShapeCommand}" Header="_-"/>
                     </Menu>
-                    <ListBox ItemsSource="{Binding Container.CurrentLayer.Shapes}" 
-                             SelectedItem="{Binding Container.CurrentShape}" 
-                             BorderBrush="{x:Null}" 
-                             Grid.Row="1">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding}" Margin="0,5,0,5"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                    <controls:ShapesControl Grid.Row="1"/>
                 </Grid>
             </TabItem>
         </TabControl>
