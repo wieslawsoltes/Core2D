@@ -9,13 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Test.Core;
 
-namespace Test.Util
+namespace Test.Core
 {
-    public class StyleObserver
+    public class Observer
     {
         private readonly Action _invalidate;
 
-        public StyleObserver(ContainerEditor editor)
+        public Observer(Editor editor)
         {
             _invalidate = () =>
             {

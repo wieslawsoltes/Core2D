@@ -156,7 +156,7 @@ namespace Test.Core
             WorkingLayer.Invalidate();
         }
 
-        public static IContainer Create(double width, double height)
+        public static IContainer Create(double width = 800, double height = 600)
         {
             var c = new XContainer()
             {

@@ -25,14 +25,11 @@ namespace Test
         {
             InitializeComponent();
 
-            var editor = ContainerEditor.Create(XContainer.Create(800, 600), ShapeRenderer.Create());
-            var observer = new StyleObserver(editor);
+            var editor = Editor.Create(XContainer.Create(), Renderer.Create());
             
             editor.NewCommand = new DelegateCommand(() =>
             {
-                var container = XContainer.Create(800, 600);
-                editor.Load(container);
-                observer = new StyleObserver(editor);
+                editor.Load(XContainer.Create());
             });
 
             editor.OpenCommand = new DelegateCommand(() =>
@@ -49,7 +46,6 @@ namespace Test
                     var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
                     var container = ContainerSerializer.Deserialize(json);
                     editor.Load(container);
-                    observer = new StyleObserver(editor);
                 }
             });
 

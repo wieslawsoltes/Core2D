@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace Test.Core
 {
-    public class ContainerEditor : XObject
+    public class Editor : XObject
     {
         public ICommand NewCommand { get; set; }
         public ICommand OpenCommand { get; set; }
@@ -51,6 +51,8 @@ namespace Test.Core
         private bool _snapToGrid;
         private double _snapX;
         private double _snapY;
+        private bool _enableObserver;
+        private Observer _observer;
 
         public IContainer Container
         {
@@ -156,19 +158,54 @@ namespace Test.Core
             }
         }
 
-        public static ContainerEditor Create(IContainer container, IRenderer renderer)
+        public bool EnableObserver
         {
-            return new ContainerEditor()
+            get { return _enableObserver; }
+            set
             {
-                Container = container,
-                Renderer = renderer,
+                if (value != _enableObserver)
+                {
+                    _enableObserver = value;
+                    Notify("EnableObserver");
+                }
+            }
+        }
+
+        public Observer Observer
+        {
+            get { return _observer; }
+            set
+            {
+                if (value != _observer)
+                {
+                    _observer = value;
+                    Notify("Observer");
+                }
+            }
+        }
+
+        public static Editor Create(IContainer container, IRenderer renderer)
+        {
+            var editor = new Editor()
+            {
                 SnapToGrid = false,
                 SnapX = 15.0,
                 SnapY = 15.0,
                 DefaultIsFilled = false,
                 CurrentTool = Tool.Line,
-                CurrentState = State.None
+                CurrentState = State.None,
+                EnableObserver = true
             };
+
+            editor.Container = container;
+            editor.Renderer = renderer;
+
+            if (editor.EnableObserver)
+            {
+                editor.Observer = new Observer(editor);
+            }
+
+            return editor;
         }
 
         public double Snap(double value, double snap)
@@ -864,8 +901,14 @@ namespace Test.Core
         public void Load(IContainer container)
         {
             Renderer.ClearCache();
+
             Container = container;
             Container.Invalidate();
+
+            if (EnableObserver)
+            {
+                Observer = new Observer(this);
+            }
         }
 
         public void GroupSelected()
