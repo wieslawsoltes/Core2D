@@ -9,13 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Test.Core;
 
-namespace Test.Util
+namespace Test.Core
 {
-    public class StyleObserver
+    public class Observer
     {
         private readonly Action _invalidate;
 
-        public StyleObserver(ContainerEditor editor)
+        public Observer(Editor editor)
         {
             _invalidate = () =>
             {
@@ -25,17 +25,17 @@ namespace Test.Util
 
             Add(editor.Container.Styles);
 
-            (editor.Container.Styles as ObservableCollection<XStyle>).CollectionChanged += (s, e) =>
+            (editor.Container.Styles as ObservableCollection<ShapeStyle>).CollectionChanged += (s, e) =>
             {
                 switch (e.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        Add(e.NewItems.Cast<XStyle>());
+                        Add(e.NewItems.Cast<ShapeStyle>());
                         break;
                     case NotifyCollectionChangedAction.Move:
                         break;
                     case NotifyCollectionChangedAction.Remove:
-                        Remove(e.OldItems.Cast<XStyle>());
+                        Remove(e.OldItems.Cast<ShapeStyle>());
                         break;
                     case NotifyCollectionChangedAction.Replace:
                         break;
@@ -54,14 +54,14 @@ namespace Test.Util
             _invalidate();
         }
 
-        private void Add(XStyle style)
+        private void Add(ShapeStyle style)
         {
             style.PropertyChanged += PropertyChangedObserver;
             style.Stroke.PropertyChanged += PropertyChangedObserver;
             style.Fill.PropertyChanged += PropertyChangedObserver;
         }
 
-        private void Add(IEnumerable<XStyle> styles)
+        private void Add(IEnumerable<ShapeStyle> styles)
         {
             foreach (var style in styles)
             {
@@ -69,14 +69,14 @@ namespace Test.Util
             }
         }
 
-        private void Remove(XStyle style)
+        private void Remove(ShapeStyle style)
         {
             style.PropertyChanged -= PropertyChangedObserver;
             style.Stroke.PropertyChanged -= PropertyChangedObserver;
             style.Fill.PropertyChanged -= PropertyChangedObserver;
         }
 
-        private void Remove(IEnumerable<XStyle> styles)
+        private void Remove(IEnumerable<ShapeStyle> styles)
         {
             foreach (var style in styles)
             {

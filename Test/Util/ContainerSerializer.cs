@@ -26,7 +26,7 @@ namespace Test.Util
 
         public static IContainer Deserialize(string json)
         {
-            var container = JsonConvert.DeserializeObject<XContainer>(
+            var container = JsonConvert.DeserializeObject<Container>(
                 json,
                 new JsonSerializerSettings()
                 {

@@ -9,12 +9,10 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XLayer : XObject, ILayer
+    public class XGroup : BaseShape
     {
         private string _name;
-        private bool _isVisible;
-        private IList<XShape> _shapes;
-        private Action _invalidate;
+        private IList<BaseShape> _shapes;
 
         public string Name
         {
@@ -29,21 +27,7 @@ namespace Test.Core
             }
         }
 
-        public bool IsVisible
-        {
-            get { return _isVisible; }
-            set
-            {
-                if (value != _isVisible)
-                {
-                    _isVisible = value;
-                    Invalidate();
-                    Notify("IsVisible");
-                }
-            }
-        }
-
-        public IList<XShape> Shapes
+        public IList<BaseShape> Shapes
         {
             get { return _shapes; }
             set
@@ -56,26 +40,20 @@ namespace Test.Core
             }
         }
 
-        public void SetInvalidate(Action invalidate)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy)
         {
-            _invalidate = invalidate;
-        }
-
-        public void Invalidate()
-        {
-            if (_invalidate != null)
+            foreach (var shape in Shapes)
             {
-                _invalidate();
+                shape.Draw(dc, renderer, dx, dy);
             }
         }
 
-        public static ILayer Create(string name, bool isVisible = true)
+        public static XGroup Create(string name)
         {
-            return new XLayer()
+            return new XGroup()
             {
                 Name = name,
-                IsVisible = isVisible,
-                Shapes = new ObservableCollection<XShape>()
+                Shapes = new ObservableCollection<BaseShape>()
             };
         }
     }

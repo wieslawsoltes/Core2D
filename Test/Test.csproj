@@ -122,37 +122,37 @@
       <DependentUpon>StyleControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Core\ContainerEditor.cs" />
+    <Compile Include="Core\Editor\Editor.cs" />
     <Compile Include="Core\IContainer.cs" />
     <Compile Include="Core\ILayer.cs" />
     <Compile Include="Core\IRenderer.cs" />
-    <Compile Include="Core\State.cs" />
+    <Compile Include="Core\Editor\State.cs" />
     <Compile Include="Core\TextHAlignment.cs" />
     <Compile Include="Core\TextVAlignment.cs" />
-    <Compile Include="Core\Tool.cs" />
-    <Compile Include="Core\XBezier.cs" />
-    <Compile Include="Core\XColor.cs" />
-    <Compile Include="Core\XContainer.cs" />
-    <Compile Include="Core\XEllipse.cs" />
-    <Compile Include="Core\XGroup.cs" />
-    <Compile Include="Core\XLayer.cs" />
-    <Compile Include="Core\XLine.cs" />
-    <Compile Include="Core\XObject.cs" />
-    <Compile Include="Core\XPoint.cs" />
-    <Compile Include="Core\XQBezier.cs" />
-    <Compile Include="Core\XRectangle.cs" />
-    <Compile Include="Core\XShape.cs" />
-    <Compile Include="Core\XStyle.cs" />
-    <Compile Include="Core\XText.cs" />
+    <Compile Include="Core\Editor\Tool.cs" />
+    <Compile Include="Core\Shapes\XBezier.cs" />
+    <Compile Include="Core\ArgbColor.cs" />
+    <Compile Include="Core\Editor\Container.cs" />
+    <Compile Include="Core\Shapes\XEllipse.cs" />
+    <Compile Include="Core\Shapes\XGroup.cs" />
+    <Compile Include="Core\Editor\Layer.cs" />
+    <Compile Include="Core\Shapes\XLine.cs" />
+    <Compile Include="Core\ObservableObject.cs" />
+    <Compile Include="Core\Shapes\XPoint.cs" />
+    <Compile Include="Core\Shapes\XQBezier.cs" />
+    <Compile Include="Core\Shapes\XRectangle.cs" />
+    <Compile Include="Core\BaseShape.cs" />
+    <Compile Include="Core\ShapeStyle.cs" />
+    <Compile Include="Core\Shapes\XText.cs" />
     <Compile Include="Util\ListContractResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\StyleObserver.cs" />
+    <Compile Include="Core\Editor\Observer.cs" />
     <Compile Include="Window1.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
     <Compile Include="LayerElement.cs" />
-    <Compile Include="ShapeRenderer.cs" />
+    <Compile Include="Renderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\ContainerControl.xaml">

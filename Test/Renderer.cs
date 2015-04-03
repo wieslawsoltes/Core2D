@@ -12,7 +12,7 @@ using Test.Core;
 
 namespace Test
 {
-    public class ShapeRenderer : XObject, IRenderer
+    public class Renderer : ObservableObject, IRenderer
     {
         private bool _drawPoints;
 
@@ -34,19 +34,19 @@ namespace Test
         private bool _enableQBezierCache = true;
         private bool _enableTextCache = true;
 
-        private IDictionary<XStyle, Tuple<Brush, Pen>> _styleCache;
+        private IDictionary<ShapeStyle, Tuple<Brush, Pen>> _styleCache;
         private IDictionary<XBezier, PathGeometry> _bezierCache;
         private IDictionary<XQBezier, PathGeometry> _qbezierCache;
         private IDictionary<XText, FormattedText> _textCache;
 
-        public ShapeRenderer()
+        public Renderer()
         {
             ClearCache();
         }
 
         public static IRenderer Create(bool drawPoints = false)
         {
-            return new ShapeRenderer()
+            return new Renderer()
             {
                 DrawPoints = drawPoints
             };
@@ -54,13 +54,13 @@ namespace Test
 
         public void ClearCache()
         {
-            _styleCache = new Dictionary<XStyle, Tuple<Brush, Pen>>();
+            _styleCache = new Dictionary<ShapeStyle, Tuple<Brush, Pen>>();
             _bezierCache = new Dictionary<XBezier, PathGeometry>();
             _qbezierCache = new Dictionary<XQBezier, PathGeometry>();
             _textCache = new Dictionary<XText, FormattedText>();
         }
 
-        private Brush CreateBrush(XColor color)
+        private Brush CreateBrush(ArgbColor color)
         {
             var brush = new SolidColorBrush(
                 Color.FromArgb(
@@ -72,7 +72,7 @@ namespace Test
             return brush;
         }
 
-        private Pen CreatePen(XColor color, double thickness)
+        private Pen CreatePen(ArgbColor color, double thickness)
         {
             var brush = CreateBrush(color);
             var pen = new Pen(brush, thickness);
@@ -326,7 +326,7 @@ namespace Test
             _dc.DrawGeometry(qbezier.IsFilled ? fill : null, stroke, pg);
         }
 
-        private Point GetTextOrigin(XStyle style, Rect rect, FormattedText ft)
+        private Point GetTextOrigin(ShapeStyle style, Rect rect, FormattedText ft)
         {
             double ox, oy;
 

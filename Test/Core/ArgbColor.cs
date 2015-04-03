@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XColor : XObject
+    public class ArgbColor : ObservableObject
     {
         private byte _a;
         private byte _r;
@@ -67,9 +67,9 @@ namespace Test.Core
             }
         }
 
-        public static XColor Create(byte a, byte r, byte g, byte b)
+        public static ArgbColor Create(byte a, byte r, byte g, byte b)
         {
-            return new XColor() { A = a, R = r, G = g, B = b };
+            return new ArgbColor() { A = a, R = r, G = g, B = b };
         }
     }
 }

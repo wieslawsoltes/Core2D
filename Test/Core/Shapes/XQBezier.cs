@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XRectangle : XShape
+    public class XQBezier : BaseShape
     {
-        private XStyle _style;
-        private XPoint _topLeft;
-        private XPoint _bottomRight;
+        private ShapeStyle _style;
+        private XPoint _point1;
+        private XPoint _point2;
+        private XPoint _point3;
         private bool _isFilled;
 
-        public XStyle Style
+        public ShapeStyle Style
         {
             get { return _style; }
             set
@@ -28,28 +29,41 @@ namespace Test.Core
             }
         }
 
-        public XPoint TopLeft
+        public XPoint Point1
         {
-            get { return _topLeft; }
+            get { return _point1; }
             set
             {
-                if (value != _topLeft)
+                if (value != _point1)
                 {
-                    _topLeft = value;
-                    Notify("TopLeft");
+                    _point1 = value;
+                    Notify("Point1");
                 }
             }
         }
 
-        public XPoint BottomRight
+        public XPoint Point2
         {
-            get { return _bottomRight; }
+            get { return _point2; }
             set
             {
-                if (value != _bottomRight)
+                if (value != _point2)
                 {
-                    _bottomRight = value;
-                    Notify("BottomRight");
+                    _point2 = value;
+                    Notify("Point2");
+                }
+            }
+        }
+
+        public XPoint Point3
+        {
+            get { return _point3; }
+            set
+            {
+                if (value != _point3)
+                {
+                    _point3 = value;
+                    Notify("Point3");
                 }
             }
         }
@@ -72,34 +86,37 @@ namespace Test.Core
             renderer.Draw(dc, this, dx, dy);
             if (renderer.DrawPoints)
             {
-                _topLeft.Draw(dc, renderer, _topLeft.X, _topLeft.Y);
-                _bottomRight.Draw(dc, renderer, _bottomRight.X, _bottomRight.Y);
+                _point1.Draw(dc, renderer, _point1.X, _point1.Y);
+                _point2.Draw(dc, renderer, _point2.X, _point2.Y);
+                _point3.Draw(dc, renderer, _point3.X, _point3.Y);
             }
         }
 
-        public static XRectangle Create(
+        public static XQBezier Create(
             double x1, double y1,
             double x2, double y2,
-            XStyle style,
-            XShape point,
+            double x3, double y3,
+            ShapeStyle style,
+            BaseShape point,
             bool isFilled = false)
         {
-            return new XRectangle()
+            return new XQBezier()
             {
                 Style = style,
-                TopLeft = XPoint.Create(x1, y1, point),
-                BottomRight = XPoint.Create(x2, y2, point),
+                Point1 = XPoint.Create(x1, y1, point),
+                Point2 = XPoint.Create(x2, y2, point),
+                Point3 = XPoint.Create(x3, y3, point),
                 IsFilled = isFilled
             };
         }
 
-        public static XRectangle Create(
+        public static XQBezier Create(
             double x, double y,
-            XStyle style,
-            XShape point,
+            ShapeStyle style,
+            BaseShape point,
             bool isFilled = false)
         {
-            return Create(x, y, x, y, style, point, isFilled);
+            return Create(x, y, x, y, x, y, style, point, isFilled);
         }
     }
 }
