@@ -32,150 +32,179 @@ namespace Test
         {
             var editor = Editor.Create(Container.Create(), Renderer.Create());
 
-            editor.NewCommand = new DelegateCommand(() => 
-            {
-                editor.Load(Container.Create());
-            });
-
-            editor.OpenCommand = new DelegateCommand(() => 
-            {
-                Open(editor);
-            });
-
-            editor.SaveAsCommand = new DelegateCommand(() => 
-            {
-                SaveAs(editor);
-            });
-
-            editor.ExitCommand = new DelegateCommand(() => 
-            {
-                Close();
-            });
-
-            editor.ClearCommand = new DelegateCommand(() => 
-            {
-                Clear(editor);
-            });
-
-            editor.ToolNoneCommand = new DelegateCommand(() => 
-            {
-                editor.CurrentTool = Tool.None;
-            });
-
-            editor.ToolLineCommand = new DelegateCommand(() => 
-            {
-                editor.CurrentTool = Tool.Line;
-            });
-
-            editor.ToolRectangleCommand = new DelegateCommand(() => 
-            {
-                editor.CurrentTool = Tool.Rectangle;
-            });
-
-            editor.ToolEllipseCommand = new DelegateCommand(() => 
-            {
-                editor.CurrentTool = Tool.Ellipse;
-            });
-
-            editor.ToolBezierCommand = new DelegateCommand(() => 
-            {
-                editor.CurrentTool = Tool.Bezier;
-            });
-
-            editor.ToolQBezierCommand = new DelegateCommand(() => 
-            {
-                editor.CurrentTool = Tool.QBezier;
-            });
-
-            editor.ToolTextCommand = new DelegateCommand(() =>
-            {
-                editor.CurrentTool = Tool.Text;
-            });
-
-            editor.DefaultIsFilledCommand = new DelegateCommand(() => 
-            {
-                editor.DefaultIsFilled = !editor.DefaultIsFilled;
-            });
-
-            editor.SnapToGridCommand = new DelegateCommand(() =>
-            {
-                editor.SnapToGrid = !editor.SnapToGrid;
-            });
-
-            editor.DrawPointsCommand = new DelegateCommand(() =>
-            {
-                editor.Renderer.DrawPoints = !editor.Renderer.DrawPoints;
-                editor.Container.Invalidate();
-            });
-
-            editor.AddLayerCommand = new DelegateCommand(() =>
-            {
-                editor.Container.Layers.Add(Layer.Create("New"));
-            });
-
-            editor.RemoveLayerCommand = new DelegateCommand(() =>
-            {
-                editor.RemoveCurrentLayer();
-            });
-
-            editor.AddStyleCommand = new DelegateCommand(() =>
-            {
-                editor.Container.Styles.Add(ShapeStyle.Create("New"));
-            });
-
-            editor.RemoveStyleCommand = new DelegateCommand(() =>
-            {
-                editor.RemoveCurrentStyle();
-            });
-
-            editor.RemoveShapeCommand = new DelegateCommand(() =>
-            {
-                editor.RemoveCurrentShape();
-            });
-
-            editor.GroupSelectedCommand = new DelegateCommand(() => 
-            {
-                editor.GroupSelected();
-            });
-
-            editor.GroupCurrentLayerCommand = new DelegateCommand(() => 
-            {
-                editor.GroupCurrentLayer();
-            });
-
-            canvas.PreviewMouseLeftButtonDown += (s, e) =>
-            {
-                canvas.Focus();
-                if (editor.IsLeftAvailable())
+            editor.NewCommand = new DelegateCommand(
+                () => 
                 {
-                    var p = e.GetPosition(canvas);
-                    editor.Left(p.X, p.Y);
-                }
-            };
+                    editor.Load(Container.Create());
+                });
 
-            canvas.PreviewMouseRightButtonDown += (s, e) =>
-            {
-                canvas.Focus();
-                if (editor.IsRightAvailable())
+            editor.OpenCommand = new DelegateCommand(
+                () => 
                 {
-                    var p = e.GetPosition(canvas);
-                    editor.Right(p.X, p.Y);
-                }
-            };
+                    Open(editor);
+                });
 
-            canvas.PreviewMouseMove += (s, e) =>
-            {
-                canvas.Focus();
-                if (editor.IsMoveAvailable())
+            editor.SaveAsCommand = new DelegateCommand(
+                () => 
                 {
-                    var p = e.GetPosition(canvas);
-                    editor.Move(p.X, p.Y);
-                }
-            };
+                    SaveAs(editor);
+                });
+
+            editor.ExitCommand = new DelegateCommand(
+                () => 
+                {
+                    Close();
+                });
+
+            editor.ClearCommand = new DelegateCommand(
+                () => 
+                {
+                    Clear(editor);
+                });
+
+            editor.ToolNoneCommand = new DelegateCommand(
+                () => 
+                {
+                    editor.CurrentTool = Tool.None;
+                });
+
+            editor.ToolLineCommand = new DelegateCommand(
+                () => 
+                {
+                    editor.CurrentTool = Tool.Line;
+                });
+
+            editor.ToolRectangleCommand = new DelegateCommand(
+                () => 
+                {
+                    editor.CurrentTool = Tool.Rectangle;
+                });
+
+            editor.ToolEllipseCommand = new DelegateCommand(
+                () => 
+                {
+                    editor.CurrentTool = Tool.Ellipse;
+                });
+
+            editor.ToolBezierCommand = new DelegateCommand(
+                () => 
+                {
+                    editor.CurrentTool = Tool.Bezier;
+                });
+
+            editor.ToolQBezierCommand = new DelegateCommand(
+                () => 
+                {
+                    editor.CurrentTool = Tool.QBezier;
+                });
+
+            editor.ToolTextCommand = new DelegateCommand(
+                () =>
+                {
+                    editor.CurrentTool = Tool.Text;
+                });
+
+            editor.DefaultIsFilledCommand = new DelegateCommand(
+                () => 
+                {
+                    editor.DefaultIsFilled = !editor.DefaultIsFilled;
+                });
+
+            editor.SnapToGridCommand = new DelegateCommand(
+                () =>
+                {
+                    editor.SnapToGrid = !editor.SnapToGrid;
+                });
+
+            editor.DrawPointsCommand = new DelegateCommand(
+                () =>
+                {
+                    editor.Renderer.DrawPoints = !editor.Renderer.DrawPoints;
+                    editor.Container.Invalidate();
+                });
+
+            editor.AddLayerCommand = new DelegateCommand(
+                () =>
+                {
+                    editor.Container.Layers.Add(Layer.Create("New"));
+                });
+
+            editor.RemoveLayerCommand = new DelegateCommand(
+                () =>
+                {
+                    editor.RemoveCurrentLayer();
+                });
+
+            editor.AddStyleCommand = new DelegateCommand(
+                () =>
+                {
+                    editor.Container.Styles.Add(ShapeStyle.Create("New"));
+                });
+
+            editor.RemoveStyleCommand = new DelegateCommand(
+                () =>
+                {
+                    editor.RemoveCurrentStyle();
+                });
+
+            editor.RemoveShapeCommand = new DelegateCommand(
+                () =>
+                {
+                    editor.RemoveCurrentShape();
+                });
+
+            editor.GroupSelectedCommand = new DelegateCommand(
+                () => 
+                {
+                    editor.GroupSelected();
+                });
+
+            editor.GroupCurrentLayerCommand = new DelegateCommand(
+                () => 
+                {
+                    editor.GroupCurrentLayer();
+                });
+
+            canvas.PreviewMouseLeftButtonDown += 
+                (s, e) =>
+                {
+                    canvas.Focus();
+                    if (editor.IsLeftAvailable())
+                    {
+                        var p = e.GetPosition(canvas);
+                        editor.Left(p.X, p.Y);
+                    }
+                };
+
+            canvas.PreviewMouseRightButtonDown += 
+                (s, e) =>
+                {
+                    canvas.Focus();
+                    if (editor.IsRightAvailable())
+                    {
+                        var p = e.GetPosition(canvas);
+                        editor.Right(p.X, p.Y);
+                    }
+                };
+
+            canvas.PreviewMouseMove += 
+                (s, e) =>
+                {
+                    canvas.Focus();
+                    if (editor.IsMoveAvailable())
+                    {
+                        var p = e.GetPosition(canvas);
+                        editor.Move(p.X, p.Y);
+                    }
+                };
+
+            Loaded += 
+                (s, e) => 
+                {
+                    canvas.Focus();
+                };
 
             DataContext = editor;
-
-            Loaded += (s, e) => canvas.Focus();
         }
 
         private static void Open(Editor editor, string path)
