@@ -114,6 +114,7 @@
     <Compile Include="Controls\StylesControl.xaml.cs">
       <DependentUpon>StylesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Demo.cs" />
     <Compile Include="Util\ContainerSerializer.cs" />
     <Compile Include="Controls\ContainerControl.xaml.cs">
       <DependentUpon>ContainerControl.xaml</DependentUpon>
