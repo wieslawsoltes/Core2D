@@ -37,7 +37,8 @@ namespace Test
                 var dlg = new OpenFileDialog()
                 {
                     Filter = "Json Files (*.json)|*.json|All Files (*.*)|*.*",
-                    FilterIndex = 0
+                    FilterIndex = 0,
+                    FileName = ""
                 };
 
                 if (dlg.ShowDialog() == true)
