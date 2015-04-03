@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XContainer : XObject, IContainer
+    public class XContainer : ObservableObject, IContainer
     {
         private double _width;
         private double _height;

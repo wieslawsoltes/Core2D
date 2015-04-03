@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XLayer : XObject, ILayer
+    public class XLayer : ObservableObject, ILayer
     {
         private string _name;
         private bool _isVisible;

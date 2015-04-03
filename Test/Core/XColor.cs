@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XColor : XObject
+    public class XColor : ObservableObject
     {
         private byte _a;
         private byte _r;

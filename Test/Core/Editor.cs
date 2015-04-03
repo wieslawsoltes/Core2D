@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace Test.Core
 {
-    public class Editor : XObject
+    public class Editor : ObservableObject
     {
         public ICommand NewCommand { get; set; }
         public ICommand OpenCommand { get; set; }

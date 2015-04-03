@@ -12,7 +12,7 @@ using Test.Core;
 
 namespace Test
 {
-    public class Renderer : XObject, IRenderer
+    public class Renderer : ObservableObject, IRenderer
     {
         private bool _drawPoints;
 

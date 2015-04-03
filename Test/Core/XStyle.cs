@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XStyle : XObject
+    public class XStyle : ObservableObject
     {
         private string _name;
         private XColor _stroke;

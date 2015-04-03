@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public abstract class XShape : XObject
+    public abstract class XShape : ObservableObject
     {
         public abstract void Draw(object dc, IRenderer renderer, double dx, double dy);
     }
