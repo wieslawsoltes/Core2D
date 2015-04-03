@@ -27,53 +27,12 @@ namespace Test
 
             var editor = Editor.Create(Container.Create(), Renderer.Create());
             
-            editor.NewCommand = new DelegateCommand(() =>
-            {
-                editor.Load(Container.Create());
-            });
-
-            editor.OpenCommand = new DelegateCommand(() =>
-            {
-                var dlg = new OpenFileDialog()
-                {
-                    Filter = "Json Files (*.json)|*.json|All Files (*.*)|*.*",
-                    FilterIndex = 0,
-                    FileName = ""
-                };
-
-                if (dlg.ShowDialog() == true)
-                {
-                    var path = dlg.FileName;
-                    var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
-                    var container = ContainerSerializer.Deserialize(json);
-                    editor.Load(container);
-                }
-            });
-
-            editor.SaveAsCommand = new DelegateCommand(() =>
-            {
-                var dlg = new SaveFileDialog()
-                {
-                    Filter = "Json Files (*.json)|*.json|All Files (*.*)|*.*",
-                    FilterIndex = 0,
-                    FileName = "container"
-                };
-
-                if (dlg.ShowDialog() == true)
-                {
-                    var path = dlg.FileName;
-                    var json = ContainerSerializer.Serialize(editor.Container);
-                    System.IO.File.WriteAllText(path, json, Encoding.UTF8);
-                }
-            });
-
+            editor.NewCommand = new DelegateCommand(() => editor.Load(Container.Create()));
+            editor.OpenCommand = new DelegateCommand(() => Open(editor));
+            editor.SaveAsCommand = new DelegateCommand(() => SaveAs(editor));
             editor.ExitCommand = new DelegateCommand(() => Close());
 
-            editor.ClearCommand = new DelegateCommand(() =>
-            {
-                editor.Container.Clear();
-                editor.Container.Invalidate();
-            });
+            editor.ClearCommand = new DelegateCommand(() => Clear(editor));
 
             editor.ToolNoneCommand = new DelegateCommand(() => editor.CurrentTool = Tool.None);
             editor.ToolLineCommand = new DelegateCommand(() => editor.CurrentTool = Tool.Line);
@@ -153,6 +112,47 @@ namespace Test
             DataContext = editor;
 
             Loaded += (s, e) => canvas.Focus();
+        }
+
+        private static void Open(Editor editor)
+        {
+            var dlg = new OpenFileDialog()
+            {
+                Filter = "Json Files (*.json)|*.json|All Files (*.*)|*.*",
+                FilterIndex = 0,
+                FileName = ""
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                var path = dlg.FileName;
+                var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
+                var container = ContainerSerializer.Deserialize(json);
+                editor.Load(container);
+            }
+        }
+
+        private static void SaveAs(Editor editor)
+        {
+            var dlg = new SaveFileDialog()
+            {
+                Filter = "Json Files (*.json)|*.json|All Files (*.*)|*.*",
+                FilterIndex = 0,
+                FileName = "container"
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                var path = dlg.FileName;
+                var json = ContainerSerializer.Serialize(editor.Container);
+                System.IO.File.WriteAllText(path, json, Encoding.UTF8);
+            }
+        }
+
+        private static void Clear(Editor editor)
+        {
+            editor.Container.Clear();
+            editor.Container.Invalidate();
         }
     }
 }
