@@ -169,6 +169,7 @@ namespace Test.Core
             c.Layers.Add(Layer.Create("Layer1"));
             c.Layers.Add(Layer.Create("Layer2"));
             c.Layers.Add(Layer.Create("Layer3"));
+            c.Layers.Add(Layer.Create("Layer4"));
 
             c.CurrentLayer = c.Layers.FirstOrDefault();
 
