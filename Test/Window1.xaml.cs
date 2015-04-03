@@ -32,23 +32,76 @@ namespace Test
         {
             var editor = Editor.Create(Container.Create(), Renderer.Create());
 
-            editor.NewCommand = new DelegateCommand(() => editor.Load(Container.Create()));
-            editor.OpenCommand = new DelegateCommand(() => Open(editor));
-            editor.SaveAsCommand = new DelegateCommand(() => SaveAs(editor));
-            editor.ExitCommand = new DelegateCommand(() => Close());
+            editor.NewCommand = new DelegateCommand(() => 
+            {
+                editor.Load(Container.Create());
+            });
 
-            editor.ClearCommand = new DelegateCommand(() => Clear(editor));
+            editor.OpenCommand = new DelegateCommand(() => 
+            {
+                Open(editor);
+            });
 
-            editor.ToolNoneCommand = new DelegateCommand(() => editor.CurrentTool = Tool.None);
-            editor.ToolLineCommand = new DelegateCommand(() => editor.CurrentTool = Tool.Line);
-            editor.ToolRectangleCommand = new DelegateCommand(() => editor.CurrentTool = Tool.Rectangle);
-            editor.ToolEllipseCommand = new DelegateCommand(() => editor.CurrentTool = Tool.Ellipse);
-            editor.ToolBezierCommand = new DelegateCommand(() => editor.CurrentTool = Tool.Bezier);
-            editor.ToolQBezierCommand = new DelegateCommand(() => editor.CurrentTool = Tool.QBezier);
-            editor.ToolTextCommand = new DelegateCommand(() => editor.CurrentTool = Tool.Text);
+            editor.SaveAsCommand = new DelegateCommand(() => 
+            {
+                SaveAs(editor);
+            });
 
-            editor.DefaultIsFilledCommand = new DelegateCommand(() => editor.DefaultIsFilled = !editor.DefaultIsFilled);
-            editor.SnapToGridCommand = new DelegateCommand(() => editor.SnapToGrid = !editor.SnapToGrid);
+            editor.ExitCommand = new DelegateCommand(() => 
+            {
+                Close();
+            });
+
+            editor.ClearCommand = new DelegateCommand(() => 
+            {
+                Clear(editor);
+            });
+
+            editor.ToolNoneCommand = new DelegateCommand(() => 
+            {
+                editor.CurrentTool = Tool.None;
+            });
+
+            editor.ToolLineCommand = new DelegateCommand(() => 
+            {
+                editor.CurrentTool = Tool.Line;
+            });
+
+            editor.ToolRectangleCommand = new DelegateCommand(() => 
+            {
+                editor.CurrentTool = Tool.Rectangle;
+            });
+
+            editor.ToolEllipseCommand = new DelegateCommand(() => 
+            {
+                editor.CurrentTool = Tool.Ellipse;
+            });
+
+            editor.ToolBezierCommand = new DelegateCommand(() => 
+            {
+                editor.CurrentTool = Tool.Bezier;
+            });
+
+            editor.ToolQBezierCommand = new DelegateCommand(() => 
+            {
+                editor.CurrentTool = Tool.QBezier;
+            });
+
+            editor.ToolTextCommand = new DelegateCommand(() =>
+            {
+                editor.CurrentTool = Tool.Text;
+            });
+
+            editor.DefaultIsFilledCommand = new DelegateCommand(() => 
+            {
+                editor.DefaultIsFilled = !editor.DefaultIsFilled;
+            });
+
+            editor.SnapToGridCommand = new DelegateCommand(() =>
+            {
+                editor.SnapToGrid = !editor.SnapToGrid;
+            });
+
             editor.DrawPointsCommand = new DelegateCommand(() =>
             {
                 editor.Renderer.DrawPoints = !editor.Renderer.DrawPoints;
@@ -80,9 +133,15 @@ namespace Test
                 editor.RemoveCurrentShape();
             });
 
-            editor.GroupSelectedCommand = new DelegateCommand(() => editor.GroupSelected());
+            editor.GroupSelectedCommand = new DelegateCommand(() => 
+            {
+                editor.GroupSelected();
+            });
 
-            editor.GroupCurrentLayerCommand = new DelegateCommand(() => editor.GroupCurrentLayer());
+            editor.GroupCurrentLayerCommand = new DelegateCommand(() => 
+            {
+                editor.GroupCurrentLayer();
+            });
 
             canvas.PreviewMouseLeftButtonDown += (s, e) =>
             {
@@ -119,6 +178,19 @@ namespace Test
             Loaded += (s, e) => canvas.Focus();
         }
 
+        private static void Open(Editor editor, string path)
+        {
+            var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
+            var container = ContainerSerializer.Deserialize(json);
+            editor.Load(container);
+        }
+
+        private static void Save(Editor editor, string path)
+        {
+            var json = ContainerSerializer.Serialize(editor.Container);
+            System.IO.File.WriteAllText(path, json, Encoding.UTF8);
+        }
+
         private static void Open(Editor editor)
         {
             var dlg = new OpenFileDialog()
@@ -130,10 +202,7 @@ namespace Test
 
             if (dlg.ShowDialog() == true)
             {
-                var path = dlg.FileName;
-                var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
-                var container = ContainerSerializer.Deserialize(json);
-                editor.Load(container);
+                Open(editor, dlg.FileName);
             }
         }
 
@@ -148,9 +217,7 @@ namespace Test
 
             if (dlg.ShowDialog() == true)
             {
-                var path = dlg.FileName;
-                var json = ContainerSerializer.Serialize(editor.Container);
-                System.IO.File.WriteAllText(path, json, Encoding.UTF8);
+                Save(editor, dlg.FileName);
             }
         }
 
