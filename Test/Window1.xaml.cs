@@ -202,6 +202,7 @@ namespace Test
                 (s, e) => 
                 {
                     canvas.Focus();
+                    //Demo.All(editor.Container, 10);
                 };
 
             DataContext = editor;
