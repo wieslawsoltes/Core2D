@@ -182,18 +182,28 @@ namespace Test.Core
 
             c.CurrentStyle = c.Styles.FirstOrDefault();
 
-            var pss = ShapeStyle.Create("PointShape", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
-            
+            SetPointShape(c);
+
+            return c;
+        }
+
+        private static void SetPointShape(Container c)
+        {
+            var pss = ShapeStyle.Create(
+                "PointShape", 
+                255, 0, 0, 0, 
+                255, 0, 0, 0, 
+                2.0);
+
             c.PointShape = XEllipse.Create(-3, -3, 3, 3, pss, null, true);
+
             //c.PointShape = XRectangle.Create(-3, -3, 3, 3, pss, null, true);
+
             //c.PointShape = XRectangle.Create(-4, -4, 4, 4, pss, null, false);
-            
+
             //var g = XGroup.Create("PointShape");
             //g.Shapes.Add(XLine.Create(-4, 0, 4, 0, pss, null));
             //g.Shapes.Add(XLine.Create(0, -4, 0, 4, pss, null));
-            //c.PointShape = g;
-
-            return c;
         }
     }
 }
