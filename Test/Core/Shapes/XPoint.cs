@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XPoint : XShape
+    public class XPoint : BaseShape
     {
-        private XShape _shape;
+        private BaseShape _shape;
         private double _x;
         private double _y;
 
-        public XShape Shape
+        public BaseShape Shape
         {
             get { return _shape; }
             set
@@ -61,7 +61,7 @@ namespace Test.Core
             }
         }
 
-        public static XPoint Create(double x, double y, XShape shape)
+        public static XPoint Create(double x, double y, BaseShape shape)
         {
             return new XPoint() { X = x, Y = y, Shape = shape };
         }

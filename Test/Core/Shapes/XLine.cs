@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XLine : XShape
+    public class XLine : BaseShape
     {
-        private XStyle _style;
+        private ShapeStyle _style;
         private XPoint _start;
         private XPoint _end;
 
-        public XStyle Style
+        public ShapeStyle Style
         {
             get { return _style; }
             set
@@ -66,8 +66,8 @@ namespace Test.Core
         public static XLine Create(
             double x1, double y1,
             double x2, double y2,
-            XStyle style,
-            XShape point)
+            ShapeStyle style,
+            BaseShape point)
         {
             return new XLine()
             {
@@ -79,8 +79,8 @@ namespace Test.Core
 
         public static XLine Create(
             double x, double y,
-            XStyle style,
-            XShape point)
+            ShapeStyle style,
+            BaseShape point)
         {
             return Create(x, y, x, y, style, point);
         }

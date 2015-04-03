@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XStyle : ObservableObject
+    public class ShapeStyle : ObservableObject
     {
         private string _name;
-        private XColor _stroke;
-        private XColor _fill;
+        private ArgbColor _stroke;
+        private ArgbColor _fill;
         private double _thickness;
         private string _fontName;
         private double _fontSize;
@@ -32,7 +32,7 @@ namespace Test.Core
             }
         }
 
-        public XColor Stroke
+        public ArgbColor Stroke
         {
             get { return _stroke; }
             set
@@ -45,7 +45,7 @@ namespace Test.Core
             }
         }
 
-        public XColor Fill
+        public ArgbColor Fill
         {
             get { return _fill; }
             set
@@ -123,7 +123,7 @@ namespace Test.Core
             }
         }
      
-        public static XStyle Create(
+        public static ShapeStyle Create(
             string name,
             byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00,
             byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00,
@@ -133,11 +133,11 @@ namespace Test.Core
             TextHAlignment textHAlignment = TextHAlignment.Center,
             TextVAlignment textVAlignment = TextVAlignment.Center)
         {
-            return new XStyle()
+            return new ShapeStyle()
             {
                 Name = name,
-                Stroke = XColor.Create(sa, sr, sg, sb),
-                Fill = XColor.Create(fa, fr, fg, fb),
+                Stroke = ArgbColor.Create(sa, sr, sg, sb),
+                Fill = ArgbColor.Create(fa, fr, fg, fb),
                 Thickness = thickness,
                 FontName = fontName,
                 FontSize = fontSize,

@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XText : XShape
+    public class XText : BaseShape
     {
-        private XStyle _style;
+        private ShapeStyle _style;
         private XPoint _topLeft;
         private XPoint _bottomRight;
         private bool _isFilled;
         private string _text;
 
-        public XStyle Style
+        public ShapeStyle Style
         {
             get { return _style; }
             set
@@ -94,8 +94,8 @@ namespace Test.Core
         public static XText Create(
             double x1, double y1,
             double x2, double y2,
-            XStyle style,
-            XShape point,
+            ShapeStyle style,
+            BaseShape point,
             string text,
             bool isFilled = false)
         {
@@ -111,8 +111,8 @@ namespace Test.Core
 
         public static XText Create(
             double x, double y,
-            XStyle style,
-            XShape point,
+            ShapeStyle style,
+            BaseShape point,
             string text,
             bool isFilled = false)
         {

@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XBezier : XShape
+    public class XBezier : BaseShape
     {
-        private XStyle _style;
+        private ShapeStyle _style;
         private XPoint _point1;
         private XPoint _point2;
         private XPoint _point3;
         private XPoint _point4;
         private bool _isFilled;
 
-        public XStyle Style
+        public ShapeStyle Style
         {
             get { return _style; }
             set
@@ -112,8 +112,8 @@ namespace Test.Core
             double x2, double y2,
             double x3, double y3,
             double x4, double y4,
-            XStyle style,
-            XShape point,
+            ShapeStyle style,
+            BaseShape point,
             bool isFilled = false)
         {
             return new XBezier()
@@ -129,8 +129,8 @@ namespace Test.Core
 
         public static XBezier Create(
             double x, double y,
-            XStyle style,
-            XShape point,
+            ShapeStyle style,
+            BaseShape point,
             bool isFilled = false)
         {
             return Create(x, y, x, y, x, y, x, y, style, point, isFilled);

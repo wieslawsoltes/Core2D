@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XContainer : ObservableObject, IContainer
+    public class Container : ObservableObject, IContainer
     {
         private double _width;
         private double _height;
-        private IList<XStyle> _styles;
-        private XStyle _currentStyle;
-        private XShape _pointShape;
+        private IList<ShapeStyle> _styles;
+        private ShapeStyle _currentStyle;
+        private BaseShape _pointShape;
         private IList<ILayer> _layers;
         private ILayer _currentLayer;
         private ILayer _workingLayer;
-        private XShape _currentShape;
+        private BaseShape _currentShape;
 
         public double Width
         {
@@ -47,7 +47,7 @@ namespace Test.Core
             }
         }
 
-        public IList<XStyle> Styles
+        public IList<ShapeStyle> Styles
         {
             get { return _styles; }
             set
@@ -60,7 +60,7 @@ namespace Test.Core
             }
         }
 
-        public XStyle CurrentStyle
+        public ShapeStyle CurrentStyle
         {
             get { return _currentStyle; }
             set
@@ -73,7 +73,7 @@ namespace Test.Core
             }
         }
 
-        public XShape PointShape
+        public BaseShape PointShape
         {
             get { return _pointShape; }
             set
@@ -125,7 +125,7 @@ namespace Test.Core
             }
         }
 
-        public XShape CurrentShape
+        public BaseShape CurrentShape
         {
             get { return _currentShape; }
             set
@@ -158,31 +158,31 @@ namespace Test.Core
 
         public static IContainer Create(double width = 800, double height = 600)
         {
-            var c = new XContainer()
+            var c = new Container()
             {
                 Width = width,
                 Height = height,
                 Layers = new ObservableCollection<ILayer>(),
-                Styles = new ObservableCollection<XStyle>()
+                Styles = new ObservableCollection<ShapeStyle>()
             };
 
-            c.Layers.Add(XLayer.Create("Layer1"));
-            c.Layers.Add(XLayer.Create("Layer2"));
-            c.Layers.Add(XLayer.Create("Layer3"));
+            c.Layers.Add(Layer.Create("Layer1"));
+            c.Layers.Add(Layer.Create("Layer2"));
+            c.Layers.Add(Layer.Create("Layer3"));
 
             c.CurrentLayer = c.Layers.FirstOrDefault();
 
-            c.WorkingLayer = XLayer.Create("Working");
+            c.WorkingLayer = Layer.Create("Working");
 
-            c.Styles.Add(XStyle.Create("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
-            c.Styles.Add(XStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
-            c.Styles.Add(XStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
-            c.Styles.Add(XStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
-            c.Styles.Add(XStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
+            c.Styles.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
+            c.Styles.Add(ShapeStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
+            c.Styles.Add(ShapeStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
+            c.Styles.Add(ShapeStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
+            c.Styles.Add(ShapeStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
 
             c.CurrentStyle = c.Styles.FirstOrDefault();
 
-            var pss = XStyle.Create("PointShape", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
+            var pss = ShapeStyle.Create("PointShape", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
             
             c.PointShape = XEllipse.Create(-3, -3, 3, 3, pss, null, true);
             //c.PointShape = XRectangle.Create(-3, -3, 3, 3, pss, null, true);

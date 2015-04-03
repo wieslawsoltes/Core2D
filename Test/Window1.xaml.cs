@@ -25,11 +25,11 @@ namespace Test
         {
             InitializeComponent();
 
-            var editor = Editor.Create(XContainer.Create(), Renderer.Create());
+            var editor = Editor.Create(Container.Create(), Renderer.Create());
             
             editor.NewCommand = new DelegateCommand(() =>
             {
-                editor.Load(XContainer.Create());
+                editor.Load(Container.Create());
             });
 
             editor.OpenCommand = new DelegateCommand(() =>
@@ -92,7 +92,7 @@ namespace Test
 
             editor.AddLayerCommand = new DelegateCommand(() =>
             {
-                editor.Container.Layers.Add(XLayer.Create("New"));
+                editor.Container.Layers.Add(Layer.Create("New"));
             });
 
             editor.RemoveLayerCommand = new DelegateCommand(() =>
@@ -102,7 +102,7 @@ namespace Test
 
             editor.AddStyleCommand = new DelegateCommand(() =>
             {
-                editor.Container.Styles.Add(XStyle.Create("New", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
+                editor.Container.Styles.Add(ShapeStyle.Create("New", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
             });
 
             editor.RemoveStyleCommand = new DelegateCommand(() =>

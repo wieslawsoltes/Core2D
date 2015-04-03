@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class XEllipse : XShape
+    public class XEllipse : BaseShape
     {
-        private XStyle _style;
+        private ShapeStyle _style;
         private XPoint _topLeft;
         private XPoint _bottomRight;
         private bool _isFilled;
 
-        public XStyle Style
+        public ShapeStyle Style
         {
             get { return _style; }
             set
@@ -80,8 +80,8 @@ namespace Test.Core
         public static XEllipse Create(
             double x1, double y1,
             double x2, double y2,
-            XStyle style,
-            XShape point,
+            ShapeStyle style,
+            BaseShape point,
             bool isFilled = false)
         {
             return new XEllipse()
@@ -95,8 +95,8 @@ namespace Test.Core
 
         public static XEllipse Create(
             double x, double y,
-            XStyle style,
-            XShape point,
+            ShapeStyle style,
+            BaseShape point,
             bool isFilled = false)
         {
             return Create(x, y, x, y, style, point, isFilled);

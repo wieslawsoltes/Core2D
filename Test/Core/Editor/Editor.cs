@@ -44,7 +44,7 @@ namespace Test.Core
 
         private IContainer _container;
         private IRenderer _renderer;
-        private XShape _shape;
+        private BaseShape _shape;
         private Tool _currentTool;
         private State _currentState;
         private bool _defaultIsFilled;
@@ -881,7 +881,7 @@ namespace Test.Core
             return layer;
         }
 
-        public XShape RemoveCurrentShape()
+        public BaseShape RemoveCurrentShape()
         {
             var shape = Container.CurrentShape;
             Container.CurrentLayer.Shapes.Remove(shape);
@@ -890,7 +890,7 @@ namespace Test.Core
             return shape;
         }
 
-        public XStyle RemoveCurrentStyle()
+        public ShapeStyle RemoveCurrentStyle()
         {
             var style = Container.CurrentStyle;
             Container.Styles.Remove(style);

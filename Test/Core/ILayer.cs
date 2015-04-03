@@ -12,7 +12,7 @@ namespace Test.Core
     {
         string Name { get; set; }
         bool IsVisible { get; set; }
-        IList<XShape> Shapes { get; set; }
+        IList<BaseShape> Shapes { get; set; }
         void SetInvalidate(Action invalidate);
         void Invalidate();
     }
