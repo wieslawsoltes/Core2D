@@ -25,8 +25,13 @@ namespace Test
         {
             InitializeComponent();
 
+            InitializeEditor();
+        }
+
+        private void InitializeEditor()
+        {
             var editor = Editor.Create(Container.Create(), Renderer.Create());
-            
+
             editor.NewCommand = new DelegateCommand(() => editor.Load(Container.Create()));
             editor.OpenCommand = new DelegateCommand(() => Open(editor));
             editor.SaveAsCommand = new DelegateCommand(() => SaveAs(editor));
@@ -44,7 +49,7 @@ namespace Test
 
             editor.DefaultIsFilledCommand = new DelegateCommand(() => editor.DefaultIsFilled = !editor.DefaultIsFilled);
             editor.SnapToGridCommand = new DelegateCommand(() => editor.SnapToGrid = !editor.SnapToGrid);
-            editor.DrawPointsCommand = new DelegateCommand(() => 
+            editor.DrawPointsCommand = new DelegateCommand(() =>
             {
                 editor.Renderer.DrawPoints = !editor.Renderer.DrawPoints;
                 editor.Container.Invalidate();
