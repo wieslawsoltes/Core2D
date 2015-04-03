@@ -103,7 +103,7 @@ namespace Test
 
             editor.AddStyleCommand = new DelegateCommand(() =>
             {
-                editor.Container.Styles.Add(ShapeStyle.Create("New", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
+                editor.Container.Styles.Add(ShapeStyle.Create("New"));
             });
 
             editor.RemoveStyleCommand = new DelegateCommand(() =>
