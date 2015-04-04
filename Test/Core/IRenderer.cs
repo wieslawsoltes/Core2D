@@ -16,6 +16,7 @@ namespace Test.Core
         void Draw(object dc, XLine line, double dx, double dy);
         void Draw(object dc, XRectangle rectangle, double dx, double dy);
         void Draw(object dc, XEllipse ellipse, double dx, double dy);
+        void Draw(object dc, XArc arc, double dx, double dy);
         void Draw(object dc, XBezier bezier, double dx, double dy);
         void Draw(object dc, XQBezier qbezier, double dx, double dy);
         void Draw(object dc, XText text, double dx, double dy);
