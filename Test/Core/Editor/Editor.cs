@@ -243,43 +243,41 @@ namespace Test.Core
             double sy = SnapToGrid ? Snap(y, SnapY) : y;
             switch (CurrentTool)
             {
-                // None
                 case Tool.None:
                     {
                         NoneLeft(sx, sy);
                     }
                     break;
-                // Line
                 case Tool.Line:
                     {
                         LineLeft(sx, sy);
                     }
                     break;
-                // Rectangle
                 case Tool.Rectangle:
                     {
                         RectangleLeft(sx, sy);
                     }
                     break;
-                // Ellipse
                 case Tool.Ellipse:
                     {
                         EllipseLeft(sx, sy);
                     }
                     break;
-                // Bezier
+                case Tool.Arc:
+                    {
+                        ArcLeft(sx, sy);
+                    }
+                    break;
                 case Tool.Bezier:
                     {
                         BezierLeft(sx, sy);
                     }
                     break;
-                // QBezier
                 case Tool.QBezier:
                     {
                         QBezierLeft(sx, sy);
                     }
                     break;
-                // Text
                 case Tool.Text:
                     {
                         TextLeft(sx, sy);
@@ -294,43 +292,41 @@ namespace Test.Core
             double sy = SnapToGrid ? Snap(y, SnapY) : y;
             switch (CurrentTool)
             {
-                // None
                 case Tool.None:
                     {
                         NoneRight(sx, sy);
                     }
                     break;
-                // Line
                 case Tool.Line:
                     {
                         LineRight(sx, sy);
                     }
                     break;
-                // Rectangle
                 case Tool.Rectangle:
                     {
                         RectangleRight(sx, sy);
                     }
                     break;
-                // Ellipse
                 case Tool.Ellipse:
                     {
                         EllipseRight(sx, sy);
                     }
                     break;
-                // Bezier
+                case Tool.Arc:
+                    {
+                        ArcRight(sx, sy);
+                    }
+                    break;
                 case Tool.Bezier:
                     {
                         BezierRight(sx, sy);
                     }
                     break;
-                // QBezier
                 case Tool.QBezier:
                     {
                         QBezierRight(sx, sy);
                     }
                     break;
-                // Text
                 case Tool.Text:
                     {
                         TextRight(sx, sy);
@@ -345,43 +341,41 @@ namespace Test.Core
             double sy = SnapToGrid ? Snap(y, SnapY) : y;
             switch (CurrentTool)
             {
-                // None
                 case Tool.None:
                     {
                         NoneMove(sx, sy);
                     }
                     break;
-                // Line
                 case Tool.Line:
                     {
                         LineMove(sx, sy);
                     }
                     break;
-                // Rectangle
                 case Tool.Rectangle:
                     {
                         RectangleMove(sx, sy);
                     }
                     break;
-                // Ellipse
                 case Tool.Ellipse:
                     {
                         EllipseMove(sx, sy);
                     }
                     break;
-                // Bezier
+                case Tool.Arc:
+                    {
+                        ArcMove(sx, sy);
+                    }
+                    break;
                 case Tool.Bezier:
                     {
                         BezierMove(sx, sy);
                     }
                     break;
-                // QBezier
                 case Tool.QBezier:
                     {
                         QBezierMove(sx, sy);
                     }
                     break;
-                // Text
                 case Tool.Text:
                     {
                         TextMove(sx, sy);
@@ -482,7 +476,12 @@ namespace Test.Core
                     break;
             }
         }
-        
+
+        private void ArcLeft(double sx, double sy)
+        {
+            throw new NotImplementedException();
+        }
+
         private void BezierLeft(double sx, double sy)
         {
             switch (CurrentState)
@@ -667,6 +666,11 @@ namespace Test.Core
             }
         }
 
+        private void ArcRight(double sx, double sy)
+        {
+            throw new NotImplementedException();
+        }
+
         private void BezierRight(double sx, double sy)
         {
             switch (CurrentState)
@@ -783,6 +787,11 @@ namespace Test.Core
                     }
                     break;
             }
+        }
+
+        private void ArcMove(double sx, double sy)
+        {
+            throw new NotImplementedException();
         }
 
         private void BezierMove(double sx, double sy)
