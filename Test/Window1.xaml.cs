@@ -50,6 +50,12 @@ namespace Test
                     SaveAs(editor);
                 });
 
+            editor.ExportCommand = new DelegateCommand(
+                () =>
+                {
+                    Export(editor);
+                });
+
             editor.ExitCommand = new DelegateCommand(
                 () => 
                 {
@@ -221,6 +227,13 @@ namespace Test
             System.IO.File.WriteAllText(path, json, Encoding.UTF8);
         }
 
+        private static void Export(Editor editor, string path)
+        {
+            var renderer = new PdfRenderer();
+            renderer.Create(path, editor.Container);
+            System.Diagnostics.Process.Start(path);
+        }
+
         private static void Open(Editor editor)
         {
             var dlg = new OpenFileDialog()
@@ -248,6 +261,21 @@ namespace Test
             if (dlg.ShowDialog() == true)
             {
                 Save(editor, dlg.FileName);
+            }
+        }
+
+        private static void Export(Editor editor)
+        {
+            var dlg = new SaveFileDialog()
+            {
+                Filter = "Pdf Files (*.pdf)|*.pdf|All Files (*.*)|*.*",
+                FilterIndex = 0,
+                FileName = "container"
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                Export(editor, dlg.FileName);
             }
         }
 
