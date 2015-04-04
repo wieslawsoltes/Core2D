@@ -77,6 +77,19 @@
                 </MenuItem.Style>
             </MenuItem>
             <Separator/>
+            <MenuItem Header="_Arc" Command="{Binding ToolArcCommand}" InputGestureText="A">
+                <MenuItem.Style>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="IsCheckable" Value="True"/>
+                        <Setter Property="IsChecked" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CurrentTool}" Value="Arc">
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.Style>
+            </MenuItem>
             <MenuItem Header="_Bezier" Command="{Binding ToolBezierCommand}" InputGestureText="B">
                 <MenuItem.Style>
                     <Style TargetType="MenuItem">
