@@ -51,6 +51,7 @@
                         <KeyBinding Command="{Binding ToolLineCommand}" Key="L" Modifiers=""/>
                         <KeyBinding Command="{Binding ToolRectangleCommand}" Key="R" Modifiers=""/>
                         <KeyBinding Command="{Binding ToolEllipseCommand}" Key="E" Modifiers=""/>
+                        <KeyBinding Command="{Binding ToolArcCommand}" Key="A" Modifiers=""/>
                         <KeyBinding Command="{Binding ToolBezierCommand}" Key="B" Modifiers=""/>
                         <KeyBinding Command="{Binding ToolQBezierCommand}" Key="Q" Modifiers=""/>
                         <KeyBinding Command="{Binding ToolTextCommand}" Key="T" Modifiers=""/>
