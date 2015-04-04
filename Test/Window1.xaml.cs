@@ -92,6 +92,12 @@ namespace Test
                     editor.CurrentTool = Tool.Ellipse;
                 });
 
+            editor.ToolArcCommand = new DelegateCommand(
+                () =>
+                {
+                    editor.CurrentTool = Tool.Arc;
+                });
+
             editor.ToolBezierCommand = new DelegateCommand(
                 () => 
                 {
