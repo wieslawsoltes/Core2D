@@ -203,6 +203,11 @@ namespace Test
                 rx, ry);
         }
 
+        public void Draw(object dc, XArc arc, double dx, double dy)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Draw(object dc, XBezier bezier, double dx, double dy)
         {
             var _dc = dc as DrawingContext;

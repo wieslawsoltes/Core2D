@@ -183,6 +183,11 @@ namespace Test
             }
         }
 
+        public void Draw(object gfx, Core.XArc arc, double dx, double dy)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Draw(object gfx, Core.XBezier bezier, double dx, double dy)
         {
             (gfx as XGraphics).DrawBezier(
