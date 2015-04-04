@@ -30,7 +30,7 @@ namespace Test
 
         private void InitializeEditor()
         {
-            var editor = Editor.Create(Container.Create(), Renderer.Create());
+            var editor = Editor.Create(Container.Create(), WpfRenderer.Create());
 
             editor.NewCommand = new DelegateCommand(
                 () => 

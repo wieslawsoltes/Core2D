@@ -122,7 +122,7 @@
       <DependentUpon>StylesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Demo.cs" />
-    <Compile Include="PdfRenderer.cs" />
+    <Compile Include="Renderers\PdfRenderer.cs" />
     <Compile Include="Util\ContainerSerializer.cs" />
     <Compile Include="Controls\ContainerControl.xaml.cs">
       <DependentUpon>ContainerControl.xaml</DependentUpon>
@@ -161,7 +161,7 @@
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
     <Compile Include="LayerElement.cs" />
-    <Compile Include="Renderer.cs" />
+    <Compile Include="Renderers\WpfRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\ContainerControl.xaml">
