@@ -24,6 +24,7 @@ namespace Test.Core
         public ICommand ToolLineCommand { get; set; }
         public ICommand ToolRectangleCommand { get; set; }
         public ICommand ToolEllipseCommand { get; set; }
+        public ICommand ToolArcCommand { get; set; }
         public ICommand ToolBezierCommand { get; set; }
         public ICommand ToolQBezierCommand { get; set; }
         public ICommand ToolTextCommand { get; set; }
