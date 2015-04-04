@@ -64,6 +64,12 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\packages\PDFsharp.1.50.3638-beta\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting">
+      <HintPath>..\packages\PDFsharp.1.50.3638-beta\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -78,6 +84,7 @@
     <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.ObjectModel" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Xaml">
@@ -115,6 +122,7 @@
       <DependentUpon>StylesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Demo.cs" />
+    <Compile Include="PdfRenderer.cs" />
     <Compile Include="Util\ContainerSerializer.cs" />
     <Compile Include="Controls\ContainerControl.xaml.cs">
       <DependentUpon>ContainerControl.xaml</DependentUpon>
