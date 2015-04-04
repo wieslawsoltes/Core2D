@@ -15,6 +15,8 @@
             <Separator/>
             <MenuItem Header="Save _As..." Command="{Binding SaveAsCommand}" InputGestureText="Ctrl+S"/>
             <Separator/>
+            <MenuItem Header="_Export..." Command="{Binding ExportCommand}" InputGestureText="Ctrl+E"/>
+            <Separator/>
             <MenuItem Header="E_xit" Command="{Binding ExitCommand}" InputGestureText="Alt+F4"/>
         </MenuItem>
         <MenuItem Header="_Edit">

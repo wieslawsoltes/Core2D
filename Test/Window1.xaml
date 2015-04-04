@@ -16,6 +16,7 @@
         <KeyBinding Command="{Binding NewCommand}" Gesture="Ctrl+N"/>
         <KeyBinding Command="{Binding OpenCommand}" Gesture="Ctrl+O"/>
         <KeyBinding Command="{Binding SaveAsCommand}" Gesture="Ctrl+S"/>
+        <KeyBinding Command="{Binding ExportCommand}" Gesture="Ctrl+E"/>
         <KeyBinding Command="{Binding ExitCommand}" Gesture="Alt+F4"/>
         <KeyBinding Command="{Binding GroupSelectedCommand}" Gesture="Ctrl+Shift+G"/>
         <KeyBinding Command="{Binding GroupCurrentLayerCommand}" Gesture="Ctrl+Shift+G"/>
