@@ -15,6 +15,7 @@ namespace Test.Core
         public ICommand NewCommand { get; set; }
         public ICommand OpenCommand { get; set; }
         public ICommand SaveAsCommand { get; set; }
+        public ICommand ExportCommand { get; set; }
         public ICommand ExitCommand { get; set; }
 
         public ICommand ClearCommand { get; set; }
