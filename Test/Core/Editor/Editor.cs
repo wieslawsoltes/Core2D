@@ -479,7 +479,32 @@ namespace Test.Core
 
         private void ArcLeft(double sx, double sy)
         {
-            throw new NotImplementedException();
+            switch (CurrentState)
+            {
+                case State.None:
+                    {
+                        _shape = XArc.Create(
+                            sx, sy,
+                            _container.CurrentStyle,
+                            _container.PointShape,
+                            DefaultIsFilled);
+                        _container.WorkingLayer.Shapes.Add(_shape);
+                        _container.WorkingLayer.Invalidate();
+                        CurrentState = State.One;
+                    }
+                    break;
+                case State.One:
+                    {
+                        var arc = _shape as XArc;
+                        arc.Point2.X = sx;
+                        arc.Point2.Y = sy;
+                        _container.WorkingLayer.Shapes.Remove(_shape);
+                        _container.CurrentLayer.Shapes.Add(_shape);
+                        _container.Invalidate();
+                        CurrentState = State.None;
+                    }
+                    break;
+            }
         }
 
         private void BezierLeft(double sx, double sy)
@@ -668,7 +693,20 @@ namespace Test.Core
 
         private void ArcRight(double sx, double sy)
         {
-            throw new NotImplementedException();
+            switch (CurrentState)
+            {
+                case State.None:
+                    {
+                    }
+                    break;
+                case State.One:
+                    {
+                        _container.WorkingLayer.Shapes.Remove(_shape);
+                        _container.WorkingLayer.Invalidate();
+                        CurrentState = State.None;
+                    }
+                    break;
+            }
         }
 
         private void BezierRight(double sx, double sy)
@@ -791,7 +829,21 @@ namespace Test.Core
 
         private void ArcMove(double sx, double sy)
         {
-            throw new NotImplementedException();
+            switch (CurrentState)
+            {
+                case State.None:
+                    {
+                    }
+                    break;
+                case State.One:
+                    {
+                        var arc = _shape as XArc;
+                        arc.Point2.X = sx;
+                        arc.Point2.Y = sy;
+                        _container.WorkingLayer.Invalidate();
+                    }
+                    break;
+            }
         }
 
         private void BezierMove(double sx, double sy)
