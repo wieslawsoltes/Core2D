@@ -12,7 +12,7 @@ using Test.Core;
 
 namespace Test
 {
-    public struct Arc
+    internal struct Arc
     {
         public Point Start;
         public Point End;
