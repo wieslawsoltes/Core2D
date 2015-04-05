@@ -11,8 +11,8 @@ namespace Test.Core
     public class XArc : BaseShape
     {
         private ShapeStyle _style;
-        private XPoint _topLeft;
-        private XPoint _bottomRight;
+        private XPoint _point1;
+        private XPoint _point2;
         private bool _isFilled;
 
         public ShapeStyle Style
@@ -28,28 +28,28 @@ namespace Test.Core
             }
         }
 
-        public XPoint TopLeft
+        public XPoint Point1
         {
-            get { return _topLeft; }
+            get { return _point1; }
             set
             {
-                if (value != _topLeft)
+                if (value != _point1)
                 {
-                    _topLeft = value;
-                    Notify("TopLeft");
+                    _point1 = value;
+                    Notify("Point1");
                 }
             }
         }
 
-        public XPoint BottomRight
+        public XPoint Point2
         {
-            get { return _bottomRight; }
+            get { return _point2; }
             set
             {
-                if (value != _bottomRight)
+                if (value != _point2)
                 {
-                    _bottomRight = value;
-                    Notify("BottomRight");
+                    _point2 = value;
+                    Notify("Point2");
                 }
             }
         }
@@ -72,8 +72,8 @@ namespace Test.Core
             renderer.Draw(dc, this, dx, dy);
             if (renderer.DrawPoints)
             {
-                _topLeft.Draw(dc, renderer, _topLeft.X, _topLeft.Y);
-                _bottomRight.Draw(dc, renderer, _bottomRight.X, _bottomRight.Y);
+                _point1.Draw(dc, renderer, _point1.X, _point1.Y);
+                _point2.Draw(dc, renderer, _point2.X, _point2.Y);
             }
         }
 
@@ -87,8 +87,8 @@ namespace Test.Core
             return new XArc()
             {
                 Style = style,
-                TopLeft = XPoint.Create(x1, y1, point),
-                BottomRight = XPoint.Create(x2, y2, point),
+                Point1 = XPoint.Create(x1, y1, point),
+                Point2 = XPoint.Create(x2, y2, point),
                 IsFilled = isFilled
             };
         }
