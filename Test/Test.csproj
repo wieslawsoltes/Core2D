@@ -123,7 +123,9 @@
     </Compile>
     <Compile Include="Core\Shapes\XArc.cs" />
     <Compile Include="Demo.cs" />
+    <Compile Include="Renderers\PdfArc.cs" />
     <Compile Include="Renderers\PdfRenderer.cs" />
+    <Compile Include="Renderers\WpfArc.cs" />
     <Compile Include="Util\ContainerSerializer.cs" />
     <Compile Include="Controls\ContainerControl.xaml.cs">
       <DependentUpon>ContainerControl.xaml</DependentUpon>

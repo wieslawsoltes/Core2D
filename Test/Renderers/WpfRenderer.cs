@@ -12,32 +12,6 @@ using Test.Core;
 
 namespace Test
 {
-    internal struct WpfArc
-    {
-        public Point Start;
-        public Point End;
-        public Size Radius;
-
-        public static WpfArc FromXArc(XArc arc, double dx, double dy)
-        {
-            double x1 = arc.Point1.X + dx;
-            double y1 = arc.Point1.Y + dy;
-            double x2 = arc.Point2.X + dx;
-            double y2 = arc.Point2.Y + dy;
-
-            double dX = x2 - x1;
-            double dY = y2 - y1;
-            double distance = Math.Sqrt(dX * dX + dY * dY);
-
-            return new WpfArc
-            {
-                Start = new Point(x1, y1),
-                End = new Point(x2, y2),
-                Radius = new Size(distance / 2.0, distance / 2.0)
-            };
-        }
-    }
-
     public class WpfRenderer : ObservableObject, IRenderer
     {
         private bool _drawPoints;
