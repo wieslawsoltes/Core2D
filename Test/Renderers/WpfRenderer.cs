@@ -12,13 +12,13 @@ using Test.Core;
 
 namespace Test
 {
-    internal struct Arc
+    internal struct WpfArc
     {
         public Point Start;
         public Point End;
         public Size Radius;
 
-        public static Arc FromXArc(XArc arc, double dx, double dy)
+        public static WpfArc FromXArc(XArc arc, double dx, double dy)
         {
             double x1 = arc.Point1.X + dx;
             double y1 = arc.Point1.Y + dy;
@@ -29,7 +29,7 @@ namespace Test
             double dY = y2 - y1;
             double distance = Math.Sqrt(dX * dX + dY * dY);
 
-            return new Arc
+            return new WpfArc
             {
                 Start = new Point(x1, y1),
                 End = new Point(x2, y2),
@@ -256,7 +256,7 @@ namespace Test
                     _styleCache.Add(arc.Style, Tuple.Create(fill, stroke));
             }
 
-            var a = Arc.FromXArc(arc, dx, dy);
+            var a = WpfArc.FromXArc(arc, dx, dy);
 
             PathGeometry pg;
             if (_enableArcCache
