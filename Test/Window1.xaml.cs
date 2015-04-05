@@ -235,7 +235,7 @@ namespace Test
 
         private static void Export(Editor editor, string path)
         {
-            var renderer = new PdfRenderer();
+            var renderer = new PdfRenderer() { DrawPoints = editor.Renderer.DrawPoints };
             renderer.Create(path, editor.Container);
             System.Diagnostics.Process.Start(path);
         }
