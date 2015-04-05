@@ -71,6 +71,26 @@ namespace Test
             }
         }
 
+        private static void Arcs(
+            IContainer c,
+            int nshapes,
+            double width,
+            double height,
+            ShapeStyle style,
+            ILayer layer,
+            Random rand)
+        {
+            for (int i = 0; i < nshapes; i++)
+            {
+                double x1 = rand.NextDouble() * width;
+                double y1 = rand.NextDouble() * height;
+                double x2 = rand.NextDouble() * width;
+                double y2 = rand.NextDouble() * height;
+                var a = XArc.Create(x1, y1, x2, y2, style, c.PointShape);
+                layer.Shapes.Add(a);
+            }
+        }
+
         private static void Beziers(
             IContainer c,
             int nshapes,
@@ -146,6 +166,7 @@ namespace Test
             Lines(c, nshapes, width, height, c.Styles[0], c.Layers[0], rand);
             Rectangles(c, nshapes, width, height, c.Styles[1], c.Layers[1], rand);
             Ellipses(c, nshapes, width, height, c.Styles[2], c.Layers[1], rand);
+            Arcs(c, nshapes, width, height, c.Styles[2], c.Layers[1], rand);
             Beziers(c, nshapes, width, height, c.Styles[3], c.Layers[2], rand);
             QBeziers(c, nshapes, width, height, c.Styles[4], c.Layers[2], rand);
             Texts(c, nshapes, width, height, c.Styles[4], c.Layers[3], rand);
