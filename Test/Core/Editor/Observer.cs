@@ -41,7 +41,7 @@ namespace Test.Core
 
             InitializeStyles(_editor.Container);
             InitializeLayers(_editor.Container);
-            //Add(_editor.Container.WorkingLayer);
+            Add(_editor.Container.WorkingLayer);
         }
 
         #region Debug
@@ -129,7 +129,11 @@ namespace Test.Core
             object sender,
             System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Style Property: " + e.PropertyName);
+            Debug(
+                "Style: " + 
+                (sender is ShapeStyle ? (sender as ShapeStyle).Name : sender.GetType().ToString()) + 
+                ", Property: " + 
+                e.PropertyName);
             _invalidateStyles();
         }
 
@@ -137,7 +141,11 @@ namespace Test.Core
             object sender,
             System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Layer Property: " + e.PropertyName);
+            Debug(
+                "Layer: " + 
+                (sender is Layer ? (sender as Layer).Name : sender.GetType().ToString()) + 
+                ", Property: " + 
+                e.PropertyName);
             _invalidateLayers();
         }
 
@@ -145,7 +153,11 @@ namespace Test.Core
             object sender,
             System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Shape Property: " + e.PropertyName);
+            Debug(
+                "Shape: " + 
+                sender.GetType() + 
+                ", Property: " + 
+                e.PropertyName);
             _invalidateShapes();
         }
 
@@ -166,7 +178,7 @@ namespace Test.Core
             style.PropertyChanged += StyleObserver;
             style.Stroke.PropertyChanged += StyleObserver;
             style.Fill.PropertyChanged += StyleObserver;
-            Debug("Add Style");
+            Debug("Add Style: " + style.Name);
         }
 
         private void Remove(ShapeStyle style)
@@ -174,7 +186,7 @@ namespace Test.Core
             style.PropertyChanged -= StyleObserver;
             style.Stroke.PropertyChanged -= StyleObserver;
             style.Fill.PropertyChanged -= StyleObserver;
-            Debug("Remove Style");
+            Debug("Remove Style: " + style.Name);
         }
 
         private void Add(IEnumerable<ShapeStyle> styles)
@@ -208,14 +220,14 @@ namespace Test.Core
         private void Add(Layer layer)
         {
             layer.PropertyChanged += LayerObserver;
-            Debug("Add Layer");
+            Debug("Add Layer: " + layer.Name);
             InitializeShapes(layer);
         }
 
         private void Remove(Layer layer)
         {
             layer.PropertyChanged -= LayerObserver;
-            Debug("Remove Layer");
+            Debug("Remove Layer: " + layer.Name);
             Remove(layer.Shapes);
         }
 
@@ -302,7 +314,7 @@ namespace Test.Core
                 text.BottomRight.PropertyChanged += ShapeObserver;
             }
 
-            Debug("Add Shape");
+            Debug("Add Shape: " + shape.GetType());
         }
 
         private void Remove(BaseShape shape)
@@ -360,7 +372,7 @@ namespace Test.Core
                 text.BottomRight.PropertyChanged -= ShapeObserver;
             }
 
-            Debug("Remove Shape");
+            Debug("Remove Shape: " + shape.GetType());
         }
 
         private void Add(IEnumerable<BaseShape> shapes)
