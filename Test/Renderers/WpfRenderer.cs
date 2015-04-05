@@ -94,7 +94,7 @@ namespace Test
                 new Point(brx + dx, bry + dy));
         }
 
-        public void Render(object dc, ILayer layer)
+        public void Render(object dc, Layer layer)
         {
             var _dc = dc as DrawingContext;
 

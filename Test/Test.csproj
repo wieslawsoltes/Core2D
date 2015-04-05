@@ -135,8 +135,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\Editor\Editor.cs" />
-    <Compile Include="Core\IContainer.cs" />
-    <Compile Include="Core\ILayer.cs" />
     <Compile Include="Core\IRenderer.cs" />
     <Compile Include="Core\Editor\State.cs" />
     <Compile Include="Core\TextHAlignment.cs" />

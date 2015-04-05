@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class Container : ObservableObject, IContainer
+    public class Container : ObservableObject
     {
         private double _width;
         private double _height;
         private IList<ShapeStyle> _styles;
         private ShapeStyle _currentStyle;
         private BaseShape _pointShape;
-        private IList<ILayer> _layers;
-        private ILayer _currentLayer;
-        private ILayer _workingLayer;
+        private IList<Layer> _layers;
+        private Layer _currentLayer;
+        private Layer _workingLayer;
         private BaseShape _currentShape;
 
         public double Width
@@ -86,7 +86,7 @@ namespace Test.Core
             }
         }
 
-        public IList<ILayer> Layers
+        public IList<Layer> Layers
         {
             get { return _layers; }
             set
@@ -99,7 +99,7 @@ namespace Test.Core
             }
         }
 
-        public ILayer CurrentLayer
+        public Layer CurrentLayer
         {
             get { return _currentLayer; }
             set
@@ -112,7 +112,7 @@ namespace Test.Core
             }
         }
 
-        public ILayer WorkingLayer
+        public Layer WorkingLayer
         {
             get { return _workingLayer; }
             set
@@ -156,13 +156,13 @@ namespace Test.Core
             WorkingLayer.Invalidate();
         }
 
-        public static IContainer Create(double width = 800, double height = 600)
+        public static Container Create(double width = 800, double height = 600)
         {
             var c = new Container()
             {
                 Width = width,
                 Height = height,
-                Layers = new ObservableCollection<ILayer>(),
+                Layers = new ObservableCollection<Layer>(),
                 Styles = new ObservableCollection<ShapeStyle>()
             };
 

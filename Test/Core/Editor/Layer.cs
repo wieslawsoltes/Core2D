@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
-    public class Layer : ObservableObject, ILayer
+    public class Layer : ObservableObject
     {
         private string _name;
         private bool _isVisible;
@@ -69,7 +69,7 @@ namespace Test.Core
             }
         }
 
-        public static ILayer Create(string name, bool isVisible = true)
+        public static Layer Create(string name, bool isVisible = true)
         {
             return new Layer()
             {

@@ -35,7 +35,7 @@ namespace Test
         {
             DataContextChanged += (s, e) =>
             {
-                var layer = DataContext as ILayer;
+                var layer = DataContext as Layer;
                 if (layer != null)
                 {
                     layer.SetInvalidate(() => this.InvalidateVisual());
@@ -47,7 +47,7 @@ namespace Test
         {
             base.OnRender(drawingContext);
 
-            var layer = DataContext as ILayer;
+            var layer = DataContext as Layer;
             if (layer != null && layer.IsVisible)
             {
                 if (Renderer != null)

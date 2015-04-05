@@ -12,12 +12,12 @@ namespace Test
     public static class Demo
     {
         private static void Lines(
-            IContainer c,
+            Container c,
             int nshapes,
             double width,
             double height,
             ShapeStyle style,
-            ILayer layer,
+            Layer layer,
             Random rand)
         {
             for (int i = 0; i < nshapes; i++)
@@ -32,12 +32,12 @@ namespace Test
         }
 
         private static void Rectangles(
-            IContainer c,
+            Container c,
             int nshapes,
             double width,
             double height,
             ShapeStyle styles,
-            ILayer layer,
+            Layer layer,
             Random rand)
         {
             for (int i = 0; i < nshapes; i++)
@@ -52,12 +52,12 @@ namespace Test
         }
 
         private static void Ellipses(
-            IContainer c,
+            Container c,
             int nshapes,
             double width,
             double height,
             ShapeStyle style,
-            ILayer layer,
+            Layer layer,
             Random rand)
         {
             for (int i = 0; i < nshapes; i++)
@@ -72,12 +72,12 @@ namespace Test
         }
 
         private static void Arcs(
-            IContainer c,
+            Container c,
             int nshapes,
             double width,
             double height,
             ShapeStyle style,
-            ILayer layer,
+            Layer layer,
             Random rand)
         {
             for (int i = 0; i < nshapes; i++)
@@ -92,12 +92,12 @@ namespace Test
         }
 
         private static void Beziers(
-            IContainer c,
+            Container c,
             int nshapes,
             double width,
             double height,
             ShapeStyle style,
-            ILayer layer,
+            Layer layer,
             Random rand)
         {
             for (int i = 0; i < nshapes; i++)
@@ -116,12 +116,12 @@ namespace Test
         }
 
         private static void QBeziers(
-            IContainer c,
+            Container c,
             int nshapes,
             double width,
             double height,
             ShapeStyle style,
-            ILayer layer,
+            Layer layer,
             Random rand)
         {
             for (int i = 0; i < nshapes; i++)
@@ -138,12 +138,12 @@ namespace Test
         }
 
         private static void Texts(
-            IContainer c,
+            Container c,
             int nshapes,
             double width,
             double height,
             ShapeStyle style,
-            ILayer layer,
+            Layer layer,
             Random rand)
         {
             for (int i = 0; i < nshapes; i++)
@@ -157,7 +157,7 @@ namespace Test
             }
         }
 
-        public static void All(IContainer c, int nshapes)
+        public static void All(Container c, int nshapes)
         {
             var width = c.Width;
             var height = c.Height;

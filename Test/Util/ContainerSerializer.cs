@@ -10,7 +10,7 @@ namespace Test.Util
 {
     public class ContainerSerializer
     {
-        public static string Serialize(IContainer container)
+        public static string Serialize(Container container)
         {
             var json = JsonConvert.SerializeObject(
                 container,
@@ -24,7 +24,7 @@ namespace Test.Util
             return json;
         }
 
-        public static IContainer Deserialize(string json)
+        public static Container Deserialize(string json)
         {
             var container = JsonConvert.DeserializeObject<Container>(
                 json,

@@ -18,7 +18,7 @@ namespace Test
 
         private Func<double, double> ScaleToPage;
 
-        public void Create(string path, Core.IContainer container)
+        public void Create(string path, Core.Container container)
         {
             using (var doc = new PdfDocument())
             {
@@ -27,7 +27,7 @@ namespace Test
             }
         }
 
-        public void Create(string path, IEnumerable<Core.IContainer> containers)
+        public void Create(string path, IEnumerable<Core.Container> containers)
         {
             using (var doc = new PdfDocument())
             {
@@ -39,7 +39,7 @@ namespace Test
             }
         }
 
-        private void Add(PdfDocument doc, Core.IContainer container)
+        private void Add(PdfDocument doc, Core.Container container)
         {
             // create A4 page with landscape orientation
             PdfPage page = doc.AddPage();
@@ -61,7 +61,7 @@ namespace Test
             }
         }
 
-        private void Render(object gfx, Core.IContainer container)
+        private void Render(object gfx, Core.Container container)
         {
             foreach (var layer in container.Layers)
             {
@@ -111,7 +111,7 @@ namespace Test
                 new System.Windows.Point(brx + dx, bry + dy));
         }
 
-        public void Render(object gfx, Core.ILayer layer)
+        public void Render(object gfx, Core.Layer layer)
         {
             foreach (var shape in layer.Shapes)
             {

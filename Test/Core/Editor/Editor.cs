@@ -44,7 +44,7 @@ namespace Test.Core
         public ICommand GroupSelectedCommand { get; set; }
         public ICommand GroupCurrentLayerCommand { get; set; }
 
-        private IContainer _container;
+        private Container _container;
         private IRenderer _renderer;
         private BaseShape _shape;
         private Tool _currentTool;
@@ -56,7 +56,7 @@ namespace Test.Core
         private bool _enableObserver;
         private Observer _observer;
 
-        public IContainer Container
+        public Container Container
         {
             get { return _container; }
             set
@@ -186,7 +186,7 @@ namespace Test.Core
             }
         }
 
-        public static Editor Create(IContainer container, IRenderer renderer)
+        public static Editor Create(Container container, IRenderer renderer)
         {
             var editor = new Editor()
             {
@@ -935,7 +935,7 @@ namespace Test.Core
             }
         }
 
-        public ILayer RemoveCurrentLayer()
+        public Layer RemoveCurrentLayer()
         {
             var layer = Container.CurrentLayer;
             Container.Layers.Remove(layer);
@@ -961,7 +961,7 @@ namespace Test.Core
             return style;
         }
         
-        public void Load(IContainer container)
+        public void Load(Container container)
         {
             Renderer.ClearCache();
 
