@@ -14,6 +14,7 @@ namespace Test.Core
         Line,
         Rectangle,
         Ellipse,
+        Arc,
         Bezier,
         QBezier,
         Text

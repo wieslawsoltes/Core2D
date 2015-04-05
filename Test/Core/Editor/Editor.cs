@@ -24,6 +24,7 @@ namespace Test.Core
         public ICommand ToolLineCommand { get; set; }
         public ICommand ToolRectangleCommand { get; set; }
         public ICommand ToolEllipseCommand { get; set; }
+        public ICommand ToolArcCommand { get; set; }
         public ICommand ToolBezierCommand { get; set; }
         public ICommand ToolQBezierCommand { get; set; }
         public ICommand ToolTextCommand { get; set; }
@@ -242,43 +243,41 @@ namespace Test.Core
             double sy = SnapToGrid ? Snap(y, SnapY) : y;
             switch (CurrentTool)
             {
-                // None
                 case Tool.None:
                     {
                         NoneLeft(sx, sy);
                     }
                     break;
-                // Line
                 case Tool.Line:
                     {
                         LineLeft(sx, sy);
                     }
                     break;
-                // Rectangle
                 case Tool.Rectangle:
                     {
                         RectangleLeft(sx, sy);
                     }
                     break;
-                // Ellipse
                 case Tool.Ellipse:
                     {
                         EllipseLeft(sx, sy);
                     }
                     break;
-                // Bezier
+                case Tool.Arc:
+                    {
+                        ArcLeft(sx, sy);
+                    }
+                    break;
                 case Tool.Bezier:
                     {
                         BezierLeft(sx, sy);
                     }
                     break;
-                // QBezier
                 case Tool.QBezier:
                     {
                         QBezierLeft(sx, sy);
                     }
                     break;
-                // Text
                 case Tool.Text:
                     {
                         TextLeft(sx, sy);
@@ -293,43 +292,41 @@ namespace Test.Core
             double sy = SnapToGrid ? Snap(y, SnapY) : y;
             switch (CurrentTool)
             {
-                // None
                 case Tool.None:
                     {
                         NoneRight(sx, sy);
                     }
                     break;
-                // Line
                 case Tool.Line:
                     {
                         LineRight(sx, sy);
                     }
                     break;
-                // Rectangle
                 case Tool.Rectangle:
                     {
                         RectangleRight(sx, sy);
                     }
                     break;
-                // Ellipse
                 case Tool.Ellipse:
                     {
                         EllipseRight(sx, sy);
                     }
                     break;
-                // Bezier
+                case Tool.Arc:
+                    {
+                        ArcRight(sx, sy);
+                    }
+                    break;
                 case Tool.Bezier:
                     {
                         BezierRight(sx, sy);
                     }
                     break;
-                // QBezier
                 case Tool.QBezier:
                     {
                         QBezierRight(sx, sy);
                     }
                     break;
-                // Text
                 case Tool.Text:
                     {
                         TextRight(sx, sy);
@@ -344,43 +341,41 @@ namespace Test.Core
             double sy = SnapToGrid ? Snap(y, SnapY) : y;
             switch (CurrentTool)
             {
-                // None
                 case Tool.None:
                     {
                         NoneMove(sx, sy);
                     }
                     break;
-                // Line
                 case Tool.Line:
                     {
                         LineMove(sx, sy);
                     }
                     break;
-                // Rectangle
                 case Tool.Rectangle:
                     {
                         RectangleMove(sx, sy);
                     }
                     break;
-                // Ellipse
                 case Tool.Ellipse:
                     {
                         EllipseMove(sx, sy);
                     }
                     break;
-                // Bezier
+                case Tool.Arc:
+                    {
+                        ArcMove(sx, sy);
+                    }
+                    break;
                 case Tool.Bezier:
                     {
                         BezierMove(sx, sy);
                     }
                     break;
-                // QBezier
                 case Tool.QBezier:
                     {
                         QBezierMove(sx, sy);
                     }
                     break;
-                // Text
                 case Tool.Text:
                     {
                         TextMove(sx, sy);
@@ -481,7 +476,37 @@ namespace Test.Core
                     break;
             }
         }
-        
+
+        private void ArcLeft(double sx, double sy)
+        {
+            switch (CurrentState)
+            {
+                case State.None:
+                    {
+                        _shape = XArc.Create(
+                            sx, sy,
+                            _container.CurrentStyle,
+                            _container.PointShape,
+                            DefaultIsFilled);
+                        _container.WorkingLayer.Shapes.Add(_shape);
+                        _container.WorkingLayer.Invalidate();
+                        CurrentState = State.One;
+                    }
+                    break;
+                case State.One:
+                    {
+                        var arc = _shape as XArc;
+                        arc.Point2.X = sx;
+                        arc.Point2.Y = sy;
+                        _container.WorkingLayer.Shapes.Remove(_shape);
+                        _container.CurrentLayer.Shapes.Add(_shape);
+                        _container.Invalidate();
+                        CurrentState = State.None;
+                    }
+                    break;
+            }
+        }
+
         private void BezierLeft(double sx, double sy)
         {
             switch (CurrentState)
@@ -666,6 +691,24 @@ namespace Test.Core
             }
         }
 
+        private void ArcRight(double sx, double sy)
+        {
+            switch (CurrentState)
+            {
+                case State.None:
+                    {
+                    }
+                    break;
+                case State.One:
+                    {
+                        _container.WorkingLayer.Shapes.Remove(_shape);
+                        _container.WorkingLayer.Invalidate();
+                        CurrentState = State.None;
+                    }
+                    break;
+            }
+        }
+
         private void BezierRight(double sx, double sy)
         {
             switch (CurrentState)
@@ -778,6 +821,25 @@ namespace Test.Core
                         var ellipse = _shape as XEllipse;
                         ellipse.BottomRight.X = sx;
                         ellipse.BottomRight.Y = sy;
+                        _container.WorkingLayer.Invalidate();
+                    }
+                    break;
+            }
+        }
+
+        private void ArcMove(double sx, double sy)
+        {
+            switch (CurrentState)
+            {
+                case State.None:
+                    {
+                    }
+                    break;
+                case State.One:
+                    {
+                        var arc = _shape as XArc;
+                        arc.Point2.X = sx;
+                        arc.Point2.Y = sy;
                         _container.WorkingLayer.Invalidate();
                     }
                     break;

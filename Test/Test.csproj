@@ -121,6 +121,7 @@
     <Compile Include="Controls\StylesControl.xaml.cs">
       <DependentUpon>StylesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\Shapes\XArc.cs" />
     <Compile Include="Demo.cs" />
     <Compile Include="Renderers\PdfRenderer.cs" />
     <Compile Include="Util\ContainerSerializer.cs" />

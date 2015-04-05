@@ -12,6 +12,32 @@ using Test.Core;
 
 namespace Test
 {
+    internal struct WpfArc
+    {
+        public Point Start;
+        public Point End;
+        public Size Radius;
+
+        public static WpfArc FromXArc(XArc arc, double dx, double dy)
+        {
+            double x1 = arc.Point1.X + dx;
+            double y1 = arc.Point1.Y + dy;
+            double x2 = arc.Point2.X + dx;
+            double y2 = arc.Point2.Y + dy;
+
+            double dX = x2 - x1;
+            double dY = y2 - y1;
+            double distance = Math.Sqrt(dX * dX + dY * dY);
+
+            return new WpfArc
+            {
+                Start = new Point(x1, y1),
+                End = new Point(x2, y2),
+                Radius = new Size(distance / 2.0, distance / 2.0)
+            };
+        }
+    }
+
     public class WpfRenderer : ObservableObject, IRenderer
     {
         private bool _drawPoints;
@@ -30,11 +56,13 @@ namespace Test
         }
 
         private bool _enableStyleCache = true;
+        private bool _enableArcCache = true;
         private bool _enableBezierCache = true;
         private bool _enableQBezierCache = true;
         private bool _enableTextCache = true;
 
         private IDictionary<ShapeStyle, Tuple<Brush, Pen>> _styleCache;
+        private IDictionary<XArc, PathGeometry> _arcCache;
         private IDictionary<XBezier, PathGeometry> _bezierCache;
         private IDictionary<XQBezier, PathGeometry> _qbezierCache;
         private IDictionary<XText, FormattedText> _textCache;
@@ -55,6 +83,7 @@ namespace Test
         public void ClearCache()
         {
             _styleCache = new Dictionary<ShapeStyle, Tuple<Brush, Pen>>();
+            _arcCache = new Dictionary<XArc, PathGeometry>();
             _bezierCache = new Dictionary<XBezier, PathGeometry>();
             _qbezierCache = new Dictionary<XQBezier, PathGeometry>();
             _textCache = new Dictionary<XText, FormattedText>();
@@ -201,6 +230,67 @@ namespace Test
                 stroke,
                 center,
                 rx, ry);
+        }
+
+        public void Draw(object dc, XArc arc, double dx, double dy)
+        {
+            var _dc = dc as DrawingContext;
+
+            Tuple<Brush, Pen> cache;
+            Brush fill;
+            Pen stroke;
+            if (_enableStyleCache
+                && _styleCache.TryGetValue(arc.Style, out cache))
+            {
+                fill = cache.Item1;
+                stroke = cache.Item2;
+            }
+            else
+            {
+                fill = CreateBrush(arc.Style.Fill);
+                stroke = CreatePen(
+                    arc.Style.Stroke,
+                    arc.Style.Thickness);
+
+                if (_enableStyleCache)
+                    _styleCache.Add(arc.Style, Tuple.Create(fill, stroke));
+            }
+
+            var a = WpfArc.FromXArc(arc, dx, dy);
+
+            PathGeometry pg;
+            if (_enableArcCache
+                && _arcCache.TryGetValue(arc, out pg))
+            {
+                var pf = pg.Figures[0];
+                pf.StartPoint = a.Start;
+                pf.IsFilled = arc.IsFilled;
+                var segment = pf.Segments[0] as ArcSegment;
+                segment.Point = a.End;
+                segment.Size = a.Radius;
+            }
+            else
+            {
+                var pf = new PathFigure()
+                {
+                    StartPoint = a.Start,
+                    IsFilled = arc.IsFilled
+                };
+
+                var segment = new ArcSegment(a.End, a.Radius, 0.0, false, SweepDirection.Clockwise, true);
+
+                //segment.Freeze();
+                pf.Segments.Add(segment);
+                //pf.Freeze();
+                pg = new PathGeometry();
+                pg.Figures.Add(pf);
+                //pg.Freeze();
+
+                if (_enableArcCache)
+                    _arcCache.Add(arc, pg);
+            }
+
+            _dc.DrawGeometry(arc.IsFilled ? fill : null, stroke, pg);
         }
 
         public void Draw(object dc, XBezier bezier, double dx, double dy)
