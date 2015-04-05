@@ -183,28 +183,39 @@ namespace Test.Core
 
             c.CurrentStyle = c.Styles.FirstOrDefault();
 
-            SetPointShape(c);
+            CrossPointShape(
+                c, 
+                ShapeStyle.Create("PointShape", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
 
             return c;
         }
 
-        private static void SetPointShape(Container c)
+        public static void EllipsePointShape(Container c, ShapeStyle pss)
         {
-            var pss = ShapeStyle.Create(
-                "PointShape", 
-                255, 0, 0, 0, 
-                255, 0, 0, 0, 
-                2.0);
+            c.PointShape = XEllipse.Create(-4, -4, 4, 4, pss, null, false);
+        }
 
+        public static void FilledEllipsePointShape(Container c, ShapeStyle pss)
+        {
             c.PointShape = XEllipse.Create(-3, -3, 3, 3, pss, null, true);
+        }
 
-            //c.PointShape = XRectangle.Create(-3, -3, 3, 3, pss, null, true);
+        public static void RectanglePointShape(Container c, ShapeStyle pss)
+        {
+            c.PointShape = XRectangle.Create(-4, -4, 4, 4, pss, null, false);
+        }
 
-            //c.PointShape = XRectangle.Create(-4, -4, 4, 4, pss, null, false);
+        public static void FilledRectanglePointShape(Container c, ShapeStyle pss)
+        {
+            c.PointShape = XRectangle.Create(-3, -3, 3, 3, pss, null, true);
+        }
 
-            //var g = XGroup.Create("PointShape");
-            //g.Shapes.Add(XLine.Create(-4, 0, 4, 0, pss, null));
-            //g.Shapes.Add(XLine.Create(0, -4, 0, 4, pss, null));
+        public static void CrossPointShape(Container c, ShapeStyle pss)
+        {
+            var g = XGroup.Create("PointShape");
+            g.Shapes.Add(XLine.Create(-4, 0, 4, 0, pss, null));
+            g.Shapes.Add(XLine.Create(0, -4, 0, 4, pss, null));
+            c.PointShape = g;
         }
     }
 }
