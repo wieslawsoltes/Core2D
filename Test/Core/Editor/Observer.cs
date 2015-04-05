@@ -41,7 +41,7 @@ namespace Test.Core
 
             InitializeStyles(_editor.Container);
             InitializeLayers(_editor.Container);
-            Add(_editor.Container.WorkingLayer);
+            //Add(_editor.Container.WorkingLayer);
         }
 
         #region Debug
