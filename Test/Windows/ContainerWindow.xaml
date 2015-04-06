@@ -11,5 +11,5 @@
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextHintingMode="Auto"
         TextOptions.TextRenderingMode="Auto">
-    <controls:ContainerControl/>
+    <controls:ContainerControl Background="DarkGray"/>
 </Window>

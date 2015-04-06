@@ -7,11 +7,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Test"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="800"
+             Width="{Binding Container.Width}" Height="{Binding Container.Height}">
     <ScrollViewer VerticalScrollBarVisibility="Auto" 
                   HorizontalScrollBarVisibility="Auto" 
                   Focusable="False">
-        <Grid Width="{Binding Container.Width}" Height="{Binding Container.Height}" Background="DarkGray">
+        <Grid Width="{Binding Container.Width}" Height="{Binding Container.Height}" Background="Transparent">
             <ItemsControl ItemsSource="{Binding Container.Layers}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
