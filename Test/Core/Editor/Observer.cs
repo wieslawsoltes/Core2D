@@ -66,13 +66,16 @@ namespace Test.Core
                     Add(e.NewItems.Cast<ShapeStyle>());
                     break;
                 case NotifyCollectionChangedAction.Move:
+                    Debug("Styles Replace");
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     Remove(e.OldItems.Cast<ShapeStyle>());
                     break;
                 case NotifyCollectionChangedAction.Replace:
+                    Debug("Styles Replace");
                     break;
                 case NotifyCollectionChangedAction.Reset:
+                    Debug("Styles Reset");
                     break;
             }
 
@@ -89,13 +92,16 @@ namespace Test.Core
                     Add(e.NewItems.Cast<Layer>());
                     break;
                 case NotifyCollectionChangedAction.Move:
+                    Debug("Layers Replace");
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     Remove(e.OldItems.Cast<Layer>());
                     break;
                 case NotifyCollectionChangedAction.Replace:
+                    Debug("Layers Replace");
                     break;
                 case NotifyCollectionChangedAction.Reset:
+                    Debug("Layers Reset");
                     break;
             }
 
@@ -112,13 +118,16 @@ namespace Test.Core
                     Add(e.NewItems.Cast<BaseShape>());
                     break;
                 case NotifyCollectionChangedAction.Move:
+                    Debug("Shapes Replace");
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     Remove(e.OldItems.Cast<BaseShape>());
                     break;
                 case NotifyCollectionChangedAction.Replace:
+                    Debug("Shapes Replace");
                     break;
                 case NotifyCollectionChangedAction.Reset:
+                    Debug("Shapes Reset");
                     break;
             }
 
