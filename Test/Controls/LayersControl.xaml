@@ -39,7 +39,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel DataContext="{Binding Container.CurrentLayer}" Grid.Row="2">
+        <StackPanel DataContext="{Binding Container.CurrentLayer}" Grid.Row="2" Margin="2">
             <GroupBox Header="Name">
                 <Grid>
                     <Grid.RowDefinitions>
