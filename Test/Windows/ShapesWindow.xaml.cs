@@ -12,14 +12,13 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Test.Controls
+namespace Test.Windows
 {
-    public partial class LayerControl : UserControl
+    public partial class ShapesWindow : Window
     {
-        public LayerControl()
+        public ShapesWindow()
         {
             InitializeComponent();
         }

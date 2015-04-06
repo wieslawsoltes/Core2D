@@ -44,6 +44,11 @@ namespace Test.Core
         public ICommand GroupSelectedCommand { get; set; }
         public ICommand GroupCurrentLayerCommand { get; set; }
 
+        public ICommand LayersWindowCommand { get; set; }
+        public ICommand StylesWindowCommand { get; set; }
+        public ICommand ShapesWindowCommand { get; set; }
+        public ICommand ContainerWindowCommand { get; set; }
+
         private Container _container;
         private IRenderer _renderer;
         private BaseShape _shape;

@@ -7,25 +7,54 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="180">
-    <ListBox ItemsSource="{Binding Container.Layers}" 
-             SelectedItem="{Binding Container.CurrentLayer}" 
-             BorderBrush="{x:Null}">
-        <ListBox.ItemTemplate>
-            <DataTemplate>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
+            <MenuItem Command="{Binding AddLayerCommand}" Header="_+"/>
+            <MenuItem Command="{Binding RemoveLayerCommand}" Header="_-"/>
+        </Menu>
+        <ListBox ItemsSource="{Binding Container.Layers}" 
+                 SelectedItem="{Binding Container.CurrentLayer}" 
+                 BorderBrush="{x:Null}"
+                 Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox IsChecked="{Binding IsVisible}" 
+                                  Margin="0,5,0,5"
+                                  Content="" 
+                                  VerticalAlignment="Stretch"
+                                  HorizontalAlignment="Stretch"
+                                  Grid.Column="0"/>
+                        <TextBlock Text="{Binding Name}" Margin="0,5,0,5" Grid.Column="1"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel DataContext="{Binding Container.CurrentLayer}" Grid.Row="2">
+            <GroupBox Header="Name">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <CheckBox IsChecked="{Binding IsVisible}" 
-                              Margin="0,5,0,5"
-                              Content="" 
-                              VerticalAlignment="Stretch"
-                              HorizontalAlignment="Stretch"
-                              Grid.Column="0"/>
-                    <TextBlock Text="{Binding Name}" Margin="0,5,0,5" Grid.Column="1"/>
+                    <TextBox Text="{Binding Name}" 
+                             TextAlignment="Left" 
+                             VerticalAlignment="Center" 
+                             Margin="1" 
+                             BorderBrush="{x:Null}"/>
                 </Grid>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
 </UserControl>

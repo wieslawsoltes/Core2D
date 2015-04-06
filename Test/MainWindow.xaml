@@ -20,6 +20,10 @@
         <KeyBinding Command="{Binding ExitCommand}" Gesture="Alt+F4"/>
         <KeyBinding Command="{Binding GroupSelectedCommand}" Gesture="Ctrl+Shift+G"/>
         <KeyBinding Command="{Binding GroupCurrentLayerCommand}" Gesture="Ctrl+Shift+G"/>
+        <KeyBinding Command="{Binding LayersWindowCommand}" Gesture="Ctrl+L"/>
+        <KeyBinding Command="{Binding StylesWindowCommand}" Gesture="Ctrl+T"/>
+        <KeyBinding Command="{Binding ShapesWindowCommand}" Gesture="Ctrl+H"/>
+        <KeyBinding Command="{Binding ContainerWindowCommand}" Gesture="Ctrl+R"/>
     </Window.InputBindings>
     <Grid FocusVisualStyle="{x:Null}">
         <Grid.ColumnDefinitions>
@@ -65,47 +69,13 @@
         <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" Background="Transparent" ResizeBehavior="PreviousAndNext"/>
         <TabControl Grid.Row="1" Grid.Column="2" Margin="0,5,5,5">
             <TabItem Header="Layers">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
-                        <MenuItem Command="{Binding AddLayerCommand}" Header="_+"/>
-                        <MenuItem Command="{Binding RemoveLayerCommand}" Header="_-"/>
-                    </Menu>
-                    <controls:LayersControl Grid.Row="1"/>
-                    <controls:LayerControl Grid.Row="2"/>
-                </Grid>
+                <controls:LayersControl/>
             </TabItem>
             <TabItem Header="Styles">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
-                        <MenuItem Command="{Binding AddStyleCommand}" Header="_+"/>
-                        <MenuItem Command="{Binding RemoveStyleCommand}" Header="_-"/>
-                    </Menu>
-                    <controls:StylesControl Grid.Row="1"/>
-                    <controls:StyleControl DataContext="{Binding Container.CurrentStyle}" Grid.Row="2" Margin="2"/>
-                </Grid>
+                <controls:StylesControl/>
             </TabItem>
             <TabItem Header="Shapes">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
-                        <MenuItem Command="{Binding RemoveShapeCommand}" Header="_-"/>
-                    </Menu>
-                    <controls:ShapesControl Grid.Row="1"/>
-                </Grid>
+                <controls:ShapesControl/>
             </TabItem>
         </TabControl>
     </Grid>

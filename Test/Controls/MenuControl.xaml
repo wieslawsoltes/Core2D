@@ -147,5 +147,12 @@
                         IsChecked="{Binding Renderer.DrawPoints, Mode=OneWay}"
                         Command="{Binding DrawPointsCommand}" InputGestureText=""/>
         </MenuItem>
+        <MenuItem Header="_Window">
+            <MenuItem Header="_Layers" Command="{Binding LayersWindowCommand}" InputGestureText="Ctrl+L"/>
+            <MenuItem Header="S_tyles" Command="{Binding StylesWindowCommand}" InputGestureText="Ctrl+T"/>
+            <MenuItem Header="S_hapes" Command="{Binding ShapesWindowCommand}" InputGestureText="Ctrl+H"/>
+            <Separator/>
+            <MenuItem Header="Containe_r" Command="{Binding ContainerWindowCommand}" InputGestureText="Ctrl+R"/>
+        </MenuItem>
     </Menu>
 </UserControl>
