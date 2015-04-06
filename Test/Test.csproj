@@ -80,11 +80,19 @@
     <Compile Include="Renderers\WpfRenderer.cs" />
     <Compile Include="Util\ContainerSerializer.cs" />
     <Compile Include="Util\ListContractResolver.cs" />
+    <Compile Include="Windows\ContainerWindow.xaml.cs">
+      <DependentUpon>ContainerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LayersWindow.xaml.cs">
+      <DependentUpon>LayersWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ShapesWindow.xaml.cs">
+      <DependentUpon>ShapesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StylesWindow.xaml.cs">
+      <DependentUpon>StylesWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\ContainerControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\LayerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -97,10 +105,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ShapesControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\StyleControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -119,9 +123,6 @@
     <Compile Include="Controls\ContainerControl.xaml.cs">
       <DependentUpon>ContainerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LayerControl.xaml.cs">
-      <DependentUpon>LayerControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\LayersControl.xaml.cs">
       <DependentUpon>LayersControl.xaml</DependentUpon>
     </Compile>
@@ -130,9 +131,6 @@
     </Compile>
     <Compile Include="Controls\ShapesControl.xaml.cs">
       <DependentUpon>ShapesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\StyleControl.xaml.cs">
-      <DependentUpon>StyleControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\StylesControl.xaml.cs">
       <DependentUpon>StylesControl.xaml</DependentUpon>
@@ -163,6 +161,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\ContainerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LayersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ShapesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\StylesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -192,9 +206,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Windows\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

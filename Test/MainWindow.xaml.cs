@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Test.Core;
 using Test.Util;
+using Test.Windows;
 
 namespace Test
 {
@@ -178,6 +179,30 @@ namespace Test
                 () => 
                 {
                     editor.GroupCurrentLayer();
+                });
+
+            editor.LayersWindowCommand = new DelegateCommand(
+                () =>
+                {
+                    (new LayersWindow() { Owner = this, DataContext = editor }).Show();
+                });
+
+            editor.StylesWindowCommand = new DelegateCommand(
+                () =>
+                {
+                    (new StylesWindow() { Owner = this, DataContext = editor }).Show();
+                });
+
+            editor.ShapesWindowCommand = new DelegateCommand(
+                () =>
+                {
+                    (new ShapesWindow() { Owner = this, DataContext = editor }).Show();
+                });
+
+            editor.ContainerWindowCommand = new DelegateCommand(
+                () =>
+                {
+                    (new ContainerWindow() { Owner = this, DataContext = editor }).Show();
                 });
 
             canvas.PreviewMouseLeftButtonDown += 
