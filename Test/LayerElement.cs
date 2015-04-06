@@ -31,17 +31,40 @@ namespace Test
             set { SetValue(RendererProperty, value); }
         }
 
+        private Layer _layer = null;
+
         public LayerElement()
         {
             DataContextChanged += (s, e) => Initialize();
+            Unloaded += (s, e) => DeInitialize();
         }
 
-        public void Initialize()
+        private void Invalidate(object sender, InvalidateLayerEventArgs e)
         {
+            this.InvalidateVisual();
+        }
+
+        private void Initialize()
+        {
+            if (_layer != null)
+            {
+                DeInitialize();
+            }
+
             var layer = DataContext as Layer;
             if (layer != null)
             {
-                layer.InvalidateLayer += (s, e) => this.InvalidateVisual();
+                _layer = layer;
+                _layer.InvalidateLayer += Invalidate;
+            }
+        }
+
+        private void DeInitialize()
+        {
+            if (_layer != null)
+            {
+                _layer.InvalidateLayer -= Invalidate;
+                _layer = null;
             }
         }
 
