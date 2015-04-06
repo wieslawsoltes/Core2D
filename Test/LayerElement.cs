@@ -38,7 +38,11 @@ namespace Test
                 var layer = DataContext as Layer;
                 if (layer != null)
                 {
-                    layer.SetInvalidate(() => this.InvalidateVisual());
+                    layer.InvalidateLayer +=
+                        (_s, _e) =>
+                        {
+                            this.InvalidateVisual();
+                        };
                 }
             };
         }

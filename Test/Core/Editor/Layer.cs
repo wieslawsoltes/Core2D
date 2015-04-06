@@ -9,12 +9,16 @@ using System.Threading.Tasks;
 
 namespace Test.Core
 {
+    public class InvalidateLayerEventArgs : EventArgs { }
+    public delegate void InvalidateLayerEventHandler(object sender, InvalidateLayerEventArgs e);
+
     public class Layer : ObservableObject
     {
+        public event InvalidateLayerEventHandler InvalidateLayer;
+
         private string _name;
         private bool _isVisible;
         private IList<BaseShape> _shapes;
-        private Action _invalidate;
 
         public string Name
         {
@@ -56,16 +60,12 @@ namespace Test.Core
             }
         }
 
-        public void SetInvalidate(Action invalidate)
-        {
-            _invalidate = invalidate;
-        }
-
         public void Invalidate()
         {
-            if (_invalidate != null)
+            var handler = InvalidateLayer;
+            if (handler != null)
             {
-                _invalidate();
+                handler(this, new InvalidateLayerEventArgs());
             }
         }
 
