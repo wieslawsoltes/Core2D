@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Test.Core;
 
 namespace Test.Controls
 {
@@ -22,6 +23,48 @@ namespace Test.Controls
         public ContainerControl()
         {
             InitializeComponent();
+
+            Loaded += (s, e) => InitializeCanvas(); 
+        }
+
+        private void InitializeCanvas()
+        {
+            var editor = DataContext as Editor;
+
+            canvas.PreviewMouseLeftButtonDown +=
+                (s, e) =>
+                {
+                    canvas.Focus();
+                    if (editor.IsLeftAvailable())
+                    {
+                        var p = e.GetPosition(canvas);
+                        editor.Left(p.X, p.Y);
+                    }
+                };
+
+            canvas.PreviewMouseRightButtonDown +=
+                (s, e) =>
+                {
+                    canvas.Focus();
+                    if (editor.IsRightAvailable())
+                    {
+                        var p = e.GetPosition(canvas);
+                        editor.Right(p.X, p.Y);
+                    }
+                };
+
+            canvas.PreviewMouseMove +=
+                (s, e) =>
+                {
+                    canvas.Focus();
+                    if (editor.IsMoveAvailable())
+                    {
+                        var p = e.GetPosition(canvas);
+                        editor.Move(p.X, p.Y);
+                    }
+                };
+
+            canvas.Focus();
         }
     }
 }

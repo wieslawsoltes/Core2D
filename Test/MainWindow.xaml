@@ -36,36 +36,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <controls:MenuControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                      HorizontalScrollBarVisibility="Auto" 
-                      Grid.Row="1" 
-                      Grid.Column="0" 
-                      Margin="5,5,0,5"
-                      Focusable="False">
-            <Grid Width="{Binding Container.Width}" Height="{Binding Container.Height}" Background="DarkGray">
-                <controls:ContainerControl/>
-                <Canvas x:Name="canvas" 
-                        Background="Transparent"
-                        Focusable="True"
-                        FocusVisualStyle="{x:Null}"
-                        Width="{Binding Container.Width}" 
-                        Height="{Binding Container.Height}">
-                    <Canvas.InputBindings>
-                        <KeyBinding Command="{Binding ToolNoneCommand}" Key="N" Modifiers=""/>
-                        <KeyBinding Command="{Binding ToolLineCommand}" Key="L" Modifiers=""/>
-                        <KeyBinding Command="{Binding ToolRectangleCommand}" Key="R" Modifiers=""/>
-                        <KeyBinding Command="{Binding ToolEllipseCommand}" Key="E" Modifiers=""/>
-                        <KeyBinding Command="{Binding ToolArcCommand}" Key="A" Modifiers=""/>
-                        <KeyBinding Command="{Binding ToolBezierCommand}" Key="B" Modifiers=""/>
-                        <KeyBinding Command="{Binding ToolQBezierCommand}" Key="Q" Modifiers=""/>
-                        <KeyBinding Command="{Binding ToolTextCommand}" Key="T" Modifiers=""/>
-                        <KeyBinding Command="{Binding DefaultIsFilledCommand}" Key="F" Modifiers=""/>
-                        <KeyBinding Command="{Binding SnapToGridCommand}" Key="G" Modifiers=""/>
-                    </Canvas.InputBindings>
-                    <local:LayerElement DataContext="{Binding Container.WorkingLayer}" Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"/>
-                </Canvas>
-            </Grid>
-        </ScrollViewer>
+        <controls:ContainerControl Grid.Row="1" Grid.Column="0" Margin="5,5,0,5"/>
         <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" Background="Transparent" ResizeBehavior="PreviousAndNext"/>
         <TabControl Grid.Row="1" Grid.Column="2" Margin="0,5,5,5">
             <TabItem Header="Layers">

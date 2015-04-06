@@ -33,24 +33,27 @@ namespace Test
 
         public LayerElement()
         {
-            DataContextChanged += (s, e) =>
+            DataContextChanged += (s, e) => Initialize();
+        }
+
+        public void Initialize()
+        {
+            var layer = DataContext as Layer;
+            if (layer != null)
             {
-                var layer = DataContext as Layer;
-                if (layer != null)
-                {
-                    layer.InvalidateLayer +=
-                        (_s, _e) =>
-                        {
-                            this.InvalidateVisual();
-                        };
-                }
-            };
+                layer.InvalidateLayer += (s, e) => this.InvalidateVisual();
+            }
         }
 
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
 
+            Render(drawingContext);
+        }
+
+        private void Render(DrawingContext drawingContext)
+        {
             var layer = DataContext as Layer;
             if (layer != null && layer.IsVisible)
             {

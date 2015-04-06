@@ -205,43 +205,9 @@ namespace Test
                     (new ContainerWindow() { Owner = this, DataContext = editor }).Show();
                 });
 
-            canvas.PreviewMouseLeftButtonDown += 
-                (s, e) =>
-                {
-                    canvas.Focus();
-                    if (editor.IsLeftAvailable())
-                    {
-                        var p = e.GetPosition(canvas);
-                        editor.Left(p.X, p.Y);
-                    }
-                };
-
-            canvas.PreviewMouseRightButtonDown += 
-                (s, e) =>
-                {
-                    canvas.Focus();
-                    if (editor.IsRightAvailable())
-                    {
-                        var p = e.GetPosition(canvas);
-                        editor.Right(p.X, p.Y);
-                    }
-                };
-
-            canvas.PreviewMouseMove += 
-                (s, e) =>
-                {
-                    canvas.Focus();
-                    if (editor.IsMoveAvailable())
-                    {
-                        var p = e.GetPosition(canvas);
-                        editor.Move(p.X, p.Y);
-                    }
-                };
-
             Loaded += 
                 (s, e) => 
                 {
-                    canvas.Focus();
                     //Demo.All(editor.Container, 10);
                 };
 
