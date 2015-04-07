@@ -8,17 +8,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Core = Test.Core;
 
 namespace Test
 {
-    public class PdfRenderer : Core.IRenderer
+    public class PdfRenderer : Test2d.IRenderer
     {
         public bool DrawPoints { get; set; }
 
         private Func<double, double> ScaleToPage;
 
-        public void Create(string path, Core.Container container)
+        public void Create(string path, Test2d.Container container)
         {
             using (var doc = new PdfDocument())
             {
@@ -27,7 +26,7 @@ namespace Test
             }
         }
 
-        public void Create(string path, IEnumerable<Core.Container> containers)
+        public void Create(string path, IEnumerable<Test2d.Container> containers)
         {
             using (var doc = new PdfDocument())
             {
@@ -39,7 +38,7 @@ namespace Test
             }
         }
 
-        private void Add(PdfDocument doc, Core.Container container)
+        private void Add(PdfDocument doc, Test2d.Container container)
         {
             // create A4 page with landscape orientation
             PdfPage page = doc.AddPage();
@@ -61,7 +60,7 @@ namespace Test
             }
         }
 
-        private void Render(object gfx, Core.Container container)
+        private void Render(object gfx, Test2d.Container container)
         {
             foreach (var layer in container.Layers)
             {
@@ -76,7 +75,7 @@ namespace Test
         {
         }
 
-        private XColor ToXColor(Core.ArgbColor color)
+        private XColor ToXColor(Test2d.ArgbColor color)
         {
             return XColor.FromArgb(
                 color.A,
@@ -85,7 +84,7 @@ namespace Test
                 color.B);
         }
 
-        private XPen ToXPen(Core.ShapeStyle style)
+        private XPen ToXPen(Test2d.ShapeStyle style)
         {
             return new XPen(
                 ToXColor(style.Stroke),
@@ -95,12 +94,12 @@ namespace Test
             };
         }
 
-        private XSolidBrush ToXSolidBrush(Core.ArgbColor color)
+        private XSolidBrush ToXSolidBrush(Test2d.ArgbColor color)
         {
             return new XSolidBrush(ToXColor(color));
         }
 
-        private System.Windows.Rect CreateRect(Core.XPoint tl, Core.XPoint br, double dx, double dy)
+        private System.Windows.Rect CreateRect(Test2d.XPoint tl, Test2d.XPoint br, double dx, double dy)
         {
             double tlx = Math.Min(tl.X, br.X);
             double tly = Math.Min(tl.Y, br.Y);
@@ -111,7 +110,7 @@ namespace Test
                 new System.Windows.Point(brx + dx, bry + dy));
         }
 
-        public void Render(object gfx, Core.Layer layer)
+        public void Render(object gfx, Test2d.Layer layer)
         {
             foreach (var shape in layer.Shapes)
             {
@@ -119,7 +118,7 @@ namespace Test
             }
         }
 
-        public void Draw(object gfx, Core.XLine line, double dx, double dy)
+        public void Draw(object gfx, Test2d.XLine line, double dx, double dy)
         {
             (gfx as XGraphics).DrawLine(
                 ToXPen(line.Style),
@@ -129,7 +128,7 @@ namespace Test
                 ScaleToPage(line.End.Y + dy));
         }
 
-        public void Draw(object gfx, Core.XRectangle rectangle, double dx, double dy)
+        public void Draw(object gfx, Test2d.XRectangle rectangle, double dx, double dy)
         {
             var rect = CreateRect(
                 rectangle.TopLeft,
@@ -157,7 +156,7 @@ namespace Test
             }
         }
 
-        public void Draw(object gfx, Core.XEllipse ellipse, double dx, double dy)
+        public void Draw(object gfx, Test2d.XEllipse ellipse, double dx, double dy)
         {
             var rect = CreateRect(
                 ellipse.TopLeft,
@@ -185,7 +184,7 @@ namespace Test
             }
         }
 
-        public void Draw(object gfx, Core.XArc arc, double dx, double dy)
+        public void Draw(object gfx, Test2d.XArc arc, double dx, double dy)
         {
             var a = PdfArc.FromXArc(arc, dx, dy);
 
@@ -199,7 +198,7 @@ namespace Test
                 a.SweepAngle);
         }
 
-        public void Draw(object gfx, Core.XBezier bezier, double dx, double dy)
+        public void Draw(object gfx, Test2d.XBezier bezier, double dx, double dy)
         {
             (gfx as XGraphics).DrawBezier(
                 ToXPen(bezier.Style),
@@ -213,7 +212,7 @@ namespace Test
                 ScaleToPage(bezier.Point4.Y));
         }
 
-        public void Draw(object gfx, Core.XQBezier qbezier, double dx, double dy)
+        public void Draw(object gfx, Test2d.XQBezier qbezier, double dx, double dy)
         {
             double x1 = qbezier.Point1.X;
             double y1 = qbezier.Point1.Y;
@@ -232,7 +231,7 @@ namespace Test
                 ScaleToPage(x4 + dx), ScaleToPage(y4 + dy));
         }
 
-        public void Draw(object gfx, Core.XText text, double dx, double dy)
+        public void Draw(object gfx, Test2d.XText text, double dx, double dy)
         {
             XPdfFontOptions options = new XPdfFontOptions(
                 PdfFontEncoding.Unicode,
@@ -258,26 +257,26 @@ namespace Test
             XStringFormat format = new XStringFormat();
             switch (text.Style.TextHAlignment)
             {
-                case Core.TextHAlignment.Left:
+                case Test2d.TextHAlignment.Left:
                     format.Alignment = XStringAlignment.Near;
                     break;
-                case Core.TextHAlignment.Center:
+                case Test2d.TextHAlignment.Center:
                     format.Alignment = XStringAlignment.Center;
                     break;
-                case Core.TextHAlignment.Right:
+                case Test2d.TextHAlignment.Right:
                     format.Alignment = XStringAlignment.Far;
                     break;
             }
 
             switch (text.Style.TextVAlignment)
             {
-                case Core.TextVAlignment.Top:
+                case Test2d.TextVAlignment.Top:
                     format.LineAlignment = XLineAlignment.Near;
                     break;
-                case Core.TextVAlignment.Center:
+                case Test2d.TextVAlignment.Center:
                     format.LineAlignment = XLineAlignment.Center;
                     break;
-                case Core.TextVAlignment.Bottom:
+                case Test2d.TextVAlignment.Bottom:
                     format.LineAlignment = XLineAlignment.Far;
                     break;
             }

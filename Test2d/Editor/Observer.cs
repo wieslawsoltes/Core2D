@@ -8,9 +8,8 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Test.Core;
 
-namespace Test.Core
+namespace Test2d
 {
     public class Observer
     {

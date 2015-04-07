@@ -6,14 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test.Core
+namespace Test2d
 {
-    public class XQBezier : BaseShape
+    public class XBezier : BaseShape
     {
         private ShapeStyle _style;
         private XPoint _point1;
         private XPoint _point2;
         private XPoint _point3;
+        private XPoint _point4;
         private bool _isFilled;
 
         public ShapeStyle Style
@@ -68,6 +69,19 @@ namespace Test.Core
             }
         }
 
+        public XPoint Point4
+        {
+            get { return _point4; }
+            set
+            {
+                if (value != _point4)
+                {
+                    _point4 = value;
+                    Notify("Point4");
+                }
+            }
+        }
+
         public bool IsFilled
         {
             get { return _isFilled; }
@@ -89,34 +103,37 @@ namespace Test.Core
                 _point1.Draw(dc, renderer, _point1.X, _point1.Y);
                 _point2.Draw(dc, renderer, _point2.X, _point2.Y);
                 _point3.Draw(dc, renderer, _point3.X, _point3.Y);
+                _point4.Draw(dc, renderer, _point4.X, _point4.Y);
             }
         }
 
-        public static XQBezier Create(
+        public static XBezier Create(
             double x1, double y1,
             double x2, double y2,
             double x3, double y3,
+            double x4, double y4,
             ShapeStyle style,
             BaseShape point,
             bool isFilled = false)
         {
-            return new XQBezier()
+            return new XBezier()
             {
                 Style = style,
                 Point1 = XPoint.Create(x1, y1, point),
                 Point2 = XPoint.Create(x2, y2, point),
                 Point3 = XPoint.Create(x3, y3, point),
+                Point4 = XPoint.Create(x4, y4, point),
                 IsFilled = isFilled
             };
         }
 
-        public static XQBezier Create(
+        public static XBezier Create(
             double x, double y,
             ShapeStyle style,
             BaseShape point,
             bool isFilled = false)
         {
-            return Create(x, y, x, y, x, y, style, point, isFilled);
+            return Create(x, y, x, y, x, y, x, y, style, point, isFilled);
         }
     }
 }

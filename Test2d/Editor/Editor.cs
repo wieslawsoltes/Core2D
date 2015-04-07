@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Test.Core
+namespace Test2d
 {
     public class Editor : ObservableObject
     {

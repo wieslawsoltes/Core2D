@@ -6,15 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test.Core
+namespace Test2d
 {
-    public class XText : BaseShape
+    public class XEllipse : BaseShape
     {
         private ShapeStyle _style;
         private XPoint _topLeft;
         private XPoint _bottomRight;
         private bool _isFilled;
-        private string _text;
 
         public ShapeStyle Style
         {
@@ -67,20 +66,7 @@ namespace Test.Core
                 }
             }
         }
-        
-        public string Text
-        {
-            get { return _text; }
-            set
-            {
-                if (value != _text)
-                {
-                    _text = value;
-                    Notify("Text");
-                }
-            }
-        }
-        
+
         public override void Draw(object dc, IRenderer renderer, double dx, double dy)
         {
             renderer.Draw(dc, this, dx, dy);
@@ -90,33 +76,30 @@ namespace Test.Core
                 _bottomRight.Draw(dc, renderer, _bottomRight.X, _bottomRight.Y);
             }
         }
-        
-        public static XText Create(
+
+        public static XEllipse Create(
             double x1, double y1,
             double x2, double y2,
             ShapeStyle style,
             BaseShape point,
-            string text,
             bool isFilled = false)
         {
-            return new XText()
+            return new XEllipse()
             {
                 Style = style,
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
-                IsFilled = isFilled,
-                Text = text
+                IsFilled = isFilled
             };
         }
 
-        public static XText Create(
+        public static XEllipse Create(
             double x, double y,
             ShapeStyle style,
             BaseShape point,
-            string text,
             bool isFilled = false)
         {
-            return Create(x, y, x, y, style, point, text, isFilled);
+            return Create(x, y, x, y, style, point, isFilled);
         }
     }
 }
