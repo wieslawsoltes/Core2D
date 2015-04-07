@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test.Core
+namespace Test2d
 {
-    public enum TextVAlignment
+    public enum TextHAlignment
     {
-        Top,
+        Left,
         Center,
-        Bottom
+        Right
     }
 }

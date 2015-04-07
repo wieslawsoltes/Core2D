@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test.Core
+namespace Test2d
 {
     public class Container : ObservableObject
     {

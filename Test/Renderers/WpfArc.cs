@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using Test.Core;
+using Test2d;
 
 namespace Test
 {

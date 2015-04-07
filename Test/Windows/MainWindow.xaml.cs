@@ -17,11 +17,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Test.Core;
+using Test2d;
 using Test.Util;
-using Test.Windows;
 
-namespace Test
+namespace Test.Windows
 {
     public partial class MainWindow : Window
     {

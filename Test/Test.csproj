@@ -73,7 +73,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Demo.cs" />
-    <Compile Include="LayerElement.cs" />
     <Compile Include="Renderers\PdfArc.cs" />
     <Compile Include="Renderers\PdfRenderer.cs" />
     <Compile Include="Renderers\WpfArc.cs" />
@@ -112,7 +111,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -135,29 +134,7 @@
     <Compile Include="Controls\StylesControl.xaml.cs">
       <DependentUpon>StylesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Core\ArgbColor.cs" />
-    <Compile Include="Core\BaseShape.cs" />
-    <Compile Include="Core\Editor\Container.cs" />
-    <Compile Include="Core\Editor\Editor.cs" />
-    <Compile Include="Core\Editor\Layer.cs" />
-    <Compile Include="Core\Editor\Observer.cs" />
-    <Compile Include="Core\Editor\State.cs" />
-    <Compile Include="Core\Editor\Tool.cs" />
-    <Compile Include="Core\IRenderer.cs" />
-    <Compile Include="Core\ObservableObject.cs" />
-    <Compile Include="Core\ShapeStyle.cs" />
-    <Compile Include="Core\Shapes\XArc.cs" />
-    <Compile Include="Core\Shapes\XBezier.cs" />
-    <Compile Include="Core\Shapes\XEllipse.cs" />
-    <Compile Include="Core\Shapes\XGroup.cs" />
-    <Compile Include="Core\Shapes\XLine.cs" />
-    <Compile Include="Core\Shapes\XPoint.cs" />
-    <Compile Include="Core\Shapes\XQBezier.cs" />
-    <Compile Include="Core\Shapes\XRectangle.cs" />
-    <Compile Include="Core\Shapes\XText.cs" />
-    <Compile Include="Core\TextHAlignment.cs" />
-    <Compile Include="Core\TextVAlignment.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -206,7 +183,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Test2d\Test2d.csproj">
+      <Project>{60dda5d9-7acc-41af-9123-c96abb6b7828}</Project>
+      <Name>Test2d</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
