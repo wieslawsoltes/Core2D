@@ -195,7 +195,7 @@ namespace Test2d
         {
             var editor = new Editor()
             {
-                SnapToGrid = false,
+                SnapToGrid = true,
                 SnapX = 15.0,
                 SnapY = 15.0,
                 DefaultIsFilled = false,
