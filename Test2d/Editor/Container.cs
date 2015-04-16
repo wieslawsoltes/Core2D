@@ -18,6 +18,7 @@ namespace Test2d
         private BaseShape _pointShape;
         private IList<Layer> _layers;
         private Layer _currentLayer;
+        private Layer _templateLayer;
         private Layer _workingLayer;
         private BaseShape _currentShape;
 
@@ -112,6 +113,19 @@ namespace Test2d
             }
         }
 
+        public Layer TemplateLayer
+        {
+            get { return _templateLayer; }
+            set
+            {
+                if (value != _templateLayer)
+                {
+                    _templateLayer = value;
+                    Notify("TemplateLayer");
+                }
+            }
+        }
+
         public Layer WorkingLayer
         {
             get { return _workingLayer; }
@@ -149,6 +163,7 @@ namespace Test2d
 
         public void Invalidate()
         {
+            TemplateLayer.Invalidate();
             foreach (var layer in Layers)
             {
                 layer.Invalidate();
@@ -156,7 +171,7 @@ namespace Test2d
             WorkingLayer.Invalidate();
         }
 
-        public static Container Create(double width = 800, double height = 600)
+        public static Container Create(double width = 810, double height = 600, bool grid = true)
         {
             var c = new Container()
             {
@@ -173,6 +188,7 @@ namespace Test2d
 
             c.CurrentLayer = c.Layers.FirstOrDefault();
 
+            c.TemplateLayer = Layer.Create("Template");
             c.WorkingLayer = Layer.Create("Working");
 
             c.Styles.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
@@ -186,6 +202,14 @@ namespace Test2d
             CrossPointShape(
                 c, 
                 ShapeStyle.Create("PointShape", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
+
+            if (grid)
+            {
+                var g = LineGrid.Create(
+                    ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.0),
+                    LineGrid.Settings.Create(0, 0, width, height, 30, 30));
+                c.TemplateLayer.Shapes.Add(g);
+            }
 
             return c;
         }

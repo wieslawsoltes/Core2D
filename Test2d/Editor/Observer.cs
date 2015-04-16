@@ -40,6 +40,7 @@ namespace Test2d
 
             InitializeStyles(_editor.Container);
             InitializeLayers(_editor.Container);
+            //Add(_editor.Container.TemplateLayer);
             //Add(_editor.Container.WorkingLayer);
         }
 
