@@ -36,7 +36,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <controls:MenuControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
-        <controls:ContainerControl Grid.Row="1" Grid.Column="0" Margin="5,5,0,5" Background="DarkGray"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                      HorizontalScrollBarVisibility="Auto" 
+                      Focusable="False"
+                      Grid.Row="1" Grid.Column="0" Margin="5,5,0,5">
+            <controls:ContainerControl/>
+        </ScrollViewer>
         <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" Background="Transparent" ResizeBehavior="PreviousAndNext"/>
         <TabControl Grid.Row="1" Grid.Column="2" Margin="0,5,5,5">
             <TabItem Header="Layers">
