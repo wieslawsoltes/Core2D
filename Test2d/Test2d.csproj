@@ -44,6 +44,7 @@
     <Compile Include="Editor\Container.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\Layer.cs" />
+    <Compile Include="Editor\LineGrid.cs" />
     <Compile Include="Editor\Observer.cs" />
     <Compile Include="Editor\State.cs" />
     <Compile Include="Editor\Tool.cs" />
