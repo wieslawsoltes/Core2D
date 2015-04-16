@@ -11,6 +11,7 @@ namespace Test2d
     public interface IRenderer
     {
         bool DrawPoints { get; set; }
+        double Zoom { get; set; }
         void ClearCache();
         void Render(object dc, Layer layer);
         void Draw(object dc, XLine line, double dx, double dy);
