@@ -11,5 +11,9 @@
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextHintingMode="Auto"
         TextOptions.TextRenderingMode="Auto">
-    <controls:ContainerControl Background="DarkGray"/>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                  HorizontalScrollBarVisibility="Auto" 
+                  Focusable="False">
+        <controls:ContainerControl/>
+    </ScrollViewer>
 </Window>
