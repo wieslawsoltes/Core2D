@@ -15,6 +15,7 @@ namespace Test
     public class WpfRenderer : ObservableObject, IRenderer
     {
         private bool _drawPoints;
+        private double _zoom;
 
         public bool DrawPoints
         {
@@ -28,12 +29,27 @@ namespace Test
                 }
             }
         }
+   
+        public double Zoom
+        {
+            get { return _zoom; }
+            set
+            {
+                if (value != _zoom)
+                {
+                    _zoom = value;
+                    Notify("Zoom");
+                }
+            }
+        }
 
-        private bool _enableStyleCache = true;
-        private bool _enableArcCache = true;
-        private bool _enableBezierCache = true;
-        private bool _enableQBezierCache = true;
-        private bool _enableTextCache = true;
+        private const bool _enableGuidelines = true;
+        
+        private const bool _enableStyleCache = true;
+        private const bool _enableArcCache = true;
+        private const bool _enableBezierCache = true;
+        private const bool _enableQBezierCache = true;
+        private const bool _enableTextCache = true;
 
         private IDictionary<ShapeStyle, Tuple<Brush, Pen>> _styleCache;
         private IDictionary<XArc, PathGeometry> _arcCache;
@@ -43,6 +59,9 @@ namespace Test
 
         public WpfRenderer()
         {
+            _drawPoints = false;
+            _zoom = 1.0;
+            
             ClearCache();
         }
 
@@ -108,6 +127,9 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
+            double thickness = line.Style.Thickness / _zoom;
+            double half = thickness / 2.0;
+            
             Tuple<Brush, Pen> cache;
             Brush fill;
             Pen stroke;
@@ -122,22 +144,41 @@ namespace Test
                 fill = CreateBrush(line.Style.Fill);
                 stroke = CreatePen(
                     line.Style.Stroke,
-                    line.Style.Thickness);
+                    thickness);
 
                 if (_enableStyleCache)
                     _styleCache.Add(line.Style, Tuple.Create(fill, stroke));
             }
 
+            double x1 = line.Start.X + dx;
+            double y1 = line.Start.Y + dy;
+            double x2 = line.End.X + dx;
+            double y2 = line.End.Y + dy;
+            
+            if (_enableGuidelines)
+            {
+                var gs = new GuidelineSet(
+                    new double[] { x1 + half, x2 + half },
+                    new double[] { y1 + half, y2 + half });
+                _dc.PushGuidelineSet(gs);
+            }
+            
             _dc.DrawLine(
                 stroke,
-                new Point(line.Start.X + dx, line.Start.Y + dy),
-                new Point(line.End.X + dx, line.End.Y + dy));
+                new Point(x1, y1),
+                new Point(x2, y2));
+            
+            if (_enableGuidelines)
+                _dc.Pop();
         }
 
         public void Draw(object dc, XRectangle rectangle, double dx, double dy)
         {
             var _dc = dc as DrawingContext;
 
+            double thickness = rectangle.Style.Thickness / _zoom;
+            double half = thickness / 2.0;
+            
             Tuple<Brush, Pen> cache;
             Brush fill;
             Pen stroke;
@@ -152,26 +193,49 @@ namespace Test
                 fill = CreateBrush(rectangle.Style.Fill);
                 stroke = CreatePen(
                     rectangle.Style.Stroke,
-                    rectangle.Style.Thickness);
+                    thickness);
 
                 if (_enableStyleCache)
                     _styleCache.Add(rectangle.Style, Tuple.Create(fill, stroke));
             }
-
+            
             var rect = CreateRect(
                 rectangle.TopLeft,
                 rectangle.BottomRight,
                 dx, dy);
+            
+            if (_enableGuidelines)
+            {
+                var gs = new GuidelineSet(
+                    new double[] 
+                        { 
+                            rect.TopLeft.X + dx + half, 
+                            rect.BottomRight.X + half 
+                        },
+                    new double[] 
+                        { 
+                            rect.TopLeft.Y + half,
+                            rect.BottomRight.Y + half
+                        });
+                (dc as DrawingContext).PushGuidelineSet(gs);
+            }
+  
             _dc.DrawRectangle(
                 rectangle.IsFilled ? fill : null,
                 stroke,
                 rect);
+            
+            if (_enableGuidelines)
+                _dc.Pop();
         }
 
         public void Draw(object dc, XEllipse ellipse, double dx, double dy)
         {
             var _dc = dc as DrawingContext;
 
+            double thickness = ellipse.Style.Thickness / _zoom;
+            double half = thickness / 2.0;
+            
             Tuple<Brush, Pen> cache;
             Brush fill;
             Pen stroke;
@@ -199,11 +263,31 @@ namespace Test
             double rx = rect.Width / 2.0;
             double ry = rect.Height / 2.0;
             var center = new Point(rect.X + rx, rect.Y + ry);
+            
+            if (_enableGuidelines)
+            {
+                var gs = new GuidelineSet(
+                    new double[] 
+                        { 
+                            rect.TopLeft.X + dx + half, 
+                            rect.BottomRight.X + half 
+                        },
+                    new double[] 
+                        { 
+                            rect.TopLeft.Y + half,
+                            rect.BottomRight.Y + half
+                        });
+                (dc as DrawingContext).PushGuidelineSet(gs);
+            }
+            
             _dc.DrawEllipse(
                 ellipse.IsFilled ? fill : null,
                 stroke,
                 center,
                 rx, ry);
+            
+            if (_enableGuidelines)
+                _dc.Pop();
         }
 
         public void Draw(object dc, XArc arc, double dx, double dy)

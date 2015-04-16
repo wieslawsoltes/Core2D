@@ -14,6 +14,7 @@ namespace Test
     public class PdfRenderer : Test2d.IRenderer
     {
         public bool DrawPoints { get; set; }
+        public double Zoom { get; set; }
 
         private Func<double, double> ScaleToPage;
 
