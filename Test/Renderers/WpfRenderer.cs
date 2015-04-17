@@ -113,6 +113,122 @@ namespace Test
                 new Point(brx + dx, bry + dy));
         }
 
+        private static void DrawLineInternal(
+            DrawingContext dc, 
+            double half, 
+            Pen pen, 
+            ref Point p0, 
+            ref Point p1)
+        {
+            if (_enableGuidelines)
+            {
+                var gs = new GuidelineSet(
+                    new double[] { p0.X + half, p1.X + half },
+                    new double[] { p0.Y + half, p1.Y + half });
+                dc.PushGuidelineSet(gs);
+            }
+
+            dc.DrawLine(pen, p0, p1);
+
+            if (_enableGuidelines)
+                dc.Pop();
+        }
+
+        private static void DrawRectangleInternal(
+            DrawingContext dc, 
+            double half, 
+            Brush brush, 
+            Pen pen, 
+            bool isFilled, 
+            ref Rect rect)
+        {
+            if (_enableGuidelines)
+            {
+                var gs = new GuidelineSet(
+                    new double[] 
+                        { 
+                            rect.TopLeft.X + half, 
+                            rect.BottomRight.X + half 
+                        },
+                    new double[] 
+                        { 
+                            rect.TopLeft.Y + half,
+                            rect.BottomRight.Y + half
+                        });
+                dc.PushGuidelineSet(gs);
+            }
+
+            dc.DrawRectangle(isFilled ? brush : null, pen, rect);
+
+            if (_enableGuidelines)
+                dc.Pop();
+        }
+
+        private static void DrawEllipseInternal(
+            DrawingContext dc, 
+            double half, 
+            Brush brush, 
+            Pen pen, 
+            bool isFilled, 
+            ref Point center,
+            double rx, double ry)
+        {
+            if (_enableGuidelines)
+            {
+                var gs = new GuidelineSet(
+                    new double[] 
+                        { 
+                            center.X - rx + half, 
+                            center.X + rx + half 
+                        },
+                    new double[] 
+                        { 
+                            center.Y - ry + half,
+                            center.Y + ry + half
+                        });
+                dc.PushGuidelineSet(gs);
+            }
+
+            dc.DrawEllipse(
+                isFilled ? brush : null,
+                pen,
+                center,
+                rx, ry);
+
+            if (_enableGuidelines)
+                dc.Pop();
+        }
+
+        private static void DrawPathGeometryInternal(
+            DrawingContext dc,
+            double half,
+            Brush brush,
+            Pen pen,
+            bool isFilled,
+            PathGeometry pg)
+        {
+            if (_enableGuidelines)
+            {
+                var gs = new GuidelineSet(
+                    new double[] 
+                        { 
+                            pg.Bounds.TopLeft.X + half, 
+                            pg.Bounds.BottomRight.X + half 
+                        },
+                    new double[] 
+                        { 
+                            pg.Bounds.TopLeft.Y + half,
+                            pg.Bounds.BottomRight.Y + half
+                        });
+                dc.PushGuidelineSet(gs);
+            }
+
+            dc.DrawGeometry(isFilled ? brush : null, pen, pg);
+
+            if (_enableGuidelines)
+                dc.Pop();
+        }
+
         public void Render(object dc, Layer layer)
         {
             var _dc = dc as DrawingContext;
@@ -154,15 +270,7 @@ namespace Test
             double y1 = line.Start.Y + dy;
             double x2 = line.End.X + dx;
             double y2 = line.End.Y + dy;
-            
-            if (_enableGuidelines)
-            {
-                var gs = new GuidelineSet(
-                    new double[] { x1 + half, x2 + half },
-                    new double[] { y1 + half, y2 + half });
-                _dc.PushGuidelineSet(gs);
-            }
-            
+
             var sas = line.Style.LineStyle.StartArrowStyle;
             var eas = line.Style.LineStyle.EndArrowStyle;
             
@@ -187,34 +295,32 @@ namespace Test
                     break;
                 case ArrowType.Rectangle:
                     {
-                        var p1 = new Point(x1 - sizeX1, y1);
-                        pt1 = t1.Transform(p1);
+                        pt1 = t1.Transform(new Point(x1 - sizeX1, y1));
                         _dc.PushTransform(t1);
-                        var r = new Rect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        // TODO: GuidelineSet
-                        _dc.DrawRectangle(sas.IsFilled ? fill : null, stroke, r);
+                        var rect = new Rect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
+                        DrawRectangleInternal(_dc, half, fill, stroke, sas.IsFilled, ref rect);
                         _dc.Pop();
                     }
                     break;
                 case ArrowType.Ellipse:
                     {
-                        var p1 = new Point(x1 - sizeX1, y1);
-                        pt1 = t1.Transform(p1);
+                        pt1 = t1.Transform(new Point(x1 - sizeX1, y1));
                         _dc.PushTransform(t1);
-                        // TODO: GuidelineSet
-                        _dc.DrawEllipse(sas.IsFilled ? fill : null, stroke, new Point(x1 - radiusX1, y1), radiusX1, radiusY1);
+                        var c = new Point(x1 - radiusX1, y1);
+                        DrawEllipseInternal(_dc, half, fill, stroke, sas.IsFilled, ref c, radiusX1, radiusY1);
                         _dc.Pop();
                     }
                     break;
                 case ArrowType.Arrow:
                     {
-                        var p1 = new Point(x1, y1);
-                        pt1 = t1.Transform(p1);
+                        pt1 = t1.Transform(new Point(x1, y1));
                         _dc.PushTransform(t1);
-                        // TODO: GuidelineSet
-                        _dc.DrawLine(stroke, new Point(x1 - sizeX1, y1 + sizeY1), new Point(x1, y1));
-                        // TODO: GuidelineSet
-                        _dc.DrawLine(stroke, new Point(x1 - sizeX1, y1 - sizeY1), new Point(x1, y1));
+                        var p11 = new Point(x1 - sizeX1, y1 + sizeY1);
+                        var p21 = new Point(x1, y1);
+                        var p12 = new Point(x1 - sizeX1, y1 - sizeY1);
+                        var p22 = new Point(x1, y1);
+                        DrawLineInternal(_dc, half, stroke, ref p11, ref p21);
+                        DrawLineInternal(_dc, half, stroke, ref p12, ref p22);
                         _dc.Pop();
                     }
                     break;
@@ -235,43 +341,38 @@ namespace Test
                     break;
                 case ArrowType.Rectangle:
                     {
-                        var p2 = new Point(x2 - sizeX2, y2);
-                        pt2 = t2.Transform(p2);
+                        pt2 = t2.Transform(new Point(x2 - sizeX2, y2));
                         _dc.PushTransform(t2);
-                        var r = new Rect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        // TODO: GuidelineSet
-                        _dc.DrawRectangle(eas.IsFilled ? fill : null, stroke, r);
+                        var rect = new Rect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
+                        DrawRectangleInternal(_dc, half, fill, stroke, eas.IsFilled, ref rect);
                         _dc.Pop();
                     }
                     break;
                 case ArrowType.Ellipse:
                     {
-                        var p2 = new Point(x2 - sizeX2, y2);
-                        pt2 = t2.Transform(p2);
+                        pt2 = t2.Transform(new Point(x2 - sizeX2, y2));
                         _dc.PushTransform(t2);
-                        // TODO: GuidelineSet
-                        _dc.DrawEllipse(eas.IsFilled ? fill : null, stroke, new Point(x2 - radiusX2, y2), radiusX2, radiusY2);
+                        var c = new Point(x2 - radiusX2, y2);
+                        DrawEllipseInternal(_dc, half, fill, stroke, eas.IsFilled, ref c, radiusX2, radiusY2);
                         _dc.Pop();
                     }
                     break;
                 case ArrowType.Arrow:
                     {
-                         var p2 = new Point(x2, y2);
-                         pt2 = t2.Transform(p2);
+                         pt2 = t2.Transform(new Point(x2, y2));
                          _dc.PushTransform(t2);
-                         // TODO: GuidelineSet
-                        _dc.DrawLine(stroke, new Point(x2 - sizeX2, y2 + sizeY2), new Point(x2, y2));
-                        // TODO: GuidelineSet
-                        _dc.DrawLine(stroke, new Point(x2 - sizeX2, y2 - sizeY2), new Point(x2, y2));
+                         var p11 = new Point(x2 - sizeX2, y2 + sizeY2);
+                         var p21 = new Point(x2, y2);
+                         var p12 = new Point(x2 - sizeX2, y2 - sizeY2);
+                         var p22 = new Point(x2, y2);
+                         DrawLineInternal(_dc, half, stroke, ref p11, ref p21);
+                         DrawLineInternal(_dc, half, stroke, ref p12, ref p22);
                         _dc.Pop();
                     }
                     break;
             }
 
-            _dc.DrawLine(stroke, pt1, pt2);
-  
-            if (_enableGuidelines)
-                _dc.Pop();
+            DrawLineInternal(_dc, half, stroke, ref pt1, ref pt2);
         }
 
         public void Draw(object dc, XRectangle rectangle, double dx, double dy)
@@ -305,30 +406,8 @@ namespace Test
                 rectangle.TopLeft,
                 rectangle.BottomRight,
                 dx, dy);
-            
-            if (_enableGuidelines)
-            {
-                var gs = new GuidelineSet(
-                    new double[] 
-                        { 
-                            rect.TopLeft.X + dx + half, 
-                            rect.BottomRight.X + half 
-                        },
-                    new double[] 
-                        { 
-                            rect.TopLeft.Y + half,
-                            rect.BottomRight.Y + half
-                        });
-                _dc.PushGuidelineSet(gs);
-            }
-  
-            _dc.DrawRectangle(
-                rectangle.IsFilled ? fill : null,
-                stroke,
-                rect);
-            
-            if (_enableGuidelines)
-                _dc.Pop();
+
+            DrawRectangleInternal(_dc, half, fill, stroke, rectangle.IsFilled, ref rect);
         }
 
         public void Draw(object dc, XEllipse ellipse, double dx, double dy)
@@ -365,31 +444,14 @@ namespace Test
             double rx = rect.Width / 2.0;
             double ry = rect.Height / 2.0;
             var center = new Point(rect.X + rx, rect.Y + ry);
-            
-            if (_enableGuidelines)
-            {
-                var gs = new GuidelineSet(
-                    new double[] 
-                        { 
-                            rect.TopLeft.X + dx + half, 
-                            rect.BottomRight.X + half 
-                        },
-                    new double[] 
-                        { 
-                            rect.TopLeft.Y + half,
-                            rect.BottomRight.Y + half
-                        });
-                _dc.PushGuidelineSet(gs);
-            }
-            
-            _dc.DrawEllipse(
-                ellipse.IsFilled ? fill : null,
-                stroke,
-                center,
+
+            DrawEllipseInternal(
+                _dc, 
+                half, 
+                fill, stroke, 
+                ellipse.IsFilled, 
+                ref center,
                 rx, ry);
-            
-            if (_enableGuidelines)
-                _dc.Pop();
         }
 
         public void Draw(object dc, XArc arc, double dx, double dy)
@@ -453,26 +515,7 @@ namespace Test
                     _arcCache.Add(arc, pg);
             }
 
-            if (_enableGuidelines)
-            {
-                var gs = new GuidelineSet(
-                    new double[] 
-                        { 
-                            pg.Bounds.TopLeft.X + dx + half, 
-                            pg.Bounds.BottomRight.X + half 
-                        },
-                    new double[] 
-                        { 
-                            pg.Bounds.TopLeft.Y + half,
-                            pg.Bounds.BottomRight.Y + half
-                        });
-                _dc.PushGuidelineSet(gs);
-            }
-            
-            _dc.DrawGeometry(arc.IsFilled ? fill : null, stroke, pg);
-            
-            if (_enableGuidelines)
-                _dc.Pop();
+            DrawPathGeometryInternal(_dc, half, fill, stroke, arc.IsFilled, pg);
         }
 
         public void Draw(object dc, XBezier bezier, double dx, double dy)
@@ -537,26 +580,7 @@ namespace Test
                     _bezierCache.Add(bezier, pg);
             }
 
-            if (_enableGuidelines)
-            {
-                var gs = new GuidelineSet(
-                    new double[] 
-                        { 
-                            pg.Bounds.TopLeft.X + dx + half, 
-                            pg.Bounds.BottomRight.X + half 
-                        },
-                    new double[] 
-                        { 
-                            pg.Bounds.TopLeft.Y + half,
-                            pg.Bounds.BottomRight.Y + half
-                        });
-                _dc.PushGuidelineSet(gs);
-            }
-            
-            _dc.DrawGeometry(bezier.IsFilled ? fill : null, stroke, pg);
-            
-            if (_enableGuidelines)
-                _dc.Pop();
+            DrawPathGeometryInternal(_dc, half, fill, stroke, bezier.IsFilled, pg);
         }
 
         public void Draw(object dc, XQBezier qbezier, double dx, double dy)
@@ -619,30 +643,11 @@ namespace Test
                 if (_enableQBezierCache)
                     _qbezierCache.Add(qbezier, pg);
             }
-            
-            if (_enableGuidelines)
-            {
-                var gs = new GuidelineSet(
-                    new double[] 
-                        { 
-                            pg.Bounds.TopLeft.X + dx + half, 
-                            pg.Bounds.BottomRight.X + half 
-                        },
-                    new double[] 
-                        { 
-                            pg.Bounds.TopLeft.Y + half,
-                            pg.Bounds.BottomRight.Y + half
-                        });
-                _dc.PushGuidelineSet(gs);
-            }
-            
-            _dc.DrawGeometry(qbezier.IsFilled ? fill : null, stroke, pg);
-            
-            if (_enableGuidelines)
-                _dc.Pop();
+
+            DrawPathGeometryInternal(_dc, half, fill, stroke, qbezier.IsFilled, pg);
         }
 
-        private Point GetTextOrigin(ShapeStyle style, Rect rect, FormattedText ft)
+        private Point GetTextOrigin(ShapeStyle style, ref Rect rect, FormattedText ft)
         {
             double ox, oy;
 
@@ -708,36 +713,16 @@ namespace Test
                 text.TopLeft,
                 text.BottomRight,
                 dx, dy);
-            
-            if (_enableGuidelines)
-            {
-                var gs = new GuidelineSet(
-                    new double[] 
-                        { 
-                            rect.TopLeft.X + dx + half, 
-                            rect.BottomRight.X + half 
-                        },
-                    new double[] 
-                        { 
-                            rect.TopLeft.Y + half,
-                            rect.BottomRight.Y + half
-                        });
-                _dc.PushGuidelineSet(gs);
-            }
-            
-            _dc.DrawRectangle(
-                text.IsFilled ? fill : null,
-                null,
-                rect);
+
+            DrawRectangleInternal(_dc, half, fill, null, text.IsFilled, ref rect);
 
             FormattedText ft;
-
             if (_enableTextCache
                 && _textCache.TryGetValue(text, out ft))
             {
                 _dc.DrawText(
                     ft, 
-                    GetTextOrigin(text.Style, rect, ft));
+                    GetTextOrigin(text.Style, ref rect, ft));
             }
             else
             {
@@ -757,11 +742,8 @@ namespace Test
 
                 _dc.DrawText(
                     ft, 
-                    GetTextOrigin(text.Style, rect, ft));
+                    GetTextOrigin(text.Style, ref rect, ft));
             }
-            
-           if (_enableGuidelines)
-               _dc.Pop();
         }
     }
 }
