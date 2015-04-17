@@ -163,11 +163,113 @@ namespace Test
                 _dc.PushGuidelineSet(gs);
             }
             
-            _dc.DrawLine(
-                stroke,
-                new Point(x1, y1),
-                new Point(x2, y2));
+            var sas = line.Style.LineStyle.StartArrowStyle;
+            var eas = line.Style.LineStyle.EndArrowStyle;
             
+            Point pt1;
+            Point pt2;
+
+            var t1 = new RotateTransform(Math.Atan2(y1 - y2, x1 - x2) * (180.0 / Math.PI), x1, y1);
+            var t2 = new RotateTransform(Math.Atan2(y2 - y1, x2 - x1) * (180.0 / Math.PI), x2, y2);
+
+            double radiusX1 = sas.RadiusX;
+            double radiusY1 = sas.RadiusY;
+            double sizeX1 = 2.0 * radiusX1;
+            double sizeY1 = 2.0 * radiusY1;
+    
+            switch (sas.ArrowType) 
+            {
+                default:
+                case ArrowType.None:
+                    {
+                        pt1 = new Point(x1, y1);
+                    }
+                    break;
+                case ArrowType.Rectangle:
+                    {
+                        var p1 = new Point(x1 - sizeX1, y1);
+                        pt1 = t1.Transform(p1);
+                        _dc.PushTransform(t1);
+                        var r = new Rect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
+                        // TODO: GuidelineSet
+                        _dc.DrawRectangle(sas.IsFilled ? fill : null, stroke, r);
+                        _dc.Pop();
+                    }
+                    break;
+                case ArrowType.Ellipse:
+                    {
+                        var p1 = new Point(x1 - sizeX1, y1);
+                        pt1 = t1.Transform(p1);
+                        _dc.PushTransform(t1);
+                        // TODO: GuidelineSet
+                        _dc.DrawEllipse(sas.IsFilled ? fill : null, stroke, new Point(x1 - radiusX1, y1), radiusX1, radiusY1);
+                        _dc.Pop();
+                    }
+                    break;
+                case ArrowType.Arrow:
+                    {
+                        var p1 = new Point(x1, y1);
+                        pt1 = t1.Transform(p1);
+                        _dc.PushTransform(t1);
+                        // TODO: GuidelineSet
+                        _dc.DrawLine(stroke, new Point(x1 - sizeX1, y1 + sizeY1), new Point(x1, y1));
+                        // TODO: GuidelineSet
+                        _dc.DrawLine(stroke, new Point(x1 - sizeX1, y1 - sizeY1), new Point(x1, y1));
+                        _dc.Pop();
+                    }
+                    break;
+            }
+            
+            double radiusX2 = eas.RadiusX;
+            double radiusY2 = eas.RadiusY;
+            double sizeX2 = 2.0 * radiusX2;
+            double sizeY2 = 2.0 * radiusY2;
+            
+            switch (eas.ArrowType) 
+            {
+                default:
+                case ArrowType.None:
+                    {
+                        pt2 = new Point(x2, y2);
+                    }
+                    break;
+                case ArrowType.Rectangle:
+                    {
+                        var p2 = new Point(x2 - sizeX2, y2);
+                        pt2 = t2.Transform(p2);
+                        _dc.PushTransform(t2);
+                        var r = new Rect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
+                        // TODO: GuidelineSet
+                        _dc.DrawRectangle(eas.IsFilled ? fill : null, stroke, r);
+                        _dc.Pop();
+                    }
+                    break;
+                case ArrowType.Ellipse:
+                    {
+                        var p2 = new Point(x2 - sizeX2, y2);
+                        pt2 = t2.Transform(p2);
+                        _dc.PushTransform(t2);
+                        // TODO: GuidelineSet
+                        _dc.DrawEllipse(eas.IsFilled ? fill : null, stroke, new Point(x2 - radiusX2, y2), radiusX2, radiusY2);
+                        _dc.Pop();
+                    }
+                    break;
+                case ArrowType.Arrow:
+                    {
+                         var p2 = new Point(x2, y2);
+                         pt2 = t2.Transform(p2);
+                         _dc.PushTransform(t2);
+                         // TODO: GuidelineSet
+                        _dc.DrawLine(stroke, new Point(x2 - sizeX2, y2 + sizeY2), new Point(x2, y2));
+                        // TODO: GuidelineSet
+                        _dc.DrawLine(stroke, new Point(x2 - sizeX2, y2 - sizeY2), new Point(x2, y2));
+                        _dc.Pop();
+                    }
+                    break;
+            }
+
+            _dc.DrawLine(stroke, pt1, pt2);
+  
             if (_enableGuidelines)
                 _dc.Pop();
         }
@@ -217,7 +319,7 @@ namespace Test
                             rect.TopLeft.Y + half,
                             rect.BottomRight.Y + half
                         });
-                (dc as DrawingContext).PushGuidelineSet(gs);
+                _dc.PushGuidelineSet(gs);
             }
   
             _dc.DrawRectangle(
@@ -250,7 +352,7 @@ namespace Test
                 fill = CreateBrush(ellipse.Style.Fill);
                 stroke = CreatePen(
                     ellipse.Style.Stroke,
-                    ellipse.Style.Thickness);
+                    thickness);
 
                 if (_enableStyleCache)
                     _styleCache.Add(ellipse.Style, Tuple.Create(fill, stroke));
@@ -277,7 +379,7 @@ namespace Test
                             rect.TopLeft.Y + half,
                             rect.BottomRight.Y + half
                         });
-                (dc as DrawingContext).PushGuidelineSet(gs);
+                _dc.PushGuidelineSet(gs);
             }
             
             _dc.DrawEllipse(
@@ -294,6 +396,9 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
+            double thickness = arc.Style.Thickness / _zoom;
+            double half = thickness / 2.0;
+            
             Tuple<Brush, Pen> cache;
             Brush fill;
             Pen stroke;
@@ -308,7 +413,7 @@ namespace Test
                 fill = CreateBrush(arc.Style.Fill);
                 stroke = CreatePen(
                     arc.Style.Stroke,
-                    arc.Style.Thickness);
+                    thickness);
 
                 if (_enableStyleCache)
                     _styleCache.Add(arc.Style, Tuple.Create(fill, stroke));
@@ -348,13 +453,35 @@ namespace Test
                     _arcCache.Add(arc, pg);
             }
 
+            if (_enableGuidelines)
+            {
+                var gs = new GuidelineSet(
+                    new double[] 
+                        { 
+                            pg.Bounds.TopLeft.X + dx + half, 
+                            pg.Bounds.BottomRight.X + half 
+                        },
+                    new double[] 
+                        { 
+                            pg.Bounds.TopLeft.Y + half,
+                            pg.Bounds.BottomRight.Y + half
+                        });
+                _dc.PushGuidelineSet(gs);
+            }
+            
             _dc.DrawGeometry(arc.IsFilled ? fill : null, stroke, pg);
+            
+            if (_enableGuidelines)
+                _dc.Pop();
         }
 
         public void Draw(object dc, XBezier bezier, double dx, double dy)
         {
             var _dc = dc as DrawingContext;
 
+            double thickness = bezier.Style.Thickness / _zoom;
+            double half = thickness / 2.0;
+            
             Tuple<Brush, Pen> cache;
             Brush fill;
             Pen stroke;
@@ -369,7 +496,7 @@ namespace Test
                 fill = CreateBrush(bezier.Style.Fill);
                 stroke = CreatePen(
                     bezier.Style.Stroke,
-                    bezier.Style.Thickness);
+                    thickness);
 
                 if (_enableStyleCache)
                     _styleCache.Add(bezier.Style, Tuple.Create(fill, stroke));
@@ -410,13 +537,35 @@ namespace Test
                     _bezierCache.Add(bezier, pg);
             }
 
+            if (_enableGuidelines)
+            {
+                var gs = new GuidelineSet(
+                    new double[] 
+                        { 
+                            pg.Bounds.TopLeft.X + dx + half, 
+                            pg.Bounds.BottomRight.X + half 
+                        },
+                    new double[] 
+                        { 
+                            pg.Bounds.TopLeft.Y + half,
+                            pg.Bounds.BottomRight.Y + half
+                        });
+                _dc.PushGuidelineSet(gs);
+            }
+            
             _dc.DrawGeometry(bezier.IsFilled ? fill : null, stroke, pg);
+            
+            if (_enableGuidelines)
+                _dc.Pop();
         }
 
         public void Draw(object dc, XQBezier qbezier, double dx, double dy)
         {
             var _dc = dc as DrawingContext;
 
+            double thickness = qbezier.Style.Thickness / _zoom;
+            double half = thickness / 2.0;
+            
             Tuple<Brush, Pen> cache;
             Brush fill;
             Pen stroke;
@@ -431,7 +580,7 @@ namespace Test
                 fill = CreateBrush(qbezier.Style.Fill);
                 stroke = CreatePen(
                     qbezier.Style.Stroke,
-                    qbezier.Style.Thickness);
+                    thickness);
 
                 if (_enableStyleCache)
                     _styleCache.Add(qbezier.Style, Tuple.Create(fill, stroke));
@@ -471,7 +620,26 @@ namespace Test
                     _qbezierCache.Add(qbezier, pg);
             }
             
+            if (_enableGuidelines)
+            {
+                var gs = new GuidelineSet(
+                    new double[] 
+                        { 
+                            pg.Bounds.TopLeft.X + dx + half, 
+                            pg.Bounds.BottomRight.X + half 
+                        },
+                    new double[] 
+                        { 
+                            pg.Bounds.TopLeft.Y + half,
+                            pg.Bounds.BottomRight.Y + half
+                        });
+                _dc.PushGuidelineSet(gs);
+            }
+            
             _dc.DrawGeometry(qbezier.IsFilled ? fill : null, stroke, pg);
+            
+            if (_enableGuidelines)
+                _dc.Pop();
         }
 
         private Point GetTextOrigin(ShapeStyle style, Rect rect, FormattedText ft)
@@ -513,6 +681,9 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
+            double thickness = text.Style.Thickness / _zoom;
+            double half = thickness / 2.0;
+            
             Tuple<Brush, Pen> cache;
             Brush fill;
             Pen stroke;
@@ -527,7 +698,7 @@ namespace Test
                 fill = CreateBrush(text.Style.Fill);
                 stroke = CreatePen(
                     text.Style.Stroke,
-                    text.Style.Thickness);
+                    thickness);
 
                 if (_enableStyleCache)
                     _styleCache.Add(text.Style, Tuple.Create(fill, stroke));
@@ -537,6 +708,23 @@ namespace Test
                 text.TopLeft,
                 text.BottomRight,
                 dx, dy);
+            
+            if (_enableGuidelines)
+            {
+                var gs = new GuidelineSet(
+                    new double[] 
+                        { 
+                            rect.TopLeft.X + dx + half, 
+                            rect.BottomRight.X + half 
+                        },
+                    new double[] 
+                        { 
+                            rect.TopLeft.Y + half,
+                            rect.BottomRight.Y + half
+                        });
+                _dc.PushGuidelineSet(gs);
+            }
+            
             _dc.DrawRectangle(
                 text.IsFilled ? fill : null,
                 null,
@@ -571,6 +759,9 @@ namespace Test
                     ft, 
                     GetTextOrigin(text.Style, rect, ft));
             }
+            
+           if (_enableGuidelines)
+               _dc.Pop();
         }
     }
 }
