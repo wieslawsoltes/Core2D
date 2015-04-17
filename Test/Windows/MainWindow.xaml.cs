@@ -35,6 +35,24 @@ namespace Test.Windows
         {
             var editor = Editor.Create(Container.Create(), WpfRenderer.Create());
 
+            
+            // override line style
+            var style = editor.Container.Styles[0];
+            style.LineStyle = LineStyle.Create(
+                ArrowStyle.Create(ArrowType.Ellipse, false, 4.0, 4.0),
+                ArrowStyle.Create(ArrowType.Ellipse, false, 4.0, 4.0));
+            
+            
+            (editor.Renderer as WpfRenderer).PropertyChanged += 
+                (s, e) =>
+                {
+                    if (e.PropertyName == "Zoom")
+                    {
+                        editor.Renderer.ClearCache();
+                        editor.Container.Invalidate();
+                    }
+                };
+            
             editor.NewCommand = new DelegateCommand(
                 () => 
                 {
