@@ -34,13 +34,22 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <controls:MenuControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
         <ScrollViewer VerticalScrollBarVisibility="Auto" 
                       HorizontalScrollBarVisibility="Auto" 
                       Focusable="False"
                       Grid.Row="1" Grid.Column="0" Margin="5,5,0,5">
-            <controls:ContainerControl/>
+            <Border BorderBrush="{x:Null}" BorderThickness="0" RenderTransformOrigin="0.5,0.5">
+                <Border.LayoutTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="0" Y="0"/>
+                        <ScaleTransform ScaleX="{Binding Renderer.Zoom}" ScaleY="{Binding Renderer.Zoom}"/>
+                    </TransformGroup>
+                </Border.LayoutTransform>
+                <controls:ContainerControl/>
+            </Border>
         </ScrollViewer>
         <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" Background="Transparent" ResizeBehavior="PreviousAndNext"/>
         <TabControl Grid.Row="1" Grid.Column="2" Margin="0,5,5,5">
@@ -54,5 +63,33 @@
                 <controls:ShapesControl/>
             </TabItem>
         </TabControl>
+        <Grid Grid.Row="2" Grid.Column="2"
+              Margin="0,0,5,5" 
+              VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{Binding Renderer.Zoom}" 
+                       Background="{x:Null}"
+                       FocusVisualStyle="{x:Null}"
+                       Grid.Row="0" 
+                       Grid.Column="0" 
+                       TextAlignment="Center" 
+                       VerticalAlignment="Center"/>
+            <Slider Value="{Binding Renderer.Zoom}" 
+                    Minimum="0.1" 
+                    Maximum="16" 
+                    TickFrequency="0.1" 
+                    SmallChange="0.1" 
+                    LargeChange="1" 
+                    IsSnapToTickEnabled="True" 
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    Margin="1"/>
+        </Grid>
     </Grid>
 </Window>
