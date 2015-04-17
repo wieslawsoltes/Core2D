@@ -14,6 +14,7 @@ namespace Test2d
         private ArgbColor _stroke;
         private ArgbColor _fill;
         private double _thickness;
+        private LineStyle _lineStyle;
         private string _fontName;
         private double _fontSize;
         private TextHAlignment _textHAlignment;
@@ -71,6 +72,19 @@ namespace Test2d
             }
         }
 
+        public LineStyle LineStyle
+        {
+            get { return _lineStyle; }
+            set
+            {
+                if (value != _lineStyle)
+                {
+                    _lineStyle = value;
+                    Notify("LineStyle");
+                }
+            }
+        }
+        
         public string FontName
         {
             get { return _fontName; }
@@ -128,6 +142,7 @@ namespace Test2d
             byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00,
             byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00,
             double thickness = 2.0,
+            LineStyle lineStyle = null,
             string fontName = "Calibri", 
             double fontSize = 12.0,
             TextHAlignment textHAlignment = TextHAlignment.Center,
@@ -139,6 +154,7 @@ namespace Test2d
                 Stroke = ArgbColor.Create(sa, sr, sg, sb),
                 Fill = ArgbColor.Create(fa, fr, fg, fb),
                 Thickness = thickness,
+                LineStyle = lineStyle ?? LineStyle.Create(ArrowStyle.Create(), ArrowStyle.Create()),
                 FontName = fontName,
                 FontSize = fontSize,
                 TextHAlignment = textHAlignment,
