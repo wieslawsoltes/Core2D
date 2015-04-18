@@ -148,11 +148,14 @@
                         Command="{Binding DrawPointsCommand}" InputGestureText=""/>
         </MenuItem>
         <MenuItem Header="_Window">
-            <MenuItem Header="_Layers" Command="{Binding LayersWindowCommand}" InputGestureText="Ctrl+L"/>
-            <MenuItem Header="S_tyles" Command="{Binding StylesWindowCommand}" InputGestureText="Ctrl+T"/>
-            <MenuItem Header="S_hapes" Command="{Binding ShapesWindowCommand}" InputGestureText="Ctrl+H"/>
+            <MenuItem Header="_Layers..." Command="{Binding LayersWindowCommand}" InputGestureText="Ctrl+L"/>
             <Separator/>
-            <MenuItem Header="Containe_r" Command="{Binding ContainerWindowCommand}" InputGestureText="Ctrl+R"/>
+            <MenuItem Header="St_yle Editor..." Command="{Binding StyleWindowCommand}" InputGestureText="Ctrl+K"/>
+            <MenuItem Header="S_tyles..." Command="{Binding StylesWindowCommand}" InputGestureText="Ctrl+T"/>
+            <Separator/>
+            <MenuItem Header="S_hapes..." Command="{Binding ShapesWindowCommand}" InputGestureText="Ctrl+H"/>
+            <Separator/>
+            <MenuItem Header="Containe_r Editor..." Command="{Binding ContainerWindowCommand}" InputGestureText="Ctrl+R"/>
         </MenuItem>
     </Menu>
 </UserControl>
