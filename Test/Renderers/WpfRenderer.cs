@@ -328,6 +328,7 @@ namespace Test
             double a2 = Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI;
             bool doRectTransform1 = a1 % 90.0 != 0.0;
             bool doRectTransform2 = a2 % 90.0 != 0.0;
+
             var t1 = new RotateTransform(a1, x1, y1);
             var t2 = new RotateTransform(a2, x2, y2);
 
