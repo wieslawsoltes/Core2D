@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Test2d;
 
-namespace Test.Controls
+namespace TestWPF.Controls
 {
     internal class LayerElement : FrameworkElement
     {

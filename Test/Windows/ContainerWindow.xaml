@@ -3,7 +3,7 @@
 <Window x:Class="Test.Windows.ContainerWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="clr-namespace:Test.Controls"
+        xmlns:wpf="clr-namespace:TestWPF.Controls;assembly=TestWPF"
         Title="Container" Height="660" Width="840"
         Background="LightGray"
         WindowState="Normal" WindowStartupLocation="CenterOwner"
@@ -14,6 +14,6 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto" 
                   HorizontalScrollBarVisibility="Auto" 
                   Focusable="False">
-        <controls:ContainerControl/>
+        <wpf:ContainerControl/>
     </ScrollViewer>
 </Window>

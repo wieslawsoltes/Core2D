@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Test2d;
 using Test.Util;
+using TestWPF;
 
 namespace Test.Windows
 {

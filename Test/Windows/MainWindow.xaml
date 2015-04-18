@@ -5,6 +5,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Test"
         xmlns:controls="clr-namespace:Test.Controls"
+        xmlns:wpf="clr-namespace:TestWPF.Controls;assembly=TestWPF"
         Title="Test" Height="720" Width="1080"
         Background="LightGray"
         WindowStartupLocation="CenterScreen" WindowState="Normal"
@@ -49,7 +50,7 @@
                         <ScaleTransform ScaleX="{Binding Renderer.Zoom}" ScaleY="{Binding Renderer.Zoom}"/>
                     </TransformGroup>
                 </Border.LayoutTransform>
-                <controls:ContainerControl/>
+                <wpf:ContainerControl/>
             </Border>
         </ScrollViewer>
         <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" Background="Transparent" ResizeBehavior="PreviousAndNext"/>
