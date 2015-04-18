@@ -18,7 +18,7 @@ namespace Test
 
         private Func<double, double> ScaleToPage;
 
-        public void Create(string path, Test2d.Container container)
+        public void Save(string path, Test2d.Container container)
         {
             using (var doc = new PdfDocument())
             {
@@ -27,7 +27,7 @@ namespace Test
             }
         }
 
-        public void Create(string path, IEnumerable<Test2d.Container> containers)
+        public void Save(string path, IEnumerable<Test2d.Container> containers)
         {
             using (var doc = new PdfDocument())
             {

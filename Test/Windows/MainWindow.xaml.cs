@@ -247,7 +247,7 @@ namespace Test.Windows
         private static void Export(Editor editor, string path)
         {
             var renderer = new PdfRenderer() { DrawPoints = editor.Renderer.DrawPoints };
-            renderer.Create(path, editor.Container);
+            renderer.Save(path, editor.Container);
             System.Diagnostics.Process.Start(path);
         }
 
