@@ -73,6 +73,41 @@ namespace Test
             };
         }
 
+        private static Point GetTextOrigin(ShapeStyle style, ref Rect rect, FormattedText ft)
+        {
+            double ox, oy;
+
+            switch (style.TextHAlignment)
+            {
+                case TextHAlignment.Left:
+                    ox = rect.TopLeft.X;
+                    break;
+                case TextHAlignment.Right:
+                    ox = rect.Right - ft.Width;
+                    break;
+                case TextHAlignment.Center:
+                default:
+                    ox = (rect.Left + rect.Width / 2.0) - (ft.Width / 2.0);
+                    break;
+            }
+
+            switch (style.TextVAlignment)
+            {
+                case TextVAlignment.Top:
+                    oy = rect.TopLeft.Y;
+                    break;
+                case TextVAlignment.Bottom:
+                    oy = rect.Bottom - ft.Height;
+                    break;
+                case TextVAlignment.Center:
+                default:
+                    oy = (rect.Bottom - rect.Height / 2.0) - (ft.Height / 2.0);
+                    break;
+            }
+
+            return new Point(ox, oy);
+        }
+        
         private static Brush CreateBrush(ArgbColor color)
         {
             var brush = new SolidColorBrush(
@@ -647,41 +682,6 @@ namespace Test
             DrawPathGeometryInternal(_dc, half, fill, stroke, qbezier.IsFilled, pg);
         }
 
-        private static Point GetTextOrigin(ShapeStyle style, ref Rect rect, FormattedText ft)
-        {
-            double ox, oy;
-
-            switch (style.TextHAlignment)
-            {
-                case TextHAlignment.Left:
-                    ox = rect.TopLeft.X;
-                    break;
-                case TextHAlignment.Right:
-                    ox = rect.Right - ft.Width;
-                    break;
-                case TextHAlignment.Center:
-                default:
-                    ox = (rect.Left + rect.Width / 2.0) - (ft.Width / 2.0);
-                    break;
-            }
-
-            switch (style.TextVAlignment)
-            {
-                case TextVAlignment.Top:
-                    oy = rect.TopLeft.Y;
-                    break;
-                case TextVAlignment.Bottom:
-                    oy = rect.Bottom - ft.Height;
-                    break;
-                case TextVAlignment.Center:
-                default:
-                    oy = (rect.Bottom - rect.Height / 2.0) - (ft.Height / 2.0);
-                    break;
-            }
-
-            return new Point(ox, oy);
-        }
-        
         public void Draw(object dc, XText text, double dx, double dy)
         {
             var _dc = dc as DrawingContext;
