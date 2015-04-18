@@ -334,6 +334,174 @@
                              VerticalAlignment="Center"/>
                 </Grid>
             </Expander>
+            <Expander Header="Line Start" IsExpanded="False">
+                <Grid DataContext="{Binding LineStyle.StartArrowStyle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Arrow Type" 
+                               Margin="0,0,2,0" 
+                               Grid.Row="0"
+                               Grid.Column="0" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="IsFilled" 
+                               Margin="0,0,2,0" 
+                               Grid.Row="1"
+                               Grid.Column="0" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="RadiusX" 
+                               Margin="0,0,2,0" 
+                               Grid.Row="2" 
+                               Grid.Column="0" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="RadiusY" 
+                               Margin="0,0,2,0" 
+                               Grid.Row="3" 
+                               Grid.Column="0" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding ArrowType}" 
+                             BorderBrush="{x:Null}" 
+                             Grid.Row="0" 
+                             Grid.Column="1" 
+                             Grid.ColumnSpan="2"
+                             TextAlignment="Left" 
+                             VerticalAlignment="Center"/>
+                    <CheckBox Content=""
+                              IsChecked="{Binding IsFilled}"
+                              Grid.Row="1" 
+                              Grid.Column="1" 
+                              Grid.ColumnSpan="2"
+                              Margin="0,1,0,1"/>
+                    <Slider Value="{Binding RadiusX}" 
+                            Minimum="0" 
+                            Maximum="16" 
+                            TickFrequency="0.1" 
+                            SmallChange="0.1"
+                            LargeChange="1"
+                            IsSnapToTickEnabled="True" 
+                            Grid.Row="2" 
+                            Grid.Column="1" 
+                            Margin="1"/>
+                    <Slider Value="{Binding RadiusY}" 
+                            Minimum="0" 
+                            Maximum="16" 
+                            TickFrequency="0.1" 
+                            SmallChange="0.1"
+                            LargeChange="1"
+                            IsSnapToTickEnabled="True" 
+                            Grid.Row="3" 
+                            Grid.Column="1" 
+                            Margin="1"/>
+                    <TextBox Text="{Binding RadiusX}" 
+                             BorderBrush="{x:Null}" 
+                             Grid.Row="2" 
+                             Grid.Column="2" 
+                             TextAlignment="Center" 
+                             VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding RadiusY}" 
+                             BorderBrush="{x:Null}" 
+                             Grid.Row="3" 
+                             Grid.Column="2" 
+                             TextAlignment="Center" 
+                             VerticalAlignment="Center"/>
+                </Grid>
+            </Expander>
+            <Expander Header="Line End" IsExpanded="False">
+                <Grid DataContext="{Binding LineStyle.EndArrowStyle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Arrow Type" 
+                               Margin="0,0,2,0" 
+                               Grid.Row="0"
+                               Grid.Column="0" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="IsFilled" 
+                               Margin="0,0,2,0" 
+                               Grid.Row="1"
+                               Grid.Column="0" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="RadiusX" 
+                               Margin="0,0,2,0" 
+                               Grid.Row="2" 
+                               Grid.Column="0" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="RadiusY" 
+                               Margin="0,0,2,0" 
+                               Grid.Row="3" 
+                               Grid.Column="0" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding ArrowType}" 
+                             BorderBrush="{x:Null}" 
+                             Grid.Row="0" 
+                             Grid.Column="1" 
+                             Grid.ColumnSpan="2"
+                             TextAlignment="Left" 
+                             VerticalAlignment="Center"/>
+                    <CheckBox Content=""
+                              IsChecked="{Binding IsFilled}"
+                              Grid.Row="1" 
+                              Grid.Column="1" 
+                              Grid.ColumnSpan="2"
+                              Margin="0,1,0,1"/>
+                    <Slider Value="{Binding RadiusX}" 
+                            Minimum="0" 
+                            Maximum="16" 
+                            TickFrequency="0.1" 
+                            SmallChange="0.1"
+                            LargeChange="1"
+                            IsSnapToTickEnabled="True" 
+                            Grid.Row="2" 
+                            Grid.Column="1" 
+                            Margin="1"/>
+                    <Slider Value="{Binding RadiusY}" 
+                            Minimum="0" 
+                            Maximum="16" 
+                            TickFrequency="0.1" 
+                            SmallChange="0.1"
+                            LargeChange="1"
+                            IsSnapToTickEnabled="True" 
+                            Grid.Row="3" 
+                            Grid.Column="1" 
+                            Margin="1"/>
+                    <TextBox Text="{Binding RadiusX}" 
+                             BorderBrush="{x:Null}" 
+                             Grid.Row="2" 
+                             Grid.Column="2" 
+                             TextAlignment="Center" 
+                             VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding RadiusY}" 
+                             BorderBrush="{x:Null}" 
+                             Grid.Row="3" 
+                             Grid.Column="2" 
+                             TextAlignment="Center" 
+                             VerticalAlignment="Center"/>
+                </Grid>
+            </Expander>
         </StackPanel>
     </Grid>
 </UserControl>
