@@ -196,6 +196,12 @@ namespace Test.Windows
                     (new LayersWindow() { Owner = this, DataContext = editor }).Show();
                 });
 
+            editor.StyleWindowCommand = new DelegateCommand(
+                () =>
+                {
+                    (new StyleWindow() { Owner = this, DataContext = editor }).Show();
+                });
+
             editor.StylesWindowCommand = new DelegateCommand(
                 () =>
                 {
