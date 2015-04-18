@@ -21,6 +21,7 @@
         <KeyBinding Command="{Binding GroupSelectedCommand}" Gesture="Ctrl+Shift+G"/>
         <KeyBinding Command="{Binding GroupCurrentLayerCommand}" Gesture="Ctrl+Shift+G"/>
         <KeyBinding Command="{Binding LayersWindowCommand}" Gesture="Ctrl+L"/>
+        <KeyBinding Command="{Binding StyleWindowCommand}" Gesture="Ctrl+K"/>
         <KeyBinding Command="{Binding StylesWindowCommand}" Gesture="Ctrl+T"/>
         <KeyBinding Command="{Binding ShapesWindowCommand}" Gesture="Ctrl+H"/>
         <KeyBinding Command="{Binding ContainerWindowCommand}" Gesture="Ctrl+R"/>
