@@ -98,8 +98,6 @@
     <Compile Include="Demo.cs" />
     <Compile Include="Renderers\PdfArc.cs" />
     <Compile Include="Renderers\PdfRenderer.cs" />
-    <Compile Include="Renderers\WpfArc.cs" />
-    <Compile Include="Renderers\WpfRenderer.cs" />
     <Compile Include="Util\ContainerSerializer.cs" />
     <Compile Include="Util\ListContractResolver.cs" />
     <Compile Include="Windows\ContainerWindow.xaml.cs">
@@ -117,10 +115,6 @@
     <Compile Include="Windows\StyleWindow.xaml.cs">
       <DependentUpon>StyleWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controls\ContainerControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\LayersControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -148,9 +142,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Controls\ContainerControl.xaml.cs">
-      <DependentUpon>ContainerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\LayersControl.xaml.cs">
       <DependentUpon>LayersControl.xaml</DependentUpon>
@@ -221,6 +212,10 @@
     <ProjectReference Include="..\Test2d\Test2d.csproj">
       <Project>{60dda5d9-7acc-41af-9123-c96abb6b7828}</Project>
       <Name>Test2d</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestWPF\TestWPF.csproj">
+      <Project>{a6e4a619-c1d8-4215-aeed-8f4839699d74}</Project>
+      <Name>TestWPF</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

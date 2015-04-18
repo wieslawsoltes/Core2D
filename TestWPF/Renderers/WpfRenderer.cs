@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Media;
 using Test2d;
 
-namespace Test
+namespace TestWPF
 {
     public class WpfRenderer : ObservableObject, IRenderer
     {

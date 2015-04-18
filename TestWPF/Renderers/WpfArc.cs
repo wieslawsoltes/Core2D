@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Test2d;
 
-namespace Test
+namespace TestWPF
 {
     internal struct WpfArc
     {
