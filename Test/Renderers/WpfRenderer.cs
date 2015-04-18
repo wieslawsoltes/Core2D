@@ -324,12 +324,15 @@ namespace Test
 
             var sas = line.Style.LineStyle.StartArrowStyle;
             var eas = line.Style.LineStyle.EndArrowStyle;
-            
+            double a1 = Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI;
+            double a2 = Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI;
+            bool doRectTransform1 = a1 % 90.0 != 0.0;
+            bool doRectTransform2 = a2 % 90.0 != 0.0;
+            var t1 = new RotateTransform(a1, x1, y1);
+            var t2 = new RotateTransform(a2, x2, y2);
+
             Point pt1;
             Point pt2;
-
-            var t1 = new RotateTransform(Math.Atan2(y1 - y2, x1 - x2) * (180.0 / Math.PI), x1, y1);
-            var t2 = new RotateTransform(Math.Atan2(y2 - y1, x2 - x1) * (180.0 / Math.PI), x2, y2);
 
             double radiusX1 = sas.RadiusX;
             double radiusY1 = sas.RadiusY;
@@ -347,10 +350,18 @@ namespace Test
                 case ArrowType.Rectangle:
                     {
                         pt1 = t1.Transform(new Point(x1 - sizeX1, y1));
-                        _dc.PushTransform(t1);
                         var rect = new Rect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        DrawRectangleInternal(_dc, half, fill, stroke, sas.IsFilled, ref rect);
-                        _dc.Pop();
+                        if (doRectTransform1)
+                        {
+                            _dc.PushTransform(t1);
+                            DrawRectangleInternal(_dc, half, fill, stroke, sas.IsFilled, ref rect);
+                            _dc.Pop();
+                        }
+                        else
+                        {
+                            var bounds = t1.TransformBounds(rect);
+                            DrawRectangleInternal(_dc, half, fill, stroke, sas.IsFilled, ref bounds);
+                        }
                     }
                     break;
                 case ArrowType.Ellipse:
@@ -365,14 +376,12 @@ namespace Test
                 case ArrowType.Arrow:
                     {
                         pt1 = t1.Transform(new Point(x1, y1));
-                        _dc.PushTransform(t1);
-                        var p11 = new Point(x1 - sizeX1, y1 + sizeY1);
-                        var p21 = new Point(x1, y1);
-                        var p12 = new Point(x1 - sizeX1, y1 - sizeY1);
-                        var p22 = new Point(x1, y1);
+                        var p11 = t1.Transform(new Point(x1 - sizeX1, y1 + sizeY1));
+                        var p21 = t1.Transform(new Point(x1, y1));
+                        var p12 = t1.Transform(new Point(x1 - sizeX1, y1 - sizeY1));
+                        var p22 = t1.Transform(new Point(x1, y1));
                         DrawLineInternal(_dc, half, stroke, ref p11, ref p21);
                         DrawLineInternal(_dc, half, stroke, ref p12, ref p22);
-                        _dc.Pop();
                     }
                     break;
             }
@@ -393,10 +402,18 @@ namespace Test
                 case ArrowType.Rectangle:
                     {
                         pt2 = t2.Transform(new Point(x2 - sizeX2, y2));
-                        _dc.PushTransform(t2);
                         var rect = new Rect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        DrawRectangleInternal(_dc, half, fill, stroke, eas.IsFilled, ref rect);
-                        _dc.Pop();
+                        if (doRectTransform2)
+                        {
+                            _dc.PushTransform(t2);
+                            DrawRectangleInternal(_dc, half, fill, stroke, eas.IsFilled, ref rect);
+                            _dc.Pop();
+                        }
+                        else
+                        {
+                            var bounds = t2.TransformBounds(rect);
+                            DrawRectangleInternal(_dc, half, fill, stroke, eas.IsFilled, ref bounds);
+                        }
                     }
                     break;
                 case ArrowType.Ellipse:
@@ -411,14 +428,12 @@ namespace Test
                 case ArrowType.Arrow:
                     {
                          pt2 = t2.Transform(new Point(x2, y2));
-                         _dc.PushTransform(t2);
-                         var p11 = new Point(x2 - sizeX2, y2 + sizeY2);
-                         var p21 = new Point(x2, y2);
-                         var p12 = new Point(x2 - sizeX2, y2 - sizeY2);
-                         var p22 = new Point(x2, y2);
+                         var p11 = t2.Transform(new Point(x2 - sizeX2, y2 + sizeY2));
+                         var p21 = t2.Transform(new Point(x2, y2));
+                         var p12 = t2.Transform(new Point(x2 - sizeX2, y2 - sizeY2));
+                         var p22 = t2.Transform(new Point(x2, y2));
                          DrawLineInternal(_dc, half, stroke, ref p11, ref p21);
                          DrawLineInternal(_dc, half, stroke, ref p12, ref p22);
-                        _dc.Pop();
                     }
                     break;
             }
