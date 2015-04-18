@@ -187,6 +187,9 @@ namespace Test2d
             style.PropertyChanged += StyleObserver;
             style.Stroke.PropertyChanged += StyleObserver;
             style.Fill.PropertyChanged += StyleObserver;
+            style.LineStyle.PropertyChanged += StyleObserver;
+            style.LineStyle.StartArrowStyle.PropertyChanged += StyleObserver;
+            style.LineStyle.EndArrowStyle.PropertyChanged += StyleObserver;
             Debug("Add Style: " + style.Name);
         }
 
@@ -195,6 +198,9 @@ namespace Test2d
             style.PropertyChanged -= StyleObserver;
             style.Stroke.PropertyChanged -= StyleObserver;
             style.Fill.PropertyChanged -= StyleObserver;
+            style.LineStyle.PropertyChanged -= StyleObserver;
+            style.LineStyle.StartArrowStyle.PropertyChanged -= StyleObserver;
+            style.LineStyle.EndArrowStyle.PropertyChanged -= StyleObserver;
             Debug("Remove Style: " + style.Name);
         }
 
