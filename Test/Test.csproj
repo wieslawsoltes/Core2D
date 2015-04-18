@@ -92,6 +92,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\StyleControl.xaml.cs">
+      <DependentUpon>StyleControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Demo.cs" />
     <Compile Include="Renderers\PdfArc.cs" />
     <Compile Include="Renderers\PdfRenderer.cs" />
@@ -111,6 +114,9 @@
     <Compile Include="Windows\StylesWindow.xaml.cs">
       <DependentUpon>StylesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\StyleWindow.xaml.cs">
+      <DependentUpon>StyleWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\ContainerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -126,6 +132,10 @@
     <Page Include="Controls\ShapesControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\StyleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\StylesControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -171,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\StylesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\StyleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
