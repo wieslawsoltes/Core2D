@@ -28,11 +28,11 @@ namespace Test.Windows
         void Close();
     }
 
-    public class MainViewModel : ObservableObject
+    public class EditorContext : ObservableObject
     {
         private Editor _editor;
 
-        public Editor Editor 
+        public Editor Editor
         {
             get { return _editor; }
             set
@@ -40,6 +40,7 @@ namespace Test.Windows
                 if (value != _editor)
                 {
                     _editor = value;
+                    Notify("Editor");
                 }
             }
         }
@@ -278,44 +279,44 @@ namespace Test.Windows
 
     public partial class MainWindow : Window, IView
     {
-        private MainViewModel _vm;
+        private EditorContext _context;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _vm = new MainViewModel();
+            _context = new EditorContext();
 
-            _vm.Initialize(this);
+            _context.Initialize(this);
 
-            _vm.Editor.LayersWindowCommand = new DelegateCommand(
+            _context.Editor.LayersWindowCommand = new DelegateCommand(
                 () =>
                 {
-                    (new LayersWindow() { Owner = this, DataContext = _vm.Editor }).Show();
+                    (new LayersWindow() { Owner = this, DataContext = _context.Editor }).Show();
                 });
 
-            _vm.Editor.StyleWindowCommand = new DelegateCommand(
+            _context.Editor.StyleWindowCommand = new DelegateCommand(
                 () =>
                 {
-                    (new StyleWindow() { Owner = this, DataContext = _vm.Editor }).Show();
+                    (new StyleWindow() { Owner = this, DataContext = _context.Editor }).Show();
                 });
 
-            _vm.Editor.StylesWindowCommand = new DelegateCommand(
+            _context.Editor.StylesWindowCommand = new DelegateCommand(
                 () =>
                 {
-                    (new StylesWindow() { Owner = this, DataContext = _vm.Editor }).Show();
+                    (new StylesWindow() { Owner = this, DataContext = _context.Editor }).Show();
                 });
 
-            _vm.Editor.ShapesWindowCommand = new DelegateCommand(
+            _context.Editor.ShapesWindowCommand = new DelegateCommand(
                 () =>
                 {
-                    (new ShapesWindow() { Owner = this, DataContext = _vm.Editor }).Show();
+                    (new ShapesWindow() { Owner = this, DataContext = _context.Editor }).Show();
                 });
 
-            _vm.Editor.ContainerWindowCommand = new DelegateCommand(
+            _context.Editor.ContainerWindowCommand = new DelegateCommand(
                 () =>
                 {
-                    (new ContainerWindow() { Owner = this, DataContext = _vm.Editor }).Show();
+                    (new ContainerWindow() { Owner = this, DataContext = _context.Editor }).Show();
                 });
 
             Loaded +=
@@ -324,7 +325,7 @@ namespace Test.Windows
                     //Demo.All(_vm.Editor.Container, 10);
                 };
 
-            DataContext = _vm.Editor;
+            DataContext = _context.Editor;
         }
     }
 }
