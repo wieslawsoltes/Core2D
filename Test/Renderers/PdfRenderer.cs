@@ -61,17 +61,6 @@ namespace Test
             }
         }
 
-        private void Draw(object gfx, Test2d.Container container)
-        {
-            foreach (var layer in container.Layers)
-            {
-                if (layer.IsVisible)
-                {
-                    Draw(gfx, layer);
-                }
-            }
-        }
-
         private static XColor ToXColor(Test2d.ArgbColor color)
         {
             return XColor.FromArgb(
@@ -109,6 +98,17 @@ namespace Test
 
         public void ClearCache()
         {
+        }
+
+        private void Draw(object gfx, Test2d.Container container)
+        {
+            foreach (var layer in container.Layers)
+            {
+                if (layer.IsVisible)
+                {
+                    Draw(gfx, layer);
+                }
+            }
         }
 
         public void Draw(object gfx, Test2d.Layer layer)
