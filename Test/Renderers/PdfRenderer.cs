@@ -16,7 +16,7 @@ namespace Test
         public bool DrawPoints { get; set; }
         public double Zoom { get; set; }
 
-        private Func<double, double> ScaleToPage;
+        private Func<double, double> _scaleToPage;
 
         public void Save(string path, Test2d.Container container)
         {
@@ -54,7 +54,7 @@ namespace Test
                 double scale = Math.Min(scaleX, scaleY);
 
                 // set scaling function
-                ScaleToPage = (value) => value * scale;
+                _scaleToPage = (value) => value * scale;
 
                 // draw block contents to pdf graphics
                 Draw(gfx, container);
@@ -72,7 +72,7 @@ namespace Test
             }
         }
 
-        private XColor ToXColor(Test2d.ArgbColor color)
+        private static XColor ToXColor(Test2d.ArgbColor color)
         {
             return XColor.FromArgb(
                 color.A,
@@ -81,22 +81,22 @@ namespace Test
                 color.B);
         }
 
-        private XPen ToXPen(Test2d.ShapeStyle style)
+        private static XPen ToXPen(Test2d.ShapeStyle style, Func<double, double> scale)
         {
             return new XPen(
                 ToXColor(style.Stroke),
-                ScaleToPage(style.Thickness))
+                scale(style.Thickness))
             {
                 LineCap = XLineCap.Flat
             };
         }
 
-        private XSolidBrush ToXSolidBrush(Test2d.ArgbColor color)
+        private static XSolidBrush ToXSolidBrush(Test2d.ArgbColor color)
         {
             return new XSolidBrush(ToXColor(color));
         }
 
-        private System.Windows.Rect CreateRect(Test2d.XPoint tl, Test2d.XPoint br, double dx, double dy)
+        private static System.Windows.Rect CreateRect(Test2d.XPoint tl, Test2d.XPoint br, double dx, double dy)
         {
             double tlx = Math.Min(tl.X, br.X);
             double tly = Math.Min(tl.Y, br.Y);
@@ -122,11 +122,11 @@ namespace Test
         public void Draw(object gfx, Test2d.XLine line, double dx, double dy)
         {
             (gfx as XGraphics).DrawLine(
-                ToXPen(line.Style),
-                ScaleToPage(line.Start.X + dx),
-                ScaleToPage(line.Start.Y + dy),
-                ScaleToPage(line.End.X + dx),
-                ScaleToPage(line.End.Y + dy));
+                ToXPen(line.Style, _scaleToPage),
+                _scaleToPage(line.Start.X + dx),
+                _scaleToPage(line.Start.Y + dy),
+                _scaleToPage(line.End.X + dx),
+                _scaleToPage(line.End.Y + dy));
         }
 
         public void Draw(object gfx, Test2d.XRectangle rectangle, double dx, double dy)
@@ -139,21 +139,21 @@ namespace Test
             if (rectangle.IsFilled)
             {
                 (gfx as XGraphics).DrawRectangle(
-                    ToXPen(rectangle.Style),
+                    ToXPen(rectangle.Style, _scaleToPage),
                     ToXSolidBrush(rectangle.Style.Fill),
-                    ScaleToPage(rect.X),
-                    ScaleToPage(rect.Y),
-                    ScaleToPage(rect.Width),
-                    ScaleToPage(rect.Height));
+                    _scaleToPage(rect.X),
+                    _scaleToPage(rect.Y),
+                    _scaleToPage(rect.Width),
+                    _scaleToPage(rect.Height));
             }
             else
             {
                 (gfx as XGraphics).DrawRectangle(
-                    ToXPen(rectangle.Style),
-                    ScaleToPage(rect.X),
-                    ScaleToPage(rect.Y),
-                    ScaleToPage(rect.Width),
-                    ScaleToPage(rect.Height));
+                    ToXPen(rectangle.Style, _scaleToPage),
+                    _scaleToPage(rect.X),
+                    _scaleToPage(rect.Y),
+                    _scaleToPage(rect.Width),
+                    _scaleToPage(rect.Height));
             }
         }
 
@@ -167,21 +167,21 @@ namespace Test
             if (ellipse.IsFilled)
             {
                 (gfx as XGraphics).DrawEllipse(
-                    ToXPen(ellipse.Style),
+                    ToXPen(ellipse.Style, _scaleToPage),
                     ToXSolidBrush(ellipse.Style.Fill),
-                    ScaleToPage(rect.X),
-                    ScaleToPage(rect.Y),
-                    ScaleToPage(rect.Width),
-                    ScaleToPage(rect.Height));
+                    _scaleToPage(rect.X),
+                    _scaleToPage(rect.Y),
+                    _scaleToPage(rect.Width),
+                    _scaleToPage(rect.Height));
             }
             else
             {
                 (gfx as XGraphics).DrawEllipse(
-                    ToXPen(ellipse.Style),
-                    ScaleToPage(rect.X),
-                    ScaleToPage(rect.Y),
-                    ScaleToPage(rect.Width),
-                    ScaleToPage(rect.Height));
+                    ToXPen(ellipse.Style, _scaleToPage),
+                    _scaleToPage(rect.X),
+                    _scaleToPage(rect.Y),
+                    _scaleToPage(rect.Width),
+                    _scaleToPage(rect.Height));
             }
         }
 
@@ -190,11 +190,11 @@ namespace Test
             var a = PdfArc.FromXArc(arc, dx, dy);
 
             (gfx as XGraphics).DrawArc(
-                ToXPen(arc.Style),
-                ScaleToPage(a.X),
-                ScaleToPage(a.Y),
-                ScaleToPage(a.Width),
-                ScaleToPage(a.Height),
+                ToXPen(arc.Style, _scaleToPage),
+                _scaleToPage(a.X),
+                _scaleToPage(a.Y),
+                _scaleToPage(a.Width),
+                _scaleToPage(a.Height),
                 a.StartAngle,
                 a.SweepAngle);
         }
@@ -202,15 +202,15 @@ namespace Test
         public void Draw(object gfx, Test2d.XBezier bezier, double dx, double dy)
         {
             (gfx as XGraphics).DrawBezier(
-                ToXPen(bezier.Style),
-                ScaleToPage(bezier.Point1.X),
-                ScaleToPage(bezier.Point1.Y),
-                ScaleToPage(bezier.Point2.X),
-                ScaleToPage(bezier.Point2.Y),
-                ScaleToPage(bezier.Point3.X),
-                ScaleToPage(bezier.Point3.Y),
-                ScaleToPage(bezier.Point4.X),
-                ScaleToPage(bezier.Point4.Y));
+                ToXPen(bezier.Style, _scaleToPage),
+                _scaleToPage(bezier.Point1.X),
+                _scaleToPage(bezier.Point1.Y),
+                _scaleToPage(bezier.Point2.X),
+                _scaleToPage(bezier.Point2.Y),
+                _scaleToPage(bezier.Point3.X),
+                _scaleToPage(bezier.Point3.Y),
+                _scaleToPage(bezier.Point4.X),
+                _scaleToPage(bezier.Point4.Y));
         }
 
         public void Draw(object gfx, Test2d.XQBezier qbezier, double dx, double dy)
@@ -225,11 +225,11 @@ namespace Test
             double y4 = qbezier.Point3.Y;
 
             (gfx as XGraphics).DrawBezier(
-                ToXPen(qbezier.Style),
-                ScaleToPage(x1 + dx), ScaleToPage(y1 + dy),
-                ScaleToPage(x2 + dx), ScaleToPage(y2 + dy),
-                ScaleToPage(x3 + dx), ScaleToPage(y3 + dy),
-                ScaleToPage(x4 + dx), ScaleToPage(y4 + dy));
+                ToXPen(qbezier.Style, _scaleToPage),
+                _scaleToPage(x1 + dx), _scaleToPage(y1 + dy),
+                _scaleToPage(x2 + dx), _scaleToPage(y2 + dy),
+                _scaleToPage(x3 + dx), _scaleToPage(y3 + dy),
+                _scaleToPage(x4 + dx), _scaleToPage(y4 + dy));
         }
 
         public void Draw(object gfx, Test2d.XText text, double dx, double dy)
@@ -240,7 +240,7 @@ namespace Test
 
             XFont font = new XFont(
                 text.Style.FontName,
-                ScaleToPage(text.Style.FontSize),
+                _scaleToPage(text.Style.FontSize),
                 XFontStyle.Regular,
                 options);
 
@@ -250,10 +250,10 @@ namespace Test
                 dx, dy);
 
             XRect srect = new XRect(
-                ScaleToPage(rect.X),
-                ScaleToPage(rect.Y),
-                ScaleToPage(rect.Width),
-                ScaleToPage(rect.Height));
+                _scaleToPage(rect.X),
+                _scaleToPage(rect.Y),
+                _scaleToPage(rect.Width),
+                _scaleToPage(rect.Height));
 
             XStringFormat format = new XStringFormat();
             switch (text.Style.TextHAlignment)
