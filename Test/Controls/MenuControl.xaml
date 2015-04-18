@@ -29,7 +29,7 @@
                         <Setter Property="IsCheckable" Value="True"/>
                         <Setter Property="IsChecked" Value="False"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding CurrentTool}" Value="None">
+                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="None">
                                 <Setter Property="IsChecked" Value="True"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -43,7 +43,7 @@
                         <Setter Property="IsCheckable" Value="True"/>
                         <Setter Property="IsChecked" Value="False"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding CurrentTool}" Value="Line">
+                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Line">
                                 <Setter Property="IsChecked" Value="True"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -56,7 +56,7 @@
                         <Setter Property="IsCheckable" Value="True"/>
                         <Setter Property="IsChecked" Value="False"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding CurrentTool}" Value="Rectangle">
+                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Rectangle">
                                 <Setter Property="IsChecked" Value="True"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -69,7 +69,7 @@
                         <Setter Property="IsCheckable" Value="True"/>
                         <Setter Property="IsChecked" Value="False"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding CurrentTool}" Value="Ellipse">
+                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Ellipse">
                                 <Setter Property="IsChecked" Value="True"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -83,7 +83,7 @@
                         <Setter Property="IsCheckable" Value="True"/>
                         <Setter Property="IsChecked" Value="False"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding CurrentTool}" Value="Arc">
+                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Arc">
                                 <Setter Property="IsChecked" Value="True"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -96,7 +96,7 @@
                         <Setter Property="IsCheckable" Value="True"/>
                         <Setter Property="IsChecked" Value="False"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding CurrentTool}" Value="Bezier">
+                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Bezier">
                                 <Setter Property="IsChecked" Value="True"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -109,7 +109,7 @@
                         <Setter Property="IsCheckable" Value="True"/>
                         <Setter Property="IsChecked" Value="False"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding CurrentTool}" Value="QBezier">
+                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="QBezier">
                                 <Setter Property="IsChecked" Value="True"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -123,7 +123,7 @@
                         <Setter Property="IsCheckable" Value="True"/>
                         <Setter Property="IsChecked" Value="False"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding CurrentTool}" Value="Text">
+                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Text">
                                 <Setter Property="IsChecked" Value="True"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -133,19 +133,19 @@
         </MenuItem>
         <MenuItem Header="_Options">
             <MenuItem Header="Default is _Filled" 
-                        IsCheckable="True" 
-                        IsChecked="{Binding DefaultIsFilled, Mode=OneWay}"
-                        Command="{Binding DefaultIsFilledCommand}" InputGestureText="F"/>
+                      IsCheckable="True" 
+                      IsChecked="{Binding Editor.DefaultIsFilled, Mode=OneWay}"
+                      Command="{Binding DefaultIsFilledCommand}" InputGestureText="F"/>
             <Separator/>
             <MenuItem Header="_Snap to Grid" 
-                        IsCheckable="True" 
-                        IsChecked="{Binding SnapToGrid, Mode=OneWay}"
-                        Command="{Binding SnapToGridCommand}" InputGestureText="G"/>
+                      IsCheckable="True" 
+                      IsChecked="{Binding Editor.SnapToGrid, Mode=OneWay}"
+                      Command="{Binding SnapToGridCommand}" InputGestureText="G"/>
             <Separator/>
             <MenuItem Header="_Draw Points" 
-                        IsCheckable="True" 
-                        IsChecked="{Binding Renderer.DrawPoints, Mode=OneWay}"
-                        Command="{Binding DrawPointsCommand}" InputGestureText=""/>
+                      IsCheckable="True" 
+                      IsChecked="{Binding Editor.Renderer.DrawPoints, Mode=OneWay}"
+                      Command="{Binding DrawPointsCommand}" InputGestureText=""/>
         </MenuItem>
         <MenuItem Header="_Window">
             <MenuItem Header="_Layers..." Command="{Binding LayersWindowCommand}" InputGestureText="Ctrl+L"/>

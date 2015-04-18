@@ -23,234 +23,247 @@ using TestWPF;
 
 namespace Test.Windows
 {
-    public partial class MainWindow : Window
+    public interface IView
     {
-        public MainWindow()
-        {
-            InitializeComponent();
+        void Close();
+    }
 
-            InitializeEditor();
+    public class EditorContext : ObservableObject
+    {
+        public ICommand NewCommand { get; set; }
+        public ICommand OpenCommand { get; set; }
+        public ICommand SaveAsCommand { get; set; }
+        public ICommand ExportCommand { get; set; }
+        public ICommand ExitCommand { get; set; }
+
+        public ICommand ClearCommand { get; set; }
+
+        public ICommand ToolNoneCommand { get; set; }
+        public ICommand ToolLineCommand { get; set; }
+        public ICommand ToolRectangleCommand { get; set; }
+        public ICommand ToolEllipseCommand { get; set; }
+        public ICommand ToolArcCommand { get; set; }
+        public ICommand ToolBezierCommand { get; set; }
+        public ICommand ToolQBezierCommand { get; set; }
+        public ICommand ToolTextCommand { get; set; }
+
+        public ICommand DefaultIsFilledCommand { get; set; }
+        public ICommand SnapToGridCommand { get; set; }
+        public ICommand DrawPointsCommand { get; set; }
+
+        public ICommand AddLayerCommand { get; set; }
+        public ICommand RemoveLayerCommand { get; set; }
+
+        public ICommand AddStyleCommand { get; set; }
+        public ICommand RemoveStyleCommand { get; set; }
+
+        public ICommand RemoveShapeCommand { get; set; }
+
+        public ICommand GroupSelectedCommand { get; set; }
+        public ICommand GroupCurrentLayerCommand { get; set; }
+
+        public ICommand LayersWindowCommand { get; set; }
+        public ICommand StyleWindowCommand { get; set; }
+        public ICommand StylesWindowCommand { get; set; }
+        public ICommand ShapesWindowCommand { get; set; }
+        public ICommand ContainerWindowCommand { get; set; }
+
+        private Editor _editor;
+
+        public Editor Editor
+        {
+            get { return _editor; }
+            set
+            {
+                if (value != _editor)
+                {
+                    _editor = value;
+                    Notify("Editor");
+                }
+            }
         }
 
-        private void InitializeEditor()
+        public void Initialize(IView view)
         {
-            var editor = Editor.Create(Container.Create(), WpfRenderer.Create());
+            _editor = Editor.Create(Container.Create(), WpfRenderer.Create());
 
-            (editor.Renderer as WpfRenderer).PropertyChanged += 
+            (_editor.Renderer as WpfRenderer).PropertyChanged +=
                 (s, e) =>
                 {
                     if (e.PropertyName == "Zoom")
                     {
-                        editor.Renderer.ClearCache();
-                        editor.Container.Invalidate();
+                        _editor.Renderer.ClearCache();
+                        _editor.Container.Invalidate();
                     }
                 };
-            
-            editor.NewCommand = new DelegateCommand(
-                () => 
-                {
-                    editor.Load(Container.Create());
-                });
 
-            editor.OpenCommand = new DelegateCommand(
-                () => 
-                {
-                    Open(editor);
-                });
-
-            editor.SaveAsCommand = new DelegateCommand(
-                () => 
-                {
-                    SaveAs(editor);
-                });
-
-            editor.ExportCommand = new DelegateCommand(
+            NewCommand = new DelegateCommand(
                 () =>
                 {
-                    Export(editor);
+                    _editor.Load(Container.Create());
                 });
 
-            editor.ExitCommand = new DelegateCommand(
-                () => 
-                {
-                    Close();
-                });
-
-            editor.ClearCommand = new DelegateCommand(
-                () => 
-                {
-                    Clear(editor);
-                });
-
-            editor.ToolNoneCommand = new DelegateCommand(
-                () => 
-                {
-                    editor.CurrentTool = Tool.None;
-                });
-
-            editor.ToolLineCommand = new DelegateCommand(
-                () => 
-                {
-                    editor.CurrentTool = Tool.Line;
-                });
-
-            editor.ToolRectangleCommand = new DelegateCommand(
-                () => 
-                {
-                    editor.CurrentTool = Tool.Rectangle;
-                });
-
-            editor.ToolEllipseCommand = new DelegateCommand(
-                () => 
-                {
-                    editor.CurrentTool = Tool.Ellipse;
-                });
-
-            editor.ToolArcCommand = new DelegateCommand(
+            OpenCommand = new DelegateCommand(
                 () =>
                 {
-                    editor.CurrentTool = Tool.Arc;
+                    Open();
                 });
 
-            editor.ToolBezierCommand = new DelegateCommand(
-                () => 
-                {
-                    editor.CurrentTool = Tool.Bezier;
-                });
-
-            editor.ToolQBezierCommand = new DelegateCommand(
-                () => 
-                {
-                    editor.CurrentTool = Tool.QBezier;
-                });
-
-            editor.ToolTextCommand = new DelegateCommand(
+            SaveAsCommand = new DelegateCommand(
                 () =>
                 {
-                    editor.CurrentTool = Tool.Text;
+                    SaveAs();
                 });
 
-            editor.DefaultIsFilledCommand = new DelegateCommand(
-                () => 
-                {
-                    editor.DefaultIsFilled = !editor.DefaultIsFilled;
-                });
-
-            editor.SnapToGridCommand = new DelegateCommand(
+            ExportCommand = new DelegateCommand(
                 () =>
                 {
-                    editor.SnapToGrid = !editor.SnapToGrid;
+                    Export();
                 });
 
-            editor.DrawPointsCommand = new DelegateCommand(
+            ExitCommand = new DelegateCommand(
                 () =>
                 {
-                    editor.Renderer.DrawPoints = !editor.Renderer.DrawPoints;
-                    editor.Container.Invalidate();
+                    view.Close();
                 });
 
-            editor.AddLayerCommand = new DelegateCommand(
+            ClearCommand = new DelegateCommand(
                 () =>
                 {
-                    editor.Container.Layers.Add(Layer.Create("New"));
+                    Clear();
                 });
 
-            editor.RemoveLayerCommand = new DelegateCommand(
+            ToolNoneCommand = new DelegateCommand(
                 () =>
                 {
-                    editor.RemoveCurrentLayer();
+                    _editor.CurrentTool = Tool.None;
                 });
 
-            editor.AddStyleCommand = new DelegateCommand(
+            ToolLineCommand = new DelegateCommand(
                 () =>
                 {
-                    editor.Container.Styles.Add(ShapeStyle.Create("New"));
+                    _editor.CurrentTool = Tool.Line;
                 });
 
-            editor.RemoveStyleCommand = new DelegateCommand(
+            ToolRectangleCommand = new DelegateCommand(
                 () =>
                 {
-                    editor.RemoveCurrentStyle();
+                    _editor.CurrentTool = Tool.Rectangle;
                 });
 
-            editor.RemoveShapeCommand = new DelegateCommand(
+            ToolEllipseCommand = new DelegateCommand(
                 () =>
                 {
-                    editor.RemoveCurrentShape();
+                    _editor.CurrentTool = Tool.Ellipse;
                 });
 
-            editor.GroupSelectedCommand = new DelegateCommand(
-                () => 
-                {
-                    editor.GroupSelected();
-                });
-
-            editor.GroupCurrentLayerCommand = new DelegateCommand(
-                () => 
-                {
-                    editor.GroupCurrentLayer();
-                });
-
-            editor.LayersWindowCommand = new DelegateCommand(
+            ToolArcCommand = new DelegateCommand(
                 () =>
                 {
-                    (new LayersWindow() { Owner = this, DataContext = editor }).Show();
+                    _editor.CurrentTool = Tool.Arc;
                 });
 
-            editor.StyleWindowCommand = new DelegateCommand(
+            ToolBezierCommand = new DelegateCommand(
                 () =>
                 {
-                    (new StyleWindow() { Owner = this, DataContext = editor }).Show();
+                    _editor.CurrentTool = Tool.Bezier;
                 });
 
-            editor.StylesWindowCommand = new DelegateCommand(
+            ToolQBezierCommand = new DelegateCommand(
                 () =>
                 {
-                    (new StylesWindow() { Owner = this, DataContext = editor }).Show();
+                    _editor.CurrentTool = Tool.QBezier;
                 });
 
-            editor.ShapesWindowCommand = new DelegateCommand(
+            ToolTextCommand = new DelegateCommand(
                 () =>
                 {
-                    (new ShapesWindow() { Owner = this, DataContext = editor }).Show();
+                    _editor.CurrentTool = Tool.Text;
                 });
 
-            editor.ContainerWindowCommand = new DelegateCommand(
+            DefaultIsFilledCommand = new DelegateCommand(
                 () =>
                 {
-                    (new ContainerWindow() { Owner = this, DataContext = editor }).Show();
+                    _editor.DefaultIsFilled = !_editor.DefaultIsFilled;
                 });
 
-            Loaded += 
-                (s, e) => 
+            SnapToGridCommand = new DelegateCommand(
+                () =>
                 {
-                    //Demo.All(editor.Container, 10);
-                };
+                    _editor.SnapToGrid = !_editor.SnapToGrid;
+                });
 
-            DataContext = editor;
+            DrawPointsCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.Renderer.DrawPoints = !_editor.Renderer.DrawPoints;
+                    _editor.Container.Invalidate();
+                });
+
+            AddLayerCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.Container.Layers.Add(Layer.Create("New"));
+                });
+
+            RemoveLayerCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.RemoveCurrentLayer();
+                });
+
+            AddStyleCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.Container.Styles.Add(ShapeStyle.Create("New"));
+                });
+
+            RemoveStyleCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.RemoveCurrentStyle();
+                });
+
+            RemoveShapeCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.RemoveCurrentShape();
+                });
+
+            GroupSelectedCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.GroupSelected();
+                });
+
+            GroupCurrentLayerCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.GroupCurrentLayer();
+                });
         }
 
-        private static void Open(Editor editor, string path)
+        public void Open(string path)
         {
             var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
             var container = ContainerSerializer.Deserialize(json);
-            editor.Load(container);
+            _editor.Load(container);
         }
 
-        private static void Save(Editor editor, string path)
+        public void Save(string path)
         {
-            var json = ContainerSerializer.Serialize(editor.Container);
+            var json = ContainerSerializer.Serialize(_editor.Container);
             System.IO.File.WriteAllText(path, json, Encoding.UTF8);
         }
 
-        private static void Export(Editor editor, string path)
+        public void Export(string path)
         {
-            var renderer = new PdfRenderer() { DrawPoints = editor.Renderer.DrawPoints };
-            renderer.Save(path, editor.Container);
+            var renderer = new PdfRenderer() { DrawPoints = _editor.Renderer.DrawPoints };
+            renderer.Save(path, _editor.Container);
             System.Diagnostics.Process.Start(path);
         }
 
-        private static void Open(Editor editor)
+        public void Open()
         {
             var dlg = new OpenFileDialog()
             {
@@ -261,11 +274,11 @@ namespace Test.Windows
 
             if (dlg.ShowDialog() == true)
             {
-                Open(editor, dlg.FileName);
+                Open(dlg.FileName);
             }
         }
 
-        private static void SaveAs(Editor editor)
+        public void SaveAs()
         {
             var dlg = new SaveFileDialog()
             {
@@ -276,11 +289,11 @@ namespace Test.Windows
 
             if (dlg.ShowDialog() == true)
             {
-                Save(editor, dlg.FileName);
+                Save(dlg.FileName);
             }
         }
 
-        private static void Export(Editor editor)
+        public void Export()
         {
             var dlg = new SaveFileDialog()
             {
@@ -291,14 +304,66 @@ namespace Test.Windows
 
             if (dlg.ShowDialog() == true)
             {
-                Export(editor, dlg.FileName);
+                Export(dlg.FileName);
             }
         }
 
-        private static void Clear(Editor editor)
+        public void Clear()
         {
-            editor.Container.Clear();
-            editor.Container.Invalidate();
+            _editor.Container.Clear();
+            _editor.Container.Invalidate();
+        }
+    }
+
+    public partial class MainWindow : Window, IView
+    {
+        private EditorContext _context;
+
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            _context = new EditorContext();
+
+            _context.Initialize(this);
+
+            _context.LayersWindowCommand = new DelegateCommand(
+                () =>
+                {
+                    (new LayersWindow() { Owner = this, DataContext = _context }).Show();
+                });
+
+            _context.StyleWindowCommand = new DelegateCommand(
+                () =>
+                {
+                    (new StyleWindow() { Owner = this, DataContext = _context }).Show();
+                });
+
+            _context.StylesWindowCommand = new DelegateCommand(
+                () =>
+                {
+                    (new StylesWindow() { Owner = this, DataContext = _context }).Show();
+                });
+
+            _context.ShapesWindowCommand = new DelegateCommand(
+                () =>
+                {
+                    (new ShapesWindow() { Owner = this, DataContext = _context }).Show();
+                });
+
+            _context.ContainerWindowCommand = new DelegateCommand(
+                () =>
+                {
+                    (new ContainerWindow() { Owner = this, DataContext = _context }).Show();
+                });
+
+            Loaded +=
+                (s, e) =>
+                {
+                    //Demo.All(_vm.Editor.Container, 10);
+                };
+
+            DataContext = _context;
         }
     }
 }

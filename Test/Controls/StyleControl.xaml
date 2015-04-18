@@ -26,7 +26,7 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </UserControl.Resources>
-    <StackPanel DataContext="{Binding Container.CurrentStyle}">
+    <StackPanel DataContext="{Binding Editor.Container.CurrentStyle}">
         <GroupBox Header="Name">
             <Grid>
                 <Grid.RowDefinitions>

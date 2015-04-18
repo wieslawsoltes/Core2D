@@ -106,7 +106,7 @@ namespace TestWPF.Controls
 
         private void InitializeCanvas()
         {
-            var editor = DataContext as Editor;
+            var editor = canvas.DataContext as Editor;
 
             canvas.PreviewMouseLeftButtonDown +=
                 (s, e) =>
