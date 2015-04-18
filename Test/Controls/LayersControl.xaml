@@ -17,8 +17,8 @@
             <MenuItem Command="{Binding AddLayerCommand}" Header="_+"/>
             <MenuItem Command="{Binding RemoveLayerCommand}" Header="_-"/>
         </Menu>
-        <ListBox ItemsSource="{Binding Container.Layers}" 
-                 SelectedItem="{Binding Container.CurrentLayer}" 
+        <ListBox ItemsSource="{Binding Editor.Container.Layers}" 
+                 SelectedItem="{Binding Editor.Container.CurrentLayer}" 
                  BorderBrush="{x:Null}"
                  Grid.Row="1">
             <ListBox.ItemTemplate>
@@ -39,7 +39,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel DataContext="{Binding Container.CurrentLayer}" Grid.Row="2" Margin="2">
+        <StackPanel DataContext="{Binding Editor.Container.CurrentLayer}" Grid.Row="2" Margin="2">
             <GroupBox Header="Name">
                 <Grid>
                     <Grid.RowDefinitions>

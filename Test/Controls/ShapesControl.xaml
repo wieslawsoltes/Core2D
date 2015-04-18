@@ -16,7 +16,8 @@
         <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
             <MenuItem Command="{Binding RemoveShapeCommand}" Header="_-"/>
         </Menu>
-        <ListBox ItemsSource="{Binding Container.CurrentLayer.Shapes}" 
+        <ListBox DataContext="{Binding Editor}"
+                 ItemsSource="{Binding Container.CurrentLayer.Shapes}" 
                  SelectedItem="{Binding Container.CurrentShape}" 
                  BorderBrush="{x:Null}"
                  Grid.Row="1">

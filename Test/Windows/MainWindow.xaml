@@ -47,7 +47,7 @@
                 <Border.LayoutTransform>
                     <TransformGroup>
                         <TranslateTransform X="0" Y="0"/>
-                        <ScaleTransform ScaleX="{Binding Renderer.Zoom}" ScaleY="{Binding Renderer.Zoom}"/>
+                        <ScaleTransform ScaleX="{Binding Editor.Renderer.Zoom}" ScaleY="{Binding Editor.Renderer.Zoom}"/>
                     </TransformGroup>
                 </Border.LayoutTransform>
                 <wpf:ContainerControl/>
@@ -75,14 +75,14 @@
                 <ColumnDefinition Width="30"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="{Binding Renderer.Zoom}" 
+            <TextBlock Text="{Binding Editor.Renderer.Zoom}" 
                        Background="{x:Null}"
                        FocusVisualStyle="{x:Null}"
                        Grid.Row="0" 
                        Grid.Column="0" 
                        TextAlignment="Center" 
                        VerticalAlignment="Center"/>
-            <Slider Value="{Binding Renderer.Zoom}" 
+            <Slider Value="{Binding Editor.Renderer.Zoom}" 
                     Minimum="0.1" 
                     Maximum="16" 
                     TickFrequency="0.1" 

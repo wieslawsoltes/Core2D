@@ -8,51 +8,52 @@
              xmlns:controls="clr-namespace:TestWPF.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="810"
-             Width="{Binding Container.Width}" Height="{Binding Container.Height}">
-    <Grid Width="{Binding Container.Width}" Height="{Binding Container.Height}" Background="Transparent">
+             Width="{Binding Editor.Container.Width}" Height="{Binding Editor.Container.Height}">
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding ToolNoneCommand}" Key="N" Modifiers=""/>
+        <KeyBinding Command="{Binding ToolLineCommand}" Key="L" Modifiers=""/>
+        <KeyBinding Command="{Binding ToolRectangleCommand}" Key="R" Modifiers=""/>
+        <KeyBinding Command="{Binding ToolEllipseCommand}" Key="E" Modifiers=""/>
+        <KeyBinding Command="{Binding ToolArcCommand}" Key="A" Modifiers=""/>
+        <KeyBinding Command="{Binding ToolBezierCommand}" Key="B" Modifiers=""/>
+        <KeyBinding Command="{Binding ToolQBezierCommand}" Key="Q" Modifiers=""/>
+        <KeyBinding Command="{Binding ToolTextCommand}" Key="T" Modifiers=""/>
+        <KeyBinding Command="{Binding DefaultIsFilledCommand}" Key="F" Modifiers=""/>
+        <KeyBinding Command="{Binding SnapToGridCommand}" Key="G" Modifiers=""/>
+    </UserControl.InputBindings>
+    <Grid Width="{Binding Editor.Container.Width}" Height="{Binding Editor.Container.Height}" Background="Transparent">
         <Canvas Background="Transparent"
                 Focusable="True"
                 FocusVisualStyle="{x:Null}"
-                Width="{Binding Container.Width}" 
-                Height="{Binding Container.Height}">
-            <controls:LayerElement DataContext="{Binding Container.TemplateLayer}" Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"/>
+                Width="{Binding Editor.Container.Width}" 
+                Height="{Binding Editor.Container.Height}">
+            <controls:LayerElement DataContext="{Binding Editor.Container.TemplateLayer}" Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"/>
         </Canvas>
-        <ItemsControl ItemsSource="{Binding Container.Layers}">
+        <ItemsControl ItemsSource="{Binding Editor.Container.Layers}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas Width="{Binding Container.Width}" Height="{Binding Container.Height}" Background="Transparent"/>
+                    <Canvas Width="{Binding Editor.Container.Width}" Height="{Binding Editor.Container.Height}" Background="Transparent"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <controls:LayerElement Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"/>
+                    <controls:LayerElement Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemContainerStyle>
                 <Style TargetType="ContentPresenter">
-                    <Setter Property="Width" Value="{Binding Path=DataContext.Container.Width, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}" />
-                    <Setter Property="Height" Value="{Binding Path=DataContext.Container.Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}" />
+                    <Setter Property="Width" Value="{Binding Path=DataContext.Editor.Container.Width, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}" />
+                    <Setter Property="Height" Value="{Binding Path=DataContext.Editor.Container.Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}" />
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>
-        <Canvas x:Name="canvas" 
+        <Canvas x:Name="canvas"
+                DataContext="{Binding Editor}"
                 Background="Transparent"
                 Focusable="True"
                 FocusVisualStyle="{x:Null}"
                 Width="{Binding Container.Width}" 
                 Height="{Binding Container.Height}">
-            <Canvas.InputBindings>
-                <KeyBinding Command="{Binding ToolNoneCommand}" Key="N" Modifiers=""/>
-                <KeyBinding Command="{Binding ToolLineCommand}" Key="L" Modifiers=""/>
-                <KeyBinding Command="{Binding ToolRectangleCommand}" Key="R" Modifiers=""/>
-                <KeyBinding Command="{Binding ToolEllipseCommand}" Key="E" Modifiers=""/>
-                <KeyBinding Command="{Binding ToolArcCommand}" Key="A" Modifiers=""/>
-                <KeyBinding Command="{Binding ToolBezierCommand}" Key="B" Modifiers=""/>
-                <KeyBinding Command="{Binding ToolQBezierCommand}" Key="Q" Modifiers=""/>
-                <KeyBinding Command="{Binding ToolTextCommand}" Key="T" Modifiers=""/>
-                <KeyBinding Command="{Binding DefaultIsFilledCommand}" Key="F" Modifiers=""/>
-                <KeyBinding Command="{Binding SnapToGridCommand}" Key="G" Modifiers=""/>
-            </Canvas.InputBindings>
             <controls:LayerElement DataContext="{Binding Container.WorkingLayer}" Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"/>
         </Canvas>
     </Grid>
