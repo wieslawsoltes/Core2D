@@ -13,6 +13,7 @@ namespace Test2d
         bool DrawPoints { get; set; }
         double Zoom { get; set; }
         void ClearCache();
+        void Draw(object dc, Container container);
         void Draw(object dc, Layer layer);
         void Draw(object dc, XLine line, double dx, double dy);
         void Draw(object dc, XRectangle rectangle, double dx, double dy);

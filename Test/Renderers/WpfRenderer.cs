@@ -264,6 +264,22 @@ namespace Test
             _textCache = new Dictionary<XText, FormattedText>();
         }
 
+        public void Draw(object dc, Container container)
+        {
+            if (container.TemplateLayer.IsVisible)
+            {
+                Draw(dc, container.TemplateLayer);
+            }
+
+            foreach (var layer in container.Layers)
+            {
+                if (layer.IsVisible)
+                {
+                    Draw(dc, layer);
+                }
+            }
+        }
+
         public void Draw(object dc, Layer layer)
         {
             var _dc = dc as DrawingContext;

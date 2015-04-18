@@ -100,8 +100,13 @@ namespace Test
         {
         }
 
-        private void Draw(object gfx, Test2d.Container container)
+        public void Draw(object gfx, Test2d.Container container)
         {
+            if (container.TemplateLayer.IsVisible)
+            {
+                Draw(gfx, container.TemplateLayer);
+            }
+
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
