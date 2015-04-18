@@ -35,15 +35,6 @@ namespace Test.Windows
         {
             var editor = Editor.Create(Container.Create(), WpfRenderer.Create());
 
-            /*
-            // override line style
-            var style = editor.Container.Styles[0];
-            style.Thickness = 1.0;
-            style.LineStyle = LineStyle.Create(
-                ArrowStyle.Create(ArrowType.Rectangle, true, 0.0, 6.0),
-                ArrowStyle.Create(ArrowType.Arrow, false, 5.0, 3.0));
-            */
-            
             (editor.Renderer as WpfRenderer).PropertyChanged += 
                 (s, e) =>
                 {
