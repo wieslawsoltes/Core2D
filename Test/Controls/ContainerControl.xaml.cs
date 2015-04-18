@@ -89,7 +89,7 @@ namespace Test.Controls
             {
                 if (Renderer != null)
                 {
-                    Renderer.Render(drawingContext, layer);
+                    Renderer.Draw(drawingContext, layer);
                 }
             }
         }

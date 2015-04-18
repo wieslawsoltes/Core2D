@@ -67,7 +67,7 @@ namespace Test
             {
                 if (layer.IsVisible)
                 {
-                    Render(gfx, layer);
+                    Draw(gfx, layer);
                 }
             }
         }
@@ -111,7 +111,7 @@ namespace Test
                 new System.Windows.Point(brx + dx, bry + dy));
         }
 
-        public void Render(object gfx, Test2d.Layer layer)
+        public void Draw(object gfx, Test2d.Layer layer)
         {
             foreach (var shape in layer.Shapes)
             {

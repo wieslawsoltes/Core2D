@@ -229,7 +229,7 @@ namespace Test
             _textCache = new Dictionary<XText, FormattedText>();
         }
 
-        public void Render(object dc, Layer layer)
+        public void Draw(object dc, Layer layer)
         {
             var _dc = dc as DrawingContext;
 
