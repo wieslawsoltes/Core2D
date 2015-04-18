@@ -124,14 +124,170 @@ namespace Test
             }
         }
 
+        private static void DrawLineInternal(
+            XGraphics gfx,
+            XPen pen,
+            ref XPoint p0,
+            ref XPoint p1)
+        {
+            gfx.DrawLine(pen, p0, p1);
+        }
+
+        private static void DrawRectangleInternal(
+            XGraphics gfx,
+            XSolidBrush brush,
+            XPen pen,
+            bool isFilled,
+            ref XRect rect)
+        {
+            if (isFilled)
+            {
+                gfx.DrawRectangle(pen, brush, rect);
+            }
+            else
+            {
+                gfx.DrawRectangle(pen, rect);
+            }
+        }
+
+        private static void DrawEllipseInternal(
+            XGraphics gfx,
+            XSolidBrush brush,
+            XPen pen,
+            bool isFilled,
+            ref XRect rect)
+        {
+            if (isFilled)
+            {
+                gfx.DrawEllipse(pen, brush, rect);
+            }
+            else
+            {
+                gfx.DrawEllipse(pen, rect);
+            }
+        }
+
         public void Draw(object gfx, Test2d.XLine line, double dx, double dy)
         {
-            (gfx as XGraphics).DrawLine(
-                ToXPen(line.Style, _scaleToPage),
-                _scaleToPage(line.Start.X + dx),
-                _scaleToPage(line.Start.Y + dy),
-                _scaleToPage(line.End.X + dx),
-                _scaleToPage(line.End.Y + dy));
+            var _gfx = gfx as XGraphics;
+
+            XSolidBrush fill = ToXSolidBrush(line.Style.Fill);
+            XPen stroke = ToXPen(line.Style, _scaleToPage);
+
+            double x1 = _scaleToPage(line.Start.X + dx);
+            double y1 = _scaleToPage(line.Start.Y + dy);
+            double x2 = _scaleToPage(line.End.X + dx);
+            double y2 = _scaleToPage(line.End.Y + dy);
+
+            var sas = line.Style.LineStyle.StartArrowStyle;
+            var eas = line.Style.LineStyle.EndArrowStyle;
+            double a1 = Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI;
+            double a2 = Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI;
+
+            var t1 = new XMatrix();
+            var c1 = new XPoint(x1, y1);
+            t1.RotateAtPrepend(a1, c1);
+
+            var t2 = new XMatrix();
+            var c2 = new XPoint(x2, y2);
+            t2.RotateAtPrepend(a2, c2);
+
+            XPoint pt1;
+            XPoint pt2;
+
+            double radiusX1 = sas.RadiusX;
+            double radiusY1 = sas.RadiusY;
+            double sizeX1 = 2.0 * radiusX1;
+            double sizeY1 = 2.0 * radiusY1;
+
+            switch (sas.ArrowType)
+            {
+                default:
+                case Test2d.ArrowType.None:
+                    {
+                        pt1 = new XPoint(x1, y1);
+                    }
+                    break;
+                case Test2d.ArrowType.Rectangle:
+                    {
+                        pt1 = t1.Transform(new XPoint(x1 - sizeX1, y1));
+                        var rect = new XRect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
+                        _gfx.Save();
+                        _gfx.RotateAtTransform(a1, c1);
+                        DrawRectangleInternal(_gfx, fill, stroke, sas.IsFilled, ref rect);
+                        _gfx.Restore();
+                    }
+                    break;
+                case Test2d.ArrowType.Ellipse:
+                    {
+                        pt1 = t1.Transform(new XPoint(x1 - sizeX1, y1));
+                        _gfx.Save();
+                        _gfx.RotateAtTransform(a1, c1);
+                        var rect = new XRect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
+                        DrawEllipseInternal(_gfx, fill, stroke, sas.IsFilled, ref rect);
+                        _gfx.Restore();
+                    }
+                    break;
+                case Test2d.ArrowType.Arrow:
+                    {
+                        pt1 = t1.Transform(new XPoint(x1, y1));
+                        var p11 = t1.Transform(new XPoint(x1 - sizeX1, y1 + sizeY1));
+                        var p21 = t1.Transform(new XPoint(x1, y1));
+                        var p12 = t1.Transform(new XPoint(x1 - sizeX1, y1 - sizeY1));
+                        var p22 = t1.Transform(new XPoint(x1, y1));
+                        DrawLineInternal(_gfx, stroke, ref p11, ref p21);
+                        DrawLineInternal(_gfx, stroke, ref p12, ref p22);
+                    }
+                    break;
+            }
+
+            double radiusX2 = eas.RadiusX;
+            double radiusY2 = eas.RadiusY;
+            double sizeX2 = 2.0 * radiusX2;
+            double sizeY2 = 2.0 * radiusY2;
+
+            switch (eas.ArrowType)
+            {
+                default:
+                case Test2d.ArrowType.None:
+                    {
+                        pt2 = new XPoint(x2, y2);
+                    }
+                    break;
+                case Test2d.ArrowType.Rectangle:
+                    {
+                        pt2 = t2.Transform(new XPoint(x2 - sizeX2, y2));
+                        var rect = new XRect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
+                        _gfx.Save();
+                        _gfx.RotateAtTransform(a2, c2);
+                        DrawRectangleInternal(_gfx, fill, stroke, eas.IsFilled, ref rect);
+                        _gfx.Restore();
+                    }
+                    break;
+                case Test2d.ArrowType.Ellipse:
+                    {
+                        pt2 = t2.Transform(new XPoint(x2 - sizeX2, y2));
+                        _gfx.Save();
+                        _gfx.RotateAtTransform(a2, c2);
+                        var rect = new XRect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
+                        DrawEllipseInternal(_gfx, fill, stroke, eas.IsFilled, ref rect);
+                        _gfx.Restore();
+                    }
+                    break;
+                case Test2d.ArrowType.Arrow:
+                    {
+                        pt2 = t2.Transform(new XPoint(x2, y2));
+                        var p11 = t2.Transform(new XPoint(x2 - sizeX2, y2 + sizeY2));
+                        var p21 = t2.Transform(new XPoint(x2, y2));
+                        var p12 = t2.Transform(new XPoint(x2 - sizeX2, y2 - sizeY2));
+                        var p22 = t2.Transform(new XPoint(x2, y2));
+                        DrawLineInternal(_gfx, stroke, ref p11, ref p21);
+                        DrawLineInternal(_gfx, stroke, ref p12, ref p22);
+                    }
+                    break;
+            }
+
+            _gfx.DrawLine(stroke, pt1, pt2);
         }
 
         public void Draw(object gfx, Test2d.XRectangle rectangle, double dx, double dy)
