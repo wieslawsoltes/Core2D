@@ -45,6 +45,7 @@ namespace Test2d
         public ICommand GroupCurrentLayerCommand { get; set; }
 
         public ICommand LayersWindowCommand { get; set; }
+        public ICommand StyleWindowCommand { get; set; }
         public ICommand StylesWindowCommand { get; set; }
         public ICommand ShapesWindowCommand { get; set; }
         public ICommand ContainerWindowCommand { get; set; }
