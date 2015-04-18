@@ -292,6 +292,8 @@ namespace Test
 
         public void Draw(object gfx, Test2d.XRectangle rectangle, double dx, double dy)
         {
+            var _gfx = gfx as XGraphics;
+
             var rect = CreateRect(
                 rectangle.TopLeft,
                 rectangle.BottomRight,
@@ -299,7 +301,7 @@ namespace Test
 
             if (rectangle.IsFilled)
             {
-                (gfx as XGraphics).DrawRectangle(
+                _gfx.DrawRectangle(
                     ToXPen(rectangle.Style, _scaleToPage),
                     ToXSolidBrush(rectangle.Style.Fill),
                     _scaleToPage(rect.X),
@@ -309,7 +311,7 @@ namespace Test
             }
             else
             {
-                (gfx as XGraphics).DrawRectangle(
+                _gfx.DrawRectangle(
                     ToXPen(rectangle.Style, _scaleToPage),
                     _scaleToPage(rect.X),
                     _scaleToPage(rect.Y),
@@ -320,6 +322,8 @@ namespace Test
 
         public void Draw(object gfx, Test2d.XEllipse ellipse, double dx, double dy)
         {
+            var _gfx = gfx as XGraphics;
+
             var rect = CreateRect(
                 ellipse.TopLeft,
                 ellipse.BottomRight,
@@ -327,7 +331,7 @@ namespace Test
 
             if (ellipse.IsFilled)
             {
-                (gfx as XGraphics).DrawEllipse(
+                _gfx.DrawEllipse(
                     ToXPen(ellipse.Style, _scaleToPage),
                     ToXSolidBrush(ellipse.Style.Fill),
                     _scaleToPage(rect.X),
@@ -337,7 +341,7 @@ namespace Test
             }
             else
             {
-                (gfx as XGraphics).DrawEllipse(
+                _gfx.DrawEllipse(
                     ToXPen(ellipse.Style, _scaleToPage),
                     _scaleToPage(rect.X),
                     _scaleToPage(rect.Y),
@@ -348,9 +352,11 @@ namespace Test
 
         public void Draw(object gfx, Test2d.XArc arc, double dx, double dy)
         {
+            var _gfx = gfx as XGraphics;
+
             var a = PdfArc.FromXArc(arc, dx, dy);
 
-            (gfx as XGraphics).DrawArc(
+            _gfx.DrawArc(
                 ToXPen(arc.Style, _scaleToPage),
                 _scaleToPage(a.X),
                 _scaleToPage(a.Y),
@@ -362,7 +368,9 @@ namespace Test
 
         public void Draw(object gfx, Test2d.XBezier bezier, double dx, double dy)
         {
-            (gfx as XGraphics).DrawBezier(
+            var _gfx = gfx as XGraphics;
+
+            _gfx.DrawBezier(
                 ToXPen(bezier.Style, _scaleToPage),
                 _scaleToPage(bezier.Point1.X),
                 _scaleToPage(bezier.Point1.Y),
@@ -376,6 +384,8 @@ namespace Test
 
         public void Draw(object gfx, Test2d.XQBezier qbezier, double dx, double dy)
         {
+            var _gfx = gfx as XGraphics;
+
             double x1 = qbezier.Point1.X;
             double y1 = qbezier.Point1.Y;
             double x2 = qbezier.Point1.X + (2.0 * (qbezier.Point2.X - qbezier.Point1.X)) / 3.0;
@@ -385,7 +395,7 @@ namespace Test
             double x4 = qbezier.Point3.X;
             double y4 = qbezier.Point3.Y;
 
-            (gfx as XGraphics).DrawBezier(
+            _gfx.DrawBezier(
                 ToXPen(qbezier.Style, _scaleToPage),
                 _scaleToPage(x1 + dx), _scaleToPage(y1 + dy),
                 _scaleToPage(x2 + dx), _scaleToPage(y2 + dy),
@@ -395,6 +405,8 @@ namespace Test
 
         public void Draw(object gfx, Test2d.XText text, double dx, double dy)
         {
+            var _gfx = gfx as XGraphics;
+
             XPdfFontOptions options = new XPdfFontOptions(
                 PdfFontEncoding.Unicode,
                 PdfFontEmbedding.Always);
@@ -445,10 +457,10 @@ namespace Test
 
             if (text.IsFilled)
             {
-                (gfx as XGraphics).DrawRectangle(ToXSolidBrush(text.Style.Fill), srect);
+                _gfx.DrawRectangle(ToXSolidBrush(text.Style.Fill), srect);
             }
 
-            (gfx as XGraphics).DrawString(
+            _gfx.DrawString(
                 text.Text,
                 font,
                 ToXSolidBrush(text.Style.Stroke),
