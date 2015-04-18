@@ -72,10 +72,6 @@ namespace Test
             }
         }
 
-        public void ClearCache()
-        {
-        }
-
         private XColor ToXColor(Test2d.ArgbColor color)
         {
             return XColor.FromArgb(
@@ -109,6 +105,10 @@ namespace Test
             return new System.Windows.Rect(
                 new System.Windows.Point(tlx + dx, tly + dy),
                 new System.Windows.Point(brx + dx, bry + dy));
+        }
+
+        public void ClearCache()
+        {
         }
 
         public void Draw(object gfx, Test2d.Layer layer)
