@@ -57,11 +57,11 @@ namespace Test
                 ScaleToPage = (value) => value * scale;
 
                 // draw block contents to pdf graphics
-                Render(gfx, container);
+                Draw(gfx, container);
             }
         }
 
-        private void Render(object gfx, Test2d.Container container)
+        private void Draw(object gfx, Test2d.Container container)
         {
             foreach (var layer in container.Layers)
             {
