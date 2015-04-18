@@ -73,15 +73,6 @@ namespace Test
             };
         }
 
-        public void ClearCache()
-        {
-            _styleCache = new Dictionary<ShapeStyle, Tuple<Brush, Pen>>();
-            _arcCache = new Dictionary<XArc, PathGeometry>();
-            _bezierCache = new Dictionary<XBezier, PathGeometry>();
-            _qbezierCache = new Dictionary<XQBezier, PathGeometry>();
-            _textCache = new Dictionary<XText, FormattedText>();
-        }
-
         private static Brush CreateBrush(ArgbColor color)
         {
             var brush = new SolidColorBrush(
@@ -227,6 +218,15 @@ namespace Test
 
             if (_enableGuidelines)
                 dc.Pop();
+        }
+
+        public void ClearCache()
+        {
+            _styleCache = new Dictionary<ShapeStyle, Tuple<Brush, Pen>>();
+            _arcCache = new Dictionary<XArc, PathGeometry>();
+            _bezierCache = new Dictionary<XBezier, PathGeometry>();
+            _qbezierCache = new Dictionary<XQBezier, PathGeometry>();
+            _textCache = new Dictionary<XText, FormattedText>();
         }
 
         public void Render(object dc, Layer layer)
