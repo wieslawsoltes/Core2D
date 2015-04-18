@@ -82,7 +82,7 @@ namespace Test
             _textCache = new Dictionary<XText, FormattedText>();
         }
 
-        private Brush CreateBrush(ArgbColor color)
+        private static Brush CreateBrush(ArgbColor color)
         {
             var brush = new SolidColorBrush(
                 Color.FromArgb(
@@ -94,7 +94,7 @@ namespace Test
             return brush;
         }
 
-        private Pen CreatePen(ArgbColor color, double thickness)
+        private static Pen CreatePen(ArgbColor color, double thickness)
         {
             var brush = CreateBrush(color);
             var pen = new Pen(brush, thickness);
@@ -102,7 +102,7 @@ namespace Test
             return pen;
         }
 
-        private Rect CreateRect(XPoint tl, XPoint br, double dx, double dy)
+        private static Rect CreateRect(XPoint tl, XPoint br, double dx, double dy)
         {
             double tlx = Math.Min(tl.X, br.X);
             double tly = Math.Min(tl.Y, br.Y);
