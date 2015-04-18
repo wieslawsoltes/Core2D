@@ -96,34 +96,6 @@ namespace Test
                 new System.Windows.Point(brx + dx, bry + dy));
         }
 
-        public void ClearCache()
-        {
-        }
-
-        public void Draw(object gfx, Test2d.Container container)
-        {
-            if (container.TemplateLayer.IsVisible)
-            {
-                Draw(gfx, container.TemplateLayer);
-            }
-
-            foreach (var layer in container.Layers)
-            {
-                if (layer.IsVisible)
-                {
-                    Draw(gfx, layer);
-                }
-            }
-        }
-
-        public void Draw(object gfx, Test2d.Layer layer)
-        {
-            foreach (var shape in layer.Shapes)
-            {
-                shape.Draw(gfx, this, 0, 0);
-            }
-        }
-
         private static void DrawLineInternal(
             XGraphics gfx,
             XPen pen,
@@ -164,6 +136,34 @@ namespace Test
             else
             {
                 gfx.DrawEllipse(pen, rect);
+            }
+        }
+
+        public void ClearCache()
+        {
+        }
+
+        public void Draw(object gfx, Test2d.Container container)
+        {
+            if (container.TemplateLayer.IsVisible)
+            {
+                Draw(gfx, container.TemplateLayer);
+            }
+
+            foreach (var layer in container.Layers)
+            {
+                if (layer.IsVisible)
+                {
+                    Draw(gfx, layer);
+                }
+            }
+        }
+
+        public void Draw(object gfx, Test2d.Layer layer)
+        {
+            foreach (var shape in layer.Shapes)
+            {
+                shape.Draw(gfx, this, 0, 0);
             }
         }
 
