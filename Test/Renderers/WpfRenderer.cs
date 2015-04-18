@@ -647,7 +647,7 @@ namespace Test
             DrawPathGeometryInternal(_dc, half, fill, stroke, qbezier.IsFilled, pg);
         }
 
-        private Point GetTextOrigin(ShapeStyle style, ref Rect rect, FormattedText ft)
+        private static Point GetTextOrigin(ShapeStyle style, ref Rect rect, FormattedText ft)
         {
             double ox, oy;
 
