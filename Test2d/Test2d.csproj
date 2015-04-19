@@ -63,6 +63,7 @@
     <Compile Include="Core\ArrowType.cs" />
     <Compile Include="Core\BaseShape.cs" />
     <Compile Include="Core\LineStyle.cs" />
+    <Compile Include="Core\ShapeState.cs" />
     <Compile Include="Editor\Container.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\Layer.cs" />

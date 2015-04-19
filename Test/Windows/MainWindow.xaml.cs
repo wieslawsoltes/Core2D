@@ -25,6 +25,11 @@ namespace Test.Windows
         {
             InitializeComponent();
 
+            InitializeContext();
+        }
+
+        private void InitializeContext()
+        {
             _context = new EditorContext();
 
             _context.Initialize(this);

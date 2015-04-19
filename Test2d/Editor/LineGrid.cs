@@ -62,6 +62,7 @@ namespace Test2d
             double ey = settings.Origin.Y + settings.GridSize.Height;
 
             var g = XGroup.Create("grid");
+            g.State &= ~ShapeState.Printable;
 
             for (double x = sx; x < ex; x += settings.CellSize.Width)
             {
@@ -71,6 +72,7 @@ namespace Test2d
                     x,
                     ey,
                     style, null);
+                line.State &= ~ShapeState.Printable;
                 g.Shapes.Add(line);
             }
 
@@ -82,6 +84,7 @@ namespace Test2d
                     ex,
                     y,
                     style, null);
+                line.State &= ~ShapeState.Printable;
                 g.Shapes.Add(line);
             }
 
