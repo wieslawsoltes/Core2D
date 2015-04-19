@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Test.Util;
 using Test2d;
+using TestPDF;
 using TestWPF;
 
 namespace Test
