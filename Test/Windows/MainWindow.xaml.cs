@@ -360,7 +360,7 @@ namespace Test.Windows
             Loaded +=
                 (s, e) =>
                 {
-                    //Demo.All(_vm.Editor.Container, 10);
+                    //Demo.All(_context.Editor.Container, 10);
                 };
 
             DataContext = _context;
