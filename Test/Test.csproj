@@ -65,9 +65,6 @@
     <Reference Include="Microsoft.Practices.Prism.SharedInterfaces">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -97,8 +94,6 @@
     <Compile Include="EditorCommands.cs" />
     <Compile Include="EditorContext.cs" />
     <Compile Include="IView.cs" />
-    <Compile Include="Util\ContainerSerializer.cs" />
-    <Compile Include="Util\ListContractResolver.cs" />
     <Compile Include="Windows\ContainerWindow.xaml.cs">
       <DependentUpon>ContainerWindow.xaml</DependentUpon>
     </Compile>
@@ -211,6 +206,10 @@
     <ProjectReference Include="..\Test2d\Test2d.csproj">
       <Project>{60dda5d9-7acc-41af-9123-c96abb6b7828}</Project>
       <Name>Test2d</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestJSON\TestJSON.csproj">
+      <Project>{9aec0134-d372-4deb-88e8-074dd87b4663}</Project>
+      <Name>TestJSON</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestPDF\TestPDF.csproj">
       <Project>{fb4d87a1-a42c-4cc2-9d3b-9273b0e72474}</Project>
