@@ -14,18 +14,18 @@
         TextOptions.TextHintingMode="Auto"
         TextOptions.TextRenderingMode="Auto">
     <Window.InputBindings>
-        <KeyBinding Command="{Binding NewCommand}" Gesture="Ctrl+N"/>
-        <KeyBinding Command="{Binding OpenCommand}" Gesture="Ctrl+O"/>
-        <KeyBinding Command="{Binding SaveAsCommand}" Gesture="Ctrl+S"/>
-        <KeyBinding Command="{Binding ExportCommand}" Gesture="Ctrl+E"/>
-        <KeyBinding Command="{Binding ExitCommand}" Gesture="Alt+F4"/>
-        <KeyBinding Command="{Binding GroupSelectedCommand}" Gesture="Ctrl+Shift+G"/>
-        <KeyBinding Command="{Binding GroupCurrentLayerCommand}" Gesture="Ctrl+Shift+G"/>
-        <KeyBinding Command="{Binding LayersWindowCommand}" Gesture="Ctrl+L"/>
-        <KeyBinding Command="{Binding StyleWindowCommand}" Gesture="Ctrl+K"/>
-        <KeyBinding Command="{Binding StylesWindowCommand}" Gesture="Ctrl+T"/>
-        <KeyBinding Command="{Binding ShapesWindowCommand}" Gesture="Ctrl+H"/>
-        <KeyBinding Command="{Binding ContainerWindowCommand}" Gesture="Ctrl+R"/>
+        <KeyBinding Command="{Binding Commands.NewCommand}" Gesture="Ctrl+N"/>
+        <KeyBinding Command="{Binding Commands.OpenCommand}" Gesture="Ctrl+O"/>
+        <KeyBinding Command="{Binding Commands.SaveAsCommand}" Gesture="Ctrl+S"/>
+        <KeyBinding Command="{Binding Commands.ExportCommand}" Gesture="Ctrl+E"/>
+        <KeyBinding Command="{Binding Commands.ExitCommand}" Gesture="Alt+F4"/>
+        <KeyBinding Command="{Binding Commands.GroupSelectedCommand}" Gesture="Ctrl+Shift+G"/>
+        <KeyBinding Command="{Binding Commands.GroupCurrentLayerCommand}" Gesture="Ctrl+Shift+G"/>
+        <KeyBinding Command="{Binding Commands.LayersWindowCommand}" Gesture="Ctrl+L"/>
+        <KeyBinding Command="{Binding Commands.StyleWindowCommand}" Gesture="Ctrl+K"/>
+        <KeyBinding Command="{Binding Commands.StylesWindowCommand}" Gesture="Ctrl+T"/>
+        <KeyBinding Command="{Binding Commands.ShapesWindowCommand}" Gesture="Ctrl+H"/>
+        <KeyBinding Command="{Binding Commands.ContainerWindowCommand}" Gesture="Ctrl+R"/>
     </Window.InputBindings>
     <Grid FocusVisualStyle="{x:Null}">
         <Grid.ColumnDefinitions>

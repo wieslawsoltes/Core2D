@@ -14,8 +14,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
-            <MenuItem Command="{Binding AddLayerCommand}" Header="_+"/>
-            <MenuItem Command="{Binding RemoveLayerCommand}" Header="_-"/>
+            <MenuItem Command="{Binding Commands.AddLayerCommand}" Header="_+"/>
+            <MenuItem Command="{Binding Commands.RemoveLayerCommand}" Header="_-"/>
         </Menu>
         <ListBox ItemsSource="{Binding Editor.Container.Layers}" 
                  SelectedItem="{Binding Editor.Container.CurrentLayer}" 

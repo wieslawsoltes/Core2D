@@ -10,16 +10,16 @@
              d:DesignHeight="600" d:DesignWidth="810"
              Width="{Binding Editor.Container.Width}" Height="{Binding Editor.Container.Height}">
     <UserControl.InputBindings>
-        <KeyBinding Command="{Binding ToolNoneCommand}" Key="N" Modifiers=""/>
-        <KeyBinding Command="{Binding ToolLineCommand}" Key="L" Modifiers=""/>
-        <KeyBinding Command="{Binding ToolRectangleCommand}" Key="R" Modifiers=""/>
-        <KeyBinding Command="{Binding ToolEllipseCommand}" Key="E" Modifiers=""/>
-        <KeyBinding Command="{Binding ToolArcCommand}" Key="A" Modifiers=""/>
-        <KeyBinding Command="{Binding ToolBezierCommand}" Key="B" Modifiers=""/>
-        <KeyBinding Command="{Binding ToolQBezierCommand}" Key="Q" Modifiers=""/>
-        <KeyBinding Command="{Binding ToolTextCommand}" Key="T" Modifiers=""/>
-        <KeyBinding Command="{Binding DefaultIsFilledCommand}" Key="F" Modifiers=""/>
-        <KeyBinding Command="{Binding SnapToGridCommand}" Key="G" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolNoneCommand}" Key="N" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolLineCommand}" Key="L" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolRectangleCommand}" Key="R" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolEllipseCommand}" Key="E" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolArcCommand}" Key="A" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolBezierCommand}" Key="B" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolQBezierCommand}" Key="Q" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolTextCommand}" Key="T" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.DefaultIsFilledCommand}" Key="F" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.SnapToGridCommand}" Key="G" Modifiers=""/>
     </UserControl.InputBindings>
     <Grid Width="{Binding Editor.Container.Width}" Height="{Binding Editor.Container.Height}" Background="Transparent">
         <Canvas Background="Transparent"

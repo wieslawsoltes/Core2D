@@ -12,49 +12,25 @@ using Test.Util;
 using Test2d;
 using TestWPF;
 
-namespace Test.Windows
+namespace Test
 {
     public class EditorContext : ObservableObject
     {
-        public ICommand NewCommand { get; set; }
-        public ICommand OpenCommand { get; set; }
-        public ICommand SaveAsCommand { get; set; }
-        public ICommand ExportCommand { get; set; }
-        public ICommand ExitCommand { get; set; }
-
-        public ICommand ClearCommand { get; set; }
-
-        public ICommand ToolNoneCommand { get; set; }
-        public ICommand ToolLineCommand { get; set; }
-        public ICommand ToolRectangleCommand { get; set; }
-        public ICommand ToolEllipseCommand { get; set; }
-        public ICommand ToolArcCommand { get; set; }
-        public ICommand ToolBezierCommand { get; set; }
-        public ICommand ToolQBezierCommand { get; set; }
-        public ICommand ToolTextCommand { get; set; }
-
-        public ICommand DefaultIsFilledCommand { get; set; }
-        public ICommand SnapToGridCommand { get; set; }
-        public ICommand DrawPointsCommand { get; set; }
-
-        public ICommand AddLayerCommand { get; set; }
-        public ICommand RemoveLayerCommand { get; set; }
-
-        public ICommand AddStyleCommand { get; set; }
-        public ICommand RemoveStyleCommand { get; set; }
-
-        public ICommand RemoveShapeCommand { get; set; }
-
-        public ICommand GroupSelectedCommand { get; set; }
-        public ICommand GroupCurrentLayerCommand { get; set; }
-
-        public ICommand LayersWindowCommand { get; set; }
-        public ICommand StyleWindowCommand { get; set; }
-        public ICommand StylesWindowCommand { get; set; }
-        public ICommand ShapesWindowCommand { get; set; }
-        public ICommand ContainerWindowCommand { get; set; }
-
+        private EditorCommands _commands;
         private Editor _editor;
+
+        public EditorCommands Commands
+        {
+            get { return _commands; }
+            set
+            {
+                if (value != _commands)
+                {
+                    _commands = value;
+                    Notify("Commands");
+                }
+            }
+        }
 
         public Editor Editor
         {
@@ -71,6 +47,7 @@ namespace Test.Windows
 
         public void Initialize(IView view)
         {
+            _commands = new EditorCommands();
             _editor = Editor.Create(Container.Create(), WpfRenderer.Create());
 
             (_editor.Renderer as WpfRenderer).PropertyChanged +=
@@ -83,146 +60,146 @@ namespace Test.Windows
                     }
                 };
 
-            NewCommand = new DelegateCommand(
+            _commands.NewCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.Load(Container.Create());
                 });
 
-            OpenCommand = new DelegateCommand(
+            _commands.OpenCommand = new DelegateCommand(
                 () =>
                 {
                     Open();
                 });
 
-            SaveAsCommand = new DelegateCommand(
+            _commands.SaveAsCommand = new DelegateCommand(
                 () =>
                 {
                     SaveAs();
                 });
 
-            ExportCommand = new DelegateCommand(
+            _commands.ExportCommand = new DelegateCommand(
                 () =>
                 {
                     Export();
                 });
 
-            ExitCommand = new DelegateCommand(
+            _commands.ExitCommand = new DelegateCommand(
                 () =>
                 {
                     view.Close();
                 });
 
-            ClearCommand = new DelegateCommand(
+            _commands.ClearCommand = new DelegateCommand(
                 () =>
                 {
                     Clear();
                 });
 
-            ToolNoneCommand = new DelegateCommand(
+            _commands.ToolNoneCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.None;
                 });
 
-            ToolLineCommand = new DelegateCommand(
+            _commands.ToolLineCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.Line;
                 });
 
-            ToolRectangleCommand = new DelegateCommand(
+            _commands.ToolRectangleCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.Rectangle;
                 });
 
-            ToolEllipseCommand = new DelegateCommand(
+            _commands.ToolEllipseCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.Ellipse;
                 });
 
-            ToolArcCommand = new DelegateCommand(
+            _commands.ToolArcCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.Arc;
                 });
 
-            ToolBezierCommand = new DelegateCommand(
+            _commands.ToolBezierCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.Bezier;
                 });
 
-            ToolQBezierCommand = new DelegateCommand(
+            _commands.ToolQBezierCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.QBezier;
                 });
 
-            ToolTextCommand = new DelegateCommand(
+            _commands.ToolTextCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.Text;
                 });
 
-            DefaultIsFilledCommand = new DelegateCommand(
+            _commands.DefaultIsFilledCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.DefaultIsFilled = !_editor.DefaultIsFilled;
                 });
 
-            SnapToGridCommand = new DelegateCommand(
+            _commands.SnapToGridCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.SnapToGrid = !_editor.SnapToGrid;
                 });
 
-            DrawPointsCommand = new DelegateCommand(
+            _commands.DrawPointsCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.Renderer.DrawPoints = !_editor.Renderer.DrawPoints;
                     _editor.Container.Invalidate();
                 });
 
-            AddLayerCommand = new DelegateCommand(
+            _commands.AddLayerCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.Container.Layers.Add(Layer.Create("New"));
                 });
 
-            RemoveLayerCommand = new DelegateCommand(
+            _commands.RemoveLayerCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.RemoveCurrentLayer();
                 });
 
-            AddStyleCommand = new DelegateCommand(
+            _commands.AddStyleCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.Container.Styles.Add(ShapeStyle.Create("New"));
                 });
 
-            RemoveStyleCommand = new DelegateCommand(
+            _commands.RemoveStyleCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.RemoveCurrentStyle();
                 });
 
-            RemoveShapeCommand = new DelegateCommand(
+            _commands.RemoveShapeCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.RemoveCurrentShape();
                 });
 
-            GroupSelectedCommand = new DelegateCommand(
+            _commands.GroupSelectedCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.GroupSelected();
                 });
 
-            GroupCurrentLayerCommand = new DelegateCommand(
+            _commands.GroupCurrentLayerCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.GroupCurrentLayer();

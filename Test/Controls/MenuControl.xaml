@@ -9,21 +9,21 @@
              d:DesignHeight="20" d:DesignWidth="810">
     <Menu Background="Transparent">
         <MenuItem Header="_File">
-            <MenuItem Header="_New" Command="{Binding NewCommand}" InputGestureText="Ctrl+N"/>
+            <MenuItem Header="_New" Command="{Binding Commands.NewCommand}" InputGestureText="Ctrl+N"/>
             <Separator/>
-            <MenuItem Header="_Open..." Command="{Binding OpenCommand}" InputGestureText="Ctrl+O"/>
+            <MenuItem Header="_Open..." Command="{Binding Commands.OpenCommand}" InputGestureText="Ctrl+O"/>
             <Separator/>
-            <MenuItem Header="Save _As..." Command="{Binding SaveAsCommand}" InputGestureText="Ctrl+S"/>
+            <MenuItem Header="Save _As..." Command="{Binding Commands.SaveAsCommand}" InputGestureText="Ctrl+S"/>
             <Separator/>
-            <MenuItem Header="_Export..." Command="{Binding ExportCommand}" InputGestureText="Ctrl+E"/>
+            <MenuItem Header="_Export..." Command="{Binding Commands.ExportCommand}" InputGestureText="Ctrl+E"/>
             <Separator/>
-            <MenuItem Header="E_xit" Command="{Binding ExitCommand}" InputGestureText="Alt+F4"/>
+            <MenuItem Header="E_xit" Command="{Binding Commands.ExitCommand}" InputGestureText="Alt+F4"/>
         </MenuItem>
         <MenuItem Header="_Edit">
-            <MenuItem Header="_Clear" Command="{Binding ClearCommand}" InputGestureText=""/>
+            <MenuItem Header="_Clear" Command="{Binding Commands.ClearCommand}" InputGestureText=""/>
         </MenuItem>
         <MenuItem Header="_Tool">
-            <MenuItem Header="_None" Command="{Binding ToolNoneCommand}" InputGestureText="N">
+            <MenuItem Header="_None" Command="{Binding Commands.ToolNoneCommand}" InputGestureText="N">
                 <MenuItem.Style>
                     <Style TargetType="MenuItem">
                         <Setter Property="IsCheckable" Value="True"/>
@@ -37,7 +37,7 @@
                 </MenuItem.Style>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Line" Command="{Binding ToolLineCommand}" InputGestureText="L">
+            <MenuItem Header="_Line" Command="{Binding Commands.ToolLineCommand}" InputGestureText="L">
                 <MenuItem.Style>
                     <Style TargetType="MenuItem">
                         <Setter Property="IsCheckable" Value="True"/>
@@ -50,7 +50,7 @@
                     </Style>
                 </MenuItem.Style>
             </MenuItem>
-            <MenuItem Header="_Rectangle" Command="{Binding ToolRectangleCommand}" InputGestureText="R">
+            <MenuItem Header="_Rectangle" Command="{Binding Commands.ToolRectangleCommand}" InputGestureText="R">
                 <MenuItem.Style>
                     <Style TargetType="MenuItem">
                         <Setter Property="IsCheckable" Value="True"/>
@@ -63,7 +63,7 @@
                     </Style>
                 </MenuItem.Style>
             </MenuItem>
-            <MenuItem Header="_Ellipse" Command="{Binding ToolEllipseCommand}" InputGestureText="E">
+            <MenuItem Header="_Ellipse" Command="{Binding Commands.ToolEllipseCommand}" InputGestureText="E">
                 <MenuItem.Style>
                     <Style TargetType="MenuItem">
                         <Setter Property="IsCheckable" Value="True"/>
@@ -77,7 +77,7 @@
                 </MenuItem.Style>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Arc" Command="{Binding ToolArcCommand}" InputGestureText="A">
+            <MenuItem Header="_Arc" Command="{Binding Commands.ToolArcCommand}" InputGestureText="A">
                 <MenuItem.Style>
                     <Style TargetType="MenuItem">
                         <Setter Property="IsCheckable" Value="True"/>
@@ -90,7 +90,7 @@
                     </Style>
                 </MenuItem.Style>
             </MenuItem>
-            <MenuItem Header="_Bezier" Command="{Binding ToolBezierCommand}" InputGestureText="B">
+            <MenuItem Header="_Bezier" Command="{Binding Commands.ToolBezierCommand}" InputGestureText="B">
                 <MenuItem.Style>
                     <Style TargetType="MenuItem">
                         <Setter Property="IsCheckable" Value="True"/>
@@ -103,7 +103,7 @@
                     </Style>
                 </MenuItem.Style>
             </MenuItem>
-            <MenuItem Header="_QBezier" Command="{Binding ToolQBezierCommand}" InputGestureText="Q">
+            <MenuItem Header="_QBezier" Command="{Binding Commands.ToolQBezierCommand}" InputGestureText="Q">
                 <MenuItem.Style>
                     <Style TargetType="MenuItem">
                         <Setter Property="IsCheckable" Value="True"/>
@@ -117,7 +117,7 @@
                 </MenuItem.Style>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Text" Command="{Binding ToolTextCommand}" InputGestureText="T">
+            <MenuItem Header="_Text" Command="{Binding Commands.ToolTextCommand}" InputGestureText="T">
                 <MenuItem.Style>
                     <Style TargetType="MenuItem">
                         <Setter Property="IsCheckable" Value="True"/>
@@ -135,27 +135,27 @@
             <MenuItem Header="Default is _Filled" 
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.DefaultIsFilled, Mode=OneWay}"
-                      Command="{Binding DefaultIsFilledCommand}" InputGestureText="F"/>
+                      Command="{Binding Commands.DefaultIsFilledCommand}" InputGestureText="F"/>
             <Separator/>
             <MenuItem Header="_Snap to Grid" 
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.SnapToGrid, Mode=OneWay}"
-                      Command="{Binding SnapToGridCommand}" InputGestureText="G"/>
+                      Command="{Binding Commands.SnapToGridCommand}" InputGestureText="G"/>
             <Separator/>
             <MenuItem Header="_Draw Points" 
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.Renderer.DrawPoints, Mode=OneWay}"
-                      Command="{Binding DrawPointsCommand}" InputGestureText=""/>
+                      Command="{Binding Commands.DrawPointsCommand}" InputGestureText=""/>
         </MenuItem>
         <MenuItem Header="_Window">
-            <MenuItem Header="_Layers..." Command="{Binding LayersWindowCommand}" InputGestureText="Ctrl+L"/>
+            <MenuItem Header="_Layers..." Command="{Binding Commands.LayersWindowCommand}" InputGestureText="Ctrl+L"/>
             <Separator/>
-            <MenuItem Header="St_yle Editor..." Command="{Binding StyleWindowCommand}" InputGestureText="Ctrl+K"/>
-            <MenuItem Header="S_tyles..." Command="{Binding StylesWindowCommand}" InputGestureText="Ctrl+T"/>
+            <MenuItem Header="St_yle Editor..." Command="{Binding Commands.StyleWindowCommand}" InputGestureText="Ctrl+K"/>
+            <MenuItem Header="S_tyles..." Command="{Binding Commands.StylesWindowCommand}" InputGestureText="Ctrl+T"/>
             <Separator/>
-            <MenuItem Header="S_hapes..." Command="{Binding ShapesWindowCommand}" InputGestureText="Ctrl+H"/>
+            <MenuItem Header="S_hapes..." Command="{Binding Commands.ShapesWindowCommand}" InputGestureText="Ctrl+H"/>
             <Separator/>
-            <MenuItem Header="Containe_r Editor..." Command="{Binding ContainerWindowCommand}" InputGestureText="Ctrl+R"/>
+            <MenuItem Header="Containe_r Editor..." Command="{Binding Commands.ContainerWindowCommand}" InputGestureText="Ctrl+R"/>
         </MenuItem>
     </Menu>
 </UserControl>

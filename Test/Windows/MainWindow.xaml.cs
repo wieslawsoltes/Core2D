@@ -19,8 +19,6 @@ namespace Test.Windows
 {
     public partial class MainWindow : Window, IView
     {
-        private EditorContext _context;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -30,38 +28,38 @@ namespace Test.Windows
 
         private void InitializeContext()
         {
-            _context = new EditorContext();
+            var context = new EditorContext();
 
-            _context.Initialize(this);
+            context.Initialize(this);
 
-            _context.LayersWindowCommand = new DelegateCommand(
+            context.Commands.LayersWindowCommand = new DelegateCommand(
                 () =>
                 {
-                    (new LayersWindow() { Owner = this, DataContext = _context }).Show();
+                    (new LayersWindow() { Owner = this, DataContext = context }).Show();
                 });
 
-            _context.StyleWindowCommand = new DelegateCommand(
+            context.Commands.StyleWindowCommand = new DelegateCommand(
                 () =>
                 {
-                    (new StyleWindow() { Owner = this, DataContext = _context }).Show();
+                    (new StyleWindow() { Owner = this, DataContext = context }).Show();
                 });
 
-            _context.StylesWindowCommand = new DelegateCommand(
+            context.Commands.StylesWindowCommand = new DelegateCommand(
                 () =>
                 {
-                    (new StylesWindow() { Owner = this, DataContext = _context }).Show();
+                    (new StylesWindow() { Owner = this, DataContext = context }).Show();
                 });
 
-            _context.ShapesWindowCommand = new DelegateCommand(
+            context.Commands.ShapesWindowCommand = new DelegateCommand(
                 () =>
                 {
-                    (new ShapesWindow() { Owner = this, DataContext = _context }).Show();
+                    (new ShapesWindow() { Owner = this, DataContext = context }).Show();
                 });
 
-            _context.ContainerWindowCommand = new DelegateCommand(
+            context.Commands.ContainerWindowCommand = new DelegateCommand(
                 () =>
                 {
-                    (new ContainerWindow() { Owner = this, DataContext = _context }).Show();
+                    (new ContainerWindow() { Owner = this, DataContext = context }).Show();
                 });
 
             Loaded +=
@@ -70,7 +68,7 @@ namespace Test.Windows
                     //Demo.All(_context.Editor.Container, 10);
                 };
 
-            DataContext = _context;
+            DataContext = context;
         }
     }
 }
