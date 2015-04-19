@@ -42,9 +42,12 @@ namespace Test2d
 
         public override void Draw(object dc, IRenderer renderer, double dx, double dy)
         {
-            foreach (var shape in Shapes)
+            if (State.HasFlag(ShapeState.Visible))
             {
-                shape.Draw(dc, renderer, dx, dy);
+                foreach (var shape in Shapes)
+                {
+                    shape.Draw(dc, renderer, dx, dy);
+                }
             }
         }
 

@@ -55,7 +55,11 @@ namespace Test2d
 
         public override void Draw(object dc, IRenderer renderer, double dx, double dy)
         {
-            renderer.Draw(dc, this, dx, dy);
+            if (State.HasFlag(ShapeState.Visible))
+            {
+                renderer.Draw(dc, this, dx, dy); 
+            }
+
             if (renderer.DrawPoints)
             {
                 _start.Draw(dc, renderer, _start.X, _start.Y);

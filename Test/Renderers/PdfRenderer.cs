@@ -163,7 +163,10 @@ namespace Test
         {
             foreach (var shape in layer.Shapes)
             {
-                shape.Draw(gfx, this, 0, 0);
+                if (shape.State.HasFlag(Test2d.ShapeState.Printable))
+                {
+                    shape.Draw(gfx, this, 0, 0);
+                }
             }
         }
 

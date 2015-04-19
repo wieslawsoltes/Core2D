@@ -11,6 +11,21 @@ namespace Test2d
 {
     public abstract class BaseShape : ObservableObject
     {
+        private ShapeState _state = ShapeState.Visible | ShapeState.Printable;
+
+        public ShapeState State
+        {
+            get { return _state; }
+            set
+            {
+                if (value != _state)
+                {
+                    _state = value;
+                    Notify("State");
+                }
+            }
+        }
+
         public abstract void Draw(object dc, IRenderer renderer, double dx, double dy);
     }
 }
