@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPF = System.Windows;
 
 namespace TestPDF
 {
@@ -85,15 +86,15 @@ namespace TestPDF
             return new XSolidBrush(ToXColor(color));
         }
 
-        private static System.Windows.Rect CreateRect(Test2d.XPoint tl, Test2d.XPoint br, double dx, double dy)
+        private static WPF.Rect CreateRect(Test2d.XPoint tl, Test2d.XPoint br, double dx, double dy)
         {
             double tlx = Math.Min(tl.X, br.X);
             double tly = Math.Min(tl.Y, br.Y);
             double brx = Math.Max(tl.X, br.X);
             double bry = Math.Max(tl.Y, br.Y);
-            return new System.Windows.Rect(
-                new System.Windows.Point(tlx + dx, tly + dy),
-                new System.Windows.Point(brx + dx, bry + dy));
+            return new WPF.Rect(
+                new WPF.Point(tlx + dx, tly + dy),
+                new WPF.Point(brx + dx, bry + dy));
         }
 
         private static void DrawLineInternal(
