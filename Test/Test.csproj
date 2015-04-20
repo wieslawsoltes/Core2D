@@ -94,7 +94,6 @@
     <Compile Include="Demo.cs" />
     <Compile Include="Editor\EditorCommands.cs" />
     <Compile Include="Editor\EditorContext.cs" />
-    <Compile Include="Editor\Emf.cs" />
     <Compile Include="Editor\IView.cs" />
     <Compile Include="Windows\ContainerWindow.xaml.cs">
       <DependentUpon>ContainerWindow.xaml</DependentUpon>
@@ -208,6 +207,10 @@
     <ProjectReference Include="..\Test2d\Test2d.csproj">
       <Project>{60dda5d9-7acc-41af-9123-c96abb6b7828}</Project>
       <Name>Test2d</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestEMF\TestEMF.csproj">
+      <Project>{cba9b80c-1ebe-4b0c-bb50-c24a9688df51}</Project>
+      <Name>TestEMF</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestJSON\TestJSON.csproj">
       <Project>{9aec0134-d372-4deb-88e8-074dd87b4663}</Project>

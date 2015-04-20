@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Test2d;
+using TestEMF;
 using TestJSON;
 using TestPDF;
 using TestWPF;

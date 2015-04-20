@@ -1,58 +1,20 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
-using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Test2d;
 using WPF = System.Windows;
 
-namespace Test
+namespace TestEMF
 {
-    internal struct EmfArc
-    {
-        public double X;
-        public double Y;
-        public double Width;
-        public double Height;
-        public double StartAngle;
-        public double SweepAngle;
-
-        public static EmfArc FromXArc(XArc arc, double dx, double dy)
-        {
-            double x1 = arc.Point1.X + dx;
-            double y1 = arc.Point1.Y + dy;
-            double x2 = arc.Point2.X + dx;
-            double y2 = arc.Point2.Y + dy;
-
-            double x0 = (x1 + x2) / 2.0;
-            double y0 = (y1 + y2) / 2.0;
-
-            double r = Math.Sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
-            double x = x0 - r;
-            double y = y0 - r;
-            double width = 2.0 * r;
-            double height = 2.0 * r;
-
-            double startAngle = 180.0 / Math.PI * Math.Atan2(y1 - y0, x1 - x0);
-            double endAngle = 180.0 / Math.PI * Math.Atan2(y2 - y0, x2 - x0);
-            double sweepAngle = Math.Abs(startAngle) + Math.Abs(endAngle);
-
-            return new EmfArc
-            {
-                X = x,
-                Y = y,
-                Width = width,
-                Height = height,
-                StartAngle = startAngle,
-                SweepAngle = sweepAngle
-            };
-        }
-    }
-
-    internal class EmfRenderer : IRenderer
+    public class EmfRenderer : IRenderer
     {
         public bool DrawPoints { get; set; }
         public double Zoom { get; set; }
@@ -119,10 +81,10 @@ namespace Test
             if (isFilled)
             {
                 gfx.FillRectangle(
-                    brush, 
-                    (float)rect.X, 
-                    (float)rect.Y, 
-                    (float)rect.Width, 
+                    brush,
+                    (float)rect.X,
+                    (float)rect.Y,
+                    (float)rect.Width,
                     (float)rect.Height);
 
             }
@@ -540,89 +502,6 @@ namespace Test
 
             brush.Dispose();
             font.Dispose();
-        }
-    }
-
-    public static class Emf
-    {
-        public static void PutOnClipboard(Container container)
-        {
-            Bitmap bitmap = null;
-            MemoryStream ms = null;
-
-            try
-            {
-                bitmap = new Bitmap((int)container.Width, (int)container.Height);
-                ms = MakeMetafileStream(bitmap, container);
-
-                var data = new WPF.DataObject();
-                data.SetData(WPF.DataFormats.EnhancedMetafile, ms);
-                WPF.Clipboard.SetDataObject(data, true);
-            }
-            finally
-            {
-                if (bitmap != null)
-                {
-                    bitmap.Dispose();
-                }
-
-                if (ms != null)
-                {
-                    ms.Dispose();
-                }
-            }
-        }
-
-        private static MemoryStream MakeMetafileStream(Bitmap bitmap, Container container)
-        {
-            Graphics g = null;
-            Metafile mf = null;
-            var ms = new MemoryStream();
-
-            try
-            {
-                using (g = Graphics.FromImage(bitmap))
-                {
-                    var hdc = g.GetHdc();
-                    mf = new Metafile(ms, hdc);
-                    g.ReleaseHdc(hdc);
-                }
-                using (g = Graphics.FromImage(mf))
-                {
-                    g.DrawImage(bitmap, 0, 0);
-
-                    var r = new EmfRenderer()
-                    {
-                        DrawPoints = false,
-                        Zoom = 1.0
-                    };
-
-                    g.SmoothingMode = SmoothingMode.HighQuality;
-                    g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-                    g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-                    g.CompositingQuality = CompositingQuality.HighQuality;
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-                    //g.TranslateTransform((float)0f, (float)0f);
-                    //g.ScaleTransform( (float)Zoom, (float)Zoom);
-                    //g.Clear(Color.FromArgb(255, 255, 255, 255));
-
-                    r.Draw(g, container);
-                }
-            }
-            finally
-            {
-                if (g != null)
-                {
-                    g.Dispose();
-                }
-
-                if (mf != null)
-                {
-                    mf.Dispose();
-                }
-            }
-            return ms;
         }
     }
 }
