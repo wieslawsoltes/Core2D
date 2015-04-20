@@ -17,6 +17,7 @@ namespace Test
         public ICommand ExportCommand { get; set; }
         public ICommand ExitCommand { get; set; }
 
+        public ICommand CopyAsEmfCommand { get; set; }
         public ICommand ClearCommand { get; set; }
 
         public ICommand ToolNoneCommand { get; set; }

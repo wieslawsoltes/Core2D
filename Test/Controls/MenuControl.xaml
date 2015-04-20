@@ -20,7 +20,9 @@
             <MenuItem Header="E_xit" Command="{Binding Commands.ExitCommand}" InputGestureText="Alt+F4"/>
         </MenuItem>
         <MenuItem Header="_Edit">
-            <MenuItem Header="_Clear" Command="{Binding Commands.ClearCommand}" InputGestureText=""/>
+            <MenuItem Header="Copy As _Metafile" Command="{Binding Commands.CopyAsEmfCommand}" InputGestureText="Ctrl+Shift+C"/>
+            <Separator/>
+            <MenuItem Header="_Clear All" Command="{Binding Commands.ClearCommand}" InputGestureText=""/>
         </MenuItem>
         <MenuItem Header="_Tool">
             <MenuItem Header="_None" Command="{Binding Commands.ToolNoneCommand}" InputGestureText="N">

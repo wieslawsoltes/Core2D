@@ -91,6 +91,12 @@ namespace Test
                     view.Close();
                 });
 
+            _commands.CopyAsEmfCommand = new DelegateCommand(
+                () =>
+                {
+                    Emf.PutOnClipboard(_editor.Container);
+                });
+
             _commands.ClearCommand = new DelegateCommand(
                 () =>
                 {
