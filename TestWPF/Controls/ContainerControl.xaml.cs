@@ -112,10 +112,21 @@ namespace TestWPF.Controls
                 (s, e) =>
                 {
                     canvas.Focus();
-                    if (editor.IsLeftAvailable())
+                    if (editor.IsLeftDownAvailable())
                     {
                         var p = e.GetPosition(canvas);
-                        editor.Left(p.X, p.Y);
+                        editor.LeftDown(p.X, p.Y);
+                    }
+                };
+            
+            canvas.PreviewMouseLeftButtonUp +=
+                (s, e) =>
+                {
+                    canvas.Focus();
+                    if (editor.IsLeftUpAvailable())
+                    {
+                        var p = e.GetPosition(canvas);
+                        editor.LeftUp(p.X, p.Y);
                     }
                 };
 
@@ -123,13 +134,24 @@ namespace TestWPF.Controls
                 (s, e) =>
                 {
                     canvas.Focus();
-                    if (editor.IsRightAvailable())
+                    if (editor.IsRightDownAvailable())
                     {
                         var p = e.GetPosition(canvas);
-                        editor.Right(p.X, p.Y);
+                        editor.RightDown(p.X, p.Y);
                     }
                 };
 
+            canvas.PreviewMouseRightButtonUp +=
+                (s, e) =>
+                {
+                    canvas.Focus();
+                    if (editor.IsRightUpAvailable())
+                    {
+                        var p = e.GetPosition(canvas);
+                        editor.RightUp(p.X, p.Y);
+                    }
+                };
+            
             canvas.PreviewMouseMove +=
                 (s, e) =>
                 {

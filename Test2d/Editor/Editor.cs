@@ -21,6 +21,7 @@ namespace Test2d
         private bool _snapToGrid;
         private double _snapX;
         private double _snapY;
+        private ShapeStyle _selectionStyle;
         private bool _enableObserver;
         private Observer _observer;
 
@@ -128,6 +129,19 @@ namespace Test2d
             }
         }
 
+        public ShapeStyle SelectionStyle
+        {
+            get { return _selectionStyle; }
+            set
+            {
+                if (value != _selectionStyle)
+                {
+                    _selectionStyle = value;
+                    Notify("SelectionStyle");
+                }
+            }
+        }
+        
         public bool EnableObserver
         {
             get { return _enableObserver; }
@@ -162,14 +176,24 @@ namespace Test2d
                 SnapX = 15.0,
                 SnapY = 15.0,
                 DefaultIsFilled = false,
-                CurrentTool = Tool.Line,
+                CurrentTool = Tool.Selection,
                 CurrentState = State.None,
                 EnableObserver = true
             };
 
+            editor.SelectionStyle = 
+                ShapeStyle.Create(
+                    "Selection",
+                    0x7F, 0x33, 0x33, 0xFF,
+                    0x4F, 0x33, 0x33, 0xFF,
+                    1.0, 
+                    LineStyle.Create(
+                        ArrowStyle.Create(), 
+                        ArrowStyle.Create()));
+       
             editor.Container = container;
             editor.Renderer = renderer;
-
+            
             if (editor.EnableObserver)
             {
                 editor.Observer = new Observer(editor);
@@ -178,20 +202,71 @@ namespace Test2d
             return editor;
         }
 
-        public double Snap(double value, double snap)
+        public static double Snap(double value, double snap)
         {
             double r = value % snap;
             return r >= snap / 2.0 ? value + snap - r : value - r;
         }
 
-        public bool IsLeftAvailable()
+        public static bool HitTest(Container container, XRectangle rectangle)
+        {
+            var rect = ShapeBounds.CreateRect(
+                rectangle.TopLeft, 
+                rectangle.BottomRight, 
+                0.0, 0.0);
+            
+            var result = ShapeBounds.HitTest(container, rect, 6.0);
+            if (result != null)
+            {
+                if (result.Count > 0)
+                {
+                    // TODO:
+                    
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+        
+        public static bool HitTest(Container container, double x, double y)
+        {
+            var result = ShapeBounds.HitTest(container, new Point2(x, y), 6.0);
+            if (result != null)
+            {
+                container.CurrentShape = result;
+                
+                // TODO:
+                
+                return true;
+            }
+            
+            container.CurrentShape = null;
+            return false;
+        }
+        
+        public bool IsLeftDownAvailable()
         {
             return Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
                 && Container.CurrentStyle != null;
         }
 
-        public bool IsRightAvailable()
+        public bool IsLeftUpAvailable()
+        {
+            return Container.CurrentLayer != null
+                && Container.CurrentLayer.IsVisible
+                && Container.CurrentStyle != null;
+        }
+        
+        public bool IsRightDownAvailable()
+        {
+            return Container.CurrentLayer != null
+                && Container.CurrentLayer.IsVisible
+                && Container.CurrentStyle != null;
+        }
+        
+        public bool IsRightUpAvailable()
         {
             return Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
@@ -205,104 +280,162 @@ namespace Test2d
                 && Container.CurrentStyle != null;
         }
 
-        public void Left(double x, double y)
+        public void LeftDown(double x, double y)
         {
             double sx = SnapToGrid ? Snap(x, SnapX) : x;
             double sy = SnapToGrid ? Snap(y, SnapY) : y;
             switch (CurrentTool)
             {
                 case Tool.None:
+                    break;
+                case Tool.Selection:
                     {
-                        NoneLeft(sx, sy);
+                        SelectionLeftDown(x, y);
                     }
                     break;
                 case Tool.Line:
                     {
-                        LineLeft(sx, sy);
+                        LineLeftDown(sx, sy);
                     }
                     break;
                 case Tool.Rectangle:
                     {
-                        RectangleLeft(sx, sy);
+                        RectangleLeftDown(sx, sy);
                     }
                     break;
                 case Tool.Ellipse:
                     {
-                        EllipseLeft(sx, sy);
+                        EllipseLeftDown(sx, sy);
                     }
                     break;
                 case Tool.Arc:
                     {
-                        ArcLeft(sx, sy);
+                        ArcLeftDown(sx, sy);
                     }
                     break;
                 case Tool.Bezier:
                     {
-                        BezierLeft(sx, sy);
+                        BezierLeftDown(sx, sy);
                     }
                     break;
                 case Tool.QBezier:
                     {
-                        QBezierLeft(sx, sy);
+                        QBezierLeftDown(sx, sy);
                     }
                     break;
                 case Tool.Text:
                     {
-                        TextLeft(sx, sy);
+                        TextLeftDown(sx, sy);
                     }
                     break;
             }
         }
 
-        public void Right(double x, double y)
+        public void LeftUp(double x, double y)
         {
             double sx = SnapToGrid ? Snap(x, SnapX) : x;
             double sy = SnapToGrid ? Snap(y, SnapY) : y;
             switch (CurrentTool)
             {
                 case Tool.None:
+                    break;
+                case Tool.Selection:
                     {
-                        NoneRight(sx, sy);
+                        SelectionLeftUp(x, y);
                     }
                     break;
                 case Tool.Line:
+                    break;
+                case Tool.Rectangle:
+                    break;
+                case Tool.Ellipse:
+                    break;
+                case Tool.Arc:
+                    break;
+                case Tool.Bezier:
+                    break;
+                case Tool.QBezier:
+                    break;
+                case Tool.Text:
+                    break;
+            }
+        }
+        
+        public void RightDown(double x, double y)
+        {
+            double sx = SnapToGrid ? Snap(x, SnapX) : x;
+            double sy = SnapToGrid ? Snap(y, SnapY) : y;
+            switch (CurrentTool)
+            {
+                case Tool.None:
+                    break;
+                case Tool.Selection:
+                    break;
+                case Tool.Line:
                     {
-                        LineRight(sx, sy);
+                        LineRightDown(sx, sy);
                     }
                     break;
                 case Tool.Rectangle:
                     {
-                        RectangleRight(sx, sy);
+                        RectangleRightDown(sx, sy);
                     }
                     break;
                 case Tool.Ellipse:
                     {
-                        EllipseRight(sx, sy);
+                        EllipseRightDown(sx, sy);
                     }
                     break;
                 case Tool.Arc:
                     {
-                        ArcRight(sx, sy);
+                        ArcRightDown(sx, sy);
                     }
                     break;
                 case Tool.Bezier:
                     {
-                        BezierRight(sx, sy);
+                        BezierRightDown(sx, sy);
                     }
                     break;
                 case Tool.QBezier:
                     {
-                        QBezierRight(sx, sy);
+                        QBezierRightDown(sx, sy);
                     }
                     break;
                 case Tool.Text:
                     {
-                        TextRight(sx, sy);
+                        TextRightDown(sx, sy);
                     }
                     break;
             }
         }
 
+        public void RightUp(double x, double y)
+        {
+            double sx = SnapToGrid ? Snap(x, SnapX) : x;
+            double sy = SnapToGrid ? Snap(y, SnapY) : y;
+            switch (CurrentTool)
+            {
+                case Tool.None:
+                    break;
+                case Tool.Selection:
+                    break;
+                case Tool.Line:
+                    break;
+                case Tool.Rectangle:
+                    break;
+                case Tool.Ellipse:
+                    break;
+                case Tool.Arc:
+                    break;
+                case Tool.Bezier:
+                    break;
+                case Tool.QBezier:
+                    break;
+                case Tool.Text:
+                    break;
+            }
+        }
+        
         public void Move(double x, double y)
         {
             double sx = SnapToGrid ? Snap(x, SnapX) : x;
@@ -310,8 +443,10 @@ namespace Test2d
             switch (CurrentTool)
             {
                 case Tool.None:
+                    break;
+                case Tool.Selection:
                     {
-                        NoneMove(sx, sy);
+                        SelectionMove(x, y);
                     }
                     break;
                 case Tool.Line:
@@ -352,11 +487,62 @@ namespace Test2d
             }
         }
 
-        private void NoneLeft(double sx, double sy)
+        private void SelectionLeftDown(double sx, double sy)
         {
+            switch (CurrentState)
+            {
+                case State.None:
+                    {
+                        if (HitTest(_container, sx, sy))
+                            break;
+
+                        _shape = XRectangle.Create(
+                            sx, sy,
+                            _selectionStyle,
+                            null,
+                            true);
+                        _container.WorkingLayer.Shapes.Add(_shape);
+                        _container.WorkingLayer.Invalidate();
+                        CurrentState = State.One;
+                    }
+                    break;
+                case State.One:
+                    {
+                        var rectangle = _shape as XRectangle;
+                        rectangle.BottomRight.X = sx;
+                        rectangle.BottomRight.Y = sy;
+                        _container.WorkingLayer.Shapes.Remove(_shape);
+                        _container.WorkingLayer.Invalidate();
+                        CurrentState = State.None;
+                    }
+                    break;
+            }
         }
 
-        private void LineLeft(double sx, double sy)
+        private void SelectionLeftUp(double sx, double sy)
+        {
+            switch (CurrentState)
+            {
+                case State.None:
+                    {
+                    }
+                    break;
+                case State.One:
+                    {
+                        var rectangle = _shape as XRectangle;
+                        rectangle.BottomRight.X = sx;
+                        rectangle.BottomRight.Y = sy;
+                        _container.WorkingLayer.Shapes.Remove(_shape);
+                        _container.WorkingLayer.Invalidate();
+                        CurrentState = State.None;
+                        
+                        HitTest(_container, rectangle);
+                    }
+                    break;
+            }
+        }
+
+        private void LineLeftDown(double sx, double sy)
         {
             switch (CurrentState)
             {
@@ -385,7 +571,7 @@ namespace Test2d
             }
         }
 
-        private void RectangleLeft(double sx, double sy)
+        private void RectangleLeftDown(double sx, double sy)
         {
             switch (CurrentState)
             {
@@ -415,7 +601,7 @@ namespace Test2d
             }
         }
 
-        private void EllipseLeft(double sx, double sy)
+        private void EllipseLeftDown(double sx, double sy)
         {
             switch (CurrentState)
             {
@@ -445,7 +631,7 @@ namespace Test2d
             }
         }
 
-        private void ArcLeft(double sx, double sy)
+        private void ArcLeftDown(double sx, double sy)
         {
             switch (CurrentState)
             {
@@ -475,7 +661,7 @@ namespace Test2d
             }
         }
 
-        private void BezierLeft(double sx, double sy)
+        private void BezierLeftDown(double sx, double sy)
         {
             switch (CurrentState)
             {
@@ -529,7 +715,7 @@ namespace Test2d
             }
         }
 
-        private void QBezierLeft(double sx, double sy)
+        private void QBezierLeftDown(double sx, double sy)
         {
             switch (CurrentState)
             {
@@ -570,7 +756,7 @@ namespace Test2d
             }
         }
 
-        private void TextLeft(double sx, double sy)
+        private void TextLeftDown(double sx, double sy)
         {
             switch (CurrentState)
             {
@@ -601,11 +787,7 @@ namespace Test2d
             }
         }
 
-        private void NoneRight(double sx, double sy)
-        {
-        }
-
-        private void LineRight(double sx, double sy)
+        private void LineRightDown(double sx, double sy)
         {
             switch (CurrentState)
             {
@@ -623,7 +805,7 @@ namespace Test2d
             }
         }
 
-        private void RectangleRight(double sx, double sy)
+        private void RectangleRightDown(double sx, double sy)
         {
             switch (CurrentState)
             {
@@ -641,7 +823,7 @@ namespace Test2d
             }
         }
 
-        private void EllipseRight(double sx, double sy)
+        private void EllipseRightDown(double sx, double sy)
         {
             switch (CurrentState)
             {
@@ -659,7 +841,7 @@ namespace Test2d
             }
         }
 
-        private void ArcRight(double sx, double sy)
+        private void ArcRightDown(double sx, double sy)
         {
             switch (CurrentState)
             {
@@ -677,7 +859,7 @@ namespace Test2d
             }
         }
 
-        private void BezierRight(double sx, double sy)
+        private void BezierRightDown(double sx, double sy)
         {
             switch (CurrentState)
             {
@@ -697,7 +879,7 @@ namespace Test2d
             }
         }
 
-        private void QBezierRight(double sx, double sy)
+        private void QBezierRightDown(double sx, double sy)
         {
             switch (CurrentState)
             {
@@ -716,7 +898,7 @@ namespace Test2d
             }
         }
 
-        private void TextRight(double sx, double sy)
+        private void TextRightDown(double sx, double sy)
         {
             switch (CurrentState)
             {
@@ -734,10 +916,25 @@ namespace Test2d
             }
         }
 
-        private void NoneMove(double sx, double sy)
+        private void SelectionMove(double sx, double sy)
         {
+            switch (CurrentState)
+            {
+                case State.None:
+                    {
+                    }
+                    break;
+                case State.One:
+                    {
+                        var rectangle = _shape as XRectangle;
+                        rectangle.BottomRight.X = sx;
+                        rectangle.BottomRight.Y = sy;
+                        _container.WorkingLayer.Invalidate();
+                    }
+                    break;
+            }
         }
-
+        
         private void LineMove(double sx, double sy)
         {
             switch (CurrentState)
