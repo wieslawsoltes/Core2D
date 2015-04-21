@@ -221,7 +221,12 @@ namespace Test2d
                 if (result.Count > 0)
                 {
                     // TODO:
+
+
+                    foreach (var shape in result)
+                        System.Diagnostics.Debug.Print("Selected: " + shape.GetType().ToString());
                     
+
                     return true;
                 }
             }
@@ -237,6 +242,10 @@ namespace Test2d
                 container.CurrentShape = result;
                 
                 // TODO:
+
+
+                System.Diagnostics.Debug.Print("Selected: " + result.GetType().ToString());
+
                 
                 return true;
             }
