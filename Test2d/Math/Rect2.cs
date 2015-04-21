@@ -1,11 +1,6 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Test2d
 {
@@ -28,7 +23,7 @@ namespace Test2d
             this.Height = height;
         }
 
-        public bool Contains(Point2 point)
+        public bool Contains(Vector2 point)
         {
             return ((point.X >= X)
                 && (point.X - Width <= X)

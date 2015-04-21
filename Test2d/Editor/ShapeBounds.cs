@@ -89,7 +89,7 @@ namespace Test2d
             return true;
         }
 
-        public static Point2 NearestPointOnLine(Point2 a, Point2 b, Point2 p)
+        public static Vector2 NearestPointOnLine(Vector2 a, Vector2 b, Vector2 p)
         {
             double ax = p.X - a.X;
             double ay = p.Y - a.Y;
@@ -98,13 +98,13 @@ namespace Test2d
             double t = (ax * bx + ay * by) / (bx * bx + by * by);
             if (t < 0.0)
             {
-                return new Point2(a.X, a.Y);
+                return new Vector2(a.X, a.Y);
             }
             else if (t > 1.0)
             {
-                return new Point2(b.X, b.Y);
+                return new Vector2(b.X, b.Y);
             }
-            return new Point2(bx * t + a.X, by * t + a.Y);
+            return new Vector2(bx * t + a.X, by * t + a.Y);
         }
 
         public static double Distance(double x1, double y1, double x2, double y2)
@@ -114,10 +114,9 @@ namespace Test2d
             return Math.Sqrt(dx * dx + dy * dy);
         }
 
-        public static void Middle(ref Point2 point, double x1, double y1, double x2, double y2)
+        public static Vector2 Middle(double x1, double y1, double x2, double y2)
         {
-            point.X = (x1 + x2) / 2.0;
-            point.Y = (y1 + y2) / 2.0;
+            return new Vector2((x1 + x2) / 2.0, (y1 + y2) / 2.0);
         }
 
         #endregion
@@ -166,16 +165,16 @@ namespace Test2d
 
         #region HitTest
    
-        public static bool HitTest(XLine line, Point2 p, double treshold)
+        public static bool HitTest(XLine line, Vector2 p, double treshold)
         {
-            var a = new Point2(line.Start.X, line.Start.Y);
-            var b = new Point2(line.End.X, line.End.Y);
+            var a = new Vector2(line.Start.X, line.Start.Y);
+            var b = new Vector2(line.End.X, line.End.Y);
             var nearest = NearestPointOnLine(a, b, p);
             double distance = Distance(p.X, p.Y, nearest.X, nearest.Y);
             return distance < treshold;
         }
 
-        public static BaseShape HitTest(IEnumerable<BaseShape> shapes, Point2 p, double treshold)
+        public static BaseShape HitTest(IEnumerable<BaseShape> shapes, Vector2 p, double treshold)
         {
             foreach (var shape in shapes)
             {
@@ -383,7 +382,7 @@ namespace Test2d
             return false;
         }
 
-        public static BaseShape HitTest(Container container, Point2 p, double treshold)
+        public static BaseShape HitTest(Container container, Vector2 p, double treshold)
         {
             foreach (var layer in container.Layers) 
             {

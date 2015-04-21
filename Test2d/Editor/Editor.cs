@@ -231,7 +231,7 @@ namespace Test2d
         
         public static bool HitTest(Container container, double x, double y)
         {
-            var result = ShapeBounds.HitTest(container, new Point2(x, y), 6.0);
+            var result = ShapeBounds.HitTest(container, new Vector2(x, y), 6.0);
             if (result != null)
             {
                 container.CurrentShape = result;

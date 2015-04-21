@@ -66,8 +66,10 @@
     <Compile Include="Core\ShapeState.cs" />
     <Compile Include="Editor\Container.cs" />
     <Compile Include="Editor\Editor.cs" />
-    <Compile Include="Editor\Point2.cs" />
-    <Compile Include="Editor\Rect2.cs" />
+    <Compile Include="Math\MonotoneChain.cs" />
+    <Compile Include="Math\Sat.cs" />
+    <Compile Include="Math\Vector2.cs" />
+    <Compile Include="Math\Rect2.cs" />
     <Compile Include="Editor\ShapeBounds.cs" />
     <Compile Include="Editor\Layer.cs" />
     <Compile Include="Editor\LineGrid.cs" />
