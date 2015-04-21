@@ -62,6 +62,30 @@ namespace Test.Windows
                     (new ContainerWindow() { Owner = this, DataContext = context }).Show();
                 });
 
+            AllowDrop = true;
+            
+            Drop += 
+                (s, e) =>
+            {
+                if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                {
+                    try
+                    {
+                        var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                        if (files != null && files.Length == 1)
+                        {
+                            string path = files[0];
+                            if (!string.IsNullOrEmpty(path))
+                            {
+                                context.Open(path);
+                                e.Handled = true;
+                            }
+                        }
+                    }
+                    catch { }
+                }
+            };
+         
             Loaded +=
                 (s, e) =>
                 {
