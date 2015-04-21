@@ -9,7 +9,7 @@ namespace Test2d
     {
         #region Math
         
-        public static bool LineIntersectsWithRect(ref Rect2 rect, XPoint p0, XPoint p1)
+        private static bool LineIntersectsWithRect(ref Rect2 rect, XPoint p0, XPoint p1)
         {
             double left = rect.Left; 
             double right = rect.Right;
@@ -90,7 +90,7 @@ namespace Test2d
             return true;
         }
 
-        public static Vector2 NearestPointOnLine(Vector2 a, Vector2 b, Vector2 p)
+        private static Vector2 NearestPointOnLine(Vector2 a, Vector2 b, Vector2 p)
         {
             double ax = p.X - a.X;
             double ay = p.Y - a.Y;
@@ -108,14 +108,14 @@ namespace Test2d
             return new Vector2(bx * t + a.X, by * t + a.Y);
         }
 
-        public static double Distance(double x1, double y1, double x2, double y2)
+        private static double Distance(double x1, double y1, double x2, double y2)
         {
             double dx = x1 - x2;
             double dy = y1 - y2;
             return Math.Sqrt(dx * dx + dy * dy);
         }
 
-        public static Vector2 Middle(double x1, double y1, double x2, double y2)
+        private static Vector2 Middle(double x1, double y1, double x2, double y2)
         {
             return new Vector2((x1 + x2) / 2.0, (y1 + y2) / 2.0);
         }
@@ -136,8 +136,8 @@ namespace Test2d
             double height = (bry + dy) - y;
             return new Rect2(x, y, width, height);
         }
-        
-        public static Rect2 GetPointBounds(XPoint point, double treshold)
+
+        private static Rect2 GetPointBounds(XPoint point, double treshold)
         {
             double radius = treshold / 2.0;
             return new Rect2(
@@ -146,18 +146,18 @@ namespace Test2d
                 treshold, 
                 treshold);
         }
- 
-        public static Rect2 GetRectangleBounds(XRectangle rectangle)
+
+        private static Rect2 GetRectangleBounds(XRectangle rectangle)
         {
             return CreateRect(rectangle.TopLeft, rectangle.BottomRight, 0.0, 0.0);
         }
-        
-        public static Rect2 GetEllipseBounds(XEllipse ellipse)
+
+        private static Rect2 GetEllipseBounds(XEllipse ellipse)
         {
             return CreateRect(ellipse.TopLeft, ellipse.BottomRight, 0.0, 0.0);
         }
 
-        public static Rect2 GetArcBounds(XArc arc, double dx, double dy)
+        private static Rect2 GetArcBounds(XArc arc, double dx, double dy)
         {
             double x1 = arc.Point1.X + dx;
             double y1 = arc.Point1.Y + dy;
@@ -176,7 +176,7 @@ namespace Test2d
             return new Rect2(x, y, width, height);
         }
 
-        public static Rect2 GetTextBounds(XText text)
+        private static Rect2 GetTextBounds(XText text)
         {
             return CreateRect(text.TopLeft, text.BottomRight, 0.0, 0.0);
         }
@@ -184,8 +184,8 @@ namespace Test2d
         #endregion
 
         #region HitTest Point
-   
-        public static bool HitTest(XLine line, Vector2 p, double treshold)
+
+        private static bool HitTest(XLine line, Vector2 p, double treshold)
         {
             var a = new Vector2(line.Start.X, line.Start.Y);
             var b = new Vector2(line.End.X, line.End.Y);
@@ -194,7 +194,7 @@ namespace Test2d
             return distance < treshold;
         }
 
-        public static BaseShape HitTest(IEnumerable<BaseShape> shapes, Vector2 p, double treshold)
+        private static BaseShape HitTest(IEnumerable<BaseShape> shapes, Vector2 p, double treshold)
         {
             foreach (var shape in shapes)
             {
@@ -307,7 +307,7 @@ namespace Test2d
 
         #region HitTest Rect
 
-        public static bool HitTest(IEnumerable<BaseShape> shapes, Rect2 rect, Vector2[] selection, ICollection<BaseShape> hs, double treshold)
+        private static bool HitTest(IEnumerable<BaseShape> shapes, Rect2 rect, Vector2[] selection, ICollection<BaseShape> hs, double treshold)
         {
             foreach (var shape in shapes)
             {
