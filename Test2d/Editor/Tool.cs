@@ -11,6 +11,7 @@ namespace Test2d
     public enum Tool
     {
         None,
+        Selection,
         Line,
         Rectangle,
         Ellipse,

@@ -110,6 +110,12 @@ namespace Test
                     _editor.CurrentTool = Tool.None;
                 });
 
+            _commands.ToolSelectionCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.CurrentTool = Tool.Selection;
+                });
+
             _commands.ToolLineCommand = new DelegateCommand(
                 () =>
                 {
