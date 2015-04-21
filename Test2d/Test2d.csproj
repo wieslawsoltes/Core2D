@@ -67,6 +67,7 @@
     <Compile Include="Editor\Container.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Math\MonotoneChain.cs" />
+    <Compile Include="Math\Polygon2.cs" />
     <Compile Include="Math\Sat.cs" />
     <Compile Include="Math\Vector2.cs" />
     <Compile Include="Math\Rect2.cs" />
