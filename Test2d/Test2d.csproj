@@ -65,6 +65,7 @@
     <Compile Include="Core\LineStyle.cs" />
     <Compile Include="Core\ShapeState.cs" />
     <Compile Include="Editor\Container.cs" />
+    <Compile Include="Editor\ConvexHullBounds.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Math\MonotoneChain.cs" />
     <Compile Include="Math\Polygon2.cs" />
