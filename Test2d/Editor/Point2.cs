@@ -2,22 +2,21 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Test2d
 {
-    public enum Tool
+    public struct Point2
     {
-        None,
-        Selection,
-        Line,
-        Rectangle,
-        Ellipse,
-        Arc,
-        Bezier,
-        QBezier,
-        Text
+        public double X;
+        public double Y;
+        public Point2(double x, double y)
+        {
+            this.X = x;
+            this.Y = y;
+        }
     }
 }

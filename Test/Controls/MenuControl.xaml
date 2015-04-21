@@ -39,6 +39,20 @@
                 </MenuItem.Style>
             </MenuItem>
             <Separator/>
+            <MenuItem Header="_Selection" Command="{Binding Commands.ToolSelectionCommand}" InputGestureText="S">
+                <MenuItem.Style>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="IsCheckable" Value="True"/>
+                        <Setter Property="IsChecked" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Selection">
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.Style>
+            </MenuItem>
+            <Separator/>
             <MenuItem Header="_Line" Command="{Binding Commands.ToolLineCommand}" InputGestureText="L">
                 <MenuItem.Style>
                     <Style TargetType="MenuItem">
