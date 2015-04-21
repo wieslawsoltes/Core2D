@@ -13,12 +13,17 @@ namespace Test2d
     {
         #region Math
         
-        public static bool LineIntersectsWithRect(
-            double left, double right,
-            double bottom, double top,
-            double x0, double y0,
-            double x1, double y1)
+        public static bool LineIntersectsWithRect(ref Rect2 rect, XPoint p0, XPoint p1)
         {
+            double left = rect.Left; 
+            double right = rect.Right;
+            double bottom = rect.Bottom; 
+            double top = rect.Top;
+            double x0 = p0.X; 
+            double y0 = p0.Y;
+            double x1 = p1.X; 
+            double y1 = p1.Y;
+
             // Liang-Barsky line clipping algorithm
             double t0 = 0.0;
             double t1 = 1.0;
@@ -279,15 +284,9 @@ namespace Test2d
                 else if (shape is XLine)
                 {
                     var line = shape as XLine;
-                    
-                    double sx = line.Start.X;
-                    double sy = line.Start.Y;
-                    double ex = line.End.X;
-                    double ey = line.End.Y;
-                    
                     if (GetPointBounds(line.Start, treshold).IntersectsWith(rect)
                         || GetPointBounds(line.End, treshold).IntersectsWith(rect)
-                        || LineIntersectsWithRect(rect.Left, rect.Right, rect.Bottom, rect.Top, sx, sy, ex, ey))
+                        || LineIntersectsWithRect(ref rect, line.Start, line.End))
                     {
                         if (hs != null)
                         {
