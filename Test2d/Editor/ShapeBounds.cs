@@ -161,6 +161,25 @@ namespace Test2d
             return CreateRect(ellipse.TopLeft, ellipse.BottomRight, 0.0, 0.0);
         }
 
+        public static Rect2 GetArcBounds(XArc arc, double dx, double dy)
+        {
+            double x1 = arc.Point1.X + dx;
+            double y1 = arc.Point1.Y + dy;
+            double x2 = arc.Point2.X + dx;
+            double y2 = arc.Point2.Y + dy;
+
+            double x0 = (x1 + x2) / 2.0;
+            double y0 = (y1 + y2) / 2.0;
+
+            double r = Math.Sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
+            double x = x0 - r;
+            double y = y0 - r;
+            double width = 2.0 * r;
+            double height = 2.0 * r;
+
+            return new Rect2(x, y, width, height);
+        }
+
         public static Rect2 GetTextBounds(XText text)
         {
             return CreateRect(text.TopLeft, text.BottomRight, 0.0, 0.0);
@@ -168,7 +187,7 @@ namespace Test2d
 
         #endregion
 
-        #region HitTest
+        #region HitTest Point
    
         public static bool HitTest(XLine line, Vector2 p, double treshold)
         {
@@ -230,15 +249,27 @@ namespace Test2d
                 }
                 else if (shape is XArc)
                 {
-                    // TODO:
+                    if (GetArcBounds(shape as XArc, 0.0, 0.0).Contains(p))
+                    {
+                        return shape;
+                    }
+                    continue;
                 }
                 else if (shape is XBezier)
                 {
-                    // TODO:
+                    if (ConvexHullBounds.Contains(shape as XBezier, p))
+                    {
+                        return shape;
+                    }
+                    continue;
                 }
                 else if (shape is XQBezier)
                 {
-                    // TODO:
+                    if (ConvexHullBounds.Contains(shape as XQBezier, p))
+                    {
+                        return shape;
+                    }
+                    continue;
                 }
                 else if (shape is XText)
                 {
@@ -262,7 +293,25 @@ namespace Test2d
             return null;
         }
 
-        public static bool HitTest(IEnumerable<BaseShape> shapes, Rect2 rect, ICollection<BaseShape> hs, double treshold)
+        public static BaseShape HitTest(Container container, Vector2 p, double treshold)
+        {
+            foreach (var layer in container.Layers)
+            {
+                var shape = HitTest(layer.Shapes, p, treshold);
+                if (shape != null)
+                {
+                    return shape;
+                }
+            }
+
+            return null;
+        }
+      
+        #endregion
+
+        #region HitTest Rect
+
+        public static bool HitTest(IEnumerable<BaseShape> shapes, Rect2 rect, Vector2[] selection, ICollection<BaseShape> hs, double treshold)
         {
             foreach (var shape in shapes)
             {
@@ -334,15 +383,51 @@ namespace Test2d
                 }
                 else if (shape is XArc)
                 {
-                    // TODO:
+                    if (GetArcBounds(shape as XArc, 0.0, 0.0).IntersectsWith(rect))
+                    {
+                        if (hs != null)
+                        {
+                            hs.Add(shape);
+                            continue;
+                        }
+                        else
+                        {
+                            return true;
+                        }
+                    }
+                    continue;
                 }
                 else if (shape is XBezier)
                 {
-                    // TODO:
+                    if (ConvexHullBounds.Overlap(selection, ConvexHullBounds.GetVertices(shape as XBezier)))
+                    {
+                        if (hs != null)
+                        {
+                            hs.Add(shape);
+                            continue;
+                        }
+                        else
+                        {
+                            return true;
+                        }
+                    }
+                    continue;
                 }
                 else if (shape is XQBezier)
                 {
-                    // TODO:
+                    if (ConvexHullBounds.Overlap(selection, ConvexHullBounds.GetVertices(shape as XQBezier)))
+                    {
+                        if (hs != null)
+                        {
+                            hs.Add(shape);
+                            continue;
+                        }
+                        else
+                        {
+                            return true;
+                        }
+                    }
+                    continue;
                 }
                 else if (shape is XText)
                 {
@@ -362,7 +447,7 @@ namespace Test2d
                 }
                 else if (shape is XGroup)
                 {
-                    if (HitTest((shape as XGroup).Shapes, rect, null, treshold) == true)
+                    if (HitTest((shape as XGroup).Shapes, rect, selection, null, treshold) == true)
                     {
                         if (hs != null)
                         {
@@ -381,27 +466,21 @@ namespace Test2d
             return false;
         }
 
-        public static BaseShape HitTest(Container container, Vector2 p, double treshold)
-        {
-            foreach (var layer in container.Layers) 
-            {
-                var shape = HitTest(layer.Shapes, p, treshold);
-                if (shape != null)
-                {
-                    return shape;
-                }
-            }
-
-            return null;
-        }
-        
         public static ICollection<BaseShape> HitTest(Container container, Rect2 rect, double treshold)
         {
             var hs = new HashSet<BaseShape>();
-            
+
+            var selection = new Vector2[]
+            {
+                new Vector2(rect.X, rect.Y),
+                new Vector2(rect.X + rect.Width, rect.Y),
+                new Vector2(rect.X + rect.Width, rect.Y + rect.Height),
+                new Vector2(rect.X, rect.Y + rect.Height)
+            };
+
             foreach (var layer in container.Layers) 
             {
-                HitTest(layer.Shapes, rect, hs, treshold);
+                HitTest(layer.Shapes, rect, selection, hs, treshold);
             }
       
             return hs;
