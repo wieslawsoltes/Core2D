@@ -90,7 +90,15 @@ namespace Test2d
                 _bottomRight.Draw(dc, renderer, _bottomRight.X, _bottomRight.Y);
             }
         }
-        
+
+        public override void Move(double dx, double dy)
+        {
+            TopLeft.X += dx;
+            TopLeft.Y += dy;
+            BottomRight.X += dx;
+            BottomRight.Y += dy;
+        }
+
         public static XText Create(
             double x1, double y1,
             double x2, double y2,

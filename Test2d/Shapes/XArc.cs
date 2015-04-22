@@ -77,6 +77,14 @@ namespace Test2d
             }
         }
 
+        public override void Move(double dx, double dy)
+        {
+            Point1.X += dx;
+            Point1.Y += dy;
+            Point2.X += dx;
+            Point2.Y += dy;
+        }
+
         public static XArc Create(
             double x1, double y1,
             double x2, double y2,

@@ -22,5 +22,7 @@ namespace Test2d
         }
 
         public abstract void Draw(object dc, IRenderer renderer, double dx, double dy);
+
+        public abstract void Move(double dx, double dy);
     }
 }

@@ -9,6 +9,7 @@ namespace Test2d
     public class XGroup : BaseShape
     {
         private string _name;
+        private ShapeStyle _style;
         private IList<BaseShape> _shapes;
 
         public string Name
@@ -20,6 +21,19 @@ namespace Test2d
                 {
                     _name = value;
                     Notify("Name");
+                }
+            }
+        }
+
+        public ShapeStyle Style
+        {
+            get { return _style; }
+            set
+            {
+                if (value != _style)
+                {
+                    _style = value;
+                    Notify("Style");
                 }
             }
         }
@@ -45,6 +59,14 @@ namespace Test2d
                 {
                     shape.Draw(dc, renderer, dx, dy);
                 }
+            }
+        }
+
+        public override void Move(double dx, double dy)
+        {
+            foreach (var shape in Shapes)
+            {
+                shape.Move(dx, dy);
             }
         }
 

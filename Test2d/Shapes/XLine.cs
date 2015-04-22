@@ -63,6 +63,14 @@ namespace Test2d
             }
         }
 
+        public override void Move(double dx, double dy)
+        {
+            Start.X += dx;
+            Start.Y += dy;
+            End.X += dx;
+            End.Y += dy;
+        }
+
         public static XLine Create(
             double x1, double y1,
             double x2, double y2,

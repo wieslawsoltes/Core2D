@@ -74,6 +74,12 @@ namespace Test2d
             }
         }
 
+        public override void Move(double dx, double dy)
+        {
+            X += dx;
+            Y += dy;
+        }
+
         public static XPoint Create(double x, double y, BaseShape shape)
         {
             return new XPoint() { X = x, Y = y, Shape = shape };

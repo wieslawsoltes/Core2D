@@ -77,6 +77,14 @@ namespace Test2d
             }
         }
 
+        public override void Move(double dx, double dy)
+        {
+            TopLeft.X += dx;
+            TopLeft.Y += dy;
+            BottomRight.X += dx;
+            BottomRight.Y += dy;
+        }
+
         public static XEllipse Create(
             double x1, double y1,
             double x2, double y2,
