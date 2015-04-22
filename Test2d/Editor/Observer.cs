@@ -332,6 +332,13 @@ namespace Test2d
                 text.TopLeft.PropertyChanged += ShapeObserver;
                 text.BottomRight.PropertyChanged += ShapeObserver;
             }
+            else if (shape is XGroup)
+            {
+                var group = shape as XGroup;
+                Add(group.Shapes);
+                (group.Shapes as ObservableCollection<BaseShape>)
+                    .CollectionChanged += ShapesCollectionObserver;
+            }
 
             Debug("Add Shape: " + shape.GetType());
         }
@@ -389,6 +396,13 @@ namespace Test2d
                 var text = shape as XText;
                 text.TopLeft.PropertyChanged -= ShapeObserver;
                 text.BottomRight.PropertyChanged -= ShapeObserver;
+            }
+            else if (shape is XGroup)
+            {
+                var group = shape as XGroup;
+                Remove(group.Shapes);
+                (group.Shapes as ObservableCollection<BaseShape>)
+                    .CollectionChanged -= ShapesCollectionObserver;
             }
 
             Debug("Remove Shape: " + shape.GetType());
