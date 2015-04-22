@@ -6,9 +6,23 @@ namespace Test2d
 {
     public class LineStyle : ObservableObject
     {
+        private string _name;
         private ArrowStyle _startArrowStyle;
         private ArrowStyle _endArrowStyle;
 
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (value != _name)
+                {
+                    _name = value;
+                    Notify("Name");
+                }
+            }
+        }
+        
         public ArrowStyle StartArrowStyle
         {
             get { return _startArrowStyle; }
