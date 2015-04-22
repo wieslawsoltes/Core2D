@@ -378,13 +378,18 @@ namespace Test2d
 
         public static BaseShape HitTest(Container container, Vector2 p, double treshold)
         {
-            foreach (var layer in container.Layers)
+            //foreach (var layer in container.Layers)
+            //{
+            //    var shape = HitTest(layer.Shapes, p, treshold);
+            //    if (shape != null)
+            //    {
+            //        return shape;
+            //    }
+            //}
+            var shape = HitTest(container.CurrentLayer.Shapes, p, treshold);
+            if (shape != null)
             {
-                var shape = HitTest(layer.Shapes, p, treshold);
-                if (shape != null)
-                {
-                    return shape;
-                }
+                return shape;
             }
 
             return null;
@@ -561,10 +566,11 @@ namespace Test2d
                 new Vector2(rect.X, rect.Y + rect.Height)
             };
 
-            foreach (var layer in container.Layers) 
-            {
-                HitTest(layer.Shapes, rect, selection, hs, treshold);
-            }
+            //foreach (var layer in container.Layers) 
+            //{
+            //    HitTest(layer.Shapes, rect, selection, hs, treshold);
+            //}
+            HitTest(container.CurrentLayer.Shapes, rect, selection, hs, treshold);
       
             return hs;
         }
