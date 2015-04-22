@@ -6,9 +6,23 @@ namespace Test2d
 {
     public class XPoint : BaseShape
     {
+        private ShapeStyle _style;
         private BaseShape _shape;
         private double _x;
         private double _y;
+
+        public ShapeStyle Style
+        {
+            get { return _style; }
+            set
+            {
+                if (value != _style)
+                {
+                    _style = value;
+                    Notify("Style");
+                }
+            }
+        }
 
         public BaseShape Shape
         {
