@@ -40,21 +40,25 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel DataContext="{Binding Editor.Container.CurrentLayer}" Grid.Row="2" Margin="2">
-            <GroupBox Header="Name">
+            <Expander Header="Name" IsExpanded="True">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Text="{Binding Name}" 
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                             BorderBrush="{x:Null}" 
+                             Grid.Row="0" 
+                             Grid.Column="0" 
+                             Grid.ColumnSpan="2"
                              TextAlignment="Left" 
-                             VerticalAlignment="Center" 
-                             Margin="1" 
-                             BorderBrush="{x:Null}"/>
+                             VerticalAlignment="Center">
+                    </TextBox>
                 </Grid>
-            </GroupBox>
+            </Expander>
         </StackPanel>
     </Grid>
 </UserControl>
