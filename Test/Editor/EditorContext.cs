@@ -6,6 +6,7 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -19,11 +20,6 @@ using TestWPF;
 
 namespace Test
 {
-    public class Globals
-    {
-        public EditorContext Context;
-    }
-
     public class EditorContext : ObservableObject
     {
         private EditorCommands _commands;
@@ -247,18 +243,21 @@ namespace Test
                 var code = System.IO.File.ReadAllText(path);
 
                 ScriptOptions options = ScriptOptions.Default
+                    .AddNamespaces("System")
+                    .AddNamespaces("System.Collections.Generic")
+                    .AddReferences(Assembly.GetAssembly(typeof(ObservableCollection<>)))
+                    .AddNamespaces("System.Collections.ObjectModel")
+                    .AddReferences(Assembly.GetAssembly(typeof(System.Linq.Enumerable)))
+                    .AddNamespaces("System.Linq")
                     .AddReferences(Assembly.GetAssembly(typeof(ObservableObject)))
                     .AddNamespaces("Test2d");
 
-                CSharpScript.Eval(
-                    code,
-                    options,
-                    new Globals()
-                    {
-                        Context = this
-                    });
+                CSharpScript.Eval(code, options, new ScriptGlobals() { Context = this });
             }
-            catch { }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+            }
         }
 
         public void Open(string path)
