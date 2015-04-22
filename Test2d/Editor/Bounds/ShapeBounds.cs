@@ -319,7 +319,7 @@ namespace Test2d
                 }
                 else if (shape is XQBezier)
                 {
-                    var qbezier = shape as XBezier;
+                    var qbezier = shape as XQBezier;
 
                     if (GetPointBounds(qbezier.Point1, treshold).Contains(p))
                     {
