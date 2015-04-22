@@ -152,6 +152,9 @@
                 </MenuItem.Style>
             </MenuItem>
         </MenuItem>
+        <MenuItem Header="_Script">
+            <MenuItem Header="Evaluate..." Command="{Binding Commands.EvalCommand}" InputGestureText="F5"/>
+        </MenuItem>
         <MenuItem Header="_Options">
             <MenuItem Header="Default is _Filled" 
                       IsCheckable="True" 

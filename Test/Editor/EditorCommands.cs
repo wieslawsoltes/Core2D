@@ -33,6 +33,8 @@ namespace Test
         public ICommand ToolQBezierCommand { get; set; }
         public ICommand ToolTextCommand { get; set; }
 
+        public ICommand EvalCommand { get; set; }
+
         public ICommand DefaultIsFilledCommand { get; set; }
         public ICommand SnapToGridCommand { get; set; }
         public ICommand DrawPointsCommand { get; set; }

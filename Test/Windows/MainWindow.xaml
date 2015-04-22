@@ -22,6 +22,7 @@
         <KeyBinding Command="{Binding Commands.CopyAsEmfCommand}" Gesture="Ctrl+Shift+C"/>
         <KeyBinding Command="{Binding Commands.GroupSelectedCommand}" Gesture="Ctrl+G"/>
         <KeyBinding Command="{Binding Commands.GroupCurrentLayerCommand}" Gesture="Ctrl+Shift+G"/>
+        <KeyBinding Command="{Binding Commands.EvalCommand}" Gesture="F5"/>
         <KeyBinding Command="{Binding Commands.LayersWindowCommand}" Gesture="Ctrl+L"/>
         <KeyBinding Command="{Binding Commands.StyleWindowCommand}" Gesture="Ctrl+K"/>
         <KeyBinding Command="{Binding Commands.StylesWindowCommand}" Gesture="Ctrl+T"/>
