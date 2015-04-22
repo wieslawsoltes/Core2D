@@ -18,7 +18,10 @@ namespace Test
         public ICommand ExitCommand { get; set; }
 
         public ICommand CopyAsEmfCommand { get; set; }
-        public ICommand ClearCommand { get; set; }
+        public ICommand DeleteSelectedCommand { get; set; }
+        public ICommand ClearAllCommand { get; set; }
+        public ICommand GroupSelectedCommand { get; set; }
+        public ICommand GroupCurrentLayerCommand { get; set; }
 
         public ICommand ToolNoneCommand { get; set; }
         public ICommand ToolSelectionCommand { get; set; }
@@ -41,9 +44,6 @@ namespace Test
         public ICommand RemoveStyleCommand { get; set; }
 
         public ICommand RemoveShapeCommand { get; set; }
-
-        public ICommand GroupSelectedCommand { get; set; }
-        public ICommand GroupCurrentLayerCommand { get; set; }
 
         public ICommand LayersWindowCommand { get; set; }
         public ICommand StyleWindowCommand { get; set; }

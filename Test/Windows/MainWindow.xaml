@@ -20,7 +20,7 @@
         <KeyBinding Command="{Binding Commands.ExportCommand}" Gesture="Ctrl+E"/>
         <KeyBinding Command="{Binding Commands.ExitCommand}" Gesture="Alt+F4"/>
         <KeyBinding Command="{Binding Commands.CopyAsEmfCommand}" Gesture="Ctrl+Shift+C"/>
-        <KeyBinding Command="{Binding Commands.GroupSelectedCommand}" Gesture="Ctrl+Shift+G"/>
+        <KeyBinding Command="{Binding Commands.GroupSelectedCommand}" Gesture="Ctrl+G"/>
         <KeyBinding Command="{Binding Commands.GroupCurrentLayerCommand}" Gesture="Ctrl+Shift+G"/>
         <KeyBinding Command="{Binding Commands.LayersWindowCommand}" Gesture="Ctrl+L"/>
         <KeyBinding Command="{Binding Commands.StyleWindowCommand}" Gesture="Ctrl+K"/>

@@ -10,6 +10,7 @@
              d:DesignHeight="600" d:DesignWidth="810"
              Width="{Binding Editor.Container.Width}" Height="{Binding Editor.Container.Height}">
     <UserControl.InputBindings>
+        <KeyBinding Command="{Binding Commands.DeleteSelectedCommand}" Key="Delete" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolNoneCommand}" Key="N" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolSelectionCommand}" Key="S" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolLineCommand}" Key="L" Modifiers=""/>
