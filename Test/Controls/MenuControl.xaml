@@ -27,7 +27,7 @@
             <MenuItem Header="_Clear All" Command="{Binding Commands.ClearAllCommand}" InputGestureText=""/>
             <Separator/>
             <MenuItem Header="_Group Selected" Command="{Binding Commands.GroupSelectedCommand}" InputGestureText="Ctrl+G"/>
-            <MenuItem Header="GroupCurrent _Layer" Command="{Binding Commands.GroupCurrentLayerCommand}" InputGestureText="Ctrl+Shift+G"/>
+            <MenuItem Header="Group Current _Layer" Command="{Binding Commands.GroupCurrentLayerCommand}" InputGestureText="Ctrl+Shift+G"/>
         </MenuItem>
         <MenuItem Header="_Tool">
             <MenuItem Header="_None" Command="{Binding Commands.ToolNoneCommand}" InputGestureText="N">
