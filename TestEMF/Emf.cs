@@ -61,7 +61,7 @@ namespace TestEMF
                 }
                 using (g = Graphics.FromImage(mf))
                 {
-                    g.DrawImage(bitmap, 0, 0);
+                    //g.DrawImage(bitmap, 0, 0);
 
                     var r = new EmfRenderer()
                     {

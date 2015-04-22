@@ -29,6 +29,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <controls:StyleControl Grid.Row="2" Margin="2"/>
+        <controls:StyleControl Grid.Row="2" Margin="2" DataContext="{Binding Editor.Container.CurrentStyle}"/>
     </Grid>
 </UserControl>

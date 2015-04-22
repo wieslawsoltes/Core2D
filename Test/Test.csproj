@@ -88,6 +88,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ShapeControl.xaml.cs">
+      <DependentUpon>ShapeControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controls\StyleControl.xaml.cs">
       <DependentUpon>StyleControl.xaml</DependentUpon>
     </Compile>
@@ -100,6 +104,10 @@
     <Compile Include="Windows\LayersWindow.xaml.cs">
       <DependentUpon>LayersWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\PropertiesWindow.xaml.cs">
+      <DependentUpon>PropertiesWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Windows\ShapesWindow.xaml.cs">
       <DependentUpon>ShapesWindow.xaml</DependentUpon>
     </Compile>
@@ -109,6 +117,8 @@
     <Compile Include="Windows\StyleWindow.xaml.cs">
       <DependentUpon>StyleWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\Dictionaries\ShapeDictionary.xaml" />
+    <Page Include="Controls\Dictionaries\StyleDictionary.xaml" />
     <Page Include="Controls\LayersControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -117,6 +127,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\ShapeControl.xaml" />
     <Page Include="Controls\ShapesControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -161,6 +172,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\PropertiesWindow.xaml" />
     <Page Include="Windows\ShapesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -223,6 +235,9 @@
       <Project>{a6e4a619-c1d8-4215-aeed-8f4839699d74}</Project>
       <Name>TestWPF</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\Dictionaries" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

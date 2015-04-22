@@ -50,5 +50,6 @@ namespace Test
         public ICommand StylesWindowCommand { get; set; }
         public ICommand ShapesWindowCommand { get; set; }
         public ICommand ContainerWindowCommand { get; set; }
+        public ICommand PropertiesWindowCommand { get; set; }
     }
 }

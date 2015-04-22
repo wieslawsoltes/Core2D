@@ -63,6 +63,34 @@ namespace Test.Windows
                     (new ContainerWindow() { Owner = this, DataContext = context }).Show();
                 });
 
+            context.Commands.PropertiesWindowCommand = new DelegateCommand(
+                () =>
+                {
+                    (new PropertiesWindow() { Owner = this, DataContext = context }).Show();
+                });
+            
+            PropertiesWindow pw = null;
+            
+            context.Editor.PropertyChanged +=
+                (s, e) =>
+                {
+                    if (e.PropertyName == "IsContextMenu")
+                    {
+                        if (context.Editor.IsContextMenu)
+                        {
+                            context.Editor.IsContextMenu = false;
+                            
+                            if (pw == null)
+                            {
+                                pw = new PropertiesWindow() { Owner = this, DataContext = context };
+                                pw.Unloaded += (_s, _e) => pw = null;
+                                
+                            }
+                            pw.Show();
+                        }
+                    }
+                };
+
             AllowDrop = true;
             
             Drop += 

@@ -11,10 +11,7 @@ namespace Test2d
         private ArgbColor _fill;
         private double _thickness;
         private LineStyle _lineStyle;
-        private string _fontName;
-        private double _fontSize;
-        private TextHAlignment _textHAlignment;
-        private TextVAlignment _textVAlignment;
+        private TextStyle _textStyle;
         
         public string Name
         {
@@ -80,59 +77,20 @@ namespace Test2d
                 }
             }
         }
-        
-        public string FontName
-        {
-            get { return _fontName; }
-            set
-            {
-                if (value != _fontName)
-                {
-                    _fontName = value;
-                    Notify("FontName");
-                }
-            }
-        }
 
-        public double FontSize
+        public TextStyle TextStyle
         {
-            get { return _fontSize; }
+            get { return _textStyle; }
             set
             {
-                if (value != _fontSize)
+                if (value != _textStyle)
                 {
-                    _fontSize = value;
-                    Notify("FontSize");
-                }
-            }
-        }
-
-        public TextHAlignment TextHAlignment
-        {
-            get { return _textHAlignment; }
-            set
-            {
-                if (value != _textHAlignment)
-                {
-                    _textHAlignment = value;
-                    Notify("TextHAlignment");
+                    _textStyle = value;
+                    Notify("TextStyle");
                 }
             }
         }
         
-        public TextVAlignment TextVAlignment
-        {
-            get { return _textVAlignment; }
-            set
-            {
-                if (value != _textVAlignment)
-                {
-                    _textVAlignment = value;
-                    Notify("TextVAlignment");
-                }
-            }
-        }
-     
         public static ShapeStyle Create(
             string name,
             byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00,
@@ -151,10 +109,7 @@ namespace Test2d
                 Fill = ArgbColor.Create(fa, fr, fg, fb),
                 Thickness = thickness,
                 LineStyle = lineStyle ?? LineStyle.Create(ArrowStyle.Create(), ArrowStyle.Create()),
-                FontName = fontName,
-                FontSize = fontSize,
-                TextHAlignment = textHAlignment,
-                TextVAlignment = textVAlignment
+                TextStyle = TextStyle.Create(fontName, fontSize, textHAlignment, textVAlignment)
             };
         }
     }

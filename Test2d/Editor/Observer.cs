@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-#define VERBOSE
+
+//#define VERBOSE
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -190,6 +192,7 @@ namespace Test2d
             style.LineStyle.PropertyChanged += StyleObserver;
             style.LineStyle.StartArrowStyle.PropertyChanged += StyleObserver;
             style.LineStyle.EndArrowStyle.PropertyChanged += StyleObserver;
+            style.TextStyle.PropertyChanged += StyleObserver;
             Debug("Add Style: " + style.Name);
         }
 
@@ -201,6 +204,7 @@ namespace Test2d
             style.LineStyle.PropertyChanged -= StyleObserver;
             style.LineStyle.StartArrowStyle.PropertyChanged -= StyleObserver;
             style.LineStyle.EndArrowStyle.PropertyChanged -= StyleObserver;
+            style.TextStyle.PropertyChanged -= StyleObserver;
             Debug("Remove Style: " + style.Name);
         }
 

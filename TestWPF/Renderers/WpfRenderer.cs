@@ -77,7 +77,7 @@ namespace TestWPF
         {
             double ox, oy;
 
-            switch (style.TextHAlignment)
+            switch (style.TextStyle.TextHAlignment)
             {
                 case TextHAlignment.Left:
                     ox = rect.TopLeft.X;
@@ -91,7 +91,7 @@ namespace TestWPF
                     break;
             }
 
-            switch (style.TextVAlignment)
+            switch (style.TextStyle.TextVAlignment)
             {
                 case TextVAlignment.Top:
                     oy = rect.TopLeft.Y;
@@ -765,11 +765,11 @@ namespace TestWPF
                     ci,
                     ci.TextInfo.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight,
                     new Typeface(
-                        new FontFamily(text.Style.FontName),
+                        new FontFamily(text.Style.TextStyle.FontName),
                         FontStyles.Normal,
                         FontWeights.Normal,
                         FontStretches.Normal),
-                    text.Style.FontSize,
+                    text.Style.TextStyle.FontSize,
                     stroke.Brush, null, TextFormattingMode.Ideal);
 
                 _dc.DrawText(

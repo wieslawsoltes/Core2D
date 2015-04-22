@@ -197,9 +197,12 @@ namespace Test2d
 
             c.CurrentStyle = c.Styles.FirstOrDefault();
 
-            CrossPointShape(
-                c, 
-                ShapeStyle.Create("PointShape", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
+            var pss = ShapeStyle.Create("PointShape", 255, 255, 0, 0, 255, 255, 0, 0, 1.0);
+            //EllipsePointShape(c, pss);
+            //FilledEllipsePointShape(c, pss);
+            //RectanglePointShape(c, pss);
+            //FilledRectanglePointShape(c, pss);
+            CrossPointShape(c, pss);
 
             if (grid)
             {

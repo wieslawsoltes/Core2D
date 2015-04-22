@@ -64,6 +64,7 @@
     <Compile Include="Core\BaseShape.cs" />
     <Compile Include="Core\LineStyle.cs" />
     <Compile Include="Core\ShapeState.cs" />
+    <Compile Include="Core\TextStyle.cs" />
     <Compile Include="Editor\Core\Container.cs" />
     <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
     <Compile Include="Editor\Core\IView.cs" />

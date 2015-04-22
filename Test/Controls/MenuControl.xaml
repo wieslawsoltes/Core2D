@@ -172,6 +172,8 @@
             <MenuItem Header="S_hapes..." Command="{Binding Commands.ShapesWindowCommand}" InputGestureText="Ctrl+H"/>
             <Separator/>
             <MenuItem Header="Containe_r Editor..." Command="{Binding Commands.ContainerWindowCommand}" InputGestureText="Ctrl+R"/>
+            <Separator/>
+            <MenuItem Header="_Properties..." Command="{Binding Commands.PropertiesWindowCommand}" InputGestureText="Alt+Enter"/>
         </MenuItem>
     </Menu>
 </UserControl>

@@ -416,8 +416,8 @@ namespace TestPDF
                 PdfFontEmbedding.Always);
 
             XFont font = new XFont(
-                text.Style.FontName,
-                _scaleToPage(text.Style.FontSize),
+                text.Style.TextStyle.FontName,
+                _scaleToPage(text.Style.TextStyle.FontSize),
                 XFontStyle.Regular,
                 options);
 
@@ -433,7 +433,7 @@ namespace TestPDF
                 _scaleToPage(rect.Height));
 
             XStringFormat format = new XStringFormat();
-            switch (text.Style.TextHAlignment)
+            switch (text.Style.TextStyle.TextHAlignment)
             {
                 case Test2d.TextHAlignment.Left:
                     format.Alignment = XStringAlignment.Near;
@@ -446,7 +446,7 @@ namespace TestPDF
                     break;
             }
 
-            switch (text.Style.TextVAlignment)
+            switch (text.Style.TextStyle.TextVAlignment)
             {
                 case Test2d.TextVAlignment.Top:
                     format.LineAlignment = XLineAlignment.Near;

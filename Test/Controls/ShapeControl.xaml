@@ -1,0 +1,28 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Test.Controls.ShapeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:Test.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="200">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Dictionaries/ShapeDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ContentControl Grid.Row="0" Content="{Binding Editor.Container.CurrentShape}" Margin="2"/>
+        <GridSplitter Grid.Row="2" Width="5" Background="Transparent" ResizeBehavior="PreviousAndNext"/>
+        <controls:StyleControl Grid.Row="2" Margin="2" DataContext="{Binding Editor.Container.CurrentShape.Style}"/>
+    </Grid>
+</UserControl>

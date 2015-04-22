@@ -448,7 +448,7 @@ namespace TestEMF
             var _gfx = gfx as Graphics;
 
             Brush brush = ToSolidBrush(text.Style.Stroke);
-            Font font = new Font(text.Style.FontName, _scaleToPage(text.Style.FontSize * 72.0 / 96.0));
+            Font font = new Font(text.Style.TextStyle.FontName, _scaleToPage(text.Style.TextStyle.FontSize * 72.0 / 96.0));
 
             var rect = CreateRect(
                 text.TopLeft,
@@ -462,7 +462,7 @@ namespace TestEMF
                 _scaleToPage(rect.Height));
 
             var format = new StringFormat();
-            switch (text.Style.TextHAlignment)
+            switch (text.Style.TextStyle.TextHAlignment)
             {
                 case Test2d.TextHAlignment.Left:
                     format.Alignment = StringAlignment.Near;
@@ -475,7 +475,7 @@ namespace TestEMF
                     break;
             }
 
-            switch (text.Style.TextVAlignment)
+            switch (text.Style.TextStyle.TextVAlignment)
             {
                 case Test2d.TextVAlignment.Top:
                     format.LineAlignment = StringAlignment.Near;
