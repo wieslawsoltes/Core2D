@@ -598,8 +598,6 @@ namespace Test2d
             switch (CurrentState)
             {
                 case State.None:
-                    {
-                    }
                     break;
                 case State.One:
                     {
@@ -884,8 +882,6 @@ namespace Test2d
             switch (CurrentState)
             {
                 case State.None:
-                    {
-                    }
                     break;
                 case State.One:
                     {
@@ -902,8 +898,6 @@ namespace Test2d
             switch (CurrentState)
             {
                 case State.None:
-                    {
-                    }
                     break;
                 case State.One:
                     {
@@ -920,8 +914,6 @@ namespace Test2d
             switch (CurrentState)
             {
                 case State.None:
-                    {
-                    }
                     break;
                 case State.One:
                     {
@@ -938,8 +930,6 @@ namespace Test2d
             switch (CurrentState)
             {
                 case State.None:
-                    {
-                    }
                     break;
                 case State.One:
                     {
@@ -956,8 +946,6 @@ namespace Test2d
             switch (CurrentState)
             {
                 case State.None:
-                    {
-                    }
                     break;
                 case State.One:
                 case State.Two:
@@ -976,8 +964,6 @@ namespace Test2d
             switch (CurrentState)
             {
                 case State.None:
-                    {
-                    }
                     break;
                 case State.One:
                 case State.Two:
@@ -995,8 +981,6 @@ namespace Test2d
             switch (CurrentState)
             {
                 case State.None:
-                    {
-                    }
                     break;
                 case State.One:
                     {
@@ -1018,42 +1002,24 @@ namespace Test2d
                     {
                         if (SelectedShape != null || SelectedShapes != null)
                         {
-                            double x = SnapToGrid ? Snap(sx, SnapX) : sx;
-                            double y = SnapToGrid ? Snap(sy, SnapY) : sy;
-                            double dx = x - _startX;
-                            double dy = y - _startY;
-                            _startX = x;
-                            _startY = y;
-                            
-                            if (SelectedShape != null)
-                            {
-                                Move(SelectedShape, dx, dy);
-                            }
-                            
-                            if (SelectedShapes != null)
-                            {
-                                Move(SelectedShapes, dx, dy);
-                            }
+                            MoveSelection(sx, sy);
+                            break;
                         }
-                        else
-                        {
-                            var rectangle = _shape as XRectangle;
-                            rectangle.BottomRight.X = sx;
-                            rectangle.BottomRight.Y = sy;
-                            _container.WorkingLayer.Invalidate();
-                        }
+
+                        var rectangle = _shape as XRectangle;
+                        rectangle.BottomRight.X = sx;
+                        rectangle.BottomRight.Y = sy;
+                        _container.WorkingLayer.Invalidate();
                     }
                     break;
             }
         }
-        
+
         private void LineMove(double sx, double sy)
         {
             switch (CurrentState)
             {
                 case State.None:
-                    {
-                    }
                     break;
                 case State.One:
                     {
@@ -1071,8 +1037,6 @@ namespace Test2d
             switch (CurrentState)
             {
                 case State.None:
-                    {
-                    }
                     break;
                 case State.One:
                     {
@@ -1090,8 +1054,6 @@ namespace Test2d
             switch (CurrentState)
             {
                 case State.None:
-                    {
-                    }
                     break;
                 case State.One:
                     {
@@ -1109,8 +1071,6 @@ namespace Test2d
             switch (CurrentState)
             {
                 case State.None:
-                    {
-                    }
                     break;
                 case State.One:
                     {
@@ -1128,8 +1088,6 @@ namespace Test2d
             switch (CurrentState)
             {
                 case State.None:
-                    {
-                    }
                     break;
                 case State.One:
                     {
@@ -1169,8 +1127,6 @@ namespace Test2d
             switch (CurrentState)
             {
                 case State.None:
-                    {
-                    }
                     break;
                 case State.One:
                     {
@@ -1198,8 +1154,6 @@ namespace Test2d
             switch (CurrentState)
             {
                 case State.None:
-                    {
-                    }
                     break;
                 case State.One:
                     {
@@ -1253,7 +1207,20 @@ namespace Test2d
 
         public void GroupSelected()
         {
-            throw new NotImplementedException();
+            if (SelectedShapes != null)
+            {
+                var group = XGroup.Create("g");
+                var layer = Container.CurrentLayer;
+
+                foreach (var shape in SelectedShapes)
+                {
+                    group.Shapes.Add(shape);
+                    layer.Shapes.Remove(shape);
+                }
+
+                layer.Shapes.Add(group);
+                layer.Invalidate();
+            }
         }
 
         public void GroupCurrentLayer()
@@ -1269,89 +1236,52 @@ namespace Test2d
             layer.Shapes.Add(group);
             layer.Invalidate();
         }
- 
-        public void Move(BaseShape shape, double dx, double dy)
+
+        public void MoveSelection(double sx, double sy)
         {
-                if (shape is XPoint)
+            double x = SnapToGrid ? Snap(sx, SnapX) : sx;
+            double y = SnapToGrid ? Snap(sy, SnapY) : sy;
+
+            double dx = x - _startX;
+            double dy = y - _startY;
+
+            _startX = x;
+            _startY = y;
+
+            if (SelectedShape != null)
+            {
+                SelectedShape.Move(dx, dy);
+            }
+
+            if (SelectedShapes != null)
+            {
+                foreach (var shape in SelectedShapes)
                 {
-                    var point = shape as XPoint;
-                    point.X += dx;
-                    point.Y += dy;
+                    shape.Move(dx, dy);
                 }
-                else if (shape is XLine)
-                {
-                    var line = shape as XLine;
-                    line.Start.X += dx;
-                    line.Start.Y += dy;
-                    line.End.X += dx;
-                    line.End.Y += dy;
-                }
-                else if (shape is XRectangle)
-                {
-                    var rectangle = shape as XRectangle;
-                    rectangle.TopLeft.X += dx;
-                    rectangle.TopLeft.Y += dy;
-                    rectangle.BottomRight.X += dx;
-                    rectangle.BottomRight.Y += dy;
-                }
-                else if (shape is XEllipse)
-                {
-                    var ellipse = shape as XEllipse;
-                    ellipse.TopLeft.X += dx;
-                    ellipse.TopLeft.Y += dy;
-                    ellipse.BottomRight.X += dx;
-                    ellipse.BottomRight.Y += dy;
-                }
-                else if (shape is XArc)
-                {
-                    var arc = shape as XArc;
-                    arc.Point1.X += dx;
-                    arc.Point1.Y += dy;
-                    arc.Point2.X += dx;
-                    arc.Point2.Y += dy;
-                }
-                else if (shape is XBezier)
-                {
-                    var bezier = shape as XBezier;
-                    bezier.Point1.X += dx;
-                    bezier.Point1.Y += dy;
-                    bezier.Point2.X += dx;
-                    bezier.Point2.Y += dy;
-                    bezier.Point3.X += dx;
-                    bezier.Point3.Y += dy;
-                    bezier.Point4.X += dx;
-                    bezier.Point4.Y += dy;
-                }
-                else if (shape is XQBezier)
-                {
-                    var qbezier = shape as XQBezier;
-                    qbezier.Point1.X += dx;
-                    qbezier.Point1.Y += dy;
-                    qbezier.Point2.X += dx;
-                    qbezier.Point2.Y += dy;
-                    qbezier.Point3.X += dx;
-                    qbezier.Point3.Y += dy;
-                }
-                else if (shape is XText)
-                {
-                    var text = shape as XText;
-                    text.TopLeft.X += dx;
-                    text.TopLeft.Y += dy;
-                    text.BottomRight.X += dx;
-                    text.BottomRight.Y += dy;
-                }
-                else if (shape is XGroup)
-                {
-                    var group = shape as XGroup;
-                    Move(group.Shapes, dx, dy);
-                }
+            }
         }
 
-        public void Move(IEnumerable<BaseShape> shapes, double dx, double dy)
+        public void DeleteSelected()
         {
-            foreach (var shape in shapes) 
+            if (SelectedShape != null)
             {
-                Move(shape, dx, dy);
+                _container.CurrentLayer.Shapes.Remove(SelectedShape);
+                _container.CurrentLayer.Invalidate();
+
+                SelectedShape = null;
+            }
+
+            if (SelectedShapes != null)
+            {
+                var layer = _container.CurrentLayer;
+
+                foreach (var shape in SelectedShapes)
+                {
+                    layer.Shapes.Remove(shape);
+                }
+
+                layer.Invalidate();
             }
         }
     }
