@@ -1,10 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Microsoft.CodeAnalysis.Scripting;
+using Microsoft.CodeAnalysis.Scripting.CSharp;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,6 +19,11 @@ using TestWPF;
 
 namespace Test
 {
+    public class Globals
+    {
+        public EditorContext Context;
+    }
+
     public class EditorContext : ObservableObject
     {
         private EditorCommands _commands;
@@ -176,6 +184,12 @@ namespace Test
                     _editor.CurrentTool = Tool.Text;
                 });
 
+            _commands.EvalCommand = new DelegateCommand(
+                () =>
+                {
+                    Eval();
+                });
+
             _commands.DefaultIsFilledCommand = new DelegateCommand(
                 () =>
                 {
@@ -226,6 +240,27 @@ namespace Test
                 });
         }
 
+        public void Eval(string path)
+        {
+            try
+            {
+                var code = System.IO.File.ReadAllText(path);
+
+                ScriptOptions options = ScriptOptions.Default
+                    .AddReferences(Assembly.GetAssembly(typeof(ObservableObject)))
+                    .AddNamespaces("Test2d");
+
+                CSharpScript.Eval(
+                    code,
+                    options,
+                    new Globals()
+                    {
+                        Context = this
+                    });
+            }
+            catch { }
+        }
+
         public void Open(string path)
         {
             var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
@@ -244,6 +279,21 @@ namespace Test
             var renderer = new PdfRenderer() { DrawPoints = _editor.Renderer.DrawPoints };
             renderer.Save(path, _editor.Container);
             System.Diagnostics.Process.Start(path);
+        }
+
+        public void Eval()
+        {
+            var dlg = new OpenFileDialog()
+            {
+                Filter = "C# Files (*.cs)|*.cs|All Files (*.*)|*.*",
+                FilterIndex = 0,
+                FileName = ""
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                Eval(dlg.FileName);
+            }
         }
 
         public void Open()
