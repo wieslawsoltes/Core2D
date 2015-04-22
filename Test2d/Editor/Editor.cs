@@ -22,9 +22,14 @@ namespace Test2d
         private double _snapX;
         private double _snapY;
         private ShapeStyle _selectionStyle;
+        private BaseShape _selectedShape;
+        private bool _isContextMenu;
+        private ICollection<BaseShape> _selectedShapes;
         private bool _enableObserver;
         private Observer _observer;
-
+        private double _startX;
+        private double _startY;
+        
         public Container Container
         {
             get { return _container; }
@@ -142,6 +147,45 @@ namespace Test2d
             }
         }
         
+        public BaseShape SelectedShape
+        {
+            get { return _selectedShape; }
+            set
+            {
+                if (value != _selectedShape)
+                {
+                    _selectedShape = value;
+                    Notify("SelectedShape");
+                }
+            }
+        }
+        
+        public ICollection<BaseShape> SelectedShapes
+        {
+            get { return _selectedShapes; }
+            set
+            {
+                if (value != _selectedShapes)
+                {
+                    _selectedShapes = value;
+                    Notify("SelectedShapes");
+                }
+            }
+        }
+        
+        public bool IsContextMenu
+        {
+            get { return _isContextMenu; }
+            set
+            {
+                if (value != _isContextMenu)
+                {
+                    _isContextMenu = value;
+                    Notify("IsContextMenu");
+                }
+            }
+        }
+        
         public bool EnableObserver
         {
             get { return _enableObserver; }
@@ -208,7 +252,7 @@ namespace Test2d
             return r >= snap / 2.0 ? value + snap - r : value - r;
         }
 
-        public static bool HitTest(Container container, XRectangle rectangle)
+        public bool HitTest(Container container, XRectangle rectangle)
         {
             var rect = ShapeBounds.CreateRect(
                 rectangle.TopLeft, 
@@ -220,37 +264,33 @@ namespace Test2d
             {
                 if (result.Count > 0)
                 {
-                    // TODO:
-
-
-                    foreach (var shape in result)
-                        System.Diagnostics.Debug.Print("Selected: " + shape.GetType().ToString());
-                    
-
+                    container.CurrentShape = null;
+                    SelectedShape = null;
+                    SelectedShapes = result;
                     return true;
                 }
             }
-            
+
+            container.CurrentShape = null;
+            SelectedShape = null;
+            SelectedShapes = null;
             return false;
         }
         
-        public static bool HitTest(Container container, double x, double y)
+        public bool HitTest(Container container, double x, double y)
         {
             var result = ShapeBounds.HitTest(container, new Vector2(x, y), 6.0);
             if (result != null)
             {
                 container.CurrentShape = result;
-                
-                // TODO:
-
-
-                System.Diagnostics.Debug.Print("Selected: " + result.GetType().ToString());
-
-                
+                SelectedShape = result;
+                SelectedShapes = null;
                 return true;
             }
             
             container.CurrentShape = null;
+            SelectedShape = null;
+            SelectedShapes = null;
             return false;
         }
         
@@ -369,9 +409,15 @@ namespace Test2d
                     break;
             }
         }
-        
+   
         public void RightDown(double x, double y)
         {
+            if (CurrentState == State.None)
+            {
+                SelectionRightDown(x, y);
+                return;
+            }
+            
             double sx = SnapToGrid ? Snap(x, SnapX) : x;
             double sy = SnapToGrid ? Snap(y, SnapY) : y;
             switch (CurrentTool)
@@ -502,8 +548,27 @@ namespace Test2d
             {
                 case State.None:
                     {
+                        if (SelectedShape == null && SelectedShapes != null)
+                        {
+                            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), 6.0);
+                            if (result != null)
+                            {
+                                _startX = SnapToGrid ? Snap(sx, SnapX) : sx;
+                                _startY = SnapToGrid ? Snap(sy, SnapY) : sy;
+                                IsContextMenu = false;
+                                CurrentState = State.One;
+                                break;
+                            }
+                        }
+                        
                         if (HitTest(_container, sx, sy))
+                        {
+                            _startX = SnapToGrid ? Snap(sx, SnapX) : sx;
+                            _startY = SnapToGrid ? Snap(sy, SnapY) : sy;
+                            IsContextMenu = false;
+                            CurrentState = State.One;
                             break;
+                        }
 
                         _shape = XRectangle.Create(
                             sx, sy,
@@ -538,6 +603,12 @@ namespace Test2d
                     break;
                 case State.One:
                     {
+                        if (SelectedShape != null || SelectedShapes != null)
+                        {
+                            CurrentState = State.None;
+                            break;
+                        }
+
                         var rectangle = _shape as XRectangle;
                         rectangle.BottomRight.X = sx;
                         rectangle.BottomRight.Y = sy;
@@ -796,6 +867,18 @@ namespace Test2d
             }
         }
 
+        private void SelectionRightDown(double sx, double sy)
+        {
+            switch (CurrentState)
+            {
+                case State.None:
+                    {
+                        IsContextMenu = HitTest(_container, sx, sy) ? true : false;
+                    }
+                    break;
+            }
+        }
+ 
         private void LineRightDown(double sx, double sy)
         {
             switch (CurrentState)
@@ -930,15 +1013,35 @@ namespace Test2d
             switch (CurrentState)
             {
                 case State.None:
-                    {
-                    }
                     break;
                 case State.One:
                     {
-                        var rectangle = _shape as XRectangle;
-                        rectangle.BottomRight.X = sx;
-                        rectangle.BottomRight.Y = sy;
-                        _container.WorkingLayer.Invalidate();
+                        if (SelectedShape != null || SelectedShapes != null)
+                        {
+                            double x = SnapToGrid ? Snap(sx, SnapX) : sx;
+                            double y = SnapToGrid ? Snap(sy, SnapY) : sy;
+                            double dx = x - _startX;
+                            double dy = y - _startY;
+                            _startX = x;
+                            _startY = y;
+                            
+                            if (SelectedShape != null)
+                            {
+                                Move(SelectedShape, dx, dy);
+                            }
+                            
+                            if (SelectedShapes != null)
+                            {
+                                Move(SelectedShapes, dx, dy);
+                            }
+                        }
+                        else
+                        {
+                            var rectangle = _shape as XRectangle;
+                            rectangle.BottomRight.X = sx;
+                            rectangle.BottomRight.Y = sy;
+                            _container.WorkingLayer.Invalidate();
+                        }
                     }
                     break;
             }
@@ -1165,6 +1268,91 @@ namespace Test2d
 
             layer.Shapes.Add(group);
             layer.Invalidate();
+        }
+ 
+        public void Move(BaseShape shape, double dx, double dy)
+        {
+                if (shape is XPoint)
+                {
+                    var point = shape as XPoint;
+                    point.X += dx;
+                    point.Y += dy;
+                }
+                else if (shape is XLine)
+                {
+                    var line = shape as XLine;
+                    line.Start.X += dx;
+                    line.Start.Y += dy;
+                    line.End.X += dx;
+                    line.End.Y += dy;
+                }
+                else if (shape is XRectangle)
+                {
+                    var rectangle = shape as XRectangle;
+                    rectangle.TopLeft.X += dx;
+                    rectangle.TopLeft.Y += dy;
+                    rectangle.BottomRight.X += dx;
+                    rectangle.BottomRight.Y += dy;
+                }
+                else if (shape is XEllipse)
+                {
+                    var ellipse = shape as XEllipse;
+                    ellipse.TopLeft.X += dx;
+                    ellipse.TopLeft.Y += dy;
+                    ellipse.BottomRight.X += dx;
+                    ellipse.BottomRight.Y += dy;
+                }
+                else if (shape is XArc)
+                {
+                    var arc = shape as XArc;
+                    arc.Point1.X += dx;
+                    arc.Point1.Y += dy;
+                    arc.Point2.X += dx;
+                    arc.Point2.Y += dy;
+                }
+                else if (shape is XBezier)
+                {
+                    var bezier = shape as XBezier;
+                    bezier.Point1.X += dx;
+                    bezier.Point1.Y += dy;
+                    bezier.Point2.X += dx;
+                    bezier.Point2.Y += dy;
+                    bezier.Point3.X += dx;
+                    bezier.Point3.Y += dy;
+                    bezier.Point4.X += dx;
+                    bezier.Point4.Y += dy;
+                }
+                else if (shape is XQBezier)
+                {
+                    var qbezier = shape as XQBezier;
+                    qbezier.Point1.X += dx;
+                    qbezier.Point1.Y += dy;
+                    qbezier.Point2.X += dx;
+                    qbezier.Point2.Y += dy;
+                    qbezier.Point3.X += dx;
+                    qbezier.Point3.Y += dy;
+                }
+                else if (shape is XText)
+                {
+                    var text = shape as XText;
+                    text.TopLeft.X += dx;
+                    text.TopLeft.Y += dy;
+                    text.BottomRight.X += dx;
+                    text.BottomRight.Y += dy;
+                }
+                else if (shape is XGroup)
+                {
+                    var group = shape as XGroup;
+                    Move(group.Shapes, dx, dy);
+                }
+        }
+
+        public void Move(IEnumerable<BaseShape> shapes, double dx, double dy)
+        {
+            foreach (var shape in shapes) 
+            {
+                Move(shape, dx, dy);
+            }
         }
     }
 }
