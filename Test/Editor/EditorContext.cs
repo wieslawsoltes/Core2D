@@ -98,10 +98,28 @@ namespace Test
                     Emf.PutOnClipboard(_editor.Container);
                 });
 
-            _commands.ClearCommand = new DelegateCommand(
+            _commands.DeleteSelectedCommand = new DelegateCommand(
                 () =>
                 {
-                    Clear();
+                    _editor.DeleteSelected();
+                });
+
+            _commands.ClearAllCommand = new DelegateCommand(
+                () =>
+                {
+                    ClearAll();
+                });
+
+            _commands.GroupSelectedCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.GroupSelected();
+                });
+
+            _commands.GroupCurrentLayerCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.GroupCurrentLayer();
                 });
 
             _commands.ToolNoneCommand = new DelegateCommand(
@@ -206,18 +224,6 @@ namespace Test
                 {
                     _editor.RemoveCurrentShape();
                 });
-
-            _commands.GroupSelectedCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.GroupSelected();
-                });
-
-            _commands.GroupCurrentLayerCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.GroupCurrentLayer();
-                });
         }
 
         public void Open(string path)
@@ -285,7 +291,7 @@ namespace Test
             }
         }
 
-        public void Clear()
+        public void ClearAll()
         {
             _editor.Container.Clear();
             _editor.Container.Invalidate();
