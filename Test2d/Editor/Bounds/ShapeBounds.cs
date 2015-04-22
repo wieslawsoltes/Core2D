@@ -212,12 +212,12 @@ namespace Test2d
 
                     if (GetPointBounds(line.Start, treshold).Contains(p))
                     {
-                        return line;
+                        return line.Start;
                     }
 
                     if (GetPointBounds(line.End, treshold).Contains(p))
                     {
-                        return line;
+                        return line.End;
                     }
 
                     if (HitTest(line, p, treshold))
@@ -228,50 +228,137 @@ namespace Test2d
                     continue;
                 }
                 else if (shape is XRectangle)
-                {
-                    if (GetRectangleBounds(shape as XRectangle).Contains(p))
+                { 
+                    var rectangle = shape as XRectangle;
+
+                    if (GetPointBounds(rectangle.TopLeft, treshold).Contains(p))
                     {
-                        return shape;
+                        return rectangle.TopLeft;
+                    }
+
+                    if (GetPointBounds(rectangle.BottomRight, treshold).Contains(p))
+                    {
+                        return rectangle.BottomRight;
+                    }
+                    
+                    if (GetRectangleBounds(rectangle).Contains(p))
+                    {
+                        return rectangle;
                     }
                     continue;
                 }
                 else if (shape is XEllipse)
                 {
-                    if (GetEllipseBounds(shape as XEllipse).Contains(p))
+                    var ellipse = shape as XEllipse;
+
+                    if (GetPointBounds(ellipse.TopLeft, treshold).Contains(p))
                     {
-                        return shape;
+                        return ellipse.TopLeft;
+                    }
+
+                    if (GetPointBounds(ellipse.BottomRight, treshold).Contains(p))
+                    {
+                        return ellipse.BottomRight;
+                    }
+                    
+                    if (GetEllipseBounds(ellipse).Contains(p))
+                    {
+                        return ellipse;
                     }
                     continue;
                 }
                 else if (shape is XArc)
                 {
-                    if (GetArcBounds(shape as XArc, 0.0, 0.0).Contains(p))
+                    var arc = shape as XArc;
+
+                    if (GetPointBounds(arc.Point1, treshold).Contains(p))
                     {
-                        return shape;
+                        return arc.Point1;
+                    }
+       
+                    if (GetPointBounds(arc.Point2, treshold).Contains(p))
+                    {
+                        return arc.Point2;
+                    }
+                    
+                    if (GetArcBounds(arc, 0.0, 0.0).Contains(p))
+                    {
+                        return arc;
                     }
                     continue;
                 }
                 else if (shape is XBezier)
-                {
-                    if (ConvexHullBounds.Contains(shape as XBezier, p))
+                {  
+                    var bezier = shape as XBezier;
+
+                    if (GetPointBounds(bezier.Point1, treshold).Contains(p))
                     {
-                        return shape;
+                        return bezier.Point1;
+                    }
+       
+                    if (GetPointBounds(bezier.Point2, treshold).Contains(p))
+                    {
+                        return bezier.Point2;
+                    }
+                    
+                    if (GetPointBounds(bezier.Point3, treshold).Contains(p))
+                    {
+                        return bezier.Point3;
+                    }
+                    
+                    if (GetPointBounds(bezier.Point4, treshold).Contains(p))
+                    {
+                        return bezier.Point4;
+                    }
+                       
+                    if (ConvexHullBounds.Contains(bezier, p))
+                    {
+                        return bezier;
                     }
                     continue;
                 }
                 else if (shape is XQBezier)
                 {
-                    if (ConvexHullBounds.Contains(shape as XQBezier, p))
+                    var qbezier = shape as XBezier;
+
+                    if (GetPointBounds(qbezier.Point1, treshold).Contains(p))
                     {
-                        return shape;
+                        return qbezier.Point1;
+                    }
+       
+                    if (GetPointBounds(qbezier.Point2, treshold).Contains(p))
+                    {
+                        return qbezier.Point2;
+                    }
+                     
+                    if (GetPointBounds(qbezier.Point3, treshold).Contains(p))
+                    {
+                        return qbezier.Point3;
+                    }
+                    
+                    if (ConvexHullBounds.Contains(qbezier, p))
+                    {
+                        return qbezier;
                     }
                     continue;
                 }
                 else if (shape is XText)
                 {
-                    if (GetTextBounds(shape as XText).Contains(p))
+                    var text = shape as XText;
+
+                    if (GetPointBounds(text.TopLeft, treshold).Contains(p))
                     {
-                        return shape;
+                        return text.TopLeft;
+                    }
+
+                    if (GetPointBounds(text.BottomRight, treshold).Contains(p))
+                    {
+                        return text.BottomRight;
+                    }
+                    
+                    if (GetTextBounds(text).Contains(p))
+                    {
+                        return text;
                     }
                     continue;
                 }
