@@ -198,13 +198,6 @@ namespace Test
                     _editor.SnapToGrid = !_editor.SnapToGrid;
                 });
 
-            _commands.DrawPointsCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.Renderer.DrawPoints = !_editor.Renderer.DrawPoints;
-                    _editor.Container.Invalidate();
-                });
-
             _commands.AddLayerCommand = new DelegateCommand(
                 () =>
                 {
@@ -275,7 +268,7 @@ namespace Test
 
         public void Export(string path)
         {
-            var renderer = new PdfRenderer() { DrawPoints = _editor.Renderer.DrawPoints };
+            var renderer = new PdfRenderer();
             renderer.Save(path, _editor.Container);
             System.Diagnostics.Process.Start(path);
         }
