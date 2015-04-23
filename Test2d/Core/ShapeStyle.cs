@@ -112,5 +112,24 @@ namespace Test2d
                 TextStyle = TextStyle.Create(fontName, fontSize, textHAlignment, textVAlignment)
             };
         }
+        
+         public static ShapeStyle Create(
+            string name,
+            ArgbColor stroke, 
+            ArgbColor fill,
+            double thickness,
+            LineStyle lineStyle,
+            TextStyle textStyle)
+        {
+            return new ShapeStyle()
+            {
+                Name = name,
+                Stroke = stroke ?? ArgbColor.Create(0xFF, 0x00, 0x00, 0x00),
+                Fill = fill ?? ArgbColor.Create(0xFF, 0x00, 0x00, 0x00),
+                Thickness = thickness,
+                LineStyle = lineStyle ?? LineStyle.Create(ArrowStyle.Create(), ArrowStyle.Create()),
+                TextStyle = textStyle ?? TextStyle.Create("Calibri", 12.0, TextHAlignment.Center, TextVAlignment.Center)
+            };
+        }
     }
 }
