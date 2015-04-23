@@ -279,12 +279,16 @@ namespace Test
             {
                 Filter = "C# Files (*.cs)|*.cs|All Files (*.*)|*.*",
                 FilterIndex = 0,
-                FileName = ""
+                FileName = "",
+                Multiselect = true
             };
 
             if (dlg.ShowDialog() == true)
             {
-                Eval(dlg.FileName);
+                foreach (var path in dlg.FileNames)
+                {
+                    Eval(path);
+                }
             }
         }
 
