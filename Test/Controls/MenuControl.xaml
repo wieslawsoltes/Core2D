@@ -165,11 +165,6 @@
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.SnapToGrid, Mode=OneWay}"
                       Command="{Binding Commands.SnapToGridCommand}" InputGestureText="G"/>
-            <Separator/>
-            <MenuItem Header="_Draw Points" 
-                      IsCheckable="True" 
-                      IsChecked="{Binding Editor.Renderer.DrawPoints, Mode=OneWay}"
-                      Command="{Binding Commands.DrawPointsCommand}" InputGestureText=""/>
         </MenuItem>
         <MenuItem Header="_Window">
             <MenuItem Header="_Layers..." Command="{Binding Commands.LayersWindowCommand}" InputGestureText="Ctrl+L"/>
