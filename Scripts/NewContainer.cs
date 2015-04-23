@@ -1,4 +1,42 @@
-public static Container Create(double width = 810, double height = 600, bool grid = true)
+enum PointShapeType
+{
+    None,
+    Ellipse,
+    FilledEllipse,
+    Rectangle,
+    FilledRectangle,
+    Cross
+}
+
+void EllipsePointShape(Container c, ShapeStyle pss)
+{
+    c.PointShape = XEllipse.Create(-4, -4, 4, 4, pss, null, false);
+}
+
+void FilledEllipsePointShape(Container c, ShapeStyle pss)
+{
+    c.PointShape = XEllipse.Create(-3, -3, 3, 3, pss, null, true);
+}
+
+void RectanglePointShape(Container c, ShapeStyle pss)
+{
+    c.PointShape = XRectangle.Create(-4, -4, 4, 4, pss, null, false);
+}
+
+void FilledRectanglePointShape(Container c, ShapeStyle pss)
+{
+    c.PointShape = XRectangle.Create(-3, -3, 3, 3, pss, null, true);
+}
+
+void CrossPointShape(Container c, ShapeStyle pss)
+{
+    var g = XGroup.Create("PointShape");
+    g.Shapes.Add(XLine.Create(-4, 0, 4, 0, pss, null));
+    g.Shapes.Add(XLine.Create(0, -4, 0, 4, pss, null));
+    c.PointShape = g;
+}
+
+Container Create(double width, double height, bool grid, PointShapeType pst)
 {
     var c = new Container()
     {
@@ -26,50 +64,46 @@ public static Container Create(double width = 810, double height = 600, bool gri
 
     c.CurrentStyle = c.Styles.FirstOrDefault();
 
-    var pss = ShapeStyle.Create("PointShape", 255, 255, 0, 0, 255, 255, 0, 0, 1.0);
-    //EllipsePointShape(c, pss);
-    //FilledEllipsePointShape(c, pss);
-    //RectanglePointShape(c, pss);
-    //FilledRectanglePointShape(c, pss);
-    CrossPointShape(c, pss);
-
+    if (pst != PointShapeType.None)
+    {
+        var pss = ShapeStyle.Create("PointShape", 255, 255, 0, 0, 255, 255, 0, 0, 2.0);
+        switch(pst)
+        {
+            case PointShapeType.None:
+                break;
+            case PointShapeType.Ellipse:
+                EllipsePointShape(c, pss);
+                break;
+            case PointShapeType.FilledEllipse:
+                FilledEllipsePointShape(c, pss);
+                break;
+            case PointShapeType.Rectangle:
+                RectanglePointShape(c, pss);
+                break;
+            case PointShapeType.FilledRectangle:
+                FilledRectanglePointShape(c, pss);
+                break;
+            case PointShapeType.Cross:
+                CrossPointShape(c, pss);
+                break;
+        }
+    }
+    
     if (grid)
     {
-        var g = LineGrid.Create(
-            ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.0),
-            LineGrid.Settings.Create(0, 0, width, height, 30, 30));
+        var style = ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.0);
+        var settings = LineGrid.Settings.Create(0, 0, width, height, 30, 30);
+        var g = LineGrid.Create(style, settings);
         c.TemplateLayer.Shapes.Add(g);
     }
 
     return c;
 }
 
-public static void EllipsePointShape(Container c, ShapeStyle pss)
-{
-    c.PointShape = XEllipse.Create(-4, -4, 4, 4, pss, null, false);
-}
+var c = Create(
+    width: 810, 
+    height: 600, 
+    grid: true, 
+    pst: PointShapeType.Cross);
 
-public static void FilledEllipsePointShape(Container c, ShapeStyle pss)
-{
-    c.PointShape = XEllipse.Create(-3, -3, 3, 3, pss, null, true);
-}
-
-public static void RectanglePointShape(Container c, ShapeStyle pss)
-{
-    c.PointShape = XRectangle.Create(-4, -4, 4, 4, pss, null, false);
-}
-
-public static void FilledRectanglePointShape(Container c, ShapeStyle pss)
-{
-    c.PointShape = XRectangle.Create(-3, -3, 3, 3, pss, null, true);
-}
-
-public static void CrossPointShape(Container c, ShapeStyle pss)
-{
-    var g = XGroup.Create("PointShape");
-    g.Shapes.Add(XLine.Create(-4, 0, 4, 0, pss, null));
-    g.Shapes.Add(XLine.Create(0, -4, 0, 4, pss, null));
-    c.PointShape = g;
-}
-
-Context.Editor.Load(Create());
+Context.Editor.Load(c);

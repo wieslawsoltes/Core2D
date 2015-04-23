@@ -1,4 +1,4 @@
-var container = Context.Editor.Container;
-var line = XLine.Create(30, 30, 120, 30, container.CurrentStyle, container.PointShape);
-container.CurrentLayer.Shapes.Add(line);
-container.CurrentLayer.Invalidate();
+var c = Context?.Editor?.Container;
+var line = XLine.Create(30, 30, 60, 30, c?.CurrentStyle, c?.PointShape);
+c?.CurrentLayer?.Shapes?.Add(line);
+c?.CurrentLayer?.Invalidate();
