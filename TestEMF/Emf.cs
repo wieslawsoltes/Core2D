@@ -63,11 +63,7 @@ namespace TestEMF
                 {
                     //g.DrawImage(bitmap, 0, 0);
 
-                    var r = new EmfRenderer()
-                    {
-                        DrawPoints = false,
-                        Zoom = 1.0
-                    };
+                    var r = new EmfRenderer() { Zoom = 1.0 };
 
                     g.SmoothingMode = SmoothingMode.HighQuality;
                     g.PixelOffsetMode = PixelOffsetMode.HighQuality;

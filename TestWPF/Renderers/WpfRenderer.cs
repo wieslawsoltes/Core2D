@@ -16,7 +16,9 @@ namespace TestWPF
     {
         private bool _drawPoints;
         private double _zoom;
-
+        private BaseShape _selectedShape;
+        private ICollection<BaseShape> _selectedShapes;
+        
         public bool DrawPoints
         {
             get { return _drawPoints; }
@@ -39,6 +41,32 @@ namespace TestWPF
                 {
                     _zoom = value;
                     Notify("Zoom");
+                }
+            }
+        }
+
+        public BaseShape SelectedShape
+        {
+            get { return _selectedShape; }
+            set
+            {
+                if (value != _selectedShape)
+                {
+                    _selectedShape = value;
+                    Notify("SelectedShape");
+                }
+            }
+        }
+        
+        public ICollection<BaseShape> SelectedShapes
+        {
+            get { return _selectedShapes; }
+            set
+            {
+                if (value != _selectedShapes)
+                {
+                    _selectedShapes = value;
+                    Notify("SelectedShapes");
                 }
             }
         }

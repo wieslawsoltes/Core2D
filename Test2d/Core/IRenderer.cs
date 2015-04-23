@@ -1,13 +1,15 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 
 namespace Test2d
 {
     public interface IRenderer
     {
-        bool DrawPoints { get; set; }
         double Zoom { get; set; }
+        BaseShape SelectedShape { get; set; }
+        ICollection<BaseShape> SelectedShapes { get; set; }
         void ClearCache();
         void Draw(object dc, Container container);
         void Draw(object dc, Layer layer);

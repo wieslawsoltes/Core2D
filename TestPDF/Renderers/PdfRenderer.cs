@@ -14,8 +14,9 @@ namespace TestPDF
 {
     public class PdfRenderer : Test2d.IRenderer
     {
-        public bool DrawPoints { get; set; }
         public double Zoom { get; set; }
+        public Test2d.BaseShape SelectedShape { get; set; }
+        public ICollection<Test2d.BaseShape> SelectedShapes { get; set; }
 
         private Func<double, double> _scaleToPage;
 

@@ -16,9 +16,10 @@ namespace TestEMF
 {
     public class EmfRenderer : IRenderer
     {
-        public bool DrawPoints { get; set; }
         public double Zoom { get; set; }
-
+        public BaseShape SelectedShape { get; set; }
+        public ICollection<BaseShape> SelectedShapes { get; set; }
+        
         private Func<double, float> _scaleToPage;
 
         public EmfRenderer()
