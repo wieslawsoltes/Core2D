@@ -336,7 +336,10 @@ namespace Test2d
             {
                 var group = shape as XGroup;
                 Add(group.Shapes);
+                Add(group.Connectors);
                 (group.Shapes as ObservableCollection<BaseShape>)
+                    .CollectionChanged += ShapesCollectionObserver;
+                (group.Connectors as ObservableCollection<XPoint>)
                     .CollectionChanged += ShapesCollectionObserver;
             }
 
@@ -401,7 +404,10 @@ namespace Test2d
             {
                 var group = shape as XGroup;
                 Remove(group.Shapes);
+                Remove(group.Connectors);
                 (group.Shapes as ObservableCollection<BaseShape>)
+                    .CollectionChanged -= ShapesCollectionObserver;
+                (group.Connectors as ObservableCollection<XPoint>)
                     .CollectionChanged -= ShapesCollectionObserver;
             }
 
