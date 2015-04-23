@@ -22,9 +22,7 @@ namespace Test2d
         private double _snapX;
         private double _snapY;
         private ShapeStyle _selectionStyle;
-        private BaseShape _selectedShape;
         private bool _isContextMenu;
-        private ICollection<BaseShape> _selectedShapes;
         private bool _enableObserver;
         private Observer _observer;
         private double _startX;
@@ -146,33 +144,7 @@ namespace Test2d
                 }
             }
         }
-        
-        public BaseShape SelectedShape
-        {
-            get { return _selectedShape; }
-            set
-            {
-                if (value != _selectedShape)
-                {
-                    _selectedShape = value;
-                    Notify("SelectedShape");
-                }
-            }
-        }
-        
-        public ICollection<BaseShape> SelectedShapes
-        {
-            get { return _selectedShapes; }
-            set
-            {
-                if (value != _selectedShapes)
-                {
-                    _selectedShapes = value;
-                    Notify("SelectedShapes");
-                }
-            }
-        }
-        
+
         public bool IsContextMenu
         {
             get { return _isContextMenu; }
@@ -265,15 +237,17 @@ namespace Test2d
                 if (result.Count > 0)
                 {
                     container.CurrentShape = null;
-                    SelectedShape = null;
-                    SelectedShapes = result;
+                    _renderer.SelectedShape = null;
+                    _renderer.SelectedShapes = result;
+                    container.CurrentLayer.Invalidate();
                     return true;
                 }
             }
 
             container.CurrentShape = null;
-            SelectedShape = null;
-            SelectedShapes = null;
+            _renderer.SelectedShape = null;
+            _renderer.SelectedShapes = null;
+            container.CurrentLayer.Invalidate();
             return false;
         }
         
@@ -283,14 +257,16 @@ namespace Test2d
             if (result != null)
             {
                 container.CurrentShape = result;
-                SelectedShape = result;
-                SelectedShapes = null;
+                _renderer.SelectedShape = result;
+                _renderer.SelectedShapes = null;
+                container.CurrentLayer.Invalidate();
                 return true;
             }
             
             container.CurrentShape = null;
-            SelectedShape = null;
-            SelectedShapes = null;
+            _renderer.SelectedShape = null;
+            _renderer.SelectedShapes = null;
+            container.CurrentLayer.Invalidate();
             return false;
         }
         
@@ -548,7 +524,8 @@ namespace Test2d
             {
                 case State.None:
                     {
-                        if (SelectedShape == null && SelectedShapes != null)
+                        if (_renderer.SelectedShape == null 
+                            && _renderer.SelectedShapes != null)
                         {
                             var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), 6.0);
                             if (result != null)
@@ -601,7 +578,8 @@ namespace Test2d
                     break;
                 case State.One:
                     {
-                        if (SelectedShape != null || SelectedShapes != null)
+                        if (_renderer.SelectedShape != null 
+                            || _renderer.SelectedShapes != null)
                         {
                             CurrentState = State.None;
                             break;
@@ -1000,7 +978,8 @@ namespace Test2d
                     break;
                 case State.One:
                     {
-                        if (SelectedShape != null || SelectedShapes != null)
+                        if (_renderer.SelectedShape != null 
+                            || _renderer.SelectedShapes != null)
                         {
                             MoveSelection(sx, sy);
                             break;
@@ -1207,12 +1186,12 @@ namespace Test2d
 
         public void GroupSelected()
         {
-            if (SelectedShapes != null)
+            if (_renderer.SelectedShapes != null)
             {
                 var group = XGroup.Create("g");
                 var layer = Container.CurrentLayer;
 
-                foreach (var shape in SelectedShapes)
+                foreach (var shape in _renderer.SelectedShapes)
                 {
                     group.Shapes.Add(shape);
                     layer.Shapes.Remove(shape);
@@ -1248,14 +1227,14 @@ namespace Test2d
             _startX = x;
             _startY = y;
 
-            if (SelectedShape != null)
+            if (_renderer.SelectedShape != null)
             {
-                SelectedShape.Move(dx, dy);
+                _renderer.SelectedShape.Move(dx, dy);
             }
 
-            if (SelectedShapes != null)
+            if (_renderer.SelectedShapes != null)
             {
-                foreach (var shape in SelectedShapes)
+                foreach (var shape in _renderer.SelectedShapes)
                 {
                     shape.Move(dx, dy);
                 }
@@ -1264,19 +1243,19 @@ namespace Test2d
 
         public void DeleteSelected()
         {
-            if (SelectedShape != null)
+            if (_renderer.SelectedShape != null)
             {
-                _container.CurrentLayer.Shapes.Remove(SelectedShape);
+                _container.CurrentLayer.Shapes.Remove(_renderer.SelectedShape);
                 _container.CurrentLayer.Invalidate();
 
-                SelectedShape = null;
+                _renderer.SelectedShape = null;
             }
 
-            if (SelectedShapes != null)
+            if (_renderer.SelectedShapes != null)
             {
                 var layer = _container.CurrentLayer;
 
-                foreach (var shape in SelectedShapes)
+                foreach (var shape in _renderer.SelectedShapes)
                 {
                     layer.Shapes.Remove(shape);
                 }
