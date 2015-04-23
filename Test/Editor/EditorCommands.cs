@@ -37,7 +37,6 @@ namespace Test
 
         public ICommand DefaultIsFilledCommand { get; set; }
         public ICommand SnapToGridCommand { get; set; }
-        public ICommand DrawPointsCommand { get; set; }
 
         public ICommand AddLayerCommand { get; set; }
         public ICommand RemoveLayerCommand { get; set; }
