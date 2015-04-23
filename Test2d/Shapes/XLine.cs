@@ -6,22 +6,8 @@ namespace Test2d
 {
     public class XLine : BaseShape
     {
-        private ShapeStyle _style;
         private XPoint _start;
         private XPoint _end;
-
-        public ShapeStyle Style
-        {
-            get { return _style; }
-            set
-            {
-                if (value != _style)
-                {
-                    _style = value;
-                    Notify("Style");
-                }
-            }
-        }
 
         public XPoint Start
         {
@@ -56,29 +42,49 @@ namespace Test2d
                 renderer.Draw(dc, this, dx, dy); 
             }
 
-            if (renderer.DrawPoints)
+            if (renderer.SelectedShape != null)
             {
-                _start.Draw(dc, renderer, _start.X, _start.Y);
-                _end.Draw(dc, renderer, _end.X, _end.Y);
+                if (this == renderer.SelectedShape)
+                {
+                    _start.Draw(dc, renderer, _start.X + dx, _start.Y + dy);
+                    _end.Draw(dc, renderer, _end.X + dx, _end.Y + dy);
+                }
+                else if (_start == renderer.SelectedShape)
+                {
+                    _start.Draw(dc, renderer, _start.X + dx, _start.Y + dy);
+                }
+                else if (_end == renderer.SelectedShape)
+                {
+                    _end.Draw(dc, renderer, _end.X + dx, _end.Y + dy);
+                }
+            }
+            
+            if (renderer.SelectedShapes != null)
+            {
+                if (renderer.SelectedShapes.Contains(this))
+                {
+                    _start.Draw(dc, renderer, _start.X + dx, _start.Y + dy);
+                    _end.Draw(dc, renderer, _end.X + dx, _end.Y + dy);
+                }
             }
         }
 
         public override void Move(double dx, double dy)
         {
-            Start.X += dx;
-            Start.Y += dy;
-            End.X += dx;
-            End.Y += dy;
+            Start.Move(dx, dy);
+            End.Move(dx, dy);
         }
 
         public static XLine Create(
             double x1, double y1,
             double x2, double y2,
             ShapeStyle style,
-            BaseShape point)
+            BaseShape point,
+            string name = "")
         {
             return new XLine()
             {
+                Name = name,
                 Style = style,
                 Start = XPoint.Create(x1, y1, point),
                 End = XPoint.Create(x2, y2, point)
@@ -88,9 +94,10 @@ namespace Test2d
         public static XLine Create(
             double x, double y,
             ShapeStyle style,
-            BaseShape point)
+            BaseShape point,
+            string name = "")
         {
-            return Create(x, y, x, y, style, point);
+            return Create(x, y, x, y, style, point, name);
         }
     }
 }

@@ -6,23 +6,9 @@ namespace Test2d
 {
     public class XPoint : BaseShape
     {
-        private ShapeStyle _style;
         private BaseShape _shape;
         private double _x;
         private double _y;
-
-        public ShapeStyle Style
-        {
-            get { return _style; }
-            set
-            {
-                if (value != _style)
-                {
-                    _style = value;
-                    Notify("Style");
-                }
-            }
-        }
 
         public BaseShape Shape
         {
@@ -71,6 +57,14 @@ namespace Test2d
                 {
                     _shape.Draw(dc, renderer, dx, dy);
                 }
+                
+                //if (renderer.SelectedShape != null)
+                //{
+                //    if (this == renderer.SelectedShape)
+                //    {
+                //        _shape.Draw(dc, renderer, dx, dy);
+                //    }
+                //}
             }
         }
 
@@ -80,9 +74,9 @@ namespace Test2d
             Y += dy;
         }
 
-        public static XPoint Create(double x, double y, BaseShape shape)
+        public static XPoint Create(double x, double y, BaseShape shape, string name = "")
         {
-            return new XPoint() { X = x, Y = y, Shape = shape };
+            return new XPoint() { Name = name, X = x, Y = y, Shape = shape };
         }
     }
 }

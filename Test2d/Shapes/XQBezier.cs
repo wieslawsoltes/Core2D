@@ -6,24 +6,10 @@ namespace Test2d
 {
     public class XQBezier : BaseShape
     {
-        private ShapeStyle _style;
         private XPoint _point1;
         private XPoint _point2;
         private XPoint _point3;
         private bool _isFilled;
-
-        public ShapeStyle Style
-        {
-            get { return _style; }
-            set
-            {
-                if (value != _style)
-                {
-                    _style = value;
-                    Notify("Style");
-                }
-            }
-        }
 
         public XPoint Point1
         {
@@ -84,22 +70,44 @@ namespace Test2d
                 renderer.Draw(dc, this, dx, dy);
             }
 
-            if (renderer.DrawPoints)
+            if (renderer.SelectedShape != null)
             {
-                _point1.Draw(dc, renderer, _point1.X, _point1.Y);
-                _point2.Draw(dc, renderer, _point2.X, _point2.Y);
-                _point3.Draw(dc, renderer, _point3.X, _point3.Y);
+                if (this == renderer.SelectedShape)
+                {
+                    _point1.Draw(dc, renderer, _point1.X + dx, _point1.Y + dy);
+                    _point2.Draw(dc, renderer, _point2.X + dx, _point2.Y + dy);
+                    _point3.Draw(dc, renderer, _point3.X + dx, _point3.Y + dy);
+                }
+                else if (_point1 == renderer.SelectedShape)
+                {
+                    _point1.Draw(dc, renderer, _point1.X + dx, _point1.Y + dy);
+                }
+                else if (_point2 == renderer.SelectedShape)
+                {
+                    _point2.Draw(dc, renderer, _point2.X + dx, _point2.Y + dy);
+                }
+                else if (_point3 == renderer.SelectedShape)
+                {
+                    _point3.Draw(dc, renderer, _point3.X + dx, _point3.Y + dy);
+                }
+            }
+            
+            if (renderer.SelectedShapes != null)
+            {
+                if (renderer.SelectedShapes.Contains(this))
+                {
+                    _point1.Draw(dc, renderer, _point1.X + dx, _point1.Y + dy);
+                    _point2.Draw(dc, renderer, _point2.X + dx, _point2.Y + dy);
+                    _point3.Draw(dc, renderer, _point3.X + dx, _point3.Y + dy);
+                }
             }
         }
 
         public override void Move(double dx, double dy)
         {
-            Point1.X += dx;
-            Point1.Y += dy;
-            Point2.X += dx;
-            Point2.Y += dy;
-            Point3.X += dx;
-            Point3.Y += dy;
+            Point1.Move(dx, dy);
+            Point2.Move(dx, dy);
+            Point3.Move(dx, dy);
         }
 
         public static XQBezier Create(
@@ -108,10 +116,12 @@ namespace Test2d
             double x3, double y3,
             ShapeStyle style,
             BaseShape point,
-            bool isFilled = false)
+            bool isFilled = false,
+            string name = "")
         {
             return new XQBezier()
             {
+                Name = name,
                 Style = style,
                 Point1 = XPoint.Create(x1, y1, point),
                 Point2 = XPoint.Create(x2, y2, point),
@@ -124,9 +134,10 @@ namespace Test2d
             double x, double y,
             ShapeStyle style,
             BaseShape point,
-            bool isFilled = false)
+            bool isFilled = false,
+            string name = "")
         {
-            return Create(x, y, x, y, x, y, style, point, isFilled);
+            return Create(x, y, x, y, x, y, style, point, isFilled, name);
         }
     }
 }

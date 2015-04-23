@@ -6,24 +6,10 @@ namespace Test2d
 {
     public class XText : BaseShape
     {
-        private ShapeStyle _style;
         private XPoint _topLeft;
         private XPoint _bottomRight;
         private bool _isFilled;
         private string _text;
-
-        public ShapeStyle Style
-        {
-            get { return _style; }
-            set
-            {
-                if (value != _style)
-                {
-                    _style = value;
-                    Notify("Style");
-                }
-            }
-        }
 
         public XPoint TopLeft
         {
@@ -84,19 +70,37 @@ namespace Test2d
                 renderer.Draw(dc, this, dx, dy);
             }
 
-            if (renderer.DrawPoints)
+            if (renderer.SelectedShape != null)
             {
-                _topLeft.Draw(dc, renderer, _topLeft.X, _topLeft.Y);
-                _bottomRight.Draw(dc, renderer, _bottomRight.X, _bottomRight.Y);
+                if (this == renderer.SelectedShape)
+                {
+                    _topLeft.Draw(dc, renderer, _topLeft.X + dx, _topLeft.Y + dy);
+                    _bottomRight.Draw(dc, renderer, _bottomRight.X + dx, _bottomRight.Y + dy);
+                }
+                else if (_topLeft == renderer.SelectedShape)
+                {
+                    _topLeft.Draw(dc, renderer, _topLeft.X + dx, _topLeft.Y + dy);
+                }
+                else if (_bottomRight == renderer.SelectedShape)
+                {
+                    _bottomRight.Draw(dc, renderer, _bottomRight.X + dx, _bottomRight.Y + dy);
+                }
+            }
+            
+            if (renderer.SelectedShapes != null)
+            {
+                if (renderer.SelectedShapes.Contains(this))
+                {
+                    _topLeft.Draw(dc, renderer, _topLeft.X + dx, _topLeft.Y + dy);
+                    _bottomRight.Draw(dc, renderer, _bottomRight.X + dx, _bottomRight.Y + dy);
+                }
             }
         }
 
         public override void Move(double dx, double dy)
         {
-            TopLeft.X += dx;
-            TopLeft.Y += dy;
-            BottomRight.X += dx;
-            BottomRight.Y += dy;
+            TopLeft.Move(dx, dy);
+            BottomRight.Move(dx, dy);
         }
 
         public static XText Create(
@@ -105,10 +109,12 @@ namespace Test2d
             ShapeStyle style,
             BaseShape point,
             string text,
-            bool isFilled = false)
+            bool isFilled = false,
+            string name = "")
         {
             return new XText()
             {
+                Name = name,
                 Style = style,
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
@@ -122,9 +128,10 @@ namespace Test2d
             ShapeStyle style,
             BaseShape point,
             string text,
-            bool isFilled = false)
+            bool isFilled = false,
+            string name = "")
         {
-            return Create(x, y, x, y, style, point, text, isFilled);
+            return Create(x, y, x, y, style, point, text, isFilled, name);
         }
     }
 }

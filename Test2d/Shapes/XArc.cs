@@ -6,23 +6,9 @@ namespace Test2d
 {
     public class XArc : BaseShape
     {
-        private ShapeStyle _style;
         private XPoint _point1;
         private XPoint _point2;
         private bool _isFilled;
-
-        public ShapeStyle Style
-        {
-            get { return _style; }
-            set
-            {
-                if (value != _style)
-                {
-                    _style = value;
-                    Notify("Style");
-                }
-            }
-        }
 
         public XPoint Point1
         {
@@ -70,19 +56,37 @@ namespace Test2d
                 renderer.Draw(dc, this, dx, dy);
             }
 
-            if (renderer.DrawPoints)
+            if (renderer.SelectedShape != null)
             {
-                _point1.Draw(dc, renderer, _point1.X, _point1.Y);
-                _point2.Draw(dc, renderer, _point2.X, _point2.Y);
+                if (this == renderer.SelectedShape)
+                {
+                    _point1.Draw(dc, renderer, _point1.X + dx, _point1.Y + dy);
+                    _point2.Draw(dc, renderer, _point2.X + dx, _point2.Y + dy);
+                }
+                else if (_point1 == renderer.SelectedShape)
+                {
+                    _point1.Draw(dc, renderer, _point1.X + dx, _point1.Y + dy);
+                }
+                else if (_point2 == renderer.SelectedShape)
+                {
+                    _point2.Draw(dc, renderer, _point2.X + dx, _point2.Y + dy);
+                }
+            }
+            
+            if (renderer.SelectedShapes != null)
+            {
+                if (renderer.SelectedShapes.Contains(this))
+                {
+                    _point1.Draw(dc, renderer, _point1.X + dx, _point1.Y + dy);
+                    _point2.Draw(dc, renderer, _point2.X + dx, _point2.Y + dy);
+                }
             }
         }
 
         public override void Move(double dx, double dy)
         {
-            Point1.X += dx;
-            Point1.Y += dy;
-            Point2.X += dx;
-            Point2.Y += dy;
+            Point1.Move(dx, dy);
+            Point2.Move(dx, dy);
         }
 
         public static XArc Create(
@@ -90,10 +94,12 @@ namespace Test2d
             double x2, double y2,
             ShapeStyle style,
             BaseShape point,
-            bool isFilled = false)
+            bool isFilled = false,
+            string name = "")
         {
             return new XArc()
             {
+                Name = name,
                 Style = style,
                 Point1 = XPoint.Create(x1, y1, point),
                 Point2 = XPoint.Create(x2, y2, point),
@@ -105,9 +111,10 @@ namespace Test2d
             double x, double y,
             ShapeStyle style,
             BaseShape point,
-            bool isFilled = false)
+            bool isFilled = false,
+            string name = "")
         {
-            return Create(x, y, x, y, style, point, isFilled);
+            return Create(x, y, x, y, style, point, isFilled, name);
         }
     }
 }

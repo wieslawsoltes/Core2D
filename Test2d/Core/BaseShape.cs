@@ -6,8 +6,23 @@ namespace Test2d
 {
     public abstract class BaseShape : ObservableObject
     {
+        private string _name;
         private ShapeState _state = ShapeState.Visible | ShapeState.Printable;
+        private ShapeStyle _style;
 
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (value != _name)
+                {
+                    _name = value;
+                    Notify("Name");
+                }
+            }
+        }
+        
         public ShapeState State
         {
             get { return _state; }
@@ -21,6 +36,19 @@ namespace Test2d
             }
         }
 
+        public ShapeStyle Style
+        {
+            get { return _style; }
+            set
+            {
+                if (value != _style)
+                {
+                    _style = value;
+                    Notify("Style");
+                }
+            }
+        }
+        
         public abstract void Draw(object dc, IRenderer renderer, double dx, double dy);
 
         public abstract void Move(double dx, double dy);

@@ -8,35 +8,8 @@ namespace Test2d
 {
     public class XGroup : BaseShape
     {
-        private string _name;
-        private ShapeStyle _style;
         private IList<BaseShape> _shapes;
-
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (value != _name)
-                {
-                    _name = value;
-                    Notify("Name");
-                }
-            }
-        }
-
-        public ShapeStyle Style
-        {
-            get { return _style; }
-            set
-            {
-                if (value != _style)
-                {
-                    _style = value;
-                    Notify("Style");
-                }
-            }
-        }
+        private IList<XPoint> _connectors;
 
         public IList<BaseShape> Shapes
         {
@@ -51,6 +24,19 @@ namespace Test2d
             }
         }
 
+        public IList<XPoint> Connectors
+        {
+            get { return _connectors; }
+            set
+            {
+                if (value != _connectors)
+                {
+                    _connectors = value;
+                    Notify("Connectors");
+                }
+            }
+        }
+        
         public override void Draw(object dc, IRenderer renderer, double dx, double dy)
         {
             if (State.HasFlag(ShapeState.Visible))
@@ -58,6 +44,44 @@ namespace Test2d
                 foreach (var shape in Shapes)
                 {
                     shape.Draw(dc, renderer, dx, dy);
+                }
+ 
+                if (renderer.SelectedShape != null)
+                {
+                    if (this == renderer.SelectedShape)
+                    {
+                        foreach (var connector in Connectors)
+                        {
+                            connector.Draw(dc, renderer, connector.X + dx, connector.Y + dy);
+                        }
+                        
+                        foreach (var connector in Connectors)
+                        {
+                            if (connector.Shape != null)
+                            {
+                                connector.Shape.Draw(dc, renderer, connector.X + dx, connector.Y + dy);
+                            }
+                        }
+                    }
+                }
+                
+                if (renderer.SelectedShapes != null)
+                {
+                    if (renderer.SelectedShapes.Contains(this))
+                    {
+                        foreach (var connector in Connectors)
+                        {
+                            connector.Draw(dc, renderer, connector.X + dx, connector.Y + dy);
+                        }
+                        
+                        foreach (var connector in Connectors)
+                        {
+                            if (connector.Shape != null)
+                            {
+                                connector.Shape.Draw(dc, renderer, connector.X + dx, connector.Y + dy);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -68,14 +92,20 @@ namespace Test2d
             {
                 shape.Move(dx, dy);
             }
+            
+            foreach (var connector in Connectors)
+            {
+                connector.Move(dx, dy);
+            }
         }
 
-        public static XGroup Create(string name)
+        public static XGroup Create(string name = "")
         {
             return new XGroup()
             {
                 Name = name,
-                Shapes = new ObservableCollection<BaseShape>()
+                Shapes = new ObservableCollection<BaseShape>(),
+                Connectors = new ObservableCollection<XPoint>()
             };
         }
     }
