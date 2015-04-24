@@ -9,9 +9,9 @@ namespace Dxf
         public string Layer { get; set; }
         public string Color { get; set; }
         public double Thickness { get; set; }
-        public Vector3 StartPoint { get; set; }
-        public Vector3 EndPoint { get; set; }
-        public Vector3 ExtrusionDirection { get; set; }
+        public DxfVector3 StartPoint { get; set; }
+        public DxfVector3 EndPoint { get; set; }
+        public DxfVector3 ExtrusionDirection { get; set; }
 
         public DxfLine(DxfAcadVer version, int id)
             : base(version, id)
@@ -23,9 +23,9 @@ namespace Dxf
             Layer = "0";
             Color = "0";
             Thickness = 0.0;
-            StartPoint = new Vector3(0.0, 0.0, 0.0);
-            EndPoint = new Vector3(0.0, 0.0, 0.0);
-            ExtrusionDirection = new Vector3(0.0, 0.0, 1.0);
+            StartPoint = new DxfVector3(0.0, 0.0, 0.0);
+            EndPoint = new DxfVector3(0.0, 0.0, 0.0);
+            ExtrusionDirection = new DxfVector3(0.0, 0.0, 1.0);
 
             return this;
         }

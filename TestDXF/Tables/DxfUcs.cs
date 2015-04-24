@@ -8,14 +8,14 @@ namespace Dxf
     {
         public string Name { get; set; }
         public DxfTableStandardFlags TableStandardFlags { get; set; }
-        public Vector3 Origin { get; set; }
-        public Vector3 XAxisDirection { get; set; }
-        public Vector3 YAxisDirection { get; set; }
+        public DxfVector3 Origin { get; set; }
+        public DxfVector3 XAxisDirection { get; set; }
+        public DxfVector3 YAxisDirection { get; set; }
         public DxfOrthographicViewType OrthographicViewType { get; set; }
         public double Elevation { get; set; }
         public string BaseUcsHandle { get; set; }
         public DxfOrthographicType[] OrthographicType { get; set; }
-        public Vector3[] OrthographicOrigin { get; set; }
+        public DxfVector3[] OrthographicOrigin { get; set; }
 
         public DxfUcs(DxfAcadVer version, int id)
             : base(version, id)
@@ -26,9 +26,9 @@ namespace Dxf
         {
             Name = string.Empty;
             TableStandardFlags = DxfTableStandardFlags.Default;
-            Origin = new Vector3(0.0, 0.0, 0.0);
-            XAxisDirection = new Vector3(0.0, 0.0, 0.0);
-            YAxisDirection = new Vector3(0.0, 0.0, 0.0);
+            Origin = new DxfVector3(0.0, 0.0, 0.0);
+            XAxisDirection = new DxfVector3(0.0, 0.0, 0.0);
+            YAxisDirection = new DxfVector3(0.0, 0.0, 0.0);
             OrthographicViewType = DxfOrthographicViewType.NotOrthographic;
             Elevation = 0;
             BaseUcsHandle = null;

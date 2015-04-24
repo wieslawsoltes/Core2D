@@ -8,9 +8,9 @@ namespace Dxf
     {
         public string Layer { get; set; }
         public string Color { get; set; }
-        public Vector3 CenterPoint { get; set; }
-        public Vector3 EndPoint { get; set; }
-        public Vector3 ExtrusionDirection { get; set; }
+        public DxfVector3 CenterPoint { get; set; }
+        public DxfVector3 EndPoint { get; set; }
+        public DxfVector3 ExtrusionDirection { get; set; }
         public double Ratio { get; set; }
         public double StartParameter { get; set; }
         public double EndParameter { get; set; }
@@ -24,9 +24,9 @@ namespace Dxf
         {
             Layer = "0";
             Color = "0";
-            CenterPoint = new Vector3(0.0, 0.0, 0.0);
-            EndPoint = new Vector3(0.0, 0.0, 0.0);
-            ExtrusionDirection = new Vector3(0.0, 0.0, 1.0);
+            CenterPoint = new DxfVector3(0.0, 0.0, 0.0);
+            EndPoint = new DxfVector3(0.0, 0.0, 0.0);
+            ExtrusionDirection = new DxfVector3(0.0, 0.0, 1.0);
             Ratio = 0.0;
             StartParameter = 0.0;
             EndParameter = 2.0 * Math.PI;

@@ -9,7 +9,7 @@ namespace Dxf
         public double Thickness { get; set; }
         public string Layer { get; set; }
         public string Color { get; set; }
-        public Vector3 FirstAlignment { get; set; }
+        public DxfVector3 FirstAlignment { get; set; }
         public double TextHeight { get; set; }
         public string DefaultValue { get; set; }
         public double TextRotation { get; set; }
@@ -18,8 +18,8 @@ namespace Dxf
         public string TextStyle { get; set; }
         public DxfTextGenerationFlags TextGenerationFlags { get; set; }
         public DxfHorizontalTextJustification HorizontalTextJustification { get; set; }
-        public Vector3 SecondAlignment { get; set; }
-        public Vector3 ExtrusionDirection { get; set; }
+        public DxfVector3 SecondAlignment { get; set; }
+        public DxfVector3 ExtrusionDirection { get; set; }
         public DxfVerticalTextJustification VerticalTextJustification { get; set; }
 
         public DxfText(DxfAcadVer version, int id)
@@ -32,7 +32,7 @@ namespace Dxf
             Thickness = 0.0;
             Layer = "0";
             Color = DxfDefaultColors.ByLayer.ColorToString();
-            FirstAlignment = new Vector3(0.0, 0.0, 0.0);
+            FirstAlignment = new DxfVector3(0.0, 0.0, 0.0);
             TextHeight = 1.0;
             DefaultValue = string.Empty;
             TextRotation = 0.0;
@@ -41,8 +41,8 @@ namespace Dxf
             TextStyle = "Standard";
             TextGenerationFlags = DxfTextGenerationFlags.Default;
             HorizontalTextJustification = DxfHorizontalTextJustification.Default;
-            SecondAlignment = new Vector3(0.0, 0.0, 0.0); ;
-            ExtrusionDirection = new Vector3(0.0, 0.0, 1.0);
+            SecondAlignment = new DxfVector3(0.0, 0.0, 0.0); ;
+            ExtrusionDirection = new DxfVector3(0.0, 0.0, 1.0);
             VerticalTextJustification = DxfVerticalTextJustification.Default;
 
             return this;

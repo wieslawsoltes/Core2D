@@ -174,8 +174,8 @@ namespace Dxf
                 .Height(_pageHeight)
                 .Width(_pageWidth)
                 .Center(new DxfVector2(_pageWidth / 2, _pageHeight / 2))
-                .ViewDirection(new Vector3(0, 0, 1))
-                .TargetPoint(new Vector3(0, 0, 0))
+                .ViewDirection(new DxfVector3(0, 0, 1))
+                .TargetPoint(new DxfVector3(0, 0, 0))
                 .FrontClippingPlane(0)
                 .BackClippingPlane(0)
                 .Twist(0);
@@ -210,7 +210,7 @@ namespace Dxf
                     Name = "*Model_Space",
                     Layer = layer,
                     BlockTypeFlags = DxfBlockTypeFlags.Default,
-                    BasePoint = new Vector3(0, 0, 0),
+                    BasePoint = new DxfVector3(0, 0, 0),
                     XrefPathName = null,
                     Description = null,
                     EndId = NextHandle(),
@@ -223,7 +223,7 @@ namespace Dxf
                     Name = "*Paper_Space",
                     Layer = layer,
                     BlockTypeFlags = DxfBlockTypeFlags.Default,
-                    BasePoint = new Vector3(0, 0, 0),
+                    BasePoint = new DxfVector3(0, 0, 0),
                     XrefPathName = null,
                     Description = null,
                     EndId = NextHandle(),
@@ -236,7 +236,7 @@ namespace Dxf
                     Name = "*Paper_Space0",
                     Layer = layer,
                     BlockTypeFlags = DxfBlockTypeFlags.Default,
-                    BasePoint = new Vector3(0, 0, 0),
+                    BasePoint = new DxfVector3(0, 0, 0),
                     XrefPathName = null,
                     Description = null,
                     EndId = NextHandle(),
@@ -272,9 +272,9 @@ namespace Dxf
                 Layer = _layer,
                 Color = DxfDefaultColors.ByLayer.ColorToString(),
                 Thickness = 0.0,
-                StartPoint = new Vector3(_x1, _y1, 0),
-                EndPoint = new Vector3(_x2, _y2, 0),
-                ExtrusionDirection = new Vector3(0, 0, 1)
+                StartPoint = new DxfVector3(_x1, _y1, 0),
+                EndPoint = new DxfVector3(_x2, _y2, 0),
+                ExtrusionDirection = new DxfVector3(0, 0, 1)
             };
 
             return line.Create();
@@ -290,9 +290,9 @@ namespace Dxf
                 Layer = _layer,
                 Color = DxfDefaultColors.ByLayer.ColorToString(),
                 Thickness = 0.0,
-                CenterPoint = new Vector3(_x, _y, 0),
+                CenterPoint = new DxfVector3(_x, _y, 0),
                 Radius = radius,
-                ExtrusionDirection = new Vector3(0, 0, 1),
+                ExtrusionDirection = new DxfVector3(0, 0, 1),
             };
 
             return circle.Create();
@@ -309,9 +309,9 @@ namespace Dxf
             {
                 Layer = _layer,
                 Color = DxfDefaultColors.ByLayer.ColorToString(),
-                CenterPoint = new Vector3(_cx, _cy, 0),
-                EndPoint = new Vector3(_ex, _ey, 0),
-                ExtrusionDirection = new Vector3(0, 0, 1),
+                CenterPoint = new DxfVector3(_cx, _cy, 0),
+                EndPoint = new DxfVector3(_ex, _ey, 0),
+                ExtrusionDirection = new DxfVector3(0, 0, 1),
                 Ratio = height / width,
                 StartParameter = 0.0,
                 EndParameter = 2.0 * Math.PI
@@ -327,7 +327,7 @@ namespace Dxf
                 Thickness = 0,
                 Layer = _layer,
                 Color = DxfDefaultColors.ByLayer.ColorToString(),
-                FirstAlignment = new Vector3(X(x), Y(y), 0),
+                FirstAlignment = new DxfVector3(X(x), Y(y), 0),
                 TextHeight = height,
                 DefaultValue = EncodeText(text),
                 TextRotation = 0,
@@ -336,8 +336,8 @@ namespace Dxf
                 TextStyle = style,
                 TextGenerationFlags = DxfTextGenerationFlags.Default,
                 HorizontalTextJustification = horizontalJustification,
-                SecondAlignment = new Vector3(X(x), Y(y), 0),
-                ExtrusionDirection = new Vector3(0, 0, 1),
+                SecondAlignment = new DxfVector3(X(x), Y(y), 0),
+                ExtrusionDirection = new DxfVector3(0, 0, 1),
                 VerticalTextJustification = verticalJustification
             };
 

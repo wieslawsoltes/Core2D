@@ -10,7 +10,7 @@ namespace Dxf
         public string Name { get; set; }
         public string Layer { get; set; }
         public DxfBlockTypeFlags BlockTypeFlags { get; set; }
-        public Vector3 BasePoint { get; set; }
+        public DxfVector3 BasePoint { get; set; }
         public string XrefPathName { get; set; }
         public string Description { get; set; }
         public int EndId { get; set; }
@@ -27,7 +27,7 @@ namespace Dxf
             Name = string.Empty;
             Layer = "0";
             BlockTypeFlags = DxfBlockTypeFlags.Default;
-            BasePoint = new Vector3(0.0, 0.0, 0.0);
+            BasePoint = new DxfVector3(0.0, 0.0, 0.0);
             XrefPathName = null;
             Description = null;
             EndId = 0;

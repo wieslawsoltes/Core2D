@@ -50,7 +50,7 @@ namespace Dxf
             return this;
         }
 
-        public DxfView ViewDirection(Vector3 wcs)
+        public DxfView ViewDirection(DxfVector3 wcs)
         {
             Add(11, wcs.X);
             Add(21, wcs.Y);
@@ -58,7 +58,7 @@ namespace Dxf
             return this;
         }
 
-        public DxfView TargetPoint(Vector3 wcs)
+        public DxfView TargetPoint(DxfVector3 wcs)
         {
             Add(12, wcs.X);
             Add(22, wcs.Y);

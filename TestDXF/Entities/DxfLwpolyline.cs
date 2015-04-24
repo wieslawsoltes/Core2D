@@ -13,7 +13,7 @@ namespace Dxf
         public double ConstantWidth { get; set; }
         public double Elevation { get; set; }
         public DxfLwpolylineVertex [] Vertices { get; set; }
-        public Vector3 ExtrusionDirection { get; set; }
+        public DxfVector3 ExtrusionDirection { get; set; }
     
         public DxfLwpolyline(DxfAcadVer version, int id)
             : base(version, id)

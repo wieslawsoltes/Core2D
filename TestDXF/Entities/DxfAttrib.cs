@@ -8,7 +8,7 @@ namespace Dxf
     {
         public double Thickness { get; set; }
         public string Layer { get; set; }
-        public Vector3 StartPoint { get; set; }
+        public DxfVector3 StartPoint { get; set; }
         public double TextHeight { get; set; }
         public string DefaultValue { get; set; }
         public double TextRotation { get; set; }
@@ -17,8 +17,8 @@ namespace Dxf
         public string TextStyle { get; set; }
         public DxfTextGenerationFlags TextGenerationFlags { get; set; }
         public DxfHorizontalTextJustification HorizontalTextJustification { get; set; }
-        public Vector3 AlignmentPoint { get; set; }
-        public Vector3 ExtrusionDirection { get; set; }
+        public DxfVector3 AlignmentPoint { get; set; }
+        public DxfVector3 ExtrusionDirection { get; set; }
         public string Tag { get; set; }
         public DxfAttributeFlags AttributeFlags { get; set; }
         public int FieldLength { get; set; }
@@ -33,7 +33,7 @@ namespace Dxf
         {
             Thickness = 0.0;
             Layer = "0";
-            StartPoint = new Vector3(0.0, 0.0, 0.0);
+            StartPoint = new DxfVector3(0.0, 0.0, 0.0);
             TextHeight = 1.0;
             DefaultValue = string.Empty;
             TextRotation = 0.0;
@@ -42,8 +42,8 @@ namespace Dxf
             TextStyle = "Standard";
             TextGenerationFlags = DxfTextGenerationFlags.Default;
             HorizontalTextJustification = DxfHorizontalTextJustification.Default;
-            AlignmentPoint = new Vector3(0.0, 0.0, 0.0); ;
-            ExtrusionDirection = new Vector3(0.0, 0.0, 1.0);
+            AlignmentPoint = new DxfVector3(0.0, 0.0, 0.0); ;
+            ExtrusionDirection = new DxfVector3(0.0, 0.0, 1.0);
             Tag = string.Empty;
             AttributeFlags = DxfAttributeFlags.Default;
             FieldLength = 0;

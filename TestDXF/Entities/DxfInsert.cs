@@ -29,7 +29,7 @@ namespace Dxf
             return this;
         }
 
-        public DxfInsert Insertion(Vector3 point)
+        public DxfInsert Insertion(DxfVector3 point)
         {
             Add(10, point.X);
             Add(20, point.Y);
@@ -37,7 +37,7 @@ namespace Dxf
             return this;
         }
 
-        public DxfInsert Scale(Vector3 factor)
+        public DxfInsert Scale(DxfVector3 factor)
         {
             Add(41, factor.X);
             Add(42, factor.Y);

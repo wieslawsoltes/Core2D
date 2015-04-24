@@ -9,9 +9,9 @@ namespace Dxf
         public string Layer { get; set; }
         public string Color { get; set; }
         public double Thickness { get; set; }
-        public Vector3 CenterPoint { get; set; }
+        public DxfVector3 CenterPoint { get; set; }
         public double Radius { get; set; }
-        public Vector3 ExtrusionDirection { get; set; }
+        public DxfVector3 ExtrusionDirection { get; set; }
 
         public DxfCircle(DxfAcadVer version, int id)
             : base(version, id)
@@ -23,9 +23,9 @@ namespace Dxf
             Layer = "0";
             Color = "0";
             Thickness = 0.0;
-            CenterPoint = new Vector3(0.0, 0.0, 0.0);
+            CenterPoint = new DxfVector3(0.0, 0.0, 0.0);
             Radius = 0.0;
-            ExtrusionDirection = new Vector3(0.0, 0.0, 1.0);
+            ExtrusionDirection = new DxfVector3(0.0, 0.0, 1.0);
 
             return this;
         }
