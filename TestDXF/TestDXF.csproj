@@ -58,12 +58,12 @@
     <Compile Include="Blocks\DxfBlocks.cs" />
     <Compile Include="Classes\DxfClass.cs" />
     <Compile Include="Classes\DxfClasses.cs" />
-    <Compile Include="Core\CodeName.cs" />
+    <Compile Include="Core\DxfCodeName.cs" />
     <Compile Include="Core\DxfExtensions.cs" />
     <Compile Include="Core\DxfObject.cs" />
-    <Compile Include="Core\SubclassMarker.cs" />
-    <Compile Include="Core\Vector2.cs" />
-    <Compile Include="Core\Vector3.cs" />
+    <Compile Include="Core\DxfSubclassMarker.cs" />
+    <Compile Include="Core\DxfVector2.cs" />
+    <Compile Include="Core\DxfVector3.cs" />
     <Compile Include="DxfFile.cs" />
     <Compile Include="DxfHeader.cs" />
     <Compile Include="DxfInspect.cs" />
