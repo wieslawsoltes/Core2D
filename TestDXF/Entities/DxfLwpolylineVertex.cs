@@ -6,12 +6,12 @@ namespace Dxf
 {
     public class DxfLwpolylineVertex
     {
-        public Vector2 Coordinates { get; private set; }
+        public DxfVector2 Coordinates { get; private set; }
         public double StartWidth { get; private set; }
         public double EndWidth { get; private set; }
         public double Bulge { get; private set; }
 
-        public DxfLwpolylineVertex(Vector2 coordinates, double startWidth, double endWidth, double bulge)
+        public DxfLwpolylineVertex(DxfVector2 coordinates, double startWidth, double endWidth, double bulge)
         {
             Coordinates = coordinates;
             StartWidth = startWidth;

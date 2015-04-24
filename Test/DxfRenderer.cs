@@ -173,7 +173,7 @@ namespace Dxf
                 .StandardFlags(DxfViewStandardFlags.Default)
                 .Height(_pageHeight)
                 .Width(_pageWidth)
-                .Center(new Vector2(_pageWidth / 2, _pageHeight / 2))
+                .Center(new DxfVector2(_pageWidth / 2, _pageHeight / 2))
                 .ViewDirection(new Vector3(0, 0, 1))
                 .TargetPoint(new Vector3(0, 0, 0))
                 .FrontClippingPlane(0)

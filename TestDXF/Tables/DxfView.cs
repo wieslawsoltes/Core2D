@@ -43,7 +43,7 @@ namespace Dxf
             return this;
         }
 
-        public DxfView Center(Vector2 point)
+        public DxfView Center(DxfVector2 point)
         {
             Add(10, point.X);
             Add(20, point.Y);

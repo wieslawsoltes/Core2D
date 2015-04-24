@@ -4,12 +4,12 @@ using System;
 
 namespace Dxf
 {
-    public class Vector2
+    public class DxfVector2
     {
         public double X { get; private set; }
         public double Y { get; private set; }
 
-        public Vector2(double x, double y)
+        public DxfVector2(double x, double y)
         {
             X = x;
             Y = y;
