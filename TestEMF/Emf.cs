@@ -45,6 +45,20 @@ namespace TestEMF
             }
         }
 
+        public static void Save(string path, Container container)
+        {
+            using (var bitmap = new Bitmap((int)container.Width, (int)container.Height))
+            {
+                using (var ms = MakeMetafileStream(bitmap, container))
+                {
+                    using (var fs = File.Create(path))
+                    {
+                        ms.WriteTo(fs);
+                    }
+                }
+            }
+        }
+        
         private static MemoryStream MakeMetafileStream(Bitmap bitmap, Container container)
         {
             Graphics g = null;

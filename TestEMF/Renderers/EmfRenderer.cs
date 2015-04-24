@@ -191,12 +191,12 @@ namespace TestEMF
             switch (sas.ArrowType)
             {
                 default:
-                case Test2d.ArrowType.None:
+                case ArrowType.None:
                     {
                         pt1 = new PointF(x1, y1);
                     }
                     break;
-                case Test2d.ArrowType.Rectangle:
+                case ArrowType.Rectangle:
                     {
                         var pts = new PointF[] { new PointF(x1 - (float)sizeX1, y1) };
                         t1.TransformPoints(pts);
@@ -208,7 +208,7 @@ namespace TestEMF
                         _gfx.Restore(gs);
                     }
                     break;
-                case Test2d.ArrowType.Ellipse:
+                case ArrowType.Ellipse:
                     {
                         var pts = new PointF[] { new PointF(x1 - (float)sizeX1, y1) };
                         t1.TransformPoints(pts);
@@ -220,7 +220,7 @@ namespace TestEMF
                         _gfx.Restore(gs);
                     }
                     break;
-                case Test2d.ArrowType.Arrow:
+                case ArrowType.Arrow:
                     {
                         var pts = new PointF[] 
                         { 
@@ -250,12 +250,12 @@ namespace TestEMF
             switch (eas.ArrowType)
             {
                 default:
-                case Test2d.ArrowType.None:
+                case ArrowType.None:
                     {
                         pt2 = new PointF(x2, y2);
                     }
                     break;
-                case Test2d.ArrowType.Rectangle:
+                case ArrowType.Rectangle:
                     {
                         var pts = new PointF[] { new PointF(x2 - (float)sizeX2, y2) };
                         t2.TransformPoints(pts);
@@ -267,7 +267,7 @@ namespace TestEMF
                         _gfx.Restore(gs);
                     }
                     break;
-                case Test2d.ArrowType.Ellipse:
+                case ArrowType.Ellipse:
                     {
                         var pts = new PointF[] { new PointF(x2 - (float)sizeX2, y2) };
                         t2.TransformPoints(pts);
@@ -279,7 +279,7 @@ namespace TestEMF
                         _gfx.Restore(gs);
                     }
                     break;
-                case Test2d.ArrowType.Arrow:
+                case ArrowType.Arrow:
                     {
                         var pts = new PointF[] 
                         { 

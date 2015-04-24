@@ -266,13 +266,23 @@ namespace Test
             System.IO.File.WriteAllText(path, json, Encoding.UTF8);
         }
 
-        public void Export(string path)
+        public void ExportAsPdf(string path)
         {
             var renderer = new PdfRenderer();
             renderer.Save(path, _editor.Container);
-            System.Diagnostics.Process.Start(path);
         }
-
+  
+        public void ExportAsEmf(string path)
+        {
+            Emf.Save(path, _editor.Container);
+        }
+        
+        public void ExportAsDxf(string path)
+        {
+            var renderer = new Dxf.DxfRenderer();
+            renderer.Create(path, _editor.Container);
+        }
+        
         public void Eval()
         {
             var dlg = new OpenFileDialog()
@@ -326,14 +336,30 @@ namespace Test
         {
             var dlg = new SaveFileDialog()
             {
-                Filter = "Pdf Files (*.pdf)|*.pdf|All Files (*.*)|*.*",
+                Filter = "Pdf Files (*.pdf)|*.pdf|Emf Files (*.emf)|*.emf|Dxf Files (*.dxf)|*.dxf|All Files (*.*)|*.*",
                 FilterIndex = 0,
                 FileName = "container"
             };
 
             if (dlg.ShowDialog() == true)
             {
-                Export(dlg.FileName);
+                switch (dlg.FilterIndex) 
+                {
+                    case 1:
+                        ExportAsPdf(dlg.FileName);
+                        System.Diagnostics.Process.Start(dlg.FileName);
+                        break;
+                    case 2:
+                        ExportAsEmf(dlg.FileName);
+                        System.Diagnostics.Process.Start(dlg.FileName);
+                        break;
+                    case 3:
+                        ExportAsDxf(dlg.FileName);
+                        System.Diagnostics.Process.Start(dlg.FileName);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
