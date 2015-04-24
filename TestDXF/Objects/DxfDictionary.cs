@@ -35,7 +35,7 @@ namespace Dxf
 
                 Handle(Id);
                 Add(330, OwnerDictionaryHandle);
-                Subclass(SubclassMarker.Dictionary);
+                Subclass(DxfSubclassMarker.Dictionary);
                 Add(280, HardOwnerFlag);
                 Add(281, (int)DuplicateRecordCloningFlags);
 

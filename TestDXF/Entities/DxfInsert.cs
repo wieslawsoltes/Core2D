@@ -14,7 +14,7 @@ namespace Dxf
             Entity();
 
             if (Version > DxfAcadVer.AC1009)
-                Subclass(SubclassMarker.BlockReference);
+                Subclass(DxfSubclassMarker.BlockReference);
         }
 
         public DxfInsert Block(string name)
@@ -94,7 +94,7 @@ namespace Dxf
             if (Version > DxfAcadVer.AC1009)
             {
                 Handle(id);
-                Subclass(SubclassMarker.Entity);
+                Subclass(DxfSubclassMarker.Entity);
                 Add(8, layer);
             }
 

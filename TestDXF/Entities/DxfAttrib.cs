@@ -59,7 +59,7 @@ namespace Dxf
             Entity();
 
             if (Version > DxfAcadVer.AC1009)
-                Subclass(SubclassMarker.Text);
+                Subclass(DxfSubclassMarker.Text);
 
             Add(8, Layer);
             Add(39, Thickness);
@@ -86,7 +86,7 @@ namespace Dxf
             Add(230, ExtrusionDirection.Z);
 
             if (Version > DxfAcadVer.AC1009)
-                Subclass(SubclassMarker.Attribute);
+                Subclass(DxfSubclassMarker.Attribute);
 
             Add(2, Tag);
 

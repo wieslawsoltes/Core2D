@@ -45,8 +45,8 @@ namespace Dxf
             if (Version > DxfAcadVer.AC1009)
             {
                 Handle(Id);
-                Subclass(SubclassMarker.SymbolTableRecord);
-                Subclass(SubclassMarker.TextStyleTableRecord);
+                Subclass(DxfSubclassMarker.SymbolTableRecord);
+                Subclass(DxfSubclassMarker.TextStyleTableRecord);
             }
 
             Add(2, Name);

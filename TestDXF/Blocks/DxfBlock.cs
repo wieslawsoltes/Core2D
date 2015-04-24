@@ -44,14 +44,14 @@ namespace Dxf
             if (Version > DxfAcadVer.AC1009)
             {
                 Handle(Id);
-                Subclass(SubclassMarker.Entity);
+                Subclass(DxfSubclassMarker.Entity);
             }
 
             Add(8, Layer);
 
             if (Version > DxfAcadVer.AC1009)
             {
-                Subclass(SubclassMarker.BlockBegin);
+                Subclass(DxfSubclassMarker.BlockBegin);
             }
 
             Add(2, Name);
@@ -86,9 +86,9 @@ namespace Dxf
             if (Version > DxfAcadVer.AC1009)
             {
                 Handle(EndId);
-                Subclass(SubclassMarker.Entity);
+                Subclass(DxfSubclassMarker.Entity);
                 Add(8, EndLayer);
-                Subclass(SubclassMarker.BlockEnd);
+                Subclass(DxfSubclassMarker.BlockEnd);
             }
 
             return this;

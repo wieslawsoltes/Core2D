@@ -37,7 +37,7 @@ namespace Dxf
             Entity();
 
             if (Version > DxfAcadVer.AC1009)
-                Subclass(SubclassMarker.Line);
+                Subclass(DxfSubclassMarker.Line);
 
             Add(8, Layer);
             Add(62, Color);

@@ -28,8 +28,8 @@ namespace Dxf
             if (Version > DxfAcadVer.AC1009)
             {
                 Add(105, Id.ToDxfHandle()); // Dimstyle handle code is 105 instead of 5
-                Subclass(SubclassMarker.SymbolTableRecord);
-                Subclass(SubclassMarker.DimStyleTableRecord);
+                Subclass(DxfSubclassMarker.SymbolTableRecord);
+                Subclass(DxfSubclassMarker.DimStyleTableRecord);
             }
 
             Add(2, Name);

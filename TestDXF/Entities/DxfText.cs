@@ -55,7 +55,7 @@ namespace Dxf
             Entity();
 
             if (Version > DxfAcadVer.AC1009)
-                Subclass(SubclassMarker.Text);
+                Subclass(DxfSubclassMarker.Text);
 
             Add(8, Layer);
             Add(62, Color);
@@ -83,7 +83,7 @@ namespace Dxf
             Add(230, ExtrusionDirection.Z);
 
             if (Version > DxfAcadVer.AC1009)
-                Subclass(SubclassMarker.Text);
+                Subclass(DxfSubclassMarker.Text);
 
             Add(73, (int)VerticalTextJustification);
 

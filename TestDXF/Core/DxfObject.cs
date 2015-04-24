@@ -123,7 +123,7 @@ namespace Dxf
             if (Version > DxfAcadVer.AC1009)
             {
                 Add(5, Id.ToDxfHandle());
-                Add(100, SubclassMarker.Entity);
+                Add(100, DxfSubclassMarker.Entity);
             }
 
             // TODO: Unify common Entity codes for all Entities.

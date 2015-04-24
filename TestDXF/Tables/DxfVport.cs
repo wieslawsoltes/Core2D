@@ -28,8 +28,8 @@ namespace Dxf
             if (Version > DxfAcadVer.AC1009)
             {
                 Handle(Id);
-                Subclass(SubclassMarker.SymbolTableRecord);
-                Subclass(SubclassMarker.ViewportTableRecord);
+                Subclass(DxfSubclassMarker.SymbolTableRecord);
+                Subclass(DxfSubclassMarker.ViewportTableRecord);
             }
 
             Add(2, Name);

@@ -41,7 +41,7 @@ namespace Dxf
             Entity();
 
             if (Version > DxfAcadVer.AC1009)
-                Subclass(SubclassMarker.Ellipse);
+                Subclass(DxfSubclassMarker.Ellipse);
 
             Add(8, Layer);
             Add(62, Color);

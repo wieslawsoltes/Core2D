@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public static class SubclassMarker
+    public static class DxfSubclassMarker
     {
         public const string Line = "AcDbLine";
         public const string Lwpolyline = "AcDbPolyline";

@@ -130,7 +130,7 @@ namespace Dxf
 
             if (Version > DxfAcadVer.AC1009)
             {
-                Subclass(SubclassMarker.DimStyleTable);
+                Subclass(DxfSubclassMarker.DimStyleTable);
                 Add(71, count);
             }
         }
@@ -228,7 +228,7 @@ namespace Dxf
             if (Version > DxfAcadVer.AC1009)
             {
                 Handle(id);
-                Subclass(SubclassMarker.SymbolTable);
+                Subclass(DxfSubclassMarker.SymbolTable);
             }
 
             Add(70, count);
