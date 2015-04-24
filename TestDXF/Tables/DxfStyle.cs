@@ -40,7 +40,7 @@ namespace Dxf
 
         public DxfStyle Create()
         {
-            Add(0, CodeName.Style);
+            Add(0, DxfCodeName.Style);
 
             if (Version > DxfAcadVer.AC1009)
             {

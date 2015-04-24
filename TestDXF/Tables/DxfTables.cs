@@ -25,7 +25,7 @@ namespace Dxf
 
         public DxfTables Begin()
         {
-            Add(0, CodeName.Section);
+            Add(0, DxfCodeName.Section);
             Add(2, "TABLES");
             return this;
         }
@@ -120,7 +120,7 @@ namespace Dxf
 
         public DxfTables End()
         {
-            Add(0, CodeName.EndSec);
+            Add(0, DxfCodeName.EndSec);
             return this;
         }
 
@@ -222,7 +222,7 @@ namespace Dxf
 
         private void BeginTable(string name, int count, int id)
         {
-            Add(0, CodeName.Table);
+            Add(0, DxfCodeName.Table);
             Add(2, name);
 
             if (Version > DxfAcadVer.AC1009)
@@ -236,7 +236,7 @@ namespace Dxf
 
         private void EndTable()
         {
-            Add(0, CodeName.Endtab);
+            Add(0, DxfCodeName.Endtab);
         }
     }
 }

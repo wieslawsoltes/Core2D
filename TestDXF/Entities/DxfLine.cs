@@ -32,7 +32,7 @@ namespace Dxf
 
         public DxfLine Create()
         {
-            Add(0, CodeName.Line);
+            Add(0, DxfCodeName.Line);
 
             Entity();
 

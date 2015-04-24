@@ -14,8 +14,8 @@ namespace Dxf
 
         public DxfEntities Begin()
         {
-            Add(0, CodeName.Section);
-            Add(2, CodeName.Entities);
+            Add(0, DxfCodeName.Section);
+            Add(2, DxfCodeName.Entities);
             return this;
         }
 
@@ -37,7 +37,7 @@ namespace Dxf
 
         public DxfEntities End()
         {
-            Add(0, CodeName.EndSec);
+            Add(0, DxfCodeName.EndSec);
             return this;
         }
     }

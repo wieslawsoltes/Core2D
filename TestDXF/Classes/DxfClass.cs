@@ -31,7 +31,7 @@ namespace Dxf
         {
             if (Version > DxfAcadVer.AC1009)
             {
-                Add(0, CodeName.Class);
+                Add(0, DxfCodeName.Class);
                 Add(1, DxfClassName);
                 Add(2, CppClassName);
                 Add(90, (int)ProxyCapabilitiesFlags);

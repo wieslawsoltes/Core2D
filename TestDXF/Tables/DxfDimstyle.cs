@@ -23,7 +23,7 @@ namespace Dxf
 
         public DxfDimstyle Create()
         {
-            Add(0, CodeName.Dimstyle);
+            Add(0, DxfCodeName.Dimstyle);
 
             if (Version > DxfAcadVer.AC1009)
             {

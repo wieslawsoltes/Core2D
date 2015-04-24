@@ -54,7 +54,7 @@ namespace Dxf
 
         public DxfAttrib Create()
         {
-            Add(0, CodeName.Attrib);
+            Add(0, DxfCodeName.Attrib);
 
             Entity();
 

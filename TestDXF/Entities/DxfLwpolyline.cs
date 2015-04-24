@@ -29,7 +29,7 @@ namespace Dxf
         
         public DxfLwpolyline Create()
         {
-            Add(0, CodeName.Lwpolyline);
+            Add(0, DxfCodeName.Lwpolyline);
 
             Entity();
 

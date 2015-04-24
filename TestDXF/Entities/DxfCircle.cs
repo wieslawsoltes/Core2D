@@ -32,7 +32,7 @@ namespace Dxf
 
         public DxfCircle Create()
         {
-            Add(0, CodeName.Circle);
+            Add(0, DxfCodeName.Circle);
 
             Entity();
 

@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public static class CodeName
+    public static class DxfCodeName
     {
         public const string Section = "SECTION";
         public const string EndSec = "ENDSEC";

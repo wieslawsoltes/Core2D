@@ -34,7 +34,7 @@ namespace Dxf
 
         public DxfLayer Create()
         {
-            Add(0, CodeName.Layer);
+            Add(0, DxfCodeName.Layer);
 
             if (Version > DxfAcadVer.AC1009)
             {

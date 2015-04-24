@@ -40,7 +40,7 @@ namespace Dxf
 
         public DxfUcs Create()
         {
-            Add(0, CodeName.Ucs);
+            Add(0, DxfCodeName.Ucs);
 
             if (Version > DxfAcadVer.AC1009)
             {

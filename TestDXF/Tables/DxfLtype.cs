@@ -32,7 +32,7 @@ namespace Dxf
 
         public DxfLtype Create()
         {
-            Add(0, CodeName.Ltype);
+            Add(0, DxfCodeName.Ltype);
 
             if (Version > DxfAcadVer.AC1009)
             {

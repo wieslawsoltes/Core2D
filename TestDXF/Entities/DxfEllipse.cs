@@ -36,7 +36,7 @@ namespace Dxf
 
         public DxfEllipse Create()
         {
-            Add(0, CodeName.Ellipse);
+            Add(0, DxfCodeName.Ellipse);
 
             Entity();
 

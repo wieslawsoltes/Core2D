@@ -14,7 +14,7 @@ namespace Dxf
 
         public DxfBlocks Begin()
         {
-            Add(0, CodeName.Section);
+            Add(0, DxfCodeName.Section);
             Add(2, "BLOCKS");
             return this;
         }
@@ -35,7 +35,7 @@ namespace Dxf
 
         public DxfBlocks End()
         {
-            Add(0, CodeName.EndSec);
+            Add(0, DxfCodeName.EndSec);
             return this;
         }
     }

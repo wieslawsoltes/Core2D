@@ -9,7 +9,7 @@ namespace Dxf
         public DxfInsert(DxfAcadVer version, int id)
             : base(version, id)
         {
-            Add(0, CodeName.Insert);
+            Add(0, DxfCodeName.Insert);
 
             Entity();
 
@@ -89,7 +89,7 @@ namespace Dxf
 
         public DxfInsert AttributesEnd(int id, string layer)
         {
-            Add(0, CodeName.SeqEnd);
+            Add(0, DxfCodeName.SeqEnd);
 
             if (Version > DxfAcadVer.AC1009)
             {

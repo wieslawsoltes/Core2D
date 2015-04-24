@@ -50,7 +50,7 @@ namespace Dxf
 
         public DxfText Create()
         {
-            Add(0, CodeName.Text);
+            Add(0, DxfCodeName.Text);
 
             Entity();
 

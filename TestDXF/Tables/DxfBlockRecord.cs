@@ -21,7 +21,7 @@ namespace Dxf
 
         public DxfBlockRecord Create()
         {
-            Add(0, CodeName.BlockRecord);
+            Add(0, DxfCodeName.BlockRecord);
 
             if (Version > DxfAcadVer.AC1009)
             {

@@ -9,7 +9,7 @@ namespace Dxf
         public DxfAppid(DxfAcadVer version, int id)
             : base(version, id)
         {
-            Add(0, CodeName.AppId);
+            Add(0, DxfCodeName.AppId);
 
             if (version > DxfAcadVer.AC1009)
             {

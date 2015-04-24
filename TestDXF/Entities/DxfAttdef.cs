@@ -58,7 +58,7 @@ namespace Dxf
 
         public DxfAttdef Create()
         {
-            Add(0, CodeName.Attdef);
+            Add(0, DxfCodeName.Attdef);
 
             Entity();
 

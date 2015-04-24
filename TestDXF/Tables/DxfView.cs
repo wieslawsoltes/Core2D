@@ -9,7 +9,7 @@ namespace Dxf
         public DxfView(DxfAcadVer version, int id)
             : base(version, id)
         {
-            Add(0, CodeName.View);
+            Add(0, DxfCodeName.View);
 
             if (version > DxfAcadVer.AC1009)
             {

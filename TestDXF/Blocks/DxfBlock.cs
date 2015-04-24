@@ -39,7 +39,7 @@ namespace Dxf
 
         public DxfBlock Create()
         {
-            Add(0, CodeName.Block);
+            Add(0, DxfCodeName.Block);
 
             if (Version > DxfAcadVer.AC1009)
             {
@@ -81,7 +81,7 @@ namespace Dxf
                 }
             }
 
-            Add(0, CodeName.Endblk);
+            Add(0, DxfCodeName.Endblk);
 
             if (Version > DxfAcadVer.AC1009)
             {

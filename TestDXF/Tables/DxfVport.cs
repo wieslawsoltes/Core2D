@@ -23,7 +23,7 @@ namespace Dxf
 
         public DxfVport Create()
         {
-            Add(0, CodeName.Vport);
+            Add(0, DxfCodeName.Vport);
 
             if (Version > DxfAcadVer.AC1009)
             {

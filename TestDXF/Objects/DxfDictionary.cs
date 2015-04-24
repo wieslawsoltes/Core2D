@@ -31,7 +31,7 @@ namespace Dxf
         {
             if (Version > DxfAcadVer.AC1009)
             {
-                Add(0, CodeName.Dictionary);
+                Add(0, DxfCodeName.Dictionary);
 
                 Handle(Id);
                 Add(330, OwnerDictionaryHandle);
