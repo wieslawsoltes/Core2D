@@ -6,28 +6,36 @@ namespace Dxf
 {
     public class DxfAppid : DxfObject<DxfAppid>
     {
+        public string ApplicationName { get; set; }
+        public DxfAppidStandardFlags AppidStandardFlags { get; set; }
+
         public DxfAppid(DxfAcadVer version, int id)
             : base(version, id)
         {
-            Add(0, DxfCodeName.AppId);
-
-            if (version > DxfAcadVer.AC1009)
-            {
-                Handle(id);
-                Subclass(DxfSubclassMarker.SymbolTableRecord);
-                Subclass(DxfSubclassMarker.RegAppTableRecord);
-            }
         }
 
-        public DxfAppid Application(string name)
+        public DxfAppid Defaults()
         {
-            Add(2, name);
+            ApplicationName = string.Empty;
+            AppidStandardFlags = DxfAppidStandardFlags.Default;
+
             return this;
         }
 
-        public DxfAppid StandardFlags(DxfAppidStandardFlags flags)
+        public DxfAppid Create()
         {
-            Add(70, (int)flags);
+            Add(0, DxfCodeName.AppId);
+
+            if (Version > DxfAcadVer.AC1009)
+            {
+                Handle(Id);
+                Subclass(DxfSubclassMarker.SymbolTableRecord);
+                Subclass(DxfSubclassMarker.RegAppTableRecord);
+            }
+
+            Add(2, ApplicationName);
+            Add(70, (int)AppidStandardFlags);
+
             return this;
         }
     }
