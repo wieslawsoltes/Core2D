@@ -22,21 +22,21 @@ namespace Dxf
         public const string Lwpolyline = "LWPOLYLINE";
         public const string Text = "TEXT";
 
+        public const string AppId = "APPID";
         public const string Ltype = "LTYPE";
         public const string BlockRecord = "BLOCK_RECORD";
         public const string Block = "BLOCK";
         public const string Endblk = "ENDBLK";
         public const string Table = "TABLE";
         public const string Endtab = "ENDTAB";
-        public const string AppId = "APPID";
         
-        public const string View = "VIEW";
-        public const string Vport = "VPORT";
+        public const string Class = "CLASS";
+        public const string Dictionary = "DICTIONARY";
         public const string Dimstyle = "DIMSTYLE";
         public const string Layer = "LAYER";
         public const string Style = "STYLE";
+        public const string View = "VIEW";
+        public const string Vport = "VPORT";
         public const string Ucs = "UCS";
-        public const string Dictionary = "DICTIONARY";
-        public const string Class = "CLASS";
     }
 }
