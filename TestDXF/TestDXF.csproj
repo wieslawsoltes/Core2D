@@ -107,6 +107,8 @@
     <Compile Include="Enums\DxfTableStandardFlags.cs" />
     <Compile Include="Enums\DxfTextGenerationFlags.cs" />
     <Compile Include="Enums\DxfVerticalTextJustification.cs" />
+    <Compile Include="Enums\DxfViewMode.cs" />
+    <Compile Include="Enums\DxfViewRenderMode.cs" />
     <Compile Include="Enums\DxfViewStandardFlags.cs" />
     <Compile Include="Enums\DxfVportStandardFlags.cs" />
     <Compile Include="Objects\DxfDictionary.cs" />
