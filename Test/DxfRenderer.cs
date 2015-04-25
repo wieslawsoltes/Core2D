@@ -49,8 +49,10 @@ namespace Dxf
             if (_version > DxfAcadVer.AC1009)
             {
                 var acad = new DxfAppid(_version, NextHandle())
-                    .Application("ACAD")
-                    .StandardFlags(DxfAppidStandardFlags.Default);
+                {
+                    ApplicationName = "ACAD",
+                    AppidStandardFlags = DxfAppidStandardFlags.Default
+                }.Create();
 
                 appids.Add(acad);
             }
