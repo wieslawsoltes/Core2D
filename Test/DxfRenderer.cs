@@ -169,16 +169,18 @@ namespace Dxf
         private IEnumerable<DxfView> TableViews()
         {
             var view = new DxfView(_version, NextHandle())
-                .Name("View")
-                .StandardFlags(DxfViewStandardFlags.Default)
-                .Height(_pageHeight)
-                .Width(_pageWidth)
-                .Center(new DxfVector2(_pageWidth / 2, _pageHeight / 2))
-                .ViewDirection(new DxfVector3(0, 0, 1))
-                .TargetPoint(new DxfVector3(0, 0, 0))
-                .FrontClippingPlane(0)
-                .BackClippingPlane(0)
-                .Twist(0);
+            {
+                Name = "View",
+                ViewStandardFlags = DxfViewStandardFlags.Default,
+                Height = _pageHeight,
+                Width = _pageWidth,
+                Center = new DxfVector2(_pageWidth / 2, _pageHeight / 2),
+                ViewDirection = new DxfVector3(0, 0, 1),
+                TargetPoint = new DxfVector3(0, 0, 0),
+                FrontClippingPlane = 0,
+                BackClippingPlane = 0,
+                TwistAngle = 0
+            }.Create();
 
             yield return view;
         }
@@ -657,39 +659,18 @@ namespace Dxf
     }
 
     /*
-    public bool ShortenStart { get; set; }
-    public bool ShortenEnd { get; set; }
-    public List<object> Tags = null;
-
-    private DxfAcadVer Version = DxfAcadVer.AC1015;
-    private int HandleCounter = 0;
-
     private DxfEntities Entities = null;
-
     private const double PageWidth = 1260;
     private const double PageHeight = 891;
-
     private const string LayerFrame = "FRAME";
     private const string LayerGrid = "GRID";
     private const string LayerTable = "TABLE";
     private const string LayerIO = "IO";
     private const string LayerWires = "WIRES";
     private const string LayerElements = "ELEMENTS";
-
     private string StylePrimatyFont = "arial.ttf"; // arialuni.ttf
     private string StylePrimatyFontDescription = "Arial"; // Arial Unicode MS
-
     private string StyleBigFont = "";
-
-    private double X(double x)
-    {
-        return x;
-    }
-
-    private double Y(double y)
-    {
-        return y == 0 ? y : -y;
-    }
 
     private DxfLine Line(double x1, double y1,
         double x2, double y2,
@@ -966,9 +947,9 @@ namespace Dxf
             appids.Add(acad);
         }
 
-        // CADE - CAnvasDiagramEditor
+        // TestDXF
         var cade = new DxfAppid(Version, GetNextHandle())
-            .Application("CADE")
+            .Application("TestDXF")
             .StandardFlags(DxfAppidStandardFlags.Default);
 
         appids.Add(cade);
