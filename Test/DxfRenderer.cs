@@ -21,8 +21,8 @@ namespace Dxf
         private string _styleBigFont = "";
 
         private int NextHandle() { return _handle += 1; }
-        private double X(double x) { return x; }
-        private double Y(double y) { return _pageHeight - y; }
+        private double ToDxfX(double x) { return x; }
+        private double ToDxfY(double y) { return _pageHeight - y; }
 
         private string EncodeText(string text)
         {
@@ -256,22 +256,20 @@ namespace Dxf
 
         private DxfBlockRecord CreateBlockRecordForBlock(string name)
         {
-            var blockRecord = new DxfBlockRecord(_version, NextHandle())
+            return new DxfBlockRecord(_version, NextHandle())
             {
                 Name = name
-            };
-
-            return blockRecord.Create();
+            }.Create();
         }
 
         private DxfLine CreateLine(double x1, double y1, double x2, double y2)
         {
-            double _x1 = X(x1);
-            double _y1 = Y(y1);
-            double _x2 = X(x2);
-            double _y2 = Y(y2);
+            double _x1 = ToDxfX(x1);
+            double _y1 = ToDxfY(y1);
+            double _x2 = ToDxfX(x2);
+            double _y2 = ToDxfY(y2);
 
-            var line = new DxfLine(_version, NextHandle())
+            return new DxfLine(_version, NextHandle())
             {
                 Layer = _layer,
                 Color = DxfDefaultColors.ByLayer.ColorToString(),
@@ -279,17 +277,15 @@ namespace Dxf
                 StartPoint = new DxfVector3(_x1, _y1, 0),
                 EndPoint = new DxfVector3(_x2, _y2, 0),
                 ExtrusionDirection = new DxfVector3(0, 0, 1)
-            };
-
-            return line.Create();
+            }.Create();
         }
 
         private DxfCircle CreateCircle(double x, double y, double radius)
         {
-            double _x = X(x);
-            double _y = Y(y);
+            double _x = ToDxfX(x);
+            double _y = ToDxfY(y);
 
-            var circle = new DxfCircle(_version, NextHandle())
+            return new DxfCircle(_version, NextHandle())
             {
                 Layer = _layer,
                 Color = DxfDefaultColors.ByLayer.ColorToString(),
@@ -297,19 +293,17 @@ namespace Dxf
                 CenterPoint = new DxfVector3(_x, _y, 0),
                 Radius = radius,
                 ExtrusionDirection = new DxfVector3(0, 0, 1),
-            };
-
-            return circle.Create();
+            }.Create();
         }
 
         private DxfEllipse CreateEllipse(double x, double y, double width, double height)
         {
-            double _cx = X(x + width / 2.0);
-            double _cy = Y(y + height / 2.0);
+            double _cx = ToDxfX(x + width / 2.0);
+            double _cy = ToDxfY(y + height / 2.0);
             double _ex = width / 2.0; // relative to _cx
             double _ey = 0.0; // relative to _cy
 
-            var ellipse = new DxfEllipse(_version, NextHandle())
+            return new DxfEllipse(_version, NextHandle())
             {
                 Layer = _layer,
                 Color = DxfDefaultColors.ByLayer.ColorToString(),
@@ -319,19 +313,23 @@ namespace Dxf
                 Ratio = height / width,
                 StartParameter = 0.0,
                 EndParameter = 2.0 * Math.PI
-            };
-
-            return ellipse.Create();
+            }.Create();
         }
 
-        private DxfText CreateText(string text, double x, double y, double height, DxfHorizontalTextJustification horizontalJustification, DxfVerticalTextJustification verticalJustification, string style)
+        private DxfText CreateText(
+            string text, 
+            double x, double y, 
+            double height, 
+            DxfHorizontalTextJustification horizontalJustification, 
+            DxfVerticalTextJustification verticalJustification, 
+            string style)
         {
-            var txt = new DxfText(_version, NextHandle())
+            return new DxfText(_version, NextHandle())
             {
                 Thickness = 0,
                 Layer = _layer,
                 Color = DxfDefaultColors.ByLayer.ColorToString(),
-                FirstAlignment = new DxfVector3(X(x), Y(y), 0),
+                FirstAlignment = new DxfVector3(ToDxfX(x), ToDxfY(y), 0),
                 TextHeight = height,
                 DefaultValue = EncodeText(text),
                 TextRotation = 0,
@@ -340,12 +338,10 @@ namespace Dxf
                 TextStyle = style,
                 TextGenerationFlags = DxfTextGenerationFlags.Default,
                 HorizontalTextJustification = horizontalJustification,
-                SecondAlignment = new DxfVector3(X(x), Y(y), 0),
+                SecondAlignment = new DxfVector3(ToDxfX(x), ToDxfY(y), 0),
                 ExtrusionDirection = new DxfVector3(0, 0, 1),
                 VerticalTextJustification = verticalJustification
-            };
-
-            return txt.Create();
+            }.Create();
         }
 
         private static Rect2 CreateRect(XPoint tl, XPoint br, double dx, double dy)
@@ -421,7 +417,13 @@ namespace Dxf
                     break;
             }
 
-            entities.Add(CreateText(text.Text, x, y, text.Style.TextStyle.FontSize * (72.0 / 96.0), halign, valign, _defaultStyle));
+            entities.Add(CreateText(
+                text.Text, 
+                x, y, 
+                text.Style.TextStyle.FontSize * (72.0 / 96.0), 
+                halign, 
+                valign, 
+                _defaultStyle));
         }
 
         private void DrawShapes(DxfEntities entities, IEnumerable<BaseShape> shapes)
@@ -439,7 +441,7 @@ namespace Dxf
                     {
                         var line = shape as XLine;
                         DrawLine(entities, line);
-                        
+                        // TODO: Draw start and end arrows.
                     }
                     else if (shape is XRectangle)
                     {
@@ -578,14 +580,6 @@ namespace Dxf
 
             // TODO: add user entities
 
-            //Entities.Add(CreateLine(0.0, 0.0, 0.0, 100.0));
-            //Entities.Add(CreateLine(0.0, 0.0, 100.0, 0.0));
-            //Entities.Add(CreateCircle(50.0, 50.0, 50.0));
-            //Entities.Add(CreateEllipse(0.0, 0.0, 100.0, 100.0));
-            //Entities.Add(CreateText("≥1", 50.0, 50.0, 14.0, DxfHorizontalTextJustification.Center, DxfVerticalTextJustification.Middle, DefaultStyle));
-
-            
-            
             if (container.TemplateLayer.IsVisible)
             {
                 DrawShapes(Entities, container.TemplateLayer.Shapes);
@@ -598,9 +592,7 @@ namespace Dxf
                     DrawShapes(Entities, layer.Shapes);
                 }
             }
- 
-            
-            
+
             Entities.End();
 
             // create objects
@@ -645,14 +637,18 @@ namespace Dxf
             file.Header(header.End(NextHandle()));
 
             if (_version > DxfAcadVer.AC1009)
+            {
                 file.Classes(classes);
+            }
 
             file.Tables(tables);
             file.Blocks(blocks);
             file.Entities(Entities);
 
             if (_version > DxfAcadVer.AC1009)
+            {
                 file.Objects(objects);
+            }
 
             file.Eof();
 
