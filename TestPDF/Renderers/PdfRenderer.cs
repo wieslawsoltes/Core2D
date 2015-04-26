@@ -359,7 +359,7 @@ namespace TestPDF
         {
             var _gfx = gfx as XGraphics;
 
-            var a = PdfArc.FromXArc(arc, dx, dy);
+            var a = Test2d.Arc.FromXArc(arc, dx, dy);
 
             _gfx.DrawArc(
                 ToXPen(arc.Style, _scaleToPage),
