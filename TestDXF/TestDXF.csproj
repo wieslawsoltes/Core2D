@@ -120,6 +120,7 @@
     <Compile Include="Tables\DxfLayer.cs" />
     <Compile Include="Tables\DxfLtype.cs" />
     <Compile Include="Tables\DxfStyle.cs" />
+    <Compile Include="Tables\DxfTable.cs" />
     <Compile Include="Tables\DxfTables.cs" />
     <Compile Include="Tables\DxfUcs.cs" />
     <Compile Include="Tables\DxfView.cs" />
