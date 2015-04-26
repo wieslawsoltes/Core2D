@@ -6,6 +6,7 @@ namespace Dxf
 {
     public static class DxfSubclassMarker
     {
+        public const string Arc = "AcDbArc";
         public const string Circle = "AcDbCircle";
         public const string Ellipse = "AcDbEllipse";
         public const string Line = "AcDbLine";

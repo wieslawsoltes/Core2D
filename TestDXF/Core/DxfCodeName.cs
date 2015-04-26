@@ -15,6 +15,7 @@ namespace Dxf
 
         public const string Attdef = "ATTDEF";
         public const string Attrib = "ATTRIB";
+        public const string Arc = "ARC";
         public const string Circle = "CIRCLE";
         public const string Ellipse = "ELLIPSE";
         public const string Insert = "INSERT";
