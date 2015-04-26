@@ -4,9 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Dxf;
 using Test2d;
 
-namespace Dxf
+namespace Test
 {
     public class DxfRenderer
     {
@@ -233,17 +234,17 @@ namespace Dxf
             };
         }
 
-        private DxfCircle CreateCircle(double x, double y, double radius)
+        private DxfCircle CreateCircle(double cx, double cy, double radius)
         {
-            double _x = ToDxfX(x);
-            double _y = ToDxfY(y);
+            double _cx = ToDxfX(cx);
+            double _cy = ToDxfY(cy);
 
             return new DxfCircle(_version, NextHandle())
             {
                 Layer = _layer,
                 Color = DxfDefaultColors.ByLayer.ToDxfColor(),
                 Thickness = 0.0,
-                CenterPoint = new DxfVector3(_x, _y, 0),
+                CenterPoint = new DxfVector3(_cx, _cy, 0),
                 Radius = radius,
                 ExtrusionDirection = new DxfVector3(0, 0, 1),
             };
@@ -266,6 +267,27 @@ namespace Dxf
                 Ratio = height / width,
                 StartParameter = 0.0,
                 EndParameter = 2.0 * Math.PI
+            };
+        }
+
+        private DxfArc CreateArc(
+            double x, double y,
+            double radius, 
+            double startAngle, double endAngle)
+        {
+            double _cx = ToDxfX(x + radius / 2.0);
+            double _cy = ToDxfY(y + radius / 2.0);
+
+            return new DxfArc(_version, NextHandle())
+            {
+                Layer = _layer,
+                Color = DxfDefaultColors.ByLayer.ToDxfColor(),
+                Thickness = 0.0,
+                CenterPoint = new DxfVector3(_cx, _cy, 0),
+                Radius = radius,
+                StartAngle = startAngle,
+                EndAngle = endAngle,
+                ExtrusionDirection = new DxfVector3(0, 0, 1),
             };
         }
 
@@ -328,6 +350,22 @@ namespace Dxf
             entities.Entities.Add(CreateEllipse(rect.X, rect.Y, rect.Width, rect.Height));
         }
 
+        private void DrawArc(DxfEntities entities, XArc arc)
+        {
+            var a = Arc.FromXArc(arc, 0.0, 0.0);
+            entities.Entities.Add(CreateArc(a.X, a.Y, a.Radius, a.StartAngle, a.EndAngle));
+        }
+
+        private void DrawBezier(DxfEntities entities, XBezier bezier)
+        {
+            // TODO: Draw bezier.
+        }
+
+        private void DrawQBezier(DxfEntities entities, XQBezier qbezier)
+        {
+            // TODO: Draw qbezier.
+        }
+
         private void DrawText(DxfEntities entities, XText text)
         {
             DxfHorizontalTextJustification halign;
@@ -388,7 +426,7 @@ namespace Dxf
                     if (shape is XPoint)
                     {
                         var point = shape as XPoint;
-                        // TODO:
+                        // TODO: Draw point.
                     }
                     else if (shape is XLine)
                     {
@@ -424,17 +462,17 @@ namespace Dxf
                     else if (shape is XArc)
                     {
                         var arc = shape as XArc;
-                        // TODO:
+                        DrawArc(entities, arc);
                     }
                     else if (shape is XBezier)
                     {
                         var bezier = shape as XBezier;
-                        // TODO:
+                        DrawBezier(entities, bezier);
                     }
                     else if (shape is XQBezier)
                     {
                         var qbezier = shape as XQBezier;
-                        // TODO:
+                        DrawQBezier(entities, qbezier);
                     }
                     else if (shape is XText)
                     {

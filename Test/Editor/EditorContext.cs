@@ -279,7 +279,7 @@ namespace Test
         
         public void ExportAsDxf(string path, Dxf.DxfAcadVer version)
         {
-            var renderer = new Dxf.DxfRenderer();
+            var renderer = new DxfRenderer();
             renderer.Create(path, _editor.Container, version);
         }
         
