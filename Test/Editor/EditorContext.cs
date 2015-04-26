@@ -277,17 +277,17 @@ namespace Test
             Emf.Save(path, _editor.Container);
         }
         
-        public void ExportAsDxf(string path)
+        public void ExportAsDxf(string path, Dxf.DxfAcadVer version)
         {
             var renderer = new Dxf.DxfRenderer();
-            renderer.Create(path, _editor.Container);
+            renderer.Create(path, _editor.Container, version);
         }
         
         public void Eval()
         {
             var dlg = new OpenFileDialog()
             {
-                Filter = "C# Files (*.cs)|*.cs|All Files (*.*)|*.*",
+                Filter = "C# (*.cs)|*.cs|All (*.*)|*.*",
                 FilterIndex = 0,
                 FileName = "",
                 Multiselect = true
@@ -306,7 +306,7 @@ namespace Test
         {
             var dlg = new OpenFileDialog()
             {
-                Filter = "Json Files (*.json)|*.json|All Files (*.*)|*.*",
+                Filter = "Json (*.json)|*.json|All (*.*)|*.*",
                 FilterIndex = 0,
                 FileName = ""
             };
@@ -321,7 +321,7 @@ namespace Test
         {
             var dlg = new SaveFileDialog()
             {
-                Filter = "Json Files (*.json)|*.json|All Files (*.*)|*.*",
+                Filter = "Json (*.json)|*.json|All (*.*)|*.*",
                 FilterIndex = 0,
                 FileName = "container"
             };
@@ -336,7 +336,7 @@ namespace Test
         {
             var dlg = new SaveFileDialog()
             {
-                Filter = "Pdf Files (*.pdf)|*.pdf|Emf Files (*.emf)|*.emf|Dxf Files (*.dxf)|*.dxf|All Files (*.*)|*.*",
+                Filter = "Pdf (*.pdf)|*.pdf|Emf (*.emf)|*.emf|Dxf AutoCAD 2000 (*.dxf)|*.dxf|Dxf R10 (*.dxf)|*.dxf|All (*.*)|*.*",
                 FilterIndex = 0,
                 FileName = "container"
             };
@@ -354,7 +354,11 @@ namespace Test
                         System.Diagnostics.Process.Start(dlg.FileName);
                         break;
                     case 3:
-                        ExportAsDxf(dlg.FileName);
+                        ExportAsDxf(dlg.FileName, Dxf.DxfAcadVer.AC1015);
+                        System.Diagnostics.Process.Start(dlg.FileName);
+                        break;
+                    case 4:
+                        ExportAsDxf(dlg.FileName, Dxf.DxfAcadVer.AC1006);
                         System.Diagnostics.Process.Start(dlg.FileName);
                         break;
                     default:
