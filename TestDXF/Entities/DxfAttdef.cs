@@ -35,7 +35,7 @@ namespace Dxf
         {
             Thickness = 0.0;
             Layer = "0";
-            Color = DxfDefaultColors.ByLayer.ColorToString();
+            Color = DxfDefaultColors.ByLayer.ToDxfColor();
             FirstAlignment = new DxfVector3(0.0, 0.0, 0.0);
             TextHeight = 1.0;
             DefaultValue = string.Empty;

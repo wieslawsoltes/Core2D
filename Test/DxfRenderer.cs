@@ -10,7 +10,7 @@ namespace Dxf
 {
     public class DxfRenderer
     {
-        private DxfAcadVer _version = DxfAcadVer.AC1015;
+        private DxfAcadVer _version;
         private string _layer = "0";
         private int _handle = 0;
         private string _defaultStyle = "Standard";
@@ -23,23 +23,6 @@ namespace Dxf
         private int NextHandle() { return _handle += 1; }
         private double ToDxfX(double x) { return x; }
         private double ToDxfY(double y) { return _pageHeight - y; }
-
-        private string EncodeText(string text)
-        {
-            if (_version >= DxfAcadVer.AC1021)
-                return text;
-            if (string.IsNullOrEmpty(text))
-                return text;
-            var sb = new StringBuilder();
-            foreach (char c in text)
-            {
-                if (c > 255)
-                    sb.Append(string.Concat("\\U+", Convert.ToInt32(c).ToString("X4")));
-                else
-                    sb.Append(c);
-            }
-            return sb.ToString();
-        }
 
         private void TableAppids(DxfTable<DxfAppid> appids)
         {
@@ -74,7 +57,7 @@ namespace Dxf
                 {
                     Name = "0",
                     LayerStandardFlags = DxfLayerStandardFlags.Default,
-                    Color = DxfDefaultColors.Default.ColorToString(),
+                    Color = DxfDefaultColors.Default.ToDxfColor(),
                     LineType = "Continuous",
                     PlottingFlag = true,
                     LineWeight = DxfLineWeight.LnWtByLwDefault,
@@ -242,7 +225,7 @@ namespace Dxf
             return new DxfLine(_version, NextHandle())
             {
                 Layer = _layer,
-                Color = DxfDefaultColors.ByLayer.ColorToString(),
+                Color = DxfDefaultColors.ByLayer.ToDxfColor(),
                 Thickness = 0.0,
                 StartPoint = new DxfVector3(_x1, _y1, 0),
                 EndPoint = new DxfVector3(_x2, _y2, 0),
@@ -258,7 +241,7 @@ namespace Dxf
             return new DxfCircle(_version, NextHandle())
             {
                 Layer = _layer,
-                Color = DxfDefaultColors.ByLayer.ColorToString(),
+                Color = DxfDefaultColors.ByLayer.ToDxfColor(),
                 Thickness = 0.0,
                 CenterPoint = new DxfVector3(_x, _y, 0),
                 Radius = radius,
@@ -276,7 +259,7 @@ namespace Dxf
             return new DxfEllipse(_version, NextHandle())
             {
                 Layer = _layer,
-                Color = DxfDefaultColors.ByLayer.ColorToString(),
+                Color = DxfDefaultColors.ByLayer.ToDxfColor(),
                 CenterPoint = new DxfVector3(_cx, _cy, 0),
                 EndPoint = new DxfVector3(_ex, _ey, 0),
                 ExtrusionDirection = new DxfVector3(0, 0, 1),
@@ -298,10 +281,10 @@ namespace Dxf
             {
                 Thickness = 0,
                 Layer = _layer,
-                Color = DxfDefaultColors.ByLayer.ColorToString(),
+                Color = DxfDefaultColors.ByLayer.ToDxfColor(),
                 FirstAlignment = new DxfVector3(ToDxfX(x), ToDxfY(y), 0),
                 TextHeight = height,
-                DefaultValue = EncodeText(text),
+                DefaultValue = text.ToDxfText(_version),
                 TextRotation = 0,
                 ScaleFactorX = 1,
                 ObliqueAngle = 0,
@@ -421,7 +404,22 @@ namespace Dxf
                     else if (shape is XEllipse)
                     {
                         var ellipse = shape as XEllipse;
-                        DrawEllipse(entities, ellipse);
+                        if (_version <= DxfAcadVer.AC1009)
+                        {
+                            // try to use circle for ellipse
+                            var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, 0.0, 0.0);
+                            if (rect.Width == rect.Height)
+                            {
+                                double radius = rect.Width / 2.0;
+                                double cx = rect.X + radius;
+                                double cy = rect.Y + radius;
+                                entities.Entities.Add(CreateCircle(cx, cy, radius));
+                            }
+                        }
+                        else
+                        {
+                            DrawEllipse(entities, ellipse);
+                        }
                     }
                     else if (shape is XArc)
                     {
@@ -471,12 +469,12 @@ namespace Dxf
             }
         }
 
-        public void Create(string path, Container container)
+        public void Create(string path, Container container, DxfAcadVer version)
         {
+            _version = version;
+
             _pageWidth = container.Width;
             _pageHeight = container.Height;
-
-            _version = DxfAcadVer.AC1015;
 
             _layer = "0";
             _handle = 0;

@@ -23,7 +23,7 @@ namespace Dxf
         {
             Name = string.Empty;
             LayerStandardFlags = DxfLayerStandardFlags.Default;
-            Color = DxfDefaultColors.Default.ColorToString();
+            Color = DxfDefaultColors.Default.ToDxfColor();
             LineType = string.Empty;
             PlottingFlag = true;
             LineWeight = DxfLineWeight.LnWtByLwDefault;
