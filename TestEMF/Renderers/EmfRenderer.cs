@@ -380,7 +380,7 @@ namespace TestEMF
             //Brush brush = ToXSolidBrush(arc.Style.Fill);
             Pen pen = ToPen(arc.Style, _scaleToPage);
 
-            var a = EmfArc.FromXArc(arc, dx, dy);
+            var a = Arc.FromXArc(arc, dx, dy);
 
             _gfx.DrawArc(
                 pen,

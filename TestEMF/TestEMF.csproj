@@ -61,7 +61,6 @@
   <ItemGroup>
     <Compile Include="Emf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Renderers\EmfArc.cs" />
     <Compile Include="Renderers\EmfRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
