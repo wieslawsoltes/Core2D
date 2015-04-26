@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public class DxfLayer : DxfObject<DxfLayer>
+    public class DxfLayer : DxfObject
     {
         public string Name { get; set; }
         public DxfLayerStandardFlags LayerStandardFlags { get; set; }
@@ -19,7 +19,7 @@ namespace Dxf
         {
         }
 
-        public DxfLayer Defaults()
+        public void Defaults()
         {
             Name = string.Empty;
             LayerStandardFlags = DxfLayerStandardFlags.Default;
@@ -28,12 +28,12 @@ namespace Dxf
             PlottingFlag = true;
             LineWeight = DxfLineWeight.LnWtByLwDefault;
             PlotStyleNameHandle = "0";
-
-            return this;
         }
 
-        public DxfLayer Create()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.Layer);
 
             if (Version > DxfAcadVer.AC1009)
@@ -55,7 +55,7 @@ namespace Dxf
                 Add(390, PlotStyleNameHandle);
             }
 
-            return this;
+            return Build();
         }
     }
 }

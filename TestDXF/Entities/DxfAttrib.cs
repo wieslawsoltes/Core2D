@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public class DxfAttrib : DxfObject<DxfAttrib>
+    public class DxfAttrib : DxfObject
     {
         public double Thickness { get; set; }
         public string Layer { get; set; }
@@ -29,7 +29,7 @@ namespace Dxf
         {
         }
 
-        public DxfAttrib Defaults()
+        public void Defaults()
         {
             Thickness = 0.0;
             Layer = "0";
@@ -42,18 +42,18 @@ namespace Dxf
             TextStyle = "Standard";
             TextGenerationFlags = DxfTextGenerationFlags.Default;
             HorizontalTextJustification = DxfHorizontalTextJustification.Default;
-            AlignmentPoint = new DxfVector3(0.0, 0.0, 0.0); ;
+            AlignmentPoint = new DxfVector3(0.0, 0.0, 0.0);
             ExtrusionDirection = new DxfVector3(0.0, 0.0, 1.0);
             Tag = string.Empty;
             AttributeFlags = DxfAttributeFlags.Default;
             FieldLength = 0;
             VerticalTextJustification = DxfVerticalTextJustification.Default;
-
-            return this;
         }
 
-        public DxfAttrib Create()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.Attrib);
 
             Entity();
@@ -94,7 +94,7 @@ namespace Dxf
             Add(73, FieldLength);
             Add(74, (int)VerticalTextJustification);
 
-            return this;
+            return Build();
         }
     }
 }

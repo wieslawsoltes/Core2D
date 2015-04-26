@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Dxf
 {
-    public class DxfBlock : DxfObject<DxfBlock>
+    public class DxfBlock : DxfObject
     {
         public string Name { get; set; }
         public string Layer { get; set; }
@@ -22,7 +22,7 @@ namespace Dxf
         {
         }
 
-        public DxfBlock Defaults()
+        public void Defaults()
         {
             Name = string.Empty;
             Layer = "0";
@@ -33,12 +33,12 @@ namespace Dxf
             EndId = 0;
             EndLayer = "0";
             Entities = null;
-
-            return this;
         }
 
-        public DxfBlock Create()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.Block);
 
             if (Version > DxfAcadVer.AC1009)
@@ -91,7 +91,7 @@ namespace Dxf
                 Subclass(DxfSubclassMarker.BlockEnd);
             }
 
-            return this;
+            return Build();
         }
     }
 }

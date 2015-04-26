@@ -6,10 +6,10 @@ using System.Linq;
 
 namespace Dxf
 {
-    public class DxfTables : DxfObject<DxfTables>
+    public class DxfTables : DxfObject
     {
-        public const string TableDimstyle = "DIMSTYLE";
         public const string TableAppId = "APPID";
+        public const string TableDimstyle = "DIMSTYLE";
         public const string TableBlockRecord = "BLOCK_RECORD";
         public const string TableLType = "LTYPE";
         public const string TableLayer = "LAYER";
@@ -17,111 +17,85 @@ namespace Dxf
         public const string TableUCS = "UCS";
         public const string TableView = "VIEW";
         public const string TableVPort = "VPORT";
-        
+
+        public DxfTable<DxfAppid> AppidTable { get; set; }
+        public DxfTable<DxfDimstyle> DimstyleTable { get; set; }
+        public DxfTable<DxfBlockRecord> BlockRecordTable { get; set; }
+        public DxfTable<DxfLtype> LtypeTable { get; set; }
+        public DxfTable<DxfLayer> LayerTable { get; set; }
+        public DxfTable<DxfStyle> StyleTable { get; set; }
+        public DxfTable<DxfUcs> UcsTable { get; set; }
+        public DxfTable<DxfView> ViewTable { get; set; }
+        public DxfTable<DxfVport> VportTable { get; set; }
+
         public DxfTables(DxfAcadVer version, int id)
             : base(version, id)
         {
+            AppidTable = new DxfTable<DxfAppid>();
+            DimstyleTable = new DxfTable<DxfDimstyle>();
+            BlockRecordTable = new DxfTable<DxfBlockRecord>();
+            LtypeTable = new DxfTable<DxfLtype>();
+            LayerTable = new DxfTable<DxfLayer>();
+            StyleTable = new DxfTable<DxfStyle>();
+            UcsTable = new DxfTable<DxfUcs>();
+            ViewTable = new DxfTable<DxfView>();
+            VportTable = new DxfTable<DxfVport>();
         }
 
-        public DxfTables Begin()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.Section);
             Add(2, "TABLES");
-            return this;
-        }
 
-        public DxfTables Add<T>(T table)
-        {
-            Append(table.ToString());
-            return this;
-        }
-
-        public DxfTables Add<T>(IEnumerable<T> tables)
-        {
-            foreach (var table in tables)
-            {
-                Add(table);
-            }
-
-            return this;
-        }
-
-        public DxfTables AddDimstyleTable(IEnumerable<DxfDimstyle> dimstyles, int id)
-        {
-            BeginDimstyles(dimstyles.Count(), id);
-            Add(dimstyles);
-            EndDimstyles();
-            return this;
-        }
-
-        public DxfTables AddAppidTable(IEnumerable<DxfAppid> appids, int id)
-        {
-            BeginAppids(appids.Count(), id);
-            Add(appids);
+            BeginAppids(AppidTable.Items.Count(), AppidTable.Id);
+            Add(AppidTable);
             EndAppids();
-            return this;
-        }
 
-        public DxfTables AddBlockRecordTable(IEnumerable<DxfBlockRecord> records, int id)
-        {
-            BeginBlockRecords(records.Count(), id);
-            Add(records);
+            BeginDimstyles(DimstyleTable.Items.Count(), DimstyleTable.Id);
+            Add(DimstyleTable);
+            EndDimstyles();
+
+            BeginBlockRecords(BlockRecordTable.Items.Count(), BlockRecordTable.Id);
+            Add(BlockRecordTable);
             EndBlockRecords();
-            return this;
-        }
 
-        public DxfTables AddLtypeTable(IEnumerable<DxfLtype> ltypes, int id)
-        {
-            BeginLtypes(ltypes.Count(), id);
-            Add(ltypes);
+            BeginLtypes(LtypeTable.Items.Count(), LtypeTable.Id);
+            Add(LtypeTable);
             EndLtypes();
-            return this;
-        }
 
-        public DxfTables AddLayerTable(IEnumerable<DxfLayer> layers, int id)
-        {
-            BeginLayers(layers.Count(), id);
-            Add(layers);
+            BeginLayers(LayerTable.Items.Count(), LayerTable.Id);
+            Add(LayerTable);
             EndLayers();
-            return this;
-        }
 
-        public DxfTables AddStyleTable(IEnumerable<DxfStyle> styles, int id)
-        {
-            BeginStyles(styles.Count(), id);
-            Add(styles);
+            BeginStyles(StyleTable.Items.Count(), StyleTable.Id);
+            Add(StyleTable);
             EndStyles();
-            return this;
-        }
 
-        public DxfTables AddUcsTable(IEnumerable<DxfUcs> ucss, int id)
-        {
-            BeginUcss(ucss.Count(), id);
-            Add(ucss);
+            BeginUcss(UcsTable.Items.Count(), UcsTable.Id);
+            Add(UcsTable);
             EndUcss();
-            return this;
-        }
 
-        public DxfTables AddViewTable(IEnumerable<DxfView> views, int id)
-        {
-            BeginViews(views.Count(), id);
-            Add(views);
+            BeginViews(ViewTable.Items.Count(), ViewTable.Id);
+            Add(ViewTable);
             EndViews();
-            return this;
-        }
 
-        public DxfTables AddVportTable(IEnumerable<DxfVport> vports, int id)
-        {
-            BeginVports(vports.Count(), id);
-            Add(vports);
+            BeginVports(VportTable.Items.Count(), VportTable.Id);
+            Add(VportTable);
             EndVports();
-            return this;
+
+            Add(0, DxfCodeName.EndSec);
+
+            return Build();
         }
 
-        public DxfTables End()
+        private void Add<T>(DxfTable<T> table) where T: DxfObject
         {
-            Add(0, DxfCodeName.EndSec);
-            return this;
+            foreach (var item in table.Items)
+            {
+                Append(item.Create());
+            }
         }
 
         private void BeginDimstyles(int count, int id)

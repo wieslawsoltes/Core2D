@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public class DxfDimstyle : DxfObject<DxfDimstyle>
+    public class DxfDimstyle : DxfObject
     {
         public string Name { get; set; }
         public DxfDimstyleStandardFlags DimstyleStandardFlags { get; set; }
@@ -14,15 +14,16 @@ namespace Dxf
         {
         }
 
-        public DxfDimstyle Defaults()
+        public void Defaults()
         {
             Name = string.Empty;
             DimstyleStandardFlags = DxfDimstyleStandardFlags.Default;
-            return this;
         }
 
-        public DxfDimstyle Create()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.Dimstyle);
 
             if (Version > DxfAcadVer.AC1009)
@@ -35,7 +36,7 @@ namespace Dxf
             Add(2, Name);
             Add(70, (int)DimstyleStandardFlags);
 
-            return this;
+            return Build();
         }
     }
 }

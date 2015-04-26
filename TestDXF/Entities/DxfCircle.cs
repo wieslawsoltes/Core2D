@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public class DxfCircle : DxfObject<DxfCircle>
+    public class DxfCircle : DxfObject
     {
         public string Layer { get; set; }
         public string Color { get; set; }
@@ -18,7 +18,7 @@ namespace Dxf
         {
         }
 
-        public DxfCircle Defaults()
+        public void Defaults()
         {
             Layer = "0";
             Color = "0";
@@ -26,12 +26,12 @@ namespace Dxf
             CenterPoint = new DxfVector3(0.0, 0.0, 0.0);
             Radius = 0.0;
             ExtrusionDirection = new DxfVector3(0.0, 0.0, 1.0);
-
-            return this;
         }
 
-        public DxfCircle Create()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.Circle);
 
             Entity();
@@ -54,7 +54,7 @@ namespace Dxf
             Add(220, ExtrusionDirection.Y);
             Add(230, ExtrusionDirection.Z);
 
-            return this;
+            return Build();
         }
     }
 }

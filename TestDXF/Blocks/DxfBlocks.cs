@@ -5,38 +5,31 @@ using System.Collections.Generic;
 
 namespace Dxf
 {
-    public class DxfBlocks : DxfObject<DxfBlocks>
+    public class DxfBlocks : DxfObject
     {
+        public IList<DxfBlock> Blocks { get; set; }
+
         public DxfBlocks(DxfAcadVer version, int id)
             : base(version, id)
         {
+            this.Blocks = new List<DxfBlock>();
         }
 
-        public DxfBlocks Begin()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.Section);
             Add(2, "BLOCKS");
-            return this;
-        }
 
-        public DxfBlocks Add(DxfBlock block)
-        {
-            Append(block.ToString());
-            return this;
-        }
+            foreach (var block in Blocks)
+            {
+                Append(block.Create());
+            }
 
-        public DxfBlocks Add(IEnumerable<DxfBlock> blocks)
-        {
-            foreach (var block in blocks)
-                Add(block);
-
-            return this;
-        }
-
-        public DxfBlocks End()
-        {
             Add(0, DxfCodeName.EndSec);
-            return this;
+
+            return Build();
         }
     }
 }

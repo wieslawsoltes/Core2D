@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public class DxfLwpolyline : DxfObject<DxfLwpolyline>
+    public class DxfLwpolyline : DxfObject
     {
         public string Layer { get; set; }
         public string Color { get; set; }
@@ -20,15 +20,15 @@ namespace Dxf
         {
         }
         
-        public DxfLwpolyline Defaults()
+        public void Defaults()
         {
             // TODO:
-
-            return this;
         }
         
-        public DxfLwpolyline Create()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.Lwpolyline);
 
             Entity();
@@ -63,7 +63,7 @@ namespace Dxf
             Add(220, ExtrusionDirection.Y);
             Add(230, ExtrusionDirection.Z);
 
-            return this;
+            return Build();
         }
     }
 }

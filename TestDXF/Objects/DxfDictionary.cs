@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Dxf
 {
-    public class DxfDictionary : DxfObject<DxfDictionary>
+    public class DxfDictionary : DxfObject
     {
         public string OwnerDictionaryHandle { get; set; }
         public bool HardOwnerFlag { get; set; }
@@ -15,20 +15,21 @@ namespace Dxf
         public DxfDictionary(DxfAcadVer version, int id)
             : base(version, id)
         {
+            Entries = new Dictionary<string, string>();
         }
 
-        public DxfDictionary Defaults()
+        public void Defaults()
         {
             OwnerDictionaryHandle = "0";
             HardOwnerFlag = false;
             DuplicateRecordCloningFlags = DxfDuplicateRecordCloningFlags.KeepExisting;
             Entries = null;
-
-            return this;
         }
 
-        public DxfDictionary Create()
+        public override string Create()
         {
+            Reset();
+
             if (Version > DxfAcadVer.AC1009)
             {
                 Add(0, DxfCodeName.Dictionary);
@@ -43,16 +44,15 @@ namespace Dxf
                 {
                     foreach (var entry in Entries)
                     {
-                        var entryName = entry.Value;
-                        var entryObjectHandle = entry.Key;
-
-                        Add(3, entryName);
-                        Add(350, entryObjectHandle);
+                        var name = entry.Value;
+                        var objectHandle = entry.Key;
+                        Add(3, name);
+                        Add(350, objectHandle);
                     }
                 }
             }
 
-            return this;
+            return Build();
         }
     }
 }

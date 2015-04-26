@@ -4,11 +4,16 @@ using System;
 
 namespace Dxf
 {
-    public class DxfPolyline : DxfObject<DxfPolyline>
+    public class DxfPolyline : DxfObject
     {
         public DxfPolyline(DxfAcadVer version, int id)
             : base(version, id)
         {
+        }
+
+        public override string Create()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public class DxfBlockRecord : DxfObject<DxfBlockRecord>
+    public class DxfBlockRecord : DxfObject
     {
         public string Name { get; set; }
 
@@ -13,14 +13,15 @@ namespace Dxf
         {
         }
 
-        public DxfBlockRecord Defaults()
+        public void Defaults()
         {
             Name = string.Empty;
-            return this;
         }
 
-        public DxfBlockRecord Create()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.BlockRecord);
 
             if (Version > DxfAcadVer.AC1009)
@@ -32,7 +33,7 @@ namespace Dxf
 
             Add(2, Name);
 
-            return this;
+            return Build();
         }
     }
 }

@@ -4,11 +4,16 @@ using System;
 
 namespace Dxf
 {
-    public class DxfViewport : DxfObject<DxfViewport>
+    public class DxfViewport : DxfObject
     {
         public DxfViewport(DxfAcadVer version, int id)
             : base(version, id)
         {
+        }
+
+        public override string Create()
+        {
+            throw new NotImplementedException();
         }
     }
 }

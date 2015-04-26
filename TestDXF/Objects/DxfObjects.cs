@@ -5,40 +5,31 @@ using System.Collections.Generic;
 
 namespace Dxf
 {
-    public class DxfObjects : DxfObject<DxfObjects>
+    public class DxfObjects : DxfObject
     {
+        public IList<DxfDictionary> Objects { get; set; }
+
         public DxfObjects(DxfAcadVer version, int id)
             : base(version, id)
         {
+            Objects = new List<DxfDictionary>();
         }
 
-        public DxfObjects Begin()
+        public override string Create()
         {
-            Add(0, "SECTION");
+            Reset();
+
+            Add(0, DxfCodeName.Section);
             Add(2, "OBJECTS");
-            return this;
-        }
 
-        public DxfObjects Add<T>(T obj)
-        {
-            Append(obj.ToString());
-            return this;
-        }
-
-        public DxfObjects Add<T>(IEnumerable<T> objects)
-        {
-            foreach (var obj in objects)
+            foreach(var obj in Objects)
             {
-                Add(obj);
+                Append(obj.Create());
             }
 
-            return this;
-        }
+            Add(0, DxfCodeName.EndSec);
 
-        public DxfObjects End()
-        {
-            Add(0, "ENDSEC");
-            return this;
+            return Build();
         }
     }
 }

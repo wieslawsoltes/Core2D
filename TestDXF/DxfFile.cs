@@ -4,53 +4,43 @@ using System;
 
 namespace Dxf
 {
-    public class DxfFile : DxfObject<DxfFile>
+    public class DxfFile : DxfObject
     {
+        public DxfHeader Header { get; set; }
+        public DxfClasses Classes { get; set; }
+        public DxfTables Tables { get; set; }
+        public DxfBlocks Blocks { get; set; }
+        public DxfEntities Entities { get; set; }
+        public DxfObjects Objects { get; set; }
+
         public DxfFile(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
 
-        public DxfFile Header(DxfHeader header)
+        public override string Create()
         {
-            Append(header.ToString());
-            return this;
-        }
+            Reset();
 
-        public DxfFile Classes(DxfClasses classes)
-        {
-            Append(classes.ToString());
-            return this;
-        }
+            Append(Header.Create());
 
-        public DxfFile Tables(DxfTables tables)
-        {
-            Append(tables.ToString());
-            return this;
-        }
+            if (Version > DxfAcadVer.AC1009)
+            {
+                Append(Classes.Create());
+            }
 
-        public DxfFile Blocks(DxfBlocks blocks)
-        {
-            Append(blocks.ToString());
-            return this;
-        }
+            Append(Tables.Create());
+            Append(Blocks.Create());
+            Append(Entities.Create());
 
-        public DxfFile Entities(DxfEntities entities)
-        {
-            Append(entities.ToString());
-            return this;
-        }
+            if (Version > DxfAcadVer.AC1009)
+            {
+                Append(Objects.Create());
+            }
 
-        public DxfFile Objects(DxfObjects objects)
-        {
-            Append(objects.ToString());
-            return this;
-        }
+            Add(0, DxfCodeName.Eof);
 
-        public DxfFile Eof()
-        {
-            Add(0, "EOF");
-            return this;
+            return Build();
         }
     }
 }

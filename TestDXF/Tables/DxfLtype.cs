@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public class DxfLtype : DxfObject<DxfLtype>
+    public class DxfLtype : DxfObject
     {
         public string Name { get; set; }
         public DxfLtypeStandardFlags LtypeStandardFlags { get; set; }
@@ -18,7 +18,7 @@ namespace Dxf
         {
         }
 
-        public DxfLtype Defaults()
+        public void Defaults()
         {
             Name = string.Empty;
             LtypeStandardFlags = DxfLtypeStandardFlags.Default;
@@ -26,12 +26,12 @@ namespace Dxf
             DashLengthItems = 0;
             TotalPatternLength = 0.0;
             DashLengths = null;
-
-            return this;
         }
 
-        public DxfLtype Create()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.Ltype);
 
             if (Version > DxfAcadVer.AC1009)
@@ -71,7 +71,7 @@ namespace Dxf
                 // 9
             }
 
-            return this;
+            return Build();
         }
     }
 }

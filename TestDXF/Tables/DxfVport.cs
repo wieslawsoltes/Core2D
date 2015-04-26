@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public class DxfVport : DxfObject<DxfVport>
+    public class DxfVport : DxfObject
     {
         public string Name { get; set; }
         public DxfVportStandardFlags VportStandardFlags { get; set; }
@@ -14,15 +14,16 @@ namespace Dxf
         {
         }
 
-        public DxfVport Defaults()
+        public void Defaults()
         {
             Name = string.Empty;
             VportStandardFlags = DxfVportStandardFlags.Default;
-            return this;
         }
 
-        public DxfVport Create()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.Vport);
 
             if (Version > DxfAcadVer.AC1009)
@@ -35,7 +36,7 @@ namespace Dxf
             Add(2, Name);
             Add(70, (int)VportStandardFlags);
 
-            return this;
+            return Build();
         }
     }
 }

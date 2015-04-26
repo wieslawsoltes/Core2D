@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public class DxfUcs : DxfObject<DxfUcs>
+    public class DxfUcs : DxfObject
     {
         public string Name { get; set; }
         public DxfTableStandardFlags TableStandardFlags { get; set; }
@@ -22,7 +22,7 @@ namespace Dxf
         {
         }
 
-        public DxfUcs Defaults()
+        public void Defaults()
         {
             Name = string.Empty;
             TableStandardFlags = DxfTableStandardFlags.Default;
@@ -34,12 +34,12 @@ namespace Dxf
             BaseUcsHandle = null;
             OrthographicType = null;
             OrthographicOrigin = null;
-
-            return this;
         }
 
-        public DxfUcs Create()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.Ucs);
 
             if (Version > DxfAcadVer.AC1009)
@@ -91,7 +91,7 @@ namespace Dxf
                 }
             }
 
-            return this;
+            return Build();
         }
     }
 }

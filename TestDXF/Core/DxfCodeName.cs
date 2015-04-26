@@ -38,5 +38,7 @@ namespace Dxf
         public const string View = "VIEW";
         public const string Vport = "VPORT";
         public const string Ucs = "UCS";
+
+        public const string Eof = "EOF";
     }
 }

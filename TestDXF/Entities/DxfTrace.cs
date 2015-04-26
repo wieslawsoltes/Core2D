@@ -4,11 +4,16 @@ using System;
 
 namespace Dxf
 {
-    public class DxfTrace : DxfObject<DxfTrace>
+    public class DxfTrace : DxfObject
     {
         public DxfTrace(DxfAcadVer version, int id)
             : base(version, id)
         {
+        }
+
+        public override string Create()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public class DxfAppid : DxfObject<DxfAppid>
+    public class DxfAppid : DxfObject
     {
         public string ApplicationName { get; set; }
         public DxfAppidStandardFlags AppidStandardFlags { get; set; }
@@ -14,16 +14,16 @@ namespace Dxf
         {
         }
 
-        public DxfAppid Defaults()
+        public void Defaults()
         {
             ApplicationName = string.Empty;
             AppidStandardFlags = DxfAppidStandardFlags.Default;
-
-            return this;
         }
 
-        public DxfAppid Create()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.AppId);
 
             if (Version > DxfAcadVer.AC1009)
@@ -36,7 +36,7 @@ namespace Dxf
             Add(2, ApplicationName);
             Add(70, (int)AppidStandardFlags);
 
-            return this;
+            return Build();
         }
     }
 }

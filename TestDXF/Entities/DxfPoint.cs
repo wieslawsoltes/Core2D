@@ -4,11 +4,16 @@ using System;
 
 namespace Dxf
 {
-    public class DxfPoint : DxfObject<DxfPoint>
+    public class DxfPoint : DxfObject
     {
         public DxfPoint(DxfAcadVer version, int id)
             : base(version, id)
         {
+        }
+
+        public override string Create()
+        {
+            throw new NotImplementedException();
         }
     }
 }

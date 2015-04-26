@@ -5,120 +5,107 @@ using System.Text;
 
 namespace Dxf
 {
-    public abstract class DxfObject<T> where T : DxfObject<T>
+    public abstract class DxfObject
     {
-        public virtual DxfAcadVer Version { get; private set; }
-        public virtual int Id { get; private set; }
-        protected StringBuilder sb = new StringBuilder();
+        public DxfAcadVer Version { get; private set; }
+        public int Id { get; private set; }
+
+        private StringBuilder _sb = new StringBuilder();
         
         public DxfObject(DxfAcadVer version, int id)
         {
-            this.Version = version;
-            this.Id = id;
+            Version = version;
+            Id = id;
         }
 
-        public override string ToString()
+        public abstract string Create();
+
+        public override string ToString() { return Create(); }
+
+        public string Build()
         {
-            return this.Build();
+            return _sb.ToString();
         }
 
-        public virtual void Reset()
+        public void Reset()
         {
-            this.sb.Length = 0;
+            _sb.Length = 0;
         }
 
-        public virtual string Build()
+        public void Add(string code, string data)
         {
-            return this.sb.ToString();
+            _sb.AppendLine(code);
+            _sb.AppendLine(data);
         }
 
-        public virtual T Add(string code, string data)
+        public void Add(string code, bool data)
         {
-            this.sb.AppendLine(code);
-            this.sb.AppendLine(data);
-            return this as T;
+            _sb.AppendLine(code);
+            _sb.AppendLine(data == true ? 1.ToString() : 0.ToString());
         }
 
-        public virtual T Add(string code, bool data)
+        public void Add(string code, int data)
         {
-            this.sb.AppendLine(code);
-            this.sb.AppendLine(data == true ? 1.ToString() : 0.ToString());
-            return this as T;
+            _sb.AppendLine(code);
+            _sb.AppendLine(data.ToString());
         }
 
-        public virtual T Add(string code, int data)
+        public void Add(string code, double data)
         {
-            this.sb.AppendLine(code);
-            this.sb.AppendLine(data.ToString());
-            return this as T;
+            _sb.AppendLine(code);
+            _sb.AppendLine(data.ToString(System.Globalization.CultureInfo.GetCultureInfo("en-GB")));
         }
 
-        public virtual T Add(string code, double data)
+        public void Add(int code, string data)
         {
-            this.sb.AppendLine(code);
-            this.sb.AppendLine(data.ToString(System.Globalization.CultureInfo.GetCultureInfo("en-GB")));
-            return this as T;
+            _sb.AppendLine(code.ToString());
+            _sb.AppendLine(data);
         }
 
-        public virtual T Add(int code, string data)
+        public void Add(int code, bool data)
         {
-            this.sb.AppendLine(code.ToString());
-            this.sb.AppendLine(data);
-            return this as T;
+            _sb.AppendLine(code.ToString());
+            _sb.AppendLine(data == true ? 1.ToString() : 0.ToString());
         }
 
-        public virtual T Add(int code, bool data)
+        public void Add(int code, int data)
         {
-            this.sb.AppendLine(code.ToString());
-            this.sb.AppendLine(data == true ? 1.ToString() : 0.ToString());
-            return this as T;
+            _sb.AppendLine(code.ToString());
+            _sb.AppendLine(data.ToString());
         }
 
-        public virtual T Add(int code, int data)
+        public void Add(int code, double data)
         {
-            this.sb.AppendLine(code.ToString());
-            this.sb.AppendLine(data.ToString());
-            return this as T;
+            _sb.AppendLine(code.ToString());
+            _sb.AppendLine(data.ToString(System.Globalization.CultureInfo.GetCultureInfo("en-GB")));
         }
 
-        public virtual T Add(int code, double data)
+        public void Append(string str)
         {
-            this.sb.AppendLine(code.ToString());
-            this.sb.AppendLine(data.ToString(System.Globalization.CultureInfo.GetCultureInfo("en-GB")));
-            return this as T;
+            _sb.Append(str);
         }
 
-        protected virtual T Append(string str)
-        {
-            this.sb.Append(str);
-            return this as T;
-        }
-
-        public virtual T Comment(string comment)
+        public void Comment(string comment)
         {
             Add(999, comment);
-            return this as T;
         }
 
-        public virtual T Handle(string handle)
+        public void Handle(string handle)
         {
             Add(5, handle);
-            return this as T;
         }
 
-        public virtual T Handle(int handle)
+        public void Handle(int handle)
         {
             Add(5, handle.ToDxfHandle());
-            return this as T;
         }
 
-        public virtual T Subclass(string subclass)
+        public void Subclass(string subclass)
         {
             Add(100, subclass);
-            return this as T;
         }
 
-        public virtual T Entity()
+        public void Entity()
         {
             if (Version > DxfAcadVer.AC1009)
             {
@@ -127,14 +114,13 @@ namespace Dxf
             }
 
             // TODO: Unify common Entity codes for all Entities.
-            //Add(8, layer);
-            //Add(62, color);
-            //Add(6, lineType);
-            //Add(370, lineweight);
-            //Add(78, lineTypeScale);
-            //Add(60, isVisible);
 
-            return this as T;
+            //Add(8, Layer);
+            //Add(62, Color);
+            //Add(6, LineType);
+            //Add(370, Lineweight);
+            //Add(78, LineTypeScale);
+            //Add(60, IsVisible);
         }
     }
 }

@@ -4,11 +4,16 @@ using System;
 
 namespace Dxf
 {
-    public class Dxf3Dface : DxfObject<Dxf3Dface>
+    public class Dxf3Dface : DxfObject
     {
         public Dxf3Dface(DxfAcadVer version, int id)
             : base(version, id)
         {
+        }
+
+        public override string Create()
+        {
+            throw new NotImplementedException();
         }
     }
 }

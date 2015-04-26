@@ -5,18 +5,30 @@ using System.Text;
 
 namespace Dxf
 {
-    public class DxfHeader : DxfObject<DxfHeader>
+    public class DxfHeader : DxfObject
     {
+        public int NextAvailableHandle { get; set; }
+
         public DxfHeader(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
 
-        public DxfHeader Begin()
+        public override string Create()
         {
-            Add(0, "SECTION");
+            Reset();
+
+            Begin();
+            Default();
+            End(NextAvailableHandle);
+
+            return Build();
+        }
+
+        private void Begin()
+        {
+            Add(0, DxfCodeName.Section);
             Add(2, "HEADER");
-            return this;
         }
 
         private void VarName(string name)
@@ -24,14 +36,13 @@ namespace Dxf
             Add(9, name);
         }
 
-        public DxfHeader AcadVer(DxfAcadVer version)
+        private void AcadVer(DxfAcadVer version)
         {
             VarName("$ACADVER");
             Add(1, version.ToString());
-            return this;
         }
 
-        public DxfHeader Default()
+        private void Default()
         {
             AcadVer(Version);
 
@@ -700,10 +711,9 @@ namespace Dxf
             VarName("$VIEWSIZE");
             Add(40, 0.0);
             */
-            return this;
         }
 
-        public DxfHeader End(int nextAvailableHandle)
+        private void End(int nextAvailableHandle)
         {
             if (Version > DxfAcadVer.AC1009)
             {
@@ -711,9 +721,7 @@ namespace Dxf
                 Add(5, nextAvailableHandle.ToDxfHandle());
             }
 
-            Add(0, "ENDSEC");
-
-            return this;
+            Add(0, DxfCodeName.EndSec);
         }
     }
 }

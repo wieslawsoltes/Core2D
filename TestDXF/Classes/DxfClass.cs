@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public class DxfClass : DxfObject<DxfClass>
+    public class DxfClass : DxfObject
     {
         public string DxfClassName { get; set; }
         public string CppClassName { get; set; }
@@ -17,18 +17,19 @@ namespace Dxf
         {
         }
 
-        public DxfClass Defaults()
+        public void Defaults()
         {
             DxfClassName = string.Empty;
             CppClassName = string.Empty;
             ProxyCapabilitiesFlags = DxfProxyCapabilitiesFlags.NoOperationsAllowed;
             WasAProxyFlag = false;
             IsAnEntityFlag = false;
-            return this;
         }
 
-        public DxfClass Create()
+        public override string Create()
         {
+            Reset();
+
             if (Version > DxfAcadVer.AC1009)
             {
                 Add(0, DxfCodeName.Class);
@@ -39,7 +40,7 @@ namespace Dxf
                 Add(281, IsAnEntityFlag);
             }
 
-            return this;
+            return Build();
         }
     }
 }

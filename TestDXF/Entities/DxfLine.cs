@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public class DxfLine : DxfObject<DxfLine>
+    public class DxfLine : DxfObject
     {
         public string Layer { get; set; }
         public string Color { get; set; }
@@ -18,7 +18,7 @@ namespace Dxf
         {
         }
 
-        public DxfLine Defaults()
+        public void Defaults()
         {
             Layer = "0";
             Color = "0";
@@ -26,12 +26,12 @@ namespace Dxf
             StartPoint = new DxfVector3(0.0, 0.0, 0.0);
             EndPoint = new DxfVector3(0.0, 0.0, 0.0);
             ExtrusionDirection = new DxfVector3(0.0, 0.0, 1.0);
-
-            return this;
         }
 
-        public DxfLine Create()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.Line);
 
             Entity();
@@ -55,7 +55,7 @@ namespace Dxf
             Add(220, ExtrusionDirection.Y);
             Add(230, ExtrusionDirection.Z);
 
-            return this;
+            return Build();
         }
     }
 }

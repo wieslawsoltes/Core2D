@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public class DxfStyle : DxfObject<DxfStyle>
+    public class DxfStyle : DxfObject
     {
         public string Name { get; set; }
         public DxfStyleFlags StyleStandardFlags { get; set; }
@@ -22,7 +22,7 @@ namespace Dxf
         {
         }
 
-        public DxfStyle Defaults()
+        public void Defaults()
         {
             Name = string.Empty;
             StyleStandardFlags = DxfStyleFlags.Default;
@@ -34,12 +34,12 @@ namespace Dxf
             PrimaryFontFile = string.Empty;
             BifFontFile = string.Empty;
             PrimatyFontDescription = string.Empty;
-            
-            return this;
         }
 
-        public DxfStyle Create()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.Style);
 
             if (Version > DxfAcadVer.AC1009)
@@ -67,7 +67,7 @@ namespace Dxf
                 Add(1071, 0);
             }
             
-            return this;
+            return Build();
         }
     }
 }

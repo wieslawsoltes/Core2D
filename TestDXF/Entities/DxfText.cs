@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public class DxfText : DxfObject<DxfText>
+    public class DxfText : DxfObject
     {
         public double Thickness { get; set; }
         public string Layer { get; set; }
@@ -27,7 +27,7 @@ namespace Dxf
         {
         }
 
-        public DxfText Defaults()
+        public void Defaults()
         {
             Thickness = 0.0;
             Layer = "0";
@@ -44,12 +44,12 @@ namespace Dxf
             SecondAlignment = new DxfVector3(0.0, 0.0, 0.0); ;
             ExtrusionDirection = new DxfVector3(0.0, 0.0, 1.0);
             VerticalTextJustification = DxfVerticalTextJustification.Default;
-
-            return this;
         }
 
-        public DxfText Create()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.Text);
 
             Entity();
@@ -87,7 +87,7 @@ namespace Dxf
 
             Add(73, (int)VerticalTextJustification);
 
-            return this;
+            return Build();
         }
     }
 }

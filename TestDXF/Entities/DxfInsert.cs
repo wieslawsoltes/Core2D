@@ -1,104 +1,100 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 
 namespace Dxf
 {
-    public class DxfInsert : DxfObject<DxfInsert>
+    public class DxfInsert : DxfObject
     {
+        public string BlockName { get; set; }
+        public string Layer { get; set; }
+        public DxfVector3 InsertionPoint { get; set; }
+        public DxfVector3 ScaleFactor { get; set; }
+        public double RotationAngle { get; set; }
+        public int ColumnCount { get; set; }
+        public int RowCount { get; set; }
+        public double ColumnSpacing { get; set; }
+        public double RowSpacing { get; set; }
+        public DxfVector3 ExtrusionDirection { get; set; }
+        public IList<DxfAttrib> Attributes { get; set; }
+
         public DxfInsert(DxfAcadVer version, int id)
             : base(version, id)
         {
+            Attributes = new List<DxfAttrib>();
+        }
+
+        public void Defaults()
+        {
+            BlockName = string.Empty;
+            Layer = "0";
+            InsertionPoint = new DxfVector3(0.0, 0.0, 0.0);
+            ScaleFactor = new DxfVector3(1.0, 1.0, 1.0);
+            RotationAngle = 0.0;
+            ColumnCount = 1;
+            RowCount = 1;
+            ColumnSpacing = 0.0;
+            RowSpacing = 0.0;
+            ExtrusionDirection = new DxfVector3(0.0, 0.0, 1.0);
+        }
+
+        public override string Create()
+        {
+            Reset();
+
             Add(0, DxfCodeName.Insert);
 
             Entity();
 
             if (Version > DxfAcadVer.AC1009)
                 Subclass(DxfSubclassMarker.BlockReference);
-        }
 
-        public DxfInsert Block(string name)
-        {
-            Add(2, name);
-            return this;
-        }
+            Add(2, BlockName);
+            Add(8, Layer);
 
-        public DxfInsert Layer(string layer)
-        {
-            Add(8, layer);
-            return this;
-        }
+            Add(10, InsertionPoint.X);
+            Add(20, InsertionPoint.Y);
+            Add(30, InsertionPoint.Z);
 
-        public DxfInsert Insertion(DxfVector3 point)
-        {
-            Add(10, point.X);
-            Add(20, point.Y);
-            Add(30, point.Z);
-            return this;
-        }
+            Add(41, ScaleFactor.X);
+            Add(42, ScaleFactor.Y);
+            Add(43, ScaleFactor.Z);
 
-        public DxfInsert Scale(DxfVector3 factor)
-        {
-            Add(41, factor.X);
-            Add(42, factor.Y);
-            Add(43, factor.Z);
-            return this;
-        }
+            Add(50, RotationAngle);
 
-        public DxfInsert Rotation(double angle)
-        {
-            Add(50, angle);
-            return this;
-        }
-
-        public DxfInsert Columns(int count)
-        {
-            Add(70, count);
-            return this;
-        }
-
-        public DxfInsert Rows(int count)
-        {
-            Add(71, count);
-            return this;
-        }
-
-        public DxfInsert ColumnSpacing(double value)
-        {
-            Add(44, value);
-            return this;
-        }
-
-        public DxfInsert RowSpacing(double value)
-        {
-            Add(45, value);
-            return this;
-        }
-
-        public DxfInsert AttributesBegin()
-        {
-            Add(66, "1"); // attributes follow: 0 - no, 1 - yes
-            return this;
-        }
-
-        public DxfInsert AddAttribute(DxfAttrib attrib)
-        {
-            Append(attrib.ToString());
-            return this;
-        }
-
-        public DxfInsert AttributesEnd(int id, string layer)
-        {
-            Add(0, DxfCodeName.SeqEnd);
+            Add(70, ColumnCount);
+            Add(71, RowCount);
+            Add(44, ColumnSpacing);
+            Add(45, RowSpacing);
 
             if (Version > DxfAcadVer.AC1009)
             {
-                Handle(id);
-                Subclass(DxfSubclassMarker.Entity);
-                Add(8, layer);
+                Add(210, ExtrusionDirection.X);
+                Add(220, ExtrusionDirection.Y);
+                Add(230, ExtrusionDirection.Z);
             }
 
-            return this;
+            if (Attributes != null && Attributes.Count > 0)
+            {
+                Add(66, "1"); // attributes follow: 0 - no, 1 - yes
+
+                foreach (var attrib in Attributes)
+                {
+                    Append(attrib.Create());
+                }
+
+                Add(0, DxfCodeName.SeqEnd);
+
+                if (Version > DxfAcadVer.AC1009)
+                {
+                    Handle(Id);
+                    Subclass(DxfSubclassMarker.Entity);
+                    Add(8, Layer);
+                }
+            }
+
+            return Build();
         }
     }
 }

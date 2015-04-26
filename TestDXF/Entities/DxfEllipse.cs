@@ -4,7 +4,7 @@ using System;
 
 namespace Dxf
 {
-    public class DxfEllipse : DxfObject<DxfEllipse>
+    public class DxfEllipse : DxfObject
     {
         public string Layer { get; set; }
         public string Color { get; set; }
@@ -20,7 +20,7 @@ namespace Dxf
         {
         }
 
-        public DxfEllipse Defaults()
+        public void Defaults()
         {
             Layer = "0";
             Color = "0";
@@ -30,12 +30,12 @@ namespace Dxf
             Ratio = 0.0;
             StartParameter = 0.0;
             EndParameter = 2.0 * Math.PI;
-
-            return this;
         }
 
-        public DxfEllipse Create()
+        public override string Create()
         {
+            Reset();
+
             Add(0, DxfCodeName.Ellipse);
 
             Entity();
@@ -62,7 +62,7 @@ namespace Dxf
             Add(41, StartParameter);
             Add(42, EndParameter);
 
-            return this;
+            return Build();
         }
     }
 }
