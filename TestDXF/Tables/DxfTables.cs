@@ -57,9 +57,12 @@ namespace Dxf
             Add(DimstyleTable);
             EndDimstyles();
 
-            BeginBlockRecords(BlockRecordTable.Items.Count(), BlockRecordTable.Id);
-            Add(BlockRecordTable);
-            EndBlockRecords();
+            if (Version > DxfAcadVer.AC1009)
+            {
+                BeginBlockRecords(BlockRecordTable.Items.Count(), BlockRecordTable.Id);
+                Add(BlockRecordTable);
+                EndBlockRecords();
+            }
 
             BeginLtypes(LtypeTable.Items.Count(), LtypeTable.Id);
             Add(LtypeTable);
