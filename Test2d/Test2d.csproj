@@ -69,6 +69,7 @@
     <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
     <Compile Include="Editor\Core\IView.cs" />
     <Compile Include="Editor\Editor.cs" />
+    <Compile Include="Math\Arc.cs" />
     <Compile Include="Math\MonotoneChain.cs" />
     <Compile Include="Math\Polygon2.cs" />
     <Compile Include="Math\Sat.cs" />
