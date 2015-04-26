@@ -10,6 +10,10 @@ namespace Dxf
     // AC1012 - not supported
     // AC1014 - not supported
     // AC1015 - supported
+    // AC1018 - not supported
+    // AC1021 - not supported
+    // AC1024 - not supported
+    // AC1027 - not supported
 
     // AutoCAD drawing database version number: 
     // AC1006 = R10
@@ -29,5 +33,15 @@ namespace Dxf
         AC1021 = 6, // AutoCAD 2007
         AC1024 = 7, // AutoCAD 2010
         AC1027 = 8, // AutoCAD 2013
+        R10 = AC1006,
+        R11 = AC1009,
+        R12 = AC1009,
+        R13 = AC1012,
+        R14 = AC1014,
+        AutoCAD2000 = AC1015,
+        AutoCAD2004 = AC1018,
+        AutoCAD2007 = AC1021,
+        AutoCAD2010 = AC1024,
+        AutoCAD2013 = AC1027
     }
 }
