@@ -87,7 +87,6 @@ namespace TestEMF
                     (float)rect.Y,
                     (float)rect.Width,
                     (float)rect.Height);
-
             }
 
             gfx.DrawRectangle(
@@ -113,7 +112,6 @@ namespace TestEMF
                     (float)rect.Y,
                     (float)rect.Width,
                     (float)rect.Height);
-
             }
 
             gfx.DrawEllipse(
