@@ -33,5 +33,17 @@ namespace Dxf
             }
             return sb.ToString();
         }
+
+        public static uint ToDxfTrueColor(byte r, byte g, byte b)
+        {
+            // Code 420: 24-bit True Color in 'unit' format: 0x00RRGGBB
+            return (uint)b | (uint)g << 8 | (uint)r << 16;
+        }
+
+        public static uint ToDxfTransparency(byte a)
+        {
+            // Code 440: Transparency value used with True Color
+            return (uint)a;
+        }
     }
 }
