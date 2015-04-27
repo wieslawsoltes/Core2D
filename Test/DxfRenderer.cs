@@ -12,7 +12,6 @@ namespace Test
     public class DxfRenderer
     {
         private DxfAcadVer _version;
-        private string _layer = "0";
         private int _handle = 0;
         private string _defaultStyle = "Standard";
         private double _pageWidth;
@@ -27,7 +26,7 @@ namespace Test
 
         private void TableAppids(DxfTable<DxfAppid> appids)
         {
-            // ACAD - default must be present
+            // NOTE: Appid "ACAD" - default must be present
             if (_version > DxfAcadVer.AC1009)
             {
                 appids.Items.Add(new DxfAppid(_version, NextHandle())
@@ -49,9 +48,9 @@ namespace Test
             }
         }
 
-        private void TableLayers(DxfTable<DxfLayer> layers)
+        private void TableLayers(DxfTable<DxfLayer> layers, Container container)
         {
-            // default layer 0 - must be present
+            // NOTE: Default layer "0" - must be present.
             if (_version > DxfAcadVer.AC1009)
             {
                 layers.Items.Add(new DxfLayer(_version, NextHandle())
@@ -65,11 +64,36 @@ namespace Test
                     PlotStyleNameHandle = "0"
                 });
             }
+            
+            layers.Items.Add(new DxfLayer(_version, NextHandle())
+            {
+                Name = container.TemplateLayer.Name,
+                LayerStandardFlags = DxfLayerStandardFlags.Default,
+                Color = DxfDefaultColors.Default.ToDxfColor(),
+                LineType = "Continuous",
+                PlottingFlag = true,
+                LineWeight = DxfLineWeight.LnWtByLwDefault,
+                PlotStyleNameHandle = "0"
+            });
+            
+            foreach (var layer in container.Layers) 
+            {
+                layers.Items.Add(new DxfLayer(_version, NextHandle())
+                {
+                    Name = layer.Name,
+                    LayerStandardFlags = DxfLayerStandardFlags.Default,
+                    Color = DxfDefaultColors.Default.ToDxfColor(),
+                    LineType = "Continuous",
+                    PlottingFlag = true,
+                    LineWeight = DxfLineWeight.LnWtByLwDefault,
+                    PlotStyleNameHandle = "0"
+                });
+            }
         }
 
         private void TableLtypes(DxfTable<DxfLtype> ltypes)
         {
-            // default ltypes ByLayer, ByBlock and Continuous - must be present
+            // NOTE: Default ltypes ByLayer, ByBlock and Continuous - must be present.
 
             // ByLayer
             ltypes.Items.Add(new DxfLtype(_version, NextHandle())
@@ -216,7 +240,7 @@ namespace Test
             };
         }
 
-        private DxfLine CreateLine(double x1, double y1, double x2, double y2)
+        private DxfLine CreateLine(double x1, double y1, double x2, double y2, string layer)
         {
             double _x1 = ToDxfX(x1);
             double _y1 = ToDxfY(y1);
@@ -225,7 +249,7 @@ namespace Test
 
             return new DxfLine(_version, NextHandle())
             {
-                Layer = _layer,
+                Layer = layer,
                 Color = DxfDefaultColors.ByLayer.ToDxfColor(),
                 Thickness = 0.0,
                 StartPoint = new DxfVector3(_x1, _y1, 0),
@@ -234,14 +258,14 @@ namespace Test
             };
         }
 
-        private DxfCircle CreateCircle(double cx, double cy, double radius)
+        private DxfCircle CreateCircle(double cx, double cy, double radius, string layer)
         {
             double _cx = ToDxfX(cx);
             double _cy = ToDxfY(cy);
 
             return new DxfCircle(_version, NextHandle())
             {
-                Layer = _layer,
+                Layer = layer,
                 Color = DxfDefaultColors.ByLayer.ToDxfColor(),
                 Thickness = 0.0,
                 CenterPoint = new DxfVector3(_cx, _cy, 0),
@@ -250,21 +274,23 @@ namespace Test
             };
         }
 
-        private DxfEllipse CreateEllipse(double x, double y, double width, double height)
+        private DxfEllipse CreateEllipse(double x, double y, double width, double height, string layer)
         {
             double _cx = ToDxfX(x + width / 2.0);
             double _cy = ToDxfY(y + height / 2.0);
-            double _ex = width / 2.0; // relative to _cx
-            double _ey = 0.0; // relative to _cy
+            double minor = Math.Min(height, width);
+            double major = Math.Max(height, width);
+            double _ex = width >= height ? major / 2.0 : 0.0; // relative to _cx
+            double _ey = width < height ? major / 2.0 : 0.0; // relative to _cy
 
             return new DxfEllipse(_version, NextHandle())
             {
-                Layer = _layer,
+                Layer = layer,
                 Color = DxfDefaultColors.ByLayer.ToDxfColor(),
                 CenterPoint = new DxfVector3(_cx, _cy, 0),
                 EndPoint = new DxfVector3(_ex, _ey, 0),
                 ExtrusionDirection = new DxfVector3(0, 0, 1),
-                Ratio = height / width,
+                Ratio = minor / major,
                 StartParameter = 0.0,
                 EndParameter = 2.0 * Math.PI
             };
@@ -273,14 +299,15 @@ namespace Test
         private DxfArc CreateArc(
             double x, double y,
             double radius, 
-            double startAngle, double endAngle)
+            double startAngle, double endAngle, 
+            string layer)
         {
             double _cx = ToDxfX(x + radius / 2.0);
             double _cy = ToDxfY(y + radius / 2.0);
 
             return new DxfArc(_version, NextHandle())
             {
-                Layer = _layer,
+                Layer = layer,
                 Color = DxfDefaultColors.ByLayer.ToDxfColor(),
                 Thickness = 0.0,
                 CenterPoint = new DxfVector3(_cx, _cy, 0),
@@ -290,6 +317,58 @@ namespace Test
                 ExtrusionDirection = new DxfVector3(0, 0, 1),
             };
         }
+        
+        private DxfSpline CreateSpline(
+            double p1x, double p1y, 
+            double p2x, double p2y,
+            double p3x, double p3y,
+            double p4x, double p4y, 
+            string layer)
+        {
+            double _p1x  = ToDxfX(p1x);
+            double _p1y  = ToDxfY(p1y);
+            double _p2x  = ToDxfX(p2x);
+            double _p2y  = ToDxfY(p2y);
+            double _p3x  = ToDxfX(p3x);
+            double _p3y  = ToDxfY(p3y);
+            double _p4x  = ToDxfX(p4x);
+            double _p4y  = ToDxfY(p4y);
+            
+            var spline = new DxfSpline(_version, NextHandle())
+            {
+                Layer = layer,
+                Color = DxfDefaultColors.ByLayer.ToDxfColor(),
+                NormalVector = new DxfVector3(0.0, 0.0, 1.0),
+                SplineFlags = DxfSplineFlags.Planar,
+                SplineCurveDegree = 3,
+                KnotTolerance =  0.0000001,
+                ControlPointTolerance = 0.0000001,
+                FitTolerance = 0.0000000001,
+                StartTangent = null,
+                EndTangent = null,
+                Knots = new double[8],
+                Weights = null,
+                ControlPoints = new DxfVector3[4],
+                FitPoints = null
+            };
+     
+            spline.Knots[0] = 0.0;
+            spline.Knots[1] = 0.0;
+            spline.Knots[2] = 0.0;
+            spline.Knots[3] = 0.0;
+            
+            spline.Knots[4] = 1.0;
+            spline.Knots[5] = 1.0;
+            spline.Knots[6] = 1.0;
+            spline.Knots[7] = 1.0;
+            
+            spline.ControlPoints[0] = new DxfVector3(_p1x, _p1y, 0.0);
+            spline.ControlPoints[1] = new DxfVector3(_p2x, _p2y, 0.0);
+            spline.ControlPoints[2] = new DxfVector3(_p3x, _p3y, 0.0);
+            spline.ControlPoints[3] = new DxfVector3(_p4x, _p4y, 0.0);
+            
+            return spline;
+        }
 
         private DxfText CreateText(
             string text, 
@@ -297,12 +376,13 @@ namespace Test
             double height, 
             DxfHorizontalTextJustification horizontalJustification, 
             DxfVerticalTextJustification verticalJustification, 
-            string style)
+            string style, 
+            string layer)
         {
             return new DxfText(_version, NextHandle())
             {
                 Thickness = 0,
-                Layer = _layer,
+                Layer = layer,
                 Color = DxfDefaultColors.ByLayer.ToDxfColor(),
                 FirstAlignment = new DxfVector3(ToDxfX(x), ToDxfY(y), 0),
                 TextHeight = height,
@@ -330,43 +410,64 @@ namespace Test
             return new Rect2(tlx + dx, tly + dy, width, height);
         }
 
-        private void DrawLine(DxfEntities entities, XLine line)
+        private void DrawLine(DxfEntities entities, XLine line, string layer)
         {
-            entities.Entities.Add(CreateLine(line.Start.X, line.Start.Y, line.End.X, line.End.Y));
+            entities.Entities.Add(CreateLine(line.Start.X, line.Start.Y, line.End.X, line.End.Y, layer));
         }
 
-        private void DrawRectangle(DxfEntities entities, XRectangle rectangle)
+        private void DrawRectangle(DxfEntities entities, XRectangle rectangle, string layer)
         {
             var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight, 0.0, 0.0);
-            entities.Entities.Add(CreateLine(rect.X, rect.Y, rect.X + rect.Width, rect.Y));
-            entities.Entities.Add(CreateLine(rect.X, rect.Y + rect.Height, rect.X + rect.Width, rect.Y + rect.Height));
-            entities.Entities.Add(CreateLine(rect.X, rect.Y, rect.X, rect.Y + rect.Height));
-            entities.Entities.Add(CreateLine(rect.X + rect.Width, rect.Y, rect.X + rect.Width, rect.Y + rect.Height));
+            entities.Entities.Add(CreateLine(rect.X, rect.Y, rect.X + rect.Width, rect.Y, layer));
+            entities.Entities.Add(CreateLine(rect.X, rect.Y + rect.Height, rect.X + rect.Width, rect.Y + rect.Height, layer));
+            entities.Entities.Add(CreateLine(rect.X, rect.Y, rect.X, rect.Y + rect.Height, layer));
+            entities.Entities.Add(CreateLine(rect.X + rect.Width, rect.Y, rect.X + rect.Width, rect.Y + rect.Height, layer));
         }
 
-        private void DrawEllipse(DxfEntities entities, XEllipse ellipse)
+        private void DrawEllipse(DxfEntities entities, XEllipse ellipse, string layer)
         {
             var rect = CreateRect(ellipse.TopLeft, ellipse.BottomRight, 0.0, 0.0);
-            entities.Entities.Add(CreateEllipse(rect.X, rect.Y, rect.Width, rect.Height));
+            entities.Entities.Add(CreateEllipse(rect.X, rect.Y, rect.Width, rect.Height, layer));
         }
 
-        private void DrawArc(DxfEntities entities, XArc arc)
+        private void DrawArc(DxfEntities entities, XArc arc, string layer)
         {
             var a = Arc.FromXArc(arc, 0.0, 0.0);
-            entities.Entities.Add(CreateArc(a.X, a.Y, a.Radius, a.StartAngle, a.EndAngle));
+            entities.Entities.Add(CreateArc(a.X, a.Y, a.Radius, a.StartAngle, a.EndAngle, layer));
         }
 
-        private void DrawBezier(DxfEntities entities, XBezier bezier)
+        private void DrawBezier(DxfEntities entities, XBezier bezier, string layer)
         {
-            // TODO: Draw bezier.
+            entities.Entities.Add(
+                CreateSpline(
+                    bezier.Point1.X, bezier.Point1.Y, 
+                    bezier.Point2.X, bezier.Point2.Y, 
+                    bezier.Point3.X, bezier.Point3.Y, 
+                    bezier.Point4.X, bezier.Point4.Y,
+                    layer));
         }
 
-        private void DrawQBezier(DxfEntities entities, XQBezier qbezier)
+        private void DrawQBezier(DxfEntities entities, XQBezier qbezier, string layer)
         {
-            // TODO: Draw qbezier.
+            double x1 = qbezier.Point1.X;
+            double y1 = qbezier.Point1.Y;
+            double x2 = qbezier.Point1.X + (2.0 * (qbezier.Point2.X - qbezier.Point1.X)) / 3.0;
+            double y2 = qbezier.Point1.Y + (2.0 * (qbezier.Point2.Y - qbezier.Point1.Y)) / 3.0;
+            double x3 = x2 + (qbezier.Point3.X - qbezier.Point1.X) / 3.0;
+            double y3 = y2 + (qbezier.Point3.Y - qbezier.Point1.Y) / 3.0;
+            double x4 = qbezier.Point3.X;
+            double y4 = qbezier.Point3.Y;
+
+            entities.Entities.Add(
+                CreateSpline(
+                    x1, y1, 
+                    x2, y2, 
+                    x3, y3, 
+                    x4, y4,
+                    layer));
         }
 
-        private void DrawText(DxfEntities entities, XText text)
+        private void DrawText(DxfEntities entities, XText text, string layer)
         {
             DxfHorizontalTextJustification halign;
             DxfVerticalTextJustification valign;
@@ -414,10 +515,11 @@ namespace Test
                 text.Style.TextStyle.FontSize * (72.0 / 96.0), 
                 halign, 
                 valign, 
-                _defaultStyle));
+                _defaultStyle,
+               layer));
         }
 
-        private void DrawShapes(DxfEntities entities, IEnumerable<BaseShape> shapes)
+        private void DrawShapes(DxfEntities entities, IEnumerable<BaseShape> shapes, string layer)
         {
             foreach (var shape in shapes) 
             {
@@ -431,13 +533,13 @@ namespace Test
                     else if (shape is XLine)
                     {
                         var line = shape as XLine;
-                        DrawLine(entities, line);
+                        DrawLine(entities, line, layer);
                         // TODO: Draw start and end arrows.
                     }
                     else if (shape is XRectangle)
                     {
                         var rectangle = shape as XRectangle;
-                        DrawRectangle(entities, rectangle);
+                        DrawRectangle(entities, rectangle, layer);
                     }
                     else if (shape is XEllipse)
                     {
@@ -451,38 +553,38 @@ namespace Test
                                 double radius = rect.Width / 2.0;
                                 double cx = rect.X + radius;
                                 double cy = rect.Y + radius;
-                                entities.Entities.Add(CreateCircle(cx, cy, radius));
+                                entities.Entities.Add(CreateCircle(cx, cy, radius, layer));
                             }
                         }
                         else
                         {
-                            DrawEllipse(entities, ellipse);
+                            DrawEllipse(entities, ellipse, layer);
                         }
                     }
                     else if (shape is XArc)
                     {
                         var arc = shape as XArc;
-                        DrawArc(entities, arc);
+                        DrawArc(entities, arc, layer);
                     }
                     else if (shape is XBezier)
                     {
                         var bezier = shape as XBezier;
-                        DrawBezier(entities, bezier);
+                        DrawBezier(entities, bezier, layer);
                     }
                     else if (shape is XQBezier)
                     {
                         var qbezier = shape as XQBezier;
-                        DrawQBezier(entities, qbezier);
+                        DrawQBezier(entities, qbezier, layer);
                     }
                     else if (shape is XText)
                     {
                         var text = shape as XText;
-                        DrawText(entities, text);
+                        DrawText(entities, text, layer);
                     }
                     else if (shape is XGroup)
                     {
                         var group = shape as XGroup;
-                        DrawShapes(entities, group.Shapes);
+                        DrawShapes(entities, group.Shapes, layer);
                     }
                 }
             }
@@ -514,7 +616,7 @@ namespace Test
             _pageWidth = container.Width;
             _pageHeight = container.Height;
 
-            _layer = "0";
+            //_layer = "0";
             _handle = 0;
 
             // create dxf file
@@ -545,9 +647,7 @@ namespace Test
             file.Tables.BlockRecordTable.Id = NextHandle();
             if (_version > DxfAcadVer.AC1009)
             {
-                // TODO: each BLOCK must have BLOCK_RECORD entry
-
-                // required block records by dxf format
+                // NOTE: Required block records by Dxf format.
                 file.Tables.BlockRecordTable.Items.Add(
                     CreateBlockRecordForBlock("*Model_Space"));
 
@@ -557,16 +657,17 @@ namespace Test
                 file.Tables.BlockRecordTable.Items.Add(
                     CreateBlockRecordForBlock("*Paper_Space0"));
 
-                // TODO: add user layers
+                // NOTE: Each BLOCK must have BLOCK_RECORD entry.
+                
                 //file.Tables.BlockRecordTable.Items.Add(
-                //    CreateBlockRecordForBlock("NEW_LAYER_NAME"));
+                //    CreateBlockRecordForBlock("BLOCK_NAME));
             }
 
             file.Tables.LtypeTable.Id = NextHandle();
             TableLtypes(file.Tables.LtypeTable);
 
             file.Tables.LayerTable.Id = NextHandle();
-            TableLayers(file.Tables.LayerTable);
+            TableLayers(file.Tables.LayerTable, container);
 
             file.Tables.StyleTable.Id = NextHandle();
             TableStyles(file.Tables.StyleTable);
@@ -587,23 +688,23 @@ namespace Test
                 file.Blocks.Blocks.Add(block);
             }
 
-            // TODO: add user blocks
+            // TODO: Add user blocks.
 
             // create entities
             file.Entities = new DxfEntities(_version, NextHandle());
 
-            // TODO: add user entities
+            // TODO: Add user entities.
 
             if (container.TemplateLayer.IsVisible)
             {
-                DrawShapes(file.Entities, container.TemplateLayer.Shapes);
+                DrawShapes(file.Entities, container.TemplateLayer.Shapes, container.TemplateLayer.Name);
             }
             
             foreach (var layer in container.Layers) 
             {
                 if (layer.IsVisible)
                 {
-                    DrawShapes(file.Entities, layer.Shapes);
+                    DrawShapes(file.Entities, layer.Shapes, layer.Name);
                 }
             }
 
@@ -637,9 +738,9 @@ namespace Test
                 file.Objects.Objects.Add(namedDict);
                 file.Objects.Objects.Add(baseDict);
 
-                // TODO: add Group dictionary
-                // TODO: add MLine style dictionary
-                // TODO: add image dictionary dictionary
+                // TODO: Add Group dictionary.
+                // TODO: Add MLine style dictionary.
+                // TODO: Add image dictionary dictionary.
 
                 // end of objects
             }
