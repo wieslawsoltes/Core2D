@@ -1260,6 +1260,8 @@ namespace Test2d
                     layer.Shapes.Remove(shape);
                 }
 
+                _renderer.SelectedShapes = null;
+
                 layer.Invalidate();
             }
         }
