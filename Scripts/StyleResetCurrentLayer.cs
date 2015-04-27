@@ -1,4 +1,4 @@
-﻿void SetStyle(IList<BaseShape> shapes, ShapeStyle style)
+﻿void SetStyle(IEnumerable<BaseShape> shapes, ShapeStyle style)
 {
     if (shapes == null || style == null)
         return;
