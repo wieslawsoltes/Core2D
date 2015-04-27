@@ -21,6 +21,7 @@ namespace Dxf
         public const string Insert = "INSERT";
         public const string Line = "LINE";
         public const string Lwpolyline = "LWPOLYLINE";
+        public const string Spline = "SPLINE";
         public const string Text = "TEXT";
 
         public const string AppId = "APPID";

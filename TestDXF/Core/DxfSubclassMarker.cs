@@ -11,6 +11,7 @@ namespace Dxf
         public const string Ellipse = "AcDbEllipse";
         public const string Line = "AcDbLine";
         public const string Lwpolyline = "AcDbPolyline";
+        public const string Spline = "AcDbSpline";
         public const string Text = "AcDbText";
 
         public const string Entity = "AcDbEntity";
