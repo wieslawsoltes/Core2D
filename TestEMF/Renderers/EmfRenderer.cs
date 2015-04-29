@@ -14,17 +14,82 @@ using WPF = System.Windows;
 
 namespace TestEMF
 {
-    public class EmfRenderer : IRenderer
+    public class EmfRenderer : ObservableObject, IRenderer
     {
-        public double Zoom { get; set; }
-        public BaseShape SelectedShape { get; set; }
-        public ICollection<BaseShape> SelectedShapes { get; set; }
+        private double _zoom;
+        private ShapeState _drawShapeState;
+        private BaseShape _selectedShape;
+        private ICollection<BaseShape> _selectedShapes;
+
+        public double Zoom
+        {
+            get { return _zoom; }
+            set
+            {
+                if (value != _zoom)
+                {
+                    _zoom = value;
+                    Notify("Zoom");
+                }
+            }
+        }
+
+        public ShapeState DrawShapeState
+        {
+            get { return _drawShapeState; }
+            set
+            {
+                if (value != _drawShapeState)
+                {
+                    _drawShapeState = value;
+                    Notify("DrawShapeState");
+                }
+            }
+        }
+
+        public BaseShape SelectedShape
+        {
+            get { return _selectedShape; }
+            set
+            {
+                if (value != _selectedShape)
+                {
+                    _selectedShape = value;
+                    Notify("SelectedShape");
+                }
+            }
+        }
+
+        public ICollection<BaseShape> SelectedShapes
+        {
+            get { return _selectedShapes; }
+            set
+            {
+                if (value != _selectedShapes)
+                {
+                    _selectedShapes = value;
+                    Notify("SelectedShapes");
+                }
+            }
+        }
         
         private Func<double, float> _scaleToPage;
 
         public EmfRenderer()
         {
+            _zoom = 1.0;
+            _drawShapeState = ShapeState.Visible | ShapeState.Printable;
+            _selectedShape = null;
+            _selectedShapes = null;
+
+            ClearCache();
+
             _scaleToPage = (value) => (float)(value * 1.0);
+        }
+        
+        public static IRenderer Create()
+        {
+            return new EmfRenderer();
         }
 
         private static Color ToColor(ArgbColor color)
@@ -146,7 +211,7 @@ namespace TestEMF
         {
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.HasFlag(Test2d.ShapeState.Printable))
+                if (shape.State.HasFlag(DrawShapeState))
                 {
                     shape.Draw(gfx, this, 0, 0);
                 }
@@ -373,12 +438,14 @@ namespace TestEMF
 
         public void Draw(object gfx, XArc arc, double dx, double dy)
         {
+            var a = Arc.FromXArc(arc, dx, dy);
+            if (a.Width <= 0.0 || a.Height <= 0.0)
+                return;
+
             var _gfx = gfx as Graphics;
 
             //Brush brush = ToXSolidBrush(arc.Style.Fill);
             Pen pen = ToPen(arc.Style, _scaleToPage);
-
-            var a = Arc.FromXArc(arc, dx, dy);
 
             _gfx.DrawArc(
                 pen,
