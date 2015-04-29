@@ -8,6 +8,7 @@ namespace Test2d
     public interface IRenderer
     {
         double Zoom { get; set; }
+        ShapeState DrawShapeState { get; set; }
         BaseShape SelectedShape { get; set; }
         ICollection<BaseShape> SelectedShapes { get; set; }
         void ClearCache();
