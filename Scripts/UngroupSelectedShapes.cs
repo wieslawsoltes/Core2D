@@ -1,4 +1,4 @@
-void Ungroup(IEnumerable<BaseShape> shapes, Layer layer, bool isGroup)
+﻿void Ungroup(IEnumerable<BaseShape> shapes, Layer layer, bool isGroup)
 {
     if (shapes == null || layer == null)
         return;
