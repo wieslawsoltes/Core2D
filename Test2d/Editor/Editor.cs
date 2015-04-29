@@ -226,10 +226,7 @@ namespace Test2d
 
         public bool HitTest(Container container, XRectangle rectangle)
         {
-            var rect = ShapeBounds.CreateRect(
-                rectangle.TopLeft, 
-                rectangle.BottomRight, 
-                0.0, 0.0);
+            var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
             
             var result = ShapeBounds.HitTest(container, rect, 6.0);
             if (result != null)
