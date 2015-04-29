@@ -14,24 +14,11 @@ namespace TestWPF
 {
     public class WpfRenderer : ObservableObject, IRenderer
     {
-        private bool _drawPoints;
         private double _zoom;
+        private ShapeState _drawShapeState;
         private BaseShape _selectedShape;
         private ICollection<BaseShape> _selectedShapes;
-        
-        public bool DrawPoints
-        {
-            get { return _drawPoints; }
-            set
-            {
-                if (value != _drawPoints)
-                {
-                    _drawPoints = value;
-                    Notify("DrawPoints");
-                }
-            }
-        }
-   
+
         public double Zoom
         {
             get { return _zoom; }
@@ -41,6 +28,19 @@ namespace TestWPF
                 {
                     _zoom = value;
                     Notify("Zoom");
+                }
+            }
+        }
+
+        public ShapeState DrawShapeState
+        {
+            get { return _drawShapeState; }
+            set
+            {
+                if (value != _drawShapeState)
+                {
+                    _drawShapeState = value;
+                    Notify("DrawShapeState");
                 }
             }
         }
@@ -87,18 +87,17 @@ namespace TestWPF
 
         public WpfRenderer()
         {
-            _drawPoints = false;
             _zoom = 1.0;
-            
+            _drawShapeState = ShapeState.Visible | ShapeState.Printable;
+            _selectedShape = null;
+            _selectedShapes = null;
+
             ClearCache();
         }
 
-        public static IRenderer Create(bool drawPoints = false)
+        public static IRenderer Create()
         {
-            return new WpfRenderer()
-            {
-                DrawPoints = drawPoints
-            };
+            return new WpfRenderer();
         }
 
         private static Point GetTextOrigin(ShapeStyle style, ref Rect rect, FormattedText ft)
@@ -314,7 +313,10 @@ namespace TestWPF
 
             foreach (var shape in layer.Shapes)
             {
-                shape.Draw(_dc, this, 0, 0);
+                if (shape.State.HasFlag(DrawShapeState))
+                {
+                    shape.Draw(_dc, this, 0, 0);
+                }
             }
         }
 
