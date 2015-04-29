@@ -124,19 +124,6 @@ namespace Test2d
 
         #region Bounds
 
-        public static Rect2 CreateRect(XPoint tl, XPoint br, double dx, double dy)
-        {
-            double tlx = Math.Min(tl.X, br.X);
-            double tly = Math.Min(tl.Y, br.Y);
-            double brx = Math.Max(tl.X, br.X);
-            double bry = Math.Max(tl.Y, br.Y);
-            double x = tlx + dx;
-            double y = tly + dy;
-            double width = (brx + dx) - x;
-            double height = (bry + dy) - y;
-            return new Rect2(x, y, width, height);
-        }
-
         private static Rect2 GetPointBounds(XPoint point, double treshold)
         {
             double radius = treshold / 2.0;
@@ -149,12 +136,12 @@ namespace Test2d
 
         private static Rect2 GetRectangleBounds(XRectangle rectangle)
         {
-            return CreateRect(rectangle.TopLeft, rectangle.BottomRight, 0.0, 0.0);
+            return Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
         }
 
         private static Rect2 GetEllipseBounds(XEllipse ellipse)
         {
-            return CreateRect(ellipse.TopLeft, ellipse.BottomRight, 0.0, 0.0);
+            return Rect2.Create(ellipse.TopLeft, ellipse.BottomRight);
         }
 
         private static Rect2 GetArcBounds(XArc arc, double dx, double dy)
@@ -178,7 +165,7 @@ namespace Test2d
 
         private static Rect2 GetTextBounds(XText text)
         {
-            return CreateRect(text.TopLeft, text.BottomRight, 0.0, 0.0);
+            return Rect2.Create(text.TopLeft, text.BottomRight);
         }
 
         #endregion
