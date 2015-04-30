@@ -10,6 +10,7 @@ namespace Test2d
         None = 0,
         Visible = 1,
         Printable = 2,
-        Locked = 4
+        Locked = 4,
+        Connector = 8
     }
 }
