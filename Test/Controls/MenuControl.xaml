@@ -183,6 +183,11 @@
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.SnapToGrid, Mode=OneWay}"
                       Command="{Binding Commands.SnapToGridCommand}" InputGestureText="G"/>
+            <Separator/>
+            <MenuItem Header="Try To _Connect" 
+                      IsCheckable="True" 
+                      IsChecked="{Binding Editor.TryToConnect, Mode=OneWay}"
+                      Command="{Binding Commands.TryToConnectCommand}" InputGestureText="C"/>
         </MenuItem>
         <MenuItem Header="_Window">
             <MenuItem Header="_Layers..." Command="{Binding Commands.LayersWindowCommand}" InputGestureText="Ctrl+L"/>
