@@ -22,6 +22,7 @@
         <KeyBinding Command="{Binding Commands.ToolTextCommand}" Key="T" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.DefaultIsFilledCommand}" Key="F" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.SnapToGridCommand}" Key="G" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.TryToConnectCommand}" Key="C" Modifiers=""/>
     </UserControl.InputBindings>
     <Grid Width="{Binding Editor.Container.Width}" Height="{Binding Editor.Container.Height}" Background="Transparent">
         <Canvas Background="Transparent"
