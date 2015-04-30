@@ -201,6 +201,9 @@ namespace TestWinForms
                     case Keys.S:
                         (DataContext as EditorContext).Commands.ToolSelectionCommand.Execute(null);
                         break;
+                    case Keys.P:
+                        (DataContext as EditorContext).Commands.ToolPointCommand.Execute(null);
+                        break;
                     case Keys.L:
                         (DataContext as EditorContext).Commands.ToolLineCommand.Execute(null);
                         break;
