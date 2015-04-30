@@ -208,6 +208,12 @@ namespace TestEDITOR
                     _editor.SnapToGrid = !_editor.SnapToGrid;
                 });
 
+            _commands.TryToConnectCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.TryToConnect = !_editor.TryToConnect;
+                });
+
             _commands.AddLayerCommand = new DelegateCommand(
                 () =>
                 {
