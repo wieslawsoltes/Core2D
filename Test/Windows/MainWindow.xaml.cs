@@ -110,7 +110,6 @@ namespace Test.Windows
                             {
                                 pw = new PropertiesWindow() { Owner = this, DataContext = context };
                                 pw.Unloaded += (_s, _e) => pw = null;
-                                
                             }
                             pw.Show();
                         }
