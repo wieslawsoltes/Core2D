@@ -88,26 +88,26 @@ namespace Test2d
             {
                 if (this == renderer.SelectedShape)
                 {
-                    _point1.Draw(dc, renderer, _point1.X + dx, _point1.Y + dy);
-                    _point2.Draw(dc, renderer, _point2.X + dx, _point2.Y + dy);
-                    _point3.Draw(dc, renderer, _point3.X + dx, _point3.Y + dy);
-                    _point4.Draw(dc, renderer, _point4.X + dx, _point4.Y + dy);
+                    _point1.Draw(dc, renderer, dx, dy);
+                    _point2.Draw(dc, renderer, dx, dy);
+                    _point3.Draw(dc, renderer, dx, dy);
+                    _point4.Draw(dc, renderer, dx, dy);
                 }
                 else if (_point1 == renderer.SelectedShape)
                 {
-                    _point1.Draw(dc, renderer, _point1.X + dx, _point1.Y + dy);
+                    _point1.Draw(dc, renderer, dx, dy);
                 }
                 else if (_point2 == renderer.SelectedShape)
                 {
-                    _point2.Draw(dc, renderer, _point2.X + dx, _point2.Y + dy);
+                    _point2.Draw(dc, renderer, dx, dy);
                 }
                 else if (_point3 == renderer.SelectedShape)
                 {
-                    _point3.Draw(dc, renderer, _point3.X + dx, _point3.Y + dy);
+                    _point3.Draw(dc, renderer, dx, dy);
                 }
                 else if (_point4 == renderer.SelectedShape)
                 {
-                    _point4.Draw(dc, renderer, _point4.X + dx, _point4.Y + dy);
+                    _point4.Draw(dc, renderer, dx, dy);
                 }
             }
             

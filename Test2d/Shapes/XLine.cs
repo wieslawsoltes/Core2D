@@ -46,16 +46,16 @@ namespace Test2d
             {
                 if (this == renderer.SelectedShape)
                 {
-                    _start.Draw(dc, renderer, _start.X + dx, _start.Y + dy);
-                    _end.Draw(dc, renderer, _end.X + dx, _end.Y + dy);
+                    _start.Draw(dc, renderer, dx, dy);
+                    _end.Draw(dc, renderer, dx, dy);
                 }
                 else if (_start == renderer.SelectedShape)
                 {
-                    _start.Draw(dc, renderer, _start.X + dx, _start.Y + dy);
+                    _start.Draw(dc, renderer, dx, dy);
                 }
                 else if (_end == renderer.SelectedShape)
                 {
-                    _end.Draw(dc, renderer, _end.X + dx, _end.Y + dy);
+                    _end.Draw(dc, renderer, dx, dy);
                 }
             }
             
@@ -63,8 +63,8 @@ namespace Test2d
             {
                 if (renderer.SelectedShapes.Contains(this))
                 {
-                    _start.Draw(dc, renderer, _start.X + dx, _start.Y + dy);
-                    _end.Draw(dc, renderer, _end.X + dx, _end.Y + dy);
+                    _start.Draw(dc, renderer, dx, dy);
+                    _end.Draw(dc, renderer, dx, dy);
                 }
             }
         }
