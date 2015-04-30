@@ -8,6 +8,7 @@ namespace Test2d
     {
         None,
         Selection,
+        Point,
         Line,
         Rectangle,
         Ellipse,
