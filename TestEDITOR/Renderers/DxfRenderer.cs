@@ -176,23 +176,12 @@ namespace TestDXF
                     PlotStyleNameHandle = "0"
                 });
             }
-            
-            layers.Items.Add(new DxfLayer(_version, NextHandle())
-            {
-                Name = container.TemplateLayer.Name,
-                LayerStandardFlags = DxfLayerStandardFlags.Default,
-                Color = DxfDefaultColors.Default.ToDxfColor(),
-                LineType = "Continuous",
-                PlottingFlag = true,
-                LineWeight = DxfLineWeight.LnWtByLwDefault,
-                PlotStyleNameHandle = "0"
-            });
-            
-            foreach (var layer in container.Layers) 
+
+            if (container.TemplateLayer.IsVisible)
             {
                 layers.Items.Add(new DxfLayer(_version, NextHandle())
                 {
-                    Name = layer.Name,
+                    Name = container.TemplateLayer.Name,
                     LayerStandardFlags = DxfLayerStandardFlags.Default,
                     Color = DxfDefaultColors.Default.ToDxfColor(),
                     LineType = "Continuous",
@@ -200,6 +189,23 @@ namespace TestDXF
                     LineWeight = DxfLineWeight.LnWtByLwDefault,
                     PlotStyleNameHandle = "0"
                 });
+            }
+            
+            foreach (var layer in container.Layers) 
+            {
+                if (layer.IsVisible)
+                {
+                    layers.Items.Add(new DxfLayer(_version, NextHandle())
+                    {
+                        Name = layer.Name,
+                        LayerStandardFlags = DxfLayerStandardFlags.Default,
+                        Color = DxfDefaultColors.Default.ToDxfColor(),
+                        LineType = "Continuous",
+                        PlottingFlag = true,
+                        LineWeight = DxfLineWeight.LnWtByLwDefault,
+                        PlotStyleNameHandle = "0"
+                    });
+                }
             }
         }
 
