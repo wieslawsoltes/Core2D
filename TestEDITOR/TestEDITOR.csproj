@@ -94,6 +94,8 @@
     <Compile Include="EditorContext.cs" />
     <Compile Include="Renderers\PdfRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Roslyn\ScriptDirectory.cs" />
+    <Compile Include="Roslyn\ScriptFile.cs" />
     <Compile Include="Roslyn\ScriptGlobals.cs" />
   </ItemGroup>
   <ItemGroup>
