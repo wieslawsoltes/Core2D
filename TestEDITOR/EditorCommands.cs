@@ -38,6 +38,7 @@ namespace TestEDITOR
 
         public ICommand DefaultIsFilledCommand { get; set; }
         public ICommand SnapToGridCommand { get; set; }
+        public ICommand TryToConnectCommand { get; set; }
 
         public ICommand AddLayerCommand { get; set; }
         public ICommand RemoveLayerCommand { get; set; }
