@@ -257,65 +257,146 @@ namespace Test2d
         public static IEnumerable<XPoint> GetPoints(IEnumerable<BaseShape> shapes)
         {
             if (shapes == null)
+            {
                 yield break;
+            }
+
             foreach (var shape in shapes)
             {
                 if (shape is XPoint)
                 {
-                    yield return shape as XPoint;
+                    var point = shape as XPoint;
+
+                    if (!point.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return shape as XPoint;
+                    }
                 }
                 else if (shape is XLine)
                 {
                     var line = shape as XLine;
-                    yield return line.Start;
-                    yield return line.End;
+
+                    if (!line.Start.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return line.Start;
+                    }
+
+                    if (!line.End.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return line.End;
+                    }
                 }
                 else if (shape is XRectangle)
                 {
                     var rectangle = shape as XRectangle;
-                    yield return rectangle.TopLeft;
-                    yield return rectangle.BottomRight;
+
+                    if (!rectangle.TopLeft.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return rectangle.TopLeft; 
+                    }
+
+                    if (!rectangle.BottomRight.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return rectangle.BottomRight; 
+                    }
                 }
                 else if (shape is XEllipse)
                 {
                     var ellipse = shape as XEllipse;
-                    yield return ellipse.TopLeft;
-                    yield return ellipse.BottomRight;
+
+                    if (!ellipse.TopLeft.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return ellipse.TopLeft; 
+                    }
+
+                    if (!ellipse.BottomRight.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return ellipse.BottomRight; 
+                    }
                 }
                 else if (shape is XArc)
                 {
                     var arc = shape as XArc;
-                    yield return arc.Point1;
-                    yield return arc.Point2;
+
+                    if (!arc.Point1.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return arc.Point1; 
+                    }
+
+                    if (!arc.Point2.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return arc.Point2; 
+                    }
                 }
                 else if (shape is XBezier)
                 {
                     var bezier = shape as XBezier;
-                    yield return bezier.Point1;
-                    yield return bezier.Point2;
-                    yield return bezier.Point3;
-                    yield return bezier.Point4;
+
+                    if (!bezier.Point1.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return bezier.Point1; 
+                    }
+
+                    if (!bezier.Point2.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return bezier.Point2; 
+                    }
+
+                    if (!bezier.Point3.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return bezier.Point3; 
+                    }
+
+                    if (!bezier.Point4.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return bezier.Point4; 
+                    }
                 }
                 else if (shape is XQBezier)
                 {
                     var qbezier = shape as XQBezier;
-                    yield return qbezier.Point1;
-                    yield return qbezier.Point2;
-                    yield return qbezier.Point3;
+
+                    if (!qbezier.Point1.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return qbezier.Point1; 
+                    }
+
+                    if (!qbezier.Point2.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return qbezier.Point2; 
+                    }
+
+                    if (!qbezier.Point3.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return qbezier.Point3; 
+                    }
                 }
                 else if (shape is XText)
                 {
                     var text = shape as XText;
-                    yield return text.TopLeft;
-                    yield return text.BottomRight;
+
+                    if (!text.TopLeft.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return text.TopLeft; 
+                    }
+
+                    if (!text.BottomRight.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return text.BottomRight; 
+                    }
                 }
                 else if (shape is XGroup)
                 {
                     var group = shape as XGroup;
+
                     foreach (var point in GetPoints(group.Shapes))
                     {
-                        yield return point;
+                        if (!point.State.HasFlag(ShapeState.Connector))
+                        {
+                            yield return point; 
+                        }
                     }
+
                     foreach (var point in group.Connectors)
                     {
                         yield return point;
@@ -1572,7 +1653,9 @@ namespace Test2d
             {
                 if (shape is XPoint)
                 {
-                    group.Connectors.Add(shape as XPoint);
+                    var point = shape as XPoint;
+                    point.State |= ShapeState.Connector;
+                    group.Connectors.Add(point);
                 }
                 else
                 {
