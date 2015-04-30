@@ -351,7 +351,17 @@ namespace Test2d
                 }
                 else if (shape is XGroup)
                 {
-                    var result = HitTest((shape as XGroup).Shapes, p, treshold);
+                    var group = shape as XGroup;
+
+                    foreach (var connector in group.Connectors)
+                    {
+                        if (GetPointBounds(connector, treshold).Contains(p))
+                        {
+                            return connector;
+                        }
+                    }
+
+                    var result = HitTest(group.Shapes, p, treshold);
                     if (result != null)
                     {
                         return shape;
