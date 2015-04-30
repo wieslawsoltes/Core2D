@@ -324,10 +324,11 @@ namespace TestEDITOR
 #else
             _rootScriptsPath = "Scripts";
 #endif
-
-            UpdateScripts();
-
-            InitializeScriptsWatcher();
+            if (System.IO.Directory.Exists(_rootScriptsPath))
+            {
+                UpdateScripts();
+                InitializeScriptsWatcher();
+            }
         }
 
         private void UpdateScripts()
