@@ -17,7 +17,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Test2d;
 using TestEDITOR;
-using TestWPF;
 
 namespace Test.Windows
 {
@@ -122,30 +121,24 @@ namespace Test.Windows
             
             Drop += 
                 (s, e) =>
-            {
-                if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 {
-                    try
+                    if (e.Data.GetDataPresent(DataFormats.FileDrop))
                     {
-                        var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                        if (files != null && files.Length == 1)
+                        try
                         {
-                            string path = files[0];
-                            if (!string.IsNullOrEmpty(path))
+                            var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                            if (files != null && files.Length == 1)
                             {
-                                context.Open(path);
-                                e.Handled = true;
+                                string path = files[0];
+                                if (!string.IsNullOrEmpty(path))
+                                {
+                                    context.Open(path);
+                                    e.Handled = true;
+                                }
                             }
                         }
+                        catch { }
                     }
-                    catch { }
-                }
-            };
-         
-            Loaded +=
-                (s, e) =>
-                {
-                    //Demo.All(_context.Editor.Container, 10);
                 };
 
             DataContext = context;
