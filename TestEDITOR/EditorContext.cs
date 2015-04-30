@@ -148,6 +148,12 @@ namespace TestEDITOR
                     _editor.CurrentTool = Tool.Selection;
                 });
 
+            _commands.ToolPointCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.CurrentTool = Tool.Point;
+                });
+
             _commands.ToolLineCommand = new DelegateCommand(
                 () =>
                 {
