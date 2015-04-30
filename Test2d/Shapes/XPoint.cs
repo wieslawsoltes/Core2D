@@ -55,7 +55,7 @@ namespace Test2d
             {
                 if (State.HasFlag(ShapeState.Visible))
                 {
-                    _shape.Draw(dc, renderer, dx, dy);
+                    _shape.Draw(dc, renderer, X + dx, Y + dy);
                 }
                 
                 //if (renderer.SelectedShape != null)

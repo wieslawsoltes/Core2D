@@ -52,16 +52,16 @@ namespace Test2d
                     {
                         foreach (var connector in Connectors)
                         {
-                            connector.Draw(dc, renderer, connector.X + dx, connector.Y + dy);
+                            connector.Draw(dc, renderer, dx, dy);
                         }
                         
-                        foreach (var connector in Connectors)
-                        {
-                            if (connector.Shape != null)
-                            {
-                                connector.Shape.Draw(dc, renderer, connector.X + dx, connector.Y + dy);
-                            }
-                        }
+                        //foreach (var connector in Connectors)
+                        //{
+                        //    if (connector.Shape != null)
+                        //    {
+                        //        connector.Shape.Draw(dc, renderer, connector.X + dx, connector.Y + dy);
+                        //    }
+                        //}
                     }
                 }
                 
@@ -71,16 +71,16 @@ namespace Test2d
                     {
                         foreach (var connector in Connectors)
                         {
-                            connector.Draw(dc, renderer, connector.X + dx, connector.Y + dy);
+                            connector.Draw(dc, renderer, dx, dy);
                         }
                         
-                        foreach (var connector in Connectors)
-                        {
-                            if (connector.Shape != null)
-                            {
-                                connector.Shape.Draw(dc, renderer, connector.X + dx, connector.Y + dy);
-                            }
-                        }
+                        //foreach (var connector in Connectors)
+                        //{
+                        //    if (connector.Shape != null)
+                        //    {
+                        //        connector.Shape.Draw(dc, renderer, connector.X + dx, connector.Y + dy);
+                        //    }
+                        //}
                     }
                 }
             }

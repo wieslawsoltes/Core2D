@@ -68,14 +68,12 @@
                      TextAlignment="Center" 
                      VerticalAlignment="Center">
             </TextBox>
-            <!--
             <Expander Header="Shape" IsExpanded="False"
                       Grid.Row="2" 
                       Grid.Column="0" 
                       Grid.ColumnSpan="3">
                 <ContentControl Content="{Binding Shape}"/>
             </Expander>
-            -->
         </Grid>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XLine}">
@@ -391,6 +389,27 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                     <ContentControl Content="{Binding ElementName=shapesListBox, Path=SelectedItem}" 
+                                    Grid.Row="1" Margin="2">
+                    </ContentControl>
+                </Grid>
+            </Expander>
+            <Expander Header="Connectors" IsExpanded="False">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="connectorsListBox"
+                             ItemsSource="{Binding Connectors}"
+                             BorderBrush="{x:Null}"
+                             Grid.Row="0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" Margin="0,5,0,5"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <ContentControl Content="{Binding ElementName=connectorsListBox, Path=SelectedItem}" 
                                     Grid.Row="1" Margin="2">
                     </ContentControl>
                 </Grid>

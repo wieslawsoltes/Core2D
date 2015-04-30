@@ -316,6 +316,10 @@ namespace Test2d
                     {
                         yield return point;
                     }
+                    foreach (var point in group.Connectors)
+                    {
+                        yield return point;
+                    }
                 }
             }
         }
@@ -572,6 +576,11 @@ namespace Test2d
                         SelectionLeftDown(x, y);
                     }
                     break;
+                case Tool.Point:
+                    {
+                        PointLeftDown(sx, sy);
+                    }
+                    break;
                 case Tool.Line:
                     {
                         LineLeftDown(sx, sy);
@@ -623,6 +632,8 @@ namespace Test2d
                         SelectionLeftUp(x, y);
                     }
                     break;
+                case Tool.Point:
+                    break;
                 case Tool.Line:
                     break;
                 case Tool.Rectangle:
@@ -655,6 +666,11 @@ namespace Test2d
                 case Tool.None:
                     break;
                 case Tool.Selection:
+                    break;
+                case Tool.Point:
+                    {
+                        PointRightDown(sx, sy);
+                    }
                     break;
                 case Tool.Line:
                     {
@@ -704,6 +720,8 @@ namespace Test2d
                     break;
                 case Tool.Selection:
                     break;
+                case Tool.Point:
+                    break;
                 case Tool.Line:
                     break;
                 case Tool.Rectangle:
@@ -732,6 +750,11 @@ namespace Test2d
                 case Tool.Selection:
                     {
                         SelectionMove(x, y);
+                    }
+                    break;
+                case Tool.Point:
+                    {
+                        PointMove(sx, sy);
                     }
                     break;
                 case Tool.Line:
@@ -847,6 +870,23 @@ namespace Test2d
                         CurrentState = State.None;
                         
                         TryToSelectShapes(_container, rectangle);
+                    }
+                    break;
+            }
+        }
+
+        private void PointLeftDown(double sx, double sy)
+        {
+            switch (CurrentState)
+            {
+                case State.None:
+                    {
+                        //var ellipse = XEllipse.Create(-3, -3, 3, 3, _container.CurrentStyle, null, true, "");
+                        //var point = XPoint.Create(sx, sy, ellipse);
+                        //_container.CurrentLayer.Shapes.Add(point);
+                        _shape = XPoint.Create(sx, sy, _container.PointShape);
+                        _container.CurrentLayer.Shapes.Add(_shape);
+                        _container.Invalidate();
                     }
                     break;
             }
@@ -1176,7 +1216,16 @@ namespace Test2d
                     break;
             }
         }
- 
+
+        private void PointRightDown(double sx, double sy)
+        {
+            switch (CurrentState)
+            {
+                case State.None:
+                    break;
+            }
+        }
+
         private void LineRightDown(double sx, double sy)
         {
             switch (CurrentState)
@@ -1312,6 +1361,15 @@ namespace Test2d
                         rectangle.BottomRight.Y = sy;
                         _container.WorkingLayer.Invalidate();
                     }
+                    break;
+            }
+        }
+
+        private void PointMove(double sx, double sy)
+        {
+            switch (CurrentState)
+            {
+                case State.None:
                     break;
             }
         }
@@ -1506,36 +1564,43 @@ namespace Test2d
             }
         }
 
-        public void GroupSelected()
+        public void Group(IEnumerable<BaseShape> shapes, Layer layer, string name)
         {
-            if (_renderer.SelectedShapes != null)
-            {
-                var group = XGroup.Create("g");
-                var layer = Container.CurrentLayer;
+            var group = XGroup.Create(name);
 
-                foreach (var shape in _renderer.SelectedShapes)
+            foreach (var shape in shapes)
+            {
+                if (shape is XPoint)
+                {
+                    group.Connectors.Add(shape as XPoint);
+                }
+                else
                 {
                     group.Shapes.Add(shape);
-                    layer.Shapes.Remove(shape);
                 }
 
-                layer.Shapes.Add(group);
-                layer.Invalidate();
-            }
-        }
-
-        public void GroupCurrentLayer()
-        {
-            var group = XGroup.Create("g");
-            var layer = Container.CurrentLayer;
-            foreach (var shape in layer.Shapes.ToList())
-            {
-                group.Shapes.Add(shape);
                 layer.Shapes.Remove(shape);
             }
 
             layer.Shapes.Add(group);
             layer.Invalidate();
+        }
+
+        public void GroupSelected()
+        {
+            if (_renderer.SelectedShapes != null)
+            {
+                Group(_renderer.SelectedShapes, Container.CurrentLayer, "g");
+            }
+        }
+
+        public void GroupCurrentLayer()
+        {
+            var layer = Container.CurrentLayer;
+            if (layer.Shapes.Count > 0)
+            {
+                Group(layer.Shapes.ToList(), layer, "g");
+            }
         }
 
         public void MoveSelection(double sx, double sy)
