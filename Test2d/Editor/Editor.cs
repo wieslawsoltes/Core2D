@@ -15,18 +15,20 @@ namespace Test2d
         private Container _container;
         private IRenderer _renderer;
         private BaseShape _shape;
-        private Tool _currentTool;
-        private State _currentState;
-        private bool _defaultIsFilled;
-        private bool _snapToGrid;
-        private double _snapX;
-        private double _snapY;
+        private Tool _currentTool = Tool.Selection;
+        private State _currentState = State.None;
+        private bool _defaultIsFilled = false;
+        private bool _snapToGrid = true;
+        private double _snapX = 15.0;
+        private double _snapY = 15.0;
         private ShapeStyle _selectionStyle;
         private bool _isContextMenu;
-        private bool _enableObserver;
+        private bool _enableObserver = true;
         private Observer _observer;
         private double _startX;
         private double _startY;
+        private double _hitTreshold = 6.0;
+        private bool _tryToConnect = true;
         
         public Container Container
         {
@@ -184,6 +186,32 @@ namespace Test2d
             }
         }
 
+        public double HitTreshold
+        {
+            get { return _hitTreshold; }
+            set
+            {
+                if (value != _hitTreshold)
+                {
+                    _hitTreshold = value;
+                    Notify("HitTreshold");
+                }
+            }
+        }
+
+        public bool TryToConnect
+        {
+            get { return _tryToConnect; }
+            set
+            {
+                if (value != _tryToConnect)
+                {
+                    _tryToConnect = value;
+                    Notify("TryToConnect");
+                }
+            }
+        }
+
         public static Editor Create(Container container, IRenderer renderer)
         {
             var editor = new Editor()
@@ -194,7 +222,9 @@ namespace Test2d
                 DefaultIsFilled = false,
                 CurrentTool = Tool.Selection,
                 CurrentState = State.None,
-                EnableObserver = true
+                EnableObserver = true,
+                HitTreshold = 6.0,
+                TryToConnect = true
             };
 
             editor.SelectionStyle = 
@@ -224,11 +254,85 @@ namespace Test2d
             return r >= snap / 2.0 ? value + snap - r : value - r;
         }
 
-        public bool HitTest(Container container, XRectangle rectangle)
+        public static IEnumerable<XPoint> GetPoints(IEnumerable<BaseShape> shapes)
+        {
+            if (shapes == null)
+                yield break;
+            foreach (var shape in shapes)
+            {
+                if (shape is XPoint)
+                {
+                    yield return shape as XPoint;
+                }
+                else if (shape is XLine)
+                {
+                    var line = shape as XLine;
+                    yield return line.Start;
+                    yield return line.End;
+                }
+                else if (shape is XRectangle)
+                {
+                    var rectangle = shape as XRectangle;
+                    yield return rectangle.TopLeft;
+                    yield return rectangle.BottomRight;
+                }
+                else if (shape is XEllipse)
+                {
+                    var ellipse = shape as XEllipse;
+                    yield return ellipse.TopLeft;
+                    yield return ellipse.BottomRight;
+                }
+                else if (shape is XArc)
+                {
+                    var arc = shape as XArc;
+                    yield return arc.Point1;
+                    yield return arc.Point2;
+                }
+                else if (shape is XBezier)
+                {
+                    var bezier = shape as XBezier;
+                    yield return bezier.Point1;
+                    yield return bezier.Point2;
+                    yield return bezier.Point3;
+                    yield return bezier.Point4;
+                }
+                else if (shape is XQBezier)
+                {
+                    var qbezier = shape as XQBezier;
+                    yield return qbezier.Point1;
+                    yield return qbezier.Point2;
+                    yield return qbezier.Point3;
+                }
+                else if (shape is XText)
+                {
+                    var text = shape as XText;
+                    yield return text.TopLeft;
+                    yield return text.BottomRight;
+                }
+                else if (shape is XGroup)
+                {
+                    var group = shape as XGroup;
+                    foreach (var point in GetPoints(group.Shapes))
+                    {
+                        yield return point;
+                    }
+                }
+            }
+        }
+
+        public static void Move(IEnumerable<XPoint> points, double dx, double dy)
+        {
+            foreach (var point in points)
+            {
+                point.Move(dx, dy);
+            }
+        }
+
+        public bool TryToSelectShapes(Container container, XRectangle rectangle)
         {
             var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
-            
-            var result = ShapeBounds.HitTest(container, rect, 6.0);
+
+            var result = ShapeBounds.HitTest(container, rect, _hitTreshold);
             if (result != null)
             {
                 if (result.Count > 0)
@@ -248,9 +352,9 @@ namespace Test2d
             return false;
         }
         
-        public bool HitTest(Container container, double x, double y)
+        public bool TryToSelectShape(Container container, double x, double y)
         {
-            var result = ShapeBounds.HitTest(container, new Vector2(x, y), 6.0);
+            var result = ShapeBounds.HitTest(container, new Vector2(x, y), _hitTreshold);
             if (result != null)
             {
                 container.CurrentShape = result;
@@ -266,7 +370,160 @@ namespace Test2d
             container.CurrentLayer.Invalidate();
             return false;
         }
-        
+
+        public void TryToConnectStart(XLine line, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                line.Start = result as XPoint;
+            }
+        }
+
+        public void TryToConnectEnd(XLine line, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                line.End = result as XPoint;
+            }
+        }
+
+        public void TryToConnectTopLeft(XRectangle rectangle, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                rectangle.TopLeft = result as XPoint;
+            }
+        }
+
+        public void TryToConnectBottomRight(XRectangle rectangle, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                rectangle.BottomRight = result as XPoint;
+            }
+        }
+
+        public void TryToConnectTopLeft(XEllipse ellipse, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                ellipse.TopLeft = result as XPoint;
+            }
+        }
+
+        public void TryToConnectBottomRight(XEllipse ellipse, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                ellipse.BottomRight = result as XPoint;
+            }
+        }
+
+        public void TryToConnectPoint1(XArc arc, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                arc.Point1 = result as XPoint;
+            }
+        }
+
+        public void TryToConnectPoint2(XArc arc, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                arc.Point2 = result as XPoint;
+            }
+        }
+
+        public void TryToConnectPoint1(XBezier bezier, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                bezier.Point1 = result as XPoint;
+            }
+        }
+
+        public void TryToConnectPoint2(XBezier bezier, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                bezier.Point2 = result as XPoint;
+            }
+        }
+
+        public void TryToConnectPoint3(XBezier bezier, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                bezier.Point3 = result as XPoint;
+            }
+        }
+
+        public void TryToConnectPoint4(XBezier bezier, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                bezier.Point4 = result as XPoint;
+            }
+        }
+
+        public void TryToConnectPoint1(XQBezier qbezier, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                qbezier.Point1 = result as XPoint;
+            }
+        }
+
+        public void TryToConnectPoint2(XQBezier qbezier, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                qbezier.Point2 = result as XPoint;
+            }
+        }
+
+        public void TryToConnectPoint3(XQBezier qbezier, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                qbezier.Point3 = result as XPoint;
+            }
+        }
+
+        public void TryToConnectTopLeft(XText text, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                text.TopLeft = result as XPoint;
+            }
+        }
+
+        public void TryToConnectBottomRight(XText text, double sx, double sy)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                text.BottomRight = result as XPoint;
+            }
+        }
+
         public bool IsLeftDownAvailable()
         {
             return Container.CurrentLayer != null
@@ -524,7 +781,7 @@ namespace Test2d
                         if (_renderer.SelectedShape == null 
                             && _renderer.SelectedShapes != null)
                         {
-                            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), 6.0);
+                            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
                             if (result != null)
                             {
                                 _startX = SnapToGrid ? Snap(sx, SnapX) : sx;
@@ -535,7 +792,7 @@ namespace Test2d
                             }
                         }
                         
-                        if (HitTest(_container, sx, sy))
+                        if (TryToSelectShape(_container, sx, sy))
                         {
                             _startX = SnapToGrid ? Snap(sx, SnapX) : sx;
                             _startY = SnapToGrid ? Snap(sy, SnapY) : sy;
@@ -589,7 +846,7 @@ namespace Test2d
                         _container.WorkingLayer.Invalidate();
                         CurrentState = State.None;
                         
-                        HitTest(_container, rectangle);
+                        TryToSelectShapes(_container, rectangle);
                     }
                     break;
             }
@@ -605,6 +862,10 @@ namespace Test2d
                             sx, sy,
                             _container.CurrentStyle,
                             _container.PointShape);
+                        if (_tryToConnect)
+                        {
+                            TryToConnectStart(_shape as XLine, sx, sy);
+                        }
                         _container.WorkingLayer.Shapes.Add(_shape);
                         _container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
@@ -615,6 +876,10 @@ namespace Test2d
                         var line = _shape as XLine;
                         line.End.X = sx;
                         line.End.Y = sy;
+                        if (_tryToConnect)
+                        {
+                            TryToConnectEnd(_shape as XLine, sx, sy); 
+                        }
                         _container.WorkingLayer.Shapes.Remove(_shape);
                         _container.CurrentLayer.Shapes.Add(_shape);
                         _container.Invalidate();
@@ -635,6 +900,10 @@ namespace Test2d
                             _container.CurrentStyle,
                             _container.PointShape,
                             DefaultIsFilled);
+                        if (_tryToConnect)
+                        {
+                            TryToConnectTopLeft(_shape as XRectangle, sx, sy); 
+                        }
                         _container.WorkingLayer.Shapes.Add(_shape);
                         _container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
@@ -645,6 +914,10 @@ namespace Test2d
                         var rectangle = _shape as XRectangle;
                         rectangle.BottomRight.X = sx;
                         rectangle.BottomRight.Y = sy;
+                        if (_tryToConnect)
+                        {
+                            TryToConnectBottomRight(_shape as XRectangle, sx, sy); 
+                        }
                         _container.WorkingLayer.Shapes.Remove(_shape);
                         _container.CurrentLayer.Shapes.Add(_shape);
                         _container.Invalidate();
@@ -665,6 +938,10 @@ namespace Test2d
                             _container.CurrentStyle,
                             _container.PointShape,
                             DefaultIsFilled);
+                        if (_tryToConnect)
+                        {
+                            TryToConnectTopLeft(_shape as XEllipse, sx, sy);
+                        }
                         _container.WorkingLayer.Shapes.Add(_shape);
                         _container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
@@ -675,6 +952,10 @@ namespace Test2d
                         var ellipse = _shape as XEllipse;
                         ellipse.BottomRight.X = sx;
                         ellipse.BottomRight.Y = sy;
+                        if (_tryToConnect)
+                        {
+                            TryToConnectBottomRight(_shape as XEllipse, sx, sy);
+                        }
                         _container.WorkingLayer.Shapes.Remove(_shape);
                         _container.CurrentLayer.Shapes.Add(_shape);
                         _container.Invalidate();
@@ -695,6 +976,10 @@ namespace Test2d
                             _container.CurrentStyle,
                             _container.PointShape,
                             DefaultIsFilled);
+                        if (_tryToConnect)
+                        {
+                            TryToConnectPoint1(_shape as XArc, sx, sy);
+                        }
                         _container.WorkingLayer.Shapes.Add(_shape);
                         _container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
@@ -705,6 +990,10 @@ namespace Test2d
                         var arc = _shape as XArc;
                         arc.Point2.X = sx;
                         arc.Point2.Y = sy;
+                        if (_tryToConnect)
+                        {
+                            TryToConnectPoint2(_shape as XArc, sx, sy);
+                        }
                         _container.WorkingLayer.Shapes.Remove(_shape);
                         _container.CurrentLayer.Shapes.Add(_shape);
                         _container.Invalidate();
@@ -725,6 +1014,10 @@ namespace Test2d
                             _container.CurrentStyle,
                             _container.PointShape,
                             DefaultIsFilled);
+                        if (_tryToConnect)
+                        {
+                            TryToConnectPoint1(_shape as XBezier, sx, sy);
+                        }
                         _container.WorkingLayer.Shapes.Add(_shape);
                         _container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
@@ -739,6 +1032,10 @@ namespace Test2d
                         bezier.Point3.Y = sy;
                         bezier.Point4.X = sx;
                         bezier.Point4.Y = sy;
+                        if (_tryToConnect)
+                        {
+                            TryToConnectPoint4(_shape as XBezier, sx, sy);
+                        }
                         _container.WorkingLayer.Invalidate();
                         CurrentState = State.Two;
                     }
@@ -750,6 +1047,10 @@ namespace Test2d
                         bezier.Point2.Y = sy;
                         bezier.Point3.X = sx;
                         bezier.Point3.Y = sy;
+                        if (_tryToConnect)
+                        {
+                            TryToConnectPoint3(_shape as XBezier, sx, sy);
+                        }
                         _container.WorkingLayer.Invalidate();
                         CurrentState = State.Three;
                     }
@@ -759,6 +1060,10 @@ namespace Test2d
                         var bezier = _shape as XBezier;
                         bezier.Point2.X = sx;
                         bezier.Point2.Y = sy;
+                        if (_tryToConnect)
+                        {
+                            TryToConnectPoint2(_shape as XBezier, sx, sy);
+                        }
                         _container.WorkingLayer.Shapes.Remove(_shape);
                         _container.CurrentLayer.Shapes.Add(_shape);
                         _container.Invalidate();
@@ -779,6 +1084,10 @@ namespace Test2d
                             _container.CurrentStyle,
                             _container.PointShape,
                             DefaultIsFilled);
+                        if (_tryToConnect)
+                        {
+                            TryToConnectPoint1(_shape as XQBezier, sx, sy);
+                        }
                         _container.WorkingLayer.Shapes.Add(_shape);
                         _container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
@@ -791,6 +1100,10 @@ namespace Test2d
                         qbezier.Point2.Y = sy;
                         qbezier.Point3.X = sx;
                         qbezier.Point3.Y = sy;
+                        if (_tryToConnect)
+                        {
+                            TryToConnectPoint3(_shape as XQBezier, sx, sy);
+                        }
                         _container.WorkingLayer.Invalidate();
                         CurrentState = State.Two;
                     }
@@ -800,6 +1113,10 @@ namespace Test2d
                         var qbezier = _shape as XQBezier;
                         qbezier.Point2.X = sx;
                         qbezier.Point2.Y = sy;
+                        if (_tryToConnect)
+                        {
+                            TryToConnectPoint2(_shape as XQBezier, sx, sy);
+                        }
                         _container.WorkingLayer.Shapes.Remove(_shape);
                         _container.CurrentLayer.Shapes.Add(_shape);
                         _container.Invalidate();
@@ -821,6 +1138,10 @@ namespace Test2d
                             _container.PointShape,
                             "Text",
                             DefaultIsFilled);
+                        if (_tryToConnect)
+                        {
+                            TryToConnectTopLeft(_shape as XText, sx, sy);
+                        }
                         _container.WorkingLayer.Shapes.Add(_shape);
                         _container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
@@ -831,6 +1152,10 @@ namespace Test2d
                         var text = _shape as XText;
                         text.BottomRight.X = sx;
                         text.BottomRight.Y = sy;
+                        if (_tryToConnect)
+                        {
+                            TryToConnectBottomRight(_shape as XText, sx, sy);
+                        }
                         _container.WorkingLayer.Shapes.Remove(_shape);
                         _container.CurrentLayer.Shapes.Add(_shape);
                         _container.Invalidate();
@@ -846,7 +1171,7 @@ namespace Test2d
             {
                 case State.None:
                     {
-                        IsContextMenu = HitTest(_container, sx, sy) ? true : false;
+                        IsContextMenu = TryToSelectShape(_container, sx, sy) ? true : false;
                     }
                     break;
             }
@@ -1226,15 +1551,21 @@ namespace Test2d
 
             if (_renderer.SelectedShape != null)
             {
-                _renderer.SelectedShape.Move(dx, dy);
+                //_renderer.SelectedShape.Move(dx, dy);
+                Move(
+                    GetPoints(Enumerable.Repeat(_renderer.SelectedShape, 1)).Distinct(), 
+                    dx, dy);
             }
 
             if (_renderer.SelectedShapes != null)
             {
-                foreach (var shape in _renderer.SelectedShapes)
-                {
-                    shape.Move(dx, dy);
-                }
+                //foreach (var shape in _renderer.SelectedShapes)
+                //{
+                //    shape.Move(dx, dy);
+                //}
+                Move(
+                    GetPoints(_renderer.SelectedShapes).Distinct(), 
+                    dx, dy);
             }
         }
 
