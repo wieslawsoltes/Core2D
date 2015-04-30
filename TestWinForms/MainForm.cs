@@ -228,6 +228,9 @@ namespace TestWinForms
                     case Keys.G:
                         (DataContext as EditorContext).Commands.SnapToGridCommand.Execute(null);
                         break;
+                    case Keys.C:
+                        (DataContext as EditorContext).Commands.TryToConnectCommand.Execute(null);
+                        break;
                 }
             };
         }
