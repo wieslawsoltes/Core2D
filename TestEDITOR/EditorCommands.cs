@@ -25,6 +25,7 @@ namespace TestEDITOR
 
         public ICommand ToolNoneCommand { get; set; }
         public ICommand ToolSelectionCommand { get; set; }
+        public ICommand ToolPointCommand { get; set; }
         public ICommand ToolLineCommand { get; set; }
         public ICommand ToolRectangleCommand { get; set; }
         public ICommand ToolEllipseCommand { get; set; }
