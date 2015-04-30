@@ -21,10 +21,10 @@ namespace TestWinForms
         {
             InitializeComponent();
 
-            Initialize();
+            InitializeContext();
         }
 
-        private void Initialize()
+        private void InitializeContext()
         {
             this.SetStyle(
                 ControlStyles.AllPaintingInWmPaint
@@ -48,6 +48,13 @@ namespace TestWinForms
             HandleMenuShortcutKeys(panel);
 
             HandleFileDialogs(panel);
+
+            FormClosing += (s, e) => DeInitializeContext();
+        }
+
+        private void DeInitializeContext()
+        {
+            (DataContext as EditorContext).Dispose();
         }
 
         private ContainerPanel InitializePanel()

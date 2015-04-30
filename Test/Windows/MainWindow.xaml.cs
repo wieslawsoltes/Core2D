@@ -141,9 +141,16 @@ namespace Test.Windows
                     }
                 };
 
+            Unloaded += (s, e) => DeInitializeContext();
+
             DataContext = context;
         }
-        
+
+        private void DeInitializeContext()
+        {
+            (DataContext as EditorContext).Dispose();
+        }
+
         public void Eval()
         {
             var dlg = new OpenFileDialog()
