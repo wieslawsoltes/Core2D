@@ -33,6 +33,7 @@ namespace Test.Windows
         {
             var context = new EditorContext();
             context.Initialize(this, WpfRenderer.Create());
+            context.InitializeSctipts();
             context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
 
             context.Commands.OpenCommand = new DelegateCommand(

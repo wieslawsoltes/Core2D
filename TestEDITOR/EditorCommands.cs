@@ -34,6 +34,7 @@ namespace TestEDITOR
         public ICommand ToolTextCommand { get; set; }
 
         public ICommand EvalCommand { get; set; }
+        public ICommand EvalScriptCommand { get; set; }
 
         public ICommand DefaultIsFilledCommand { get; set; }
         public ICommand SnapToGridCommand { get; set; }

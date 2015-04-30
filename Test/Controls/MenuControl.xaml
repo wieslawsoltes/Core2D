@@ -155,6 +155,24 @@
         <MenuItem Header="_Script">
             <MenuItem Header="_Evaluate..." Command="{Binding Commands.EvalCommand}" InputGestureText="F5"/>
         </MenuItem>
+        <MenuItem Header="S_cripts" ItemsSource="{Binding ScriptDirectories}">
+            <MenuItem.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Scripts}">
+                    <TextBlock Text="{Binding Name}"/>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                    <HierarchicalDataTemplate.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Command" Value="{Binding DataContext.Commands.EvalScriptCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                            <Setter Property="CommandParameter" Value="{Binding Path}"/>
+                        </Style>
+                    </HierarchicalDataTemplate.ItemContainerStyle>
+                </HierarchicalDataTemplate>
+            </MenuItem.ItemTemplate>
+        </MenuItem>
         <MenuItem Header="_Options">
             <MenuItem Header="Default is _Filled" 
                       IsCheckable="True" 

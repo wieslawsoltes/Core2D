@@ -23,6 +23,8 @@ namespace TestEDITOR
     {
         private EditorCommands _commands;
         private Editor _editor;
+        private string _rootScriptsPath;
+        private IList<ScriptDirectory> _scriptDirectories;
 
         public EditorCommands Commands
         {
@@ -48,6 +50,43 @@ namespace TestEDITOR
                     Notify("Editor");
                 }
             }
+        }
+
+        public string RootScriptsPath
+        {
+            get { return _rootScriptsPath; }
+            set
+            {
+                if (value != _rootScriptsPath)
+                {
+                    _rootScriptsPath = value;
+                    Notify("RootScriptsPath");
+                }
+            }
+        }
+
+        public IList<ScriptDirectory> ScriptDirectories
+        {
+            get { return _scriptDirectories; }
+            set
+            {
+                if (value != _scriptDirectories)
+                {
+                    _scriptDirectories = value;
+                    Notify("ScriptDirectories");
+                }
+            }
+        }
+
+        public void InitializeSctipts()
+        {
+            #if DEBUG
+            _rootScriptsPath = "../../../Scripts";
+            #else
+            _scriptsPath = "Scripts";
+            #endif
+
+            _scriptDirectories = ScriptDirectory.CreateScriptDirectories(_rootScriptsPath);
         }
 
         public void Initialize(IView view, IRenderer renderer)
@@ -159,6 +198,12 @@ namespace TestEDITOR
                 () =>
                 {
                     _editor.CurrentTool = Tool.Text;
+                });
+
+            _commands.EvalScriptCommand = new DelegateCommand<string>(
+                (path) =>
+                {
+                    Eval(path);
                 });
 
             _commands.DefaultIsFilledCommand = new DelegateCommand(
