@@ -88,6 +88,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ContainerControl.xaml.cs">
+      <DependentUpon>ContainerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ShapeControl.xaml.cs">
       <DependentUpon>ShapeControl.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -95,6 +98,8 @@
     <Compile Include="Controls\StyleControl.xaml.cs">
       <DependentUpon>StyleControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Renderers\WpfArc.cs" />
+    <Compile Include="Renderers\WpfRenderer.cs" />
     <Compile Include="Windows\ContainerWindow.xaml.cs">
       <DependentUpon>ContainerWindow.xaml</DependentUpon>
     </Compile>
@@ -114,8 +119,12 @@
     <Compile Include="Windows\StyleWindow.xaml.cs">
       <DependentUpon>StyleWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controls\Dictionaries\ShapeDictionary.xaml" />
-    <Page Include="Controls\Dictionaries\StyleDictionary.xaml" />
+    <Page Include="Controls\ContainerControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dictionaries\ShapeDictionary.xaml" />
+    <Page Include="Dictionaries\StyleDictionary.xaml" />
     <Page Include="Controls\LayersControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -223,10 +232,6 @@
     <ProjectReference Include="..\TestEDITOR\TestEDITOR.csproj">
       <Project>{6C5DFAB8-5747-42DF-8D8F-AC1922AE12AA}</Project>
       <Name>TestEDITOR</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TestWPF\TestWPF.csproj">
-      <Project>{a6e4a619-c1d8-4215-aeed-8f4839699d74}</Project>
-      <Name>TestWPF</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
