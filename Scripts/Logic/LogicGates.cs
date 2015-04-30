@@ -41,15 +41,19 @@ styles.Add(styleConnector);
     var connectorShape = XEllipse.Create(-3, -3, 3, 3, styleConnector, null, true, "");
     
     var cl = XPoint.Create(0, 15, connectorShape, "L");
+    cl.State |= ShapeState.Connector;
     g.Connectors.Add(cl);
     
     var cr = XPoint.Create(30, 15, connectorShape, "R");
+    cr.State |= ShapeState.Connector;
     g.Connectors.Add(cr);
     
     var ct = XPoint.Create(15, 0, connectorShape, "T");
+    ct.State |= ShapeState.Connector;
     g.Connectors.Add(ct);
     
     var cb = XPoint.Create(15, 30, connectorShape, "B");
+    cb.State |= ShapeState.Connector;
     g.Connectors.Add(cb);
     
     layer.Shapes.Add(g);
@@ -67,15 +71,19 @@ styles.Add(styleConnector);
     var connectorShape = XEllipse.Create(-3, -3, 3, 3, styleConnector, null, true, "");
     
     var cl = XPoint.Create(0, 15, connectorShape, "L");
+    cl.State |= ShapeState.Connector;
     g.Connectors.Add(cl);
     
     var cr = XPoint.Create(30, 15, connectorShape, "R");
+    cr.State |= ShapeState.Connector;
     g.Connectors.Add(cr);
     
     var ct = XPoint.Create(15, 0, connectorShape, "T");
+    ct.State |= ShapeState.Connector;
     g.Connectors.Add(ct);
     
     var cb = XPoint.Create(15, 30, connectorShape, "B");
+    cb.State |= ShapeState.Connector;
     g.Connectors.Add(cb);
     
     layer.Shapes.Add(g);
