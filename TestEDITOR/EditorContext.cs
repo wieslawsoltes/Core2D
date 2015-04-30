@@ -83,7 +83,7 @@ namespace TestEDITOR
             #if DEBUG
             _rootScriptsPath = "../../../Scripts";
             #else
-            _scriptsPath = "Scripts";
+            _rootScriptsPath = "Scripts";
             #endif
 
             _scriptDirectories = ScriptDirectory.CreateScriptDirectories(_rootScriptsPath);
