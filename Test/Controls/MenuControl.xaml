@@ -58,6 +58,20 @@
                 </MenuItem.Style>
             </MenuItem>
             <Separator/>
+            <MenuItem Header="_Point" Command="{Binding Commands.ToolPointCommand}" InputGestureText="P">
+                <MenuItem.Style>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="IsCheckable" Value="True"/>
+                        <Setter Property="IsChecked" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Point">
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.Style>
+            </MenuItem>
+            <Separator/>
             <MenuItem Header="_Line" Command="{Binding Commands.ToolLineCommand}" InputGestureText="L">
                 <MenuItem.Style>
                     <Style TargetType="MenuItem">

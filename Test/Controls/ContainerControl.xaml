@@ -13,6 +13,7 @@
         <KeyBinding Command="{Binding Commands.DeleteSelectedCommand}" Key="Delete" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolNoneCommand}" Key="N" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolSelectionCommand}" Key="S" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolPointCommand}" Key="P" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolLineCommand}" Key="L" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolRectangleCommand}" Key="R" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolEllipseCommand}" Key="E" Modifiers=""/>
