@@ -737,7 +737,7 @@ namespace TestDXF
             {
                 file.Classes = new DxfClasses(_version, NextHandle());
 
-                // classes.Classes.Add(new DxfClass(...));
+                // file.Classes.Add(new DxfClass(...));
 
                 // end of classes
             }
