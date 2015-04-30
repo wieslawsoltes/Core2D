@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -19,7 +20,7 @@ using TestPDF;
 
 namespace TestEDITOR
 {
-    public class EditorContext : ObservableObject
+    public class EditorContext : ObservableObject, IDisposable
     {
         private EditorCommands _commands;
         private Editor _editor;
@@ -76,17 +77,6 @@ namespace TestEDITOR
                     Notify("ScriptDirectories");
                 }
             }
-        }
-
-        public void InitializeSctipts()
-        {
-            #if DEBUG
-            _rootScriptsPath = "../../../Scripts";
-            #else
-            _rootScriptsPath = "Scripts";
-            #endif
-
-            _scriptDirectories = ScriptDirectory.CreateScriptDirectories(_rootScriptsPath);
         }
 
         public void Initialize(IView view, IRenderer renderer)
@@ -313,6 +303,61 @@ namespace TestEDITOR
         {
             _editor.Container.Clear();
             _editor.Container.Invalidate();
+        }
+
+        public void InitializeSctipts()
+        {
+#if DEBUG
+            _rootScriptsPath = "../../../Scripts";
+#else
+            _rootScriptsPath = "Scripts";
+#endif
+
+            UpdateScripts();
+
+            InitializeScriptsWatcher();
+        }
+
+        private void UpdateScripts()
+        {
+            try
+            {
+                ScriptDirectories = ScriptDirectory.CreateScriptDirectories(_rootScriptsPath);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+            }
+        }
+
+        private System.IO.FileSystemWatcher _watcher = null;
+
+        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+        private void InitializeScriptsWatcher()
+        {
+            _watcher = new System.IO.FileSystemWatcher();
+            _watcher.Path = _rootScriptsPath;
+            _watcher.Filter = "*.*";
+            _watcher.NotifyFilter =
+                System.IO.NotifyFilters.LastAccess
+                | System.IO.NotifyFilters.LastWrite
+                | System.IO.NotifyFilters.FileName
+                | System.IO.NotifyFilters.DirectoryName;
+            _watcher.IncludeSubdirectories = true;
+            _watcher.Filter = "*.*";
+            _watcher.Changed += (s, e) => UpdateScripts();
+            _watcher.Created += (s, e) => UpdateScripts();
+            _watcher.Deleted += (s, e) => UpdateScripts();
+            _watcher.Renamed += (s, e) => UpdateScripts();
+            _watcher.EnableRaisingEvents = true;
+        }
+
+        public void Dispose()
+        {
+            if (_watcher != null)
+            {
+                _watcher.Dispose();
+            }
         }
     }
 }
