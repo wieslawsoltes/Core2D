@@ -12,7 +12,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
-            <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Container.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+            <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Container.CurrentStyleGroup.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                       SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Expander}}}" 
                       Grid.Row="0" 
                       Grid.Column="0" 

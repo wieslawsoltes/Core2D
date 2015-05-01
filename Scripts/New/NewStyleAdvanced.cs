@@ -7,4 +7,4 @@ var endArrowStyle = ArrowStyle.Create(ArrowType.None, isFilled: false, radiusX: 
 var lineStyle = LineStyle.Create(startArrowStyle, endArrowStyle);
 var textStyle = TextStyle.Create(fontName: "Calibri", fontSize: 12.0, textHAlignment: TextHAlignment.Center, textVAlignment: TextVAlignment.Center);
 var style = ShapeStyle.Create(name, stroke, fill, thickness, lineStyle, textStyle);
-Context.Editor.Container.Styles.Add(style);
+Context.Editor.Container.CurrentStyleGroup.Styles.Add(style);

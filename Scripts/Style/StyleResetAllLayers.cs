@@ -10,7 +10,7 @@
     }
 }
 var layers = Context?.Editor?.Container?.Layers;
-var style = Context?.Editor?.Container?.CurrentStyle;
+var style = Context?.Editor?.Container?.CurrentStyleGroup?.CurrentStyle;
 foreach (var layer in layers)
 {
     SetStyle(layer?.Shapes, style);

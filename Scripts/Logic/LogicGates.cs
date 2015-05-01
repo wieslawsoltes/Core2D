@@ -1,6 +1,12 @@
 ﻿var c = Context.Editor.Container;
+var sg = c.StyleGroups.Where(x => x.Name == "Logic").FirstOrDefault();
+if (sg == null)
+{
+    sg = ShapeStyleGroup.Create("Logic");
+    c.StyleGroups.Add(sg);
+}
+var styles = sg.Styles;
 var layer = c.CurrentLayer;
-var styles = c.Styles;
 var ps = c.PointShape;
 
 var styleTextBig = ShapeStyle.Create(
@@ -28,6 +34,8 @@ var styleConnector = ShapeStyle.Create(
     null, 
     "Consolas", 12.0, TextHAlignment.Center, TextVAlignment.Center);
 styles.Add(styleConnector);
+
+sg.CurrentStyle = sg.Styles.FirstOrDefault();
 
 {
     var g = XGroup.Create("AND");
