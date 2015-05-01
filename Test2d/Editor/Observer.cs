@@ -58,6 +58,32 @@ namespace Test2d
 
         #region Handlers
 
+        private void StyleGroupsCollectionObserver(
+            object sender,
+            NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    Add(e.NewItems.Cast<ShapeStyleGroup>());
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    Debug("Style Group Replace");
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    Remove(e.OldItems.Cast<ShapeStyleGroup>());
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    Debug("Style Group Replace");
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    Debug("Style Group Reset");
+                    break;
+            }
+
+            _invalidateStyles();
+        }
+
         private void StylesCollectionObserver(
             object sender,
             NotifyCollectionChangedEventArgs e)
@@ -136,6 +162,18 @@ namespace Test2d
             _invalidateShapes();
         }
 
+        private void StyleGroupObserver(
+            object sender,
+            System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Debug(
+                "Style Group: " +
+                (sender is ShapeStyle ? (sender as ShapeStyle).Name : sender.GetType().ToString()) +
+                ", Property: " +
+                e.PropertyName);
+            _invalidateStyles();
+        }
+
         private void StyleObserver(
             object sender,
             System.ComponentModel.PropertyChangedEventArgs e)
@@ -178,10 +216,35 @@ namespace Test2d
 
         private void InitializeStyles(Container container)
         {
-            Add(container.Styles);
+            (container.StyleGroups as ObservableCollection<ShapeStyleGroup>)
+                .CollectionChanged += StyleGroupsCollectionObserver;
 
-            (container.Styles as ObservableCollection<ShapeStyle>)
+            foreach (var sg in container.StyleGroups)
+            {
+                Add(sg);
+            }
+        }
+
+        private void Add(ShapeStyleGroup sg)
+        {
+            Add(sg.Styles);
+
+            (sg.Styles as ObservableCollection<ShapeStyle>)
                 .CollectionChanged += StylesCollectionObserver;
+
+            sg.PropertyChanged += StyleGroupObserver;
+            Debug("Add Style Group: " + sg.Name);
+        }
+
+        private void Remove(ShapeStyleGroup sg)
+        {
+            Remove(sg.Styles);
+
+            (sg.Styles as ObservableCollection<ShapeStyle>)
+                .CollectionChanged -= StylesCollectionObserver;
+
+            sg.PropertyChanged -= StyleGroupObserver;
+            Debug("Remove Style Group: " + sg.Name);
         }
 
         private void Add(ShapeStyle style)
@@ -221,6 +284,22 @@ namespace Test2d
             foreach (var style in styles)
             {
                 Remove(style);
+            }
+        }
+
+        private void Add(IEnumerable<ShapeStyleGroup> sgs)
+        {
+            foreach (var sg in sgs)
+            {
+                Add(sg);
+            }
+        }
+
+        private void Remove(IEnumerable<ShapeStyleGroup> sgs)
+        {
+            foreach (var sg in sgs)
+            {
+                Remove(sg);
             }
         }
 
