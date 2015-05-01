@@ -1,7 +1,15 @@
-var styles = Context.Editor.Container.Styles;
+var c = Context.Editor.Container;
+var sg = c.StyleGroups.Where(x => x.Name == "Logic").FirstOrDefault();
+if (sg == null)
+{
+    sg = ShapeStyleGroup.Create("Logic");
+    c.StyleGroups.Add(sg);
+}
+var styles = sg.Styles;
 var radiusX = 5.0;
 var radiusY = 5.0;
 var thickness = 2.0;
+
 // wire
 {
     var name = "Wire";
@@ -50,3 +58,5 @@ var thickness = 2.0;
     var style = ShapeStyle.Create(name, stroke, fill, thickness, lineStyle, textStyle);
     styles.Add(style);
 }
+
+sg.CurrentStyle = sg.Styles.FirstOrDefault();
