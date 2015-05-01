@@ -43,7 +43,7 @@ Container Create(double width, double height, bool grid, PointShapeType pst)
         Width = width,
         Height = height,
         Layers = new ObservableCollection<Layer>(),
-        Styles = new ObservableCollection<ShapeStyle>()
+        StyleGroups = new ObservableCollection<ShapeStyleGroup>()
     };
 
     c.Layers.Add(Layer.Create("Layer1"));
@@ -56,17 +56,29 @@ Container Create(double width, double height, bool grid, PointShapeType pst)
     c.TemplateLayer = Layer.Create("Template");
     c.WorkingLayer = Layer.Create("Working");
 
-    c.Styles.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
-    c.Styles.Add(ShapeStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
-    c.Styles.Add(ShapeStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
-    c.Styles.Add(ShapeStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
-    c.Styles.Add(ShapeStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
+    // default styles group
+    var sgd = ShapeStyleGroup.Create("Default");
+    sgd.Styles.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
+    sgd.Styles.Add(ShapeStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
+    sgd.Styles.Add(ShapeStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
+    sgd.Styles.Add(ShapeStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
+    sgd.Styles.Add(ShapeStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
+    sgd.CurrentStyle = sgd.Styles.FirstOrDefault();
 
-    c.CurrentStyle = c.Styles.FirstOrDefault();
+    c.StyleGroups.Add(sgd);
+    c.CurrentStyleGroup = c.StyleGroups.FirstOrDefault();
+
+    // template styles group
+    var sgt = ShapeStyleGroup.Create("Template");
+    var pss = ShapeStyle.Create("PointShape", 255, 255, 0, 0, 255, 255, 0, 0, 2.0);
+    var gs = ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.0);
+    sgt.Styles.Add(pss);
+    sgt.Styles.Add(gs);
+    c.StyleGroups.Add(sgt);
+    sgt.CurrentStyle = sgt.Styles.FirstOrDefault();
 
     if (pst != PointShapeType.None)
     {
-        var pss = ShapeStyle.Create("PointShape", 255, 255, 0, 0, 255, 255, 0, 0, 2.0);
         switch(pst)
         {
             case PointShapeType.None:
@@ -91,9 +103,8 @@ Container Create(double width, double height, bool grid, PointShapeType pst)
     
     if (grid)
     {
-        var style = ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.0);
         var settings = LineGrid.Settings.Create(0, 0, width, height, 30, 30);
-        var g = LineGrid.Create(style, settings);
+        var g = LineGrid.Create(gs, settings);
         c.TemplateLayer.Shapes.Add(g);
     }
 

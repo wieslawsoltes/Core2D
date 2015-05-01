@@ -10,7 +10,7 @@
     }
 }
 var layer = Context?.Editor?.Container?.CurrentLayer;
-var style = Context?.Editor?.Container?.CurrentStyle;
+var style = Context?.Editor?.Container?.CurrentStyleGroup?.CurrentStyle;
 var shapes = Context?.Editor?.Renderer?.SelectedShapes;
 SetStyle(shapes, style);
 layer?.Invalidate();
