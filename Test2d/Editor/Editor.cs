@@ -644,6 +644,12 @@ namespace Test2d
                 && Container.CurrentStyle != null;
         }
 
+        public bool IsSelectionAvailable()
+        {
+            return _renderer.SelectedShape != null
+                || _renderer.SelectedShapes != null;
+        }
+
         public void LeftDown(double x, double y)
         {
             double sx = SnapToGrid ? Snap(x, SnapX) : x;
@@ -918,11 +924,14 @@ namespace Test2d
                 case State.One:
                     {
                         var rectangle = _shape as XRectangle;
-                        rectangle.BottomRight.X = sx;
-                        rectangle.BottomRight.Y = sy;
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.WorkingLayer.Invalidate();
-                        CurrentState = State.None;
+                        if (rectangle != null)
+                        {
+                            rectangle.BottomRight.X = sx;
+                            rectangle.BottomRight.Y = sy;
+                            _container.WorkingLayer.Shapes.Remove(_shape);
+                            _container.WorkingLayer.Invalidate();
+                            CurrentState = State.None;
+                        }
                     }
                     break;
             }
@@ -944,13 +953,16 @@ namespace Test2d
                         }
 
                         var rectangle = _shape as XRectangle;
-                        rectangle.BottomRight.X = sx;
-                        rectangle.BottomRight.Y = sy;
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.WorkingLayer.Invalidate();
-                        CurrentState = State.None;
-                        
-                        TryToSelectShapes(_container, rectangle);
+                        if (rectangle != null)
+                        {
+                            rectangle.BottomRight.X = sx;
+                            rectangle.BottomRight.Y = sy;
+                            _container.WorkingLayer.Shapes.Remove(_shape);
+                            _container.WorkingLayer.Invalidate();
+                            CurrentState = State.None;
+
+                            TryToSelectShapes(_container, rectangle); 
+                        }
                     }
                     break;
             }
@@ -962,9 +974,6 @@ namespace Test2d
             {
                 case State.None:
                     {
-                        //var ellipse = XEllipse.Create(-3, -3, 3, 3, _container.CurrentStyle, null, true, "");
-                        //var point = XPoint.Create(sx, sy, ellipse);
-                        //_container.CurrentLayer.Shapes.Add(point);
                         _shape = XPoint.Create(sx, sy, _container.PointShape);
                         _container.CurrentLayer.Shapes.Add(_shape);
                         _container.Invalidate();
@@ -995,16 +1004,19 @@ namespace Test2d
                 case State.One:
                     {
                         var line = _shape as XLine;
-                        line.End.X = sx;
-                        line.End.Y = sy;
-                        if (_tryToConnect)
+                        if (line != null)
                         {
-                            TryToConnectEnd(_shape as XLine, sx, sy); 
+                            line.End.X = sx;
+                            line.End.Y = sy;
+                            if (_tryToConnect)
+                            {
+                                TryToConnectEnd(_shape as XLine, sx, sy);
+                            }
+                            _container.WorkingLayer.Shapes.Remove(_shape);
+                            _container.CurrentLayer.Shapes.Add(_shape);
+                            _container.Invalidate();
+                            CurrentState = State.None;
                         }
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.CurrentLayer.Shapes.Add(_shape);
-                        _container.Invalidate();
-                        CurrentState = State.None;
                     }
                     break;
             }
@@ -1033,16 +1045,19 @@ namespace Test2d
                 case State.One:
                     {
                         var rectangle = _shape as XRectangle;
-                        rectangle.BottomRight.X = sx;
-                        rectangle.BottomRight.Y = sy;
-                        if (_tryToConnect)
+                        if (rectangle != null)
                         {
-                            TryToConnectBottomRight(_shape as XRectangle, sx, sy); 
+                            rectangle.BottomRight.X = sx;
+                            rectangle.BottomRight.Y = sy;
+                            if (_tryToConnect)
+                            {
+                                TryToConnectBottomRight(_shape as XRectangle, sx, sy);
+                            }
+                            _container.WorkingLayer.Shapes.Remove(_shape);
+                            _container.CurrentLayer.Shapes.Add(_shape);
+                            _container.Invalidate();
+                            CurrentState = State.None;
                         }
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.CurrentLayer.Shapes.Add(_shape);
-                        _container.Invalidate();
-                        CurrentState = State.None;
                     }
                     break;
             }
@@ -1071,16 +1086,19 @@ namespace Test2d
                 case State.One:
                     {
                         var ellipse = _shape as XEllipse;
-                        ellipse.BottomRight.X = sx;
-                        ellipse.BottomRight.Y = sy;
-                        if (_tryToConnect)
+                        if (ellipse != null)
                         {
-                            TryToConnectBottomRight(_shape as XEllipse, sx, sy);
+                            ellipse.BottomRight.X = sx;
+                            ellipse.BottomRight.Y = sy;
+                            if (_tryToConnect)
+                            {
+                                TryToConnectBottomRight(_shape as XEllipse, sx, sy);
+                            }
+                            _container.WorkingLayer.Shapes.Remove(_shape);
+                            _container.CurrentLayer.Shapes.Add(_shape);
+                            _container.Invalidate();
+                            CurrentState = State.None;
                         }
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.CurrentLayer.Shapes.Add(_shape);
-                        _container.Invalidate();
-                        CurrentState = State.None;
                     }
                     break;
             }
@@ -1109,16 +1127,19 @@ namespace Test2d
                 case State.One:
                     {
                         var arc = _shape as XArc;
-                        arc.Point2.X = sx;
-                        arc.Point2.Y = sy;
-                        if (_tryToConnect)
+                        if (arc != null)
                         {
-                            TryToConnectPoint2(_shape as XArc, sx, sy);
+                            arc.Point2.X = sx;
+                            arc.Point2.Y = sy;
+                            if (_tryToConnect)
+                            {
+                                TryToConnectPoint2(_shape as XArc, sx, sy);
+                            }
+                            _container.WorkingLayer.Shapes.Remove(_shape);
+                            _container.CurrentLayer.Shapes.Add(_shape);
+                            _container.Invalidate();
+                            CurrentState = State.None;
                         }
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.CurrentLayer.Shapes.Add(_shape);
-                        _container.Invalidate();
-                        CurrentState = State.None;
                     }
                     break;
             }
@@ -1147,48 +1168,57 @@ namespace Test2d
                 case State.One:
                     {
                         var bezier = _shape as XBezier;
-                        bezier.Point2.X = sx;
-                        bezier.Point2.Y = sy;
-                        bezier.Point3.X = sx;
-                        bezier.Point3.Y = sy;
-                        bezier.Point4.X = sx;
-                        bezier.Point4.Y = sy;
-                        if (_tryToConnect)
+                        if (bezier != null)
                         {
-                            TryToConnectPoint4(_shape as XBezier, sx, sy);
+                            bezier.Point2.X = sx;
+                            bezier.Point2.Y = sy;
+                            bezier.Point3.X = sx;
+                            bezier.Point3.Y = sy;
+                            bezier.Point4.X = sx;
+                            bezier.Point4.Y = sy;
+                            if (_tryToConnect)
+                            {
+                                TryToConnectPoint4(_shape as XBezier, sx, sy);
+                            }
+                            _container.WorkingLayer.Invalidate();
+                            CurrentState = State.Two;
                         }
-                        _container.WorkingLayer.Invalidate();
-                        CurrentState = State.Two;
                     }
                     break;
                 case State.Two:
                     {
                         var bezier = _shape as XBezier;
-                        bezier.Point2.X = sx;
-                        bezier.Point2.Y = sy;
-                        bezier.Point3.X = sx;
-                        bezier.Point3.Y = sy;
-                        if (_tryToConnect)
+                        if (bezier != null)
                         {
-                            TryToConnectPoint3(_shape as XBezier, sx, sy);
+                            bezier.Point2.X = sx;
+                            bezier.Point2.Y = sy;
+                            bezier.Point3.X = sx;
+                            bezier.Point3.Y = sy;
+                            if (_tryToConnect)
+                            {
+                                TryToConnectPoint3(_shape as XBezier, sx, sy);
+                            }
+                            _container.WorkingLayer.Invalidate();
+                            CurrentState = State.Three;
                         }
-                        _container.WorkingLayer.Invalidate();
-                        CurrentState = State.Three;
                     }
                     break;
                 case State.Three:
                     {
                         var bezier = _shape as XBezier;
-                        bezier.Point2.X = sx;
-                        bezier.Point2.Y = sy;
-                        if (_tryToConnect)
+                        if (bezier != null)
                         {
-                            TryToConnectPoint2(_shape as XBezier, sx, sy);
+                            bezier.Point2.X = sx;
+                            bezier.Point2.Y = sy;
+                            if (_tryToConnect)
+                            {
+                                TryToConnectPoint2(_shape as XBezier, sx, sy);
+                            }
+                            _container.WorkingLayer.Shapes.Remove(_shape);
+                            _container.CurrentLayer.Shapes.Add(_shape);
+                            _container.Invalidate();
+                            CurrentState = State.None;
                         }
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.CurrentLayer.Shapes.Add(_shape);
-                        _container.Invalidate();
-                        CurrentState = State.None;
                     }
                     break;
             }
@@ -1217,31 +1247,37 @@ namespace Test2d
                 case State.One:
                     {
                         var qbezier = _shape as XQBezier;
-                        qbezier.Point2.X = sx;
-                        qbezier.Point2.Y = sy;
-                        qbezier.Point3.X = sx;
-                        qbezier.Point3.Y = sy;
-                        if (_tryToConnect)
+                        if (qbezier != null)
                         {
-                            TryToConnectPoint3(_shape as XQBezier, sx, sy);
+                            qbezier.Point2.X = sx;
+                            qbezier.Point2.Y = sy;
+                            qbezier.Point3.X = sx;
+                            qbezier.Point3.Y = sy;
+                            if (_tryToConnect)
+                            {
+                                TryToConnectPoint3(_shape as XQBezier, sx, sy);
+                            }
+                            _container.WorkingLayer.Invalidate();
+                            CurrentState = State.Two;
                         }
-                        _container.WorkingLayer.Invalidate();
-                        CurrentState = State.Two;
                     }
                     break;
                 case State.Two:
                     {
                         var qbezier = _shape as XQBezier;
-                        qbezier.Point2.X = sx;
-                        qbezier.Point2.Y = sy;
-                        if (_tryToConnect)
+                        if (qbezier != null)
                         {
-                            TryToConnectPoint2(_shape as XQBezier, sx, sy);
+                            qbezier.Point2.X = sx;
+                            qbezier.Point2.Y = sy;
+                            if (_tryToConnect)
+                            {
+                                TryToConnectPoint2(_shape as XQBezier, sx, sy);
+                            }
+                            _container.WorkingLayer.Shapes.Remove(_shape);
+                            _container.CurrentLayer.Shapes.Add(_shape);
+                            _container.Invalidate();
+                            CurrentState = State.None;
                         }
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.CurrentLayer.Shapes.Add(_shape);
-                        _container.Invalidate();
-                        CurrentState = State.None;
                     }
                     break;
             }
@@ -1271,16 +1307,19 @@ namespace Test2d
                 case State.One:
                     {
                         var text = _shape as XText;
-                        text.BottomRight.X = sx;
-                        text.BottomRight.Y = sy;
-                        if (_tryToConnect)
+                        if (text != null)
                         {
-                            TryToConnectBottomRight(_shape as XText, sx, sy);
+                            text.BottomRight.X = sx;
+                            text.BottomRight.Y = sy;
+                            if (_tryToConnect)
+                            {
+                                TryToConnectBottomRight(_shape as XText, sx, sy);
+                            }
+                            _container.WorkingLayer.Shapes.Remove(_shape);
+                            _container.CurrentLayer.Shapes.Add(_shape);
+                            _container.Invalidate();
+                            CurrentState = State.None;
                         }
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.CurrentLayer.Shapes.Add(_shape);
-                        _container.Invalidate();
-                        CurrentState = State.None;
                     }
                     break;
             }
@@ -1430,17 +1469,19 @@ namespace Test2d
                     break;
                 case State.One:
                     {
-                        if (_renderer.SelectedShape != null 
-                            || _renderer.SelectedShapes != null)
+                        if (IsSelectionAvailable())
                         {
                             MoveSelection(sx, sy);
                             break;
                         }
 
                         var rectangle = _shape as XRectangle;
-                        rectangle.BottomRight.X = sx;
-                        rectangle.BottomRight.Y = sy;
-                        _container.WorkingLayer.Invalidate();
+                        if (rectangle != null)
+                        {
+                            rectangle.BottomRight.X = sx;
+                            rectangle.BottomRight.Y = sy;
+                            _container.WorkingLayer.Invalidate();
+                        }
                     }
                     break;
             }
@@ -1464,9 +1505,12 @@ namespace Test2d
                 case State.One:
                     {
                         var line = _shape as XLine;
-                        line.End.X = sx;
-                        line.End.Y = sy;
-                        _container.WorkingLayer.Invalidate();
+                        if (line != null)
+                        {
+                            line.End.X = sx;
+                            line.End.Y = sy;
+                            _container.WorkingLayer.Invalidate();
+                        }
                     }
                     break;
             }
@@ -1481,9 +1525,12 @@ namespace Test2d
                 case State.One:
                     {
                         var rectangle = _shape as XRectangle;
-                        rectangle.BottomRight.X = sx;
-                        rectangle.BottomRight.Y = sy;
-                        _container.WorkingLayer.Invalidate();
+                        if (rectangle != null)
+                        {
+                            rectangle.BottomRight.X = sx;
+                            rectangle.BottomRight.Y = sy;
+                            _container.WorkingLayer.Invalidate();
+                        }
                     }
                     break;
             }
@@ -1498,9 +1545,12 @@ namespace Test2d
                 case State.One:
                     {
                         var ellipse = _shape as XEllipse;
-                        ellipse.BottomRight.X = sx;
-                        ellipse.BottomRight.Y = sy;
-                        _container.WorkingLayer.Invalidate();
+                        if (ellipse != null)
+                        {
+                            ellipse.BottomRight.X = sx;
+                            ellipse.BottomRight.Y = sy;
+                            _container.WorkingLayer.Invalidate();
+                        }
                     }
                     break;
             }
@@ -1515,9 +1565,12 @@ namespace Test2d
                 case State.One:
                     {
                         var arc = _shape as XArc;
-                        arc.Point2.X = sx;
-                        arc.Point2.Y = sy;
-                        _container.WorkingLayer.Invalidate();
+                        if (arc != null)
+                        {
+                            arc.Point2.X = sx;
+                            arc.Point2.Y = sy;
+                            _container.WorkingLayer.Invalidate();
+                        }
                     }
                     break;
             }
@@ -1532,31 +1585,40 @@ namespace Test2d
                 case State.One:
                     {
                         var bezier = _shape as XBezier;
-                        bezier.Point2.X = sx;
-                        bezier.Point2.Y = sy;
-                        bezier.Point3.X = sx;
-                        bezier.Point3.Y = sy;
-                        bezier.Point4.X = sx;
-                        bezier.Point4.Y = sy;
-                        _container.WorkingLayer.Invalidate();
+                        if (bezier != null)
+                        {
+                            bezier.Point2.X = sx;
+                            bezier.Point2.Y = sy;
+                            bezier.Point3.X = sx;
+                            bezier.Point3.Y = sy;
+                            bezier.Point4.X = sx;
+                            bezier.Point4.Y = sy;
+                            _container.WorkingLayer.Invalidate();
+                        }
                     }
                     break;
                 case State.Two:
                     {
                         var bezier = _shape as XBezier;
-                        bezier.Point2.X = sx;
-                        bezier.Point2.Y = sy;
-                        bezier.Point3.X = sx;
-                        bezier.Point3.Y = sy;
-                        _container.WorkingLayer.Invalidate();
+                        if (bezier != null)
+                        {
+                            bezier.Point2.X = sx;
+                            bezier.Point2.Y = sy;
+                            bezier.Point3.X = sx;
+                            bezier.Point3.Y = sy;
+                            _container.WorkingLayer.Invalidate();
+                        }
                     }
                     break;
                 case State.Three:
                     {
                         var bezier = _shape as XBezier;
-                        bezier.Point2.X = sx;
-                        bezier.Point2.Y = sy;
-                        _container.WorkingLayer.Invalidate();
+                        if (bezier != null)
+                        {
+                            bezier.Point2.X = sx;
+                            bezier.Point2.Y = sy;
+                            _container.WorkingLayer.Invalidate();
+                        }
                     }
                     break;
             }
@@ -1570,20 +1632,26 @@ namespace Test2d
                     break;
                 case State.One:
                     {
-                        var bezier = _shape as XQBezier;
-                        bezier.Point2.X = sx;
-                        bezier.Point2.Y = sy;
-                        bezier.Point3.X = sx;
-                        bezier.Point3.Y = sy;
-                        _container.WorkingLayer.Invalidate();
+                        var qbezier = _shape as XQBezier;
+                        if (qbezier != null)
+                        {
+                            qbezier.Point2.X = sx;
+                            qbezier.Point2.Y = sy;
+                            qbezier.Point3.X = sx;
+                            qbezier.Point3.Y = sy;
+                            _container.WorkingLayer.Invalidate();
+                        }
                     }
                     break;
                 case State.Two:
                     {
-                        var bezier = _shape as XQBezier;
-                        bezier.Point2.X = sx;
-                        bezier.Point2.Y = sy;
-                        _container.WorkingLayer.Invalidate();
+                        var qbezier = _shape as XQBezier;
+                        if (qbezier != null)
+                        {
+                            qbezier.Point2.X = sx;
+                            qbezier.Point2.Y = sy;
+                            _container.WorkingLayer.Invalidate();
+                        }
                     }
                     break;
             }
@@ -1598,9 +1666,12 @@ namespace Test2d
                 case State.One:
                     {
                         var text = _shape as XText;
-                        text.BottomRight.X = sx;
-                        text.BottomRight.Y = sy;
-                        _container.WorkingLayer.Invalidate();
+                        if (text != null)
+                        {
+                            text.BottomRight.X = sx;
+                            text.BottomRight.Y = sy;
+                            _container.WorkingLayer.Invalidate();
+                        }
                     }
                     break;
             }
@@ -1609,26 +1680,35 @@ namespace Test2d
         public Layer RemoveCurrentLayer()
         {
             var layer = Container.CurrentLayer;
-            Container.Layers.Remove(layer);
-            Container.CurrentLayer = Container.Layers.FirstOrDefault();
-            Container.Invalidate();
+            if (layer != null)
+            {
+                Container.Layers.Remove(layer);
+                Container.CurrentLayer = Container.Layers.FirstOrDefault();
+                Container.Invalidate();
+            }
             return layer;
         }
 
         public BaseShape RemoveCurrentShape()
         {
             var shape = Container.CurrentShape;
-            Container.CurrentLayer.Shapes.Remove(shape);
-            Container.CurrentShape = Container.CurrentLayer.Shapes.FirstOrDefault();
-            Container.Invalidate();
+            if (shape != null)
+            {
+                Container.CurrentLayer.Shapes.Remove(shape);
+                Container.CurrentShape = Container.CurrentLayer.Shapes.FirstOrDefault();
+                Container.Invalidate();
+            }
             return shape;
         }
 
         public ShapeStyle RemoveCurrentStyle()
         {
             var style = Container.CurrentStyle;
-            Container.Styles.Remove(style);
-            Container.CurrentStyle = Container.Styles.FirstOrDefault();
+            if (style != null)
+            {
+                Container.Styles.Remove(style);
+                Container.CurrentStyle = Container.Styles.FirstOrDefault();
+            }
             return style;
         }
         
@@ -1674,6 +1754,7 @@ namespace Test2d
             if (_renderer.SelectedShapes != null)
             {
                 Group(_renderer.SelectedShapes, Container.CurrentLayer, "g");
+                _renderer.SelectedShapes = null;
             }
         }
 
