@@ -13,6 +13,6 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto" 
                   HorizontalScrollBarVisibility="Auto" 
                   Focusable="False">
-        <controls:ShapeControl/>
+        <controls:ShapeControl Margin="2"/>
     </ScrollViewer>
 </Window>

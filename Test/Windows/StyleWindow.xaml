@@ -13,6 +13,6 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto" 
                   HorizontalScrollBarVisibility="Auto" 
                   Focusable="False">
-        <controls:StyleControl DataContext="{Binding Editor.Container.CurrentStyle}"/>
+        <controls:StyleControl DataContext="{Binding Editor.Container.CurrentStyle}" Margin="2"/>
     </ScrollViewer>
 </Window>
