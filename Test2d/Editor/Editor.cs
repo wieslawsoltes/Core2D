@@ -500,16 +500,16 @@ namespace Test2d
             }
         }
 
-        public void MoveSelection(double sx, double sy)
+        public void MoveSelection(double x, double y)
         {
-            double x = SnapToGrid ? Snap(sx, SnapX) : sx;
-            double y = SnapToGrid ? Snap(sy, SnapY) : sy;
+            double sx = SnapToGrid ? Snap(x, SnapX) : x;
+            double sy = SnapToGrid ? Snap(y, SnapY) : y;
 
-            double dx = x - _startX;
-            double dy = y - _startY;
+            double dx = sx - _startX;
+            double dy = sy - _startY;
 
-            _startX = x;
-            _startY = y;
+            _startX = sx;
+            _startY = sy;
 
             if (_renderer.SelectedShape != null)
             {
@@ -599,153 +599,153 @@ namespace Test2d
             return false;
         }
 
-        public void TryToConnectStart(XLine line, double sx, double sy)
+        public void TryToConnectStart(XLine line, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 line.Start = result as XPoint;
             }
         }
 
-        public void TryToConnectEnd(XLine line, double sx, double sy)
+        public void TryToConnectEnd(XLine line, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 line.End = result as XPoint;
             }
         }
 
-        public void TryToConnectTopLeft(XRectangle rectangle, double sx, double sy)
+        public void TryToConnectTopLeft(XRectangle rectangle, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 rectangle.TopLeft = result as XPoint;
             }
         }
 
-        public void TryToConnectBottomRight(XRectangle rectangle, double sx, double sy)
+        public void TryToConnectBottomRight(XRectangle rectangle, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 rectangle.BottomRight = result as XPoint;
             }
         }
 
-        public void TryToConnectTopLeft(XEllipse ellipse, double sx, double sy)
+        public void TryToConnectTopLeft(XEllipse ellipse, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 ellipse.TopLeft = result as XPoint;
             }
         }
 
-        public void TryToConnectBottomRight(XEllipse ellipse, double sx, double sy)
+        public void TryToConnectBottomRight(XEllipse ellipse, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 ellipse.BottomRight = result as XPoint;
             }
         }
 
-        public void TryToConnectPoint1(XArc arc, double sx, double sy)
+        public void TryToConnectPoint1(XArc arc, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 arc.Point1 = result as XPoint;
             }
         }
 
-        public void TryToConnectPoint2(XArc arc, double sx, double sy)
+        public void TryToConnectPoint2(XArc arc, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 arc.Point2 = result as XPoint;
             }
         }
 
-        public void TryToConnectPoint1(XBezier bezier, double sx, double sy)
+        public void TryToConnectPoint1(XBezier bezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 bezier.Point1 = result as XPoint;
             }
         }
 
-        public void TryToConnectPoint2(XBezier bezier, double sx, double sy)
+        public void TryToConnectPoint2(XBezier bezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 bezier.Point2 = result as XPoint;
             }
         }
 
-        public void TryToConnectPoint3(XBezier bezier, double sx, double sy)
+        public void TryToConnectPoint3(XBezier bezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 bezier.Point3 = result as XPoint;
             }
         }
 
-        public void TryToConnectPoint4(XBezier bezier, double sx, double sy)
+        public void TryToConnectPoint4(XBezier bezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 bezier.Point4 = result as XPoint;
             }
         }
 
-        public void TryToConnectPoint1(XQBezier qbezier, double sx, double sy)
+        public void TryToConnectPoint1(XQBezier qbezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 qbezier.Point1 = result as XPoint;
             }
         }
 
-        public void TryToConnectPoint2(XQBezier qbezier, double sx, double sy)
+        public void TryToConnectPoint2(XQBezier qbezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 qbezier.Point2 = result as XPoint;
             }
         }
 
-        public void TryToConnectPoint3(XQBezier qbezier, double sx, double sy)
+        public void TryToConnectPoint3(XQBezier qbezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 qbezier.Point3 = result as XPoint;
             }
         }
 
-        public void TryToConnectTopLeft(XText text, double sx, double sy)
+        public void TryToConnectTopLeft(XText text, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 text.TopLeft = result as XPoint;
             }
         }
 
-        public void TryToConnectBottomRight(XText text, double sx, double sy)
+        public void TryToConnectBottomRight(XText text, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 text.BottomRight = result as XPoint;
