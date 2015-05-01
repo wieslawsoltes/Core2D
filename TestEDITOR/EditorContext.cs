@@ -26,6 +26,7 @@ namespace TestEDITOR
         private Editor _editor;
         private string _rootScriptsPath;
         private IList<ScriptDirectory> _scriptDirectories;
+        private System.IO.FileSystemWatcher _watcher = null;
 
         public EditorCommands Commands
         {
@@ -324,45 +325,40 @@ namespace TestEDITOR
 #else
             _rootScriptsPath = "Scripts";
 #endif
+
+            Action update = () =>
+            {
+                try
+                {
+                    ScriptDirectories =
+                        ScriptDirectory.CreateScriptDirectories(_rootScriptsPath);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.Print(ex.Message);
+                }
+            };
+
             if (System.IO.Directory.Exists(_rootScriptsPath))
             {
-                UpdateScripts();
-                InitializeScriptsWatcher();
-            }
-        }
+                update();
 
-        private void UpdateScripts()
-        {
-            try
-            {
-                ScriptDirectories = ScriptDirectory.CreateScriptDirectories(_rootScriptsPath);
+                _watcher = new System.IO.FileSystemWatcher();
+                _watcher.Path = _rootScriptsPath;
+                _watcher.Filter = "*.*";
+                _watcher.NotifyFilter =
+                    System.IO.NotifyFilters.LastAccess
+                    | System.IO.NotifyFilters.LastWrite
+                    | System.IO.NotifyFilters.FileName
+                    | System.IO.NotifyFilters.DirectoryName;
+                _watcher.IncludeSubdirectories = true;
+                _watcher.Filter = "*.*";
+                _watcher.Changed += (s, e) => update();
+                _watcher.Created += (s, e) => update();
+                _watcher.Deleted += (s, e) => update();
+                _watcher.Renamed += (s, e) => update();
+                _watcher.EnableRaisingEvents = true;
             }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.Print(ex.Message);
-            }
-        }
-
-        private System.IO.FileSystemWatcher _watcher = null;
-
-        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
-        private void InitializeScriptsWatcher()
-        {
-            _watcher = new System.IO.FileSystemWatcher();
-            _watcher.Path = _rootScriptsPath;
-            _watcher.Filter = "*.*";
-            _watcher.NotifyFilter =
-                System.IO.NotifyFilters.LastAccess
-                | System.IO.NotifyFilters.LastWrite
-                | System.IO.NotifyFilters.FileName
-                | System.IO.NotifyFilters.DirectoryName;
-            _watcher.IncludeSubdirectories = true;
-            _watcher.Filter = "*.*";
-            _watcher.Changed += (s, e) => UpdateScripts();
-            _watcher.Created += (s, e) => UpdateScripts();
-            _watcher.Deleted += (s, e) => UpdateScripts();
-            _watcher.Renamed += (s, e) => UpdateScripts();
-            _watcher.EnableRaisingEvents = true;
         }
 
         public void Dispose()
