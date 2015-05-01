@@ -236,7 +236,7 @@ namespace TestEDITOR
             _commands.AddStyleCommand = new DelegateCommand(
                 () =>
                 {
-                    _editor.Container.Styles.Add(ShapeStyle.Create("New"));
+                    _editor.Container.CurrentStyleGroup.Styles.Add(ShapeStyle.Create("New"));
                 });
 
             _commands.RemoveStyleCommand = new DelegateCommand(
