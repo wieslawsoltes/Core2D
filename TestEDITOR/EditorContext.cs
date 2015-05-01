@@ -250,6 +250,36 @@ namespace TestEDITOR
                 {
                     _editor.RemoveCurrentShape();
                 });
+
+            WarmUpCSharpScript();
+        }
+
+        private void WarmUpCSharpScript()
+        {
+            // NOTE: Warmup Roslyn script engine.
+            try
+            {
+                Task.Run(() => Eval("Action a = () => { };", this));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+            }
+        }
+
+        public void Eval(string code, EditorContext context)
+        {
+            ScriptOptions options = ScriptOptions.Default
+                .AddNamespaces("System")
+                .AddNamespaces("System.Collections.Generic")
+                .AddReferences(Assembly.GetAssembly(typeof(ObservableCollection<>)))
+                .AddNamespaces("System.Collections.ObjectModel")
+                .AddReferences(Assembly.GetAssembly(typeof(System.Linq.Enumerable)))
+                .AddNamespaces("System.Linq")
+                .AddReferences(Assembly.GetAssembly(typeof(ObservableObject)))
+                .AddNamespaces("Test2d");
+
+            CSharpScript.Eval(code, options, new ScriptGlobals() { Context = context });
         }
 
         public void Eval(string path)
@@ -257,18 +287,8 @@ namespace TestEDITOR
             try
             {
                 var code = System.IO.File.ReadAllText(path);
-
-                ScriptOptions options = ScriptOptions.Default
-                    .AddNamespaces("System")
-                    .AddNamespaces("System.Collections.Generic")
-                    .AddReferences(Assembly.GetAssembly(typeof(ObservableCollection<>)))
-                    .AddNamespaces("System.Collections.ObjectModel")
-                    .AddReferences(Assembly.GetAssembly(typeof(System.Linq.Enumerable)))
-                    .AddNamespaces("System.Linq")
-                    .AddReferences(Assembly.GetAssembly(typeof(ObservableObject)))
-                    .AddNamespaces("Test2d");
-
-                CSharpScript.Eval(code, options, new ScriptGlobals() { Context = this });
+                var context = this;
+                Eval(code, context);
             }
             catch (Exception ex)
             {
