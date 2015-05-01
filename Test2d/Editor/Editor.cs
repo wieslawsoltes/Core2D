@@ -437,11 +437,11 @@ namespace Test2d
 
         public void RemoveCurrentStyle()
         {
-            var style = Container.CurrentStyle;
+            var style = Container.CurrentStyleGroup.CurrentStyle;
             if (style != null)
             {
-                Container.Styles.Remove(style);
-                Container.CurrentStyle = Container.Styles.FirstOrDefault();
+                Container.CurrentStyleGroup.Styles.Remove(style);
+                Container.CurrentStyleGroup.CurrentStyle = Container.CurrentStyleGroup.Styles.FirstOrDefault();
             }
         }
 
@@ -756,35 +756,35 @@ namespace Test2d
         {
             return Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
-                && Container.CurrentStyle != null;
+                && Container.CurrentStyleGroup.CurrentStyle != null;
         }
 
         public bool IsLeftUpAvailable()
         {
             return Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
-                && Container.CurrentStyle != null;
+                && Container.CurrentStyleGroup.CurrentStyle != null;
         }
         
         public bool IsRightDownAvailable()
         {
             return Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
-                && Container.CurrentStyle != null;
+                && Container.CurrentStyleGroup.CurrentStyle != null;
         }
         
         public bool IsRightUpAvailable()
         {
             return Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
-                && Container.CurrentStyle != null;
+                && Container.CurrentStyleGroup.CurrentStyle != null;
         }
 
         public bool IsMoveAvailable()
         {
             return Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
-                && Container.CurrentStyle != null;
+                && Container.CurrentStyleGroup.CurrentStyle != null;
         }
 
         public bool IsSelectionAvailable()
@@ -900,7 +900,7 @@ namespace Test2d
                     {
                         _shape = XLine.Create(
                             sx, sy,
-                            _container.CurrentStyle,
+                            _container.CurrentStyleGroup.CurrentStyle,
                             _container.PointShape);
                         if (_tryToConnect)
                         {
@@ -940,7 +940,7 @@ namespace Test2d
                     {
                         _shape = XRectangle.Create(
                             sx, sy,
-                            _container.CurrentStyle,
+                            _container.CurrentStyleGroup.CurrentStyle,
                             _container.PointShape,
                             DefaultIsFilled);
                         if (_tryToConnect)
@@ -981,7 +981,7 @@ namespace Test2d
                     {
                         _shape = XEllipse.Create(
                             sx, sy,
-                            _container.CurrentStyle,
+                            _container.CurrentStyleGroup.CurrentStyle,
                             _container.PointShape,
                             DefaultIsFilled);
                         if (_tryToConnect)
@@ -1022,7 +1022,7 @@ namespace Test2d
                     {
                         _shape = XArc.Create(
                             sx, sy,
-                            _container.CurrentStyle,
+                            _container.CurrentStyleGroup.CurrentStyle,
                             _container.PointShape,
                             DefaultIsFilled);
                         if (_tryToConnect)
@@ -1063,7 +1063,7 @@ namespace Test2d
                     {
                         _shape = XBezier.Create(
                             sx, sy,
-                            _container.CurrentStyle,
+                            _container.CurrentStyleGroup.CurrentStyle,
                             _container.PointShape,
                             DefaultIsFilled);
                         if (_tryToConnect)
@@ -1142,7 +1142,7 @@ namespace Test2d
                     {
                         _shape = XQBezier.Create(
                             sx, sy,
-                            _container.CurrentStyle,
+                            _container.CurrentStyleGroup.CurrentStyle,
                             _container.PointShape,
                             DefaultIsFilled);
                         if (_tryToConnect)
@@ -1201,7 +1201,7 @@ namespace Test2d
                     {
                         _shape = XText.Create(
                             sx, sy,
-                            _container.CurrentStyle,
+                            _container.CurrentStyleGroup.CurrentStyle,
                             _container.PointShape,
                             "Text",
                             DefaultIsFilled);
