@@ -945,8 +945,7 @@ namespace Test2d
                     break;
                 case State.One:
                     {
-                        if (_renderer.SelectedShape != null 
-                            || _renderer.SelectedShapes != null)
+                        if (IsSelectionAvailable())
                         {
                             CurrentState = State.None;
                             break;
