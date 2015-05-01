@@ -8,11 +8,19 @@
         {
             var g = shape as XGroup;
             Ungroup(g.Shapes, layer, isGroup: true);
+            Ungroup(g.Connectors, layer, isGroup: true);
             layer.Shapes.Remove(g);
         }
         else if (isGroup)
         {
-            layer.Shapes.Add(shape);
+            if (shape is XPoint)
+            {
+                shape.State &= ~ShapeState.Connector;
+            }
+            else
+            {
+                layer.Shapes.Add(shape);
+            }
         }
     }
 }
@@ -25,6 +33,7 @@ if (shape != null && shape is XGroup && layer != null)
 {
     var g = shape as XGroup;
     Ungroup(g.Shapes, layer, isGroup: true);
+    Ungroup(g.Connectors, layer, isGroup: true);
     layer.Shapes.Remove(g);
     layer.Invalidate();
     Context.Editor.Renderer.SelectedShape = null;
