@@ -413,6 +413,149 @@ namespace Test2d
             }
         }
 
+        public void RemoveCurrentLayer()
+        {
+            var layer = Container.CurrentLayer;
+            if (layer != null)
+            {
+                Container.Layers.Remove(layer);
+                Container.CurrentLayer = Container.Layers.FirstOrDefault();
+                Container.Invalidate();
+            }
+        }
+
+        public void RemoveCurrentShape()
+        {
+            var shape = Container.CurrentShape;
+            if (shape != null)
+            {
+                Container.CurrentLayer.Shapes.Remove(shape);
+                Container.CurrentShape = Container.CurrentLayer.Shapes.FirstOrDefault();
+                Container.Invalidate();
+            }
+        }
+
+        public void RemoveCurrentStyle()
+        {
+            var style = Container.CurrentStyle;
+            if (style != null)
+            {
+                Container.Styles.Remove(style);
+                Container.CurrentStyle = Container.Styles.FirstOrDefault();
+            }
+        }
+
+        public void Load(Container container)
+        {
+            Renderer.ClearCache();
+
+            Container = container;
+            Container.Invalidate();
+
+            if (EnableObserver)
+            {
+                Observer = new Observer(this);
+            }
+        }
+
+        public void Group(IEnumerable<BaseShape> shapes, Layer layer, string name)
+        {
+            var group = XGroup.Create(name);
+
+            foreach (var shape in shapes)
+            {
+                if (shape is XPoint)
+                {
+                    var point = shape as XPoint;
+                    point.State |= ShapeState.Connector;
+                    group.Connectors.Add(point);
+                }
+                else
+                {
+                    group.Shapes.Add(shape);
+                }
+
+                layer.Shapes.Remove(shape);
+            }
+
+            layer.Shapes.Add(group);
+            layer.Invalidate();
+        }
+
+        public void GroupSelected()
+        {
+            if (_renderer.SelectedShapes != null)
+            {
+                Group(_renderer.SelectedShapes, Container.CurrentLayer, "g");
+                _renderer.SelectedShapes = null;
+            }
+        }
+
+        public void GroupCurrentLayer()
+        {
+            var layer = Container.CurrentLayer;
+            if (layer.Shapes.Count > 0)
+            {
+                Group(layer.Shapes.ToList(), layer, "g");
+            }
+        }
+
+        public void MoveSelection(double sx, double sy)
+        {
+            double x = SnapToGrid ? Snap(sx, SnapX) : sx;
+            double y = SnapToGrid ? Snap(sy, SnapY) : sy;
+
+            double dx = x - _startX;
+            double dy = y - _startY;
+
+            _startX = x;
+            _startY = y;
+
+            if (_renderer.SelectedShape != null)
+            {
+                //_renderer.SelectedShape.Move(dx, dy);
+                Move(
+                    GetPoints(Enumerable.Repeat(_renderer.SelectedShape, 1)).Distinct(),
+                    dx, dy);
+            }
+
+            if (_renderer.SelectedShapes != null)
+            {
+                //foreach (var shape in _renderer.SelectedShapes)
+                //{
+                //    shape.Move(dx, dy);
+                //}
+                Move(
+                    GetPoints(_renderer.SelectedShapes).Distinct(),
+                    dx, dy);
+            }
+        }
+
+        public void DeleteSelected()
+        {
+            if (_renderer.SelectedShape != null)
+            {
+                _container.CurrentLayer.Shapes.Remove(_renderer.SelectedShape);
+                _container.CurrentLayer.Invalidate();
+
+                _renderer.SelectedShape = null;
+            }
+
+            if (_renderer.SelectedShapes != null)
+            {
+                var layer = _container.CurrentLayer;
+
+                foreach (var shape in _renderer.SelectedShapes)
+                {
+                    layer.Shapes.Remove(shape);
+                }
+
+                _renderer.SelectedShapes = null;
+
+                layer.Invalidate();
+            }
+        }
+
         public bool TryToSelectShapes(Container container, XRectangle rectangle)
         {
             var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
@@ -650,245 +793,13 @@ namespace Test2d
                 || _renderer.SelectedShapes != null;
         }
 
-        public void LeftDown(double x, double y)
-        {
-            double sx = SnapToGrid ? Snap(x, SnapX) : x;
-            double sy = SnapToGrid ? Snap(y, SnapY) : y;
-            switch (CurrentTool)
-            {
-                case Tool.None:
-                    break;
-                case Tool.Selection:
-                    {
-                        SelectionLeftDown(x, y);
-                    }
-                    break;
-                case Tool.Point:
-                    {
-                        PointLeftDown(sx, sy);
-                    }
-                    break;
-                case Tool.Line:
-                    {
-                        LineLeftDown(sx, sy);
-                    }
-                    break;
-                case Tool.Rectangle:
-                    {
-                        RectangleLeftDown(sx, sy);
-                    }
-                    break;
-                case Tool.Ellipse:
-                    {
-                        EllipseLeftDown(sx, sy);
-                    }
-                    break;
-                case Tool.Arc:
-                    {
-                        ArcLeftDown(sx, sy);
-                    }
-                    break;
-                case Tool.Bezier:
-                    {
-                        BezierLeftDown(sx, sy);
-                    }
-                    break;
-                case Tool.QBezier:
-                    {
-                        QBezierLeftDown(sx, sy);
-                    }
-                    break;
-                case Tool.Text:
-                    {
-                        TextLeftDown(sx, sy);
-                    }
-                    break;
-            }
-        }
-
-        public void LeftUp(double x, double y)
-        {
-            double sx = SnapToGrid ? Snap(x, SnapX) : x;
-            double sy = SnapToGrid ? Snap(y, SnapY) : y;
-            switch (CurrentTool)
-            {
-                case Tool.None:
-                    break;
-                case Tool.Selection:
-                    {
-                        SelectionLeftUp(x, y);
-                    }
-                    break;
-                case Tool.Point:
-                    break;
-                case Tool.Line:
-                    break;
-                case Tool.Rectangle:
-                    break;
-                case Tool.Ellipse:
-                    break;
-                case Tool.Arc:
-                    break;
-                case Tool.Bezier:
-                    break;
-                case Tool.QBezier:
-                    break;
-                case Tool.Text:
-                    break;
-            }
-        }
-   
-        public void RightDown(double x, double y)
-        {
-            if (CurrentState == State.None)
-            {
-                SelectionRightDown(x, y);
-                return;
-            }
-            
-            double sx = SnapToGrid ? Snap(x, SnapX) : x;
-            double sy = SnapToGrid ? Snap(y, SnapY) : y;
-            switch (CurrentTool)
-            {
-                case Tool.None:
-                    break;
-                case Tool.Selection:
-                    break;
-                case Tool.Point:
-                    {
-                        PointRightDown(sx, sy);
-                    }
-                    break;
-                case Tool.Line:
-                    {
-                        LineRightDown(sx, sy);
-                    }
-                    break;
-                case Tool.Rectangle:
-                    {
-                        RectangleRightDown(sx, sy);
-                    }
-                    break;
-                case Tool.Ellipse:
-                    {
-                        EllipseRightDown(sx, sy);
-                    }
-                    break;
-                case Tool.Arc:
-                    {
-                        ArcRightDown(sx, sy);
-                    }
-                    break;
-                case Tool.Bezier:
-                    {
-                        BezierRightDown(sx, sy);
-                    }
-                    break;
-                case Tool.QBezier:
-                    {
-                        QBezierRightDown(sx, sy);
-                    }
-                    break;
-                case Tool.Text:
-                    {
-                        TextRightDown(sx, sy);
-                    }
-                    break;
-            }
-        }
-
-        public void RightUp(double x, double y)
-        {
-            double sx = SnapToGrid ? Snap(x, SnapX) : x;
-            double sy = SnapToGrid ? Snap(y, SnapY) : y;
-            switch (CurrentTool)
-            {
-                case Tool.None:
-                    break;
-                case Tool.Selection:
-                    break;
-                case Tool.Point:
-                    break;
-                case Tool.Line:
-                    break;
-                case Tool.Rectangle:
-                    break;
-                case Tool.Ellipse:
-                    break;
-                case Tool.Arc:
-                    break;
-                case Tool.Bezier:
-                    break;
-                case Tool.QBezier:
-                    break;
-                case Tool.Text:
-                    break;
-            }
-        }
-        
-        public void Move(double x, double y)
-        {
-            double sx = SnapToGrid ? Snap(x, SnapX) : x;
-            double sy = SnapToGrid ? Snap(y, SnapY) : y;
-            switch (CurrentTool)
-            {
-                case Tool.None:
-                    break;
-                case Tool.Selection:
-                    {
-                        SelectionMove(x, y);
-                    }
-                    break;
-                case Tool.Point:
-                    {
-                        PointMove(sx, sy);
-                    }
-                    break;
-                case Tool.Line:
-                    {
-                        LineMove(sx, sy);
-                    }
-                    break;
-                case Tool.Rectangle:
-                    {
-                        RectangleMove(sx, sy);
-                    }
-                    break;
-                case Tool.Ellipse:
-                    {
-                        EllipseMove(sx, sy);
-                    }
-                    break;
-                case Tool.Arc:
-                    {
-                        ArcMove(sx, sy);
-                    }
-                    break;
-                case Tool.Bezier:
-                    {
-                        BezierMove(sx, sy);
-                    }
-                    break;
-                case Tool.QBezier:
-                    {
-                        QBezierMove(sx, sy);
-                    }
-                    break;
-                case Tool.Text:
-                    {
-                        TextMove(sx, sy);
-                    }
-                    break;
-            }
-        }
-
         private void SelectionLeftDown(double sx, double sy)
         {
             switch (CurrentState)
             {
                 case State.None:
                     {
-                        if (_renderer.SelectedShape == null 
+                        if (_renderer.SelectedShape == null
                             && _renderer.SelectedShapes != null)
                         {
                             var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
@@ -901,7 +812,7 @@ namespace Test2d
                                 break;
                             }
                         }
-                        
+
                         if (TryToSelectShape(_container, sx, sy))
                         {
                             _startX = SnapToGrid ? Snap(sx, SnapX) : sx;
@@ -960,7 +871,7 @@ namespace Test2d
                             _container.WorkingLayer.Invalidate();
                             CurrentState = State.None;
 
-                            TryToSelectShapes(_container, rectangle); 
+                            TryToSelectShapes(_container, rectangle);
                         }
                     }
                     break;
@@ -1034,7 +945,7 @@ namespace Test2d
                             DefaultIsFilled);
                         if (_tryToConnect)
                         {
-                            TryToConnectTopLeft(_shape as XRectangle, sx, sy); 
+                            TryToConnectTopLeft(_shape as XRectangle, sx, sy);
                         }
                         _container.WorkingLayer.Shapes.Add(_shape);
                         _container.WorkingLayer.Invalidate();
@@ -1676,149 +1587,235 @@ namespace Test2d
             }
         }
 
-        public Layer RemoveCurrentLayer()
+        public void LeftDown(double x, double y)
         {
-            var layer = Container.CurrentLayer;
-            if (layer != null)
+            double sx = SnapToGrid ? Snap(x, SnapX) : x;
+            double sy = SnapToGrid ? Snap(y, SnapY) : y;
+            switch (CurrentTool)
             {
-                Container.Layers.Remove(layer);
-                Container.CurrentLayer = Container.Layers.FirstOrDefault();
-                Container.Invalidate();
+                case Tool.None:
+                    break;
+                case Tool.Selection:
+                    {
+                        SelectionLeftDown(x, y);
+                    }
+                    break;
+                case Tool.Point:
+                    {
+                        PointLeftDown(sx, sy);
+                    }
+                    break;
+                case Tool.Line:
+                    {
+                        LineLeftDown(sx, sy);
+                    }
+                    break;
+                case Tool.Rectangle:
+                    {
+                        RectangleLeftDown(sx, sy);
+                    }
+                    break;
+                case Tool.Ellipse:
+                    {
+                        EllipseLeftDown(sx, sy);
+                    }
+                    break;
+                case Tool.Arc:
+                    {
+                        ArcLeftDown(sx, sy);
+                    }
+                    break;
+                case Tool.Bezier:
+                    {
+                        BezierLeftDown(sx, sy);
+                    }
+                    break;
+                case Tool.QBezier:
+                    {
+                        QBezierLeftDown(sx, sy);
+                    }
+                    break;
+                case Tool.Text:
+                    {
+                        TextLeftDown(sx, sy);
+                    }
+                    break;
             }
-            return layer;
         }
 
-        public BaseShape RemoveCurrentShape()
+        public void LeftUp(double x, double y)
         {
-            var shape = Container.CurrentShape;
-            if (shape != null)
+            double sx = SnapToGrid ? Snap(x, SnapX) : x;
+            double sy = SnapToGrid ? Snap(y, SnapY) : y;
+            switch (CurrentTool)
             {
-                Container.CurrentLayer.Shapes.Remove(shape);
-                Container.CurrentShape = Container.CurrentLayer.Shapes.FirstOrDefault();
-                Container.Invalidate();
+                case Tool.None:
+                    break;
+                case Tool.Selection:
+                    {
+                        SelectionLeftUp(x, y);
+                    }
+                    break;
+                case Tool.Point:
+                    break;
+                case Tool.Line:
+                    break;
+                case Tool.Rectangle:
+                    break;
+                case Tool.Ellipse:
+                    break;
+                case Tool.Arc:
+                    break;
+                case Tool.Bezier:
+                    break;
+                case Tool.QBezier:
+                    break;
+                case Tool.Text:
+                    break;
             }
-            return shape;
+        }
+   
+        public void RightDown(double x, double y)
+        {
+            if (CurrentState == State.None)
+            {
+                SelectionRightDown(x, y);
+                return;
+            }
+            
+            double sx = SnapToGrid ? Snap(x, SnapX) : x;
+            double sy = SnapToGrid ? Snap(y, SnapY) : y;
+            switch (CurrentTool)
+            {
+                case Tool.None:
+                    break;
+                case Tool.Selection:
+                    break;
+                case Tool.Point:
+                    {
+                        PointRightDown(sx, sy);
+                    }
+                    break;
+                case Tool.Line:
+                    {
+                        LineRightDown(sx, sy);
+                    }
+                    break;
+                case Tool.Rectangle:
+                    {
+                        RectangleRightDown(sx, sy);
+                    }
+                    break;
+                case Tool.Ellipse:
+                    {
+                        EllipseRightDown(sx, sy);
+                    }
+                    break;
+                case Tool.Arc:
+                    {
+                        ArcRightDown(sx, sy);
+                    }
+                    break;
+                case Tool.Bezier:
+                    {
+                        BezierRightDown(sx, sy);
+                    }
+                    break;
+                case Tool.QBezier:
+                    {
+                        QBezierRightDown(sx, sy);
+                    }
+                    break;
+                case Tool.Text:
+                    {
+                        TextRightDown(sx, sy);
+                    }
+                    break;
+            }
         }
 
-        public ShapeStyle RemoveCurrentStyle()
+        public void RightUp(double x, double y)
         {
-            var style = Container.CurrentStyle;
-            if (style != null)
+            double sx = SnapToGrid ? Snap(x, SnapX) : x;
+            double sy = SnapToGrid ? Snap(y, SnapY) : y;
+            switch (CurrentTool)
             {
-                Container.Styles.Remove(style);
-                Container.CurrentStyle = Container.Styles.FirstOrDefault();
+                case Tool.None:
+                    break;
+                case Tool.Selection:
+                    break;
+                case Tool.Point:
+                    break;
+                case Tool.Line:
+                    break;
+                case Tool.Rectangle:
+                    break;
+                case Tool.Ellipse:
+                    break;
+                case Tool.Arc:
+                    break;
+                case Tool.Bezier:
+                    break;
+                case Tool.QBezier:
+                    break;
+                case Tool.Text:
+                    break;
             }
-            return style;
         }
         
-        public void Load(Container container)
+        public void Move(double x, double y)
         {
-            Renderer.ClearCache();
-
-            Container = container;
-            Container.Invalidate();
-
-            if (EnableObserver)
+            double sx = SnapToGrid ? Snap(x, SnapX) : x;
+            double sy = SnapToGrid ? Snap(y, SnapY) : y;
+            switch (CurrentTool)
             {
-                Observer = new Observer(this);
-            }
-        }
-
-        public void Group(IEnumerable<BaseShape> shapes, Layer layer, string name)
-        {
-            var group = XGroup.Create(name);
-
-            foreach (var shape in shapes)
-            {
-                if (shape is XPoint)
-                {
-                    var point = shape as XPoint;
-                    point.State |= ShapeState.Connector;
-                    group.Connectors.Add(point);
-                }
-                else
-                {
-                    group.Shapes.Add(shape);
-                }
-
-                layer.Shapes.Remove(shape);
-            }
-
-            layer.Shapes.Add(group);
-            layer.Invalidate();
-        }
-
-        public void GroupSelected()
-        {
-            if (_renderer.SelectedShapes != null)
-            {
-                Group(_renderer.SelectedShapes, Container.CurrentLayer, "g");
-                _renderer.SelectedShapes = null;
-            }
-        }
-
-        public void GroupCurrentLayer()
-        {
-            var layer = Container.CurrentLayer;
-            if (layer.Shapes.Count > 0)
-            {
-                Group(layer.Shapes.ToList(), layer, "g");
-            }
-        }
-
-        public void MoveSelection(double sx, double sy)
-        {
-            double x = SnapToGrid ? Snap(sx, SnapX) : sx;
-            double y = SnapToGrid ? Snap(sy, SnapY) : sy;
-
-            double dx = x - _startX;
-            double dy = y - _startY;
-
-            _startX = x;
-            _startY = y;
-
-            if (_renderer.SelectedShape != null)
-            {
-                //_renderer.SelectedShape.Move(dx, dy);
-                Move(
-                    GetPoints(Enumerable.Repeat(_renderer.SelectedShape, 1)).Distinct(), 
-                    dx, dy);
-            }
-
-            if (_renderer.SelectedShapes != null)
-            {
-                //foreach (var shape in _renderer.SelectedShapes)
-                //{
-                //    shape.Move(dx, dy);
-                //}
-                Move(
-                    GetPoints(_renderer.SelectedShapes).Distinct(), 
-                    dx, dy);
-            }
-        }
-
-        public void DeleteSelected()
-        {
-            if (_renderer.SelectedShape != null)
-            {
-                _container.CurrentLayer.Shapes.Remove(_renderer.SelectedShape);
-                _container.CurrentLayer.Invalidate();
-
-                _renderer.SelectedShape = null;
-            }
-
-            if (_renderer.SelectedShapes != null)
-            {
-                var layer = _container.CurrentLayer;
-
-                foreach (var shape in _renderer.SelectedShapes)
-                {
-                    layer.Shapes.Remove(shape);
-                }
-
-                _renderer.SelectedShapes = null;
-
-                layer.Invalidate();
+                case Tool.None:
+                    break;
+                case Tool.Selection:
+                    {
+                        SelectionMove(x, y);
+                    }
+                    break;
+                case Tool.Point:
+                    {
+                        PointMove(sx, sy);
+                    }
+                    break;
+                case Tool.Line:
+                    {
+                        LineMove(sx, sy);
+                    }
+                    break;
+                case Tool.Rectangle:
+                    {
+                        RectangleMove(sx, sy);
+                    }
+                    break;
+                case Tool.Ellipse:
+                    {
+                        EllipseMove(sx, sy);
+                    }
+                    break;
+                case Tool.Arc:
+                    {
+                        ArcMove(sx, sy);
+                    }
+                    break;
+                case Tool.Bezier:
+                    {
+                        BezierMove(sx, sy);
+                    }
+                    break;
+                case Tool.QBezier:
+                    {
+                        QBezierMove(sx, sy);
+                    }
+                    break;
+                case Tool.Text:
+                    {
+                        TextMove(sx, sy);
+                    }
+                    break;
             }
         }
     }
