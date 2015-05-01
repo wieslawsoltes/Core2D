@@ -214,8 +214,8 @@ namespace Test2d
 
             if (grid)
             {
-                var s = LineGrid.Settings.Create(0, 0, width, height, 30, 30);
-                var g = LineGrid.Create(gs, s);
+                var settings = LineGrid.Settings.Create(0, 0, width, height, 30, 30);
+                var g = LineGrid.Create(gs, settings);
                 c.TemplateLayer.Shapes.Add(g);
             }
 
