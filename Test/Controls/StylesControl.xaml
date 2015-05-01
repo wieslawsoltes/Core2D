@@ -7,9 +7,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="180">
+             d:DesignHeight="600" d:DesignWidth="200">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -18,17 +19,27 @@
             <MenuItem Command="{Binding Commands.AddStyleCommand}" Header="_+"/>
             <MenuItem Command="{Binding Commands.RemoveStyleCommand}" Header="_-"/>
         </Menu>
+        <ComboBox ItemsSource="{Binding Editor.Container.StyleGroups}" 
+                  SelectedItem="{Binding Editor.Container.CurrentStyleGroup}" 
+                  Grid.Row="1" 
+                  Margin="2,2,2,2">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
         <ListBox DataContext="{Binding Editor}"
-                 ItemsSource="{Binding Container.Styles}" 
-                 SelectedItem="{Binding Container.CurrentStyle}" 
+                 ItemsSource="{Binding Container.CurrentStyleGroup.Styles}" 
+                 SelectedItem="{Binding Container.CurrentStyleGroup.CurrentStyle}" 
                  BorderBrush="{x:Null}"
-                 Grid.Row="1">
+                 Grid.Row="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Margin="0,5,0,5"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <controls:StyleControl Grid.Row="2" Margin="2" DataContext="{Binding Editor.Container.CurrentStyle}"/>
+        <controls:StyleControl Grid.Row="23" Margin="2" DataContext="{Binding Editor.Container.CurrentStyleGroup.CurrentStyle}"/>
     </Grid>
 </UserControl>
