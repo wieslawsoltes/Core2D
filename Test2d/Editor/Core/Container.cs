@@ -11,8 +11,8 @@ namespace Test2d
     {
         private double _width;
         private double _height;
-        private IList<ShapeStyle> _styles;
-        private ShapeStyle _currentStyle;
+        private IList<ShapeStyleGroup> _styleGroups;
+        private ShapeStyleGroup _currentStyleGroup;
         private BaseShape _pointShape;
         private IList<Layer> _layers;
         private Layer _currentLayer;
@@ -46,28 +46,28 @@ namespace Test2d
             }
         }
 
-        public IList<ShapeStyle> Styles
+        public IList<ShapeStyleGroup> StyleGroups
         {
-            get { return _styles; }
+            get { return _styleGroups; }
             set
             {
-                if (value != _styles)
+                if (value != _styleGroups)
                 {
-                    _styles = value;
-                    Notify("Styles");
+                    _styleGroups = value;
+                    Notify("StyleGroups");
                 }
             }
         }
 
-        public ShapeStyle CurrentStyle
+        public ShapeStyleGroup CurrentStyleGroup
         {
-            get { return _currentStyle; }
+            get { return _currentStyleGroup; }
             set
             {
-                if (value != _currentStyle)
+                if (value != _currentStyleGroup)
                 {
-                    _currentStyle = value;
-                    Notify("CurrentStyle");
+                    _currentStyleGroup = value;
+                    Notify("CurrentStyleGroup");
                 }
             }
         }
@@ -176,7 +176,7 @@ namespace Test2d
                 Width = width,
                 Height = height,
                 Layers = new ObservableCollection<Layer>(),
-                Styles = new ObservableCollection<ShapeStyle>()
+                StyleGroups = new ObservableCollection<ShapeStyleGroup>()
             };
 
             c.Layers.Add(Layer.Create("Layer1"));
@@ -189,22 +189,33 @@ namespace Test2d
             c.TemplateLayer = Layer.Create("Template");
             c.WorkingLayer = Layer.Create("Working");
 
-            c.Styles.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
-            c.Styles.Add(ShapeStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
-            c.Styles.Add(ShapeStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
-            c.Styles.Add(ShapeStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
-            c.Styles.Add(ShapeStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
+            // default styles group
+            var sgd = ShapeStyleGroup.Create("Default");
+            sgd.Styles.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
+            sgd.Styles.Add(ShapeStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
+            sgd.Styles.Add(ShapeStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
+            sgd.Styles.Add(ShapeStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
+            sgd.Styles.Add(ShapeStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
+            sgd.CurrentStyle = sgd.Styles.FirstOrDefault();
 
-            c.CurrentStyle = c.Styles.FirstOrDefault();
+            c.StyleGroups.Add(sgd);
+            c.CurrentStyleGroup = c.StyleGroups.FirstOrDefault();
 
+            // template styles group
+            var sgt = ShapeStyleGroup.Create("Template");
             var pss = ShapeStyle.Create("PointShape", 255, 255, 0, 0, 255, 255, 0, 0, 2.0);
+            var gs = ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.0);
+            sgt.Styles.Add(pss);
+            sgt.Styles.Add(gs);
+            c.StyleGroups.Add(sgt);
+            sgt.CurrentStyle = sgt.Styles.FirstOrDefault();
+
             CrossPointShape(c, pss);
 
             if (grid)
             {
-                var g = LineGrid.Create(
-                    ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.0),
-                    LineGrid.Settings.Create(0, 0, width, height, 30, 30));
+                var s = LineGrid.Settings.Create(0, 0, width, height, 30, 30);
+                var g = LineGrid.Create(gs, s);
                 c.TemplateLayer.Shapes.Add(g);
             }
 
