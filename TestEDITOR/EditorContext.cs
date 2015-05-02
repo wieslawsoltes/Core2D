@@ -340,7 +340,7 @@ namespace TestEDITOR
             _commands.TickSimulationCommand = new DelegateCommand(
                 () =>
                 {
-                    TickSimulation(Simulations);
+                    TickSimulation();
                 },
                 () => IsSimulationMode() && IsSimulationPaused);
 
@@ -504,37 +504,7 @@ namespace TestEDITOR
             return _timer != null;
         }
 
-        private void StartSimulation(IDictionary<XGroup, BoolSimulation> simulations)
-        {
-            _clock = new Clock(cycle: 0L, resolution: 100);
-            IsSimulationPaused = false;
-            _timer = new System.Threading.Timer(
-                (state) =>
-                {
-                    try
-                    {
-                        if (!IsSimulationPaused)
-                        {
-                            TickSimulation(simulations);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Debug.Print(ex.Message);
-                        System.Diagnostics.Debug.Print(ex.StackTrace);
-
-                        if (IsSimulationMode())
-                        {
-                            StopSimulation();
-                        }
-                    }
-                },
-                null, 0, _clock.Resolution);
-
-            UpdateCanExecuteState();
-        }
-
-        private void StartSimulation()
+        public void StartSimulation()
         {
             try
             {
@@ -550,7 +520,32 @@ namespace TestEDITOR
                     if (Simulations != null)
                     {
                         // TODO: Use Working layer to show simulation state.
-                        StartSimulation(Simulations);
+                        _clock = new Clock(cycle: 0L, resolution: 100);
+                        IsSimulationPaused = false;
+                        _timer = new System.Threading.Timer(
+                            (state) =>
+                            {
+                                try
+                                {
+                                    if (!IsSimulationPaused)
+                                    {
+                                        TickSimulation();
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    System.Diagnostics.Debug.Print(ex.Message);
+                                    System.Diagnostics.Debug.Print(ex.StackTrace);
+
+                                    if (IsSimulationMode())
+                                    {
+                                        StopSimulation();
+                                    }
+                                }
+                            },
+                            null, 0, _clock.Resolution);
+
+                        UpdateCanExecuteState();
                     }
                 }
             }
@@ -561,7 +556,34 @@ namespace TestEDITOR
             }
         }
 
-        private void PauseSimulation()
+        public void StopSimulation()
+        {
+            try
+            {
+                // TODO: Reset Working layer simulation state.
+
+                if (IsSimulationMode())
+                {
+                    _timer.Dispose();
+                    _timer = null;
+                    IsSimulationPaused = false;
+                    UpdateCanExecuteState();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+        }
+
+        public void RestartSimulation()
+        {
+            StopSimulation();
+            StartSimulation();
+        }
+
+        public void PauseSimulation()
         {
             try
             {
@@ -578,42 +600,15 @@ namespace TestEDITOR
             }
         }
 
-        private void TickSimulation(IDictionary<XGroup, BoolSimulation> simulations)
+        public void TickSimulation()
         {
             try
             {
                 if (IsSimulationMode())
                 {
-                    _simulationFactory.Run(simulations, _clock);
+                    _simulationFactory.Run(Simulations, _clock);
                     _clock.Tick();
                     // TODO: Update Working layer simulation state.
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
-            }
-        }
-
-        private void RestartSimulation()
-        {
-            StopSimulation();
-            StartSimulation();
-        }
-
-        private void StopSimulation()
-        {
-            try
-            {
-                // TODO: Reset Working layer simulation state.
-
-                if (IsSimulationMode())
-                {
-                    _timer.Dispose();
-                    _timer = null;
-                    IsSimulationPaused = false;
-                    UpdateCanExecuteState();
                 }
             }
             catch (Exception ex)
@@ -682,6 +677,11 @@ namespace TestEDITOR
             if (_watcher != null)
             {
                 _watcher.Dispose();
+            }
+
+            if (IsSimulationMode())
+            {
+                StopSimulation();
             }
         }
     }
