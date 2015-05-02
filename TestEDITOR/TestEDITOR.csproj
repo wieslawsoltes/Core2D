@@ -103,6 +103,30 @@
     <Compile Include="Roslyn\ScriptDirectory.cs" />
     <Compile Include="Roslyn\ScriptFile.cs" />
     <Compile Include="Roslyn\ScriptGlobals.cs" />
+    <Compile Include="Simulation\Simulations\Gates\AndSimulation.cs" />
+    <Compile Include="Simulation\Simulations\Gates\InverterSimulation.cs" />
+    <Compile Include="Simulation\Simulations\Gates\OrSimulation.cs" />
+    <Compile Include="Simulation\Simulations\Gates\XorSimulation.cs" />
+    <Compile Include="Simulation\Simulations\Memory\MemoryResetPrioritySimulation.cs" />
+    <Compile Include="Simulation\Simulations\Memory\MemoryResetPriorityVSimulation.cs" />
+    <Compile Include="Simulation\Simulations\Memory\MemorySetPrioritySimulation.cs" />
+    <Compile Include="Simulation\Simulations\Memory\MemorySetPriorityVSimulation.cs" />
+    <Compile Include="Simulation\Simulations\Shortcut\ShortcutSimulation.cs" />
+    <Compile Include="Simulation\Simulations\Signal\InputSimulation.cs" />
+    <Compile Include="Simulation\Simulations\Signal\OutputSimulation.cs" />
+    <Compile Include="Simulation\Simulations\Signal\SignalSimulation.cs" />
+    <Compile Include="Simulation\Simulations\Timers\TimerOffSimulation.cs" />
+    <Compile Include="Simulation\Simulations\Timers\TimerOnSimulation.cs" />
+    <Compile Include="Simulation\Simulations\Timers\TimerPulseSimulation.cs" />
+    <Compile Include="Simulation\Core\BoolInput.cs" />
+    <Compile Include="Simulation\Core\BoolSimulation.cs" />
+    <Compile Include="Simulation\BoolSimulationFactory.cs" />
+    <Compile Include="Simulation\Core\Clock.cs" />
+    <Compile Include="Simulation\Core\IClock.cs" />
+    <Compile Include="Simulation\ContainerGraph.cs" />
+    <Compile Include="Simulation\Core\ContainerGraphContext.cs" />
+    <Compile Include="Simulation\ContainerGraphDebug.cs" />
+    <Compile Include="Simulation\TopologicalSort.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

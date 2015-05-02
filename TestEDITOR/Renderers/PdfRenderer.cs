@@ -127,7 +127,7 @@ namespace TestPDF
                 // set scaling function
                 _scaleToPage = (value) => value * scale;
 
-                // draw block contents to pdf graphics
+                // draw container contents to pdf graphics
                 Draw(gfx, container);
             }
         }
