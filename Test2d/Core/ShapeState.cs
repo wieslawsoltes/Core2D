@@ -11,6 +11,9 @@ namespace Test2d
         Visible = 1,
         Printable = 2,
         Locked = 4,
-        Connector = 8
+        Connector = 8,
+        Input = 16,
+        Output = 32,
+        Standalone = 64
     }
 }
