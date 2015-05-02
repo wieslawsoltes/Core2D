@@ -468,7 +468,7 @@ namespace Test2d
                 {
                     var point = shape as XPoint;
                     point.Owner = group;
-                    point.State |= ShapeState.Connector;
+                    point.State |= ShapeState.Connector | ShapeState.None;
                     point.State &= ~ShapeState.Standalone;
                     group.Connectors.Add(point);
                 }
