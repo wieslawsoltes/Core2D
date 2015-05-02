@@ -467,11 +467,15 @@ namespace Test2d
                 if (shape is XPoint)
                 {
                     var point = shape as XPoint;
+                    point.Owner = group;
                     point.State |= ShapeState.Connector;
+                    point.State &= ~ShapeState.Standalone;
                     group.Connectors.Add(point);
                 }
                 else
                 {
+                    shape.Owner = group;
+                    shape.State &= ~ShapeState.Standalone;
                     group.Shapes.Add(shape);
                 }
 
