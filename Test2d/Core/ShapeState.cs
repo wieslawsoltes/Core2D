@@ -7,13 +7,14 @@ namespace Test2d
     [Flags]
     public enum ShapeState
     {
-        None = 0,
+        Default = 0,
         Visible = 1,
         Printable = 2,
         Locked = 4,
         Connector = 8,
-        Input = 16,
-        Output = 32,
-        Standalone = 64
+        None = 16,
+        Standalone = 32,
+        Input = 64,
+        Output = 128
     }
 }
