@@ -1,7 +1,7 @@
 var c = Context?.Editor?.Container;
-var l1 = XLine.Create(30, 30, 60, 30, c?.CurrentStyle, c?.PointShape);
-var l2 = XLine.Create(60, 30, 60, 60, c?.CurrentStyle, c?.PointShape);
-var l3 = XLine.Create(60, 30, 90, 30, c?.CurrentStyle, c?.PointShape);
+var l1 = XLine.Create(30, 30, 60, 30, c?.CurrentStyleGroup?.CurrentStyle, c?.PointShape);
+var l2 = XLine.Create(60, 30, 60, 60, c?.CurrentStyleGroup?.CurrentStyle, c?.PointShape);
+var l3 = XLine.Create(60, 30, 90, 30, c?.CurrentStyleGroup?.CurrentStyle, c?.PointShape);
 l2.Start = l1.End;
 l3.Start = l1.End;
 c?.CurrentLayer?.Shapes?.Add(l1);

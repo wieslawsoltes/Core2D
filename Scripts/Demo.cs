@@ -102,7 +102,7 @@ Container Create(double width, double height)
         Width = width,
         Height = height,
         Layers = new ObservableCollection<Layer>(),
-        Styles = new ObservableCollection<ShapeStyle>()
+        StyleGroups = new ObservableCollection<ShapeStyleGroup>()
     };
     c.Layers.Add(Layer.Create("Layer1"));
     c.Layers.Add(Layer.Create("Layer2"));
@@ -111,12 +111,15 @@ Container Create(double width, double height)
     c.CurrentLayer = c.Layers.FirstOrDefault();
     c.TemplateLayer = Layer.Create("Template");
     c.WorkingLayer = Layer.Create("Working");
-    c.Styles.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
-    c.Styles.Add(ShapeStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
-    c.Styles.Add(ShapeStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
-    c.Styles.Add(ShapeStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
-    c.Styles.Add(ShapeStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
-    c.CurrentStyle = c.Styles.FirstOrDefault();
+    var sgd = ShapeStyleGroup.Create("Default");
+    sgd.Styles.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
+    sgd.Styles.Add(ShapeStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
+    sgd.Styles.Add(ShapeStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
+    sgd.Styles.Add(ShapeStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
+    sgd.Styles.Add(ShapeStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
+    sgd.CurrentStyle = sgd.Styles.FirstOrDefault();
+    c.StyleGroups.Add(sgd);
+    c.CurrentStyleGroup = c.StyleGroups.FirstOrDefault();
     return c;
 }
 
@@ -126,12 +129,13 @@ var width = c.Width;
 var height = c.Height;
 var rand = new Random(Guid.NewGuid().GetHashCode());
 
-Lines(c, n, width, height, c.Styles[0], c.Layers[0], rand);
-Rectangles(c, n, width, height, c.Styles[1], c.Layers[1], rand);
-Ellipses(c, n, width, height, c.Styles[2], c.Layers[1], rand);
-Arcs(c, n, width, height, c.Styles[2], c.Layers[1], rand);
-Beziers(c, n, width, height, c.Styles[3], c.Layers[2], rand);
-QBeziers(c, n, width, height, c.Styles[4], c.Layers[2], rand);
-Texts(c, n, width, height, c.Styles[4], c.Layers[3], rand);
+var styles = c.CurrentStyleGroup.Styles;
+Lines(c, n, width, height, styles[0], c.Layers[0], rand);
+Rectangles(c, n, width, height, styles[1], c.Layers[1], rand);
+Ellipses(c, n, width, height, styles[2], c.Layers[1], rand);
+Arcs(c, n, width, height, styles[2], c.Layers[1], rand);
+Beziers(c, n, width, height, styles[3], c.Layers[2], rand);
+QBeziers(c, n, width, height, styles[4], c.Layers[2], rand);
+Texts(c, n, width, height, styles[4], c.Layers[3], rand);
 
 Context.Editor.Load(c);
