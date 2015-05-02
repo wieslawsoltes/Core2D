@@ -52,7 +52,7 @@ namespace TestSIM
             return true;
         }
 
-        private IDictionary<XGroup, BoolSimulation> GetSimulations(PageGraphContext context)
+        private IDictionary<XGroup, BoolSimulation> GetSimulations(ContainerGraphContext context)
         {
             var simulations = new Dictionary<XGroup, BoolSimulation>();
             foreach (var group in context.OrderedGroups)
@@ -69,7 +69,7 @@ namespace TestSIM
             return simulations;
         }
 
-        public IDictionary<XGroup, BoolSimulation> Create(PageGraphContext context)
+        public IDictionary<XGroup, BoolSimulation> Create(ContainerGraphContext context)
         {
             var simulations = GetSimulations(context);
 
