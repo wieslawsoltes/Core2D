@@ -124,7 +124,7 @@
     <Compile Include="Simulation\Core\Clock.cs" />
     <Compile Include="Simulation\Core\IClock.cs" />
     <Compile Include="Simulation\ContainerGraph.cs" />
-    <Compile Include="Simulation\Core\PageGraphContext.cs" />
+    <Compile Include="Simulation\Core\ContainerGraphContext.cs" />
     <Compile Include="Simulation\ContainerGraphDebug.cs" />
     <Compile Include="Simulation\TopologicalSort.cs" />
   </ItemGroup>
