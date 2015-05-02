@@ -78,23 +78,25 @@ namespace TestSIM
             {
                 var inputs = group.Connectors
                     .Where(pin => context.PinTypes[pin].HasFlag(ShapeState.Input))
-                    .SelectMany(pin =>
-                    {
-                        return context.Dependencies[pin]
-                            .Where(dep => context.PinTypes[dep.Item1].HasFlag(ShapeState.Output));
-                    })
-                    .Select(pin => pin);
+                    .SelectMany(
+                        pin =>
+                        {
+                            return context.Dependencies[pin]
+                                .Where(dep => context.PinTypes[dep.Point].HasFlag(ShapeState.Output));
+                        })
+                        .Select(pin => pin);
 
                 // convert inputs to BoolInput
                 var simulation = simulations[group];
-                simulation.Inputs = inputs.Select(input =>
-                {
-                    return new BoolInput()
+                simulation.Inputs = inputs.Select(
+                    input =>
                     {
-                        Simulation = simulations[input.Item1.Owner as XGroup],
-                        IsInverted = input.Item2
-                    };
-                }).ToArray();
+                        return new BoolInput()
+                        {
+                            Simulation = simulations[input.Point.Owner as XGroup],
+                            IsInverted = input.IsInverted
+                        };
+                    }).ToArray();
             }
             return simulations;
         }

@@ -30,9 +30,9 @@ namespace TestSIM
                     {
                         Debug.WriteLine(
                             "\t{0}:{1}, inverted: {2}",
-                            connection.Item1.Owner == null ? "<>" : connection.Item1.Owner.Name,
-                            connection.Item1.Name,
-                            connection.Item2);
+                            connection.Point.Owner == null ? "<>" : connection.Point.Owner.Name,
+                            connection.Point.Name,
+                            connection.IsInverted);
                     }
                 }
                 else
@@ -59,10 +59,10 @@ namespace TestSIM
                     {
                         Debug.WriteLine(
                             "\t[{0}] {1}:{2}, inverted: {3}",
-                            dependency.Item1.State,
-                            dependency.Item1.Owner == null ? "<>" : dependency.Item1.Owner.Name,
-                            dependency.Item1.Name,
-                            dependency.Item2);
+                            dependency.Point.State,
+                            dependency.Point.Owner == null ? "<>" : dependency.Point.Owner.Name,
+                            dependency.Point.Name,
+                            dependency.IsInverted);
                     }
                 }
                 else
