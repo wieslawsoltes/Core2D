@@ -320,6 +320,133 @@ namespace TestEDITOR
             WarmUpCSharpScript();
         }
 
+        public void Eval(string code, EditorContext context)
+        {
+            ScriptOptions options = ScriptOptions.Default
+                .AddNamespaces("System")
+                .AddNamespaces("System.Collections.Generic")
+                .AddReferences(Assembly.GetAssembly(typeof(ObservableCollection<>)))
+                .AddNamespaces("System.Collections.ObjectModel")
+                .AddReferences(Assembly.GetAssembly(typeof(System.Linq.Enumerable)))
+                .AddNamespaces("System.Linq")
+                .AddReferences(Assembly.GetAssembly(typeof(ObservableObject)))
+                .AddNamespaces("Test2d");
+
+            CSharpScript.Eval(code, options, new ScriptGlobals() { Context = context });
+        }
+
+        public void Eval(string path)
+        {
+            try
+            {
+                var code = System.IO.File.ReadAllText(path);
+                var context = this;
+                Eval(code, context);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+            }
+        }
+
+        public void Open(string path)
+        {
+            var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
+            var container = ContainerSerializer.Deserialize(json);
+            _editor.Load(container);
+        }
+
+        public void Save(string path)
+        {
+            var json = ContainerSerializer.Serialize(_editor.Container);
+            System.IO.File.WriteAllText(path, json, Encoding.UTF8);
+        }
+
+        public void ExportAsPdf(string path)
+        {
+            var renderer = new PdfRenderer()
+            {
+                DrawShapeState = ShapeState.Printable
+            };
+            renderer.Save(path, _editor.Container);
+        }
+  
+        public void ExportAsEmf(string path)
+        {
+            Emf.Save(path, _editor.Container);
+        }
+        
+        public void ExportAsDxf(string path, Dxf.DxfAcadVer version)
+        {
+            var renderer = new DxfRenderer()
+            {
+                DrawShapeState = ShapeState.Printable
+            };
+            renderer.Create(path, _editor.Container, version);
+        }
+ 
+        public void ClearAll()
+        {
+            _editor.Container.Clear();
+            _editor.Container.Invalidate();
+        }
+
+        private void WarmUpCSharpScript()
+        {
+            // NOTE: Warmup Roslyn script engine.
+            try
+            {
+                Task.Run(() => Eval("Action a = () => { };", this));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+            }
+        }
+
+        public void InitializeSctipts()
+        {
+#if DEBUG
+            _rootScriptsPath = "../../../Scripts";
+#else
+            _rootScriptsPath = "Scripts";
+#endif
+
+            Action update = () =>
+            {
+                try
+                {
+                    ScriptDirectories =
+                        ScriptDirectory.CreateScriptDirectories(_rootScriptsPath);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.Print(ex.Message);
+                }
+            };
+
+            if (System.IO.Directory.Exists(_rootScriptsPath))
+            {
+                update();
+
+                _watcher = new System.IO.FileSystemWatcher();
+                _watcher.Path = _rootScriptsPath;
+                _watcher.Filter = "*.*";
+                _watcher.NotifyFilter =
+                    System.IO.NotifyFilters.LastAccess
+                    | System.IO.NotifyFilters.LastWrite
+                    | System.IO.NotifyFilters.FileName
+                    | System.IO.NotifyFilters.DirectoryName;
+                _watcher.IncludeSubdirectories = true;
+                _watcher.Filter = "*.*";
+                _watcher.Changed += (s, e) => update();
+                _watcher.Created += (s, e) => update();
+                _watcher.Deleted += (s, e) => update();
+                _watcher.Renamed += (s, e) => update();
+                _watcher.EnableRaisingEvents = true;
+            }
+        }
+
         public bool IsEditMode()
         {
             return _timer == null;
@@ -367,7 +494,7 @@ namespace TestEDITOR
                     return;
                 }
 
-                var graph = PageGraph.Create(Editor.Container);
+                var graph = ContainerGraph.Create(Editor.Container);
                 if (graph != null)
                 {
                     _simulations = _simulationFactory.Create(graph);
@@ -442,133 +569,6 @@ namespace TestEDITOR
             {
                 System.Diagnostics.Debug.Print(ex.Message);
                 System.Diagnostics.Debug.Print(ex.StackTrace);
-            }
-        }
-
-        private void WarmUpCSharpScript()
-        {
-            // NOTE: Warmup Roslyn script engine.
-            try
-            {
-                Task.Run(() => Eval("Action a = () => { };", this));
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.Print(ex.Message);
-            }
-        }
-
-        public void Eval(string code, EditorContext context)
-        {
-            ScriptOptions options = ScriptOptions.Default
-                .AddNamespaces("System")
-                .AddNamespaces("System.Collections.Generic")
-                .AddReferences(Assembly.GetAssembly(typeof(ObservableCollection<>)))
-                .AddNamespaces("System.Collections.ObjectModel")
-                .AddReferences(Assembly.GetAssembly(typeof(System.Linq.Enumerable)))
-                .AddNamespaces("System.Linq")
-                .AddReferences(Assembly.GetAssembly(typeof(ObservableObject)))
-                .AddNamespaces("Test2d");
-
-            CSharpScript.Eval(code, options, new ScriptGlobals() { Context = context });
-        }
-
-        public void Eval(string path)
-        {
-            try
-            {
-                var code = System.IO.File.ReadAllText(path);
-                var context = this;
-                Eval(code, context);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.Print(ex.Message);
-            }
-        }
-
-        public void Open(string path)
-        {
-            var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
-            var container = ContainerSerializer.Deserialize(json);
-            _editor.Load(container);
-        }
-
-        public void Save(string path)
-        {
-            var json = ContainerSerializer.Serialize(_editor.Container);
-            System.IO.File.WriteAllText(path, json, Encoding.UTF8);
-        }
-
-        public void ExportAsPdf(string path)
-        {
-            var renderer = new PdfRenderer()
-            {
-                DrawShapeState = ShapeState.Printable
-            };
-            renderer.Save(path, _editor.Container);
-        }
-  
-        public void ExportAsEmf(string path)
-        {
-            Emf.Save(path, _editor.Container);
-        }
-        
-        public void ExportAsDxf(string path, Dxf.DxfAcadVer version)
-        {
-            var renderer = new DxfRenderer()
-            {
-                DrawShapeState = ShapeState.Printable
-            };
-            renderer.Create(path, _editor.Container, version);
-        }
- 
-        public void ClearAll()
-        {
-            _editor.Container.Clear();
-            _editor.Container.Invalidate();
-        }
-
-        public void InitializeSctipts()
-        {
-#if DEBUG
-            _rootScriptsPath = "../../../Scripts";
-#else
-            _rootScriptsPath = "Scripts";
-#endif
-
-            Action update = () =>
-            {
-                try
-                {
-                    ScriptDirectories =
-                        ScriptDirectory.CreateScriptDirectories(_rootScriptsPath);
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.Print(ex.Message);
-                }
-            };
-
-            if (System.IO.Directory.Exists(_rootScriptsPath))
-            {
-                update();
-
-                _watcher = new System.IO.FileSystemWatcher();
-                _watcher.Path = _rootScriptsPath;
-                _watcher.Filter = "*.*";
-                _watcher.NotifyFilter =
-                    System.IO.NotifyFilters.LastAccess
-                    | System.IO.NotifyFilters.LastWrite
-                    | System.IO.NotifyFilters.FileName
-                    | System.IO.NotifyFilters.DirectoryName;
-                _watcher.IncludeSubdirectories = true;
-                _watcher.Filter = "*.*";
-                _watcher.Changed += (s, e) => update();
-                _watcher.Created += (s, e) => update();
-                _watcher.Deleted += (s, e) => update();
-                _watcher.Renamed += (s, e) => update();
-                _watcher.EnableRaisingEvents = true;
             }
         }
 
