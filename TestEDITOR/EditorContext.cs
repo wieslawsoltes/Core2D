@@ -17,6 +17,7 @@ using TestDXF;
 using TestEMF;
 using TestJSON;
 using TestPDF;
+using TestSIM;
 
 namespace TestEDITOR
 {
@@ -26,7 +27,12 @@ namespace TestEDITOR
         private Editor _editor;
         private string _rootScriptsPath;
         private IList<ScriptDirectory> _scriptDirectories;
+        private bool _isSimulationPaused;
         private System.IO.FileSystemWatcher _watcher = null;
+        private System.Threading.Timer _timer = null;
+        private BoolSimulationFactory _simulationFactory = null;
+        private IDictionary<XGroup, BoolSimulation> _simulations;
+        private Clock _clock = null;
 
         public EditorCommands Commands
         {
@@ -80,10 +86,40 @@ namespace TestEDITOR
             }
         }
 
+        public bool IsSimulationPaused
+        {
+            get { return _isSimulationPaused; }
+            set
+            {
+                if (value != _isSimulationPaused)
+                {
+                    _isSimulationPaused = value;
+                    Notify("IsSimulationPaused");
+                }
+            }
+        }
+
         public void Initialize(IView view, IRenderer renderer)
         {
             _commands = new EditorCommands();
             _editor = Editor.Create(Container.Create(), renderer);
+
+            _simulationFactory = new BoolSimulationFactory();
+            _simulationFactory.Register(new SignalSimulation());
+            _simulationFactory.Register(new InputSimulation());
+            _simulationFactory.Register(new OutputSimulation());
+            _simulationFactory.Register(new ShortcutSimulation());
+            _simulationFactory.Register(new AndSimulation());
+            _simulationFactory.Register(new OrSimulation());
+            _simulationFactory.Register(new InverterSimulation());
+            _simulationFactory.Register(new XorSimulation());
+            _simulationFactory.Register(new TimerOnSimulation());
+            _simulationFactory.Register(new TimerOffSimulation());
+            _simulationFactory.Register(new TimerPulseSimulation());
+            _simulationFactory.Register(new MemoryResetPriorityVSimulation());
+            _simulationFactory.Register(new MemorySetPriorityVSimulation());
+            _simulationFactory.Register(new MemoryResetPrioritySimulation());
+            _simulationFactory.Register(new MemorySetPrioritySimulation());
 
             (_editor.Renderer as ObservableObject).PropertyChanged +=
                 (s, e) =>
@@ -251,7 +287,162 @@ namespace TestEDITOR
                     _editor.RemoveCurrentShape();
                 });
 
+            _commands.StartSimulationCommand = new DelegateCommand(
+                () =>
+                {
+                    StartSimulation();
+                });
+
+            _commands.StopSimulationCommand = new DelegateCommand(
+                () =>
+                {
+                    StopSimulation(); 
+                });
+
+            _commands.RestartSimulationCommand = new DelegateCommand(
+                () =>
+                {
+                    RestartSimulation();
+                });
+
+            _commands.PauseSimulationCommand = new DelegateCommand(
+                () =>
+                {
+                    PauseSimulation();
+                });
+
+            _commands.TickSimulationCommand = new DelegateCommand(
+                () =>
+                {
+                    TickSimulation(_simulations);
+                });
+
             WarmUpCSharpScript();
+        }
+
+        public bool IsEditMode()
+        {
+            return _timer == null;
+        }
+
+        public bool IsSimulationMode()
+        {
+            return _timer != null;
+        }
+
+        private void StartSimulation(IDictionary<XGroup, BoolSimulation> simulations)
+        {
+            _clock = new Clock(cycle: 0L, resolution: 100);
+            IsSimulationPaused = false;
+            _timer = new System.Threading.Timer(
+                (state) =>
+                {
+                    try
+                    {
+                        if (!IsSimulationPaused)
+                        {
+                            TickSimulation(simulations);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.Print(ex.Message);
+                        System.Diagnostics.Debug.Print(ex.StackTrace);
+
+                        if (IsSimulationMode())
+                        {
+                            StopSimulation();
+                        }
+                    }
+                },
+                null, 0, _clock.Resolution);
+        }
+
+        private void StartSimulation()
+        {
+            try
+            {
+                if (IsSimulationMode())
+                {
+                    return;
+                }
+
+                var graph = PageGraph.Create(Editor.Container);
+                if (graph != null)
+                {
+                    _simulations = _simulationFactory.Create(graph);
+                    if (_simulations != null)
+                    {
+                        // TODO: Use Working layer to show simulation state.
+                        StartSimulation(_simulations);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+        }
+
+        private void PauseSimulation()
+        {
+            try
+            {
+                if (IsSimulationMode())
+                {
+                    IsSimulationPaused = !IsSimulationPaused;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+        }
+
+        private void TickSimulation(IDictionary<XGroup, BoolSimulation> simulations)
+        {
+            try
+            {
+                if (IsSimulationMode())
+                {
+                    _simulationFactory.Run(simulations, _clock);
+                    _clock.Tick();
+                    // TODO: Update Working layer simulation state.
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+        }
+
+        private void RestartSimulation()
+        {
+            StopSimulation();
+            StartSimulation();
+        }
+
+        private void StopSimulation()
+        {
+            try
+            {
+                // TODO: Reset Working layer simulation state.
+
+                if (IsSimulationMode())
+                {
+                    _timer.Dispose();
+                    _timer = null;
+                    IsSimulationPaused = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
 
         private void WarmUpCSharpScript()
