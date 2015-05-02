@@ -167,7 +167,7 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Script">
-            <MenuItem Header="_Evaluate..." Command="{Binding Commands.EvalCommand}" InputGestureText="F5"/>
+            <MenuItem Header="_Evaluate..." Command="{Binding Commands.EvalCommand}" InputGestureText="F9"/>
         </MenuItem>
         <MenuItem Header="S_cripts" ItemsSource="{Binding ScriptDirectories}">
             <MenuItem.ItemTemplate>
@@ -204,14 +204,25 @@
                       Command="{Binding Commands.TryToConnectCommand}" InputGestureText="C"/>
         </MenuItem>
         <MenuItem Header="S_imulation">
-            <MenuItem Header="_Start" Command="{Binding Commands.StartSimulationCommand}" InputGestureText=""/>
-            <MenuItem Header="S_top" Command="{Binding Commands.StopSimulationCommand}" InputGestureText=""/>
+            <MenuItem Header="_Start" Command="{Binding Commands.StartSimulationCommand}" InputGestureText="F5"/>
+            <MenuItem Header="S_top" Command="{Binding Commands.StopSimulationCommand}" InputGestureText="F6"/>
             <Separator/>
-            <MenuItem Header="_Restart" Command="{Binding Commands.RestartSimulationCommand}" InputGestureText=""/>
+            <MenuItem Header="_Restart" Command="{Binding Commands.RestartSimulationCommand}" InputGestureText="Ctrl+F5"/>
             <Separator/>
-            <MenuItem Header="_Pause" Command="{Binding Commands.PauseSimulationCommand}" InputGestureText=""/>
+            <MenuItem Header="_Pause" Command="{Binding Commands.PauseSimulationCommand}" InputGestureText="Ctrl+F6">
+                <MenuItem.Style>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="IsChecked" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSimulationPaused}" Value="True">
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.Style>
+            </MenuItem>
             <Separator/>
-            <MenuItem Header="Ti_ck" Command="{Binding Commands.TickSimulationCommand}" InputGestureText=""/>
+            <MenuItem Header="Ti_ck" Command="{Binding Commands.TickSimulationCommand}" InputGestureText="F7"/>
         </MenuItem>
         <MenuItem Header="_Window">
             <MenuItem Header="_Layers..." Command="{Binding Commands.LayersWindowCommand}" InputGestureText="Ctrl+L"/>

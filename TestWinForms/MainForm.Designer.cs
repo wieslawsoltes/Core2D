@@ -61,12 +61,22 @@ namespace TestWinForms
             this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.evaluateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.defaultIsFilledToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.snapToGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.tryToConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.simulationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
+            this.restartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
+            this.pauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
+            this.tickToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.layersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
@@ -78,16 +88,6 @@ namespace TestWinForms
             this.containerEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.propertiessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.simulationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.restartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tickToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -367,9 +367,15 @@ namespace TestWinForms
             // evaluateToolStripMenuItem
             // 
             this.evaluateToolStripMenuItem.Name = "evaluateToolStripMenuItem";
-            this.evaluateToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.evaluateToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F9;
             this.evaluateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.evaluateToolStripMenuItem.Text = "&Evaluate...";
+            // 
+            // scriptsToolStripMenuItem
+            // 
+            this.scriptsToolStripMenuItem.Name = "scriptsToolStripMenuItem";
+            this.scriptsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.scriptsToolStripMenuItem.Text = "S&cripts";
             // 
             // optionsToolStripMenuItem
             // 
@@ -413,6 +419,71 @@ namespace TestWinForms
             this.tryToConnectToolStripMenuItem.ShortcutKeyDisplayString = "C";
             this.tryToConnectToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.tryToConnectToolStripMenuItem.Text = "Try To &Connect";
+            // 
+            // simulationToolStripMenuItem
+            // 
+            this.simulationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startToolStripMenuItem,
+            this.stopToolStripMenuItem,
+            this.toolStripSeparator18,
+            this.restartToolStripMenuItem,
+            this.toolStripSeparator19,
+            this.pauseToolStripMenuItem,
+            this.toolStripSeparator20,
+            this.tickToolStripMenuItem});
+            this.simulationToolStripMenuItem.Name = "simulationToolStripMenuItem";
+            this.simulationToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+            this.simulationToolStripMenuItem.Text = "S&imulation";
+            // 
+            // startToolStripMenuItem
+            // 
+            this.startToolStripMenuItem.Name = "startToolStripMenuItem";
+            this.startToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.startToolStripMenuItem.Text = "&Start";
+            // 
+            // stopToolStripMenuItem
+            // 
+            this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
+            this.stopToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F6;
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.stopToolStripMenuItem.Text = "S&top";
+            // 
+            // toolStripSeparator18
+            // 
+            this.toolStripSeparator18.Name = "toolStripSeparator18";
+            this.toolStripSeparator18.Size = new System.Drawing.Size(153, 6);
+            // 
+            // restartToolStripMenuItem
+            // 
+            this.restartToolStripMenuItem.Name = "restartToolStripMenuItem";
+            this.restartToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F5)));
+            this.restartToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.restartToolStripMenuItem.Text = "&Restart";
+            // 
+            // toolStripSeparator19
+            // 
+            this.toolStripSeparator19.Name = "toolStripSeparator19";
+            this.toolStripSeparator19.Size = new System.Drawing.Size(153, 6);
+            // 
+            // pauseToolStripMenuItem
+            // 
+            this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
+            this.pauseToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F6)));
+            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.pauseToolStripMenuItem.Text = "&Pause";
+            // 
+            // toolStripSeparator20
+            // 
+            this.toolStripSeparator20.Name = "toolStripSeparator20";
+            this.toolStripSeparator20.Size = new System.Drawing.Size(153, 6);
+            // 
+            // tickToolStripMenuItem
+            // 
+            this.tickToolStripMenuItem.Name = "tickToolStripMenuItem";
+            this.tickToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
+            this.tickToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.tickToolStripMenuItem.Text = "Ti&ck";
             // 
             // windowToolStripMenuItem
             // 
@@ -492,72 +563,6 @@ namespace TestWinForms
             this.propertiessToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Return)));
             this.propertiessToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.propertiessToolStripMenuItem.Text = "&Propertiess...";
-            // 
-            // scriptsToolStripMenuItem
-            // 
-            this.scriptsToolStripMenuItem.Name = "scriptsToolStripMenuItem";
-            this.scriptsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.scriptsToolStripMenuItem.Text = "S&cripts";
-            // 
-            // simulationToolStripMenuItem
-            // 
-            this.simulationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.startToolStripMenuItem,
-            this.stopToolStripMenuItem,
-            this.toolStripSeparator18,
-            this.restartToolStripMenuItem,
-            this.toolStripSeparator19,
-            this.pauseToolStripMenuItem,
-            this.toolStripSeparator20,
-            this.tickToolStripMenuItem});
-            this.simulationToolStripMenuItem.Name = "simulationToolStripMenuItem";
-            this.simulationToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
-            this.simulationToolStripMenuItem.Text = "S&imulation";
-            // 
-            // startToolStripMenuItem
-            // 
-            this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.startToolStripMenuItem.Text = "&Start";
-            // 
-            // stopToolStripMenuItem
-            // 
-            this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.stopToolStripMenuItem.Text = "S&top";
-            // 
-            // restartToolStripMenuItem
-            // 
-            this.restartToolStripMenuItem.Name = "restartToolStripMenuItem";
-            this.restartToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.restartToolStripMenuItem.Text = "&Restart";
-            // 
-            // pauseToolStripMenuItem
-            // 
-            this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
-            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.pauseToolStripMenuItem.Text = "&Pause";
-            // 
-            // tickToolStripMenuItem
-            // 
-            this.tickToolStripMenuItem.Name = "tickToolStripMenuItem";
-            this.tickToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.tickToolStripMenuItem.Text = "Ti&ck";
-            // 
-            // toolStripSeparator18
-            // 
-            this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new System.Drawing.Size(149, 6);
-            // 
-            // toolStripSeparator19
-            // 
-            this.toolStripSeparator19.Name = "toolStripSeparator19";
-            this.toolStripSeparator19.Size = new System.Drawing.Size(149, 6);
-            // 
-            // toolStripSeparator20
-            // 
-            this.toolStripSeparator20.Name = "toolStripSeparator20";
-            this.toolStripSeparator20.Size = new System.Drawing.Size(149, 6);
             // 
             // MainForm
             // 
