@@ -12,6 +12,8 @@ namespace TestDXF
     public class DxfRenderer : ObservableObject, IRenderer
     {
         private double _zoom;
+        private double _panX;
+        private double _panY;
         private ShapeState _drawShapeState;
         private BaseShape _selectedShape;
         private ICollection<BaseShape> _selectedShapes;
@@ -25,6 +27,32 @@ namespace TestDXF
                 {
                     _zoom = value;
                     Notify("Zoom");
+                }
+            }
+        }
+
+        public double PanX
+        {
+            get { return _panX; }
+            set
+            {
+                if (value != _panX)
+                {
+                    _panX = value;
+                    Notify("PanX");
+                }
+            }
+        }
+
+        public double PanY
+        {
+            get { return _panY; }
+            set
+            {
+                if (value != _panY)
+                {
+                    _panY = value;
+                    Notify("PanY");
                 }
             }
         }

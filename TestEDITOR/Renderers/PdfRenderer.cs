@@ -14,6 +14,8 @@ namespace TestPDF
     public class PdfRenderer : Test2d.ObservableObject, Test2d.IRenderer
     {
         private double _zoom;
+        private double _panX;
+        private double _panY;
         private Test2d.ShapeState _drawShapeState;
         private Test2d.BaseShape _selectedShape;
         private ICollection<Test2d.BaseShape> _selectedShapes;
@@ -27,6 +29,32 @@ namespace TestPDF
                 {
                     _zoom = value;
                     Notify("Zoom");
+                }
+            }
+        }
+
+        public double PanX
+        {
+            get { return _panX; }
+            set
+            {
+                if (value != _panX)
+                {
+                    _panX = value;
+                    Notify("PanX");
+                }
+            }
+        }
+
+        public double PanY
+        {
+            get { return _panY; }
+            set
+            {
+                if (value != _panY)
+                {
+                    _panY = value;
+                    Notify("PanY");
                 }
             }
         }
