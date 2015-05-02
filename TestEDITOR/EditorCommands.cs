@@ -49,6 +49,12 @@ namespace TestEDITOR
 
         public ICommand RemoveShapeCommand { get; set; }
 
+        public ICommand StartSimulationCommand { get; set; }
+        public ICommand StopSimulationCommand { get; set; }
+        public ICommand RestartSimulationCommand { get; set; }
+        public ICommand PauseSimulationCommand { get; set; }
+        public ICommand TickSimulationCommand { get; set; }
+
         public ICommand LayersWindowCommand { get; set; }
         public ICommand StyleWindowCommand { get; set; }
         public ICommand StylesWindowCommand { get; set; }
