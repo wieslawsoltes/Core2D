@@ -7,7 +7,8 @@ namespace Test2d
     public abstract class BaseShape : ObservableObject
     {
         private string _name;
-        private ShapeState _state = ShapeState.Visible | ShapeState.Printable;
+        private BaseShape _owner;
+        private ShapeState _state = ShapeState.Visible | ShapeState.Printable | ShapeState.Standalone;
         private ShapeStyle _style;
 
         public string Name
@@ -22,7 +23,20 @@ namespace Test2d
                 }
             }
         }
-        
+
+        public BaseShape Owner
+        {
+            get { return _owner; }
+            set
+            {
+                if (value != _owner)
+                {
+                    _owner = value;
+                    Notify("Owner");
+                }
+            }
+        }
+
         public ShapeState State
         {
             get { return _state; }
