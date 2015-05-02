@@ -14,6 +14,6 @@ namespace TestSIM
         public IDictionary<XPoint, ICollection<Tuple<XPoint, bool>>> Connections { get; set; }
         public IDictionary<XPoint, ICollection<Tuple<XPoint, bool>>> Dependencies { get; set; }
         public IDictionary<XPoint, ShapeState> PinTypes { get; set; }
-        public IList<XGroup> OrderedBlocks { get; set; }
+        public IList<XGroup> OrderedGroups { get; set; }
     }
 }
