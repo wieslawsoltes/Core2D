@@ -34,24 +34,24 @@ namespace TestSIM
                         yield return line.End;
                     }
                 }
-                //else if (shape is XBezier)
-                //{
-                //    var bezier = shape as XBezier;
-                //    if (bezier.Style.Name.StartsWith("Logic-Wire"))
-                //    {
-                //        yield return bezier.Point1;
-                //        yield return bezier.Point4;
-                //    }
-                //}
-                //else if (shape is XQBezier)
-                //{
-                //    var qbezier = shape as XQBezier;
-                //    if (qbezier.Style.Name.StartsWith("Logic-Wire"))
-                //    {
-                //        yield return qbezier.Point1;
-                //        yield return qbezier.Point3;
-                //    }
-                //}
+                else if (shape is XBezier)
+                {
+                    var bezier = shape as XBezier;
+                    if (bezier.Style.Name.StartsWith("Logic-Wire"))
+                    {
+                        yield return bezier.Point1;
+                        yield return bezier.Point4;
+                    }
+                }
+                else if (shape is XQBezier)
+                {
+                    var qbezier = shape as XQBezier;
+                    if (qbezier.Style.Name.StartsWith("Logic-Wire"))
+                    {
+                        yield return qbezier.Point1;
+                        yield return qbezier.Point3;
+                    }
+                }
                 else if (shape is XGroup)
                 {
                     var group = shape as XGroup;
@@ -79,7 +79,14 @@ namespace TestSIM
             }
         }
 
-        public static PageGraphContext Create(Container container)
+        public static bool IsValidWireType(BaseShape shape)
+        {
+            return shape is XLine 
+                || shape is XBezier 
+                || shape is XQBezier;
+        }
+
+        public static ContainerGraphContext Create(Container container)
         {
             var shapes = container.Layers.SelectMany(l => l.Shapes);
 
@@ -87,39 +94,39 @@ namespace TestSIM
                 shapes,
                 shapes.Where(s => s is XGroup).Cast<XGroup>(),
                 shapes.Where(s => s is XPoint && s.State.HasFlag(ShapeState.Standalone)).Cast<XPoint>(),
-                shapes.Where(s => s is XLine && s.Style.Name.StartsWith("Logic-Wire")).Cast<XLine>());
+                shapes.Where(s => IsValidWireType(s) && s.Style.Name.StartsWith("Logic-Wire")));
         }
 
-        public static PageGraphContext Create(
+        public static ContainerGraphContext Create(
             IEnumerable<BaseShape> shapes,
             IEnumerable<XGroup> groups,
             IEnumerable<XPoint> pins,
-            IEnumerable<XLine> wires)
+            IEnumerable<BaseShape> wires)
         {
-            var context = new PageGraphContext();
+            var context = new ContainerGraphContext();
 
             context.Connections = FindConnections(shapes, pins, wires);
-            //PageGraphDebug.WriteConnections(context);
+            ContainerGraphDebug.WriteConnections(context);
             context.Dependencies = FindDependencies(groups, context.Connections);
-            //PageGraphDebug.WriteDependencies(context);
+            ContainerGraphDebug.WriteDependencies(context);
             context.PinTypes = FindPinTypes(groups, wires, pins, context.Dependencies);
-            //PageGraphDebug.WritePinTypes(context);
+            ContainerGraphDebug.WritePinTypes(context);
             context.OrderedGroups = SortDependencies(groups, context.Dependencies, context.PinTypes);
-            //PageGraphDebug.WriteOrderedGroups(context);
+            ContainerGraphDebug.WriteOrderedGroups(context);
 
             return context;
         }
 
-        public static bool IsPinInverted(XLine wire)
+        public static bool IsPinInverted(ShapeStyle style)
         {
-            return (wire.Style.LineStyle.StartArrowStyle.ArrowType == ArrowType.Ellipse)
-                | (wire.Style.LineStyle.EndArrowStyle.ArrowType == ArrowType.Ellipse);
+            return (style.LineStyle.StartArrowStyle.ArrowType == ArrowType.Ellipse)
+                | (style.LineStyle.EndArrowStyle.ArrowType == ArrowType.Ellipse);
         }
 
         public static IDictionary<XPoint, ICollection<Tuple<XPoint, bool>>> FindConnections(
             IEnumerable<BaseShape> shapes,
             IEnumerable<XPoint> pins,
-            IEnumerable<XLine> wires)
+            IEnumerable<BaseShape> wires)
         {
             var connections = new Dictionary<XPoint, ICollection<Tuple<XPoint, bool>>>();
 
@@ -133,19 +140,63 @@ namespace TestSIM
 
             foreach (var wire in wires)
             {
-                var startConnections = connections[wire.Start];
-                var endConnections = connections[wire.End];
-                bool isPinInverted = IsPinInverted(wire);
-  
-                var et = Tuple.Create(wire.End, isPinInverted);
-                if (!startConnections.Contains(et))
+                if (wire is XLine)
                 {
-                    startConnections.Add(et);
+                    var line = wire as XLine;
+                    var startConnections = connections[line.Start];
+                    var endConnections = connections[line.End];
+                    bool isPinInverted = IsPinInverted(line.Style);
+
+                    var et = Tuple.Create(line.End, isPinInverted);
+                    if (!startConnections.Contains(et))
+                    {
+                        startConnections.Add(et);
+                    }
+                    var st = Tuple.Create(line.Start, isPinInverted);
+                    if (!endConnections.Contains(st))
+                    {
+                        endConnections.Add(st);
+                    }
                 }
-                var st = Tuple.Create(wire.Start, isPinInverted);
-                if (!endConnections.Contains(st))
+                else if (wire is XBezier)
                 {
-                    endConnections.Add(st);
+                    var bezier = wire as XBezier;
+                    var startConnections = connections[bezier.Point1];
+                    var endConnections = connections[bezier.Point4];
+                    bool isPinInverted = IsPinInverted(bezier.Style);
+
+                    var et = Tuple.Create(bezier.Point4, isPinInverted);
+                    if (!startConnections.Contains(et))
+                    {
+                        startConnections.Add(et);
+                    }
+                    var st = Tuple.Create(bezier.Point1, isPinInverted);
+                    if (!endConnections.Contains(st))
+                    {
+                        endConnections.Add(st);
+                    }
+                }
+                else if (wire is XQBezier)
+                {
+                    var qbezier = wire as XQBezier;
+                    var startConnections = connections[qbezier.Point1];
+                    var endConnections = connections[qbezier.Point3];
+                    bool isPinInverted = IsPinInverted(qbezier.Style);
+
+                    var et = Tuple.Create(qbezier.Point3, isPinInverted);
+                    if (!startConnections.Contains(et))
+                    {
+                        startConnections.Add(et);
+                    }
+                    var st = Tuple.Create(qbezier.Point1, isPinInverted);
+                    if (!endConnections.Contains(st))
+                    {
+                        endConnections.Add(st);
+                    }
+                }
+                else
+                {
+                    throw new Exception("Invalid wire type. Supported wire types: XLine, XBezier and XQBezier.");
                 }
             }
 
@@ -204,7 +255,7 @@ namespace TestSIM
 
         public static IDictionary<XPoint, ShapeState> FindPinTypes(
             IEnumerable<XGroup> groups,
-            IEnumerable<XLine> wires,
+            IEnumerable<BaseShape> wires,
             IEnumerable<XPoint> pins,
             IDictionary<XPoint, ICollection<Tuple<XPoint, bool>>> dependencies)
         {
@@ -295,22 +346,72 @@ namespace TestSIM
                 }
             }
 
+            // standalone pins in wires
             foreach (var wire in wires)
             {
-                if (wire.Start.State.HasFlag(ShapeState.Standalone))
+                if (wire is XLine)
                 {
-                    if (!pinTypes.ContainsKey(wire.Start))
+                    var line = wire as XLine;
+
+                    if (line.Start.State.HasFlag(ShapeState.Standalone))
                     {
-                        pinTypes.Add(wire.Start, wire.Start.State);
+                        if (!pinTypes.ContainsKey(line.Start))
+                        {
+                            pinTypes.Add(line.Start, line.Start.State);
+                        }
+                    }
+
+                    if (line.End.State.HasFlag(ShapeState.Standalone))
+                    {
+                        if (!pinTypes.ContainsKey(line.End))
+                        {
+                            pinTypes.Add(line.End, line.End.State);
+                        }
                     }
                 }
-
-                if (wire.End.State.HasFlag(ShapeState.Standalone))
+                else if (wire is XBezier)
                 {
-                    if (!pinTypes.ContainsKey(wire.End))
+                    var bezier = wire as XBezier;
+
+                    if (bezier.Point1.State.HasFlag(ShapeState.Standalone))
                     {
-                        pinTypes.Add(wire.End, wire.End.State);
+                        if (!pinTypes.ContainsKey(bezier.Point1))
+                        {
+                            pinTypes.Add(bezier.Point1, bezier.Point1.State);
+                        }
                     }
+
+                    if (bezier.Point4.State.HasFlag(ShapeState.Standalone))
+                    {
+                        if (!pinTypes.ContainsKey(bezier.Point4))
+                        {
+                            pinTypes.Add(bezier.Point4, bezier.Point4.State);
+                        }
+                    }
+                }
+                else if (wire is XQBezier)
+                {
+                    var qbezier = wire as XQBezier;
+
+                    if (qbezier.Point1.State.HasFlag(ShapeState.Standalone))
+                    {
+                        if (!pinTypes.ContainsKey(qbezier.Point1))
+                        {
+                            pinTypes.Add(qbezier.Point1, qbezier.Point1.State);
+                        }
+                    }
+
+                    if (qbezier.Point3.State.HasFlag(ShapeState.Standalone))
+                    {
+                        if (!pinTypes.ContainsKey(qbezier.Point3))
+                        {
+                            pinTypes.Add(qbezier.Point3, qbezier.Point3.State);
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("Invalid wire type. Supported wire types: XLine, XBezier and XQBezier.");
                 }
             }
 
