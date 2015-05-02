@@ -17,7 +17,7 @@ namespace TestSIM
 
         public override Func<XGroup, BoolSimulation> Factory
         {
-            get { return (block) => { return new MemorySetPriorityVSimulation(); }; }
+            get { return (group) => { return new MemorySetPriorityVSimulation(); }; }
         }
 
         public override void Run(IClock clock)

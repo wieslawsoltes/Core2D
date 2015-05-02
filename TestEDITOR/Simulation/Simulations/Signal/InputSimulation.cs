@@ -17,7 +17,7 @@ namespace TestSIM
 
         public override Func<XGroup, BoolSimulation> Factory
         {
-            get { return (block) => { return new InputSimulation(false); }; }
+            get { return (group) => { return new InputSimulation(false); }; }
         }
 
         public InputSimulation()

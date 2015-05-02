@@ -17,7 +17,7 @@ namespace TestSIM
 
         public override Func<XGroup, BoolSimulation> Factory
         {
-            get { return (block) => { return new ShortcutSimulation(); }; }
+            get { return (group) => { return new ShortcutSimulation(); }; }
         }
 
         public override void Run(IClock clock)

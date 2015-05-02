@@ -19,10 +19,10 @@ namespace TestSIM
         //{
         //    get
         //    {
-        //        return (block) =>
+        //        return (group) =>
         //        {
-        //            double delay = block.GetDoublePropertyValue("Delay");
-        //            string unit = block.GetStringPropertyValue("Unit");
+        //            double delay = group.GetDoublePropertyValue("Delay");
+        //            string unit = group.GetStringPropertyValue("Unit");
         //            double seconds = delay.ConvertToSeconds(unit);
         //            return new TimerOffSimulation(false, seconds);
         //        };
@@ -32,7 +32,7 @@ namespace TestSIM
         {
             get
             {
-                return (block) =>
+                return (group) =>
                 {
                     return new TimerOffSimulation(false, 1.0);
                 };
