@@ -9,7 +9,7 @@ using Test2d;
 
 namespace TestSIM
 {
-    public class PageGraphContext
+    public class ContainerGraphContext
     {
         public IDictionary<XPoint, ICollection<Tuple<XPoint, bool>>> Connections { get; set; }
         public IDictionary<XPoint, ICollection<Tuple<XPoint, bool>>> Dependencies { get; set; }
