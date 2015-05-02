@@ -86,6 +86,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="{Binding Editor.Renderer.Zoom}" 
+                       TextTrimming="CharacterEllipsis"
                        Background="{x:Null}"
                        FocusVisualStyle="{x:Null}"
                        Grid.Row="0" 
