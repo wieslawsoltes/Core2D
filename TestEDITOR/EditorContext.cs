@@ -104,23 +104,6 @@ namespace TestEDITOR
             _commands = new EditorCommands();
             _editor = Editor.Create(Container.Create(), renderer);
 
-            _simulationFactory = new BoolSimulationFactory();
-            _simulationFactory.Register(new SignalSimulation());
-            _simulationFactory.Register(new InputSimulation());
-            _simulationFactory.Register(new OutputSimulation());
-            _simulationFactory.Register(new ShortcutSimulation());
-            _simulationFactory.Register(new AndSimulation());
-            _simulationFactory.Register(new OrSimulation());
-            _simulationFactory.Register(new InverterSimulation());
-            _simulationFactory.Register(new XorSimulation());
-            _simulationFactory.Register(new TimerOnSimulation());
-            _simulationFactory.Register(new TimerOffSimulation());
-            _simulationFactory.Register(new TimerPulseSimulation());
-            _simulationFactory.Register(new MemoryResetPriorityVSimulation());
-            _simulationFactory.Register(new MemorySetPriorityVSimulation());
-            _simulationFactory.Register(new MemoryResetPrioritySimulation());
-            _simulationFactory.Register(new MemorySetPrioritySimulation());
-
             (_editor.Renderer as ObservableObject).PropertyChanged +=
                 (s, e) =>
                 {
@@ -445,6 +428,26 @@ namespace TestEDITOR
                 _watcher.Renamed += (s, e) => update();
                 _watcher.EnableRaisingEvents = true;
             }
+        }
+
+        public void InitializeSimulation()
+        {
+            _simulationFactory = new BoolSimulationFactory();
+            _simulationFactory.Register(new SignalSimulation());
+            _simulationFactory.Register(new InputSimulation());
+            _simulationFactory.Register(new OutputSimulation());
+            _simulationFactory.Register(new ShortcutSimulation());
+            _simulationFactory.Register(new AndSimulation());
+            _simulationFactory.Register(new OrSimulation());
+            _simulationFactory.Register(new InverterSimulation());
+            _simulationFactory.Register(new XorSimulation());
+            _simulationFactory.Register(new TimerOnSimulation());
+            _simulationFactory.Register(new TimerOffSimulation());
+            _simulationFactory.Register(new TimerPulseSimulation());
+            _simulationFactory.Register(new MemoryResetPriorityVSimulation());
+            _simulationFactory.Register(new MemorySetPriorityVSimulation());
+            _simulationFactory.Register(new MemoryResetPrioritySimulation());
+            _simulationFactory.Register(new MemorySetPrioritySimulation());
         }
 
         public bool IsEditMode()
