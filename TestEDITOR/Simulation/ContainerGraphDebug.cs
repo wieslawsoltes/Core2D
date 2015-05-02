@@ -13,7 +13,7 @@ namespace TestSIM
 {
     public static class ContainerGraphDebug
     {
-        public static void WriteConnections(PageGraphContext context)
+        public static void WriteConnections(ContainerGraphContext context)
         {
             Debug.WriteLine("Connections: ");
             foreach (var kvp in context.Connections)
@@ -42,7 +42,7 @@ namespace TestSIM
             }
         }
 
-        public static void WriteDependencies(PageGraphContext context)
+        public static void WriteDependencies(ContainerGraphContext context)
         {
             Debug.WriteLine("Dependencies: ");
             foreach (var kvp in context.Dependencies)
@@ -76,7 +76,7 @@ namespace TestSIM
             }
         }
 
-        public static void WritePinTypes(PageGraphContext context)
+        public static void WritePinTypes(ContainerGraphContext context)
         {
             Debug.WriteLine("PinTypes: ");
             foreach (var kvp in context.PinTypes)
@@ -91,7 +91,7 @@ namespace TestSIM
             }
         }
 
-        public static void WriteOrderedGroups(PageGraphContext context)
+        public static void WriteOrderedGroups(ContainerGraphContext context)
         {
             Debug.WriteLine("OrderedGroups: ");
             foreach (var group in context.OrderedGroups)
