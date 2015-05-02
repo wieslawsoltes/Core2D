@@ -99,6 +99,19 @@ namespace TestEDITOR
             }
         }
 
+        public IDictionary<XGroup, BoolSimulation> Simulations
+        {
+            get { return _simulations; }
+            set
+            {
+                if (value != _simulations)
+                {
+                    _simulations = value;
+                    Notify("Simulations");
+                }
+            }
+        }
+
         public void Initialize(IView view, IRenderer renderer)
         {
             _commands = new EditorCommands();
@@ -327,7 +340,7 @@ namespace TestEDITOR
             _commands.TickSimulationCommand = new DelegateCommand(
                 () =>
                 {
-                    TickSimulation(_simulations);
+                    TickSimulation(Simulations);
                 },
                 () => IsSimulationMode() && IsSimulationPaused);
 
@@ -533,11 +546,11 @@ namespace TestEDITOR
                 var graph = ContainerGraph.Create(Editor.Container);
                 if (graph != null)
                 {
-                    _simulations = _simulationFactory.Create(graph);
-                    if (_simulations != null)
+                    Simulations = _simulationFactory.Create(graph);
+                    if (Simulations != null)
                     {
                         // TODO: Use Working layer to show simulation state.
-                        StartSimulation(_simulations);
+                        StartSimulation(Simulations);
                     }
                 }
             }
