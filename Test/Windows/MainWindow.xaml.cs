@@ -41,61 +41,71 @@ namespace Test.Windows
                 () =>
                 {
                     Open();
-                });
+                },
+                () => context.IsEditMode());
 
             context.Commands.SaveAsCommand = new DelegateCommand(
                 () =>
                 {
                     SaveAs();
-                });
+                },
+                () => context.IsEditMode());
 
             context.Commands.ExportCommand = new DelegateCommand(
                 () =>
                 {
                     Export();
-                });
+                },
+                () => context.IsEditMode());
         
             context.Commands.EvalCommand = new DelegateCommand(
                 () =>
                 {
                     Eval();
-                });
+                },
+                () => context.IsEditMode());
             
             context.Commands.LayersWindowCommand = new DelegateCommand(
                 () =>
                 {
                     (new LayersWindow() { Owner = this, DataContext = context }).Show();
-                });
+                },
+                () => true);
 
             context.Commands.StyleWindowCommand = new DelegateCommand(
                 () =>
                 {
                     (new StyleWindow() { Owner = this, DataContext = context }).Show();
-                });
+                },
+                () => true);
 
             context.Commands.StylesWindowCommand = new DelegateCommand(
                 () =>
                 {
                     (new StylesWindow() { Owner = this, DataContext = context }).Show();
-                });
+                },
+                () => true);
 
             context.Commands.ShapesWindowCommand = new DelegateCommand(
                 () =>
                 {
                     (new ShapesWindow() { Owner = this, DataContext = context }).Show();
-                });
+                },
+                () => true);
 
             context.Commands.ContainerWindowCommand = new DelegateCommand(
                 () =>
                 {
                     (new ContainerWindow() { Owner = this, DataContext = context }).Show();
-                });
+                },
+                () => true);
 
             context.Commands.PropertiesWindowCommand = new DelegateCommand(
                 () =>
                 {
                     (new PropertiesWindow() { Owner = this, DataContext = context }).Show();
-                });
+                },
+                () => true);
             
             PropertiesWindow pw = null;
             

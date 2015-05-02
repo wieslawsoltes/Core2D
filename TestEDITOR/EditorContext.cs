@@ -118,187 +118,218 @@ namespace TestEDITOR
                 () =>
                 {
                     _editor.Load(Container.Create());
-                });
+                },
+                () => IsEditMode());
 
             _commands.ExitCommand = new DelegateCommand(
                 () =>
                 {
                     view.Close();
-                });
+                },
+                () => true);
 
             _commands.CopyAsEmfCommand = new DelegateCommand(
                 () =>
                 {
                     Emf.PutOnClipboard(_editor.Container);
-                });
+                },
+                () => IsEditMode());
 
             _commands.DeleteSelectedCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.DeleteSelected();
-                });
+                },
+                () => IsEditMode());
 
             _commands.ClearAllCommand = new DelegateCommand(
                 () =>
                 {
                     ClearAll();
-                });
+                },
+                () => IsEditMode());
 
             _commands.GroupSelectedCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.GroupSelected();
-                });
+                },
+                () => IsEditMode());
 
             _commands.GroupCurrentLayerCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.GroupCurrentLayer();
-                });
+                },
+                () => IsEditMode());
 
             _commands.ToolNoneCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.None;
-                });
+                },
+                () => IsEditMode());
 
             _commands.ToolSelectionCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.Selection;
-                });
+                },
+                () => IsEditMode());
 
             _commands.ToolPointCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.Point;
-                });
+                },
+                () => IsEditMode());
 
             _commands.ToolLineCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.Line;
-                });
+                },
+                () => IsEditMode());
 
             _commands.ToolRectangleCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.Rectangle;
-                });
+                },
+                () => IsEditMode());
 
             _commands.ToolEllipseCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.Ellipse;
-                });
+                },
+                () => IsEditMode());
 
             _commands.ToolArcCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.Arc;
-                });
+                },
+                () => IsEditMode());
 
             _commands.ToolBezierCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.Bezier;
-                });
+                },
+                () => IsEditMode());
 
             _commands.ToolQBezierCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.QBezier;
-                });
+                },
+                () => IsEditMode());
 
             _commands.ToolTextCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.CurrentTool = Tool.Text;
-                });
+                },
+                () => IsEditMode());
 
             _commands.EvalScriptCommand = new DelegateCommand<string>(
                 (path) =>
                 {
                     Eval(path);
-                });
+                },
+                (path) => IsEditMode());
 
             _commands.DefaultIsFilledCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.DefaultIsFilled = !_editor.DefaultIsFilled;
-                });
+                },
+                () => IsEditMode());
 
             _commands.SnapToGridCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.SnapToGrid = !_editor.SnapToGrid;
-                });
+                },
+                () => IsEditMode());
 
             _commands.TryToConnectCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.TryToConnect = !_editor.TryToConnect;
-                });
+                },
+                () => IsEditMode());
 
             _commands.AddLayerCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.Container.Layers.Add(Layer.Create("New"));
-                });
+                },
+                () => IsEditMode());
 
             _commands.RemoveLayerCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.RemoveCurrentLayer();
-                });
+                },
+                () => IsEditMode());
 
             _commands.AddStyleCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.Container.CurrentStyleGroup.Styles.Add(ShapeStyle.Create("New"));
-                });
+                },
+                () => IsEditMode());
 
             _commands.RemoveStyleCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.RemoveCurrentStyle();
-                });
+                },
+                () => IsEditMode());
 
             _commands.RemoveShapeCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.RemoveCurrentShape();
-                });
+                },
+                () => IsEditMode());
 
             _commands.StartSimulationCommand = new DelegateCommand(
                 () =>
                 {
                     StartSimulation();
-                });
+                }, 
+                () => IsEditMode());
 
             _commands.StopSimulationCommand = new DelegateCommand(
                 () =>
                 {
                     StopSimulation(); 
-                });
+                },
+                () => IsSimulationMode());
 
             _commands.RestartSimulationCommand = new DelegateCommand(
                 () =>
                 {
                     RestartSimulation();
-                });
+                },
+                () => IsSimulationMode());
 
             _commands.PauseSimulationCommand = new DelegateCommand(
                 () =>
                 {
                     PauseSimulation();
-                });
+                },
+                () => IsSimulationMode());
 
             _commands.TickSimulationCommand = new DelegateCommand(
                 () =>
                 {
                     TickSimulation(_simulations);
-                });
+                },
+                () => IsSimulationMode() && IsSimulationPaused);
 
             WarmUpCSharpScript();
         }
@@ -486,6 +517,8 @@ namespace TestEDITOR
                     }
                 },
                 null, 0, _clock.Resolution);
+
+            UpdateCanExecuteState();
         }
 
         private void StartSimulation()
@@ -522,6 +555,7 @@ namespace TestEDITOR
                 if (IsSimulationMode())
                 {
                     IsSimulationPaused = !IsSimulationPaused;
+                    UpdateCanExecuteState();
                 }
             }
             catch (Exception ex)
@@ -566,6 +600,7 @@ namespace TestEDITOR
                     _timer.Dispose();
                     _timer = null;
                     IsSimulationPaused = false;
+                    UpdateCanExecuteState();
                 }
             }
             catch (Exception ex)
@@ -573,6 +608,60 @@ namespace TestEDITOR
                 System.Diagnostics.Debug.Print(ex.Message);
                 System.Diagnostics.Debug.Print(ex.StackTrace);
             }
+        }
+
+        private void UpdateCanExecuteState()
+        {
+            (_commands.NewCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.OpenCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.SaveAsCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ExportCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ExitCommand as DelegateCommand).RaiseCanExecuteChanged();
+
+            (_commands.CopyAsEmfCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.DeleteSelectedCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ClearAllCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.GroupSelectedCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.GroupCurrentLayerCommand as DelegateCommand).RaiseCanExecuteChanged();
+
+            (_commands.ToolNoneCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolSelectionCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolPointCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolLineCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolRectangleCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolEllipseCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolArcCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolBezierCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolQBezierCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolTextCommand as DelegateCommand).RaiseCanExecuteChanged();
+
+            (_commands.EvalCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.EvalScriptCommand as DelegateCommand<string>).RaiseCanExecuteChanged();
+
+            (_commands.DefaultIsFilledCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.SnapToGridCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.TryToConnectCommand as DelegateCommand).RaiseCanExecuteChanged();
+
+            (_commands.AddLayerCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.RemoveLayerCommand as DelegateCommand).RaiseCanExecuteChanged();
+
+            (_commands.AddStyleCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.RemoveStyleCommand as DelegateCommand).RaiseCanExecuteChanged();
+
+            (_commands.RemoveShapeCommand as DelegateCommand).RaiseCanExecuteChanged();
+
+            (_commands.StartSimulationCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.StopSimulationCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.RestartSimulationCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.PauseSimulationCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.TickSimulationCommand as DelegateCommand).RaiseCanExecuteChanged();
+
+            (_commands.LayersWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.StyleWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.StylesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ShapesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ContainerWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.PropertiesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
         }
 
         public void Dispose()
