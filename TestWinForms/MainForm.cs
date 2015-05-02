@@ -33,13 +33,16 @@ namespace TestWinForms
                 | ControlStyles.SupportsTransparentBackColor,
                 true);
 
+            var context = new EditorContext();
+            context.Initialize(this, EmfRenderer.Create());
+            context.InitializeSctipts();
+            context.InitializeSimulation();
+            context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
+
+            DataContext = context;
+
             var panel = InitializePanel();
-
-            DataContext = new EditorContext();
-            (DataContext as EditorContext).Initialize(this, EmfRenderer.Create());
-            (DataContext as EditorContext).Editor.Renderer.DrawShapeState = ShapeState.Visible;
-
-            panel.Context = (DataContext as EditorContext);
+            panel.Context = context;
 
             HandlePanelLayerInvalidation(panel);
             UpdatePanelSize(panel);
