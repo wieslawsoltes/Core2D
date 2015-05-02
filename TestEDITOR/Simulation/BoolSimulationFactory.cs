@@ -55,15 +55,15 @@ namespace TestSIM
         private IDictionary<XGroup, BoolSimulation> GetSimulations(PageGraphContext context)
         {
             var simulations = new Dictionary<XGroup, BoolSimulation>();
-            foreach (var block in context.OrderedBlocks)
+            foreach (var group in context.OrderedGroups)
             {
-                if (Registry.ContainsKey(block.Name))
+                if (Registry.ContainsKey(group.Name))
                 {
-                    simulations.Add(block, Registry[block.Name](block));
+                    simulations.Add(group, Registry[group.Name](group));
                 }
                 else
                 {
-                    throw new Exception("Not supported block simulation.");
+                    throw new Exception("Not supported group simulation.");
                 }
             }
             return simulations;
@@ -73,10 +73,10 @@ namespace TestSIM
         {
             var simulations = GetSimulations(context);
 
-            // find ordered block Inputs
-            foreach (var block in context.OrderedBlocks)
+            // find ordered group Inputs
+            foreach (var group in context.OrderedGroups)
             {
-                var inputs = block.Connectors
+                var inputs = group.Connectors
                     .Where(pin => context.PinTypes[pin].HasFlag(ShapeState.Input))
                     .SelectMany(pin =>
                     {
@@ -86,7 +86,7 @@ namespace TestSIM
                     .Select(pin => pin);
 
                 // convert inputs to BoolInput
-                var simulation = simulations[block];
+                var simulation = simulations[group];
                 simulation.Inputs = inputs.Select(input =>
                 {
                     return new BoolInput()
