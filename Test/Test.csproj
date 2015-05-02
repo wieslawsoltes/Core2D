@@ -98,6 +98,8 @@
     <Compile Include="Controls\StyleControl.xaml.cs">
       <DependentUpon>StyleControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PanAndZoom\PanAndZoomBorder.cs" />
+    <Compile Include="PanAndZoom\PanAndZoomGrid.cs" />
     <Compile Include="Renderers\WpfArc.cs" />
     <Compile Include="Renderers\WpfRenderer.cs" />
     <Compile Include="Windows\ContainerWindow.xaml.cs">
