@@ -13,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Test2d;
+using TestEDITOR;
 
 namespace Test.Windows
 {
@@ -21,6 +23,68 @@ namespace Test.Windows
         public ContainerWindow()
         {
             InitializeComponent();
+
+            grid.EnableAutoFit = true;
+
+            border.InvalidateChild = (z, x, y) =>
+            {
+                var context = DataContext as EditorContext;
+                context.Editor.Renderer.Zoom = z;
+                context.Editor.Renderer.PanX = x;
+                context.Editor.Renderer.PanY = y;
+                //context.Editor.Renderer.ClearCache();
+                //context.Editor.Container.Invalidate();
+            };
+
+            border.AutoFitChild = (width, height) =>
+            {
+                if (border != null && DataContext != null)
+                {
+                    var context = DataContext as EditorContext;
+                    border.AutoFit(
+                        width,
+                        height,
+                        context.Editor.Container.Width,
+                        context.Editor.Container.Height);
+                    //context.Editor.Renderer.ClearCache();
+                    //context.Editor.Container.Invalidate();
+                }
+            };
+
+            Loaded += (s, e) =>
+            {
+                ((DataContext as EditorContext).Editor.Renderer as ObservableObject).PropertyChanged +=
+                (_s, _e) =>
+                {
+                    if (_e.PropertyName == "Zoom")
+                    {
+                        var context = DataContext as EditorContext;
+                        double value = context.Editor.Renderer.Zoom;
+                        border.Scale.ScaleX = value;
+                        border.Scale.ScaleY = value;
+                        //context.Editor.Renderer.ClearCache();
+                        //context.Editor.Container.Invalidate();
+                    }
+
+                    if (_e.PropertyName == "PanX")
+                    {
+                        var context = DataContext as EditorContext;
+                        double value = context.Editor.Renderer.PanX;
+                        border.Translate.X = value;
+                        //context.Editor.Renderer.ClearCache();
+                        //context.Editor.Container.Invalidate();
+                    }
+
+                    if (_e.PropertyName == "PanY")
+                    {
+                        var context = DataContext as EditorContext;
+                        double value = context.Editor.Renderer.PanY;
+                        border.Translate.Y = value;
+                        //context.Editor.Renderer.ClearCache();
+                        //context.Editor.Container.Invalidate();
+                    }
+                };
+            };
         }
     }
 }
