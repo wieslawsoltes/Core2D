@@ -1,72 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <ProjectGuid>{6C5DFAB8-5747-42DF-8D8F-AC1922AE12AA}</ProjectGuid>
-    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DD2D100A-773A-4893-A3EB-6C63E11B12A9}</ProjectGuid>
     <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestEDITOR</RootNamespace>
     <AssemblyName>TestEDITOR</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <TargetFrameworkProfile />
+    <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DebugSymbols>True</DebugSymbols>
-    <DebugType>Full</DebugType>
-    <Optimize>False</Optimize>
-    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DebugSymbols>False</DebugSymbols>
-    <DebugType>None</DebugType>
-    <Optimize>True</Optimize>
-    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
     <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeAnalysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.Common.1.0.0-rc3-20150501-01\lib\net45\Microsoft.CodeAnalysis.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.1.0.0-rc3-20150501-01\lib\net45\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.CSharp.Desktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.1.0.0-rc3-20150501-01\lib\net45\Microsoft.CodeAnalysis.CSharp.Desktop.dll</HintPath>
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Common.1.0.0-rc3-20150502-02\lib\net45\Microsoft.CodeAnalysis.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis.Desktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.Common.1.0.0-rc3-20150501-01\lib\net45\Microsoft.CodeAnalysis.Desktop.dll</HintPath>
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Common.1.0.0-rc3-20150502-02\lib\net45\Microsoft.CodeAnalysis.Desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis.Scripting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.Scripting.Common.1.0.0-rc3-20150501-01\lib\net45\Microsoft.CodeAnalysis.Scripting.dll</HintPath>
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Scripting.Common.1.0.0-rc3-20150502-02\lib\net45\Microsoft.CodeAnalysis.Scripting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis.Scripting.CSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeAnalysis.Scripting.CSharp.1.0.0-rc3-20150501-01\lib\net45\Microsoft.CodeAnalysis.Scripting.CSharp.dll</HintPath>
+      <HintPath>..\packages\Microsoft.CodeAnalysis.Scripting.CSharp.1.0.0-rc3-20150502-02\lib\net45\Microsoft.CodeAnalysis.Scripting.CSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.CSharp">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Prism.Mvvm">
+    <Reference Include="Microsoft.Practices.Prism.Mvvm, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism.Mvvm.Desktop">
+    <Reference Include="Microsoft.Practices.Prism.Mvvm.Desktop, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.Desktop.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces">
+    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PdfSharp, Version=1.50.3638.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp.1.50.3638-beta\lib\net20\PdfSharp.dll</HintPath>
@@ -77,32 +67,39 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Collections.Immutable">
+    <Reference Include="System.Collections.Immutable, Version=1.1.34.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.1.1.34-rc\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.ObjectModel" />
-    <Reference Include="System.Reflection.Metadata">
+    <Reference Include="System.Reflection.Metadata, Version=1.0.19.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reflection.Metadata.1.0.19-rc\lib\portable-net45+win8\System.Reflection.Metadata.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Runtime" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Renderers\DxfRenderer.cs" />
     <Compile Include="EditorCommands.cs" />
     <Compile Include="EditorContext.cs" />
-    <Compile Include="Renderers\PdfRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\DxfRenderer.cs" />
+    <Compile Include="Renderers\PdfRenderer.cs" />
     <Compile Include="Roslyn\ScriptDirectory.cs" />
     <Compile Include="Roslyn\ScriptFile.cs" />
     <Compile Include="Roslyn\ScriptGlobals.cs" />
+    <Compile Include="Simulation\BoolSimulationFactory.cs" />
+    <Compile Include="Simulation\ContainerGraph.cs" />
+    <Compile Include="Simulation\ContainerGraphDebug.cs" />
+    <Compile Include="Simulation\Core\BoolInput.cs" />
+    <Compile Include="Simulation\Core\BoolSimulation.cs" />
+    <Compile Include="Simulation\Core\Clock.cs" />
+    <Compile Include="Simulation\Core\ContainerGraphContext.cs" />
+    <Compile Include="Simulation\Core\IClock.cs" />
     <Compile Include="Simulation\Simulations\Gates\AndSimulation.cs" />
     <Compile Include="Simulation\Simulations\Gates\InverterSimulation.cs" />
     <Compile Include="Simulation\Simulations\Gates\OrSimulation.cs" />
@@ -118,36 +115,35 @@
     <Compile Include="Simulation\Simulations\Timers\TimerOffSimulation.cs" />
     <Compile Include="Simulation\Simulations\Timers\TimerOnSimulation.cs" />
     <Compile Include="Simulation\Simulations\Timers\TimerPulseSimulation.cs" />
-    <Compile Include="Simulation\Core\BoolInput.cs" />
-    <Compile Include="Simulation\Core\BoolSimulation.cs" />
-    <Compile Include="Simulation\BoolSimulationFactory.cs" />
-    <Compile Include="Simulation\Core\Clock.cs" />
-    <Compile Include="Simulation\Core\IClock.cs" />
-    <Compile Include="Simulation\ContainerGraph.cs" />
-    <Compile Include="Simulation\Core\ContainerGraphContext.cs" />
-    <Compile Include="Simulation\ContainerGraphDebug.cs" />
     <Compile Include="Simulation\TopologicalSort.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Test2d\Test2d.csproj">
+      <Project>{60dda5d9-7acc-41af-9123-c96abb6b7828}</Project>
+      <Name>Test2d</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestDXF\TestDXF.csproj">
+      <Project>{a71cb982-5f0d-4cde-8537-559f7f45de05}</Project>
+      <Name>TestDXF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestEMF\TestEMF.csproj">
+      <Project>{cba9b80c-1ebe-4b0c-bb50-c24a9688df51}</Project>
+      <Name>TestEMF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestJSON\TestJSON.csproj">
+      <Project>{9aec0134-d372-4deb-88e8-074dd87b4663}</Project>
+      <Name>TestJSON</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Test2d\Test2d.csproj">
-      <Project>{60DDA5D9-7ACC-41AF-9123-C96ABB6B7828}</Project>
-      <Name>Test2d</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TestDXF\TestDXF.csproj">
-      <Project>{A71CB982-5F0D-4CDE-8537-559F7F45DE05}</Project>
-      <Name>TestDXF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TestEMF\TestEMF.csproj">
-      <Project>{CBA9B80C-1EBE-4B0C-BB50-C24A9688DF51}</Project>
-      <Name>TestEMF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TestJSON\TestJSON.csproj">
-      <Project>{9AEC0134-D372-4DEB-88E8-074DD87B4663}</Project>
-      <Name>TestJSON</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>

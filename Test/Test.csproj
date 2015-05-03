@@ -76,9 +76,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -232,7 +230,7 @@
       <Name>TestDXF</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestEDITOR\TestEDITOR.csproj">
-      <Project>{6C5DFAB8-5747-42DF-8D8F-AC1922AE12AA}</Project>
+      <Project>{dd2d100a-773a-4893-a3eb-6c63e11b12a9}</Project>
       <Name>TestEDITOR</Name>
     </ProjectReference>
   </ItemGroup>
