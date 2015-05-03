@@ -351,6 +351,64 @@
             </Expander>   
         </StackPanel>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type core:XImage}">
+        <StackPanel>
+            <Expander Header="Style" IsExpanded="True">
+                <ContentControl Content="{Binding Style}"/>
+            </Expander>
+            <Expander Header="TopLeft" IsExpanded="False">
+                <ContentControl Content="{Binding TopLeft}"/>
+            </Expander>
+            <Expander Header="BottomRight" IsExpanded="False">
+                <ContentControl Content="{Binding BottomRight}"/>
+            </Expander>
+            <Expander Header="Path" IsExpanded="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Text="{Binding Path, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                             BorderBrush="{x:Null}" 
+                             Grid.Row="0" 
+                             Grid.Column="0" 
+                             Grid.ColumnSpan="2"
+                             TextAlignment="Left" 
+                             VerticalAlignment="Center">
+                    </TextBox>
+                </Grid>
+            </Expander>
+            <Expander Header="Properties" IsExpanded="False">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="IsFilled" 
+                               Margin="0,0,2,0" 
+                               Grid.Row="0"
+                               Grid.Column="0" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Center">
+                    </TextBlock>
+                    <CheckBox Content=""
+                              IsChecked="{Binding IsFilled}"
+                              Grid.Row="0" 
+                              Grid.Column="1" 
+                              Grid.ColumnSpan="2"
+                              Margin="0,1,0,1">
+                    </CheckBox>
+                </Grid>
+            </Expander>
+        </StackPanel>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type core:XGroup}">
         <StackPanel>
             <Expander Header="Name" IsExpanded="True">
