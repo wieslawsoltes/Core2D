@@ -20,14 +20,22 @@
             <MenuItem Header="E_xit" Command="{Binding Commands.ExitCommand}" InputGestureText="Alt+F4"/>
         </MenuItem>
         <MenuItem Header="_Edit">
+            <MenuItem Header="_Undo" Command="{Binding Commands.UndoCommand}" InputGestureText="Ctrl+Z"/>
+            <MenuItem Header="_Redo" Command="{Binding Commands.RedoCommand}" InputGestureText="Ctrl+Y"/>
+            <Separator/>
             <MenuItem Header="Copy As _Metafile" Command="{Binding Commands.CopyAsEmfCommand}" InputGestureText="Ctrl+Shift+C"/>
             <Separator/>
-            <MenuItem Header="_Delete" Command="{Binding Commands.DeleteSelectedCommand}" InputGestureText="Del"/>
+            <MenuItem Header="Cu_t" Command="{Binding Commands.CutCommand}" InputGestureText="Ctrl+X"/>
+            <MenuItem Header="_Copy" Command="{Binding Commands.CopyCommand}" InputGestureText="Ctrl+C"/>
+            <MenuItem Header="_Paste" Command="{Binding Commands.PasteCommand}" InputGestureText="Ctrl+V"/>
+            <MenuItem Header="_Delete" Command="{Binding Commands.DeleteCommand}" InputGestureText="Del"/>
             <Separator/>
-            <MenuItem Header="_Clear All" Command="{Binding Commands.ClearAllCommand}" InputGestureText=""/>
+            <MenuItem Header="Select _All" Command="{Binding Commands.SelectAllCommand}" InputGestureText="Ctrl+A"/>
             <Separator/>
-            <MenuItem Header="_Group Selected" Command="{Binding Commands.GroupSelectedCommand}" InputGestureText="Ctrl+G"/>
-            <MenuItem Header="Group Current _Layer" Command="{Binding Commands.GroupCurrentLayerCommand}" InputGestureText="Ctrl+Shift+G"/>
+            <MenuItem Header="Cl_ear All" Command="{Binding Commands.ClearAllCommand}" InputGestureText=""/>
+            <Separator/>
+            <MenuItem Header="_Group" Command="{Binding Commands.GroupCommand}" InputGestureText="Ctrl+G"/>
+            <MenuItem Header="Group _Layer" Command="{Binding Commands.GroupLayerCommand}" InputGestureText="Ctrl+Shift+G"/>
         </MenuItem>
         <MenuItem Header="_Tool">
             <MenuItem Header="_None" Command="{Binding Commands.ToolNoneCommand}" InputGestureText="N">
