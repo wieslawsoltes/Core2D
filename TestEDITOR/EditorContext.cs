@@ -492,25 +492,49 @@ namespace TestEDITOR
 
         public void ExportAsPdf(string path)
         {
-            var renderer = new PdfRenderer()
+            try
+            { 
+                var renderer = new PdfRenderer()
+                {
+                    DrawShapeState = ShapeState.Printable
+                };
+                renderer.Save(path, _editor.Container);
+            }
+            catch (Exception ex)
             {
-                DrawShapeState = ShapeState.Printable
-            };
-            renderer.Save(path, _editor.Container);
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
   
         public void ExportAsEmf(string path)
         {
-            Emf.Save(path, _editor.Container);
+            try
+            {
+                Emf.Save(path, _editor.Container);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
         
         public void ExportAsDxf(string path, Dxf.DxfAcadVer version)
         {
-            var renderer = new DxfRenderer()
+            try
+            { 
+                var renderer = new DxfRenderer()
+                {
+                    DrawShapeState = ShapeState.Printable
+                };
+                renderer.Create(path, _editor.Container, version);
+            }
+            catch (Exception ex)
             {
-                DrawShapeState = ShapeState.Printable
-            };
-            renderer.Create(path, _editor.Container, version);
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
 
         public bool CanCopy()
@@ -615,6 +639,34 @@ namespace TestEDITOR
             _editor.Select(_editor.Container, new HashSet<BaseShape>(shapes));
         }
 
+        public void Drop(XGroup group, double x, double y)
+        {
+            try
+            {
+                double sx = _editor.SnapToGrid ? Editor.Snap(x, _editor.SnapX) : x;
+                double sy = _editor.SnapToGrid ? Editor.Snap(y, _editor.SnapY) : y;
+
+                var json = ContainerSerializer.Serialize(group);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    var clone = ContainerSerializer.Deserialize<XGroup>(json);
+                    if (clone != null)
+                    {
+                        _editor.Deselect(_editor.Container);
+                        TryToRestoreStyles(Enumerable.Repeat(clone, 1).ToList());
+                        clone.Move(sx, sy);
+                        _editor.Container.CurrentLayer.Shapes.Add(clone);
+                        _editor.Select(_editor.Container, clone);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+        }
+
         public bool CanUndo()
         {
             return false;
@@ -705,6 +757,7 @@ namespace TestEDITOR
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
             }
         }
 
