@@ -90,6 +90,7 @@
     <Compile Include="Shapes\XBezier.cs" />
     <Compile Include="Shapes\XEllipse.cs" />
     <Compile Include="Shapes\XGroup.cs" />
+    <Compile Include="Shapes\XImage.cs" />
     <Compile Include="Shapes\XLine.cs" />
     <Compile Include="Shapes\XPoint.cs" />
     <Compile Include="Shapes\XQBezier.cs" />
