@@ -10,10 +10,10 @@ namespace TestJSON
 {
     public class ContainerSerializer
     {
-        public static string Serialize(Container container)
+        public static string Serialize<T>(T value)
         {
             var json = JsonConvert.SerializeObject(
-                container,
+                value,
                 new JsonSerializerSettings()
                 {
                     Formatting = Formatting.Indented,
@@ -24,9 +24,9 @@ namespace TestJSON
             return json;
         }
 
-        public static Container Deserialize(string json)
+        public static T Deserialize<T>(string json)
         {
-            var container = JsonConvert.DeserializeObject<Container>(
+            var container = JsonConvert.DeserializeObject<T>(
                 json,
                 new JsonSerializerSettings()
                 {
