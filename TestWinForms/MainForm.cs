@@ -34,7 +34,7 @@ namespace TestWinForms
                 true);
 
             var context = new EditorContext();
-            context.Initialize(this, EmfRenderer.Create());
+            context.Initialize(this, EmfRenderer.Create(), new TextClipboard());
             context.InitializeSctipts();
             context.InitializeSimulation();
             context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
@@ -271,7 +271,25 @@ namespace TestWinForms
             saveFileDialog2.ShowDialog(this);
         }
     }
-    
+
+    internal class TextClipboard : ITextClipboard
+    {
+        public void SetText(string text)
+        {
+            Clipboard.SetText(text, TextDataFormat.UnicodeText);
+        }
+
+        public string GetText()
+        {
+            return Clipboard.GetText(TextDataFormat.UnicodeText);
+        }
+
+        public bool ContainsText()
+        {
+            return Clipboard.ContainsText(TextDataFormat.UnicodeText);
+        }
+    }
+
     internal class ContainerPanel : Panel
     {
         public EditorContext Context { get; set; }
