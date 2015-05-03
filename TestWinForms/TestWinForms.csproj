@@ -96,10 +96,6 @@
       <Project>{dd2d100a-773a-4893-a3eb-6c63e11b12a9}</Project>
       <Name>TestEDITOR</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TestEMF\TestEMF.csproj">
-      <Project>{cba9b80c-1ebe-4b0c-bb50-c24a9688df51}</Project>
-      <Name>TestEMF</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

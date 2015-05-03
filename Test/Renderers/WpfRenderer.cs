@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Test2d;
 
 namespace Test
@@ -106,12 +107,14 @@ namespace Test
         private const bool _enableBezierCache = true;
         private const bool _enableQBezierCache = true;
         private const bool _enableTextCache = true;
+        private const bool _enableImageCache = true;
 
         private IDictionary<ShapeStyle, Tuple<Brush, Pen>> _styleCache;
         private IDictionary<XArc, PathGeometry> _arcCache;
         private IDictionary<XBezier, PathGeometry> _bezierCache;
         private IDictionary<XQBezier, PathGeometry> _qbezierCache;
         private IDictionary<XText, FormattedText> _textCache;
+        private IDictionary<Uri, BitmapImage> _biCache;
 
         public WpfRenderer()
         {
@@ -317,6 +320,16 @@ namespace Test
             _bezierCache = new Dictionary<XBezier, PathGeometry>();
             _qbezierCache = new Dictionary<XQBezier, PathGeometry>();
             _textCache = new Dictionary<XText, FormattedText>();
+
+            if (_biCache != null)
+            {
+                foreach (var kvp in _biCache)
+                {
+                    kvp.Value.StreamSource.Dispose();
+                }
+                _biCache.Clear();
+            }
+            _biCache = new Dictionary<Uri, BitmapImage>();
         }
 
         public void Draw(object dc, Container container)
@@ -830,9 +843,72 @@ namespace Test
                     text.Style.TextStyle.FontSize,
                     stroke.Brush, null, TextFormattingMode.Ideal);
 
+                if (_enableTextCache)
+                    _textCache.Add(text, ft);
+
                 _dc.DrawText(
                     ft, 
                     GetTextOrigin(text.Style, ref rect, ft));
+            }
+        }
+
+        public void Draw(object dc, XImage image, double dx, double dy)
+        {
+            if (image.Path == null)
+                return;
+
+            var _dc = dc as DrawingContext;
+
+            double thickness = image.Style.Thickness / _zoom;
+            double half = thickness / 2.0;
+
+            Tuple<Brush, Pen> cache;
+            Brush fill;
+            Pen stroke;
+            if (_enableStyleCache
+                && _styleCache.TryGetValue(image.Style, out cache))
+            {
+                fill = cache.Item1;
+                stroke = cache.Item2;
+            }
+            else
+            {
+                fill = CreateBrush(image.Style.Fill);
+                stroke = CreatePen(
+                    image.Style.Stroke,
+                    thickness);
+
+                if (_enableStyleCache)
+                    _styleCache.Add(image.Style, Tuple.Create(fill, stroke));
+            }
+
+            var rect = CreateRect(
+                image.TopLeft,
+                image.BottomRight,
+                dx, dy);
+
+            DrawRectangleInternal(_dc, half, fill, null, image.IsFilled, ref rect);
+
+            if (_enableImageCache
+                && _biCache.ContainsKey(image.Path))
+            {
+                _dc.DrawImage(_biCache[image.Path], rect);
+            }
+            else
+            {
+                if (!System.IO.File.Exists(image.Path.LocalPath))
+                    return;
+
+                byte[] buffer = System.IO.File.ReadAllBytes(image.Path.LocalPath);
+                var ms = new System.IO.MemoryStream(buffer);
+                var bi = new BitmapImage();
+                bi.BeginInit();
+                bi.StreamSource = ms;
+                bi.EndInit();
+                bi.Freeze();
+                _biCache[image.Path] = bi;
+
+                _dc.DrawImage(_biCache[image.Path], rect);
             }
         }
     }

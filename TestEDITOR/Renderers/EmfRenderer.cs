@@ -10,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Test2d;
-using WPF = System.Windows;
 
 namespace TestEMF
 {
@@ -145,15 +144,9 @@ namespace TestEMF
             return new SolidBrush(ToColor(color));
         }
 
-        private static WPF.Rect CreateRect(XPoint tl, XPoint br, double dx, double dy)
+        private static Rect2 CreateRect(XPoint tl, XPoint br, double dx, double dy)
         {
-            double tlx = Math.Min(tl.X, br.X);
-            double tly = Math.Min(tl.Y, br.Y);
-            double brx = Math.Max(tl.X, br.X);
-            double bry = Math.Max(tl.Y, br.Y);
-            return new System.Windows.Rect(
-                new WPF.Point(tlx + dx, tly + dy),
-                new WPF.Point(brx + dx, bry + dy));
+            return Rect2.Create(tl, br, dx, dy);
         }
 
         private static void DrawLineInternal(
@@ -170,7 +163,7 @@ namespace TestEMF
             Brush brush,
             Pen pen,
             bool isFilled,
-            ref WPF.Rect rect)
+            ref Rect2 rect)
         {
             if (isFilled)
             {
@@ -195,7 +188,7 @@ namespace TestEMF
             Brush brush,
             Pen pen,
             bool isFilled,
-            ref WPF.Rect rect)
+            ref Rect2 rect)
         {
             if (isFilled)
             {
@@ -292,7 +285,7 @@ namespace TestEMF
                         var pts = new PointF[] { new PointF(x1 - (float)sizeX1, y1) };
                         t1.TransformPoints(pts);
                         pt1 = pts[0];
-                        var rect = new WPF.Rect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
+                        var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
                         var gs = _gfx.Save();
                         _gfx.Transform = t1;
                         DrawRectangleInternal(_gfx, fill, stroke, sas.IsFilled, ref rect);
@@ -306,7 +299,7 @@ namespace TestEMF
                         pt1 = pts[0];
                         var gs = _gfx.Save();
                         _gfx.Transform = t1;
-                        var rect = new WPF.Rect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
+                        var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
                         DrawEllipseInternal(_gfx, fill, stroke, sas.IsFilled, ref rect);
                         _gfx.Restore(gs);
                     }
@@ -351,7 +344,7 @@ namespace TestEMF
                         var pts = new PointF[] { new PointF(x2 - (float)sizeX2, y2) };
                         t2.TransformPoints(pts);
                         pt2 = pts[0];
-                        var rect = new WPF.Rect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
+                        var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
                         var gs = _gfx.Save();
                         _gfx.Transform = t2;
                         DrawRectangleInternal(_gfx, fill, stroke, eas.IsFilled, ref rect);
@@ -365,7 +358,7 @@ namespace TestEMF
                         pt2 = pts[0];
                         var gs = _gfx.Save();
                         _gfx.Transform = t2;
-                        var rect = new WPF.Rect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
+                        var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
                         DrawEllipseInternal(_gfx, fill, stroke, eas.IsFilled, ref rect);
                         _gfx.Restore(gs);
                     }
@@ -596,6 +589,33 @@ namespace TestEMF
 
             brush.Dispose();
             font.Dispose();
+        }
+
+        public void Draw(object gfx, XImage image, double dx, double dy)
+        {
+            var _gfx = gfx as Graphics;
+
+            Brush brush = ToSolidBrush(image.Style.Stroke);
+
+            var rect = CreateRect(
+                image.TopLeft,
+                image.BottomRight,
+                dx, dy);
+
+            var srect = new RectangleF(
+                _scaleToPage(rect.X),
+                _scaleToPage(rect.Y),
+                _scaleToPage(rect.Width),
+                _scaleToPage(rect.Height));
+
+            if (image.IsFilled)
+            {
+                _gfx.FillRectangle(ToSolidBrush(image.Style.Fill), srect);
+            }
+
+            _gfx.DrawImage(Image.FromFile(image.Path.LocalPath), srect);
+
+            brush.Dispose();
         }
     }
 }

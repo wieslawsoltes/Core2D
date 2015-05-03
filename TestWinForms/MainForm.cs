@@ -228,6 +228,9 @@ namespace TestWinForms
                     case Keys.T:
                         (DataContext as EditorContext).Commands.ToolTextCommand.Execute(null);
                         break;
+                    case Keys.I:
+                        (DataContext as EditorContext).Commands.ToolImageCommand.Execute(null);
+                        break;
                     case Keys.F:
                         (DataContext as EditorContext).Commands.DefaultIsFilledCommand.Execute(null);
                         break;

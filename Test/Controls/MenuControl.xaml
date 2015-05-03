@@ -173,6 +173,20 @@
                     </Style>
                 </MenuItem.Style>
             </MenuItem>
+            <Separator/>
+            <MenuItem Header="_Image" Command="{Binding Commands.ToolImageCommand}" InputGestureText="I">
+                <MenuItem.Style>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="IsCheckable" Value="True"/>
+                        <Setter Property="IsChecked" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Image">
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.Style>
+            </MenuItem>
         </MenuItem>
         <MenuItem Header="_Script">
             <MenuItem Header="_Evaluate..." Command="{Binding Commands.EvalCommand}" InputGestureText="F9"/>

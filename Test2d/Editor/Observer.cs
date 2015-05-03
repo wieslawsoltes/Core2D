@@ -411,6 +411,12 @@ namespace Test2d
                 text.TopLeft.PropertyChanged += ShapeObserver;
                 text.BottomRight.PropertyChanged += ShapeObserver;
             }
+            else if (shape is XImage)
+            {
+                var image = shape as XImage;
+                image.TopLeft.PropertyChanged += ShapeObserver;
+                image.BottomRight.PropertyChanged += ShapeObserver;
+            }
             else if (shape is XGroup)
             {
                 var group = shape as XGroup;
@@ -478,6 +484,12 @@ namespace Test2d
                 var text = shape as XText;
                 text.TopLeft.PropertyChanged -= ShapeObserver;
                 text.BottomRight.PropertyChanged -= ShapeObserver;
+            }
+            else if (shape is XImage)
+            {
+                var image = shape as XImage;
+                image.TopLeft.PropertyChanged -= ShapeObserver;
+                image.BottomRight.PropertyChanged -= ShapeObserver;
             }
             else if (shape is XGroup)
             {

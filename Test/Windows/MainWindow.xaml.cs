@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Test2d;
 using TestEDITOR;
+using TestEMF;
 
 namespace Test.Windows
 {
@@ -55,6 +56,7 @@ namespace Test.Windows
             context.InitializeSctipts();
             context.InitializeSimulation();
             context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
+            context.Editor.GetImagePath = () => Image();
 
             context.Commands.OpenCommand = new DelegateCommand(
                 () =>
@@ -76,7 +78,14 @@ namespace Test.Windows
                     Export();
                 },
                 () => context.IsEditMode());
-        
+
+            context.Commands.CopyAsEmfCommand = new DelegateCommand(
+                () =>
+                {
+                    Emf.PutOnClipboard(context.Editor.Container);
+                },
+                () => context.IsEditMode());
+
             context.Commands.EvalCommand = new DelegateCommand(
                 () =>
                 {
@@ -268,6 +277,22 @@ namespace Test.Windows
                         break;
                 }
             }
+        }
+
+        public string Image()
+        {
+            var dlg = new OpenFileDialog()
+            {
+                Filter = "All (*.*)|*.*",
+                FilterIndex = 0,
+                FileName = ""
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                return dlg.FileName;
+            }
+            return null;
         }
     }
 }

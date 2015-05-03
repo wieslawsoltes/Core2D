@@ -44,6 +44,10 @@ namespace Test.Controls
         {
             DataContextChanged += (s, e) => Initialize();
             Unloaded += (s, e) => DeInitialize();
+
+            RenderOptions.SetBitmapScalingMode(
+                this,
+                BitmapScalingMode.HighQuality);
         }
 
         private void Invalidate(object sender, InvalidateLayerEventArgs e)

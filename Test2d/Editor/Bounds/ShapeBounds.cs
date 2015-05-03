@@ -168,6 +168,11 @@ namespace Test2d
             return Rect2.Create(text.TopLeft, text.BottomRight);
         }
 
+        private static Rect2 GetImageBounds(XImage image)
+        {
+            return Rect2.Create(image.TopLeft, image.BottomRight);
+        }
+
         #endregion
 
         #region HitTest Point
@@ -349,6 +354,26 @@ namespace Test2d
                     }
                     continue;
                 }
+                else if (shape is XImage)
+                {
+                    var image = shape as XImage;
+
+                    if (GetPointBounds(image.TopLeft, treshold).Contains(p))
+                    {
+                        return image.TopLeft;
+                    }
+
+                    if (GetPointBounds(image.BottomRight, treshold).Contains(p))
+                    {
+                        return image.BottomRight;
+                    }
+
+                    if (GetImageBounds(image).Contains(p))
+                    {
+                        return image;
+                    }
+                    continue;
+                }
                 else if (shape is XGroup)
                 {
                     var group = shape as XGroup;
@@ -517,6 +542,22 @@ namespace Test2d
                 else if (shape is XText)
                 {
                     if (GetTextBounds(shape as XText).IntersectsWith(rect))
+                    {
+                        if (hs != null)
+                        {
+                            hs.Add(shape);
+                            continue;
+                        }
+                        else
+                        {
+                            return true;
+                        }
+                    }
+                    continue;
+                }
+                else if (shape is XImage)
+                {
+                    if (GetImageBounds(shape as XImage).IntersectsWith(rect))
                     {
                         if (hs != null)
                         {

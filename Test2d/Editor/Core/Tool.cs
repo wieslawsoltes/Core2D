@@ -15,6 +15,7 @@ namespace Test2d
         Arc,
         Bezier,
         QBezier,
-        Text
+        Text,
+        Image
     }
 }

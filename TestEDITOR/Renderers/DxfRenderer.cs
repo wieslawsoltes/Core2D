@@ -117,38 +117,52 @@ namespace TestDXF
 
         public void Draw(object dc, Container container)
         {
+            // TODO:
         }
 
         public void Draw(object dc, Layer layer)
         {
+            // TODO:
         }
 
         public void Draw(object dc, XLine line, double dx, double dy)
         {
+            // TODO:
         }
 
         public void Draw(object dc, XRectangle rectangle, double dx, double dy)
         {
+            // TODO:
         }
 
         public void Draw(object dc, XEllipse ellipse, double dx, double dy)
         {
+            // TODO:
         }
 
         public void Draw(object dc, XArc arc, double dx, double dy)
         {
+            // TODO:
         }
 
         public void Draw(object dc, XBezier bezier, double dx, double dy)
         {
+            // TODO:
         }
 
         public void Draw(object dc, XQBezier qbezier, double dx, double dy)
         {
+            // TODO:
         }
 
         public void Draw(object dc, XText text, double dx, double dy)
         {
+            // TODO:
+        }
+
+        public void Draw(object dc, XImage image, double dx, double dy)
+        {
+            // TODO:
         }
 
         private DxfAcadVer _version;
@@ -715,6 +729,11 @@ namespace TestDXF
                     {
                         var text = shape as XText;
                         DrawText(entities, text, layer);
+                    }
+                    else if (shape is XImage)
+                    {
+                        var image = shape as XImage;
+                        // TODO: Draw image.
                     }
                     else if (shape is XGroup)
                     {

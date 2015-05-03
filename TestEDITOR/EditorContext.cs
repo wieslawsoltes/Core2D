@@ -171,13 +171,6 @@ namespace TestEDITOR
                 },
                 () => IsEditMode() && CanRedo());
 
-            _commands.CopyAsEmfCommand = new DelegateCommand(
-                () =>
-                {
-                    Emf.PutOnClipboard(_editor.Container);
-                },
-                () => IsEditMode());
-
             _commands.CutCommand = new DelegateCommand(
                 () =>
                 {
@@ -304,6 +297,13 @@ namespace TestEDITOR
                 },
                 () => IsEditMode());
 
+            _commands.ToolImageCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.CurrentTool = Tool.Image;
+                },
+                () => IsEditMode());
+
             _commands.EvalScriptCommand = new DelegateCommand<string>(
                 (path) =>
                 {
@@ -343,6 +343,22 @@ namespace TestEDITOR
                 () =>
                 {
                     _editor.RemoveCurrentLayer();
+                },
+                () => IsEditMode());
+
+            _commands.AddStyleGroupCommand = new DelegateCommand(
+                () =>
+                {
+                    var sg = ShapeStyleGroup.Create("New");
+                    sg.Styles.Add(ShapeStyle.Create("New"));
+                    _editor.Container.StyleGroups.Add(sg);
+                },
+                () => IsEditMode());
+
+            _commands.RemoveStyleGroupCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.RemoveCurrentStyleGroup();
                 },
                 () => IsEditMode());
 

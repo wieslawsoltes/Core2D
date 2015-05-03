@@ -558,5 +558,28 @@ namespace TestPDF
                 srect,
                 format);
         }
+
+        public void Draw(object gfx, Test2d.XImage image, double dx, double dy)
+        {
+            var _gfx = gfx as XGraphics;
+
+            var rect = Test2d.Rect2.Create(
+                image.TopLeft,
+                image.BottomRight,
+                dx, dy);
+
+            XRect srect = new XRect(
+                _scaleToPage(rect.X),
+                _scaleToPage(rect.Y),
+                _scaleToPage(rect.Width),
+                _scaleToPage(rect.Height));
+
+            if (image.IsFilled)
+            {
+                _gfx.DrawRectangle(ToXSolidBrush(image.Style.Fill), srect);
+            }
+
+            _gfx.DrawImage(XImage.FromFile(image.Path.LocalPath), srect);
+        }
     }
 }
