@@ -18,9 +18,15 @@
         <KeyBinding Command="{Binding Commands.SaveAsCommand}" Gesture="Ctrl+S"/>
         <KeyBinding Command="{Binding Commands.ExportCommand}" Gesture="Ctrl+E"/>
         <KeyBinding Command="{Binding Commands.ExitCommand}" Gesture="Alt+F4"/>
+        <KeyBinding Command="{Binding Commands.UndoCommand}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{Binding Commands.RedoCommand}" Gesture="Ctrl+Y"/>
         <KeyBinding Command="{Binding Commands.CopyAsEmfCommand}" Gesture="Ctrl+Shift+C"/>
-        <KeyBinding Command="{Binding Commands.GroupSelectedCommand}" Gesture="Ctrl+G"/>
-        <KeyBinding Command="{Binding Commands.GroupCurrentLayerCommand}" Gesture="Ctrl+Shift+G"/>
+        <KeyBinding Command="{Binding Commands.CutCommand}" Gesture="Ctrl+X"/>
+        <KeyBinding Command="{Binding Commands.CopyCommand}" Gesture="Ctrl+C"/>
+        <KeyBinding Command="{Binding Commands.PasteCommand}" Gesture="Ctrl+V"/>
+        <KeyBinding Command="{Binding Commands.SelectAllCommand}" Gesture="Ctrl+A"/>
+        <KeyBinding Command="{Binding Commands.GroupCommand}" Gesture="Ctrl+G"/>
+        <KeyBinding Command="{Binding Commands.GroupLayerCommand}" Gesture="Ctrl+Shift+G"/>
         <KeyBinding Command="{Binding Commands.EvalCommand}" Gesture="F9"/>
         <KeyBinding Command="{Binding Commands.StartSimulationCommand}" Gesture="F5"/>
         <KeyBinding Command="{Binding Commands.StopSimulationCommand}" Gesture="F6"/>
