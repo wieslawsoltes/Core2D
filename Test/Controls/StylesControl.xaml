@@ -12,12 +12,13 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
-            <MenuItem Command="{Binding Commands.AddStyleCommand}" Header="_+"/>
-            <MenuItem Command="{Binding Commands.RemoveStyleCommand}" Header="_-"/>
+            <MenuItem Command="{Binding Commands.AddStyleGroupCommand}" Header="+"/>
+            <MenuItem Command="{Binding Commands.RemoveStyleGroupCommand}" Header="-"/>
         </Menu>
         <ComboBox ItemsSource="{Binding Editor.Container.StyleGroups}" 
                   SelectedItem="{Binding Editor.Container.CurrentStyleGroup}" 
@@ -29,17 +30,21 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+        <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="2">
+            <MenuItem Command="{Binding Commands.AddStyleCommand}" Header="_+"/>
+            <MenuItem Command="{Binding Commands.RemoveStyleCommand}" Header="_-"/>
+        </Menu>
         <ListBox DataContext="{Binding Editor}"
                  ItemsSource="{Binding Container.CurrentStyleGroup.Styles}" 
                  SelectedItem="{Binding Container.CurrentStyleGroup.CurrentStyle}" 
                  BorderBrush="{x:Null}"
-                 Grid.Row="2">
+                 Grid.Row="3">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Margin="0,5,0,5"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <controls:StyleControl Grid.Row="23" Margin="2" DataContext="{Binding Editor.Container.CurrentStyleGroup.CurrentStyle}"/>
+        <controls:StyleControl Grid.Row="4" Margin="2" DataContext="{Binding Editor.Container.CurrentStyleGroup.CurrentStyle}"/>
     </Grid>
 </UserControl>
