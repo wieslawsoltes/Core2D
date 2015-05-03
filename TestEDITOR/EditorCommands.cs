@@ -17,11 +17,17 @@ namespace TestEDITOR
         public ICommand ExportCommand { get; set; }
         public ICommand ExitCommand { get; set; }
 
+        public ICommand UndoCommand { get; set; }
+        public ICommand RedoCommand { get; set; }
         public ICommand CopyAsEmfCommand { get; set; }
-        public ICommand DeleteSelectedCommand { get; set; }
+        public ICommand CutCommand { get; set; }
+        public ICommand CopyCommand { get; set; }
+        public ICommand PasteCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand SelectAllCommand { get; set; }
         public ICommand ClearAllCommand { get; set; }
-        public ICommand GroupSelectedCommand { get; set; }
-        public ICommand GroupCurrentLayerCommand { get; set; }
+        public ICommand GroupCommand { get; set; }
+        public ICommand GroupLayerCommand { get; set; }
 
         public ICommand ToolNoneCommand { get; set; }
         public ICommand ToolSelectionCommand { get; set; }
