@@ -212,6 +212,8 @@ namespace Test2d
             }
         }
 
+        public Func<string> GetImagePath { get; set; }
+
         public static Editor Create(Container container, IRenderer renderer)
         {
             var editor = new Editor()
@@ -385,6 +387,20 @@ namespace Test2d
                         yield return text.BottomRight; 
                     }
                 }
+                else if (shape is XImage)
+                {
+                    var image = shape as XImage;
+
+                    if (!image.TopLeft.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return image.TopLeft;
+                    }
+
+                    if (!image.BottomRight.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return image.BottomRight;
+                    }
+                }
                 else if (shape is XGroup)
                 {
                     var group = shape as XGroup;
@@ -446,6 +462,10 @@ namespace Test2d
                 {
                     yield return shape;
                 }
+                else if (shape is XImage)
+                {
+                    yield return shape;
+                }
                 else if (shape is XGroup)
                 {
                     foreach (var s in GetShapes((shape as XGroup).Shapes))
@@ -485,6 +505,16 @@ namespace Test2d
                 Container.CurrentLayer.Shapes.Remove(shape);
                 Container.CurrentShape = Container.CurrentLayer.Shapes.FirstOrDefault();
                 Container.Invalidate();
+            }
+        }
+
+        public void RemoveCurrentStyleGroup()
+        {
+            var sg = Container.CurrentStyleGroup;
+            if (sg != null)
+            {
+                Container.StyleGroups.Remove(sg);
+                Container.CurrentStyleGroup = Container.StyleGroups.FirstOrDefault();
             }
         }
 
@@ -820,6 +850,24 @@ namespace Test2d
             if (result != null && result is XPoint)
             {
                 text.BottomRight = result as XPoint;
+            }
+        }
+
+        public void TryToConnectTopLeft(XImage image, double x, double y)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                image.TopLeft = result as XPoint;
+            }
+        }
+
+        public void TryToConnectBottomRight(XImage image, double x, double y)
+        {
+            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                image.BottomRight = result as XPoint;
             }
         }
 
@@ -1306,6 +1354,54 @@ namespace Test2d
             }
         }
 
+        private void ImageLeftDown(double sx, double sy)
+        {
+            switch (CurrentState)
+            {
+                case State.None:
+                    {
+                        var path = GetImagePath();
+                        if (string.IsNullOrEmpty(path))
+                            return;
+
+                        var uri = new Uri(path);
+
+                        _shape = XImage.Create(
+                            sx, sy,
+                            _container.CurrentStyleGroup.CurrentStyle,
+                            _container.PointShape,
+                            uri,
+                            DefaultIsFilled);
+                        if (_tryToConnect)
+                        {
+                            TryToConnectTopLeft(_shape as XImage, sx, sy);
+                        }
+                        _container.WorkingLayer.Shapes.Add(_shape);
+                        _container.WorkingLayer.Invalidate();
+                        CurrentState = State.One;
+                    }
+                    break;
+                case State.One:
+                    {
+                        var image = _shape as XImage;
+                        if (image != null)
+                        {
+                            image.BottomRight.X = sx;
+                            image.BottomRight.Y = sy;
+                            if (_tryToConnect)
+                            {
+                                TryToConnectBottomRight(_shape as XImage, sx, sy);
+                            }
+                            _container.WorkingLayer.Shapes.Remove(_shape);
+                            _container.CurrentLayer.Shapes.Add(_shape);
+                            _container.Invalidate();
+                            CurrentState = State.None;
+                        }
+                    }
+                    break;
+            }
+        }
+
         private void SelectionRightDown(double sx, double sy)
         {
             switch (CurrentState)
@@ -1427,6 +1523,22 @@ namespace Test2d
         }
 
         private void TextRightDown(double sx, double sy)
+        {
+            switch (CurrentState)
+            {
+                case State.None:
+                    break;
+                case State.One:
+                    {
+                        _container.WorkingLayer.Shapes.Remove(_shape);
+                        _container.WorkingLayer.Invalidate();
+                        CurrentState = State.None;
+                    }
+                    break;
+            }
+        }
+
+        private void ImageRightDown(double sx, double sy)
         {
             switch (CurrentState)
             {
@@ -1658,6 +1770,26 @@ namespace Test2d
             }
         }
 
+        private void ImageMove(double sx, double sy)
+        {
+            switch (CurrentState)
+            {
+                case State.None:
+                    break;
+                case State.One:
+                    {
+                        var image = _shape as XImage;
+                        if (image != null)
+                        {
+                            image.BottomRight.X = sx;
+                            image.BottomRight.Y = sy;
+                            _container.WorkingLayer.Invalidate();
+                        }
+                    }
+                    break;
+            }
+        }
+
         public void LeftDown(double x, double y)
         {
             double sx = SnapToGrid ? Snap(x, SnapX) : x;
@@ -1711,6 +1843,11 @@ namespace Test2d
                         TextLeftDown(sx, sy);
                     }
                     break;
+                case Tool.Image:
+                    {
+                        ImageLeftDown(sx, sy);
+                    }
+                    break;
             }
         }
 
@@ -1742,6 +1879,8 @@ namespace Test2d
                 case Tool.QBezier:
                     break;
                 case Tool.Text:
+                    break;
+                case Tool.Image:
                     break;
             }
         }
@@ -1802,6 +1941,11 @@ namespace Test2d
                         TextRightDown(sx, sy);
                     }
                     break;
+                case Tool.Image:
+                    {
+                        ImageRightDown(sx, sy);
+                    }
+                    break;
             }
         }
 
@@ -1830,6 +1974,8 @@ namespace Test2d
                 case Tool.QBezier:
                     break;
                 case Tool.Text:
+                    break;
+                case Tool.Image:
                     break;
             }
         }
@@ -1885,6 +2031,11 @@ namespace Test2d
                 case Tool.Text:
                     {
                         TextMove(sx, sy);
+                    }
+                    break;
+                case Tool.Image:
+                    {
+                        ImageMove(sx, sy);
                     }
                     break;
             }
