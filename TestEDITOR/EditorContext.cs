@@ -432,6 +432,7 @@ namespace TestEDITOR
                 .AddReferences(Assembly.GetAssembly(typeof(ContainerSerializer)))
                 .AddNamespaces("TestJSON")
                 .AddReferences(Assembly.GetAssembly(typeof(EditorContext)))
+                .AddNamespaces("TestEDITOR")
                 .AddNamespaces("TestPDF")
                 .AddNamespaces("TestSIM");
 
