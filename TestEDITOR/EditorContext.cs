@@ -25,6 +25,7 @@ namespace TestEDITOR
     {
         private EditorCommands _commands;
         private Editor _editor;
+        private ITextClipboard _textClipboard;
         private string _rootScriptsPath;
         private IList<ScriptDirectory> _scriptDirectories;
         private bool _isSimulationPaused;
@@ -56,6 +57,19 @@ namespace TestEDITOR
                 {
                     _editor = value;
                     Notify("Editor");
+                }
+            }
+        }
+
+        public ITextClipboard TextClipboard
+        {
+            get { return _textClipboard; }
+            set
+            {
+                if (value != _textClipboard)
+                {
+                    _textClipboard = value;
+                    Notify("TextClipboard");
                 }
             }
         }
@@ -114,18 +128,18 @@ namespace TestEDITOR
 
         public Action<Action> Execute { get; set; }
 
-        public void Initialize(IView view, IRenderer renderer)
+        public void Initialize(IView view, IRenderer renderer, ITextClipboard clipboard)
         {
             _commands = new EditorCommands();
             _editor = Editor.Create(Container.Create(), renderer);
+            _textClipboard = clipboard;
 
             (_editor.Renderer as ObservableObject).PropertyChanged +=
                 (s, e) =>
                 {
                     if (e.PropertyName == "Zoom")
                     {
-                        _editor.Renderer.ClearCache();
-                        _editor.Container.Invalidate();
+                        Invalidate();
                     }
                 };
 
@@ -143,6 +157,20 @@ namespace TestEDITOR
                 },
                 () => true);
 
+            _commands.UndoCommand = new DelegateCommand(
+                () =>
+                {
+                    Undo();
+                },
+                () => IsEditMode() && CanUndo());
+
+            _commands.RedoCommand = new DelegateCommand(
+                () =>
+                {
+                    Redo();
+                },
+                () => IsEditMode() && CanRedo());
+
             _commands.CopyAsEmfCommand = new DelegateCommand(
                 () =>
                 {
@@ -150,10 +178,38 @@ namespace TestEDITOR
                 },
                 () => IsEditMode());
 
-            _commands.DeleteSelectedCommand = new DelegateCommand(
+            _commands.CutCommand = new DelegateCommand(
+                () =>
+                {
+                    Cut();
+                },
+                () => IsEditMode() /* && CanCopy() */);
+
+            _commands.CopyCommand = new DelegateCommand(
+                () =>
+                {
+                    Copy();
+                },
+                () => IsEditMode() /* && CanCopy() */);
+
+            _commands.PasteCommand = new DelegateCommand(
+                () =>
+                {
+                    Paste();
+                },
+                () => IsEditMode() /* && CanPaste() */);
+
+            _commands.DeleteCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.DeleteSelected();
+                },
+                () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+            _commands.SelectAllCommand = new DelegateCommand(
+                () =>
+                {
+                    SelectAll();
                 },
                 () => IsEditMode());
 
@@ -164,14 +220,14 @@ namespace TestEDITOR
                 },
                 () => IsEditMode());
 
-            _commands.GroupSelectedCommand = new DelegateCommand(
+            _commands.GroupCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.GroupSelected();
                 },
-                () => IsEditMode());
+                () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
-            _commands.GroupCurrentLayerCommand = new DelegateCommand(
+            _commands.GroupLayerCommand = new DelegateCommand(
                 () =>
                 {
                     _editor.GroupCurrentLayer();
@@ -349,6 +405,12 @@ namespace TestEDITOR
             WarmUpCSharpScript();
         }
 
+        public void Invalidate()
+        {
+            _editor.Renderer.ClearCache();
+            _editor.Container.Invalidate();
+        }
+
         public void Eval(string code, EditorContext context, Action<Action> execute)
         {
             ScriptOptions options = ScriptOptions.Default
@@ -401,7 +463,7 @@ namespace TestEDITOR
         public void Open(string path)
         {
             var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
-            var container = ContainerSerializer.Deserialize(json);
+            var container = ContainerSerializer.Deserialize<Container>(json);
             _editor.Load(container);
         }
 
@@ -433,7 +495,169 @@ namespace TestEDITOR
             };
             renderer.Create(path, _editor.Container, version);
         }
- 
+
+        public bool CanCopy()
+        {
+            return _editor.IsSelectionAvailable();
+        }
+
+        public bool CanPaste()
+        {
+            try
+            {
+                return _textClipboard.ContainsText();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+            return false;
+        }
+
+        private void Copy(IList<BaseShape> shapes)
+        {
+            try
+            {
+                var json = ContainerSerializer.Serialize(shapes);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    _textClipboard.SetText(json);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+        }
+
+        public void Paste(string json)
+        {
+            try
+            {
+                var shapes = ContainerSerializer.Deserialize<IList<BaseShape>>(json);
+                if (shapes != null && shapes.Count() > 0)
+                {
+                    Paste(shapes);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+        }
+
+        private void RestoreStyles(IEnumerable<BaseShape> shapes)
+        {
+            var styles = _editor.Container.StyleGroups.SelectMany(sg => sg.Styles);
+            var dict = styles.ToDictionary(s => s.Name);
+
+            var points = Editor.GetPoints(shapes);
+            foreach (var point in points)
+            {
+                point.Shape = _editor.Container.PointShape;
+            }
+
+            foreach (var shape in Editor.GetShapes(shapes))
+            {
+                ShapeStyle style;
+                if (dict.TryGetValue(shape.Style.Name, out style))
+                {
+                    shape.Style = style;
+                }
+            }
+        }
+
+        public void Paste(IEnumerable<BaseShape> shapes)
+        {
+            _editor.Deselect(_editor.Container);
+
+            RestoreStyles(shapes);
+
+            foreach (var shape in shapes)
+            {
+                _editor.Container.CurrentLayer.Shapes.Add(shape);
+            }
+
+            _editor.Select(_editor.Container, new HashSet<BaseShape>(shapes));
+        }
+
+        public bool CanUndo()
+        {
+            return false;
+        }
+
+        public bool CanRedo()
+        {
+            return false;
+        }
+
+        public void Undo()
+        {
+            // TODO:
+        }
+
+        public void Redo()
+        {
+            // TODO:
+        }
+
+        public void Cut()
+        {
+            if (CanCopy())
+            {
+                Copy();
+
+                _editor.DeleteSelected();
+            }
+        }
+
+        public void Copy()
+        {
+            if (CanCopy())
+            {
+                if (_editor.Renderer.SelectedShape != null)
+                {
+                    Copy(Enumerable.Repeat(_editor.Renderer.SelectedShape, 1).ToList());
+                }
+
+                if (_editor.Renderer.SelectedShapes != null)
+                {
+                    Copy(_editor.Renderer.SelectedShapes.ToList());
+                }
+            }
+        }
+
+        public void Paste()
+        {
+            try
+            {
+                if (CanPaste())
+                {
+                    var json = _textClipboard.GetText();
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        Paste(json);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+        }
+
+        public void SelectAll()
+        {
+            _editor.Deselect(_editor.Container);
+            _editor.Select(
+                _editor.Container,
+                new HashSet<BaseShape>(_editor.Container.CurrentLayer.Shapes));
+        }
+
         public void ClearAll()
         {
             _editor.Container.Clear();
@@ -471,6 +695,7 @@ namespace TestEDITOR
                 catch (Exception ex)
                 {
                     System.Diagnostics.Debug.Print(ex.Message);
+                    System.Diagnostics.Debug.Print(ex.StackTrace);
                 }
             };
 
@@ -649,10 +874,10 @@ namespace TestEDITOR
             (_commands.ExitCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.CopyAsEmfCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.DeleteSelectedCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.DeleteCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ClearAllCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.GroupSelectedCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.GroupCurrentLayerCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.GroupCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.GroupLayerCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.ToolNoneCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolSelectionCommand as DelegateCommand).RaiseCanExecuteChanged();
