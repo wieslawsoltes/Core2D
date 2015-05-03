@@ -405,6 +405,59 @@ namespace Test2d
             }
         }
 
+        public static IEnumerable<BaseShape> GetShapes(IEnumerable<BaseShape> shapes)
+        {
+            if (shapes == null)
+            {
+                yield break;
+            }
+
+            foreach (var shape in shapes)
+            {
+                if (shape is XPoint)
+                {
+                    yield return shape;
+                }
+                else if (shape is XLine)
+                {
+                    yield return shape;
+                }
+                else if (shape is XRectangle)
+                {
+                    yield return shape;
+                }
+                else if (shape is XEllipse)
+                {
+                    yield return shape;
+                }
+                else if (shape is XArc)
+                {
+                    yield return shape;
+                }
+                else if (shape is XBezier)
+                {
+                    yield return shape;
+                }
+                else if (shape is XQBezier)
+                {
+                    yield return shape;
+                }
+                else if (shape is XText)
+                {
+                    yield return shape;
+                }
+                else if (shape is XGroup)
+                {
+                    foreach (var s in GetShapes((shape as XGroup).Shapes))
+                    {
+                        yield return s;
+                    }
+
+                    yield return shape;
+                }
+            }
+        }
+
         public static void Move(IEnumerable<XPoint> points, double dx, double dy)
         {
             foreach (var point in points)
@@ -560,6 +613,30 @@ namespace Test2d
             }
         }
 
+        public void Select(Container container, BaseShape shape)
+        {
+            container.CurrentShape = shape;
+            _renderer.SelectedShape = shape;
+            _renderer.SelectedShapes = null;
+            container.CurrentLayer.Invalidate();
+        }
+
+        public void Select(Container container, ICollection<BaseShape> shapes)
+        {
+            container.CurrentShape = null;
+            _renderer.SelectedShape = null;
+            _renderer.SelectedShapes = shapes;
+            container.CurrentLayer.Invalidate();
+        }
+
+        public void Deselect(Container container)
+        {
+            container.CurrentShape = null;
+            _renderer.SelectedShape = null;
+            _renderer.SelectedShapes = null;
+            container.CurrentLayer.Invalidate();
+        }
+
         public bool TryToSelectShapes(Container container, XRectangle rectangle)
         {
             var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
@@ -569,37 +646,27 @@ namespace Test2d
             {
                 if (result.Count > 0)
                 {
-                    container.CurrentShape = null;
-                    _renderer.SelectedShape = null;
-                    _renderer.SelectedShapes = result;
-                    container.CurrentLayer.Invalidate();
+                    Select(container, result);
                     return true;
                 }
             }
 
-            container.CurrentShape = null;
-            _renderer.SelectedShape = null;
-            _renderer.SelectedShapes = null;
-            container.CurrentLayer.Invalidate();
+            Deselect(container);
+
             return false;
         }
-        
+
         public bool TryToSelectShape(Container container, double x, double y)
         {
             var result = ShapeBounds.HitTest(container, new Vector2(x, y), _hitTreshold);
             if (result != null)
             {
-                container.CurrentShape = result;
-                _renderer.SelectedShape = result;
-                _renderer.SelectedShapes = null;
-                container.CurrentLayer.Invalidate();
+                Select(container, result);
                 return true;
             }
-            
-            container.CurrentShape = null;
-            _renderer.SelectedShape = null;
-            _renderer.SelectedShapes = null;
-            container.CurrentLayer.Invalidate();
+
+            Deselect(container);
+
             return false;
         }
 
