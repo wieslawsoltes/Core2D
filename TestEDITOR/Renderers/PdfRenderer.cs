@@ -171,12 +171,26 @@ namespace TestPDF
 
         private static XPen ToXPen(Test2d.ShapeStyle style, Func<double, double> scale)
         {
-            return new XPen(
-                ToXColor(style.Stroke),
-                scale(style.Thickness))
+            var pen = new XPen(ToXColor(style.Stroke), scale(style.Thickness));
+            switch (style.LineStyle.LineCap)
             {
-                LineCap = XLineCap.Flat
-            };
+                case Test2d.LineCap.Flat:
+                    pen.LineCap = XLineCap.Flat;
+                    break;
+                case Test2d.LineCap.Square:
+                    pen.LineCap = XLineCap.Square;
+                    break;
+                case Test2d.LineCap.Round:
+                    pen.LineCap = XLineCap.Round;
+                    break;
+            }
+            if (style.LineStyle.Dashes != null)
+            {
+                // TODO: Convert to correct dash values.
+                pen.DashPattern = style.LineStyle.Dashes;
+            }
+            pen.DashOffset = style.LineStyle.DashOffset;
+            return pen;
         }
 
         private static XSolidBrush ToXSolidBrush(Test2d.ArgbColor color)

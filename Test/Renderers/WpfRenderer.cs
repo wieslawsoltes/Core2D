@@ -178,10 +178,30 @@ namespace Test
             return brush;
         }
 
-        private static Pen CreatePen(ArgbColor color, double thickness)
+        private static Pen CreatePen(LineStyle ls, ArgbColor color, double thickness)
         {
             var brush = CreateBrush(color);
             var pen = new Pen(brush, thickness);
+            switch (ls.LineCap)
+            {
+                case LineCap.Flat:
+                    pen.StartLineCap = PenLineCap.Flat;
+                    pen.EndLineCap = PenLineCap.Flat;
+                    pen.DashCap = PenLineCap.Flat;
+                    break;
+                case LineCap.Square:
+                    pen.StartLineCap = PenLineCap.Square;
+                    pen.EndLineCap = PenLineCap.Square;
+                    pen.DashCap = PenLineCap.Square;
+                    break;
+                case LineCap.Round:
+                    pen.StartLineCap = PenLineCap.Round;
+                    pen.EndLineCap = PenLineCap.Round;
+                    pen.DashCap = PenLineCap.Round;
+                    break;
+            }
+            pen.DashStyle = new DashStyle(ls.Dashes, ls.DashOffset);
+            pen.DashStyle.Offset = ls.DashOffset;
             pen.Freeze();
             return pen;
         }
@@ -381,6 +401,7 @@ namespace Test
             {
                 fill = CreateBrush(line.Style.Fill);
                 stroke = CreatePen(
+                    line.Style.LineStyle,
                     line.Style.Stroke,
                     thickness);
 
@@ -533,6 +554,7 @@ namespace Test
             {
                 fill = CreateBrush(rectangle.Style.Fill);
                 stroke = CreatePen(
+                    rectangle.Style.LineStyle,
                     rectangle.Style.Stroke,
                     thickness);
 
@@ -568,6 +590,7 @@ namespace Test
             {
                 fill = CreateBrush(ellipse.Style.Fill);
                 stroke = CreatePen(
+                    ellipse.Style.LineStyle,
                     ellipse.Style.Stroke,
                     thickness);
 
@@ -612,6 +635,7 @@ namespace Test
             {
                 fill = CreateBrush(arc.Style.Fill);
                 stroke = CreatePen(
+                    arc.Style.LineStyle,
                     arc.Style.Stroke,
                     thickness);
 
@@ -676,6 +700,7 @@ namespace Test
             {
                 fill = CreateBrush(bezier.Style.Fill);
                 stroke = CreatePen(
+                    bezier.Style.LineStyle,
                     bezier.Style.Stroke,
                     thickness);
 
@@ -741,6 +766,7 @@ namespace Test
             {
                 fill = CreateBrush(qbezier.Style.Fill);
                 stroke = CreatePen(
+                    qbezier.Style.LineStyle,
                     qbezier.Style.Stroke,
                     thickness);
 
@@ -805,6 +831,7 @@ namespace Test
             {
                 fill = CreateBrush(text.Style.Fill);
                 stroke = CreatePen(
+                    text.Style.LineStyle,
                     text.Style.Stroke,
                     thickness);
 
@@ -875,6 +902,7 @@ namespace Test
             {
                 fill = CreateBrush(image.Style.Fill);
                 stroke = CreatePen(
+                    image.Style.LineStyle,
                     image.Style.Stroke,
                     thickness);
 

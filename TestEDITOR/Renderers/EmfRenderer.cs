@@ -130,13 +130,32 @@ namespace TestEMF
 
         private static Pen ToPen(ShapeStyle style, Func<double, float> scale)
         {
-            return new Pen(
-                ToColor(style.Stroke),
-                (float)scale(style.Thickness))
+            var pen = new Pen(ToColor(style.Stroke), (float)scale(style.Thickness));
+            switch (style.LineStyle.LineCap)
             {
-                StartCap = System.Drawing.Drawing2D.LineCap.Flat,
-                EndCap = System.Drawing.Drawing2D.LineCap.Flat
-            };
+                case Test2d.LineCap.Flat:
+                    pen.StartCap = System.Drawing.Drawing2D.LineCap.Flat;
+                    pen.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
+                    pen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
+                    break;
+                case Test2d.LineCap.Square:
+                    pen.StartCap = System.Drawing.Drawing2D.LineCap.Square;
+                    pen.EndCap = System.Drawing.Drawing2D.LineCap.Square;
+                    pen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
+                    break;
+                case Test2d.LineCap.Round:
+                    pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+                    pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+                    pen.DashCap = System.Drawing.Drawing2D.DashCap.Round;
+                    break;
+            }
+            if (style.LineStyle.Dashes != null)
+            {
+                // TODO: Convert to correct dash values.
+                pen.DashPattern = style.LineStyle.Dashes.Select(x => (float)x).ToArray();
+            }
+            pen.DashOffset = (float)style.LineStyle.DashOffset;
+            return pen;
         }
 
         private static SolidBrush ToSolidBrush(ArgbColor color)
