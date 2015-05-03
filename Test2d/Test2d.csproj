@@ -68,6 +68,7 @@
     <Compile Include="Core\TextStyle.cs" />
     <Compile Include="Editor\Core\Container.cs" />
     <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
+    <Compile Include="Editor\Core\ITextClipboard.cs" />
     <Compile Include="Editor\Core\IView.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Math\Arc.cs" />
