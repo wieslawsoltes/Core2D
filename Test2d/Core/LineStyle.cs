@@ -9,6 +9,9 @@ namespace Test2d
         private string _name;
         private ArrowStyle _startArrowStyle;
         private ArrowStyle _endArrowStyle;
+        private LineCap _lineCap;
+        private double[] _dashes;
+        private double _dashOffset;
 
         public string Name
         {
@@ -49,14 +52,59 @@ namespace Test2d
             }
         }
 
+        public LineCap LineCap
+        {
+            get { return _lineCap; }
+            set
+            {
+                if (value != _lineCap)
+                {
+                    _lineCap = value;
+                    Notify("LineCap");
+                }
+            }
+        }
+
+        public double[] Dashes
+        {
+            get { return _dashes; }
+            set
+            {
+                if (value != _dashes)
+                {
+                    _dashes = value;
+                    Notify("Dashes");
+                }
+            }
+        }
+
+        public double DashOffset
+        {
+            get { return _dashOffset; }
+            set
+            {
+                if (value != _dashOffset)
+                {
+                    _dashOffset = value;
+                    Notify("DashOffset");
+                }
+            }
+        }
+
         public static LineStyle Create(
             ArrowStyle startArrowStyle = null,
-            ArrowStyle endArrowStyle = null)
+            ArrowStyle endArrowStyle = null,
+            LineCap lineCap = LineCap.Round,
+            double[] dashes = null,
+            double dashOffset = 0.0)
         {
             return new LineStyle() 
             { 
                 StartArrowStyle = startArrowStyle,
-                EndArrowStyle = endArrowStyle
+                EndArrowStyle = endArrowStyle,
+                LineCap = lineCap,
+                Dashes = dashes,
+                DashOffset = dashOffset
             };
         }
     }
