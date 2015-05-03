@@ -23,5 +23,6 @@ namespace Test2d
         void Draw(object dc, XBezier bezier, double dx, double dy);
         void Draw(object dc, XQBezier qbezier, double dx, double dy);
         void Draw(object dc, XText text, double dx, double dy);
+        void Draw(object dc, XImage image, double dx, double dy);
     }
 }
