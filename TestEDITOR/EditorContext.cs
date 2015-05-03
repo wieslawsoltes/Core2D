@@ -550,25 +550,37 @@ namespace TestEDITOR
             }
         }
 
-        private void RestoreStyles(IEnumerable<BaseShape> shapes)
+        private void TryToRestoreStyles(IEnumerable<BaseShape> shapes)
         {
-            var styles = _editor.Container.StyleGroups.SelectMany(sg => sg.Styles);
-            var dict = styles.ToDictionary(s => s.Name);
+            var styles = _editor.Container.StyleGroups
+                .SelectMany(sg => sg.Styles)
+                .ToDictionary(s => s.Name);
 
+            // reset point shape to container default
             foreach (var point in Editor.GetPoints(shapes))
             {
                 point.Shape = _editor.Container.PointShape;
             }
 
+            // try to restore shape styles
             foreach (var shape in Editor.GetShapes(shapes))
             {
                 if (shape.Style == null)
                     continue;
 
                 ShapeStyle style;
-                if (dict.TryGetValue(shape.Style.Name, out style))
+                if (styles.TryGetValue(shape.Style.Name, out style))
                 {
+                    // use existing style
                     shape.Style = style;
+                }
+                else
+                {
+                    // add missing style
+                    _editor.Container.CurrentStyleGroup.Styles.Add(shape.Style);
+                    styles = _editor.Container.StyleGroups
+                        .SelectMany(sg => sg.Styles)
+                        .ToDictionary(s => s.Name);
                 }
             }
         }
@@ -577,7 +589,7 @@ namespace TestEDITOR
         {
             _editor.Deselect(_editor.Container);
 
-            RestoreStyles(shapes);
+            TryToRestoreStyles(shapes);
 
             foreach (var shape in shapes)
             {
