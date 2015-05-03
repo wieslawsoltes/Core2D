@@ -10,6 +10,7 @@ namespace Test2d
         private BaseShape _owner;
         private ShapeState _state = ShapeState.Visible | ShapeState.Printable | ShapeState.Standalone;
         private ShapeStyle _style;
+        private ShapeProperty[] _properties;
 
         public string Name
         {
@@ -62,7 +63,20 @@ namespace Test2d
                 }
             }
         }
-        
+
+        public ShapeProperty[] Properties
+        {
+            get { return _properties; }
+            set
+            {
+                if (value != _properties)
+                {
+                    _properties = value;
+                    Notify("Properties");
+                }
+            }
+        }
+
         public abstract void Draw(object dc, IRenderer renderer, double dx, double dy);
 
         public abstract void Move(double dx, double dy);
