@@ -39,6 +39,7 @@ namespace TestEDITOR
         public ICommand ToolBezierCommand { get; set; }
         public ICommand ToolQBezierCommand { get; set; }
         public ICommand ToolTextCommand { get; set; }
+        public ICommand ToolImageCommand { get; set; }
 
         public ICommand EvalCommand { get; set; }
         public ICommand EvalScriptCommand { get; set; }
@@ -49,6 +50,9 @@ namespace TestEDITOR
 
         public ICommand AddLayerCommand { get; set; }
         public ICommand RemoveLayerCommand { get; set; }
+
+        public ICommand AddStyleGroupCommand { get; set; }
+        public ICommand RemoveStyleGroupCommand { get; set; }
 
         public ICommand AddStyleCommand { get; set; }
         public ICommand RemoveStyleCommand { get; set; }
