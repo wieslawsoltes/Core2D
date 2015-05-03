@@ -62,7 +62,9 @@
     <Compile Include="Core\ArrowStyle.cs" />
     <Compile Include="Core\ArrowType.cs" />
     <Compile Include="Core\BaseShape.cs" />
+    <Compile Include="Core\LineCap.cs" />
     <Compile Include="Core\LineStyle.cs" />
+    <Compile Include="Core\ShapeProperty.cs" />
     <Compile Include="Core\ShapeState.cs" />
     <Compile Include="Core\ShapeStyleGroup.cs" />
     <Compile Include="Core\TextStyle.cs" />
