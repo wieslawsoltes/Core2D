@@ -89,6 +89,9 @@
     <Compile Include="Controls\ContainerControl.xaml.cs">
       <DependentUpon>ContainerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GroupsControl.xaml.cs">
+      <DependentUpon>GroupsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ShapeControl.xaml.cs">
       <DependentUpon>ShapeControl.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -122,6 +125,10 @@
     <Page Include="Controls\ContainerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\GroupsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dictionaries\ShapeDictionary.xaml" />
     <Page Include="Dictionaries\StyleDictionary.xaml" />
