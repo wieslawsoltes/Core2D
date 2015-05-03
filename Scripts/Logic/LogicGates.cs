@@ -6,7 +6,6 @@ if (sg == null)
     c.StyleGroups.Add(sg);
 }
 var styles = sg.Styles;
-var layer = c.CurrentLayer;
 var ps = c.PointShape;
 
 var styleTextBig = ShapeStyle.Create(
@@ -159,11 +158,7 @@ XGroup CreateOrGate()
     return g;
 }
 
-layer.Shapes.Add(CreateInputSignal());
-layer.Shapes.Add(CreateInputSignal());
-layer.Shapes.Add(CreateInputSignal());
-layer.Shapes.Add(CreateOutputSignal());
-layer.Shapes.Add(CreateAndGate());
-layer.Shapes.Add(CreateOrGate());
-
-layer.Invalidate();
+c.Groups.Add(CreateInputSignal());
+c.Groups.Add(CreateOutputSignal());
+c.Groups.Add(CreateAndGate());
+c.Groups.Add(CreateOrGate());
