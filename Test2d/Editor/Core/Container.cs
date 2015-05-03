@@ -11,6 +11,8 @@ namespace Test2d
     {
         private double _width;
         private double _height;
+        private IList<KeyValuePair<string, ShapeProperty>> _database;
+        private IList<XGroup> _groups;
         private IList<ShapeStyleGroup> _styleGroups;
         private ShapeStyleGroup _currentStyleGroup;
         private BaseShape _pointShape;
@@ -42,6 +44,32 @@ namespace Test2d
                 {
                     _height = value;
                     Notify("Height");
+                }
+            }
+        }
+
+        public IList<KeyValuePair<string, ShapeProperty>> Database
+        {
+            get { return _database; }
+            set
+            {
+                if (value != _database)
+                {
+                    _database = value;
+                    Notify("Database");
+                }
+            }
+        }
+
+        public IList<XGroup> Groups
+        {
+            get { return _groups; }
+            set
+            {
+                if (value != _groups)
+                {
+                    _groups = value;
+                    Notify("Groups");
                 }
             }
         }
@@ -175,6 +203,7 @@ namespace Test2d
             {
                 Width = width,
                 Height = height,
+                Groups = new ObservableCollection<XGroup>(),
                 Layers = new ObservableCollection<Layer>(),
                 StyleGroups = new ObservableCollection<ShapeStyleGroup>()
             };
@@ -200,6 +229,37 @@ namespace Test2d
 
             c.StyleGroups.Add(sgd);
             c.CurrentStyleGroup = c.StyleGroups.FirstOrDefault();
+
+            // dashed lines styles group
+            var sgdl = ShapeStyleGroup.Create("Lines");
+
+            var solid = ShapeStyle.Create("Solid", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
+            solid.LineStyle.Dashes = null;
+            solid.LineStyle.DashOffset = 0.0;
+            sgdl.Styles.Add(solid);
+
+            var dash = ShapeStyle.Create("Dash", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
+            dash.LineStyle.Dashes = new double[] { 2, 2 };
+            dash.LineStyle.DashOffset = 1.0;
+            sgdl.Styles.Add(dash);
+
+            var dot = ShapeStyle.Create("Dot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
+            dot.LineStyle.Dashes = new double[] { 0, 2 };
+            dot.LineStyle.DashOffset = 0.0;
+            sgdl.Styles.Add(dot);
+
+            var dashDot = ShapeStyle.Create("DashDot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
+            dashDot.LineStyle.Dashes = new double[] { 2, 2, 0, 2 };
+            dashDot.LineStyle.DashOffset = 1.0;
+            sgdl.Styles.Add(dashDot);
+
+            var dashDotDot = ShapeStyle.Create("DashDotDot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
+            dashDotDot.LineStyle.Dashes = new double[] { 2, 2, 0, 2, 0, 2 };
+            dashDotDot.LineStyle.DashOffset = 1.0;
+            sgdl.Styles.Add(dashDotDot);
+
+            sgdl.CurrentStyle = sgdl.Styles.FirstOrDefault();
+            c.StyleGroups.Add(sgdl);
 
             // template styles group
             var sgt = ShapeStyleGroup.Create("Template");
