@@ -555,14 +555,16 @@ namespace TestEDITOR
             var styles = _editor.Container.StyleGroups.SelectMany(sg => sg.Styles);
             var dict = styles.ToDictionary(s => s.Name);
 
-            var points = Editor.GetPoints(shapes);
-            foreach (var point in points)
+            foreach (var point in Editor.GetPoints(shapes))
             {
                 point.Shape = _editor.Container.PointShape;
             }
 
             foreach (var shape in Editor.GetShapes(shapes))
             {
+                if (shape.Style == null)
+                    continue;
+
                 ShapeStyle style;
                 if (dict.TryGetValue(shape.Style.Name, out style))
                 {
