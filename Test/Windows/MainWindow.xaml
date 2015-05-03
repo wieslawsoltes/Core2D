@@ -5,7 +5,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Test"
         xmlns:controls="clr-namespace:Test.Controls"
-        Title="Test" Height="720" Width="1140"
+        Title="Test" Height="720" Width="1200"
         Background="LightGray"
         WindowStartupLocation="CenterScreen" WindowState="Normal"
         UseLayoutRounding="True" SnapsToDevicePixels="True"
@@ -42,6 +42,8 @@
     </Window.InputBindings>
     <Grid FocusVisualStyle="{x:Null}">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="110"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="230"/>
@@ -51,11 +53,20 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <controls:MenuControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+        <controls:MenuControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"/>
+        <TabControl Grid.Row="1" Grid.Column="0" Margin="5,8,0,5">
+            <TabItem Header="Goups">
+                <controls:GroupsControl/>
+            </TabItem>
+        </TabControl>
+        <GridSplitter Grid.Row="1" Grid.Column="1" 
+                      Width="5" Background="Transparent" 
+                      ResizeBehavior="PreviousAndNext" 
+                      ShowsPreview="True"/>
         <ScrollViewer VerticalScrollBarVisibility="Auto" 
                       HorizontalScrollBarVisibility="Auto" 
                       Focusable="False"
-                      Grid.Row="1" Grid.Column="0" Margin="5,5,0,5">
+                      Grid.Row="1" Grid.Column="2" Margin="0,8,0,5">
             <Border BorderBrush="{x:Null}" BorderThickness="0" RenderTransformOrigin="0.5,0.5">
                 <Border.LayoutTransform>
                     <TransformGroup>
@@ -63,11 +74,14 @@
                         <ScaleTransform ScaleX="{Binding Editor.Renderer.Zoom}" ScaleY="{Binding Editor.Renderer.Zoom}"/>
                     </TransformGroup>
                 </Border.LayoutTransform>
-                <controls:ContainerControl/>
+                <controls:ContainerControl x:Name="containerControl"/>
             </Border>
         </ScrollViewer>
-        <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" Background="Transparent" ResizeBehavior="PreviousAndNext"/>
-        <TabControl Grid.Row="1" Grid.Column="2" Margin="0,5,5,5">
+        <GridSplitter Grid.Row="1" Grid.Column="3" 
+                      Width="5" Background="Transparent" 
+                      ResizeBehavior="PreviousAndNext" 
+                      ShowsPreview="True"/>
+        <TabControl Grid.Row="1" Grid.Column="4" Margin="0,8,5,5">
             <TabItem Header="Layers">
                 <controls:LayersControl/>
             </TabItem>
@@ -81,7 +95,7 @@
                 <controls:ShapeControl/>
             </TabItem>
         </TabControl>
-        <Grid Grid.Row="2" Grid.Column="2"
+        <Grid Grid.Row="2" Grid.Column="5"
               Margin="5,2,5,2"
               VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>

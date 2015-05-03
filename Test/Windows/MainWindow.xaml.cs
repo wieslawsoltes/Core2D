@@ -161,9 +161,17 @@ namespace Test.Windows
                     }
                 };
 
-            AllowDrop = true;
-            
-            Drop += 
+            containerControl.AllowDrop = true;
+
+            containerControl.DragEnter += (s, e) =>
+            {
+                if (!e.Data.GetDataPresent("Group") || s == e.Source)
+                {
+                    e.Effects = DragDropEffects.None;
+                }
+            };
+
+            containerControl.Drop += 
                 (s, e) =>
                 {
                     if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -181,7 +189,30 @@ namespace Test.Windows
                                 }
                             }
                         }
-                        catch { }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.Print(ex.Message);
+                            System.Diagnostics.Debug.Print(ex.StackTrace);
+                        }
+                    }
+
+                    if (e.Data.GetDataPresent("Group"))
+                    {
+                        try
+                        {
+                            var group = e.Data.GetData("Group") as XGroup;
+                            if (group != null)
+                            {
+                                var p = e.GetPosition(containerControl);
+                                context.Drop(group, p.X, p.Y);
+                                e.Handled = true;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.Print(ex.Message);
+                            System.Diagnostics.Debug.Print(ex.StackTrace);
+                        }
                     }
                 };
 
