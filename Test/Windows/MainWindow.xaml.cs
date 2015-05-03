@@ -32,6 +32,7 @@ namespace Test.Windows
         private void InitializeContext()
         {
             var context = new EditorContext();
+            context.Execute = (action) => Dispatcher.Invoke(action);
             context.Initialize(this, WpfRenderer.Create());
             context.InitializeSctipts();
             context.InitializeSimulation();

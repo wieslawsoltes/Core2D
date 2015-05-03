@@ -112,6 +112,8 @@ namespace TestEDITOR
             }
         }
 
+        public Action<Action> Execute { get; set; }
+
         public void Initialize(IView view, IRenderer renderer)
         {
             _commands = new EditorCommands();
@@ -347,19 +349,38 @@ namespace TestEDITOR
             WarmUpCSharpScript();
         }
 
-        public void Eval(string code, EditorContext context)
+        public void Eval(string code, EditorContext context, Action<Action> execute)
         {
             ScriptOptions options = ScriptOptions.Default
                 .AddNamespaces("System")
                 .AddNamespaces("System.Collections.Generic")
+                .AddNamespaces("System.Text")
+                .AddNamespaces("System.Threading")
+                .AddNamespaces("System.Threading.Tasks")
                 .AddReferences(Assembly.GetAssembly(typeof(ObservableCollection<>)))
                 .AddNamespaces("System.Collections.ObjectModel")
                 .AddReferences(Assembly.GetAssembly(typeof(System.Linq.Enumerable)))
                 .AddNamespaces("System.Linq")
                 .AddReferences(Assembly.GetAssembly(typeof(ObservableObject)))
-                .AddNamespaces("Test2d");
+                .AddNamespaces("Test2d")
+                .AddReferences(Assembly.GetAssembly(typeof(Dxf.DxfObject)))
+                .AddNamespaces("TestDXF")
+                .AddReferences(Assembly.GetAssembly(typeof(Emf)))
+                .AddNamespaces("TestEMF")
+                .AddReferences(Assembly.GetAssembly(typeof(ContainerSerializer)))
+                .AddNamespaces("TestJSON")
+                .AddReferences(Assembly.GetAssembly(typeof(EditorContext)))
+                .AddNamespaces("TestPDF")
+                .AddNamespaces("TestSIM");
 
-            CSharpScript.Eval(code, options, new ScriptGlobals() { Context = context });
+            CSharpScript.Eval(
+                code, 
+                options, 
+                new ScriptGlobals() 
+                { 
+                    Context = context,
+                    Execute = execute
+                });
         }
 
         public void Eval(string path)
@@ -368,11 +389,12 @@ namespace TestEDITOR
             {
                 var code = System.IO.File.ReadAllText(path);
                 var context = this;
-                Eval(code, context);
+                Eval(code, context, Execute);
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
             }
         }
 
@@ -423,7 +445,7 @@ namespace TestEDITOR
             // NOTE: Warmup Roslyn script engine.
             try
             {
-                Task.Run(() => Eval("Action a = () => { };", this));
+                Task.Run(() => Eval("Action a = () => { };", this, Execute));
             }
             catch (Exception ex)
             {

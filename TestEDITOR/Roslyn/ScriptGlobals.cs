@@ -11,5 +11,6 @@ namespace TestEDITOR
     public class ScriptGlobals
     {
         public EditorContext Context;
+        public Action<Action> Execute;
     }
 }
