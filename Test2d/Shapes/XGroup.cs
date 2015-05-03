@@ -8,8 +8,22 @@ namespace Test2d
 {
     public class XGroup : BaseShape
     {
+        private IList<KeyValuePair<string, ShapeProperty>> _database;
         private IList<BaseShape> _shapes;
         private IList<XPoint> _connectors;
+
+        public IList<KeyValuePair<string, ShapeProperty>> Database
+        {
+            get { return _database; }
+            set
+            {
+                if (value != _database)
+                {
+                    _database = value;
+                    Notify("Database");
+                }
+            }
+        }
 
         public IList<BaseShape> Shapes
         {
