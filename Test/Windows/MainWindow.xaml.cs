@@ -20,6 +20,24 @@ using TestEDITOR;
 
 namespace Test.Windows
 {
+    internal class TextClipboard : ITextClipboard
+    {
+        public void SetText(string text)
+        {
+            Clipboard.SetText(text, TextDataFormat.UnicodeText);
+        }
+
+        public string GetText()
+        {
+            return Clipboard.GetText(TextDataFormat.UnicodeText);
+        }
+
+        public bool ContainsText()
+        {
+            return Clipboard.ContainsText(TextDataFormat.UnicodeText);
+        }
+    }
+
     public partial class MainWindow : Window, IView
     {
         public MainWindow()
@@ -33,7 +51,7 @@ namespace Test.Windows
         {
             var context = new EditorContext();
             context.Execute = (action) => Dispatcher.Invoke(action);
-            context.Initialize(this, WpfRenderer.Create());
+            context.Initialize(this, WpfRenderer.Create(), new TextClipboard());
             context.InitializeSctipts();
             context.InitializeSimulation();
             context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
@@ -101,15 +119,20 @@ namespace Test.Windows
                 },
                 () => true);
 
+            PropertiesWindow pw = null;
+
             context.Commands.PropertiesWindowCommand = new DelegateCommand(
                 () =>
                 {
-                    (new PropertiesWindow() { Owner = this, DataContext = context }).Show();
+                    if (pw == null)
+                    {
+                        pw = new PropertiesWindow() { Owner = this, DataContext = context };
+                        pw.Unloaded += (_s, _e) => pw = null;
+                    }
+                    pw.Show();
                 },
                 () => true);
-            
-            PropertiesWindow pw = null;
-            
+
             context.Editor.PropertyChanged +=
                 (s, e) =>
                 {
