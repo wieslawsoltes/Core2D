@@ -56,19 +56,13 @@
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainForm.cs">
@@ -99,7 +93,7 @@
       <Name>TestDXF</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestEDITOR\TestEDITOR.csproj">
-      <Project>{6C5DFAB8-5747-42DF-8D8F-AC1922AE12AA}</Project>
+      <Project>{dd2d100a-773a-4893-a3eb-6c63e11b12a9}</Project>
       <Name>TestEDITOR</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestEMF\TestEMF.csproj">
