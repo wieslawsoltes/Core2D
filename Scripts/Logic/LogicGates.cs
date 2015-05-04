@@ -59,7 +59,11 @@ XGroup CreateInputSignal()
 {
     var g = XGroup.Create("INPUT");
 
-    var label = XText.Create(0, 0, 30, 30, styleTextBig, ps, "IN", false, "");
+    var label = XText.Create(0, 0, 30, 30, styleTextBig, ps, "{0}", false, "");
+    var labelProperty = ShapeProperty.Create("IN");
+    g.AddProperty("Label", labelProperty);
+    label.Properties = new [] { labelProperty };
+
     SetShapeState(label, g);
     g.Shapes.Add(label);
 
@@ -79,7 +83,10 @@ XGroup CreateOutputSignal()
 {
     var g = XGroup.Create("OUTPUT");
 
-    var label = XText.Create(0, 0, 30, 30, styleTextBig, ps, "OUT", false, "");
+    var label = XText.Create(0, 0, 30, 30, styleTextBig, ps, "{0}", false, "");
+    var labelProperty = ShapeProperty.Create("OUT");
+    g.AddProperty("Label", labelProperty);
+    label.Properties = new [] { labelProperty };
     SetShapeState(label, g);
     g.Shapes.Add(label);
 
@@ -100,6 +107,9 @@ XGroup CreateAndGate()
     var g = XGroup.Create("AND");
 
     var label = XText.Create(0, 0, 30, 30, styleTextBig, ps, "&", false, "");
+    var labelProperty = ShapeProperty.Create("&");
+    g.AddProperty("Label", labelProperty);
+    label.Properties = new [] { labelProperty };
     SetShapeState(label, g);
     g.Shapes.Add(label);
 
@@ -131,7 +141,12 @@ XGroup CreateOrGate()
 {
     var g = XGroup.Create("OR");
 
-    var label = XText.Create(0, 0, 30, 30, styleTextBig, ps, "≥1", false, "");
+    var label = XText.Create(0, 0, 30, 30, styleTextBig, ps, "{0}{1}", false, "");
+    var prefixProperty = ShapeProperty.Create("≥");
+    var counterProperty = ShapeProperty.Create("1");
+    g.AddProperty("Prefix", prefixProperty);
+    g.AddProperty("Counter", counterProperty);
+    label.Properties = new [] { prefixProperty, counterProperty };
     SetShapeState(label, g);
     g.Shapes.Add(label);
 
