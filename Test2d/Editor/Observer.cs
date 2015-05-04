@@ -162,6 +162,32 @@ namespace Test2d
             _invalidateShapes();
         }
 
+        private void DatabaseCollectionObserver(
+            object sender,
+            NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    Add(e.NewItems.Cast<KeyValuePair<string, ShapeProperty>>());
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    Debug("Database Replace");
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    Remove(e.OldItems.Cast<KeyValuePair<string, ShapeProperty>>());
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    Debug("Database Replace");
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    Debug("Database Reset");
+                    break;
+            }
+
+            _invalidateShapes();
+        }
+
         private void StyleGroupObserver(
             object sender,
             System.ComponentModel.PropertyChangedEventArgs e)
@@ -206,6 +232,18 @@ namespace Test2d
                 "Shape: " + 
                 sender.GetType() + 
                 ", Property: " + 
+                e.PropertyName);
+            _invalidateShapes();
+        }
+
+        private void PropertyObserver(
+            object sender,
+            System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Debug(
+                "Property: " +
+                sender.GetType() +
+                ", Property: " +
                 e.PropertyName);
             _invalidateShapes();
         }
@@ -422,10 +460,13 @@ namespace Test2d
                 var group = shape as XGroup;
                 Add(group.Shapes);
                 Add(group.Connectors);
+                Add(group.Database);
                 (group.Shapes as ObservableCollection<BaseShape>)
                     .CollectionChanged += ShapesCollectionObserver;
                 (group.Connectors as ObservableCollection<XPoint>)
                     .CollectionChanged += ShapesCollectionObserver;
+                (group.Database as ObservableCollection<KeyValuePair<string, ShapeProperty>>)
+                    .CollectionChanged += DatabaseCollectionObserver;
             }
 
             Debug("Add Shape: " + shape.GetType());
@@ -500,6 +541,8 @@ namespace Test2d
                     .CollectionChanged -= ShapesCollectionObserver;
                 (group.Connectors as ObservableCollection<XPoint>)
                     .CollectionChanged -= ShapesCollectionObserver;
+                (group.Database as ObservableCollection<KeyValuePair<string, ShapeProperty>>)
+                    .CollectionChanged -= DatabaseCollectionObserver;
             }
 
             Debug("Remove Shape: " + shape.GetType());
@@ -518,6 +561,40 @@ namespace Test2d
             foreach (var shape in shapes)
             {
                 Remove(shape);
+            }
+        }
+
+        #endregion
+
+        #region Properties
+
+        private void Add(KeyValuePair<string, ShapeProperty> property)
+        {
+            property.Value.PropertyChanged += PropertyObserver;
+
+            Debug("Add Property: " + property.Key + ", type: " + property.Value.Data.GetType());
+        }
+
+        private void Remove(KeyValuePair<string, ShapeProperty> property)
+        {
+            property.Value.PropertyChanged += PropertyObserver;
+
+            Debug("Remove Property: " + property.Key + ", type: " + property.Value.Data.GetType());
+        }
+
+        private void Add(IEnumerable<KeyValuePair<string, ShapeProperty>> properties)
+        {
+            foreach (var property in properties)
+            {
+                Add(property);
+            }
+        }
+
+        private void Remove(IEnumerable<KeyValuePair<string, ShapeProperty>> properties)
+        {
+            foreach (var property in properties)
+            {
+                Remove(property);
             }
         }
 
