@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Test2d
 {
@@ -10,6 +12,7 @@ namespace Test2d
         private XPoint _bottomRight;
         private bool _isFilled;
         private string _text;
+        private string _textBinding;
 
         public XPoint TopLeft
         {
@@ -62,7 +65,20 @@ namespace Test2d
                 }
             }
         }
-        
+
+        public string TextBinding
+        {
+            get { return _textBinding; }
+            set
+            {
+                if (value != _textBinding)
+                {
+                    _textBinding = value;
+                    Notify("TextBinding");
+                }
+            }
+        }
+
         public override void Draw(object dc, IRenderer renderer, double dx, double dy)
         {
             if (State.HasFlag(ShapeState.Visible))
@@ -101,6 +117,23 @@ namespace Test2d
         {
             TopLeft.Move(dx, dy);
             BottomRight.Move(dx, dy);
+        }
+
+        public string Bind(IList<KeyValuePair<string, ShapeProperty>> db)
+        {
+            if (db != null && !string.IsNullOrEmpty(this.TextBinding))
+            {
+                // try to bind to database using TextBinding key
+                var result = db.Where(kvp => kvp.Key == this.TextBinding).FirstOrDefault();
+                if (result.Value != null)
+                {
+                    return result.Value.Data.ToString();
+                }
+            }
+
+            // try to bind to Properties using Text as formatting
+            return (this.Properties != null) ?
+                string.Format(this.Text, this.Properties) : this.Text;
         }
 
         public static XText Create(
