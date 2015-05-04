@@ -50,7 +50,7 @@ namespace Test2d
                 }
             }
         }
-        
+   
         public override void Draw(object dc, IRenderer renderer, double dx, double dy)
         {
             if (State.HasFlag(ShapeState.Visible))
@@ -113,11 +113,20 @@ namespace Test2d
             }
         }
 
+        public void AddProperty(string key, ShapeProperty property)
+        {
+            _database.Add(
+                new KeyValuePair<string, ShapeProperty>(
+                    key,
+                    property));
+        }
+
         public static XGroup Create(string name = "")
         {
             return new XGroup()
             {
                 Name = name,
+                Database = new ObservableCollection<KeyValuePair<string, ShapeProperty>>(),
                 Shapes = new ObservableCollection<BaseShape>(),
                 Connectors = new ObservableCollection<XPoint>()
             };
