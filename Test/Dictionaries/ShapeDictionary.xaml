@@ -472,6 +472,28 @@
                     </ContentControl>
                 </Grid>
             </Expander>
+            <Expander Header="Properties" IsExpanded="True">
+                <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" 
+                              ItemsSource="{Binding Database, UpdateSourceTrigger=PropertyChanged}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="Auto" VerticalAlignment="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,1,2,1" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{Binding Key}"/>
+                                <TextBox Grid.Column="1" Grid.Row="0" Margin="0,1,0,1" VerticalAlignment="Center" Text="{Binding Value.Data, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Expander>
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>
