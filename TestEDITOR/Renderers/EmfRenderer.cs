@@ -600,7 +600,7 @@ namespace TestEMF
             }
 
             _gfx.DrawString(
-                text.Text,
+                text.Bind(null),
                 font,
                 ToSolidBrush(text.Style.Stroke),
                 srect,

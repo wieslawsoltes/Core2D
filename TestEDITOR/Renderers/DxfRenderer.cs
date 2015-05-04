@@ -659,7 +659,7 @@ namespace TestDXF
             }
 
             entities.Entities.Add(CreateText(
-                text.Text, 
+                text.Bind(null), 
                 x, y, 
                 text.Style.TextStyle.FontSize * (72.0 / 96.0), 
                 halign, 

@@ -566,7 +566,7 @@ namespace TestPDF
             }
 
             _gfx.DrawString(
-                text.Text,
+                text.Bind(null),
                 font,
                 ToXSolidBrush(text.Style.Stroke),
                 srect,

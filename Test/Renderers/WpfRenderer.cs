@@ -859,7 +859,7 @@ namespace Test
                 var ci = CultureInfo.InvariantCulture;
 
                 ft = new FormattedText(
-                    text.Text,
+                    text.Bind(null),
                     ci,
                     ci.TextInfo.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight,
                     new Typeface(
