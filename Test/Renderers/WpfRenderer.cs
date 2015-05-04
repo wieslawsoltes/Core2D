@@ -870,8 +870,8 @@ namespace Test
                     text.Style.TextStyle.FontSize,
                     stroke.Brush, null, TextFormattingMode.Ideal);
 
-                if (_enableTextCache)
-                    _textCache.Add(text, ft);
+                //if (_enableTextCache)
+                //    _textCache.Add(text, ft);
 
                 _dc.DrawText(
                     ft, 
