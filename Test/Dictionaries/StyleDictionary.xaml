@@ -19,6 +19,11 @@
             <x:Type TypeName="core:ArrowType"/>
         </ObjectDataProvider.MethodParameters>
     </ObjectDataProvider>
+    <ObjectDataProvider x:Key="LineCapValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+        <ObjectDataProvider.MethodParameters>
+            <x:Type TypeName="core:LineCap"/>
+        </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
     <DataTemplate DataType="{x:Type core:ArgbColor}">
         <Grid>
             <Grid.RowDefinitions>
