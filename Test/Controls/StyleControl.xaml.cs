@@ -17,6 +17,39 @@ using System.Windows.Shapes;
 
 namespace Test.Controls
 {
+    public class DoubleToStringConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            try
+            {
+                double[] a = value as double[];
+                if (a != null)
+                    return string.Join(" ", a.Select(x => x.ToString(culture)));
+            }
+            catch { }
+
+            return null;
+        }
+        
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            try
+            {
+                string s = value as string;
+                if (s != null)
+                {
+                    string[] a = s.Split(new char [] { ' ' });
+                    if (a != null && a.Length > 0)
+                        return a.Select(x => double.Parse(x, culture)).ToArray();
+                }
+            }
+            catch { }
+
+            return null;
+        }
+    }
+    
     public partial class StyleControl : UserControl
     {
         public StyleControl()
