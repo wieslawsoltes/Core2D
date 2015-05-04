@@ -875,6 +875,7 @@ namespace Test2d
         {
             return Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
+                && Container.CurrentStyleGroup != null
                 && Container.CurrentStyleGroup.CurrentStyle != null;
         }
 
@@ -882,6 +883,7 @@ namespace Test2d
         {
             return Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
+                && Container.CurrentStyleGroup != null
                 && Container.CurrentStyleGroup.CurrentStyle != null;
         }
         
@@ -889,6 +891,7 @@ namespace Test2d
         {
             return Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
+                && Container.CurrentStyleGroup != null
                 && Container.CurrentStyleGroup.CurrentStyle != null;
         }
         
@@ -896,6 +899,7 @@ namespace Test2d
         {
             return Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
+                && Container.CurrentStyleGroup != null
                 && Container.CurrentStyleGroup.CurrentStyle != null;
         }
 
@@ -903,6 +907,7 @@ namespace Test2d
         {
             return Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
+                && Container.CurrentStyleGroup != null
                 && Container.CurrentStyleGroup.CurrentStyle != null;
         }
 
