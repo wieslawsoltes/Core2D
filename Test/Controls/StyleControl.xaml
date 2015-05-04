@@ -7,6 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:core="clr-namespace:Test2d;assembly=Test2d"
+             xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="180">
     <UserControl.Resources>
@@ -17,7 +18,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel>
-         <Expander Header="Name" IsExpanded="True">
+        <Expander Header="Name" IsExpanded="True">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -79,6 +80,78 @@
         </Expander>
         <Expander Header="Line End" IsExpanded="False">
             <ContentControl Content="{Binding LineStyle.EndArrowStyle}"/>
+        </Expander>
+        <Expander Header="Line" IsExpanded="False">
+            <Expander.Resources>
+                <controls:DoubleToStringConverter x:Key="DoubleToStringConverter"/>
+            </Expander.Resources>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Line Cap" 
+                           Margin="0,0,2,0" 
+                           Grid.Row="0"
+                           Grid.Column="0" 
+                           TextAlignment="Left" 
+                           VerticalAlignment="Center">
+                </TextBlock>
+                <TextBlock Text="Dashes" 
+                           Margin="0,0,2,0" 
+                           Grid.Row="2" 
+                           Grid.Column="0" 
+                           TextAlignment="Left" 
+                           VerticalAlignment="Center">
+                </TextBlock>
+                <TextBlock Text="Dash Offset" 
+                           Margin="0,0,2,0" 
+                           Grid.Row="3" 
+                           Grid.Column="0" 
+                           TextAlignment="Left" 
+                           VerticalAlignment="Center">
+                </TextBlock>
+                <ComboBox ItemsSource="{Binding Source={StaticResource ResourceKey=LineCapValues}}" 
+                          SelectedItem="{Binding LineStyle.LineCap}" 
+                          Grid.Row="0" 
+                          Grid.Column="1" 
+                          Grid.ColumnSpan="2"
+                          Margin="0,1,0,1">
+                </ComboBox>
+                <Slider Value="{Binding LineStyle.DashOffset}" 
+                        Minimum="0" 
+                        Maximum="15" 
+                        TickFrequency="0.1" 
+                        SmallChange="0.1"
+                        LargeChange="1"
+                        IsSnapToTickEnabled="True" 
+                        Grid.Row="3" 
+                        Grid.Column="1" 
+                        Margin="1">
+                </Slider>
+                <TextBox Text="{Binding LineStyle.Dashes, Converter={StaticResource DoubleToStringConverter}}" 
+                         BorderBrush="{x:Null}" 
+                         Grid.Row="2" 
+                         Grid.Column="1" 
+                         Grid.ColumnSpan="2"
+                         TextAlignment="Center" 
+                         VerticalAlignment="Center">
+                </TextBox>
+                <TextBox Text="{Binding LineStyle.DashOffset, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                         BorderBrush="{x:Null}" 
+                         Grid.Row="3" 
+                         Grid.Column="2" 
+                         TextAlignment="Center" 
+                         VerticalAlignment="Center">
+                </TextBox>
+            </Grid>
         </Expander>
     </StackPanel>
 </UserControl>
