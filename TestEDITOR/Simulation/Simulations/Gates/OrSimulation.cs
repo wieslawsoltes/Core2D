@@ -15,13 +15,9 @@ namespace TestSIM
             get { return "OR"; }
         }
 
-        //public override Func<XGroup, BoolSimulation> Factory
-        //{
-        //    get { return (group) => { return new OrSimulation(null, group.GetIntPropertyValue("Counter")); }; }
-        //}
         public override Func<XGroup, BoolSimulation> Factory
         {
-            get { return (group) => { return new OrSimulation(null, 1); }; }
+            get { return (group) => { return new OrSimulation(null, group.GetIntPropertyValue("Counter")); }; }
         }
 
         public int Counter { get; set; }

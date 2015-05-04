@@ -15,26 +15,16 @@ namespace TestSIM
             get { return "TIMER-OFF"; }
         }
 
-        //public override Func<XGroup, BoolSimulation> Factory
-        //{
-        //    get
-        //    {
-        //        return (group) =>
-        //        {
-        //            double delay = group.GetDoublePropertyValue("Delay");
-        //            string unit = group.GetStringPropertyValue("Unit");
-        //            double seconds = delay.ConvertToSeconds(unit);
-        //            return new TimerOffSimulation(false, seconds);
-        //        };
-        //    }
-        //}
         public override Func<XGroup, BoolSimulation> Factory
         {
             get
             {
                 return (group) =>
                 {
-                    return new TimerOffSimulation(false, 1.0);
+                    double delay = group.GetDoublePropertyValue("Delay");
+                    string unit = group.GetStringPropertyValue("Unit");
+                    double seconds = delay.ConvertToSeconds(unit);
+                    return new TimerOffSimulation(false, seconds);
                 };
             }
         }
