@@ -102,7 +102,9 @@ namespace TestEMF
         
         private Func<double, float> _scaleToPage;
 
-        public EmfRenderer()
+        private double _textScaleFactor;
+        
+        public EmfRenderer(double textScaleFactor = 1.0)
         {
             _zoom = 1.0;
             _drawShapeState = ShapeState.Visible | ShapeState.Printable;
@@ -111,7 +113,8 @@ namespace TestEMF
 
             ClearCache();
 
-            _scaleToPage = (value) => (float)(value * 1.0);
+            _textScaleFactor = textScaleFactor;
+            _scaleToPage = (value) => (float)(value);
         }
         
         public static IRenderer Create()
@@ -130,7 +133,7 @@ namespace TestEMF
 
         private static Pen ToPen(ShapeStyle style, Func<double, float> scale)
         {
-            var pen = new Pen(ToColor(style.Stroke), (float)scale(style.Thickness));
+            var pen = new Pen(ToColor(style.Stroke), (float)style.Thickness);
             switch (style.LineStyle.LineCap)
             {
                 case Test2d.LineCap.Flat:
@@ -548,13 +551,13 @@ namespace TestEMF
             //brush.Dispose();
             pen.Dispose();
         }
-
+   
         public void Draw(object gfx, XText text, double dx, double dy)
         {
             var _gfx = gfx as Graphics;
 
             Brush brush = ToSolidBrush(text.Style.Stroke);
-            Font font = new Font(text.Style.TextStyle.FontName, _scaleToPage(text.Style.TextStyle.FontSize * 72.0 / 96.0));
+            Font font = new Font(text.Style.TextStyle.FontName, (float)(text.Style.TextStyle.FontSize * _textScaleFactor));
 
             var rect = CreateRect(
                 text.TopLeft,
