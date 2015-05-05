@@ -541,7 +541,7 @@ namespace Test2d
             }
         }
 
-        public void Group(IEnumerable<BaseShape> shapes, Layer layer, string name)
+        public XGroup Group(IEnumerable<BaseShape> shapes, Layer layer, string name)
         {
             var group = XGroup.Create(name);
 
@@ -564,17 +564,20 @@ namespace Test2d
 
                 layer.Shapes.Remove(shape);
             }
-
-            layer.Shapes.Add(group);
-            layer.Invalidate();
+   
+            return group;
         }
 
         public void GroupSelected()
         {
+            var layer = Container.CurrentLayer;
             if (_renderer.SelectedShapes != null)
             {
-                Group(_renderer.SelectedShapes, Container.CurrentLayer, "g");
+                var g = Group(_renderer.SelectedShapes, layer, "g");
+                _renderer.SelectedShape = null;
                 _renderer.SelectedShapes = null;
+                layer.Shapes.Add(g);
+                layer.Invalidate();
             }
         }
 
@@ -583,7 +586,11 @@ namespace Test2d
             var layer = Container.CurrentLayer;
             if (layer.Shapes.Count > 0)
             {
-                Group(layer.Shapes.ToList(), layer, "g");
+                var g = Group(layer.Shapes.ToList(), layer, "g");
+                _renderer.SelectedShape = null;
+                _renderer.SelectedShapes = null;
+                layer.Shapes.Add(g);
+                layer.Invalidate();
             }
         }
 
