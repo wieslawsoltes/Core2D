@@ -12,9 +12,10 @@ namespace Test2d
         private double _width;
         private double _height;
         private IList<KeyValuePair<string, ShapeProperty>> _database;
-        private IList<XGroup> _groups;
         private IList<ShapeStyleGroup> _styleGroups;
         private ShapeStyleGroup _currentStyleGroup;
+        private IList<GroupLibrary> _groupLibraries;
+        private GroupLibrary _currentGroupLibrary;
         private BaseShape _pointShape;
         private IList<Layer> _layers;
         private Layer _currentLayer;
@@ -61,19 +62,6 @@ namespace Test2d
             }
         }
 
-        public IList<XGroup> Groups
-        {
-            get { return _groups; }
-            set
-            {
-                if (value != _groups)
-                {
-                    _groups = value;
-                    Notify("Groups");
-                }
-            }
-        }
-
         public IList<ShapeStyleGroup> StyleGroups
         {
             get { return _styleGroups; }
@@ -96,6 +84,32 @@ namespace Test2d
                 {
                     _currentStyleGroup = value;
                     Notify("CurrentStyleGroup");
+                }
+            }
+        }
+
+        public IList<GroupLibrary> GroupLibraries
+        {
+            get { return _groupLibraries; }
+            set
+            {
+                if (value != _groupLibraries)
+                {
+                    _groupLibraries = value;
+                    Notify("GroupLibraries");
+                }
+            }
+        }
+
+        public GroupLibrary CurrentGroupLibrary
+        {
+            get { return _currentGroupLibrary; }
+            set
+            {
+                if (value != _currentGroupLibrary)
+                {
+                    _currentGroupLibrary = value;
+                    Notify("CurrentGroupLibrary");
                 }
             }
         }
@@ -203,7 +217,7 @@ namespace Test2d
             {
                 Width = width,
                 Height = height,
-                Groups = new ObservableCollection<XGroup>(),
+                GroupLibraries = new ObservableCollection<GroupLibrary>(),
                 Layers = new ObservableCollection<Layer>(),
                 StyleGroups = new ObservableCollection<ShapeStyleGroup>()
             };
@@ -217,6 +231,11 @@ namespace Test2d
 
             c.TemplateLayer = Layer.Create("Template");
             c.WorkingLayer = Layer.Create("Working");
+
+            // default group library
+            var gld = GroupLibrary.Create("Default");
+            c.GroupLibraries.Add(gld);
+            c.CurrentGroupLibrary = c.GroupLibraries.FirstOrDefault();
 
             // default styles group
             var sgd = ShapeStyleGroup.Create("Default");
