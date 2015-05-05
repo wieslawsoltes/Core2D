@@ -8,10 +8,38 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="110">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0">
+            <MenuItem Command="{Binding Commands.AddGroupLibraryCommand}" Header="+"/>
+            <MenuItem Command="{Binding Commands.RemoveGroupLibraryCommand}" Header="-"/>
+        </Menu>
+        <ComboBox ItemsSource="{Binding Editor.Container.GroupLibraries}" 
+                  SelectedItem="{Binding Editor.Container.CurrentGroupLibrary}" 
+                  Grid.Row="1" 
+                  Margin="2,2,2,2">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="2">
+            <MenuItem Command="{Binding Commands.AddGroupCommand}" Header="_+"/>
+            <MenuItem Command="{Binding Commands.RemoveGroupCommand}" Header="_-"/>
+        </Menu>
         <ListBox x:Name="groupsListBox"
-                 ItemsSource="{Binding Editor.Container.Groups}"
+                 DataContext="{Binding Editor}"
+                 ItemsSource="{Binding Container.CurrentGroupLibrary.Groups}"
+                 SelectedItem="{Binding Container.CurrentGroupLibrary.CurrentGroup}" 
                  BorderBrush="{x:Null}"
-                 HorizontalContentAlignment="Stretch">
+                 HorizontalContentAlignment="Stretch"
+                 Grid.Row="3">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Margin="0,5,0,5"/>
