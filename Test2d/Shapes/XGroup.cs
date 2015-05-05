@@ -113,6 +113,14 @@ namespace Test2d
             }
         }
 
+        public void AddProperty(ShapeProperty property)
+        {
+            _database.Add(
+                new KeyValuePair<string, ShapeProperty>(
+                    property.Name,
+                    property));
+        }
+
         public void AddProperty(string key, ShapeProperty property)
         {
             _database.Add(
@@ -121,7 +129,38 @@ namespace Test2d
                     property));
         }
 
-        public static XGroup Create(string name = "")
+        public void AddShape(BaseShape shape)
+        {
+            shape.Owner = this;
+            shape.State &= ~ShapeState.Standalone;
+            Shapes.Add(shape);
+        }
+
+        public void AddConnectorAsNone(XPoint point)
+        {
+            point.Owner = this;
+            point.State |= ShapeState.Connector | ShapeState.None;
+            point.State &= ~ShapeState.Standalone;
+            Connectors.Add(point);
+        }
+
+        public void AddConnectorAsInput(XPoint point)
+        {
+            point.Owner = this;
+            point.State |= ShapeState.Connector | ShapeState.Input;
+            point.State &= ~ShapeState.Standalone;
+            Connectors.Add(point);
+        }
+
+        public void AddConnectorAsOutput(XPoint point)
+        {
+            point.Owner = this;
+            point.State |= ShapeState.Connector | ShapeState.Output;
+            point.State &= ~ShapeState.Standalone;
+            Connectors.Add(point);
+        }
+
+        public static XGroup Create(string name)
         {
             return new XGroup()
             {
@@ -130,6 +169,27 @@ namespace Test2d
                 Shapes = new ObservableCollection<BaseShape>(),
                 Connectors = new ObservableCollection<XPoint>()
             };
+        }
+
+        public static XGroup Group(string name, IEnumerable<BaseShape> shapes)
+        {
+            var g = XGroup.Create(name);
+            if (shapes == null)
+                return g;
+
+            foreach (var shape in shapes)
+            {
+                if (shape is XPoint)
+                {
+                    g.AddConnectorAsNone(shape as XPoint);
+                }
+                else
+                {
+                    g.AddShape(shape);
+                }
+            }
+
+            return g;
         }
     }
 }
