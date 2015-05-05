@@ -75,8 +75,6 @@ namespace TestEMF
                 }
                 using (g = Graphics.FromImage(mf))
                 {
-                    //g.DrawImage(bitmap, 0, 0);
-
                     var r = EmfRenderer.Create();
 
                     g.SmoothingMode = SmoothingMode.HighQuality;
@@ -85,10 +83,8 @@ namespace TestEMF
                     g.CompositingQuality = CompositingQuality.HighQuality;
                     g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-                    //g.TranslateTransform((float)0f, (float)0f);
-                    //g.ScaleTransform( (float)Zoom, (float)Zoom);
-                    //g.Clear(Color.FromArgb(255, 255, 255, 255));
-
+                    g.PageUnit = GraphicsUnit.Point;
+    
                     r.Draw(g, container);
                 }
             }
