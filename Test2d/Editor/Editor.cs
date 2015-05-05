@@ -486,6 +486,26 @@ namespace Test2d
             }
         }
 
+        public void RemoveCurrentGroupLibrary()
+        {
+            var gl = Container.CurrentGroupLibrary;
+            if (gl != null)
+            {
+                Container.GroupLibraries.Remove(gl);
+                Container.CurrentGroupLibrary = Container.GroupLibraries.FirstOrDefault();
+            }
+        }
+
+        public void RemoveCurrentGroup()
+        {
+            var group = Container.CurrentGroupLibrary.CurrentGroup;
+            if (group != null)
+            {
+                Container.CurrentGroupLibrary.Groups.Remove(group);
+                Container.CurrentGroupLibrary.CurrentGroup = Container.CurrentGroupLibrary.Groups.FirstOrDefault();
+            }
+        }
+
         public void RemoveCurrentLayer()
         {
             var layer = Container.CurrentLayer;
@@ -541,43 +561,20 @@ namespace Test2d
             }
         }
 
-        public XGroup Group(IEnumerable<BaseShape> shapes, Layer layer, string name)
-        {
-            var group = XGroup.Create(name);
-
-            foreach (var shape in shapes)
-            {
-                if (shape is XPoint)
-                {
-                    var point = shape as XPoint;
-                    point.Owner = group;
-                    point.State |= ShapeState.Connector | ShapeState.None;
-                    point.State &= ~ShapeState.Standalone;
-                    group.Connectors.Add(point);
-                }
-                else
-                {
-                    shape.Owner = group;
-                    shape.State &= ~ShapeState.Standalone;
-                    group.Shapes.Add(shape);
-                }
-
-                layer.Shapes.Remove(shape);
-            }
-   
-            return group;
-        }
-
         public void GroupSelected()
         {
             var layer = Container.CurrentLayer;
             if (_renderer.SelectedShapes != null)
             {
-                var g = Group(_renderer.SelectedShapes, layer, "g");
-                _renderer.SelectedShape = null;
-                _renderer.SelectedShapes = null;
+                var g = XGroup.Group("g", _renderer.SelectedShapes);
+
+                foreach (var shape in _renderer.SelectedShapes)
+                {
+                    layer.Shapes.Remove(shape);
+                }
+
                 layer.Shapes.Add(g);
-                layer.Invalidate();
+                Select(Container, g);
             }
         }
 
@@ -586,11 +583,15 @@ namespace Test2d
             var layer = Container.CurrentLayer;
             if (layer.Shapes.Count > 0)
             {
-                var g = Group(layer.Shapes.ToList(), layer, "g");
-                _renderer.SelectedShape = null;
-                _renderer.SelectedShapes = null;
+                var g = XGroup.Group("g", layer.Shapes);
+
+                foreach (var shape in layer.Shapes.ToList())
+                {
+                    layer.Shapes.Remove(shape);
+                }
+
                 layer.Shapes.Add(g);
-                layer.Invalidate();
+                Select(Container, g);
             }
         }
 

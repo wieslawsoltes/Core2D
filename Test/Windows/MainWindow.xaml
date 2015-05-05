@@ -82,17 +82,17 @@
                       ResizeBehavior="PreviousAndNext" 
                       ShowsPreview="True"/>
         <TabControl Grid.Row="1" Grid.Column="4" Margin="0,8,5,5">
-            <TabItem Header="Layers">
-                <controls:LayersControl/>
-            </TabItem>
             <TabItem Header="Styles">
                 <controls:StylesControl/>
             </TabItem>
-            <TabItem Header="Shapes">
-                <controls:ShapesControl/>
-            </TabItem>
             <TabItem Header="Properties">
                 <controls:ShapeControl/>
+            </TabItem>
+            <TabItem Header="Layers">
+                <controls:LayersControl/>
+            </TabItem>
+            <TabItem Header="Shapes">
+                <controls:ShapesControl/>
             </TabItem>
         </TabControl>
         <Grid Grid.Row="2" Grid.Column="5"

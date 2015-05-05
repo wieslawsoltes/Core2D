@@ -332,6 +332,46 @@ namespace TestEDITOR
                 },
                 () => IsEditMode());
 
+            _commands.AddGroupLibraryCommand = new DelegateCommand(
+                () =>
+                {
+                    var gl = GroupLibrary.Create("New");
+                    _editor.Container.GroupLibraries.Add(gl);
+                },
+                () => IsEditMode());
+
+            _commands.RemoveGroupLibraryCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.RemoveCurrentGroupLibrary();
+                },
+                () => IsEditMode());
+
+            _commands.AddGroupCommand = new DelegateCommand(
+                () =>
+                {
+                    var group = _editor.Renderer.SelectedShape;
+                    if (group != null && group is XGroup)
+                    {
+                        if (_editor.Container.CurrentGroupLibrary != null)
+                        {
+                            var clone = Clone(group as XGroup);
+                            if (clone != null)
+                            {
+                                _editor.Container.CurrentGroupLibrary.Groups.Add(clone);
+                            }
+                        }
+                    }
+                },
+                () => IsEditMode());
+
+            _commands.RemoveGroupCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.RemoveCurrentGroup();
+                },
+                () => IsEditMode());
+
             _commands.AddLayerCommand = new DelegateCommand(
                 () =>
                 {
@@ -639,6 +679,30 @@ namespace TestEDITOR
             _editor.Select(_editor.Container, new HashSet<BaseShape>(shapes));
         }
 
+        public XGroup Clone(XGroup group)
+        {
+            try
+            {
+                var json = ContainerSerializer.Serialize(group);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    var clone = ContainerSerializer.Deserialize<XGroup>(json);
+                    if (clone != null)
+                    {
+                        TryToRestoreStyles(Enumerable.Repeat(clone, 1).ToList());
+                        return clone;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+
+            return null;
+        }
+
         public void Drop(XGroup group, double x, double y)
         {
             try
@@ -646,18 +710,13 @@ namespace TestEDITOR
                 double sx = _editor.SnapToGrid ? Editor.Snap(x, _editor.SnapX) : x;
                 double sy = _editor.SnapToGrid ? Editor.Snap(y, _editor.SnapY) : y;
 
-                var json = ContainerSerializer.Serialize(group);
-                if (!string.IsNullOrEmpty(json))
+                var clone = Clone(group);
+                if (clone != null)
                 {
-                    var clone = ContainerSerializer.Deserialize<XGroup>(json);
-                    if (clone != null)
-                    {
-                        _editor.Deselect(_editor.Container);
-                        TryToRestoreStyles(Enumerable.Repeat(clone, 1).ToList());
-                        clone.Move(sx, sy);
-                        _editor.Container.CurrentLayer.Shapes.Add(clone);
-                        _editor.Select(_editor.Container, clone);
-                    }
+                    _editor.Deselect(_editor.Container);
+                    clone.Move(sx, sy);
+                    _editor.Container.CurrentLayer.Shapes.Add(clone);
+                    _editor.Select(_editor.Container, clone);
                 }
             }
             catch (Exception ex)
@@ -981,11 +1040,20 @@ namespace TestEDITOR
             (_commands.SnapToGridCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.TryToConnectCommand as DelegateCommand).RaiseCanExecuteChanged();
 
+            (_commands.AddGroupLibraryCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.RemoveGroupLibraryCommand as DelegateCommand).RaiseCanExecuteChanged();
+
+            (_commands.AddGroupCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.RemoveGroupCommand as DelegateCommand).RaiseCanExecuteChanged();
+
             (_commands.AddLayerCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.RemoveLayerCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.AddStyleCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.RemoveStyleCommand as DelegateCommand).RaiseCanExecuteChanged();
+
+            (_commands.AddStyleGroupCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.RemoveStyleGroupCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.RemoveShapeCommand as DelegateCommand).RaiseCanExecuteChanged();
 

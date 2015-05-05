@@ -42,6 +42,7 @@ Container Create(double width, double height, bool grid, PointShapeType pst)
     {
         Width = width,
         Height = height,
+        GroupLibraries = new ObservableCollection<GroupLibrary>(),
         Layers = new ObservableCollection<Layer>(),
         StyleGroups = new ObservableCollection<ShapeStyleGroup>()
     };
@@ -55,6 +56,11 @@ Container Create(double width, double height, bool grid, PointShapeType pst)
 
     c.TemplateLayer = Layer.Create("Template");
     c.WorkingLayer = Layer.Create("Working");
+
+    // default group library
+    var gld = GroupLibrary.Create("Default");
+    c.GroupLibraries.Add(gld);
+    c.CurrentGroupLibrary = c.GroupLibraries.FirstOrDefault();
 
     // default styles group
     var sgd = ShapeStyleGroup.Create("Default");

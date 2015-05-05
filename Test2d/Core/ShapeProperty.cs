@@ -7,7 +7,21 @@ namespace Test2d
 {
     public class ShapeProperty : ObservableObject
     {
+        private string _name;
         private object _data;
+
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (value != _name)
+                {
+                    _name = value;
+                    Notify("Name");
+                }
+            }
+        }
 
         public object Data
         {
@@ -22,10 +36,11 @@ namespace Test2d
             }
         }
 
-        public static ShapeProperty Create(object data)
+        public static ShapeProperty Create(string name, object data)
         {
             return new ShapeProperty() 
             { 
+                Name = name,
                 Data = data 
             };
         }
