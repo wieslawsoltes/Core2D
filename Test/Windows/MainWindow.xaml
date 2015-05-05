@@ -5,6 +5,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Test"
         xmlns:controls="clr-namespace:Test.Controls"
+        xmlns:converters="clr-namespace:Test.Converters"
         Title="Test" Height="720" Width="1200"
         Background="LightGray"
         WindowStartupLocation="CenterScreen" WindowState="Normal"
@@ -98,6 +99,9 @@
         <Grid Grid.Row="2" Grid.Column="5"
               Margin="5,2,5,2"
               VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.Resources>
+                <converters:ZoomScaleConverter x:Key="ZoomScaleConverter"/>
+            </Grid.Resources>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -114,12 +118,12 @@
                        TextAlignment="Center" 
                        VerticalAlignment="Center">
             </TextBlock>
-            <Slider Value="{Binding Editor.Renderer.Zoom}" 
+            <Slider Value="{Binding Editor.Renderer.Zoom, Converter={StaticResource ZoomScaleConverter}, FallbackValue=1.0}" 
                     Minimum="0.1" 
-                    Maximum="16" 
+                    Maximum="16.0" 
                     TickFrequency="0.1" 
                     SmallChange="0.1" 
-                    LargeChange="1" 
+                    LargeChange="1.0" 
                     IsSnapToTickEnabled="True" 
                     Grid.Row="0" 
                     Grid.Column="1" 
