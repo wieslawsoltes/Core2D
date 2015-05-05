@@ -34,7 +34,7 @@ namespace TestWinForms
                 true);
 
             var context = new EditorContext();
-            context.Initialize(this, EmfRenderer.Create(), new TextClipboard());
+            context.Initialize(this, new EmfRenderer(72.0 / 96.0), new TextClipboard());
             context.InitializeSctipts();
             context.InitializeSimulation();
             context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
@@ -404,6 +404,8 @@ namespace TestWinForms
             g.ScaleTransform((float)Context.Editor.Renderer.Zoom, (float)Context.Editor.Renderer.Zoom);
             g.Clear(Color.FromArgb(255, 211, 211, 211));
 
+            g.PageUnit = GraphicsUnit.Display;
+            
             Context.Editor.Renderer.Draw(g, Context.Editor.Container);
             Context.Editor.Renderer.Draw(g, Context.Editor.Container.WorkingLayer);
         }
