@@ -171,7 +171,7 @@ namespace TestPDF
 
         private static XPen ToXPen(Test2d.ShapeStyle style, Func<double, double> scale)
         {
-            var pen = new XPen(ToXColor(style.Stroke), scale(style.Thickness));
+            var pen = new XPen(ToXColor(style.Stroke), XUnit.FromPoint(style.Thickness));
             switch (style.LineStyle.LineCap)
             {
                 case Test2d.LineCap.Flat:
@@ -518,7 +518,7 @@ namespace TestPDF
 
             XFont font = new XFont(
                 text.Style.TextStyle.FontName,
-                _scaleToPage(text.Style.TextStyle.FontSize),
+                XUnit.FromPoint(text.Style.TextStyle.FontSize),
                 XFontStyle.Regular,
                 options);
 
