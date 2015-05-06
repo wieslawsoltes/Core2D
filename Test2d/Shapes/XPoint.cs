@@ -1,6 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Test2d
 {
@@ -76,7 +79,15 @@ namespace Test2d
 
         public static XPoint Create(double x, double y, BaseShape shape, string name = "")
         {
-            return new XPoint() { Name = name, X = x, Y = y, Shape = shape };
+            return new XPoint() 
+            { 
+                Name = name,
+                Style = null,
+                Properties = new ObservableCollection<ShapeProperty>(),
+                X = x, 
+                Y = y, 
+                Shape = shape 
+            };
         }
     }
 }

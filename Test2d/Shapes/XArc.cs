@@ -1,6 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Test2d
 {
@@ -101,6 +104,7 @@ namespace Test2d
             {
                 Name = name,
                 Style = style,
+                Properties = new ObservableCollection<ShapeProperty>(),
                 Point1 = XPoint.Create(x1, y1, point),
                 Point2 = XPoint.Create(x2, y2, point),
                 IsFilled = isFilled

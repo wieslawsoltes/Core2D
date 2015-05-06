@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Test2d
@@ -131,9 +132,16 @@ namespace Test2d
                 }
             }
 
-            // try to bind to Properties using Text as formatting
-            return (this.Properties != null) ?
-                string.Format(this.Text, this.Properties) : this.Text;
+            if (this.Properties != null && this.Properties.Count > 0)
+            {
+                try
+                {
+                    // try to bind to Properties using Text as formatting
+                    return string.Format(this.Text, this.Properties.Select(x => x.Data).ToArray());
+                }
+                catch (FormatException) { }
+            }
+            return this.Text;
         }
 
         public static XText Create(
@@ -149,6 +157,7 @@ namespace Test2d
             {
                 Name = name,
                 Style = style,
+                Properties = new ObservableCollection<ShapeProperty>(),
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
                 IsFilled = isFilled,
