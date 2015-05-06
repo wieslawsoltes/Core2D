@@ -162,6 +162,32 @@ namespace Test2d
             _invalidateShapes();
         }
 
+        private void PropertiesCollectionObserver(
+            object sender,
+            NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    Add(e.NewItems.Cast<ShapeProperty>());
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    Debug("Property Replace");
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    Remove(e.OldItems.Cast<ShapeProperty>());
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    Debug("Property Replace");
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    Debug("Property Reset");
+                    break;
+            }
+
+            _invalidateShapes();
+        }
+        
         private void DatabaseCollectionObserver(
             object sender,
             NotifyCollectionChangedEventArgs e)
@@ -399,6 +425,10 @@ namespace Test2d
         {
             shape.PropertyChanged += ShapeObserver;
 
+            Add(shape.Properties);
+            (shape.Properties as ObservableCollection<ShapeProperty>)
+                .CollectionChanged += PropertiesCollectionObserver;
+                   
             if (shape is XPoint)
             {
                 var point = shape as XPoint;
@@ -476,6 +506,10 @@ namespace Test2d
         {
             shape.PropertyChanged -= ShapeObserver;
 
+            Remove(shape.Properties);
+            (shape.Properties as ObservableCollection<ShapeProperty>)
+                .CollectionChanged -= PropertiesCollectionObserver;
+                 
             if (shape is XPoint)
             {
                 var point = shape as XPoint;
@@ -537,6 +571,7 @@ namespace Test2d
                 var group = shape as XGroup;
                 Remove(group.Shapes);
                 Remove(group.Connectors);
+                Remove(group.Database);
                 (group.Shapes as ObservableCollection<BaseShape>)
                     .CollectionChanged -= ShapesCollectionObserver;
                 (group.Connectors as ObservableCollection<XPoint>)
@@ -567,6 +602,38 @@ namespace Test2d
         #endregion
 
         #region Properties
+        
+        private void Add(ShapeProperty property)
+        {
+            property.PropertyChanged += PropertyObserver;
+            Debug("Add Property: " + property.Name + ", type: " + property.Data.GetType());
+        }
+
+        private void Remove(ShapeProperty property)
+        {
+            property.PropertyChanged += PropertyObserver;
+            Debug("Remove Property: " + property.Name + ", type: " + property.Data.GetType());
+        }
+
+        private void Add(IEnumerable<ShapeProperty> properties)
+        {
+            foreach (var property in properties)
+            {
+                Add(property);
+            }
+        }
+
+        private void Remove(IEnumerable<ShapeProperty> properties)
+        {
+            foreach (var property in properties)
+            {
+                Remove(property);
+            }
+        }
+        
+        #endregion
+
+        #region Database
 
         private void Add(KeyValuePair<string, ShapeProperty> property)
         {
