@@ -26,6 +26,10 @@ Test is a program for making 2D diagrams and running logic simulations.
 * https://www.nuget.org/api/v2/
 * https://www.myget.org/F/roslyn-nightly/
 
+## Contact
+
+https://github.com/wieslawsoltes/Test
+
 ## License
 
 Test is licensed under the [MIT license](LICENSE.TXT).
