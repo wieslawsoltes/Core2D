@@ -4,9 +4,12 @@
 
 ## About
 
-Test is a application for making 2D diagrams and running logic simulations.
+Test is an application for making 2D diagrams and running logic simulations.
 
-## Dependencies
+## Building Test
+
+* [Visual Studio Community 2013](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx)
+* [SharpDevelop 5](http://www.icsharpcode.net/OpenSource/SD/Download/#SharpDevelop5x)
 
 ### NuGet Packages
 
