@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Test"
         xmlns:controls="clr-namespace:Test.Controls"
         xmlns:converters="clr-namespace:Test.Converters"
-        Title="Test" Height="720" Width="1200"
+        Title="Test" Height="720" Width="1220"
         Background="LightGray"
         WindowStartupLocation="CenterScreen" WindowState="Normal"
         UseLayoutRounding="True" SnapsToDevicePixels="True"
@@ -43,7 +43,7 @@
     </Window.InputBindings>
     <Grid FocusVisualStyle="{x:Null}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="110"/>
+            <ColumnDefinition Width="130"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
@@ -57,7 +57,9 @@
         <controls:MenuControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"/>
         <TabControl Grid.Row="1" Grid.Column="0" Margin="5,8,0,5">
             <TabItem Header="Goups">
-                <controls:GroupsControl/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <controls:GroupsControl/>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
         <GridSplitter Grid.Row="1" Grid.Column="1" 
@@ -84,16 +86,24 @@
                       ShowsPreview="True"/>
         <TabControl Grid.Row="1" Grid.Column="4" Margin="0,8,5,5">
             <TabItem Header="Styles">
-                <controls:StylesControl/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <controls:StylesControl/>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Properties">
-                <controls:ShapeControl/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <controls:ShapeControl/>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Layers">
-                <controls:LayersControl/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <controls:LayersControl/>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Shapes">
-                <controls:ShapesControl/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <controls:ShapesControl/>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
         <Grid Grid.Row="2" Grid.Column="5"
