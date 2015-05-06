@@ -1,9 +1,15 @@
 # Test
-Test
+
+2D Diagram Editor and Simulator
+
+## About
+
+Test is a program for making 2D diagrams and running logic simulations.
 
 ## Dependencies
 
-### Packages
+### NuGet Packages
+
 * Prism.Mvvm
 * Newtonsoft.Json
 * PDFsharp
@@ -15,7 +21,8 @@ Test
 * System.Collections.Immutable
 * System.Reflection.Metadata
 
-### Package Sources
+### NuGet Package Sources
+
 * https://www.nuget.org/api/v2/
 * https://www.myget.org/F/roslyn-nightly/
 
