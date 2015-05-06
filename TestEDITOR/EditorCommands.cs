@@ -48,6 +48,9 @@ namespace TestEDITOR
         public ICommand SnapToGridCommand { get; set; }
         public ICommand TryToConnectCommand { get; set; }
 
+        public ICommand AddPropertyCommand { get; set; }
+        public ICommand RemovePropertyCommand { get; set; }
+        
         public ICommand AddGroupLibraryCommand { get; set; }
         public ICommand RemoveGroupLibraryCommand { get; set; }
 
