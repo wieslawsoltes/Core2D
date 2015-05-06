@@ -332,6 +332,27 @@ namespace TestEDITOR
                 },
                 () => IsEditMode());
 
+            
+            _commands.AddPropertyCommand = new DelegateCommand(
+                () =>
+                {
+                    if (_editor.Renderer.SelectedShape != null)
+                    {
+                        _editor.Renderer.SelectedShape.Properties.Add(ShapeProperty.Create("New", ""));
+                    }
+                },
+                () => IsEditMode());
+            
+            _commands.RemovePropertyCommand = new DelegateCommand<object>(
+                (property) =>
+                {
+                    if (property is ShapeProperty)
+                    {
+                        _editor.Renderer.SelectedShape.Properties.Remove(property as ShapeProperty);
+                    }
+                },
+                (property) => IsEditMode());
+            
             _commands.AddGroupLibraryCommand = new DelegateCommand(
                 () =>
                 {
@@ -1040,6 +1061,9 @@ namespace TestEDITOR
             (_commands.SnapToGridCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.TryToConnectCommand as DelegateCommand).RaiseCanExecuteChanged();
 
+            (_commands.AddPropertyCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.RemovePropertyCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            
             (_commands.AddGroupLibraryCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.RemoveGroupLibraryCommand as DelegateCommand).RaiseCanExecuteChanged();
 
