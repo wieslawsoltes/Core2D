@@ -12,7 +12,7 @@
         TextOptions.TextRenderingMode="Auto">
     <ScrollViewer VerticalScrollBarVisibility="Auto" 
                   HorizontalScrollBarVisibility="Auto" 
-                  Focusable="False">
+                  Focusable="True">
         <controls:StyleControl DataContext="{Binding Editor.Container.CurrentStyleGroup.CurrentStyle}" Margin="2"/>
     </ScrollViewer>
 </Window>
