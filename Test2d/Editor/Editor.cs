@@ -690,7 +690,14 @@ namespace Test2d
             {
                 if (result.Count > 0)
                 {
-                    Select(container, result);
+                    if (result.Count == 1)
+                    {
+                        Select(container, result.FirstOrDefault());
+                    }
+                    else
+                    {
+                        Select(container, result);
+                    }
                     return true;
                 }
             }
