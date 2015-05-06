@@ -101,6 +101,7 @@
       <DependentUpon>StyleControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\DoubleToStringConverter.cs" />
+    <Compile Include="Converters\FlagsEnumConverter.cs" />
     <Compile Include="Converters\ZoomScaleConverter.cs" />
     <Compile Include="PanAndZoom\PanAndZoomBorder.cs" />
     <Compile Include="PanAndZoom\PanAndZoomGrid.cs" />
