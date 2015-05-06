@@ -2,7 +2,8 @@
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:core="clr-namespace:Test2d;assembly=Test2d">
+                    xmlns:core="clr-namespace:Test2d;assembly=Test2d"
+                    xmlns:converters="clr-namespace:Test.Converters">
     <ControlTemplate x:Key="PropertiesControlTemplateKey">
          <Grid>
             <Grid.RowDefinitions>
@@ -42,6 +43,40 @@
             </ItemsControl>
         </Grid>
     </ControlTemplate>
+    <ControlTemplate x:Key="StateControlTemplateKey">
+        <ControlTemplate.Resources>
+            <converters:FlagsEnumConverter x:Key="FlagsEnumConverter"/>
+        </ControlTemplate.Resources>
+        <StackPanel>
+            <CheckBox Content="Default" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+            </CheckBox>
+            <CheckBox Content="Visible" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+            </CheckBox>
+            <CheckBox Content="Printable" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+            </CheckBox>
+            <CheckBox Content="Locked" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+            </CheckBox>
+            <CheckBox Content="Connector" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+            </CheckBox>
+            <CheckBox Content="None" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+            </CheckBox>
+            <CheckBox Content="Standalone" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+            </CheckBox>
+            <CheckBox Content="Input" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+            </CheckBox>
+            <CheckBox Content="Output" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+            </CheckBox>
+        </StackPanel>
+    </ControlTemplate>
     <DataTemplate DataType="{x:Type core:ShapeStyle}">
         <Grid>
             <Grid.RowDefinitions>
@@ -72,6 +107,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80"/>
@@ -79,14 +115,14 @@
                 <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="X" 
-                       Margin="0,0,2,0" 
+                       Margin="5" 
                        Grid.Row="0" 
                        Grid.Column="0" 
                        TextAlignment="Left" 
                        VerticalAlignment="Center">
             </TextBlock>
             <TextBlock Text="Y" 
-                       Margin="0,0,2,0" 
+                       Margin="5" 
                        Grid.Row="1" 
                        Grid.Column="0" 
                        TextAlignment="Left" 
@@ -114,8 +150,14 @@
                       Grid.ColumnSpan="3">
                 <ContentControl Content="{Binding Shape}"/>
             </Expander>
-            <Expander Header="Properties" IsExpanded="False" 
+            <Expander Header="State" IsExpanded="True"
                       Grid.Row="3" 
+                      Grid.Column="0"
+                      Grid.ColumnSpan="3">
+                <Control Template="{StaticResource StateControlTemplateKey}"/>
+            </Expander>
+            <Expander Header="Properties" IsExpanded="False" 
+                      Grid.Row="4" 
                       Grid.Column="0"
                       Grid.ColumnSpan="3">
                 <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
@@ -132,6 +174,9 @@
             </Expander>
             <Expander Header="End" IsExpanded="False">
                 <ContentControl Content="{Binding End}"/>
+            </Expander>
+            <Expander Header="State" IsExpanded="True">
+                <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Properties" IsExpanded="True">
                 <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
@@ -175,6 +220,9 @@
                     </CheckBox>
                 </Grid>
             </Expander>
+            <Expander Header="State" IsExpanded="True">
+                <Control Template="{StaticResource StateControlTemplateKey}"/>
+            </Expander>
             <Expander Header="Properties" IsExpanded="True">
                 <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
             </Expander> 
@@ -217,6 +265,9 @@
                     </CheckBox>
                 </Grid>
             </Expander>
+            <Expander Header="State" IsExpanded="True">
+                <Control Template="{StaticResource StateControlTemplateKey}"/>
+            </Expander>
             <Expander Header="Properties" IsExpanded="True">
                 <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
             </Expander>
@@ -258,6 +309,9 @@
                               Margin="0,1,0,1">
                     </CheckBox>
                 </Grid>
+            </Expander>
+            <Expander Header="State" IsExpanded="True">
+                <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Properties" IsExpanded="True">
                 <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
@@ -307,6 +361,9 @@
                     </CheckBox>
                 </Grid>
             </Expander>
+            <Expander Header="State" IsExpanded="True">
+                <Control Template="{StaticResource StateControlTemplateKey}"/>
+            </Expander>
             <Expander Header="Properties" IsExpanded="True">
                 <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
             </Expander> 
@@ -352,6 +409,9 @@
                     </CheckBox>
                 </Grid>
             </Expander>
+            <Expander Header="State" IsExpanded="True">
+                <Control Template="{StaticResource StateControlTemplateKey}"/>
+            </Expander>
             <Expander Header="Properties" IsExpanded="True">
                 <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
             </Expander>
@@ -394,7 +454,7 @@
                     </CheckBox>
                 </Grid>
             </Expander>
-             <Expander Header="TextBinding" IsExpanded="False">
+            <Expander Header="TextBinding" IsExpanded="False">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -431,6 +491,9 @@
                              VerticalAlignment="Center">
                     </TextBox>
                 </Grid>
+            </Expander>
+            <Expander Header="State" IsExpanded="True">
+                <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Properties" IsExpanded="True">
                 <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
@@ -492,6 +555,9 @@
                               Margin="0,1,0,1">
                     </CheckBox>
                 </Grid>
+            </Expander>
+            <Expander Header="State" IsExpanded="True">
+                <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Properties" IsExpanded="True">
                 <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
@@ -560,6 +626,9 @@
                                     Grid.Row="1" Margin="2">
                     </ContentControl>
                 </Grid>
+            </Expander>
+            <Expander Header="State" IsExpanded="True">
+                <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Properties" IsExpanded="True">
                 <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
