@@ -4,7 +4,7 @@
 
 ## About
 
-Test is a program for making 2D diagrams and running logic simulations.
+Test is a application for making 2D diagrams and running logic simulations.
 
 ## Dependencies
 
