@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 
 namespace Test2d
 {
@@ -10,7 +11,7 @@ namespace Test2d
         private BaseShape _owner;
         private ShapeState _state = ShapeState.Visible | ShapeState.Printable | ShapeState.Standalone;
         private ShapeStyle _style;
-        private ShapeProperty[] _properties;
+        private IList<ShapeProperty> _properties;
 
         public string Name
         {
@@ -64,7 +65,7 @@ namespace Test2d
             }
         }
 
-        public ShapeProperty[] Properties
+        public IList<ShapeProperty> Properties
         {
             get { return _properties; }
             set
