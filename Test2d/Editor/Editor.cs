@@ -482,7 +482,10 @@ namespace Test2d
         {
             foreach (var point in points)
             {
-                point.Move(dx, dy);
+                if (!point.State.HasFlag(ShapeState.Locked))
+                {
+                    point.Move(dx, dy);
+                }
             }
         }
 
@@ -608,10 +611,13 @@ namespace Test2d
 
             if (_renderer.SelectedShape != null)
             {
-                //_renderer.SelectedShape.Move(dx, dy);
-                Move(
-                    GetPoints(Enumerable.Repeat(_renderer.SelectedShape, 1)).Distinct(),
-                    dx, dy);
+                if (!_renderer.SelectedShape.State.HasFlag(ShapeState.Locked))
+                {
+                    //_renderer.SelectedShape.Move(dx, dy);
+                    Move(
+                        GetPoints(Enumerable.Repeat(_renderer.SelectedShape, 1)).Distinct(),
+                        dx, dy);
+                }
             }
 
             if (_renderer.SelectedShapes != null)
@@ -621,7 +627,7 @@ namespace Test2d
                 //    shape.Move(dx, dy);
                 //}
                 Move(
-                    GetPoints(_renderer.SelectedShapes).Distinct(),
+                    GetPoints(_renderer.SelectedShapes.Where(s => !s.State.HasFlag(ShapeState.Locked))).Distinct(),
                     dx, dy);
             }
         }
