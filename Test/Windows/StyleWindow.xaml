@@ -4,7 +4,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:Test.Controls"
-        Title="Style" Height="600" Width="200"
+        Title="Style" Height="700" Width="230"
         WindowState="Normal" WindowStartupLocation="CenterOwner"
         UseLayoutRounding="True" SnapsToDevicePixels="True"
         TextOptions.TextFormattingMode="Display"
@@ -13,6 +13,17 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto" 
                   HorizontalScrollBarVisibility="Auto" 
                   Focusable="True">
-        <controls:StyleControl DataContext="{Binding Editor.Container.CurrentStyleGroup.CurrentStyle}" Margin="2"/>
+        <controls:StyleControl DataContext="{Binding Editor.Container.CurrentShape.Style}" Margin="2">
+            <controls:StyleControl.Style>
+                <Style TargetType="controls:StyleControl">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </controls:StyleControl.Style>
+        </controls:StyleControl>
     </ScrollViewer>
 </Window>

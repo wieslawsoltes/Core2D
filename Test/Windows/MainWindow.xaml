@@ -91,9 +91,7 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Properties">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <controls:ShapeControl/>
-                </ScrollViewer>
+                <controls:ShapeControl/>
             </TabItem>
             <TabItem Header="Layers">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
