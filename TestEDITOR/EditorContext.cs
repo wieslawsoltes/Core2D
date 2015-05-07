@@ -128,10 +128,34 @@ namespace TestEDITOR
 
         public Action<Action> Execute { get; set; }
 
+        public Project DefaultProject()
+        {
+            var project = Project.Create();
+            var document = Document.Create();
+            var container = Container.Create();
+
+            var gs = project.StyleGroups
+                .Where(g => g.Name == "Template")
+                .FirstOrDefault()
+                .Styles
+                .Where(s => s.Name == "Grid")
+                .FirstOrDefault();
+            Container.CreateGrid(container, gs);
+
+            document.Containers.Add(container);
+            document.CurrentContainer = container;
+
+            project.Documents.Add(document);
+            project.CurrentDocument = document;
+
+            return project;
+        }
+
         public void Initialize(IView view, IRenderer renderer, ITextClipboard clipboard)
         {
             _commands = new EditorCommands();
-            _editor = Editor.Create(Container.Create(), renderer);
+
+            _editor = Editor.Create(DefaultProject(), renderer);
             _textClipboard = clipboard;
 
             (_editor.Renderer as ObservableObject).PropertyChanged +=
@@ -146,7 +170,7 @@ namespace TestEDITOR
             _commands.NewCommand = new DelegateCommand(
                 () =>
                 {
-                    _editor.Load(Container.Create());
+                    _editor.Load(DefaultProject());
                 },
                 () => IsEditMode());
 
@@ -357,7 +381,7 @@ namespace TestEDITOR
                 () =>
                 {
                     var gl = GroupLibrary.Create("New");
-                    _editor.Container.GroupLibraries.Add(gl);
+                    _editor.Project.GroupLibraries.Add(gl);
                 },
                 () => IsEditMode());
 
@@ -374,12 +398,12 @@ namespace TestEDITOR
                     var group = _editor.Renderer.SelectedShape;
                     if (group != null && group is XGroup)
                     {
-                        if (_editor.Container.CurrentGroupLibrary != null)
+                        if (_editor.Project.CurrentGroupLibrary != null)
                         {
                             var clone = Clone(group as XGroup);
                             if (clone != null)
                             {
-                                _editor.Container.CurrentGroupLibrary.Groups.Add(clone);
+                                _editor.Project.CurrentGroupLibrary.Groups.Add(clone);
                             }
                         }
                     }
@@ -412,7 +436,7 @@ namespace TestEDITOR
                 {
                     var sg = ShapeStyleGroup.Create("New");
                     sg.Styles.Add(ShapeStyle.Create("New"));
-                    _editor.Container.StyleGroups.Add(sg);
+                    _editor.Project.StyleGroups.Add(sg);
                 },
                 () => IsEditMode());
 
@@ -426,7 +450,7 @@ namespace TestEDITOR
             _commands.AddStyleCommand = new DelegateCommand(
                 () =>
                 {
-                    _editor.Container.CurrentStyleGroup.Styles.Add(ShapeStyle.Create("New"));
+                    _editor.Project.CurrentStyleGroup.Styles.Add(ShapeStyle.Create("New"));
                 },
                 () => IsEditMode());
 
@@ -478,6 +502,155 @@ namespace TestEDITOR
                     TickSimulation();
                 },
                 () => IsSimulationMode() && IsSimulationPaused);
+
+            _commands.SelectedItemChangedCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    System.Diagnostics.Debug.Print(item.GetType().ToString());
+                    if (item is Container)
+                    {
+                        // TODO:
+                    }
+                    else if (item is Document)
+                    {
+                        // TODO:
+                    }
+                },
+                (item) => IsEditMode());
+
+            _commands.AddContainerCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.InsertContainerBeforeCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.InsertContainerAfterCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.CutContainerCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.CopyContainerCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.PasteContainerCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.DeleteContainerCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.AddDocumentCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.InsertDocumentBeforeCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.InsertDocumentAfterCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.CutDocumentCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.CopyDocumentCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.PasteDocumentCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.DeleteDocumentCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+
+            _commands.AddProjectCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.CutProjectCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.CopyProjectCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.PasteProjectCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
+
+            _commands.DeleteProjectCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    // TODO:
+                },
+                (item) => IsEditMode());
 
             WarmUpCSharpScript();
         }
@@ -541,13 +714,13 @@ namespace TestEDITOR
         public void Open(string path)
         {
             var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
-            var container = ContainerSerializer.Deserialize<Container>(json);
-            _editor.Load(container);
+            var project = ContainerSerializer.Deserialize<Project>(json);
+            _editor.Load(project);
         }
 
         public void Save(string path)
         {
-            var json = ContainerSerializer.Serialize(_editor.Container);
+            var json = ContainerSerializer.Serialize(_editor.Project);
             System.IO.File.WriteAllText(path, json, Encoding.UTF8);
         }
 
@@ -653,14 +826,14 @@ namespace TestEDITOR
 
         private void TryToRestoreStyles(IEnumerable<BaseShape> shapes)
         {
-            var styles = _editor.Container.StyleGroups
+            var styles = _editor.Project.StyleGroups
                 .SelectMany(sg => sg.Styles)
                 .ToDictionary(s => s.Name);
 
             // reset point shape to container default
             foreach (var point in Editor.GetPoints(shapes))
             {
-                point.Shape = _editor.Container.PointShape;
+                point.Shape = _editor.Project.PointShape;
             }
 
             // try to restore shape styles
@@ -678,8 +851,8 @@ namespace TestEDITOR
                 else
                 {
                     // add missing style
-                    _editor.Container.CurrentStyleGroup.Styles.Add(shape.Style);
-                    styles = _editor.Container.StyleGroups
+                    _editor.Project.CurrentStyleGroup.Styles.Add(shape.Style);
+                    styles = _editor.Project.StyleGroups
                         .SelectMany(sg => sg.Styles)
                         .ToDictionary(s => s.Name);
                 }
@@ -1093,6 +1266,30 @@ namespace TestEDITOR
             (_commands.ShapesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ContainerWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.PropertiesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
+
+            (_commands.SelectedItemChangedCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+
+            (_commands.AddContainerCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.InsertContainerBeforeCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.InsertContainerAfterCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.CutContainerCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.CopyContainerCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.PasteContainerCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.DeleteContainerCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+
+            (_commands.AddDocumentCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.InsertDocumentBeforeCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.InsertDocumentAfterCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.CutDocumentCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.CopyDocumentCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.PasteDocumentCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.DeleteDocumentCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+
+            (_commands.AddProjectCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.CutProjectCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.CopyProjectCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.PasteProjectCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.DeleteProjectCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
         }
 
         public void Dispose()
