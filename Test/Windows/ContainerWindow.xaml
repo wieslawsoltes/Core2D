@@ -54,8 +54,8 @@
                               Focusable="False"
                               VerticalAlignment="Stretch" 
                               HorizontalAlignment="Stretch"
-                              Width="{Binding Editor.Container.Width}" 
-                              Height="{Binding Editor.Container.Height}">
+                              Width="{Binding Editor.Project.CurrentDocument.CurrentContainer.Width}" 
+                              Height="{Binding Editor.Project.CurrentDocument.CurrentContainer.Height}">
             <controls:ContainerControl/>
         </paz:PanAndZoomBorder>
     </paz:PanAndZoomGrid>

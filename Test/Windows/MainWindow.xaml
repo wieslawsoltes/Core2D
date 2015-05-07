@@ -56,10 +56,13 @@
         </Grid.RowDefinitions>
         <controls:MenuControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"/>
         <TabControl Grid.Row="1" Grid.Column="0" Margin="5,8,0,5">
-            <TabItem Header="Goups">
+            <TabItem Header="Groups">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                     <controls:GroupsControl/>
                 </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Project">
+                <controls:ProjectControl/>
             </TabItem>
         </TabControl>
         <GridSplitter Grid.Row="1" Grid.Column="1" 
