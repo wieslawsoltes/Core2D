@@ -22,11 +22,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <ContentControl Content="{Binding Editor.Container.CurrentShape}" Margin="2"/>
+            <ContentControl Content="{Binding Editor.Project.CurrentDocument.CurrentContainer.CurrentShape}" Margin="2"/>
         </ScrollViewer>
         <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" Background="Transparent" ResizeBehavior="PreviousAndNext"/>
         <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <controls:StyleControl Margin="2" DataContext="{Binding Editor.Container.CurrentShape.Style}">
+            <controls:StyleControl Margin="2" DataContext="{Binding Editor.Project.CurrentDocument.CurrentContainer.CurrentShape.Style}">
                 <controls:StyleControl.Style>
                     <Style TargetType="controls:StyleControl">
                         <Setter Property="Visibility" Value="Visible"/>

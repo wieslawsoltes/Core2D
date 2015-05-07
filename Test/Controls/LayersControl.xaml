@@ -17,8 +17,8 @@
             <MenuItem Command="{Binding Commands.AddLayerCommand}" Header="_+"/>
             <MenuItem Command="{Binding Commands.RemoveLayerCommand}" Header="_-"/>
         </Menu>
-        <ListBox ItemsSource="{Binding Editor.Container.Layers}" 
-                 SelectedItem="{Binding Editor.Container.CurrentLayer}" 
+        <ListBox ItemsSource="{Binding Editor.Project.CurrentDocument.CurrentContainer.Layers}" 
+                 SelectedItem="{Binding Editor.Project.CurrentDocument.CurrentContainer.CurrentLayer}" 
                  BorderBrush="{x:Null}"
                  Grid.Row="1">
             <ListBox.ItemTemplate>
@@ -39,7 +39,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel DataContext="{Binding Editor.Container.CurrentLayer}" Grid.Row="2" Margin="2">
+        <StackPanel DataContext="{Binding Editor.Project.CurrentDocument.CurrentContainer.CurrentLayer}" Grid.Row="2" Margin="2">
             <StackPanel.Style>
                 <Style TargetType="StackPanel">
                     <Setter Property="Visibility" Value="Visible"/>

@@ -19,8 +19,8 @@
             <MenuItem Command="{Binding Commands.AddGroupLibraryCommand}" Header="+"/>
             <MenuItem Command="{Binding Commands.RemoveGroupLibraryCommand}" Header="-"/>
         </Menu>
-        <ComboBox ItemsSource="{Binding Editor.Container.GroupLibraries}" 
-                  SelectedItem="{Binding Editor.Container.CurrentGroupLibrary}" 
+        <ComboBox ItemsSource="{Binding Editor.Project.GroupLibraries}" 
+                  SelectedItem="{Binding Editor.Project.CurrentGroupLibrary}" 
                   Grid.Row="1" 
                   Margin="2,2,2,2">
             <ComboBox.ItemTemplate>
@@ -35,8 +35,8 @@
         </Menu>
         <ListBox x:Name="groupsListBox"
                  DataContext="{Binding Editor}"
-                 ItemsSource="{Binding Container.CurrentGroupLibrary.Groups}"
-                 SelectedItem="{Binding Container.CurrentGroupLibrary.CurrentGroup}" 
+                 ItemsSource="{Binding Project.CurrentGroupLibrary.Groups}"
+                 SelectedItem="{Binding Project.CurrentGroupLibrary.CurrentGroup}" 
                  BorderBrush="{x:Null}"
                  HorizontalContentAlignment="Stretch"
                  Grid.Row="3">

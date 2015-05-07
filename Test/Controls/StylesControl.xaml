@@ -20,8 +20,8 @@
             <MenuItem Command="{Binding Commands.AddStyleGroupCommand}" Header="+"/>
             <MenuItem Command="{Binding Commands.RemoveStyleGroupCommand}" Header="-"/>
         </Menu>
-        <ComboBox ItemsSource="{Binding Editor.Container.StyleGroups}" 
-                  SelectedItem="{Binding Editor.Container.CurrentStyleGroup}" 
+        <ComboBox ItemsSource="{Binding Editor.Project.StyleGroups}" 
+                  SelectedItem="{Binding Editor.Project.CurrentStyleGroup}" 
                   Grid.Row="1" 
                   Margin="2,2,2,2">
             <ComboBox.ItemTemplate>
@@ -35,8 +35,8 @@
             <MenuItem Command="{Binding Commands.RemoveStyleCommand}" Header="_-"/>
         </Menu>
         <ListBox DataContext="{Binding Editor}"
-                 ItemsSource="{Binding Container.CurrentStyleGroup.Styles}" 
-                 SelectedItem="{Binding Container.CurrentStyleGroup.CurrentStyle}" 
+                 ItemsSource="{Binding Project.CurrentStyleGroup.Styles}" 
+                 SelectedItem="{Binding Project.CurrentStyleGroup.CurrentStyle}" 
                  BorderBrush="{x:Null}"
                  Grid.Row="3">
             <ListBox.ItemTemplate>
@@ -45,7 +45,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <controls:StyleControl Grid.Row="4" Margin="2" DataContext="{Binding Editor.Container.CurrentStyleGroup.CurrentStyle}">
+        <controls:StyleControl Grid.Row="4" Margin="2" DataContext="{Binding Editor.Project.CurrentStyleGroup.CurrentStyle}">
             <controls:StyleControl.Style>
                 <Style TargetType="controls:StyleControl">
                     <Setter Property="Visibility" Value="Visible"/>

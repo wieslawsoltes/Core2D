@@ -25,8 +25,8 @@
             <MenuItem Command="{Binding Commands.RemoveShapeCommand}" Header="_-"/>
         </Menu>
         <ListBox DataContext="{Binding Editor}"
-                 ItemsSource="{Binding Container.CurrentLayer.Shapes}" 
-                 SelectedItem="{Binding Container.CurrentShape}" 
+                 ItemsSource="{Binding Project.CurrentDocument.CurrentContainer.CurrentLayer.Shapes}" 
+                 SelectedItem="{Binding Project.CurrentDocument.CurrentContainer.CurrentShape}" 
                  BorderBrush="{x:Null}"
                  Grid.Row="1">
             <ListBox.ItemTemplate>
@@ -35,7 +35,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ContentControl Content="{Binding Editor.Container.CurrentShape}" 
+        <ContentControl Content="{Binding Editor.Project.CurrentDocument.CurrentContainer.CurrentShape}" 
                         Grid.Row="2" Margin="2">
         </ContentControl>
     </Grid>
