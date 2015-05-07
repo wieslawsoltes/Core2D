@@ -80,5 +80,29 @@ namespace TestEDITOR
         public ICommand ShapesWindowCommand { get; set; }
         public ICommand ContainerWindowCommand { get; set; }
         public ICommand PropertiesWindowCommand { get; set; }
+
+        public ICommand SelectedItemChangedCommand { get; set; }
+
+        public ICommand AddContainerCommand { get; set; }
+        public ICommand InsertContainerBeforeCommand { get; set; }
+        public ICommand InsertContainerAfterCommand { get; set; }
+        public ICommand CutContainerCommand { get; set; }
+        public ICommand CopyContainerCommand { get; set; }
+        public ICommand PasteContainerCommand { get; set; }
+        public ICommand DeleteContainerCommand { get; set; }
+
+        public ICommand AddDocumentCommand { get; set; }
+        public ICommand InsertDocumentBeforeCommand { get; set; }
+        public ICommand InsertDocumentAfterCommand { get; set; }
+        public ICommand CutDocumentCommand { get; set; }
+        public ICommand CopyDocumentCommand { get; set; }
+        public ICommand PasteDocumentCommand { get; set; }
+        public ICommand DeleteDocumentCommand { get; set; }
+
+        public ICommand AddProjectCommand { get; set; }
+        public ICommand CutProjectCommand { get; set; }
+        public ICommand CopyProjectCommand { get; set; }
+        public ICommand PasteProjectCommand { get; set; }
+        public ICommand DeleteProjectCommand { get; set; }
     }
 }
