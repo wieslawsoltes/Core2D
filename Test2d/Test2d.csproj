@@ -69,12 +69,14 @@
     <Compile Include="Core\ShapeState.cs" />
     <Compile Include="Core\ShapeStyleGroup.cs" />
     <Compile Include="Core\TextStyle.cs" />
-    <Compile Include="Editor\Core\Container.cs" />
+    <Compile Include="Editor\Project\Container.cs" />
     <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
     <Compile Include="Editor\Core\ITextClipboard.cs" />
     <Compile Include="Editor\Core\IView.cs" />
     <Compile Include="Core\GroupLibrary.cs" />
     <Compile Include="Editor\Editor.cs" />
+    <Compile Include="Editor\Project\Document.cs" />
+    <Compile Include="Editor\Project\Project.cs" />
     <Compile Include="Math\Arc.cs" />
     <Compile Include="Math\MonotoneChain.cs" />
     <Compile Include="Math\Polygon2.cs" />
@@ -82,7 +84,7 @@
     <Compile Include="Math\Vector2.cs" />
     <Compile Include="Math\Rect2.cs" />
     <Compile Include="Editor\Bounds\ShapeBounds.cs" />
-    <Compile Include="Editor\Core\Layer.cs" />
+    <Compile Include="Editor\Project\Layer.cs" />
     <Compile Include="Editor\LineGrid.cs" />
     <Compile Include="Editor\Observer.cs" />
     <Compile Include="Editor\Core\State.cs" />
