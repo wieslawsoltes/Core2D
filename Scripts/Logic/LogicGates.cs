@@ -1,22 +1,23 @@
-﻿var c = Context.Editor.Container;
+﻿var p = Context.Editor.Project;
+var c = Context.Editor.Project.CurrentDocument.CurrentContainer;
 
-var sg = c.StyleGroups.Where(x => x.Name == "Logic").FirstOrDefault();
+var sg = p.StyleGroups.Where(x => x.Name == "Logic").FirstOrDefault();
 if (sg == null)
 {
     sg = ShapeStyleGroup.Create("Logic");
-    c.StyleGroups.Add(sg);
+    p.StyleGroups.Add(sg);
 }
 var styles = sg.Styles;
 
-var gl = c.GroupLibraries.Where(x => x.Name == "Logic").FirstOrDefault();
+var gl = p.GroupLibraries.Where(x => x.Name == "Logic").FirstOrDefault();
 if (gl == null)
 {
     gl = GroupLibrary.Create("Logic");
-    c.GroupLibraries.Add(gl);
+    p.GroupLibraries.Add(gl);
 }
 var groups = gl.Groups;
 
-var ps = c.PointShape;
+var ps = p.PointShape;
 
 var styleTextMediumLC = ShapeStyle.Create(
     "Logic-Text-Medium-LC", 

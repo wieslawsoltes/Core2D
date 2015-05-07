@@ -1,9 +1,9 @@
-var c = Context.Editor.Container;
-var sg = c.StyleGroups.Where(x => x.Name == "Logic").FirstOrDefault();
+var p = Context.Editor.Project;
+var sg = p.StyleGroups.Where(x => x.Name == "Logic").FirstOrDefault();
 if (sg == null)
 {
     sg = ShapeStyleGroup.Create("Logic");
-    c.StyleGroups.Add(sg);
+    p.StyleGroups.Add(sg);
 }
 var styles = sg.Styles;
 var radiusX = 5.0;
