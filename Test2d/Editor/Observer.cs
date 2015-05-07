@@ -27,23 +27,21 @@ namespace Test2d
             _invalidateStyles = () =>
             {
                 _editor.Renderer.ClearCache();
-                _editor.Container.Invalidate();
+                _editor.Project.CurrentDocument.CurrentContainer.Invalidate();
             };
 
             _invalidateLayers = () =>
             {
-                _editor.Container.Invalidate();
+                _editor.Project.CurrentDocument.CurrentContainer.Invalidate();
             };
 
             _invalidateShapes = () =>
             {
-                _editor.Container.Invalidate();
+                _editor.Project.CurrentDocument.CurrentContainer.Invalidate();
             };
 
-            InitializeStyles(_editor.Container);
-            InitializeLayers(_editor.Container);
-            //Add(_editor.Container.TemplateLayer);
-            //Add(_editor.Container.WorkingLayer);
+            InitializeStyles(_editor.Project);
+            InitializeLayers(_editor.Project);
         }
 
         #region Debug
@@ -278,12 +276,12 @@ namespace Test2d
 
         #region Styles
 
-        private void InitializeStyles(Container container)
+        private void InitializeStyles(Project project)
         {
-            (container.StyleGroups as ObservableCollection<ShapeStyleGroup>)
+            (project.StyleGroups as ObservableCollection<ShapeStyleGroup>)
                 .CollectionChanged += StyleGroupsCollectionObserver;
 
-            foreach (var sg in container.StyleGroups)
+            foreach (var sg in project.StyleGroups)
             {
                 Add(sg);
             }
@@ -371,12 +369,21 @@ namespace Test2d
 
         #region Layers
 
-        private void InitializeLayers(Container container)
+        private void InitializeLayers(Project project)
         {
-            Add(container.Layers);
+            foreach (var document in project.Documents)
+            {
+                foreach (var container in document.Containers)
+                {
+                    Add(container.Layers);
 
-            (container.Layers as ObservableCollection<Layer>)
-                .CollectionChanged += LayersCollectionObserver;
+                    (container.Layers as ObservableCollection<Layer>)
+                        .CollectionChanged += LayersCollectionObserver;
+
+                    //Add(container.TemplateLayer);
+                    //Add(container.WorkingLayer);
+                }
+            }
         }
 
         private void Add(Layer layer)
