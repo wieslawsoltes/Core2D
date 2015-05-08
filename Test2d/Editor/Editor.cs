@@ -32,7 +32,10 @@ namespace Test2d
 
         public Container Container
         {
-            get { return Project.CurrentDocument.CurrentContainer; }
+            get 
+            {
+                return Project.CurrentContainer;
+            }
         }
 
         public Project Project
@@ -899,7 +902,8 @@ namespace Test2d
 
         public bool IsLeftDownAvailable()
         {
-            return Container.CurrentLayer != null
+            return Container != null
+                && Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
                 && Project.CurrentStyleGroup != null
                 && Project.CurrentStyleGroup.CurrentStyle != null;
@@ -907,7 +911,8 @@ namespace Test2d
 
         public bool IsLeftUpAvailable()
         {
-            return Container.CurrentLayer != null
+            return Container != null
+                && Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
                 && Project.CurrentStyleGroup != null
                 && Project.CurrentStyleGroup.CurrentStyle != null;
@@ -915,7 +920,8 @@ namespace Test2d
         
         public bool IsRightDownAvailable()
         {
-            return Container.CurrentLayer != null
+            return Container != null
+                && Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
                 && Project.CurrentStyleGroup != null
                 && Project.CurrentStyleGroup.CurrentStyle != null;
@@ -923,7 +929,8 @@ namespace Test2d
         
         public bool IsRightUpAvailable()
         {
-            return Container.CurrentLayer != null
+            return Container != null
+                && Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
                 && Project.CurrentStyleGroup != null
                 && Project.CurrentStyleGroup.CurrentStyle != null;
@@ -931,7 +938,8 @@ namespace Test2d
 
         public bool IsMoveAvailable()
         {
-            return Container.CurrentLayer != null
+            return Container != null
+                && Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
                 && Project.CurrentStyleGroup != null
                 && Project.CurrentStyleGroup.CurrentStyle != null;
