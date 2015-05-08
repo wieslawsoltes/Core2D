@@ -128,26 +128,69 @@ namespace TestEDITOR
 
         public Action<Action> Execute { get; set; }
 
+        public Container EmptyTemplate(Project project)
+        {
+            var container = Container.Create("Empty");
+
+            return container;
+        }
+        
+        public Container GridTemplate(Project project)
+        {
+            var container = Container.Create("Grid");
+
+            var gs = project
+                .StyleGroups.FirstOrDefault(g => g.Name == "Template")
+                .Styles.FirstOrDefault(s => s.Name == "Grid");
+            var settings = LineGrid.Settings.Create(0, 0, container.Width, container.Height, 30, 30);
+            var shapes = LineGrid.Create(gs, settings, project.PointShape);
+            var layer = container.Layers.FirstOrDefault();
+            
+            foreach (var shape in shapes) 
+            {
+                layer.Shapes.Add(shape);
+            }
+
+            return container;
+        }
+        
+        public Container DefaultContainer(Project project)
+        {
+            var container = Container.Create();
+            container.Template = project.CurrentTemplate;
+            return container;
+        }
+        
+        public Document DefaultDocument(Project project)
+        {
+             var document = Document.Create();
+      
+             return document;
+        }
+        
         public Project DefaultProject()
         {
             var project = Project.Create();
-            var document = Document.Create();
-            var container = Container.Create();
-
-            var gs = project.StyleGroups
-                .Where(g => g.Name == "Template")
-                .FirstOrDefault()
-                .Styles
-                .Where(s => s.Name == "Grid")
-                .FirstOrDefault();
-            Container.CreateGrid(container, gs);
-
-            document.Containers.Add(container);
-            document.CurrentContainer = container;
-
-            project.Documents.Add(document);
-            project.CurrentDocument = document;
-
+            
+            project.Templates.Add(EmptyTemplate(project));
+            project.Templates.Add(GridTemplate(project));
+            project.CurrentTemplate = project.Templates.FirstOrDefault(t => t.Name == "Grid");
+            
+            var document1 = DefaultDocument(project);
+            var document2 = DefaultDocument(project);
+            
+            var container1 = DefaultContainer(project);
+            var container2 = DefaultContainer(project);
+            
+            document1.Containers.Add(container1);
+            document2.Containers.Add(container2);
+            
+            project.Documents.Add(document1);
+            project.Documents.Add(document2);
+            
+            project.CurrentDocument = project.Documents.FirstOrDefault();
+            project.CurrentContainer = document1.Containers.FirstOrDefault();
+         
             return project;
         }
 
@@ -503,17 +546,75 @@ namespace TestEDITOR
                 },
                 () => IsSimulationMode() && IsSimulationPaused);
 
+            _commands.AddTemplateCommand = new DelegateCommand(
+                () =>
+                {
+                    _editor.Project.Templates.Add(EmptyTemplate(_editor.Project));
+                },
+                () => IsEditMode());
+
+            _commands.RemoveTemplateCommand = new DelegateCommand(
+                () =>
+                {
+                    if (_editor.Project.CurrentTemplate != null)
+                    {
+                        _editor.Project.Templates.Remove(_editor.Project.CurrentTemplate);
+                    }
+                    
+                    var template = _editor.Project.CurrentTemplate;
+                    if (template != null)
+                    {
+                        _editor.Project.Templates.Remove(template);
+                        _editor.Project.CurrentTemplate = _editor.Project.Templates.FirstOrDefault();
+                    }
+                },
+                () => IsEditMode());
+
+            _commands.EditTemplateCommand = new DelegateCommand(
+                () =>
+                {
+                    var template = _editor.Project.CurrentTemplate;
+                    if (template != null)
+                    {
+                        _editor.Project.CurrentContainer = template;
+                        _editor.Project.CurrentContainer.Invalidate();
+                    }
+                },
+                () => IsEditMode());
+
+            _commands.ApplyTemplateCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    if (item is Container)
+                    {
+                        var template = item as Container;
+                        
+                        _editor.Project.CurrentContainer.Template = template;
+                        System.Diagnostics.Debug.Print("Template: " + template.Name);
+                    }
+                },
+                (item) => IsEditMode());
+            
             _commands.SelectedItemChangedCommand = new DelegateCommand<object>(
                 (item) =>
                 {
-                    System.Diagnostics.Debug.Print(item.GetType().ToString());
+                    System.Diagnostics.Debug.Print("Selected: " + item.GetType());
                     if (item is Container)
                     {
-                        // TODO:
+                        var container = item as Container;
+                        var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
+                        if (document != null)
+                        {
+                            _editor.Project.CurrentDocument = document;
+                            _editor.Project.CurrentContainer = container;
+                        }
                     }
                     else if (item is Document)
                     {
-                        // TODO:
+                        var document = item as Document;
+              
+                        _editor.Project.CurrentDocument = document;
+                        _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
                     }
                 },
                 (item) => IsEditMode());
@@ -521,7 +622,9 @@ namespace TestEDITOR
             _commands.AddContainerCommand = new DelegateCommand<object>(
                 (item) =>
                 {
-                    // TODO:
+                    var container = DefaultContainer(_editor.Project);
+                    _editor.Project.CurrentDocument.Containers.Add(container);
+                    _editor.Project.CurrentContainer = container;
                 },
                 (item) => IsEditMode());
 
@@ -570,7 +673,10 @@ namespace TestEDITOR
             _commands.AddDocumentCommand = new DelegateCommand<object>(
                 (item) =>
                 {
-                    // TODO:
+                    var document = DefaultDocument(_editor.Project);
+                    _editor.Project.Documents.Add(document);
+                    _editor.Project.CurrentDocument = document;
+                    _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
                 },
                 (item) => IsEditMode());
 
@@ -1267,6 +1373,11 @@ namespace TestEDITOR
             (_commands.ContainerWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.PropertiesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
 
+            (_commands.AddTemplateCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.RemoveTemplateCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.EditTemplateCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ApplyTemplateCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            
             (_commands.SelectedItemChangedCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
 
             (_commands.AddContainerCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
