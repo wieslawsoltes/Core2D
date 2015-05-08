@@ -81,8 +81,13 @@ namespace TestEDITOR
         public ICommand ContainerWindowCommand { get; set; }
         public ICommand PropertiesWindowCommand { get; set; }
 
+        public ICommand AddTemplateCommand { get; set; }
+        public ICommand RemoveTemplateCommand { get; set; }
+        public ICommand EditTemplateCommand { get; set; }
+        public ICommand ApplyTemplateCommand { get; set; }
+        
         public ICommand SelectedItemChangedCommand { get; set; }
-
+        
         public ICommand AddContainerCommand { get; set; }
         public ICommand InsertContainerBeforeCommand { get; set; }
         public ICommand InsertContainerAfterCommand { get; set; }
