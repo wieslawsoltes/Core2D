@@ -236,11 +236,17 @@ namespace TestEMF
 
         public void Draw(object gfx, Container container)
         {
-            if (container.TemplateLayer.IsVisible)
+            if (container.Template != null)
             {
-                Draw(gfx, container.TemplateLayer);
+                foreach (var layer in container.Template.Layers)
+                {
+                    if (layer.IsVisible)
+                    {
+                        Draw(gfx, layer);
+                    }
+                }
             }
-
+            
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
