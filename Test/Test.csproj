@@ -111,8 +111,13 @@
     <Compile Include="Controls\StyleControl.xaml.cs">
       <DependentUpon>StyleControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TemplatesControl.xaml.cs">
+      <DependentUpon>TemplatesControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Converters\DoubleToStringConverter.cs" />
     <Compile Include="Converters\FlagsEnumConverter.cs" />
+    <Compile Include="Converters\ObjectEqualityConverter.cs" />
     <Compile Include="Converters\ZoomScaleConverter.cs" />
     <Compile Include="PanAndZoom\PanAndZoomBorder.cs" />
     <Compile Include="PanAndZoom\PanAndZoomGrid.cs" />
@@ -149,6 +154,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\TemplatesControl.xaml" />
     <Page Include="Dictionaries\ShapeDictionary.xaml" />
     <Page Include="Dictionaries\StyleDictionary.xaml" />
     <Page Include="Controls\LayersControl.xaml">
