@@ -154,12 +154,6 @@ namespace TestWinForms
 
         private void HandlePanelLayerInvalidation(ContainerPanel panel)
         {
-            (DataContext as EditorContext).Editor.Container.TemplateLayer.InvalidateLayer +=
-                (sender, e) =>
-                {
-                    panel.Invalidate();
-                };
-
             foreach (var layer in (DataContext as EditorContext).Editor.Container.Layers)
             {
                 layer.InvalidateLayer +=
