@@ -6,16 +6,36 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:converters="clr-namespace:Test.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="110">
     <UserControl.Resources>
-        <ContextMenu x:Key="ContainerContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-            <MenuItem Header="Te_mplate" ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.Editor.Project.Templates, FallbackValue={x:Null}}">
+        <ContextMenu x:Key="ContainerContextMenu" 
+                     DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+            <MenuItem Header="Te_mplate" 
+                      Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                      DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Editor.Project.Templates}">
+                <MenuItem.Resources>
+                    <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
+                </MenuItem.Resources>
                 <MenuItem.ItemContainerStyle>
                     <Style TargetType="MenuItem">
                         <Setter Property="Header" Value="{Binding Name}"/>
-                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.Commands.ApplyTemplateCommand}"/>
+                        <Setter Property="Command" Value="{Binding Path=Tag.Commands.ApplyTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}, FallbackValue={x:Null}}"/>
                         <Setter Property="CommandParameter" Value="{Binding}"/>
+                        <Setter Property="IsCheckable" Value="True"/>
+                        <Setter Property="IsChecked" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Value="True">
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource ObjectEqualityConverter}">  
+                                        <Binding Path="Tag.Editor.Project.CurrentContainer.Template" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}"/>  
+                                        <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>  
+                                    </MultiBinding> 
+                                </DataTrigger.Binding>
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
                     </Style>
                 </MenuItem.ItemContainerStyle>
             </MenuItem>
