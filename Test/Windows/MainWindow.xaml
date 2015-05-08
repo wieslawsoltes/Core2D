@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Test"
         xmlns:controls="clr-namespace:Test.Controls"
         xmlns:converters="clr-namespace:Test.Converters"
-        Title="Test" Height="720" Width="1220"
+        Title="Test" Height="720" Width="1320"
         Background="LightGray"
         WindowStartupLocation="CenterScreen" WindowState="Normal"
         UseLayoutRounding="True" SnapsToDevicePixels="True"
@@ -43,7 +43,7 @@
     </Window.InputBindings>
     <Grid FocusVisualStyle="{x:Null}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="130"/>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
@@ -64,6 +64,9 @@
             <TabItem Header="Project">
                 <controls:ProjectControl/>
             </TabItem>
+            <TabItem Header="Templates">
+                <controls:TemplatesControl/>
+            </TabItem>
         </TabControl>
         <GridSplitter Grid.Row="1" Grid.Column="1" 
                       Width="5" Background="Transparent" 
@@ -80,7 +83,18 @@
                         <ScaleTransform ScaleX="{Binding Editor.Renderer.Zoom}" ScaleY="{Binding Editor.Renderer.Zoom}"/>
                     </TransformGroup>
                 </Border.LayoutTransform>
-                <controls:ContainerControl x:Name="containerControl"/>
+                <controls:ContainerControl x:Name="containerControl">
+                    <controls:ContainerControl.Style>
+                        <Style TargetType="controls:ContainerControl">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Editor.Project.CurrentContainer}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </controls:ContainerControl.Style>
+                </controls:ContainerControl>
             </Border>
         </ScrollViewer>
         <GridSplitter Grid.Row="1" Grid.Column="3" 
