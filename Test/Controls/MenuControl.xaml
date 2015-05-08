@@ -5,6 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:Test.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="20" d:DesignWidth="810">
     <Menu Background="Transparent">
@@ -187,6 +188,31 @@
                     </Style>
                 </MenuItem.Style>
             </MenuItem>
+        </MenuItem>
+        <MenuItem Header="Te_mplate" Tag="{Binding}" ItemsSource="{Binding Editor.Project.Templates}">
+            <MenuItem.Resources>
+                <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
+            </MenuItem.Resources>
+            <MenuItem.ItemContainerStyle>
+                <Style TargetType="MenuItem">
+                    <Setter Property="Header" Value="{Binding Name}"/>
+                    <Setter Property="Command" Value="{Binding Path=Tag.Commands.ApplyTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}}"/>
+                    <Setter Property="CommandParameter" Value="{Binding}"/>
+                    <Setter Property="IsCheckable" Value="True"/>
+                    <Setter Property="IsChecked" Value="False"/>
+                    <Style.Triggers>
+                        <DataTrigger Value="True">
+                            <DataTrigger.Binding>
+                                <MultiBinding Converter="{StaticResource ObjectEqualityConverter}">  
+                                    <Binding Path="Tag.Editor.Project.CurrentContainer.Template" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}"/>  
+                                    <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>  
+                                </MultiBinding> 
+                            </DataTrigger.Binding>
+                            <Setter Property="IsChecked" Value="True"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </MenuItem.ItemContainerStyle>
         </MenuItem>
         <MenuItem Header="_Script">
             <MenuItem Header="_Evaluate..." Command="{Binding Commands.EvalCommand}" InputGestureText="F9"/>
