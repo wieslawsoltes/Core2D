@@ -54,9 +54,20 @@
                               Focusable="False"
                               VerticalAlignment="Stretch" 
                               HorizontalAlignment="Stretch"
-                              Width="{Binding Editor.Project.CurrentDocument.CurrentContainer.Width}" 
-                              Height="{Binding Editor.Project.CurrentDocument.CurrentContainer.Height}">
-            <controls:ContainerControl/>
+                              Width="{Binding Editor.Project.CurrentContainer.Width}" 
+                              Height="{Binding Editor.Project.CurrentContainer.Height}">
+            <controls:ContainerControl>
+                <controls:ContainerControl.Style>
+                    <Style TargetType="controls:ContainerControl">
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Editor.Project.CurrentContainer}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </controls:ContainerControl.Style>
+            </controls:ContainerControl>
         </paz:PanAndZoomBorder>
     </paz:PanAndZoomGrid>
 </Window>

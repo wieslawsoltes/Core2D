@@ -13,7 +13,7 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto" 
                   HorizontalScrollBarVisibility="Auto" 
                   Focusable="True">
-        <controls:StyleControl DataContext="{Binding Editor.Project.CurrentDocument.CurrentContainer.CurrentShape.Style}" Margin="2">
+        <controls:StyleControl DataContext="{Binding Editor.Project.CurrentContainer.CurrentShape.Style}" Margin="2">
             <controls:StyleControl.Style>
                 <Style TargetType="controls:StyleControl">
                     <Setter Property="Visibility" Value="Visible"/>

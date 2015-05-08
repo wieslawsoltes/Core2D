@@ -8,7 +8,7 @@
              xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="810"
-             Width="{Binding Editor.Project.CurrentDocument.CurrentContainer.Width}" Height="{Binding Editor.Project.CurrentDocument.CurrentContainer.Height}">
+             Width="{Binding Editor.Project.CurrentContainer.Width}" Height="{Binding Editor.Project.CurrentContainer.Height}">
     <UserControl.InputBindings>
         <KeyBinding Command="{Binding Commands.DeleteCommand}" Key="Delete" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolNoneCommand}" Key="N" Modifiers=""/>
@@ -26,18 +26,11 @@
         <KeyBinding Command="{Binding Commands.SnapToGridCommand}" Key="G" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.TryToConnectCommand}" Key="C" Modifiers=""/>
     </UserControl.InputBindings>
-    <Grid Width="{Binding Editor.Project.CurrentDocument.CurrentContainer.Width}" Height="{Binding Editor.Project.CurrentDocument.CurrentContainer.Height}" Background="Transparent">
-        <Canvas Background="Transparent"
-                Focusable="True"
-                FocusVisualStyle="{x:Null}"
-                Width="{Binding Editor.Project.CurrentDocument.CurrentContainer.Width}" 
-                Height="{Binding Editor.Project.CurrentDocument.CurrentContainer.Height}">
-            <controls:LayerElement DataContext="{Binding Editor.Project.CurrentDocument.CurrentContainer.TemplateLayer}" Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"/>
-        </Canvas>
-        <ItemsControl ItemsSource="{Binding Editor.Project.CurrentDocument.CurrentContainer.Layers}">
+    <Grid Width="{Binding Editor.Project.CurrentContainer.Width}" Height="{Binding Editor.Project.CurrentContainer.Height}" Background="Transparent">
+        <ItemsControl ItemsSource="{Binding Editor.Project.CurrentContainer.Template.Layers}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas Width="{Binding Editor.Project.CurrentDocument.CurrentContainer.Width}" Height="{Binding Editor.Project.CurrentDocument.CurrentContainer.Height}" Background="Transparent"/>
+                    <Canvas Width="{Binding Editor.Project.CurrentContainer.Template.Width}" Height="{Binding Editor.Project.CurrentContainer.Template.Height}" Background="Transparent"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
@@ -47,8 +40,26 @@
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemContainerStyle>
                 <Style TargetType="ContentPresenter">
-                    <Setter Property="Width" Value="{Binding Path=DataContext.Editor.Project.CurrentDocument.CurrentContainer.Width, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}" />
-                    <Setter Property="Height" Value="{Binding Path=DataContext.Editor.Project.CurrentDocument.CurrentContainer.Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}" />
+                    <Setter Property="Width" Value="{Binding Path=DataContext.Editor.Project.CurrentContainer.Template.Width, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}" />
+                    <Setter Property="Height" Value="{Binding Path=DataContext.Editor.Project.CurrentContainer.Template.Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
+        <ItemsControl ItemsSource="{Binding Editor.Project.CurrentContainer.Layers}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas Width="{Binding Editor.Project.CurrentContainer.Width}" Height="{Binding Editor.Project.CurrentContainer.Height}" Background="Transparent"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <controls:LayerElement Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Width" Value="{Binding Path=DataContext.Editor.Project.CurrentContainer.Width, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}" />
+                    <Setter Property="Height" Value="{Binding Path=DataContext.Editor.Project.CurrentContainer.Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}" />
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>
@@ -57,9 +68,9 @@
                 Background="Transparent"
                 Focusable="True"
                 FocusVisualStyle="{x:Null}"
-                Width="{Binding Project.CurrentDocument.CurrentContainer.Width}" 
-                Height="{Binding Project.CurrentDocument.CurrentContainer.Height}">
-            <controls:LayerElement DataContext="{Binding Project.CurrentDocument.CurrentContainer.WorkingLayer}" Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"/>
+                Width="{Binding Project.CurrentContainer.Width}" 
+                Height="{Binding Project.CurrentContainer.Height}">
+            <controls:LayerElement DataContext="{Binding Project.CurrentContainer.WorkingLayer}" Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"/>
         </Canvas>
     </Grid>
 </UserControl>
