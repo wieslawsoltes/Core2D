@@ -354,11 +354,6 @@ namespace Test
 
         public void Draw(object dc, Container container)
         {
-            if (container.TemplateLayer.IsVisible)
-            {
-                Draw(dc, container.TemplateLayer);
-            }
-
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
