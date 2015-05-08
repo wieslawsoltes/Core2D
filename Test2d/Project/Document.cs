@@ -11,7 +11,7 @@ namespace Test2d
     {
         private string _name;
         private IList<Container> _containers;
-        private Container _currentContainer;
+
 
         public string Name
         {
@@ -35,19 +35,6 @@ namespace Test2d
                 {
                     _containers = value;
                     Notify("Containers");
-                }
-            }
-        }
-
-        public Container CurrentContainer
-        {
-            get { return _currentContainer; }
-            set
-            {
-                if (value != _currentContainer)
-                {
-                    _currentContainer = value;
-                    Notify("CurrentContainer");
                 }
             }
         }

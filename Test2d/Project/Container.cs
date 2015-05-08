@@ -16,7 +16,6 @@ namespace Test2d
         private IList<Layer> _layers;
         private Container _template;
         private Layer _currentLayer;
-        private Layer _templateLayer;
         private Layer _workingLayer;
         private BaseShape _currentShape;
 
@@ -111,19 +110,6 @@ namespace Test2d
             }
         }
 
-        public Layer TemplateLayer
-        {
-            get { return _templateLayer; }
-            set
-            {
-                if (value != _templateLayer)
-                {
-                    _templateLayer = value;
-                    Notify("TemplateLayer");
-                }
-            }
-        }
-
         public Layer WorkingLayer
         {
             get { return _workingLayer; }
@@ -161,7 +147,11 @@ namespace Test2d
 
         public void Invalidate()
         {
-            TemplateLayer.Invalidate();
+            if (Template != null)
+            {
+                Template.Invalidate();
+            }
+            
             foreach (var layer in Layers)
             {
                 layer.Invalidate();
@@ -186,17 +176,9 @@ namespace Test2d
 
             c.CurrentLayer = c.Layers.FirstOrDefault();
 
-            c.TemplateLayer = Layer.Create("Template");
             c.WorkingLayer = Layer.Create("Working");
 
             return c;
-        }
-
-        public static void CreateGrid(Container c, ShapeStyle gs, double width = 810, double height = 600)
-        {
-            var settings = LineGrid.Settings.Create(0, 0, width, height, 30, 30);
-            var g = LineGrid.Create(gs, settings);
-            c.TemplateLayer.Shapes.Add(g);
         }
     }
 }

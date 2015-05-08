@@ -19,6 +19,7 @@ namespace Test2d
         private BaseShape _pointShape;
         private IList<Document> _documents;
         private Document _currentDocument;
+        private Container _currentContainer;
 
         public string Name
         {
@@ -150,6 +151,19 @@ namespace Test2d
             }
         }
 
+        public Container CurrentContainer
+        {
+            get { return _currentContainer; }
+            set
+            {
+                if (value != _currentContainer)
+                {
+                    _currentContainer = value;
+                    Notify("CurrentContainer");
+                }
+            }
+        }
+        
         public static Project Create(string name = "Project")
         {
             var p = new Project()
