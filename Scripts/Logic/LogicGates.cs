@@ -1,5 +1,5 @@
 ﻿var p = Context.Editor.Project;
-var c = Context.Editor.Project.CurrentDocument.CurrentContainer;
+var c = Context.Editor.Project.CurrentContainer;
 
 var sg = p.StyleGroups.Where(x => x.Name == "Logic").FirstOrDefault();
 if (sg == null)
