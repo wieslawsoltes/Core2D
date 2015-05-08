@@ -27,23 +27,21 @@ namespace Test2d
             _invalidateStyles = () =>
             {
                 _editor.Renderer.ClearCache();
-                _editor.Container.Invalidate();
+                _editor.Project.CurrentContainer.Invalidate();
             };
 
             _invalidateLayers = () =>
             {
-                _editor.Container.Invalidate();
+                _editor.Project.CurrentContainer.Invalidate();
             };
 
             _invalidateShapes = () =>
             {
-                _editor.Container.Invalidate();
+                _editor.Project.CurrentContainer.Invalidate();
             };
 
-            InitializeStyles(_editor.Container);
-            InitializeLayers(_editor.Container);
-            //Add(_editor.Container.TemplateLayer);
-            //Add(_editor.Container.WorkingLayer);
+            InitializeStyles(_editor.Project);
+            Add(_editor.Project);
         }
 
         #region Debug
@@ -108,6 +106,58 @@ namespace Test2d
             }
 
             _invalidateStyles();
+        }
+
+        private void DocumentsCollectionObserver(
+            object sender,
+            NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    Add(e.NewItems.Cast<Document>());
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    Debug("Documents Replace");
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    Remove(e.OldItems.Cast<Document>());
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    Debug("Documents Replace");
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    Debug("Documents Reset");
+                    break;
+            }
+
+            //_invalidateLayers();
+        }
+        
+         private void ContainersCollectionObserver(
+            object sender,
+            NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    Add(e.NewItems.Cast<Container>());
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    Debug("Containers Replace");
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    Remove(e.OldItems.Cast<Container>());
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    Debug("Containers Replace");
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    Debug("Containers Reset");
+                    break;
+            }
+
+            //_invalidateLayers();
         }
 
         private void LayersCollectionObserver(
@@ -278,12 +328,12 @@ namespace Test2d
 
         #region Styles
 
-        private void InitializeStyles(Container container)
+        private void InitializeStyles(Project project)
         {
-            (container.StyleGroups as ObservableCollection<ShapeStyleGroup>)
+            (project.StyleGroups as ObservableCollection<ShapeStyleGroup>)
                 .CollectionChanged += StyleGroupsCollectionObserver;
 
-            foreach (var sg in container.StyleGroups)
+            foreach (var sg in project.StyleGroups)
             {
                 Add(sg);
             }
@@ -369,14 +419,49 @@ namespace Test2d
 
         #endregion
 
-        #region Layers
+        #region Project
 
-        private void InitializeLayers(Container container)
+        private void Add(Project project)
         {
+            Debug("Add Project: " + project.Name);
+            (project.Documents as ObservableCollection<Document>)
+                .CollectionChanged += DocumentsCollectionObserver;
+            
+            foreach (var document in project.Documents)
+            {
+                Add(document);
+            }
+            
+            (project.Templates as ObservableCollection<Container>)
+                .CollectionChanged += ContainersCollectionObserver;
+            
+            foreach (var template in project.Templates)
+            {
+                Add(template);
+            }
+        }
+        
+        private void Add(Document document)
+        {
+            Debug("Add Document: " + document.Name);
+            (document.Containers as ObservableCollection<Container>)
+                .CollectionChanged += ContainersCollectionObserver;
+            
+            foreach (var container in document.Containers)
+            {
+                Add(container);
+            }
+        }
+        
+        private void Add(Container container)
+        {
+            Debug("Add Container: " + container.Name);
             Add(container.Layers);
 
             (container.Layers as ObservableCollection<Layer>)
                 .CollectionChanged += LayersCollectionObserver;
+
+            //Add(container.WorkingLayer);
         }
 
         private void Add(Layer layer)
@@ -386,11 +471,86 @@ namespace Test2d
             InitializeShapes(layer);
         }
 
+        private void Remove(Project project)
+        {
+            Debug("Remove Project: " + project.Name);
+            (project.Documents as ObservableCollection<Document>)
+                .CollectionChanged -= DocumentsCollectionObserver;
+            
+            foreach (var document in project.Documents)
+            {
+                Remove(document);
+            }
+            
+            (project.Templates as ObservableCollection<Container>)
+                .CollectionChanged -= ContainersCollectionObserver;
+            
+            foreach (var template in project.Templates)
+            {
+                Remove(template);
+            }
+        }
+        
+        private void Remove(Document document)
+        {
+            Debug("Remove Document: " + document.Name);
+            (document.Containers as ObservableCollection<Container>)
+                .CollectionChanged -= ContainersCollectionObserver;
+            
+            foreach (var container in document.Containers)
+            {
+                Remove(container);
+            }
+        }
+        
+        private void Remove(Container container)
+        {
+            Debug("Remove Container: " + container.Name);
+            Add(container.Layers);
+
+            (container.Layers as ObservableCollection<Layer>)
+                .CollectionChanged -= LayersCollectionObserver;
+
+            //Remove(container.WorkingLayer);
+        }
+  
         private void Remove(Layer layer)
         {
             layer.PropertyChanged -= LayerObserver;
             Debug("Remove Layer: " + layer.Name);
             Remove(layer.Shapes);
+        }
+
+        private void Add(IEnumerable<Document> documents)
+        {
+            foreach (var document in documents)
+            {
+                Add(document);
+            }
+        }
+        
+        private void Remove(IEnumerable<Document> documents)
+        {
+            foreach (var document in documents)
+            {
+                Remove(document);
+            }
+        }
+        
+        private void Add(IEnumerable<Container> containers)
+        {
+            foreach (var container in containers)
+            {
+                Add(container);
+            }
+        }
+        
+        private void Remove(IEnumerable<Container> containers)
+        {
+            foreach (var container in containers)
+            {
+                Remove(container);
+            }
         }
 
         private void Add(IEnumerable<Layer> layers)

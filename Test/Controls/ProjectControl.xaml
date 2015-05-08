@@ -1,0 +1,113 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Test.Controls.ProjectControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:converters="clr-namespace:Test.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="110">
+    <UserControl.Resources>
+        <ContextMenu x:Key="ContainerContextMenu" 
+                     DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+            <MenuItem Header="Te_mplate" 
+                      Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                      DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Editor.Project.Templates}">
+                <MenuItem.Resources>
+                    <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
+                </MenuItem.Resources>
+                <MenuItem.ItemContainerStyle>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Header" Value="{Binding Name}"/>
+                        <Setter Property="Command" Value="{Binding Path=Tag.Commands.ApplyTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}, FallbackValue={x:Null}}"/>
+                        <Setter Property="CommandParameter" Value="{Binding}"/>
+                        <Setter Property="IsCheckable" Value="True"/>
+                        <Setter Property="IsChecked" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Value="True">
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource ObjectEqualityConverter}">  
+                                        <Binding Path="Tag.Editor.Project.CurrentContainer.Template" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}"/>  
+                                        <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>  
+                                    </MultiBinding> 
+                                </DataTrigger.Binding>
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.ItemContainerStyle>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="Insert Container Bef_ore" InputGestureText="" Command="{Binding DataContext.Commands.InsertContainerBeforeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+            <MenuItem Header="Insert Container Aft_er" InputGestureText="" Command="{Binding DataContext.Commands.InsertContainerAfterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+            <Separator/>
+            <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{Binding DataContext.Commands.CutContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+            <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{Binding DataContext.Commands.CopyContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+            <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{Binding DataContext.Commands.PasteContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+            <Separator/>
+            <MenuItem Header="_Delete" InputGestureText="Del" Command="{Binding DataContext.Commands.DeleteContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        </ContextMenu>
+        <ContextMenu x:Key="DocumentContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+            <MenuItem Header="_Add Container" InputGestureText="Ctrl+N" Command="{Binding DataContext.Commands.AddContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+            <Separator/>
+            <MenuItem Header="Insert Document Bef_ore" InputGestureText="" Command="{Binding DataContext.Commands.InsertDocumentBeforeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+            <MenuItem Header="Insert Document Aft_er" InputGestureText="" Command="{Binding DataContext.Commands.InsertDocumentAfterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+            <Separator/>
+            <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{Binding DataContext.Commands.CutDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+            <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{Binding DataContext.Commands.CopyDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+            <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{Binding DataContext.Commands.PasteDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+            <Separator/>
+            <MenuItem Header="_Delete" InputGestureText="Del" Command="{Binding DataContext.Commands.DeleteDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        </ContextMenu>
+        <ContextMenu x:Key="PojectContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+            <MenuItem Header="_Add Document" InputGestureText="Ctrl+N" Command="{Binding DataContext.Commands.AddDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        </ContextMenu>
+    </UserControl.Resources>
+    <Grid>
+        <TreeView x:Name="projectTreeView" ItemsSource="{Binding Editor.Project.Documents}" BorderBrush="{x:Null}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedItemChanged">
+                    <i:InvokeCommandAction Command="{Binding Commands.SelectedItemChangedCommand}" CommandParameter="{Binding ElementName=projectTreeView, Path=SelectedItem}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <TreeView.InputBindings>
+                <KeyBinding Command="{Binding Commands.AddProjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{Binding Commands.CutProjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+X"/>
+                <KeyBinding Command="{Binding Commands.CopyProjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+C"/>
+                <KeyBinding Command="{Binding Commands.PasteProjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+V"/>
+                <KeyBinding Command="{Binding Commands.DeleteProjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Del"/>
+            </TreeView.InputBindings>
+            <TreeView.Style>
+                <Style TargetType="TreeView">
+                    <Setter Property="ContextMenu" Value="{StaticResource PojectContextMenu}"/>
+                </Style>
+            </TreeView.Style>
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="TreeViewItem">
+                    <Setter Property="IsExpanded" Value="True"/>
+                    <Setter Property="ContextMenu" Value="{StaticResource DocumentContextMenu}"/>
+                    <EventSetter Event="TreeViewItem.MouseRightButtonDown" Handler="TreeViewItem_MouseRightButtonDown"/>
+                </Style>
+            </TreeView.ItemContainerStyle>
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Containers}">
+                    <HierarchicalDataTemplate.ItemContainerStyle>
+                        <Style TargetType="TreeViewItem">
+                            <Setter Property="IsExpanded" Value="False"/>
+                            <Setter Property="ContextMenu" Value="{StaticResource ContainerContextMenu}"/>
+                            <EventSetter Event="TreeViewItem.MouseRightButtonDown" Handler="TreeViewItem_MouseRightButtonDown"/>
+                        </Style>
+                    </HierarchicalDataTemplate.ItemContainerStyle>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" FontWeight="Normal"/>
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                    <TextBlock Text="{Binding Name}" FontWeight="Normal"/>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </Grid>
+</UserControl>

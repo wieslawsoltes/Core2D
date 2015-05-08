@@ -1,6 +1,6 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<UserControl x:Class="Test.Controls.LayersControl"
+<UserControl x:Class="Test.Controls.TemplatesControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,32 +14,21 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0" Margin="2,0,2,0">
-            <MenuItem Command="{Binding Commands.AddLayerCommand}" Header="_+"/>
-            <MenuItem Command="{Binding Commands.RemoveLayerCommand}" Header="_-"/>
+            <MenuItem Command="{Binding Commands.EditTemplateCommand}" Header="EDIT"/>
+            <MenuItem Command="{Binding Commands.AddTemplateCommand}" Header="_+"/>
+            <MenuItem Command="{Binding Commands.RemoveTemplateCommand}" Header="_-"/>
         </Menu>
-        <ListBox ItemsSource="{Binding Editor.Project.CurrentContainer.Layers}" 
-                 SelectedItem="{Binding Editor.Project.CurrentContainer.CurrentLayer}" 
+        <ListBox ItemsSource="{Binding Editor.Project.Templates}" 
+                 SelectedItem="{Binding Editor.Project.CurrentTemplate}" 
                  BorderBrush="{x:Null}"
                  Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="25"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <CheckBox IsChecked="{Binding IsVisible}" 
-                                  Margin="0,5,0,5"
-                                  Content="" 
-                                  VerticalAlignment="Stretch"
-                                  HorizontalAlignment="Stretch"
-                                  Grid.Column="0"/>
-                        <TextBlock Text="{Binding Name}" Margin="0,5,0,5" Grid.Column="1"/>
-                    </Grid>
+                    <TextBlock Text="{Binding Name}" Margin="0,5,0,5"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel DataContext="{Binding Editor.Project.CurrentContainer.CurrentLayer}" Grid.Row="2" Margin="2">
+        <StackPanel DataContext="{Binding Editor.Project.CurrentTemplate}" Grid.Row="2" Margin="2">
             <StackPanel.Style>
                 <Style TargetType="StackPanel">
                     <Setter Property="Visibility" Value="Visible"/>

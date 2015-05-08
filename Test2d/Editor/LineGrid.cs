@@ -54,15 +54,14 @@ namespace Test2d
             }
         }
 
-        public static XGroup Create(ShapeStyle style, Settings settings)
+        public static IList<BaseShape> Create(ShapeStyle style, Settings settings, BaseShape point)
         {
             double sx = settings.Origin.X + settings.CellSize.Width;
             double sy = settings.Origin.Y + settings.CellSize.Height;
             double ex = settings.Origin.X + settings.GridSize.Width;
             double ey = settings.Origin.Y + settings.GridSize.Height;
 
-            var g = XGroup.Create("grid");
-            g.State &= ~ShapeState.Printable;
+            var shapes = new List<BaseShape>();
 
             for (double x = sx; x < ex; x += settings.CellSize.Width)
             {
@@ -71,9 +70,9 @@ namespace Test2d
                     settings.Origin.Y,
                     x,
                     ey,
-                    style, null);
+                    style, point);
                 line.State &= ~ShapeState.Printable;
-                g.Shapes.Add(line);
+                shapes.Add(line);
             }
 
             for (double y = sy; y < ey; y += settings.CellSize.Height)
@@ -83,12 +82,12 @@ namespace Test2d
                     y,
                     ex,
                     y,
-                    style, null);
+                    style, point);
                 line.State &= ~ShapeState.Printable;
-                g.Shapes.Add(line);
+                shapes.Add(line);
             }
 
-            return g;
+            return shapes;
         }
     }
 }

@@ -266,7 +266,7 @@ namespace Test.Windows
             {
                 Filter = "Json (*.json)|*.json|All (*.*)|*.*",
                 FilterIndex = 0,
-                FileName = "container"
+                FileName = "project"
             };
 
             if (dlg.ShowDialog() == true)
@@ -281,7 +281,7 @@ namespace Test.Windows
             {
                 Filter = "Pdf (*.pdf)|*.pdf|Emf (*.emf)|*.emf|Dxf AutoCAD 2000 (*.dxf)|*.dxf|Dxf R10 (*.dxf)|*.dxf|All (*.*)|*.*",
                 FilterIndex = 0,
-                FileName = "container"
+                FileName = "project"
             };
 
             if (dlg.ShowDialog() == true)

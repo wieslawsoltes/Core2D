@@ -219,18 +219,24 @@ namespace TestDXF
                 });
             }
 
-            if (container.TemplateLayer.IsVisible)
+            if (container.Template != null)
             {
-                layers.Items.Add(new DxfLayer(_version, NextHandle())
+                foreach (var layer in container.Template.Layers) 
                 {
-                    Name = container.TemplateLayer.Name,
-                    LayerStandardFlags = DxfLayerStandardFlags.Default,
-                    Color = DxfDefaultColors.Default.ToDxfColor(),
-                    LineType = "Continuous",
-                    PlottingFlag = true,
-                    LineWeight = DxfLineWeight.LnWtByLwDefault,
-                    PlotStyleNameHandle = "0"
-                });
+                    if (layer.IsVisible)
+                    {
+                        layers.Items.Add(new DxfLayer(_version, NextHandle())
+                        {
+                            Name = layer.Name,
+                            LayerStandardFlags = DxfLayerStandardFlags.Default,
+                            Color = DxfDefaultColors.Default.ToDxfColor(),
+                            LineType = "Continuous",
+                            PlottingFlag = true,
+                            LineWeight = DxfLineWeight.LnWtByLwDefault,
+                            PlotStyleNameHandle = "0"
+                        });
+                    }
+                }
             }
             
             foreach (var layer in container.Layers) 
@@ -849,9 +855,15 @@ namespace TestDXF
 
             // TODO: Add user entities.
 
-            if (container.TemplateLayer.IsVisible)
+            if (container.Template != null)
             {
-                DrawShapes(file.Entities, container.TemplateLayer.Shapes, container.TemplateLayer.Name);
+                foreach (var layer in container.Template.Layers) 
+                {
+                    if (layer.IsVisible)
+                    {
+                        DrawShapes(file.Entities, layer.Shapes, layer.Name);
+                    }
+                }
             }
             
             foreach (var layer in container.Layers) 

@@ -154,12 +154,6 @@ namespace TestWinForms
 
         private void HandlePanelLayerInvalidation(ContainerPanel panel)
         {
-            (DataContext as EditorContext).Editor.Container.TemplateLayer.InvalidateLayer +=
-                (sender, e) =>
-                {
-                    panel.Invalidate();
-                };
-
             foreach (var layer in (DataContext as EditorContext).Editor.Container.Layers)
             {
                 layer.InvalidateLayer +=
@@ -262,7 +256,7 @@ namespace TestWinForms
         {
             saveFileDialog1.Filter = "Json (*.json)|*.json|All (*.*)|*.*";
             saveFileDialog1.FilterIndex = 0;
-            saveFileDialog1.FileName = "container";
+            saveFileDialog1.FileName = "project";
             saveFileDialog1.ShowDialog(this);
         }
 
@@ -270,7 +264,7 @@ namespace TestWinForms
         {
             saveFileDialog2.Filter = "Pdf (*.pdf)|*.pdf|Emf (*.emf)|*.emf|Dxf AutoCAD 2000 (*.dxf)|*.dxf|Dxf R10 (*.dxf)|*.dxf|All (*.*)|*.*";
             saveFileDialog2.FilterIndex = 0;
-            saveFileDialog2.FileName = "container";
+            saveFileDialog2.FileName = "project";
             saveFileDialog2.ShowDialog(this);
         }
     }

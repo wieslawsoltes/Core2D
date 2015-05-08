@@ -7,57 +7,29 @@ using System.Linq;
 
 namespace Test2d
 {
-    public class Container : ObservableObject
+    public class Project : ObservableObject
     {
-        private double _width;
-        private double _height;
-        private IList<KeyValuePair<string, ShapeProperty>> _database;
+        private string _name;
         private IList<ShapeStyleGroup> _styleGroups;
         private ShapeStyleGroup _currentStyleGroup;
         private IList<GroupLibrary> _groupLibraries;
         private GroupLibrary _currentGroupLibrary;
+        private IList<Container> _templates;
+        private Container _currentTemplate;
         private BaseShape _pointShape;
-        private IList<Layer> _layers;
-        private Layer _currentLayer;
-        private Layer _templateLayer;
-        private Layer _workingLayer;
-        private BaseShape _currentShape;
+        private IList<Document> _documents;
+        private Document _currentDocument;
+        private Container _currentContainer;
 
-        public double Width
+        public string Name
         {
-            get { return _width; }
+            get { return _name; }
             set
             {
-                if (value != _width)
+                if (value != _name)
                 {
-                    _width = value;
-                    Notify("Width");
-                }
-            }
-        }
-
-        public double Height
-        {
-            get { return _height; }
-            set
-            {
-                if (value != _height)
-                {
-                    _height = value;
-                    Notify("Height");
-                }
-            }
-        }
-
-        public IList<KeyValuePair<string, ShapeProperty>> Database
-        {
-            get { return _database; }
-            set
-            {
-                if (value != _database)
-                {
-                    _database = value;
-                    Notify("Database");
+                    _name = value;
+                    Notify("Name");
                 }
             }
         }
@@ -114,6 +86,32 @@ namespace Test2d
             }
         }
 
+        public IList<Container> Templates
+        {
+            get { return _templates; }
+            set
+            {
+                if (value != _templates)
+                {
+                    _templates = value;
+                    Notify("Templates");
+                }
+            }
+        }
+
+        public Container CurrentTemplate
+        {
+            get { return _currentTemplate; }
+            set
+            {
+                if (value != _currentTemplate)
+                {
+                    _currentTemplate = value;
+                    Notify("CurrentTemplate");
+                }
+            }
+        }
+
         public BaseShape PointShape
         {
             get { return _pointShape; }
@@ -127,115 +125,60 @@ namespace Test2d
             }
         }
 
-        public IList<Layer> Layers
+        public IList<Document> Documents
         {
-            get { return _layers; }
+            get { return _documents; }
             set
             {
-                if (value != _layers)
+                if (value != _documents)
                 {
-                    _layers = value;
-                    Notify("Layers");
+                    _documents = value;
+                    Notify("Documents");
                 }
             }
         }
 
-        public Layer CurrentLayer
+        public Document CurrentDocument
         {
-            get { return _currentLayer; }
+            get { return _currentDocument; }
             set
             {
-                if (value != _currentLayer)
+                if (value != _currentDocument)
                 {
-                    _currentLayer = value;
-                    Notify("CurrentLayer");
+                    _currentDocument = value;
+                    Notify("CurrentDocument");
                 }
             }
         }
 
-        public Layer TemplateLayer
+        public Container CurrentContainer
         {
-            get { return _templateLayer; }
+            get { return _currentContainer; }
             set
             {
-                if (value != _templateLayer)
+                if (value != _currentContainer)
                 {
-                    _templateLayer = value;
-                    Notify("TemplateLayer");
+                    _currentContainer = value;
+                    Notify("CurrentContainer");
                 }
             }
         }
-
-        public Layer WorkingLayer
+        
+        public static Project Create(string name = "Project")
         {
-            get { return _workingLayer; }
-            set
+            var p = new Project()
             {
-                if (value != _workingLayer)
-                {
-                    _workingLayer = value;
-                    Notify("WorkingLayer");
-                }
-            }
-        }
-
-        public BaseShape CurrentShape
-        {
-            get { return _currentShape; }
-            set
-            {
-                if (value != _currentShape)
-                {
-                    _currentShape = value;
-                    Notify("CurrentShape");
-                }
-            }
-        }
-
-        public void Clear()
-        {
-            foreach (var layer in Layers)
-            {
-                layer.Shapes.Clear();
-            }
-            WorkingLayer.Shapes.Clear();
-        }
-
-        public void Invalidate()
-        {
-            TemplateLayer.Invalidate();
-            foreach (var layer in Layers)
-            {
-                layer.Invalidate();
-            }
-            WorkingLayer.Invalidate();
-        }
-
-        public static Container Create(double width = 810, double height = 600, bool grid = true)
-        {
-            var c = new Container()
-            {
-                Width = width,
-                Height = height,
+                Name = name,
+                StyleGroups = new ObservableCollection<ShapeStyleGroup>(),
                 GroupLibraries = new ObservableCollection<GroupLibrary>(),
-                Layers = new ObservableCollection<Layer>(),
-                StyleGroups = new ObservableCollection<ShapeStyleGroup>()
+                Templates = new ObservableCollection<Container>(),
+                Documents = new ObservableCollection<Document>(),
             };
-
-            c.Layers.Add(Layer.Create("Layer1"));
-            c.Layers.Add(Layer.Create("Layer2"));
-            c.Layers.Add(Layer.Create("Layer3"));
-            c.Layers.Add(Layer.Create("Layer4"));
-
-            c.CurrentLayer = c.Layers.FirstOrDefault();
-
-            c.TemplateLayer = Layer.Create("Template");
-            c.WorkingLayer = Layer.Create("Working");
 
             // default group library
             var gld = GroupLibrary.Create("Default");
-            c.GroupLibraries.Add(gld);
-            c.CurrentGroupLibrary = c.GroupLibraries.FirstOrDefault();
+            p.GroupLibraries.Add(gld);
+            p.CurrentGroupLibrary = p.GroupLibraries.FirstOrDefault();
 
             // default styles group
             var sgd = ShapeStyleGroup.Create("Default");
@@ -246,8 +189,8 @@ namespace Test2d
             sgd.Styles.Add(ShapeStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
             sgd.CurrentStyle = sgd.Styles.FirstOrDefault();
 
-            c.StyleGroups.Add(sgd);
-            c.CurrentStyleGroup = c.StyleGroups.FirstOrDefault();
+            p.StyleGroups.Add(sgd);
+            p.CurrentStyleGroup = p.StyleGroups.FirstOrDefault();
 
             // dashed lines styles group
             var sgdl = ShapeStyleGroup.Create("Lines");
@@ -278,7 +221,7 @@ namespace Test2d
             sgdl.Styles.Add(dashDotDot);
 
             sgdl.CurrentStyle = sgdl.Styles.FirstOrDefault();
-            c.StyleGroups.Add(sgdl);
+            p.StyleGroups.Add(sgdl);
 
             // template styles group
             var sgt = ShapeStyleGroup.Create("Template");
@@ -286,47 +229,40 @@ namespace Test2d
             var gs = ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.0);
             sgt.Styles.Add(pss);
             sgt.Styles.Add(gs);
-            c.StyleGroups.Add(sgt);
+            p.StyleGroups.Add(sgt);
             sgt.CurrentStyle = sgt.Styles.FirstOrDefault();
 
-            CrossPointShape(c, pss);
+            CrossPointShape(p, pss);
 
-            if (grid)
-            {
-                var settings = LineGrid.Settings.Create(0, 0, width, height, 30, 30);
-                var g = LineGrid.Create(gs, settings);
-                c.TemplateLayer.Shapes.Add(g);
-            }
-
-            return c;
+            return p;
         }
 
-        public static void EllipsePointShape(Container c, ShapeStyle pss)
+        public static void EllipsePointShape(Project p, ShapeStyle pss)
         {
-            c.PointShape = XEllipse.Create(-4, -4, 4, 4, pss, null, false);
+            p.PointShape = XEllipse.Create(-4, -4, 4, 4, pss, null, false);
         }
 
-        public static void FilledEllipsePointShape(Container c, ShapeStyle pss)
+        public static void FilledEllipsePointShape(Project p, ShapeStyle pss)
         {
-            c.PointShape = XEllipse.Create(-3, -3, 3, 3, pss, null, true);
+            p.PointShape = XEllipse.Create(-3, -3, 3, 3, pss, null, true);
         }
 
-        public static void RectanglePointShape(Container c, ShapeStyle pss)
+        public static void RectanglePointShape(Project p, ShapeStyle pss)
         {
-            c.PointShape = XRectangle.Create(-4, -4, 4, 4, pss, null, false);
+            p.PointShape = XRectangle.Create(-4, -4, 4, 4, pss, null, false);
         }
 
-        public static void FilledRectanglePointShape(Container c, ShapeStyle pss)
+        public static void FilledRectanglePointShape(Project p, ShapeStyle pss)
         {
-            c.PointShape = XRectangle.Create(-3, -3, 3, 3, pss, null, true);
+            p.PointShape = XRectangle.Create(-3, -3, 3, 3, pss, null, true);
         }
 
-        public static void CrossPointShape(Container c, ShapeStyle pss)
+        public static void CrossPointShape(Project p, ShapeStyle pss)
         {
             var g = XGroup.Create("PointShape");
             g.Shapes.Add(XLine.Create(-4, 0, 4, 0, pss, null));
             g.Shapes.Add(XLine.Create(0, -4, 0, 4, pss, null));
-            c.PointShape = g;
+            p.PointShape = g;
         }
     }
 }

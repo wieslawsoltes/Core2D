@@ -12,7 +12,7 @@ namespace Test2d
 {
     public class Editor : ObservableObject
     {
-        private Container _container;
+        private Project _project;
         private IRenderer _renderer;
         private BaseShape _shape;
         private Tool _currentTool = Tool.Selection;
@@ -29,16 +29,24 @@ namespace Test2d
         private double _startY;
         private double _hitTreshold = 6.0;
         private bool _tryToConnect = true;
-        
+
         public Container Container
         {
-            get { return _container; }
+            get 
+            {
+                return Project.CurrentContainer;
+            }
+        }
+
+        public Project Project
+        {
+            get { return _project; }
             set
             {
-                if (value != _container)
+                if (value != _project)
                 {
-                    _container = value;
-                    Notify("Container");
+                    _project = value;
+                    Notify("Project");
                 }
             }
         }
@@ -214,7 +222,7 @@ namespace Test2d
 
         public Func<string> GetImagePath { get; set; }
 
-        public static Editor Create(Container container, IRenderer renderer)
+        public static Editor Create(Project project, IRenderer renderer)
         {
             var editor = new Editor()
             {
@@ -238,8 +246,8 @@ namespace Test2d
                     LineStyle.Create(
                         ArrowStyle.Create(), 
                         ArrowStyle.Create()));
-       
-            editor.Container = container;
+
+            editor.Project = project;
             editor.Renderer = renderer;
             
             if (editor.EnableObserver)
@@ -491,21 +499,21 @@ namespace Test2d
 
         public void RemoveCurrentGroupLibrary()
         {
-            var gl = Container.CurrentGroupLibrary;
+            var gl = Project.CurrentGroupLibrary;
             if (gl != null)
             {
-                Container.GroupLibraries.Remove(gl);
-                Container.CurrentGroupLibrary = Container.GroupLibraries.FirstOrDefault();
+                Project.GroupLibraries.Remove(gl);
+                Project.CurrentGroupLibrary = Project.GroupLibraries.FirstOrDefault();
             }
         }
 
         public void RemoveCurrentGroup()
         {
-            var group = Container.CurrentGroupLibrary.CurrentGroup;
+            var group = Project.CurrentGroupLibrary.CurrentGroup;
             if (group != null)
             {
-                Container.CurrentGroupLibrary.Groups.Remove(group);
-                Container.CurrentGroupLibrary.CurrentGroup = Container.CurrentGroupLibrary.Groups.FirstOrDefault();
+                Project.CurrentGroupLibrary.Groups.Remove(group);
+                Project.CurrentGroupLibrary.CurrentGroup = Project.CurrentGroupLibrary.Groups.FirstOrDefault();
             }
         }
 
@@ -533,29 +541,29 @@ namespace Test2d
 
         public void RemoveCurrentStyleGroup()
         {
-            var sg = Container.CurrentStyleGroup;
+            var sg = Project.CurrentStyleGroup;
             if (sg != null)
             {
-                Container.StyleGroups.Remove(sg);
-                Container.CurrentStyleGroup = Container.StyleGroups.FirstOrDefault();
+                Project.StyleGroups.Remove(sg);
+                Project.CurrentStyleGroup = Project.StyleGroups.FirstOrDefault();
             }
         }
 
         public void RemoveCurrentStyle()
         {
-            var style = Container.CurrentStyleGroup.CurrentStyle;
+            var style = Project.CurrentStyleGroup.CurrentStyle;
             if (style != null)
             {
-                Container.CurrentStyleGroup.Styles.Remove(style);
-                Container.CurrentStyleGroup.CurrentStyle = Container.CurrentStyleGroup.Styles.FirstOrDefault();
+                Project.CurrentStyleGroup.Styles.Remove(style);
+                Project.CurrentStyleGroup.CurrentStyle = Project.CurrentStyleGroup.Styles.FirstOrDefault();
             }
         }
 
-        public void Load(Container container)
+        public void Load(Project project)
         {
             Renderer.ClearCache();
 
-            Container = container;
+            Project = project;
             Container.Invalidate();
 
             if (EnableObserver)
@@ -636,15 +644,15 @@ namespace Test2d
         {
             if (_renderer.SelectedShape != null)
             {
-                _container.CurrentLayer.Shapes.Remove(_renderer.SelectedShape);
-                _container.CurrentLayer.Invalidate();
+                Container.CurrentLayer.Shapes.Remove(_renderer.SelectedShape);
+                Container.CurrentLayer.Invalidate();
 
                 _renderer.SelectedShape = null;
             }
 
             if (_renderer.SelectedShapes != null)
             {
-                var layer = _container.CurrentLayer;
+                var layer = Container.CurrentLayer;
 
                 foreach (var shape in _renderer.SelectedShapes)
                 {
@@ -723,7 +731,7 @@ namespace Test2d
 
         public void TryToConnectStart(XLine line, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 line.Start = result as XPoint;
@@ -732,7 +740,7 @@ namespace Test2d
 
         public void TryToConnectEnd(XLine line, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 line.End = result as XPoint;
@@ -741,7 +749,7 @@ namespace Test2d
 
         public void TryToConnectTopLeft(XRectangle rectangle, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 rectangle.TopLeft = result as XPoint;
@@ -750,7 +758,7 @@ namespace Test2d
 
         public void TryToConnectBottomRight(XRectangle rectangle, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 rectangle.BottomRight = result as XPoint;
@@ -759,7 +767,7 @@ namespace Test2d
 
         public void TryToConnectTopLeft(XEllipse ellipse, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 ellipse.TopLeft = result as XPoint;
@@ -768,7 +776,7 @@ namespace Test2d
 
         public void TryToConnectBottomRight(XEllipse ellipse, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 ellipse.BottomRight = result as XPoint;
@@ -777,7 +785,7 @@ namespace Test2d
 
         public void TryToConnectPoint1(XArc arc, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 arc.Point1 = result as XPoint;
@@ -786,7 +794,7 @@ namespace Test2d
 
         public void TryToConnectPoint2(XArc arc, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 arc.Point2 = result as XPoint;
@@ -795,7 +803,7 @@ namespace Test2d
 
         public void TryToConnectPoint1(XBezier bezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 bezier.Point1 = result as XPoint;
@@ -804,7 +812,7 @@ namespace Test2d
 
         public void TryToConnectPoint2(XBezier bezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 bezier.Point2 = result as XPoint;
@@ -813,7 +821,7 @@ namespace Test2d
 
         public void TryToConnectPoint3(XBezier bezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 bezier.Point3 = result as XPoint;
@@ -822,7 +830,7 @@ namespace Test2d
 
         public void TryToConnectPoint4(XBezier bezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 bezier.Point4 = result as XPoint;
@@ -831,7 +839,7 @@ namespace Test2d
 
         public void TryToConnectPoint1(XQBezier qbezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 qbezier.Point1 = result as XPoint;
@@ -840,7 +848,7 @@ namespace Test2d
 
         public void TryToConnectPoint2(XQBezier qbezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 qbezier.Point2 = result as XPoint;
@@ -849,7 +857,7 @@ namespace Test2d
 
         public void TryToConnectPoint3(XQBezier qbezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 qbezier.Point3 = result as XPoint;
@@ -858,7 +866,7 @@ namespace Test2d
 
         public void TryToConnectTopLeft(XText text, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 text.TopLeft = result as XPoint;
@@ -867,7 +875,7 @@ namespace Test2d
 
         public void TryToConnectBottomRight(XText text, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 text.BottomRight = result as XPoint;
@@ -876,7 +884,7 @@ namespace Test2d
 
         public void TryToConnectTopLeft(XImage image, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 image.TopLeft = result as XPoint;
@@ -885,7 +893,7 @@ namespace Test2d
 
         public void TryToConnectBottomRight(XImage image, double x, double y)
         {
-            var result = ShapeBounds.HitTest(_container, new Vector2(x, y), _hitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
             if (result != null && result is XPoint)
             {
                 image.BottomRight = result as XPoint;
@@ -894,42 +902,47 @@ namespace Test2d
 
         public bool IsLeftDownAvailable()
         {
-            return Container.CurrentLayer != null
+            return Container != null
+                && Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
-                && Container.CurrentStyleGroup != null
-                && Container.CurrentStyleGroup.CurrentStyle != null;
+                && Project.CurrentStyleGroup != null
+                && Project.CurrentStyleGroup.CurrentStyle != null;
         }
 
         public bool IsLeftUpAvailable()
         {
-            return Container.CurrentLayer != null
+            return Container != null
+                && Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
-                && Container.CurrentStyleGroup != null
-                && Container.CurrentStyleGroup.CurrentStyle != null;
+                && Project.CurrentStyleGroup != null
+                && Project.CurrentStyleGroup.CurrentStyle != null;
         }
         
         public bool IsRightDownAvailable()
         {
-            return Container.CurrentLayer != null
+            return Container != null
+                && Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
-                && Container.CurrentStyleGroup != null
-                && Container.CurrentStyleGroup.CurrentStyle != null;
+                && Project.CurrentStyleGroup != null
+                && Project.CurrentStyleGroup.CurrentStyle != null;
         }
         
         public bool IsRightUpAvailable()
         {
-            return Container.CurrentLayer != null
+            return Container != null
+                && Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
-                && Container.CurrentStyleGroup != null
-                && Container.CurrentStyleGroup.CurrentStyle != null;
+                && Project.CurrentStyleGroup != null
+                && Project.CurrentStyleGroup.CurrentStyle != null;
         }
 
         public bool IsMoveAvailable()
         {
-            return Container.CurrentLayer != null
+            return Container != null
+                && Container.CurrentLayer != null
                 && Container.CurrentLayer.IsVisible
-                && Container.CurrentStyleGroup != null
-                && Container.CurrentStyleGroup.CurrentStyle != null;
+                && Project.CurrentStyleGroup != null
+                && Project.CurrentStyleGroup.CurrentStyle != null;
         }
 
         public bool IsSelectionAvailable()
@@ -947,7 +960,7 @@ namespace Test2d
                         if (_renderer.SelectedShape == null
                             && _renderer.SelectedShapes != null)
                         {
-                            var result = ShapeBounds.HitTest(_container, new Vector2(sx, sy), _hitTreshold);
+                            var result = ShapeBounds.HitTest(Container, new Vector2(sx, sy), _hitTreshold);
                             if (result != null)
                             {
                                 _startX = SnapToGrid ? Snap(sx, SnapX) : sx;
@@ -958,7 +971,7 @@ namespace Test2d
                             }
                         }
 
-                        if (TryToSelectShape(_container, sx, sy))
+                        if (TryToSelectShape(Container, sx, sy))
                         {
                             _startX = SnapToGrid ? Snap(sx, SnapX) : sx;
                             _startY = SnapToGrid ? Snap(sy, SnapY) : sy;
@@ -972,8 +985,8 @@ namespace Test2d
                             _selectionStyle,
                             null,
                             true);
-                        _container.WorkingLayer.Shapes.Add(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Add(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
                     }
                     break;
@@ -984,8 +997,8 @@ namespace Test2d
                         {
                             rectangle.BottomRight.X = sx;
                             rectangle.BottomRight.Y = sy;
-                            _container.WorkingLayer.Shapes.Remove(_shape);
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Shapes.Remove(_shape);
+                            Container.WorkingLayer.Invalidate();
                             CurrentState = State.None;
                         }
                     }
@@ -1012,11 +1025,11 @@ namespace Test2d
                         {
                             rectangle.BottomRight.X = sx;
                             rectangle.BottomRight.Y = sy;
-                            _container.WorkingLayer.Shapes.Remove(_shape);
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Shapes.Remove(_shape);
+                            Container.WorkingLayer.Invalidate();
                             CurrentState = State.None;
 
-                            TryToSelectShapes(_container, rectangle);
+                            TryToSelectShapes(Container, rectangle);
                         }
                     }
                     break;
@@ -1029,9 +1042,9 @@ namespace Test2d
             {
                 case State.None:
                     {
-                        _shape = XPoint.Create(sx, sy, _container.PointShape);
-                        _container.CurrentLayer.Shapes.Add(_shape);
-                        _container.Invalidate();
+                        _shape = XPoint.Create(sx, sy, Project.PointShape);
+                        Container.CurrentLayer.Shapes.Add(_shape);
+                        Container.Invalidate();
                     }
                     break;
             }
@@ -1045,14 +1058,14 @@ namespace Test2d
                     {
                         _shape = XLine.Create(
                             sx, sy,
-                            _container.CurrentStyleGroup.CurrentStyle,
-                            _container.PointShape);
+                            Project.CurrentStyleGroup.CurrentStyle,
+                            Project.PointShape);
                         if (_tryToConnect)
                         {
                             TryToConnectStart(_shape as XLine, sx, sy);
                         }
-                        _container.WorkingLayer.Shapes.Add(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Add(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
                     }
                     break;
@@ -1067,9 +1080,9 @@ namespace Test2d
                             {
                                 TryToConnectEnd(_shape as XLine, sx, sy);
                             }
-                            _container.WorkingLayer.Shapes.Remove(_shape);
-                            _container.CurrentLayer.Shapes.Add(_shape);
-                            _container.Invalidate();
+                            Container.WorkingLayer.Shapes.Remove(_shape);
+                            Container.CurrentLayer.Shapes.Add(_shape);
+                            Container.Invalidate();
                             CurrentState = State.None;
                         }
                     }
@@ -1085,15 +1098,15 @@ namespace Test2d
                     {
                         _shape = XRectangle.Create(
                             sx, sy,
-                            _container.CurrentStyleGroup.CurrentStyle,
-                            _container.PointShape,
+                            Project.CurrentStyleGroup.CurrentStyle,
+                            Project.PointShape,
                             DefaultIsFilled);
                         if (_tryToConnect)
                         {
                             TryToConnectTopLeft(_shape as XRectangle, sx, sy);
                         }
-                        _container.WorkingLayer.Shapes.Add(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Add(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
                     }
                     break;
@@ -1108,9 +1121,9 @@ namespace Test2d
                             {
                                 TryToConnectBottomRight(_shape as XRectangle, sx, sy);
                             }
-                            _container.WorkingLayer.Shapes.Remove(_shape);
-                            _container.CurrentLayer.Shapes.Add(_shape);
-                            _container.Invalidate();
+                            Container.WorkingLayer.Shapes.Remove(_shape);
+                            Container.CurrentLayer.Shapes.Add(_shape);
+                            Container.Invalidate();
                             CurrentState = State.None;
                         }
                     }
@@ -1126,15 +1139,15 @@ namespace Test2d
                     {
                         _shape = XEllipse.Create(
                             sx, sy,
-                            _container.CurrentStyleGroup.CurrentStyle,
-                            _container.PointShape,
+                            Project.CurrentStyleGroup.CurrentStyle,
+                            Project.PointShape,
                             DefaultIsFilled);
                         if (_tryToConnect)
                         {
                             TryToConnectTopLeft(_shape as XEllipse, sx, sy);
                         }
-                        _container.WorkingLayer.Shapes.Add(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Add(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
                     }
                     break;
@@ -1149,9 +1162,9 @@ namespace Test2d
                             {
                                 TryToConnectBottomRight(_shape as XEllipse, sx, sy);
                             }
-                            _container.WorkingLayer.Shapes.Remove(_shape);
-                            _container.CurrentLayer.Shapes.Add(_shape);
-                            _container.Invalidate();
+                            Container.WorkingLayer.Shapes.Remove(_shape);
+                            Container.CurrentLayer.Shapes.Add(_shape);
+                            Container.Invalidate();
                             CurrentState = State.None;
                         }
                     }
@@ -1167,15 +1180,15 @@ namespace Test2d
                     {
                         _shape = XArc.Create(
                             sx, sy,
-                            _container.CurrentStyleGroup.CurrentStyle,
-                            _container.PointShape,
+                            Project.CurrentStyleGroup.CurrentStyle,
+                            Project.PointShape,
                             DefaultIsFilled);
                         if (_tryToConnect)
                         {
                             TryToConnectPoint1(_shape as XArc, sx, sy);
                         }
-                        _container.WorkingLayer.Shapes.Add(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Add(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
                     }
                     break;
@@ -1190,9 +1203,9 @@ namespace Test2d
                             {
                                 TryToConnectPoint2(_shape as XArc, sx, sy);
                             }
-                            _container.WorkingLayer.Shapes.Remove(_shape);
-                            _container.CurrentLayer.Shapes.Add(_shape);
-                            _container.Invalidate();
+                            Container.WorkingLayer.Shapes.Remove(_shape);
+                            Container.CurrentLayer.Shapes.Add(_shape);
+                            Container.Invalidate();
                             CurrentState = State.None;
                         }
                     }
@@ -1208,15 +1221,15 @@ namespace Test2d
                     {
                         _shape = XBezier.Create(
                             sx, sy,
-                            _container.CurrentStyleGroup.CurrentStyle,
-                            _container.PointShape,
+                            Project.CurrentStyleGroup.CurrentStyle,
+                            Project.PointShape,
                             DefaultIsFilled);
                         if (_tryToConnect)
                         {
                             TryToConnectPoint1(_shape as XBezier, sx, sy);
                         }
-                        _container.WorkingLayer.Shapes.Add(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Add(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
                     }
                     break;
@@ -1235,7 +1248,7 @@ namespace Test2d
                             {
                                 TryToConnectPoint4(_shape as XBezier, sx, sy);
                             }
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Invalidate();
                             CurrentState = State.Two;
                         }
                     }
@@ -1253,7 +1266,7 @@ namespace Test2d
                             {
                                 TryToConnectPoint3(_shape as XBezier, sx, sy);
                             }
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Invalidate();
                             CurrentState = State.Three;
                         }
                     }
@@ -1269,9 +1282,9 @@ namespace Test2d
                             {
                                 TryToConnectPoint2(_shape as XBezier, sx, sy);
                             }
-                            _container.WorkingLayer.Shapes.Remove(_shape);
-                            _container.CurrentLayer.Shapes.Add(_shape);
-                            _container.Invalidate();
+                            Container.WorkingLayer.Shapes.Remove(_shape);
+                            Container.CurrentLayer.Shapes.Add(_shape);
+                            Container.Invalidate();
                             CurrentState = State.None;
                         }
                     }
@@ -1287,15 +1300,15 @@ namespace Test2d
                     {
                         _shape = XQBezier.Create(
                             sx, sy,
-                            _container.CurrentStyleGroup.CurrentStyle,
-                            _container.PointShape,
+                            Project.CurrentStyleGroup.CurrentStyle,
+                            Project.PointShape,
                             DefaultIsFilled);
                         if (_tryToConnect)
                         {
                             TryToConnectPoint1(_shape as XQBezier, sx, sy);
                         }
-                        _container.WorkingLayer.Shapes.Add(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Add(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
                     }
                     break;
@@ -1312,7 +1325,7 @@ namespace Test2d
                             {
                                 TryToConnectPoint3(_shape as XQBezier, sx, sy);
                             }
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Invalidate();
                             CurrentState = State.Two;
                         }
                     }
@@ -1328,9 +1341,9 @@ namespace Test2d
                             {
                                 TryToConnectPoint2(_shape as XQBezier, sx, sy);
                             }
-                            _container.WorkingLayer.Shapes.Remove(_shape);
-                            _container.CurrentLayer.Shapes.Add(_shape);
-                            _container.Invalidate();
+                            Container.WorkingLayer.Shapes.Remove(_shape);
+                            Container.CurrentLayer.Shapes.Add(_shape);
+                            Container.Invalidate();
                             CurrentState = State.None;
                         }
                     }
@@ -1346,16 +1359,16 @@ namespace Test2d
                     {
                         _shape = XText.Create(
                             sx, sy,
-                            _container.CurrentStyleGroup.CurrentStyle,
-                            _container.PointShape,
+                            Project.CurrentStyleGroup.CurrentStyle,
+                            Project.PointShape,
                             "Text",
                             DefaultIsFilled);
                         if (_tryToConnect)
                         {
                             TryToConnectTopLeft(_shape as XText, sx, sy);
                         }
-                        _container.WorkingLayer.Shapes.Add(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Add(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
                     }
                     break;
@@ -1370,9 +1383,9 @@ namespace Test2d
                             {
                                 TryToConnectBottomRight(_shape as XText, sx, sy);
                             }
-                            _container.WorkingLayer.Shapes.Remove(_shape);
-                            _container.CurrentLayer.Shapes.Add(_shape);
-                            _container.Invalidate();
+                            Container.WorkingLayer.Shapes.Remove(_shape);
+                            Container.CurrentLayer.Shapes.Add(_shape);
+                            Container.Invalidate();
                             CurrentState = State.None;
                         }
                     }
@@ -1394,16 +1407,16 @@ namespace Test2d
 
                         _shape = XImage.Create(
                             sx, sy,
-                            _container.CurrentStyleGroup.CurrentStyle,
-                            _container.PointShape,
+                            Project.CurrentStyleGroup.CurrentStyle,
+                            Project.PointShape,
                             uri,
                             DefaultIsFilled);
                         if (_tryToConnect)
                         {
                             TryToConnectTopLeft(_shape as XImage, sx, sy);
                         }
-                        _container.WorkingLayer.Shapes.Add(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Add(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
                     }
                     break;
@@ -1418,9 +1431,9 @@ namespace Test2d
                             {
                                 TryToConnectBottomRight(_shape as XImage, sx, sy);
                             }
-                            _container.WorkingLayer.Shapes.Remove(_shape);
-                            _container.CurrentLayer.Shapes.Add(_shape);
-                            _container.Invalidate();
+                            Container.WorkingLayer.Shapes.Remove(_shape);
+                            Container.CurrentLayer.Shapes.Add(_shape);
+                            Container.Invalidate();
                             CurrentState = State.None;
                         }
                     }
@@ -1434,7 +1447,7 @@ namespace Test2d
             {
                 case State.None:
                     {
-                        IsContextMenu = TryToSelectShape(_container, sx, sy) ? true : false;
+                        IsContextMenu = TryToSelectShape(Container, sx, sy) ? true : false;
                     }
                     break;
             }
@@ -1457,8 +1470,8 @@ namespace Test2d
                     break;
                 case State.One:
                     {
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Remove(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.None;
                     }
                     break;
@@ -1473,8 +1486,8 @@ namespace Test2d
                     break;
                 case State.One:
                     {
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Remove(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.None;
                     }
                     break;
@@ -1489,8 +1502,8 @@ namespace Test2d
                     break;
                 case State.One:
                     {
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Remove(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.None;
                     }
                     break;
@@ -1505,8 +1518,8 @@ namespace Test2d
                     break;
                 case State.One:
                     {
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Remove(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.None;
                     }
                     break;
@@ -1523,8 +1536,8 @@ namespace Test2d
                 case State.Two:
                 case State.Three:
                     {
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Remove(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.None;
                     }
                     break;
@@ -1540,8 +1553,8 @@ namespace Test2d
                 case State.One:
                 case State.Two:
                     {
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Remove(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.None;
                     }
                     break;
@@ -1556,8 +1569,8 @@ namespace Test2d
                     break;
                 case State.One:
                     {
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Remove(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.None;
                     }
                     break;
@@ -1572,8 +1585,8 @@ namespace Test2d
                     break;
                 case State.One:
                     {
-                        _container.WorkingLayer.Shapes.Remove(_shape);
-                        _container.WorkingLayer.Invalidate();
+                        Container.WorkingLayer.Shapes.Remove(_shape);
+                        Container.WorkingLayer.Invalidate();
                         CurrentState = State.None;
                     }
                     break;
@@ -1599,7 +1612,7 @@ namespace Test2d
                         {
                             rectangle.BottomRight.X = sx;
                             rectangle.BottomRight.Y = sy;
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Invalidate();
                         }
                     }
                     break;
@@ -1628,7 +1641,7 @@ namespace Test2d
                         {
                             line.End.X = sx;
                             line.End.Y = sy;
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Invalidate();
                         }
                     }
                     break;
@@ -1648,7 +1661,7 @@ namespace Test2d
                         {
                             rectangle.BottomRight.X = sx;
                             rectangle.BottomRight.Y = sy;
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Invalidate();
                         }
                     }
                     break;
@@ -1668,7 +1681,7 @@ namespace Test2d
                         {
                             ellipse.BottomRight.X = sx;
                             ellipse.BottomRight.Y = sy;
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Invalidate();
                         }
                     }
                     break;
@@ -1688,7 +1701,7 @@ namespace Test2d
                         {
                             arc.Point2.X = sx;
                             arc.Point2.Y = sy;
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Invalidate();
                         }
                     }
                     break;
@@ -1712,7 +1725,7 @@ namespace Test2d
                             bezier.Point3.Y = sy;
                             bezier.Point4.X = sx;
                             bezier.Point4.Y = sy;
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Invalidate();
                         }
                     }
                     break;
@@ -1725,7 +1738,7 @@ namespace Test2d
                             bezier.Point2.Y = sy;
                             bezier.Point3.X = sx;
                             bezier.Point3.Y = sy;
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Invalidate();
                         }
                     }
                     break;
@@ -1736,7 +1749,7 @@ namespace Test2d
                         {
                             bezier.Point2.X = sx;
                             bezier.Point2.Y = sy;
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Invalidate();
                         }
                     }
                     break;
@@ -1758,7 +1771,7 @@ namespace Test2d
                             qbezier.Point2.Y = sy;
                             qbezier.Point3.X = sx;
                             qbezier.Point3.Y = sy;
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Invalidate();
                         }
                     }
                     break;
@@ -1769,7 +1782,7 @@ namespace Test2d
                         {
                             qbezier.Point2.X = sx;
                             qbezier.Point2.Y = sy;
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Invalidate();
                         }
                     }
                     break;
@@ -1789,7 +1802,7 @@ namespace Test2d
                         {
                             text.BottomRight.X = sx;
                             text.BottomRight.Y = sy;
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Invalidate();
                         }
                     }
                     break;
@@ -1809,7 +1822,7 @@ namespace Test2d
                         {
                             image.BottomRight.X = sx;
                             image.BottomRight.Y = sy;
-                            _container.WorkingLayer.Invalidate();
+                            Container.WorkingLayer.Invalidate();
                         }
                     }
                     break;
