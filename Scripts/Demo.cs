@@ -1,4 +1,4 @@
-void Lines(Container c, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
+void Lines(BaseShape ps, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
 {
     for (int i = 0; i < n; i++)
     {
@@ -6,12 +6,12 @@ void Lines(Container c, int n, double width, double height, ShapeStyle style, La
         double y1 = rand.NextDouble() * height;
         double x2 = rand.NextDouble() * width;
         double y2 = rand.NextDouble() * height;
-        var l = XLine.Create(x1, y1, x2, y2, style, c.PointShape);
+        var l = XLine.Create(x1, y1, x2, y2, style, ps);
         layer.Shapes.Add(l);
     }
 }
 
-void Rectangles(Container c, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
+void Rectangles(BaseShape ps, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
 {
     for (int i = 0; i < n; i++)
     {
@@ -19,12 +19,12 @@ void Rectangles(Container c, int n, double width, double height, ShapeStyle styl
         double y1 = rand.NextDouble() * height;
         double x2 = rand.NextDouble() * width;
         double y2 = rand.NextDouble() * height;
-        var r = XRectangle.Create(x1, y1, x2, y2, style, c.PointShape);
+        var r = XRectangle.Create(x1, y1, x2, y2, style, ps);
         layer.Shapes.Add(r);
     }
 }
 
-void Ellipses(Container c, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
+void Ellipses(BaseShape ps, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
 {
     for (int i = 0; i < n; i++)
     {
@@ -32,12 +32,12 @@ void Ellipses(Container c, int n, double width, double height, ShapeStyle style,
         double y1 = rand.NextDouble() * height;
         double x2 = rand.NextDouble() * width;
         double y2 = rand.NextDouble() * height;
-        var e = XEllipse.Create(x1, y1, x2, y2, style, c.PointShape);
+        var e = XEllipse.Create(x1, y1, x2, y2, style, ps);
         layer.Shapes.Add(e);
     }
 }
 
-void Arcs(Container c, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
+void Arcs(BaseShape ps, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
 {
     for (int i = 0; i < n; i++)
     {
@@ -45,12 +45,12 @@ void Arcs(Container c, int n, double width, double height, ShapeStyle style, Lay
         double y1 = rand.NextDouble() * height;
         double x2 = rand.NextDouble() * width;
         double y2 = rand.NextDouble() * height;
-        var a = XArc.Create(x1, y1, x2, y2, style, c.PointShape);
+        var a = XArc.Create(x1, y1, x2, y2, style, ps);
         layer.Shapes.Add(a);
     }
 }
 
-void Beziers(Container c, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
+void Beziers(BaseShape ps, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
 {
     for (int i = 0; i < n; i++)
     {
@@ -62,12 +62,12 @@ void Beziers(Container c, int n, double width, double height, ShapeStyle style, 
         double y3 = rand.NextDouble() * height;
         double x4 = rand.NextDouble() * width;
         double y4 = rand.NextDouble() * height;
-        var b = XBezier.Create(x1, y1, x2, y2, x3, y3, x4, y4, style, c.PointShape);
+        var b = XBezier.Create(x1, y1, x2, y2, x3, y3, x4, y4, style, ps);
         layer.Shapes.Add(b);
     }
 }
 
-void QBeziers(Container c, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
+void QBeziers(BaseShape ps, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
 {
     for (int i = 0; i < n; i++)
     {
@@ -77,12 +77,12 @@ void QBeziers(Container c, int n, double width, double height, ShapeStyle style,
         double y2 = rand.NextDouble() * height;
         double x3 = rand.NextDouble() * width;
         double y3 = rand.NextDouble() * height;
-        var b = XQBezier.Create(x1, y1, x2, y2, x3, y3, style, c.PointShape);
+        var b = XQBezier.Create(x1, y1, x2, y2, x3, y3, style, ps);
         layer.Shapes.Add(b);
     }
 }
 
-void Texts(Container c, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
+void Texts(BaseShape ps, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
 {
     for (int i = 0; i < n; i++)
     {
@@ -90,52 +90,27 @@ void Texts(Container c, int n, double width, double height, ShapeStyle style, La
         double y1 = rand.NextDouble() * height;
         double x2 = rand.NextDouble() * width;
         double y2 = rand.NextDouble() * height;
-        var t = XText.Create(x1, y1, x2, y2, style, c.PointShape, "Demo");
+        var t = XText.Create(x1, y1, x2, y2, style, ps, "Demo");
         layer.Shapes.Add(t);
     }
 }
 
-Container Create(double width, double height)
-{
-    var c = new Container()
-    {
-        Width = width,
-        Height = height,
-        Layers = new ObservableCollection<Layer>(),
-        StyleGroups = new ObservableCollection<ShapeStyleGroup>()
-    };
-    c.Layers.Add(Layer.Create("Layer1"));
-    c.Layers.Add(Layer.Create("Layer2"));
-    c.Layers.Add(Layer.Create("Layer3"));
-    c.Layers.Add(Layer.Create("Layer4"));
-    c.CurrentLayer = c.Layers.FirstOrDefault();
-    c.TemplateLayer = Layer.Create("Template");
-    c.WorkingLayer = Layer.Create("Working");
-    var sgd = ShapeStyleGroup.Create("Default");
-    sgd.Styles.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
-    sgd.Styles.Add(ShapeStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
-    sgd.Styles.Add(ShapeStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
-    sgd.Styles.Add(ShapeStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
-    sgd.Styles.Add(ShapeStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
-    sgd.CurrentStyle = sgd.Styles.FirstOrDefault();
-    c.StyleGroups.Add(sgd);
-    c.CurrentStyleGroup = c.StyleGroups.FirstOrDefault();
-    return c;
-}
+var p = Context.DefaultProject();
+var ps = p.PointShape;
+var c = p.Documents.FirstOrDefault().Containers.FirstOrDefault();
+var styles = p.StyleGroups.FirstOrDefault().Styles;
 
-var c = Create(810, 600);
 var n = 100;
 var width = c.Width;
 var height = c.Height;
 var rand = new Random(Guid.NewGuid().GetHashCode());
 
-var styles = c.CurrentStyleGroup.Styles;
-Lines(c, n, width, height, styles[0], c.Layers[0], rand);
-Rectangles(c, n, width, height, styles[1], c.Layers[1], rand);
-Ellipses(c, n, width, height, styles[2], c.Layers[1], rand);
-Arcs(c, n, width, height, styles[2], c.Layers[1], rand);
-Beziers(c, n, width, height, styles[3], c.Layers[2], rand);
-QBeziers(c, n, width, height, styles[4], c.Layers[2], rand);
-Texts(c, n, width, height, styles[4], c.Layers[3], rand);
+Lines(ps, n, width, height, styles[0], c.Layers[0], rand);
+Rectangles(ps, n, width, height, styles[1], c.Layers[1], rand);
+Ellipses(ps, n, width, height, styles[2], c.Layers[1], rand);
+Arcs(ps, n, width, height, styles[2], c.Layers[1], rand);
+Beziers(ps, n, width, height, styles[3], c.Layers[2], rand);
+QBeziers(ps, n, width, height, styles[4], c.Layers[2], rand);
+Texts(ps, n, width, height, styles[4], c.Layers[3], rand);
 
-Context.Editor.Load(c);
+Context.Editor.Load(p);
