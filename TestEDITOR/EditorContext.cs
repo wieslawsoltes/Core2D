@@ -733,34 +733,6 @@ namespace TestEDITOR
                 },
                 (item) => IsEditMode());
 
-            _commands.CutContainerCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    // TODO:
-                },
-                (item) => IsEditMode());
-
-            _commands.CopyContainerCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    // TODO:
-                },
-                (item) => IsEditMode());
-
-            _commands.PasteContainerCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    // TODO:
-                },
-                (item) => IsEditMode());
-
-            _commands.DeleteContainerCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    // TODO:
-                },
-                (item) => IsEditMode());
-
             _commands.AddDocumentCommand = new DelegateCommand<object>(
                 (item) =>
                 {
@@ -779,34 +751,6 @@ namespace TestEDITOR
                 (item) => IsEditMode());
 
             _commands.InsertDocumentAfterCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    // TODO:
-                },
-                (item) => IsEditMode());
-
-            _commands.CutDocumentCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    // TODO:
-                },
-                (item) => IsEditMode());
-
-            _commands.CopyDocumentCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    // TODO:
-                },
-                (item) => IsEditMode());
-
-            _commands.PasteDocumentCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    // TODO:
-                },
-                (item) => IsEditMode());
-
-            _commands.DeleteDocumentCommand = new DelegateCommand<object>(
                 (item) =>
                 {
                     // TODO:
@@ -1469,18 +1413,10 @@ namespace TestEDITOR
             (_commands.AddContainerCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.InsertContainerBeforeCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.InsertContainerAfterCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.CutContainerCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.CopyContainerCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.PasteContainerCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.DeleteContainerCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
 
             (_commands.AddDocumentCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.InsertDocumentBeforeCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.InsertDocumentAfterCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.CutDocumentCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.CopyDocumentCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.PasteDocumentCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.DeleteDocumentCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
         }
 
         public void Dispose()

@@ -91,17 +91,9 @@ namespace TestEDITOR
         public ICommand AddContainerCommand { get; set; }
         public ICommand InsertContainerBeforeCommand { get; set; }
         public ICommand InsertContainerAfterCommand { get; set; }
-        public ICommand CutContainerCommand { get; set; }
-        public ICommand CopyContainerCommand { get; set; }
-        public ICommand PasteContainerCommand { get; set; }
-        public ICommand DeleteContainerCommand { get; set; }
 
         public ICommand AddDocumentCommand { get; set; }
         public ICommand InsertDocumentBeforeCommand { get; set; }
         public ICommand InsertDocumentAfterCommand { get; set; }
-        public ICommand CutDocumentCommand { get; set; }
-        public ICommand CopyDocumentCommand { get; set; }
-        public ICommand PasteDocumentCommand { get; set; }
-        public ICommand DeleteDocumentCommand { get; set; }
     }
 }

@@ -37,11 +37,11 @@
         <MenuItem Header="Insert Container Bef_ore" InputGestureText="" Command="{Binding DataContext.Commands.InsertContainerBeforeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
         <MenuItem Header="Insert Container Aft_er" InputGestureText="" Command="{Binding DataContext.Commands.InsertContainerAfterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
         <Separator/>
-        <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{Binding DataContext.Commands.CutContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
-        <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{Binding DataContext.Commands.CopyContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
-        <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{Binding DataContext.Commands.PasteContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{Binding DataContext.Commands.CutCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{Binding DataContext.Commands.CopyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{Binding DataContext.Commands.PasteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
         <Separator/>
-        <MenuItem Header="_Delete" InputGestureText="Del" Command="{Binding DataContext.Commands.DeleteContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="_Delete" InputGestureText="Del" Command="{Binding DataContext.Commands.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
         <Separator/>
         <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
     </ContextMenu>
@@ -51,11 +51,11 @@
         <MenuItem Header="Insert Document Bef_ore" InputGestureText="" Command="{Binding DataContext.Commands.InsertDocumentBeforeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
         <MenuItem Header="Insert Document Aft_er" InputGestureText="" Command="{Binding DataContext.Commands.InsertDocumentAfterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
         <Separator/>
-        <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{Binding DataContext.Commands.CutDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
-        <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{Binding DataContext.Commands.CopyDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
-        <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{Binding DataContext.Commands.PasteDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{Binding DataContext.Commands.CutCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{Binding DataContext.Commands.CopyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{Binding DataContext.Commands.PasteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
         <Separator/>
-        <MenuItem Header="_Delete" InputGestureText="Del" Command="{Binding DataContext.Commands.DeleteDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="_Delete" InputGestureText="Del" Command="{Binding DataContext.Commands.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
         <Separator/>
         <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
     </ContextMenu>
