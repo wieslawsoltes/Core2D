@@ -81,7 +81,12 @@ namespace TestWinForms
         {
             HandlePanelLayerInvalidation(panel);
             UpdatePanelSize(panel);
-            (DataContext as EditorContext).Editor.Container.Invalidate();
+
+            var container = (DataContext as EditorContext).Editor.Container;
+            if (container != null)
+            {
+                container.Invalidate();
+            }
         }
 
         private void HandleFileDialogs(ContainerPanel panel)
@@ -142,8 +147,12 @@ namespace TestWinForms
 
         private void UpdatePanelSize(ContainerPanel panel)
         {
-            int width = (int)(DataContext as EditorContext).Editor.Container.Width;
-            int height = (int)(DataContext as EditorContext).Editor.Container.Height;
+            var container = (DataContext as EditorContext).Editor.Container;
+            if (container == null)
+                return;
+
+            int width = (int)container.Width;
+            int height = (int)container.Height;
 
             int x = (this.Width - width) / 2;
             int y = (((this.Height) - height) / 2) - (this.menuStrip1.Height / 3);
@@ -154,20 +163,16 @@ namespace TestWinForms
 
         private void HandlePanelLayerInvalidation(ContainerPanel panel)
         {
-            foreach (var layer in (DataContext as EditorContext).Editor.Container.Layers)
+            var container = (DataContext as EditorContext).Editor.Container;
+            if (container == null)
+                return;
+
+            foreach (var layer in container.Layers)
             {
-                layer.InvalidateLayer +=
-                    (sender, e) =>
-                    {
-                        panel.Invalidate();
-                    };
+                layer.InvalidateLayer += (s, e) => panel.Invalidate();
             }
 
-            (DataContext as EditorContext).Editor.Container.WorkingLayer.InvalidateLayer +=
-                (sender, e) =>
-                {
-                    panel.Invalidate();
-                };
+            container.WorkingLayer.InvalidateLayer += (s, e) => panel.Invalidate();
         }
 
         private void HandleMenuShortcutKeys(ContainerPanel panel)
