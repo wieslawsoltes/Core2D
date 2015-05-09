@@ -48,6 +48,8 @@
             <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{Binding DataContext.Commands.PasteContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
             <Separator/>
             <MenuItem Header="_Delete" InputGestureText="Del" Command="{Binding DataContext.Commands.DeleteContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+            <Separator/>
+            <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
         </ContextMenu>
         <ContextMenu x:Key="DocumentContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
             <MenuItem Header="_Add Container" InputGestureText="Ctrl+N" Command="{Binding DataContext.Commands.AddContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
@@ -60,9 +62,13 @@
             <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{Binding DataContext.Commands.PasteDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
             <Separator/>
             <MenuItem Header="_Delete" InputGestureText="Del" Command="{Binding DataContext.Commands.DeleteDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+            <Separator/>
+            <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
         </ContextMenu>
         <ContextMenu x:Key="PojectContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
             <MenuItem Header="_Add Document" InputGestureText="Ctrl+N" Command="{Binding DataContext.Commands.AddDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+            <Separator/>
+            <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
         </ContextMenu>
     </UserControl.Resources>
     <Grid>
@@ -73,11 +79,12 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <TreeView.InputBindings>
-                <KeyBinding Command="{Binding Commands.AddProjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+N"/>
-                <KeyBinding Command="{Binding Commands.CutProjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+X"/>
-                <KeyBinding Command="{Binding Commands.CopyProjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+C"/>
-                <KeyBinding Command="{Binding Commands.PasteProjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+V"/>
-                <KeyBinding Command="{Binding Commands.DeleteProjectCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Del"/>
+                <KeyBinding Command="{Binding Commands.NewCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{Binding Commands.CutCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+X"/>
+                <KeyBinding Command="{Binding Commands.CopyCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+C"/>
+                <KeyBinding Command="{Binding Commands.PasteCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+V"/>
+                <KeyBinding Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Del"/>
+                <KeyBinding Command="{Binding Commands.ExportCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+N"/>
             </TreeView.InputBindings>
             <TreeView.Style>
                 <Style TargetType="TreeView">
