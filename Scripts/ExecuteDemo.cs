@@ -1,9 +1,10 @@
 
 void Animate(int delay, int count)
 {
-    var c = Context.Editor.Container;
+    var p = Context.Editor.Project;
+    var c = p.CurrentContainer;
     var rand = new Random(Guid.NewGuid().GetHashCode());
-    var s = c.CurrentStyleGroup.CurrentStyle;
+    var s = p.CurrentStyleGroup.CurrentStyle;
     double width = c.Width;
     double height = c.Height;
 
@@ -16,7 +17,7 @@ void Animate(int delay, int count)
                 rand.NextDouble() * height, 
                 rand.NextDouble() * width, 
                 rand.NextDouble() * height, 
-                s, c.PointShape);
+                s, p.PointShape);
             Execute(() => c.CurrentLayer.Shapes.Add(line));
             Execute(() => c.CurrentLayer.Invalidate());
             Thread.Sleep(delay);

@@ -36,39 +36,43 @@ struct Settings
     }
 }
 
-XGroup Create(ShapeStyle style, Settings settings)
+IList<BaseShape> Create(ShapeStyle style, Settings settings, BaseShape point)
 {
     double sx = settings.Origin.X + settings.CellSize.Width;
     double sy = settings.Origin.Y + settings.CellSize.Height;
     double ex = settings.Origin.X + settings.GridSize.Width;
     double ey = settings.Origin.Y + settings.GridSize.Height;
 
+    var shapes = new List<BaseShape>();
+
     var g = XGroup.Create("grid");
     g.State &= ~ShapeState.Printable;
 
     for (double x = sx; x < ex; x += settings.CellSize.Width)
     {
-        var line = XLine.Create(x, settings.Origin.Y, x, ey, style, null);
+        var line = XLine.Create(x, settings.Origin.Y, x, ey, style, point);
         line.State &= ~ShapeState.Printable;
-        g.Shapes.Add(line);
+        shapes.Add(line);
     }
 
     for (double y = sy; y < ey; y += settings.CellSize.Height)
     {
-        var line = XLine.Create(settings.Origin.X, y, ex, y, style, null);
+        var line = XLine.Create(settings.Origin.X, y, ex, y, style, point);
         line.State &= ~ShapeState.Printable;
-        g.Shapes.Add(line);
+        shapes.Add(line);
     }
 
-    return g;
+    return shapes;
 }
 
-var c = Context.Editor.Container;
-var layer = c.TemplateLayer;
+var p = Context.Editor.Project;
+var c = p.CurrentContainer;
+var layer = c.Layers.FirstOrDefault();
 var style = ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.0);
 var settings = Settings.Create(Point.Create(0, 0), Size.Create(c.Width, c.Height), Size.Create(30, 30));
-var grid = Create(style, settings);
-
-layer.Shapes.Clear();
-layer.Shapes.Add(grid);
+var shapes = Create(style, settings, p.PointShape);
+foreach (var shape in shapes) 
+{
+    layer.Shapes.Add(shape);
+}
 layer.Invalidate();

@@ -1,3 +1,3 @@
-var c = Context?.Editor?.Container;
-c.Width = 840;
-c.Height = 630;
+var c = Context?.Editor?.Project?.CurrentContainer;
+c.Width += 30;
+c.Height += 30;
