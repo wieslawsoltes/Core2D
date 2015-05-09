@@ -119,29 +119,96 @@ namespace TestPDF
 
         public void Save(string path, Test2d.Container container)
         {
-            using (var doc = new PdfDocument())
+            using (var pdf = new PdfDocument())
             {
-                Add(doc, container);
-                doc.Save(path);
+                Add(pdf, container);
+                pdf.Save(path);
             }
         }
 
-        public void Save(string path, IEnumerable<Test2d.Container> containers)
+        public void Save(string path, Test2d.Document document)
         {
-            using (var doc = new PdfDocument())
+            using (var pdf = new PdfDocument())
             {
-                foreach (var page in containers)
+                PdfOutline documentOutline = null;
+
+                foreach (var container in document.Containers)
                 {
-                    Add(doc, page);
+                    var page = Add(pdf, container);
+
+                    if (documentOutline == null)
+                    {
+                        documentOutline = pdf.Outlines.Add(
+                            document.Name,
+                            page,
+                            true,
+                            PdfOutlineStyle.Regular,
+                            XColors.Black);
+                    }
+
+                    documentOutline.Outlines.Add(
+                        container.Name,
+                        page,
+                        true,
+                        PdfOutlineStyle.Regular,
+                        XColors.Black);
                 }
-                doc.Save(path);
+
+                pdf.Save(path);
             }
         }
 
-        private void Add(PdfDocument doc, Test2d.Container container)
+        public void Save(string path, Test2d.Project project)
+        {
+            using (var pdf = new PdfDocument())
+            {
+                PdfOutline projectOutline = null;
+
+                foreach (var document in project.Documents)
+                {
+                    PdfOutline documentOutline = null;
+
+                    foreach (var container in document.Containers)
+                    {
+                        var page = Add(pdf, container);
+
+                        if (projectOutline == null)
+                        {
+                            projectOutline = pdf.Outlines.Add(
+                                project.Name,
+                                page,
+                                true,
+                                PdfOutlineStyle.Regular,
+                                XColors.Black);
+                        }
+
+                        if (documentOutline == null)
+                        {
+                            documentOutline = projectOutline.Outlines.Add(
+                                document.Name,
+                                page,
+                                true,
+                                PdfOutlineStyle.Regular,
+                                XColors.Black);
+                        }
+
+                        documentOutline.Outlines.Add(
+                            container.Name,
+                            page,
+                            true,
+                            PdfOutlineStyle.Regular,
+                            XColors.Black);
+                    }
+                }
+
+                pdf.Save(path);
+            }
+        }
+
+        private PdfPage Add(PdfDocument pdf, Test2d.Container container)
         {
             // create A4 page with landscape orientation
-            PdfPage page = doc.AddPage();
+            PdfPage page = pdf.AddPage();
             page.Size = PageSize.A4;
             page.Orientation = PageOrientation.Landscape;
 
@@ -158,6 +225,8 @@ namespace TestPDF
                 // draw container contents to pdf graphics
                 Draw(gfx, container);
             }
+
+            return page;
         }
 
         private static XColor ToXColor(Test2d.ArgbColor color)
