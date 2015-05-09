@@ -264,7 +264,25 @@ namespace Test2d
             return r >= snap / 2.0 ? value + snap - r : value - r;
         }
 
-        public static IEnumerable<XPoint> GetPoints(IEnumerable<BaseShape> shapes)
+        public void ToRelativeUri(Uri baseUri, IEnumerable<XImage> images)
+        {
+            foreach (var image in images)
+            {
+                var relative = baseUri.MakeRelativeUri(image.Path);
+                image.Path = relative;
+            }
+        }
+
+        public void ToAbsoluteUri(Uri baseUri, IEnumerable<XImage> images)
+        {
+            foreach (var image in images)
+            {
+                var absolute = new Uri(baseUri, image.Path);
+                image.Path = absolute;
+            }
+        }
+
+        public static IEnumerable<XPoint> GetAllPoints(IEnumerable<BaseShape> shapes)
         {
             if (shapes == null)
             {
@@ -413,7 +431,7 @@ namespace Test2d
                 {
                     var group = shape as XGroup;
 
-                    foreach (var point in GetPoints(group.Shapes))
+                    foreach (var point in GetAllPoints(group.Shapes))
                     {
                         if (!point.State.HasFlag(ShapeState.Connector))
                         {
@@ -429,7 +447,7 @@ namespace Test2d
             }
         }
 
-        public static IEnumerable<BaseShape> GetShapes(IEnumerable<BaseShape> shapes)
+        public static IEnumerable<BaseShape> GetAllShapes(IEnumerable<BaseShape> shapes)
         {
             if (shapes == null)
             {
@@ -476,7 +494,7 @@ namespace Test2d
                 }
                 else if (shape is XGroup)
                 {
-                    foreach (var s in GetShapes((shape as XGroup).Shapes))
+                    foreach (var s in GetAllShapes((shape as XGroup).Shapes))
                     {
                         yield return s;
                     }
@@ -484,6 +502,18 @@ namespace Test2d
                     yield return shape;
                 }
             }
+        }
+
+        public static IEnumerable<T> GetAllShapes<T>(Project project)
+        {
+            var shapes = project.Documents
+                .SelectMany(d => d.Containers)
+                .SelectMany(c => c.Layers)
+                .SelectMany(l => l.Shapes);
+
+            return GetAllShapes(shapes)
+                .Where(s => s is T)
+                .Cast<T>();
         }
 
         public static void Move(IEnumerable<XPoint> points, double dx, double dy)
@@ -623,7 +653,7 @@ namespace Test2d
                 {
                     //_renderer.SelectedShape.Move(dx, dy);
                     Move(
-                        GetPoints(Enumerable.Repeat(_renderer.SelectedShape, 1)).Distinct(),
+                        GetAllPoints(Enumerable.Repeat(_renderer.SelectedShape, 1)).Distinct(),
                         dx, dy);
                 }
             }
@@ -635,7 +665,7 @@ namespace Test2d
                 //    shape.Move(dx, dy);
                 //}
                 Move(
-                    GetPoints(_renderer.SelectedShapes.Where(s => !s.State.HasFlag(ShapeState.Locked))).Distinct(),
+                    GetAllPoints(_renderer.SelectedShapes.Where(s => !s.State.HasFlag(ShapeState.Locked))).Distinct(),
                     dx, dy);
             }
         }
