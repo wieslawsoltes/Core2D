@@ -12,7 +12,6 @@ namespace Test2d
         private string _name;
         private IList<Container> _containers;
 
-
         public string Name
         {
             get { return _name; }
