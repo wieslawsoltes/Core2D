@@ -15,8 +15,11 @@ if (gl == null)
     gl = GroupLibrary.Create("Logic");
     p.GroupLibraries.Add(gl);
 }
-var groups = gl.Groups;
 
+p.CurrentStyleGroup = sg;
+p.CurrentGroupLibrary = gl;
+
+var groups = gl.Groups;
 var ps = p.PointShape;
 
 var styleTextMediumLC = ShapeStyle.Create(

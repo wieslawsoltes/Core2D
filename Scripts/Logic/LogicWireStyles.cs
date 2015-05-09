@@ -5,6 +5,9 @@ if (sg == null)
     sg = ShapeStyleGroup.Create("Logic");
     p.StyleGroups.Add(sg);
 }
+
+p.CurrentStyleGroup = sg;
+
 var styles = sg.Styles;
 var radiusX = 5.0;
 var radiusY = 5.0;
