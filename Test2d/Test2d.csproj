@@ -87,7 +87,6 @@
     <Compile Include="Math\Rect2.cs" />
     <Compile Include="Bounds\ShapeBounds.cs" />
     <Compile Include="Project\Layer.cs" />
-    <Compile Include="Editor\LineGrid.cs" />
     <Compile Include="Editor\Observer.cs" />
     <Compile Include="Core\IRenderer.cs" />
     <Compile Include="Core\ObservableObject.cs" />

@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Test2d;
 
-namespace Test2d
+namespace TestEDITOR
 {
     public static class LineGrid
     {
