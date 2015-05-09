@@ -1,3 +1,3 @@
-var c = Context?.Editor?.Container;
+var c = Context?.Editor?.Project?.CurrentContainer;
 c?.Clear();
 c?.Invalidate();
