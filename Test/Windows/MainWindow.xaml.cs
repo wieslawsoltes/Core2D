@@ -73,12 +73,12 @@ namespace Test.Windows
                 },
                 () => context.IsEditMode());
 
-            context.Commands.ExportCommand = new DelegateCommand(
-                () =>
+            context.Commands.ExportCommand = new DelegateCommand<object>(
+                (item) =>
                 {
-                    Export();
+                    Export(item);
                 },
-                () => context.IsEditMode());
+                (item) => context.IsEditMode());
 
             context.Commands.CopyAsEmfCommand = new DelegateCommand(
                 () =>
@@ -287,13 +287,34 @@ namespace Test.Windows
             }
         }
 
-        public void Export()
+        public void Export(object item)
         {
+            string name = string.Empty;
+
+            if (item is Container)
+            {
+                name = (item as Container).Name;
+            }
+            else if (item is Document)
+            {
+                name = (item as Document).Name;
+            }
+            else if (item is Project)
+            {
+                name = (item as Project).Name;
+            }
+            else if (item is EditorContext)
+            {
+                var editor = (item as EditorContext).Editor;
+                name = editor.Project.Name;
+                item = editor.Project;
+            }
+
             var dlg = new SaveFileDialog()
             {
                 Filter = "Pdf (*.pdf)|*.pdf|Emf (*.emf)|*.emf|Dxf AutoCAD 2000 (*.dxf)|*.dxf|Dxf R10 (*.dxf)|*.dxf|All (*.*)|*.*",
                 FilterIndex = 0,
-                FileName = "project"
+                FileName = name
             };
 
             if (dlg.ShowDialog() == true)
@@ -301,7 +322,7 @@ namespace Test.Windows
                 switch (dlg.FilterIndex) 
                 {
                     case 1:
-                        (DataContext as EditorContext).ExportAsPdf(dlg.FileName);
+                        (DataContext as EditorContext).ExportAsPdf(dlg.FileName, item);
                         System.Diagnostics.Process.Start(dlg.FileName);
                         break;
                     case 2:
