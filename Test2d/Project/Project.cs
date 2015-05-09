@@ -163,36 +163,24 @@ namespace Test2d
                 }
             }
         }
-        
-        public static Project Create(string name = "Project")
+
+        public static ShapeStyleGroup DefaultStyleGroup()
         {
-            var p = new Project()
-            {
-                Name = name,
-                StyleGroups = new ObservableCollection<ShapeStyleGroup>(),
-                GroupLibraries = new ObservableCollection<GroupLibrary>(),
-                Templates = new ObservableCollection<Container>(),
-                Documents = new ObservableCollection<Document>(),
-            };
-
-            // default group library
-            var gld = GroupLibrary.Create("Default");
-            p.GroupLibraries.Add(gld);
-            p.CurrentGroupLibrary = p.GroupLibraries.FirstOrDefault();
-
-            // default styles group
             var sgd = ShapeStyleGroup.Create("Default");
+
             sgd.Styles.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
             sgd.Styles.Add(ShapeStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
             sgd.Styles.Add(ShapeStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
             sgd.Styles.Add(ShapeStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
             sgd.Styles.Add(ShapeStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
+
             sgd.CurrentStyle = sgd.Styles.FirstOrDefault();
 
-            p.StyleGroups.Add(sgd);
-            p.CurrentStyleGroup = p.StyleGroups.FirstOrDefault();
+            return sgd;
+        }
 
-            // dashed lines styles group
+        public static ShapeStyleGroup LinesStyleGroup()
+        {
             var sgdl = ShapeStyleGroup.Create("Lines");
 
             var solid = ShapeStyle.Create("Solid", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
@@ -221,48 +209,82 @@ namespace Test2d
             sgdl.Styles.Add(dashDotDot);
 
             sgdl.CurrentStyle = sgdl.Styles.FirstOrDefault();
-            p.StyleGroups.Add(sgdl);
 
-            // template styles group
+            return sgdl;
+        }
+
+        public static ShapeStyleGroup TemplateStyleGroup()
+        {
             var sgt = ShapeStyleGroup.Create("Template");
             var pss = ShapeStyle.Create("PointShape", 255, 255, 0, 0, 255, 255, 0, 0, 2.0);
             var gs = ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.0);
+
             sgt.Styles.Add(pss);
             sgt.Styles.Add(gs);
-            p.StyleGroups.Add(sgt);
+
             sgt.CurrentStyle = sgt.Styles.FirstOrDefault();
 
-            CrossPointShape(p, pss);
-
-            return p;
+            return sgt;
         }
 
-        public static void EllipsePointShape(Project p, ShapeStyle pss)
+        public static BaseShape EllipsePointShape(Project p, ShapeStyle pss)
         {
-            p.PointShape = XEllipse.Create(-4, -4, 4, 4, pss, null, false);
+            return XEllipse.Create(-4, -4, 4, 4, pss, null, false);
         }
 
-        public static void FilledEllipsePointShape(Project p, ShapeStyle pss)
+        public static BaseShape FilledEllipsePointShape(Project p, ShapeStyle pss)
         {
-            p.PointShape = XEllipse.Create(-3, -3, 3, 3, pss, null, true);
+            return XEllipse.Create(-3, -3, 3, 3, pss, null, true);
         }
 
-        public static void RectanglePointShape(Project p, ShapeStyle pss)
+        public static BaseShape RectanglePointShape(Project p, ShapeStyle pss)
         {
-            p.PointShape = XRectangle.Create(-4, -4, 4, 4, pss, null, false);
+            return XRectangle.Create(-4, -4, 4, 4, pss, null, false);
         }
 
-        public static void FilledRectanglePointShape(Project p, ShapeStyle pss)
+        public static BaseShape FilledRectanglePointShape(Project p, ShapeStyle pss)
         {
-            p.PointShape = XRectangle.Create(-3, -3, 3, 3, pss, null, true);
+            return XRectangle.Create(-3, -3, 3, 3, pss, null, true);
         }
 
-        public static void CrossPointShape(Project p, ShapeStyle pss)
+        public static BaseShape CrossPointShape(Project p, ShapeStyle pss)
         {
             var g = XGroup.Create("PointShape");
             g.Shapes.Add(XLine.Create(-4, 0, 4, 0, pss, null));
             g.Shapes.Add(XLine.Create(0, -4, 0, 4, pss, null));
-            p.PointShape = g;
+            return g;
+        }
+
+        public static Project Create(string name = "Project")
+        {
+            var p = new Project()
+            {
+                Name = name,
+                StyleGroups = new ObservableCollection<ShapeStyleGroup>(),
+                GroupLibraries = new ObservableCollection<GroupLibrary>(),
+                Templates = new ObservableCollection<Container>(),
+                Documents = new ObservableCollection<Document>(),
+            };
+
+            var gld = GroupLibrary.Create("Default");
+            p.GroupLibraries.Add(gld);
+            p.CurrentGroupLibrary = p.GroupLibraries.FirstOrDefault();
+
+            var sgd = DefaultStyleGroup();
+            p.StyleGroups.Add(sgd);
+            p.CurrentStyleGroup = p.StyleGroups.FirstOrDefault();
+
+            var sgdl = LinesStyleGroup();
+            p.StyleGroups.Add(sgdl);
+
+            var sgt = TemplateStyleGroup();
+            p.StyleGroups.Add(sgt);
+
+            p.PointShape = CrossPointShape(
+                p,
+                sgt.Styles.FirstOrDefault(s => s.Name == "PointShape"));
+
+            return p;
         }
     }
 }
