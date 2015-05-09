@@ -598,7 +598,6 @@ namespace TestEDITOR
             _commands.SelectedItemChangedCommand = new DelegateCommand<object>(
                 (item) =>
                 {
-                    System.Diagnostics.Debug.Print("Selected: " + item.GetType());
                     if (item is Container)
                     {
                         var container = item as Container;
