@@ -721,42 +721,6 @@ namespace TestEDITOR
                 },
                 (item) => IsEditMode());
 
-
-            _commands.AddProjectCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    // TODO:
-                },
-                (item) => IsEditMode());
-
-            _commands.CutProjectCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    // TODO:
-                },
-                (item) => IsEditMode());
-
-            _commands.CopyProjectCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    // TODO:
-                },
-                (item) => IsEditMode());
-
-            _commands.PasteProjectCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    // TODO:
-                },
-                (item) => IsEditMode());
-
-            _commands.DeleteProjectCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    // TODO:
-                },
-                (item) => IsEditMode());
-
             WarmUpCSharpScript();
         }
 
@@ -842,7 +806,7 @@ namespace TestEDITOR
             _editor.ToAbsoluteUri(root, images);
         }
 
-        public void ExportAsPdf(string path)
+        public void ExportAsPdf(string path, object item)
         {
             try
             { 
@@ -850,7 +814,19 @@ namespace TestEDITOR
                 {
                     DrawShapeState = ShapeState.Printable
                 };
-                renderer.Save(path, _editor.Container);
+
+                if (item is Container)
+                {
+                    renderer.Save(path, item as Container);
+                }
+                else if (item is Document)
+                {
+                    renderer.Save(path, item as Document);
+                }
+                else if (item is Project)
+                {
+                    renderer.Save(path, item as Project);
+                }
             }
             catch (Exception ex)
             {
@@ -1325,7 +1301,7 @@ namespace TestEDITOR
             (_commands.NewCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.OpenCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.SaveAsCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ExportCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ExportCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ExitCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.CopyAsEmfCommand as DelegateCommand).RaiseCanExecuteChanged();
@@ -1407,12 +1383,6 @@ namespace TestEDITOR
             (_commands.CopyDocumentCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.PasteDocumentCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.DeleteDocumentCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-
-            (_commands.AddProjectCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.CutProjectCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.CopyProjectCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.PasteProjectCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.DeleteProjectCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
         }
 
         public void Dispose()
