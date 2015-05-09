@@ -9,8 +9,8 @@
             SetStyle((shape as XGroup).Shapes, style);
     }
 }
-var layers = Context?.Editor?.Container?.Layers;
-var style = Context?.Editor?.Container?.CurrentStyleGroup?.CurrentStyle;
+var layers = Context?.Editor?.Project?.CurrentContainer?.Layers;
+var style = Context?.Editor?.Project?.CurrentStyleGroup?.CurrentStyle;
 foreach (var layer in layers)
 {
     SetStyle(layer?.Shapes, style);

@@ -9,7 +9,7 @@
             SetStyle((shape as XGroup).Shapes, style);
     }
 }
-var layer = Context?.Editor?.Container?.CurrentLayer;
-var style = Context?.Editor?.Container?.CurrentStyleGroup?.CurrentStyle;
+var layer = Context?.Editor?.Project?.CurrentContainer?.CurrentLayer;
+var style = Context?.Editor?.Project?.CurrentStyleGroup?.CurrentStyle;
 SetStyle(layer?.Shapes, style);
 layer?.Invalidate();

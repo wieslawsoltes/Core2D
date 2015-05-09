@@ -1,1 +1,1 @@
-Context.Editor.Container.CurrentStyleGroup.Styles.Add(ShapeStyle.Create("New"));
+Context.Editor.Project.CurrentStyleGroup.Styles.Add(ShapeStyle.Create("New"));

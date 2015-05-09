@@ -1,1 +1,1 @@
-Context.Editor.Container.Layers.Add(Layer.Create("New"));
+Context.Editor.Project.CurrentContainer.Layers.Add(Layer.Create("New"));

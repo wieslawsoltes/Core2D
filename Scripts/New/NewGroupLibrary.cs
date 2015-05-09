@@ -1,4 +1,4 @@
-var c = Context.Editor.Container;
+var p = Context.Editor.Project;
 var gl = GroupLibrary.Create("New");
-c.GroupLibraries.Add(gl);
-c.CurrentGroupLibrary = gl;
+p.GroupLibraries.Add(gl);
+p.CurrentGroupLibrary = gl;
