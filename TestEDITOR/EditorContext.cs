@@ -820,13 +820,26 @@ namespace TestEDITOR
         {
             var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
             var project = ContainerSerializer.Deserialize<Project>(json);
+
+            var root = new Uri(path);
+            var images = Editor.GetAllShapes<XImage>(project);
+
+            _editor.ToAbsoluteUri(root, images);
+
             _editor.Load(project);
         }
 
         public void Save(string path)
         {
+            var root = new Uri(path);
+            var images = Editor.GetAllShapes<XImage>(_editor.Project);
+
+            _editor.ToRelativeUri(root, images);
+
             var json = ContainerSerializer.Serialize(_editor.Project);
             System.IO.File.WriteAllText(path, json, Encoding.UTF8);
+
+            _editor.ToAbsoluteUri(root, images);
         }
 
         public void ExportAsPdf(string path)
@@ -936,13 +949,13 @@ namespace TestEDITOR
                 .ToDictionary(s => s.Name);
 
             // reset point shape to container default
-            foreach (var point in Editor.GetPoints(shapes))
+            foreach (var point in Editor.GetAllPoints(shapes))
             {
                 point.Shape = _editor.Project.PointShape;
             }
 
             // try to restore shape styles
-            foreach (var shape in Editor.GetShapes(shapes))
+            foreach (var shape in Editor.GetAllShapes(shapes))
             {
                 if (shape.Style == null)
                     continue;
