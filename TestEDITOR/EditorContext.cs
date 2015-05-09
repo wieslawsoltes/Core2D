@@ -210,12 +210,29 @@ namespace TestEDITOR
                     }
                 };
 
-            _commands.NewCommand = new DelegateCommand(
-                () =>
+            _commands.NewCommand = new DelegateCommand<object>(
+                (item) =>
                 {
-                    _editor.Load(DefaultProject());
+                    if (item is Document)
+                    {
+                        var document = item as Document;
+                        var container = DefaultContainer(_editor.Project);
+                        document.Containers.Add(container);
+                        _editor.Project.CurrentContainer = container;
+                    }
+                    else if (item is Project || item == null)
+                    {
+                        var document = DefaultDocument(_editor.Project);
+                        _editor.Project.Documents.Add(document);
+                        _editor.Project.CurrentDocument = document;
+                        _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
+                    }
+                    else if (item is EditorContext || item == null)
+                    {
+                        _editor.Load(DefaultProject());
+                    }
                 },
-                () => IsEditMode());
+                (item) => IsEditMode());
 
             _commands.ExitCommand = new DelegateCommand(
                 () =>
@@ -238,33 +255,111 @@ namespace TestEDITOR
                 },
                 () => IsEditMode() && CanRedo());
 
-            _commands.CutCommand = new DelegateCommand(
-                () =>
+            _commands.CutCommand = new DelegateCommand<object>(
+                (item) =>
                 {
-                    Cut();
+                    if (item is Container)
+                    {
+                        var container = item as Container;
+                        // TODO:
+                    }
+                    else if (item is Document)
+                    {
+                        var document = item as Document;
+                        // TODO:
+                    }
+                    else if (item is Project)
+                    {
+                        var project = item as Project;
+                        // TODO:
+                    }
+                    else if (item is EditorContext || item == null)
+                    {
+                        Cut();
+                    }
                 },
-                () => IsEditMode() /* && CanCopy() */);
+                (item) => IsEditMode() /* && CanCopy() */);
 
-            _commands.CopyCommand = new DelegateCommand(
-                () =>
+            _commands.CopyCommand = new DelegateCommand<object>(
+                (item) =>
                 {
-                    Copy();
+                    if (item is Container)
+                    {
+                        var container = item as Container;
+                        // TODO:
+                    }
+                    else if (item is Document)
+                    {
+                        var document = item as Document;
+                        // TODO:
+                    }
+                    else if (item is Project)
+                    {
+                        var project = item as Project;
+                        // TODO:
+                    }
+                    else if (item is EditorContext || item == null)
+                    {
+                        Copy();
+                    }
                 },
-                () => IsEditMode() /* && CanCopy() */);
+                (item) => IsEditMode() /* && CanCopy() */);
 
-            _commands.PasteCommand = new DelegateCommand(
-                () =>
+            _commands.PasteCommand = new DelegateCommand<object>(
+                (item) =>
                 {
-                    Paste();
+                    if (item is Container)
+                    {
+                        var container = item as Container;
+                        // TODO:
+                    }
+                    else if (item is Document)
+                    {
+                        var document = item as Document;
+                        // TODO:
+                    }
+                    else if (item is Project)
+                    {
+                        var project = item as Project;
+                        // TODO:
+                    }
+                    else if (item is EditorContext || item == null)
+                    {
+                        Paste();
+                    }
                 },
-                () => IsEditMode() /* && CanPaste() */);
+                (item) => IsEditMode() /* && CanPaste() */);
 
-            _commands.DeleteCommand = new DelegateCommand(
-                () =>
+            _commands.DeleteCommand = new DelegateCommand<object>(
+                (item) =>
                 {
-                    _editor.DeleteSelected();
+                    if (item is Container)
+                    {
+                        var container = item as Container;
+                        var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
+                        if (document != null)
+                        {
+                            document.Containers.Remove(container);
+                            _editor.Project.CurrentDocument = document;
+                            _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
+                        }
+                    }
+                    else if (item is Document)
+                    {
+                        var document = item as Document;
+                        _editor.Project.Documents.Remove(document);
+                        _editor.Project.CurrentDocument = _editor.Project.Documents.FirstOrDefault();
+                        if (_editor.Project.CurrentDocument != null)
+                        {
+                            _editor.Project.CurrentContainer = _editor.Project.CurrentDocument.Containers.FirstOrDefault();
+                        }
+                    }
+                    else if (item is EditorContext || item == null)
+                    {
+                        _editor.DeleteSelected();
+                    }
                 },
-                () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+                (item) => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
             _commands.SelectAllCommand = new DelegateCommand(
                 () =>
@@ -611,7 +706,6 @@ namespace TestEDITOR
                     else if (item is Document)
                     {
                         var document = item as Document;
-              
                         _editor.Project.CurrentDocument = document;
                         _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
                     }
@@ -1298,14 +1392,20 @@ namespace TestEDITOR
 
         private void UpdateCanExecuteState()
         {
-            (_commands.NewCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.NewCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.OpenCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.SaveAsCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ExportCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ExitCommand as DelegateCommand).RaiseCanExecuteChanged();
 
+            (_commands.UndoCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.RedoCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.CopyAsEmfCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.DeleteCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.CutCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.CopyCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.PasteCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.DeleteCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.SelectAllCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ClearAllCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.GroupCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.GroupLayerCommand as DelegateCommand).RaiseCanExecuteChanged();

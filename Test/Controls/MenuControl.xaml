@@ -10,7 +10,7 @@
              d:DesignHeight="20" d:DesignWidth="810">
     <Menu Background="Transparent">
         <MenuItem Header="_File">
-            <MenuItem Header="_New" Command="{Binding Commands.NewCommand}" InputGestureText="Ctrl+N"/>
+            <MenuItem Header="_New" Command="{Binding Commands.NewCommand}" CommandParameter="{Binding}" InputGestureText="Ctrl+N"/>
             <Separator/>
             <MenuItem Header="_Open..." Command="{Binding Commands.OpenCommand}" InputGestureText="Ctrl+O"/>
             <Separator/>
@@ -26,10 +26,10 @@
             <Separator/>
             <MenuItem Header="Copy As _Metafile" Command="{Binding Commands.CopyAsEmfCommand}" InputGestureText="Ctrl+Shift+C"/>
             <Separator/>
-            <MenuItem Header="Cu_t" Command="{Binding Commands.CutCommand}" InputGestureText="Ctrl+X"/>
-            <MenuItem Header="_Copy" Command="{Binding Commands.CopyCommand}" InputGestureText="Ctrl+C"/>
-            <MenuItem Header="_Paste" Command="{Binding Commands.PasteCommand}" InputGestureText="Ctrl+V"/>
-            <MenuItem Header="_Delete" Command="{Binding Commands.DeleteCommand}" InputGestureText="Del"/>
+            <MenuItem Header="Cu_t" Command="{Binding Commands.CutCommand}" CommandParameter="{Binding}" InputGestureText="Ctrl+X"/>
+            <MenuItem Header="_Copy" Command="{Binding Commands.CopyCommand}" CommandParameter="{Binding}" InputGestureText="Ctrl+C"/>
+            <MenuItem Header="_Paste" Command="{Binding Commands.PasteCommand}" CommandParameter="{Binding}" InputGestureText="Ctrl+V"/>
+            <MenuItem Header="_Delete" Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding}" InputGestureText="Del"/>
             <Separator/>
             <MenuItem Header="Select _All" Command="{Binding Commands.SelectAllCommand}" InputGestureText="Ctrl+A"/>
             <Separator/>

@@ -84,7 +84,7 @@
                 <KeyBinding Command="{Binding Commands.CopyCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+C"/>
                 <KeyBinding Command="{Binding Commands.PasteCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+V"/>
                 <KeyBinding Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Del"/>
-                <KeyBinding Command="{Binding Commands.ExportCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{Binding Commands.ExportCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+E"/>
             </TreeView.InputBindings>
             <TreeView.Style>
                 <Style TargetType="TreeView">
