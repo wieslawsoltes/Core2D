@@ -155,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TemplatesControl.xaml" />
+    <Page Include="Dictionaries\ProjectDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dictionaries\ShapeDictionary.xaml" />
     <Page Include="Dictionaries\StyleDictionary.xaml" />
     <Page Include="Controls\LayersControl.xaml">
