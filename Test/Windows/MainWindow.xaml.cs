@@ -4,6 +4,7 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -179,13 +180,24 @@ namespace Test.Windows
                         try
                         {
                             var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                            if (files != null && files.Length == 1)
+                            if (files != null && files.Length >= 1)
                             {
-                                string path = files[0];
-                                if (!string.IsNullOrEmpty(path))
+                                foreach (var path in files)
                                 {
-                                    context.Open(path);
-                                    e.Handled = true;
+                                    if (string.IsNullOrEmpty(path))
+                                        continue;
+
+                                    string ext = System.IO.Path.GetExtension(path);
+                                    if (string.Compare(ext, ".json", true, CultureInfo.InvariantCulture) == 0)
+                                    {
+                                        context.Open(path);
+                                        e.Handled = true;
+                                    }
+                                    else if (string.Compare(ext, ".cs", true, CultureInfo.InvariantCulture) == 0)
+                                    {
+                                        context.Eval(path);
+                                        e.Handled = true;
+                                    }
                                 }
                             }
                         }
