@@ -599,7 +599,10 @@ namespace TestPDF
                 _gfx.DrawRectangle(ToXSolidBrush(image.Style.Fill), srect);
             }
 
-            _gfx.DrawImage(XImage.FromFile(image.Path.LocalPath), srect);
+            if (image.Path.IsAbsoluteUri && System.IO.File.Exists(image.Path.LocalPath))
+            {
+                _gfx.DrawImage(XImage.FromFile(image.Path.LocalPath), srect);
+            }
         }
     }
 }

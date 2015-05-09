@@ -641,7 +641,10 @@ namespace TestEMF
                 _gfx.FillRectangle(ToSolidBrush(image.Style.Fill), srect);
             }
 
-            _gfx.DrawImage(Image.FromFile(image.Path.LocalPath), srect);
+            if (image.Path.IsAbsoluteUri && System.IO.File.Exists(image.Path.LocalPath))
+            {
+                _gfx.DrawImage(Image.FromFile(image.Path.LocalPath), srect);
+            }
 
             brush.Dispose();
         }

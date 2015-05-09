@@ -919,7 +919,7 @@ namespace Test
             }
             else
             {
-                if (!System.IO.File.Exists(image.Path.LocalPath))
+                if (!image.Path.IsAbsoluteUri || !System.IO.File.Exists(image.Path.LocalPath))
                     return;
 
                 byte[] buffer = System.IO.File.ReadAllBytes(image.Path.LocalPath);
