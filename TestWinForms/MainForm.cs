@@ -111,7 +111,7 @@ namespace TestWinForms
                 switch (filterIndex)
                 {
                     case 1:
-                        (DataContext as EditorContext).ExportAsPdf(path);
+                        (DataContext as EditorContext).ExportAsPdf(path, (DataContext as EditorContext).Editor.Project);
                         System.Diagnostics.Process.Start(path);
                         break;
                     case 2:
