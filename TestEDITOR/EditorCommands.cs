@@ -87,7 +87,7 @@ namespace TestEDITOR
         public ICommand ApplyTemplateCommand { get; set; }
         
         public ICommand SelectedItemChangedCommand { get; set; }
-        
+
         public ICommand AddContainerCommand { get; set; }
         public ICommand InsertContainerBeforeCommand { get; set; }
         public ICommand InsertContainerAfterCommand { get; set; }
@@ -103,11 +103,5 @@ namespace TestEDITOR
         public ICommand CopyDocumentCommand { get; set; }
         public ICommand PasteDocumentCommand { get; set; }
         public ICommand DeleteDocumentCommand { get; set; }
-
-        public ICommand AddProjectCommand { get; set; }
-        public ICommand CutProjectCommand { get; set; }
-        public ICommand CopyProjectCommand { get; set; }
-        public ICommand PasteProjectCommand { get; set; }
-        public ICommand DeleteProjectCommand { get; set; }
     }
 }
