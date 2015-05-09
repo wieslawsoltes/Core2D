@@ -683,9 +683,7 @@ namespace TestEDITOR
                     if (item is Container)
                     {
                         var template = item as Container;
-                        
                         _editor.Project.CurrentContainer.Template = template;
-                        System.Diagnostics.Debug.Print("Template: " + template.Name);
                     }
                 },
                 (item) => IsEditMode());
