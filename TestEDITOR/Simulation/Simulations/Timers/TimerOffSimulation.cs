@@ -108,7 +108,7 @@ namespace TestSIM
                         {
                             _isEnabled = false;
                             _isLowEnabled = false;
-                            base.State = null;
+                            base.State = default(bool?);
                         }
                         break;
                 }

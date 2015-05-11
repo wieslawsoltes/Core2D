@@ -19,8 +19,8 @@ namespace TestEMF
     {
         public static void PutOnClipboard(Container container)
         {
-            Bitmap bitmap = null;
-            MemoryStream ms = null;
+            Bitmap bitmap = default(Bitmap);
+            MemoryStream ms = default(MemoryStream);
 
             try
             {
@@ -61,8 +61,8 @@ namespace TestEMF
         
         private static MemoryStream MakeMetafileStream(Bitmap bitmap, Container container)
         {
-            Graphics g = null;
-            Metafile mf = null;
+            Graphics g = default(Graphics);
+            Metafile mf = default(Metafile);
             var ms = new MemoryStream();
 
             try

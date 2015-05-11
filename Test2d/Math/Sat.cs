@@ -151,7 +151,7 @@ namespace Test2d
                 if (!p1.Overlap(p2))
                 {
                     // then we can guarantee that the shapes do not overlap
-                    mtv = null;
+                    mtv = default(MinimumTranslationVector?);
                     return false;
                 }
                 else
@@ -178,7 +178,7 @@ namespace Test2d
                 if (!p1.Overlap(p2))
                 {
                     // then we can guarantee that the shapes do not overlap
-                    mtv = null;
+                    mtv = default(MinimumTranslationVector?);
                     return false;
                 }
                 else
@@ -220,7 +220,7 @@ namespace Test2d
                 if (!p1.Overlap(p2))
                 {
                     // then we can guarantee that the shapes do not overlap
-                    mtv = null;
+                    mtv = default(MinimumTranslationVector?);
                     return false;
                 }
                 else
@@ -264,7 +264,7 @@ namespace Test2d
                 if (!p1.Overlap(p2))
                 {
                     // then we can guarantee that the shapes do not overlap
-                    mtv = null;
+                    mtv = default(MinimumTranslationVector?);
                     return false;
                 }
                 else

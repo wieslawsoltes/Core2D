@@ -82,7 +82,7 @@ namespace Test2d
             return new XPoint() 
             { 
                 Name = name,
-                Style = null,
+                Style = default(ShapeStyle),
                 Properties = new ObservableCollection<ShapeProperty>(),
                 X = x, 
                 Y = y, 

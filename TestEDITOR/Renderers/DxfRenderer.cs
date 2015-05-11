@@ -100,8 +100,8 @@ namespace TestDXF
         {
             _zoom = 1.0;
             _drawShapeState = ShapeState.Visible | ShapeState.Printable;
-            _selectedShape = null;
-            _selectedShapes = null;
+            _selectedShape = default(BaseShape);
+            _selectedShapes = default(ICollection<BaseShape>);
 
             ClearCache();
         }
@@ -269,7 +269,7 @@ namespace TestDXF
                 Description = "ByLayer",
                 DashLengthItems = 0,
                 TotalPatternLength = 0,
-                DashLengths = null,
+                DashLengths = default(double[]),
             });
 
             // ByBlock
@@ -280,7 +280,7 @@ namespace TestDXF
                 Description = "ByBlock",
                 DashLengthItems = 0,
                 TotalPatternLength = 0,
-                DashLengths = null,
+                DashLengths = default(double[]),
             });
 
             // Continuous
@@ -291,7 +291,7 @@ namespace TestDXF
                 Description = "Solid line",
                 DashLengthItems = 0,
                 TotalPatternLength = 0,
-                DashLengths = null,
+                DashLengths = default(double[]),
             });
         }
 
@@ -359,11 +359,11 @@ namespace TestDXF
                     Layer = layer,
                     BlockTypeFlags = DxfBlockTypeFlags.Default,
                     BasePoint = new DxfVector3(0, 0, 0),
-                    XrefPathName = null,
-                    Description = null,
+                    XrefPathName = default(string),
+                    Description = default(string),
                     EndId = NextHandle(),
                     EndLayer = layer,
-                    Entities = null
+                    Entities = default(IList<object>)
                 });
 
                 blocks.Add(new DxfBlock(_version, NextHandle())
@@ -372,11 +372,11 @@ namespace TestDXF
                     Layer = layer,
                     BlockTypeFlags = DxfBlockTypeFlags.Default,
                     BasePoint = new DxfVector3(0, 0, 0),
-                    XrefPathName = null,
-                    Description = null,
+                    XrefPathName = default(string),
+                    Description = default(string),
                     EndId = NextHandle(),
                     EndLayer = layer,
-                    Entities = null
+                    Entities = default(IList<object>)
                 });
 
                 blocks.Add(new DxfBlock(_version, NextHandle())
@@ -385,11 +385,11 @@ namespace TestDXF
                     Layer = layer,
                     BlockTypeFlags = DxfBlockTypeFlags.Default,
                     BasePoint = new DxfVector3(0, 0, 0),
-                    XrefPathName = null,
-                    Description = null,
+                    XrefPathName = default(string),
+                    Description = default(string),
                     EndId = NextHandle(),
                     EndLayer = layer,
-                    Entities = null
+                    Entities = default(IList<object>)
                 });
 
                 return blocks;
@@ -510,14 +510,14 @@ namespace TestDXF
                 KnotTolerance =  0.0000001,
                 ControlPointTolerance = 0.0000001,
                 FitTolerance = 0.0000000001,
-                StartTangent = null,
-                EndTangent = null,
+                StartTangent = default(DxfVector3),
+                EndTangent = default(DxfVector3),
                 Knots = new double[8],
-                Weights = null,
+                Weights = default(double[]),
                 ControlPoints = new DxfVector3[4],
-                FitPoints = null
+                FitPoints = default(DxfVector3[])
             };
-     
+
             spline.Knots[0] = 0.0;
             spline.Knots[1] = 0.0;
             spline.Knots[2] = 0.0;

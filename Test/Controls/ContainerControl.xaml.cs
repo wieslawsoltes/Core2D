@@ -38,7 +38,7 @@ namespace Test.Controls
             set { SetValue(RendererProperty, value); }
         }
 
-        private Layer _layer = null;
+        private Layer _layer = default(Layer);
 
         public LayerElement()
         {
@@ -75,7 +75,7 @@ namespace Test.Controls
             if (_layer != null)
             {
                 _layer.InvalidateLayer -= Invalidate;
-                _layer = null;
+                _layer = default(Layer);
             }
         }
 

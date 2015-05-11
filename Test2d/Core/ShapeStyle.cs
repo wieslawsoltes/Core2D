@@ -96,7 +96,7 @@ namespace Test2d
             byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00,
             byte fa = 0xFF, byte fr = 0x00, byte fg = 0x00, byte fb = 0x00,
             double thickness = 2.0,
-            LineStyle lineStyle = null,
+            LineStyle lineStyle = default(LineStyle),
             string fontName = "Calibri", 
             double fontSize = 12.0,
             TextHAlignment textHAlignment = TextHAlignment.Center,

@@ -92,7 +92,7 @@ namespace TestSIM
                     case null:
                         {
                             _isEnabled = false;
-                            base.State = null;
+                            base.State = default(bool?);
                         }
                         break;
                 }

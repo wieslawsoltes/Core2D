@@ -114,7 +114,7 @@ namespace TestSIM
                         {
                             _isReset = true;
                             _isEnabled = false;
-                            base.State = null;
+                            base.State = default(bool?);
                         }
                         break;
                 }

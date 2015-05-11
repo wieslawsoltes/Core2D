@@ -120,8 +120,8 @@ namespace Test
         {
             _zoom = 1.0;
             _drawShapeState = ShapeState.Visible | ShapeState.Printable;
-            _selectedShape = null;
-            _selectedShapes = null;
+            _selectedShape = default(BaseShape);
+            _selectedShapes = default(ICollection<BaseShape>);
 
             ClearCache();
         }
