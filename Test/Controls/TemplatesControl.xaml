@@ -7,6 +7,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="180">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Test;component/Dictionaries/ProjectDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -28,9 +35,10 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel DataContext="{Binding Editor.Project.CurrentTemplate}" Grid.Row="2" Margin="2">
-            <StackPanel.Style>
-                <Style TargetType="StackPanel">
+        <ContentControl Content="{Binding Editor.Project.CurrentTemplate}"
+                        Grid.Row="2" Margin="2">
+             <ContentControl.Style>
+                <Style TargetType="ContentControl">
                     <Setter Property="Visibility" Value="Visible"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding}" Value="{x:Null}">
@@ -38,26 +46,7 @@
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-            </StackPanel.Style>
-            <Expander Header="Name" IsExpanded="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="30"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                             BorderBrush="{x:Null}" 
-                             Grid.Row="0" 
-                             Grid.Column="0" 
-                             Grid.ColumnSpan="2"
-                             TextAlignment="Left" 
-                             VerticalAlignment="Center">
-                    </TextBox>
-                </Grid>
-            </Expander>
-        </StackPanel>
+            </ContentControl.Style>
+        </ContentControl>
     </Grid>
 </UserControl>
