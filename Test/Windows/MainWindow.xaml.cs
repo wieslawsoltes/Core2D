@@ -283,7 +283,7 @@ namespace Test.Windows
             {
                 Filter = "Project (*.project)|*.project|All (*.*)|*.*",
                 FilterIndex = 0,
-                FileName = "project"
+                FileName = (DataContext as EditorContext).Editor.Project.Name
             };
 
             if (dlg.ShowDialog() == true)
@@ -311,6 +311,12 @@ namespace Test.Windows
             else if (item is EditorContext)
             {
                 var editor = (item as EditorContext).Editor;
+                name = editor.Project.Name;
+                item = editor.Project;
+            }
+            else if (item == null)
+            {
+                var editor = (DataContext as EditorContext).Editor;
                 name = editor.Project.Name;
                 item = editor.Project;
             }
