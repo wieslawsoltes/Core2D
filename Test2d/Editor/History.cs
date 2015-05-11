@@ -11,51 +11,15 @@ namespace Test2d
     public class History<T>
     {
         private ISerializer _serializer = default(ISerializer);
+        private ICompressor _compressor = default(ICompressor);
         private Stack<byte[]> _undos = new Stack<byte[]>();
         private Stack<byte[]> _redos = new Stack<byte[]>();
         private byte[] _hold = default(byte[]);
 
-        public History(ISerializer serializer)
+        public History(ISerializer serializer, ICompressor compressor)
         {
             _serializer = serializer;
-        }
-
-        public static byte[] Compress(byte[] data)
-        {
-            using (var ms = new System.IO.MemoryStream()) 
-            {
-                using (var cs = new System.IO.Compression.GZipStream(ms, System.IO.Compression.CompressionMode.Compress, true))
-                {
-                    cs.Write(data, 0, data.Length);
-                }
-                return ms.ToArray();
-            }
-        }
-
-        public static byte[] Decompress(byte[] data)
-        {
-            using (var ms = new System.IO.MemoryStream(data)) 
-            {
-                using (var cs = new System.IO.Compression.GZipStream(ms, System.IO.Compression.CompressionMode.Decompress))
-                {
-                    const int size = 4096;
-                    var buffer = new byte[size];
-                    using (var memory = new System.IO.MemoryStream())
-                    {
-                        int count = 0;
-                        do
-                        {
-                            count = cs.Read(buffer, 0, size);
-                            if (count > 0)
-                            {
-                                memory.Write(buffer, 0, count);
-                            }
-                        }
-                        while (count > 0);
-                        return memory.ToArray();
-                    }
-                }
-            }
+            _compressor = compressor;
         }
 
         public void Reset()
@@ -73,7 +37,7 @@ namespace Test2d
 
         public void Hold(T obj)
         {
-            _hold = Compress(_serializer.ToBson(obj));
+            _hold = _compressor.Compress(_serializer.ToBson(obj));
         }
 
         public void Commit()
@@ -88,7 +52,7 @@ namespace Test2d
 
         public void Snapshot(T obj)
         {
-            Snapshot(Compress(_serializer.ToBson(obj)));
+            Snapshot(_compressor.Compress(_serializer.ToBson(obj)));
         }
 
         private void Snapshot(byte[] bson)
@@ -107,11 +71,11 @@ namespace Test2d
         {
             if (CanUndo())
             {
-                var bson = Compress(_serializer.ToBson(current));
+                var bson = _compressor.Compress(_serializer.ToBson(current));
                 if (bson != null)
                 {
                     _redos.Push(bson);
-                    return _serializer.FromBson<T>(Decompress(_undos.Pop()));
+                    return _serializer.FromBson<T>(_compressor.Decompress(_undos.Pop()));
                 }
             }
             return default(T);
@@ -121,11 +85,11 @@ namespace Test2d
         {
             if (CanRedo())
             {
-                var bson = Compress(_serializer.ToBson(current));
+                var bson = _compressor.Compress(_serializer.ToBson(current));
                 if (bson != null)
                 {
                     _undos.Push(bson);
-                    return _serializer.FromBson<T>(Decompress(_redos.Pop()));
+                    return _serializer.FromBson<T>(_compressor.Decompress(_redos.Pop()));
                 }
             }
             return default(T);
