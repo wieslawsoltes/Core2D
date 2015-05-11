@@ -26,14 +26,16 @@ namespace TestEDITOR
         private EditorCommands _commands;
         private Editor _editor;
         private ITextClipboard _textClipboard;
+        private ISerializer _serializer;
+        private History<Project> _history;
         private string _rootScriptsPath;
         private IList<ScriptDirectory> _scriptDirectories;
         private bool _isSimulationPaused;
-        private System.IO.FileSystemWatcher _watcher = null;
-        private System.Threading.Timer _timer = null;
-        private BoolSimulationFactory _simulationFactory = null;
+        private System.IO.FileSystemWatcher _watcher = default(System.IO.FileSystemWatcher);
+        private System.Threading.Timer _timer = default(System.Threading.Timer);
+        private BoolSimulationFactory _simulationFactory = default(BoolSimulationFactory);
         private IDictionary<XGroup, BoolSimulation> _simulations;
-        private Clock _clock = null;
+        private Clock _clock = default(Clock);
 
         public EditorCommands Commands
         {
@@ -74,6 +76,32 @@ namespace TestEDITOR
             }
         }
 
+        public ISerializer Serializer
+        {
+            get { return _serializer; }
+            set
+            {
+                if (value != _serializer)
+                {
+                    _serializer = value;
+                    Notify("Serializer");
+                }
+            }
+        }
+        
+        public History<Project> History
+        {
+            get { return _history; }
+            set
+            {
+                if (value != _history)
+                {
+                    _history = value;
+                    Notify("History");
+                }
+            }
+        }
+    
         public string RootScriptsPath
         {
             get { return _rootScriptsPath; }
@@ -197,9 +225,10 @@ namespace TestEDITOR
         public void Initialize(IView view, IRenderer renderer, ITextClipboard clipboard)
         {
             _commands = new EditorCommands();
-
-            _editor = Editor.Create(DefaultProject(), renderer);
             _textClipboard = clipboard;
+            _serializer = new NewtonsoftSerializer();
+            _history = new History<Project>(_serializer);
+            _editor = Editor.Create(DefaultProject(), renderer, _history);
 
             (_editor.Renderer as ObservableObject).PropertyChanged +=
                 (s, e) =>
@@ -217,18 +246,22 @@ namespace TestEDITOR
                     {
                         var document = item as Document;
                         var container = DefaultContainer(_editor.Project);
+                        _history.Snapshot(_editor.Project);
                         document.Containers.Add(container);
                         _editor.Project.CurrentContainer = container;
                     }
                     else if (item is Project || item == null)
                     {
                         var document = DefaultDocument(_editor.Project);
+                        _history.Snapshot(_editor.Project);
                         _editor.Project.Documents.Add(document);
                         _editor.Project.CurrentDocument = document;
                         _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
                     }
                     else if (item is EditorContext || item == null)
                     {
+                        _history.Reset();
+                        _history.Snapshot(_editor.Project);
                         _editor.Load(DefaultProject());
                     }
                 },
@@ -246,14 +279,14 @@ namespace TestEDITOR
                 {
                     Undo();
                 },
-                () => IsEditMode() && CanUndo());
+                () => IsEditMode() /* && CanUndo() */);
 
             _commands.RedoCommand = new DelegateCommand(
                 () =>
                 {
                     Redo();
                 },
-                () => IsEditMode() && CanRedo());
+                () => IsEditMode() /* && CanRedo() */);
 
             _commands.CutCommand = new DelegateCommand<object>(
                 (item) =>
@@ -339,6 +372,7 @@ namespace TestEDITOR
                         var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
                         if (document != null)
                         {
+                            _history.Snapshot(_editor.Project);
                             document.Containers.Remove(container);
                             _editor.Project.CurrentDocument = document;
                             _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
@@ -347,11 +381,16 @@ namespace TestEDITOR
                     else if (item is Document)
                     {
                         var document = item as Document;
+                        _history.Snapshot(_editor.Project);
                         _editor.Project.Documents.Remove(document);
                         _editor.Project.CurrentDocument = _editor.Project.Documents.FirstOrDefault();
                         if (_editor.Project.CurrentDocument != null)
                         {
                             _editor.Project.CurrentContainer = _editor.Project.CurrentDocument.Containers.FirstOrDefault();
+                        }
+                        else
+                        {
+                            _editor.Project.CurrentContainer = default(Container);
                         }
                     }
                     else if (item is EditorContext || item == null)
@@ -500,6 +539,7 @@ namespace TestEDITOR
                 {
                     if (_editor.Renderer.SelectedShape != null)
                     {
+                        _history.Snapshot(_editor.Project);
                         _editor.Renderer.SelectedShape.Properties.Add(ShapeProperty.Create("New", ""));
                     }
                 },
@@ -510,6 +550,7 @@ namespace TestEDITOR
                 {
                     if (property is ShapeProperty)
                     {
+                        _history.Snapshot(_editor.Project);
                         _editor.Renderer.SelectedShape.Properties.Remove(property as ShapeProperty);
                     }
                 },
@@ -519,6 +560,7 @@ namespace TestEDITOR
                 () =>
                 {
                     var gl = GroupLibrary.Create("New");
+                    _history.Snapshot(_editor.Project);
                     _editor.Project.GroupLibraries.Add(gl);
                 },
                 () => IsEditMode());
@@ -541,6 +583,7 @@ namespace TestEDITOR
                             var clone = Clone(group as XGroup);
                             if (clone != null)
                             {
+                                _history.Snapshot(_editor.Project);
                                 _editor.Project.CurrentGroupLibrary.Groups.Add(clone);
                             }
                         }
@@ -558,6 +601,7 @@ namespace TestEDITOR
             _commands.AddLayerCommand = new DelegateCommand(
                 () =>
                 {
+                    _history.Snapshot(_editor.Project);
                     _editor.Container.Layers.Add(Layer.Create("New"));
                 },
                 () => IsEditMode());
@@ -574,6 +618,7 @@ namespace TestEDITOR
                 {
                     var sg = ShapeStyleGroup.Create("New");
                     sg.Styles.Add(ShapeStyle.Create("New"));
+                    _history.Snapshot(_editor.Project);
                     _editor.Project.StyleGroups.Add(sg);
                 },
                 () => IsEditMode());
@@ -588,6 +633,7 @@ namespace TestEDITOR
             _commands.AddStyleCommand = new DelegateCommand(
                 () =>
                 {
+                    _history.Snapshot(_editor.Project);
                     _editor.Project.CurrentStyleGroup.Styles.Add(ShapeStyle.Create("New"));
                 },
                 () => IsEditMode());
@@ -644,6 +690,7 @@ namespace TestEDITOR
             _commands.AddTemplateCommand = new DelegateCommand(
                 () =>
                 {
+                    _history.Snapshot(_editor.Project);
                     _editor.Project.Templates.Add(EmptyTemplate(_editor.Project));
                 },
                 () => IsEditMode());
@@ -653,6 +700,7 @@ namespace TestEDITOR
                 {
                     if (_editor.Project.CurrentTemplate != null)
                     {
+                        _history.Snapshot(_editor.Project);
                         _editor.Project.Templates.Remove(_editor.Project.CurrentTemplate);
                     }
                     
@@ -683,6 +731,7 @@ namespace TestEDITOR
                     if (item is Container)
                     {
                         var template = item as Container;
+                        _history.Snapshot(_editor.Project);
                         _editor.Project.CurrentContainer.Template = template;
                     }
                 },
@@ -714,6 +763,7 @@ namespace TestEDITOR
                 (item) =>
                 {
                     var container = DefaultContainer(_editor.Project);
+                    _history.Snapshot(_editor.Project);
                     _editor.Project.CurrentDocument.Containers.Add(container);
                     _editor.Project.CurrentContainer = container;
                 },
@@ -737,6 +787,7 @@ namespace TestEDITOR
                 (item) =>
                 {
                     var document = DefaultDocument(_editor.Project);
+                    _history.Snapshot(_editor.Project);
                     _editor.Project.Documents.Add(document);
                     _editor.Project.CurrentDocument = document;
                     _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
@@ -784,7 +835,7 @@ namespace TestEDITOR
                 .AddNamespaces("TestDXF")
                 .AddReferences(Assembly.GetAssembly(typeof(Emf)))
                 .AddNamespaces("TestEMF")
-                .AddReferences(Assembly.GetAssembly(typeof(ContainerSerializer)))
+                .AddReferences(Assembly.GetAssembly(typeof(NewtonsoftSerializer)))
                 .AddNamespaces("TestJSON")
                 .AddReferences(Assembly.GetAssembly(typeof(EditorContext)))
                 .AddNamespaces("TestEDITOR")
@@ -816,16 +867,45 @@ namespace TestEDITOR
             }
         }
 
+        private string ReadUtf8Text(string path)
+        {
+            using (var fs = System.IO.File.OpenRead(path))
+            {
+                using (var cs = new System.IO.Compression.GZipStream(fs, System.IO.Compression.CompressionMode.Decompress))
+                {
+                    using (var sr = new System.IO.StreamReader(cs, Encoding.UTF8))
+                    {
+                        return sr.ReadToEnd();
+                    }
+                }
+            }
+        }
+        
+        private void WriteUtf8Text(string path, string text)
+        {
+            using (var fs = System.IO.File.Create(path))
+            {
+                using (var cs = new System.IO.Compression.GZipStream(fs, System.IO.Compression.CompressionMode.Compress))
+                {
+                    using (var sw = new System.IO.StreamWriter(cs, Encoding.UTF8))
+                    {
+                        sw.Write(text);
+                    }
+                }
+            }
+        }
+        
         public void Open(string path)
         {
-            var json = System.IO.File.ReadAllText(path, Encoding.UTF8);
-            var project = ContainerSerializer.Deserialize<Project>(json);
+            var json = ReadUtf8Text(path);
+            var project = Serializer.FromJson<Project>(json);
 
             var root = new Uri(path);
             var images = Editor.GetAllShapes<XImage>(project);
 
             _editor.ToAbsoluteUri(root, images);
 
+            _history.Snapshot(_editor.Project);
             _editor.Load(project);
         }
 
@@ -836,8 +916,8 @@ namespace TestEDITOR
 
             _editor.ToRelativeUri(root, images);
 
-            var json = ContainerSerializer.Serialize(_editor.Project);
-            System.IO.File.WriteAllText(path, json, Encoding.UTF8);
+            var json = Serializer.ToJson(_editor.Project);
+            WriteUtf8Text(path, json);
 
             _editor.ToAbsoluteUri(root, images);
         }
@@ -924,7 +1004,7 @@ namespace TestEDITOR
         {
             try
             {
-                var json = ContainerSerializer.Serialize(shapes);
+                var json = Serializer.ToJson(shapes);
                 if (!string.IsNullOrEmpty(json))
                 {
                     _textClipboard.SetText(json);
@@ -941,7 +1021,7 @@ namespace TestEDITOR
         {
             try
             {
-                var shapes = ContainerSerializer.Deserialize<IList<BaseShape>>(json);
+                var shapes = Serializer.FromJson<IList<BaseShape>>(json);
                 if (shapes != null && shapes.Count() > 0)
                 {
                     Paste(shapes);
@@ -993,6 +1073,8 @@ namespace TestEDITOR
         {
             _editor.Deselect(_editor.Container);
 
+            _history.Snapshot(_editor.Project);
+            
             TryToRestoreStyles(shapes);
 
             foreach (var shape in shapes)
@@ -1007,10 +1089,10 @@ namespace TestEDITOR
         {
             try
             {
-                var json = ContainerSerializer.Serialize(group);
+                var json = Serializer.ToJson(group);
                 if (!string.IsNullOrEmpty(json))
                 {
-                    var clone = ContainerSerializer.Deserialize<XGroup>(json);
+                    var clone = Serializer.FromJson<XGroup>(json);
                     if (clone != null)
                     {
                         TryToRestoreStyles(Enumerable.Repeat(clone, 1).ToList());
@@ -1039,6 +1121,7 @@ namespace TestEDITOR
                 {
                     _editor.Deselect(_editor.Container);
                     clone.Move(sx, sy);
+                    _history.Snapshot(_editor.Project);
                     _editor.Container.CurrentLayer.Shapes.Add(clone);
                     _editor.Select(_editor.Container, clone);
                 }
@@ -1052,22 +1135,46 @@ namespace TestEDITOR
 
         public bool CanUndo()
         {
-            return false;
+            return _history.CanUndo();
         }
 
         public bool CanRedo()
         {
-            return false;
+            return _history.CanRedo();
         }
 
         public void Undo()
         {
-            // TODO:
+            try
+            {
+                if (_history.CanUndo())
+                {
+                    var project = _history.Undo(_editor.Project);
+                    _editor.Load(project);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
 
         public void Redo()
         {
-            // TODO:
+            try
+            {
+                if (_history.CanRedo())
+                {
+                    var project = _history.Redo(_editor.Project);
+                    _editor.Load(project);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
 
         public void Cut()
@@ -1126,6 +1233,7 @@ namespace TestEDITOR
 
         public void ClearAll()
         {
+            _history.Snapshot(_editor.Project);
             _editor.Container.Clear();
             _editor.Container.Invalidate();
         }
@@ -1279,7 +1387,7 @@ namespace TestEDITOR
                 if (IsSimulationMode())
                 {
                     _timer.Dispose();
-                    _timer = null;
+                    _timer = default(System.Threading.Timer);
                     IsSimulationPaused = false;
                     UpdateCanExecuteState();
                 }
