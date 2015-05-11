@@ -52,8 +52,8 @@ namespace Dxf
             UcsXAxisDirection = new DxfVector3(0.0, 0.0, 0.0);
             UcsYAxisDirection = new DxfVector3(0.0, 0.0, 0.0);
             UcsOrthographicViewType = DxfOrthographicViewType.NotOrthographic;
-            NamedUcsHandle = null;
-            BaseUcsHandle = null;
+            NamedUcsHandle = default(string);
+            BaseUcsHandle = default(string);
         }
 
         public override string Create()

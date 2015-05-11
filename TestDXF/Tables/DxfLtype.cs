@@ -25,7 +25,7 @@ namespace Dxf
             Description = string.Empty;
             DashLengthItems = 0;
             TotalPatternLength = 0.0;
-            DashLengths = null;
+            DashLengths = default(double[]);
         }
 
         public override string Create()

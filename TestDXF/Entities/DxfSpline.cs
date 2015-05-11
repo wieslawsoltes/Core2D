@@ -39,8 +39,8 @@ namespace Dxf
             ControlPointTolerance = 0.0000001;
             FitTolerance = 0.0000000001;
             
-            StartTangent = null;
-            EndTangent = null;
+            StartTangent = default(DxfVector3);
+            EndTangent = default(DxfVector3);
             
             Knots = new double[8];
             //Knots[0] = 0.0;
@@ -60,7 +60,7 @@ namespace Dxf
             //ControlPoints[2] = new DxfVector3(0.0, 0.0, 0.0);
             //ControlPoints[3] = new DxfVector3(0.0, 0.0, 0.0);
             
-            FitPoints = null;
+            FitPoints = default(DxfVector3[]);
         }
         
         public override string Create()

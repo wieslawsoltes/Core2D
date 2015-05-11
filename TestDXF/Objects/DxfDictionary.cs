@@ -23,7 +23,7 @@ namespace Dxf
             OwnerDictionaryHandle = "0";
             HardOwnerFlag = false;
             DuplicateRecordCloningFlags = DxfDuplicateRecordCloningFlags.KeepExisting;
-            Entries = null;
+            Entries = default(IDictionary<string, string>);
         }
 
         public override string Create()

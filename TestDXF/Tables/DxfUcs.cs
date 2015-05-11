@@ -31,9 +31,9 @@ namespace Dxf
             YAxisDirection = new DxfVector3(0.0, 0.0, 0.0);
             OrthographicViewType = DxfOrthographicViewType.NotOrthographic;
             Elevation = 0;
-            BaseUcsHandle = null;
-            OrthographicType = null;
-            OrthographicOrigin = null;
+            BaseUcsHandle = default(string);
+            OrthographicType = default(DxfOrthographicType[]);
+            OrthographicOrigin = default(DxfVector3[]);
         }
 
         public override string Create()

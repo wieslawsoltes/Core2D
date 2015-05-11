@@ -50,8 +50,8 @@ namespace Dxf
 
             var sections = new List<DxfRawTag>();
 
-            DxfRawTag section = null;
-            DxfRawTag other = null;
+            DxfRawTag section = default(DxfRawTag);
+            DxfRawTag other = default(DxfRawTag);
 
             for (int i = 0; i < lines.Length; i += 2)
             {
@@ -68,14 +68,14 @@ namespace Dxf
                     section = tag;
                     section.Children = new List<DxfRawTag>();
                     sections.Add(section);
-                    other = null;
+                    other = default(DxfRawTag);
                 }
                 else if (isSectionEnd)
                 {
                     tag.Parent = section;
                     section.Children.Add(tag);
-                    section = null;
-                    other = null;
+                    section = default(DxfRawTag);
+                    other = default(DxfRawTag);
                 }
                 else
                 {
@@ -108,7 +108,7 @@ namespace Dxf
                     }
                     else
                     {
-                        tag.Parent = null;
+                        tag.Parent = default(DxfRawTag);
                         sections.Add(tag);
                     }
                 }
