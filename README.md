@@ -16,6 +16,8 @@ Test is an application for making 2D diagrams and running logic simulations.
 * Prism.Mvvm
 * Newtonsoft.Json
 * PDFsharp
+* lz4net
+* System.Windows.Interactivity.WPF
 * Microsoft.CodeAnalysis.Analyzers
 * Microsoft.CodeAnalysis.Common
 * Microsoft.CodeAnalysis.CSharp
