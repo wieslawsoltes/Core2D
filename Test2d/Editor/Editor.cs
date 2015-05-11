@@ -25,8 +25,11 @@ namespace Test2d
         private bool _isContextMenu;
         private bool _enableObserver = true;
         private Observer _observer;
+        private History<Project> _history;
         private double _startX;
         private double _startY;
+        private double _historyX;
+        private double _historyY;
         private double _hitTreshold = 6.0;
         private bool _tryToConnect = true;
 
@@ -194,6 +197,19 @@ namespace Test2d
             }
         }
 
+        public History<Project> History
+        {
+            get { return _history; }
+            set
+            {
+                if (value != _history)
+                {
+                    _history = value;
+                    Notify("History");
+                }
+            }
+        }
+ 
         public double HitTreshold
         {
             get { return _hitTreshold; }
@@ -222,7 +238,7 @@ namespace Test2d
 
         public Func<string> GetImagePath { get; set; }
 
-        public static Editor Create(Project project, IRenderer renderer)
+        public static Editor Create(Project project, IRenderer renderer, History<Project> history)
         {
             var editor = new Editor()
             {
@@ -233,6 +249,7 @@ namespace Test2d
                 CurrentTool = Tool.Selection,
                 CurrentState = State.None,
                 EnableObserver = true,
+                History = history,
                 HitTreshold = 6.0,
                 TryToConnect = true
             };
@@ -532,6 +549,7 @@ namespace Test2d
             var gl = Project.CurrentGroupLibrary;
             if (gl != null)
             {
+                _history.Snapshot(_project);
                 Project.GroupLibraries.Remove(gl);
                 Project.CurrentGroupLibrary = Project.GroupLibraries.FirstOrDefault();
             }
@@ -542,6 +560,7 @@ namespace Test2d
             var group = Project.CurrentGroupLibrary.CurrentGroup;
             if (group != null)
             {
+                _history.Snapshot(_project);
                 Project.CurrentGroupLibrary.Groups.Remove(group);
                 Project.CurrentGroupLibrary.CurrentGroup = Project.CurrentGroupLibrary.Groups.FirstOrDefault();
             }
@@ -552,6 +571,7 @@ namespace Test2d
             var layer = Container.CurrentLayer;
             if (layer != null)
             {
+                _history.Snapshot(_project);
                 Container.Layers.Remove(layer);
                 Container.CurrentLayer = Container.Layers.FirstOrDefault();
                 Container.Invalidate();
@@ -563,6 +583,7 @@ namespace Test2d
             var shape = Container.CurrentShape;
             if (shape != null)
             {
+                _history.Snapshot(_project);
                 Container.CurrentLayer.Shapes.Remove(shape);
                 Container.CurrentShape = Container.CurrentLayer.Shapes.FirstOrDefault();
                 Container.Invalidate();
@@ -574,6 +595,7 @@ namespace Test2d
             var sg = Project.CurrentStyleGroup;
             if (sg != null)
             {
+                _history.Snapshot(_project);
                 Project.StyleGroups.Remove(sg);
                 Project.CurrentStyleGroup = Project.StyleGroups.FirstOrDefault();
             }
@@ -584,6 +606,7 @@ namespace Test2d
             var style = Project.CurrentStyleGroup.CurrentStyle;
             if (style != null)
             {
+                _history.Snapshot(_project);
                 Project.CurrentStyleGroup.Styles.Remove(style);
                 Project.CurrentStyleGroup.CurrentStyle = Project.CurrentStyleGroup.Styles.FirstOrDefault();
             }
@@ -592,7 +615,7 @@ namespace Test2d
         public void Load(Project project)
         {
             Renderer.ClearCache();
-
+            
             Project = project;
             Container.Invalidate();
 
@@ -607,6 +630,8 @@ namespace Test2d
             var layer = Container.CurrentLayer;
             if (_renderer.SelectedShapes != null)
             {
+                _history.Snapshot(_project);
+  
                 var g = XGroup.Group("g", _renderer.SelectedShapes);
 
                 foreach (var shape in _renderer.SelectedShapes)
@@ -624,6 +649,8 @@ namespace Test2d
             var layer = Container.CurrentLayer;
             if (layer.Shapes.Count > 0)
             {
+                _history.Snapshot(_project);
+                
                 var g = XGroup.Group("g", layer.Shapes);
 
                 foreach (var shape in layer.Shapes.ToList())
@@ -645,7 +672,7 @@ namespace Test2d
             double dy = sy - _startY;
 
             _startX = sx;
-            _startY = sy;
+            _startY = sy;                    
 
             if (_renderer.SelectedShape != null)
             {
@@ -674,14 +701,18 @@ namespace Test2d
         {
             if (_renderer.SelectedShape != null)
             {
+                _history.Snapshot(_project);
+
                 Container.CurrentLayer.Shapes.Remove(_renderer.SelectedShape);
                 Container.CurrentLayer.Invalidate();
 
-                _renderer.SelectedShape = null;
+                _renderer.SelectedShape = default(BaseShape);
             }
 
-            if (_renderer.SelectedShapes != null)
+            if (_renderer.SelectedShapes != null && _renderer.SelectedShapes.Count > 0)
             {
+                _history.Snapshot(_project);
+                
                 var layer = Container.CurrentLayer;
 
                 foreach (var shape in _renderer.SelectedShapes)
@@ -689,7 +720,7 @@ namespace Test2d
                     layer.Shapes.Remove(shape);
                 }
 
-                _renderer.SelectedShapes = null;
+                _renderer.SelectedShapes = default(ICollection<BaseShape>);
 
                 layer.Invalidate();
             }
@@ -699,23 +730,23 @@ namespace Test2d
         {
             container.CurrentShape = shape;
             _renderer.SelectedShape = shape;
-            _renderer.SelectedShapes = null;
+            _renderer.SelectedShapes = default(ICollection<BaseShape>);
             container.CurrentLayer.Invalidate();
         }
 
         public void Select(Container container, ICollection<BaseShape> shapes)
         {
-            container.CurrentShape = null;
-            _renderer.SelectedShape = null;
+            container.CurrentShape = default(BaseShape);
+            _renderer.SelectedShape = default(BaseShape);
             _renderer.SelectedShapes = shapes;
             container.CurrentLayer.Invalidate();
         }
 
         public void Deselect(Container container)
         {
-            container.CurrentShape = null;
-            _renderer.SelectedShape = null;
-            _renderer.SelectedShapes = null;
+            container.CurrentShape = default(BaseShape);
+            _renderer.SelectedShape = default(BaseShape);
+            _renderer.SelectedShapes = default(ICollection<BaseShape>);
             container.CurrentLayer.Invalidate();
         }
 
@@ -995,6 +1026,9 @@ namespace Test2d
                             {
                                 _startX = SnapToGrid ? Snap(sx, SnapX) : sx;
                                 _startY = SnapToGrid ? Snap(sy, SnapY) : sy;
+                                _historyX = _startX;
+                                _historyY = _startY;   
+                                _history.Hold(_project);
                                 IsContextMenu = false;
                                 CurrentState = State.One;
                                 break;
@@ -1005,6 +1039,9 @@ namespace Test2d
                         {
                             _startX = SnapToGrid ? Snap(sx, SnapX) : sx;
                             _startY = SnapToGrid ? Snap(sy, SnapY) : sy;
+                            _historyX = _startX;
+                            _historyY = _startY;   
+                            _history.Hold(_project);
                             IsContextMenu = false;
                             CurrentState = State.One;
                             break;
@@ -1046,6 +1083,16 @@ namespace Test2d
                     {
                         if (IsSelectionAvailable())
                         {
+                            double x = SnapToGrid ? Snap(sx, SnapX) : sx;
+                            double y = SnapToGrid ? Snap(sy, SnapY) : sy;
+                            if (_historyX != x || _historyY != y)
+                            {
+                                _history.Commit();
+                            }
+                            else
+                            {
+                                _history.Release();
+                            }
                             CurrentState = State.None;
                             break;
                         }
@@ -1111,6 +1158,7 @@ namespace Test2d
                                 TryToConnectEnd(_shape as XLine, sx, sy);
                             }
                             Container.WorkingLayer.Shapes.Remove(_shape);
+                            _history.Snapshot(_project);
                             Container.CurrentLayer.Shapes.Add(_shape);
                             Container.Invalidate();
                             CurrentState = State.None;
@@ -1152,6 +1200,7 @@ namespace Test2d
                                 TryToConnectBottomRight(_shape as XRectangle, sx, sy);
                             }
                             Container.WorkingLayer.Shapes.Remove(_shape);
+                            _history.Snapshot(_project);
                             Container.CurrentLayer.Shapes.Add(_shape);
                             Container.Invalidate();
                             CurrentState = State.None;
@@ -1193,6 +1242,7 @@ namespace Test2d
                                 TryToConnectBottomRight(_shape as XEllipse, sx, sy);
                             }
                             Container.WorkingLayer.Shapes.Remove(_shape);
+                            _history.Snapshot(_project);
                             Container.CurrentLayer.Shapes.Add(_shape);
                             Container.Invalidate();
                             CurrentState = State.None;
@@ -1234,6 +1284,7 @@ namespace Test2d
                                 TryToConnectPoint2(_shape as XArc, sx, sy);
                             }
                             Container.WorkingLayer.Shapes.Remove(_shape);
+                            _history.Snapshot(_project);
                             Container.CurrentLayer.Shapes.Add(_shape);
                             Container.Invalidate();
                             CurrentState = State.None;
@@ -1313,6 +1364,7 @@ namespace Test2d
                                 TryToConnectPoint2(_shape as XBezier, sx, sy);
                             }
                             Container.WorkingLayer.Shapes.Remove(_shape);
+                            _history.Snapshot(_project);
                             Container.CurrentLayer.Shapes.Add(_shape);
                             Container.Invalidate();
                             CurrentState = State.None;
@@ -1372,6 +1424,7 @@ namespace Test2d
                                 TryToConnectPoint2(_shape as XQBezier, sx, sy);
                             }
                             Container.WorkingLayer.Shapes.Remove(_shape);
+                            _history.Snapshot(_project);
                             Container.CurrentLayer.Shapes.Add(_shape);
                             Container.Invalidate();
                             CurrentState = State.None;
@@ -1414,6 +1467,7 @@ namespace Test2d
                                 TryToConnectBottomRight(_shape as XText, sx, sy);
                             }
                             Container.WorkingLayer.Shapes.Remove(_shape);
+                            _history.Snapshot(_project);
                             Container.CurrentLayer.Shapes.Add(_shape);
                             Container.Invalidate();
                             CurrentState = State.None;
@@ -1462,6 +1516,7 @@ namespace Test2d
                                 TryToConnectBottomRight(_shape as XImage, sx, sy);
                             }
                             Container.WorkingLayer.Shapes.Remove(_shape);
+                            _history.Snapshot(_project);
                             Container.CurrentLayer.Shapes.Add(_shape);
                             Container.Invalidate();
                             CurrentState = State.None;

@@ -36,11 +36,11 @@ namespace TestSIM
             int length = Inputs.Length;
             if (length == 1)
             {
-                base.State = null;
+                base.State = default(bool?);
                 return;
             }
 
-            bool? result = null;
+            bool? result = default(bool?);
             for (int i = 0; i < length; i++)
             {
                 var input = Inputs[i];

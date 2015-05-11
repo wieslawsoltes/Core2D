@@ -102,8 +102,8 @@ namespace TestPDF
         {
             _zoom = 1.0;
             _drawShapeState = Test2d.ShapeState.Visible | Test2d.ShapeState.Printable;
-            _selectedShape = null;
-            _selectedShapes = null;
+            _selectedShape = default(Test2d.BaseShape);
+            _selectedShapes = default(ICollection<Test2d.BaseShape>);
 
             ClearCache();
 
@@ -130,7 +130,7 @@ namespace TestPDF
         {
             using (var pdf = new PdfDocument())
             {
-                PdfOutline documentOutline = null;
+                PdfOutline documentOutline = default(PdfOutline);
 
                 foreach (var container in document.Containers)
                 {
@@ -162,11 +162,11 @@ namespace TestPDF
         {
             using (var pdf = new PdfDocument())
             {
-                PdfOutline projectOutline = null;
+                PdfOutline projectOutline = default(PdfOutline);
 
                 foreach (var document in project.Documents)
                 {
-                    PdfOutline documentOutline = null;
+                    PdfOutline documentOutline = default(PdfOutline);
 
                     foreach (var container in document.Containers)
                     {

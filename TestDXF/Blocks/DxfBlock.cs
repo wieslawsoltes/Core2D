@@ -28,11 +28,11 @@ namespace Dxf
             Layer = "0";
             BlockTypeFlags = DxfBlockTypeFlags.Default;
             BasePoint = new DxfVector3(0.0, 0.0, 0.0);
-            XrefPathName = null;
-            Description = null;
+            XrefPathName = default(string);
+            Description = default(string);
             EndId = 0;
             EndLayer = "0";
-            Entities = null;
+            Entities = default(IList<object>);
         }
 
         public override string Create()

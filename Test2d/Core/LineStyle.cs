@@ -92,10 +92,10 @@ namespace Test2d
         }
 
         public static LineStyle Create(
-            ArrowStyle startArrowStyle = null,
-            ArrowStyle endArrowStyle = null,
+            ArrowStyle startArrowStyle = default(ArrowStyle),
+            ArrowStyle endArrowStyle = default(ArrowStyle),
             LineCap lineCap = LineCap.Round,
-            double[] dashes = null,
+            double[] dashes = default(double[]),
             double dashOffset = 0.0)
         {
             return new LineStyle() 

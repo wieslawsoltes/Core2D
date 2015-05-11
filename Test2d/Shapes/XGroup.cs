@@ -165,7 +165,7 @@ namespace Test2d
             return new XGroup()
             {
                 Name = name,
-                Style = null,
+                Style = default(ShapeStyle),
                 Properties = new ObservableCollection<ShapeProperty>(),
                 Database = new ObservableCollection<KeyValuePair<string, ShapeProperty>>(),
                 Shapes = new ObservableCollection<BaseShape>(),

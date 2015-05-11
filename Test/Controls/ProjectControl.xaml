@@ -73,6 +73,16 @@
         </TreeView>
         <ContentControl Content="{Binding ElementName=projectTreeView, Path=SelectedItem}"
                         Grid.Row="2" Margin="2">
+             <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
         </ContentControl>
     </Grid>
 </UserControl>
