@@ -1120,6 +1120,7 @@ namespace Test2d
                 case State.None:
                     {
                         _shape = XPoint.Create(sx, sy, Project.PointShape);
+                        _history.Snapshot(_project);
                         Container.CurrentLayer.Shapes.Add(_shape);
                         Container.Invalidate();
                     }
