@@ -261,12 +261,24 @@ namespace TestEDITOR
             _commands.NewCommand = new DelegateCommand<object>(
                 (item) =>
                 {
-                    if (item is Document)
+                    if (item is Container)
                     {
-                        var document = item as Document;
+                        var selected = item as Container;
+                        var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(selected));
+                        if (document != null)
+                        {
+                            var container = DefaultContainer(_editor.Project);
+                            _history.Snapshot(_editor.Project);
+                            document.Containers.Add(container);
+                            _editor.Project.CurrentContainer = container;
+                        }
+                    }
+                    else if (item is Document)
+                    {
+                        var selected = item as Document;
                         var container = DefaultContainer(_editor.Project);
                         _history.Snapshot(_editor.Project);
-                        document.Containers.Add(container);
+                        selected.Containers.Add(container);
                         _editor.Project.CurrentContainer = container;
                     }
                     else if (item is Project || item == null)
@@ -761,19 +773,18 @@ namespace TestEDITOR
                 {
                     if (item is Container)
                     {
-                        var container = item as Container;
-                        var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
+                        var selected = item as Container;
+                        var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(selected));
                         if (document != null)
                         {
                             _editor.Project.CurrentDocument = document;
-                            _editor.Project.CurrentContainer = container;
+                            _editor.Project.CurrentContainer = selected;
                         }
                     }
                     else if (item is Document)
                     {
-                        var document = item as Document;
-                        _editor.Project.CurrentDocument = document;
-                        _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
+                        var selected = item as Document;
+                        _editor.Project.CurrentDocument = selected;
                     }
                 },
                 (item) => IsEditMode());
