@@ -63,6 +63,7 @@
     <Compile Include="Core\ArrowStyle.cs" />
     <Compile Include="Core\ArrowType.cs" />
     <Compile Include="Core\BaseShape.cs" />
+    <Compile Include="Core\ISerializer.cs" />
     <Compile Include="Core\ITextClipboard.cs" />
     <Compile Include="Core\IView.cs" />
     <Compile Include="Core\LineCap.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Core\ShapeState.cs" />
     <Compile Include="Core\ShapeStyleGroup.cs" />
     <Compile Include="Core\TextStyle.cs" />
+    <Compile Include="Editor\History.cs" />
     <Compile Include="Editor\State.cs" />
     <Compile Include="Editor\Tool.cs" />
     <Compile Include="Project\Container.cs" />
