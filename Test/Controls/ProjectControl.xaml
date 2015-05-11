@@ -20,6 +20,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -27,7 +28,27 @@
             <MenuItem Command="{Binding Commands.NewCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="_+"/>
             <MenuItem Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="_-"/>
         </Menu>
-        <TreeView x:Name="projectTreeView" ItemsSource="{Binding Editor.Project.Documents}" BorderBrush="{x:Null}" Grid.Row="1">
+        <ContentControl Content="{Binding Editor.Project}"
+                        Grid.Row="1" Margin="2">
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
+        <TreeView x:Name="projectTreeView" 
+                  Tag="{Binding}"
+                  ItemsSource="{Binding Editor.Project.Documents}" 
+                  BorderBrush="{x:Null}" 
+                  Grid.Row="2">
+            <TreeView.Resources>
+                <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
+            </TreeView.Resources>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectedItemChanged">
                     <i:InvokeCommandAction Command="{Binding Commands.SelectedItemChangedCommand}" CommandParameter="{Binding ElementName=projectTreeView, Path=SelectedItem}"/>
@@ -60,6 +81,18 @@
                             <Setter Property="IsExpanded" Value="False"/>
                             <Setter Property="ContextMenu" Value="{StaticResource ContainerContextMenu}"/>
                             <EventSetter Event="TreeViewItem.MouseRightButtonDown" Handler="TreeViewItem_MouseRightButtonDown"/>
+                            <Setter Property="IsSelected" Value="False"/>
+                            <Style.Triggers>
+                                <DataTrigger Value="True">
+                                    <DataTrigger.Binding>
+                                        <MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
+                                            <Binding Path="Tag.Editor.Project.CurrentContainer" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type TreeView}}"/>
+                                            <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
+                                        </MultiBinding>
+                                    </DataTrigger.Binding>
+                                    <Setter Property="IsSelected" Value="True"/>
+                                </DataTrigger>
+                            </Style.Triggers>
                         </Style>
                     </HierarchicalDataTemplate.ItemContainerStyle>
                     <HierarchicalDataTemplate.ItemTemplate>
@@ -72,7 +105,7 @@
             </TreeView.ItemTemplate>
         </TreeView>
         <ContentControl Content="{Binding ElementName=projectTreeView, Path=SelectedItem}"
-                        Grid.Row="2" Margin="2">
+                        Grid.Row="3" Margin="2">
              <ContentControl.Style>
                 <Style TargetType="ContentControl">
                     <Setter Property="Visibility" Value="Visible"/>
