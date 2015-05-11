@@ -34,7 +34,11 @@ namespace TestWinForms
                 true);
 
             var context = new EditorContext();
-            context.Initialize(this, new EmfRenderer(72.0 / 96.0), new TextClipboard());
+            context.Initialize(
+                this, 
+                new EmfRenderer(72.0 / 96.0), 
+                new TextClipboard(),
+                new GZipCompressor());
             context.InitializeSctipts();
             context.InitializeSimulation();
             context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
@@ -289,6 +293,47 @@ namespace TestWinForms
         public bool ContainsText()
         {
             return Clipboard.ContainsText(TextDataFormat.UnicodeText);
+        }
+    }
+
+    internal class GZipCompressor : ICompressor
+    {
+        public byte[] Compress(byte[] data)
+        {
+            using (var ms = new System.IO.MemoryStream())
+            {
+                using (var cs = new System.IO.Compression.GZipStream(ms, System.IO.Compression.CompressionMode.Compress, true))
+                {
+                    cs.Write(data, 0, data.Length);
+                }
+                return ms.ToArray();
+            }
+        }
+
+        public byte[] Decompress(byte[] data)
+        {
+            using (var ms = new System.IO.MemoryStream(data))
+            {
+                using (var cs = new System.IO.Compression.GZipStream(ms, System.IO.Compression.CompressionMode.Decompress))
+                {
+                    const int size = 4096;
+                    var buffer = new byte[size];
+                    using (var memory = new System.IO.MemoryStream())
+                    {
+                        int count = 0;
+                        do
+                        {
+                            count = cs.Read(buffer, 0, size);
+                            if (count > 0)
+                            {
+                                memory.Write(buffer, 0, count);
+                            }
+                        }
+                        while (count > 0);
+                        return memory.ToArray();
+                    }
+                }
+            }
         }
     }
 
