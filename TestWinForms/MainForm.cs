@@ -252,14 +252,14 @@ namespace TestWinForms
 
         private void Open()
         {
-            openFileDialog1.Filter = "Json (*.json)|*.json|All (*.*)|*.*";
+            openFileDialog1.Filter = "Project (*.project)|*.project|All (*.*)|*.*";
             openFileDialog1.FilterIndex = 0;
             openFileDialog1.ShowDialog(this);
         }
 
         private void Save()
         {
-            saveFileDialog1.Filter = "Json (*.json)|*.json|All (*.*)|*.*";
+            saveFileDialog1.Filter = "Project (*.project)|*.project|All (*.*)|*.*";
             saveFileDialog1.FilterIndex = 0;
             saveFileDialog1.FileName = "project";
             saveFileDialog1.ShowDialog(this);

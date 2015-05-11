@@ -129,7 +129,7 @@ namespace Test.Windows
                 },
                 () => true);
 
-            PropertiesWindow pw = null;
+            PropertiesWindow pw = default(PropertiesWindow);
 
             context.Commands.PropertiesWindowCommand = new DelegateCommand(
                 () =>
@@ -137,7 +137,7 @@ namespace Test.Windows
                     if (pw == null)
                     {
                         pw = new PropertiesWindow() { Owner = this, DataContext = context };
-                        pw.Unloaded += (_s, _e) => pw = null;
+                        pw.Unloaded += (_s, _e) => pw = default(PropertiesWindow);
                     }
                     pw.Show();
                 },
@@ -155,7 +155,7 @@ namespace Test.Windows
                             if (pw == null)
                             {
                                 pw = new PropertiesWindow() { Owner = this, DataContext = context };
-                                pw.Unloaded += (_s, _e) => pw = null;
+                                pw.Unloaded += (_s, _e) => pw = default(PropertiesWindow);
                             }
                             pw.Show();
                         }
@@ -188,7 +188,7 @@ namespace Test.Windows
                                         continue;
 
                                     string ext = System.IO.Path.GetExtension(path);
-                                    if (string.Compare(ext, ".json", true, CultureInfo.InvariantCulture) == 0)
+                                    if (string.Compare(ext, ".project", true, CultureInfo.InvariantCulture) == 0)
                                     {
                                         context.Open(path);
                                         e.Handled = true;
@@ -261,7 +261,7 @@ namespace Test.Windows
         {
             var dlg = new OpenFileDialog()
             {
-                Filter = "Json (*.json)|*.json|All (*.*)|*.*",
+                Filter = "Project (*.project)|*.project|All (*.*)|*.*",
                 FilterIndex = 0,
                 FileName = ""
             };
@@ -276,7 +276,7 @@ namespace Test.Windows
         {
             var dlg = new SaveFileDialog()
             {
-                Filter = "Json (*.json)|*.json|All (*.*)|*.*",
+                Filter = "Project (*.project)|*.project|All (*.*)|*.*",
                 FilterIndex = 0,
                 FileName = "project"
             };
