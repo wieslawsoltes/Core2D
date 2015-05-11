@@ -199,26 +199,22 @@
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:Project}">
-        <StackPanel>
-            <Expander Header="Name" IsExpanded="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="30"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                             BorderBrush="{x:Null}" 
-                             Grid.Row="0" 
-                             Grid.Column="0" 
-                             Grid.ColumnSpan="2"
-                             TextAlignment="Left" 
-                             VerticalAlignment="Center">
-                    </TextBox>
-                </Grid>
-            </Expander>
-        </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                     BorderBrush="{x:Null}" 
+                     Grid.Row="0" 
+                     Grid.Column="0" 
+                     Grid.ColumnSpan="2"
+                     TextAlignment="Left" 
+                     VerticalAlignment="Center">
+            </TextBox>
+        </Grid>
     </DataTemplate>
 </ResourceDictionary>
