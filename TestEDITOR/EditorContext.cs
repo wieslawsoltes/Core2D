@@ -27,6 +27,7 @@ namespace TestEDITOR
         private Editor _editor;
         private ITextClipboard _textClipboard;
         private ISerializer _serializer;
+        private ICompressor _compressor;
         private History<Project> _history;
         private string _rootScriptsPath;
         private IList<ScriptDirectory> _scriptDirectories;
@@ -85,6 +86,19 @@ namespace TestEDITOR
                 {
                     _serializer = value;
                     Notify("Serializer");
+                }
+            }
+        }
+
+        public ICompressor Compressor
+        {
+            get { return _compressor; }
+            set
+            {
+                if (value != _compressor)
+                {
+                    _compressor = value;
+                    Notify("Compressor");
                 }
             }
         }
@@ -222,12 +236,17 @@ namespace TestEDITOR
             return project;
         }
 
-        public void Initialize(IView view, IRenderer renderer, ITextClipboard clipboard)
+        public void Initialize(
+            IView view, 
+            IRenderer renderer, 
+            ITextClipboard clipboard, 
+            ICompressor compressor)
         {
             _commands = new EditorCommands();
             _textClipboard = clipboard;
             _serializer = new NewtonsoftSerializer();
-            _history = new History<Project>(_serializer);
+            _compressor = compressor;
+            _history = new History<Project>(_serializer, _compressor);
             _editor = Editor.Create(DefaultProject(), renderer, _history);
 
             (_editor.Renderer as ObservableObject).PropertyChanged +=
