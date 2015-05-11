@@ -184,7 +184,7 @@ namespace Test2d
             var sgdl = ShapeStyleGroup.Create("Lines");
 
             var solid = ShapeStyle.Create("Solid", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
-            solid.LineStyle.Dashes = null;
+            solid.LineStyle.Dashes = default(double[]);
             solid.LineStyle.DashOffset = 0.0;
             sgdl.Styles.Add(solid);
 
