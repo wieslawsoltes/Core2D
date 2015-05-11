@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Test.Compressors;
 using Test2d;
 using TestEDITOR;
 using TestEMF;
@@ -53,7 +54,11 @@ namespace Test.Windows
         {
             var context = new EditorContext();
             context.Execute = (action) => Dispatcher.Invoke(action);
-            context.Initialize(this, WpfRenderer.Create(), new TextClipboard());
+            context.Initialize(
+                this,
+                WpfRenderer.Create(),
+                new TextClipboard(),
+                new LZ4CodecCompressor());
             context.InitializeSctipts();
             context.InitializeSimulation();
             context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
