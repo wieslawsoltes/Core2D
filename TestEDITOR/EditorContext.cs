@@ -235,7 +235,7 @@ namespace TestEDITOR
          
             return project;
         }
-
+        
         public void Initialize(
             IView view, 
             IRenderer renderer, 
@@ -319,23 +319,25 @@ namespace TestEDITOR
                 },
                 () => IsEditMode() /* && CanRedo() */);
 
+            var _containerToCopy = default(Container);
+            var _documentToCopy = default(Document);
+
             _commands.CutCommand = new DelegateCommand<object>(
                 (item) =>
                 {
                     if (item is Container)
                     {
                         var container = item as Container;
-                        // TODO:
+                        _containerToCopy = container;
+                        _documentToCopy = default(Document);
+                        _editor.Delete(container);
                     }
                     else if (item is Document)
                     {
                         var document = item as Document;
-                        // TODO:
-                    }
-                    else if (item is Project)
-                    {
-                        var project = item as Project;
-                        // TODO:
+                        _containerToCopy = default(Container);
+                        _documentToCopy = document;
+                        _editor.Delete(document);
                     }
                     else if (item is EditorContext || item == null)
                     {
@@ -343,24 +345,21 @@ namespace TestEDITOR
                     }
                 },
                 (item) => IsEditMode() /* && CanCopy() */);
-
+            
             _commands.CopyCommand = new DelegateCommand<object>(
                 (item) =>
                 {
                     if (item is Container)
                     {
                         var container = item as Container;
-                        // TODO:
+                        _containerToCopy = container;
+                        _documentToCopy = default(Document);
                     }
                     else if (item is Document)
                     {
                         var document = item as Document;
-                        // TODO:
-                    }
-                    else if (item is Project)
-                    {
-                        var project = item as Project;
-                        // TODO:
+                        _containerToCopy = default(Container);
+                        _documentToCopy = document;
                     }
                     else if (item is EditorContext || item == null)
                     {
@@ -374,18 +373,38 @@ namespace TestEDITOR
                 {
                     if (item is Container)
                     {
-                        var container = item as Container;
-                        // TODO:
+                        if (_containerToCopy != null)
+                        {
+                            var container = item as Container;
+                            var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
+                            if (document != null)
+                            {
+                                _history.Snapshot(_editor.Project);
+                                int index = document.Containers.IndexOf(container);
+                                var clone = Clone(_containerToCopy);
+                                document.Containers[index] = clone;
+                                _editor.Project.CurrentContainer = clone;
+                            }
+                        }
                     }
                     else if (item is Document)
                     {
-                        var document = item as Document;
-                        // TODO:
-                    }
-                    else if (item is Project)
-                    {
-                        var project = item as Project;
-                        // TODO:
+                        if (_containerToCopy != null)
+                        {
+                            var document = item as Document;
+                            _history.Snapshot(_editor.Project);
+                            var clone = Clone(_containerToCopy);
+                            document.Containers.Add(clone);
+                            _editor.Project.CurrentContainer = clone;
+                        }
+                        else if (_documentToCopy != null)
+                        {
+                            var document = item as Document;
+                            int index = _editor.Project.Documents.IndexOf(document);
+                            var clone = Clone(_documentToCopy);
+                            _editor.Project.Documents[index] = clone;
+                            _editor.Project.CurrentDocument = clone;
+                        }
                     }
                     else if (item is EditorContext || item == null)
                     {
@@ -400,29 +419,12 @@ namespace TestEDITOR
                     if (item is Container)
                     {
                         var container = item as Container;
-                        var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
-                        if (document != null)
-                        {
-                            _history.Snapshot(_editor.Project);
-                            document.Containers.Remove(container);
-                            _editor.Project.CurrentDocument = document;
-                            _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
-                        }
+                        _editor.Delete(container);
                     }
                     else if (item is Document)
                     {
                         var document = item as Document;
-                        _history.Snapshot(_editor.Project);
-                        _editor.Project.Documents.Remove(document);
-                        _editor.Project.CurrentDocument = _editor.Project.Documents.FirstOrDefault();
-                        if (_editor.Project.CurrentDocument != null)
-                        {
-                            _editor.Project.CurrentContainer = _editor.Project.CurrentDocument.Containers.FirstOrDefault();
-                        }
-                        else
-                        {
-                            _editor.Project.CurrentContainer = default(Container);
-                        }
+                        _editor.Delete(document);
                     }
                     else if (item is EditorContext || item == null)
                     {
@@ -564,7 +566,6 @@ namespace TestEDITOR
                 },
                 () => IsEditMode());
 
-            
             _commands.AddPropertyCommand = new DelegateCommand(
                 () =>
                 {
@@ -802,14 +803,30 @@ namespace TestEDITOR
             _commands.InsertContainerBeforeCommand = new DelegateCommand<object>(
                 (item) =>
                 {
-                    // TODO:
+                    if (item is Container)
+                    {
+                        var selected = item as Container;
+                        int index = _editor.Project.CurrentDocument.Containers.IndexOf(selected);
+                        var container = DefaultContainer(_editor.Project);
+                        _history.Snapshot(_editor.Project);
+                        _editor.Project.CurrentDocument.Containers.Insert(index, container);
+                        _editor.Project.CurrentContainer = container;
+                    }
                 },
                 (item) => IsEditMode());
 
             _commands.InsertContainerAfterCommand = new DelegateCommand<object>(
                 (item) =>
                 {
-                    // TODO:
+                    if (item is Container)
+                    {
+                        var selected = item as Container;
+                        int index = _editor.Project.CurrentDocument.Containers.IndexOf(selected);
+                        var container = DefaultContainer(_editor.Project);
+                        _history.Snapshot(_editor.Project);
+                        _editor.Project.CurrentDocument.Containers.Insert(index + 1, container);
+                        _editor.Project.CurrentContainer = container;
+                    } 
                 },
                 (item) => IsEditMode());
 
@@ -827,14 +844,33 @@ namespace TestEDITOR
             _commands.InsertDocumentBeforeCommand = new DelegateCommand<object>(
                 (item) =>
                 {
-                    // TODO:
+                    if (item is Document)
+                    {
+                        var selected = item as Document;
+                        int index = _editor.Project.Documents.IndexOf(selected);
+                        var document = DefaultDocument(_editor.Project);
+                        _history.Snapshot(_editor.Project);
+                        _editor.Project.Documents.Insert(index, document);
+                        _editor.Project.CurrentDocument = document;
+                        _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
+                    }
+                    
                 },
                 (item) => IsEditMode());
 
             _commands.InsertDocumentAfterCommand = new DelegateCommand<object>(
                 (item) =>
                 {
-                    // TODO:
+                    if (item is Document)
+                    {
+                        var selected = item as Document;
+                        int index = _editor.Project.Documents.IndexOf(selected);
+                        var document = DefaultDocument(_editor.Project);
+                        _history.Snapshot(_editor.Project);
+                        _editor.Project.Documents.Insert(index + 1, document);
+                        _editor.Project.CurrentDocument = document;
+                        _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
+                    }
                 },
                 (item) => IsEditMode());
 
@@ -1126,6 +1162,62 @@ namespace TestEDITOR
                     if (clone != null)
                     {
                         TryToRestoreStyles(Enumerable.Repeat(clone, 1).ToList());
+                        return clone;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+
+            return null;
+        }
+        
+        public Container Clone(Container container)
+        {
+            try
+            {
+                var template = container.Template;
+                var json = Serializer.ToJson(container);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    var clone = Serializer.FromJson<Container>(json);
+                    if (clone != null)
+                    {
+                        TryToRestoreStyles(clone.Layers.SelectMany(l => l.Shapes));
+                        clone.Template = template;
+                        return clone;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+
+            return null;
+        }
+        
+        public Document Clone(Document document)
+        {
+            try
+            {
+                var templates = document.Containers.Select(c => c.Template).ToArray();
+                var json = Serializer.ToJson(document);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    var clone = Serializer.FromJson<Document>(json);
+                    if (clone != null)
+                    {
+                        for (int i = 0; i < clone.Containers.Count; i++)
+                        {
+                            var container = clone.Containers[i];
+                            TryToRestoreStyles(container.Layers.SelectMany(l => l.Shapes));
+                            container.Template = templates[i];
+                        }
                         return clone;
                     }
                 }
