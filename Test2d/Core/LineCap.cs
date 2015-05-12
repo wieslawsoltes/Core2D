@@ -4,10 +4,22 @@ using System;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum LineCap
     {
+        /// <summary>
+        /// 
+        /// </summary>
         Flat = 0,
+        /// <summary>
+        /// 
+        /// </summary>
         Square = 1,
+        /// <summary>
+        /// 
+        /// </summary>
         Round = 2
     }
 }

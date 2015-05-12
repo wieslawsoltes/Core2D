@@ -4,17 +4,51 @@ using System;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public struct Arc
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public double X;
+        /// <summary>
+        /// 
+        /// </summary>
         public double Y;
+        /// <summary>
+        /// 
+        /// </summary>
         public double Width;
+        /// <summary>
+        /// 
+        /// </summary>
         public double Height;
+        /// <summary>
+        /// 
+        /// </summary>
         public double Radius;
+        /// <summary>
+        /// 
+        /// </summary>
         public double StartAngle;
+        /// <summary>
+        /// 
+        /// </summary>
         public double EndAngle;
+        /// <summary>
+        /// 
+        /// </summary>
         public double SweepAngle;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arc"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
         public static Arc FromXArc(XArc arc, double dx, double dy)
         {
             double x1 = arc.Point1.X + dx;

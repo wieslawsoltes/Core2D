@@ -7,12 +7,18 @@ using System.Linq;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class XPoint : BaseShape
     {
         private BaseShape _shape;
         private double _x;
         private double _y;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public BaseShape Shape
         {
             get { return _shape; }
@@ -26,6 +32,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double X
         {
             get { return _x; }
@@ -39,6 +48,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double Y
         {
             get { return _y; }
@@ -52,6 +64,13 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="renderer"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy)
         {
             if (_shape != null)
@@ -71,12 +90,25 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public override void Move(double dx, double dy)
         {
             X += dx;
             Y += dy;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="shape"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static XPoint Create(double x, double y, BaseShape shape, string name = "")
         {
             return new XPoint() 

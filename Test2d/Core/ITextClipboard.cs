@@ -4,10 +4,25 @@ using System;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface ITextClipboard
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         bool ContainsText();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         string GetText();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
         void SetText(string text);
     }
 }

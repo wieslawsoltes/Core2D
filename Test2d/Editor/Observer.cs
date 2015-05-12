@@ -53,6 +53,10 @@ namespace Test2d
 
         #region Debug
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
         [System.Diagnostics.Conditional("VERBOSE")]
         private void Debug(string text)
         {
@@ -63,6 +67,11 @@ namespace Test2d
 
         #region Handlers
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StyleGroupsCollectionObserver(
             object sender,
             NotifyCollectionChangedEventArgs e)
@@ -91,6 +100,11 @@ namespace Test2d
             _invalidateStyles();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StylesCollectionObserver(
             object sender,
             NotifyCollectionChangedEventArgs e)
@@ -119,6 +133,11 @@ namespace Test2d
             _invalidateStyles();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DocumentsCollectionObserver(
             object sender,
             NotifyCollectionChangedEventArgs e)
@@ -147,7 +166,12 @@ namespace Test2d
             //_invalidateLayers();
         }
         
-         private void ContainersCollectionObserver(
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ContainersCollectionObserver(
             object sender,
             NotifyCollectionChangedEventArgs e)
         {
@@ -175,6 +199,11 @@ namespace Test2d
             //_invalidateLayers();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LayersCollectionObserver(
             object sender,
             NotifyCollectionChangedEventArgs e)
@@ -203,6 +232,11 @@ namespace Test2d
             _invalidateLayers();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ShapesCollectionObserver(
             object sender,
             NotifyCollectionChangedEventArgs e)
@@ -231,6 +265,11 @@ namespace Test2d
             _invalidateShapes();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PropertiesCollectionObserver(
             object sender,
             NotifyCollectionChangedEventArgs e)
@@ -259,6 +298,11 @@ namespace Test2d
             _invalidateShapes();
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DatabaseCollectionObserver(
             object sender,
             NotifyCollectionChangedEventArgs e)
@@ -287,6 +331,11 @@ namespace Test2d
             _invalidateShapes();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StyleGroupObserver(
             object sender,
             System.ComponentModel.PropertyChangedEventArgs e)
@@ -299,6 +348,11 @@ namespace Test2d
             _invalidateStyles();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StyleObserver(
             object sender,
             System.ComponentModel.PropertyChangedEventArgs e)
@@ -311,6 +365,11 @@ namespace Test2d
             _invalidateStyles();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LayerObserver(
             object sender,
             System.ComponentModel.PropertyChangedEventArgs e)
@@ -323,6 +382,11 @@ namespace Test2d
             _invalidateLayers();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ShapeObserver(
             object sender,
             System.ComponentModel.PropertyChangedEventArgs e)
@@ -335,6 +399,11 @@ namespace Test2d
             _invalidateShapes();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PropertyObserver(
             object sender,
             System.ComponentModel.PropertyChangedEventArgs e)
@@ -351,6 +420,10 @@ namespace Test2d
 
         #region Styles
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project"></param>
         private void InitializeStyles(Project project)
         {
             (project.StyleGroups as ObservableCollection<ShapeStyleGroup>)
@@ -362,6 +435,10 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sg"></param>
         private void Add(ShapeStyleGroup sg)
         {
             Add(sg.Styles);
@@ -373,6 +450,10 @@ namespace Test2d
             Debug("Add Style Group: " + sg.Name);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sg"></param>
         private void Remove(ShapeStyleGroup sg)
         {
             Remove(sg.Styles);
@@ -384,6 +465,10 @@ namespace Test2d
             Debug("Remove Style Group: " + sg.Name);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="style"></param>
         private void Add(ShapeStyle style)
         {
             style.PropertyChanged += StyleObserver;
@@ -396,6 +481,10 @@ namespace Test2d
             Debug("Add Style: " + style.Name);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="style"></param>
         private void Remove(ShapeStyle style)
         {
             style.PropertyChanged -= StyleObserver;
@@ -408,6 +497,10 @@ namespace Test2d
             Debug("Remove Style: " + style.Name);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="styles"></param>
         private void Add(IEnumerable<ShapeStyle> styles)
         {
             foreach (var style in styles)
@@ -416,6 +509,10 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="styles"></param>
         private void Remove(IEnumerable<ShapeStyle> styles)
         {
             foreach (var style in styles)
@@ -424,6 +521,10 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sgs"></param>
         private void Add(IEnumerable<ShapeStyleGroup> sgs)
         {
             foreach (var sg in sgs)
@@ -432,6 +533,10 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sgs"></param>
         private void Remove(IEnumerable<ShapeStyleGroup> sgs)
         {
             foreach (var sg in sgs)
@@ -444,6 +549,10 @@ namespace Test2d
 
         #region Project
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project"></param>
         private void Add(Project project)
         {
             Debug("Add Project: " + project.Name);
@@ -464,6 +573,10 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="document"></param>
         private void Add(Document document)
         {
             Debug("Add Document: " + document.Name);
@@ -476,6 +589,10 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
         private void Add(Container container)
         {
             Debug("Add Container: " + container.Name);
@@ -487,6 +604,10 @@ namespace Test2d
             //Add(container.WorkingLayer);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="layer"></param>
         private void Add(Layer layer)
         {
             layer.PropertyChanged += LayerObserver;
@@ -494,6 +615,10 @@ namespace Test2d
             InitializeShapes(layer);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project"></param>
         private void Remove(Project project)
         {
             Debug("Remove Project: " + project.Name);
@@ -514,6 +639,10 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="document"></param>
         private void Remove(Document document)
         {
             Debug("Remove Document: " + document.Name);
@@ -526,6 +655,10 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
         private void Remove(Container container)
         {
             Debug("Remove Container: " + container.Name);
@@ -537,6 +670,10 @@ namespace Test2d
             //Remove(container.WorkingLayer);
         }
   
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="layer"></param>
         private void Remove(Layer layer)
         {
             layer.PropertyChanged -= LayerObserver;
@@ -544,6 +681,10 @@ namespace Test2d
             Remove(layer.Shapes);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="documents"></param>
         private void Add(IEnumerable<Document> documents)
         {
             foreach (var document in documents)
@@ -552,6 +693,10 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="documents"></param>
         private void Remove(IEnumerable<Document> documents)
         {
             foreach (var document in documents)
@@ -560,6 +705,10 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="containers"></param>
         private void Add(IEnumerable<Container> containers)
         {
             foreach (var container in containers)
@@ -568,6 +717,10 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="containers"></param>
         private void Remove(IEnumerable<Container> containers)
         {
             foreach (var container in containers)
@@ -576,6 +729,10 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="layers"></param>
         private void Add(IEnumerable<Layer> layers)
         {
             foreach (var layer in layers)
@@ -584,6 +741,10 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="layers"></param>
         private void Remove(IEnumerable<Layer> layers)
         {
             foreach (var layer in layers)
@@ -596,6 +757,10 @@ namespace Test2d
 
         #region Shapes
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="layer"></param>
         private void InitializeShapes(Layer layer)
         {
             Add(layer.Shapes);
@@ -604,6 +769,10 @@ namespace Test2d
                 .CollectionChanged += ShapesCollectionObserver;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
         private void Add(BaseShape shape)
         {
             shape.PropertyChanged += ShapeObserver;
@@ -685,6 +854,10 @@ namespace Test2d
             Debug("Add Shape: " + shape.GetType());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
         private void Remove(BaseShape shape)
         {
             shape.PropertyChanged -= ShapeObserver;
@@ -766,6 +939,10 @@ namespace Test2d
             Debug("Remove Shape: " + shape.GetType());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
         private void Add(IEnumerable<BaseShape> shapes)
         {
             foreach (var shape in shapes)
@@ -774,6 +951,10 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
         private void Remove(IEnumerable<BaseShape> shapes)
         {
             foreach (var shape in shapes)
@@ -786,18 +967,30 @@ namespace Test2d
 
         #region Properties
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
         private void Add(ShapeProperty property)
         {
             property.PropertyChanged += PropertyObserver;
             Debug("Add Property: " + property.Name + ", type: " + property.Data.GetType());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
         private void Remove(ShapeProperty property)
         {
             property.PropertyChanged += PropertyObserver;
             Debug("Remove Property: " + property.Name + ", type: " + property.Data.GetType());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="properties"></param>
         private void Add(IEnumerable<ShapeProperty> properties)
         {
             foreach (var property in properties)
@@ -806,6 +999,10 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="properties"></param>
         private void Remove(IEnumerable<ShapeProperty> properties)
         {
             foreach (var property in properties)
@@ -818,6 +1015,10 @@ namespace Test2d
 
         #region Database
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
         private void Add(KeyValuePair<string, ShapeProperty> property)
         {
             property.Value.PropertyChanged += PropertyObserver;
@@ -825,6 +1026,10 @@ namespace Test2d
             Debug("Add Property: " + property.Key + ", type: " + property.Value.Data.GetType());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
         private void Remove(KeyValuePair<string, ShapeProperty> property)
         {
             property.Value.PropertyChanged += PropertyObserver;
@@ -832,6 +1037,10 @@ namespace Test2d
             Debug("Remove Property: " + property.Key + ", type: " + property.Value.Data.GetType());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="properties"></param>
         private void Add(IEnumerable<KeyValuePair<string, ShapeProperty>> properties)
         {
             foreach (var property in properties)
@@ -840,6 +1049,10 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="properties"></param>
         private void Remove(IEnumerable<KeyValuePair<string, ShapeProperty>> properties)
         {
             foreach (var property in properties)

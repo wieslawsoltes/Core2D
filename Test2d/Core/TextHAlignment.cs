@@ -4,10 +4,22 @@ using System;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum TextHAlignment
     {
+        /// <summary>
+        /// 
+        /// </summary>
         Left,
+        /// <summary>
+        /// 
+        /// </summary>
         Center,
+        /// <summary>
+        /// 
+        /// </summary>
         Right
     }
 }

@@ -49,7 +49,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// Gets or sets currenly selected group fro Groups collection.
+        /// Gets or sets currenly selected group from Groups collection.
         /// </summary>
         public XGroup CurrentGroup
         {

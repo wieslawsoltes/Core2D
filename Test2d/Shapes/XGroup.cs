@@ -6,12 +6,18 @@ using System.Collections.ObjectModel;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class XGroup : BaseShape
     {
         private IList<KeyValuePair<string, ShapeProperty>> _database;
         private IList<BaseShape> _shapes;
         private IList<XPoint> _connectors;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<KeyValuePair<string, ShapeProperty>> Database
         {
             get { return _database; }
@@ -25,6 +31,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<BaseShape> Shapes
         {
             get { return _shapes; }
@@ -38,6 +47,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<XPoint> Connectors
         {
             get { return _connectors; }
@@ -51,6 +63,13 @@ namespace Test2d
             }
         }
    
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="renderer"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy)
         {
             if (State.HasFlag(ShapeState.Visible))
@@ -100,6 +119,11 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public override void Move(double dx, double dy)
         {
             foreach (var shape in Shapes)
@@ -113,6 +137,10 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
         public void AddProperty(ShapeProperty property)
         {
             _database.Add(
@@ -121,6 +149,11 @@ namespace Test2d
                     property));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="property"></param>
         public void AddProperty(string key, ShapeProperty property)
         {
             _database.Add(
@@ -129,6 +162,10 @@ namespace Test2d
                     property));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
         public void AddShape(BaseShape shape)
         {
             shape.Owner = this;
@@ -136,6 +173,10 @@ namespace Test2d
             Shapes.Add(shape);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
         public void AddConnectorAsNone(XPoint point)
         {
             point.Owner = this;
@@ -144,6 +185,10 @@ namespace Test2d
             Connectors.Add(point);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
         public void AddConnectorAsInput(XPoint point)
         {
             point.Owner = this;
@@ -152,6 +197,10 @@ namespace Test2d
             Connectors.Add(point);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
         public void AddConnectorAsOutput(XPoint point)
         {
             point.Owner = this;
@@ -160,6 +209,11 @@ namespace Test2d
             Connectors.Add(point);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static XGroup Create(string name)
         {
             return new XGroup()
@@ -173,6 +227,12 @@ namespace Test2d
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="shapes"></param>
+        /// <returns></returns>
         public static XGroup Group(string name, IEnumerable<BaseShape> shapes)
         {
             var g = XGroup.Create(name);
