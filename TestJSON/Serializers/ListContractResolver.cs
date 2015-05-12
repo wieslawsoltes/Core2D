@@ -16,7 +16,7 @@ namespace TestJSON
     internal class ListContractResolver : DefaultContractResolver
     {
         /// <summary>
-        /// Use ObservableCollection<> for IList contract.
+        /// Use ObservableCollection for IList contract.
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
