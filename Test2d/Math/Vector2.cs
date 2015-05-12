@@ -453,15 +453,20 @@ namespace Test2d
         //    return this.Dot(v.Normalize());
         //}
 
-        public Vector2 Project(Vector2 v)
-        {
-            return v * (this.Dot(v) / v.Dot(v));
-        }
-        
         //public Vector2 Project(Vector2 v)
         //{
         //    return v.Normalize() * this.Component(v);
         //}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public Vector2 Project(Vector2 v)
+        {
+            return v * (this.Dot(v) / v.Dot(v));
+        }
 
         /// <summary>
         /// 
