@@ -72,6 +72,7 @@
     <Compile Include="Core\LineCap.cs" />
     <Compile Include="Core\LineStyle.cs" />
     <Compile Include="Core\ShapeProperty.cs" />
+    <Compile Include="Core\ShapePropertyExtensions.cs" />
     <Compile Include="Core\ShapeState.cs" />
     <Compile Include="Core\ShapeStyleGroup.cs" />
     <Compile Include="Core\TextStyle.cs" />
