@@ -697,6 +697,33 @@ namespace Test2d
             }
         }
 
+        public void Delete(Container container)
+        {
+            var document = _project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
+            if (document != null)
+            {
+                _history.Snapshot(_project);
+                document.Containers.Remove(container);
+                _project.CurrentDocument = document;
+                _project.CurrentContainer = document.Containers.FirstOrDefault();
+            }
+        }
+        
+        public void Delete(Document document)
+        {
+            _history.Snapshot(_project);
+            _project.Documents.Remove(document);
+            _project.CurrentDocument = _project.Documents.FirstOrDefault();
+            if (_project.CurrentDocument != null)
+            {
+                _project.CurrentContainer = _project.CurrentDocument.Containers.FirstOrDefault();
+            }
+            else
+            {
+                _project.CurrentContainer = default(Container);
+            }
+        }
+        
         public void DeleteSelected()
         {
             if (_renderer.SelectedShape != null)
