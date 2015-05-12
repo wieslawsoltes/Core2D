@@ -9,6 +9,9 @@ using System.Windows.Input;
 
 namespace TestEDITOR
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class EditorCommands
     {
         /// <summary>

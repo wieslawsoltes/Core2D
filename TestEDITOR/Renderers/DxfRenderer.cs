@@ -9,6 +9,9 @@ using Test2d;
 
 namespace TestDXF
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfRenderer : ObservableObject, IRenderer
     {
         private double _zoom;
