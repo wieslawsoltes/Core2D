@@ -10,14 +10,21 @@ using System.Threading.Tasks;
 
 namespace TestJSON
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal class ListContractResolver : DefaultContractResolver
     {
+        /// <summary>
+        /// Use ObservableCollection<> for IList contract.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public override JsonContract ResolveContract(Type type)
         {
             if (type.IsGenericType
                 && type.GetGenericTypeDefinition() == typeof(IList<>))
             {
-                // use ObservableCollection for IList contract
                 return base
                     .ResolveContract(typeof(ObservableCollection<>)
                     .MakeGenericType(type.GenericTypeArguments[0]));
