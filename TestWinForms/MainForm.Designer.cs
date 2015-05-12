@@ -6,6 +6,10 @@ namespace TestWinForms
     {
         private System.ComponentModel.IContainer components = null;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing) 
@@ -18,6 +22,9 @@ namespace TestWinForms
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitializeComponent()
         {
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();

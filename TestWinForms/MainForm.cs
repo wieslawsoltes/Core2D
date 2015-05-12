@@ -13,10 +13,19 @@ using TestEMF;
 
 namespace TestWinForms
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class MainForm : Form, IView
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public object DataContext { get; set; }
     
+        /// <summary>
+        /// 
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
@@ -24,6 +33,9 @@ namespace TestWinForms
             InitializeContext();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitializeContext()
         {
             this.SetStyle(
@@ -59,11 +71,18 @@ namespace TestWinForms
             FormClosing += (s, e) => DeInitializeContext();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void DeInitializeContext()
         {
             (DataContext as EditorContext).Dispose();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private ContainerPanel InitializePanel()
         {
             var panel = new ContainerPanel();
@@ -81,6 +100,10 @@ namespace TestWinForms
             return panel;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="panel"></param>
         private void Invalidate(ContainerPanel panel)
         {
             HandlePanelLayerInvalidation(panel);
@@ -93,6 +116,10 @@ namespace TestWinForms
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="panel"></param>
         private void HandleFileDialogs(ContainerPanel panel)
         {
             // open container
@@ -149,6 +176,10 @@ namespace TestWinForms
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="panel"></param>
         private void UpdatePanelSize(ContainerPanel panel)
         {
             var container = (DataContext as EditorContext).Editor.Container;
@@ -165,6 +196,10 @@ namespace TestWinForms
             panel.Size = new System.Drawing.Size(width, height);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="panel"></param>
         private void HandlePanelLayerInvalidation(ContainerPanel panel)
         {
             var container = (DataContext as EditorContext).Editor.Container;
@@ -179,6 +214,10 @@ namespace TestWinForms
             container.WorkingLayer.InvalidateLayer += (s, e) => panel.Invalidate();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="panel"></param>
         private void HandleMenuShortcutKeys(ContainerPanel panel)
         {
             newToolStripMenuItem.Click += (sender, e) =>
@@ -195,6 +234,10 @@ namespace TestWinForms
             evaluateToolStripMenuItem.Click += (sender, e) => Eval();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="panel"></param>
         private void HandlePanelShorcutKeys(ContainerPanel panel)
         {
             panel.KeyDown += (sender, e) =>
@@ -247,6 +290,9 @@ namespace TestWinForms
             };
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         private void Eval()
         {
             openFileDialog2.Filter = "C# (*.cs)|*.cs|All (*.*)|*.*";
@@ -254,6 +300,9 @@ namespace TestWinForms
             openFileDialog2.ShowDialog(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void Open()
         {
             openFileDialog1.Filter = "Project (*.project)|*.project|All (*.*)|*.*";
@@ -261,6 +310,9 @@ namespace TestWinForms
             openFileDialog1.ShowDialog(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void Save()
         {
             saveFileDialog1.Filter = "Project (*.project)|*.project|All (*.*)|*.*";
@@ -269,6 +321,9 @@ namespace TestWinForms
             saveFileDialog1.ShowDialog(this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void Export()
         {
             saveFileDialog2.Filter = "Pdf (*.pdf)|*.pdf|Emf (*.emf)|*.emf|Dxf AutoCAD 2000 (*.dxf)|*.dxf|Dxf R10 (*.dxf)|*.dxf|All (*.*)|*.*";
@@ -278,26 +333,49 @@ namespace TestWinForms
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     internal class TextClipboard : ITextClipboard
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
         public void SetText(string text)
         {
             Clipboard.SetText(text, TextDataFormat.UnicodeText);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string GetText()
         {
             return Clipboard.GetText(TextDataFormat.UnicodeText);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool ContainsText()
         {
             return Clipboard.ContainsText(TextDataFormat.UnicodeText);
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     internal class GZipCompressor : ICompressor
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public byte[] Compress(byte[] data)
         {
             using (var ms = new System.IO.MemoryStream())
@@ -310,6 +388,11 @@ namespace TestWinForms
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public byte[] Decompress(byte[] data)
         {
             using (var ms = new System.IO.MemoryStream(data))
@@ -339,13 +422,22 @@ namespace TestWinForms
 
     internal class ContainerPanel : Panel
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public EditorContext Context { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ContainerPanel()
         {
             Initialize();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void Initialize()
         {
             this.SetStyle(
@@ -414,6 +506,9 @@ namespace TestWinForms
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected override CreateParams CreateParams
         {
             get
@@ -424,10 +519,18 @@ namespace TestWinForms
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnPaintBackground(PaintEventArgs e) 
         { 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnPaint(PaintEventArgs e)
         {
             if (Context != null)
@@ -436,6 +539,10 @@ namespace TestWinForms
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="g"></param>
         private void Draw(Graphics g)
         {
             g.SmoothingMode = SmoothingMode.HighQuality;
