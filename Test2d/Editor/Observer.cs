@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Observer
     {
         private readonly Editor _editor;
@@ -20,6 +23,10 @@ namespace Test2d
         private readonly Action _invalidateLayers;
         private readonly Action _invalidateShapes;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="editor"></param>
         public Observer(Editor editor)
         {
             _editor = editor;
