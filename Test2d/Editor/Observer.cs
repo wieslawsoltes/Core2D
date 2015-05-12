@@ -73,6 +73,8 @@ namespace Test2d
                     break;
                 case NotifyCollectionChangedAction.Replace:
                     Debug("Style Group Replace");
+                    Remove(e.OldItems.Cast<ShapeStyleGroup>());
+                    Add(e.NewItems.Cast<ShapeStyleGroup>());
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     Debug("Style Group Reset");
@@ -99,6 +101,8 @@ namespace Test2d
                     break;
                 case NotifyCollectionChangedAction.Replace:
                     Debug("Styles Replace");
+                    Remove(e.OldItems.Cast<ShapeStyle>());
+                    Add(e.NewItems.Cast<ShapeStyle>());
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     Debug("Styles Reset");
@@ -125,6 +129,8 @@ namespace Test2d
                     break;
                 case NotifyCollectionChangedAction.Replace:
                     Debug("Documents Replace");
+                    Remove(e.OldItems.Cast<Document>());
+                    Add(e.NewItems.Cast<Document>());
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     Debug("Documents Reset");
@@ -151,6 +157,8 @@ namespace Test2d
                     break;
                 case NotifyCollectionChangedAction.Replace:
                     Debug("Containers Replace");
+                    Remove(e.OldItems.Cast<Container>());
+                    Add(e.NewItems.Cast<Container>());
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     Debug("Containers Reset");
@@ -177,6 +185,8 @@ namespace Test2d
                     break;
                 case NotifyCollectionChangedAction.Replace:
                     Debug("Layers Replace");
+                    Remove(e.OldItems.Cast<Layer>());
+                    Add(e.NewItems.Cast<Layer>());
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     Debug("Layers Reset");
@@ -203,6 +213,8 @@ namespace Test2d
                     break;
                 case NotifyCollectionChangedAction.Replace:
                     Debug("Shapes Replace");
+                    Remove(e.OldItems.Cast<BaseShape>());
+                    Add(e.NewItems.Cast<BaseShape>());
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     Debug("Shapes Reset");
@@ -229,6 +241,8 @@ namespace Test2d
                     break;
                 case NotifyCollectionChangedAction.Replace:
                     Debug("Property Replace");
+                    Remove(e.OldItems.Cast<ShapeProperty>());
+                    Add(e.NewItems.Cast<ShapeProperty>());
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     Debug("Property Reset");
@@ -255,6 +269,8 @@ namespace Test2d
                     break;
                 case NotifyCollectionChangedAction.Replace:
                     Debug("Database Replace");
+                    Remove(e.OldItems.Cast<KeyValuePair<string, ShapeProperty>>());
+                    Add(e.NewItems.Cast<KeyValuePair<string, ShapeProperty>>());
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     Debug("Database Reset");
