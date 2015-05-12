@@ -8,14 +8,39 @@ using System.Windows.Media;
 
 namespace Test.PanAndZoom
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class PanAndZoomBorder : Border
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public Action<double, double, double> InvalidateChild { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public Action<double, double> AutoFitChild { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public Action<double, double, double> ZoomAndPanChild { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public ScaleTransform Scale { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public TranslateTransform Translate { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="twidth"></param>
+        /// <param name="theight"></param>
         public void AutoFit(double width, double height, double twidth, double theight)
         {
             double zoom = Math.Min(width / twidth, height / theight) - 0.001;
@@ -30,6 +55,9 @@ namespace Test.PanAndZoom
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override UIElement Child
         {
             get { return base.Child; }

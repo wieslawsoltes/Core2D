@@ -10,8 +10,19 @@ using System.Windows.Data;
 
 namespace Test.Converters
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ZoomScaleConverter : IValueConverter
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             double sliderValue = (double)value;
@@ -19,6 +30,14 @@ namespace Test.Converters
             return displayValue;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             double displayValue = (double)value;
