@@ -8,29 +8,49 @@ using Test2d;
 
 namespace TestSIM
 {
-    public class OutputSimulation : BoolSimulation
+    /// <summary>
+    /// 
+    /// </summary>
+    public class InverterSimulation : BoolSimulation
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override string Key
         {
-            get { return "OUTPUT"; }
+            get { return "INVERTER"; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override Func<XGroup, BoolSimulation> Factory
         {
-            get { return (group) => { return new OutputSimulation(false); }; }
+            get { return (group) => { return new InverterSimulation(null); }; }
         }
 
-        public OutputSimulation()
+        /// <summary>
+        /// 
+        /// </summary>
+        public InverterSimulation()
             : base()
         {
         }
 
-        public OutputSimulation(bool? state)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="state"></param>
+        public InverterSimulation(bool? state)
             : base()
         {
             base.State = state;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="clock"></param>
         public override void Run(IClock clock)
         {
             int length = Inputs.Length;
@@ -41,11 +61,11 @@ namespace TestSIM
             else if (length == 1)
             {
                 var input = Inputs[0];
-                base.State = input.IsInverted ? !(input.Simulation.State) : input.Simulation.State;
+                base.State = input.IsInverted ? input.Simulation.State : !(input.Simulation.State);
             }
             else
             {
-                throw new Exception("Output simulation can only have one input State.");
+                throw new Exception("Inverter simulation can only have one input State.");
             }
         }
     }

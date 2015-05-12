@@ -7,9 +7,18 @@ using System.Text;
 
 namespace TestSIM
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BoolInput
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public BoolSimulation Simulation { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsInverted { get; set; }
     }
 }

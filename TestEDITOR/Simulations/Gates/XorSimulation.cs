@@ -8,29 +8,49 @@ using Test2d;
 
 namespace TestSIM
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class XorSimulation : BoolSimulation
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override string Key 
         { 
             get { return "XOR"; } 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override Func<XGroup, BoolSimulation> Factory
         {
             get { return (group) => { return new XorSimulation(null); }; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public XorSimulation()
             : base()
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="state"></param>
         public XorSimulation(bool? state)
             : base()
         {
             base.State = state;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="clock"></param>
         public override void Run(IClock clock)
         {
             int length = Inputs.Length;

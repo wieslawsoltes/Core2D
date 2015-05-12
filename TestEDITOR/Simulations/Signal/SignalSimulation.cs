@@ -8,29 +8,49 @@ using Test2d;
 
 namespace TestSIM
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class SignalSimulation : BoolSimulation
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override string Key
         {
             get { return "SIGNAL"; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override Func<XGroup, BoolSimulation> Factory
         {
             get { return (group) => { return new SignalSimulation(false); }; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public SignalSimulation() 
             : base()
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="state"></param>
         public SignalSimulation(bool? state)
             : base()
         {
             base.State = state;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="clock"></param>
         public override void Run(IClock clock)
         {
             int length = Inputs.Length;

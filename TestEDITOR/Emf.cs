@@ -15,8 +15,15 @@ using WPF = System.Windows;
 
 namespace TestEMF
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class Emf
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
         public static void PutOnClipboard(Container container)
         {
             Bitmap bitmap = default(Bitmap);
@@ -45,6 +52,11 @@ namespace TestEMF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="container"></param>
         public static void Save(string path, Container container)
         {
             using (var bitmap = new Bitmap((int)container.Width, (int)container.Height))
@@ -59,6 +71,12 @@ namespace TestEMF
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bitmap"></param>
+        /// <param name="container"></param>
+        /// <returns></returns>
         private static MemoryStream MakeMetafileStream(Bitmap bitmap, Container container)
         {
             Graphics g = default(Graphics);

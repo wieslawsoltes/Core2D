@@ -8,18 +8,31 @@ using Test2d;
 
 namespace TestSIM
 {
-    public class MemoryResetPrioritySimulation : BoolSimulation
+    /// <summary>
+    /// 
+    /// </summary>
+    public class MemorySetPrioritySimulation : BoolSimulation
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override string Key
         {
-            get { return "SR-RESET"; }
+            get { return "SR-SET"; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override Func<XGroup, BoolSimulation> Factory
         {
-            get { return (group) => { return new MemoryResetPrioritySimulation(); }; }
+            get { return (group) => { return new MemorySetPrioritySimulation(); }; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="clock"></param>
         public override void Run(IClock clock)
         {
             // TODO: Implement simulation

@@ -10,20 +10,39 @@ using Test2d;
 
 namespace TestSIM
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BoolSimulationFactory
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public IDictionary<string, Func<XGroup, BoolSimulation>> Registry { get; private set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public BoolSimulationFactory()
         {
             Registry = new Dictionary<string, Func<XGroup, BoolSimulation>>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static T GetInstance<T>() where T: BoolSimulation
         {
             return (T)Activator.CreateInstance(typeof(T), true);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="simulation"></param>
+        /// <returns></returns>
         public bool Register(BoolSimulation simulation)
         {
             if (Registry.ContainsKey(simulation.Key))
@@ -34,6 +53,10 @@ namespace TestSIM
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="simulations"></param>
         public void Register(IEnumerable<BoolSimulation> simulations)
         {
             foreach (var simulation in simulations)
@@ -42,6 +65,12 @@ namespace TestSIM
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="factory"></param>
+        /// <returns></returns>
         public bool Register(string key, Func<XGroup, BoolSimulation> factory)
         {
             if (Registry.ContainsKey(key))
@@ -52,6 +81,11 @@ namespace TestSIM
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         private IDictionary<XGroup, BoolSimulation> GetSimulations(ContainerGraphContext context)
         {
             var simulations = new Dictionary<XGroup, BoolSimulation>();
@@ -69,6 +103,11 @@ namespace TestSIM
             return simulations;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public IDictionary<XGroup, BoolSimulation> Create(ContainerGraphContext context)
         {
             var simulations = GetSimulations(context);
@@ -101,6 +140,11 @@ namespace TestSIM
             return simulations;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="simulations"></param>
+        /// <param name="clock"></param>
         public void Run(IDictionary<XGroup, BoolSimulation> simulations, IClock clock)
         {
             foreach (var simulation in simulations)

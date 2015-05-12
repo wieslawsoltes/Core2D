@@ -8,9 +8,18 @@ using System.Threading.Tasks;
 
 namespace TestEDITOR
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ScriptGlobals
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public EditorContext Context;
+        /// <summary>
+        /// 
+        /// </summary>
         public Action<Action> Execute;
     }
 }

@@ -9,12 +9,29 @@ using Test2d;
 
 namespace TestEDITOR
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class LineGrid
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public struct Point
         {
+            /// <summary>
+            /// 
+            /// </summary>
             public double X;
+            /// <summary>
+            /// 
+            /// </summary>
             public double Y;
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="x"></param>
+            /// <param name="y"></param>
             public Point(double x, double y)
             {
                 X = x;
@@ -22,10 +39,24 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public struct Size
         {
+            /// <summary>
+            /// 
+            /// </summary>
             public double Width;
+            /// <summary>
+            /// 
+            /// </summary>
             public double Height;
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="width"></param>
+            /// <param name="height"></param>
             public Size(double width, double height)
             {
                 Width = width;
@@ -33,11 +64,33 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public struct Settings
         {
+            /// <summary>
+            /// 
+            /// </summary>
             public Point Origin;
+            /// <summary>
+            /// 
+            /// </summary>
             public Size GridSize;
+            /// <summary>
+            /// 
+            /// </summary>
             public Size CellSize;
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="originX"></param>
+            /// <param name="originY"></param>
+            /// <param name="gridWidth"></param>
+            /// <param name="gridHeight"></param>
+            /// <param name="cellWidth"></param>
+            /// <param name="cellHeight"></param>
+            /// <returns></returns>
             public static Settings Create(
                 double originX,
                 double originY,
@@ -55,6 +108,13 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="settings"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
         public static IList<BaseShape> Create(ShapeStyle style, Settings settings, BaseShape point)
         {
             double sx = settings.Origin.X + settings.CellSize.Width;

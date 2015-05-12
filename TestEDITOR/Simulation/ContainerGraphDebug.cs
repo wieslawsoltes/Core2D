@@ -11,8 +11,15 @@ using Test2d;
 
 namespace TestSIM
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class ContainerGraphDebug
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public static void WriteConnections(ContainerGraphContext context)
         {
             Debug.WriteLine("Connections: ");
@@ -42,6 +49,10 @@ namespace TestSIM
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public static void WriteDependencies(ContainerGraphContext context)
         {
             Debug.WriteLine("Dependencies: ");
@@ -76,6 +87,10 @@ namespace TestSIM
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public static void WritePinTypes(ContainerGraphContext context)
         {
             Debug.WriteLine("PinTypes: ");
@@ -91,6 +106,10 @@ namespace TestSIM
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public static void WriteOrderedGroups(ContainerGraphContext context)
         {
             Debug.WriteLine("OrderedGroups: ");

@@ -8,35 +8,55 @@ using Test2d;
 
 namespace TestSIM
 {
-    public class TimerPulseSimulation : BoolSimulation
+    /// <summary>
+    /// 
+    /// </summary>
+    public class TimerOnSimulation : BoolSimulation
     {
-        public override string Key 
+        /// <summary>
+        /// 
+        /// </summary>
+        public override string Key
         {
-            get { return "TIMER-PULSE"; } 
+            get { return "TIMER-ON"; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override Func<XGroup, BoolSimulation> Factory
         {
-            get 
+            get
             {
                 return (group) =>
                 {
                     double delay = group.GetDoublePropertyValue("Delay");
                     string unit = group.GetStringPropertyValue("Unit");
                     double seconds = delay.ConvertToSeconds(unit);
-                    return new TimerPulseSimulation(false, seconds);
+                    return new TimerOnSimulation(false, seconds);
                 };
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double Delay { get; set; }
 
-        public TimerPulseSimulation()
+        /// <summary>
+        /// 
+        /// </summary>
+        public TimerOnSimulation()
             : base()
         {
         }
 
-        public TimerPulseSimulation(bool? state, double delay)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="state"></param>
+        /// <param name="delay"></param>
+        public TimerOnSimulation(bool? state, double delay)
             : base()
         {
             base.State = state;
@@ -44,9 +64,12 @@ namespace TestSIM
         }
 
         private bool _isEnabled;
-        private bool _isReset;
         private long _endCycle;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="clock"></param>
         public override void Run(IClock clock)
         {
             int length = Inputs.Length;
@@ -64,55 +87,34 @@ namespace TestSIM
                         {
                             if (_isEnabled)
                             {
-                                if (clock.Cycle >= _endCycle && base.State != false)
+                                if (clock.Cycle >= _endCycle && base.State != true)
                                 {
-                                    _isEnabled = false;
-                                    base.State = false;
-                                    break;
+                                    base.State = true;
                                 }
                             }
                             else
                             {
-                                if (_isReset == true)
+                                // Delay -> in seconds
+                                // Clock.Cycle
+                                // Clock.Resolution -> in milliseconds
+                                long cyclesDelay = (long)(Delay * 1000.0) / clock.Resolution;
+                                _endCycle = clock.Cycle + cyclesDelay;
+                                _isEnabled = true;
+                                if (clock.Cycle >= _endCycle)
                                 {
-                                    // Delay -> in seconds
-                                    // Clock.Cycle
-                                    // Clock.Resolution -> in milliseconds
-                                    long cyclesDelay = (long)(Delay * 1000.0) / clock.Resolution;
-                                    _endCycle = clock.Cycle + cyclesDelay;
-                                    _isReset = false;
-                                    if (clock.Cycle >= _endCycle)
-                                    {
-                                        _isEnabled = false;
-                                        base.State = false;
-                                    }
-                                    else
-                                    {
-                                        _isEnabled = true;
-                                        base.State = true;
-                                    }
+                                    base.State = true;
                                 }
-                                break;
                             }
                         }
                         break;
                     case false:
                         {
-                            _isReset = true;
-                            if (_isEnabled)
-                            {
-                                if (clock.Cycle >= _endCycle && base.State != false)
-                                {
-                                    base.State = false;
-                                    _isEnabled = false;
-                                    break;
-                                }
-                            }
+                            _isEnabled = false;
+                            base.State = false;
                         }
                         break;
                     case null:
                         {
-                            _isReset = true;
                             _isEnabled = false;
                             base.State = default(bool?);
                         }
