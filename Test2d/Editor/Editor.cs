@@ -454,6 +454,16 @@ namespace Test2d
                     {
                         yield return arc.Point2; 
                     }
+
+                    if (!arc.Point3.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return arc.Point3;
+                    }
+
+                    if (!arc.Point4.State.HasFlag(ShapeState.Connector))
+                    {
+                        yield return arc.Point4;
+                    }
                 }
                 else if (shape is XBezier)
                 {
@@ -1110,6 +1120,36 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="arc"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void TryToConnectPoint3(XArc arc, double x, double y)
+        {
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                arc.Point3 = result as XPoint;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arc"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void TryToConnectPoint4(XArc arc, double x, double y)
+        {
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
+            if (result != null && result is XPoint)
+            {
+                arc.Point4 = result as XPoint;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="bezier"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -1603,7 +1643,6 @@ namespace Test2d
                         {
                             TryToConnectPoint1(_shape as XArc, sx, sy);
                         }
-                        Container.WorkingLayer.Shapes.Add(_shape);
                         Container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
                     }
@@ -1615,9 +1654,46 @@ namespace Test2d
                         {
                             arc.Point2.X = sx;
                             arc.Point2.Y = sy;
+                            arc.Point3.X = sx;
+                            arc.Point3.Y = sy;
                             if (_tryToConnect)
                             {
                                 TryToConnectPoint2(_shape as XArc, sx, sy);
+                            }
+                            Container.WorkingLayer.Invalidate();
+                            CurrentState = State.Two;
+                        }
+                    }
+                    break;
+                case State.Two:
+                    {
+                        var arc = _shape as XArc;
+                        if (arc != null)
+                        {
+                            arc.Point3.X = sx;
+                            arc.Point3.Y = sy;
+                            arc.Point4.X = sx;
+                            arc.Point4.Y = sy;
+                            if (_tryToConnect)
+                            {
+                                TryToConnectPoint3(_shape as XArc, sx, sy);
+                            }
+                            Container.WorkingLayer.Shapes.Add(_shape);
+                            Container.WorkingLayer.Invalidate();
+                            CurrentState = State.Three;
+                        }
+                    }
+                    break;
+                case State.Three:
+                    {
+                        var arc = _shape as XArc;
+                        if (arc != null)
+                        {
+                            arc.Point4.X = sx;
+                            arc.Point4.Y = sy;
+                            if (_tryToConnect)
+                            {
+                                TryToConnectPoint4(_shape as XArc, sx, sy);
                             }
                             Container.WorkingLayer.Shapes.Remove(_shape);
                             _history.Snapshot(_project);
@@ -1938,6 +2014,8 @@ namespace Test2d
                 case State.None:
                     break;
                 case State.One:
+                case State.Two:
+                case State.Three:
                     {
                         Container.WorkingLayer.Shapes.Remove(_shape);
                         Container.WorkingLayer.Invalidate();
@@ -2122,6 +2200,28 @@ namespace Test2d
                         {
                             arc.Point2.X = sx;
                             arc.Point2.Y = sy;
+                            Container.WorkingLayer.Invalidate();
+                        }
+                    }
+                    break;
+                case State.Two:
+                    {
+                        var arc = _shape as XArc;
+                        if (arc != null)
+                        {
+                            arc.Point3.X = sx;
+                            arc.Point3.Y = sy;
+                            Container.WorkingLayer.Invalidate();
+                        }
+                    }
+                    break;
+                case State.Three:
+                    {
+                        var arc = _shape as XArc;
+                        if (arc != null)
+                        {
+                            arc.Point4.X = sx;
+                            arc.Point4.Y = sy;
                             Container.WorkingLayer.Invalidate();
                         }
                     }
