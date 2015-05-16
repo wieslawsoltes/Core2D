@@ -657,19 +657,21 @@ namespace TestDXF
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        /// <param name="radius"></param>
+        /// <param name="radiusX"></param>
+        /// <param name="radiusY"></param>
         /// <param name="startAngle"></param>
         /// <param name="endAngle"></param>
         /// <param name="layer"></param>
         /// <returns></returns>
         private DxfArc CreateArc(
             double x, double y,
-            double radius, 
+            double radiusX, double radiusY,
             double startAngle, double endAngle, 
             string layer)
         {
-            double _cx = ToDxfX(x + radius / 2.0);
-            double _cy = ToDxfY(y + radius / 2.0);
+            // TODO: Handle properly radiusX and radiusY.
+            double _cx = ToDxfX(x + radiusX / 2.0);
+            double _cy = ToDxfY(y + radiusY / 2.0);
 
             return new DxfArc(_version, NextHandle())
             {
@@ -677,7 +679,7 @@ namespace TestDXF
                 Color = DxfDefaultColors.ByLayer.ToDxfColor(),
                 Thickness = 0.0,
                 CenterPoint = new DxfVector3(_cx, _cy, 0),
-                Radius = radius,
+                Radius = radiusX,
                 StartAngle = startAngle,
                 EndAngle = endAngle,
                 ExtrusionDirection = new DxfVector3(0, 0, 1),
@@ -837,7 +839,7 @@ namespace TestDXF
         private void DrawArc(DxfEntities entities, XArc arc, string layer)
         {
             var a = Arc.FromXArc(arc, 0.0, 0.0);
-            entities.Entities.Add(CreateArc(a.X, a.Y, a.Radius, a.StartAngle, a.EndAngle, layer));
+            entities.Entities.Add(CreateArc(a.X, a.Y, a.RadiusX, a.RadiusY, a.StartAngle, a.EndAngle, layer));
         }
 
         /// <summary>
