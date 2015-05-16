@@ -967,14 +967,16 @@ namespace TestDXF
                     break;
             }
 
-            entities.Entities.Add(CreateText(
-                text.Bind(null), 
-                x, y, 
-                text.Style.TextStyle.FontSize * (72.0 / 96.0), 
-                halign, 
-                valign, 
+            var dxfText = CreateText(
+                text.Bind(null),
+                x, y,
+                text.Style.TextStyle.FontSize * (72.0 / 96.0),
+                halign,
+                valign,
                 _defaultStyle,
-               layer));
+               layer);
+
+            entities.Entities.Add(dxfText);
         }
 
         /// <summary>
