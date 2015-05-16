@@ -35,6 +35,8 @@ namespace Test2d
         private double _historyY;
         private double _hitTreshold = 6.0;
         private bool _tryToConnect = true;
+        private bool _enableArcHelper = true;
+        private ArcHelper _arcHelper;
 
         /// <summary>
         /// Gets current container.
@@ -1643,6 +1645,12 @@ namespace Test2d
                         {
                             TryToConnectPoint1(_shape as XArc, sx, sy);
                         }
+                        if (_enableArcHelper)
+                        {
+                            _arcHelper = new ArcHelper(Project);
+                            _arcHelper.ToStateOne();
+                            _arcHelper.Move(_shape as XArc);
+                        }
                         Container.WorkingLayer.Invalidate();
                         CurrentState = State.One;
                     }
@@ -1659,6 +1667,11 @@ namespace Test2d
                             if (_tryToConnect)
                             {
                                 TryToConnectPoint2(_shape as XArc, sx, sy);
+                            }
+                            if (_enableArcHelper)
+                            {
+                                _arcHelper.ToStateTwo();
+                                _arcHelper.Move(_shape as XArc);
                             }
                             Container.WorkingLayer.Invalidate();
                             CurrentState = State.Two;
@@ -1678,6 +1691,11 @@ namespace Test2d
                             {
                                 TryToConnectPoint3(_shape as XArc, sx, sy);
                             }
+                            if (_enableArcHelper)
+                            {
+                                _arcHelper.ToStateThree();
+                                _arcHelper.Move(_shape as XArc);
+                            }
                             Container.WorkingLayer.Shapes.Add(_shape);
                             Container.WorkingLayer.Invalidate();
                             CurrentState = State.Three;
@@ -1694,6 +1712,11 @@ namespace Test2d
                             if (_tryToConnect)
                             {
                                 TryToConnectPoint4(_shape as XArc, sx, sy);
+                            }
+                            if (_enableArcHelper)
+                            {
+                                _arcHelper.Remove();
+                                _arcHelper.Finalize(_shape as XArc);
                             }
                             Container.WorkingLayer.Shapes.Remove(_shape);
                             _history.Snapshot(_project);
@@ -2017,6 +2040,10 @@ namespace Test2d
                 case State.Two:
                 case State.Three:
                     {
+                        if (_enableArcHelper)
+                        {
+                            _arcHelper.Remove();
+                        }
                         Container.WorkingLayer.Shapes.Remove(_shape);
                         Container.WorkingLayer.Invalidate();
                         CurrentState = State.None;
@@ -2200,6 +2227,10 @@ namespace Test2d
                         {
                             arc.Point2.X = sx;
                             arc.Point2.Y = sy;
+                            if (_enableArcHelper)
+                            {
+                                _arcHelper.Move(_shape as XArc);
+                            }
                             Container.WorkingLayer.Invalidate();
                         }
                     }
@@ -2211,6 +2242,10 @@ namespace Test2d
                         {
                             arc.Point3.X = sx;
                             arc.Point3.Y = sy;
+                            if (_enableArcHelper)
+                            {
+                                _arcHelper.Move(_shape as XArc);
+                            }
                             Container.WorkingLayer.Invalidate();
                         }
                     }
@@ -2222,6 +2257,10 @@ namespace Test2d
                         {
                             arc.Point4.X = sx;
                             arc.Point4.Y = sy;
+                            if (_enableArcHelper)
+                            {
+                                _arcHelper.Move(_shape as XArc);
+                            }
                             Container.WorkingLayer.Invalidate();
                         }
                     }
