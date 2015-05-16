@@ -324,7 +324,8 @@ namespace TestEMF
         /// </summary>
         /// <param name="gfx"></param>
         /// <param name="container"></param>
-        public void Draw(object gfx, Container container)
+        /// <param name="db"></param>
+        public void Draw(object gfx, Container container, IList<ShapeProperty> db)
         {
             if (container.Template != null)
             {
@@ -332,7 +333,7 @@ namespace TestEMF
                 {
                     if (layer.IsVisible)
                     {
-                        Draw(gfx, layer);
+                        Draw(gfx, layer, db);
                     }
                 }
             }
@@ -341,7 +342,7 @@ namespace TestEMF
             {
                 if (layer.IsVisible)
                 {
-                    Draw(gfx, layer);
+                    Draw(gfx, layer, db);
                 }
             }
         }
@@ -351,13 +352,14 @@ namespace TestEMF
         /// </summary>
         /// <param name="gfx"></param>
         /// <param name="layer"></param>
-        public void Draw(object gfx, Layer layer)
+        /// <param name="db"></param>
+        public void Draw(object gfx, Layer layer, IList<ShapeProperty> db)
         {
             foreach (var shape in layer.Shapes)
             {
                 if (shape.State.HasFlag(DrawShapeState))
                 {
-                    shape.Draw(gfx, this, 0, 0);
+                    shape.Draw(gfx, this, 0, 0, db);
                 }
             }
         }
@@ -369,7 +371,8 @@ namespace TestEMF
         /// <param name="line"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object gfx, XLine line, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object gfx, XLine line, double dx, double dy, IList<ShapeProperty> db)
         {
             var _gfx = gfx as Graphics;
 
@@ -528,7 +531,8 @@ namespace TestEMF
         /// <param name="rectangle"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object gfx, XRectangle rectangle, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object gfx, XRectangle rectangle, double dx, double dy, IList<ShapeProperty> db)
         {
             var _gfx = gfx as Graphics;
 
@@ -568,7 +572,8 @@ namespace TestEMF
         /// <param name="ellipse"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object gfx, XEllipse ellipse, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object gfx, XEllipse ellipse, double dx, double dy, IList<ShapeProperty> db)
         {
             var _gfx = gfx as Graphics;
 
@@ -608,7 +613,8 @@ namespace TestEMF
         /// <param name="arc"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object gfx, XArc arc, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object gfx, XArc arc, double dx, double dy, IList<ShapeProperty> db)
         {
             var a = GdiArc.FromXArc(arc, dx, dy);
             if (a.Width <= 0.0 || a.Height <= 0.0)
@@ -639,7 +645,8 @@ namespace TestEMF
         /// <param name="bezier"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object gfx, XBezier bezier, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object gfx, XBezier bezier, double dx, double dy, IList<ShapeProperty> db)
         {
             var _gfx = gfx as Graphics;
 
@@ -668,7 +675,8 @@ namespace TestEMF
         /// <param name="qbezier"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object gfx, XQBezier qbezier, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object gfx, XQBezier qbezier, double dx, double dy, IList<ShapeProperty> db)
         {
             var _gfx = gfx as Graphics;
 
@@ -702,7 +710,8 @@ namespace TestEMF
         /// <param name="text"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object gfx, XText text, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object gfx, XText text, double dx, double dy, IList<ShapeProperty> db)
         {
             var _gfx = gfx as Graphics;
 
@@ -778,7 +787,7 @@ namespace TestEMF
             }
 
             _gfx.DrawString(
-                text.Bind(null),
+                text.Bind(db),
                 font,
                 ToSolidBrush(text.Style.Stroke),
                 srect,
@@ -795,7 +804,8 @@ namespace TestEMF
         /// <param name="image"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object gfx, XImage image, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object gfx, XImage image, double dx, double dy, IList<ShapeProperty> db)
         {
             var _gfx = gfx as Graphics;
 

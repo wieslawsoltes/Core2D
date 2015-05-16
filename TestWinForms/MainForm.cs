@@ -556,9 +556,9 @@ namespace TestWinForms
             g.Clear(Color.FromArgb(255, 211, 211, 211));
 
             g.PageUnit = GraphicsUnit.Display;
-            
-            Context.Editor.Renderer.Draw(g, Context.Editor.Container);
-            Context.Editor.Renderer.Draw(g, Context.Editor.Container.WorkingLayer);
+
+            Context.Editor.Renderer.Draw(g, Context.Editor.Container, Context.Editor.Container.Properties);
+            Context.Editor.Renderer.Draw(g, Context.Editor.Container.WorkingLayer, Context.Editor.Container.Properties);
         }
     }
 }

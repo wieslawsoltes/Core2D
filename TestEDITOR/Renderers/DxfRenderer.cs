@@ -151,7 +151,8 @@ namespace TestDXF
         /// </summary>
         /// <param name="dc"></param>
         /// <param name="container"></param>
-        public void Draw(object dc, Container container)
+        /// <param name="db"></param>
+        public void Draw(object dc, Container container, IList<ShapeProperty> db)
         {
             // TODO:
         }
@@ -161,7 +162,8 @@ namespace TestDXF
         /// </summary>
         /// <param name="dc"></param>
         /// <param name="layer"></param>
-        public void Draw(object dc, Layer layer)
+        /// <param name="db"></param>
+        public void Draw(object dc, Layer layer, IList<ShapeProperty> db)
         {
             // TODO:
         }
@@ -173,7 +175,8 @@ namespace TestDXF
         /// <param name="line"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object dc, XLine line, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object dc, XLine line, double dx, double dy, IList<ShapeProperty> db)
         {
             // TODO:
         }
@@ -185,7 +188,8 @@ namespace TestDXF
         /// <param name="rectangle"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object dc, XRectangle rectangle, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object dc, XRectangle rectangle, double dx, double dy, IList<ShapeProperty> db)
         {
             // TODO:
         }
@@ -197,7 +201,8 @@ namespace TestDXF
         /// <param name="ellipse"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object dc, XEllipse ellipse, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object dc, XEllipse ellipse, double dx, double dy, IList<ShapeProperty> db)
         {
             // TODO:
         }
@@ -209,7 +214,8 @@ namespace TestDXF
         /// <param name="arc"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object dc, XArc arc, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object dc, XArc arc, double dx, double dy, IList<ShapeProperty> db)
         {
             // TODO:
         }
@@ -221,7 +227,8 @@ namespace TestDXF
         /// <param name="bezier"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object dc, XBezier bezier, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object dc, XBezier bezier, double dx, double dy, IList<ShapeProperty> db)
         {
             // TODO:
         }
@@ -233,7 +240,8 @@ namespace TestDXF
         /// <param name="qbezier"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object dc, XQBezier qbezier, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object dc, XQBezier qbezier, double dx, double dy, IList<ShapeProperty> db)
         {
             // TODO:
         }
@@ -245,7 +253,8 @@ namespace TestDXF
         /// <param name="text"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object dc, XText text, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object dc, XText text, double dx, double dy, IList<ShapeProperty> db)
         {
             // TODO:
         }
@@ -257,7 +266,8 @@ namespace TestDXF
         /// <param name="image"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object dc, XImage image, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object dc, XImage image, double dx, double dy, IList<ShapeProperty> db)
         {
             // TODO:
         }
@@ -927,7 +937,8 @@ namespace TestDXF
         /// <param name="entities"></param>
         /// <param name="text"></param>
         /// <param name="layer"></param>
-        private void DrawText(DxfEntities entities, XText text, string layer)
+        /// <param name="db"></param>
+        private void DrawText(DxfEntities entities, XText text, string layer, IList<ShapeProperty> db)
         {
             DxfHorizontalTextJustification halign;
             DxfVerticalTextJustification valign;
@@ -970,7 +981,7 @@ namespace TestDXF
             }
 
             var dxfText = CreateText(
-                text.Bind(null),
+                text.Bind(db),
                 x, y,
                 text.Style.TextStyle.FontSize * (72.0 / 96.0),
                 halign,
@@ -987,7 +998,8 @@ namespace TestDXF
         /// <param name="entities"></param>
         /// <param name="shapes"></param>
         /// <param name="layer"></param>
-        private void DrawShapes(DxfEntities entities, IEnumerable<BaseShape> shapes, string layer)
+        /// <param name="db"></param>
+        private void DrawShapes(DxfEntities entities, IEnumerable<BaseShape> shapes, string layer, IList<ShapeProperty> db)
         {
             foreach (var shape in shapes) 
             {
@@ -1047,7 +1059,7 @@ namespace TestDXF
                     else if (shape is XText)
                     {
                         var text = shape as XText;
-                        DrawText(entities, text, layer);
+                        DrawText(entities, text, layer, db);
                     }
                     else if (shape is XImage)
                     {
@@ -1057,7 +1069,7 @@ namespace TestDXF
                     else if (shape is XGroup)
                     {
                         var group = shape as XGroup;
-                        DrawShapes(entities, group.Shapes, layer);
+                        DrawShapes(entities, group.Shapes, layer, db);
                     }
                 }
             }
@@ -1185,7 +1197,7 @@ namespace TestDXF
                 {
                     if (layer.IsVisible)
                     {
-                        DrawShapes(file.Entities, layer.Shapes, layer.Name);
+                        DrawShapes(file.Entities, layer.Shapes, layer.Name, container.Properties);
                     }
                 }
             }
@@ -1194,7 +1206,7 @@ namespace TestDXF
             {
                 if (layer.IsVisible)
                 {
-                    DrawShapes(file.Entities, layer.Shapes, layer.Name);
+                    DrawShapes(file.Entities, layer.Shapes, layer.Name, container.Properties);
                 }
             }
 
