@@ -11,14 +11,14 @@ namespace Test2d
     /// </summary>
     public class XGroup : BaseShape
     {
-        private IList<KeyValuePair<string, ShapeProperty>> _database;
+        private Database _database;
         private IList<BaseShape> _shapes;
         private IList<XPoint> _connectors;
 
         /// <summary>
         /// 
         /// </summary>
-        public IList<KeyValuePair<string, ShapeProperty>> Database
+        public Database Database
         {
             get { return _database; }
             set
@@ -70,13 +70,14 @@ namespace Test2d
         /// <param name="renderer"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy)
+        /// <param name="db"></param>
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db)
         {
             if (State.HasFlag(ShapeState.Visible))
             {
                 foreach (var shape in Shapes)
                 {
-                    shape.Draw(dc, renderer, dx, dy);
+                    shape.Draw(dc, renderer, dx, dy, db);
                 }
  
                 if (renderer.SelectedShape != null)
@@ -85,16 +86,8 @@ namespace Test2d
                     {
                         foreach (var connector in Connectors)
                         {
-                            connector.Draw(dc, renderer, dx, dy);
+                            connector.Draw(dc, renderer, dx, dy, db);
                         }
-                        
-                        //foreach (var connector in Connectors)
-                        //{
-                        //    if (connector.Shape != null)
-                        //    {
-                        //        connector.Shape.Draw(dc, renderer, connector.X + dx, connector.Y + dy);
-                        //    }
-                        //}
                     }
                 }
                 
@@ -104,16 +97,8 @@ namespace Test2d
                     {
                         foreach (var connector in Connectors)
                         {
-                            connector.Draw(dc, renderer, dx, dy);
+                            connector.Draw(dc, renderer, dx, dy, db);
                         }
-                        
-                        //foreach (var connector in Connectors)
-                        //{
-                        //    if (connector.Shape != null)
-                        //    {
-                        //        connector.Shape.Draw(dc, renderer, connector.X + dx, connector.Y + dy);
-                        //    }
-                        //}
                     }
                 }
             }
@@ -135,31 +120,6 @@ namespace Test2d
             {
                 connector.Move(dx, dy);
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="property"></param>
-        public void AddProperty(ShapeProperty property)
-        {
-            _database.Add(
-                new KeyValuePair<string, ShapeProperty>(
-                    property.Name,
-                    property));
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="property"></param>
-        public void AddProperty(string key, ShapeProperty property)
-        {
-            _database.Add(
-                new KeyValuePair<string, ShapeProperty>(
-                    key,
-                    property));
         }
 
         /// <summary>
@@ -221,7 +181,7 @@ namespace Test2d
                 Name = name,
                 Style = default(ShapeStyle),
                 Properties = new ObservableCollection<ShapeProperty>(),
-                Database = new ObservableCollection<KeyValuePair<string, ShapeProperty>>(),
+                Database = Database.Create(),
                 Shapes = new ObservableCollection<BaseShape>(),
                 Connectors = new ObservableCollection<XPoint>()
             };
@@ -252,7 +212,7 @@ namespace Test2d
       
                 foreach (var property in shape.Properties) 
                 {
-                    g.AddProperty(property);
+                    g.Database.AddProperty(property);
                 }
             }
 
