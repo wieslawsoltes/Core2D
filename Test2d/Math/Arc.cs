@@ -55,6 +55,26 @@ namespace Test2d
         public double SweepAngle;
 
         /// <summary>
+        /// Converts an angle in decimal degress to radians.
+        /// </summary>
+        /// <param name="angleInDegrees">Angle in decimal degrees.</param>
+        /// <returns>Angle in radians.</returns>
+        public static double DegreesToRadians(double angleInDegrees)
+        {
+            return angleInDegrees * (Math.PI / 180.0);
+        }
+
+        /// <summary>
+        /// Converts an angle in radians to decimal degress.
+        /// </summary>
+        /// <param name="angleInRadians">Angle in radians</param>
+        /// <returns>Angle in decimal degrees.</returns>
+        public static double RadiansToDegrees(double angleInRadians)
+        {
+            return angleInRadians * (180.0 / Math.PI);
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="arc"></param>
