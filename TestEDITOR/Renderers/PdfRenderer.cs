@@ -744,10 +744,31 @@ namespace TestPDF
                 PdfFontEncoding.Unicode,
                 PdfFontEmbedding.Always);
 
+            var fontStyle = XFontStyle.Regular;
+            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Bold))
+            {
+                fontStyle |= XFontStyle.Bold;
+            }
+
+            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Italic))
+            {
+                fontStyle |= XFontStyle.Italic;
+            }
+
+            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline))
+            {
+                fontStyle |= XFontStyle.Underline;
+            }
+
+            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
+            {
+                fontStyle |= XFontStyle.Strikeout;
+            }
+
             XFont font = new XFont(
                 text.Style.TextStyle.FontName,
                 XUnit.FromPoint(text.Style.TextStyle.FontSize),
-                XFontStyle.Regular,
+                fontStyle,
                 options);
 
             var rect = Test2d.Rect2.Create(

@@ -267,8 +267,8 @@ namespace TestDXF
         private string _defaultStyle = "Standard";
         private double _pageWidth;
         private double _pageHeight;
-        private string _stylePrimatyFont = "calibri.ttf"; // "arial.ttf"; "arialuni.ttf";
-        private string _stylePrimatyFontDescription = "Calibri"; // "Arial"; "Arial Unicode MS"
+        private string _stylePrimaryFont = "calibri.ttf"; // "arial.ttf"; "arialuni.ttf";
+        private string _stylePrimaryFontDescription = "Calibri"; // "Arial"; "Arial Unicode MS"
         private string _styleBigFont = "";
 
         /// <summary>
@@ -450,9 +450,9 @@ namespace TestDXF
                 ObliqueAngle = 0,
                 TextGenerationFlags = DxfTextGenerationFlags.Default,
                 LastHeightUsed = 1,
-                PrimaryFontFile = _stylePrimatyFont,
+                PrimaryFontFile = _stylePrimaryFont,
                 BifFontFile = _styleBigFont,
-                PrimatyFontDescription = _stylePrimatyFontDescription
+                PrimatyFontDescription = _stylePrimaryFontDescription
             });
         }
 

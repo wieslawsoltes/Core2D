@@ -707,7 +707,32 @@ namespace TestEMF
             var _gfx = gfx as Graphics;
 
             Brush brush = ToSolidBrush(text.Style.Stroke);
-            Font font = new Font(text.Style.TextStyle.FontName, (float)(text.Style.TextStyle.FontSize * _textScaleFactor));
+
+            var fontStyle = System.Drawing.FontStyle.Regular;
+            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Bold))
+            {
+                fontStyle |= System.Drawing.FontStyle.Bold;
+            }
+
+            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Italic))
+            {
+                fontStyle |= System.Drawing.FontStyle.Italic;
+            }
+
+            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline))
+            {
+                fontStyle |= System.Drawing.FontStyle.Underline;
+            }
+
+            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
+            {
+                fontStyle |= System.Drawing.FontStyle.Strikeout;
+            }
+
+            Font font = new Font(
+                text.Style.TextStyle.FontName, 
+                (float)(text.Style.TextStyle.FontSize * _textScaleFactor),
+                fontStyle);
 
             var rect = CreateRect(
                 text.TopLeft,
@@ -723,26 +748,26 @@ namespace TestEMF
             var format = new StringFormat();
             switch (text.Style.TextStyle.TextHAlignment)
             {
-                case Test2d.TextHAlignment.Left:
+                case TextHAlignment.Left:
                     format.Alignment = StringAlignment.Near;
                     break;
-                case Test2d.TextHAlignment.Center:
+                case TextHAlignment.Center:
                     format.Alignment = StringAlignment.Center;
                     break;
-                case Test2d.TextHAlignment.Right:
+                case TextHAlignment.Right:
                     format.Alignment = StringAlignment.Far;
                     break;
             }
 
             switch (text.Style.TextStyle.TextVAlignment)
             {
-                case Test2d.TextVAlignment.Top:
+                case TextVAlignment.Top:
                     format.LineAlignment = StringAlignment.Near;
                     break;
-                case Test2d.TextVAlignment.Center:
+                case TextVAlignment.Center:
                     format.LineAlignment = StringAlignment.Center;
                     break;
-                case Test2d.TextVAlignment.Bottom:
+                case TextVAlignment.Bottom:
                     format.LineAlignment = StringAlignment.Far;
                     break;
             }

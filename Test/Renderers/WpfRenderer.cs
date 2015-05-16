@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Test2d;
@@ -1012,17 +1013,49 @@ namespace Test
             {
                 var ci = CultureInfo.InvariantCulture;
 
+                var fontStyle = System.Windows.FontStyles.Normal;
+                if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Italic))
+                {
+                    fontStyle = System.Windows.FontStyles.Italic;
+                }
+
+                var fontWeight = FontWeights.Regular;
+                if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Bold))
+                {
+                    fontWeight = FontWeights.Bold;
+                }
+
                 ft = new FormattedText(
                     text.Bind(null),
                     ci,
                     ci.TextInfo.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight,
                     new Typeface(
                         new FontFamily(text.Style.TextStyle.FontName),
-                        FontStyles.Normal,
-                        FontWeights.Normal,
+                        fontStyle,
+                        fontWeight,
                         FontStretches.Normal),
                     text.Style.TextStyle.FontSize,
                     stroke.Brush, null, TextFormattingMode.Ideal);
+
+                if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline)
+                    || text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
+                {
+                    var decorations = new TextDecorationCollection();
+
+                    if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline))
+                    {
+                        decorations = new TextDecorationCollection(
+                            decorations.Union(TextDecorations.Underline));
+                    }
+
+                    if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
+                    {
+                        decorations = new TextDecorationCollection(
+                            decorations.Union(TextDecorations.Strikethrough));
+                    }
+
+                    ft.SetTextDecorations(decorations);
+                }
 
                 //if (_enableTextCache)
                 //    _textCache.Add(text, ft);
