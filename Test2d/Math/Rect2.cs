@@ -91,12 +91,30 @@ namespace Test2d
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static Rect2 Create(XPoint tl, XPoint br, double dx = 0.0, double dy = 0.0)
+        public static Rect2 Create(
+            XPoint tl, XPoint br, 
+            double dx = 0.0, double dy = 0.0)
         {
             double tlx = Math.Min(tl.X, br.X);
             double tly = Math.Min(tl.Y, br.Y);
             double brx = Math.Max(tl.X, br.X);
             double bry = Math.Max(tl.Y, br.Y);
+            double x = tlx + dx;
+            double y = tly + dy;
+            double width = (brx + dx) - x;
+            double height = (bry + dy) - y;
+            return new Rect2(x, y, width, height);
+        }
+
+        public static Rect2 Create(
+            double x1, double y1, 
+            double x2, double y2, 
+            double dx = 0.0, double dy = 0.0)
+        {
+            double tlx = Math.Min(x1, x2);
+            double tly = Math.Min(y1, y2);
+            double brx = Math.Max(x1, x2);
+            double bry = Math.Max(y1, y2);
             double x = tlx + dx;
             double y = tly + dy;
             double width = (brx + dx) - x;
