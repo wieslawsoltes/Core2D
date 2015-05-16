@@ -111,7 +111,7 @@ namespace Test2d
                 }
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -127,7 +127,9 @@ namespace Test2d
         /// <param name="thickness"></param>
         /// <param name="lineStyle"></param>
         /// <param name="fontName"></param>
+        /// <param name="fontFile"></param>
         /// <param name="fontSize"></param>
+        /// <param name="fontStyle"></param>
         /// <param name="textHAlignment"></param>
         /// <param name="textVAlignment"></param>
         /// <returns></returns>
@@ -138,7 +140,9 @@ namespace Test2d
             double thickness = 2.0,
             LineStyle lineStyle = default(LineStyle),
             string fontName = "Calibri", 
+            string fontFile = "calibri.ttf",
             double fontSize = 12.0,
+            FontStyle fontStyle = FontStyle.Regular,
             TextHAlignment textHAlignment = TextHAlignment.Center,
             TextVAlignment textVAlignment = TextVAlignment.Center)
         {
@@ -149,7 +153,7 @@ namespace Test2d
                 Fill = ArgbColor.Create(fa, fr, fg, fb),
                 Thickness = thickness,
                 LineStyle = lineStyle ?? LineStyle.Create(ArrowStyle.Create(), ArrowStyle.Create()),
-                TextStyle = TextStyle.Create(fontName, fontSize, textHAlignment, textVAlignment)
+                TextStyle = TextStyle.Create(fontName, fontFile, fontSize, fontStyle, textHAlignment, textVAlignment)
             };
         }
         
@@ -178,7 +182,7 @@ namespace Test2d
                 Fill = fill ?? ArgbColor.Create(0xFF, 0x00, 0x00, 0x00),
                 Thickness = thickness,
                 LineStyle = lineStyle ?? LineStyle.Create(ArrowStyle.Create(), ArrowStyle.Create()),
-                TextStyle = textStyle ?? TextStyle.Create("Calibri", 12.0, TextHAlignment.Center, TextVAlignment.Center)
+                TextStyle = textStyle ?? TextStyle.Create("Calibri", "calibri.ttf", 12.0, FontStyle.Regular, TextHAlignment.Center, TextVAlignment.Center)
             };
         }
     }
