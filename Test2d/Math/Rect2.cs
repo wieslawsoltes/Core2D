@@ -13,30 +13,37 @@ namespace Test2d
         /// 
         /// </summary>
         public double X;
+
         /// <summary>
         /// 
         /// </summary>
         public double Y;
+
         /// <summary>
         /// 
         /// </summary>
         public double Width;
+
         /// <summary>
         /// 
         /// </summary>
         public double Height;
+
         /// <summary>
         /// 
         /// </summary>
         public double Left { get { return X; } }
+
         /// <summary>
         /// 
         /// </summary>
         public double Right { get { return Width + X; } }
+
         /// <summary>
         /// 
         /// </summary>
         public double Top { get { return Y; } }
+
         /// <summary>
         /// 
         /// </summary>
@@ -86,29 +93,6 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="tl"></param>
-        /// <param name="br"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
-        public static Rect2 Create(
-            XPoint tl, XPoint br, 
-            double dx = 0.0, double dy = 0.0)
-        {
-            double tlx = Math.Min(tl.X, br.X);
-            double tly = Math.Min(tl.Y, br.Y);
-            double brx = Math.Max(tl.X, br.X);
-            double bry = Math.Max(tl.Y, br.Y);
-            double x = tlx + dx;
-            double y = tly + dy;
-            double width = (brx + dx) - x;
-            double height = (bry + dy) - y;
-            return new Rect2(x, y, width, height);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
         /// <param name="x2"></param>
@@ -117,8 +101,8 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <returns></returns>
         public static Rect2 Create(
-            double x1, double y1, 
-            double x2, double y2, 
+            double x1, double y1,
+            double x2, double y2,
             double dx = 0.0, double dy = 0.0)
         {
             double tlx = Math.Min(x1, x2);
@@ -130,6 +114,36 @@ namespace Test2d
             double width = (brx + dx) - x;
             double height = (bry + dy) - y;
             return new Rect2(x, y, width, height);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tl"></param>
+        /// <param name="br"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static Rect2 Create(
+            Point2 tl, Point2 br,
+            double dx = 0.0, double dy = 0.0)
+        {
+            return Rect2.Create(tl.X, tl.Y, br.X, br.Y, dx, dy);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tl"></param>
+        /// <param name="br"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static Rect2 Create(
+            XPoint tl, XPoint br,
+            double dx = 0.0, double dy = 0.0)
+        {
+            return Rect2.Create(tl.X, tl.Y, br.X, br.Y, dx, dy);
         }
     }
 }
