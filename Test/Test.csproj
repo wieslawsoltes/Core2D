@@ -127,6 +127,7 @@
     <Compile Include="Converters\DoubleToStringConverter.cs" />
     <Compile Include="Converters\FlagsEnumConverter.cs" />
     <Compile Include="Converters\ObjectEqualityConverter.cs" />
+    <Compile Include="Converters\ShapePropertyParameterConverter.cs" />
     <Compile Include="Converters\ZoomScaleConverter.cs" />
     <Compile Include="PanAndZoom\PanAndZoomBorder.cs" />
     <Compile Include="PanAndZoom\PanAndZoomGrid.cs" />
@@ -163,12 +164,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TemplatesControl.xaml" />
-    <Page Include="Dictionaries\ProjectDictionary.xaml">
+    <Page Include="Dictionaries\Test2dDictionary.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dictionaries\ShapeDictionary.xaml" />
-    <Page Include="Dictionaries\StyleDictionary.xaml" />
     <Page Include="Controls\LayersControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
