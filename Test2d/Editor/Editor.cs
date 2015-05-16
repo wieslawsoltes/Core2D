@@ -694,7 +694,7 @@ namespace Test2d
                 _history.Snapshot(_project);
                 Container.Layers.Remove(layer);
                 Container.CurrentLayer = Container.Layers.FirstOrDefault();
-                Container.Invalidate();
+                //Container.Invalidate();
             }
         }
 
@@ -709,7 +709,7 @@ namespace Test2d
                 _history.Snapshot(_project);
                 Container.CurrentLayer.Shapes.Remove(shape);
                 Container.CurrentShape = Container.CurrentLayer.Shapes.FirstOrDefault();
-                Container.Invalidate();
+                //Container.Invalidate();
             }
         }
 
@@ -750,7 +750,7 @@ namespace Test2d
             Renderer.ClearCache();
             
             Project = project;
-            Container.Invalidate();
+            //Container.Invalidate();
 
             if (EnableObserver)
             {
@@ -1499,7 +1499,7 @@ namespace Test2d
                         _shape = XPoint.Create(sx, sy, Project.PointShape);
                         _history.Snapshot(_project);
                         Container.CurrentLayer.Shapes.Add(_shape);
-                        Container.Invalidate();
+                        //Container.Invalidate();
                     }
                     break;
             }
@@ -1538,7 +1538,7 @@ namespace Test2d
                             Container.WorkingLayer.Shapes.Remove(_shape);
                             _history.Snapshot(_project);
                             Container.CurrentLayer.Shapes.Add(_shape);
-                            Container.Invalidate();
+                            //Container.Invalidate();
                             CurrentState = State.None;
                         }
                     }
@@ -1580,7 +1580,7 @@ namespace Test2d
                             Container.WorkingLayer.Shapes.Remove(_shape);
                             _history.Snapshot(_project);
                             Container.CurrentLayer.Shapes.Add(_shape);
-                            Container.Invalidate();
+                            //Container.Invalidate();
                             CurrentState = State.None;
                         }
                     }
@@ -1622,7 +1622,7 @@ namespace Test2d
                             Container.WorkingLayer.Shapes.Remove(_shape);
                             _history.Snapshot(_project);
                             Container.CurrentLayer.Shapes.Add(_shape);
-                            Container.Invalidate();
+                            //Container.Invalidate();
                             CurrentState = State.None;
                         }
                     }
@@ -1801,7 +1801,7 @@ namespace Test2d
                             Container.WorkingLayer.Shapes.Remove(_shape);
                             _history.Snapshot(_project);
                             Container.CurrentLayer.Shapes.Add(_shape);
-                            Container.Invalidate();
+                            //Container.Invalidate();
                             CurrentState = State.None;
                         }
                     }
@@ -1861,7 +1861,7 @@ namespace Test2d
                             Container.WorkingLayer.Shapes.Remove(_shape);
                             _history.Snapshot(_project);
                             Container.CurrentLayer.Shapes.Add(_shape);
-                            Container.Invalidate();
+                            //Container.Invalidate();
                             CurrentState = State.None;
                         }
                     }
@@ -1904,7 +1904,7 @@ namespace Test2d
                             Container.WorkingLayer.Shapes.Remove(_shape);
                             _history.Snapshot(_project);
                             Container.CurrentLayer.Shapes.Add(_shape);
-                            Container.Invalidate();
+                            //Container.Invalidate();
                             CurrentState = State.None;
                         }
                     }
@@ -1953,7 +1953,7 @@ namespace Test2d
                             Container.WorkingLayer.Shapes.Remove(_shape);
                             _history.Snapshot(_project);
                             Container.CurrentLayer.Shapes.Add(_shape);
-                            Container.Invalidate();
+                            //Container.Invalidate();
                             CurrentState = State.None;
                         }
                     }
