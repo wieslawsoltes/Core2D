@@ -782,6 +782,7 @@ namespace Test
                 var segment = pf.Segments[0] as ArcSegment;
                 segment.Point = a.End;
                 segment.Size = a.Radius;
+                segment.IsLargeArc = a.IsLargeArc;
             }
             else
             {
@@ -791,7 +792,7 @@ namespace Test
                     IsFilled = arc.IsFilled
                 };
 
-                var segment = new ArcSegment(a.End, a.Radius, 0.0, false, SweepDirection.Clockwise, true);
+                var segment = new ArcSegment(a.End, a.Radius, 0.0, a.IsLargeArc, SweepDirection.Clockwise, true);
 
                 //segment.Freeze();
                 pf.Segments.Add(segment);
