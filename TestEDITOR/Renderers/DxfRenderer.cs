@@ -856,6 +856,7 @@ namespace TestDXF
 
             if (a.RadiusX != a.RadiusY)
             {
+                // TODO: Fix start and end angle.
                 var dxfEllipse = CreateEllipse(
                     a.X, a.Y,
                     a.Width, a.Height,
@@ -866,6 +867,7 @@ namespace TestDXF
             }
             else
             {
+                // TODO: Fix start and end angle.
                 var dxfArc = CreateArc(
                     a.X, a.Y, 
                     a.RadiusX, 
