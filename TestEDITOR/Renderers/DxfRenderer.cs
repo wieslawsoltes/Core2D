@@ -852,7 +852,7 @@ namespace TestDXF
         /// <param name="layer"></param>
         private void DrawArc(DxfEntities entities, XArc arc, string layer)
         {
-            var a = Arc.FromXArc(arc, 0.0, 0.0);
+            var a = GdiArc.FromXArc(arc, 0.0, 0.0);
 
             if (a.RadiusX != a.RadiusY)
             {
