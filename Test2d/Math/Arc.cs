@@ -13,30 +13,42 @@ namespace Test2d
         /// 
         /// </summary>
         public double X;
+
         /// <summary>
         /// 
         /// </summary>
         public double Y;
+
         /// <summary>
         /// 
         /// </summary>
         public double Width;
+
         /// <summary>
         /// 
         /// </summary>
         public double Height;
+
         /// <summary>
         /// 
         /// </summary>
-        public double Radius;
+        public double RadiusX;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double RadiusY;
+
         /// <summary>
         /// 
         /// </summary>
         public double StartAngle;
+
         /// <summary>
         /// 
         /// </summary>
         public double EndAngle;
+
         /// <summary>
         /// 
         /// </summary>
@@ -55,27 +67,33 @@ namespace Test2d
             double y1 = arc.Point1.Y + dy;
             double x2 = arc.Point2.X + dx;
             double y2 = arc.Point2.Y + dy;
+            double x3 = arc.Point3.X + dx;
+            double y3 = arc.Point3.Y + dy;
+            double x4 = arc.Point4.X + dx;
+            double y4 = arc.Point4.Y + dy;
+            var rect = Rect2.Create(x1, y1, x2, y2, dx, dy);
+            double cx = rect.X + rect.Width / 2.0;
+            double cy = rect.Y + rect.Height / 2.0;
+            double radiusX = cx - rect.X;
+            double radiusY = cy - rect.Y;
+            double startAngle = Math.Atan2(y3 - cy, x3 - cx);
+            double endAngle = Math.Atan2(y4 - cy, x4 - cx);
+            double sweepAngle = (endAngle - startAngle) * 180.0 / Math.PI;
 
-            double x0 = (x1 + x2) / 2.0;
-            double y0 = (y1 + y2) / 2.0;
+            if (sweepAngle < 0)
+                sweepAngle += 360;
 
-            double r = Math.Sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
-            double x = x0 - r;
-            double y = y0 - r;
-            double width = 2.0 * r;
-            double height = 2.0 * r;
-
-            double startAngle = 180.0 / Math.PI * Math.Atan2(y1 - y0, x1 - x0);
-            double endAngle = 180.0 / Math.PI * Math.Atan2(y2 - y0, x2 - x0);
-            double sweepAngle = Math.Abs(startAngle) + Math.Abs(endAngle);
+            startAngle *= 180.0 / Math.PI;
+            endAngle *= 180.0 / Math.PI;
 
             return new Arc
             {
-                X = x,
-                Y = y,
-                Width = width,
-                Height = height,
-                Radius = r,
+                X = rect.X,
+                Y = rect.Y,
+                Width = rect.Width,
+                Height = rect.Height,
+                RadiusX = radiusX,
+                RadiusY = radiusY,
                 StartAngle = startAngle,
                 EndAngle =  endAngle,
                 SweepAngle = sweepAngle
