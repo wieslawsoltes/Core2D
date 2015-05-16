@@ -9,26 +9,26 @@ using Test2d;
 
 namespace TestSIM
 {
-    public class Pin
-    {
-        public XPoint Point { get; set; }
-        public bool IsInverted { get; set; }
-
-        public static Pin Create(XPoint point, bool isInverted)
-        {
-            return new Pin() 
-            { 
-                Point = point, 
-                IsInverted = isInverted 
-            };
-        }
-    }
-
+    /// <summary>
+    /// 
+    /// </summary>
     public class ContainerGraphContext
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public IDictionary<XPoint, ICollection<Pin>> Connections { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public IDictionary<XPoint, ICollection<Pin>> Dependencies { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public IDictionary<XPoint, ShapeState> PinTypes { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<XGroup> OrderedGroups { get; set; }
     }
 }

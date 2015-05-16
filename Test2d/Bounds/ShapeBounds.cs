@@ -5,10 +5,20 @@ using System.Collections.Generic;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class ShapeBounds
     {
         #region Math
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rect"></param>
+        /// <param name="p0"></param>
+        /// <param name="p1"></param>
+        /// <returns></returns>
         private static bool LineIntersectsWithRect(ref Rect2 rect, XPoint p0, XPoint p1)
         {
             double left = rect.Left; 
@@ -90,6 +100,13 @@ namespace Test2d
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
         private static Vector2 NearestPointOnLine(Vector2 a, Vector2 b, Vector2 p)
         {
             double ax = p.X - a.X;
@@ -108,6 +125,14 @@ namespace Test2d
             return new Vector2(bx * t + a.X, by * t + a.Y);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <returns></returns>
         private static double Distance(double x1, double y1, double x2, double y2)
         {
             double dx = x1 - x2;
@@ -115,6 +140,14 @@ namespace Test2d
             return Math.Sqrt(dx * dx + dy * dy);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <returns></returns>
         private static Vector2 Middle(double x1, double y1, double x2, double y2)
         {
             return new Vector2((x1 + x2) / 2.0, (y1 + y2) / 2.0);
@@ -124,6 +157,12 @@ namespace Test2d
 
         #region Bounds
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="treshold"></param>
+        /// <returns></returns>
         private static Rect2 GetPointBounds(XPoint point, double treshold)
         {
             double radius = treshold / 2.0;
@@ -134,16 +173,33 @@ namespace Test2d
                 treshold);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rectangle"></param>
+        /// <returns></returns>
         private static Rect2 GetRectangleBounds(XRectangle rectangle)
         {
             return Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ellipse"></param>
+        /// <returns></returns>
         private static Rect2 GetEllipseBounds(XEllipse ellipse)
         {
             return Rect2.Create(ellipse.TopLeft, ellipse.BottomRight);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arc"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
         private static Rect2 GetArcBounds(XArc arc, double dx, double dy)
         {
             double x1 = arc.Point1.X + dx;
@@ -163,11 +219,21 @@ namespace Test2d
             return new Rect2(x, y, width, height);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         private static Rect2 GetTextBounds(XText text)
         {
             return Rect2.Create(text.TopLeft, text.BottomRight);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="image"></param>
+        /// <returns></returns>
         private static Rect2 GetImageBounds(XImage image)
         {
             return Rect2.Create(image.TopLeft, image.BottomRight);
@@ -177,6 +243,13 @@ namespace Test2d
 
         #region HitTest Point
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="p"></param>
+        /// <param name="treshold"></param>
+        /// <returns></returns>
         private static bool HitTest(XLine line, Vector2 p, double treshold)
         {
             var a = new Vector2(line.Start.X, line.Start.Y);
@@ -186,6 +259,13 @@ namespace Test2d
             return distance < treshold;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
+        /// <param name="p"></param>
+        /// <param name="treshold"></param>
+        /// <returns></returns>
         private static BaseShape HitTest(IEnumerable<BaseShape> shapes, Vector2 p, double treshold)
         {
             foreach (var shape in shapes)
@@ -398,6 +478,13 @@ namespace Test2d
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="p"></param>
+        /// <param name="treshold"></param>
+        /// <returns></returns>
         public static BaseShape HitTest(Container container, Vector2 p, double treshold)
         {
             //foreach (var layer in container.Layers)
@@ -421,6 +508,15 @@ namespace Test2d
 
         #region HitTest Rect
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
+        /// <param name="rect"></param>
+        /// <param name="selection"></param>
+        /// <param name="hs"></param>
+        /// <param name="treshold"></param>
+        /// <returns></returns>
         private static bool HitTest(IEnumerable<BaseShape> shapes, Rect2 rect, Vector2[] selection, ICollection<BaseShape> hs, double treshold)
         {
             foreach (var shape in shapes)
@@ -592,6 +688,13 @@ namespace Test2d
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="rect"></param>
+        /// <param name="treshold"></param>
+        /// <returns></returns>
         public static ICollection<BaseShape> HitTest(Container container, Rect2 rect, double treshold)
         {
             var hs = new HashSet<BaseShape>();

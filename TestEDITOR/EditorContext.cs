@@ -21,6 +21,9 @@ using TestSIM;
 
 namespace TestEDITOR
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class EditorContext : ObservableObject, IDisposable
     {
         private EditorCommands _commands;
@@ -38,6 +41,9 @@ namespace TestEDITOR
         private IDictionary<XGroup, BoolSimulation> _simulations;
         private Clock _clock = default(Clock);
 
+        /// <summary>
+        /// 
+        /// </summary>
         public EditorCommands Commands
         {
             get { return _commands; }
@@ -51,6 +57,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Editor Editor
         {
             get { return _editor; }
@@ -64,6 +73,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ITextClipboard TextClipboard
         {
             get { return _textClipboard; }
@@ -77,6 +89,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ISerializer Serializer
         {
             get { return _serializer; }
@@ -90,6 +105,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ICompressor Compressor
         {
             get { return _compressor; }
@@ -103,6 +121,9 @@ namespace TestEDITOR
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public History<Project> History
         {
             get { return _history; }
@@ -116,6 +137,9 @@ namespace TestEDITOR
             }
         }
     
+        /// <summary>
+        /// 
+        /// </summary>
         public string RootScriptsPath
         {
             get { return _rootScriptsPath; }
@@ -129,6 +153,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<ScriptDirectory> ScriptDirectories
         {
             get { return _scriptDirectories; }
@@ -142,6 +169,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsSimulationPaused
         {
             get { return _isSimulationPaused; }
@@ -155,6 +185,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IDictionary<XGroup, BoolSimulation> Simulations
         {
             get { return _simulations; }
@@ -168,8 +201,16 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Action<Action> Execute { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns></returns>
         public Container EmptyTemplate(Project project)
         {
             var container = Container.Create("Empty");
@@ -177,6 +218,11 @@ namespace TestEDITOR
             return container;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns></returns>
         public Container GridTemplate(Project project)
         {
             var container = Container.Create("Grid");
@@ -196,6 +242,11 @@ namespace TestEDITOR
             return container;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns></returns>
         public Container DefaultContainer(Project project)
         {
             var container = Container.Create();
@@ -203,6 +254,11 @@ namespace TestEDITOR
             return container;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns></returns>
         public Document DefaultDocument(Project project)
         {
              var document = Document.Create();
@@ -210,6 +266,10 @@ namespace TestEDITOR
              return document;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Project DefaultProject()
         {
             var project = Project.Create();
@@ -236,6 +296,13 @@ namespace TestEDITOR
             return project;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="renderer"></param>
+        /// <param name="clipboard"></param>
+        /// <param name="compressor"></param>
         public void Initialize(
             IView view, 
             IRenderer renderer, 
@@ -877,12 +944,21 @@ namespace TestEDITOR
             WarmUpCSharpScript();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Invalidate()
         {
             _editor.Renderer.ClearCache();
             _editor.Container.Invalidate();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="context"></param>
+        /// <param name="execute"></param>
         public void Eval(string code, EditorContext context, Action<Action> execute)
         {
             ScriptOptions options = ScriptOptions.Default
@@ -918,6 +994,10 @@ namespace TestEDITOR
                 });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
         public void Eval(string path)
         {
             try
@@ -933,6 +1013,11 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         private string ReadUtf8Text(string path)
         {
             using (var fs = System.IO.File.OpenRead(path))
@@ -947,6 +1032,11 @@ namespace TestEDITOR
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="text"></param>
         private void WriteUtf8Text(string path, string text)
         {
             using (var fs = System.IO.File.Create(path))
@@ -961,6 +1051,10 @@ namespace TestEDITOR
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
         public void Open(string path)
         {
             var json = ReadUtf8Text(path);
@@ -975,6 +1069,10 @@ namespace TestEDITOR
             _editor.Load(project);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
         public void Save(string path)
         {
             var root = new Uri(path);
@@ -988,6 +1086,11 @@ namespace TestEDITOR
             _editor.ToAbsoluteUri(root, images);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="item"></param>
         public void ExportAsPdf(string path, object item)
         {
             try
@@ -1017,6 +1120,10 @@ namespace TestEDITOR
             }
         }
   
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
         public void ExportAsEmf(string path)
         {
             try
@@ -1030,6 +1137,11 @@ namespace TestEDITOR
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="version"></param>
         public void ExportAsDxf(string path, Dxf.DxfAcadVer version)
         {
             try
@@ -1047,11 +1159,19 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool CanCopy()
         {
             return _editor.IsSelectionAvailable();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool CanPaste()
         {
             try
@@ -1066,6 +1186,10 @@ namespace TestEDITOR
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
         private void Copy(IList<BaseShape> shapes)
         {
             try
@@ -1083,6 +1207,10 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="json"></param>
         public void Paste(string json)
         {
             try
@@ -1099,7 +1227,11 @@ namespace TestEDITOR
                 System.Diagnostics.Debug.Print(ex.StackTrace);
             }
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
         private void TryToRestoreStyles(IEnumerable<BaseShape> shapes)
         {
             var styles = _editor.Project.StyleGroups
@@ -1135,6 +1267,10 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
         public void Paste(IEnumerable<BaseShape> shapes)
         {
             _editor.Deselect(_editor.Container);
@@ -1151,6 +1287,11 @@ namespace TestEDITOR
             _editor.Select(_editor.Container, new HashSet<BaseShape>(shapes));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="group"></param>
+        /// <returns></returns>
         public XGroup Clone(XGroup group)
         {
             try
@@ -1175,6 +1316,11 @@ namespace TestEDITOR
             return null;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <returns></returns>
         public Container Clone(Container container)
         {
             try
@@ -1201,6 +1347,11 @@ namespace TestEDITOR
             return null;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
         public Document Clone(Document document)
         {
             try
@@ -1231,6 +1382,12 @@ namespace TestEDITOR
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void Drop(XGroup group, double x, double y)
         {
             try
@@ -1255,16 +1412,27 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool CanUndo()
         {
             return _history.CanUndo();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool CanRedo()
         {
             return _history.CanRedo();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Undo()
         {
             try
@@ -1282,6 +1450,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Redo()
         {
             try
@@ -1299,6 +1470,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Cut()
         {
             if (CanCopy())
@@ -1309,6 +1483,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Copy()
         {
             if (CanCopy())
@@ -1325,6 +1502,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Paste()
         {
             try
@@ -1345,6 +1525,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void SelectAll()
         {
             _editor.Deselect(_editor.Container);
@@ -1353,6 +1536,9 @@ namespace TestEDITOR
                 new HashSet<BaseShape>(_editor.Container.CurrentLayer.Shapes));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ClearAll()
         {
             _history.Snapshot(_editor.Project);
@@ -1360,6 +1546,9 @@ namespace TestEDITOR
             _editor.Container.Invalidate();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void WarmUpCSharpScript()
         {
             // NOTE: Warmup Roslyn script engine.
@@ -1374,6 +1563,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void InitializeSctipts()
         {
 #if DEBUG
@@ -1418,6 +1610,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void InitializeSimulation()
         {
             _simulationFactory = new BoolSimulationFactory();
@@ -1438,16 +1633,27 @@ namespace TestEDITOR
             _simulationFactory.Register(new MemorySetPrioritySimulation());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool IsEditMode()
         {
             return _timer == null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool IsSimulationMode()
         {
             return _timer != null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void StartSimulation()
         {
             try
@@ -1500,6 +1706,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void StopSimulation()
         {
             try
@@ -1521,12 +1730,18 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void RestartSimulation()
         {
             StopSimulation();
             StartSimulation();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void PauseSimulation()
         {
             try
@@ -1544,6 +1759,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void TickSimulation()
         {
             try
@@ -1562,6 +1780,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void UpdateCanExecuteState()
         {
             (_commands.NewCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
@@ -1649,6 +1870,9 @@ namespace TestEDITOR
             (_commands.InsertDocumentAfterCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Dispose()
         {
             if (_watcher != null)

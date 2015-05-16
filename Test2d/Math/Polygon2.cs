@@ -4,15 +4,32 @@ using System;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public struct Polygon2
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public Vector2[] Points;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
         public bool Contains(Vector2 point)
         {
             return Contains(point.X, point.Y);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public bool Contains(double x, double y)
         {
             bool contains = false;

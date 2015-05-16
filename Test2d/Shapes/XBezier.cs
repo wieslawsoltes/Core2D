@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class XBezier : BaseShape
     {
         private XPoint _point1;
@@ -15,6 +18,9 @@ namespace Test2d
         private XPoint _point4;
         private bool _isFilled;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public XPoint Point1
         {
             get { return _point1; }
@@ -28,6 +34,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public XPoint Point2
         {
             get { return _point2; }
@@ -41,6 +50,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public XPoint Point3
         {
             get { return _point3; }
@@ -54,6 +66,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public XPoint Point4
         {
             get { return _point4; }
@@ -67,6 +82,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsFilled
         {
             get { return _isFilled; }
@@ -80,6 +98,13 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="renderer"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy)
         {
             if (State.HasFlag(ShapeState.Visible))
@@ -126,6 +151,11 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public override void Move(double dx, double dy)
         {
             Point1.Move(dx, dy);
@@ -134,6 +164,22 @@ namespace Test2d
             Point4.Move(dx, dy);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <param name="x3"></param>
+        /// <param name="y3"></param>
+        /// <param name="x4"></param>
+        /// <param name="y4"></param>
+        /// <param name="style"></param>
+        /// <param name="point"></param>
+        /// <param name="isFilled"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static XBezier Create(
             double x1, double y1,
             double x2, double y2,
@@ -157,6 +203,16 @@ namespace Test2d
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="style"></param>
+        /// <param name="point"></param>
+        /// <param name="isFilled"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static XBezier Create(
             double x, double y,
             ShapeStyle style,

@@ -8,8 +8,19 @@ using System.Threading.Tasks;
 
 namespace TestSIM
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class TopologicalSort<T> where T : class
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="dependencies"></param>
+        /// <param name="ignoreCycles"></param>
+        /// <returns></returns>
         public IEnumerable<T> Sort(
             IEnumerable<T> source,
             Func<T, IEnumerable<T>> dependencies,
@@ -24,6 +35,14 @@ namespace TestSIM
             return sorted;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="visited"></param>
+        /// <param name="sorted"></param>
+        /// <param name="dependencies"></param>
+        /// <param name="ignoreCycles"></param>
         private void Visit(
             T item,
             ICollection<T> visited,

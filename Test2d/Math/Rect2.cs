@@ -4,17 +4,51 @@ using System;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public struct Rect2
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public double X;
+        /// <summary>
+        /// 
+        /// </summary>
         public double Y;
+        /// <summary>
+        /// 
+        /// </summary>
         public double Width;
+        /// <summary>
+        /// 
+        /// </summary>
         public double Height;
+        /// <summary>
+        /// 
+        /// </summary>
         public double Left { get { return X; } }
+        /// <summary>
+        /// 
+        /// </summary>
         public double Right { get { return Width + X; } }
+        /// <summary>
+        /// 
+        /// </summary>
         public double Top { get { return Y; } }
+        /// <summary>
+        /// 
+        /// </summary>
         public double Bottom { get { return Y + Height; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         public Rect2(double x, double y, double width, double height)
         {
             this.X = x;
@@ -23,6 +57,11 @@ namespace Test2d
             this.Height = height;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
         public bool Contains(Vector2 point)
         {
             return ((point.X >= X)
@@ -31,6 +70,11 @@ namespace Test2d
                 && (point.Y - Height <= Y));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rect"></param>
+        /// <returns></returns>
         public bool IntersectsWith(Rect2 rect)
         {
             return (rect.Left <= Right)
@@ -39,6 +83,14 @@ namespace Test2d
                 && (rect.Bottom >= Top);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tl"></param>
+        /// <param name="br"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
         public static Rect2 Create(XPoint tl, XPoint br, double dx = 0.0, double dy = 0.0)
         {
             double tlx = Math.Min(tl.X, br.X);

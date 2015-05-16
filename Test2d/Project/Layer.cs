@@ -9,17 +9,35 @@ using System.Threading.Tasks;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class InvalidateLayerEventArgs : EventArgs { }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public delegate void InvalidateLayerEventHandler(object sender, InvalidateLayerEventArgs e);
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class Layer : ObservableObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public event InvalidateLayerEventHandler InvalidateLayer;
 
         private string _name;
         private bool _isVisible;
         private IList<BaseShape> _shapes;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -33,6 +51,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsVisible
         {
             get { return _isVisible; }
@@ -47,6 +68,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<BaseShape> Shapes
         {
             get { return _shapes; }
@@ -60,6 +84,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Invalidate()
         {
             var handler = InvalidateLayer;
@@ -69,6 +96,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="isVisible"></param>
+        /// <returns></returns>
         public static Layer Create(string name, bool isVisible = true)
         {
             return new Layer()

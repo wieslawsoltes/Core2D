@@ -23,26 +23,47 @@ using TestEMF;
 
 namespace Test.Windows
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal class TextClipboard : ITextClipboard
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
         public void SetText(string text)
         {
             Clipboard.SetText(text, TextDataFormat.UnicodeText);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string GetText()
         {
             return Clipboard.GetText(TextDataFormat.UnicodeText);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool ContainsText()
         {
             return Clipboard.ContainsText(TextDataFormat.UnicodeText);
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class MainWindow : Window, IView
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -50,6 +71,9 @@ namespace Test.Windows
             InitializeContext();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitializeContext()
         {
             var context = new EditorContext();
@@ -238,11 +262,17 @@ namespace Test.Windows
             DataContext = context;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void DeInitializeContext()
         {
             (DataContext as EditorContext).Dispose();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Eval()
         {
             var dlg = new OpenFileDialog()
@@ -262,6 +292,9 @@ namespace Test.Windows
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Open()
         {
             var dlg = new OpenFileDialog()
@@ -277,6 +310,9 @@ namespace Test.Windows
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void SaveAs()
         {
             var dlg = new SaveFileDialog()
@@ -292,6 +328,10 @@ namespace Test.Windows
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         public void Export(object item)
         {
             string name = string.Empty;
@@ -354,6 +394,10 @@ namespace Test.Windows
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string Image()
         {
             var dlg = new OpenFileDialog()

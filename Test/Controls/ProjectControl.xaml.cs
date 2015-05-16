@@ -17,13 +17,24 @@ using System.Windows.Shapes;
 
 namespace Test.Controls
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class ProjectControl : UserControl
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public ProjectControl()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TreeViewItem_MouseRightButtonDown(object sender, MouseEventArgs e)
         {
             var item = sender as TreeViewItem;

@@ -4,6 +4,9 @@ using System;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class TextStyle : ObservableObject
     {
         private string _name;
@@ -12,6 +15,9 @@ namespace Test2d
         private TextHAlignment _textHAlignment;
         private TextVAlignment _textVAlignment;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -25,6 +31,9 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public string FontName
         {
             get { return _fontName; }
@@ -38,6 +47,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double FontSize
         {
             get { return _fontSize; }
@@ -51,6 +63,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public TextHAlignment TextHAlignment
         {
             get { return _textHAlignment; }
@@ -64,6 +79,9 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public TextVAlignment TextVAlignment
         {
             get { return _textVAlignment; }
@@ -77,6 +95,14 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fontName"></param>
+        /// <param name="fontSize"></param>
+        /// <param name="textHAlignment"></param>
+        /// <param name="textVAlignment"></param>
+        /// <returns></returns>
         public static TextStyle Create(
             string fontName = "Calibri", 
             double fontSize = 12.0,

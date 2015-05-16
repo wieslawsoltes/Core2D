@@ -26,6 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Test2d.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>PdbOnly</DebugType>
@@ -34,6 +35,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Test2d.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
@@ -70,6 +72,7 @@
     <Compile Include="Core\LineCap.cs" />
     <Compile Include="Core\LineStyle.cs" />
     <Compile Include="Core\ShapeProperty.cs" />
+    <Compile Include="Core\ShapePropertyExtensions.cs" />
     <Compile Include="Core\ShapeState.cs" />
     <Compile Include="Core\ShapeStyleGroup.cs" />
     <Compile Include="Core\TextStyle.cs" />

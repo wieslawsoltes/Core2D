@@ -4,6 +4,9 @@ using System;
 
 namespace Test2d
 {
+    /// <summary>
+    /// Specifies the Alpha, Red, Green and Blue color channels used for shape stroke and fill.
+    /// </summary>
     public class ArgbColor : ObservableObject
     {
         private byte _a;
@@ -11,6 +14,9 @@ namespace Test2d
         private byte _g;
         private byte _b;
 
+        /// <summary>
+        /// Alpha color channel.
+        /// </summary>
         public byte A
         {
             get { return _a; }
@@ -24,6 +30,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Red color channel.
+        /// </summary>
         public byte R
         {
             get { return _r; }
@@ -37,6 +46,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Green color channel.
+        /// </summary>
         public byte G
         {
             get { return _g; }
@@ -50,6 +62,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Blue color channel.
+        /// </summary>
         public byte B
         {
             get { return _b; }
@@ -63,6 +78,14 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Creates a new instance of the ArgbColor class.
+        /// </summary>
+        /// <param name="a">The alpha color channel.</param>
+        /// <param name="r">The red color channel.</param>
+        /// <param name="g">The green color channel.</param>
+        /// <param name="b">The blue color channel.</param>
+        /// <returns>The new instance of the ArgbColor class.</returns>
         public static ArgbColor Create(byte a, byte r, byte g, byte b)
         {
             return new ArgbColor() { A = a, R = r, G = g, B = b };

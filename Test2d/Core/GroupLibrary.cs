@@ -7,12 +7,18 @@ using System.Linq;
 
 namespace Test2d
 {
+    /// <summary>
+    /// Named XGroup shapes collection.
+    /// </summary>
     public class GroupLibrary : ObservableObject
     {
         private string _name;
         private IList<XGroup> _groups;
         private XGroup _currentGroup;
 
+        /// <summary>
+        /// Gets or sets group library name.
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -26,6 +32,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets a colletion XGroup.
+        /// </summary>
         public IList<XGroup> Groups
         {
             get { return _groups; }
@@ -39,6 +48,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets currenly selected group from Groups collection.
+        /// </summary>
         public XGroup CurrentGroup
         {
             get { return _currentGroup; }
@@ -52,6 +64,11 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Creates a new instance of the GroupLibrary class.
+        /// </summary>
+        /// <param name="name">The group library name.</param>
+        /// <returns>The new instance of the GroupLibrary class.</returns>
         public static GroupLibrary Create(string name)
         {
             return new GroupLibrary()

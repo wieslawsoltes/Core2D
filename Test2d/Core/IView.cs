@@ -4,9 +4,18 @@ using System;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IView
     {
+        /// <summary>
+        /// 
+        /// </summary>
         object DataContext { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         void Close();
     }
 }

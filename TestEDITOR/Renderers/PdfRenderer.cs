@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace TestPDF
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class PdfRenderer : Test2d.ObservableObject, Test2d.IRenderer
     {
         private double _zoom;
@@ -20,6 +23,9 @@ namespace TestPDF
         private Test2d.BaseShape _selectedShape;
         private ICollection<Test2d.BaseShape> _selectedShapes;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double Zoom
         {
             get { return _zoom; }
@@ -33,6 +39,9 @@ namespace TestPDF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double PanX
         {
             get { return _panX; }
@@ -46,6 +55,9 @@ namespace TestPDF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double PanY
         {
             get { return _panY; }
@@ -59,6 +71,9 @@ namespace TestPDF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Test2d.ShapeState DrawShapeState
         {
             get { return _drawShapeState; }
@@ -72,6 +87,9 @@ namespace TestPDF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Test2d.BaseShape SelectedShape
         {
             get { return _selectedShape; }
@@ -85,6 +103,9 @@ namespace TestPDF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ICollection<Test2d.BaseShape> SelectedShapes
         {
             get { return _selectedShapes; }
@@ -98,6 +119,9 @@ namespace TestPDF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public PdfRenderer()
         {
             _zoom = 1.0;
@@ -110,13 +134,25 @@ namespace TestPDF
             _scaleToPage = (value) => (float)(value * 1.0);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static Test2d.IRenderer Create()
         {
             return new PdfRenderer();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private Func<double, double> _scaleToPage;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="container"></param>
         public void Save(string path, Test2d.Container container)
         {
             using (var pdf = new PdfDocument())
@@ -126,6 +162,11 @@ namespace TestPDF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="document"></param>
         public void Save(string path, Test2d.Document document)
         {
             using (var pdf = new PdfDocument())
@@ -158,6 +199,11 @@ namespace TestPDF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="project"></param>
         public void Save(string path, Test2d.Project project)
         {
             using (var pdf = new PdfDocument())
@@ -205,6 +251,12 @@ namespace TestPDF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pdf"></param>
+        /// <param name="container"></param>
+        /// <returns></returns>
         private PdfPage Add(PdfDocument pdf, Test2d.Container container)
         {
             // create A4 page with landscape orientation
@@ -229,6 +281,11 @@ namespace TestPDF
             return page;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
         private static XColor ToXColor(Test2d.ArgbColor color)
         {
             return XColor.FromArgb(
@@ -238,6 +295,12 @@ namespace TestPDF
                 color.B);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="scale"></param>
+        /// <returns></returns>
         private static XPen ToXPen(Test2d.ShapeStyle style, Func<double, double> scale)
         {
             var pen = new XPen(ToXColor(style.Stroke), XUnit.FromPoint(style.Thickness));
@@ -262,11 +325,23 @@ namespace TestPDF
             return pen;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
         private static XSolidBrush ToXSolidBrush(Test2d.ArgbColor color)
         {
             return new XSolidBrush(ToXColor(color));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="pen"></param>
+        /// <param name="p0"></param>
+        /// <param name="p1"></param>
         private static void DrawLineInternal(
             XGraphics gfx,
             XPen pen,
@@ -276,6 +351,14 @@ namespace TestPDF
             gfx.DrawLine(pen, p0, p1);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="brush"></param>
+        /// <param name="pen"></param>
+        /// <param name="isFilled"></param>
+        /// <param name="rect"></param>
         private static void DrawRectangleInternal(
             XGraphics gfx,
             XSolidBrush brush,
@@ -293,6 +376,14 @@ namespace TestPDF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="brush"></param>
+        /// <param name="pen"></param>
+        /// <param name="isFilled"></param>
+        /// <param name="rect"></param>
         private static void DrawEllipseInternal(
             XGraphics gfx,
             XSolidBrush brush,
@@ -310,10 +401,18 @@ namespace TestPDF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ClearCache()
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="container"></param>
         public void Draw(object gfx, Test2d.Container container)
         {
             if (container.Template != null)
@@ -336,6 +435,11 @@ namespace TestPDF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="layer"></param>
         public void Draw(object gfx, Test2d.Layer layer)
         {
             foreach (var shape in layer.Shapes)
@@ -347,6 +451,13 @@ namespace TestPDF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="line"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object gfx, Test2d.XLine line, double dx, double dy)
         {
             var _gfx = gfx as XGraphics;
@@ -470,6 +581,13 @@ namespace TestPDF
             _gfx.DrawLine(stroke, pt1, pt2);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="rectangle"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object gfx, Test2d.XRectangle rectangle, double dx, double dy)
         {
             var _gfx = gfx as XGraphics;
@@ -500,6 +618,13 @@ namespace TestPDF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="ellipse"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object gfx, Test2d.XEllipse ellipse, double dx, double dy)
         {
             var _gfx = gfx as XGraphics;
@@ -530,6 +655,13 @@ namespace TestPDF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="arc"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object gfx, Test2d.XArc arc, double dx, double dy)
         {
             var _gfx = gfx as XGraphics;
@@ -546,6 +678,13 @@ namespace TestPDF
                 a.SweepAngle);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="bezier"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object gfx, Test2d.XBezier bezier, double dx, double dy)
         {
             var _gfx = gfx as XGraphics;
@@ -562,6 +701,13 @@ namespace TestPDF
                 _scaleToPage(bezier.Point4.Y));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="qbezier"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object gfx, Test2d.XQBezier qbezier, double dx, double dy)
         {
             var _gfx = gfx as XGraphics;
@@ -583,6 +729,13 @@ namespace TestPDF
                 _scaleToPage(x4 + dx), _scaleToPage(y4 + dy));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="text"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object gfx, Test2d.XText text, double dx, double dy)
         {
             var _gfx = gfx as XGraphics;
@@ -648,6 +801,13 @@ namespace TestPDF
                 format);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="image"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object gfx, Test2d.XImage image, double dx, double dy)
         {
             var _gfx = gfx as XGraphics;

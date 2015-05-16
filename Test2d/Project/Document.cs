@@ -7,11 +7,17 @@ using System.Linq;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Document : ObservableObject
     {
         private string _name;
         private IList<Container> _containers;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -25,6 +31,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<Container> Containers
         {
             get { return _containers; }
@@ -38,6 +47,11 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static Document Create(string name = "Document")
         {
             return new Document()

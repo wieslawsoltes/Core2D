@@ -13,6 +13,9 @@ using Test2d;
 
 namespace Test
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class WpfRenderer : ObservableObject, IRenderer
     {
         private double _zoom;
@@ -22,6 +25,9 @@ namespace Test
         private BaseShape _selectedShape;
         private ICollection<BaseShape> _selectedShapes;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double Zoom
         {
             get { return _zoom; }
@@ -35,6 +41,9 @@ namespace Test
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double PanX
         {
             get { return _panX; }
@@ -48,6 +57,9 @@ namespace Test
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double PanY
         {
             get { return _panY; }
@@ -61,6 +73,9 @@ namespace Test
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ShapeState DrawShapeState
         {
             get { return _drawShapeState; }
@@ -74,6 +89,9 @@ namespace Test
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public BaseShape SelectedShape
         {
             get { return _selectedShape; }
@@ -87,6 +105,9 @@ namespace Test
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public ICollection<BaseShape> SelectedShapes
         {
             get { return _selectedShapes; }
@@ -101,7 +122,6 @@ namespace Test
         }
 
         private const bool _enableGuidelines = true;
-        
         private const bool _enableStyleCache = true;
         private const bool _enableArcCache = true;
         private const bool _enableBezierCache = true;
@@ -116,6 +136,9 @@ namespace Test
         private IDictionary<XText, FormattedText> _textCache;
         private IDictionary<Uri, BitmapImage> _biCache;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public WpfRenderer()
         {
             _zoom = 1.0;
@@ -126,11 +149,22 @@ namespace Test
             ClearCache();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static IRenderer Create()
         {
             return new WpfRenderer();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="rect"></param>
+        /// <param name="ft"></param>
+        /// <returns></returns>
         private static Point GetTextOrigin(ShapeStyle style, ref Rect rect, FormattedText ft)
         {
             double ox, oy;
@@ -166,6 +200,11 @@ namespace Test
             return new Point(ox, oy);
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
         private static Brush CreateBrush(ArgbColor color)
         {
             var brush = new SolidColorBrush(
@@ -178,6 +217,13 @@ namespace Test
             return brush;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ls"></param>
+        /// <param name="color"></param>
+        /// <param name="thickness"></param>
+        /// <returns></returns>
         private static Pen CreatePen(LineStyle ls, ArgbColor color, double thickness)
         {
             var brush = CreateBrush(color);
@@ -206,6 +252,14 @@ namespace Test
             return pen;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tl"></param>
+        /// <param name="br"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
         private static Rect CreateRect(XPoint tl, XPoint br, double dx, double dy)
         {
             double tlx = Math.Min(tl.X, br.X);
@@ -217,6 +271,14 @@ namespace Test
                 new Point(brx + dx, bry + dy));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="half"></param>
+        /// <param name="pen"></param>
+        /// <param name="p0"></param>
+        /// <param name="p1"></param>
         private static void DrawLineInternal(
             DrawingContext dc, 
             double half, 
@@ -238,6 +300,15 @@ namespace Test
                 dc.Pop();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="half"></param>
+        /// <param name="brush"></param>
+        /// <param name="pen"></param>
+        /// <param name="isFilled"></param>
+        /// <param name="rect"></param>
         private static void DrawRectangleInternal(
             DrawingContext dc, 
             double half, 
@@ -268,6 +339,17 @@ namespace Test
                 dc.Pop();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="half"></param>
+        /// <param name="brush"></param>
+        /// <param name="pen"></param>
+        /// <param name="isFilled"></param>
+        /// <param name="center"></param>
+        /// <param name="rx"></param>
+        /// <param name="ry"></param>
         private static void DrawEllipseInternal(
             DrawingContext dc, 
             double half, 
@@ -303,6 +385,15 @@ namespace Test
                 dc.Pop();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="half"></param>
+        /// <param name="brush"></param>
+        /// <param name="pen"></param>
+        /// <param name="isFilled"></param>
+        /// <param name="pg"></param>
         private static void DrawPathGeometryInternal(
             DrawingContext dc,
             double half,
@@ -333,6 +424,9 @@ namespace Test
                 dc.Pop();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ClearCache()
         {
             _styleCache = new Dictionary<ShapeStyle, Tuple<Brush, Pen>>();
@@ -352,6 +446,11 @@ namespace Test
             _biCache = new Dictionary<Uri, BitmapImage>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="container"></param>
         public void Draw(object dc, Container container)
         {
             foreach (var layer in container.Layers)
@@ -363,6 +462,11 @@ namespace Test
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="layer"></param>
         public void Draw(object dc, Layer layer)
         {
             var _dc = dc as DrawingContext;
@@ -376,6 +480,13 @@ namespace Test
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="line"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object dc, XLine line, double dx, double dy)
         {
             var _dc = dc as DrawingContext;
@@ -529,6 +640,13 @@ namespace Test
             DrawLineInternal(_dc, half, stroke, ref pt1, ref pt2);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="rectangle"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object dc, XRectangle rectangle, double dx, double dy)
         {
             var _dc = dc as DrawingContext;
@@ -565,6 +683,13 @@ namespace Test
             DrawRectangleInternal(_dc, half, fill, stroke, rectangle.IsFilled, ref rect);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="ellipse"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object dc, XEllipse ellipse, double dx, double dy)
         {
             var _dc = dc as DrawingContext;
@@ -610,6 +735,13 @@ namespace Test
                 rx, ry);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="arc"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object dc, XArc arc, double dx, double dy)
         {
             var _dc = dc as DrawingContext;
@@ -675,6 +807,13 @@ namespace Test
             DrawPathGeometryInternal(_dc, half, fill, stroke, arc.IsFilled, pg);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="bezier"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object dc, XBezier bezier, double dx, double dy)
         {
             var _dc = dc as DrawingContext;
@@ -741,6 +880,13 @@ namespace Test
             DrawPathGeometryInternal(_dc, half, fill, stroke, bezier.IsFilled, pg);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="qbezier"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object dc, XQBezier qbezier, double dx, double dy)
         {
             var _dc = dc as DrawingContext;
@@ -806,6 +952,13 @@ namespace Test
             DrawPathGeometryInternal(_dc, half, fill, stroke, qbezier.IsFilled, pg);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="text"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object dc, XText text, double dx, double dy)
         {
             var _dc = dc as DrawingContext;
@@ -874,6 +1027,13 @@ namespace Test
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="image"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object dc, XImage image, double dx, double dy)
         {
             if (image.Path == null)

@@ -5,11 +5,22 @@ using System.Linq;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal static class ConvexHullBounds
     {
         private static MonotoneChain mc = new MonotoneChain();
         private static SeparatingAxisTheorem sat = new SeparatingAxisTheorem();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="convexHull"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
         private static bool Contains(double x, double y, Vector2[] convexHull, int k)
         {
             bool contains = false;
@@ -24,6 +35,12 @@ namespace Test2d
             return contains;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bezier"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
         public static bool Contains(XBezier bezier, Vector2 point)
         {
             Vector2[] vertices = new Vector2[4];
@@ -40,6 +57,12 @@ namespace Test2d
             return Contains(point.X, point.Y, convexHull, k);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="qbezier"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
         public static bool Contains(XQBezier qbezier, Vector2 point)
         {
             Vector2[] vertices = new Vector2[3];
@@ -55,6 +78,11 @@ namespace Test2d
             return Contains(point.X, point.Y, convexHull, k);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bezier"></param>
+        /// <returns></returns>
         public static Vector2[] GetVertices(XBezier bezier)
         {
             Vector2[] vertices = new Vector2[4];
@@ -71,6 +99,11 @@ namespace Test2d
             return convexHull.Take(k).ToArray();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="qbezier"></param>
+        /// <returns></returns>
         public static Vector2[] GetVertices(XQBezier qbezier)
         {
             Vector2[] vertices = new Vector2[3];
@@ -86,6 +119,12 @@ namespace Test2d
             return convexHull.Take(k).ToArray();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="selection"></param>
+        /// <param name="vertices"></param>
+        /// <returns></returns>
         public static bool Overlap(Vector2[] selection, Vector2[] vertices)
         {
             return sat.Overlap(selection, vertices);

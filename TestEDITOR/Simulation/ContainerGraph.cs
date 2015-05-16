@@ -9,8 +9,16 @@ using Test2d;
 
 namespace TestSIM
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class ContainerGraph
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
+        /// <returns></returns>
         public static IEnumerable<XPoint> GetLogicPoints(IEnumerable<BaseShape> shapes)
         {
             if (shapes == null)
@@ -63,6 +71,11 @@ namespace TestSIM
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <returns></returns>
         public static bool IsValidWireType(BaseShape shape)
         {
             return (shape is XLine 
@@ -71,6 +84,11 @@ namespace TestSIM
                 && shape.Style.Name.StartsWith("Logic-Wire");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="style"></param>
+        /// <returns></returns>
         public static bool IsPinInverted(ShapeStyle style)
         {
             var ls = style.LineStyle;
@@ -78,12 +96,22 @@ namespace TestSIM
                 | (ls.EndArrowStyle.ArrowType == ArrowType.Ellipse);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <returns></returns>
         public static bool IsPinStandalone(BaseShape shape)
         {
             return shape is XPoint
                 && shape.State.HasFlag(ShapeState.Standalone);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <returns></returns>
         public static ContainerGraphContext Create(Container container)
         {
             var shapes = container.Layers.SelectMany(l => l.Shapes);
@@ -93,6 +121,14 @@ namespace TestSIM
             return Create(shapes, groups, pins, wires);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
+        /// <param name="groups"></param>
+        /// <param name="pins"></param>
+        /// <param name="wires"></param>
+        /// <returns></returns>
         public static ContainerGraphContext Create(
             IEnumerable<BaseShape> shapes,
             IEnumerable<XGroup> groups,
@@ -133,6 +169,13 @@ namespace TestSIM
             return context;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p1"></param>
+        /// <param name="p2"></param>
+        /// <param name="style"></param>
+        /// <param name="connections"></param>
         public static void SetWireConnections(
             XPoint p1, 
             XPoint p2, 
@@ -156,6 +199,13 @@ namespace TestSIM
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
+        /// <param name="pins"></param>
+        /// <param name="wires"></param>
+        /// <returns></returns>
         public static IDictionary<XPoint, ICollection<Pin>> CreateConnectios(
             IEnumerable<BaseShape> shapes,
             IEnumerable<XPoint> pins,
@@ -210,6 +260,12 @@ namespace TestSIM
             return connections;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="groups"></param>
+        /// <param name="connections"></param>
+        /// <returns></returns>
         public static IDictionary<XPoint, ICollection<Pin>> FindDependencies(
             IEnumerable<XGroup> groups,
             IDictionary<XPoint, ICollection<Pin>> connections)
@@ -228,6 +284,13 @@ namespace TestSIM
             return dependencies;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="next"></param>
+        /// <param name="start"></param>
+        /// <param name="connections"></param>
+        /// <param name="dependencies"></param>
         public static void FindDependencies(
             XPoint next,
             XPoint start,
@@ -260,6 +323,12 @@ namespace TestSIM
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="groups"></param>
+        /// <param name="dependencies"></param>
+        /// <returns></returns>
         public static IDictionary<XPoint, ShapeState> FindConnectorPinTypes(
             IEnumerable<XGroup> groups,
             IDictionary<XPoint, ICollection<Pin>> dependencies)
@@ -352,6 +421,12 @@ namespace TestSIM
             return pinTypes;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="wires"></param>
+        /// <param name="pins"></param>
+        /// <param name="pinTypes"></param>
         private static void AddStandalonePinTypes(
             IEnumerable<BaseShape> wires, 
             IEnumerable<XPoint> pins, 
@@ -437,6 +512,12 @@ namespace TestSIM
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dependencies"></param>
+        /// <param name="pinTypes"></param>
+        /// <param name="pins"></param>
         private static void FindConnectorPinTypes(
             IDictionary<XPoint, ICollection<Pin>> dependencies,
             Dictionary<XPoint, ShapeState> pinTypes,
@@ -517,6 +598,13 @@ namespace TestSIM
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="groups"></param>
+        /// <param name="dependencies"></param>
+        /// <param name="pinTypes"></param>
+        /// <returns></returns>
         public static IList<XGroup> SortDependencies(
             IEnumerable<XGroup> groups,
             IDictionary<XPoint, ICollection<Pin>> dependencies,

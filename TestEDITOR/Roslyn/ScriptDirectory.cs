@@ -9,12 +9,18 @@ using Test2d;
 
 namespace TestEDITOR
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ScriptDirectory : ObservableObject
     {
         private string _name;
         private string _path;
         private IList<ScriptFile> _scripts;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -28,6 +34,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Path
         {
             get { return _path; }
@@ -41,6 +50,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<ScriptFile> Scripts
         {
             get { return _scripts; }
@@ -54,6 +66,12 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static ScriptDirectory Create(string name, string path)
         {
             return new ScriptDirectory()
@@ -64,6 +82,11 @@ namespace TestEDITOR
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static ScriptDirectory CreateScriptDirectory(string path)
         {
             var files = System.IO.Directory.EnumerateFiles(
@@ -90,6 +113,11 @@ namespace TestEDITOR
             return sd;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static IList<ScriptDirectory> CreateScriptDirectories(string path)
         {
             var sds = new ObservableCollection<ScriptDirectory>();

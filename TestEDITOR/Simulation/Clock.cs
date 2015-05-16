@@ -7,28 +7,45 @@ using System.Text;
 
 namespace TestSIM
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Clock : IClock
     {
         private object _sync = new object();
-
         private long _cycle;
+        private int _resolution;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public long Cycle 
         {
             get { return _cycle; } 
         }
 
-        private int _resolution;
+        /// <summary>
+        /// 
+        /// </summary>
         public int Resolution 
         {
             get { return _resolution; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cycle"></param>
+        /// <param name="resolution"></param>
         public Clock(long cycle, int resolution)
         {
             this._cycle = cycle;
             this._resolution = resolution;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Tick()
         {
             lock (_sync)
@@ -37,6 +54,9 @@ namespace TestSIM
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Reset()
         {
             lock (_sync)
@@ -45,6 +65,10 @@ namespace TestSIM
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cycle"></param>
         public void SetCycle(long cycle)
         {
             lock (_sync)
@@ -53,6 +77,10 @@ namespace TestSIM
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="resolution"></param>
         public void SetResolution(int resolution)
         {
             lock (_sync)

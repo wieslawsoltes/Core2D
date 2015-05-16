@@ -18,10 +18,22 @@ using Test2d;
 
 namespace Test.Controls
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class GroupsControl : UserControl
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private Point _dragStartPoint;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="child"></param>
+        /// <returns></returns>
         private T FindVisualParent<T>(DependencyObject child)
             where T : DependencyObject
         {
@@ -34,6 +46,9 @@ namespace Test.Controls
             return FindVisualParent<T>(parentObject);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public GroupsControl()
         {
             InitializeComponent();

@@ -4,18 +4,54 @@ using System;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum Tool
     {
+        /// <summary>
+        /// 
+        /// </summary>
         None,
+        /// <summary>
+        /// 
+        /// </summary>
         Selection,
+        /// <summary>
+        /// 
+        /// </summary>
         Point,
+        /// <summary>
+        /// 
+        /// </summary>
         Line,
+        /// <summary>
+        /// 
+        /// </summary>
         Rectangle,
+        /// <summary>
+        /// 
+        /// </summary>
         Ellipse,
+        /// <summary>
+        /// 
+        /// </summary>
         Arc,
+        /// <summary>
+        /// 
+        /// </summary>
         Bezier,
+        /// <summary>
+        /// 
+        /// </summary>
         QBezier,
+        /// <summary>
+        /// 
+        /// </summary>
         Text,
+        /// <summary>
+        /// 
+        /// </summary>
         Image
     }
 }

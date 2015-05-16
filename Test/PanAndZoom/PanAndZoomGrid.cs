@@ -6,10 +6,21 @@ using System.Windows.Controls;
 
 namespace Test.PanAndZoom
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class PanAndZoomGrid : Grid
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public bool EnableAutoFit { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arrangeSize"></param>
+        /// <returns></returns>
         protected override Size ArrangeOverride(Size arrangeSize)
         {
             if (EnableAutoFit

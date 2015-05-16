@@ -4,6 +4,9 @@ using System;
 
 namespace Test2d
 {
+    /// <summary>
+    /// Specifies the arrow style used to draw line endings.
+    /// </summary>
     public class ArrowStyle : ObservableObject
     {
         private ArrowType _arrowType;
@@ -11,6 +14,9 @@ namespace Test2d
         private double _radiusX;
         private double _radiusY;
         
+        /// <summary>
+        /// Gets or sets arrow type.
+        /// </summary>
         public ArrowType ArrowType
         {
             get { return _arrowType; }
@@ -24,6 +30,9 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// Gets or sets value indicating whether arrow shape is filled.
+        /// </summary>
         public bool IsFilled
         {
             get { return _isFilled; }
@@ -37,6 +46,9 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// Gets or sets arrow X axis radius.
+        /// </summary>
         public double RadiusX
         {
             get { return _radiusX; }
@@ -50,6 +62,9 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// Gets or sets arrow Y axis radius.
+        /// </summary>
         public double RadiusY
         {
             get { return _radiusY; }
@@ -63,6 +78,14 @@ namespace Test2d
             }
         }
   
+        /// <summary>
+        /// Creates a new instance of the ArrowStyle class.
+        /// </summary>
+        /// <param name="arrowType">The arrow type.</param>
+        /// <param name="isFilled">The arow shape fill flag.</param>
+        /// <param name="radiusX">The arrow X axis radius.</param>
+        /// <param name="radiusY">The arrow Y axis radius.</param>
+        /// <returns>The new instance of the ArrowStyle class.</returns>
         public static ArrowStyle Create(
             ArrowType arrowType = ArrowType.None,
             bool isFilled = false,

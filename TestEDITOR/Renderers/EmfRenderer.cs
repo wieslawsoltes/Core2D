@@ -13,6 +13,9 @@ using Test2d;
 
 namespace TestEMF
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class EmfRenderer : ObservableObject, IRenderer
     {
         private double _zoom;
@@ -22,6 +25,9 @@ namespace TestEMF
         private BaseShape _selectedShape;
         private ICollection<BaseShape> _selectedShapes;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double Zoom
         {
             get { return _zoom; }
@@ -35,6 +41,9 @@ namespace TestEMF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double PanX
         {
             get { return _panX; }
@@ -48,6 +57,9 @@ namespace TestEMF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double PanY
         {
             get { return _panY; }
@@ -61,6 +73,9 @@ namespace TestEMF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ShapeState DrawShapeState
         {
             get { return _drawShapeState; }
@@ -74,6 +89,9 @@ namespace TestEMF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public BaseShape SelectedShape
         {
             get { return _selectedShape; }
@@ -87,6 +105,9 @@ namespace TestEMF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ICollection<BaseShape> SelectedShapes
         {
             get { return _selectedShapes; }
@@ -100,10 +121,20 @@ namespace TestEMF
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         private Func<double, float> _scaleToPage;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private double _textScaleFactor;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="textScaleFactor"></param>
         public EmfRenderer(double textScaleFactor = 1.0)
         {
             _zoom = 1.0;
@@ -117,11 +148,20 @@ namespace TestEMF
             _scaleToPage = (value) => (float)(value);
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static IRenderer Create()
         {
             return new EmfRenderer();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
         private static Color ToColor(ArgbColor color)
         {
             return Color.FromArgb(
@@ -131,6 +171,12 @@ namespace TestEMF
                 color.B);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="scale"></param>
+        /// <returns></returns>
         private static Pen ToPen(ShapeStyle style, Func<double, float> scale)
         {
             var pen = new Pen(ToColor(style.Stroke), (float)style.Thickness);
@@ -161,16 +207,36 @@ namespace TestEMF
             return pen;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
         private static SolidBrush ToSolidBrush(ArgbColor color)
         {
             return new SolidBrush(ToColor(color));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tl"></param>
+        /// <param name="br"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
         private static Rect2 CreateRect(XPoint tl, XPoint br, double dx, double dy)
         {
             return Rect2.Create(tl, br, dx, dy);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="pen"></param>
+        /// <param name="p0"></param>
+        /// <param name="p1"></param>
         private static void DrawLineInternal(
             Graphics gfx,
             Pen pen,
@@ -180,6 +246,14 @@ namespace TestEMF
             gfx.DrawLine(pen, p0, p1);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="brush"></param>
+        /// <param name="pen"></param>
+        /// <param name="isFilled"></param>
+        /// <param name="rect"></param>
         private static void DrawRectangleInternal(
             Graphics gfx,
             Brush brush,
@@ -205,6 +279,14 @@ namespace TestEMF
                 (float)rect.Height);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="brush"></param>
+        /// <param name="pen"></param>
+        /// <param name="isFilled"></param>
+        /// <param name="rect"></param>
         private static void DrawEllipseInternal(
             Graphics gfx,
             Brush brush,
@@ -230,10 +312,18 @@ namespace TestEMF
                 (float)rect.Height);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ClearCache()
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="container"></param>
         public void Draw(object gfx, Container container)
         {
             if (container.Template != null)
@@ -256,6 +346,11 @@ namespace TestEMF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="layer"></param>
         public void Draw(object gfx, Layer layer)
         {
             foreach (var shape in layer.Shapes)
@@ -267,6 +362,13 @@ namespace TestEMF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="line"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object gfx, XLine line, double dx, double dy)
         {
             var _gfx = gfx as Graphics;
@@ -419,6 +521,13 @@ namespace TestEMF
             stroke.Dispose();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="rectangle"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object gfx, XRectangle rectangle, double dx, double dy)
         {
             var _gfx = gfx as Graphics;
@@ -452,6 +561,13 @@ namespace TestEMF
             pen.Dispose();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="ellipse"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object gfx, XEllipse ellipse, double dx, double dy)
         {
             var _gfx = gfx as Graphics;
@@ -485,6 +601,13 @@ namespace TestEMF
             pen.Dispose();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="arc"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object gfx, XArc arc, double dx, double dy)
         {
             var a = Arc.FromXArc(arc, dx, dy);
@@ -509,6 +632,13 @@ namespace TestEMF
             pen.Dispose();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="bezier"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object gfx, XBezier bezier, double dx, double dy)
         {
             var _gfx = gfx as Graphics;
@@ -531,6 +661,13 @@ namespace TestEMF
             pen.Dispose();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="qbezier"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object gfx, XQBezier qbezier, double dx, double dy)
         {
             var _gfx = gfx as Graphics;
@@ -558,6 +695,13 @@ namespace TestEMF
             pen.Dispose();
         }
    
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="text"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object gfx, XText text, double dx, double dy)
         {
             var _gfx = gfx as Graphics;
@@ -619,6 +763,13 @@ namespace TestEMF
             font.Dispose();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="image"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object gfx, XImage image, double dx, double dy)
         {
             var _gfx = gfx as Graphics;

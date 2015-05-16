@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Project : ObservableObject
     {
         private string _name;
@@ -21,6 +24,9 @@ namespace Test2d
         private Document _currentDocument;
         private Container _currentContainer;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -34,6 +40,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<ShapeStyleGroup> StyleGroups
         {
             get { return _styleGroups; }
@@ -47,6 +56,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ShapeStyleGroup CurrentStyleGroup
         {
             get { return _currentStyleGroup; }
@@ -60,6 +72,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<GroupLibrary> GroupLibraries
         {
             get { return _groupLibraries; }
@@ -73,6 +88,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public GroupLibrary CurrentGroupLibrary
         {
             get { return _currentGroupLibrary; }
@@ -86,6 +104,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<Container> Templates
         {
             get { return _templates; }
@@ -99,6 +120,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Container CurrentTemplate
         {
             get { return _currentTemplate; }
@@ -112,6 +136,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public BaseShape PointShape
         {
             get { return _pointShape; }
@@ -125,6 +152,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<Document> Documents
         {
             get { return _documents; }
@@ -138,6 +168,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Document CurrentDocument
         {
             get { return _currentDocument; }
@@ -151,6 +184,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Container CurrentContainer
         {
             get { return _currentContainer; }
@@ -164,6 +200,10 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static ShapeStyleGroup DefaultStyleGroup()
         {
             var sgd = ShapeStyleGroup.Create("Default");
@@ -179,6 +219,10 @@ namespace Test2d
             return sgd;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static ShapeStyleGroup LinesStyleGroup()
         {
             var sgdl = ShapeStyleGroup.Create("Lines");
@@ -213,6 +257,10 @@ namespace Test2d
             return sgdl;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static ShapeStyleGroup TemplateStyleGroup()
         {
             var sgt = ShapeStyleGroup.Create("Template");
@@ -227,26 +275,56 @@ namespace Test2d
             return sgt;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="pss"></param>
+        /// <returns></returns>
         public static BaseShape EllipsePointShape(Project p, ShapeStyle pss)
         {
             return XEllipse.Create(-4, -4, 4, 4, pss, null, false);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="pss"></param>
+        /// <returns></returns>
         public static BaseShape FilledEllipsePointShape(Project p, ShapeStyle pss)
         {
             return XEllipse.Create(-3, -3, 3, 3, pss, null, true);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="pss"></param>
+        /// <returns></returns>
         public static BaseShape RectanglePointShape(Project p, ShapeStyle pss)
         {
             return XRectangle.Create(-4, -4, 4, 4, pss, null, false);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="pss"></param>
+        /// <returns></returns>
         public static BaseShape FilledRectanglePointShape(Project p, ShapeStyle pss)
         {
             return XRectangle.Create(-3, -3, 3, 3, pss, null, true);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="pss"></param>
+        /// <returns></returns>
         public static BaseShape CrossPointShape(Project p, ShapeStyle pss)
         {
             var g = XGroup.Create("PointShape");
@@ -255,6 +333,11 @@ namespace Test2d
             return g;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static Project Create(string name = "Project")
         {
             var p = new Project()

@@ -10,12 +10,31 @@ using Test2d;
 
 namespace Test
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal struct WpfArc
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public Point Start;
+        /// <summary>
+        /// 
+        /// </summary>
         public Point End;
+        /// <summary>
+        /// 
+        /// </summary>
         public Size Radius;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arc"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
         public static WpfArc FromXArc(XArc arc, double dx, double dy)
         {
             double x1 = arc.Point1.X + dx;

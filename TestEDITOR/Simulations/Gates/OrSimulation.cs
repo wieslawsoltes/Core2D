@@ -8,25 +8,45 @@ using Test2d;
 
 namespace TestSIM
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class OrSimulation : BoolSimulation
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override string Key
         {
             get { return "OR"; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override Func<XGroup, BoolSimulation> Factory
         {
             get { return (group) => { return new OrSimulation(null, group.GetIntPropertyValue("Counter")); }; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int Counter { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public OrSimulation()
             : base()
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="state"></param>
+        /// <param name="counter"></param>
         public OrSimulation(bool? state, int counter)
             : base()
         {
@@ -34,6 +54,10 @@ namespace TestSIM
             this.Counter = counter;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="clock"></param>
         public override void Run(IClock clock)
         {
             int length = Inputs.Length;

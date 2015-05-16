@@ -4,12 +4,30 @@ using System;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum State
     {
+        /// <summary>
+        /// 
+        /// </summary>
         None,
+        /// <summary>
+        /// 
+        /// </summary>
         One,
+        /// <summary>
+        /// 
+        /// </summary>
         Two,
+        /// <summary>
+        /// 
+        /// </summary>
         Three,
+        /// <summary>
+        /// 
+        /// </summary>
         Four
     }
 }

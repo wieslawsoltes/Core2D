@@ -18,8 +18,14 @@ using TestEDITOR;
 
 namespace Test.Windows
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class ContainerWindow : Window
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public ContainerWindow()
         {
             InitializeComponent();

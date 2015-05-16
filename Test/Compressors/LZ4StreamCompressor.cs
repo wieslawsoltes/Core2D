@@ -8,8 +8,16 @@ using Test2d;
 
 namespace Test.Compressors
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class LZ4StreamCompressor : ICompressor
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public byte[] Compress(byte[] data)
         {
             using (var ms = new MemoryStream())
@@ -22,6 +30,11 @@ namespace Test.Compressors
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public byte[] Decompress(byte[] data)
         {
             using (var ms = new MemoryStream(data))

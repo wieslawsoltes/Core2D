@@ -9,6 +9,9 @@ using Test2d;
 
 namespace TestDXF
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfRenderer : ObservableObject, IRenderer
     {
         private double _zoom;
@@ -18,6 +21,9 @@ namespace TestDXF
         private BaseShape _selectedShape;
         private ICollection<BaseShape> _selectedShapes;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double Zoom
         {
             get { return _zoom; }
@@ -31,6 +37,9 @@ namespace TestDXF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double PanX
         {
             get { return _panX; }
@@ -44,6 +53,9 @@ namespace TestDXF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double PanY
         {
             get { return _panY; }
@@ -57,6 +69,9 @@ namespace TestDXF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ShapeState DrawShapeState
         {
             get { return _drawShapeState; }
@@ -70,6 +85,9 @@ namespace TestDXF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public BaseShape SelectedShape
         {
             get { return _selectedShape; }
@@ -83,6 +101,9 @@ namespace TestDXF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ICollection<BaseShape> SelectedShapes
         {
             get { return _selectedShapes; }
@@ -96,6 +117,9 @@ namespace TestDXF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfRenderer()
         {
             _zoom = 1.0;
@@ -106,60 +130,133 @@ namespace TestDXF
             ClearCache();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static IRenderer Create()
         {
             return new DxfRenderer();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ClearCache()
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="container"></param>
         public void Draw(object dc, Container container)
         {
             // TODO:
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="layer"></param>
         public void Draw(object dc, Layer layer)
         {
             // TODO:
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="line"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object dc, XLine line, double dx, double dy)
         {
             // TODO:
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="rectangle"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object dc, XRectangle rectangle, double dx, double dy)
         {
             // TODO:
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="ellipse"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object dc, XEllipse ellipse, double dx, double dy)
         {
             // TODO:
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="arc"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object dc, XArc arc, double dx, double dy)
         {
             // TODO:
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="bezier"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object dc, XBezier bezier, double dx, double dy)
         {
             // TODO:
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="qbezier"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object dc, XQBezier qbezier, double dx, double dy)
         {
             // TODO:
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="text"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object dc, XText text, double dx, double dy)
         {
             // TODO:
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="image"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public void Draw(object dc, XImage image, double dx, double dy)
         {
             // TODO:
@@ -174,10 +271,39 @@ namespace TestDXF
         private string _stylePrimatyFontDescription = "Calibri"; // "Arial"; "Arial Unicode MS"
         private string _styleBigFont = "";
 
-        private int NextHandle() { return _handle += 1; }
-        private double ToDxfX(double x) { return x; }
-        private double ToDxfY(double y) { return _pageHeight - y; }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private int NextHandle() 
+        { 
+            return _handle += 1; 
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        private double ToDxfX(double x) 
+        { 
+            return x; 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        private double ToDxfY(double y) 
+        { 
+            return _pageHeight - y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="appids"></param>
         private void TableAppids(DxfTable<DxfAppid> appids)
         {
             // NOTE: Appid "ACAD" - default must be present
@@ -191,6 +317,10 @@ namespace TestDXF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dimstyles"></param>
         private void TableDimstyles(DxfTable<DxfDimstyle> dimstyles)
         {
             if (_version > DxfAcadVer.AC1009)
@@ -202,6 +332,11 @@ namespace TestDXF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="layers"></param>
+        /// <param name="container"></param>
         private void TableLayers(DxfTable<DxfLayer> layers, Container container)
         {
             // NOTE: Default layer "0" - must be present.
@@ -257,6 +392,10 @@ namespace TestDXF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ltypes"></param>
         private void TableLtypes(DxfTable<DxfLtype> ltypes)
         {
             // NOTE: Default ltypes ByLayer, ByBlock and Continuous - must be present.
@@ -295,6 +434,10 @@ namespace TestDXF
             });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="styles"></param>
         private void TableStyles(DxfTable<DxfStyle> styles)
         {
             // style: Standard
@@ -313,11 +456,19 @@ namespace TestDXF
             });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ucss"></param>
         private void TableUcss(DxfTable<DxfUcs> ucss)
         {
             // NOTE: Currently not used.
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="views"></param>
         private void TableViews(DxfTable<DxfView> views)
         {
             views.Items.Add(new DxfView(_version, NextHandle())
@@ -335,6 +486,10 @@ namespace TestDXF
             });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vports"></param>
         private void TableVports(DxfTable<DxfVport> vports)
         {
             if (_version > DxfAcadVer.AC1009)
@@ -346,6 +501,10 @@ namespace TestDXF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private IEnumerable<DxfBlock> DefaultBlocks()
         {
             if (_version > DxfAcadVer.AC1009)
@@ -398,6 +557,11 @@ namespace TestDXF
             return Enumerable.Empty<DxfBlock>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         private DxfBlockRecord CreateBlockRecordForBlock(string name)
         {
             return new DxfBlockRecord(_version, NextHandle())
@@ -406,6 +570,15 @@ namespace TestDXF
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <param name="layer"></param>
+        /// <returns></returns>
         private DxfLine CreateLine(double x1, double y1, double x2, double y2, string layer)
         {
             double _x1 = ToDxfX(x1);
@@ -424,6 +597,14 @@ namespace TestDXF
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cx"></param>
+        /// <param name="cy"></param>
+        /// <param name="radius"></param>
+        /// <param name="layer"></param>
+        /// <returns></returns>
         private DxfCircle CreateCircle(double cx, double cy, double radius, string layer)
         {
             double _cx = ToDxfX(cx);
@@ -440,6 +621,15 @@ namespace TestDXF
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="layer"></param>
+        /// <returns></returns>
         private DxfEllipse CreateEllipse(double x, double y, double width, double height, string layer)
         {
             double _cx = ToDxfX(x + width / 2.0);
@@ -462,6 +652,16 @@ namespace TestDXF
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="radius"></param>
+        /// <param name="startAngle"></param>
+        /// <param name="endAngle"></param>
+        /// <param name="layer"></param>
+        /// <returns></returns>
         private DxfArc CreateArc(
             double x, double y,
             double radius, 
@@ -484,6 +684,19 @@ namespace TestDXF
             };
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p1x"></param>
+        /// <param name="p1y"></param>
+        /// <param name="p2x"></param>
+        /// <param name="p2y"></param>
+        /// <param name="p3x"></param>
+        /// <param name="p3y"></param>
+        /// <param name="p4x"></param>
+        /// <param name="p4y"></param>
+        /// <param name="layer"></param>
+        /// <returns></returns>
         private DxfSpline CreateSpline(
             double p1x, double p1y, 
             double p2x, double p2y,
@@ -536,6 +749,18 @@ namespace TestDXF
             return spline;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="height"></param>
+        /// <param name="horizontalJustification"></param>
+        /// <param name="verticalJustification"></param>
+        /// <param name="style"></param>
+        /// <param name="layer"></param>
+        /// <returns></returns>
         private DxfText CreateText(
             string text, 
             double x, double y, 
@@ -565,11 +790,23 @@ namespace TestDXF
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="line"></param>
+        /// <param name="layer"></param>
         private void DrawLine(DxfEntities entities, XLine line, string layer)
         {
             entities.Entities.Add(CreateLine(line.Start.X, line.Start.Y, line.End.X, line.End.Y, layer));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="rectangle"></param>
+        /// <param name="layer"></param>
         private void DrawRectangle(DxfEntities entities, XRectangle rectangle, string layer)
         {
             var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
@@ -579,18 +816,36 @@ namespace TestDXF
             entities.Entities.Add(CreateLine(rect.X + rect.Width, rect.Y, rect.X + rect.Width, rect.Y + rect.Height, layer));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="ellipse"></param>
+        /// <param name="layer"></param>
         private void DrawEllipse(DxfEntities entities, XEllipse ellipse, string layer)
         {
             var rect = Rect2.Create(ellipse.TopLeft, ellipse.BottomRight);
             entities.Entities.Add(CreateEllipse(rect.X, rect.Y, rect.Width, rect.Height, layer));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="arc"></param>
+        /// <param name="layer"></param>
         private void DrawArc(DxfEntities entities, XArc arc, string layer)
         {
             var a = Arc.FromXArc(arc, 0.0, 0.0);
             entities.Entities.Add(CreateArc(a.X, a.Y, a.Radius, a.StartAngle, a.EndAngle, layer));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="bezier"></param>
+        /// <param name="layer"></param>
         private void DrawBezier(DxfEntities entities, XBezier bezier, string layer)
         {
             entities.Entities.Add(
@@ -602,6 +857,12 @@ namespace TestDXF
                     layer));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="qbezier"></param>
+        /// <param name="layer"></param>
         private void DrawQBezier(DxfEntities entities, XQBezier qbezier, string layer)
         {
             double x1 = qbezier.Point1.X;
@@ -622,6 +883,12 @@ namespace TestDXF
                     layer));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="text"></param>
+        /// <param name="layer"></param>
         private void DrawText(DxfEntities entities, XText text, string layer)
         {
             DxfHorizontalTextJustification halign;
@@ -674,6 +941,12 @@ namespace TestDXF
                layer));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="shapes"></param>
+        /// <param name="layer"></param>
         private void DrawShapes(DxfEntities entities, IEnumerable<BaseShape> shapes, string layer)
         {
             foreach (var shape in shapes) 
@@ -750,6 +1023,11 @@ namespace TestDXF
             }
         }
  
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="text"></param>
         private void Save(string path, string text)
         {
             try
@@ -769,6 +1047,12 @@ namespace TestDXF
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="container"></param>
+        /// <param name="version"></param>
         public void Create(string path, Container container, DxfAcadVer version)
         {
             _version = version;

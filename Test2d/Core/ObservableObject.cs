@@ -5,10 +5,20 @@ using System.ComponentModel;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class ObservableObject : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         public void Notify(string propertyName)
         {
             var handler = PropertyChanged;

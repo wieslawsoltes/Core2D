@@ -10,8 +10,17 @@ using Test2d;
 
 namespace TestJSON
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class NewtonsoftSerializer : ISerializer
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public string ToJson<T>(T value)
         {
             var settings = new JsonSerializerSettings()
@@ -26,6 +35,12 @@ namespace TestJSON
             return json;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public byte[] ToBson<T>(T value)
         {
             using (var ms = new System.IO.MemoryStream())
@@ -44,6 +59,12 @@ namespace TestJSON
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="bson"></param>
+        /// <returns></returns>
         public T FromBson<T>(byte[] bson) 
         {
             using (var ms = new System.IO.MemoryStream(bson))
@@ -63,6 +84,12 @@ namespace TestJSON
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="json"></param>
+        /// <returns></returns>
         public T FromJson<T>(string json)
         {
             var settings = new JsonSerializerSettings()

@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Container : ObservableObject
     {
         private string _name;
@@ -19,6 +22,9 @@ namespace Test2d
         private Layer _workingLayer;
         private BaseShape _currentShape;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -32,6 +38,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double Width
         {
             get { return _width; }
@@ -45,6 +54,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double Height
         {
             get { return _height; }
@@ -58,6 +70,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<KeyValuePair<string, ShapeProperty>> Database
         {
             get { return _database; }
@@ -71,6 +86,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<Layer> Layers
         {
             get { return _layers; }
@@ -84,6 +102,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Container Template
         {
             get { return _template; }
@@ -97,6 +118,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Layer CurrentLayer
         {
             get { return _currentLayer; }
@@ -110,6 +134,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Layer WorkingLayer
         {
             get { return _workingLayer; }
@@ -123,6 +150,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public BaseShape CurrentShape
         {
             get { return _currentShape; }
@@ -136,6 +166,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Clear()
         {
             foreach (var layer in Layers)
@@ -145,6 +178,9 @@ namespace Test2d
             WorkingLayer.Shapes.Clear();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Invalidate()
         {
             if (Template != null)
@@ -159,6 +195,13 @@ namespace Test2d
             WorkingLayer.Invalidate();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <returns></returns>
         public static Container Create(string name = "Container", double width = 810, double height = 600)
         {
             var c = new Container()

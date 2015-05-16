@@ -18,8 +18,14 @@ using Test2d;
 
 namespace Test.Controls
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal class LayerElement : FrameworkElement
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public static readonly DependencyProperty RendererProperty =
             DependencyProperty.Register(
                 "Renderer",
@@ -32,14 +38,23 @@ namespace Test.Controls
                     FrameworkPropertyMetadataOptions.AffectsArrange |
                     FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IRenderer Renderer
         {
             get { return (IRenderer)GetValue(RendererProperty); }
             set { SetValue(RendererProperty, value); }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private Layer _layer = default(Layer);
 
+        /// <summary>
+        /// 
+        /// </summary>
         public LayerElement()
         {
             DataContextChanged += (s, e) => Initialize();
@@ -50,11 +65,19 @@ namespace Test.Controls
                 BitmapScalingMode.HighQuality);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Invalidate(object sender, InvalidateLayerEventArgs e)
         {
             this.InvalidateVisual();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void Initialize()
         {
             if (_layer != null)
@@ -70,6 +93,9 @@ namespace Test.Controls
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void DeInitialize()
         {
             if (_layer != null)
@@ -79,6 +105,10 @@ namespace Test.Controls
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="drawingContext"></param>
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
@@ -86,6 +116,10 @@ namespace Test.Controls
             Render(drawingContext);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="drawingContext"></param>
         private void Render(DrawingContext drawingContext)
         {
             var layer = DataContext as Layer;
@@ -99,8 +133,14 @@ namespace Test.Controls
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class ContainerControl : UserControl
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public ContainerControl()
         {
             InitializeComponent();
@@ -108,6 +148,9 @@ namespace Test.Controls
             Loaded += (s, e) => InitializeCanvas(); 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitializeCanvas()
         {
             var editor = canvas.DataContext as Editor;

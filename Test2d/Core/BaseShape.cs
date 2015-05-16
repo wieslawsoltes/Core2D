@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace Test2d
 {
+    /// <summary>
+    /// Base class for Test2d shapes.
+    /// </summary>
     public abstract class BaseShape : ObservableObject
     {
         private string _name;
@@ -13,6 +16,9 @@ namespace Test2d
         private ShapeStyle _style;
         private IList<ShapeProperty> _properties;
 
+        /// <summary>
+        /// Gets or sets shape name.
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -26,6 +32,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets shape owner shape.
+        /// </summary>
         public BaseShape Owner
         {
             get { return _owner; }
@@ -39,6 +48,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Idicates shape state options.
+        /// </summary>
         public ShapeState State
         {
             get { return _state; }
@@ -52,6 +64,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Get or sets shape drawing style.
+        /// </summary>
         public ShapeStyle Style
         {
             get { return _style; }
@@ -65,6 +80,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets a colletion ShapeProperty that will be used during drawing.
+        /// </summary>
         public IList<ShapeProperty> Properties
         {
             get { return _properties; }
@@ -78,8 +96,20 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Draw shape using current renderer.
+        /// </summary>
+        /// <param name="dc">The generic drawing context object</param>
+        /// <param name="renderer">The generic renderer object used to draw shape.</param>
+        /// <param name="dx">The X axis draw position osffset.</param>
+        /// <param name="dy">The Y axis draw position osffset.</param>
         public abstract void Draw(object dc, IRenderer renderer, double dx, double dy);
 
+        /// <summary>
+        /// Move shape position using dx,dy offset.
+        /// </summary>
+        /// <param name="dx">The X axis position osffset.</param>
+        /// <param name="dy">The Y axis position osffset.</param>
         public abstract void Move(double dx, double dy);
     }
 }

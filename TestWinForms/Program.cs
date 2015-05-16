@@ -5,8 +5,15 @@ using System.Windows.Forms;
 
 namespace TestWinForms
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal sealed class Program
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
         [STAThread]
         private static void Main(string[] args)
         {

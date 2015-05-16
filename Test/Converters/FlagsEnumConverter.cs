@@ -10,10 +10,21 @@ using System.Windows.Data;
 
 namespace Test.Converters
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class FlagsEnumConverter : IValueConverter
     {
         private int _value;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int mask = (int)parameter;
@@ -21,6 +32,14 @@ namespace Test.Converters
             return (mask == 0 && _value == 0) ? true : ((mask & _value) != 0);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             _value ^= (int)parameter;

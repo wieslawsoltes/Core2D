@@ -8,6 +8,10 @@ using Test2d;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class History<T>
     {
         private ISerializer _serializer = default(ISerializer);
@@ -16,12 +20,20 @@ namespace Test2d
         private Stack<byte[]> _redos = new Stack<byte[]>();
         private byte[] _hold = default(byte[]);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="serializer"></param>
+        /// <param name="compressor"></param>
         public History(ISerializer serializer, ICompressor compressor)
         {
             _serializer = serializer;
             _compressor = compressor;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Reset()
         {
             if (_undos != null && _undos.Count > 0)
@@ -35,26 +47,44 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
         public void Hold(T obj)
         {
             _hold = _compressor.Compress(_serializer.ToBson(obj));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Commit()
         {
             Snapshot(_hold);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Release()
         {
             _hold = default(byte[]);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
         public void Snapshot(T obj)
         {
             Snapshot(_compressor.Compress(_serializer.ToBson(obj)));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bson"></param>
         private void Snapshot(byte[] bson)
         {
             if (bson != null)
@@ -67,6 +97,11 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="current"></param>
+        /// <returns></returns>
         public T Undo(T current)
         {
             if (CanUndo())
@@ -81,6 +116,11 @@ namespace Test2d
             return default(T);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="current"></param>
+        /// <returns></returns>
         public T Redo(T current)
         {
             if (CanRedo())
@@ -95,11 +135,19 @@ namespace Test2d
             return default(T);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool CanUndo()
         {
             return _undos != null && _undos.Count > 0;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool CanRedo()
         {
             return _redos != null && _redos.Count > 0;

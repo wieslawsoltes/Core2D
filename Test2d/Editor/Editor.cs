@@ -10,6 +10,9 @@ using System.Windows.Input;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Editor : ObservableObject
     {
         private Project _project;
@@ -33,6 +36,9 @@ namespace Test2d
         private double _hitTreshold = 6.0;
         private bool _tryToConnect = true;
 
+        /// <summary>
+        /// Gets current container.
+        /// </summary>
         public Container Container
         {
             get 
@@ -41,6 +47,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets current project.
+        /// </summary>
         public Project Project
         {
             get { return _project; }
@@ -54,6 +63,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets current renderer.
+        /// </summary>
         public IRenderer Renderer
         {
             get { return _renderer; }
@@ -67,6 +79,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets current editor tool.
+        /// </summary>
         public Tool CurrentTool
         {
             get { return _currentTool; }
@@ -80,6 +95,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets current editor state.
+        /// </summary>
         public State CurrentState
         {
             get { return _currentState; }
@@ -93,6 +111,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets value indicating whether shape is filled during creation.
+        /// </summary>
         public bool DefaultIsFilled
         {
             get { return _defaultIsFilled; }
@@ -106,6 +127,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets how grid snapping is handled. 
+        /// </summary>
         public bool SnapToGrid
         {
             get { return _snapToGrid; }
@@ -119,6 +143,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets how much grid X axis is snapped.
+        /// </summary>
         public double SnapX
         {
             get { return _snapX; }
@@ -132,6 +159,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets how much grid Y axis is snapped.
+        /// </summary>
         public double SnapY
         {
             get { return _snapY; }
@@ -145,6 +175,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets selection rectangle style.
+        /// </summary>
         public ShapeStyle SelectionStyle
         {
             get { return _selectionStyle; }
@@ -158,6 +191,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets if context menu is about to open.
+        /// </summary>
         public bool IsContextMenu
         {
             get { return _isContextMenu; }
@@ -171,6 +207,9 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// Gets or sets if project collections and objects observer is enabled.
+        /// </summary>
         public bool EnableObserver
         {
             get { return _enableObserver; }
@@ -184,6 +223,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets current project collections and objects observer.
+        /// </summary>
         public Observer Observer
         {
             get { return _observer; }
@@ -197,6 +239,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets undo/redo history handler.
+        /// </summary>
         public History<Project> History
         {
             get { return _history; }
@@ -210,6 +255,9 @@ namespace Test2d
             }
         }
  
+        /// <summary>
+        /// Gets or sets hit test treshold radius.
+        /// </summary>
         public double HitTreshold
         {
             get { return _hitTreshold; }
@@ -223,6 +271,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Gets or sets how point connection is handled.
+        /// </summary>
         public bool TryToConnect
         {
             get { return _tryToConnect; }
@@ -236,8 +287,18 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Get image path using common system open file dialog.
+        /// </summary>
         public Func<string> GetImagePath { get; set; }
 
+        /// <summary>
+        /// Creates a new Editor instance.
+        /// </summary>
+        /// <param name="project">The project to edit.</param>
+        /// <param name="renderer">The shape renderer.</param>
+        /// <param name="history">The undo/redo history handler.</param>
+        /// <returns></returns>
         public static Editor Create(Project project, IRenderer renderer, History<Project> history)
         {
             var editor = new Editor()
@@ -275,12 +336,23 @@ namespace Test2d
             return editor;
         }
 
+        /// <summary>
+        /// Snaps value by specified snap parameter.
+        /// </summary>
+        /// <param name="value">The value to snap.</param>
+        /// <param name="snap">The snap amount.</param>
+        /// <returns>The snapped value.</returns>
         public static double Snap(double value, double snap)
         {
             double r = value % snap;
             return r >= snap / 2.0 ? value + snap - r : value - r;
         }
 
+        /// <summary>
+        /// Sets image Path property to relative Uri using the specified base Uri.
+        /// </summary>
+        /// <param name="baseUri">The base absolute Uri.</param>
+        /// <param name="images">The collection if XImage shapes.</param>
         public void ToRelativeUri(Uri baseUri, IEnumerable<XImage> images)
         {
             foreach (var image in images)
@@ -290,6 +362,11 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Sets image Path property to absolute Uri using the specified base Uri.
+        /// </summary>
+        /// <param name="baseUri">The base absolute Uri.</param>
+        /// <param name="images">The collection if XImage shapes.</param>
         public void ToAbsoluteUri(Uri baseUri, IEnumerable<XImage> images)
         {
             foreach (var image in images)
@@ -299,6 +376,11 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
+        /// <returns></returns>
         public static IEnumerable<XPoint> GetAllPoints(IEnumerable<BaseShape> shapes)
         {
             if (shapes == null)
@@ -464,6 +546,11 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
+        /// <returns></returns>
         public static IEnumerable<BaseShape> GetAllShapes(IEnumerable<BaseShape> shapes)
         {
             if (shapes == null)
@@ -521,6 +608,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="project"></param>
+        /// <returns></returns>
         public static IEnumerable<T> GetAllShapes<T>(Project project)
         {
             var shapes = project.Documents
@@ -533,6 +626,12 @@ namespace Test2d
                 .Cast<T>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="points"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public static void Move(IEnumerable<XPoint> points, double dx, double dy)
         {
             foreach (var point in points)
@@ -544,6 +643,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Removes the Project.CurrentGroupLibrary object from the Project.GroupLibraries collection.
+        /// </summary>
         public void RemoveCurrentGroupLibrary()
         {
             var gl = Project.CurrentGroupLibrary;
@@ -555,6 +657,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Removes the Project.CurrentGroupLibrary.CurrentGroup object from the Project.CurrentGroupLibrary.Groups collection.
+        /// </summary>
         public void RemoveCurrentGroup()
         {
             var group = Project.CurrentGroupLibrary.CurrentGroup;
@@ -566,6 +671,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Removes the Container.CurrentLayer object from the Container.Layers collection.
+        /// </summary>
         public void RemoveCurrentLayer()
         {
             var layer = Container.CurrentLayer;
@@ -578,6 +686,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Removes the Container.CurrentShape object from the Container.CurrentLayer.Shapes collection.
+        /// </summary>
         public void RemoveCurrentShape()
         {
             var shape = Container.CurrentShape;
@@ -590,6 +701,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Removed the Project.CurrentStyleGroup object from the Project.StyleGroups collection.
+        /// </summary>
         public void RemoveCurrentStyleGroup()
         {
             var sg = Project.CurrentStyleGroup;
@@ -601,6 +715,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Removes the Project.CurrentStyleGroup.CurrentStyle object from the Project.CurrentStyleGroup.Styles collection.
+        /// </summary>
         public void RemoveCurrentStyle()
         {
             var style = Project.CurrentStyleGroup.CurrentStyle;
@@ -612,6 +729,10 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project"></param>
         public void Load(Project project)
         {
             Renderer.ClearCache();
@@ -625,6 +746,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void GroupSelected()
         {
             var layer = Container.CurrentLayer;
@@ -644,6 +768,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void GroupCurrentLayer()
         {
             var layer = Container.CurrentLayer;
@@ -663,6 +790,11 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void MoveSelection(double x, double y)
         {
             double sx = SnapToGrid ? Snap(x, SnapX) : x;
@@ -697,6 +829,10 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// Removes container object from owner document Containers collection.
+        /// </summary>
+        /// <param name="container">The container object to remove from document Containers collection.</param>
         public void Delete(Container container)
         {
             var document = _project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
@@ -709,6 +845,10 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// Removes document object from project Documents collection.
+        /// </summary>
+        /// <param name="document">The document object to remove from project Documents collection.</param>
         public void Delete(Document document)
         {
             _history.Snapshot(_project);
@@ -724,6 +864,9 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public void DeleteSelected()
         {
             if (_renderer.SelectedShape != null)
@@ -753,6 +896,11 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="shape"></param>
         public void Select(Container container, BaseShape shape)
         {
             container.CurrentShape = shape;
@@ -761,6 +909,11 @@ namespace Test2d
             container.CurrentLayer.Invalidate();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="shapes"></param>
         public void Select(Container container, ICollection<BaseShape> shapes)
         {
             container.CurrentShape = default(BaseShape);
@@ -769,6 +922,10 @@ namespace Test2d
             container.CurrentLayer.Invalidate();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
         public void Deselect(Container container)
         {
             container.CurrentShape = default(BaseShape);
@@ -777,6 +934,12 @@ namespace Test2d
             container.CurrentLayer.Invalidate();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="rectangle"></param>
+        /// <returns></returns>
         public bool TryToSelectShapes(Container container, XRectangle rectangle)
         {
             var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
@@ -803,6 +966,13 @@ namespace Test2d
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public bool TryToSelectShape(Container container, double x, double y)
         {
             var result = ShapeBounds.HitTest(container, new Vector2(x, y), _hitTreshold);
@@ -817,6 +987,12 @@ namespace Test2d
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectStart(XLine line, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -826,6 +1002,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectEnd(XLine line, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -835,6 +1017,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rectangle"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectTopLeft(XRectangle rectangle, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -844,6 +1032,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rectangle"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectBottomRight(XRectangle rectangle, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -853,6 +1047,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ellipse"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectTopLeft(XEllipse ellipse, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -862,6 +1062,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ellipse"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectBottomRight(XEllipse ellipse, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -871,6 +1077,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arc"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectPoint1(XArc arc, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -880,6 +1092,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arc"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectPoint2(XArc arc, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -889,6 +1107,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bezier"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectPoint1(XBezier bezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -898,6 +1122,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bezier"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectPoint2(XBezier bezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -907,6 +1137,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bezier"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectPoint3(XBezier bezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -916,6 +1152,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bezier"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectPoint4(XBezier bezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -925,6 +1167,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="qbezier"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectPoint1(XQBezier qbezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -934,6 +1182,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="qbezier"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectPoint2(XQBezier qbezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -943,6 +1197,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="qbezier"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectPoint3(XQBezier qbezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -952,6 +1212,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectTopLeft(XText text, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -961,6 +1227,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectBottomRight(XText text, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -970,6 +1242,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectTopLeft(XImage image, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -979,6 +1257,12 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void TryToConnectBottomRight(XImage image, double x, double y)
         {
             var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _hitTreshold);
@@ -988,6 +1272,10 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool IsLeftDownAvailable()
         {
             return Container != null
@@ -997,6 +1285,10 @@ namespace Test2d
                 && Project.CurrentStyleGroup.CurrentStyle != null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool IsLeftUpAvailable()
         {
             return Container != null
@@ -1006,6 +1298,10 @@ namespace Test2d
                 && Project.CurrentStyleGroup.CurrentStyle != null;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool IsRightDownAvailable()
         {
             return Container != null
@@ -1015,6 +1311,10 @@ namespace Test2d
                 && Project.CurrentStyleGroup.CurrentStyle != null;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool IsRightUpAvailable()
         {
             return Container != null
@@ -1024,6 +1324,10 @@ namespace Test2d
                 && Project.CurrentStyleGroup.CurrentStyle != null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool IsMoveAvailable()
         {
             return Container != null
@@ -1033,6 +1337,10 @@ namespace Test2d
                 && Project.CurrentStyleGroup.CurrentStyle != null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool IsSelectionAvailable()
         {
             return _renderer.SelectedShape != null
@@ -1942,6 +2250,11 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void LeftDown(double x, double y)
         {
             double sx = SnapToGrid ? Snap(x, SnapX) : x;
@@ -2003,6 +2316,11 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void LeftUp(double x, double y)
         {
             double sx = SnapToGrid ? Snap(x, SnapX) : x;
@@ -2037,6 +2355,11 @@ namespace Test2d
             }
         }
    
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void RightDown(double x, double y)
         {
             if (CurrentState == State.None)
@@ -2101,6 +2424,11 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void RightUp(double x, double y)
         {
             double sx = SnapToGrid ? Snap(x, SnapX) : x;
@@ -2132,6 +2460,11 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void Move(double x, double y)
         {
             double sx = SnapToGrid ? Snap(x, SnapX) : x;

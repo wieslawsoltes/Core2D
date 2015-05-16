@@ -17,8 +17,14 @@ using System.Windows.Shapes;
 
 namespace Test.Controls
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class ShapesControl : UserControl
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public ShapesControl()
         {
             InitializeComponent();

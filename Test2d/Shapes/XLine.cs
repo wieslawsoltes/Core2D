@@ -7,11 +7,17 @@ using System.Linq;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class XLine : BaseShape
     {
         private XPoint _start;
         private XPoint _end;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public XPoint Start
         {
             get { return _start; }
@@ -25,6 +31,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public XPoint End
         {
             get { return _end; }
@@ -38,6 +47,13 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="renderer"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy)
         {
             if (State.HasFlag(ShapeState.Visible))
@@ -72,12 +88,28 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         public override void Move(double dx, double dy)
         {
             Start.Move(dx, dy);
             End.Move(dx, dy);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <param name="style"></param>
+        /// <param name="point"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static XLine Create(
             double x1, double y1,
             double x2, double y2,
@@ -95,6 +127,15 @@ namespace Test2d
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="style"></param>
+        /// <param name="point"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static XLine Create(
             double x, double y,
             ShapeStyle style,

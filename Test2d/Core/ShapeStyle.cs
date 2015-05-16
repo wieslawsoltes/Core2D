@@ -4,6 +4,9 @@ using System;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ShapeStyle : ObservableObject
     {
         private string _name;
@@ -13,6 +16,9 @@ namespace Test2d
         private LineStyle _lineStyle;
         private TextStyle _textStyle;
         
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -26,6 +32,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ArgbColor Stroke
         {
             get { return _stroke; }
@@ -39,6 +48,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ArgbColor Fill
         {
             get { return _fill; }
@@ -52,6 +64,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double Thickness
         {
             get { return _thickness; }
@@ -65,6 +80,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public LineStyle LineStyle
         {
             get { return _lineStyle; }
@@ -78,6 +96,9 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public TextStyle TextStyle
         {
             get { return _textStyle; }
@@ -91,6 +112,25 @@ namespace Test2d
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="sa"></param>
+        /// <param name="sr"></param>
+        /// <param name="sg"></param>
+        /// <param name="sb"></param>
+        /// <param name="fa"></param>
+        /// <param name="fr"></param>
+        /// <param name="fg"></param>
+        /// <param name="fb"></param>
+        /// <param name="thickness"></param>
+        /// <param name="lineStyle"></param>
+        /// <param name="fontName"></param>
+        /// <param name="fontSize"></param>
+        /// <param name="textHAlignment"></param>
+        /// <param name="textVAlignment"></param>
+        /// <returns></returns>
         public static ShapeStyle Create(
             string name,
             byte sa = 0xFF, byte sr = 0x00, byte sg = 0x00, byte sb = 0x00,
@@ -113,7 +153,17 @@ namespace Test2d
             };
         }
         
-         public static ShapeStyle Create(
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="stroke"></param>
+        /// <param name="fill"></param>
+        /// <param name="thickness"></param>
+        /// <param name="lineStyle"></param>
+        /// <param name="textStyle"></param>
+        /// <returns></returns>
+        public static ShapeStyle Create(
             string name,
             ArgbColor stroke, 
             ArgbColor fill,

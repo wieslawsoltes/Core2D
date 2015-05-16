@@ -9,11 +9,25 @@ namespace Test2d
     // based on pseudo code: 
     // http://www.codezealot.org/archives/55
 
+    /// <summary>
+    /// 
+    /// </summary>
     public struct Projection
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public double Min { get; private set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double Max { get; private set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
         public Projection(double min, double max)
             : this()
         {
@@ -21,11 +35,21 @@ namespace Test2d
             this.Max = max;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public bool Overlap(Projection p)
         {
             return !(this.Min > p.Max || p.Min > this.Max);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public double GetOverlap(Projection p)
         {
             return !this.Overlap(p) ?
@@ -33,17 +57,36 @@ namespace Test2d
                 Math.Abs(Math.Max(this.Min, p.Min) - Math.Min(this.Max, p.Max));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public bool Contains(Projection p)
         {
             return (this.Min <= p.Min && this.Max >= p.Max);
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public struct MinimumTranslationVector
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public Vector2 Smallest { get; private set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double Overlap { get; private set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="smallest"></param>
+        /// <param name="overlap"></param>
         public MinimumTranslationVector(Vector2 smallest, double overlap)
             : this()
         {
@@ -52,8 +95,16 @@ namespace Test2d
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class SeparatingAxisTheorem
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vertices"></param>
+        /// <returns></returns>
         public Vector2[] GetAxes(Vector2[] vertices)
         {
             Vector2[] axes = new Vector2[vertices.Length];
@@ -74,6 +125,12 @@ namespace Test2d
             return axes;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vertices"></param>
+        /// <param name="axis"></param>
+        /// <returns></returns>
         public Projection Project(Vector2[] vertices, Vector2 axis)
         {
             double min = axis.Dot(vertices[0]);
@@ -94,6 +151,12 @@ namespace Test2d
             return new Projection(min, max);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vertices1"></param>
+        /// <param name="vertices2"></param>
+        /// <returns></returns>
         public bool Overlap(Vector2[] vertices1, Vector2[] vertices2)
         {
             Vector2[] axes1 = GetAxes(vertices1);
@@ -131,6 +194,13 @@ namespace Test2d
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vertices1"></param>
+        /// <param name="vertices2"></param>
+        /// <param name="mtv"></param>
+        /// <returns></returns>
         public bool MinimumTranslationVector(
             Vector2[] vertices1,
             Vector2[] vertices2,
@@ -200,6 +270,13 @@ namespace Test2d
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vertices1"></param>
+        /// <param name="vertices2"></param>
+        /// <param name="mtv"></param>
+        /// <returns></returns>
         public bool MinimumTranslationVectorWithContainment(
             Vector2[] vertices1,
             Vector2[] vertices2,

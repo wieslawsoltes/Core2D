@@ -16,8 +16,14 @@ using System.Windows.Shapes;
 
 namespace Test.Windows
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class StyleWindow : Window
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public StyleWindow()
         {
             InitializeComponent();

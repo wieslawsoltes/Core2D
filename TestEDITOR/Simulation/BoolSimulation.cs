@@ -8,12 +8,31 @@ using Test2d;
 
 namespace TestSIM
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class BoolSimulation
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public abstract string Key { get; }
+        /// <summary>
+        /// 
+        /// </summary>
         public abstract Func<XGroup, BoolSimulation> Factory { get; }
+        /// <summary>
+        /// 
+        /// </summary>
         public BoolInput[] Inputs { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public bool? State { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="clock"></param>
         public abstract void Run(IClock clock);
     }
 }

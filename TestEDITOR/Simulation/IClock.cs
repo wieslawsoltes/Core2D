@@ -7,9 +7,18 @@ using System.Text;
 
 namespace TestSIM
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IClock
     {
+        /// <summary>
+        /// 
+        /// </summary>
         long Cycle { get; }
+        /// <summary>
+        /// 
+        /// </summary>
         int Resolution { get; }
     }
 }
