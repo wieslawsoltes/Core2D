@@ -106,6 +106,16 @@ namespace Test2d
             return new Rect2(x, y, width, height);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
         public static Rect2 Create(
             double x1, double y1, 
             double x2, double y2, 
