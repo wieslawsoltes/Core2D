@@ -45,7 +45,11 @@ void Arcs(BaseShape ps, int n, double width, double height, ShapeStyle style, La
         double y1 = rand.NextDouble() * height;
         double x2 = rand.NextDouble() * width;
         double y2 = rand.NextDouble() * height;
-        var a = XArc.Create(x1, y1, x2, y2, style, ps);
+        double x3 = rand.NextDouble() * width;
+        double y3 = rand.NextDouble() * height;
+        double x4 = rand.NextDouble() * width;
+        double y4 = rand.NextDouble() * height;
+        var a = XArc.Create(x1, y1, x2, y2, x3, y3, x4, y4, style, ps);
         layer.Shapes.Add(a);
     }
 }
