@@ -22,7 +22,7 @@ namespace Test2d
             {
                 throw new ArgumentNullException();
             }
-            ShapeProperty property = group.Database.Where(p => p.Key == key).FirstOrDefault().Value;
+            ShapeProperty property = group.Database.Records.Where(p => p.Key == key).FirstOrDefault().Value;
             if (property != null
                 && property.Data != null
                 && property.Data is string)
@@ -47,7 +47,7 @@ namespace Test2d
             {
                 throw new ArgumentNullException();
             }
-            ShapeProperty property = group.Database.Where(p => p.Key == key).FirstOrDefault().Value;
+            ShapeProperty property = group.Database.Records.Where(p => p.Key == key).FirstOrDefault().Value;
             int value;
             if (property != null
                 && property.Data != null
@@ -77,7 +77,7 @@ namespace Test2d
             {
                 throw new ArgumentNullException();
             }
-            ShapeProperty property = group.Database.Where(p => p.Key == key).FirstOrDefault().Value;
+            ShapeProperty property = group.Database.Records.Where(p => p.Key == key).FirstOrDefault().Value;
             double value;
             if (property != null
                 && property.Data != null
