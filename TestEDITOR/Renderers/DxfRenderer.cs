@@ -804,7 +804,8 @@ namespace TestDXF
         /// <param name="layer"></param>
         private void DrawLine(DxfEntities entities, XLine line, string layer)
         {
-            entities.Entities.Add(CreateLine(line.Start.X, line.Start.Y, line.End.X, line.End.Y, layer));
+            var dxfLine = CreateLine(line.Start.X, line.Start.Y, line.End.X, line.End.Y, layer);
+            entities.Entities.Add(dxfLine);
         }
 
         /// <summary>
@@ -816,10 +817,14 @@ namespace TestDXF
         private void DrawRectangle(DxfEntities entities, XRectangle rectangle, string layer)
         {
             var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
-            entities.Entities.Add(CreateLine(rect.X, rect.Y, rect.X + rect.Width, rect.Y, layer));
-            entities.Entities.Add(CreateLine(rect.X, rect.Y + rect.Height, rect.X + rect.Width, rect.Y + rect.Height, layer));
-            entities.Entities.Add(CreateLine(rect.X, rect.Y, rect.X, rect.Y + rect.Height, layer));
-            entities.Entities.Add(CreateLine(rect.X + rect.Width, rect.Y, rect.X + rect.Width, rect.Y + rect.Height, layer));
+            var dxfLine1 = CreateLine(rect.X, rect.Y, rect.X + rect.Width, rect.Y, layer);
+            var dxfLine2 = CreateLine(rect.X, rect.Y + rect.Height, rect.X + rect.Width, rect.Y + rect.Height, layer);
+            var dxfLine3 = CreateLine(rect.X, rect.Y, rect.X, rect.Y + rect.Height, layer);
+            var dxfLine4 = CreateLine(rect.X + rect.Width, rect.Y, rect.X + rect.Width, rect.Y + rect.Height, layer);
+            entities.Entities.Add(dxfLine1);
+            entities.Entities.Add(dxfLine2);
+            entities.Entities.Add(dxfLine3);
+            entities.Entities.Add(dxfLine4);
         }
 
         /// <summary>
@@ -878,13 +883,13 @@ namespace TestDXF
         /// <param name="layer"></param>
         private void DrawBezier(DxfEntities entities, XBezier bezier, string layer)
         {
-            entities.Entities.Add(
-                CreateSpline(
-                    bezier.Point1.X, bezier.Point1.Y, 
-                    bezier.Point2.X, bezier.Point2.Y, 
-                    bezier.Point3.X, bezier.Point3.Y, 
-                    bezier.Point4.X, bezier.Point4.Y,
-                    layer));
+            var dxfSpline = CreateSpline(
+                bezier.Point1.X, bezier.Point1.Y,
+                bezier.Point2.X, bezier.Point2.Y,
+                bezier.Point3.X, bezier.Point3.Y,
+                bezier.Point4.X, bezier.Point4.Y,
+                layer);
+            entities.Entities.Add(dxfSpline);
         }
 
         /// <summary>
@@ -904,13 +909,14 @@ namespace TestDXF
             double x4 = qbezier.Point3.X;
             double y4 = qbezier.Point3.Y;
 
-            entities.Entities.Add(
-                CreateSpline(
-                    x1, y1, 
-                    x2, y2, 
-                    x3, y3, 
-                    x4, y4,
-                    layer));
+            var dxfSpline = CreateSpline(
+                x1, y1,
+                x2, y2,
+                x3, y3,
+                x4, y4,
+                layer);
+
+            entities.Entities.Add(dxfSpline);
         }
 
         /// <summary>
