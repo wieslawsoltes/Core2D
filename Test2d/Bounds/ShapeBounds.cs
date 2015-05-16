@@ -352,6 +352,16 @@ namespace Test2d
                     {
                         return arc.Point2;
                     }
+
+                    if (GetPointBounds(arc.Point3, treshold).Contains(p))
+                    {
+                        return arc.Point3;
+                    }
+
+                    if (GetPointBounds(arc.Point4, treshold).Contains(p))
+                    {
+                        return arc.Point4;
+                    }
                     
                     if (GetArcBounds(arc, 0.0, 0.0).Contains(p))
                     {
