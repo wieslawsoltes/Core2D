@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Test;component/Dictionaries/ShapeDictionary.xaml"/>
+                <ResourceDictionary Source="/Test;component/Dictionaries/Test2dDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
