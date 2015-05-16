@@ -7,7 +7,7 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public struct Arc
+    public struct GdiArc
     {
         /// <summary>
         /// 
@@ -55,33 +55,13 @@ namespace Test2d
         public double SweepAngle;
 
         /// <summary>
-        /// Converts an angle in decimal degress to radians.
-        /// </summary>
-        /// <param name="angleInDegrees">Angle in decimal degrees.</param>
-        /// <returns>Angle in radians.</returns>
-        public static double DegreesToRadians(double angleInDegrees)
-        {
-            return angleInDegrees * (Math.PI / 180.0);
-        }
-
-        /// <summary>
-        /// Converts an angle in radians to decimal degress.
-        /// </summary>
-        /// <param name="angleInRadians">Angle in radians</param>
-        /// <returns>Angle in decimal degrees.</returns>
-        public static double RadiansToDegrees(double angleInRadians)
-        {
-            return angleInRadians * (180.0 / Math.PI);
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="arc"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        public static Arc FromXArc(XArc arc, double dx, double dy)
+        public static GdiArc FromXArc(XArc arc, double dx, double dy)
         {
             double x1 = arc.Point1.X + dx;
             double y1 = arc.Point1.Y + dy;
@@ -106,7 +86,7 @@ namespace Test2d
             startAngle *= 180.0 / Math.PI;
             endAngle *= 180.0 / Math.PI;
 
-            return new Arc
+            return new GdiArc
             {
                 X = rect.X,
                 Y = rect.Y,
