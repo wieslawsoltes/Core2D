@@ -155,7 +155,16 @@ namespace TestEDITOR
         /// 
         /// </summary>
         public ICommand RemovePropertyCommand { get; set; }
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand AddRecordCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand RemoveRecordCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
