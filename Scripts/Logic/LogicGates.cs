@@ -82,7 +82,7 @@ XGroup CreateInputSignal()
     var co = XPoint.Create(30, 15, ps, "O");
 
     var labelProperty = ShapeProperty.Create("Label", "IN");
-    g.AddProperty(labelProperty);
+    g.Database.AddProperty(labelProperty);
     label.Properties = new [] { labelProperty };
 
     g.AddShape(label);
@@ -102,7 +102,7 @@ XGroup CreateOutputSignal()
     var ci = XPoint.Create(0, 15, ps, "I");
     
     var labelProperty = ShapeProperty.Create("Label", "OUT");
-    g.AddProperty(labelProperty);
+    g.Database.AddProperty(labelProperty);
     label.Properties = new [] { labelProperty };
 
     g.AddShape(label);
@@ -127,19 +127,19 @@ XGroup CreateSignal()
     var co = XPoint.Create(300, 15, ps, "O");
    
     var designationProperty = ShapeProperty.Create("Designation", "Designation");
-    g.AddProperty(designationProperty);
+    g.Database.AddProperty(designationProperty);
     labelDesignation.Properties = new [] { designationProperty };
 
     var descriptionProperty = ShapeProperty.Create("Description", "Description");
-    g.AddProperty(descriptionProperty);
+    g.Database.AddProperty(descriptionProperty);
     labelDescription.Properties = new [] { descriptionProperty };
     
     var signalProperty = ShapeProperty.Create("Signal", "Signal");
-    g.AddProperty(signalProperty);
+    g.Database.AddProperty(signalProperty);
     labelSignal.Properties = new [] { signalProperty };
     
     var conditionProperty = ShapeProperty.Create("Condition", "Condition");
-    g.AddProperty(conditionProperty);
+    g.Database.AddProperty(conditionProperty);
     labelCondition.Properties = new [] { conditionProperty };
     
     g.AddShape(labelDesignation);
@@ -167,7 +167,7 @@ XGroup CreateAndGate()
     var cb = XPoint.Create(15, 30, ps, "B");
 
     var labelProperty = ShapeProperty.Create("Label", "&");
-    g.AddProperty(labelProperty);
+    g.Database.AddProperty(labelProperty);
     label.Properties = new [] { labelProperty };
     
     g.AddShape(label);
@@ -194,8 +194,8 @@ XGroup CreateOrGate()
 
     var prefixProperty = ShapeProperty.Create("Prefix", "≥");
     var counterProperty = ShapeProperty.Create("Counter", "1");
-    g.AddProperty(prefixProperty);
-    g.AddProperty(counterProperty);
+    g.Database.AddProperty(prefixProperty);
+    g.Database.AddProperty(counterProperty);
     label.Properties = new [] { prefixProperty, counterProperty };
 
     g.AddShape(label);
@@ -221,7 +221,7 @@ XGroup CreateXorGate()
     var cb = XPoint.Create(15, 30, ps, "B");
 
     var labelProperty = ShapeProperty.Create("Label", "=1");
-    g.AddProperty(labelProperty);
+    g.Database.AddProperty(labelProperty);
     label.Properties = new [] { labelProperty };
     
     g.AddShape(label);
@@ -247,7 +247,7 @@ XGroup CreateInverterGate()
     var cb = XPoint.Create(15, 30, ps, "B");
 
     var labelProperty = ShapeProperty.Create("Label", "1");
-    g.AddProperty(labelProperty);
+    g.Database.AddProperty(labelProperty);
     label.Properties = new [] { labelProperty };
     
     g.AddShape(label);
@@ -280,17 +280,17 @@ XGroup CreateTimerOn()
     var prefixProperty = ShapeProperty.Create("Prefix", "T=");
     var delayProperty = ShapeProperty.Create("Delay", "1");
     var unitProperty = ShapeProperty.Create("Unit", "s");
-    g.AddProperty(prefixProperty);
-    g.AddProperty(delayProperty);
-    g.AddProperty(unitProperty);
+    g.Database.AddProperty(prefixProperty);
+    g.Database.AddProperty(delayProperty);
+    g.Database.AddProperty(unitProperty);
     label.Properties = new [] { prefixProperty, delayProperty, unitProperty };
 
     var t0Property = ShapeProperty.Create("T0", "T");
-    g.AddProperty(t0Property);
+    g.Database.AddProperty(t0Property);
     t0.Properties = new [] { t0Property };
     
     var t1Property = ShapeProperty.Create("T1", "0");
-    g.AddProperty(t1Property);
+    g.Database.AddProperty(t1Property);
     t1.Properties = new [] { t1Property };
 
     g.AddShape(label);
@@ -328,17 +328,17 @@ XGroup CreateTimerOff()
     var prefixProperty = ShapeProperty.Create("Prefix", "T=");
     var delayProperty = ShapeProperty.Create("Delay", "1");
     var unitProperty = ShapeProperty.Create("Unit", "s");
-    g.AddProperty(prefixProperty);
-    g.AddProperty(delayProperty);
-    g.AddProperty(unitProperty);
+    g.Database.AddProperty(prefixProperty);
+    g.Database.AddProperty(delayProperty);
+    g.Database.AddProperty(unitProperty);
     label.Properties = new [] { prefixProperty, delayProperty, unitProperty };
 
     var t0Property = ShapeProperty.Create("T0", "0");
-    g.AddProperty(t0Property);
+    g.Database.AddProperty(t0Property);
     t0.Properties = new [] { t0Property };
     
     var t1Property = ShapeProperty.Create("T1", "T");
-    g.AddProperty(t1Property);
+    g.Database.AddProperty(t1Property);
     t1.Properties = new [] { t1Property };
 
     g.AddShape(label);
@@ -378,13 +378,13 @@ XGroup CreateTimerPulse()
     var prefixProperty = ShapeProperty.Create("Prefix", "T=");
     var delayProperty = ShapeProperty.Create("Delay", "1");
     var unitProperty = ShapeProperty.Create("Unit", "s");
-    g.AddProperty(prefixProperty);
-    g.AddProperty(delayProperty);
-    g.AddProperty(unitProperty);
+    g.Database.AddProperty(prefixProperty);
+    g.Database.AddProperty(delayProperty);
+    g.Database.AddProperty(unitProperty);
     label.Properties = new [] { prefixProperty, delayProperty, unitProperty };
 
     var tProperty = ShapeProperty.Create("T", "T");
-    g.AddProperty(tProperty);
+    g.Database.AddProperty(tProperty);
     t.Properties = new [] { tProperty };
 
     g.AddShape(label);

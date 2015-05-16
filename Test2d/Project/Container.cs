@@ -15,7 +15,7 @@ namespace Test2d
         private string _name;
         private double _width;
         private double _height;
-        private IList<KeyValuePair<string, ShapeProperty>> _database;
+        private IList<ShapeProperty> _properties;
         private IList<Layer> _layers;
         private Container _template;
         private Layer _currentLayer;
@@ -71,17 +71,17 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets a colletion ShapeProperty that will be used during drawing.
         /// </summary>
-        public IList<KeyValuePair<string, ShapeProperty>> Database
+        public IList<ShapeProperty> Properties
         {
-            get { return _database; }
+            get { return _properties; }
             set
             {
-                if (value != _database)
+                if (value != _properties)
                 {
-                    _database = value;
-                    Notify("Database");
+                    _properties = value;
+                    Notify("Properties");
                 }
             }
         }
@@ -209,17 +209,18 @@ namespace Test2d
                 Name = name,
                 Width = width,
                 Height = height,
+                Properties = new ObservableCollection<ShapeProperty>(),
                 Layers = new ObservableCollection<Layer>()
             };
 
-            c.Layers.Add(Layer.Create("Layer1"));
-            c.Layers.Add(Layer.Create("Layer2"));
-            c.Layers.Add(Layer.Create("Layer3"));
-            c.Layers.Add(Layer.Create("Layer4"));
+            c.Layers.Add(Layer.Create("Layer1", c));
+            c.Layers.Add(Layer.Create("Layer2", c));
+            c.Layers.Add(Layer.Create("Layer3", c));
+            c.Layers.Add(Layer.Create("Layer4", c));
 
             c.CurrentLayer = c.Layers.FirstOrDefault();
 
-            c.WorkingLayer = Layer.Create("Working");
+            c.WorkingLayer = Layer.Create("Working", c);
 
             return c;
         }

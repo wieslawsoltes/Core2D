@@ -32,6 +32,7 @@ namespace Test2d
         public event InvalidateLayerEventHandler InvalidateLayer;
 
         private string _name;
+        private Container _owner;
         private bool _isVisible;
         private IList<BaseShape> _shapes;
 
@@ -47,6 +48,22 @@ namespace Test2d
                 {
                     _name = value;
                     Notify("Name");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Container Owner
+        {
+            get { return _owner; }
+            set
+            {
+                if (value != _owner)
+                {
+                    _owner = value;
+                    Notify("Owner");
                 }
             }
         }
@@ -100,13 +117,15 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="owner"></param>
         /// <param name="isVisible"></param>
         /// <returns></returns>
-        public static Layer Create(string name, bool isVisible = true)
+        public static Layer Create(string name, Container owner, bool isVisible = true)
         {
             return new Layer()
             {
                 Name = name,
+                Owner = owner,
                 IsVisible = isVisible,
                 Shapes = new ObservableCollection<BaseShape>()
             };

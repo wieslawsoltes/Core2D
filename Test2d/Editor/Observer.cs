@@ -601,6 +601,10 @@ namespace Test2d
             (container.Layers as ObservableCollection<Layer>)
                 .CollectionChanged += LayersCollectionObserver;
 
+            Add(container.Properties);
+            (container.Properties as ObservableCollection<ShapeProperty>)
+                .CollectionChanged += PropertiesCollectionObserver;
+
             //Add(container.WorkingLayer);
         }
 
@@ -666,6 +670,10 @@ namespace Test2d
 
             (container.Layers as ObservableCollection<Layer>)
                 .CollectionChanged -= LayersCollectionObserver;
+
+            Remove(container.Properties);
+            (container.Properties as ObservableCollection<ShapeProperty>)
+                .CollectionChanged -= PropertiesCollectionObserver;
 
             //Remove(container.WorkingLayer);
         }
@@ -844,12 +852,12 @@ namespace Test2d
                 var group = shape as XGroup;
                 Add(group.Shapes);
                 Add(group.Connectors);
-                Add(group.Database);
+                Add(group.Database.Records);
                 (group.Shapes as ObservableCollection<BaseShape>)
                     .CollectionChanged += ShapesCollectionObserver;
                 (group.Connectors as ObservableCollection<XPoint>)
                     .CollectionChanged += ShapesCollectionObserver;
-                (group.Database as ObservableCollection<KeyValuePair<string, ShapeProperty>>)
+                (group.Database.Records as ObservableCollection<KeyValuePair<string, ShapeProperty>>)
                     .CollectionChanged += DatabaseCollectionObserver;
             }
 
@@ -931,12 +939,12 @@ namespace Test2d
                 var group = shape as XGroup;
                 Remove(group.Shapes);
                 Remove(group.Connectors);
-                Remove(group.Database);
+                Remove(group.Database.Records);
                 (group.Shapes as ObservableCollection<BaseShape>)
                     .CollectionChanged -= ShapesCollectionObserver;
                 (group.Connectors as ObservableCollection<XPoint>)
                     .CollectionChanged -= ShapesCollectionObserver;
-                (group.Database as ObservableCollection<KeyValuePair<string, ShapeProperty>>)
+                (group.Database.Records as ObservableCollection<KeyValuePair<string, ShapeProperty>>)
                     .CollectionChanged -= DatabaseCollectionObserver;
             }
 

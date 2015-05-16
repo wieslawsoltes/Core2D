@@ -275,7 +275,7 @@ namespace TestPDF
                 _scaleToPage = (value) => value * scale;
 
                 // draw container contents to pdf graphics
-                Draw(gfx, container);
+                Draw(gfx, container, container.Properties);
             }
 
             return page;
@@ -413,7 +413,8 @@ namespace TestPDF
         /// </summary>
         /// <param name="gfx"></param>
         /// <param name="container"></param>
-        public void Draw(object gfx, Test2d.Container container)
+        /// <param name="db"></param>
+        public void Draw(object gfx, Test2d.Container container, IList<Test2d.ShapeProperty> db)
         {
             if (container.Template != null)
             {
@@ -421,7 +422,7 @@ namespace TestPDF
                 {
                     if (layer.IsVisible)
                     {
-                        Draw(gfx, layer);
+                        Draw(gfx, layer, db);
                     }
                 }
             }
@@ -430,7 +431,7 @@ namespace TestPDF
             {
                 if (layer.IsVisible)
                 {
-                    Draw(gfx, layer);
+                    Draw(gfx, layer, db);
                 }
             }
         }
@@ -440,13 +441,14 @@ namespace TestPDF
         /// </summary>
         /// <param name="gfx"></param>
         /// <param name="layer"></param>
-        public void Draw(object gfx, Test2d.Layer layer)
+        /// <param name="db"></param>
+        public void Draw(object gfx, Test2d.Layer layer, IList<Test2d.ShapeProperty> db)
         {
             foreach (var shape in layer.Shapes)
             {
                 if (shape.State.HasFlag(DrawShapeState))
                 {
-                    shape.Draw(gfx, this, 0, 0);
+                    shape.Draw(gfx, this, 0, 0, db);
                 }
             }
         }
@@ -458,7 +460,8 @@ namespace TestPDF
         /// <param name="line"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object gfx, Test2d.XLine line, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object gfx, Test2d.XLine line, double dx, double dy, IList<Test2d.ShapeProperty> db)
         {
             var _gfx = gfx as XGraphics;
 
@@ -588,7 +591,8 @@ namespace TestPDF
         /// <param name="rectangle"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object gfx, Test2d.XRectangle rectangle, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object gfx, Test2d.XRectangle rectangle, double dx, double dy, IList<Test2d.ShapeProperty> db)
         {
             var _gfx = gfx as XGraphics;
 
@@ -625,7 +629,8 @@ namespace TestPDF
         /// <param name="ellipse"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object gfx, Test2d.XEllipse ellipse, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object gfx, Test2d.XEllipse ellipse, double dx, double dy, IList<Test2d.ShapeProperty> db)
         {
             var _gfx = gfx as XGraphics;
 
@@ -662,7 +667,8 @@ namespace TestPDF
         /// <param name="arc"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object gfx, Test2d.XArc arc, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object gfx, Test2d.XArc arc, double dx, double dy, IList<Test2d.ShapeProperty> db)
         {
             var _gfx = gfx as XGraphics;
 
@@ -685,7 +691,8 @@ namespace TestPDF
         /// <param name="bezier"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object gfx, Test2d.XBezier bezier, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object gfx, Test2d.XBezier bezier, double dx, double dy, IList<Test2d.ShapeProperty> db)
         {
             var _gfx = gfx as XGraphics;
 
@@ -708,7 +715,8 @@ namespace TestPDF
         /// <param name="qbezier"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object gfx, Test2d.XQBezier qbezier, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object gfx, Test2d.XQBezier qbezier, double dx, double dy, IList<Test2d.ShapeProperty> db)
         {
             var _gfx = gfx as XGraphics;
 
@@ -736,7 +744,8 @@ namespace TestPDF
         /// <param name="text"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object gfx, Test2d.XText text, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object gfx, Test2d.XText text, double dx, double dy, IList<Test2d.ShapeProperty> db)
         {
             var _gfx = gfx as XGraphics;
 
@@ -815,7 +824,7 @@ namespace TestPDF
             }
 
             _gfx.DrawString(
-                text.Bind(null),
+                text.Bind(db),
                 font,
                 ToXSolidBrush(text.Style.Stroke),
                 srect,
@@ -829,7 +838,8 @@ namespace TestPDF
         /// <param name="image"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public void Draw(object gfx, Test2d.XImage image, double dx, double dy)
+        /// <param name="db"></param>
+        public void Draw(object gfx, Test2d.XImage image, double dx, double dy, IList<Test2d.ShapeProperty> db)
         {
             var _gfx = gfx as XGraphics;
 

@@ -103,7 +103,8 @@ namespace Test2d
         /// <param name="renderer">The generic renderer object used to draw shape.</param>
         /// <param name="dx">The X axis draw position osffset.</param>
         /// <param name="dy">The Y axis draw position osffset.</param>
-        public abstract void Draw(object dc, IRenderer renderer, double dx, double dy);
+        /// <param name="db">The properties database used for binding.</param>
+        public abstract void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db);
 
         /// <summary>
         /// Move shape position using dx,dy offset.

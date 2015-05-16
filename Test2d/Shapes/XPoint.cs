@@ -71,22 +71,15 @@ namespace Test2d
         /// <param name="renderer"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy)
+        /// <param name="db"></param>
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db)
         {
             if (_shape != null)
             {
                 if (State.HasFlag(ShapeState.Visible))
                 {
-                    _shape.Draw(dc, renderer, X + dx, Y + dy);
+                    _shape.Draw(dc, renderer, X + dx, Y + dy, db);
                 }
-                
-                //if (renderer.SelectedShape != null)
-                //{
-                //    if (this == renderer.SelectedShape)
-                //    {
-                //        _shape.Draw(dc, renderer, dx, dy);
-                //    }
-                //}
             }
         }
 

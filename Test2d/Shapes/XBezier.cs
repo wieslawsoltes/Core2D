@@ -105,37 +105,38 @@ namespace Test2d
         /// <param name="renderer"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy)
+        /// <param name="db"></param>
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db)
         {
             if (State.HasFlag(ShapeState.Visible))
             {
-                renderer.Draw(dc, this, dx, dy);
+                renderer.Draw(dc, this, dx, dy, db);
             }
 
             if (renderer.SelectedShape != null)
             {
                 if (this == renderer.SelectedShape)
                 {
-                    _point1.Draw(dc, renderer, dx, dy);
-                    _point2.Draw(dc, renderer, dx, dy);
-                    _point3.Draw(dc, renderer, dx, dy);
-                    _point4.Draw(dc, renderer, dx, dy);
+                    _point1.Draw(dc, renderer, dx, dy, db);
+                    _point2.Draw(dc, renderer, dx, dy, db);
+                    _point3.Draw(dc, renderer, dx, dy, db);
+                    _point4.Draw(dc, renderer, dx, dy, db);
                 }
                 else if (_point1 == renderer.SelectedShape)
                 {
-                    _point1.Draw(dc, renderer, dx, dy);
+                    _point1.Draw(dc, renderer, dx, dy, db);
                 }
                 else if (_point2 == renderer.SelectedShape)
                 {
-                    _point2.Draw(dc, renderer, dx, dy);
+                    _point2.Draw(dc, renderer, dx, dy, db);
                 }
                 else if (_point3 == renderer.SelectedShape)
                 {
-                    _point3.Draw(dc, renderer, dx, dy);
+                    _point3.Draw(dc, renderer, dx, dy, db);
                 }
                 else if (_point4 == renderer.SelectedShape)
                 {
-                    _point4.Draw(dc, renderer, dx, dy);
+                    _point4.Draw(dc, renderer, dx, dy, db);
                 }
             }
             
@@ -143,10 +144,10 @@ namespace Test2d
             {
                 if (renderer.SelectedShapes.Contains(this))
                 {
-                    _point1.Draw(dc, renderer, dx, dy);
-                    _point2.Draw(dc, renderer, dx, dy);
-                    _point3.Draw(dc, renderer, dx, dy);
-                    _point4.Draw(dc, renderer, dx, dy);
+                    _point1.Draw(dc, renderer, dx, dy, db);
+                    _point2.Draw(dc, renderer, dx, dy, db);
+                    _point3.Draw(dc, renderer, dx, dy, db);
+                    _point4.Draw(dc, renderer, dx, dy, db);
                 }
             }
         }

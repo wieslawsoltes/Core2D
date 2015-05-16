@@ -103,7 +103,7 @@ namespace TestEMF
 
                     g.PageUnit = GraphicsUnit.Point;
     
-                    r.Draw(g, container);
+                    r.Draw(g, container, container.Properties);
                 }
             }
             finally
