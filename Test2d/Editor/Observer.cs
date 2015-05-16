@@ -809,6 +809,8 @@ namespace Test2d
                 var arc = shape as XArc;
                 arc.Point1.PropertyChanged += ShapeObserver;
                 arc.Point2.PropertyChanged += ShapeObserver;
+                arc.Point3.PropertyChanged += ShapeObserver;
+                arc.Point4.PropertyChanged += ShapeObserver;
             }
             else if (shape is XBezier)
             {
@@ -894,6 +896,8 @@ namespace Test2d
                 var arc = shape as XArc;
                 arc.Point1.PropertyChanged -= ShapeObserver;
                 arc.Point2.PropertyChanged -= ShapeObserver;
+                arc.Point3.PropertyChanged -= ShapeObserver;
+                arc.Point4.PropertyChanged -= ShapeObserver;
             }
             else if (shape is XBezier)
             {
