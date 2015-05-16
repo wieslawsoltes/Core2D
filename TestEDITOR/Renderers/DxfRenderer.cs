@@ -628,9 +628,15 @@ namespace TestDXF
         /// <param name="y"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
+        /// <param name="startAngle">The start angle in radians.</param>
+        /// <param name="endAngle">The end angle in radians.</param>
         /// <param name="layer"></param>
         /// <returns></returns>
-        private DxfEllipse CreateEllipse(double x, double y, double width, double height, string layer)
+        private DxfEllipse CreateEllipse(
+            double x, double y, 
+            double width, double height, 
+            double startAngle, double endAngle,
+            string layer)
         {
             double _cx = ToDxfX(x + width / 2.0);
             double _cy = ToDxfY(y + height / 2.0);
@@ -647,8 +653,8 @@ namespace TestDXF
                 EndPoint = new DxfVector3(_ex, _ey, 0),
                 ExtrusionDirection = new DxfVector3(0, 0, 1),
                 Ratio = minor / major,
-                StartParameter = 0.0,
-                EndParameter = 2.0 * Math.PI
+                StartParameter = startAngle,
+                EndParameter = endAngle
             };
         }
 
@@ -657,21 +663,19 @@ namespace TestDXF
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        /// <param name="radiusX"></param>
-        /// <param name="radiusY"></param>
+        /// <param name="radius"></param>
         /// <param name="startAngle"></param>
         /// <param name="endAngle"></param>
         /// <param name="layer"></param>
         /// <returns></returns>
         private DxfArc CreateArc(
             double x, double y,
-            double radiusX, double radiusY,
+            double radius,
             double startAngle, double endAngle, 
             string layer)
         {
-            // TODO: Handle properly radiusX and radiusY.
-            double _cx = ToDxfX(x + radiusX / 2.0);
-            double _cy = ToDxfY(y + radiusY / 2.0);
+            double _cx = ToDxfX(x + radius / 2.0);
+            double _cy = ToDxfY(y + radius / 2.0);
 
             return new DxfArc(_version, NextHandle())
             {
@@ -679,7 +683,7 @@ namespace TestDXF
                 Color = DxfDefaultColors.ByLayer.ToDxfColor(),
                 Thickness = 0.0,
                 CenterPoint = new DxfVector3(_cx, _cy, 0),
-                Radius = radiusX,
+                Radius = radius,
                 StartAngle = startAngle,
                 EndAngle = endAngle,
                 ExtrusionDirection = new DxfVector3(0, 0, 1),
@@ -827,7 +831,12 @@ namespace TestDXF
         private void DrawEllipse(DxfEntities entities, XEllipse ellipse, string layer)
         {
             var rect = Rect2.Create(ellipse.TopLeft, ellipse.BottomRight);
-            entities.Entities.Add(CreateEllipse(rect.X, rect.Y, rect.Width, rect.Height, layer));
+            var dxfEllipse = CreateEllipse(
+                rect.X, rect.Y, 
+                rect.Width, rect.Height, 
+                0.0, 2.0 * Math.PI,
+                layer);
+            entities.Entities.Add(dxfEllipse);
         }
 
         /// <summary>
@@ -839,7 +848,23 @@ namespace TestDXF
         private void DrawArc(DxfEntities entities, XArc arc, string layer)
         {
             var a = Arc.FromXArc(arc, 0.0, 0.0);
-            entities.Entities.Add(CreateArc(a.X, a.Y, a.RadiusX, a.RadiusY, a.StartAngle, a.EndAngle, layer));
+
+            if (a.RadiusX != a.RadiusY)
+            {
+                var dxfEllipse = CreateEllipse(
+                    a.X, a.Y,
+                    a.Width, a.Height,
+                    a.StartAngle * (Math.PI / 180.0),
+                    a.EndAngle * (Math.PI / 180.0),
+                    layer);
+                entities.Entities.Add(dxfEllipse);
+            }
+            else
+            {
+                var dxfArc = CreateArc(a.X, a.Y, a.RadiusX, a.StartAngle, a.EndAngle, layer);
+                entities.Entities.Add(dxfArc);
+            }
+
         }
 
         /// <summary>
