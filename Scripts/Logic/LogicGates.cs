@@ -28,7 +28,10 @@ var styleTextMediumLC = ShapeStyle.Create(
     255, 0, 0, 0, 
     2.0, 
     null, 
-    "Consolas", 11.0, TextHAlignment.Left, TextVAlignment.Center);
+    "Consolas", "consola.ttf",
+    11.0, 
+    FontStyle.Regular,
+    TextHAlignment.Left, TextVAlignment.Center);
 styles.Add(styleTextMediumLC);
 
 var styleTextMediumCC = ShapeStyle.Create(
@@ -37,7 +40,10 @@ var styleTextMediumCC = ShapeStyle.Create(
     255, 0, 0, 0, 
     2.0, 
     null, 
-    "Consolas", 11.0, TextHAlignment.Center, TextVAlignment.Center);
+    "Consolas", "consola.ttf",
+    11.0, 
+    FontStyle.Regular,
+    TextHAlignment.Center, TextVAlignment.Center);
 styles.Add(styleTextMediumCC);
 
 var styleTextBigCC = ShapeStyle.Create(
@@ -46,7 +52,10 @@ var styleTextBigCC = ShapeStyle.Create(
     255, 0, 0, 0, 
     2.0, 
     null, 
-    "Consolas", 14.0, TextHAlignment.Center, TextVAlignment.Center);
+    "Consolas", "consola.ttf",
+    14.0, 
+    FontStyle.Regular,
+    TextHAlignment.Center, TextVAlignment.Center);
 styles.Add(styleTextBigCC);
 
 var styleLineThick = ShapeStyle.Create(
@@ -55,7 +64,10 @@ var styleLineThick = ShapeStyle.Create(
     255, 0, 0, 0, 
     2.0, 
     null,
-    "Consolas", 12.0, TextHAlignment.Center, TextVAlignment.Center);
+    "Consolas", "consola.ttf",
+    12.0, 
+    FontStyle.Regular,
+    TextHAlignment.Center, TextVAlignment.Center);
 styles.Add(styleLineThick);
 
 sg.CurrentStyle = sg.Styles.FirstOrDefault();
