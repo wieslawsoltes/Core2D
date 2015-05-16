@@ -11,7 +11,9 @@ namespace Test2d
     {
         private string _name;
         private string _fontName;
+        private string _fontFile;
         private double _fontSize;
+        private FontStyle _fontStyle;
         private TextHAlignment _textHAlignment;
         private TextVAlignment _textVAlignment;
 
@@ -50,6 +52,22 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public string FontFile
+        {
+            get { return _fontFile; }
+            set
+            {
+                if (value != _fontFile)
+                {
+                    _fontFile = value;
+                    Notify("FontFile");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public double FontSize
         {
             get { return _fontSize; }
@@ -59,6 +77,22 @@ namespace Test2d
                 {
                     _fontSize = value;
                     Notify("FontSize");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public FontStyle FontStyle
+        {
+            get { return _fontStyle; }
+            set
+            {
+                if (value != _fontStyle)
+                {
+                    _fontStyle = value;
+                    Notify("FontStyle");
                 }
             }
         }
@@ -99,20 +133,26 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="fontName"></param>
+        /// <param name="fontFile"></param>
         /// <param name="fontSize"></param>
+        /// <param name="fontStyle"></param>
         /// <param name="textHAlignment"></param>
         /// <param name="textVAlignment"></param>
         /// <returns></returns>
         public static TextStyle Create(
             string fontName = "Calibri", 
+            string fontFile = "calibri.ttf",
             double fontSize = 12.0,
+            FontStyle fontStyle = FontStyle.Regular,
             TextHAlignment textHAlignment = TextHAlignment.Center,
             TextVAlignment textVAlignment = TextVAlignment.Center)
         {
             return new TextStyle()
             {
                 FontName = fontName,
+                FontFile = fontFile,
                 FontSize = fontSize,
+                FontStyle = fontStyle,
                 TextHAlignment = textHAlignment,
                 TextVAlignment = textVAlignment
             };
