@@ -1,7 +1,10 @@
-void Lines(BaseShape ps, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
+void Lines(BaseShape ps, int n, double width, double height, IList<ShapeStyle> styles, Layer layer, Random rand)
 {
+    var sb = new byte[n];
+    rand.NextBytes(sb);
     for (int i = 0; i < n; i++)
     {
+        var style = styles[sb[i]];
         double x1 = rand.NextDouble() * width;
         double y1 = rand.NextDouble() * height;
         double x2 = rand.NextDouble() * width;
@@ -11,10 +14,13 @@ void Lines(BaseShape ps, int n, double width, double height, ShapeStyle style, L
     }
 }
 
-void Rectangles(BaseShape ps, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
+void Rectangles(BaseShape ps, int n, double width, double height, IList<ShapeStyle> styles, Layer layer, Random rand)
 {
+    var sb = new byte[n];
+    rand.NextBytes(sb);
     for (int i = 0; i < n; i++)
     {
+        var style = styles[sb[i]];
         double x1 = rand.NextDouble() * width;
         double y1 = rand.NextDouble() * height;
         double x2 = rand.NextDouble() * width;
@@ -24,10 +30,13 @@ void Rectangles(BaseShape ps, int n, double width, double height, ShapeStyle sty
     }
 }
 
-void Ellipses(BaseShape ps, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
+void Ellipses(BaseShape ps, int n, double width, double height, IList<ShapeStyle> styles, Layer layer, Random rand)
 {
+    var sb = new byte[n];
+    rand.NextBytes(sb);
     for (int i = 0; i < n; i++)
     {
+        var style = styles[sb[i]];
         double x1 = rand.NextDouble() * width;
         double y1 = rand.NextDouble() * height;
         double x2 = rand.NextDouble() * width;
@@ -37,10 +46,13 @@ void Ellipses(BaseShape ps, int n, double width, double height, ShapeStyle style
     }
 }
 
-void Arcs(BaseShape ps, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
+void Arcs(BaseShape ps, int n, double width, double height, IList<ShapeStyle> styles, Layer layer, Random rand)
 {
+    var sb = new byte[n];
+    rand.NextBytes(sb);
     for (int i = 0; i < n; i++)
     {
+        var style = styles[sb[i]];
         double x1 = rand.NextDouble() * width;
         double y1 = rand.NextDouble() * height;
         double x2 = rand.NextDouble() * width;
@@ -54,10 +66,13 @@ void Arcs(BaseShape ps, int n, double width, double height, ShapeStyle style, La
     }
 }
 
-void Beziers(BaseShape ps, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
+void Beziers(BaseShape ps, int n, double width, double height, IList<ShapeStyle> styles, Layer layer, Random rand)
 {
+    var sb = new byte[n];
+    rand.NextBytes(sb);
     for (int i = 0; i < n; i++)
     {
+        var style = styles[sb[i]];
         double x1 = rand.NextDouble() * width;
         double y1 = rand.NextDouble() * height;
         double x2 = rand.NextDouble() * width;
@@ -71,10 +86,13 @@ void Beziers(BaseShape ps, int n, double width, double height, ShapeStyle style,
     }
 }
 
-void QBeziers(BaseShape ps, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
+void QBeziers(BaseShape ps, int n, double width, double height, IList<ShapeStyle> styles, Layer layer, Random rand)
 {
+    var sb = new byte[n];
+    rand.NextBytes(sb);
     for (int i = 0; i < n; i++)
     {
+        var style = styles[sb[i]];
         double x1 = rand.NextDouble() * width;
         double y1 = rand.NextDouble() * height;
         double x2 = rand.NextDouble() * width;
@@ -86,10 +104,13 @@ void QBeziers(BaseShape ps, int n, double width, double height, ShapeStyle style
     }
 }
 
-void Texts(BaseShape ps, int n, double width, double height, ShapeStyle style, Layer layer, Random rand)
+void Texts(BaseShape ps, int n, double width, double height, IList<ShapeStyle> styles, Layer layer, Random rand)
 {
+    var sb = new byte[n];
+    rand.NextBytes(sb);
     for (int i = 0; i < n; i++)
     {
+        var style = styles[sb[i]];
         double x1 = rand.NextDouble() * width;
         double y1 = rand.NextDouble() * height;
         double x2 = rand.NextDouble() * width;
@@ -99,22 +120,53 @@ void Texts(BaseShape ps, int n, double width, double height, ShapeStyle style, L
     }
 }
 
-var p = Context.DefaultProject();
-var ps = p.PointShape;
-var c = p.Documents.FirstOrDefault().Containers.FirstOrDefault();
-var styles = p.StyleGroups.FirstOrDefault().Styles;
+void Demo(Project p, int n = 100)
+{
+    var ps = p.PointShape;
+    var c = p.Documents.FirstOrDefault().Containers.FirstOrDefault();
+    var width = c.Width;
+    var height = c.Height;
+    var rand = new Random(Guid.NewGuid().GetHashCode());
 
-var n = 100;
-var width = c.Width;
-var height = c.Height;
-var rand = new Random(Guid.NewGuid().GetHashCode());
+    var ll = Layer.Create("Demo-Lines");
+    var rl = Layer.Create("Demo-Rectangles");
+    var el = Layer.Create("Demo-Ellipses");
+    var al = Layer.Create("Demo-Arcs");
+    var bl = Layer.Create("Demo-Beziers");
+    var ql = Layer.Create("Demo-QBeziers");
+    var tl = Layer.Create("Demo-Texts");
+    c.Layers.Add(ll);
+    c.Layers.Add(rl);
+    c.Layers.Add(el);
+    c.Layers.Add(al);
+    c.Layers.Add(bl);
+    c.Layers.Add(ql);
+    c.Layers.Add(tl);
 
-Lines(ps, n, width, height, styles[0], c.Layers[0], rand);
-Rectangles(ps, n, width, height, styles[1], c.Layers[1], rand);
-Ellipses(ps, n, width, height, styles[2], c.Layers[1], rand);
-Arcs(ps, n, width, height, styles[2], c.Layers[1], rand);
-Beziers(ps, n, width, height, styles[3], c.Layers[2], rand);
-QBeziers(ps, n, width, height, styles[4], c.Layers[2], rand);
-Texts(ps, n, width, height, styles[4], c.Layers[3], rand);
+    var sg = ShapeStyleGroup.Create("Demo");
+    p.StyleGroups.Add(sg);
+    sg.Styles.Clear();
+    for (int i = 0; i <= 255; i++)
+    {
+        var b = new byte[8];
+        rand.NextBytes(b);
+        var style = ShapeStyle.Create(
+            i.ToString(), 
+            b[0], b[1], b[2], b[3], 
+            b[4], b[5], b[6], b[7], 
+            2.0);
+        sg.Styles.Add(style);
+    }
 
-Context.Editor.Load(p);
+    Lines(ps, n, width, height, sg.Styles, ll, rand);
+    Rectangles(ps, n, width, height, sg.Styles, rl, rand);
+    Ellipses(ps, n, width, height, sg.Styles, el, rand);
+    Arcs(ps, n, width, height, sg.Styles, al, rand);
+    Beziers(ps, n, width, height, sg.Styles, bl, rand);
+    QBeziers(ps, n, width, height, sg.Styles, ql, rand);
+    Texts(ps, n, width, height, sg.Styles, tl, rand);
+
+    c.Invalidate();
+}
+
+Demo(Context.Editor.Project, 100);
