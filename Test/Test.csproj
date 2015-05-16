@@ -130,7 +130,6 @@
     <Compile Include="Converters\ZoomScaleConverter.cs" />
     <Compile Include="PanAndZoom\PanAndZoomBorder.cs" />
     <Compile Include="PanAndZoom\PanAndZoomGrid.cs" />
-    <Compile Include="Renderers\WpfArc.cs" />
     <Compile Include="Renderers\WpfRenderer.cs" />
     <Compile Include="Windows\ContainerWindow.xaml.cs">
       <DependentUpon>ContainerWindow.xaml</DependentUpon>

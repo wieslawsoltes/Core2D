@@ -777,21 +777,27 @@ namespace Test
                 && _arcCache.TryGetValue(arc, out pg))
             {
                 var pf = pg.Figures[0];
-                pf.StartPoint = a.Start;
+                pf.StartPoint = new Point(a.Start.X, a.Start.Y);
                 pf.IsFilled = arc.IsFilled;
                 var segment = pf.Segments[0] as ArcSegment;
-                segment.Point = a.End;
-                segment.Size = a.Radius;
+                segment.Point = new Point(a.End.X, a.End.Y);
+                segment.Size = new Size(a.Radius.Width, a.Radius.Height);
+                segment.IsLargeArc = a.IsLargeArc;
             }
             else
             {
                 var pf = new PathFigure()
                 {
-                    StartPoint = a.Start,
+                    StartPoint = new Point(a.Start.X, a.Start.Y),
                     IsFilled = arc.IsFilled
                 };
 
-                var segment = new ArcSegment(a.End, a.Radius, 0.0, false, SweepDirection.Clockwise, true);
+                var segment = new ArcSegment(
+                    new Point(a.End.X, a.End.Y),
+                    new Size(a.Radius.Width, a.Radius.Height), 
+                    0.0, 
+                    a.IsLargeArc, SweepDirection.Clockwise, 
+                    true);
 
                 //segment.Freeze();
                 pf.Segments.Add(segment);

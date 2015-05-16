@@ -610,7 +610,7 @@ namespace TestEMF
         /// <param name="dy"></param>
         public void Draw(object gfx, XArc arc, double dx, double dy)
         {
-            var a = Arc.FromXArc(arc, dx, dy);
+            var a = GdiArc.FromXArc(arc, dx, dy);
             if (a.Width <= 0.0 || a.Height <= 0.0)
                 return;
 

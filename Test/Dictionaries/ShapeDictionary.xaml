@@ -284,6 +284,12 @@
             <Expander Header="Point2" IsExpanded="False">
                 <ContentControl Content="{Binding Point2}"/>
             </Expander>
+            <Expander Header="Point3" IsExpanded="False">
+                <ContentControl Content="{Binding Point3}"/>
+            </Expander>
+            <Expander Header="Point4" IsExpanded="False">
+                <ContentControl Content="{Binding Point4}"/>
+            </Expander>
             <Expander Header="Fill" IsExpanded="False">
                 <Grid>
                     <Grid.RowDefinitions>

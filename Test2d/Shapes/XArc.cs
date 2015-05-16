@@ -14,6 +14,8 @@ namespace Test2d
     {
         private XPoint _point1;
         private XPoint _point2;
+        private XPoint _point3;
+        private XPoint _point4;
         private bool _isFilled;
 
         /// <summary>
@@ -44,6 +46,38 @@ namespace Test2d
                 {
                     _point2 = value;
                     Notify("Point2");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public XPoint Point3
+        {
+            get { return _point3; }
+            set
+            {
+                if (value != _point3)
+                {
+                    _point3 = value;
+                    Notify("Point3");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public XPoint Point4
+        {
+            get { return _point4; }
+            set
+            {
+                if (value != _point4)
+                {
+                    _point4 = value;
+                    Notify("Point4");
                 }
             }
         }
@@ -84,6 +118,8 @@ namespace Test2d
                 {
                     _point1.Draw(dc, renderer, dx, dy);
                     _point2.Draw(dc, renderer, dx, dy);
+                    _point3.Draw(dc, renderer, dx, dy);
+                    _point4.Draw(dc, renderer, dx, dy);
                 }
                 else if (_point1 == renderer.SelectedShape)
                 {
@@ -93,6 +129,14 @@ namespace Test2d
                 {
                     _point2.Draw(dc, renderer, dx, dy);
                 }
+                else if (_point3 == renderer.SelectedShape)
+                {
+                    _point3.Draw(dc, renderer, dx, dy);
+                }
+                else if (_point4 == renderer.SelectedShape)
+                {
+                    _point4.Draw(dc, renderer, dx, dy);
+                }
             }
             
             if (renderer.SelectedShapes != null)
@@ -101,6 +145,8 @@ namespace Test2d
                 {
                     _point1.Draw(dc, renderer, dx, dy);
                     _point2.Draw(dc, renderer, dx, dy);
+                    _point3.Draw(dc, renderer, dx, dy);
+                    _point4.Draw(dc, renderer, dx, dy);
                 }
             }
         }
@@ -114,6 +160,8 @@ namespace Test2d
         {
             Point1.Move(dx, dy);
             Point2.Move(dx, dy);
+            Point3.Move(dx, dy);
+            Point4.Move(dx, dy);
         }
 
         /// <summary>
@@ -123,6 +171,10 @@ namespace Test2d
         /// <param name="y1"></param>
         /// <param name="x2"></param>
         /// <param name="y2"></param>
+        /// <param name="x3"></param>
+        /// <param name="y3"></param>
+        /// <param name="x4"></param>
+        /// <param name="y4"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
         /// <param name="isFilled"></param>
@@ -131,6 +183,8 @@ namespace Test2d
         public static XArc Create(
             double x1, double y1,
             double x2, double y2,
+            double x3, double y3,
+            double x4, double y4,
             ShapeStyle style,
             BaseShape point,
             bool isFilled = false,
@@ -143,6 +197,8 @@ namespace Test2d
                 Properties = new ObservableCollection<ShapeProperty>(),
                 Point1 = XPoint.Create(x1, y1, point),
                 Point2 = XPoint.Create(x2, y2, point),
+                Point3 = XPoint.Create(x3, y3, point),
+                Point4 = XPoint.Create(x4, y4, point),
                 IsFilled = isFilled
             };
         }
@@ -164,7 +220,7 @@ namespace Test2d
             bool isFilled = false,
             string name = "")
         {
-            return Create(x, y, x, y, style, point, isFilled, name);
+            return Create(x, y, x, y, x, y, x, y, style, point, isFilled, name);
         }
     }
 }

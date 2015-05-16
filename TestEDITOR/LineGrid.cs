@@ -17,70 +17,20 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
-        public struct Point
-        {
-            /// <summary>
-            /// 
-            /// </summary>
-            public double X;
-            /// <summary>
-            /// 
-            /// </summary>
-            public double Y;
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="x"></param>
-            /// <param name="y"></param>
-            public Point(double x, double y)
-            {
-                X = x;
-                Y = y;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public struct Size
-        {
-            /// <summary>
-            /// 
-            /// </summary>
-            public double Width;
-            /// <summary>
-            /// 
-            /// </summary>
-            public double Height;
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="width"></param>
-            /// <param name="height"></param>
-            public Size(double width, double height)
-            {
-                Width = width;
-                Height = height;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public struct Settings
         {
             /// <summary>
             /// 
             /// </summary>
-            public Point Origin;
+            public Point2 Origin;
             /// <summary>
             /// 
             /// </summary>
-            public Size GridSize;
+            public Size2 GridSize;
             /// <summary>
             /// 
             /// </summary>
-            public Size CellSize;
+            public Size2 CellSize;
             /// <summary>
             /// 
             /// </summary>
@@ -101,9 +51,9 @@ namespace TestEDITOR
             {
                 return new Settings()
                 {
-                    Origin = new Point(originX, originY),
-                    GridSize = new Size(gridWidth, gridHeight),
-                    CellSize = new Size(cellWidth, cellHeight)
+                    Origin = Point2.Create(originX, originY),
+                    GridSize = Size2.Create(gridWidth, gridHeight),
+                    CellSize = Size2.Create(cellWidth, cellHeight)
                 };
             }
         }
