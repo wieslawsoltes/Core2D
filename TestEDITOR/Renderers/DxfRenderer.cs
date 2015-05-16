@@ -861,10 +861,13 @@ namespace TestDXF
             }
             else
             {
-                var dxfArc = CreateArc(a.X, a.Y, a.RadiusX, a.StartAngle, a.EndAngle, layer);
+                var dxfArc = CreateArc(
+                    a.X, a.Y, 
+                    a.RadiusX, 
+                    a.StartAngle, a.EndAngle, 
+                    layer);
                 entities.Entities.Add(dxfArc);
             }
-
         }
 
         /// <summary>
