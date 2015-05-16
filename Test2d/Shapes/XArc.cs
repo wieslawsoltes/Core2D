@@ -14,6 +14,8 @@ namespace Test2d
     {
         private XPoint _point1;
         private XPoint _point2;
+        private XPoint _point3;
+        private XPoint _point4;
         private bool _isFilled;
 
         /// <summary>
@@ -44,6 +46,38 @@ namespace Test2d
                 {
                     _point2 = value;
                     Notify("Point2");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public XPoint Point3
+        {
+            get { return _point3; }
+            set
+            {
+                if (value != _point3)
+                {
+                    _point3 = value;
+                    Notify("Point3");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public XPoint Point4
+        {
+            get { return _point4; }
+            set
+            {
+                if (value != _point4)
+                {
+                    _point4 = value;
+                    Notify("Point4");
                 }
             }
         }
