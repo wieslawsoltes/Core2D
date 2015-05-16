@@ -649,28 +649,61 @@ namespace TestEDITOR
                 },
                 () => IsEditMode());
 
-            _commands.AddPropertyCommand = new DelegateCommand(
-                () =>
+            _commands.AddPropertyCommand = new DelegateCommand<object>(
+                (owner) =>
                 {
-                    if (_editor.Renderer.SelectedShape != null)
+                    if (owner != null)
                     {
-                        _history.Snapshot(_editor.Project);
-                        _editor.Renderer.SelectedShape.Properties.Add(ShapeProperty.Create("New", ""));
+                        if (owner is BaseShape)
+                        {
+                            _history.Snapshot(_editor.Project);
+                            (owner as BaseShape).Properties.Add(ShapeProperty.Create("New", ""));
+                        }
+                        else if (owner is Container)
+                        {
+                            _history.Snapshot(_editor.Project);
+                            (owner as Container).Properties.Add(ShapeProperty.Create("New", ""));
+                        }
                     }
                 },
-                () => IsEditMode());
-            
+                (owner) => IsEditMode());
+
             _commands.RemovePropertyCommand = new DelegateCommand<object>(
-                (property) =>
+                (parameter) =>
                 {
-                    if (property is ShapeProperty)
+                    if (parameter != null && parameter is ShapePropertyParameter)
                     {
-                        _history.Snapshot(_editor.Project);
-                        _editor.Renderer.SelectedShape.Properties.Remove(property as ShapeProperty);
+                        var owner = (parameter as ShapePropertyParameter).Owner;
+                        var property = (parameter as ShapePropertyParameter).Property;
+
+                        if (owner is BaseShape)
+                        {
+                            _history.Snapshot(_editor.Project);
+                            (owner as BaseShape).Properties.Remove(property);
+                        }
+                        else if (owner is Container)
+                        {
+                            _history.Snapshot(_editor.Project);
+                            (owner as Container).Properties.Remove(property);
+                        }
                     }
                 },
-                (property) => IsEditMode());
-            
+                (parameter) => IsEditMode());
+
+            _commands.AddRecordCommand = new DelegateCommand<object>(
+                (database) =>
+                {
+                    // TODO:
+                },
+                (database) => IsEditMode());
+
+            _commands.RemoveRecordCommand = new DelegateCommand<object>(
+                (record) =>
+                {
+                    // TODO:
+                },
+                (record) => IsEditMode());
+
             _commands.AddGroupLibraryCommand = new DelegateCommand(
                 () =>
                 {
@@ -717,7 +750,7 @@ namespace TestEDITOR
                 () =>
                 {
                     _history.Snapshot(_editor.Project);
-                    _editor.Container.Layers.Add(Layer.Create("New"));
+                    _editor.Container.Layers.Add(Layer.Create("New", _editor.Container));
                 },
                 () => IsEditMode());
 
@@ -863,6 +896,7 @@ namespace TestEDITOR
                         {
                             _editor.Project.CurrentDocument = document;
                             _editor.Project.CurrentContainer = selected;
+                            _editor.Project.CurrentContainer.Invalidate();
                         }
                     }
                     else if (item is Document)
@@ -1837,9 +1871,12 @@ namespace TestEDITOR
             (_commands.SnapToGridCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.TryToConnectCommand as DelegateCommand).RaiseCanExecuteChanged();
 
-            (_commands.AddPropertyCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.AddPropertyCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.RemovePropertyCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            
+
+            (_commands.AddRecordCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.RemoveRecordCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+
             (_commands.AddGroupLibraryCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.RemoveGroupLibraryCommand as DelegateCommand).RaiseCanExecuteChanged();
 
