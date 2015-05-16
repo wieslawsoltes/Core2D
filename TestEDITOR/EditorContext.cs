@@ -209,15 +209,29 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="container"></param>
+        private void RenameTemplateLayers(Container container)
+        {
+            foreach (var layer in container.Layers)
+            {
+                layer.Name = string.Concat("Template", layer.Name);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="project"></param>
         /// <returns></returns>
         public Container EmptyTemplate(Project project)
         {
             var container = Container.Create("Empty");
 
+            RenameTemplateLayers(container);
+
             return container;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -226,6 +240,8 @@ namespace TestEDITOR
         public Container GridTemplate(Project project)
         {
             var container = Container.Create("Grid");
+
+            RenameTemplateLayers(container);
 
             var gs = project
                 .StyleGroups.FirstOrDefault(g => g.Name == "Template")
