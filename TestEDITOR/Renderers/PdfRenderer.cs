@@ -404,6 +404,23 @@ namespace TestPDF
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="container"></param>
+        private void DrawBackground(XGraphics gfx, Test2d.Container container)
+        {
+            var rect = Test2d.Rect2.Create(0, 0, container.Width, container.Height);
+            gfx.DrawRectangle(
+                null,
+                ToXSolidBrush(container.Background),
+                _scaleToPage(rect.X),
+                _scaleToPage(rect.Y),
+                _scaleToPage(rect.Width),
+                _scaleToPage(rect.Height));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void ClearCache()
         {
         }
@@ -418,6 +435,8 @@ namespace TestPDF
         {
             if (container.Template != null)
             {
+                DrawBackground(gfx as XGraphics, container.Template);
+
                 foreach (var layer in container.Template.Layers)
                 {
                     if (layer.IsVisible)
@@ -426,6 +445,8 @@ namespace TestPDF
                     }
                 }
             }
+
+            DrawBackground(gfx as XGraphics, container);
 
             foreach (var layer in container.Layers)
             {
