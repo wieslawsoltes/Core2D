@@ -1176,6 +1176,9 @@
                     </TextBox>
                 </Grid>
             </Expander>
+            <Expander Header="Background" IsExpanded="False">
+                <ContentControl Content="{Binding Background}"/>
+            </Expander>
             <Expander Header="Template" IsExpanded="False">
                 <Grid>
                     <Grid.RowDefinitions>
