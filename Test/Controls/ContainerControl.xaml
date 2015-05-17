@@ -6,6 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:Test.Controls"
+             xmlns:converters="clr-namespace:Test.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="810"
              Width="{Binding Editor.Project.CurrentContainer.Width}" Height="{Binding Editor.Project.CurrentContainer.Height}">
@@ -28,9 +29,14 @@
     </UserControl.InputBindings>
     <Grid Width="{Binding Editor.Project.CurrentContainer.Width}" Height="{Binding Editor.Project.CurrentContainer.Height}" Background="Transparent">
         <ItemsControl ItemsSource="{Binding Editor.Project.CurrentContainer.Template.Layers}">
+            <ItemsControl.Resources>
+                <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
+            </ItemsControl.Resources>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas Width="{Binding Editor.Project.CurrentContainer.Template.Width}" Height="{Binding Editor.Project.CurrentContainer.Template.Height}" Background="Transparent"/>
+                    <Canvas Width="{Binding Editor.Project.CurrentContainer.Template.Width}" 
+                            Height="{Binding Editor.Project.CurrentContainer.Template.Height}" 
+                            Background="{Binding Editor.Project.CurrentContainer.Template.Background, Converter={StaticResource ArgbColorToBrushConverter}}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
@@ -48,9 +54,14 @@
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>
         <ItemsControl ItemsSource="{Binding Editor.Project.CurrentContainer.Layers}">
+            <ItemsControl.Resources>
+                <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
+            </ItemsControl.Resources>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas Width="{Binding Editor.Project.CurrentContainer.Width}" Height="{Binding Editor.Project.CurrentContainer.Height}" Background="Transparent"/>
+                    <Canvas Width="{Binding Editor.Project.CurrentContainer.Width}" 
+                            Height="{Binding Editor.Project.CurrentContainer.Height}" 
+                            Background="{Binding Editor.Project.CurrentContainer.Background, Converter={StaticResource ArgbColorToBrushConverter}}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
