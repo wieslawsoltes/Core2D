@@ -4,22 +4,57 @@ using System;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfEllipse : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Layer { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Color { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 CenterPoint { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 EndPoint { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 ExtrusionDirection { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double Ratio { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double StartParameter { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double EndParameter { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfEllipse(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Defaults()
         {
             Layer = "0";
@@ -32,6 +67,10 @@ namespace Dxf
             EndParameter = 2.0 * Math.PI;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();

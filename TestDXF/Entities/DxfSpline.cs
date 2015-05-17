@@ -3,32 +3,81 @@ using System;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfSpline : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Layer { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Color { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 NormalVector { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfSplineFlags SplineFlags { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public int SplineCurveDegree { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double KnotTolerance { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double ControlPointTolerance { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double FitTolerance { get; set; }
-        
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 StartTangent { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 EndTangent { get; set; }
-        
+        /// <summary>
+        /// 
+        /// </summary>
         public double[] Knots { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double[] Weights { get; set; }
-        
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3[] ControlPoints { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3[] FitPoints { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfSpline(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public void Defaults()
         {
             NormalVector = new DxfVector3(0.0, 0.0, 1.0);
@@ -63,6 +112,10 @@ namespace Dxf
             FitPoints = default(DxfVector3[]);
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();

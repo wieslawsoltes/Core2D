@@ -4,20 +4,49 @@ using System;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfCircle : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Layer { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Color { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double Thickness { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 CenterPoint { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double Radius { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 ExtrusionDirection { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfCircle(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Defaults()
         {
             Layer = "0";
@@ -28,6 +57,10 @@ namespace Dxf
             ExtrusionDirection = new DxfVector3(0.0, 0.0, 1.0);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();

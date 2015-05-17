@@ -5,26 +5,70 @@ using System.Collections.Generic;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfInsert : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string BlockName { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Layer { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 InsertionPoint { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 ScaleFactor { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double RotationAngle { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public int ColumnCount { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public int RowCount { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double ColumnSpacing { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double RowSpacing { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 ExtrusionDirection { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<DxfAttrib> Attributes { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfInsert(DxfAcadVer version, int id)
             : base(version, id)
         {
             Attributes = new List<DxfAttrib>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Defaults()
         {
             BlockName = string.Empty;
@@ -39,6 +83,10 @@ namespace Dxf
             ExtrusionDirection = new DxfVector3(0.0, 0.0, 1.0);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();

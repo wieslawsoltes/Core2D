@@ -4,33 +4,101 @@ using System;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfAttdef : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public double Thickness { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Layer { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Color { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 FirstAlignment { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double TextHeight { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string DefaultValue { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double TextRotation { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double ScaleFactorX { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double ObliqueAngle { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string TextStyle { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfTextGenerationFlags TextGenerationFlags { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfHorizontalTextJustification HorizontalTextJustification { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 SecondAlignment { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 ExtrusionDirection { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Prompt { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Tag { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfAttributeFlags AttributeFlags { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public int FieldLength { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVerticalTextJustification VerticalTextJustification { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfAttdef(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Defaults()
         {
             Thickness = 0.0;
@@ -54,6 +122,10 @@ namespace Dxf
             VerticalTextJustification = DxfVerticalTextJustification.Default;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();

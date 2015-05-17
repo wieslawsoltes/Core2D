@@ -4,27 +4,66 @@ using System;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfLwpolyline : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Layer { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Color { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double Thickness { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfLwpolylineFlags LwpolylineFlags { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double ConstantWidth { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double Elevation { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfLwpolylineVertex [] Vertices { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 ExtrusionDirection { get; set; }
     
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfLwpolyline(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public void Defaults()
         {
             // TODO:
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();
