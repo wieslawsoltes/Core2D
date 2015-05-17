@@ -4,20 +4,49 @@ using System;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfLtype : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfLtypeStandardFlags LtypeStandardFlags { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Description { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public int DashLengthItems { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double TotalPatternLength { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double[] DashLengths { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfLtype(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Defaults()
         {
             Name = string.Empty;
@@ -28,6 +57,10 @@ namespace Dxf
             DashLengths = default(double[]);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();

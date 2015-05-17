@@ -4,22 +4,43 @@ using System;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfDimstyle : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfDimstyleStandardFlags DimstyleStandardFlags { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfDimstyle(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Defaults()
         {
             Name = string.Empty;
             DimstyleStandardFlags = DxfDimstyleStandardFlags.Default;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();

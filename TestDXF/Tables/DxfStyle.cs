@@ -4,24 +4,65 @@ using System;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfStyle : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfStyleFlags StyleStandardFlags { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double FixedTextHeight { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double WidthFactor { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double ObliqueAngle { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfTextGenerationFlags TextGenerationFlags { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double LastHeightUsed { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string PrimaryFontFile { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string BifFontFile { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string PrimatyFontDescription { get; set; }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfStyle(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Defaults()
         {
             Name = string.Empty;
@@ -36,6 +77,10 @@ namespace Dxf
             PrimatyFontDescription = string.Empty;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();

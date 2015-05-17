@@ -4,21 +4,53 @@ using System;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfLayer : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfLayerStandardFlags LayerStandardFlags { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Color { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string LineType { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public bool PlottingFlag { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfLineWeight LineWeight { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string PlotStyleNameHandle { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfLayer(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Defaults()
         {
             Name = string.Empty;
@@ -30,6 +62,10 @@ namespace Dxf
             PlotStyleNameHandle = "0";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();

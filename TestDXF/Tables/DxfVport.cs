@@ -4,22 +4,43 @@ using System;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfVport : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVportStandardFlags VportStandardFlags { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfVport(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Defaults()
         {
             Name = string.Empty;
             VportStandardFlags = DxfVportStandardFlags.Default;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();

@@ -4,34 +4,105 @@ using System;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfView : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfViewStandardFlags ViewStandardFlags { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double Height { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double Width { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector2 Center { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 ViewDirection { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 TargetPoint { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double LensLength { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double FrontClippingPlane { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double BackClippingPlane { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double TwistAngle { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfViewMode ViewMode { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfViewRenderMode RenderMode { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public bool HaveUcsAssociated { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 UcsOrigin { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 UcsXAxisDirection { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 UcsYAxisDirection { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfOrthographicViewType UcsOrthographicViewType { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string NamedUcsHandle { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string BaseUcsHandle { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfView(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Defaults()
         {
             Name = string.Empty;
@@ -56,6 +127,10 @@ namespace Dxf
             BaseUcsHandle = default(string);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();

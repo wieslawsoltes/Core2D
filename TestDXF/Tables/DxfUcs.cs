@@ -4,24 +4,65 @@ using System;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfUcs : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfTableStandardFlags TableStandardFlags { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 Origin { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 XAxisDirection { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 YAxisDirection { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfOrthographicViewType OrthographicViewType { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double Elevation { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string BaseUcsHandle { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfOrthographicType[] OrthographicType { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3[] OrthographicOrigin { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfUcs(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Defaults()
         {
             Name = string.Empty;
@@ -36,6 +77,10 @@ namespace Dxf
             OrthographicOrigin = default(DxfVector3[]);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();
