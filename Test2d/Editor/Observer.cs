@@ -19,6 +19,7 @@ namespace Test2d
     public class Observer
     {
         private readonly Editor _editor;
+        private readonly Action _invalidateContainer;
         private readonly Action _invalidateStyles;
         private readonly Action _invalidateLayers;
         private readonly Action _invalidateShapes;
@@ -30,6 +31,10 @@ namespace Test2d
         public Observer(Editor editor)
         {
             _editor = editor;
+
+            _invalidateContainer = () =>
+            {
+            };
 
             _invalidateStyles = () =>
             {
@@ -336,6 +341,44 @@ namespace Test2d
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void ContainerObserver(
+            object sender,
+            System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Debug(
+                "Container: " +
+                (sender is Container ? (sender as Container).Name : sender.GetType().ToString()) +
+                ", Property: " +
+                e.PropertyName);
+            _invalidateContainer();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ContainerBackgroudObserver(
+            object sender,
+            System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Debug(
+                "Background: " +
+                sender.GetType().ToString() +
+                ", Property: " +
+                e.PropertyName);
+            _editor.Project.CurrentContainer.Notify("Background");
+            if (_editor.Project.CurrentContainer.Template != null)
+            {
+                _editor.Project.CurrentContainer.Template.Notify("Background");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StyleGroupObserver(
             object sender,
             System.ComponentModel.PropertyChangedEventArgs e)
@@ -595,6 +638,8 @@ namespace Test2d
         /// <param name="container"></param>
         private void Add(Container container)
         {
+            //container.PropertyChanged += ContainerObserver;
+            container.Background.PropertyChanged += ContainerBackgroudObserver;
             Debug("Add Container: " + container.Name);
             Add(container.Layers);
 
@@ -665,6 +710,8 @@ namespace Test2d
         /// <param name="container"></param>
         private void Remove(Container container)
         {
+            //container.PropertyChanged -= ContainerObserver;
+            container.Background.PropertyChanged -= ContainerBackgroudObserver;
             Debug("Remove Container: " + container.Name);
             Add(container.Layers);
 
