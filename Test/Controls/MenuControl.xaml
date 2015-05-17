@@ -238,17 +238,17 @@
         <MenuItem Header="_Options">
             <MenuItem Header="Default is _Filled" 
                       IsCheckable="True" 
-                      IsChecked="{Binding Editor.Project.DefaultIsFilled, Mode=OneWay}"
+                      IsChecked="{Binding Editor.Project.Options.DefaultIsFilled, Mode=OneWay}"
                       Command="{Binding Commands.DefaultIsFilledCommand}" InputGestureText="F"/>
             <Separator/>
             <MenuItem Header="_Snap to Grid" 
                       IsCheckable="True" 
-                      IsChecked="{Binding Editor.Project.SnapToGrid, Mode=OneWay}"
+                      IsChecked="{Binding Editor.Project.Options.SnapToGrid, Mode=OneWay}"
                       Command="{Binding Commands.SnapToGridCommand}" InputGestureText="G"/>
             <Separator/>
             <MenuItem Header="Try To _Connect" 
                       IsCheckable="True" 
-                      IsChecked="{Binding Editor.Project.TryToConnect, Mode=OneWay}"
+                      IsChecked="{Binding Editor.Project.Options.TryToConnect, Mode=OneWay}"
                       Command="{Binding Commands.TryToConnectCommand}" InputGestureText="C"/>
         </MenuItem>
         <MenuItem Header="S_imulation">

@@ -92,6 +92,7 @@
     <Compile Include="Core\GroupLibrary.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Project\Document.cs" />
+    <Compile Include="Project\Options.cs" />
     <Compile Include="Project\Project.cs" />
     <Compile Include="Math\GdiArc.cs" />
     <Compile Include="Math\MonotoneChain.cs" />

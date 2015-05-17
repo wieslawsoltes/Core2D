@@ -675,8 +675,8 @@ namespace Test2d
         /// <param name="y"></param>
         public void MoveSelection(double x, double y)
         {
-            double sx = _project.SnapToGrid ? Snap(x, _project.SnapX) : x;
-            double sy = _project.SnapToGrid ? Snap(y, _project.SnapY) : y;
+            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
+            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
 
             double dx = sx - _startX;
             double dy = sy - _startY;
@@ -822,7 +822,7 @@ namespace Test2d
         {
             var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
 
-            var result = ShapeBounds.HitTest(container, rect, _project.HitTreshold);
+            var result = ShapeBounds.HitTest(container, rect, _project.Options.HitTreshold);
             if (result != null)
             {
                 if (result.Count > 0)
@@ -853,7 +853,7 @@ namespace Test2d
         /// <returns></returns>
         public bool TryToSelectShape(Container container, double x, double y)
         {
-            var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null)
             {
                 Select(container, result);
@@ -873,7 +873,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectStart(XLine line, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 line.Start = result as XPoint;
@@ -888,7 +888,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectEnd(XLine line, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 line.End = result as XPoint;
@@ -903,7 +903,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectTopLeft(XRectangle rectangle, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 rectangle.TopLeft = result as XPoint;
@@ -918,7 +918,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectBottomRight(XRectangle rectangle, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 rectangle.BottomRight = result as XPoint;
@@ -933,7 +933,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectTopLeft(XEllipse ellipse, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 ellipse.TopLeft = result as XPoint;
@@ -948,7 +948,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectBottomRight(XEllipse ellipse, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 ellipse.BottomRight = result as XPoint;
@@ -963,7 +963,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectPoint1(XArc arc, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 arc.Point1 = result as XPoint;
@@ -978,7 +978,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectPoint2(XArc arc, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 arc.Point2 = result as XPoint;
@@ -993,7 +993,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectPoint3(XArc arc, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 arc.Point3 = result as XPoint;
@@ -1008,7 +1008,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectPoint4(XArc arc, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 arc.Point4 = result as XPoint;
@@ -1023,7 +1023,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectPoint1(XBezier bezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 bezier.Point1 = result as XPoint;
@@ -1038,7 +1038,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectPoint2(XBezier bezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 bezier.Point2 = result as XPoint;
@@ -1053,7 +1053,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectPoint3(XBezier bezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 bezier.Point3 = result as XPoint;
@@ -1068,7 +1068,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectPoint4(XBezier bezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 bezier.Point4 = result as XPoint;
@@ -1083,7 +1083,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectPoint1(XQBezier qbezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 qbezier.Point1 = result as XPoint;
@@ -1098,7 +1098,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectPoint2(XQBezier qbezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 qbezier.Point2 = result as XPoint;
@@ -1113,7 +1113,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectPoint3(XQBezier qbezier, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 qbezier.Point3 = result as XPoint;
@@ -1128,7 +1128,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectTopLeft(XText text, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 text.TopLeft = result as XPoint;
@@ -1143,7 +1143,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectBottomRight(XText text, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 text.BottomRight = result as XPoint;
@@ -1158,7 +1158,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectTopLeft(XImage image, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 image.TopLeft = result as XPoint;
@@ -1173,7 +1173,7 @@ namespace Test2d
         /// <param name="y"></param>
         public void TryToConnectBottomRight(XImage image, double x, double y)
         {
-            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.HitTreshold);
+            var result = ShapeBounds.HitTest(Container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 image.BottomRight = result as XPoint;
@@ -1264,11 +1264,11 @@ namespace Test2d
                         if (_renderer.SelectedShape == null
                             && _renderer.SelectedShapes != null)
                         {
-                            var result = ShapeBounds.HitTest(Container, new Vector2(sx, sy), _project.HitTreshold);
+                            var result = ShapeBounds.HitTest(Container, new Vector2(sx, sy), _project.Options.HitTreshold);
                             if (result != null)
                             {
-                                _startX = _project.SnapToGrid ? Snap(sx, _project.SnapX) : sx;
-                                _startY = _project.SnapToGrid ? Snap(sy, _project.SnapY) : sy;
+                                _startX = _project.Options.SnapToGrid ? Snap(sx, _project.Options.SnapX) : sx;
+                                _startY = _project.Options.SnapToGrid ? Snap(sy, _project.Options.SnapY) : sy;
                                 _historyX = _startX;
                                 _historyY = _startY;   
                                 _history.Hold(_project);
@@ -1280,8 +1280,8 @@ namespace Test2d
 
                         if (TryToSelectShape(Container, sx, sy))
                         {
-                            _startX = _project.SnapToGrid ? Snap(sx, _project.SnapX) : sx;
-                            _startY = _project.SnapToGrid ? Snap(sy, _project.SnapY) : sy;
+                            _startX = _project.Options.SnapToGrid ? Snap(sx, _project.Options.SnapX) : sx;
+                            _startY = _project.Options.SnapToGrid ? Snap(sy, _project.Options.SnapY) : sy;
                             _historyX = _startX;
                             _historyY = _startY;   
                             _history.Hold(_project);
@@ -1292,7 +1292,7 @@ namespace Test2d
 
                         _shape = XRectangle.Create(
                             sx, sy,
-                            _project.SelectionStyle,
+                            _project.Options.SelectionStyle,
                             null,
                             true);
                         Container.WorkingLayer.Shapes.Add(_shape);
@@ -1326,8 +1326,8 @@ namespace Test2d
                     {
                         if (IsSelectionAvailable())
                         {
-                            double x = _project.SnapToGrid ? Snap(sx, _project.SnapX) : sx;
-                            double y = _project.SnapToGrid ? Snap(sy, _project.SnapY) : sy;
+                            double x = _project.Options.SnapToGrid ? Snap(sx, _project.Options.SnapX) : sx;
+                            double y = _project.Options.SnapToGrid ? Snap(sy, _project.Options.SnapY) : sy;
                             if (_historyX != x || _historyY != y)
                             {
                                 _history.Commit();
@@ -1381,7 +1381,7 @@ namespace Test2d
                             sx, sy,
                             Project.CurrentStyleGroup.CurrentStyle,
                             Project.PointShape);
-                        if (_project.TryToConnect)
+                        if (_project.Options.TryToConnect)
                         {
                             TryToConnectStart(_shape as XLine, sx, sy);
                         }
@@ -1397,7 +1397,7 @@ namespace Test2d
                         {
                             line.End.X = sx;
                             line.End.Y = sy;
-                            if (_project.TryToConnect)
+                            if (_project.Options.TryToConnect)
                             {
                                 TryToConnectEnd(_shape as XLine, sx, sy);
                             }
@@ -1422,8 +1422,8 @@ namespace Test2d
                             sx, sy,
                             Project.CurrentStyleGroup.CurrentStyle,
                             Project.PointShape,
-                            _project.DefaultIsFilled);
-                        if (_project.TryToConnect)
+                            _project.Options.DefaultIsFilled);
+                        if (_project.Options.TryToConnect)
                         {
                             TryToConnectTopLeft(_shape as XRectangle, sx, sy);
                         }
@@ -1439,7 +1439,7 @@ namespace Test2d
                         {
                             rectangle.BottomRight.X = sx;
                             rectangle.BottomRight.Y = sy;
-                            if (_project.TryToConnect)
+                            if (_project.Options.TryToConnect)
                             {
                                 TryToConnectBottomRight(_shape as XRectangle, sx, sy);
                             }
@@ -1464,8 +1464,8 @@ namespace Test2d
                             sx, sy,
                             Project.CurrentStyleGroup.CurrentStyle,
                             Project.PointShape,
-                            _project.DefaultIsFilled);
-                        if (_project.TryToConnect)
+                            _project.Options.DefaultIsFilled);
+                        if (_project.Options.TryToConnect)
                         {
                             TryToConnectTopLeft(_shape as XEllipse, sx, sy);
                         }
@@ -1481,7 +1481,7 @@ namespace Test2d
                         {
                             ellipse.BottomRight.X = sx;
                             ellipse.BottomRight.Y = sy;
-                            if (_project.TryToConnect)
+                            if (_project.Options.TryToConnect)
                             {
                                 TryToConnectBottomRight(_shape as XEllipse, sx, sy);
                             }
@@ -1506,8 +1506,8 @@ namespace Test2d
                             sx, sy,
                             Project.CurrentStyleGroup.CurrentStyle,
                             Project.PointShape,
-                            _project.DefaultIsFilled);
-                        if (_project.TryToConnect)
+                            _project.Options.DefaultIsFilled);
+                        if (_project.Options.TryToConnect)
                         {
                             TryToConnectPoint1(_shape as XArc, sx, sy);
                         }
@@ -1530,7 +1530,7 @@ namespace Test2d
                             arc.Point2.Y = sy;
                             arc.Point3.X = sx;
                             arc.Point3.Y = sy;
-                            if (_project.TryToConnect)
+                            if (_project.Options.TryToConnect)
                             {
                                 TryToConnectPoint2(_shape as XArc, sx, sy);
                             }
@@ -1553,7 +1553,7 @@ namespace Test2d
                             arc.Point3.Y = sy;
                             arc.Point4.X = sx;
                             arc.Point4.Y = sy;
-                            if (_project.TryToConnect)
+                            if (_project.Options.TryToConnect)
                             {
                                 TryToConnectPoint3(_shape as XArc, sx, sy);
                             }
@@ -1575,7 +1575,7 @@ namespace Test2d
                         {
                             arc.Point4.X = sx;
                             arc.Point4.Y = sy;
-                            if (_project.TryToConnect)
+                            if (_project.Options.TryToConnect)
                             {
                                 TryToConnectPoint4(_shape as XArc, sx, sy);
                             }
@@ -1605,8 +1605,8 @@ namespace Test2d
                             sx, sy,
                             Project.CurrentStyleGroup.CurrentStyle,
                             Project.PointShape,
-                            _project.DefaultIsFilled);
-                        if (_project.TryToConnect)
+                            _project.Options.DefaultIsFilled);
+                        if (_project.Options.TryToConnect)
                         {
                             TryToConnectPoint1(_shape as XBezier, sx, sy);
                         }
@@ -1626,7 +1626,7 @@ namespace Test2d
                             bezier.Point3.Y = sy;
                             bezier.Point4.X = sx;
                             bezier.Point4.Y = sy;
-                            if (_project.TryToConnect)
+                            if (_project.Options.TryToConnect)
                             {
                                 TryToConnectPoint4(_shape as XBezier, sx, sy);
                             }
@@ -1644,7 +1644,7 @@ namespace Test2d
                             bezier.Point2.Y = sy;
                             bezier.Point3.X = sx;
                             bezier.Point3.Y = sy;
-                            if (_project.TryToConnect)
+                            if (_project.Options.TryToConnect)
                             {
                                 TryToConnectPoint3(_shape as XBezier, sx, sy);
                             }
@@ -1660,7 +1660,7 @@ namespace Test2d
                         {
                             bezier.Point2.X = sx;
                             bezier.Point2.Y = sy;
-                            if (_project.TryToConnect)
+                            if (_project.Options.TryToConnect)
                             {
                                 TryToConnectPoint2(_shape as XBezier, sx, sy);
                             }
@@ -1685,8 +1685,8 @@ namespace Test2d
                             sx, sy,
                             Project.CurrentStyleGroup.CurrentStyle,
                             Project.PointShape,
-                            _project.DefaultIsFilled);
-                        if (_project.TryToConnect)
+                            _project.Options.DefaultIsFilled);
+                        if (_project.Options.TryToConnect)
                         {
                             TryToConnectPoint1(_shape as XQBezier, sx, sy);
                         }
@@ -1704,7 +1704,7 @@ namespace Test2d
                             qbezier.Point2.Y = sy;
                             qbezier.Point3.X = sx;
                             qbezier.Point3.Y = sy;
-                            if (_project.TryToConnect)
+                            if (_project.Options.TryToConnect)
                             {
                                 TryToConnectPoint3(_shape as XQBezier, sx, sy);
                             }
@@ -1720,7 +1720,7 @@ namespace Test2d
                         {
                             qbezier.Point2.X = sx;
                             qbezier.Point2.Y = sy;
-                            if (_project.TryToConnect)
+                            if (_project.Options.TryToConnect)
                             {
                                 TryToConnectPoint2(_shape as XQBezier, sx, sy);
                             }
@@ -1746,8 +1746,8 @@ namespace Test2d
                             Project.CurrentStyleGroup.CurrentStyle,
                             Project.PointShape,
                             "Text",
-                            _project.DefaultIsFilled);
-                        if (_project.TryToConnect)
+                            _project.Options.DefaultIsFilled);
+                        if (_project.Options.TryToConnect)
                         {
                             TryToConnectTopLeft(_shape as XText, sx, sy);
                         }
@@ -1763,7 +1763,7 @@ namespace Test2d
                         {
                             text.BottomRight.X = sx;
                             text.BottomRight.Y = sy;
-                            if (_project.TryToConnect)
+                            if (_project.Options.TryToConnect)
                             {
                                 TryToConnectBottomRight(_shape as XText, sx, sy);
                             }
@@ -1795,8 +1795,8 @@ namespace Test2d
                             Project.CurrentStyleGroup.CurrentStyle,
                             Project.PointShape,
                             uri,
-                            _project.DefaultIsFilled);
-                        if (_project.TryToConnect)
+                            _project.Options.DefaultIsFilled);
+                        if (_project.Options.TryToConnect)
                         {
                             TryToConnectTopLeft(_shape as XImage, sx, sy);
                         }
@@ -1812,7 +1812,7 @@ namespace Test2d
                         {
                             image.BottomRight.X = sx;
                             image.BottomRight.Y = sy;
-                            if (_project.TryToConnect)
+                            if (_project.Options.TryToConnect)
                             {
                                 TryToConnectBottomRight(_shape as XImage, sx, sy);
                             }
@@ -2262,8 +2262,8 @@ namespace Test2d
         /// <param name="y"></param>
         public void LeftDown(double x, double y)
         {
-            double sx = _project.SnapToGrid ? Snap(x, _project.SnapX) : x;
-            double sy = _project.SnapToGrid ? Snap(y, _project.SnapY) : y;
+            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
+            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
             switch (CurrentTool)
             {
                 case Tool.None:
@@ -2328,8 +2328,8 @@ namespace Test2d
         /// <param name="y"></param>
         public void LeftUp(double x, double y)
         {
-            double sx = _project.SnapToGrid ? Snap(x, _project.SnapX) : x;
-            double sy = _project.SnapToGrid ? Snap(y, _project.SnapY) : y;
+            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
+            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
             switch (CurrentTool)
             {
                 case Tool.None:
@@ -2373,8 +2373,8 @@ namespace Test2d
                 return;
             }
 
-            double sx = _project.SnapToGrid ? Snap(x, _project.SnapX) : x;
-            double sy = _project.SnapToGrid ? Snap(y, _project.SnapY) : y;
+            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
+            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
             switch (CurrentTool)
             {
                 case Tool.None:
@@ -2436,8 +2436,8 @@ namespace Test2d
         /// <param name="y"></param>
         public void RightUp(double x, double y)
         {
-            double sx = _project.SnapToGrid ? Snap(x, _project.SnapX) : x;
-            double sy = _project.SnapToGrid ? Snap(y, _project.SnapY) : y;
+            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
+            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
             switch (CurrentTool)
             {
                 case Tool.None:
@@ -2472,8 +2472,8 @@ namespace Test2d
         /// <param name="y"></param>
         public void Move(double x, double y)
         {
-            double sx = _project.SnapToGrid ? Snap(x, _project.SnapX) : x;
-            double sy = _project.SnapToGrid ? Snap(y, _project.SnapY) : y;
+            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
+            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
             switch (CurrentTool)
             {
                 case Tool.None:

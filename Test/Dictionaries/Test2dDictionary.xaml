@@ -1420,13 +1420,13 @@
                                VerticalAlignment="Center">
                     </TextBlock>
                     <CheckBox Content=""
-                              IsChecked="{Binding SnapToGrid}"
+                              IsChecked="{Binding Options.SnapToGrid}"
                               Grid.Row="0" 
                               Grid.Column="1" 
                               Grid.ColumnSpan="2"
                               Margin="0,2,0,2">
                     </CheckBox>
-                    <TextBox Text="{Binding SnapX, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                    <TextBox Text="{Binding Options.SnapX, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                              BorderBrush="{x:Null}" 
                              Grid.Row="1" 
                              Grid.Column="1" 
@@ -1434,7 +1434,7 @@
                              TextAlignment="Center" 
                              VerticalAlignment="Center">
                     </TextBox>
-                    <TextBox Text="{Binding SnapY, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                    <TextBox Text="{Binding Options.SnapY, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                              BorderBrush="{x:Null}" 
                              Grid.Row="2" 
                              Grid.Column="1" 
@@ -1442,7 +1442,7 @@
                              TextAlignment="Center" 
                              VerticalAlignment="Center">
                     </TextBox>
-                    <TextBox Text="{Binding HitTreshold, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                    <TextBox Text="{Binding Options.HitTreshold, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                              BorderBrush="{x:Null}" 
                              Grid.Row="3" 
                              Grid.Column="1" 
@@ -1451,14 +1451,14 @@
                              VerticalAlignment="Center">
                     </TextBox>
                     <CheckBox Content=""
-                              IsChecked="{Binding DefaultIsFilled}"
+                              IsChecked="{Binding Options.DefaultIsFilled}"
                               Grid.Row="4" 
                               Grid.Column="1" 
                               Grid.ColumnSpan="2"
                               Margin="0,2,0,2">
                     </CheckBox>
                     <CheckBox Content=""
-                              IsChecked="{Binding TryToConnect}"
+                              IsChecked="{Binding Options.TryToConnect}"
                               Grid.Row="5" 
                               Grid.Column="1" 
                               Grid.ColumnSpan="2"
@@ -1469,7 +1469,7 @@
             <!--
             <Expander Header="Selection" IsExpanded="False">
                 <Control Template="{StaticResource StyleControlTemplateKey}" 
-                         DataContext="{Binding SelectionStyle}" 
+                         DataContext="{Binding Options.SelectionStyle}" 
                          Margin="2">
                 </Control>
             </Expander>
