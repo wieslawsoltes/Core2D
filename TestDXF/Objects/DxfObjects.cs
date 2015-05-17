@@ -5,16 +5,31 @@ using System.Collections.Generic;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfObjects : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<DxfDictionary> Objects { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfObjects(DxfAcadVer version, int id)
             : base(version, id)
         {
             Objects = new List<DxfDictionary>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();

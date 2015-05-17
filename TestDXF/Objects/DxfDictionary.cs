@@ -5,19 +5,42 @@ using System.Collections.Generic;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfDictionary : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string OwnerDictionaryHandle { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public bool HardOwnerFlag { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfDuplicateRecordCloningFlags DuplicateRecordCloningFlags { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public IDictionary<string, string> Entries { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfDictionary(DxfAcadVer version, int id)
             : base(version, id)
         {
             Entries = new Dictionary<string, string>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Defaults()
         {
             OwnerDictionaryHandle = "0";
@@ -26,6 +49,10 @@ namespace Dxf
             Entries = default(IDictionary<string, string>);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();
