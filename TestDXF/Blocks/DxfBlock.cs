@@ -5,23 +5,61 @@ using System.Collections.Generic;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfBlock : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Layer { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfBlockTypeFlags BlockTypeFlags { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfVector3 BasePoint { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string XrefPathName { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Description { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public int EndId { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string EndLayer { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<object> Entities { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfBlock(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Defaults()
         {
             Name = string.Empty;
@@ -35,6 +73,10 @@ namespace Dxf
             Entities = default(IList<object>);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();
