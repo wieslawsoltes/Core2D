@@ -15,6 +15,7 @@ namespace Test2d
         private string _name;
         private double _width;
         private double _height;
+        private ArgbColor _background;
         private IList<ShapeProperty> _properties;
         private IList<Layer> _layers;
         private Container _template;
@@ -66,6 +67,22 @@ namespace Test2d
                 {
                     _height = value;
                     Notify("Height");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ArgbColor Background
+        {
+            get { return _background; }
+            set
+            {
+                if (value != _background)
+                {
+                    _background = value;
+                    Notify("Background");
                 }
             }
         }
@@ -209,6 +226,7 @@ namespace Test2d
                 Name = name,
                 Width = width,
                 Height = height,
+                Background = ArgbColor.Create(0x00, 0xFF, 0xFF, 0xFF),
                 Properties = new ObservableCollection<ShapeProperty>(),
                 Layers = new ObservableCollection<Layer>()
             };
