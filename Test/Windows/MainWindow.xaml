@@ -13,6 +13,9 @@
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextHintingMode="Auto"
         TextOptions.TextRenderingMode="Auto">
+    <Window.Resources>
+        <converters:ZoomScaleConverter x:Key="ZoomScaleConverter"/>
+    </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Command="{Binding Commands.NewCommand}" Gesture="Ctrl+N"/>
         <KeyBinding Command="{Binding Commands.OpenCommand}" Gesture="Ctrl+O"/>
@@ -124,9 +127,6 @@
         <Grid Grid.Row="2" Grid.Column="5"
               Margin="5,2,5,2"
               VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <Grid.Resources>
-                <converters:ZoomScaleConverter x:Key="ZoomScaleConverter"/>
-            </Grid.Resources>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>

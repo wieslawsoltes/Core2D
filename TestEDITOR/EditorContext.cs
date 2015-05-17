@@ -631,21 +631,21 @@ namespace TestEDITOR
             _commands.DefaultIsFilledCommand = new DelegateCommand(
                 () =>
                 {
-                    _editor.DefaultIsFilled = !_editor.DefaultIsFilled;
+                    _editor.Project.DefaultIsFilled = !_editor.Project.DefaultIsFilled;
                 },
                 () => IsEditMode());
 
             _commands.SnapToGridCommand = new DelegateCommand(
                 () =>
                 {
-                    _editor.SnapToGrid = !_editor.SnapToGrid;
+                    _editor.Project.SnapToGrid = !_editor.Project.SnapToGrid;
                 },
                 () => IsEditMode());
 
             _commands.TryToConnectCommand = new DelegateCommand(
                 () =>
                 {
-                    _editor.TryToConnect = !_editor.TryToConnect;
+                    _editor.Project.TryToConnect = !_editor.Project.TryToConnect;
                 },
                 () => IsEditMode());
 
@@ -1442,8 +1442,8 @@ namespace TestEDITOR
         {
             try
             {
-                double sx = _editor.SnapToGrid ? Editor.Snap(x, _editor.SnapX) : x;
-                double sy = _editor.SnapToGrid ? Editor.Snap(y, _editor.SnapY) : y;
+                double sx = _editor.Project.SnapToGrid ? Editor.Snap(x, _editor.Project.SnapX) : x;
+                double sy = _editor.Project.SnapToGrid ? Editor.Snap(y, _editor.Project.SnapY) : y;
 
                 var clone = Clone(group);
                 if (clone != null)
