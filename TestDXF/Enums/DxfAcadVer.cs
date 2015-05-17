@@ -22,26 +22,86 @@ namespace Dxf
     // AC1014 = R14
     // AC1015 = AutoCAD 2000
 
+    /// <summary>
+    /// 
+    /// </summary>
     public enum DxfAcadVer : int
     {
-        AC1006 = 0, // R10
-        AC1009 = 1, // R11 and R12
-        AC1012 = 2, // R13
-        AC1014 = 3, // R14
-        AC1015 = 4, // AutoCAD 2000
-        AC1018 = 5, // AutoCAD 2004
-        AC1021 = 6, // AutoCAD 2007
-        AC1024 = 7, // AutoCAD 2010
-        AC1027 = 8, // AutoCAD 2013
+        /// <summary>
+        /// R10
+        /// </summary>
+        AC1006 = 0,
+        /// <summary>
+        /// R11 and R12
+        /// </summary>
+        AC1009 = 1,
+        /// <summary>
+        /// R13
+        /// </summary>
+        AC1012 = 2,
+        /// <summary>
+        /// R14
+        /// </summary>
+        AC1014 = 3,
+        /// <summary>
+        /// AutoCAD 2000
+        /// </summary>
+        AC1015 = 4,
+        /// <summary>
+        /// AutoCAD 2004
+        /// </summary>
+        AC1018 = 5,
+        /// <summary>
+        /// AutoCAD 2007
+        /// </summary>
+        AC1021 = 6,
+        /// <summary>
+        /// AutoCAD 2010
+        /// </summary>
+        AC1024 = 7,
+        /// <summary>
+        /// AutoCAD 2013
+        /// </summary>
+        AC1027 = 8,
+        /// <summary>
+        /// R10
+        /// </summary>
         R10 = AC1006,
+        /// <summary>
+        /// R11
+        /// </summary>
         R11 = AC1009,
+        /// <summary>
+        /// R12
+        /// </summary>
         R12 = AC1009,
+        /// <summary>
+        /// R13
+        /// </summary>
         R13 = AC1012,
+        /// <summary>
+        /// R14
+        /// </summary>
         R14 = AC1014,
+        /// <summary>
+        /// AutoCAD 2000
+        /// </summary>
         AutoCAD2000 = AC1015,
+        /// <summary>
+        /// AutoCAD 2004
+        /// </summary>
         AutoCAD2004 = AC1018,
+        /// <summary>
+        /// AutoCAD 2007
+        /// </summary>
         AutoCAD2007 = AC1021,
+        /// <summary>
+        /// AutoCAD 2010
+        /// </summary>
         AutoCAD2010 = AC1024,
+        /// <summary>
+        /// AutoCAD 2013
+        /// </summary>
         AutoCAD2013 = AC1027
     }
 }
