@@ -5,15 +5,30 @@ using System.Text;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfHeader : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public int NextAvailableHandle { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfHeader(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();
@@ -25,23 +40,37 @@ namespace Dxf
             return Build();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void Begin()
         {
             Add(0, DxfCodeName.Section);
             Add(2, "HEADER");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
         private void VarName(string name)
         {
             Add(9, name);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
         private void AcadVer(DxfAcadVer version)
         {
             VarName("$ACADVER");
             Add(1, version.ToString());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void Default()
         {
             AcadVer(Version);
@@ -713,6 +742,10 @@ namespace Dxf
             */
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nextAvailableHandle"></param>
         private void End(int nextAvailableHandle)
         {
             if (Version > DxfAcadVer.AC1009)

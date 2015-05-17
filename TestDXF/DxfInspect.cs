@@ -7,13 +7,33 @@ using System.Text;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class DxfInspect
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public const int DxfCodeForType = 0;
+        /// <summary>
+        /// 
+        /// </summary>
         public const int DxfCodeForName = 2;
+        /// <summary>
+        /// 
+        /// </summary>
         public const string DxfCodeNameSection = "SECTION";
+        /// <summary>
+        /// 
+        /// </summary>
         public const string DxfCodeNameEndsec = "ENDSEC";
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static string ToHtml(string path)
         {
             try
@@ -31,6 +51,11 @@ namespace Dxf
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static string Read(string path)
         {
             using (var reader = new System.IO.StreamReader(path))
@@ -39,6 +64,11 @@ namespace Dxf
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public static IList<DxfRawTag> Parse(string text)
         {
             var lines = text.Split("\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray();
@@ -116,7 +146,13 @@ namespace Dxf
 
             return sections;
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sections"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public static string ToHtml(IList<DxfRawTag> sections, string fileName)
         {
             var sb = new StringBuilder();
@@ -207,6 +243,11 @@ namespace Dxf
             return sb.ToString();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dxfPath"></param>
+        /// <param name="htmlPath"></param>
         public static void Convert(string dxfPath, string htmlPath)
         {
             try
@@ -221,6 +262,11 @@ namespace Dxf
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="text"></param>
         public static void Save(string path, string text)
         {
             try

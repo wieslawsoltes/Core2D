@@ -7,14 +7,35 @@ using System.Text;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfRawTag
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsEnabled { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public int GroupCode { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string DataElement { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfRawTag Parent { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<DxfRawTag> Children { get; set; }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public string Dxf
         {
             get
@@ -25,6 +46,11 @@ namespace Dxf
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="sb"></param>
         private static void ToDxf(DxfRawTag tag, StringBuilder sb)
         {
             if (tag.IsEnabled && sb != null)
@@ -47,11 +73,18 @@ namespace Dxf
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfRawTag()
         {
             IsEnabled = true;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             if (Children != null)
