@@ -4,19 +4,45 @@ using System;
 
 namespace Dxf
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfClass : DxfObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string DxfClassName { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string CppClassName { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DxfProxyCapabilitiesFlags ProxyCapabilitiesFlags { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public bool WasAProxyFlag { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsAnEntityFlag { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="id"></param>
         public DxfClass(DxfAcadVer version, int id)
             : base(version, id)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Defaults()
         {
             DxfClassName = string.Empty;
@@ -26,6 +52,10 @@ namespace Dxf
             IsAnEntityFlag = false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string Create()
         {
             Reset();
