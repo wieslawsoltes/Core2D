@@ -315,6 +315,24 @@ namespace TestEMF
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="container"></param>
+        private void DrawBackground(Graphics gfx, Container container)
+        {
+            Brush brush = ToSolidBrush(container.Background);
+            var rect = Rect2.Create(0, 0, container.Width, container.Height);
+            gfx.FillRectangle(
+                brush,
+                _scaleToPage(rect.X),
+                _scaleToPage(rect.Y),
+                _scaleToPage(rect.Width),
+                _scaleToPage(rect.Height));
+            brush.Dispose();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void ClearCache()
         {
         }
@@ -329,6 +347,8 @@ namespace TestEMF
         {
             if (container.Template != null)
             {
+                DrawBackground(gfx as Graphics, container.Template);
+
                 foreach (var layer in container.Template.Layers)
                 {
                     if (layer.IsVisible)
@@ -337,7 +357,9 @@ namespace TestEMF
                     }
                 }
             }
-            
+
+            DrawBackground(gfx as Graphics, container);
+
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
