@@ -127,7 +127,10 @@ namespace Test.Controls
             {
                 if (Renderer != null)
                 {
-                    Renderer.Draw(drawingContext, layer, (Tag as Container).Properties);
+                    Renderer.Draw(
+                        drawingContext, 
+                        layer, 
+                        (Tag as Container).Properties);
                 }
             }
         }
