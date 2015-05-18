@@ -750,7 +750,7 @@ namespace TestEDITOR
                 () =>
                 {
                     _history.Snapshot(_editor.Project);
-                    _editor.Container.Layers.Add(Layer.Create("New", _editor.Container));
+                    _editor.Project.CurrentContainer.Layers.Add(Layer.Create("New", _editor.Project.CurrentContainer));
                 },
                 () => IsEditMode());
 
@@ -1000,7 +1000,7 @@ namespace TestEDITOR
         public void Invalidate()
         {
             _editor.Renderer.ClearCache();
-            _editor.Container.Invalidate();
+            _editor.Project.CurrentContainer.Invalidate();
         }
 
         /// <summary>
@@ -1178,7 +1178,7 @@ namespace TestEDITOR
         {
             try
             {
-                Emf.Save(path, _editor.Container);
+                Emf.Save(path, _editor.Project.CurrentContainer);
             }
             catch (Exception ex)
             {
@@ -1200,7 +1200,7 @@ namespace TestEDITOR
                 {
                     DrawShapeState = ShapeState.Printable
                 };
-                renderer.Create(path, _editor.Container, version);
+                renderer.Create(path, _editor.Project.CurrentContainer, version);
             }
             catch (Exception ex)
             {
@@ -1323,7 +1323,7 @@ namespace TestEDITOR
         /// <param name="shapes"></param>
         public void Paste(IEnumerable<BaseShape> shapes)
         {
-            _editor.Deselect(_editor.Container);
+            _editor.Deselect(_editor.Project.CurrentContainer);
 
             _history.Snapshot(_editor.Project);
             
@@ -1331,10 +1331,10 @@ namespace TestEDITOR
 
             foreach (var shape in shapes)
             {
-                _editor.Container.CurrentLayer.Shapes.Add(shape);
+                _editor.Project.CurrentContainer.CurrentLayer.Shapes.Add(shape);
             }
 
-            _editor.Select(_editor.Container, new HashSet<BaseShape>(shapes));
+            _editor.Select(_editor.Project.CurrentContainer, new HashSet<BaseShape>(shapes));
         }
 
         /// <summary>
@@ -1448,11 +1448,11 @@ namespace TestEDITOR
                 var clone = Clone(group);
                 if (clone != null)
                 {
-                    _editor.Deselect(_editor.Container);
+                    _editor.Deselect(_editor.Project.CurrentContainer);
                     clone.Move(sx, sy);
                     _history.Snapshot(_editor.Project);
-                    _editor.Container.CurrentLayer.Shapes.Add(clone);
-                    _editor.Select(_editor.Container, clone);
+                    _editor.Project.CurrentContainer.CurrentLayer.Shapes.Add(clone);
+                    _editor.Select(_editor.Project.CurrentContainer, clone);
                 }
             }
             catch (Exception ex)
@@ -1580,10 +1580,10 @@ namespace TestEDITOR
         /// </summary>
         public void SelectAll()
         {
-            _editor.Deselect(_editor.Container);
+            _editor.Deselect(_editor.Project.CurrentContainer);
             _editor.Select(
-                _editor.Container,
-                new HashSet<BaseShape>(_editor.Container.CurrentLayer.Shapes));
+                _editor.Project.CurrentContainer,
+                new HashSet<BaseShape>(_editor.Project.CurrentContainer.CurrentLayer.Shapes));
         }
 
         /// <summary>
@@ -1592,8 +1592,8 @@ namespace TestEDITOR
         public void ClearAll()
         {
             _history.Snapshot(_editor.Project);
-            _editor.Container.Clear();
-            _editor.Container.Invalidate();
+            _editor.Project.CurrentContainer.Clear();
+            _editor.Project.CurrentContainer.Invalidate();
         }
 
         /// <summary>
@@ -1713,7 +1713,7 @@ namespace TestEDITOR
                     return;
                 }
 
-                var graph = ContainerGraph.Create(Editor.Container);
+                var graph = ContainerGraph.Create(Editor.Project.CurrentContainer);
                 if (graph != null)
                 {
                     Simulations = _simulationFactory.Create(graph);

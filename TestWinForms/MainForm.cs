@@ -109,7 +109,7 @@ namespace TestWinForms
             HandlePanelLayerInvalidation(panel);
             UpdatePanelSize(panel);
 
-            var container = (DataContext as EditorContext).Editor.Container;
+            var container = (DataContext as EditorContext).Editor.Project.CurrentContainer;
             if (container != null)
             {
                 container.Invalidate();
@@ -182,7 +182,7 @@ namespace TestWinForms
         /// <param name="panel"></param>
         private void UpdatePanelSize(ContainerPanel panel)
         {
-            var container = (DataContext as EditorContext).Editor.Container;
+            var container = (DataContext as EditorContext).Editor.Project.CurrentContainer;
             if (container == null)
                 return;
 
@@ -202,7 +202,7 @@ namespace TestWinForms
         /// <param name="panel"></param>
         private void HandlePanelLayerInvalidation(ContainerPanel panel)
         {
-            var container = (DataContext as EditorContext).Editor.Container;
+            var container = (DataContext as EditorContext).Editor.Project.CurrentContainer;
             if (container == null)
                 return;
 
@@ -557,8 +557,8 @@ namespace TestWinForms
 
             g.PageUnit = GraphicsUnit.Display;
 
-            Context.Editor.Renderer.Draw(g, Context.Editor.Container, Context.Editor.Container.Properties);
-            Context.Editor.Renderer.Draw(g, Context.Editor.Container.WorkingLayer, Context.Editor.Container.Properties);
+            Context.Editor.Renderer.Draw(g, Context.Editor.Project.CurrentContainer, Context.Editor.Project.CurrentContainer.Properties);
+            Context.Editor.Renderer.Draw(g, Context.Editor.Project.CurrentContainer.WorkingLayer, Context.Editor.Project.CurrentContainer.Properties);
         }
     }
 }
