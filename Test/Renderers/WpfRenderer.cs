@@ -134,7 +134,7 @@ namespace Test
         private IDictionary<XArc, PathGeometry> _arcCache;
         private IDictionary<XBezier, PathGeometry> _bezierCache;
         private IDictionary<XQBezier, PathGeometry> _qbezierCache;
-        private IDictionary<XText, Tuple<string, FormattedText>> _textCache;
+        private IDictionary<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache;
         private IDictionary<Uri, BitmapImage> _biCache;
 
         /// <summary>
@@ -434,7 +434,7 @@ namespace Test
             _arcCache = new Dictionary<XArc, PathGeometry>();
             _bezierCache = new Dictionary<XBezier, PathGeometry>();
             _qbezierCache = new Dictionary<XQBezier, PathGeometry>();
-            _textCache = new Dictionary<XText, Tuple<string, FormattedText>>();
+            _textCache = new Dictionary<XText, Tuple<string, FormattedText, ShapeStyle>>();
 
             if (_biCache != null)
             {
@@ -1012,12 +1012,13 @@ namespace Test
 
             var tbind = text.Bind(db);
 
-            Tuple<string, FormattedText> tcache = null;
+            Tuple<string, FormattedText, ShapeStyle> tcache = null;
             FormattedText ft;
             string ct;
             if (_enableTextCache
                 && _textCache.TryGetValue(text, out tcache)
-                && string.Compare(tcache.Item1, tbind) == 0)
+                && string.Compare(tcache.Item1, tbind) == 0
+                && tcache.Item3 == text.Style)
             {
                 ct = tcache.Item1;
                 ft = tcache.Item2;
@@ -1055,7 +1056,6 @@ namespace Test
                     tf,
                     text.Style.TextStyle.FontSize,
                     stroke.Brush, null, TextFormattingMode.Ideal);
-               
 
                 if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline)
                     || text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
@@ -1081,11 +1081,11 @@ namespace Test
                 {
                     if (_textCache.ContainsKey(text))
                     {
-                        _textCache[text] = Tuple.Create(tbind, ft);
+                        _textCache[text] = Tuple.Create(tbind, ft, text.Style);
                     }
                     else
                     {
-                        _textCache.Add(text, Tuple.Create(tbind, ft));
+                        _textCache.Add(text, Tuple.Create(tbind, ft, text.Style));
                     }
                 }
 
