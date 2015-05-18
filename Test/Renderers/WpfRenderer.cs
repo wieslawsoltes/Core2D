@@ -19,6 +19,19 @@ namespace Test
     /// </summary>
     public class WpfRenderer : ObservableObject, IRenderer
     {
+        private const bool _enableGuidelines = true;
+        private const bool _enableStyleCache = true;
+        private const bool _enableArcCache = true;
+        private const bool _enableBezierCache = true;
+        private const bool _enableQBezierCache = true;
+        private const bool _enableTextCache = true;
+        private const bool _enableImageCache = true;
+        private IDictionary<ShapeStyle, Tuple<Brush, Pen>> _styleCache;
+        private IDictionary<XArc, PathGeometry> _arcCache;
+        private IDictionary<XBezier, PathGeometry> _bezierCache;
+        private IDictionary<XQBezier, PathGeometry> _qbezierCache;
+        private IDictionary<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache;
+        private IDictionary<Uri, BitmapImage> _biCache;
         private double _zoom;
         private double _panX;
         private double _panY;
@@ -121,21 +134,6 @@ namespace Test
                 }
             }
         }
-
-        private const bool _enableGuidelines = true;
-        private const bool _enableStyleCache = true;
-        private const bool _enableArcCache = true;
-        private const bool _enableBezierCache = true;
-        private const bool _enableQBezierCache = true;
-        private const bool _enableTextCache = true;
-        private const bool _enableImageCache = true;
-
-        private IDictionary<ShapeStyle, Tuple<Brush, Pen>> _styleCache;
-        private IDictionary<XArc, PathGeometry> _arcCache;
-        private IDictionary<XBezier, PathGeometry> _bezierCache;
-        private IDictionary<XQBezier, PathGeometry> _qbezierCache;
-        private IDictionary<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache;
-        private IDictionary<Uri, BitmapImage> _biCache;
 
         /// <summary>
         /// 
