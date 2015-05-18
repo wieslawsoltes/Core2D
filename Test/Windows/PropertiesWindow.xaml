@@ -10,5 +10,9 @@
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextHintingMode="Auto"
         TextOptions.TextRenderingMode="Auto">
-    <controls:ShapeControl Margin="2"/>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                  HorizontalScrollBarVisibility="Auto" 
+                  Focusable="True">
+        <controls:ShapeControl Margin="2"/>
+    </ScrollViewer>
 </Window>
