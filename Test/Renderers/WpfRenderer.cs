@@ -1019,8 +1019,6 @@ namespace Test
                 && _textCache.TryGetValue(text, out tcache)
                 && string.Compare(tcache.Item1, tbind) == 0)
             {
-                System.Diagnostics.Debug.Print("using cache: " + tbind);
-
                 ct = tcache.Item1;
                 ft = tcache.Item2;
 
@@ -1081,8 +1079,6 @@ namespace Test
 
                 if (_enableTextCache)
                 {
-                    System.Diagnostics.Debug.Print("add cache: " + tbind);
-
                     if (_textCache.ContainsKey(text))
                     {
                         _textCache[text] = Tuple.Create(tbind, ft);
