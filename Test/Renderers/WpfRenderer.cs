@@ -1010,13 +1010,17 @@ namespace Test
 
             DrawRectangleInternal(_dc, half, fill, null, text.IsFilled, ref rect);
 
+            var tbind = text.Bind(db);
+
             Tuple<string, FormattedText> tcache;
             FormattedText ft;
             string ct;
             if (_enableTextCache
-                && _textCache.TryGetValue(text, out tcache) 
-                && string.Compare(tcache.Item1, text.Text) == 0)
+                && _textCache.TryGetValue(text, out tcache)
+                && string.Compare(tcache.Item1, tbind) == 0)
             {
+                System.Diagnostics.Debug.Print("using cache: " + tbind);
+
                 ct = tcache.Item1;
                 ft = tcache.Item2;
 
@@ -1040,17 +1044,20 @@ namespace Test
                     fontWeight = FontWeights.Bold;
                 }
 
+                var tf = new Typeface(
+                    new FontFamily(text.Style.TextStyle.FontName),
+                    fontStyle,
+                    fontWeight,
+                    FontStretches.Normal);
+
                 ft = new FormattedText(
-                    text.Bind(db),
+                    tbind,
                     ci,
                     ci.TextInfo.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight,
-                    new Typeface(
-                        new FontFamily(text.Style.TextStyle.FontName),
-                        fontStyle,
-                        fontWeight,
-                        FontStretches.Normal),
+                    tf,
                     text.Style.TextStyle.FontSize,
                     stroke.Brush, null, TextFormattingMode.Ideal);
+               
 
                 if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline)
                     || text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
@@ -1074,13 +1081,15 @@ namespace Test
 
                 if (_enableTextCache)
                 {
+                    System.Diagnostics.Debug.Print("add cache: " + tbind);
+
                     if (_textCache.ContainsKey(text))
                     {
-                        _textCache[text] = Tuple.Create((string)text.Text.Clone(), ft);
+                        _textCache[text] = Tuple.Create(tbind, ft);
                     }
                     else
                     {
-                        _textCache.Add(text, Tuple.Create((string)text.Text.Clone(), ft));
+                        _textCache.Add(text, Tuple.Create(tbind, ft));
                     }
                 }
 
