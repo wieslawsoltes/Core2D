@@ -107,33 +107,6 @@
                 </controls:ContainerControl>
             </paz:PanAndZoomBorder>
         </paz:PanAndZoomGrid>
-        <!--
-        <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                      HorizontalScrollBarVisibility="Auto" 
-                      Focusable="False"
-                      Grid.Row="1" Grid.Column="2" Margin="0,8,0,5">
-            <Border BorderBrush="{x:Null}" BorderThickness="0" RenderTransformOrigin="0.5,0.5">
-                <Border.LayoutTransform>
-                    <TransformGroup>
-                        <TranslateTransform X="0" Y="0"/>
-                        <ScaleTransform ScaleX="{Binding Editor.Renderer.Zoom}" ScaleY="{Binding Editor.Renderer.Zoom}"/>
-                    </TransformGroup>
-                </Border.LayoutTransform>
-                <controls:ContainerControl x:Name="containerControl">
-                    <controls:ContainerControl.Style>
-                        <Style TargetType="controls:ContainerControl">
-                            <Setter Property="Visibility" Value="Visible"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Editor.Project.CurrentContainer}" Value="{x:Null}">
-                                    <Setter Property="Visibility" Value="Hidden"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </controls:ContainerControl.Style>
-                </controls:ContainerControl>
-            </Border>
-        </ScrollViewer>
-        -->
         <GridSplitter Grid.Row="1" Grid.Column="3" 
                       Width="5" Background="Transparent" 
                       ResizeBehavior="PreviousAndNext" 
