@@ -39,7 +39,7 @@ namespace Test.Windows
                 context.Editor.Renderer.PanX = x;
                 context.Editor.Renderer.PanY = y;
                 //context.Editor.Renderer.ClearCache();
-                //context.Editor.Container.Invalidate();
+                //context.Editor.Project.CurrentContainer.Invalidate();
             };
 
             border.AutoFitChild = (width, height) =>
@@ -50,13 +50,26 @@ namespace Test.Windows
                     border.AutoFit(
                         width,
                         height,
-                        context.Editor.Container.Width,
-                        context.Editor.Container.Height);
+                        context.Editor.Project.CurrentContainer.Width,
+                        context.Editor.Project.CurrentContainer.Height);
                     //context.Editor.Renderer.ClearCache();
-                    //context.Editor.Container.Invalidate();
+                    //context.Editor.Project.CurrentContainer.Invalidate();
                 }
             };
 
+            border.MouseDown += (s, e) =>
+            {
+                if (e.ChangedButton == MouseButton.Middle && e.ClickCount == 2)
+                {
+                    grid.AutoFit();
+                }
+                
+                if (e.ChangedButton == MouseButton.Middle && e.ClickCount == 3)
+                {
+                    grid.ResetZoomAndPan();
+                }
+            };
+            
             Loaded += (s, e) =>
             {
                 ((DataContext as EditorContext).Editor.Renderer as ObservableObject).PropertyChanged +=
@@ -69,7 +82,7 @@ namespace Test.Windows
                         border.Scale.ScaleX = value;
                         border.Scale.ScaleY = value;
                         //context.Editor.Renderer.ClearCache();
-                        //context.Editor.Container.Invalidate();
+                        //context.Editor.Project.CurrentContainer.Invalidate();
                     }
 
                     if (_e.PropertyName == "PanX")
@@ -78,7 +91,7 @@ namespace Test.Windows
                         double value = context.Editor.Renderer.PanX;
                         border.Translate.X = value;
                         //context.Editor.Renderer.ClearCache();
-                        //context.Editor.Container.Invalidate();
+                        //context.Editor.Project.CurrentContainer.Invalidate();
                     }
 
                     if (_e.PropertyName == "PanY")
@@ -87,7 +100,7 @@ namespace Test.Windows
                         double value = context.Editor.Renderer.PanY;
                         border.Translate.Y = value;
                         //context.Editor.Renderer.ClearCache();
-                        //context.Editor.Container.Invalidate();
+                        //context.Editor.Project.CurrentContainer.Invalidate();
                     }
                 };
             };

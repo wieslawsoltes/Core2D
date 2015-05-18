@@ -112,7 +112,7 @@ namespace Test.Windows
             context.Commands.CopyAsEmfCommand = new DelegateCommand(
                 () =>
                 {
-                    Emf.PutOnClipboard(context.Editor.Container);
+                    Emf.PutOnClipboard(context.Editor.Project.CurrentContainer);
                 },
                 () => context.IsEditMode());
 
@@ -191,6 +191,76 @@ namespace Test.Windows
                     }
                 };
 
+            grid.EnableAutoFit = true;
+
+            border.InvalidateChild = (z, x, y) =>
+            {
+                context.Editor.Renderer.Zoom = z;
+                context.Editor.Renderer.PanX = x;
+                context.Editor.Renderer.PanY = y;
+                //context.Editor.Renderer.ClearCache();
+                //context.Editor.Project.CurrentContainer.Invalidate();
+            };
+
+            border.AutoFitChild = (width, height) =>
+            {
+                if (border != null && context != null)
+                {
+                    border.AutoFit(
+                        width,
+                        height,
+                        context.Editor.Project.CurrentContainer.Width,
+                        context.Editor.Project.CurrentContainer.Height);
+                    //context.Editor.Renderer.ClearCache();
+                    //context.Editor.Project.CurrentContainer.Invalidate();
+                }
+            };
+            
+            border.MouseDown += (s, e) =>
+            {
+                if (e.ChangedButton == MouseButton.Middle && e.ClickCount == 2)
+                {
+                    grid.AutoFit();
+                }
+                
+                if (e.ChangedButton == MouseButton.Middle && e.ClickCount == 3)
+                {
+                    grid.ResetZoomAndPan();
+                }
+            };
+
+            Loaded += (s, e) =>
+            {
+                (context.Editor.Renderer as ObservableObject).PropertyChanged +=
+                (_s, _e) =>
+                {
+                    if (_e.PropertyName == "Zoom")
+                    {
+                        double value = context.Editor.Renderer.Zoom;
+                        border.Scale.ScaleX = value;
+                        border.Scale.ScaleY = value;
+                        //context.Editor.Renderer.ClearCache();
+                        //context.Editor.Project.CurrentContainer.Invalidate();
+                    }
+
+                    if (_e.PropertyName == "PanX")
+                    {
+                        double value = context.Editor.Renderer.PanX;
+                        border.Translate.X = value;
+                        //context.Editor.Renderer.ClearCache();
+                        //context.Editor.Project.CurrentContainer.Invalidate();
+                    }
+
+                    if (_e.PropertyName == "PanY")
+                    {
+                        double value = context.Editor.Renderer.PanY;
+                        border.Translate.Y = value;
+                        //context.Editor.Renderer.ClearCache();
+                        //context.Editor.Project.CurrentContainer.Invalidate();
+                    }
+                };
+            };
+      
             containerControl.AllowDrop = true;
 
             containerControl.DragEnter += (s, e) =>

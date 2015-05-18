@@ -19,6 +19,39 @@ namespace Test.PanAndZoom
         /// <summary>
         /// 
         /// </summary>
+        public void AutoFit()
+        {
+            if (base.Children != null && base.Children.Count == 1)
+            {
+                var zoom = base.Children[0] as PanAndZoomBorder;
+                if (zoom != null && zoom.AutoFitChild != null)
+                {
+                    zoom.AutoFitChild(
+                        this.ActualWidth,
+                        this.ActualHeight);
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ResetZoomAndPan()
+        {
+            if (base.Children != null && base.Children.Count == 1)
+            {
+                var zoom = base.Children[0] as PanAndZoomBorder;
+                if (zoom != null && zoom.ZoomAndPanChild != null)
+                {
+                    zoom.ZoomAndPanChild(0.0, 0.0, 1.0);
+                }
+            }
+            
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="arrangeSize"></param>
         /// <returns></returns>
         protected override Size ArrangeOverride(Size arrangeSize)

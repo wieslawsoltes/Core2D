@@ -143,12 +143,12 @@ namespace Test.PanAndZoom
                             child.CaptureMouse();
                         }
 
-                        if (child != null
-                            && e.ChangedButton == MouseButton.Middle
-                            && e.ClickCount == 2)
-                        {
-                            ZoomAndPanChild(0.0, 0.0, 1.0);
-                        }
+                        //if (child != null
+                        //    && e.ChangedButton == MouseButton.Middle
+                        //    && e.ClickCount == 2)
+                        //{
+                        //    ZoomAndPanChild(0.0, 0.0, 1.0);
+                        //}
                     };
 
                     this.MouseUp += (s, e) =>

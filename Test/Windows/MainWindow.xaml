@@ -1,4 +1,4 @@
-﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
 <Window x:Class="Test.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Test"
         xmlns:controls="clr-namespace:Test.Controls"
         xmlns:converters="clr-namespace:Test.Converters"
+        xmlns:paz="clr-namespace:Test.PanAndZoom"
         Title="Test" Height="720" Width="1320"
         Background="LightGray"
         WindowStartupLocation="CenterScreen" WindowState="Normal"
@@ -75,6 +76,38 @@
                       Width="5" Background="Transparent" 
                       ResizeBehavior="PreviousAndNext" 
                       ShowsPreview="True"/>
+        <paz:PanAndZoomGrid x:Name="grid"
+                            ClipToBounds="True"
+                            Background="Transparent"
+                            FocusVisualStyle="{x:Null}"
+                            Focusable="False"
+                            Grid.Row="1" Grid.Column="2" Margin="0,8,0,5">
+            <paz:PanAndZoomBorder x:Name="border"
+                                  ClipToBounds="False"
+                                  Background="Transparent"
+                                  BorderBrush="{x:Null}" 
+                                  BorderThickness="0" 
+                                  FocusVisualStyle="{x:Null}"
+                                  Focusable="False"
+                                  VerticalAlignment="Stretch" 
+                                  HorizontalAlignment="Stretch"
+                                  Width="{Binding Editor.Project.CurrentContainer.Width}" 
+                                  Height="{Binding Editor.Project.CurrentContainer.Height}">
+                <controls:ContainerControl x:Name="containerControl">
+                    <controls:ContainerControl.Style>
+                        <Style TargetType="controls:ContainerControl">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Editor.Project.CurrentContainer}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </controls:ContainerControl.Style>
+                </controls:ContainerControl>
+            </paz:PanAndZoomBorder>
+        </paz:PanAndZoomGrid>
+        <!--
         <ScrollViewer VerticalScrollBarVisibility="Auto" 
                       HorizontalScrollBarVisibility="Auto" 
                       Focusable="False"
@@ -100,6 +133,7 @@
                 </controls:ContainerControl>
             </Border>
         </ScrollViewer>
+        -->
         <GridSplitter Grid.Row="1" Grid.Column="3" 
                       Width="5" Background="Transparent" 
                       ResizeBehavior="PreviousAndNext" 
