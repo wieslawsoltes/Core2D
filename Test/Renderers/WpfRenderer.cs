@@ -134,7 +134,7 @@ namespace Test
         private IDictionary<XArc, PathGeometry> _arcCache;
         private IDictionary<XBezier, PathGeometry> _bezierCache;
         private IDictionary<XQBezier, PathGeometry> _qbezierCache;
-        private IDictionary<XText, FormattedText> _textCache;
+        private IDictionary<XText, Tuple<string, FormattedText>> _textCache;
         private IDictionary<Uri, BitmapImage> _biCache;
 
         /// <summary>
@@ -434,7 +434,7 @@ namespace Test
             _arcCache = new Dictionary<XArc, PathGeometry>();
             _bezierCache = new Dictionary<XBezier, PathGeometry>();
             _qbezierCache = new Dictionary<XQBezier, PathGeometry>();
-            _textCache = new Dictionary<XText, FormattedText>();
+            _textCache = new Dictionary<XText, Tuple<string, FormattedText>>();
 
             if (_biCache != null)
             {
@@ -1010,10 +1010,16 @@ namespace Test
 
             DrawRectangleInternal(_dc, half, fill, null, text.IsFilled, ref rect);
 
+            Tuple<string, FormattedText> tcache;
             FormattedText ft;
+            string ct;
             if (_enableTextCache
-                && _textCache.TryGetValue(text, out ft))
+                && _textCache.TryGetValue(text, out tcache) 
+                && string.Compare(tcache.Item1, text.Text) == 0)
             {
+                ct = tcache.Item1;
+                ft = tcache.Item2;
+
                 _dc.DrawText(
                     ft, 
                     GetTextOrigin(text.Style, ref rect, ft));
@@ -1066,8 +1072,17 @@ namespace Test
                     ft.SetTextDecorations(decorations);
                 }
 
-                //if (_enableTextCache)
-                //    _textCache.Add(text, ft);
+                if (_enableTextCache)
+                {
+                    if (_textCache.ContainsKey(text))
+                    {
+                        _textCache[text] = Tuple.Create((string)text.Text.Clone(), ft);
+                    }
+                    else
+                    {
+                        _textCache.Add(text, Tuple.Create((string)text.Text.Clone(), ft));
+                    }
+                }
 
                 _dc.DrawText(
                     ft, 
