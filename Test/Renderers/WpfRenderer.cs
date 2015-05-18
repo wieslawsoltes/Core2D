@@ -498,7 +498,7 @@ namespace Test
             double thickness = line.Style.Thickness / _zoom;
             double half = thickness / 2.0;
             
-            Tuple<Brush, Pen> cache;
+            Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
             if (_enableStyleCache 
@@ -658,8 +658,8 @@ namespace Test
 
             double thickness = rectangle.Style.Thickness / _zoom;
             double half = thickness / 2.0;
-            
-            Tuple<Brush, Pen> cache;
+
+            Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
             if (_enableStyleCache 
@@ -702,8 +702,8 @@ namespace Test
 
             double thickness = ellipse.Style.Thickness / _zoom;
             double half = thickness / 2.0;
-            
-            Tuple<Brush, Pen> cache;
+
+            Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
             if (_enableStyleCache 
@@ -755,8 +755,8 @@ namespace Test
 
             double thickness = arc.Style.Thickness / _zoom;
             double half = thickness / 2.0;
-            
-            Tuple<Brush, Pen> cache;
+
+            Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
             if (_enableStyleCache
@@ -779,7 +779,7 @@ namespace Test
 
             var a = WpfArc.FromXArc(arc, dx, dy);
 
-            PathGeometry pg;
+            PathGeometry pg = null;
             if (_enableArcCache
                 && _arcCache.TryGetValue(arc, out pg))
             {
@@ -834,8 +834,8 @@ namespace Test
 
             double thickness = bezier.Style.Thickness / _zoom;
             double half = thickness / 2.0;
-            
-            Tuple<Brush, Pen> cache;
+
+            Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
             if (_enableStyleCache 
@@ -856,7 +856,7 @@ namespace Test
                     _styleCache.Add(bezier.Style, Tuple.Create(fill, stroke));
             }
 
-            PathGeometry pg;
+            PathGeometry pg = null;
             if (_enableBezierCache 
                 && _bezierCache.TryGetValue(bezier, out pg))
             {
@@ -908,8 +908,8 @@ namespace Test
 
             double thickness = qbezier.Style.Thickness / _zoom;
             double half = thickness / 2.0;
-            
-            Tuple<Brush, Pen> cache;
+
+            Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
             if (_enableStyleCache 
@@ -930,7 +930,7 @@ namespace Test
                     _styleCache.Add(qbezier.Style, Tuple.Create(fill, stroke));
             }
 
-            PathGeometry pg;
+            PathGeometry pg = null;
 
             if (_enableQBezierCache 
                 && _qbezierCache.TryGetValue(qbezier, out pg))
@@ -981,8 +981,8 @@ namespace Test
 
             double thickness = text.Style.Thickness / _zoom;
             double half = thickness / 2.0;
-            
-            Tuple<Brush, Pen> cache;
+
+            Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
             if (_enableStyleCache 
@@ -1012,7 +1012,7 @@ namespace Test
 
             var tbind = text.Bind(db);
 
-            Tuple<string, FormattedText> tcache;
+            Tuple<string, FormattedText> tcache = null;
             FormattedText ft;
             string ct;
             if (_enableTextCache
@@ -1113,7 +1113,7 @@ namespace Test
             double thickness = image.Style.Thickness / _zoom;
             double half = thickness / 2.0;
 
-            Tuple<Brush, Pen> cache;
+            Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
             if (_enableStyleCache
