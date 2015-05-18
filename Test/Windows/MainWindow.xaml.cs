@@ -204,7 +204,9 @@ namespace Test.Windows
 
             border.AutoFitChild = (width, height) =>
             {
-                if (border != null && context != null)
+                if (border != null 
+                    && context != null
+                    && context.Editor.Project.CurrentContainer != null)
                 {
                     border.AutoFit(
                         width,
