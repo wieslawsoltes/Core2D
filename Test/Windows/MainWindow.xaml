@@ -66,10 +66,14 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Project">
-                <controls:ProjectControl/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <controls:ProjectControl/>
+                </ScrollViewer> 
             </TabItem>
             <TabItem Header="Templates">
-                <controls:TemplatesControl/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <controls:TemplatesControl/>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
         <GridSplitter Grid.Row="1" Grid.Column="1" 
@@ -118,7 +122,9 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Properties">
-                <controls:ShapeControl/>
+                <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <controls:ShapeControl/>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Layers">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
