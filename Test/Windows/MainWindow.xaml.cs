@@ -309,15 +309,34 @@ namespace Test.Windows
                         }
                     }
 
-                    if (e.Data.GetDataPresent("Group"))
+                    if (e.Data.GetDataPresent(typeof(XGroup)))
                     {
                         try
                         {
-                            var group = e.Data.GetData("Group") as XGroup;
+                            var group = e.Data.GetData(typeof(XGroup)) as XGroup;
                             if (group != null)
                             {
                                 var p = e.GetPosition(containerControl);
                                 context.Drop(group, p.X, p.Y);
+                                e.Handled = true;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.Print(ex.Message);
+                            System.Diagnostics.Debug.Print(ex.StackTrace);
+                        }
+                    }
+                    
+                    if (e.Data.GetDataPresent(typeof(ShapeStyle)))
+                    {
+                        try
+                        {
+                            var style = e.Data.GetData(typeof(ShapeStyle)) as ShapeStyle;
+                            if (style != null)
+                            {
+                                var p = e.GetPosition(containerControl);
+                                context.Drop(style, p.X, p.Y);
                                 e.Handled = true;
                             }
                         }
