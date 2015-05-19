@@ -23,6 +23,11 @@ namespace Test.Controls
     public class DragAndDropListBox<T> : ListBox 
         where T : class
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public ListBoxDropMode DropMode { get; set; }
+
         private Point _dragStartPoint;
 
         private P FindVisualParent<P>(DependencyObject child) 
@@ -99,12 +104,26 @@ namespace Test.Controls
                 if (e.Data.GetDataPresent(typeof(T)))
                 {
                     var source = e.Data.GetData(typeof(T)) as T;
-                    var target = ((ListBoxItem)(sender)).DataContext as T;
+                    var listBoxItem = sender as ListBoxItem;
+                    var target = listBoxItem.DataContext as T;
             
                     int sourceIndex = this.Items.IndexOf(source);
                     int targetIndex = this.Items.IndexOf(target);
-    
-                    Move(source, sourceIndex, targetIndex);   
+
+                    switch (DropMode)
+                    {
+                        case ListBoxDropMode.Move:
+                            Move(source, sourceIndex, targetIndex);
+                            break;
+                        case ListBoxDropMode.Swap:
+                            Swap(source, sourceIndex, targetIndex);
+                            break;
+                    }
+
+                    this.UpdateLayout();
+                    var item = this.Items[targetIndex];
+                    var container = this.ItemContainerGenerator.ContainerFromItem(item);
+                    (container as ListBoxItem).IsSelected = true;
                 }
             }
         }
@@ -132,6 +151,17 @@ namespace Test.Controls
                         items.RemoveAt(removeIndex);
                     }
                 }
+            }
+        }
+
+        private void Swap(T source, int sourceIndex, int targetIndex)
+        {
+            var items = this.DataContext as IList<T>;
+            if (items != null)
+            {
+                var target = items[targetIndex];
+                items[targetIndex] = source;
+                items[sourceIndex] = target;
             }
         }
     }
