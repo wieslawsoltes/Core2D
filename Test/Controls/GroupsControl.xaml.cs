@@ -26,61 +26,9 @@ namespace Test.Controls
         /// <summary>
         /// 
         /// </summary>
-        private Point _dragStartPoint;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="child"></param>
-        /// <returns></returns>
-        private T FindVisualParent<T>(DependencyObject child)
-            where T : DependencyObject
-        {
-            var parentObject = VisualTreeHelper.GetParent(child);
-            if (parentObject == null)
-                return null;
-            T parent = parentObject as T;
-            if (parent != null)
-                return parent;
-            return FindVisualParent<T>(parentObject);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public GroupsControl()
         {
             InitializeComponent();
-
-            groupsListBox.PreviewMouseLeftButtonDown += (s, e) =>
-            {
-                _dragStartPoint = e.GetPosition(null);
-            };
-
-            groupsListBox.PreviewMouseMove += (s, e) =>
-            {
-                Point point = e.GetPosition(null);
-                Vector diff = _dragStartPoint - point;
-                if (e.LeftButton == MouseButtonState.Pressed &&
-                    (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
-                        Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
-                {
-                    var listBox = s as ListBox;
-                    var listBoxItem = FindVisualParent<ListBoxItem>(((DependencyObject)e.OriginalSource));
-                    if (listBoxItem != null)
-                    {
-                        var group = (XGroup)listBox
-                            .ItemContainerGenerator
-                            .ItemFromContainer(listBoxItem);
-                        DataObject dragData = new DataObject("Group", group);
-                        DragDrop.DoDragDrop(
-                            listBoxItem,
-                            dragData,
-                            DragDropEffects.Move);
-                    }
-                }
-            };
         }
     }
 }

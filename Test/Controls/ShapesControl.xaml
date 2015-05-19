@@ -6,6 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:core="clr-namespace:Test2d;assembly=Test2d"
+             xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="180">
     <UserControl.Resources>
@@ -24,17 +25,19 @@
         <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0" Margin="2,0,2,0">
             <MenuItem Command="{Binding Commands.RemoveShapeCommand}" Header="_-"/>
         </Menu>
-        <ListBox DataContext="{Binding Editor}"
-                 ItemsSource="{Binding Project.CurrentContainer.CurrentLayer.Shapes}" 
-                 SelectedItem="{Binding Project.CurrentContainer.CurrentShape}" 
-                 BorderBrush="{x:Null}"
-                 Grid.Row="1">
-            <ListBox.ItemTemplate>
+        <controls:BaseShapeDragAndDropListBox
+            DataContext="{Binding Editor.Project.CurrentContainer.CurrentLayer.Shapes}"
+            ItemsSource="{Binding}"
+            SelectedItem="{Binding DataContext.Editor.Project.CurrentContainer.CurrentShape, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+            BorderBrush="{x:Null}"
+            HorizontalContentAlignment="Stretch"
+            Grid.Row="1">
+            <controls:BaseShapeDragAndDropListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}" Margin="0,5,0,5"/>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </controls:BaseShapeDragAndDropListBox.ItemTemplate>
+        </controls:BaseShapeDragAndDropListBox>
         <ContentControl Content="{Binding Editor.Project.CurrentContainer.CurrentShape}" 
                         Grid.Row="2" Margin="2">
         </ContentControl>

@@ -5,6 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="110">
     <Grid>
@@ -33,18 +34,19 @@
             <MenuItem Command="{Binding Commands.AddGroupCommand}" Header="_+"/>
             <MenuItem Command="{Binding Commands.RemoveGroupCommand}" Header="_-"/>
         </Menu>
-        <ListBox x:Name="groupsListBox"
-                 DataContext="{Binding Editor}"
-                 ItemsSource="{Binding Project.CurrentGroupLibrary.Groups}"
-                 SelectedItem="{Binding Project.CurrentGroupLibrary.CurrentGroup}" 
-                 BorderBrush="{x:Null}"
-                 HorizontalContentAlignment="Stretch"
-                 Grid.Row="3">
-            <ListBox.ItemTemplate>
+        <controls:XGroupDragAndDropListBox 
+            x:Name="groupsListBox"
+            DataContext="{Binding Editor.Project.CurrentGroupLibrary.Groups}"
+            ItemsSource="{Binding}"
+            SelectedItem="{Binding DataContext.Editor.Project.CurrentGroupLibrary.CurrentGroup, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+            BorderBrush="{x:Null}"
+            HorizontalContentAlignment="Stretch"
+            Grid.Row="3">
+            <controls:XGroupDragAndDropListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Margin="0,5,0,5"/>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </controls:XGroupDragAndDropListBox.ItemTemplate>
+        </controls:XGroupDragAndDropListBox>
     </Grid>
 </UserControl>

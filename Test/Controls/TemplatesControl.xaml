@@ -5,6 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="180">
     <UserControl.Resources>
@@ -25,16 +26,19 @@
             <MenuItem Command="{Binding Commands.AddTemplateCommand}" Header="_+"/>
             <MenuItem Command="{Binding Commands.RemoveTemplateCommand}" Header="_-"/>
         </Menu>
-        <ListBox ItemsSource="{Binding Editor.Project.Templates}" 
-                 SelectedItem="{Binding Editor.Project.CurrentTemplate}" 
-                 BorderBrush="{x:Null}"
-                 Grid.Row="1">
-            <ListBox.ItemTemplate>
+        <controls:ContainerDragAndDropListBox
+            DataContext="{Binding Editor.Project.Templates}"
+            ItemsSource="{Binding}"
+            SelectedItem="{Binding DataContext.Editor.Project.CurrentTemplate, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+            BorderBrush="{x:Null}"
+            HorizontalContentAlignment="Stretch"
+            Grid.Row="1">
+            <controls:ContainerDragAndDropListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Margin="0,5,0,5"/>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </controls:ContainerDragAndDropListBox.ItemTemplate>
+        </controls:ContainerDragAndDropListBox>
         <ContentControl Content="{Binding Editor.Project.CurrentTemplate}"
                         Grid.Row="2" Margin="2">
              <ContentControl.Style>
