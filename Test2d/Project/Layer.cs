@@ -120,7 +120,7 @@ namespace Test2d
         /// <param name="owner"></param>
         /// <param name="isVisible"></param>
         /// <returns></returns>
-        public static Layer Create(string name, Container owner, bool isVisible = true)
+        public static Layer Create(string name, Container owner = null, bool isVisible = true)
         {
             return new Layer()
             {
