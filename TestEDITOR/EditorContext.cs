@@ -1465,6 +1465,42 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="style"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void Drop(ShapeStyle style, double x, double y)
+        {
+            if (_editor.Renderer.SelectedShape != null)
+            {
+                _history.Snapshot(_editor.Project);
+                _editor.Renderer.SelectedShape.Style = style;
+            }
+            else if (_editor.Renderer.SelectedShapes != null && _editor.Renderer.SelectedShapes.Count > 0)
+            {
+                _history.Snapshot(_editor.Project);
+                foreach (var shape in _editor.Renderer.SelectedShapes) 
+                {
+                    shape.Style = style;
+                }
+            }
+            else
+            {
+                var container = _editor.Project.CurrentContainer;
+                if (container != null)
+                {
+                    var result = ShapeBounds.HitTest(container, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+                    if (result != null)
+                    {
+                        _history.Snapshot(_editor.Project);
+                        result.Style = style;
+                    }
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         public bool CanUndo()
         {
