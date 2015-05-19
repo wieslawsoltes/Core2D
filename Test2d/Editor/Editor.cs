@@ -158,7 +158,6 @@ namespace Test2d
                 }
             }
         }
- 
 
         /// <summary>
         /// Get image path using common system open file dialog.
