@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="Controls\Custom\DragAndDropListBox.cs" />
     <Compile Include="Controls\Custom\LayerElement.cs" />
+    <Compile Include="Controls\Custom\ListBoxDropMode.cs" />
     <Compile Include="Controls\DragAndDropListBoxes\BaseShapeDragAndDropListBox.cs" />
     <Compile Include="Controls\DragAndDropListBoxes\ContainerDragAndDropListBox.cs" />
     <Compile Include="Controls\DragAndDropListBoxes\LayerDragAndDropListBox.cs" />
@@ -284,10 +285,7 @@
       <Name>TestEDITOR</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\Custom" />
-    <Folder Include="Controls\DragAndDropListBoxes" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
