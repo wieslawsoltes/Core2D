@@ -21,6 +21,7 @@ namespace Test2d
         private Container _template;
         private Layer _currentLayer;
         private Layer _workingLayer;
+        private Layer _helperLayer;
         private BaseShape _currentShape;
 
         /// <summary>
@@ -166,6 +167,22 @@ namespace Test2d
                 }
             }
         }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public Layer HelperLayer
+        {
+            get { return _helperLayer; }
+            set
+            {
+                if (value != _helperLayer)
+                {
+                    _helperLayer = value;
+                    Notify("HelperLayer");
+                }
+            }
+        }
 
         /// <summary>
         /// 
@@ -193,6 +210,7 @@ namespace Test2d
                 layer.Shapes.Clear();
             }
             WorkingLayer.Shapes.Clear();
+            HelperLayer.Shapes.Clear();
         }
 
         /// <summary>
@@ -205,11 +223,23 @@ namespace Test2d
                 Template.Invalidate();
             }
             
-            foreach (var layer in Layers)
+            if (Layers != null)
             {
-                layer.Invalidate();
+                foreach (var layer in Layers)
+                {
+                    layer.Invalidate();
+                }
             }
-            WorkingLayer.Invalidate();
+            
+            if (WorkingLayer != null)
+            {
+                WorkingLayer.Invalidate();
+            }
+            
+            if (HelperLayer != null)
+            {
+                HelperLayer.Invalidate();
+            }
         }
 
         /// <summary>
@@ -239,6 +269,7 @@ namespace Test2d
             c.CurrentLayer = c.Layers.FirstOrDefault();
 
             c.WorkingLayer = Layer.Create("Working", c);
+            c.HelperLayer = Layer.Create("Helper", c);
 
             return c;
         }
