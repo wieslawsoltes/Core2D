@@ -21,7 +21,6 @@ namespace Test2d
         private GroupLibrary _currentGroupLibrary;
         private IList<Container> _templates;
         private Container _currentTemplate;
-        private BaseShape _pointShape;
         private IList<Document> _documents;
         private Document _currentDocument;
         private Container _currentContainer;
@@ -157,22 +156,6 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public BaseShape PointShape
-        {
-            get { return _pointShape; }
-            set
-            {
-                if (value != _pointShape)
-                {
-                    _pointShape = value;
-                    Notify("PointShape");
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public IList<Document> Documents
         {
             get { return _documents; }
@@ -282,73 +265,13 @@ namespace Test2d
         public static ShapeStyleGroup TemplateStyleGroup()
         {
             var sgt = ShapeStyleGroup.Create("Template");
-            var pss = ShapeStyle.Create("PointShape", 255, 255, 0, 0, 255, 255, 0, 0, 2.0);
             var gs = ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.0);
 
-            sgt.Styles.Add(pss);
             sgt.Styles.Add(gs);
 
             sgt.CurrentStyle = sgt.Styles.FirstOrDefault();
 
             return sgt;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="p"></param>
-        /// <param name="pss"></param>
-        /// <returns></returns>
-        public static BaseShape EllipsePointShape(Project p, ShapeStyle pss)
-        {
-            return XEllipse.Create(-4, -4, 4, 4, pss, null, false);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="p"></param>
-        /// <param name="pss"></param>
-        /// <returns></returns>
-        public static BaseShape FilledEllipsePointShape(Project p, ShapeStyle pss)
-        {
-            return XEllipse.Create(-3, -3, 3, 3, pss, null, true);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="p"></param>
-        /// <param name="pss"></param>
-        /// <returns></returns>
-        public static BaseShape RectanglePointShape(Project p, ShapeStyle pss)
-        {
-            return XRectangle.Create(-4, -4, 4, 4, pss, null, false);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="p"></param>
-        /// <param name="pss"></param>
-        /// <returns></returns>
-        public static BaseShape FilledRectanglePointShape(Project p, ShapeStyle pss)
-        {
-            return XRectangle.Create(-3, -3, 3, 3, pss, null, true);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="p"></param>
-        /// <param name="pss"></param>
-        /// <returns></returns>
-        public static BaseShape CrossPointShape(Project p, ShapeStyle pss)
-        {
-            var g = XGroup.Create("PointShape");
-            g.Shapes.Add(XLine.Create(-4, 0, 4, 0, pss, null));
-            g.Shapes.Add(XLine.Create(0, -4, 0, 4, pss, null));
-            return g;
         }
 
         /// <summary>
@@ -381,10 +304,6 @@ namespace Test2d
 
             var sgt = TemplateStyleGroup();
             p.StyleGroups.Add(sgt);
-
-            p.PointShape = CrossPointShape(
-                p,
-                sgt.Styles.FirstOrDefault(s => s.Name == "PointShape"));
 
             return p;
         }
