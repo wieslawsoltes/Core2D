@@ -122,7 +122,7 @@ void Texts(BaseShape ps, int n, double width, double height, IList<ShapeStyle> s
 
 void Demo(Project p, int n = 100)
 {
-    var ps = p.PointShape;
+    var ps = p.Options.PointShape;
     var c = p.Documents.FirstOrDefault().Containers.FirstOrDefault();
     var width = c.Width;
     var height = c.Height;
