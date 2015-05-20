@@ -103,6 +103,11 @@ namespace TestEMF
 
                     g.PageUnit = GraphicsUnit.Point;
     
+                    if (container.Template != null)
+                    {
+                        r.Draw(g, container.Template, container.Properties);
+                    }
+
                     r.Draw(g, container, container.Properties);
                 }
             }
