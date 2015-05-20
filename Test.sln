@@ -1,7 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-# SharpDevelop 5.1
+# Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
@@ -15,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWinForms", "TestWinForms\TestWinForms.csproj", "{89476BE1-326D-4548-B62A-DE7B2ACC56F9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEDITOR", "TestEDITOR\TestEDITOR.csproj", "{DD2D100A-773A-4893-A3EB-6C63E11B12A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDirect2D", "TestDirect2D\TestDirect2D.csproj", "{1C74A7B6-A80B-406B-A53F-465740D3742F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +47,10 @@ Global
 		{DD2D100A-773A-4893-A3EB-6C63E11B12A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD2D100A-773A-4893-A3EB-6C63E11B12A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD2D100A-773A-4893-A3EB-6C63E11B12A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C74A7B6-A80B-406B-A53F-465740D3742F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C74A7B6-A80B-406B-A53F-465740D3742F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C74A7B6-A80B-406B-A53F-465740D3742F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C74A7B6-A80B-406B-A53F-465740D3742F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
