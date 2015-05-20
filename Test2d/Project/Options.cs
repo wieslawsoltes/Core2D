@@ -15,7 +15,6 @@ namespace Test2d
         private double _hitTreshold = 6.0;
         private bool _defaultIsFilled = false;
         private bool _tryToConnect = false;
-        private ShapeStyle _pointShapeStyle;
         private BaseShape _pointShape;
         private ShapeStyle _selectionStyle;
         private ShapeStyle _helperStyle;
@@ -117,22 +116,6 @@ namespace Test2d
         }
 
         /// <summary>
-        /// Gets or sets point shape style.
-        /// </summary>
-        public ShapeStyle PointShapeStyle
-        {
-            get { return _pointShapeStyle; }
-            set
-            {
-                if (value != _pointShapeStyle)
-                {
-                    _pointShapeStyle = value;
-                    Notify("PointShapeStyle");
-                }
-            }
-        }
-        
-        /// <summary>
         /// Gets or sets shape used to draw points.
         /// </summary>
         public BaseShape PointShape
@@ -216,7 +199,7 @@ namespace Test2d
                         ArrowStyle.Create(),
                         ArrowStyle.Create()));
 
-            options.PointShapeStyle = 
+            var pss = 
                 ShapeStyle.Create(
                     "PointShape",
                     0xFF, 0xFF, 0x00, 0x00,
@@ -226,11 +209,11 @@ namespace Test2d
                         ArrowStyle.Create(),
                        ArrowStyle.Create()));
 
-            options.PointShape = CrossPointShape(options.PointShapeStyle);
+            options.PointShape = CrossPointShape(pss);
   
             return options;
         }
-     
+
         /// <summary>
         /// 
         /// </summary>
