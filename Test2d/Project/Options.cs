@@ -14,8 +14,11 @@ namespace Test2d
         private double _snapY = 15.0;
         private double _hitTreshold = 6.0;
         private bool _defaultIsFilled = false;
-        private bool _tryToConnect = true;
+        private bool _tryToConnect = false;
+        private ShapeStyle _pointShapeStyle;
+        private BaseShape _pointShape;
         private ShapeStyle _selectionStyle;
+        private ShapeStyle _helperStyle;
 
         /// <summary>
         /// Gets or sets how grid snapping is handled. 
@@ -114,6 +117,38 @@ namespace Test2d
         }
 
         /// <summary>
+        /// Gets or sets point shape style.
+        /// </summary>
+        public ShapeStyle PointShapeStyle
+        {
+            get { return _pointShapeStyle; }
+            set
+            {
+                if (value != _pointShapeStyle)
+                {
+                    _pointShapeStyle = value;
+                    Notify("PointShapeStyle");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets shape used to draw points.
+        /// </summary>
+        public BaseShape PointShape
+        {
+            get { return _pointShape; }
+            set
+            {
+                if (value != _pointShape)
+                {
+                    _pointShape = value;
+                    Notify("PointShape");
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets selection rectangle style.
         /// </summary>
         public ShapeStyle SelectionStyle
@@ -125,6 +160,22 @@ namespace Test2d
                 {
                     _selectionStyle = value;
                     Notify("SelectionStyle");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets editor helper shapes style.
+        /// </summary>
+        public ShapeStyle HelperStyle
+        {
+            get { return _helperStyle; }
+            set
+            {
+                if (value != _helperStyle)
+                {
+                    _helperStyle = value;
+                    Notify("HelperStyle");
                 }
             }
         }
@@ -142,7 +193,7 @@ namespace Test2d
                 SnapY = 15.0,
                 HitTreshold = 6.0,
                 DefaultIsFilled = false,
-                TryToConnect = true,
+                TryToConnect = false,
             };
 
             options.SelectionStyle =
@@ -155,7 +206,82 @@ namespace Test2d
                         ArrowStyle.Create(),
                         ArrowStyle.Create()));
 
+            options.HelperStyle =
+                ShapeStyle.Create(
+                    "Helper",
+                    0xFF, 0xFF, 0x00, 0x00,
+                    0xFF, 0xFF, 0x00, 0x00,
+                    1.0,
+                    LineStyle.Create(
+                        ArrowStyle.Create(),
+                        ArrowStyle.Create()));
+
+            options.PointShapeStyle = 
+                ShapeStyle.Create(
+                    "PointShape",
+                    0xFF, 0xFF, 0x00, 0x00,
+                    0xFF, 0xFF, 0x00, 0x00, 
+                    2.0,
+                    LineStyle.Create(
+                        ArrowStyle.Create(),
+                       ArrowStyle.Create()));
+
+            options.PointShape = CrossPointShape(options.PointShapeStyle);
+  
             return options;
+        }
+     
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pss"></param>
+        /// <returns></returns>
+        public static BaseShape EllipsePointShape(ShapeStyle pss)
+        {
+            return XEllipse.Create(-4, -4, 4, 4, pss, null, false);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pss"></param>
+        /// <returns></returns>
+        public static BaseShape FilledEllipsePointShape(ShapeStyle pss)
+        {
+            return XEllipse.Create(-3, -3, 3, 3, pss, null, true);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pss"></param>
+        /// <returns></returns>
+        public static BaseShape RectanglePointShape(ShapeStyle pss)
+        {
+            return XRectangle.Create(-4, -4, 4, 4, pss, null, false);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pss"></param>
+        /// <returns></returns>
+        public static BaseShape FilledRectanglePointShape(ShapeStyle pss)
+        {
+            return XRectangle.Create(-3, -3, 3, 3, pss, null, true);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pss"></param>
+        /// <returns></returns>
+        public static BaseShape CrossPointShape(ShapeStyle pss)
+        {
+            var g = XGroup.Create("PointShape");
+            g.Shapes.Add(XLine.Create(-4, 0, 4, 0, pss, null));
+            g.Shapes.Add(XLine.Create(0, -4, 0, 4, pss, null));
+            return g;
         }
     }
 }

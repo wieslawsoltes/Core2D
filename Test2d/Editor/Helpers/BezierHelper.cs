@@ -11,28 +11,27 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public class ArcHelper : Helper
+    public class BezierHelper : Helper
     {
         private Editor _editor;
         private State _currentState = State.None;
-        private XArc _shape;
-        
+        private XBezier _shape;
+
         private ShapeStyle _style;
-        private XLine _startLine;
-        private XLine _endLine;
-        private XEllipse _ellipse;
+        private XLine _line12;
+        private XLine _line43;
+        private XLine _line23;
         private double _pointEllipseRadius = 3.0;
-        private XEllipse _ellipseP1;
-        private XEllipse _ellipseP2;
-        private XEllipse _ellipseCenter;
-        private XEllipse _ellipseStart;
-        private XEllipse _ellipseEnd;
-        
+        private XEllipse _ellipsePoint1;
+        private XEllipse _ellipsePoint2;
+        private XEllipse _ellipsePoint3;
+        private XEllipse _ellipsePoint4;
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="editor"></param>
-        public ArcHelper(Editor editor)
+        public BezierHelper(Editor editor)
         {
             _editor = editor;
         }
@@ -40,60 +39,60 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="arc"></param>
+        /// <param name="bezier"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void TryToConnectPoint1(XArc arc, double x, double y)
+        public void TryToConnectPoint1(XBezier bezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
-                arc.Point1 = result as XPoint;
+                bezier.Point1 = result as XPoint;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="arc"></param>
+        /// <param name="bezier"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void TryToConnectPoint2(XArc arc, double x, double y)
+        public void TryToConnectPoint2(XBezier bezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
-                arc.Point2 = result as XPoint;
+                bezier.Point2 = result as XPoint;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="arc"></param>
+        /// <param name="bezier"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void TryToConnectPoint3(XArc arc, double x, double y)
+        public void TryToConnectPoint3(XBezier bezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
-                arc.Point3 = result as XPoint;
+                bezier.Point3 = result as XPoint;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="arc"></param>
+        /// <param name="bezier"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void TryToConnectPoint4(XArc arc, double x, double y)
+        public void TryToConnectPoint4(XBezier bezier, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
-                arc.Point4 = result as XPoint;
+                bezier.Point4 = result as XPoint;
             }
         }
 
@@ -110,37 +109,39 @@ namespace Test2d
             {
                 case State.None:
                     {
-                        _shape = XArc.Create(
+                        _shape = XBezier.Create(
                             sx, sy,
                             _editor.Project.CurrentStyleGroup.CurrentStyle,
                             _editor.Project.Options.PointShape,
                             _editor.Project.Options.DefaultIsFilled);
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            TryToConnectPoint1(_shape, sx, sy);
+                            TryToConnectPoint1(_shape as XBezier, sx, sy);
                         }
+                        _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
-                        Move(_shape);
+                        Move(_shape as XBezier);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         _currentState = State.One;
                     }
                     break;
                 case State.One:
                     {
-                        if (_shape != null)
+                        var bezier = _shape as XBezier;
+                        if (bezier != null)
                         {
-                            _shape.Point2.X = sx;
-                            _shape.Point2.Y = sy;
-                            _shape.Point3.X = sx;
-                            _shape.Point3.Y = sy;
+                            bezier.Point3.X = sx;
+                            bezier.Point3.Y = sy;
+                            bezier.Point4.X = sx;
+                            bezier.Point4.Y = sy;
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                TryToConnectPoint2(_shape, sx, sy);
+                                TryToConnectPoint4(_shape as XBezier, sx, sy);
                             }
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             ToStateTwo();
-                            Move(_shape);
+                            Move(_shape as XBezier);
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                             _currentState = State.Two;
                         }
@@ -148,20 +149,18 @@ namespace Test2d
                     break;
                 case State.Two:
                     {
-                        if (_shape != null)
+                        var bezier = _shape as XBezier;
+                        if (bezier != null)
                         {
-                            _shape.Point3.X = sx;
-                            _shape.Point3.Y = sy;
-                            _shape.Point4.X = sx;
-                            _shape.Point4.Y = sy;
+                            bezier.Point2.X = sx;
+                            bezier.Point2.Y = sy;
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                TryToConnectPoint3(_shape, sx, sy);
+                                TryToConnectPoint3(_shape as XBezier, sx, sy);
                             }
-                            _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             ToStateThree();
-                            Move(_shape);
+                            Move(_shape as XBezier);
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                             _currentState = State.Three;
                         }
@@ -169,17 +168,18 @@ namespace Test2d
                     break;
                 case State.Three:
                     {
-                        if (_shape != null)
+                        var bezier = _shape as XBezier;
+                        if (bezier != null)
                         {
-                            _shape.Point4.X = sx;
-                            _shape.Point4.Y = sy;
+                            bezier.Point3.X = sx;
+                            bezier.Point3.Y = sy;
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                TryToConnectPoint4(_shape, sx, sy);
+                                TryToConnectPoint2(_shape as XBezier, sx, sy);
                             }
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             Remove();
-                            Finalize(_shape);
+                            Finalize(_shape as XBezier);
                             _editor.History.Snapshot(_editor.Project);
                             _editor.Project.CurrentContainer.CurrentLayer.Shapes.Add(_shape);
                             //_editor.Project.CurrentContainer.Invalidate();
@@ -208,8 +208,6 @@ namespace Test2d
         /// <param name="y"></param>
         public override void RightDown(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case State.None:
@@ -254,36 +252,43 @@ namespace Test2d
                     break;
                 case State.One:
                     {
-                        if (_shape != null)
+                        var bezier = _shape as XBezier;
+                        if (bezier != null)
                         {
-                            _shape.Point2.X = sx;
-                            _shape.Point2.Y = sy;
+                            bezier.Point2.X = sx;
+                            bezier.Point2.Y = sy;
+                            bezier.Point3.X = sx;
+                            bezier.Point3.Y = sy;
+                            bezier.Point4.X = sx;
+                            bezier.Point4.Y = sy;
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                            Move(_shape);
+                            Move(_shape as XBezier);
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         }
                     }
                     break;
                 case State.Two:
                     {
-                        if (_shape != null)
+                        var bezier = _shape as XBezier;
+                        if (bezier != null)
                         {
-                            _shape.Point3.X = sx;
-                            _shape.Point3.Y = sy;
+                            bezier.Point2.X = sx;
+                            bezier.Point2.Y = sy;
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                            Move(_shape);
+                            Move(_shape as XBezier);
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         }
                     }
                     break;
                 case State.Three:
                     {
-                        if (_shape != null)
+                        var bezier = _shape as XBezier;
+                        if (bezier != null)
                         {
-                            _shape.Point4.X = sx;
-                            _shape.Point4.Y = sy;
+                            bezier.Point3.X = sx;
+                            bezier.Point3.Y = sy;
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                            Move(_shape);
+                            Move(_shape as XBezier);
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         }
                     }
@@ -297,37 +302,22 @@ namespace Test2d
         public override void ToStateOne()
         {
             _style = _editor.Project.Options.HelperStyle;
-            _ellipse = XEllipse.Create(0, 0, _style, null);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipse);
-            _ellipseP1 = XEllipse.Create(0, 0, _style, null, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseP1);
-            _ellipseP2 = XEllipse.Create(0, 0, _style, null, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseP2);
-            _ellipseCenter = XEllipse.Create(0, 0, _style, null, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseCenter);
+            _ellipsePoint1 = XEllipse.Create(0, 0, _style, null, true);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint1);
+            _ellipsePoint2 = XEllipse.Create(0, 0, _style, null, true);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint2);
         }
-
+        
         /// <summary>
         /// 
         /// </summary>
         public override void ToStateTwo()
         {
-            if (_ellipseP1 != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipseP1);
-                _ellipseP1 = null;
-            }
-            
-            if (_ellipseP2 != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipseP2);
-                _ellipseP2 = null;
-            }
-            
-            _startLine = XLine.Create(0, 0, _style, null);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_startLine);
-            _ellipseStart = XEllipse.Create(0, 0, _style, null, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseStart);
+            _style = _editor.Project.Options.HelperStyle;
+            _line12 = XLine.Create(0, 0, _style, null);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line12);
+            _ellipsePoint3 = XEllipse.Create(0, 0, _style, null, true);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint3);
         }
 
         /// <summary>
@@ -335,16 +325,12 @@ namespace Test2d
         /// </summary>
         public override void ToStateThree()
         {
-            if (_ellipse != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipse);
-                _ellipse = null;
-            }
-            
-            _endLine = XLine.Create(0, 0, _style, null);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_endLine);
-            _ellipseEnd = XEllipse.Create(0, 0, _style, null, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseEnd);
+            _line43 = XLine.Create(0, 0, _style, null);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line43);
+            _line23 = XLine.Create(0, 0, _style, null);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line23);
+            _ellipsePoint4 = XEllipse.Create(0, 0, _style, null, true);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint4);
         }
 
         /// <summary>
@@ -360,71 +346,62 @@ namespace Test2d
         /// <param name="shape"></param>
         public override void Move(BaseShape shape)
         {
-            var arc = shape as XArc;
-            var a = WpfArc.FromXArc(arc, 0, 0);
-
-            if (_ellipse != null)
+            var bezier = shape as XBezier;
+            
+            if (_line12 != null)
             {
-                _ellipse.TopLeft.X = a.P1.X;
-                _ellipse.TopLeft.Y = a.P1.Y;
-                _ellipse.BottomRight.X = a.P2.X;
-                _ellipse.BottomRight.Y = a.P2.Y;
-            }
-
-            if (_startLine != null)
-            {
-                _startLine.Start.X = a.Center.X;
-                _startLine.Start.Y = a.Center.Y;
-                _startLine.End.X = a.Start.X;
-                _startLine.End.Y = a.Start.Y;
+                _line12.Start.X = bezier.Point1.X;
+                _line12.Start.Y = bezier.Point1.Y;
+                _line12.End.X = bezier.Point2.X;
+                _line12.End.Y = bezier.Point2.Y;
             }
 
-            if (_endLine != null)
+            if (_line43 != null)
             {
-                _endLine.Start.X = a.Center.X;
-                _endLine.Start.Y = a.Center.Y;
-                _endLine.End.X = a.End.X;
-                _endLine.End.Y = a.End.Y;
+                _line43.Start.X = bezier.Point4.X;
+                _line43.Start.Y = bezier.Point4.Y;
+                _line43.End.X = bezier.Point3.X;
+                _line43.End.Y = bezier.Point3.Y;
             }
             
-            if (_ellipseP1 != null)
+            if (_line23 != null)
             {
-                _ellipseP1.TopLeft.X = a.P1.X - _pointEllipseRadius;
-                _ellipseP1.TopLeft.Y = a.P1.Y - _pointEllipseRadius;
-                _ellipseP1.BottomRight.X = a.P1.X + _pointEllipseRadius;
-                _ellipseP1.BottomRight.Y = a.P1.Y + _pointEllipseRadius;
+                _line23.Start.X = bezier.Point2.X;
+                _line23.Start.Y = bezier.Point2.Y;
+                _line23.End.X = bezier.Point3.X;
+                _line23.End.Y = bezier.Point3.Y;
+            }
+ 
+            if (_ellipsePoint1 != null)
+            {
+                _ellipsePoint1.TopLeft.X = bezier.Point1.X - _pointEllipseRadius;
+                _ellipsePoint1.TopLeft.Y = bezier.Point1.Y - _pointEllipseRadius;
+                _ellipsePoint1.BottomRight.X = bezier.Point1.X + _pointEllipseRadius;
+                _ellipsePoint1.BottomRight.Y = bezier.Point1.Y + _pointEllipseRadius;
             }
             
-            if (_ellipseP2 != null)
+            if (_ellipsePoint2 != null)
             {
-                _ellipseP2.TopLeft.X = a.P2.X - _pointEllipseRadius;
-                _ellipseP2.TopLeft.Y = a.P2.Y - _pointEllipseRadius;
-                _ellipseP2.BottomRight.X = a.P2.X + _pointEllipseRadius;
-                _ellipseP2.BottomRight.Y = a.P2.Y + _pointEllipseRadius;
+                _ellipsePoint2.TopLeft.X = bezier.Point2.X - _pointEllipseRadius;
+                _ellipsePoint2.TopLeft.Y = bezier.Point2.Y - _pointEllipseRadius;
+                _ellipsePoint2.BottomRight.X = bezier.Point2.X + _pointEllipseRadius;
+                _ellipsePoint2.BottomRight.Y = bezier.Point2.Y + _pointEllipseRadius;
             }
             
-            if (_ellipseCenter != null)
+            if (_ellipsePoint3 != null)
             {
-                _ellipseCenter.TopLeft.X = a.Center.X - _pointEllipseRadius;
-                _ellipseCenter.TopLeft.Y = a.Center.Y - _pointEllipseRadius;
-                _ellipseCenter.BottomRight.X = a.Center.X + _pointEllipseRadius;
-                _ellipseCenter.BottomRight.Y = a.Center.Y + _pointEllipseRadius;
+                _ellipsePoint3.TopLeft.X = bezier.Point3.X - _pointEllipseRadius;
+                _ellipsePoint3.TopLeft.Y = bezier.Point3.Y - _pointEllipseRadius;
+                _ellipsePoint3.BottomRight.X = bezier.Point3.X + _pointEllipseRadius;
+                _ellipsePoint3.BottomRight.Y = bezier.Point3.Y + _pointEllipseRadius;
             }
             
-            if (_ellipseStart != null)
+            if (_ellipsePoint4 != null)
             {
-                _ellipseStart.TopLeft.X = a.Start.X - _pointEllipseRadius;
-                _ellipseStart.TopLeft.Y = a.Start.Y - _pointEllipseRadius;
-                _ellipseStart.BottomRight.X = a.Start.X + _pointEllipseRadius;
-                _ellipseStart.BottomRight.Y = a.Start.Y + _pointEllipseRadius;
-            }
-            
-            if (_ellipseEnd != null)
-            {
-                _ellipseEnd.TopLeft.X = a.End.X - _pointEllipseRadius;
-                _ellipseEnd.TopLeft.Y = a.End.Y - _pointEllipseRadius;
-                _ellipseEnd.BottomRight.X = a.End.X + _pointEllipseRadius;
-                _ellipseEnd.BottomRight.Y = a.End.Y + _pointEllipseRadius;
+                _ellipsePoint4.TopLeft.X = bezier.Point4.X - _pointEllipseRadius;
+                _ellipsePoint4.TopLeft.Y = bezier.Point4.Y - _pointEllipseRadius;
+                _ellipsePoint4.BottomRight.X = bezier.Point4.X + _pointEllipseRadius;
+                _ellipsePoint4.BottomRight.Y = bezier.Point4.Y + _pointEllipseRadius;
             }
         }
 
@@ -434,12 +411,6 @@ namespace Test2d
         /// <param name="shape"></param>
         public override void Finalize(BaseShape shape)
         {
-            var arc = shape as XArc;
-            var a = WpfArc.FromXArc(arc, 0, 0);
-            arc.Point3.X = a.Start.X;
-            arc.Point3.Y = a.Start.Y;
-            arc.Point4.X = a.End.X;
-            arc.Point4.Y = a.End.Y;
         }
 
         /// <summary>
@@ -447,54 +418,48 @@ namespace Test2d
         /// </summary>
         public override void Remove()
         {
-            if (_ellipse != null)
+            if (_line12 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipse);
-                _ellipse = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line12);
+                _line12 = null;
             }
 
-            if (_startLine != null)
+            if (_line43 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_startLine);
-                _startLine = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line43);
+                _line43 = null;
+            }
+            
+            if (_line23 != null)
+            {
+                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line23);
+                _line23 = null;
+            }
+            
+            if (_ellipsePoint1 != null)
+            {
+                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint1);
+                _ellipsePoint1 = null;
+            }
+            
+            if (_ellipsePoint2 != null)
+            {
+                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint2);
+                _ellipsePoint2 = null;
+            }
+   
+            if (_ellipsePoint3 != null)
+            {
+                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint3);
+                _ellipsePoint3 = null;
+            }
+            
+            if (_ellipsePoint4 != null)
+            {
+                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint4);
+                _ellipsePoint4 = null;
             }
 
-            if (_endLine != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_endLine);
-                _endLine = null;
-            }
-
-            if (_ellipseP1 != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipseP1);
-                _ellipseP1 = null;
-            }
-            
-            if (_ellipseP2 != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipseP2);
-                _ellipseP2 = null;
-            }
-            
-            if (_ellipseCenter != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipseCenter);
-                _ellipseCenter = null;
-            }
-            
-            if (_ellipseStart != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipseStart);
-                _ellipseStart = null;
-            }
-            
-            if (_ellipseEnd != null)
-            {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipseEnd);
-                _ellipseEnd = null;
-            }
-            
             _style = null;
         }
     }

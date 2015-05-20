@@ -274,7 +274,21 @@ namespace TestPDF
                 // set scaling function
                 _scaleToPage = (value) => value * scale;
 
+                // draw container template contents to pdf graphics
+                if (container.Template != null)
+                {
+                    DrawBackgroundInternal(
+                        gfx, 
+                        container.Template.Background, 
+                        Test2d.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
+                    Draw(gfx, container.Template, container.Properties);
+                }
+                
                 // draw container contents to pdf graphics
+                DrawBackgroundInternal(
+                    gfx, 
+                    container.Template.Background, 
+                    Test2d.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
                 Draw(gfx, container, container.Properties);
             }
 
@@ -405,13 +419,13 @@ namespace TestPDF
         /// 
         /// </summary>
         /// <param name="gfx"></param>
-        /// <param name="container"></param>
-        private void DrawBackground(XGraphics gfx, Test2d.Container container)
+        /// <param name="color"></param>
+        /// <param name="rect"></param>
+        private void DrawBackgroundInternal(XGraphics gfx, Test2d.ArgbColor color, Test2d.Rect2 rect)
         {
-            var rect = Test2d.Rect2.Create(0, 0, container.Width, container.Height);
             gfx.DrawRectangle(
                 null,
-                ToXSolidBrush(container.Background),
+                ToXSolidBrush(color),
                 _scaleToPage(rect.X),
                 _scaleToPage(rect.Y),
                 _scaleToPage(rect.Width),
@@ -433,21 +447,6 @@ namespace TestPDF
         /// <param name="db"></param>
         public void Draw(object gfx, Test2d.Container container, IList<Test2d.ShapeProperty> db)
         {
-            if (container.Template != null)
-            {
-                DrawBackground(gfx as XGraphics, container.Template);
-
-                foreach (var layer in container.Template.Layers)
-                {
-                    if (layer.IsVisible)
-                    {
-                        Draw(gfx, layer, db);
-                    }
-                }
-            }
-
-            DrawBackground(gfx as XGraphics, container);
-
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)

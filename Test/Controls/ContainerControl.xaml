@@ -86,6 +86,10 @@
                 DataContext="{Binding Project.CurrentContainer.WorkingLayer}" 
                 Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"
                 Tag="{Binding Path=DataContext.Project.CurrentContainer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"/>
+            <controls:LayerElement 
+                DataContext="{Binding Project.CurrentContainer.HelperLayer}" 
+                Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"
+                Tag="{Binding Path=DataContext.Project.CurrentContainer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"/>
         </Canvas>
     </Grid>
 </UserControl>

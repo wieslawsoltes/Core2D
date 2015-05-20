@@ -317,7 +317,7 @@ namespace TestEMF
         /// </summary>
         /// <param name="gfx"></param>
         /// <param name="container"></param>
-        private void DrawBackground(Graphics gfx, Container container)
+        private void DrawBackgroundInternal(Graphics gfx, Container container)
         {
             Brush brush = ToSolidBrush(container.Background);
             var rect = Rect2.Create(0, 0, container.Width, container.Height);
@@ -345,21 +345,6 @@ namespace TestEMF
         /// <param name="db"></param>
         public void Draw(object gfx, Container container, IList<ShapeProperty> db)
         {
-            if (container.Template != null)
-            {
-                DrawBackground(gfx as Graphics, container.Template);
-
-                foreach (var layer in container.Template.Layers)
-                {
-                    if (layer.IsVisible)
-                    {
-                        Draw(gfx, layer, db);
-                    }
-                }
-            }
-
-            DrawBackground(gfx as Graphics, container);
-
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)

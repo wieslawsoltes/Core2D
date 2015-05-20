@@ -247,7 +247,7 @@ namespace TestEDITOR
                 .StyleGroups.FirstOrDefault(g => g.Name == "Template")
                 .Styles.FirstOrDefault(s => s.Name == "Grid");
             var settings = LineGrid.Settings.Create(0, 0, container.Width, container.Height, 30, 30);
-            var shapes = LineGrid.Create(gs, settings, project.PointShape);
+            var shapes = LineGrid.Create(gs, settings, project.Options.PointShape);
             var layer = container.Layers.FirstOrDefault();
             
             foreach (var shape in shapes) 
@@ -992,6 +992,7 @@ namespace TestEDITOR
                 (item) => IsEditMode());
 
             WarmUpCSharpScript();
+            WarmUpHistory();
         }
 
         /// <summary>
@@ -1291,7 +1292,7 @@ namespace TestEDITOR
             // reset point shape to container default
             foreach (var point in Editor.GetAllPoints(shapes))
             {
-                point.Shape = _editor.Project.PointShape;
+                point.Shape = _editor.Project.Options.PointShape;
             }
 
             // try to restore shape styles
@@ -1640,13 +1641,45 @@ namespace TestEDITOR
             // NOTE: Warmup Roslyn script engine.
             try
             {
-                Task.Run(() => Eval("Action a = () => { };", this, Execute));
+                Task.Run(
+                    () =>
+                    {
+                        Eval("Action a = () => { };", this, Execute);
+                    });
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.Print(ex.Message);
                 System.Diagnostics.Debug.Print(ex.StackTrace);
             }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private void WarmUpHistory()
+        {
+            // NOTE: Warmup history serializer and compressor.
+            try
+            {
+                Task.Run(
+                    () =>
+                    {
+                        var history = new History<Project>(_serializer, _compressor);
+                        var project = DefaultProject();
+                        history.Snapshot(project);
+                        history.Undo(project);
+                    });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+            
+            
+            
+            
         }
 
         /// <summary>

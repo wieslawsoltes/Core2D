@@ -212,6 +212,7 @@ namespace TestWinForms
             }
 
             container.WorkingLayer.InvalidateLayer += (s, e) => panel.Invalidate();
+            container.HelperLayer.InvalidateLayer += (s, e) => panel.Invalidate();
         }
 
         /// <summary>
@@ -543,6 +544,26 @@ namespace TestWinForms
         /// 
         /// </summary>
         /// <param name="g"></param>
+        /// <param name="c"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        private void Background(Graphics g, ArgbColor c, double width, double height)
+        {
+            var brush =  new SolidBrush(Color.FromArgb(c.A, c.R, c.G, c.B));
+            var rect = Rect2.Create(0, 0, width, height);
+            g.FillRectangle(
+                brush,
+                (float)rect.X,
+                (float)rect.Y,
+                (float)rect.Width,
+                (float)rect.Height);
+            brush.Dispose();   
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="g"></param>
         private void Draw(Graphics g)
         {
             g.SmoothingMode = SmoothingMode.HighQuality;
@@ -557,8 +578,19 @@ namespace TestWinForms
 
             g.PageUnit = GraphicsUnit.Display;
 
-            Context.Editor.Renderer.Draw(g, Context.Editor.Project.CurrentContainer, Context.Editor.Project.CurrentContainer.Properties);
-            Context.Editor.Renderer.Draw(g, Context.Editor.Project.CurrentContainer.WorkingLayer, Context.Editor.Project.CurrentContainer.Properties);
+            var renderer = Context.Editor.Renderer;
+            var container = Context.Editor.Project.CurrentContainer;
+
+            if (container.Template != null)
+            {
+                Background(g, container.Template.Background, this.Width, this.Height);
+                renderer.Draw(g, container.Template, container.Properties);
+            }
+
+            Background(g, container.Background, this.Width, this.Height);
+            renderer.Draw(g, container, container.Properties);
+            renderer.Draw(g, container.WorkingLayer, container.Properties);
+            renderer.Draw(g, container.HelperLayer, container.Properties);
         }
     }
 }
