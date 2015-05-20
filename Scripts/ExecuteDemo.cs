@@ -17,7 +17,7 @@ void Animate(int delay, int count)
                 rand.NextDouble() * height, 
                 rand.NextDouble() * width, 
                 rand.NextDouble() * height, 
-                s, p.PointShape);
+                s, p.Options.PointShape);
             Execute(() => c.CurrentLayer.Shapes.Add(line));
             Execute(() => c.CurrentLayer.Invalidate());
             Thread.Sleep(delay);

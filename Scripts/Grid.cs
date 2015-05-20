@@ -70,7 +70,7 @@ var c = p.CurrentContainer;
 var layer = c.Layers.FirstOrDefault();
 var style = ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.0);
 var settings = Settings.Create(Point.Create(0, 0), Size.Create(c.Width, c.Height), Size.Create(30, 30));
-var shapes = Create(style, settings, p.PointShape);
+var shapes = Create(style, settings, p.Options.PointShape);
 foreach (var shape in shapes) 
 {
     layer.Shapes.Add(shape);

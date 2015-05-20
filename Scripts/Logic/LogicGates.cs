@@ -20,7 +20,7 @@ p.CurrentStyleGroup = sg;
 p.CurrentGroupLibrary = gl;
 
 var groups = gl.Groups;
-var ps = p.PointShape;
+var ps = p.Options.PointShape;
 
 var styleTextMediumLC = ShapeStyle.Create(
     "Logic-Text-Medium-LC", 
