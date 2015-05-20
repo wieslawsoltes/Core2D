@@ -17,19 +17,11 @@ namespace Test2d
     {
         private Project _project;
         private IRenderer _renderer;
-        private BaseShape _shape;
-        private State _currentState = State.None;
-        private Tool _currentTool = Tool.Selection;
+        private Tool _currentTool;
         private bool _isContextMenu;
-        private bool _enableObserver = true;
+        private bool _enableObserver;
         private Observer _observer;
         private History<Project> _history;
-        private double _startX;
-        private double _startY;
-        private double _historyX;
-        private double _historyY;
-        private bool _enableArcHelper = true;
-        private ArcHelper _arcHelper;
 
         /// <summary>
         /// Gets or sets current project.
@@ -59,22 +51,6 @@ namespace Test2d
                 {
                     _renderer = value;
                     Notify("Renderer");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets current editor state.
-        /// </summary>
-        public State CurrentState
-        {
-            get { return _currentState; }
-            set
-            {
-                if (value != _currentState)
-                {
-                    _currentState = value;
-                    Notify("CurrentState");
                 }
             }
         }
@@ -165,6 +141,56 @@ namespace Test2d
         public Func<string> GetImagePath { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public SelectionHelper SelectionHelper { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public PointHelper PointHelper { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public LineHelper LineHelper { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public RectangleHelper RectangleHelper { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EllipseHelper EllipseHelper { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ArcHelper ArcHelper { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public BezierHelper BezierHelper { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public QBezierHelper QBezierHelper { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public TextHelper TextHelper { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ImageHelper ImageHelper { get; set; }
+
+        /// <summary>
         /// Creates a new Editor instance.
         /// </summary>
         /// <param name="project">The project to edit.</param>
@@ -175,7 +201,6 @@ namespace Test2d
         {
             var editor = new Editor()
             {
-                CurrentState = State.None,
                 CurrentTool = Tool.Selection,
                 EnableObserver = true,
                 History = history,
@@ -188,6 +213,17 @@ namespace Test2d
             {
                 editor.Observer = new Observer(editor);
             }
+
+            editor.SelectionHelper = new SelectionHelper(editor);
+            editor.PointHelper = new PointHelper(editor);
+            editor.LineHelper = new LineHelper(editor);
+            editor.RectangleHelper = new RectangleHelper(editor);
+            editor.EllipseHelper = new EllipseHelper(editor);
+            editor.ArcHelper = new ArcHelper(editor);
+            editor.BezierHelper = new BezierHelper(editor);
+            editor.QBezierHelper = new QBezierHelper(editor);
+            editor.TextHelper = new TextHelper(editor);
+            editor.ImageHelper = new ImageHelper(editor);
 
             return editor;
         }
@@ -657,45 +693,6 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void MoveSelection(double x, double y)
-        {
-            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
-            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
-
-            double dx = sx - _startX;
-            double dy = sy - _startY;
-
-            _startX = sx;
-            _startY = sy;                    
-
-            if (_renderer.SelectedShape != null)
-            {
-                if (!_renderer.SelectedShape.State.HasFlag(ShapeState.Locked))
-                {
-                    //_renderer.SelectedShape.Move(dx, dy);
-                    Move(
-                        GetAllPoints(Enumerable.Repeat(_renderer.SelectedShape, 1)).Distinct(),
-                        dx, dy);
-                }
-            }
-
-            if (_renderer.SelectedShapes != null)
-            {
-                //foreach (var shape in _renderer.SelectedShapes)
-                //{
-                //    shape.Move(dx, dy);
-                //}
-                Move(
-                    GetAllPoints(_renderer.SelectedShapes.Where(s => !s.State.HasFlag(ShapeState.Locked))).Distinct(),
-                    dx, dy);
-            }
-        }
-
-        /// <summary>
         /// Removes container object from owner document Containers collection.
         /// </summary>
         /// <param name="container">The container object to remove from document Containers collection.</param>
@@ -856,321 +853,6 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="line"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectStart(XLine line, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                line.Start = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="line"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectEnd(XLine line, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                line.End = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="rectangle"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectTopLeft(XRectangle rectangle, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                rectangle.TopLeft = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="rectangle"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectBottomRight(XRectangle rectangle, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                rectangle.BottomRight = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ellipse"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectTopLeft(XEllipse ellipse, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                ellipse.TopLeft = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ellipse"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectBottomRight(XEllipse ellipse, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                ellipse.BottomRight = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="arc"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectPoint1(XArc arc, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                arc.Point1 = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="arc"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectPoint2(XArc arc, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                arc.Point2 = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="arc"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectPoint3(XArc arc, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                arc.Point3 = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="arc"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectPoint4(XArc arc, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                arc.Point4 = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="bezier"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectPoint1(XBezier bezier, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                bezier.Point1 = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="bezier"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectPoint2(XBezier bezier, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                bezier.Point2 = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="bezier"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectPoint3(XBezier bezier, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                bezier.Point3 = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="bezier"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectPoint4(XBezier bezier, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                bezier.Point4 = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="qbezier"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectPoint1(XQBezier qbezier, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                qbezier.Point1 = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="qbezier"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectPoint2(XQBezier qbezier, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                qbezier.Point2 = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="qbezier"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectPoint3(XQBezier qbezier, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                qbezier.Point3 = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectTopLeft(XText text, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                text.TopLeft = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectBottomRight(XText text, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                text.BottomRight = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="image"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectTopLeft(XImage image, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                image.TopLeft = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="image"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void TryToConnectBottomRight(XImage image, double x, double y)
-        {
-            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(x, y), _project.Options.HitTreshold);
-            if (result != null && result is XPoint)
-            {
-                image.BottomRight = result as XPoint;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <returns></returns>
         public bool IsLeftDownAvailable()
         {
@@ -1242,1007 +924,7 @@ namespace Test2d
             return _renderer.SelectedShape != null
                 || _renderer.SelectedShapes != null;
         }
-
-        private void SelectionLeftDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    {
-                        if (_renderer.SelectedShape == null
-                            && _renderer.SelectedShapes != null)
-                        {
-                            var result = ShapeBounds.HitTest(Project.CurrentContainer, new Vector2(sx, sy), _project.Options.HitTreshold);
-                            if (result != null)
-                            {
-                                _startX = _project.Options.SnapToGrid ? Snap(sx, _project.Options.SnapX) : sx;
-                                _startY = _project.Options.SnapToGrid ? Snap(sy, _project.Options.SnapY) : sy;
-                                _historyX = _startX;
-                                _historyY = _startY;   
-                                _history.Hold(_project);
-                                IsContextMenu = false;
-                                CurrentState = State.One;
-                                break;
-                            }
-                        }
-
-                        if (TryToSelectShape(Project.CurrentContainer, sx, sy))
-                        {
-                            _startX = _project.Options.SnapToGrid ? Snap(sx, _project.Options.SnapX) : sx;
-                            _startY = _project.Options.SnapToGrid ? Snap(sy, _project.Options.SnapY) : sy;
-                            _historyX = _startX;
-                            _historyY = _startY;   
-                            _history.Hold(_project);
-                            IsContextMenu = false;
-                            CurrentState = State.One;
-                            break;
-                        }
-
-                        _shape = XRectangle.Create(
-                            sx, sy,
-                            _project.Options.SelectionStyle,
-                            null,
-                            true);
-                        Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.One;
-                    }
-                    break;
-                case State.One:
-                    {
-                        var rectangle = _shape as XRectangle;
-                        if (rectangle != null)
-                        {
-                            rectangle.BottomRight.X = sx;
-                            rectangle.BottomRight.Y = sy;
-                            Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                            CurrentState = State.None;
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void SelectionLeftUp(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                    {
-                        if (IsSelectionAvailable())
-                        {
-                            double x = _project.Options.SnapToGrid ? Snap(sx, _project.Options.SnapX) : sx;
-                            double y = _project.Options.SnapToGrid ? Snap(sy, _project.Options.SnapY) : sy;
-                            if (_historyX != x || _historyY != y)
-                            {
-                                _history.Commit();
-                            }
-                            else
-                            {
-                                _history.Release();
-                            }
-                            CurrentState = State.None;
-                            break;
-                        }
-
-                        var rectangle = _shape as XRectangle;
-                        if (rectangle != null)
-                        {
-                            rectangle.BottomRight.X = sx;
-                            rectangle.BottomRight.Y = sy;
-                            Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                            CurrentState = State.None;
-
-                            TryToSelectShapes(Project.CurrentContainer, rectangle);
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void PointLeftDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    {
-                        _shape = XPoint.Create(sx, sy, Project.PointShape);
-                        _history.Snapshot(_project);
-                        Project.CurrentContainer.CurrentLayer.Shapes.Add(_shape);
-                        //Project.CurrentContainer.Invalidate();
-                    }
-                    break;
-            }
-        }
-
-        private void LineLeftDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    {
-                        _shape = XLine.Create(
-                            sx, sy,
-                            Project.CurrentStyleGroup.CurrentStyle,
-                            Project.PointShape);
-                        if (_project.Options.TryToConnect)
-                        {
-                            TryToConnectStart(_shape as XLine, sx, sy);
-                        }
-                        Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.One;
-                    }
-                    break;
-                case State.One:
-                    {
-                        var line = _shape as XLine;
-                        if (line != null)
-                        {
-                            line.End.X = sx;
-                            line.End.Y = sy;
-                            if (_project.Options.TryToConnect)
-                            {
-                                TryToConnectEnd(_shape as XLine, sx, sy);
-                            }
-                            Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                            _history.Snapshot(_project);
-                            Project.CurrentContainer.CurrentLayer.Shapes.Add(_shape);
-                            //Project.CurrentContainer.Invalidate();
-                            CurrentState = State.None;
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void RectangleLeftDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    {
-                        _shape = XRectangle.Create(
-                            sx, sy,
-                            Project.CurrentStyleGroup.CurrentStyle,
-                            Project.PointShape,
-                            _project.Options.DefaultIsFilled);
-                        if (_project.Options.TryToConnect)
-                        {
-                            TryToConnectTopLeft(_shape as XRectangle, sx, sy);
-                        }
-                        Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.One;
-                    }
-                    break;
-                case State.One:
-                    {
-                        var rectangle = _shape as XRectangle;
-                        if (rectangle != null)
-                        {
-                            rectangle.BottomRight.X = sx;
-                            rectangle.BottomRight.Y = sy;
-                            if (_project.Options.TryToConnect)
-                            {
-                                TryToConnectBottomRight(_shape as XRectangle, sx, sy);
-                            }
-                            Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                            _history.Snapshot(_project);
-                            Project.CurrentContainer.CurrentLayer.Shapes.Add(_shape);
-                            //Project.CurrentContainer.Invalidate();
-                            CurrentState = State.None;
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void EllipseLeftDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    {
-                        _shape = XEllipse.Create(
-                            sx, sy,
-                            Project.CurrentStyleGroup.CurrentStyle,
-                            Project.PointShape,
-                            _project.Options.DefaultIsFilled);
-                        if (_project.Options.TryToConnect)
-                        {
-                            TryToConnectTopLeft(_shape as XEllipse, sx, sy);
-                        }
-                        Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.One;
-                    }
-                    break;
-                case State.One:
-                    {
-                        var ellipse = _shape as XEllipse;
-                        if (ellipse != null)
-                        {
-                            ellipse.BottomRight.X = sx;
-                            ellipse.BottomRight.Y = sy;
-                            if (_project.Options.TryToConnect)
-                            {
-                                TryToConnectBottomRight(_shape as XEllipse, sx, sy);
-                            }
-                            Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                            _history.Snapshot(_project);
-                            Project.CurrentContainer.CurrentLayer.Shapes.Add(_shape);
-                            //Project.CurrentContainer.Invalidate();
-                            CurrentState = State.None;
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void ArcLeftDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    {
-                        _shape = XArc.Create(
-                            sx, sy,
-                            Project.CurrentStyleGroup.CurrentStyle,
-                            Project.PointShape,
-                            _project.Options.DefaultIsFilled);
-                        if (_project.Options.TryToConnect)
-                        {
-                            TryToConnectPoint1(_shape as XArc, sx, sy);
-                        }
-                        if (_enableArcHelper)
-                        {
-                            _arcHelper = new ArcHelper(Project);
-                            _arcHelper.ToStateOne();
-                            _arcHelper.Move(_shape as XArc);
-                        }
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.One;
-                    }
-                    break;
-                case State.One:
-                    {
-                        var arc = _shape as XArc;
-                        if (arc != null)
-                        {
-                            arc.Point2.X = sx;
-                            arc.Point2.Y = sy;
-                            arc.Point3.X = sx;
-                            arc.Point3.Y = sy;
-                            if (_project.Options.TryToConnect)
-                            {
-                                TryToConnectPoint2(_shape as XArc, sx, sy);
-                            }
-                            if (_enableArcHelper)
-                            {
-                                _arcHelper.ToStateTwo();
-                                _arcHelper.Move(_shape as XArc);
-                            }
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                            CurrentState = State.Two;
-                        }
-                    }
-                    break;
-                case State.Two:
-                    {
-                        var arc = _shape as XArc;
-                        if (arc != null)
-                        {
-                            arc.Point3.X = sx;
-                            arc.Point3.Y = sy;
-                            arc.Point4.X = sx;
-                            arc.Point4.Y = sy;
-                            if (_project.Options.TryToConnect)
-                            {
-                                TryToConnectPoint3(_shape as XArc, sx, sy);
-                            }
-                            if (_enableArcHelper)
-                            {
-                                _arcHelper.ToStateThree();
-                                _arcHelper.Move(_shape as XArc);
-                            }
-                            Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                            CurrentState = State.Three;
-                        }
-                    }
-                    break;
-                case State.Three:
-                    {
-                        var arc = _shape as XArc;
-                        if (arc != null)
-                        {
-                            arc.Point4.X = sx;
-                            arc.Point4.Y = sy;
-                            if (_project.Options.TryToConnect)
-                            {
-                                TryToConnectPoint4(_shape as XArc, sx, sy);
-                            }
-                            if (_enableArcHelper)
-                            {
-                                _arcHelper.Remove();
-                                _arcHelper.Finalize(_shape as XArc);
-                            }
-                            Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                            _history.Snapshot(_project);
-                            Project.CurrentContainer.CurrentLayer.Shapes.Add(_shape);
-                            //Project.CurrentContainer.Invalidate();
-                            CurrentState = State.None;
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void BezierLeftDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    {
-                        _shape = XBezier.Create(
-                            sx, sy,
-                            Project.CurrentStyleGroup.CurrentStyle,
-                            Project.PointShape,
-                            _project.Options.DefaultIsFilled);
-                        if (_project.Options.TryToConnect)
-                        {
-                            TryToConnectPoint1(_shape as XBezier, sx, sy);
-                        }
-                        Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.One;
-                    }
-                    break;
-                case State.One:
-                    {
-                        var bezier = _shape as XBezier;
-                        if (bezier != null)
-                        {
-                            bezier.Point2.X = sx;
-                            bezier.Point2.Y = sy;
-                            bezier.Point3.X = sx;
-                            bezier.Point3.Y = sy;
-                            bezier.Point4.X = sx;
-                            bezier.Point4.Y = sy;
-                            if (_project.Options.TryToConnect)
-                            {
-                                TryToConnectPoint4(_shape as XBezier, sx, sy);
-                            }
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                            CurrentState = State.Two;
-                        }
-                    }
-                    break;
-                case State.Two:
-                    {
-                        var bezier = _shape as XBezier;
-                        if (bezier != null)
-                        {
-                            bezier.Point2.X = sx;
-                            bezier.Point2.Y = sy;
-                            bezier.Point3.X = sx;
-                            bezier.Point3.Y = sy;
-                            if (_project.Options.TryToConnect)
-                            {
-                                TryToConnectPoint3(_shape as XBezier, sx, sy);
-                            }
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                            CurrentState = State.Three;
-                        }
-                    }
-                    break;
-                case State.Three:
-                    {
-                        var bezier = _shape as XBezier;
-                        if (bezier != null)
-                        {
-                            bezier.Point2.X = sx;
-                            bezier.Point2.Y = sy;
-                            if (_project.Options.TryToConnect)
-                            {
-                                TryToConnectPoint2(_shape as XBezier, sx, sy);
-                            }
-                            Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                            _history.Snapshot(_project);
-                            Project.CurrentContainer.CurrentLayer.Shapes.Add(_shape);
-                            //Project.CurrentContainer.Invalidate();
-                            CurrentState = State.None;
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void QBezierLeftDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    {
-                        _shape = XQBezier.Create(
-                            sx, sy,
-                            Project.CurrentStyleGroup.CurrentStyle,
-                            Project.PointShape,
-                            _project.Options.DefaultIsFilled);
-                        if (_project.Options.TryToConnect)
-                        {
-                            TryToConnectPoint1(_shape as XQBezier, sx, sy);
-                        }
-                        Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.One;
-                    }
-                    break;
-                case State.One:
-                    {
-                        var qbezier = _shape as XQBezier;
-                        if (qbezier != null)
-                        {
-                            qbezier.Point2.X = sx;
-                            qbezier.Point2.Y = sy;
-                            qbezier.Point3.X = sx;
-                            qbezier.Point3.Y = sy;
-                            if (_project.Options.TryToConnect)
-                            {
-                                TryToConnectPoint3(_shape as XQBezier, sx, sy);
-                            }
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                            CurrentState = State.Two;
-                        }
-                    }
-                    break;
-                case State.Two:
-                    {
-                        var qbezier = _shape as XQBezier;
-                        if (qbezier != null)
-                        {
-                            qbezier.Point2.X = sx;
-                            qbezier.Point2.Y = sy;
-                            if (_project.Options.TryToConnect)
-                            {
-                                TryToConnectPoint2(_shape as XQBezier, sx, sy);
-                            }
-                            Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                            _history.Snapshot(_project);
-                            Project.CurrentContainer.CurrentLayer.Shapes.Add(_shape);
-                            //Project.CurrentContainer.Invalidate();
-                            CurrentState = State.None;
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void TextLeftDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    {
-                        _shape = XText.Create(
-                            sx, sy,
-                            Project.CurrentStyleGroup.CurrentStyle,
-                            Project.PointShape,
-                            "Text",
-                            _project.Options.DefaultIsFilled);
-                        if (_project.Options.TryToConnect)
-                        {
-                            TryToConnectTopLeft(_shape as XText, sx, sy);
-                        }
-                        Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.One;
-                    }
-                    break;
-                case State.One:
-                    {
-                        var text = _shape as XText;
-                        if (text != null)
-                        {
-                            text.BottomRight.X = sx;
-                            text.BottomRight.Y = sy;
-                            if (_project.Options.TryToConnect)
-                            {
-                                TryToConnectBottomRight(_shape as XText, sx, sy);
-                            }
-                            Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                            _history.Snapshot(_project);
-                            Project.CurrentContainer.CurrentLayer.Shapes.Add(_shape);
-                            //Project.CurrentContainer.Invalidate();
-                            CurrentState = State.None;
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void ImageLeftDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    {
-                        var path = GetImagePath();
-                        if (string.IsNullOrEmpty(path))
-                            return;
-
-                        var uri = new Uri(path);
-
-                        _shape = XImage.Create(
-                            sx, sy,
-                            Project.CurrentStyleGroup.CurrentStyle,
-                            Project.PointShape,
-                            uri,
-                            _project.Options.DefaultIsFilled);
-                        if (_project.Options.TryToConnect)
-                        {
-                            TryToConnectTopLeft(_shape as XImage, sx, sy);
-                        }
-                        Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.One;
-                    }
-                    break;
-                case State.One:
-                    {
-                        var image = _shape as XImage;
-                        if (image != null)
-                        {
-                            image.BottomRight.X = sx;
-                            image.BottomRight.Y = sy;
-                            if (_project.Options.TryToConnect)
-                            {
-                                TryToConnectBottomRight(_shape as XImage, sx, sy);
-                            }
-                            Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                            _history.Snapshot(_project);
-                            Project.CurrentContainer.CurrentLayer.Shapes.Add(_shape);
-                            //Project.CurrentContainer.Invalidate();
-                            CurrentState = State.None;
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void SelectionRightDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    {
-                        IsContextMenu = TryToSelectShape(Project.CurrentContainer, sx, sy) ? true : false;
-                    }
-                    break;
-            }
-        }
-
-        private void PointRightDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-            }
-        }
-
-        private void LineRightDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                    {
-                        Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.None;
-                    }
-                    break;
-            }
-        }
-
-        private void RectangleRightDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                    {
-                        Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.None;
-                    }
-                    break;
-            }
-        }
-
-        private void EllipseRightDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                    {
-                        Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.None;
-                    }
-                    break;
-            }
-        }
-
-        private void ArcRightDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                case State.Two:
-                case State.Three:
-                    {
-                        if (_enableArcHelper)
-                        {
-                            _arcHelper.Remove();
-                        }
-                        Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.None;
-                    }
-                    break;
-            }
-        }
-
-        private void BezierRightDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                case State.Two:
-                case State.Three:
-                    {
-                        Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.None;
-                    }
-                    break;
-            }
-        }
-
-        private void QBezierRightDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                case State.Two:
-                    {
-                        Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.None;
-                    }
-                    break;
-            }
-        }
-
-        private void TextRightDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                    {
-                        Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.None;
-                    }
-                    break;
-            }
-        }
-
-        private void ImageRightDown(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                    {
-                        Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
-                        Project.CurrentContainer.WorkingLayer.Invalidate();
-                        CurrentState = State.None;
-                    }
-                    break;
-            }
-        }
-
-        private void SelectionMove(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                    {
-                        if (IsSelectionAvailable())
-                        {
-                            MoveSelection(sx, sy);
-                            break;
-                        }
-
-                        var rectangle = _shape as XRectangle;
-                        if (rectangle != null)
-                        {
-                            rectangle.BottomRight.X = sx;
-                            rectangle.BottomRight.Y = sy;
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void PointMove(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-            }
-        }
-
-        private void LineMove(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                    {
-                        var line = _shape as XLine;
-                        if (line != null)
-                        {
-                            line.End.X = sx;
-                            line.End.Y = sy;
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void RectangleMove(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                    {
-                        var rectangle = _shape as XRectangle;
-                        if (rectangle != null)
-                        {
-                            rectangle.BottomRight.X = sx;
-                            rectangle.BottomRight.Y = sy;
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void EllipseMove(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                    {
-                        var ellipse = _shape as XEllipse;
-                        if (ellipse != null)
-                        {
-                            ellipse.BottomRight.X = sx;
-                            ellipse.BottomRight.Y = sy;
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void ArcMove(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                    {
-                        var arc = _shape as XArc;
-                        if (arc != null)
-                        {
-                            arc.Point2.X = sx;
-                            arc.Point2.Y = sy;
-                            if (_enableArcHelper)
-                            {
-                                _arcHelper.Move(_shape as XArc);
-                            }
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                        }
-                    }
-                    break;
-                case State.Two:
-                    {
-                        var arc = _shape as XArc;
-                        if (arc != null)
-                        {
-                            arc.Point3.X = sx;
-                            arc.Point3.Y = sy;
-                            if (_enableArcHelper)
-                            {
-                                _arcHelper.Move(_shape as XArc);
-                            }
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                        }
-                    }
-                    break;
-                case State.Three:
-                    {
-                        var arc = _shape as XArc;
-                        if (arc != null)
-                        {
-                            arc.Point4.X = sx;
-                            arc.Point4.Y = sy;
-                            if (_enableArcHelper)
-                            {
-                                _arcHelper.Move(_shape as XArc);
-                            }
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void BezierMove(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                    {
-                        var bezier = _shape as XBezier;
-                        if (bezier != null)
-                        {
-                            bezier.Point2.X = sx;
-                            bezier.Point2.Y = sy;
-                            bezier.Point3.X = sx;
-                            bezier.Point3.Y = sy;
-                            bezier.Point4.X = sx;
-                            bezier.Point4.Y = sy;
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                        }
-                    }
-                    break;
-                case State.Two:
-                    {
-                        var bezier = _shape as XBezier;
-                        if (bezier != null)
-                        {
-                            bezier.Point2.X = sx;
-                            bezier.Point2.Y = sy;
-                            bezier.Point3.X = sx;
-                            bezier.Point3.Y = sy;
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                        }
-                    }
-                    break;
-                case State.Three:
-                    {
-                        var bezier = _shape as XBezier;
-                        if (bezier != null)
-                        {
-                            bezier.Point2.X = sx;
-                            bezier.Point2.Y = sy;
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void QBezierMove(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                    {
-                        var qbezier = _shape as XQBezier;
-                        if (qbezier != null)
-                        {
-                            qbezier.Point2.X = sx;
-                            qbezier.Point2.Y = sy;
-                            qbezier.Point3.X = sx;
-                            qbezier.Point3.Y = sy;
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                        }
-                    }
-                    break;
-                case State.Two:
-                    {
-                        var qbezier = _shape as XQBezier;
-                        if (qbezier != null)
-                        {
-                            qbezier.Point2.X = sx;
-                            qbezier.Point2.Y = sy;
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void TextMove(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                    {
-                        var text = _shape as XText;
-                        if (text != null)
-                        {
-                            text.BottomRight.X = sx;
-                            text.BottomRight.Y = sy;
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                        }
-                    }
-                    break;
-            }
-        }
-
-        private void ImageMove(double sx, double sy)
-        {
-            switch (CurrentState)
-            {
-                case State.None:
-                    break;
-                case State.One:
-                    {
-                        var image = _shape as XImage;
-                        if (image != null)
-                        {
-                            image.BottomRight.X = sx;
-                            image.BottomRight.Y = sy;
-                            Project.CurrentContainer.WorkingLayer.Invalidate();
-                        }
-                    }
-                    break;
-            }
-        }
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -2250,60 +932,58 @@ namespace Test2d
         /// <param name="y"></param>
         public void LeftDown(double x, double y)
         {
-            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
-            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
             switch (CurrentTool)
             {
                 case Tool.None:
                     break;
                 case Tool.Selection:
                     {
-                        SelectionLeftDown(x, y);
+                        SelectionHelper.LeftDown(x, y);
                     }
                     break;
                 case Tool.Point:
                     {
-                        PointLeftDown(sx, sy);
+                        PointHelper.LeftDown(x, y);
                     }
                     break;
                 case Tool.Line:
                     {
-                        LineLeftDown(sx, sy);
+                        LineHelper.LeftDown(x, y);
                     }
                     break;
                 case Tool.Rectangle:
                     {
-                        RectangleLeftDown(sx, sy);
+                        RectangleHelper.LeftDown(x, y);
                     }
                     break;
                 case Tool.Ellipse:
                     {
-                        EllipseLeftDown(sx, sy);
+                        EllipseHelper.LeftDown(x, y);
                     }
                     break;
                 case Tool.Arc:
                     {
-                        ArcLeftDown(sx, sy);
+                        ArcHelper.LeftDown(x, y);
                     }
                     break;
                 case Tool.Bezier:
                     {
-                        BezierLeftDown(sx, sy);
+                        BezierHelper.LeftDown(x, y);
                     }
                     break;
                 case Tool.QBezier:
                     {
-                        QBezierLeftDown(sx, sy);
+                        QBezierHelper.LeftDown(x, y);
                     }
                     break;
                 case Tool.Text:
                     {
-                        TextLeftDown(sx, sy);
+                        TextHelper.LeftDown(x, y);
                     }
                     break;
                 case Tool.Image:
                     {
-                        ImageLeftDown(sx, sy);
+                        ImageHelper.LeftDown(x, y);
                     }
                     break;
             }
@@ -2316,34 +996,59 @@ namespace Test2d
         /// <param name="y"></param>
         public void LeftUp(double x, double y)
         {
-            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
-            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
             switch (CurrentTool)
             {
                 case Tool.None:
                     break;
                 case Tool.Selection:
                     {
-                        SelectionLeftUp(x, y);
+                        SelectionHelper.LeftUp(x, y);
                     }
                     break;
                 case Tool.Point:
+                    {
+                        PointHelper.LeftUp(x, y);
+                    }
                     break;
                 case Tool.Line:
+                    {
+                        LineHelper.LeftUp(x, y);
+                    }
                     break;
                 case Tool.Rectangle:
+                    {
+                        RectangleHelper.LeftUp(x, y);
+                    }
                     break;
                 case Tool.Ellipse:
+                    {
+                        EllipseHelper.LeftUp(x, y);
+                    }
                     break;
                 case Tool.Arc:
+                    {
+                        ArcHelper.LeftUp(x, y);
+                    }
                     break;
                 case Tool.Bezier:
+                    {
+                        BezierHelper.LeftUp(x, y);
+                    }
                     break;
                 case Tool.QBezier:
+                    {
+                        QBezierHelper.LeftUp(x, y);
+                    }
                     break;
                 case Tool.Text:
+                    {
+                        TextHelper.LeftUp(x, y);
+                    }
                     break;
                 case Tool.Image:
+                    {
+                        ImageHelper.LeftUp(x, y);
+                    }
                     break;
             }
         }
@@ -2355,63 +1060,58 @@ namespace Test2d
         /// <param name="y"></param>
         public void RightDown(double x, double y)
         {
-            if (CurrentState == State.None)
-            {
-                SelectionRightDown(x, y);
-                return;
-            }
-
-            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
-            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
             switch (CurrentTool)
             {
                 case Tool.None:
                     break;
                 case Tool.Selection:
+                    {
+                        SelectionHelper.RightDown(x, y);
+                    }
                     break;
                 case Tool.Point:
                     {
-                        PointRightDown(sx, sy);
+                        PointHelper.RightDown(x, y);
                     }
                     break;
                 case Tool.Line:
                     {
-                        LineRightDown(sx, sy);
+                        LineHelper.RightDown(x, y);
                     }
                     break;
                 case Tool.Rectangle:
                     {
-                        RectangleRightDown(sx, sy);
+                        RectangleHelper.RightDown(x, y);
                     }
                     break;
                 case Tool.Ellipse:
                     {
-                        EllipseRightDown(sx, sy);
+                        EllipseHelper.RightDown(x, y);
                     }
                     break;
                 case Tool.Arc:
                     {
-                        ArcRightDown(sx, sy);
+                        ArcHelper.RightDown(x, y);
                     }
                     break;
                 case Tool.Bezier:
                     {
-                        BezierRightDown(sx, sy);
+                        BezierHelper.RightDown(x, y);
                     }
                     break;
                 case Tool.QBezier:
                     {
-                        QBezierRightDown(sx, sy);
+                        QBezierHelper.RightDown(x, y);
                     }
                     break;
                 case Tool.Text:
                     {
-                        TextRightDown(sx, sy);
+                        TextHelper.RightDown(x, y);
                     }
                     break;
                 case Tool.Image:
                     {
-                        ImageRightDown(sx, sy);
+                        ImageHelper.RightDown(x, y);
                     }
                     break;
             }
@@ -2424,31 +1124,59 @@ namespace Test2d
         /// <param name="y"></param>
         public void RightUp(double x, double y)
         {
-            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
-            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
             switch (CurrentTool)
             {
                 case Tool.None:
                     break;
                 case Tool.Selection:
+                    {
+                        SelectionHelper.RightUp(x, y);
+                    }
                     break;
                 case Tool.Point:
+                    {
+                        PointHelper.RightUp(x, y);
+                    }
                     break;
                 case Tool.Line:
+                    {
+                        LineHelper.RightUp(x, y);
+                    }
                     break;
                 case Tool.Rectangle:
+                    {
+                        RectangleHelper.RightUp(x, y);
+                    }
                     break;
                 case Tool.Ellipse:
+                    {
+                        EllipseHelper.RightUp(x, y);
+                    }
                     break;
                 case Tool.Arc:
+                    {
+                        ArcHelper.RightUp(x, y);
+                    }
                     break;
                 case Tool.Bezier:
+                    {
+                        BezierHelper.RightUp(x, y);
+                    }
                     break;
                 case Tool.QBezier:
+                    {
+                        QBezierHelper.RightUp(x, y);
+                    }
                     break;
                 case Tool.Text:
+                    {
+                        TextHelper.RightUp(x, y);
+                    }
                     break;
                 case Tool.Image:
+                    {
+                        ImageHelper.RightUp(x, y);
+                    }
                     break;
             }
         }
@@ -2460,60 +1188,58 @@ namespace Test2d
         /// <param name="y"></param>
         public void Move(double x, double y)
         {
-            double sx = _project.Options.SnapToGrid ? Snap(x, _project.Options.SnapX) : x;
-            double sy = _project.Options.SnapToGrid ? Snap(y, _project.Options.SnapY) : y;
             switch (CurrentTool)
             {
                 case Tool.None:
                     break;
                 case Tool.Selection:
                     {
-                        SelectionMove(x, y);
+                        SelectionHelper.Move(x, y);
                     }
                     break;
                 case Tool.Point:
                     {
-                        PointMove(sx, sy);
+                        PointHelper.Move(x, y);
                     }
                     break;
                 case Tool.Line:
                     {
-                        LineMove(sx, sy);
+                        LineHelper.Move(x, y);
                     }
                     break;
                 case Tool.Rectangle:
                     {
-                        RectangleMove(sx, sy);
+                        RectangleHelper.Move(x, y);
                     }
                     break;
                 case Tool.Ellipse:
                     {
-                        EllipseMove(sx, sy);
+                        EllipseHelper.Move(x, y);
                     }
                     break;
                 case Tool.Arc:
                     {
-                        ArcMove(sx, sy);
+                        ArcHelper.Move(x, y);
                     }
                     break;
                 case Tool.Bezier:
                     {
-                        BezierMove(sx, sy);
+                        BezierHelper.Move(x, y);
                     }
                     break;
                 case Tool.QBezier:
                     {
-                        QBezierMove(sx, sy);
+                        QBezierHelper.Move(x, y);
                     }
                     break;
                 case Tool.Text:
                     {
-                        TextMove(sx, sy);
+                        TextHelper.Move(x, y);
                     }
                     break;
                 case Tool.Image:
                     {
-                        ImageMove(sx, sy);
+                        ImageHelper.Move(x, y);
                     }
                     break;
             }
