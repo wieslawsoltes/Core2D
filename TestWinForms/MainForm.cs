@@ -572,8 +572,8 @@ namespace TestWinForms
             g.CompositingQuality = CompositingQuality.HighQuality;
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-            g.TranslateTransform((float)0f, (float)0f);
-            g.ScaleTransform((float)Context.Editor.Renderer.Zoom, (float)Context.Editor.Renderer.Zoom);
+            //g.TranslateTransform((float)0f, (float)0f);
+            //g.ScaleTransform((float)Context.Editor.Renderer.Zoom, (float)Context.Editor.Renderer.Zoom);
             g.Clear(Color.FromArgb(255, 211, 211, 211));
 
             g.PageUnit = GraphicsUnit.Display;
