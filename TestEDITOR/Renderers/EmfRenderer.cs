@@ -701,10 +701,14 @@ namespace TestEMF
 
             _gfx.DrawBezier(
                 pen,
-                _scaleToPage(x1 + dx), _scaleToPage(y1 + dy),
-                _scaleToPage(x2 + dx), _scaleToPage(y2 + dy),
-                _scaleToPage(x3 + dx), _scaleToPage(y3 + dy),
-                _scaleToPage(x4 + dx), _scaleToPage(y4 + dy));
+                _scaleToPage(x1 + dx), 
+                _scaleToPage(y1 + dy),
+                _scaleToPage(x2 + dx), 
+                _scaleToPage(y2 + dy),
+                _scaleToPage(x3 + dx), 
+                _scaleToPage(y3 + dy),
+                _scaleToPage(x4 + dx), 
+                _scaleToPage(y4 + dy));
 
             //brush.Dispose();
             pen.Dispose();
