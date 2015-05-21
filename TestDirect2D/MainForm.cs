@@ -39,6 +39,7 @@ namespace TestDirect2D
             context.InitializeSctipts();
             context.InitializeSimulation();
             context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
+            context.Editor.GetImagePath = () => Image();
 
             Title = "Test";
             ClientSize = new Size(1000, 650);
@@ -597,6 +598,26 @@ namespace TestDirect2D
 
             sw.Stop();
             System.Diagnostics.Debug.Print(sw.ElapsedMilliseconds + "ms");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string Image()
+        {
+            var dlg = new OpenFileDialog();
+            dlg.Filters = new List<FileDialogFilter>()
+            {
+                new FileDialogFilter("All", ".*")
+            };
+            dlg.FileName = "";
+            var result = dlg.ShowDialog(this);
+            if (result == DialogResult.Ok)
+            {
+                return dlg.FileName;
+            }
+            return null;
         }
     }
     
