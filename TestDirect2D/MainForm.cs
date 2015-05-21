@@ -30,7 +30,7 @@ namespace TestDirect2D
                 this,
                 new EtoRenderer(72.0 / 96.0),
                 new TextClipboard(),
-                new GZipCompressor());
+                new LZ4CodecCompressor());
             context.InitializeSctipts();
             context.InitializeSimulation();
             context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
