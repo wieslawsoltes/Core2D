@@ -365,7 +365,6 @@ namespace TestDirect2D
         /// </summary>
         public void ClearCache()
         {
-
         }
 
         /// <summary>
@@ -456,8 +455,7 @@ namespace TestDirect2D
                         pt1 = t1.TransformPoint(new PointF(x1 - (float)sizeX1, y1));
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
                         _gfx.SaveTransform();
-                        _gfx.TranslateTransform(c1);
-                        _gfx.RotateTransform(a1);
+                        _gfx.MultiplyTransform(t1);
                         DrawRectangleInternal(_gfx, fill, stroke, sas.IsFilled, ref rect);
                         _gfx.RestoreTransform();
                     }
@@ -466,8 +464,7 @@ namespace TestDirect2D
                     {
                         pt1 = t1.TransformPoint(new PointF(x1 - (float)sizeX1, y1));
                         _gfx.SaveTransform();
-                        _gfx.TranslateTransform(c1);
-                        _gfx.RotateTransform(a1);
+                        _gfx.MultiplyTransform(t1);
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
                         DrawEllipseInternal(_gfx, fill, stroke, sas.IsFilled, ref rect);
                         _gfx.RestoreTransform();
@@ -512,8 +509,7 @@ namespace TestDirect2D
                         pt2 = t2.TransformPoint(new PointF(x2 - (float)sizeX2, y2));
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
                         _gfx.SaveTransform();
-                        _gfx.TranslateTransform(c2);
-                        _gfx.RotateTransform(a2);
+                        _gfx.MultiplyTransform(t2);
                         DrawRectangleInternal(_gfx, fill, stroke, eas.IsFilled, ref rect);
                         _gfx.RestoreTransform();
                     }
@@ -522,8 +518,7 @@ namespace TestDirect2D
                     {
                         pt2 = t2.TransformPoint(new PointF(x2 - (float)sizeX2, y2));
                         _gfx.SaveTransform();
-                        _gfx.TranslateTransform(c2);
-                        _gfx.RotateTransform(a2);
+                        _gfx.MultiplyTransform(t2);
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
                         DrawEllipseInternal(_gfx, fill, stroke, eas.IsFilled, ref rect);
                         _gfx.RestoreTransform();
@@ -539,11 +534,11 @@ namespace TestDirect2D
                             new PointF(x2 - (float)sizeX2, y2 - (float)sizeY2),
                             new PointF(x2, y2)
                         };
-                        pt2 = t1.TransformPoint(pts[0]);
-                        var p11 = t1.TransformPoint(pts[1]);
-                        var p21 = t1.TransformPoint(pts[2]);
-                        var p12 = t1.TransformPoint(pts[3]);
-                        var p22 = t1.TransformPoint(pts[4]);
+                        pt2 = t2.TransformPoint(pts[0]);
+                        var p11 = t2.TransformPoint(pts[1]);
+                        var p21 = t2.TransformPoint(pts[2]);
+                        var p12 = t2.TransformPoint(pts[3]);
+                        var p22 = t2.TransformPoint(pts[4]);
                         DrawLineInternal(_gfx, stroke, ref p11, ref p21);
                         DrawLineInternal(_gfx, stroke, ref p12, ref p22);
                     }
@@ -654,19 +649,36 @@ namespace TestDirect2D
 
             var _gfx = gfx as Graphics;
 
-            //Brush brush = ToXSolidBrush(arc.Style.Fill);
+            Brush brush = ToSolidBrush(arc.Style.Fill);
             Pen pen = ToPen(arc.Style, _scaleToPage);
 
-            _gfx.DrawArc(
-                pen,
-                _scaleToPage(a.X),
-                _scaleToPage(a.Y),
-                _scaleToPage(a.Width),
-                _scaleToPage(a.Height),
-                (float)a.StartAngle,
-                (float)a.SweepAngle);
+            if (arc.IsFilled)
+            {
+                var path = new GraphicsPath();
+                path.AddArc(
+                    _scaleToPage(a.X),
+                    _scaleToPage(a.Y),
+                    _scaleToPage(a.Width),
+                    _scaleToPage(a.Height),
+                    (float)a.StartAngle,
+                    (float)a.SweepAngle);
+                _gfx.FillPath(brush, path);
+                _gfx.DrawPath(pen, path);
+                path.Dispose();
+            }
+            else
+            {
+                _gfx.DrawArc(
+                    pen,
+                    _scaleToPage(a.X),
+                    _scaleToPage(a.Y),
+                    _scaleToPage(a.Width),
+                    _scaleToPage(a.Height),
+                    (float)a.StartAngle,
+                    (float)a.SweepAngle);
+            }
 
-            //brush.Dispose();
+            brush.Dispose();
             pen.Dispose();
         }
 
@@ -682,9 +694,9 @@ namespace TestDirect2D
         {
             var _gfx = gfx as Graphics;
 
-            //Brush brush = ToXSolidBrush(bezier.Style.Fill);
+            Brush brush = ToSolidBrush(bezier.Style.Fill);
             Pen pen = ToPen(bezier.Style, _scaleToPage);
-
+                
             var path = new GraphicsPath();
             path.AddBezier(
                 new PointF(
@@ -699,10 +711,15 @@ namespace TestDirect2D
                 new PointF(
                     _scaleToPage(bezier.Point4.X),
                     _scaleToPage(bezier.Point4.Y)));
+
+            if (bezier.IsFilled)
+            {
+                _gfx.FillPath(brush, path);
+            }
             _gfx.DrawPath(pen, path);
             path.Dispose();
 
-            //brush.Dispose();
+            brush.Dispose();
             pen.Dispose();
         }
 
@@ -718,7 +735,7 @@ namespace TestDirect2D
         {
             var _gfx = gfx as Graphics;
 
-            //Brush brush = ToXSolidBrush(qbezier.Style.Fill);
+            Brush brush = ToSolidBrush(qbezier.Style.Fill);
             Pen pen = ToPen(qbezier.Style, _scaleToPage);
 
             double x1 = qbezier.Point1.X;
@@ -744,10 +761,14 @@ namespace TestDirect2D
                 new PointF(
                     _scaleToPage(x4 + dx),
                     _scaleToPage(y4 + dy)));
+            if (qbezier.IsFilled)
+            {
+                _gfx.FillPath(brush, path);
+            }
             _gfx.DrawPath(pen, path);
             path.Dispose();
 
-            //brush.Dispose();
+            brush.Dispose();
             pen.Dispose();
         }
 
