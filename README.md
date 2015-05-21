@@ -15,7 +15,7 @@ Test is an application for making 2D diagrams and running logic simulations.
 
 * Prism.Mvvm
 * Newtonsoft.Json
-* PDFsharp
+* PDFsharp-gdi (core PDFsharp package does not implement XGraphicsPath.AddArc method)
 * lz4net
 * System.Windows.Interactivity.WPF
 * Microsoft.CodeAnalysis.Analyzers
@@ -25,6 +25,12 @@ Test is an application for making 2D diagrams and running logic simulations.
 * Microsoft.CodeAnalysis.Scripting.CSharp
 * System.Collections.Immutable
 * System.Reflection.Metadata
+* Eto.Forms
+* Eto.Platform.Direct2D
+* Eto.Platform.Windows
+* SharpDX
+* SharpDX.Direct2D1
+* SharpDX.DXGI
 
 ### NuGet Package Sources
 
