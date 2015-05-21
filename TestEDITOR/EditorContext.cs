@@ -13,10 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Test2d;
-using TestDXF;
-using TestEMF;
 using TestJSON;
-using TestPDF;
 using TestSIM;
 
 namespace TestEDITOR

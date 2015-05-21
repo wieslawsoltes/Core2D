@@ -4,7 +4,7 @@ using System;
 using LZ4;
 using Test2d;
 
-namespace Test.Compressors
+namespace TestEDITOR
 {
     /// <summary>
     /// 

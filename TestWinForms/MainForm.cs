@@ -9,7 +9,6 @@ using System.Drawing.Text;
 using System.Windows.Forms;
 using Test2d;
 using TestEDITOR;
-using TestEMF;
 
 namespace TestWinForms
 {
@@ -377,57 +376,6 @@ namespace TestWinForms
     /// <summary>
     /// 
     /// </summary>
-    internal class GZipCompressor : ICompressor
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public byte[] Compress(byte[] data)
-        {
-            using (var ms = new System.IO.MemoryStream())
-            {
-                using (var cs = new System.IO.Compression.GZipStream(ms, System.IO.Compression.CompressionMode.Compress, true))
-                {
-                    cs.Write(data, 0, data.Length);
-                }
-                return ms.ToArray();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public byte[] Decompress(byte[] data)
-        {
-            using (var ms = new System.IO.MemoryStream(data))
-            {
-                using (var cs = new System.IO.Compression.GZipStream(ms, System.IO.Compression.CompressionMode.Decompress))
-                {
-                    const int size = 4096;
-                    var buffer = new byte[size];
-                    using (var memory = new System.IO.MemoryStream())
-                    {
-                        int count = 0;
-                        do
-                        {
-                            count = cs.Read(buffer, 0, size);
-                            if (count > 0)
-                            {
-                                memory.Write(buffer, 0, count);
-                            }
-                        }
-                        while (count > 0);
-                        return memory.ToArray();
-                    }
-                }
-            }
-        }
-    }
-
     internal class ContainerPanel : Panel
     {
         /// <summary>

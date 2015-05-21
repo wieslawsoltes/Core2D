@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Test2d;
 
-namespace TestEMF
+namespace TestEDITOR
 {
     /// <summary>
     /// 

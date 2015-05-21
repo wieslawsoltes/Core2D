@@ -7,7 +7,7 @@ using System.Text;
 using Dxf;
 using Test2d;
 
-namespace TestDXF
+namespace TestEDITOR
 {
     /// <summary>
     /// 

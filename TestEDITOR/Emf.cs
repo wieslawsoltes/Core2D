@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using Test2d;
 using WPF = System.Windows;
 
-namespace TestEMF
+namespace TestEDITOR
 {
     /// <summary>
     /// 
