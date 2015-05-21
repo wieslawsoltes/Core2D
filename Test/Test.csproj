@@ -269,10 +269,6 @@
       <Project>{60dda5d9-7acc-41af-9123-c96abb6b7828}</Project>
       <Name>Test2d</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TestDXF\TestDXF.csproj">
-      <Project>{a71cb982-5f0d-4cde-8537-559f7f45de05}</Project>
-      <Name>TestDXF</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TestEDITOR\TestEDITOR.csproj">
       <Project>{dd2d100a-773a-4893-a3eb-6c63e11b12a9}</Project>
       <Name>TestEDITOR</Name>

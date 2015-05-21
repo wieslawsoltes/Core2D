@@ -80,6 +80,10 @@
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1-beta3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PdfSharp-gdi">
       <HintPath>..\packages\PDFsharp-gdi.1.50.3638-beta\lib\net20\PdfSharp-gdi.dll</HintPath>
     </Reference>
@@ -113,10 +117,100 @@
     <Compile Include="Compressors\GZipCompressor.cs" />
     <Compile Include="Compressors\LZ4CodecCompressor.cs" />
     <Compile Include="Compressors\LZ4StreamCompressor.cs" />
-    <Compile Include="EditorCommands.cs" />
-    <Compile Include="EditorContext.cs" />
-    <Compile Include="Emf.cs" />
-    <Compile Include="LineGrid.cs" />
+    <Compile Include="Dxf\Blocks\DxfBlock.cs" />
+    <Compile Include="Dxf\Blocks\DxfBlocks.cs" />
+    <Compile Include="Dxf\Classes\DxfClass.cs" />
+    <Compile Include="Dxf\Classes\DxfClasses.cs" />
+    <Compile Include="Dxf\Core\DxfCodeName.cs" />
+    <Compile Include="Dxf\Core\DxfExtensions.cs" />
+    <Compile Include="Dxf\Core\DxfObject.cs" />
+    <Compile Include="Dxf\Core\DxfSubclassMarker.cs" />
+    <Compile Include="Dxf\Core\DxfVector2.cs" />
+    <Compile Include="Dxf\Core\DxfVector3.cs" />
+    <Compile Include="Dxf\DxfFile.cs" />
+    <Compile Include="Dxf\DxfHeader.cs" />
+    <Compile Include="Dxf\DxfInspect.cs" />
+    <Compile Include="Dxf\DxfRawTag.cs" />
+    <Compile Include="Dxf\Entities\Dxf3Dface.cs" />
+    <Compile Include="Dxf\Entities\Dxf3Dsolid.cs" />
+    <Compile Include="Dxf\Entities\DxfAcadProxyEntity.cs" />
+    <Compile Include="Dxf\Entities\DxfArc.cs" />
+    <Compile Include="Dxf\Entities\DxfArcAlignedText.cs" />
+    <Compile Include="Dxf\Entities\DxfAttdef.cs" />
+    <Compile Include="Dxf\Entities\DxfAttrib.cs" />
+    <Compile Include="Dxf\Entities\DxfBody.cs" />
+    <Compile Include="Dxf\Entities\DxfCircle.cs" />
+    <Compile Include="Dxf\Entities\DxfDimension.cs" />
+    <Compile Include="Dxf\Entities\DxfEllipse.cs" />
+    <Compile Include="Dxf\Entities\DxfEntities.cs" />
+    <Compile Include="Dxf\Entities\DxfHatch.cs" />
+    <Compile Include="Dxf\Entities\DxfImage.cs" />
+    <Compile Include="Dxf\Entities\DxfInsert.cs" />
+    <Compile Include="Dxf\Entities\DxfLeader.cs" />
+    <Compile Include="Dxf\Entities\DxfLine.cs" />
+    <Compile Include="Dxf\Entities\DxfLwpolyline.cs" />
+    <Compile Include="Dxf\Entities\DxfLwpolylineVertex.cs" />
+    <Compile Include="Dxf\Entities\DxfMline.cs" />
+    <Compile Include="Dxf\Entities\DxfMText.cs" />
+    <Compile Include="Dxf\Entities\DxfOle2Frame.cs" />
+    <Compile Include="Dxf\Entities\DxfOleFrame.cs" />
+    <Compile Include="Dxf\Entities\DxfPoint.cs" />
+    <Compile Include="Dxf\Entities\DxfPolyline.cs" />
+    <Compile Include="Dxf\Entities\DxfRay.cs" />
+    <Compile Include="Dxf\Entities\DxfRegion.cs" />
+    <Compile Include="Dxf\Entities\DxfRText.cs" />
+    <Compile Include="Dxf\Entities\DxfSeqend.cs" />
+    <Compile Include="Dxf\Entities\DxfShape.cs" />
+    <Compile Include="Dxf\Entities\DxfSolid.cs" />
+    <Compile Include="Dxf\Entities\DxfSpline.cs" />
+    <Compile Include="Dxf\Entities\DxfText.cs" />
+    <Compile Include="Dxf\Entities\DxfTolerance.cs" />
+    <Compile Include="Dxf\Entities\DxfTrace.cs" />
+    <Compile Include="Dxf\Entities\DxfVertex.cs" />
+    <Compile Include="Dxf\Entities\DxfViewport.cs" />
+    <Compile Include="Dxf\Entities\DxfWipeout.cs" />
+    <Compile Include="Dxf\Entities\DxfXline.cs" />
+    <Compile Include="Dxf\Enums\DxfAcadVer.cs" />
+    <Compile Include="Dxf\Enums\DxfAppidStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfAttributeFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfBlockTypeFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfDefaultColors.cs" />
+    <Compile Include="Dxf\Enums\DxfDimstyleStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfDuplicateRecordCloningFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfHorizontalTextJustification.cs" />
+    <Compile Include="Dxf\Enums\DxfLayerStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfLineWeight.cs" />
+    <Compile Include="Dxf\Enums\DxfLtypeStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfLwpolylineFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfOrthographicType.cs" />
+    <Compile Include="Dxf\Enums\DxfOrthographicViewType.cs" />
+    <Compile Include="Dxf\Enums\DxfProxyCapabilitiesFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfSplineFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfStyleFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfTableStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfTextGenerationFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfVerticalTextJustification.cs" />
+    <Compile Include="Dxf\Enums\DxfViewMode.cs" />
+    <Compile Include="Dxf\Enums\DxfViewRenderMode.cs" />
+    <Compile Include="Dxf\Enums\DxfViewStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfVportStandardFlags.cs" />
+    <Compile Include="Dxf\Objects\DxfDictionary.cs" />
+    <Compile Include="Dxf\Objects\DxfObjects.cs" />
+    <Compile Include="Dxf\Tables\DxfAppid.cs" />
+    <Compile Include="Dxf\Tables\DxfBlockRecord.cs" />
+    <Compile Include="Dxf\Tables\DxfDimstyle.cs" />
+    <Compile Include="Dxf\Tables\DxfLayer.cs" />
+    <Compile Include="Dxf\Tables\DxfLtype.cs" />
+    <Compile Include="Dxf\Tables\DxfStyle.cs" />
+    <Compile Include="Dxf\Tables\DxfTable.cs" />
+    <Compile Include="Dxf\Tables\DxfTables.cs" />
+    <Compile Include="Dxf\Tables\DxfUcs.cs" />
+    <Compile Include="Dxf\Tables\DxfView.cs" />
+    <Compile Include="Dxf\Tables\DxfVport.cs" />
+    <Compile Include="Editor\EditorCommands.cs" />
+    <Compile Include="Editor\EditorContext.cs" />
+    <Compile Include="Editor\Emf.cs" />
+    <Compile Include="Editor\LineGrid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\DxfRenderer.cs" />
     <Compile Include="Renderers\EmfRenderer.cs" />
@@ -124,6 +218,8 @@
     <Compile Include="Roslyn\ScriptDirectory.cs" />
     <Compile Include="Roslyn\ScriptFile.cs" />
     <Compile Include="Roslyn\ScriptGlobals.cs" />
+    <Compile Include="Serializers\ListContractResolver.cs" />
+    <Compile Include="Serializers\NewtonsoftSerializer.cs" />
     <Compile Include="Simulation\BoolSimulationFactory.cs" />
     <Compile Include="Simulation\ContainerGraph.cs" />
     <Compile Include="Simulation\ContainerGraphDebug.cs" />
@@ -154,14 +250,6 @@
     <ProjectReference Include="..\Test2d\Test2d.csproj">
       <Project>{60dda5d9-7acc-41af-9123-c96abb6b7828}</Project>
       <Name>Test2d</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TestDXF\TestDXF.csproj">
-      <Project>{a71cb982-5f0d-4cde-8537-559f7f45de05}</Project>
-      <Name>TestDXF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TestJSON\TestJSON.csproj">
-      <Project>{9aec0134-d372-4deb-88e8-074dd87b4663}</Project>
-      <Name>TestJSON</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

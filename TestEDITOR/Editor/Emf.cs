@@ -26,29 +26,22 @@ namespace TestEDITOR
         /// <param name="container"></param>
         public static void PutOnClipboard(Container container)
         {
-            Bitmap bitmap = default(Bitmap);
-            MemoryStream ms = default(MemoryStream);
-
             try
             {
-                bitmap = new Bitmap((int)container.Width, (int)container.Height);
-                ms = MakeMetafileStream(bitmap, container);
-
-                var data = new WPF.DataObject();
-                data.SetData(WPF.DataFormats.EnhancedMetafile, ms);
-                WPF.Clipboard.SetDataObject(data, true);
+                using (var bitmap = new Bitmap((int)container.Width, (int)container.Height))
+                {
+                    using (var ms = MakeMetafileStream(bitmap, container))
+                    {
+                        var data = new WPF.DataObject();
+                        data.SetData(WPF.DataFormats.EnhancedMetafile, ms);
+                        WPF.Clipboard.SetDataObject(data, true);
+                    }
+                }
             }
-            finally
+            catch (Exception ex)
             {
-                if (bitmap != null)
-                {
-                    bitmap.Dispose();
-                }
-
-                if (ms != null)
-                {
-                    ms.Dispose();
-                }
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
             }
         }
 
@@ -79,8 +72,8 @@ namespace TestEDITOR
         /// <returns></returns>
         private static MemoryStream MakeMetafileStream(Bitmap bitmap, Container container)
         {
-            Graphics g = default(Graphics);
-            Metafile mf = default(Metafile);
+            var g = default(Graphics);
+            var mf = default(Metafile);
             var ms = new MemoryStream();
 
             try
@@ -91,6 +84,7 @@ namespace TestEDITOR
                     mf = new Metafile(ms, hdc);
                     g.ReleaseHdc(hdc);
                 }
+
                 using (g = Graphics.FromImage(mf))
                 {
                     var r = EmfRenderer.Create();

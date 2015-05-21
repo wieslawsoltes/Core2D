@@ -13,7 +13,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Test2d;
-using TestJSON;
 using TestSIM;
 
 namespace TestEDITOR
@@ -1021,16 +1020,10 @@ namespace TestEDITOR
                 .AddNamespaces("System.Linq")
                 .AddReferences(Assembly.GetAssembly(typeof(ObservableObject)))
                 .AddNamespaces("Test2d")
-                .AddReferences(Assembly.GetAssembly(typeof(Dxf.DxfObject)))
-                .AddNamespaces("TestDXF")
-                .AddReferences(Assembly.GetAssembly(typeof(Emf)))
-                .AddNamespaces("TestEMF")
-                .AddReferences(Assembly.GetAssembly(typeof(NewtonsoftSerializer)))
-                .AddNamespaces("TestJSON")
                 .AddReferences(Assembly.GetAssembly(typeof(EditorContext)))
                 .AddNamespaces("TestEDITOR")
-                .AddNamespaces("TestPDF")
-                .AddNamespaces("TestSIM");
+                .AddNamespaces("TestSIM")
+                .AddNamespaces("Dxf");
 
             CSharpScript.Eval(
                 code, 

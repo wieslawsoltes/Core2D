@@ -36,17 +36,57 @@ namespace TestDirect2D
             context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
             context.Editor.GetImagePath = () => Image();
 
+            DataContext = context;
+
+            var drawable = new Drawable(true);
+            InitializeDrawable(context, drawable);
+            SetContainerInvalidation(drawable);
+            SetDrawableSize(drawable);
+
+            InitializeForm(drawable);
+            InitializeMenu(context, drawable);
+
+            Load += (s, e) => drawable.Focus();
+            Closed += (s, e) => context.Dispose();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="drawable"></param>
+        private void InitializeForm(Drawable drawable)
+        {
             Title = "Test";
             ClientSize = new Size(1000, 650);
-            Closed += (s, e) => context.Dispose();
-            
-            var drawable = new Drawable(true);
+
+            var listBox = new ListBox();
+            listBox.BindDataContext(
+                c => c.DataStore,
+                (EditorContext c) => c.Editor.Project.CurrentDocument.Containers);
+
+            Content = new Scrollable
+            {
+                Border = BorderType.None,
+                Content = new TableLayout(
+                    null,
+                    new TableRow(null, drawable, null, listBox, null),
+                    null)
+            };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="drawable"></param>
+        private void InitializeDrawable(EditorContext context, Drawable drawable)
+        {
             drawable.Width = (int)context.Editor.Project.CurrentContainer.Width;
             drawable.Height = (int)context.Editor.Project.CurrentContainer.Height;
 
             drawable.Paint += (s, e) => Draw(e.Graphics);
 
-            drawable.MouseDown += 
+            drawable.MouseDown +=
                 (sender, e) =>
                 {
                     if (e.Buttons == MouseButtons.Primary)
@@ -58,7 +98,7 @@ namespace TestDirect2D
                             context.Editor.LeftDown(p.X, p.Y);
                         }
                     }
-    
+
                     if (e.Buttons == MouseButtons.Alternate)
                     {
                         drawable.Focus();
@@ -70,7 +110,7 @@ namespace TestDirect2D
                     }
                 };
 
-            drawable.MouseUp += 
+            drawable.MouseUp +=
                 (sender, e) =>
                 {
                     if (e.Buttons == MouseButtons.Primary)
@@ -82,7 +122,7 @@ namespace TestDirect2D
                             context.Editor.LeftUp(p.X, p.Y);
                         }
                     }
-    
+
                     if (e.Buttons == MouseButtons.Alternate)
                     {
                         drawable.Focus();
@@ -94,7 +134,7 @@ namespace TestDirect2D
                     }
                 };
 
-            drawable.MouseMove += 
+            drawable.MouseMove +=
                 (sender, e) =>
                 {
                     drawable.Focus();
@@ -157,29 +197,21 @@ namespace TestDirect2D
                             break;
                     }
                 };
+        }
 
-            var listBox = new ListBox();
-            listBox.BindDataContext(
-                c => c.DataStore, 
-                (EditorContext c) => c.Editor.Project.CurrentDocument.Containers);
-
-            Content = new Scrollable
-            {
-                Border = BorderType.None,
-                Content = new TableLayout(
-                    null,
-                    new TableRow(null, drawable, null, listBox, null),
-                    null)
-            };
-            
-            Load += (s, e) => drawable.Focus();
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="drawable"></param>
+        private void InitializeMenu(EditorContext context, Drawable drawable)
+        {
             var newCommand = new Command()
             {
-                MenuText = "&New", 
+                MenuText = "&New",
                 Shortcut = Application.Instance.CommonModifier | Keys.N
             };
-            newCommand.Executed += 
+            newCommand.Executed +=
                 (s, e) =>
                 {
                     context.Commands.NewCommand.Execute(null);
@@ -188,10 +220,10 @@ namespace TestDirect2D
 
             var openCommand = new Command()
             {
-                MenuText = "&Open...", 
+                MenuText = "&Open...",
                 Shortcut = Application.Instance.CommonModifier | Keys.O
             };
-            openCommand.Executed += 
+            openCommand.Executed +=
                 (s, e) =>
                 {
                     var dlg = new OpenFileDialog();
@@ -207,13 +239,13 @@ namespace TestDirect2D
                         Invalidate(drawable);
                     }
                 };
-            
+
             var saveAsCommand = new Command()
             {
-                MenuText = "Save &As...", 
+                MenuText = "Save &As...",
                 Shortcut = Application.Instance.CommonModifier | Keys.S
             };
-            saveAsCommand.Executed += 
+            saveAsCommand.Executed +=
                 (s, e) =>
                 {
                     var dlg = new SaveFileDialog();
@@ -232,10 +264,10 @@ namespace TestDirect2D
 
             var exportCommand = new Command()
             {
-                MenuText = "&Export...", 
+                MenuText = "&Export...",
                 Shortcut = Application.Instance.CommonModifier | Keys.E
             };
-            exportCommand.Executed += 
+            exportCommand.Executed +=
                 (s, e) =>
                 {
                     var dlg = new SaveFileDialog();
@@ -276,92 +308,92 @@ namespace TestDirect2D
                         }
                     }
                 };
-            
-            var exitCommand = new Command() 
-            { 
-                MenuText = "E&xit", 
-                Shortcut = Application.Instance.AlternateModifier | Keys.F4 
+
+            var exitCommand = new Command()
+            {
+                MenuText = "E&xit",
+                Shortcut = Application.Instance.AlternateModifier | Keys.F4
             };
-            exitCommand.Executed +=  (s, e) => Application.Instance.Quit();
+            exitCommand.Executed += (s, e) => Application.Instance.Quit();
 
             var aboutCommand = new Command()
-            { 
-                MenuText = "&About..." 
+            {
+                MenuText = "&About..."
             };
             aboutCommand.Executed += (s, e) => MessageBox.Show(this, Platform.ID);
 
             var noneTool = new Command() { MenuText = "&None", Shortcut = Keys.N };
             noneTool.Executed += (s, e) => context.Commands.ToolNoneCommand.Execute(null);
-            
+
             var selectionTool = new Command() { MenuText = "&Selection", Shortcut = Keys.S };
             selectionTool.Executed += (s, e) => context.Commands.ToolSelectionCommand.Execute(null);
-            
+
             var pointTool = new Command() { MenuText = "&Point", Shortcut = Keys.P };
             pointTool.Executed += (s, e) => context.Commands.ToolPointCommand.Execute(null);
- 
+
             var lineTool = new Command() { MenuText = "&Line", Shortcut = Keys.L };
             lineTool.Executed += (s, e) => context.Commands.ToolLineCommand.Execute(null);
-            
+
             var rectangleTool = new Command() { MenuText = "&Rectangle", Shortcut = Keys.R };
             rectangleTool.Executed += (s, e) => context.Commands.ToolRectangleCommand.Execute(null);
-            
+
             var ellipseTool = new Command() { MenuText = "&Ellipse", Shortcut = Keys.E };
             ellipseTool.Executed += (s, e) => context.Commands.ToolEllipseCommand.Execute(null);
-            
+
             var arcTool = new Command() { MenuText = "&Arc", Shortcut = Keys.A };
             arcTool.Executed += (s, e) => context.Commands.ToolArcCommand.Execute(null);
-            
+
             var bezierTool = new Command() { MenuText = "&Bezier", Shortcut = Keys.B };
             bezierTool.Executed += (s, e) => context.Commands.ToolBezierCommand.Execute(null);
-            
+
             var qbezierTool = new Command() { MenuText = "&QBeezier", Shortcut = Keys.Q };
             qbezierTool.Executed += (s, e) => context.Commands.ToolQBezierCommand.Execute(null);
-            
+
             var textTool = new Command() { MenuText = "&Text", Shortcut = Keys.T };
             textTool.Executed += (s, e) => context.Commands.ToolTextCommand.Execute(null);
-            
+
             var imageTool = new Command() { MenuText = "&Image", Shortcut = Keys.I };
             imageTool.Executed += (s, e) => context.Commands.ToolImageCommand.Execute(null);
 
             var undoCommand = new Command() { MenuText = "&Undo", Shortcut = Application.Instance.CommonModifier | Keys.Z };
             undoCommand.Executed += (s, e) => context.Commands.UndoCommand.Execute(null);
-            
+
             var redoCommand = new Command() { MenuText = "&Redo", Shortcut = Application.Instance.CommonModifier | Keys.Y };
             redoCommand.Executed += (s, e) => context.Commands.RedoCommand.Execute(null);
 
             var copyAsMetaFileCommand = new Command() { MenuText = "Copy As &Metafile", Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.Y };
-            copyAsMetaFileCommand.Executed += (s, e) => context.Commands.CopyAsEmfCommand.Execute(null);
+            copyAsMetaFileCommand.Executed += (s, e) => Emf.PutOnClipboard(context.Editor.Project.CurrentContainer);
 
             var cutCommand = new Command() { MenuText = "Cu&t", Shortcut = Application.Instance.CommonModifier | Keys.X };
             cutCommand.Executed += (s, e) => context.Commands.CutCommand.Execute(null);
-            
+
             var copyCommand = new Command() { MenuText = "&Copy", Shortcut = Application.Instance.CommonModifier | Keys.C };
             copyCommand.Executed += (s, e) => context.Commands.CopyCommand.Execute(null);
-            
+
             var pasteCommand = new Command() { MenuText = "&Paste", Shortcut = Application.Instance.CommonModifier | Keys.V };
             pasteCommand.Executed += (s, e) => context.Commands.PasteCommand.Execute(null);
-            
+
             var deleteCommand = new Command() { MenuText = "&Delete", Shortcut = Keys.Delete };
             deleteCommand.Executed += (s, e) => context.Commands.DeleteCommand.Execute(null);
 
             var selectAllCommand = new Command() { MenuText = "Select &All", Shortcut = Application.Instance.CommonModifier | Keys.A };
             selectAllCommand.Executed += (s, e) => context.Commands.SelectAllCommand.Execute(null);
-            
+
             var clearAllCommand = new Command() { MenuText = "Cl&ear All" };
             clearAllCommand.Executed += (s, e) => context.Commands.ClearAllCommand.Execute(null);
-            
+
             var groupCommand = new Command() { MenuText = "&Group", Shortcut = Application.Instance.CommonModifier | Keys.G };
             groupCommand.Executed += (s, e) => context.Commands.GroupCommand.Execute(null);
-            
+
             var groupLayerCommand = new Command() { MenuText = "Group &Layer", Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.G };
             groupLayerCommand.Executed += (s, e) => context.Commands.GroupLayerCommand.Execute(null);
 
             var evalCommand = new Command()
             {
-                MenuText = "&Evaluate...", 
+                MenuText = "&Evaluate...",
                 Shortcut = Keys.F9
             };
-            evalCommand.Executed += 
+            evalCommand.Executed +=
                 (s, e) =>
                 {
                     var dlg = new OpenFileDialog();
@@ -377,7 +409,7 @@ namespace TestDirect2D
                         Invalidate(drawable);
                     }
                 };
-            
+
             Menu = new MenuBar
             {
                 Items =
@@ -455,11 +487,6 @@ namespace TestDirect2D
                 QuitItem = exitCommand,
                 AboutItem = aboutCommand
             };
-
-            DataContext = context;
-            
-            SetContainerInvalidation(drawable);
-            SetDrawableSize(drawable);
         }
 
         /// <summary>
