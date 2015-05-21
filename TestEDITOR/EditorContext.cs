@@ -364,7 +364,7 @@ namespace TestEDITOR
                         selected.Containers.Add(container);
                         _editor.Project.CurrentContainer = container;
                     }
-                    else if (item is Project || item == null)
+                    else if (item is Project)
                     {
                         var document = DefaultDocument(_editor.Project);
                         _history.Snapshot(_editor.Project);
