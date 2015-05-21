@@ -20,11 +20,6 @@ namespace TestDirect2D
     /// </summary>
     public class MainForm : Form, IView
     {
-      class MyModel
-     {
-         public List<string> ListItems { get; set; }
-     }
-        
         /// <summary>
         /// 
         /// </summary>
