@@ -60,8 +60,8 @@ namespace TestWinForms
             var panel = InitializePanel();
             panel.Context = context;
 
-            HandlePanelLayerInvalidation(panel);
-            UpdatePanelSize(panel);
+            SetContainerInvalidation(panel);
+            SetPanelSize(panel);
 
             HandlePanelShorcutKeys(panel);
             HandleMenuShortcutKeys(panel);
@@ -106,8 +106,8 @@ namespace TestWinForms
         /// <param name="panel"></param>
         private void Invalidate(ContainerPanel panel)
         {
-            HandlePanelLayerInvalidation(panel);
-            UpdatePanelSize(panel);
+            SetContainerInvalidation(panel);
+            SetPanelSize(panel);
 
             var container = (DataContext as EditorContext).Editor.Project.CurrentContainer;
             if (container != null)
@@ -180,7 +180,7 @@ namespace TestWinForms
         /// 
         /// </summary>
         /// <param name="panel"></param>
-        private void UpdatePanelSize(ContainerPanel panel)
+        private void SetPanelSize(ContainerPanel panel)
         {
             var container = (DataContext as EditorContext).Editor.Project.CurrentContainer;
             if (container == null)
@@ -200,7 +200,7 @@ namespace TestWinForms
         /// 
         /// </summary>
         /// <param name="panel"></param>
-        private void HandlePanelLayerInvalidation(ContainerPanel panel)
+        private void SetContainerInvalidation(ContainerPanel panel)
         {
             var container = (DataContext as EditorContext).Editor.Project.CurrentContainer;
             if (container == null)
@@ -211,8 +211,15 @@ namespace TestWinForms
                 layer.InvalidateLayer += (s, e) => panel.Invalidate();
             }
 
-            container.WorkingLayer.InvalidateLayer += (s, e) => panel.Invalidate();
-            container.HelperLayer.InvalidateLayer += (s, e) => panel.Invalidate();
+            if (container.WorkingLayer != null)
+            {
+                container.WorkingLayer.InvalidateLayer += (s, e) => panel.Invalidate();
+            }
+            
+            if (container.HelperLayer != null)
+            {
+                container.HelperLayer.InvalidateLayer += (s, e) => panel.Invalidate();
+            }
         }
 
         /// <summary>
@@ -589,8 +596,16 @@ namespace TestWinForms
 
             Background(g, container.Background, this.Width, this.Height);
             renderer.Draw(g, container, container.Properties);
-            renderer.Draw(g, container.WorkingLayer, container.Properties);
-            renderer.Draw(g, container.HelperLayer, container.Properties);
+            
+            if (container.WorkingLayer != null)
+            {
+                renderer.Draw(g, container.WorkingLayer, container.Properties);
+            }
+            
+            if (container.HelperLayer != null)
+            {
+                renderer.Draw(g, container.HelperLayer, container.Properties);
+            }
         }
     }
 }
