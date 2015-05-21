@@ -694,14 +694,33 @@ namespace TestPDF
 
             var a = Test2d.GdiArc.FromXArc(arc, dx, dy);
 
-            _gfx.DrawArc(
-                ToXPen(arc.Style, _scaleToPage),
-                _scaleToPage(a.X),
-                _scaleToPage(a.Y),
-                _scaleToPage(a.Width),
-                _scaleToPage(a.Height),
-                a.StartAngle,
-                a.SweepAngle);
+            if (arc.IsFilled)
+            {
+                var path = new XGraphicsPath();
+                // NOTE: Not implemented in PdfSharp.
+                path.AddArc(
+                    _scaleToPage(a.X),
+                    _scaleToPage(a.Y),
+                    _scaleToPage(a.Width),
+                    _scaleToPage(a.Height),
+                    a.StartAngle,
+                    a.SweepAngle);
+                _gfx.DrawPath(
+                    ToXPen(arc.Style, _scaleToPage),
+                    ToXSolidBrush(arc.Style.Fill),
+                    path);
+            }
+            else
+            {
+                _gfx.DrawArc(
+                    ToXPen(arc.Style, _scaleToPage),
+                    _scaleToPage(a.X),
+                    _scaleToPage(a.Y),
+                    _scaleToPage(a.Width),
+                    _scaleToPage(a.Height),
+                    a.StartAngle,
+                    a.SweepAngle);
+            }
         }
 
         /// <summary>
@@ -716,16 +735,36 @@ namespace TestPDF
         {
             var _gfx = gfx as XGraphics;
 
-            _gfx.DrawBezier(
-                ToXPen(bezier.Style, _scaleToPage),
-                _scaleToPage(bezier.Point1.X),
-                _scaleToPage(bezier.Point1.Y),
-                _scaleToPage(bezier.Point2.X),
-                _scaleToPage(bezier.Point2.Y),
-                _scaleToPage(bezier.Point3.X),
-                _scaleToPage(bezier.Point3.Y),
-                _scaleToPage(bezier.Point4.X),
-                _scaleToPage(bezier.Point4.Y));
+            if (bezier.IsFilled)
+            {
+                var path = new XGraphicsPath();
+                path.AddBezier(
+                    _scaleToPage(bezier.Point1.X),
+                    _scaleToPage(bezier.Point1.Y),
+                    _scaleToPage(bezier.Point2.X), 
+                    _scaleToPage(bezier.Point2.Y),
+                    _scaleToPage(bezier.Point3.X), 
+                    _scaleToPage(bezier.Point3.Y),
+                    _scaleToPage(bezier.Point4.X),
+                    _scaleToPage(bezier.Point4.Y));
+                _gfx.DrawPath(
+                    ToXPen(bezier.Style, _scaleToPage),
+                    ToXSolidBrush(bezier.Style.Fill),
+                    path);
+            }
+            else
+            {
+                _gfx.DrawBezier(
+                    ToXPen(bezier.Style, _scaleToPage),
+                    _scaleToPage(bezier.Point1.X),
+                    _scaleToPage(bezier.Point1.Y),
+                    _scaleToPage(bezier.Point2.X),
+                    _scaleToPage(bezier.Point2.Y),
+                    _scaleToPage(bezier.Point3.X),
+                    _scaleToPage(bezier.Point3.Y),
+                    _scaleToPage(bezier.Point4.X),
+                    _scaleToPage(bezier.Point4.Y));
+            }
         }
 
         /// <summary>
@@ -749,12 +788,36 @@ namespace TestPDF
             double x4 = qbezier.Point3.X;
             double y4 = qbezier.Point3.Y;
 
-            _gfx.DrawBezier(
-                ToXPen(qbezier.Style, _scaleToPage),
-                _scaleToPage(x1 + dx), _scaleToPage(y1 + dy),
-                _scaleToPage(x2 + dx), _scaleToPage(y2 + dy),
-                _scaleToPage(x3 + dx), _scaleToPage(y3 + dy),
-                _scaleToPage(x4 + dx), _scaleToPage(y4 + dy));
+            if (qbezier.IsFilled)
+            {
+                var path = new XGraphicsPath();
+                path.AddBezier(
+                    _scaleToPage(x1 + dx),
+                    _scaleToPage(y1 + dy),
+                    _scaleToPage(x2 + dx), 
+                    _scaleToPage(y2 + dy),
+                    _scaleToPage(x3 + dx), 
+                    _scaleToPage(y3 + dy),
+                    _scaleToPage(x4 + dx),
+                    _scaleToPage(y4 + dy));
+                _gfx.DrawPath(
+                    ToXPen(qbezier.Style, _scaleToPage),
+                    ToXSolidBrush(qbezier.Style.Fill),
+                    path);
+            }
+            else
+            {
+                _gfx.DrawBezier(
+                    ToXPen(qbezier.Style, _scaleToPage),
+                    _scaleToPage(x1 + dx), 
+                    _scaleToPage(y1 + dy),
+                    _scaleToPage(x2 + dx), 
+                    _scaleToPage(y2 + dy),
+                    _scaleToPage(x3 + dx), 
+                    _scaleToPage(y3 + dy),
+                    _scaleToPage(x4 + dx), 
+                    _scaleToPage(y4 + dy));
+            }
         }
 
         /// <summary>

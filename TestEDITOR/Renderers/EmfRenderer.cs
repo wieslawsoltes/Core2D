@@ -629,8 +629,21 @@ namespace TestEMF
 
             var _gfx = gfx as Graphics;
 
-            //Brush brush = ToXSolidBrush(arc.Style.Fill);
+            Brush brush = ToSolidBrush(arc.Style.Fill);
             Pen pen = ToPen(arc.Style, _scaleToPage);
+
+            if (arc.IsFilled)
+            {
+                var path = new GraphicsPath();
+                path.AddArc(
+                    _scaleToPage(a.X),
+                    _scaleToPage(a.Y),
+                    _scaleToPage(a.Width),
+                    _scaleToPage(a.Height),
+                    (float)a.StartAngle,
+                    (float)a.SweepAngle);
+                _gfx.FillPath(brush, path);
+            }
 
             _gfx.DrawArc(
                 pen,
@@ -641,7 +654,7 @@ namespace TestEMF
                 (float)a.StartAngle,
                 (float)a.SweepAngle);
 
-            //brush.Dispose();
+            brush.Dispose();
             pen.Dispose();
         }
 
@@ -657,8 +670,23 @@ namespace TestEMF
         {
             var _gfx = gfx as Graphics;
 
-            //Brush brush = ToXSolidBrush(bezier.Style.Fill);
+            Brush brush = ToSolidBrush(bezier.Style.Fill);
             Pen pen = ToPen(bezier.Style, _scaleToPage);
+
+            if (bezier.IsFilled)
+            {
+                var path = new GraphicsPath();
+                path.AddBezier(
+                    _scaleToPage(bezier.Point1.X),
+                    _scaleToPage(bezier.Point1.Y),
+                    _scaleToPage(bezier.Point2.X), 
+                    _scaleToPage(bezier.Point2.Y),
+                    _scaleToPage(bezier.Point3.X), 
+                    _scaleToPage(bezier.Point3.Y),
+                    _scaleToPage(bezier.Point4.X),
+                    _scaleToPage(bezier.Point4.Y));
+                _gfx.FillPath(brush, path);
+            }
 
             _gfx.DrawBezier(
                 pen,
@@ -671,7 +699,7 @@ namespace TestEMF
                 _scaleToPage(bezier.Point4.X),
                 _scaleToPage(bezier.Point4.Y));
 
-            //brush.Dispose();
+            brush.Dispose();
             pen.Dispose();
         }
 
@@ -687,7 +715,7 @@ namespace TestEMF
         {
             var _gfx = gfx as Graphics;
 
-            //Brush brush = ToXSolidBrush(qbezier.Style.Fill);
+            Brush brush = ToSolidBrush(qbezier.Style.Fill);
             Pen pen = ToPen(qbezier.Style, _scaleToPage);
 
             double x1 = qbezier.Point1.X;
@@ -699,6 +727,21 @@ namespace TestEMF
             double x4 = qbezier.Point3.X;
             double y4 = qbezier.Point3.Y;
 
+            if (qbezier.IsFilled)
+            {
+                var path = new GraphicsPath();
+                path.AddBezier(
+                    _scaleToPage(x1 + dx), 
+                    _scaleToPage(y1 + dy),
+                    _scaleToPage(x2 + dx), 
+                    _scaleToPage(y2 + dy),
+                    _scaleToPage(x3 + dx), 
+                    _scaleToPage(y3 + dy),
+                    _scaleToPage(x4 + dx), 
+                    _scaleToPage(y4 + dy));
+                _gfx.FillPath(brush, path);
+            }
+            
             _gfx.DrawBezier(
                 pen,
                 _scaleToPage(x1 + dx), 
@@ -710,7 +753,7 @@ namespace TestEMF
                 _scaleToPage(x4 + dx), 
                 _scaleToPage(y4 + dy));
 
-            //brush.Dispose();
+            brush.Dispose();
             pen.Dispose();
         }
    
