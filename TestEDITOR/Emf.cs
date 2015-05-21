@@ -109,6 +109,7 @@ namespace TestEMF
                     }
 
                     r.Draw(g, container, container.Properties);
+                    r.ClearCache();
                 }
             }
             finally
