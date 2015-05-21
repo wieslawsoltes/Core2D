@@ -16,6 +16,8 @@ namespace TestPDF
     /// </summary>
     public class PdfRenderer : Test2d.ObservableObject, Test2d.IRenderer
     {
+        private bool _enableImageCache = true;
+        private IDictionary<Uri, XImage> _biCache;
         private double _zoom;
         private double _panX;
         private double _panY;
@@ -196,6 +198,7 @@ namespace TestPDF
                 }
 
                 pdf.Save(path);
+                ClearCache();
             }
         }
 
@@ -248,6 +251,7 @@ namespace TestPDF
                 }
 
                 pdf.Save(path);
+                ClearCache();
             }
         }
 
@@ -437,6 +441,15 @@ namespace TestPDF
         /// </summary>
         public void ClearCache()
         {
+            if (_biCache != null)
+            {
+                foreach (var kvp in _biCache)
+                {
+                    kvp.Value.Dispose();
+                }
+                _biCache.Clear();
+            }
+            _biCache = new Dictionary<Uri, XImage>();
         }
 
         /// <summary>
@@ -942,9 +955,25 @@ namespace TestPDF
                 _gfx.DrawRectangle(ToXSolidBrush(image.Style.Fill), srect);
             }
 
-            if (image.Path.IsAbsoluteUri && System.IO.File.Exists(image.Path.LocalPath))
+            if (_enableImageCache
+                && _biCache.ContainsKey(image.Path))
             {
-                _gfx.DrawImage(XImage.FromFile(image.Path.LocalPath), srect);
+                _gfx.DrawImage(_biCache[image.Path], srect);
+            }
+            else
+            {
+                if (!image.Path.IsAbsoluteUri || !System.IO.File.Exists(image.Path.LocalPath))
+                    return;
+
+                var bi = XImage.FromFile(image.Path.LocalPath);
+
+                if (_enableImageCache)
+                    _biCache[image.Path] = bi;
+
+                _gfx.DrawImage(bi, srect);
+
+                if (!_enableImageCache)
+                    bi.Dispose();
             }
         }
     }
