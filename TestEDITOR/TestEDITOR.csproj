@@ -210,6 +210,8 @@
     <Compile Include="Editor\EditorCommands.cs" />
     <Compile Include="Editor\EditorContext.cs" />
     <Compile Include="Editor\Emf.cs" />
+    <Compile Include="Editor\ExportType.cs" />
+    <Compile Include="Editor\ImportType.cs" />
     <Compile Include="Editor\LineGrid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\DxfRenderer.cs" />
