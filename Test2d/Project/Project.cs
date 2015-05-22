@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace Test2d
 {
-
     /// <summary>
     /// 
     /// </summary>
