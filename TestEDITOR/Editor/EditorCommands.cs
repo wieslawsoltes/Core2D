@@ -38,6 +38,87 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
+        public ICommand ImportStyleCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ImportStylesCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ImportStyleGroupCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ImportStyleGroupsCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ImportGroupCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ImportGroupsCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ImportGroupLibraryCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ImportGroupLibrariesCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ImportTemplateCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ImportTemplatesCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ExportStyleCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ExportStylesCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ExportStyleGroupCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ExportStyleGroupsCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ExportGroupCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ExportGroupsCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ExportGroupLibraryCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ExportGroupLibrariesCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ExportTemplateCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ExportTemplatesCommand { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand UndoCommand { get; set; }
         /// <summary>
         /// 
