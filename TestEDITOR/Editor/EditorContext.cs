@@ -1095,12 +1095,80 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="project"></param>
+        public void Validate(Project project)
+        {
+            if (project == null)
+                return;
+            
+            if (project.Options == null)
+            {
+                project.Options = Options.Create();
+            }
+            
+            if (project.StyleGroups == null)
+            {
+                project.StyleGroups = new ObservableCollection<ShapeStyleGroup>();
+            }
+
+            if (project.GroupLibraries == null)
+            {
+                project.GroupLibraries = new ObservableCollection<GroupLibrary>();
+            }
+            
+            if (project.Templates == null)
+            {
+                project.Templates = new ObservableCollection<Container>();
+            }
+ 
+            if (project.Documents == null)
+            {
+                project.Documents = new ObservableCollection<Document>();
+            }
+
+            foreach (var document in project.Documents) 
+            {
+                if (document.Containers == null)
+                {
+                    document.Containers = new ObservableCollection<Container>();
+                }
+                
+                foreach (var container in document.Containers) 
+                {
+                    if (container.Layers == null)
+                    {
+                        container.Layers = new ObservableCollection<Layer>();
+                    }
+                    
+                    if (container.Properties == null)
+                    {
+                        container.Properties = new ObservableCollection<ShapeProperty>();
+                    }
+                    
+                    if (container.WorkingLayer == null)
+                    {
+                        container.WorkingLayer = Layer.Create("Working", container);
+                    }
+ 
+                    if (container.HelperLayer == null)
+                    {
+                        container.HelperLayer = Layer.Create("Helper", container);
+                    }
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="path"></param>
         public void Open(string path)
         {
             var json = ReadUtf8Text(path);
             var project = Serializer.FromJson<Project>(json);
 
+            Validate(project);
+    
             var root = new Uri(path);
             var images = Editor.GetAllShapes<XImage>(project);
 
@@ -1900,6 +1968,27 @@ namespace TestEDITOR
             (_commands.ExportCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ExitCommand as DelegateCommand).RaiseCanExecuteChanged();
 
+            (_commands.ImportStyleCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ImportStylesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ImportStyleGroupCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ImportStyleGroupsCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ImportGroupCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ImportGroupsCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ImportGroupLibraryCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ImportGroupLibrariesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ImportTemplateCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ImportTemplatesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ExportStyleCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ExportStylesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ExportStyleGroupCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ExportStyleGroupsCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ExportGroupCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ExportGroupsCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ExportGroupLibraryCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ExportGroupLibrariesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ExportTemplateCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ExportTemplatesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+ 
             (_commands.UndoCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.RedoCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.CopyAsEmfCommand as DelegateCommand).RaiseCanExecuteChanged();
