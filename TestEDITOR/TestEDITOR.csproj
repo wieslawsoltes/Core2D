@@ -213,6 +213,7 @@
     <Compile Include="Editor\ExportType.cs" />
     <Compile Include="Editor\ImportType.cs" />
     <Compile Include="Editor\LineGrid.cs" />
+    <Compile Include="Editor\StyleComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\DxfRenderer.cs" />
     <Compile Include="Renderers\EmfRenderer.cs" />
