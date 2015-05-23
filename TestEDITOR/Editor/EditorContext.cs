@@ -1059,13 +1059,27 @@ namespace TestEDITOR
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        private string ReadUtf8Text(string path)
+        /// <param name="compress"></param>
+        public string ReadUtf8Text(string path, bool compress = true)
         {
-            using (var fs = System.IO.File.OpenRead(path))
+            if (compress)
             {
-                using (var cs = new System.IO.Compression.GZipStream(fs, System.IO.Compression.CompressionMode.Decompress))
+                using (var fs = System.IO.File.OpenRead(path))
                 {
-                    using (var sr = new System.IO.StreamReader(cs, Encoding.UTF8))
+                    using (var cs = new System.IO.Compression.GZipStream(fs, System.IO.Compression.CompressionMode.Decompress))
+                    {
+                        using (var sr = new System.IO.StreamReader(cs, Encoding.UTF8))
+                        {
+                            return sr.ReadToEnd();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                using (var fs = System.IO.File.OpenRead(path))
+                {
+                    using (var sr = new System.IO.StreamReader(fs, Encoding.UTF8))
                     {
                         return sr.ReadToEnd();
                     }
@@ -1078,13 +1092,27 @@ namespace TestEDITOR
         /// </summary>
         /// <param name="path"></param>
         /// <param name="text"></param>
-        private void WriteUtf8Text(string path, string text)
+        /// <param name="compress"></param>
+        public void WriteUtf8Text(string path, string text, bool compress = true)
         {
-            using (var fs = System.IO.File.Create(path))
+            if (compress)
             {
-                using (var cs = new System.IO.Compression.GZipStream(fs, System.IO.Compression.CompressionMode.Compress))
+                using (var fs = System.IO.File.Create(path))
                 {
-                    using (var sw = new System.IO.StreamWriter(cs, Encoding.UTF8))
+                    using (var cs = new System.IO.Compression.GZipStream(fs, System.IO.Compression.CompressionMode.Compress))
+                    {
+                        using (var sw = new System.IO.StreamWriter(cs, Encoding.UTF8))
+                        {
+                            sw.Write(text);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                using (var fs = System.IO.File.Create(path))
+                {
+                    using (var sw = new System.IO.StreamWriter(fs, Encoding.UTF8))
                     {
                         sw.Write(text);
                     }
@@ -1171,7 +1199,6 @@ namespace TestEDITOR
     
             var root = new Uri(path);
             var images = Editor.GetAllShapes<XImage>(project);
-
             _editor.ToAbsoluteUri(root, images);
 
             _history.Snapshot(_editor.Project);
@@ -1186,7 +1213,6 @@ namespace TestEDITOR
         {
             var root = new Uri(path);
             var images = Editor.GetAllShapes<XImage>(_editor.Project);
-
             _editor.ToRelativeUri(root, images);
 
             var json = Serializer.ToJson(_editor.Project);
@@ -1260,6 +1286,297 @@ namespace TestEDITOR
                     DrawShapeState = ShapeState.Printable
                 };
                 renderer.Create(path, _editor.Project.CurrentContainer, version);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="item"></param>
+        /// <param name="type"></param>
+        public void ImportEx(string path, object item, ImportType type)
+        {
+            try
+            {
+                switch (type)
+                {
+                    case ImportType.Style:
+                        {
+                            var styles = item as IList<ShapeStyle>;
+                            var json = ReadUtf8Text(path, false);
+                            var import = Serializer.FromJson<ShapeStyle>(json);
+                            _history.Snapshot(_editor.Project);
+                            styles.Add(import);
+                        }
+                        break;
+                    case ImportType.Styles:
+                        {
+                            var styles = item as IList<ShapeStyle>;
+                            var json = ReadUtf8Text(path, false);
+                            var import = Serializer.FromJson<IList<ShapeStyle>>(json);
+                            _history.Snapshot(_editor.Project);
+                            foreach (var style in import)
+                            {
+                                styles.Add(style);
+                            }
+                        }
+                        break;
+                    case ImportType.StyleGroup:
+                        {
+                            var sgs = item as IList<ShapeStyleGroup>;
+                            var json = ReadUtf8Text(path, false);
+                            var import = Serializer.FromJson<ShapeStyleGroup>(json);
+                            _history.Snapshot(_editor.Project);
+                            sgs.Add(import);
+                        }
+                        break;
+                    case ImportType.StyleGroups:
+                        {
+                            var sgs = item as IList<ShapeStyleGroup>;
+                            var json = ReadUtf8Text(path, false);
+                            var import = Serializer.FromJson<IList<ShapeStyleGroup>>(json);
+                            _history.Snapshot(_editor.Project);
+                            foreach (var sg in import)
+                            {
+                                sgs.Add(sg);
+                            }
+                        }
+                        break;
+                    case ImportType.Group:
+                        {
+                            var groups = item as IList<XGroup>;
+                            var json = ReadUtf8Text(path, false);
+                            var import = Serializer.FromJson<XGroup>(json);
+
+                            var shapes = Enumerable.Repeat(import as XGroup, 1);
+                            TryToRestoreStyles(shapes);
+                            var root = new Uri(path);
+                            var images = Editor.GetAllShapes<XImage>(shapes);
+                            _editor.ToAbsoluteUri(root, images);
+
+                            _history.Snapshot(_editor.Project);
+                            groups.Add(import);
+                        }
+                        break;
+                    case ImportType.Groups:
+                        {
+                            var groups = item as IList<XGroup>;
+                            var json = ReadUtf8Text(path, false);
+                            var import = Serializer.FromJson<IList<XGroup>>(json);
+
+                            var shapes = import;
+                            TryToRestoreStyles(shapes);
+                            var root = new Uri(path);
+                            var images = Editor.GetAllShapes<XImage>(shapes);
+                            _editor.ToAbsoluteUri(root, images);
+
+                            _history.Snapshot(_editor.Project);
+                            foreach (var group in import)
+                            {
+                                groups.Add(group);
+                            }
+                        }
+                        break;
+                    case ImportType.GroupLibrary:
+                        {
+                            var gls = item as IList<GroupLibrary>;
+                            var json = ReadUtf8Text(path, false);
+                            var import = Serializer.FromJson<GroupLibrary>(json);
+
+                            var shapes = import.Groups;
+                            TryToRestoreStyles(shapes);
+                            var root = new Uri(path);
+                            var images = Editor.GetAllShapes<XImage>(shapes);
+                            _editor.ToAbsoluteUri(root, images);
+
+                            _history.Snapshot(_editor.Project);
+                            gls.Add(import);
+                        }
+                        break;
+                    case ImportType.GroupLibraries:
+                        {
+                            var gls = item as IList<GroupLibrary>;
+                            var json = ReadUtf8Text(path, false);
+                            var import = Serializer.FromJson<IList<GroupLibrary>>(json);
+
+                            var shapes = import.SelectMany(x => x.Groups);
+                            TryToRestoreStyles(shapes);
+                            var root = new Uri(path);
+                            var images = Editor.GetAllShapes<XImage>(shapes);
+                            _editor.ToAbsoluteUri(root, images);
+
+                            _history.Snapshot(_editor.Project);
+                            foreach (var library in import)
+                            {
+                                gls.Add(library);
+                            }
+                        }
+                        break;
+                    case ImportType.Template:
+                        {
+                            var templates = item as IList<Container>;
+                            var json = ReadUtf8Text(path, false);
+                            var import = Serializer.FromJson<Container>(json);
+
+                            var shapes = import.Layers.SelectMany(x => x.Shapes);
+                            TryToRestoreStyles(shapes);
+                            var root = new Uri(path);
+                            var images = Editor.GetAllShapes<XImage>(shapes);
+                            _editor.ToAbsoluteUri(root, images);
+
+                            _history.Snapshot(_editor.Project);
+                            templates.Add(import);
+                        }
+                        break;
+                    case ImportType.Templates:
+                        {
+                            var templates = item as IList<Container>;
+                            var json = ReadUtf8Text(path, false);
+                            var import = Serializer.FromJson<IList<Container>>(json);
+
+                            var shapes = import.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
+                            TryToRestoreStyles(shapes);
+                            var root = new Uri(path);
+                            var images = Editor.GetAllShapes<XImage>(shapes);
+                            _editor.ToAbsoluteUri(root, images);
+
+                            _history.Snapshot(_editor.Project);
+                            foreach (var template in import)
+                            {
+                                templates.Add(template);
+                            }
+                        }
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="item"></param>
+        /// <param name="type"></param>
+        public void ExportEx(string path, object item, ExportType type)
+        {
+            try
+            {
+                switch (type)
+                {
+                    case ExportType.Style:
+                        {
+                            var json = Serializer.ToJson(item as ShapeStyle);
+                            WriteUtf8Text(path, json, false);
+                        }
+                        break;
+                    case ExportType.Styles:
+                        {
+                            var json = Serializer.ToJson((item as ShapeStyleGroup).Styles);
+                            WriteUtf8Text(path, json, false);
+                        }
+                        break;
+                    case ExportType.StyleGroup:
+                        {
+                            var json = Serializer.ToJson((item as ShapeStyleGroup));
+                            WriteUtf8Text(path, json, false);
+                        }
+                        break;
+                    case ExportType.StyleGroups:
+                        {
+                            var json = Serializer.ToJson((item as Project).StyleGroups);
+                            WriteUtf8Text(path, json, false);
+                        }
+                        break;
+                    case ExportType.Group:
+                        {
+                            var shapes = Enumerable.Repeat(item as XGroup, 1);
+                            var root = new Uri(path);
+                            var images = Editor.GetAllShapes<XImage>(shapes);
+                            _editor.ToRelativeUri(root, images);
+
+                            var json = Serializer.ToJson(item as XGroup);
+                            WriteUtf8Text(path, json, false);
+
+                            _editor.ToAbsoluteUri(root, images);
+                        }
+                        break;
+                    case ExportType.Groups:
+                        {
+                            var shapes = (item as GroupLibrary).Groups;
+                            var root = new Uri(path);
+                            var images = Editor.GetAllShapes<XImage>(shapes);
+                            _editor.ToRelativeUri(root, images);
+
+                            var json = Serializer.ToJson((item as GroupLibrary).Groups);
+                            WriteUtf8Text(path, json, false);
+
+                            _editor.ToAbsoluteUri(root, images);
+                        }
+                        break;
+                    case ExportType.GroupLibrary:
+                        {
+                            var shapes = (item as GroupLibrary).Groups;
+                            var root = new Uri(path);
+                            var images = Editor.GetAllShapes<XImage>(shapes);
+                            _editor.ToRelativeUri(root, images);
+
+                            var json = Serializer.ToJson(item as GroupLibrary);
+                            WriteUtf8Text(path, json, false);
+
+                            _editor.ToAbsoluteUri(root, images);
+                        }
+                        break;
+                    case ExportType.GroupLibraries:
+                        {
+                            var shapes = (item as Project).GroupLibraries.SelectMany(x => x.Groups);
+                            var root = new Uri(path);
+                            var images = Editor.GetAllShapes<XImage>(shapes);
+                            _editor.ToRelativeUri(root, images);
+
+                            var json = Serializer.ToJson((item as Project).GroupLibraries);
+                            WriteUtf8Text(path, json, false);
+
+                            _editor.ToAbsoluteUri(root, images);
+                        }
+                        break;
+                    case ExportType.Template:
+                        {
+                            var shapes = (item as Container).Layers.SelectMany(x => x.Shapes);
+                            var root = new Uri(path);
+                            var images = Editor.GetAllShapes<XImage>(shapes);
+                            _editor.ToRelativeUri(root, images);
+
+                            var json = Serializer.ToJson(item as Container);
+                            WriteUtf8Text(path, json, false);
+
+                            _editor.ToAbsoluteUri(root, images);
+                        }
+                        break;
+                    case ExportType.Templates:
+                        {
+                            var shapes = (item as Project).Templates.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
+                            var root = new Uri(path);
+                            var images = Editor.GetAllShapes<XImage>(shapes);
+                            _editor.ToRelativeUri(root, images);
+
+                            var json = Serializer.ToJson((item as Project).Templates);
+                            WriteUtf8Text(path, json, false);
+
+                            _editor.ToAbsoluteUri(root, images);
+                        }
+                        break;
+                }
             }
             catch (Exception ex)
             {
