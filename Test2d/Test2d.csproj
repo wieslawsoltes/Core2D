@@ -73,6 +73,7 @@
     <Compile Include="Core\IView.cs" />
     <Compile Include="Core\LineCap.cs" />
     <Compile Include="Core\LineStyle.cs" />
+    <Compile Include="Core\MaxLengthFlags.cs" />
     <Compile Include="Core\ShapeProperty.cs" />
     <Compile Include="Core\ShapePropertyExtensions.cs" />
     <Compile Include="Core\ShapePropertyParameter.cs" />
