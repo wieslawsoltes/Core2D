@@ -195,6 +195,12 @@ namespace TestDirect2D
                         case Keys.C:
                             context.Commands.TryToConnectCommand.Execute(null);
                             break;
+                        case Keys.Z:
+                            context.Commands.ZoomResetCommand.Execute(null);
+                            break;
+                        case Keys.X:
+                            context.Commands.ZoomExtentCommand.Execute(null);
+                            break;
                     }
                 };
         }

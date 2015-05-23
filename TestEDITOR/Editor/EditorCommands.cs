@@ -320,6 +320,15 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
+        public ICommand ZoomResetCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ZoomExtentCommand { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand LayersWindowCommand { get; set; }
         /// <summary>
         /// 

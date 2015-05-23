@@ -72,6 +72,23 @@
             <MenuItem Header="_Group" Command="{Binding Commands.GroupCommand}" InputGestureText="Ctrl+G"/>
             <MenuItem Header="Group _Layer" Command="{Binding Commands.GroupLayerCommand}" InputGestureText="Ctrl+Shift+G"/>
         </MenuItem>
+        <MenuItem Header="_View">
+            <MenuItem Header="_Zoom">
+                <MenuItem Header="_Reset" Command="{Binding Commands.ZoomResetCommand}" InputGestureText="Z"/>
+                <MenuItem Header="_Extent" Command="{Binding Commands.ZoomExtentCommand}" InputGestureText="X"/>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="_Layers..." Command="{Binding Commands.LayersWindowCommand}" InputGestureText="Ctrl+L"/>
+            <Separator/>
+            <MenuItem Header="St_yle Editor..." Command="{Binding Commands.StyleWindowCommand}" InputGestureText="Ctrl+K"/>
+            <MenuItem Header="S_tyles..." Command="{Binding Commands.StylesWindowCommand}" InputGestureText="Ctrl+T"/>
+            <Separator/>
+            <MenuItem Header="S_hapes..." Command="{Binding Commands.ShapesWindowCommand}" InputGestureText="Ctrl+H"/>
+            <Separator/>
+            <MenuItem Header="Containe_r Editor..." Command="{Binding Commands.ContainerWindowCommand}" InputGestureText="Ctrl+R"/>
+            <Separator/>
+            <MenuItem Header="_Properties..." Command="{Binding Commands.PropertiesWindowCommand}" InputGestureText="F4"/>
+        </MenuItem>
         <MenuItem Header="_Tool">
             <MenuItem Header="_None" Command="{Binding Commands.ToolNoneCommand}" InputGestureText="N">
                 <MenuItem.Style>
@@ -305,18 +322,6 @@
             </MenuItem>
             <Separator/>
             <MenuItem Header="Ti_ck" Command="{Binding Commands.TickSimulationCommand}" InputGestureText="F7"/>
-        </MenuItem>
-        <MenuItem Header="_Window">
-            <MenuItem Header="_Layers..." Command="{Binding Commands.LayersWindowCommand}" InputGestureText="Ctrl+L"/>
-            <Separator/>
-            <MenuItem Header="St_yle Editor..." Command="{Binding Commands.StyleWindowCommand}" InputGestureText="Ctrl+K"/>
-            <MenuItem Header="S_tyles..." Command="{Binding Commands.StylesWindowCommand}" InputGestureText="Ctrl+T"/>
-            <Separator/>
-            <MenuItem Header="S_hapes..." Command="{Binding Commands.ShapesWindowCommand}" InputGestureText="Ctrl+H"/>
-            <Separator/>
-            <MenuItem Header="Containe_r Editor..." Command="{Binding Commands.ContainerWindowCommand}" InputGestureText="Ctrl+R"/>
-            <Separator/>
-            <MenuItem Header="_Properties..." Command="{Binding Commands.PropertiesWindowCommand}" InputGestureText="Alt+Enter"/>
         </MenuItem>
     </Menu>
 </UserControl>

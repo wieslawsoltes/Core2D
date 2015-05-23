@@ -2366,6 +2366,9 @@ namespace TestEDITOR
             (_commands.PauseSimulationCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.TickSimulationCommand as DelegateCommand).RaiseCanExecuteChanged();
 
+            (_commands.ZoomResetCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ZoomExtentCommand as DelegateCommand).RaiseCanExecuteChanged();
+
             (_commands.LayersWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.StyleWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.StylesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();

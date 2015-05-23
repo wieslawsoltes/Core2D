@@ -293,6 +293,12 @@ namespace TestWinForms
                     case Keys.C:
                         (DataContext as EditorContext).Commands.TryToConnectCommand.Execute(null);
                         break;
+                    case Keys.Z:
+                        (DataContext as EditorContext).Commands.ZoomResetCommand.Execute(null);
+                        break;
+                    case Keys.X:
+                        (DataContext as EditorContext).Commands.ZoomExtentCommand.Execute(null);
+                        break;
                 }
             };
         }

@@ -260,7 +260,21 @@ namespace Test.Windows
                     Eval();
                 },
                 () => context.IsEditMode());
-            
+
+            context.Commands.ZoomResetCommand = new DelegateCommand(
+                () =>
+                {
+                    grid.ResetZoomAndPan();
+                },
+                () => true);
+
+            context.Commands.ZoomExtentCommand = new DelegateCommand(
+                () =>
+                {
+                    grid.AutoFit();
+                },
+                () => true);
+
             context.Commands.LayersWindowCommand = new DelegateCommand(
                 () =>
                 {
