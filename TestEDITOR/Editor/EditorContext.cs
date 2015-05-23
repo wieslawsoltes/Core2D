@@ -1642,7 +1642,7 @@ namespace TestEDITOR
                 System.Diagnostics.Debug.Print(ex.StackTrace);
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -1651,6 +1651,7 @@ namespace TestEDITOR
         {
             var styles = _editor.Project.StyleGroups
                 .SelectMany(sg => sg.Styles)
+                .Distinct(new StyleComparer())
                 .ToDictionary(s => s.Name);
 
             // reset point shape to container default
@@ -1687,6 +1688,7 @@ namespace TestEDITOR
                     // recreate styles dictionary
                     styles = _editor.Project.StyleGroups
                         .SelectMany(sg => sg.Styles)
+                        .Distinct(new StyleComparer())
                         .ToDictionary(s => s.Name);
                 }
             }
