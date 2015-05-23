@@ -8,7 +8,7 @@
              xmlns:core="clr-namespace:Test2d;assembly=Test2d"
              xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="180">
+             d:DesignHeight="300" d:DesignWidth="200">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -32,6 +32,24 @@
             BorderBrush="{x:Null}"
             HorizontalContentAlignment="Stretch"
             Grid.Row="1">
+            <controls:BaseShapeDragAndDropListBox.Resources>
+                <ContextMenu x:Key="ShapeContextMenu" 
+                             DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                    <MenuItem Header="_Delete" 
+                              InputGestureText="Del" 
+                              Command="{Binding DataContext.Commands.RemoveShapeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                </ContextMenu>
+            </controls:BaseShapeDragAndDropListBox.Resources>
+            <controls:BaseShapeDragAndDropListBox.InputBindings>
+                <KeyBinding Command="{Binding DataContext.Commands.RemoveShapeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:XGroupDragAndDropListBox}}}" 
+                            Gesture="Del"/>
+            </controls:BaseShapeDragAndDropListBox.InputBindings>
+            <controls:BaseShapeDragAndDropListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="ContextMenu" Value="{StaticResource ShapeContextMenu}"/>
+                </Style>
+            </controls:BaseShapeDragAndDropListBox.ItemContainerStyle>
             <controls:BaseShapeDragAndDropListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}" Margin="0,5,0,5"/>
