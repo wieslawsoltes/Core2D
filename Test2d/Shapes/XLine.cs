@@ -145,5 +145,181 @@ namespace Test2d
         {
             return Create(x, y, x, y, style, point, name);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        public static void SetMaxLength(
+            XLine line,
+            ref double x1, ref double y1,
+            ref double x2, ref double y2)
+        {
+            var ls = line.Style.LineStyle;
+
+            if (ls.MaxLengthFlags == MaxLengthFlags.Disabled)
+                return;
+
+            if (ls.MaxLengthFlags.HasFlag(MaxLengthFlags.All))
+            {
+                SetMaxLengthAll(line, ref x1, ref y1, ref x2, ref y2);
+            }
+            else
+            {
+                if (ls.MaxLengthFlags.HasFlag(MaxLengthFlags.Vertical))
+                {
+                    bool isVertical = Math.Round(x1, 1) == Math.Round(x2, 1);
+                    if (isVertical)
+                    {
+                        SetMaxLengthVertical(line, ref y1, ref y2);
+                    }
+                }
+
+                if (ls.MaxLengthFlags.HasFlag(MaxLengthFlags.Horizontal))
+                {
+                    bool isHorizontal = Math.Round(y1, 1) == Math.Round(y2, 1);
+                    if (isHorizontal)
+                    {
+                        SetMaxLengthHorizontal(line, ref x1, ref x2);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        public static void SetMaxLengthAll(
+            XLine line, 
+            ref double x1, ref double y1, 
+            ref double x2, ref double y2)
+        {
+            var ls = line.Style.LineStyle;
+
+            bool shortenStart = ls.MaxLengthStartState != ShapeState.Default
+                && line.Start.State.HasFlag(ls.MaxLengthStartState)
+                && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.Start);
+
+            bool shortenEnd = ls.MaxLengthEndState != ShapeState.Default
+                && line.End.State.HasFlag(ls.MaxLengthEndState)
+                && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.End);
+
+            if (shortenStart && !shortenEnd)
+            {
+                var p1 = Point2.Create(x1, y1);
+                var p2 = Point2.Create(x2, y2);
+                double length = p1.Distance(p2);
+                x1 = p2.X - (p2.X - p1.X) / length * ls.MaxLength;
+                y1 = p2.Y - (p2.Y - p1.Y) / length * ls.MaxLength;
+            }
+
+            if (!shortenStart && shortenEnd)
+            {
+                var p1 = Point2.Create(x2, y2);
+                var p2 = Point2.Create(x1, y1);
+                double length = p1.Distance(p2);
+                x2 = p2.X - (p2.X - p1.X) / length * ls.MaxLength;
+                y2 = p2.Y - (p2.Y - p1.Y) / length * ls.MaxLength;
+            }
+
+            if (shortenStart && shortenEnd)
+            {
+                // TODO:
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="x1"></param>
+        /// <param name="x2"></param>
+        public static void SetMaxLengthHorizontal(XLine line, ref double x1, ref double x2)
+        {
+            var ls = line.Style.LineStyle;
+
+            bool shortenStart = ls.MaxLengthStartState != ShapeState.Default
+                && line.Start.State.HasFlag(ls.MaxLengthStartState)
+                && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.Start);
+
+            bool shortenEnd = ls.MaxLengthEndState != ShapeState.Default
+                && line.End.State.HasFlag(ls.MaxLengthEndState)
+                && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.End);
+
+            if (shortenStart && !shortenEnd)
+            {
+                if (x2 > x1)
+                    x1 = x2 - ls.MaxLength;
+                else
+                    x1 = x2 + ls.MaxLength;
+            }
+
+            if (!shortenStart && shortenEnd)
+            {
+                if (x2 > x1)
+                    x2 = x1 + ls.MaxLength;
+                else
+                    x2 = x1 - ls.MaxLength;
+            }
+
+            if (shortenStart && shortenEnd)
+            {
+                // TODO:
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="y1"></param>
+        /// <param name="y2"></param>
+        public static void SetMaxLengthVertical(XLine line, ref double y1, ref double y2)
+        {
+            var ls = line.Style.LineStyle;
+
+            bool shortenStart = ls.MaxLengthStartState != ShapeState.Default
+                && line.Start.State.HasFlag(ls.MaxLengthStartState)
+                && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.Start);
+
+            bool shortenEnd = ls.MaxLengthEndState != ShapeState.Default
+                && line.End.State.HasFlag(ls.MaxLengthEndState)
+                && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.End);
+
+            if (shortenStart && !shortenEnd)
+            {
+                if (y2 > y1)
+                    y1 = y2 - ls.MaxLength;
+                else
+                    y1 = y2 + ls.MaxLength;
+            }
+
+            if (!shortenStart && shortenEnd)
+            {
+                if (y2 > y1)
+                    y2 = y1 + ls.MaxLength;
+                else
+                    y2 = y1 - ls.MaxLength;
+            }
+
+            /*
+            if (shortenStart && shortenEnd)
+            {
+                if (y2 > y1)
+                    y2 = y1 + ls.MaxLength;
+                else
+                    y2 = y1 - ls.MaxLength;
+            }
+            */
+        }
     }
 }
