@@ -563,12 +563,12 @@ namespace Test2d
         /// </summary>
         public void RemoveCurrentTemplate()
         {
-            var template = Project.CurrentTemplate;
+            var template = _project.CurrentTemplate;
             if (template != null)
             {
                 _history.Snapshot(_project);
-                Project.Templates.Remove(_project.CurrentTemplate);
-                Project.CurrentTemplate = _project.Templates.FirstOrDefault();
+                _project.Templates.Remove(_project.CurrentTemplate);
+                _project.CurrentTemplate = _project.Templates.FirstOrDefault();
             }
         }
 
@@ -577,12 +577,12 @@ namespace Test2d
         /// </summary>
         public void RemoveCurrentGroupLibrary()
         {
-            var gl = Project.CurrentGroupLibrary;
+            var gl = _project.CurrentGroupLibrary;
             if (gl != null)
             {
                 _history.Snapshot(_project);
-                Project.GroupLibraries.Remove(gl);
-                Project.CurrentGroupLibrary = Project.GroupLibraries.FirstOrDefault();
+                _project.GroupLibraries.Remove(gl);
+                _project.CurrentGroupLibrary = _project.GroupLibraries.FirstOrDefault();
             }
         }
 
@@ -591,12 +591,12 @@ namespace Test2d
         /// </summary>
         public void RemoveCurrentGroup()
         {
-            var group = Project.CurrentGroupLibrary.CurrentGroup;
+            var group = _project.CurrentGroupLibrary.CurrentGroup;
             if (group != null)
             {
                 _history.Snapshot(_project);
-                Project.CurrentGroupLibrary.Groups.Remove(group);
-                Project.CurrentGroupLibrary.CurrentGroup = Project.CurrentGroupLibrary.Groups.FirstOrDefault();
+                _project.CurrentGroupLibrary.Groups.Remove(group);
+                _project.CurrentGroupLibrary.CurrentGroup = _project.CurrentGroupLibrary.Groups.FirstOrDefault();
             }
         }
 
@@ -605,13 +605,13 @@ namespace Test2d
         /// </summary>
         public void RemoveCurrentLayer()
         {
-            var layer = Project.CurrentContainer.CurrentLayer;
+            var layer = _project.CurrentContainer.CurrentLayer;
             if (layer != null)
             {
                 _history.Snapshot(_project);
-                Project.CurrentContainer.Layers.Remove(layer);
-                Project.CurrentContainer.CurrentLayer = Project.CurrentContainer.Layers.FirstOrDefault();
-                //Project.CurrentContainer.Invalidate();
+                _project.CurrentContainer.Layers.Remove(layer);
+                _project.CurrentContainer.CurrentLayer = _project.CurrentContainer.Layers.FirstOrDefault();
+                //_project.CurrentContainer.Invalidate();
             }
         }
 
@@ -620,13 +620,13 @@ namespace Test2d
         /// </summary>
         public void RemoveCurrentShape()
         {
-            var shape = Project.CurrentContainer.CurrentShape;
+            var shape = _project.CurrentContainer.CurrentShape;
             if (shape != null)
             {
                 _history.Snapshot(_project);
-                Project.CurrentContainer.CurrentLayer.Shapes.Remove(shape);
-                Project.CurrentContainer.CurrentShape = Project.CurrentContainer.CurrentLayer.Shapes.FirstOrDefault();
-                //Project.CurrentContainer.Invalidate();
+                _project.CurrentContainer.CurrentLayer.Shapes.Remove(shape);
+                _project.CurrentContainer.CurrentShape = _project.CurrentContainer.CurrentLayer.Shapes.FirstOrDefault();
+                //_project.CurrentContainer.Invalidate();
             }
         }
 
@@ -635,12 +635,12 @@ namespace Test2d
         /// </summary>
         public void RemoveCurrentStyleGroup()
         {
-            var sg = Project.CurrentStyleGroup;
+            var sg = _project.CurrentStyleGroup;
             if (sg != null)
             {
                 _history.Snapshot(_project);
-                Project.StyleGroups.Remove(sg);
-                Project.CurrentStyleGroup = Project.StyleGroups.FirstOrDefault();
+                _project.StyleGroups.Remove(sg);
+                _project.CurrentStyleGroup = _project.StyleGroups.FirstOrDefault();
             }
         }
 
@@ -649,12 +649,12 @@ namespace Test2d
         /// </summary>
         public void RemoveCurrentStyle()
         {
-            var style = Project.CurrentStyleGroup.CurrentStyle;
+            var style = _project.CurrentStyleGroup.CurrentStyle;
             if (style != null)
             {
                 _history.Snapshot(_project);
-                Project.CurrentStyleGroup.Styles.Remove(style);
-                Project.CurrentStyleGroup.CurrentStyle = Project.CurrentStyleGroup.Styles.FirstOrDefault();
+                _project.CurrentStyleGroup.Styles.Remove(style);
+                _project.CurrentStyleGroup.CurrentStyle = _project.CurrentStyleGroup.Styles.FirstOrDefault();
             }
         }
 
@@ -664,10 +664,10 @@ namespace Test2d
         /// <param name="project"></param>
         public void Load(Project project)
         {
-            Renderer.ClearCache();
+            _renderer.ClearCache();
             
             Project = project;
-            //Project.CurrentContainer.Invalidate();
+            //_project.CurrentContainer.Invalidate();
 
             if (EnableObserver)
             {
@@ -680,7 +680,7 @@ namespace Test2d
         /// </summary>
         public void GroupSelected()
         {
-            var layer = Project.CurrentContainer.CurrentLayer;
+            var layer = _project.CurrentContainer.CurrentLayer;
             if (_renderer.SelectedShapes != null)
             {
                 _history.Snapshot(_project);
@@ -693,7 +693,7 @@ namespace Test2d
                 }
 
                 layer.Shapes.Add(g);
-                Select(Project.CurrentContainer, g);
+                Select(_project.CurrentContainer, g);
             }
         }
 
@@ -702,7 +702,7 @@ namespace Test2d
         /// </summary>
         public void GroupCurrentLayer()
         {
-            var layer = Project.CurrentContainer.CurrentLayer;
+            var layer = _project.CurrentContainer.CurrentLayer;
             if (layer.Shapes.Count > 0)
             {
                 _history.Snapshot(_project);
@@ -715,7 +715,7 @@ namespace Test2d
                 }
 
                 layer.Shapes.Add(g);
-                Select(Project.CurrentContainer, g);
+                Select(_project.CurrentContainer, g);
             }
         }
 
@@ -763,8 +763,8 @@ namespace Test2d
             {
                 _history.Snapshot(_project);
 
-                Project.CurrentContainer.CurrentLayer.Shapes.Remove(_renderer.SelectedShape);
-                Project.CurrentContainer.CurrentLayer.Invalidate();
+                _project.CurrentContainer.CurrentLayer.Shapes.Remove(_renderer.SelectedShape);
+                _project.CurrentContainer.CurrentLayer.Invalidate();
 
                 _renderer.SelectedShape = default(BaseShape);
             }
@@ -772,8 +772,8 @@ namespace Test2d
             if (_renderer.SelectedShapes != null && _renderer.SelectedShapes.Count > 0)
             {
                 _history.Snapshot(_project);
-                
-                var layer = Project.CurrentContainer.CurrentLayer;
+
+                var layer = _project.CurrentContainer.CurrentLayer;
 
                 foreach (var shape in _renderer.SelectedShapes)
                 {
@@ -883,11 +883,11 @@ namespace Test2d
         /// <returns></returns>
         public bool IsLeftDownAvailable()
         {
-            return Project.CurrentContainer != null
-                && Project.CurrentContainer.CurrentLayer != null
-                && Project.CurrentContainer.CurrentLayer.IsVisible
-                && Project.CurrentStyleGroup != null
-                && Project.CurrentStyleGroup.CurrentStyle != null;
+            return _project.CurrentContainer != null
+                && _project.CurrentContainer.CurrentLayer != null
+                && _project.CurrentContainer.CurrentLayer.IsVisible
+                && _project.CurrentStyleGroup != null
+                && _project.CurrentStyleGroup.CurrentStyle != null;
         }
 
         /// <summary>
@@ -896,11 +896,11 @@ namespace Test2d
         /// <returns></returns>
         public bool IsLeftUpAvailable()
         {
-            return Project.CurrentContainer != null
-                && Project.CurrentContainer.CurrentLayer != null
-                && Project.CurrentContainer.CurrentLayer.IsVisible
-                && Project.CurrentStyleGroup != null
-                && Project.CurrentStyleGroup.CurrentStyle != null;
+            return _project.CurrentContainer != null
+                && _project.CurrentContainer.CurrentLayer != null
+                && _project.CurrentContainer.CurrentLayer.IsVisible
+                && _project.CurrentStyleGroup != null
+                && _project.CurrentStyleGroup.CurrentStyle != null;
         }
         
         /// <summary>
@@ -909,11 +909,11 @@ namespace Test2d
         /// <returns></returns>
         public bool IsRightDownAvailable()
         {
-            return Project.CurrentContainer != null
-                && Project.CurrentContainer.CurrentLayer != null
-                && Project.CurrentContainer.CurrentLayer.IsVisible
-                && Project.CurrentStyleGroup != null
-                && Project.CurrentStyleGroup.CurrentStyle != null;
+            return _project.CurrentContainer != null
+                && _project.CurrentContainer.CurrentLayer != null
+                && _project.CurrentContainer.CurrentLayer.IsVisible
+                && _project.CurrentStyleGroup != null
+                && _project.CurrentStyleGroup.CurrentStyle != null;
         }
         
         /// <summary>
@@ -922,11 +922,11 @@ namespace Test2d
         /// <returns></returns>
         public bool IsRightUpAvailable()
         {
-            return Project.CurrentContainer != null
-                && Project.CurrentContainer.CurrentLayer != null
-                && Project.CurrentContainer.CurrentLayer.IsVisible
-                && Project.CurrentStyleGroup != null
-                && Project.CurrentStyleGroup.CurrentStyle != null;
+            return _project.CurrentContainer != null
+                && _project.CurrentContainer.CurrentLayer != null
+                && _project.CurrentContainer.CurrentLayer.IsVisible
+                && _project.CurrentStyleGroup != null
+                && _project.CurrentStyleGroup.CurrentStyle != null;
         }
 
         /// <summary>
@@ -935,11 +935,11 @@ namespace Test2d
         /// <returns></returns>
         public bool IsMoveAvailable()
         {
-            return Project.CurrentContainer != null
-                && Project.CurrentContainer.CurrentLayer != null
-                && Project.CurrentContainer.CurrentLayer.IsVisible
-                && Project.CurrentStyleGroup != null
-                && Project.CurrentStyleGroup.CurrentStyle != null;
+            return _project.CurrentContainer != null
+                && _project.CurrentContainer.CurrentLayer != null
+                && _project.CurrentContainer.CurrentLayer.IsVisible
+                && _project.CurrentStyleGroup != null
+                && _project.CurrentStyleGroup.CurrentStyle != null;
         }
 
         /// <summary>
