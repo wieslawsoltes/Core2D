@@ -842,18 +842,7 @@ namespace TestEDITOR
             _commands.RemoveTemplateCommand = new DelegateCommand(
                 () =>
                 {
-                    if (_editor.Project.CurrentTemplate != null)
-                    {
-                        _history.Snapshot(_editor.Project);
-                        _editor.Project.Templates.Remove(_editor.Project.CurrentTemplate);
-                    }
-                    
-                    var template = _editor.Project.CurrentTemplate;
-                    if (template != null)
-                    {
-                        _editor.Project.Templates.Remove(template);
-                        _editor.Project.CurrentTemplate = _editor.Project.Templates.FirstOrDefault();
-                    }
+                    _editor.RemoveCurrentTemplate();
                 },
                 () => IsEditMode());
 
@@ -1684,8 +1673,18 @@ namespace TestEDITOR
                 }
                 else
                 {
+                    // create Imported style group
+                    if (_editor.Project.CurrentStyleGroup == null)
+                    {
+                        var sg = ShapeStyleGroup.Create("Imported");
+                        _editor.Project.StyleGroups.Add(sg);
+                        _editor.Project.CurrentStyleGroup = sg;
+                    }
+
                     // add missing style
                     _editor.Project.CurrentStyleGroup.Styles.Add(shape.Style);
+
+                    // recreate styles dictionary
                     styles = _editor.Project.StyleGroups
                         .SelectMany(sg => sg.Styles)
                         .ToDictionary(s => s.Name);
