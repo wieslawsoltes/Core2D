@@ -522,6 +522,8 @@ namespace Test
             double x2 = line.End.X + dx;
             double y2 = line.End.Y + dy;
 
+            XLine.SetMaxLength(line, ref x1, ref y1, ref x2, ref y2);
+
             var sas = line.Style.LineStyle.StartArrowStyle;
             var eas = line.Style.LineStyle.EndArrowStyle;
             double a1 = Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI;

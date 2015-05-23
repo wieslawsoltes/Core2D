@@ -583,14 +583,18 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="line"></param>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
         /// <param name="x2"></param>
         /// <param name="y2"></param>
         /// <param name="layer"></param>
         /// <returns></returns>
-        private DxfLine CreateLine(double x1, double y1, double x2, double y2, string layer)
+        private DxfLine CreateLine(XLine line, double x1, double y1, double x2, double y2, string layer)
         {
+            if (line != null)
+                XLine.SetMaxLength(line, ref x1, ref y1, ref x2, ref y2);
+
             double _x1 = ToDxfX(x1);
             double _y1 = ToDxfY(y1);
             double _x2 = ToDxfX(x2);
@@ -814,7 +818,7 @@ namespace TestEDITOR
         /// <param name="layer"></param>
         private void DrawLine(DxfEntities entities, XLine line, string layer)
         {
-            var dxfLine = CreateLine(line.Start.X, line.Start.Y, line.End.X, line.End.Y, layer);
+            var dxfLine = CreateLine(line, line.Start.X, line.Start.Y, line.End.X, line.End.Y, layer);
             entities.Entities.Add(dxfLine);
         }
 
@@ -827,10 +831,10 @@ namespace TestEDITOR
         private void DrawRectangle(DxfEntities entities, XRectangle rectangle, string layer)
         {
             var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
-            var dxfLine1 = CreateLine(rect.X, rect.Y, rect.X + rect.Width, rect.Y, layer);
-            var dxfLine2 = CreateLine(rect.X, rect.Y + rect.Height, rect.X + rect.Width, rect.Y + rect.Height, layer);
-            var dxfLine3 = CreateLine(rect.X, rect.Y, rect.X, rect.Y + rect.Height, layer);
-            var dxfLine4 = CreateLine(rect.X + rect.Width, rect.Y, rect.X + rect.Width, rect.Y + rect.Height, layer);
+            var dxfLine1 = CreateLine(null, rect.X, rect.Y, rect.X + rect.Width, rect.Y, layer);
+            var dxfLine2 = CreateLine(null, rect.X, rect.Y + rect.Height, rect.X + rect.Width, rect.Y + rect.Height, layer);
+            var dxfLine3 = CreateLine(null, rect.X, rect.Y, rect.X, rect.Y + rect.Height, layer);
+            var dxfLine4 = CreateLine(null, rect.X + rect.Width, rect.Y, rect.X + rect.Width, rect.Y + rect.Height, layer);
             entities.Entities.Add(dxfLine1);
             entities.Entities.Add(dxfLine2);
             entities.Entities.Add(dxfLine3);

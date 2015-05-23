@@ -501,10 +501,17 @@ namespace TestEDITOR
             XSolidBrush fill = ToXSolidBrush(line.Style.Fill);
             XPen stroke = ToXPen(line.Style, _scaleToPage);
 
-            double x1 = _scaleToPage(line.Start.X + dx);
-            double y1 = _scaleToPage(line.Start.Y + dy);
-            double x2 = _scaleToPage(line.End.X + dx);
-            double y2 = _scaleToPage(line.End.Y + dy);
+            double _x1 = line.Start.X + dx;
+            double _y1 = line.Start.Y + dy;
+            double _x2 = line.End.X + dx;
+            double _y2 = line.End.Y + dy;
+
+            Test2d.XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
+
+            double x1 = _scaleToPage(_x1);
+            double y1 = _scaleToPage(_y1);
+            double x2 = _scaleToPage(_x2);
+            double y2 = _scaleToPage(_y2);
 
             var sas = line.Style.LineStyle.StartArrowStyle;
             var eas = line.Style.LineStyle.EndArrowStyle;

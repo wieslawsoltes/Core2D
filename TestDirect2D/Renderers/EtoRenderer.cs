@@ -427,10 +427,17 @@ namespace TestDirect2D
             Brush fill = ToSolidBrush(line.Style.Fill);
             Pen stroke = ToPen(line.Style, _scaleToPage);
 
-            float x1 = _scaleToPage(line.Start.X + dx);
-            float y1 = _scaleToPage(line.Start.Y + dy);
-            float x2 = _scaleToPage(line.End.X + dx);
-            float y2 = _scaleToPage(line.End.Y + dy);
+            double _x1 = line.Start.X + dx;
+            double _y1 = line.Start.Y + dy;
+            double _x2 = line.End.X + dx;
+            double _y2 = line.End.Y + dy;
+
+            XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
+
+            float x1 = _scaleToPage(_x1);
+            float y1 = _scaleToPage(_y1);
+            float x2 = _scaleToPage(_x2);
+            float y2 = _scaleToPage(_y2);
 
             var sas = line.Style.LineStyle.StartArrowStyle;
             var eas = line.Style.LineStyle.EndArrowStyle;
