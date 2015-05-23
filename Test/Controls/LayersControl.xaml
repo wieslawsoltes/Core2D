@@ -7,7 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="180">
+             d:DesignHeight="300" d:DesignWidth="200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -25,6 +25,31 @@
             HorizontalContentAlignment="Stretch"
             BorderBrush="{x:Null}"
             Grid.Row="1">
+            <controls:LayerDragAndDropListBox.Resources>
+                <ContextMenu x:Key="LayerContextMenu" 
+                             DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                    <MenuItem Header="_Add Layer"
+                              InputGestureText="Ctrl+N" 
+                              Command="{Binding DataContext.Commands.AddLayerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                    <Separator/>
+                    <MenuItem Header="_Delete" 
+                              InputGestureText="Del" 
+                              Command="{Binding DataContext.Commands.RemoveLayerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                </ContextMenu>
+            </controls:LayerDragAndDropListBox.Resources>
+            <controls:LayerDragAndDropListBox.InputBindings>
+                <KeyBinding Command="{Binding DataContext.Commands.AddLayerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ShapeStyleDragAndDropListBox}}}" 
+                            Gesture="Ctrl+N"/>
+                <KeyBinding Command="{Binding DataContext.Commands.RemoveLayerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:XGroupDragAndDropListBox}}}" 
+                            Gesture="Del"/>
+            </controls:LayerDragAndDropListBox.InputBindings>
+            <controls:LayerDragAndDropListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="ContextMenu" Value="{StaticResource LayerContextMenu}"/>
+                </Style>
+            </controls:LayerDragAndDropListBox.ItemContainerStyle>
             <controls:LayerDragAndDropListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
