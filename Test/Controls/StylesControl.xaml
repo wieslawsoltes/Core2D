@@ -17,6 +17,14 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0" Margin="2,0,2,0">
+            <MenuItem Header="import">
+                <MenuItem Header="St_yle Group" Command="{Binding Commands.ImportStyleGroupCommand}" CommandParameter="{Binding Editor.Project.StyleGroups}" InputGestureText=""/>
+                <MenuItem Header="Sty_le Groups" Command="{Binding Commands.ImportStyleGroupsCommand}" CommandParameter="{Binding Editor.Project.StyleGroups}" InputGestureText=""/>
+            </MenuItem>
+            <MenuItem Header="export">
+                <MenuItem Header="St_yle Group" Command="{Binding Commands.ExportStyleGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup}" InputGestureText=""/>
+                <MenuItem Header="Sty_le Groups" Command="{Binding Commands.ExportStyleGroupsCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+            </MenuItem>
             <MenuItem Command="{Binding Commands.AddStyleGroupCommand}" Header="+"/>
             <MenuItem Command="{Binding Commands.RemoveStyleGroupCommand}" Header="-"/>
         </Menu>
@@ -31,6 +39,14 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="2" Margin="2,0,2,0">
+            <MenuItem Header="import">
+                <MenuItem Header="_Style" Command="{Binding Commands.ImportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup.Styles}" InputGestureText=""/>
+                <MenuItem Header="S_tyles" Command="{Binding Commands.ImportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup.Styles}" InputGestureText=""/>
+            </MenuItem>
+            <MenuItem Header="export">
+                <MenuItem Header="_Style" Command="{Binding Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup.CurrentStyle}" InputGestureText=""/>
+                <MenuItem Header="S_tyles" Command="{Binding Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup}" InputGestureText=""/>
+            </MenuItem>
             <MenuItem Command="{Binding Commands.AddStyleCommand}" Header="_+"/>
             <MenuItem Command="{Binding Commands.RemoveStyleCommand}" Header="_-"/>
         </Menu>
@@ -41,6 +57,39 @@
             BorderBrush="{x:Null}"
             HorizontalContentAlignment="Stretch"
             Grid.Row="3">
+            <controls:ShapeStyleDragAndDropListBox.Resources>
+                <ContextMenu x:Key="StyleContextMenu" 
+                             DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                    <MenuItem Header="_Add Style"
+                              InputGestureText="Ctrl+N" 
+                              Command="{Binding DataContext.Commands.AddStyleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                    <Separator/>
+                    <MenuItem Header="_Delete" 
+                              InputGestureText="Del" 
+                              Command="{Binding DataContext.Commands.RemoveStyleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                    <Separator/>
+                    <MenuItem Header="E_xport" 
+                              InputGestureText="Ctrl+E" 
+                              Command="{Binding DataContext.Commands.ExportStyleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                              CommandParameter="{Binding}"/>
+                </ContextMenu>
+            </controls:ShapeStyleDragAndDropListBox.Resources>
+            <controls:ShapeStyleDragAndDropListBox.InputBindings>
+                <KeyBinding Command="{Binding DataContext.Commands.AddStyleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ShapeStyleDragAndDropListBox}}}" 
+                            Gesture="Ctrl+N"/>
+                <KeyBinding Command="{Binding DataContext.Commands.RemoveStyleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ShapeStyleDragAndDropListBox}}}" 
+                            Gesture="Del"/>
+                <KeyBinding Command="{Binding DataContext.Commands.ExportStyleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ShapeStyleDragAndDropListBox}}}" 
+                            Gesture="Ctrl+E"/>
+            </controls:ShapeStyleDragAndDropListBox.InputBindings>
+            <controls:ShapeStyleDragAndDropListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="ContextMenu" Value="{StaticResource StyleContextMenu}"/>
+                </Style>
+            </controls:ShapeStyleDragAndDropListBox.ItemContainerStyle>
             <controls:ShapeStyleDragAndDropListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Margin="0,5,0,5"/>

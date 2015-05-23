@@ -7,7 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="180">
+             d:DesignHeight="300" d:DesignWidth="200">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -22,7 +22,15 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0" Margin="2,0,2,0">
-            <MenuItem Command="{Binding Commands.EditTemplateCommand}" Header="EDIT"/>
+            <MenuItem Header="import">
+                <MenuItem Header="_Template" Command="{Binding Commands.ImportTemplateCommand}" CommandParameter="{Binding Editor.Project.Templates}" InputGestureText=""/>
+                <MenuItem Header="T_emplates" Command="{Binding Commands.ImportTemplatesCommand}" CommandParameter="{Binding Editor.Project.Templates}" InputGestureText=""/>
+            </MenuItem>
+            <MenuItem Header="export">
+                <MenuItem Header="_Template" Command="{Binding Commands.ExportTemplateCommand}" CommandParameter="{Binding Editor.Project.CurrentTemplate}" InputGestureText=""/>
+                <MenuItem Header="T_emplates" Command="{Binding Commands.ExportTemplatesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+            </MenuItem>
+            <MenuItem Command="{Binding Commands.EditTemplateCommand}" Header="edit"/>
             <MenuItem Command="{Binding Commands.AddTemplateCommand}" Header="_+"/>
             <MenuItem Command="{Binding Commands.RemoveTemplateCommand}" Header="_-"/>
         </Menu>
@@ -33,6 +41,43 @@
             BorderBrush="{x:Null}"
             HorizontalContentAlignment="Stretch"
             Grid.Row="1">
+            <controls:ContainerDragAndDropListBox.Resources>
+                <ContextMenu x:Key="TemplateContextMenu" 
+                             DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                    <MenuItem Header="_Edit Template"
+                              InputGestureText="" 
+                              Command="{Binding DataContext.Commands.EditTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                    <Separator/>
+                    <MenuItem Header="_Add Template"
+                              InputGestureText="Ctrl+N" 
+                              Command="{Binding DataContext.Commands.AddTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                    <Separator/>
+                    <MenuItem Header="_Delete" 
+                              InputGestureText="Del" 
+                              Command="{Binding DataContext.Commands.RemoveTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                    <Separator/>
+                    <MenuItem Header="E_xport" 
+                              InputGestureText="Ctrl+E" 
+                              Command="{Binding DataContext.Commands.ExportTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                              CommandParameter="{Binding}"/>
+                </ContextMenu>
+            </controls:ContainerDragAndDropListBox.Resources>
+            <controls:ContainerDragAndDropListBox.InputBindings>
+                <KeyBinding Command="{Binding DataContext.Commands.AddTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ContainerDragAndDropListBox}}}" 
+                            Gesture="Ctrl+N"/>
+                <KeyBinding Command="{Binding DataContext.Commands.RemoveTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ContainerDragAndDropListBox}}}" 
+                            Gesture="Del"/>
+                <KeyBinding Command="{Binding DataContext.Commands.ExportTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ContainerDragAndDropListBox}}}" 
+                            Gesture="Ctrl+E"/>
+            </controls:ContainerDragAndDropListBox.InputBindings>
+            <controls:ContainerDragAndDropListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="ContextMenu" Value="{StaticResource TemplateContextMenu}"/>
+                </Style>
+            </controls:ContainerDragAndDropListBox.ItemContainerStyle>
             <controls:ContainerDragAndDropListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Margin="0,5,0,5"/>

@@ -7,7 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="110">
+             d:DesignHeight="300" d:DesignWidth="200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -17,6 +17,14 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0" Margin="2,0,2,0">
+            <MenuItem Header="import">
+                <MenuItem Header="Gr_oup Library" Command="{Binding Commands.ImportGroupLibraryCommand}" CommandParameter="{Binding Editor.Project.GroupLibraries}" InputGestureText=""/>
+                <MenuItem Header="Gro_up Libraries" Command="{Binding Commands.ImportGroupLibrariesCommand}" CommandParameter="{Binding Editor.Project.GroupLibraries}" InputGestureText=""/>
+            </MenuItem>
+            <MenuItem Header="export">
+                <MenuItem Header="Gr_oup Library" Command="{Binding Commands.ExportGroupLibraryCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
+                <MenuItem Header="Gro_up Libraries" Command="{Binding Commands.ExportGroupLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+            </MenuItem>
             <MenuItem Command="{Binding Commands.AddGroupLibraryCommand}" Header="+"/>
             <MenuItem Command="{Binding Commands.RemoveGroupLibraryCommand}" Header="-"/>
         </Menu>
@@ -31,6 +39,14 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="2" Margin="2,0,2,0">
+            <MenuItem Header="import">
+                <MenuItem Header="_Group" Command="{Binding Commands.ImportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.Groups}" InputGestureText=""/>
+                <MenuItem Header="G_roups" Command="{Binding Commands.ImportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.Groups}" InputGestureText=""/>
+            </MenuItem>
+            <MenuItem Header="export">
+                <MenuItem Header="_Group" Command="{Binding Commands.ExportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.CurrentGroup}" InputGestureText=""/>
+                <MenuItem Header="G_roups" Command="{Binding Commands.ExportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
+            </MenuItem>
             <MenuItem Command="{Binding Commands.AddGroupCommand}" Header="_+"/>
             <MenuItem Command="{Binding Commands.RemoveGroupCommand}" Header="_-"/>
         </Menu>
@@ -42,6 +58,39 @@
             BorderBrush="{x:Null}"
             HorizontalContentAlignment="Stretch"
             Grid.Row="3">
+            <controls:XGroupDragAndDropListBox.Resources>
+                <ContextMenu x:Key="GroupContextMenu" 
+                             DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                    <MenuItem Header="_Add Group"
+                              InputGestureText="Ctrl+N" 
+                              Command="{Binding DataContext.Commands.AddGroupCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                    <Separator/>
+                    <MenuItem Header="_Delete" 
+                              InputGestureText="Del" 
+                              Command="{Binding DataContext.Commands.RemoveGroupCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                    <Separator/>
+                    <MenuItem Header="E_xport" 
+                              InputGestureText="Ctrl+E" 
+                              Command="{Binding DataContext.Commands.ExportGroupCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                              CommandParameter="{Binding}"/>
+                </ContextMenu>
+            </controls:XGroupDragAndDropListBox.Resources>
+            <controls:XGroupDragAndDropListBox.InputBindings>
+                <KeyBinding Command="{Binding DataContext.Commands.AddGroupCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:XGroupDragAndDropListBox}}}" 
+                            Gesture="Ctrl+N"/>
+                <KeyBinding Command="{Binding DataContext.Commands.RemoveGroupCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:XGroupDragAndDropListBox}}}" 
+                            Gesture="Del"/>
+                <KeyBinding Command="{Binding DataContext.Commands.ExportGroupCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:XGroupDragAndDropListBox}}}" 
+                            Gesture="Ctrl+E"/>
+            </controls:XGroupDragAndDropListBox.InputBindings>
+            <controls:XGroupDragAndDropListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="ContextMenu" Value="{StaticResource GroupContextMenu}"/>
+                </Style>
+            </controls:XGroupDragAndDropListBox.ItemContainerStyle>
             <controls:XGroupDragAndDropListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Margin="0,5,0,5"/>
