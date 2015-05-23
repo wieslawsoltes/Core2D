@@ -42,7 +42,7 @@
             </controls:BaseShapeDragAndDropListBox.Resources>
             <controls:BaseShapeDragAndDropListBox.InputBindings>
                 <KeyBinding Command="{Binding DataContext.Commands.RemoveShapeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:XGroupDragAndDropListBox}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:BaseShapeDragAndDropListBox}}}" 
                             Gesture="Del"/>
             </controls:BaseShapeDragAndDropListBox.InputBindings>
             <controls:BaseShapeDragAndDropListBox.ItemContainerStyle>

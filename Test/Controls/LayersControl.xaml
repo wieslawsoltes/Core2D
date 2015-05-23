@@ -39,10 +39,10 @@
             </controls:LayerDragAndDropListBox.Resources>
             <controls:LayerDragAndDropListBox.InputBindings>
                 <KeyBinding Command="{Binding DataContext.Commands.AddLayerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ShapeStyleDragAndDropListBox}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:LayerDragAndDropListBox}}}" 
                             Gesture="Ctrl+N"/>
                 <KeyBinding Command="{Binding DataContext.Commands.RemoveLayerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:XGroupDragAndDropListBox}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:LayerDragAndDropListBox}}}" 
                             Gesture="Del"/>
             </controls:LayerDragAndDropListBox.InputBindings>
             <controls:LayerDragAndDropListBox.ItemContainerStyle>
