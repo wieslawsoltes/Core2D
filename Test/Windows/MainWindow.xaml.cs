@@ -53,7 +53,7 @@ namespace Test.Windows
             return Clipboard.ContainsText(TextDataFormat.UnicodeText);
         }
     }
-
+ 
     /// <summary>
     /// 
     /// </summary>
@@ -104,6 +104,146 @@ namespace Test.Windows
                 (item) =>
                 {
                     Export(item);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ImportStyleCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ImportEx(item, ImportType.Style);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ImportStylesCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ImportEx(item, ImportType.Styles);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ImportStyleGroupCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ImportEx(item, ImportType.StyleGroup);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ImportStyleGroupsCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ImportEx(item, ImportType.StyleGroups);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ImportGroupCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ImportEx(item, ImportType.Group);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ImportGroupsCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ImportEx(item, ImportType.Groups);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ImportGroupLibraryCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ImportEx(item, ImportType.GroupLibrary);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ImportGroupLibrariesCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ImportEx(item, ImportType.GroupLibraries);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ImportTemplateCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ImportEx(item, ImportType.Template);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ImportTemplatesCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ImportEx(item, ImportType.Templates);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ExportStyleCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ExportEx(item, ExportType.Style);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ExportStylesCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ExportEx(item, ExportType.Styles);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ExportStyleGroupCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ExportEx(item, ExportType.StyleGroup);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ExportStyleGroupsCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ExportEx(item, ExportType.StyleGroups);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ExportGroupCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ExportEx(item, ExportType.Group);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ExportGroupsCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ExportEx(item, ExportType.Groups);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ExportGroupLibraryCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ExportEx(item, ExportType.GroupLibrary);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ExportGroupLibrariesCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ExportEx(item, ExportType.GroupLibraries);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ExportTemplateCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ExportEx(item, ExportType.Template);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ExportTemplatesCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ExportEx(item, ExportType.Templates);
                 },
                 (item) => context.IsEditMode());
 
@@ -297,6 +437,56 @@ namespace Test.Windows
                                         context.Eval(path);
                                         e.Handled = true;
                                     }
+                                    else if (string.Compare(ext, ".style", true, CultureInfo.InvariantCulture) == 0)
+                                    {
+                                        context.ImportEx(path, context.Editor.Project.CurrentStyleGroup.Styles, ImportType.Style);
+                                        e.Handled = true;
+                                    }
+                                    else if (string.Compare(ext, ".styles", true, CultureInfo.InvariantCulture) == 0)
+                                    {
+                                        context.ImportEx(path, context.Editor.Project.CurrentStyleGroup.Styles, ImportType.Styles);
+                                        e.Handled = true;
+                                    }
+                                    else if (string.Compare(ext, ".stylegroup", true, CultureInfo.InvariantCulture) == 0)
+                                    {
+                                        context.ImportEx(path, context.Editor.Project.StyleGroups, ImportType.StyleGroup);
+                                        e.Handled = true;
+                                    }
+                                    else if (string.Compare(ext, ".stylegroups", true, CultureInfo.InvariantCulture) == 0)
+                                    {
+                                        context.ImportEx(path, context.Editor.Project.StyleGroups, ImportType.StyleGroups);
+                                        e.Handled = true;
+                                    }
+                                    else if (string.Compare(ext, ".group", true, CultureInfo.InvariantCulture) == 0)
+                                    {
+                                        context.ImportEx(path, context.Editor.Project.CurrentGroupLibrary.Groups, ImportType.Group);
+                                        e.Handled = true;
+                                    }
+                                    else if (string.Compare(ext, ".groups", true, CultureInfo.InvariantCulture) == 0)
+                                    {
+                                        context.ImportEx(path, context.Editor.Project.CurrentGroupLibrary.Groups, ImportType.Groups);
+                                        e.Handled = true;
+                                    }
+                                    else if (string.Compare(ext, ".grouplibrary", true, CultureInfo.InvariantCulture) == 0)
+                                    {
+                                        context.ImportEx(path, context.Editor.Project.GroupLibraries, ImportType.GroupLibrary);
+                                        e.Handled = true;
+                                    }
+                                    else if (string.Compare(ext, ".grouplibraries", true, CultureInfo.InvariantCulture) == 0)
+                                    {
+                                        context.ImportEx(path, context.Editor.Project.GroupLibraries, ImportType.GroupLibraries);
+                                        e.Handled = true;
+                                    }
+                                    else if (string.Compare(ext, ".template", true, CultureInfo.InvariantCulture) == 0)
+                                    {
+                                        context.ImportEx(path, context.Editor.Project.Templates, ImportType.Template);
+                                        e.Handled = true;
+                                    }
+                                    else if (string.Compare(ext, ".templates", true, CultureInfo.InvariantCulture) == 0)
+                                    {
+                                        context.ImportEx(path, context.Editor.Project.Templates, ImportType.Templates);
+                                        e.Handled = true;
+                                    }
                                 }
                             }
                         }
@@ -414,6 +604,143 @@ namespace Test.Windows
             if (dlg.ShowDialog() == true)
             {
                 (DataContext as EditorContext).Save(dlg.FileName);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="type"></param>
+        public void ImportEx(object item, ImportType type)
+        {
+            if (item == null)
+                return;
+            
+            string filter = string.Empty;
+            
+            switch (type) 
+            {
+                case ImportType.Style:
+                    filter = "Style (*.style)|*.style|All (*.*)|*.*";
+                    break;
+                case ImportType.Styles:
+                    filter = "Styles (*.styles)|*.styles|All (*.*)|*.*";
+                    break;
+                case ImportType.StyleGroup:
+                    filter = "StyleGroup (*.stylegroup)|*.stylegroup|All (*.*)|*.*";
+                    break;
+                case ImportType.StyleGroups:
+                    filter = "StyleGroups (*.stylegroups)|*.stylegroups|All (*.*)|*.*";
+                    break;
+                case ImportType.Group:
+                    filter = "Group (*.group)|*.group|All (*.*)|*.*";
+                    break;
+                case ImportType.Groups:
+                    filter = "Groups (*.groups)|*.groups|All (*.*)|*.*";
+                    break;
+                case ImportType.GroupLibrary:
+                    filter = "GroupLibrary (*.grouplibrary)|*.grouplibrary|All (*.*)|*.*";
+                    break;
+                case ImportType.GroupLibraries:
+                    filter = "GroupLibraries (*.grouplibraries)|*.grouplibraries|All (*.*)|*.*";
+                    break;
+                case ImportType.Template:
+                    filter = "Template (*.template)|*.template|All (*.*)|*.*";
+                    break;
+                case ImportType.Templates:
+                    filter = "Templates (*.templates)|*.templates|All (*.*)|*.*";
+                    break;
+            }
+
+            var dlg = new OpenFileDialog()
+            {
+                Filter = filter,
+                Multiselect = true,
+                FilterIndex = 0
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                var context = DataContext as EditorContext;
+                var paths = dlg.FileNames;
+
+                foreach (var path in paths)
+                {
+                    context.ImportEx(path, item, type);
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="type"></param>
+        public void ExportEx(object item, ExportType type)
+        {
+            if (item == null)
+                return;
+            
+            string name = string.Empty;
+            string filter = string.Empty;
+            
+            switch (type) 
+            {
+                case ExportType.Style:
+                    filter = "Style (*.style)|*.style|All (*.*)|*.*";
+                    name = (item as ShapeStyle).Name;
+                    break;
+                case ExportType.Styles:
+                    filter = "Styles (*.styles)|*.styles|All (*.*)|*.*";
+                    name = (item as ShapeStyleGroup).Name;
+                    break;
+                case ExportType.StyleGroup:
+                    filter = "StyleGroup (*.stylegroup)|*.stylegroup|All (*.*)|*.*";
+                    name = (item as ShapeStyleGroup).Name;
+                    break;
+                case ExportType.StyleGroups:
+                    filter = "StyleGroups (*.stylegroups)|*.stylegroups|All (*.*)|*.*";
+                    name = (item as Project).Name;
+                    break;
+                case ExportType.Group:
+                    filter = "Group (*.group)|*.group|All (*.*)|*.*";
+                    name = (item as XGroup).Name;
+                    break;
+                case ExportType.Groups:
+                    filter = "Groups (*.groups)|*.groups|All (*.*)|*.*";
+                    name = (item as GroupLibrary).Name;
+                    break;
+                case ExportType.GroupLibrary:
+                    filter = "GroupLibrary (*.grouplibrary)|*.grouplibrary|All (*.*)|*.*";
+                    name = (item as GroupLibrary).Name;
+                    break;
+                case ExportType.GroupLibraries:
+                    filter = "GroupLibraries (*.grouplibraries)|*.grouplibraries|All (*.*)|*.*";
+                    name = (item as Project).Name;
+                    break;
+                case ExportType.Template:
+                    filter = "Template (*.template)|*.template|All (*.*)|*.*";
+                    name = (item as Container).Name;
+                    break;
+                case ExportType.Templates:
+                    filter = "Templates (*.templates)|*.templates|All (*.*)|*.*";
+                    name = (item as Project).Name;
+                    break;
+            }
+            
+            var dlg = new SaveFileDialog()
+            {
+                Filter = filter,
+                FilterIndex = 0,
+                FileName = name
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                var path = dlg.FileName;
+                var context = DataContext as EditorContext;
+                context.ExportEx(path, item, type);
             }
         }
 
