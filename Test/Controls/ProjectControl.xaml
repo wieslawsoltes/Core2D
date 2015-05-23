@@ -9,7 +9,7 @@
              xmlns:core="clr-namespace:Test2d;assembly=Test2d"
              xmlns:converters="clr-namespace:Test.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="110">
+             d:DesignHeight="300" d:DesignWidth="200">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
