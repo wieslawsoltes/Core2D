@@ -514,6 +514,19 @@ namespace Test2d
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="shapes"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> GetAllShapes<T>(IEnumerable<BaseShape> shapes)
+        {
+            return GetAllShapes(shapes)
+                .Where(s => s is T)
+                .Cast<T>();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="project"></param>
         /// <returns></returns>
         public static IEnumerable<T> GetAllShapes<T>(Project project)
