@@ -13,6 +13,10 @@ namespace Test.PanAndZoom
     /// </summary>
     public class PanAndZoomBorder : Border
     {
+        private const double _minimum = 0.01;
+        private const double _maximum = 1000.0;
+        private const double _zoomSpeed = 3.5;
+
         /// <summary>
         /// 
         /// </summary>
@@ -97,15 +101,21 @@ namespace Test.PanAndZoom
                     {
                         if (child != null)
                         {
-                            double zoom = e.Delta > 0 ? .2 : -.2;
-                            if (!(e.Delta > 0) && (st.ScaleX < .4 || st.ScaleY < .4))
+                            //double zoom = e.Delta > 0 ? .2 : -.2;
+                            //if (!(e.Delta > 0) && (st.ScaleX < .4 || st.ScaleY < .4))
+                            //    return;
+                            double zoom = st.ScaleX;
+                            zoom = e.Delta > 0 ? zoom + zoom / _zoomSpeed : zoom - zoom / _zoomSpeed;
+                            if (zoom < _minimum || zoom > _maximum)
                                 return;
 
                             Point relative = e.GetPosition(child);
                             double abosuluteX = relative.X * st.ScaleX + tt.X;
                             double abosuluteY = relative.Y * st.ScaleY + tt.Y;
-                            st.ScaleX += zoom;
-                            st.ScaleY += zoom;
+                            //st.ScaleX += zoom;
+                            //st.ScaleY += zoom;
+                            st.ScaleX = zoom;
+                            st.ScaleY = zoom;
                             tt.X = abosuluteX - relative.X * st.ScaleX;
                             tt.Y = abosuluteY - relative.Y * st.ScaleY;
 
