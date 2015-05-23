@@ -559,6 +559,20 @@ namespace Test2d
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public void RemoveCurrentTemplate()
+        {
+            var template = Project.CurrentTemplate;
+            if (template != null)
+            {
+                _history.Snapshot(_project);
+                Project.Templates.Remove(_project.CurrentTemplate);
+                Project.CurrentTemplate = _project.Templates.FirstOrDefault();
+            }
+        }
+
+        /// <summary>
         /// Removes the Project.CurrentGroupLibrary object from the Project.GroupLibraries collection.
         /// </summary>
         public void RemoveCurrentGroupLibrary()
