@@ -23,5 +23,13 @@ namespace Test.Controls
     /// </summary>
     public class LayerDragAndDropListBox : DragAndDropListBox<Test2d.Layer>
     { 
+        /// <summary>
+        /// 
+        /// </summary>
+        public LayerDragAndDropListBox()
+            : base()
+        {
+            this.Initialized += (s, e) => base.Initialize();
+        }
     }
 }

@@ -22,6 +22,14 @@ namespace Test.Controls
     /// 
     /// </summary>
     public class BaseShapeDragAndDropListBox : DragAndDropListBox<BaseShape>
-    { 
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public BaseShapeDragAndDropListBox()
+            : base()
+        {
+            this.Initialized += (s, e) => base.Initialize();
+        }
     }
 }

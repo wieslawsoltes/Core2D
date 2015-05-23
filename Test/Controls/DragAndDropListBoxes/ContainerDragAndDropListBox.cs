@@ -23,5 +23,13 @@ namespace Test.Controls
     /// </summary>
     public class ContainerDragAndDropListBox : DragAndDropListBox<Test2d.Container>
     { 
+        /// <summary>
+        /// 
+        /// </summary>
+        public ContainerDragAndDropListBox()
+            : base()
+        {
+            this.Initialized += (s, e) => base.Initialize();
+        }
     }
 }

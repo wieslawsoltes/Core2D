@@ -22,6 +22,14 @@ namespace Test.Controls
     /// 
     /// </summary>
     public class XGroupDragAndDropListBox : DragAndDropListBox<Test2d.XGroup>
-    { 
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public XGroupDragAndDropListBox()
+            : base()
+        {
+            this.Initialized += (s, e) => base.Initialize();
+        }
     }
 }

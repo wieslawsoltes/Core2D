@@ -23,5 +23,13 @@ namespace Test.Controls
     /// </summary>
     public class ShapeStyleDragAndDropListBox : DragAndDropListBox<Test2d.ShapeStyle>
     { 
+        /// <summary>
+        /// 
+        /// </summary>
+        public ShapeStyleDragAndDropListBox()
+            : base()
+        {
+            this.Initialized += (s, e) => base.Initialize();
+        }
     }
 }

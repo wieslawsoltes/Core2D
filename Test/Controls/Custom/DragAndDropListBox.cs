@@ -49,10 +49,26 @@ namespace Test.Controls
         /// </summary>
         public DragAndDropListBox()
         {
-            this.PreviewMouseMove += ListBox_PreviewMouseMove;
+        }
 
-            var style = new Style(typeof(ListBoxItem));
-            
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Initialize()
+        {
+            var style = this.ItemContainerStyle;
+            if (style != null)
+            {
+                if (style.IsSealed)
+                    return;
+            }
+            else
+            {
+                style = new Style(typeof(ListBoxItem));
+            }
+
+            PreviewMouseMove += ListBox_PreviewMouseMove;
+
             style.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
 
             style.Setters.Add(
@@ -62,10 +78,11 @@ namespace Test.Controls
 
             style.Setters.Add(
                     new EventSetter(
-                        ListBoxItem.DropEvent, 
+                        ListBoxItem.DropEvent,
                         new DragEventHandler(ListBoxItem_Drop)));
-  
-            this.ItemContainerStyle = style;
+
+            if (this.ItemContainerStyle == null)
+                this.ItemContainerStyle = style;
         }
 
         private void ListBox_PreviewMouseMove(object sender, MouseEventArgs e)
