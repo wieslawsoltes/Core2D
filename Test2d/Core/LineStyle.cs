@@ -15,6 +15,10 @@ namespace Test2d
         private LineCap _lineCap;
         private double[] _dashes;
         private double _dashOffset;
+        private MaxLengthFlags _maxLengthFlags;
+        private double _maxLength;
+        private ShapeState _maxLengthStartState;
+        private ShapeState _maxLengthEndState;
 
         /// <summary>
         /// 
@@ -115,18 +119,92 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public MaxLengthFlags MaxLengthFlags
+        {
+            get { return _maxLengthFlags; }
+            set
+            {
+                if (value != _maxLengthFlags)
+                {
+                    _maxLengthFlags = value;
+                    Notify("MaxLengthFlags");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double MaxLength
+        {
+            get { return _maxLength; }
+            set
+            {
+                if (value != _maxLength)
+                {
+                    _maxLength = value;
+                    Notify("MaxLength");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ShapeState MaxLengthStartState
+        {
+            get { return _maxLengthStartState; }
+            set
+            {
+                if (value != _maxLengthStartState)
+                {
+                    _maxLengthStartState = value;
+                    Notify("MaxLengthStartState");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ShapeState MaxLengthEndState
+        {
+            get { return _maxLengthEndState; }
+            set
+            {
+                if (value != _maxLengthEndState)
+                {
+                    _maxLengthEndState = value;
+                    Notify("MaxLengthEndState");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="startArrowStyle"></param>
         /// <param name="endArrowStyle"></param>
         /// <param name="lineCap"></param>
         /// <param name="dashes"></param>
         /// <param name="dashOffset"></param>
+        /// <param name="verticalLength"></param>
+        /// <param name="maxLengthFlags"></param>
+        /// <param name="maxLength"></param>
+        /// <param name="maxLengthStartState"></param>
+        /// <param name="maxLengthEndState"></param>
         /// <returns></returns>
         public static LineStyle Create(
             ArrowStyle startArrowStyle = default(ArrowStyle),
             ArrowStyle endArrowStyle = default(ArrowStyle),
             LineCap lineCap = LineCap.Round,
             double[] dashes = default(double[]),
-            double dashOffset = 0.0)
+            double dashOffset = 0.0,
+            double verticalLength = 22.5,
+            MaxLengthFlags maxLengthFlags = MaxLengthFlags.Disabled,
+            double maxLength = 0.0,
+            ShapeState maxLengthStartState = ShapeState.Default,
+            ShapeState maxLengthEndState = ShapeState.Default)
         {
             return new LineStyle() 
             { 
@@ -134,7 +212,11 @@ namespace Test2d
                 EndArrowStyle = endArrowStyle,
                 LineCap = lineCap,
                 Dashes = dashes,
-                DashOffset = dashOffset
+                DashOffset = dashOffset,
+                MaxLengthFlags = maxLengthFlags,
+                MaxLength = maxLength,
+                MaxLengthStartState = maxLengthStartState,
+                MaxLengthEndState = maxLengthEndState
             };
         }
     }
