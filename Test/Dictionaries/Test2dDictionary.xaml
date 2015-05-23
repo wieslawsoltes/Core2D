@@ -6,7 +6,11 @@
                     xmlns:converters="clr-namespace:Test.Converters"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <converters:DoubleToStringConverter x:Key="DoubleToStringConverter"/>
-    <converters:FlagsEnumConverter x:Key="FlagsEnumConverter"/>
+    <converters:FlagsEnumConverter x:Key="FontStyleFlagsEnumConverter"/>
+    <converters:FlagsEnumConverter x:Key="StateFlagsEnumConverter"/>
+    <converters:FlagsEnumConverter x:Key="MagLengthFlagsEnumConverter"/>
+    <converters:FlagsEnumConverter x:Key="StartStateFlagsEnumConverter"/>
+    <converters:FlagsEnumConverter x:Key="EndStateFlagsEnumConverter"/>
     <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
     <converters:ShapePropertyParameterConverter x:Key="ShapePropertyParameterConverter"/>
     <ObjectDataProvider x:Key="TextHAlignmentValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
@@ -32,19 +36,134 @@
     <ControlTemplate x:Key="FontStyleControlTemplateKey">
         <StackPanel>
             <CheckBox Content="Regular" Margin="1"
-                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Regular}}">
+                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Regular}}">
             </CheckBox>
             <CheckBox Content="Bold" Margin="1"
-                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Bold}}">
+                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Bold}}">
             </CheckBox>
             <CheckBox Content="Italic" Margin="1"
-                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Italic}}">
+                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Italic}}">
             </CheckBox>
             <CheckBox Content="Underline" Margin="1"
-                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Underline}}">
+                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Underline}}">
             </CheckBox>
             <CheckBox Content="Strikeout" Margin="1"
-                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Strikeout}}">
+                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Strikeout}}">
+            </CheckBox>
+        </StackPanel>
+    </ControlTemplate>
+    <ControlTemplate x:Key="StateControlTemplateKey">
+        <StackPanel>
+            <CheckBox Content="Default" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+            </CheckBox>
+            <CheckBox Content="Visible" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+            </CheckBox>
+            <CheckBox Content="Printable" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+            </CheckBox>
+            <CheckBox Content="Locked" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+            </CheckBox>
+            <CheckBox Content="Connector" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+            </CheckBox>
+            <CheckBox Content="None" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+            </CheckBox>
+            <CheckBox Content="Standalone" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+            </CheckBox>
+            <CheckBox Content="Input" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+            </CheckBox>
+            <CheckBox Content="Output" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+            </CheckBox>
+        </StackPanel>
+    </ControlTemplate>
+    <ControlTemplate x:Key="MaxLengthControlTemplateKey">
+        <StackPanel>
+            <CheckBox Content="Disabled" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Disabled}}">
+            </CheckBox>
+            <CheckBox Content="Start" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Start}}">
+            </CheckBox>
+            <CheckBox Content="End" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.End}}">
+            </CheckBox>
+            <CheckBox Content="Vertical" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Vertical}}">
+            </CheckBox>
+            <CheckBox Content="Horizontal" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Horizontal}}">
+            </CheckBox>
+            <CheckBox Content="All" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.All}}">
+            </CheckBox>
+        </StackPanel>
+    </ControlTemplate>
+    <ControlTemplate x:Key="StartStateControlTemplateKey">
+        <StackPanel>
+            <CheckBox Content="Default" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+            </CheckBox>
+            <CheckBox Content="Visible" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+            </CheckBox>
+            <CheckBox Content="Printable" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+            </CheckBox>
+            <CheckBox Content="Locked" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+            </CheckBox>
+            <CheckBox Content="Connector" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+            </CheckBox>
+            <CheckBox Content="None" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+            </CheckBox>
+            <CheckBox Content="Standalone" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+            </CheckBox>
+            <CheckBox Content="Input" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+            </CheckBox>
+            <CheckBox Content="Output" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+            </CheckBox>
+        </StackPanel>
+    </ControlTemplate>
+    <ControlTemplate x:Key="EndStateControlTemplateKey">
+        <StackPanel>
+            <CheckBox Content="Default" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+            </CheckBox>
+            <CheckBox Content="Visible" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+            </CheckBox>
+            <CheckBox Content="Printable" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+            </CheckBox>
+            <CheckBox Content="Locked" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+            </CheckBox>
+            <CheckBox Content="Connector" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+            </CheckBox>
+            <CheckBox Content="None" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+            </CheckBox>
+            <CheckBox Content="Standalone" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+            </CheckBox>
+            <CheckBox Content="Input" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+            </CheckBox>
+            <CheckBox Content="Output" Margin="1"
+                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
@@ -492,6 +611,82 @@
                     </TextBox>
                 </Grid>
             </Expander>
+            <Expander Header="Line MaxLength" IsExpanded="False">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Flags" 
+                               Margin="0,0,2,0" 
+                               Grid.Row="0"
+                               Grid.Column="0" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Top">
+                    </TextBlock>
+                    <TextBlock Text="Length" 
+                               Margin="0,0,2,0" 
+                               Grid.Row="1" 
+                               Grid.Column="0" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Center">
+                    </TextBlock>
+                    <TextBlock Text="StartState" 
+                               Margin="0,0,2,0" 
+                               Grid.Row="2" 
+                               Grid.Column="0" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Top">
+                    </TextBlock>
+                    <TextBlock Text="EndState" 
+                               Margin="0,0,2,0" 
+                               Grid.Row="3" 
+                               Grid.Column="0" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Top">
+                    </TextBlock>
+                    <Control Grid.Row="0" 
+                             Grid.Column="1" 
+                             Grid.ColumnSpan="2" 
+                             Template="{StaticResource MaxLengthControlTemplateKey}">
+                    </Control>
+                    <Slider Value="{Binding LineStyle.MaxLength}" 
+                            Minimum="0" 
+                            Maximum="30" 
+                            TickFrequency="0.1" 
+                            SmallChange="0.1"
+                            LargeChange="1"
+                            IsSnapToTickEnabled="True" 
+                            Grid.Row="1" 
+                            Grid.Column="1" 
+                            Margin="1">
+                    </Slider>
+                    <TextBox Text="{Binding LineStyle.MaxLength, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                             BorderBrush="{x:Null}" 
+                             Grid.Row="1" 
+                             Grid.Column="2" 
+                             TextAlignment="Center" 
+                             VerticalAlignment="Center">
+                    </TextBox>
+                    <Control Grid.Row="2" 
+                             Grid.Column="1" 
+                             Grid.ColumnSpan="2" 
+                             Template="{StaticResource StartStateControlTemplateKey}">
+                    </Control>
+                    <Control Grid.Row="3" 
+                             Grid.Column="1" 
+                             Grid.ColumnSpan="2" 
+                             Template="{StaticResource EndStateControlTemplateKey}">
+                    </Control>
+                </Grid>
+            </Expander>
         </StackPanel>
     </ControlTemplate>
     <ControlTemplate x:Key="PropertiesControlTemplateKey">
@@ -584,37 +779,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
-    </ControlTemplate>
-    <ControlTemplate x:Key="StateControlTemplateKey">
-        <StackPanel>
-            <CheckBox Content="Default" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
-            </CheckBox>
-            <CheckBox Content="Visible" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
-            </CheckBox>
-            <CheckBox Content="Printable" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
-            </CheckBox>
-            <CheckBox Content="Locked" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
-            </CheckBox>
-            <CheckBox Content="Connector" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
-            </CheckBox>
-            <CheckBox Content="None" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
-            </CheckBox>
-            <CheckBox Content="Standalone" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
-            </CheckBox>
-            <CheckBox Content="Input" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
-            </CheckBox>
-            <CheckBox Content="Output" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource FlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
-            </CheckBox>
-        </StackPanel>
     </ControlTemplate>
     <DataTemplate DataType="{x:Type core:ShapeStyle}">
         <Grid>
