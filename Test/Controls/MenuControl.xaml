@@ -21,11 +21,13 @@
             <MenuItem Header="Impo_rt">
                 <MenuItem Header="_Style" Command="{Binding Commands.ImportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup.Styles}" InputGestureText=""/>
                 <MenuItem Header="S_tyles" Command="{Binding Commands.ImportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup.Styles}" InputGestureText=""/>
+                <Separator/>
                 <MenuItem Header="St_yle Group" Command="{Binding Commands.ImportStyleGroupCommand}" CommandParameter="{Binding Editor.Project.StyleGroups}" InputGestureText=""/>
                 <MenuItem Header="Sty_le Groups" Command="{Binding Commands.ImportStyleGroupsCommand}" CommandParameter="{Binding Editor.Project.StyleGroups}" InputGestureText=""/>
                 <Separator/>
                 <MenuItem Header="_Group" Command="{Binding Commands.ImportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.Groups}" InputGestureText=""/>
                 <MenuItem Header="G_roups" Command="{Binding Commands.ImportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.Groups}" InputGestureText=""/>
+                <Separator/>
                 <MenuItem Header="Gr_oup Library" Command="{Binding Commands.ImportGroupLibraryCommand}" CommandParameter="{Binding Editor.Project.GroupLibraries}" InputGestureText=""/>
                 <MenuItem Header="Gro_up Libraries" Command="{Binding Commands.ImportGroupLibrariesCommand}" CommandParameter="{Binding Editor.Project.GroupLibraries}" InputGestureText=""/>
                 <Separator/>
@@ -35,17 +37,19 @@
             <Separator/>
             <MenuItem Header="Expor_t">
                 <MenuItem Header="_Style" Command="{Binding Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup.CurrentStyle}" InputGestureText=""/>
-                <MenuItem Header="S_tyles" Command="{Binding Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup.Styles}" InputGestureText=""/>
+                <MenuItem Header="S_tyles" Command="{Binding Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup}" InputGestureText=""/>
+                <Separator/>
                 <MenuItem Header="St_yle Group" Command="{Binding Commands.ExportStyleGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup}" InputGestureText=""/>
-                <MenuItem Header="Sty_le Groups" Command="{Binding Commands.ExportStyleGroupsCommand}" CommandParameter="{Binding Editor.Project.StyleGroups}" InputGestureText=""/>
+                <MenuItem Header="Sty_le Groups" Command="{Binding Commands.ExportStyleGroupsCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
                 <Separator/>
                 <MenuItem Header="_Group" Command="{Binding Commands.ExportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.CurrentGroup}" InputGestureText=""/>
-                <MenuItem Header="G_roups" Command="{Binding Commands.ExportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.Groups}" InputGestureText=""/>
-                <MenuItem Header="Gr_oup Library" Command="{Binding Commands.ExportGroupLibraryCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
-                <MenuItem Header="Gro_up Libraries" Command="{Binding Commands.ExportGroupLibrariesCommand}" CommandParameter="{Binding Editor.Project.GroupLibraries}" InputGestureText=""/>
+                <MenuItem Header="G_roups" Command="{Binding Commands.ExportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
                 <Separator/>
-                <MenuItem Header="_Template" Command="{Binding Commands.ExportTemplateCommand}" CommandParameter="{Binding Editor.Project.Templates}" InputGestureText=""/>
-                <MenuItem Header="T_emplates" Command="{Binding Commands.ExportTemplatesCommand}" CommandParameter="{Binding Editor.Project.CurrentTemplate}" InputGestureText=""/>
+                <MenuItem Header="Gr_oup Library" Command="{Binding Commands.ExportGroupLibraryCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
+                <MenuItem Header="Gro_up Libraries" Command="{Binding Commands.ExportGroupLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                <Separator/>
+                <MenuItem Header="_Template" Command="{Binding Commands.ExportTemplateCommand}" CommandParameter="{Binding Editor.Project.CurrentTemplate}" InputGestureText=""/>
+                <MenuItem Header="T_emplates" Command="{Binding Commands.ExportTemplatesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
             </MenuItem>
             <Separator/>
             <MenuItem Header="E_xit" Command="{Binding Commands.ExitCommand}" InputGestureText="Alt+F4"/>
