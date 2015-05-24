@@ -241,32 +241,6 @@ namespace Test2d
             _invalidateShapes();
         }
 
-        private void RecordsCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    Add(e.NewItems.Cast<KeyValuePair<string, ShapeProperty>>());
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    Debug("Records Replace");
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    Remove(e.OldItems.Cast<KeyValuePair<string, ShapeProperty>>());
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    Debug("Records Replace");
-                    Remove(e.OldItems.Cast<KeyValuePair<string, ShapeProperty>>());
-                    Add(e.NewItems.Cast<KeyValuePair<string, ShapeProperty>>());
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    Debug("Records Reset");
-                    break;
-            }
-
-            _invalidateShapes();
-        }
-
         private void ContainerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Debug("Container: " + (sender is Container ? (sender as Container).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
@@ -495,10 +469,8 @@ namespace Test2d
                 var group = shape as XGroup;
                 Add(group.Shapes);
                 Add(group.Connectors);
-                Add(group.Database.Records);
                 (group.Shapes as ObservableCollection<BaseShape>).CollectionChanged += ShapesCollectionObserver;
                 (group.Connectors as ObservableCollection<XPoint>).CollectionChanged += ShapesCollectionObserver;
-                (group.Database.Records as ObservableCollection<KeyValuePair<string, ShapeProperty>>).CollectionChanged += RecordsCollectionObserver;
             }
 
             Debug("Add Shape: " + shape.GetType());
@@ -573,10 +545,8 @@ namespace Test2d
                 var group = shape as XGroup;
                 Remove(group.Shapes);
                 Remove(group.Connectors);
-                Remove(group.Database.Records);
                 (group.Shapes as ObservableCollection<BaseShape>).CollectionChanged -= ShapesCollectionObserver;
                 (group.Connectors as ObservableCollection<XPoint>).CollectionChanged -= ShapesCollectionObserver;
-                (group.Database.Records as ObservableCollection<KeyValuePair<string, ShapeProperty>>).CollectionChanged -= RecordsCollectionObserver;
             }
             
             Debug("Remove Shape: " + shape.GetType());
@@ -755,22 +725,6 @@ namespace Test2d
             foreach (var property in properties)
             {
                 Remove(property);
-            }
-        }
-
-        private void Add(IEnumerable<KeyValuePair<string, ShapeProperty>> records)
-        {
-            foreach (var record in records)
-            {
-                Add(record);
-            }
-        }
-
-        private void Remove(IEnumerable<KeyValuePair<string, ShapeProperty>> records)
-        {
-            foreach (var record in records)
-            {
-                Remove(record);
             }
         }
     }
