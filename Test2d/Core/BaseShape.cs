@@ -15,6 +15,7 @@ namespace Test2d
         private ShapeState _state = ShapeState.Visible | ShapeState.Printable | ShapeState.Standalone;
         private ShapeStyle _style;
         private IList<ShapeProperty> _properties;
+        private DataRecord _record;
 
         /// <summary>
         /// Gets or sets shape name.
@@ -97,6 +98,22 @@ namespace Test2d
         }
 
         /// <summary>
+        /// Gets or sets shape data record.
+        /// </summary>
+        public DataRecord Record
+        {
+            get { return _record; }
+            set
+            {
+                if (value != _record)
+                {
+                    _record = value;
+                    Notify("Data");
+                }
+            }
+        }
+
+        /// <summary>
         /// Draw shape using current renderer.
         /// </summary>
         /// <param name="dc">The generic drawing context object</param>
@@ -104,7 +121,8 @@ namespace Test2d
         /// <param name="dx">The X axis draw position osffset.</param>
         /// <param name="dy">The Y axis draw position osffset.</param>
         /// <param name="db">The properties database used for binding.</param>
-        public abstract void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db);
+        /// <param name="r">The external data record used for binding.</param>
+        public abstract void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, DataRecord r);
 
         /// <summary>
         /// Move shape position using dx,dy offset.

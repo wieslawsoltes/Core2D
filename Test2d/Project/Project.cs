@@ -14,6 +14,8 @@ namespace Test2d
     {
         private string _name;
         private Options _options;
+        private IList<Database> _databases;
+        private Database _currentDatabase;
         private IList<ShapeStyleGroup> _styleGroups;
         private ShapeStyleGroup _currentStyleGroup;
         private IList<GroupLibrary> _groupLibraries;
@@ -52,6 +54,38 @@ namespace Test2d
                 {
                     _options = value;
                     Notify("Options");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Database CurrentDatabase
+        {
+            get { return _currentDatabase; }
+            set
+            {
+                if (value != _currentDatabase)
+                {
+                    _currentDatabase = value;
+                    Notify("CurrentDatabase");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IList<Database> Databases
+        {
+            get { return _databases; }
+            set
+            {
+                if (value != _databases)
+                {
+                    _databases = value;
+                    Notify("Databases");
                 }
             }
         }
@@ -284,6 +318,7 @@ namespace Test2d
             {
                 Name = name,
                 Options = Options.Create(),
+                Databases = new ObservableCollection<Database>(),
                 StyleGroups = new ObservableCollection<ShapeStyleGroup>(),
                 GroupLibraries = new ObservableCollection<GroupLibrary>(),
                 Templates = new ObservableCollection<Container>(),

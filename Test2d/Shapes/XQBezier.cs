@@ -89,32 +89,35 @@ namespace Test2d
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
+            var record = r != null ? r : this.Record;
+
             if (State.HasFlag(ShapeState.Visible))
             {
-                renderer.Draw(dc, this, dx, dy, db);
+                renderer.Draw(dc, this, dx, dy, db, record);
             }
 
             if (renderer.SelectedShape != null)
             {
                 if (this == renderer.SelectedShape)
                 {
-                    _point1.Draw(dc, renderer, dx, dy, db);
-                    _point2.Draw(dc, renderer, dx, dy, db);
-                    _point3.Draw(dc, renderer, dx, dy, db);
+                    _point1.Draw(dc, renderer, dx, dy, db, record);
+                    _point2.Draw(dc, renderer, dx, dy, db, record);
+                    _point3.Draw(dc, renderer, dx, dy, db, record);
                 }
                 else if (_point1 == renderer.SelectedShape)
                 {
-                    _point1.Draw(dc, renderer, dx, dy, db);
+                    _point1.Draw(dc, renderer, dx, dy, db, record);
                 }
                 else if (_point2 == renderer.SelectedShape)
                 {
-                    _point2.Draw(dc, renderer, dx, dy, db);
+                    _point2.Draw(dc, renderer, dx, dy, db, record);
                 }
                 else if (_point3 == renderer.SelectedShape)
                 {
-                    _point3.Draw(dc, renderer, dx, dy, db);
+                    _point3.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
             
@@ -122,9 +125,9 @@ namespace Test2d
             {
                 if (renderer.SelectedShapes.Contains(this))
                 {
-                    _point1.Draw(dc, renderer, dx, dy, db);
-                    _point2.Draw(dc, renderer, dx, dy, db);
-                    _point3.Draw(dc, renderer, dx, dy, db);
+                    _point1.Draw(dc, renderer, dx, dy, db, record);
+                    _point2.Draw(dc, renderer, dx, dy, db, record);
+                    _point3.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
         }
