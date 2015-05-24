@@ -11,23 +11,32 @@ namespace Test2d
     /// </summary>
     public class XGroup : BaseShape
     {
-        private Database _database;
+        private IList<ShapeProperty> _database;
         private IList<BaseShape> _shapes;
         private IList<XPoint> _connectors;
 
         /// <summary>
         /// 
         /// </summary>
-        public Database Database
+        public IList<ShapeProperty> Database
         {
-            get { return _database; }
-            set
+            get 
             {
-                if (value != _database)
+                if (_database == null)
                 {
-                    _database = value;
-                    Notify("Database");
+                    if (_shapes != null)
+                    {
+                        _database = new ObservableCollection<ShapeProperty>();
+                        foreach (var shape in _shapes)
+                        {
+                            foreach (var property in shape.Properties)
+                            {
+                                _database.Add(property);
+                            }
+                        }
+                    }
                 }
+                return _database;
             }
         }
 
@@ -181,7 +190,6 @@ namespace Test2d
                 Name = name,
                 Style = default(ShapeStyle),
                 Properties = new ObservableCollection<ShapeProperty>(),
-                Database = Database.Create(),
                 Shapes = new ObservableCollection<BaseShape>(),
                 Connectors = new ObservableCollection<XPoint>()
             };
@@ -208,11 +216,6 @@ namespace Test2d
                 else
                 {
                     g.AddShape(shape);
-                }
-      
-                foreach (var property in shape.Properties) 
-                {
-                    g.Database.AddProperty(property);
                 }
             }
 
