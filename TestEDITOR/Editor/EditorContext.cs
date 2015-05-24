@@ -1331,6 +1331,7 @@ namespace TestEDITOR
 
                             var shapes = Enumerable.Repeat(import as XGroup, 1);
                             TryToRestoreStyles(shapes);
+                            TryToRestoreRecords(shapes);
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
                             _editor.ToAbsoluteUri(root, images);
@@ -1347,6 +1348,7 @@ namespace TestEDITOR
 
                             var shapes = import;
                             TryToRestoreStyles(shapes);
+                            TryToRestoreRecords(shapes);
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
                             _editor.ToAbsoluteUri(root, images);
@@ -1366,6 +1368,7 @@ namespace TestEDITOR
 
                             var shapes = import.Groups;
                             TryToRestoreStyles(shapes);
+                            TryToRestoreRecords(shapes);
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
                             _editor.ToAbsoluteUri(root, images);
@@ -1382,6 +1385,7 @@ namespace TestEDITOR
 
                             var shapes = import.SelectMany(x => x.Groups);
                             TryToRestoreStyles(shapes);
+                            TryToRestoreRecords(shapes);
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
                             _editor.ToAbsoluteUri(root, images);
@@ -1401,6 +1405,7 @@ namespace TestEDITOR
 
                             var shapes = import.Layers.SelectMany(x => x.Shapes);
                             TryToRestoreStyles(shapes);
+                            TryToRestoreRecords(shapes);
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
                             _editor.ToAbsoluteUri(root, images);
@@ -1417,6 +1422,7 @@ namespace TestEDITOR
 
                             var shapes = import.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
                             TryToRestoreStyles(shapes);
+                            TryToRestoreRecords(shapes);
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
                             _editor.ToAbsoluteUri(root, images);
@@ -1723,6 +1729,52 @@ namespace TestEDITOR
         /// 
         /// </summary>
         /// <param name="shapes"></param>
+        private void TryToRestoreRecords(IEnumerable<BaseShape> shapes)
+        {
+            var records = _editor.Project.Databases
+                .SelectMany(d => d.Records)
+                .ToDictionary(s => s.Id);
+
+            // try to restore shape record
+            foreach (var shape in Editor.GetAllShapes(shapes))
+            {
+                if (shape.Record == null)
+                    continue;
+
+                DataRecord record;
+                if (records.TryGetValue(shape.Record.Id, out record))
+                {
+                    // use existing record
+                    shape.Record = record;
+                }
+                else
+                {
+                    // create Imported database
+                    if (_editor.Project.CurrentDatabase == null)
+                    {
+                        var db = Database.Create(
+                            "Imported",
+                            shape.Record.Columns, 
+                            new ObservableCollection<DataRecord>());
+                        _editor.Project.Databases.Add(db);
+                        _editor.Project.CurrentDatabase = db;
+                    }
+
+                    // add missing data record
+                    _editor.Project.CurrentDatabase.Records.Add(shape.Record);
+
+                    // recreate records dictionary
+                    records = _editor.Project.Databases
+                        .SelectMany(d => d.Records)
+                        .ToDictionary(s => s.Id);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
         public void Paste(IEnumerable<BaseShape> shapes)
         {
             _editor.Deselect(_editor.Project.CurrentContainer);
@@ -1730,6 +1782,7 @@ namespace TestEDITOR
             _history.Snapshot(_editor.Project);
             
             TryToRestoreStyles(shapes);
+            TryToRestoreRecords(shapes);
 
             foreach (var shape in shapes)
             {
@@ -1754,7 +1807,9 @@ namespace TestEDITOR
                     var clone = Serializer.FromJson<XGroup>(json);
                     if (clone != null)
                     {
-                        TryToRestoreStyles(Enumerable.Repeat(clone, 1).ToList());
+                        var shapes = Enumerable.Repeat(clone, 1).ToList();
+                        TryToRestoreStyles(shapes);
+                        TryToRestoreRecords(shapes);
                         return clone;
                     }
                 }
@@ -1784,7 +1839,9 @@ namespace TestEDITOR
                     var clone = Serializer.FromJson<Container>(json);
                     if (clone != null)
                     {
-                        TryToRestoreStyles(clone.Layers.SelectMany(l => l.Shapes));
+                        var shapes = clone.Layers.SelectMany(l => l.Shapes);
+                        TryToRestoreStyles(shapes);
+                        TryToRestoreRecords(shapes);
                         clone.Template = template;
                         return clone;
                     }
@@ -1818,7 +1875,9 @@ namespace TestEDITOR
                         for (int i = 0; i < clone.Containers.Count; i++)
                         {
                             var container = clone.Containers[i];
-                            TryToRestoreStyles(container.Layers.SelectMany(l => l.Shapes));
+                            var shapes = container.Layers.SelectMany(l => l.Shapes);
+                            TryToRestoreStyles(shapes);
+                            TryToRestoreRecords(shapes);
                             container.Template = templates[i];
                         }
                         return clone;
