@@ -123,7 +123,12 @@ XGroup CreateSignal()
     var separator = XLine.Create(210, 0, 210, 30, styleLineThick, ps);
     var ci = XPoint.Create(0, 15, ps, "I");
     var co = XPoint.Create(300, 15, ps, "O");
-   
+
+    labelDesignation.TextBinding = "Designation";
+    labelDescription.TextBinding = "Description";
+    labelSignal.TextBinding = "Signal";
+    labelCondition.TextBinding = "Condition";
+
     var designationProperty = ShapeProperty.Create("Designation", "Designation");
     labelDesignation.Properties = new [] { designationProperty };
 
