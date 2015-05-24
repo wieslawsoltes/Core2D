@@ -38,6 +38,15 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
+        public ICommand ImportDataCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ExportDataCommand { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand ImportStyleCommand { get; set; }
         /// <summary>
         /// 
@@ -317,6 +326,10 @@ namespace TestEDITOR
         /// </summary>
         public ICommand ZoomExtentCommand { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand DatabasesWindowCommand { get; set; }
         /// <summary>
         /// 
         /// </summary>

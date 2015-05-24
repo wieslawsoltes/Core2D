@@ -99,10 +99,10 @@ namespace TestEDITOR
     
                     if (container.Template != null)
                     {
-                        r.Draw(g, container.Template, container.Properties);
+                        r.Draw(g, container.Template, container.Properties, null);
                     }
 
-                    r.Draw(g, container, container.Properties);
+                    r.Draw(g, container, container.Properties, null);
                     r.ClearCache();
                 }
             }

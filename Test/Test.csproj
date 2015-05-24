@@ -103,6 +103,12 @@
     <Compile Include="Controls\Custom\DragAndDropListBox.cs" />
     <Compile Include="Controls\Custom\LayerElement.cs" />
     <Compile Include="Controls\Custom\ListBoxDropMode.cs" />
+    <Compile Include="Controls\DatabaseControl.xaml.cs">
+      <DependentUpon>DatabaseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DatabasesControl.xaml.cs">
+      <DependentUpon>DatabasesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DragAndDropListBoxes\BaseShapeDragAndDropListBox.cs" />
     <Compile Include="Controls\DragAndDropListBoxes\ContainerDragAndDropListBox.cs" />
     <Compile Include="Controls\DragAndDropListBoxes\LayerDragAndDropListBox.cs" />
@@ -137,6 +143,9 @@
     <Compile Include="Windows\ContainerWindow.xaml.cs">
       <DependentUpon>ContainerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DatabasesWindow.xaml.cs">
+      <DependentUpon>DatabasesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\LayersWindow.xaml.cs">
       <DependentUpon>LayersWindow.xaml</DependentUpon>
     </Compile>
@@ -156,6 +165,14 @@
     <Page Include="Controls\ContainerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\DatabaseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DatabasesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\GroupsControl.xaml">
       <SubType>Designer</SubType>
@@ -189,6 +206,10 @@
     <Page Include="Controls\StylesControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\DatabasesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

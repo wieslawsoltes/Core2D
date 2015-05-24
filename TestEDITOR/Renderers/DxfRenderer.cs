@@ -152,7 +152,8 @@ namespace TestEDITOR
         /// <param name="dc"></param>
         /// <param name="container"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, Container container, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, Container container, IList<ShapeProperty> db, DataRecord r)
         {
             // TODO:
         }
@@ -163,7 +164,8 @@ namespace TestEDITOR
         /// <param name="dc"></param>
         /// <param name="layer"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, Layer layer, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, Layer layer, IList<ShapeProperty> db, DataRecord r)
         {
             // TODO:
         }
@@ -176,7 +178,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, XLine line, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, XLine line, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             // TODO:
         }
@@ -189,7 +192,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, XRectangle rectangle, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, XRectangle rectangle, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             // TODO:
         }
@@ -202,7 +206,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, XEllipse ellipse, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, XEllipse ellipse, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             // TODO:
         }
@@ -215,7 +220,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, XArc arc, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, XArc arc, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             // TODO:
         }
@@ -228,7 +234,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, XBezier bezier, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, XBezier bezier, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             // TODO:
         }
@@ -241,7 +248,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, XQBezier qbezier, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, XQBezier qbezier, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             // TODO:
         }
@@ -254,7 +262,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, XText text, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, XText text, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             // TODO:
         }
@@ -267,7 +276,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, XImage image, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, XImage image, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             // TODO:
         }
@@ -942,7 +952,8 @@ namespace TestEDITOR
         /// <param name="text"></param>
         /// <param name="layer"></param>
         /// <param name="db"></param>
-        private void DrawText(DxfEntities entities, XText text, string layer, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        private void DrawText(DxfEntities entities, XText text, string layer, IList<ShapeProperty> db, DataRecord r)
         {
             DxfHorizontalTextJustification halign;
             DxfVerticalTextJustification valign;
@@ -985,7 +996,7 @@ namespace TestEDITOR
             }
 
             var dxfText = CreateText(
-                text.Bind(db),
+                text.Bind(db, r),
                 x, y,
                 text.Style.TextStyle.FontSize * (72.0 / 96.0),
                 halign,
@@ -1003,7 +1014,8 @@ namespace TestEDITOR
         /// <param name="shapes"></param>
         /// <param name="layer"></param>
         /// <param name="db"></param>
-        private void DrawShapes(DxfEntities entities, IEnumerable<BaseShape> shapes, string layer, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        private void DrawShapes(DxfEntities entities, IEnumerable<BaseShape> shapes, string layer, IList<ShapeProperty> db, DataRecord r)
         {
             foreach (var shape in shapes) 
             {
@@ -1063,7 +1075,7 @@ namespace TestEDITOR
                     else if (shape is XText)
                     {
                         var text = shape as XText;
-                        DrawText(entities, text, layer, db);
+                        DrawText(entities, text, layer, db, r);
                     }
                     else if (shape is XImage)
                     {
@@ -1073,7 +1085,7 @@ namespace TestEDITOR
                     else if (shape is XGroup)
                     {
                         var group = shape as XGroup;
-                        DrawShapes(entities, group.Shapes, layer, db);
+                        DrawShapes(entities, group.Shapes, layer, db, r == null ? group.Record : r);
                     }
                 }
             }
@@ -1201,7 +1213,7 @@ namespace TestEDITOR
                 {
                     if (layer.IsVisible)
                     {
-                        DrawShapes(file.Entities, layer.Shapes, layer.Name, container.Properties);
+                        DrawShapes(file.Entities, layer.Shapes, layer.Name, container.Properties, null);
                     }
                 }
             }
@@ -1210,7 +1222,7 @@ namespace TestEDITOR
             {
                 if (layer.IsVisible)
                 {
-                    DrawShapes(file.Entities, layer.Shapes, layer.Name, container.Properties);
+                    DrawShapes(file.Entities, layer.Shapes, layer.Name, container.Properties, null);
                 }
             }
 

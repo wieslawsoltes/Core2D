@@ -354,13 +354,14 @@ namespace TestEDITOR
         /// <param name="gfx"></param>
         /// <param name="container"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, Container container, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, Container container, IList<ShapeProperty> db, DataRecord r)
         {
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
                 {
-                    Draw(gfx, layer, db);
+                    Draw(gfx, layer, db, r);
                 }
             }
         }
@@ -371,13 +372,14 @@ namespace TestEDITOR
         /// <param name="gfx"></param>
         /// <param name="layer"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, Layer layer, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, Layer layer, IList<ShapeProperty> db, DataRecord r)
         {
             foreach (var shape in layer.Shapes)
             {
                 if (shape.State.HasFlag(DrawShapeState))
                 {
-                    shape.Draw(gfx, this, 0, 0, db);
+                    shape.Draw(gfx, this, 0, 0, db, r);
                 }
             }
         }
@@ -390,7 +392,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, XLine line, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, XLine line, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             var _gfx = gfx as Graphics;
 
@@ -557,7 +560,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, XRectangle rectangle, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, XRectangle rectangle, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             var _gfx = gfx as Graphics;
 
@@ -598,7 +602,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, XEllipse ellipse, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, XEllipse ellipse, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             var _gfx = gfx as Graphics;
 
@@ -639,7 +644,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, XArc arc, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, XArc arc, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             var a = GdiArc.FromXArc(arc, dx, dy);
             if (a.Width <= 0.0 || a.Height <= 0.0)
@@ -684,7 +690,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, XBezier bezier, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, XBezier bezier, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             var _gfx = gfx as Graphics;
 
@@ -729,7 +736,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, XQBezier qbezier, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, XQBezier qbezier, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             var _gfx = gfx as Graphics;
 
@@ -783,7 +791,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, XText text, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, XText text, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             var _gfx = gfx as Graphics;
 
@@ -859,7 +868,7 @@ namespace TestEDITOR
             }
 
             _gfx.DrawString(
-                text.Bind(db),
+                text.Bind(db, r),
                 font,
                 ToSolidBrush(text.Style.Stroke),
                 srect,
@@ -877,7 +886,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, XImage image, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, XImage image, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             var _gfx = gfx as Graphics;
 

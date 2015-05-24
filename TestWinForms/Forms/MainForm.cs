@@ -545,20 +545,20 @@ namespace TestWinForms
             if (container.Template != null)
             {
                 Background(g, container.Template.Background, this.Width, this.Height);
-                renderer.Draw(g, container.Template, container.Properties);
+                renderer.Draw(g, container.Template, container.Properties, null);
             }
 
             Background(g, container.Background, this.Width, this.Height);
-            renderer.Draw(g, container, container.Properties);
+            renderer.Draw(g, container, container.Properties, null);
             
             if (container.WorkingLayer != null)
             {
-                renderer.Draw(g, container.WorkingLayer, container.Properties);
+                renderer.Draw(g, container.WorkingLayer, container.Properties, null);
             }
             
             if (container.HelperLayer != null)
             {
-                renderer.Draw(g, container.HelperLayer, container.Properties);
+                renderer.Draw(g, container.HelperLayer, container.Properties, null);
             }
         }
     }
