@@ -11,8 +11,25 @@ namespace Test2d
     /// </summary>
     public class DataRecord : ObservableObject
     {
+        private Guid _id;
         private IList<string> _columns;
         private IList<string> _data;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Guid Id
+        {
+            get { return _id; }
+            set
+            {
+                if (value != _id)
+                {
+                    _id = value;
+                    Notify("Id");
+                }
+            }
+        }
 
         /// <summary>
         /// 
@@ -58,6 +75,7 @@ namespace Test2d
         {
             return new DataRecord()
             {
+                Id = Guid.NewGuid(),
                 Columns = columns,
                 Data = new ObservableCollection<string>(data)
             };
