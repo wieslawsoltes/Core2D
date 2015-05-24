@@ -739,19 +739,11 @@
     <ControlTemplate x:Key="DatabaseControlTemplateKey">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0" Margin="2,0,2,0">
-                <MenuItem Command="{Binding DataContext.Commands.AddRecordCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                          CommandParameter="{Binding}" 
-                          Header="+">
-
-                </MenuItem>
-            </Menu>
-            <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1"
-                          ItemsSource="{Binding Database.Records, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0"
+                          ItemsSource="{Binding Database, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
@@ -766,14 +758,9 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <TextBox Grid.Column="0" Grid.Row="0" Margin="2,1,2,1" VerticalAlignment="Center" 
-                                     IsReadOnly="True"
-                                     Text="{Binding Key, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
-                            <TextBox Grid.Column="1" Grid.Row="0" Margin="0,1,0,1" VerticalAlignment="Center" 
-                                     Text="{Binding Value.Data, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
-                            <Button Grid.Column="2" Grid.Row="0" Margin="2,1,2,1" VerticalAlignment="Center" Content="-" 
-                                    Command="{Binding DataContext.Commands.RemoveRecordCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                                    CommandParameter="{Binding}">
-                            </Button>
+                                     Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                            <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Margin="0,1,0,1" VerticalAlignment="Center" 
+                                     Text="{Binding Data, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

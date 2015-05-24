@@ -686,20 +686,6 @@ namespace TestEDITOR
                 },
                 (parameter) => IsEditMode());
 
-            _commands.AddRecordCommand = new DelegateCommand<object>(
-                (database) =>
-                {
-                    // TODO:
-                },
-                (database) => IsEditMode());
-
-            _commands.RemoveRecordCommand = new DelegateCommand<object>(
-                (record) =>
-                {
-                    // TODO:
-                },
-                (record) => IsEditMode());
-
             _commands.AddGroupLibraryCommand = new DelegateCommand(
                 () =>
                 {
@@ -2339,9 +2325,6 @@ namespace TestEDITOR
 
             (_commands.AddPropertyCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.RemovePropertyCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-
-            (_commands.AddRecordCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.RemoveRecordCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
 
             (_commands.AddGroupLibraryCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.RemoveGroupLibraryCommand as DelegateCommand).RaiseCanExecuteChanged();

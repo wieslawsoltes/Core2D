@@ -240,15 +240,6 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
-        public ICommand AddRecordCommand { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand RemoveRecordCommand { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public ICommand AddGroupLibraryCommand { get; set; }
         /// <summary>
         /// 
