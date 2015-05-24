@@ -38,6 +38,7 @@
         <KeyBinding Command="{Binding Commands.RestartSimulationCommand}" Gesture="Ctrl+F5"/>
         <KeyBinding Command="{Binding Commands.PauseSimulationCommand}" Gesture="Ctrl+F6"/>
         <KeyBinding Command="{Binding Commands.TickSimulationCommand}" Gesture="F7"/>
+        <KeyBinding Command="{Binding Commands.DatabasesWindowCommand}" Gesture="Ctrl+D"/>
         <KeyBinding Command="{Binding Commands.LayersWindowCommand}" Gesture="Ctrl+L"/>
         <KeyBinding Command="{Binding Commands.StyleWindowCommand}" Gesture="Ctrl+K"/>
         <KeyBinding Command="{Binding Commands.StylesWindowCommand}" Gesture="Ctrl+T"/>
