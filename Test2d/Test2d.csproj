@@ -65,7 +65,6 @@
     <Compile Include="Core\ArrowStyle.cs" />
     <Compile Include="Core\ArrowType.cs" />
     <Compile Include="Core\BaseShape.cs" />
-    <Compile Include="Core\Database.cs" />
     <Compile Include="Core\FontStyle.cs" />
     <Compile Include="Core\ICompressor.cs" />
     <Compile Include="Core\ISerializer.cs" />
