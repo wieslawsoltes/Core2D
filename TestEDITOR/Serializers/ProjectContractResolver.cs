@@ -13,7 +13,7 @@ namespace TestEDITOR
     /// <summary>
     /// 
     /// </summary>
-    internal class ListContractResolver : DefaultContractResolver
+    internal class ProjectContractResolver : DefaultContractResolver
     {
         /// <summary>
         /// Use ObservableCollection for IList contract.
@@ -33,6 +33,18 @@ namespace TestEDITOR
             {
                 return base.ResolveContract(type);
             }
+        }
+
+        /// <summary>
+        /// Serialize only writable properties. 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="memberSerialization"></param>
+        /// <returns></returns>
+        protected override IList<JsonProperty> CreateProperties(Type type, Newtonsoft.Json.MemberSerialization memberSerialization)
+        {
+            IList<JsonProperty> props = base.CreateProperties(type, memberSerialization);
+            return props.Where(p => p.Writable).ToList();
         }
     }
 }

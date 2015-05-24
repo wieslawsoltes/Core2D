@@ -28,7 +28,8 @@ namespace TestEDITOR
                 Formatting = Formatting.Indented,
                 TypeNameHandling = TypeNameHandling.Objects,
                 PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                ContractResolver = new ProjectContractResolver()
             };
             settings.Converters.Add(new KeyValuePairConverter());
             var json = JsonConvert.SerializeObject(value, settings);
@@ -52,6 +53,7 @@ namespace TestEDITOR
                         TypeNameHandling = TypeNameHandling.Objects,
                         PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                         ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                        ContractResolver = new ProjectContractResolver()
                     };
                     serializer.Serialize(writer, value);
                 }
@@ -76,7 +78,7 @@ namespace TestEDITOR
                         TypeNameHandling = TypeNameHandling.Objects,
                         PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                         ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                        ContractResolver = new ListContractResolver()
+                        ContractResolver = new ProjectContractResolver()
                     };
                     var value = serializer.Deserialize<T>(reader);
                     return value;
@@ -98,7 +100,7 @@ namespace TestEDITOR
                 TypeNameHandling = TypeNameHandling.Objects,
                 PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ListContractResolver()
+                ContractResolver = new ProjectContractResolver()
             };
             settings.Converters.Add(new KeyValuePairConverter());
             var value = JsonConvert.DeserializeObject<T>(json, settings);
