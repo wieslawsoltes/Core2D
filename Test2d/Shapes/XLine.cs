@@ -55,27 +55,30 @@ namespace Test2d
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
+            var record = r != null ? r : this.Record;
+
             if (State.HasFlag(ShapeState.Visible))
             {
-                renderer.Draw(dc, this, dx, dy, db); 
+                renderer.Draw(dc, this, dx, dy, db, record); 
             }
 
             if (renderer.SelectedShape != null)
             {
                 if (this == renderer.SelectedShape)
                 {
-                    _start.Draw(dc, renderer, dx, dy, db);
-                    _end.Draw(dc, renderer, dx, dy, db);
+                    _start.Draw(dc, renderer, dx, dy, db, record);
+                    _end.Draw(dc, renderer, dx, dy, db, record);
                 }
                 else if (_start == renderer.SelectedShape)
                 {
-                    _start.Draw(dc, renderer, dx, dy, db);
+                    _start.Draw(dc, renderer, dx, dy, db, record);
                 }
                 else if (_end == renderer.SelectedShape)
                 {
-                    _end.Draw(dc, renderer, dx, dy, db);
+                    _end.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
             
@@ -83,8 +86,8 @@ namespace Test2d
             {
                 if (renderer.SelectedShapes.Contains(this))
                 {
-                    _start.Draw(dc, renderer, dx, dy, db);
-                    _end.Draw(dc, renderer, dx, dy, db);
+                    _start.Draw(dc, renderer, dx, dy, db, record);
+                    _end.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
         }

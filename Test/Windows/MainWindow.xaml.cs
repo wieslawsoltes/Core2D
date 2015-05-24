@@ -4,6 +4,7 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -104,6 +105,20 @@ namespace Test.Windows
                 (item) =>
                 {
                     Export(item);
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ImportDataCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ImportData();
+                },
+                (item) => context.IsEditMode());
+
+            context.Commands.ExportDataCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    ExportData();
                 },
                 (item) => context.IsEditMode());
 
@@ -272,6 +287,13 @@ namespace Test.Windows
                 () =>
                 {
                     grid.AutoFit();
+                },
+                () => true);
+
+            context.Commands.DatabasesWindowCommand = new DelegateCommand(
+                () =>
+                {
+                    (new DatabasesWindow() { Owner = this, DataContext = context }).Show();
                 },
                 () => true);
 
@@ -529,7 +551,26 @@ namespace Test.Windows
                             System.Diagnostics.Debug.Print(ex.StackTrace);
                         }
                     }
-                    
+
+                    if (e.Data.GetDataPresent(typeof(DataRecord)))
+                    {
+                        try
+                        {
+                            var record = e.Data.GetData(typeof(DataRecord)) as DataRecord;
+                            if (record != null)
+                            {
+                                var p = e.GetPosition(containerControl);
+                                context.Drop(record, p.X, p.Y);
+                                e.Handled = true;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.Print(ex.Message);
+                            System.Diagnostics.Debug.Print(ex.StackTrace);
+                        }
+                    }
+
                     if (e.Data.GetDataPresent(typeof(ShapeStyle)))
                     {
                         try
@@ -561,6 +602,47 @@ namespace Test.Windows
         private void DeInitializeContext()
         {
             (DataContext as EditorContext).Dispose();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ImportData()
+        {
+            var dlg = new OpenFileDialog()
+            {
+                Filter = "Csv (*.csv)|*.csv|All (*.*)|*.*",
+                FilterIndex = 0,
+                FileName = ""
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                (DataContext as EditorContext).ImportData(dlg.FileName);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ExportData()
+        {
+            var context = DataContext as EditorContext;
+            var database = context.Editor.Project.CurrentDatabase;
+            if (database == null)
+                return;
+
+            var dlg = new SaveFileDialog()
+            {
+                Filter = "Csv (*.csv)|*.csv|All (*.*)|*.*",
+                FilterIndex = 0,
+                FileName = database.Name
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                (DataContext as EditorContext).ExportData(dlg.FileName, database);
+            }
         }
 
         /// <summary>

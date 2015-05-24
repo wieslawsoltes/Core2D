@@ -78,6 +78,8 @@
                 <MenuItem Header="_Extent" Command="{Binding Commands.ZoomExtentCommand}" InputGestureText="X"/>
             </MenuItem>
             <Separator/>
+            <MenuItem Header="_Databases..." Command="{Binding Commands.DatabasesWindowCommand}" InputGestureText="Ctrl+D"/>
+            <Separator/>
             <MenuItem Header="_Layers..." Command="{Binding Commands.LayersWindowCommand}" InputGestureText="Ctrl+L"/>
             <Separator/>
             <MenuItem Header="St_yle Editor..." Command="{Binding Commands.StyleWindowCommand}" InputGestureText="Ctrl+K"/>
@@ -239,6 +241,11 @@
                     </Style>
                 </MenuItem.Style>
             </MenuItem>
+        </MenuItem>
+        <MenuItem Header="_Data">
+            <MenuItem Header="_Import..." Command="{Binding Commands.ImportDataCommand}" InputGestureText=""/>
+            <Separator/>
+            <MenuItem Header="_Export..." Command="{Binding Commands.ExportDataCommand}" InputGestureText=""/>
         </MenuItem>
         <MenuItem Header="Te_mplate" Tag="{Binding}" ItemsSource="{Binding Editor.Project.Templates}">
             <MenuItem.Resources>

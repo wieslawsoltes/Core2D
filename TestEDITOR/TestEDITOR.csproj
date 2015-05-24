@@ -80,6 +80,7 @@
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1-beta3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -117,6 +118,7 @@
     <Compile Include="Compressors\GZipCompressor.cs" />
     <Compile Include="Compressors\LZ4CodecCompressor.cs" />
     <Compile Include="Compressors\LZ4StreamCompressor.cs" />
+    <Compile Include="Data\CsvReader.cs" />
     <Compile Include="Dxf\Blocks\DxfBlock.cs" />
     <Compile Include="Dxf\Blocks\DxfBlocks.cs" />
     <Compile Include="Dxf\Classes\DxfClass.cs" />
@@ -258,9 +260,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

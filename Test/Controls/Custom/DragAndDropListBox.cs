@@ -91,7 +91,7 @@ namespace Test.Controls
             Vector diff = _dragStartPoint - point;
             if (e.LeftButton == MouseButtonState.Pressed &&
                 (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
-                    Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+                 Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
             {
                 var listBox = sender as ListBox;
                 var listBoxItem = FindVisualParent<ListBoxItem>(((DependencyObject)e.OriginalSource));

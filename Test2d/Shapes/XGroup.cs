@@ -80,13 +80,16 @@ namespace Test2d
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
+            var record = r != null ? r : this.Record;
+
             if (State.HasFlag(ShapeState.Visible))
             {
                 foreach (var shape in Shapes)
                 {
-                    shape.Draw(dc, renderer, dx, dy, db);
+                    shape.Draw(dc, renderer, dx, dy, db, record);
                 }
  
                 if (renderer.SelectedShape != null)
@@ -95,7 +98,7 @@ namespace Test2d
                     {
                         foreach (var connector in Connectors)
                         {
-                            connector.Draw(dc, renderer, dx, dy, db);
+                            connector.Draw(dc, renderer, dx, dy, db, record);
                         }
                     }
                 }
@@ -106,7 +109,7 @@ namespace Test2d
                     {
                         foreach (var connector in Connectors)
                         {
-                            connector.Draw(dc, renderer, dx, dy, db);
+                            connector.Draw(dc, renderer, dx, dy, db, record);
                         }
                     }
                 }

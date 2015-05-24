@@ -89,27 +89,30 @@ namespace Test2d
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
+            var record = r != null ? r : this.Record;
+
             if (State.HasFlag(ShapeState.Visible))
             {
-                renderer.Draw(dc, this, dx, dy, db);
+                renderer.Draw(dc, this, dx, dy, db, record);
             }
 
             if (renderer.SelectedShape != null)
             {
                 if (this == renderer.SelectedShape)
                 {
-                    _topLeft.Draw(dc, renderer, dx, dy, db);
-                    _bottomRight.Draw(dc, renderer, dx, dy, db);
+                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
+                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
                 }
                 else if (_topLeft == renderer.SelectedShape)
                 {
-                    _topLeft.Draw(dc, renderer, dx, dy, db);
+                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
                 }
                 else if (_bottomRight == renderer.SelectedShape)
                 {
-                    _bottomRight.Draw(dc, renderer, dx, dy, db);
+                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
 
@@ -117,8 +120,8 @@ namespace Test2d
             {
                 if (renderer.SelectedShapes.Contains(this))
                 {
-                    _topLeft.Draw(dc, renderer, dx, dy, db);
-                    _bottomRight.Draw(dc, renderer, dx, dy, db);
+                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
+                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
         }

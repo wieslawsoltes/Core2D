@@ -106,27 +106,30 @@ namespace Test2d
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
+            var record = r != null ? r : this.Record;
+
             if (State.HasFlag(ShapeState.Visible))
             {
-                renderer.Draw(dc, this, dx, dy, db);
+                renderer.Draw(dc, this, dx, dy, db, record);
             }
 
             if (renderer.SelectedShape != null)
             {
                 if (this == renderer.SelectedShape)
                 {
-                    _topLeft.Draw(dc, renderer, dx, dy, db);
-                    _bottomRight.Draw(dc, renderer, dx, dy, db);
+                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
+                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
                 }
                 else if (_topLeft == renderer.SelectedShape)
                 {
-                    _topLeft.Draw(dc, renderer, dx, dy, db);
+                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
                 }
                 else if (_bottomRight == renderer.SelectedShape)
                 {
-                    _bottomRight.Draw(dc, renderer, dx, dy, db);
+                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
             
@@ -134,8 +137,8 @@ namespace Test2d
             {
                 if (renderer.SelectedShapes.Contains(this))
                 {
-                    _topLeft.Draw(dc, renderer, dx, dy, db);
-                    _bottomRight.Draw(dc, renderer, dx, dy, db);
+                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
+                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
         }
@@ -155,12 +158,31 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="db"></param>
+        /// <param name="r"></param>
         /// <returns></returns>
-        public string Bind(IList<ShapeProperty> db)
+        public string Bind(IList<ShapeProperty> db, DataRecord r)
         {
+            var record = r != null ? r : this.Record;
+
+            // try to bind to internal (this.Record) or external (r) data record using TextBinding key
+            if (record != null && !string.IsNullOrEmpty(this.TextBinding))
+            {
+                if (record.Columns != null
+                    && record.Data != null
+                    && record.Columns.Count == record.Data.Count)
+
+                    for (int i = 0; i < record.Columns.Count; i++)
+                {
+                    if (record.Columns[i] == this.TextBinding)
+                    {
+                        return record.Data[i];
+                    }
+                }
+            }
+
+            // try to bind to external properties database using TextBinding key
             if (db != null && !string.IsNullOrEmpty(this.TextBinding))
             {
-                // try to bind to external properties database using TextBinding key
                 var result = db.Where(p => p.Name == this.TextBinding).FirstOrDefault();
                 if (result != null && result.Data != null)
                 {
@@ -168,15 +190,16 @@ namespace Test2d
                 }
             }
 
+            // try to bind to Properties using Text as formatting
             if (this.Properties != null && this.Properties.Count > 0)
             {
                 try
                 {
-                    // try to bind to Properties using Text as formatting
                     return string.Format(this.Text, this.Properties.Select(x => x.Data).ToArray());
                 }
                 catch (FormatException) { }
             }
+
             return this.Text;
         }
 

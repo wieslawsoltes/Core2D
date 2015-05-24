@@ -451,13 +451,14 @@ namespace Test
         /// <param name="dc"></param>
         /// <param name="container"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, Container container, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, Container container, IList<ShapeProperty> db, DataRecord r)
         {
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
                 {
-                    Draw(dc, layer, db);
+                    Draw(dc, layer, db, r);
                 }
             }
         }
@@ -468,7 +469,8 @@ namespace Test
         /// <param name="dc"></param>
         /// <param name="layer"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, Layer layer, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, Layer layer, IList<ShapeProperty> db, DataRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -476,7 +478,7 @@ namespace Test
             {
                 if (shape.State.HasFlag(DrawShapeState))
                 {
-                    shape.Draw(_dc, this, 0, 0, db);
+                    shape.Draw(_dc, this, 0, 0, db, r);
                 }
             }
         }
@@ -489,7 +491,8 @@ namespace Test
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, XLine line, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, XLine line, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -652,7 +655,8 @@ namespace Test
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, XRectangle rectangle, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, XRectangle rectangle, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -696,7 +700,8 @@ namespace Test
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, XEllipse ellipse, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, XEllipse ellipse, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -749,7 +754,8 @@ namespace Test
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, XArc arc, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, XArc arc, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -828,7 +834,8 @@ namespace Test
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, XBezier bezier, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, XBezier bezier, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -902,7 +909,8 @@ namespace Test
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, XQBezier qbezier, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, XQBezier qbezier, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -975,7 +983,8 @@ namespace Test
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, XText text, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, XText text, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             var _dc = dc as DrawingContext;
 
@@ -1010,7 +1019,7 @@ namespace Test
 
             DrawRectangleInternal(_dc, half, fill, null, text.IsFilled, ref rect);
 
-            var tbind = text.Bind(db);
+            var tbind = text.Bind(db, r);
 
             Tuple<string, FormattedText, ShapeStyle> tcache = null;
             FormattedText ft;
@@ -1103,7 +1112,8 @@ namespace Test
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object dc, XImage image, double dx, double dy, IList<ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object dc, XImage image, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
         {
             if (image.Path == null)
                 return;

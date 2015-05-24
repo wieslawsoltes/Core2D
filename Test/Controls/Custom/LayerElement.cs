@@ -130,7 +130,8 @@ namespace Test.Controls
                     Renderer.Draw(
                         drawingContext, 
                         layer, 
-                        (Tag as Container).Properties);
+                        (Tag as Container).Properties,
+                        null);
                 }
             }
         }

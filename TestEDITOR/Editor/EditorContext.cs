@@ -1563,6 +1563,45 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="path"></param>
+        public void ImportData(string path)
+        {
+            try
+            {
+                var reader = new CsvReader();
+                var fields = reader.Read(path);
+                var name = System.IO.Path.GetFileNameWithoutExtension(path);
+
+                IList<string> columns = new ObservableCollection<string>(fields.FirstOrDefault());
+                IEnumerable<string[]> data = fields.Skip(1);
+
+                var temp = data.Select(d => DataRecord.Create(columns, d));
+                var records = new ObservableCollection<DataRecord>(temp);
+                var database = Database.Create(name, columns, records);
+
+                _editor.Project.Databases.Add(database);
+                _editor.Project.CurrentDatabase = database;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="database"></param>
+        public void ExportData(string path, Database database)
+        {
+            // TODO:
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         public bool CanCopy()
         {
@@ -1828,6 +1867,42 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="record"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void Drop(DataRecord record, double x, double y)
+        {
+            if (_editor.Renderer.SelectedShape != null)
+            {
+                _history.Snapshot(_editor.Project);
+                _editor.Renderer.SelectedShape.Record = record;
+            }
+            else if (_editor.Renderer.SelectedShapes != null && _editor.Renderer.SelectedShapes.Count > 0)
+            {
+                _history.Snapshot(_editor.Project);
+                foreach (var shape in _editor.Renderer.SelectedShapes)
+                {
+                    shape.Record = record;
+                }
+            }
+            else
+            {
+                var container = _editor.Project.CurrentContainer;
+                if (container != null)
+                {
+                    var result = ShapeBounds.HitTest(container, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+                    if (result != null)
+                    {
+                        _history.Snapshot(_editor.Project);
+                        result.Record = record;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="style"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -1860,7 +1935,7 @@ namespace TestEDITOR
                 }
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -2272,6 +2347,9 @@ namespace TestEDITOR
             (_commands.ExportCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ExitCommand as DelegateCommand).RaiseCanExecuteChanged();
 
+            (_commands.ImportDataCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ExportDataCommand as DelegateCommand).RaiseCanExecuteChanged();
+
             (_commands.ImportStyleCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ImportStylesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ImportStyleGroupCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
@@ -2352,6 +2430,7 @@ namespace TestEDITOR
             (_commands.ZoomResetCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ZoomExtentCommand as DelegateCommand).RaiseCanExecuteChanged();
 
+            (_commands.DatabasesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.LayersWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.StyleWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.StylesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();

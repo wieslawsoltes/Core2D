@@ -285,7 +285,7 @@ namespace TestEDITOR
                         gfx, 
                         container.Template.Background, 
                         Test2d.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
-                    Draw(gfx, container.Template, container.Properties);
+                    Draw(gfx, container.Template, container.Properties, null);
                 }
                 
                 // draw container contents to pdf graphics
@@ -293,7 +293,7 @@ namespace TestEDITOR
                     gfx, 
                     container.Template.Background, 
                     Test2d.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
-                Draw(gfx, container, container.Properties);
+                Draw(gfx, container, container.Properties, null);
             }
 
             return page;
@@ -458,13 +458,14 @@ namespace TestEDITOR
         /// <param name="gfx"></param>
         /// <param name="container"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, Test2d.Container container, IList<Test2d.ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, Test2d.Container container, IList<Test2d.ShapeProperty> db, Test2d.DataRecord r)
         {
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
                 {
-                    Draw(gfx, layer, db);
+                    Draw(gfx, layer, db, r);
                 }
             }
         }
@@ -475,13 +476,14 @@ namespace TestEDITOR
         /// <param name="gfx"></param>
         /// <param name="layer"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, Test2d.Layer layer, IList<Test2d.ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, Test2d.Layer layer, IList<Test2d.ShapeProperty> db, Test2d.DataRecord r)
         {
             foreach (var shape in layer.Shapes)
             {
                 if (shape.State.HasFlag(DrawShapeState))
                 {
-                    shape.Draw(gfx, this, 0, 0, db);
+                    shape.Draw(gfx, this, 0, 0, db, r);
                 }
             }
         }
@@ -494,7 +496,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, Test2d.XLine line, double dx, double dy, IList<Test2d.ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, Test2d.XLine line, double dx, double dy, IList<Test2d.ShapeProperty> db, Test2d.DataRecord r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -632,7 +635,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, Test2d.XRectangle rectangle, double dx, double dy, IList<Test2d.ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, Test2d.XRectangle rectangle, double dx, double dy, IList<Test2d.ShapeProperty> db, Test2d.DataRecord r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -670,7 +674,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, Test2d.XEllipse ellipse, double dx, double dy, IList<Test2d.ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, Test2d.XEllipse ellipse, double dx, double dy, IList<Test2d.ShapeProperty> db, Test2d.DataRecord r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -708,7 +713,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, Test2d.XArc arc, double dx, double dy, IList<Test2d.ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, Test2d.XArc arc, double dx, double dy, IList<Test2d.ShapeProperty> db, Test2d.DataRecord r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -751,7 +757,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, Test2d.XBezier bezier, double dx, double dy, IList<Test2d.ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, Test2d.XBezier bezier, double dx, double dy, IList<Test2d.ShapeProperty> db, Test2d.DataRecord r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -795,7 +802,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, Test2d.XQBezier qbezier, double dx, double dy, IList<Test2d.ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, Test2d.XQBezier qbezier, double dx, double dy, IList<Test2d.ShapeProperty> db, Test2d.DataRecord r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -848,7 +856,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, Test2d.XText text, double dx, double dy, IList<Test2d.ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, Test2d.XText text, double dx, double dy, IList<Test2d.ShapeProperty> db, Test2d.DataRecord r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -927,7 +936,7 @@ namespace TestEDITOR
             }
 
             _gfx.DrawString(
-                text.Bind(db),
+                text.Bind(db, r),
                 font,
                 ToXSolidBrush(text.Style.Stroke),
                 srect,
@@ -942,7 +951,8 @@ namespace TestEDITOR
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
-        public void Draw(object gfx, Test2d.XImage image, double dx, double dy, IList<Test2d.ShapeProperty> db)
+        /// <param name="r"></param>
+        public void Draw(object gfx, Test2d.XImage image, double dx, double dy, IList<Test2d.ShapeProperty> db, Test2d.DataRecord r)
         {
             var _gfx = gfx as XGraphics;
 
