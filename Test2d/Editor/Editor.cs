@@ -21,6 +21,7 @@ namespace Test2d
         private bool _isContextMenu;
         private bool _enableObserver;
         private Observer _observer;
+        private bool _enableHistory;
         private History<Project> _history;
 
         /// <summary>
@@ -120,6 +121,22 @@ namespace Test2d
         }
 
         /// <summary>
+        /// Gets or sets if project collections and objects history is enabled.
+        /// </summary>
+        public bool EnableHistory
+        {
+            get { return _enableHistory; }
+            set
+            {
+                if (value != _enableHistory)
+                {
+                    _enableHistory = value;
+                    Notify("EnableHistory");
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets or sets undo/redo history handler.
         /// </summary>
         public History<Project> History
@@ -195,19 +212,26 @@ namespace Test2d
         /// </summary>
         /// <param name="project">The project to edit.</param>
         /// <param name="renderer">The shape renderer.</param>
-        /// <param name="history">The undo/redo history handler.</param>
+        /// <param name="serializer">The object serializer.</param>
+        /// <param name="compressor">The binary data compressor.</param>
         /// <returns></returns>
         public static Editor Create(
             Project project, 
-            IRenderer renderer, 
-            History<Project> history)
+            IRenderer renderer,
+            ISerializer serializer,
+            ICompressor compressor)
         {
             var editor = new Editor()
             {
                 CurrentTool = Tool.Selection,
                 EnableObserver = true,
-                History = history,
+                EnableHistory = true
             };
+
+            if (editor.EnableHistory)
+            {
+                editor.History = new History<Project>(serializer, compressor);
+            }
 
             editor.Project = project;
             editor.Renderer = renderer;

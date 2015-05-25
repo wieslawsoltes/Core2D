@@ -310,13 +310,16 @@ namespace TestEDITOR
             try
             {
                 _commands = new EditorCommands();
+
                 _textClipboard = clipboard;
                 _serializer = serializer;
                 _compressor = compressor;
+
                 _editor = Editor.Create(
                     DefaultProject(), 
-                    renderer, 
-                    new History<Project>(_serializer, _compressor));
+                    renderer,
+                    serializer, 
+                    compressor);
 
                 (_editor.Renderer as ObservableObject).PropertyChanged +=
                     (s, e) =>
