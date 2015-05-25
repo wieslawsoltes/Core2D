@@ -228,14 +228,14 @@ namespace Test2d
                 EnableHistory = true
             };
 
+            editor.Project = project;
+            editor.Renderer = renderer;
+
             if (editor.EnableHistory)
             {
                 editor.History = new History<Project>(serializer, compressor);
             }
 
-            editor.Project = project;
-            editor.Renderer = renderer;
-            
             if (editor.EnableObserver)
             {
                 editor.Observer = new Observer(editor);
