@@ -81,6 +81,7 @@ namespace Test.Windows
                 this,
                 WpfRenderer.Create(),
                 new TextClipboard(),
+                new NewtonsoftSerializer(),
                 new LZ4CodecCompressor());
             context.InitializeSctipts();
             context.InitializeSimulation();

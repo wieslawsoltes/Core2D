@@ -197,7 +197,10 @@ namespace Test2d
         /// <param name="renderer">The shape renderer.</param>
         /// <param name="history">The undo/redo history handler.</param>
         /// <returns></returns>
-        public static Editor Create(Project project, IRenderer renderer, History<Project> history)
+        public static Editor Create(
+            Project project, 
+            IRenderer renderer, 
+            History<Project> history)
         {
             var editor = new Editor()
             {

@@ -49,6 +49,7 @@ namespace TestWinForms
                 this, 
                 new EmfRenderer(72.0 / 96.0), 
                 new TextClipboard(),
+                new NewtonsoftSerializer(),
                 new LZ4CodecCompressor());
             context.InitializeSctipts();
             context.InitializeSimulation();
