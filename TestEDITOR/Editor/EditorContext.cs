@@ -802,7 +802,6 @@ namespace TestEDITOR
                     () =>
                     {
                         var sg = ShapeStyleGroup.Create("New");
-                        sg.Styles.Add(ShapeStyle.Create("New"));
                         _editor.History.Snapshot(_editor.Project);
                         _editor.Project.StyleGroups.Add(sg);
                     },
@@ -2073,73 +2072,82 @@ namespace TestEDITOR
             {
                 if (files != null && files.Length >= 1)
                 {
+                    bool result = false;
                     foreach (var path in files)
                     {
                         if (string.IsNullOrEmpty(path))
                             continue;
 
                         string ext = System.IO.Path.GetExtension(path);
+
                         if (string.Compare(ext, ".project", true, CultureInfo.InvariantCulture) == 0)
                         {
                             Open(path);
-                            return true;
+                            result = true;
                         }
                         else if (string.Compare(ext, ".cs", true, CultureInfo.InvariantCulture) == 0)
                         {
                             Eval(path);
-                            return true;
+                            result = true;
+                        }
+                        else if (string.Compare(ext, ".csv", true, CultureInfo.InvariantCulture) == 0)
+                        {
+                            ImportData(path);
+                            result = true;
                         }
                         else if (string.Compare(ext, ".style", true, CultureInfo.InvariantCulture) == 0)
                         {
                             ImportEx(path, _editor.Project.CurrentStyleGroup.Styles, ImportType.Style);
-                            return true;
+                            result = true;
                         }
                         else if (string.Compare(ext, ".styles", true, CultureInfo.InvariantCulture) == 0)
                         {
                             ImportEx(path, _editor.Project.CurrentStyleGroup.Styles, ImportType.Styles);
-                            return true;
+                            result = true;
                         }
                         else if (string.Compare(ext, ".stylegroup", true, CultureInfo.InvariantCulture) == 0)
                         {
                             ImportEx(path, _editor.Project.StyleGroups, ImportType.StyleGroup);
-                            return true;
+                            result = true;
                         }
                         else if (string.Compare(ext, ".stylegroups", true, CultureInfo.InvariantCulture) == 0)
                         {
                             ImportEx(path, _editor.Project.StyleGroups, ImportType.StyleGroups);
-                            return true;
+                            result = true;
                         }
                         else if (string.Compare(ext, ".group", true, CultureInfo.InvariantCulture) == 0)
                         {
                             ImportEx(path, _editor.Project.CurrentGroupLibrary.Groups, ImportType.Group);
-                            return true;
+                            result = true;
                         }
                         else if (string.Compare(ext, ".groups", true, CultureInfo.InvariantCulture) == 0)
                         {
                             ImportEx(path, _editor.Project.CurrentGroupLibrary.Groups, ImportType.Groups);
-                            return true;
+                            result = true;
                         }
                         else if (string.Compare(ext, ".grouplibrary", true, CultureInfo.InvariantCulture) == 0)
                         {
                             ImportEx(path, _editor.Project.GroupLibraries, ImportType.GroupLibrary);
-                            return true;
+                            result = true;
                         }
                         else if (string.Compare(ext, ".grouplibraries", true, CultureInfo.InvariantCulture) == 0)
                         {
                             ImportEx(path, _editor.Project.GroupLibraries, ImportType.GroupLibraries);
-                            return true;
+                            result = true;
                         }
                         else if (string.Compare(ext, ".template", true, CultureInfo.InvariantCulture) == 0)
                         {
                             ImportEx(path, _editor.Project.Templates, ImportType.Template);
-                            return true;
+                            result = true;
                         }
                         else if (string.Compare(ext, ".templates", true, CultureInfo.InvariantCulture) == 0)
                         {
                             ImportEx(path, _editor.Project.Templates, ImportType.Templates);
-                            return true;
+                            result = true;
                         }
                     }
+
+                    return result;
                 }
             }
             catch (Exception ex)
@@ -2215,6 +2223,10 @@ namespace TestEDITOR
                             _editor.History.Snapshot(_editor.Project);
                             result.Record = record;
                         }
+                        else
+                        {
+                            DropAsGroup(record, x, y);
+                        }
                     }
                 }
             }
@@ -2223,6 +2235,77 @@ namespace TestEDITOR
                 System.Diagnostics.Debug.Print(ex.Message);
                 System.Diagnostics.Debug.Print(ex.StackTrace);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="record"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void DropAsGroup(Record record, double x, double y)
+        {
+            var g = XGroup.Create("g");
+            g.Record = record;
+
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+
+            var count = record.Values.Count;
+            double px = sx;
+            double py = sy;
+            double width = 150;
+            double height = 15;
+
+            for (int i = 0; i < count; i++)
+            {
+                var column = record.Columns[i];
+                if (column.IsVisible)
+                {
+                    var text = XText.Create(
+                        px, py,
+                        px + width, py + height,
+                        _editor.Project.CurrentStyleGroup.CurrentStyle,
+                        _editor.Project.Options.PointShape, "");
+                    var binding = ShapeBinding.Create("Text", record.Columns[i].Name);
+                    text.Bindings.Add(binding);
+                    g.AddShape(text);
+
+                    py += height;
+                }
+            }
+
+            var rectangle = XRectangle.Create(
+                sx, sy,
+                sx + width, sy + (double)count * height,
+                _editor.Project.CurrentStyleGroup.CurrentStyle,
+                _editor.Project.Options.PointShape);
+            g.AddShape(rectangle);
+
+            double ptx = sx + width / 2;
+            double pty = sy;
+
+            double pbx = sx + width / 2;
+            double pby = sy + (double)count * height;
+
+            double plx = sx;
+            double ply = sy + ((double)count * height) / 2;
+
+            double prx = sx + width;
+            double pry = sy + ((double)count * height) / 2;
+
+            var pt = XPoint.Create(ptx, pty, _editor.Project.Options.PointShape);
+            var pb = XPoint.Create(pbx, pby, _editor.Project.Options.PointShape);
+            var pl = XPoint.Create(plx, ply, _editor.Project.Options.PointShape);
+            var pr = XPoint.Create(prx, pry, _editor.Project.Options.PointShape);
+
+            g.AddConnectorAsNone(pt);
+            g.AddConnectorAsNone(pb);
+            g.AddConnectorAsNone(pl);
+            g.AddConnectorAsNone(pr);
+
+            _editor.History.Snapshot(_editor.Project);
+            _editor.Project.CurrentContainer.CurrentLayer.Shapes.Add(g);
         }
 
         /// <summary>
