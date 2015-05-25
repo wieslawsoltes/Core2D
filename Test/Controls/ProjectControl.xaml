@@ -29,7 +29,8 @@
             <MenuItem Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="_-"/>
         </Menu>
         <ContentControl Content="{Binding Editor.Project}"
-                        Grid.Row="1">
+                        Grid.Row="1" 
+                        Margin="2,0,2,0">
             <ContentControl.Style>
                 <Style TargetType="ContentControl">
                     <Setter Property="Visibility" Value="Visible"/>
