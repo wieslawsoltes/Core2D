@@ -135,6 +135,7 @@
     <Compile Include="Converters\DoubleToStringConverter.cs" />
     <Compile Include="Converters\FlagsEnumConverter.cs" />
     <Compile Include="Converters\ObjectEqualityConverter.cs" />
+    <Compile Include="Converters\ShapeBindingParameterConverter.cs" />
     <Compile Include="Converters\ShapePropertyParameterConverter.cs" />
     <Compile Include="Converters\ZoomScaleConverter.cs" />
     <Compile Include="Controls\Custom\PanAndZoomBorder.cs" />
@@ -295,7 +296,6 @@
       <Name>TestEDITOR</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
