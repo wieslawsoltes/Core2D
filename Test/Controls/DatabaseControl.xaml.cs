@@ -105,7 +105,7 @@ namespace Test.Controls
             gv.SetValue(VirtualizingStackPanel.VirtualizationModeProperty, VirtualizationMode.Recycling);
             gv.SetValue(ScrollViewer.IsDeferredScrollingEnabledProperty, true);
             gv.SetValue(ScrollViewer.CanContentScrollProperty, true);
-                
+
             int i = 0;
             foreach (var column in columns)
             {
