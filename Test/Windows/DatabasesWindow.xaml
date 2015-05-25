@@ -10,9 +10,5 @@
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextHintingMode="Auto"
         TextOptions.TextRenderingMode="Auto">
-    <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                  HorizontalScrollBarVisibility="Auto" 
-                  Focusable="False">
-        <controls:DatabasesControl Margin="2"/>
-    </ScrollViewer>
+    <controls:DatabasesControl Margin="2"/>
 </Window>
