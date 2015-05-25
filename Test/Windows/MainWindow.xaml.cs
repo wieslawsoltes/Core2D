@@ -455,75 +455,9 @@ namespace Test.Windows
                         try
                         {
                             var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                            if (files != null && files.Length >= 1)
+                            if (context.Drop(files))
                             {
-                                foreach (var path in files)
-                                {
-                                    if (string.IsNullOrEmpty(path))
-                                        continue;
-
-                                    string ext = System.IO.Path.GetExtension(path);
-                                    if (string.Compare(ext, ".project", true, CultureInfo.InvariantCulture) == 0)
-                                    {
-                                        context.Open(path);
-                                        e.Handled = true;
-                                    }
-                                    else if (string.Compare(ext, ".cs", true, CultureInfo.InvariantCulture) == 0)
-                                    {
-                                        context.Eval(path);
-                                        e.Handled = true;
-                                    }
-                                    else if (string.Compare(ext, ".style", true, CultureInfo.InvariantCulture) == 0)
-                                    {
-                                        context.ImportEx(path, context.Editor.Project.CurrentStyleGroup.Styles, ImportType.Style);
-                                        e.Handled = true;
-                                    }
-                                    else if (string.Compare(ext, ".styles", true, CultureInfo.InvariantCulture) == 0)
-                                    {
-                                        context.ImportEx(path, context.Editor.Project.CurrentStyleGroup.Styles, ImportType.Styles);
-                                        e.Handled = true;
-                                    }
-                                    else if (string.Compare(ext, ".stylegroup", true, CultureInfo.InvariantCulture) == 0)
-                                    {
-                                        context.ImportEx(path, context.Editor.Project.StyleGroups, ImportType.StyleGroup);
-                                        e.Handled = true;
-                                    }
-                                    else if (string.Compare(ext, ".stylegroups", true, CultureInfo.InvariantCulture) == 0)
-                                    {
-                                        context.ImportEx(path, context.Editor.Project.StyleGroups, ImportType.StyleGroups);
-                                        e.Handled = true;
-                                    }
-                                    else if (string.Compare(ext, ".group", true, CultureInfo.InvariantCulture) == 0)
-                                    {
-                                        context.ImportEx(path, context.Editor.Project.CurrentGroupLibrary.Groups, ImportType.Group);
-                                        e.Handled = true;
-                                    }
-                                    else if (string.Compare(ext, ".groups", true, CultureInfo.InvariantCulture) == 0)
-                                    {
-                                        context.ImportEx(path, context.Editor.Project.CurrentGroupLibrary.Groups, ImportType.Groups);
-                                        e.Handled = true;
-                                    }
-                                    else if (string.Compare(ext, ".grouplibrary", true, CultureInfo.InvariantCulture) == 0)
-                                    {
-                                        context.ImportEx(path, context.Editor.Project.GroupLibraries, ImportType.GroupLibrary);
-                                        e.Handled = true;
-                                    }
-                                    else if (string.Compare(ext, ".grouplibraries", true, CultureInfo.InvariantCulture) == 0)
-                                    {
-                                        context.ImportEx(path, context.Editor.Project.GroupLibraries, ImportType.GroupLibraries);
-                                        e.Handled = true;
-                                    }
-                                    else if (string.Compare(ext, ".template", true, CultureInfo.InvariantCulture) == 0)
-                                    {
-                                        context.ImportEx(path, context.Editor.Project.Templates, ImportType.Template);
-                                        e.Handled = true;
-                                    }
-                                    else if (string.Compare(ext, ".templates", true, CultureInfo.InvariantCulture) == 0)
-                                    {
-                                        context.ImportEx(path, context.Editor.Project.Templates, ImportType.Templates);
-                                        e.Handled = true;
-                                    }
-                                }
+                                e.Handled = true;
                             }
                         }
                         catch (Exception ex)

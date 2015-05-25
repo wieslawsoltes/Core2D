@@ -6,6 +6,7 @@ using Microsoft.Practices.Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Security.Permissions;
@@ -2069,6 +2070,95 @@ namespace TestEDITOR
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="files"></param>
+        /// <returns></returns>
+        public bool Drop(string[] files)
+        {
+            try
+            {
+                if (files != null && files.Length >= 1)
+                {
+                    foreach (var path in files)
+                    {
+                        if (string.IsNullOrEmpty(path))
+                            continue;
+
+                        string ext = System.IO.Path.GetExtension(path);
+                        if (string.Compare(ext, ".project", true, CultureInfo.InvariantCulture) == 0)
+                        {
+                            Open(path);
+                            return true;
+                        }
+                        else if (string.Compare(ext, ".cs", true, CultureInfo.InvariantCulture) == 0)
+                        {
+                            Eval(path);
+                            return true;
+                        }
+                        else if (string.Compare(ext, ".style", true, CultureInfo.InvariantCulture) == 0)
+                        {
+                            ImportEx(path, _editor.Project.CurrentStyleGroup.Styles, ImportType.Style);
+                            return true;
+                        }
+                        else if (string.Compare(ext, ".styles", true, CultureInfo.InvariantCulture) == 0)
+                        {
+                            ImportEx(path, _editor.Project.CurrentStyleGroup.Styles, ImportType.Styles);
+                            return true;
+                        }
+                        else if (string.Compare(ext, ".stylegroup", true, CultureInfo.InvariantCulture) == 0)
+                        {
+                            ImportEx(path, _editor.Project.StyleGroups, ImportType.StyleGroup);
+                            return true;
+                        }
+                        else if (string.Compare(ext, ".stylegroups", true, CultureInfo.InvariantCulture) == 0)
+                        {
+                            ImportEx(path, _editor.Project.StyleGroups, ImportType.StyleGroups);
+                            return true;
+                        }
+                        else if (string.Compare(ext, ".group", true, CultureInfo.InvariantCulture) == 0)
+                        {
+                            ImportEx(path, _editor.Project.CurrentGroupLibrary.Groups, ImportType.Group);
+                            return true;
+                        }
+                        else if (string.Compare(ext, ".groups", true, CultureInfo.InvariantCulture) == 0)
+                        {
+                            ImportEx(path, _editor.Project.CurrentGroupLibrary.Groups, ImportType.Groups);
+                            return true;
+                        }
+                        else if (string.Compare(ext, ".grouplibrary", true, CultureInfo.InvariantCulture) == 0)
+                        {
+                            ImportEx(path, _editor.Project.GroupLibraries, ImportType.GroupLibrary);
+                            return true;
+                        }
+                        else if (string.Compare(ext, ".grouplibraries", true, CultureInfo.InvariantCulture) == 0)
+                        {
+                            ImportEx(path, _editor.Project.GroupLibraries, ImportType.GroupLibraries);
+                            return true;
+                        }
+                        else if (string.Compare(ext, ".template", true, CultureInfo.InvariantCulture) == 0)
+                        {
+                            ImportEx(path, _editor.Project.Templates, ImportType.Template);
+                            return true;
+                        }
+                        else if (string.Compare(ext, ".templates", true, CultureInfo.InvariantCulture) == 0)
+                        {
+                            ImportEx(path, _editor.Project.Templates, ImportType.Templates);
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+
+            return false;
         }
 
         /// <summary>
