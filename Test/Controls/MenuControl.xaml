@@ -243,9 +243,9 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Data">
-            <MenuItem Header="_Import..." Command="{Binding Commands.ImportDataCommand}" InputGestureText=""/>
+            <MenuItem Header="_Import..." Command="{Binding Commands.ImportDataCommand}" InputGestureText="F8"/>
             <Separator/>
-            <MenuItem Header="_Export..." Command="{Binding Commands.ExportDataCommand}" InputGestureText=""/>
+            <MenuItem Header="_Export..." Command="{Binding Commands.ExportDataCommand}" InputGestureText="Ctrl+F8"/>
         </MenuItem>
         <MenuItem Header="Te_mplate" Tag="{Binding}" ItemsSource="{Binding Editor.Project.Templates}">
             <MenuItem.Resources>
