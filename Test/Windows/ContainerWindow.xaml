@@ -27,6 +27,8 @@
         <KeyBinding Command="{Binding Commands.SelectAllCommand}" Gesture="Ctrl+A"/>
         <KeyBinding Command="{Binding Commands.GroupCommand}" Gesture="Ctrl+G"/>
         <KeyBinding Command="{Binding Commands.GroupLayerCommand}" Gesture="Ctrl+Shift+G"/>
+        <KeyBinding Command="{Binding Commands.ImportDataCommand}" Gesture="F8"/>
+        <KeyBinding Command="{Binding Commands.ExportDataCommand}" Gesture="Ctrl+F8"/>
         <KeyBinding Command="{Binding Commands.EvalCommand}" Gesture="F9"/>
         <KeyBinding Command="{Binding Commands.StartSimulationCommand}" Gesture="F5"/>
         <KeyBinding Command="{Binding Commands.StopSimulationCommand}" Gesture="F6"/>
