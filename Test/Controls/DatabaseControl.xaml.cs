@@ -77,7 +77,7 @@ namespace Test.Controls
         /// 
         /// </summary>
         /// <param name="columns"></param>
-        public void SetColumns(IList<string> columns)
+        public void SetColumns(IList<Column> columns)
         {
             listView.View = CreateColumnsView(columns);
         }
@@ -86,7 +86,7 @@ namespace Test.Controls
         /// 
         /// </summary>
         /// <param name="records"></param>
-        public void SetRecord(IList<DataRecord> records)
+        public void SetRecord(IList<Record> records)
         {
             listView.ItemsSource = null;
             listView.ItemsSource = records;
@@ -97,19 +97,28 @@ namespace Test.Controls
         /// </summary>
         /// <param name="columns"></param>
         /// <returns></returns>
-        private GridView CreateColumnsView(IList<string> columns)
+        private GridView CreateColumnsView(IList<Column> columns)
         {
             var gv = new GridView();
+
+            gv.SetValue(VirtualizingStackPanel.IsVirtualizingProperty, true);
+            gv.SetValue(VirtualizingStackPanel.VirtualizationModeProperty, VirtualizationMode.Recycling);
+            gv.SetValue(ScrollViewer.IsDeferredScrollingEnabledProperty, true);
+            gv.SetValue(ScrollViewer.CanContentScrollProperty, true);
+                
             int i = 0;
             foreach (var column in columns)
             {
-                gv.Columns.Add(
-                    new GridViewColumn 
-                    { 
-                        Header = column, 
-                        Width = double.NaN,
-                        DisplayMemberBinding = new Binding("Data[" + i + "]")
-                    });
+                if (column.IsVisible)
+                {
+                    gv.Columns.Add(
+                        new GridViewColumn 
+                        { 
+                            Header = column.Name, 
+                            Width = column.Width,
+                            DisplayMemberBinding = new Binding("Values[" + i + "].Content")
+                        });
+                }
                 i++;
             }
             return gv;
@@ -132,10 +141,10 @@ namespace Test.Controls
                 var listViewItem = FindVisualParent<ListViewItem>((DependencyObject)e.OriginalSource);
                 if (listViewItem != null)
                 {
-                    var record = (DataRecord)listView
+                    var record = (Record)listView
                         .ItemContainerGenerator
                         .ItemFromContainer(listViewItem);
-                    DataObject dragData = new DataObject(typeof(DataRecord), record);
+                    DataObject dragData = new DataObject(typeof(Record), record);
                     DragDrop.DoDragDrop(
                         listViewItem,
                         dragData, 
