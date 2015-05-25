@@ -10,7 +10,7 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public class XRectangle : BaseShape
+    public class XEllipse : BaseShape
     {
         private XPoint _topLeft;
         private XPoint _bottomRight;
@@ -73,9 +73,9 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, Record r)
         {
-            var record = r != null ? r : this.Record;
+            var record = r ?? this.Record;
 
             if (State.HasFlag(ShapeState.Visible))
             {
@@ -132,7 +132,7 @@ namespace Test2d
         /// <param name="isFilled"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static XRectangle Create(
+        public static XEllipse Create(
             double x1, double y1,
             double x2, double y2,
             ShapeStyle style,
@@ -140,10 +140,11 @@ namespace Test2d
             bool isFilled = false,
             string name = "")
         {
-            return new XRectangle()
+            return new XEllipse()
             {
                 Name = name,
                 Style = style,
+                Bindings = new ObservableCollection<ShapeBinding>(),
                 Properties = new ObservableCollection<ShapeProperty>(),
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
@@ -161,7 +162,7 @@ namespace Test2d
         /// <param name="isFilled"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static XRectangle Create(
+        public static XEllipse Create(
             double x, double y,
             ShapeStyle style,
             BaseShape point,

@@ -59,6 +59,110 @@ namespace Test2d
             System.Diagnostics.Debug.Print(text);
         }
 
+        private void DatabasesCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    Add(e.NewItems.Cast<Database>());
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    Debug("Databases Replace");
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    Remove(e.OldItems.Cast<Database>());
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    Debug("Databases Replace");
+                    Remove(e.OldItems.Cast<Database>());
+                    Add(e.NewItems.Cast<Database>());
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    Debug("Databases Reset");
+                    break;
+            }
+
+            //_invalidateLayers();
+        }
+        
+        private void ColumnsCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    Add(e.NewItems.Cast<Column>());
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    Debug("Columns Replace");
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    Remove(e.OldItems.Cast<Column>());
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    Debug("Columns Replace");
+                    Remove(e.OldItems.Cast<Column>());
+                    Add(e.NewItems.Cast<Column>());
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    Debug("Columns Reset");
+                    break;
+            }
+
+            //_invalidateLayers();
+        }
+        
+        private void RecordsCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    Add(e.NewItems.Cast<Record>());
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    Debug("Records Replace");
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    Remove(e.OldItems.Cast<Record>());
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    Debug("Records Replace");
+                    Remove(e.OldItems.Cast<Record>());
+                    Add(e.NewItems.Cast<Record>());
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    Debug("Records Reset");
+                    break;
+            }
+
+            //_invalidateLayers();
+        }
+        
+        private void ValuesCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    Add(e.NewItems.Cast<Value>());
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    Debug("Values Replace");
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    Remove(e.OldItems.Cast<Value>());
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    Debug("Values Replace");
+                    Remove(e.OldItems.Cast<Value>());
+                    Add(e.NewItems.Cast<Value>());
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    Debug("Values Reset");
+                    break;
+            }
+
+            _invalidateLayers();
+        }
+ 
         private void DocumentsCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
@@ -215,6 +319,32 @@ namespace Test2d
             _invalidateStyles();
         }
 
+        private void BindingsCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    Add(e.NewItems.Cast<ShapeBinding>());
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    Debug("Bindings Replace");
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    Remove(e.OldItems.Cast<ShapeBinding>());
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    Debug("Bindings Replace");
+                    Remove(e.OldItems.Cast<ShapeBinding>());
+                    Add(e.NewItems.Cast<ShapeBinding>());
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    Debug("Bindings Reset");
+                    break;
+            }
+
+            _invalidateShapes();
+        }
+        
         private void PropertiesCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
@@ -241,6 +371,30 @@ namespace Test2d
             _invalidateShapes();
         }
 
+        private void DatabaseObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Debug("Database: " + sender.GetType() + ", Property: " + e.PropertyName);
+            _invalidateShapes();
+        }
+        
+        private void ColumnObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Debug("Column: " + sender.GetType() + ", Property: " + e.PropertyName);
+            _invalidateShapes();
+        }
+        
+        private void RecordObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Debug("Record: " + sender.GetType() + ", Property: " + e.PropertyName);
+            _invalidateShapes();
+        }
+        
+        private void ValueObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Debug("Value: " + sender.GetType() + ", Property: " + e.PropertyName);
+            _invalidateShapes();
+        }
+        
         private void ContainerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Debug("Container: " + (sender is Container ? (sender as Container).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
@@ -281,6 +435,12 @@ namespace Test2d
             _invalidateStyles();
         }
 
+        private void BindingObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Debug("Property: " + sender.GetType() + ", Property: " + e.PropertyName);
+            _invalidateShapes();
+        }
+        
         private void PropertyObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Debug("Property: " + sender.GetType() + ", Property: " + e.PropertyName);
@@ -289,188 +449,525 @@ namespace Test2d
 
         private void Add(Project project)
         {
+            if (project == null)
+                return;
+            
             Debug("Add Project: " + project.Name);
-            (project.Documents as ObservableCollection<Document>).CollectionChanged += DocumentsCollectionObserver;
             
-            foreach (var document in project.Documents)
+            if (project.Databases != null)
             {
-                Add(document);
+                (project.Databases as ObservableCollection<Database>).CollectionChanged += DatabasesCollectionObserver;
+                
+                foreach (var database in project.Databases)
+                {
+                    Add(database);
+                }
             }
             
-            (project.Templates as ObservableCollection<Container>).CollectionChanged += ContainersCollectionObserver;
-            
-            foreach (var template in project.Templates)
+            if (project.Documents != null)
             {
-                Add(template);
+                (project.Documents as ObservableCollection<Document>).CollectionChanged += DocumentsCollectionObserver;
+                
+                foreach (var document in project.Documents)
+                {
+                    Add(document);
+                }
             }
-
-            (project.StyleGroups as ObservableCollection<ShapeStyleGroup>).CollectionChanged += StyleGroupsCollectionObserver;
-
-            foreach (var sg in project.StyleGroups)
+            
+            if (project.Templates != null)
             {
-                Add(sg);
+                (project.Templates as ObservableCollection<Container>).CollectionChanged += ContainersCollectionObserver;
+                
+                foreach (var template in project.Templates)
+                {
+                    Add(template);
+                }
+            }
+            
+            if (project.StyleGroups != null)
+            {
+                (project.StyleGroups as ObservableCollection<ShapeStyleGroup>).CollectionChanged += StyleGroupsCollectionObserver;
+    
+                foreach (var sg in project.StyleGroups)
+                {
+                    Add(sg);
+                }
             }
         }
 
         private void Remove(Project project)
         {
+            if (project == null)
+                return;
+            
             Debug("Remove Project: " + project.Name);
-            (project.Documents as ObservableCollection<Document>).CollectionChanged -= DocumentsCollectionObserver;
-
-            foreach (var document in project.Documents)
+            
+            if (project.Databases != null)
             {
-                Remove(document);
+                (project.Databases as ObservableCollection<Database>).CollectionChanged -= DatabasesCollectionObserver;
+                
+                foreach (var database in project.Databases)
+                {
+                    Remove(database);
+                }
+            }
+            
+            if (project.Documents != null)
+            {
+                (project.Documents as ObservableCollection<Document>).CollectionChanged -= DocumentsCollectionObserver;
+    
+                foreach (var document in project.Documents)
+                {
+                    Remove(document);
+                }
             }
 
-            (project.Templates as ObservableCollection<Container>).CollectionChanged -= ContainersCollectionObserver;
-
-            foreach (var template in project.Templates)
+            if (project.Templates != null)
             {
-                Remove(template);
+                (project.Templates as ObservableCollection<Container>).CollectionChanged -= ContainersCollectionObserver;
+    
+                foreach (var template in project.Templates)
+                {
+                    Remove(template);
+                }
             }
 
-            (project.StyleGroups as ObservableCollection<ShapeStyleGroup>).CollectionChanged -= StyleGroupsCollectionObserver;
-
-            foreach (var sg in project.StyleGroups)
+            if (project.StyleGroups != null)
             {
-                Remove(sg);
+                (project.StyleGroups as ObservableCollection<ShapeStyleGroup>).CollectionChanged -= StyleGroupsCollectionObserver;
+    
+                foreach (var sg in project.StyleGroups)
+                {
+                    Remove(sg);
+                }
             }
         }
 
+        private void Add(Database database)
+        {
+            if (database == null)
+                return;
+            
+            //database.PropertyChanged += DatabaseObserver;
+
+            Debug("Add Database: " + database.Name);
+            
+            if (database.Columns != null)
+            {
+                Add(database.Columns);
+                (database.Columns as ObservableCollection<Column>).CollectionChanged += ColumnsCollectionObserver;
+            }
+            
+            if (database.Records != null)
+            {
+                Add(database.Records);
+                (database.Records as ObservableCollection<Record>).CollectionChanged += RecordsCollectionObserver;
+            }
+        }
+        
+        private void Remove(Database database)
+        {
+            if (database == null)
+                return;
+            
+            //database.PropertyChanged -= DatabaseObserver;
+
+            Debug("Remove Database: " + database.Name);
+            
+            if (database.Columns != null)
+            {
+                Remove(database.Columns);
+                (database.Columns as ObservableCollection<Column>).CollectionChanged -= ColumnsCollectionObserver;
+            }
+            
+            if (database.Records != null)
+            {
+                Remove(database.Records);
+                (database.Records as ObservableCollection<Record>).CollectionChanged -= RecordsCollectionObserver;
+            }
+        }
+
+        private void Add(Column column)
+        {
+            if (column == null)
+                return;
+
+            column.PropertyChanged += ColumnObserver;
+
+            Debug("Add Column: " + column.Id);
+        }
+        
+        private void Remove(Column column)
+        {
+            if (column == null)
+                return;
+
+            column.PropertyChanged -= ColumnObserver;
+
+            Debug("Remove Column: " + column.Id);
+        }
+
+        private void Add(Record record)
+        {
+            if (record == null)
+                return;
+            
+            record.PropertyChanged += RecordObserver;
+            
+            if (record.Values != null)
+            {
+                Add(record.Values);
+                (record.Values as ObservableCollection<Value>).CollectionChanged += ValuesCollectionObserver;
+            }
+            
+            Debug("Add Record: " + record.Id);
+        }
+
+        private void Remove(Record record)
+        {
+            if (record == null)
+                return;
+
+            record.PropertyChanged -= RecordObserver;
+            
+            if (record.Values != null)
+            {
+                Remove(record.Values);
+                (record.Values as ObservableCollection<string>).CollectionChanged -= ValuesCollectionObserver;
+            }
+            
+            Debug("Remove Record: " + record.Id);
+        }
+        
+        private void Add(Value value)
+        {
+            if (value == null)
+                return;
+
+            value.PropertyChanged += ValueObserver;
+
+            Debug("Add Value");
+        }
+        
+        private void Remove(Value value)
+        {
+            if (value == null)
+                return;
+
+            value.PropertyChanged -= ValueObserver;
+
+            Debug("Remove Value");
+        }
+        
         private void Add(Document document)
         {
-            Debug("Add Document: " + document.Name);
-            (document.Containers as ObservableCollection<Container>)
-                .CollectionChanged += ContainersCollectionObserver;
+            if (document == null)
+                return;
             
-            foreach (var container in document.Containers)
+            Debug("Add Document: " + document.Name);
+            
+            if (document.Containers != null)
             {
-                Add(container);
+                (document.Containers as ObservableCollection<Container>)
+                    .CollectionChanged += ContainersCollectionObserver;
+                
+                foreach (var container in document.Containers)
+                {
+                    Add(container);
+                }
             }
         }
 
         private void Remove(Document document)
         {
-            Debug("Remove Document: " + document.Name);
-            (document.Containers as ObservableCollection<Container>).CollectionChanged -= ContainersCollectionObserver;
+            if (document == null)
+                return;
             
-            foreach (var container in document.Containers)
+            Debug("Remove Document: " + document.Name);
+            
+            if (document.Containers != null)
             {
-                Remove(container);
+                (document.Containers as ObservableCollection<Container>).CollectionChanged -= ContainersCollectionObserver;
+                
+                foreach (var container in document.Containers)
+                {
+                    Remove(container);
+                }
             }
         }
 
         private void Add(Container container)
         {
+            if (container == null)
+                return;
+            
             //container.PropertyChanged += ContainerObserver;
-            container.Background.PropertyChanged += ContainerBackgroudObserver;
+            
+            if (container.Background != null)
+            {
+                container.Background.PropertyChanged += ContainerBackgroudObserver;
+            }
+            
             Debug("Add Container: " + container.Name);
-            Add(container.Layers);
-            (container.Layers as ObservableCollection<Layer>).CollectionChanged += LayersCollectionObserver;
-            Add(container.Properties);
-            (container.Properties as ObservableCollection<ShapeProperty>).CollectionChanged += PropertiesCollectionObserver;
+            
+            if (container.Layers != null)
+            {
+                Add(container.Layers);
+                (container.Layers as ObservableCollection<Layer>).CollectionChanged += LayersCollectionObserver;
+            }
+            
+            if (container.Properties != null)
+            {
+                Add(container.Properties);
+                (container.Properties as ObservableCollection<ShapeProperty>).CollectionChanged += PropertiesCollectionObserver;
+            }
+            
             //Add(container.WorkingLayer);
         }
 
         private void Remove(Container container)
         {
+            if (container == null)
+                return;
+            
             //container.PropertyChanged -= ContainerObserver;
-            container.Background.PropertyChanged -= ContainerBackgroudObserver;
+            
+            if (container.Background != null)
+            {
+                container.Background.PropertyChanged -= ContainerBackgroudObserver;
+            }
+            
             Debug("Remove Container: " + container.Name);
-            Add(container.Layers);
-            (container.Layers as ObservableCollection<Layer>).CollectionChanged -= LayersCollectionObserver;
-            Remove(container.Properties);
-            (container.Properties as ObservableCollection<ShapeProperty>).CollectionChanged -= PropertiesCollectionObserver;
+            
+            if (container.Layers != null)
+            {
+                Add(container.Layers);
+                (container.Layers as ObservableCollection<Layer>).CollectionChanged -= LayersCollectionObserver;
+            }
+            
+            if (container.Properties != null)
+            {
+                Remove(container.Properties);
+                (container.Properties as ObservableCollection<ShapeProperty>).CollectionChanged -= PropertiesCollectionObserver;
+            }
+            
             //Remove(container.WorkingLayer);
         }
 
         private void Add(Layer layer)
         {
+            if (layer == null)
+                return;
+            
             layer.PropertyChanged += LayerObserver;
+            
             Debug("Add Layer: " + layer.Name);
-            Add(layer.Shapes);
-            (layer.Shapes as ObservableCollection<BaseShape>).CollectionChanged += ShapesCollectionObserver;
+            
+            if (layer.Shapes != null)
+            {
+                Add(layer.Shapes);
+                (layer.Shapes as ObservableCollection<BaseShape>).CollectionChanged += ShapesCollectionObserver;
+            }
         }
 
         private void Remove(Layer layer)
         {
+            if (layer == null)
+                return;
+            
             layer.PropertyChanged -= LayerObserver;
+            
             Debug("Remove Layer: " + layer.Name);
-            Remove(layer.Shapes);
-            (layer.Shapes as ObservableCollection<BaseShape>).CollectionChanged -= ShapesCollectionObserver;
+            
+            if (layer.Shapes != null)
+            {
+                Remove(layer.Shapes);
+                (layer.Shapes as ObservableCollection<BaseShape>).CollectionChanged -= ShapesCollectionObserver;
+            }
         }
 
         private void Add(BaseShape shape)
         {
+            if (shape == null)
+                return;
+            
             shape.PropertyChanged += ShapeObserver;
-            Add(shape.Properties);
-            (shape.Properties as ObservableCollection<ShapeProperty>).CollectionChanged += PropertiesCollectionObserver; 
+
+            if (shape.Bindings != null)
+            {
+                Add(shape.Bindings);
+                (shape.Bindings as ObservableCollection<ShapeBinding>).CollectionChanged += BindingsCollectionObserver;
+            }
+            
+            if (shape.Properties != null)
+            {
+                Add(shape.Properties);
+                (shape.Properties as ObservableCollection<ShapeProperty>).CollectionChanged += PropertiesCollectionObserver; 
+            }
             
             if (shape is XPoint)
             {
                 var point = shape as XPoint;
-                point.Shape.PropertyChanged += ShapeObserver;
+                if (point.Shape != null)
+                {
+                    point.Shape.PropertyChanged += ShapeObserver;
+                }
             }
             else if (shape is XLine)
             {
                 var line = shape as XLine;
-                line.Start.PropertyChanged += ShapeObserver;
-                line.End.PropertyChanged += ShapeObserver;
+                
+                if (line.Start != null)
+                {
+                    line.Start.PropertyChanged += ShapeObserver;
+                }
+                
+                if (line.End != null)
+                {
+                    line.End.PropertyChanged += ShapeObserver;
+                }
             }
             else if (shape is XRectangle)
             {
                 var rectangle = shape as XRectangle;
-                rectangle.TopLeft.PropertyChanged += ShapeObserver;
-                rectangle.BottomRight.PropertyChanged += ShapeObserver;
+                
+                if (rectangle.TopLeft != null)
+                {
+                    rectangle.TopLeft.PropertyChanged += ShapeObserver;
+                }
+                
+                if (rectangle.BottomRight != null)
+                {
+                    rectangle.BottomRight.PropertyChanged += ShapeObserver;
+                }
             }
             else if (shape is XEllipse)
             {
                 var ellipse = shape as XEllipse;
-                ellipse.TopLeft.PropertyChanged += ShapeObserver;
-                ellipse.BottomRight.PropertyChanged += ShapeObserver;
+
+                if (ellipse.TopLeft != null)
+                {
+                    ellipse.TopLeft.PropertyChanged += ShapeObserver;
+                }
+                
+                if (ellipse.BottomRight != null)
+                {
+                    ellipse.BottomRight.PropertyChanged += ShapeObserver;
+                }
             }
             else if (shape is XArc)
             {
                 var arc = shape as XArc;
-                arc.Point1.PropertyChanged += ShapeObserver;
-                arc.Point2.PropertyChanged += ShapeObserver;
-                arc.Point3.PropertyChanged += ShapeObserver;
-                arc.Point4.PropertyChanged += ShapeObserver;
+                
+                if (arc.Point1 != null)
+                {
+                    arc.Point1.PropertyChanged += ShapeObserver;
+                }
+                
+                if (arc.Point2 != null)
+                {
+                    arc.Point2.PropertyChanged += ShapeObserver;
+                }
+                
+                if (arc.Point3 != null)
+                {
+                    arc.Point3.PropertyChanged += ShapeObserver;
+                }
+                
+                if (arc.Point4 != null)
+                {
+                    arc.Point4.PropertyChanged += ShapeObserver;
+                }
             }
             else if (shape is XBezier)
             {
                 var bezier = shape as XBezier;
-                bezier.Point1.PropertyChanged += ShapeObserver;
-                bezier.Point2.PropertyChanged += ShapeObserver;
-                bezier.Point3.PropertyChanged += ShapeObserver;
-                bezier.Point4.PropertyChanged += ShapeObserver;
+
+                if (bezier.Point1 != null)
+                {
+                    bezier.Point1.PropertyChanged += ShapeObserver;
+                }
+                
+                if (bezier.Point2 != null)
+                {
+                    bezier.Point2.PropertyChanged += ShapeObserver;
+                }
+                
+                if (bezier.Point3 != null)
+                {
+                    bezier.Point3.PropertyChanged += ShapeObserver;
+                }
+                
+                if (bezier.Point4 != null)
+                {
+                    bezier.Point4.PropertyChanged += ShapeObserver;
+                }
             }
             else if (shape is XQBezier)
             {
                 var qbezier = shape as XQBezier;
-                qbezier.Point1.PropertyChanged += ShapeObserver;
-                qbezier.Point2.PropertyChanged += ShapeObserver;
-                qbezier.Point3.PropertyChanged += ShapeObserver;
+
+                if (qbezier.Point1 != null)
+                {
+                    qbezier.Point1.PropertyChanged += ShapeObserver;
+                }
+                
+                if (qbezier.Point2 != null)
+                {
+                    qbezier.Point2.PropertyChanged += ShapeObserver;
+                }
+                
+                if (qbezier.Point3 != null)
+                {
+                    qbezier.Point3.PropertyChanged += ShapeObserver;
+                }
             }
             else if (shape is XText)
             {
                 var text = shape as XText;
-                text.TopLeft.PropertyChanged += ShapeObserver;
-                text.BottomRight.PropertyChanged += ShapeObserver;
+
+                if (text.TopLeft != null)
+                {
+                    text.TopLeft.PropertyChanged += ShapeObserver;
+                }
+                
+                if (text.BottomRight != null)
+                {
+                    text.BottomRight.PropertyChanged += ShapeObserver;
+                }
             }
             else if (shape is XImage)
             {
                 var image = shape as XImage;
-                image.TopLeft.PropertyChanged += ShapeObserver;
-                image.BottomRight.PropertyChanged += ShapeObserver;
+ 
+                if (image.TopLeft != null)
+                {
+                    image.TopLeft.PropertyChanged += ShapeObserver;
+                }
+                
+                if (image.BottomRight != null)
+                {
+                    image.BottomRight.PropertyChanged += ShapeObserver;
+                }
             }
             else if (shape is XGroup)
             {
                 var group = shape as XGroup;
-                Add(group.Shapes);
-                Add(group.Connectors);
-                (group.Shapes as ObservableCollection<BaseShape>).CollectionChanged += ShapesCollectionObserver;
-                (group.Connectors as ObservableCollection<XPoint>).CollectionChanged += ShapesCollectionObserver;
+                
+                if (group != null)
+                {
+                    if (group.Shapes != null)
+                    {
+                        Add(group.Shapes);
+                        (group.Shapes as ObservableCollection<BaseShape>).CollectionChanged += ShapesCollectionObserver;
+                    }
+                    
+                    if (group.Connectors != null)
+                    {
+                        Add(group.Connectors);
+                        (group.Connectors as ObservableCollection<XPoint>).CollectionChanged += ShapesCollectionObserver;
+                    }
+                }
             }
 
             Debug("Add Shape: " + shape.GetType());
@@ -478,146 +975,430 @@ namespace Test2d
 
         private void Remove(BaseShape shape)
         {
+            if (shape == null)
+                return;
+            
             shape.PropertyChanged -= ShapeObserver;
-            Remove(shape.Properties);
-            (shape.Properties as ObservableCollection<ShapeProperty>).CollectionChanged -= PropertiesCollectionObserver;
+
+            if (shape.Bindings != null)
+            {
+                Remove(shape.Bindings);
+                (shape.Bindings as ObservableCollection<ShapeBinding>).CollectionChanged -= BindingsCollectionObserver;
+            }
+            
+            if (shape.Properties != null)
+            {
+                Remove(shape.Properties);
+                (shape.Properties as ObservableCollection<ShapeProperty>).CollectionChanged -= PropertiesCollectionObserver; 
+            }
             
             if (shape is XPoint)
             {
                 var point = shape as XPoint;
-                point.Shape.PropertyChanged -= ShapeObserver;
+                if (point.Shape != null)
+                {
+                    point.Shape.PropertyChanged -= ShapeObserver;
+                }
             }
             else if (shape is XLine)
             {
                 var line = shape as XLine;
-                line.Start.PropertyChanged -= ShapeObserver;
-                line.End.PropertyChanged -= ShapeObserver;
+                
+                if (line.Start != null)
+                {
+                    line.Start.PropertyChanged -= ShapeObserver;
+                }
+                
+                if (line.End != null)
+                {
+                    line.End.PropertyChanged -= ShapeObserver;
+                }
             }
             else if (shape is XRectangle)
             {
                 var rectangle = shape as XRectangle;
-                rectangle.TopLeft.PropertyChanged -= ShapeObserver;
-                rectangle.BottomRight.PropertyChanged -= ShapeObserver;
+                
+                if (rectangle.TopLeft != null)
+                {
+                    rectangle.TopLeft.PropertyChanged -= ShapeObserver;
+                }
+                
+                if (rectangle.BottomRight != null)
+                {
+                    rectangle.BottomRight.PropertyChanged -= ShapeObserver;
+                }
             }
             else if (shape is XEllipse)
             {
                 var ellipse = shape as XEllipse;
-                ellipse.TopLeft.PropertyChanged -= ShapeObserver;
-                ellipse.BottomRight.PropertyChanged -= ShapeObserver;
+
+                if (ellipse.TopLeft != null)
+                {
+                    ellipse.TopLeft.PropertyChanged -= ShapeObserver;
+                }
+                
+                if (ellipse.BottomRight != null)
+                {
+                    ellipse.BottomRight.PropertyChanged -= ShapeObserver;
+                }
             }
             else if (shape is XArc)
             {
                 var arc = shape as XArc;
-                arc.Point1.PropertyChanged -= ShapeObserver;
-                arc.Point2.PropertyChanged -= ShapeObserver;
-                arc.Point3.PropertyChanged -= ShapeObserver;
-                arc.Point4.PropertyChanged -= ShapeObserver;
+                
+                if (arc.Point1 != null)
+                {
+                    arc.Point1.PropertyChanged -= ShapeObserver;
+                }
+                
+                if (arc.Point2 != null)
+                {
+                    arc.Point2.PropertyChanged -= ShapeObserver;
+                }
+                
+                if (arc.Point3 != null)
+                {
+                    arc.Point3.PropertyChanged -= ShapeObserver;
+                }
+                
+                if (arc.Point4 != null)
+                {
+                    arc.Point4.PropertyChanged -= ShapeObserver;
+                }
             }
             else if (shape is XBezier)
             {
                 var bezier = shape as XBezier;
-                bezier.Point1.PropertyChanged -= ShapeObserver;
-                bezier.Point2.PropertyChanged -= ShapeObserver;
-                bezier.Point3.PropertyChanged -= ShapeObserver;
-                bezier.Point4.PropertyChanged -= ShapeObserver;
+
+                if (bezier.Point1 != null)
+                {
+                    bezier.Point1.PropertyChanged -= ShapeObserver;
+                }
+                
+                if (bezier.Point2 != null)
+                {
+                    bezier.Point2.PropertyChanged -= ShapeObserver;
+                }
+                
+                if (bezier.Point3 != null)
+                {
+                    bezier.Point3.PropertyChanged -= ShapeObserver;
+                }
+                
+                if (bezier.Point4 != null)
+                {
+                    bezier.Point4.PropertyChanged -= ShapeObserver;
+                }
             }
             else if (shape is XQBezier)
             {
                 var qbezier = shape as XQBezier;
-                qbezier.Point1.PropertyChanged -= ShapeObserver;
-                qbezier.Point2.PropertyChanged -= ShapeObserver;
-                qbezier.Point3.PropertyChanged -= ShapeObserver;
+
+                if (qbezier.Point1 != null)
+                {
+                    qbezier.Point1.PropertyChanged -= ShapeObserver;
+                }
+                
+                if (qbezier.Point2 != null)
+                {
+                    qbezier.Point2.PropertyChanged -= ShapeObserver;
+                }
+                
+                if (qbezier.Point3 != null)
+                {
+                    qbezier.Point3.PropertyChanged -= ShapeObserver;
+                }
             }
             else if (shape is XText)
             {
                 var text = shape as XText;
-                text.TopLeft.PropertyChanged -= ShapeObserver;
-                text.BottomRight.PropertyChanged -= ShapeObserver;
+
+                if (text.TopLeft != null)
+                {
+                    text.TopLeft.PropertyChanged -= ShapeObserver;
+                }
+                
+                if (text.BottomRight != null)
+                {
+                    text.BottomRight.PropertyChanged -= ShapeObserver;
+                }
             }
             else if (shape is XImage)
             {
                 var image = shape as XImage;
-                image.TopLeft.PropertyChanged -= ShapeObserver;
-                image.BottomRight.PropertyChanged -= ShapeObserver;
+ 
+                if (image.TopLeft != null)
+                {
+                    image.TopLeft.PropertyChanged -= ShapeObserver;
+                }
+                
+                if (image.BottomRight != null)
+                {
+                    image.BottomRight.PropertyChanged -= ShapeObserver;
+                }
             }
             else if (shape is XGroup)
             {
                 var group = shape as XGroup;
-                Remove(group.Shapes);
-                Remove(group.Connectors);
-                (group.Shapes as ObservableCollection<BaseShape>).CollectionChanged -= ShapesCollectionObserver;
-                (group.Connectors as ObservableCollection<XPoint>).CollectionChanged -= ShapesCollectionObserver;
+                
+                if (group != null)
+                {
+                    if (group.Shapes != null)
+                    {
+                        Remove(group.Shapes);
+                        (group.Shapes as ObservableCollection<BaseShape>).CollectionChanged -= ShapesCollectionObserver;
+                    }
+                    
+                    if (group.Connectors != null)
+                    {
+                        Remove(group.Connectors);
+                        (group.Connectors as ObservableCollection<XPoint>).CollectionChanged -= ShapesCollectionObserver;
+                    }
+                }
             }
-            
+
             Debug("Remove Shape: " + shape.GetType());
         }
 
         private void Add(ShapeStyleGroup sg)
         {
-            Add(sg.Styles);
-            (sg.Styles as ObservableCollection<ShapeStyle>).CollectionChanged += StylesCollectionObserver;
+            if (sg == null)
+                return;
+            
+            if (sg.Styles != null)
+            {
+                Add(sg.Styles);
+                (sg.Styles as ObservableCollection<ShapeStyle>).CollectionChanged += StylesCollectionObserver;
+            }
+            
             sg.PropertyChanged += StyleGroupObserver;
             Debug("Add Style Group: " + sg.Name);
         }
 
         private void Remove(ShapeStyleGroup sg)
         {
-            Remove(sg.Styles);
-            (sg.Styles as ObservableCollection<ShapeStyle>).CollectionChanged -= StylesCollectionObserver;
+            if (sg == null)
+                return;
+            
+            if (sg.Styles != null)
+            {
+                Remove(sg.Styles);
+                (sg.Styles as ObservableCollection<ShapeStyle>).CollectionChanged -= StylesCollectionObserver;
+            }
+            
             sg.PropertyChanged -= StyleGroupObserver;
             Debug("Remove Style Group: " + sg.Name);
         }
 
         private void Add(ShapeStyle style)
         {
+            if (style == null)
+                return;
+            
             style.PropertyChanged += StyleObserver;
-            style.Stroke.PropertyChanged += StyleObserver;
-            style.Fill.PropertyChanged += StyleObserver;
-            style.LineStyle.PropertyChanged += StyleObserver;
-            style.LineStyle.StartArrowStyle.PropertyChanged += StyleObserver;
-            style.LineStyle.EndArrowStyle.PropertyChanged += StyleObserver;
-            style.TextStyle.PropertyChanged += StyleObserver;
+            
+            if (style.Stroke != null)
+            {
+                style.Stroke.PropertyChanged += StyleObserver;
+            }
+            
+            if (style.Fill != null)
+            {
+                style.Fill.PropertyChanged += StyleObserver;
+            }
+            
+            if (style.LineStyle != null)
+            {
+                style.LineStyle.PropertyChanged += StyleObserver;
+                
+                if (style.LineStyle.StartArrowStyle != null)
+                {
+                    style.LineStyle.StartArrowStyle.PropertyChanged += StyleObserver;
+                }
+            
+                if (style.LineStyle.EndArrowStyle != null)
+                {
+                    style.LineStyle.EndArrowStyle.PropertyChanged += StyleObserver;
+                }
+            }
+        
+            if (style.TextStyle != null)
+            {
+                style.TextStyle.PropertyChanged += StyleObserver;
+            }
+            
             Debug("Add Style: " + style.Name);
         }
 
         private void Remove(ShapeStyle style)
         {
+            if (style == null)
+                return;
+            
             style.PropertyChanged -= StyleObserver;
-            style.Stroke.PropertyChanged -= StyleObserver;
-            style.Fill.PropertyChanged -= StyleObserver;
-            style.LineStyle.PropertyChanged -= StyleObserver;
-            style.LineStyle.StartArrowStyle.PropertyChanged -= StyleObserver;
-            style.LineStyle.EndArrowStyle.PropertyChanged -= StyleObserver;
-            style.TextStyle.PropertyChanged -= StyleObserver;
-            Debug("Remove Style: " + style.Name);
+            
+            if (style.Stroke != null)
+            {
+                style.Stroke.PropertyChanged -= StyleObserver;
+            }
+            
+            if (style.Fill != null)
+            {
+                style.Fill.PropertyChanged -= StyleObserver;
+            }
+            
+            if (style.LineStyle != null)
+            {
+                style.LineStyle.PropertyChanged -= StyleObserver;
+                
+                if (style.LineStyle.StartArrowStyle != null)
+                {
+                    style.LineStyle.StartArrowStyle.PropertyChanged -= StyleObserver;
+                }
+            
+                if (style.LineStyle.EndArrowStyle != null)
+                {
+                    style.LineStyle.EndArrowStyle.PropertyChanged -= StyleObserver;
+                }
+            }
+        
+            if (style.TextStyle != null)
+            {
+                style.TextStyle.PropertyChanged -= StyleObserver;
+            }
+            
+            Debug("Removee Style: " + style.Name);
         }
 
+        private void Add(ShapeBinding binding)
+        {
+            if (binding == null)
+                return;
+            
+            binding.PropertyChanged += BindingObserver;
+            Debug("Add Bnding: " + binding.Property + ", path: " + binding.Path);
+        }
+
+        private void Remove(ShapeBinding binding)
+        {
+            if (binding == null)
+                return;
+            
+            binding.PropertyChanged += BindingObserver;
+            Debug("Remove Bnding: " + binding.Property + ", path: " + binding.Path);
+        }
+   
         private void Add(ShapeProperty property)
         {
+            if (property == null)
+                return;
+            
             property.PropertyChanged += PropertyObserver;
-            Debug("Add Property: " + property.Name + ", type: " + property.Data.GetType());
+            Debug("Add Property: " + property.Name + ", type: " + property.Value.GetType());
         }
 
         private void Remove(ShapeProperty property)
         {
+            if (property == null)
+                return;
+            
             property.PropertyChanged += PropertyObserver;
-            Debug("Remove Property: " + property.Name + ", type: " + property.Data.GetType());
+            Debug("Remove Property: " + property.Name + ", type: " + property.Value.GetType());
         }
-
-        private void Add(KeyValuePair<string, ShapeProperty> record)
+   
+        private void Add(IEnumerable<Database> databases)
         {
-            record.Value.PropertyChanged += PropertyObserver;
-            Debug("Add Record: " + record.Key + ", type: " + record.Value.Data.GetType());
+            if (databases == null)
+                return;
+            
+            foreach (var database in databases)
+            {
+                Add(database);
+            }
         }
-
-        private void Remove(KeyValuePair<string, ShapeProperty> record)
+        
+        private void Remove(IEnumerable<Database> databases)
         {
-            record.Value.PropertyChanged += PropertyObserver;
-            Debug("Remove Record: " + record.Key + ", type: " + record.Value.Data.GetType());
+            if (databases == null)
+                return;
+            
+            foreach (var database in databases)
+            {
+                Remove(database);
+            }
         }
 
+        private void Add(IEnumerable<Column> columns)
+        {
+            if (columns == null)
+                return;
+            
+            foreach (var column in columns)
+            {
+                Add(column);
+            }
+        }
+        
+        private void Remove(IEnumerable<Column> columns)
+        {
+            if (columns == null)
+                return;
+            
+            foreach (var column in columns)
+            {
+                Remove(column);
+            }
+        }
+
+        private void Add(IEnumerable<Record> records)
+        {
+            if (records == null)
+                return;
+            
+            foreach (var record in records)
+            {
+                Add(record);
+            }
+        }
+        
+        private void Remove(IEnumerable<Record> records)
+        {
+            if (records == null)
+                return;
+            
+            foreach (var record in records)
+            {
+                Remove(record);
+            }
+        }
+ 
+        private void Add(IEnumerable<Value> values)
+        {
+            if (values == null)
+                return;
+            
+            foreach (var value in values)
+            {
+                Add(value);
+            }
+        }
+        
+        private void Remove(IEnumerable<Value> values)
+        {
+            if (values == null)
+                return;
+            
+            foreach (var value in values)
+            {
+                Remove(value);
+            }
+        }
+        
         private void Add(IEnumerable<Document> documents)
         {
+            if (documents == null)
+                return;
+            
             foreach (var document in documents)
             {
                 Add(document);
@@ -626,6 +1407,9 @@ namespace Test2d
 
         private void Remove(IEnumerable<Document> documents)
         {
+            if (documents == null)
+                return;
+            
             foreach (var document in documents)
             {
                 Remove(document);
@@ -634,6 +1418,9 @@ namespace Test2d
 
         private void Add(IEnumerable<Container> containers)
         {
+            if (containers == null)
+                return;
+            
             foreach (var container in containers)
             {
                 Add(container);
@@ -642,6 +1429,9 @@ namespace Test2d
 
         private void Remove(IEnumerable<Container> containers)
         {
+            if (containers == null)
+                return;
+            
             foreach (var container in containers)
             {
                 Remove(container);
@@ -650,6 +1440,9 @@ namespace Test2d
 
         private void Add(IEnumerable<Layer> layers)
         {
+            if (layers == null)
+                return;
+
             foreach (var layer in layers)
             {
                 Add(layer);
@@ -658,6 +1451,9 @@ namespace Test2d
 
         private void Remove(IEnumerable<Layer> layers)
         {
+            if (layers == null)
+                return;
+            
             foreach (var layer in layers)
             {
                 Remove(layer);
@@ -666,6 +1462,9 @@ namespace Test2d
 
         private void Add(IEnumerable<BaseShape> shapes)
         {
+            if (shapes == null)
+                return;
+            
             foreach (var shape in shapes)
             {
                 Add(shape);
@@ -674,6 +1473,9 @@ namespace Test2d
 
         private void Remove(IEnumerable<BaseShape> shapes)
         {
+            if (shapes == null)
+                return;
+            
             foreach (var shape in shapes)
             {
                 Remove(shape);
@@ -682,6 +1484,9 @@ namespace Test2d
 
         private void Add(IEnumerable<ShapeStyle> styles)
         {
+            if (styles == null)
+                return;
+            
             foreach (var style in styles)
             {
                 Add(style);
@@ -690,6 +1495,9 @@ namespace Test2d
 
         private void Remove(IEnumerable<ShapeStyle> styles)
         {
+            if (styles == null)
+                return;
+            
             foreach (var style in styles)
             {
                 Remove(style);
@@ -698,6 +1506,9 @@ namespace Test2d
 
         private void Add(IEnumerable<ShapeStyleGroup> sgs)
         {
+            if (sgs == null)
+                return;
+            
             foreach (var sg in sgs)
             {
                 Add(sg);
@@ -706,14 +1517,42 @@ namespace Test2d
 
         private void Remove(IEnumerable<ShapeStyleGroup> sgs)
         {
+            if (sgs == null)
+                return;
+            
             foreach (var sg in sgs)
             {
                 Remove(sg);
             }
         }
 
+        private void Add(IEnumerable<ShapeBinding> bindings)
+        {
+            if (bindings == null)
+                return;
+            
+            foreach (var binding in bindings)
+            {
+                Add(binding);
+            }
+        }
+
+        private void Remove(IEnumerable<ShapeBinding> bindings)
+        {
+            if (bindings == null)
+                return;
+            
+            foreach (var binding in bindings)
+            {
+                Remove(binding);
+            }
+        }
+
         private void Add(IEnumerable<ShapeProperty> properties)
         {
+            if (properties == null)
+                return;
+            
             foreach (var property in properties)
             {
                 Add(property);
@@ -722,6 +1561,9 @@ namespace Test2d
 
         private void Remove(IEnumerable<ShapeProperty> properties)
         {
+            if (properties == null)
+                return;
+            
             foreach (var property in properties)
             {
                 Remove(property);

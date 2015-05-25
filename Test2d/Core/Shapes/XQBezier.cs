@@ -10,25 +10,25 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public class XImage : BaseShape
+    public class XQBezier : BaseShape
     {
-        private XPoint _topLeft;
-        private XPoint _bottomRight;
+        private XPoint _point1;
+        private XPoint _point2;
+        private XPoint _point3;
         private bool _isFilled;
-        private Uri _path;
 
         /// <summary>
         /// 
         /// </summary>
-        public XPoint TopLeft
+        public XPoint Point1
         {
-            get { return _topLeft; }
+            get { return _point1; }
             set
             {
-                if (value != _topLeft)
+                if (value != _point1)
                 {
-                    _topLeft = value;
-                    Notify("TopLeft");
+                    _point1 = value;
+                    Notify("Point1");
                 }
             }
         }
@@ -36,15 +36,31 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public XPoint BottomRight
+        public XPoint Point2
         {
-            get { return _bottomRight; }
+            get { return _point2; }
             set
             {
-                if (value != _bottomRight)
+                if (value != _point2)
                 {
-                    _bottomRight = value;
-                    Notify("BottomRight");
+                    _point2 = value;
+                    Notify("Point2");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public XPoint Point3
+        {
+            get { return _point3; }
+            set
+            {
+                if (value != _point3)
+                {
+                    _point3 = value;
+                    Notify("Point3");
                 }
             }
         }
@@ -68,31 +84,15 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public Uri Path
-        {
-            get { return _path; }
-            set
-            {
-                if (value != _path)
-                {
-                    _path = value;
-                    Notify("Path");
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="dc"></param>
         /// <param name="renderer"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, Record r)
         {
-            var record = r != null ? r : this.Record;
+            var record = r ?? this.Record;
 
             if (State.HasFlag(ShapeState.Visible))
             {
@@ -103,25 +103,31 @@ namespace Test2d
             {
                 if (this == renderer.SelectedShape)
                 {
-                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
-                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
+                    _point1.Draw(dc, renderer, dx, dy, db, record);
+                    _point2.Draw(dc, renderer, dx, dy, db, record);
+                    _point3.Draw(dc, renderer, dx, dy, db, record);
                 }
-                else if (_topLeft == renderer.SelectedShape)
+                else if (_point1 == renderer.SelectedShape)
                 {
-                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
+                    _point1.Draw(dc, renderer, dx, dy, db, record);
                 }
-                else if (_bottomRight == renderer.SelectedShape)
+                else if (_point2 == renderer.SelectedShape)
                 {
-                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
+                    _point2.Draw(dc, renderer, dx, dy, db, record);
+                }
+                else if (_point3 == renderer.SelectedShape)
+                {
+                    _point3.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
-
+            
             if (renderer.SelectedShapes != null)
             {
                 if (renderer.SelectedShapes.Contains(this))
                 {
-                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
-                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
+                    _point1.Draw(dc, renderer, dx, dy, db, record);
+                    _point2.Draw(dc, renderer, dx, dy, db, record);
+                    _point3.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
         }
@@ -133,8 +139,9 @@ namespace Test2d
         /// <param name="dy"></param>
         public override void Move(double dx, double dy)
         {
-            TopLeft.Move(dx, dy);
-            BottomRight.Move(dx, dy);
+            Point1.Move(dx, dy);
+            Point2.Move(dx, dy);
+            Point3.Move(dx, dy);
         }
 
         /// <summary>
@@ -144,30 +151,32 @@ namespace Test2d
         /// <param name="y1"></param>
         /// <param name="x2"></param>
         /// <param name="y2"></param>
+        /// <param name="x3"></param>
+        /// <param name="y3"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
-        /// <param name="path"></param>
         /// <param name="isFilled"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static XImage Create(
+        public static XQBezier Create(
             double x1, double y1,
             double x2, double y2,
+            double x3, double y3,
             ShapeStyle style,
             BaseShape point,
-            Uri path,
             bool isFilled = false,
             string name = "")
         {
-            return new XImage()
+            return new XQBezier()
             {
                 Name = name,
                 Style = style,
+                Bindings = new ObservableCollection<ShapeBinding>(),
                 Properties = new ObservableCollection<ShapeProperty>(),
-                TopLeft = XPoint.Create(x1, y1, point),
-                BottomRight = XPoint.Create(x2, y2, point),
-                IsFilled = isFilled,
-                Path = path
+                Point1 = XPoint.Create(x1, y1, point),
+                Point2 = XPoint.Create(x2, y2, point),
+                Point3 = XPoint.Create(x3, y3, point),
+                IsFilled = isFilled
             };
         }
 
@@ -178,19 +187,17 @@ namespace Test2d
         /// <param name="y"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
-        /// <param name="path"></param>
         /// <param name="isFilled"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static XImage Create(
+        public static XQBezier Create(
             double x, double y,
             ShapeStyle style,
             BaseShape point,
-            Uri path,
             bool isFilled = false,
             string name = "")
         {
-            return Create(x, y, x, y, style, point, path, isFilled, name);
+            return Create(x, y, x, y, x, y, style, point, isFilled, name);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Test2d
     public class ShapeProperty : ObservableObject
     {
         private string _name;
-        private object _data;
+        private object _value;
 
         /// <summary>
         /// 
@@ -32,14 +32,14 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public object Data
+        public object Value
         {
-            get { return _data; }
+            get { return _value; }
             set
             {
-                if (value != _data)
+                if (value != _value)
                 {
-                    _data = value;
+                    _value = value;
                     Notify("Data");
                 }
             }
@@ -49,14 +49,14 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="data"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
-        public static ShapeProperty Create(string name, object data)
+        public static ShapeProperty Create(string name, object value)
         {
             return new ShapeProperty() 
             { 
                 Name = name,
-                Data = data 
+                Value = value 
             };
         }
 
@@ -66,7 +66,7 @@ namespace Test2d
         /// <returns></returns>
         public override string ToString() 
         { 
-            return Data.ToString(); 
+            return _value.ToString(); 
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public class XBezier : BaseShape
+    public class XArc : BaseShape
     {
         private XPoint _point1;
         private XPoint _point2;
@@ -107,9 +107,9 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, Record r)
         {
-            var record = r != null ? r : this.Record;
+            var record = r ?? this.Record;
 
             if (State.HasFlag(ShapeState.Visible))
             {
@@ -184,7 +184,7 @@ namespace Test2d
         /// <param name="isFilled"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static XBezier Create(
+        public static XArc Create(
             double x1, double y1,
             double x2, double y2,
             double x3, double y3,
@@ -194,10 +194,11 @@ namespace Test2d
             bool isFilled = false,
             string name = "")
         {
-            return new XBezier()
+            return new XArc()
             {
                 Name = name,
                 Style = style,
+                Bindings = new ObservableCollection<ShapeBinding>(),
                 Properties = new ObservableCollection<ShapeProperty>(),
                 Point1 = XPoint.Create(x1, y1, point),
                 Point2 = XPoint.Create(x2, y2, point),
@@ -217,7 +218,7 @@ namespace Test2d
         /// <param name="isFilled"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static XBezier Create(
+        public static XArc Create(
             double x, double y,
             ShapeStyle style,
             BaseShape point,

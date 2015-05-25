@@ -9,11 +9,11 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public class DataRecord : ObservableObject
+    public class Record : ObservableObject
     {
         private Guid _id;
-        private IList<string> _columns;
-        private IList<string> _data;
+        private IList<Column> _columns;
+        private IList<Value> _values;
 
         /// <summary>
         /// 
@@ -34,7 +34,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<string> Columns
+        public IList<Column> Columns
         {
             get { return _columns; }
             set
@@ -50,15 +50,15 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<string> Data
+        public IList<Value> Values
         {
-            get { return _data; }
+            get { return _values; }
             set
             {
-                if (value != _data)
+                if (value != _values)
                 {
-                    _data = value;
-                    Notify("Data");
+                    _values = value;
+                    Notify("Values");
                 }
             }
         }
@@ -67,17 +67,17 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="columns"></param>
-        /// <param name="data"></param>
+        /// <param name="values"></param>
         /// <returns></returns>
-        public static DataRecord Create(
-            IList<string> columns, 
-            IEnumerable<string> data)
+        public static Record Create(
+            IList<Column> columns, 
+            IEnumerable<Value> values)
         {
-            return new DataRecord()
+            return new Record()
             {
                 Id = Guid.NewGuid(),
                 Columns = columns,
-                Data = new ObservableCollection<string>(data)
+                Values = new ObservableCollection<Value>(values)
             };
         }
     }

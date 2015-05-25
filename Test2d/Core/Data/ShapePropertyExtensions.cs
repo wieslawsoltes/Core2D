@@ -22,12 +22,12 @@ namespace Test2d
             {
                 throw new ArgumentNullException();
             }
-            ShapeProperty property = group.Database.Where(p => p.Name == key).FirstOrDefault();
+            ShapeProperty property = group.Database.FirstOrDefault(p => p.Name == key);
             if (property != null
-                && property.Data != null
-                && property.Data is string)
+                && property.Value != null
+                && property.Value is string)
             {
-                return property.Data as string;
+                return property.Value as string;
             }
             else
             {
@@ -47,13 +47,13 @@ namespace Test2d
             {
                 throw new ArgumentNullException();
             }
-            ShapeProperty property = group.Database.Where(p => p.Name == key).FirstOrDefault();
+            ShapeProperty property = group.Database.FirstOrDefault(p => p.Name == key);
             int value;
             if (property != null
-                && property.Data != null
-                && property.Data is string)
+                && property.Value != null
+                && property.Value is string)
             {
-                if (!int.TryParse(property.Data as string, out value))
+                if (!int.TryParse(property.Value as string, out value))
                 {
                     throw new Exception(string.Format("Invalid format of {0} property.", key));
                 }
@@ -77,13 +77,13 @@ namespace Test2d
             {
                 throw new ArgumentNullException();
             }
-            ShapeProperty property = group.Database.Where(p => p.Name == key).FirstOrDefault();
+            ShapeProperty property = group.Database.FirstOrDefault(p => p.Name == key);
             double value;
             if (property != null
-                && property.Data != null
-                && property.Data is string)
+                && property.Value != null
+                && property.Value is string)
             {
-                if (!double.TryParse(property.Data as string, out value))
+                if (!double.TryParse(property.Value as string, out value))
                 {
                     throw new Exception(string.Format("Invalid format of {0} property.", key));
                 }

@@ -56,9 +56,9 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, Record r)
         {
-            var record = r != null ? r : this.Record;
+            var record = r ?? this.Record;
 
             if (State.HasFlag(ShapeState.Visible))
             {
@@ -125,6 +125,7 @@ namespace Test2d
             {
                 Name = name,
                 Style = style,
+                Bindings = new ObservableCollection<ShapeBinding>(),
                 Properties = new ObservableCollection<ShapeProperty>(),
                 Start = XPoint.Create(x1, y1, point),
                 End = XPoint.Create(x2, y2, point)

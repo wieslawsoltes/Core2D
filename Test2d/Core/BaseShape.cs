@@ -14,8 +14,9 @@ namespace Test2d
         private BaseShape _owner;
         private ShapeState _state = ShapeState.Visible | ShapeState.Printable | ShapeState.Standalone;
         private ShapeStyle _style;
+        private IList<ShapeBinding> _bindings;
         private IList<ShapeProperty> _properties;
-        private DataRecord _record;
+        private Record _record;
 
         /// <summary>
         /// Gets or sets shape name.
@@ -80,6 +81,22 @@ namespace Test2d
                 }
             }
         }
+        
+        /// <summary>
+        /// Gets or sets a colletion ShapeBinding that will be used during drawing.
+        /// </summary>
+        public IList<ShapeBinding> Bindings
+        {
+            get { return _bindings; }
+            set
+            {
+                if (value != _bindings)
+                {
+                    _bindings = value;
+                    Notify("Bindings");
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets a colletion ShapeProperty that will be used during drawing.
@@ -100,7 +117,7 @@ namespace Test2d
         /// <summary>
         /// Gets or sets shape data record.
         /// </summary>
-        public DataRecord Record
+        public Record Record
         {
             get { return _record; }
             set
@@ -122,7 +139,7 @@ namespace Test2d
         /// <param name="dy">The Y axis draw position osffset.</param>
         /// <param name="db">The properties database used for binding.</param>
         /// <param name="r">The external data record used for binding.</param>
-        public abstract void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, DataRecord r);
+        public abstract void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, Record r);
 
         /// <summary>
         /// Move shape position using dx,dy offset.

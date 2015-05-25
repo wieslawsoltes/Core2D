@@ -10,11 +10,12 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public class XQBezier : BaseShape
+    public class XBezier : BaseShape
     {
         private XPoint _point1;
         private XPoint _point2;
         private XPoint _point3;
+        private XPoint _point4;
         private bool _isFilled;
 
         /// <summary>
@@ -68,6 +69,22 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public XPoint Point4
+        {
+            get { return _point4; }
+            set
+            {
+                if (value != _point4)
+                {
+                    _point4 = value;
+                    Notify("Point4");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsFilled
         {
             get { return _isFilled; }
@@ -90,9 +107,9 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, Record r)
         {
-            var record = r != null ? r : this.Record;
+            var record = r ?? this.Record;
 
             if (State.HasFlag(ShapeState.Visible))
             {
@@ -106,6 +123,7 @@ namespace Test2d
                     _point1.Draw(dc, renderer, dx, dy, db, record);
                     _point2.Draw(dc, renderer, dx, dy, db, record);
                     _point3.Draw(dc, renderer, dx, dy, db, record);
+                    _point4.Draw(dc, renderer, dx, dy, db, record);
                 }
                 else if (_point1 == renderer.SelectedShape)
                 {
@@ -119,6 +137,10 @@ namespace Test2d
                 {
                     _point3.Draw(dc, renderer, dx, dy, db, record);
                 }
+                else if (_point4 == renderer.SelectedShape)
+                {
+                    _point4.Draw(dc, renderer, dx, dy, db, record);
+                }
             }
             
             if (renderer.SelectedShapes != null)
@@ -128,6 +150,7 @@ namespace Test2d
                     _point1.Draw(dc, renderer, dx, dy, db, record);
                     _point2.Draw(dc, renderer, dx, dy, db, record);
                     _point3.Draw(dc, renderer, dx, dy, db, record);
+                    _point4.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
         }
@@ -142,6 +165,7 @@ namespace Test2d
             Point1.Move(dx, dy);
             Point2.Move(dx, dy);
             Point3.Move(dx, dy);
+            Point4.Move(dx, dy);
         }
 
         /// <summary>
@@ -153,28 +177,33 @@ namespace Test2d
         /// <param name="y2"></param>
         /// <param name="x3"></param>
         /// <param name="y3"></param>
+        /// <param name="x4"></param>
+        /// <param name="y4"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
         /// <param name="isFilled"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static XQBezier Create(
+        public static XBezier Create(
             double x1, double y1,
             double x2, double y2,
             double x3, double y3,
+            double x4, double y4,
             ShapeStyle style,
             BaseShape point,
             bool isFilled = false,
             string name = "")
         {
-            return new XQBezier()
+            return new XBezier()
             {
                 Name = name,
                 Style = style,
+                Bindings = new ObservableCollection<ShapeBinding>(),
                 Properties = new ObservableCollection<ShapeProperty>(),
                 Point1 = XPoint.Create(x1, y1, point),
                 Point2 = XPoint.Create(x2, y2, point),
                 Point3 = XPoint.Create(x3, y3, point),
+                Point4 = XPoint.Create(x4, y4, point),
                 IsFilled = isFilled
             };
         }
@@ -189,14 +218,14 @@ namespace Test2d
         /// <param name="isFilled"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static XQBezier Create(
+        public static XBezier Create(
             double x, double y,
             ShapeStyle style,
             BaseShape point,
             bool isFilled = false,
             string name = "")
         {
-            return Create(x, y, x, y, x, y, style, point, isFilled, name);
+            return Create(x, y, x, y, x, y, x, y, style, point, isFilled, name);
         }
     }
 }

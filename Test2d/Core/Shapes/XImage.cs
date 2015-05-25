@@ -10,13 +10,12 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public class XText : BaseShape
+    public class XImage : BaseShape
     {
         private XPoint _topLeft;
         private XPoint _bottomRight;
         private bool _isFilled;
-        private string _text;
-        private string _textBinding;
+        private Uri _path;
 
         /// <summary>
         /// 
@@ -65,35 +64,19 @@ namespace Test2d
                 }
             }
         }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Text
-        {
-            get { return _text; }
-            set
-            {
-                if (value != _text)
-                {
-                    _text = value;
-                    Notify("Text");
-                }
-            }
-        }
 
         /// <summary>
         /// 
         /// </summary>
-        public string TextBinding
+        public Uri Path
         {
-            get { return _textBinding; }
+            get { return _path; }
             set
             {
-                if (value != _textBinding)
+                if (value != _path)
                 {
-                    _textBinding = value;
-                    Notify("TextBinding");
+                    _path = value;
+                    Notify("Path");
                 }
             }
         }
@@ -107,9 +90,9 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, DataRecord r)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, Record r)
         {
-            var record = r != null ? r : this.Record;
+            var record = r ?? this.Record;
 
             if (State.HasFlag(ShapeState.Visible))
             {
@@ -132,7 +115,7 @@ namespace Test2d
                     _bottomRight.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
-            
+
             if (renderer.SelectedShapes != null)
             {
                 if (renderer.SelectedShapes.Contains(this))
@@ -157,83 +140,35 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        /// <returns></returns>
-        public string Bind(IList<ShapeProperty> db, DataRecord r)
-        {
-            var record = r != null ? r : this.Record;
-
-            // try to bind to internal (this.Record) or external (r) data record using TextBinding key
-            if (record != null && !string.IsNullOrEmpty(this.TextBinding))
-            {
-                if (record.Columns != null
-                    && record.Data != null
-                    && record.Columns.Count == record.Data.Count)
-
-                    for (int i = 0; i < record.Columns.Count; i++)
-                {
-                    if (record.Columns[i] == this.TextBinding)
-                    {
-                        return record.Data[i];
-                    }
-                }
-            }
-
-            // try to bind to external properties database using TextBinding key
-            if (db != null && !string.IsNullOrEmpty(this.TextBinding))
-            {
-                var result = db.Where(p => p.Name == this.TextBinding).FirstOrDefault();
-                if (result != null && result.Data != null)
-                {
-                    return result.Data.ToString();
-                }
-            }
-
-            // try to bind to Properties using Text as formatting
-            if (this.Properties != null && this.Properties.Count > 0)
-            {
-                try
-                {
-                    return string.Format(this.Text, this.Properties.Select(x => x.Data).ToArray());
-                }
-                catch (FormatException) { }
-            }
-
-            return this.Text;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
         /// <param name="x2"></param>
         /// <param name="y2"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
-        /// <param name="text"></param>
+        /// <param name="path"></param>
         /// <param name="isFilled"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static XText Create(
+        public static XImage Create(
             double x1, double y1,
             double x2, double y2,
             ShapeStyle style,
             BaseShape point,
-            string text,
+            Uri path,
             bool isFilled = false,
             string name = "")
         {
-            return new XText()
+            return new XImage()
             {
                 Name = name,
                 Style = style,
+                Bindings = new ObservableCollection<ShapeBinding>(),
                 Properties = new ObservableCollection<ShapeProperty>(),
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
                 IsFilled = isFilled,
-                Text = text
+                Path = path
             };
         }
 
@@ -244,19 +179,19 @@ namespace Test2d
         /// <param name="y"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
-        /// <param name="text"></param>
+        /// <param name="path"></param>
         /// <param name="isFilled"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static XText Create(
+        public static XImage Create(
             double x, double y,
             ShapeStyle style,
             BaseShape point,
-            string text,
+            Uri path,
             bool isFilled = false,
             string name = "")
         {
-            return Create(x, y, x, y, style, point, text, isFilled, name);
+            return Create(x, y, x, y, style, point, path, isFilled, name);
         }
     }
 }

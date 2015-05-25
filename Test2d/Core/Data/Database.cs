@@ -12,8 +12,8 @@ namespace Test2d
     public class Database : ObservableObject
     {
         private string _name;
-        private IList<string> _columns;
-        private IList<DataRecord> _records;
+        private IList<Column> _columns;
+        private IList<Record> _records;
 
         /// <summary>
         /// 
@@ -34,7 +34,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<string> Columns
+        public IList<Column> Columns
         {
             get { return _columns; }
             set
@@ -50,7 +50,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<DataRecord> Records
+        public IList<Record> Records
         {
             get { return _records; }
             set
@@ -73,8 +73,8 @@ namespace Test2d
             return new Database()
             {
                 Name = name,
-                Columns = new ObservableCollection<string>(),
-                Records = new ObservableCollection<DataRecord>()
+                Columns = new ObservableCollection<Column>(),
+                Records = new ObservableCollection<Record>()
             };
         }
 
@@ -87,8 +87,8 @@ namespace Test2d
         /// <returns></returns>
         public static Database Create(
             string name, 
-            IList<string> columns, 
-            IList<DataRecord> records)
+            IList<Column> columns, 
+            IList<Record> records)
         {
             return new Database()
             {
