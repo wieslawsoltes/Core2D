@@ -125,7 +125,7 @@ namespace Test2d
                 if (value != _record)
                 {
                     _record = value;
-                    Notify("Data");
+                    Notify("Record");
                 }
             }
         }
