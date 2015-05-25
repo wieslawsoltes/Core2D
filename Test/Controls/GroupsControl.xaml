@@ -8,8 +8,16 @@
              xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="200">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Test;component/Dictionaries/Test2dDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -28,9 +36,23 @@
             <MenuItem Command="{Binding Commands.AddGroupLibraryCommand}" Header="+"/>
             <MenuItem Command="{Binding Commands.RemoveGroupLibraryCommand}" Header="-"/>
         </Menu>
+        <ContentControl Content="{Binding Editor.Project.CurrentGroupLibrary}"
+                        Grid.Row="1" 
+                        Margin="2,0,2,0">
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
         <ComboBox ItemsSource="{Binding Editor.Project.GroupLibraries}" 
                   SelectedItem="{Binding Editor.Project.CurrentGroupLibrary}" 
-                  Grid.Row="1" 
+                  Grid.Row="2" 
                   Margin="2,2,2,2">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -38,7 +60,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="2" Margin="2,0,2,0">
+        <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="3" Margin="2,0,2,0">
             <MenuItem Header="import">
                 <MenuItem Header="_Group" Command="{Binding Commands.ImportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.Groups}" InputGestureText=""/>
                 <MenuItem Header="G_roups" Command="{Binding Commands.ImportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.Groups}" InputGestureText=""/>
@@ -57,7 +79,7 @@
             SelectedItem="{Binding DataContext.Editor.Project.CurrentGroupLibrary.CurrentGroup, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
             BorderBrush="{x:Null}"
             HorizontalContentAlignment="Stretch"
-            Grid.Row="3">
+            Grid.Row="4">
             <controls:XGroupDragAndDropListBox.Resources>
                 <ContextMenu x:Key="GroupContextMenu" 
                              DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
