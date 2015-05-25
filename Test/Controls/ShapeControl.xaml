@@ -16,31 +16,17 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <StackPanel>
-            <ContentControl Margin="2">
-                <ContentControl.Style>
-                    <Style TargetType="ContentControl">
-                        <Setter Property="Content" Value="{Binding Editor.Project.CurrentContainer.CurrentShape}"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Editor.Project.CurrentContainer.CurrentShape}" Value="{x:Null}">
-                                <Setter Property="Content" Value="{Binding Editor.Project.CurrentContainer}"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ContentControl.Style>
-            </ContentControl>
-            <controls:StyleControl Margin="2" DataContext="{Binding Editor.Project.CurrentContainer.CurrentShape.Style}">
-                <controls:StyleControl.Style>
-                    <Style TargetType="controls:StyleControl">
-                        <Setter Property="Visibility" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding}" Value="{x:Null}">
-                                <Setter Property="Visibility" Value="Hidden"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </controls:StyleControl.Style>
-            </controls:StyleControl>
-        </StackPanel>
+        <ContentControl Margin="2">
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Setter Property="Content" Value="{Binding Editor.Project.CurrentContainer.CurrentShape}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Editor.Project.CurrentContainer.CurrentShape}" Value="{x:Null}">
+                            <Setter Property="Content" Value="{Binding Editor.Project.CurrentContainer}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
     </Grid>
 </UserControl>
