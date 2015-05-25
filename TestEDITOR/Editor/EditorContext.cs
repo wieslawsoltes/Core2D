@@ -285,26 +285,26 @@ namespace TestEDITOR
         public Project DefaultProject()
         {
             var project = Project.Create();
-            
+
             project.Templates.Add(EmptyTemplate(project));
             project.Templates.Add(GridTemplate(project));
             project.CurrentTemplate = project.Templates.FirstOrDefault(t => t.Name == "Grid");
-            
+
             var document1 = DefaultDocument(project);
             var document2 = DefaultDocument(project);
-            
+
             var container1 = DefaultContainer(project);
             var container2 = DefaultContainer(project);
-            
+
             document1.Containers.Add(container1);
             document2.Containers.Add(container2);
-            
+
             project.Documents.Add(document1);
             project.Documents.Add(document2);
-            
+
             project.CurrentDocument = project.Documents.FirstOrDefault();
             project.CurrentContainer = document1.Containers.FirstOrDefault();
-         
+
             return project;
         }
         
@@ -321,711 +321,719 @@ namespace TestEDITOR
             ITextClipboard clipboard, 
             ICompressor compressor)
         {
-            _commands = new EditorCommands();
-            _textClipboard = clipboard;
-            _serializer = new NewtonsoftSerializer();
-            _compressor = compressor;
-            _history = new History<Project>(_serializer, _compressor);
-            _editor = Editor.Create(DefaultProject(), renderer, _history);
+            try
+            {
+                _commands = new EditorCommands();
+                _textClipboard = clipboard;
+                _serializer = new NewtonsoftSerializer();
+                _compressor = compressor;
+                _history = new History<Project>(_serializer, _compressor);
+                _editor = Editor.Create(DefaultProject(), renderer, _history);
 
-            (_editor.Renderer as ObservableObject).PropertyChanged +=
-                (s, e) =>
-                {
-                    if (e.PropertyName == "Zoom")
+                (_editor.Renderer as ObservableObject).PropertyChanged +=
+                    (s, e) =>
                     {
-                        Invalidate();
-                    }
-                };
-
-            _commands.NewCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    if (item is Container)
-                    {
-                        var selected = item as Container;
-                        var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(selected));
-                        if (document != null)
+                        if (e.PropertyName == "Zoom")
                         {
+                            Invalidate();
+                        }
+                    };
+
+                _commands.NewCommand = new DelegateCommand<object>(
+                    (item) =>
+                    {
+                        if (item is Container)
+                        {
+                            var selected = item as Container;
+                            var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(selected));
+                            if (document != null)
+                            {
+                                var container = DefaultContainer(_editor.Project);
+                                _history.Snapshot(_editor.Project);
+                                document.Containers.Add(container);
+                                _editor.Project.CurrentContainer = container;
+                            }
+                        }
+                        else if (item is Document)
+                        {
+                            var selected = item as Document;
                             var container = DefaultContainer(_editor.Project);
                             _history.Snapshot(_editor.Project);
-                            document.Containers.Add(container);
+                            selected.Containers.Add(container);
                             _editor.Project.CurrentContainer = container;
                         }
-                    }
-                    else if (item is Document)
+                        else if (item is Project)
+                        {
+                            var document = DefaultDocument(_editor.Project);
+                            _history.Snapshot(_editor.Project);
+                            _editor.Project.Documents.Add(document);
+                            _editor.Project.CurrentDocument = document;
+                            _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
+                        }
+                        else if (item is EditorContext || item == null)
+                        {
+                            _history.Reset();
+                            _history.Snapshot(_editor.Project);
+                            _editor.Load(DefaultProject());
+                        }
+                    },
+                    (item) => IsEditMode());
+
+                _commands.ExitCommand = new DelegateCommand(
+                    () =>
                     {
-                        var selected = item as Document;
+                        view.Close();
+                    },
+                    () => true);
+
+                _commands.UndoCommand = new DelegateCommand(
+                    () =>
+                    {
+                        Undo();
+                    },
+                    () => IsEditMode() /* && CanUndo() */);
+
+                _commands.RedoCommand = new DelegateCommand(
+                    () =>
+                    {
+                        Redo();
+                    },
+                    () => IsEditMode() /* && CanRedo() */);
+
+                var _containerToCopy = default(Container);
+                var _documentToCopy = default(Document);
+
+                _commands.CutCommand = new DelegateCommand<object>(
+                    (item) =>
+                    {
+                        if (item is Container)
+                        {
+                            var container = item as Container;
+                            _containerToCopy = container;
+                            _documentToCopy = default(Document);
+                            _editor.Delete(container);
+                        }
+                        else if (item is Document)
+                        {
+                            var document = item as Document;
+                            _containerToCopy = default(Container);
+                            _documentToCopy = document;
+                            _editor.Delete(document);
+                        }
+                        else if (item is EditorContext || item == null)
+                        {
+                            Cut();
+                        }
+                    },
+                    (item) => IsEditMode() /* && CanCopy() */);
+
+                _commands.CopyCommand = new DelegateCommand<object>(
+                    (item) =>
+                    {
+                        if (item is Container)
+                        {
+                            var container = item as Container;
+                            _containerToCopy = container;
+                            _documentToCopy = default(Document);
+                        }
+                        else if (item is Document)
+                        {
+                            var document = item as Document;
+                            _containerToCopy = default(Container);
+                            _documentToCopy = document;
+                        }
+                        else if (item is EditorContext || item == null)
+                        {
+                            Copy();
+                        }
+                    },
+                    (item) => IsEditMode() /* && CanCopy() */);
+
+                _commands.PasteCommand = new DelegateCommand<object>(
+                    (item) =>
+                    {
+                        if (item is Container)
+                        {
+                            if (_containerToCopy != null)
+                            {
+                                var container = item as Container;
+                                var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
+                                if (document != null)
+                                {
+                                    _history.Snapshot(_editor.Project);
+                                    int index = document.Containers.IndexOf(container);
+                                    var clone = Clone(_containerToCopy);
+                                    document.Containers[index] = clone;
+                                    _editor.Project.CurrentContainer = clone;
+                                }
+                            }
+                        }
+                        else if (item is Document)
+                        {
+                            if (_containerToCopy != null)
+                            {
+                                var document = item as Document;
+                                _history.Snapshot(_editor.Project);
+                                var clone = Clone(_containerToCopy);
+                                document.Containers.Add(clone);
+                                _editor.Project.CurrentContainer = clone;
+                            }
+                            else if (_documentToCopy != null)
+                            {
+                                var document = item as Document;
+                                int index = _editor.Project.Documents.IndexOf(document);
+                                var clone = Clone(_documentToCopy);
+                                _editor.Project.Documents[index] = clone;
+                                _editor.Project.CurrentDocument = clone;
+                            }
+                        }
+                        else if (item is EditorContext || item == null)
+                        {
+                            Paste();
+                        }
+                    },
+                    (item) => IsEditMode() /* && CanPaste() */);
+
+                _commands.DeleteCommand = new DelegateCommand<object>(
+                    (item) =>
+                    {
+                        if (item is Container)
+                        {
+                            var container = item as Container;
+                            _editor.Delete(container);
+                        }
+                        else if (item is Document)
+                        {
+                            var document = item as Document;
+                            _editor.Delete(document);
+                        }
+                        else if (item is EditorContext || item == null)
+                        {
+                            _editor.DeleteSelected();
+                        }
+                    },
+                    (item) => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+                _commands.SelectAllCommand = new DelegateCommand(
+                    () =>
+                    {
+                        SelectAll();
+                    },
+                    () => IsEditMode());
+
+                _commands.ClearAllCommand = new DelegateCommand(
+                    () =>
+                    {
+                        ClearAll();
+                    },
+                    () => IsEditMode());
+
+                _commands.GroupCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.GroupSelected();
+                    },
+                    () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+                _commands.GroupLayerCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.GroupCurrentLayer();
+                    },
+                    () => IsEditMode());
+
+                _commands.ToolNoneCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.CurrentTool = Tool.None;
+                    },
+                    () => IsEditMode());
+
+                _commands.ToolSelectionCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.CurrentTool = Tool.Selection;
+                    },
+                    () => IsEditMode());
+
+                _commands.ToolPointCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.CurrentTool = Tool.Point;
+                    },
+                    () => IsEditMode());
+
+                _commands.ToolLineCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.CurrentTool = Tool.Line;
+                    },
+                    () => IsEditMode());
+
+                _commands.ToolRectangleCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.CurrentTool = Tool.Rectangle;
+                    },
+                    () => IsEditMode());
+
+                _commands.ToolEllipseCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.CurrentTool = Tool.Ellipse;
+                    },
+                    () => IsEditMode());
+
+                _commands.ToolArcCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.CurrentTool = Tool.Arc;
+                    },
+                    () => IsEditMode());
+
+                _commands.ToolBezierCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.CurrentTool = Tool.Bezier;
+                    },
+                    () => IsEditMode());
+
+                _commands.ToolQBezierCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.CurrentTool = Tool.QBezier;
+                    },
+                    () => IsEditMode());
+
+                _commands.ToolTextCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.CurrentTool = Tool.Text;
+                    },
+                    () => IsEditMode());
+
+                _commands.ToolImageCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.CurrentTool = Tool.Image;
+                    },
+                    () => IsEditMode());
+
+                _commands.EvalScriptCommand = new DelegateCommand<string>(
+                    (path) =>
+                    {
+                        Eval(path);
+                    },
+                    (path) => IsEditMode());
+
+                _commands.DefaultIsFilledCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.Project.Options.DefaultIsFilled = !_editor.Project.Options.DefaultIsFilled;
+                    },
+                    () => IsEditMode());
+
+                _commands.SnapToGridCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.Project.Options.SnapToGrid = !_editor.Project.Options.SnapToGrid;
+                    },
+                    () => IsEditMode());
+
+                _commands.TryToConnectCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.Project.Options.TryToConnect = !_editor.Project.Options.TryToConnect;
+                    },
+                    () => IsEditMode());
+
+
+                _commands.AddBindingCommand = new DelegateCommand<object>(
+                    (owner) =>
+                    {
+                        if (owner != null)
+                        {
+                            if (owner is BaseShape)
+                            {
+                                var shape = owner as BaseShape;
+                                if (shape.Bindings == null)
+                                {
+                                    shape.Bindings = new ObservableCollection<ShapeBinding>();
+                                }
+
+                                _history.Snapshot(_editor.Project);
+                                shape.Bindings.Add(ShapeBinding.Create("", ""));
+                            }
+                        }
+                    },
+                    (owner) => IsEditMode());
+
+                _commands.RemoveBindingCommand = new DelegateCommand<object>(
+                    (parameter) =>
+                    {
+                        if (parameter != null && parameter is ShapeBindingParameter)
+                        {
+                            var owner = (parameter as ShapeBindingParameter).Owner;
+                            var binding = (parameter as ShapeBindingParameter).Binding;
+
+                            if (owner is BaseShape)
+                            {
+                                var shape = owner as BaseShape;
+                                if (shape.Bindings != null)
+                                {
+                                    _history.Snapshot(_editor.Project);
+                                    shape.Bindings.Remove(binding);
+                                }
+                            }
+                        }
+                    },
+                    (parameter) => IsEditMode());
+
+                _commands.AddPropertyCommand = new DelegateCommand<object>(
+                    (owner) =>
+                    {
+                        if (owner != null)
+                        {
+                            if (owner is BaseShape)
+                            {
+                                var shape = owner as BaseShape;
+                                if (shape.Properties == null)
+                                {
+                                    shape.Properties = new ObservableCollection<ShapeProperty>();
+                                }
+
+                                _history.Snapshot(_editor.Project);
+                                shape.Properties.Add(ShapeProperty.Create("New", ""));
+                            }
+                            else if (owner is Container)
+                            {
+                                var container = owner as Container;
+                                if (container.Properties == null)
+                                {
+                                    container.Properties = new ObservableCollection<ShapeProperty>();
+                                }
+
+                                _history.Snapshot(_editor.Project);
+                                container.Properties.Add(ShapeProperty.Create("New", ""));
+                            }
+                        }
+                    },
+                    (owner) => IsEditMode());
+
+                _commands.RemovePropertyCommand = new DelegateCommand<object>(
+                    (parameter) =>
+                    {
+                        if (parameter != null && parameter is ShapePropertyParameter)
+                        {
+                            var owner = (parameter as ShapePropertyParameter).Owner;
+                            var property = (parameter as ShapePropertyParameter).Property;
+
+                            if (owner is BaseShape)
+                            {
+                                var shape = owner as BaseShape;
+                                if (shape.Properties != null)
+                                {
+                                    _history.Snapshot(_editor.Project);
+                                    shape.Properties.Remove(property);
+                                }
+                            }
+                            else if (owner is Container)
+                            {
+                                var container = owner as Container;
+                                if (container.Properties != null)
+                                {
+                                    _history.Snapshot(_editor.Project);
+                                    container.Properties.Remove(property);
+                                }
+                            }
+                        }
+                    },
+                    (parameter) => IsEditMode());
+
+                _commands.AddGroupLibraryCommand = new DelegateCommand(
+                    () =>
+                    {
+                        var gl = GroupLibrary.Create("New");
+                        _history.Snapshot(_editor.Project);
+                        _editor.Project.GroupLibraries.Add(gl);
+                    },
+                    () => IsEditMode());
+
+                _commands.RemoveGroupLibraryCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.RemoveCurrentGroupLibrary();
+                    },
+                    () => IsEditMode());
+
+                _commands.AddGroupCommand = new DelegateCommand(
+                    () =>
+                    {
+                        var group = _editor.Renderer.SelectedShape;
+                        if (group != null && group is XGroup)
+                        {
+                            if (_editor.Project.CurrentGroupLibrary != null)
+                            {
+                                var clone = Clone(group as XGroup);
+                                if (clone != null)
+                                {
+                                    _history.Snapshot(_editor.Project);
+                                    _editor.Project.CurrentGroupLibrary.Groups.Add(clone);
+                                }
+                            }
+                        }
+                    },
+                    () => IsEditMode());
+
+                _commands.RemoveGroupCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.RemoveCurrentGroup();
+                    },
+                    () => IsEditMode());
+
+                _commands.AddLayerCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _history.Snapshot(_editor.Project);
+                        _editor.Project.CurrentContainer.Layers.Add(Layer.Create("New", _editor.Project.CurrentContainer));
+                    },
+                    () => IsEditMode());
+
+                _commands.RemoveLayerCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.RemoveCurrentLayer();
+                    },
+                    () => IsEditMode());
+
+                _commands.AddStyleGroupCommand = new DelegateCommand(
+                    () =>
+                    {
+                        var sg = ShapeStyleGroup.Create("New");
+                        sg.Styles.Add(ShapeStyle.Create("New"));
+                        _history.Snapshot(_editor.Project);
+                        _editor.Project.StyleGroups.Add(sg);
+                    },
+                    () => IsEditMode());
+
+                _commands.RemoveStyleGroupCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.RemoveCurrentStyleGroup();
+                    },
+                    () => IsEditMode());
+
+                _commands.AddStyleCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _history.Snapshot(_editor.Project);
+                        _editor.Project.CurrentStyleGroup.Styles.Add(ShapeStyle.Create("New"));
+                    },
+                    () => IsEditMode());
+
+                _commands.RemoveStyleCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.RemoveCurrentStyle();
+                    },
+                    () => IsEditMode());
+
+                _commands.RemoveShapeCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.RemoveCurrentShape();
+                    },
+                    () => IsEditMode());
+
+                _commands.StartSimulationCommand = new DelegateCommand(
+                    () =>
+                    {
+                        StartSimulation();
+                    },
+                    () => IsEditMode());
+
+                _commands.StopSimulationCommand = new DelegateCommand(
+                    () =>
+                    {
+                        StopSimulation();
+                    },
+                    () => IsSimulationMode());
+
+                _commands.RestartSimulationCommand = new DelegateCommand(
+                    () =>
+                    {
+                        RestartSimulation();
+                    },
+                    () => IsSimulationMode());
+
+                _commands.PauseSimulationCommand = new DelegateCommand(
+                    () =>
+                    {
+                        PauseSimulation();
+                    },
+                    () => IsSimulationMode());
+
+                _commands.TickSimulationCommand = new DelegateCommand(
+                    () =>
+                    {
+                        TickSimulation();
+                    },
+                    () => IsSimulationMode() && IsSimulationPaused);
+
+                _commands.AddTemplateCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _history.Snapshot(_editor.Project);
+                        _editor.Project.Templates.Add(EmptyTemplate(_editor.Project));
+                    },
+                    () => IsEditMode());
+
+                _commands.RemoveTemplateCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.RemoveCurrentTemplate();
+                    },
+                    () => IsEditMode());
+
+                _commands.EditTemplateCommand = new DelegateCommand(
+                    () =>
+                    {
+                        var template = _editor.Project.CurrentTemplate;
+                        if (template != null)
+                        {
+                            _editor.Project.CurrentContainer = template;
+                            _editor.Project.CurrentContainer.Invalidate();
+                        }
+                    },
+                    () => IsEditMode());
+
+                _commands.ApplyTemplateCommand = new DelegateCommand<object>(
+                    (item) =>
+                    {
+                        if (item is Container)
+                        {
+                            var template = item as Container;
+                            _history.Snapshot(_editor.Project);
+                            _editor.Project.CurrentContainer.Template = template;
+                        }
+                    },
+                    (item) => IsEditMode());
+
+                _commands.SelectedItemChangedCommand = new DelegateCommand<object>(
+                    (item) =>
+                    {
+                        if (item is Container)
+                        {
+                            var selected = item as Container;
+                            var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(selected));
+                            if (document != null)
+                            {
+                                _editor.Project.CurrentDocument = document;
+                                _editor.Project.CurrentContainer = selected;
+                                _editor.Project.CurrentContainer.Invalidate();
+                            }
+                        }
+                        else if (item is Document)
+                        {
+                            var selected = item as Document;
+                            _editor.Project.CurrentDocument = selected;
+                        }
+                    },
+                    (item) => IsEditMode());
+
+                _commands.AddContainerCommand = new DelegateCommand<object>(
+                    (item) =>
+                    {
                         var container = DefaultContainer(_editor.Project);
                         _history.Snapshot(_editor.Project);
-                        selected.Containers.Add(container);
+                        _editor.Project.CurrentDocument.Containers.Add(container);
                         _editor.Project.CurrentContainer = container;
-                    }
-                    else if (item is Project)
+                    },
+                    (item) => IsEditMode());
+
+                _commands.InsertContainerBeforeCommand = new DelegateCommand<object>(
+                    (item) =>
+                    {
+                        if (item is Container)
+                        {
+                            var selected = item as Container;
+                            int index = _editor.Project.CurrentDocument.Containers.IndexOf(selected);
+                            var container = DefaultContainer(_editor.Project);
+                            _history.Snapshot(_editor.Project);
+                            _editor.Project.CurrentDocument.Containers.Insert(index, container);
+                            _editor.Project.CurrentContainer = container;
+                        }
+                    },
+                    (item) => IsEditMode());
+
+                _commands.InsertContainerAfterCommand = new DelegateCommand<object>(
+                    (item) =>
+                    {
+                        if (item is Container)
+                        {
+                            var selected = item as Container;
+                            int index = _editor.Project.CurrentDocument.Containers.IndexOf(selected);
+                            var container = DefaultContainer(_editor.Project);
+                            _history.Snapshot(_editor.Project);
+                            _editor.Project.CurrentDocument.Containers.Insert(index + 1, container);
+                            _editor.Project.CurrentContainer = container;
+                        }
+                    },
+                    (item) => IsEditMode());
+
+                _commands.AddDocumentCommand = new DelegateCommand<object>(
+                    (item) =>
                     {
                         var document = DefaultDocument(_editor.Project);
                         _history.Snapshot(_editor.Project);
                         _editor.Project.Documents.Add(document);
                         _editor.Project.CurrentDocument = document;
                         _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
-                    }
-                    else if (item is EditorContext || item == null)
-                    {
-                        _history.Reset();
-                        _history.Snapshot(_editor.Project);
-                        _editor.Load(DefaultProject());
-                    }
-                },
-                (item) => IsEditMode());
+                    },
+                    (item) => IsEditMode());
 
-            _commands.ExitCommand = new DelegateCommand(
-                () =>
-                {
-                    view.Close();
-                },
-                () => true);
-
-            _commands.UndoCommand = new DelegateCommand(
-                () =>
-                {
-                    Undo();
-                },
-                () => IsEditMode() /* && CanUndo() */);
-
-            _commands.RedoCommand = new DelegateCommand(
-                () =>
-                {
-                    Redo();
-                },
-                () => IsEditMode() /* && CanRedo() */);
-
-            var _containerToCopy = default(Container);
-            var _documentToCopy = default(Document);
-
-            _commands.CutCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    if (item is Container)
+                _commands.InsertDocumentBeforeCommand = new DelegateCommand<object>(
+                    (item) =>
                     {
-                        var container = item as Container;
-                        _containerToCopy = container;
-                        _documentToCopy = default(Document);
-                        _editor.Delete(container);
-                    }
-                    else if (item is Document)
-                    {
-                        var document = item as Document;
-                        _containerToCopy = default(Container);
-                        _documentToCopy = document;
-                        _editor.Delete(document);
-                    }
-                    else if (item is EditorContext || item == null)
-                    {
-                        Cut();
-                    }
-                },
-                (item) => IsEditMode() /* && CanCopy() */);
-            
-            _commands.CopyCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    if (item is Container)
-                    {
-                        var container = item as Container;
-                        _containerToCopy = container;
-                        _documentToCopy = default(Document);
-                    }
-                    else if (item is Document)
-                    {
-                        var document = item as Document;
-                        _containerToCopy = default(Container);
-                        _documentToCopy = document;
-                    }
-                    else if (item is EditorContext || item == null)
-                    {
-                        Copy();
-                    }
-                },
-                (item) => IsEditMode() /* && CanCopy() */);
-
-            _commands.PasteCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    if (item is Container)
-                    {
-                        if (_containerToCopy != null)
+                        if (item is Document)
                         {
-                            var container = item as Container;
-                            var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
-                            if (document != null)
-                            {
-                                _history.Snapshot(_editor.Project);
-                                int index = document.Containers.IndexOf(container);
-                                var clone = Clone(_containerToCopy);
-                                document.Containers[index] = clone;
-                                _editor.Project.CurrentContainer = clone;
-                            }
-                        }
-                    }
-                    else if (item is Document)
-                    {
-                        if (_containerToCopy != null)
-                        {
-                            var document = item as Document;
+                            var selected = item as Document;
+                            int index = _editor.Project.Documents.IndexOf(selected);
+                            var document = DefaultDocument(_editor.Project);
                             _history.Snapshot(_editor.Project);
-                            var clone = Clone(_containerToCopy);
-                            document.Containers.Add(clone);
-                            _editor.Project.CurrentContainer = clone;
-                        }
-                        else if (_documentToCopy != null)
-                        {
-                            var document = item as Document;
-                            int index = _editor.Project.Documents.IndexOf(document);
-                            var clone = Clone(_documentToCopy);
-                            _editor.Project.Documents[index] = clone;
-                            _editor.Project.CurrentDocument = clone;
-                        }
-                    }
-                    else if (item is EditorContext || item == null)
-                    {
-                        Paste();
-                    }
-                },
-                (item) => IsEditMode() /* && CanPaste() */);
-
-            _commands.DeleteCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    if (item is Container)
-                    {
-                        var container = item as Container;
-                        _editor.Delete(container);
-                    }
-                    else if (item is Document)
-                    {
-                        var document = item as Document;
-                        _editor.Delete(document);
-                    }
-                    else if (item is EditorContext || item == null)
-                    {
-                        _editor.DeleteSelected();
-                    }
-                },
-                (item) => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-            _commands.SelectAllCommand = new DelegateCommand(
-                () =>
-                {
-                    SelectAll();
-                },
-                () => IsEditMode());
-
-            _commands.ClearAllCommand = new DelegateCommand(
-                () =>
-                {
-                    ClearAll();
-                },
-                () => IsEditMode());
-
-            _commands.GroupCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.GroupSelected();
-                },
-                () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-            _commands.GroupLayerCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.GroupCurrentLayer();
-                },
-                () => IsEditMode());
-
-            _commands.ToolNoneCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.CurrentTool = Tool.None;
-                },
-                () => IsEditMode());
-
-            _commands.ToolSelectionCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.CurrentTool = Tool.Selection;
-                },
-                () => IsEditMode());
-
-            _commands.ToolPointCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.CurrentTool = Tool.Point;
-                },
-                () => IsEditMode());
-
-            _commands.ToolLineCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.CurrentTool = Tool.Line;
-                },
-                () => IsEditMode());
-
-            _commands.ToolRectangleCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.CurrentTool = Tool.Rectangle;
-                },
-                () => IsEditMode());
-
-            _commands.ToolEllipseCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.CurrentTool = Tool.Ellipse;
-                },
-                () => IsEditMode());
-
-            _commands.ToolArcCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.CurrentTool = Tool.Arc;
-                },
-                () => IsEditMode());
-
-            _commands.ToolBezierCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.CurrentTool = Tool.Bezier;
-                },
-                () => IsEditMode());
-
-            _commands.ToolQBezierCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.CurrentTool = Tool.QBezier;
-                },
-                () => IsEditMode());
-
-            _commands.ToolTextCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.CurrentTool = Tool.Text;
-                },
-                () => IsEditMode());
-
-            _commands.ToolImageCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.CurrentTool = Tool.Image;
-                },
-                () => IsEditMode());
-
-            _commands.EvalScriptCommand = new DelegateCommand<string>(
-                (path) =>
-                {
-                    Eval(path);
-                },
-                (path) => IsEditMode());
-
-            _commands.DefaultIsFilledCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.Project.Options.DefaultIsFilled = !_editor.Project.Options.DefaultIsFilled;
-                },
-                () => IsEditMode());
-
-            _commands.SnapToGridCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.Project.Options.SnapToGrid = !_editor.Project.Options.SnapToGrid;
-                },
-                () => IsEditMode());
-
-            _commands.TryToConnectCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.Project.Options.TryToConnect = !_editor.Project.Options.TryToConnect;
-                },
-                () => IsEditMode());
-
-            
-            _commands.AddBindingCommand = new DelegateCommand<object>(
-                (owner) =>
-                {
-                    if (owner != null)
-                    {
-                        if (owner is BaseShape)
-                        {
-                            var shape = owner as BaseShape;
-                            if (shape.Bindings == null)
-                            {
-                                shape.Bindings = new ObservableCollection<ShapeBinding>();
-                            }
-                            
-                            _history.Snapshot(_editor.Project);
-                            shape.Bindings.Add(ShapeBinding.Create("", ""));
-                        }
-                    }
-                },
-                (owner) => IsEditMode());
-
-            _commands.RemoveBindingCommand = new DelegateCommand<object>(
-                (parameter) =>
-                {
-                    if (parameter != null && parameter is ShapeBindingParameter)
-                    {
-                        var owner = (parameter as ShapeBindingParameter).Owner;
-                        var binding = (parameter as ShapeBindingParameter).Binding;
-
-                        if (owner is BaseShape)
-                        {
-                            var shape = owner as BaseShape;
-                            if (shape.Bindings != null)
-                            {
-                                _history.Snapshot(_editor.Project);
-                                shape.Bindings.Remove(binding);
-                            }
-                        }
-                    }
-                },
-                (parameter) => IsEditMode());
-     
-            _commands.AddPropertyCommand = new DelegateCommand<object>(
-                (owner) =>
-                {
-                    if (owner != null)
-                    {
-                        if (owner is BaseShape)
-                        {
-                            var shape = owner as BaseShape;
-                            if (shape.Properties == null)
-                            {
-                                shape.Properties = new ObservableCollection<ShapeProperty>();
-                            }
-                            
-                            _history.Snapshot(_editor.Project);
-                            shape.Properties.Add(ShapeProperty.Create("New", ""));
-                        }
-                        else if (owner is Container)
-                        {
-                            var container = owner as Container;
-                            if (container.Properties == null)
-                            {
-                                container.Properties = new ObservableCollection<ShapeProperty>();
-                            }
-                            
-                            _history.Snapshot(_editor.Project);
-                            container.Properties.Add(ShapeProperty.Create("New", ""));
-                        }
-                    }
-                },
-                (owner) => IsEditMode());
-
-            _commands.RemovePropertyCommand = new DelegateCommand<object>(
-                (parameter) =>
-                {
-                    if (parameter != null && parameter is ShapePropertyParameter)
-                    {
-                        var owner = (parameter as ShapePropertyParameter).Owner;
-                        var property = (parameter as ShapePropertyParameter).Property;
-
-                        if (owner is BaseShape)
-                        {
-                            var shape = owner as BaseShape;
-                            if (shape.Properties != null)
-                            {
-                                _history.Snapshot(_editor.Project);
-                                shape.Properties.Remove(property);
-                            }
-                        }
-                        else if (owner is Container)
-                        {
-                            var container = owner as Container;
-                            if (container.Properties != null)
-                            {
-                                _history.Snapshot(_editor.Project);
-                                container.Properties.Remove(property);
-                            }
-                        }
-                    }
-                },
-                (parameter) => IsEditMode());
-
-            _commands.AddGroupLibraryCommand = new DelegateCommand(
-                () =>
-                {
-                    var gl = GroupLibrary.Create("New");
-                    _history.Snapshot(_editor.Project);
-                    _editor.Project.GroupLibraries.Add(gl);
-                },
-                () => IsEditMode());
-
-            _commands.RemoveGroupLibraryCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.RemoveCurrentGroupLibrary();
-                },
-                () => IsEditMode());
-
-            _commands.AddGroupCommand = new DelegateCommand(
-                () =>
-                {
-                    var group = _editor.Renderer.SelectedShape;
-                    if (group != null && group is XGroup)
-                    {
-                        if (_editor.Project.CurrentGroupLibrary != null)
-                        {
-                            var clone = Clone(group as XGroup);
-                            if (clone != null)
-                            {
-                                _history.Snapshot(_editor.Project);
-                                _editor.Project.CurrentGroupLibrary.Groups.Add(clone);
-                            }
-                        }
-                    }
-                },
-                () => IsEditMode());
-
-            _commands.RemoveGroupCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.RemoveCurrentGroup();
-                },
-                () => IsEditMode());
-
-            _commands.AddLayerCommand = new DelegateCommand(
-                () =>
-                {
-                    _history.Snapshot(_editor.Project);
-                    _editor.Project.CurrentContainer.Layers.Add(Layer.Create("New", _editor.Project.CurrentContainer));
-                },
-                () => IsEditMode());
-
-            _commands.RemoveLayerCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.RemoveCurrentLayer();
-                },
-                () => IsEditMode());
-
-            _commands.AddStyleGroupCommand = new DelegateCommand(
-                () =>
-                {
-                    var sg = ShapeStyleGroup.Create("New");
-                    sg.Styles.Add(ShapeStyle.Create("New"));
-                    _history.Snapshot(_editor.Project);
-                    _editor.Project.StyleGroups.Add(sg);
-                },
-                () => IsEditMode());
-
-            _commands.RemoveStyleGroupCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.RemoveCurrentStyleGroup();
-                },
-                () => IsEditMode());
-
-            _commands.AddStyleCommand = new DelegateCommand(
-                () =>
-                {
-                    _history.Snapshot(_editor.Project);
-                    _editor.Project.CurrentStyleGroup.Styles.Add(ShapeStyle.Create("New"));
-                },
-                () => IsEditMode());
-
-            _commands.RemoveStyleCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.RemoveCurrentStyle();
-                },
-                () => IsEditMode());
-
-            _commands.RemoveShapeCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.RemoveCurrentShape();
-                },
-                () => IsEditMode());
-
-            _commands.StartSimulationCommand = new DelegateCommand(
-                () =>
-                {
-                    StartSimulation();
-                }, 
-                () => IsEditMode());
-
-            _commands.StopSimulationCommand = new DelegateCommand(
-                () =>
-                {
-                    StopSimulation(); 
-                },
-                () => IsSimulationMode());
-
-            _commands.RestartSimulationCommand = new DelegateCommand(
-                () =>
-                {
-                    RestartSimulation();
-                },
-                () => IsSimulationMode());
-
-            _commands.PauseSimulationCommand = new DelegateCommand(
-                () =>
-                {
-                    PauseSimulation();
-                },
-                () => IsSimulationMode());
-
-            _commands.TickSimulationCommand = new DelegateCommand(
-                () =>
-                {
-                    TickSimulation();
-                },
-                () => IsSimulationMode() && IsSimulationPaused);
-
-            _commands.AddTemplateCommand = new DelegateCommand(
-                () =>
-                {
-                    _history.Snapshot(_editor.Project);
-                    _editor.Project.Templates.Add(EmptyTemplate(_editor.Project));
-                },
-                () => IsEditMode());
-
-            _commands.RemoveTemplateCommand = new DelegateCommand(
-                () =>
-                {
-                    _editor.RemoveCurrentTemplate();
-                },
-                () => IsEditMode());
-
-            _commands.EditTemplateCommand = new DelegateCommand(
-                () =>
-                {
-                    var template = _editor.Project.CurrentTemplate;
-                    if (template != null)
-                    {
-                        _editor.Project.CurrentContainer = template;
-                        _editor.Project.CurrentContainer.Invalidate();
-                    }
-                },
-                () => IsEditMode());
-
-            _commands.ApplyTemplateCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    if (item is Container)
-                    {
-                        var template = item as Container;
-                        _history.Snapshot(_editor.Project);
-                        _editor.Project.CurrentContainer.Template = template;
-                    }
-                },
-                (item) => IsEditMode());
-            
-            _commands.SelectedItemChangedCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    if (item is Container)
-                    {
-                        var selected = item as Container;
-                        var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(selected));
-                        if (document != null)
-                        {
+                            _editor.Project.Documents.Insert(index, document);
                             _editor.Project.CurrentDocument = document;
-                            _editor.Project.CurrentContainer = selected;
-                            _editor.Project.CurrentContainer.Invalidate();
+                            _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
                         }
-                    }
-                    else if (item is Document)
+
+                    },
+                    (item) => IsEditMode());
+
+                _commands.InsertDocumentAfterCommand = new DelegateCommand<object>(
+                    (item) =>
                     {
-                        var selected = item as Document;
-                        _editor.Project.CurrentDocument = selected;
-                    }
-                },
-                (item) => IsEditMode());
+                        if (item is Document)
+                        {
+                            var selected = item as Document;
+                            int index = _editor.Project.Documents.IndexOf(selected);
+                            var document = DefaultDocument(_editor.Project);
+                            _history.Snapshot(_editor.Project);
+                            _editor.Project.Documents.Insert(index + 1, document);
+                            _editor.Project.CurrentDocument = document;
+                            _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
+                        }
+                    },
+                    (item) => IsEditMode());
 
-            _commands.AddContainerCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    var container = DefaultContainer(_editor.Project);
-                    _history.Snapshot(_editor.Project);
-                    _editor.Project.CurrentDocument.Containers.Add(container);
-                    _editor.Project.CurrentContainer = container;
-                },
-                (item) => IsEditMode());
-
-            _commands.InsertContainerBeforeCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    if (item is Container)
-                    {
-                        var selected = item as Container;
-                        int index = _editor.Project.CurrentDocument.Containers.IndexOf(selected);
-                        var container = DefaultContainer(_editor.Project);
-                        _history.Snapshot(_editor.Project);
-                        _editor.Project.CurrentDocument.Containers.Insert(index, container);
-                        _editor.Project.CurrentContainer = container;
-                    }
-                },
-                (item) => IsEditMode());
-
-            _commands.InsertContainerAfterCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    if (item is Container)
-                    {
-                        var selected = item as Container;
-                        int index = _editor.Project.CurrentDocument.Containers.IndexOf(selected);
-                        var container = DefaultContainer(_editor.Project);
-                        _history.Snapshot(_editor.Project);
-                        _editor.Project.CurrentDocument.Containers.Insert(index + 1, container);
-                        _editor.Project.CurrentContainer = container;
-                    } 
-                },
-                (item) => IsEditMode());
-
-            _commands.AddDocumentCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    var document = DefaultDocument(_editor.Project);
-                    _history.Snapshot(_editor.Project);
-                    _editor.Project.Documents.Add(document);
-                    _editor.Project.CurrentDocument = document;
-                    _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
-                },
-                (item) => IsEditMode());
-
-            _commands.InsertDocumentBeforeCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    if (item is Document)
-                    {
-                        var selected = item as Document;
-                        int index = _editor.Project.Documents.IndexOf(selected);
-                        var document = DefaultDocument(_editor.Project);
-                        _history.Snapshot(_editor.Project);
-                        _editor.Project.Documents.Insert(index, document);
-                        _editor.Project.CurrentDocument = document;
-                        _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
-                    }
-                    
-                },
-                (item) => IsEditMode());
-
-            _commands.InsertDocumentAfterCommand = new DelegateCommand<object>(
-                (item) =>
-                {
-                    if (item is Document)
-                    {
-                        var selected = item as Document;
-                        int index = _editor.Project.Documents.IndexOf(selected);
-                        var document = DefaultDocument(_editor.Project);
-                        _history.Snapshot(_editor.Project);
-                        _editor.Project.Documents.Insert(index + 1, document);
-                        _editor.Project.CurrentDocument = document;
-                        _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
-                    }
-                },
-                (item) => IsEditMode());
-
-            WarmUpCSharpScript();
-            WarmUpHistory();
+                WarmUpCSharpScript();
+                WarmUpHistory();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
 
         /// <summary>
@@ -1033,8 +1041,16 @@ namespace TestEDITOR
         /// </summary>
         public void Invalidate()
         {
-            _editor.Renderer.ClearCache();
-            _editor.Project.CurrentContainer.Invalidate();
+            try
+            {
+                _editor.Renderer.ClearCache();
+                _editor.Project.CurrentContainer.Invalidate();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
 
         /// <summary>
@@ -1045,31 +1061,39 @@ namespace TestEDITOR
         /// <param name="execute"></param>
         public void Eval(string code, EditorContext context, Action<Action> execute)
         {
-            ScriptOptions options = ScriptOptions.Default
-                .AddNamespaces("System")
-                .AddNamespaces("System.Collections.Generic")
-                .AddNamespaces("System.Text")
-                .AddNamespaces("System.Threading")
-                .AddNamespaces("System.Threading.Tasks")
-                .AddReferences(Assembly.GetAssembly(typeof(ObservableCollection<>)))
-                .AddNamespaces("System.Collections.ObjectModel")
-                .AddReferences(Assembly.GetAssembly(typeof(System.Linq.Enumerable)))
-                .AddNamespaces("System.Linq")
-                .AddReferences(Assembly.GetAssembly(typeof(ObservableObject)))
-                .AddNamespaces("Test2d")
-                .AddReferences(Assembly.GetAssembly(typeof(EditorContext)))
-                .AddNamespaces("TestEDITOR")
-                .AddNamespaces("TestSIM")
-                .AddNamespaces("Dxf");
+            try
+            {
+                ScriptOptions options = ScriptOptions.Default
+                    .AddNamespaces("System")
+                    .AddNamespaces("System.Collections.Generic")
+                    .AddNamespaces("System.Text")
+                    .AddNamespaces("System.Threading")
+                    .AddNamespaces("System.Threading.Tasks")
+                    .AddReferences(Assembly.GetAssembly(typeof(ObservableCollection<>)))
+                    .AddNamespaces("System.Collections.ObjectModel")
+                    .AddReferences(Assembly.GetAssembly(typeof(System.Linq.Enumerable)))
+                    .AddNamespaces("System.Linq")
+                    .AddReferences(Assembly.GetAssembly(typeof(ObservableObject)))
+                    .AddNamespaces("Test2d")
+                    .AddReferences(Assembly.GetAssembly(typeof(EditorContext)))
+                    .AddNamespaces("TestEDITOR")
+                    .AddNamespaces("TestSIM")
+                    .AddNamespaces("Dxf");
 
-            CSharpScript.Eval(
-                code, 
-                options, 
-                new ScriptGlobals() 
-                { 
-                    Context = context,
-                    Execute = execute
-                });
+                CSharpScript.Eval(
+                    code,
+                    options,
+                    new ScriptGlobals()
+                    {
+                        Context = context,
+                        Execute = execute
+                    });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
 
         /// <summary>
@@ -1099,29 +1123,38 @@ namespace TestEDITOR
         /// <param name="compress"></param>
         public string ReadUtf8Text(string path, bool compress = true)
         {
-            if (compress)
+            try
             {
-                using (var fs = System.IO.File.OpenRead(path))
+                if (compress)
                 {
-                    using (var cs = new System.IO.Compression.GZipStream(fs, System.IO.Compression.CompressionMode.Decompress))
+                    using (var fs = System.IO.File.OpenRead(path))
                     {
-                        using (var sr = new System.IO.StreamReader(cs, Encoding.UTF8))
+                        using (var cs = new System.IO.Compression.GZipStream(fs, System.IO.Compression.CompressionMode.Decompress))
+                        {
+                            using (var sr = new System.IO.StreamReader(cs, Encoding.UTF8))
+                            {
+                                return sr.ReadToEnd();
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    using (var fs = System.IO.File.OpenRead(path))
+                    {
+                        using (var sr = new System.IO.StreamReader(fs, Encoding.UTF8))
                         {
                             return sr.ReadToEnd();
                         }
                     }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                using (var fs = System.IO.File.OpenRead(path))
-                {
-                    using (var sr = new System.IO.StreamReader(fs, Encoding.UTF8))
-                    {
-                        return sr.ReadToEnd();
-                    }
-                }
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
             }
+            return null;
         }
         
         /// <summary>
@@ -1132,28 +1165,36 @@ namespace TestEDITOR
         /// <param name="compress"></param>
         public void WriteUtf8Text(string path, string text, bool compress = true)
         {
-            if (compress)
+            try
             {
-                using (var fs = System.IO.File.Create(path))
+                if (compress)
                 {
-                    using (var cs = new System.IO.Compression.GZipStream(fs, System.IO.Compression.CompressionMode.Compress))
+                    using (var fs = System.IO.File.Create(path))
                     {
-                        using (var sw = new System.IO.StreamWriter(cs, Encoding.UTF8))
+                        using (var cs = new System.IO.Compression.GZipStream(fs, System.IO.Compression.CompressionMode.Compress))
+                        {
+                            using (var sw = new System.IO.StreamWriter(cs, Encoding.UTF8))
+                            {
+                                sw.Write(text);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    using (var fs = System.IO.File.Create(path))
+                    {
+                        using (var sw = new System.IO.StreamWriter(fs, Encoding.UTF8))
                         {
                             sw.Write(text);
                         }
                     }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                using (var fs = System.IO.File.Create(path))
-                {
-                    using (var sw = new System.IO.StreamWriter(fs, Encoding.UTF8))
-                    {
-                        sw.Write(text);
-                    }
-                }
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
             }
         }
         
@@ -1163,63 +1204,71 @@ namespace TestEDITOR
         /// <param name="project"></param>
         public void Validate(Project project)
         {
-            if (project == null)
-                return;
-            
-            if (project.Options == null)
+            try
             {
-                project.Options = Options.Create();
-            }
-            
-            if (project.StyleGroups == null)
-            {
-                project.StyleGroups = new ObservableCollection<ShapeStyleGroup>();
-            }
+                if (project == null)
+                    return;
 
-            if (project.GroupLibraries == null)
-            {
-                project.GroupLibraries = new ObservableCollection<GroupLibrary>();
-            }
-            
-            if (project.Templates == null)
-            {
-                project.Templates = new ObservableCollection<Container>();
-            }
- 
-            if (project.Documents == null)
-            {
-                project.Documents = new ObservableCollection<Document>();
-            }
+                if (project.Options == null)
+                {
+                    project.Options = Options.Create();
+                }
 
-            foreach (var document in project.Documents) 
+                if (project.StyleGroups == null)
+                {
+                    project.StyleGroups = new ObservableCollection<ShapeStyleGroup>();
+                }
+
+                if (project.GroupLibraries == null)
+                {
+                    project.GroupLibraries = new ObservableCollection<GroupLibrary>();
+                }
+
+                if (project.Templates == null)
+                {
+                    project.Templates = new ObservableCollection<Container>();
+                }
+
+                if (project.Documents == null)
+                {
+                    project.Documents = new ObservableCollection<Document>();
+                }
+
+                foreach (var document in project.Documents)
+                {
+                    if (document.Containers == null)
+                    {
+                        document.Containers = new ObservableCollection<Container>();
+                    }
+
+                    foreach (var container in document.Containers)
+                    {
+                        if (container.Layers == null)
+                        {
+                            container.Layers = new ObservableCollection<Layer>();
+                        }
+
+                        if (container.Properties == null)
+                        {
+                            container.Properties = new ObservableCollection<ShapeProperty>();
+                        }
+
+                        if (container.WorkingLayer == null)
+                        {
+                            container.WorkingLayer = Layer.Create("Working", container);
+                        }
+
+                        if (container.HelperLayer == null)
+                        {
+                            container.HelperLayer = Layer.Create("Helper", container);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
             {
-                if (document.Containers == null)
-                {
-                    document.Containers = new ObservableCollection<Container>();
-                }
-                
-                foreach (var container in document.Containers) 
-                {
-                    if (container.Layers == null)
-                    {
-                        container.Layers = new ObservableCollection<Layer>();
-                    }
-                    
-                    if (container.Properties == null)
-                    {
-                        container.Properties = new ObservableCollection<ShapeProperty>();
-                    }
-                    
-                    if (container.WorkingLayer == null)
-                    {
-                        container.WorkingLayer = Layer.Create("Working", container);
-                    }
- 
-                    if (container.HelperLayer == null)
-                    {
-                        container.HelperLayer = Layer.Create("Helper", container);
-                    }
-                }
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
             }
         }
         
@@ -1229,17 +1278,25 @@ namespace TestEDITOR
         /// <param name="path"></param>
         public void Open(string path)
         {
-            var json = ReadUtf8Text(path);
-            var project = Serializer.FromJson<Project>(json);
+            try
+            {
+                var json = ReadUtf8Text(path);
+                var project = Serializer.FromJson<Project>(json);
 
-            Validate(project);
-    
-            var root = new Uri(path);
-            var images = Editor.GetAllShapes<XImage>(project);
-            _editor.ToAbsoluteUri(root, images);
+                Validate(project);
 
-            _history.Snapshot(_editor.Project);
-            _editor.Load(project);
+                var root = new Uri(path);
+                var images = Editor.GetAllShapes<XImage>(project);
+                _editor.ToAbsoluteUri(root, images);
+
+                _history.Snapshot(_editor.Project);
+                _editor.Load(project);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
 
         /// <summary>
@@ -1248,14 +1305,22 @@ namespace TestEDITOR
         /// <param name="path"></param>
         public void Save(string path)
         {
-            var root = new Uri(path);
-            var images = Editor.GetAllShapes<XImage>(_editor.Project);
-            _editor.ToRelativeUri(root, images);
+            try
+            {
+                var root = new Uri(path);
+                var images = Editor.GetAllShapes<XImage>(_editor.Project);
+                _editor.ToRelativeUri(root, images);
 
-            var json = Serializer.ToJson(_editor.Project);
-            WriteUtf8Text(path, json);
+                var json = Serializer.ToJson(_editor.Project);
+                WriteUtf8Text(path, json);
 
-            _editor.ToAbsoluteUri(root, images);
+                _editor.ToAbsoluteUri(root, images);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
 
         /// <summary>
@@ -1673,7 +1738,15 @@ namespace TestEDITOR
         /// <param name="database"></param>
         public void ExportData(string path, Database database)
         {
-            // TODO:
+            try
+            {
+                // TODO:
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
 
         /// <summary>
@@ -1751,53 +1824,61 @@ namespace TestEDITOR
         /// <param name="shapes"></param>
         private void TryToRestoreStyles(IEnumerable<BaseShape> shapes)
         {
-            if (_editor.Project.StyleGroups == null)
-                return;
-            
-            var styles = _editor.Project.StyleGroups
-                .Where(sg => sg.Styles != null && sg.Styles.Count > 0)
-                .SelectMany(sg => sg.Styles)
-                .Distinct(new StyleComparer())
-                .ToDictionary(s => s.Name);
-
-            // reset point shape to container default
-            foreach (var point in Editor.GetAllPoints(shapes))
+            try
             {
-                point.Shape = _editor.Project.Options.PointShape;
-            }
+                if (_editor.Project.StyleGroups == null)
+                    return;
 
-            // try to restore shape styles
-            foreach (var shape in Editor.GetAllShapes(shapes))
-            {
-                if (shape.Style == null)
-                    continue;
+                var styles = _editor.Project.StyleGroups
+                    .Where(sg => sg.Styles != null && sg.Styles.Count > 0)
+                    .SelectMany(sg => sg.Styles)
+                    .Distinct(new StyleComparer())
+                    .ToDictionary(s => s.Name);
 
-                ShapeStyle style;
-                if (styles.TryGetValue(shape.Style.Name, out style))
+                // reset point shape to container default
+                foreach (var point in Editor.GetAllPoints(shapes))
                 {
-                    // use existing style
-                    shape.Style = style;
+                    point.Shape = _editor.Project.Options.PointShape;
                 }
-                else
+
+                // try to restore shape styles
+                foreach (var shape in Editor.GetAllShapes(shapes))
                 {
-                    // create Imported style group
-                    if (_editor.Project.CurrentStyleGroup == null)
+                    if (shape.Style == null)
+                        continue;
+
+                    ShapeStyle style;
+                    if (styles.TryGetValue(shape.Style.Name, out style))
                     {
-                        var sg = ShapeStyleGroup.Create("Imported");
-                        _editor.Project.StyleGroups.Add(sg);
-                        _editor.Project.CurrentStyleGroup = sg;
+                        // use existing style
+                        shape.Style = style;
                     }
+                    else
+                    {
+                        // create Imported style group
+                        if (_editor.Project.CurrentStyleGroup == null)
+                        {
+                            var sg = ShapeStyleGroup.Create("Imported");
+                            _editor.Project.StyleGroups.Add(sg);
+                            _editor.Project.CurrentStyleGroup = sg;
+                        }
 
-                    // add missing style
-                    _editor.Project.CurrentStyleGroup.Styles.Add(shape.Style);
+                        // add missing style
+                        _editor.Project.CurrentStyleGroup.Styles.Add(shape.Style);
 
-                    // recreate styles dictionary
-                    styles = _editor.Project.StyleGroups
-                        .Where(sg => sg.Styles != null && sg.Styles.Count > 0)
-                        .SelectMany(sg => sg.Styles)
-                        .Distinct(new StyleComparer())
-                        .ToDictionary(s => s.Name);
+                        // recreate styles dictionary
+                        styles = _editor.Project.StyleGroups
+                            .Where(sg => sg.Styles != null && sg.Styles.Count > 0)
+                            .SelectMany(sg => sg.Styles)
+                            .Distinct(new StyleComparer())
+                            .ToDictionary(s => s.Name);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
             }
         }
 
@@ -1807,48 +1888,56 @@ namespace TestEDITOR
         /// <param name="shapes"></param>
         private void TryToRestoreRecords(IEnumerable<BaseShape> shapes)
         {
-            if (_editor.Project.Databases == null)
-                return;
-            
-            var records = _editor.Project.Databases
-                .Where(d => d.Records != null && d.Records.Count > 0)
-                .SelectMany(d => d.Records)
-                .ToDictionary(s => s.Id);
-
-            // try to restore shape record
-            foreach (var shape in Editor.GetAllShapes(shapes))
+            try
             {
-                if (shape.Record == null)
-                    continue;
+                if (_editor.Project.Databases == null)
+                    return;
 
-                Record record;
-                if (records.TryGetValue(shape.Record.Id, out record))
+                var records = _editor.Project.Databases
+                    .Where(d => d.Records != null && d.Records.Count > 0)
+                    .SelectMany(d => d.Records)
+                    .ToDictionary(s => s.Id);
+
+                // try to restore shape record
+                foreach (var shape in Editor.GetAllShapes(shapes))
                 {
-                    // use existing record
-                    shape.Record = record;
-                }
-                else
-                {
-                    // create Imported database
-                    if (_editor.Project.CurrentDatabase == null)
+                    if (shape.Record == null)
+                        continue;
+
+                    Record record;
+                    if (records.TryGetValue(shape.Record.Id, out record))
                     {
-                        var db = Database.Create(
-                            "Imported",
-                            shape.Record.Columns, 
-                            new ObservableCollection<Record>());
-                        _editor.Project.Databases.Add(db);
-                        _editor.Project.CurrentDatabase = db;
+                        // use existing record
+                        shape.Record = record;
                     }
+                    else
+                    {
+                        // create Imported database
+                        if (_editor.Project.CurrentDatabase == null)
+                        {
+                            var db = Database.Create(
+                                "Imported",
+                                shape.Record.Columns,
+                                new ObservableCollection<Record>());
+                            _editor.Project.Databases.Add(db);
+                            _editor.Project.CurrentDatabase = db;
+                        }
 
-                    // add missing data record
-                    _editor.Project.CurrentDatabase.Records.Add(shape.Record);
+                        // add missing data record
+                        _editor.Project.CurrentDatabase.Records.Add(shape.Record);
 
-                    // recreate records dictionary
-                    records = _editor.Project.Databases
-                        .Where(d => d.Records != null && d.Records.Count > 0)
-                        .SelectMany(d => d.Records)
-                        .ToDictionary(s => s.Id);
+                        // recreate records dictionary
+                        records = _editor.Project.Databases
+                            .Where(d => d.Records != null && d.Records.Count > 0)
+                            .SelectMany(d => d.Records)
+                            .ToDictionary(s => s.Id);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
             }
         }
 
@@ -1858,19 +1947,27 @@ namespace TestEDITOR
         /// <param name="shapes"></param>
         public void Paste(IEnumerable<BaseShape> shapes)
         {
-            _editor.Deselect(_editor.Project.CurrentContainer);
-
-            _history.Snapshot(_editor.Project);
-            
-            TryToRestoreStyles(shapes);
-            TryToRestoreRecords(shapes);
-
-            foreach (var shape in shapes)
+            try
             {
-                _editor.Project.CurrentContainer.CurrentLayer.Shapes.Add(shape);
-            }
+                _editor.Deselect(_editor.Project.CurrentContainer);
 
-            _editor.Select(_editor.Project.CurrentContainer, new HashSet<BaseShape>(shapes));
+                _history.Snapshot(_editor.Project);
+
+                TryToRestoreStyles(shapes);
+                TryToRestoreRecords(shapes);
+
+                foreach (var shape in shapes)
+                {
+                    _editor.Project.CurrentContainer.CurrentLayer.Shapes.Add(shape);
+                }
+
+                _editor.Select(_editor.Project.CurrentContainer, new HashSet<BaseShape>(shapes));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
 
         /// <summary>
@@ -2012,31 +2109,39 @@ namespace TestEDITOR
         /// <param name="y"></param>
         public void Drop(Record record, double x, double y)
         {
-            if (_editor.Renderer.SelectedShape != null)
+            try
             {
-                _history.Snapshot(_editor.Project);
-                _editor.Renderer.SelectedShape.Record = record;
-            }
-            else if (_editor.Renderer.SelectedShapes != null && _editor.Renderer.SelectedShapes.Count > 0)
-            {
-                _history.Snapshot(_editor.Project);
-                foreach (var shape in _editor.Renderer.SelectedShapes)
+                if (_editor.Renderer.SelectedShape != null)
                 {
-                    shape.Record = record;
+                    _history.Snapshot(_editor.Project);
+                    _editor.Renderer.SelectedShape.Record = record;
                 }
-            }
-            else
-            {
-                var container = _editor.Project.CurrentContainer;
-                if (container != null)
+                else if (_editor.Renderer.SelectedShapes != null && _editor.Renderer.SelectedShapes.Count > 0)
                 {
-                    var result = ShapeBounds.HitTest(container, new Vector2(x, y), _editor.Project.Options.HitTreshold);
-                    if (result != null)
+                    _history.Snapshot(_editor.Project);
+                    foreach (var shape in _editor.Renderer.SelectedShapes)
                     {
-                        _history.Snapshot(_editor.Project);
-                        result.Record = record;
+                        shape.Record = record;
                     }
                 }
+                else
+                {
+                    var container = _editor.Project.CurrentContainer;
+                    if (container != null)
+                    {
+                        var result = ShapeBounds.HitTest(container, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+                        if (result != null)
+                        {
+                            _history.Snapshot(_editor.Project);
+                            result.Record = record;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2048,31 +2153,39 @@ namespace TestEDITOR
         /// <param name="y"></param>
         public void Drop(ShapeStyle style, double x, double y)
         {
-            if (_editor.Renderer.SelectedShape != null)
+            try
             {
-                _history.Snapshot(_editor.Project);
-                _editor.Renderer.SelectedShape.Style = style;
-            }
-            else if (_editor.Renderer.SelectedShapes != null && _editor.Renderer.SelectedShapes.Count > 0)
-            {
-                _history.Snapshot(_editor.Project);
-                foreach (var shape in _editor.Renderer.SelectedShapes) 
+                if (_editor.Renderer.SelectedShape != null)
                 {
-                    shape.Style = style;
+                    _history.Snapshot(_editor.Project);
+                    _editor.Renderer.SelectedShape.Style = style;
                 }
-            }
-            else
-            {
-                var container = _editor.Project.CurrentContainer;
-                if (container != null)
+                else if (_editor.Renderer.SelectedShapes != null && _editor.Renderer.SelectedShapes.Count > 0)
                 {
-                    var result = ShapeBounds.HitTest(container, new Vector2(x, y), _editor.Project.Options.HitTreshold);
-                    if (result != null)
+                    _history.Snapshot(_editor.Project);
+                    foreach (var shape in _editor.Renderer.SelectedShapes)
                     {
-                        _history.Snapshot(_editor.Project);
-                        result.Style = style;
+                        shape.Style = style;
                     }
                 }
+                else
+                {
+                    var container = _editor.Project.CurrentContainer;
+                    if (container != null)
+                    {
+                        var result = ShapeBounds.HitTest(container, new Vector2(x, y), _editor.Project.Options.HitTreshold);
+                        if (result != null)
+                        {
+                            _history.Snapshot(_editor.Project);
+                            result.Style = style;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2139,11 +2252,19 @@ namespace TestEDITOR
         /// </summary>
         public void Cut()
         {
-            if (CanCopy())
+            try
             {
-                Copy();
+                if (CanCopy())
+                {
+                    Copy();
 
-                _editor.DeleteSelected();
+                    _editor.DeleteSelected();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2152,17 +2273,25 @@ namespace TestEDITOR
         /// </summary>
         public void Copy()
         {
-            if (CanCopy())
+            try
             {
-                if (_editor.Renderer.SelectedShape != null)
+                if (CanCopy())
                 {
-                    Copy(Enumerable.Repeat(_editor.Renderer.SelectedShape, 1).ToList());
-                }
+                    if (_editor.Renderer.SelectedShape != null)
+                    {
+                        Copy(Enumerable.Repeat(_editor.Renderer.SelectedShape, 1).ToList());
+                    }
 
-                if (_editor.Renderer.SelectedShapes != null)
-                {
-                    Copy(_editor.Renderer.SelectedShapes.ToList());
+                    if (_editor.Renderer.SelectedShapes != null)
+                    {
+                        Copy(_editor.Renderer.SelectedShapes.ToList());
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2194,10 +2323,18 @@ namespace TestEDITOR
         /// </summary>
         public void SelectAll()
         {
-            _editor.Deselect(_editor.Project.CurrentContainer);
-            _editor.Select(
-                _editor.Project.CurrentContainer,
-                new HashSet<BaseShape>(_editor.Project.CurrentContainer.CurrentLayer.Shapes));
+            try
+            {
+                _editor.Deselect(_editor.Project.CurrentContainer);
+                _editor.Select(
+                    _editor.Project.CurrentContainer,
+                    new HashSet<BaseShape>(_editor.Project.CurrentContainer.CurrentLayer.Shapes));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
 
         /// <summary>
@@ -2205,9 +2342,17 @@ namespace TestEDITOR
         /// </summary>
         public void ClearAll()
         {
-            _history.Snapshot(_editor.Project);
-            _editor.Project.CurrentContainer.Clear();
-            _editor.Project.CurrentContainer.Invalidate();
+            try
+            {
+                _history.Snapshot(_editor.Project);
+                _editor.Project.CurrentContainer.Clear();
+                _editor.Project.CurrentContainer.Invalidate();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
 
         /// <summary>
@@ -2253,10 +2398,6 @@ namespace TestEDITOR
                 System.Diagnostics.Debug.Print(ex.Message);
                 System.Diagnostics.Debug.Print(ex.StackTrace);
             }
-            
-            
-            
-            
         }
 
         /// <summary>
@@ -2264,45 +2405,53 @@ namespace TestEDITOR
         /// </summary>
         public void InitializeSctipts()
         {
+            try
+            {
 #if DEBUG
-            _rootScriptsPath = "../../../Scripts";
+                _rootScriptsPath = "../../../Scripts";
 #else
             _rootScriptsPath = "Scripts";
 #endif
 
-            Action update = () =>
-            {
-                try
+                Action update = () =>
                 {
-                    ScriptDirectories =
-                        ScriptDirectory.CreateScriptDirectories(_rootScriptsPath);
-                }
-                catch (Exception ex)
+                    try
+                    {
+                        ScriptDirectories =
+                            ScriptDirectory.CreateScriptDirectories(_rootScriptsPath);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.Print(ex.Message);
+                        System.Diagnostics.Debug.Print(ex.StackTrace);
+                    }
+                };
+
+                if (System.IO.Directory.Exists(_rootScriptsPath))
                 {
-                    System.Diagnostics.Debug.Print(ex.Message);
-                    System.Diagnostics.Debug.Print(ex.StackTrace);
+                    update();
+
+                    _watcher = new System.IO.FileSystemWatcher();
+                    _watcher.Path = _rootScriptsPath;
+                    _watcher.Filter = "*.*";
+                    _watcher.NotifyFilter =
+                        System.IO.NotifyFilters.LastAccess
+                        | System.IO.NotifyFilters.LastWrite
+                        | System.IO.NotifyFilters.FileName
+                        | System.IO.NotifyFilters.DirectoryName;
+                    _watcher.IncludeSubdirectories = true;
+                    _watcher.Filter = "*.*";
+                    _watcher.Changed += (s, e) => update();
+                    _watcher.Created += (s, e) => update();
+                    _watcher.Deleted += (s, e) => update();
+                    _watcher.Renamed += (s, e) => update();
+                    _watcher.EnableRaisingEvents = true;
                 }
-            };
-
-            if (System.IO.Directory.Exists(_rootScriptsPath))
+            }
+            catch (Exception ex)
             {
-                update();
-
-                _watcher = new System.IO.FileSystemWatcher();
-                _watcher.Path = _rootScriptsPath;
-                _watcher.Filter = "*.*";
-                _watcher.NotifyFilter =
-                    System.IO.NotifyFilters.LastAccess
-                    | System.IO.NotifyFilters.LastWrite
-                    | System.IO.NotifyFilters.FileName
-                    | System.IO.NotifyFilters.DirectoryName;
-                _watcher.IncludeSubdirectories = true;
-                _watcher.Filter = "*.*";
-                _watcher.Changed += (s, e) => update();
-                _watcher.Created += (s, e) => update();
-                _watcher.Deleted += (s, e) => update();
-                _watcher.Renamed += (s, e) => update();
-                _watcher.EnableRaisingEvents = true;
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2311,22 +2460,30 @@ namespace TestEDITOR
         /// </summary>
         public void InitializeSimulation()
         {
-            _simulationFactory = new BoolSimulationFactory();
-            _simulationFactory.Register(new SignalSimulation());
-            _simulationFactory.Register(new InputSimulation());
-            _simulationFactory.Register(new OutputSimulation());
-            _simulationFactory.Register(new ShortcutSimulation());
-            _simulationFactory.Register(new AndSimulation());
-            _simulationFactory.Register(new OrSimulation());
-            _simulationFactory.Register(new InverterSimulation());
-            _simulationFactory.Register(new XorSimulation());
-            _simulationFactory.Register(new TimerOnSimulation());
-            _simulationFactory.Register(new TimerOffSimulation());
-            _simulationFactory.Register(new TimerPulseSimulation());
-            _simulationFactory.Register(new MemoryResetPriorityVSimulation());
-            _simulationFactory.Register(new MemorySetPriorityVSimulation());
-            _simulationFactory.Register(new MemoryResetPrioritySimulation());
-            _simulationFactory.Register(new MemorySetPrioritySimulation());
+            try
+            {
+                _simulationFactory = new BoolSimulationFactory();
+                _simulationFactory.Register(new SignalSimulation());
+                _simulationFactory.Register(new InputSimulation());
+                _simulationFactory.Register(new OutputSimulation());
+                _simulationFactory.Register(new ShortcutSimulation());
+                _simulationFactory.Register(new AndSimulation());
+                _simulationFactory.Register(new OrSimulation());
+                _simulationFactory.Register(new InverterSimulation());
+                _simulationFactory.Register(new XorSimulation());
+                _simulationFactory.Register(new TimerOnSimulation());
+                _simulationFactory.Register(new TimerOffSimulation());
+                _simulationFactory.Register(new TimerPulseSimulation());
+                _simulationFactory.Register(new MemoryResetPriorityVSimulation());
+                _simulationFactory.Register(new MemorySetPriorityVSimulation());
+                _simulationFactory.Register(new MemoryResetPrioritySimulation());
+                _simulationFactory.Register(new MemorySetPrioritySimulation());
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
 
         /// <summary>
