@@ -240,6 +240,15 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
+        public ICommand AddBindingCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand RemoveBindingCommand { get; set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand AddPropertyCommand { get; set; }
         /// <summary>
         /// 

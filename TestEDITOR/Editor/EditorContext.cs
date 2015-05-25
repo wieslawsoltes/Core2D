@@ -645,6 +645,48 @@ namespace TestEDITOR
                 },
                 () => IsEditMode());
 
+            
+            _commands.AddBindingCommand = new DelegateCommand<object>(
+                (owner) =>
+                {
+                    if (owner != null)
+                    {
+                        if (owner is BaseShape)
+                        {
+                            var shape = owner as BaseShape;
+                            if (shape.Bindings == null)
+                            {
+                                shape.Bindings = new ObservableCollection<ShapeBinding>();
+                            }
+                            
+                            _history.Snapshot(_editor.Project);
+                            shape.Bindings.Add(ShapeBinding.Create("", ""));
+                        }
+                    }
+                },
+                (owner) => IsEditMode());
+
+            _commands.RemoveBindingCommand = new DelegateCommand<object>(
+                (parameter) =>
+                {
+                    if (parameter != null && parameter is ShapeBindingParameter)
+                    {
+                        var owner = (parameter as ShapeBindingParameter).Owner;
+                        var binding = (parameter as ShapeBindingParameter).Binding;
+
+                        if (owner is BaseShape)
+                        {
+                            var shape = owner as BaseShape;
+                            if (shape.Bindings != null)
+                            {
+                                _history.Snapshot(_editor.Project);
+                                shape.Bindings.Remove(binding);
+                            }
+                        }
+                    }
+                },
+                (parameter) => IsEditMode());
+     
             _commands.AddPropertyCommand = new DelegateCommand<object>(
                 (owner) =>
                 {
@@ -652,13 +694,25 @@ namespace TestEDITOR
                     {
                         if (owner is BaseShape)
                         {
+                            var shape = owner as BaseShape;
+                            if (shape.Properties == null)
+                            {
+                                shape.Properties = new ObservableCollection<ShapeProperty>();
+                            }
+                            
                             _history.Snapshot(_editor.Project);
-                            (owner as BaseShape).Properties.Add(ShapeProperty.Create("New", ""));
+                            shape.Properties.Add(ShapeProperty.Create("New", ""));
                         }
                         else if (owner is Container)
                         {
+                            var container = owner as Container;
+                            if (container.Properties == null)
+                            {
+                                container.Properties = new ObservableCollection<ShapeProperty>();
+                            }
+                            
                             _history.Snapshot(_editor.Project);
-                            (owner as Container).Properties.Add(ShapeProperty.Create("New", ""));
+                            container.Properties.Add(ShapeProperty.Create("New", ""));
                         }
                     }
                 },
@@ -674,13 +728,21 @@ namespace TestEDITOR
 
                         if (owner is BaseShape)
                         {
-                            _history.Snapshot(_editor.Project);
-                            (owner as BaseShape).Properties.Remove(property);
+                            var shape = owner as BaseShape;
+                            if (shape.Properties != null)
+                            {
+                                _history.Snapshot(_editor.Project);
+                                shape.Properties.Remove(property);
+                            }
                         }
                         else if (owner is Container)
                         {
-                            _history.Snapshot(_editor.Project);
-                            (owner as Container).Properties.Remove(property);
+                            var container = owner as Container;
+                            if (container.Properties != null)
+                            {
+                                _history.Snapshot(_editor.Project);
+                                container.Properties.Remove(property);
+                            }
                         }
                     }
                 },
@@ -1578,15 +1640,24 @@ namespace TestEDITOR
                 var fields = reader.Read(path);
                 var name = System.IO.Path.GetFileNameWithoutExtension(path);
 
-                IList<string> columns = new ObservableCollection<string>(fields.FirstOrDefault());
-                IEnumerable<string[]> data = fields.Skip(1);
+                var db = Database.Create(name);
 
-                var temp = data.Select(d => DataRecord.Create(columns, d));
-                var records = new ObservableCollection<DataRecord>(temp);
-                var database = Database.Create(name, columns, records);
+                var tempColumns = fields.FirstOrDefault().Select(c => Column.Create(c));
+                IList<Column> columns = new ObservableCollection<Column>(tempColumns);
 
-                _editor.Project.Databases.Add(database);
-                _editor.Project.CurrentDatabase = database;
+                var tempRecords = fields
+                    .Skip(1)
+                    .Select(v => 
+                            Record.Create(
+                                columns,
+                                v.Select(c => Value.Create(c))));
+                var records = new ObservableCollection<Record>(tempRecords);
+
+                db.Columns = columns;
+                db.Records = records;
+
+                _editor.Project.Databases.Add(db);
+                _editor.Project.CurrentDatabase = db;
             }
             catch (Exception ex)
             {
@@ -1680,7 +1751,11 @@ namespace TestEDITOR
         /// <param name="shapes"></param>
         private void TryToRestoreStyles(IEnumerable<BaseShape> shapes)
         {
+            if (_editor.Project.StyleGroups == null)
+                return;
+            
             var styles = _editor.Project.StyleGroups
+                .Where(sg => sg.Styles != null && sg.Styles.Count > 0)
                 .SelectMany(sg => sg.Styles)
                 .Distinct(new StyleComparer())
                 .ToDictionary(s => s.Name);
@@ -1718,6 +1793,7 @@ namespace TestEDITOR
 
                     // recreate styles dictionary
                     styles = _editor.Project.StyleGroups
+                        .Where(sg => sg.Styles != null && sg.Styles.Count > 0)
                         .SelectMany(sg => sg.Styles)
                         .Distinct(new StyleComparer())
                         .ToDictionary(s => s.Name);
@@ -1731,7 +1807,11 @@ namespace TestEDITOR
         /// <param name="shapes"></param>
         private void TryToRestoreRecords(IEnumerable<BaseShape> shapes)
         {
+            if (_editor.Project.Databases == null)
+                return;
+            
             var records = _editor.Project.Databases
+                .Where(d => d.Records != null && d.Records.Count > 0)
                 .SelectMany(d => d.Records)
                 .ToDictionary(s => s.Id);
 
@@ -1741,7 +1821,7 @@ namespace TestEDITOR
                 if (shape.Record == null)
                     continue;
 
-                DataRecord record;
+                Record record;
                 if (records.TryGetValue(shape.Record.Id, out record))
                 {
                     // use existing record
@@ -1755,7 +1835,7 @@ namespace TestEDITOR
                         var db = Database.Create(
                             "Imported",
                             shape.Record.Columns, 
-                            new ObservableCollection<DataRecord>());
+                            new ObservableCollection<Record>());
                         _editor.Project.Databases.Add(db);
                         _editor.Project.CurrentDatabase = db;
                     }
@@ -1765,6 +1845,7 @@ namespace TestEDITOR
 
                     // recreate records dictionary
                     records = _editor.Project.Databases
+                        .Where(d => d.Records != null && d.Records.Count > 0)
                         .SelectMany(d => d.Records)
                         .ToDictionary(s => s.Id);
                 }
@@ -1929,7 +2010,7 @@ namespace TestEDITOR
         /// <param name="record"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void Drop(DataRecord record, double x, double y)
+        public void Drop(Record record, double x, double y)
         {
             if (_editor.Renderer.SelectedShape != null)
             {
@@ -2406,8 +2487,8 @@ namespace TestEDITOR
             (_commands.ExportCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ExitCommand as DelegateCommand).RaiseCanExecuteChanged();
 
-            (_commands.ImportDataCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ExportDataCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ImportDataCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ExportDataCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
 
             (_commands.ImportStyleCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ImportStylesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
@@ -2460,6 +2541,9 @@ namespace TestEDITOR
             (_commands.SnapToGridCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.TryToConnectCommand as DelegateCommand).RaiseCanExecuteChanged();
 
+            (_commands.AddBindingCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.RemoveBindingCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            
             (_commands.AddPropertyCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.RemovePropertyCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
 
