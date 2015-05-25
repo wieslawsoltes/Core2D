@@ -10,7 +10,7 @@
              d:DesignHeight="300" d:DesignWidth="200">
     <TabControl VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
-                TabStripPlacement="Top"
+                TabStripPlacement="Bottom"
                 ItemsSource="{Binding Editor.Project.Databases}"
                 SelectedItem="{Binding Editor.Project.CurrentDatabase}">
         <TabControl.ItemTemplate>
