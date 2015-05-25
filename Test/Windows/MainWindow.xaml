@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:Test.Controls"
         xmlns:converters="clr-namespace:Test.Converters"
         xmlns:paz="clr-namespace:Test.PanAndZoom"
-        Title="Test" Height="720" Width="1320"
+        Title="Test" Height="720" Width="1324"
         Background="LightGray"
         WindowStartupLocation="CenterScreen" WindowState="Normal"
         UseLayoutRounding="True" SnapsToDevicePixels="True"
@@ -32,6 +32,8 @@
         <KeyBinding Command="{Binding Commands.SelectAllCommand}" Gesture="Ctrl+A"/>
         <KeyBinding Command="{Binding Commands.GroupCommand}" Gesture="Ctrl+G"/>
         <KeyBinding Command="{Binding Commands.GroupLayerCommand}" Gesture="Ctrl+Shift+G"/>
+        <KeyBinding Command="{Binding Commands.ImportDataCommand}" Gesture="F8"/>
+        <KeyBinding Command="{Binding Commands.ExportDataCommand}" Gesture="Ctrl+F8"/>
         <KeyBinding Command="{Binding Commands.EvalCommand}" Gesture="F9"/>
         <KeyBinding Command="{Binding Commands.StartSimulationCommand}" Gesture="F5"/>
         <KeyBinding Command="{Binding Commands.StopSimulationCommand}" Gesture="F6"/>
@@ -52,33 +54,33 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="230"/>
+            <ColumnDefinition Width="280"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
         <controls:MenuControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"/>
-        <TabControl Grid.Row="1" Grid.Column="0" Margin="5,8,0,5">
-            <TabItem Header="Groups">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <controls:GroupsControl/>
-                </ScrollViewer>
-            </TabItem>
+        <TabControl Grid.Row="1" Grid.Column="0" Margin="5,5,0,0">
             <TabItem Header="Project">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                     <controls:ProjectControl/>
-                </ScrollViewer> 
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Templates">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                     <controls:TemplatesControl/>
                 </ScrollViewer>
             </TabItem>
+            <TabItem Header="Groups">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <controls:GroupsControl/>
+                </ScrollViewer>
+            </TabItem>
         </TabControl>
         <GridSplitter Grid.Row="1" Grid.Column="1" 
-                      Width="5" Background="Transparent" 
+                      Width="7" Background="Transparent" 
                       ResizeBehavior="PreviousAndNext" 
                       ShowsPreview="True"/>
         <paz:PanAndZoomGrid x:Name="grid"
@@ -86,7 +88,8 @@
                             Background="Transparent"
                             FocusVisualStyle="{x:Null}"
                             Focusable="False"
-                            Grid.Row="1" Grid.Column="2" Margin="0,8,0,5">
+                            Grid.Row="1" Grid.Column="2" 
+                            Margin="0,5,0,0">
             <paz:PanAndZoomBorder x:Name="border"
                                   ClipToBounds="False"
                                   Background="Transparent"
@@ -113,18 +116,13 @@
             </paz:PanAndZoomBorder>
         </paz:PanAndZoomGrid>
         <GridSplitter Grid.Row="1" Grid.Column="3" 
-                      Width="5" Background="Transparent" 
+                      Width="7" Background="Transparent" 
                       ResizeBehavior="PreviousAndNext" 
                       ShowsPreview="True"/>
-        <TabControl Grid.Row="1" Grid.Column="4" Margin="0,8,5,5">
+        <TabControl Grid.Row="1" Grid.Column="4" Margin="0,5,5,0">
             <TabItem Header="Styles">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                     <controls:StylesControl/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Properties">
-                <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <controls:ShapeControl/>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Layers">
@@ -137,38 +135,30 @@
                     <controls:ShapesControl/>
                 </ScrollViewer>
             </TabItem>
+            <TabItem Header="Style">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <controls:StyleControl Margin="2" DataContext="{Binding Editor.Project.CurrentContainer.CurrentShape.Style}">
+                        <controls:StyleControl.Style>
+                            <Style TargetType="controls:StyleControl">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </controls:StyleControl.Style>
+                    </controls:StyleControl>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Shape">
+                <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <controls:ShapeControl/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Data">
+                <controls:DatabasesControl/>
+            </TabItem>
         </TabControl>
-        <Grid Grid.Row="2" Grid.Column="5"
-              Margin="5,2,5,2"
-              VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="{Binding Editor.Renderer.Zoom}" 
-                       TextTrimming="CharacterEllipsis"
-                       Background="{x:Null}"
-                       FocusVisualStyle="{x:Null}"
-                       Grid.Row="0" 
-                       Grid.Column="0" 
-                       TextAlignment="Center" 
-                       VerticalAlignment="Center">
-            </TextBlock>
-            <Slider Value="{Binding Editor.Renderer.Zoom, Converter={StaticResource ZoomScaleConverter}, FallbackValue=1.0}" 
-                    Minimum="0.1" 
-                    Maximum="16.0" 
-                    TickFrequency="0.1" 
-                    SmallChange="0.1" 
-                    LargeChange="1.0" 
-                    IsSnapToTickEnabled="True" 
-                    Grid.Row="0" 
-                    Grid.Column="1" 
-                    Margin="1"
-                    VerticalAlignment="Center">
-            </Slider>
-        </Grid>
     </Grid>
 </Window>
