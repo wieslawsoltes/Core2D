@@ -552,11 +552,11 @@ namespace Test.Windows
                         }
                     }
 
-                    if (e.Data.GetDataPresent(typeof(DataRecord)))
+                    if (e.Data.GetDataPresent(typeof(Record)))
                     {
                         try
                         {
-                            var record = e.Data.GetData(typeof(DataRecord)) as DataRecord;
+                            var record = e.Data.GetData(typeof(Record)) as Record;
                             if (record != null)
                             {
                                 var p = e.GetPosition(containerControl);
