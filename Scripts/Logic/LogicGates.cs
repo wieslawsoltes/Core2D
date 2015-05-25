@@ -124,10 +124,10 @@ XGroup CreateSignal()
     var ci = XPoint.Create(0, 15, ps, "I");
     var co = XPoint.Create(300, 15, ps, "O");
 
-    labelDesignation.TextBinding = "Designation";
-    labelDescription.TextBinding = "Description";
-    labelSignal.TextBinding = "Signal";
-    labelCondition.TextBinding = "Condition";
+    labelDesignation.Bindings.Add(ShapeBinding.Create("Text", "Designation"));
+    labelDescription.Bindings.Add(ShapeBinding.Create("Text", "Description"));
+    labelSignal.Bindings.Add(ShapeBinding.Create("Text", "Signal"));
+    labelCondition.Bindings.Add(ShapeBinding.Create("Text", "Condition"));
 
     var designationProperty = ShapeProperty.Create("Designation", "Designation");
     labelDesignation.Properties = new [] { designationProperty };
