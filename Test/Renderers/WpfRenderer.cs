@@ -45,14 +45,7 @@ namespace Test
         public double Zoom
         {
             get { return _zoom; }
-            set
-            {
-                if (value != _zoom)
-                {
-                    _zoom = value;
-                    Notify("Zoom");
-                }
-            }
+            set { Update(ref _zoom, value); }
         }
 
         /// <summary>
@@ -61,14 +54,7 @@ namespace Test
         public double PanX
         {
             get { return _panX; }
-            set
-            {
-                if (value != _panX)
-                {
-                    _panX = value;
-                    Notify("PanX");
-                }
-            }
+            set { Update(ref _panX, value); }
         }
 
         /// <summary>
@@ -77,14 +63,7 @@ namespace Test
         public double PanY
         {
             get { return _panY; }
-            set
-            {
-                if (value != _panY)
-                {
-                    _panY = value;
-                    Notify("PanY");
-                }
-            }
+            set { Update(ref _panY, value); }
         }
 
         /// <summary>
@@ -93,14 +72,7 @@ namespace Test
         public ShapeState DrawShapeState
         {
             get { return _drawShapeState; }
-            set
-            {
-                if (value != _drawShapeState)
-                {
-                    _drawShapeState = value;
-                    Notify("DrawShapeState");
-                }
-            }
+            set { Update(ref _drawShapeState, value); }
         }
 
         /// <summary>
@@ -109,14 +81,7 @@ namespace Test
         public BaseShape SelectedShape
         {
             get { return _selectedShape; }
-            set
-            {
-                if (value != _selectedShape)
-                {
-                    _selectedShape = value;
-                    Notify("SelectedShape");
-                }
-            }
+            set { Update(ref _selectedShape, value); }
         }
         
         /// <summary>
@@ -125,14 +90,7 @@ namespace Test
         public ICollection<BaseShape> SelectedShapes
         {
             get { return _selectedShapes; }
-            set
-            {
-                if (value != _selectedShapes)
-                {
-                    _selectedShapes = value;
-                    Notify("SelectedShapes");
-                }
-            }
+            set { Update(ref _selectedShapes, value); }
         }
 
         /// <summary>
