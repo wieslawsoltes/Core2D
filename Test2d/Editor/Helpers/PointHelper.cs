@@ -41,7 +41,7 @@ namespace Test2d
                     {
                         _shape = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         _editor.History.Snapshot(_editor.Project);
-                        _editor.Project.CurrentContainer.CurrentLayer.Shapes.Add(_shape);
+                        _editor.Project.CurrentContainer.CurrentLayer.Shapes = _editor.Project.CurrentContainer.CurrentLayer.Shapes.Add(_shape);
                         //_editor.Project.CurrentContainer.Invalidate();
                     }
                     break;

@@ -76,7 +76,7 @@ namespace Test2d
                             _editor.Project.Options.SelectionStyle,
                             null,
                             true);
-                        _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
+                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         _currentState = State.One;
                     }
@@ -88,7 +88,7 @@ namespace Test2d
                         {
                             rectangle.BottomRight.X = x;
                             rectangle.BottomRight.Y = y;
-                            _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
+                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = State.None;
                         }
@@ -131,7 +131,7 @@ namespace Test2d
                         {
                             rectangle.BottomRight.X = x;
                             rectangle.BottomRight.Y = y;
-                            _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
+                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = State.None;
 
@@ -218,6 +218,7 @@ namespace Test2d
                         if (_editor.IsSelectionAvailable())
                         {
                             MoveSelection(x, y);
+                            _editor.Project.CurrentContainer.CurrentLayer.Invalidate();
                             break;
                         }
 
