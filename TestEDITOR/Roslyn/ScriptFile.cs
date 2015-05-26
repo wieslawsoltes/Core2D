@@ -23,14 +23,7 @@ namespace TestEDITOR
         public string Name
         {
             get { return _name; }
-            set
-            {
-                if (value != _name)
-                {
-                    _name = value;
-                    Notify("Name");
-                }
-            }
+            set { Update(ref _name, value); }
         }
 
         /// <summary>
@@ -39,14 +32,7 @@ namespace TestEDITOR
         public string Path
         {
             get { return _path; }
-            set
-            {
-                if (value != _path)
-                {
-                    _path = value;
-                    Notify("Path");
-                }
-            }
+            set { Update(ref _path, value); }
         }
 
         /// <summary>
