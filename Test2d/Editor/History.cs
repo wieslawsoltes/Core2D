@@ -8,6 +8,116 @@ using Test2d;
 
 namespace Test2d
 {
+    // TODO: Add ImmutableArray support.
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class History<T>
+    {
+        private ISerializer _serializer = default(ISerializer);
+        private ICompressor _compressor = default(ICompressor);
+       // private Stack<byte[]> _undos = new Stack<byte[]>();
+        //private Stack<byte[]> _redos = new Stack<byte[]>();
+        //private byte[] _hold = default(byte[]);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="serializer"></param>
+        /// <param name="compressor"></param>
+        public History(ISerializer serializer, ICompressor compressor)
+        {
+            _serializer = serializer;
+            _compressor = compressor;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Reset()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        public void Hold(T obj)
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Commit()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Release()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        public void Snapshot(T obj)
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bson"></param>
+        private void Snapshot(byte[] bson)
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="current"></param>
+        /// <returns></returns>
+        public T Undo(T current)
+        {
+            return default(T);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="current"></param>
+        /// <returns></returns>
+        public T Redo(T current)
+        {
+            return default(T);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool CanUndo()
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool CanRedo()
+        {
+            return false;
+        }
+    }
+
+    /*
     /// <summary>
     /// 
     /// </summary>
@@ -153,4 +263,5 @@ namespace Test2d
             return _redos != null && _redos.Count > 0;
         }
     }
+    */
 }
