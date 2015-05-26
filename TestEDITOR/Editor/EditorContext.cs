@@ -43,14 +43,7 @@ namespace TestEDITOR
         public EditorCommands Commands
         {
             get { return _commands; }
-            set
-            {
-                if (value != _commands)
-                {
-                    _commands = value;
-                    Notify("Commands");
-                }
-            }
+            set { Update(ref _commands, value); }
         }
 
         /// <summary>
@@ -59,14 +52,7 @@ namespace TestEDITOR
         public Editor Editor
         {
             get { return _editor; }
-            set
-            {
-                if (value != _editor)
-                {
-                    _editor = value;
-                    Notify("Editor");
-                }
-            }
+            set { Update(ref _editor, value); }
         }
 
         /// <summary>
@@ -75,14 +61,7 @@ namespace TestEDITOR
         public ITextClipboard TextClipboard
         {
             get { return _textClipboard; }
-            set
-            {
-                if (value != _textClipboard)
-                {
-                    _textClipboard = value;
-                    Notify("TextClipboard");
-                }
-            }
+            set { Update(ref _textClipboard, value); }
         }
 
         /// <summary>
@@ -91,14 +70,7 @@ namespace TestEDITOR
         public ISerializer Serializer
         {
             get { return _serializer; }
-            set
-            {
-                if (value != _serializer)
-                {
-                    _serializer = value;
-                    Notify("Serializer");
-                }
-            }
+            set { Update(ref _serializer, value); }
         }
 
         /// <summary>
@@ -107,14 +79,7 @@ namespace TestEDITOR
         public ICompressor Compressor
         {
             get { return _compressor; }
-            set
-            {
-                if (value != _compressor)
-                {
-                    _compressor = value;
-                    Notify("Compressor");
-                }
-            }
+            set { Update(ref _compressor, value); }
         }
 
         /// <summary>
@@ -123,14 +88,7 @@ namespace TestEDITOR
         public string RootScriptsPath
         {
             get { return _rootScriptsPath; }
-            set
-            {
-                if (value != _rootScriptsPath)
-                {
-                    _rootScriptsPath = value;
-                    Notify("RootScriptsPath");
-                }
-            }
+            set { Update(ref _rootScriptsPath, value); }
         }
 
         /// <summary>
@@ -139,14 +97,7 @@ namespace TestEDITOR
         public IList<ScriptDirectory> ScriptDirectories
         {
             get { return _scriptDirectories; }
-            set
-            {
-                if (value != _scriptDirectories)
-                {
-                    _scriptDirectories = value;
-                    Notify("ScriptDirectories");
-                }
-            }
+            set { Update(ref _scriptDirectories, value); }
         }
 
         /// <summary>
@@ -155,14 +106,7 @@ namespace TestEDITOR
         public bool IsSimulationPaused
         {
             get { return _isSimulationPaused; }
-            set
-            {
-                if (value != _isSimulationPaused)
-                {
-                    _isSimulationPaused = value;
-                    Notify("IsSimulationPaused");
-                }
-            }
+            set { Update(ref _isSimulationPaused, value); }
         }
 
         /// <summary>
@@ -171,14 +115,7 @@ namespace TestEDITOR
         public IDictionary<XGroup, BoolSimulation> Simulations
         {
             get { return _simulations; }
-            set
-            {
-                if (value != _simulations)
-                {
-                    _simulations = value;
-                    Notify("Simulations");
-                }
-            }
+            set { Update(ref _simulations, value); }
         }
 
         /// <summary>
