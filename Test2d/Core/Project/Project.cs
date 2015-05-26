@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Linq;
 
 namespace Test2d
@@ -14,15 +13,15 @@ namespace Test2d
     {
         private string _name;
         private Options _options;
-        private IList<Database> _databases;
+        private ImmutableArray<Database> _databases;
         private Database _currentDatabase;
-        private IList<ShapeStyleGroup> _styleGroups;
+        private ImmutableArray<ShapeStyleGroup> _styleGroups;
         private ShapeStyleGroup _currentStyleGroup;
-        private IList<GroupLibrary> _groupLibraries;
+        private ImmutableArray<GroupLibrary> _groupLibraries;
         private GroupLibrary _currentGroupLibrary;
-        private IList<Container> _templates;
+        private ImmutableArray<Container> _templates;
         private Container _currentTemplate;
-        private IList<Document> _documents;
+        private ImmutableArray<Document> _documents;
         private Document _currentDocument;
         private Container _currentContainer;
 
@@ -56,7 +55,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<Database> Databases
+        public ImmutableArray<Database> Databases
         {
             get { return _databases; }
             set { Update(ref _databases, value); }
@@ -65,7 +64,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<ShapeStyleGroup> StyleGroups
+        public ImmutableArray<ShapeStyleGroup> StyleGroups
         {
             get { return _styleGroups; }
             set { Update(ref _styleGroups, value); }
@@ -83,7 +82,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<GroupLibrary> GroupLibraries
+        public ImmutableArray<GroupLibrary> GroupLibraries
         {
             get { return _groupLibraries; }
             set { Update(ref _groupLibraries, value); }
@@ -101,7 +100,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<Container> Templates
+        public ImmutableArray<Container> Templates
         {
             get { return _templates; }
             set { Update(ref _templates, value); }
@@ -119,7 +118,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<Document> Documents
+        public ImmutableArray<Document> Documents
         {
             get { return _documents; }
             set { Update(ref _documents, value); }
@@ -151,11 +150,13 @@ namespace Test2d
         {
             var sgd = ShapeStyleGroup.Create("Default");
 
-            sgd.Styles.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
-            sgd.Styles.Add(ShapeStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
-            sgd.Styles.Add(ShapeStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
-            sgd.Styles.Add(ShapeStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
-            sgd.Styles.Add(ShapeStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
+            var builder = sgd.Styles.ToBuilder();
+            builder.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
+            builder.Add(ShapeStyle.Create("Yellow", 255, 255, 255, 0, 255, 255, 255, 0, 2.0));
+            builder.Add(ShapeStyle.Create("Red", 255, 255, 0, 0, 255, 255, 0, 0, 2.0));
+            builder.Add(ShapeStyle.Create("Green", 255, 0, 255, 0, 255, 0, 255, 0, 2.0));
+            builder.Add(ShapeStyle.Create("Blue", 255, 0, 0, 255, 255, 0, 0, 255, 2.0));
+            sgd.Styles = builder.ToImmutable();
 
             sgd.CurrentStyle = sgd.Styles.FirstOrDefault();
 
@@ -173,27 +174,30 @@ namespace Test2d
             var solid = ShapeStyle.Create("Solid", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
             solid.LineStyle.Dashes = default(double[]);
             solid.LineStyle.DashOffset = 0.0;
-            sgdl.Styles.Add(solid);
 
             var dash = ShapeStyle.Create("Dash", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
             dash.LineStyle.Dashes = new double[] { 2, 2 };
             dash.LineStyle.DashOffset = 1.0;
-            sgdl.Styles.Add(dash);
 
             var dot = ShapeStyle.Create("Dot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
             dot.LineStyle.Dashes = new double[] { 0, 2 };
             dot.LineStyle.DashOffset = 0.0;
-            sgdl.Styles.Add(dot);
 
             var dashDot = ShapeStyle.Create("DashDot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
             dashDot.LineStyle.Dashes = new double[] { 2, 2, 0, 2 };
             dashDot.LineStyle.DashOffset = 1.0;
-            sgdl.Styles.Add(dashDot);
 
             var dashDotDot = ShapeStyle.Create("DashDotDot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
             dashDotDot.LineStyle.Dashes = new double[] { 2, 2, 0, 2, 0, 2 };
             dashDotDot.LineStyle.DashOffset = 1.0;
-            sgdl.Styles.Add(dashDotDot);
+
+            var builder = sgdl.Styles.ToBuilder();
+            builder.Add(solid);
+            builder.Add(dash);
+            builder.Add(dot);
+            builder.Add(dashDot);
+            builder.Add(dashDotDot);
+            sgdl.Styles = builder.ToImmutable();
 
             sgdl.CurrentStyle = sgdl.Styles.FirstOrDefault();
 
@@ -209,7 +213,9 @@ namespace Test2d
             var sgt = ShapeStyleGroup.Create("Template");
             var gs = ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.0);
 
-            sgt.Styles.Add(gs);
+            var builder = sgt.Styles.ToBuilder();
+            builder.Add(gs);
+            sgt.Styles = builder.ToImmutable();
 
             sgt.CurrentStyle = sgt.Styles.FirstOrDefault();
 
@@ -227,26 +233,25 @@ namespace Test2d
             {
                 Name = name,
                 Options = Options.Create(),
-                Databases = new ObservableCollection<Database>(),
-                StyleGroups = new ObservableCollection<ShapeStyleGroup>(),
-                GroupLibraries = new ObservableCollection<GroupLibrary>(),
-                Templates = new ObservableCollection<Container>(),
-                Documents = new ObservableCollection<Document>(),
+                Databases = ImmutableArray.Create<Database>(),
+                StyleGroups = ImmutableArray.Create<ShapeStyleGroup>(),
+                GroupLibraries = ImmutableArray.Create<GroupLibrary>(),
+                Templates = ImmutableArray.Create<Container>(),
+                Documents = ImmutableArray.Create<Document>(),
             };
 
-            var gld = GroupLibrary.Create("Default");
-            p.GroupLibraries.Add(gld);
+            var glBuilder = p.GroupLibraries.ToBuilder();
+            glBuilder.Add(GroupLibrary.Create("Default"));
+            p.GroupLibraries = glBuilder.ToImmutable();
+
+            var sgBuilder = p.StyleGroups.ToBuilder();
+            sgBuilder.Add(DefaultStyleGroup());
+            sgBuilder.Add(LinesStyleGroup());
+            sgBuilder.Add(TemplateStyleGroup());
+            p.StyleGroups = sgBuilder.ToImmutable();
+
             p.CurrentGroupLibrary = p.GroupLibraries.FirstOrDefault();
-
-            var sgd = DefaultStyleGroup();
-            p.StyleGroups.Add(sgd);
             p.CurrentStyleGroup = p.StyleGroups.FirstOrDefault();
-
-            var sgdl = LinesStyleGroup();
-            p.StyleGroups.Add(sgdl);
-
-            var sgt = TemplateStyleGroup();
-            p.StyleGroups.Add(sgt);
 
             return p;
         }

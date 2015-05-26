@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Linq;
 
 namespace Test2d
@@ -13,7 +12,7 @@ namespace Test2d
     public class GroupLibrary : ObservableObject
     {
         private string _name;
-        private IList<XGroup> _groups;
+        private ImmutableArray<XGroup> _groups;
         private XGroup _currentGroup;
 
         /// <summary>
@@ -28,7 +27,7 @@ namespace Test2d
         /// <summary>
         /// Gets or sets a colletion XGroup.
         /// </summary>
-        public IList<XGroup> Groups
+        public ImmutableArray<XGroup> Groups
         {
             get { return _groups; }
             set { Update(ref _groups, value); }
@@ -53,7 +52,7 @@ namespace Test2d
             return new GroupLibrary()
             {
                 Name = name,
-                Groups = new ObservableCollection<XGroup>()
+                Groups = ImmutableArray.Create<XGroup>()
             };
         }
     }
