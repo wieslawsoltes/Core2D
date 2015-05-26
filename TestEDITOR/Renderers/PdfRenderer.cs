@@ -5,6 +5,7 @@ using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace TestEDITOR
         private double _panY;
         private Test2d.ShapeState _drawShapeState;
         private Test2d.BaseShape _selectedShape;
-        private ICollection<Test2d.BaseShape> _selectedShapes;
+        private ImmutableHashSet<Test2d.BaseShape> _selectedShapes;
 
         /// <summary>
         /// 
@@ -73,7 +74,7 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
-        public ICollection<Test2d.BaseShape> SelectedShapes
+        public ImmutableHashSet<Test2d.BaseShape> SelectedShapes
         {
             get { return _selectedShapes; }
             set { Update(ref _selectedShapes, value); }
@@ -87,7 +88,7 @@ namespace TestEDITOR
             _zoom = 1.0;
             _drawShapeState = Test2d.ShapeState.Visible | Test2d.ShapeState.Printable;
             _selectedShape = default(Test2d.BaseShape);
-            _selectedShapes = default(ICollection<Test2d.BaseShape>);
+            _selectedShapes = default(ImmutableHashSet<Test2d.BaseShape>);
 
             ClearCache();
 
@@ -417,7 +418,7 @@ namespace TestEDITOR
         /// <param name="container"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.Container container, IList<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Test2d.Container container, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
         {
             foreach (var layer in container.Layers)
             {
@@ -435,7 +436,7 @@ namespace TestEDITOR
         /// <param name="layer"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.Layer layer, IList<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Test2d.Layer layer, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
         {
             foreach (var shape in layer.Shapes)
             {
@@ -455,7 +456,7 @@ namespace TestEDITOR
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XLine line, double dx, double dy, IList<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Test2d.XLine line, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -594,7 +595,7 @@ namespace TestEDITOR
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XRectangle rectangle, double dx, double dy, IList<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Test2d.XRectangle rectangle, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -633,7 +634,7 @@ namespace TestEDITOR
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XEllipse ellipse, double dx, double dy, IList<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Test2d.XEllipse ellipse, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -672,7 +673,7 @@ namespace TestEDITOR
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XArc arc, double dx, double dy, IList<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Test2d.XArc arc, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -716,7 +717,7 @@ namespace TestEDITOR
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XBezier bezier, double dx, double dy, IList<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Test2d.XBezier bezier, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -761,7 +762,7 @@ namespace TestEDITOR
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XQBezier qbezier, double dx, double dy, IList<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Test2d.XQBezier qbezier, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -815,7 +816,7 @@ namespace TestEDITOR
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XText text, double dx, double dy, IList<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Test2d.XText text, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -910,7 +911,7 @@ namespace TestEDITOR
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XImage image, double dx, double dy, IList<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Test2d.XImage image, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
         {
             var _gfx = gfx as XGraphics;
 
