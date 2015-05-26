@@ -30,14 +30,7 @@ namespace Test2d
         public string Name
         {
             get { return _name; }
-            set
-            {
-                if (value != _name)
-                {
-                    _name = value;
-                    Notify("Name");
-                }
-            }
+            set { Update(ref _name, value); }
         }
 
         /// <summary>
@@ -46,14 +39,7 @@ namespace Test2d
         public double Width
         {
             get { return _width; }
-            set
-            {
-                if (value != _width)
-                {
-                    _width = value;
-                    Notify("Width");
-                }
-            }
+            set { Update(ref _width, value); }
         }
 
         /// <summary>
@@ -62,14 +48,7 @@ namespace Test2d
         public double Height
         {
             get { return _height; }
-            set
-            {
-                if (value != _height)
-                {
-                    _height = value;
-                    Notify("Height");
-                }
-            }
+            set { Update(ref _height, value); }
         }
 
         /// <summary>
@@ -78,14 +57,7 @@ namespace Test2d
         public ArgbColor Background
         {
             get { return _background; }
-            set
-            {
-                if (value != _background)
-                {
-                    _background = value;
-                    Notify("Background");
-                }
-            }
+            set { Update(ref _background, value); }
         }
 
         /// <summary>
@@ -94,14 +66,7 @@ namespace Test2d
         public IList<ShapeProperty> Properties
         {
             get { return _properties; }
-            set
-            {
-                if (value != _properties)
-                {
-                    _properties = value;
-                    Notify("Properties");
-                }
-            }
+            set { Update(ref _properties, value); }
         }
 
         /// <summary>
@@ -110,14 +75,7 @@ namespace Test2d
         public IList<Layer> Layers
         {
             get { return _layers; }
-            set
-            {
-                if (value != _layers)
-                {
-                    _layers = value;
-                    Notify("Layers");
-                }
-            }
+            set { Update(ref _layers, value); }
         }
 
         /// <summary>
@@ -126,14 +84,7 @@ namespace Test2d
         public Container Template
         {
             get { return _template; }
-            set
-            {
-                if (value != _template)
-                {
-                    _template = value;
-                    Notify("Template");
-                }
-            }
+            set { Update(ref _template, value); }
         }
 
         /// <summary>
@@ -142,14 +93,7 @@ namespace Test2d
         public Layer CurrentLayer
         {
             get { return _currentLayer; }
-            set
-            {
-                if (value != _currentLayer)
-                {
-                    _currentLayer = value;
-                    Notify("CurrentLayer");
-                }
-            }
+            set { Update(ref _currentLayer, value); }
         }
 
         /// <summary>
@@ -158,14 +102,7 @@ namespace Test2d
         public Layer WorkingLayer
         {
             get { return _workingLayer; }
-            set
-            {
-                if (value != _workingLayer)
-                {
-                    _workingLayer = value;
-                    Notify("WorkingLayer");
-                }
-            }
+            set { Update(ref _workingLayer, value); }
         }
         
         /// <summary>
@@ -174,14 +111,7 @@ namespace Test2d
         public Layer HelperLayer
         {
             get { return _helperLayer; }
-            set
-            {
-                if (value != _helperLayer)
-                {
-                    _helperLayer = value;
-                    Notify("HelperLayer");
-                }
-            }
+            set { Update(ref _helperLayer, value); }
         }
 
         /// <summary>
@@ -190,14 +120,7 @@ namespace Test2d
         public BaseShape CurrentShape
         {
             get { return _currentShape; }
-            set
-            {
-                if (value != _currentShape)
-                {
-                    _currentShape = value;
-                    Notify("CurrentShape");
-                }
-            }
+            set { Update(ref _currentShape, value); }
         }
 
         /// <summary>

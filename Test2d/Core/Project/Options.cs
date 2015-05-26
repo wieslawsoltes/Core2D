@@ -25,14 +25,7 @@ namespace Test2d
         public bool SnapToGrid
         {
             get { return _snapToGrid; }
-            set
-            {
-                if (value != _snapToGrid)
-                {
-                    _snapToGrid = value;
-                    Notify("SnapToGrid");
-                }
-            }
+            set { Update(ref _snapToGrid, value); }
         }
 
         /// <summary>
@@ -41,14 +34,7 @@ namespace Test2d
         public double SnapX
         {
             get { return _snapX; }
-            set
-            {
-                if (value != _snapX)
-                {
-                    _snapX = value;
-                    Notify("SnapX");
-                }
-            }
+            set { Update(ref _snapX, value); }
         }
 
         /// <summary>
@@ -57,14 +43,7 @@ namespace Test2d
         public double SnapY
         {
             get { return _snapY; }
-            set
-            {
-                if (value != _snapY)
-                {
-                    _snapY = value;
-                    Notify("SnapY");
-                }
-            }
+            set { Update(ref _snapY, value); }
         }
 
         /// <summary>
@@ -73,14 +52,7 @@ namespace Test2d
         public double HitTreshold
         {
             get { return _hitTreshold; }
-            set
-            {
-                if (value != _hitTreshold)
-                {
-                    _hitTreshold = value;
-                    Notify("HitTreshold");
-                }
-            }
+            set { Update(ref _hitTreshold, value); }
         }
 
         /// <summary>
@@ -89,14 +61,7 @@ namespace Test2d
         public bool DefaultIsFilled
         {
             get { return _defaultIsFilled; }
-            set
-            {
-                if (value != _defaultIsFilled)
-                {
-                    _defaultIsFilled = value;
-                    Notify("DefaultIsFilled");
-                }
-            }
+            set { Update(ref _defaultIsFilled, value); }
         }
 
         /// <summary>
@@ -105,14 +70,7 @@ namespace Test2d
         public bool TryToConnect
         {
             get { return _tryToConnect; }
-            set
-            {
-                if (value != _tryToConnect)
-                {
-                    _tryToConnect = value;
-                    Notify("TryToConnect");
-                }
-            }
+            set { Update(ref _tryToConnect, value); }
         }
 
         /// <summary>
@@ -121,14 +79,7 @@ namespace Test2d
         public BaseShape PointShape
         {
             get { return _pointShape; }
-            set
-            {
-                if (value != _pointShape)
-                {
-                    _pointShape = value;
-                    Notify("PointShape");
-                }
-            }
+            set { Update(ref _pointShape, value); }
         }
         
         /// <summary>
@@ -137,14 +88,7 @@ namespace Test2d
         public ShapeStyle SelectionStyle
         {
             get { return _selectionStyle; }
-            set
-            {
-                if (value != _selectionStyle)
-                {
-                    _selectionStyle = value;
-                    Notify("SelectionStyle");
-                }
-            }
+            set { Update(ref _selectionStyle, value); }
         }
         
         /// <summary>
@@ -153,14 +97,7 @@ namespace Test2d
         public ShapeStyle HelperStyle
         {
             get { return _helperStyle; }
-            set
-            {
-                if (value != _helperStyle)
-                {
-                    _helperStyle = value;
-                    Notify("HelperStyle");
-                }
-            }
+            set { Update(ref _helperStyle, value); }
         }
 
         /// <summary>

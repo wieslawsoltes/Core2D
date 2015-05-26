@@ -21,14 +21,7 @@ namespace Test2d
         public string Name
         {
             get { return _name; }
-            set
-            {
-                if (value != _name)
-                {
-                    _name = value;
-                    Notify("Name");
-                }
-            }
+            set { Update(ref _name, value); }
         }
 
         /// <summary>
@@ -37,14 +30,7 @@ namespace Test2d
         public IList<ShapeStyle> Styles
         {
             get { return _styles; }
-            set
-            {
-                if (value != _styles)
-                {
-                    _styles = value;
-                    Notify("Styles");
-                }
-            }
+            set { Update(ref _styles, value); }
         }
 
         /// <summary>
@@ -53,14 +39,7 @@ namespace Test2d
         public ShapeStyle CurrentStyle
         {
             get { return _currentStyle; }
-            set
-            {
-                if (value != _currentStyle)
-                {
-                    _currentStyle = value;
-                    Notify("CurrentStyle");
-                }
-            }
+            set { Update(ref _currentStyle, value); }
         }
 
         /// <summary>

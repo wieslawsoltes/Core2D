@@ -22,14 +22,7 @@ namespace Test2d
         public string Name
         {
             get { return _name; }
-            set
-            {
-                if (value != _name)
-                {
-                    _name = value;
-                    Notify("Name");
-                }
-            }
+            set { Update(ref _name, value); }
         }
 
         /// <summary>
@@ -38,14 +31,7 @@ namespace Test2d
         public ArgbColor Stroke
         {
             get { return _stroke; }
-            set
-            {
-                if (value != _stroke)
-                {
-                    _stroke = value;
-                    Notify("Stroke");
-                }
-            }
+            set { Update(ref _stroke, value); }
         }
 
         /// <summary>
@@ -54,14 +40,7 @@ namespace Test2d
         public ArgbColor Fill
         {
             get { return _fill; }
-            set
-            {
-                if (value != _fill)
-                {
-                    _fill = value;
-                    Notify("Fill");
-                }
-            }
+            set { Update(ref _fill, value); }
         }
 
         /// <summary>
@@ -70,14 +49,7 @@ namespace Test2d
         public double Thickness
         {
             get { return _thickness; }
-            set
-            {
-                if (value != _thickness)
-                {
-                    _thickness = value;
-                    Notify("Thickness");
-                }
-            }
+            set { Update(ref _thickness, value); }
         }
 
         /// <summary>
@@ -86,14 +58,7 @@ namespace Test2d
         public LineStyle LineStyle
         {
             get { return _lineStyle; }
-            set
-            {
-                if (value != _lineStyle)
-                {
-                    _lineStyle = value;
-                    Notify("LineStyle");
-                }
-            }
+            set { Update(ref _lineStyle, value); }
         }
 
         /// <summary>
@@ -102,14 +67,7 @@ namespace Test2d
         public TextStyle TextStyle
         {
             get { return _textStyle; }
-            set
-            {
-                if (value != _textStyle)
-                {
-                    _textStyle = value;
-                    Notify("TextStyle");
-                }
-            }
+            set { Update(ref _textStyle, value); }
         }
 
         /// <summary>

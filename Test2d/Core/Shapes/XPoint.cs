@@ -22,14 +22,7 @@ namespace Test2d
         public BaseShape Shape
         {
             get { return _shape; }
-            set
-            {
-                if (value != _shape)
-                {
-                    _shape = value;
-                    Notify("Shape");
-                }
-            }
+            set { Update(ref _shape, value); }
         }
 
         /// <summary>
@@ -38,14 +31,7 @@ namespace Test2d
         public double X
         {
             get { return _x; }
-            set
-            {
-                if (value != _x)
-                {
-                    _x = value;
-                    Notify("X");
-                }
-            }
+            set { Update(ref _x, value); }
         }
 
         /// <summary>
@@ -54,14 +40,7 @@ namespace Test2d
         public double Y
         {
             get { return _y; }
-            set
-            {
-                if (value != _y)
-                {
-                    _y = value;
-                    Notify("Y");
-                }
-            }
+            set { Update(ref _y, value); }
         }
 
         /// <summary>

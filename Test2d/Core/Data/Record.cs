@@ -21,14 +21,7 @@ namespace Test2d
         public Guid Id
         {
             get { return _id; }
-            set
-            {
-                if (value != _id)
-                {
-                    _id = value;
-                    Notify("Id");
-                }
-            }
+            set { Update(ref _id, value); }
         }
 
         /// <summary>
@@ -37,14 +30,7 @@ namespace Test2d
         public IList<Column> Columns
         {
             get { return _columns; }
-            set
-            {
-                if (value != _columns)
-                {
-                    _columns = value;
-                    Notify("Columns");
-                }
-            }
+            set { Update(ref _columns, value); }
         }
 
         /// <summary>
@@ -53,14 +39,7 @@ namespace Test2d
         public IList<Value> Values
         {
             get { return _values; }
-            set
-            {
-                if (value != _values)
-                {
-                    _values = value;
-                    Notify("Values");
-                }
-            }
+            set { Update(ref _values, value); }
         }
 
         /// <summary>

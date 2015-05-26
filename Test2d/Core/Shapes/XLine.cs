@@ -21,14 +21,7 @@ namespace Test2d
         public XPoint Start
         {
             get { return _start; }
-            set
-            {
-                if (value != _start)
-                {
-                    _start = value;
-                    Notify("Start");
-                }
-            }
+            set { Update(ref _start, value); }
         }
 
         /// <summary>
@@ -37,14 +30,7 @@ namespace Test2d
         public XPoint End
         {
             get { return _end; }
-            set
-            {
-                if (value != _end)
-                {
-                    _end = value;
-                    Notify("End");
-                }
-            }
+            set { Update(ref _end, value); }
         }
 
         /// <summary>

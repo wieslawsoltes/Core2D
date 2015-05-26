@@ -32,14 +32,7 @@ namespace Test2d
         public string Name
         {
             get { return _name; }
-            set
-            {
-                if (value != _name)
-                {
-                    _name = value;
-                    Notify("Name");
-                }
-            }
+            set { Update(ref _name, value); }
         }
 
         /// <summary>
@@ -48,14 +41,7 @@ namespace Test2d
         public Options Options
         {
             get { return _options; }
-            set
-            {
-                if (value != _options)
-                {
-                    _options = value;
-                    Notify("Options");
-                }
-            }
+            set { Update(ref _options, value); }
         }
 
         /// <summary>
@@ -64,14 +50,7 @@ namespace Test2d
         public Database CurrentDatabase
         {
             get { return _currentDatabase; }
-            set
-            {
-                if (value != _currentDatabase)
-                {
-                    _currentDatabase = value;
-                    Notify("CurrentDatabase");
-                }
-            }
+            set { Update(ref _currentDatabase, value); }
         }
 
         /// <summary>
@@ -80,14 +59,7 @@ namespace Test2d
         public IList<Database> Databases
         {
             get { return _databases; }
-            set
-            {
-                if (value != _databases)
-                {
-                    _databases = value;
-                    Notify("Databases");
-                }
-            }
+            set { Update(ref _databases, value); }
         }
 
         /// <summary>
@@ -96,14 +68,7 @@ namespace Test2d
         public IList<ShapeStyleGroup> StyleGroups
         {
             get { return _styleGroups; }
-            set
-            {
-                if (value != _styleGroups)
-                {
-                    _styleGroups = value;
-                    Notify("StyleGroups");
-                }
-            }
+            set { Update(ref _styleGroups, value); }
         }
 
         /// <summary>
@@ -112,14 +77,7 @@ namespace Test2d
         public ShapeStyleGroup CurrentStyleGroup
         {
             get { return _currentStyleGroup; }
-            set
-            {
-                if (value != _currentStyleGroup)
-                {
-                    _currentStyleGroup = value;
-                    Notify("CurrentStyleGroup");
-                }
-            }
+            set { Update(ref _currentStyleGroup, value); }
         }
 
         /// <summary>
@@ -128,14 +86,7 @@ namespace Test2d
         public IList<GroupLibrary> GroupLibraries
         {
             get { return _groupLibraries; }
-            set
-            {
-                if (value != _groupLibraries)
-                {
-                    _groupLibraries = value;
-                    Notify("GroupLibraries");
-                }
-            }
+            set { Update(ref _groupLibraries, value); }
         }
 
         /// <summary>
@@ -144,14 +95,7 @@ namespace Test2d
         public GroupLibrary CurrentGroupLibrary
         {
             get { return _currentGroupLibrary; }
-            set
-            {
-                if (value != _currentGroupLibrary)
-                {
-                    _currentGroupLibrary = value;
-                    Notify("CurrentGroupLibrary");
-                }
-            }
+            set { Update(ref _currentGroupLibrary, value); }
         }
 
         /// <summary>
@@ -160,14 +104,7 @@ namespace Test2d
         public IList<Container> Templates
         {
             get { return _templates; }
-            set
-            {
-                if (value != _templates)
-                {
-                    _templates = value;
-                    Notify("Templates");
-                }
-            }
+            set { Update(ref _templates, value); }
         }
 
         /// <summary>
@@ -176,14 +113,7 @@ namespace Test2d
         public Container CurrentTemplate
         {
             get { return _currentTemplate; }
-            set
-            {
-                if (value != _currentTemplate)
-                {
-                    _currentTemplate = value;
-                    Notify("CurrentTemplate");
-                }
-            }
+            set { Update(ref _currentTemplate, value); }
         }
 
         /// <summary>
@@ -192,14 +122,7 @@ namespace Test2d
         public IList<Document> Documents
         {
             get { return _documents; }
-            set
-            {
-                if (value != _documents)
-                {
-                    _documents = value;
-                    Notify("Documents");
-                }
-            }
+            set { Update(ref _documents, value); }
         }
 
         /// <summary>
@@ -208,14 +131,7 @@ namespace Test2d
         public Document CurrentDocument
         {
             get { return _currentDocument; }
-            set
-            {
-                if (value != _currentDocument)
-                {
-                    _currentDocument = value;
-                    Notify("CurrentDocument");
-                }
-            }
+            set { Update(ref _currentDocument, value); }
         }
 
         /// <summary>
@@ -224,14 +140,7 @@ namespace Test2d
         public Container CurrentContainer
         {
             get { return _currentContainer; }
-            set
-            {
-                if (value != _currentContainer)
-                {
-                    _currentContainer = value;
-                    Notify("CurrentContainer");
-                }
-            }
+            set { Update(ref _currentContainer, value); }
         }
 
         /// <summary>

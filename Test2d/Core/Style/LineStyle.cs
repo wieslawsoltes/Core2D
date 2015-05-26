@@ -26,14 +26,7 @@ namespace Test2d
         public string Name
         {
             get { return _name; }
-            set
-            {
-                if (value != _name)
-                {
-                    _name = value;
-                    Notify("Name");
-                }
-            }
+            set { Update(ref _name, value); }
         }
         
         /// <summary>
@@ -42,14 +35,7 @@ namespace Test2d
         public ArrowStyle StartArrowStyle
         {
             get { return _startArrowStyle; }
-            set
-            {
-                if (value != _startArrowStyle)
-                {
-                    _startArrowStyle = value;
-                    Notify("StartArrowStyle");
-                }
-            }
+            set { Update(ref _startArrowStyle, value); }
         }
         
         /// <summary>
@@ -58,14 +44,7 @@ namespace Test2d
         public ArrowStyle EndArrowStyle
         {
             get { return _endArrowStyle; }
-            set
-            {
-                if (value != _endArrowStyle)
-                {
-                    _endArrowStyle = value;
-                    Notify("EndArrowStyle");
-                }
-            }
+            set { Update(ref _endArrowStyle, value); }
         }
 
         /// <summary>
@@ -74,14 +53,7 @@ namespace Test2d
         public LineCap LineCap
         {
             get { return _lineCap; }
-            set
-            {
-                if (value != _lineCap)
-                {
-                    _lineCap = value;
-                    Notify("LineCap");
-                }
-            }
+            set { Update(ref _lineCap, value); }
         }
 
         /// <summary>
@@ -90,14 +62,7 @@ namespace Test2d
         public double[] Dashes
         {
             get { return _dashes; }
-            set
-            {
-                if (value != _dashes)
-                {
-                    _dashes = value;
-                    Notify("Dashes");
-                }
-            }
+            set { Update(ref _dashes, value); }
         }
 
         /// <summary>
@@ -106,14 +71,7 @@ namespace Test2d
         public double DashOffset
         {
             get { return _dashOffset; }
-            set
-            {
-                if (value != _dashOffset)
-                {
-                    _dashOffset = value;
-                    Notify("DashOffset");
-                }
-            }
+            set { Update(ref _dashOffset, value); }
         }
 
         /// <summary>
@@ -122,14 +80,7 @@ namespace Test2d
         public MaxLengthFlags MaxLengthFlags
         {
             get { return _maxLengthFlags; }
-            set
-            {
-                if (value != _maxLengthFlags)
-                {
-                    _maxLengthFlags = value;
-                    Notify("MaxLengthFlags");
-                }
-            }
+            set { Update(ref _maxLengthFlags, value); }
         }
 
         /// <summary>
@@ -138,14 +89,7 @@ namespace Test2d
         public double MaxLength
         {
             get { return _maxLength; }
-            set
-            {
-                if (value != _maxLength)
-                {
-                    _maxLength = value;
-                    Notify("MaxLength");
-                }
-            }
+            set { Update(ref _maxLength, value); }
         }
 
         /// <summary>
@@ -154,14 +98,7 @@ namespace Test2d
         public ShapeState MaxLengthStartState
         {
             get { return _maxLengthStartState; }
-            set
-            {
-                if (value != _maxLengthStartState)
-                {
-                    _maxLengthStartState = value;
-                    Notify("MaxLengthStartState");
-                }
-            }
+            set { Update(ref _maxLengthStartState, value); }
         }
 
         /// <summary>
@@ -170,14 +107,7 @@ namespace Test2d
         public ShapeState MaxLengthEndState
         {
             get { return _maxLengthEndState; }
-            set
-            {
-                if (value != _maxLengthEndState)
-                {
-                    _maxLengthEndState = value;
-                    Notify("MaxLengthEndState");
-                }
-            }
+            set { Update(ref _maxLengthEndState, value); }
         }
 
         /// <summary>

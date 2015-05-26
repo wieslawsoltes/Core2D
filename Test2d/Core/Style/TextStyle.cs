@@ -23,14 +23,7 @@ namespace Test2d
         public string Name
         {
             get { return _name; }
-            set
-            {
-                if (value != _name)
-                {
-                    _name = value;
-                    Notify("Name");
-                }
-            }
+            set { Update(ref _name, value); }
         }
         
         /// <summary>
@@ -39,14 +32,7 @@ namespace Test2d
         public string FontName
         {
             get { return _fontName; }
-            set
-            {
-                if (value != _fontName)
-                {
-                    _fontName = value;
-                    Notify("FontName");
-                }
-            }
+            set { Update(ref _fontName, value); }
         }
 
         /// <summary>
@@ -55,14 +41,7 @@ namespace Test2d
         public string FontFile
         {
             get { return _fontFile; }
-            set
-            {
-                if (value != _fontFile)
-                {
-                    _fontFile = value;
-                    Notify("FontFile");
-                }
-            }
+            set { Update(ref _fontFile, value); }
         }
 
         /// <summary>
@@ -71,14 +50,7 @@ namespace Test2d
         public double FontSize
         {
             get { return _fontSize; }
-            set
-            {
-                if (value != _fontSize)
-                {
-                    _fontSize = value;
-                    Notify("FontSize");
-                }
-            }
+            set { Update(ref _fontSize, value); }
         }
 
         /// <summary>
@@ -87,14 +59,7 @@ namespace Test2d
         public FontStyle FontStyle
         {
             get { return _fontStyle; }
-            set
-            {
-                if (value != _fontStyle)
-                {
-                    _fontStyle = value;
-                    Notify("FontStyle");
-                }
-            }
+            set { Update(ref _fontStyle, value); }
         }
 
         /// <summary>
@@ -103,14 +68,7 @@ namespace Test2d
         public TextHAlignment TextHAlignment
         {
             get { return _textHAlignment; }
-            set
-            {
-                if (value != _textHAlignment)
-                {
-                    _textHAlignment = value;
-                    Notify("TextHAlignment");
-                }
-            }
+            set { Update(ref _textHAlignment, value); }
         }
         
         /// <summary>
@@ -119,14 +77,7 @@ namespace Test2d
         public TextVAlignment TextVAlignment
         {
             get { return _textVAlignment; }
-            set
-            {
-                if (value != _textVAlignment)
-                {
-                    _textVAlignment = value;
-                    Notify("TextVAlignment");
-                }
-            }
+            set { Update(ref _textVAlignment, value); }
         }
 
         /// <summary>

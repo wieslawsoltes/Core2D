@@ -21,14 +21,7 @@ namespace Test2d
         public string Name
         {
             get { return _name; }
-            set
-            {
-                if (value != _name)
-                {
-                    _name = value;
-                    Notify("Name");
-                }
-            }
+            set { Update(ref _name, value); }
         }
 
         /// <summary>
@@ -37,14 +30,7 @@ namespace Test2d
         public IList<Column> Columns
         {
             get { return _columns; }
-            set
-            {
-                if (value != _columns)
-                {
-                    _columns = value;
-                    Notify("Columns");
-                }
-            }
+            set { Update(ref _columns, value); }
         }
 
         /// <summary>
@@ -53,14 +39,7 @@ namespace Test2d
         public IList<Record> Records
         {
             get { return _records; }
-            set
-            {
-                if (value != _records)
-                {
-                    _records = value;
-                    Notify("Records");
-                }
-            }
+            set { Update(ref _records, value); }
         }
 
         /// <summary>

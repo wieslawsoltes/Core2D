@@ -24,14 +24,7 @@ namespace Test2d
         public XPoint Point1
         {
             get { return _point1; }
-            set
-            {
-                if (value != _point1)
-                {
-                    _point1 = value;
-                    Notify("Point1");
-                }
-            }
+            set { Update(ref _point1, value); }
         }
 
         /// <summary>
@@ -40,14 +33,7 @@ namespace Test2d
         public XPoint Point2
         {
             get { return _point2; }
-            set
-            {
-                if (value != _point2)
-                {
-                    _point2 = value;
-                    Notify("Point2");
-                }
-            }
+            set { Update(ref _point2, value); }
         }
 
         /// <summary>
@@ -56,14 +42,7 @@ namespace Test2d
         public XPoint Point3
         {
             get { return _point3; }
-            set
-            {
-                if (value != _point3)
-                {
-                    _point3 = value;
-                    Notify("Point3");
-                }
-            }
+            set { Update(ref _point3, value); }
         }
 
         /// <summary>
@@ -72,14 +51,7 @@ namespace Test2d
         public XPoint Point4
         {
             get { return _point4; }
-            set
-            {
-                if (value != _point4)
-                {
-                    _point4 = value;
-                    Notify("Point4");
-                }
-            }
+            set { Update(ref _point4, value); }
         }
 
         /// <summary>
@@ -88,14 +60,7 @@ namespace Test2d
         public bool IsFilled
         {
             get { return _isFilled; }
-            set
-            {
-                if (value != _isFilled)
-                {
-                    _isFilled = value;
-                    Notify("IsFilled");
-                }
-            }
+            set { Update(ref _isFilled, value); }
         }
 
         /// <summary>

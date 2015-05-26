@@ -21,14 +21,7 @@ namespace Test2d
         public string Name
         {
             get { return _name; }
-            set
-            {
-                if (value != _name)
-                {
-                    _name = value;
-                    Notify("Name");
-                }
-            }
+            set { Update(ref _name, value); }
         }
 
         /// <summary>
@@ -37,14 +30,7 @@ namespace Test2d
         public IList<Container> Containers
         {
             get { return _containers; }
-            set
-            {
-                if (value != _containers)
-                {
-                    _containers = value;
-                    Notify("Containers");
-                }
-            }
+            set { Update(ref _containers, value); }
         }
 
         /// <summary>

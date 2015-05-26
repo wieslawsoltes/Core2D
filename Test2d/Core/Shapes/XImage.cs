@@ -23,14 +23,7 @@ namespace Test2d
         public XPoint TopLeft
         {
             get { return _topLeft; }
-            set
-            {
-                if (value != _topLeft)
-                {
-                    _topLeft = value;
-                    Notify("TopLeft");
-                }
-            }
+            set { Update(ref _topLeft, value); }
         }
 
         /// <summary>
@@ -39,14 +32,7 @@ namespace Test2d
         public XPoint BottomRight
         {
             get { return _bottomRight; }
-            set
-            {
-                if (value != _bottomRight)
-                {
-                    _bottomRight = value;
-                    Notify("BottomRight");
-                }
-            }
+            set { Update(ref _bottomRight, value); }
         }
 
         /// <summary>
@@ -55,14 +41,7 @@ namespace Test2d
         public bool IsFilled
         {
             get { return _isFilled; }
-            set
-            {
-                if (value != _isFilled)
-                {
-                    _isFilled = value;
-                    Notify("IsFilled");
-                }
-            }
+            set { Update(ref _isFilled, value); }
         }
 
         /// <summary>
@@ -71,14 +50,7 @@ namespace Test2d
         public Uri Path
         {
             get { return _path; }
-            set
-            {
-                if (value != _path)
-                {
-                    _path = value;
-                    Notify("Path");
-                }
-            }
+            set { Update(ref _path, value); }
         }
 
         /// <summary>

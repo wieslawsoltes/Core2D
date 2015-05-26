@@ -19,14 +19,7 @@ namespace Test2d
         public string Property
         {
             get { return _property; }
-            set
-            {
-                if (value != _property)
-                {
-                    _property = value;
-                    Notify("Property");
-                }
-            }
+            set { Update(ref _property, value); }
         }
 
         /// <summary>
@@ -35,14 +28,7 @@ namespace Test2d
         public string Path
         {
             get { return _path; }
-            set
-            {
-                if (value != _path)
-                {
-                    _path = value;
-                    Notify("Path");
-                }
-            }
+            set { Update(ref _path, value); }
         }
 
         /// <summary>

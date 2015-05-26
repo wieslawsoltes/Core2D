@@ -42,14 +42,7 @@ namespace Test2d
         public string Name
         {
             get { return _name; }
-            set
-            {
-                if (value != _name)
-                {
-                    _name = value;
-                    Notify("Name");
-                }
-            }
+            set { Update(ref _name, value); }
         }
 
         /// <summary>
@@ -58,14 +51,7 @@ namespace Test2d
         public Container Owner
         {
             get { return _owner; }
-            set
-            {
-                if (value != _owner)
-                {
-                    _owner = value;
-                    Notify("Owner");
-                }
-            }
+            set { Update(ref _owner, value); }
         }
 
         /// <summary>
@@ -74,15 +60,7 @@ namespace Test2d
         public bool IsVisible
         {
             get { return _isVisible; }
-            set
-            {
-                if (value != _isVisible)
-                {
-                    _isVisible = value;
-                    Invalidate();
-                    Notify("IsVisible");
-                }
-            }
+            set { Update(ref _isVisible, value); }
         }
 
         /// <summary>
@@ -91,14 +69,7 @@ namespace Test2d
         public IList<BaseShape> Shapes
         {
             get { return _shapes; }
-            set
-            {
-                if (value != _shapes)
-                {
-                    _shapes = value;
-                    Notify("Shapes");
-                }
-            }
+            set { Update(ref _shapes, value); }
         }
 
         /// <summary>

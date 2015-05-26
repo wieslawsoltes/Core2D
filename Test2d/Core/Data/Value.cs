@@ -19,14 +19,7 @@ namespace Test2d
         public string Content
         {
             get { return _content; }
-            set
-            {
-                if (value != _content)
-                {
-                    _content = value;
-                    Notify("Content");
-                }
-            }
+            set { Update(ref _content, value); }
         }
 
         /// <summary>

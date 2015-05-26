@@ -22,14 +22,7 @@ namespace Test2d
         public Guid Id
         {
             get { return _id; }
-            set
-            {
-                if (value != _id)
-                {
-                    _id = value;
-                    Notify("Id");
-                }
-            }
+            set { Update(ref _id, value); }
         }
         
         /// <summary>
@@ -38,14 +31,7 @@ namespace Test2d
         public string Name
         {
             get { return _name; }
-            set
-            {
-                if (value != _name)
-                {
-                    _name = value;
-                    Notify("Name");
-                }
-            }
+            set { Update(ref _name, value); }
         }
         
         /// <summary>
@@ -54,14 +40,7 @@ namespace Test2d
         public double Width
         {
             get { return _width; }
-            set
-            {
-                if (value != _width)
-                {
-                    _width = value;
-                    Notify("Width");
-                }
-            }
+            set { Update(ref _width, value); }
         }
         
         /// <summary>
@@ -70,14 +49,7 @@ namespace Test2d
         public bool IsVisible
         {
             get { return _isVisible; }
-            set
-            {
-                if (value != _isVisible)
-                {
-                    _isVisible = value;
-                    Notify("IsVisible");
-                }
-            }
+            set { Update(ref _isVisible, value); }
         }
         
         /// <summary>

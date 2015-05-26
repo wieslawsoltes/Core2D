@@ -46,14 +46,7 @@ namespace Test2d
         public IList<BaseShape> Shapes
         {
             get { return _shapes; }
-            set
-            {
-                if (value != _shapes)
-                {
-                    _shapes = value;
-                    Notify("Shapes");
-                }
-            }
+            set { Update(ref _shapes, value); }
         }
 
         /// <summary>
@@ -62,14 +55,7 @@ namespace Test2d
         public IList<XPoint> Connectors
         {
             get { return _connectors; }
-            set
-            {
-                if (value != _connectors)
-                {
-                    _connectors = value;
-                    Notify("Connectors");
-                }
-            }
+            set { Update(ref _connectors, value); }
         }
    
         /// <summary>

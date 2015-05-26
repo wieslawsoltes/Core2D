@@ -20,14 +20,7 @@ namespace Test2d
         public byte A
         {
             get { return _a; }
-            set
-            {
-                if (value != _a)
-                {
-                    _a = value;
-                    Notify("A");
-                }
-            }
+            set { Update(ref _a, value); }
         }
 
         /// <summary>
@@ -36,14 +29,7 @@ namespace Test2d
         public byte R
         {
             get { return _r; }
-            set
-            {
-                if (value != _r)
-                {
-                    _r = value;
-                    Notify("R");
-                }
-            }
+            set { Update(ref _r, value); }
         }
 
         /// <summary>
@@ -52,14 +38,7 @@ namespace Test2d
         public byte G
         {
             get { return _g; }
-            set
-            {
-                if (value != _g)
-                {
-                    _g = value;
-                    Notify("G");
-                }
-            }
+            set { Update(ref _g, value); }
         }
 
         /// <summary>
@@ -68,14 +47,7 @@ namespace Test2d
         public byte B
         {
             get { return _b; }
-            set
-            {
-                if (value != _b)
-                {
-                    _b = value;
-                    Notify("B");
-                }
-            }
+            set { Update(ref _b, value); }
         }
 
         /// <summary>

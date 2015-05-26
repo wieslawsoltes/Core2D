@@ -20,14 +20,7 @@ namespace Test2d
         public ArrowType ArrowType
         {
             get { return _arrowType; }
-            set
-            {
-                if (value != _arrowType)
-                {
-                    _arrowType = value;
-                    Notify("ArrowType");
-                }
-            }
+            set { Update(ref _arrowType, value); }
         }
         
         /// <summary>
@@ -36,14 +29,7 @@ namespace Test2d
         public bool IsFilled
         {
             get { return _isFilled; }
-            set
-            {
-                if (value != _isFilled)
-                {
-                    _isFilled = value;
-                    Notify("IsFilled");
-                }
-            }
+            set { Update(ref _isFilled, value); }
         }
         
         /// <summary>
@@ -52,14 +38,7 @@ namespace Test2d
         public double RadiusX
         {
             get { return _radiusX; }
-            set
-            {
-                if (value != _radiusX)
-                {
-                    _radiusX = value;
-                    Notify("RadiusX");
-                }
-            }
+            set { Update(ref _radiusX, value); }
         }
         
         /// <summary>
@@ -68,14 +47,7 @@ namespace Test2d
         public double RadiusY
         {
             get { return _radiusY; }
-            set
-            {
-                if (value != _radiusY)
-                {
-                    _radiusY = value;
-                    Notify("RadiusY");
-                }
-            }
+            set { Update(ref _radiusY, value); }
         }
   
         /// <summary>

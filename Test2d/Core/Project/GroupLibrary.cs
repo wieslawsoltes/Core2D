@@ -22,14 +22,7 @@ namespace Test2d
         public string Name
         {
             get { return _name; }
-            set
-            {
-                if (value != _name)
-                {
-                    _name = value;
-                    Notify("Name");
-                }
-            }
+            set { Update(ref _name, value); }
         }
 
         /// <summary>
@@ -38,14 +31,7 @@ namespace Test2d
         public IList<XGroup> Groups
         {
             get { return _groups; }
-            set
-            {
-                if (value != _groups)
-                {
-                    _groups = value;
-                    Notify("Groups");
-                }
-            }
+            set { Update(ref _groups, value); }
         }
 
         /// <summary>
@@ -54,14 +40,7 @@ namespace Test2d
         public XGroup CurrentGroup
         {
             get { return _currentGroup; }
-            set
-            {
-                if (value != _currentGroup)
-                {
-                    _currentGroup = value;
-                    Notify("CurrentGroup");
-                }
-            }
+            set { Update(ref _currentGroup, value); }
         }
 
         /// <summary>
