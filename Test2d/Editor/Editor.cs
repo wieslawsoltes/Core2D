@@ -30,14 +30,7 @@ namespace Test2d
         public Project Project
         {
             get { return _project; }
-            set
-            {
-                if (value != _project)
-                {
-                    _project = value;
-                    Notify("Project");
-                }
-            }
+            set { Update(ref _project, value); }
         }
 
         /// <summary>
@@ -46,14 +39,7 @@ namespace Test2d
         public IRenderer Renderer
         {
             get { return _renderer; }
-            set
-            {
-                if (value != _renderer)
-                {
-                    _renderer = value;
-                    Notify("Renderer");
-                }
-            }
+            set { Update(ref _renderer, value); }
         }
 
         /// <summary>
@@ -62,14 +48,7 @@ namespace Test2d
         public Tool CurrentTool
         {
             get { return _currentTool; }
-            set
-            {
-                if (value != _currentTool)
-                {
-                    _currentTool = value;
-                    Notify("CurrentTool");
-                }
-            }
+            set { Update(ref _currentTool, value); }
         }
 
         /// <summary>
@@ -78,14 +57,7 @@ namespace Test2d
         public bool IsContextMenu
         {
             get { return _isContextMenu; }
-            set
-            {
-                if (value != _isContextMenu)
-                {
-                    _isContextMenu = value;
-                    Notify("IsContextMenu");
-                }
-            }
+            set { Update(ref _isContextMenu, value); }
         }
         
         /// <summary>
@@ -94,14 +66,7 @@ namespace Test2d
         public bool EnableObserver
         {
             get { return _enableObserver; }
-            set
-            {
-                if (value != _enableObserver)
-                {
-                    _enableObserver = value;
-                    Notify("EnableObserver");
-                }
-            }
+            set { Update(ref _enableObserver, value); }
         }
 
         /// <summary>
@@ -110,14 +75,7 @@ namespace Test2d
         public Observer Observer
         {
             get { return _observer; }
-            set
-            {
-                if (value != _observer)
-                {
-                    _observer = value;
-                    Notify("Observer");
-                }
-            }
+            set { Update(ref _observer, value); }
         }
 
         /// <summary>
@@ -126,14 +84,7 @@ namespace Test2d
         public bool EnableHistory
         {
             get { return _enableHistory; }
-            set
-            {
-                if (value != _enableHistory)
-                {
-                    _enableHistory = value;
-                    Notify("EnableHistory");
-                }
-            }
+            set { Update(ref _enableHistory, value); }
         }
 
         /// <summary>
@@ -142,14 +93,7 @@ namespace Test2d
         public History<Project> History
         {
             get { return _history; }
-            set
-            {
-                if (value != _history)
-                {
-                    _history = value;
-                    Notify("History");
-                }
-            }
+            set { Update(ref _history, value); }
         }
 
         /// <summary>
