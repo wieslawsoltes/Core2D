@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Linq;
 
 namespace Test2d
@@ -72,7 +71,7 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, Record r)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             var record = r ?? this.Record;
 
@@ -163,8 +162,8 @@ namespace Test2d
             {
                 Name = name,
                 Style = style,
-                Bindings = new ObservableCollection<ShapeBinding>(),
-                Properties = new ObservableCollection<ShapeProperty>(),
+                Bindings = ImmutableArray.Create<ShapeBinding>(),
+                Properties = ImmutableArray.Create<ShapeProperty>(),
                 Point1 = XPoint.Create(x1, y1, point),
                 Point2 = XPoint.Create(x2, y2, point),
                 Point3 = XPoint.Create(x3, y3, point),
