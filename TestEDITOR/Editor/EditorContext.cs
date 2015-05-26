@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.CodeAnalysis.Scripting.CSharp;
 using Microsoft.Practices.Prism.Commands;
 using System;
+using System.Collections.Immutable;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Test2d;
 using TestSIM;
+using Microsoft.CodeAnalysis;
 
 namespace TestEDITOR
 {
@@ -29,7 +31,7 @@ namespace TestEDITOR
         private ISerializer _serializer;
         private ICompressor _compressor;
         private string _rootScriptsPath;
-        private IList<ScriptDirectory> _scriptDirectories;
+        private ImmutableArray<ScriptDirectory> _scriptDirectories;
         private bool _isSimulationPaused;
         private System.IO.FileSystemWatcher _watcher = default(System.IO.FileSystemWatcher);
         private System.Threading.Timer _timer = default(System.Threading.Timer);
@@ -94,7 +96,7 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
-        public IList<ScriptDirectory> ScriptDirectories
+        public ImmutableArray<ScriptDirectory> ScriptDirectories
         {
             get { return _scriptDirectories; }
             set { Update(ref _scriptDirectories, value); }
@@ -166,11 +168,13 @@ namespace TestEDITOR
             var settings = LineGrid.Settings.Create(0, 0, container.Width, container.Height, 30, 30);
             var shapes = LineGrid.Create(gs, settings, project.Options.PointShape);
             var layer = container.Layers.FirstOrDefault();
-            
+
+            var builder = layer.Shapes.ToBuilder();
             foreach (var shape in shapes) 
             {
-                layer.Shapes.Add(shape);
+                builder.Add(shape);
             }
+            layer.Shapes = builder.ToImmutable();
 
             return container;
         }
@@ -207,8 +211,11 @@ namespace TestEDITOR
         {
             var project = Project.Create();
 
-            project.Templates.Add(EmptyTemplate(project));
-            project.Templates.Add(GridTemplate(project));
+            var templateBuilder = project.Templates.ToBuilder();
+            templateBuilder.Add(EmptyTemplate(project));
+            templateBuilder.Add(GridTemplate(project));
+            project.Templates = templateBuilder.ToImmutable();
+
             project.CurrentTemplate = project.Templates.FirstOrDefault(t => t.Name == "Grid");
 
             var document1 = DefaultDocument(project);
@@ -217,11 +224,18 @@ namespace TestEDITOR
             var container1 = DefaultContainer(project);
             var container2 = DefaultContainer(project);
 
-            document1.Containers.Add(container1);
-            document2.Containers.Add(container2);
+            var document1Builder = document1.Containers.ToBuilder();
+            document1Builder.Add(container1);
+            document1.Containers = document1Builder.ToImmutable();
 
-            project.Documents.Add(document1);
-            project.Documents.Add(document2);
+            var document2Builder = document2.Containers.ToBuilder();
+            document2Builder.Add(container2);
+            document2.Containers = document2Builder.ToImmutable();
+
+            var documentBuilder = project.Documents.ToBuilder();
+            documentBuilder.Add(document1);
+            documentBuilder.Add(document2);
+            project.Documents = documentBuilder.ToImmutable();
 
             project.CurrentDocument = project.Documents.FirstOrDefault();
             project.CurrentContainer = document1.Containers.FirstOrDefault();
@@ -278,7 +292,7 @@ namespace TestEDITOR
                             {
                                 var container = DefaultContainer(_editor.Project);
                                 _editor.History.Snapshot(_editor.Project);
-                                document.Containers.Add(container);
+                                document.Containers = document.Containers.Add(container);
                                 _editor.Project.CurrentContainer = container;
                             }
                         }
@@ -287,14 +301,14 @@ namespace TestEDITOR
                             var selected = item as Document;
                             var container = DefaultContainer(_editor.Project);
                             _editor.History.Snapshot(_editor.Project);
-                            selected.Containers.Add(container);
+                            selected.Containers = selected.Containers.Add(container);
                             _editor.Project.CurrentContainer = container;
                         }
                         else if (item is Project)
                         {
                             var document = DefaultDocument(_editor.Project);
                             _editor.History.Snapshot(_editor.Project);
-                            _editor.Project.Documents.Add(document);
+                            _editor.Project.Documents = _editor.Project.Documents.Add(document);
                             _editor.Project.CurrentDocument = document;
                             _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
                         }
@@ -391,7 +405,12 @@ namespace TestEDITOR
                                     _editor.History.Snapshot(_editor.Project);
                                     int index = document.Containers.IndexOf(container);
                                     var clone = Clone(_containerToCopy);
-                                    document.Containers[index] = clone;
+
+                                    var builder = document.Containers.ToBuilder();
+                                    builder[index] = clone;
+                                    document.Containers = builder.ToImmutable();
+                                    //document.Containers[index] = clone;
+
                                     _editor.Project.CurrentContainer = clone;
                                 }
                             }
@@ -403,7 +422,7 @@ namespace TestEDITOR
                                 var document = item as Document;
                                 _editor.History.Snapshot(_editor.Project);
                                 var clone = Clone(_containerToCopy);
-                                document.Containers.Add(clone);
+                                document.Containers = document.Containers.Add(clone);
                                 _editor.Project.CurrentContainer = clone;
                             }
                             else if (_documentToCopy != null)
@@ -411,7 +430,12 @@ namespace TestEDITOR
                                 var document = item as Document;
                                 int index = _editor.Project.Documents.IndexOf(document);
                                 var clone = Clone(_documentToCopy);
-                                _editor.Project.Documents[index] = clone;
+
+                                var builder = _editor.Project.Documents.ToBuilder();
+                                builder[index] = clone;
+                                _editor.Project.Documents = builder.ToImmutable();
+                                //_editor.Project.Documents[index] = clone;
+
                                 _editor.Project.CurrentDocument = clone;
                             }
                         }
@@ -586,11 +610,11 @@ namespace TestEDITOR
                                 var shape = owner as BaseShape;
                                 if (shape.Bindings == null)
                                 {
-                                    shape.Bindings = new ObservableCollection<ShapeBinding>();
+                                    shape.Bindings = ImmutableArray.Create<ShapeBinding>();
                                 }
 
                                 _editor.History.Snapshot(_editor.Project);
-                                shape.Bindings.Add(ShapeBinding.Create("", ""));
+                                shape.Bindings = shape.Bindings.Add(ShapeBinding.Create("", ""));
                             }
                         }
                     },
@@ -610,7 +634,7 @@ namespace TestEDITOR
                                 if (shape.Bindings != null)
                                 {
                                     _editor.History.Snapshot(_editor.Project);
-                                    shape.Bindings.Remove(binding);
+                                    shape.Bindings = shape.Bindings.Remove(binding);
                                 }
                             }
                         }
@@ -627,22 +651,22 @@ namespace TestEDITOR
                                 var shape = owner as BaseShape;
                                 if (shape.Properties == null)
                                 {
-                                    shape.Properties = new ObservableCollection<ShapeProperty>();
+                                    shape.Properties = ImmutableArray.Create<ShapeProperty>();
                                 }
 
                                 _editor.History.Snapshot(_editor.Project);
-                                shape.Properties.Add(ShapeProperty.Create("New", ""));
+                                shape.Properties = shape.Properties.Add(ShapeProperty.Create("New", ""));
                             }
                             else if (owner is Container)
                             {
                                 var container = owner as Container;
                                 if (container.Properties == null)
                                 {
-                                    container.Properties = new ObservableCollection<ShapeProperty>();
+                                    container.Properties = ImmutableArray.Create<ShapeProperty>();
                                 }
 
                                 _editor.History.Snapshot(_editor.Project);
-                                container.Properties.Add(ShapeProperty.Create("New", ""));
+                                container.Properties = container.Properties.Add(ShapeProperty.Create("New", ""));
                             }
                         }
                     },
@@ -662,7 +686,7 @@ namespace TestEDITOR
                                 if (shape.Properties != null)
                                 {
                                     _editor.History.Snapshot(_editor.Project);
-                                    shape.Properties.Remove(property);
+                                    shape.Properties = shape.Properties.Remove(property);
                                 }
                             }
                             else if (owner is Container)
@@ -671,7 +695,7 @@ namespace TestEDITOR
                                 if (container.Properties != null)
                                 {
                                     _editor.History.Snapshot(_editor.Project);
-                                    container.Properties.Remove(property);
+                                    container.Properties = container.Properties.Remove(property);
                                 }
                             }
                         }
@@ -683,7 +707,7 @@ namespace TestEDITOR
                     {
                         var gl = GroupLibrary.Create("New");
                         _editor.History.Snapshot(_editor.Project);
-                        _editor.Project.GroupLibraries.Add(gl);
+                        _editor.Project.GroupLibraries = _editor.Project.GroupLibraries.Add(gl);
                     },
                     () => IsEditMode());
 
@@ -706,7 +730,7 @@ namespace TestEDITOR
                                 if (clone != null)
                                 {
                                     _editor.History.Snapshot(_editor.Project);
-                                    _editor.Project.CurrentGroupLibrary.Groups.Add(clone);
+                                    _editor.Project.CurrentGroupLibrary.Groups = _editor.Project.CurrentGroupLibrary.Groups.Add(clone);
                                 }
                             }
                         }
@@ -724,7 +748,7 @@ namespace TestEDITOR
                     () =>
                     {
                         _editor.History.Snapshot(_editor.Project);
-                        _editor.Project.CurrentContainer.Layers.Add(Layer.Create("New", _editor.Project.CurrentContainer));
+                        _editor.Project.CurrentContainer.Layers = _editor.Project.CurrentContainer.Layers.Add(Layer.Create("New", _editor.Project.CurrentContainer));
                     },
                     () => IsEditMode());
 
@@ -740,7 +764,7 @@ namespace TestEDITOR
                     {
                         var sg = ShapeStyleGroup.Create("New");
                         _editor.History.Snapshot(_editor.Project);
-                        _editor.Project.StyleGroups.Add(sg);
+                        _editor.Project.StyleGroups = _editor.Project.StyleGroups.Add(sg);
                     },
                     () => IsEditMode());
 
@@ -755,7 +779,7 @@ namespace TestEDITOR
                     () =>
                     {
                         _editor.History.Snapshot(_editor.Project);
-                        _editor.Project.CurrentStyleGroup.Styles.Add(ShapeStyle.Create("New"));
+                        _editor.Project.CurrentStyleGroup.Styles = _editor.Project.CurrentStyleGroup.Styles.Add(ShapeStyle.Create("New"));
                     },
                     () => IsEditMode());
 
@@ -812,7 +836,7 @@ namespace TestEDITOR
                     () =>
                     {
                         _editor.History.Snapshot(_editor.Project);
-                        _editor.Project.Templates.Add(EmptyTemplate(_editor.Project));
+                        _editor.Project.Templates = _editor.Project.Templates.Add(EmptyTemplate(_editor.Project));
                     },
                     () => IsEditMode());
 
@@ -874,7 +898,7 @@ namespace TestEDITOR
                     {
                         var container = DefaultContainer(_editor.Project);
                         _editor.History.Snapshot(_editor.Project);
-                        _editor.Project.CurrentDocument.Containers.Add(container);
+                        _editor.Project.CurrentDocument.Containers = _editor.Project.CurrentDocument.Containers.Add(container);
                         _editor.Project.CurrentContainer = container;
                     },
                     (item) => IsEditMode());
@@ -914,7 +938,7 @@ namespace TestEDITOR
                     {
                         var document = DefaultDocument(_editor.Project);
                         _editor.History.Snapshot(_editor.Project);
-                        _editor.Project.Documents.Add(document);
+                        _editor.Project.Documents = _editor.Project.Documents.Add(document);
                         _editor.Project.CurrentDocument = document;
                         _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
                     },
@@ -990,7 +1014,13 @@ namespace TestEDITOR
         {
             try
             {
+                var path = System.IO.Path.GetDirectoryName(typeof(object).Assembly.Location);
+
                 ScriptOptions options = ScriptOptions.Default
+                    .AddReferences(MetadataReference.CreateFromFile(System.IO.Path.Combine(path, "mscorlib.dll")))
+                    .AddReferences(MetadataReference.CreateFromFile(System.IO.Path.Combine(path, "System.dll")))
+                    .AddReferences(MetadataReference.CreateFromFile(System.IO.Path.Combine(path, "System.Core.dll")))
+                    .AddReferences(MetadataReference.CreateFromFile(System.IO.Path.Combine(path, "System.Runtime.dll")))
                     .AddNamespaces("System")
                     .AddNamespaces("System.Collections.Generic")
                     .AddNamespaces("System.Text")
@@ -998,6 +1028,8 @@ namespace TestEDITOR
                     .AddNamespaces("System.Threading.Tasks")
                     .AddReferences(Assembly.GetAssembly(typeof(ObservableCollection<>)))
                     .AddNamespaces("System.Collections.ObjectModel")
+                    .AddReferences(Assembly.GetAssembly(typeof(ImmutableArray<>)))
+                    .AddNamespaces("System.Collections.Immutable")
                     .AddReferences(Assembly.GetAssembly(typeof(System.Linq.Enumerable)))
                     .AddNamespaces("System.Linq")
                     .AddReferences(Assembly.GetAssembly(typeof(ObservableObject)))
@@ -1143,41 +1175,41 @@ namespace TestEDITOR
 
                 if (project.StyleGroups == null)
                 {
-                    project.StyleGroups = new ObservableCollection<ShapeStyleGroup>();
+                    project.StyleGroups = ImmutableArray.Create<ShapeStyleGroup>();
                 }
 
                 if (project.GroupLibraries == null)
                 {
-                    project.GroupLibraries = new ObservableCollection<GroupLibrary>();
+                    project.GroupLibraries = ImmutableArray.Create<GroupLibrary>();
                 }
 
                 if (project.Templates == null)
                 {
-                    project.Templates = new ObservableCollection<Container>();
+                    project.Templates = ImmutableArray.Create<Container>();
                 }
 
                 if (project.Documents == null)
                 {
-                    project.Documents = new ObservableCollection<Document>();
+                    project.Documents = ImmutableArray.Create<Document>();
                 }
 
                 foreach (var document in project.Documents)
                 {
                     if (document.Containers == null)
                     {
-                        document.Containers = new ObservableCollection<Container>();
+                        document.Containers = ImmutableArray.Create<Container>();
                     }
 
                     foreach (var container in document.Containers)
                     {
                         if (container.Layers == null)
                         {
-                            container.Layers = new ObservableCollection<Layer>();
+                            container.Layers = ImmutableArray.Create<Layer>();
                         }
 
                         if (container.Properties == null)
                         {
-                            container.Properties = new ObservableCollection<ShapeProperty>();
+                            container.Properties = ImmutableArray.Create<ShapeProperty>();
                         }
 
                         if (container.WorkingLayer == null)
@@ -1331,6 +1363,8 @@ namespace TestEDITOR
         /// <param name="type"></param>
         public void ImportEx(string path, object item, ImportType type)
         {
+            // TODO: Add ImmutableArray support.
+            /*
             try
             {
                 switch (type)
@@ -1495,6 +1529,7 @@ namespace TestEDITOR
                 System.Diagnostics.Debug.Print(ex.Message);
                 System.Diagnostics.Debug.Print(ex.StackTrace);
             }
+            */
         }
 
         /// <summary>
@@ -1635,20 +1670,20 @@ namespace TestEDITOR
                 var db = Database.Create(name);
 
                 var tempColumns = fields.FirstOrDefault().Select(c => Column.Create(c));
-                IList<Column> columns = new ObservableCollection<Column>(tempColumns);
+                var columns = ImmutableArray.CreateRange<Column>(tempColumns);
 
                 var tempRecords = fields
                     .Skip(1)
                     .Select(v => 
                             Record.Create(
                                 columns,
-                                v.Select(c => Value.Create(c))));
-                var records = new ObservableCollection<Record>(tempRecords);
+                                ImmutableArray.CreateRange<Value>(v.Select(c => Value.Create(c)))));
+                var records = ImmutableArray.CreateRange<Record>(tempRecords);
 
                 db.Columns = columns;
                 db.Records = records;
 
-                _editor.Project.Databases.Add(db);
+                _editor.Project.Databases = _editor.Project.Databases.Add(db);
                 _editor.Project.CurrentDatabase = db;
             }
             catch (Exception ex)
@@ -1757,7 +1792,7 @@ namespace TestEDITOR
                     return;
 
                 var styles = _editor.Project.StyleGroups
-                    .Where(sg => sg.Styles != null && sg.Styles.Count > 0)
+                    .Where(sg => sg.Styles != null && sg.Styles.Length > 0)
                     .SelectMany(sg => sg.Styles)
                     .Distinct(new StyleComparer())
                     .ToDictionary(s => s.Name);
@@ -1786,16 +1821,16 @@ namespace TestEDITOR
                         if (_editor.Project.CurrentStyleGroup == null)
                         {
                             var sg = ShapeStyleGroup.Create("Imported");
-                            _editor.Project.StyleGroups.Add(sg);
+                            _editor.Project.StyleGroups = _editor.Project.StyleGroups.Add(sg);
                             _editor.Project.CurrentStyleGroup = sg;
                         }
 
                         // add missing style
-                        _editor.Project.CurrentStyleGroup.Styles.Add(shape.Style);
+                        _editor.Project.CurrentStyleGroup.Styles = _editor.Project.CurrentStyleGroup.Styles.Add(shape.Style);
 
                         // recreate styles dictionary
                         styles = _editor.Project.StyleGroups
-                            .Where(sg => sg.Styles != null && sg.Styles.Count > 0)
+                            .Where(sg => sg.Styles != null && sg.Styles.Length > 0)
                             .SelectMany(sg => sg.Styles)
                             .Distinct(new StyleComparer())
                             .ToDictionary(s => s.Name);
@@ -1821,7 +1856,7 @@ namespace TestEDITOR
                     return;
 
                 var records = _editor.Project.Databases
-                    .Where(d => d.Records != null && d.Records.Count > 0)
+                    .Where(d => d.Records != null && d.Records.Length > 0)
                     .SelectMany(d => d.Records)
                     .ToDictionary(s => s.Id);
 
@@ -1842,20 +1877,17 @@ namespace TestEDITOR
                         // create Imported database
                         if (_editor.Project.CurrentDatabase == null)
                         {
-                            var db = Database.Create(
-                                "Imported",
-                                shape.Record.Columns,
-                                new ObservableCollection<Record>());
-                            _editor.Project.Databases.Add(db);
+                            var db = Database.Create("Imported", shape.Record.Columns);
+                            _editor.Project.Databases = _editor.Project.Databases.Add(db);
                             _editor.Project.CurrentDatabase = db;
                         }
 
                         // add missing data record
-                        _editor.Project.CurrentDatabase.Records.Add(shape.Record);
+                        _editor.Project.CurrentDatabase.Records = _editor.Project.CurrentDatabase.Records.Add(shape.Record);
 
                         // recreate records dictionary
                         records = _editor.Project.Databases
-                            .Where(d => d.Records != null && d.Records.Count > 0)
+                            .Where(d => d.Records != null && d.Records.Length > 0)
                             .SelectMany(d => d.Records)
                             .ToDictionary(s => s.Id);
                     }
@@ -1883,12 +1915,14 @@ namespace TestEDITOR
                 TryToRestoreStyles(shapes);
                 TryToRestoreRecords(shapes);
 
+                var builder = _editor.Project.CurrentContainer.CurrentLayer.Shapes.ToBuilder();
                 foreach (var shape in shapes)
                 {
-                    _editor.Project.CurrentContainer.CurrentLayer.Shapes.Add(shape);
+                    builder.Add(shape);
                 }
+                _editor.Project.CurrentContainer.CurrentLayer.Shapes = builder.ToImmutable();
 
-                _editor.Select(_editor.Project.CurrentContainer, new HashSet<BaseShape>(shapes));
+                _editor.Select(_editor.Project.CurrentContainer, ImmutableHashSet.CreateRange<BaseShape>(shapes));
             }
             catch (Exception ex)
             {
@@ -1977,7 +2011,7 @@ namespace TestEDITOR
                     var clone = Serializer.FromJson<Document>(json);
                     if (clone != null)
                     {
-                        for (int i = 0; i < clone.Containers.Count; i++)
+                        for (int i = 0; i < clone.Containers.Length; i++)
                         {
                             var container = clone.Containers[i];
                             var shapes = container.Layers.SelectMany(l => l.Shapes);
@@ -2115,7 +2149,7 @@ namespace TestEDITOR
                     _editor.Deselect(_editor.Project.CurrentContainer);
                     clone.Move(sx, sy);
                     _editor.History.Snapshot(_editor.Project);
-                    _editor.Project.CurrentContainer.CurrentLayer.Shapes.Add(clone);
+                    _editor.Project.CurrentContainer.CurrentLayer.Shapes = _editor.Project.CurrentContainer.CurrentLayer.Shapes.Add(clone);
                     _editor.Select(_editor.Project.CurrentContainer, clone);
                 }
             }
@@ -2188,13 +2222,13 @@ namespace TestEDITOR
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
 
-            var count = record.Values.Count;
+            var length = record.Values.Length;
             double px = sx;
             double py = sy;
             double width = 150;
             double height = 15;
 
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < length; i++)
             {
                 var column = record.Columns[i];
                 if (column.IsVisible)
@@ -2205,7 +2239,7 @@ namespace TestEDITOR
                         _editor.Project.CurrentStyleGroup.CurrentStyle,
                         _editor.Project.Options.PointShape, "");
                     var binding = ShapeBinding.Create("Text", record.Columns[i].Name);
-                    text.Bindings.Add(binding);
+                    text.Bindings = text.Bindings.Add(binding);
                     g.AddShape(text);
 
                     py += height;
@@ -2214,7 +2248,7 @@ namespace TestEDITOR
 
             var rectangle = XRectangle.Create(
                 sx, sy,
-                sx + width, sy + (double)count * height,
+                sx + width, sy + (double)length * height,
                 _editor.Project.CurrentStyleGroup.CurrentStyle,
                 _editor.Project.Options.PointShape);
             g.AddShape(rectangle);
@@ -2223,13 +2257,13 @@ namespace TestEDITOR
             double pty = sy;
 
             double pbx = sx + width / 2;
-            double pby = sy + (double)count * height;
+            double pby = sy + (double)length * height;
 
             double plx = sx;
-            double ply = sy + ((double)count * height) / 2;
+            double ply = sy + ((double)length * height) / 2;
 
             double prx = sx + width;
-            double pry = sy + ((double)count * height) / 2;
+            double pry = sy + ((double)length * height) / 2;
 
             var pt = XPoint.Create(ptx, pty, _editor.Project.Options.PointShape);
             var pb = XPoint.Create(pbx, pby, _editor.Project.Options.PointShape);
@@ -2242,7 +2276,7 @@ namespace TestEDITOR
             g.AddConnectorAsNone(pr);
 
             _editor.History.Snapshot(_editor.Project);
-            _editor.Project.CurrentContainer.CurrentLayer.Shapes.Add(g);
+            _editor.Project.CurrentContainer.CurrentLayer.Shapes = _editor.Project.CurrentContainer.CurrentLayer.Shapes.Add(g);
         }
 
         /// <summary>
@@ -2428,7 +2462,7 @@ namespace TestEDITOR
                 _editor.Deselect(_editor.Project.CurrentContainer);
                 _editor.Select(
                     _editor.Project.CurrentContainer,
-                    new HashSet<BaseShape>(_editor.Project.CurrentContainer.CurrentLayer.Shapes));
+                    ImmutableHashSet.CreateRange<BaseShape>(_editor.Project.CurrentContainer.CurrentLayer.Shapes));
             }
             catch (Exception ex)
             {
