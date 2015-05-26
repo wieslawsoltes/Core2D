@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 
 namespace Test2d
 {
@@ -12,8 +11,8 @@ namespace Test2d
     public class Record : ObservableObject
     {
         private Guid _id;
-        private IList<Column> _columns;
-        private IList<Value> _values;
+        private ImmutableArray<Column> _columns;
+        private ImmutableArray<Value> _values;
 
         /// <summary>
         /// 
@@ -27,7 +26,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<Column> Columns
+        public ImmutableArray<Column> Columns
         {
             get { return _columns; }
             set { Update(ref _columns, value); }
@@ -36,7 +35,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<Value> Values
+        public ImmutableArray<Value> Values
         {
             get { return _values; }
             set { Update(ref _values, value); }
@@ -49,14 +48,14 @@ namespace Test2d
         /// <param name="values"></param>
         /// <returns></returns>
         public static Record Create(
-            IList<Column> columns, 
-            IEnumerable<Value> values)
+            ImmutableArray<Column> columns, 
+            ImmutableArray<Value> values)
         {
             return new Record()
             {
                 Id = Guid.NewGuid(),
                 Columns = columns,
-                Values = new ObservableCollection<Value>(values)
+                Values = values
             };
         }
     }

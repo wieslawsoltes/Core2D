@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 
 namespace Test2d
 {
@@ -12,8 +11,8 @@ namespace Test2d
     public class Database : ObservableObject
     {
         private string _name;
-        private IList<Column> _columns;
-        private IList<Record> _records;
+        private ImmutableArray<Column> _columns;
+        private ImmutableArray<Record> _records;
 
         /// <summary>
         /// 
@@ -27,7 +26,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<Column> Columns
+        public ImmutableArray<Column> Columns
         {
             get { return _columns; }
             set { Update(ref _columns, value); }
@@ -36,7 +35,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<Record> Records
+        public ImmutableArray<Record> Records
         {
             get { return _records; }
             set { Update(ref _records, value); }
@@ -52,8 +51,26 @@ namespace Test2d
             return new Database()
             {
                 Name = name,
-                Columns = new ObservableCollection<Column>(),
-                Records = new ObservableCollection<Record>()
+                Columns = ImmutableArray.Create<Column>(),
+                Records = ImmutableArray.Create<Record>()
+            };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="columns"></param>
+        /// <returns></returns>
+        public static Database Create(
+            string name, 
+            ImmutableArray<Column> columns)
+        {
+            return new Database()
+            {
+                Name = name,
+                Columns = columns,
+                Records = ImmutableArray.Create<Record>()
             };
         }
 
@@ -65,9 +82,9 @@ namespace Test2d
         /// <param name="records"></param>
         /// <returns></returns>
         public static Database Create(
-            string name, 
-            IList<Column> columns, 
-            IList<Record> records)
+            string name,
+            ImmutableArray<Column> columns,
+            ImmutableArray<Record> records)
         {
             return new Database()
             {
