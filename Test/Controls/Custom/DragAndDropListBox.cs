@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -149,23 +150,39 @@ namespace Test.Controls
         {
             if (sourceIndex < targetIndex)
             {
-                var items = this.DataContext as IList<T>;
+                var items = (ImmutableArray<T>)this.DataContext;
                 if (items != null)
                 {
-                    items.Insert(targetIndex + 1, source);
-                    items.RemoveAt(sourceIndex);
+                    // TODO: Add ImmutableArray support.
+                    /*
+                    var builder = items.ToBuilder();
+                    builder.Insert(targetIndex + 1, source);
+                    builder.RemoveAt(sourceIndex);
+                    this.DataContext = builder.ToImmutable();
+                    */
+
+                    //items.Insert(targetIndex + 1, source);
+                    //items.RemoveAt(sourceIndex);
                 }
             }
             else
             {
-                var items = this.DataContext as IList<T>;
+                var items = (ImmutableArray<T>)this.DataContext;
                 if (items != null)
                 {
                     int removeIndex = sourceIndex + 1;
-                    if (items.Count + 1 > removeIndex)
+                    if (items.Length + 1 > removeIndex)
                     {
-                        items.Insert(targetIndex, source);
-                        items.RemoveAt(removeIndex);
+                        // TODO: Add ImmutableArray support.
+                        /*
+                        var builder = items.ToBuilder();
+                        builder.Insert(targetIndex, source);
+                        builder.RemoveAt(removeIndex);
+                        this.DataContext = builder.ToImmutable();
+                        */
+
+                        //items.Insert(targetIndex, source);
+                        //items.RemoveAt(removeIndex);
                     }
                 }
             }
@@ -173,12 +190,21 @@ namespace Test.Controls
 
         private void Swap(T source, int sourceIndex, int targetIndex)
         {
-            var items = this.DataContext as IList<T>;
+            var items = (ImmutableArray<T>)this.DataContext;
             if (items != null)
             {
                 var target = items[targetIndex];
-                items[targetIndex] = source;
-                items[sourceIndex] = target;
+
+                // TODO: Add ImmutableArray support.
+                /*
+                var builder = items.ToBuilder();
+                builder[targetIndex] = source;
+                builder[sourceIndex] = target;
+                this.DataContext = builder.ToImmutable();
+                */
+
+                //items[targetIndex] = source;
+                //items[sourceIndex] = target;
             }
         }
     }
