@@ -13,6 +13,7 @@ namespace Test2d
         private string _name;
         private ImmutableArray<Column> _columns;
         private ImmutableArray<Record> _records;
+        private Record _currentRecord;
 
         /// <summary>
         /// 
@@ -39,6 +40,15 @@ namespace Test2d
         {
             get { return _records; }
             set { Update(ref _records, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Record CurrentRecord
+        {
+            get { return _currentRecord; }
+            set { Update(ref _currentRecord, value); }
         }
 
         /// <summary>
