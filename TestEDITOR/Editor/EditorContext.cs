@@ -1761,7 +1761,11 @@ namespace TestEDITOR
                 db.Columns = columns;
                 db.Records = records;
 
-                _editor.Project.Databases = _editor.Project.Databases.Add(db);
+                var previous = _editor.Project.Databases;
+                var next = _editor.Project.Databases.Add(db);
+                _editor.History.Snapshot(previous, next, (p) => _editor.Project.Databases = p);
+                _editor.Project.Databases = next;
+
                 _editor.Project.CurrentDatabase = db;
             }
             catch (Exception ex)
