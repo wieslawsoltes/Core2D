@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +33,7 @@ namespace Test2d
         private string _name;
         private Container _owner;
         private bool _isVisible;
-        private IList<BaseShape> _shapes;
+        private ImmutableArray<BaseShape> _shapes;
 
         /// <summary>
         /// 
@@ -60,13 +59,13 @@ namespace Test2d
         public bool IsVisible
         {
             get { return _isVisible; }
-            set { Update(ref _isVisible, value); }
+            set { Update(ref _isVisible, value); Invalidate(); }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public IList<BaseShape> Shapes
+        public ImmutableArray<BaseShape> Shapes
         {
             get { return _shapes; }
             set { Update(ref _shapes, value); }
@@ -98,7 +97,7 @@ namespace Test2d
                 Name = name,
                 Owner = owner,
                 IsVisible = isVisible,
-                Shapes = new ObservableCollection<BaseShape>()
+                Shapes = ImmutableArray.Create<BaseShape>()
             };
         }
     }

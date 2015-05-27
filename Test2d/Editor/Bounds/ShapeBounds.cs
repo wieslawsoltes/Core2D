@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace Test2d
 {
@@ -524,10 +525,10 @@ namespace Test2d
         /// <param name="shapes"></param>
         /// <param name="rect"></param>
         /// <param name="selection"></param>
-        /// <param name="hs"></param>
+        /// <param name="builder"></param>
         /// <param name="treshold"></param>
         /// <returns></returns>
-        private static bool HitTest(IEnumerable<BaseShape> shapes, Rect2 rect, Vector2[] selection, ICollection<BaseShape> hs, double treshold)
+        private static bool HitTest(IEnumerable<BaseShape> shapes, Rect2 rect, Vector2[] selection, ImmutableHashSet<BaseShape>.Builder builder, double treshold)
         {
             foreach (var shape in shapes)
             {
@@ -535,9 +536,9 @@ namespace Test2d
                 {
                     if (GetPointBounds(shape as XPoint, treshold).IntersectsWith(rect))
                     {
-                        if (hs != null)
+                        if (builder != null)
                         {
-                            hs.Add(shape);
+                            builder.Add(shape);
                         }
                         else
                         {
@@ -553,9 +554,9 @@ namespace Test2d
                         || GetPointBounds(line.End, treshold).IntersectsWith(rect)
                         || LineIntersectsWithRect(ref rect, line.Start, line.End))
                     {
-                        if (hs != null)
+                        if (builder != null)
                         {
-                            hs.Add(line);
+                            builder.Add(line);
                             continue;
                         }
                         else
@@ -569,9 +570,9 @@ namespace Test2d
                 {
                     if (GetEllipseBounds(shape as XEllipse).IntersectsWith(rect))
                     {
-                        if (hs != null)
+                        if (builder != null)
                         {
-                            hs.Add(shape);
+                            builder.Add(shape);
                             continue;
                         }
                         else
@@ -585,9 +586,9 @@ namespace Test2d
                 {
                     if (GetRectangleBounds(shape as XRectangle).IntersectsWith(rect))
                     {
-                        if (hs != null)
+                        if (builder != null)
                         {
-                            hs.Add(shape);
+                            builder.Add(shape);
                             continue;
                         }
                         else
@@ -601,9 +602,9 @@ namespace Test2d
                 {
                     if (GetArcBounds(shape as XArc, 0.0, 0.0).IntersectsWith(rect))
                     {
-                        if (hs != null)
+                        if (builder != null)
                         {
-                            hs.Add(shape);
+                            builder.Add(shape);
                             continue;
                         }
                         else
@@ -617,9 +618,9 @@ namespace Test2d
                 {
                     if (ConvexHullBounds.Overlap(selection, ConvexHullBounds.GetVertices(shape as XBezier)))
                     {
-                        if (hs != null)
+                        if (builder != null)
                         {
-                            hs.Add(shape);
+                            builder.Add(shape);
                             continue;
                         }
                         else
@@ -633,9 +634,9 @@ namespace Test2d
                 {
                     if (ConvexHullBounds.Overlap(selection, ConvexHullBounds.GetVertices(shape as XQBezier)))
                     {
-                        if (hs != null)
+                        if (builder != null)
                         {
-                            hs.Add(shape);
+                            builder.Add(shape);
                             continue;
                         }
                         else
@@ -649,9 +650,9 @@ namespace Test2d
                 {
                     if (GetTextBounds(shape as XText).IntersectsWith(rect))
                     {
-                        if (hs != null)
+                        if (builder != null)
                         {
-                            hs.Add(shape);
+                            builder.Add(shape);
                             continue;
                         }
                         else
@@ -665,9 +666,9 @@ namespace Test2d
                 {
                     if (GetImageBounds(shape as XImage).IntersectsWith(rect))
                     {
-                        if (hs != null)
+                        if (builder != null)
                         {
-                            hs.Add(shape);
+                            builder.Add(shape);
                             continue;
                         }
                         else
@@ -681,9 +682,9 @@ namespace Test2d
                 {
                     if (HitTest((shape as XGroup).Shapes, rect, selection, null, treshold) == true)
                     {
-                        if (hs != null)
+                        if (builder != null)
                         {
-                            hs.Add(shape);
+                            builder.Add(shape);
                             continue;
                         }
                         else
@@ -705,9 +706,9 @@ namespace Test2d
         /// <param name="rect"></param>
         /// <param name="treshold"></param>
         /// <returns></returns>
-        public static ICollection<BaseShape> HitTest(Container container, Rect2 rect, double treshold)
+        public static ImmutableHashSet<BaseShape> HitTest(Container container, Rect2 rect, double treshold)
         {
-            var hs = new HashSet<BaseShape>();
+            var builder = ImmutableHashSet.CreateBuilder<BaseShape>();
 
             var selection = new Vector2[]
             {
@@ -717,13 +718,9 @@ namespace Test2d
                 new Vector2(rect.X, rect.Y + rect.Height)
             };
 
-            //foreach (var layer in container.Layers) 
-            //{
-            //    HitTest(layer.Shapes, rect, selection, hs, treshold);
-            //}
-            HitTest(container.CurrentLayer.Shapes, rect, selection, hs, treshold);
-      
-            return hs;
+            HitTest(container.CurrentLayer.Shapes, rect, selection, builder, treshold);
+
+            return builder.ToImmutableHashSet();
         }
 
         #endregion

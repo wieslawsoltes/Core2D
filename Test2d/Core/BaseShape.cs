@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace Test2d
 {
@@ -14,8 +14,8 @@ namespace Test2d
         private BaseShape _owner;
         private ShapeState _state = ShapeState.Visible | ShapeState.Printable | ShapeState.Standalone;
         private ShapeStyle _style;
-        private IList<ShapeBinding> _bindings;
-        private IList<ShapeProperty> _properties;
+        private ImmutableArray<ShapeBinding> _bindings;
+        private ImmutableArray<ShapeProperty> _properties;
         private Record _record;
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Test2d
         /// <summary>
         /// Gets or sets a colletion ShapeBinding that will be used during drawing.
         /// </summary>
-        public IList<ShapeBinding> Bindings
+        public ImmutableArray<ShapeBinding> Bindings
         {
             get { return _bindings; }
             set { Update(ref _bindings, value); }
@@ -66,7 +66,7 @@ namespace Test2d
         /// <summary>
         /// Gets or sets a colletion ShapeProperty that will be used during drawing.
         /// </summary>
-        public IList<ShapeProperty> Properties
+        public ImmutableArray<ShapeProperty> Properties
         {
             get { return _properties; }
             set { Update(ref _properties, value); }
@@ -90,7 +90,7 @@ namespace Test2d
         /// <param name="dy">The Y axis draw position osffset.</param>
         /// <param name="db">The properties database used for binding.</param>
         /// <param name="r">The external data record used for binding.</param>
-        public abstract void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, Record r);
+        public abstract void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r);
 
         /// <summary>
         /// Move shape position using dx,dy offset.

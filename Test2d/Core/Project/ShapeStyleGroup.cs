@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 
 namespace Test2d
 {
@@ -12,7 +11,7 @@ namespace Test2d
     public class ShapeStyleGroup : ObservableObject
     {
         private string _name;
-        private IList<ShapeStyle> _styles;
+        private ImmutableArray<ShapeStyle> _styles;
         private ShapeStyle _currentStyle;
 
         /// <summary>
@@ -27,7 +26,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<ShapeStyle> Styles
+        public ImmutableArray<ShapeStyle> Styles
         {
             get { return _styles; }
             set { Update(ref _styles, value); }
@@ -52,7 +51,7 @@ namespace Test2d
             return new ShapeStyleGroup()
             {
                 Name = name,
-                Styles = new ObservableCollection<ShapeStyle>()
+                Styles = ImmutableArray.Create<ShapeStyle>()
             };
         }
     }

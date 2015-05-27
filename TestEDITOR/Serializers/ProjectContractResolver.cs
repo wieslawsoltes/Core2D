@@ -3,7 +3,7 @@
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +16,7 @@ namespace TestEDITOR
     internal class ProjectContractResolver : DefaultContractResolver
     {
         /// <summary>
-        /// Use ObservableCollection for IList contract.
+        /// Use ImmutableArray for IList contract.
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
@@ -26,7 +26,7 @@ namespace TestEDITOR
                 && type.GetGenericTypeDefinition() == typeof(IList<>))
             {
                 return base
-                    .ResolveContract(typeof(ObservableCollection<>)
+                    .ResolveContract(typeof(ImmutableArray<>)
                     .MakeGenericType(type.GenericTypeArguments[0]));
             }
             else

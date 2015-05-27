@@ -7,21 +7,57 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="200">
-    <TabControl VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                TabStripPlacement="Bottom"
-                ItemsSource="{Binding Editor.Project.Databases}"
-                SelectedItem="{Binding Editor.Project.CurrentDatabase}">
-        <TabControl.ItemTemplate>
-            <DataTemplate>
-                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </DataTemplate>
-        </TabControl.ItemTemplate>
-        <TabControl.ContentTemplate>
-            <DataTemplate>
-                <controls:DatabaseControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-            </DataTemplate>
-        </TabControl.ContentTemplate>
-    </TabControl>
+             d:DesignHeight="300" d:DesignWidth="280">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0" Margin="2,0,2,0">
+            <MenuItem Header="new" Command="{Binding Commands.AddDatabaseCommand}" InputGestureText=""/>
+            <MenuItem Header="import" Command="{Binding Commands.ImportDataCommand}" InputGestureText=""/>
+            <MenuItem Header="export" Command="{Binding Commands.ExportDataCommand}" InputGestureText=""/>
+            <MenuItem Header="update" Command="{Binding Commands.UpdateDataCommand}" InputGestureText=""/>
+            <MenuItem Command="{Binding Commands.AddRecordCommand}" Header="+"/>
+            <MenuItem Command="{Binding Commands.RemoveRecordCommand}" Header="-"/>
+        </Menu>
+        <TabControl VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    TabStripPlacement="Bottom"
+                    Grid.Row="1"
+                    ItemsSource="{Binding Editor.Project.Databases}"
+                    SelectedItem="{Binding Editor.Project.CurrentDatabase}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Name}" 
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" 
+                                   Grid.Column="0">
+                        </TextBlock>
+                        <Button Command="{Binding DataContext.Commands.RemoveDatabaseCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                CommandParameter="{Binding}"
+                                Content="X" 
+                                Padding="2,0,2,0"
+                                BorderBrush="{x:Null}" 
+                                Background="{x:Null}" 
+                                VerticalAlignment="Center"  
+                                Grid.Column="2">
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <controls:DatabaseControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+    </Grid>
 </UserControl>

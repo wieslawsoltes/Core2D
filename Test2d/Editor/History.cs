@@ -11,26 +11,150 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class History<T>
+    internal struct UndoRedo
     {
-        private ISerializer _serializer = default(ISerializer);
-        private ICompressor _compressor = default(ICompressor);
-        private Stack<byte[]> _undos = new Stack<byte[]>();
-        private Stack<byte[]> _redos = new Stack<byte[]>();
-        private byte[] _hold = default(byte[]);
+        public readonly Action Undo;
+        public readonly Action Redo;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="undo"></param>
+        /// <param name="redo"></param>
+        public UndoRedo(Action undo, Action redo)
+        {
+            this.Undo = undo;
+            this.Redo = redo;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="undo"></param>
+        /// <param name="redo"></param>
+        /// <returns></returns>
+        public static UndoRedo Create(Action undo, Action redo)
+        {
+            return new UndoRedo(undo, redo);
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class History
+    {
+        private Stack<UndoRedo> _undos = new Stack<UndoRedo>();
+        private Stack<UndoRedo> _redos = new Stack<UndoRedo>();
+        private UndoRedo _hold = default(UndoRedo);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="serializer"></param>
-        /// <param name="compressor"></param>
-        public History(ISerializer serializer, ICompressor compressor)
+        /// <param name="previous"></param>
+        /// <param name="next"></param>
+        /// <param name="update"></param>
+        public void Snapshot<T>(T previous, T next, Action<T> update)
         {
-            _serializer = serializer;
-            _compressor = compressor;
+            var undo = UndoRedo.Create(() => update(previous), () => update(next));
+            if (_redos.Count > 0)
+                _redos.Clear();
+            _undos.Push(undo);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="previous"></param>
+        /// <param name="next"></param>
+        /// <param name="update"></param>
+        public void Hold<T>(T previous, T next, Action<T> update)
+        {
+            _hold = UndoRedo.Create(() => update(previous), () => update(next));
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Commit()
+        {
+            if (_redos.Count > 0)
+                _redos.Clear();
+            _undos.Push(_hold);
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Release()
+        {
+            _hold = default(UndoRedo);
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool CanUndo()
+        {
+            return _undos.Count > 0;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool CanRedo()
+        {
+            return _redos.Count > 0;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool Undo()
+        {
+            if (_undos.Count <= 0)
+                return false;
+
+            var undo = _undos.Pop();
+            if (undo.Undo != null)
+            {
+                undo.Undo();
+                if (undo.Redo != null)
+                {
+                    var redo = UndoRedo.Create(undo.Undo, undo.Redo);
+                    _redos.Push(redo);
+                }
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool Redo()
+        {
+            if (_redos.Count <= 0)
+                return false;
+
+            var redo = _redos.Pop();
+            if (redo.Redo != null)
+            {
+                redo.Redo();
+                if (redo.Undo != null)
+                {
+                    var undo = UndoRedo.Create(redo.Undo, redo.Redo);
+                    _undos.Push(undo);
+                }
+                return true;
+            }
+            return false;
+        } 
+        
         /// <summary>
         /// 
         /// </summary>
@@ -45,112 +169,6 @@ namespace Test2d
             {
                 _redos.Clear();
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        public void Hold(T obj)
-        {
-            _hold = _compressor.Compress(_serializer.ToBson(obj));
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void Commit()
-        {
-            Snapshot(_hold);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void Release()
-        {
-            _hold = default(byte[]);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        public void Snapshot(T obj)
-        {
-            Snapshot(_compressor.Compress(_serializer.ToBson(obj)));
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="bson"></param>
-        private void Snapshot(byte[] bson)
-        {
-            if (bson != null)
-            {
-                if (_redos.Count > 0)
-                {
-                    _redos.Clear();
-                }
-                _undos.Push(bson);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="current"></param>
-        /// <returns></returns>
-        public T Undo(T current)
-        {
-            if (CanUndo())
-            {
-                var bson = _compressor.Compress(_serializer.ToBson(current));
-                if (bson != null)
-                {
-                    _redos.Push(bson);
-                    return _serializer.FromBson<T>(_compressor.Decompress(_undos.Pop()));
-                }
-            }
-            return default(T);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="current"></param>
-        /// <returns></returns>
-        public T Redo(T current)
-        {
-            if (CanRedo())
-            {
-                var bson = _compressor.Compress(_serializer.ToBson(current));
-                if (bson != null)
-                {
-                    _undos.Push(bson);
-                    return _serializer.FromBson<T>(_compressor.Decompress(_redos.Pop()));
-                }
-            }
-            return default(T);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool CanUndo()
-        {
-            return _undos != null && _undos.Count > 0;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool CanRedo()
-        {
-            return _redos != null && _redos.Count > 0;
         }
     }
 }

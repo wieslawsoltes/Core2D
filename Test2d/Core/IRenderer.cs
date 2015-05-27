@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace Test2d
 {
@@ -38,7 +38,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        ICollection<BaseShape> SelectedShapes { get; set; }
+        ImmutableHashSet<BaseShape> SelectedShapes { get; set; }
 
         /// <summary>
         /// 
@@ -52,7 +52,7 @@ namespace Test2d
         /// <param name="container"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        void Draw(object dc, Container container, IList<ShapeProperty> db, Record r);
+        void Draw(object dc, Container container, ImmutableArray<ShapeProperty> db, Record r);
 
         /// <summary>
         /// 
@@ -61,7 +61,7 @@ namespace Test2d
         /// <param name="layer"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        void Draw(object dc, Layer layer, IList<ShapeProperty> db, Record r);
+        void Draw(object dc, Layer layer, ImmutableArray<ShapeProperty> db, Record r);
 
         /// <summary>
         /// 
@@ -72,7 +72,7 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        void Draw(object dc, XLine line, double dx, double dy, IList<ShapeProperty> db, Record r);
+        void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r);
 
         /// <summary>
         /// 
@@ -83,7 +83,7 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        void Draw(object dc, XRectangle rectangle, double dx, double dy, IList<ShapeProperty> db, Record r);
+        void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r);
 
         /// <summary>
         /// 
@@ -94,7 +94,7 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        void Draw(object dc, XEllipse ellipse, double dx, double dy, IList<ShapeProperty> db, Record r);
+        void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r);
 
         /// <summary>
         /// 
@@ -105,7 +105,7 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        void Draw(object dc, XArc arc, double dx, double dy, IList<ShapeProperty> db, Record r);
+        void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r);
 
         /// <summary>
         /// 
@@ -116,7 +116,7 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        void Draw(object dc, XBezier bezier, double dx, double dy, IList<ShapeProperty> db, Record r);
+        void Draw(object dc, XBezier bezier, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r);
 
         /// <summary>
         /// 
@@ -127,7 +127,7 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        void Draw(object dc, XQBezier qbezier, double dx, double dy, IList<ShapeProperty> db, Record r);
+        void Draw(object dc, XQBezier qbezier, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r);
 
         /// <summary>
         /// 
@@ -138,7 +138,7 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        void Draw(object dc, XText text, double dx, double dy, IList<ShapeProperty> db, Record r);
+        void Draw(object dc, XText text, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r);
 
         /// <summary>
         /// 
@@ -149,6 +149,6 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        void Draw(object dc, XImage image, double dx, double dy, IList<ShapeProperty> db, Record r);
+        void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r);
     }
 }

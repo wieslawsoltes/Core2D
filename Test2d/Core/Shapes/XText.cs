@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Linq;
 
 namespace Test2d
@@ -62,7 +61,7 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, Record r)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             var record = r ?? this.Record;
 
@@ -115,16 +114,16 @@ namespace Test2d
         /// <param name="db"></param>
         /// <param name="r"></param>
         /// <returns></returns>
-        public string BindToTextProperty(IList<ShapeProperty> db, Record r)
+        public string BindToTextProperty(ImmutableArray<ShapeProperty> db, Record r)
         {
             var record = r ?? this.Record;
 
             // try to bind to internal (this.Record) or external (r) data record using Bindings
-            if (record != null && this.Bindings != null && this.Bindings.Count > 0)
+            if (record != null && this.Bindings != null && this.Bindings.Length > 0)
             {
                 if (record.Columns != null
                     && record.Values != null
-                    && record.Columns.Count == record.Values.Count)
+                    && record.Columns.Length == record.Values.Length)
                 {
                     var columns = record.Columns;
                     foreach (var binding in this.Bindings) 
@@ -133,7 +132,7 @@ namespace Test2d
                         {
                             if (binding.Property == "Text")
                             {
-                                for (int i = 0; i < columns.Count; i++)
+                                for (int i = 0; i < columns.Length; i++)
                                 {
                                     if (columns[i].Name == binding.Path)
                                     {
@@ -147,7 +146,7 @@ namespace Test2d
             }
 
             // try to bind to external properties database using Bindings
-            if (db != null && this.Bindings != null && this.Bindings.Count > 0)
+            if (db != null && this.Bindings != null && this.Bindings.Length > 0)
             {
                 foreach (var binding in this.Bindings) 
                 {
@@ -166,7 +165,7 @@ namespace Test2d
             }
 
             // try to bind to Properties using Text as formatting
-            if (this.Properties != null && this.Properties.Count > 0)
+            if (this.Properties != null && this.Properties.Length > 0)
             {
                 try
                 {
@@ -211,8 +210,8 @@ namespace Test2d
             {
                 Name = name,
                 Style = style,
-                Bindings = new ObservableCollection<ShapeBinding>(),
-                Properties = new ObservableCollection<ShapeProperty>(),
+                Bindings = ImmutableArray.Create<ShapeBinding>(),
+                Properties = ImmutableArray.Create<ShapeProperty>(),
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
                 IsFilled = isFilled,

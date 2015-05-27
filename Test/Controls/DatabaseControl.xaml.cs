@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,8 +69,7 @@ namespace Test.Controls
             var database = DataContext as Database;
             if (database != null)
             {
-                SetColumns(database.Columns);
-                SetRecord(database.Records);
+                listView.View = CreateColumnsView(database.Columns);
             }
         }
 
@@ -77,27 +77,8 @@ namespace Test.Controls
         /// 
         /// </summary>
         /// <param name="columns"></param>
-        public void SetColumns(IList<Column> columns)
-        {
-            listView.View = CreateColumnsView(columns);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="records"></param>
-        public void SetRecord(IList<Record> records)
-        {
-            listView.ItemsSource = null;
-            listView.ItemsSource = records;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="columns"></param>
         /// <returns></returns>
-        private GridView CreateColumnsView(IList<Column> columns)
+        private GridView CreateColumnsView(ImmutableArray<Column> columns)
         {
             var gv = new GridView();
 

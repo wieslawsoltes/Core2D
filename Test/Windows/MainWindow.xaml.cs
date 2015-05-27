@@ -123,6 +123,13 @@ namespace Test.Windows
                 },
                 (item) => context.IsEditMode());
 
+            context.Commands.UpdateDataCommand = new DelegateCommand<object>(
+                (item) =>
+                {
+                    UpdateData();
+                },
+                (item) => context.IsEditMode());
+
             context.Commands.ImportStyleCommand = new DelegateCommand<object>(
                 (item) =>
                 {
@@ -577,6 +584,29 @@ namespace Test.Windows
             if (dlg.ShowDialog() == true)
             {
                 (DataContext as EditorContext).ExportData(dlg.FileName, database);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void UpdateData()
+        {
+            var context = DataContext as EditorContext;
+            var database = context.Editor.Project.CurrentDatabase;
+            if (database == null)
+                return;
+
+            var dlg = new OpenFileDialog()
+            {
+                Filter = "Csv (*.csv)|*.csv|All (*.*)|*.*",
+                FilterIndex = 0,
+                FileName = ""
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                (DataContext as EditorContext).UpdateData(dlg.FileName, database);
             }
         }
 

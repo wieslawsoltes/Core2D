@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 
 namespace Test2d
 {
@@ -11,14 +11,14 @@ namespace Test2d
     /// </summary>
     public class XGroup : BaseShape
     {
-        private IList<ShapeProperty> _database;
-        private IList<BaseShape> _shapes;
-        private IList<XPoint> _connectors;
+        private ImmutableArray<ShapeProperty> _database;
+        private ImmutableArray<BaseShape> _shapes;
+        private ImmutableArray<XPoint> _connectors;
 
         /// <summary>
         /// 
         /// </summary>
-        public IList<ShapeProperty> Database
+        public ImmutableArray<ShapeProperty> Database
         {
             get 
             {
@@ -26,14 +26,15 @@ namespace Test2d
                 {
                     if (_shapes != null)
                     {
-                        _database = new ObservableCollection<ShapeProperty>();
+                        var databaseBuilder = ImmutableArray.CreateBuilder<ShapeProperty>();
                         foreach (var shape in _shapes)
                         {
                             foreach (var property in shape.Properties)
                             {
-                                _database.Add(property);
+                                databaseBuilder.Add(property);
                             }
                         }
+                        _database = databaseBuilder.ToImmutable();
                     }
                 }
                 return _database;
@@ -43,7 +44,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<BaseShape> Shapes
+        public ImmutableArray<BaseShape> Shapes
         {
             get { return _shapes; }
             set { Update(ref _shapes, value); }
@@ -52,7 +53,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<XPoint> Connectors
+        public ImmutableArray<XPoint> Connectors
         {
             get { return _connectors; }
             set { Update(ref _connectors, value); }
@@ -67,7 +68,7 @@ namespace Test2d
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, IList<ShapeProperty> db, Record r)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             var record = r ?? this.Record;
 
@@ -128,7 +129,7 @@ namespace Test2d
         {
             shape.Owner = this;
             shape.State &= ~ShapeState.Standalone;
-            Shapes.Add(shape);
+            Shapes = Shapes.Add(shape);
         }
 
         /// <summary>
@@ -140,7 +141,7 @@ namespace Test2d
             point.Owner = this;
             point.State |= ShapeState.Connector | ShapeState.None;
             point.State &= ~ShapeState.Standalone;
-            Connectors.Add(point);
+            Connectors = Connectors.Add(point);
         }
 
         /// <summary>
@@ -152,7 +153,7 @@ namespace Test2d
             point.Owner = this;
             point.State |= ShapeState.Connector | ShapeState.Input;
             point.State &= ~ShapeState.Standalone;
-            Connectors.Add(point);
+            Connectors = Connectors.Add(point);
         }
 
         /// <summary>
@@ -164,7 +165,7 @@ namespace Test2d
             point.Owner = this;
             point.State |= ShapeState.Connector | ShapeState.Output;
             point.State &= ~ShapeState.Standalone;
-            Connectors.Add(point);
+            Connectors = Connectors.Add(point);
         }
 
         /// <summary>
@@ -178,10 +179,10 @@ namespace Test2d
             {
                 Name = name,
                 Style = default(ShapeStyle),
-                Bindings = new ObservableCollection<ShapeBinding>(),
-                Properties = new ObservableCollection<ShapeProperty>(),
-                Shapes = new ObservableCollection<BaseShape>(),
-                Connectors = new ObservableCollection<XPoint>()
+                Bindings = ImmutableArray.Create<ShapeBinding>(),
+                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Shapes = ImmutableArray.Create<BaseShape>(),
+                Connectors = ImmutableArray.Create<XPoint>()
             };
         }
 

@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using Test2d;
@@ -16,7 +15,7 @@ namespace TestEDITOR
     {
         private string _name;
         private string _path;
-        private IList<ScriptFile> _scripts;
+        private ImmutableArray<ScriptFile> _scripts;
 
         /// <summary>
         /// 
@@ -39,7 +38,7 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
-        public IList<ScriptFile> Scripts
+        public ImmutableArray<ScriptFile> Scripts
         {
             get { return _scripts; }
             set { Update(ref _scripts, value); }
@@ -57,7 +56,7 @@ namespace TestEDITOR
             {
                 Name = name,
                 Path = path,
-                Scripts = new ObservableCollection<ScriptFile>()
+                Scripts = ImmutableArray.Create<ScriptFile>()
             };
         }
 
@@ -79,6 +78,7 @@ namespace TestEDITOR
             }
 
             var sd = ScriptDirectory.Create(System.IO.Path.GetFileName(path), path);
+            var builder = ImmutableArray.CreateBuilder<ScriptFile>();
 
             foreach (var file in files)
             {
@@ -86,8 +86,10 @@ namespace TestEDITOR
                     System.IO.Path.GetFileNameWithoutExtension(file),
                     file);
 
-                sd.Scripts.Add(sf);
+                builder.Add(sf);
             }
+
+            sd.Scripts = builder.ToImmutable();
 
             return sd;
         }
@@ -97,14 +99,14 @@ namespace TestEDITOR
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static IList<ScriptDirectory> CreateScriptDirectories(string path)
+        public static ImmutableArray<ScriptDirectory> CreateScriptDirectories(string path)
         {
-            var sds = new ObservableCollection<ScriptDirectory>();
+            var builder = ImmutableArray.CreateBuilder<ScriptDirectory>();
 
             var root = CreateScriptDirectory(path);
             if (root != null)
             {
-                sds.Add(root);
+                builder.Add(root);
             }
 
             var dirs = System.IO.Directory.EnumerateDirectories(
@@ -117,11 +119,11 @@ namespace TestEDITOR
                 var sub = CreateScriptDirectory(dir);
                 if (sub != null)
                 {
-                    sds.Add(sub);
+                    builder.Add(sub);
                 }
             }
 
-            return sds;
+            return builder.ToImmutable();
         }
     }
 }

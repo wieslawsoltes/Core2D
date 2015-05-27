@@ -118,7 +118,7 @@ namespace Test2d
                         {
                             TryToConnectPoint1(_shape as XBezier, sx, sy);
                         }
-                        _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
+                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         ToStateOne();
                         Move(_shape as XBezier);
@@ -177,12 +177,16 @@ namespace Test2d
                             {
                                 TryToConnectPoint2(_shape as XBezier, sx, sy);
                             }
-                            _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
+                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             Remove();
                             Finalize(_shape as XBezier);
-                            _editor.History.Snapshot(_editor.Project);
-                            _editor.Project.CurrentContainer.CurrentLayer.Shapes.Add(_shape);
-                            //_editor.Project.CurrentContainer.Invalidate();
+
+                            var layer = _editor.Project.CurrentContainer.CurrentLayer;
+                            var previous = layer.Shapes;
+                            var next = layer.Shapes.Add(_shape);
+                            _editor.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                            layer.Shapes = next;
+
                             _currentState = State.None;
                         }
                     }
@@ -216,7 +220,7 @@ namespace Test2d
                 case State.Two:
                 case State.Three:
                     {
-                        _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
+                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         Remove();
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
@@ -303,9 +307,9 @@ namespace Test2d
         {
             _style = _editor.Project.Options.HelperStyle;
             _ellipsePoint1 = XEllipse.Create(0, 0, _style, null, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint1);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint1);
             _ellipsePoint2 = XEllipse.Create(0, 0, _style, null, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint2);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint2);
         }
         
         /// <summary>
@@ -315,9 +319,9 @@ namespace Test2d
         {
             _style = _editor.Project.Options.HelperStyle;
             _line12 = XLine.Create(0, 0, _style, null);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line12);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line12);
             _ellipsePoint3 = XEllipse.Create(0, 0, _style, null, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint3);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint3);
         }
 
         /// <summary>
@@ -326,11 +330,11 @@ namespace Test2d
         public override void ToStateThree()
         {
             _line43 = XLine.Create(0, 0, _style, null);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line43);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line43);
             _line23 = XLine.Create(0, 0, _style, null);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line23);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line23);
             _ellipsePoint4 = XEllipse.Create(0, 0, _style, null, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint4);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint4);
         }
 
         /// <summary>
@@ -420,43 +424,43 @@ namespace Test2d
         {
             if (_line12 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line12);
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line12);
                 _line12 = null;
             }
 
             if (_line43 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line43);
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line43);
                 _line43 = null;
             }
             
             if (_line23 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line23);
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line23);
                 _line23 = null;
             }
             
             if (_ellipsePoint1 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint1);
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint1);
                 _ellipsePoint1 = null;
             }
             
             if (_ellipsePoint2 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint2);
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint2);
                 _ellipsePoint2 = null;
             }
    
             if (_ellipsePoint3 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint3);
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint3);
                 _ellipsePoint3 = null;
             }
             
             if (_ellipsePoint4 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint4);
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint4);
                 _ellipsePoint4 = null;
             }
 

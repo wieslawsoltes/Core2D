@@ -199,8 +199,12 @@ namespace Test2d
         public static BaseShape CrossPointShape(ShapeStyle pss)
         {
             var g = XGroup.Create("PointShape");
-            g.Shapes.Add(XLine.Create(-4, 0, 4, 0, pss, null));
-            g.Shapes.Add(XLine.Create(0, -4, 0, 4, pss, null));
+
+            var builder = g.Shapes.ToBuilder();
+            builder.Add(XLine.Create(-4, 0, 4, 0, pss, null));
+            builder.Add(XLine.Create(0, -4, 0, 4, pss, null));
+            g.Shapes = builder.ToImmutable();
+
             return g;
         }
     }

@@ -3,12 +3,12 @@ var sg = p.StyleGroups.Where(x => x.Name == "Logic").FirstOrDefault();
 if (sg == null)
 {
     sg = ShapeStyleGroup.Create("Logic");
-    p.StyleGroups.Add(sg);
+    p.StyleGroups = p.StyleGroups.Add(sg);
 }
 
 p.CurrentStyleGroup = sg;
 
-var styles = sg.Styles;
+var styles = sg.Styles.ToBuilder();
 var radiusX = 5.0;
 var radiusY = 5.0;
 var thickness = 2.0;
@@ -62,4 +62,5 @@ var thickness = 2.0;
     styles.Add(style);
 }
 
+sg.Styles = styles.ToImmutable();
 sg.CurrentStyle = sg.Styles.FirstOrDefault();

@@ -93,7 +93,7 @@ namespace Dxf
 
             if (Version > DxfAcadVer.AC1009)
             {
-                // TODO: multiple complex linetype elements
+                // TODO: Multiple complex linetype elements.
                 // 74
                 // 75
                 // 340

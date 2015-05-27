@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -37,7 +38,7 @@ namespace Test
         private double _panY;
         private ShapeState _drawShapeState;
         private BaseShape _selectedShape;
-        private ICollection<BaseShape> _selectedShapes;
+        private ImmutableHashSet<BaseShape> _selectedShapes;
 
         /// <summary>
         /// 
@@ -87,7 +88,7 @@ namespace Test
         /// <summary>
         /// 
         /// </summary>
-        public ICollection<BaseShape> SelectedShapes
+        public ImmutableHashSet<BaseShape> SelectedShapes
         {
             get { return _selectedShapes; }
             set { Update(ref _selectedShapes, value); }
@@ -101,7 +102,7 @@ namespace Test
             _zoom = 1.0;
             _drawShapeState = ShapeState.Visible | ShapeState.Printable;
             _selectedShape = default(BaseShape);
-            _selectedShapes = default(ICollection<BaseShape>);
+            _selectedShapes = default(ImmutableHashSet<BaseShape>);
 
             ClearCache();
         }
@@ -410,7 +411,7 @@ namespace Test
         /// <param name="container"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object dc, Container container, IList<ShapeProperty> db, Record r)
+        public void Draw(object dc, Container container, ImmutableArray<ShapeProperty> db, Record r)
         {
             foreach (var layer in container.Layers)
             {
@@ -428,7 +429,7 @@ namespace Test
         /// <param name="layer"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object dc, Layer layer, IList<ShapeProperty> db, Record r)
+        public void Draw(object dc, Layer layer, ImmutableArray<ShapeProperty> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -450,7 +451,7 @@ namespace Test
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object dc, XLine line, double dx, double dy, IList<ShapeProperty> db, Record r)
+        public void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -614,7 +615,7 @@ namespace Test
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object dc, XRectangle rectangle, double dx, double dy, IList<ShapeProperty> db, Record r)
+        public void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -659,7 +660,7 @@ namespace Test
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object dc, XEllipse ellipse, double dx, double dy, IList<ShapeProperty> db, Record r)
+        public void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -713,7 +714,7 @@ namespace Test
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object dc, XArc arc, double dx, double dy, IList<ShapeProperty> db, Record r)
+        public void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -793,7 +794,7 @@ namespace Test
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object dc, XBezier bezier, double dx, double dy, IList<ShapeProperty> db, Record r)
+        public void Draw(object dc, XBezier bezier, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -868,7 +869,7 @@ namespace Test
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object dc, XQBezier qbezier, double dx, double dy, IList<ShapeProperty> db, Record r)
+        public void Draw(object dc, XQBezier qbezier, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -942,7 +943,7 @@ namespace Test
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object dc, XText text, double dx, double dy, IList<ShapeProperty> db, Record r)
+        public void Draw(object dc, XText text, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             var _dc = dc as DrawingContext;
 
@@ -1071,7 +1072,7 @@ namespace Test
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object dc, XImage image, double dx, double dy, IList<ShapeProperty> db, Record r)
+        public void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             if (image.Path == null)
                 return;
@@ -1112,25 +1113,41 @@ namespace Test
             if (_enableImageCache
                 && _biCache.ContainsKey(image.Path))
             {
-                _dc.DrawImage(_biCache[image.Path], rect);
+                try
+                {
+                    _dc.DrawImage(_biCache[image.Path], rect);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.Print(ex.Message);
+                    System.Diagnostics.Debug.Print(ex.StackTrace);
+                }
             }
             else
             {
                 if (!image.Path.IsAbsoluteUri || !System.IO.File.Exists(image.Path.LocalPath))
                     return;
 
-                byte[] buffer = System.IO.File.ReadAllBytes(image.Path.LocalPath);
-                var ms = new System.IO.MemoryStream(buffer);
-                var bi = new BitmapImage();
-                bi.BeginInit();
-                bi.StreamSource = ms;
-                bi.EndInit();
-                bi.Freeze();
+                try
+                {
+                    byte[] buffer = System.IO.File.ReadAllBytes(image.Path.LocalPath);
+                    var ms = new System.IO.MemoryStream(buffer);
+                    var bi = new BitmapImage();
+                    bi.BeginInit();
+                    bi.StreamSource = ms;
+                    bi.EndInit();
+                    bi.Freeze();
 
-                if (_enableImageCache)
-                    _biCache[image.Path] = bi;
+                    if (_enableImageCache)
+                        _biCache[image.Path] = bi;
 
-                _dc.DrawImage(bi, rect);
+                    _dc.DrawImage(bi, rect);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.Print(ex.Message);
+                    System.Diagnostics.Debug.Print(ex.StackTrace);
+                }
             }
         }
     }

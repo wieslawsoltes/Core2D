@@ -43,6 +43,10 @@ namespace TestEDITOR
         /// 
         /// </summary>
         public ICommand ExportDataCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand UpdateDataCommand { get; set; }
 
         /// <summary>
         /// 
@@ -236,6 +240,24 @@ namespace TestEDITOR
         /// 
         /// </summary>
         public ICommand TryToConnectCommand { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand AddDatabaseCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand RemoveDatabaseCommand { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand AddRecordCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand RemoveRecordCommand { get; set; }
 
         /// <summary>
         /// 

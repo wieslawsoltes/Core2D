@@ -20,6 +20,7 @@
         </Menu>
         <controls:LayerDragAndDropListBox 
             DataContext="{Binding Editor.Project.CurrentContainer.Layers}"
+            Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
             ItemsSource="{Binding}"
             SelectedItem="{Binding DataContext.Editor.Project.CurrentContainer.CurrentLayer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
             HorizontalContentAlignment="Stretch"

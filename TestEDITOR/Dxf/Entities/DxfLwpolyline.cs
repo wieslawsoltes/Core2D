@@ -57,7 +57,7 @@ namespace Dxf
         /// </summary>
         public void Defaults()
         {
-            // TODO:
+            // TODO: Implement Defaults().
         }
         
         /// <summary>

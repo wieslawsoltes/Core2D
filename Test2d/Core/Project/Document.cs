@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Linq;
 
 namespace Test2d
@@ -13,7 +12,7 @@ namespace Test2d
     public class Document : ObservableObject
     {
         private string _name;
-        private IList<Container> _containers;
+        private ImmutableArray<Container> _containers;
 
         /// <summary>
         /// 
@@ -27,7 +26,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<Container> Containers
+        public ImmutableArray<Container> Containers
         {
             get { return _containers; }
             set { Update(ref _containers, value); }
@@ -43,7 +42,7 @@ namespace Test2d
             return new Document()
             {
                 Name = name,
-                Containers = new ObservableCollection<Container>()
+                Containers = ImmutableArray.Create<Container>()
             };
         }
     }

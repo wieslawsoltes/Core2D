@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -21,8 +22,7 @@ namespace Test2d
         private bool _isContextMenu;
         private bool _enableObserver;
         private Observer _observer;
-        private bool _enableHistory;
-        private History<Project> _history;
+        private History _history;
 
         /// <summary>
         /// Gets or sets current project.
@@ -79,18 +79,9 @@ namespace Test2d
         }
 
         /// <summary>
-        /// Gets or sets if project collections and objects history is enabled.
-        /// </summary>
-        public bool EnableHistory
-        {
-            get { return _enableHistory; }
-            set { Update(ref _enableHistory, value); }
-        }
-
-        /// <summary>
         /// Gets or sets undo/redo history handler.
         /// </summary>
-        public History<Project> History
+        public History History
         {
             get { return _history; }
             set { Update(ref _history, value); }
@@ -168,17 +159,13 @@ namespace Test2d
             var editor = new Editor()
             {
                 CurrentTool = Tool.Selection,
-                EnableObserver = true,
-                EnableHistory = true
+                EnableObserver = true
             };
 
             editor.Project = project;
             editor.Renderer = renderer;
 
-            if (editor.EnableHistory)
-            {
-                editor.History = new History<Project>(serializer, compressor);
-            }
+            editor.History = new History();
 
             if (editor.EnableObserver)
             {
@@ -537,8 +524,11 @@ namespace Test2d
             var template = _project.CurrentTemplate;
             if (template != null)
             {
-                _history.Snapshot(_project);
-                _project.Templates.Remove(_project.CurrentTemplate);
+                var previous = _project.Templates;
+                var next =  _project.Templates.Remove(_project.CurrentTemplate);
+                _history.Snapshot(previous, next, (p) => _project.Templates = p);
+                _project.Templates = next;
+
                 _project.CurrentTemplate = _project.Templates.FirstOrDefault();
             }
         }
@@ -551,8 +541,11 @@ namespace Test2d
             var gl = _project.CurrentGroupLibrary;
             if (gl != null)
             {
-                _history.Snapshot(_project);
-                _project.GroupLibraries.Remove(gl);
+                var previous = _project.GroupLibraries;
+                var next = _project.GroupLibraries.Remove(gl);
+                _history.Snapshot(previous, next, (p) => _project.GroupLibraries = p);
+                _project.GroupLibraries = next;
+
                 _project.CurrentGroupLibrary = _project.GroupLibraries.FirstOrDefault();
             }
         }
@@ -565,8 +558,12 @@ namespace Test2d
             var group = _project.CurrentGroupLibrary.CurrentGroup;
             if (group != null)
             {
-                _history.Snapshot(_project);
-                _project.CurrentGroupLibrary.Groups.Remove(group);
+                var gl = _project.CurrentGroupLibrary;
+                var previous = gl.Groups;
+                var next = gl.Groups.Remove(group);
+                _history.Snapshot(previous, next, (p) => gl.Groups = p);
+                gl.Groups = next;
+
                 _project.CurrentGroupLibrary.CurrentGroup = _project.CurrentGroupLibrary.Groups.FirstOrDefault();
             }
         }
@@ -579,10 +576,13 @@ namespace Test2d
             var layer = _project.CurrentContainer.CurrentLayer;
             if (layer != null)
             {
-                _history.Snapshot(_project);
-                _project.CurrentContainer.Layers.Remove(layer);
+                var container = _project.CurrentContainer;
+                var previous = container.Layers;
+                var next = container.Layers.Remove(layer);
+                _history.Snapshot(previous, next, (p) => container.Layers = p);
+                container.Layers = next;
+
                 _project.CurrentContainer.CurrentLayer = _project.CurrentContainer.Layers.FirstOrDefault();
-                //_project.CurrentContainer.Invalidate();
             }
         }
 
@@ -594,10 +594,13 @@ namespace Test2d
             var shape = _project.CurrentContainer.CurrentShape;
             if (shape != null)
             {
-                _history.Snapshot(_project);
-                _project.CurrentContainer.CurrentLayer.Shapes.Remove(shape);
+                var layer = _project.CurrentContainer.CurrentLayer;
+                var previous = layer.Shapes;
+                var next = layer.Shapes.Remove(shape);
+                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+
                 _project.CurrentContainer.CurrentShape = _project.CurrentContainer.CurrentLayer.Shapes.FirstOrDefault();
-                //_project.CurrentContainer.Invalidate();
             }
         }
 
@@ -609,8 +612,11 @@ namespace Test2d
             var sg = _project.CurrentStyleGroup;
             if (sg != null)
             {
-                _history.Snapshot(_project);
-                _project.StyleGroups.Remove(sg);
+                var previous = _project.StyleGroups;
+                var next = _project.StyleGroups.Remove(sg);
+                _history.Snapshot(previous, next, (p) => _project.StyleGroups = p);
+                _project.StyleGroups = next;
+
                 _project.CurrentStyleGroup = _project.StyleGroups.FirstOrDefault();
             }
         }
@@ -623,8 +629,12 @@ namespace Test2d
             var style = _project.CurrentStyleGroup.CurrentStyle;
             if (style != null)
             {
-                _history.Snapshot(_project);
-                _project.CurrentStyleGroup.Styles.Remove(style);
+                var sg = _project.CurrentStyleGroup;
+                var previous = sg.Styles;
+                var next = sg.Styles.Remove(style);
+                _history.Snapshot(previous, next, (p) => sg.Styles = p);
+                sg.Styles = next;
+
                 _project.CurrentStyleGroup.CurrentStyle = _project.CurrentStyleGroup.Styles.FirstOrDefault();
             }
         }
@@ -638,7 +648,6 @@ namespace Test2d
             _renderer.ClearCache();
             
             Project = project;
-            //_project.CurrentContainer.Invalidate();
 
             if (EnableObserver)
             {
@@ -654,16 +663,21 @@ namespace Test2d
             var layer = _project.CurrentContainer.CurrentLayer;
             if (_renderer.SelectedShapes != null)
             {
-                _history.Snapshot(_project);
-  
+                // TODO: Group method changes SelectedShapes State properties.
                 var g = XGroup.Group("g", _renderer.SelectedShapes);
 
+                var builder = layer.Shapes.ToBuilder();
                 foreach (var shape in _renderer.SelectedShapes)
                 {
-                    layer.Shapes.Remove(shape);
+                    builder.Remove(shape);
                 }
+                builder.Add(g);
 
-                layer.Shapes.Add(g);
+                var previous = layer.Shapes;
+                var next = builder.ToImmutable();
+                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+
                 Select(_project.CurrentContainer, g);
             }
         }
@@ -674,18 +688,24 @@ namespace Test2d
         public void GroupCurrentLayer()
         {
             var layer = _project.CurrentContainer.CurrentLayer;
-            if (layer.Shapes.Count > 0)
+            if (layer.Shapes.Length > 0)
             {
-                _history.Snapshot(_project);
-                
+                // TODO: Group method changes SelectedShapes State properties.
                 var g = XGroup.Group("g", layer.Shapes);
 
+                var builder = layer.Shapes.ToBuilder();
                 foreach (var shape in layer.Shapes.ToList())
                 {
-                    layer.Shapes.Remove(shape);
+                    builder.Remove(shape);
                 }
+                builder.Add(g);
+                layer.Shapes = builder.ToImmutable();
 
-                layer.Shapes.Add(g);
+                var previous = layer.Shapes;
+                var next = builder.ToImmutable();
+                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+
                 Select(_project.CurrentContainer, g);
             }
         }
@@ -699,8 +719,11 @@ namespace Test2d
             var document = _project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
             if (document != null)
             {
-                _history.Snapshot(_project);
-                document.Containers.Remove(container);
+                var previous = document.Containers;
+                var next = document.Containers.Remove(container);
+                _history.Snapshot(previous, next, (p) => document.Containers = p);
+                document.Containers = next;
+
                 _project.CurrentDocument = document;
                 _project.CurrentContainer = document.Containers.FirstOrDefault();
             }
@@ -712,8 +735,11 @@ namespace Test2d
         /// <param name="document">The document object to remove from project Documents collection.</param>
         public void Delete(Document document)
         {
-            _history.Snapshot(_project);
-            _project.Documents.Remove(document);
+            var previous = _project.Documents;
+            var next = _project.Documents.Remove(document);
+            _history.Snapshot(previous, next, (p) => _project.Documents = p);
+            _project.Documents = next;
+
             _project.CurrentDocument = _project.Documents.FirstOrDefault();
             if (_project.CurrentDocument != null)
             {
@@ -732,27 +758,32 @@ namespace Test2d
         {
             if (_renderer.SelectedShape != null)
             {
-                _history.Snapshot(_project);
-
-                _project.CurrentContainer.CurrentLayer.Shapes.Remove(_renderer.SelectedShape);
+                var layer = _project.CurrentContainer.CurrentLayer;
+                var previous = layer.Shapes;
+                var next = layer.Shapes.Remove(_renderer.SelectedShape); ;
+                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+ 
                 _project.CurrentContainer.CurrentLayer.Invalidate();
-
                 _renderer.SelectedShape = default(BaseShape);
             }
 
             if (_renderer.SelectedShapes != null && _renderer.SelectedShapes.Count > 0)
             {
-                _history.Snapshot(_project);
-
                 var layer = _project.CurrentContainer.CurrentLayer;
 
+                var builder = layer.Shapes.ToBuilder();
                 foreach (var shape in _renderer.SelectedShapes)
                 {
-                    layer.Shapes.Remove(shape);
+                    builder.Remove(shape);
                 }
 
-                _renderer.SelectedShapes = default(ICollection<BaseShape>);
+                var previous = layer.Shapes;
+                var next = builder.ToImmutable();
+                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
 
+                _renderer.SelectedShapes = default(ImmutableHashSet<BaseShape>);
                 layer.Invalidate();
             }
         }
@@ -766,7 +797,7 @@ namespace Test2d
         {
             container.CurrentShape = shape;
             _renderer.SelectedShape = shape;
-            _renderer.SelectedShapes = default(ICollection<BaseShape>);
+            _renderer.SelectedShapes = default(ImmutableHashSet<BaseShape>);
             container.CurrentLayer.Invalidate();
         }
 
@@ -775,7 +806,7 @@ namespace Test2d
         /// </summary>
         /// <param name="container"></param>
         /// <param name="shapes"></param>
-        public void Select(Container container, ICollection<BaseShape> shapes)
+        public void Select(Container container, ImmutableHashSet<BaseShape> shapes)
         {
             container.CurrentShape = default(BaseShape);
             _renderer.SelectedShape = default(BaseShape);
@@ -786,12 +817,22 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public void Deselect()
+        {
+            _renderer.SelectedShape = default(BaseShape);
+            _renderer.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="container"></param>
         public void Deselect(Container container)
         {
-            container.CurrentShape = default(BaseShape);
             _renderer.SelectedShape = default(BaseShape);
-            _renderer.SelectedShapes = default(ICollection<BaseShape>);
+            _renderer.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+
+            container.CurrentShape = default(BaseShape);
             container.CurrentLayer.Invalidate();
         }
 

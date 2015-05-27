@@ -27,6 +27,7 @@
         </Menu>
         <controls:BaseShapeDragAndDropListBox
             DataContext="{Binding Editor.Project.CurrentContainer.CurrentLayer.Shapes}"
+            Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
             ItemsSource="{Binding}"
             SelectedItem="{Binding DataContext.Editor.Project.CurrentContainer.CurrentShape, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
             BorderBrush="{x:Null}"

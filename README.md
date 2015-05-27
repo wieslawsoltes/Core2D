@@ -31,6 +31,7 @@ Test is an application for making 2D diagrams and running logic simulations.
 * SharpDX
 * SharpDX.Direct2D1
 * SharpDX.DXGI
+* CsvHelper
 
 ### NuGet Package Sources
 

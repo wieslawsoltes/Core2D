@@ -16,7 +16,7 @@ namespace Test2d
     /// </summary>
     public class Observer
     {
-        private readonly Editor _currentEditor;
+        private readonly Editor _editor;
         private readonly Action _invalidateContainer;
         private readonly Action _invalidateStyles;
         private readonly Action _invalidateLayers;
@@ -28,7 +28,7 @@ namespace Test2d
         /// <param name="editor"></param>
         public Observer(Editor editor)
         {
-            _currentEditor = editor;
+            _editor = editor;
 
             _invalidateContainer = () =>
             {
@@ -36,21 +36,30 @@ namespace Test2d
 
             _invalidateStyles = () =>
             {
-                _currentEditor.Renderer.ClearCache();
-                _currentEditor.Project.CurrentContainer.Invalidate();
+                if (_editor.Project.CurrentContainer != null)
+                {
+                    _editor.Renderer.ClearCache();
+                    _editor.Project.CurrentContainer.Invalidate();
+                }
             };
 
             _invalidateLayers = () =>
             {
-                _currentEditor.Project.CurrentContainer.Invalidate();
+                if (_editor.Project.CurrentContainer != null)
+                {
+                    _editor.Project.CurrentContainer.Invalidate();
+                }
             };
 
             _invalidateShapes = () =>
             {
-                _currentEditor.Project.CurrentContainer.Invalidate();
+                if (_editor.Project.CurrentContainer != null)
+                {
+                    _editor.Project.CurrentContainer.Invalidate();
+                }
             };
 
-            Add(_currentEditor.Project);
+            Add(_editor.Project);
         }
 
         [System.Diagnostics.Conditional("VERBOSE")]
@@ -59,373 +68,187 @@ namespace Test2d
             System.Diagnostics.Debug.Print(text);
         }
 
-        private void DatabasesCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    Add(e.NewItems.Cast<Database>());
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    Debug("Databases Replace");
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    Remove(e.OldItems.Cast<Database>());
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    Debug("Databases Replace");
-                    Remove(e.OldItems.Cast<Database>());
-                    Add(e.NewItems.Cast<Database>());
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    Debug("Databases Reset");
-                    break;
-            }
-
-            //_invalidateLayers();
-        }
-        
-        private void ColumnsCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    Add(e.NewItems.Cast<Column>());
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    Debug("Columns Replace");
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    Remove(e.OldItems.Cast<Column>());
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    Debug("Columns Replace");
-                    Remove(e.OldItems.Cast<Column>());
-                    Add(e.NewItems.Cast<Column>());
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    Debug("Columns Reset");
-                    break;
-            }
-
-            //_invalidateLayers();
-        }
-        
-        private void RecordsCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    Add(e.NewItems.Cast<Record>());
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    Debug("Records Replace");
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    Remove(e.OldItems.Cast<Record>());
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    Debug("Records Replace");
-                    Remove(e.OldItems.Cast<Record>());
-                    Add(e.NewItems.Cast<Record>());
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    Debug("Records Reset");
-                    break;
-            }
-
-            //_invalidateLayers();
-        }
-        
-        private void ValuesCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    Add(e.NewItems.Cast<Value>());
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    Debug("Values Replace");
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    Remove(e.OldItems.Cast<Value>());
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    Debug("Values Replace");
-                    Remove(e.OldItems.Cast<Value>());
-                    Add(e.NewItems.Cast<Value>());
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    Debug("Values Reset");
-                    break;
-            }
-
-            _invalidateLayers();
-        }
- 
-        private void DocumentsCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    Add(e.NewItems.Cast<Document>());
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    Debug("Documents Replace");
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    Remove(e.OldItems.Cast<Document>());
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    Debug("Documents Replace");
-                    Remove(e.OldItems.Cast<Document>());
-                    Add(e.NewItems.Cast<Document>());
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    Debug("Documents Reset");
-                    break;
-            }
-
-            //_invalidateLayers();
-        }
-
-        private void ContainersCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    Add(e.NewItems.Cast<Container>());
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    Debug("Containers Replace");
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    Remove(e.OldItems.Cast<Container>());
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    Debug("Containers Replace");
-                    Remove(e.OldItems.Cast<Container>());
-                    Add(e.NewItems.Cast<Container>());
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    Debug("Containers Reset");
-                    break;
-            }
-
-            //_invalidateLayers();
-        }
-
-        private void LayersCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    Add(e.NewItems.Cast<Layer>());
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    Debug("Layers Replace");
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    Remove(e.OldItems.Cast<Layer>());
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    Debug("Layers Replace");
-                    Remove(e.OldItems.Cast<Layer>());
-                    Add(e.NewItems.Cast<Layer>());
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    Debug("Layers Reset");
-                    break;
-            }
-
-            _invalidateLayers();
-        }
-
-        private void ShapesCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    Add(e.NewItems.Cast<BaseShape>());
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    Debug("Shapes Replace");
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    Remove(e.OldItems.Cast<BaseShape>());
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    Debug("Shapes Replace");
-                    Remove(e.OldItems.Cast<BaseShape>());
-                    Add(e.NewItems.Cast<BaseShape>());
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    Debug("Shapes Reset");
-                    break;
-            }
-
-            _invalidateShapes();
-        }
-
-        private void StyleGroupsCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    Add(e.NewItems.Cast<ShapeStyleGroup>());
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    Debug("Style Groups Replace");
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    Remove(e.OldItems.Cast<ShapeStyleGroup>());
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    Debug("Style Groups Replace");
-                    Remove(e.OldItems.Cast<ShapeStyleGroup>());
-                    Add(e.NewItems.Cast<ShapeStyleGroup>());
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    Debug("Style Groups Reset");
-                    break;
-            }
-
-            _invalidateStyles();
-        }
-
-        private void StylesCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    Add(e.NewItems.Cast<ShapeStyle>());
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    Debug("Styles Replace");
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    Remove(e.OldItems.Cast<ShapeStyle>());
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    Debug("Styles Replace");
-                    Remove(e.OldItems.Cast<ShapeStyle>());
-                    Add(e.NewItems.Cast<ShapeStyle>());
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    Debug("Styles Reset");
-                    break;
-            }
-
-            _invalidateStyles();
-        }
-
-        private void BindingsCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    Add(e.NewItems.Cast<ShapeBinding>());
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    Debug("Bindings Replace");
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    Remove(e.OldItems.Cast<ShapeBinding>());
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    Debug("Bindings Replace");
-                    Remove(e.OldItems.Cast<ShapeBinding>());
-                    Add(e.NewItems.Cast<ShapeBinding>());
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    Debug("Bindings Reset");
-                    break;
-            }
-
-            _invalidateShapes();
-        }
-        
-        private void PropertiesCollectionObserver(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    Add(e.NewItems.Cast<ShapeProperty>());
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    Debug("Properties Replace");
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    Remove(e.OldItems.Cast<ShapeProperty>());
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    Debug("Properties Replace");
-                    Remove(e.OldItems.Cast<ShapeProperty>());
-                    Add(e.NewItems.Cast<ShapeProperty>());
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    Debug("Properties Reset");
-                    break;
-            }
-
-            _invalidateShapes();
-        }
-
         private void DatabaseObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Debug("Database: " + sender.GetType() + ", Property: " + e.PropertyName);
+
+            if (e.PropertyName == "Columns")
+            {
+                var database = sender as Database;
+                Remove(database.Columns);
+                Add(database.Columns);
+            }
+
+            if (e.PropertyName == "Records")
+            {
+                var database = sender as Database;
+                Remove(database.Records);
+                Add(database.Records);
+            }
+
             _invalidateShapes();
         }
-        
+
         private void ColumnObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Debug("Column: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
         }
-        
+
         private void RecordObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Debug("Record: " + sender.GetType() + ", Property: " + e.PropertyName);
+
+            if (e.PropertyName == "Columns")
+            {
+                var record = sender as Record;
+                Remove(record.Columns);
+                Add(record.Columns);
+            }
+
+            if (e.PropertyName == "Values")
+            {
+                var record = sender as Record;
+                Remove(record.Values);
+                Add(record.Values);
+            }
+
             _invalidateShapes();
         }
-        
+
         private void ValueObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Debug("Value: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
         }
-        
+
+        private void ProjectObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Debug("Project: " + sender.GetType() + ", Property: " + e.PropertyName);
+
+            if (e.PropertyName == "Databases")
+            {
+                var project = sender as Project;
+                Remove(project.Databases);
+                Add(project.Databases);
+            }
+
+            if (e.PropertyName == "StyleGroups")
+            {
+                var project = sender as Project;
+                Remove(project.StyleGroups);
+                Add(project.StyleGroups);
+            }
+
+            if (e.PropertyName == "Templates")
+            {
+                var project = sender as Project;
+                Remove(project.Templates);
+                Add(project.Templates);
+            }
+
+            if (e.PropertyName == "Documents")
+            {
+                var project = sender as Project;
+                Remove(project.Documents);
+                Add(project.Documents);
+            }
+
+            _invalidateShapes();
+        }
+
+        private void DocumentObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Debug("Document: " + sender.GetType() + ", Property: " + e.PropertyName);
+
+            if (e.PropertyName == "Containers")
+            {
+                var document = sender as Document;
+                Remove(document.Containers);
+                Add(document.Containers);
+            }
+
+            _invalidateShapes();
+        }
+
         private void ContainerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Debug("Container: " + (sender is Container ? (sender as Container).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
+
+            if (e.PropertyName == "Properties")
+            {
+                var container = sender as Container;
+                Remove(container.Properties);
+                Add(container.Properties);
+            }
+
+            if (e.PropertyName == "Layers")
+            {
+                var container = sender as Container;
+                Remove(container.Layers);
+                Add(container.Layers);
+            }
+
             _invalidateContainer();
         }
 
         private void ContainerBackgroudObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Debug("Background: " + sender.GetType().ToString() + ", Property: " + e.PropertyName);
-            _currentEditor.Project.CurrentContainer.Notify("Background");
-            if (_currentEditor.Project.CurrentContainer.Template != null)
+
+            _editor.Project.CurrentContainer.Notify("Background");
+            if (_editor.Project.CurrentContainer.Template != null)
             {
-                _currentEditor.Project.CurrentContainer.Template.Notify("Background");
+                _editor.Project.CurrentContainer.Template.Notify("Background");
             }
         }
 
         private void LayerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Debug("Layer: " + (sender is Layer ? (sender as Layer).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
+
+            if (e.PropertyName == "Shapes")
+            {
+                var layer = sender as Layer;
+                Remove(layer.Shapes);
+                Add(layer.Shapes);
+            }
+
             _invalidateLayers();
         }
 
         private void ShapeObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Debug("Shape: " + sender.GetType() + ", Property: " + e.PropertyName);
+
+            if (e.PropertyName == "Bindings")
+            {
+                var shape = sender as BaseShape;
+                Remove(shape.Bindings);
+                Add(shape.Bindings);
+            }
+
+            if (e.PropertyName == "Properties")
+            {
+                var shape = sender as BaseShape;
+                Remove(shape.Properties);
+                Add(shape.Properties);
+            }
+
             _invalidateShapes();
         }
 
         private void StyleGroupObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Style Group: " + (sender is ShapeStyle ? (sender as ShapeStyle).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
+            Debug("Style Group: " + (sender is ShapeStyleGroup ? (sender as ShapeStyleGroup).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
+
+            if (e.PropertyName == "Styles")
+            {
+                var sg = sender as ShapeStyleGroup;
+                Remove(sg.Styles);
+                Add(sg.Styles);
+            }
+
             _invalidateStyles();
         }
 
@@ -447,147 +270,59 @@ namespace Test2d
             _invalidateShapes();
         }
 
-        private void Add(Project project)
-        {
-            if (project == null)
-                return;
-            
-            Debug("Add Project: " + project.Name);
-            
-            if (project.Databases != null)
-            {
-                (project.Databases as ObservableCollection<Database>).CollectionChanged += DatabasesCollectionObserver;
-                
-                foreach (var database in project.Databases)
-                {
-                    Add(database);
-                }
-            }
-            
-            if (project.Documents != null)
-            {
-                (project.Documents as ObservableCollection<Document>).CollectionChanged += DocumentsCollectionObserver;
-                
-                foreach (var document in project.Documents)
-                {
-                    Add(document);
-                }
-            }
-            
-            if (project.Templates != null)
-            {
-                (project.Templates as ObservableCollection<Container>).CollectionChanged += ContainersCollectionObserver;
-                
-                foreach (var template in project.Templates)
-                {
-                    Add(template);
-                }
-            }
-            
-            if (project.StyleGroups != null)
-            {
-                (project.StyleGroups as ObservableCollection<ShapeStyleGroup>).CollectionChanged += StyleGroupsCollectionObserver;
-    
-                foreach (var sg in project.StyleGroups)
-                {
-                    Add(sg);
-                }
-            }
-        }
-
-        private void Remove(Project project)
-        {
-            if (project == null)
-                return;
-            
-            Debug("Remove Project: " + project.Name);
-            
-            if (project.Databases != null)
-            {
-                (project.Databases as ObservableCollection<Database>).CollectionChanged -= DatabasesCollectionObserver;
-                
-                foreach (var database in project.Databases)
-                {
-                    Remove(database);
-                }
-            }
-            
-            if (project.Documents != null)
-            {
-                (project.Documents as ObservableCollection<Document>).CollectionChanged -= DocumentsCollectionObserver;
-    
-                foreach (var document in project.Documents)
-                {
-                    Remove(document);
-                }
-            }
-
-            if (project.Templates != null)
-            {
-                (project.Templates as ObservableCollection<Container>).CollectionChanged -= ContainersCollectionObserver;
-    
-                foreach (var template in project.Templates)
-                {
-                    Remove(template);
-                }
-            }
-
-            if (project.StyleGroups != null)
-            {
-                (project.StyleGroups as ObservableCollection<ShapeStyleGroup>).CollectionChanged -= StyleGroupsCollectionObserver;
-    
-                foreach (var sg in project.StyleGroups)
-                {
-                    Remove(sg);
-                }
-            }
-        }
-
-        private void Add(Database database)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="database"></param>
+        public void Add(Database database)
         {
             if (database == null)
                 return;
-            
-            //database.PropertyChanged += DatabaseObserver;
+
+            database.PropertyChanged += DatabaseObserver;
 
             Debug("Add Database: " + database.Name);
-            
+
             if (database.Columns != null)
             {
                 Add(database.Columns);
-                (database.Columns as ObservableCollection<Column>).CollectionChanged += ColumnsCollectionObserver;
             }
-            
+
             if (database.Records != null)
             {
                 Add(database.Records);
-                (database.Records as ObservableCollection<Record>).CollectionChanged += RecordsCollectionObserver;
             }
         }
-        
-        private void Remove(Database database)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="database"></param>
+        public void Remove(Database database)
         {
             if (database == null)
                 return;
-            
-            //database.PropertyChanged -= DatabaseObserver;
+
+            database.PropertyChanged -= DatabaseObserver;
 
             Debug("Remove Database: " + database.Name);
-            
+
             if (database.Columns != null)
             {
                 Remove(database.Columns);
-                (database.Columns as ObservableCollection<Column>).CollectionChanged -= ColumnsCollectionObserver;
             }
-            
+
             if (database.Records != null)
             {
                 Remove(database.Records);
-                (database.Records as ObservableCollection<Record>).CollectionChanged -= RecordsCollectionObserver;
             }
         }
 
-        private void Add(Column column)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="column"></param>
+        public void Add(Column column)
         {
             if (column == null)
                 return;
@@ -596,8 +331,12 @@ namespace Test2d
 
             Debug("Add Column: " + column.Id);
         }
-        
-        private void Remove(Column column)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="column"></param>
+        public void Remove(Column column)
         {
             if (column == null)
                 return;
@@ -607,39 +346,49 @@ namespace Test2d
             Debug("Remove Column: " + column.Id);
         }
 
-        private void Add(Record record)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="record"></param>
+        public void Add(Record record)
         {
             if (record == null)
                 return;
-            
+
             record.PropertyChanged += RecordObserver;
-            
+
             if (record.Values != null)
             {
                 Add(record.Values);
-                (record.Values as ObservableCollection<Value>).CollectionChanged += ValuesCollectionObserver;
             }
-            
+
             Debug("Add Record: " + record.Id);
         }
 
-        private void Remove(Record record)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="record"></param>
+        public void Remove(Record record)
         {
             if (record == null)
                 return;
 
             record.PropertyChanged -= RecordObserver;
-            
+
             if (record.Values != null)
             {
                 Remove(record.Values);
-                (record.Values as ObservableCollection<string>).CollectionChanged -= ValuesCollectionObserver;
             }
-            
+
             Debug("Remove Record: " + record.Id);
         }
-        
-        private void Add(Value value)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        public void Add(Value value)
         {
             if (value == null)
                 return;
@@ -648,8 +397,12 @@ namespace Test2d
 
             Debug("Add Value");
         }
-        
-        private void Remove(Value value)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        public void Remove(Value value)
         {
             if (value == null)
                 return;
@@ -658,19 +411,114 @@ namespace Test2d
 
             Debug("Remove Value");
         }
-        
-        private void Add(Document document)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project"></param>
+        public void Add(Project project)
+        {
+            if (project == null)
+                return;
+
+            project.PropertyChanged += ProjectObserver;
+            
+            Debug("Add Project: " + project.Name);
+
+            if (project.Databases != null)
+            {
+                foreach (var database in project.Databases)
+                {
+                    Add(database);
+                }
+            }
+            
+            if (project.Documents != null)
+            {
+                foreach (var document in project.Documents)
+                {
+                    Add(document);
+                }
+            }
+            
+            if (project.Templates != null)
+            {
+                foreach (var template in project.Templates)
+                {
+                    Add(template);
+                }
+            }
+            
+            if (project.StyleGroups != null)
+            {
+                foreach (var sg in project.StyleGroups)
+                {
+                    Add(sg);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project"></param>
+        public void Remove(Project project)
+        {
+            if (project == null)
+                return;
+
+            project.PropertyChanged -= ProjectObserver;
+
+            Debug("Remove Project: " + project.Name);
+
+            if (project.Databases != null)
+            {
+                foreach (var database in project.Databases)
+                {
+                    Remove(database);
+                }
+            }
+            
+            if (project.Documents != null)
+            {
+                foreach (var document in project.Documents)
+                {
+                    Remove(document);
+                }
+            }
+
+            if (project.Templates != null)
+            {
+                foreach (var template in project.Templates)
+                {
+                    Remove(template);
+                }
+            }
+
+            if (project.StyleGroups != null)
+            {
+                foreach (var sg in project.StyleGroups)
+                {
+                    Remove(sg);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="document"></param>
+        public void Add(Document document)
         {
             if (document == null)
                 return;
-            
+
+            document.PropertyChanged += DocumentObserver;
+
             Debug("Add Document: " + document.Name);
-            
+
             if (document.Containers != null)
             {
-                (document.Containers as ObservableCollection<Container>)
-                    .CollectionChanged += ContainersCollectionObserver;
-                
                 foreach (var container in document.Containers)
                 {
                     Add(container);
@@ -678,17 +526,21 @@ namespace Test2d
             }
         }
 
-        private void Remove(Document document)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="document"></param>
+        public void Remove(Document document)
         {
             if (document == null)
                 return;
-            
+
+            document.PropertyChanged -= DocumentObserver;
+
             Debug("Remove Document: " + document.Name);
-            
+
             if (document.Containers != null)
             {
-                (document.Containers as ObservableCollection<Container>).CollectionChanged -= ContainersCollectionObserver;
-                
                 foreach (var container in document.Containers)
                 {
                     Remove(container);
@@ -696,12 +548,16 @@ namespace Test2d
             }
         }
 
-        private void Add(Container container)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        public void Add(Container container)
         {
             if (container == null)
                 return;
             
-            //container.PropertyChanged += ContainerObserver;
+            container.PropertyChanged += ContainerObserver;
             
             if (container.Background != null)
             {
@@ -713,24 +569,26 @@ namespace Test2d
             if (container.Layers != null)
             {
                 Add(container.Layers);
-                (container.Layers as ObservableCollection<Layer>).CollectionChanged += LayersCollectionObserver;
             }
             
             if (container.Properties != null)
             {
                 Add(container.Properties);
-                (container.Properties as ObservableCollection<ShapeProperty>).CollectionChanged += PropertiesCollectionObserver;
             }
             
             //Add(container.WorkingLayer);
         }
 
-        private void Remove(Container container)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        public void Remove(Container container)
         {
             if (container == null)
                 return;
             
-            //container.PropertyChanged -= ContainerObserver;
+            container.PropertyChanged -= ContainerObserver;
             
             if (container.Background != null)
             {
@@ -742,19 +600,21 @@ namespace Test2d
             if (container.Layers != null)
             {
                 Add(container.Layers);
-                (container.Layers as ObservableCollection<Layer>).CollectionChanged -= LayersCollectionObserver;
             }
             
             if (container.Properties != null)
             {
                 Remove(container.Properties);
-                (container.Properties as ObservableCollection<ShapeProperty>).CollectionChanged -= PropertiesCollectionObserver;
             }
             
             //Remove(container.WorkingLayer);
         }
 
-        private void Add(Layer layer)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="layer"></param>
+        public void Add(Layer layer)
         {
             if (layer == null)
                 return;
@@ -766,11 +626,14 @@ namespace Test2d
             if (layer.Shapes != null)
             {
                 Add(layer.Shapes);
-                (layer.Shapes as ObservableCollection<BaseShape>).CollectionChanged += ShapesCollectionObserver;
             }
         }
 
-        private void Remove(Layer layer)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="layer"></param>
+        public void Remove(Layer layer)
         {
             if (layer == null)
                 return;
@@ -782,11 +645,14 @@ namespace Test2d
             if (layer.Shapes != null)
             {
                 Remove(layer.Shapes);
-                (layer.Shapes as ObservableCollection<BaseShape>).CollectionChanged -= ShapesCollectionObserver;
             }
         }
 
-        private void Add(BaseShape shape)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        public void Add(BaseShape shape)
         {
             if (shape == null)
                 return;
@@ -796,13 +662,11 @@ namespace Test2d
             if (shape.Bindings != null)
             {
                 Add(shape.Bindings);
-                (shape.Bindings as ObservableCollection<ShapeBinding>).CollectionChanged += BindingsCollectionObserver;
             }
             
             if (shape.Properties != null)
             {
                 Add(shape.Properties);
-                (shape.Properties as ObservableCollection<ShapeProperty>).CollectionChanged += PropertiesCollectionObserver; 
             }
             
             if (shape is XPoint)
@@ -959,13 +823,11 @@ namespace Test2d
                     if (group.Shapes != null)
                     {
                         Add(group.Shapes);
-                        (group.Shapes as ObservableCollection<BaseShape>).CollectionChanged += ShapesCollectionObserver;
                     }
                     
                     if (group.Connectors != null)
                     {
                         Add(group.Connectors);
-                        (group.Connectors as ObservableCollection<XPoint>).CollectionChanged += ShapesCollectionObserver;
                     }
                 }
             }
@@ -973,7 +835,11 @@ namespace Test2d
             Debug("Add Shape: " + shape.GetType());
         }
 
-        private void Remove(BaseShape shape)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        public void Remove(BaseShape shape)
         {
             if (shape == null)
                 return;
@@ -983,13 +849,11 @@ namespace Test2d
             if (shape.Bindings != null)
             {
                 Remove(shape.Bindings);
-                (shape.Bindings as ObservableCollection<ShapeBinding>).CollectionChanged -= BindingsCollectionObserver;
             }
             
             if (shape.Properties != null)
             {
                 Remove(shape.Properties);
-                (shape.Properties as ObservableCollection<ShapeProperty>).CollectionChanged -= PropertiesCollectionObserver; 
             }
             
             if (shape is XPoint)
@@ -1146,13 +1010,11 @@ namespace Test2d
                     if (group.Shapes != null)
                     {
                         Remove(group.Shapes);
-                        (group.Shapes as ObservableCollection<BaseShape>).CollectionChanged -= ShapesCollectionObserver;
                     }
                     
                     if (group.Connectors != null)
                     {
                         Remove(group.Connectors);
-                        (group.Connectors as ObservableCollection<XPoint>).CollectionChanged -= ShapesCollectionObserver;
                     }
                 }
             }
@@ -1160,7 +1022,11 @@ namespace Test2d
             Debug("Remove Shape: " + shape.GetType());
         }
 
-        private void Add(ShapeStyleGroup sg)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sg"></param>
+        public void Add(ShapeStyleGroup sg)
         {
             if (sg == null)
                 return;
@@ -1168,14 +1034,17 @@ namespace Test2d
             if (sg.Styles != null)
             {
                 Add(sg.Styles);
-                (sg.Styles as ObservableCollection<ShapeStyle>).CollectionChanged += StylesCollectionObserver;
             }
             
             sg.PropertyChanged += StyleGroupObserver;
             Debug("Add Style Group: " + sg.Name);
         }
 
-        private void Remove(ShapeStyleGroup sg)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sg"></param>
+        public void Remove(ShapeStyleGroup sg)
         {
             if (sg == null)
                 return;
@@ -1183,14 +1052,17 @@ namespace Test2d
             if (sg.Styles != null)
             {
                 Remove(sg.Styles);
-                (sg.Styles as ObservableCollection<ShapeStyle>).CollectionChanged -= StylesCollectionObserver;
             }
             
             sg.PropertyChanged -= StyleGroupObserver;
             Debug("Remove Style Group: " + sg.Name);
         }
 
-        private void Add(ShapeStyle style)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="style"></param>
+        public void Add(ShapeStyle style)
         {
             if (style == null)
                 return;
@@ -1230,7 +1102,11 @@ namespace Test2d
             Debug("Add Style: " + style.Name);
         }
 
-        private void Remove(ShapeStyle style)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="style"></param>
+        public void Remove(ShapeStyle style)
         {
             if (style == null)
                 return;
@@ -1270,7 +1146,11 @@ namespace Test2d
             Debug("Removee Style: " + style.Name);
         }
 
-        private void Add(ShapeBinding binding)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="binding"></param>
+        public void Add(ShapeBinding binding)
         {
             if (binding == null)
                 return;
@@ -1279,7 +1159,11 @@ namespace Test2d
             Debug("Add Bnding: " + binding.Property + ", path: " + binding.Path);
         }
 
-        private void Remove(ShapeBinding binding)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="binding"></param>
+        public void Remove(ShapeBinding binding)
         {
             if (binding == null)
                 return;
@@ -1287,8 +1171,12 @@ namespace Test2d
             binding.PropertyChanged += BindingObserver;
             Debug("Remove Bnding: " + binding.Property + ", path: " + binding.Path);
         }
-   
-        private void Add(ShapeProperty property)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
+        public void Add(ShapeProperty property)
         {
             if (property == null)
                 return;
@@ -1297,7 +1185,11 @@ namespace Test2d
             Debug("Add Property: " + property.Name + ", type: " + property.Value.GetType());
         }
 
-        private void Remove(ShapeProperty property)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
+        public void Remove(ShapeProperty property)
         {
             if (property == null)
                 return;
@@ -1305,8 +1197,12 @@ namespace Test2d
             property.PropertyChanged += PropertyObserver;
             Debug("Remove Property: " + property.Name + ", type: " + property.Value.GetType());
         }
-   
-        private void Add(IEnumerable<Database> databases)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="databases"></param>
+        public void Add(IEnumerable<Database> databases)
         {
             if (databases == null)
                 return;
@@ -1316,8 +1212,12 @@ namespace Test2d
                 Add(database);
             }
         }
-        
-        private void Remove(IEnumerable<Database> databases)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="databases"></param>
+        public void Remove(IEnumerable<Database> databases)
         {
             if (databases == null)
                 return;
@@ -1328,7 +1228,11 @@ namespace Test2d
             }
         }
 
-        private void Add(IEnumerable<Column> columns)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="columns"></param>
+        public void Add(IEnumerable<Column> columns)
         {
             if (columns == null)
                 return;
@@ -1338,8 +1242,12 @@ namespace Test2d
                 Add(column);
             }
         }
-        
-        private void Remove(IEnumerable<Column> columns)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="columns"></param>
+        public void Remove(IEnumerable<Column> columns)
         {
             if (columns == null)
                 return;
@@ -1350,7 +1258,11 @@ namespace Test2d
             }
         }
 
-        private void Add(IEnumerable<Record> records)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="records"></param>
+        public void Add(IEnumerable<Record> records)
         {
             if (records == null)
                 return;
@@ -1360,8 +1272,12 @@ namespace Test2d
                 Add(record);
             }
         }
-        
-        private void Remove(IEnumerable<Record> records)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="records"></param>
+        public void Remove(IEnumerable<Record> records)
         {
             if (records == null)
                 return;
@@ -1371,8 +1287,12 @@ namespace Test2d
                 Remove(record);
             }
         }
- 
-        private void Add(IEnumerable<Value> values)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="values"></param>
+        public void Add(IEnumerable<Value> values)
         {
             if (values == null)
                 return;
@@ -1382,8 +1302,12 @@ namespace Test2d
                 Add(value);
             }
         }
-        
-        private void Remove(IEnumerable<Value> values)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="values"></param>
+        public void Remove(IEnumerable<Value> values)
         {
             if (values == null)
                 return;
@@ -1393,8 +1317,12 @@ namespace Test2d
                 Remove(value);
             }
         }
-        
-        private void Add(IEnumerable<Document> documents)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="documents"></param>
+        public void Add(IEnumerable<Document> documents)
         {
             if (documents == null)
                 return;
@@ -1405,7 +1333,11 @@ namespace Test2d
             }
         }
 
-        private void Remove(IEnumerable<Document> documents)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="documents"></param>
+        public void Remove(IEnumerable<Document> documents)
         {
             if (documents == null)
                 return;
@@ -1416,7 +1348,11 @@ namespace Test2d
             }
         }
 
-        private void Add(IEnumerable<Container> containers)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="containers"></param>
+        public void Add(IEnumerable<Container> containers)
         {
             if (containers == null)
                 return;
@@ -1427,7 +1363,11 @@ namespace Test2d
             }
         }
 
-        private void Remove(IEnumerable<Container> containers)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="containers"></param>
+        public void Remove(IEnumerable<Container> containers)
         {
             if (containers == null)
                 return;
@@ -1438,7 +1378,11 @@ namespace Test2d
             }
         }
 
-        private void Add(IEnumerable<Layer> layers)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="layers"></param>
+        public void Add(IEnumerable<Layer> layers)
         {
             if (layers == null)
                 return;
@@ -1449,7 +1393,11 @@ namespace Test2d
             }
         }
 
-        private void Remove(IEnumerable<Layer> layers)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="layers"></param>
+        public void Remove(IEnumerable<Layer> layers)
         {
             if (layers == null)
                 return;
@@ -1460,7 +1408,11 @@ namespace Test2d
             }
         }
 
-        private void Add(IEnumerable<BaseShape> shapes)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
+        public void Add(IEnumerable<BaseShape> shapes)
         {
             if (shapes == null)
                 return;
@@ -1471,7 +1423,11 @@ namespace Test2d
             }
         }
 
-        private void Remove(IEnumerable<BaseShape> shapes)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
+        public void Remove(IEnumerable<BaseShape> shapes)
         {
             if (shapes == null)
                 return;
@@ -1482,7 +1438,11 @@ namespace Test2d
             }
         }
 
-        private void Add(IEnumerable<ShapeStyle> styles)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="styles"></param>
+        public void Add(IEnumerable<ShapeStyle> styles)
         {
             if (styles == null)
                 return;
@@ -1493,7 +1453,11 @@ namespace Test2d
             }
         }
 
-        private void Remove(IEnumerable<ShapeStyle> styles)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="styles"></param>
+        public void Remove(IEnumerable<ShapeStyle> styles)
         {
             if (styles == null)
                 return;
@@ -1504,7 +1468,11 @@ namespace Test2d
             }
         }
 
-        private void Add(IEnumerable<ShapeStyleGroup> sgs)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sgs"></param>
+        public void Add(IEnumerable<ShapeStyleGroup> sgs)
         {
             if (sgs == null)
                 return;
@@ -1515,7 +1483,11 @@ namespace Test2d
             }
         }
 
-        private void Remove(IEnumerable<ShapeStyleGroup> sgs)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sgs"></param>
+        public void Remove(IEnumerable<ShapeStyleGroup> sgs)
         {
             if (sgs == null)
                 return;
@@ -1526,7 +1498,11 @@ namespace Test2d
             }
         }
 
-        private void Add(IEnumerable<ShapeBinding> bindings)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bindings"></param>
+        public void Add(IEnumerable<ShapeBinding> bindings)
         {
             if (bindings == null)
                 return;
@@ -1537,7 +1513,11 @@ namespace Test2d
             }
         }
 
-        private void Remove(IEnumerable<ShapeBinding> bindings)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bindings"></param>
+        public void Remove(IEnumerable<ShapeBinding> bindings)
         {
             if (bindings == null)
                 return;
@@ -1548,7 +1528,11 @@ namespace Test2d
             }
         }
 
-        private void Add(IEnumerable<ShapeProperty> properties)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="properties"></param>
+        public void Add(IEnumerable<ShapeProperty> properties)
         {
             if (properties == null)
                 return;
@@ -1559,7 +1543,11 @@ namespace Test2d
             }
         }
 
-        private void Remove(IEnumerable<ShapeProperty> properties)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="properties"></param>
+        public void Remove(IEnumerable<ShapeProperty> properties)
         {
             if (properties == null)
                 return;

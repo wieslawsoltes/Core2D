@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Linq;
 
 namespace Test2d
@@ -16,8 +15,8 @@ namespace Test2d
         private double _width;
         private double _height;
         private ArgbColor _background;
-        private IList<ShapeProperty> _properties;
-        private IList<Layer> _layers;
+        private ImmutableArray<ShapeProperty> _properties;
+        private ImmutableArray<Layer> _layers;
         private Container _template;
         private Layer _currentLayer;
         private Layer _workingLayer;
@@ -63,7 +62,7 @@ namespace Test2d
         /// <summary>
         /// Gets or sets a colletion ShapeProperty that will be used during drawing.
         /// </summary>
-        public IList<ShapeProperty> Properties
+        public ImmutableArray<ShapeProperty> Properties
         {
             get { return _properties; }
             set { Update(ref _properties, value); }
@@ -72,7 +71,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<Layer> Layers
+        public ImmutableArray<Layer> Layers
         {
             get { return _layers; }
             set { Update(ref _layers, value); }
@@ -130,10 +129,10 @@ namespace Test2d
         {
             foreach (var layer in Layers)
             {
-                layer.Shapes.Clear();
+                layer.Shapes = ImmutableArray.Create<BaseShape>();
             }
-            WorkingLayer.Shapes.Clear();
-            HelperLayer.Shapes.Clear();
+            WorkingLayer.Shapes = ImmutableArray.Create<BaseShape>();
+            HelperLayer.Shapes = ImmutableArray.Create<BaseShape>();
         }
 
         /// <summary>
@@ -180,17 +179,18 @@ namespace Test2d
                 Width = width,
                 Height = height,
                 Background = ArgbColor.Create(0x00, 0xFF, 0xFF, 0xFF),
-                Properties = new ObservableCollection<ShapeProperty>(),
-                Layers = new ObservableCollection<Layer>()
+                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Layers = ImmutableArray.Create<Layer>()
             };
 
-            c.Layers.Add(Layer.Create("Layer1", c));
-            c.Layers.Add(Layer.Create("Layer2", c));
-            c.Layers.Add(Layer.Create("Layer3", c));
-            c.Layers.Add(Layer.Create("Layer4", c));
+            var builder = c.Layers.ToBuilder();
+            builder.Add(Layer.Create("Layer1", c));
+            builder.Add(Layer.Create("Layer2", c));
+            builder.Add(Layer.Create("Layer3", c));
+            builder.Add(Layer.Create("Layer4", c));
+            c.Layers = builder.ToImmutable();
 
             c.CurrentLayer = c.Layers.FirstOrDefault();
-
             c.WorkingLayer = Layer.Create("Working", c);
             c.HelperLayer = Layer.Create("Helper", c);
 

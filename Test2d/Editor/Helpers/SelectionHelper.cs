@@ -52,7 +52,7 @@ namespace Test2d
                                 _startY = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
                                 _historyX = _startX;
                                 _historyY = _startY;
-                                _editor.History.Hold(_editor.Project);
+                                // TODO: Add history hold.
                                 _editor.IsContextMenu = false;
                                 _currentState = State.One;
                                 break;
@@ -65,7 +65,7 @@ namespace Test2d
                             _startY = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
                             _historyX = _startX;
                             _historyY = _startY;
-                            _editor.History.Hold(_editor.Project);
+                            // TODO: Add history hold.
                             _editor.IsContextMenu = false;
                             _currentState = State.One;
                             break;
@@ -76,7 +76,7 @@ namespace Test2d
                             _editor.Project.Options.SelectionStyle,
                             null,
                             true);
-                        _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
+                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         _currentState = State.One;
                     }
@@ -88,7 +88,7 @@ namespace Test2d
                         {
                             rectangle.BottomRight.X = x;
                             rectangle.BottomRight.Y = y;
-                            _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
+                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = State.None;
                         }
@@ -116,11 +116,13 @@ namespace Test2d
                             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
                             if (_historyX != sx || _historyY != sy)
                             {
-                                _editor.History.Commit();
+                                // TODO: Enable history commit.
+                                //_editor.History.Commit();
                             }
                             else
                             {
-                                _editor.History.Release();
+                                // TODO: Enable history release.
+                                //_editor.History.Release();
                             }
                             _currentState = State.None;
                             break;
@@ -131,7 +133,7 @@ namespace Test2d
                         {
                             rectangle.BottomRight.X = x;
                             rectangle.BottomRight.Y = y;
-                            _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
+                            _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = State.None;
 
@@ -218,6 +220,7 @@ namespace Test2d
                         if (_editor.IsSelectionAvailable())
                         {
                             MoveSelection(x, y);
+                            _editor.Project.CurrentContainer.CurrentLayer.Invalidate();
                             break;
                         }
 
