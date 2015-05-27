@@ -75,6 +75,7 @@
         <controls:XGroupDragAndDropListBox 
             x:Name="groupsListBox"
             DataContext="{Binding Editor.Project.CurrentGroupLibrary.Groups}"
+            Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
             ItemsSource="{Binding}"
             SelectedItem="{Binding DataContext.Editor.Project.CurrentGroupLibrary.CurrentGroup, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
             BorderBrush="{x:Null}"

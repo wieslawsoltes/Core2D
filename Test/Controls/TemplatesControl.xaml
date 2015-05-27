@@ -34,14 +34,15 @@
             <MenuItem Command="{Binding Commands.AddTemplateCommand}" Header="_+"/>
             <MenuItem Command="{Binding Commands.RemoveTemplateCommand}" Header="_-"/>
         </Menu>
-        <controls:ContainerDragAndDropListBox
+        <controls:TemplateDragAndDropListBox
             DataContext="{Binding Editor.Project.Templates}"
+            Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
             ItemsSource="{Binding}"
             SelectedItem="{Binding DataContext.Editor.Project.CurrentTemplate, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
             BorderBrush="{x:Null}"
             HorizontalContentAlignment="Stretch"
             Grid.Row="1">
-            <controls:ContainerDragAndDropListBox.Resources>
+            <controls:TemplateDragAndDropListBox.Resources>
                 <ContextMenu x:Key="TemplateContextMenu" 
                              DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Header="_Edit Template"
@@ -61,29 +62,29 @@
                               Command="{Binding DataContext.Commands.ExportTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                               CommandParameter="{Binding}"/>
                 </ContextMenu>
-            </controls:ContainerDragAndDropListBox.Resources>
-            <controls:ContainerDragAndDropListBox.InputBindings>
+            </controls:TemplateDragAndDropListBox.Resources>
+            <controls:TemplateDragAndDropListBox.InputBindings>
                 <KeyBinding Command="{Binding DataContext.Commands.AddTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ContainerDragAndDropListBox}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:TemplateDragAndDropListBox}}}" 
                             Gesture="Ctrl+N"/>
                 <KeyBinding Command="{Binding DataContext.Commands.RemoveTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ContainerDragAndDropListBox}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:TemplateDragAndDropListBox}}}" 
                             Gesture="Del"/>
                 <KeyBinding Command="{Binding DataContext.Commands.ExportTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ContainerDragAndDropListBox}}}" 
+                            CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:TemplateDragAndDropListBox}}}" 
                             Gesture="Ctrl+E"/>
-            </controls:ContainerDragAndDropListBox.InputBindings>
-            <controls:ContainerDragAndDropListBox.ItemContainerStyle>
+            </controls:TemplateDragAndDropListBox.InputBindings>
+            <controls:TemplateDragAndDropListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="ContextMenu" Value="{StaticResource TemplateContextMenu}"/>
                 </Style>
-            </controls:ContainerDragAndDropListBox.ItemContainerStyle>
-            <controls:ContainerDragAndDropListBox.ItemTemplate>
+            </controls:TemplateDragAndDropListBox.ItemContainerStyle>
+            <controls:TemplateDragAndDropListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Margin="0,5,0,5"/>
                 </DataTemplate>
-            </controls:ContainerDragAndDropListBox.ItemTemplate>
-        </controls:ContainerDragAndDropListBox>
+            </controls:TemplateDragAndDropListBox.ItemTemplate>
+        </controls:TemplateDragAndDropListBox>
         <ContentControl Content="{Binding Editor.Project.CurrentTemplate}"
                         Grid.Row="2" Margin="2">
              <ContentControl.Style>

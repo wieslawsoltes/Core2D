@@ -74,6 +74,7 @@
         </Menu>
         <controls:ShapeStyleDragAndDropListBox
             DataContext="{Binding Editor.Project.CurrentStyleGroup.Styles}"
+            Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
             ItemsSource="{Binding}" 
             SelectedItem="{Binding DataContext.Editor.Project.CurrentStyleGroup.CurrentStyle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
             BorderBrush="{x:Null}"

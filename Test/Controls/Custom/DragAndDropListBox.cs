@@ -146,6 +146,12 @@ namespace Test.Controls
             }
         }
 
+        /// <summary>
+        /// Updates DataContext binding to ImmutableArray collection property.
+        /// </summary>
+        /// <param name="array">The updated immutable array.</param>
+        public virtual void UpdateDataContext(ImmutableArray<T> array) { }
+
         private void Move(T source, int sourceIndex, int targetIndex)
         {
             if (sourceIndex < targetIndex)
@@ -153,16 +159,12 @@ namespace Test.Controls
                 var items = (ImmutableArray<T>)this.DataContext;
                 if (items != null)
                 {
-                    // TODO: Add ImmutableArray support.
-                    /*
+                    var exp = this.GetBindingExpression(ListBox.DataContextProperty);
+
                     var builder = items.ToBuilder();
                     builder.Insert(targetIndex + 1, source);
                     builder.RemoveAt(sourceIndex);
-                    this.DataContext = builder.ToImmutable();
-                    */
-
-                    //items.Insert(targetIndex + 1, source);
-                    //items.RemoveAt(sourceIndex);
+                    UpdateDataContext(builder.ToImmutable());
                 }
             }
             else
@@ -173,16 +175,10 @@ namespace Test.Controls
                     int removeIndex = sourceIndex + 1;
                     if (items.Length + 1 > removeIndex)
                     {
-                        // TODO: Add ImmutableArray support.
-                        /*
                         var builder = items.ToBuilder();
                         builder.Insert(targetIndex, source);
                         builder.RemoveAt(removeIndex);
-                        this.DataContext = builder.ToImmutable();
-                        */
-
-                        //items.Insert(targetIndex, source);
-                        //items.RemoveAt(removeIndex);
+                        UpdateDataContext(builder.ToImmutable());
                     }
                 }
             }
@@ -195,16 +191,10 @@ namespace Test.Controls
             {
                 var target = items[targetIndex];
 
-                // TODO: Add ImmutableArray support.
-                /*
                 var builder = items.ToBuilder();
                 builder[targetIndex] = source;
                 builder[sourceIndex] = target;
-                this.DataContext = builder.ToImmutable();
-                */
-
-                //items[targetIndex] = source;
-                //items[sourceIndex] = target;
+                UpdateDataContext(builder.ToImmutable());
             }
         }
     }

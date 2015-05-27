@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,21 @@ namespace Test.Controls
             : base()
         {
             this.Initialized += (s, e) => base.Initialize();
+        }
+
+        /// <summary>
+        /// Updates DataContext binding to ImmutableArray collection property.
+        /// </summary>
+        /// <param name="array">The updated immutable array.</param>
+        public override void UpdateDataContext(ImmutableArray<Test2d.Layer> array)
+        {
+            var editor = (Test2d.Editor)this.Tag;
+
+            var container = editor.Project.CurrentContainer;
+            var previous = container.Layers;
+            var next = array;
+            editor.History.Snapshot(previous, next, (p) => container.Layers = p);
+            container.Layers = next;
         }
     }
 }

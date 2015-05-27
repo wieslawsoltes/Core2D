@@ -114,7 +114,7 @@
       <DependentUpon>DatabasesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\DragAndDropListBoxes\BaseShapeDragAndDropListBox.cs" />
-    <Compile Include="Controls\DragAndDropListBoxes\ContainerDragAndDropListBox.cs" />
+    <Compile Include="Controls\DragAndDropListBoxes\TemplateDragAndDropListBox.cs" />
     <Compile Include="Controls\DragAndDropListBoxes\LayerDragAndDropListBox.cs" />
     <Compile Include="Controls\DragAndDropListBoxes\ShapeStyleDragAndDropListBox.cs" />
     <Compile Include="Controls\DragAndDropListBoxes\XGroupDragAndDropListBox.cs" />
