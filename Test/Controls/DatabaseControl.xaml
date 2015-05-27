@@ -8,9 +8,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="200">
     <ListView 
-            x:Name="listView"
-            ItemsSource="{Binding Records}"
-            HorizontalContentAlignment="Stretch" 
-            VerticalAlignment="Stretch">
+        x:Name="listView"
+        ItemsSource="{Binding Records}"
+        SelectedItem="{Binding CurrentRecord}" 
+        HorizontalContentAlignment="Stretch" 
+        VerticalAlignment="Stretch">
     </ListView>
 </UserControl>
