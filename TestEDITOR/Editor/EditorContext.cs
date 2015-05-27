@@ -647,6 +647,8 @@ namespace TestEDITOR
                             var next = _editor.Project.Databases.Remove(db as Database);
                             _editor.History.Snapshot(previous, next, (p) => _editor.Project.Databases = p);
                             _editor.Project.Databases = next;
+
+                            _editor.Project.CurrentDatabase = _editor.Project.Databases.FirstOrDefault();
                         }
                     },
                     (db) => IsEditMode());
