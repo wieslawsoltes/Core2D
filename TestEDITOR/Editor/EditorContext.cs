@@ -621,6 +621,74 @@ namespace TestEDITOR
                     },
                     () => IsEditMode());
 
+                _commands.AddDatabaseCommand = new DelegateCommand(
+                    () =>
+                    {
+                        var columns = Enumerable.Repeat("Column", 4).Select(n => Column.Create(n));
+                        var db = Database.Create(
+                            "New",
+                            ImmutableArray.CreateRange<Column>(columns));
+
+                        var previous = _editor.Project.Databases;
+                        var next = _editor.Project.Databases.Add(db);
+                        _editor.History.Snapshot(previous, next, (p) => _editor.Project.Databases = p);
+                        _editor.Project.Databases = next;
+
+                        _editor.Project.CurrentDatabase = db;
+                    },
+                    () => IsEditMode());
+
+                _commands.RemoveDatabaseCommand = new DelegateCommand<object>(
+                    (db) =>
+                    {
+                        if (db != null && db is Database)
+                        {
+                            var previous = _editor.Project.Databases;
+                            var next = _editor.Project.Databases.Remove(db as Database);
+                            _editor.History.Snapshot(previous, next, (p) => _editor.Project.Databases = p);
+                            _editor.Project.Databases = next;
+                        }
+                    },
+                    (db) => IsEditMode());
+
+                _commands.AddRecordCommand = new DelegateCommand(
+                    () =>
+                    {
+                        if (_editor.Project.CurrentDatabase != null)
+                        {
+                            var db = _editor.Project.CurrentDatabase;
+
+                            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Value.Create(c));
+                            var record = Record.Create(
+                                db.Columns,
+                                ImmutableArray.CreateRange<Value>(values));
+
+                            var previous = db.Records;
+                            var next = db.Records.Add(record);
+                            _editor.History.Snapshot(previous, next, (p) => db.Records = p);
+                            db.Records = next;
+                        }
+                    },
+                    () => IsEditMode());
+
+                _commands.RemoveRecordCommand = new DelegateCommand(
+                    () =>
+                    {
+                        if (_editor.Project.CurrentDatabase != null)
+                        {
+                            var db = _editor.Project.CurrentDatabase;
+                            if (db.CurrentRecord != null)
+                            {
+                                var record = db.CurrentRecord;
+
+                                var previous = db.Records;
+                                var next = db.Records.Remove(record);
+                                _editor.History.Snapshot(previous, next, (p) => db.Records = p);
+                                db.Records = next;
+                            }
+                        }
+                    },
+                    () => IsEditMode());
 
                 _commands.AddBindingCommand = new DelegateCommand<object>(
                     (owner) =>
@@ -2903,6 +2971,11 @@ namespace TestEDITOR
             (_commands.DefaultIsFilledCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.SnapToGridCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.TryToConnectCommand as DelegateCommand).RaiseCanExecuteChanged();
+
+            (_commands.AddDatabaseCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.RemoveDatabaseCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.AddRecordCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.RemoveRecordCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.AddBindingCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.RemoveBindingCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
