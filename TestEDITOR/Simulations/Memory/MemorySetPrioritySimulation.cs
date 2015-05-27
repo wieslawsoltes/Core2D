@@ -35,7 +35,7 @@ namespace TestSIM
         /// <param name="clock"></param>
         public override void Run(IClock clock)
         {
-            // TODO: Implement simulation
+            // TODO: Implement Run().
         }
     }
 }

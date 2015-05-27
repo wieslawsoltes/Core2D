@@ -114,7 +114,7 @@ namespace TestEDITOR
         /// <param name="r"></param>
         public void Draw(object dc, Container container, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            // TODO: Implement Draw().
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace TestEDITOR
         /// <param name="r"></param>
         public void Draw(object dc, Layer layer, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            // TODO: Implement Draw().
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace TestEDITOR
         /// <param name="r"></param>
         public void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            // TODO: Implement Draw().
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace TestEDITOR
         /// <param name="r"></param>
         public void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            // TODO: Implement Draw().
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace TestEDITOR
         /// <param name="r"></param>
         public void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            // TODO: Implement Draw().
         }
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace TestEDITOR
         /// <param name="r"></param>
         public void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            // TODO: Implement Draw().
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace TestEDITOR
         /// <param name="r"></param>
         public void Draw(object dc, XBezier bezier, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            // TODO: Implement Draw().
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace TestEDITOR
         /// <param name="r"></param>
         public void Draw(object dc, XQBezier qbezier, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            // TODO: Implement Draw().
         }
 
         /// <summary>
@@ -224,7 +224,7 @@ namespace TestEDITOR
         /// <param name="r"></param>
         public void Draw(object dc, XText text, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            // TODO: Implement Draw().
         }
 
         /// <summary>
@@ -238,7 +238,7 @@ namespace TestEDITOR
         /// <param name="r"></param>
         public void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            // TODO: Implement Draw().
         }
 
         private DxfAcadVer _version;

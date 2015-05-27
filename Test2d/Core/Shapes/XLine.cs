@@ -222,7 +222,7 @@ namespace Test2d
 
             if (shortenStart && shortenEnd)
             {
-                // TODO:
+                // TODO: Implement shorten start and end case.
             }
         }
 
@@ -262,7 +262,7 @@ namespace Test2d
 
             if (shortenStart && shortenEnd)
             {
-                // TODO:
+                // TODO: Implement shorten start and end case.
             }
         }
 
@@ -300,15 +300,10 @@ namespace Test2d
                     y2 = y1 - ls.MaxLength;
             }
 
-            /*
             if (shortenStart && shortenEnd)
             {
-                if (y2 > y1)
-                    y2 = y1 + ls.MaxLength;
-                else
-                    y2 = y1 - ls.MaxLength;
+                // TODO: Implement shorten start and end case.
             }
-            */
         }
     }
 }
