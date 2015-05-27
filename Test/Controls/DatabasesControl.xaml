@@ -7,7 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="200">
+             d:DesignHeight="300" d:DesignWidth="280">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,6 +18,7 @@
             <MenuItem Header="new" Command="{Binding Commands.AddDatabaseCommand}" InputGestureText=""/>
             <MenuItem Header="import" Command="{Binding Commands.ImportDataCommand}" InputGestureText=""/>
             <MenuItem Header="export" Command="{Binding Commands.ExportDataCommand}" InputGestureText=""/>
+            <MenuItem Header="update" Command="{Binding Commands.UpdateDataCommand}" InputGestureText=""/>
             <MenuItem Command="{Binding Commands.AddRecordCommand}" Header="+"/>
             <MenuItem Command="{Binding Commands.RemoveRecordCommand}" Header="-"/>
         </Menu>

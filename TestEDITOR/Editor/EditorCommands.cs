@@ -43,6 +43,10 @@ namespace TestEDITOR
         /// 
         /// </summary>
         public ICommand ExportDataCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand UpdateDataCommand { get; set; }
 
         /// <summary>
         /// 
