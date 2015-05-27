@@ -1807,22 +1807,39 @@ namespace TestEDITOR
         /// 
         /// </summary>
         /// <param name="path"></param>
-        public void ImportData(string path)
+        /// <returns></returns>
+        public Database OpenDatabase(string path)
         {
-            try
+            var reader = new CsvReader();
+            var fields = reader.Read(path);
+            var name = System.IO.Path.GetFileNameWithoutExtension(path);
+
+            var db = Database.Create(name);
+
+            var tempColumns = fields.FirstOrDefault().Select(c => Column.Create(c));
+            var columns = ImmutableArray.CreateRange<Column>(tempColumns);
+
+            if (columns.Length >= 1 && columns[0].Name == "Id")
             {
-                var reader = new CsvReader();
-                var fields = reader.Read(path);
-                var name = System.IO.Path.GetFileNameWithoutExtension(path);
-
-                var db = Database.Create(name);
-
-                var tempColumns = fields.FirstOrDefault().Select(c => Column.Create(c));
-                var columns = ImmutableArray.CreateRange<Column>(tempColumns);
-
+                // use existing record Id's
                 var tempRecords = fields
                     .Skip(1)
-                    .Select(v => 
+                    .Select(v =>
+                            Record.Create(
+                                v.FirstOrDefault(),
+                                columns,
+                                ImmutableArray.CreateRange<Value>(v.Select(c => Value.Create(c)))));
+                var records = ImmutableArray.CreateRange<Record>(tempRecords);
+
+                db.Columns = columns;
+                db.Records = records;
+            }
+            else
+            {
+                // create records with new Id's
+                var tempRecords = fields
+                    .Skip(1)
+                    .Select(v =>
                             Record.Create(
                                 columns,
                                 ImmutableArray.CreateRange<Value>(v.Select(c => Value.Create(c)))));
@@ -1830,6 +1847,20 @@ namespace TestEDITOR
 
                 db.Columns = columns;
                 db.Records = records;
+            }
+
+            return db;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        public void ImportData(string path)
+        {
+            try
+            {
+                var db = OpenDatabase(path);
 
                 var previous = _editor.Project.Databases;
                 var next = _editor.Project.Databases.Add(db);
@@ -1854,7 +1885,128 @@ namespace TestEDITOR
         {
             try
             {
-                // TODO:
+                using (var writer = new System.IO.StringWriter())
+                {
+                    var configuration = new CsvHelper.Configuration.CsvConfiguration();
+
+                    configuration.Delimiter = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator;
+                    configuration.CultureInfo = System.Globalization.CultureInfo.CurrentCulture;
+
+                    using (var csv = new CsvHelper.CsvWriter(writer, configuration))
+                    {
+                        // columns
+                        csv.WriteField("Id");
+                        foreach (var column in database.Columns)
+                        {
+                            csv.WriteField(column.Name);
+                        }
+                        csv.NextRecord();
+
+                        // records
+                        foreach (var record in database.Records)
+                        {
+                            csv.WriteField(record.Id.ToString());
+                            foreach (var value in record.Values)
+                            {
+                                csv.WriteField(value.Content);
+                            }
+                            csv.NextRecord();
+                        }
+                    }
+
+                    using (var file = System.IO.File.CreateText(path))
+                    {
+                        file.Write(writer.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="database"></param>
+        public void UpdateData(string path, Database database)
+        {
+            try
+            {
+                var db = OpenDatabase(path);
+
+                if (db.Columns.Length <= 1)
+                    return;
+
+                // check for the Id column
+                if (db.Columns[0].Name != "Id")
+                    return;
+
+                // skip Id column for update
+                if (db.Columns.Length - 1 != database.Columns.Length)
+                    return;
+
+                // check column names
+                for (int i = 1; i < db.Columns.Length; i++)
+                {
+                    if (db.Columns[i].Name != database.Columns[i - 1].Name)
+                        return;
+                }
+
+                bool isDirty = false;
+                var recordsBuilder = database.Records.ToBuilder();
+
+                for (int i = 0; i < database.Records.Length; i++)
+                {
+                    var record = database.Records[i];
+                    
+                    var result = db.Records.FirstOrDefault(r => r.Id == record.Id);
+                    if (result != null)
+                    {
+                        // update existing record
+                        for (int j = 1; j < result.Values.Length; j++)
+                        {
+                            var valuesBuilder = record.Values.ToBuilder();
+                            valuesBuilder[j - 1] = result.Values[j];
+                            record.Values = valuesBuilder.ToImmutable();
+                        }
+                        isDirty = true;
+                    }
+                    else
+                    {
+                        var r = db.Records[i];
+
+                        // use existing columns
+                        r.Columns = database.Columns;
+
+                        // skip Id column
+                        r.Values = r.Values.Skip(1).ToImmutableArray();
+
+                        recordsBuilder.Add(r);
+                        isDirty = true;
+                    }
+                }
+
+                if (isDirty)
+                {
+                    //var previous = database.Records;
+                    //var next = builder.ToImmutable();
+                    //_editor.History.Snapshot(previous, next, (p) => database.Records = p);
+                    //database.Records = next;
+
+                    var builder = _editor.Project.Databases.ToBuilder();
+                    var index = builder.IndexOf(database);
+                    database.Records = recordsBuilder.ToImmutable();
+                    builder[index] = database;
+
+                    var previous = _editor.Project.Databases;
+                    var next = builder.ToImmutable();
+                    _editor.History.Snapshot(previous, next, (p) => _editor.Project.Databases = p);
+                    _editor.Project.Databases = next;
+                }
             }
             catch (Exception ex)
             {
@@ -2922,6 +3074,7 @@ namespace TestEDITOR
 
             (_commands.ImportDataCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ExportDataCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.UpdateDataCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
 
             (_commands.ImportStyleCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ImportStylesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
