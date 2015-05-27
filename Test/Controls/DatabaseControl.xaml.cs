@@ -69,31 +69,9 @@ namespace Test.Controls
             var database = DataContext as Database;
             if (database != null)
             {
-                SetColumns(database.Columns);
-                //SetRecords(database.Records);
+                listView.View = CreateColumnsView(database.Columns);
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="columns"></param>
-        public void SetColumns(ImmutableArray<Column> columns)
-        {
-            listView.View = CreateColumnsView(columns);
-        }
-
-        /*
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="records"></param>
-        public void SetRecords(ImmutableArray<Record> records)
-        {
-            listView.ItemsSource = null;
-            listView.ItemsSource = records;
-        }
-        */
 
         /// <summary>
         /// 
