@@ -5,21 +5,21 @@ var sg = p.StyleGroups.Where(x => x.Name == "Logic").FirstOrDefault();
 if (sg == null)
 {
     sg = ShapeStyleGroup.Create("Logic");
-    p.StyleGroups.Add(sg);
+    p.StyleGroups = p.StyleGroups.Add(sg);
 }
-var styles = sg.Styles;
+var styles = sg.Styles.ToBuilder();
 
 var gl = p.GroupLibraries.Where(x => x.Name == "Logic").FirstOrDefault();
 if (gl == null)
 {
     gl = GroupLibrary.Create("Logic");
-    p.GroupLibraries.Add(gl);
+    p.GroupLibraries = p.GroupLibraries.Add(gl);
 }
 
 p.CurrentStyleGroup = sg;
 p.CurrentGroupLibrary = gl;
 
-var groups = gl.Groups;
+var groups = gl.Groups.ToBuilder();
 var ps = p.Options.PointShape;
 
 var styleTextMediumLC = ShapeStyle.Create(
@@ -70,6 +70,7 @@ var styleLineThick = ShapeStyle.Create(
     TextHAlignment.Center, TextVAlignment.Center);
 styles.Add(styleLineThick);
 
+sg.Styles = styles.ToImmutable();
 sg.CurrentStyle = sg.Styles.FirstOrDefault();
 
 // INPUT
@@ -82,7 +83,7 @@ XGroup CreateInputSignal()
     var co = XPoint.Create(30, 15, ps, "O");
 
     var labelProperty = ShapeProperty.Create("Label", "IN");
-    label.Properties = new [] { labelProperty };
+    label.Properties = label.Properties.Add(labelProperty);
 
     g.AddShape(label);
     g.AddShape(frame);
@@ -101,7 +102,7 @@ XGroup CreateOutputSignal()
     var ci = XPoint.Create(0, 15, ps, "I");
     
     var labelProperty = ShapeProperty.Create("Label", "OUT");
-    label.Properties = new [] { labelProperty };
+    label.Properties = label.Properties.Add(labelProperty);
 
     g.AddShape(label);
     g.AddShape(frame);
@@ -124,22 +125,22 @@ XGroup CreateSignal()
     var ci = XPoint.Create(0, 15, ps, "I");
     var co = XPoint.Create(300, 15, ps, "O");
 
-    labelDesignation.Bindings.Add(ShapeBinding.Create("Text", "Designation"));
-    labelDescription.Bindings.Add(ShapeBinding.Create("Text", "Description"));
-    labelSignal.Bindings.Add(ShapeBinding.Create("Text", "Signal"));
-    labelCondition.Bindings.Add(ShapeBinding.Create("Text", "Condition"));
+    labelDesignation.Bindings = labelDesignation.Bindings.Add(ShapeBinding.Create("Text", "Designation"));
+    labelDescription.Bindings = labelDescription.Bindings.Add(ShapeBinding.Create("Text", "Description"));
+    labelSignal.Bindings = labelSignal.Bindings.Add(ShapeBinding.Create("Text", "Signal"));
+    labelCondition.Bindings = labelCondition.Bindings.Add(ShapeBinding.Create("Text", "Condition"));
 
     var designationProperty = ShapeProperty.Create("Designation", "Designation");
-    labelDesignation.Properties = new [] { designationProperty };
+    labelDesignation.Properties = labelDesignation.Properties.Add(designationProperty);
 
     var descriptionProperty = ShapeProperty.Create("Description", "Description");
-    labelDescription.Properties = new [] { descriptionProperty };
+    labelDescription.Properties = labelDescription.Properties.Add(descriptionProperty);
     
     var signalProperty = ShapeProperty.Create("Signal", "Signal");
-    labelSignal.Properties = new [] { signalProperty };
+    labelSignal.Properties = labelSignal.Properties.Add(signalProperty);
     
     var conditionProperty = ShapeProperty.Create("Condition", "Condition");
-    labelCondition.Properties = new [] { conditionProperty };
+    labelCondition.Properties = labelCondition.Properties.Add(conditionProperty);
     
     g.AddShape(labelDesignation);
     g.AddShape(labelDescription);
@@ -166,7 +167,7 @@ XGroup CreateAndGate()
     var cb = XPoint.Create(15, 30, ps, "B");
 
     var labelProperty = ShapeProperty.Create("Label", "&");
-    label.Properties = new [] { labelProperty };
+    label.Properties = label.Properties.Add(labelProperty);
     
     g.AddShape(label);
     g.AddShape(frame);
@@ -192,7 +193,8 @@ XGroup CreateOrGate()
 
     var prefixProperty = ShapeProperty.Create("Prefix", "≥");
     var counterProperty = ShapeProperty.Create("Counter", "1");
-    label.Properties = new [] { prefixProperty, counterProperty };
+    label.Properties = label.Properties.Add(prefixProperty);
+    label.Properties = label.Properties.Add(counterProperty);
 
     g.AddShape(label);
     g.AddShape(frame);
@@ -217,7 +219,7 @@ XGroup CreateXorGate()
     var cb = XPoint.Create(15, 30, ps, "B");
 
     var labelProperty = ShapeProperty.Create("Label", "=1");
-    label.Properties = new [] { labelProperty };
+    label.Properties = label.Properties.Add(labelProperty);
     
     g.AddShape(label);
     g.AddShape(frame);
@@ -242,7 +244,7 @@ XGroup CreateInverterGate()
     var cb = XPoint.Create(15, 30, ps, "B");
 
     var labelProperty = ShapeProperty.Create("Label", "1");
-    label.Properties = new [] { labelProperty };
+    label.Properties = label.Properties.Add(labelProperty);
     
     g.AddShape(label);
     g.AddShape(frame);
@@ -274,13 +276,15 @@ XGroup CreateTimerOn()
     var prefixProperty = ShapeProperty.Create("Prefix", "T=");
     var delayProperty = ShapeProperty.Create("Delay", "1");
     var unitProperty = ShapeProperty.Create("Unit", "s");
-    label.Properties = new [] { prefixProperty, delayProperty, unitProperty };
+    label.Properties = label.Properties.Add(prefixProperty);
+    label.Properties = label.Properties.Add(delayProperty);
+    label.Properties = label.Properties.Add(unitProperty);
 
     var t0Property = ShapeProperty.Create("T0", "T");
-    t0.Properties = new [] { t0Property };
+    t0.Properties = t0.Properties.Add(t0Property);
     
     var t1Property = ShapeProperty.Create("T1", "0");
-    t1.Properties = new [] { t1Property };
+    t1.Properties = t1.Properties.Add(t1Property);
 
     g.AddShape(label);
     g.AddShape(t0);
@@ -317,13 +321,15 @@ XGroup CreateTimerOff()
     var prefixProperty = ShapeProperty.Create("Prefix", "T=");
     var delayProperty = ShapeProperty.Create("Delay", "1");
     var unitProperty = ShapeProperty.Create("Unit", "s");
-    label.Properties = new [] { prefixProperty, delayProperty, unitProperty };
+    label.Properties = label.Properties.Add(prefixProperty);
+    label.Properties = label.Properties.Add(delayProperty);
+    label.Properties = label.Properties.Add(unitProperty);
 
     var t0Property = ShapeProperty.Create("T0", "0");
-    t0.Properties = new [] { t0Property };
+    t0.Properties = t0.Properties.Add(t0Property);
     
     var t1Property = ShapeProperty.Create("T1", "T");
-    t1.Properties = new [] { t1Property };
+    t1.Properties = t1.Properties.Add(t1Property);
 
     g.AddShape(label);
     g.AddShape(t0);
@@ -362,10 +368,12 @@ XGroup CreateTimerPulse()
     var prefixProperty = ShapeProperty.Create("Prefix", "T=");
     var delayProperty = ShapeProperty.Create("Delay", "1");
     var unitProperty = ShapeProperty.Create("Unit", "s");
-    label.Properties = new [] { prefixProperty, delayProperty, unitProperty };
+    label.Properties = label.Properties.Add(prefixProperty);
+    label.Properties = label.Properties.Add(delayProperty);
+    label.Properties = label.Properties.Add(unitProperty);
 
     var tProperty = ShapeProperty.Create("T", "T");
-    t.Properties = new [] { tProperty };
+    t.Properties = t.Properties.Add(tProperty);
 
     g.AddShape(label);
     g.AddShape(t);
@@ -393,3 +401,5 @@ groups.Add(CreateInverterGate());
 groups.Add(CreateTimerOn());
 groups.Add(CreateTimerOff());
 groups.Add(CreateTimerPulse());
+
+gl.Groups = groups.ToImmutable();
