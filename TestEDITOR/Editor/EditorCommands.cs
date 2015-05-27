@@ -240,6 +240,24 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
+        public ICommand AddDatabaseCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand RemoveDatabaseCommand { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand AddRecordCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand RemoveRecordCommand { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand AddBindingCommand { get; set; }
         /// <summary>
         /// 
