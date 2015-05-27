@@ -104,9 +104,13 @@ namespace Test2d
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             Remove();
                             Finalize(_shape);
-                            _editor.History.Snapshot(_editor.Project);
-                            _editor.Project.CurrentContainer.CurrentLayer.Shapes = _editor.Project.CurrentContainer.CurrentLayer.Shapes.Add(_shape);
-                            //_editor.Project.CurrentContainer.Invalidate();
+
+                            var layer = _editor.Project.CurrentContainer.CurrentLayer;
+                            var previous = layer.Shapes;
+                            var next = layer.Shapes.Add(_shape);
+                            _editor.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                            layer.Shapes = next;
+
                             _currentState = State.None;
                         }
                     }

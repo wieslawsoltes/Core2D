@@ -40,9 +40,12 @@ namespace Test2d
                 case State.None:
                     {
                         _shape = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        _editor.History.Snapshot(_editor.Project);
-                        _editor.Project.CurrentContainer.CurrentLayer.Shapes = _editor.Project.CurrentContainer.CurrentLayer.Shapes.Add(_shape);
-                        //_editor.Project.CurrentContainer.Invalidate();
+
+                        var layer = _editor.Project.CurrentContainer.CurrentLayer;
+                        var previous = layer.Shapes;
+                        var next = layer.Shapes.Add(_shape);
+                        _editor.History.Snapshot(previous, next, (p) => layer.Shapes = p);
+                        layer.Shapes = next;
                     }
                     break;
             }
