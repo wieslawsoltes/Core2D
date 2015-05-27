@@ -1512,56 +1512,74 @@ namespace TestEDITOR
         public void ImportEx(string path, object item, ImportType type)
         {
             // TODO: Add ImmutableArray support.
-            /*
+
             try
             {
                 switch (type)
                 {
                     case ImportType.Style:
                         {
-                            var styles = item as IList<ShapeStyle>;
+                            var sg = item as ShapeStyleGroup;
                             var json = ReadUtf8Text(path, false);
                             var import = Serializer.FromJson<ShapeStyle>(json);
-                            _editor.History.Snapshot(_editor.Project);
-                            styles.Add(import);
+
+                            var previous = sg.Styles;
+                            var next = sg.Styles.Add(import);
+                            _editor.History.Snapshot(previous, next, (p) => sg.Styles = p);
+                            sg.Styles = next;
                         }
                         break;
                     case ImportType.Styles:
                         {
-                            var styles = item as IList<ShapeStyle>;
+                            var sg = item as ShapeStyleGroup;
                             var json = ReadUtf8Text(path, false);
                             var import = Serializer.FromJson<IList<ShapeStyle>>(json);
-                            _editor.History.Snapshot(_editor.Project);
+
+                            var builder = sg.Styles.ToBuilder();
                             foreach (var style in import)
                             {
-                                styles.Add(style);
+                                builder.Add(style);
                             }
+
+                            var previous = sg.Styles;
+                            var next = builder.ToImmutable();
+                            _editor.History.Snapshot(previous, next, (p) => sg.Styles = p);
+                            sg.Styles = next;
                         }
                         break;
                     case ImportType.StyleGroup:
                         {
-                            var sgs = item as IList<ShapeStyleGroup>;
+                            var project = item as Project;
                             var json = ReadUtf8Text(path, false);
                             var import = Serializer.FromJson<ShapeStyleGroup>(json);
-                            _editor.History.Snapshot(_editor.Project);
-                            sgs.Add(import);
+
+                            var previous = project.StyleGroups;
+                            var next = project.StyleGroups.Add(import);
+                            _editor.History.Snapshot(previous, next, (p) => project.StyleGroups = p);
+                            project.StyleGroups = next;
                         }
                         break;
                     case ImportType.StyleGroups:
                         {
-                            var sgs = item as IList<ShapeStyleGroup>;
+                            var project = item as Project;
                             var json = ReadUtf8Text(path, false);
                             var import = Serializer.FromJson<IList<ShapeStyleGroup>>(json);
-                            _editor.History.Snapshot(_editor.Project);
+
+                            var builder = project.StyleGroups.ToBuilder();
                             foreach (var sg in import)
                             {
-                                sgs.Add(sg);
+                                builder.Add(sg);
                             }
+
+                            var previous = project.StyleGroups;
+                            var next = builder.ToImmutable();
+                            _editor.History.Snapshot(previous, next, (p) => project.StyleGroups = p);
+                            project.StyleGroups = next;
                         }
                         break;
                     case ImportType.Group:
                         {
-                            var groups = item as IList<XGroup>;
+                            var gl = item as GroupLibrary;
                             var json = ReadUtf8Text(path, false);
                             var import = Serializer.FromJson<XGroup>(json);
 
@@ -1572,13 +1590,15 @@ namespace TestEDITOR
                             var images = Editor.GetAllShapes<XImage>(shapes);
                             _editor.ToAbsoluteUri(root, images);
 
-                            _editor.History.Snapshot(_editor.Project);
-                            groups.Add(import);
+                            var previous = gl.Groups;
+                            var next = gl.Groups.Add(import);
+                            _editor.History.Snapshot(previous, next, (p) => gl.Groups = p);
+                            gl.Groups = next;
                         }
                         break;
                     case ImportType.Groups:
                         {
-                            var groups = item as IList<XGroup>;
+                            var gl = item as GroupLibrary;
                             var json = ReadUtf8Text(path, false);
                             var import = Serializer.FromJson<IList<XGroup>>(json);
 
@@ -1589,16 +1609,21 @@ namespace TestEDITOR
                             var images = Editor.GetAllShapes<XImage>(shapes);
                             _editor.ToAbsoluteUri(root, images);
 
-                            _editor.History.Snapshot(_editor.Project);
+                            var builder = gl.Groups.ToBuilder();
                             foreach (var group in import)
                             {
-                                groups.Add(group);
+                                builder.Add(group);
                             }
+
+                            var previous = gl.Groups;
+                            var next = builder.ToImmutable();
+                            _editor.History.Snapshot(previous, next, (p) => gl.Groups = p);
+                            gl.Groups = next;
                         }
                         break;
                     case ImportType.GroupLibrary:
                         {
-                            var gls = item as IList<GroupLibrary>;
+                            var project = item as Project;
                             var json = ReadUtf8Text(path, false);
                             var import = Serializer.FromJson<GroupLibrary>(json);
 
@@ -1609,13 +1634,15 @@ namespace TestEDITOR
                             var images = Editor.GetAllShapes<XImage>(shapes);
                             _editor.ToAbsoluteUri(root, images);
 
-                            _editor.History.Snapshot(_editor.Project);
-                            gls.Add(import);
+                            var previous = project.GroupLibraries;
+                            var next = project.GroupLibraries.Add(import);
+                            _editor.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
+                            project.GroupLibraries = next;
                         }
                         break;
                     case ImportType.GroupLibraries:
                         {
-                            var gls = item as IList<GroupLibrary>;
+                            var project = item as Project;
                             var json = ReadUtf8Text(path, false);
                             var import = Serializer.FromJson<IList<GroupLibrary>>(json);
 
@@ -1626,16 +1653,21 @@ namespace TestEDITOR
                             var images = Editor.GetAllShapes<XImage>(shapes);
                             _editor.ToAbsoluteUri(root, images);
 
-                            _editor.History.Snapshot(_editor.Project);
+                            var builder = project.GroupLibraries.ToBuilder();
                             foreach (var library in import)
                             {
-                                gls.Add(library);
+                                builder.Add(library);
                             }
+
+                            var previous = project.GroupLibraries;
+                            var next = builder.ToImmutable();
+                            _editor.History.Snapshot(previous, next, (p) => project.GroupLibraries = p);
+                            project.GroupLibraries = next;
                         }
                         break;
                     case ImportType.Template:
                         {
-                            var templates = item as IList<Container>;
+                            var project = item as Project;
                             var json = ReadUtf8Text(path, false);
                             var import = Serializer.FromJson<Container>(json);
 
@@ -1646,13 +1678,15 @@ namespace TestEDITOR
                             var images = Editor.GetAllShapes<XImage>(shapes);
                             _editor.ToAbsoluteUri(root, images);
 
-                            _editor.History.Snapshot(_editor.Project);
-                            templates.Add(import);
+                            var previous = project.Templates;
+                            var next = project.Templates.Add(import);
+                            _editor.History.Snapshot(previous, next, (p) => project.Templates = p);
+                            project.Templates = next;
                         }
                         break;
                     case ImportType.Templates:
                         {
-                            var templates = item as IList<Container>;
+                            var project = item as Project;
                             var json = ReadUtf8Text(path, false);
                             var import = Serializer.FromJson<IList<Container>>(json);
 
@@ -1663,11 +1697,16 @@ namespace TestEDITOR
                             var images = Editor.GetAllShapes<XImage>(shapes);
                             _editor.ToAbsoluteUri(root, images);
 
-                            _editor.History.Snapshot(_editor.Project);
+                            var builder = project.Templates.ToBuilder();
                             foreach (var template in import)
                             {
-                                templates.Add(template);
+                                builder.Add(template);
                             }
+
+                            var previous = project.Templates;
+                            var next = builder.ToImmutable();
+                            _editor.History.Snapshot(previous, next, (p) => project.Templates = p);
+                            project.Templates = next;
                         }
                         break;
                 }
@@ -1677,7 +1716,6 @@ namespace TestEDITOR
                 System.Diagnostics.Debug.Print(ex.Message);
                 System.Diagnostics.Debug.Print(ex.StackTrace);
             }
-            */
         }
 
         /// <summary>
@@ -2376,52 +2414,52 @@ namespace TestEDITOR
                         }
                         else if (string.Compare(ext, ".style", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project.CurrentStyleGroup.Styles, ImportType.Style);
+                            ImportEx(path, _editor.Project.CurrentStyleGroup, ImportType.Style);
                             result = true;
                         }
                         else if (string.Compare(ext, ".styles", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project.CurrentStyleGroup.Styles, ImportType.Styles);
+                            ImportEx(path, _editor.Project.CurrentStyleGroup, ImportType.Styles);
                             result = true;
                         }
                         else if (string.Compare(ext, ".stylegroup", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project.StyleGroups, ImportType.StyleGroup);
+                            ImportEx(path, _editor.Project, ImportType.StyleGroup);
                             result = true;
                         }
                         else if (string.Compare(ext, ".stylegroups", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project.StyleGroups, ImportType.StyleGroups);
+                            ImportEx(path, _editor.Project, ImportType.StyleGroups);
                             result = true;
                         }
                         else if (string.Compare(ext, ".group", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project.CurrentGroupLibrary.Groups, ImportType.Group);
+                            ImportEx(path, _editor.Project.CurrentGroupLibrary, ImportType.Group);
                             result = true;
                         }
                         else if (string.Compare(ext, ".groups", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project.CurrentGroupLibrary.Groups, ImportType.Groups);
+                            ImportEx(path, _editor.Project.CurrentGroupLibrary, ImportType.Groups);
                             result = true;
                         }
                         else if (string.Compare(ext, ".grouplibrary", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project.GroupLibraries, ImportType.GroupLibrary);
+                            ImportEx(path, _editor.Project, ImportType.GroupLibrary);
                             result = true;
                         }
                         else if (string.Compare(ext, ".grouplibraries", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project.GroupLibraries, ImportType.GroupLibraries);
+                            ImportEx(path, _editor.Project, ImportType.GroupLibraries);
                             result = true;
                         }
                         else if (string.Compare(ext, ".template", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project.Templates, ImportType.Template);
+                            ImportEx(path, _editor.Project, ImportType.Template);
                             result = true;
                         }
                         else if (string.Compare(ext, ".templates", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project.Templates, ImportType.Templates);
+                            ImportEx(path, _editor.Project, ImportType.Templates);
                             result = true;
                         }
                     }
