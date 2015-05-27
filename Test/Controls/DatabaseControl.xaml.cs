@@ -70,7 +70,7 @@ namespace Test.Controls
             if (database != null)
             {
                 SetColumns(database.Columns);
-                SetRecord(database.Records);
+                //SetRecords(database.Records);
             }
         }
 
@@ -83,15 +83,17 @@ namespace Test.Controls
             listView.View = CreateColumnsView(columns);
         }
 
+        /*
         /// <summary>
         /// 
         /// </summary>
         /// <param name="records"></param>
-        public void SetRecord(ImmutableArray<Record> records)
+        public void SetRecords(ImmutableArray<Record> records)
         {
             listView.ItemsSource = null;
             listView.ItemsSource = records;
         }
+        */
 
         /// <summary>
         /// 
