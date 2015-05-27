@@ -58,5 +58,25 @@ namespace Test2d
                 Values = values
             };
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="columns"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public static Record Create(
+            string id,
+            ImmutableArray<Column> columns,
+            ImmutableArray<Value> values)
+        {
+            return new Record()
+            {
+                Id = Guid.Parse(id),
+                Columns = columns,
+                Values = values
+            };
+        }
     }
 }
