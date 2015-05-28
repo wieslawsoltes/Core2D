@@ -2878,6 +2878,7 @@ namespace TestEDITOR
 #else
             _rootScriptsPath = "Scripts";
 #endif
+                ScriptDirectories = ImmutableArray.Create<ScriptDirectory>();
 
                 Action update = () =>
                 {
