@@ -528,14 +528,14 @@ namespace TestWinForms
         /// <param name="g"></param>
         private void Draw(Graphics g)
         {
-            g.SmoothingMode = SmoothingMode.HighQuality;
-            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            g.SmoothingMode = SmoothingMode.HighSpeed;
+            g.PixelOffsetMode = PixelOffsetMode.Half;
             g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
             g.CompositingQuality = CompositingQuality.HighQuality;
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-            //g.TranslateTransform((float)0f, (float)0f);
-            //g.ScaleTransform((float)Context.Editor.Renderer.Zoom, (float)Context.Editor.Renderer.Zoom);
+            g.TranslateTransform((float)0f, (float)0f);
+            g.ScaleTransform((float)1f, (float)1f);
             g.Clear(Color.FromArgb(255, 211, 211, 211));
 
             g.PageUnit = GraphicsUnit.Display;
