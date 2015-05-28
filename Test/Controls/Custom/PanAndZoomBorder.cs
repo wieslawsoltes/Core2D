@@ -70,8 +70,8 @@ namespace Test.PanAndZoom
                 if (value != null && value != this.Child)
                 {
                     UIElement child = value;
-                    Point origin = new Point();
-                    Point start = new Point();
+                    var origin = new Point();
+                    var start = new Point();
 
                     var group = new TransformGroup();
                     var st = new ScaleTransform();
