@@ -119,7 +119,7 @@ namespace TestDirect2D
         /// <param name="rect"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        private static PointF GetTextOrigin(ShapeStyle style, ref RectangleF rect, ref SizeF size)
+        private PointF GetTextOrigin(ShapeStyle style, ref RectangleF rect, ref SizeF size)
         {
             float ox, oy;
 
@@ -159,7 +159,7 @@ namespace TestDirect2D
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        private static Color ToColor(ArgbColor color)
+        private Color ToColor(ArgbColor color)
         {
             return Color.FromArgb(
                 color.R,
@@ -174,9 +174,9 @@ namespace TestDirect2D
         /// <param name="style"></param>
         /// <param name="scale"></param>
         /// <returns></returns>
-        private static Pen ToPen(ShapeStyle style, Func<double, float> scale)
+        private Pen ToPen(ShapeStyle style, Func<double, float> scale)
         {
-            var pen = new Pen(ToColor(style.Stroke), (float)style.Thickness);
+            var pen = new Pen(ToColor(style.Stroke), (float)(style.Thickness / _zoom));
             switch (style.LineStyle.LineCap)
             {
                 case Test2d.LineCap.Flat:
@@ -203,7 +203,7 @@ namespace TestDirect2D
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        private static SolidBrush ToSolidBrush(ArgbColor color)
+        private SolidBrush ToSolidBrush(ArgbColor color)
         {
             return new SolidBrush(ToColor(color));
         }
