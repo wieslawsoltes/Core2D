@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
 using Eto;
 using Eto.Drawing;
 using Eto.Forms;
@@ -20,6 +21,15 @@ namespace TestDirect2D
     /// </summary>
     public class MainForm : Form, IView
     {
+        private const float _minimum = 0.01f;
+        private const float _maximum = 1000.0f;
+        private const float _zoomSpeed = 3.5f;
+
+        private float _zoom = 1f;
+        private float _panX = 0f;
+        private float _panY = 0f;
+        private bool _isPanMode = false;
+        
         /// <summary>
         /// 
         /// </summary>
@@ -59,19 +69,24 @@ namespace TestDirect2D
         {
             Title = "Test";
             ClientSize = new Size(1000, 650);
+            WindowState = WindowState.Maximized;
 
-            var listBox = new ListBox();
-            listBox.BindDataContext(
-                c => c.DataStore,
-                (EditorContext c) => c.Editor.Project.CurrentDocument.Containers);
+            Content = new TableLayout(
+                null,
+                new TableRow(null, drawable, null),
+                null);
 
-            Content = new Scrollable
+            drawable.CanFocus = true;
+     
+            this.MouseEnter += (sender, e) => 
             {
-                Border = BorderType.None,
-                Content = new TableLayout(
-                    null,
-                    new TableRow(null, drawable, null, listBox, null),
-                    null)
+                drawable.Focus();
+            };
+            
+            this.MouseLeave += (sender, e) => 
+            {
+                if (drawable.HasFocus) 
+                    this.Focus();
             };
         }
 
@@ -87,16 +102,49 @@ namespace TestDirect2D
 
             drawable.Paint += (s, e) => Draw(e.Graphics);
 
+            var origin = new PointF();
+            var start = new PointF();
+
+            drawable.MouseWheel +=
+                (sender, e) =>
+                {
+                    float zoom = _zoom;
+                    zoom = e.Delta.Height > 0 ? zoom + zoom / _zoomSpeed : zoom - zoom / _zoomSpeed;
+                    if (zoom < _minimum || zoom > _maximum)
+                        return;
+
+                    PointF relative = e.Location;
+                    
+                    float abosuluteX = relative.X * _zoom + _panX;
+                    float abosuluteY = relative.Y * _zoom + _panY;
+                    _zoom = zoom;
+                    _panX = abosuluteX - relative.X * _zoom;
+                    _panY = abosuluteY - relative.Y * _zoom;
+
+                    context.Editor.Renderer.Zoom = _zoom;
+                    context.Editor.Renderer.PanX = _panX;
+                    context.Editor.Renderer.PanY = _panY;
+                    Invalidate(drawable);
+                };
+            
             drawable.MouseDown +=
                 (sender, e) =>
                 {
+                    if (e.Buttons == MouseButtons.Middle)
+                    {
+                        start = e.Location;
+                        origin = new PointF(_panX, _panY);
+                        this.Cursor = Cursors.Pointer;
+                        _isPanMode = true;
+                    }
+                
                     if (e.Buttons == MouseButtons.Primary)
                     {
                         drawable.Focus();
                         if (context.Editor.IsLeftDownAvailable())
                         {
                             var p = e.Location;
-                            context.Editor.LeftDown(p.X, p.Y);
+                            context.Editor.LeftDown((p.X - _panX) / _zoom, (p.Y - _panY) / _zoom);
                         }
                     }
 
@@ -106,7 +154,7 @@ namespace TestDirect2D
                         if (context.Editor.IsRightDownAvailable())
                         {
                             var p = e.Location;
-                            context.Editor.RightDown(p.X, p.Y);
+                            context.Editor.RightDown((p.X - _panX) / _zoom, (p.Y - _panY) / _zoom);
                         }
                     }
                 };
@@ -114,13 +162,19 @@ namespace TestDirect2D
             drawable.MouseUp +=
                 (sender, e) =>
                 {
+                    if (e.Buttons == MouseButtons.Middle)
+                    {
+                        _isPanMode = false;
+                        this.Cursor = Cursors.Default;
+                    }
+                
                     if (e.Buttons == MouseButtons.Primary)
                     {
                         drawable.Focus();
                         if (context.Editor.IsLeftUpAvailable())
                         {
                             var p = e.Location;
-                            context.Editor.LeftUp(p.X, p.Y);
+                            context.Editor.LeftUp((p.X - _panX) / _zoom, (p.Y - _panY) / _zoom);
                         }
                     }
 
@@ -130,19 +184,33 @@ namespace TestDirect2D
                         if (context.Editor.IsRightUpAvailable())
                         {
                             var p = e.Location;
-                            context.Editor.RightUp(p.X, p.Y);
+                            context.Editor.RightUp((p.X - _panX) / _zoom, (p.Y - _panY) / _zoom);
                         }
                     }
                 };
 
             drawable.MouseMove +=
                 (sender, e) =>
-                {
-                    drawable.Focus();
-                    if (context.Editor.IsMoveAvailable())
+                { 
+                    //drawable.Focus();
+                    if (_isPanMode)
                     {
                         var p = e.Location;
-                        context.Editor.Move(p.X, p.Y);
+                        float vx = start.X - p.X;
+                        float vy = start.Y - p.Y;
+                        _panX = origin.X - vx;
+                        _panY = origin.Y - vy;
+                        context.Editor.Renderer.PanX = _panX;
+                        context.Editor.Renderer.PanY = _panY;
+                        Invalidate(drawable);
+                    }
+                    else
+                    {
+                        if (context.Editor.IsMoveAvailable())
+                        {
+                            var p = e.Location;
+                            context.Editor.Move((p.X - _panX) / _zoom, (p.Y - _panY) / _zoom);
+                        }
                     }
                 };
 
@@ -197,10 +265,16 @@ namespace TestDirect2D
                             context.Commands.TryToConnectCommand.Execute(null);
                             break;
                         case Keys.Z:
-                            context.Commands.ZoomResetCommand.Execute(null);
+                            _zoom = 1f;
+                            _panX = 0f;
+                            _panY = 0f;
+                            context.Editor.Renderer.Zoom = _zoom;
+                            context.Editor.Renderer.PanX = _panX;
+                            context.Editor.Renderer.PanY = _panY;
+                            Invalidate(drawable);
                             break;
                         case Keys.X:
-                            context.Commands.ZoomExtentCommand.Execute(null);
+                            // TODO: Autofit drawable.
                             break;
                     }
                 };
@@ -568,37 +642,17 @@ namespace TestDirect2D
         /// 
         /// </summary>
         /// <param name="g"></param>
-        /// <param name="c"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        private void Background(Graphics g, ArgbColor c, double width, double height)
-        {
-            var brush = new SolidBrush(Color.FromArgb(c.R, c.G, c.B, c.A));
-            var rect = Rect2.Create(0, 0, width, height);
-            g.FillRectangle(
-                brush,
-                (float)rect.X,
-                (float)rect.Y,
-                (float)rect.Width,
-                (float)rect.Height);
-            brush.Dispose();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="g"></param>
         private void Draw(Graphics g)
         {
             var context = this.DataContext as EditorContext;
 
-            var sw = System.Diagnostics.Stopwatch.StartNew();
+            //var sw = System.Diagnostics.Stopwatch.StartNew();
 
             g.AntiAlias = false;
             g.PixelOffsetMode = PixelOffsetMode.Half;
 
-            //g.TranslateTransform((float)0f, (float)0f);
-            //g.ScaleTransform((float)context.Editor.Renderer.Zoom, (float)context.Editor.Renderer.Zoom);
+            g.TranslateTransform(_panX, _panY);
+            g.ScaleTransform(_zoom);
             var background = new SolidBrush(Color.FromArgb(211, 211, 211, 255));
             g.Clear(background);
             background.Dispose();
@@ -625,8 +679,28 @@ namespace TestDirect2D
                 renderer.Draw(g, container.HelperLayer, container.Properties, null);
             }
 
-            sw.Stop();
-            System.Diagnostics.Debug.Print(sw.ElapsedMilliseconds + "ms");
+            //sw.Stop();
+            //System.Diagnostics.Debug.Print(sw.ElapsedMilliseconds + "ms");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="c"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        private void Background(Graphics g, ArgbColor c, double width, double height)
+        {
+            var brush = new SolidBrush(Color.FromArgb(c.R, c.G, c.B, c.A));
+            var rect = Rect2.Create(0, 0, width, height);
+            g.FillRectangle(
+                brush,
+                (float)rect.X,
+                (float)rect.Y,
+                (float)rect.Width,
+                (float)rect.Height);
+            brush.Dispose();
         }
 
         /// <summary>
