@@ -3163,6 +3163,7 @@ namespace TestEDITOR
             (_commands.ToolBezierCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolQBezierCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolTextCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolImageCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.EvalCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.EvalScriptCommand as DelegateCommand<string>).RaiseCanExecuteChanged();
