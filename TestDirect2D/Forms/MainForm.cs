@@ -24,12 +24,17 @@ namespace TestDirect2D
         private const float _minimum = 0.01f;
         private const float _maximum = 1000.0f;
         private const float _zoomSpeed = 3.5f;
-
         private float _zoom = 1f;
         private float _panX = 0f;
         private float _panY = 0f;
         private bool _isPanMode = false;
-        
+        private float _panOffsetX = 0f;
+        private float _panOffsetY = 0f;
+        private bool _havePanUp = false;
+        private PointF _origin = new PointF();
+        private PointF _start = new PointF();
+        private PointF _panUp = new PointF();
+
         /// <summary>
         /// 
         /// </summary>
@@ -102,39 +107,16 @@ namespace TestDirect2D
 
             drawable.Paint += (s, e) => Draw(e.Graphics);
 
-            var origin = new PointF();
-            var start = new PointF();
-
-            drawable.MouseWheel +=
-                (sender, e) =>
-                {
-                    float zoom = _zoom;
-                    zoom = e.Delta.Height > 0 ? zoom + zoom / _zoomSpeed : zoom - zoom / _zoomSpeed;
-                    if (zoom < _minimum || zoom > _maximum)
-                        return;
-
-                    PointF relative = e.Location;
-                    
-                    float abosuluteX = relative.X * _zoom + _panX;
-                    float abosuluteY = relative.Y * _zoom + _panY;
-                    _zoom = zoom;
-                    _panX = abosuluteX - relative.X * _zoom;
-                    _panY = abosuluteY - relative.Y * _zoom;
-
-                    context.Editor.Renderer.Zoom = _zoom;
-                    context.Editor.Renderer.PanX = _panX;
-                    context.Editor.Renderer.PanY = _panY;
-                    Invalidate(drawable);
-                };
-            
             drawable.MouseDown +=
                 (sender, e) =>
                 {
                     if (e.Buttons == MouseButtons.Middle)
                     {
-                        start = e.Location;
-                        origin = new PointF(_panX, _panY);
+                        _start = e.Location;
+                        _origin = new PointF(_panX, _panY);
+
                         this.Cursor = Cursors.Pointer;
+
                         _isPanMode = true;
                     }
                 
@@ -164,6 +146,11 @@ namespace TestDirect2D
                 {
                     if (e.Buttons == MouseButtons.Middle)
                     {
+                        _panUp = e.Location;
+                        _havePanUp = true;
+                        _panOffsetX += _panX - _origin.X;
+                        _panOffsetY += _panY - _origin.Y;
+                        System.Diagnostics.Debug.Print("Offset: {0}, {1}", _panOffsetX, _panOffsetY);
                         _isPanMode = false;
                         this.Cursor = Cursors.Default;
                     }
@@ -192,16 +179,19 @@ namespace TestDirect2D
             drawable.MouseMove +=
                 (sender, e) =>
                 { 
-                    //drawable.Focus();
                     if (_isPanMode)
                     {
                         var p = e.Location;
-                        float vx = start.X - p.X;
-                        float vy = start.Y - p.Y;
-                        _panX = origin.X - vx;
-                        _panY = origin.Y - vy;
+
+                        float vx = _start.X - p.X;
+                        float vy = _start.Y - p.Y;
+
+                        _panX = _origin.X - vx;
+                        _panY = _origin.Y - vy;
+
                         context.Editor.Renderer.PanX = _panX;
                         context.Editor.Renderer.PanY = _panY;
+
                         Invalidate(drawable);
                     }
                     else
@@ -212,6 +202,28 @@ namespace TestDirect2D
                             context.Editor.Move((p.X - _panX) / _zoom, (p.Y - _panY) / _zoom);
                         }
                     }
+                };
+
+            drawable.MouseWheel +=
+                (sender, e) =>
+                {
+                    float zoom = _zoom;
+                    zoom = e.Delta.Height > 0 ? zoom + zoom / _zoomSpeed : zoom - zoom / _zoomSpeed;
+                    if (zoom < _minimum || zoom > _maximum)
+                        return;
+
+                    PointF relative = e.Location;
+
+                    float dx = _havePanUp ? relative.X - _panUp.X : 0f;
+                    float dy = _havePanUp ? relative.Y - _panUp.Y : 0f;
+
+                    ZoomTo(
+                        context, 
+                        zoom, 
+                        relative.X - _panOffsetX + dx, 
+                        relative.Y - _panOffsetY + dy);
+
+                    Invalidate(drawable);
                 };
 
             drawable.KeyDown +=
@@ -265,12 +277,7 @@ namespace TestDirect2D
                             context.Commands.TryToConnectCommand.Execute(null);
                             break;
                         case Keys.Z:
-                            _zoom = 1f;
-                            _panX = 0f;
-                            _panY = 0f;
-                            context.Editor.Renderer.Zoom = _zoom;
-                            context.Editor.Renderer.PanX = _panX;
-                            context.Editor.Renderer.PanY = _panY;
+                            ResetZoom(context);
                             Invalidate(drawable);
                             break;
                         case Keys.X:
@@ -278,6 +285,45 @@ namespace TestDirect2D
                             break;
                     }
                 };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        private void ResetZoom(EditorContext context)
+        {
+            _zoom = 1f;
+            _panX = 0f;
+            _panY = 0f;
+            _panOffsetX = 0f;
+            _panOffsetY = 0f;
+            _havePanUp = false;
+            context.Editor.Renderer.Zoom = _zoom;
+            context.Editor.Renderer.PanX = _panX;
+            context.Editor.Renderer.PanY = _panY;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="zoom"></param>
+        /// <param name="rx"></param>
+        /// <param name="ry"></param>
+        private void ZoomTo(EditorContext context, float zoom, float rx, float ry)
+        {
+            float ax = (rx * _zoom) + _panX;
+            float ay = (ry * _zoom) + _panY;
+
+            _zoom = zoom;
+
+            _panX = ax - (rx * _zoom);
+            _panY = ay - (ry * _zoom);
+
+            context.Editor.Renderer.Zoom = _zoom;
+            context.Editor.Renderer.PanX = _panX;
+            context.Editor.Renderer.PanY = _panY;
         }
 
         /// <summary>
