@@ -30,10 +30,15 @@ namespace TestDirect2D
         private bool _isPanMode = false;
         private float _panOffsetX = 0f;
         private float _panOffsetY = 0f;
-        private bool _havePanUp = false;
-        private PointF _origin = new PointF();
-        private PointF _start = new PointF();
-        private PointF _panUp = new PointF();
+        private float _originX = 0f;
+        private float _originY = 0f;
+        private float _startX = 0f;
+        private float _startY = 0f;
+        private float _wheelOriginX = 0f;
+        private float _wheelOriginY = 0f;
+        private bool _haveWheelOrigin = false;
+        private float _wheelOffsetX = 0f;
+        private float _wheelOffsetY = 0f;
 
         /// <summary>
         /// 
@@ -112,8 +117,13 @@ namespace TestDirect2D
                 {
                     if (e.Buttons == MouseButtons.Middle)
                     {
-                        _start = e.Location;
-                        _origin = new PointF(_panX, _panY);
+                        var p = e.Location;
+
+                        _startX = p.X;
+                        _startY = p.Y;
+
+                        _originX = _panX;
+                        _originY = _panY;
 
                         this.Cursor = Cursors.Pointer;
 
@@ -146,11 +156,9 @@ namespace TestDirect2D
                 {
                     if (e.Buttons == MouseButtons.Middle)
                     {
-                        _panUp = e.Location;
-                        _havePanUp = true;
-                        _panOffsetX += _panX - _origin.X;
-                        _panOffsetY += _panY - _origin.Y;
-                        System.Diagnostics.Debug.Print("Offset: {0}, {1}", _panOffsetX, _panOffsetY);
+                        _panOffsetX += _panX - _originX;
+                        _panOffsetY += _panY - _originY;
+                        System.Diagnostics.Debug.Print("Pan Offset: {0}, {1}", _panOffsetX, _panOffsetY);
                         _isPanMode = false;
                         this.Cursor = Cursors.Default;
                     }
@@ -183,11 +191,11 @@ namespace TestDirect2D
                     {
                         var p = e.Location;
 
-                        float vx = _start.X - p.X;
-                        float vy = _start.Y - p.Y;
+                        float vx = _startX - p.X;
+                        float vy = _startY - p.Y;
 
-                        _panX = _origin.X - vx;
-                        _panY = _origin.Y - vy;
+                        _panX = _originX - vx;
+                        _panY = _originY - vy;
 
                         context.Editor.Renderer.PanX = _panX;
                         context.Editor.Renderer.PanY = _panY;
@@ -212,16 +220,24 @@ namespace TestDirect2D
                     if (zoom < _minimum || zoom > _maximum)
                         return;
 
-                    PointF relative = e.Location;
+                    var p = e.Location;
 
-                    float dx = _havePanUp ? relative.X - _panUp.X : 0f;
-                    float dy = _havePanUp ? relative.Y - _panUp.Y : 0f;
+                    if (!_haveWheelOrigin)
+                    {
+                        _wheelOriginX = p.X;
+                        _wheelOriginY = p.Y;
+                        _haveWheelOrigin = true;
+                    }
+
+                    _wheelOffsetX = p.X - _wheelOriginX;
+                    _wheelOffsetY = p.Y - _wheelOriginY;
+                    System.Diagnostics.Debug.Print("Wheel Offset: {0}, {1}", _wheelOffsetX, _wheelOffsetY);
 
                     ZoomTo(
                         context, 
-                        zoom, 
-                        relative.X - _panOffsetX + dx, 
-                        relative.Y - _panOffsetY + dy);
+                        zoom,
+                        p.X - _wheelOffsetX - _panOffsetX,
+                        p.Y - _wheelOffsetY - _panOffsetY);
 
                     Invalidate(drawable);
                 };
@@ -298,7 +314,11 @@ namespace TestDirect2D
             _panY = 0f;
             _panOffsetX = 0f;
             _panOffsetY = 0f;
-            _havePanUp = false;
+            _wheelOriginX = 0f;
+            _wheelOriginY = 0f;
+            _wheelOffsetX = 0f;
+            _wheelOffsetY = 0f;
+            _haveWheelOrigin = false;
             context.Editor.Renderer.Zoom = _zoom;
             context.Editor.Renderer.PanX = _panX;
             context.Editor.Renderer.PanY = _panY;
