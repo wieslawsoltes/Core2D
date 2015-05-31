@@ -141,6 +141,23 @@
     <Compile Include="Core\Shapes\XQBezier.cs" />
     <Compile Include="Core\Shapes\XRectangle.cs" />
     <Compile Include="Core\Shapes\XText.cs" />
+    <Compile Include="Path\Core\XFillRule.cs" />
+    <Compile Include="Path\Core\XPathPoint.cs" />
+    <Compile Include="Path\Core\XPathRect.cs" />
+    <Compile Include="Path\Core\XPathSegment.cs" />
+    <Compile Include="Path\Core\XPathSize.cs" />
+    <Compile Include="Path\Core\XSweepDirection.cs" />
+    <Compile Include="Path\Core\XTransform.cs" />
+    <Compile Include="Path\Segments\XArcSegment.cs" />
+    <Compile Include="Path\Segments\XBezierSegment.cs" />
+    <Compile Include="Path\Segments\XLineSegment.cs" />
+    <Compile Include="Path\Segments\XPolyBezierSegment.cs" />
+    <Compile Include="Path\Segments\XPolyLineSegment.cs" />
+    <Compile Include="Path\Segments\XPolyQuadraticBezierSegment.cs" />
+    <Compile Include="Path\Segments\XQuadraticBezierSegment.cs" />
+    <Compile Include="Path\XPath.cs" />
+    <Compile Include="Path\XPathFigure.cs" />
+    <Compile Include="Path\XPathGeometry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
