@@ -884,5 +884,19 @@ namespace TestDirect2D
 
             brush.Dispose();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="path"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <param name="db"></param>
+        /// <param name="r"></param>
+        public void Draw(object gfx, XPath path, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

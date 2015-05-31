@@ -952,5 +952,19 @@ namespace TestEDITOR
                     bi.Dispose();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
+        /// <param name="path"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <param name="db"></param>
+        /// <param name="r"></param>
+        public void Draw(object gfx, Test2d.XPath path, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
