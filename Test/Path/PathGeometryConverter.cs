@@ -40,7 +40,7 @@ namespace Test
         {
             var xpg = XPathGeometry.Create(
                 new List<XPathFigure>(),
-                pg.FillRule == FillRule.EvenOdd ? XFillRule.Nonzero : XFillRule.EvenOdd,
+                pg.FillRule == FillRule.EvenOdd ? XFillRule.EvenOdd : XFillRule.Nonzero,
                 XPathRect.Create(pg.Bounds.X, pg.Bounds.Y, pg.Bounds.Width, pg.Bounds.Height));
 
             foreach (var pf in pg.Figures)
