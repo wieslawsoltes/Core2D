@@ -121,6 +121,10 @@
     <Compile Include="Controls\GroupsControl.xaml.cs">
       <DependentUpon>GroupsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PathControl.xaml.cs">
+      <DependentUpon>PathControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controls\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
@@ -157,6 +161,10 @@
     <Compile Include="Windows\LayersWindow.xaml.cs">
       <DependentUpon>LayersWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\PathWindow.xaml.cs">
+      <DependentUpon>PathWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Windows\PropertiesWindow.xaml.cs">
       <DependentUpon>PropertiesWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -186,6 +194,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\PathControl.xaml" />
     <Page Include="Controls\ProjectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -255,6 +264,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\PathWindow.xaml" />
     <Page Include="Windows\PropertiesWindow.xaml" />
     <Page Include="Windows\ShapesWindow.xaml">
       <SubType>Designer</SubType>
