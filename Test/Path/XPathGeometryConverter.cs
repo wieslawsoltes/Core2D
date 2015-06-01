@@ -149,5 +149,15 @@ namespace Test
             var sg = ToStreamGeometry(xpg);
             return sg.ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sg"></param>
+        /// <returns></returns>
+        public static string ToSource(this StreamGeometry sg)
+        {
+            return sg.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        }
     }
 }
