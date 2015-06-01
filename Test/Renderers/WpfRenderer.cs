@@ -27,12 +27,14 @@ namespace Test
         private bool _enableQBezierCache = true;
         private bool _enableTextCache = true;
         private bool _enableImageCache = true;
+        private bool _enablePathCache = true;
         private IDictionary<ShapeStyle, Tuple<Brush, Pen>> _styleCache;
         private IDictionary<XArc, PathGeometry> _arcCache;
         private IDictionary<XBezier, PathGeometry> _bezierCache;
         private IDictionary<XQBezier, PathGeometry> _qbezierCache;
         private IDictionary<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache;
         private IDictionary<Uri, BitmapImage> _biCache;
+        private IDictionary<XPath, Tuple<string, XPathGeometry, StreamGeometry, TransformGroupHelper, ShapeStyle>> _pathCache;
         private double _zoom;
         private double _panX;
         private double _panY;
@@ -402,6 +404,8 @@ namespace Test
                 _biCache.Clear();
             }
             _biCache = new Dictionary<Uri, BitmapImage>();
+            
+            _pathCache = new Dictionary<XPath, Tuple<string, XPathGeometry, StreamGeometry, TransformGroupHelper, ShapeStyle>>();
         }
 
         /// <summary>
@@ -1047,13 +1051,14 @@ namespace Test
 
                 if (_enableTextCache)
                 {
+                    var tuple = Tuple.Create(tbind, ft, text.Style);
                     if (_textCache.ContainsKey(text))
                     {
-                        _textCache[text] = Tuple.Create(tbind, ft, text.Style);
+                        _textCache[text] = tuple;
                     }
                     else
                     {
-                        _textCache.Add(text, Tuple.Create(tbind, ft, text.Style));
+                        _textCache.Add(text, tuple);
                     }
                 }
 
@@ -1162,7 +1167,88 @@ namespace Test
         /// <param name="r"></param>
         public void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            throw new NotImplementedException();
+            if (path.Source == null && path.Geometry == null)
+                return;
+
+            var _dc = dc as DrawingContext;
+
+            double thickness = path.Style.Thickness / _zoom;
+            double half = thickness / 2.0;
+
+            Tuple<Brush, Pen> cache = null;
+            Brush fill;
+            Pen stroke;
+            if (_enableStyleCache 
+                && _styleCache.TryGetValue(path.Style, out cache))
+            {
+                fill = cache.Item1;
+                stroke = cache.Item2;
+            }
+            else
+            {
+                fill = CreateBrush(path.Style.Fill);
+                stroke = CreatePen(
+                    path.Style.LineStyle,
+                    path.Style.Stroke,
+                    thickness);
+
+                if (_enableStyleCache)
+                    _styleCache.Add(path.Style, Tuple.Create(fill, stroke));
+            }
+    
+            Tuple<string, XPathGeometry, StreamGeometry, TransformGroupHelper, ShapeStyle> pcache = null;
+            StreamGeometry sg;
+            TransformGroupHelper tgh;
+    
+            if (_enableTextCache
+                && _pathCache.TryGetValue(path, out pcache)
+                && string.Compare(pcache.Item1, path.Source) == 0
+                && pcache.Item2 == path.Geometry
+                && pcache.Item5 == path.Style)
+            {
+                sg = pcache.Item3;
+                tgh = pcache.Item4;
+
+                tgh.Update(path.Transform);
+                
+                _dc.PushTransform(tgh.Group);
+                _dc.DrawGeometry(path.IsFilled ? fill : null, path.IsStroked ? stroke : null, sg);
+                _dc.Pop();
+            }
+            else
+            {
+                if (path.Geometry == null && !string.IsNullOrEmpty(path.Source))
+                {
+                    var xpg = path.Source.ToXPathGeometry();
+                    path.Geometry = xpg;
+                }
+
+                if (path.Geometry != null && string.IsNullOrEmpty(path.Source))
+                {
+                    path.Source = path.Geometry.ToSource();
+                }
+
+                sg = path.Geometry.ToStreamGeometry();
+                tgh = new TransformGroupHelper(path.Transform);
+
+                if (_enablePathCache)
+                {
+                    var tuple = Tuple.Create(path.Source, path.Geometry, sg, tgh, path.Style);
+                    if (_pathCache.ContainsKey(path))
+                    {
+                        
+                        _pathCache[path] = tuple;
+                    }
+                    else
+                    {
+                        _pathCache.Add(path, tuple);
+                    }
+                }
+          
+                _dc.PushTransform(tgh.Group);
+                _dc.DrawGeometry(path.IsFilled ? fill : null, path.IsStroked ? stroke : null, sg);
+                _dc.Pop();
+            }  
         }
     }
 }
