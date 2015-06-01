@@ -519,6 +519,32 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="shape"></param>
+        public void AddWithHistory(BaseShape shape)
+        {
+            var layer = _project.CurrentContainer.CurrentLayer;
+            var previous = layer.Shapes;
+            var next = layer.Shapes.Add(shape);
+            _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
+        public void AddWithHistory(IEnumerable<BaseShape> shapes)
+        {
+            var layer = _project.CurrentContainer.CurrentLayer;
+            var previous = layer.Shapes;
+            var next = layer.Shapes.AddRange(shapes);
+            _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void RemoveCurrentTemplate()
         {
             var template = _project.CurrentTemplate;
