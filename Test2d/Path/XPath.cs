@@ -17,7 +17,9 @@ namespace Test2d
         private bool _isFilled;
 
         /// <summary>
-        /// 
+        /// Gets or sets path source markup used to draw shape.
+        /// Source markup syntax: 
+        /// https://msdn.microsoft.com/en-us/library/ms752293(v=vs.110).aspx
         /// </summary>
         public string Source
         {
@@ -95,6 +97,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="style"></param>
         /// <param name="source"></param>
         /// <param name="geometry"></param>
         /// <param name="transform"></param>
@@ -103,6 +106,7 @@ namespace Test2d
         /// <returns></returns>
         public static XPath Create(
             string name,
+            ShapeStyle style,
             string source,
             XPathGeometry geometry,
             XTransform transform,
@@ -112,6 +116,7 @@ namespace Test2d
             return new XPath()
             {
                 Name = name,
+                Style = style,
                 Source = source,
                 Geometry = geometry,
                 Transform = transform,
