@@ -9,6 +9,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace TestEDITOR
 {
@@ -682,7 +683,7 @@ namespace TestEDITOR
             if (arc.IsFilled)
             {
                 var path = new XGraphicsPath();
-                // NOTE: Not implemented in PdfSharp universal version.
+                // NOTE: Not implemented in PdfSharp Core version.
                 path.AddArc(
                     _scaleToPage(a.X),
                     _scaleToPage(a.Y),
@@ -952,7 +953,7 @@ namespace TestEDITOR
                     bi.Dispose();
             }
         }
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -978,9 +979,20 @@ namespace TestEDITOR
                     if (segment is Test2d.XArcSegment)
                     {
                         var arcSegment = segment as Test2d.XArcSegment;
-
-                        // TODO: Add arc to current figure using gp.AddArc(...).
-
+                        var point1 = new XPoint(
+                            _scaleToPage(startPoint.X), 
+                            _scaleToPage(startPoint.Y));
+                        var point2 = new XPoint(
+                            _scaleToPage(arcSegment.Point.X), 
+                            _scaleToPage(arcSegment.Point.Y));
+                        var size = new XSize(
+                            _scaleToPage(arcSegment.Size.Width), 
+                            _scaleToPage(arcSegment.Size.Height));
+                        gp.AddArc(
+                            point1,
+                            point2, 
+                            size, arcSegment.RotationAngle, arcSegment.IsLargeArc, 
+                            arcSegment.SweepDirection == Test2d.XSweepDirection.Clockwise ? SweepDirection.Clockwise : SweepDirection.Counterclockwise);
                         startPoint = arcSegment.Point;
                     }
                     else if (segment is Test2d.XBezierSegment)
@@ -1166,10 +1178,10 @@ namespace TestEDITOR
                 }
             }
 
-            _gfx.Save();
-
             var t = path.Transform;
             var c = new XPoint(t.CenterX, t.CenterY);
+            
+            _gfx.Save();
             _gfx.TranslateTransform(t.OffsetX, t.OffsetY);
             _gfx.RotateAtTransform(t.RotateAngle, c);
             _gfx.SkewAtTransform(t.SkewAngleX, t.SkewAngleY, c);
