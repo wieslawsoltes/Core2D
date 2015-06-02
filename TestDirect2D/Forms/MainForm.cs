@@ -271,6 +271,9 @@ namespace TestDirect2D
                         case Keys.I:
                             _context.Commands.ToolImageCommand.Execute(null);
                             break;
+                        case Keys.H:
+                            _context.Commands.ToolPathCommand.Execute(null);
+                            break;
                         case Keys.F:
                             _context.Commands.DefaultIsFilledCommand.Execute(null);
                             break;
@@ -592,6 +595,17 @@ namespace TestDirect2D
                     _context.Commands.ToolImageCommand.Execute(null);
                 };
 
+            var pathTool = new Command()
+            {
+                MenuText = "Pat&h",
+                Shortcut = Keys.H
+            };
+            pathTool.Executed +=
+                (s, e) =>
+                {
+                    _context.Commands.ToolPathCommand.Execute(null);
+                };
+
             var undoCommand = new Command() 
             { 
                 MenuText = "&Undo", 
@@ -794,7 +808,9 @@ namespace TestDirect2D
                     new SeparatorMenuItem(),
                     textTool,
                     new SeparatorMenuItem(),
-                    imageTool
+                    imageTool,
+                    new SeparatorMenuItem(),
+                    pathTool
                 }
             };
 
