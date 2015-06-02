@@ -84,8 +84,15 @@ namespace Test2d
         /// <param name="dy"></param>
         public override void Move(double dx, double dy)
         {
-            Start.Move(dx, dy);
-            End.Move(dx, dy);
+            if (!Start.State.HasFlag(ShapeState.Connector))
+            {
+                Start.Move(dx, dy);
+            }
+
+            if (!End.State.HasFlag(ShapeState.Connector))
+            {
+                End.Move(dx, dy);
+            }
         }
 
         /// <summary>

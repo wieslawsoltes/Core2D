@@ -112,7 +112,10 @@ namespace Test2d
         {
             foreach (var shape in Shapes)
             {
-                shape.Move(dx, dy);
+                if (!shape.State.HasFlag(ShapeState.Connector))
+                {
+                    shape.Move(dx, dy);
+                }
             }
             
             foreach (var connector in Connectors)
