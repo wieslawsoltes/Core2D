@@ -242,8 +242,9 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="shapes"></param>
+        /// <param name="exclude"></param>
         /// <returns></returns>
-        public static IEnumerable<XPoint> GetAllPoints(IEnumerable<BaseShape> shapes)
+        public static IEnumerable<XPoint> GetAllPoints(IEnumerable<BaseShape> shapes, ShapeState exclude)
         {
             if (shapes == null)
             {
@@ -256,7 +257,7 @@ namespace Test2d
                 {
                     var point = shape as XPoint;
 
-                    if (!point.State.HasFlag(ShapeState.Connector))
+                    if (!point.State.HasFlag(exclude))
                     {
                         yield return shape as XPoint;
                     }
@@ -265,12 +266,12 @@ namespace Test2d
                 {
                     var line = shape as XLine;
 
-                    if (!line.Start.State.HasFlag(ShapeState.Connector))
+                    if (!line.Start.State.HasFlag(exclude))
                     {
                         yield return line.Start;
                     }
 
-                    if (!line.End.State.HasFlag(ShapeState.Connector))
+                    if (!line.End.State.HasFlag(exclude))
                     {
                         yield return line.End;
                     }
@@ -279,12 +280,12 @@ namespace Test2d
                 {
                     var rectangle = shape as XRectangle;
 
-                    if (!rectangle.TopLeft.State.HasFlag(ShapeState.Connector))
+                    if (!rectangle.TopLeft.State.HasFlag(exclude))
                     {
                         yield return rectangle.TopLeft; 
                     }
 
-                    if (!rectangle.BottomRight.State.HasFlag(ShapeState.Connector))
+                    if (!rectangle.BottomRight.State.HasFlag(exclude))
                     {
                         yield return rectangle.BottomRight; 
                     }
@@ -293,12 +294,12 @@ namespace Test2d
                 {
                     var ellipse = shape as XEllipse;
 
-                    if (!ellipse.TopLeft.State.HasFlag(ShapeState.Connector))
+                    if (!ellipse.TopLeft.State.HasFlag(exclude))
                     {
                         yield return ellipse.TopLeft; 
                     }
 
-                    if (!ellipse.BottomRight.State.HasFlag(ShapeState.Connector))
+                    if (!ellipse.BottomRight.State.HasFlag(exclude))
                     {
                         yield return ellipse.BottomRight; 
                     }
@@ -307,22 +308,22 @@ namespace Test2d
                 {
                     var arc = shape as XArc;
 
-                    if (!arc.Point1.State.HasFlag(ShapeState.Connector))
+                    if (!arc.Point1.State.HasFlag(exclude))
                     {
                         yield return arc.Point1; 
                     }
 
-                    if (!arc.Point2.State.HasFlag(ShapeState.Connector))
+                    if (!arc.Point2.State.HasFlag(exclude))
                     {
                         yield return arc.Point2; 
                     }
 
-                    if (!arc.Point3.State.HasFlag(ShapeState.Connector))
+                    if (!arc.Point3.State.HasFlag(exclude))
                     {
                         yield return arc.Point3;
                     }
 
-                    if (!arc.Point4.State.HasFlag(ShapeState.Connector))
+                    if (!arc.Point4.State.HasFlag(exclude))
                     {
                         yield return arc.Point4;
                     }
@@ -331,22 +332,22 @@ namespace Test2d
                 {
                     var bezier = shape as XBezier;
 
-                    if (!bezier.Point1.State.HasFlag(ShapeState.Connector))
+                    if (!bezier.Point1.State.HasFlag(exclude))
                     {
                         yield return bezier.Point1; 
                     }
 
-                    if (!bezier.Point2.State.HasFlag(ShapeState.Connector))
+                    if (!bezier.Point2.State.HasFlag(exclude))
                     {
                         yield return bezier.Point2; 
                     }
 
-                    if (!bezier.Point3.State.HasFlag(ShapeState.Connector))
+                    if (!bezier.Point3.State.HasFlag(exclude))
                     {
                         yield return bezier.Point3; 
                     }
 
-                    if (!bezier.Point4.State.HasFlag(ShapeState.Connector))
+                    if (!bezier.Point4.State.HasFlag(exclude))
                     {
                         yield return bezier.Point4; 
                     }
@@ -355,17 +356,17 @@ namespace Test2d
                 {
                     var qbezier = shape as XQBezier;
 
-                    if (!qbezier.Point1.State.HasFlag(ShapeState.Connector))
+                    if (!qbezier.Point1.State.HasFlag(exclude))
                     {
                         yield return qbezier.Point1; 
                     }
 
-                    if (!qbezier.Point2.State.HasFlag(ShapeState.Connector))
+                    if (!qbezier.Point2.State.HasFlag(exclude))
                     {
                         yield return qbezier.Point2; 
                     }
 
-                    if (!qbezier.Point3.State.HasFlag(ShapeState.Connector))
+                    if (!qbezier.Point3.State.HasFlag(exclude))
                     {
                         yield return qbezier.Point3; 
                     }
@@ -374,12 +375,12 @@ namespace Test2d
                 {
                     var text = shape as XText;
 
-                    if (!text.TopLeft.State.HasFlag(ShapeState.Connector))
+                    if (!text.TopLeft.State.HasFlag(exclude))
                     {
                         yield return text.TopLeft; 
                     }
 
-                    if (!text.BottomRight.State.HasFlag(ShapeState.Connector))
+                    if (!text.BottomRight.State.HasFlag(exclude))
                     {
                         yield return text.BottomRight; 
                     }
@@ -388,12 +389,12 @@ namespace Test2d
                 {
                     var image = shape as XImage;
 
-                    if (!image.TopLeft.State.HasFlag(ShapeState.Connector))
+                    if (!image.TopLeft.State.HasFlag(exclude))
                     {
                         yield return image.TopLeft;
                     }
 
-                    if (!image.BottomRight.State.HasFlag(ShapeState.Connector))
+                    if (!image.BottomRight.State.HasFlag(exclude))
                     {
                         yield return image.BottomRight;
                     }
@@ -402,9 +403,9 @@ namespace Test2d
                 {
                     var group = shape as XGroup;
 
-                    foreach (var point in GetAllPoints(group.Shapes))
+                    foreach (var point in GetAllPoints(group.Shapes, exclude))
                     {
-                        if (!point.State.HasFlag(ShapeState.Connector))
+                        if (!point.State.HasFlag(exclude))
                         {
                             yield return point; 
                         }
