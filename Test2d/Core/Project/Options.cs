@@ -13,6 +13,7 @@ namespace Test2d
         private double _snapX = 15.0;
         private double _snapY = 15.0;
         private double _hitTreshold = 6.0;
+        private MoveMode _moveMode = MoveMode.Point;
         private bool _defaultIsFilled = false;
         private bool _tryToConnect = false;
         private BaseShape _pointShape;
@@ -53,6 +54,15 @@ namespace Test2d
         {
             get { return _hitTreshold; }
             set { Update(ref _hitTreshold, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets how selected shapes are moved.
+        /// </summary>
+        public MoveMode MoveMode
+        {
+            get { return _moveMode; }
+            set { Update(ref _moveMode, value); }
         }
 
         /// <summary>
@@ -112,6 +122,7 @@ namespace Test2d
                 SnapX = 15.0,
                 SnapY = 15.0,
                 HitTreshold = 6.0,
+                MoveMode = MoveMode.Point,
                 DefaultIsFilled = false,
                 TryToConnect = false,
             };

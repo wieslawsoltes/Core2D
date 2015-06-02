@@ -183,24 +183,53 @@ namespace Test2d
 
             if (_editor.Renderer.SelectedShape != null)
             {
-                if (!_editor.Renderer.SelectedShape.State.HasFlag(ShapeState.Locked))
+                switch (_editor.Project.Options.MoveMode)
                 {
-                    //_editor.Renderer.SelectedShape.Move(dx, dy);
-                    Editor.Move(
-                        Editor.GetAllPoints(Enumerable.Repeat(_editor.Renderer.SelectedShape, 1)).Distinct(),
-                        dx, dy);
+                    case MoveMode.Point:
+                        {
+                            if (!_editor.Renderer.SelectedShape.State.HasFlag(ShapeState.Locked))
+                            {
+                                var shapes = Enumerable.Repeat(_editor.Renderer.SelectedShape, 1);
+                                var points = Editor.GetAllPoints(shapes, ShapeState.Connector).Distinct();
+                                Editor.Move(points, dx, dy);
+                            }
+                        }
+                        break;
+                    case MoveMode.Shape:
+                        {
+                            if (!_editor.Renderer.SelectedShape.State.HasFlag(ShapeState.Locked)
+                                && !_editor.Renderer.SelectedShape.State.HasFlag(ShapeState.Connector))
+                            {
+                                _editor.Renderer.SelectedShape.Move(dx, dy);
+                            }
+                        }
+                        break;
                 }
             }
 
             if (_editor.Renderer.SelectedShapes != null)
             {
-                //foreach (var shape in _editor.Renderer.SelectedShapes)
-                //{
-                //    shape.Move(dx, dy);
-                //}
-                Editor.Move(
-                    Editor.GetAllPoints(_editor.Renderer.SelectedShapes.Where(s => !s.State.HasFlag(ShapeState.Locked))).Distinct(),
-                    dx, dy);
+                switch (_editor.Project.Options.MoveMode)
+                {
+                    case MoveMode.Point:
+                        {
+                            var shapes = _editor.Renderer.SelectedShapes.Where(s => !s.State.HasFlag(ShapeState.Locked));
+                            var points = Editor.GetAllPoints(shapes, ShapeState.Connector).Distinct();
+                            Editor.Move(points, dx, dy);
+                        }
+                        break;
+                    case MoveMode.Shape:
+                        {
+                            foreach (var shape in _editor.Renderer.SelectedShapes)
+                            {
+                                if (!shape.State.HasFlag(ShapeState.Locked))
+                                {
+                                    shape.Move(dx, dy);
+                                }
+                            }
+                        }
+                        break;
+                }
             }
         }
 
