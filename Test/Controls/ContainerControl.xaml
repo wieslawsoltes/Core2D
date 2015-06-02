@@ -26,6 +26,7 @@
         <KeyBinding Command="{Binding Commands.ToolQBezierCommand}" Key="Q" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolTextCommand}" Key="T" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolImageCommand}" Key="I" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolPathCommand}" Key="H" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.DefaultIsFilledCommand}" Key="F" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.SnapToGridCommand}" Key="G" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.TryToConnectCommand}" Key="C" Modifiers=""/>

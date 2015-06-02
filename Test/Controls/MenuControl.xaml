@@ -241,6 +241,20 @@
                     </Style>
                 </MenuItem.Style>
             </MenuItem>
+            <Separator/>
+            <MenuItem Header="Pat_h" Command="{Binding Commands.ToolPathCommand}" InputGestureText="H">
+                <MenuItem.Style>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="IsCheckable" Value="True"/>
+                        <Setter Property="IsChecked" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Path">
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.Style>
+            </MenuItem>
         </MenuItem>
         <MenuItem Header="_Data">
             <MenuItem Header="_Import..." Command="{Binding Commands.ImportDataCommand}" InputGestureText="F8"/>
