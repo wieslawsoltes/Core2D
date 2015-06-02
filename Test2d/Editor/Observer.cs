@@ -817,6 +817,11 @@ namespace Test2d
             else if (shape is XPath)
             {
                 var path = shape as XPath;
+
+                if (path.Transform != null)
+                {
+                    path.Transform.PropertyChanged += ShapeObserver;
+                }
             }
             else if (shape is XGroup)
             {
@@ -1008,6 +1013,11 @@ namespace Test2d
             else if (shape is XPath)
             {
                 var path = shape as XPath;
+
+                if (path.Transform != null)
+                {
+                    path.Transform.PropertyChanged -= ShapeObserver;
+                }
             }
             else if (shape is XGroup)
             {
