@@ -12,7 +12,7 @@ namespace Test2d
     {
         private string _source;
         private XPathGeometry _geometry;
-        private XTransform _transform;
+        private ShapeTransform _transform;
         private bool _isStroked;
         private bool _isFilled;
 
@@ -39,7 +39,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public XTransform Transform
+        public ShapeTransform Transform
         {
             get { return _transform; }
             set { Update(ref _transform, value); }
@@ -109,7 +109,7 @@ namespace Test2d
             ShapeStyle style,
             string source,
             XPathGeometry geometry,
-            XTransform transform,
+            ShapeTransform transform,
             bool isStroked = true,
             bool isFilled = true)
         {
