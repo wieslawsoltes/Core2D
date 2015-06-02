@@ -285,6 +285,9 @@ namespace TestWinForms
                     case Keys.I:
                         (DataContext as EditorContext).Commands.ToolImageCommand.Execute(null);
                         break;
+                    case Keys.H:
+                        (DataContext as EditorContext).Commands.ToolPathCommand.Execute(null);
+                        break;
                     case Keys.F:
                         (DataContext as EditorContext).Commands.DefaultIsFilledCommand.Execute(null);
                         break;

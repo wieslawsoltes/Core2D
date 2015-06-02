@@ -6,7 +6,7 @@
 
 Test is an application for making 2D diagrams and running logic simulations.
 
-### Simulation
+## Simulation
 
 Simulation is done using synchronous sequential logic with clock signal
 to simulate state of all elements every clock cycle.
@@ -52,7 +52,7 @@ and keeps it high for a Delay after the input goes low.
 Pulse Timer causes State to go high when an input goes high 
 and keeps it high for a Delay and then goes low.
 
-## References
+### References
 
 http://en.wikipedia.org/wiki/Three-valued_logic
 http://en.wikipedia.org/wiki/Many-valued_logic
@@ -75,7 +75,7 @@ http://en.wikipedia.org/wiki/Logic_simulation
 
 * Prism.Mvvm
 * Newtonsoft.Json
-* PDFsharp-gdi (core PDFsharp package does not implement XGraphicsPath.AddArc method)
+* PDFsharp-wpf (core PDFsharp package does not implement XGraphicsPath.AddArc method)
 * lz4net
 * System.Windows.Interactivity.WPF
 * Microsoft.CodeAnalysis.Analyzers

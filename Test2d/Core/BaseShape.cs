@@ -37,7 +37,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// Idicates shape state options.
+        /// Indicates shape state options.
         /// </summary>
         public ShapeState State
         {

@@ -89,11 +89,11 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1-beta3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PdfSharp-gdi">
-      <HintPath>..\packages\PDFsharp-gdi.1.50.3638-beta\lib\net20\PdfSharp-gdi.dll</HintPath>
+    <Reference Include="PdfSharp-wpf">
+      <HintPath>..\packages\PDFsharp-wpf.1.50.3638-beta\lib\net30\PdfSharp-wpf.dll</HintPath>
     </Reference>
-    <Reference Include="PdfSharp.Charting-gdi">
-      <HintPath>..\packages\PDFsharp-gdi.1.50.3638-beta\lib\net20\PdfSharp.Charting-gdi.dll</HintPath>
+    <Reference Include="PdfSharp.Charting-wpf">
+      <HintPath>..\packages\PDFsharp-wpf.1.50.3638-beta\lib\net30\PdfSharp.Charting-wpf.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

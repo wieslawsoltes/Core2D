@@ -20,6 +20,10 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        Group,
+        /// <summary>
+        /// 
+        /// </summary>
         Point,
         /// <summary>
         /// 
@@ -52,6 +56,10 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        Image
+        Image,
+        /// <summary>
+        /// 
+        /// </summary>
+        Path
     }
 }

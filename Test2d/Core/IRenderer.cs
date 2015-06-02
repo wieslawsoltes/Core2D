@@ -150,5 +150,16 @@ namespace Test2d
         /// <param name="db"></param>
         /// <param name="r"></param>
         void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="path"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <param name="db"></param>
+        /// <param name="r"></param>
+        void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r);
     }
 }

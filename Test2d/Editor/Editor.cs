@@ -100,6 +100,11 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public GroupHelper GroupHelper { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public PointHelper PointHelper { get; set; }
 
         /// <summary>
@@ -143,6 +148,11 @@ namespace Test2d
         public ImageHelper ImageHelper { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public PathHelper PathHelper { get; set; }
+
+        /// <summary>
         /// Creates a new Editor instance.
         /// </summary>
         /// <param name="project">The project to edit.</param>
@@ -173,6 +183,7 @@ namespace Test2d
             }
 
             editor.SelectionHelper = new SelectionHelper(editor);
+            editor.GroupHelper = new GroupHelper(editor);
             editor.PointHelper = new PointHelper(editor);
             editor.LineHelper = new LineHelper(editor);
             editor.RectangleHelper = new RectangleHelper(editor);
@@ -182,6 +193,7 @@ namespace Test2d
             editor.QBezierHelper = new QBezierHelper(editor);
             editor.TextHelper = new TextHelper(editor);
             editor.ImageHelper = new ImageHelper(editor);
+            editor.PathHelper = new PathHelper(editor);
 
             return editor;
         }
@@ -514,6 +526,32 @@ namespace Test2d
                     point.Move(dx, dy);
                 }
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        public void AddWithHistory(BaseShape shape)
+        {
+            var layer = _project.CurrentContainer.CurrentLayer;
+            var previous = layer.Shapes;
+            var next = layer.Shapes.Add(shape);
+            _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
+        public void AddWithHistory(IEnumerable<BaseShape> shapes)
+        {
+            var layer = _project.CurrentContainer.CurrentLayer;
+            var previous = layer.Shapes;
+            var next = layer.Shapes.AddRange(shapes);
+            _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
         }
 
         /// <summary>
@@ -980,6 +1018,11 @@ namespace Test2d
                         SelectionHelper.LeftDown(x, y);
                     }
                     break;
+                case Tool.Group:
+                    {
+                        GroupHelper.LeftDown(x, y);
+                    }
+                    break;
                 case Tool.Point:
                     {
                         PointHelper.LeftDown(x, y);
@@ -1025,6 +1068,11 @@ namespace Test2d
                         ImageHelper.LeftDown(x, y);
                     }
                     break;
+                case Tool.Path:
+                    {
+                        PathHelper.LeftDown(x, y);
+                    }
+                    break;
             }
         }
 
@@ -1042,6 +1090,11 @@ namespace Test2d
                 case Tool.Selection:
                     {
                         SelectionHelper.LeftUp(x, y);
+                    }
+                    break;
+                case Tool.Group:
+                    {
+                        GroupHelper.LeftUp(x, y);
                     }
                     break;
                 case Tool.Point:
@@ -1089,6 +1142,11 @@ namespace Test2d
                         ImageHelper.LeftUp(x, y);
                     }
                     break;
+                case Tool.Path:
+                    {
+                        PathHelper.LeftUp(x, y);
+                    }
+                    break;
             }
         }
    
@@ -1106,6 +1164,11 @@ namespace Test2d
                 case Tool.Selection:
                     {
                         SelectionHelper.RightDown(x, y);
+                    }
+                    break;
+                case Tool.Group:
+                    {
+                        GroupHelper.RightDown(x, y);
                     }
                     break;
                 case Tool.Point:
@@ -1153,6 +1216,11 @@ namespace Test2d
                         ImageHelper.RightDown(x, y);
                     }
                     break;
+                case Tool.Path:
+                    {
+                        PathHelper.RightDown(x, y);
+                    }
+                    break;
             }
         }
 
@@ -1170,6 +1238,11 @@ namespace Test2d
                 case Tool.Selection:
                     {
                         SelectionHelper.RightUp(x, y);
+                    }
+                    break;
+                case Tool.Group:
+                    {
+                        GroupHelper.RightUp(x, y);
                     }
                     break;
                 case Tool.Point:
@@ -1217,6 +1290,11 @@ namespace Test2d
                         ImageHelper.RightUp(x, y);
                     }
                     break;
+                case Tool.Path:
+                    {
+                        PathHelper.RightUp(x, y);
+                    }
+                    break;
             }
         }
         
@@ -1234,6 +1312,11 @@ namespace Test2d
                 case Tool.Selection:
                     {
                         SelectionHelper.Move(x, y);
+                    }
+                    break;
+                case Tool.Group:
+                    {
+                        GroupHelper.Move(x, y);
                     }
                     break;
                 case Tool.Point:
@@ -1279,6 +1362,11 @@ namespace Test2d
                 case Tool.Image:
                     {
                         ImageHelper.Move(x, y);
+                    }
+                    break;
+                case Tool.Path:
+                    {
+                        PathHelper.Move(x, y);
                     }
                     break;
             }

@@ -241,6 +241,20 @@ namespace TestEDITOR
             // TODO: Implement Draw().
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="path"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <param name="db"></param>
+        /// <param name="r"></param>
+        public void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        {
+            // TODO: Implement Draw().
+        }
+
         private DxfAcadVer _version;
         private int _handle = 0;
         private string _defaultStyle = "Standard";

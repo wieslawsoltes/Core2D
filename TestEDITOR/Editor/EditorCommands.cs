@@ -185,6 +185,10 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
+        public ICommand ToolGroupCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand ToolPointCommand { get; set; }
         /// <summary>
         /// 
@@ -218,6 +222,10 @@ namespace TestEDITOR
         /// 
         /// </summary>
         public ICommand ToolImageCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ToolPathCommand { get; set; }
 
         /// <summary>
         /// 
