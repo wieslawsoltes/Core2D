@@ -67,6 +67,8 @@ namespace TestWinForms
             this.snapToGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.tryToConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -172,7 +174,9 @@ namespace TestWinForms
             this.toolStripSeparator10,
             this.textToolStripMenuItem,
             this.toolStripSeparator23,
-            this.imageToolStripMenuItem});
+            this.imageToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.pathToolStripMenuItem});
             this.toolToolStripMenuItem.Name = "toolToolStripMenuItem";
             this.toolToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.toolToolStripMenuItem.Text = "&Tool";
@@ -291,7 +295,7 @@ namespace TestWinForms
             // 
             this.evaluateToolStripMenuItem.Name = "evaluateToolStripMenuItem";
             this.evaluateToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F9;
-            this.evaluateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.evaluateToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.evaluateToolStripMenuItem.Text = "&Evaluate...";
             // 
             // optionsToolStripMenuItem
@@ -336,6 +340,18 @@ namespace TestWinForms
             this.tryToConnectToolStripMenuItem.ShortcutKeyDisplayString = "C";
             this.tryToConnectToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.tryToConnectToolStripMenuItem.Text = "Try To &Connect";
+            // 
+            // pathToolStripMenuItem
+            // 
+            this.pathToolStripMenuItem.Name = "pathToolStripMenuItem";
+            this.pathToolStripMenuItem.ShortcutKeyDisplayString = "H";
+            this.pathToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pathToolStripMenuItem.Text = "Pat&h";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
             // 
             // MainForm
             // 
@@ -396,5 +412,7 @@ namespace TestWinForms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator23;
         private System.Windows.Forms.ToolStripMenuItem imageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem pathToolStripMenuItem;
     }
 }
