@@ -814,6 +814,10 @@ namespace Test2d
                     image.BottomRight.PropertyChanged += ShapeObserver;
                 }
             }
+            else if (shape is XPath)
+            {
+                var path = shape as XPath;
+            }
             else if (shape is XGroup)
             {
                 var group = shape as XGroup;
@@ -1000,6 +1004,10 @@ namespace Test2d
                 {
                     image.BottomRight.PropertyChanged -= ShapeObserver;
                 }
+            }
+            else if (shape is XPath)
+            {
+                var path = shape as XPath;
             }
             else if (shape is XGroup)
             {
