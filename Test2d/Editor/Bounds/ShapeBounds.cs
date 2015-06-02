@@ -240,6 +240,22 @@ namespace Test2d
             return Rect2.Create(image.TopLeft, image.BottomRight);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private static Rect2 GetPathBounds(XPath path)
+        {
+            var b = path.Geometry.Bounds;
+            var t = path.Transform;
+            return Rect2.Create(
+                t.OffsetX + b.X,
+                t.OffsetY + b.Y,
+                t.OffsetX + b.X + b.Width,
+                t.OffsetY + b.Y + b.Height);
+        }
+
         #endregion
 
         #region HitTest Point
@@ -465,6 +481,16 @@ namespace Test2d
                     }
                     continue;
                 }
+                else if (shape is XPath)
+                {
+                    var path = shape as XPath;
+
+                    if (GetPathBounds(path).Contains(p))
+                    {
+                        return path;
+                    }
+                    continue;
+                }
                 else if (shape is XGroup)
                 {
                     var group = shape as XGroup;
@@ -657,6 +683,22 @@ namespace Test2d
                 else if (shape is XImage)
                 {
                     if (GetImageBounds(shape as XImage).IntersectsWith(rect))
+                    {
+                        if (builder != null)
+                        {
+                            builder.Add(shape);
+                            continue;
+                        }
+                        else
+                        {
+                            return true;
+                        }
+                    }
+                    continue;
+                }
+                else if (shape is XPath)
+                {
+                    if (GetPathBounds(shape as XPath).IntersectsWith(rect))
                     {
                         if (builder != null)
                         {
