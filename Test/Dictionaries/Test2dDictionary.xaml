@@ -16,6 +16,11 @@
     <converters:ShapeBindingParameterConverter x:Key="ShapeBindingParameterConverter"/>
     <converters:ShapePropertyParameterConverter x:Key="ShapePropertyParameterConverter"/>
     <!-- enums -->
+    <ObjectDataProvider x:Key="MoveModeValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+        <ObjectDataProvider.MethodParameters>
+            <x:Type TypeName="core:MoveMode"/>
+        </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
     <ObjectDataProvider x:Key="TextHAlignmentValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
         <ObjectDataProvider.MethodParameters>
             <x:Type TypeName="core:TextHAlignment"/>
@@ -764,7 +769,39 @@
             </Expander>
         </StackPanel>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type core:XTransform}">
+    <!-- shape -->
+    <ControlTemplate x:Key="StateControlTemplateKey">
+        <StackPanel Margin="5,2,5,2">
+            <CheckBox Content="Default" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+            </CheckBox>
+            <CheckBox Content="Visible" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+            </CheckBox>
+            <CheckBox Content="Printable" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+            </CheckBox>
+            <CheckBox Content="Locked" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+            </CheckBox>
+            <CheckBox Content="Connector" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+            </CheckBox>
+            <CheckBox Content="None" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+            </CheckBox>
+            <CheckBox Content="Standalone" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+            </CheckBox>
+            <CheckBox Content="Input" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+            </CheckBox>
+            <CheckBox Content="Output" Margin="1"
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+            </CheckBox>
+        </StackPanel>
+    </ControlTemplate>
+    <DataTemplate DataType="{x:Type core:ShapeTransform}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -963,37 +1000,6 @@
             </CheckBox>
             <CheckBox Content="Strikeout" Margin="1"
                       IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Strikeout}}">
-            </CheckBox>
-        </StackPanel>
-    </ControlTemplate>
-    <ControlTemplate x:Key="StateControlTemplateKey">
-        <StackPanel Margin="5,2,5,2">
-            <CheckBox Content="Default" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
-            </CheckBox>
-            <CheckBox Content="Visible" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
-            </CheckBox>
-            <CheckBox Content="Printable" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
-            </CheckBox>
-            <CheckBox Content="Locked" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
-            </CheckBox>
-            <CheckBox Content="Connector" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
-            </CheckBox>
-            <CheckBox Content="None" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
-            </CheckBox>
-            <CheckBox Content="Standalone" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
-            </CheckBox>
-            <CheckBox Content="Input" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
-            </CheckBox>
-            <CheckBox Content="Output" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
@@ -2678,6 +2684,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="90"/>
@@ -2712,16 +2719,24 @@
                                TextAlignment="Left" 
                                VerticalAlignment="Center">
                     </TextBlock>
+                    <TextBlock 
+                        Text="MoveMode" 
+                        Margin="5,2,5,2" 
+                        Grid.Row="4"
+                        Grid.Column="0" 
+                        TextAlignment="Left" 
+                        VerticalAlignment="Center">
+                    </TextBlock>
                     <TextBlock Text="DefaultIsFilled" 
                                Margin="5,2,5,2" 
-                               Grid.Row="4"
+                               Grid.Row="5"
                                Grid.Column="0" 
                                TextAlignment="Left" 
                                VerticalAlignment="Center">
                     </TextBlock>
                     <TextBlock Text="TryToConnect" 
                                Margin="5,2,5,2" 
-                               Grid.Row="5"
+                               Grid.Row="6"
                                Grid.Column="0" 
                                TextAlignment="Left" 
                                VerticalAlignment="Center">
@@ -2760,16 +2775,24 @@
                              TextAlignment="Center" 
                              VerticalAlignment="Center">
                     </TextBox>
+                    <ComboBox 
+                        ItemsSource="{Binding Source={StaticResource ResourceKey=MoveModeValues}}" 
+                        SelectedItem="{Binding Options.MoveMode}" 
+                        Margin="5,2,5,2" 
+                        Grid.Row="4" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2">
+                    </ComboBox>
                     <CheckBox Content=""
                               IsChecked="{Binding Options.DefaultIsFilled}"
-                              Grid.Row="4" 
+                              Grid.Row="5" 
                               Grid.Column="1" 
                               Grid.ColumnSpan="2"
                               Margin="5,2,5,2">
                     </CheckBox>
                     <CheckBox Content=""
                               IsChecked="{Binding Options.TryToConnect}"
-                              Grid.Row="5" 
+                              Grid.Row="6" 
                               Grid.Column="1" 
                               Grid.ColumnSpan="2"
                               Margin="5,2,5,2">

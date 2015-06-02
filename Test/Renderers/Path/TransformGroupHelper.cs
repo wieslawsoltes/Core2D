@@ -33,7 +33,7 @@ namespace Test
         /// 
         /// </summary>
         /// <param name="t"></param>
-        public TransformGroupHelper(XTransform t)
+        public TransformGroupHelper(ShapeTransform t)
         {
             _scale = new ScaleTransform(t.ScaleX, t.ScaleY, t.CenterX, t.CenterY);
             _skew = new SkewTransform(t.SkewAngleX, t.SkewAngleY, t.CenterX, t.CenterY);
@@ -50,7 +50,7 @@ namespace Test
         /// 
         /// </summary>
         /// <param name="t"></param>
-        public void Update(XTransform t)
+        public void Update(ShapeTransform t)
         {
             _scale.ScaleX = t.ScaleX;
             _scale.ScaleY = t.ScaleY;

@@ -39,7 +39,7 @@ namespace Test2d
             {
                 case State.None:
                     {
-                        var transform = XTransform.Create(offsetX: sx, offsetY: sy);
+                        var transform = ShapeTransform.Create(offsetX: sx, offsetY: sy);
                         _shape = XPath.Create(
                             "Path", 
                             _editor.Project.CurrentStyleGroup.CurrentStyle, 
