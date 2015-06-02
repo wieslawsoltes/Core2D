@@ -916,10 +916,10 @@ namespace TestEDITOR
                 {
                     if (segment is Test2d.XArcSegment)
                     {
-                        // TODO: Convert WPF/SVG elliptical arc segment format to GDI+ bezier curves.
                         throw new NotSupportedException("Not supported segment type: " + segment.GetType());
-                        var arcSegment = segment as Test2d.XArcSegment;
-                        startPoint = arcSegment.Point;
+                        //var arcSegment = segment as Test2d.XArcSegment;
+                        // TODO: Convert WPF/SVG elliptical arc segment format to GDI+ bezier curves.
+                        //startPoint = arcSegment.Point;
                     }
                     else if (segment is Test2d.XBezierSegment)
                     {
