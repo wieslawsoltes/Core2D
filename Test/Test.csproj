@@ -200,10 +200,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TemplatesControl.xaml" />
-    <Page Include="Dictionaries\PathDictionary.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Dictionaries\Test2dDictionary.xaml">
       <SubType>Designer</SubType>
     </Page>
