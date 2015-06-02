@@ -218,6 +218,10 @@ namespace TestEDITOR
         /// 
         /// </summary>
         public ICommand ToolImageCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ToolPathCommand { get; set; }
 
         /// <summary>
         /// 
