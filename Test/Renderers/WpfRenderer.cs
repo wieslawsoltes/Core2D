@@ -1236,7 +1236,6 @@ namespace Test
                     var tuple = Tuple.Create(path.Source, path.Geometry, sg, tgh, path.Style);
                     if (_pathCache.ContainsKey(path))
                     {
-                        
                         _pathCache[path] = tuple;
                     }
                     else
