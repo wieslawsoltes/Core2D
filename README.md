@@ -75,7 +75,7 @@ http://en.wikipedia.org/wiki/Logic_simulation
 
 * Prism.Mvvm
 * Newtonsoft.Json
-* PDFsharp-gdi (core PDFsharp package does not implement XGraphicsPath.AddArc method)
+* PDFsharp-wpf (core PDFsharp package does not implement XGraphicsPath.AddArc method)
 * lz4net
 * System.Windows.Interactivity.WPF
 * Microsoft.CodeAnalysis.Analyzers
