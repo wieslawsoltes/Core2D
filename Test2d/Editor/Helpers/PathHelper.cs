@@ -14,8 +14,8 @@ namespace Test2d
     public class PathHelper : Helper
     {
         private Editor _editor;
-        //private State _currentState = State.None;
-        //private XGroup _shape;
+        private State _currentState = State.None;
+        private XPath _shape;
 
         /// <summary>
         /// 
@@ -33,6 +33,23 @@ namespace Test2d
         /// <param name="y"></param>
         public override void LeftDown(double x, double y)
         {
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            switch (_currentState)
+            {
+                case State.None:
+                    {
+                        var transform = XTransform.Create(offsetX: sx, offsetY: sy);
+                        _shape = XPath.Create(
+                            "Path", 
+                            _editor.Project.CurrentStyleGroup.CurrentStyle, 
+                            null, null, 
+                            transform, 
+                            true, true);
+                        _editor.AddWithHistory(_shape);
+                    }
+                    break;
+            }
         }
 
         /// <summary>
@@ -42,6 +59,8 @@ namespace Test2d
         /// <param name="y"></param>
         public override void LeftUp(double x, double y)
         {
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
         }
 
         /// <summary>
@@ -51,6 +70,13 @@ namespace Test2d
         /// <param name="y"></param>
         public override void RightDown(double x, double y)
         {
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            switch (_currentState)
+            {
+                case State.None:
+                    break;
+            }
         }
 
         /// <summary>
@@ -60,6 +86,8 @@ namespace Test2d
         /// <param name="y"></param>
         public override void RightUp(double x, double y)
         {
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
         }
 
         /// <summary>
@@ -69,6 +97,13 @@ namespace Test2d
         /// <param name="y"></param>
         public override void Move(double x, double y)
         {
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            switch (_currentState)
+            {
+                case State.None:
+                    break;
+            }
         }
 
         /// <summary>
