@@ -961,6 +961,13 @@ namespace TestEDITOR
                     },
                     () => IsEditMode());
 
+                _commands.ToolGroupCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.CurrentTool = Tool.Group;
+                    },
+                    () => IsEditMode());
+
                 _commands.ToolPointCommand = new DelegateCommand(
                     () =>
                     {
@@ -1021,6 +1028,13 @@ namespace TestEDITOR
                     () =>
                     {
                         _editor.CurrentTool = Tool.Image;
+                    },
+                    () => IsEditMode());
+
+                _commands.ToolPathCommand = new DelegateCommand(
+                    () =>
+                    {
+                        _editor.CurrentTool = Tool.Path;
                     },
                     () => IsEditMode());
 
@@ -3155,6 +3169,7 @@ namespace TestEDITOR
 
             (_commands.ToolNoneCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolSelectionCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolGroupCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolPointCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolLineCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolRectangleCommand as DelegateCommand).RaiseCanExecuteChanged();
@@ -3164,6 +3179,7 @@ namespace TestEDITOR
             (_commands.ToolQBezierCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolTextCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolImageCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolPathCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.EvalCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.EvalScriptCommand as DelegateCommand<string>).RaiseCanExecuteChanged();
