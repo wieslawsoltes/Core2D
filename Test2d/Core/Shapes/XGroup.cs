@@ -88,6 +88,16 @@ namespace Test2d
                             connector.Draw(dc, renderer, dx, dy, db, record);
                         }
                     }
+                    else
+                    {
+                        foreach (var connector in Connectors)
+                        {
+                            if (connector == renderer.SelectedShape)
+                            {
+                                connector.Draw(dc, renderer, dx, dy, db, record);
+                            }
+                        }
+                    }
                 }
                 
                 if (renderer.SelectedShapes != null)
