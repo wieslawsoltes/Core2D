@@ -23,6 +23,7 @@ namespace Test2d
         private bool _enableObserver;
         private Observer _observer;
         private History _history;
+        private BaseShape _hover;
 
         /// <summary>
         /// Gets or sets current project.
@@ -924,6 +925,68 @@ namespace Test2d
             }
 
             Deselect(container);
+
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        public void Hover(BaseShape shape)
+        {
+            Select(_project.CurrentContainer, shape);
+            _hover = shape;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Dehover()
+        {
+            _hover = default(BaseShape);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        public void Dehover(Container container)
+        {
+            _hover = default(BaseShape);
+            Deselect(container);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public bool TryToHoverShape(double x, double y)
+        {
+            if (_renderer.SelectedShapes == null
+                && !(_renderer.SelectedShape != null && _hover != _renderer.SelectedShape))
+            {
+                var result = ShapeBounds.HitTest(
+                    _project.CurrentContainer,
+                    new Vector2(x, y),
+                    _project.Options.HitTreshold);
+                if (result != null)
+                {
+                    Select(_project.CurrentContainer, result);
+                    _hover = result;
+
+                    return true;
+                }
+                else
+                {
+                    if (_renderer.SelectedShape == _hover)
+                    {
+                        _hover = default(BaseShape);
+                        Deselect(_project.CurrentContainer);
+                    }
+                }
+            }
 
             return false;
         }

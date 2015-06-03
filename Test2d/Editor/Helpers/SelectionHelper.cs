@@ -16,7 +16,6 @@ namespace Test2d
         private Editor _editor;
         private State _currentState = State.None;
         private BaseShape _shape;
-        private BaseShape _previousHoverShape = default(BaseShape);
         private double _startX;
         private double _startY;
         private double _historyX;
@@ -42,8 +41,7 @@ namespace Test2d
             {
                 case State.None:
                     {
-                        _previousHoverShape = default(BaseShape);
-
+                        _editor.Dehover();
                         if (_editor.Renderer.SelectedShape == null
                             && _editor.Renderer.SelectedShapes != null)
                         {
@@ -157,8 +155,7 @@ namespace Test2d
             {
                 case State.None:
                     {
-                        _previousHoverShape = default(BaseShape);
-
+                        _editor.Dehover();
                         _editor.IsContextMenu = _editor.TryToSelectShape(_editor.Project.CurrentContainer, x, y) ? true : false;
                     }
                     break;
@@ -247,44 +244,13 @@ namespace Test2d
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        private void TryToSelectHoverShape(double x, double y)
-        {
-            var renderer = _editor.Renderer;
-            if (renderer.SelectedShapes == null
-                && !(renderer.SelectedShape != null && _previousHoverShape != renderer.SelectedShape))
-            {
-                var result = ShapeBounds.HitTest(
-                    _editor.Project.CurrentContainer,
-                    new Vector2(x, y),
-                    _editor.Project.Options.HitTreshold);
-                if (result != null)
-                {
-                    _editor.Select(_editor.Project.CurrentContainer, result);
-                    _previousHoverShape = result;
-                }
-                else
-                {
-                    if (_editor.Renderer.SelectedShape == _previousHoverShape)
-                    {
-                        _previousHoverShape = default(BaseShape);
-                        _editor.Deselect(_editor.Project.CurrentContainer);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
         public override void Move(double x, double y)
         {
             switch (_currentState)
             {
                 case State.None:
                     {
-                        TryToSelectHoverShape(x, y);
+                        _editor.TryToHoverShape(x, y);
                     }
                     break;
                 case State.One:
