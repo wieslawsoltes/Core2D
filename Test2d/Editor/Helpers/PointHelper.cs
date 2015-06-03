@@ -40,7 +40,18 @@ namespace Test2d
                 case State.None:
                     {
                         _shape = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        _editor.AddWithHistory(_shape);
+
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            if (!_editor.TryToSplitLine(x, y, _shape, true))
+                            {
+                                _editor.AddWithHistory(_shape);
+                            }
+                        }
+                        else
+                        {
+                            _editor.AddWithHistory(_shape);
+                        }
                     }
                     break;
             }
