@@ -98,6 +98,32 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public Point2 NearestPointOnLine(double x, double y)
+        {
+            var a = _start;
+            var b = _end;
+            double ax = x - a.X;
+            double ay = y - a.Y;
+            double bx = b.X - a.X;
+            double by = b.Y - a.Y;
+            double t = (ax * bx + ay * by) / (bx * bx + by * by);
+            if (t < 0.0)
+            {
+                return new Point2(a.X, a.Y);
+            }
+            else if (t > 1.0)
+            {
+                return new Point2(b.X, b.Y);
+            }
+            return new Point2(bx * t + a.X, by * t + a.Y);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
         /// <param name="x2"></param>
