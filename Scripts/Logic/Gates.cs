@@ -1,18 +1,18 @@
 ﻿var p = Context.Editor.Project;
 var c = Context.Editor.Project.CurrentContainer;
 
-var sg = p.StyleGroups.Where(x => x.Name == "Logic").FirstOrDefault();
+var sg = p.StyleGroups.Where(x => x.Name == "Logic-Gates").FirstOrDefault();
 if (sg == null)
 {
-    sg = ShapeStyleGroup.Create("Logic");
+    sg = ShapeStyleGroup.Create("Logic-Gates");
     p.StyleGroups = p.StyleGroups.Add(sg);
 }
 var styles = sg.Styles.ToBuilder();
 
-var gl = p.GroupLibraries.Where(x => x.Name == "Logic").FirstOrDefault();
+var gl = p.GroupLibraries.Where(x => x.Name == "Logic-Gates").FirstOrDefault();
 if (gl == null)
 {
-    gl = GroupLibrary.Create("Logic");
+    gl = GroupLibrary.Create("Logic-Gates");
     p.GroupLibraries = p.GroupLibraries.Add(gl);
 }
 

@@ -1,8 +1,8 @@
 var p = Context.Editor.Project;
-var sg = p.StyleGroups.Where(x => x.Name == "Logic").FirstOrDefault();
+var sg = p.StyleGroups.Where(x => x.Name == "Logic-Wires").FirstOrDefault();
 if (sg == null)
 {
-    sg = ShapeStyleGroup.Create("Logic");
+    sg = ShapeStyleGroup.Create("Logic-Wires");
     p.StyleGroups = p.StyleGroups.Add(sg);
 }
 
