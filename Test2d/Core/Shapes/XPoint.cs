@@ -96,5 +96,17 @@ namespace Test2d
                 Shape = shape 
             };
         }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public double Distance(XPoint point)
+        {
+            double dx = this.X - point.X;
+            double dy = this.Y - point.Y;
+            return Math.Sqrt(dx * dx + dy * dy);
+        }
     }
 }
