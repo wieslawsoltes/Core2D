@@ -931,6 +931,61 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="point"></param>
+        /// <param name="select"></param>
+        /// <returns></returns>
+        public bool TryToSplitLine(double x, double y, XPoint point, bool select = false)
+        {
+            var result = ShapeBounds.HitTest(
+                _project.CurrentContainer,
+                new Vector2(x, y),
+                _project.Options.HitTreshold);
+
+            if (result is XLine)
+            {
+                var line = result as XLine;
+
+                var split = XLine.Create(
+                    x, y,
+                    line.Style,
+                    _project.Options.PointShape);
+
+                double ds = point.Distance(line.Start);
+                double de = point.Distance(line.End);
+
+                if (ds < de)
+                {
+                    split.Start = line.Start;
+                    split.End = point;
+
+                    line.Start = point;
+                }
+                else
+                {
+                    split.Start = point;
+                    split.End = line.End;
+
+                    line.End = point;
+                }
+
+                AddWithHistory(split);
+
+                if (select)
+                {
+                    Select(_project.CurrentContainer, point);
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         public bool IsLeftDownAvailable()
         {
