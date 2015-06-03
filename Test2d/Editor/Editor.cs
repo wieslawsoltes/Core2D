@@ -1010,6 +1010,13 @@ namespace Test2d
             {
                 var line = result as XLine;
 
+                if (!_project.Options.SnapToGrid)
+                {
+                    var nearest = line.NearestPointOnLine(x, y);
+                    point.X = nearest.X;
+                    point.Y = nearest.Y;
+                }
+
                 var split = XLine.Create(
                     x, y,
                     line.Style,
