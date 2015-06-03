@@ -37,13 +37,16 @@ namespace Test2d
         /// <param name="line"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void TryToConnectStart(XLine line, double x, double y)
+        /// <returns></returns>
+        public bool TryToConnectStart(XLine line, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 line.Start = result as XPoint;
+                return true;
             }
+            return false;
         }
 
         /// <summary>
@@ -52,13 +55,16 @@ namespace Test2d
         /// <param name="line"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void TryToConnectEnd(XLine line, double x, double y)
+        /// <returns></returns>
+        public bool TryToConnectEnd(XLine line, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 line.End = result as XPoint;
+                return true;
             }
+            return false;
         }
 
         /// <summary>
@@ -80,7 +86,11 @@ namespace Test2d
                             _editor.Project.Options.PointShape);
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            TryToConnectStart(_shape as XLine, sx, sy);
+                            var result = TryToConnectStart(_shape as XLine, sx, sy);
+                            if (!result)
+                            {
+                                _editor.TryToSplitLine(x, y, _shape.Start);
+                            }
                         }
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
@@ -99,7 +109,11 @@ namespace Test2d
                             line.End.Y = sy;
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                TryToConnectEnd(_shape as XLine, sx, sy);
+                                var result = TryToConnectEnd(_shape as XLine, sx, sy);
+                                if (!result)
+                                {
+                                    _editor.TryToSplitLine(x, y, _shape.End);
+                                }
                             }
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             Remove();
