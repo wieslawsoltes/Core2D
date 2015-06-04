@@ -6,6 +6,8 @@
                     xmlns:core="clr-namespace:Test2d;assembly=Test2d"
                     xmlns:converters="clr-namespace:Test.Converters">
     <!-- converters -->
+    <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
+    <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
     <converters:DoubleToStringConverter x:Key="DoubleToStringConverter"/>
     <converters:FlagsEnumConverter x:Key="FontStyleFlagsEnumConverter"/>
     <converters:FlagsEnumConverter x:Key="StateFlagsEnumConverter"/>
@@ -51,6 +53,31 @@
             <x:Type TypeName="core:XFillRule"/>
         </ObjectDataProvider.MethodParameters>
     </ObjectDataProvider>
+    <!-- brushes -->
+    <SolidColorBrush x:Key="DarkSquareColor" Color="DarkGray" />
+    <SolidColorBrush x:Key="LightSquareColor" Color="LightGray" />
+    <DrawingBrush x:Key="CheckerBoard" Viewport="0,0,20,20" ViewportUnits="Absolute" Stretch="None" TileMode="Tile">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Brush="{DynamicResource DarkSquareColor}">
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <RectangleGeometry Rect="0,0,10,10"/>
+                            <RectangleGeometry Rect="10,10,10,10"/>
+                        </GeometryGroup>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="{DynamicResource LightSquareColor}">
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <RectangleGeometry Rect="10,0,10,10"/>
+                            <RectangleGeometry Rect="0,10,10,10"/>
+                        </GeometryGroup>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
     <!-- path -->
     <DataTemplate DataType="{x:Type core:XPathPoint}">
         <Grid>
@@ -1094,36 +1121,60 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
+            <Rectangle 
+                Fill="{StaticResource CheckerBoard}"
+                Grid.Row="0" 
+                Grid.Column="0" 
+                Grid.ColumnSpan="3" 
+                Margin="5,2,5,2"
+                Height="20">
+            </Rectangle>
+            <Rectangle 
+                Grid.Row="0" 
+                Grid.Column="0" 
+                Grid.ColumnSpan="3" 
+                Margin="5,2,5,2"
+                Height="20">
+                <Rectangle.Fill>
+                    <MultiBinding Converter="{StaticResource ArgbColorToBrushMultiConverter}">
+                        <Binding Path="DataContext.A" RelativeSource="{RelativeSource Self}"/>
+                        <Binding Path="DataContext.R" RelativeSource="{RelativeSource Self}"/>
+                        <Binding Path="DataContext.G" RelativeSource="{RelativeSource Self}"/>
+                        <Binding Path="DataContext.B" RelativeSource="{RelativeSource Self}"/>
+                    </MultiBinding>
+                </Rectangle.Fill>
+            </Rectangle>
             <TextBlock Text="A" 
                        Margin="5,2,5,2" 
-                       Grid.Row="0"
+                       Grid.Row="1"
                        Grid.Column="0" 
                        TextAlignment="Center" 
                        VerticalAlignment="Center">
             </TextBlock>
             <TextBlock Text="R" 
                        Margin="5,2,5,2" 
-                       Grid.Row="1" 
+                       Grid.Row="2" 
                        Grid.Column="0" 
                        TextAlignment="Center" 
                        VerticalAlignment="Center">
             </TextBlock>
             <TextBlock Text="G" 
                        Margin="5,2,5,2" 
-                       Grid.Row="2" 
+                       Grid.Row="3" 
                        Grid.Column="0" 
                        TextAlignment="Center" 
                        VerticalAlignment="Center">
             </TextBlock>
             <TextBlock Text="B" 
                        Margin="5,2,5,2" 
-                       Grid.Row="3" 
+                       Grid.Row="4" 
                        Grid.Column="0" 
                        TextAlignment="Center" 
                        VerticalAlignment="Center">
@@ -1133,7 +1184,7 @@
                     Maximum="255" 
                     TickFrequency="1" 
                     IsSnapToTickEnabled="True" 
-                    Grid.Row="0" 
+                    Grid.Row="1" 
                     Grid.Column="1" 
                     Margin="5,2,5,2">
             </Slider>
@@ -1142,7 +1193,7 @@
                     Maximum="255" 
                     TickFrequency="1" 
                     IsSnapToTickEnabled="True" 
-                    Grid.Row="1" 
+                    Grid.Row="2" 
                     Grid.Column="1" 
                     Margin="5,2,5,2">
             </Slider>
@@ -1151,7 +1202,7 @@
                     Maximum="255" 
                     TickFrequency="1" 
                     IsSnapToTickEnabled="True" 
-                    Grid.Row="2" 
+                    Grid.Row="3" 
                     Grid.Column="1" 
                     Margin="5,2,5,2">
             </Slider>
@@ -1160,19 +1211,11 @@
                     Maximum="255" 
                     TickFrequency="1" 
                     IsSnapToTickEnabled="True" 
-                    Grid.Row="3" 
+                    Grid.Row="4" 
                     Grid.Column="1" 
                     Margin="5,2,5,2">
             </Slider>
             <TextBox Text="{Binding A, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                     BorderBrush="{x:Null}" 
-                     Margin="5,2,5,2"
-                     Grid.Row="0" 
-                     Grid.Column="2" 
-                     TextAlignment="Center" 
-                     VerticalAlignment="Center">
-            </TextBox>
-            <TextBox Text="{Binding R, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                      BorderBrush="{x:Null}" 
                      Margin="5,2,5,2"
                      Grid.Row="1" 
@@ -1180,7 +1223,7 @@
                      TextAlignment="Center" 
                      VerticalAlignment="Center">
             </TextBox>
-            <TextBox Text="{Binding G, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+            <TextBox Text="{Binding R, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                      BorderBrush="{x:Null}" 
                      Margin="5,2,5,2"
                      Grid.Row="2" 
@@ -1188,10 +1231,18 @@
                      TextAlignment="Center" 
                      VerticalAlignment="Center">
             </TextBox>
-            <TextBox Text="{Binding B, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+            <TextBox Text="{Binding G, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                      BorderBrush="{x:Null}" 
                      Margin="5,2,5,2"
                      Grid.Row="3" 
+                     Grid.Column="2" 
+                     TextAlignment="Center" 
+                     VerticalAlignment="Center">
+            </TextBox>
+            <TextBox Text="{Binding B, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                     BorderBrush="{x:Null}" 
+                     Margin="5,2,5,2"
+                     Grid.Row="4" 
                      Grid.Column="2" 
                      TextAlignment="Center" 
                      VerticalAlignment="Center">
