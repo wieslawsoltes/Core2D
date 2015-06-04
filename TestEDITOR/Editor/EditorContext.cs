@@ -3194,6 +3194,7 @@ namespace TestEDITOR
             (_commands.StylesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ShapesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ContainerWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ScriptWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.PropertiesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.AddTemplateCommand as DelegateCommand).RaiseCanExecuteChanged();

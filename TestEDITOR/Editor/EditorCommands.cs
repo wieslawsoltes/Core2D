@@ -388,7 +388,11 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
-        public ICommand ContainerWindowCommand { get; set; }
+        public ICommand ContainerWindowCommand { get; set; } 
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ScriptWindowCommand { get; set; } 
         /// <summary>
         /// 
         /// </summary>

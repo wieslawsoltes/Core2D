@@ -271,6 +271,11 @@ namespace Test.Windows
                     () => (new ContainerWindow() { Owner = this, DataContext = context }).Show(),
                     () => true);
 
+            context.Commands.ScriptWindowCommand =
+                new DelegateCommand(
+                    () => (new ScriptWindow() { Owner = this, DataContext = context.ScriptDirectories }).Show(),
+                    () => true);
+
             var pw = default(PropertiesWindow);
 
             context.Commands.PropertiesWindowCommand = 

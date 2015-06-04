@@ -89,6 +89,8 @@
             <Separator/>
             <MenuItem Header="Containe_r Editor..." Command="{Binding Commands.ContainerWindowCommand}" InputGestureText="Ctrl+R"/>
             <Separator/>
+            <MenuItem Header="_Script Editor..." Command="{Binding Commands.ScriptWindowCommand}" InputGestureText="Ctrl+U"/>
+            <Separator/>
             <MenuItem Header="_Properties..." Command="{Binding Commands.PropertiesWindowCommand}" InputGestureText="F4"/>
         </MenuItem>
         <MenuItem Header="_Tool">
@@ -292,18 +294,18 @@
         <MenuItem Header="S_cripts" ItemsSource="{Binding ScriptDirectories}">
             <MenuItem.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Scripts}">
-                    <TextBlock Text="{Binding Name}"/>
-                    <HierarchicalDataTemplate.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </HierarchicalDataTemplate.ItemTemplate>
                     <HierarchicalDataTemplate.ItemContainerStyle>
                         <Style TargetType="MenuItem">
                             <Setter Property="Command" Value="{Binding DataContext.Commands.EvalScriptCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
                             <Setter Property="CommandParameter" Value="{Binding Path}"/>
                         </Style>
                     </HierarchicalDataTemplate.ItemContainerStyle>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                    <TextBlock Text="{Binding Name}"/>
                 </HierarchicalDataTemplate>
             </MenuItem.ItemTemplate>
         </MenuItem>
