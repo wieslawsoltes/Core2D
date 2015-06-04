@@ -21,27 +21,9 @@ namespace TestEtoForms
     public class MainForm : Form, IView
     {
         private EditorContext _context;
+        private ZoomState _state;
         private Drawable _drawable;
         private Color _background = Color.FromArgb(211, 211, 211, 255);
-
-        private const float _minimum = 0.01f;
-        private const float _maximum = 1000.0f;
-        private const float _zoomSpeed = 3.5f;
-        private float _zoom = 1f;
-        private float _panX = 0f;
-        private float _panY = 0f;
-        private bool _isPanMode = false;
-        private float _panOffsetX = 0f;
-        private float _panOffsetY = 0f;
-        private float _originX = 0f;
-        private float _originY = 0f;
-        private float _startX = 0f;
-        private float _startY = 0f;
-        private float _wheelOriginX = 0f;
-        private float _wheelOriginY = 0f;
-        private bool _haveWheelOrigin = false;
-        private float _wheelOffsetX = 0f;
-        private float _wheelOffsetY = 0f;
 
         /// <summary>
         /// 
@@ -67,6 +49,10 @@ namespace TestEtoForms
                 Serializer = new NewtonsoftSerializer(),
                 Compressor = new LZ4CodecCompressor(),
                 ScriptEngine = new RoslynScriptEngine(),
+                PdfWriter = new PdfWriter(),
+                DxfWriter = new DxfWriter(),
+                CsvReader = new VisualBasicReader(),
+                CsvWriter = new CsvHelperWriter(),
                 Execute = (action) => action()
             };
             _context.InitializeEditor();
@@ -74,6 +60,8 @@ namespace TestEtoForms
             _context.InitializeSimulation();
             _context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
             _context.Editor.GetImagePath = () => Image();
+
+            _state = new ZoomState(_context, InvalidateContainer);
 
             DataContext = _context;
         }
@@ -95,141 +83,62 @@ namespace TestEtoForms
                 {
                     var p = e.Location;
 
-                    System.Diagnostics.Debug.Print("Pan Offset: {0}, {1}", _panOffsetX, _panOffsetY);
-
                     if (e.Buttons == MouseButtons.Middle)
                     {
-                        _startX = p.X;
-                        _startY = p.Y;
-
-                        _originX = _panX;
-                        _originY = _panY;
-
+                        _state.MiddleDown(p.X, p.Y);
                         this.Cursor = Cursors.Pointer;
-
-                        _isPanMode = true;
                     }
 
                     if (e.Buttons == MouseButtons.Primary)
                     {
                         _drawable.Focus();
-                        if (_context.Editor.IsLeftDownAvailable())
-                        {
-                            _context.Editor.LeftDown(
-                                (p.X - _panX) / _zoom,
-                                (p.Y - _panY) / _zoom);
-                        }
+                        _state.PrimaryDown(p.X, p.Y);
                     }
 
                     if (e.Buttons == MouseButtons.Alternate)
                     {
                         _drawable.Focus();
-                        if (_context.Editor.IsRightDownAvailable())
-                        {
-                            _context.Editor.RightDown(
-                                (p.X - _panX) / _zoom,
-                                (p.Y - _panY) / _zoom);
-                        }
+                        _state.AlternateDown(p.X, p.Y);
                     }
                 };
 
             _drawable.MouseUp +=
                 (sender, e) =>
                 {
+                    var p = e.Location;
+
                     if (e.Buttons == MouseButtons.Middle)
                     {
-                        _panOffsetX += _panX - _originX;
-                        _panOffsetY += _panY - _originY;
-                        System.Diagnostics.Debug.Print("Pan Offset: {0}, {1}", _panOffsetX, _panOffsetY);
-                        _isPanMode = false;
+                        _drawable.Focus();
+                        _state.MiddleUp(p.X, p.Y);
                         this.Cursor = Cursors.Default;
                     }
 
                     if (e.Buttons == MouseButtons.Primary)
                     {
                         _drawable.Focus();
-                        if (_context.Editor.IsLeftUpAvailable())
-                        {
-                            var p = e.Location;
-                            _context.Editor.LeftUp(
-                                (p.X - _panX) / _zoom,
-                                (p.Y - _panY) / _zoom);
-                        }
+                        _state.PrimaryUp(p.X, p.Y);
                     }
 
                     if (e.Buttons == MouseButtons.Alternate)
                     {
                         _drawable.Focus();
-                        if (_context.Editor.IsRightUpAvailable())
-                        {
-                            var p = e.Location;
-                            _context.Editor.RightUp(
-                                (p.X - _panX) / _zoom,
-                                (p.Y - _panY) / _zoom);
-                        }
+                        _state.AlternateUp(p.X, p.Y);
                     }
                 };
 
             _drawable.MouseMove +=
                 (sender, e) =>
                 {
-                    if (_isPanMode)
-                    {
-                        var p = e.Location;
-
-                        float vx = _startX - p.X;
-                        float vy = _startY - p.Y;
-
-                        _panX = _originX - vx;
-                        _panY = _originY - vy;
-
-                        _context.Editor.Renderer.PanX = _panX;
-                        _context.Editor.Renderer.PanY = _panY;
-
-                        InvalidateContainer();
-                    }
-                    else
-                    {
-                        if (_context.Editor.IsMoveAvailable())
-                        {
-                            var p = e.Location;
-                            _context.Editor.Move(
-                                (p.X - _panX) / _zoom,
-                                (p.Y - _panY) / _zoom);
-                        }
-                    }
+                    var p = e.Location;
+                    _state.Move(p.X, p.Y);
                 };
 
             _drawable.MouseWheel +=
                 (sender, e) =>
                 {
-                    float zoom = _zoom;
-                    zoom = e.Delta.Height > 0 ?
-                        zoom + zoom / _zoomSpeed :
-                        zoom - zoom / _zoomSpeed;
-
-                    if (zoom < _minimum || zoom > _maximum)
-                        return;
-
                     var p = e.Location;
-
-                    if (!_haveWheelOrigin)
-                    {
-                        _wheelOriginX = p.X;
-                        _wheelOriginY = p.Y;
-                        _haveWheelOrigin = true;
-                    }
-
-                    _wheelOffsetX = p.X - _wheelOriginX;
-                    _wheelOffsetY = p.Y - _wheelOriginY;
-                    System.Diagnostics.Debug.Print("Wheel Offset: {0}, {1}", _wheelOffsetX, _wheelOffsetY);
-
-                    ZoomTo(
-                        zoom,
-                        p.X - _panOffsetX - _wheelOffsetX,
-                        p.Y - _panOffsetY - _wheelOffsetY);
-
-                    InvalidateContainer();
+                    _state.Wheel(p.X, p.Y, e.Delta.Height);
                 };
 
             _drawable.KeyDown +=
@@ -286,7 +195,7 @@ namespace TestEtoForms
                             _context.Commands.TryToConnectCommand.Execute(null);
                             break;
                         case Keys.Z:
-                            ResetZoom();
+                            _state.ResetZoom();
                             InvalidateContainer();
                             break;
                         case Keys.X:
@@ -920,8 +829,8 @@ namespace TestEtoForms
             g.AntiAlias = false;
             g.PixelOffsetMode = PixelOffsetMode.Half;
 
-            g.TranslateTransform(_panX, _panY);
-            g.ScaleTransform(_zoom);
+            g.TranslateTransform(_state.PanX, _state.PanY);
+            g.ScaleTransform(_state.Zoom);
 
             var brush = new SolidBrush(_background);
             g.Clear(brush);
@@ -934,9 +843,9 @@ namespace TestEtoForms
             {
                 DrawBackground(
                     g, 
-                    container.Template.Background, 
-                    this.Width, 
-                    this.Height);
+                    container.Template.Background,
+                    container.Width,
+                    container.Height);
 
                 renderer.Draw(
                     g, 
@@ -947,9 +856,9 @@ namespace TestEtoForms
 
             DrawBackground(
                 g, 
-                container.Background, 
-                this.Width, 
-                this.Height);
+                container.Background,
+                container.Width,
+                container.Height);
 
             renderer.Draw(
                 g, 
@@ -974,47 +883,6 @@ namespace TestEtoForms
                     container.Properties, 
                     null);
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void ResetZoom()
-        {
-            _zoom = 1f;
-            _panX = 0f;
-            _panY = 0f;
-            _panOffsetX = 0f;
-            _panOffsetY = 0f;
-            _wheelOriginX = 0f;
-            _wheelOriginY = 0f;
-            _wheelOffsetX = 0f;
-            _wheelOffsetY = 0f;
-            _haveWheelOrigin = false;
-            _context.Editor.Renderer.Zoom = _zoom;
-            _context.Editor.Renderer.PanX = _panX;
-            _context.Editor.Renderer.PanY = _panY;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="zoom"></param>
-        /// <param name="rx"></param>
-        /// <param name="ry"></param>
-        private void ZoomTo(float zoom, float rx, float ry)
-        {
-            float ax = (rx * _zoom) + _panX;
-            float ay = (ry * _zoom) + _panY;
-
-            _zoom = zoom;
-
-            _panX = ax - (rx * _zoom);
-            _panY = ay - (ry * _zoom);
-
-            _context.Editor.Renderer.Zoom = _zoom;
-            _context.Editor.Renderer.PanX = _panX;
-            _context.Editor.Renderer.PanY = _panY;
         }
 
         /// <summary>

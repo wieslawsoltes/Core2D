@@ -49,18 +49,46 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\MainForm.cs" />
+    <Compile Include="MainForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Renderers\EtoRenderer.cs" />
+    <Compile Include="ZoomState.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dependencies\Compressor.LZ4\Compressor.LZ4.csproj">
+      <Project>{afe57f76-d587-4f4d-b308-507476934d29}</Project>
+      <Name>Compressor.LZ4</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj">
+      <Project>{d40b3bcd-0a26-40bb-960b-9464d248c934}</Project>
+      <Name>FileWriter.Dxf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\FileWriter.Pdf-wpf\FileWriter.Pdf-wpf.csproj">
+      <Project>{5c5a31b5-8f76-42e7-aea8-55b32ca641fa}</Project>
+      <Name>FileWriter.Pdf-wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\Renderer.EtoForms\Renderer.EtoForms.csproj">
+      <Project>{e4f69cd9-1373-4587-8bd2-a2f46ebb4912}</Project>
+      <Name>Renderer.EtoForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\ScriptEngine.Roslyn\ScriptEngine.Roslyn.csproj">
+      <Project>{dfbeacc3-406d-4216-8841-56398b9500d5}</Project>
+      <Name>ScriptEngine.Roslyn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
+      <Project>{08e4e8bf-e513-4a8d-835c-1eed6ecb4a21}</Project>
+      <Name>Serializer.Newtonsoft</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\TextFieldReader.VisualBasic\TextFieldReader.VisualBasic.csproj">
+      <Project>{a5c01125-8391-4966-b724-5f5ec4fe80a9}</Project>
+      <Name>TextFieldReader.VisualBasic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
+      <Project>{87302d12-1184-402d-bf23-a5699f3d0bb4}</Project>
+      <Name>TextFieldWriter.CsvHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Test2d\Test2d.csproj">
       <Project>{60dda5d9-7acc-41af-9123-c96abb6b7828}</Project>
       <Name>Test2d</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TestEDITOR\TestEDITOR.csproj">
-      <Project>{dd2d100a-773a-4893-a3eb-6c63e11b12a9}</Project>
-      <Name>TestEDITOR</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
