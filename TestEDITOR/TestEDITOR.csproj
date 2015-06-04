@@ -135,7 +135,7 @@
     <Compile Include="Renderers\EmfRenderer.cs" />
     <Compile Include="Renderers\PdfRenderer.cs" />
     <Compile Include="Script\RoslynScriptEngine.cs" />
-    <Compile Include="Script\ScriptGlobals.cs" />
+    <Compile Include="Script\RolsynScriptGlobals.cs" />
     <Compile Include="Serializers\ProjectContractResolver.cs" />
     <Compile Include="Serializers\NewtonsoftSerializer.cs" />
   </ItemGroup>
