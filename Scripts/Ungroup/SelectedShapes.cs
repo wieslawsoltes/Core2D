@@ -1,4 +1,5 @@
-﻿ShapeState cs = ShapeState.Connector | ShapeState.None | ShapeState.Input | ShapeState.Output;
+
+ShapeState cs = ShapeState.Connector | ShapeState.None | ShapeState.Input | ShapeState.Output;
 
 void Ungroup(IEnumerable<BaseShape> shapes, Layer layer, bool isGroup)
 {

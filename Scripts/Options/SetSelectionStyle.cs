@@ -1,4 +1,5 @@
-Context.Editor.Project.Options.SelectionStyle =
+
+var selection = 
     ShapeStyle.Create(
         "Selection",
         0x7F, 0x33, 0x33, 0x5F,
@@ -7,3 +8,5 @@ Context.Editor.Project.Options.SelectionStyle =
         LineStyle.Create(
             ArrowStyle.Create(),
             ArrowStyle.Create()));
+
+Context.Editor.Project.Options.SelectionStyle = selection;

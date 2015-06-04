@@ -1,4 +1,5 @@
-﻿var p = Context.Editor.Project;
+
+var p = Context.Editor.Project;
 var c = Context.Editor.Project.CurrentContainer;
 
 var sg = p.StyleGroups.Where(x => x.Name == "Logic-Gates").FirstOrDefault();
@@ -22,6 +23,7 @@ p.CurrentGroupLibrary = gl;
 var groups = gl.Groups.ToBuilder();
 var ps = p.Options.PointShape;
 
+// Logic-Text-Medium-LC
 var styleTextMediumLC = ShapeStyle.Create(
     "Logic-Text-Medium-LC", 
     255, 0, 0, 0, 
@@ -34,6 +36,7 @@ var styleTextMediumLC = ShapeStyle.Create(
     TextHAlignment.Left, TextVAlignment.Center);
 styles.Add(styleTextMediumLC);
 
+// Logic-Text-Medium-CC
 var styleTextMediumCC = ShapeStyle.Create(
     "Logic-Text-Medium-CC", 
     255, 0, 0, 0, 
@@ -46,6 +49,7 @@ var styleTextMediumCC = ShapeStyle.Create(
     TextHAlignment.Center, TextVAlignment.Center);
 styles.Add(styleTextMediumCC);
 
+// Logic-Text-Big-CC
 var styleTextBigCC = ShapeStyle.Create(
     "Logic-Text-Big-CC", 
     255, 0, 0, 0, 
@@ -58,6 +62,7 @@ var styleTextBigCC = ShapeStyle.Create(
     TextHAlignment.Center, TextVAlignment.Center);
 styles.Add(styleTextBigCC);
 
+// Logic-Line-Thick
 var styleLineThick = ShapeStyle.Create(
     "Logic-Line-Thick", 
     255, 0, 0, 0, 

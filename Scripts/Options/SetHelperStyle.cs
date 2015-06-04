@@ -1,4 +1,5 @@
-Context.Editor.Project.Options.HelperStyle =
+
+var helper = 
     ShapeStyle.Create(
         "Helper",
         0xFF, 0xFF, 0xFF, 0x00,
@@ -7,3 +8,5 @@ Context.Editor.Project.Options.HelperStyle =
         LineStyle.Create(
             ArrowStyle.Create(),
             ArrowStyle.Create()));
+
+Context.Editor.Project.Options.HelperStyle = helper;

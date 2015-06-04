@@ -1,3 +1,4 @@
+
 void Lines(BaseShape ps, int n, double width, double height, IList<ShapeStyle> styles, Layer layer, Random rand)
 {
     var sb = new byte[n];

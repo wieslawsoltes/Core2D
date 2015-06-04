@@ -1,4 +1,5 @@
-﻿IEnumerable<XPoint> GetPoints(IEnumerable<BaseShape> shapes)
+
+IEnumerable<XPoint> GetPoints(IEnumerable<BaseShape> shapes)
 {
     if (shapes == null)
         yield break;

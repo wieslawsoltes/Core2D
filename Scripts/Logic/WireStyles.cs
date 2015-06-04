@@ -1,3 +1,4 @@
+
 var p = Context.Editor.Project;
 var sg = p.StyleGroups.Where(x => x.Name == "Logic-Wires").FirstOrDefault();
 if (sg == null)
@@ -25,6 +26,7 @@ var thickness = 2.0;
     var style = ShapeStyle.Create(name, stroke, fill, thickness, lineStyle, textStyle);
     styles.Add(style);
 }
+
 // wire start inverted
 {
     var name = "Logic-Wire-Start-Inverted";
@@ -37,6 +39,7 @@ var thickness = 2.0;
     var style = ShapeStyle.Create(name, stroke, fill, thickness, lineStyle, textStyle);
     styles.Add(style);
 }
+
 // wire end inverted
 {
     var name = "Logic-Wire-End-Inverted";
@@ -49,6 +52,7 @@ var thickness = 2.0;
     var style = ShapeStyle.Create(name, stroke, fill, thickness, lineStyle, textStyle);
     styles.Add(style);
 }
+
 // wire start & end inverted
 {
     var name = "Logic-Wire-Start/End-Inverted";

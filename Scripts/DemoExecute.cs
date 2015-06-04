@@ -27,4 +27,5 @@ void Animate(int delay, int count)
 
 var delay = (int)(1000.0 / 10.0);
 var count = 100;
+
 Animate(delay, count);

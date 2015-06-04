@@ -1,4 +1,5 @@
-﻿void SetStyle(IEnumerable<BaseShape> shapes, ShapeStyle style)
+
+void SetStyle(IEnumerable<BaseShape> shapes, ShapeStyle style)
 {
     if (shapes == null || style == null)
         return;
@@ -12,5 +13,7 @@
 var layer = Context?.Editor?.Project?.CurrentContainer?.CurrentLayer;
 var style = Context?.Editor?.Project?.CurrentStyleGroup?.CurrentStyle;
 var shapes = Context?.Editor?.Renderer?.SelectedShapes;
+
 SetStyle(shapes, style);
+
 layer?.Invalidate();
