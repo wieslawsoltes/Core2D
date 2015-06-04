@@ -896,339 +896,325 @@ namespace TestEDITOR
 
                 _commands = new EditorCommands();
 
-                _commands.NewCommand = new DelegateCommand<object>(
-                    (item) => NewCommandHandler(item),
-                    (item) => IsEditMode());
+                _commands.NewCommand = 
+                    new DelegateCommand<object>(
+                        (item) => NewCommandHandler(item),
+                        (item) => IsEditMode());
 
-                _commands.ExitCommand = new DelegateCommand(
-                    () => ExitCommandHandler(),
-                    () => true);
+                _commands.ExitCommand = 
+                    new DelegateCommand(
+                        () => ExitCommandHandler(),
+                        () => true);
 
-                _commands.UndoCommand = new DelegateCommand(
-                    () => UndoCommandHandler(),
-                    () => IsEditMode() /* && CanUndo() */);
+                _commands.UndoCommand = 
+                    new DelegateCommand(
+                        () => UndoCommandHandler(),
+                        () => IsEditMode() /* && CanUndo() */);
 
-                _commands.RedoCommand = new DelegateCommand(
-                    () => RedoCommandHandler(),
-                    () => IsEditMode() /* && CanRedo() */);
+                _commands.RedoCommand = 
+                    new DelegateCommand(
+                        () => RedoCommandHandler(),
+                        () => IsEditMode() /* && CanRedo() */);
 
-                _commands.CutCommand = new DelegateCommand<object>(
-                    (item) => CutCommandHandler(item),
-                    (item) => IsEditMode() /* && CanCopy() */);
+                _commands.CutCommand = 
+                    new DelegateCommand<object>(
+                        (item) => CutCommandHandler(item),
+                        (item) => IsEditMode() /* && CanCopy() */);
 
-                _commands.CopyCommand = new DelegateCommand<object>(
-                    (item) => CopyCommandHandler(item),
-                    (item) => IsEditMode() /* && CanCopy() */);
+                _commands.CopyCommand = 
+                    new DelegateCommand<object>(
+                        (item) => CopyCommandHandler(item),
+                        (item) => IsEditMode() /* && CanCopy() */);
 
-                _commands.PasteCommand = new DelegateCommand<object>(
-                    (item) => PasteCommandHandler(item),
-                    (item) => IsEditMode() /* && CanPaste() */);
+                _commands.PasteCommand = 
+                    new DelegateCommand<object>(
+                        (item) => PasteCommandHandler(item),
+                        (item) => IsEditMode() /* && CanPaste() */);
 
-                _commands.DeleteCommand = new DelegateCommand<object>(
-                    (item) => DeleteCommandHandler(item),
-                    (item) => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+                _commands.DeleteCommand = 
+                    new DelegateCommand<object>(
+                        (item) => DeleteCommandHandler(item),
+                        (item) => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
-                _commands.SelectAllCommand = new DelegateCommand(
-                    () =>
-                    {
-                        SelectAll();
-                    },
-                    () => IsEditMode());
+                _commands.SelectAllCommand = 
+                    new DelegateCommand(
+                        () => SelectAll(),
+                        () => IsEditMode());
 
-                _commands.ClearAllCommand = new DelegateCommand(
-                    () =>
-                    {
-                        ClearAll();
-                    },
-                    () => IsEditMode());
+                _commands.ClearAllCommand = 
+                    new DelegateCommand(
+                        () => ClearAll(),
+                        () => IsEditMode());
 
-                _commands.GroupCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.GroupSelected();
-                    },
-                    () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+                _commands.GroupCommand = 
+                    new DelegateCommand(
+                        () => _editor.GroupSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
-                _commands.GroupLayerCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.GroupCurrentLayer();
-                    },
-                    () => IsEditMode());
+                _commands.GroupLayerCommand = 
+                    new DelegateCommand(
+                        () => _editor.GroupCurrentLayer(),
+                        () => IsEditMode());
 
-                _commands.ToolNoneCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.CurrentTool = Tool.None;
-                    },
-                    () => IsEditMode());
+                _commands.ToolNoneCommand = 
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.None,
+                        () => IsEditMode());
 
-                _commands.ToolSelectionCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.CurrentTool = Tool.Selection;
-                    },
-                    () => IsEditMode());
+                _commands.ToolSelectionCommand = 
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.Selection,
+                        () => IsEditMode());
 
-                _commands.ToolGroupCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.CurrentTool = Tool.Group;
-                    },
-                    () => IsEditMode());
+                _commands.ToolGroupCommand = 
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.Group,
+                        () => IsEditMode());
 
-                _commands.ToolPointCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.CurrentTool = Tool.Point;
-                    },
-                    () => IsEditMode());
+                _commands.ToolPointCommand = 
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.Point,
+                        () => IsEditMode());
 
-                _commands.ToolLineCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.CurrentTool = Tool.Line;
-                    },
-                    () => IsEditMode());
+                _commands.ToolLineCommand = 
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.Line,
+                        () => IsEditMode());
 
-                _commands.ToolRectangleCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.CurrentTool = Tool.Rectangle;
-                    },
-                    () => IsEditMode());
+                _commands.ToolRectangleCommand = 
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.Rectangle,
+                        () => IsEditMode());
 
-                _commands.ToolEllipseCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.CurrentTool = Tool.Ellipse;
-                    },
-                    () => IsEditMode());
+                _commands.ToolEllipseCommand = 
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.Ellipse,
+                        () => IsEditMode());
 
-                _commands.ToolArcCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.CurrentTool = Tool.Arc;
-                    },
-                    () => IsEditMode());
+                _commands.ToolArcCommand = 
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.Arc,
+                        () => IsEditMode());
 
-                _commands.ToolBezierCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.CurrentTool = Tool.Bezier;
-                    },
-                    () => IsEditMode());
+                _commands.ToolBezierCommand = 
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.Bezier,
+                        () => IsEditMode());
 
-                _commands.ToolQBezierCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.CurrentTool = Tool.QBezier;
-                    },
-                    () => IsEditMode());
+                _commands.ToolQBezierCommand = 
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.QBezier,
+                        () => IsEditMode());
 
-                _commands.ToolTextCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.CurrentTool = Tool.Text;
-                    },
-                    () => IsEditMode());
+                _commands.ToolTextCommand = 
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.Text,
+                        () => IsEditMode());
 
-                _commands.ToolImageCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.CurrentTool = Tool.Image;
-                    },
-                    () => IsEditMode());
+                _commands.ToolImageCommand = 
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.Image,
+                        () => IsEditMode());
 
-                _commands.ToolPathCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.CurrentTool = Tool.Path;
-                    },
-                    () => IsEditMode());
+                _commands.ToolPathCommand = 
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.Path,
+                        () => IsEditMode());
 
-                _commands.EvalScriptCommand = new DelegateCommand<string>(
-                    (path) =>
-                    {
-                        Eval(path);
-                    },
-                    (path) => IsEditMode());
+                _commands.EvalScriptCommand = 
+                    new DelegateCommand<string>(
+                        (path) => Eval(path),
+                        (path) => IsEditMode());
 
-                _commands.DefaultIsFilledCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.Project.Options.DefaultIsFilled = !_editor.Project.Options.DefaultIsFilled;
-                    },
-                    () => IsEditMode());
+                _commands.DefaultIsFilledCommand = 
+                    new DelegateCommand(
+                        () => _editor.Project.Options.DefaultIsFilled = !_editor.Project.Options.DefaultIsFilled,
+                        () => IsEditMode());
 
-                _commands.SnapToGridCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.Project.Options.SnapToGrid = !_editor.Project.Options.SnapToGrid;
-                    },
-                    () => IsEditMode());
+                _commands.SnapToGridCommand = 
+                    new DelegateCommand(
+                        () => _editor.Project.Options.SnapToGrid = !_editor.Project.Options.SnapToGrid,
+                        () => IsEditMode());
 
-                _commands.TryToConnectCommand = new DelegateCommand(
-                    () =>
-                    {
-                        _editor.Project.Options.TryToConnect = !_editor.Project.Options.TryToConnect;
-                    },
-                    () => IsEditMode());
+                _commands.TryToConnectCommand = 
+                    new DelegateCommand(
+                        () => _editor.Project.Options.TryToConnect = !_editor.Project.Options.TryToConnect,
+                        () => IsEditMode());
 
-                _commands.AddDatabaseCommand = new DelegateCommand(
-                    () => AddDatabaseCommandHandler(),
-                    () => IsEditMode());
+                _commands.AddDatabaseCommand = 
+                    new DelegateCommand(
+                        () => AddDatabaseCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.RemoveDatabaseCommand = new DelegateCommand<object>(
-                    (db) => RemoveDatabaseCommandHandler(db),
-                    (db) => IsEditMode());
+                _commands.RemoveDatabaseCommand = 
+                    new DelegateCommand<object>(
+                        (db) => RemoveDatabaseCommandHandler(db),
+                        (db) => IsEditMode());
 
-                _commands.AddRecordCommand = new DelegateCommand(
-                    () => AddRecordCommandHandler(),
-                    () => IsEditMode());
+                _commands.AddRecordCommand = 
+                    new DelegateCommand(
+                        () => AddRecordCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.RemoveRecordCommand = new DelegateCommand(
-                    () => RemoveRecordCommandHandler(),
-                    () => IsEditMode());
+                _commands.RemoveRecordCommand = 
+                    new DelegateCommand(
+                        () => RemoveRecordCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.AddBindingCommand = new DelegateCommand<object>(
-                    (owner) => AddBindingCommandHandler(owner),
-                    (owner) => IsEditMode());
+                _commands.AddBindingCommand = 
+                    new DelegateCommand<object>(
+                        (owner) => AddBindingCommandHandler(owner),
+                        (owner) => IsEditMode());
 
-                _commands.RemoveBindingCommand = new DelegateCommand<object>(
-                    (parameter) => RemoveBindingCommandHandler(parameter),
-                    (parameter) => IsEditMode());
+                _commands.RemoveBindingCommand = 
+                    new DelegateCommand<object>(
+                        (parameter) => RemoveBindingCommandHandler(parameter),
+                        (parameter) => IsEditMode());
 
-                _commands.AddPropertyCommand = new DelegateCommand<object>(
-                    (owner) => AddPropertyCommandHandler(owner),
-                    (owner) => IsEditMode());
+                _commands.AddPropertyCommand = 
+                    new DelegateCommand<object>(
+                        (owner) => AddPropertyCommandHandler(owner),
+                        (owner) => IsEditMode());
 
-                _commands.RemovePropertyCommand = new DelegateCommand<object>(
-                    (parameter) => RemovePropertyCommandHandler(parameter),
-                    (parameter) => IsEditMode());
+                _commands.RemovePropertyCommand = 
+                    new DelegateCommand<object>(
+                        (parameter) => RemovePropertyCommandHandler(parameter),
+                        (parameter) => IsEditMode());
                 
-                _commands.AddGroupLibraryCommand = new DelegateCommand(
-                    () => AddGroupLibraryCommandHandler(),
-                    () => IsEditMode());
+                _commands.AddGroupLibraryCommand = 
+                    new DelegateCommand(
+                        () => AddGroupLibraryCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.RemoveGroupLibraryCommand = new DelegateCommand(
-                    () => RemoveGroupLibraryCommandHandler(),
-                    () => IsEditMode());
+                _commands.RemoveGroupLibraryCommand = 
+                    new DelegateCommand(
+                        () => RemoveGroupLibraryCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.AddGroupCommand = new DelegateCommand(
-                    () => AddGroupCommandHandler(),
-                    () => IsEditMode());
+                _commands.AddGroupCommand = 
+                    new DelegateCommand(
+                        () => AddGroupCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.RemoveGroupCommand = new DelegateCommand(
-                    () => RemoveGroupCommandHandler(),
-                    () => IsEditMode());
+                _commands.RemoveGroupCommand = 
+                    new DelegateCommand(
+                        () => RemoveGroupCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.AddLayerCommand = new DelegateCommand(
-                    () => AddLayerCommandHandler(),
-                    () => IsEditMode());
+                _commands.AddLayerCommand = 
+                    new DelegateCommand(
+                        () => AddLayerCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.RemoveLayerCommand = new DelegateCommand(
-                    () => RemoveLayerCommandHandler(),
-                    () => IsEditMode());
+                _commands.RemoveLayerCommand = 
+                    new DelegateCommand(
+                        () => RemoveLayerCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.AddStyleGroupCommand = new DelegateCommand(
-                    () => AddStyleGroupCommandHandler(),
-                    () => IsEditMode());
+                _commands.AddStyleGroupCommand = 
+                    new DelegateCommand(
+                        () => AddStyleGroupCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.RemoveStyleGroupCommand = new DelegateCommand(
-                    () => RemoveStyleGroupCommandHandler(),
-                    () => IsEditMode());
+                _commands.RemoveStyleGroupCommand = 
+                    new DelegateCommand(
+                        () => RemoveStyleGroupCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.AddStyleCommand = new DelegateCommand(
-                    () => AddStyleCommandHandler(),
-                    () => IsEditMode());
+                _commands.AddStyleCommand = 
+                    new DelegateCommand(
+                        () => AddStyleCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.RemoveStyleCommand = new DelegateCommand(
-                    () => RemoveStyleCommandHandler(),
-                    () => IsEditMode());
+                _commands.RemoveStyleCommand = 
+                    new DelegateCommand(
+                        () => RemoveStyleCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.RemoveShapeCommand = new DelegateCommand(
-                    () => RemoveShapeCommandHandler(),
-                    () => IsEditMode());
+                _commands.RemoveShapeCommand = 
+                    new DelegateCommand(
+                        () => RemoveShapeCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.StartSimulationCommand = new DelegateCommand(
-                    () =>
-                    {
-                        StartSimulation();
-                    },
-                    () => IsEditMode());
+                _commands.StartSimulationCommand = 
+                    new DelegateCommand(
+                        () => StartSimulation(),
+                        () => IsEditMode());
 
-                _commands.StopSimulationCommand = new DelegateCommand(
-                    () =>
-                    {
-                        StopSimulation();
-                    },
-                    () => IsSimulationMode());
+                _commands.StopSimulationCommand = 
+                    new DelegateCommand(
+                        () => StopSimulation(),
+                        () => IsSimulationMode());
 
-                _commands.RestartSimulationCommand = new DelegateCommand(
-                    () =>
-                    {
-                        RestartSimulation();
-                    },
-                    () => IsSimulationMode());
+                _commands.RestartSimulationCommand = 
+                    new DelegateCommand(
+                        () => RestartSimulation(),
+                        () => IsSimulationMode());
 
-                _commands.PauseSimulationCommand = new DelegateCommand(
-                    () =>
-                    {
-                        PauseSimulation();
-                    },
-                    () => IsSimulationMode());
+                _commands.PauseSimulationCommand = 
+                    new DelegateCommand(
+                        () => PauseSimulation(),
+                        () => IsSimulationMode());
 
-                _commands.TickSimulationCommand = new DelegateCommand(
-                    () =>
-                    {
-                        TickSimulation();
-                    },
-                    () => IsSimulationMode() && IsSimulationPaused);
+                _commands.TickSimulationCommand = 
+                    new DelegateCommand(
+                        () => TickSimulation(),
+                        () => IsSimulationMode() && IsSimulationPaused);
 
-                _commands.AddTemplateCommand = new DelegateCommand(
-                    () => AddTemplateCommandHandler(),
-                    () => IsEditMode());
+                _commands.AddTemplateCommand = 
+                    new DelegateCommand(
+                        () => AddTemplateCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.RemoveTemplateCommand = new DelegateCommand(
-                    () => RemoveTemplateCommandHandler(),
-                    () => IsEditMode());
+                _commands.RemoveTemplateCommand = 
+                    new DelegateCommand(
+                        () => RemoveTemplateCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.EditTemplateCommand = new DelegateCommand(
-                    () => EditTemplateCommandHandler(),
-                    () => IsEditMode());
+                _commands.EditTemplateCommand = 
+                    new DelegateCommand(
+                        () => EditTemplateCommandHandler(),
+                        () => IsEditMode());
 
-                _commands.ApplyTemplateCommand = new DelegateCommand<object>(
-                    (item) => ApplyTemplateCommandHandler(item),
-                    (item) => IsEditMode());
+                _commands.ApplyTemplateCommand = 
+                    new DelegateCommand<object>(
+                        (item) => ApplyTemplateCommandHandler(item),
+                        (item) => IsEditMode());
 
-                _commands.SelectedItemChangedCommand = new DelegateCommand<object>(
-                    (item) => SelectedItemChangedCommandHandler(item),
-                    (item) => IsEditMode());
+                _commands.SelectedItemChangedCommand = 
+                    new DelegateCommand<object>(
+                        (item) => SelectedItemChangedCommandHandler(item),
+                        (item) => IsEditMode());
 
-                _commands.AddContainerCommand = new DelegateCommand<object>(
-                    (item) => AddContainerCommandHandler(item),
-                    (item) => IsEditMode());
+                _commands.AddContainerCommand = 
+                    new DelegateCommand<object>(
+                        (item) => AddContainerCommandHandler(item),
+                        (item) => IsEditMode());
 
-                _commands.InsertContainerBeforeCommand = new DelegateCommand<object>(
-                    (item) => InsertContainerBeforeCommandHandler(item),
-                    (item) => IsEditMode());
+                _commands.InsertContainerBeforeCommand = 
+                    new DelegateCommand<object>(
+                        (item) => InsertContainerBeforeCommandHandler(item),
+                        (item) => IsEditMode());
 
-                _commands.InsertContainerAfterCommand = new DelegateCommand<object>(
-                    (item) => InsertContainerAfterCommandHandler(item),
-                    (item) => IsEditMode());
+                _commands.InsertContainerAfterCommand = 
+                    new DelegateCommand<object>(
+                        (item) => InsertContainerAfterCommandHandler(item),
+                        (item) => IsEditMode());
 
-                _commands.AddDocumentCommand = new DelegateCommand<object>(
-                    (item) => AddDocumentCommandHandler(item),
-                    (item) => IsEditMode());
+                _commands.AddDocumentCommand = 
+                    new DelegateCommand<object>(
+                        (item) => AddDocumentCommandHandler(item),
+                        (item) => IsEditMode());
 
-                _commands.InsertDocumentBeforeCommand = new DelegateCommand<object>(
-                    (item) => InsertDocumentBeforeCommandHandler(item),
-                    (item) => IsEditMode());
+                _commands.InsertDocumentBeforeCommand = 
+                    new DelegateCommand<object>(
+                        (item) => InsertDocumentBeforeCommandHandler(item),
+                        (item) => IsEditMode());
 
-                _commands.InsertDocumentAfterCommand = new DelegateCommand<object>(
-                    (item) => InsertDocumentAfterCommandHandler(item),
-                    (item) => IsEditMode());
+                _commands.InsertDocumentAfterCommand = 
+                    new DelegateCommand<object>(
+                        (item) => InsertDocumentAfterCommandHandler(item),
+                        (item) => IsEditMode());
 
                 WarmUpCSharpScript();
             }
