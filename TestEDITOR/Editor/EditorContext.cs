@@ -23,6 +23,7 @@ namespace TestEDITOR
         private EditorCommands _commands;
         private Editor _editor;
         private IView _view;
+        private IRenderer _renderer;
         private ITextClipboard _textClipboard;
         private ISerializer _serializer;
         private ICompressor _compressor;
@@ -54,6 +55,24 @@ namespace TestEDITOR
         {
             get { return _editor; }
             set { Update(ref _editor, value); }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public IView View
+        {
+            get { return _view; }
+            set { Update(ref _view, value); }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public IRenderer Renderer
+        {
+            get { return _renderer; }
+            set { Update(ref _renderer, value); }
         }
 
         /// <summary>
@@ -854,35 +873,17 @@ namespace TestEDITOR
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
-        /// <param name="view"></param>
-        /// <param name="renderer"></param>
-        /// <param name="clipboard"></param>
-        /// <param name="serializer"></param>
-        /// <param name="compressor"></param>
-        /// <param name="engine"></param>
-        public void Initialize(
-            IView view,
-            IRenderer renderer,
-            ITextClipboard clipboard,
-            ISerializer serializer,
-            ICompressor compressor,
-            IScriptEngine engine)
+        public void InitializeEditor()
         {
             try
             {
-                _view = view;
-                _textClipboard = clipboard;
-                _serializer = serializer;
-                _compressor = compressor;
-                _scriptEngine = engine;
-
                 _editor = Editor.Create(
                     DefaultProject(),
-                    renderer,
-                    serializer,
-                    compressor);
+                    _renderer,
+                    _serializer,
+                    _compressor);
 
                 (_editor.Renderer as ObservableObject).PropertyChanged +=
                     (s, e) =>
@@ -1230,6 +1231,114 @@ namespace TestEDITOR
                     (item) => IsEditMode());
 
                 WarmUpCSharpScript();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        private void WarmUpCSharpScript()
+        {
+            // NOTE: Warmup Roslyn script engine.
+            try
+            {
+                Task.Run(
+                    () =>
+                    {
+                        Eval("Action a = () => { };", this, Execute);
+                    });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void InitializeSctipts()
+        {
+            try
+            {
+#if DEBUG
+                _rootScriptsPath = "../../../Scripts";
+#else
+                _rootScriptsPath = "Scripts";
+#endif
+                ScriptDirectories = ImmutableArray.Create<ScriptDirectory>();
+
+                Action update = () =>
+                {
+                    try
+                    {
+                        ScriptDirectories =
+                            ScriptDirectory.CreateScriptDirectories(_rootScriptsPath);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.Print(ex.Message);
+                        System.Diagnostics.Debug.Print(ex.StackTrace);
+                    }
+                };
+
+                if (System.IO.Directory.Exists(_rootScriptsPath))
+                {
+                    update();
+
+                    _watcher = new System.IO.FileSystemWatcher();
+                    _watcher.Path = _rootScriptsPath;
+                    _watcher.Filter = "*.*";
+                    _watcher.NotifyFilter =
+                        System.IO.NotifyFilters.LastAccess
+                        | System.IO.NotifyFilters.LastWrite
+                        | System.IO.NotifyFilters.FileName
+                        | System.IO.NotifyFilters.DirectoryName;
+                    _watcher.IncludeSubdirectories = true;
+                    _watcher.Filter = "*.*";
+                    _watcher.Changed += (s, e) => update();
+                    _watcher.Created += (s, e) => update();
+                    _watcher.Deleted += (s, e) => update();
+                    _watcher.Renamed += (s, e) => update();
+                    _watcher.EnableRaisingEvents = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void InitializeSimulation()
+        {
+            try
+            {
+                _simulationFactory = new BoolSimulationFactory();
+                _simulationFactory.Register(new SignalSimulation());
+                _simulationFactory.Register(new InputSimulation());
+                _simulationFactory.Register(new OutputSimulation());
+                _simulationFactory.Register(new ShortcutSimulation());
+                _simulationFactory.Register(new AndSimulation());
+                _simulationFactory.Register(new OrSimulation());
+                _simulationFactory.Register(new InverterSimulation());
+                _simulationFactory.Register(new XorSimulation());
+                _simulationFactory.Register(new TimerOnSimulation());
+                _simulationFactory.Register(new TimerOffSimulation());
+                _simulationFactory.Register(new TimerPulseSimulation());
+                _simulationFactory.Register(new MemoryResetPriorityVSimulation());
+                _simulationFactory.Register(new MemorySetPriorityVSimulation());
+                _simulationFactory.Register(new MemoryResetPrioritySimulation());
+                _simulationFactory.Register(new MemorySetPrioritySimulation());
             }
             catch (Exception ex)
             {
@@ -2832,114 +2941,6 @@ namespace TestEDITOR
                 // TODO: Add history snapshot.
                 _editor.Project.CurrentContainer.Clear();
                 _editor.Project.CurrentContainer.Invalidate();
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        private void WarmUpCSharpScript()
-        {
-            // NOTE: Warmup Roslyn script engine.
-            try
-            {
-                Task.Run(
-                    () =>
-                    {
-                        Eval("Action a = () => { };", this, Execute);
-                    });
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void InitializeSctipts()
-        {
-            try
-            {
-#if DEBUG
-                _rootScriptsPath = "../../../Scripts";
-#else
-                _rootScriptsPath = "Scripts";
-#endif
-                ScriptDirectories = ImmutableArray.Create<ScriptDirectory>();
-
-                Action update = () =>
-                {
-                    try
-                    {
-                        ScriptDirectories =
-                            ScriptDirectory.CreateScriptDirectories(_rootScriptsPath);
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Debug.Print(ex.Message);
-                        System.Diagnostics.Debug.Print(ex.StackTrace);
-                    }
-                };
-
-                if (System.IO.Directory.Exists(_rootScriptsPath))
-                {
-                    update();
-
-                    _watcher = new System.IO.FileSystemWatcher();
-                    _watcher.Path = _rootScriptsPath;
-                    _watcher.Filter = "*.*";
-                    _watcher.NotifyFilter =
-                        System.IO.NotifyFilters.LastAccess
-                        | System.IO.NotifyFilters.LastWrite
-                        | System.IO.NotifyFilters.FileName
-                        | System.IO.NotifyFilters.DirectoryName;
-                    _watcher.IncludeSubdirectories = true;
-                    _watcher.Filter = "*.*";
-                    _watcher.Changed += (s, e) => update();
-                    _watcher.Created += (s, e) => update();
-                    _watcher.Deleted += (s, e) => update();
-                    _watcher.Renamed += (s, e) => update();
-                    _watcher.EnableRaisingEvents = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void InitializeSimulation()
-        {
-            try
-            {
-                _simulationFactory = new BoolSimulationFactory();
-                _simulationFactory.Register(new SignalSimulation());
-                _simulationFactory.Register(new InputSimulation());
-                _simulationFactory.Register(new OutputSimulation());
-                _simulationFactory.Register(new ShortcutSimulation());
-                _simulationFactory.Register(new AndSimulation());
-                _simulationFactory.Register(new OrSimulation());
-                _simulationFactory.Register(new InverterSimulation());
-                _simulationFactory.Register(new XorSimulation());
-                _simulationFactory.Register(new TimerOnSimulation());
-                _simulationFactory.Register(new TimerOffSimulation());
-                _simulationFactory.Register(new TimerPulseSimulation());
-                _simulationFactory.Register(new MemoryResetPriorityVSimulation());
-                _simulationFactory.Register(new MemorySetPriorityVSimulation());
-                _simulationFactory.Register(new MemoryResetPrioritySimulation());
-                _simulationFactory.Register(new MemorySetPrioritySimulation());
             }
             catch (Exception ex)
             {

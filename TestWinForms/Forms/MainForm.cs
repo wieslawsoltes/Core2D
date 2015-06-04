@@ -44,14 +44,17 @@ namespace TestWinForms
                 | ControlStyles.SupportsTransparentBackColor,
                 true);
 
-            var context = new EditorContext();
-            context.Initialize(
-                this, 
-                new EmfRenderer(72.0 / 96.0), 
-                new TextClipboard(),
-                new NewtonsoftSerializer(),
-                new LZ4CodecCompressor(),
-                new RoslynScriptEngine());
+            var context = new EditorContext()
+            {
+                View = this,
+                Renderer = new EmfRenderer(72.0 / 96.0),
+                TextClipboard = new TextClipboard(),
+                Serializer = new NewtonsoftSerializer(),
+                Compressor = new LZ4CodecCompressor(),
+                ScriptEngine = new RoslynScriptEngine(),
+                Execute = (action) => action()
+            };
+            context.InitializeEditor();
             context.InitializeSctipts();
             context.InitializeSimulation();
             context.Editor.Renderer.DrawShapeState = ShapeState.Visible;

@@ -59,15 +59,17 @@ namespace TestEtoForms
         /// </summary>
         private void InitializeContext()
         {
-            _context = new EditorContext();
-
-            _context.Initialize(
-                this,
-                new EtoRenderer(72.0 / 96.0),
-                new TextClipboard(),
-                new NewtonsoftSerializer(),
-                new LZ4CodecCompressor(),
-                new RoslynScriptEngine());
+            _context = new EditorContext()
+            {
+                View = this,
+                Renderer = new EtoRenderer(72.0 / 96.0),
+                TextClipboard = new TextClipboard(),
+                Serializer = new NewtonsoftSerializer(),
+                Compressor = new LZ4CodecCompressor(),
+                ScriptEngine = new RoslynScriptEngine(),
+                Execute = (action) => action()
+            };
+            _context.InitializeEditor();
             _context.InitializeSctipts();
             _context.InitializeSimulation();
             _context.Editor.Renderer.DrawShapeState = ShapeState.Visible;

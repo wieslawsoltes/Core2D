@@ -75,15 +75,17 @@ namespace Test.Windows
         /// </summary>
         private void InitializeContext()
         {
-            var context = new EditorContext();
-            context.Execute = (action) => Dispatcher.Invoke(action);
-            context.Initialize(
-                this,
-                WpfRenderer.Create(),
-                new TextClipboard(),
-                new NewtonsoftSerializer(),
-                new LZ4CodecCompressor(),
-                new RoslynScriptEngine());
+            var context = new EditorContext()
+            {
+                View = this,
+                Renderer = WpfRenderer.Create(),
+                TextClipboard = new TextClipboard(),
+                Serializer = new NewtonsoftSerializer(),
+                Compressor = new LZ4CodecCompressor(),
+                ScriptEngine = new RoslynScriptEngine(),
+                Execute = (action) => Dispatcher.Invoke(action)
+            };
+            context.InitializeEditor();
             context.InitializeSctipts();
             context.InitializeSimulation();
             context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
