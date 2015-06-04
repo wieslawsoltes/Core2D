@@ -86,10 +86,6 @@
       <Project>{60dda5d9-7acc-41af-9123-c96abb6b7828}</Project>
       <Name>Test2d</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TestEDITOR\TestEDITOR.csproj">
-      <Project>{dd2d100a-773a-4893-a3eb-6c63e11b12a9}</Project>
-      <Name>TestEDITOR</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TestEtoForms\TestEtoForms.csproj">
       <Project>{c2d17c89-b904-4bce-8bce-fc65020de7bb}</Project>
       <Name>TestEtoForms</Name>
