@@ -270,6 +270,10 @@ namespace TestEDITOR
             return project;
         }
  
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         private void NewCommandHandler(object item)
         {
             if (item is Container)
@@ -320,21 +324,34 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void ExitCommandHandler()
         {
             _view.Close();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void UndoCommandHandler()
         {
             Undo();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void RedoCommandHandler()
         {
             Redo();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         private void CutCommandHandler(object item)
         {
             if (item is Container)
@@ -357,6 +374,10 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         private void CopyCommandHandler(object item)
         {
             if (item is Container)
@@ -377,6 +398,10 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         private void PasteCommandHandler(object item)
         {
             if (item is Container)
@@ -440,6 +465,10 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         private void DeleteCommandHandler(object item)
         {
             if (item is Container)
@@ -458,6 +487,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void AddDatabaseCommandHandler()
         {
             var builder = ImmutableArray.CreateBuilder<Column>();
@@ -478,6 +510,10 @@ namespace TestEDITOR
             _editor.Project.CurrentDatabase = db;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="db"></param>
         private void RemoveDatabaseCommandHandler(object db)
         {
             if (db != null && db is Database)
@@ -491,6 +527,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void AddRecordCommandHandler()
         {
             if (_editor.Project.CurrentDatabase != null)
@@ -509,6 +548,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void RemoveRecordCommandHandler()
         {
             if (_editor.Project.CurrentDatabase != null)
@@ -526,6 +568,10 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="owner"></param>
         private void AddBindingCommandHandler(object owner)
         {
             if (owner != null)
@@ -546,6 +592,10 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameter"></param>
         private void RemoveBindingCommandHandler(object parameter)
         {
             if (parameter != null && parameter is ShapeBindingParameter)
@@ -567,6 +617,10 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="owner"></param>
         private void AddPropertyCommandHandler(object owner)
         {
             if (owner != null)
@@ -600,6 +654,10 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameter"></param>
         private void RemovePropertyCommandHandler(object parameter)
         {
             if (parameter != null && parameter is ShapePropertyParameter)
@@ -632,6 +690,9 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void AddGroupLibraryCommandHandler()
         {
             var gl = GroupLibrary.Create("New");
@@ -642,11 +703,17 @@ namespace TestEDITOR
             _editor.Project.GroupLibraries = next;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void RemoveGroupLibraryCommandHandler()
         {
             _editor.RemoveCurrentGroupLibrary();
         }
  
+        /// <summary>
+        /// 
+        /// </summary>
         private void AddGroupCommandHandler()
         {
             var group = _editor.Renderer.SelectedShape;
@@ -667,11 +734,17 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void RemoveGroupCommandHandler()
         {
             _editor.RemoveCurrentGroup();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void AddLayerCommandHandler()
         {
             var container = _editor.Project.CurrentContainer;
@@ -681,11 +754,17 @@ namespace TestEDITOR
             container.Layers = next;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void RemoveLayerCommandHandler()
         {
             _editor.RemoveCurrentLayer();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void AddStyleGroupCommandHandler()
         {
             var sg = ShapeStyleGroup.Create("New");
@@ -696,11 +775,17 @@ namespace TestEDITOR
             _editor.Project.StyleGroups = next;
         }
  
+        /// <summary>
+        /// 
+        /// </summary>
         private void RemoveStyleGroupCommandHandler()
         {
             _editor.RemoveCurrentStyleGroup();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void AddStyleCommandHandler()
         {
             var sg = _editor.Project.CurrentStyleGroup;
@@ -710,16 +795,25 @@ namespace TestEDITOR
             sg.Styles = next;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void RemoveStyleCommandHandler()
         {
             _editor.RemoveCurrentStyle();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void RemoveShapeCommandHandler()
         {
             _editor.RemoveCurrentShape();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void AddTemplateCommandHandler()
         {
             var previous = _editor.Project.Templates;
@@ -728,11 +822,17 @@ namespace TestEDITOR
             _editor.Project.Templates = next;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void RemoveTemplateCommandHandler()
         {
             _editor.RemoveCurrentTemplate();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void EditTemplateCommandHandler()
         {
             var template = _editor.Project.CurrentTemplate;
@@ -743,6 +843,10 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         private void ApplyTemplateCommandHandler(object item)
         {
             if (item is Container)
@@ -754,6 +858,10 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         private void SelectedItemChangedCommandHandler(object item)
         {
             if (item is Container)
@@ -774,6 +882,10 @@ namespace TestEDITOR
             }
         }
   
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         private void AddContainerCommandHandler(object item)
         {
             var container = DefaultContainer(_editor.Project);
@@ -787,6 +899,10 @@ namespace TestEDITOR
             _editor.Project.CurrentContainer = container;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         private void InsertContainerBeforeCommandHandler(object item)
         {
             if (item is Container)
@@ -805,6 +921,10 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         private void InsertContainerAfterCommandHandler(object item)
         {
             if (item is Container)
@@ -823,6 +943,10 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         private void AddDocumentCommandHandler(object item)
         {
             var document = DefaultDocument(_editor.Project);
@@ -836,6 +960,10 @@ namespace TestEDITOR
             _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         private void InsertDocumentBeforeCommandHandler(object item)
         {
             if (item is Document)
@@ -854,6 +982,10 @@ namespace TestEDITOR
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         private void InsertDocumentAfterCommandHandler(object item)
         {
             if (item is Document)
