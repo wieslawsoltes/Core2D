@@ -140,6 +140,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\ArgbColorToBrushConverter.cs" />
+    <Compile Include="Converters\ArgbColorToBrushMultiConverter.cs" />
     <Compile Include="Converters\DoubleToStringConverter.cs" />
     <Compile Include="Converters\FlagsEnumConverter.cs" />
     <Compile Include="Converters\ObjectEqualityConverter.cs" />
