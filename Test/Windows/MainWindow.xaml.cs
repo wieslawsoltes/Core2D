@@ -78,11 +78,15 @@ namespace Test.Windows
             var context = new EditorContext()
             {
                 View = this,
-                Renderer = WpfRenderer.Create(),
+                Renderer = new WpfRenderer(),
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),
                 Compressor = new LZ4CodecCompressor(),
                 ScriptEngine = new RoslynScriptEngine(),
+                PdfWriter = new PdfWriter(),
+                DxfWriter = new DxfWriter(),
+                CsvReader = new VisualBasicReader(),
+                CsvWriter = new CsvHelperWriter(),
                 Execute = (action) => Dispatcher.Invoke(action)
             };
             context.InitializeEditor();
@@ -519,7 +523,10 @@ namespace Test.Windows
 
             if (dlg.ShowDialog() == true)
             {
-                (DataContext as EditorContext).ExportData(dlg.FileName, database);
+                if (context.CsvWriter != null)
+                {
+                    context.CsvWriter.Write(dlg.FileName, database);
+                }
             }
         }
 
