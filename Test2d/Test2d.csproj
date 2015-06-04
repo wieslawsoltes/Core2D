@@ -74,11 +74,12 @@
     <Compile Include="Core\Data\Column.cs" />
     <Compile Include="Core\Data\Database.cs" />
     <Compile Include="Core\Data\Record.cs" />
-    <Compile Include="Core\ICompressor.cs" />
+    <Compile Include="Editor\Core\ICompressor.cs" />
     <Compile Include="Core\Data\ITextFieldReader.cs" />
-    <Compile Include="Core\ISerializer.cs" />
-    <Compile Include="Core\ITextClipboard.cs" />
-    <Compile Include="Core\IView.cs" />
+    <Compile Include="Editor\Core\IScriptEngine.cs" />
+    <Compile Include="Editor\Core\ISerializer.cs" />
+    <Compile Include="Editor\Core\ITextClipboard.cs" />
+    <Compile Include="Editor\Core\IView.cs" />
     <Compile Include="Core\ShapeState.cs" />
     <Compile Include="Core\Style\LineCap.cs" />
     <Compile Include="Core\Style\LineStyle.cs" />
@@ -197,6 +198,8 @@
     <Compile Include="Editor\Helpers\TextHelper.cs" />
     <Compile Include="Editor\History.cs" />
     <Compile Include="Editor\MoveMode.cs" />
+    <Compile Include="Editor\Script\ScriptDirectory.cs" />
+    <Compile Include="Editor\Script\ScriptFile.cs" />
     <Compile Include="Editor\State.cs" />
     <Compile Include="Editor\Tool.cs" />
     <Compile Include="Math\MathHelpers.cs" />
