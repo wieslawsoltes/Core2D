@@ -38,8 +38,6 @@ namespace Test.Windows
                 context.Editor.Renderer.Zoom = z;
                 context.Editor.Renderer.PanX = x;
                 context.Editor.Renderer.PanY = y;
-                //context.Editor.Renderer.ClearCache();
-                //context.Editor.Project.CurrentContainer.Invalidate();
             };
 
             border.AutoFitChild = (width, height) =>
@@ -52,8 +50,6 @@ namespace Test.Windows
                         height,
                         context.Editor.Project.CurrentContainer.Width,
                         context.Editor.Project.CurrentContainer.Height);
-                    //context.Editor.Renderer.ClearCache();
-                    //context.Editor.Project.CurrentContainer.Invalidate();
                 }
             };
 
@@ -81,8 +77,6 @@ namespace Test.Windows
                         double value = context.Editor.Renderer.Zoom;
                         border.Scale.ScaleX = value;
                         border.Scale.ScaleY = value;
-                        //context.Editor.Renderer.ClearCache();
-                        //context.Editor.Project.CurrentContainer.Invalidate();
                     }
 
                     if (_e.PropertyName == "PanX")
@@ -90,8 +84,6 @@ namespace Test.Windows
                         var context = DataContext as EditorContext;
                         double value = context.Editor.Renderer.PanX;
                         border.Translate.X = value;
-                        //context.Editor.Renderer.ClearCache();
-                        //context.Editor.Project.CurrentContainer.Invalidate();
                     }
 
                     if (_e.PropertyName == "PanY")
@@ -99,8 +91,6 @@ namespace Test.Windows
                         var context = DataContext as EditorContext;
                         double value = context.Editor.Renderer.PanY;
                         border.Translate.Y = value;
-                        //context.Editor.Renderer.ClearCache();
-                        //context.Editor.Project.CurrentContainer.Invalidate();
                     }
                 };
             };
