@@ -7,14 +7,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms.VisualStyles;
 using Eto;
 using Eto.Drawing;
 using Eto.Forms;
 using Test2d;
 using TestEDITOR;
 
-namespace TestDirect2D
+namespace TestEtoForms
 {
     /// <summary>
     /// 

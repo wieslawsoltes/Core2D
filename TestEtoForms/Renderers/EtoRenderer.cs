@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Eto.Drawing;
 using Test2d;
 
-namespace TestDirect2D
+namespace TestEtoForms
 {
     public class EtoRenderer : ObservableObject, IRenderer
     {
