@@ -1,8 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Scripting;
-using Microsoft.CodeAnalysis.Scripting.CSharp;
 using Microsoft.Practices.Prism.Commands;
 using System;
 using System.Collections.Immutable;
@@ -10,7 +7,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +27,7 @@ namespace TestEDITOR
         private ITextClipboard _textClipboard;
         private ISerializer _serializer;
         private ICompressor _compressor;
+        private IScriptEngine _scriptEngine;
         private string _rootScriptsPath;
         private ImmutableArray<ScriptDirectory> _scriptDirectories;
         private bool _isSimulationPaused;
@@ -85,6 +82,15 @@ namespace TestEDITOR
         {
             get { return _compressor; }
             set { Update(ref _compressor, value); }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public IScriptEngine ScriptEngine
+        {
+            get { return _scriptEngine; }
+            set { Update(ref _scriptEngine, value); }
         }
 
         /// <summary>
@@ -856,12 +862,14 @@ namespace TestEDITOR
         /// <param name="clipboard"></param>
         /// <param name="serializer"></param>
         /// <param name="compressor"></param>
+        /// <param name="engine"></param>
         public void Initialize(
             IView view,
             IRenderer renderer,
             ITextClipboard clipboard,
             ISerializer serializer,
-            ICompressor compressor)
+            ICompressor compressor,
+            IScriptEngine engine)
         {
             try
             {
@@ -869,6 +877,7 @@ namespace TestEDITOR
                 _textClipboard = clipboard;
                 _serializer = serializer;
                 _compressor = compressor;
+                _scriptEngine = engine;
 
                 _editor = Editor.Create(
                     DefaultProject(),
@@ -1257,39 +1266,7 @@ namespace TestEDITOR
         {
             try
             {
-                var path = System.IO.Path.GetDirectoryName(typeof(object).Assembly.Location);
-
-                ScriptOptions options = ScriptOptions.Default
-                    .AddReferences(MetadataReference.CreateFromFile(System.IO.Path.Combine(path, "mscorlib.dll")))
-                    .AddReferences(MetadataReference.CreateFromFile(System.IO.Path.Combine(path, "System.dll")))
-                    .AddReferences(MetadataReference.CreateFromFile(System.IO.Path.Combine(path, "System.Core.dll")))
-                    .AddReferences(MetadataReference.CreateFromFile(System.IO.Path.Combine(path, "System.Runtime.dll")))
-                    .AddNamespaces("System")
-                    .AddNamespaces("System.Collections.Generic")
-                    .AddNamespaces("System.Text")
-                    .AddNamespaces("System.Threading")
-                    .AddNamespaces("System.Threading.Tasks")
-                    .AddReferences(Assembly.GetAssembly(typeof(ObservableCollection<>)))
-                    .AddNamespaces("System.Collections.ObjectModel")
-                    .AddReferences(Assembly.GetAssembly(typeof(ImmutableArray<>)))
-                    .AddNamespaces("System.Collections.Immutable")
-                    .AddReferences(Assembly.GetAssembly(typeof(System.Linq.Enumerable)))
-                    .AddNamespaces("System.Linq")
-                    .AddReferences(Assembly.GetAssembly(typeof(ObservableObject)))
-                    .AddNamespaces("Test2d")
-                    .AddReferences(Assembly.GetAssembly(typeof(EditorContext)))
-                    .AddNamespaces("TestEDITOR")
-                    .AddNamespaces("TestSIM")
-                    .AddNamespaces("Dxf");
-
-                CSharpScript.Eval(
-                    code,
-                    options,
-                    new ScriptGlobals()
-                    {
-                        Context = context,
-                        Execute = execute
-                    });
+                _scriptEngine.Eval(code, context, execute);
             }
             catch (Exception ex)
             {

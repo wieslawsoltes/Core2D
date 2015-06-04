@@ -82,7 +82,8 @@ namespace Test.Windows
                 WpfRenderer.Create(),
                 new TextClipboard(),
                 new NewtonsoftSerializer(),
-                new LZ4CodecCompressor());
+                new LZ4CodecCompressor(),
+                new RoslynScriptEngine());
             context.InitializeSctipts();
             context.InitializeSimulation();
             context.Editor.Renderer.DrawShapeState = ShapeState.Visible;

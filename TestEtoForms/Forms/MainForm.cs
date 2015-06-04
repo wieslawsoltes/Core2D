@@ -66,7 +66,8 @@ namespace TestEtoForms
                 new EtoRenderer(72.0 / 96.0),
                 new TextClipboard(),
                 new NewtonsoftSerializer(),
-                new LZ4CodecCompressor());
+                new LZ4CodecCompressor(),
+                new RoslynScriptEngine());
             _context.InitializeSctipts();
             _context.InitializeSimulation();
             _context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
