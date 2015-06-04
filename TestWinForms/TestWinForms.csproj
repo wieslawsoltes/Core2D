@@ -78,10 +78,10 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\MainForm.cs">
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MainForm.Designer.cs">
+    <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -92,18 +92,46 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\MainForm.resx">
+    <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.Designer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dependencies\Compressor.LZ4\Compressor.LZ4.csproj">
+      <Project>{afe57f76-d587-4f4d-b308-507476934d29}</Project>
+      <Name>Compressor.LZ4</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj">
+      <Project>{d40b3bcd-0a26-40bb-960b-9464d248c934}</Project>
+      <Name>FileWriter.Dxf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\FileWriter.Pdf-wpf\FileWriter.Pdf-wpf.csproj">
+      <Project>{5c5a31b5-8f76-42e7-aea8-55b32ca641fa}</Project>
+      <Name>FileWriter.Pdf-wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\Renderer.WinForms\Renderer.WinForms.csproj">
+      <Project>{3dc476e6-5032-4888-9337-221b88653c40}</Project>
+      <Name>Renderer.WinForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\ScriptEngine.Roslyn\ScriptEngine.Roslyn.csproj">
+      <Project>{dfbeacc3-406d-4216-8841-56398b9500d5}</Project>
+      <Name>ScriptEngine.Roslyn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
+      <Project>{08e4e8bf-e513-4a8d-835c-1eed6ecb4a21}</Project>
+      <Name>Serializer.Newtonsoft</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\TextFieldReader.VisualBasic\TextFieldReader.VisualBasic.csproj">
+      <Project>{a5c01125-8391-4966-b724-5f5ec4fe80a9}</Project>
+      <Name>TextFieldReader.VisualBasic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
+      <Project>{87302d12-1184-402d-bf23-a5699f3d0bb4}</Project>
+      <Name>TextFieldWriter.CsvHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Test2d\Test2d.csproj">
       <Project>{60DDA5D9-7ACC-41AF-9123-C96ABB6B7828}</Project>
       <Name>Test2d</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TestEDITOR\TestEDITOR.csproj">
-      <Project>{dd2d100a-773a-4893-a3eb-6c63e11b12a9}</Project>
-      <Name>TestEDITOR</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

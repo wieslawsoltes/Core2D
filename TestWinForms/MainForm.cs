@@ -52,6 +52,10 @@ namespace TestWinForms
                 Serializer = new NewtonsoftSerializer(),
                 Compressor = new LZ4CodecCompressor(),
                 ScriptEngine = new RoslynScriptEngine(),
+                PdfWriter = new PdfWriter(),
+                DxfWriter = new DxfWriter(),
+                CsvReader = new VisualBasicReader(),
+                CsvWriter = new CsvHelperWriter(),
                 Execute = (action) => action()
             };
             context.InitializeEditor();
@@ -544,8 +548,9 @@ namespace TestWinForms
             g.CompositingQuality = CompositingQuality.HighQuality;
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-            g.TranslateTransform((float)0f, (float)0f);
-            g.ScaleTransform((float)1f, (float)1f);
+            //g.TranslateTransform(_state.PanX, _state.PanY);
+            //g.ScaleTransform(_state.Zoom);
+
             g.Clear(Color.FromArgb(255, 211, 211, 211));
 
             g.PageUnit = GraphicsUnit.Display;
