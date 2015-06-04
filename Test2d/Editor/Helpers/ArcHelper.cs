@@ -27,6 +27,8 @@ namespace Test2d
         private XEllipse _ellipseCenter;
         private XEllipse _ellipseStart;
         private XEllipse _ellipseEnd;
+        private bool _connectedP3;
+        private bool _connectedP4;
         
         /// <summary>
         /// 
@@ -43,13 +45,16 @@ namespace Test2d
         /// <param name="arc"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void TryToConnectPoint1(XArc arc, double x, double y)
+        /// <returns></returns>
+        public bool TryToConnectPoint1(XArc arc, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 arc.Point1 = result as XPoint;
+                return true;
             }
+            return false;
         }
 
         /// <summary>
@@ -58,13 +63,16 @@ namespace Test2d
         /// <param name="arc"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void TryToConnectPoint2(XArc arc, double x, double y)
+        /// <returns></returns>
+        public bool TryToConnectPoint2(XArc arc, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 arc.Point2 = result as XPoint;
+                return true;
             }
+            return false;
         }
 
         /// <summary>
@@ -73,13 +81,16 @@ namespace Test2d
         /// <param name="arc"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void TryToConnectPoint3(XArc arc, double x, double y)
+        /// <returns></returns>
+        public bool TryToConnectPoint3(XArc arc, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 arc.Point3 = result as XPoint;
+                return true;
             }
+            return false;
         }
 
         /// <summary>
@@ -88,13 +99,16 @@ namespace Test2d
         /// <param name="arc"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void TryToConnectPoint4(XArc arc, double x, double y)
+        /// <returns></returns>
+        public bool TryToConnectPoint4(XArc arc, double x, double y)
         {
             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
             if (result != null && result is XPoint)
             {
                 arc.Point4 = result as XPoint;
+                return true;
             }
+            return false;
         }
 
         /// <summary>
@@ -110,6 +124,8 @@ namespace Test2d
             {
                 case State.None:
                     {
+                        _connectedP3 = false;
+                        _connectedP4 = false;
                         _shape = XArc.Create(
                             sx, sy,
                             _editor.Project.CurrentStyleGroup.CurrentStyle,
@@ -156,7 +172,7 @@ namespace Test2d
                             _shape.Point4.Y = sy;
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                TryToConnectPoint3(_shape, sx, sy);
+                                _connectedP3 = TryToConnectPoint3(_shape, sx, sy);
                             }
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
@@ -175,7 +191,7 @@ namespace Test2d
                             _shape.Point4.Y = sy;
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                TryToConnectPoint4(_shape, sx, sy);
+                                _connectedP4 = TryToConnectPoint4(_shape, sx, sy);
                             }
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             Remove();
@@ -249,11 +265,34 @@ namespace Test2d
             switch (_currentState)
             {
                 case State.None:
+                    {
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            _editor.TryToHoverShape(sx, sy);
+                        }
+                    }
                     break;
                 case State.One:
                     {
                         if (_shape != null)
                         {
+                            if (_editor.Project.Options.TryToConnect)
+                            {
+                                if (_editor.TryToHoverShape(sx, sy))
+                                {
+                                    if (_ellipseP2 != null)
+                                    {
+                                        _ellipseP2.State &= ~ShapeState.Visible;
+                                    }
+                                }
+                                else
+                                {
+                                    if (_ellipseP2 != null)
+                                    {
+                                        _ellipseP2.State |= ShapeState.Visible;
+                                    }
+                                }
+                            }
                             _shape.Point2.X = sx;
                             _shape.Point2.Y = sy;
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
@@ -266,6 +305,23 @@ namespace Test2d
                     {
                         if (_shape != null)
                         {
+                            if (_editor.Project.Options.TryToConnect)
+                            {
+                                if (_editor.TryToHoverShape(sx, sy))
+                                {
+                                    if (_ellipseStart != null)
+                                    {
+                                        _ellipseStart.State &= ~ShapeState.Visible;
+                                    }
+                                }
+                                else
+                                {
+                                    if (_ellipseStart != null)
+                                    {
+                                        _ellipseStart.State |= ShapeState.Visible;
+                                    }
+                                }
+                            }
                             _shape.Point3.X = sx;
                             _shape.Point3.Y = sy;
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
@@ -278,6 +334,23 @@ namespace Test2d
                     {
                         if (_shape != null)
                         {
+                            if (_editor.Project.Options.TryToConnect)
+                            {
+                                if (_editor.TryToHoverShape(sx, sy))
+                                {
+                                    if (_ellipseEnd != null)
+                                    {
+                                        _ellipseEnd.State &= ~ShapeState.Visible;
+                                    }
+                                }
+                                else
+                                {
+                                    if (_ellipseEnd != null)
+                                    {
+                                        _ellipseEnd.State |= ShapeState.Visible;
+                                    }
+                                }
+                            }
                             _shape.Point4.X = sx;
                             _shape.Point4.Y = sy;
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
@@ -434,10 +507,18 @@ namespace Test2d
         {
             var arc = shape as XArc;
             var a = WpfArc.FromXArc(arc, 0, 0);
-            arc.Point3.X = a.Start.X;
-            arc.Point3.Y = a.Start.Y;
-            arc.Point4.X = a.End.X;
-            arc.Point4.Y = a.End.Y;
+
+            if (!_connectedP3)
+            {
+                arc.Point3.X = a.Start.X;
+                arc.Point3.Y = a.Start.Y;
+            }
+
+            if (!_connectedP4)
+            {
+                arc.Point4.X = a.End.X;
+                arc.Point4.Y = a.End.Y;
+            }
         }
 
         /// <summary>
