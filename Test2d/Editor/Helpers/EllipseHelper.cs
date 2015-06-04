@@ -173,12 +173,35 @@ namespace Test2d
             switch (_currentState)
             {
                 case State.None:
+                    {
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            _editor.TryToHoverShape(sx, sy);
+                        }
+                    }
                     break;
                 case State.One:
                     {
                         var ellipse = _shape as XEllipse;
                         if (ellipse != null)
                         {
+                            if (_editor.Project.Options.TryToConnect)
+                            {
+                                if (_editor.TryToHoverShape(sx, sy))
+                                {
+                                    if (_ellipseBottomRight != null)
+                                    {
+                                        _ellipseBottomRight.State &= ~ShapeState.Visible;
+                                    }
+                                }
+                                else
+                                {
+                                    if (_ellipseBottomRight != null)
+                                    {
+                                        _ellipseBottomRight.State |= ShapeState.Visible;
+                                    }
+                                }
+                            }
                             ellipse.BottomRight.X = sx;
                             ellipse.BottomRight.Y = sy;
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
