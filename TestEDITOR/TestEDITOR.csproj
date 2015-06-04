@@ -125,11 +125,10 @@
     <Compile Include="Data\CsvReader.cs" />
     <Compile Include="Editor\EditorCommands.cs" />
     <Compile Include="Editor\EditorContext.cs" />
-    <Compile Include="Editor\Emf.cs" />
-    <Compile Include="Editor\ExportType.cs" />
-    <Compile Include="Editor\ImportType.cs" />
+    <Compile Include="Editor\Core\ExportType.cs" />
+    <Compile Include="Editor\Core\ImportType.cs" />
     <Compile Include="Editor\LineGrid.cs" />
-    <Compile Include="Editor\StyleComparer.cs" />
+    <Compile Include="Editor\Core\StyleComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\DxfRenderer.cs" />
     <Compile Include="Renderers\EmfRenderer.cs" />

@@ -123,107 +123,107 @@ namespace Test.Windows
 
             context.Commands.ImportStyleCommand = 
                 new DelegateCommand<object>(
-                    (item) => ImportEx(item, ImportType.Style),
+                    (item) => ImportObject(item, ImportType.Style),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportStylesCommand = 
                 new DelegateCommand<object>(
-                    (item) => ImportEx(item, ImportType.Styles),
+                    (item) => ImportObject(item, ImportType.Styles),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportStyleGroupCommand = 
                 new DelegateCommand<object>(
-                    (item) => ImportEx(item, ImportType.StyleGroup),
+                    (item) => ImportObject(item, ImportType.StyleGroup),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportStyleGroupsCommand = 
                 new DelegateCommand<object>(
-                    (item) => ImportEx(item, ImportType.StyleGroups),
+                    (item) => ImportObject(item, ImportType.StyleGroups),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportGroupCommand = 
                 new DelegateCommand<object>(
-                    (item) => ImportEx(item, ImportType.Group),
+                    (item) => ImportObject(item, ImportType.Group),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportGroupsCommand = 
                 new DelegateCommand<object>(
-                    (item) => ImportEx(item, ImportType.Groups),
+                    (item) => ImportObject(item, ImportType.Groups),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportGroupLibraryCommand = 
                 new DelegateCommand<object>(
-                    (item) => ImportEx(item, ImportType.GroupLibrary),
+                    (item) => ImportObject(item, ImportType.GroupLibrary),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportGroupLibrariesCommand = 
                 new DelegateCommand<object>(
-                    (item) => ImportEx(item, ImportType.GroupLibraries),
+                    (item) => ImportObject(item, ImportType.GroupLibraries),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportTemplateCommand = 
                 new DelegateCommand<object>(
-                    (item) => ImportEx(item, ImportType.Template),
+                    (item) => ImportObject(item, ImportType.Template),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportTemplatesCommand = 
                 new DelegateCommand<object>(
-                    (item) => ImportEx(item, ImportType.Templates),
+                    (item) => ImportObject(item, ImportType.Templates),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportStyleCommand = 
                 new DelegateCommand<object>(
-                    (item) => ExportEx(item, ExportType.Style),
+                    (item) => ExportObject(item, ExportType.Style),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportStylesCommand = 
                 new DelegateCommand<object>(
-                    (item) => ExportEx(item, ExportType.Styles),
+                    (item) => ExportObject(item, ExportType.Styles),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportStyleGroupCommand = 
                 new DelegateCommand<object>(
-                    (item) => ExportEx(item, ExportType.StyleGroup),
+                    (item) => ExportObject(item, ExportType.StyleGroup),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportStyleGroupsCommand = 
                 new DelegateCommand<object>(
-                    (item) => ExportEx(item, ExportType.StyleGroups),
+                    (item) => ExportObject(item, ExportType.StyleGroups),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportGroupCommand = 
                 new DelegateCommand<object>(
-                    (item) => ExportEx(item, ExportType.Group),
+                    (item) => ExportObject(item, ExportType.Group),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportGroupsCommand = 
                 new DelegateCommand<object>(
-                    (item) => ExportEx(item, ExportType.Groups),
+                    (item) => ExportObject(item, ExportType.Groups),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportGroupLibraryCommand = 
                 new DelegateCommand<object>(
-                    (item) => ExportEx(item, ExportType.GroupLibrary),
+                    (item) => ExportObject(item, ExportType.GroupLibrary),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportGroupLibrariesCommand = 
                 new DelegateCommand<object>(
-                    (item) => ExportEx(item, ExportType.GroupLibraries),
+                    (item) => ExportObject(item, ExportType.GroupLibraries),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportTemplateCommand = 
                 new DelegateCommand<object>(
-                    (item) => ExportEx(item, ExportType.Template),
+                    (item) => ExportObject(item, ExportType.Template),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportTemplatesCommand = 
                 new DelegateCommand<object>(
-                    (item) => ExportEx(item, ExportType.Templates),
+                    (item) => ExportObject(item, ExportType.Templates),
                     (item) => context.IsEditMode());
 
             context.Commands.CopyAsEmfCommand = 
                 new DelegateCommand(
-                    () => Emf.PutOnClipboard(context.Editor.Project.CurrentContainer),
+                    () => EmfFile.SetClipboard(context.Editor.Project.CurrentContainer),
                     () => context.IsEditMode());
 
             context.Commands.EvalCommand = 
@@ -391,9 +391,13 @@ namespace Test.Windows
             containerControl.DragEnter += 
                 (s, e) =>
                 {
-                    if (!e.Data.GetDataPresent("Group") || s == e.Source)
+                    if (!e.Data.GetDataPresent(DataFormats.FileDrop)
+                        && !e.Data.GetDataPresent(typeof(XGroup))
+                        && !e.Data.GetDataPresent(typeof(Record))
+                        && !e.Data.GetDataPresent(typeof(ShapeStyle)))
                     {
                         e.Effects = DragDropEffects.None;
+                        e.Handled = true;
                     }
                 };
 
@@ -615,7 +619,7 @@ namespace Test.Windows
         /// </summary>
         /// <param name="item"></param>
         /// <param name="type"></param>
-        public void ImportEx(object item, ImportType type)
+        public void ImportObject(object item, ImportType type)
         {
             if (item == null)
                 return;
@@ -680,7 +684,7 @@ namespace Test.Windows
         /// </summary>
         /// <param name="item"></param>
         /// <param name="type"></param>
-        public void ExportEx(object item, ExportType type)
+        public void ExportObject(object item, ExportType type)
         {
             if (item == null)
                 return;
@@ -748,6 +752,27 @@ namespace Test.Windows
         }
 
         /// <summary>
+        ///
+        /// </summary>
+        /// <param name="path"></param>
+        public void ExportEmf(string path)
+        {
+            try
+            {
+                var context = (DataContext as EditorContext);
+
+                EmfFile.Save(
+                    path, 
+                    context.Editor.Project.CurrentContainer);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="item"></param>
@@ -796,7 +821,7 @@ namespace Test.Windows
                         System.Diagnostics.Process.Start(dlg.FileName);
                         break;
                     case 2:
-                        (DataContext as EditorContext).ExportAsEmf(dlg.FileName);
+                        ExportEmf(dlg.FileName);
                         System.Diagnostics.Process.Start(dlg.FileName);
                         break;
                     case 3:

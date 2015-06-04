@@ -1685,23 +1685,6 @@ namespace TestEDITOR
                 System.Diagnostics.Debug.Print(ex.StackTrace);
             }
         }
-  
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="path"></param>
-        public void ExportAsEmf(string path)
-        {
-            try
-            {
-                Emf.Save(path, _editor.Project.CurrentContainer);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
-            }
-        }
         
         /// <summary>
         ///

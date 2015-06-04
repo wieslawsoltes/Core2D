@@ -18,13 +18,70 @@ namespace TestEDITOR
     /// <summary>
     /// 
     /// </summary>
-    public static class Emf
+    public static class EmfFile
     {
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="bitmap"></param>
         /// <param name="container"></param>
-        public static void PutOnClipboard(Container container)
+        /// <returns></returns>
+        public static MemoryStream MakeMetafileStream(Bitmap bitmap, Container container)
+        {
+            var g = default(Graphics);
+            var mf = default(Metafile);
+            var ms = new MemoryStream();
+
+            try
+            {
+                using (g = Graphics.FromImage(bitmap))
+                {
+                    var hdc = g.GetHdc();
+                    mf = new Metafile(ms, hdc);
+                    g.ReleaseHdc(hdc);
+                }
+
+                using (g = Graphics.FromImage(mf))
+                {
+                    var r = EmfRenderer.Create();
+
+                    g.SmoothingMode = SmoothingMode.HighQuality;
+                    g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                    g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+                    g.CompositingQuality = CompositingQuality.HighQuality;
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+                    g.PageUnit = GraphicsUnit.Point;
+
+                    if (container.Template != null)
+                    {
+                        r.Draw(g, container.Template, container.Properties, null);
+                    }
+
+                    r.Draw(g, container, container.Properties, null);
+                    r.ClearCache();
+                }
+            }
+            finally
+            {
+                if (g != null)
+                {
+                    g.Dispose();
+                }
+
+                if (mf != null)
+                {
+                    mf.Dispose();
+                }
+            }
+            return ms;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        public static void SetClipboard(Container container)
         {
             try
             {
@@ -62,63 +119,6 @@ namespace TestEDITOR
                     }
                 }
             }
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="bitmap"></param>
-        /// <param name="container"></param>
-        /// <returns></returns>
-        private static MemoryStream MakeMetafileStream(Bitmap bitmap, Container container)
-        {
-            var g = default(Graphics);
-            var mf = default(Metafile);
-            var ms = new MemoryStream();
-
-            try
-            {
-                using (g = Graphics.FromImage(bitmap))
-                {
-                    var hdc = g.GetHdc();
-                    mf = new Metafile(ms, hdc);
-                    g.ReleaseHdc(hdc);
-                }
-
-                using (g = Graphics.FromImage(mf))
-                {
-                    var r = EmfRenderer.Create();
-
-                    g.SmoothingMode = SmoothingMode.HighQuality;
-                    g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-                    g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-                    g.CompositingQuality = CompositingQuality.HighQuality;
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-                    g.PageUnit = GraphicsUnit.Point;
-    
-                    if (container.Template != null)
-                    {
-                        r.Draw(g, container.Template, container.Properties, null);
-                    }
-
-                    r.Draw(g, container, container.Properties, null);
-                    r.ClearCache();
-                }
-            }
-            finally
-            {
-                if (g != null)
-                {
-                    g.Dispose();
-                }
-
-                if (mf != null)
-                {
-                    mf.Dispose();
-                }
-            }
-            return ms;
         }
     }
 }

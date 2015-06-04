@@ -155,14 +155,10 @@ namespace TestWinForms
                         System.Diagnostics.Process.Start(path);
                         break;
                     case 2:
-                        (DataContext as EditorContext).ExportAsEmf(path);
-                        System.Diagnostics.Process.Start(path);
-                        break;
-                    case 3:
                         (DataContext as EditorContext).ExportAsDxf(path, Dxf.DxfAcadVer.AC1015);
                         System.Diagnostics.Process.Start(path);
                         break;
-                    case 4:
+                    case 3:
                         (DataContext as EditorContext).ExportAsDxf(path, Dxf.DxfAcadVer.AC1006);
                         System.Diagnostics.Process.Start(path);
                         break;
@@ -354,7 +350,7 @@ namespace TestWinForms
         /// </summary>
         private void Export()
         {
-            saveFileDialog2.Filter = "Pdf (*.pdf)|*.pdf|Emf (*.emf)|*.emf|Dxf AutoCAD 2000 (*.dxf)|*.dxf|Dxf R10 (*.dxf)|*.dxf|All (*.*)|*.*";
+            saveFileDialog2.Filter = "Pdf (*.pdf)|*.pdf|Dxf AutoCAD 2000 (*.dxf)|*.dxf|Dxf R10 (*.dxf)|*.dxf|All (*.*)|*.*";
             saveFileDialog2.FilterIndex = 0;
             saveFileDialog2.FileName = "project";
             saveFileDialog2.ShowDialog(this);

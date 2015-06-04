@@ -420,7 +420,6 @@ namespace TestEtoForms
                     dlg.Filters = new List<FileDialogFilter>()
                     {
                         new FileDialogFilter("Pdf", ".pdf"),
-                        new FileDialogFilter("Emf", ".emf"),
                         new FileDialogFilter("Dxf AutoCAD 2000", ".dxf"),
                         new FileDialogFilter("Dxf R10", ".dxf"),
                         new FileDialogFilter("All", ".*")
@@ -438,14 +437,10 @@ namespace TestEtoForms
                                 System.Diagnostics.Process.Start(path);
                                 break;
                             case 1:
-                                _context.ExportAsEmf(path);
-                                System.Diagnostics.Process.Start(path);
-                                break;
-                            case 2:
                                 _context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1015);
                                 System.Diagnostics.Process.Start(path);
                                 break;
-                            case 3:
+                            case 2:
                                 _context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1006);
                                 System.Diagnostics.Process.Start(path);
                                 break;
@@ -630,17 +625,6 @@ namespace TestEtoForms
                     _context.Commands.RedoCommand.Execute(null);
                 };
 
-            var copyAsMetaFileCommand = new Command() 
-            { 
-                MenuText = "Copy As &Metafile", 
-                Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.Y 
-            };
-            copyAsMetaFileCommand.Executed +=
-                (s, e) =>
-                {
-                    Emf.PutOnClipboard(_context.Editor.Project.CurrentContainer);
-                };
-
             var cutCommand = new Command() 
             { 
                 MenuText = "Cu&t", 
@@ -772,8 +756,6 @@ namespace TestEtoForms
                 {
                     undoCommand,
                     redoCommand,
-                    new SeparatorMenuItem(),
-                    copyAsMetaFileCommand,
                     new SeparatorMenuItem(),
                     cutCommand,
                     copyCommand,

@@ -156,6 +156,7 @@
     <Compile Include="Converters\ZoomScaleConverter.cs" />
     <Compile Include="Controls\Custom\PanAndZoomBorder.cs" />
     <Compile Include="Controls\Custom\PanAndZoomGrid.cs" />
+    <Compile Include="Renderers\Emf\EmfFile.cs" />
     <Compile Include="Renderers\Path\PathGeometryConverter.cs" />
     <Compile Include="Renderers\Path\TransformGroupHelper.cs" />
     <Compile Include="Renderers\Path\XPathGeometryConverter.cs" />
