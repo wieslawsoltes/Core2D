@@ -59,6 +59,10 @@
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.1.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.5.0.2\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
       <Private>True</Private>
@@ -128,6 +132,9 @@
     <Compile Include="Controls\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ScriptControl.xaml.cs">
+      <DependentUpon>ScriptControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ShapeControl.xaml.cs">
       <DependentUpon>ShapeControl.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -170,6 +177,9 @@
       <DependentUpon>PropertiesWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Windows\ScriptWindow.xaml.cs">
+      <DependentUpon>ScriptWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ShapesWindow.xaml.cs">
       <DependentUpon>ShapesWindow.xaml</DependentUpon>
     </Compile>
@@ -197,6 +207,10 @@
     </Page>
     <Page Include="Controls\PathControl.xaml" />
     <Page Include="Controls\ProjectControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ScriptControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -263,6 +277,10 @@
     </Page>
     <Page Include="Windows\PathWindow.xaml" />
     <Page Include="Windows\PropertiesWindow.xaml" />
+    <Page Include="Windows\ScriptWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\ShapesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
