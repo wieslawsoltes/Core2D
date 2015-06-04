@@ -30,70 +30,82 @@ namespace Test.Windows
         {
             InitializeComponent();
 
+            Initialize();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void Initialize()
+        {
             grid.EnableAutoFit = true;
 
-            border.InvalidateChild = (z, x, y) =>
-            {
-                var context = DataContext as EditorContext;
-                context.Editor.Renderer.Zoom = z;
-                context.Editor.Renderer.PanX = x;
-                context.Editor.Renderer.PanY = y;
-            };
-
-            border.AutoFitChild = (width, height) =>
-            {
-                if (border != null && DataContext != null)
+            border.InvalidateChild =
+                (z, x, y) =>
                 {
                     var context = DataContext as EditorContext;
-                    border.AutoFit(
-                        width,
-                        height,
-                        context.Editor.Project.CurrentContainer.Width,
-                        context.Editor.Project.CurrentContainer.Height);
-                }
-            };
+                    context.Editor.Renderer.Zoom = z;
+                    context.Editor.Renderer.PanX = x;
+                    context.Editor.Renderer.PanY = y;
+                };
 
-            border.MouseDown += (s, e) =>
-            {
-                if (e.ChangedButton == MouseButton.Middle && e.ClickCount == 2)
+            border.AutoFitChild =
+                (width, height) =>
                 {
-                    grid.AutoFit();
-                }
-                
-                if (e.ChangedButton == MouseButton.Middle && e.ClickCount == 3)
-                {
-                    grid.ResetZoomAndPan();
-                }
-            };
-            
-            Loaded += (s, e) =>
-            {
-                ((DataContext as EditorContext).Editor.Renderer as ObservableObject).PropertyChanged +=
-                (_s, _e) =>
-                {
-                    if (_e.PropertyName == "Zoom")
+                    if (border != null && DataContext != null)
                     {
                         var context = DataContext as EditorContext;
-                        double value = context.Editor.Renderer.Zoom;
-                        border.Scale.ScaleX = value;
-                        border.Scale.ScaleY = value;
-                    }
-
-                    if (_e.PropertyName == "PanX")
-                    {
-                        var context = DataContext as EditorContext;
-                        double value = context.Editor.Renderer.PanX;
-                        border.Translate.X = value;
-                    }
-
-                    if (_e.PropertyName == "PanY")
-                    {
-                        var context = DataContext as EditorContext;
-                        double value = context.Editor.Renderer.PanY;
-                        border.Translate.Y = value;
+                        border.AutoFit(
+                            width,
+                            height,
+                            context.Editor.Project.CurrentContainer.Width,
+                            context.Editor.Project.CurrentContainer.Height);
                     }
                 };
-            };
+
+            border.MouseDown +=
+                (s, e) =>
+                {
+                    if (e.ChangedButton == MouseButton.Middle && e.ClickCount == 2)
+                    {
+                        grid.AutoFit();
+                    }
+
+                    if (e.ChangedButton == MouseButton.Middle && e.ClickCount == 3)
+                    {
+                        grid.ResetZoomAndPan();
+                    }
+                };
+
+            Loaded +=
+                (s, e) =>
+                {
+                    ((DataContext as EditorContext).Editor.Renderer as ObservableObject).PropertyChanged +=
+                        (_s, _e) =>
+                        {
+                            if (_e.PropertyName == "Zoom")
+                            {
+                                var context = DataContext as EditorContext;
+                                double value = context.Editor.Renderer.Zoom;
+                                border.Scale.ScaleX = value;
+                                border.Scale.ScaleY = value;
+                            }
+
+                            if (_e.PropertyName == "PanX")
+                            {
+                                var context = DataContext as EditorContext;
+                                double value = context.Editor.Renderer.PanX;
+                                border.Translate.X = value;
+                            }
+
+                            if (_e.PropertyName == "PanY")
+                            {
+                                var context = DataContext as EditorContext;
+                                double value = context.Editor.Renderer.PanY;
+                                border.Translate.Y = value;
+                            }
+                        };
+                };
         }
     }
 }
