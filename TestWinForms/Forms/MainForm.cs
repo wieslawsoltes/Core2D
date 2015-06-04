@@ -250,58 +250,65 @@ namespace TestWinForms
         {
             panel.KeyDown += (sender, e) =>
             {
+                if (e.Control || e.Alt || e.Shift)
+                    return;
+
+                var context = DataContext as EditorContext;
                 switch (e.KeyCode)
                 {
+                    case Keys.Delete:
+                        context.Commands.DeleteCommand.Execute(null);
+                        break;
                     case Keys.N:
-                        (DataContext as EditorContext).Commands.ToolNoneCommand.Execute(null);
+                        context.Commands.ToolNoneCommand.Execute(null);
                         break;
                     case Keys.S:
-                        (DataContext as EditorContext).Commands.ToolSelectionCommand.Execute(null);
+                        context.Commands.ToolSelectionCommand.Execute(null);
                         break;
                     case Keys.P:
-                        (DataContext as EditorContext).Commands.ToolPointCommand.Execute(null);
+                        context.Commands.ToolPointCommand.Execute(null);
                         break;
                     case Keys.L:
-                        (DataContext as EditorContext).Commands.ToolLineCommand.Execute(null);
+                        context.Commands.ToolLineCommand.Execute(null);
                         break;
                     case Keys.R:
-                        (DataContext as EditorContext).Commands.ToolRectangleCommand.Execute(null);
+                        context.Commands.ToolRectangleCommand.Execute(null);
                         break;
                     case Keys.E:
-                        (DataContext as EditorContext).Commands.ToolEllipseCommand.Execute(null);
+                        context.Commands.ToolEllipseCommand.Execute(null);
                         break;
                     case Keys.A:
-                        (DataContext as EditorContext).Commands.ToolArcCommand.Execute(null);
+                        context.Commands.ToolArcCommand.Execute(null);
                         break;
                     case Keys.B:
-                        (DataContext as EditorContext).Commands.ToolBezierCommand.Execute(null);
+                        context.Commands.ToolBezierCommand.Execute(null);
                         break;
                     case Keys.Q:
-                        (DataContext as EditorContext).Commands.ToolQBezierCommand.Execute(null);
+                        context.Commands.ToolQBezierCommand.Execute(null);
                         break;
                     case Keys.T:
-                        (DataContext as EditorContext).Commands.ToolTextCommand.Execute(null);
+                        context.Commands.ToolTextCommand.Execute(null);
                         break;
                     case Keys.I:
-                        (DataContext as EditorContext).Commands.ToolImageCommand.Execute(null);
+                        context.Commands.ToolImageCommand.Execute(null);
                         break;
                     case Keys.H:
-                        (DataContext as EditorContext).Commands.ToolPathCommand.Execute(null);
+                        context.Commands.ToolPathCommand.Execute(null);
                         break;
                     case Keys.F:
-                        (DataContext as EditorContext).Commands.DefaultIsFilledCommand.Execute(null);
+                        context.Commands.DefaultIsFilledCommand.Execute(null);
                         break;
                     case Keys.G:
-                        (DataContext as EditorContext).Commands.SnapToGridCommand.Execute(null);
+                        context.Commands.SnapToGridCommand.Execute(null);
                         break;
                     case Keys.C:
-                        (DataContext as EditorContext).Commands.TryToConnectCommand.Execute(null);
+                        context.Commands.TryToConnectCommand.Execute(null);
                         break;
                     case Keys.Z:
-                        (DataContext as EditorContext).Commands.ZoomResetCommand.Execute(null);
+                        context.Commands.ZoomResetCommand.Execute(null);
                         break;
                     case Keys.X:
-                        (DataContext as EditorContext).Commands.ZoomExtentCommand.Execute(null);
+                        context.Commands.ZoomExtentCommand.Execute(null);
                         break;
                 }
             };
