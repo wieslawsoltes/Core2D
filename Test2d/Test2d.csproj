@@ -76,6 +76,7 @@
     <Compile Include="Core\Data\Record.cs" />
     <Compile Include="Editor\Core\ICompressor.cs" />
     <Compile Include="Core\Data\ITextFieldReader.cs" />
+    <Compile Include="Editor\Core\IFileWriter.cs" />
     <Compile Include="Editor\Core\IScriptEngine.cs" />
     <Compile Include="Editor\Core\ISerializer.cs" />
     <Compile Include="Editor\Core\ITextClipboard.cs" />

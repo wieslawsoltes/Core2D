@@ -1661,23 +1661,7 @@ namespace TestEDITOR
         {
             try
             {
-                var renderer = new PdfRenderer()
-                {
-                    DrawShapeState = ShapeState.Printable
-                };
-
-                if (item is Container)
-                {
-                    renderer.Save(path, item as Container);
-                }
-                else if (item is Document)
-                {
-                    renderer.Save(path, item as Document);
-                }
-                else if (item is Project)
-                {
-                    renderer.Save(path, item as Project);
-                }
+                (new PdfWriter()).Save(path, item, null);
             }
             catch (Exception ex)
             {
@@ -1699,7 +1683,7 @@ namespace TestEDITOR
                 {
                     DrawShapeState = ShapeState.Printable
                 };
-                renderer.Create(path, _editor.Project.CurrentContainer, version);
+                renderer.Save(path, _editor.Project.CurrentContainer, version);
             }
             catch (Exception ex)
             {

@@ -1094,7 +1094,7 @@ namespace TestEDITOR
         /// <param name="path"></param>
         /// <param name="container"></param>
         /// <param name="version"></param>
-        public void Create(string path, Container container, DxfAcadVer version)
+        public void Save(string path, Container container, DxfAcadVer version)
         {
             _version = version;
 

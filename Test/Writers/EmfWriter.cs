@@ -18,7 +18,7 @@ namespace TestEDITOR
     /// <summary>
     /// 
     /// </summary>
-    public static class EmfFile
+    public class EmfWriter : IFileWriter
     {
         /// <summary>
         /// 
@@ -26,7 +26,7 @@ namespace TestEDITOR
         /// <param name="bitmap"></param>
         /// <param name="container"></param>
         /// <returns></returns>
-        public static MemoryStream MakeMetafileStream(Bitmap bitmap, Container container)
+        public MemoryStream MakeMetafileStream(Bitmap bitmap, Container container)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -81,7 +81,7 @@ namespace TestEDITOR
         /// 
         /// </summary>
         /// <param name="container"></param>
-        public static void SetClipboard(Container container)
+        public void SetClipboard(Container container)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace TestEDITOR
         /// </summary>
         /// <param name="path"></param>
         /// <param name="container"></param>
-        public static void Save(string path, Container container)
+        public void Save(string path, Container container)
         {
             using (var bitmap = new Bitmap((int)container.Width, (int)container.Height))
             {
@@ -118,6 +118,23 @@ namespace TestEDITOR
                         ms.WriteTo(fs);
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="item"></param>
+        /// <param name="options"></param>
+        public void Save(string path, object item, object options)
+        {
+            if (string.IsNullOrEmpty(path) || item == null)
+                return;
+
+            if (item is Container)
+            {
+                this.Save(path, item as Container);
             }
         }
     }

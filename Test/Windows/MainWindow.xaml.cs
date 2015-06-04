@@ -223,7 +223,7 @@ namespace Test.Windows
 
             context.Commands.CopyAsEmfCommand = 
                 new DelegateCommand(
-                    () => EmfFile.SetClipboard(context.Editor.Project.CurrentContainer),
+                    () => (new EmfWriter()).SetClipboard(context.Editor.Project.CurrentContainer),
                     () => context.IsEditMode());
 
             context.Commands.EvalCommand = 
@@ -750,10 +750,8 @@ namespace Test.Windows
             try
             {
                 var context = (DataContext as EditorContext);
-
-                EmfFile.Save(
-                    path, 
-                    context.Editor.Project.CurrentContainer);
+                var container = context.Editor.Project.CurrentContainer;
+                (new EmfWriter()).Save(path, container);
             }
             catch (Exception ex)
             {
