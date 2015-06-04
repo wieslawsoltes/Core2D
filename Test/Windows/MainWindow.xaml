@@ -125,16 +125,6 @@
                     <controls:StylesControl/>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Layers">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <controls:LayersControl/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Shapes">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <controls:ShapesControl/>
-                </ScrollViewer>
-            </TabItem>
             <TabItem Header="Style">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                     <controls:StyleControl Margin="2" DataContext="{Binding Editor.Project.CurrentContainer.CurrentShape.Style}">
@@ -149,6 +139,16 @@
                             </Style>
                         </controls:StyleControl.Style>
                     </controls:StyleControl>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Layers">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <controls:LayersControl/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Shapes">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <controls:ShapesControl/>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Shape">
