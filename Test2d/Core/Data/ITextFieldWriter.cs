@@ -8,13 +8,13 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public interface ITextFieldReader
+    public interface ITextFieldWriter
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="path"></param>
-        /// <returns></returns>
-        Database Read(string path);
+        /// <param name="database"></param>
+        void Write(string path, Database database);
     }
 }
