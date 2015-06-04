@@ -210,12 +210,35 @@ namespace Test2d
             switch (_currentState)
             {
                 case State.None:
+                    {
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            _editor.TryToHoverShape(sx, sy);
+                        }
+                    }
                     break;
                 case State.One:
                     {
                         var qbezier = _shape as XQBezier;
                         if (qbezier != null)
                         {
+                            if (_editor.Project.Options.TryToConnect)
+                            {
+                                if (_editor.TryToHoverShape(sx, sy))
+                                {
+                                    if (_ellipsePoint3 != null)
+                                    {
+                                        _ellipsePoint3.State &= ~ShapeState.Visible;
+                                    }
+                                }
+                                else
+                                {
+                                    if (_ellipsePoint3 != null)
+                                    {
+                                        _ellipsePoint3.State |= ShapeState.Visible;
+                                    }
+                                }
+                            }
                             qbezier.Point2.X = sx;
                             qbezier.Point2.Y = sy;
                             qbezier.Point3.X = sx;
@@ -231,6 +254,23 @@ namespace Test2d
                         var qbezier = _shape as XQBezier;
                         if (qbezier != null)
                         {
+                            if (_editor.Project.Options.TryToConnect)
+                            {
+                                if (_editor.TryToHoverShape(sx, sy))
+                                {
+                                    if (_ellipsePoint2 != null)
+                                    {
+                                        _ellipsePoint2.State &= ~ShapeState.Visible;
+                                    }
+                                }
+                                else
+                                {
+                                    if (_ellipsePoint2 != null)
+                                    {
+                                        _ellipsePoint2.State |= ShapeState.Visible;
+                                    }
+                                }
+                            }
                             qbezier.Point2.X = sx;
                             qbezier.Point2.Y = sy;
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
@@ -250,8 +290,8 @@ namespace Test2d
             _style = _editor.Project.Options.HelperStyle;
             _ellipsePoint1 = XEllipse.Create(0, 0, _style, null, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint1);
-            _ellipsePoint2 = XEllipse.Create(0, 0, _style, null, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint2);
+            _ellipsePoint3 = XEllipse.Create(0, 0, _style, null, true);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint3);
         }
         
         /// <summary>
@@ -264,8 +304,8 @@ namespace Test2d
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line12);
             _line32 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line32);
-            _ellipsePoint3 = XEllipse.Create(0, 0, _style, null, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint3);
+            _ellipsePoint2 = XEllipse.Create(0, 0, _style, null, true);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint2);
         }
 
         /// <summary>
