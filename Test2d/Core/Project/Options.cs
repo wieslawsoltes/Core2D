@@ -12,7 +12,7 @@ namespace Test2d
         private bool _snapToGrid = true;
         private double _snapX = 15.0;
         private double _snapY = 15.0;
-        private double _hitTreshold = 6.0;
+        private double _hitTreshold = 7.0;
         private MoveMode _moveMode = MoveMode.Point;
         private bool _defaultIsFilled = false;
         private bool _tryToConnect = false;
@@ -121,7 +121,7 @@ namespace Test2d
                 SnapToGrid = true,
                 SnapX = 15.0,
                 SnapY = 15.0,
-                HitTreshold = 6.0,
+                HitTreshold = 7.0,
                 MoveMode = MoveMode.Point,
                 DefaultIsFilled = false,
                 TryToConnect = false,
