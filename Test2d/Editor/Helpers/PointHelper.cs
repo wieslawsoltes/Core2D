@@ -107,6 +107,12 @@ namespace Test2d
             switch (_currentState)
             {
                 case State.None:
+                    {
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            _editor.TryToHoverShape(sx, sy);
+                        }
+                    }
                     break;
             }
         }
