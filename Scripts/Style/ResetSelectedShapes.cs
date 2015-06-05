@@ -7,13 +7,16 @@ void SetStyle(IEnumerable<BaseShape> shapes, ShapeStyle style)
     {
         shape.Style = style;
         if (shape is XGroup)
+        {
             SetStyle((shape as XGroup).Shapes, style);
+        }
     }
 }
-var layer = Context?.Editor?.Project?.CurrentContainer?.CurrentLayer;
-var style = Context?.Editor?.Project?.CurrentStyleGroup?.CurrentStyle;
-var shapes = Context?.Editor?.Renderer?.SelectedShapes;
+
+var p = Context.Editor.Project;
+var layer = p.CurrentContainer.CurrentLayer;
+var style = p.CurrentStyleLibrary.CurrentStyle;
+var shapes = Context.Editor.Renderer.SelectedShapes;
 
 SetStyle(shapes, style);
-
-layer?.Invalidate();
+layer.Invalidate();

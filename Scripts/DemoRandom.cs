@@ -168,11 +168,11 @@ void Demo(Project p, int n = 100)
     layersBuilder.Add(tl);
     c.Layers = layersBuilder.ToImmutable();
 
-    var sg = ShapeStyleGroup.Create("Demo");
-    p.StyleGroups = p.StyleGroups.Add(sg);
+    var sl = StyleLibrary.Create("Demo");
+    p.StyleLibraries = p.StyleLibraries.Add(sl);
 
-    sg.Styles.Clear();
-    var stylesBuilder = sg.Styles.ToBuilder();
+    sl.Styles = sl.Styles.Clear();
+    var stylesBuilder = sl.Styles.ToBuilder();
     for (int i = 0; i <= 255; i++)
     {
         var b = new byte[8];
@@ -184,15 +184,15 @@ void Demo(Project p, int n = 100)
             2.0);
         stylesBuilder.Add(style);
     }
-    sg.Styles = stylesBuilder.ToImmutable();
+    sl.Styles = stylesBuilder.ToImmutable();
 
-    Lines(ps, n, width, height, sg.Styles, ll, rand);
-    Rectangles(ps, n, width, height, sg.Styles, rl, rand);
-    Ellipses(ps, n, width, height, sg.Styles, el, rand);
-    Arcs(ps, n, width, height, sg.Styles, al, rand);
-    Beziers(ps, n, width, height, sg.Styles, bl, rand);
-    QBeziers(ps, n, width, height, sg.Styles, ql, rand);
-    Texts(ps, n, width, height, sg.Styles, tl, rand);
+    Lines(ps, n, width, height, sl.Styles, ll, rand);
+    Rectangles(ps, n, width, height, sl.Styles, rl, rand);
+    Ellipses(ps, n, width, height, sl.Styles, el, rand);
+    Arcs(ps, n, width, height, sl.Styles, al, rand);
+    Beziers(ps, n, width, height, sl.Styles, bl, rand);
+    QBeziers(ps, n, width, height, sl.Styles, ql, rand);
+    Texts(ps, n, width, height, sl.Styles, tl, rand);
 
     c.Invalidate();
 }

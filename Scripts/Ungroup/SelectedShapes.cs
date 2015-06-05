@@ -12,7 +12,7 @@ void Ungroup(IEnumerable<BaseShape> shapes, Layer layer, bool isGroup)
             var g = shape as XGroup;
             Ungroup(g.Shapes, layer, isGroup: true);
             Ungroup(g.Connectors, layer, isGroup: true);
-            layer.Shapes.Remove(g);
+            layer.Shapes = layer.Shapes.Remove(g);
         }
         else if (isGroup)
         {
@@ -20,29 +20,29 @@ void Ungroup(IEnumerable<BaseShape> shapes, Layer layer, bool isGroup)
             {
                 shape.State &= ~cs;
                 shape.State |= ShapeState.Standalone;
-                layer.Shapes.Add(shape);
+                layer.Shapes = layer.Shapes.Add(shape);
             }
             else
             {
                 shape.State |= ShapeState.Standalone;
-                layer.Shapes.Add(shape);
+                layer.Shapes = layer.Shapes.Add(shape);
             }
         }
     }
 }
 
-var editor = Context?.Editor;
-var renderer = editor?.Renderer;
-var shapes = renderer?.SelectedShapes;
-var shape = renderer?.SelectedShape;
-var layer = editor?.Project?.CurrentContainer?.CurrentLayer;
+var editor = Context.Editor;
+var renderer = editor.Renderer;
+var shapes = renderer.SelectedShapes;
+var shape = renderer.SelectedShape;
+var layer = editor.Project.CurrentContainer.CurrentLayer;
 
 if (shape != null && shape is XGroup && layer != null)
 {
     var g = shape as XGroup;
     Ungroup(g.Shapes, layer, isGroup: true);
     Ungroup(g.Connectors, layer, isGroup: true);
-    layer.Shapes.Remove(g);
+    layer.Shapes = layer.Shapes.Remove(g);
     layer.Invalidate();
     renderer.SelectedShape = null;
 }

@@ -1,5 +1,5 @@
 
-var layer = Context.Editor.Project.CurrentContainer.CurrentLayer;
+var l = Context.Editor.Project.CurrentContainer.CurrentLayer;
 
-layer.Shapes.Clear();
-layer.Invalidate();
+l.Shapes = l.Shapes.Clear();
+l.Invalidate();

@@ -1,3 +1,4 @@
+
 var pss = 
     ShapeStyle.Create(
         "PointShape",
@@ -9,7 +10,7 @@ var pss =
             ArrowStyle.Create()));
 
 var g = XGroup.Create("PointShape");
-g.Shapes.Add(XLine.Create(-4, 0, 4, 0, pss, null));
-g.Shapes.Add(XLine.Create(0, -4, 0, 4, pss, null));
+g.Shapes = g.Shapes.Add(XLine.Create(-4, 0, 4, 0, pss, null));
+g.Shapes = g.Shapes.Add(XLine.Create(0, -4, 0, 4, pss, null));
 
 Context.Editor.Project.Options.PointShape = g;

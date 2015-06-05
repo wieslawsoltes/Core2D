@@ -73,9 +73,11 @@ var style = ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.
 var settings = Settings.Create(Point.Create(0, 0), Size.Create(c.Width, c.Height), Size.Create(30, 30));
 var shapes = Create(style, settings, p.Options.PointShape);
 
+var builder = layer.Shapes.ToBuilder();
 foreach (var shape in shapes) 
 {
-    layer.Shapes.Add(shape);
+    builder.Add(shape);
 }
+layer.Shapes = builder.ToImmutable();
 
 layer.Invalidate();
