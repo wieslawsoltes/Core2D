@@ -8,7 +8,7 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public class ShapeStyleGroup : ObservableObject
+    public class StyleLibrary : ObservableObject
     {
         private string _name;
         private ImmutableArray<ShapeStyle> _styles;
@@ -46,9 +46,9 @@ namespace Test2d
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static ShapeStyleGroup Create(string name)
+        public static StyleLibrary Create(string name)
         {
-            return new ShapeStyleGroup()
+            return new StyleLibrary()
             {
                 Name = name,
                 Styles = ImmutableArray.Create<ShapeStyle>()

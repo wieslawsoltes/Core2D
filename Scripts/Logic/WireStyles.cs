@@ -1,15 +1,15 @@
 
 var p = Context.Editor.Project;
-var sg = p.StyleGroups.Where(x => x.Name == "Logic-Wires").FirstOrDefault();
-if (sg == null)
+var sl = p.StyleLibraries.FirstOrDefault(x => x.Name == "Logic-Wires");
+if (sl == null)
 {
-    sg = ShapeStyleGroup.Create("Logic-Wires");
-    p.StyleGroups = p.StyleGroups.Add(sg);
+    sl = StyleLibrary.Create("Logic-Wires");
+    p.StyleLibraries = p.StyleLibraries.Add(sl);
 }
 
-p.CurrentStyleGroup = sg;
+p.CurrentStyleLibrary = sl;
 
-var styles = sg.Styles.ToBuilder();
+var styles = sl.Styles.ToBuilder();
 var radiusX = 5.0;
 var radiusY = 5.0;
 var thickness = 2.0;
@@ -66,5 +66,5 @@ var thickness = 2.0;
     styles.Add(style);
 }
 
-sg.Styles = styles.ToImmutable();
-sg.CurrentStyle = sg.Styles.FirstOrDefault();
+sl.Styles = styles.ToImmutable();
+sl.CurrentStyle = sl.Styles.FirstOrDefault();

@@ -76,7 +76,7 @@ namespace Test2d
                     {
                         _shape = XText.Create(
                             sx, sy,
-                            _editor.Project.CurrentStyleGroup.CurrentStyle,
+                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape,
                             "Text",
                             _editor.Project.Options.DefaultIsFilled);

@@ -645,37 +645,37 @@ namespace Test2d
         }
 
         /// <summary>
-        /// Removed the Project.CurrentStyleGroup object from the Project.StyleGroups collection.
+        /// Removed the Project.CurrentStyleLibrary object from the Project.StyleLibraries collection.
         /// </summary>
-        public void RemoveCurrentStyleGroup()
+        public void RemoveCurrentStyleLibrary()
         {
-            var sg = _project.CurrentStyleGroup;
+            var sg = _project.CurrentStyleLibrary;
             if (sg != null)
             {
-                var previous = _project.StyleGroups;
-                var next = _project.StyleGroups.Remove(sg);
-                _history.Snapshot(previous, next, (p) => _project.StyleGroups = p);
-                _project.StyleGroups = next;
+                var previous = _project.StyleLibraries;
+                var next = _project.StyleLibraries.Remove(sg);
+                _history.Snapshot(previous, next, (p) => _project.StyleLibraries = p);
+                _project.StyleLibraries = next;
 
-                _project.CurrentStyleGroup = _project.StyleGroups.FirstOrDefault();
+                _project.CurrentStyleLibrary = _project.StyleLibraries.FirstOrDefault();
             }
         }
 
         /// <summary>
-        /// Removes the Project.CurrentStyleGroup.CurrentStyle object from the Project.CurrentStyleGroup.Styles collection.
+        /// Removes the Project.CurrentStyleLibrary.CurrentStyle object from the Project.CurrentStyleLibrary.Styles collection.
         /// </summary>
         public void RemoveCurrentStyle()
         {
-            var style = _project.CurrentStyleGroup.CurrentStyle;
+            var style = _project.CurrentStyleLibrary.CurrentStyle;
             if (style != null)
             {
-                var sg = _project.CurrentStyleGroup;
+                var sg = _project.CurrentStyleLibrary;
                 var previous = sg.Styles;
                 var next = sg.Styles.Remove(style);
                 _history.Snapshot(previous, next, (p) => sg.Styles = p);
                 sg.Styles = next;
 
-                _project.CurrentStyleGroup.CurrentStyle = _project.CurrentStyleGroup.Styles.FirstOrDefault();
+                _project.CurrentStyleLibrary.CurrentStyle = _project.CurrentStyleLibrary.Styles.FirstOrDefault();
             }
         }
 
@@ -1062,8 +1062,8 @@ namespace Test2d
             return _project.CurrentContainer != null
                 && _project.CurrentContainer.CurrentLayer != null
                 && _project.CurrentContainer.CurrentLayer.IsVisible
-                && _project.CurrentStyleGroup != null
-                && _project.CurrentStyleGroup.CurrentStyle != null;
+                && _project.CurrentStyleLibrary != null
+                && _project.CurrentStyleLibrary.CurrentStyle != null;
         }
 
         /// <summary>
@@ -1075,8 +1075,8 @@ namespace Test2d
             return _project.CurrentContainer != null
                 && _project.CurrentContainer.CurrentLayer != null
                 && _project.CurrentContainer.CurrentLayer.IsVisible
-                && _project.CurrentStyleGroup != null
-                && _project.CurrentStyleGroup.CurrentStyle != null;
+                && _project.CurrentStyleLibrary != null
+                && _project.CurrentStyleLibrary.CurrentStyle != null;
         }
         
         /// <summary>
@@ -1088,8 +1088,8 @@ namespace Test2d
             return _project.CurrentContainer != null
                 && _project.CurrentContainer.CurrentLayer != null
                 && _project.CurrentContainer.CurrentLayer.IsVisible
-                && _project.CurrentStyleGroup != null
-                && _project.CurrentStyleGroup.CurrentStyle != null;
+                && _project.CurrentStyleLibrary != null
+                && _project.CurrentStyleLibrary.CurrentStyle != null;
         }
         
         /// <summary>
@@ -1101,8 +1101,8 @@ namespace Test2d
             return _project.CurrentContainer != null
                 && _project.CurrentContainer.CurrentLayer != null
                 && _project.CurrentContainer.CurrentLayer.IsVisible
-                && _project.CurrentStyleGroup != null
-                && _project.CurrentStyleGroup.CurrentStyle != null;
+                && _project.CurrentStyleLibrary != null
+                && _project.CurrentStyleLibrary.CurrentStyle != null;
         }
 
         /// <summary>
@@ -1114,8 +1114,8 @@ namespace Test2d
             return _project.CurrentContainer != null
                 && _project.CurrentContainer.CurrentLayer != null
                 && _project.CurrentContainer.CurrentLayer.IsVisible
-                && _project.CurrentStyleGroup != null
-                && _project.CurrentStyleGroup.CurrentStyle != null;
+                && _project.CurrentStyleLibrary != null
+                && _project.CurrentStyleLibrary.CurrentStyle != null;
         }
 
         /// <summary>

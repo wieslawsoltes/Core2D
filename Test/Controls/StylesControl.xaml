@@ -26,17 +26,17 @@
         </Grid.RowDefinitions>
         <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0" Margin="2,0,2,0">
             <MenuItem Header="import">
-                <MenuItem Header="St_yle Group" Command="{Binding Commands.ImportStyleGroupCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
-                <MenuItem Header="Sty_le Groups" Command="{Binding Commands.ImportStyleGroupsCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                <MenuItem Header="St_yle Library" Command="{Binding Commands.ImportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                <MenuItem Header="Sty_le Libraries" Command="{Binding Commands.ImportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
             </MenuItem>
             <MenuItem Header="export">
-                <MenuItem Header="St_yle Group" Command="{Binding Commands.ExportStyleGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup}" InputGestureText=""/>
-                <MenuItem Header="Sty_le Groups" Command="{Binding Commands.ExportStyleGroupsCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                <MenuItem Header="St_yle Library" Command="{Binding Commands.ExportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
+                <MenuItem Header="Sty_le Libraries" Command="{Binding Commands.ExportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
             </MenuItem>
-            <MenuItem Command="{Binding Commands.AddStyleGroupCommand}" Header="+"/>
-            <MenuItem Command="{Binding Commands.RemoveStyleGroupCommand}" Header="-"/>
+            <MenuItem Command="{Binding Commands.AddStyleLibraryCommand}" Header="+"/>
+            <MenuItem Command="{Binding Commands.RemoveStyleLibraryCommand}" Header="-"/>
         </Menu>
-        <ContentControl Content="{Binding Editor.Project.CurrentStyleGroup}"
+        <ContentControl Content="{Binding Editor.Project.CurrentStyleLibrary}"
                         Grid.Row="1" 
                         Margin="2,0,2,0">
             <ContentControl.Style>
@@ -50,8 +50,8 @@
                 </Style>
             </ContentControl.Style>
         </ContentControl>
-        <ComboBox ItemsSource="{Binding Editor.Project.StyleGroups}" 
-                  SelectedItem="{Binding Editor.Project.CurrentStyleGroup}" 
+        <ComboBox ItemsSource="{Binding Editor.Project.StyleLibraries}" 
+                  SelectedItem="{Binding Editor.Project.CurrentStyleLibrary}" 
                   Grid.Row="2" 
                   Margin="2,2,2,2">
             <ComboBox.ItemTemplate>
@@ -62,21 +62,21 @@
         </ComboBox>
         <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="3" Margin="2,0,2,0">
             <MenuItem Header="import">
-                <MenuItem Header="_Style" Command="{Binding Commands.ImportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup}" InputGestureText=""/>
-                <MenuItem Header="S_tyles" Command="{Binding Commands.ImportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup}" InputGestureText=""/>
+                <MenuItem Header="_Style" Command="{Binding Commands.ImportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
+                <MenuItem Header="S_tyles" Command="{Binding Commands.ImportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
             </MenuItem>
             <MenuItem Header="export">
-                <MenuItem Header="_Style" Command="{Binding Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup.CurrentStyle}" InputGestureText=""/>
-                <MenuItem Header="S_tyles" Command="{Binding Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup}" InputGestureText=""/>
+                <MenuItem Header="_Style" Command="{Binding Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" InputGestureText=""/>
+                <MenuItem Header="S_tyles" Command="{Binding Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
             </MenuItem>
             <MenuItem Command="{Binding Commands.AddStyleCommand}" Header="_+"/>
             <MenuItem Command="{Binding Commands.RemoveStyleCommand}" Header="_-"/>
         </Menu>
         <controls:ShapeStyleDragAndDropListBox
-            DataContext="{Binding Editor.Project.CurrentStyleGroup.Styles}"
+            DataContext="{Binding Editor.Project.CurrentStyleLibrary.Styles}"
             Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
             ItemsSource="{Binding}" 
-            SelectedItem="{Binding DataContext.Editor.Project.CurrentStyleGroup.CurrentStyle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+            SelectedItem="{Binding DataContext.Editor.Project.CurrentStyleLibrary.CurrentStyle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
             BorderBrush="{x:Null}"
             HorizontalContentAlignment="Stretch"
             Grid.Row="4">
@@ -119,7 +119,7 @@
                 </DataTemplate>
             </controls:ShapeStyleDragAndDropListBox.ItemTemplate>
         </controls:ShapeStyleDragAndDropListBox>
-        <controls:StyleControl Grid.Row="54" Margin="2" DataContext="{Binding Editor.Project.CurrentStyleGroup.CurrentStyle}">
+        <controls:StyleControl Grid.Row="54" Margin="2" DataContext="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}">
             <controls:StyleControl.Style>
                 <Style TargetType="controls:StyleControl">
                     <Setter Property="Visibility" Value="Visible"/>

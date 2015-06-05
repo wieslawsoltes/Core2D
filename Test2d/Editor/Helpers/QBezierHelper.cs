@@ -94,7 +94,7 @@ namespace Test2d
                     {
                         _shape = XQBezier.Create(
                             sx, sy,
-                            _editor.Project.CurrentStyleGroup.CurrentStyle,
+                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape,
                             _editor.Project.Options.DefaultIsFilled);
                         if (_editor.Project.Options.TryToConnect)

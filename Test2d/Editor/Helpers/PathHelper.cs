@@ -42,7 +42,7 @@ namespace Test2d
                         var transform = ShapeTransform.Create(offsetX: sx, offsetY: sy);
                         _shape = XPath.Create(
                             "Path", 
-                            _editor.Project.CurrentStyleGroup.CurrentStyle, 
+                            _editor.Project.CurrentStyleLibrary.CurrentStyle, 
                             null, null, 
                             transform, 
                             true, true);

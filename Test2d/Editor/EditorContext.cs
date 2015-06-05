@@ -229,7 +229,7 @@ namespace Test2d
             RenameTemplateLayers(container);
 
             var gs = project
-                .StyleGroups.FirstOrDefault(g => g.Name == "Template")
+                .StyleLibraries.FirstOrDefault(g => g.Name == "Template")
                 .Styles.FirstOrDefault(s => s.Name == "Grid");
             var settings = LineGrid.Settings.Create(0, 0, container.Width, container.Height, 30, 30);
             var shapes = LineGrid.Create(gs, settings, project.Options.PointShape);
@@ -804,22 +804,22 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void AddStyleGroupCommandHandler()
+        private void AddStyleLibraryCommandHandler()
         {
-            var sg = ShapeStyleGroup.Create("New");
+            var sg = StyleLibrary.Create("New");
 
-            var previous = _editor.Project.StyleGroups;
-            var next = _editor.Project.StyleGroups.Add(sg);
-            _editor.History.Snapshot(previous, next, (p) => _editor.Project.StyleGroups = p);
-            _editor.Project.StyleGroups = next;
+            var previous = _editor.Project.StyleLibraries;
+            var next = _editor.Project.StyleLibraries.Add(sg);
+            _editor.History.Snapshot(previous, next, (p) => _editor.Project.StyleLibraries = p);
+            _editor.Project.StyleLibraries = next;
         }
  
         /// <summary>
         /// 
         /// </summary>
-        private void RemoveStyleGroupCommandHandler()
+        private void RemoveStyleLibraryCommandHandler()
         {
-            _editor.RemoveCurrentStyleGroup();
+            _editor.RemoveCurrentStyleLibrary();
         }
 
         /// <summary>
@@ -827,7 +827,7 @@ namespace Test2d
         /// </summary>
         private void AddStyleCommandHandler()
         {
-            var sg = _editor.Project.CurrentStyleGroup;
+            var sg = _editor.Project.CurrentStyleLibrary;
             var previous = sg.Styles;
             var next = sg.Styles.Add(ShapeStyle.Create("New"));
             _editor.History.Snapshot(previous, next, (p) => sg.Styles = p);
@@ -1282,14 +1282,14 @@ namespace Test2d
                         () => RemoveLayerCommandHandler(),
                         () => IsEditMode());
 
-                _commands.AddStyleGroupCommand = 
+                _commands.AddStyleLibraryCommand = 
                     new DelegateCommand(
-                        () => AddStyleGroupCommandHandler(),
+                        () => AddStyleLibraryCommandHandler(),
                         () => IsEditMode());
 
-                _commands.RemoveStyleGroupCommand = 
+                _commands.RemoveStyleLibraryCommand = 
                     new DelegateCommand(
-                        () => RemoveStyleGroupCommandHandler(),
+                        () => RemoveStyleLibraryCommandHandler(),
                         () => IsEditMode());
 
                 _commands.AddStyleCommand = 
@@ -1749,7 +1749,7 @@ namespace Test2d
                 {
                     case ImportType.Style:
                         {
-                            var sg = item as ShapeStyleGroup;
+                            var sg = item as StyleLibrary;
                             var json = ReadUtf8Text(path, false);
                             var import = _serializer.FromJson<ShapeStyle>(json);
 
@@ -1761,7 +1761,7 @@ namespace Test2d
                         break;
                     case ImportType.Styles:
                         {
-                            var sg = item as ShapeStyleGroup;
+                            var sg = item as StyleLibrary;
                             var json = ReadUtf8Text(path, false);
                             var import = _serializer.FromJson<IList<ShapeStyle>>(json);
 
@@ -1777,34 +1777,34 @@ namespace Test2d
                             sg.Styles = next;
                         }
                         break;
-                    case ImportType.StyleGroup:
+                    case ImportType.StyleLibrary:
                         {
                             var project = item as Project;
                             var json = ReadUtf8Text(path, false);
-                            var import = _serializer.FromJson<ShapeStyleGroup>(json);
+                            var import = _serializer.FromJson<StyleLibrary>(json);
 
-                            var previous = project.StyleGroups;
-                            var next = project.StyleGroups.Add(import);
-                            _editor.History.Snapshot(previous, next, (p) => project.StyleGroups = p);
-                            project.StyleGroups = next;
+                            var previous = project.StyleLibraries;
+                            var next = project.StyleLibraries.Add(import);
+                            _editor.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
+                            project.StyleLibraries = next;
                         }
                         break;
-                    case ImportType.StyleGroups:
+                    case ImportType.StyleLibraries:
                         {
                             var project = item as Project;
                             var json = ReadUtf8Text(path, false);
-                            var import = _serializer.FromJson<IList<ShapeStyleGroup>>(json);
+                            var import = _serializer.FromJson<IList<StyleLibrary>>(json);
 
-                            var builder = project.StyleGroups.ToBuilder();
+                            var builder = project.StyleLibraries.ToBuilder();
                             foreach (var sg in import)
                             {
                                 builder.Add(sg);
                             }
 
-                            var previous = project.StyleGroups;
+                            var previous = project.StyleLibraries;
                             var next = builder.ToImmutable();
-                            _editor.History.Snapshot(previous, next, (p) => project.StyleGroups = p);
-                            project.StyleGroups = next;
+                            _editor.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
+                            project.StyleLibraries = next;
                         }
                         break;
                     case ImportType.Group:
@@ -1968,19 +1968,19 @@ namespace Test2d
                         break;
                     case ExportType.Styles:
                         {
-                            var json = _serializer.ToJson((item as ShapeStyleGroup).Styles);
+                            var json = _serializer.ToJson((item as StyleLibrary).Styles);
                             WriteUtf8Text(path, json, false);
                         }
                         break;
-                    case ExportType.StyleGroup:
+                    case ExportType.StyleLibrary:
                         {
-                            var json = _serializer.ToJson((item as ShapeStyleGroup));
+                            var json = _serializer.ToJson((item as StyleLibrary));
                             WriteUtf8Text(path, json, false);
                         }
                         break;
-                    case ExportType.StyleGroups:
+                    case ExportType.StyleLibraries:
                         {
-                            var json = _serializer.ToJson((item as Project).StyleGroups);
+                            var json = _serializer.ToJson((item as Project).StyleLibraries);
                             WriteUtf8Text(path, json, false);
                         }
                         break;
@@ -2266,10 +2266,10 @@ namespace Test2d
         {
             try
             {
-                if (_editor.Project.StyleGroups == null)
+                if (_editor.Project.StyleLibraries == null)
                     return;
 
-                var styles = _editor.Project.StyleGroups
+                var styles = _editor.Project.StyleLibraries
                     .Where(sg => sg.Styles != null && sg.Styles.Length > 0)
                     .SelectMany(sg => sg.Styles)
                     .Distinct(new StyleComparer())
@@ -2295,19 +2295,19 @@ namespace Test2d
                     }
                     else
                     {
-                        // create Imported style group
-                        if (_editor.Project.CurrentStyleGroup == null)
+                        // create Imported style library
+                        if (_editor.Project.CurrentStyleLibrary == null)
                         {
-                            var sg = ShapeStyleGroup.Create("Imported");
-                            _editor.Project.StyleGroups = _editor.Project.StyleGroups.Add(sg);
-                            _editor.Project.CurrentStyleGroup = sg;
+                            var sg = StyleLibrary.Create("Imported");
+                            _editor.Project.StyleLibraries = _editor.Project.StyleLibraries.Add(sg);
+                            _editor.Project.CurrentStyleLibrary = sg;
                         }
 
                         // add missing style
-                        _editor.Project.CurrentStyleGroup.Styles = _editor.Project.CurrentStyleGroup.Styles.Add(shape.Style);
+                        _editor.Project.CurrentStyleLibrary.Styles = _editor.Project.CurrentStyleLibrary.Styles.Add(shape.Style);
 
                         // recreate styles dictionary
-                        styles = _editor.Project.StyleGroups
+                        styles = _editor.Project.StyleLibraries
                             .Where(sg => sg.Styles != null && sg.Styles.Length > 0)
                             .SelectMany(sg => sg.Styles)
                             .Distinct(new StyleComparer())
@@ -2550,22 +2550,22 @@ namespace Test2d
                         }
                         else if (string.Compare(ext, ".style", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project.CurrentStyleGroup, ImportType.Style);
+                            ImportEx(path, _editor.Project.CurrentStyleLibrary, ImportType.Style);
                             result = true;
                         }
                         else if (string.Compare(ext, ".styles", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project.CurrentStyleGroup, ImportType.Styles);
+                            ImportEx(path, _editor.Project.CurrentStyleLibrary, ImportType.Styles);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".stylegroup", true, CultureInfo.InvariantCulture) == 0)
+                        else if (string.Compare(ext, ".StyleLibrary", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project, ImportType.StyleGroup);
+                            ImportEx(path, _editor.Project, ImportType.StyleLibrary);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".stylegroups", true, CultureInfo.InvariantCulture) == 0)
+                        else if (string.Compare(ext, ".StyleLibraries", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project, ImportType.StyleGroups);
+                            ImportEx(path, _editor.Project, ImportType.StyleLibraries);
                             result = true;
                         }
                         else if (string.Compare(ext, ".group", true, CultureInfo.InvariantCulture) == 0)
@@ -2724,7 +2724,7 @@ namespace Test2d
                     var text = XText.Create(
                         px, py,
                         px + width, py + height,
-                        _editor.Project.CurrentStyleGroup.CurrentStyle,
+                        _editor.Project.CurrentStyleLibrary.CurrentStyle,
                         _editor.Project.Options.PointShape, "");
                     var binding = ShapeBinding.Create("Text", record.Columns[i].Name);
                     text.Bindings = text.Bindings.Add(binding);
@@ -2737,7 +2737,7 @@ namespace Test2d
             var rectangle = XRectangle.Create(
                 sx, sy,
                 sx + width, sy + (double)length * height,
-                _editor.Project.CurrentStyleGroup.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
                 _editor.Project.Options.PointShape);
             g.AddShape(rectangle);
 
@@ -3145,8 +3145,8 @@ namespace Test2d
 
             (_commands.ImportStyleCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ImportStylesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ImportStyleGroupCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ImportStyleGroupsCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ImportStyleLibraryCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ImportStyleLibrariesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ImportGroupCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ImportGroupsCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ImportGroupLibraryCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
@@ -3155,8 +3155,8 @@ namespace Test2d
             (_commands.ImportTemplatesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ExportStyleCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ExportStylesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ExportStyleGroupCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ExportStyleGroupsCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ExportStyleLibraryCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ExportStyleLibrariesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ExportGroupCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ExportGroupsCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ExportGroupLibraryCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
@@ -3220,8 +3220,8 @@ namespace Test2d
             (_commands.AddStyleCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.RemoveStyleCommand as DelegateCommand).RaiseCanExecuteChanged();
 
-            (_commands.AddStyleGroupCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.RemoveStyleGroupCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.AddStyleLibraryCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.RemoveStyleLibraryCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.RemoveShapeCommand as DelegateCommand).RaiseCanExecuteChanged();
 

@@ -20,11 +20,11 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        StyleGroup,
+        StyleLibrary,
         /// <summary>
         /// 
         /// </summary>
-        StyleGroups,
+        StyleLibraries,
         /// <summary>
         /// 
         /// </summary>

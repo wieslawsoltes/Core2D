@@ -59,11 +59,11 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public ICommand ImportStyleGroupCommand { get; set; }
+        public ICommand ImportStyleLibraryCommand { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public ICommand ImportStyleGroupsCommand { get; set; }
+        public ICommand ImportStyleLibrariesCommand { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -99,11 +99,11 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public ICommand ExportStyleGroupCommand { get; set; }
+        public ICommand ExportStyleLibraryCommand { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public ICommand ExportStyleGroupsCommand { get; set; }
+        public ICommand ExportStyleLibrariesCommand { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -315,11 +315,11 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public ICommand AddStyleGroupCommand { get; set; }
+        public ICommand AddStyleLibraryCommand { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public ICommand RemoveStyleGroupCommand { get; set; }
+        public ICommand RemoveStyleLibraryCommand { get; set; }
 
         /// <summary>
         /// 

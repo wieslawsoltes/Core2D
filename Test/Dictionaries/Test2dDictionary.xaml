@@ -1683,7 +1683,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
-            <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleGroup.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+            <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                       SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Expander}}}" 
                       Grid.Row="0" 
                       Grid.Column="0" 
@@ -2992,7 +2992,7 @@
             </Expander>
         </StackPanel>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type core:ShapeStyleGroup}">
+    <DataTemplate DataType="{x:Type core:StyleLibrary}">
         <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                  BorderBrush="{x:Null}" 
                  TextAlignment="Left" 

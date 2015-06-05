@@ -2,22 +2,22 @@
 var p = Context.Editor.Project;
 var c = Context.Editor.Project.CurrentContainer;
 
-var sg = p.StyleGroups.Where(x => x.Name == "Logic-Gates").FirstOrDefault();
-if (sg == null)
+var sl = p.StyleLibraries.FirstOrDefault(x => x.Name == "Logic-Gates");
+if (sl == null)
 {
-    sg = ShapeStyleGroup.Create("Logic-Gates");
-    p.StyleGroups = p.StyleGroups.Add(sg);
+    sl = StyleLibrary.Create("Logic-Gates");
+    p.StyleLibraries = p.StyleLibraries.Add(sl);
 }
-var styles = sg.Styles.ToBuilder();
+var styles = sl.Styles.ToBuilder();
 
-var gl = p.GroupLibraries.Where(x => x.Name == "Logic-Gates").FirstOrDefault();
+var gl = p.GroupLibraries.FirstOrDefault(x => x.Name == "Logic-Gates");
 if (gl == null)
 {
     gl = GroupLibrary.Create("Logic-Gates");
     p.GroupLibraries = p.GroupLibraries.Add(gl);
 }
 
-p.CurrentStyleGroup = sg;
+p.CurrentStyleLibrary = sl;
 p.CurrentGroupLibrary = gl;
 
 var groups = gl.Groups.ToBuilder();
@@ -75,8 +75,8 @@ var styleLineThick = ShapeStyle.Create(
     TextHAlignment.Center, TextVAlignment.Center);
 styles.Add(styleLineThick);
 
-sg.Styles = styles.ToImmutable();
-sg.CurrentStyle = sg.Styles.FirstOrDefault();
+sl.Styles = styles.ToImmutable();
+sl.CurrentStyle = sl.Styles.FirstOrDefault();
 
 // INPUT
 XGroup CreateInputSignal()

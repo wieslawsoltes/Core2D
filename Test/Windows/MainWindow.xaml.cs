@@ -135,14 +135,14 @@ namespace Test.Windows
                     (item) => ImportObject(item, ImportType.Styles),
                     (item) => context.IsEditMode());
 
-            context.Commands.ImportStyleGroupCommand = 
+            context.Commands.ImportStyleLibraryCommand = 
                 new DelegateCommand<object>(
-                    (item) => ImportObject(item, ImportType.StyleGroup),
+                    (item) => ImportObject(item, ImportType.StyleLibrary),
                     (item) => context.IsEditMode());
 
-            context.Commands.ImportStyleGroupsCommand = 
+            context.Commands.ImportStyleLibrariesCommand = 
                 new DelegateCommand<object>(
-                    (item) => ImportObject(item, ImportType.StyleGroups),
+                    (item) => ImportObject(item, ImportType.StyleLibraries),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportGroupCommand = 
@@ -185,14 +185,14 @@ namespace Test.Windows
                     (item) => ExportObject(item, ExportType.Styles),
                     (item) => context.IsEditMode());
 
-            context.Commands.ExportStyleGroupCommand = 
+            context.Commands.ExportStyleLibraryCommand = 
                 new DelegateCommand<object>(
-                    (item) => ExportObject(item, ExportType.StyleGroup),
+                    (item) => ExportObject(item, ExportType.StyleLibrary),
                     (item) => context.IsEditMode());
 
-            context.Commands.ExportStyleGroupsCommand = 
+            context.Commands.ExportStyleLibrariesCommand = 
                 new DelegateCommand<object>(
-                    (item) => ExportObject(item, ExportType.StyleGroups),
+                    (item) => ExportObject(item, ExportType.StyleLibraries),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportGroupCommand = 
@@ -631,11 +631,11 @@ namespace Test.Windows
                 case ImportType.Styles:
                     filter = "Styles (*.styles)|*.styles|All (*.*)|*.*";
                     break;
-                case ImportType.StyleGroup:
-                    filter = "StyleGroup (*.stylegroup)|*.stylegroup|All (*.*)|*.*";
+                case ImportType.StyleLibrary:
+                    filter = "StyleLibrary (*.StyleLibrary)|*.StyleLibrary|All (*.*)|*.*";
                     break;
-                case ImportType.StyleGroups:
-                    filter = "StyleGroups (*.stylegroups)|*.stylegroups|All (*.*)|*.*";
+                case ImportType.StyleLibraries:
+                    filter = "StyleLibraries (*.StyleLibraries)|*.StyleLibraries|All (*.*)|*.*";
                     break;
                 case ImportType.Group:
                     filter = "Group (*.group)|*.group|All (*.*)|*.*";
@@ -697,14 +697,14 @@ namespace Test.Windows
                     break;
                 case ExportType.Styles:
                     filter = "Styles (*.styles)|*.styles|All (*.*)|*.*";
-                    name = (item as ShapeStyleGroup).Name;
+                    name = (item as StyleLibrary).Name;
                     break;
-                case ExportType.StyleGroup:
-                    filter = "StyleGroup (*.stylegroup)|*.stylegroup|All (*.*)|*.*";
-                    name = (item as ShapeStyleGroup).Name;
+                case ExportType.StyleLibrary:
+                    filter = "StyleLibrary (*.StyleLibrary)|*.StyleLibrary|All (*.*)|*.*";
+                    name = (item as StyleLibrary).Name;
                     break;
-                case ExportType.StyleGroups:
-                    filter = "StyleGroups (*.stylegroups)|*.stylegroups|All (*.*)|*.*";
+                case ExportType.StyleLibraries:
+                    filter = "StyleLibraries (*.StyleLibraries)|*.StyleLibraries|All (*.*)|*.*";
                     name = (item as Project).Name;
                     break;
                 case ExportType.Group:

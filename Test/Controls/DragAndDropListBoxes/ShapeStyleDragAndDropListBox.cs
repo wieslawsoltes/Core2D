@@ -41,7 +41,7 @@ namespace Test.Controls
         {
             var editor = (Test2d.Editor)this.Tag;
 
-            var sg = editor.Project.CurrentStyleGroup;
+            var sg = editor.Project.CurrentStyleLibrary;
             var previous = sg.Styles;
             var next = array;
             editor.History.Snapshot(previous, next, (p) => sg.Styles = p);

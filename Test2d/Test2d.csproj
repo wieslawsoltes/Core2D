@@ -232,7 +232,7 @@
     <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Core\Project\Document.cs" />
-    <Compile Include="Core\Project\GroupLibrary.cs" />
+    <Compile Include="Core\Project\Libraries\GroupLibrary.cs" />
     <Compile Include="Core\Project\Options.cs" />
     <Compile Include="Core\Project\Project.cs" />
     <Compile Include="Math\GdiArc.cs" />
@@ -246,7 +246,7 @@
     <Compile Include="Editor\Observer.cs" />
     <Compile Include="Core\IRenderer.cs" />
     <Compile Include="Core\ObservableObject.cs" />
-    <Compile Include="Core\Project\ShapeStyleGroup.cs" />
+    <Compile Include="Core\Project\Libraries\StyleLibrary.cs" />
     <Compile Include="Core\Shapes\XArc.cs" />
     <Compile Include="Core\Shapes\XBezier.cs" />
     <Compile Include="Core\Shapes\XEllipse.cs" />

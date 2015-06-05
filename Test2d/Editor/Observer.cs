@@ -133,11 +133,11 @@ namespace Test2d
                 Add(project.Databases);
             }
 
-            if (e.PropertyName == "StyleGroups")
+            if (e.PropertyName == "StyleLibraries")
             {
                 var project = sender as Project;
-                Remove(project.StyleGroups);
-                Add(project.StyleGroups);
+                Remove(project.StyleLibraries);
+                Add(project.StyleLibraries);
             }
 
             if (e.PropertyName == "Templates")
@@ -238,13 +238,13 @@ namespace Test2d
             _invalidateShapes();
         }
 
-        private void StyleGroupObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void StyleLibraryObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Style Group: " + (sender is ShapeStyleGroup ? (sender as ShapeStyleGroup).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
+            Debug("Style Library: " + (sender is StyleLibrary ? (sender as StyleLibrary).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
 
             if (e.PropertyName == "Styles")
             {
-                var sg = sender as ShapeStyleGroup;
+                var sg = sender as StyleLibrary;
                 Remove(sg.Styles);
                 Add(sg.Styles);
             }
@@ -449,9 +449,9 @@ namespace Test2d
                 }
             }
             
-            if (project.StyleGroups != null)
+            if (project.StyleLibraries != null)
             {
-                foreach (var sg in project.StyleGroups)
+                foreach (var sg in project.StyleLibraries)
                 {
                     Add(sg);
                 }
@@ -495,9 +495,9 @@ namespace Test2d
                 }
             }
 
-            if (project.StyleGroups != null)
+            if (project.StyleLibraries != null)
             {
-                foreach (var sg in project.StyleGroups)
+                foreach (var sg in project.StyleLibraries)
                 {
                     Remove(sg);
                 }
@@ -1044,7 +1044,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="sg"></param>
-        public void Add(ShapeStyleGroup sg)
+        public void Add(StyleLibrary sg)
         {
             if (sg == null)
                 return;
@@ -1054,15 +1054,15 @@ namespace Test2d
                 Add(sg.Styles);
             }
             
-            sg.PropertyChanged += StyleGroupObserver;
-            Debug("Add Style Group: " + sg.Name);
+            sg.PropertyChanged += StyleLibraryObserver;
+            Debug("Add Style Library: " + sg.Name);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sg"></param>
-        public void Remove(ShapeStyleGroup sg)
+        public void Remove(StyleLibrary sg)
         {
             if (sg == null)
                 return;
@@ -1072,8 +1072,8 @@ namespace Test2d
                 Remove(sg.Styles);
             }
             
-            sg.PropertyChanged -= StyleGroupObserver;
-            Debug("Remove Style Group: " + sg.Name);
+            sg.PropertyChanged -= StyleLibraryObserver;
+            Debug("Remove Style Library: " + sg.Name);
         }
 
         /// <summary>
@@ -1490,7 +1490,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="sgs"></param>
-        public void Add(IEnumerable<ShapeStyleGroup> sgs)
+        public void Add(IEnumerable<StyleLibrary> sgs)
         {
             if (sgs == null)
                 return;
@@ -1505,7 +1505,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="sgs"></param>
-        public void Remove(IEnumerable<ShapeStyleGroup> sgs)
+        public void Remove(IEnumerable<StyleLibrary> sgs)
         {
             if (sgs == null)
                 return;

@@ -15,8 +15,8 @@ namespace Test2d
         private Options _options;
         private ImmutableArray<Database> _databases;
         private Database _currentDatabase;
-        private ImmutableArray<ShapeStyleGroup> _styleGroups;
-        private ShapeStyleGroup _currentStyleGroup;
+        private ImmutableArray<StyleLibrary> _styleLibraries;
+        private StyleLibrary _currentStyleLibrary;
         private ImmutableArray<GroupLibrary> _groupLibraries;
         private GroupLibrary _currentGroupLibrary;
         private ImmutableArray<Container> _templates;
@@ -64,19 +64,19 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public ImmutableArray<ShapeStyleGroup> StyleGroups
+        public ImmutableArray<StyleLibrary> StyleLibraries
         {
-            get { return _styleGroups; }
-            set { Update(ref _styleGroups, value); }
+            get { return _styleLibraries; }
+            set { Update(ref _styleLibraries, value); }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public ShapeStyleGroup CurrentStyleGroup
+        public StyleLibrary CurrentStyleLibrary
         {
-            get { return _currentStyleGroup; }
-            set { Update(ref _currentStyleGroup, value); }
+            get { return _currentStyleLibrary; }
+            set { Update(ref _currentStyleLibrary, value); }
         }
 
         /// <summary>
@@ -146,9 +146,9 @@ namespace Test2d
         /// 
         /// </summary>
         /// <returns></returns>
-        public static ShapeStyleGroup DefaultStyleGroup()
+        public static StyleLibrary DefaultStyleLibrary()
         {
-            var sgd = ShapeStyleGroup.Create("Default");
+            var sgd = StyleLibrary.Create("Default");
 
             var builder = sgd.Styles.ToBuilder();
             builder.Add(ShapeStyle.Create("Black", 255, 0, 0, 0, 255, 0, 0, 0, 2.0));
@@ -167,9 +167,9 @@ namespace Test2d
         /// 
         /// </summary>
         /// <returns></returns>
-        public static ShapeStyleGroup LinesStyleGroup()
+        public static StyleLibrary LinesStyleLibrary()
         {
-            var sgdl = ShapeStyleGroup.Create("Lines");
+            var sgdl = StyleLibrary.Create("Lines");
 
             var solid = ShapeStyle.Create("Solid", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
             solid.LineStyle.Dashes = default(double[]);
@@ -208,9 +208,9 @@ namespace Test2d
         /// 
         /// </summary>
         /// <returns></returns>
-        public static ShapeStyleGroup TemplateStyleGroup()
+        public static StyleLibrary TemplateStyleLibrary()
         {
-            var sgt = ShapeStyleGroup.Create("Template");
+            var sgt = StyleLibrary.Create("Template");
             var gs = ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.0);
 
             var builder = sgt.Styles.ToBuilder();
@@ -234,7 +234,7 @@ namespace Test2d
                 Name = name,
                 Options = Options.Create(),
                 Databases = ImmutableArray.Create<Database>(),
-                StyleGroups = ImmutableArray.Create<ShapeStyleGroup>(),
+                StyleLibraries = ImmutableArray.Create<StyleLibrary>(),
                 GroupLibraries = ImmutableArray.Create<GroupLibrary>(),
                 Templates = ImmutableArray.Create<Container>(),
                 Documents = ImmutableArray.Create<Document>(),
@@ -244,14 +244,14 @@ namespace Test2d
             glBuilder.Add(GroupLibrary.Create("Default"));
             p.GroupLibraries = glBuilder.ToImmutable();
 
-            var sgBuilder = p.StyleGroups.ToBuilder();
-            sgBuilder.Add(DefaultStyleGroup());
-            sgBuilder.Add(LinesStyleGroup());
-            sgBuilder.Add(TemplateStyleGroup());
-            p.StyleGroups = sgBuilder.ToImmutable();
+            var sgBuilder = p.StyleLibraries.ToBuilder();
+            sgBuilder.Add(DefaultStyleLibrary());
+            sgBuilder.Add(LinesStyleLibrary());
+            sgBuilder.Add(TemplateStyleLibrary());
+            p.StyleLibraries = sgBuilder.ToImmutable();
 
             p.CurrentGroupLibrary = p.GroupLibraries.FirstOrDefault();
-            p.CurrentStyleGroup = p.StyleGroups.FirstOrDefault();
+            p.CurrentStyleLibrary = p.StyleLibraries.FirstOrDefault();
 
             return p;
         }

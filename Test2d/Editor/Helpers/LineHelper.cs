@@ -82,7 +82,7 @@ namespace Test2d
                     {
                         _shape = XLine.Create(
                             sx, sy,
-                            _editor.Project.CurrentStyleGroup.CurrentStyle,
+                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape);
                         if (_editor.Project.Options.TryToConnect)
                         {

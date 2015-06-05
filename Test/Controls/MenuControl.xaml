@@ -19,11 +19,11 @@
             <MenuItem Header="_Export..." Command="{Binding Commands.ExportCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText="Ctrl+E"/>
             <Separator/>
             <MenuItem Header="Impo_rt">
-                <MenuItem Header="_Style" Command="{Binding Commands.ImportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup}" InputGestureText=""/>
-                <MenuItem Header="S_tyles" Command="{Binding Commands.ImportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup}" InputGestureText=""/>
+                <MenuItem Header="_Style" Command="{Binding Commands.ImportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
+                <MenuItem Header="S_tyles" Command="{Binding Commands.ImportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
                 <Separator/>
-                <MenuItem Header="St_yle Group" Command="{Binding Commands.ImportStyleGroupCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
-                <MenuItem Header="Sty_le Groups" Command="{Binding Commands.ImportStyleGroupsCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                <MenuItem Header="St_yle Library" Command="{Binding Commands.ImportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                <MenuItem Header="Sty_le Libraries" Command="{Binding Commands.ImportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
                 <Separator/>
                 <MenuItem Header="_Group" Command="{Binding Commands.ImportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
                 <MenuItem Header="G_roups" Command="{Binding Commands.ImportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
@@ -36,11 +36,11 @@
             </MenuItem>
             <Separator/>
             <MenuItem Header="Expor_t">
-                <MenuItem Header="_Style" Command="{Binding Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup.CurrentStyle}" InputGestureText=""/>
-                <MenuItem Header="S_tyles" Command="{Binding Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup}" InputGestureText=""/>
+                <MenuItem Header="_Style" Command="{Binding Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" InputGestureText=""/>
+                <MenuItem Header="S_tyles" Command="{Binding Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
                 <Separator/>
-                <MenuItem Header="St_yle Group" Command="{Binding Commands.ExportStyleGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleGroup}" InputGestureText=""/>
-                <MenuItem Header="Sty_le Groups" Command="{Binding Commands.ExportStyleGroupsCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                <MenuItem Header="St_yle Library" Command="{Binding Commands.ExportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
+                <MenuItem Header="Sty_le Libraries" Command="{Binding Commands.ExportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
                 <Separator/>
                 <MenuItem Header="_Group" Command="{Binding Commands.ExportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.CurrentGroup}" InputGestureText=""/>
                 <MenuItem Header="G_roups" Command="{Binding Commands.ExportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
