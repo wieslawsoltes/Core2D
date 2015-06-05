@@ -58,7 +58,7 @@ namespace TestSIM
         /// 
         /// </summary>
         /// <param name="clock"></param>
-        public override void Run(IClock clock)
+        public override void Run(Clock clock)
         {
             int length = Inputs.Length;
             if (length == 1)

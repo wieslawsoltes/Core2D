@@ -145,7 +145,7 @@ namespace TestSIM
         /// </summary>
         /// <param name="simulations"></param>
         /// <param name="clock"></param>
-        public void Run(IDictionary<XGroup, BoolSimulation> simulations, IClock clock)
+        public void Run(IDictionary<XGroup, BoolSimulation> simulations, Clock clock)
         {
             foreach (var simulation in simulations)
             {

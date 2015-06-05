@@ -11,14 +11,14 @@ namespace TestSIM
     /// <summary>
     /// 
     /// </summary>
-    public class TimerOnSimulation : BoolSimulation
+    public class TimerOffSimulation : BoolSimulation
     {
         /// <summary>
         /// 
         /// </summary>
         public override string Key
         {
-            get { return "TIMER-ON"; }
+            get { return "TIMER-OFF"; }
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace TestSIM
                     double delay = group.GetDoublePropertyValue("Delay");
                     string unit = group.GetStringPropertyValue("Unit");
                     double seconds = delay.ConvertToSeconds(unit);
-                    return new TimerOnSimulation(false, seconds);
+                    return new TimerOffSimulation(false, seconds);
                 };
             }
         }
@@ -46,7 +46,7 @@ namespace TestSIM
         /// <summary>
         /// 
         /// </summary>
-        public TimerOnSimulation()
+        public TimerOffSimulation()
             : base()
         {
         }
@@ -56,7 +56,7 @@ namespace TestSIM
         /// </summary>
         /// <param name="state"></param>
         /// <param name="delay"></param>
-        public TimerOnSimulation(bool? state, double delay)
+        public TimerOffSimulation(bool? state, double delay)
             : base()
         {
             base.State = state;
@@ -64,13 +64,14 @@ namespace TestSIM
         }
 
         private bool _isEnabled;
+        private bool _isLowEnabled;
         private long _endCycle;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="clock"></param>
-        public override void Run(IClock clock)
+        public override void Run(Clock clock)
         {
             int length = Inputs.Length;
             if (length == 0)
@@ -85,37 +86,52 @@ namespace TestSIM
                 {
                     case true:
                         {
-                            if (_isEnabled)
+                            if (_isEnabled == false && _isLowEnabled == false)
                             {
-                                if (clock.Cycle >= _endCycle && base.State != true)
-                                {
-                                    base.State = true;
-                                }
-                            }
-                            else
-                            {
-                                // Delay -> in seconds
-                                // Clock.Cycle
-                                // Clock.Resolution -> in milliseconds
-                                long cyclesDelay = (long)(Delay * 1000.0) / clock.Resolution;
-                                _endCycle = clock.Cycle + cyclesDelay;
+                                base.State = true;
                                 _isEnabled = true;
+                                _isLowEnabled = false;
+                            }
+                            else if (_isEnabled == true && _isLowEnabled == true && base.State != false)
+                            {
                                 if (clock.Cycle >= _endCycle)
                                 {
-                                    base.State = true;
+                                    base.State = false;
+                                    _isEnabled = false;
+                                    _isLowEnabled = false;
+                                    break;
                                 }
                             }
                         }
                         break;
                     case false:
                         {
-                            _isEnabled = false;
-                            base.State = false;
+                            if (_isEnabled == true && _isLowEnabled == false)
+                            {
+                                // Delay -> in seconds
+                                // Clock.Cycle
+                                // Clock.Resolution -> in milliseconds
+                                long cyclesDelay = (long)(Delay * 1000.0) / clock.Resolution;
+                                _endCycle = clock.Cycle + cyclesDelay;
+                                _isLowEnabled = true;
+                                break;
+                            }
+                            else if (_isEnabled == true && _isLowEnabled == true && base.State != false)
+                            {
+                                if (clock.Cycle >= _endCycle)
+                                {
+                                    base.State = false;
+                                    _isEnabled = false;
+                                    _isLowEnabled = false;
+                                    break;
+                                }
+                            }
                         }
                         break;
                     case null:
                         {
                             _isEnabled = false;
+                            _isLowEnabled = false;
                             base.State = default(bool?);
                         }
                         break;
@@ -123,7 +139,7 @@ namespace TestSIM
             }
             else
             {
-                throw new Exception("TimerOn simulation can only have one input State.");
+                throw new Exception("TimerOff simulation can only have one input State.");
             }
         }
     }

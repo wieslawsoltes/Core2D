@@ -11,31 +11,28 @@ namespace TestSIM
     /// <summary>
     /// 
     /// </summary>
-    public class MemorySetPriorityVSimulation : BoolSimulation
+    public abstract class BoolSimulation
     {
         /// <summary>
         /// 
         /// </summary>
-        public override string Key
-        {
-            get { return "SR-SET-V"; }
-        }
-
+        public abstract string Key { get; }
         /// <summary>
         /// 
         /// </summary>
-        public override Func<XGroup, BoolSimulation> Factory
-        {
-            get { return (group) => { return new MemorySetPriorityVSimulation(); }; }
-        }
-
+        public abstract Func<XGroup, BoolSimulation> Factory { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public BoolInput[] Inputs { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool? State { get; set; }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="clock"></param>
-        public override void Run(IClock clock)
-        {
-            // TODO: Implement Run().
-        }
+        public abstract void Run(Clock clock);
     }
 }

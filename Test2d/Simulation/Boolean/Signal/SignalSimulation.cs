@@ -1,4 +1,4 @@
-// Copyright (c) Wiesław Šoltés. All rights reserved.
+﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
@@ -11,14 +11,14 @@ namespace TestSIM
     /// <summary>
     /// 
     /// </summary>
-    public class XorSimulation : BoolSimulation
+    public class SignalSimulation : BoolSimulation
     {
         /// <summary>
         /// 
         /// </summary>
-        public override string Key 
-        { 
-            get { return "XOR"; } 
+        public override string Key
+        {
+            get { return "SIGNAL"; }
         }
 
         /// <summary>
@@ -26,13 +26,13 @@ namespace TestSIM
         /// </summary>
         public override Func<XGroup, BoolSimulation> Factory
         {
-            get { return (group) => { return new XorSimulation(null); }; }
+            get { return (group) => { return new SignalSimulation(false); }; }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public XorSimulation()
+        public SignalSimulation() 
             : base()
         {
         }
@@ -41,7 +41,7 @@ namespace TestSIM
         /// 
         /// </summary>
         /// <param name="state"></param>
-        public XorSimulation(bool? state)
+        public SignalSimulation(bool? state)
             : base()
         {
             base.State = state;
@@ -51,29 +51,22 @@ namespace TestSIM
         /// 
         /// </summary>
         /// <param name="clock"></param>
-        public override void Run(IClock clock)
+        public override void Run(Clock clock)
         {
             int length = Inputs.Length;
-            if (length == 1)
+            if (length == 0)
             {
-                base.State = default(bool?);
-                return;
+                // Do nothing.
             }
-
-            bool? result = default(bool?);
-            for (int i = 0; i < length; i++)
+            else if (length == 1)
             {
-                var input = Inputs[i];
-                if (i == 0)
-                {
-                    result = input.IsInverted ? !(input.Simulation.State) : input.Simulation.State;
-                }
-                else
-                {
-                    result ^= input.IsInverted ? !(input.Simulation.State) : input.Simulation.State;
-                }
+                var input = Inputs[0];
+                base.State = input.IsInverted ? !(input.Simulation.State) : input.Simulation.State;
             }
-            base.State = result;
+            else
+            {
+                throw new Exception("Signal simulation can only have one input State.");
+            }
         }
     }
 }

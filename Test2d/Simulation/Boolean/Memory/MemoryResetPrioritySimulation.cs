@@ -11,14 +11,14 @@ namespace TestSIM
     /// <summary>
     /// 
     /// </summary>
-    public class ShortcutSimulation : BoolSimulation
+    public class MemoryResetPrioritySimulation : BoolSimulation
     {
         /// <summary>
         /// 
         /// </summary>
         public override string Key
         {
-            get { return "SHORTCUT"; }
+            get { return "SR-RESET"; }
         }
 
         /// <summary>
@@ -26,16 +26,16 @@ namespace TestSIM
         /// </summary>
         public override Func<XGroup, BoolSimulation> Factory
         {
-            get { return (group) => { return new ShortcutSimulation(); }; }
+            get { return (group) => { return new MemoryResetPrioritySimulation(); }; }
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="clock"></param>
-        public override void Run(IClock clock)
+        public override void Run(Clock clock)
         {
-            // TODO: Implement simulation
+            // TODO: Implement Run().
         }
     }
 }

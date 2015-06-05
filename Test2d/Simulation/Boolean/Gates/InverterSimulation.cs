@@ -11,14 +11,14 @@ namespace TestSIM
     /// <summary>
     /// 
     /// </summary>
-    public class SignalSimulation : BoolSimulation
+    public class InverterSimulation : BoolSimulation
     {
         /// <summary>
         /// 
         /// </summary>
         public override string Key
         {
-            get { return "SIGNAL"; }
+            get { return "INVERTER"; }
         }
 
         /// <summary>
@@ -26,13 +26,13 @@ namespace TestSIM
         /// </summary>
         public override Func<XGroup, BoolSimulation> Factory
         {
-            get { return (group) => { return new SignalSimulation(false); }; }
+            get { return (group) => { return new InverterSimulation(null); }; }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public SignalSimulation() 
+        public InverterSimulation()
             : base()
         {
         }
@@ -41,7 +41,7 @@ namespace TestSIM
         /// 
         /// </summary>
         /// <param name="state"></param>
-        public SignalSimulation(bool? state)
+        public InverterSimulation(bool? state)
             : base()
         {
             base.State = state;
@@ -51,7 +51,7 @@ namespace TestSIM
         /// 
         /// </summary>
         /// <param name="clock"></param>
-        public override void Run(IClock clock)
+        public override void Run(Clock clock)
         {
             int length = Inputs.Length;
             if (length == 0)
@@ -61,11 +61,11 @@ namespace TestSIM
             else if (length == 1)
             {
                 var input = Inputs[0];
-                base.State = input.IsInverted ? !(input.Simulation.State) : input.Simulation.State;
+                base.State = input.IsInverted ? input.Simulation.State : !(input.Simulation.State);
             }
             else
             {
-                throw new Exception("Signal simulation can only have one input State.");
+                throw new Exception("Inverter simulation can only have one input State.");
             }
         }
     }

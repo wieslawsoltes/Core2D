@@ -11,14 +11,14 @@ namespace TestSIM
     /// <summary>
     /// 
     /// </summary>
-    public class AndSimulation : BoolSimulation
+    public class InputSimulation : BoolSimulation
     {
         /// <summary>
         /// 
         /// </summary>
         public override string Key
         {
-            get { return "AND"; }
+            get { return "INPUT"; }
         }
 
         /// <summary>
@@ -26,13 +26,13 @@ namespace TestSIM
         /// </summary>
         public override Func<XGroup, BoolSimulation> Factory
         {
-            get { return (group) => { return new AndSimulation(null); }; }
+            get { return (group) => { return new InputSimulation(false); }; }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public AndSimulation()
+        public InputSimulation()
             : base()
         {
         }
@@ -41,7 +41,7 @@ namespace TestSIM
         /// 
         /// </summary>
         /// <param name="state"></param>
-        public AndSimulation(bool? state)
+        public InputSimulation(bool? state)
             : base()
         {
             base.State = state;
@@ -51,29 +51,17 @@ namespace TestSIM
         /// 
         /// </summary>
         /// <param name="clock"></param>
-        public override void Run(IClock clock)
+        public override void Run(Clock clock)
         {
             int length = Inputs.Length;
-            if (length == 1)
+            if (length == 0)
             {
-                base.State = default(bool?);
-                return;
+                // Do nothing.
             }
-
-            bool? result = default(bool?);
-            for (int i = 0; i < length; i++)
+            else
             {
-                var input = Inputs[i];
-                if (i == 0)
-                {
-                    result = input.IsInverted ? !(input.Simulation.State) : input.Simulation.State;
-                }
-                else
-                {
-                    result &= input.IsInverted ? !(input.Simulation.State) : input.Simulation.State;
-                }
+                throw new Exception("Input simulation can not have any inputs connected.");
             }
-            base.State = result;
         }
     }
 }

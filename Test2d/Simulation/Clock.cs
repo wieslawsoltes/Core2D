@@ -10,7 +10,7 @@ namespace TestSIM
     /// <summary>
     /// 
     /// </summary>
-    public class Clock : IClock
+    public class Clock
     {
         private object _sync = new object();
         private long _cycle;

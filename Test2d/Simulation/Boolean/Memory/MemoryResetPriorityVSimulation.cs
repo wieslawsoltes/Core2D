@@ -33,7 +33,7 @@ namespace TestSIM
         /// 
         /// </summary>
         /// <param name="clock"></param>
-        public override void Run(IClock clock)
+        public override void Run(Clock clock)
         {
             // TODO: Implement Run().
         }

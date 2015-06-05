@@ -11,14 +11,14 @@ namespace TestSIM
     /// <summary>
     /// 
     /// </summary>
-    public class MemorySetPrioritySimulation : BoolSimulation
+    public class MemorySetPriorityVSimulation : BoolSimulation
     {
         /// <summary>
         /// 
         /// </summary>
         public override string Key
         {
-            get { return "SR-SET"; }
+            get { return "SR-SET-V"; }
         }
 
         /// <summary>
@@ -26,14 +26,14 @@ namespace TestSIM
         /// </summary>
         public override Func<XGroup, BoolSimulation> Factory
         {
-            get { return (group) => { return new MemorySetPrioritySimulation(); }; }
+            get { return (group) => { return new MemorySetPriorityVSimulation(); }; }
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="clock"></param>
-        public override void Run(IClock clock)
+        public override void Run(Clock clock)
         {
             // TODO: Implement Run().
         }
