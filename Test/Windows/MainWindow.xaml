@@ -59,10 +59,10 @@
                 <ad:LayoutPanel Orientation="Horizontal">
                     <ad:LayoutAnchorablePaneGroup DockWidth="230" Orientation="Vertical">
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable Title="Project">
+                            <ad:LayoutAnchorable Title="Project" AutoHideWidth="230">
                                 <controls:ProjectControl/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Options">
+                            <ad:LayoutAnchorable Title="Options" AutoHideWidth="230">
                                 <ScrollViewer 
                                     VerticalScrollBarVisibility="Auto" 
                                     HorizontalScrollBarVisibility="Auto" 
@@ -70,15 +70,15 @@
                                     <ContentControl Content="{Binding Editor.Project.Options}"/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Templates">
+                            <ad:LayoutAnchorable Title="Templates" AutoHideWidth="230">
                                 <controls:TemplatesControl/>
                             </ad:LayoutAnchorable> 
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable Title="Groups">
+                            <ad:LayoutAnchorable Title="Groups" AutoHideWidth="230">
                                 <controls:GroupsControl/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Data">
+                            <ad:LayoutAnchorable Title="Data" AutoHideWidth="230">
                                 <controls:DatabasesControl/>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
@@ -126,18 +126,18 @@
                     </ad:LayoutDocumentPaneGroup>
                     <ad:LayoutAnchorablePaneGroup DockWidth="230" Orientation="Vertical">
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable Title="Styles">
+                            <ad:LayoutAnchorable Title="Styles" AutoHideWidth="230">
                                 <controls:StylesControl/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Layers">
+                            <ad:LayoutAnchorable Title="Layers" AutoHideWidth="230">
                                 <controls:LayersControl/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Shapes">
+                            <ad:LayoutAnchorable Title="Shapes" AutoHideWidth="230">
                                 <controls:ShapesControl/>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable Title="Properties">
+                            <ad:LayoutAnchorable Title="Properties" AutoHideWidth="230">
                                 <ScrollViewer 
                                     VerticalScrollBarVisibility="Auto" 
                                     HorizontalScrollBarVisibility="Auto" 
@@ -145,7 +145,7 @@
                                     <controls:ShapeControl/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Style">
+                            <ad:LayoutAnchorable Title="Style" AutoHideWidth="230">
                                 <ScrollViewer 
                                     VerticalScrollBarVisibility="Auto" 
                                     HorizontalScrollBarVisibility="Auto" 
@@ -153,7 +153,7 @@
                                     <controls:StyleControl/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Template">
+                            <ad:LayoutAnchorable Title="Template" AutoHideWidth="230">
                                 <ScrollViewer 
                                     VerticalScrollBarVisibility="Auto" 
                                     HorizontalScrollBarVisibility="Auto" 
