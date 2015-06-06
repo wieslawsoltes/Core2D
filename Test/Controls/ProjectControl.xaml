@@ -10,43 +10,40 @@
              xmlns:converters="clr-namespace:Test.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="200">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Test;component/Dictionaries/Test2dDictionary.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
     <Grid>
+        <Grid.Resources>
+            <ControlTemplate x:Key="ProjectMenu">
+                <Menu Background="Transparent" HorizontalAlignment="Right">
+                    <MenuItem Command="{Binding Commands.NewCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="_+"/>
+                    <MenuItem Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="_-"/>
+                </Menu>
+            </ControlTemplate>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0" Margin="2,0,2,0">
-            <MenuItem Command="{Binding Commands.NewCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="_+"/>
-            <MenuItem Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="_-"/>
-        </Menu>
-        <ContentControl Content="{Binding Editor.Project}"
-                        Grid.Row="1" 
-                        Margin="2,0,2,0">
-            <ContentControl.Style>
-                <Style TargetType="ContentControl">
-                    <Setter Property="Visibility" Value="Visible"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding}" Value="{x:Null}">
-                            <Setter Property="Visibility" Value="Hidden"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ContentControl.Style>
-        </ContentControl>
-        <TreeView x:Name="projectTreeView" 
-                  Tag="{Binding}"
-                  ItemsSource="{Binding Editor.Project.Documents}" 
-                  BorderBrush="{x:Null}" 
-                  Grid.Row="2">
+        <Control Template="{StaticResource ProjectMenu}" Grid.Row="0" Margin="2,0,2,0"/>
+        <Grid 
+            Grid.Row="1" 
+            Margin="2,0,2,0">
+            <TextBox 
+                Text="{Binding Editor.Project.Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                BorderBrush="{x:Null}" 
+                Margin="5,2,5,2"
+                Grid.Row="0" 
+                TextAlignment="Left" 
+                VerticalAlignment="Center">
+            </TextBox>
+        </Grid>
+        <TreeView 
+            x:Name="projectTreeView" 
+            Tag="{Binding}"
+            ItemsSource="{Binding Editor.Project.Documents}" 
+            BorderBrush="{x:Null}" 
+            Grid.Row="2">
             <TreeView.Resources>
                 <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
             </TreeView.Resources>
@@ -105,18 +102,27 @@
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
-        <ContentControl Content="{Binding ElementName=projectTreeView, Path=SelectedItem}"
-                        Grid.Row="3" Margin="2">
-             <ContentControl.Style>
-                <Style TargetType="ContentControl">
+        <Expander Header="Name" IsExpanded="True" Grid.Row="3" Margin="2">
+            <Expander.Style>
+                <Style TargetType="Expander">
                     <Setter Property="Visibility" Value="Visible"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                        <DataTrigger Binding="{Binding ElementName=projectTreeView, Path=SelectedItem}" Value="{x:Null}">
                             <Setter Property="Visibility" Value="Hidden"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-            </ContentControl.Style>
-        </ContentControl>
+            </Expander.Style>
+            <Grid>
+                <TextBox 
+                    Text="{Binding ElementName=projectTreeView, Path=SelectedItem.Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                    BorderBrush="{x:Null}" 
+                    Margin="5,2,5,2"
+                    Grid.Row="0" 
+                    TextAlignment="Left" 
+                    VerticalAlignment="Center">
+                </TextBox>
+            </Grid>
+        </Expander>
     </Grid>
 </UserControl>

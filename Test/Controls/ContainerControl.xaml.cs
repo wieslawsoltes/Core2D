@@ -23,6 +23,8 @@ namespace Test.Controls
     /// </summary>
     public partial class ContainerControl : UserControl
     {
+        private bool _isLoaded = false;
+
         /// <summary>
         /// 
         /// </summary>
@@ -30,7 +32,16 @@ namespace Test.Controls
         {
             InitializeComponent();
 
-            Loaded += (s, e) => InitializeCanvas(); 
+            Loaded += 
+                (s, e) =>
+                {
+                    if (_isLoaded)
+                        return;
+                    else
+                        _isLoaded = true;
+
+                    InitializeCanvas();
+                };
         }
 
         /// <summary>

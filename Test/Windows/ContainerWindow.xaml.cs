@@ -23,6 +23,8 @@ namespace Test.Windows
     /// </summary>
     public partial class ContainerWindow : Window
     {
+        private bool _isLoaded = false;
+
         /// <summary>
         /// 
         /// </summary>
@@ -80,6 +82,11 @@ namespace Test.Windows
             Loaded +=
                 (s, e) =>
                 {
+                    if (_isLoaded)
+                        return;
+                    else
+                        _isLoaded = true;
+
                     ((DataContext as EditorContext).Editor.Renderer as ObservableObject).PropertyChanged +=
                         (_s, _e) =>
                         {

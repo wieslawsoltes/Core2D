@@ -10,9 +10,10 @@
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextHintingMode="Auto"
         TextOptions.TextRenderingMode="Auto">
-    <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                  HorizontalScrollBarVisibility="Auto" 
-                  Focusable="False">
+    <ScrollViewer 
+        VerticalScrollBarVisibility="Auto" 
+        HorizontalScrollBarVisibility="Auto" 
+        Focusable="False">
         <controls:LayersControl Margin="2"/>
     </ScrollViewer>
 </Window>

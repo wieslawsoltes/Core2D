@@ -60,6 +60,8 @@ namespace Test.Windows
     /// </summary>
     public partial class MainWindow : Window, IView
     {
+        private bool _isLoaded = false;
+
         /// <summary>
         /// 
         /// </summary>
@@ -356,6 +358,11 @@ namespace Test.Windows
             Loaded += 
                 (s, e) =>
                 {
+                    if (_isLoaded)
+                        return;
+                    else
+                        _isLoaded = true;
+
                     (context.Editor.Renderer as ObservableObject).PropertyChanged +=
                         (_s, _e) =>
                         {

@@ -11,9 +11,6 @@
              d:DesignHeight="600" d:DesignWidth="810"
              Width="{Binding Editor.Project.CurrentContainer.Width}" 
              Height="{Binding Editor.Project.CurrentContainer.Height}">
-    <UserControl.Resources>
-        <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
-    </UserControl.Resources>
     <UserControl.InputBindings>
         <KeyBinding Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding}" Key="Delete" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolNoneCommand}" Key="N" Modifiers=""/>

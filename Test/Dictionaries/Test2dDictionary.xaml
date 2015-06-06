@@ -17,6 +17,7 @@
     <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
     <converters:ShapeBindingParameterConverter x:Key="ShapeBindingParameterConverter"/>
     <converters:ShapePropertyParameterConverter x:Key="ShapePropertyParameterConverter"/>
+    <converters:ZoomScaleConverter x:Key="ZoomScaleConverter"/>
     <!-- enums -->
     <ObjectDataProvider x:Key="MoveModeValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
         <ObjectDataProvider.MethodParameters>
@@ -1457,7 +1458,7 @@
             </ComboBox>
         </Grid>
     </DataTemplate>
-    <ControlTemplate x:Key="StyleControlTemplateKey">
+    <DataTemplate DataType="{x:Type core:ShapeStyle}">
         <StackPanel>
             <Expander Header="Name" IsExpanded="True">
                 <Grid>
@@ -1673,8 +1674,8 @@
                 </Grid>
             </Expander>
         </StackPanel>
-    </ControlTemplate>
-    <DataTemplate DataType="{x:Type core:ShapeStyle}">
+    </DataTemplate>
+    <ControlTemplate x:Key="StyleControlTemplateKey">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -1696,8 +1697,15 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
         </Grid>
-    </DataTemplate>
+    </ControlTemplate>
     <!-- data -->
+    <ControlTemplate x:Key="BindingsMenu">
+        <Menu Background="Transparent" HorizontalAlignment="Right">
+            <MenuItem Command="{Binding DataContext.Commands.AddBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                      CommandParameter="{Binding}" 
+                      Header="+"/>
+        </Menu>
+    </ControlTemplate>
     <ControlTemplate x:Key="BindingsControlTemplateKey">
          <Grid>
             <Grid.RowDefinitions>
@@ -1706,11 +1714,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0" Margin="2,0,2,0">
-                <MenuItem Command="{Binding DataContext.Commands.AddBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                          CommandParameter="{Binding}" 
-                          Header="+"/>
-            </Menu>
+            <Control Template="{StaticResource BindingsMenu}" Grid.Row="0" Margin="2,0,2,0"/>
             <Grid Height="Auto" VerticalAlignment="Top" Grid.Row="1">
                 <Grid.Style>
                     <Style TargetType="Grid">
@@ -1770,6 +1774,13 @@
             </ItemsControl>
         </Grid>
     </ControlTemplate>
+    <ControlTemplate x:Key="PropertiesMenu">
+        <Menu Background="Transparent" HorizontalAlignment="Right">
+            <MenuItem Command="{Binding DataContext.Commands.AddPropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                      CommandParameter="{Binding}" 
+                      Header="+"/>
+        </Menu>
+    </ControlTemplate>
     <ControlTemplate x:Key="PropertiesControlTemplateKey">
          <Grid>
             <Grid.RowDefinitions>
@@ -1778,11 +1789,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0" Margin="2,0,2,0">
-                <MenuItem Command="{Binding DataContext.Commands.AddPropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                          CommandParameter="{Binding}" 
-                          Header="+"/>
-            </Menu>
+            <Control Template="{StaticResource PropertiesMenu}" Grid.Row="0" Margin="2,0,2,0"/>
             <Grid Height="Auto" VerticalAlignment="Top" Grid.Row="1">
                 <Grid.Style>
                     <Style TargetType="Grid">
@@ -2043,7 +2050,7 @@
     <DataTemplate DataType="{x:Type core:XLine}">
         <StackPanel>
             <Expander Header="Style" IsExpanded="True">
-                <ContentControl Content="{Binding Style}"/>
+                <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="Start" IsExpanded="False">
                 <ContentControl Content="{Binding Start}"/>
@@ -2068,7 +2075,7 @@
     <DataTemplate DataType="{x:Type core:XRectangle}">
         <StackPanel>
             <Expander Header="Style" IsExpanded="True">
-                <ContentControl Content="{Binding Style}"/>
+                <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="TopLeft" IsExpanded="False">
                 <ContentControl Content="{Binding TopLeft}"/>
@@ -2119,7 +2126,7 @@
     <DataTemplate DataType="{x:Type core:XEllipse}">
         <StackPanel>
             <Expander Header="Style" IsExpanded="True">
-                <ContentControl Content="{Binding Style}"/>
+                <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="TopLeft" IsExpanded="False">
                 <ContentControl Content="{Binding TopLeft}"/>
@@ -2170,7 +2177,7 @@
     <DataTemplate DataType="{x:Type core:XArc}">
         <StackPanel>
             <Expander Header="Style" IsExpanded="True">
-                <ContentControl Content="{Binding Style}"/>
+                <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="Point1" IsExpanded="False">
                 <ContentControl Content="{Binding Point1}"/>
@@ -2227,7 +2234,7 @@
     <DataTemplate DataType="{x:Type core:XBezier}">
         <StackPanel>
             <Expander Header="Style" IsExpanded="True">
-                <ContentControl Content="{Binding Style}"/>
+                <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="Point1" IsExpanded="False">
                 <ContentControl Content="{Binding Point1}"/>
@@ -2284,7 +2291,7 @@
     <DataTemplate DataType="{x:Type core:XQBezier}">
         <StackPanel>
             <Expander Header="Style" IsExpanded="True">
-                <ContentControl Content="{Binding Style}"/>
+                <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="Point1" IsExpanded="False">
                 <ContentControl Content="{Binding Point1}"/>
@@ -2338,7 +2345,7 @@
     <DataTemplate DataType="{x:Type core:XText}">
         <StackPanel>
             <Expander Header="Style" IsExpanded="True">
-                <ContentControl Content="{Binding Style}"/>
+                <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="TopLeft" IsExpanded="False">
                 <ContentControl Content="{Binding TopLeft}"/>
@@ -2409,7 +2416,7 @@
     <DataTemplate DataType="{x:Type core:XImage}">
         <StackPanel>
             <Expander Header="Style" IsExpanded="True">
-                <ContentControl Content="{Binding Style}"/>
+                <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="TopLeft" IsExpanded="False">
                 <ContentControl Content="{Binding TopLeft}"/>
@@ -2579,7 +2586,7 @@
                 </Grid>
             </Expander>
             <Expander Header="Style" IsExpanded="True">
-                <ContentControl Content="{Binding Style}"/>
+                <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="Source" IsExpanded="False">
                 <Grid>
@@ -2724,131 +2731,146 @@
         <Separator/>
         <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
     </ContextMenu>
+    <DataTemplate DataType="{x:Type core:Options}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock 
+                Text="SnapToGrid" 
+                Margin="5,2,5,2" 
+                Grid.Row="0"
+                Grid.Column="0" 
+                TextAlignment="Left" 
+                VerticalAlignment="Center">
+            </TextBlock>
+            <TextBlock 
+                Text="SnapX" 
+                Margin="5,2,5,2" 
+                Grid.Row="1" 
+                Grid.Column="0" 
+                TextAlignment="Left" 
+                VerticalAlignment="Center">
+            </TextBlock>
+            <TextBlock 
+                Text="SnapY" 
+                Margin="5,2,5,2" 
+                Grid.Row="2" 
+                Grid.Column="0" 
+                TextAlignment="Left" 
+                VerticalAlignment="Center">
+            </TextBlock>
+            <TextBlock 
+                Text="HitTreshold" 
+                Margin="5,2,5,2" 
+                Grid.Row="3" 
+                Grid.Column="0" 
+                TextAlignment="Left" 
+                VerticalAlignment="Center">
+            </TextBlock>
+            <TextBlock 
+                Text="MoveMode" 
+                Margin="5,2,5,2" 
+                Grid.Row="4"
+                Grid.Column="0" 
+                TextAlignment="Left" 
+                VerticalAlignment="Center">
+            </TextBlock>
+            <TextBlock 
+                Text="DefaultIsFilled" 
+                Margin="5,2,5,2" 
+                Grid.Row="5"
+                Grid.Column="0" 
+                TextAlignment="Left" 
+                VerticalAlignment="Center">
+            </TextBlock>
+            <TextBlock 
+                Text="TryToConnect" 
+                Margin="5,2,5,2" 
+                Grid.Row="6"
+                Grid.Column="0" 
+                TextAlignment="Left" 
+                VerticalAlignment="Center">
+            </TextBlock>
+            <CheckBox 
+                Content=""
+                IsChecked="{Binding SnapToGrid}"
+                Grid.Row="0" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2"
+                Margin="5,2,5,2">
+            </CheckBox>
+            <TextBox 
+                Text="{Binding SnapX, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                BorderBrush="{x:Null}" 
+                Margin="5,2,5,2"
+                Grid.Row="1" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2"
+                TextAlignment="Center" 
+                VerticalAlignment="Center">
+            </TextBox>
+            <TextBox 
+                Text="{Binding SnapY, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                BorderBrush="{x:Null}" 
+                Margin="5,2,5,2"
+                Grid.Row="2" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2"
+                TextAlignment="Center" 
+                VerticalAlignment="Center">
+            </TextBox>
+            <TextBox 
+                Text="{Binding HitTreshold, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                BorderBrush="{x:Null}" 
+                Margin="5,2,5,2"
+                Grid.Row="3" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2"
+                TextAlignment="Center" 
+                VerticalAlignment="Center">
+            </TextBox>
+            <ComboBox 
+                ItemsSource="{Binding Source={StaticResource ResourceKey=MoveModeValues}}" 
+                SelectedItem="{Binding MoveMode}" 
+                Margin="5,2,5,2" 
+                Grid.Row="4" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2">
+            </ComboBox>
+            <CheckBox 
+                Content=""
+                IsChecked="{Binding DefaultIsFilled}"
+                Grid.Row="5" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2"
+                Margin="5,2,5,2">
+            </CheckBox>
+            <CheckBox 
+                Content=""
+                IsChecked="{Binding TryToConnect}"
+                Grid.Row="6" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2"
+                Margin="5,2,5,2">
+            </CheckBox>
+        </Grid>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type core:Project}">
         <StackPanel>
             <Expander Header="Options" IsExpanded="False">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="SnapToGrid" 
-                               Margin="5,2,5,2" 
-                               Grid.Row="0"
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock Text="SnapX" 
-                               Margin="5,2,5,2" 
-                               Grid.Row="1" 
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock Text="SnapY" 
-                               Margin="5,2,5,2" 
-                               Grid.Row="2" 
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock Text="HitTreshold" 
-                               Margin="5,2,5,2" 
-                               Grid.Row="3" 
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="MoveMode" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="4"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock Text="DefaultIsFilled" 
-                               Margin="5,2,5,2" 
-                               Grid.Row="5"
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock Text="TryToConnect" 
-                               Margin="5,2,5,2" 
-                               Grid.Row="6"
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
-                    </TextBlock>
-                    <CheckBox Content=""
-                              IsChecked="{Binding Options.SnapToGrid}"
-                              Grid.Row="0" 
-                              Grid.Column="1" 
-                              Grid.ColumnSpan="2"
-                              Margin="5,2,5,2">
-                    </CheckBox>
-                    <TextBox Text="{Binding Options.SnapX, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                             BorderBrush="{x:Null}" 
-                             Margin="5,2,5,2"
-                             Grid.Row="1" 
-                             Grid.Column="1" 
-                             Grid.ColumnSpan="2"
-                             TextAlignment="Center" 
-                             VerticalAlignment="Center">
-                    </TextBox>
-                    <TextBox Text="{Binding Options.SnapY, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                             BorderBrush="{x:Null}" 
-                             Margin="5,2,5,2"
-                             Grid.Row="2" 
-                             Grid.Column="1" 
-                             Grid.ColumnSpan="2"
-                             TextAlignment="Center" 
-                             VerticalAlignment="Center">
-                    </TextBox>
-                    <TextBox Text="{Binding Options.HitTreshold, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                             BorderBrush="{x:Null}" 
-                             Margin="5,2,5,2"
-                             Grid.Row="3" 
-                             Grid.Column="1" 
-                             Grid.ColumnSpan="2"
-                             TextAlignment="Center" 
-                             VerticalAlignment="Center">
-                    </TextBox>
-                    <ComboBox 
-                        ItemsSource="{Binding Source={StaticResource ResourceKey=MoveModeValues}}" 
-                        SelectedItem="{Binding Options.MoveMode}" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="4" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </ComboBox>
-                    <CheckBox Content=""
-                              IsChecked="{Binding Options.DefaultIsFilled}"
-                              Grid.Row="5" 
-                              Grid.Column="1" 
-                              Grid.ColumnSpan="2"
-                              Margin="5,2,5,2">
-                    </CheckBox>
-                    <CheckBox Content=""
-                              IsChecked="{Binding Options.TryToConnect}"
-                              Grid.Row="6" 
-                              Grid.Column="1" 
-                              Grid.ColumnSpan="2"
-                              Margin="5,2,5,2">
-                    </CheckBox>
-                </Grid>
+                <ContentControl Content="{Binding Options}"/>
             </Expander>
             <Grid>
                 <Grid.RowDefinitions>

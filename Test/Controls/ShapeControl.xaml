@@ -8,13 +8,6 @@
              xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="200">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Test;component/Dictionaries/Test2dDictionary.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
     <Grid>
         <ContentControl Margin="2">
             <ContentControl.Style>
