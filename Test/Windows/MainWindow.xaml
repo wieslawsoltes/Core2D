@@ -4,19 +4,17 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Test"
+        xmlns:core="clr-namespace:Test2d;assembly=Test2d"
         xmlns:controls="clr-namespace:Test.Controls"
         xmlns:converters="clr-namespace:Test.Converters"
         xmlns:paz="clr-namespace:Test.PanAndZoom"
+        xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock"
         Title="Test" Height="720" Width="1324"
-        Background="LightGray"
-        WindowStartupLocation="CenterScreen" WindowState="Normal"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
         UseLayoutRounding="True" SnapsToDevicePixels="True"
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextHintingMode="Auto"
         TextOptions.TextRenderingMode="Auto">
-    <Window.Resources>
-        <converters:ZoomScaleConverter x:Key="ZoomScaleConverter"/>
-    </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Command="{Binding Commands.NewCommand}" Gesture="Ctrl+N"/>
         <KeyBinding Command="{Binding Commands.OpenCommand}" Gesture="Ctrl+O"/>
@@ -50,116 +48,123 @@
         <KeyBinding Command="{Binding Commands.PropertiesWindowCommand}" Gesture="F4"/>
     </Window.InputBindings>
     <Grid FocusVisualStyle="{x:Null}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="197"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="277"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
-        <controls:MenuControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"/>
-        <TabControl Grid.Row="1" Grid.Column="0" Margin="5,5,0,0">
-            <TabItem Header="Project">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <controls:ProjectControl/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Templates">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <controls:TemplatesControl/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Groups">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <controls:GroupsControl/>
-                </ScrollViewer>
-            </TabItem>
-        </TabControl>
-        <GridSplitter Grid.Row="1" Grid.Column="1" 
-                      Width="7" Background="Transparent" 
-                      ResizeBehavior="PreviousAndNext" 
-                      ShowsPreview="True"/>
-        <paz:PanAndZoomGrid x:Name="grid"
-                            ClipToBounds="True"
-                            Background="Transparent"
-                            FocusVisualStyle="{x:Null}"
-                            Focusable="False"
-                            Grid.Row="1" Grid.Column="2" 
-                            Margin="0,5,0,0">
-            <paz:PanAndZoomBorder x:Name="border"
-                                  ClipToBounds="False"
-                                  Background="Transparent"
-                                  BorderBrush="{x:Null}" 
-                                  BorderThickness="0" 
-                                  FocusVisualStyle="{x:Null}"
-                                  Focusable="False"
-                                  VerticalAlignment="Stretch" 
-                                  HorizontalAlignment="Stretch"
-                                  Width="{Binding Editor.Project.CurrentContainer.Width}" 
-                                  Height="{Binding Editor.Project.CurrentContainer.Height}">
-                <controls:ContainerControl x:Name="containerControl">
-                    <controls:ContainerControl.Style>
-                        <Style TargetType="controls:ContainerControl">
-                            <Setter Property="Visibility" Value="Visible"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Editor.Project.CurrentContainer}" Value="{x:Null}">
-                                    <Setter Property="Visibility" Value="Hidden"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </controls:ContainerControl.Style>
-                </controls:ContainerControl>
-            </paz:PanAndZoomBorder>
-        </paz:PanAndZoomGrid>
-        <GridSplitter Grid.Row="1" Grid.Column="3" 
-                      Width="7" Background="Transparent" 
-                      ResizeBehavior="PreviousAndNext" 
-                      ShowsPreview="True"/>
-        <TabControl Grid.Row="1" Grid.Column="4" Margin="0,5,5,0">
-            <TabItem Header="Styles">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <controls:StylesControl/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Style">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <controls:StyleControl Margin="2" DataContext="{Binding Editor.Project.CurrentContainer.CurrentShape.Style}">
-                        <controls:StyleControl.Style>
-                            <Style TargetType="controls:StyleControl">
-                                <Setter Property="Visibility" Value="Visible"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding}" Value="{x:Null}">
-                                        <Setter Property="Visibility" Value="Hidden"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </controls:StyleControl.Style>
-                    </controls:StyleControl>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Layers">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <controls:LayersControl/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Shapes">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <controls:ShapesControl/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Shape">
-                <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <controls:ShapeControl/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Data">
-                <controls:DatabasesControl/>
-            </TabItem>
-        </TabControl>
+        <controls:MenuControl Grid.Row="0"/>
+        <ad:DockingManager x:Name="dock" Grid.Row="1" Margin="0,5,0,0">
+            <ad:LayoutRoot>
+                <ad:LayoutPanel Orientation="Horizontal">
+                    <ad:LayoutAnchorablePaneGroup DockWidth="230" Orientation="Vertical">
+                        <ad:LayoutAnchorablePane>
+                            <ad:LayoutAnchorable Title="Project">
+                                <controls:ProjectControl/>
+                            </ad:LayoutAnchorable>
+                            <ad:LayoutAnchorable Title="Options">
+                                <ScrollViewer 
+                                    VerticalScrollBarVisibility="Auto" 
+                                    HorizontalScrollBarVisibility="Auto" 
+                                    Focusable="True">
+                                    <ContentControl Content="{Binding Editor.Project.Options}"/>
+                                </ScrollViewer>
+                            </ad:LayoutAnchorable>
+                            <ad:LayoutAnchorable Title="Templates">
+                                <controls:TemplatesControl/>
+                            </ad:LayoutAnchorable> 
+                        </ad:LayoutAnchorablePane>
+                        <ad:LayoutAnchorablePane>
+                            <ad:LayoutAnchorable Title="Groups">
+                                <controls:GroupsControl/>
+                            </ad:LayoutAnchorable>
+                            <ad:LayoutAnchorable Title="Data">
+                                <controls:DatabasesControl/>
+                            </ad:LayoutAnchorable>
+                        </ad:LayoutAnchorablePane>
+                    </ad:LayoutAnchorablePaneGroup>
+                    <ad:LayoutDocumentPaneGroup>
+                        <ad:LayoutDocumentPane>
+                            <ad:LayoutDocument Title="Container">
+                                <paz:PanAndZoomGrid 
+                                    x:Name="grid"
+                                    ClipToBounds="True"
+                                    Background="Transparent"
+                                    FocusVisualStyle="{x:Null}"
+                                    Focusable="False">
+                                    <paz:PanAndZoomBorder 
+                                        x:Name="border"
+                                        ClipToBounds="False"
+                                        Background="Transparent"
+                                        BorderBrush="{x:Null}" 
+                                        BorderThickness="0" 
+                                        FocusVisualStyle="{x:Null}"
+                                        Focusable="False"
+                                        VerticalAlignment="Stretch" 
+                                        HorizontalAlignment="Stretch"
+                                        Width="{Binding Editor.Project.CurrentContainer.Width}" 
+                                        Height="{Binding Editor.Project.CurrentContainer.Height}">
+                                        <controls:ContainerControl x:Name="containerControl">
+                                            <controls:ContainerControl.Style>
+                                                <Style TargetType="controls:ContainerControl">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Editor.Project.CurrentContainer}" Value="{x:Null}">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </controls:ContainerControl.Style>
+                                        </controls:ContainerControl>
+                                    </paz:PanAndZoomBorder>
+                                </paz:PanAndZoomGrid>
+                            </ad:LayoutDocument>
+                            <ad:LayoutDocument Title="Script">
+                                <controls:ScriptControl DataContext="{Binding ScriptDirectories}"/>
+                            </ad:LayoutDocument>
+                        </ad:LayoutDocumentPane>
+                    </ad:LayoutDocumentPaneGroup>
+                    <ad:LayoutAnchorablePaneGroup DockWidth="230" Orientation="Vertical">
+                        <ad:LayoutAnchorablePane>
+                            <ad:LayoutAnchorable Title="Styles">
+                                <controls:StylesControl/>
+                            </ad:LayoutAnchorable>
+                            <ad:LayoutAnchorable Title="Layers">
+                                <controls:LayersControl/>
+                            </ad:LayoutAnchorable>
+                            <ad:LayoutAnchorable Title="Shapes">
+                                <controls:ShapesControl/>
+                            </ad:LayoutAnchorable>
+                        </ad:LayoutAnchorablePane>
+                        <ad:LayoutAnchorablePane>
+                            <ad:LayoutAnchorable Title="Properties">
+                                <ScrollViewer 
+                                    VerticalScrollBarVisibility="Auto" 
+                                    HorizontalScrollBarVisibility="Auto" 
+                                    Focusable="True">
+                                    <controls:ShapeControl/>
+                                </ScrollViewer>
+                            </ad:LayoutAnchorable>
+                            <ad:LayoutAnchorable Title="Style">
+                                <ScrollViewer 
+                                    VerticalScrollBarVisibility="Auto" 
+                                    HorizontalScrollBarVisibility="Auto" 
+                                    Focusable="True">
+                                    <controls:StyleControl/>
+                                </ScrollViewer>
+                            </ad:LayoutAnchorable>
+                            <ad:LayoutAnchorable Title="Template">
+                                <ScrollViewer 
+                                    VerticalScrollBarVisibility="Auto" 
+                                    HorizontalScrollBarVisibility="Auto" 
+                                    Focusable="True">
+                                    <controls:TemplateControl/>
+                                </ScrollViewer>
+                            </ad:LayoutAnchorable>
+                        </ad:LayoutAnchorablePane>
+                    </ad:LayoutAnchorablePaneGroup>
+                </ad:LayoutPanel>
+            </ad:LayoutRoot>
+        </ad:DockingManager>
     </Grid>
 </Window>
