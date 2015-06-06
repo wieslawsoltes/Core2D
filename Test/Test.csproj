@@ -122,6 +122,9 @@
     <Compile Include="Controls\DatabasesControl.xaml.cs">
       <DependentUpon>DatabasesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DocumentControl.xaml.cs">
+      <DependentUpon>DocumentControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DragAndDropListBoxes\BaseShapeDragAndDropListBox.cs" />
     <Compile Include="Controls\DragAndDropListBoxes\TemplateDragAndDropListBox.cs" />
     <Compile Include="Controls\DragAndDropListBoxes\LayerDragAndDropListBox.cs" />
@@ -202,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\DatabasesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DocumentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
