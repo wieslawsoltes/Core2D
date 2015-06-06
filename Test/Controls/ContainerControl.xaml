@@ -31,22 +31,26 @@
         <KeyBinding Command="{Binding Commands.ZoomResetCommand}" Key="Z" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ZoomExtentCommand}" Key="X" Modifiers=""/>
     </UserControl.InputBindings>
-    <Grid Width="{Binding Editor.Project.CurrentContainer.Width}" 
-          Height="{Binding Editor.Project.CurrentContainer.Height}" 
-          Background="Transparent">
+    <Grid 
+        Width="{Binding Editor.Project.CurrentContainer.Width}" 
+        Height="{Binding Editor.Project.CurrentContainer.Height}" 
+        Background="Transparent">
         <ItemsControl ItemsSource="{Binding Editor.Project.CurrentContainer.Template.Layers}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas Width="{Binding Editor.Project.CurrentContainer.Template.Width}" 
-                            Height="{Binding Editor.Project.CurrentContainer.Template.Height}" 
-                            Background="{Binding Editor.Project.CurrentContainer.Template.Background, Converter={StaticResource ArgbColorToBrushConverter}}"/>
+                    <Canvas 
+                        Width="{Binding Editor.Project.CurrentContainer.Template.Width}" 
+                        Height="{Binding Editor.Project.CurrentContainer.Template.Height}" 
+                        Background="{Binding Editor.Project.CurrentContainer.Template.Background, Converter={StaticResource ArgbColorToBrushConverter}}">
+                    </Canvas>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <controls:LayerElement 
                         Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"
-                        Tag="{Binding Path=DataContext.Editor.Project.CurrentContainer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"/>
+                        Tag="{Binding Path=DataContext.Editor.Project.CurrentContainer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}">
+                    </controls:LayerElement>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemContainerStyle>
@@ -59,16 +63,19 @@
         <ItemsControl ItemsSource="{Binding Editor.Project.CurrentContainer.Layers}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas Width="{Binding Editor.Project.CurrentContainer.Width}" 
-                            Height="{Binding Editor.Project.CurrentContainer.Height}" 
-                            Background="{Binding Editor.Project.CurrentContainer.Background, Converter={StaticResource ArgbColorToBrushConverter}}"/>
+                    <Canvas 
+                        Width="{Binding Editor.Project.CurrentContainer.Width}" 
+                        Height="{Binding Editor.Project.CurrentContainer.Height}" 
+                        Background="{Binding Editor.Project.CurrentContainer.Background, Converter={StaticResource ArgbColorToBrushConverter}}">
+                    </Canvas>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <controls:LayerElement 
                         Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"
-                        Tag="{Binding Path=DataContext.Editor.Project.CurrentContainer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"/>
+                        Tag="{Binding Path=DataContext.Editor.Project.CurrentContainer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}">
+                    </controls:LayerElement>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemContainerStyle>
@@ -78,21 +85,24 @@
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>
-        <Canvas x:Name="canvas"
-                DataContext="{Binding Editor}"
-                Background="Transparent"
-                Focusable="True"
-                FocusVisualStyle="{x:Null}"
-                Width="{Binding Project.CurrentContainer.Width}" 
-                Height="{Binding Project.CurrentContainer.Height}">
+        <Canvas 
+            x:Name="canvas"
+            DataContext="{Binding Editor}"
+            Background="Transparent"
+            Focusable="True"
+            FocusVisualStyle="{x:Null}"
+            Width="{Binding Project.CurrentContainer.Width}" 
+            Height="{Binding Project.CurrentContainer.Height}">
             <controls:LayerElement 
                 DataContext="{Binding Project.CurrentContainer.WorkingLayer}" 
                 Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"
-                Tag="{Binding Path=DataContext.Project.CurrentContainer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"/>
+                Tag="{Binding Path=DataContext.Project.CurrentContainer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}">
+            </controls:LayerElement>
             <controls:LayerElement 
                 DataContext="{Binding Project.CurrentContainer.HelperLayer}" 
                 Renderer="{Binding Path=DataContext.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"
-                Tag="{Binding Path=DataContext.Project.CurrentContainer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"/>
+                Tag="{Binding Path=DataContext.Project.CurrentContainer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}">
+            </controls:LayerElement>
         </Canvas>
     </Grid>
 </UserControl>
