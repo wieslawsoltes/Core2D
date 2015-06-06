@@ -43,22 +43,24 @@
         <KeyBinding Command="{Binding Commands.ContainerWindowCommand}" Gesture="Ctrl+R"/>
         <KeyBinding Command="{Binding Commands.PropertiesWindowCommand}" Gesture="F4"/>
     </Window.InputBindings>
-    <paz:PanAndZoomGrid x:Name="grid"
-                        ClipToBounds="True"
-                        Background="Transparent"
-                        FocusVisualStyle="{x:Null}"
-                        Focusable="False">
-        <paz:PanAndZoomBorder x:Name="border"
-                              ClipToBounds="False"
-                              Background="Transparent"
-                              BorderBrush="{x:Null}" 
-                              BorderThickness="0" 
-                              FocusVisualStyle="{x:Null}"
-                              Focusable="False"
-                              VerticalAlignment="Stretch" 
-                              HorizontalAlignment="Stretch"
-                              Width="{Binding Editor.Project.CurrentContainer.Width}" 
-                              Height="{Binding Editor.Project.CurrentContainer.Height}">
+    <paz:PanAndZoomGrid 
+        x:Name="grid"
+        ClipToBounds="True"
+        Background="Transparent"
+        FocusVisualStyle="{x:Null}"
+        Focusable="False">
+        <paz:PanAndZoomBorder 
+            x:Name="border"
+            ClipToBounds="False"
+            Background="Transparent"
+            BorderBrush="{x:Null}" 
+            BorderThickness="0" 
+            FocusVisualStyle="{x:Null}"
+            Focusable="False"
+            VerticalAlignment="Stretch" 
+            HorizontalAlignment="Stretch"
+            Width="{Binding Editor.Project.CurrentContainer.Width}" 
+            Height="{Binding Editor.Project.CurrentContainer.Height}">
             <controls:ContainerControl>
                 <controls:ContainerControl.Style>
                     <Style TargetType="controls:ContainerControl">
