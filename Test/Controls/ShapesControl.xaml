@@ -9,22 +9,19 @@
              xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="200">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Test;component/Dictionaries/Test2dDictionary.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
     <Grid>
+        <Grid.Resources>
+            <ControlTemplate x:Key="ShapesMenu">
+                <Menu Background="Transparent" HorizontalAlignment="Right">
+                    <MenuItem Command="{Binding Commands.RemoveShapeCommand}" Header="_-"/>
+                </Menu>
+            </ControlTemplate>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0" Margin="2,0,2,0">
-            <MenuItem Command="{Binding Commands.RemoveShapeCommand}" Header="_-"/>
-        </Menu>
+        <Control Template="{StaticResource ShapesMenu}" Grid.Row="0" Margin="2,0,2,0"/>
         <controls:BaseShapeDragAndDropListBox
             DataContext="{Binding Editor.Project.CurrentContainer.CurrentLayer.Shapes}"
             Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
@@ -57,8 +54,5 @@
                 </DataTemplate>
             </controls:BaseShapeDragAndDropListBox.ItemTemplate>
         </controls:BaseShapeDragAndDropListBox>
-        <ContentControl Content="{Binding Editor.Project.CurrentContainer.CurrentShape}" 
-                        Grid.Row="2" Margin="2">
-        </ContentControl>
     </Grid>
 </UserControl>
