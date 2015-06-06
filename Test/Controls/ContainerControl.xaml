@@ -31,5 +31,8 @@
         <KeyBinding Command="{Binding Commands.ZoomResetCommand}" Key="Z" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ZoomExtentCommand}" Key="X" Modifiers=""/>
     </UserControl.InputBindings>
-    <Control Template="{StaticResource ContainerControlTemplateKey}"/>
+    <Control 
+        Template="{StaticResource ContainerControlTemplateKey}"
+        DataContext="{Binding Editor.Project.CurrentContainer}">
+    </Control>
 </UserControl>

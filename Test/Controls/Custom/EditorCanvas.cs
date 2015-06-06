@@ -55,7 +55,7 @@ namespace Test.Controls
 
         private void EditorCanvas_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var context = this.DataContext as EditorContext;
+            var context = this.Tag as EditorContext;
             if (context == null)
                 return;
 
@@ -69,7 +69,7 @@ namespace Test.Controls
 
         private void EditorCanvas_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var context = this.DataContext as EditorContext;
+            var context = this.Tag as EditorContext;
             if (context == null)
                 return;
 
@@ -83,7 +83,7 @@ namespace Test.Controls
 
         private void EditorCanvas_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var context = this.DataContext as EditorContext;
+            var context = this.Tag as EditorContext;
             if (context == null)
                 return;
 
@@ -97,7 +97,7 @@ namespace Test.Controls
 
         private void EditorCanvas_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var context = this.DataContext as EditorContext;
+            var context = this.Tag as EditorContext;
             if (context == null)
                 return;
 
@@ -111,7 +111,7 @@ namespace Test.Controls
 
         private void EditorCanvas_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            var context = this.DataContext as EditorContext;
+            var context = this.Tag as EditorContext;
             if (context == null)
                 return;
 
