@@ -10,12 +10,27 @@
              xmlns:converters="clr-namespace:Test.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="200">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Test;component/Dictionaries/Test2dDictionary.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
-    <Control Template="{StaticResource StyleControlTemplateKey}"/>
+    <Grid>
+        <ContentControl Margin="2">
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="Content" Value="{Binding Editor.Renderer.SelectedShape.Style}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Editor.Renderer.SelectedShape.Style}" Value="{x:Null}">
+                            <Setter Property="Content" Value="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}"/>
+                        </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Editor.Renderer.SelectedShape.Style}" Value="{x:Null}"/>
+                                <Condition Binding="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" Value="{x:Null}"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Hidden"/>
+                            <Setter Property="Content" Value="{x:Null}"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
+    </Grid>
 </UserControl>
