@@ -15,6 +15,21 @@
         <KeyBinding Command="{Binding ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Gesture="Ctrl+E"/>
     </UserControl.InputBindings>
     <Grid>
+        <Grid.Resources>
+            <ControlTemplate x:Key="ScriptMenu">
+                <Menu Background="Transparent">
+                    <MenuItem Header="_File">
+                        <MenuItem Header="_New" Command="{Binding NewCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" InputGestureText="Ctrl+N"/>
+                        <Separator/>
+                        <MenuItem Header="_Save" Command="{Binding SaveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" InputGestureText="Ctrl+S"/>
+                        <Separator/>
+                        <MenuItem Header="_Import..." Command="{Binding ImportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" InputGestureText="Ctrl+I"/>
+                        <Separator/>
+                        <MenuItem  Header="_Export..." Command="{Binding ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" InputGestureText="Ctrl+E"/>
+                    </MenuItem>
+                </Menu>
+            </ControlTemplate>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -24,17 +39,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="270"/>
         </Grid.ColumnDefinitions>
-        <Menu Background="Transparent" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-            <MenuItem Header="_File">
-                <MenuItem Header="_New" Command="{Binding NewCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" InputGestureText="Ctrl+N"/>
-                <Separator/>
-                <MenuItem Header="_Save" Command="{Binding SaveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" InputGestureText="Ctrl+S"/>
-                <Separator/>
-                <MenuItem Header="_Import..." Command="{Binding ImportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" InputGestureText="Ctrl+I"/>
-                <Separator/>
-                <MenuItem  Header="_Export..." Command="{Binding ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" InputGestureText="Ctrl+E"/>
-            </MenuItem>
-        </Menu>
+        <Control Template="{StaticResource ScriptMenu}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
         <ae:TextEditor 
             xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
             Name="editor"
