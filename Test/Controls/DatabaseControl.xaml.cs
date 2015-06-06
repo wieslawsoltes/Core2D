@@ -24,6 +24,7 @@ namespace Test.Controls
     /// </summary>
     public partial class DatabaseControl : UserControl
     {
+        private bool _isLoaded = false;
         private Point dragStartPoint;
 
         private P FindVisualParent<P>(DependencyObject child)
@@ -47,15 +48,22 @@ namespace Test.Controls
         {
             InitializeComponent();
 
-            Loaded += (sender, e) =>
-            {
-                Initialize();
-            };
+            Loaded += 
+                (sender, e) =>
+                {
+                    if (_isLoaded)
+                        return;
+                    else
+                        _isLoaded = true;
 
-            DataContextChanged += (sender, e) =>
-            {
-                Initialize();
-            };
+                    Initialize();
+                };
+
+            DataContextChanged += 
+                (sender, e) =>
+                {
+                    Initialize();
+                };
 
             listView.PreviewMouseLeftButtonDown += ListView_PreviewMouseLeftButtonDown;
             listView.PreviewMouseMove += ListView_PreviewMouseMove;
