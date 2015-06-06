@@ -167,7 +167,7 @@ namespace Test.Controls
                     Renderer.Draw(
                         drawingContext, 
                         layer, 
-                        (Tag as Container).Properties,
+                        layer.Owner.Properties,
                         null);
                 }
             }

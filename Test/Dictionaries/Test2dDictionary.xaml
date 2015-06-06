@@ -3047,8 +3047,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <controls:LayerElement 
-                            Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"
-                            Tag="{Binding Path=DataContext.Editor.Project.CurrentContainer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}">
+                            Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                         </controls:LayerElement>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -3072,8 +3071,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <controls:LayerElement 
-                            Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"
-                            Tag="{Binding Path=DataContext.Editor.Project.CurrentContainer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}">
+                            Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                         </controls:LayerElement>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -3093,13 +3091,11 @@
                 Height="{Binding Editor.Project.CurrentContainer.Height}">
                 <controls:LayerElement 
                     DataContext="{Binding Editor.Project.CurrentContainer.WorkingLayer}" 
-                    Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:EditorCanvas}}}"
-                    Tag="{Binding Path=DataContext.Editor.Project.CurrentContainer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:EditorCanvas}}}">
+                    Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                 </controls:LayerElement>
                 <controls:LayerElement 
                     DataContext="{Binding Editor.Project.CurrentContainer.HelperLayer}" 
-                    Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}}"
-                    Tag="{Binding Path=DataContext.Editor.Project.CurrentContainer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:EditorCanvas}}}">
+                    Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                 </controls:LayerElement>
             </controls:EditorCanvas>
         </Grid>
