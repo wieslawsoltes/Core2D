@@ -40,8 +40,6 @@ namespace Test.Windows
         /// </summary>
         private void Initialize()
         {
-            grid.EnableAutoFit = (DataContext as EditorContext).Editor.Renderer.State.EnableAutofit;
-
             border.InvalidateChild =
                 (z, x, y) =>
                 {
@@ -96,6 +94,9 @@ namespace Test.Windows
                         return;
                     else
                         _isLoaded = true;
+
+                    var context = DataContext as EditorContext;
+                    grid.EnableAutoFit = context.Editor.Renderer.State.EnableAutofit;
                 };
         }
     }
