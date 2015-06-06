@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\RendererState.cs" />
     <Compile Include="Core\Shape\BaseShape.cs" />
     <Compile Include="Core\ITextFieldWriter.cs" />
     <Compile Include="Core\Data\Value.cs" />

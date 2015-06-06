@@ -61,7 +61,7 @@ namespace TestWinForms
             context.InitializeEditor();
             context.InitializeSctipts();
             context.InitializeSimulation();
-            context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
+            context.Editor.Renderer.State.DrawShapeState = ShapeState.Visible;
 
             DataContext = context;
 

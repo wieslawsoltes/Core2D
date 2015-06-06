@@ -21,10 +21,8 @@ namespace TestEDITOR
             if (string.IsNullOrEmpty(path) || item == null)
                 return;
 
-            var renderer = new PdfRenderer()
-            {
-                DrawShapeState = ShapeState.Printable
-            };
+            var renderer = new PdfRenderer();
+            renderer.State.DrawShapeState = ShapeState.Printable;
 
             if (item is Container)
             {

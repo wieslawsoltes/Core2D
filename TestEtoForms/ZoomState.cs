@@ -106,8 +106,8 @@ namespace TestEtoForms
                 PanX = OriginX - vx;
                 PanY = OriginY - vy;
 
-                _context.Editor.Renderer.PanX = PanX;
-                _context.Editor.Renderer.PanY = PanY;
+                _context.Editor.Renderer.State.PanX = PanX;
+                _context.Editor.Renderer.State.PanY = PanY;
 
                 _invalidate();
             }
@@ -161,9 +161,9 @@ namespace TestEtoForms
             PanX = ax - (rx * Zoom);
             PanY = ay - (ry * Zoom);
 
-            _context.Editor.Renderer.Zoom = Zoom;
-            _context.Editor.Renderer.PanX = PanX;
-            _context.Editor.Renderer.PanY = PanY;
+            _context.Editor.Renderer.State.Zoom = Zoom;
+            _context.Editor.Renderer.State.PanX = PanX;
+            _context.Editor.Renderer.State.PanY = PanY;
         }
 
         public void ResetZoom()
@@ -179,9 +179,9 @@ namespace TestEtoForms
             WheelOffsetY = 0f;
             HaveWheelOrigin = false;
 
-            _context.Editor.Renderer.Zoom = Zoom;
-            _context.Editor.Renderer.PanX = PanX;
-            _context.Editor.Renderer.PanY = PanY;
+            _context.Editor.Renderer.State.Zoom = Zoom;
+            _context.Editor.Renderer.State.PanX = PanX;
+            _context.Editor.Renderer.State.PanY = PanY;
         }
     }
 }

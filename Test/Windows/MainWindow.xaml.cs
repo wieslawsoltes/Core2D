@@ -94,7 +94,7 @@ namespace Test.Windows
             context.InitializeEditor();
             context.InitializeSctipts();
             context.InitializeSimulation();
-            context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
+            context.Editor.Renderer.State.DrawShapeState = ShapeState.Visible;
             context.Editor.GetImagePath = () => Image();
 
             context.Commands.OpenCommand = 
@@ -316,16 +316,16 @@ namespace Test.Windows
                     }
                 };
 
-            grid.EnableAutoFit = true;
+            grid.EnableAutoFit = context.Renderer.State.EnableAutofit;
 
             border.InvalidateChild = 
                 (z, x, y) =>
                 {
-                    bool invalidate = context.Editor.Renderer.Zoom != z;
+                    bool invalidate = context.Editor.Renderer.State.Zoom != z;
 
-                    context.Editor.Renderer.Zoom = z;
-                    context.Editor.Renderer.PanX = x;
-                    context.Editor.Renderer.PanY = y;
+                    context.Editor.Renderer.State.Zoom = z;
+                    context.Editor.Renderer.State.PanX = x;
+                    context.Editor.Renderer.State.PanY = y;
 
                     if (invalidate)
                     {
@@ -340,6 +340,9 @@ namespace Test.Windows
                         && context != null
                         && context.Editor.Project.CurrentContainer != null)
                     {
+                        if (!context.Renderer.State.EnableAutofit)
+                            return;
+
                         border.AutoFit(
                             width,
                             height,

@@ -21,10 +21,8 @@ namespace TestEDITOR
             if (string.IsNullOrEmpty(path) || item == null)
                 return;
 
-            var renderer = new DxfRenderer()
-            {
-                DrawShapeState = ShapeState.Printable
-            };
+            var renderer = new DxfRenderer();
+            renderer.State.DrawShapeState = ShapeState.Printable;
 
             if (item is Container)
             {

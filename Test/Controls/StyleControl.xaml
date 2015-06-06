@@ -15,14 +15,14 @@
             <ContentControl.Style>
                 <Style TargetType="ContentControl">
                     <Setter Property="Visibility" Value="Visible"/>
-                    <Setter Property="Content" Value="{Binding Editor.Renderer.SelectedShape.Style}"/>
+                    <Setter Property="Content" Value="{Binding Editor.Renderer.State.SelectedShape.Style}"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Editor.Renderer.SelectedShape.Style}" Value="{x:Null}">
+                        <DataTrigger Binding="{Binding Editor.Renderer.State.SelectedShape.Style}" Value="{x:Null}">
                             <Setter Property="Content" Value="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}"/>
                         </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Editor.Renderer.SelectedShape.Style}" Value="{x:Null}"/>
+                                <Condition Binding="{Binding Editor.Renderer.State.SelectedShape.Style}" Value="{x:Null}"/>
                                 <Condition Binding="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" Value="{x:Null}"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Visibility" Value="Hidden"/>

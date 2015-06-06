@@ -80,36 +80,36 @@ namespace Test2d
                 renderer.Draw(dc, this, dx, dy, db, record);
             }
 
-            if (renderer.SelectedShape != null)
+            if (renderer.State.SelectedShape != null)
             {
-                if (this == renderer.SelectedShape)
+                if (this == renderer.State.SelectedShape)
                 {
                     _point1.Draw(dc, renderer, dx, dy, db, record);
                     _point2.Draw(dc, renderer, dx, dy, db, record);
                     _point3.Draw(dc, renderer, dx, dy, db, record);
                     _point4.Draw(dc, renderer, dx, dy, db, record);
                 }
-                else if (_point1 == renderer.SelectedShape)
+                else if (_point1 == renderer.State.SelectedShape)
                 {
                     _point1.Draw(dc, renderer, dx, dy, db, record);
                 }
-                else if (_point2 == renderer.SelectedShape)
+                else if (_point2 == renderer.State.SelectedShape)
                 {
                     _point2.Draw(dc, renderer, dx, dy, db, record);
                 }
-                else if (_point3 == renderer.SelectedShape)
+                else if (_point3 == renderer.State.SelectedShape)
                 {
                     _point3.Draw(dc, renderer, dx, dy, db, record);
                 }
-                else if (_point4 == renderer.SelectedShape)
+                else if (_point4 == renderer.State.SelectedShape)
                 {
                     _point4.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
             
-            if (renderer.SelectedShapes != null)
+            if (renderer.State.SelectedShapes != null)
             {
-                if (renderer.SelectedShapes.Contains(this))
+                if (renderer.State.SelectedShapes.Contains(this))
                 {
                     _point1.Draw(dc, renderer, dx, dy, db, record);
                     _point2.Draw(dc, renderer, dx, dy, db, record);

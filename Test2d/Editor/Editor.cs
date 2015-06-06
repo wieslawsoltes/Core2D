@@ -701,13 +701,13 @@ namespace Test2d
         public void GroupSelected()
         {
             var layer = _project.CurrentContainer.CurrentLayer;
-            if (_renderer.SelectedShapes != null)
+            if (_renderer.State.SelectedShapes != null)
             {
                 // TODO: Group method changes SelectedShapes State properties.
-                var g = XGroup.Group("g", _renderer.SelectedShapes);
+                var g = XGroup.Group("g", _renderer.State.SelectedShapes);
 
                 var builder = layer.Shapes.ToBuilder();
-                foreach (var shape in _renderer.SelectedShapes)
+                foreach (var shape in _renderer.State.SelectedShapes)
                 {
                     builder.Remove(shape);
                 }
@@ -796,24 +796,24 @@ namespace Test2d
         /// </summary>
         public void DeleteSelected()
         {
-            if (_renderer.SelectedShape != null)
+            if (_renderer.State.SelectedShape != null)
             {
                 var layer = _project.CurrentContainer.CurrentLayer;
                 var previous = layer.Shapes;
-                var next = layer.Shapes.Remove(_renderer.SelectedShape); ;
+                var next = layer.Shapes.Remove(_renderer.State.SelectedShape); ;
                 _history.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
  
                 _project.CurrentContainer.CurrentLayer.Invalidate();
-                _renderer.SelectedShape = default(BaseShape);
+                _renderer.State.SelectedShape = default(BaseShape);
             }
 
-            if (_renderer.SelectedShapes != null && _renderer.SelectedShapes.Count > 0)
+            if (_renderer.State.SelectedShapes != null && _renderer.State.SelectedShapes.Count > 0)
             {
                 var layer = _project.CurrentContainer.CurrentLayer;
 
                 var builder = layer.Shapes.ToBuilder();
-                foreach (var shape in _renderer.SelectedShapes)
+                foreach (var shape in _renderer.State.SelectedShapes)
                 {
                     builder.Remove(shape);
                 }
@@ -823,7 +823,7 @@ namespace Test2d
                 _history.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
-                _renderer.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+                _renderer.State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
                 layer.Invalidate();
             }
         }
@@ -836,8 +836,8 @@ namespace Test2d
         public void Select(Container container, BaseShape shape)
         {
             container.CurrentShape = shape;
-            _renderer.SelectedShape = shape;
-            _renderer.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+            _renderer.State.SelectedShape = shape;
+            _renderer.State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
             container.CurrentLayer.Invalidate();
         }
 
@@ -849,8 +849,8 @@ namespace Test2d
         public void Select(Container container, ImmutableHashSet<BaseShape> shapes)
         {
             container.CurrentShape = default(BaseShape);
-            _renderer.SelectedShape = default(BaseShape);
-            _renderer.SelectedShapes = shapes;
+            _renderer.State.SelectedShape = default(BaseShape);
+            _renderer.State.SelectedShapes = shapes;
             container.CurrentLayer.Invalidate();
         }
 
@@ -859,8 +859,8 @@ namespace Test2d
         /// </summary>
         public void Deselect()
         {
-            _renderer.SelectedShape = default(BaseShape);
-            _renderer.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+            _renderer.State.SelectedShape = default(BaseShape);
+            _renderer.State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
         }
 
         /// <summary>
@@ -869,11 +869,11 @@ namespace Test2d
         /// <param name="container"></param>
         public void Deselect(Container container)
         {
-            if (_renderer.SelectedShape != null
-                || _renderer.SelectedShapes != null)
+            if (_renderer.State.SelectedShape != null
+                || _renderer.State.SelectedShapes != null)
             {
-                _renderer.SelectedShape = default(BaseShape);
-                _renderer.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+                _renderer.State.SelectedShape = default(BaseShape);
+                _renderer.State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
 
                 container.CurrentShape = default(BaseShape);
                 container.CurrentLayer.Invalidate();
@@ -968,8 +968,8 @@ namespace Test2d
         /// <param name="y"></param>
         public bool TryToHoverShape(double x, double y)
         {
-            if (_renderer.SelectedShapes == null
-                && !(_renderer.SelectedShape != null && _hover != _renderer.SelectedShape))
+            if (_renderer.State.SelectedShapes == null
+                && !(_renderer.State.SelectedShape != null && _hover != _renderer.State.SelectedShape))
             {
                 var result = ShapeBounds.HitTest(
                     _project.CurrentContainer,
@@ -984,8 +984,8 @@ namespace Test2d
                 }
                 else
                 {
-                    if (_renderer.SelectedShape != null 
-                        && _renderer.SelectedShape == _hover)
+                    if (_renderer.State.SelectedShape != null 
+                        && _renderer.State.SelectedShape == _hover)
                     {
                         _hover = default(BaseShape);
                         Deselect(_project.CurrentContainer);
@@ -1129,8 +1129,8 @@ namespace Test2d
         /// <returns></returns>
         public bool IsSelectionAvailable()
         {
-            return _renderer.SelectedShape != null
-                || _renderer.SelectedShapes != null;
+            return _renderer.State.SelectedShape != null
+                || _renderer.State.SelectedShapes != null;
         }
         
         /// <summary>

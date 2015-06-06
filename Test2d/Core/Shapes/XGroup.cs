@@ -79,9 +79,9 @@ namespace Test2d
                     shape.Draw(dc, renderer, dx, dy, db, record);
                 }
  
-                if (renderer.SelectedShape != null)
+                if (renderer.State.SelectedShape != null)
                 {
-                    if (this == renderer.SelectedShape)
+                    if (this == renderer.State.SelectedShape)
                     {
                         foreach (var connector in Connectors)
                         {
@@ -92,7 +92,7 @@ namespace Test2d
                     {
                         foreach (var connector in Connectors)
                         {
-                            if (connector == renderer.SelectedShape)
+                            if (connector == renderer.State.SelectedShape)
                             {
                                 connector.Draw(dc, renderer, dx, dy, db, record);
                             }
@@ -100,9 +100,9 @@ namespace Test2d
                     }
                 }
                 
-                if (renderer.SelectedShapes != null)
+                if (renderer.State.SelectedShapes != null)
                 {
-                    if (renderer.SelectedShapes.Contains(this))
+                    if (renderer.State.SelectedShapes.Contains(this))
                     {
                         foreach (var connector in Connectors)
                         {

@@ -13,32 +13,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        double Zoom { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        double PanX { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        double PanY { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        ShapeState DrawShapeState { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        BaseShape SelectedShape { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        ImmutableHashSet<BaseShape> SelectedShapes { get; set; }
+        RendererState State { get; set; }
 
         /// <summary>
         /// 

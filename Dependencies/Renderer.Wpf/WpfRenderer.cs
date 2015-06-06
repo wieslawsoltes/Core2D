@@ -35,65 +35,15 @@ namespace Test
         private IDictionary<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache;
         private IDictionary<Uri, BitmapImage> _biCache;
         private IDictionary<XPath, Tuple<string, XPathGeometry, StreamGeometry, TransformGroupHelper, ShapeStyle>> _pathCache;
-        private double _zoom;
-        private double _panX;
-        private double _panY;
-        private ShapeState _drawShapeState;
-        private BaseShape _selectedShape;
-        private ImmutableHashSet<BaseShape> _selectedShapes;
+        private RendererState _state = new RendererState();
 
         /// <summary>
         /// 
         /// </summary>
-        public double Zoom
+        public RendererState State
         {
-            get { return _zoom; }
-            set { Update(ref _zoom, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double PanX
-        {
-            get { return _panX; }
-            set { Update(ref _panX, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double PanY
-        {
-            get { return _panY; }
-            set { Update(ref _panY, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ShapeState DrawShapeState
-        {
-            get { return _drawShapeState; }
-            set { Update(ref _drawShapeState, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public BaseShape SelectedShape
-        {
-            get { return _selectedShape; }
-            set { Update(ref _selectedShape, value); }
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public ImmutableHashSet<BaseShape> SelectedShapes
-        {
-            get { return _selectedShapes; }
-            set { Update(ref _selectedShapes, value); }
+            get { return _state; }
+            set { Update(ref _state, value); }
         }
 
         /// <summary>
@@ -101,11 +51,6 @@ namespace Test
         /// </summary>
         public WpfRenderer()
         {
-            _zoom = 1.0;
-            _drawShapeState = ShapeState.Visible | ShapeState.Printable;
-            _selectedShape = default(BaseShape);
-            _selectedShapes = default(ImmutableHashSet<BaseShape>);
-
             ClearCache();
         }
 
@@ -439,7 +384,7 @@ namespace Test
 
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.HasFlag(DrawShapeState))
+                if (shape.State.HasFlag(_state.DrawShapeState))
                 {
                     shape.Draw(_dc, this, 0, 0, db, r);
                 }
@@ -459,7 +404,7 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
-            double thickness = line.Style.Thickness / _zoom;
+            double thickness = line.Style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
             
             Tuple<Brush, Pen> cache = null;
@@ -623,7 +568,7 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
-            double thickness = rectangle.Style.Thickness / _zoom;
+            double thickness = rectangle.Style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> cache = null;
@@ -668,7 +613,7 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
-            double thickness = ellipse.Style.Thickness / _zoom;
+            double thickness = ellipse.Style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> cache = null;
@@ -722,7 +667,7 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
-            double thickness = arc.Style.Thickness / _zoom;
+            double thickness = arc.Style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> cache = null;
@@ -802,7 +747,7 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
-            double thickness = bezier.Style.Thickness / _zoom;
+            double thickness = bezier.Style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> cache = null;
@@ -877,7 +822,7 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
-            double thickness = qbezier.Style.Thickness / _zoom;
+            double thickness = qbezier.Style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> cache = null;
@@ -951,7 +896,7 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
-            double thickness = text.Style.Thickness / _zoom;
+            double thickness = text.Style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> cache = null;
@@ -1084,7 +1029,7 @@ namespace Test
 
             var _dc = dc as DrawingContext;
 
-            double thickness = image.Style.Thickness / _zoom;
+            double thickness = image.Style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> cache = null;
@@ -1172,7 +1117,7 @@ namespace Test
 
             var _dc = dc as DrawingContext;
 
-            double thickness = path.Style.Thickness / _zoom;
+            double thickness = path.Style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> cache = null;

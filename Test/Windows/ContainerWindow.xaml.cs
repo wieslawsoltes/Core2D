@@ -40,17 +40,17 @@ namespace Test.Windows
         /// </summary>
         private void Initialize()
         {
-            grid.EnableAutoFit = true;
+            grid.EnableAutoFit = (DataContext as EditorContext).Editor.Renderer.State.EnableAutofit;
 
             border.InvalidateChild =
                 (z, x, y) =>
                 {
                     var context = DataContext as EditorContext;
-                    bool invalidate = context.Editor.Renderer.Zoom != z;
+                    bool invalidate = context.Editor.Renderer.State.Zoom != z;
 
-                    context.Editor.Renderer.Zoom = z;
-                    context.Editor.Renderer.PanX = x;
-                    context.Editor.Renderer.PanY = y;
+                    context.Editor.Renderer.State.Zoom = z;
+                    context.Editor.Renderer.State.PanX = x;
+                    context.Editor.Renderer.State.PanY = y;
 
                     if (invalidate)
                     {
@@ -64,6 +64,9 @@ namespace Test.Windows
                     if (border != null && DataContext != null)
                     {
                         var context = DataContext as EditorContext;
+                        if (!context.Renderer.State.EnableAutofit)
+                            return;
+
                         border.AutoFit(
                             width,
                             height,

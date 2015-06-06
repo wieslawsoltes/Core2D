@@ -20,65 +20,15 @@ namespace TestEDITOR
     {
         private bool _enableImageCache = true;
         private IDictionary<Uri, XImage> _biCache;
-        private double _zoom;
-        private double _panX;
-        private double _panY;
-        private Test2d.ShapeState _drawShapeState;
-        private Test2d.BaseShape _selectedShape;
-        private ImmutableHashSet<Test2d.BaseShape> _selectedShapes;
+        private Test2d.RendererState _state = new Test2d.RendererState();
 
         /// <summary>
         /// 
         /// </summary>
-        public double Zoom
+        public Test2d.RendererState State
         {
-            get { return _zoom; }
-            set { Update(ref _zoom, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double PanX
-        {
-            get { return _panX; }
-            set { Update(ref _panX, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double PanY
-        {
-            get { return _panY; }
-            set { Update(ref _panY, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Test2d.ShapeState DrawShapeState
-        {
-            get { return _drawShapeState; }
-            set { Update(ref _drawShapeState, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Test2d.BaseShape SelectedShape
-        {
-            get { return _selectedShape; }
-            set { Update(ref _selectedShape, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ImmutableHashSet<Test2d.BaseShape> SelectedShapes
-        {
-            get { return _selectedShapes; }
-            set { Update(ref _selectedShapes, value); }
+            get { return _state; }
+            set { Update(ref _state, value); }
         }
 
         /// <summary>
@@ -86,11 +36,6 @@ namespace TestEDITOR
         /// </summary>
         public PdfRenderer()
         {
-            _zoom = 1.0;
-            _drawShapeState = Test2d.ShapeState.Visible | Test2d.ShapeState.Printable;
-            _selectedShape = default(Test2d.BaseShape);
-            _selectedShapes = default(ImmutableHashSet<Test2d.BaseShape>);
-
             ClearCache();
 
             _scaleToPage = (value) => (float)(value * 1.0);
@@ -441,7 +386,7 @@ namespace TestEDITOR
         {
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.HasFlag(DrawShapeState))
+                if (shape.State.HasFlag(_state.DrawShapeState))
                 {
                     shape.Draw(gfx, this, 0, 0, db, r);
                 }

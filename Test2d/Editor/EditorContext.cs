@@ -755,7 +755,7 @@ namespace Test2d
         /// </summary>
         private void AddGroupCommandHandler()
         {
-            var group = _editor.Renderer.SelectedShape;
+            var group = _editor.Renderer.State.SelectedShape;
             if (group != null && group is XGroup)
             {
                 if (_editor.Project.CurrentGroupLibrary != null)
@@ -2649,15 +2649,15 @@ namespace Test2d
         {
             try
             {
-                if (_editor.Renderer.SelectedShape != null)
+                if (_editor.Renderer.State.SelectedShape != null)
                 {
                     // TODO: Add history snapshot.
-                    _editor.Renderer.SelectedShape.Record = record;
+                    _editor.Renderer.State.SelectedShape.Record = record;
                 }
-                else if (_editor.Renderer.SelectedShapes != null && _editor.Renderer.SelectedShapes.Count > 0)
+                else if (_editor.Renderer.State.SelectedShapes != null && _editor.Renderer.State.SelectedShapes.Count > 0)
                 {
                     // TODO: Add history snapshot.
-                    foreach (var shape in _editor.Renderer.SelectedShapes)
+                    foreach (var shape in _editor.Renderer.State.SelectedShapes)
                     {
                         shape.Record = record;
                     }
@@ -2772,15 +2772,15 @@ namespace Test2d
         {
             try
             {
-                if (_editor.Renderer.SelectedShape != null)
+                if (_editor.Renderer.State.SelectedShape != null)
                 {
                     // TODO: Add history snapshot.
-                    _editor.Renderer.SelectedShape.Style = style;
+                    _editor.Renderer.State.SelectedShape.Style = style;
                 }
-                else if (_editor.Renderer.SelectedShapes != null && _editor.Renderer.SelectedShapes.Count > 0)
+                else if (_editor.Renderer.State.SelectedShapes != null && _editor.Renderer.State.SelectedShapes.Count > 0)
                 {
                     // TODO: Add history snapshot.
-                    foreach (var shape in _editor.Renderer.SelectedShapes)
+                    foreach (var shape in _editor.Renderer.State.SelectedShapes)
                     {
                         shape.Style = style;
                     }
@@ -2894,14 +2894,14 @@ namespace Test2d
             {
                 if (CanCopy())
                 {
-                    if (_editor.Renderer.SelectedShape != null)
+                    if (_editor.Renderer.State.SelectedShape != null)
                     {
-                        Copy(Enumerable.Repeat(_editor.Renderer.SelectedShape, 1).ToList());
+                        Copy(Enumerable.Repeat(_editor.Renderer.State.SelectedShape, 1).ToList());
                     }
 
-                    if (_editor.Renderer.SelectedShapes != null)
+                    if (_editor.Renderer.State.SelectedShapes != null)
                     {
-                        Copy(_editor.Renderer.SelectedShapes.ToList());
+                        Copy(_editor.Renderer.State.SelectedShapes.ToList());
                     }
                 }
             }

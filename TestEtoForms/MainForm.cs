@@ -58,7 +58,7 @@ namespace TestEtoForms
             _context.InitializeEditor();
             _context.InitializeSctipts();
             _context.InitializeSimulation();
-            _context.Editor.Renderer.DrawShapeState = ShapeState.Visible;
+            _context.Editor.Renderer.State.DrawShapeState = ShapeState.Visible;
             _context.Editor.GetImagePath = () => Image();
 
             _state = new ZoomState(_context, InvalidateContainer);

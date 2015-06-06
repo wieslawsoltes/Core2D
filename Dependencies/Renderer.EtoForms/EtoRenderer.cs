@@ -15,65 +15,15 @@ namespace TestEtoForms
     {
         private bool _enableImageCache = true;
         private IDictionary<Uri, Bitmap> _biCache;
-        private double _zoom;
-        private double _panX;
-        private double _panY;
-        private ShapeState _drawShapeState;
-        private BaseShape _selectedShape;
-        private ImmutableHashSet<BaseShape> _selectedShapes;
+        private RendererState _state = new RendererState();
 
         /// <summary>
         /// 
         /// </summary>
-        public double Zoom
+        public RendererState State
         {
-            get { return _zoom; }
-            set { Update(ref _zoom, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double PanX
-        {
-            get { return _panX; }
-            set { Update(ref _panX, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double PanY
-        {
-            get { return _panY; }
-            set { Update(ref _panY, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ShapeState DrawShapeState
-        {
-            get { return _drawShapeState; }
-            set { Update(ref _drawShapeState, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public BaseShape SelectedShape
-        {
-            get { return _selectedShape; }
-            set { Update(ref _selectedShape, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ImmutableHashSet<BaseShape> SelectedShapes
-        {
-            get { return _selectedShapes; }
-            set { Update(ref _selectedShapes, value); }
+            get { return _state; }
+            set { Update(ref _state, value); }
         }
 
         /// <summary>
@@ -92,11 +42,6 @@ namespace TestEtoForms
         /// <param name="textScaleFactor"></param>
         public EtoRenderer(double textScaleFactor = 1.0)
         {
-            _zoom = 1.0;
-            _drawShapeState = ShapeState.Visible | ShapeState.Printable;
-            _selectedShape = default(BaseShape);
-            _selectedShapes = default(ImmutableHashSet<BaseShape>);
-
             ClearCache();
 
             _textScaleFactor = textScaleFactor;
@@ -176,7 +121,7 @@ namespace TestEtoForms
         /// <returns></returns>
         private Pen ToPen(ShapeStyle style, Func<double, float> scale)
         {
-            var pen = new Pen(ToColor(style.Stroke), (float)(style.Thickness / _zoom));
+            var pen = new Pen(ToColor(style.Stroke), (float)(style.Thickness / _state.Zoom));
             switch (style.LineStyle.LineCap)
             {
                 case Test2d.LineCap.Flat:
@@ -366,7 +311,7 @@ namespace TestEtoForms
         {
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.HasFlag(DrawShapeState))
+                if (shape.State.HasFlag(_state.DrawShapeState))
                 {
                     shape.Draw(gfx, this, 0, 0, db, r);
                 }

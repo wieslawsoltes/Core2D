@@ -42,8 +42,8 @@ namespace Test2d
                 case State.None:
                     {
                         _editor.Dehover();
-                        if (_editor.Renderer.SelectedShape == null
-                            && _editor.Renderer.SelectedShapes != null)
+                        if (_editor.Renderer.State.SelectedShape == null
+                            && _editor.Renderer.State.SelectedShapes != null)
                         {
                             var result = ShapeBounds.HitTest(_editor.Project.CurrentContainer, new Vector2(x, y), _editor.Project.Options.HitTreshold);
                             if (result != null)
@@ -187,15 +187,15 @@ namespace Test2d
             _startX = sx;
             _startY = sy;
 
-            if (_editor.Renderer.SelectedShape != null)
+            if (_editor.Renderer.State.SelectedShape != null)
             {
                 switch (_editor.Project.Options.MoveMode)
                 {
                     case MoveMode.Point:
                         {
-                            if (!_editor.Renderer.SelectedShape.State.HasFlag(ShapeState.Locked))
+                            if (!_editor.Renderer.State.SelectedShape.State.HasFlag(ShapeState.Locked))
                             {
-                                var shapes = Enumerable.Repeat(_editor.Renderer.SelectedShape, 1);
+                                var shapes = Enumerable.Repeat(_editor.Renderer.State.SelectedShape, 1);
                                 var points = Editor.GetAllPoints(shapes, ShapeState.Connector).Distinct();
                                 Editor.Move(points, dx, dy);
                             }
@@ -203,30 +203,30 @@ namespace Test2d
                         break;
                     case MoveMode.Shape:
                         {
-                            if (!_editor.Renderer.SelectedShape.State.HasFlag(ShapeState.Locked)
-                                && !_editor.Renderer.SelectedShape.State.HasFlag(ShapeState.Connector))
+                            if (!_editor.Renderer.State.SelectedShape.State.HasFlag(ShapeState.Locked)
+                                && !_editor.Renderer.State.SelectedShape.State.HasFlag(ShapeState.Connector))
                             {
-                                _editor.Renderer.SelectedShape.Move(dx, dy);
+                                _editor.Renderer.State.SelectedShape.Move(dx, dy);
                             }
                         }
                         break;
                 }
             }
 
-            if (_editor.Renderer.SelectedShapes != null)
+            if (_editor.Renderer.State.SelectedShapes != null)
             {
                 switch (_editor.Project.Options.MoveMode)
                 {
                     case MoveMode.Point:
                         {
-                            var shapes = _editor.Renderer.SelectedShapes.Where(s => !s.State.HasFlag(ShapeState.Locked));
+                            var shapes = _editor.Renderer.State.SelectedShapes.Where(s => !s.State.HasFlag(ShapeState.Locked));
                             var points = Editor.GetAllPoints(shapes, ShapeState.Connector).Distinct();
                             Editor.Move(points, dx, dy);
                         }
                         break;
                     case MoveMode.Shape:
                         {
-                            foreach (var shape in _editor.Renderer.SelectedShapes)
+                            foreach (var shape in _editor.Renderer.State.SelectedShapes)
                             {
                                 if (!shape.State.HasFlag(ShapeState.Locked))
                                 {

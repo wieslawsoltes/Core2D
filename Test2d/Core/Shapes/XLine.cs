@@ -50,26 +50,26 @@ namespace Test2d
                 renderer.Draw(dc, this, dx, dy, db, record); 
             }
 
-            if (renderer.SelectedShape != null)
+            if (renderer.State.SelectedShape != null)
             {
-                if (this == renderer.SelectedShape)
+                if (this == renderer.State.SelectedShape)
                 {
                     _start.Draw(dc, renderer, dx, dy, db, record);
                     _end.Draw(dc, renderer, dx, dy, db, record);
                 }
-                else if (_start == renderer.SelectedShape)
+                else if (_start == renderer.State.SelectedShape)
                 {
                     _start.Draw(dc, renderer, dx, dy, db, record);
                 }
-                else if (_end == renderer.SelectedShape)
+                else if (_end == renderer.State.SelectedShape)
                 {
                     _end.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
             
-            if (renderer.SelectedShapes != null)
+            if (renderer.State.SelectedShapes != null)
             {
-                if (renderer.SelectedShapes.Contains(this))
+                if (renderer.State.SelectedShapes.Contains(this))
                 {
                     _start.Draw(dc, renderer, dx, dy, db, record);
                     _end.Draw(dc, renderer, dx, dy, db, record);
