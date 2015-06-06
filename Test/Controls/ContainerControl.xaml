@@ -32,7 +32,7 @@
         <KeyBinding Command="{Binding Commands.ZoomExtentCommand}" Key="X" Modifiers=""/>
     </UserControl.InputBindings>
     <Control 
-        Template="{StaticResource ContainerControlTemplateKey}"
-        DataContext="{Binding Editor.Project.CurrentContainer}">
+        DataContext="{Binding Editor.Project.CurrentContainer}"
+        Template="{StaticResource ContainerEditorControlTemplateKey}">
     </Control>
 </UserControl>

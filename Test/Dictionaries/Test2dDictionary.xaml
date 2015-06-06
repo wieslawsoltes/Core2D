@@ -3030,58 +3030,38 @@
         </TextBox>
     </DataTemplate>
     <ControlTemplate x:Key="ContainerControlTemplateKey">
+        <ItemsControl ItemsSource="{Binding Layers}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas 
+                        Width="{Binding Width}" 
+                        Height="{Binding Height}" 
+                        Background="{Binding Background, Converter={StaticResource ArgbColorToBrushConverter}}">
+                    </Canvas>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <controls:LayerElement 
+                        Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+                    </controls:LayerElement>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Width" Value="{Binding Path=DataContext.Width, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}" />
+                    <Setter Property="Height" Value="{Binding Path=DataContext.Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
+    </ControlTemplate>
+    <ControlTemplate x:Key="ContainerEditorControlTemplateKey">
         <Grid 
             Width="{Binding Width}" 
             Height="{Binding Height}" 
             Background="Transparent">
-            <ItemsControl ItemsSource="{Binding Template.Layers}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas 
-                            Width="{Binding Template.Width}" 
-                            Height="{Binding Template.Height}" 
-                            Background="{Binding Template.Background, Converter={StaticResource ArgbColorToBrushConverter}}">
-                        </Canvas>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <controls:LayerElement 
-                            Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
-                        </controls:LayerElement>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemContainerStyle>
-                    <Style TargetType="ContentPresenter">
-                        <Setter Property="Width" Value="{Binding Path=DataContext.Template.Width, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}" />
-                        <Setter Property="Height" Value="{Binding Path=DataContext.Template.Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}" />
-                    </Style>
-                </ItemsControl.ItemContainerStyle>
-            </ItemsControl>
-            <ItemsControl ItemsSource="{Binding Layers}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas 
-                            Width="{Binding Width}" 
-                            Height="{Binding Height}" 
-                            Background="{Binding Background, Converter={StaticResource ArgbColorToBrushConverter}}">
-                        </Canvas>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <controls:LayerElement 
-                            Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
-                        </controls:LayerElement>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemContainerStyle>
-                    <Style TargetType="ContentPresenter">
-                        <Setter Property="Width" Value="{Binding Path=DataContext.Width, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}" />
-                        <Setter Property="Height" Value="{Binding Path=DataContext.Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}" />
-                    </Style>
-                </ItemsControl.ItemContainerStyle>
-            </ItemsControl>
+            <Control DataContext="{Binding Template}" Template="{StaticResource ContainerControlTemplateKey}"/>
+            <Control DataContext="{Binding}" Template="{StaticResource ContainerControlTemplateKey}"/>
             <controls:EditorCanvas 
                 Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
                 Background="Transparent"
