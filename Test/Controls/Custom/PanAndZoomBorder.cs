@@ -91,6 +91,7 @@ namespace Test.PanAndZoom
                         st.ScaleY = zoom;
                         tt.X = x;
                         tt.Y = y;
+
                         if (InvalidateChild != null)
                         {
                             InvalidateChild(st.ScaleX, tt.X, tt.Y);
@@ -101,19 +102,16 @@ namespace Test.PanAndZoom
                     {
                         if (child != null)
                         {
-                            //double zoom = e.Delta > 0 ? .2 : -.2;
-                            //if (!(e.Delta > 0) && (st.ScaleX < .4 || st.ScaleY < .4))
-                            //    return;
                             double zoom = st.ScaleX;
-                            zoom = e.Delta > 0 ? zoom + zoom / _zoomSpeed : zoom - zoom / _zoomSpeed;
+                            zoom = e.Delta > 0 ? 
+                                zoom + zoom / _zoomSpeed : 
+                                zoom - zoom / _zoomSpeed;
                             if (zoom < _minimum || zoom > _maximum)
                                 return;
 
                             Point relative = e.GetPosition(child);
                             double abosuluteX = relative.X * st.ScaleX + tt.X;
                             double abosuluteY = relative.Y * st.ScaleY + tt.Y;
-                            //st.ScaleX += zoom;
-                            //st.ScaleY += zoom;
                             st.ScaleX = zoom;
                             st.ScaleY = zoom;
                             tt.X = abosuluteX - relative.X * st.ScaleX;
@@ -152,13 +150,6 @@ namespace Test.PanAndZoom
                             this.Cursor = Cursors.Hand;
                             child.CaptureMouse();
                         }
-
-                        //if (child != null
-                        //    && e.ChangedButton == MouseButton.Middle
-                        //    && e.ClickCount == 2)
-                        //{
-                        //    ZoomAndPanChild(0.0, 0.0, 1.0);
-                        //}
                     };
 
                     this.MouseUp += (s, e) =>

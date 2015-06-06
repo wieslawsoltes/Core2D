@@ -46,9 +46,16 @@ namespace Test.Windows
                 (z, x, y) =>
                 {
                     var context = DataContext as EditorContext;
+                    bool invalidate = context.Editor.Renderer.Zoom != z;
+
                     context.Editor.Renderer.Zoom = z;
                     context.Editor.Renderer.PanX = x;
                     context.Editor.Renderer.PanY = y;
+
+                    if (invalidate)
+                    {
+                        context.Invalidate();
+                    }
                 };
 
             border.AutoFitChild =
@@ -86,32 +93,6 @@ namespace Test.Windows
                         return;
                     else
                         _isLoaded = true;
-
-                    ((DataContext as EditorContext).Editor.Renderer as ObservableObject).PropertyChanged +=
-                        (_s, _e) =>
-                        {
-                            if (_e.PropertyName == "Zoom")
-                            {
-                                var context = DataContext as EditorContext;
-                                double value = context.Editor.Renderer.Zoom;
-                                border.Scale.ScaleX = value;
-                                border.Scale.ScaleY = value;
-                            }
-
-                            if (_e.PropertyName == "PanX")
-                            {
-                                var context = DataContext as EditorContext;
-                                double value = context.Editor.Renderer.PanX;
-                                border.Translate.X = value;
-                            }
-
-                            if (_e.PropertyName == "PanY")
-                            {
-                                var context = DataContext as EditorContext;
-                                double value = context.Editor.Renderer.PanY;
-                                border.Translate.Y = value;
-                            }
-                        };
                 };
         }
     }

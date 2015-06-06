@@ -23,6 +23,8 @@ namespace Test.Controls
     /// </summary>
     internal class LayerElement : FrameworkElement
     {
+        private bool _isLoaded = false;
+
         /// <summary>
         /// 
         /// </summary>
@@ -57,8 +59,43 @@ namespace Test.Controls
         /// </summary>
         public LayerElement()
         {
-            DataContextChanged += (s, e) => Initialize();
-            Unloaded += (s, e) => DeInitialize();
+            Loaded +=
+                (s, e) =>
+                {
+                    if (_isLoaded)
+                        return;
+                    else
+                        _isLoaded = true;
+
+                    Initialize();
+                };
+
+            Unloaded +=
+                (s, e) =>
+                {
+                    if (!_isLoaded)
+                        return;
+                    else
+                        _isLoaded = false;
+
+                    DeInitialize();
+                };
+
+            DataContextChanged +=
+                (s, e) =>
+                {
+                    if (!_isLoaded)
+                        _isLoaded = true;
+
+                    if (_layer != null)
+                    {
+                        var layer = DataContext as Layer;
+                        if (layer == _layer)
+                            return;
+                    }
+
+                    Initialize();
+                };
 
             RenderOptions.SetBitmapScalingMode(
                 this,

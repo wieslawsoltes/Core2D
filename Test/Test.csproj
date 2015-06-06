@@ -113,6 +113,7 @@
       <DependentUpon>ContainerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Custom\DragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\EditorCanvas.cs" />
     <Compile Include="Controls\Custom\LayerElement.cs" />
     <Compile Include="Controls\Custom\ListBoxDropMode.cs" />
     <Compile Include="Controls\DatabaseControl.xaml.cs">

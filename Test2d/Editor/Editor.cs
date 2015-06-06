@@ -869,11 +869,15 @@ namespace Test2d
         /// <param name="container"></param>
         public void Deselect(Container container)
         {
-            _renderer.SelectedShape = default(BaseShape);
-            _renderer.SelectedShapes = default(ImmutableHashSet<BaseShape>);
+            if (_renderer.SelectedShape != null
+                || _renderer.SelectedShapes != null)
+            {
+                _renderer.SelectedShape = default(BaseShape);
+                _renderer.SelectedShapes = default(ImmutableHashSet<BaseShape>);
 
-            container.CurrentShape = default(BaseShape);
-            container.CurrentLayer.Invalidate();
+                container.CurrentShape = default(BaseShape);
+                container.CurrentLayer.Invalidate();
+            }
         }
 
         /// <summary>
@@ -980,7 +984,8 @@ namespace Test2d
                 }
                 else
                 {
-                    if (_renderer.SelectedShape == _hover)
+                    if (_renderer.SelectedShape != null 
+                        && _renderer.SelectedShape == _hover)
                     {
                         _hover = default(BaseShape);
                         Deselect(_project.CurrentContainer);

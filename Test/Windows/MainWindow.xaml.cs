@@ -321,9 +321,16 @@ namespace Test.Windows
             border.InvalidateChild = 
                 (z, x, y) =>
                 {
+                    bool invalidate = context.Editor.Renderer.Zoom != z;
+
                     context.Editor.Renderer.Zoom = z;
                     context.Editor.Renderer.PanX = x;
                     context.Editor.Renderer.PanY = y;
+
+                    if (invalidate)
+                    {
+                        context.Invalidate();
+                    }
                 };
 
             border.AutoFitChild = 
@@ -340,7 +347,7 @@ namespace Test.Windows
                             context.Editor.Project.CurrentContainer.Height);
                     }
                 };
-            
+
             border.MouseDown += 
                 (s, e) =>
                 {
@@ -362,31 +369,18 @@ namespace Test.Windows
                         return;
                     else
                         _isLoaded = true;
-
-                    (context.Editor.Renderer as ObservableObject).PropertyChanged +=
-                        (_s, _e) =>
-                        {
-                            if (_e.PropertyName == "Zoom")
-                            {
-                                double value = context.Editor.Renderer.Zoom;
-                                border.Scale.ScaleX = value;
-                                border.Scale.ScaleY = value;
-                            }
-
-                            if (_e.PropertyName == "PanX")
-                            {
-                                double value = context.Editor.Renderer.PanX;
-                                border.Translate.X = value;
-                            }
-
-                            if (_e.PropertyName == "PanY")
-                            {
-                                double value = context.Editor.Renderer.PanY;
-                                border.Translate.Y = value;
-                            }
-                        };
                 };
-      
+
+            Unloaded += (s, e) =>
+            {
+                if (!_isLoaded)
+                    return;
+                else
+                    _isLoaded = false;
+
+                DeInitializeContext();
+            };
+
             containerControl.AllowDrop = true;
 
             containerControl.DragEnter += 
@@ -479,8 +473,6 @@ namespace Test.Windows
                         }
                     }
                 };
-
-            Unloaded += (s, e) => DeInitializeContext();
 
             DataContext = context;
         }

@@ -1056,15 +1056,6 @@ namespace Test2d
                     _serializer,
                     _compressor);
 
-                (_editor.Renderer as ObservableObject).PropertyChanged +=
-                    (s, e) =>
-                    {
-                        if (e.PropertyName == "Zoom")
-                        {
-                            Invalidate();
-                        }
-                    };
-
                 _commands = new EditorCommands();
 
                 _commands.NewCommand = 
