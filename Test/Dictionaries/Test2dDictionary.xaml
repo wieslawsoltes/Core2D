@@ -3056,10 +3056,7 @@
         </ItemsControl>
     </ControlTemplate>
     <ControlTemplate x:Key="ContainerEditorControlTemplateKey">
-        <Grid 
-            Width="{Binding Width}" 
-            Height="{Binding Height}" 
-            Background="Transparent">
+        <Grid Width="{Binding Width}" Height="{Binding Height}" Background="Transparent">
             <Control DataContext="{Binding Template}" Template="{StaticResource ContainerControlTemplateKey}"/>
             <Control DataContext="{Binding}" Template="{StaticResource ContainerControlTemplateKey}"/>
             <controls:EditorCanvas 
