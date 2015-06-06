@@ -22,7 +22,7 @@ namespace Test2d
         private EditorCommands _commands;
         private Editor _editor;
         private IView _view;
-        private IRenderer _renderer;
+        private IRenderer[] _renderers;
         private ITextClipboard _textClipboard;
         private ISerializer _serializer;
         private ICompressor _compressor;
@@ -72,10 +72,10 @@ namespace Test2d
         /// <summary>
         ///
         /// </summary>
-        public IRenderer Renderer
+        public IRenderer[] Renderers
         {
-            get { return _renderer; }
-            set { Update(ref _renderer, value); }
+            get { return _renderers; }
+            set { Update(ref _renderers, value); }
         }
 
         /// <summary>
@@ -755,7 +755,7 @@ namespace Test2d
         /// </summary>
         private void AddGroupCommandHandler()
         {
-            var group = _editor.Renderer.State.SelectedShape;
+            var group = _editor.Renderers[0].State.SelectedShape;
             if (group != null && group is XGroup)
             {
                 if (_editor.Project.CurrentGroupLibrary != null)
@@ -1052,7 +1052,7 @@ namespace Test2d
             {
                 _editor = Editor.Create(
                     DefaultProject(),
-                    _renderer,
+                    _renderers,
                     _serializer,
                     _compressor);
 
@@ -1502,7 +1502,11 @@ namespace Test2d
         {
             try
             {
-                _editor.Renderer.ClearCache();
+                foreach (var renderer in _editor.Renderers)
+                {
+                    renderer.ClearCache();
+                }
+
                 _editor.Project.CurrentContainer.Invalidate();
             }
             catch (Exception ex)
@@ -2649,15 +2653,15 @@ namespace Test2d
         {
             try
             {
-                if (_editor.Renderer.State.SelectedShape != null)
+                if (_editor.Renderers[0].State.SelectedShape != null)
                 {
                     // TODO: Add history snapshot.
-                    _editor.Renderer.State.SelectedShape.Record = record;
+                    _editor.Renderers[0].State.SelectedShape.Record = record;
                 }
-                else if (_editor.Renderer.State.SelectedShapes != null && _editor.Renderer.State.SelectedShapes.Count > 0)
+                else if (_editor.Renderers[0].State.SelectedShapes != null && _editor.Renderers[0].State.SelectedShapes.Count > 0)
                 {
                     // TODO: Add history snapshot.
-                    foreach (var shape in _editor.Renderer.State.SelectedShapes)
+                    foreach (var shape in _editor.Renderers[0].State.SelectedShapes)
                     {
                         shape.Record = record;
                     }
@@ -2772,15 +2776,15 @@ namespace Test2d
         {
             try
             {
-                if (_editor.Renderer.State.SelectedShape != null)
+                if (_editor.Renderers[0].State.SelectedShape != null)
                 {
                     // TODO: Add history snapshot.
-                    _editor.Renderer.State.SelectedShape.Style = style;
+                    _editor.Renderers[0].State.SelectedShape.Style = style;
                 }
-                else if (_editor.Renderer.State.SelectedShapes != null && _editor.Renderer.State.SelectedShapes.Count > 0)
+                else if (_editor.Renderers[0].State.SelectedShapes != null && _editor.Renderers[0].State.SelectedShapes.Count > 0)
                 {
                     // TODO: Add history snapshot.
-                    foreach (var shape in _editor.Renderer.State.SelectedShapes)
+                    foreach (var shape in _editor.Renderers[0].State.SelectedShapes)
                     {
                         shape.Style = style;
                     }
@@ -2894,14 +2898,14 @@ namespace Test2d
             {
                 if (CanCopy())
                 {
-                    if (_editor.Renderer.State.SelectedShape != null)
+                    if (_editor.Renderers[0].State.SelectedShape != null)
                     {
-                        Copy(Enumerable.Repeat(_editor.Renderer.State.SelectedShape, 1).ToList());
+                        Copy(Enumerable.Repeat(_editor.Renderers[0].State.SelectedShape, 1).ToList());
                     }
 
-                    if (_editor.Renderer.State.SelectedShapes != null)
+                    if (_editor.Renderers[0].State.SelectedShapes != null)
                     {
-                        Copy(_editor.Renderer.State.SelectedShapes.ToList());
+                        Copy(_editor.Renderers[0].State.SelectedShapes.ToList());
                     }
                 }
             }
@@ -3230,7 +3234,7 @@ namespace Test2d
             (_commands.StyleWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.StylesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ShapesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ContainerWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.DocumentWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ScriptWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.PropertiesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
 

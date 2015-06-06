@@ -44,7 +44,7 @@ namespace TestEtoForms
             _context = new EditorContext()
             {
                 View = this,
-                Renderer = new EtoRenderer(72.0 / 96.0),
+                Renderers = new IRenderer[] { new EtoRenderer(72.0 / 96.0) },
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),
                 Compressor = new LZ4CodecCompressor(),
@@ -58,7 +58,7 @@ namespace TestEtoForms
             _context.InitializeEditor();
             _context.InitializeSctipts();
             _context.InitializeSimulation();
-            _context.Editor.Renderer.State.DrawShapeState = ShapeState.Visible;
+            _context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
             _context.Editor.GetImagePath = () => Image();
 
             _state = new ZoomState(_context, InvalidateContainer);
@@ -836,7 +836,7 @@ namespace TestEtoForms
             g.Clear(brush);
             brush.Dispose();
 
-            var renderer = _context.Editor.Renderer;
+            var renderer = _context.Editor.Renderers[0];
             var container = _context.Editor.Project.CurrentContainer;
 
             if (container.Template != null)

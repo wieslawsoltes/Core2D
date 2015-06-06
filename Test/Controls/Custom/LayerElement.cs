@@ -23,35 +23,43 @@ namespace Test.Controls
     /// </summary>
     internal class LayerElement : FrameworkElement
     {
-        private bool _isLoaded = false;
-
         /// <summary>
         /// 
         /// </summary>
-        public static readonly DependencyProperty RendererProperty =
-            DependencyProperty.Register(
-                "Renderer",
-                typeof(IRenderer),
-                typeof(LayerElement),
-                new FrameworkPropertyMetadata(
-                    null,
-                    FrameworkPropertyMetadataOptions.AffectsRender |
-                    FrameworkPropertyMetadataOptions.AffectsMeasure |
-                    FrameworkPropertyMetadataOptions.AffectsArrange |
-                    FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public IRenderer Renderer
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static IRenderer GetRenderer(DependencyObject obj)
         {
-            get { return (IRenderer)GetValue(RendererProperty); }
-            set { SetValue(RendererProperty, value); }
+            return (IRenderer)obj.GetValue(RendererProperty);
         }
 
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="value"></param>
+        public static void SetRenderer(DependencyObject obj, IRenderer value)
+        {
+            obj.SetValue(RendererProperty, value);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static readonly DependencyProperty RendererProperty =
+            DependencyProperty.RegisterAttached(
+                "Renderer",
+                typeof(IRenderer),
+                typeof(LayerElement),
+                new FrameworkPropertyMetadata(
+                    null,
+                    FrameworkPropertyMetadataOptions.Inherits |
+                    FrameworkPropertyMetadataOptions.AffectsRender |
+                    FrameworkPropertyMetadataOptions.AffectsMeasure |
+                    FrameworkPropertyMetadataOptions.AffectsArrange |
+                    FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
+
+        private bool _isLoaded = false;
         private Layer _layer = default(Layer);
 
         /// <summary>
@@ -162,9 +170,10 @@ namespace Test.Controls
             var layer = DataContext as Layer;
             if (layer != null && layer.IsVisible)
             {
-                if (Renderer != null)
+                var renderer = LayerElement.GetRenderer(this);
+                if (renderer != null)
                 {
-                    Renderer.Draw(
+                    renderer.Draw(
                         drawingContext, 
                         layer, 
                         layer.Owner.Properties,

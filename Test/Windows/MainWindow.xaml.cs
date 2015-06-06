@@ -80,7 +80,7 @@ namespace Test.Windows
             var context = new EditorContext()
             {
                 View = this,
-                Renderer = new WpfRenderer(),
+                Renderers = new IRenderer[] { new WpfRenderer(), new WpfRenderer() },
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),
                 Compressor = new LZ4CodecCompressor(),
@@ -94,7 +94,8 @@ namespace Test.Windows
             context.InitializeEditor();
             context.InitializeSctipts();
             context.InitializeSimulation();
-            context.Editor.Renderer.State.DrawShapeState = ShapeState.Visible;
+            context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
+            context.Editor.Renderers[1].State.DrawShapeState = ShapeState.Visible;
             context.Editor.GetImagePath = () => Image();
 
             context.Commands.OpenCommand = 
@@ -272,9 +273,9 @@ namespace Test.Windows
                     () => (new ShapesWindow() { Owner = this, DataContext = context }).Show(),
                     () => true);
 
-            context.Commands.ContainerWindowCommand = 
+            context.Commands.DocumentWindowCommand = 
                 new DelegateCommand(
-                    () => (new ContainerWindow() { Owner = this, DataContext = context }).Show(),
+                    () => (new DocumentWindow() { Owner = this, DataContext = context }).Show(),
                     () => true);
 
             context.Commands.ScriptWindowCommand =
@@ -316,16 +317,16 @@ namespace Test.Windows
                     }
                 };
 
-            grid.EnableAutoFit = context.Renderer.State.EnableAutofit;
+            grid.EnableAutoFit = context.Renderers[0].State.EnableAutofit;
 
             border.InvalidateChild = 
                 (z, x, y) =>
                 {
-                    bool invalidate = context.Editor.Renderer.State.Zoom != z;
+                    bool invalidate = context.Editor.Renderers[0].State.Zoom != z;
 
-                    context.Editor.Renderer.State.Zoom = z;
-                    context.Editor.Renderer.State.PanX = x;
-                    context.Editor.Renderer.State.PanY = y;
+                    context.Editor.Renderers[0].State.Zoom = z;
+                    context.Editor.Renderers[0].State.PanX = x;
+                    context.Editor.Renderers[0].State.PanY = y;
 
                     if (invalidate)
                     {
@@ -340,7 +341,7 @@ namespace Test.Windows
                         && context != null
                         && context.Editor.Project.CurrentContainer != null)
                     {
-                        if (!context.Renderer.State.EnableAutofit)
+                        if (!context.Renderers[0].State.EnableAutofit)
                             return;
 
                         border.AutoFit(

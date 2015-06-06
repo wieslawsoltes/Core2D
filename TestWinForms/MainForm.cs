@@ -47,7 +47,7 @@ namespace TestWinForms
             var context = new EditorContext()
             {
                 View = this,
-                Renderer = new EmfRenderer(72.0 / 96.0),
+                Renderers = new IRenderer[] { new EmfRenderer(72.0 / 96.0) },
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),
                 Compressor = new LZ4CodecCompressor(),
@@ -61,7 +61,7 @@ namespace TestWinForms
             context.InitializeEditor();
             context.InitializeSctipts();
             context.InitializeSimulation();
-            context.Editor.Renderer.State.DrawShapeState = ShapeState.Visible;
+            context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
 
             DataContext = context;
 
@@ -555,7 +555,7 @@ namespace TestWinForms
 
             g.PageUnit = GraphicsUnit.Display;
 
-            var renderer = Context.Editor.Renderer;
+            var renderer = Context.Editor.Renderers[0];
             var container = Context.Editor.Project.CurrentContainer;
 
             if (container.Template != null)

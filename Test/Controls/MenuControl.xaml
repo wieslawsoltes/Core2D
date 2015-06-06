@@ -87,7 +87,7 @@
             <Separator/>
             <MenuItem Header="S_hapes..." Command="{Binding Commands.ShapesWindowCommand}" InputGestureText="Ctrl+H"/>
             <Separator/>
-            <MenuItem Header="Containe_r Editor..." Command="{Binding Commands.ContainerWindowCommand}" InputGestureText="Ctrl+R"/>
+            <MenuItem Header="Do_cument..." Command="{Binding Commands.DocumentWindowCommand}" InputGestureText="Ctrl+R"/>
             <Separator/>
             <MenuItem Header="_Script Editor..." Command="{Binding Commands.ScriptWindowCommand}" InputGestureText="Ctrl+U"/>
             <Separator/>

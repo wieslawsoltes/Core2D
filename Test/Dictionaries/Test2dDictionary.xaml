@@ -3042,9 +3042,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <controls:LayerElement 
-                        Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
-                    </controls:LayerElement>
+                    <controls:LayerElement/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemContainerStyle>
@@ -3066,14 +3064,8 @@
                 FocusVisualStyle="{x:Null}"
                 Width="{Binding Width}" 
                 Height="{Binding Height}">
-                <controls:LayerElement 
-                    DataContext="{Binding WorkingLayer}" 
-                    Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
-                </controls:LayerElement>
-                <controls:LayerElement 
-                    DataContext="{Binding HelperLayer}" 
-                    Renderer="{Binding Path=DataContext.Editor.Renderer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
-                </controls:LayerElement>
+                <controls:LayerElement DataContext="{Binding WorkingLayer}"/>
+                <controls:LayerElement DataContext="{Binding HelperLayer}"/>
             </controls:EditorCanvas>
         </Grid>
     </ControlTemplate>

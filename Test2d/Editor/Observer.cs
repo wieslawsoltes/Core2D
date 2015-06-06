@@ -38,7 +38,10 @@ namespace Test2d
             {
                 if (_editor.Project.CurrentContainer != null)
                 {
-                    _editor.Renderer.ClearCache();
+                    foreach (var renderer in _editor.Renderers)
+                    {
+                        renderer.ClearCache();
+                    }
                     _editor.Project.CurrentContainer.Invalidate();
                 }
             };

@@ -167,8 +167,8 @@
     <Compile Include="Converters\ZoomScaleConverter.cs" />
     <Compile Include="Controls\Custom\PanAndZoomBorder.cs" />
     <Compile Include="Controls\Custom\PanAndZoomGrid.cs" />
-    <Compile Include="Windows\ContainerWindow.xaml.cs">
-      <DependentUpon>ContainerWindow.xaml</DependentUpon>
+    <Compile Include="Windows\DocumentWindow.xaml.cs">
+      <DependentUpon>DocumentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\DatabasesWindow.xaml.cs">
       <DependentUpon>DatabasesWindow.xaml</DependentUpon>
@@ -282,7 +282,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\ContainerWindow.xaml">
+    <Page Include="Windows\DocumentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

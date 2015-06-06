@@ -388,7 +388,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public ICommand ContainerWindowCommand { get; set; } 
+        public ICommand DocumentWindowCommand { get; set; } 
         /// <summary>
         /// 
         /// </summary>
