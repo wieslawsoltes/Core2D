@@ -9,19 +9,28 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="280">
     <Grid>
+        <Grid.Resources>
+            <ControlTemplate x:Key="DatabasesMenu">
+                <Menu Background="Transparent" HorizontalAlignment="Right">
+                    <MenuItem Header="database">
+                        <MenuItem Header="new" Command="{Binding Commands.AddDatabaseCommand}" InputGestureText=""/>
+                        <Separator/>
+                        <MenuItem Header="import" Command="{Binding Commands.ImportDataCommand}" InputGestureText=""/>
+                        <MenuItem Header="export" Command="{Binding Commands.ExportDataCommand}" InputGestureText=""/>
+                        <Separator/>
+                        <MenuItem Header="update" Command="{Binding Commands.UpdateDataCommand}" InputGestureText=""/>
+                    </MenuItem>
+                    <MenuItem Command="{Binding Commands.AddRecordCommand}" Header="+"/>
+                    <MenuItem Command="{Binding Commands.RemoveRecordCommand}" Header="-"/>
+                </Menu>
+            </ControlTemplate>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Menu Background="Transparent" HorizontalAlignment="Right" Grid.Row="0" Margin="2,0,2,0">
-            <MenuItem Header="new" Command="{Binding Commands.AddDatabaseCommand}" InputGestureText=""/>
-            <MenuItem Header="import" Command="{Binding Commands.ImportDataCommand}" InputGestureText=""/>
-            <MenuItem Header="export" Command="{Binding Commands.ExportDataCommand}" InputGestureText=""/>
-            <MenuItem Header="update" Command="{Binding Commands.UpdateDataCommand}" InputGestureText=""/>
-            <MenuItem Command="{Binding Commands.AddRecordCommand}" Header="+"/>
-            <MenuItem Command="{Binding Commands.RemoveRecordCommand}" Header="-"/>
-        </Menu>
+        <Control Template="{StaticResource DatabasesMenu}" Grid.Row="0" Margin="2,0,2,0"/>
         <TabControl VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
                     TabStripPlacement="Bottom"
