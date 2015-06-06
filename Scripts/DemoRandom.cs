@@ -150,13 +150,13 @@ void Demo(Project p, int n = 100)
     var height = c.Height;
     var rand = new Random(Guid.NewGuid().GetHashCode());
 
-    var ll = Layer.Create("Demo-Lines");
-    var rl = Layer.Create("Demo-Rectangles");
-    var el = Layer.Create("Demo-Ellipses");
-    var al = Layer.Create("Demo-Arcs");
-    var bl = Layer.Create("Demo-Beziers");
-    var ql = Layer.Create("Demo-QBeziers");
-    var tl = Layer.Create("Demo-Texts");
+    var ll = Layer.Create("Demo-Lines", c);
+    var rl = Layer.Create("Demo-Rectangles", c);
+    var el = Layer.Create("Demo-Ellipses", c);
+    var al = Layer.Create("Demo-Arcs", c);
+    var bl = Layer.Create("Demo-Beziers", c);
+    var ql = Layer.Create("Demo-QBeziers", c);
+    var tl = Layer.Create("Demo-Texts", c);
 
     var layersBuilder = c.Layers.ToBuilder();
     layersBuilder.Add(ll);
