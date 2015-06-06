@@ -10,20 +10,10 @@
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextHintingMode="Auto"
         TextOptions.TextRenderingMode="Auto">
-    <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                  HorizontalScrollBarVisibility="Auto" 
-                  Focusable="True">
-        <controls:StyleControl DataContext="{Binding Editor.Project.CurrentContainer.CurrentShape.Style}" Margin="2">
-            <controls:StyleControl.Style>
-                <Style TargetType="controls:StyleControl">
-                    <Setter Property="Visibility" Value="Visible"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding}" Value="{x:Null}">
-                            <Setter Property="Visibility" Value="Hidden"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </controls:StyleControl.Style>
-        </controls:StyleControl>
+    <ScrollViewer 
+        VerticalScrollBarVisibility="Auto"        
+        HorizontalScrollBarVisibility="Auto" 
+        Focusable="True">
+        <controls:StyleControl/>
     </ScrollViewer>
 </Window>
