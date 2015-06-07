@@ -16,6 +16,7 @@ namespace Test2d
     /// </summary>
     public class Editor : ObservableObject
     {
+        private ILog _log;
         private Project _project;
         private IRenderer[] _renderers;
         private Tool _currentTool;
@@ -24,6 +25,15 @@ namespace Test2d
         private Observer _observer;
         private History _history;
         private BaseShape _hover;
+
+        /// <summary>
+        /// Gets or sets current log.
+        /// </summary>
+        public ILog Log
+        {
+            get { return _log; }
+            set { Update(ref _log, value); }
+        }
 
         /// <summary>
         /// Gets or sets current project.
