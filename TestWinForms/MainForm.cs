@@ -85,7 +85,11 @@ namespace TestWinForms
         /// </summary>
         private void DeInitializeContext()
         {
-            (DataContext as EditorContext).Dispose();
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Dispose();
         }
 
         /// <summary>
@@ -118,7 +122,11 @@ namespace TestWinForms
             SetContainerInvalidation(panel);
             SetPanelSize(panel);
 
-            var container = (DataContext as EditorContext).Editor.Project.CurrentContainer;
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            var container = context.Editor.Project.CurrentContainer;
             if (container != null)
             {
                 container.Invalidate();
@@ -134,37 +142,49 @@ namespace TestWinForms
             // open container
             this.openFileDialog1.FileOk += (sender, e) =>
             {
+                var context = DataContext as EditorContext;
+                if (context == null)
+                    return;
+
                 string path = openFileDialog1.FileName;
                 int filterIndex = openFileDialog1.FilterIndex;
-                (DataContext as EditorContext).Open(path);
+                context.Open(path);
                 Invalidate(panel);
             };
 
             // save container
             this.saveFileDialog1.FileOk += (sender, e) =>
             {
+                var context = DataContext as EditorContext;
+                if (context == null)
+                    return;
+
                 string path = saveFileDialog1.FileName;
                 int filterIndex = saveFileDialog1.FilterIndex;
-                (DataContext as EditorContext).Save(path);
+                context.Save(path);
             };
 
             // export container
             this.saveFileDialog2.FileOk += (sender, e) =>
             {
+                var context = DataContext as EditorContext;
+                if (context == null)
+                    return;
+
                 string path = saveFileDialog2.FileName;
                 int filterIndex = saveFileDialog2.FilterIndex;
                 switch (filterIndex)
                 {
                     case 1:
-                        (DataContext as EditorContext).ExportAsPdf(path, (DataContext as EditorContext).Editor.Project);
+                        context.ExportAsPdf(path, context.Editor.Project);
                         Process.Start(path);
                         break;
                     case 2:
-                        (DataContext as EditorContext).ExportAsDxf(path, Dxf.DxfAcadVer.AC1015);
+                        context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1015);
                         Process.Start(path);
                         break;
                     case 3:
-                        (DataContext as EditorContext).ExportAsDxf(path, Dxf.DxfAcadVer.AC1006);
+                        context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1006);
                         Process.Start(path);
                         break;
                     default:
@@ -175,9 +195,13 @@ namespace TestWinForms
             // eval script
             this.openFileDialog2.FileOk += (sender, e) =>
             {
+                var context = DataContext as EditorContext;
+                if (context == null)
+                    return;
+
                 string path = openFileDialog2.FileName;
                 int filterIndex = openFileDialog2.FilterIndex;
-                (DataContext as EditorContext).Eval(path);
+                context.Eval(path);
             };
         }
 
@@ -187,7 +211,11 @@ namespace TestWinForms
         /// <param name="panel"></param>
         private void SetPanelSize(ContainerPanel panel)
         {
-            var container = (DataContext as EditorContext).Editor.Project.CurrentContainer;
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            var container = context.Editor.Project.CurrentContainer;
             if (container == null)
                 return;
 
@@ -207,7 +235,11 @@ namespace TestWinForms
         /// <param name="panel"></param>
         private void SetContainerInvalidation(ContainerPanel panel)
         {
-            var container = (DataContext as EditorContext).Editor.Project.CurrentContainer;
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            var container = context.Editor.Project.CurrentContainer;
             if (container == null)
                 return;
 
@@ -235,7 +267,11 @@ namespace TestWinForms
         {
             newToolStripMenuItem.Click += (sender, e) =>
                 {
-                    (DataContext as EditorContext).Commands.NewCommand.Execute(null);
+                    var context = DataContext as EditorContext;
+                    if (context == null)
+                        return;
+
+                    context.Commands.NewCommand.Execute(null);
                     Invalidate(panel);
                 };
 
@@ -259,6 +295,9 @@ namespace TestWinForms
                     return;
 
                 var context = DataContext as EditorContext;
+                if (context == null)
+                    return;
+
                 switch (e.KeyCode)
                 {
                     case Keys.Delete:

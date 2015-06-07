@@ -55,7 +55,7 @@ namespace Test.Windows
             return Clipboard.ContainsText(TextDataFormat.UnicodeText);
         }
     }
- 
+
     /// <summary>
     /// 
     /// </summary>
@@ -92,6 +92,7 @@ namespace Test.Windows
                 CsvWriter = new CsvHelperWriter(),
                 Execute = (action) => Dispatcher.Invoke(action)
             };
+
             context.InitializeEditor();
             context.InitializeSctipts();
             context.InitializeSimulation();
@@ -507,7 +508,11 @@ namespace Test.Windows
         /// </summary>
         private void DeInitializeContext()
         {
-            (DataContext as EditorContext).Dispose();
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Dispose();
         }
 
         /// <summary>
@@ -515,6 +520,10 @@ namespace Test.Windows
         /// </summary>
         public void ImportData()
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             var dlg = new OpenFileDialog()
             {
                 Filter = "Csv (*.csv)|*.csv|All (*.*)|*.*",
@@ -524,7 +533,7 @@ namespace Test.Windows
 
             if (dlg.ShowDialog() == true)
             {
-                (DataContext as EditorContext).ImportData(dlg.FileName);
+                context.ImportData(dlg.FileName);
             }
         }
 
@@ -534,6 +543,9 @@ namespace Test.Windows
         public void ExportData()
         {
             var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             var database = context.Editor.Project.CurrentDatabase;
             if (database == null)
                 return;
@@ -560,6 +572,9 @@ namespace Test.Windows
         public void UpdateData()
         {
             var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             var database = context.Editor.Project.CurrentDatabase;
             if (database == null)
                 return;
@@ -573,7 +588,7 @@ namespace Test.Windows
 
             if (dlg.ShowDialog() == true)
             {
-                (DataContext as EditorContext).UpdateData(dlg.FileName, database);
+                context.UpdateData(dlg.FileName, database);
             }
         }
 
@@ -582,6 +597,10 @@ namespace Test.Windows
         /// </summary>
         public void Eval()
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             var dlg = new OpenFileDialog()
             {
                 Filter = "C# (*.cs)|*.cs|All (*.*)|*.*",
@@ -594,7 +613,7 @@ namespace Test.Windows
             {
                 foreach (var path in dlg.FileNames)
                 {
-                    (DataContext as EditorContext).Eval(path);
+                    context.Eval(path);
                 }
             }
         }
@@ -604,6 +623,10 @@ namespace Test.Windows
         /// </summary>
         public void Open()
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             var dlg = new OpenFileDialog()
             {
                 Filter = "Project (*.project)|*.project|All (*.*)|*.*",
@@ -613,7 +636,7 @@ namespace Test.Windows
 
             if (dlg.ShowDialog() == true)
             {
-                (DataContext as EditorContext).Open(dlg.FileName);
+                context.Open(dlg.FileName);
             }
         }
 
@@ -622,16 +645,20 @@ namespace Test.Windows
         /// </summary>
         public void SaveAs()
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             var dlg = new SaveFileDialog()
             {
                 Filter = "Project (*.project)|*.project|All (*.*)|*.*",
                 FilterIndex = 0,
-                FileName = (DataContext as EditorContext).Editor.Project.Name
+                FileName = context.Editor.Project.Name
             };
 
             if (dlg.ShowDialog() == true)
             {
-                (DataContext as EditorContext).Save(dlg.FileName);
+                context.Save(dlg.FileName);
             }
         }
 
@@ -642,6 +669,10 @@ namespace Test.Windows
         /// <param name="type"></param>
         public void ImportObject(object item, ImportType type)
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             if (item == null)
                 return;
             
@@ -690,7 +721,6 @@ namespace Test.Windows
 
             if (dlg.ShowDialog() == true)
             {
-                var context = DataContext as EditorContext;
                 var paths = dlg.FileNames;
 
                 foreach (var path in paths)
@@ -707,6 +737,10 @@ namespace Test.Windows
         /// <param name="type"></param>
         public void ExportObject(object item, ExportType type)
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             if (item == null)
                 return;
             
@@ -767,7 +801,6 @@ namespace Test.Windows
             if (dlg.ShowDialog() == true)
             {
                 var path = dlg.FileName;
-                var context = DataContext as EditorContext;
                 context.ExportEx(path, item, type);
             }
         }
@@ -805,6 +838,10 @@ namespace Test.Windows
         /// <param name="item"></param>
         public void Export(object item)
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             string name = string.Empty;
 
             if (item is Container)
@@ -827,7 +864,7 @@ namespace Test.Windows
             }
             else if (item == null)
             {
-                var editor = (DataContext as EditorContext).Editor;
+                var editor = context.Editor;
                 name = editor.Project.Name;
                 item = editor.Project;
             }
@@ -844,7 +881,7 @@ namespace Test.Windows
                 switch (dlg.FilterIndex) 
                 {
                     case 1:
-                        (DataContext as EditorContext).ExportAsPdf(dlg.FileName, item);
+                        context.ExportAsPdf(dlg.FileName, item);
                         Process.Start(dlg.FileName);
                         break;
                     case 2:
@@ -852,11 +889,11 @@ namespace Test.Windows
                         Process.Start(dlg.FileName);
                         break;
                     case 3:
-                        (DataContext as EditorContext).ExportAsDxf(dlg.FileName, Dxf.DxfAcadVer.AC1015);
+                        context.ExportAsDxf(dlg.FileName, Dxf.DxfAcadVer.AC1015);
                         Process.Start(dlg.FileName);
                         break;
                     case 4:
-                        (DataContext as EditorContext).ExportAsDxf(dlg.FileName, Dxf.DxfAcadVer.AC1006);
+                        context.ExportAsDxf(dlg.FileName, Dxf.DxfAcadVer.AC1006);
                         Process.Start(dlg.FileName);
                         break;
                     default:
