@@ -124,6 +124,33 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <param name="style"></param>
+        /// <param name="point"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static XLine Create(
+            XPoint start,
+            XPoint end,
+            ShapeStyle style,
+            BaseShape point,
+            string name = "")
+        {
+            return new XLine()
+            {
+                Name = name,
+                Style = style,
+                Bindings = ImmutableArray.Create<ShapeBinding>(),
+                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Start = start,
+                End = end
+            };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
         /// <param name="x2"></param>
