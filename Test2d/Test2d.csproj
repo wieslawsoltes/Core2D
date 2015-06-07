@@ -225,6 +225,8 @@
     <Compile Include="Editor\Script\ScriptFile.cs" />
     <Compile Include="Editor\State.cs" />
     <Compile Include="Editor\Tool.cs" />
+    <Compile Include="Log\ILog.cs" />
+    <Compile Include="Log\TraceLog.cs" />
     <Compile Include="Math\MathHelpers.cs" />
     <Compile Include="Math\Point2.cs" />
     <Compile Include="Math\Size2.cs" />
