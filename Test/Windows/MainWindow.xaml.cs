@@ -5,6 +5,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -415,8 +416,8 @@ namespace Test.Windows
                         }
                         catch (Exception ex)
                         {
-                            System.Diagnostics.Debug.Print(ex.Message);
-                            System.Diagnostics.Debug.Print(ex.StackTrace);
+                            Debug.Print(ex.Message);
+                            Debug.Print(ex.StackTrace);
                         }
                     }
 
@@ -434,8 +435,8 @@ namespace Test.Windows
                         }
                         catch (Exception ex)
                         {
-                            System.Diagnostics.Debug.Print(ex.Message);
-                            System.Diagnostics.Debug.Print(ex.StackTrace);
+                            Debug.Print(ex.Message);
+                            Debug.Print(ex.StackTrace);
                         }
                     }
 
@@ -453,8 +454,8 @@ namespace Test.Windows
                         }
                         catch (Exception ex)
                         {
-                            System.Diagnostics.Debug.Print(ex.Message);
-                            System.Diagnostics.Debug.Print(ex.StackTrace);
+                            Debug.Print(ex.Message);
+                            Debug.Print(ex.StackTrace);
                         }
                     }
 
@@ -472,8 +473,8 @@ namespace Test.Windows
                         }
                         catch (Exception ex)
                         {
-                            System.Diagnostics.Debug.Print(ex.Message);
-                            System.Diagnostics.Debug.Print(ex.StackTrace);
+                            Debug.Print(ex.Message);
+                            Debug.Print(ex.StackTrace);
                         }
                     }
                 };
@@ -765,8 +766,8 @@ namespace Test.Windows
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -816,19 +817,19 @@ namespace Test.Windows
                 {
                     case 1:
                         (DataContext as EditorContext).ExportAsPdf(dlg.FileName, item);
-                        System.Diagnostics.Process.Start(dlg.FileName);
+                        Process.Start(dlg.FileName);
                         break;
                     case 2:
                         ExportEmf(dlg.FileName);
-                        System.Diagnostics.Process.Start(dlg.FileName);
+                        Process.Start(dlg.FileName);
                         break;
                     case 3:
                         (DataContext as EditorContext).ExportAsDxf(dlg.FileName, Dxf.DxfAcadVer.AC1015);
-                        System.Diagnostics.Process.Start(dlg.FileName);
+                        Process.Start(dlg.FileName);
                         break;
                     case 4:
                         (DataContext as EditorContext).ExportAsDxf(dlg.FileName, Dxf.DxfAcadVer.AC1006);
-                        System.Diagnostics.Process.Start(dlg.FileName);
+                        Process.Start(dlg.FileName);
                         break;
                     default:
                         break;

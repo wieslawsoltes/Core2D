@@ -2,9 +2,10 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Microsoft.Practices.Prism.Commands;
 using System;
-using System.Collections.Immutable;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -1382,8 +1383,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -1403,8 +1404,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -1431,8 +1432,8 @@ namespace Test2d
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.Print(ex.Message);
-                        System.Diagnostics.Debug.Print(ex.StackTrace);
+                        Debug.Print(ex.Message);
+                        Debug.Print(ex.StackTrace);
                     }
                 };
 
@@ -1459,8 +1460,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -1490,8 +1491,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -1511,8 +1512,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -1530,8 +1531,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -1549,8 +1550,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -1590,8 +1591,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
             return null;
         }
@@ -1632,8 +1633,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -1657,8 +1658,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -1681,8 +1682,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -1702,8 +1703,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
         
@@ -1723,8 +1724,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -1938,8 +1939,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2061,8 +2062,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2088,8 +2089,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2179,8 +2180,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2205,8 +2206,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
             return false;
         }
@@ -2227,8 +2228,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2248,8 +2249,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2312,8 +2313,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2368,8 +2369,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2403,8 +2404,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2432,8 +2433,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
 
             return null;
@@ -2465,8 +2466,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
 
             return null;
@@ -2502,8 +2503,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
 
             return null;
@@ -2600,8 +2601,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
 
             return false;
@@ -2638,8 +2639,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2686,8 +2687,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2800,8 +2801,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2838,8 +2839,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2858,8 +2859,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2879,8 +2880,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2906,8 +2907,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2929,8 +2930,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2948,8 +2949,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -2966,8 +2967,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -3022,8 +3023,8 @@ namespace Test2d
                                 }
                                 catch (Exception ex)
                                 {
-                                    System.Diagnostics.Debug.Print(ex.Message);
-                                    System.Diagnostics.Debug.Print(ex.StackTrace);
+                                    Debug.Print(ex.Message);
+                                    Debug.Print(ex.StackTrace);
 
                                     if (IsSimulationMode())
                                     {
@@ -3039,8 +3040,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -3063,8 +3064,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -3092,8 +3093,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 
@@ -3113,8 +3114,8 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
 

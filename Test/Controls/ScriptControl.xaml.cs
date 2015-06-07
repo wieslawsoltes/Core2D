@@ -4,6 +4,7 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -107,8 +108,8 @@ namespace Test.Controls
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.Print(ex.Message);
-                    System.Diagnostics.Debug.Print(ex.StackTrace);
+                    Debug.Print(ex.Message);
+                    Debug.Print(ex.StackTrace);
                 }
             }
         }
@@ -125,8 +126,8 @@ namespace Test.Controls
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.Print(ex.Message);
-                    System.Diagnostics.Debug.Print(ex.StackTrace);
+                    Debug.Print(ex.Message);
+                    Debug.Print(ex.StackTrace);
                 }
             }
             else
@@ -150,8 +151,8 @@ namespace Test.Controls
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.Print(ex.Message);
-                    System.Diagnostics.Debug.Print(ex.StackTrace);
+                    Debug.Print(ex.Message);
+                    Debug.Print(ex.StackTrace);
                 }
             }
         }
@@ -174,8 +175,8 @@ namespace Test.Controls
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.Print(ex.Message);
-                    System.Diagnostics.Debug.Print(ex.StackTrace);
+                    Debug.Print(ex.Message);
+                    Debug.Print(ex.StackTrace);
                 }
             }
         }
@@ -198,8 +199,16 @@ namespace Test.Controls
 
             if (dlg.ShowDialog() == true)
             {
-                var code = editor.Text;
-                System.IO.File.WriteAllText(dlg.FileName, code);
+                try
+                {
+                    var code = editor.Text;
+                    System.IO.File.WriteAllText(dlg.FileName, code);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Print(ex.Message);
+                    Debug.Print(ex.StackTrace);
+                }
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Diagnostics;
 using Test2d;
 
 namespace TestEtoForms
@@ -37,7 +38,7 @@ namespace TestEtoForms
 
         public void MiddleDown(float x, float y)
         {
-            System.Diagnostics.Debug.Print("Pan Offset: {0}, {1}", PanOffsetX, PanOffsetY);
+            Debug.Print("Pan Offset: {0}, {1}", PanOffsetX, PanOffsetY);
 
             StartX = x;
             StartY = y;
@@ -72,7 +73,7 @@ namespace TestEtoForms
         {
             PanOffsetX += PanX - OriginX;
             PanOffsetY += PanY - OriginY;
-            System.Diagnostics.Debug.Print("Pan Offset: {0}, {1}", PanOffsetX, PanOffsetY);
+            Debug.Print("Pan Offset: {0}, {1}", PanOffsetX, PanOffsetY);
             IsPanMode = false;
         }
 
@@ -141,7 +142,7 @@ namespace TestEtoForms
 
             WheelOffsetX = x - WheelOriginX;
             WheelOffsetY = y - WheelOriginY;
-            System.Diagnostics.Debug.Print("Wheel Offset: {0}, {1}", WheelOffsetX, WheelOffsetY);
+            Debug.Print("Wheel Offset: {0}, {1}", WheelOffsetX, WheelOffsetY);
 
             ZoomTo(
                 zoom,

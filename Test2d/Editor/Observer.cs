@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,15 +66,15 @@ namespace Test2d
             Add(_editor.Project);
         }
 
-        [System.Diagnostics.Conditional("VERBOSE")]
-        private void Debug(string text)
+        [Conditional("VERBOSE")]
+        private void Verbose(string text)
         {
-            System.Diagnostics.Debug.Print(text);
+            Debug.Print(text);
         }
 
         private void DatabaseObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Database: " + sender.GetType() + ", Property: " + e.PropertyName);
+            Verbose("Database: " + sender.GetType() + ", Property: " + e.PropertyName);
 
             if (e.PropertyName == "Columns")
             {
@@ -94,13 +95,13 @@ namespace Test2d
 
         private void ColumnObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Column: " + sender.GetType() + ", Property: " + e.PropertyName);
+            Verbose("Column: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
         }
 
         private void RecordObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Record: " + sender.GetType() + ", Property: " + e.PropertyName);
+            Verbose("Record: " + sender.GetType() + ", Property: " + e.PropertyName);
 
             if (e.PropertyName == "Columns")
             {
@@ -121,13 +122,13 @@ namespace Test2d
 
         private void ValueObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Value: " + sender.GetType() + ", Property: " + e.PropertyName);
+            Verbose("Value: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
         }
 
         private void ProjectObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Project: " + sender.GetType() + ", Property: " + e.PropertyName);
+            Verbose("Project: " + sender.GetType() + ", Property: " + e.PropertyName);
 
             if (e.PropertyName == "Databases")
             {
@@ -162,7 +163,7 @@ namespace Test2d
 
         private void DocumentObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Document: " + sender.GetType() + ", Property: " + e.PropertyName);
+            Verbose("Document: " + sender.GetType() + ", Property: " + e.PropertyName);
 
             if (e.PropertyName == "Containers")
             {
@@ -176,7 +177,7 @@ namespace Test2d
 
         private void ContainerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Container: " + (sender is Container ? (sender as Container).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
+            Verbose("Container: " + (sender is Container ? (sender as Container).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
 
             if (e.PropertyName == "Properties")
             {
@@ -197,7 +198,7 @@ namespace Test2d
 
         private void ContainerBackgroudObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Background: " + sender.GetType().ToString() + ", Property: " + e.PropertyName);
+            Verbose("Background: " + sender.GetType().ToString() + ", Property: " + e.PropertyName);
 
             _editor.Project.CurrentContainer.Notify("Background");
             if (_editor.Project.CurrentContainer.Template != null)
@@ -208,7 +209,7 @@ namespace Test2d
 
         private void LayerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Layer: " + (sender is Layer ? (sender as Layer).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
+            Verbose("Layer: " + (sender is Layer ? (sender as Layer).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
 
             if (e.PropertyName == "Shapes")
             {
@@ -222,7 +223,7 @@ namespace Test2d
 
         private void ShapeObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Shape: " + sender.GetType() + ", Property: " + e.PropertyName);
+            Verbose("Shape: " + sender.GetType() + ", Property: " + e.PropertyName);
 
             if (e.PropertyName == "Bindings")
             {
@@ -243,7 +244,7 @@ namespace Test2d
 
         private void StyleLibraryObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Style Library: " + (sender is StyleLibrary ? (sender as StyleLibrary).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
+            Verbose("Style Library: " + (sender is StyleLibrary ? (sender as StyleLibrary).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
 
             if (e.PropertyName == "Styles")
             {
@@ -257,19 +258,19 @@ namespace Test2d
 
         private void StyleObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Style: " + (sender is ShapeStyle ? (sender as ShapeStyle).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
+            Verbose("Style: " + (sender is ShapeStyle ? (sender as ShapeStyle).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
             _invalidateStyles();
         }
 
         private void BindingObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Property: " + sender.GetType() + ", Property: " + e.PropertyName);
+            Verbose("Property: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
         }
         
         private void PropertyObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Debug("Property: " + sender.GetType() + ", Property: " + e.PropertyName);
+            Verbose("Property: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
         }
 
@@ -284,7 +285,7 @@ namespace Test2d
 
             database.PropertyChanged += DatabaseObserver;
 
-            Debug("Add Database: " + database.Name);
+            Verbose("Add Database: " + database.Name);
 
             if (database.Columns != null)
             {
@@ -308,7 +309,7 @@ namespace Test2d
 
             database.PropertyChanged -= DatabaseObserver;
 
-            Debug("Remove Database: " + database.Name);
+            Verbose("Remove Database: " + database.Name);
 
             if (database.Columns != null)
             {
@@ -332,7 +333,7 @@ namespace Test2d
 
             column.PropertyChanged += ColumnObserver;
 
-            Debug("Add Column: " + column.Id);
+            Verbose("Add Column: " + column.Id);
         }
 
         /// <summary>
@@ -346,7 +347,7 @@ namespace Test2d
 
             column.PropertyChanged -= ColumnObserver;
 
-            Debug("Remove Column: " + column.Id);
+            Verbose("Remove Column: " + column.Id);
         }
 
         /// <summary>
@@ -365,7 +366,7 @@ namespace Test2d
                 Add(record.Values);
             }
 
-            Debug("Add Record: " + record.Id);
+            Verbose("Add Record: " + record.Id);
         }
 
         /// <summary>
@@ -384,7 +385,7 @@ namespace Test2d
                 Remove(record.Values);
             }
 
-            Debug("Remove Record: " + record.Id);
+            Verbose("Remove Record: " + record.Id);
         }
 
         /// <summary>
@@ -398,7 +399,7 @@ namespace Test2d
 
             value.PropertyChanged += ValueObserver;
 
-            Debug("Add Value");
+            Verbose("Add Value");
         }
 
         /// <summary>
@@ -412,7 +413,7 @@ namespace Test2d
 
             value.PropertyChanged -= ValueObserver;
 
-            Debug("Remove Value");
+            Verbose("Remove Value");
         }
 
         /// <summary>
@@ -426,7 +427,7 @@ namespace Test2d
 
             project.PropertyChanged += ProjectObserver;
             
-            Debug("Add Project: " + project.Name);
+            Verbose("Add Project: " + project.Name);
 
             if (project.Databases != null)
             {
@@ -472,7 +473,7 @@ namespace Test2d
 
             project.PropertyChanged -= ProjectObserver;
 
-            Debug("Remove Project: " + project.Name);
+            Verbose("Remove Project: " + project.Name);
 
             if (project.Databases != null)
             {
@@ -518,7 +519,7 @@ namespace Test2d
 
             document.PropertyChanged += DocumentObserver;
 
-            Debug("Add Document: " + document.Name);
+            Verbose("Add Document: " + document.Name);
 
             if (document.Containers != null)
             {
@@ -540,7 +541,7 @@ namespace Test2d
 
             document.PropertyChanged -= DocumentObserver;
 
-            Debug("Remove Document: " + document.Name);
+            Verbose("Remove Document: " + document.Name);
 
             if (document.Containers != null)
             {
@@ -567,7 +568,7 @@ namespace Test2d
                 container.Background.PropertyChanged += ContainerBackgroudObserver;
             }
             
-            Debug("Add Container: " + container.Name);
+            Verbose("Add Container: " + container.Name);
             
             if (container.Layers != null)
             {
@@ -598,7 +599,7 @@ namespace Test2d
                 container.Background.PropertyChanged -= ContainerBackgroudObserver;
             }
             
-            Debug("Remove Container: " + container.Name);
+            Verbose("Remove Container: " + container.Name);
             
             if (container.Layers != null)
             {
@@ -624,7 +625,7 @@ namespace Test2d
             
             layer.PropertyChanged += LayerObserver;
             
-            Debug("Add Layer: " + layer.Name);
+            Verbose("Add Layer: " + layer.Name);
             
             if (layer.Shapes != null)
             {
@@ -643,7 +644,7 @@ namespace Test2d
             
             layer.PropertyChanged -= LayerObserver;
             
-            Debug("Remove Layer: " + layer.Name);
+            Verbose("Remove Layer: " + layer.Name);
             
             if (layer.Shapes != null)
             {
@@ -844,7 +845,7 @@ namespace Test2d
                 }
             }
 
-            Debug("Add Shape: " + shape.GetType());
+            Verbose("Add Shape: " + shape.GetType());
         }
 
         /// <summary>
@@ -1040,7 +1041,7 @@ namespace Test2d
                 }
             }
 
-            Debug("Remove Shape: " + shape.GetType());
+            Verbose("Remove Shape: " + shape.GetType());
         }
 
         /// <summary>
@@ -1058,7 +1059,7 @@ namespace Test2d
             }
             
             sg.PropertyChanged += StyleLibraryObserver;
-            Debug("Add Style Library: " + sg.Name);
+            Verbose("Add Style Library: " + sg.Name);
         }
 
         /// <summary>
@@ -1076,7 +1077,7 @@ namespace Test2d
             }
             
             sg.PropertyChanged -= StyleLibraryObserver;
-            Debug("Remove Style Library: " + sg.Name);
+            Verbose("Remove Style Library: " + sg.Name);
         }
 
         /// <summary>
@@ -1120,7 +1121,7 @@ namespace Test2d
                 style.TextStyle.PropertyChanged += StyleObserver;
             }
             
-            Debug("Add Style: " + style.Name);
+            Verbose("Add Style: " + style.Name);
         }
 
         /// <summary>
@@ -1164,7 +1165,7 @@ namespace Test2d
                 style.TextStyle.PropertyChanged -= StyleObserver;
             }
             
-            Debug("Removee Style: " + style.Name);
+            Verbose("Removee Style: " + style.Name);
         }
 
         /// <summary>
@@ -1177,7 +1178,7 @@ namespace Test2d
                 return;
             
             binding.PropertyChanged += BindingObserver;
-            Debug("Add Bnding: " + binding.Property + ", path: " + binding.Path);
+            Verbose("Add Bnding: " + binding.Property + ", path: " + binding.Path);
         }
 
         /// <summary>
@@ -1190,7 +1191,7 @@ namespace Test2d
                 return;
             
             binding.PropertyChanged += BindingObserver;
-            Debug("Remove Bnding: " + binding.Property + ", path: " + binding.Path);
+            Verbose("Remove Bnding: " + binding.Property + ", path: " + binding.Path);
         }
 
         /// <summary>
@@ -1203,7 +1204,7 @@ namespace Test2d
                 return;
             
             property.PropertyChanged += PropertyObserver;
-            Debug("Add Property: " + property.Name + ", type: " + property.Value.GetType());
+            Verbose("Add Property: " + property.Name + ", type: " + property.Value.GetType());
         }
 
         /// <summary>
@@ -1216,7 +1217,7 @@ namespace Test2d
                 return;
             
             property.PropertyChanged += PropertyObserver;
-            Debug("Remove Property: " + property.Name + ", type: " + property.Value.GetType());
+            Verbose("Remove Property: " + property.Name + ", type: " + property.Value.GetType());
         }
 
         /// <summary>

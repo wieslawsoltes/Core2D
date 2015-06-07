@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using Test2d;
 
@@ -54,8 +55,8 @@ namespace TestEDITOR
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
         }
     }

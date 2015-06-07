@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -1069,8 +1070,8 @@ namespace Test
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.Print(ex.Message);
-                    System.Diagnostics.Debug.Print(ex.StackTrace);
+                    Debug.Print(ex.Message);
+                    Debug.Print(ex.StackTrace);
                 }
             }
             else
@@ -1095,8 +1096,8 @@ namespace Test
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.Print(ex.Message);
-                    System.Diagnostics.Debug.Print(ex.StackTrace);
+                    Debug.Print(ex.Message);
+                    Debug.Print(ex.StackTrace);
                 }
             }
         }

@@ -12,6 +12,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using Test2d;
 using TestEDITOR;
+using System.Diagnostics;
 
 namespace TestEtoForms
 {
@@ -343,15 +344,15 @@ namespace TestEtoForms
                         {
                             case 0:
                                 _context.ExportAsPdf(path, _context.Editor.Project);
-                                System.Diagnostics.Process.Start(path);
+                                Process.Start(path);
                                 break;
                             case 1:
                                 _context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1015);
-                                System.Diagnostics.Process.Start(path);
+                                Process.Start(path);
                                 break;
                             case 2:
                                 _context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1006);
-                                System.Diagnostics.Process.Start(path);
+                                Process.Start(path);
                                 break;
                             default:
                                 break;

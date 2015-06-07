@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -39,8 +40,8 @@ namespace Test.Converters
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
 
             return null;
@@ -74,8 +75,8 @@ namespace Test.Converters
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.Message);
-                System.Diagnostics.Debug.Print(ex.StackTrace);
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
             }
 
             return null;

@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -156,15 +157,15 @@ namespace TestWinForms
                 {
                     case 1:
                         (DataContext as EditorContext).ExportAsPdf(path, (DataContext as EditorContext).Editor.Project);
-                        System.Diagnostics.Process.Start(path);
+                        Process.Start(path);
                         break;
                     case 2:
                         (DataContext as EditorContext).ExportAsDxf(path, Dxf.DxfAcadVer.AC1015);
-                        System.Diagnostics.Process.Start(path);
+                        Process.Start(path);
                         break;
                     case 3:
                         (DataContext as EditorContext).ExportAsDxf(path, Dxf.DxfAcadVer.AC1006);
-                        System.Diagnostics.Process.Start(path);
+                        Process.Start(path);
                         break;
                     default:
                         break;
