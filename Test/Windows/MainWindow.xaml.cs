@@ -416,8 +416,13 @@ namespace Test.Windows
                         }
                         catch (Exception ex)
                         {
-                            Debug.Print(ex.Message);
-                            Debug.Print(ex.StackTrace);
+                            if (context.Editor.Log != null)
+                            {
+                                context.Editor.Log.LogError("{0}{1}{2}",
+                                    ex.Message,
+                                    Environment.NewLine,
+                                    ex.StackTrace);
+                            }
                         }
                     }
 
@@ -435,8 +440,13 @@ namespace Test.Windows
                         }
                         catch (Exception ex)
                         {
-                            Debug.Print(ex.Message);
-                            Debug.Print(ex.StackTrace);
+                            if (context.Editor.Log != null)
+                            {
+                                context.Editor.Log.LogError("{0}{1}{2}",
+                                    ex.Message,
+                                    Environment.NewLine,
+                                    ex.StackTrace);
+                            }
                         }
                     }
 
@@ -454,8 +464,13 @@ namespace Test.Windows
                         }
                         catch (Exception ex)
                         {
-                            Debug.Print(ex.Message);
-                            Debug.Print(ex.StackTrace);
+                            if (context.Editor.Log != null)
+                            {
+                                context.Editor.Log.LogError("{0}{1}{2}",
+                                    ex.Message,
+                                    Environment.NewLine,
+                                    ex.StackTrace);
+                            }
                         }
                     }
 
@@ -473,8 +488,13 @@ namespace Test.Windows
                         }
                         catch (Exception ex)
                         {
-                            Debug.Print(ex.Message);
-                            Debug.Print(ex.StackTrace);
+                            if (context.Editor.Log != null)
+                            {
+                                context.Editor.Log.LogError("{0}{1}{2}",
+                                    ex.Message,
+                                    Environment.NewLine,
+                                    ex.StackTrace);
+                            }
                         }
                     }
                 };
@@ -758,16 +778,24 @@ namespace Test.Windows
         /// <param name="path"></param>
         public void ExportEmf(string path)
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             try
             {
-                var context = (DataContext as EditorContext);
                 var container = context.Editor.Project.CurrentContainer;
                 (new EmfWriter()).Save(path, container);
             }
             catch (Exception ex)
             {
-                Debug.Print(ex.Message);
-                Debug.Print(ex.StackTrace);
+                if (context.Editor.Log != null)
+                {
+                    context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
             }
         }
 
