@@ -20,7 +20,7 @@ namespace Test2d
         /// <param name="p0"></param>
         /// <param name="p1"></param>
         /// <returns></returns>
-        private static bool LineIntersectsWithRect(ref Rect2 rect, XPoint p0, XPoint p1)
+        public static bool LineIntersectsWithRect(ref Rect2 rect, XPoint p0, XPoint p1)
         {
             double left = rect.Left; 
             double right = rect.Right;
@@ -108,7 +108,7 @@ namespace Test2d
         /// <param name="b"></param>
         /// <param name="p"></param>
         /// <returns></returns>
-        private static Vector2 NearestPointOnLine(Vector2 a, Vector2 b, Vector2 p)
+        public static Vector2 NearestPointOnLine(Vector2 a, Vector2 b, Vector2 p)
         {
             double ax = p.X - a.X;
             double ay = p.Y - a.Y;
@@ -134,7 +134,7 @@ namespace Test2d
         /// <param name="x2"></param>
         /// <param name="y2"></param>
         /// <returns></returns>
-        private static double Distance(double x1, double y1, double x2, double y2)
+        public static double Distance(double x1, double y1, double x2, double y2)
         {
             double dx = x1 - x2;
             double dy = y1 - y2;
@@ -149,7 +149,7 @@ namespace Test2d
         /// <param name="x2"></param>
         /// <param name="y2"></param>
         /// <returns></returns>
-        private static Vector2 Middle(double x1, double y1, double x2, double y2)
+        public static Vector2 Middle(double x1, double y1, double x2, double y2)
         {
             return new Vector2((x1 + x2) / 2.0, (y1 + y2) / 2.0);
         }
@@ -164,7 +164,7 @@ namespace Test2d
         /// <param name="point"></param>
         /// <param name="treshold"></param>
         /// <returns></returns>
-        private static Rect2 GetPointBounds(XPoint point, double treshold)
+        public static Rect2 GetPointBounds(XPoint point, double treshold)
         {
             double radius = treshold / 2.0;
             return new Rect2(
@@ -179,7 +179,7 @@ namespace Test2d
         /// </summary>
         /// <param name="rectangle"></param>
         /// <returns></returns>
-        private static Rect2 GetRectangleBounds(XRectangle rectangle)
+        public static Rect2 GetRectangleBounds(XRectangle rectangle)
         {
             return Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
         }
@@ -189,7 +189,7 @@ namespace Test2d
         /// </summary>
         /// <param name="ellipse"></param>
         /// <returns></returns>
-        private static Rect2 GetEllipseBounds(XEllipse ellipse)
+        public static Rect2 GetEllipseBounds(XEllipse ellipse)
         {
             return Rect2.Create(ellipse.TopLeft, ellipse.BottomRight);
         }
@@ -201,7 +201,7 @@ namespace Test2d
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <returns></returns>
-        private static Rect2 GetArcBounds(XArc arc, double dx, double dy)
+        public static Rect2 GetArcBounds(XArc arc, double dx, double dy)
         {
             double x1 = arc.Point1.X + dx;
             double y1 = arc.Point1.Y + dy;
@@ -225,7 +225,7 @@ namespace Test2d
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        private static Rect2 GetTextBounds(XText text)
+        public static Rect2 GetTextBounds(XText text)
         {
             return Rect2.Create(text.TopLeft, text.BottomRight);
         }
@@ -235,7 +235,7 @@ namespace Test2d
         /// </summary>
         /// <param name="image"></param>
         /// <returns></returns>
-        private static Rect2 GetImageBounds(XImage image)
+        public static Rect2 GetImageBounds(XImage image)
         {
             return Rect2.Create(image.TopLeft, image.BottomRight);
         }
@@ -245,7 +245,7 @@ namespace Test2d
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        private static Rect2 GetPathBounds(XPath path)
+        public static Rect2 GetPathBounds(XPath path)
         {
             var b = path.Geometry.Bounds;
             var t = path.Transform;
@@ -267,7 +267,7 @@ namespace Test2d
         /// <param name="p"></param>
         /// <param name="treshold"></param>
         /// <returns></returns>
-        private static bool HitTest(XLine line, Vector2 p, double treshold)
+        public static bool HitTest(XLine line, Vector2 p, double treshold)
         {
             var a = new Vector2(line.Start.X, line.Start.Y);
             var b = new Vector2(line.End.X, line.End.Y);
@@ -283,7 +283,7 @@ namespace Test2d
         /// <param name="p"></param>
         /// <param name="treshold"></param>
         /// <returns></returns>
-        private static BaseShape HitTest(IEnumerable<BaseShape> shapes, Vector2 p, double treshold)
+        public static BaseShape HitTest(IEnumerable<BaseShape> shapes, Vector2 p, double treshold)
         {
             foreach (var shape in shapes)
             {
