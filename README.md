@@ -73,25 +73,28 @@ http://en.wikipedia.org/wiki/Logic_simulation
 
 ### NuGet Packages
 
+* System.Collections.Immutable
 * Prism.Mvvm
 * Newtonsoft.Json
+* CsvHelper
 * PDFsharp-wpf (core PDFsharp package does not implement XGraphicsPath.AddArc method)
 * lz4net
-* System.Windows.Interactivity.WPF
 * Microsoft.CodeAnalysis.Analyzers
 * Microsoft.CodeAnalysis.Common
 * Microsoft.CodeAnalysis.CSharp
 * Microsoft.CodeAnalysis.Scripting.Common
 * Microsoft.CodeAnalysis.Scripting.CSharp
-* System.Collections.Immutable
 * System.Reflection.Metadata
+* System.Windows.Interactivity.WPF
+* AvalonEdit
+* Xceed.Wpf.AvalonDock
+* Xceed.Products.Wpf.Toolkit.AvalonDock
 * Eto.Forms
 * Eto.Platform.Direct2D
 * Eto.Platform.Windows
 * SharpDX
 * SharpDX.Direct2D1
 * SharpDX.DXGI
-* CsvHelper
 
 ### NuGet Package Sources
 
