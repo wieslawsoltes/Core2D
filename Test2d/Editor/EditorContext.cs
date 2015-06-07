@@ -2753,12 +2753,7 @@ namespace Test2d
             g.AddConnectorAsNone(pl);
             g.AddConnectorAsNone(pr);
 
-            var layer = _editor.Project.CurrentContainer.CurrentLayer;
-
-            var previous = layer.Shapes;
-            var next = layer.Shapes.Add(g);
-            _editor.History.Snapshot(previous, next, (p) => layer.Shapes = p);
-            layer.Shapes = next;
+            _editor.AddWithHistory(g);
         }
 
         /// <summary>
