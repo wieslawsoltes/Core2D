@@ -2629,6 +2629,11 @@ namespace Test2d
                     _editor.AddWithHistory(clone);
 
                     _editor.Select(_editor.Project.CurrentContainer, clone);
+
+                    if (_editor.Project.Options.TryToConnect)
+                    {
+                        _editor.TryToConnect(clone);
+                    }
                 }
             }
             catch (Exception ex)
