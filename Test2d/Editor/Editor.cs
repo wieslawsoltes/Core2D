@@ -1064,6 +1064,108 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="line"></param>
+        /// <param name="p0"></param>
+        /// <param name="p1"></param>
+        /// <returns></returns>
+        public bool TryToSplitLine(XLine line, XPoint p0, XPoint p1)
+        {
+            // points must be aligned horizontally or vertically
+            if (p0.X != p1.X && p0.Y != p1.Y)
+                return false;
+
+            // line must be horizontal or vertical
+            if (line.Start.X != line.End.X && line.Start.Y != line.End.Y)
+                return false;
+
+            XLine split;
+            if (line.Start.X > line.End.X || line.Start.Y > line.End.Y)
+            {
+                split = XLine.Create(
+                    p0,
+                    line.End,
+                    line.Style,
+                    _project.Options.PointShape);
+                line.End = p1;
+            }
+            else
+            {
+                split = XLine.Create(
+                    p1,
+                    line.End,
+                    line.Style,
+                    _project.Options.PointShape);
+                line.End = p0;
+            }
+
+            AddWithHistory(split);
+
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="group"></param>
+        /// <returns></returns>
+        public bool TryToConnect(XGroup group)
+        {
+            var layer = _project.CurrentContainer.CurrentLayer;
+            if (group.Connectors.Length > 0)
+            {
+                var wires = Editor.GetAllShapes<XLine>(layer.Shapes);
+                var dict = new Dictionary<XLine, IList<XPoint>>();
+
+                // find possible group to line connections
+                foreach (var connector in group.Connectors)
+                {
+                    var p = new Vector2(connector.X, connector.Y);
+                    var t = _project.Options.HitTreshold;
+                    XLine result = null;
+                    foreach (var line in wires)
+                    {
+                        if (ShapeBounds.HitTest(line, p, t))
+                        {
+                            result = line;
+                            break;
+                        }
+                    }
+
+                    if (result != null)
+                    {
+                        if (dict.ContainsKey(result))
+                        {
+                            dict[result].Add(connector);
+                        }
+                        else
+                        {
+                            dict.Add(result, new List<XPoint>());
+                            dict[result].Add(connector);
+                        }
+                    }
+                }
+
+                bool success = false;
+
+                // try to split lines using group connectors
+                foreach (var kv in dict)
+                {
+                    IList<XPoint> points = kv.Value;
+                    if (points.Count == 2)
+                    {
+                        success = TryToSplitLine(kv.Key, points[0], points[1]);
+                    }
+                }
+
+                return success;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         public bool IsLeftDownAvailable()
         {
