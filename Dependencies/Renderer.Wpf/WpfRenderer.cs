@@ -333,6 +333,29 @@ namespace Test
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="container"></param>
+        private static void DrawBackground(DrawingContext dc, Container container)
+        {
+            var brush = CreateBrush(container.Background);
+            var rect = new Rect(
+                0,
+                0,
+                container.Width,
+                container.Height);
+
+            DrawRectangleInternal(
+                dc,
+                0.5,
+                brush,
+                null,
+                true,
+                ref rect);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void ClearCache()
         {
             _styleCache = new Dictionary<ShapeStyle, Tuple<Brush, Pen>>();
@@ -363,6 +386,11 @@ namespace Test
         /// <param name="r"></param>
         public void Draw(object dc, Container container, ImmutableArray<ShapeProperty> db, Record r)
         {
+            var _dc = dc as DrawingContext;
+
+            DrawBackground(_dc, container.Template);
+            DrawBackground(_dc, container);
+
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
