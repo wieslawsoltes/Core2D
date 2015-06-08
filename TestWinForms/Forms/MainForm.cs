@@ -18,6 +18,8 @@ namespace TestWinForms
     /// </summary>
     public partial class MainForm : Form, IView
     {
+        private ContainerPanel _panel;
+
         /// <summary>
         /// 
         /// </summary>
@@ -66,16 +68,15 @@ namespace TestWinForms
 
             DataContext = context;
 
-            var panel = InitializePanel();
-            panel.Context = context;
+            InitializePanel();
 
-            SetContainerInvalidation(panel);
-            SetPanelSize(panel);
+            SetContainerInvalidation();
+            SetPanelSize();
 
-            HandlePanelShorcutKeys(panel);
-            HandleMenuShortcutKeys(panel);
+            HandlePanelShorcutKeys();
+            HandleMenuShortcutKeys();
 
-            HandleFileDialogs(panel);
+            HandleFileDialogs();
 
             FormClosing += (s, e) => DeInitializeContext();
         }
@@ -96,31 +97,36 @@ namespace TestWinForms
         /// 
         /// </summary>
         /// <returns></returns>
-        private ContainerPanel InitializePanel()
+        private void InitializePanel()
         {
-            var panel = new ContainerPanel();
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
 
-            panel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            panel.Name = "containerPanel";
-            panel.TabIndex = 0;
+            _panel = new ContainerPanel();
+
+            _panel.Context = context;
+            _panel.InvalidateContainer = InvalidateContainer;
+            _panel.Initialize();
+
+            _panel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            _panel.Name = "containerPanel";
+            _panel.TabIndex = 0;
 
             this.SuspendLayout();
-            this.Controls.Add(panel);
+            this.Controls.Add(_panel);
             this.ResumeLayout(false);
 
-            panel.Select();
-
-            return panel;
+            _panel.Select();
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="panel"></param>
-        private void Invalidate(ContainerPanel panel)
+        private void InvalidateContainer()
         {
-            SetContainerInvalidation(panel);
-            SetPanelSize(panel);
+            SetContainerInvalidation();
+            SetPanelSize();
 
             var context = DataContext as EditorContext;
             if (context == null)
@@ -136,8 +142,7 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="panel"></param>
-        private void HandleFileDialogs(ContainerPanel panel)
+        private void HandleFileDialogs()
         {
             // open container
             this.openFileDialog1.FileOk += (sender, e) =>
@@ -149,7 +154,7 @@ namespace TestWinForms
                 string path = openFileDialog1.FileName;
                 int filterIndex = openFileDialog1.FilterIndex;
                 context.Open(path);
-                Invalidate(panel);
+                InvalidateContainer();
             };
 
             // save container
@@ -208,8 +213,7 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="panel"></param>
-        private void SetPanelSize(ContainerPanel panel)
+        private void SetPanelSize()
         {
             var context = DataContext as EditorContext;
             if (context == null)
@@ -225,15 +229,14 @@ namespace TestWinForms
             int x = (this.Width - width) / 2;
             int y = (((this.Height) - height) / 2) - (this.menuStrip1.Height / 3);
 
-            panel.Location = new System.Drawing.Point(x, y);
-            panel.Size = new System.Drawing.Size(width, height);
+            _panel.Location = new System.Drawing.Point(x, y);
+            _panel.Size = new System.Drawing.Size(width, height);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="panel"></param>
-        private void SetContainerInvalidation(ContainerPanel panel)
+        private void SetContainerInvalidation()
         {
             var context = DataContext as EditorContext;
             if (context == null)
@@ -245,25 +248,24 @@ namespace TestWinForms
 
             foreach (var layer in container.Layers)
             {
-                layer.InvalidateLayer += (s, e) => panel.Invalidate();
+                layer.InvalidateLayer += (s, e) => _panel.Invalidate();
             }
 
             if (container.WorkingLayer != null)
             {
-                container.WorkingLayer.InvalidateLayer += (s, e) => panel.Invalidate();
+                container.WorkingLayer.InvalidateLayer += (s, e) => _panel.Invalidate();
             }
             
             if (container.HelperLayer != null)
             {
-                container.HelperLayer.InvalidateLayer += (s, e) => panel.Invalidate();
+                container.HelperLayer.InvalidateLayer += (s, e) => _panel.Invalidate();
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="panel"></param>
-        private void HandleMenuShortcutKeys(ContainerPanel panel)
+        private void HandleMenuShortcutKeys()
         {
             newToolStripMenuItem.Click += (sender, e) =>
                 {
@@ -272,7 +274,7 @@ namespace TestWinForms
                         return;
 
                     context.Commands.NewCommand.Execute(null);
-                    Invalidate(panel);
+                    InvalidateContainer();
                 };
 
             openToolStripMenuItem.Click += (sender, e) => Open();
@@ -286,10 +288,9 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="panel"></param>
-        private void HandlePanelShorcutKeys(ContainerPanel panel)
+        private void HandlePanelShorcutKeys()
         {
-            panel.KeyDown += (sender, e) =>
+            _panel.KeyDown += (sender, e) =>
             {
                 if (e.Control || e.Alt || e.Shift)
                     return;
@@ -349,10 +350,10 @@ namespace TestWinForms
                         context.Commands.TryToConnectCommand.Execute(null);
                         break;
                     case Keys.Z:
-                        context.Commands.ZoomResetCommand.Execute(null);
+                        _panel.ResetZoom();
                         break;
                     case Keys.X:
-                        context.Commands.ZoomExtentCommand.Execute(null);
+                        _panel.AutoFit();
                         break;
                 }
             };
@@ -404,41 +405,10 @@ namespace TestWinForms
     /// <summary>
     /// 
     /// </summary>
-    internal class TextClipboard : ITextClipboard
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="text"></param>
-        public void SetText(string text)
-        {
-            Clipboard.SetText(text, TextDataFormat.UnicodeText);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public string GetText()
-        {
-            return Clipboard.GetText(TextDataFormat.UnicodeText);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool ContainsText()
-        {
-            return Clipboard.ContainsText(TextDataFormat.UnicodeText);
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
     internal class ContainerPanel : Panel
     {
+        private ZoomState _state;
+
         /// <summary>
         /// 
         /// </summary>
@@ -447,15 +417,19 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
+        public Action InvalidateContainer { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public ContainerPanel()
         {
-            Initialize();
         }
 
         /// <summary>
         /// 
         /// </summary>
-        private void Initialize()
+        public void Initialize()
         {
             this.SetStyle(
                 ControlStyles.UserPaint
@@ -466,61 +440,81 @@ namespace TestWinForms
 
             this.BackColor = Color.Transparent;
 
-            this.MouseDown += (sender, e) =>
-            {
-                if (e.Button == MouseButtons.Left)
-                {
-                    this.Focus();
-                    if (Context.Editor.IsLeftDownAvailable())
-                    {
-                        var p = e.Location;
-                        Context.Editor.LeftDown(p.X, p.Y);
-                    }
-                }
+            _state = new ZoomState(Context, InvalidateContainer);
 
-                if (e.Button == MouseButtons.Right)
-                {
-                    this.Focus();
-                    if (Context.Editor.IsRightDownAvailable())
-                    {
-                        var p = e.Location;
-                        Context.Editor.RightDown(p.X, p.Y);
-                    }
-                }
-            };
-
-            this.MouseUp += (sender, e) =>
-            {
-                if (e.Button == MouseButtons.Left)
-                {
-                    this.Focus();
-                    if (Context.Editor.IsLeftUpAvailable())
-                    {
-                        var p = e.Location;
-                        Context.Editor.LeftUp(p.X, p.Y);
-                    }
-                }
-
-                if (e.Button == MouseButtons.Right)
-                {
-                    this.Focus();
-                    if (Context.Editor.IsRightUpAvailable())
-                    {
-                        var p = e.Location;
-                        Context.Editor.RightUp(p.X, p.Y);
-                    }
-                }
-            };
-
-            this.MouseMove += (sender, e) =>
-            {
-                this.Focus();
-                if (Context.Editor.IsMoveAvailable())
+            this.MouseDown += 
+                (sender, e) =>
                 {
                     var p = e.Location;
-                    Context.Editor.Move(p.X, p.Y);
-                }
-            };
+
+                    if (e.Button == MouseButtons.Middle)
+                    {
+                        _state.MiddleDown(p.X, p.Y);
+                        this.Cursor = Cursors.Hand;
+                    }
+
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        this.Focus();
+                        _state.PrimaryDown(p.X, p.Y);
+                    }
+
+                    if (e.Button == MouseButtons.Right)
+                    {
+                        this.Focus();
+                        _state.AlternateDown(p.X, p.Y);
+                    }
+                };
+
+            this.MouseUp += 
+                (sender, e) =>
+                {
+                    var p = e.Location;
+
+                    if (e.Button == MouseButtons.Middle)
+                    {
+                        this.Focus();
+                        _state.MiddleUp(p.X, p.Y);
+                        this.Cursor = Cursors.Default;
+                    }
+
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        this.Focus();
+                        _state.PrimaryUp(p.X, p.Y);
+                    }
+
+                    if (e.Button == MouseButtons.Right)
+                    {
+                        this.Focus();
+                        _state.AlternateUp(p.X, p.Y);
+                    }
+                };
+
+            this.MouseMove += 
+                (sender, e) =>
+                {
+                    var p = e.Location;
+                    _state.Move(p.X, p.Y);
+                };
+
+            this.MouseWheel +=
+                (sender, e) =>
+                {
+                    var p = e.Location;
+                    _state.Wheel(p.X, p.Y, e.Delta);
+                };
+        }
+
+        public void ResetZoom()
+        {
+            _state.ResetZoom();
+            InvalidateContainer();
+        }
+
+        public void AutoFit()
+        {
+            // TODO: Autofit panel.
         }
 
         /// <summary>
@@ -588,8 +582,8 @@ namespace TestWinForms
             g.CompositingQuality = CompositingQuality.HighQuality;
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-            //g.TranslateTransform(_state.PanX, _state.PanY);
-            //g.ScaleTransform(_state.Zoom);
+            g.TranslateTransform(_state.PanX, _state.PanY);
+            g.ScaleTransform(_state.Zoom, _state.Zoom);
 
             g.Clear(Color.FromArgb(255, 211, 211, 211));
 
@@ -616,6 +610,39 @@ namespace TestWinForms
             {
                 renderer.Draw(g, container.HelperLayer, container.Properties, null);
             }
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    internal class TextClipboard : ITextClipboard
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        public void SetText(string text)
+        {
+            Clipboard.SetText(text, TextDataFormat.UnicodeText);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string GetText()
+        {
+            return Clipboard.GetText(TextDataFormat.UnicodeText);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool ContainsText()
+        {
+            return Clipboard.ContainsText(TextDataFormat.UnicodeText);
         }
     }
 }
