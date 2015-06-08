@@ -8,13 +8,14 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public interface ITextFieldReader
+    /// <typeparam name="T"></typeparam>
+    public interface ITextFieldReader<T>
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        Database Read(string path);
+        T Read(string path);
     }
 }

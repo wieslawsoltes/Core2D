@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DFBEACC3-406D-4216-8841-56398B9500D5}</ProjectGuid>
+    <ProjectGuid>{C2E7CC66-B36E-4F1A-998A-029AE107C2E6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScriptEngine.Roslyn</RootNamespace>
-    <AssemblyName>ScriptEngine.Roslyn</AssemblyName>
+    <RootNamespace>Test2d.Editor</RootNamespace>
+    <AssemblyName>Test2d.Editor</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,68 +30,82 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeAnalysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.CodeAnalysis.Common.1.0.0-rc3-20150605-02\lib\net45\Microsoft.CodeAnalysis.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Prism.Mvvm, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.CodeAnalysis.CSharp.1.0.0-rc3-20150605-02\lib\net45\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Prism.Mvvm.Desktop, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.Desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.Scripting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.CodeAnalysis.Scripting.Common.1.0.0-rc3-20150605-02\lib\net45\Microsoft.CodeAnalysis.Scripting.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.Scripting.CSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.CodeAnalysis.Scripting.CSharp.1.0.0-rc3-20150605-02\lib\net45\Microsoft.CodeAnalysis.Scripting.CSharp.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <HintPath>..\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
-    <Reference Include="System.Reflection.Metadata, Version=1.0.21.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Reflection.Metadata.1.0.21\lib\portable-net45+win8\System.Reflection.Metadata.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Runtime" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
+    <Compile Include="Editor\Bounds\ShapeBounds.cs" />
+    <Compile Include="Editor\Editor.cs" />
+    <Compile Include="Editor\EditorCommands.cs" />
+    <Compile Include="Editor\EditorContext.cs" />
+    <Compile Include="Editor\Core\ExportType.cs" />
+    <Compile Include="Editor\Core\Helper.cs" />
+    <Compile Include="Editor\Helpers\ArcHelper.cs" />
+    <Compile Include="Editor\Helpers\BezierHelper.cs" />
+    <Compile Include="Editor\Helpers\EllipseHelper.cs" />
+    <Compile Include="Editor\Helpers\GroupHelper.cs" />
+    <Compile Include="Editor\Helpers\ImageHelper.cs" />
+    <Compile Include="Editor\Helpers\LineHelper.cs" />
+    <Compile Include="Editor\Helpers\PathHelper.cs" />
+    <Compile Include="Editor\Helpers\PointHelper.cs" />
+    <Compile Include="Editor\Helpers\QBezierHelper.cs" />
+    <Compile Include="Editor\Helpers\RectangleHelper.cs" />
+    <Compile Include="Editor\Helpers\SelectionHelper.cs" />
+    <Compile Include="Editor\Helpers\TextHelper.cs" />
+    <Compile Include="Editor\Core\History.cs" />
+    <Compile Include="Editor\Core\ImportType.cs" />
+    <Compile Include="Editor\LineGrid.cs" />
+    <Compile Include="Editor\Log\ILog.cs" />
+    <Compile Include="Editor\Log\TraceLog.cs" />
+    <Compile Include="Editor\Observer.cs" />
+    <Compile Include="Editor\Script\ScriptDirectory.cs" />
+    <Compile Include="Editor\Script\ScriptFile.cs" />
+    <Compile Include="Editor\Core\State.cs" />
+    <Compile Include="Editor\Core\Tool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RolsynScriptGlobals.cs" />
-    <Compile Include="RoslynScriptEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Test2d.Editor.Dxf\Test2d.Editor.Dxf.csproj">
+    <ProjectReference Include="..\Test2d.Editor.Dxf\Test2d.Editor.Dxf.csproj">
       <Project>{304b499e-9fb2-45ff-acb9-1c5224028be6}</Project>
       <Name>Test2d.Editor.Dxf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Test2d.Editor.Math\Test2d.Editor.Math.csproj">
+    <ProjectReference Include="..\Test2d.Editor.Math\Test2d.Editor.Math.csproj">
       <Project>{3292a90c-b664-4f71-af59-f4bfa04020f8}</Project>
       <Name>Test2d.Editor.Math</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Test2d.Editor.Simulation\Test2d.Editor.Simulation.csproj">
+    <ProjectReference Include="..\Test2d.Editor.Simulation\Test2d.Editor.Simulation.csproj">
       <Project>{426fe776-be71-4860-a0b0-09178b06c22e}</Project>
       <Name>Test2d.Editor.Simulation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Test2d.Editor\Test2d.Editor.csproj">
-      <Project>{c2e7cc66-b36e-4f1a-998a-029ae107c2e6}</Project>
-      <Name>Test2d.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Test2d.Interfaces\Test2d.Interfaces.csproj">
+    <ProjectReference Include="..\Test2d.Interfaces\Test2d.Interfaces.csproj">
       <Project>{c3e348e1-bf9e-4a71-a1f7-61b7607e0a20}</Project>
       <Name>Test2d.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Test2d\Test2d.csproj">
+    <ProjectReference Include="..\Test2d\Test2d.csproj">
       <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
       <Name>Test2d</Name>
     </ProjectReference>

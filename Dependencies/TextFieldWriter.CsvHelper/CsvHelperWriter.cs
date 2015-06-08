@@ -7,7 +7,7 @@ using Test2d;
 
 namespace TestEDITOR
 {
-    public class CsvHelperWriter : ITextFieldWriter
+    public class CsvHelperWriter : ITextFieldWriter<Database>
     {
         /// <summary>
         ///

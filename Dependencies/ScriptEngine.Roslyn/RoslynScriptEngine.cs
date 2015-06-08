@@ -1,4 +1,5 @@
-﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
+﻿using Dxf;
+// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Scripting;
@@ -8,6 +9,8 @@ using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using Test2d;
+using TestEDITOR;
+using TestSIM;
 
 namespace TestEDITOR
 {
@@ -42,10 +45,21 @@ namespace TestEDITOR
                 .AddNamespaces("System.Collections.Immutable")
                 .AddReferences(Assembly.GetAssembly(typeof(System.Linq.Enumerable)))
                 .AddNamespaces("System.Linq")
+                // Core
                 .AddReferences(Assembly.GetAssembly(typeof(ObservableObject)))
                 .AddNamespaces("Test2d")
+                // Interfaces
+                .AddReferences(Assembly.GetAssembly(typeof(IView)))
+                // Math
+                .AddReferences(Assembly.GetAssembly(typeof(Vector2)))
+                // Editor
+                .AddReferences(Assembly.GetAssembly(typeof(Editor)))
                 .AddNamespaces("TestEDITOR")
+                // Simulation
+                .AddReferences(Assembly.GetAssembly(typeof(Clock)))
                 .AddNamespaces("TestSIM")
+                // Dxf
+                .AddReferences(Assembly.GetAssembly(typeof(DxfObject)))
                 .AddNamespaces("Dxf");
 
             CSharpScript.Eval(

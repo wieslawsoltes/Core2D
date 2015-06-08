@@ -12,7 +12,7 @@ namespace TestEDITOR
     /// <summary>
     /// 
     /// </summary>
-    public class VisualBasicReader : ITextFieldReader
+    public class VisualBasicReader : ITextFieldReader<Database>
     {
         /// <summary>
         /// 

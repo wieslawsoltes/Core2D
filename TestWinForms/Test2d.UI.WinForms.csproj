@@ -78,10 +78,10 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainForm.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -92,7 +92,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.Designer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -129,8 +129,24 @@
       <Project>{87302d12-1184-402d-bf23-a5699f3d0bb4}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Test2d.Editor.Dxf\Test2d.Editor.Dxf.csproj">
+      <Project>{304b499e-9fb2-45ff-acb9-1c5224028be6}</Project>
+      <Name>Test2d.Editor.Dxf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test2d.Editor.Math\Test2d.Editor.Math.csproj">
+      <Project>{3292a90c-b664-4f71-af59-f4bfa04020f8}</Project>
+      <Name>Test2d.Editor.Math</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test2d.Editor\Test2d.Editor.csproj">
+      <Project>{c2e7cc66-b36e-4f1a-998a-029ae107c2e6}</Project>
+      <Name>Test2d.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test2d.Interfaces\Test2d.Interfaces.csproj">
+      <Project>{c3e348e1-bf9e-4a71-a1f7-61b7607e0a20}</Project>
+      <Name>Test2d.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Test2d\Test2d.csproj">
-      <Project>{60DDA5D9-7ACC-41AF-9123-C96ABB6B7828}</Project>
+      <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
       <Name>Test2d</Name>
     </ProjectReference>
   </ItemGroup>

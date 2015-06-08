@@ -48,6 +48,21 @@ rmdir /Q /S Test\obj
 rmdir /Q /S Test2d\bin
 rmdir /Q /S Test2d\obj
 
+rmdir /Q /S Test2d.Editor\bin
+rmdir /Q /S Test2d.Editor\obj
+
+rmdir /Q /S Test2d.Editor.Dxf\bin
+rmdir /Q /S Test2d.Editor.Dxf\obj
+
+rmdir /Q /S Test2d.Editor.Math\bin
+rmdir /Q /S Test2d.Editor.Math\obj
+
+rmdir /Q /S Test2d.Editor.Simulation\bin
+rmdir /Q /S Test2d.Editor.Simulation\obj
+
+rmdir /Q /S Test2d.Interfaces\bin
+rmdir /Q /S Test2d.Interfaces\obj
+
 rmdir /Q /S TestDirect2D\bin
 rmdir /Q /S TestDirect2D\obj
 

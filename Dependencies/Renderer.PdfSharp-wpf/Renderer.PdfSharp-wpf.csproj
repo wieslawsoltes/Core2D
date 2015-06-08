@@ -61,8 +61,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Test2d.Editor.Math\Test2d.Editor.Math.csproj">
+      <Project>{3292a90c-b664-4f71-af59-f4bfa04020f8}</Project>
+      <Name>Test2d.Editor.Math</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Test2d\Test2d.csproj">
-      <Project>{60dda5d9-7acc-41af-9123-c96abb6b7828}</Project>
+      <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
       <Name>Test2d</Name>
     </ProjectReference>
   </ItemGroup>

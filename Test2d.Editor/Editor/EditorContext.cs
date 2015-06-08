@@ -30,8 +30,8 @@ namespace Test2d
         private IScriptEngine _scriptEngine;
         private IFileWriter _pdfWriter;
         private IFileWriter _dxfWriter;
-        private ITextFieldReader _csvReader;
-        private ITextFieldWriter _csvWriter;
+        private ITextFieldReader<Database> _csvReader;
+        private ITextFieldWriter<Database> _csvWriter;
         private string _rootScriptsPath;
         private ImmutableArray<ScriptDirectory> _scriptDirectories;
         private bool _isSimulationPaused;
@@ -136,7 +136,7 @@ namespace Test2d
         /// <summary>
         ///
         /// </summary>
-        public ITextFieldReader CsvReader
+        public ITextFieldReader<Database> CsvReader
         {
             get { return _csvReader; }
             set { Update(ref _csvReader, value); }
@@ -145,7 +145,7 @@ namespace Test2d
         /// <summary>
         ///
         /// </summary>
-        public ITextFieldWriter CsvWriter
+        public ITextFieldWriter<Database> CsvWriter
         {
             get { return _csvWriter; }
             set { Update(ref _csvWriter, value); }

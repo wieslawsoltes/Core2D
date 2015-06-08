@@ -1,10 +1,10 @@
-# Test
+# Test2d
 
 2D Diagram Editor and Simulator
 
 ## About
 
-Test is an application for making 2D diagrams and running logic simulations.
+Test2d is an application for making 2D diagrams and running logic simulations.
 
 ## Simulation
 
@@ -66,7 +66,7 @@ http://en.wikipedia.org/wiki/State_(computer_science)
 http://en.wikipedia.org/wiki/Logic_design
 http://en.wikipedia.org/wiki/Logic_simulation
 
-## Building Test
+## Building Test2d
 
 * [Visual Studio Community 2013](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx)
 * [SharpDevelop 5](http://www.icsharpcode.net/OpenSource/SD/Download/#SharpDevelop5x)
@@ -103,8 +103,8 @@ http://en.wikipedia.org/wiki/Logic_simulation
 
 ## Contact
 
-https://github.com/wieslawsoltes/Test
+https://github.com/wieslawsoltes/Test2d
 
 ## License
 
-Test is licensed under the [MIT license](LICENSE.TXT).
+Test2d is licensed under the [MIT license](LICENSE.TXT).

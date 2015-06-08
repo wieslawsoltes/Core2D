@@ -4,306 +4,107 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{60DDA5D9-7ACC-41AF-9123-C96ABB6B7828}</ProjectGuid>
+    <ProjectGuid>{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Test2d</RootNamespace>
     <AssemblyName>Test2d</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NoWin32Manifest>False</NoWin32Manifest>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
-    <NoStdLib>False</NoStdLib>
-    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
-    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>Full</DebugType>
-    <Optimize>False</Optimize>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Test2d.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>PdbOnly</DebugType>
-    <Optimize>True</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Test2d.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
-    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
-    <BaseAddress>4194304</BaseAddress>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <RegisterForComInterop>False</RegisterForComInterop>
-    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
-    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Practices.Prism.Mvvm, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Prism.Mvvm.Desktop, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.Desktop.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Collections" />
     <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
-    <Reference Include="System.ObjectModel" />
-    <Reference Include="System.Runtime" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Renderer\RendererState.cs" />
-    <Compile Include="Core\Shape\BaseShape.cs" />
-    <Compile Include="Editor\Interfaces\ITextFieldWriter.cs" />
-    <Compile Include="Core\Data\Value.cs" />
-    <Compile Include="Core\Style\ArgbColor.cs" />
-    <Compile Include="Core\Style\ArrowStyle.cs" />
-    <Compile Include="Core\Style\ArrowType.cs" />
-    <Compile Include="Core\Style\FontStyle.cs" />
-    <Compile Include="Core\Data\Column.cs" />
-    <Compile Include="Core\Data\Database.cs" />
-    <Compile Include="Core\Data\Record.cs" />
-    <Compile Include="Editor\ExportType.cs" />
-    <Compile Include="Editor\Interfaces\ICompressor.cs" />
-    <Compile Include="Editor\Interfaces\ITextFieldReader.cs" />
-    <Compile Include="Editor\Interfaces\IFileWriter.cs" />
-    <Compile Include="Editor\ImportType.cs" />
-    <Compile Include="Editor\Interfaces\IScriptEngine.cs" />
-    <Compile Include="Editor\Interfaces\ISerializer.cs" />
-    <Compile Include="Editor\Interfaces\ITextClipboard.cs" />
-    <Compile Include="Editor\Interfaces\IView.cs" />
-    <Compile Include="Core\Shape\ShapeState.cs" />
-    <Compile Include="Core\Style\LineCap.cs" />
-    <Compile Include="Core\Style\LineStyle.cs" />
-    <Compile Include="Core\Style\MaxLengthFlags.cs" />
-    <Compile Include="Core\Style\ShapeStyle.cs" />
-    <Compile Include="Core\Style\TextHAlignment.cs" />
-    <Compile Include="Core\Style\TextStyle.cs" />
-    <Compile Include="Core\Shape\ShapeBinding.cs" />
-    <Compile Include="Core\Shape\ShapeBindingParamater.cs" />
-    <Compile Include="Core\Shape\ShapeProperty.cs" />
-    <Compile Include="Core\Shape\ShapePropertyExtensions.cs" />
-    <Compile Include="Core\Shape\ShapePropertyParameter.cs" />
-    <Compile Include="Core\Style\TextVAlignment.cs" />
-    <Compile Include="Dxf\Blocks\DxfBlock.cs" />
-    <Compile Include="Dxf\Blocks\DxfBlocks.cs" />
-    <Compile Include="Dxf\Classes\DxfClass.cs" />
-    <Compile Include="Dxf\Classes\DxfClasses.cs" />
-    <Compile Include="Dxf\Core\DxfCodeName.cs" />
-    <Compile Include="Dxf\Core\DxfExtensions.cs" />
-    <Compile Include="Dxf\Core\DxfObject.cs" />
-    <Compile Include="Dxf\Core\DxfSubclassMarker.cs" />
-    <Compile Include="Dxf\Core\DxfVector2.cs" />
-    <Compile Include="Dxf\Core\DxfVector3.cs" />
-    <Compile Include="Dxf\DxfFile.cs" />
-    <Compile Include="Dxf\DxfHeader.cs" />
-    <Compile Include="Dxf\DxfInspect.cs" />
-    <Compile Include="Dxf\DxfRawTag.cs" />
-    <Compile Include="Dxf\Entities\Dxf3Dface.cs" />
-    <Compile Include="Dxf\Entities\Dxf3Dsolid.cs" />
-    <Compile Include="Dxf\Entities\DxfAcadProxyEntity.cs" />
-    <Compile Include="Dxf\Entities\DxfArc.cs" />
-    <Compile Include="Dxf\Entities\DxfArcAlignedText.cs" />
-    <Compile Include="Dxf\Entities\DxfAttdef.cs" />
-    <Compile Include="Dxf\Entities\DxfAttrib.cs" />
-    <Compile Include="Dxf\Entities\DxfBody.cs" />
-    <Compile Include="Dxf\Entities\DxfCircle.cs" />
-    <Compile Include="Dxf\Entities\DxfDimension.cs" />
-    <Compile Include="Dxf\Entities\DxfEllipse.cs" />
-    <Compile Include="Dxf\Entities\DxfEntities.cs" />
-    <Compile Include="Dxf\Entities\DxfHatch.cs" />
-    <Compile Include="Dxf\Entities\DxfImage.cs" />
-    <Compile Include="Dxf\Entities\DxfInsert.cs" />
-    <Compile Include="Dxf\Entities\DxfLeader.cs" />
-    <Compile Include="Dxf\Entities\DxfLine.cs" />
-    <Compile Include="Dxf\Entities\DxfLwpolyline.cs" />
-    <Compile Include="Dxf\Entities\DxfLwpolylineVertex.cs" />
-    <Compile Include="Dxf\Entities\DxfMline.cs" />
-    <Compile Include="Dxf\Entities\DxfMText.cs" />
-    <Compile Include="Dxf\Entities\DxfOle2Frame.cs" />
-    <Compile Include="Dxf\Entities\DxfOleFrame.cs" />
-    <Compile Include="Dxf\Entities\DxfPoint.cs" />
-    <Compile Include="Dxf\Entities\DxfPolyline.cs" />
-    <Compile Include="Dxf\Entities\DxfRay.cs" />
-    <Compile Include="Dxf\Entities\DxfRegion.cs" />
-    <Compile Include="Dxf\Entities\DxfRText.cs" />
-    <Compile Include="Dxf\Entities\DxfSeqend.cs" />
-    <Compile Include="Dxf\Entities\DxfShape.cs" />
-    <Compile Include="Dxf\Entities\DxfSolid.cs" />
-    <Compile Include="Dxf\Entities\DxfSpline.cs" />
-    <Compile Include="Dxf\Entities\DxfText.cs" />
-    <Compile Include="Dxf\Entities\DxfTolerance.cs" />
-    <Compile Include="Dxf\Entities\DxfTrace.cs" />
-    <Compile Include="Dxf\Entities\DxfVertex.cs" />
-    <Compile Include="Dxf\Entities\DxfViewport.cs" />
-    <Compile Include="Dxf\Entities\DxfWipeout.cs" />
-    <Compile Include="Dxf\Entities\DxfXline.cs" />
-    <Compile Include="Dxf\Enums\DxfAcadVer.cs" />
-    <Compile Include="Dxf\Enums\DxfAppidStandardFlags.cs" />
-    <Compile Include="Dxf\Enums\DxfAttributeFlags.cs" />
-    <Compile Include="Dxf\Enums\DxfBlockTypeFlags.cs" />
-    <Compile Include="Dxf\Enums\DxfDefaultColors.cs" />
-    <Compile Include="Dxf\Enums\DxfDimstyleStandardFlags.cs" />
-    <Compile Include="Dxf\Enums\DxfDuplicateRecordCloningFlags.cs" />
-    <Compile Include="Dxf\Enums\DxfHorizontalTextJustification.cs" />
-    <Compile Include="Dxf\Enums\DxfLayerStandardFlags.cs" />
-    <Compile Include="Dxf\Enums\DxfLineWeight.cs" />
-    <Compile Include="Dxf\Enums\DxfLtypeStandardFlags.cs" />
-    <Compile Include="Dxf\Enums\DxfLwpolylineFlags.cs" />
-    <Compile Include="Dxf\Enums\DxfOrthographicType.cs" />
-    <Compile Include="Dxf\Enums\DxfOrthographicViewType.cs" />
-    <Compile Include="Dxf\Enums\DxfProxyCapabilitiesFlags.cs" />
-    <Compile Include="Dxf\Enums\DxfSplineFlags.cs" />
-    <Compile Include="Dxf\Enums\DxfStyleFlags.cs" />
-    <Compile Include="Dxf\Enums\DxfTableStandardFlags.cs" />
-    <Compile Include="Dxf\Enums\DxfTextGenerationFlags.cs" />
-    <Compile Include="Dxf\Enums\DxfVerticalTextJustification.cs" />
-    <Compile Include="Dxf\Enums\DxfViewMode.cs" />
-    <Compile Include="Dxf\Enums\DxfViewRenderMode.cs" />
-    <Compile Include="Dxf\Enums\DxfViewStandardFlags.cs" />
-    <Compile Include="Dxf\Enums\DxfVportStandardFlags.cs" />
-    <Compile Include="Dxf\Objects\DxfDictionary.cs" />
-    <Compile Include="Dxf\Objects\DxfObjects.cs" />
-    <Compile Include="Dxf\Tables\DxfAppid.cs" />
-    <Compile Include="Dxf\Tables\DxfBlockRecord.cs" />
-    <Compile Include="Dxf\Tables\DxfDimstyle.cs" />
-    <Compile Include="Dxf\Tables\DxfLayer.cs" />
-    <Compile Include="Dxf\Tables\DxfLtype.cs" />
-    <Compile Include="Dxf\Tables\DxfStyle.cs" />
-    <Compile Include="Dxf\Tables\DxfTable.cs" />
-    <Compile Include="Dxf\Tables\DxfTables.cs" />
-    <Compile Include="Dxf\Tables\DxfUcs.cs" />
-    <Compile Include="Dxf\Tables\DxfView.cs" />
-    <Compile Include="Dxf\Tables\DxfVport.cs" />
-    <Compile Include="Core\Style\StyleComparer.cs" />
-    <Compile Include="Editor\EditorCommands.cs" />
-    <Compile Include="Editor\EditorContext.cs" />
-    <Compile Include="Editor\Helper.cs" />
-    <Compile Include="Editor\Helpers\ArcHelper.cs" />
-    <Compile Include="Editor\Helpers\BezierHelper.cs" />
-    <Compile Include="Editor\Helpers\EllipseHelper.cs" />
-    <Compile Include="Editor\Helpers\GroupHelper.cs" />
-    <Compile Include="Editor\Helpers\ImageHelper.cs" />
-    <Compile Include="Editor\Helpers\LineHelper.cs" />
-    <Compile Include="Editor\Helpers\PathHelper.cs" />
-    <Compile Include="Editor\Helpers\PointHelper.cs" />
-    <Compile Include="Editor\Helpers\QBezierHelper.cs" />
-    <Compile Include="Editor\Helpers\RectangleHelper.cs" />
-    <Compile Include="Editor\Helpers\SelectionHelper.cs" />
-    <Compile Include="Editor\Helpers\TextHelper.cs" />
-    <Compile Include="Editor\History.cs" />
-    <Compile Include="Editor\LineGrid.cs" />
-    <Compile Include="Editor\MoveMode.cs" />
-    <Compile Include="Editor\Script\ScriptDirectory.cs" />
-    <Compile Include="Editor\Script\ScriptFile.cs" />
-    <Compile Include="Editor\State.cs" />
-    <Compile Include="Editor\Tool.cs" />
-    <Compile Include="Editor\Log\ILog.cs" />
-    <Compile Include="Editor\Log\TraceLog.cs" />
-    <Compile Include="Math\MathHelpers.cs" />
-    <Compile Include="Math\Point2.cs" />
-    <Compile Include="Math\Size2.cs" />
-    <Compile Include="Math\WpfArc.cs" />
-    <Compile Include="Core\Project\Container.cs" />
-    <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
-    <Compile Include="Editor\Editor.cs" />
-    <Compile Include="Core\Project\Document.cs" />
-    <Compile Include="Core\Libraries\GroupLibrary.cs" />
-    <Compile Include="Core\Project\Options.cs" />
-    <Compile Include="Core\Project\Project.cs" />
-    <Compile Include="Math\GdiArc.cs" />
-    <Compile Include="Math\MonotoneChain.cs" />
-    <Compile Include="Math\Polygon2.cs" />
-    <Compile Include="Math\Sat.cs" />
-    <Compile Include="Math\Vector2.cs" />
-    <Compile Include="Math\Rect2.cs" />
-    <Compile Include="Editor\Bounds\ShapeBounds.cs" />
-    <Compile Include="Core\Project\Layer.cs" />
-    <Compile Include="Editor\Observer.cs" />
-    <Compile Include="Core\Renderer\IRenderer.cs" />
+    <Compile Include="Data\Column.cs" />
+    <Compile Include="Data\Database.cs" />
+    <Compile Include="Data\Record.cs" />
+    <Compile Include="Data\Value.cs" />
+    <Compile Include="Libraries\GroupLibrary.cs" />
+    <Compile Include="Libraries\StyleLibrary.cs" />
     <Compile Include="Core\ObservableObject.cs" />
-    <Compile Include="Core\Libraries\StyleLibrary.cs" />
-    <Compile Include="Core\Shapes\XArc.cs" />
-    <Compile Include="Core\Shapes\XBezier.cs" />
-    <Compile Include="Core\Shapes\XEllipse.cs" />
-    <Compile Include="Core\Shapes\XGroup.cs" />
-    <Compile Include="Core\Shapes\XImage.cs" />
-    <Compile Include="Core\Shapes\XLine.cs" />
-    <Compile Include="Core\Shapes\XPoint.cs" />
-    <Compile Include="Core\Shapes\XQBezier.cs" />
-    <Compile Include="Core\Shapes\XRectangle.cs" />
-    <Compile Include="Core\Shapes\XText.cs" />
-    <Compile Include="Core\Shapes\Path\XFillRule.cs" />
-    <Compile Include="Core\Shapes\Path\XPathPoint.cs" />
-    <Compile Include="Core\Shapes\Path\XPathRect.cs" />
-    <Compile Include="Core\Shapes\Path\XPathSegment.cs" />
-    <Compile Include="Core\Shapes\Path\XPathSize.cs" />
-    <Compile Include="Core\Shapes\Path\XSweepDirection.cs" />
-    <Compile Include="Core\Shape\ShapeTransform.cs" />
-    <Compile Include="Core\Shapes\Path\Segments\XArcSegment.cs" />
-    <Compile Include="Core\Shapes\Path\Segments\XBezierSegment.cs" />
-    <Compile Include="Core\Shapes\Path\Segments\XLineSegment.cs" />
-    <Compile Include="Core\Shapes\Path\Segments\XPolyBezierSegment.cs" />
-    <Compile Include="Core\Shapes\Path\Segments\XPolyLineSegment.cs" />
-    <Compile Include="Core\Shapes\Path\Segments\XPolyQuadraticBezierSegment.cs" />
-    <Compile Include="Core\Shapes\Path\Segments\XQuadraticBezierSegment.cs" />
-    <Compile Include="Core\Shapes\XPath.cs" />
-    <Compile Include="Core\Shapes\Path\XPathFigure.cs" />
-    <Compile Include="Core\Shapes\Path\XPathGeometry.cs" />
+    <Compile Include="Project\Container.cs" />
+    <Compile Include="Project\Document.cs" />
+    <Compile Include="Project\Layer.cs" />
+    <Compile Include="Project\MoveMode.cs" />
+    <Compile Include="Project\Options.cs" />
+    <Compile Include="Project\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Simulation\Boolean\BoolInput.cs" />
-    <Compile Include="Simulation\Boolean\BoolSimulation.cs" />
-    <Compile Include="Simulation\Boolean\BoolSimulationFactory.cs" />
-    <Compile Include="Simulation\Clock.cs" />
-    <Compile Include="Simulation\Graph\ContainerGraph.cs" />
-    <Compile Include="Simulation\Graph\ContainerGraphContext.cs" />
-    <Compile Include="Simulation\Graph\ContainerGraphDebug.cs" />
-    <Compile Include="Simulation\Boolean\Gates\AndSimulation.cs" />
-    <Compile Include="Simulation\Boolean\Gates\InverterSimulation.cs" />
-    <Compile Include="Simulation\Boolean\Gates\OrSimulation.cs" />
-    <Compile Include="Simulation\Boolean\Gates\XorSimulation.cs" />
-    <Compile Include="Simulation\Boolean\Memory\MemoryResetPrioritySimulation.cs" />
-    <Compile Include="Simulation\Boolean\Memory\MemoryResetPriorityVSimulation.cs" />
-    <Compile Include="Simulation\Boolean\Memory\MemorySetPrioritySimulation.cs" />
-    <Compile Include="Simulation\Boolean\Memory\MemorySetPriorityVSimulation.cs" />
-    <Compile Include="Simulation\Boolean\Shortcut\ShortcutSimulation.cs" />
-    <Compile Include="Simulation\Boolean\Signal\InputSimulation.cs" />
-    <Compile Include="Simulation\Boolean\Signal\OutputSimulation.cs" />
-    <Compile Include="Simulation\Boolean\Signal\SignalSimulation.cs" />
-    <Compile Include="Simulation\Boolean\Timers\TimerOffSimulation.cs" />
-    <Compile Include="Simulation\Boolean\Timers\TimerOnSimulation.cs" />
-    <Compile Include="Simulation\Boolean\Timers\TimerPulseSimulation.cs" />
-    <Compile Include="Simulation\Pin.cs" />
-    <Compile Include="Simulation\Graph\TopologicalSort.cs" />
+    <Compile Include="Renderer\IRenderer.cs" />
+    <Compile Include="Renderer\RendererState.cs" />
+    <Compile Include="Shapes\Path\Segments\XArcSegment.cs" />
+    <Compile Include="Shapes\Path\Segments\XBezierSegment.cs" />
+    <Compile Include="Shapes\Path\Segments\XLineSegment.cs" />
+    <Compile Include="Shapes\Path\Segments\XPolyBezierSegment.cs" />
+    <Compile Include="Shapes\Path\Segments\XPolyLineSegment.cs" />
+    <Compile Include="Shapes\Path\Segments\XPolyQuadraticBezierSegment.cs" />
+    <Compile Include="Shapes\Path\Segments\XQuadraticBezierSegment.cs" />
+    <Compile Include="Shapes\Path\XFillRule.cs" />
+    <Compile Include="Shapes\Path\XPathFigure.cs" />
+    <Compile Include="Shapes\Path\XPathGeometry.cs" />
+    <Compile Include="Shapes\Path\XPathPoint.cs" />
+    <Compile Include="Shapes\Path\XPathRect.cs" />
+    <Compile Include="Shapes\Path\XPathSegment.cs" />
+    <Compile Include="Shapes\Path\XPathSize.cs" />
+    <Compile Include="Shapes\Path\XSweepDirection.cs" />
+    <Compile Include="Shapes\XArc.cs" />
+    <Compile Include="Shapes\XBezier.cs" />
+    <Compile Include="Shapes\XEllipse.cs" />
+    <Compile Include="Shapes\XGroup.cs" />
+    <Compile Include="Shapes\XImage.cs" />
+    <Compile Include="Shapes\XLine.cs" />
+    <Compile Include="Shapes\XPath.cs" />
+    <Compile Include="Shapes\XPoint.cs" />
+    <Compile Include="Shapes\XQBezier.cs" />
+    <Compile Include="Shapes\XRectangle.cs" />
+    <Compile Include="Shapes\XText.cs" />
+    <Compile Include="Shape\BaseShape.cs" />
+    <Compile Include="Shape\ShapeBinding.cs" />
+    <Compile Include="Shape\ShapeBindingParamater.cs" />
+    <Compile Include="Shape\ShapeProperty.cs" />
+    <Compile Include="Shape\ShapePropertyExtensions.cs" />
+    <Compile Include="Shape\ShapePropertyParameter.cs" />
+    <Compile Include="Shape\ShapeState.cs" />
+    <Compile Include="Shape\ShapeTransform.cs" />
+    <Compile Include="Style\ArgbColor.cs" />
+    <Compile Include="Style\ArrowStyle.cs" />
+    <Compile Include="Style\ArrowType.cs" />
+    <Compile Include="Style\FontStyle.cs" />
+    <Compile Include="Style\LineCap.cs" />
+    <Compile Include="Style\LineStyle.cs" />
+    <Compile Include="Style\MaxLengthFlags.cs" />
+    <Compile Include="Style\ShapeStyle.cs" />
+    <Compile Include="Style\StyleComparer.cs" />
+    <Compile Include="Style\TextHAlignment.cs" />
+    <Compile Include="Style\TextStyle.cs" />
+    <Compile Include="Style\TextVAlignment.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

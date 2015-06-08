@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Test2d")]
+[assembly: AssemblyTitle("Test2d.Interfaces")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Test2d")]
+[assembly: AssemblyProduct("Test2d.Interfaces")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("05402dd2-93c8-4b30-ac03-139feaffd186")]
+[assembly: Guid("53ed266e-eba4-4497-9079-ab07965fb0f1")]
 
 // Version information for an assembly consists of the following four values:
 //

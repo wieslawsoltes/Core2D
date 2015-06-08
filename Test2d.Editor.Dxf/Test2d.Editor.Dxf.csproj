@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{304B499E-9FB2-45FF-ACB9-1C5224028BE6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Test2d.Editor.Dxf</RootNamespace>
+    <AssemblyName>Test2d.Editor.Dxf</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dxf\Blocks\DxfBlock.cs" />
+    <Compile Include="Dxf\Blocks\DxfBlocks.cs" />
+    <Compile Include="Dxf\Classes\DxfClass.cs" />
+    <Compile Include="Dxf\Classes\DxfClasses.cs" />
+    <Compile Include="Dxf\Core\DxfCodeName.cs" />
+    <Compile Include="Dxf\Core\DxfExtensions.cs" />
+    <Compile Include="Dxf\Core\DxfObject.cs" />
+    <Compile Include="Dxf\Core\DxfSubclassMarker.cs" />
+    <Compile Include="Dxf\Core\DxfVector2.cs" />
+    <Compile Include="Dxf\Core\DxfVector3.cs" />
+    <Compile Include="Dxf\DxfFile.cs" />
+    <Compile Include="Dxf\DxfHeader.cs" />
+    <Compile Include="Dxf\DxfInspect.cs" />
+    <Compile Include="Dxf\DxfRawTag.cs" />
+    <Compile Include="Dxf\Entities\Dxf3Dface.cs" />
+    <Compile Include="Dxf\Entities\Dxf3Dsolid.cs" />
+    <Compile Include="Dxf\Entities\DxfAcadProxyEntity.cs" />
+    <Compile Include="Dxf\Entities\DxfArc.cs" />
+    <Compile Include="Dxf\Entities\DxfArcAlignedText.cs" />
+    <Compile Include="Dxf\Entities\DxfAttdef.cs" />
+    <Compile Include="Dxf\Entities\DxfAttrib.cs" />
+    <Compile Include="Dxf\Entities\DxfBody.cs" />
+    <Compile Include="Dxf\Entities\DxfCircle.cs" />
+    <Compile Include="Dxf\Entities\DxfDimension.cs" />
+    <Compile Include="Dxf\Entities\DxfEllipse.cs" />
+    <Compile Include="Dxf\Entities\DxfEntities.cs" />
+    <Compile Include="Dxf\Entities\DxfHatch.cs" />
+    <Compile Include="Dxf\Entities\DxfImage.cs" />
+    <Compile Include="Dxf\Entities\DxfInsert.cs" />
+    <Compile Include="Dxf\Entities\DxfLeader.cs" />
+    <Compile Include="Dxf\Entities\DxfLine.cs" />
+    <Compile Include="Dxf\Entities\DxfLwpolyline.cs" />
+    <Compile Include="Dxf\Entities\DxfLwpolylineVertex.cs" />
+    <Compile Include="Dxf\Entities\DxfMline.cs" />
+    <Compile Include="Dxf\Entities\DxfMText.cs" />
+    <Compile Include="Dxf\Entities\DxfOle2Frame.cs" />
+    <Compile Include="Dxf\Entities\DxfOleFrame.cs" />
+    <Compile Include="Dxf\Entities\DxfPoint.cs" />
+    <Compile Include="Dxf\Entities\DxfPolyline.cs" />
+    <Compile Include="Dxf\Entities\DxfRay.cs" />
+    <Compile Include="Dxf\Entities\DxfRegion.cs" />
+    <Compile Include="Dxf\Entities\DxfRText.cs" />
+    <Compile Include="Dxf\Entities\DxfSeqend.cs" />
+    <Compile Include="Dxf\Entities\DxfShape.cs" />
+    <Compile Include="Dxf\Entities\DxfSolid.cs" />
+    <Compile Include="Dxf\Entities\DxfSpline.cs" />
+    <Compile Include="Dxf\Entities\DxfText.cs" />
+    <Compile Include="Dxf\Entities\DxfTolerance.cs" />
+    <Compile Include="Dxf\Entities\DxfTrace.cs" />
+    <Compile Include="Dxf\Entities\DxfVertex.cs" />
+    <Compile Include="Dxf\Entities\DxfViewport.cs" />
+    <Compile Include="Dxf\Entities\DxfWipeout.cs" />
+    <Compile Include="Dxf\Entities\DxfXline.cs" />
+    <Compile Include="Dxf\Enums\DxfAcadVer.cs" />
+    <Compile Include="Dxf\Enums\DxfAppidStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfAttributeFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfBlockTypeFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfDefaultColors.cs" />
+    <Compile Include="Dxf\Enums\DxfDimstyleStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfDuplicateRecordCloningFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfHorizontalTextJustification.cs" />
+    <Compile Include="Dxf\Enums\DxfLayerStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfLineWeight.cs" />
+    <Compile Include="Dxf\Enums\DxfLtypeStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfLwpolylineFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfOrthographicType.cs" />
+    <Compile Include="Dxf\Enums\DxfOrthographicViewType.cs" />
+    <Compile Include="Dxf\Enums\DxfProxyCapabilitiesFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfSplineFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfStyleFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfTableStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfTextGenerationFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfVerticalTextJustification.cs" />
+    <Compile Include="Dxf\Enums\DxfViewMode.cs" />
+    <Compile Include="Dxf\Enums\DxfViewRenderMode.cs" />
+    <Compile Include="Dxf\Enums\DxfViewStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfVportStandardFlags.cs" />
+    <Compile Include="Dxf\Objects\DxfDictionary.cs" />
+    <Compile Include="Dxf\Objects\DxfObjects.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Dxf\Tables\DxfAppid.cs" />
+    <Compile Include="Dxf\Tables\DxfBlockRecord.cs" />
+    <Compile Include="Dxf\Tables\DxfDimstyle.cs" />
+    <Compile Include="Dxf\Tables\DxfLayer.cs" />
+    <Compile Include="Dxf\Tables\DxfLtype.cs" />
+    <Compile Include="Dxf\Tables\DxfStyle.cs" />
+    <Compile Include="Dxf\Tables\DxfTable.cs" />
+    <Compile Include="Dxf\Tables\DxfTables.cs" />
+    <Compile Include="Dxf\Tables\DxfUcs.cs" />
+    <Compile Include="Dxf\Tables\DxfView.cs" />
+    <Compile Include="Dxf\Tables\DxfVport.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -51,9 +51,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Test2d\Test2d.csproj">
-      <Project>{60dda5d9-7acc-41af-9123-c96abb6b7828}</Project>
-      <Name>Test2d</Name>
+    <ProjectReference Include="..\..\Test2d.Interfaces\Test2d.Interfaces.csproj">
+      <Project>{c3e348e1-bf9e-4a71-a1f7-61b7607e0a20}</Project>
+      <Name>Test2d.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

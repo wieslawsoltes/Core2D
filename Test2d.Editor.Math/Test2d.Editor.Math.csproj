@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E4F69CD9-1373-4587-8BD2-A2F46EBB4912}</ProjectGuid>
+    <ProjectGuid>{3292A90C-B664-4F71-AF59-F4BFA04020F8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Renderer.EtoForms</RootNamespace>
-    <AssemblyName>Renderer.EtoForms</AssemblyName>
+    <RootNamespace>Test2d.Editor.Math</RootNamespace>
+    <AssemblyName>Test2d.Editor.Math</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,36 +30,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Eto, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eto.Forms.2.0.5\lib\net45\Eto.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Core" />
-    <Reference Include="System.IO" />
-    <Reference Include="System.Runtime" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EtoRenderer.cs" />
+    <Compile Include="Math\Arc\GdiArc.cs" />
+    <Compile Include="Math\MathHelpers.cs" />
+    <Compile Include="Math\MonotoneChain.cs" />
+    <Compile Include="Math\Core\Point2.cs" />
+    <Compile Include="Math\Core\Polygon2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Math\Core\Rect2.cs" />
+    <Compile Include="Math\Sat.cs" />
+    <Compile Include="Math\Core\Size2.cs" />
+    <Compile Include="Math\Core\Vector2.cs" />
+    <Compile Include="Math\Arc\WpfArc.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Test2d.Editor.Math\Test2d.Editor.Math.csproj">
-      <Project>{3292a90c-b664-4f71-af59-f4bfa04020f8}</Project>
-      <Name>Test2d.Editor.Math</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Test2d\Test2d.csproj">
+    <ProjectReference Include="..\Test2d\Test2d.csproj">
       <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
       <Name>Test2d</Name>
     </ProjectReference>

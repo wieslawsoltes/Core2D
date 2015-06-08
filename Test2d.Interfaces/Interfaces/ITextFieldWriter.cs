@@ -8,13 +8,14 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public interface ITextFieldWriter
+    /// <typeparam name="T"></typeparam>
+    public interface ITextFieldWriter<T>
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="path"></param>
         /// <param name="database"></param>
-        void Write(string path, Database database);
+        void Write(string path, T database);
     }
 }

@@ -49,8 +49,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Test2d.Interfaces\Test2d.Interfaces.csproj">
+      <Project>{c3e348e1-bf9e-4a71-a1f7-61b7607e0a20}</Project>
+      <Name>Test2d.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Test2d\Test2d.csproj">
-      <Project>{60dda5d9-7acc-41af-9123-c96abb6b7828}</Project>
+      <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
       <Name>Test2d</Name>
     </ProjectReference>
     <ProjectReference Include="..\Renderer.WinForms\Renderer.WinForms.csproj">
