@@ -6,8 +6,8 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>TestWinForms</RootNamespace>
-    <AssemblyName>TestWinForms</AssemblyName>
+    <RootNamespace>Test2d.UI.WinForms</RootNamespace>
+    <AssemblyName>Test2d.UI.WinForms</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <TargetFrameworkProfile />
@@ -45,10 +45,10 @@
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\TestWinForms.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Test2d.UI.WinForms.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <DocumentationFile>bin\Release\TestWinForms.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\Test2d.UI.WinForms.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp">

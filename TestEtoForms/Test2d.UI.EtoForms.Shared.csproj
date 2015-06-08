@@ -7,8 +7,8 @@
     <ProjectGuid>{C2D17C89-B904-4BCE-8BCE-FC65020DE7BB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestEtoForms</RootNamespace>
-    <AssemblyName>TestEtoForms</AssemblyName>
+    <RootNamespace>Test2d.UI.EtoForms.Shared</RootNamespace>
+    <AssemblyName>Test2d.UI.EtoForms.Shared</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

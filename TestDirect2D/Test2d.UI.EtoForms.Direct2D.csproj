@@ -7,8 +7,8 @@
     <ProjectGuid>{1C74A7B6-A80B-406B-A53F-465740D3742F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestDirect2D</RootNamespace>
-    <AssemblyName>TestDirect2D</AssemblyName>
+    <RootNamespace>Test2d.UI.EtoForms.Direct2D</RootNamespace>
+    <AssemblyName>Test2d.UI.EtoForms.Direct2D</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
