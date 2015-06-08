@@ -7,11 +7,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TestDirect2D")]
+[assembly: AssemblyTitle("Test2d.UI.EtoForms.Direct2D")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TestDirect2D")]
+[assembly: AssemblyProduct("Test2d.UI.EtoForms.Direct2D")]
 [assembly: AssemblyCopyright("Copyright © Wiesław Šoltés 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

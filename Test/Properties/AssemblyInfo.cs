@@ -9,11 +9,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Test")]
+[assembly: AssemblyTitle("Test2d.UI.Wpf")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Test")]
+[assembly: AssemblyProduct("Test2d.UI.Wpf")]
 [assembly: AssemblyCopyright("Copyright © Wiesław Šoltés 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
