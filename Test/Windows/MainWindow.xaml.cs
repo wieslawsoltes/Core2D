@@ -687,10 +687,10 @@ namespace Test.Windows
                     filter = "Styles (*.styles)|*.styles|All (*.*)|*.*";
                     break;
                 case ImportType.StyleLibrary:
-                    filter = "StyleLibrary (*.StyleLibrary)|*.StyleLibrary|All (*.*)|*.*";
+                    filter = "StyleLibrary (*.stylelibrary)|*.stylelibrary|All (*.*)|*.*";
                     break;
                 case ImportType.StyleLibraries:
-                    filter = "StyleLibraries (*.StyleLibraries)|*.StyleLibraries|All (*.*)|*.*";
+                    filter = "StyleLibraries (*.styleLibraries)|*.stylelibraries|All (*.*)|*.*";
                     break;
                 case ImportType.Group:
                     filter = "Group (*.group)|*.group|All (*.*)|*.*";
@@ -758,11 +758,11 @@ namespace Test.Windows
                     name = (item as StyleLibrary).Name;
                     break;
                 case ExportType.StyleLibrary:
-                    filter = "StyleLibrary (*.StyleLibrary)|*.StyleLibrary|All (*.*)|*.*";
+                    filter = "StyleLibrary (*.stylelibrary)|*.stylelibrary|All (*.*)|*.*";
                     name = (item as StyleLibrary).Name;
                     break;
                 case ExportType.StyleLibraries:
-                    filter = "StyleLibraries (*.StyleLibraries)|*.StyleLibraries|All (*.*)|*.*";
+                    filter = "StyleLibraries (*.stylelibraries)|*.stylelibraries|All (*.*)|*.*";
                     name = (item as Project).Name;
                     break;
                 case ExportType.Group:
