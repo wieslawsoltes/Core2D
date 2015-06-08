@@ -803,11 +803,7 @@ namespace TestEtoForms
         /// <param name="c"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        private void DrawBackground(
-            Graphics g, 
-            ArgbColor c, 
-            double width, 
-            double height)
+        private void DrawBackground(Graphics g, ArgbColor c, double width, double height)
         {
             var color = Color.FromArgb(c.R, c.G, c.B, c.A);
             var brush = new SolidBrush(color);
