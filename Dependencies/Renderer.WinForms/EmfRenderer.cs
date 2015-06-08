@@ -68,7 +68,7 @@ namespace TestEDITOR
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        private static Color ToColor(ArgbColor color)
+        private Color ToColor(ArgbColor color)
         {
             return Color.FromArgb(
                 color.A,
@@ -83,9 +83,9 @@ namespace TestEDITOR
         /// <param name="style"></param>
         /// <param name="scale"></param>
         /// <returns></returns>
-        private static Pen ToPen(ShapeStyle style, Func<double, float> scale)
+        private Pen ToPen(ShapeStyle style, Func<double, float> scale)
         {
-            var pen = new Pen(ToColor(style.Stroke), (float)style.Thickness);
+            var pen = new Pen(ToColor(style.Stroke), (float)(style.Thickness / _state.Zoom));
             switch (style.LineStyle.LineCap)
             {
                 case Test2d.LineCap.Flat:
@@ -118,7 +118,7 @@ namespace TestEDITOR
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        private static SolidBrush ToSolidBrush(ArgbColor color)
+        private SolidBrush ToSolidBrush(ArgbColor color)
         {
             return new SolidBrush(ToColor(color));
         }
@@ -352,7 +352,7 @@ namespace TestEDITOR
                         pt1 = pts[0];
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
                         var gs = _gfx.Save();
-                        _gfx.Transform = t1;
+                        _gfx.MultiplyTransform(t1);
                         DrawRectangleInternal(_gfx, fill, stroke, sas.IsFilled, ref rect);
                         _gfx.Restore(gs);
                     }
@@ -363,7 +363,7 @@ namespace TestEDITOR
                         t1.TransformPoints(pts);
                         pt1 = pts[0];
                         var gs = _gfx.Save();
-                        _gfx.Transform = t1;
+                        _gfx.MultiplyTransform(t1);
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
                         DrawEllipseInternal(_gfx, fill, stroke, sas.IsFilled, ref rect);
                         _gfx.Restore(gs);
@@ -411,7 +411,7 @@ namespace TestEDITOR
                         pt2 = pts[0];
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
                         var gs = _gfx.Save();
-                        _gfx.Transform = t2;
+                        _gfx.MultiplyTransform(t2);
                         DrawRectangleInternal(_gfx, fill, stroke, eas.IsFilled, ref rect);
                         _gfx.Restore(gs);
                     }
@@ -422,7 +422,7 @@ namespace TestEDITOR
                         t2.TransformPoints(pts);
                         pt2 = pts[0];
                         var gs = _gfx.Save();
-                        _gfx.Transform = t2;
+                        _gfx.MultiplyTransform(t2);
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
                         DrawEllipseInternal(_gfx, fill, stroke, eas.IsFilled, ref rect);
                         _gfx.Restore(gs);
