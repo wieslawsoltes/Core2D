@@ -4,38 +4,122 @@ using System;
 using System.Diagnostics;
 using Test2d;
 
-namespace TestEtoForms
+namespace TestEDITOR
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ZoomState
     {
         private EditorContext _context;
         private Action _invalidate;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public float MinimumZoom = 0.01f;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float MaximumZoom = 1000.0f;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float ZoomSpeed = 3.5f;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float Zoom = 1f;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float PanX = 0f;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float PanY = 0f;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsPanMode = false;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float PanOffsetX = 0f;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float PanOffsetY = 0f;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float OriginX = 0f;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float OriginY = 0f;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float StartX = 0f;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float StartY = 0f;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float WheelOriginX = 0f;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float WheelOriginY = 0f;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public bool HaveWheelOrigin = false;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float WheelOffsetX = 0f;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float WheelOffsetY = 0f;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="invalidate"></param>
         public ZoomState(EditorContext context, Action invalidate)
         {
             _context = context;
             _invalidate = invalidate;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void MiddleDown(float x, float y)
         {
             Debug.Print("Pan Offset: {0}, {1}", PanOffsetX, PanOffsetY);
@@ -49,6 +133,11 @@ namespace TestEtoForms
             IsPanMode = true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void PrimaryDown(float x, float y)
         {
             if (_context.Editor.IsLeftDownAvailable())
@@ -59,6 +148,11 @@ namespace TestEtoForms
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void AlternateDown(float x, float y)
         {
             if (_context.Editor.IsRightDownAvailable())
@@ -69,6 +163,11 @@ namespace TestEtoForms
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void MiddleUp(float x, float y)
         {
             PanOffsetX += PanX - OriginX;
@@ -77,6 +176,11 @@ namespace TestEtoForms
             IsPanMode = false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void PrimaryUp(float x, float y)
         {
             if (_context.Editor.IsLeftUpAvailable())
@@ -87,6 +191,11 @@ namespace TestEtoForms
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void AlternateUp(float x, float y)
         {
             if (_context.Editor.IsRightUpAvailable())
@@ -97,6 +206,11 @@ namespace TestEtoForms
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void Move(float x, float y)
         {
             if (IsPanMode)
@@ -123,6 +237,12 @@ namespace TestEtoForms
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="delta"></param>
         public void Wheel(float x, float y, float delta)
         {
             float zoom = Zoom;
@@ -152,6 +272,12 @@ namespace TestEtoForms
             _invalidate();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="zoom"></param>
+        /// <param name="rx"></param>
+        /// <param name="ry"></param>
         public void ZoomTo(float zoom, float rx, float ry)
         {
             float ax = (rx * Zoom) + PanX;
@@ -167,6 +293,9 @@ namespace TestEtoForms
             _context.Editor.Renderers[0].State.PanY = PanY;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ResetZoom()
         {
             Zoom = 1f;
