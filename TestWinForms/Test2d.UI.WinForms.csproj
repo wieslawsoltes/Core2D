@@ -78,6 +78,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\TestEtoForms\Forms\ZoomState.cs">
+      <Link>Forms\ZoomState.cs</Link>
+    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
