@@ -86,8 +86,8 @@ namespace Test2d
         /// </summary>
         /// <param name="dc">The generic drawing context object</param>
         /// <param name="renderer">The generic renderer object used to draw shape.</param>
-        /// <param name="dx">The X axis draw position osffset.</param>
-        /// <param name="dy">The Y axis draw position osffset.</param>
+        /// <param name="dx">The X axis draw position offset.</param>
+        /// <param name="dy">The Y axis draw position offset.</param>
         /// <param name="db">The properties database used for binding.</param>
         /// <param name="r">The external data record used for binding.</param>
         public abstract void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r);
@@ -95,8 +95,8 @@ namespace Test2d
         /// <summary>
         /// Move shape position using dx,dy offset.
         /// </summary>
-        /// <param name="dx">The X axis position osffset.</param>
-        /// <param name="dy">The Y axis position osffset.</param>
+        /// <param name="dx">The X axis position offset.</param>
+        /// <param name="dy">The Y axis position offset.</param>
         public abstract void Move(double dx, double dy);
     }
 }
