@@ -7,7 +7,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Test;component/Dictionaries/Test2dDictionary.xaml"/>
+                <ResourceDictionary Source="/Test2d.UI.Wpf;component/Dictionaries/Test2dDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
