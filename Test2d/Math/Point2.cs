@@ -45,6 +45,19 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public double Distance(double x, double y)
+        {
+            double dx = this.X - x;
+            double dy = this.Y - y;
+            return Math.Sqrt(dx * dx + dy * dy);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="centerPoint"></param>
         /// <param name="angleInDegrees"></param>
         /// <returns></returns>
