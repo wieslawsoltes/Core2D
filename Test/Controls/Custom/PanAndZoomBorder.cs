@@ -138,7 +138,7 @@ namespace Test.PanAndZoom
                         }
                     };
 
-                    this.MouseDown += (s, e) =>
+                    this.PreviewMouseDown += (s, e) =>
                     {
                         if (child != null
                             && e.ChangedButton == MouseButton.Middle
