@@ -124,5 +124,145 @@ namespace Test2d
 
             return points;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <returns></returns>
+        public static double Distance(double x1, double y1, double x2, double y2)
+        {
+            double dx = x1 - x2;
+            double dy = y1 - y2;
+            return Math.Sqrt(dx * dx + dy * dy);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <returns></returns>
+        public static Vector2 Middle(double x1, double y1, double x2, double y2)
+        {
+            return new Vector2((x1 + x2) / 2.0, (y1 + y2) / 2.0);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public static Vector2 NearestPointOnLine(Vector2 a, Vector2 b, Vector2 p)
+        {
+            double ax = p.X - a.X;
+            double ay = p.Y - a.Y;
+            double bx = b.X - a.X;
+            double by = b.Y - a.Y;
+            double t = (ax * bx + ay * by) / (bx * bx + by * by);
+            if (t < 0.0)
+            {
+                return new Vector2(a.X, a.Y);
+            }
+            else if (t > 1.0)
+            {
+                return new Vector2(b.X, b.Y);
+            }
+            return new Vector2(bx * t + a.X, by * t + a.Y);
+        }
+
+        /// <summary>
+        /// Check if line intersects with rectangle using Liang-Barsky line clipping algorithm.
+        /// </summary>
+        /// <param name="rect"></param>
+        /// <param name="p0"></param>
+        /// <param name="p1"></param>
+        /// <returns>True if line intersects with rectangle.</returns>
+        public static bool LineIntersectsWithRect(Rect2 rect, Point2 p0, Point2 p1)
+        {
+            double left = rect.Left;
+            double right = rect.Right;
+            double bottom = rect.Bottom;
+            double top = rect.Top;
+            double x0 = p0.X;
+            double y0 = p0.Y;
+            double x1 = p1.X;
+            double y1 = p1.Y;
+
+            double t0 = 0.0;
+            double t1 = 1.0;
+            double dx = x1 - x0;
+            double dy = y1 - y0;
+            double p = 0.0, q = 0.0, r;
+
+            for (int edge = 0; edge < 4; edge++)
+            {
+                if (edge == 0)
+                {
+                    p = -dx;
+                    q = -(left - x0);
+                }
+                if (edge == 1)
+                {
+                    p = dx;
+                    q = (right - x0);
+                }
+                if (edge == 2)
+                {
+                    p = dy;
+                    q = (bottom - y0);
+                }
+                if (edge == 3)
+                {
+                    p = -dy;
+                    q = -(top - y0);
+                }
+
+                r = q / p;
+
+                if (p == 0.0 && q < 0.0)
+                {
+                    return false;
+                }
+
+                if (p < 0.0)
+                {
+                    if (r > t1)
+                    {
+                        return false;
+                    }
+                    else if (r > t0)
+                    {
+                        t0 = r;
+                    }
+                }
+                else if (p > 0.0)
+                {
+                    if (r < t0)
+                    {
+                        return false;
+                    }
+                    else if (r < t1)
+                    {
+                        t1 = r;
+                    }
+                }
+            }
+
+            // to calulate clipped line position
+            // x0clip = x0 + t0 * dx;
+            // y0clip = y0 + t0 * dy;
+            // x1clip = x0 + t1 * dx;
+            // y1clip = y0 + t1 * dy;
+
+            return true;
+        }
     }
 }

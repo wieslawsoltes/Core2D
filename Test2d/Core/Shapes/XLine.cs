@@ -98,32 +98,6 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        public Point2 NearestPointOnLine(double x, double y)
-        {
-            var a = _start;
-            var b = _end;
-            double ax = x - a.X;
-            double ay = y - a.Y;
-            double bx = b.X - a.X;
-            double by = b.Y - a.Y;
-            double t = (ax * bx + ay * by) / (bx * bx + by * by);
-            if (t < 0.0)
-            {
-                return new Point2(a.X, a.Y);
-            }
-            else if (t > 1.0)
-            {
-                return new Point2(b.X, b.Y);
-            }
-            return new Point2(bx * t + a.X, by * t + a.Y);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <param name="style"></param>
@@ -264,20 +238,20 @@ namespace Test2d
 
             if (shortenStart && !shortenEnd)
             {
-                var p1 = Point2.Create(x1, y1);
-                var p2 = Point2.Create(x2, y2);
-                double length = p1.Distance(p2);
-                x1 = p2.X - (p2.X - p1.X) / length * ls.MaxLength;
-                y1 = p2.Y - (p2.Y - p1.Y) / length * ls.MaxLength;
+                double dx = x1 - x2;
+                double dy = y1 - y2;
+                double distance = Math.Sqrt(dx * dx + dy * dy);
+                x1 = x2 - (x2 - x1) / distance * ls.MaxLength;
+                y1 = y2 - (y2 - y1) / distance * ls.MaxLength;
             }
 
             if (!shortenStart && shortenEnd)
             {
-                var p1 = Point2.Create(x2, y2);
-                var p2 = Point2.Create(x1, y1);
-                double length = p1.Distance(p2);
-                x2 = p2.X - (p2.X - p1.X) / length * ls.MaxLength;
-                y2 = p2.Y - (p2.Y - p1.Y) / length * ls.MaxLength;
+                double dx = x2 - x1;
+                double dy = y2 - y1;
+                double distance = Math.Sqrt(dx * dx + dy * dy);
+                x2 = x1 - (x1 - x2) / distance * ls.MaxLength;
+                y2 = y1 - (y1 - y2) / distance * ls.MaxLength;
             }
 
             if (shortenStart && shortenEnd)

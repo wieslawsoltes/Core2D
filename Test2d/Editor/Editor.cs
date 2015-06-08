@@ -1030,7 +1030,9 @@ namespace Test2d
 
                 if (!_project.Options.SnapToGrid)
                 {
-                    var nearest = line.NearestPointOnLine(x, y);
+                    var a = new Vector2(line.Start.X, line.Start.Y);
+                    var b = new Vector2(line.End.X, line.End.Y);
+                    var nearest = MathHelpers.NearestPointOnLine(a, b, new Vector2(x, y));
                     point.X = nearest.X;
                     point.Y = nearest.Y;
                 }
