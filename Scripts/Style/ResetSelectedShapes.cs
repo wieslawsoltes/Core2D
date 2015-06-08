@@ -16,7 +16,7 @@ void SetStyle(IEnumerable<BaseShape> shapes, ShapeStyle style)
 var p = Context.Editor.Project;
 var layer = p.CurrentContainer.CurrentLayer;
 var style = p.CurrentStyleLibrary.CurrentStyle;
-var shapes = Context.Editor.Renderer.SelectedShapes;
+var shapes = Context.Editor.Renderers[0].State.SelectedShapes;
 
 SetStyle(shapes, style);
 layer.Invalidate();

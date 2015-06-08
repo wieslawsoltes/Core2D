@@ -1,8 +1,8 @@
 
 var p = Context.Editor.Project;
-var r = Context.Editor.Renderer;
+var s = Context.Editor.Renderers[0].State.SelectedShape;
 
-if (r.SelectedShape != null)
+if (s != null)
 {
-    p.Options.PointShape = r.SelectedShape;
+    p.Options.PointShape = s;
 }

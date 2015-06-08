@@ -73,8 +73,8 @@ void Move(IEnumerable<XPoint> points, double dx, double dy)
     }
 }
 
-var shapes = Context?.Editor?.Renderer?.SelectedShapes;
-var layer = Context?.Editor?.Project?.CurrentContainer?.CurrentLayer;
+var shapes = Context.Editor.Renderers[0].State.SelectedShapes;
+var layer = Context.Editor.Project.CurrentContainer.CurrentLayer;
 
 if (shapes != null && layer != null)
 {

@@ -32,9 +32,9 @@ void Ungroup(IEnumerable<BaseShape> shapes, Layer layer, bool isGroup)
 }
 
 var editor = Context.Editor;
-var renderer = editor.Renderer;
-var shapes = renderer.SelectedShapes;
-var shape = renderer.SelectedShape;
+var renderer = editor.Renderers[0];
+var shapes = renderer.State.SelectedShapes;
+var shape = renderer.State.SelectedShape;
 var layer = editor.Project.CurrentContainer.CurrentLayer;
 
 if (shape != null && shape is XGroup && layer != null)
@@ -44,12 +44,12 @@ if (shape != null && shape is XGroup && layer != null)
     Ungroup(g.Connectors, layer, isGroup: true);
     layer.Shapes = layer.Shapes.Remove(g);
     layer.Invalidate();
-    renderer.SelectedShape = null;
+    renderer.State.SelectedShape = null;
 }
 
 if (shapes != null && layer != null)
 {
     Ungroup(shapes, layer, isGroup: false);
     layer.Invalidate();
-    renderer.SelectedShapes = null;
+    renderer.State.SelectedShapes = null;
 }
