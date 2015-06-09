@@ -42,9 +42,6 @@ rmdir /Q /S Dependencies\TextFieldReader.VisualBasic\obj
 rmdir /Q /S Dependencies\TextFieldWriter.CsvHelper\bin
 rmdir /Q /S Dependencies\TextFieldWriter.CsvHelper\obj
 
-rmdir /Q /S Test\bin
-rmdir /Q /S Test\obj
-
 rmdir /Q /S Test2d\bin
 rmdir /Q /S Test2d\obj
 
@@ -63,14 +60,17 @@ rmdir /Q /S Test2d.Editor.Simulation\obj
 rmdir /Q /S Test2d.Interfaces\bin
 rmdir /Q /S Test2d.Interfaces\obj
 
-rmdir /Q /S TestDirect2D\bin
-rmdir /Q /S TestDirect2D\obj
+rmdir /Q /S Test2d.UI.EtoForms.Direct2D\bin
+rmdir /Q /S Test2d.UI.EtoForms.Direct2D\obj
 
-rmdir /Q /S TestEtoForms\bin
-rmdir /Q /S TestEtoForms\obj
+rmdir /Q /S Test2d.UI.EtoForms.Shared\bin
+rmdir /Q /S Test2d.UI.EtoForms.Shared\obj
 
-rmdir /Q /S TestWinForms\bin
-rmdir /Q /S TestWinForms\obj
+rmdir /Q /S Test2d.UI.WinForms\bin
+rmdir /Q /S Test2d.UI.WinForms\obj
+
+rmdir /Q /S Test2d.UI.Wpf\bin
+rmdir /Q /S Test2d.UI.Wpf\obj
 
 rmdir /Q /S packages
 
