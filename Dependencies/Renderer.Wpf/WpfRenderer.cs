@@ -180,33 +180,6 @@ namespace Test
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="topLeftX"></param>
-        /// <param name="topLeftY"></param>
-        /// <param name="bottomRightX"></param>
-        /// <param name="bottomRightY"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
-        private static Rect CreateRect(
-            double topLeftX, 
-            double topLeftY, 
-            double bottomRightX, 
-            double bottomRightY,
-            double dx, 
-            double dy)
-        {
-            double tlx = Math.Min(topLeftX, bottomRightX);
-            double tly = Math.Min(topLeftY, bottomRightY);
-            double brx = Math.Max(topLeftX, bottomRightX);
-            double bry = Math.Max(topLeftY, bottomRightY);
-            return new Rect(
-                new Point(tlx + dx, tly + dy),
-                new Point(brx + dx, bry + dy));
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="dc"></param>
         /// <param name="half"></param>
         /// <param name="pen"></param>
@@ -438,6 +411,11 @@ namespace Test
         public void Draw(object dc, Layer layer, ImmutableArray<ShapeProperty> db, Record r)
         {
             var _dc = dc as DrawingContext;
+
+            foreach (var shape in layer.Shapes)
+            {
+                shape.Bind();
+            }
 
             foreach (var shape in layer.Shapes)
             {
@@ -688,11 +666,10 @@ namespace Test
                     _styleCache.Add(rectangle.Style, Tuple.Create(fill, stroke));
             }
 
-            double tlx, tly, brx, bry;
-            rectangle.Bind(r, out tlx, out tly, out brx, out bry);
-            var rect = CreateRect(tlx, tly, brx, bry, dx, dy);
-            //var rect = CreateRect(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
-
+            var rect = CreateRect(
+                rectangle.TopLeft, 
+                rectangle.BottomRight, 
+                dx, dy);
             DrawRectangleInternal(_dc, half, fill, stroke, rectangle.IsFilled, ref rect);
         }
 
