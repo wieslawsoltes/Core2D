@@ -93,14 +93,50 @@ namespace Test2d
                 LineCap = lineCap,
                 Dashes = dashes,
                 DashOffset = dashOffset,
-                LineStyle = lineStyle ?? LineStyle.Create(),
-                TextStyle = textStyle ?? TextStyle.Create()
+                LineStyle = lineStyle ?? LineStyle.Create("Line"),
+                TextStyle = textStyle ?? TextStyle.Create("Text")
             };
             
             style.StartArrowStyle = startArrowStyle ?? ArrowStyle.Create("Start", style);
             style.EndArrowStyle = endArrowStyle ?? ArrowStyle.Create("End", style);
             
             return style;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="stroke"></param>
+        /// <param name="fill"></param>
+        /// <param name="thickness"></param>
+        /// <param name="textStyle"></param>
+        /// <param name="lineStyle"></param>
+        /// <param name="startArrowStyle"></param>
+        /// <param name="endArrowStyle"></param>
+        /// <returns></returns>
+        public static ShapeStyle Create(
+            string name,
+            ArgbColor stroke,
+            ArgbColor fill,
+            double thickness,
+            TextStyle textStyle,
+            LineStyle lineStyle,
+            ArrowStyle startArrowStyle,
+            ArrowStyle endArrowStyle)
+        {
+            return new ShapeStyle()
+            {
+                Name = name,
+                Stroke = stroke,
+                Fill = fill,
+                Thickness = thickness,
+                LineCap = LineCap.Round,
+                Dashes = default(double[]),
+                DashOffset = 0.0,
+                LineStyle = lineStyle,
+                TextStyle = textStyle
+            };
         }
     }
 }
