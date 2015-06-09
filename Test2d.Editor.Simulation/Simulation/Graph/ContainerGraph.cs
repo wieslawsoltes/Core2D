@@ -91,9 +91,8 @@ namespace TestSIM
         /// <returns></returns>
         public static bool IsPinInverted(ShapeStyle style)
         {
-            var ls = style.LineStyle;
-            return (ls.StartArrowStyle.ArrowType == ArrowType.Ellipse)
-                | (ls.EndArrowStyle.ArrowType == ArrowType.Ellipse);
+            return (style.StartArrowStyle.ArrowType == ArrowType.Ellipse)
+                | (style.EndArrowStyle.ArrowType == ArrowType.Ellipse);
         }
 
         /// <summary>
