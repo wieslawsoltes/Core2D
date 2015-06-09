@@ -66,6 +66,14 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public override void Bind()
+        {
+            // TODO: Implement Bind() method.
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="dc"></param>
         /// <param name="renderer"></param>
         /// <param name="dx"></param>

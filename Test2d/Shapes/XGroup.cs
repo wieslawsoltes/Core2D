@@ -58,7 +58,15 @@ namespace Test2d
             get { return _connectors; }
             set { Update(ref _connectors, value); }
         }
-   
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public override void Bind()
+        {
+            // TODO: Implement Bind() method.
+        }
+
         /// <summary>
         /// 
         /// </summary>

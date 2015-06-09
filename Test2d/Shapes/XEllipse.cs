@@ -45,6 +45,15 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public override void Bind()
+        {
+            _topLeft.TryToBind("TopLeft", this.Bindings, this.Record);
+            _bottomRight.TryToBind("BottomRight", this.Bindings, this.Record);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="dc"></param>
         /// <param name="renderer"></param>
         /// <param name="dx"></param>
