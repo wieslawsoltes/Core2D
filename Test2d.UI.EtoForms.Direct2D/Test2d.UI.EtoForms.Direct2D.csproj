@@ -86,7 +86,7 @@
       <Project>{c3e348e1-bf9e-4a71-a1f7-61b7607e0a20}</Project>
       <Name>Test2d.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TestEtoForms\Test2d.UI.EtoForms.Shared.csproj">
+    <ProjectReference Include="..\Test2d.UI.EtoForms.Shared\Test2d.UI.EtoForms.Shared.csproj">
       <Project>{c2d17c89-b904-4bce-8bce-fc65020de7bb}</Project>
       <Name>Test2d.UI.EtoForms.Shared</Name>
     </ProjectReference>
