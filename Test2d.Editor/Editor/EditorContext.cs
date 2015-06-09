@@ -213,6 +213,8 @@ namespace Test2d
         {
             var container = Container.Create("Empty");
 
+            container.Background = ArgbColor.Create(0xFF, 0xFF, 0xFF, 0xFF);
+            
             RenameTemplateLayers(container);
 
             return container;
@@ -227,6 +229,8 @@ namespace Test2d
         {
             var container = Container.Create("Grid");
 
+            container.Background = ArgbColor.Create(0xFF, 0xFF, 0xFF, 0xFF);
+            
             RenameTemplateLayers(container);
 
             var gs = project
@@ -1386,12 +1390,17 @@ namespace Test2d
             }
             catch (Exception ex)
             {
-                if (_editor.Log != null)
+                if (_editor != null &&_editor.Log != null)
                 {
                     _editor.Log.LogError("{0}{1}{2}",
                         ex.Message,
                         Environment.NewLine,
                         ex.StackTrace);
+                }
+                else
+                {
+                    Debug.Print(ex.Message);
+                    Debug.Print(ex.StackTrace);
                 }
             }
         }
