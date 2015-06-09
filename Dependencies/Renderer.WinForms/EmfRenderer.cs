@@ -83,10 +83,10 @@ namespace TestEDITOR
         /// <param name="style"></param>
         /// <param name="scale"></param>
         /// <returns></returns>
-        private Pen ToPen(ShapeStyle style, Func<double, float> scale)
+        private Pen ToPen(BaseStyle style, Func<double, float> scale)
         {
             var pen = new Pen(ToColor(style.Stroke), (float)(style.Thickness / _state.Zoom));
-            switch (style.LineStyle.LineCap)
+            switch (style.LineCap)
             {
                 case Test2d.LineCap.Flat:
                     pen.StartCap = System.Drawing.Drawing2D.LineCap.Flat;
@@ -104,12 +104,12 @@ namespace TestEDITOR
                     pen.DashCap = System.Drawing.Drawing2D.DashCap.Round;
                     break;
             }
-            if (style.LineStyle.Dashes != null)
+            if (style.Dashes != null)
             {
                 // TODO: Convert to correct dash values.
-                pen.DashPattern = style.LineStyle.Dashes.Select(x => (float)x).ToArray();
+                pen.DashPattern = style.Dashes.Select(x => (float)x).ToArray();
             }
-            pen.DashOffset = (float)style.LineStyle.DashOffset;
+            pen.DashOffset = (float)style.DashOffset;
             return pen;
         }
 
@@ -301,8 +301,14 @@ namespace TestEDITOR
         {
             var _gfx = gfx as Graphics;
 
-            Brush fill = ToSolidBrush(line.Style.Fill);
-            Pen stroke = ToPen(line.Style, _scaleToPage);
+            Brush fillLine = ToSolidBrush(line.Style.Fill);
+            Pen strokeLine = ToPen(line.Style, _scaleToPage);
+
+            Brush fillStartArrow = ToSolidBrush(line.Style.StartArrowStyle.Fill);
+            Pen strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
+
+            Brush fillEndArrow = ToSolidBrush(line.Style.EndArrowStyle.Fill);
+            Pen strokeEndArrow = ToPen(line.Style.EndArrowStyle, _scaleToPage);
 
             double _x1 = line.Start.X + dx;
             double _y1 = line.Start.Y + dy;
@@ -316,8 +322,8 @@ namespace TestEDITOR
             float x2 = _scaleToPage(_x2);
             float y2 = _scaleToPage(_y2);
 
-            var sas = line.Style.LineStyle.StartArrowStyle;
-            var eas = line.Style.LineStyle.EndArrowStyle;
+            var sas = line.Style.StartArrowStyle;
+            var eas = line.Style.EndArrowStyle;
             float a1 = (float)(Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI);
             float a2 = (float)(Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI);
 
@@ -353,7 +359,7 @@ namespace TestEDITOR
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
                         var gs = _gfx.Save();
                         _gfx.MultiplyTransform(t1);
-                        DrawRectangleInternal(_gfx, fill, stroke, sas.IsFilled, ref rect);
+                        DrawRectangleInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsFilled, ref rect);
                         _gfx.Restore(gs);
                     }
                     break;
@@ -365,7 +371,7 @@ namespace TestEDITOR
                         var gs = _gfx.Save();
                         _gfx.MultiplyTransform(t1);
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        DrawEllipseInternal(_gfx, fill, stroke, sas.IsFilled, ref rect);
+                        DrawEllipseInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsFilled, ref rect);
                         _gfx.Restore(gs);
                     }
                     break;
@@ -385,8 +391,8 @@ namespace TestEDITOR
                         var p21 = pts[2];
                         var p12 = pts[3];
                         var p22 = pts[4];
-                        DrawLineInternal(_gfx, stroke, ref p11, ref p21);
-                        DrawLineInternal(_gfx, stroke, ref p12, ref p22);
+                        DrawLineInternal(_gfx, strokeStartArrow, ref p11, ref p21);
+                        DrawLineInternal(_gfx, strokeStartArrow, ref p12, ref p22);
                     }
                     break;
             }
@@ -412,7 +418,7 @@ namespace TestEDITOR
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
                         var gs = _gfx.Save();
                         _gfx.MultiplyTransform(t2);
-                        DrawRectangleInternal(_gfx, fill, stroke, eas.IsFilled, ref rect);
+                        DrawRectangleInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsFilled, ref rect);
                         _gfx.Restore(gs);
                     }
                     break;
@@ -424,7 +430,7 @@ namespace TestEDITOR
                         var gs = _gfx.Save();
                         _gfx.MultiplyTransform(t2);
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        DrawEllipseInternal(_gfx, fill, stroke, eas.IsFilled, ref rect);
+                        DrawEllipseInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsFilled, ref rect);
                         _gfx.Restore(gs);
                     }
                     break;
@@ -444,16 +450,22 @@ namespace TestEDITOR
                         var p21 = pts[2];
                         var p12 = pts[3];
                         var p22 = pts[4];
-                        DrawLineInternal(_gfx, stroke, ref p11, ref p21);
-                        DrawLineInternal(_gfx, stroke, ref p12, ref p22);
+                        DrawLineInternal(_gfx, strokeEndArrow, ref p11, ref p21);
+                        DrawLineInternal(_gfx, strokeEndArrow, ref p12, ref p22);
                     }
                     break;
             }
 
-            _gfx.DrawLine(stroke, pt1, pt2);
+            _gfx.DrawLine(strokeLine, pt1, pt2);
 
-            fill.Dispose();
-            stroke.Dispose();
+            fillLine.Dispose();
+            strokeLine.Dispose();
+
+            fillStartArrow.Dispose();
+            strokeStartArrow.Dispose();
+
+            fillEndArrow.Dispose();
+            strokeEndArrow.Dispose();
         }
 
         /// <summary>
