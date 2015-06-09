@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.Wpf", "Test\Test2d.UI.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.Wpf", "Test2d.UI.Wpf\Test2d.UI.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.WinForms", "TestWinForms\Test2d.UI.WinForms.csproj", "{89476BE1-326D-4548-B62A-DE7B2ACC56F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.WinForms", "Test2d.UI.WinForms\Test2d.UI.WinForms.csproj", "{89476BE1-326D-4548-B62A-DE7B2ACC56F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.EtoForms.Direct2D", "TestDirect2D\Test2d.UI.EtoForms.Direct2D.csproj", "{1C74A7B6-A80B-406B-A53F-465740D3742F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.EtoForms.Direct2D", "Test2d.UI.EtoForms.Direct2D\Test2d.UI.EtoForms.Direct2D.csproj", "{1C74A7B6-A80B-406B-A53F-465740D3742F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.EtoForms.Shared", "TestEtoForms\Test2d.UI.EtoForms.Shared.csproj", "{C2D17C89-B904-4BCE-8BCE-FC65020DE7BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.EtoForms.Shared", "Test2d.UI.EtoForms.Shared\Test2d.UI.EtoForms.Shared.csproj", "{C2D17C89-B904-4BCE-8BCE-FC65020DE7BB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{2D76C6F5-844B-4D2D-96D8-B39D49C70706}"
 EndProject
