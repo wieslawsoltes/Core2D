@@ -214,7 +214,7 @@ namespace TestEtoForms
         /// </summary>
         private void InitializeForm()
         {
-            Title = "Test";
+            Title = "Test2d";
             ClientSize = new Size(1000, 650);
             WindowState = WindowState.Maximized;
 
