@@ -58,9 +58,19 @@ namespace Test2d
         /// <param name="g">The green color channel.</param>
         /// <param name="b">The blue color channel.</param>
         /// <returns>The new instance of the ArgbColor class.</returns>
-        public static ArgbColor Create(byte a, byte r, byte g, byte b)
+        public static ArgbColor Create(
+            byte a = 0xFF, 
+            byte r = 0x00, 
+            byte g = 0x00,
+            byte b = 0x00)
         {
-            return new ArgbColor() { A = a, R = r, G = g, B = b };
+            return new ArgbColor() 
+            { 
+                A = a, 
+                R = r, 
+                G = g, 
+                B = b 
+            };
         }
     }
 }
