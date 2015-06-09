@@ -9,7 +9,7 @@
         xmlns:converters="clr-namespace:Test.Converters"
         xmlns:paz="clr-namespace:Test.PanAndZoom"
         xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock"
-        Title="{Binding Editor.Project.Name, StringFormat={}{0} - Test, FallbackValue=Test, TargetNullValue=Test}" 
+        Title="{Binding Editor.Project.Name, StringFormat={}{0} - Test2d, FallbackValue=Test, TargetNullValue=Test}" 
         Height="720" Width="1324"
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
         UseLayoutRounding="True" SnapsToDevicePixels="True"

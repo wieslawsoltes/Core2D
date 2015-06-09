@@ -1251,9 +1251,151 @@
             </TextBox>
         </Grid>
     </DataTemplate>
+    <ControlTemplate x:Key="BaseStyleControlTemplateKey">
+        <StackPanel>
+            <Expander Header="Name" IsExpanded="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                             BorderBrush="{x:Null}" 
+                             Margin="5,2,5,2"
+                             Grid.Row="0" 
+                             Grid.Column="0" 
+                             Grid.ColumnSpan="2"
+                             TextAlignment="Left" 
+                             VerticalAlignment="Center">
+                    </TextBox>
+                </Grid>
+            </Expander>
+            <Expander Header="Stroke" IsExpanded="False">
+                <ContentControl Content="{Binding Stroke}"/>
+            </Expander>
+            <Expander Header="Fill" IsExpanded="False">
+                <ContentControl Content="{Binding Fill}"/>
+            </Expander>
+            <Expander Header="Thickness" IsExpanded="False">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <Slider Value="{Binding Thickness}" 
+                            Minimum="0" 
+                            Maximum="50" 
+                            TickFrequency="0.1" 
+                            SmallChange="0.1" 
+                            LargeChange="1" 
+                            IsSnapToTickEnabled="True" 
+                            Grid.Row="0" 
+                            Grid.Column="0" 
+                            Margin="5,2,5,2">
+                    </Slider>
+                    <TextBox Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                             BorderBrush="{x:Null}"
+                             Margin="5,2,5,2"
+                             Grid.Row="0" 
+                             Grid.Column="1" 
+                             TextAlignment="Center" 
+                             VerticalAlignment="Center">
+                    </TextBox>
+                </Grid>
+            </Expander>
+            <Expander Header="Cap" IsExpanded="False">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Line Cap" 
+                               Margin="5,2,5,2" 
+                               Grid.Row="0"
+                               Grid.Column="0" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Center">
+                    </TextBlock>
+                    <ComboBox ItemsSource="{Binding Source={StaticResource ResourceKey=LineCapValues}}" 
+                              SelectedItem="{Binding LineCap}" 
+                              Grid.Row="0" 
+                              Grid.Column="1" 
+                              Grid.ColumnSpan="2"
+                              Margin="5,2,5,2">
+                    </ComboBox>
+                </Grid>
+            </Expander>
+            <Expander Header="Dash" IsExpanded="False">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Dashes" 
+                               Margin="5,2,5,2" 
+                               Grid.Row="0" 
+                               Grid.Column="0" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Center">
+                    </TextBlock>
+                    <TextBlock Text="Dash Offset" 
+                               Margin="5,2,5,2" 
+                               Grid.Row="1" 
+                               Grid.Column="0" 
+                               TextAlignment="Left" 
+                               VerticalAlignment="Center">
+                    </TextBlock>
+                    <TextBox Text="{Binding Dashes, Converter={StaticResource DoubleToStringConverter}}" 
+                             BorderBrush="{x:Null}" 
+                             Margin="5,2,5,2"
+                             Grid.Row="0" 
+                             Grid.Column="1" 
+                             Grid.ColumnSpan="2"
+                             TextAlignment="Center" 
+                             VerticalAlignment="Center">
+                    </TextBox>
+                    <Slider Value="{Binding DashOffset}" 
+                            Minimum="0" 
+                            Maximum="15" 
+                            TickFrequency="0.1" 
+                            SmallChange="0.1"
+                            LargeChange="1"
+                            IsSnapToTickEnabled="True" 
+                            Grid.Row="1" 
+                            Grid.Column="1" 
+                            Margin="5,2,5,2">
+                    </Slider>
+                    <TextBox Text="{Binding DashOffset, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                             BorderBrush="{x:Null}" 
+                             Margin="5,2,5,2"
+                             Grid.Row="1" 
+                             Grid.Column="2" 
+                             TextAlignment="Center" 
+                             VerticalAlignment="Center">
+                    </TextBox>
+                </Grid>
+            </Expander>
+        </StackPanel>
+    </ControlTemplate>
     <DataTemplate DataType="{x:Type core:ArrowStyle}">
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -1344,6 +1486,13 @@
                      TextAlignment="Center" 
                      VerticalAlignment="Center">
             </TextBox>
+            <Expander Header="Base Style"
+                      IsExpanded="False"
+                      Grid.Row="4" 
+                      Grid.Column="0" 
+                      Grid.ColumnSpan="3">
+                <Control Template="{StaticResource BaseStyleControlTemplateKey}"/>
+            </Expander>
         </Grid>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:TextStyle}">
@@ -1461,141 +1610,15 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:ShapeStyle}">
         <StackPanel>
-            <Expander Header="Name" IsExpanded="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                             BorderBrush="{x:Null}" 
-                             Margin="5,2,5,2"
-                             Grid.Row="0" 
-                             Grid.Column="0" 
-                             Grid.ColumnSpan="2"
-                             TextAlignment="Left" 
-                             VerticalAlignment="Center">
-                    </TextBox>
-                </Grid>
-            </Expander>
-            <Expander Header="Stroke" IsExpanded="False">
-                <ContentControl Content="{Binding Stroke}"/>
-            </Expander>
-            <Expander Header="Fill" IsExpanded="False">
-                <ContentControl Content="{Binding Fill}"/>
-            </Expander>
-            <Expander Header="Thickness" IsExpanded="False">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <Slider Value="{Binding Thickness}" 
-                            Minimum="0" 
-                            Maximum="50" 
-                            TickFrequency="0.1" 
-                            SmallChange="0.1" 
-                            LargeChange="1" 
-                            IsSnapToTickEnabled="True" 
-                            Grid.Row="0" 
-                            Grid.Column="0" 
-                            Margin="5,2,5,2">
-                    </Slider>
-                    <TextBox Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                             BorderBrush="{x:Null}"
-                             Margin="5,2,5,2"
-                             Grid.Row="0" 
-                             Grid.Column="1" 
-                             TextAlignment="Center" 
-                             VerticalAlignment="Center">
-                    </TextBox>
-                </Grid>
-            </Expander>
+            <Control Template="{StaticResource BaseStyleControlTemplateKey}"/>
             <Expander Header="Text" IsExpanded="False">
                 <ContentControl Content="{Binding TextStyle}"/>
             </Expander>
-            <Expander Header="Line Start" IsExpanded="False">
-                <ContentControl Content="{Binding LineStyle.StartArrowStyle}"/>
+            <Expander Header="Line Start Arrow" IsExpanded="False">
+                <ContentControl Content="{Binding StartArrowStyle}"/>
             </Expander>
-            <Expander Header="Line End" IsExpanded="False">
-                <ContentControl Content="{Binding LineStyle.EndArrowStyle}"/>
-            </Expander>
-            <Expander Header="Line" IsExpanded="False">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Line Cap" 
-                               Margin="5,2,5,2" 
-                               Grid.Row="0"
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock Text="Dashes" 
-                               Margin="5,2,5,2" 
-                               Grid.Row="2" 
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock Text="Dash Offset" 
-                               Margin="5,2,5,2" 
-                               Grid.Row="3" 
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
-                    </TextBlock>
-                    <ComboBox ItemsSource="{Binding Source={StaticResource ResourceKey=LineCapValues}}" 
-                              SelectedItem="{Binding LineStyle.LineCap}" 
-                              Grid.Row="0" 
-                              Grid.Column="1" 
-                              Grid.ColumnSpan="2"
-                              Margin="5,2,5,2">
-                    </ComboBox>
-                    <Slider Value="{Binding LineStyle.DashOffset}" 
-                            Minimum="0" 
-                            Maximum="15" 
-                            TickFrequency="0.1" 
-                            SmallChange="0.1"
-                            LargeChange="1"
-                            IsSnapToTickEnabled="True" 
-                            Grid.Row="3" 
-                            Grid.Column="1" 
-                            Margin="5,2,5,2">
-                    </Slider>
-                    <TextBox Text="{Binding LineStyle.Dashes, Converter={StaticResource DoubleToStringConverter}}" 
-                             BorderBrush="{x:Null}" 
-                             Margin="5,2,5,2"
-                             Grid.Row="2" 
-                             Grid.Column="1" 
-                             Grid.ColumnSpan="2"
-                             TextAlignment="Center" 
-                             VerticalAlignment="Center">
-                    </TextBox>
-                    <TextBox Text="{Binding LineStyle.DashOffset, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                             BorderBrush="{x:Null}" 
-                             Margin="5,2,5,2"
-                             Grid.Row="3" 
-                             Grid.Column="2" 
-                             TextAlignment="Center" 
-                             VerticalAlignment="Center">
-                    </TextBox>
-                </Grid>
+            <Expander Header="Line End Arrow" IsExpanded="False">
+                <ContentControl Content="{Binding EndArrowStyle}"/>
             </Expander>
             <Expander Header="Line MaxLength" IsExpanded="False">
                 <Grid>
