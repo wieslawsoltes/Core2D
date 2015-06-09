@@ -224,10 +224,10 @@ namespace TestEDITOR
         /// <param name="style"></param>
         /// <param name="scale"></param>
         /// <returns></returns>
-        private static XPen ToXPen(Test2d.ShapeStyle style, Func<double, double> scale)
+        private static XPen ToXPen(Test2d.BaseStyle style, Func<double, double> scale)
         {
             var pen = new XPen(ToXColor(style.Stroke), XUnit.FromPoint(style.Thickness));
-            switch (style.LineStyle.LineCap)
+            switch (style.LineCap)
             {
                 case Test2d.LineCap.Flat:
                     pen.LineCap = XLineCap.Flat;
@@ -239,12 +239,12 @@ namespace TestEDITOR
                     pen.LineCap = XLineCap.Round;
                     break;
             }
-            if (style.LineStyle.Dashes != null)
+            if (style.Dashes != null)
             {
                 // TODO: Convert to correct dash values.
-                pen.DashPattern = style.LineStyle.Dashes;
+                pen.DashPattern = style.Dashes;
             }
-            pen.DashOffset = style.LineStyle.DashOffset;
+            pen.DashOffset = style.DashOffset;
             return pen;
         }
 
@@ -406,8 +406,14 @@ namespace TestEDITOR
         {
             var _gfx = gfx as XGraphics;
 
-            XSolidBrush fill = ToXSolidBrush(line.Style.Fill);
-            XPen stroke = ToXPen(line.Style, _scaleToPage);
+            XSolidBrush fillLine = ToXSolidBrush(line.Style.Fill);
+            XPen strokeLine = ToXPen(line.Style, _scaleToPage);
+
+            XSolidBrush fillStartArrow = ToXSolidBrush(line.Style.StartArrowStyle.Fill);
+            XPen strokeStartArrow = ToXPen(line.Style.StartArrowStyle, _scaleToPage);
+
+            XSolidBrush fillEndArrow = ToXSolidBrush(line.Style.EndArrowStyle.Fill);
+            XPen strokeEndArrow = ToXPen(line.Style.EndArrowStyle, _scaleToPage);
 
             double _x1 = line.Start.X + dx;
             double _y1 = line.Start.Y + dy;
@@ -421,8 +427,8 @@ namespace TestEDITOR
             double x2 = _scaleToPage(_x2);
             double y2 = _scaleToPage(_y2);
 
-            var sas = line.Style.LineStyle.StartArrowStyle;
-            var eas = line.Style.LineStyle.EndArrowStyle;
+            var sas = line.Style.StartArrowStyle;
+            var eas = line.Style.EndArrowStyle;
             double a1 = Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI;
             double a2 = Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI;
 
@@ -456,7 +462,7 @@ namespace TestEDITOR
                         var rect = new XRect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
                         _gfx.Save();
                         _gfx.RotateAtTransform(a1, c1);
-                        DrawRectangleInternal(_gfx, fill, stroke, sas.IsFilled, ref rect);
+                        DrawRectangleInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsFilled, ref rect);
                         _gfx.Restore();
                     }
                     break;
@@ -466,7 +472,7 @@ namespace TestEDITOR
                         _gfx.Save();
                         _gfx.RotateAtTransform(a1, c1);
                         var rect = new XRect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        DrawEllipseInternal(_gfx, fill, stroke, sas.IsFilled, ref rect);
+                        DrawEllipseInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsFilled, ref rect);
                         _gfx.Restore();
                     }
                     break;
@@ -477,8 +483,8 @@ namespace TestEDITOR
                         var p21 = t1.Transform(new XPoint(x1, y1));
                         var p12 = t1.Transform(new XPoint(x1 - sizeX1, y1 - sizeY1));
                         var p22 = t1.Transform(new XPoint(x1, y1));
-                        DrawLineInternal(_gfx, stroke, ref p11, ref p21);
-                        DrawLineInternal(_gfx, stroke, ref p12, ref p22);
+                        DrawLineInternal(_gfx, strokeStartArrow, ref p11, ref p21);
+                        DrawLineInternal(_gfx, strokeStartArrow, ref p12, ref p22);
                     }
                     break;
             }
@@ -502,7 +508,7 @@ namespace TestEDITOR
                         var rect = new XRect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
                         _gfx.Save();
                         _gfx.RotateAtTransform(a2, c2);
-                        DrawRectangleInternal(_gfx, fill, stroke, eas.IsFilled, ref rect);
+                        DrawRectangleInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsFilled, ref rect);
                         _gfx.Restore();
                     }
                     break;
@@ -512,7 +518,7 @@ namespace TestEDITOR
                         _gfx.Save();
                         _gfx.RotateAtTransform(a2, c2);
                         var rect = new XRect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        DrawEllipseInternal(_gfx, fill, stroke, eas.IsFilled, ref rect);
+                        DrawEllipseInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsFilled, ref rect);
                         _gfx.Restore();
                     }
                     break;
@@ -523,13 +529,13 @@ namespace TestEDITOR
                         var p21 = t2.Transform(new XPoint(x2, y2));
                         var p12 = t2.Transform(new XPoint(x2 - sizeX2, y2 - sizeY2));
                         var p22 = t2.Transform(new XPoint(x2, y2));
-                        DrawLineInternal(_gfx, stroke, ref p11, ref p21);
-                        DrawLineInternal(_gfx, stroke, ref p12, ref p22);
+                        DrawLineInternal(_gfx, strokeEndArrow, ref p11, ref p21);
+                        DrawLineInternal(_gfx, strokeEndArrow, ref p12, ref p22);
                     }
                     break;
             }
 
-            _gfx.DrawLine(stroke, pt1, pt2);
+            _gfx.DrawLine(strokeLine, pt1, pt2);
         }
 
         /// <summary>
