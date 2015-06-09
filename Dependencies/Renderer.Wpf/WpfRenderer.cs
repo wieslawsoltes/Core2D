@@ -23,6 +23,7 @@ namespace Test
     {
         private const bool _enableGuidelines = true;
         private bool _enableStyleCache = true;
+        private bool _enableArrowStyleCache = true;
         private bool _enableArcCache = true;
         private bool _enableBezierCache = true;
         private bool _enableQBezierCache = true;
@@ -30,6 +31,7 @@ namespace Test
         private bool _enableImageCache = true;
         private bool _enablePathCache = true;
         private IDictionary<ShapeStyle, Tuple<Brush, Pen>> _styleCache;
+        private IDictionary<ArrowStyle, Tuple<Brush, Pen>> _arrowStyleCache;
         private IDictionary<XArc, PathGeometry> _arcCache;
         private IDictionary<XBezier, PathGeometry> _bezierCache;
         private IDictionary<XQBezier, PathGeometry> _qbezierCache;
@@ -126,15 +128,13 @@ namespace Test
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="ls"></param>
-        /// <param name="color"></param>
-        /// <param name="thickness"></param>
+        /// <param name="style"></param>
         /// <returns></returns>
-        private static Pen CreatePen(LineStyle ls, ArgbColor color, double thickness)
+        private static Pen CreatePen(BaseStyle style, double thickness)
         {
-            var brush = CreateBrush(color);
+            var brush = CreateBrush(style.Stroke);
             var pen = new Pen(brush, thickness);
-            switch (ls.LineCap)
+            switch (style.LineCap)
             {
                 case LineCap.Flat:
                     pen.StartLineCap = PenLineCap.Flat;
@@ -152,8 +152,8 @@ namespace Test
                     pen.DashCap = PenLineCap.Round;
                     break;
             }
-            pen.DashStyle = new DashStyle(ls.Dashes, ls.DashOffset);
-            pen.DashStyle.Offset = ls.DashOffset;
+            pen.DashStyle = new DashStyle(style.Dashes, style.DashOffset);
+            pen.DashStyle.Offset = style.DashOffset;
             pen.Freeze();
             return pen;
         }
@@ -359,6 +359,7 @@ namespace Test
         public void ClearCache()
         {
             _styleCache = new Dictionary<ShapeStyle, Tuple<Brush, Pen>>();
+            _arrowStyleCache = new Dictionary<ArrowStyle, Tuple<Brush, Pen>>();
             _arcCache = new Dictionary<XArc, PathGeometry>();
             _bezierCache = new Dictionary<XBezier, PathGeometry>();
             _qbezierCache = new Dictionary<XQBezier, PathGeometry>();
@@ -433,30 +434,69 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
-            double thickness = line.Style.Thickness / _state.Zoom;
-            double half = thickness / 2.0;
+            double zoom = _state.Zoom;
+            double thicknessLine = line.Style.Thickness / zoom;
+            double halfLine = thicknessLine / 2.0;
+            double thicknessStartArrow = line.Style.StartArrowStyle.Thickness / zoom;
+            double halfStartArrow = thicknessStartArrow / 2.0;
+            double thicknessEndArrow = line.Style.EndArrowStyle.Thickness / zoom;
+            double halfEndArrow = thicknessEndArrow / 2.0;
             
-            Tuple<Brush, Pen> cache = null;
-            Brush fill;
-            Pen stroke;
+            // line style
+            Tuple<Brush, Pen> lineCache = null;
+            Brush fillLine;
+            Pen strokeLine;
             if (_enableStyleCache 
-                && _styleCache.TryGetValue(line.Style, out cache))
+                && _styleCache.TryGetValue(line.Style, out lineCache))
             {
-                fill = cache.Item1;
-                stroke = cache.Item2;
+                fillLine = lineCache.Item1;
+                strokeLine = lineCache.Item2;
             }
             else
             {
-                fill = CreateBrush(line.Style.Fill);
-                stroke = CreatePen(
-                    line.Style.LineStyle,
-                    line.Style.Stroke,
-                    thickness);
-
+                fillLine = CreateBrush(line.Style.Fill);
+                strokeLine = CreatePen(line.Style, thicknessLine);
                 if (_enableStyleCache)
-                    _styleCache.Add(line.Style, Tuple.Create(fill, stroke));
+                    _styleCache.Add(line.Style, Tuple.Create(fillLine, strokeLine));
+            }
+        
+            // start arrow style
+            Tuple<Brush, Pen> startArrowCache = null;
+            Brush fillStartArrow;
+            Pen strokeStartArrow;
+            if (_enableArrowStyleCache 
+                && _arrowStyleCache.TryGetValue(line.Style.StartArrowStyle, out startArrowCache))
+            {
+                fillStartArrow = startArrowCache.Item1;
+                strokeStartArrow = startArrowCache.Item2;
+            }
+            else
+            {
+                fillStartArrow = CreateBrush(line.Style.StartArrowStyle.Fill);
+                strokeStartArrow = CreatePen(line.Style.StartArrowStyle, thicknessStartArrow);
+                if (_enableArrowStyleCache)
+                    _arrowStyleCache.Add(line.Style.StartArrowStyle, Tuple.Create(fillStartArrow, strokeStartArrow));
+            }
+            
+            // end arrow style
+            Tuple<Brush, Pen> endArrowCache = null;
+            Brush fillEndArrow;
+            Pen strokeEndArrow;
+            if (_enableArrowStyleCache 
+                && _arrowStyleCache.TryGetValue(line.Style.EndArrowStyle, out endArrowCache))
+            {
+                fillEndArrow = endArrowCache.Item1;
+                strokeEndArrow = endArrowCache.Item2;
+            }
+            else
+            {
+                fillEndArrow = CreateBrush(line.Style.EndArrowStyle.Fill);
+                strokeEndArrow = CreatePen(line.Style.EndArrowStyle, thicknessEndArrow);
+                if (_enableArrowStyleCache)
+                    _arrowStyleCache.Add(line.Style.EndArrowStyle, Tuple.Create(fillStartArrow, strokeEndArrow));
             }
 
+            // line max length
             double x1 = line.Start.X + dx;
             double y1 = line.Start.Y + dy;
             double x2 = line.End.X + dx;
@@ -464,8 +504,9 @@ namespace Test
 
             XLine.SetMaxLength(line, ref x1, ref y1, ref x2, ref y2);
 
-            var sas = line.Style.LineStyle.StartArrowStyle;
-            var eas = line.Style.LineStyle.EndArrowStyle;
+            // arrow transforms
+            var sas = line.Style.StartArrowStyle;
+            var eas = line.Style.EndArrowStyle;
             double a1 = Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI;
             double a2 = Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI;
             bool doRectTransform1 = a1 % 90.0 != 0.0;
@@ -476,12 +517,13 @@ namespace Test
 
             Point pt1;
             Point pt2;
-
+   
+            // draw start arrow
             double radiusX1 = sas.RadiusX;
             double radiusY1 = sas.RadiusY;
             double sizeX1 = 2.0 * radiusX1;
             double sizeY1 = 2.0 * radiusY1;
-    
+
             switch (sas.ArrowType) 
             {
                 default:
@@ -497,13 +539,13 @@ namespace Test
                         if (doRectTransform1)
                         {
                             _dc.PushTransform(t1);
-                            DrawRectangleInternal(_dc, half, fill, stroke, sas.IsFilled, ref rect);
+                            DrawRectangleInternal(_dc, halfStartArrow, fillStartArrow, strokeStartArrow, sas.IsFilled, ref rect);
                             _dc.Pop();
                         }
                         else
                         {
                             var bounds = t1.TransformBounds(rect);
-                            DrawRectangleInternal(_dc, half, fill, stroke, sas.IsFilled, ref bounds);
+                            DrawRectangleInternal(_dc, halfStartArrow, fillStartArrow, strokeStartArrow, sas.IsFilled, ref bounds);
                         }
                     }
                     break;
@@ -512,7 +554,7 @@ namespace Test
                         pt1 = t1.Transform(new Point(x1 - sizeX1, y1));
                         _dc.PushTransform(t1);
                         var c = new Point(x1 - radiusX1, y1);
-                        DrawEllipseInternal(_dc, half, fill, stroke, sas.IsFilled, ref c, radiusX1, radiusY1);
+                        DrawEllipseInternal(_dc, halfStartArrow, fillStartArrow, strokeStartArrow, sas.IsFilled, ref c, radiusX1, radiusY1);
                         _dc.Pop();
                     }
                     break;
@@ -523,12 +565,13 @@ namespace Test
                         var p21 = t1.Transform(new Point(x1, y1));
                         var p12 = t1.Transform(new Point(x1 - sizeX1, y1 - sizeY1));
                         var p22 = t1.Transform(new Point(x1, y1));
-                        DrawLineInternal(_dc, half, stroke, ref p11, ref p21);
-                        DrawLineInternal(_dc, half, stroke, ref p12, ref p22);
+                        DrawLineInternal(_dc, halfStartArrow, strokeStartArrow, ref p11, ref p21);
+                        DrawLineInternal(_dc, halfStartArrow, strokeStartArrow, ref p12, ref p22);
                     }
                     break;
             }
             
+            // draw end arrow
             double radiusX2 = eas.RadiusX;
             double radiusY2 = eas.RadiusY;
             double sizeX2 = 2.0 * radiusX2;
@@ -549,13 +592,13 @@ namespace Test
                         if (doRectTransform2)
                         {
                             _dc.PushTransform(t2);
-                            DrawRectangleInternal(_dc, half, fill, stroke, eas.IsFilled, ref rect);
+                            DrawRectangleInternal(_dc, halfEndArrow, fillEndArrow, strokeEndArrow, eas.IsFilled, ref rect);
                             _dc.Pop();
                         }
                         else
                         {
                             var bounds = t2.TransformBounds(rect);
-                            DrawRectangleInternal(_dc, half, fill, stroke, eas.IsFilled, ref bounds);
+                            DrawRectangleInternal(_dc, halfEndArrow, fillEndArrow, strokeEndArrow, eas.IsFilled, ref bounds);
                         }
                     }
                     break;
@@ -564,7 +607,7 @@ namespace Test
                         pt2 = t2.Transform(new Point(x2 - sizeX2, y2));
                         _dc.PushTransform(t2);
                         var c = new Point(x2 - radiusX2, y2);
-                        DrawEllipseInternal(_dc, half, fill, stroke, eas.IsFilled, ref c, radiusX2, radiusY2);
+                        DrawEllipseInternal(_dc, halfEndArrow, fillEndArrow, strokeEndArrow, eas.IsFilled, ref c, radiusX2, radiusY2);
                         _dc.Pop();
                     }
                     break;
@@ -575,13 +618,14 @@ namespace Test
                          var p21 = t2.Transform(new Point(x2, y2));
                          var p12 = t2.Transform(new Point(x2 - sizeX2, y2 - sizeY2));
                          var p22 = t2.Transform(new Point(x2, y2));
-                         DrawLineInternal(_dc, half, stroke, ref p11, ref p21);
-                         DrawLineInternal(_dc, half, stroke, ref p12, ref p22);
+                         DrawLineInternal(_dc, halfEndArrow, strokeEndArrow, ref p11, ref p21);
+                         DrawLineInternal(_dc, halfEndArrow, strokeEndArrow, ref p12, ref p22);
                     }
                     break;
             }
 
-            DrawLineInternal(_dc, half, stroke, ref pt1, ref pt2);
+            // draw line using points from arrow transforms
+            DrawLineInternal(_dc, halfLine, strokeLine, ref pt1, ref pt2);
         }
 
         /// <summary>
@@ -612,11 +656,7 @@ namespace Test
             else
             {
                 fill = CreateBrush(rectangle.Style.Fill);
-                stroke = CreatePen(
-                    rectangle.Style.LineStyle,
-                    rectangle.Style.Stroke,
-                    thickness);
-
+                stroke = CreatePen(rectangle.Style, thickness);
                 if (_enableStyleCache)
                     _styleCache.Add(rectangle.Style, Tuple.Create(fill, stroke));
             }
@@ -657,11 +697,7 @@ namespace Test
             else
             {
                 fill = CreateBrush(ellipse.Style.Fill);
-                stroke = CreatePen(
-                    ellipse.Style.LineStyle,
-                    ellipse.Style.Stroke,
-                    thickness);
-
+                stroke = CreatePen(ellipse.Style, thickness);
                 if (_enableStyleCache)
                     _styleCache.Add(ellipse.Style, Tuple.Create(fill, stroke));
             }
@@ -711,11 +747,7 @@ namespace Test
             else
             {
                 fill = CreateBrush(arc.Style.Fill);
-                stroke = CreatePen(
-                    arc.Style.LineStyle,
-                    arc.Style.Stroke,
-                    thickness);
-
+                stroke = CreatePen(arc.Style, thickness);
                 if (_enableStyleCache)
                     _styleCache.Add(arc.Style, Tuple.Create(fill, stroke));
             }
@@ -791,11 +823,7 @@ namespace Test
             else
             {
                 fill = CreateBrush(bezier.Style.Fill);
-                stroke = CreatePen(
-                    bezier.Style.LineStyle,
-                    bezier.Style.Stroke,
-                    thickness);
-
+                stroke = CreatePen(bezier.Style, thickness);
                 if (_enableStyleCache)
                     _styleCache.Add(bezier.Style, Tuple.Create(fill, stroke));
             }
@@ -866,11 +894,7 @@ namespace Test
             else
             {
                 fill = CreateBrush(qbezier.Style.Fill);
-                stroke = CreatePen(
-                    qbezier.Style.LineStyle,
-                    qbezier.Style.Stroke,
-                    thickness);
-
+                stroke = CreatePen(qbezier.Style, thickness);
                 if (_enableStyleCache)
                     _styleCache.Add(qbezier.Style, Tuple.Create(fill, stroke));
             }
@@ -940,11 +964,7 @@ namespace Test
             else
             {
                 fill = CreateBrush(text.Style.Fill);
-                stroke = CreatePen(
-                    text.Style.LineStyle,
-                    text.Style.Stroke,
-                    thickness);
-
+                stroke = CreatePen(text.Style, thickness);
                 if (_enableStyleCache)
                     _styleCache.Add(text.Style, Tuple.Create(fill, stroke));
             }
@@ -1073,11 +1093,7 @@ namespace Test
             else
             {
                 fill = CreateBrush(image.Style.Fill);
-                stroke = CreatePen(
-                    image.Style.LineStyle,
-                    image.Style.Stroke,
-                    thickness);
-
+                stroke = CreatePen(image.Style, thickness);
                 if (_enableStyleCache)
                     _styleCache.Add(image.Style, Tuple.Create(fill, stroke));
             }
@@ -1161,11 +1177,7 @@ namespace Test
             else
             {
                 fill = CreateBrush(path.Style.Fill);
-                stroke = CreatePen(
-                    path.Style.LineStyle,
-                    path.Style.Stroke,
-                    thickness);
-
+                stroke = CreatePen(path.Style, thickness);
                 if (_enableStyleCache)
                     _styleCache.Add(path.Style, Tuple.Create(fill, stroke));
             }
