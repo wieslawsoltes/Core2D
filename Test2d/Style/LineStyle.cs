@@ -72,9 +72,9 @@ namespace Test2d
         public static LineStyle Create(
             string name = "",
             MaxLengthFlags maxLengthFlags = MaxLengthFlags.Disabled,
-            double maxLength = 0.0,
-            ShapeState maxLengthStartState = ShapeState.Default,
-            ShapeState maxLengthEndState = ShapeState.Default)
+            double maxLength = 15.0,
+            ShapeState maxLengthStartState = ShapeState.Connector | ShapeState.Output,
+            ShapeState maxLengthEndState = ShapeState.Connector | ShapeState.Input)
         {
             return new LineStyle() 
             { 
