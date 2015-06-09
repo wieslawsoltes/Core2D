@@ -616,6 +616,30 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="owner"></param>
+        private void ResetRecordCommandHandler(object owner)
+        {
+            if (owner != null)
+            {
+                if (owner is BaseShape)
+                {
+                    var shape = owner as BaseShape;
+                    var record = shape.Record;
+
+                    if (record != null)
+                    {
+                        var previous = record;
+                        var next = default(Record);
+                        _editor.History.Snapshot(previous, next, (p) => shape.Record = p);
+                        shape.Record = next;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="owner"></param>
         private void AddBindingCommandHandler(object owner)
         {
             if (owner != null)
@@ -1230,6 +1254,11 @@ namespace Test2d
                     new DelegateCommand(
                         () => RemoveRecordCommandHandler(),
                         () => IsEditMode());
+
+                _commands.ResetRecordCommand = 
+                    new DelegateCommand<object>(
+                        (owner) => ResetRecordCommandHandler(owner),
+                        (owner) => IsEditMode());
 
                 _commands.AddBindingCommand = 
                     new DelegateCommand<object>(
@@ -3419,6 +3448,8 @@ namespace Test2d
             (_commands.RemoveDatabaseCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.AddRecordCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.RemoveRecordCommand as DelegateCommand).RaiseCanExecuteChanged();
+
+            (_commands.ResetRecordCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
 
             (_commands.AddBindingCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.RemoveBindingCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
