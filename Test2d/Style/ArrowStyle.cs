@@ -106,6 +106,7 @@ namespace Test2d
         /// <summary>
         /// Creates a new instance of the ArrowStyle class.
         /// </summary>
+        /// <param name="name">The arrow style name.</param>
         /// <param name="source">The BaseStyle source object.</param>
         /// <param name="arrowType">The arrow type.</param>
         /// <param name="isFilled">The arow shape fill flag.</param>
@@ -113,14 +114,16 @@ namespace Test2d
         /// <param name="radiusY">The arrow Y axis radius.</param>
         /// <returns>The new instance of the ArrowStyle class.</returns>
         public static ArrowStyle Create(
+            string name,
             BaseStyle source,
             ArrowType arrowType = ArrowType.None,
             bool isFilled = false,
             double radiusX = 5.0,
-            double radiusY = 3.0)
+            double radiusY = 5.0)
         {
             return new ArrowStyle(source) 
             { 
+                Name = name,
                 ArrowType = arrowType,
                 IsFilled = isFilled,
                 RadiusX = radiusX,

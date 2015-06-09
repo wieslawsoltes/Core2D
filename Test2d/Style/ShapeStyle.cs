@@ -97,8 +97,8 @@ namespace Test2d
                 TextStyle = textStyle ?? TextStyle.Create()
             };
             
-            style.StartArrowStyle = startArrowStyle ?? ArrowStyle.Create(style);
-            style.EndArrowStyle = endArrowStyle ?? ArrowStyle.Create(style);
+            style.StartArrowStyle = startArrowStyle ?? ArrowStyle.Create("Start", style);
+            style.EndArrowStyle = endArrowStyle ?? ArrowStyle.Create("End", style);
             
             return style;
         }
