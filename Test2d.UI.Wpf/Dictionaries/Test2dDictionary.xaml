@@ -1035,84 +1035,84 @@
     <ControlTemplate x:Key="MaxLengthControlTemplateKey">
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Disabled" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Disabled}}">
+                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Disabled}}">
             </CheckBox>
             <CheckBox Content="Start" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Start}}">
+                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Start}}">
             </CheckBox>
             <CheckBox Content="End" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.End}}">
+                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.End}}">
             </CheckBox>
             <CheckBox Content="Vertical" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Vertical}}">
+                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Vertical}}">
             </CheckBox>
             <CheckBox Content="Horizontal" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Horizontal}}">
+                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Horizontal}}">
             </CheckBox>
             <CheckBox Content="All" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.All}}">
+                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.All}}">
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
     <ControlTemplate x:Key="StartStateControlTemplateKey">
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Default" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
             </CheckBox>
             <CheckBox Content="Visible" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
             </CheckBox>
             <CheckBox Content="Printable" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
             </CheckBox>
             <CheckBox Content="Locked" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
             </CheckBox>
             <CheckBox Content="Connector" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
             </CheckBox>
             <CheckBox Content="None" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
             </CheckBox>
             <CheckBox Content="Standalone" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
             </CheckBox>
             <CheckBox Content="Input" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
             </CheckBox>
             <CheckBox Content="Output" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
     <ControlTemplate x:Key="EndStateControlTemplateKey">
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Default" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
             </CheckBox>
             <CheckBox Content="Visible" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
             </CheckBox>
             <CheckBox Content="Printable" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
             </CheckBox>
             <CheckBox Content="Locked" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
             </CheckBox>
             <CheckBox Content="Connector" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
             </CheckBox>
             <CheckBox Content="None" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
             </CheckBox>
             <CheckBox Content="Standalone" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
             </CheckBox>
             <CheckBox Content="Input" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
             </CheckBox>
             <CheckBox Content="Output" Margin="1"
-                      IsChecked="{Binding Path=LineStyle.MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
@@ -1608,6 +1608,46 @@
             </ComboBox>
         </Grid>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type core:LineStyle}">
+        <TabControl>
+            <TabItem Header="Flags">
+                <Control Template="{StaticResource MaxLengthControlTemplateKey}"/>
+            </TabItem>
+            <TabItem Header="Length">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <Slider
+                        Value="{Binding MaxLength}" 
+                        Minimum="0" 
+                        Maximum="30" 
+                        TickFrequency="0.1" 
+                        SmallChange="0.1"
+                        LargeChange="1"
+                        IsSnapToTickEnabled="True" 
+                        Grid.Column="0" 
+                        Margin="5,2,5,2">
+                    </Slider>
+                    <TextBox
+                        Text="{Binding MaxLength, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                        BorderBrush="{x:Null}" 
+                        Margin="5,2,5,2"
+                        Grid.Column="1" 
+                        TextAlignment="Center" 
+                        VerticalAlignment="Center">
+                    </TextBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Start">
+                <Control Template="{StaticResource StartStateControlTemplateKey}"/>
+            </TabItem>
+            <TabItem Header="End">
+                <Control Template="{StaticResource EndStateControlTemplateKey}"/>
+            </TabItem>
+        </TabControl>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type core:ShapeStyle}">
         <StackPanel>
             <Control Template="{StaticResource BaseStyleControlTemplateKey}"/>
@@ -1621,81 +1661,7 @@
                 <ContentControl Content="{Binding EndArrowStyle}"/>
             </Expander>
             <Expander Header="Line MaxLength" IsExpanded="False">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Flags" 
-                               Margin="5,2,5,2" 
-                               Grid.Row="0"
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Top">
-                    </TextBlock>
-                    <TextBlock Text="Length" 
-                               Margin="5,2,5,2" 
-                               Grid.Row="1" 
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock Text="StartState" 
-                               Margin="5,2,5,2" 
-                               Grid.Row="2" 
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Top">
-                    </TextBlock>
-                    <TextBlock Text="EndState" 
-                               Margin="5,2,5,2" 
-                               Grid.Row="3" 
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Top">
-                    </TextBlock>
-                    <Control Grid.Row="0" 
-                             Grid.Column="1" 
-                             Grid.ColumnSpan="2" 
-                             Template="{StaticResource MaxLengthControlTemplateKey}">
-                    </Control>
-                    <Slider Value="{Binding LineStyle.MaxLength}" 
-                            Minimum="0" 
-                            Maximum="30" 
-                            TickFrequency="0.1" 
-                            SmallChange="0.1"
-                            LargeChange="1"
-                            IsSnapToTickEnabled="True" 
-                            Grid.Row="1" 
-                            Grid.Column="1" 
-                            Margin="5,2,5,2">
-                    </Slider>
-                    <TextBox Text="{Binding LineStyle.MaxLength, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                             BorderBrush="{x:Null}" 
-                             Margin="5,2,5,2"
-                             Grid.Row="1" 
-                             Grid.Column="2" 
-                             TextAlignment="Center" 
-                             VerticalAlignment="Center">
-                    </TextBox>
-                    <Control Grid.Row="2" 
-                             Grid.Column="1" 
-                             Grid.ColumnSpan="2" 
-                             Template="{StaticResource StartStateControlTemplateKey}">
-                    </Control>
-                    <Control Grid.Row="3" 
-                             Grid.Column="1" 
-                             Grid.ColumnSpan="2" 
-                             Template="{StaticResource EndStateControlTemplateKey}">
-                    </Control>
-                </Grid>
+                <ContentControl Content="{Binding LineStyle}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -1929,6 +1895,13 @@
             </ItemsControl>
         </Grid>
     </ControlTemplate>
+    <ControlTemplate x:Key="RecordMenu">
+        <Menu Background="Transparent" HorizontalAlignment="Right">
+            <MenuItem Command="{Binding DataContext.Commands.ResetRecordCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                      CommandParameter="{Binding}" 
+                      Header="X"/>
+        </Menu>
+    </ControlTemplate>
     <ControlTemplate x:Key="RecordControlTemplateKey">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -1937,10 +1910,12 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="Name">
+            <Control Template="{StaticResource RecordMenu}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="2,0,2,0"/>
+            <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,2,5,2" VerticalAlignment="Center" Text="Name">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -1952,7 +1927,7 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBlock Grid.Column="1" Margin="5,2,5,2" VerticalAlignment="Center" Text="Value">
+            <TextBlock Grid.Column="1" Grid.Row="1" Margin="5,2,5,2" VerticalAlignment="Center" Text="Value">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -1965,7 +1940,7 @@
                 </TextBlock.Style>
             </TextBlock>
             <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" 
-                          Grid.Row="1" Grid.Column="0"
+                          Grid.Row="2" Grid.Column="0"
                           ItemsSource="{Binding Record.Columns, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -1977,7 +1952,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" 
-                          Grid.Row="1" Grid.Column="1"
+                          Grid.Row="2" Grid.Column="1"
                           ItemsSource="{Binding Record.Values, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -1990,12 +1965,23 @@
             </ItemsControl>
         </Grid>
     </ControlTemplate>
+    <ControlTemplate x:Key="DataControlTemplate">
+        <TabControl>
+            <TabItem Header="Record">
+                <Control Template="{StaticResource RecordControlTemplateKey}"/>
+            </TabItem>
+            <TabItem Header="Bindings">
+                <Control Template="{StaticResource BindingsControlTemplateKey}"/>
+            </TabItem>
+            <TabItem Header="Properties">
+                <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
+            </TabItem>
+        </TabControl>
+    </ControlTemplate>
     <!-- shapes -->
     <DataTemplate DataType="{x:Type core:XPoint}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -2051,23 +2037,11 @@
                       Grid.ColumnSpan="3">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Record" IsExpanded="False"
+            <Expander Header="Data" IsExpanded="False"
                       Grid.Row="4" 
                       Grid.Column="0"
                       Grid.ColumnSpan="3">
-                <Control Template="{StaticResource RecordControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Bindings" IsExpanded="False" 
-                      Grid.Row="5" 
-                      Grid.Column="0"
-                      Grid.ColumnSpan="3">
-                <Control Template="{StaticResource BindingsControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="False" 
-                      Grid.Row="6" 
-                      Grid.Column="0"
-                      Grid.ColumnSpan="3">
-                <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </Grid>
     </DataTemplate>
@@ -2085,14 +2059,8 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Record" IsExpanded="True">
-                <Control Template="{StaticResource RecordControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Bindings" IsExpanded="True">
-                <Control Template="{StaticResource BindingsControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -2136,15 +2104,9 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Record" IsExpanded="True">
-                <Control Template="{StaticResource RecordControlTemplateKey}"/>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
-            <Expander Header="Bindings" IsExpanded="True">
-                <Control Template="{StaticResource BindingsControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
-            </Expander> 
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XEllipse}">
@@ -2187,14 +2149,8 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Record" IsExpanded="True">
-                <Control Template="{StaticResource RecordControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Bindings" IsExpanded="True">
-                <Control Template="{StaticResource BindingsControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -2244,15 +2200,9 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Record" IsExpanded="True">
-                <Control Template="{StaticResource RecordControlTemplateKey}"/>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
-            <Expander Header="Bindings" IsExpanded="True">
-                <Control Template="{StaticResource BindingsControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
-            </Expander> 
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XBezier}">
@@ -2301,15 +2251,9 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Record" IsExpanded="True">
-                <Control Template="{StaticResource RecordControlTemplateKey}"/>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
-            <Expander Header="Bindings" IsExpanded="True">
-                <Control Template="{StaticResource BindingsControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
-            </Expander> 
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XQBezier}">
@@ -2355,14 +2299,8 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Record" IsExpanded="True">
-                <Control Template="{StaticResource RecordControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Bindings" IsExpanded="True">
-                <Control Template="{StaticResource BindingsControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -2426,14 +2364,8 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Record" IsExpanded="True">
-                <Control Template="{StaticResource RecordControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Bindings" IsExpanded="True">
-                <Control Template="{StaticResource BindingsControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -2497,14 +2429,8 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Record" IsExpanded="True">
-                <Control Template="{StaticResource RecordControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Bindings" IsExpanded="True">
-                <Control Template="{StaticResource BindingsControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -2574,14 +2500,8 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Record" IsExpanded="True">
-                <Control Template="{StaticResource RecordControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Bindings" IsExpanded="True">
-                <Control Template="{StaticResource BindingsControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
             <Expander Header="Database" IsExpanded="True">
                 <Control Template="{StaticResource DatabaseControlTemplateKey}"/>
@@ -2684,14 +2604,8 @@
             <Expander Header="Geometry" IsExpanded="False">
                 <ContentControl Content="{Binding Geometry}"/>
             </Expander>
-            <Expander Header="Record" IsExpanded="True">
-                <Control Template="{StaticResource RecordControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Bindings" IsExpanded="True">
-                <Control Template="{StaticResource BindingsControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
