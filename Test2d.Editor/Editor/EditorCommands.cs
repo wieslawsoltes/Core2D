@@ -270,6 +270,11 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public ICommand ResetRecordCommand { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand AddBindingCommand { get; set; }
         /// <summary>
         /// 
