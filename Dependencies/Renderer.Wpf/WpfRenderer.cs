@@ -493,7 +493,7 @@ namespace Test
                 fillEndArrow = CreateBrush(line.Style.EndArrowStyle.Fill);
                 strokeEndArrow = CreatePen(line.Style.EndArrowStyle, thicknessEndArrow);
                 if (_enableArrowStyleCache)
-                    _arrowStyleCache.Add(line.Style.EndArrowStyle, Tuple.Create(fillStartArrow, strokeEndArrow));
+                    _arrowStyleCache.Add(line.Style.EndArrowStyle, Tuple.Create(fillEndArrow, strokeEndArrow));
             }
 
             // line max length
