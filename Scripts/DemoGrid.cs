@@ -1,35 +1,11 @@
 
-struct Point
-{
-    public double X;
-    public double Y;
-    public static Point Create(double x, double y) => new Point(x, y);
-    public Point(double x, double y)
-    {
-        X = x;
-        Y = y;
-    }
-}
-
-struct Size
-{
-    public double Width;
-    public double Height;
-    public static Size Create(double width, double height) => new Size(width, height);
-    public Size(double width, double height)
-    {
-        Width = width;
-        Height = height;
-    }
-}
-
 struct Settings
 {
-    public Point Origin;
-    public Size GridSize;
-    public Size CellSize;
-    public static Settings Create(Point origin, Size grid, Size cell) => new Settings(origin, grid, cell);
-    public Settings(Point origin, Size grid, Size cell)
+    public Point2 Origin;
+    public Size2 GridSize;
+    public Size2 CellSize;
+    public static Settings Create(Point2 origin, Size2 grid, Size2 cell) => new Settings(origin, grid, cell);
+    public Settings(Point2 origin, Size2 grid, Size2 cell)
     {
         Origin = origin;
         GridSize = grid;;
@@ -45,9 +21,6 @@ IList<BaseShape> Create(ShapeStyle style, Settings settings, BaseShape point)
     double ey = settings.Origin.Y + settings.GridSize.Height;
 
     var shapes = new List<BaseShape>();
-
-    var g = XGroup.Create("grid");
-    g.State &= ~ShapeState.Printable;
 
     for (double x = sx; x < ex; x += settings.CellSize.Width)
     {
@@ -69,8 +42,25 @@ IList<BaseShape> Create(ShapeStyle style, Settings settings, BaseShape point)
 var p = Context.Editor.Project;
 var c = p.CurrentContainer;
 var layer = c.Layers.FirstOrDefault();
-var style = ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.0);
-var settings = Settings.Create(Point.Create(0, 0), Size.Create(c.Width, c.Height), Size.Create(30, 30));
+
+var style = default(ShapeStyle);
+var sl = p.StyleLibraries.FirstOrDefault(g => g.Name == "Template");
+if (sl != null)
+{
+    style = sl.Styles.FirstOrDefault(s => s.Name == "Grid");
+}
+else
+{
+    sl = p.CurrentStyleLibrary;
+}
+
+if (style == null)
+{
+    style = ShapeStyle.Create("Grid", 255, 222, 222, 222, 255, 222, 222, 222, 1.0);
+    sl.Styles = sl.Styles.Add(style);
+}
+
+var settings = Settings.Create(Point2.Create(0, 0), Size2.Create(c.Width, c.Height), Size2.Create(30, 30));
 var shapes = Create(style, settings, p.Options.PointShape);
 
 var builder = layer.Shapes.ToBuilder();
