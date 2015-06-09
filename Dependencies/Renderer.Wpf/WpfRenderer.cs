@@ -414,7 +414,7 @@ namespace Test
 
             foreach (var shape in layer.Shapes)
             {
-                shape.Bind();
+                shape.Bind(r);
             }
 
             foreach (var shape in layer.Shapes)

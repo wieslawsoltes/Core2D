@@ -62,9 +62,20 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public override void Bind()
+        /// <param name="r"></param>
+        public override void Bind(Record r)
         {
-            // TODO: Implement Bind() method.
+            var record = r ?? this.Record;
+
+            foreach (var shape in Shapes)
+            {
+                shape.Bind(record);
+            }
+
+            foreach (var connector in Connectors)
+            {
+                connector.Bind(record);
+            }
         }
 
         /// <summary>

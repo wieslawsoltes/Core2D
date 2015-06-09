@@ -55,10 +55,12 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public override void Bind()
+        /// <param name="r"></param>
+        public override void Bind(Record r)
         {
-            _topLeft.TryToBind("TopLeft", this.Bindings, this.Record);
-            _bottomRight.TryToBind("BottomRight", this.Bindings, this.Record);
+            var record = r ?? this.Record;
+            _topLeft.TryToBind("TopLeft", this.Bindings, record);
+            _bottomRight.TryToBind("BottomRight", this.Bindings, record);
         }
 
         /// <summary>

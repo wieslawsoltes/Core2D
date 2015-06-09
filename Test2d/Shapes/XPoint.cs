@@ -46,9 +46,10 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public override void Bind()
+        /// <param name="r"></param>
+        public override void Bind(Record r)
         {
-            var record = this.Record;
+            var record = r ?? this.Record;
             var bindings = this.Bindings;
             string propertyNameX = "X";
             string propertyNameY = "Y";
