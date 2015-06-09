@@ -1104,15 +1104,35 @@ namespace Test2d
             if (style.LineStyle != null)
             {
                 style.LineStyle.PropertyChanged += StyleObserver;
-                
-                if (style.LineStyle.StartArrowStyle != null)
-                {
-                    style.LineStyle.StartArrowStyle.PropertyChanged += StyleObserver;
-                }
+            }
             
-                if (style.LineStyle.EndArrowStyle != null)
+            if (style.StartArrowStyle != null)
+            {
+                style.StartArrowStyle.PropertyChanged += StyleObserver;
+                
+                if (style.StartArrowStyle.Stroke != null)
                 {
-                    style.LineStyle.EndArrowStyle.PropertyChanged += StyleObserver;
+                    style.StartArrowStyle.Stroke.PropertyChanged += StyleObserver;
+                }
+                
+                if (style.StartArrowStyle.Fill != null)
+                {
+                    style.StartArrowStyle.Fill.PropertyChanged += StyleObserver;
+                }
+            }
+        
+            if (style.EndArrowStyle != null)
+            {
+                style.EndArrowStyle.PropertyChanged += StyleObserver;
+                
+                if (style.EndArrowStyle.Stroke != null)
+                {
+                    style.EndArrowStyle.Stroke.PropertyChanged += StyleObserver;
+                }
+                
+                if (style.EndArrowStyle.Fill != null)
+                {
+                    style.EndArrowStyle.Fill.PropertyChanged += StyleObserver;
                 }
             }
         
@@ -1148,18 +1168,38 @@ namespace Test2d
             if (style.LineStyle != null)
             {
                 style.LineStyle.PropertyChanged -= StyleObserver;
+            }
+        
+            if (style.StartArrowStyle != null)
+            {
+                style.StartArrowStyle.PropertyChanged -= StyleObserver;
                 
-                if (style.LineStyle.StartArrowStyle != null)
+                if (style.StartArrowStyle.Stroke != null)
                 {
-                    style.LineStyle.StartArrowStyle.PropertyChanged -= StyleObserver;
+                    style.StartArrowStyle.Stroke.PropertyChanged -= StyleObserver;
                 }
-            
-                if (style.LineStyle.EndArrowStyle != null)
+                
+                if (style.StartArrowStyle.Fill != null)
                 {
-                    style.LineStyle.EndArrowStyle.PropertyChanged -= StyleObserver;
+                    style.StartArrowStyle.Fill.PropertyChanged -= StyleObserver;
                 }
             }
         
+            if (style.EndArrowStyle != null)
+            {
+                style.EndArrowStyle.PropertyChanged -= StyleObserver;
+                
+                if (style.EndArrowStyle.Stroke != null)
+                {
+                    style.EndArrowStyle.Stroke.PropertyChanged -= StyleObserver;
+                }
+                
+                if (style.EndArrowStyle.Fill != null)
+                {
+                    style.EndArrowStyle.Fill.PropertyChanged -= StyleObserver;
+                }
+            }
+            
             if (style.TextStyle != null)
             {
                 style.TextStyle.PropertyChanged -= StyleObserver;

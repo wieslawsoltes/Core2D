@@ -36,6 +36,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -95,6 +96,7 @@
     <Compile Include="Style\ArgbColor.cs" />
     <Compile Include="Style\ArrowStyle.cs" />
     <Compile Include="Style\ArrowType.cs" />
+    <Compile Include="Style\BaseStyle.cs" />
     <Compile Include="Style\FontStyle.cs" />
     <Compile Include="Style\LineCap.cs" />
     <Compile Include="Style\LineStyle.cs" />

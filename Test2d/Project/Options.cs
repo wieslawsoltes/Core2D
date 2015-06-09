@@ -132,30 +132,21 @@ namespace Test2d
                     "Selection",
                     0x7F, 0x33, 0x33, 0xFF,
                     0x4F, 0x33, 0x33, 0xFF,
-                    1.0,
-                    LineStyle.Create(
-                        ArrowStyle.Create(),
-                        ArrowStyle.Create()));
+                    1.0);
 
             options.HelperStyle =
                 ShapeStyle.Create(
                     "Helper",
                     0xFF, 0xFF, 0x00, 0x00,
                     0xFF, 0xFF, 0x00, 0x00,
-                    1.0,
-                    LineStyle.Create(
-                        ArrowStyle.Create(),
-                        ArrowStyle.Create()));
+                    1.0);
 
             var pss = 
                 ShapeStyle.Create(
                     "PointShape",
                     0xFF, 0xFF, 0x00, 0x00,
                     0xFF, 0xFF, 0x00, 0x00, 
-                    2.0,
-                    LineStyle.Create(
-                        ArrowStyle.Create(),
-                       ArrowStyle.Create()));
+                    2.0);
 
             options.PointShape = CrossPointShape(pss);
   

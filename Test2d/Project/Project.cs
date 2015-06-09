@@ -172,24 +172,24 @@ namespace Test2d
             var sgdl = StyleLibrary.Create("Lines");
 
             var solid = ShapeStyle.Create("Solid", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
-            solid.LineStyle.Dashes = default(double[]);
-            solid.LineStyle.DashOffset = 0.0;
+            solid.Dashes = default(double[]);
+            solid.DashOffset = 0.0;
 
             var dash = ShapeStyle.Create("Dash", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
-            dash.LineStyle.Dashes = new double[] { 2, 2 };
-            dash.LineStyle.DashOffset = 1.0;
+            dash.Dashes = new double[] { 2, 2 };
+            dash.DashOffset = 1.0;
 
             var dot = ShapeStyle.Create("Dot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
-            dot.LineStyle.Dashes = new double[] { 0, 2 };
-            dot.LineStyle.DashOffset = 0.0;
+            dot.Dashes = new double[] { 0, 2 };
+            dot.DashOffset = 0.0;
 
             var dashDot = ShapeStyle.Create("DashDot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
-            dashDot.LineStyle.Dashes = new double[] { 2, 2, 0, 2 };
-            dashDot.LineStyle.DashOffset = 1.0;
+            dashDot.Dashes = new double[] { 2, 2, 0, 2 };
+            dashDot.DashOffset = 1.0;
 
             var dashDotDot = ShapeStyle.Create("DashDotDot", 255, 0, 0, 0, 255, 0, 0, 0, 2.0);
-            dashDotDot.LineStyle.Dashes = new double[] { 2, 2, 0, 2, 0, 2 };
-            dashDotDot.LineStyle.DashOffset = 1.0;
+            dashDotDot.Dashes = new double[] { 2, 2, 0, 2, 0, 2 };
+            dashDotDot.DashOffset = 1.0;
 
             var builder = sgdl.Styles.ToBuilder();
             builder.Add(solid);
@@ -211,7 +211,7 @@ namespace Test2d
         public static StyleLibrary TemplateStyleLibrary()
         {
             var sgt = StyleLibrary.Create("Template");
-            var gs = ShapeStyle.Create("Grid", 255, 172, 172, 172, 255, 172, 172, 172, 1.0);
+            var gs = ShapeStyle.Create("Grid", 255, 222, 222, 222, 255, 222, 222, 222, 1.0);
 
             var builder = sgt.Styles.ToBuilder();
             builder.Add(gs);

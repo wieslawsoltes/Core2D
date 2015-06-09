@@ -16,7 +16,7 @@ namespace Test2d
         private FontStyle _fontStyle;
         private TextHAlignment _textHAlignment;
         private TextVAlignment _textVAlignment;
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -83,6 +83,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="name"></param>
         /// <param name="fontName"></param>
         /// <param name="fontFile"></param>
         /// <param name="fontSize"></param>
@@ -91,6 +92,7 @@ namespace Test2d
         /// <param name="textVAlignment"></param>
         /// <returns></returns>
         public static TextStyle Create(
+            string name = "",
             string fontName = "Calibri", 
             string fontFile = "calibri.ttf",
             double fontSize = 12.0,
@@ -100,6 +102,7 @@ namespace Test2d
         {
             return new TextStyle()
             {
+                Name = name,
                 FontName = fontName,
                 FontFile = fontFile,
                 FontSize = fontSize,
