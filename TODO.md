@@ -3,7 +3,6 @@
 ## UI
 
 * Save/load docking manager layout
-* Reset Record property to null in shape Properties
 
 ## Editor
 
@@ -12,7 +11,7 @@
 
 ## Database
 
-* Database creator (column names, add/remove columns)
+* Database creator (column names, add/remove columns, default row values)
 * Rename database columns
 * Database editor (using data grid)
 * Open exported database format
