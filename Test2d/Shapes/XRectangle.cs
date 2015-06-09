@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Immutable;
+using System.Globalization;
 using System.Linq;
 
 namespace Test2d
@@ -40,6 +41,103 @@ namespace Test2d
         {
             get { return _isFilled; }
             set { Update(ref _isFilled, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="tlx"></param>
+        /// <param name="tly"></param>
+        /// <param name="brx"></param>
+        /// <param name="bry"></param>
+        public void Bind(Record r, out double tlx, out double tly, out double brx, out double bry)
+        {
+            var record = r ?? this.Record;
+
+            // set default values before trying to bind to record
+            tlx = _topLeft.X;
+            tly = _topLeft.Y;
+            brx = _bottomRight.X;
+            bry = _bottomRight.Y;
+
+            // try to bind to internal (this.Record) or external (r) data record using Bindings
+            if (record != null && this.Bindings != null && this.Bindings.Length > 0)
+            {
+                if (record.Columns != null
+                    && record.Values != null
+                    && record.Columns.Length == record.Values.Length)
+                {
+                    var columns = record.Columns;
+                    foreach (var binding in this.Bindings)
+                    {
+                        if (!string.IsNullOrEmpty(binding.Property) && !string.IsNullOrEmpty(binding.Path))
+                        {
+                            if (binding.Property == "TopLeft.X")
+                            {
+                                for (int i = 0; i < columns.Length; i++)
+                                {
+                                    if (columns[i].Name == binding.Path)
+                                    {
+                                        double result;
+                                        bool success = double.TryParse(record.Values[i].Content, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+                                        if (success)
+                                        {
+                                            tlx = result;
+                                        }
+                                    }
+                                }
+                            }
+                            else if (binding.Property == "TopLeft.Y")
+                            {
+                                for (int i = 0; i < columns.Length; i++)
+                                {
+                                    if (columns[i].Name == binding.Path)
+                                    {
+                                        double result;
+                                        bool success = double.TryParse(record.Values[i].Content, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+                                        if (success)
+                                        {
+                                            tly = result;
+                                        }
+                                    }
+                                }
+                            }
+                            else if (binding.Property == "BottomRight.X")
+                            {
+                                for (int i = 0; i < columns.Length; i++)
+                                {
+                                    if (columns[i].Name == binding.Path)
+                                    {
+                                        double result;
+                                        bool success = double.TryParse(record.Values[i].Content, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+                                        if (success)
+                                        {
+                                            brx = result;
+                                        }
+                                    }
+                               
+                                }
+                            }
+                            else if (binding.Property == "BottomRight.Y")
+                            {
+                                for (int i = 0; i < columns.Length; i++)
+                                {
+                                    if (columns[i].Name == binding.Path)
+                                    {
+                                        double result;
+                                        bool success = double.TryParse(record.Values[i].Content, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+                                        if (success)
+                                        {
+                                            bry = result;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
