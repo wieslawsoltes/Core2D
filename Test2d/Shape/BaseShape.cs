@@ -82,6 +82,12 @@ namespace Test2d
         }
 
         /// <summary>
+        /// Binding shape properties to Record data.
+        /// </summary>
+        /// <param name="r">The external data record used for binding.</param>
+        public abstract void Bind(Record r);
+
+        /// <summary>
         /// Draw shape using current renderer.
         /// </summary>
         /// <param name="dc">The generic drawing context object</param>

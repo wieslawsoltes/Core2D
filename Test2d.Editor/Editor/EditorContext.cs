@@ -2861,12 +2861,25 @@ namespace Test2d
                         var result = ShapeBounds.HitTest(container, new Vector2(x, y), _editor.Project.Options.HitTreshold);
                         if (result != null)
                         {
-                            // TODO: Add history snapshot.
-                            result.Record = record;
+                            var previous = result.Record;
+                            var next = record;
+                            _editor.History.Snapshot(previous, next, (p) => result.Record = p);
+                            result.Record = next;
                         }
                         else
                         {
-                            DropAsGroup(record, x, y);
+                            if (_editor.CurrentTool == Tool.None
+                                || _editor.CurrentTool == Tool.Selection
+                                || _editor.CurrentTool == Tool.Group
+                                || _editor.CurrentTool == Tool.Image
+                                || _editor.CurrentTool == Tool.Path)
+                            {
+                                DropAsGroup(record, x, y);
+                            }
+                            else
+                            {
+                                DropAsShapeAndBind(record, x, y);
+                            }
                         }
                     }
                 }
@@ -2880,6 +2893,225 @@ namespace Test2d
                         Environment.NewLine,
                         ex.StackTrace);
                 }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="record"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void DropAsShapeAndBind(Record record, double x, double y)
+        {
+            switch (_editor.CurrentTool)
+            {
+                case Tool.Point:
+                    {
+                        var point = XPoint.Create(x, y, _editor.Project.Options.PointShape);
+                        point.Record = record;
+
+                        if (record.Columns.Length >= 2)
+                        {
+                            point.Bindings = point.Bindings.Add(ShapeBinding.Create("X", record.Columns[0].Name));
+                            point.Bindings = point.Bindings.Add(ShapeBinding.Create("Y", record.Columns[1].Name));
+                        }
+
+                        _editor.AddWithHistory(point);
+                    }
+                    break;
+                case Tool.Line:
+                    {
+                        var line = XLine.Create(
+                            x, y, 
+                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                            _editor.Project.Options.PointShape);
+                        line.Record = record;
+
+                        if (record.Columns.Length >= 2)
+                        {
+                            line.Bindings = line.Bindings.Add(ShapeBinding.Create("Start.X", record.Columns[0].Name));
+                            line.Bindings = line.Bindings.Add(ShapeBinding.Create("Start.Y", record.Columns[1].Name));
+                        }
+
+                        if (record.Columns.Length >= 4)
+                        {
+                            line.Bindings = line.Bindings.Add(ShapeBinding.Create("End.X", record.Columns[2].Name));
+                            line.Bindings = line.Bindings.Add(ShapeBinding.Create("End.Y", record.Columns[3].Name));
+                        }
+
+                        _editor.AddWithHistory(line);
+                    }
+                    break;
+                case Tool.Rectangle:
+                    {
+                        var rectangle = XRectangle.Create(
+                            x, y,
+                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                            _editor.Project.Options.PointShape);
+                        rectangle.Record = record;
+
+                        if (record.Columns.Length >= 2)
+                        {
+                            rectangle.Bindings = rectangle.Bindings.Add(ShapeBinding.Create("TopLeft.X", record.Columns[0].Name));
+                            rectangle.Bindings = rectangle.Bindings.Add(ShapeBinding.Create("TopLeft.Y", record.Columns[1].Name));
+                        }
+
+                        if (record.Columns.Length >= 4)
+                        {
+                            rectangle.Bindings = rectangle.Bindings.Add(ShapeBinding.Create("BottomRight.X", record.Columns[2].Name));
+                            rectangle.Bindings = rectangle.Bindings.Add(ShapeBinding.Create("BottomRight.Y", record.Columns[3].Name));
+                        }
+
+                        _editor.AddWithHistory(rectangle);
+                    }
+                    break;
+                case Tool.Ellipse:
+                    {
+                        var ellipse = XEllipse.Create(
+                            x, y,
+                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                            _editor.Project.Options.PointShape);
+                        ellipse.Record = record;
+
+                        if (record.Columns.Length >= 2)
+                        {
+                            ellipse.Bindings = ellipse.Bindings.Add(ShapeBinding.Create("TopLeft.X", record.Columns[0].Name));
+                            ellipse.Bindings = ellipse.Bindings.Add(ShapeBinding.Create("TopLeft.Y", record.Columns[1].Name));
+                        }
+
+                        if (record.Columns.Length >= 4)
+                        {
+                            ellipse.Bindings = ellipse.Bindings.Add(ShapeBinding.Create("BottomRight.X", record.Columns[2].Name));
+                            ellipse.Bindings = ellipse.Bindings.Add(ShapeBinding.Create("BottomRight.Y", record.Columns[3].Name));
+                        }
+
+                        _editor.AddWithHistory(ellipse);
+                    }
+                    break;
+                case Tool.Arc:
+                    {
+                        var arc = XArc.Create(
+                            x, y,
+                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                            _editor.Project.Options.PointShape);
+                        arc.Record = record;
+
+                        if (record.Columns.Length >= 2)
+                        {
+                            arc.Bindings = arc.Bindings.Add(ShapeBinding.Create("Point1.X", record.Columns[0].Name));
+                            arc.Bindings = arc.Bindings.Add(ShapeBinding.Create("Point1.Y", record.Columns[1].Name));
+                        }
+
+                        if (record.Columns.Length >= 4)
+                        {
+                            arc.Bindings = arc.Bindings.Add(ShapeBinding.Create("Point2.X", record.Columns[2].Name));
+                            arc.Bindings = arc.Bindings.Add(ShapeBinding.Create("Point2.Y", record.Columns[3].Name));
+                        }
+
+                        if (record.Columns.Length >= 6)
+                        {
+                            arc.Bindings = arc.Bindings.Add(ShapeBinding.Create("Point3.X", record.Columns[4].Name));
+                            arc.Bindings = arc.Bindings.Add(ShapeBinding.Create("Point3.Y", record.Columns[5].Name));
+                        }
+
+                        if (record.Columns.Length >= 8)
+                        {
+                            arc.Bindings = arc.Bindings.Add(ShapeBinding.Create("Point4.X", record.Columns[6].Name));
+                            arc.Bindings = arc.Bindings.Add(ShapeBinding.Create("Point4.Y", record.Columns[7].Name));
+                        }
+
+                        _editor.AddWithHistory(arc);
+                    }
+                    break;
+                case Tool.Bezier:
+                    {
+                        var bezier = XBezier.Create(
+                            x, y,
+                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                            _editor.Project.Options.PointShape);
+                        bezier.Record = record;
+
+                        if (record.Columns.Length >= 2)
+                        {
+                            bezier.Bindings = bezier.Bindings.Add(ShapeBinding.Create("Point1.X", record.Columns[0].Name));
+                            bezier.Bindings = bezier.Bindings.Add(ShapeBinding.Create("Point1.Y", record.Columns[1].Name));
+                        }
+
+                        if (record.Columns.Length >= 4)
+                        {
+                            bezier.Bindings = bezier.Bindings.Add(ShapeBinding.Create("Point2.X", record.Columns[2].Name));
+                            bezier.Bindings = bezier.Bindings.Add(ShapeBinding.Create("Point2.Y", record.Columns[3].Name));
+                        }
+
+                        if (record.Columns.Length >= 6)
+                        {
+                            bezier.Bindings = bezier.Bindings.Add(ShapeBinding.Create("Point3.X", record.Columns[4].Name));
+                            bezier.Bindings = bezier.Bindings.Add(ShapeBinding.Create("Point3.Y", record.Columns[5].Name));
+                        }
+
+                        if (record.Columns.Length >= 8)
+                        {
+                            bezier.Bindings = bezier.Bindings.Add(ShapeBinding.Create("Point4.X", record.Columns[6].Name));
+                            bezier.Bindings = bezier.Bindings.Add(ShapeBinding.Create("Point4.Y", record.Columns[7].Name));
+                        }
+
+                        _editor.AddWithHistory(bezier);
+                    }
+                    break;
+                case Tool.QBezier:
+                    {
+                        var qbezier = XQBezier.Create(
+                            x, y,
+                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                            _editor.Project.Options.PointShape);
+                        qbezier.Record = record;
+
+                        if (record.Columns.Length >= 2)
+                        {
+                            qbezier.Bindings = qbezier.Bindings.Add(ShapeBinding.Create("Point1.X", record.Columns[0].Name));
+                            qbezier.Bindings = qbezier.Bindings.Add(ShapeBinding.Create("Point1.Y", record.Columns[1].Name));
+                        }
+
+                        if (record.Columns.Length >= 4)
+                        {
+                            qbezier.Bindings = qbezier.Bindings.Add(ShapeBinding.Create("Point2.X", record.Columns[2].Name));
+                            qbezier.Bindings = qbezier.Bindings.Add(ShapeBinding.Create("Point2.Y", record.Columns[3].Name));
+                        }
+
+                        if (record.Columns.Length >= 6)
+                        {
+                            qbezier.Bindings = qbezier.Bindings.Add(ShapeBinding.Create("Point3.X", record.Columns[4].Name));
+                            qbezier.Bindings = qbezier.Bindings.Add(ShapeBinding.Create("Point3.Y", record.Columns[5].Name));
+                        }
+
+                        _editor.AddWithHistory(qbezier);
+                    }
+                    break;
+                case Tool.Text:
+                    {
+                        var text = XText.Create(
+                            x, y,
+                            _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                            _editor.Project.Options.PointShape,
+                            "Text");
+                        text.Record = record;
+
+                        if (record.Columns.Length >= 2)
+                        {
+                            text.Bindings = text.Bindings.Add(ShapeBinding.Create("TopLeft.X", record.Columns[0].Name));
+                            text.Bindings = text.Bindings.Add(ShapeBinding.Create("TopLeft.Y", record.Columns[1].Name));
+                        }
+
+                        if (record.Columns.Length >= 4)
+                        {
+                            text.Bindings = text.Bindings.Add(ShapeBinding.Create("BottomRight.X", record.Columns[2].Name));
+                            text.Bindings = text.Bindings.Add(ShapeBinding.Create("BottomRight.Y", record.Columns[3].Name));
+                        }
+
+                        _editor.AddWithHistory(text);
+                    }
+                    break;
             }
         }
 

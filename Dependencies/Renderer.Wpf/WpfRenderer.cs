@@ -414,6 +414,11 @@ namespace Test
 
             foreach (var shape in layer.Shapes)
             {
+                shape.Bind(r);
+            }
+
+            foreach (var shape in layer.Shapes)
+            {
                 if (shape.State.HasFlag(_state.DrawShapeState))
                 {
                     shape.Draw(_dc, this, 0, 0, db, r);
@@ -660,12 +665,11 @@ namespace Test
                 if (_enableStyleCache)
                     _styleCache.Add(rectangle.Style, Tuple.Create(fill, stroke));
             }
-            
-            var rect = CreateRect(
-                rectangle.TopLeft,
-                rectangle.BottomRight,
-                dx, dy);
 
+            var rect = CreateRect(
+                rectangle.TopLeft, 
+                rectangle.BottomRight, 
+                dx, dy);
             DrawRectangleInternal(_dc, half, fill, stroke, rectangle.IsFilled, ref rect);
         }
 

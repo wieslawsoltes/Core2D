@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Immutable;
+using System.Globalization;
 using System.Linq;
 
 namespace Test2d
@@ -40,6 +41,122 @@ namespace Test2d
         {
             get { return _y; }
             set { Update(ref _y, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="r"></param>
+        public override void Bind(Record r)
+        {
+            var record = r ?? this.Record;
+            var bindings = this.Bindings;
+            string propertyNameX = "X";
+            string propertyNameY = "Y";
+
+            if (record != null && bindings != null && bindings.Length > 0)
+            {
+                if (record.Columns != null
+                    && record.Values != null
+                    && record.Columns.Length == record.Values.Length)
+                {
+                    var columns = record.Columns;
+                    foreach (var binding in bindings)
+                    {
+                        if (!string.IsNullOrEmpty(binding.Property) && !string.IsNullOrEmpty(binding.Path))
+                        {
+                            if (binding.Property == propertyNameX)
+                            {
+                                for (int i = 0; i < columns.Length; i++)
+                                {
+                                    if (columns[i].Name == binding.Path)
+                                    {
+                                        double result;
+                                        bool success = double.TryParse(record.Values[i].Content, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+                                        if (success)
+                                        {
+                                            _x = result;
+                                        }
+                                    }
+                                }
+                            }
+                            else if (binding.Property == propertyNameY)
+                            {
+                                for (int i = 0; i < columns.Length; i++)
+                                {
+                                    if (columns[i].Name == binding.Path)
+                                    {
+                                        double result;
+                                        bool success = double.TryParse(record.Values[i].Content, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+                                        if (success)
+                                        {
+                                            _y = result;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <param name="bindings"></param>
+        /// <param name="record"></param>
+        public void TryToBind(string propertyName, ImmutableArray<ShapeBinding> bindings, Record record)
+        {
+            string propertyNameX = propertyName + ".X";
+            string propertyNameY = propertyName + ".Y";
+
+            if (record != null && bindings != null && bindings.Length > 0)
+            {
+                if (record.Columns != null
+                    && record.Values != null
+                    && record.Columns.Length == record.Values.Length)
+                {
+                    var columns = record.Columns;
+                    foreach (var binding in bindings)
+                    {
+                        if (!string.IsNullOrEmpty(binding.Property) && !string.IsNullOrEmpty(binding.Path))
+                        {
+                            if (binding.Property == propertyNameX)
+                            {
+                                for (int i = 0; i < columns.Length; i++)
+                                {
+                                    if (columns[i].Name == binding.Path)
+                                    {
+                                        double result;
+                                        bool success = double.TryParse(record.Values[i].Content, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+                                        if (success)
+                                        {
+                                            _x = result;
+                                        }
+                                    }
+                                }
+                            }
+                            else if (binding.Property == propertyNameY)
+                            {
+                                for (int i = 0; i < columns.Length; i++)
+                                {
+                                    if (columns[i].Name == binding.Path)
+                                    {
+                                        double result;
+                                        bool success = double.TryParse(record.Values[i].Content, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+                                        if (success)
+                                        {
+                                            _y = result;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>

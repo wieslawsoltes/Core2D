@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Collections.Immutable;
+using System.Globalization;
 using System.Linq;
 
 namespace Test2d
@@ -40,6 +41,18 @@ namespace Test2d
         {
             get { return _isFilled; }
             set { Update(ref _isFilled, value); }
+        }
+
+ 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="r"></param>
+        public override void Bind(Record r)
+        {
+            var record = r ?? this.Record;
+            _topLeft.TryToBind("TopLeft", this.Bindings, record);
+            _bottomRight.TryToBind("BottomRight", this.Bindings, record);
         }
 
         /// <summary>

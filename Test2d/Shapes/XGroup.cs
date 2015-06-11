@@ -58,7 +58,26 @@ namespace Test2d
             get { return _connectors; }
             set { Update(ref _connectors, value); }
         }
-   
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="r"></param>
+        public override void Bind(Record r)
+        {
+            var record = r ?? this.Record;
+
+            foreach (var shape in Shapes)
+            {
+                shape.Bind(record);
+            }
+
+            foreach (var connector in Connectors)
+            {
+                connector.Bind(record);
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>

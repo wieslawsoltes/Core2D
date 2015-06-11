@@ -2037,7 +2037,7 @@
                       Grid.ColumnSpan="3">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="False"
+            <Expander Header="Data" IsExpanded="True"
                       Grid.Row="4" 
                       Grid.Column="0"
                       Grid.ColumnSpan="3">
