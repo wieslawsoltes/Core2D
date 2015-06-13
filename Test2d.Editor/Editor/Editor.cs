@@ -529,7 +529,7 @@ namespace Test2d
         /// <param name="points"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public static void Move(IEnumerable<XPoint> points, double dx, double dy)
+        public static void MovePointsBy(IEnumerable<XPoint> points, double dx, double dy)
         {
             foreach (var point in points)
             {
@@ -546,7 +546,7 @@ namespace Test2d
         /// <param name="shapes"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
-        public static void Move(IEnumerable<BaseShape> shapes, double dx, double dy)
+        public static void MoveShapesBy(IEnumerable<BaseShape> shapes, double dx, double dy)
         {
             foreach (var shape in shapes)
             {
