@@ -118,6 +118,11 @@
     <Compile Include="Editor\Log\ILog.cs" />
     <Compile Include="Editor\Log\TraceLog.cs" />
     <Compile Include="Editor\Observer.cs" />
+    <Compile Include="Editor\Parameters\ColumnParameter.cs" />
+    <Compile Include="Editor\Parameters\RecordParameter.cs" />
+    <Compile Include="Editor\Parameters\ShapeBindingParamater.cs" />
+    <Compile Include="Editor\Parameters\ShapePropertyParameter.cs" />
+    <Compile Include="Editor\Parameters\ValueParamterer.cs" />
     <Compile Include="Editor\Script\ScriptDirectory.cs" />
     <Compile Include="Editor\Script\ScriptFile.cs" />
     <Compile Include="Editor\Core\State.cs" />

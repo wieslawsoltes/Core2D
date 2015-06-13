@@ -125,10 +125,8 @@
     <Compile Include="Shapes\XText.cs" />
     <Compile Include="Shape\BaseShape.cs" />
     <Compile Include="Shape\ShapeBinding.cs" />
-    <Compile Include="Shape\ShapeBindingParamater.cs" />
     <Compile Include="Shape\ShapeProperty.cs" />
     <Compile Include="Shape\ShapePropertyExtensions.cs" />
-    <Compile Include="Shape\ShapePropertyParameter.cs" />
     <Compile Include="Shape\ShapeState.cs" />
     <Compile Include="Shape\ShapeTransform.cs" />
     <Compile Include="Style\ArgbColor.cs" />
