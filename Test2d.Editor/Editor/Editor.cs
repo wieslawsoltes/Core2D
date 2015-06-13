@@ -543,6 +543,23 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="shapes"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        public static void Move(IEnumerable<BaseShape> shapes, double dx, double dy)
+        {
+            foreach (var shape in shapes)
+            {
+                if (!shape.State.HasFlag(ShapeState.Locked))
+                {
+                    shape.Move(dx, dy);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="shape"></param>
         public void AddWithHistory(BaseShape shape)
         {
