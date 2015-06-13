@@ -49,10 +49,9 @@ namespace Test2d
         /// <param name="binding"></param>
         /// <param name="record"></param>
         /// <param name="value"></param>
-        private void BindToDouble(ShapeBinding binding, Record record, ref double value)
+        private static void BindToDouble(ShapeBinding binding, Record record, ref double value)
         {
             var columns = record.Columns;
-
             for (int i = 0; i < columns.Length; i++)
             {
                 if (columns[i].Name == binding.Path)
@@ -77,7 +76,7 @@ namespace Test2d
         /// <param name="record"></param>
         /// <param name="propertyNameX"></param>
         /// <param name="propertyNameY"></param>
-        private void TryToBindInternal(
+        private void TryToBind(
             ImmutableArray<ShapeBinding> bindings,
             Record record,
             string propertyNameX,
@@ -118,7 +117,7 @@ namespace Test2d
             var bindings = this.Bindings;
             string propertyNameX = "X";
             string propertyNameY = "Y";
-            TryToBindInternal(bindings, record, propertyNameX, propertyNameY);
+            TryToBind(bindings, record, propertyNameX, propertyNameY);
         }
 
         /// <summary>
@@ -131,7 +130,7 @@ namespace Test2d
         {
             string propertyNameX = propertyName + ".X";
             string propertyNameY = propertyName + ".Y";
-            TryToBindInternal(bindings, record, propertyNameX, propertyNameY);
+            TryToBind(bindings, record, propertyNameX, propertyNameY);
         }
 
         /// <summary>
