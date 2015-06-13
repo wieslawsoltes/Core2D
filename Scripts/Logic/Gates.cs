@@ -29,11 +29,13 @@ var styleTextMediumLC = ShapeStyle.Create(
     255, 0, 0, 0, 
     255, 0, 0, 0, 
     2.0, 
-    null, 
-    "Consolas", "consola.ttf",
-    11.0, 
-    FontStyle.Regular,
-    TextHAlignment.Left, TextVAlignment.Center);
+    TextStyle.Create(
+        "Text",
+        "Consolas", "consola.ttf", 
+        11.0, 
+        FontStyle.Regular,
+        TextHAlignment.Left, TextVAlignment.Center),
+    LineStyle.Create("Line"));
 styles.Add(styleTextMediumLC);
 
 // Logic-Text-Medium-CC
@@ -42,11 +44,13 @@ var styleTextMediumCC = ShapeStyle.Create(
     255, 0, 0, 0, 
     255, 0, 0, 0, 
     2.0, 
-    null, 
-    "Consolas", "consola.ttf",
-    11.0, 
-    FontStyle.Regular,
-    TextHAlignment.Center, TextVAlignment.Center);
+    TextStyle.Create(
+        "Text",
+        "Consolas", "consola.ttf",
+        11.0, 
+        FontStyle.Regular,
+        TextHAlignment.Center, TextVAlignment.Center),
+    LineStyle.Create("Line"));
 styles.Add(styleTextMediumCC);
 
 // Logic-Text-Big-CC
@@ -55,11 +59,13 @@ var styleTextBigCC = ShapeStyle.Create(
     255, 0, 0, 0, 
     255, 0, 0, 0, 
     2.0, 
-    null, 
-    "Consolas", "consola.ttf",
-    14.0, 
-    FontStyle.Regular,
-    TextHAlignment.Center, TextVAlignment.Center);
+    TextStyle.Create(
+        "Text",
+        "Consolas", "consola.ttf",
+        14.0, 
+        FontStyle.Regular,
+        TextHAlignment.Center, TextVAlignment.Center),
+    LineStyle.Create("Line"));
 styles.Add(styleTextBigCC);
 
 // Logic-Line-Thick
@@ -68,11 +74,13 @@ var styleLineThick = ShapeStyle.Create(
     255, 0, 0, 0, 
     255, 0, 0, 0, 
     2.0, 
-    null,
-    "Consolas", "consola.ttf",
-    12.0, 
-    FontStyle.Regular,
-    TextHAlignment.Center, TextVAlignment.Center);
+    TextStyle.Create(
+        "Text",
+        "Consolas", "consola.ttf",
+        12.0, 
+        FontStyle.Regular,
+        TextHAlignment.Center, TextVAlignment.Center),
+    LineStyle.Create("Line"));
 styles.Add(styleLineThick);
 
 sl.Styles = styles.ToImmutable();
