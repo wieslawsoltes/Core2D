@@ -130,37 +130,43 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="bindings"></param>
-        /// <param name="record"></param>
+        /// <param name="r"></param>
         /// <param name="propertyName"></param>
         /// <param name="value"></param>
         /// <returns></returns>
         private static bool TryToBind(
             ImmutableArray<ShapeBinding> bindings, 
-            Record record, 
+            Record r, 
             string propertyName, 
             out string value)
         {
-            if (record.Columns != null
-                && record.Values != null
-                && record.Columns.Length == record.Values.Length)
+            if (r == null || bindings == null || bindings.Length <= 0)
             {
-                var columns = record.Columns;
-                foreach (var binding in bindings)
+                value = null;
+                return false;
+            }
+
+            if (r.Columns == null || r.Values == null || r.Columns.Length != r.Values.Length)
+            {
+                value = null;
+                return false;
+            }
+
+            var columns = r.Columns;
+            foreach (var binding in bindings)
+            {
+                if (string.IsNullOrEmpty(binding.Property) || string.IsNullOrEmpty(binding.Path))
+                    continue;
+
+                if (binding.Property != propertyName)
+                    continue;
+
+                for (int i = 0; i < columns.Length; i++)
                 {
-                    if (!string.IsNullOrEmpty(binding.Property) 
-                        && !string.IsNullOrEmpty(binding.Path))
+                    if (columns[i].Name == binding.Path)
                     {
-                        if (binding.Property == propertyName)
-                        {
-                            for (int i = 0; i < columns.Length; i++)
-                            {
-                                if (columns[i].Name == binding.Path)
-                                {
-                                    value = record.Values[i].Content;
-                                    return true;
-                                }
-                            }
-                        }
+                        value = r.Values[i].Content;
+                        return true;
                     }
                 }
             }
@@ -185,18 +191,17 @@ namespace Test2d
         {
             foreach (var binding in bindings)
             {
-                if (!string.IsNullOrEmpty(binding.Property)
-                    && !string.IsNullOrEmpty(binding.Path))
+                if (string.IsNullOrEmpty(binding.Property) || string.IsNullOrEmpty(binding.Path))
+                    continue;
+
+                if (binding.Property != propertyName)
+                    continue;
+
+                var result = db.FirstOrDefault(p => p.Name == binding.Path);
+                if (result != null && result.Value != null)
                 {
-                    if (binding.Property == propertyName)
-                    {
-                        var result = db.FirstOrDefault(p => p.Name == binding.Path);
-                        if (result != null && result.Value != null)
-                        {
-                            value =  result.Value.ToString();
-                            return true;
-                        }
-                    }
+                    value =  result.Value.ToString();
+                    return true;
                 }
             }
 
