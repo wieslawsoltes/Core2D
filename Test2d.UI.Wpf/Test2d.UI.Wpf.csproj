@@ -168,6 +168,9 @@
     <Compile Include="Controls\DatabaseControl.xaml.cs">
       <DependentUpon>DatabaseControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RecordsControl.xaml.cs">
+      <DependentUpon>RecordsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DatabasesControl.xaml.cs">
       <DependentUpon>DatabasesControl.xaml</DependentUpon>
     </Compile>
@@ -208,11 +211,14 @@
     </Compile>
     <Compile Include="Converters\ArgbColorToBrushConverter.cs" />
     <Compile Include="Converters\ArgbColorToBrushMultiConverter.cs" />
+    <Compile Include="Converters\ColumnParameterConverter.cs" />
     <Compile Include="Converters\DoubleToStringConverter.cs" />
     <Compile Include="Converters\FlagsEnumConverter.cs" />
     <Compile Include="Converters\ObjectEqualityConverter.cs" />
+    <Compile Include="Converters\RecordParameterConverter.cs" />
     <Compile Include="Converters\ShapeBindingParameterConverter.cs" />
     <Compile Include="Converters\ShapePropertyParameterConverter.cs" />
+    <Compile Include="Converters\ValueParameterConverter.cs" />
     <Compile Include="Converters\ZoomScaleConverter.cs" />
     <Compile Include="Controls\Custom\PanAndZoomBorder.cs" />
     <Compile Include="Controls\Custom\PanAndZoomGrid.cs" />
@@ -250,6 +256,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\DatabaseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RecordsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

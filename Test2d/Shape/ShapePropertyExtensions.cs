@@ -18,11 +18,11 @@ namespace Test2d
         /// <returns></returns>
         public static string GetStringPropertyValue(this XGroup group, string key)
         {
-            if (group == null || group.Database == null)
+            if (group == null || group.ShapesProperties == null)
             {
                 throw new ArgumentNullException();
             }
-            ShapeProperty property = group.Database.FirstOrDefault(p => p.Name == key);
+            ShapeProperty property = group.ShapesProperties.FirstOrDefault(p => p.Name == key);
             if (property != null
                 && property.Value != null
                 && property.Value is string)
@@ -43,11 +43,11 @@ namespace Test2d
         /// <returns></returns>
         public static int GetIntPropertyValue(this XGroup group, string key)
         {
-            if (group == null || group.Database == null)
+            if (group == null || group.ShapesProperties == null)
             {
                 throw new ArgumentNullException();
             }
-            ShapeProperty property = group.Database.FirstOrDefault(p => p.Name == key);
+            ShapeProperty property = group.ShapesProperties.FirstOrDefault(p => p.Name == key);
             int value;
             if (property != null
                 && property.Value != null
@@ -73,11 +73,11 @@ namespace Test2d
         /// <returns></returns>
         public static double GetDoublePropertyValue(this XGroup group, string key)
         {
-            if (group == null || group.Database == null)
+            if (group == null || group.ShapesProperties == null)
             {
                 throw new ArgumentNullException();
             }
-            ShapeProperty property = group.Database.FirstOrDefault(p => p.Name == key);
+            ShapeProperty property = group.ShapesProperties.FirstOrDefault(p => p.Name == key);
             double value;
             if (property != null
                 && property.Value != null

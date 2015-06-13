@@ -11,33 +11,33 @@ namespace Test2d
     /// </summary>
     public class XGroup : BaseShape
     {
-        private ImmutableArray<ShapeProperty> _database;
+        private ImmutableArray<ShapeProperty> _shapesProperties;
         private ImmutableArray<BaseShape> _shapes;
         private ImmutableArray<XPoint> _connectors;
 
         /// <summary>
         /// 
         /// </summary>
-        public ImmutableArray<ShapeProperty> Database
+        public ImmutableArray<ShapeProperty> ShapesProperties
         {
             get 
             {
-                if (_database == null)
+                if (_shapesProperties == null)
                 {
                     if (_shapes != null)
                     {
-                        var databaseBuilder = ImmutableArray.CreateBuilder<ShapeProperty>();
+                        var builder = ImmutableArray.CreateBuilder<ShapeProperty>();
                         foreach (var shape in _shapes)
                         {
                             foreach (var property in shape.Properties)
                             {
-                                databaseBuilder.Add(property);
+                                builder.Add(property);
                             }
                         }
-                        _database = databaseBuilder.ToImmutable();
+                        _shapesProperties = builder.ToImmutable();
                     }
                 }
-                return _database;
+                return _shapesProperties;
             }
         }
 

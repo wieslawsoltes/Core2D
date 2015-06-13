@@ -79,8 +79,27 @@
                             <ad:LayoutAnchorable Title="Groups" AutoHideWidth="230">
                                 <controls:GroupsControl/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Data" AutoHideWidth="230">
+                            <ad:LayoutAnchorable Title="Databases" AutoHideWidth="230">
                                 <controls:DatabasesControl/>
+                            </ad:LayoutAnchorable>
+                            <ad:LayoutAnchorable Title="Database" AutoHideWidth="230">
+                                <ScrollViewer 
+                                    VerticalScrollBarVisibility="Auto" 
+                                    HorizontalScrollBarVisibility="Auto" 
+                                    Focusable="True">
+                                    <controls:DatabaseControl>
+                                        <controls:DatabaseControl.Style>
+                                            <Style TargetType="controls:DatabaseControl">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Editor.Project.CurrentDatabase}" Value="{x:Null}">
+                                                        <Setter Property="Visibility" Value="Hidden"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </controls:DatabaseControl.Style>
+                                    </controls:DatabaseControl>
+                                </ScrollViewer>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                     </ad:LayoutAnchorablePaneGroup>

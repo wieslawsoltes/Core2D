@@ -64,7 +64,7 @@
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <controls:DatabaseControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                    <controls:RecordsControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
