@@ -79,6 +79,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binding\PropertyBinding.cs" />
+    <Compile Include="Binding\PropertyBindingMode.cs" />
     <Compile Include="Data\Column.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="Data\Record.cs" />
