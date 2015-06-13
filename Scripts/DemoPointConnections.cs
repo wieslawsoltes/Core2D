@@ -1,7 +1,7 @@
 
 var p = Context.Editor.Project;
 var c = p.CurrentContainer;
-var l = c.CurrentLayer.Shapes
+var l = c.CurrentLayer;
 var s = p.CurrentStyleLibrary.CurrentStyle;
 var ps = p.Options.PointShape;
 
