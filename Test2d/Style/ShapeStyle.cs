@@ -135,7 +135,9 @@ namespace Test2d
                 Dashes = default(double[]),
                 DashOffset = 0.0,
                 LineStyle = lineStyle,
-                TextStyle = textStyle
+                TextStyle = textStyle,
+                StartArrowStyle = startArrowStyle,
+                EndArrowStyle = endArrowStyle
             };
         }
     }
