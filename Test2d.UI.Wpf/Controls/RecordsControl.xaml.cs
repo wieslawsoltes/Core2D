@@ -79,6 +79,7 @@ namespace Test.Controls
             {
                 listView.View = CreateColumnsView(database.Columns);
 
+                // TODO: Update ListView when database Columns change.
                 /*
                 if (database.Columns != null)
                 {
