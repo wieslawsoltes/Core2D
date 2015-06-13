@@ -46,7 +46,6 @@ namespace Test2d
     {
         private Stack<UndoRedo> _undos = new Stack<UndoRedo>();
         private Stack<UndoRedo> _redos = new Stack<UndoRedo>();
-        private UndoRedo _hold = default(UndoRedo);
 
         /// <summary>
         /// 
@@ -62,35 +61,6 @@ namespace Test2d
             _undos.Push(undo);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="previous"></param>
-        /// <param name="next"></param>
-        /// <param name="update"></param>
-        public void Hold<T>(T previous, T next, Action<T> update)
-        {
-            _hold = UndoRedo.Create(() => update(previous), () => update(next));
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public void Commit()
-        {
-            if (_redos.Count > 0)
-                _redos.Clear();
-            _undos.Push(_hold);
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public void Release()
-        {
-            _hold = default(UndoRedo);
-        }
-        
         /// <summary>
         /// 
         /// </summary>
