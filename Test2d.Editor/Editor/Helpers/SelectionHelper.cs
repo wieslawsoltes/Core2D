@@ -228,6 +228,7 @@ namespace Test2d
                             {
                                 var shape = _editor.Renderers[0].State.SelectedShape;
                                 var shapes = Enumerable.Repeat(shape, 1);
+                                _shapesCache = shapes;
                             }
                         }
                         break;
