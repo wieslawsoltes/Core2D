@@ -46,6 +46,71 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="binding"></param>
+        /// <param name="record"></param>
+        /// <param name="value"></param>
+        private void BindToDouble(ShapeBinding binding, Record record, ref double value)
+        {
+            var columns = record.Columns;
+
+            for (int i = 0; i < columns.Length; i++)
+            {
+                if (columns[i].Name == binding.Path)
+                {
+                    double result;
+                    bool success = double.TryParse(
+                        record.Values[i].Content,
+                        NumberStyles.Any, CultureInfo.InvariantCulture,
+                        out result);
+                    if (success)
+                    {
+                        value = result;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bindings"></param>
+        /// <param name="record"></param>
+        /// <param name="propertyNameX"></param>
+        /// <param name="propertyNameY"></param>
+        private void TryToBindInternal(
+            ImmutableArray<ShapeBinding> bindings,
+            Record record,
+            string propertyNameX,
+            string propertyNameY)
+        {
+            if (record != null && bindings != null && bindings.Length > 0)
+            {
+                if (record.Columns != null
+                    && record.Values != null
+                    && record.Columns.Length == record.Values.Length)
+                {
+                    foreach (var binding in bindings)
+                    {
+                        if (!string.IsNullOrEmpty(binding.Property)
+                            && !string.IsNullOrEmpty(binding.Path))
+                        {
+                            if (binding.Property == propertyNameX)
+                            {
+                                BindToDouble(binding, record, ref _x);
+                            }
+                            else if (binding.Property == propertyNameY)
+                            {
+                                BindToDouble(binding, record, ref _y);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="r"></param>
         public override void Bind(Record r)
         {
@@ -53,52 +118,7 @@ namespace Test2d
             var bindings = this.Bindings;
             string propertyNameX = "X";
             string propertyNameY = "Y";
-
-            if (record != null && bindings != null && bindings.Length > 0)
-            {
-                if (record.Columns != null
-                    && record.Values != null
-                    && record.Columns.Length == record.Values.Length)
-                {
-                    var columns = record.Columns;
-                    foreach (var binding in bindings)
-                    {
-                        if (!string.IsNullOrEmpty(binding.Property) && !string.IsNullOrEmpty(binding.Path))
-                        {
-                            if (binding.Property == propertyNameX)
-                            {
-                                for (int i = 0; i < columns.Length; i++)
-                                {
-                                    if (columns[i].Name == binding.Path)
-                                    {
-                                        double result;
-                                        bool success = double.TryParse(record.Values[i].Content, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
-                                        if (success)
-                                        {
-                                            _x = result;
-                                        }
-                                    }
-                                }
-                            }
-                            else if (binding.Property == propertyNameY)
-                            {
-                                for (int i = 0; i < columns.Length; i++)
-                                {
-                                    if (columns[i].Name == binding.Path)
-                                    {
-                                        double result;
-                                        bool success = double.TryParse(record.Values[i].Content, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
-                                        if (success)
-                                        {
-                                            _y = result;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            TryToBindInternal(bindings, record, propertyNameX, propertyNameY);
         }
 
         /// <summary>
@@ -111,52 +131,7 @@ namespace Test2d
         {
             string propertyNameX = propertyName + ".X";
             string propertyNameY = propertyName + ".Y";
-
-            if (record != null && bindings != null && bindings.Length > 0)
-            {
-                if (record.Columns != null
-                    && record.Values != null
-                    && record.Columns.Length == record.Values.Length)
-                {
-                    var columns = record.Columns;
-                    foreach (var binding in bindings)
-                    {
-                        if (!string.IsNullOrEmpty(binding.Property) && !string.IsNullOrEmpty(binding.Path))
-                        {
-                            if (binding.Property == propertyNameX)
-                            {
-                                for (int i = 0; i < columns.Length; i++)
-                                {
-                                    if (columns[i].Name == binding.Path)
-                                    {
-                                        double result;
-                                        bool success = double.TryParse(record.Values[i].Content, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
-                                        if (success)
-                                        {
-                                            _x = result;
-                                        }
-                                    }
-                                }
-                            }
-                            else if (binding.Property == propertyNameY)
-                            {
-                                for (int i = 0; i < columns.Length; i++)
-                                {
-                                    if (columns[i].Name == binding.Path)
-                                    {
-                                        double result;
-                                        bool success = double.TryParse(record.Values[i].Content, NumberStyles.Any, CultureInfo.InvariantCulture, out result);
-                                        if (success)
-                                        {
-                                            _y = result;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            TryToBindInternal(bindings, record, propertyNameX, propertyNameY);
         }
 
         /// <summary>
