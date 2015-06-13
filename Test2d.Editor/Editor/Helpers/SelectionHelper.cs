@@ -20,6 +20,8 @@ namespace Test2d
         private double _startY;
         private double _historyX;
         private double _historyY;
+        private IEnumerable<XPoint> _pointsCache;
+        private IEnumerable<BaseShape> _shapesCache;
 
         /// <summary>
         /// 
@@ -52,7 +54,7 @@ namespace Test2d
                                 _startY = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
                                 _historyX = _startX;
                                 _historyY = _startY;
-                                // TODO: Add history hold.
+                                GenerateMoveSelectionCache();
                                 _editor.IsContextMenu = false;
                                 _currentState = State.One;
                                 break;
@@ -65,7 +67,7 @@ namespace Test2d
                             _startY = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
                             _historyX = _startX;
                             _historyY = _startY;
-                            // TODO: Add history hold.
+                            GenerateMoveSelectionCache();
                             _editor.IsContextMenu = false;
                             _currentState = State.One;
                             break;
@@ -116,14 +118,9 @@ namespace Test2d
                             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
                             if (_historyX != sx || _historyY != sy)
                             {
-                                // TODO: Enable history commit.
-                                //_editor.History.Commit();
+                                // TODO: Add history snapshot.
                             }
-                            else
-                            {
-                                // TODO: Enable history release.
-                                //_editor.History.Release();
-                            }
+                            DisposeMoveSelectionCache();
                             _currentState = State.None;
                             break;
                         }
@@ -136,7 +133,6 @@ namespace Test2d
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = State.None;
-
                             _editor.TryToSelectShapes(_editor.Project.CurrentContainer, rectangle);
                         }
                     }
@@ -159,6 +155,11 @@ namespace Test2d
                         _editor.IsContextMenu = _editor.TryToSelectShape(_editor.Project.CurrentContainer, x, y) ? true : false;
                     }
                     break;
+                case State.One:
+                    {
+                        DisposeMoveSelectionCache();
+                    }
+                    break;
             }
         }
 
@@ -174,9 +175,71 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        private void GenerateMoveSelectionCache()
+        {
+            if (_editor.Renderers[0].State.SelectedShape != null)
+            {
+                var state = _editor.Renderers[0].State.SelectedShape.State;
+
+                switch (_editor.Project.Options.MoveMode)
+                {
+                    case MoveMode.Point:
+                        {
+                            if (!state.HasFlag(ShapeState.Locked))
+                            {
+                                var shape = _editor.Renderers[0].State.SelectedShape;
+                                var shapes = Enumerable.Repeat(shape, 1);
+                                _pointsCache = Editor.GetAllPoints(shapes, ShapeState.Connector).Distinct();
+                            }
+                        }
+                        break;
+                    case MoveMode.Shape:
+                        {
+                            if (!state.HasFlag(ShapeState.Locked) && !state.HasFlag(ShapeState.Connector))
+                            {
+                                var shape = _editor.Renderers[0].State.SelectedShape;
+                                var shapes = Enumerable.Repeat(shape, 1);
+                            }
+                        }
+                        break;
+                }
+            }
+
+            if (_editor.Renderers[0].State.SelectedShapes != null)
+            {
+                var shapes = _editor.Renderers[0].State.SelectedShapes.Where(s => !s.State.HasFlag(ShapeState.Locked));
+
+                switch (_editor.Project.Options.MoveMode)
+                {
+                    case MoveMode.Point:
+                        {
+                            _pointsCache = Editor.GetAllPoints(shapes, ShapeState.Connector).Distinct();
+                        }
+                        break;
+                    case MoveMode.Shape:
+                        {
+                            _shapesCache = shapes;
+                        }
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void DisposeMoveSelectionCache()
+        {
+            _pointsCache = null;
+            _shapesCache = null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        private void MoveSelection(double x, double y)
+        private void MoveSelectionTo(double x, double y)
         {
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
@@ -187,55 +250,14 @@ namespace Test2d
             _startX = sx;
             _startY = sy;
 
-            if (_editor.Renderers[0].State.SelectedShape != null)
+            if (_pointsCache != null)
             {
-                switch (_editor.Project.Options.MoveMode)
-                {
-                    case MoveMode.Point:
-                        {
-                            if (!_editor.Renderers[0].State.SelectedShape.State.HasFlag(ShapeState.Locked))
-                            {
-                                var shapes = Enumerable.Repeat(_editor.Renderers[0].State.SelectedShape, 1);
-                                var points = Editor.GetAllPoints(shapes, ShapeState.Connector).Distinct();
-                                Editor.Move(points, dx, dy);
-                            }
-                        }
-                        break;
-                    case MoveMode.Shape:
-                        {
-                            if (!_editor.Renderers[0].State.SelectedShape.State.HasFlag(ShapeState.Locked)
-                                && !_editor.Renderers[0].State.SelectedShape.State.HasFlag(ShapeState.Connector))
-                            {
-                                _editor.Renderers[0].State.SelectedShape.Move(dx, dy);
-                            }
-                        }
-                        break;
-                }
+                Editor.Move(_pointsCache, dx, dy);
             }
 
-            if (_editor.Renderers[0].State.SelectedShapes != null)
+            if (_shapesCache != null)
             {
-                switch (_editor.Project.Options.MoveMode)
-                {
-                    case MoveMode.Point:
-                        {
-                            var shapes = _editor.Renderers[0].State.SelectedShapes.Where(s => !s.State.HasFlag(ShapeState.Locked));
-                            var points = Editor.GetAllPoints(shapes, ShapeState.Connector).Distinct();
-                            Editor.Move(points, dx, dy);
-                        }
-                        break;
-                    case MoveMode.Shape:
-                        {
-                            foreach (var shape in _editor.Renderers[0].State.SelectedShapes)
-                            {
-                                if (!shape.State.HasFlag(ShapeState.Locked))
-                                {
-                                    shape.Move(dx, dy);
-                                }
-                            }
-                        }
-                        break;
-                }
+                Editor.Move(_shapesCache, dx, dy);
             }
         }
 
@@ -257,7 +279,7 @@ namespace Test2d
                     {
                         if (_editor.IsSelectionAvailable())
                         {
-                            MoveSelection(x, y);
+                            MoveSelectionTo(x, y);
                             _editor.Project.CurrentContainer.CurrentLayer.Invalidate();
                             break;
                         }
