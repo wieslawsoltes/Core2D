@@ -108,19 +108,6 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="r"></param>
-        public override void Bind(Record r)
-        {
-            var record = r ?? this.Record;
-            var bindings = this.Bindings;
-            string propertyNameX = "X";
-            string propertyNameY = "Y";
-            TryToBind(bindings, record, propertyNameX, propertyNameY);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="propertyName"></param>
         /// <param name="bindings"></param>
         /// <param name="record"></param>
@@ -128,6 +115,19 @@ namespace Test2d
         {
             string propertyNameX = propertyName + ".X";
             string propertyNameY = propertyName + ".Y";
+            TryToBind(bindings, record, propertyNameX, propertyNameY);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="r"></param>
+        public override void Bind(Record r)
+        {
+            var record = r ?? this.Record;
+            var bindings = this.Bindings;
+            string propertyNameX = "X";
+            string propertyNameY = "Y";
             TryToBind(bindings, record, propertyNameX, propertyNameY);
         }
 
