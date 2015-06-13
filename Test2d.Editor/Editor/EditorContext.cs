@@ -541,10 +541,7 @@ namespace Test2d
             {
                 builder.Add(Column.Create("Column" + i));
             }
-      
-            var db = Database.Create(
-                "New",
-                builder.ToImmutable());
+            var db = Database.Create("New", builder.ToImmutable());
 
             var previous = _editor.Project.Databases;
             var next = _editor.Project.Databases.Add(db);
@@ -568,6 +565,52 @@ namespace Test2d
                 _editor.Project.Databases = next;
 
                 _editor.Project.CurrentDatabase = _editor.Project.Databases.FirstOrDefault();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="owner"></param>
+        private void AddColumnCommandHandler(object owner)
+        {
+            if (owner != null && owner is Database)
+            {
+                var db = owner as Database;
+                if (db.Columns == null)
+                {
+                    db.Columns = ImmutableArray.Create<Column>();
+                }
+
+                var previous = db.Columns;
+                var next = db.Columns.Add(Column.Create("Column" + db.Columns.Length));
+                _editor.History.Snapshot(previous, next, (p) => db.Columns = p);
+                db.Columns = next;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameter"></param>
+        private void RemoveColumnCommandHandler(object parameter)
+        {
+            if (parameter != null && parameter is ColumnParameter)
+            {
+                var owner = (parameter as ColumnParameter).Owner;
+                var column = (parameter as ColumnParameter).Column;
+
+                if (owner is Database)
+                {
+                    var db = owner as Database;
+                    if (db.Columns != null)
+                    {
+                        var previous = db.Columns;
+                        var next = db.Columns.Remove(column);
+                        _editor.History.Snapshot(previous, next, (p) => db.Columns = p);
+                        db.Columns = next;
+                    }
+                }
             }
         }
 
@@ -618,20 +661,17 @@ namespace Test2d
         /// <param name="owner"></param>
         private void ResetRecordCommandHandler(object owner)
         {
-            if (owner != null)
+            if (owner != null && owner is BaseShape)
             {
-                if (owner is BaseShape)
-                {
-                    var shape = owner as BaseShape;
-                    var record = shape.Record;
+                var shape = owner as BaseShape;
+                var record = shape.Record;
 
-                    if (record != null)
-                    {
-                        var previous = record;
-                        var next = default(Record);
-                        _editor.History.Snapshot(previous, next, (p) => shape.Record = p);
-                        shape.Record = next;
-                    }
+                if (record != null)
+                {
+                    var previous = record;
+                    var next = default(Record);
+                    _editor.History.Snapshot(previous, next, (p) => shape.Record = p);
+                    shape.Record = next;
                 }
             }
         }
@@ -642,21 +682,18 @@ namespace Test2d
         /// <param name="owner"></param>
         private void AddBindingCommandHandler(object owner)
         {
-            if (owner != null)
+            if (owner != null && owner is BaseShape)
             {
-                if (owner is BaseShape)
+                var shape = owner as BaseShape;
+                if (shape.Bindings == null)
                 {
-                    var shape = owner as BaseShape;
-                    if (shape.Bindings == null)
-                    {
-                        shape.Bindings = ImmutableArray.Create<ShapeBinding>();
-                    }
-
-                    var previous = shape.Bindings;
-                    var next = shape.Bindings.Add(ShapeBinding.Create("", ""));
-                    _editor.History.Snapshot(previous, next, (p) => shape.Bindings = p);
-                    shape.Bindings = next;
+                    shape.Bindings = ImmutableArray.Create<ShapeBinding>();
                 }
+
+                var previous = shape.Bindings;
+                var next = shape.Bindings.Add(ShapeBinding.Create("", ""));
+                _editor.History.Snapshot(previous, next, (p) => shape.Bindings = p);
+                shape.Bindings = next;
             }
         }
 
@@ -671,7 +708,7 @@ namespace Test2d
                 var owner = (parameter as ShapeBindingParameter).Owner;
                 var binding = (parameter as ShapeBindingParameter).Binding;
 
-                if (owner is BaseShape)
+                if (owner != null && owner is BaseShape)
                 {
                     var shape = owner as BaseShape;
                     if (shape.Bindings != null)
@@ -1244,6 +1281,16 @@ namespace Test2d
                     new DelegateCommand<object>(
                         (db) => RemoveDatabaseCommandHandler(db),
                         (db) => IsEditMode());
+
+                _commands.AddColumnCommand = 
+                    new DelegateCommand<object>(
+                        (owner) => AddColumnCommandHandler(owner),
+                        (owner) => IsEditMode());
+
+                _commands.RemoveColumnCommand = 
+                    new DelegateCommand<object>(
+                        (parameter) => RemoveColumnCommandHandler(parameter),
+                        (parameter) => IsEditMode());
 
                 _commands.AddRecordCommand = 
                     new DelegateCommand(
@@ -3678,6 +3725,10 @@ namespace Test2d
 
             (_commands.AddDatabaseCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.RemoveDatabaseCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+
+            (_commands.AddRecordCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.RemoveRecordCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+
             (_commands.AddRecordCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.RemoveRecordCommand as DelegateCommand).RaiseCanExecuteChanged();
 

@@ -261,6 +261,15 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public ICommand AddColumnCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand RemoveColumnCommand { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand AddRecordCommand { get; set; }
         /// <summary>
         /// 
