@@ -957,9 +957,11 @@ namespace Test2d
             if (item is Container)
             {
                 var template = item as Container;
-                
-                // TODO: Add history snapshot.
-                _editor.Project.CurrentContainer.Template = template;
+
+                var previous = _editor.Project.CurrentContainer.Template;
+                var next = template;
+                _editor.History.Snapshot(previous, next, (p) => _editor.Project.CurrentContainer.Template = p);
+                _editor.Project.CurrentContainer.Template = next;
             }
         }
 
@@ -1895,8 +1897,6 @@ namespace Test2d
         /// <param name="type"></param>
         public void ImportEx(string path, object item, ImportType type)
         {
-            // TODO: Add ImmutableArray support.
-
             try
             {
                 switch (type)
