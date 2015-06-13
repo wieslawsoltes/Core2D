@@ -129,6 +129,94 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="bindings"></param>
+        /// <param name="record"></param>
+        /// <param name="propertyName"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private static bool TryToBind(
+            ImmutableArray<ShapeBinding> bindings, 
+            Record record, 
+            string propertyName, 
+            out string value)
+        {
+            if (record.Columns != null
+                && record.Values != null
+                && record.Columns.Length == record.Values.Length)
+            {
+                var columns = record.Columns;
+                foreach (var binding in bindings)
+                {
+                    if (!string.IsNullOrEmpty(binding.Property) 
+                        && !string.IsNullOrEmpty(binding.Path))
+                    {
+                        if (binding.Property == propertyName)
+                        {
+                            for (int i = 0; i < columns.Length; i++)
+                            {
+                                if (columns[i].Name == binding.Path)
+                                {
+                                    value = record.Values[i].Content;
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            value = null;
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bindings"></param>
+        /// <param name="db"></param>
+        /// <param name="propertyName"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private static bool TryToBind(
+            ImmutableArray<ShapeBinding> bindings, 
+            ImmutableArray<ShapeProperty> db,
+            string propertyName, 
+            out string value)
+        {
+            foreach (var binding in bindings)
+            {
+                if (!string.IsNullOrEmpty(binding.Property)
+                    && !string.IsNullOrEmpty(binding.Path))
+                {
+                    if (binding.Property == propertyName)
+                    {
+                        var result = db.FirstOrDefault(p => p.Name == binding.Path);
+                        if (result != null && result.Value != null)
+                        {
+                            value =  result.Value.ToString();
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            value = null;
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="properties"></param>
+        /// <returns></returns>
+        private static object[] ToArgs(ImmutableArray<ShapeProperty> properties)
+        {
+            return properties.Where(x => x != null).Select(x => x.Value).ToArray();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="db"></param>
         /// <param name="r"></param>
         /// <returns></returns>
@@ -137,60 +225,38 @@ namespace Test2d
             var record = r ?? this.Record;
 
             // try to bind to internal (this.Record) or external (r) data record using Bindings
-            if (record != null && this.Bindings != null && this.Bindings.Length > 0)
+            if (record != null 
+                && this.Bindings != null 
+                && this.Bindings.Length > 0)
             {
-                if (record.Columns != null
-                    && record.Values != null
-                    && record.Columns.Length == record.Values.Length)
+                string value;
+                bool success = TryToBind(this.Bindings, record, "Text", out value);
+                if (success)
                 {
-                    var columns = record.Columns;
-                    foreach (var binding in this.Bindings) 
-                    {
-                        if (!string.IsNullOrEmpty(binding.Property) && !string.IsNullOrEmpty(binding.Path))
-                        {
-                            if (binding.Property == "Text")
-                            {
-                                for (int i = 0; i < columns.Length; i++)
-                                {
-                                    if (columns[i].Name == binding.Path)
-                                    {
-                                        return record.Values[i].Content;
-                                    }
-                                 }
-                            }
-                        }
-                    }  
+                    return value;
                 }
             }
 
             // try to bind to external properties database using Bindings
-            if (db != null && this.Bindings != null && this.Bindings.Length > 0)
+            if (db != null 
+                && this.Bindings != null 
+                && this.Bindings.Length > 0)
             {
-                foreach (var binding in this.Bindings) 
+                string value;
+                bool success = TryToBind(this.Bindings, db, "Text", out value);
+                if (success)
                 {
-                    if (!string.IsNullOrEmpty(binding.Property) && !string.IsNullOrEmpty(binding.Path))
-                    {
-                        if (binding.Property == "Text")
-                        {
-                            var result = db.FirstOrDefault(p => p.Name == binding.Path);
-                            if (result != null && result.Value != null)
-                            {
-                                return result.Value.ToString();
-                            }
-                        }
-                    }
+                    return value;
                 }
             }
 
             // try to bind to Properties using Text as formatting
-            if (this.Properties != null && this.Properties.Length > 0)
+            if (this.Properties != null 
+                && this.Properties.Length > 0)
             {
                 try
                 {
-                    var args = this.Properties
-                        .Where(x => x != null)
-                        .Select(x => x.Value)
-                        .ToArray();
+                    var args = ToArgs(this.Properties);
                     if (args != null && args.Length > 0)
                     {
                         return string.Format(this.Text, args);
