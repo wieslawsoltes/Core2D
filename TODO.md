@@ -11,9 +11,9 @@
 
 ## Database
 
-* Database creator (column names, add/remove columns, default row values)
-* Rename database columns
-* Database editor (using data grid)
+* Database default row values
+* Databases list view update after columns change
+* Database editor with data grid
 * Open exported database format
 * Filter database records
 
