@@ -12,7 +12,7 @@ namespace TestEDITOR
     /// <summary>
     /// 
     /// </summary>
-    public class RolsynScriptGlobals
+    public class RoslynShapeGlobals
     {
         /// <summary>
         /// 
@@ -21,6 +21,10 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
-        public Action<Action> Execute;
+        public BaseShape Shape;
+        /// <summary>
+        /// 
+        /// </summary>
+        public object State;
     }
 }

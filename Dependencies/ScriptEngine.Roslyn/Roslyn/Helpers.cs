@@ -1,5 +1,4 @@
-﻿using Dxf;
-// Copyright (c) Wiesław Šoltés. All rights reserved.
+﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Scripting;
@@ -8,6 +7,7 @@ using System;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Reflection;
+using Dxf;
 using Test2d;
 using TestEDITOR;
 using TestSIM;
@@ -17,15 +17,13 @@ namespace TestEDITOR
     /// <summary>
     /// 
     /// </summary>
-    public class RoslynScriptEngine : IScriptEngine
+    internal static class Helpers
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="code"></param>
-        /// <param name="context"></param>
-        /// <param name="execute"></param>
-        public void Eval(string code, object context, Action<Action> execute)
+        /// <returns></returns>
+        public static ScriptOptions GetOptions()
         {
             var path = System.IO.Path.GetDirectoryName(typeof(object).Assembly.Location);
 
@@ -61,16 +59,7 @@ namespace TestEDITOR
                 // Dxf
                 .AddReferences(Assembly.GetAssembly(typeof(DxfObject)))
                 .AddNamespaces("Dxf");
-
-            CSharpScript.Eval(
-                code,
-                options,
-                new RolsynScriptGlobals()
-                {
-                    Context = context as EditorContext,
-                    Execute = execute
-                });
+            return options;
         }
     }
-
 }
