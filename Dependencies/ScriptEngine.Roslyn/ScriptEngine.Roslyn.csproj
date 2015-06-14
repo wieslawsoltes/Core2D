@@ -102,9 +102,8 @@
     <Compile Include="Roslyn\Helpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Roslyn\RoslynCodeEngine.cs" />
-    <Compile Include="Roslyn\RoslynScriptCache.cs" />
     <Compile Include="Roslyn\RoslynScriptGlobals.cs" />
-    <Compile Include="Roslyn\RoslynShapeGlobals.cs" />
+    <Compile Include="Roslyn\RoslynCodeGlobals.cs" />
     <Compile Include="Roslyn\RoslynScriptEngine.cs" />
   </ItemGroup>
   <ItemGroup>
