@@ -28,6 +28,7 @@ namespace Test2d
         private ISerializer _serializer;
         private ICompressor _compressor;
         private IScriptEngine _scriptEngine;
+        private ICodeEngine _codeEngine;
         private IFileWriter _pdfWriter;
         private IFileWriter _dxfWriter;
         private ITextFieldReader<Database> _csvReader;
@@ -113,6 +114,15 @@ namespace Test2d
         {
             get { return _scriptEngine; }
             set { Update(ref _scriptEngine, value); }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public ICodeEngine CodeEngine
+        {
+            get { return _codeEngine; }
+            set { Update(ref _codeEngine, value); }
         }
 
         /// <summary>
