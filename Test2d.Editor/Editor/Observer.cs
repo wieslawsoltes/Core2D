@@ -17,6 +17,8 @@ namespace Test2d
     /// </summary>
     public class Observer
     {
+        public bool IsPaused { get; set; }
+
         private readonly Editor _editor;
         private readonly Action _invalidateContainer;
         private readonly Action _invalidateStyles;
@@ -33,10 +35,19 @@ namespace Test2d
 
             _invalidateContainer = () =>
             {
+                if (IsPaused)
+                {
+                    return;
+                }
             };
 
             _invalidateStyles = () =>
             {
+                if (IsPaused)
+                {
+                    return;
+                }
+
                 if (_editor.Project.CurrentContainer != null)
                 {
                     foreach (var renderer in _editor.Renderers)
@@ -49,6 +60,11 @@ namespace Test2d
 
             _invalidateLayers = () =>
             {
+                if (IsPaused)
+                {
+                    return;
+                }
+
                 if (_editor.Project.CurrentContainer != null)
                 {
                     _editor.Project.CurrentContainer.Invalidate();
@@ -57,6 +73,11 @@ namespace Test2d
 
             _invalidateShapes = () =>
             {
+                if (IsPaused)
+                {
+                    return;
+                }
+
                 if (_editor.Project.CurrentContainer != null)
                 {
                     _editor.Project.CurrentContainer.Invalidate();
