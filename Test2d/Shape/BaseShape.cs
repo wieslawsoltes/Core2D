@@ -17,6 +17,8 @@ namespace Test2d
         private ImmutableArray<ShapeBinding> _bindings;
         private ImmutableArray<ShapeProperty> _properties;
         private Record _record;
+        private bool _isExecutable;
+        private string _code;
 
         /// <summary>
         /// Gets or sets shape name.
@@ -79,6 +81,24 @@ namespace Test2d
         {
             get { return _record; }
             set { Update(ref _record, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets value indicating whether C# code is executable.
+        /// </summary>
+        public bool IsExecutable
+        {
+            get { return _isExecutable; }
+            set { Update(ref _isExecutable, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets shape executable C# code used for simulation.
+        /// </summary>
+        public string Code
+        {
+            get { return _code; }
+            set { Update(ref _code, value); }
         }
 
         /// <summary>
