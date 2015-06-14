@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using Test2d;
 
-namespace TestEDITOR
+namespace Test2d
 {
     /// <summary>
     /// 

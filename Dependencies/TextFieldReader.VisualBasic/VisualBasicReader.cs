@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Test2d;
 
-namespace TestEDITOR
+namespace Test2d
 {
     /// <summary>
     /// 

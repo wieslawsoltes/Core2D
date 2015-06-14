@@ -9,10 +9,9 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using Dxf;
 using Test2d;
-using TestEDITOR;
 using TestSIM;
 
-namespace TestEDITOR
+namespace Test2d
 {
     /// <summary>
     /// 
@@ -52,7 +51,6 @@ namespace TestEDITOR
                 .AddReferences(Assembly.GetAssembly(typeof(Vector2)))
                 // Editor
                 .AddReferences(Assembly.GetAssembly(typeof(Editor)))
-                .AddNamespaces("TestEDITOR")
                 // Simulation
                 .AddReferences(Assembly.GetAssembly(typeof(Clock)))
                 .AddNamespaces("TestSIM")

@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Globalization;
 using Test2d;
 
-namespace TestEDITOR
+namespace Test2d
 {
     public class CsvHelperWriter : ITextFieldWriter<Database>
     {

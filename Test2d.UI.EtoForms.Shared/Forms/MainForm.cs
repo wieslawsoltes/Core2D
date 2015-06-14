@@ -11,7 +11,6 @@ using Eto;
 using Eto.Drawing;
 using Eto.Forms;
 using Test2d;
-using TestEDITOR;
 using System.Diagnostics;
 
 namespace TestEtoForms

@@ -19,7 +19,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Test2d;
-using TestEDITOR;
 
 namespace Test.Windows
 {

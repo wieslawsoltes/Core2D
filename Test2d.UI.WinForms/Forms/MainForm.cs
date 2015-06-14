@@ -9,7 +9,6 @@ using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.Windows.Forms;
 using Test2d;
-using TestEDITOR;
 
 namespace TestWinForms
 {
