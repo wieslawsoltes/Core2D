@@ -3726,8 +3726,8 @@ namespace Test2d
             (_commands.AddDatabaseCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.RemoveDatabaseCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
 
-            (_commands.AddRecordCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.RemoveRecordCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.AddColumnCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.RemoveColumnCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
 
             (_commands.AddRecordCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.RemoveRecordCommand as DelegateCommand).RaiseCanExecuteChanged();
