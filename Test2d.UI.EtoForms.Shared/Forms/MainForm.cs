@@ -50,6 +50,7 @@ namespace TestEtoForms
                 Serializer = new NewtonsoftSerializer(),
                 Compressor = new LZ4CodecCompressor(),
                 ScriptEngine = new RoslynScriptEngine(),
+                CodeEngine = new RoslynCodeEngine(),
                 PdfWriter = new PdfWriter(),
                 DxfWriter = new DxfWriter(),
                 CsvReader = new VisualBasicReader(),
