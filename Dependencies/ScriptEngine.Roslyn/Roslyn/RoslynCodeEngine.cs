@@ -6,20 +6,26 @@ using Microsoft.CodeAnalysis.Scripting.CSharp;
 using System;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reflection;
+using System.Text;
 using Dxf;
 using Test2d;
 using TestSIM;
 
-namespace TestEDITOR
+namespace Test2d
 {
     /// <summary>
     /// 
     /// </summary>
     public class RoslynCodeEngine : ICodeEngine
     {
-        private bool _haveCache;
-        private ImmutableArray<RoslynScriptCache> _cache;
+        private ScriptOptions _options;
+        private BaseShape[] _shapes;
+        private RoslynCodeGlobals<object> _globals;
+        private string _code;
+        private bool _haveRunner;
+        private ScriptRunner _runner;
 
         /// <summary>
         /// 
@@ -28,39 +34,46 @@ namespace TestEDITOR
         /// <param name="context"></param>
         public void Build(ImmutableArray<BaseShape> shapes, object context)
         {
-            var options = Helpers.GetOptions();
-            var cache = ImmutableArray.CreateBuilder<RoslynScriptCache>();
-
-            foreach (var shape in shapes)
+            _options = Helpers.GetOptions();
+            _shapes = shapes.Where(s => s.IsExecutable && !string.IsNullOrEmpty(s.Code)).ToArray();
+            _globals = new RoslynCodeGlobals<object>()
             {
-                if (!shape.IsExecutable || string.IsNullOrEmpty(shape.Code))
-                    continue;
+                Context = context as EditorContext,
+                Shapes = _shapes,
+                State = null
+            };
 
-                var script = CSharpScript.Create(shape.Code, options);
-                script.Build();
-
-                cache.Add(new RoslynScriptCache(shape, script, context));
+            // merge all shapes code as one big script
+            var sb = new StringBuilder();
+            for (int i = 0; i < _shapes.Length; i++)
+            {
+                // wrap shape Code in a block and define Shape variable as its own type
+                sb.AppendLine("{");
+                sb.AppendLine(string.Concat("var Shape = Shapes[", i, "] as ", _shapes[i].GetType().Name, ";"));
+                sb.AppendLine(_shapes[i].Code);
+                sb.AppendLine("}");
             }
+            _code = sb.ToString();
 
-            _cache = cache.ToImmutableArray();
-            _haveCache = true;
+            _runner = CSharpScript.Create(_code, _options).WithGlobalsType(typeof(RoslynCodeGlobals<object>)).CreateDelegate();
+            _haveRunner = true;
         }
 
         public void Run()
         {
-            if (!_haveCache)
+            if (!_haveRunner)
                 return;
 
-            foreach (var item in _cache)
-            {
-                item.Script.Run(item.Globals);
-            }
+            _runner(_globals);
         }
 
         public void Reset()
         {
-            _haveCache = false;
-            _cache = ImmutableArray<RoslynScriptCache>.Empty;
+            _haveRunner = false;
+            _options = null;
+            _shapes = null;
+            _globals = null;
+            _code = null;
         }
     }
 }
