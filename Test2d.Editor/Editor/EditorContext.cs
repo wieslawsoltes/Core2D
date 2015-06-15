@@ -3522,6 +3522,47 @@ namespace Test2d
                     return;
                 }
 
+                var shapes = _editor.Project.Documents
+                    .SelectMany(d => d.Containers)
+                    .SelectMany(c => c.Layers)
+                    .SelectMany(l => l.Shapes).ToImmutableArray();
+
+                _codeEngine.Build(shapes, this);
+
+                _clock = new Clock(cycle: 0L, resolution: 100);
+                IsSimulationPaused = false;
+
+                _timer = new System.Threading.Timer(
+                    (state) =>
+                    {
+                        try
+                        {
+                            if (!IsSimulationPaused)
+                            {
+                                TickSimulation();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            if (_editor.Log != null)
+                            {
+                                _editor.Log.LogError("{0}{1}{2}",
+                                    ex.Message,
+                                    Environment.NewLine,
+                                    ex.StackTrace);
+                            }
+
+                            if (IsSimulationMode())
+                            {
+                                StopSimulation();
+                            }
+                        }
+                    },
+                    null, 0, _clock.Resolution);
+
+                UpdateCanExecuteState();
+
+                /*
                 var graph = ContainerGraph.Create(Editor.Project.CurrentContainer);
                 if (graph != null)
                 {
@@ -3562,6 +3603,7 @@ namespace Test2d
                         UpdateCanExecuteState();
                     }
                 }
+                */
             }
             catch (Exception ex)
             {
@@ -3647,7 +3689,16 @@ namespace Test2d
             {
                 if (IsSimulationMode())
                 {
-                    _simulationFactory.Run(Simulations, _clock);
+                    //_simulationFactory.Run(Simulations, _clock);
+
+                    _editor.Observer.IsPaused = true;
+                    _codeEngine.Run();
+                    _editor.Observer.IsPaused = false;
+                    if (_editor.Project.CurrentContainer != null)
+                    {
+                        _editor.Project.CurrentContainer.Invalidate();
+                    }
+
                     _clock.Tick();
                     // TODO: Update Working layer simulation state.
                 }
