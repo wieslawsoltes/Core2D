@@ -11,7 +11,7 @@ using Dxf;
 using Test2d;
 using TestSIM;
 
-namespace TestEDITOR
+namespace Test2d
 {
     /// <summary>
     /// 
