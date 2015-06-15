@@ -12,7 +12,7 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public class RoslynCodeGlobals
+    public class RoslynCodeGlobals<T>
     {
         /// <summary>
         /// 
@@ -25,6 +25,6 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public object State;
+        public T State;
     }
 }
