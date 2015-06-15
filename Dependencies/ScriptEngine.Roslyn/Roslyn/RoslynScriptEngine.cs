@@ -23,8 +23,7 @@ namespace Test2d
         /// </summary>
         /// <param name="code"></param>
         /// <param name="context"></param>
-        /// <param name="execute"></param>
-        public void Eval(string code, object context, Action<Action> execute)
+        public void Eval(string code, object context)
         {
             var options = Helpers.GetOptions();
             CSharpScript.Eval(
@@ -32,8 +31,7 @@ namespace Test2d
                 options,
                 new RoslynScriptGlobals()
                 {
-                    Context = context as EditorContext,
-                    Execute = execute
+                    Context = context as EditorContext
                 });
         }
     }

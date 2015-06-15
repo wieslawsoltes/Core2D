@@ -58,12 +58,10 @@ namespace TestWinForms
                 PdfWriter = new PdfWriter(),
                 DxfWriter = new DxfWriter(),
                 CsvReader = new VisualBasicReader(),
-                CsvWriter = new CsvHelperWriter(),
-                Execute = (action) => action()
+                CsvWriter = new CsvHelperWriter()
             };
             context.InitializeEditor();
             context.InitializeSctipts();
-            context.InitializeSimulation();
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
 
             DataContext = context;

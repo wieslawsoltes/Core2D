@@ -14,7 +14,6 @@ namespace Test2d
         /// </summary>
         /// <param name="code"></param>
         /// <param name="context"></param>
-        /// <param name="execute"></param>
-        void Eval(string code, object context, Action<Action> execute);
+        void Eval(string code, object context);
     }
 }

@@ -89,13 +89,11 @@ namespace Test.Windows
                 PdfWriter = new PdfWriter(),
                 DxfWriter = new DxfWriter(),
                 CsvReader = new VisualBasicReader(),
-                CsvWriter = new CsvHelperWriter(),
-                Execute = (action) => Dispatcher.Invoke(action)
+                CsvWriter = new CsvHelperWriter()
             };
 
             context.InitializeEditor();
             context.InitializeSctipts();
-            context.InitializeSimulation();
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
             context.Editor.Renderers[1].State.DrawShapeState = ShapeState.Visible;
             context.Editor.GetImagePath = () => Image();

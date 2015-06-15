@@ -18,9 +18,5 @@ namespace Test2d
         /// 
         /// </summary>
         public EditorContext Context;
-        /// <summary>
-        /// 
-        /// </summary>
-        public Action<Action> Execute;
     }
 }
