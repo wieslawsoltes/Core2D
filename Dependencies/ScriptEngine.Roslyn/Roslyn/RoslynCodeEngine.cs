@@ -36,11 +36,12 @@ namespace Test2d
         {
             _options = Helpers.GetOptions();
             _shapes = shapes.Where(s => s.IsExecutable && !string.IsNullOrEmpty(s.Code)).ToArray();
+
             _globals = new RoslynCodeGlobals<object>()
             {
                 Context = context as EditorContext,
                 Shapes = _shapes,
-                State = null
+                States = new object[_shapes.Length]
             };
 
             // merge all shapes code as one big script
@@ -49,6 +50,7 @@ namespace Test2d
             {
                 // wrap shape Code in a block and define Shape variable as its own type
                 sb.AppendLine("{");
+                sb.AppendLine(string.Concat("var State = States[", i, "];"));
                 sb.AppendLine(string.Concat("var Shape = Shapes[", i, "] as ", _shapes[i].GetType().Name, ";"));
                 sb.AppendLine(_shapes[i].Code);
                 sb.AppendLine("}");
