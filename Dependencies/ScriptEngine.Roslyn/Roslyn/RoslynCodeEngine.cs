@@ -58,7 +58,13 @@ namespace Test2d
             }
             _code = sb.ToString();
 
-            _runner = CSharpScript.Create(_code, _options).WithGlobalsType(typeof(RoslynCodeGlobals<object>)).CreateDelegate();
+            _runner = CSharpScript.Create(_code, _options)
+                .WithGlobalsType(typeof(RoslynCodeGlobals<object>))
+                .CreateDelegate();
+
+            // initialize States before first tick
+            _runner(_globals);
+
             _haveRunner = true;
         }
 
