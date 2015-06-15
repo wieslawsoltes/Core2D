@@ -5,7 +5,7 @@ using System.IO;
 using System.IO.Compression;
 using Test2d;
 
-namespace TestEDITOR
+namespace Test2d
 {
     /// <summary>
     /// 

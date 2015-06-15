@@ -28,6 +28,7 @@ namespace Test2d
         private ISerializer _serializer;
         private ICompressor _compressor;
         private IScriptEngine _scriptEngine;
+        private ICodeEngine _codeEngine;
         private IFileWriter _pdfWriter;
         private IFileWriter _dxfWriter;
         private ITextFieldReader<Database> _csvReader;
@@ -35,11 +36,9 @@ namespace Test2d
         private string _rootScriptsPath;
         private ImmutableArray<ScriptDirectory> _scriptDirectories;
         private bool _isSimulationPaused;
+        private Clock _clock = default(Clock);
         private System.IO.FileSystemWatcher _watcher = default(System.IO.FileSystemWatcher);
         private System.Threading.Timer _timer = default(System.Threading.Timer);
-        private BoolSimulationFactory _simulationFactory = default(BoolSimulationFactory);
-        private IDictionary<XGroup, BoolSimulation> _simulations;
-        private Clock _clock = default(Clock);
         private Container _containerToCopy = default(Container);
         private Document _documentToCopy = default(Document);
         
@@ -118,6 +117,15 @@ namespace Test2d
         /// <summary>
         ///
         /// </summary>
+        public ICodeEngine CodeEngine
+        {
+            get { return _codeEngine; }
+            set { Update(ref _codeEngine, value); }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
         public IFileWriter PdfWriter
         {
             get { return _pdfWriter; }
@@ -172,25 +180,20 @@ namespace Test2d
         /// <summary>
         ///
         /// </summary>
+        public Clock Clock
+        {
+            get { return _clock; }
+            set { Update(ref _clock, value); }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
         public bool IsSimulationPaused
         {
             get { return _isSimulationPaused; }
             set { Update(ref _isSimulationPaused, value); }
         }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public IDictionary<XGroup, BoolSimulation> Simulations
-        {
-            get { return _simulations; }
-            set { Update(ref _simulations, value); }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public Action<Action> Execute { get; set; }
 
         /// <summary>
         ///
@@ -1494,7 +1497,7 @@ namespace Test2d
                 Task.Run(
                     () =>
                     {
-                        Eval("Action a = () => { };", this, Execute);
+                        Eval("Action a = () => { };", this);
                     });
             }
             catch (Exception ex)
@@ -1578,42 +1581,6 @@ namespace Test2d
         /// <summary>
         ///
         /// </summary>
-        public void InitializeSimulation()
-        {
-            try
-            {
-                _simulationFactory = new BoolSimulationFactory();
-                _simulationFactory.Register(new SignalSimulation());
-                _simulationFactory.Register(new InputSimulation());
-                _simulationFactory.Register(new OutputSimulation());
-                _simulationFactory.Register(new ShortcutSimulation());
-                _simulationFactory.Register(new AndSimulation());
-                _simulationFactory.Register(new OrSimulation());
-                _simulationFactory.Register(new InverterSimulation());
-                _simulationFactory.Register(new XorSimulation());
-                _simulationFactory.Register(new TimerOnSimulation());
-                _simulationFactory.Register(new TimerOffSimulation());
-                _simulationFactory.Register(new TimerPulseSimulation());
-                _simulationFactory.Register(new MemoryResetPriorityVSimulation());
-                _simulationFactory.Register(new MemorySetPriorityVSimulation());
-                _simulationFactory.Register(new MemoryResetPrioritySimulation());
-                _simulationFactory.Register(new MemorySetPrioritySimulation());
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
         public void Invalidate()
         {
             try
@@ -1642,12 +1609,11 @@ namespace Test2d
         /// </summary>
         /// <param name="code"></param>
         /// <param name="context"></param>
-        /// <param name="execute"></param>
-        public void Eval(string code, EditorContext context, Action<Action> execute)
+        public void Eval(string code, EditorContext context)
         {
             try
             {
-                _scriptEngine.Eval(code, context, execute);
+                _scriptEngine.Eval(code, context);
             }
             catch (Exception ex)
             {
@@ -1671,7 +1637,7 @@ namespace Test2d
             {
                 var code = System.IO.File.ReadAllText(path);
                 var context = this;
-                Eval(code, context, Execute);
+                Eval(code, context);
             }
             catch (Exception ex)
             {
@@ -3512,46 +3478,45 @@ namespace Test2d
                     return;
                 }
 
-                var graph = ContainerGraph.Create(Editor.Project.CurrentContainer);
-                if (graph != null)
-                {
-                    Simulations = _simulationFactory.Create(graph);
-                    if (Simulations != null)
+                _clock = new Clock(cycle: 0L, resolution: 100);
+
+                var shapes = _editor.Project.Documents
+                    .SelectMany(d => d.Containers)
+                    .SelectMany(c => c.Layers)
+                    .SelectMany(l => l.Shapes).ToImmutableArray();
+                _codeEngine.Build(shapes, this);
+
+                IsSimulationPaused = false;
+                _timer = new System.Threading.Timer(
+                    (state) =>
                     {
-                        // TODO: Use Working layer to show simulation state.
-                        _clock = new Clock(cycle: 0L, resolution: 100);
-                        IsSimulationPaused = false;
-                        _timer = new System.Threading.Timer(
-                            (state) =>
+                        try
+                        {
+                            if (!IsSimulationPaused)
                             {
-                                try
-                                {
-                                    if (!IsSimulationPaused)
-                                    {
-                                        TickSimulation();
-                                    }
-                                }
-                                catch (Exception ex)
-                                {
-                                    if (_editor.Log != null)
-                                    {
-                                        _editor.Log.LogError("{0}{1}{2}",
-                                            ex.Message,
-                                            Environment.NewLine,
-                                            ex.StackTrace);
-                                    }
+                                TickSimulation();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            if (_editor.Log != null)
+                            {
+                                _editor.Log.LogError("{0}{1}{2}",
+                                    ex.Message,
+                                    Environment.NewLine,
+                                    ex.StackTrace);
+                            }
 
-                                    if (IsSimulationMode())
-                                    {
-                                        StopSimulation();
-                                    }
-                                }
-                            },
-                            null, 0, _clock.Resolution);
+                            if (IsSimulationMode())
+                            {
+                                StopSimulation();
+                            }
+                        }
+                    },
+                    null, 0, _clock.Resolution);
 
-                        UpdateCanExecuteState();
-                    }
-                }
+                UpdateCanExecuteState();
+
             }
             catch (Exception ex)
             {
@@ -3572,8 +3537,6 @@ namespace Test2d
         {
             try
             {
-                // TODO: Reset Working layer simulation state.
-
                 if (IsSimulationMode())
                 {
                     _timer.Dispose();
@@ -3637,9 +3600,14 @@ namespace Test2d
             {
                 if (IsSimulationMode())
                 {
-                    _simulationFactory.Run(Simulations, _clock);
+                    _editor.Observer.IsPaused = true;
+                    _codeEngine.Run();
+                    _editor.Observer.IsPaused = false;
+                    if (_editor.Project.CurrentContainer != null)
+                    {
+                        _editor.Project.CurrentContainer.Invalidate();
+                    }
                     _clock.Tick();
-                    // TODO: Update Working layer simulation state.
                 }
             }
             catch (Exception ex)

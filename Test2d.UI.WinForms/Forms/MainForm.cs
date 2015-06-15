@@ -9,7 +9,6 @@ using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.Windows.Forms;
 using Test2d;
-using TestEDITOR;
 
 namespace TestWinForms
 {
@@ -55,15 +54,14 @@ namespace TestWinForms
                 Serializer = new NewtonsoftSerializer(),
                 Compressor = new LZ4CodecCompressor(),
                 ScriptEngine = new RoslynScriptEngine(),
+                CodeEngine = new RoslynCodeEngine(),
                 PdfWriter = new PdfWriter(),
                 DxfWriter = new DxfWriter(),
                 CsvReader = new VisualBasicReader(),
-                CsvWriter = new CsvHelperWriter(),
-                Execute = (action) => action()
+                CsvWriter = new CsvHelperWriter()
             };
             context.InitializeEditor();
             context.InitializeSctipts();
-            context.InitializeSimulation();
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
 
             DataContext = context;

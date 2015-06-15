@@ -113,7 +113,16 @@ namespace TestSIM
         /// <returns></returns>
         public static ContainerGraphContext Create(Container container)
         {
-            var shapes = container.Layers.SelectMany(l => l.Shapes);
+            return Create(container.Layers.SelectMany(l => l.Shapes));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
+        /// <returns></returns>
+        public static ContainerGraphContext Create(IEnumerable<BaseShape> shapes)
+        {
             var groups = shapes.Where(s => s is XGroup).Cast<XGroup>();
             var pins = shapes.Where(s => IsPinStandalone(s)).Cast<XPoint>();
             var wires = shapes.Where(s => IsValidWireType(s));

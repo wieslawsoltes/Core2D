@@ -7,12 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Test2d;
 
-namespace TestEDITOR
+namespace Test2d
 {
     /// <summary>
     /// 
     /// </summary>
-    public class RolsynScriptGlobals
+    public class RoslynCodeGlobals<T>
     {
         /// <summary>
         /// 
@@ -21,6 +21,10 @@ namespace TestEDITOR
         /// <summary>
         /// 
         /// </summary>
-        public Action<Action> Execute;
+        public BaseShape[] Shapes;
+        /// <summary>
+        /// 
+        /// </summary>
+        public T[] States;
     }
 }

@@ -11,7 +11,6 @@ using Eto;
 using Eto.Drawing;
 using Eto.Forms;
 using Test2d;
-using TestEDITOR;
 using System.Diagnostics;
 
 namespace TestEtoForms
@@ -50,15 +49,14 @@ namespace TestEtoForms
                 Serializer = new NewtonsoftSerializer(),
                 Compressor = new LZ4CodecCompressor(),
                 ScriptEngine = new RoslynScriptEngine(),
+                CodeEngine = new RoslynCodeEngine(),
                 PdfWriter = new PdfWriter(),
                 DxfWriter = new DxfWriter(),
                 CsvReader = new VisualBasicReader(),
-                CsvWriter = new CsvHelperWriter(),
-                Execute = (action) => action()
+                CsvWriter = new CsvHelperWriter()
             };
             _context.InitializeEditor();
             _context.InitializeSctipts();
-            _context.InitializeSimulation();
             _context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
             _context.Editor.GetImagePath = () => Image();
 

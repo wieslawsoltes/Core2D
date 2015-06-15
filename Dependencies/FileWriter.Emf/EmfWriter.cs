@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using Test2d;
 using WPF = System.Windows;
 
-namespace TestEDITOR
+namespace Test2d
 {
     /// <summary>
     /// 

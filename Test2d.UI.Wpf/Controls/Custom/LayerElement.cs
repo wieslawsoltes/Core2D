@@ -117,7 +117,11 @@ namespace Test.Controls
         /// <param name="e"></param>
         private void Invalidate(object sender, InvalidateLayerEventArgs e)
         {
-            this.InvalidateVisual();
+            Dispatcher.Invoke(
+                () =>
+                {
+                    this.InvalidateVisual();
+                });
         }
 
         /// <summary>
