@@ -50,6 +50,7 @@ namespace Test2d
             {
                 // wrap shape Code in a block and define Shape variable as its own type
                 sb.AppendLine("{");
+                sb.AppendLine(string.Concat("var Id = ", i, ";"));
                 sb.AppendLine(string.Concat("var State = States[", i, "];"));
                 sb.AppendLine(string.Concat("var Shape = Shapes[", i, "] as ", _shapes[i].GetType().Name, ";"));
                 sb.AppendLine(_shapes[i].Code);
