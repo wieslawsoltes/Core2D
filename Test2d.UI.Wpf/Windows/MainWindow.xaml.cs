@@ -238,6 +238,16 @@ namespace Test.Windows
                     () => Eval(),
                     () => context.IsEditMode());
 
+            context.Commands.ImportCodeCommand =
+                new DelegateCommand(
+                    () => ImportCode(),
+                    () => context.IsEditMode());
+
+            context.Commands.ExportCodeCommand =
+                new DelegateCommand(
+                    () => ExportCode(),
+                    () => context.IsEditMode());
+
             context.Commands.ZoomResetCommand = 
                 new DelegateCommand(
                     () => grid.ResetZoomAndPan(),
@@ -612,6 +622,86 @@ namespace Test.Windows
                 foreach (var path in dlg.FileNames)
                 {
                     context.Eval(path);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ImportCode()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            var shape = context.Editor.Renderers[0].State.SelectedShape;
+            if (shape == null)
+                return;
+
+            try
+            {
+                var dlg = new OpenFileDialog()
+                {
+                    Filter = "C# (*.cs)|*.cs|All (*.*)|*.*",
+                    FilterIndex = 0,
+                    FileName = ""
+                };
+
+                if (dlg.ShowDialog() == true)
+                {
+                    shape.Code = System.IO.File.ReadAllText(dlg.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (context.Editor.Log != null)
+                {
+                    context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ExportCode()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            var shape = context.Editor.Renderers[0].State.SelectedShape;
+            if (shape == null)
+                return;
+
+            try
+            {
+                string name = "code";
+
+                var dlg = new SaveFileDialog()
+                {
+                    Filter = "C# (*.cs)|*.cs|All (*.*)|*.*",
+                    FilterIndex = 0,
+                    FileName = name
+                };
+
+                if (dlg.ShowDialog() == true)
+                {
+                    System.IO.File.WriteAllText(dlg.FileName, shape.Code);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (context.Editor.Log != null)
+                {
+                    context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
                 }
             }
         }
