@@ -174,7 +174,18 @@
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable Title="Code" AutoHideWidth="230">
-                                <controls:CodeControl/>
+                                <controls:CodeControl>
+                                    <controls:CodeControl.Style>
+                                        <Style TargetType="controls:CodeControl">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Editor.Renderers[0].State.SelectedShape}" Value="{x:Null}">
+                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </controls:CodeControl.Style>
+                                </controls:CodeControl>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable Title="Template" AutoHideWidth="230">
                                 <ScrollViewer 

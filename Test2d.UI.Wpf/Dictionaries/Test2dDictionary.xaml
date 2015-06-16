@@ -1017,16 +1017,6 @@
     </DataTemplate>
     <ControlTemplate x:Key="CodeControlTemplateKey">
         <TabControl>
-            <TabItem Header="Code">
-                <TextBox Text="{Binding Code, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center"
-                         AcceptsReturn="True"
-                         AcceptsTab="True">
-                </TextBox>
-            </TabItem>
             <TabItem Header="Flags">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -1052,6 +1042,26 @@
                               Margin="5,2,5,2">
                     </CheckBox>
                 </Grid>
+            </TabItem>
+            <TabItem Header="Code">
+                <TextBox Text="{Binding Code, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                         BorderBrush="{x:Null}" 
+                         Margin="5,2,5,2"
+                         TextAlignment="Left" 
+                         VerticalAlignment="Center"
+                         AcceptsReturn="True"
+                         AcceptsTab="True">
+                </TextBox>
+            </TabItem>
+            <TabItem Header="Data">
+                <TextBox Text="{Binding Data, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                         BorderBrush="{x:Null}" 
+                         Margin="5,2,5,2"
+                         TextAlignment="Left" 
+                         VerticalAlignment="Center"
+                         AcceptsReturn="True"
+                         AcceptsTab="True">
+                </TextBox>
             </TabItem>
         </TabControl>
     </ControlTemplate>
@@ -2201,7 +2211,7 @@
                       Grid.ColumnSpan="3">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="False"
+            <Expander Header="Code" IsExpanded="True"
                       Grid.Row="5" 
                       Grid.Column="0"
                       Grid.ColumnSpan="3">
@@ -2248,7 +2258,7 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="False">
+            <Expander Header="Code" IsExpanded="True">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data" IsExpanded="True">
@@ -2315,7 +2325,7 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="False">
+            <Expander Header="Code" IsExpanded="True">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data" IsExpanded="True">
@@ -2382,7 +2392,7 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="False">
+            <Expander Header="Code" IsExpanded="True">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data" IsExpanded="True">
@@ -2455,7 +2465,7 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="False">
+            <Expander Header="Code" IsExpanded="True">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data" IsExpanded="True">
@@ -2528,7 +2538,7 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="False">
+            <Expander Header="Code" IsExpanded="True">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data" IsExpanded="True">
@@ -2598,7 +2608,7 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="False">
+            <Expander Header="Code" IsExpanded="True">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data" IsExpanded="True">
@@ -2685,7 +2695,7 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="False">
+            <Expander Header="Code" IsExpanded="True">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data" IsExpanded="True">
@@ -2772,7 +2782,7 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="False">
+            <Expander Header="Code" IsExpanded="True">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data" IsExpanded="True">
@@ -2846,7 +2856,7 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="False">
+            <Expander Header="Code" IsExpanded="True">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data" IsExpanded="True">
@@ -2953,7 +2963,7 @@
             <Expander Header="Geometry" IsExpanded="False">
                 <ContentControl Content="{Binding Geometry}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="False">
+            <Expander Header="Code" IsExpanded="True">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data" IsExpanded="True">

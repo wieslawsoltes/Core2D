@@ -1,9 +1,11 @@
-﻿
-if (States[Id] == null)
+BoolSimulationFactory factory;
+IDictionary<XGroup, BoolSimulation> simulations;
+
+void Init(EditorContext context)
 {
     try
     {
-        var shapes = Context.Editor.Project.Documents
+        var shapes = context.Editor.Project.Documents
             .SelectMany(d => d.Containers)
             .SelectMany(c => c.Layers)
             .SelectMany(l => l.Shapes);
@@ -12,7 +14,7 @@ if (States[Id] == null)
             var graph = ContainerGraph.Create(shapes);
             if (graph != null)
             {
-                var factory = new BoolSimulationFactory();
+                factory = new BoolSimulationFactory();
                 factory.Register(new SignalSimulation());
                 factory.Register(new InputSimulation());
                 factory.Register(new OutputSimulation());
@@ -29,44 +31,38 @@ if (States[Id] == null)
                 factory.Register(new MemoryResetPrioritySimulation());
                 factory.Register(new MemorySetPrioritySimulation());
 
-                var simulations = factory.Create(graph);
-                if (simulations != null)
-                {
-                    States[Id] = Tuple.Create(factory, simulations);
-                }
+                simulations = factory.Create(graph);
             }
         }
     }
     catch (Exception ex)
     {
-        if (Context.Editor.Log != null)
+        if (context.Editor.Log != null)
         {
-            Context.Editor.Log.LogError("{0}{1}{2}",
+            context.Editor.Log.LogError("{0}{1}{2}",
                 ex.Message,
                 Environment.NewLine,
                 ex.StackTrace);
         }
     }
 }
-else
+
+void Run(EditorContext context, XText shape)
 {
     try
     {
-        if (States[Id] != null)
+        if (simulations != null)
         {
-            var tuple = States[Id] as Tuple<BoolSimulationFactory, IDictionary<XGroup, BoolSimulation>>;
-            var factory = tuple.Item1;
-            var simulations = tuple.Item2;
-            factory.Run(simulations, Context.Clock);
+            factory.Run(simulations, context.Clock);
         }
 
-        Shape.Text = Context.Clock.Cycle.ToString();
+        shape.Text = context.Clock.Cycle.ToString();
     }
     catch (Exception ex)
     {
-        if (Context.Editor.Log != null)
+        if (context.Editor.Log != null)
         {
-            Context.Editor.Log.LogError("{0}{1}{2}",
+            context.Editor.Log.LogError("{0}{1}{2}",
                 ex.Message,
                 Environment.NewLine,
                 ex.StackTrace);

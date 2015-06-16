@@ -126,8 +126,19 @@ namespace Test.Controls
         {
             InitializeComponent();
 
-            textEditor.Options.ConvertTabsToSpaces = true;
-            textEditor.Options.ShowColumnRuler = true;
+            InitializeTextEditors();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitializeTextEditors()
+        {
+            codeEditor.Options.ConvertTabsToSpaces = true;
+            codeEditor.Options.ShowColumnRuler = true;
+
+            dataEditor.Options.ConvertTabsToSpaces = true;
+            dataEditor.Options.ShowColumnRuler = true;
         }
     }
 }
