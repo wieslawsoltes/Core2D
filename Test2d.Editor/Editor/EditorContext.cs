@@ -3478,7 +3478,9 @@ namespace Test2d
                     return;
                 }
 
-                _clock = new Clock(cycle: 0L, resolution: 100);
+                _clock = new Clock(
+                    cycle: 0L, 
+                    resolution: _editor.Project.Options.CycleResolution);
 
                 var shapes = _editor.Project.Documents
                     .SelectMany(d => d.Containers)
