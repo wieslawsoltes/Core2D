@@ -48,11 +48,12 @@ namespace Test2d
             var sw = Stopwatch.StartNew();
 
             // merge all shapes code as one big script
-            
+            var sb = new StringBuilder();
+
             for (int i = 0; i < _shapes.Length; i++)
             {
                 // wrap shape Code and Data in a block and define Shape variable as its own type
-                var sb = new StringBuilder();
+                //var sb = new StringBuilder();
 
                 // class name
                 var name = string.Concat("Runner_", Guid.NewGuid().ToString("N").ToUpper());
@@ -93,17 +94,15 @@ namespace Test2d
                 sb.AppendLine("}");
 
                 // create runner
-                sb.AppendLine(string.Concat("new ", name, "();"));
-
-                // evaluate shape code and set runner
-                var code = sb.ToString();
-
-                //Debug.Print(code);
-
-                var runner = CSharpScript.Eval(code, _options, _globals);
-                _globals.Runners[i] = runner as CodeRunner;
+                sb.AppendLine(string.Concat("Runners[", i, "] = ", "new ", name, "();"));
             }
 
+            // compile runners
+            var runners = sb.ToString();
+            //Debug.Print(runners);
+            CSharpScript.Eval(runners, _options, _globals);
+
+            // create main runner script
             _code = "for (int i = 0; i < Runners.Length; i++) Runners[i].Run(i, Shapes, Context);";
             _runner = CSharpScript.Create(_code, _options)
                 .WithGlobalsType(typeof(RoslynCodeGlobals))
