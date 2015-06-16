@@ -373,11 +373,19 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public ICommand ImportCodeCommand { get; set; }
+        public ICommand ImportShapeCodeCommand { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public ICommand ExportCodeCommand { get; set; }
+        public ICommand ExportShapeCodeCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ImportShapeDataCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ExportShapeDataCommand { get; set; }
 
         /// <summary>
         /// 

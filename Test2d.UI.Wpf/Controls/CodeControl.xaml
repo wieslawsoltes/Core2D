@@ -35,8 +35,14 @@
                         <Separator/>
                         <MenuItem Header="Ti_ck" Command="{Binding Commands.TickSimulationCommand}" InputGestureText="F7"/>
                     </MenuItem>
-                    <MenuItem Header="import" Command="{Binding Commands.ImportCodeCommand}" InputGestureText=""/>
-                    <MenuItem Header="export" Command="{Binding Commands.ExportCodeCommand}" InputGestureText=""/>
+                    <MenuItem Header="import">
+                        <MenuItem Header="_Code" Command="{Binding Commands.ImportShapeCodeCommand}" InputGestureText=""/>
+                        <MenuItem Header="_Data" Command="{Binding Commands.ImportShapeDataCommand}" InputGestureText=""/>
+                    </MenuItem>
+                    <MenuItem Header="export">
+                        <MenuItem Header="_Code" Command="{Binding Commands.ExportShapeCodeCommand}" InputGestureText=""/>
+                        <MenuItem Header="_Data" Command="{Binding Commands.ExportShapeDataCommand}" InputGestureText=""/>
+                    </MenuItem>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
