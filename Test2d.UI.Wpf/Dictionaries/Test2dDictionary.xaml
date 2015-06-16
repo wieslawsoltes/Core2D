@@ -2201,17 +2201,17 @@
                       Grid.ColumnSpan="3">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True"
+            <Expander Header="Code" IsExpanded="False"
                       Grid.Row="5" 
                       Grid.Column="0"
                       Grid.ColumnSpan="3">
-                <Control Template="{StaticResource DataControlTemplate}"/>
+                <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="False"
+            <Expander Header="Data" IsExpanded="True"
                       Grid.Row="6" 
                       Grid.Column="0"
                       Grid.ColumnSpan="3">
-                <Control Template="{StaticResource CodeControlTemplateKey}"/>
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </Grid>
     </DataTemplate>
@@ -2248,11 +2248,11 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
-                <Control Template="{StaticResource DataControlTemplate}"/>
-            </Expander>
             <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
+            </Expander>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -2315,11 +2315,11 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
-                <Control Template="{StaticResource DataControlTemplate}"/>
-            </Expander>
             <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
+            </Expander>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -2382,11 +2382,11 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
-                <Control Template="{StaticResource DataControlTemplate}"/>
-            </Expander>
             <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
+            </Expander>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -2455,11 +2455,11 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
-                <Control Template="{StaticResource DataControlTemplate}"/>
-            </Expander>
             <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
+            </Expander>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -2528,11 +2528,11 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
-                <Control Template="{StaticResource DataControlTemplate}"/>
-            </Expander>
             <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
+            </Expander>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -2598,11 +2598,11 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
-                <Control Template="{StaticResource DataControlTemplate}"/>
-            </Expander>
             <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
+            </Expander>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -2685,11 +2685,11 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
-                <Control Template="{StaticResource DataControlTemplate}"/>
-            </Expander>
             <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
+            </Expander>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -2772,11 +2772,11 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
-                <Control Template="{StaticResource DataControlTemplate}"/>
-            </Expander>
             <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
+            </Expander>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -2846,11 +2846,11 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
-                <Control Template="{StaticResource DataControlTemplate}"/>
-            </Expander>
             <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
+            </Expander>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
             <Expander Header="Shapes Properties" IsExpanded="True">
                 <Control Template="{StaticResource GroupDatabaseControlTemplateKey}"/>
@@ -2953,11 +2953,11 @@
             <Expander Header="Geometry" IsExpanded="False">
                 <ContentControl Content="{Binding Geometry}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
-                <Control Template="{StaticResource DataControlTemplate}"/>
-            </Expander>
             <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
+            </Expander>
+            <Expander Header="Data" IsExpanded="True">
+                <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
