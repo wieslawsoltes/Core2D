@@ -11,16 +11,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="200">
     <Grid>
-        <Grid.Style>
-            <Style TargetType="Grid">
-                <Setter Property="Visibility" Value="Visible"/>
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding Editor.Renderers[0].State.SelectedShape}" Value="{x:Null}">
-                        <Setter Property="Visibility" Value="Hidden"/>
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </Grid.Style>
         <Grid.Resources>
             <ControlTemplate x:Key="CodeMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
@@ -56,20 +46,36 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Control Template="{StaticResource CodeMenu}" Grid.Row="0" Margin="2,0,2,0"/>
-        <ae:TextEditor 
-            Name="textEditor"
-            SyntaxHighlighting="C#"
-            ShowLineNumbers="True"
-            FontFamily="Consolas"
-            FontSize="10pt"
-            VerticalScrollBarVisibility="Auto"
-            HorizontalScrollBarVisibility="Auto"
-            Grid.Row="1"
-            Margin="2,2,2,2">
-            <i:Interaction.Behaviors>
-                <controls:AvalonEditBehaviour Code="{Binding Editor.Renderers[0].State.SelectedShape.Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </i:Interaction.Behaviors>
-        </ae:TextEditor>
+        <TabControl Grid.Row="1" Margin="2,2,2,2">
+            <TabItem Header="Code">
+                <ae:TextEditor 
+                    Name="codeEditor"
+                    SyntaxHighlighting="C#"
+                    ShowLineNumbers="True"
+                    FontFamily="Consolas"
+                    FontSize="10pt"
+                    VerticalScrollBarVisibility="Auto"
+                    HorizontalScrollBarVisibility="Auto">
+                    <i:Interaction.Behaviors>
+                        <controls:AvalonEditBehaviour Code="{Binding Editor.Renderers[0].State.SelectedShape.Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </i:Interaction.Behaviors>
+                </ae:TextEditor>
+            </TabItem>
+            <TabItem Header="Data">
+                <ae:TextEditor 
+                    Name="dataEditor"
+                    SyntaxHighlighting="C#"
+                    ShowLineNumbers="True"
+                    FontFamily="Consolas"
+                    FontSize="10pt"
+                    VerticalScrollBarVisibility="Auto"
+                    HorizontalScrollBarVisibility="Auto">
+                    <i:Interaction.Behaviors>
+                        <controls:AvalonEditBehaviour Code="{Binding Editor.Renderers[0].State.SelectedShape.Data, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </i:Interaction.Behaviors>
+                </ae:TextEditor>
+            </TabItem>
+        </TabControl>
         <CheckBox 
             Content="IsExecutable"
             IsChecked="{Binding Editor.Renderers[0].State.SelectedShape.IsExecutable}"
