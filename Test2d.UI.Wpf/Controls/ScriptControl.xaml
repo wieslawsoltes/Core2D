@@ -41,7 +41,6 @@
         </Grid.ColumnDefinitions>
         <Control Template="{StaticResource ScriptMenu}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
         <ae:TextEditor 
-            xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
             Name="editor"
             SyntaxHighlighting="C#"
             ShowLineNumbers="True"
