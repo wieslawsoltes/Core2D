@@ -19,6 +19,7 @@ namespace Test2d
         private Record _record;
         private bool _isExecutable;
         private string _code;
+        private string _data;
 
         /// <summary>
         /// Gets or sets shape name.
@@ -99,6 +100,15 @@ namespace Test2d
         {
             get { return _code; }
             set { Update(ref _code, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets shape executable C# data used for simulation.
+        /// </summary>
+        public string Data
+        {
+            get { return _data; }
+            set { Update(ref _data, value); }
         }
 
         /// <summary>
