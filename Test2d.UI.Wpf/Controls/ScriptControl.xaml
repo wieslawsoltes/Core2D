@@ -41,7 +41,7 @@
         </Grid.ColumnDefinitions>
         <Control Template="{StaticResource ScriptMenu}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
         <ae:TextEditor 
-            Name="editor"
+            Name="textEditor"
             SyntaxHighlighting="C#"
             ShowLineNumbers="True"
             FontFamily="Consolas"

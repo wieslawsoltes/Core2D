@@ -58,8 +58,8 @@ namespace Test.Controls
             ImportCommand = new DelegateCommand(() => Import());
             ExportCommand = new DelegateCommand(() => Export(tree.SelectedItem));
 
-            editor.Options.ConvertTabsToSpaces = true;
-            editor.Options.ShowColumnRuler = true;
+            textEditor.Options.ConvertTabsToSpaces = true;
+            textEditor.Options.ShowColumnRuler = true;
 
             tree.SelectedItemChanged +=
                 (s, e) =>
@@ -122,7 +122,7 @@ namespace Test.Controls
                 try
                 {
                     var code = System.IO.File.ReadAllText(script.Path);
-                    editor.Text = code;
+                    textEditor.Text = code;
                 }
                 catch (Exception ex)
                 {
@@ -132,7 +132,7 @@ namespace Test.Controls
             }
             else
             {
-                editor.Text = "";
+                textEditor.Text = "";
             }
         }
 
@@ -143,9 +143,9 @@ namespace Test.Controls
                 var script = value as ScriptFile;
                 try
                 {
-                    if (editor.CanUndo)
+                    if (textEditor.CanUndo)
                     {
-                        var code = editor.Text;
+                        var code = textEditor.Text;
                         System.IO.File.WriteAllText(script.Path, code);
                     }
                 }
@@ -171,7 +171,7 @@ namespace Test.Controls
                 try
                 {
                     var code = System.IO.File.ReadAllText(dlg.FileName);
-                    editor.Text = code;
+                    textEditor.Text = code;
                 }
                 catch (Exception ex)
                 {
@@ -190,7 +190,7 @@ namespace Test.Controls
                 name = (value as ScriptFile).Name;
             }
 
-            var dlg = new OpenFileDialog()
+            var dlg = new SaveFileDialog()
             {
                 Filter = "C# (*.cs)|*.cs|All (*.*)|*.*",
                 FilterIndex = 0,
@@ -201,7 +201,7 @@ namespace Test.Controls
             {
                 try
                 {
-                    var code = editor.Text;
+                    var code = textEditor.Text;
                     System.IO.File.WriteAllText(dlg.FileName, code);
                 }
                 catch (Exception ex)
