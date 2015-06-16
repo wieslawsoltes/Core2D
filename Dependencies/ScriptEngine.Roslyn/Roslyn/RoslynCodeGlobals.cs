@@ -25,6 +25,6 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public T[] States;
+        public CodeRunner[] Runners;
     }
 }
