@@ -23,7 +23,7 @@ namespace Test2d
     {
         private ScriptOptions _options;
         private BaseShape[] _shapes;
-        private RoslynCodeGlobals<object> _globals;
+        private RoslynCodeGlobals _globals;
         private string _code;
         private bool _haveRunner;
         private ScriptRunner _runner;
@@ -38,7 +38,7 @@ namespace Test2d
             _options = Helpers.GetOptions();
             _shapes = shapes.Where(s => s.IsExecutable).ToArray();
 
-            _globals = new RoslynCodeGlobals<object>()
+            _globals = new RoslynCodeGlobals()
             {
                 Context = context as EditorContext,
                 Shapes = _shapes,
@@ -106,7 +106,7 @@ namespace Test2d
 
             _code = "for (int i = 0; i < Runners.Length; i++) Runners[i].Run(i, Shapes, Context);";
             _runner = CSharpScript.Create(_code, _options)
-                .WithGlobalsType(typeof(RoslynCodeGlobals<object>))
+                .WithGlobalsType(typeof(RoslynCodeGlobals))
                 .CreateDelegate();
 
             sw.Stop();

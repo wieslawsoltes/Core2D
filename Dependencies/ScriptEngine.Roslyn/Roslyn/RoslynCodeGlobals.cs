@@ -12,7 +12,7 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public class RoslynCodeGlobals<T>
+    public class RoslynCodeGlobals
     {
         /// <summary>
         /// 
