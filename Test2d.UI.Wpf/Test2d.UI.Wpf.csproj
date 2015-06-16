@@ -147,8 +147,8 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.6.15111.10510, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xceed.Wpf.AvalonDock.2.6.15111.10510\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.7.15309.11180, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xceed.Wpf.AvalonDock.2.7.15309.11180\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
