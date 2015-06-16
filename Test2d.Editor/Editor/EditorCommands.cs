@@ -373,6 +373,15 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public ICommand ImportCodeCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ExportCodeCommand { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand ZoomResetCommand { get; set; }
         /// <summary>
         /// 

@@ -3731,6 +3731,9 @@ namespace Test2d
             (_commands.PauseSimulationCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.TickSimulationCommand as DelegateCommand).RaiseCanExecuteChanged();
 
+            (_commands.ImportCodeCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ExportCodeCommand as DelegateCommand).RaiseCanExecuteChanged();
+
             (_commands.ZoomResetCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ZoomExtentCommand as DelegateCommand).RaiseCanExecuteChanged();
 
