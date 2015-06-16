@@ -1435,7 +1435,7 @@ namespace Test2d
                 _commands.SelectedItemChangedCommand = 
                     new DelegateCommand<object>(
                         (item) => SelectedItemChangedCommandHandler(item),
-                        (item) => IsEditMode());
+                        (item) => IsEditMode() || IsSimulationMode());
 
                 _commands.AddContainerCommand = 
                     new DelegateCommand<object>(
