@@ -173,6 +173,9 @@
                                     <controls:StyleControl/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
+                            <ad:LayoutAnchorable Title="Code" AutoHideWidth="230">
+                                <controls:CodeControl/>
+                            </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable Title="Template" AutoHideWidth="230">
                                 <ScrollViewer 
                                     VerticalScrollBarVisibility="Auto" 
