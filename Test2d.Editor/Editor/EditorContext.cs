@@ -2776,6 +2776,26 @@ namespace Test2d
                             Open(path);
                             result = true;
                         }
+                        if (string.Compare(ext, ".code", true, CultureInfo.InvariantCulture) == 0)
+                        {
+                            var selectedShape = _editor.Renderers[0].State.SelectedShape;
+                            var selectedShapes = _editor.Renderers[0].State.SelectedShapes;
+
+                            if (selectedShape != null)
+                            {
+                                ImportShapeCode(path, selectedShape);
+                            }
+
+                            if (selectedShapes != null)
+                            {
+                                foreach (var shape in selectedShapes)
+                                {
+                                    ImportShapeCode(path, shape);
+                                }
+                            }
+
+                            result = true;
+                        }
                         else if (string.Compare(ext, ".cs", true, CultureInfo.InvariantCulture) == 0)
                         {
                             Eval(path);
