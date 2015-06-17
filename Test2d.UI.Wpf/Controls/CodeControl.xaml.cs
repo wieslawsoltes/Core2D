@@ -134,11 +134,14 @@ namespace Test.Controls
         /// </summary>
         private void InitializeTextEditors()
         {
-            codeEditor.Options.ConvertTabsToSpaces = true;
-            codeEditor.Options.ShowColumnRuler = true;
+            definitionsEditor.Options.ConvertTabsToSpaces = true;
+            definitionsEditor.Options.ShowColumnRuler = true;
 
-            dataEditor.Options.ConvertTabsToSpaces = true;
-            dataEditor.Options.ShowColumnRuler = true;
+            initializationEditor.Options.ConvertTabsToSpaces = true;
+            initializationEditor.Options.ShowColumnRuler = true;
+
+            scriptEditor.Options.ConvertTabsToSpaces = true;
+            scriptEditor.Options.ShowColumnRuler = true;
         }
     }
 }
