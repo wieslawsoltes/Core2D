@@ -36,7 +36,7 @@ namespace Test2d
         public void Build(ImmutableArray<BaseShape> shapes, object context)
         {
             _options = Helpers.GetOptions();
-            _shapes = shapes.Where(s => s.Code.IsExecutable).ToArray();
+            _shapes = shapes.Where(s => s.Code != null && s.Code.IsExecutable).ToArray();
 
             _globals = new RoslynCodeGlobals()
             {
