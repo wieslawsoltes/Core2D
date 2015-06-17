@@ -2330,6 +2330,59 @@ namespace Test2d
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="shape"></param>
+        public void ImportShapeCode(string path, BaseShape shape)
+        {
+            try
+            {
+                var json = ReadUtf8Text(path, false);
+                var code = _serializer.FromJson<ShapeCode>(json);
+
+                var previous = shape.Code;
+                var next = code;
+                _editor.History.Snapshot(previous, next, (p) => shape.Code = p);
+                shape.Code = next;
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="shape"></param>
+        public void ExportShapeCode(string path, BaseShape shape)
+        {
+            try
+            {
+                var json = _serializer.ToJson(shape.Code);
+                WriteUtf8Text(path, json, false);
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
         ///
         /// </summary>
         /// <returns></returns>
@@ -3735,8 +3788,6 @@ namespace Test2d
 
             (_commands.ImportShapeCodeCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ExportShapeCodeCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ImportShapeDataCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ExportShapeDataCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.ZoomResetCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ZoomExtentCommand as DelegateCommand).RaiseCanExecuteChanged();

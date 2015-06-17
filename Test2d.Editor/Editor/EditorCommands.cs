@@ -378,14 +378,6 @@ namespace Test2d
         /// 
         /// </summary>
         public ICommand ExportShapeCodeCommand { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand ImportShapeDataCommand { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand ExportShapeDataCommand { get; set; }
 
         /// <summary>
         /// 

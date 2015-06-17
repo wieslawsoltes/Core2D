@@ -248,16 +248,6 @@ namespace Test.Windows
                     () => ExportShapeCode(),
                     () => context.IsEditMode());
 
-            context.Commands.ImportShapeDataCommand =
-                new DelegateCommand(
-                    () => ImportShapeData(),
-                    () => context.IsEditMode());
-
-            context.Commands.ExportShapeDataCommand =
-                new DelegateCommand(
-                    () => ExportShapeData(),
-                    () => context.IsEditMode());
-
             context.Commands.ZoomResetCommand = 
                 new DelegateCommand(
                     () => grid.ResetZoomAndPan(),
@@ -653,14 +643,14 @@ namespace Test.Windows
             {
                 var dlg = new OpenFileDialog()
                 {
-                    Filter = "C# (*.cs)|*.cs|All (*.*)|*.*",
+                    Filter = "Code (*.code)|*.code|All (*.*)|*.*",
                     FilterIndex = 0,
                     FileName = ""
                 };
 
                 if (dlg.ShowDialog() == true)
                 {
-                    shape.Code = System.IO.File.ReadAllText(dlg.FileName);
+                    context.ImportShapeCode(dlg.FileName, shape);
                 }
             }
             catch (Exception ex)
@@ -690,98 +680,18 @@ namespace Test.Windows
 
             try
             {
-                string name = "Shape.Code.cs";
+                string name = "shape";
 
                 var dlg = new SaveFileDialog()
                 {
-                    Filter = "C# (*.cs)|*.cs|All (*.*)|*.*",
+                    Filter = "Code (*.code)|*.code|All (*.*)|*.*",
                     FilterIndex = 0,
                     FileName = name
                 };
 
                 if (dlg.ShowDialog() == true)
                 {
-                    System.IO.File.WriteAllText(dlg.FileName, shape.Code);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (context.Editor.Log != null)
-                {
-                    context.Editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void ImportShapeData()
-        {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            var shape = context.Editor.Renderers[0].State.SelectedShape;
-            if (shape == null)
-                return;
-
-            try
-            {
-                var dlg = new OpenFileDialog()
-                {
-                    Filter = "C# (*.cs)|*.cs|All (*.*)|*.*",
-                    FilterIndex = 0,
-                    FileName = ""
-                };
-
-                if (dlg.ShowDialog() == true)
-                {
-                    shape.Data = System.IO.File.ReadAllText(dlg.FileName);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (context.Editor.Log != null)
-                {
-                    context.Editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void ExportShapeData()
-        {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            var shape = context.Editor.Renderers[0].State.SelectedShape;
-            if (shape == null)
-                return;
-
-            try
-            {
-                string name = "Shape.Data.cs";
-
-                var dlg = new SaveFileDialog()
-                {
-                    Filter = "C# (*.cs)|*.cs|All (*.*)|*.*",
-                    FilterIndex = 0,
-                    FileName = name
-                };
-
-                if (dlg.ShowDialog() == true)
-                {
-                    System.IO.File.WriteAllText(dlg.FileName, shape.Data);
+                    context.ExportShapeCode(dlg.FileName, shape);
                 }
             }
             catch (Exception ex)
