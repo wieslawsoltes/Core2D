@@ -36,7 +36,7 @@ namespace Test2d
         public void Build(ImmutableArray<BaseShape> shapes, object context)
         {
             _options = Helpers.GetOptions();
-            _shapes = shapes.Where(s => s.IsExecutable).ToArray();
+            _shapes = shapes.Where(s => s.Code.IsExecutable).ToArray();
 
             _globals = new RoslynCodeGlobals()
             {
@@ -52,39 +52,44 @@ namespace Test2d
 
             for (int i = 0; i < _shapes.Length; i++)
             {
-                // wrap shape Code and Data in a block and define Shape variable as its own type
-                //var sb = new StringBuilder();
+                // wrap shape Code in a class object
 
                 // class name
                 var name = string.Concat("Runner_", Guid.NewGuid().ToString("N").ToUpper());
+                var type = _shapes[i].GetType().Name;
 
                 // begin class
                 sb.AppendLine(string.Concat("public class ", name, " : CodeRunner"));
                 sb.AppendLine("{");
 
-                // shape property
-                sb.AppendLine(string.Concat("public ", name, "()"));
-                sb.AppendLine("{");
-                sb.AppendLine("}");
-
-                // shape data
-                if (!string.IsNullOrWhiteSpace(_shapes[i].Data))
+                // script definitions
+                if (!string.IsNullOrWhiteSpace(_shapes[i].Code.Definitions))
                 {
-                    sb.AppendLine(_shapes[i].Data);
+                    sb.AppendLine(_shapes[i].Code.Definitions);
                 }
+
+                // script initialization
+                sb.AppendLine(string.Concat("public ", name, "(int id, BaseShape[] shapes, EditorContext context)"));
+                sb.AppendLine("{");
+                if (!string.IsNullOrWhiteSpace(_shapes[i].Code.Initialization))
+                {
+                    // define shape variable with proper type in constructor
+                    sb.AppendLine(string.Concat("var shape = shapes[id] as ", type, ";"));
+                    sb.AppendLine(_shapes[i].Code.Initialization);
+                }
+                sb.AppendLine("}");
 
                 // begin run method
                 sb.AppendLine("public override void Run(int id, BaseShape[] shapes, EditorContext context)");
                 sb.AppendLine("{");
 
-                // define local shape variable with proper type
-                var type = _shapes[i].GetType().Name;
+                // define shape variable with proper type in Run method
                 sb.AppendLine(string.Concat("var shape = shapes[id] as ", type, ";"));
 
-                // shape code
-                if (!string.IsNullOrWhiteSpace(_shapes[i].Code))
+                // script code
+                if (!string.IsNullOrWhiteSpace(_shapes[i].Code.Script))
                 {
-                    sb.AppendLine(_shapes[i].Code);
+                    sb.AppendLine(_shapes[i].Code.Script);
                 }
 
                 // end run method
@@ -94,7 +99,7 @@ namespace Test2d
                 sb.AppendLine("}");
 
                 // create runner
-                sb.AppendLine(string.Concat("Runners[", i, "] = ", "new ", name, "();"));
+                sb.AppendLine(string.Concat("Runners[", i, "] = ", "new ", name, "(", i, ", Shapes, Context);"));
             }
 
             // compile runners
