@@ -157,6 +157,7 @@ namespace Test2d
                 Style = style,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
+                Code = ShapeCode.Create(),
                 Start = XPoint.Create(x1, y1, point),
                 End = XPoint.Create(x2, y2, point)
             };

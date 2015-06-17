@@ -154,6 +154,7 @@ namespace Test2d
                 Style = style,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
+                Code = ShapeCode.Create(),
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
                 IsFilled = isFilled,

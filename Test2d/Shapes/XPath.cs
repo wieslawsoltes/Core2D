@@ -128,6 +128,7 @@ namespace Test2d
                 Style = style,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
+                Code = ShapeCode.Create(),
                 Source = source,
                 Geometry = geometry,
                 Transform = transform,

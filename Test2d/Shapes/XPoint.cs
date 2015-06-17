@@ -180,6 +180,7 @@ namespace Test2d
                 Style = default(ShapeStyle),
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
+                Code = ShapeCode.Create(),
                 X = x, 
                 Y = y, 
                 Shape = shape 
