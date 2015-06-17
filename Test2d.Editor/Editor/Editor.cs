@@ -712,6 +712,8 @@ namespace Test2d
         /// <param name="project"></param>
         public void Load(Project project)
         {
+            Deselect();
+
             foreach (var renderer in _renderers)
             {
                 renderer.ClearCache();
