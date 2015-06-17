@@ -1,0 +1,8 @@
+﻿{
+  "$id": "1",
+  "$type": "Test2d.ShapeCode, Test2d",
+  "IsExecutable": true,
+  "Definitions": "double v;",
+  "Initialization": "v = 1.0;",
+  "Script": "shape.TopLeft.X += v;\r\nshape.BottomRight.X += v;"
+}
