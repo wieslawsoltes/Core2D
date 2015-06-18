@@ -61,10 +61,11 @@
                     <ad:LayoutAnchorablePaneGroup DockWidth="230" Orientation="Vertical">
                         <ad:LayoutAnchorablePane>
                             <ad:LayoutAnchorable Title="Project" AutoHideWidth="230">
-                                <controls:ProjectControl/>
+                                <controls:ProjectControl x:Name="projectControl"/>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable Title="Options" AutoHideWidth="230">
                                 <ScrollViewer 
+                                    x:Name="optionsScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
                                     HorizontalScrollBarVisibility="Auto" 
                                     Focusable="True">
@@ -72,18 +73,19 @@
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable Title="Templates" AutoHideWidth="230">
-                                <controls:TemplatesControl/>
+                                <controls:TemplatesControl x:Name="templatesControll"/>
                             </ad:LayoutAnchorable> 
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
                             <ad:LayoutAnchorable Title="Groups" AutoHideWidth="230">
-                                <controls:GroupsControl/>
+                                <controls:GroupsControl x:Name="groupsControl"/>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable Title="Databases" AutoHideWidth="230">
-                                <controls:DatabasesControl/>
+                                <controls:DatabasesControl x:Name="databasesControl"/>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable Title="Database" AutoHideWidth="230">
                                 <ScrollViewer 
+                                    x:Name="databaseControl"
                                     VerticalScrollBarVisibility="Auto" 
                                     HorizontalScrollBarVisibility="Auto" 
                                     Focusable="True">
@@ -107,7 +109,7 @@
                         <ad:LayoutDocumentPane>
                             <ad:LayoutDocument Title="Container">
                                 <paz:PanAndZoomGrid 
-                                    x:Name="grid"
+                                    x:Name="panAndZoomGrid"
                                     ClipToBounds="True"
                                     Background="Transparent"
                                     FocusVisualStyle="{x:Null}"
@@ -140,25 +142,26 @@
                                 </paz:PanAndZoomGrid>
                             </ad:LayoutDocument>
                             <ad:LayoutDocument Title="Script">
-                                <controls:ScriptControl DataContext="{Binding ScriptDirectories}"/>
+                                <controls:ScriptControl x:Name="scriptControl" DataContext="{Binding ScriptDirectories}"/>
                             </ad:LayoutDocument>
                         </ad:LayoutDocumentPane>
                     </ad:LayoutDocumentPaneGroup>
                     <ad:LayoutAnchorablePaneGroup DockWidth="230" Orientation="Vertical">
                         <ad:LayoutAnchorablePane>
                             <ad:LayoutAnchorable Title="Styles" AutoHideWidth="230">
-                                <controls:StylesControl/>
+                                <controls:StylesControl x:Name="stylesControl"/>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable Title="Layers" AutoHideWidth="230">
-                                <controls:LayersControl/>
+                                <controls:LayersControl x:Name="layersControl"/>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable Title="Shapes" AutoHideWidth="230">
-                                <controls:ShapesControl/>
+                                <controls:ShapesControl x:Name="shapesControl"/>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
                             <ad:LayoutAnchorable Title="Properties" AutoHideWidth="230">
                                 <ScrollViewer 
+                                    x:Name="shapeScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
                                     HorizontalScrollBarVisibility="Auto" 
                                     Focusable="True">
@@ -167,6 +170,7 @@
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable Title="Style" AutoHideWidth="230">
                                 <ScrollViewer 
+                                    x:Name="styleScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
                                     HorizontalScrollBarVisibility="Auto" 
                                     Focusable="True">
@@ -174,7 +178,7 @@
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable Title="Code" AutoHideWidth="230">
-                                <controls:CodeControl>
+                                <controls:CodeControl x:Name="codeControl">
                                     <controls:CodeControl.Style>
                                         <Style TargetType="controls:CodeControl">
                                             <Setter Property="Visibility" Value="Visible"/>
@@ -189,6 +193,7 @@
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable Title="Template" AutoHideWidth="230">
                                 <ScrollViewer 
+                                    x:Name="templateScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
                                     HorizontalScrollBarVisibility="Auto" 
                                     Focusable="True">

@@ -468,5 +468,18 @@ namespace Test2d
         /// 
         /// </summary>
         public ICommand InsertDocumentAfterCommand { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand LoadWindowLayoutCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand SaveWindowLayoutCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ResetWindowLayoutCommand { get; set; }
     }
 }

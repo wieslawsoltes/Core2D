@@ -19,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Test2d;
+using Xceed.Wpf.AvalonDock.Layout.Serialization;
 
 namespace Test.Windows
 {
@@ -60,6 +61,7 @@ namespace Test.Windows
     /// </summary>
     public partial class MainWindow : Window, IView
     {
+        private string _layoutPath = "Test2d.UI.Wpf.layout";
         private bool _isLoaded = false;
 
         /// <summary>
@@ -70,6 +72,101 @@ namespace Test.Windows
             InitializeComponent();
 
             InitializeContext();
+        }
+
+        /// <summary>
+        /// Load docking manager layout.
+        /// </summary>
+        /// <param name="path"></param>
+        private void LoadLayout(string path)
+        {
+            var serializer = new XmlLayoutSerializer(dock);
+            using (var reader = new System.IO.StreamReader(path))
+            {
+                serializer.Deserialize(reader);
+            }
+        }
+
+        /// <summary>
+        /// Save docking manager layout.
+        /// </summary>
+        /// <param name="path"></param>
+        private void SaveLayout(string path)
+        {
+            var serializer = new XmlLayoutSerializer(dock);
+            using (var writer = new System.IO.StreamWriter(path))
+            {
+                serializer.Serialize(writer);
+            }
+        }
+
+        /// <summary>
+        /// Load docking manager layout.
+        /// </summary>
+        private void LoadLayout()
+        {
+            var dlg = new OpenFileDialog()
+            {
+                Filter = "Layout (*.layout)|*.layout|All (*.*)|*.*",
+                FilterIndex = 0,
+                FileName = ""
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                try
+                {
+                    LoadLayout(dlg.FileName);
+                }
+                catch(Exception ex)
+                {
+                    Debug.Print(ex.Message);
+                    Debug.Print(ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Save docking manager layout.
+        /// </summary>
+        private void SaveLayout()
+        {
+            var dlg = new SaveFileDialog()
+            {
+                Filter = "Layout (*.layout)|*.layout|All (*.*)|*.*",
+                FilterIndex = 0,
+                FileName = _layoutPath
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                try
+                {
+                    SaveLayout(dlg.FileName);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Print(ex.Message);
+                    Debug.Print(ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Reset docking manager layout.
+        /// </summary>
+        private void ResetLayout()
+        {
+
+            try
+            {
+                // TODO: Reset docking manager layout.
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                Debug.Print(ex.StackTrace);
+            }
         }
 
         /// <summary>
@@ -250,12 +347,12 @@ namespace Test.Windows
 
             context.Commands.ZoomResetCommand = 
                 new DelegateCommand(
-                    () => grid.ResetZoomAndPan(),
+                    () => panAndZoomGrid.ResetZoomAndPan(),
                     () => true);
 
             context.Commands.ZoomExtentCommand = 
                 new DelegateCommand(
-                    () => grid.AutoFit(),
+                    () => panAndZoomGrid.AutoFit(),
                     () => true);
 
             context.Commands.DatabasesWindowCommand = 
@@ -308,6 +405,21 @@ namespace Test.Windows
                     },
                     () => true);
 
+            context.Commands.LoadWindowLayoutCommand =
+                new DelegateCommand(
+                    () => LoadLayout(),
+                    () => true);
+
+            context.Commands.SaveWindowLayoutCommand =
+                new DelegateCommand(
+                    () => SaveLayout(),
+                    () => true);
+
+            context.Commands.ResetWindowLayoutCommand =
+                new DelegateCommand(
+                    () => ResetLayout(),
+                    () => true);
+
             context.Editor.PropertyChanged +=
                 (s, e) =>
                 {
@@ -327,7 +439,7 @@ namespace Test.Windows
                     }
                 };
 
-            grid.EnableAutoFit = context.Renderers[0].State.EnableAutofit;
+            panAndZoomGrid.EnableAutoFit = context.Renderers[0].State.EnableAutofit;
 
             border.InvalidateChild = 
                 (z, x, y) =>
@@ -367,12 +479,12 @@ namespace Test.Windows
                 {
                     if (e.ChangedButton == MouseButton.Middle && e.ClickCount == 2)
                     {
-                        grid.AutoFit();
+                        panAndZoomGrid.AutoFit();
                     }
                 
                     if (e.ChangedButton == MouseButton.Middle && e.ClickCount == 3)
                     {
-                        grid.ResetZoomAndPan();
+                        panAndZoomGrid.ResetZoomAndPan();
                     }
                 };
 

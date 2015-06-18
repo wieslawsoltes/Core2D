@@ -3835,6 +3835,10 @@ namespace Test2d
             (_commands.AddDocumentCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.InsertDocumentBeforeCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.InsertDocumentAfterCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+
+            (_commands.LoadWindowLayoutCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.SaveWindowLayoutCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ResetWindowLayoutCommand as DelegateCommand).RaiseCanExecuteChanged();
         }
 
         /// <summary>
