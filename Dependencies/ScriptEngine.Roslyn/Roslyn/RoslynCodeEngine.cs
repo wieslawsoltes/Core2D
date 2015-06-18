@@ -52,8 +52,25 @@ namespace Test2d
 
             for (int i = 0; i < _shapes.Length; i++)
             {
-                // wrap shape Code in a class object
-
+                // wrap shape Code in class object:
+                //
+                // public class Runner_{guid} : CodeRunner
+                // {
+                //     {Code.Definitions}
+                //
+                //     public Runner_{guid}(int id, BaseShape[] shapes, EditorContext context)
+                //     {
+                //         var shape = shapes[id] as {type};
+                //         {Code.Initialization}
+                //     }
+                //
+                //     public override void Run(int id, BaseShape[] shapes, EditorContext context)
+                //     {
+                //         var shape = shapes[id] as {type};
+                //         {Code.Script}
+                //     }
+                // }
+                
                 // class name
                 var name = string.Concat("Runner_", Guid.NewGuid().ToString("N").ToUpper());
                 var type = _shapes[i].GetType().Name;
@@ -108,7 +125,7 @@ namespace Test2d
             CSharpScript.Eval(runners, _options, _globals);
 
             // create main runner script
-            _code = "for (int i = 0; i < Runners.Length; i++) Runners[i].Run(i, Shapes, Context);";
+            _code = "for (int i = 0; i < Runners.Length; i++) if (Shapes[i].Code.IsExecutable) Runners[i].Run(i, Shapes, Context);";
             _runner = CSharpScript.Create(_code, _options)
                 .WithGlobalsType(typeof(RoslynCodeGlobals))
                 .CreateDelegate();
