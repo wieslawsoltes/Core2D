@@ -1,0 +1,8 @@
+﻿{
+  "$id": "1",
+  "$type": "Test2d.ShapeCode, Test2d",
+  "IsExecutable": true,
+  "Definitions": "// r0: radius x axis\r\n// r1: radius y axis\r\n// x0: center point x coordinate\r\n// y0: center point y coordinate\r\n// t0: start angle in radians\r\n// t1: end angle in radians\r\n// step: calculations precision\r\n// t: current angle\r\ndouble r0;\r\ndouble r1;\r\ndouble x0;\r\ndouble y0; \r\ndouble t0; \r\ndouble t1;\r\ndouble step;\r\ndouble t;",
+  "Initialization": "// distance between line Start and End point\r\ndouble distance = shape.End.Distance(shape.Start);\r\nvar center = shape.Start;\r\n// circle radius\r\nr0 = distance;\r\nr1 = distance;\r\n// circle center\r\nx0 = center.X;\r\ny0 = center.Y;\r\n// start angle in radians\r\nt0 = 0; \r\n// end angle in radians\r\nt1 = 2 * Math.PI;\r\n// calculations precision\r\nstep = 0.1;\r\n// current angle\r\nt = t0;",
+  "Script": "// reset animation\r\nif (t == t1)\r\n    t = t0;\r\n\r\ndouble x = x0 + r0 * Math.Cos(t);\r\ndouble y = y0 + r1 * Math.Sin(t);\r\nt += step;\r\n\r\nvar p = shape.End;\r\np.X = x;\r\np.Y = y;"
+}

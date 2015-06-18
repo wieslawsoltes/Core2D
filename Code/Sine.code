@@ -1,0 +1,8 @@
+﻿{
+  "$id": "1",
+  "$type": "Test2d.ShapeCode, Test2d",
+  "IsExecutable": true,
+  "Definitions": "double originalX;\r\ndouble originalY;\r\ndouble t;\r\ndouble tstep = 0.1;\r\ndouble velocity = -1.0;\r\ndouble amplitude = 30;\r\ndouble distance = 300;",
+  "Initialization": "t = 0;\r\noriginalX = shape.X;\r\noriginalY = shape.Y;",
+  "Script": "if (Math.Abs(shape.X - originalX) < distance)\r\n{\r\n    shape.X += velocity;\r\n    \r\n    t += tstep;\r\n    var y = Math.Sin(t) * amplitude;\r\n    shape.Y = originalY + y;\r\n}"
+}
