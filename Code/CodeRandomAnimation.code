@@ -1,8 +1,0 @@
-﻿{
-  "$id": "1",
-  "$type": "Test2d.ShapeCode, Test2d",
-  "IsExecutable": true,
-  "Definitions": "double width;\r\ndouble height;\r\nRandom r;",
-  "Initialization": "width = 810;\r\nheight = 600;\r\nr = new Random(Guid.NewGuid().GetHashCode());",
-  "Script": "shape.TopLeft.X = r.NextDouble() * width;\r\nshape.TopLeft.Y = r.NextDouble() * height;\r\nshape.BottomRight.X = r.NextDouble() * width;\r\nshape.BottomRight.Y = r.NextDouble() * height;"
-}
