@@ -292,27 +292,19 @@ namespace Test2d
 
             project.CurrentTemplate = project.Templates.FirstOrDefault(t => t.Name == "Grid");
 
-            var document1 = DefaultDocument(project);
-            var document2 = DefaultDocument(project);
+            var document = DefaultDocument(project);
+            var container = DefaultContainer(project);
 
-            var container1 = DefaultContainer(project);
-            var container2 = DefaultContainer(project);
-
-            var document1Builder = document1.Containers.ToBuilder();
-            document1Builder.Add(container1);
-            document1.Containers = document1Builder.ToImmutable();
-
-            var document2Builder = document2.Containers.ToBuilder();
-            document2Builder.Add(container2);
-            document2.Containers = document2Builder.ToImmutable();
+            var document1Builder = document.Containers.ToBuilder();
+            document1Builder.Add(container);
+            document.Containers = document1Builder.ToImmutable();
 
             var documentBuilder = project.Documents.ToBuilder();
-            documentBuilder.Add(document1);
-            documentBuilder.Add(document2);
+            documentBuilder.Add(document);
             project.Documents = documentBuilder.ToImmutable();
 
             project.CurrentDocument = project.Documents.FirstOrDefault();
-            project.CurrentContainer = document1.Containers.FirstOrDefault();
+            project.CurrentContainer = document.Containers.FirstOrDefault();
 
             return project;
         }
