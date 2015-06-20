@@ -151,17 +151,12 @@ namespace Test2d
 
             for (int i = 0; i < _shapes.Length; i++)
             {
-                var shape = _shapes[i];
-                var id = i;
-                _ids.Add(shape.Code, id);
-
-                FormatRunner(shape, id, sb);
-                StartObservingCode(shape);
+                _ids.Add(_shapes[i].Code, i);
+                FormatRunner(_shapes[i], i, sb);
             }
 
             // compile runners
             var runners = sb.ToString();
-            //Debug.Print(runners);
             CSharpScript.Eval(runners, _options, _globals);
 
             // create main runner script
@@ -169,6 +164,11 @@ namespace Test2d
             _runners = CSharpScript.Create(_code, _options)
                 .WithGlobalsType(typeof(RoslynCodeGlobals))
                 .CreateDelegate();
+
+            for (int i = 0; i < _shapes.Length; i++)
+            {
+                StartObservingCode(_shapes[i]);
+            }
         }
 
         /// <summary>
