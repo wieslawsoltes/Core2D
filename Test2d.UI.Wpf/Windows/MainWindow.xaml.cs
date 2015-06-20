@@ -80,7 +80,22 @@ namespace Test.Windows
         /// <param name="path"></param>
         private void LoadLayout(string path)
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             var serializer = new XmlLayoutSerializer(dock);
+
+            serializer.LayoutSerializationCallback +=
+                (s, e) =>
+                {
+                    var element = e.Content as FrameworkElement;
+                    if (element != null)
+                    {
+                        element.DataContext = context;
+                    }
+                };
+
             using (var reader = new System.IO.StreamReader(path))
             {
                 serializer.Deserialize(reader);
