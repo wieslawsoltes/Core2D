@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LayoutRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RootPanel Orientation="Horizontal">
+    <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="230">
+      <LayoutAnchorablePane DockWidth="230">
+        <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Project" IsSelected="True" ContentId="projectControl" />
+        <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Options" ContentId="optionsScrollViewer" />
+        <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Templates" ContentId="templatesControll" />
+      </LayoutAnchorablePane>
+      <LayoutAnchorablePane>
+        <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Groups" IsSelected="True" ContentId="groupsControl" />
+        <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Databases" ContentId="databasesControl" />
+        <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Database" ContentId="databaseControl" />
+      </LayoutAnchorablePane>
+    </LayoutAnchorablePaneGroup>
+    <LayoutDocumentPaneGroup Orientation="Horizontal">
+      <LayoutDocumentPane>
+        <LayoutDocument Title="Container" IsSelected="True" IsLastFocusedDocument="True" ContentId="panAndZoomGrid" LastActivationTimeStamp="06/20/2015 09:08:07" />
+        <LayoutDocument Title="Script" ContentId="scriptControl" />
+      </LayoutDocumentPane>
+    </LayoutDocumentPaneGroup>
+    <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="230">
+      <LayoutAnchorablePane DockWidth="230">
+        <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Styles" IsSelected="True" ContentId="stylesControl" />
+        <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Layers" ContentId="layersControl" />
+        <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Shapes" ContentId="shapesControl" />
+      </LayoutAnchorablePane>
+      <LayoutAnchorablePane>
+        <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Properties" IsSelected="True" ContentId="shapeScrollViewer" />
+        <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Style" ContentId="styleScrollViewer" />
+        <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Code" ContentId="codeControl" />
+        <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Template" ContentId="templateScrollViewer" />
+      </LayoutAnchorablePane>
+    </LayoutAnchorablePaneGroup>
+  </RootPanel>
+  <TopSide />
+  <RightSide />
+  <LeftSide />
+  <BottomSide />
+  <FloatingWindows />
+  <Hidden />
+</LayoutRoot>

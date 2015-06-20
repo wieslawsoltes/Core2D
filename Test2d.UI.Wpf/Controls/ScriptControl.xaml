@@ -61,7 +61,7 @@
             ShowsPreview="True"/>
         <TreeView 
             x:Name="tree" 
-            ItemsSource="{Binding}"
+            ItemsSource="{Binding ScriptDirectories}"
             Margin="0,5,5,5"
             Grid.Column="2"
             Grid.Row="1">

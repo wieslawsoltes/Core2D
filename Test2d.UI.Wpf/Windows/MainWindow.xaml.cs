@@ -61,6 +61,7 @@ namespace Test.Windows
     /// </summary>
     public partial class MainWindow : Window, IView
     {
+        private string _restoreLayoutPath = "Test2d.UI.Wpf.layout";
         private string _layoutPath = "Test2d.UI.Wpf.layout";
         private bool _enableRestoreLayout = true;
         private bool _isLoaded = false;
@@ -80,7 +81,8 @@ namespace Test.Windows
         /// </summary>
         /// <param name="path"></param>
         /// <param name="context"></param>
-        private void LoadLayout(string path, object context)
+        /// <param name="isResource"></param>
+        private void LoadLayout(string path, object context, bool isResource = false)
         {
             if (!System.IO.File.Exists(path))
                 return;
@@ -97,9 +99,24 @@ namespace Test.Windows
                     }
                 };
 
-            using (var reader = new System.IO.StreamReader(path))
+            if (!isResource)
             {
-                serializer.Deserialize(reader);
+                using (var reader = new System.IO.StreamReader(path))
+                {
+                    serializer.Deserialize(reader);
+                }
+            }
+            else
+            {
+                var root = "Test2d.UI.Wpf.Layouts.";
+                var assembly = this.GetType().Assembly;
+                using (var stream = assembly.GetManifestResourceStream(root + path))
+                {
+                    using (var reader = new System.IO.StreamReader(stream))
+                    {
+                        serializer.Deserialize(reader);
+                    }
+                }
             }
         }
 
@@ -235,9 +252,13 @@ namespace Test.Windows
         /// </summary>
         private void ResetLayout()
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             try
             {
-                // TODO: Reset docking manager layout.
+                LoadLayout(_restoreLayoutPath, context, true);
             }
             catch (Exception ex)
             {
@@ -464,7 +485,7 @@ namespace Test.Windows
 
             context.Commands.ScriptWindowCommand =
                 new DelegateCommand(
-                    () => (new ScriptWindow() { Owner = this, DataContext = context.ScriptDirectories }).Show(),
+                    () => (new ScriptWindow() { Owner = this, DataContext = context }).Show(),
                     () => true);
 
             var pw = default(PropertiesWindow);

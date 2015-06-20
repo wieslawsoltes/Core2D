@@ -142,7 +142,7 @@
                                 </paz:PanAndZoomGrid>
                             </ad:LayoutDocument>
                             <ad:LayoutDocument Title="Script">
-                                <controls:ScriptControl x:Name="scriptControl" DataContext="{Binding ScriptDirectories}"/>
+                                <controls:ScriptControl x:Name="scriptControl"/>
                             </ad:LayoutDocument>
                         </ad:LayoutDocumentPane>
                     </ad:LayoutDocumentPaneGroup>
