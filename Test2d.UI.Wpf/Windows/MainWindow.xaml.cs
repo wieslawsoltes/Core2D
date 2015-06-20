@@ -262,8 +262,13 @@ namespace Test.Windows
             }
             catch (Exception ex)
             {
-                Debug.Print(ex.Message);
-                Debug.Print(ex.StackTrace);
+                if (context.Editor.Log != null)
+                {
+                    context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
             }
         }
 
