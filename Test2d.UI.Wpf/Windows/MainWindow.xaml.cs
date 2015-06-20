@@ -62,6 +62,7 @@ namespace Test.Windows
     public partial class MainWindow : Window, IView
     {
         private string _layoutPath = "Test2d.UI.Wpf.layout";
+        private bool _enableRestoreLayout = true;
         private bool _isLoaded = false;
 
         /// <summary>
@@ -78,10 +79,10 @@ namespace Test.Windows
         /// Load docking manager layout.
         /// </summary>
         /// <param name="path"></param>
-        private void LoadLayout(string path)
+        /// <param name="context"></param>
+        private void LoadLayout(string path, object context)
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
+            if (!System.IO.File.Exists(path))
                 return;
 
             var serializer = new XmlLayoutSerializer(dock);
@@ -116,10 +117,58 @@ namespace Test.Windows
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        private void AutoLoadLayout(EditorContext context)
+        {
+            try
+            {
+                LoadLayout(_layoutPath, context);
+            }
+            catch (Exception ex)
+            {
+                if (context.Editor.Log != null)
+                {
+                    context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        private void AutoSaveLayout(EditorContext context)
+        {
+            try
+            {
+                SaveLayout(_layoutPath);
+            }
+            catch (Exception ex)
+            {
+                if (context.Editor.Log != null)
+                {
+                    context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
         /// Load docking manager layout.
         /// </summary>
         private void LoadLayout()
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             var dlg = new OpenFileDialog()
             {
                 Filter = "Layout (*.layout)|*.layout|All (*.*)|*.*",
@@ -131,12 +180,17 @@ namespace Test.Windows
             {
                 try
                 {
-                    LoadLayout(dlg.FileName);
+                    LoadLayout(dlg.FileName, context);
                 }
                 catch(Exception ex)
                 {
-                    Debug.Print(ex.Message);
-                    Debug.Print(ex.StackTrace);
+                    if (context.Editor.Log != null)
+                    {
+                        context.Editor.Log.LogError("{0}{1}{2}",
+                            ex.Message,
+                            Environment.NewLine,
+                            ex.StackTrace);
+                    }
                 }
             }
         }
@@ -146,6 +200,10 @@ namespace Test.Windows
         /// </summary>
         private void SaveLayout()
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             var dlg = new SaveFileDialog()
             {
                 Filter = "Layout (*.layout)|*.layout|All (*.*)|*.*",
@@ -161,8 +219,13 @@ namespace Test.Windows
                 }
                 catch (Exception ex)
                 {
-                    Debug.Print(ex.Message);
-                    Debug.Print(ex.StackTrace);
+                    if (context.Editor.Log != null)
+                    {
+                        context.Editor.Log.LogError("{0}{1}{2}",
+                            ex.Message,
+                            Environment.NewLine,
+                            ex.StackTrace);
+                    }
                 }
             }
         }
@@ -172,7 +235,6 @@ namespace Test.Windows
         /// </summary>
         private void ResetLayout()
         {
-
             try
             {
                 // TODO: Reset docking manager layout.
@@ -510,6 +572,11 @@ namespace Test.Windows
                         return;
                     else
                         _isLoaded = true;
+
+                    if (_enableRestoreLayout)
+                    {
+                        AutoLoadLayout(context);
+                    }
                 };
 
             Unloaded += (s, e) =>
@@ -520,6 +587,11 @@ namespace Test.Windows
                     _isLoaded = false;
 
                 DeInitializeContext();
+
+                if (_enableRestoreLayout)
+                {
+                    AutoSaveLayout(context);
+                }
             };
 
             containerControl.AllowDrop = true;
