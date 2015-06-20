@@ -3608,6 +3608,7 @@ namespace Test2d
                 {
                     _timer.Dispose();
                     _timer = default(System.Threading.Timer);
+                    _codeEngine.Reset();
                     IsSimulationPaused = false;
                     UpdateCanExecuteState();
                 }
