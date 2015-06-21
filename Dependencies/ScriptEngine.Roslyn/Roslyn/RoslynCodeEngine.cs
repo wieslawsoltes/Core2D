@@ -129,7 +129,6 @@ namespace Test2d
                 catch (Exception ex)
                 {
                     Debug.Print(ex.Message);
-                    Debug.Print(ex.StackTrace);
                 }
             }
         }
