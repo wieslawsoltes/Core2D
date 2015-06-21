@@ -1,9 +1,5 @@
 ﻿# TODO
 
-## UI
-
-* Save/load docking manager layout
-
 ## Editor
 
 * Add undo/redo for all property changes
