@@ -1103,7 +1103,7 @@ namespace Test2d
         {
             try
             {
-                _editor = Editor.Create(DefaultProject(), _renderers, _serializer);
+                _editor = Editor.Create(DefaultProject(), _renderers);
                 _editor.Log = new TraceLog();
                 _editor.Log.Initialize("Test.log");
 
