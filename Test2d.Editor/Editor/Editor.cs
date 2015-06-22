@@ -832,7 +832,7 @@ namespace Test2d
             {
                 var layer = _project.CurrentContainer.CurrentLayer;
                 var previous = layer.Shapes;
-                var next = layer.Shapes.Remove(_renderers[0].State.SelectedShape); ;
+                var next = layer.Shapes.Remove(_renderers[0].State.SelectedShape);
                 _history.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
  
