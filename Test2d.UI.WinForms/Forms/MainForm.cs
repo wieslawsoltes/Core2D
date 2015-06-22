@@ -52,7 +52,6 @@ namespace TestWinForms
                 Renderers = new IRenderer[] { new EmfRenderer(72.0 / 96.0) },
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),
-                Compressor = new LZ4CodecCompressor(),
                 ScriptEngine = new RoslynScriptEngine(),
                 CodeEngine = new RoslynCodeEngine(),
                 PdfWriter = new PdfWriter(),

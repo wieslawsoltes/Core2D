@@ -26,7 +26,6 @@ namespace Test2d
         private IRenderer[] _renderers;
         private ITextClipboard _textClipboard;
         private ISerializer _serializer;
-        private ICompressor _compressor;
         private IScriptEngine _scriptEngine;
         private ICodeEngine _codeEngine;
         private IFileWriter _pdfWriter;
@@ -94,15 +93,6 @@ namespace Test2d
         {
             get { return _serializer; }
             set { Update(ref _serializer, value); }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public ICompressor Compressor
-        {
-            get { return _compressor; }
-            set { Update(ref _compressor, value); }
         }
 
         /// <summary>
@@ -1113,12 +1103,7 @@ namespace Test2d
         {
             try
             {
-                _editor = Editor.Create(
-                    DefaultProject(),
-                    _renderers,
-                    _serializer,
-                    _compressor);
-
+                _editor = Editor.Create(DefaultProject(), _renderers, _serializer);
                 _editor.Log = new TraceLog();
                 _editor.Log.Initialize("Test.log");
 

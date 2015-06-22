@@ -283,7 +283,6 @@ namespace Test.Windows
                 Renderers = new IRenderer[] { new WpfRenderer(), new WpfRenderer() },
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),
-                Compressor = new LZ4CodecCompressor(),
                 ScriptEngine = new RoslynScriptEngine(),
                 CodeEngine = new RoslynCodeEngine(),
                 PdfWriter = new PdfWriter(),

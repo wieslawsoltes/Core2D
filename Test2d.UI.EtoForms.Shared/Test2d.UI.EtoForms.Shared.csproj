@@ -90,10 +90,6 @@
     <Compile Include="Forms\ZoomState.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dependencies\Compressor.LZ4\Compressor.LZ4.csproj">
-      <Project>{afe57f76-d587-4f4d-b308-507476934d29}</Project>
-      <Name>Compressor.LZ4</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj">
       <Project>{d40b3bcd-0a26-40bb-960b-9464d248c934}</Project>
       <Name>FileWriter.Dxf</Name>

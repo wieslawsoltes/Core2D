@@ -169,13 +169,8 @@ namespace Test2d
         /// <param name="project">The project to edit.</param>
         /// <param name="renderers">The shape renderers.</param>
         /// <param name="serializer">The object serializer.</param>
-        /// <param name="compressor">The binary data compressor.</param>
         /// <returns></returns>
-        public static Editor Create(
-            Project project, 
-            IRenderer[] renderers,
-            ISerializer serializer,
-            ICompressor compressor)
+        public static Editor Create(Project project, IRenderer[] renderers, ISerializer serializer)
         {
             var editor = new Editor()
             {
