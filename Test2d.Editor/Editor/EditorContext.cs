@@ -24,6 +24,7 @@ namespace Test2d
         private Editor _editor;
         private IView _view;
         private IRenderer[] _renderers;
+        private ISimulationTimer _simulationTimer;
         private ITextClipboard _textClipboard;
         private ISerializer _serializer;
         private IScriptEngine _scriptEngine;
@@ -37,10 +38,9 @@ namespace Test2d
         private bool _isSimulationPaused;
         private Clock _clock = default(Clock);
         private System.IO.FileSystemWatcher _watcher = default(System.IO.FileSystemWatcher);
-        private System.Threading.Timer _timer = default(System.Threading.Timer);
         private Container _containerToCopy = default(Container);
         private Document _documentToCopy = default(Document);
-        
+
         /// <summary>
         ///
         /// </summary>
@@ -75,6 +75,15 @@ namespace Test2d
         {
             get { return _renderers; }
             set { Update(ref _renderers, value); }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public ISimulationTimer SimulationTimer
+        {
+            get { return _simulationTimer; }
+            set { Update(ref _simulationTimer, value); }
         }
 
         /// <summary>
@@ -1237,7 +1246,7 @@ namespace Test2d
                 _commands.EvalScriptCommand = 
                     new DelegateCommand<string>(
                         (path) => Eval(path),
-                        (path) => IsEditMode());
+                        (path) => true);
 
                 _commands.DefaultIsFilledCommand = 
                     new DelegateCommand(
@@ -3504,7 +3513,7 @@ namespace Test2d
         /// <returns></returns>
         public bool IsEditMode()
         {
-            return _timer == null;
+            return !_simulationTimer.IsRunning;
         }
 
         /// <summary>
@@ -3513,7 +3522,7 @@ namespace Test2d
         /// <returns></returns>
         public bool IsSimulationMode()
         {
-            return _timer != null;
+            return _simulationTimer.IsRunning;
         }
 
         /// <summary>
@@ -3575,20 +3584,18 @@ namespace Test2d
                 _codeEngine.Build(shapes, this);
 
                 IsSimulationPaused = false;
-                _timer = new System.Threading.Timer(
-                    (state) => 
+
+                _simulationTimer.Start(
+                    () =>
                     {
                         if (!IsSimulationPaused)
                         {
                             TickSimulation();
                         }
                     },
-                    null, 
-                    0, 
                     _clock.Resolution);
 
                 UpdateCanExecuteState();
-
             }
             catch (Exception ex)
             {
@@ -3611,8 +3618,7 @@ namespace Test2d
             {
                 if (IsSimulationMode())
                 {
-                    _timer.Dispose();
-                    _timer = default(System.Threading.Timer);
+                    _simulationTimer.Stop();
                     _codeEngine.Reset();
                     IsSimulationPaused = false;
                     UpdateCanExecuteState();

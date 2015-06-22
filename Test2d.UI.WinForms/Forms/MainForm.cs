@@ -50,6 +50,7 @@ namespace TestWinForms
             {
                 View = this,
                 Renderers = new IRenderer[] { new EmfRenderer(72.0 / 96.0) },
+                SimulationTimer = new SimulationTimer(),
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),
                 ScriptEngine = new RoslynScriptEngine(),
@@ -607,6 +608,41 @@ namespace TestWinForms
             {
                 renderer.Draw(g, container.HelperLayer, container.Properties, null);
             }
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    internal class SimulationTimer : ISimulationTimer
+    {
+        private System.Threading.Timer _timer = default(System.Threading.Timer);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsRunning
+        {
+            get { return _timer != null; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="callback"></param>
+        /// <param name="period"></param>
+        public void Start(Action callback, int period)
+        {
+            _timer = new System.Threading.Timer((_) => callback(), null, 0, period);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Stop()
+        {
+            _timer.Dispose();
+            _timer = default(System.Threading.Timer);
         }
     }
 

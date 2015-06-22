@@ -26,6 +26,41 @@ namespace Test.Windows
     /// <summary>
     /// 
     /// </summary>
+    internal class SimulationTimer : ISimulationTimer
+    {
+        private System.Threading.Timer _timer = default(System.Threading.Timer);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsRunning
+        {
+            get { return _timer != null; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="callback"></param>
+        /// <param name="period"></param>
+        public void Start(Action callback, int period)
+        {
+            _timer = new System.Threading.Timer((_) => callback(), null, 0, period);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Stop()
+        {
+            _timer.Dispose();
+            _timer = default(System.Threading.Timer);
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     internal class TextClipboard : ITextClipboard
     {
         /// <summary>
@@ -281,6 +316,7 @@ namespace Test.Windows
             {
                 View = this,
                 Renderers = new IRenderer[] { new WpfRenderer(), new WpfRenderer() },
+                SimulationTimer = new SimulationTimer(),
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),
                 ScriptEngine = new RoslynScriptEngine(),
