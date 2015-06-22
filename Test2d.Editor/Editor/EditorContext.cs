@@ -3519,6 +3519,42 @@ namespace Test2d
         /// <summary>
         ///
         /// </summary>
+        public void TickSimulation()
+        {
+            try
+            {
+                if (IsSimulationMode())
+                {
+                    _editor.Observer.IsPaused = true;
+                    _codeEngine.Run();
+                    _editor.Observer.IsPaused = false;
+                    if (_editor.Project.CurrentContainer != null)
+                    {
+                        _editor.Project.CurrentContainer.Invalidate();
+                    }
+                    _clock.Tick();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+
+                if (IsSimulationMode())
+                {
+                    StopSimulation();
+                }
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
         public void StartSimulation()
         {
             try
@@ -3540,32 +3576,16 @@ namespace Test2d
 
                 IsSimulationPaused = false;
                 _timer = new System.Threading.Timer(
-                    (state) =>
+                    (state) => 
                     {
-                        try
+                        if (!IsSimulationPaused)
                         {
-                            if (!IsSimulationPaused)
-                            {
-                                TickSimulation();
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            if (_editor.Log != null)
-                            {
-                                _editor.Log.LogError("{0}{1}{2}",
-                                    ex.Message,
-                                    Environment.NewLine,
-                                    ex.StackTrace);
-                            }
-
-                            if (IsSimulationMode())
-                            {
-                                StopSimulation();
-                            }
+                            TickSimulation();
                         }
                     },
-                    null, 0, _clock.Resolution);
+                    null, 
+                    0, 
+                    _clock.Resolution);
 
                 UpdateCanExecuteState();
 
@@ -3630,37 +3650,6 @@ namespace Test2d
                 {
                     IsSimulationPaused = !IsSimulationPaused;
                     UpdateCanExecuteState();
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void TickSimulation()
-        {
-            try
-            {
-                if (IsSimulationMode())
-                {
-                    _editor.Observer.IsPaused = true;
-                    _codeEngine.Run();
-                    _editor.Observer.IsPaused = false;
-                    if (_editor.Project.CurrentContainer != null)
-                    {
-                        _editor.Project.CurrentContainer.Invalidate();
-                    }
-                    _clock.Tick();
                 }
             }
             catch (Exception ex)
