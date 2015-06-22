@@ -178,7 +178,7 @@ namespace TestWinForms
             this.toolStripSeparator5,
             this.pathToolStripMenuItem});
             this.toolToolStripMenuItem.Name = "toolToolStripMenuItem";
-            this.toolToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.toolToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.toolToolStripMenuItem.Text = "&Tool";
             // 
             // noneToolStripMenuItem
@@ -306,8 +306,8 @@ namespace TestWinForms
             // evaluateToolStripMenuItem
             // 
             this.evaluateToolStripMenuItem.Name = "evaluateToolStripMenuItem";
-            this.evaluateToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F9;
-            this.evaluateToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.evaluateToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F8;
+            this.evaluateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.evaluateToolStripMenuItem.Text = "&Evaluate...";
             // 
             // optionsToolStripMenuItem
@@ -326,31 +326,31 @@ namespace TestWinForms
             // 
             this.defaultIsFilledToolStripMenuItem.Name = "defaultIsFilledToolStripMenuItem";
             this.defaultIsFilledToolStripMenuItem.ShortcutKeyDisplayString = "F";
-            this.defaultIsFilledToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.defaultIsFilledToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.defaultIsFilledToolStripMenuItem.Text = "Default is &Filled";
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(166, 6);
             // 
             // snapToGridToolStripMenuItem
             // 
             this.snapToGridToolStripMenuItem.Name = "snapToGridToolStripMenuItem";
             this.snapToGridToolStripMenuItem.ShortcutKeyDisplayString = "G";
-            this.snapToGridToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.snapToGridToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.snapToGridToolStripMenuItem.Text = "&Snap to Grid";
             // 
             // toolStripSeparator16
             // 
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator16.Size = new System.Drawing.Size(166, 6);
             // 
             // tryToConnectToolStripMenuItem
             // 
             this.tryToConnectToolStripMenuItem.Name = "tryToConnectToolStripMenuItem";
             this.tryToConnectToolStripMenuItem.ShortcutKeyDisplayString = "C";
-            this.tryToConnectToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.tryToConnectToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.tryToConnectToolStripMenuItem.Text = "Try To &Connect";
             // 
             // MainForm
