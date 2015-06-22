@@ -9,6 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1000">
     <UserControl.InputBindings>
+        <KeyBinding Command="{Binding EvalCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Gesture="F8"/>
         <KeyBinding Command="{Binding NewCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Gesture="Ctrl+N"/>
         <KeyBinding Command="{Binding SaveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Gesture="Ctrl+S"/>
         <KeyBinding Command="{Binding ImportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Gesture="Ctrl+I"/>
@@ -18,7 +19,9 @@
         <Grid.Resources>
             <ControlTemplate x:Key="ScriptMenu">
                 <Menu Background="Transparent">
-                    <MenuItem Header="_File">
+                    <MenuItem Header="_Script">
+                        <MenuItem Header="_Evaluate" Command="{Binding EvalCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" InputGestureText="F8"/>
+                        <Separator/>
                         <MenuItem Header="_New" Command="{Binding NewCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" InputGestureText="Ctrl+N"/>
                         <Separator/>
                         <MenuItem Header="_Save" Command="{Binding SaveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" InputGestureText="Ctrl+S"/>

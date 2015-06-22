@@ -26,6 +26,13 @@ namespace Test.Controls
     /// </summary>
     public partial class ScriptControl : UserControl
     {
+        private bool _enableAutoSave = false;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand EvalCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -53,6 +60,15 @@ namespace Test.Controls
         {
             InitializeComponent();
 
+            Initialize();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void Initialize()
+        {
+            EvalCommand = new DelegateCommand(() => Eval());
             NewCommand = new DelegateCommand(() => New());
             SaveCommand = new DelegateCommand(() => Save(tree.SelectedItem));
             ImportCommand = new DelegateCommand(() => Import());
@@ -64,58 +80,107 @@ namespace Test.Controls
             tree.SelectedItemChanged +=
                 (s, e) =>
                 {
-                    Save(e.OldValue);
+                    if (_enableAutoSave)
+                    {
+                        Save(e.OldValue);
+                    }
+
                     Open(e.NewValue);
                 };
         }
 
-        private void New()
+        /// <summary>
+        /// 
+        /// </summary>
+        private void Eval()
         {
-            if (tree.SelectedItem is ScriptDirectory)
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            try
             {
-                var directory = tree.SelectedItem as ScriptDirectory;
-
-                var template = "New";
-                try
+                var code = textEditor.Text;
+                context.Eval(code, context);
+            }
+            catch (Exception ex)
+            {
+                if (context.Editor.Log != null)
                 {
-                    int max = 4096;
-                    int i = 0;
-                    bool success = false;
-
-                    while (success == false && i < max)
-                    {
-                        var name = template + i;
-                        var path = System.IO.Path.Combine(directory.Path, name + ".cs");
-
-                        if (!System.IO.File.Exists(path))
-                        {
-                            success = true;
-
-                            var script = new ScriptFile()
-                            {
-                                Name = name,
-                                Path = path
-                            };
-
-                            System.IO.File.CreateText(script.Path);
-                            directory.Scripts = directory.Scripts.Add(script);
-                        }
-                        else
-                        {
-                            i++;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.Print(ex.Message);
-                    Debug.Print(ex.StackTrace);
+                    context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
                 }
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private void New()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            var directory = tree.SelectedItem as ScriptDirectory;
+            if (directory == null || !(directory is ScriptDirectory))
+                return;
+
+            try
+            {
+                var template = "New";
+                int max = 4096;
+                int i = 0;
+                bool success = false;
+
+                while (success == false && i < max)
+                {
+                    var name = template + i;
+                    var path = System.IO.Path.Combine(directory.Path, name + ".cs");
+
+                    if (!System.IO.File.Exists(path))
+                    {
+                        success = true;
+
+                        var script = new ScriptFile()
+                        {
+                            Name = name,
+                            Path = path
+                        };
+
+                        System.IO.File.CreateText(script.Path);
+                        directory.Scripts = directory.Scripts.Add(script);
+                    }
+                    else
+                    {
+                        i++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (context.Editor.Log != null)
+                {
+                    context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         private void Open(object value)
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             if (value != null && value is ScriptFile)
             {
                 var script = value as ScriptFile;
@@ -126,8 +191,13 @@ namespace Test.Controls
                 }
                 catch (Exception ex)
                 {
-                    Debug.Print(ex.Message);
-                    Debug.Print(ex.StackTrace);
+                    if (context.Editor.Log != null)
+                    {
+                        context.Editor.Log.LogError("{0}{1}{2}",
+                            ex.Message,
+                            Environment.NewLine,
+                            ex.StackTrace);
+                    }
                 }
             }
             else
@@ -136,29 +206,46 @@ namespace Test.Controls
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         private void Save(object value)
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             if (value != null && value is ScriptFile)
             {
                 var script = value as ScriptFile;
                 try
                 {
-                    if (textEditor.CanUndo)
-                    {
-                        var code = textEditor.Text;
-                        System.IO.File.WriteAllText(script.Path, code);
-                    }
+                    var code = textEditor.Text;
+                    System.IO.File.WriteAllText(script.Path, code);
                 }
                 catch (Exception ex)
                 {
-                    Debug.Print(ex.Message);
-                    Debug.Print(ex.StackTrace);
+                    if (context.Editor.Log != null)
+                    {
+                        context.Editor.Log.LogError("{0}{1}{2}",
+                            ex.Message,
+                            Environment.NewLine,
+                            ex.StackTrace);
+                    }
                 }
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void Import()
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             var dlg = new OpenFileDialog()
             {
                 Filter = "C# (*.cs)|*.cs|All (*.*)|*.*",
@@ -175,14 +262,27 @@ namespace Test.Controls
                 }
                 catch (Exception ex)
                 {
-                    Debug.Print(ex.Message);
-                    Debug.Print(ex.StackTrace);
+                    if (context.Editor.Log != null)
+                    {
+                        context.Editor.Log.LogError("{0}{1}{2}",
+                            ex.Message,
+                            Environment.NewLine,
+                            ex.StackTrace);
+                    }
                 }
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         private void Export(object value)
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             string name = "script";
 
             if (value != null && value is ScriptFile)
@@ -206,8 +306,13 @@ namespace Test.Controls
                 }
                 catch (Exception ex)
                 {
-                    Debug.Print(ex.Message);
-                    Debug.Print(ex.StackTrace);
+                    if (context.Editor.Log != null)
+                    {
+                        context.Editor.Log.LogError("{0}{1}{2}",
+                            ex.Message,
+                            Environment.NewLine,
+                            ex.StackTrace);
+                    }
                 }
             }
         }
