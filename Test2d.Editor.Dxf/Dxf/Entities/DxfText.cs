@@ -97,7 +97,7 @@ namespace Dxf
             TextStyle = "Standard";
             TextGenerationFlags = DxfTextGenerationFlags.Default;
             HorizontalTextJustification = DxfHorizontalTextJustification.Default;
-            SecondAlignment = new DxfVector3(0.0, 0.0, 0.0); ;
+            SecondAlignment = new DxfVector3(0.0, 0.0, 0.0);
             ExtrusionDirection = new DxfVector3(0.0, 0.0, 1.0);
             VerticalTextJustification = DxfVerticalTextJustification.Default;
         }
