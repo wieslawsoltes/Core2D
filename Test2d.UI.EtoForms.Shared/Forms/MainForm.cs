@@ -259,6 +259,8 @@ namespace TestEtoForms
         /// <param name="drawable"></param>
         private void InitializeMenu()
         {
+            #region File
+
             var newCommand = new Command()
             {
                 MenuText = "&New",
@@ -368,15 +370,9 @@ namespace TestEtoForms
                     Application.Instance.Quit();
                 };
 
-            var aboutCommand = new Command()
-            {
-                MenuText = "&About..."
-            };
-            aboutCommand.Executed += 
-                (s, e) =>
-                {
-                    MessageBox.Show(this, Platform.ID);
-                };
+            #endregion
+
+            #region Tool
 
             var noneTool = new Command() 
             { 
@@ -510,6 +506,10 @@ namespace TestEtoForms
                     _context.Commands.ToolPathCommand.Execute(null);
                 };
 
+            #endregion
+
+            #region Edit
+
             var undoCommand = new Command() 
             { 
                 MenuText = "&Undo", 
@@ -619,10 +619,14 @@ namespace TestEtoForms
                     _context.Commands.GroupLayerCommand.Execute(null);
                 };
 
+            #endregion
+
+            #region Script
+
             var evalCommand = new Command()
             {
                 MenuText = "&Evaluate...",
-                Shortcut = Keys.F9
+                Shortcut = Keys.F8
             };
             evalCommand.Executed +=
                 (s, e) =>
@@ -640,6 +644,69 @@ namespace TestEtoForms
                         InvalidateContainer();
                     }
                 };
+
+            #endregion
+
+            #region Simulation
+
+            var startSimulation = new Command()
+            {
+                MenuText = "&Start",
+                Shortcut = Keys.F5,
+            };
+            startSimulation.Executed +=
+                (s, e) =>
+                {
+                    _context.Commands.StartSimulationCommand.Execute(null);
+                };
+
+            var stopSimulation = new Command()
+            {
+                MenuText = "S&top",
+                Shortcut = Keys.F6
+            };
+            stopSimulation.Executed +=
+                (s, e) =>
+                {
+                    _context.Commands.StopSimulationCommand.Execute(null);
+                };
+
+            var restartSimulation = new Command()
+            {
+                MenuText = "&Restart",
+                Shortcut = Keys.F7
+            };
+            restartSimulation.Executed +=
+                (s, e) =>
+                {
+                    _context.Commands.RestartSimulationCommand.Execute(null);
+                };
+
+            var pauseSimulation = new Command()
+            {
+                MenuText = "&Pause",
+                Shortcut = Keys.F9
+            };
+            pauseSimulation.Executed +=
+                (s, e) =>
+                {
+                    _context.Commands.PauseSimulationCommand.Execute(null);
+                };
+
+            var tickSimulation = new Command()
+            {
+                MenuText = "Ti&ck",
+                Shortcut = Keys.F10
+            };
+            tickSimulation.Executed +=
+                (s, e) =>
+                {
+                    _context.Commands.TickSimulationCommand.Execute(null);
+                };
+
+            #endregion
+
+            #region Menu
 
             var fileMenu = new ButtonMenuItem()
             { 
@@ -714,6 +781,32 @@ namespace TestEtoForms
                 }
             };
 
+            var simulationMenu = new ButtonMenuItem()
+            {
+                Text = "S&imulation",
+                Items =
+                { 
+                    startSimulation,
+                    stopSimulation,
+                    new SeparatorMenuItem(),
+                    restartSimulation,
+                    new SeparatorMenuItem(),
+                    pauseSimulation,
+                    new SeparatorMenuItem(),
+                    tickSimulation,
+                }
+            };
+
+            var aboutCommand = new Command()
+            {
+                MenuText = "&About..."
+            };
+            aboutCommand.Executed +=
+                (s, e) =>
+                {
+                    MessageBox.Show(this, Platform.ID);
+                };
+
             Menu = new MenuBar
             {
                 Items =
@@ -721,11 +814,14 @@ namespace TestEtoForms
                     fileMenu,
                     editMenu,
                     toolMenu,
-                    scriptMenu
+                    scriptMenu,
+                    simulationMenu
                 },
                 QuitItem = exitCommand,
                 AboutItem = aboutCommand
             };
+
+            #endregion
         }
 
         /// <summary>
