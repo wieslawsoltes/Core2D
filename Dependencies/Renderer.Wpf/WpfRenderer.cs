@@ -439,12 +439,16 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
+            var style = line.Style;
+            if (style == null)
+                return;
+
             double zoom = _state.Zoom;
-            double thicknessLine = line.Style.Thickness / zoom;
+            double thicknessLine = style.Thickness / zoom;
             double halfLine = thicknessLine / 2.0;
-            double thicknessStartArrow = line.Style.StartArrowStyle.Thickness / zoom;
+            double thicknessStartArrow = style.StartArrowStyle.Thickness / zoom;
             double halfStartArrow = thicknessStartArrow / 2.0;
-            double thicknessEndArrow = line.Style.EndArrowStyle.Thickness / zoom;
+            double thicknessEndArrow = style.EndArrowStyle.Thickness / zoom;
             double halfEndArrow = thicknessEndArrow / 2.0;
             
             // line style
@@ -452,17 +456,17 @@ namespace Test
             Brush fillLine;
             Pen strokeLine;
             if (_enableStyleCache 
-                && _styleCache.TryGetValue(line.Style, out lineCache))
+                && _styleCache.TryGetValue(style, out lineCache))
             {
                 fillLine = lineCache.Item1;
                 strokeLine = lineCache.Item2;
             }
             else
             {
-                fillLine = CreateBrush(line.Style.Fill);
-                strokeLine = CreatePen(line.Style, thicknessLine);
+                fillLine = CreateBrush(style.Fill);
+                strokeLine = CreatePen(style, thicknessLine);
                 if (_enableStyleCache)
-                    _styleCache.Add(line.Style, Tuple.Create(fillLine, strokeLine));
+                    _styleCache.Add(style, Tuple.Create(fillLine, strokeLine));
             }
         
             // start arrow style
@@ -470,17 +474,17 @@ namespace Test
             Brush fillStartArrow;
             Pen strokeStartArrow;
             if (_enableArrowStyleCache 
-                && _arrowStyleCache.TryGetValue(line.Style.StartArrowStyle, out startArrowCache))
+                && _arrowStyleCache.TryGetValue(style.StartArrowStyle, out startArrowCache))
             {
                 fillStartArrow = startArrowCache.Item1;
                 strokeStartArrow = startArrowCache.Item2;
             }
             else
             {
-                fillStartArrow = CreateBrush(line.Style.StartArrowStyle.Fill);
-                strokeStartArrow = CreatePen(line.Style.StartArrowStyle, thicknessStartArrow);
+                fillStartArrow = CreateBrush(style.StartArrowStyle.Fill);
+                strokeStartArrow = CreatePen(style.StartArrowStyle, thicknessStartArrow);
                 if (_enableArrowStyleCache)
-                    _arrowStyleCache.Add(line.Style.StartArrowStyle, Tuple.Create(fillStartArrow, strokeStartArrow));
+                    _arrowStyleCache.Add(style.StartArrowStyle, Tuple.Create(fillStartArrow, strokeStartArrow));
             }
             
             // end arrow style
@@ -488,17 +492,17 @@ namespace Test
             Brush fillEndArrow;
             Pen strokeEndArrow;
             if (_enableArrowStyleCache 
-                && _arrowStyleCache.TryGetValue(line.Style.EndArrowStyle, out endArrowCache))
+                && _arrowStyleCache.TryGetValue(style.EndArrowStyle, out endArrowCache))
             {
                 fillEndArrow = endArrowCache.Item1;
                 strokeEndArrow = endArrowCache.Item2;
             }
             else
             {
-                fillEndArrow = CreateBrush(line.Style.EndArrowStyle.Fill);
-                strokeEndArrow = CreatePen(line.Style.EndArrowStyle, thicknessEndArrow);
+                fillEndArrow = CreateBrush(style.EndArrowStyle.Fill);
+                strokeEndArrow = CreatePen(style.EndArrowStyle, thicknessEndArrow);
                 if (_enableArrowStyleCache)
-                    _arrowStyleCache.Add(line.Style.EndArrowStyle, Tuple.Create(fillEndArrow, strokeEndArrow));
+                    _arrowStyleCache.Add(style.EndArrowStyle, Tuple.Create(fillEndArrow, strokeEndArrow));
             }
 
             // line max length
@@ -510,8 +514,8 @@ namespace Test
             XLine.SetMaxLength(line, ref x1, ref y1, ref x2, ref y2);
 
             // arrow transforms
-            var sas = line.Style.StartArrowStyle;
-            var eas = line.Style.EndArrowStyle;
+            var sas = style.StartArrowStyle;
+            var eas = style.EndArrowStyle;
             double a1 = Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI;
             double a2 = Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI;
             bool doRectTransform1 = a1 % 90.0 != 0.0;
@@ -646,24 +650,28 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
-            double thickness = rectangle.Style.Thickness / _state.Zoom;
+            var style = rectangle.Style;
+            if (style == null)
+                return;
+
+            double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache 
-                && _styleCache.TryGetValue(rectangle.Style, out cache))
+            if (_enableStyleCache
+                && _styleCache.TryGetValue(style, out cache))
             {
                 fill = cache.Item1;
                 stroke = cache.Item2;
             }
             else
             {
-                fill = CreateBrush(rectangle.Style.Fill);
-                stroke = CreatePen(rectangle.Style, thickness);
+                fill = CreateBrush(style.Fill);
+                stroke = CreatePen(style, thickness);
                 if (_enableStyleCache)
-                    _styleCache.Add(rectangle.Style, Tuple.Create(fill, stroke));
+                    _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
 
             var rect = CreateRect(
@@ -686,24 +694,28 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
-            double thickness = ellipse.Style.Thickness / _state.Zoom;
+            var style = ellipse.Style;
+            if (style == null)
+                return;
+
+            double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
             if (_enableStyleCache 
-                && _styleCache.TryGetValue(ellipse.Style, out cache))
+                && _styleCache.TryGetValue(style, out cache))
             {
                 fill = cache.Item1;
                 stroke = cache.Item2;
             }
             else
             {
-                fill = CreateBrush(ellipse.Style.Fill);
-                stroke = CreatePen(ellipse.Style, thickness);
+                fill = CreateBrush(style.Fill);
+                stroke = CreatePen(style, thickness);
                 if (_enableStyleCache)
-                    _styleCache.Add(ellipse.Style, Tuple.Create(fill, stroke));
+                    _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
 
             var rect = CreateRect(
@@ -736,24 +748,28 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
-            double thickness = arc.Style.Thickness / _state.Zoom;
+            var style = arc.Style;
+            if (style == null)
+                return;
+
+            double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
             if (_enableStyleCache
-                && _styleCache.TryGetValue(arc.Style, out cache))
+                && _styleCache.TryGetValue(style, out cache))
             {
                 fill = cache.Item1;
                 stroke = cache.Item2;
             }
             else
             {
-                fill = CreateBrush(arc.Style.Fill);
-                stroke = CreatePen(arc.Style, thickness);
+                fill = CreateBrush(style.Fill);
+                stroke = CreatePen(style, thickness);
                 if (_enableStyleCache)
-                    _styleCache.Add(arc.Style, Tuple.Create(fill, stroke));
+                    _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
 
             var a = WpfArc.FromXArc(arc, dx, dy);
@@ -812,24 +828,28 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
-            double thickness = bezier.Style.Thickness / _state.Zoom;
+            var style = bezier.Style;
+            if (style == null)
+                return;
+
+            double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
             if (_enableStyleCache 
-                && _styleCache.TryGetValue(bezier.Style, out cache))
+                && _styleCache.TryGetValue(style, out cache))
             {
                 fill = cache.Item1;
                 stroke = cache.Item2;
             }
             else
             {
-                fill = CreateBrush(bezier.Style.Fill);
-                stroke = CreatePen(bezier.Style, thickness);
+                fill = CreateBrush(style.Fill);
+                stroke = CreatePen(style, thickness);
                 if (_enableStyleCache)
-                    _styleCache.Add(bezier.Style, Tuple.Create(fill, stroke));
+                    _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
 
             PathGeometry pg = null;
@@ -883,24 +903,28 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
-            double thickness = qbezier.Style.Thickness / _state.Zoom;
+            var style = qbezier.Style;
+            if (style == null)
+                return;
+
+            double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
             if (_enableStyleCache 
-                && _styleCache.TryGetValue(qbezier.Style, out cache))
+                && _styleCache.TryGetValue(style, out cache))
             {
                 fill = cache.Item1;
                 stroke = cache.Item2;
             }
             else
             {
-                fill = CreateBrush(qbezier.Style.Fill);
-                stroke = CreatePen(qbezier.Style, thickness);
+                fill = CreateBrush(style.Fill);
+                stroke = CreatePen(style, thickness);
                 if (_enableStyleCache)
-                    _styleCache.Add(qbezier.Style, Tuple.Create(fill, stroke));
+                    _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
 
             PathGeometry pg = null;
@@ -953,24 +977,28 @@ namespace Test
         {
             var _dc = dc as DrawingContext;
 
-            double thickness = text.Style.Thickness / _state.Zoom;
+            var style = text.Style;
+            if (style == null)
+                return;
+
+            double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
             if (_enableStyleCache 
-                && _styleCache.TryGetValue(text.Style, out cache))
+                && _styleCache.TryGetValue(style, out cache))
             {
                 fill = cache.Item1;
                 stroke = cache.Item2;
             }
             else
             {
-                fill = CreateBrush(text.Style.Fill);
-                stroke = CreatePen(text.Style, thickness);
+                fill = CreateBrush(style.Fill);
+                stroke = CreatePen(style, thickness);
                 if (_enableStyleCache)
-                    _styleCache.Add(text.Style, Tuple.Create(fill, stroke));
+                    _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
 
             var rect = CreateRect(
@@ -988,33 +1016,33 @@ namespace Test
             if (_enableTextCache
                 && _textCache.TryGetValue(text, out tcache)
                 && string.Compare(tcache.Item1, tbind) == 0
-                && tcache.Item3 == text.Style)
+                && tcache.Item3 == style)
             {
                 ct = tcache.Item1;
                 ft = tcache.Item2;
 
                 _dc.DrawText(
                     ft, 
-                    GetTextOrigin(text.Style, ref rect, ft));
+                    GetTextOrigin(style, ref rect, ft));
             }
             else
             {
                 var ci = CultureInfo.InvariantCulture;
 
                 var fontStyle = System.Windows.FontStyles.Normal;
-                if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Italic))
+                if (style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Italic))
                 {
                     fontStyle = System.Windows.FontStyles.Italic;
                 }
 
                 var fontWeight = FontWeights.Regular;
-                if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Bold))
+                if (style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Bold))
                 {
                     fontWeight = FontWeights.Bold;
                 }
 
                 var tf = new Typeface(
-                    new FontFamily(text.Style.TextStyle.FontName),
+                    new FontFamily(style.TextStyle.FontName),
                     fontStyle,
                     fontWeight,
                     FontStretches.Normal);
@@ -1024,21 +1052,21 @@ namespace Test
                     ci,
                     ci.TextInfo.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight,
                     tf,
-                    text.Style.TextStyle.FontSize,
+                    style.TextStyle.FontSize,
                     stroke.Brush, null, TextFormattingMode.Ideal);
 
-                if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline)
-                    || text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
+                if (style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline)
+                    || style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
                 {
                     var decorations = new TextDecorationCollection();
 
-                    if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline))
+                    if (style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline))
                     {
                         decorations = new TextDecorationCollection(
                             decorations.Union(TextDecorations.Underline));
                     }
 
-                    if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
+                    if (style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
                     {
                         decorations = new TextDecorationCollection(
                             decorations.Union(TextDecorations.Strikethrough));
@@ -1049,7 +1077,7 @@ namespace Test
 
                 if (_enableTextCache)
                 {
-                    var tuple = Tuple.Create(tbind, ft, text.Style);
+                    var tuple = Tuple.Create(tbind, ft, style);
                     if (_textCache.ContainsKey(text))
                     {
                         _textCache[text] = tuple;
@@ -1062,7 +1090,7 @@ namespace Test
 
                 _dc.DrawText(
                     ft, 
-                    GetTextOrigin(text.Style, ref rect, ft));
+                    GetTextOrigin(style, ref rect, ft));
             }
         }
 
@@ -1082,24 +1110,28 @@ namespace Test
 
             var _dc = dc as DrawingContext;
 
-            double thickness = image.Style.Thickness / _state.Zoom;
+            var style = image.Style;
+            if (style == null)
+                return;
+
+            double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
             if (_enableStyleCache
-                && _styleCache.TryGetValue(image.Style, out cache))
+                && _styleCache.TryGetValue(style, out cache))
             {
                 fill = cache.Item1;
                 stroke = cache.Item2;
             }
             else
             {
-                fill = CreateBrush(image.Style.Fill);
-                stroke = CreatePen(image.Style, thickness);
+                fill = CreateBrush(style.Fill);
+                stroke = CreatePen(style, thickness);
                 if (_enableStyleCache)
-                    _styleCache.Add(image.Style, Tuple.Create(fill, stroke));
+                    _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
 
             var rect = CreateRect(
@@ -1166,24 +1198,28 @@ namespace Test
 
             var _dc = dc as DrawingContext;
 
-            double thickness = path.Style.Thickness / _state.Zoom;
+            var style = path.Style;
+            if (style == null)
+                return;
+
+            double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
             Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
             if (_enableStyleCache 
-                && _styleCache.TryGetValue(path.Style, out cache))
+                && _styleCache.TryGetValue(style, out cache))
             {
                 fill = cache.Item1;
                 stroke = cache.Item2;
             }
             else
             {
-                fill = CreateBrush(path.Style.Fill);
-                stroke = CreatePen(path.Style, thickness);
+                fill = CreateBrush(style.Fill);
+                stroke = CreatePen(style, thickness);
                 if (_enableStyleCache)
-                    _styleCache.Add(path.Style, Tuple.Create(fill, stroke));
+                    _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
     
             Tuple<string, XPathGeometry, StreamGeometry, TransformGroupHelper, ShapeStyle> pcache = null;
@@ -1194,7 +1230,7 @@ namespace Test
                 && _pathCache.TryGetValue(path, out pcache)
                 && string.Compare(pcache.Item1, path.Source) == 0
                 && pcache.Item2 == path.Geometry
-                && pcache.Item5 == path.Style)
+                && pcache.Item5 == style)
             {
                 sg = pcache.Item3;
                 tgh = pcache.Item4;
@@ -1223,7 +1259,7 @@ namespace Test
 
                 if (_enablePathCache)
                 {
-                    var tuple = Tuple.Create(path.Source, path.Geometry, sg, tgh, path.Style);
+                    var tuple = Tuple.Create(path.Source, path.Geometry, sg, tgh, style);
                     if (_pathCache.ContainsKey(path))
                     {
                         _pathCache[path] = tuple;
