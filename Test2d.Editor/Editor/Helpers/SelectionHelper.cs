@@ -55,7 +55,6 @@ namespace Test2d
                                 _historyX = _startX;
                                 _historyY = _startY;
                                 GenerateMoveSelectionCache();
-                                _editor.IsContextMenu = false;
                                 _currentState = State.One;
                                 break;
                             }
@@ -68,7 +67,6 @@ namespace Test2d
                             _historyX = _startX;
                             _historyY = _startY;
                             GenerateMoveSelectionCache();
-                            _editor.IsContextMenu = false;
                             _currentState = State.One;
                             break;
                         }
@@ -181,7 +179,6 @@ namespace Test2d
                 case State.None:
                     {
                         _editor.Dehover();
-                        _editor.IsContextMenu = _editor.TryToSelectShape(_editor.Project.CurrentContainer, x, y) ? true : false;
                     }
                     break;
                 case State.One:

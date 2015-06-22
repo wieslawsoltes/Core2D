@@ -492,19 +492,9 @@ namespace Test.Windows
                     () => (new ScriptWindow() { Owner = this, DataContext = context }).Show(),
                     () => true);
 
-            var pw = default(PropertiesWindow);
-
             context.Commands.PropertiesWindowCommand = 
                 new DelegateCommand(
-                    () =>
-                    {
-                        if (pw == null)
-                        {
-                            pw = new PropertiesWindow() { Owner = this, DataContext = context };
-                            pw.Unloaded += (_s, _e) => pw = default(PropertiesWindow);
-                        }
-                        pw.Show();
-                    },
+                    () => (new PropertiesWindow() { Owner = this, DataContext = context }).Show(),
                     () => true);
 
             context.Commands.LoadWindowLayoutCommand =
@@ -521,25 +511,6 @@ namespace Test.Windows
                 new DelegateCommand(
                     () => ResetLayout(),
                     () => true);
-
-            context.Editor.PropertyChanged +=
-                (s, e) =>
-                {
-                    if (e.PropertyName == "IsContextMenu")
-                    {
-                        if (context.Editor.IsContextMenu)
-                        {
-                            context.Editor.IsContextMenu = false;
-                            
-                            if (pw == null)
-                            {
-                                pw = new PropertiesWindow() { Owner = this, DataContext = context };
-                                pw.Unloaded += (_s, _e) => pw = default(PropertiesWindow);
-                            }
-                            pw.Show();
-                        }
-                    }
-                };
 
             panAndZoomGrid.EnableAutoFit = context.Renderers[0].State.EnableAutofit;
 

@@ -20,7 +20,6 @@ namespace Test2d
         private Project _project;
         private IRenderer[] _renderers;
         private Tool _currentTool;
-        private bool _isContextMenu;
         private bool _enableObserver;
         private Observer _observer;
         private History _history;
@@ -62,15 +61,6 @@ namespace Test2d
             set { Update(ref _currentTool, value); }
         }
 
-        /// <summary>
-        /// Gets or sets if context menu is about to open.
-        /// </summary>
-        public bool IsContextMenu
-        {
-            get { return _isContextMenu; }
-            set { Update(ref _isContextMenu, value); }
-        }
-        
         /// <summary>
         /// Gets or sets if project collections and objects observer is enabled.
         /// </summary>
