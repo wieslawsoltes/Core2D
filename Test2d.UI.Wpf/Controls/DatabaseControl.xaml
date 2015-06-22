@@ -12,10 +12,10 @@
             <ControlTemplate x:Key="DatabasesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Header="database">
-                        <MenuItem Header="import" Command="{Binding Commands.ImportDataCommand}" InputGestureText=""/>
-                        <MenuItem Header="export" Command="{Binding Commands.ExportDataCommand}" InputGestureText=""/>
+                        <MenuItem Header="_Import..." Command="{Binding Commands.ImportDataCommand}" InputGestureText=""/>
+                        <MenuItem Header="_Export..." Command="{Binding Commands.ExportDataCommand}" InputGestureText=""/>
                         <Separator/>
-                        <MenuItem Header="update" Command="{Binding Commands.UpdateDataCommand}" InputGestureText=""/>
+                        <MenuItem Header="_Update..." Command="{Binding Commands.UpdateDataCommand}" InputGestureText=""/>
                     </MenuItem>
                     <MenuItem Command="{Binding Commands.AddDatabaseCommand}" Header="+"/>
                     <MenuItem Command="{Binding Commands.RemoveDatabaseCommand}" CommandParameter="{Binding Editor.Project.CurrentDatabase}" Header="-"/>

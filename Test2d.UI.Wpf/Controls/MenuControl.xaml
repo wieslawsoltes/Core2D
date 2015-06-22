@@ -19,37 +19,37 @@
             <MenuItem Header="_Export..." Command="{Binding Commands.ExportCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText="Ctrl+E"/>
             <Separator/>
             <MenuItem Header="Impo_rt">
-                <MenuItem Header="_Style" Command="{Binding Commands.ImportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
-                <MenuItem Header="S_tyles" Command="{Binding Commands.ImportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
+                <MenuItem Header="_Style..." Command="{Binding Commands.ImportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
+                <MenuItem Header="S_tyles..." Command="{Binding Commands.ImportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
                 <Separator/>
-                <MenuItem Header="St_yle Library" Command="{Binding Commands.ImportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
-                <MenuItem Header="Sty_le Libraries" Command="{Binding Commands.ImportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                <MenuItem Header="St_yle Library..." Command="{Binding Commands.ImportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                <MenuItem Header="Sty_le Libraries..." Command="{Binding Commands.ImportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
                 <Separator/>
-                <MenuItem Header="_Group" Command="{Binding Commands.ImportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
-                <MenuItem Header="G_roups" Command="{Binding Commands.ImportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
+                <MenuItem Header="_Group..." Command="{Binding Commands.ImportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
+                <MenuItem Header="G_roups..." Command="{Binding Commands.ImportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
                 <Separator/>
-                <MenuItem Header="Gr_oup Library" Command="{Binding Commands.ImportGroupLibraryCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
-                <MenuItem Header="Gro_up Libraries" Command="{Binding Commands.ImportGroupLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                <MenuItem Header="Gr_oup Library..." Command="{Binding Commands.ImportGroupLibraryCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                <MenuItem Header="Gro_up Libraries..." Command="{Binding Commands.ImportGroupLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
                 <Separator/>
-                <MenuItem Header="_Template" Command="{Binding Commands.ImportTemplateCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
-                <MenuItem Header="T_emplates" Command="{Binding Commands.ImportTemplatesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                <MenuItem Header="_Template..." Command="{Binding Commands.ImportTemplateCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                <MenuItem Header="T_emplates..." Command="{Binding Commands.ImportTemplatesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
             </MenuItem>
             <Separator/>
             <MenuItem Header="Expor_t">
-                <MenuItem Header="_Style" Command="{Binding Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" InputGestureText=""/>
-                <MenuItem Header="S_tyles" Command="{Binding Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
+                <MenuItem Header="_Style..." Command="{Binding Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" InputGestureText=""/>
+                <MenuItem Header="S_tyles..." Command="{Binding Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
                 <Separator/>
-                <MenuItem Header="St_yle Library" Command="{Binding Commands.ExportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
-                <MenuItem Header="Sty_le Libraries" Command="{Binding Commands.ExportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                <MenuItem Header="St_yle Library..." Command="{Binding Commands.ExportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
+                <MenuItem Header="Sty_le Libraries..." Command="{Binding Commands.ExportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
                 <Separator/>
-                <MenuItem Header="_Group" Command="{Binding Commands.ExportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.CurrentGroup}" InputGestureText=""/>
-                <MenuItem Header="G_roups" Command="{Binding Commands.ExportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
+                <MenuItem Header="_Group..." Command="{Binding Commands.ExportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.CurrentGroup}" InputGestureText=""/>
+                <MenuItem Header="G_roups..." Command="{Binding Commands.ExportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
                 <Separator/>
-                <MenuItem Header="Gr_oup Library" Command="{Binding Commands.ExportGroupLibraryCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
-                <MenuItem Header="Gro_up Libraries" Command="{Binding Commands.ExportGroupLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                <MenuItem Header="Gr_oup Library..." Command="{Binding Commands.ExportGroupLibraryCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
+                <MenuItem Header="Gro_up Libraries..." Command="{Binding Commands.ExportGroupLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
                 <Separator/>
-                <MenuItem Header="_Template" Command="{Binding Commands.ExportTemplateCommand}" CommandParameter="{Binding Editor.Project.CurrentTemplate}" InputGestureText=""/>
-                <MenuItem Header="T_emplates" Command="{Binding Commands.ExportTemplatesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                <MenuItem Header="_Template..." Command="{Binding Commands.ExportTemplateCommand}" CommandParameter="{Binding Editor.Project.CurrentTemplate}" InputGestureText=""/>
+                <MenuItem Header="T_emplates..." Command="{Binding Commands.ExportTemplatesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
             </MenuItem>
             <Separator/>
             <MenuItem Header="E_xit" Command="{Binding Commands.ExitCommand}" InputGestureText="Alt+F4"/>
@@ -78,18 +78,15 @@
                 <MenuItem Header="_Extent" Command="{Binding Commands.ZoomExtentCommand}" InputGestureText="X"/>
             </MenuItem>
             <Separator/>
+            <MenuItem Header="_Script..." Command="{Binding Commands.ScriptWindowCommand}" InputGestureText="Ctrl+U"/>
+            <Separator/>
+            <MenuItem Header="S_tyles..." Command="{Binding Commands.StylesWindowCommand}" InputGestureText="Ctrl+T"/>
+            <MenuItem Header="St_yle..." Command="{Binding Commands.StyleWindowCommand}" InputGestureText="Ctrl+K"/>
+            <MenuItem Header="_Layers..." Command="{Binding Commands.LayersWindowCommand}" InputGestureText="Ctrl+L"/>
+            <MenuItem Header="S_hapes..." Command="{Binding Commands.ShapesWindowCommand}" InputGestureText="Ctrl+H"/>
             <MenuItem Header="_Databases..." Command="{Binding Commands.DatabasesWindowCommand}" InputGestureText="Ctrl+D"/>
             <Separator/>
-            <MenuItem Header="_Layers..." Command="{Binding Commands.LayersWindowCommand}" InputGestureText="Ctrl+L"/>
-            <Separator/>
-            <MenuItem Header="St_yle Editor..." Command="{Binding Commands.StyleWindowCommand}" InputGestureText="Ctrl+K"/>
-            <MenuItem Header="S_tyles..." Command="{Binding Commands.StylesWindowCommand}" InputGestureText="Ctrl+T"/>
-            <Separator/>
-            <MenuItem Header="S_hapes..." Command="{Binding Commands.ShapesWindowCommand}" InputGestureText="Ctrl+H"/>
-            <Separator/>
             <MenuItem Header="Do_cument..." Command="{Binding Commands.DocumentWindowCommand}" InputGestureText="Ctrl+R"/>
-            <Separator/>
-            <MenuItem Header="_Script Editor..." Command="{Binding Commands.ScriptWindowCommand}" InputGestureText="Ctrl+U"/>
             <Separator/>
             <MenuItem Header="_Properties..." Command="{Binding Commands.PropertiesWindowCommand}" InputGestureText="F4"/>
         </MenuItem>
@@ -259,9 +256,9 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Data">
-            <MenuItem Header="_Import..." Command="{Binding Commands.ImportDataCommand}" InputGestureText="F8"/>
+            <MenuItem Header="_Import..." Command="{Binding Commands.ImportDataCommand}" InputGestureText=""/>
             <Separator/>
-            <MenuItem Header="_Export..." Command="{Binding Commands.ExportDataCommand}" InputGestureText="Ctrl+F8"/>
+            <MenuItem Header="_Export..." Command="{Binding Commands.ExportDataCommand}" InputGestureText=""/>
         </MenuItem>
         <MenuItem Header="Te_mplate" Tag="{Binding}" ItemsSource="{Binding Editor.Project.Templates}">
             <MenuItem.Resources>
@@ -289,7 +286,7 @@
             </MenuItem.ItemContainerStyle>
         </MenuItem>
         <MenuItem Header="_Script">
-            <MenuItem Header="_Evaluate..." Command="{Binding Commands.EvalCommand}" InputGestureText="F9"/>
+            <MenuItem Header="_Evaluate..." Command="{Binding Commands.EvalCommand}" InputGestureText="F8"/>
         </MenuItem>
         <MenuItem Header="S_cripts" ItemsSource="{Binding ScriptDirectories}">
             <MenuItem.ItemTemplate>
@@ -329,9 +326,9 @@
             <MenuItem Header="_Start" Command="{Binding Commands.StartSimulationCommand}" InputGestureText="F5"/>
             <MenuItem Header="S_top" Command="{Binding Commands.StopSimulationCommand}" InputGestureText="F6"/>
             <Separator/>
-            <MenuItem Header="_Restart" Command="{Binding Commands.RestartSimulationCommand}" InputGestureText="Ctrl+F5"/>
+            <MenuItem Header="_Restart" Command="{Binding Commands.RestartSimulationCommand}" InputGestureText="F7"/>
             <Separator/>
-            <MenuItem Header="_Pause" Command="{Binding Commands.PauseSimulationCommand}" InputGestureText="Ctrl+F6">
+            <MenuItem Header="_Pause" Command="{Binding Commands.PauseSimulationCommand}" InputGestureText="F9">
                 <MenuItem.Style>
                     <Style TargetType="MenuItem">
                         <Setter Property="IsChecked" Value="False"/>
@@ -344,7 +341,7 @@
                 </MenuItem.Style>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="Ti_ck" Command="{Binding Commands.TickSimulationCommand}" InputGestureText="F7"/>
+            <MenuItem Header="Ti_ck" Command="{Binding Commands.TickSimulationCommand}" InputGestureText="F10"/>
         </MenuItem>
         <MenuItem Header="_Window">
             <MenuItem Header="_Load Layout..." Command="{Binding Commands.LoadWindowLayoutCommand}" InputGestureText=""/>

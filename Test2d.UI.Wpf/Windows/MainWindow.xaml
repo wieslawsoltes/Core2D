@@ -31,14 +31,12 @@
         <KeyBinding Command="{Binding Commands.SelectAllCommand}" Gesture="Ctrl+A"/>
         <KeyBinding Command="{Binding Commands.GroupCommand}" Gesture="Ctrl+G"/>
         <KeyBinding Command="{Binding Commands.GroupLayerCommand}" Gesture="Ctrl+Shift+G"/>
-        <KeyBinding Command="{Binding Commands.ImportDataCommand}" Gesture="F8"/>
-        <KeyBinding Command="{Binding Commands.ExportDataCommand}" Gesture="Ctrl+F8"/>
-        <KeyBinding Command="{Binding Commands.EvalCommand}" Gesture="F9"/>
+        <KeyBinding Command="{Binding Commands.EvalCommand}" Gesture="F8"/>
         <KeyBinding Command="{Binding Commands.StartSimulationCommand}" Gesture="F5"/>
         <KeyBinding Command="{Binding Commands.StopSimulationCommand}" Gesture="F6"/>
-        <KeyBinding Command="{Binding Commands.RestartSimulationCommand}" Gesture="Ctrl+F5"/>
-        <KeyBinding Command="{Binding Commands.PauseSimulationCommand}" Gesture="Ctrl+F6"/>
-        <KeyBinding Command="{Binding Commands.TickSimulationCommand}" Gesture="F7"/>
+        <KeyBinding Command="{Binding Commands.RestartSimulationCommand}" Gesture="F7"/>
+        <KeyBinding Command="{Binding Commands.PauseSimulationCommand}" Gesture="F9"/>
+        <KeyBinding Command="{Binding Commands.TickSimulationCommand}" Gesture="F10"/>
         <KeyBinding Command="{Binding Commands.DatabasesWindowCommand}" Gesture="Ctrl+D"/>
         <KeyBinding Command="{Binding Commands.LayersWindowCommand}" Gesture="Ctrl+L"/>
         <KeyBinding Command="{Binding Commands.StyleWindowCommand}" Gesture="Ctrl+K"/>

@@ -18,9 +18,9 @@
                         <MenuItem Header="_Start" Command="{Binding Commands.StartSimulationCommand}" InputGestureText="F5"/>
                         <MenuItem Header="S_top" Command="{Binding Commands.StopSimulationCommand}" InputGestureText="F6"/>
                         <Separator/>
-                        <MenuItem Header="_Restart" Command="{Binding Commands.RestartSimulationCommand}" InputGestureText="Ctrl+F5"/>
+                        <MenuItem Header="_Restart" Command="{Binding Commands.RestartSimulationCommand}" InputGestureText="F7"/>
                         <Separator/>
-                        <MenuItem Header="_Pause" Command="{Binding Commands.PauseSimulationCommand}" InputGestureText="Ctrl+F6">
+                        <MenuItem Header="_Pause" Command="{Binding Commands.PauseSimulationCommand}" InputGestureText="F9">
                             <MenuItem.Style>
                                 <Style TargetType="MenuItem">
                                     <Setter Property="IsChecked" Value="False"/>
@@ -33,7 +33,7 @@
                             </MenuItem.Style>
                         </MenuItem>
                         <Separator/>
-                        <MenuItem Header="Ti_ck" Command="{Binding Commands.TickSimulationCommand}" InputGestureText="F7"/>
+                        <MenuItem Header="Ti_ck" Command="{Binding Commands.TickSimulationCommand}" InputGestureText="F10"/>
                     </MenuItem>
                     <MenuItem Header="import" Command="{Binding Commands.ImportShapeCodeCommand}" InputGestureText=""/>
                     <MenuItem Header="export" Command="{Binding Commands.ExportShapeCodeCommand}" InputGestureText=""/>

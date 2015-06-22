@@ -13,12 +13,12 @@
             <ControlTemplate x:Key="StyleLibrariesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Header="import">
-                        <MenuItem Header="St_yle Library" Command="{Binding Commands.ImportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
-                        <MenuItem Header="Sty_le Libraries" Command="{Binding Commands.ImportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                        <MenuItem Header="St_yle Library..." Command="{Binding Commands.ImportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                        <MenuItem Header="Sty_le Libraries..." Command="{Binding Commands.ImportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
                     </MenuItem>
                     <MenuItem Header="export">
-                        <MenuItem Header="St_yle Library" Command="{Binding Commands.ExportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
-                        <MenuItem Header="Sty_le Libraries" Command="{Binding Commands.ExportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                        <MenuItem Header="St_yle Library..." Command="{Binding Commands.ExportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
+                        <MenuItem Header="Sty_le Libraries..." Command="{Binding Commands.ExportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
                     </MenuItem>
                     <MenuItem Command="{Binding Commands.AddStyleLibraryCommand}" Header="+"/>
                     <MenuItem Command="{Binding Commands.RemoveStyleLibraryCommand}" Header="-"/>
@@ -27,12 +27,12 @@
             <ControlTemplate x:Key="StylesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Header="import">
-                        <MenuItem Header="_Style" Command="{Binding Commands.ImportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
-                        <MenuItem Header="S_tyles" Command="{Binding Commands.ImportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
+                        <MenuItem Header="_Style..." Command="{Binding Commands.ImportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
+                        <MenuItem Header="S_tyles..." Command="{Binding Commands.ImportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
                     </MenuItem>
                     <MenuItem Header="export">
-                        <MenuItem Header="_Style" Command="{Binding Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" InputGestureText=""/>
-                        <MenuItem Header="S_tyles" Command="{Binding Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
+                        <MenuItem Header="_Style..." Command="{Binding Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" InputGestureText=""/>
+                        <MenuItem Header="S_tyles..." Command="{Binding Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
                     </MenuItem>
                     <MenuItem Command="{Binding Commands.AddStyleCommand}" Header="_+"/>
                     <MenuItem Command="{Binding Commands.RemoveStyleCommand}" Header="_-"/>
