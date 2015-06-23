@@ -51,7 +51,7 @@ namespace TestEtoForms
                 CodeEngine = new RoslynCodeEngine(),
                 PdfWriter = new PdfWriter(),
                 DxfWriter = new DxfWriter(),
-                CsvReader = new VisualBasicReader(),
+                CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter()
             };
             _context.InitializeEditor();

@@ -57,7 +57,7 @@ namespace TestWinForms
                 CodeEngine = new RoslynCodeEngine(),
                 PdfWriter = new PdfWriter(),
                 DxfWriter = new DxfWriter(),
-                CsvReader = new VisualBasicReader(),
+                CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter()
             };
             context.InitializeEditor();

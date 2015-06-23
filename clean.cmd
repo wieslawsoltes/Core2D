@@ -36,6 +36,9 @@ rmdir /Q /S Dependencies\ScriptEngine.Roslyn\obj
 rmdir /Q /S Dependencies\Serializer.Newtonsoft\bin
 rmdir /Q /S Dependencies\Serializer.Newtonsoft\obj
 
+rmdir /Q /S Dependencies\TextFieldReader.CsvHelper\bin
+rmdir /Q /S Dependencies\TextFieldReader.CsvHelper\obj
+
 rmdir /Q /S Dependencies\TextFieldReader.VisualBasic\bin
 rmdir /Q /S Dependencies\TextFieldReader.VisualBasic\obj
 

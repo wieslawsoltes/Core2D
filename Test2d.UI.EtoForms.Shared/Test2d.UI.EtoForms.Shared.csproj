@@ -112,10 +112,6 @@
       <Project>{08e4e8bf-e513-4a8d-835c-1eed6ecb4a21}</Project>
       <Name>Serializer.Newtonsoft</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dependencies\TextFieldReader.VisualBasic\TextFieldReader.VisualBasic.csproj">
-      <Project>{a5c01125-8391-4966-b724-5f5ec4fe80a9}</Project>
-      <Name>TextFieldReader.VisualBasic</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
       <Project>{87302d12-1184-402d-bf23-a5699f3d0bb4}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
@@ -139,6 +135,10 @@
     <ProjectReference Include="..\Test2d\Test2d.csproj">
       <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
       <Name>Test2d</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
+      <Project>{64bae9e8-93b5-4edc-8ad6-5a3dcba8c051}</Project>
+      <Name>TextFieldReader.CsvHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
