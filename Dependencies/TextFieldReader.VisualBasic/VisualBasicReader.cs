@@ -46,43 +46,7 @@ namespace Test2d
         {
             var fields = ReadInternal(path);
             var name = System.IO.Path.GetFileNameWithoutExtension(path);
-
-            var db = Database.Create(name);
-
-            var tempColumns = fields.FirstOrDefault().Select(c => Column.Create(c));
-            var columns = ImmutableArray.CreateRange<Column>(tempColumns);
-
-            if (columns.Length >= 1 && columns[0].Name == "Id")
-            {
-                // use existing record Id's
-                var tempRecords = fields
-                    .Skip(1)
-                    .Select(v =>
-                            Record.Create(
-                                v.FirstOrDefault(),
-                                columns,
-                                ImmutableArray.CreateRange<Value>(v.Select(c => Value.Create(c)))));
-                var records = ImmutableArray.CreateRange<Record>(tempRecords);
-
-                db.Columns = columns;
-                db.Records = records;
-            }
-            else
-            {
-                // create records with new Id's
-                var tempRecords = fields
-                    .Skip(1)
-                    .Select(v =>
-                            Record.Create(
-                                columns,
-                                ImmutableArray.CreateRange<Value>(v.Select(c => Value.Create(c)))));
-                var records = ImmutableArray.CreateRange<Record>(tempRecords);
-
-                db.Columns = columns;
-                db.Records = records;
-            }
-
-            return db;
+            return Database.Create(name, fields);
         }
     }
 }
