@@ -52,7 +52,7 @@ namespace Test2d
                 // Editor
                 .AddReferences(Assembly.GetAssembly(typeof(Editor)))
                 // Simulation
-                .AddReferences(Assembly.GetAssembly(typeof(Clock)))
+                .AddReferences(Assembly.GetAssembly(typeof(Pin)))
                 .AddNamespaces("TestSIM")
                 // Dxf
                 .AddReferences(Assembly.GetAssembly(typeof(DxfObject)))

@@ -97,12 +97,11 @@
     <Compile Include="Simulation\Boolean\Timers\TimerOffSimulation.cs" />
     <Compile Include="Simulation\Boolean\Timers\TimerOnSimulation.cs" />
     <Compile Include="Simulation\Boolean\Timers\TimerPulseSimulation.cs" />
-    <Compile Include="Simulation\Clock.cs" />
     <Compile Include="Simulation\Graph\ContainerGraph.cs" />
     <Compile Include="Simulation\Graph\ContainerGraphContext.cs" />
     <Compile Include="Simulation\Graph\ContainerGraphDebug.cs" />
     <Compile Include="Simulation\Graph\TopologicalSort.cs" />
-    <Compile Include="Simulation\Pin.cs" />
+    <Compile Include="Simulation\Graph\Pin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
