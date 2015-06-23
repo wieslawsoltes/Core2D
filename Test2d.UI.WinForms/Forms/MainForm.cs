@@ -434,37 +434,4 @@ namespace TestWinForms
             _timer = default(System.Threading.Timer);
         }
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    internal class TextClipboard : ITextClipboard
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="text"></param>
-        public void SetText(string text)
-        {
-            Clipboard.SetText(text, TextDataFormat.UnicodeText);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public string GetText()
-        {
-            return Clipboard.GetText(TextDataFormat.UnicodeText);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool ContainsText()
-        {
-            return Clipboard.ContainsText(TextDataFormat.UnicodeText);
-        }
-    }
 }
