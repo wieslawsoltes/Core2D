@@ -7,6 +7,9 @@ using Test2d;
 
 namespace Test2d
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CsvHelperWriter : ITextFieldWriter<Database>
     {
         /// <summary>
@@ -21,7 +24,6 @@ namespace Test2d
                 using (var writer = new System.IO.StringWriter())
                 {
                     var configuration = new CsvHelper.Configuration.CsvConfiguration();
-
                     configuration.Delimiter = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
                     configuration.CultureInfo = CultureInfo.CurrentCulture;
 
