@@ -1,17 +1,17 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Eto;
+using Eto.Drawing;
+using Eto.Forms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Eto;
-using Eto.Drawing;
-using Eto.Forms;
 using Test2d;
-using System.Diagnostics;
 
 namespace TestEtoForms
 {
@@ -994,39 +994,6 @@ namespace TestEtoForms
                 return dlg.FileName;
             }
             return null;
-        }
-    }
-
-    /// <summary>
-    /// Wrapper class for Eto.Forms.Clipboard clipboard class.
-    /// </summary>
-    internal class TextClipboard : ITextClipboard
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="text"></param>
-        public void SetText(string text)
-        {
-            new Clipboard().Text = text;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public string GetText()
-        {
-            return new Clipboard().Text;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool ContainsText()
-        {
-            return !string.IsNullOrEmpty(new Clipboard().Text);
         }
     }
 }

@@ -87,6 +87,7 @@
   <ItemGroup>
     <Compile Include="Forms\MainForm.cs" />
     <Compile Include="Forms\SimulationTimer.cs" />
+    <Compile Include="Forms\TextClipboard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\ZoomState.cs" />
   </ItemGroup>
