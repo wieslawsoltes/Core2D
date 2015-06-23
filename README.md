@@ -4,7 +4,7 @@
 
 ## About
 
-Test2d is an application for making 2D diagrams and running logic simulations.
+Test2d is an application for making 2D diagrams and running simulations.
 
 ## Simulation
 
