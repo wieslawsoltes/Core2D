@@ -24,7 +24,7 @@ using Xceed.Wpf.AvalonDock.Layout.Serialization;
 namespace Test.Windows
 {
     /// <summary>
-    /// 
+    /// Wrapper class for System.Threading.Timer timer class.
     /// </summary>
     internal class SimulationTimer : ISimulationTimer
     {
@@ -59,7 +59,7 @@ namespace Test.Windows
     }
 
     /// <summary>
-    /// 
+    /// Wrapper class for System.Windows.Clipboard clipboard class.
     /// </summary>
     internal class TextClipboard : ITextClipboard
     {

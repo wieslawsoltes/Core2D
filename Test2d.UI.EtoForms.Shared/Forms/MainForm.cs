@@ -998,7 +998,7 @@ namespace TestEtoForms
     }
 
     /// <summary>
-    /// 
+    /// Wrapper class for Eto.Forms.UITimer timer class.
     /// </summary>
     internal class SimulationTimer : ISimulationTimer
     {
@@ -1036,7 +1036,7 @@ namespace TestEtoForms
     }
 
     /// <summary>
-    /// 
+    /// Wrapper class for Eto.Forms.Clipboard clipboard class.
     /// </summary>
     internal class TextClipboard : ITextClipboard
     {
