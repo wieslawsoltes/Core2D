@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-set ReleaseDate=20150617
+set ReleaseDate=YYYYMMDD
 set ProjectPath=.
 set Releases=RELEASES.TXT
 
