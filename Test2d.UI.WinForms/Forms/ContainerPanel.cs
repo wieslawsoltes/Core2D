@@ -113,12 +113,18 @@ namespace TestWinForms
                 };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ResetZoom()
         {
             _state.ResetZoom();
             InvalidateContainer();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void AutoFit()
         {
             // TODO: Autofit panel.

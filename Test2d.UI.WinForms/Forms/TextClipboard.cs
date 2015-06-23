@@ -7,7 +7,7 @@ using Test2d;
 namespace TestWinForms
 {
     /// <summary>
-    /// 
+    /// Wrapper class for System.Windows.Forms.Clipboard clipboard class.
     /// </summary>
     internal class TextClipboard : ITextClipboard
     {
