@@ -101,7 +101,7 @@ namespace Test.Windows
         }
 
         /// <summary>
-        /// 
+        /// Auto load docking manager layout.
         /// </summary>
         /// <param name="context"></param>
         private void AutoLoadLayout(EditorContext context)
@@ -123,7 +123,7 @@ namespace Test.Windows
         }
 
         /// <summary>
-        /// 
+        /// Auto save docking manager layout.
         /// </summary>
         /// <param name="context"></param>
         private void AutoSaveLayout(EditorContext context)
