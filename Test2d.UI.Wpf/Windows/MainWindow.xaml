@@ -11,6 +11,7 @@
         xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock"
         Title="{Binding Editor.Project.Name, StringFormat={}{0} - Test2d, FallbackValue=Test2d, TargetNullValue=Test2d}" 
         Height="720" Width="1324"
+        Background="White"
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
         UseLayoutRounding="True" SnapsToDevicePixels="True"
         TextOptions.TextFormattingMode="Display"
@@ -53,7 +54,7 @@
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
         <controls:MenuControl Grid.Row="0"/>
-        <ad:DockingManager x:Name="dock" Grid.Row="1" Margin="0,5,0,0">
+        <ad:DockingManager x:Name="dock" Background="White" Grid.Row="1" Margin="0,5,0,0">
             <ad:LayoutRoot>
                 <ad:LayoutPanel Orientation="Horizontal">
                     <ad:LayoutAnchorablePaneGroup DockWidth="230" Orientation="Vertical">
