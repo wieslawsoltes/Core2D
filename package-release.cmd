@@ -8,6 +8,7 @@ set ReleasePath=%6\%1
 set WinRAR=c:\Program Files\WinRAR\WinRAR.exe
 
 mkdir "%ReleaseName%"
+mkdir "%ReleaseName%\Code"
 mkdir "%ReleaseName%\Scripts"
 
 copy "%ProjectPath%\*.txt" "%ReleaseName%"
