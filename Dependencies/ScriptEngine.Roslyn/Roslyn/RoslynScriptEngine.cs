@@ -5,7 +5,6 @@ using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.CodeAnalysis.Scripting.CSharp;
 using System;
 using System.Collections.Immutable;
-using System.Collections.ObjectModel;
 using System.Reflection;
 using Dxf;
 using Test2d;
