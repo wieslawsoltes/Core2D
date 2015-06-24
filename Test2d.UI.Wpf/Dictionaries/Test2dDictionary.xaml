@@ -2226,13 +2226,13 @@
                       Grid.ColumnSpan="3">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="True"
+            <Expander Header="Code" IsExpanded="False"
                       Grid.Row="5" 
                       Grid.Column="0"
                       Grid.ColumnSpan="3">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True"
+            <Expander Header="Data" IsExpanded="False"
                       Grid.Row="6" 
                       Grid.Column="0"
                       Grid.ColumnSpan="3">
@@ -2261,7 +2261,7 @@
                     </TextBox>
                 </Grid>
             </Expander>
-            <Expander Header="Style" IsExpanded="True">
+            <Expander Header="Style" IsExpanded="False">
                 <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="Start" IsExpanded="False">
@@ -2273,10 +2273,10 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="True">
+            <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
+            <Expander Header="Data" IsExpanded="False">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
@@ -2302,7 +2302,7 @@
                     </TextBox>
                 </Grid>
             </Expander>
-            <Expander Header="Style" IsExpanded="True">
+            <Expander Header="Style" IsExpanded="False">
                 <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="TopLeft" IsExpanded="False">
@@ -2340,10 +2340,10 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="True">
+            <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
+            <Expander Header="Data" IsExpanded="False">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
@@ -2369,7 +2369,7 @@
                     </TextBox>
                 </Grid>
             </Expander>
-            <Expander Header="Style" IsExpanded="True">
+            <Expander Header="Style" IsExpanded="False">
                 <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="TopLeft" IsExpanded="False">
@@ -2407,10 +2407,10 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="True">
+            <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
+            <Expander Header="Data" IsExpanded="False">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
@@ -2436,7 +2436,7 @@
                     </TextBox>
                 </Grid>
             </Expander>
-            <Expander Header="Style" IsExpanded="True">
+            <Expander Header="Style" IsExpanded="False">
                 <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="Point1" IsExpanded="False">
@@ -2480,10 +2480,10 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="True">
+            <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
+            <Expander Header="Data" IsExpanded="False">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
@@ -2509,7 +2509,7 @@
                     </TextBox>
                 </Grid>
             </Expander>
-            <Expander Header="Style" IsExpanded="True">
+            <Expander Header="Style" IsExpanded="False">
                 <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="Point1" IsExpanded="False">
@@ -2553,10 +2553,10 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="True">
+            <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
+            <Expander Header="Data" IsExpanded="False">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
@@ -2582,7 +2582,7 @@
                     </TextBox>
                 </Grid>
             </Expander>
-            <Expander Header="Style" IsExpanded="True">
+            <Expander Header="Style" IsExpanded="False">
                 <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="Point1" IsExpanded="False">
@@ -2623,10 +2623,10 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="True">
+            <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
+            <Expander Header="Data" IsExpanded="False">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
@@ -2652,7 +2652,7 @@
                     </TextBox>
                 </Grid>
             </Expander>
-            <Expander Header="Style" IsExpanded="True">
+            <Expander Header="Style" IsExpanded="False">
                 <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="TopLeft" IsExpanded="False">
@@ -2687,7 +2687,7 @@
                     </CheckBox>
                 </Grid>
             </Expander>
-            <Expander Header="Text" IsExpanded="True">
+            <Expander Header="Text" IsExpanded="False">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -2710,10 +2710,10 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="True">
+            <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
+            <Expander Header="Data" IsExpanded="False">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
@@ -2739,7 +2739,7 @@
                     </TextBox>
                 </Grid>
             </Expander>
-            <Expander Header="Style" IsExpanded="True">
+            <Expander Header="Style" IsExpanded="False">
                 <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="TopLeft" IsExpanded="False">
@@ -2797,17 +2797,17 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="True">
+            <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
+            <Expander Header="Data" IsExpanded="False">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XGroup}">
         <StackPanel>
-            <Expander Header="Name" IsExpanded="True">
+            <Expander Header="Name" IsExpanded="False">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -2871,13 +2871,13 @@
             <Expander Header="State" IsExpanded="False">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="True">
+            <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
+            <Expander Header="Data" IsExpanded="False">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
-            <Expander Header="Shapes Properties" IsExpanded="True">
+            <Expander Header="Shapes Properties" IsExpanded="False">
                 <Control Template="{StaticResource GroupDatabaseControlTemplateKey}"/>
             </Expander>
         </StackPanel>
@@ -2903,7 +2903,7 @@
                     </TextBox>
                 </Grid>
             </Expander>
-            <Expander Header="Style" IsExpanded="True">
+            <Expander Header="Style" IsExpanded="False">
                 <Control Template="{StaticResource StyleControlTemplateKey}"/>
             </Expander>
             <Expander Header="Source" IsExpanded="False">
@@ -2927,10 +2927,10 @@
                     </TextBox>
                 </Grid>
             </Expander>
-            <Expander Header="Transform" IsExpanded="True">
+            <Expander Header="Transform" IsExpanded="False">
                 <ContentControl Content="{Binding Transform}"/>
             </Expander>
-            <Expander Header="Properties" IsExpanded="True">
+            <Expander Header="Properties" IsExpanded="False">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -2978,10 +2978,10 @@
             <Expander Header="Geometry" IsExpanded="False">
                 <ContentControl Content="{Binding Geometry}"/>
             </Expander>
-            <Expander Header="Code" IsExpanded="True">
+            <Expander Header="Code" IsExpanded="False">
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Data" IsExpanded="True">
+            <Expander Header="Data" IsExpanded="False">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
         </StackPanel>
