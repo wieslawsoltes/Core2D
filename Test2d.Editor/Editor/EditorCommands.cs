@@ -435,6 +435,10 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public ICommand TemplateWindowCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand PropertiesWindowCommand { get; set; }
         /// <summary>
         /// 
@@ -447,7 +451,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public ICommand TemplateWindowCommand { get; set; }
+        public ICommand DataWindowCommand { get; set; }
 
         /// <summary>
         /// 

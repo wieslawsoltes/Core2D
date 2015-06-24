@@ -49,10 +49,11 @@
         <KeyBinding Command="{Binding Commands.StylesWindowCommand}" Gesture="Ctrl+Alt+S"/>
         <KeyBinding Command="{Binding Commands.LayersWindowCommand}" Gesture="Ctrl+Alt+L"/>
         <KeyBinding Command="{Binding Commands.ShapesWindowCommand}" Gesture="Ctrl+Alt+A"/>
+        <KeyBinding Command="{Binding Commands.TemplateWindowCommand}" Gesture="Ctrl+Alt+M"/>
         <KeyBinding Command="{Binding Commands.PropertiesWindowCommand}" Gesture="F4"/>
         <KeyBinding Command="{Binding Commands.StyleWindowCommand}" Gesture="Ctrl+Alt+Y"/>
         <KeyBinding Command="{Binding Commands.CodeWindowCommand}" Gesture="Ctrl+Alt+C"/>
-        <KeyBinding Command="{Binding Commands.TemplateWindowCommand}" Gesture="Ctrl+Alt+M"/>
+        <KeyBinding Command="{Binding Commands.DataWindowCommand}" Gesture="Ctrl+Alt+I"/>
     </Window.InputBindings>
     <Grid FocusVisualStyle="{x:Null}">
         <Grid.RowDefinitions>
@@ -173,6 +174,15 @@
                             <ad:LayoutAnchorable x:Name="shapesWindow" Title="Shapes" AutoHideWidth="230">
                                 <controls:ShapesControl x:Name="shapesControl"/>
                             </ad:LayoutAnchorable>
+                            <ad:LayoutAnchorable x:Name="templateWindow" Title="Template" AutoHideWidth="230">
+                                <ScrollViewer 
+                                    x:Name="templateScrollViewer"
+                                    VerticalScrollBarVisibility="Auto" 
+                                    HorizontalScrollBarVisibility="Auto" 
+                                    Focusable="True">
+                                    <controls:TemplateControl/>
+                                </ScrollViewer>
+                            </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
                             <ad:LayoutAnchorable x:Name="propertiesWindow" Title="Properties" AutoHideWidth="230">
@@ -207,14 +217,19 @@
                                     </controls:CodeControl.Style>
                                 </controls:CodeControl>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="templateWindow" Title="Template" AutoHideWidth="230">
-                                <ScrollViewer 
-                                    x:Name="templateScrollViewer"
-                                    VerticalScrollBarVisibility="Auto" 
-                                    HorizontalScrollBarVisibility="Auto" 
-                                    Focusable="True">
-                                    <controls:TemplateControl/>
-                                </ScrollViewer>
+                            <ad:LayoutAnchorable x:Name="dataWindow" Title="Data" AutoHideWidth="230">
+                                <controls:DataControl x:Name="dataControl">
+                                    <controls:DataControl.Style>
+                                        <Style TargetType="controls:DataControl">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Editor.Renderers[0].State.SelectedShape}" Value="{x:Null}">
+                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </controls:DataControl.Style>
+                                </controls:DataControl>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                     </ad:LayoutAnchorablePaneGroup>

@@ -15,7 +15,7 @@
     </LayoutAnchorablePaneGroup>
     <LayoutDocumentPaneGroup Orientation="Horizontal">
       <LayoutDocumentPane>
-        <LayoutDocument Title="Container" IsSelected="True" IsLastFocusedDocument="True" ContentId="panAndZoomGrid" CanClose="False" LastActivationTimeStamp="06/24/2015 20:02:57" />
+        <LayoutDocument Title="Container" IsSelected="True" IsLastFocusedDocument="True" ContentId="panAndZoomGrid" CanClose="False" LastActivationTimeStamp="06/24/2015 21:23:52" />
         <LayoutDocument Title="Script" ContentId="scriptControl" CanClose="False" />
       </LayoutDocumentPane>
     </LayoutDocumentPaneGroup>
@@ -24,12 +24,13 @@
         <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Styles" IsSelected="True" ContentId="stylesControl" />
         <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Layers" ContentId="layersControl" />
         <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Shapes" ContentId="shapesControl" />
+        <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Template" ContentId="templateScrollViewer" />
       </LayoutAnchorablePane>
       <LayoutAnchorablePane>
         <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Properties" IsSelected="True" ContentId="shapeScrollViewer" />
         <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Style" ContentId="styleScrollViewer" />
         <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Code" ContentId="codeControl" />
-        <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Template" ContentId="templateScrollViewer" />
+        <LayoutAnchorable AutoHideWidth="230" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Data" ContentId="dataControl" />
       </LayoutAnchorablePane>
     </LayoutAnchorablePaneGroup>
   </RootPanel>

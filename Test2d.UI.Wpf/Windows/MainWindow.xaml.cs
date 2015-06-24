@@ -28,7 +28,7 @@ namespace Test.Windows
     {
         private string _resourceLayoutPath = "Test2d.UI.Wpf.layout";
         private string _defaultLayoutPath = "Test2d.UI.Wpf.layout";
-        private bool _enableRestoreLayout = true;
+        private bool _enableRestoreLayout = false;
         private bool _isLoaded = false;
 
         /// <summary>
@@ -492,6 +492,11 @@ namespace Test.Windows
                     () => shapesWindow.Show(),
                     () => true);
 
+            context.Commands.TemplateWindowCommand =
+                new DelegateCommand(
+                    () => templateWindow.Show(),
+                    () => true);
+
             context.Commands.PropertiesWindowCommand = 
                 new DelegateCommand(
                     () => propertiesWindow.Show(),
@@ -507,9 +512,9 @@ namespace Test.Windows
                     () => codeWindow.Show(),
                     () => true);
 
-            context.Commands.TemplateWindowCommand =
+            context.Commands.DataWindowCommand =
                 new DelegateCommand(
-                    () => templateWindow.Show(),
+                    () => dataWindow.Show(),
                     () => true);
 
             context.Commands.LoadWindowLayoutCommand =
