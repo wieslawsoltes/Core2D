@@ -3790,9 +3790,9 @@ namespace Test2d
             (_commands.GroupsWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.DatabasesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.DatabaseWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ContainerWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ScriptWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.DocumentWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
+            //(_commands.ContainerWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
+            //(_commands.ScriptWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
+            //(_commands.DocumentWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.StylesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.LayersWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ShapesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
