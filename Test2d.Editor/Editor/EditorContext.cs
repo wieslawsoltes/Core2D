@@ -1415,7 +1415,7 @@ namespace Test2d
                 _commands.ApplyTemplateCommand = 
                     new DelegateCommand<object>(
                         (item) => ApplyTemplateCommandHandler(item),
-                        (item) => IsEditMode());
+                        (item) => true);
 
                 _commands.SelectedItemChangedCommand = 
                     new DelegateCommand<object>(
