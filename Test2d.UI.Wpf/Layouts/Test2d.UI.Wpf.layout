@@ -15,8 +15,8 @@
     </LayoutAnchorablePaneGroup>
     <LayoutDocumentPaneGroup Orientation="Horizontal">
       <LayoutDocumentPane>
-        <LayoutDocument Title="Container" IsSelected="True" IsLastFocusedDocument="True" ContentId="panAndZoomGrid" LastActivationTimeStamp="06/20/2015 09:08:07" />
-        <LayoutDocument Title="Script" ContentId="scriptControl" />
+        <LayoutDocument Title="Container" IsSelected="True" IsLastFocusedDocument="True" ContentId="panAndZoomGrid" CanClose="False" LastActivationTimeStamp="06/24/2015 20:02:57" />
+        <LayoutDocument Title="Script" ContentId="scriptControl" CanClose="False" />
       </LayoutDocumentPane>
     </LayoutDocumentPaneGroup>
     <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="230">

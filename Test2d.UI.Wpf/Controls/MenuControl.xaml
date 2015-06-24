@@ -78,17 +78,26 @@
                 <MenuItem Header="_Extent" Command="{Binding Commands.ZoomExtentCommand}" InputGestureText="X"/>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Script..." Command="{Binding Commands.ScriptWindowCommand}" InputGestureText="Ctrl+U"/>
+            <MenuItem Header="_Project Explorer" Command="{Binding Commands.ProjectWindowCommand}" InputGestureText="Ctrl+Alt+P"/>
+            <MenuItem Header="_Options" Command="{Binding Commands.OptionsWindowCommand}" InputGestureText="Ctrl+Alt+O"/>
+            <MenuItem Header="_Templates" Command="{Binding Commands.TemplatesWindowCommand}" InputGestureText="Ctrl+Alt+T"/>
             <Separator/>
-            <MenuItem Header="S_tyles..." Command="{Binding Commands.StylesWindowCommand}" InputGestureText="Ctrl+T"/>
-            <MenuItem Header="St_yle..." Command="{Binding Commands.StyleWindowCommand}" InputGestureText="Ctrl+K"/>
-            <MenuItem Header="_Layers..." Command="{Binding Commands.LayersWindowCommand}" InputGestureText="Ctrl+L"/>
-            <MenuItem Header="S_hapes..." Command="{Binding Commands.ShapesWindowCommand}" InputGestureText="Ctrl+H"/>
-            <MenuItem Header="_Databases..." Command="{Binding Commands.DatabasesWindowCommand}" InputGestureText="Ctrl+D"/>
+            <MenuItem Header="_Groups" Command="{Binding Commands.GroupsWindowCommand}" InputGestureText="Ctrl+Alt+G"/>
+            <MenuItem Header="_Databases" Command="{Binding Commands.DatabasesWindowCommand}" InputGestureText="Ctrl+Alt+D"/>
+            <MenuItem Header="Data_base Window" Command="{Binding Commands.DatabaseWindowCommand}" InputGestureText="Ctrl+Alt+B"/>
             <Separator/>
-            <MenuItem Header="Do_cument..." Command="{Binding Commands.DocumentWindowCommand}" InputGestureText="Ctrl+R"/>
+            <MenuItem Header="Co_ntainer" Command="{Binding Commands.ContainerWindowCommand}" InputGestureText="Ctrl+Alt+N"/>
+            <MenuItem Header="Sc_ript Window" Command="{Binding Commands.ScriptWindowCommand}" InputGestureText="Ctrl+Alt+R"/>
             <Separator/>
-            <MenuItem Header="_Properties..." Command="{Binding Commands.PropertiesWindowCommand}" InputGestureText="F4"/>
+            <MenuItem Header="_Styles" Command="{Binding Commands.StylesWindowCommand}" InputGestureText="Ctrl+Alt+S"/>
+            <MenuItem Header="_Layers" Command="{Binding Commands.LayersWindowCommand}" InputGestureText="Ctrl+Alt+L"/>
+            <MenuItem Header="Sh_apes" Command="{Binding Commands.ShapesWindowCommand}" InputGestureText="Ctrl+Alt+A"/>
+            <Separator/>
+            <MenuItem Header="St_yle Window" Command="{Binding Commands.StyleWindowCommand}" InputGestureText="Ctrl+Alt+Y"/>
+            <MenuItem Header="_Code Window" Command="{Binding Commands.CodeWindowCommand}" InputGestureText="Ctrl+Alt+C"/>
+            <MenuItem Header="Te_mplate Window" Command="{Binding Commands.TemplateWindowCommand}" InputGestureText="Ctrl+Alt+M"/>
+            <Separator/>
+            <MenuItem Header="Prop_erties Window" Command="{Binding Commands.PropertiesWindowCommand}" InputGestureText="F4"/>
         </MenuItem>
         <MenuItem Header="_Tool">
             <MenuItem Header="_None" Command="{Binding Commands.ToolNoneCommand}" InputGestureText="N">

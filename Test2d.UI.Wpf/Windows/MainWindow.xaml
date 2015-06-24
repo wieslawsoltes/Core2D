@@ -38,14 +38,21 @@
         <KeyBinding Command="{Binding Commands.RestartSimulationCommand}" Gesture="F7"/>
         <KeyBinding Command="{Binding Commands.PauseSimulationCommand}" Gesture="F9"/>
         <KeyBinding Command="{Binding Commands.TickSimulationCommand}" Gesture="F10"/>
-        <KeyBinding Command="{Binding Commands.DatabasesWindowCommand}" Gesture="Ctrl+D"/>
-        <KeyBinding Command="{Binding Commands.LayersWindowCommand}" Gesture="Ctrl+L"/>
-        <KeyBinding Command="{Binding Commands.StyleWindowCommand}" Gesture="Ctrl+K"/>
-        <KeyBinding Command="{Binding Commands.StylesWindowCommand}" Gesture="Ctrl+T"/>
-        <KeyBinding Command="{Binding Commands.ShapesWindowCommand}" Gesture="Ctrl+H"/>
-        <KeyBinding Command="{Binding Commands.ScriptWindowCommand}" Gesture="Ctrl+U"/>
-        <KeyBinding Command="{Binding Commands.DocumentWindowCommand}" Gesture="Ctrl+R"/>
+        <KeyBinding Command="{Binding Commands.ProjectWindowCommand}" Gesture="Ctrl+Alt+P"/>
+        <KeyBinding Command="{Binding Commands.OptionsWindowCommand}" Gesture="Ctrl+Alt+O"/>
+        <KeyBinding Command="{Binding Commands.TemplatesWindowCommand}" Gesture="Ctrl+Alt+T"/>
+        <KeyBinding Command="{Binding Commands.GroupsWindowCommand}" Gesture="Ctrl+Alt+G"/>
+        <KeyBinding Command="{Binding Commands.DatabasesWindowCommand}" Gesture="Ctrl+Alt+D"/>
+        <KeyBinding Command="{Binding Commands.DatabaseWindowCommand}" Gesture="Ctrl+Alt+B"/>
+        <KeyBinding Command="{Binding Commands.ContainerWindowCommand}" Gesture="Ctrl+Alt+N"/>
+        <KeyBinding Command="{Binding Commands.ScriptWindowCommand}" Gesture="Ctrl+Alt+R"/>
+        <KeyBinding Command="{Binding Commands.StylesWindowCommand}" Gesture="Ctrl+Alt+S"/>
+        <KeyBinding Command="{Binding Commands.LayersWindowCommand}" Gesture="Ctrl+Alt+L"/>
+        <KeyBinding Command="{Binding Commands.ShapesWindowCommand}" Gesture="Ctrl+Alt+A"/>
         <KeyBinding Command="{Binding Commands.PropertiesWindowCommand}" Gesture="F4"/>
+        <KeyBinding Command="{Binding Commands.StyleWindowCommand}" Gesture="Ctrl+Alt+Y"/>
+        <KeyBinding Command="{Binding Commands.CodeWindowCommand}" Gesture="Ctrl+Alt+C"/>
+        <KeyBinding Command="{Binding Commands.TemplateWindowCommand}" Gesture="Ctrl+Alt+M"/>
     </Window.InputBindings>
     <Grid FocusVisualStyle="{x:Null}">
         <Grid.RowDefinitions>
@@ -54,15 +61,15 @@
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
         <controls:MenuControl Grid.Row="0"/>
-        <ad:DockingManager x:Name="dock" Background="White" Grid.Row="1" Margin="0,5,0,0">
+        <ad:DockingManager x:Name="dockingManager" Background="White" Grid.Row="1" Margin="0,5,0,0">
             <ad:LayoutRoot>
                 <ad:LayoutPanel Orientation="Horizontal">
                     <ad:LayoutAnchorablePaneGroup DockWidth="230" Orientation="Vertical">
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable Title="Project" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="projectWindow" Title="Project" AutoHideWidth="230">
                                 <controls:ProjectControl x:Name="projectControl"/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Options" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="optionsWindow" Title="Options" AutoHideWidth="230">
                                 <ScrollViewer 
                                     x:Name="optionsScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
@@ -71,18 +78,18 @@
                                     <ContentControl Content="{Binding Editor.Project.Options}"/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Templates" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="templatesWindow" Title="Templates" AutoHideWidth="230">
                                 <controls:TemplatesControl x:Name="templatesControll"/>
                             </ad:LayoutAnchorable> 
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable Title="Groups" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="groupsWindow" Title="Groups" AutoHideWidth="230">
                                 <controls:GroupsControl x:Name="groupsControl"/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Databases" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="databasesWindow" Title="Databases" AutoHideWidth="230">
                                 <controls:DatabasesControl x:Name="databasesControl"/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Database" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="databaseWindow" Title="Database" AutoHideWidth="230">
                                 <ScrollViewer 
                                     x:Name="databaseControl"
                                     VerticalScrollBarVisibility="Auto" 
@@ -106,7 +113,7 @@
                     </ad:LayoutAnchorablePaneGroup>
                     <ad:LayoutDocumentPaneGroup>
                         <ad:LayoutDocumentPane>
-                            <ad:LayoutDocument Title="Container">
+                            <ad:LayoutDocument x:Name="containerWindow" Title="Container" CanClose="False">
                                 <paz:PanAndZoomGrid 
                                     x:Name="panAndZoomGrid"
                                     ClipToBounds="True"
@@ -140,25 +147,35 @@
                                     </paz:PanAndZoomBorder>
                                 </paz:PanAndZoomGrid>
                             </ad:LayoutDocument>
-                            <ad:LayoutDocument Title="Script">
+                            <!--
+                            <ad:LayoutDocument x:Name="documentWindow" Title="Document" CanClose="False">
+                                <controls:DocumentControl x:Name="documentControl"/>
+                            </ad:LayoutDocument>
+                            -->
+                            <!--
+                            <ad:LayoutDocument x:Name="pathWindow" Title="Path" CanClose="False">
+                                <controls:PathControl x:Name="pathControl"/>
+                            </ad:LayoutDocument>
+                            -->
+                            <ad:LayoutDocument x:Name="scriptWindow" Title="Script" CanClose="False">
                                 <controls:ScriptControl x:Name="scriptControl"/>
                             </ad:LayoutDocument>
                         </ad:LayoutDocumentPane>
                     </ad:LayoutDocumentPaneGroup>
                     <ad:LayoutAnchorablePaneGroup DockWidth="230" Orientation="Vertical">
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable Title="Styles" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="stylesWindow" Title="Styles" AutoHideWidth="230">
                                 <controls:StylesControl x:Name="stylesControl"/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Layers" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="layersWindow" Title="Layers" AutoHideWidth="230">
                                 <controls:LayersControl x:Name="layersControl"/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Shapes" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="shapesWindow" Title="Shapes" AutoHideWidth="230">
                                 <controls:ShapesControl x:Name="shapesControl"/>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable Title="Properties" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="propertiesWindow" Title="Properties" AutoHideWidth="230">
                                 <ScrollViewer 
                                     x:Name="shapeScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
@@ -167,7 +184,7 @@
                                     <controls:ShapeControl/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Style" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="styleWindow" Title="Style" AutoHideWidth="230">
                                 <ScrollViewer 
                                     x:Name="styleScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
@@ -176,7 +193,7 @@
                                     <controls:StyleControl/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Code" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="codeWindow" Title="Code" AutoHideWidth="230">
                                 <controls:CodeControl x:Name="codeControl">
                                     <controls:CodeControl.Style>
                                         <Style TargetType="controls:CodeControl">
@@ -190,7 +207,7 @@
                                     </controls:CodeControl.Style>
                                 </controls:CodeControl>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable Title="Template" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="templateWindow" Title="Template" AutoHideWidth="230">
                                 <ScrollViewer 
                                     x:Name="templateScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 

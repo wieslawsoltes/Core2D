@@ -227,35 +227,6 @@
     <Compile Include="Controls\Custom\PanAndZoomGrid.cs" />
     <Compile Include="Util\SimulationTimer.cs" />
     <Compile Include="Util\TextClipboard.cs" />
-    <Compile Include="Windows\DocumentWindow.xaml.cs">
-      <DependentUpon>DocumentWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\DatabasesWindow.xaml.cs">
-      <DependentUpon>DatabasesWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\LayersWindow.xaml.cs">
-      <DependentUpon>LayersWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\PathWindow.xaml.cs">
-      <DependentUpon>PathWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Windows\PropertiesWindow.xaml.cs">
-      <DependentUpon>PropertiesWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Windows\ScriptWindow.xaml.cs">
-      <DependentUpon>ScriptWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\ShapesWindow.xaml.cs">
-      <DependentUpon>ShapesWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\StylesWindow.xaml.cs">
-      <DependentUpon>StylesWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\StyleWindow.xaml.cs">
-      <DependentUpon>StyleWindow.xaml</DependentUpon>
-    </Compile>
     <Page Include="Controls\CodeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -322,10 +293,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\DatabasesWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -350,32 +317,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\DocumentWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\LayersWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\PathWindow.xaml" />
-    <Page Include="Windows\PropertiesWindow.xaml" />
-    <Page Include="Windows\ScriptWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\ShapesWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\StylesWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\StyleWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

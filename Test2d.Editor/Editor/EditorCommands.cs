@@ -391,15 +391,35 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public ICommand ProjectWindowCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand OptionsWindowCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand TemplatesWindowCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand GroupsWindowCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand DatabasesWindowCommand { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public ICommand LayersWindowCommand { get; set; }
+        public ICommand DatabaseWindowCommand { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public ICommand StyleWindowCommand { get; set; }
+        public ICommand ContainerWindowCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ScriptWindowCommand { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -407,19 +427,27 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public ICommand LayersWindowCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand ShapesWindowCommand { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public ICommand DocumentWindowCommand { get; set; } 
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand ScriptWindowCommand { get; set; } 
-        /// <summary>
-        /// 
-        /// </summary>
         public ICommand PropertiesWindowCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand StyleWindowCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand CodeWindowCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand TemplateWindowCommand { get; set; }
 
         /// <summary>
         /// 

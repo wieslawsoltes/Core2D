@@ -26,8 +26,8 @@ namespace Test.Windows
     /// </summary>
     public partial class MainWindow : Window, IView
     {
-        private string _restoreLayoutPath = "Test2d.UI.Wpf.layout";
-        private string _layoutPath = "Test2d.UI.Wpf.layout";
+        private string _resourceLayoutPath = "Test2d.UI.Wpf.layout";
+        private string _defaultLayoutPath = "Test2d.UI.Wpf.layout";
         private bool _enableRestoreLayout = true;
         private bool _isLoaded = false;
 
@@ -42,17 +42,13 @@ namespace Test.Windows
         }
 
         /// <summary>
-        /// Load docking manager layout.
+        /// Load docking manager layout from resource.
         /// </summary>
         /// <param name="path"></param>
         /// <param name="context"></param>
-        /// <param name="isResource"></param>
-        private void LoadLayout(string path, object context, bool isResource = false)
+        private void LoadLayoutFromResource(string path, object context)
         {
-            if (!System.IO.File.Exists(path))
-                return;
-
-            var serializer = new XmlLayoutSerializer(dock);
+            var serializer = new XmlLayoutSerializer(dockingManager);
 
             serializer.LayoutSerializationCallback +=
                 (s, e) =>
@@ -64,24 +60,42 @@ namespace Test.Windows
                     }
                 };
 
-            if (!isResource)
+            var root = "Test2d.UI.Wpf.Layouts.";
+            var assembly = this.GetType().Assembly;
+            using (var stream = assembly.GetManifestResourceStream(root + path))
             {
-                using (var reader = new System.IO.StreamReader(path))
+                using (var reader = new System.IO.StreamReader(stream))
                 {
                     serializer.Deserialize(reader);
                 }
             }
-            else
-            {
-                var root = "Test2d.UI.Wpf.Layouts.";
-                var assembly = this.GetType().Assembly;
-                using (var stream = assembly.GetManifestResourceStream(root + path))
+        }
+
+        /// <summary>
+        /// Load docking manager layout.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="context"></param>
+        private void LoadLayout(string path, object context)
+        {
+            if (!System.IO.File.Exists(path))
+                return;
+
+            var serializer = new XmlLayoutSerializer(dockingManager);
+
+            serializer.LayoutSerializationCallback +=
+                (s, e) =>
                 {
-                    using (var reader = new System.IO.StreamReader(stream))
+                    var element = e.Content as FrameworkElement;
+                    if (element != null)
                     {
-                        serializer.Deserialize(reader);
+                        element.DataContext = context;
                     }
-                }
+                };
+
+            using (var reader = new System.IO.StreamReader(path))
+            {
+                serializer.Deserialize(reader);
             }
         }
 
@@ -91,7 +105,7 @@ namespace Test.Windows
         /// <param name="path"></param>
         private void SaveLayout(string path)
         {
-            var serializer = new XmlLayoutSerializer(dock);
+            var serializer = new XmlLayoutSerializer(dockingManager);
             using (var writer = new System.IO.StreamWriter(path))
             {
                 serializer.Serialize(writer);
@@ -106,7 +120,7 @@ namespace Test.Windows
         {
             try
             {
-                LoadLayout(_layoutPath, context);
+                LoadLayout(_defaultLayoutPath, context);
             }
             catch (Exception ex)
             {
@@ -128,7 +142,7 @@ namespace Test.Windows
         {
             try
             {
-                SaveLayout(_layoutPath);
+                SaveLayout(_defaultLayoutPath);
             }
             catch (Exception ex)
             {
@@ -190,7 +204,7 @@ namespace Test.Windows
             {
                 Filter = "Layout (*.layout)|*.layout|All (*.*)|*.*",
                 FilterIndex = 0,
-                FileName = _layoutPath
+                FileName = _defaultLayoutPath
             };
 
             if (dlg.ShowDialog() == true)
@@ -223,7 +237,7 @@ namespace Test.Windows
 
             try
             {
-                LoadLayout(_restoreLayoutPath, context, true);
+                LoadLayoutFromResource(_resourceLayoutPath, context);
             }
             catch (Exception ex)
             {
@@ -423,44 +437,79 @@ namespace Test.Windows
                     () => panAndZoomGrid.AutoFit(),
                     () => true);
 
+            context.Commands.ProjectWindowCommand = 
+                new DelegateCommand(
+                    () => projectWindow.Show(),
+                    () => true);
+
+            context.Commands.OptionsWindowCommand = 
+                new DelegateCommand(
+                    () => optionsWindow.Show(),
+                    () => true);
+
+            context.Commands.TemplatesWindowCommand = 
+                new DelegateCommand(
+                    () => templatesWindow.Show(),
+                    () => true);
+
+            context.Commands.GroupsWindowCommand = 
+                new DelegateCommand(
+                    () => groupsWindow.Show(),
+                    () => true);
+
             context.Commands.DatabasesWindowCommand = 
                 new DelegateCommand(
-                    () => (new DatabasesWindow() { Owner = this, DataContext = context }).Show(),
+                    () => databasesWindow.Show(),
+                    () => true);
+
+            context.Commands.DatabaseWindowCommand = 
+                new DelegateCommand(
+                    () => databaseWindow.Show(),
+                    () => true);
+
+            //context.Commands.ContainerWindowCommand = 
+            //    new DelegateCommand(
+            //        () => ,
+            //        () => true);
+
+            //context.Commands.ScriptWindowCommand = 
+            //    new DelegateCommand(
+            //        () => ,
+            //        () => true);
+
+            context.Commands.StylesWindowCommand = 
+                new DelegateCommand(
+                    () => stylesWindow.Show(),
                     () => true);
 
             context.Commands.LayersWindowCommand = 
                 new DelegateCommand(
-                    () => (new LayersWindow() { Owner = this, DataContext = context }).Show(),
-                    () => true);
-
-            context.Commands.StyleWindowCommand = 
-                new DelegateCommand(
-                    () =>(new StyleWindow() { Owner = this, DataContext = context }).Show(),
-                    () => true);
-
-            context.Commands.StylesWindowCommand = 
-                new DelegateCommand(
-                    () => (new StylesWindow() { Owner = this, DataContext = context }).Show(),
+                    () => layersWindow.Show(),
                     () => true);
 
             context.Commands.ShapesWindowCommand = 
                 new DelegateCommand(
-                    () => (new ShapesWindow() { Owner = this, DataContext = context }).Show(),
-                    () => true);
-
-            context.Commands.DocumentWindowCommand = 
-                new DelegateCommand(
-                    () => (new DocumentWindow() { Owner = this, DataContext = context }).Show(),
-                    () => true);
-
-            context.Commands.ScriptWindowCommand =
-                new DelegateCommand(
-                    () => (new ScriptWindow() { Owner = this, DataContext = context }).Show(),
+                    () => shapesWindow.Show(),
                     () => true);
 
             context.Commands.PropertiesWindowCommand = 
                 new DelegateCommand(
-                    () => (new PropertiesWindow() { Owner = this, DataContext = context }).Show(),
+                    () => propertiesWindow.Show(),
+                    () => true);
+
+            context.Commands.StyleWindowCommand = 
+                new DelegateCommand(
+                    () => styleWindow.Show(),
+                    () => true);
+
+            context.Commands.CodeWindowCommand = 
+                new DelegateCommand(
+                    () => codeWindow.Show(),
+                    () => true);
+
+            context.Commands.TemplateWindowCommand =
+                new DelegateCommand(
+                    () => templateWindow.Show(),
                     () => true);
 
             context.Commands.LoadWindowLayoutCommand =
