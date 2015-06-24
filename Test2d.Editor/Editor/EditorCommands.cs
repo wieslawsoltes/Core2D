@@ -423,6 +423,10 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public ICommand DocumentWindowCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand StylesWindowCommand { get; set; }
         /// <summary>
         /// 

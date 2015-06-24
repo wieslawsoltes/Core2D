@@ -477,6 +477,11 @@ namespace Test.Windows
             //        () => ,
             //        () => true);
 
+            //context.Commands.DocumentWindowCommand = 
+            //    new DelegateCommand(
+            //        () => ,
+            //        () => true);
+
             context.Commands.StylesWindowCommand = 
                 new DelegateCommand(
                     () => stylesWindow.Show(),

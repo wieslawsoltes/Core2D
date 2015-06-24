@@ -46,6 +46,7 @@
         <KeyBinding Command="{Binding Commands.DatabaseWindowCommand}" Gesture="Ctrl+Alt+B"/>
         <KeyBinding Command="{Binding Commands.ContainerWindowCommand}" Gesture="Ctrl+Alt+N"/>
         <KeyBinding Command="{Binding Commands.ScriptWindowCommand}" Gesture="Ctrl+Alt+R"/>
+        <KeyBinding Command="{Binding Commands.DocumentWindowCommand}" Gesture="Ctrl+Alt+U"/>
         <KeyBinding Command="{Binding Commands.StylesWindowCommand}" Gesture="Ctrl+Alt+S"/>
         <KeyBinding Command="{Binding Commands.LayersWindowCommand}" Gesture="Ctrl+Alt+L"/>
         <KeyBinding Command="{Binding Commands.ShapesWindowCommand}" Gesture="Ctrl+Alt+A"/>

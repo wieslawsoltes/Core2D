@@ -88,6 +88,7 @@
             <Separator/>
             <MenuItem Header="Co_ntainer" Command="{Binding Commands.ContainerWindowCommand}" InputGestureText="Ctrl+Alt+N"/>
             <MenuItem Header="Sc_ript Window" Command="{Binding Commands.ScriptWindowCommand}" InputGestureText="Ctrl+Alt+R"/>
+            <MenuItem Header="Doc_ument Window" Command="{Binding Commands.DocumentWindowCommand}" InputGestureText="Ctrl+Alt+U"/>
             <Separator/>
             <MenuItem Header="_Styles" Command="{Binding Commands.StylesWindowCommand}" InputGestureText="Ctrl+Alt+S"/>
             <MenuItem Header="_Layers" Command="{Binding Commands.LayersWindowCommand}" InputGestureText="Ctrl+Alt+L"/>
