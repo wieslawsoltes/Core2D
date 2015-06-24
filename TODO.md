@@ -2,9 +2,10 @@
 
 ## Editor
 
+* Improve image Uri handling
+* Path shape editor support
 * Add undo/redo for all property changes
 * Detach point shape from connector on move
-* Path shape editor support
 
 ## Database
 
