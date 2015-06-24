@@ -28,7 +28,7 @@ namespace Test.Windows
     {
         private string _resourceLayoutPath = "Test2d.UI.Wpf.layout";
         private string _defaultLayoutPath = "Test2d.UI.Wpf.layout";
-        private bool _enableRestoreLayout = false;
+        private bool _enableRestoreLayout = true;
         private bool _isLoaded = false;
 
         /// <summary>
