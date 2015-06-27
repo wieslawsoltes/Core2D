@@ -2214,6 +2214,9 @@
                 <TabItem Header="Data">
                     <Control Template="{StaticResource DataControlTemplate}"/>
                 </TabItem>
+                <TabItem Header="Style">
+                    <ContentControl Content="{Binding Style}"/>
+                </TabItem>
             </TabControl>
         </StackPanel>
     </DataTemplate>
@@ -2279,6 +2282,9 @@
                 </TabItem>
                 <TabItem Header="Data">
                     <Control Template="{StaticResource DataControlTemplate}"/>
+                </TabItem>
+                <TabItem Header="Style">
+                    <ContentControl Content="{Binding Style}"/>
                 </TabItem>
             </TabControl>
         </StackPanel>
@@ -2368,6 +2374,9 @@
                 <TabItem Header="Data">
                     <Control Template="{StaticResource DataControlTemplate}"/>
                 </TabItem>
+                <TabItem Header="Style">
+                    <ContentControl Content="{Binding Style}"/>
+                </TabItem>
             </TabControl>
         </StackPanel>
     </DataTemplate>
@@ -2455,6 +2464,9 @@
                 </TabItem>
                 <TabItem Header="Data">
                     <Control Template="{StaticResource DataControlTemplate}"/>
+                </TabItem>
+                <TabItem Header="Style">
+                    <ContentControl Content="{Binding Style}"/>
                 </TabItem>
             </TabControl>
         </StackPanel>
@@ -2550,6 +2562,9 @@
                 <TabItem Header="Data">
                     <Control Template="{StaticResource DataControlTemplate}"/>
                 </TabItem>
+                <TabItem Header="Style">
+                    <ContentControl Content="{Binding Style}"/>
+                </TabItem>
             </TabControl>
         </StackPanel>
     </DataTemplate>
@@ -2644,6 +2659,9 @@
                 <TabItem Header="Data">
                     <Control Template="{StaticResource DataControlTemplate}"/>
                 </TabItem>
+                <TabItem Header="Style">
+                    <ContentControl Content="{Binding Style}"/>
+                </TabItem>
             </TabControl>
         </StackPanel>
     </DataTemplate>
@@ -2734,6 +2752,9 @@
                 </TabItem>
                 <TabItem Header="Data">
                     <Control Template="{StaticResource DataControlTemplate}"/>
+                </TabItem>
+                <TabItem Header="Style">
+                    <ContentControl Content="{Binding Style}"/>
                 </TabItem>
             </TabControl>
         </StackPanel>
@@ -2847,6 +2868,9 @@
                 <TabItem Header="Data">
                     <Control Template="{StaticResource DataControlTemplate}"/>
                 </TabItem>
+                <TabItem Header="Style">
+                    <ContentControl Content="{Binding Style}"/>
+                </TabItem>
             </TabControl>
         </StackPanel>
     </DataTemplate>
@@ -2945,6 +2969,9 @@
                 <TabItem Header="Data">
                     <Control Template="{StaticResource DataControlTemplate}"/>
                 </TabItem>
+                <TabItem Header="Style">
+                    <ContentControl Content="{Binding Style}"/>
+                </TabItem>
             </TabControl>
         </StackPanel>
     </DataTemplate>
@@ -3028,6 +3055,9 @@
                 </TabItem>
                 <TabItem Header="Data">
                     <Control Template="{StaticResource DataControlTemplate}"/>
+                </TabItem>
+                <TabItem Header="Style">
+                    <ContentControl Content="{Binding Style}"/>
                 </TabItem>
             </TabControl>
         </StackPanel>
@@ -3150,6 +3180,9 @@
                 </TabItem>
                 <TabItem Header="Data">
                     <Control Template="{StaticResource DataControlTemplate}"/>
+                </TabItem>
+                <TabItem Header="Style">
+                    <ContentControl Content="{Binding Style}"/>
                 </TabItem>
             </TabControl>
         </StackPanel>
