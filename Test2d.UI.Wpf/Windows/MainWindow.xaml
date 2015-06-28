@@ -164,18 +164,18 @@
                             </ad:LayoutDocument>
                         </ad:LayoutDocumentPane>
                     </ad:LayoutDocumentPaneGroup>
-                    <ad:LayoutAnchorablePaneGroup DockWidth="230" Orientation="Vertical">
+                    <ad:LayoutAnchorablePaneGroup DockWidth="270" Orientation="Vertical">
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable x:Name="stylesWindow" Title="Styles" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="stylesWindow" Title="Styles" AutoHideWidth="270">
                                 <controls:StylesControl x:Name="stylesControl"/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="layersWindow" Title="Layers" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="layersWindow" Title="Layers" AutoHideWidth="270">
                                 <controls:LayersControl x:Name="layersControl"/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="shapesWindow" Title="Shapes" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="shapesWindow" Title="Shapes" AutoHideWidth="270">
                                 <controls:ShapesControl x:Name="shapesControl"/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="templateWindow" Title="Template" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="templateWindow" Title="Template" AutoHideWidth="270">
                                 <ScrollViewer 
                                     x:Name="templateScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
@@ -186,7 +186,7 @@
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable x:Name="propertiesWindow" Title="Properties" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="propertiesWindow" Title="Properties" AutoHideWidth="270">
                                 <ScrollViewer 
                                     x:Name="shapeScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
@@ -195,7 +195,7 @@
                                     <controls:ShapeControl/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="styleWindow" Title="Style" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="styleWindow" Title="Style" AutoHideWidth="270">
                                 <ScrollViewer 
                                     x:Name="styleScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
@@ -204,7 +204,7 @@
                                     <controls:StyleControl/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="codeWindow" Title="Code" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="codeWindow" Title="Code" AutoHideWidth="270">
                                 <controls:CodeControl x:Name="codeControl">
                                     <controls:CodeControl.Style>
                                         <Style TargetType="controls:CodeControl">
@@ -218,7 +218,7 @@
                                     </controls:CodeControl.Style>
                                 </controls:CodeControl>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="dataWindow" Title="Data" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="dataWindow" Title="Data" AutoHideWidth="270">
                                 <controls:DataControl x:Name="dataControl">
                                     <controls:DataControl.Style>
                                         <Style TargetType="controls:DataControl">
