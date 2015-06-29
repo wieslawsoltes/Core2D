@@ -26,6 +26,7 @@ namespace Test.Windows
     /// </summary>
     public partial class MainWindow : Window, IView
     {
+        private string _resourceLayoutRoot = "Test2d.UI.Wpf.Layouts.";
         private string _resourceLayoutPath = "Test2d.UI.Wpf.layout";
         private string _defaultLayoutPath = "Test2d.UI.Wpf.layout";
         private bool _enableRestoreLayout = true;
@@ -60,9 +61,8 @@ namespace Test.Windows
                     }
                 };
 
-            var root = "Test2d.UI.Wpf.Layouts.";
             var assembly = this.GetType().Assembly;
-            using (var stream = assembly.GetManifestResourceStream(root + path))
+            using (var stream = assembly.GetManifestResourceStream(path))
             {
                 using (var reader = new System.IO.StreamReader(stream))
                 {
@@ -234,10 +234,10 @@ namespace Test.Windows
             var context = DataContext as EditorContext;
             if (context == null)
                 return;
-
+            
             try
             {
-                LoadLayoutFromResource(_resourceLayoutPath, context);
+                LoadLayoutFromResource(_resourceLayoutRoot + _resourceLayoutPath, context);
             }
             catch (Exception ex)
             {
