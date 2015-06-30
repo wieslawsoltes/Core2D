@@ -186,18 +186,24 @@ namespace PdfSharp
                 // draw container template contents to pdf graphics
                 if (container.Template != null)
                 {
-                    DrawBackgroundInternal(
-                        gfx, 
-                        container.Template.Background, 
-                        Test2d.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
+                    if (container.Template.Background.A > 0)
+                    {
+                        DrawBackgroundInternal(
+                            gfx,
+                            container.Template.Background,
+                            Test2d.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
+                    }
                     Draw(gfx, container.Template, container.Properties, null);
                 }
                 
                 // draw container contents to pdf graphics
-                DrawBackgroundInternal(
-                    gfx, 
-                    container.Background, 
-                    Test2d.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
+                if (container.Background.A > 0)
+                {
+                    DrawBackgroundInternal(
+                        gfx,
+                        container.Background,
+                        Test2d.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
+                }
                 Draw(gfx, container, container.Properties, null);
             }
 
