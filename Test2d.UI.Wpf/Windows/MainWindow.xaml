@@ -52,9 +52,10 @@
         <KeyBinding Command="{Binding Commands.ShapesWindowCommand}" Gesture="Ctrl+Alt+A"/>
         <KeyBinding Command="{Binding Commands.TemplateWindowCommand}" Gesture="Ctrl+Alt+M"/>
         <KeyBinding Command="{Binding Commands.PropertiesWindowCommand}" Gesture="F4"/>
-        <KeyBinding Command="{Binding Commands.StyleWindowCommand}" Gesture="Ctrl+Alt+Y"/>
+        <KeyBinding Command="{Binding Commands.StateWindowCommand}" Gesture="Ctrl+Alt+W"/>
         <KeyBinding Command="{Binding Commands.CodeWindowCommand}" Gesture="Ctrl+Alt+C"/>
         <KeyBinding Command="{Binding Commands.DataWindowCommand}" Gesture="Ctrl+Alt+I"/>
+        <KeyBinding Command="{Binding Commands.StyleWindowCommand}" Gesture="Ctrl+Alt+Y"/>
     </Window.InputBindings>
     <Grid FocusVisualStyle="{x:Null}">
         <Grid.RowDefinitions>
@@ -195,14 +196,19 @@
                                     <controls:ShapeControl/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="styleWindow" Title="Style" AutoHideWidth="270">
-                                <ScrollViewer 
-                                    x:Name="styleScrollViewer"
-                                    VerticalScrollBarVisibility="Auto" 
-                                    HorizontalScrollBarVisibility="Auto" 
-                                    Focusable="True">
-                                    <controls:StyleControl/>
-                                </ScrollViewer>
+                            <ad:LayoutAnchorable x:Name="stateWindow" Title="State" AutoHideWidth="270">
+                                <controls:StateControl x:Name="stateControl">
+                                    <controls:StateControl.Style>
+                                        <Style TargetType="controls:StateControl">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Editor.Renderers[0].State.SelectedShape}" Value="{x:Null}">
+                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </controls:StateControl.Style>
+                                </controls:StateControl>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable x:Name="codeWindow" Title="Code" AutoHideWidth="270">
                                 <controls:CodeControl x:Name="codeControl">
@@ -231,6 +237,15 @@
                                         </Style>
                                     </controls:DataControl.Style>
                                 </controls:DataControl>
+                            </ad:LayoutAnchorable>
+                            <ad:LayoutAnchorable x:Name="styleWindow" Title="Style" AutoHideWidth="270">
+                                <ScrollViewer 
+                                    x:Name="styleScrollViewer"
+                                    VerticalScrollBarVisibility="Auto" 
+                                    HorizontalScrollBarVisibility="Auto" 
+                                    Focusable="True">
+                                    <controls:StyleControl/>
+                                </ScrollViewer>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                     </ad:LayoutAnchorablePaneGroup>

@@ -205,6 +205,9 @@
       <DependentUpon>ShapeControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\StateControl.xaml.cs">
+      <DependentUpon>StateControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\StyleControl.xaml.cs">
       <DependentUpon>StyleControl.xaml</DependentUpon>
     </Compile>
@@ -268,6 +271,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ScriptControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StateControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

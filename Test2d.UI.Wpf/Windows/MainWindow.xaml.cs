@@ -507,9 +507,9 @@ namespace Test.Windows
                     () => propertiesWindow.Show(),
                     () => true);
 
-            context.Commands.StyleWindowCommand = 
+            context.Commands.StateWindowCommand =
                 new DelegateCommand(
-                    () => styleWindow.Show(),
+                    () => stateWindow.Show(),
                     () => true);
 
             context.Commands.CodeWindowCommand = 
@@ -520,6 +520,11 @@ namespace Test.Windows
             context.Commands.DataWindowCommand =
                 new DelegateCommand(
                     () => dataWindow.Show(),
+                    () => true);
+
+            context.Commands.StyleWindowCommand =
+                new DelegateCommand(
+                    () => styleWindow.Show(),
                     () => true);
 
             context.Commands.LoadWindowLayoutCommand =

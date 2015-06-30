@@ -95,9 +95,10 @@
             <MenuItem Header="Sh_apes" Command="{Binding Commands.ShapesWindowCommand}" InputGestureText="Ctrl+Alt+A"/>
             <MenuItem Header="Te_mplate Window" Command="{Binding Commands.TemplateWindowCommand}" InputGestureText="Ctrl+Alt+M"/>
             <Separator/>
-            <MenuItem Header="St_yle Window" Command="{Binding Commands.StyleWindowCommand}" InputGestureText="Ctrl+Alt+Y"/>
+            <MenuItem Header="State _Window" Command="{Binding Commands.StateWindowCommand}" InputGestureText="Ctrl+Alt+W"/>
             <MenuItem Header="_Code Window" Command="{Binding Commands.CodeWindowCommand}" InputGestureText="Ctrl+Alt+C"/>
             <MenuItem Header="Data W_indow" Command="{Binding Commands.DataWindowCommand}" InputGestureText="Ctrl+Alt+I"/>
+            <MenuItem Header="St_yle Window" Command="{Binding Commands.StyleWindowCommand}" InputGestureText="Ctrl+Alt+Y"/>
             <Separator/>
             <MenuItem Header="Prop_erties Window" Command="{Binding Commands.PropertiesWindowCommand}" InputGestureText="F4"/>
         </MenuItem>

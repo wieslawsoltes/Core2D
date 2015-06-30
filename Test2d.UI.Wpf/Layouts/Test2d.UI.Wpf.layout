@@ -15,7 +15,7 @@
     </LayoutAnchorablePaneGroup>
     <LayoutDocumentPaneGroup Orientation="Horizontal">
       <LayoutDocumentPane>
-        <LayoutDocument Title="Container" IsSelected="True" IsLastFocusedDocument="True" ContentId="panAndZoomGrid" CanClose="False" LastActivationTimeStamp="06/29/2015 19:47:43" />
+        <LayoutDocument Title="Container" IsSelected="True" IsLastFocusedDocument="True" ContentId="panAndZoomGrid" CanClose="False" LastActivationTimeStamp="06/30/2015 18:26:59" />
         <LayoutDocument Title="Script" ContentId="scriptControl" CanClose="False" />
       </LayoutDocumentPane>
     </LayoutDocumentPaneGroup>
@@ -28,9 +28,10 @@
       </LayoutAnchorablePane>
       <LayoutAnchorablePane>
         <LayoutAnchorable AutoHideWidth="270" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Properties" IsSelected="True" ContentId="shapeScrollViewer" />
-        <LayoutAnchorable AutoHideWidth="270" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Style" ContentId="styleScrollViewer" />
+        <LayoutAnchorable AutoHideWidth="270" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="State" ContentId="stateControl" />
         <LayoutAnchorable AutoHideWidth="270" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Code" ContentId="codeControl" />
         <LayoutAnchorable AutoHideWidth="270" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Data" ContentId="dataControl" />
+        <LayoutAnchorable AutoHideWidth="270" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Style" ContentId="styleScrollViewer" />
       </LayoutAnchorablePane>
     </LayoutAnchorablePaneGroup>
   </RootPanel>

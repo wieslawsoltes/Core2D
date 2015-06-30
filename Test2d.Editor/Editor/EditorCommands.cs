@@ -447,7 +447,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public ICommand StyleWindowCommand { get; set; }
+        public ICommand StateWindowCommand { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -456,6 +456,10 @@ namespace Test2d
         /// 
         /// </summary>
         public ICommand DataWindowCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand StyleWindowCommand { get; set; }
 
         /// <summary>
         /// 
