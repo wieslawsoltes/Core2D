@@ -260,6 +260,8 @@ namespace Test2d
         {
             var container = Container.Create();
             container.Template = project.CurrentTemplate;
+            container.Width = container.Template.Width;
+            container.Height = container.Template.Height;
             return container;
         }
         
