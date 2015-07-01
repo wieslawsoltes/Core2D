@@ -129,14 +129,14 @@ XGroup CreateSignal()
 {
     var g = XGroup.Create("SIGNAL");
 
-    var labelDesignation = XText.Create(5, 0, 205, 15, styleTextMediumLC, ps, "{0}", false, "");
-    var labelDescription = XText.Create(5, 15, 205, 30, styleTextMediumLC, ps, "{0}", false, "");
-    var labelSignal = XText.Create(215, 0, 295, 15, styleTextMediumLC, ps, "{0}", false, "");
-    var labelCondition = XText.Create(215, 15, 295, 30, styleTextMediumLC, ps, "{0}", false, "");
-    var frame = XRectangle.Create(0, 0, 300, 30, styleLineThick, ps, false, "");
-    var separator = XLine.Create(210, 0, 210, 30, styleLineThick, ps);
+    var labelDesignation = XText.Create(5, 0, 190, 15, styleTextMediumLC, ps, "{0}", false, "");
+    var labelDescription = XText.Create(5, 15, 190, 30, styleTextMediumLC, ps, "{0}", false, "");
+    var labelSignal = XText.Create(200, 0, 280, 15, styleTextMediumLC, ps, "{0}", false, "");
+    var labelCondition = XText.Create(200, 15, 280, 30, styleTextMediumLC, ps, "{0}", false, "");
+    var frame = XRectangle.Create(0, 0, 285, 30, styleLineThick, ps, false, "");
+    var separator = XLine.Create(195, 0, 195, 30, styleLineThick, ps);
     var ci = XPoint.Create(0, 15, ps, "I");
-    var co = XPoint.Create(300, 15, ps, "O");
+    var co = XPoint.Create(285, 15, ps, "O");
 
     labelDesignation.Bindings = labelDesignation.Bindings.Add(ShapeBinding.Create("Text", "Designation"));
     labelDescription.Bindings = labelDescription.Bindings.Add(ShapeBinding.Create("Text", "Description"));
