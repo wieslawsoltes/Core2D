@@ -170,7 +170,7 @@ namespace PdfSharp
         {
             // create A4 page with landscape orientation
             PdfPage page = pdf.AddPage();
-            page.Size = PageSize.A4;
+            page.Size = PageSize.A3;
             page.Orientation = PageOrientation.Landscape;
 
             using (XGraphics gfx = XGraphics.FromPdfPage(page))
@@ -232,7 +232,7 @@ namespace PdfSharp
         /// <returns></returns>
         private static XPen ToXPen(Test2d.BaseStyle style, Func<double, double> scale)
         {
-            var pen = new XPen(ToXColor(style.Stroke), XUnit.FromPoint(style.Thickness));
+            var pen = new XPen(ToXColor(style.Stroke), XUnit.FromPresentation(style.Thickness));
             switch (style.LineCap)
             {
                 case Test2d.LineCap.Flat:
