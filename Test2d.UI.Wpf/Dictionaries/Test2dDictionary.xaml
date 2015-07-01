@@ -1737,18 +1737,6 @@
             </Expander>
         </StackPanel>
     </DataTemplate>
-    <ControlTemplate x:Key="StyleControlTemplateKey">
-        <Grid>
-            <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                      SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-        </Grid>
-    </ControlTemplate>
     <!-- data -->
     <ControlTemplate x:Key="BindingsMenu">
         <Menu Background="Transparent" HorizontalAlignment="Right">
@@ -2136,7 +2124,8 @@
             </TabItem>
         </TabControl>
     </ControlTemplate>
-    <ControlTemplate x:Key="NameControlTemplate">
+    <!-- shapes -->
+    <ControlTemplate x:Key="NameControlTemplateKey">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -2162,33 +2151,38 @@
             </TextBox>
         </Grid>
     </ControlTemplate>
-    <!-- shapes -->
+    <ControlTemplate x:Key="StyleControlTemplateKey">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Style" 
+                       Margin="5,2,5,2" 
+                       Grid.Row="0" 
+                       Grid.Column="0" 
+                       TextAlignment="Left" 
+                       VerticalAlignment="Center">
+            </TextBlock>
+            <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                      SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
+                      Margin="5,2,5,2"
+                      Grid.Row="0" 
+                      Grid.Column="1">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+    </ControlTemplate>
     <DataTemplate DataType="{x:Type core:XPoint}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1" 
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
-                </TextBox>
-            </Grid>
+            <Control Template="{StaticResource NameControlTemplateKey}"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2249,58 +2243,12 @@
             <Expander Header="Data">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
-            <Expander Header="Style">
-                <ContentControl Content="{Binding Style}"/>
-            </Expander>
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XLine}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1" 
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
-                </TextBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Style" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <Control Template="{StaticResource StyleControlTemplateKey}"
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1">
-                </Control>
-            </Grid>
+            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Expander Header="Start">
                 <ContentControl Content="{Binding Start}"/>
             </Expander>
@@ -2323,51 +2271,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XRectangle}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1" 
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
-                </TextBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Style" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <Control Template="{StaticResource StyleControlTemplateKey}"
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1">
-                </Control>
-            </Grid>
+            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2412,51 +2317,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XEllipse}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1" 
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
-                </TextBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Style" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <Control Template="{StaticResource StyleControlTemplateKey}"
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1">
-                </Control>
-            </Grid>
+            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2501,51 +2363,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XArc}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1" 
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
-                </TextBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Style" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <Control Template="{StaticResource StyleControlTemplateKey}"
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1">
-                </Control>
-            </Grid>
+            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2596,51 +2415,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XBezier}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1" 
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
-                </TextBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Style" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <Control Template="{StaticResource StyleControlTemplateKey}"
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1">
-                </Control>
-            </Grid>
+            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2691,51 +2467,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XQBezier}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1" 
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
-                </TextBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Style" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <Control Template="{StaticResource StyleControlTemplateKey}"
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1">
-                </Control>
-            </Grid>
+            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2783,51 +2516,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XText}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1" 
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
-                </TextBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Style" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <Control Template="{StaticResource StyleControlTemplateKey}"
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1">
-                </Control>
-            </Grid>
+            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2896,51 +2586,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XImage}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1" 
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
-                </TextBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Style" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <Control Template="{StaticResource StyleControlTemplateKey}"
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1">
-                </Control>
-            </Grid>
+            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2995,30 +2642,7 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XGroup}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1" 
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
-                </TextBox>
-            </Grid>
+            <Control Template="{StaticResource NameControlTemplateKey}"/>
             <Expander Header="Properties">
                 <Control Template="{StaticResource GroupDatabaseControlTemplateKey}"/>
             </Expander>
@@ -3073,58 +2697,12 @@
             <Expander Header="Data">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
-            <Expander Header="Style">
-                <ContentControl Content="{Binding Style}"/>
-            </Expander>
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XPath}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1" 
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
-                </TextBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Style" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <Control Template="{StaticResource StyleControlTemplateKey}"
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1">
-                </Control>
-            </Grid>
+            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
