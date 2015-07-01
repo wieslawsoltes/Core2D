@@ -802,6 +802,61 @@
         </StackPanel>
     </DataTemplate>
     <!-- shape -->
+    <ControlTemplate x:Key="NameControlTemplateKey">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Name" 
+                       Margin="5,2,5,2" 
+                       Grid.Row="0" 
+                       Grid.Column="0" 
+                       TextAlignment="Left" 
+                       VerticalAlignment="Center">
+            </TextBlock>
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                     BorderBrush="{x:Null}" 
+                     Margin="5,2,5,2"
+                     Grid.Row="0" 
+                     Grid.Column="1" 
+                     TextAlignment="Left" 
+                     VerticalAlignment="Center">
+            </TextBox>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="StyleControlTemplateKey">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Style" 
+                       Margin="5,2,5,2" 
+                       Grid.Row="0" 
+                       Grid.Column="0" 
+                       TextAlignment="Left" 
+                       VerticalAlignment="Center">
+            </TextBlock>
+            <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                      SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
+                      Margin="5,2,5,2"
+                      Grid.Row="0" 
+                      Grid.Column="1">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+    </ControlTemplate>
     <ControlTemplate x:Key="StateControlTemplateKey">
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Default" Margin="1"
@@ -1015,6 +1070,7 @@
             </TextBox>
         </Grid>
     </DataTemplate>
+    <!-- code -->
     <ControlTemplate x:Key="CodeControlTemplateKey">
         <StackPanel>
             <Grid>
@@ -2125,61 +2181,6 @@
         </TabControl>
     </ControlTemplate>
     <!-- shapes -->
-    <ControlTemplate x:Key="NameControlTemplateKey">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Name" 
-                       Margin="5,2,5,2" 
-                       Grid.Row="0" 
-                       Grid.Column="0" 
-                       TextAlignment="Left" 
-                       VerticalAlignment="Center">
-            </TextBlock>
-            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                     BorderBrush="{x:Null}" 
-                     Margin="5,2,5,2"
-                     Grid.Row="0" 
-                     Grid.Column="1" 
-                     TextAlignment="Left" 
-                     VerticalAlignment="Center">
-            </TextBox>
-        </Grid>
-    </ControlTemplate>
-    <ControlTemplate x:Key="StyleControlTemplateKey">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Style" 
-                       Margin="5,2,5,2" 
-                       Grid.Row="0" 
-                       Grid.Column="0" 
-                       TextAlignment="Left" 
-                       VerticalAlignment="Center">
-            </TextBlock>
-            <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                      SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
-                      Margin="5,2,5,2"
-                      Grid.Row="0" 
-                      Grid.Column="1">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-        </Grid>
-    </ControlTemplate>
     <DataTemplate DataType="{x:Type core:XPoint}">
         <StackPanel>
             <Control Template="{StaticResource NameControlTemplateKey}"/>
