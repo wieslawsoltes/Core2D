@@ -11,6 +11,7 @@ namespace Test2d
     public class ArrowStyle : BaseStyle
     {
         private ArrowType _arrowType;
+        private bool _isStroked;
         private bool _isFilled;
         private double _radiusX;
         private double _radiusY;
@@ -23,7 +24,16 @@ namespace Test2d
             get { return _arrowType; }
             set { Update(ref _arrowType, value); }
         }
-        
+
+        /// <summary>
+        /// Gets or sets value indicating whether arrow shape is stroked.
+        /// </summary>
+        public bool IsStroked
+        {
+            get { return _isStroked; }
+            set { Update(ref _isStroked, value); }
+        }
+
         /// <summary>
         /// Gets or sets value indicating whether arrow shape is filled.
         /// </summary>
@@ -84,12 +94,14 @@ namespace Test2d
         /// Creates a new instance of the ArrowStyle class.
         /// </summary>
         /// <param name="arrowType">The arrow type.</param>
+        /// <param name="isStroked">The arow shape stroke flag.</param>
         /// <param name="isFilled">The arow shape fill flag.</param>
         /// <param name="radiusX">The arrow X axis radius.</param>
         /// <param name="radiusY">The arrow Y axis radius.</param>
         /// <returns>The new instance of the ArrowStyle class.</returns>
         public static ArrowStyle Create(
             ArrowType arrowType = ArrowType.None,
+            bool isStroked = true,
             bool isFilled = false,
             double radiusX = 5.0,
             double radiusY = 3.0)
@@ -109,6 +121,7 @@ namespace Test2d
         /// <param name="name">The arrow style name.</param>
         /// <param name="source">The BaseStyle source object.</param>
         /// <param name="arrowType">The arrow type.</param>
+        /// <param name="isStroked">The arow shape stroke flag.</param>
         /// <param name="isFilled">The arow shape fill flag.</param>
         /// <param name="radiusX">The arrow X axis radius.</param>
         /// <param name="radiusY">The arrow Y axis radius.</param>
@@ -117,6 +130,7 @@ namespace Test2d
             string name,
             BaseStyle source,
             ArrowType arrowType = ArrowType.None,
+            bool isStroked = true,
             bool isFilled = false,
             double radiusX = 5.0,
             double radiusY = 5.0)
@@ -125,6 +139,7 @@ namespace Test2d
             { 
                 Name = name,
                 ArrowType = arrowType,
+                IsStroked = isStroked,
                 IsFilled = isFilled,
                 RadiusX = radiusX,
                 RadiusY = radiusY
