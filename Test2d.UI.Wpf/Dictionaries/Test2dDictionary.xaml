@@ -2646,18 +2646,32 @@
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XGroup}">
-        <StackPanel>
-            <Control Template="{StaticResource NameControlTemplateKey}"/>
-            <Expander Header="Properties">
-                <Control Template="{StaticResource GroupDatabaseControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Shapes">
+        <TabControl>
+            <TabItem Header="Group">
+                <StackPanel>
+                    <Control Template="{StaticResource NameControlTemplateKey}"/>
+                    <Expander Header="Properties">
+                        <Control Template="{StaticResource GroupDatabaseControlTemplateKey}"/>
+                    </Expander>
+                    <Expander Header="State">
+                        <Control Template="{StaticResource StateControlTemplateKey}"/>
+                    </Expander>
+                    <Expander Header="Code">
+                        <Control Template="{StaticResource CodeControlTemplateKey}"/>
+                    </Expander>
+                    <Expander Header="Data">
+                        <Control Template="{StaticResource DataControlTemplate}"/>
+                    </Expander>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Shapes">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <ListBox x:Name="shapesListBox"
+                    <ListBox 
+                        x:Name="shapesListBox"
                         ItemsSource="{Binding Shapes}"
                         BorderBrush="{x:Null}"
                         Grid.Row="0">
@@ -2667,18 +2681,20 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <ContentControl Content="{Binding ElementName=shapesListBox, Path=SelectedItem}" 
-                            Grid.Row="1" Margin="5,2,5,2">
+                    <ContentControl 
+                        Content="{Binding ElementName=shapesListBox, Path=SelectedItem}" 
+                        Grid.Row="1" Margin="5,2,5,2">
                     </ContentControl>
                 </Grid>
-            </Expander>
-            <Expander Header="Connectors">
+            </TabItem>
+            <TabItem Header="Connectors">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <ListBox x:Name="connectorsListBox"
+                    <ListBox 
+                        x:Name="connectorsListBox"
                         ItemsSource="{Binding Connectors}"
                         BorderBrush="{x:Null}"
                         Grid.Row="0">
@@ -2688,21 +2704,13 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <ContentControl Content="{Binding ElementName=connectorsListBox, Path=SelectedItem}" 
-                            Grid.Row="1" Margin="5,2,5,2">
+                    <ContentControl 
+                        Content="{Binding ElementName=connectorsListBox, Path=SelectedItem}" 
+                        Grid.Row="1" Margin="5,2,5,2">
                     </ContentControl>
                 </Grid>
-            </Expander>
-            <Expander Header="State">
-                <Control Template="{StaticResource StateControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Code">
-                <Control Template="{StaticResource CodeControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Data">
-                <Control Template="{StaticResource DataControlTemplate}"/>
-            </Expander>
-        </StackPanel>
+            </TabItem>
+        </TabControl>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XReference}">
         <TabControl>
