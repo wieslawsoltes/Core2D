@@ -68,6 +68,10 @@ namespace TestSIM
                         yield return point;
                     }
                 }
+                else if (shape is XReference)
+                {
+                    // TODO: Add reference support.
+                }
             }
         }
 

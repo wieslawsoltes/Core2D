@@ -864,6 +864,23 @@ namespace Test2d
                     }
                 }
             }
+            else if (shape is XReference)
+            {
+                var reference = shape as XReference;
+
+                if (reference != null)
+                {
+                    if (reference.Origin != null)
+                    {
+                        reference.Origin.PropertyChanged += ShapeObserver;
+                    }
+
+                    if (reference.Shape != null)
+                    {
+                        Add(reference.Shape);
+                    }
+                }
+            }
 
             Verbose("Add Shape: " + shape.GetType());
         }
@@ -1057,6 +1074,23 @@ namespace Test2d
                     if (group.Connectors != null)
                     {
                         Remove(group.Connectors);
+                    }
+                }
+            }
+            else if (shape is XReference)
+            {
+                var reference = shape as XReference;
+
+                if (reference != null)
+                {
+                    if (reference.Origin != null)
+                    {
+                        reference.Origin.PropertyChanged -= ShapeObserver;
+                    }
+
+                    if (reference.Shape != null)
+                    {
+                        Remove(reference.Shape);
                     }
                 }
             }

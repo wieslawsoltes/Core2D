@@ -97,36 +97,36 @@ namespace Test2d
                 {
                     shape.Draw(dc, renderer, dx, dy, db, record);
                 }
+            }
  
-                if (renderer.State.SelectedShape != null)
+            if (renderer.State.SelectedShape != null)
+            {
+                if (this == renderer.State.SelectedShape)
                 {
-                    if (this == renderer.State.SelectedShape)
+                    foreach (var connector in Connectors)
                     {
-                        foreach (var connector in Connectors)
+                        connector.Draw(dc, renderer, dx, dy, db, record);
+                    }
+                }
+                else
+                {
+                    foreach (var connector in Connectors)
+                    {
+                        if (connector == renderer.State.SelectedShape)
                         {
                             connector.Draw(dc, renderer, dx, dy, db, record);
-                        }
-                    }
-                    else
-                    {
-                        foreach (var connector in Connectors)
-                        {
-                            if (connector == renderer.State.SelectedShape)
-                            {
-                                connector.Draw(dc, renderer, dx, dy, db, record);
-                            }
                         }
                     }
                 }
-                
-                if (renderer.State.SelectedShapes != null)
+            }
+            
+            if (renderer.State.SelectedShapes != null)
+            {
+                if (renderer.State.SelectedShapes.Contains(this))
                 {
-                    if (renderer.State.SelectedShapes.Contains(this))
+                    foreach (var connector in Connectors)
                     {
-                        foreach (var connector in Connectors)
-                        {
-                            connector.Draw(dc, renderer, dx, dy, db, record);
-                        }
+                        connector.Draw(dc, renderer, dx, dy, db, record);
                     }
                 }
             }

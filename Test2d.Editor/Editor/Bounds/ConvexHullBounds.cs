@@ -41,16 +41,16 @@ namespace Test2d
         /// <param name="bezier"></param>
         /// <param name="point"></param>
         /// <returns></returns>
-        public static bool Contains(XBezier bezier, Vector2 point)
+        public static bool Contains(XBezier bezier, Vector2 point, double dx, double dy)
         {
             Vector2[] vertices = new Vector2[4];
             int k;
             Vector2[] convexHull;
 
-            vertices[0] = new Vector2(bezier.Point1.X, bezier.Point1.Y);
-            vertices[1] = new Vector2(bezier.Point2.X, bezier.Point2.Y);
-            vertices[2] = new Vector2(bezier.Point3.X, bezier.Point3.Y);
-            vertices[3] = new Vector2(bezier.Point4.X, bezier.Point4.Y);
+            vertices[0] = new Vector2(bezier.Point1.X + dx, bezier.Point1.Y + dy);
+            vertices[1] = new Vector2(bezier.Point2.X + dx, bezier.Point2.Y + dy);
+            vertices[2] = new Vector2(bezier.Point3.X + dx, bezier.Point3.Y + dy);
+            vertices[3] = new Vector2(bezier.Point4.X + dx, bezier.Point4.Y + dy);
 
             mc.ConvexHull(vertices, out convexHull, out k);
 
@@ -63,15 +63,15 @@ namespace Test2d
         /// <param name="qbezier"></param>
         /// <param name="point"></param>
         /// <returns></returns>
-        public static bool Contains(XQBezier qbezier, Vector2 point)
+        public static bool Contains(XQBezier qbezier, Vector2 point, double dx, double dy)
         {
             Vector2[] vertices = new Vector2[3];
             int k;
             Vector2[] convexHull;
 
-            vertices[0] = new Vector2(qbezier.Point1.X, qbezier.Point1.Y);
-            vertices[1] = new Vector2(qbezier.Point2.X, qbezier.Point2.Y);
-            vertices[2] = new Vector2(qbezier.Point3.X, qbezier.Point3.Y);
+            vertices[0] = new Vector2(qbezier.Point1.X + dx, qbezier.Point1.Y + dy);
+            vertices[1] = new Vector2(qbezier.Point2.X + dx, qbezier.Point2.Y + dy);
+            vertices[2] = new Vector2(qbezier.Point3.X + dx, qbezier.Point3.Y + dy);
 
             mc.ConvexHull(vertices, out convexHull, out k);
 
@@ -83,16 +83,16 @@ namespace Test2d
         /// </summary>
         /// <param name="bezier"></param>
         /// <returns></returns>
-        public static Vector2[] GetVertices(XBezier bezier)
+        public static Vector2[] GetVertices(XBezier bezier, double dx, double dy)
         {
             Vector2[] vertices = new Vector2[4];
             int k;
             Vector2[] convexHull;
 
-            vertices[0] = new Vector2(bezier.Point1.X, bezier.Point1.Y);
-            vertices[1] = new Vector2(bezier.Point2.X, bezier.Point2.Y);
-            vertices[2] = new Vector2(bezier.Point3.X, bezier.Point3.Y);
-            vertices[3] = new Vector2(bezier.Point4.X, bezier.Point4.Y);
+            vertices[0] = new Vector2(bezier.Point1.X + dx, bezier.Point1.Y + dy);
+            vertices[1] = new Vector2(bezier.Point2.X + dx, bezier.Point2.Y + dy);
+            vertices[2] = new Vector2(bezier.Point3.X + dx, bezier.Point3.Y + dy);
+            vertices[3] = new Vector2(bezier.Point4.X + dx, bezier.Point4.Y + dy);
 
             mc.ConvexHull(vertices, out convexHull, out k);
 
@@ -104,15 +104,15 @@ namespace Test2d
         /// </summary>
         /// <param name="qbezier"></param>
         /// <returns></returns>
-        public static Vector2[] GetVertices(XQBezier qbezier)
+        public static Vector2[] GetVertices(XQBezier qbezier, double dx, double dy)
         {
             Vector2[] vertices = new Vector2[3];
             int k;
             Vector2[] convexHull;
 
-            vertices[0] = new Vector2(qbezier.Point1.X, qbezier.Point1.Y);
-            vertices[1] = new Vector2(qbezier.Point2.X, qbezier.Point2.Y);
-            vertices[2] = new Vector2(qbezier.Point3.X, qbezier.Point3.Y);
+            vertices[0] = new Vector2(qbezier.Point1.X + dx, qbezier.Point1.Y + dy);
+            vertices[1] = new Vector2(qbezier.Point2.X + dx, qbezier.Point2.Y + dy);
+            vertices[2] = new Vector2(qbezier.Point3.X + dx, qbezier.Point3.Y + dy);
 
             mc.ConvexHull(vertices, out convexHull, out k);
 
