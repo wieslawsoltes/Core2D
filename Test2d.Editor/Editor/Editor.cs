@@ -800,7 +800,7 @@ namespace Test2d
 
             if (_renderers[0].State.SelectedShapes != null)
             {
-
+                // TODO: Group and reference selected shapes.
             }
         }
 
