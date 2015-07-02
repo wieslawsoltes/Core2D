@@ -14,6 +14,8 @@ namespace Test2d
         private BaseShape _owner;
         private ShapeState _state = ShapeState.Visible | ShapeState.Printable | ShapeState.Standalone;
         private ShapeStyle _style;
+        private bool _isStroked;
+        private bool _isFilled;
         private ImmutableArray<ShapeBinding> _bindings;
         private ImmutableArray<ShapeProperty> _properties;
         private Record _record;
@@ -54,7 +56,25 @@ namespace Test2d
             get { return _style; }
             set { Update(ref _style, value); }
         }
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsStroked
+        {
+            get { return _isStroked; }
+            set { Update(ref _isStroked, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsFilled
+        {
+            get { return _isFilled; }
+            set { Update(ref _isFilled, value); }
+        }
+
         /// <summary>
         /// Gets or sets a colletion ShapeBinding that will be used during drawing.
         /// </summary>
