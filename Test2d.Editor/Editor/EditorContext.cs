@@ -1179,6 +1179,11 @@ namespace Test2d
                         () => _editor.GroupCurrentLayer(),
                         () => IsEditMode());
 
+                _commands.ReferenceCommand =
+                    new DelegateCommand(
+                        () => _editor.ReferenceSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
                 _commands.ToolNoneCommand = 
                     new DelegateCommand(
                         () => _editor.CurrentTool = Tool.None,
@@ -2917,7 +2922,7 @@ namespace Test2d
                 double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
 
                 var origin = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                var reference = XReference.Create(string.Concat("Ref-", group.Name), origin, group);
+                var reference = XReference.Create(string.Concat("r-", group.Name), origin, group);
                
                 _editor.Deselect(_editor.Project.CurrentContainer);
                 _editor.AddWithHistory(reference);
@@ -3757,6 +3762,7 @@ namespace Test2d
             (_commands.ClearAllCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.GroupCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.GroupLayerCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ReferenceCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.ToolNoneCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolSelectionCommand as DelegateCommand).RaiseCanExecuteChanged();

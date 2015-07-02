@@ -71,6 +71,8 @@
             <Separator/>
             <MenuItem Header="_Group" Command="{Binding Commands.GroupCommand}" InputGestureText="Ctrl+G"/>
             <MenuItem Header="Group _Layer" Command="{Binding Commands.GroupLayerCommand}" InputGestureText="Ctrl+Shift+G"/>
+            <Separator/>
+            <MenuItem Header="Re_ference" Command="{Binding Commands.ReferenceCommand}" InputGestureText="Ctrl+R"/>
         </MenuItem>
         <MenuItem Header="_View">
             <MenuItem Header="_Zoom">

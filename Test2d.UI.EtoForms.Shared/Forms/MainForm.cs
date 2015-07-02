@@ -619,6 +619,17 @@ namespace TestEtoForms
                     _context.Commands.GroupLayerCommand.Execute(null);
                 };
 
+            var referenceCommand = new Command()
+            {
+                MenuText = "Re&ference",
+                Shortcut = Application.Instance.CommonModifier | Keys.R
+            };
+            referenceCommand.Executed +=
+                (s, e) =>
+                {
+                    _context.Commands.ReferenceCommand.Execute(null);
+                };
+
             #endregion
 
             #region Script
@@ -742,6 +753,8 @@ namespace TestEtoForms
                     new SeparatorMenuItem(),
                     groupCommand,
                     groupLayerCommand,
+                    new SeparatorMenuItem(),
+                    referenceCommand
                 }
             };
 
@@ -793,7 +806,7 @@ namespace TestEtoForms
                     new SeparatorMenuItem(),
                     pauseSimulation,
                     new SeparatorMenuItem(),
-                    tickSimulation,
+                    tickSimulation
                 }
             };
 

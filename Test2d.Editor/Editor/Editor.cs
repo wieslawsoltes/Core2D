@@ -782,6 +782,29 @@ namespace Test2d
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public void ReferenceSelected()
+        {
+            if (_renderers[0].State.SelectedShape != null)
+            {
+                var shape = _renderers[0].State.SelectedShape;
+                var origin = XPoint.Create(0, 0, _project.Options.PointShape);
+                var reference = XReference.Create("r", origin, shape);
+
+                Deselect(_project.CurrentContainer);
+                AddWithHistory(reference);
+
+                Select(_project.CurrentContainer, reference);
+            }
+
+            if (_renderers[0].State.SelectedShapes != null)
+            {
+
+            }
+        }
+
+        /// <summary>
         /// Removes container object from owner document Containers collection.
         /// </summary>
         /// <param name="container">The container object to remove from document Containers collection.</param>
