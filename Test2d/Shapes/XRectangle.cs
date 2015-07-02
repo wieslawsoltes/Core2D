@@ -14,7 +14,8 @@ namespace Test2d
     {
         private XPoint _topLeft;
         private XPoint _bottomRight;
-        private bool _isFilled;
+        private double _radiusX;
+        private double _radiusY;
 
         /// <summary>
         /// 
@@ -37,13 +38,21 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public bool IsFilled
+        public double RadiusX
         {
-            get { return _isFilled; }
-            set { Update(ref _isFilled, value); }
+            get { return _radiusX; }
+            set { Update(ref _radiusX, value); }
         }
 
- 
+        /// <summary>
+        /// 
+        /// </summary>
+        public double RadiusY
+        {
+            get { return _radiusY; }
+            set { Update(ref _radiusY, value); }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -129,6 +138,8 @@ namespace Test2d
         /// <param name="point"></param>
         /// <param name="isFilled"></param>
         /// <param name="name"></param>
+        /// <param name="radiusX"></param>
+        /// <param name="radiusY"></param>
         /// <returns></returns>
         public static XRectangle Create(
             double x1, double y1,
@@ -136,18 +147,23 @@ namespace Test2d
             ShapeStyle style,
             BaseShape point,
             bool isFilled = false,
-            string name = "")
+            string name = "",
+            double radiusX = 0.0,
+            double radiusY = 0.0)
         {
             return new XRectangle()
             {
                 Name = name,
                 Style = style,
+                IsStroked = true,
+                IsFilled = isFilled,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
                 Code = ShapeCode.Create(),
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
-                IsFilled = isFilled
+                RadiusX = radiusX,
+                RadiusY = radiusY
             };
         }
 
