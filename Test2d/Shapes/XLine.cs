@@ -126,6 +126,8 @@ namespace Test2d
             {
                 Name = name,
                 Style = style,
+                IsStroked = true,
+                IsFilled = false,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
                 Code = ShapeCode.Create(),
@@ -156,6 +158,8 @@ namespace Test2d
             {
                 Name = name,
                 Style = style,
+                IsStroked = true,
+                IsFilled = false,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
                 Code = ShapeCode.Create(),

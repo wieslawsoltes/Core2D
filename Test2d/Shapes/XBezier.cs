@@ -15,7 +15,6 @@ namespace Test2d
         private XPoint _point2;
         private XPoint _point3;
         private XPoint _point4;
-        private bool _isFilled;
 
         /// <summary>
         /// 
@@ -51,15 +50,6 @@ namespace Test2d
         {
             get { return _point4; }
             set { Update(ref _point4, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool IsFilled
-        {
-            get { return _isFilled; }
-            set { Update(ref _isFilled, value); }
         }
 
         /// <summary>
@@ -190,14 +180,15 @@ namespace Test2d
             {
                 Name = name,
                 Style = style,
+                IsStroked = true,
+                IsFilled = isFilled,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
                 Code = ShapeCode.Create(),
                 Point1 = XPoint.Create(x1, y1, point),
                 Point2 = XPoint.Create(x2, y2, point),
                 Point3 = XPoint.Create(x3, y3, point),
-                Point4 = XPoint.Create(x4, y4, point),
-                IsFilled = isFilled
+                Point4 = XPoint.Create(x4, y4, point)
             };
         }
 
