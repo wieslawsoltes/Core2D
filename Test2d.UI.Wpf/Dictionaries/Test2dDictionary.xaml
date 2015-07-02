@@ -1777,21 +1777,27 @@
         </TabControl>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:ShapeStyle}">
-        <StackPanel>
-            <Control Template="{StaticResource BaseStyleControlTemplateKey}"/>
-            <Expander Header="Text" IsExpanded="False">
+        <TabControl>
+            <TabItem Header="Base">
+                <Control Template="{StaticResource BaseStyleControlTemplateKey}"/>
+            </TabItem>
+            <TabItem Header="Text">
                 <ContentControl Content="{Binding TextStyle}"/>
-            </Expander>
-            <Expander Header="Line Start Arrow" IsExpanded="False">
-                <ContentControl Content="{Binding StartArrowStyle}"/>
-            </Expander>
-            <Expander Header="Line End Arrow" IsExpanded="False">
-                <ContentControl Content="{Binding EndArrowStyle}"/>
-            </Expander>
-            <Expander Header="Line MaxLength" IsExpanded="False">
-                <ContentControl Content="{Binding LineStyle}"/>
-            </Expander>
-        </StackPanel>
+            </TabItem>
+            <TabItem Header="Line">
+                <StackPanel>
+                    <Expander Header="Line Start Arrow" IsExpanded="False">
+                        <ContentControl Content="{Binding StartArrowStyle}"/>
+                    </Expander>
+                    <Expander Header="Line End Arrow" IsExpanded="False">
+                        <ContentControl Content="{Binding EndArrowStyle}"/>
+                    </Expander>
+                    <Expander Header="Line MaxLength" IsExpanded="False">
+                        <ContentControl Content="{Binding LineStyle}"/>
+                    </Expander>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
     </DataTemplate>
     <!-- data -->
     <ControlTemplate x:Key="BindingsMenu">
