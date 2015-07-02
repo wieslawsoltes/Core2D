@@ -2863,12 +2863,12 @@ namespace Test2d
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="group"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void Drop(XGroup group, double x, double y)
+        public void DropAsClone(XGroup group, double x, double y)
         {
             try
             {
@@ -2890,6 +2890,45 @@ namespace Test2d
                         _editor.TryToConnect(clone);
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void DropAsReference(XGroup group, double x, double y)
+        {
+            try
+            {
+                double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+                double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+
+                var origin = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                var reference = XReference.Create(string.Concat("Ref-", group.Name), origin, group);
+               
+                _editor.Deselect(_editor.Project.CurrentContainer);
+                _editor.AddWithHistory(reference);
+
+                _editor.Select(_editor.Project.CurrentContainer, reference);
+
+                if (_editor.Project.Options.TryToConnect)
+                {
+                    // TODO: Implement TryToConnect for XReference.
+                    //_editor.TryToConnect(reference);
+                } 
             }
             catch (Exception ex)
             {
