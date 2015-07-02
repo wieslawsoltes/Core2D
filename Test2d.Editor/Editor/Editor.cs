@@ -411,6 +411,17 @@ namespace Test2d
                         yield return point;
                     }
                 }
+                else if (shape is XReference)
+                {
+                    var reference = shape as XReference;
+
+                    if (!reference.Origin.State.HasFlag(exclude))
+                    {
+                        yield return reference.Origin;
+                    }
+
+                    // TODO: Add reference.Shape support.
+                }
             }
         }
 
@@ -471,6 +482,10 @@ namespace Test2d
                         yield return s;
                     }
 
+                    yield return shape;
+                }
+                else if (shape is XReference)
+                {
                     yield return shape;
                 }
             }
@@ -1139,7 +1154,7 @@ namespace Test2d
                     XLine result = null;
                     foreach (var line in wires)
                     {
-                        if (ShapeBounds.HitTest(line, p, t))
+                        if (ShapeBounds.HitTestLine(line, p, t, 0, 0))
                         {
                             result = line;
                             break;
