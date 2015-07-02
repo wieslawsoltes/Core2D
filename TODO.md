@@ -1,5 +1,9 @@
 ﻿# TODO
 
+## Shapes
+
+* Add Reference shape
+
 ## Editor
 
 * Improve image Uri handling
