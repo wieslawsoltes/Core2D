@@ -189,6 +189,7 @@ namespace Test
             DrawingContext dc, 
             double half, 
             Pen pen, 
+            bool isStroked,
             ref Point p0, 
             ref Point p1)
         {
@@ -200,7 +201,7 @@ namespace Test
                 dc.PushGuidelineSet(gs);
             }
 
-            dc.DrawLine(pen, p0, p1);
+            dc.DrawLine(isStroked ? pen : null, p0, p1);
 
             if (_enableGuidelines)
                 dc.Pop();
@@ -220,8 +221,11 @@ namespace Test
             double half, 
             Brush brush, 
             Pen pen, 
+            bool isStroked,
             bool isFilled, 
-            ref Rect rect)
+            ref Rect rect,
+            double rx = 0.0,
+            double ry = 0.0)
         {
             if (_enableGuidelines)
             {
@@ -239,7 +243,14 @@ namespace Test
                 dc.PushGuidelineSet(gs);
             }
 
-            dc.DrawRectangle(isFilled ? brush : null, pen, rect);
+            if (rx > 0.0 || ry > 0.0)
+            {
+                dc.DrawRoundedRectangle(isFilled ? brush : null, isStroked ? pen : null, rect, rx, ry);
+            }
+            else
+            {
+                dc.DrawRectangle(isFilled ? brush : null, isStroked ? pen : null, rect);
+            }
 
             if (_enableGuidelines)
                 dc.Pop();
@@ -261,6 +272,7 @@ namespace Test
             double half, 
             Brush brush, 
             Pen pen, 
+            bool isStroked,
             bool isFilled, 
             ref Point center,
             double rx, double ry)
@@ -283,7 +295,7 @@ namespace Test
 
             dc.DrawEllipse(
                 isFilled ? brush : null,
-                pen,
+                isStroked ? pen : null,
                 center,
                 rx, ry);
 
@@ -305,6 +317,7 @@ namespace Test
             double half,
             Brush brush,
             Pen pen,
+            bool isStroked,
             bool isFilled,
             PathGeometry pg)
         {
@@ -324,7 +337,7 @@ namespace Test
                 dc.PushGuidelineSet(gs);
             }
 
-            dc.DrawGeometry(isFilled ? brush : null, pen, pg);
+            dc.DrawGeometry(isFilled ? brush : null, isStroked ? pen : null, pg);
 
             if (_enableGuidelines)
                 dc.Pop();
@@ -349,6 +362,7 @@ namespace Test
                 0.5,
                 brush,
                 null,
+                false,
                 true,
                 ref rect);
         }
@@ -548,13 +562,13 @@ namespace Test
                         if (doRectTransform1)
                         {
                             _dc.PushTransform(t1);
-                            DrawRectangleInternal(_dc, halfStartArrow, fillStartArrow, strokeStartArrow, sas.IsFilled, ref rect);
+                            DrawRectangleInternal(_dc, halfStartArrow, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
                             _dc.Pop();
                         }
                         else
                         {
                             var bounds = t1.TransformBounds(rect);
-                            DrawRectangleInternal(_dc, halfStartArrow, fillStartArrow, strokeStartArrow, sas.IsFilled, ref bounds);
+                            DrawRectangleInternal(_dc, halfStartArrow, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref bounds);
                         }
                     }
                     break;
@@ -563,7 +577,7 @@ namespace Test
                         pt1 = t1.Transform(new Point(x1 - sizeX1, y1));
                         _dc.PushTransform(t1);
                         var c = new Point(x1 - radiusX1, y1);
-                        DrawEllipseInternal(_dc, halfStartArrow, fillStartArrow, strokeStartArrow, sas.IsFilled, ref c, radiusX1, radiusY1);
+                        DrawEllipseInternal(_dc, halfStartArrow, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref c, radiusX1, radiusY1);
                         _dc.Pop();
                     }
                     break;
@@ -574,8 +588,8 @@ namespace Test
                         var p21 = t1.Transform(new Point(x1, y1));
                         var p12 = t1.Transform(new Point(x1 - sizeX1, y1 - sizeY1));
                         var p22 = t1.Transform(new Point(x1, y1));
-                        DrawLineInternal(_dc, halfStartArrow, strokeStartArrow, ref p11, ref p21);
-                        DrawLineInternal(_dc, halfStartArrow, strokeStartArrow, ref p12, ref p22);
+                        DrawLineInternal(_dc, halfStartArrow, strokeStartArrow, sas.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(_dc, halfStartArrow, strokeStartArrow, sas.IsStroked, ref p12, ref p22);
                     }
                     break;
             }
@@ -601,13 +615,13 @@ namespace Test
                         if (doRectTransform2)
                         {
                             _dc.PushTransform(t2);
-                            DrawRectangleInternal(_dc, halfEndArrow, fillEndArrow, strokeEndArrow, eas.IsFilled, ref rect);
+                            DrawRectangleInternal(_dc, halfEndArrow, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
                             _dc.Pop();
                         }
                         else
                         {
                             var bounds = t2.TransformBounds(rect);
-                            DrawRectangleInternal(_dc, halfEndArrow, fillEndArrow, strokeEndArrow, eas.IsFilled, ref bounds);
+                            DrawRectangleInternal(_dc, halfEndArrow, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref bounds);
                         }
                     }
                     break;
@@ -616,7 +630,7 @@ namespace Test
                         pt2 = t2.Transform(new Point(x2 - sizeX2, y2));
                         _dc.PushTransform(t2);
                         var c = new Point(x2 - radiusX2, y2);
-                        DrawEllipseInternal(_dc, halfEndArrow, fillEndArrow, strokeEndArrow, eas.IsFilled, ref c, radiusX2, radiusY2);
+                        DrawEllipseInternal(_dc, halfEndArrow, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref c, radiusX2, radiusY2);
                         _dc.Pop();
                     }
                     break;
@@ -627,14 +641,14 @@ namespace Test
                          var p21 = t2.Transform(new Point(x2, y2));
                          var p12 = t2.Transform(new Point(x2 - sizeX2, y2 - sizeY2));
                          var p22 = t2.Transform(new Point(x2, y2));
-                         DrawLineInternal(_dc, halfEndArrow, strokeEndArrow, ref p11, ref p21);
-                         DrawLineInternal(_dc, halfEndArrow, strokeEndArrow, ref p12, ref p22);
+                         DrawLineInternal(_dc, halfEndArrow, strokeEndArrow, eas.IsStroked, ref p11, ref p21);
+                         DrawLineInternal(_dc, halfEndArrow, strokeEndArrow, eas.IsStroked, ref p12, ref p22);
                     }
                     break;
             }
 
             // draw line using points from arrow transforms
-            DrawLineInternal(_dc, halfLine, strokeLine, ref pt1, ref pt2);
+            DrawLineInternal(_dc, halfLine, strokeLine, line.IsStroked, ref pt1, ref pt2);
         }
 
         /// <summary>
@@ -678,7 +692,13 @@ namespace Test
                 rectangle.TopLeft, 
                 rectangle.BottomRight, 
                 dx, dy);
-            DrawRectangleInternal(_dc, half, fill, stroke, rectangle.IsFilled, ref rect);
+            DrawRectangleInternal(
+                _dc, 
+                half, 
+                fill, stroke, 
+                rectangle.IsStroked, rectangle.IsFilled, 
+                ref rect, 
+                rectangle.RadiusX, rectangle.RadiusY);
         }
 
         /// <summary>
@@ -730,7 +750,7 @@ namespace Test
                 _dc, 
                 half, 
                 fill, stroke, 
-                ellipse.IsFilled, 
+                ellipse.IsStroked, ellipse.IsFilled, 
                 ref center,
                 rx, ry);
         }
@@ -785,6 +805,7 @@ namespace Test
                 segment.Point = new Point(a.End.X, a.End.Y);
                 segment.Size = new Size(a.Radius.Width, a.Radius.Height);
                 segment.IsLargeArc = a.IsLargeArc;
+                segment.IsStroked = arc.IsStroked;
             }
             else
             {
@@ -799,7 +820,7 @@ namespace Test
                     new Size(a.Radius.Width, a.Radius.Height), 
                     0.0, 
                     a.IsLargeArc, SweepDirection.Clockwise, 
-                    true);
+                    arc.IsStroked);
 
                 //segment.Freeze();
                 pf.Segments.Add(segment);
@@ -812,7 +833,7 @@ namespace Test
                     _arcCache.Add(arc, pg);
             }
 
-            DrawPathGeometryInternal(_dc, half, fill, stroke, arc.IsFilled, pg);
+            DrawPathGeometryInternal(_dc, half, fill, stroke, arc.IsStroked, arc.IsFilled, pg);
         }
 
         /// <summary>
@@ -863,6 +884,7 @@ namespace Test
                 bs.Point1 = new Point(bezier.Point2.X + dx, bezier.Point2.Y + dy);
                 bs.Point2 = new Point(bezier.Point3.X + dx, bezier.Point3.Y + dy);
                 bs.Point3 = new Point(bezier.Point4.X + dx, bezier.Point4.Y + dy);
+                bs.IsStroked = bezier.IsStroked;
             }
             else
             {
@@ -875,7 +897,7 @@ namespace Test
                         new Point(bezier.Point2.X + dx, bezier.Point2.Y + dy),
                         new Point(bezier.Point3.X + dx, bezier.Point3.Y + dy),
                         new Point(bezier.Point4.X + dx, bezier.Point4.Y + dy),
-                        true);
+                        bezier.IsStroked);
                 //bs.Freeze();
                 pf.Segments.Add(bs);
                 //pf.Freeze();
@@ -887,7 +909,7 @@ namespace Test
                     _bezierCache.Add(bezier, pg);
             }
 
-            DrawPathGeometryInternal(_dc, half, fill, stroke, bezier.IsFilled, pg);
+            DrawPathGeometryInternal(_dc, half, fill, stroke, bezier.IsStroked, bezier.IsFilled, pg);
         }
 
         /// <summary>
@@ -938,6 +960,7 @@ namespace Test
                 var qbs = pf.Segments[0] as QuadraticBezierSegment;
                 qbs.Point1 = new Point(qbezier.Point2.X + dx, qbezier.Point2.Y + dy);
                 qbs.Point2 = new Point(qbezier.Point3.X + dx, qbezier.Point3.Y + dy);
+                qbs.IsStroked = qbezier.IsStroked;
             }
             else
             {
@@ -950,7 +973,7 @@ namespace Test
                 var qbs = new QuadraticBezierSegment(
                         new Point(qbezier.Point2.X + dx, qbezier.Point2.Y + dy),
                         new Point(qbezier.Point3.X + dx, qbezier.Point3.Y + dy),
-                        true);
+                        qbezier.IsStroked);
                 //bs.Freeze();
                 pf.Segments.Add(qbs);
                 //pf.Freeze();
@@ -961,7 +984,7 @@ namespace Test
                     _qbezierCache.Add(qbezier, pg);
             }
 
-            DrawPathGeometryInternal(_dc, half, fill, stroke, qbezier.IsFilled, pg);
+            DrawPathGeometryInternal(_dc, half, fill, stroke, qbezier.IsStroked, qbezier.IsFilled, pg);
         }
 
         /// <summary>
@@ -1006,7 +1029,13 @@ namespace Test
                 text.BottomRight,
                 dx, dy);
 
-            DrawRectangleInternal(_dc, half, fill, null, text.IsFilled, ref rect);
+            DrawRectangleInternal(
+                _dc, 
+                half, 
+                fill, stroke, 
+                text.IsStroked, text.IsFilled, 
+                ref rect, 
+                text.RadiusX, text.RadiusY);
 
             var tbind = text.BindToTextProperty(db, r);
 
@@ -1139,7 +1168,7 @@ namespace Test
                 image.BottomRight,
                 dx, dy);
 
-            DrawRectangleInternal(_dc, half, fill, null, image.IsFilled, ref rect);
+            DrawRectangleInternal(_dc, half, fill, stroke, image.IsStroked, image.IsFilled, ref rect);
 
             if (_enableImageCache
                 && _biCache.ContainsKey(image.Path))
