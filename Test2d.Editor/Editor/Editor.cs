@@ -805,6 +805,204 @@ namespace Test2d
         }
 
         /// <summary>
+        /// Move shape from source index to target index position in an array. 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="sourceIndex"></param>
+        /// <param name="targetIndex"></param>
+        private void Move(BaseShape source, int sourceIndex, int targetIndex)
+        {
+            if (sourceIndex < targetIndex)
+            {
+                var layer = _project.CurrentContainer.CurrentLayer;
+                var items = layer.Shapes;
+                if (items != null)
+                {
+                    var builder = items.ToBuilder();
+                    builder.Insert(targetIndex + 1, source);
+                    builder.RemoveAt(sourceIndex);
+
+                    var previous = layer.Shapes;
+                    var next = builder.ToImmutable();
+                    _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                    layer.Shapes = next;
+                }
+            }
+            else
+            {
+                var layer = _project.CurrentContainer.CurrentLayer;
+                var items = layer.Shapes;
+                if (items != null)
+                {
+                    int removeIndex = sourceIndex + 1;
+                    if (items.Length + 1 > removeIndex)
+                    {
+                        var builder = items.ToBuilder();
+                        builder.Insert(targetIndex, source);
+                        builder.RemoveAt(removeIndex);
+
+                        var previous = layer.Shapes;
+                        var next = builder.ToImmutable();
+                        _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                        layer.Shapes = next;
+                    }
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Bring a shape to the top of the stack.
+        /// </summary>
+        /// <param name="source"></param>
+        public void BringToFront(BaseShape source)
+        {
+            var layer = _project.CurrentContainer.CurrentLayer;
+            var items = layer.Shapes;
+            
+            int sourceIndex = items.IndexOf(source);
+            int targetIndex = items.Length - 1;
+            if (targetIndex >= 0 && sourceIndex != targetIndex)
+            {
+                Move(source, sourceIndex, targetIndex);
+            }
+        }
+
+        /// <summary>
+        /// Move a shape one step closer to the front of the stack.
+        /// </summary>
+        /// <param name="source"></param>
+        public void BringForward(BaseShape source)
+        {
+            var layer = _project.CurrentContainer.CurrentLayer;
+            var items = layer.Shapes;
+            
+            int sourceIndex = items.IndexOf(source);
+            int targetIndex = sourceIndex + 1;
+            if (targetIndex < items.Length)
+            {
+                Move(source, sourceIndex, targetIndex);
+            }
+        }
+        
+        /// <summary>
+        /// Move a shape one step down within the stack.
+        /// </summary>
+        /// <param name="source"></param>
+        public void SendBackward(BaseShape source)
+        {
+            var layer = _project.CurrentContainer.CurrentLayer;
+            var items = layer.Shapes;
+            
+            int sourceIndex = items.IndexOf(source);
+            int targetIndex = sourceIndex - 1;
+            if (targetIndex >= 0)
+            {
+                Move(source, sourceIndex, targetIndex);
+            }
+        }
+        
+        /// <summary>
+        /// Move a shape to the bottom of the stack.
+        /// </summary>
+        /// <param name="source"></param>
+        public void SendToBack(BaseShape source)
+        {
+            var layer = _project.CurrentContainer.CurrentLayer;
+            var items = layer.Shapes;
+            
+            int sourceIndex = items.IndexOf(source);
+            int targetIndex = 0;
+            if (sourceIndex != targetIndex)
+            {
+                Move(source, sourceIndex, targetIndex);
+            }
+        }
+        
+        /// <summary>
+        /// Bring selected shapes to the top of the stack.
+        /// </summary>
+        public void BringToFrontSelected()
+        {
+            var source = _renderers[0].State.SelectedShape;
+            if (source != null)
+            {
+                BringToFront(source);
+            }
+            
+            var sources = _renderers[0].State.SelectedShapes;
+            if (sources != null)
+            {
+                foreach (var s in sources) 
+                {
+                    BringToFront(s);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Move selected shapes one step closer to the front of the stack.
+        /// </summary>
+        public void BringForwardSelected()
+        {
+            var source = _renderers[0].State.SelectedShape;
+            if (source != null)
+            {
+                BringForward(source);
+            }
+            
+            var sources = _renderers[0].State.SelectedShapes;
+            if (sources != null)
+            {
+                foreach (var s in sources) 
+                {
+                    BringForward(s);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Move selected shapes one step down within the stack.
+        /// </summary>
+        public void SendBackwardSelected()
+        {
+            var source = _renderers[0].State.SelectedShape;
+            if (source != null)
+            {
+                SendBackward(source);
+            }
+            
+            var sources = _renderers[0].State.SelectedShapes;
+            if (sources != null)
+            {
+                foreach (var s in sources.Reverse()) 
+                {
+                    SendBackward(s);
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Move selected shapes to the bottom of the stack.
+        /// </summary>
+        public void SendToBackSelected()
+        {
+            var source = _renderers[0].State.SelectedShape;
+            if (source != null)
+            {
+                SendToBack(source);
+            }
+            
+            var sources = _renderers[0].State.SelectedShapes;
+            if (sources != null)
+            {
+                foreach (var s in sources.Reverse())
+                {
+                    SendToBack(s);
+                }
+            }
+        }
+
+        /// <summary>
         /// Removes container object from owner document Containers collection.
         /// </summary>
         /// <param name="container">The container object to remove from document Containers collection.</param>
