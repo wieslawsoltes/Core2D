@@ -1011,6 +1011,11 @@ namespace Test2d
                         var reference = shape as XReference;
                         // TODO: Draw reference.
                     }
+                    else if (shape is XPath)
+                    {
+                        var path = shape as XPath;
+                        // TODO: Draw path.
+                    }
                 }
             }
         }

@@ -165,6 +165,7 @@ namespace Test2d
         /// 
         /// </summary>
         public ICommand ClearAllCommand { get; set; }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -177,6 +178,23 @@ namespace Test2d
         /// 
         /// </summary>
         public ICommand ReferenceCommand { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand BringToFrontCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand BringForwardCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand SendBackwardCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand SendToBackCommand { get; set; }
 
         /// <summary>
         /// 

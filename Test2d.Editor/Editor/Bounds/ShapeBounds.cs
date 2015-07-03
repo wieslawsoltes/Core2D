@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 
 namespace Test2d
 {
@@ -364,7 +365,7 @@ namespace Test2d
             {
                 var group = shape as XGroup;
 
-                foreach (var connector in group.Connectors)
+                foreach (var connector in group.Connectors.Reverse())
                 {
                     if (GetPointBounds(connector, treshold, dx, dy).Contains(p))
                     {
@@ -372,7 +373,7 @@ namespace Test2d
                     }
                 }
 
-                var result = HitTest(group.Shapes, p, treshold, dx, dy);
+                var result = HitTest(group.Shapes.Reverse(), p, treshold, dx, dy);
                 if (result != null)
                 {
                     return shape;
@@ -432,7 +433,7 @@ namespace Test2d
         /// <returns></returns>
         public static BaseShape HitTest(Container container, Vector2 p, double treshold)
         {
-            var result = HitTest(container.CurrentLayer.Shapes, p, treshold, 0, 0);
+            var result = HitTest(container.CurrentLayer.Shapes.Reverse(), p, treshold, 0, 0);
             if (result != null)
             {
                 return result;
@@ -629,7 +630,7 @@ namespace Test2d
             }
             else if (shape is XGroup)
             {
-                if (HitTest((shape as XGroup).Shapes, rect, selection, null, treshold, dx, dy) == true)
+                if (HitTest((shape as XGroup).Shapes.Reverse(), rect, selection, null, treshold, dx, dy) == true)
                 {
                     if (builder != null)
                     {
@@ -714,7 +715,7 @@ namespace Test2d
                 new Vector2(rect.X, rect.Y + rect.Height)
             };
 
-            HitTest(container.CurrentLayer.Shapes, rect, selection, builder, treshold, 0, 0);
+            HitTest(container.CurrentLayer.Shapes.Reverse(), rect, selection, builder, treshold, 0, 0);
 
             return builder.ToImmutableHashSet();
         }

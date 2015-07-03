@@ -1184,6 +1184,26 @@ namespace Test2d
                         () => _editor.ReferenceSelected(),
                         () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
+                _commands.BringToFrontCommand = 
+                    new DelegateCommand(
+                        () => _editor.BringToFrontSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+                
+                _commands.SendToBackCommand = 
+                    new DelegateCommand(
+                        () => _editor.SendToBackSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+                
+                _commands.BringForwardCommand = 
+                    new DelegateCommand(
+                        () => _editor.BringForwardSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+                
+                _commands.SendBackwardCommand = 
+                    new DelegateCommand(
+                        () => _editor.SendBackwardSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+                
                 _commands.ToolNoneCommand = 
                     new DelegateCommand(
                         () => _editor.CurrentTool = Tool.None,
@@ -3764,6 +3784,11 @@ namespace Test2d
             (_commands.GroupLayerCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ReferenceCommand as DelegateCommand).RaiseCanExecuteChanged();
 
+            (_commands.BringToFrontCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.BringForwardCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.SendBackwardCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.SendToBackCommand as DelegateCommand).RaiseCanExecuteChanged();
+                        
             (_commands.ToolNoneCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolSelectionCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolGroupCommand as DelegateCommand).RaiseCanExecuteChanged();

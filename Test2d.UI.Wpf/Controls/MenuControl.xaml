@@ -1,4 +1,4 @@
-﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
 <UserControl x:Class="Test.Controls.MenuControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -69,10 +69,18 @@
             <Separator/>
             <MenuItem Header="Cl_ear All" Command="{Binding Commands.ClearAllCommand}" InputGestureText=""/>
             <Separator/>
-            <MenuItem Header="_Group" Command="{Binding Commands.GroupCommand}" InputGestureText="Ctrl+G"/>
-            <MenuItem Header="Group _Layer" Command="{Binding Commands.GroupLayerCommand}" InputGestureText="Ctrl+Shift+G"/>
-            <Separator/>
-            <MenuItem Header="Re_ference" Command="{Binding Commands.ReferenceCommand}" InputGestureText="Ctrl+R"/>
+            <MenuItem Header="_Grouping">
+                <MenuItem Header="_Group" Command="{Binding Commands.GroupCommand}" InputGestureText="Ctrl+G"/>
+                <MenuItem Header="Group _Layer" Command="{Binding Commands.GroupLayerCommand}" InputGestureText="Ctrl+Shift+G"/>
+                <Separator/>
+                <MenuItem Header="Re_ference" Command="{Binding Commands.ReferenceCommand}" InputGestureText="Ctrl+R"/>
+            </MenuItem>
+            <MenuItem Header="_Order">
+                <MenuItem Header="Bring to Front" Command="{Binding Commands.BringToFrontCommand}" InputGestureText=""/>
+                <MenuItem Header="Bring Forward" Command="{Binding Commands.BringForwardCommand}" InputGestureText=""/>
+                <MenuItem Header="Send Backward" Command="{Binding Commands.SendBackwardCommand}" InputGestureText=""/>
+                <MenuItem Header="Send to Back" Command="{Binding Commands.SendToBackCommand}" InputGestureText=""/>
+            </MenuItem>
         </MenuItem>
         <MenuItem Header="_View">
             <MenuItem Header="_Zoom">
