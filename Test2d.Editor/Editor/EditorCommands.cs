@@ -173,7 +173,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public ICommand GroupLayerCommand { get; set; }
+        public ICommand UngroupCommand { get; set; }
         /// <summary>
         /// 
         /// </summary>

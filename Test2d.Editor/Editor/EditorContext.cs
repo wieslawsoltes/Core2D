@@ -1174,10 +1174,10 @@ namespace Test2d
                         () => _editor.GroupSelected(),
                         () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
-                _commands.GroupLayerCommand = 
+                _commands.UngroupCommand = 
                     new DelegateCommand(
-                        () => _editor.GroupCurrentLayer(),
-                        () => IsEditMode());
+                        () => _editor.UngroupSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
                 _commands.ReferenceCommand =
                     new DelegateCommand(
@@ -3781,7 +3781,7 @@ namespace Test2d
             (_commands.SelectAllCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ClearAllCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.GroupCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.GroupLayerCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.UngroupCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ReferenceCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.BringToFrontCommand as DelegateCommand).RaiseCanExecuteChanged();

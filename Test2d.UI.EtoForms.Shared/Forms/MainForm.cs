@@ -597,6 +597,17 @@ namespace TestEtoForms
                     _context.Commands.ClearAllCommand.Execute(null);
                 };
 
+            var referenceCommand = new Command()
+            {
+                MenuText = "Re&ference",
+                Shortcut = Application.Instance.CommonModifier | Keys.R
+            };
+            referenceCommand.Executed +=
+                (s, e) =>
+                {
+                    _context.Commands.ReferenceCommand.Execute(null);
+                };
+
             var groupCommand = new Command() 
             { 
                 MenuText = "&Group",
@@ -608,26 +619,15 @@ namespace TestEtoForms
                     _context.Commands.GroupCommand.Execute(null);
                 };
 
-            var groupLayerCommand = new Command() 
+            var ungroupCommand = new Command() 
             { 
-                MenuText = "Group &Layer", 
-                Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.G 
+                MenuText = "U&ngroup", 
+                Shortcut = Application.Instance.CommonModifier | Keys.U
             };
-            groupLayerCommand.Executed +=
+            ungroupCommand.Executed +=
                 (s, e) =>
                 {
-                    _context.Commands.GroupLayerCommand.Execute(null);
-                };
-
-            var referenceCommand = new Command()
-            {
-                MenuText = "Re&ference",
-                Shortcut = Application.Instance.CommonModifier | Keys.R
-            };
-            referenceCommand.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.ReferenceCommand.Execute(null);
+                    _context.Commands.UngroupCommand.Execute(null);
                 };
 
             #endregion
@@ -751,10 +751,10 @@ namespace TestEtoForms
                     new SeparatorMenuItem(),
                     clearAllCommand,
                     new SeparatorMenuItem(),
-                    groupCommand,
-                    groupLayerCommand,
+                    referenceCommand,
                     new SeparatorMenuItem(),
-                    referenceCommand
+                    groupCommand,
+                    ungroupCommand
                 }
             };
 

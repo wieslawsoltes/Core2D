@@ -729,16 +729,17 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public void GroupSelected()
+        public XGroup GroupSelected()
         {
+            var shapes = _renderers[0].State.SelectedShapes;
             var layer = _project.CurrentContainer.CurrentLayer;
-            if (_renderers[0].State.SelectedShapes != null)
+            if (shapes != null)
             {
                 // TODO: Group method changes SelectedShapes State properties.
-                var g = XGroup.Group("g", _renderers[0].State.SelectedShapes);
+                var g = XGroup.Group("g", shapes);
 
                 var builder = layer.Shapes.ToBuilder();
-                foreach (var shape in _renderers[0].State.SelectedShapes)
+                foreach (var shape in shapes)
                 {
                     builder.Remove(shape);
                 }
@@ -750,34 +751,97 @@ namespace Test2d
                 layer.Shapes = next;
 
                 Select(_project.CurrentContainer, g);
+
+                return g;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shapes"></param>
+        /// <param name="builder"></param>
+        /// <param name="groupShapes"></param>
+        private void Ungroup(
+            IEnumerable<BaseShape> shapes, 
+            ImmutableArray<BaseShape>.Builder builder, 
+            bool groupShapes)
+        {
+            if (shapes == null)
+                return;
+
+            foreach (var shape in shapes)
+            {
+                if (shape is XGroup)
+                {
+                    var g = shape as XGroup;
+                    Ungroup(g.Shapes, builder, groupShapes: true);
+                    Ungroup(g.Connectors, builder, groupShapes: true);
+                    builder.Remove(g);
+                }
+                else if (groupShapes)
+                {
+                    if (shape is XPoint)
+                    {
+                        shape.State &= 
+                            ~(ShapeState.Connector 
+                            | ShapeState.None 
+                            | ShapeState.Input 
+                            | ShapeState.Output);
+                        shape.State |= ShapeState.Standalone;
+                        builder.Add(shape);
+                    }
+                    else
+                    {
+                        shape.State |= ShapeState.Standalone;
+                        builder.Add(shape);
+                    }
+                }
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void GroupCurrentLayer()
+        public void UngroupSelected()
         {
+            var shapes = _renderers[0].State.SelectedShapes;
+            var shape = _renderers[0].State.SelectedShape;
             var layer = _project.CurrentContainer.CurrentLayer;
-            if (layer.Shapes.Length > 0)
-            {
-                // TODO: Group method changes SelectedShapes State properties.
-                var g = XGroup.Group("g", layer.Shapes);
 
+            if (shape != null && shape is XGroup && layer != null)
+            {
                 var builder = layer.Shapes.ToBuilder();
-                foreach (var shape in layer.Shapes.ToList())
-                {
-                    builder.Remove(shape);
-                }
-                builder.Add(g);
-                layer.Shapes = builder.ToImmutable();
+
+                var g = shape as XGroup;
+                Ungroup(g.Shapes, builder, groupShapes: true);
+                Ungroup(g.Connectors, builder, groupShapes: true);
+                builder.Remove(g);
 
                 var previous = layer.Shapes;
                 var next = builder.ToImmutable();
                 _history.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
-                Select(_project.CurrentContainer, g);
+                _renderers[0].State.SelectedShape = null;
+                layer.Invalidate();
+            }
+
+            if (shapes != null && layer != null)
+            {
+                var builder = layer.Shapes.ToBuilder();
+
+                Ungroup(shapes, builder, groupShapes: false);
+
+                var previous = layer.Shapes;
+                var next = builder.ToImmutable();
+                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+
+                layer.Invalidate();
+                _renderers[0].State.SelectedShapes = null;
             }
         }
 
