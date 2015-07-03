@@ -13,8 +13,6 @@ namespace Test2d
         private string _source;
         private XPathGeometry _geometry;
         private ShapeTransform _transform;
-        private bool _isStroked;
-        private bool _isFilled;
 
         /// <summary>
         /// Gets or sets path source markup used to draw shape.
@@ -43,24 +41,6 @@ namespace Test2d
         {
             get { return _transform; }
             set { Update(ref _transform, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool IsStroked
-        {
-            get { return _isStroked; }
-            set { Update(ref _isStroked, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool IsFilled
-        {
-            get { return _isFilled; }
-            set { Update(ref _isFilled, value); }
         }
 
         /// <summary>
@@ -126,14 +106,14 @@ namespace Test2d
             {
                 Name = name,
                 Style = style,
+                IsStroked = isStroked,
+                IsFilled = isFilled,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
                 Code = ShapeCode.Create(),
                 Source = source,
                 Geometry = geometry,
-                Transform = transform,
-                IsStroked = isStroked,
-                IsFilled = isFilled
+                Transform = transform
             };
         }
     }
