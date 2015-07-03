@@ -159,8 +159,6 @@ namespace Test.Controls
                 var items = (ImmutableArray<T>)this.DataContext;
                 if (items != null)
                 {
-                    var exp = this.GetBindingExpression(ListBox.DataContextProperty);
-
                     var builder = items.ToBuilder();
                     builder.Insert(targetIndex + 1, source);
                     builder.RemoveAt(sourceIndex);
@@ -190,7 +188,6 @@ namespace Test.Controls
             if (items != null)
             {
                 var target = items[targetIndex];
-
                 var builder = items.ToBuilder();
                 builder[targetIndex] = source;
                 builder[sourceIndex] = target;
