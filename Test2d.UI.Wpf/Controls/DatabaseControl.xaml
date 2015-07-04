@@ -38,10 +38,30 @@
                     <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
+            <ComboBox.Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Editor.Project.CurrentDatabase}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ComboBox.Style>
         </ComboBox>
         <Control Template="{StaticResource DatabaseControlTemplateKey}" 
                  DataContext="{Binding Editor.Project.CurrentDatabase}" 
                  Grid.Row="2">
+            <Control.Style>
+                <Style TargetType="Control">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding DataContext.Editor.Project.CurrentDatabase, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Control.Style>
         </Control>
     </Grid>
 </UserControl>
