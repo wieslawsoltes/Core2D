@@ -40,6 +40,8 @@ namespace Test2d
         /// </summary>
         /// <param name="bezier"></param>
         /// <param name="point"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         /// <returns></returns>
         public static bool Contains(XBezier bezier, Vector2 point, double dx, double dy)
         {
@@ -62,6 +64,8 @@ namespace Test2d
         /// </summary>
         /// <param name="qbezier"></param>
         /// <param name="point"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         /// <returns></returns>
         public static bool Contains(XQBezier qbezier, Vector2 point, double dx, double dy)
         {
@@ -82,6 +86,8 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="bezier"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         /// <returns></returns>
         public static Vector2[] GetVertices(XBezier bezier, double dx, double dy)
         {
@@ -103,6 +109,8 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="qbezier"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         /// <returns></returns>
         public static Vector2[] GetVertices(XQBezier qbezier, double dx, double dy)
         {

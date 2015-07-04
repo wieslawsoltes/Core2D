@@ -16,13 +16,16 @@ namespace Test2d
     /// </summary>
     public class Observer
     {
-        public bool IsPaused { get; set; }
-
         private readonly Editor _editor;
         private readonly Action _invalidateContainer;
         private readonly Action _invalidateStyles;
         private readonly Action _invalidateLayers;
         private readonly Action _invalidateShapes;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsPaused { get; set; }
 
         /// <summary>
         /// 

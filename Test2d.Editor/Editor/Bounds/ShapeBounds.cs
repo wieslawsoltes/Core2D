@@ -674,6 +674,8 @@ namespace Test2d
         /// <param name="selection"></param>
         /// <param name="builder"></param>
         /// <param name="treshold"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
         /// <returns></returns>
         private static bool HitTest(
             IEnumerable<BaseShape> shapes, 
