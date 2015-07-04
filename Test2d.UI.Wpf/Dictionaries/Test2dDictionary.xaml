@@ -936,48 +936,6 @@
             </CheckBox>
         </Grid>
     </ControlTemplate>
-    <ControlTemplate x:Key="RadiusControlTemplateKey">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="X" 
-                       Margin="5,2,5,2" 
-                       Grid.Row="0" 
-                       Grid.Column="0" 
-                       TextAlignment="Left" 
-                       VerticalAlignment="Center">
-            </TextBlock>
-            <TextBox Text="{Binding RadiusX, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                     BorderBrush="{x:Null}" 
-                     Margin="5,2,5,2"
-                     Grid.Row="0" 
-                     Grid.Column="1" 
-                     TextAlignment="Left" 
-                     VerticalAlignment="Center">
-            </TextBox>
-            <TextBlock Text="Y" 
-                       Margin="5,2,5,2" 
-                       Grid.Row="1" 
-                       Grid.Column="0" 
-                       TextAlignment="Left" 
-                       VerticalAlignment="Center">
-            </TextBlock>
-            <TextBox Text="{Binding RadiusY, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                     BorderBrush="{x:Null}" 
-                     Margin="5,2,5,2"
-                     Grid.Row="1" 
-                     Grid.Column="1" 
-                     TextAlignment="Left" 
-                     VerticalAlignment="Center">
-            </TextBox>
-        </Grid>
-    </ControlTemplate>
     <ControlTemplate x:Key="TextControlTemplateKey">
         <Grid>
             <Grid.RowDefinitions>
@@ -2424,9 +2382,6 @@
             <Expander Header="BottomRight">
                 <ContentControl Content="{Binding BottomRight}"/>
             </Expander>
-            <Expander Header="Radius">
-                <Control Template="{StaticResource RadiusControlTemplateKey}"/>
-            </Expander>
             <Expander Header="State">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
@@ -2572,9 +2527,6 @@
             </Expander>
             <Expander Header="BottomRight">
                 <ContentControl Content="{Binding BottomRight}"/>
-            </Expander>
-            <Expander Header="Radius">
-                <Control Template="{StaticResource RadiusControlTemplateKey}"/>
             </Expander>
             <Expander Header="State">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
