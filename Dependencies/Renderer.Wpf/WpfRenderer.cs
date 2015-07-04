@@ -129,6 +129,7 @@ namespace Test
         /// 
         /// </summary>
         /// <param name="style"></param>
+        /// <param name="thickness"></param>
         /// <returns></returns>
         private static Pen CreatePen(BaseStyle style, double thickness)
         {
@@ -183,6 +184,7 @@ namespace Test
         /// <param name="dc"></param>
         /// <param name="half"></param>
         /// <param name="pen"></param>
+        /// <param name="isStroked"></param>
         /// <param name="p0"></param>
         /// <param name="p1"></param>
         private static void DrawLineInternal(
@@ -214,6 +216,7 @@ namespace Test
         /// <param name="half"></param>
         /// <param name="brush"></param>
         /// <param name="pen"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="rect"></param>
         private static void DrawRectangleInternal(
@@ -257,6 +260,7 @@ namespace Test
         /// <param name="half"></param>
         /// <param name="brush"></param>
         /// <param name="pen"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="center"></param>
         /// <param name="rx"></param>
@@ -304,6 +308,7 @@ namespace Test
         /// <param name="half"></param>
         /// <param name="brush"></param>
         /// <param name="pen"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="pg"></param>
         private static void DrawPathGeometryInternal(

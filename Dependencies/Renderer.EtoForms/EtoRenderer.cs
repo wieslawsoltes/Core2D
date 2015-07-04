@@ -11,6 +11,9 @@ using Test2d;
 
 namespace TestEtoForms
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class EtoRenderer : ObservableObject, IRenderer
     {
         private bool _enableImageCache = true;
