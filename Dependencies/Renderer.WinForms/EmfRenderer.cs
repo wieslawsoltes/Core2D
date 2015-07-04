@@ -141,15 +141,20 @@ namespace Test2d
         /// </summary>
         /// <param name="gfx"></param>
         /// <param name="pen"></param>
+        /// <param name="isStroked"></param>
         /// <param name="p0"></param>
         /// <param name="p1"></param>
         private static void DrawLineInternal(
             Graphics gfx,
             Pen pen,
+            bool isStroked,
             ref PointF p0,
             ref PointF p1)
         {
-            gfx.DrawLine(pen, p0, p1);
+            if (isStroked)
+            {
+                gfx.DrawLine(pen, p0, p1);
+            }
         }
 
         /// <summary>
@@ -158,12 +163,14 @@ namespace Test2d
         /// <param name="gfx"></param>
         /// <param name="brush"></param>
         /// <param name="pen"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="rect"></param>
         private static void DrawRectangleInternal(
             Graphics gfx,
             Brush brush,
             Pen pen,
+            bool isStroked,
             bool isFilled,
             ref Rect2 rect)
         {
@@ -177,12 +184,15 @@ namespace Test2d
                     (float)rect.Height);
             }
 
-            gfx.DrawRectangle(
-                pen,
-                (float)rect.X,
-                (float)rect.Y,
-                (float)rect.Width,
-                (float)rect.Height);
+            if (isStroked)
+            {
+                gfx.DrawRectangle(
+                    pen,
+                    (float)rect.X,
+                    (float)rect.Y,
+                    (float)rect.Width,
+                    (float)rect.Height);
+            }
         }
 
         /// <summary>
@@ -191,12 +201,14 @@ namespace Test2d
         /// <param name="gfx"></param>
         /// <param name="brush"></param>
         /// <param name="pen"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="rect"></param>
         private static void DrawEllipseInternal(
             Graphics gfx,
             Brush brush,
             Pen pen,
+            bool isStroked,
             bool isFilled,
             ref Rect2 rect)
         {
@@ -210,12 +222,15 @@ namespace Test2d
                     (float)rect.Height);
             }
 
-            gfx.DrawEllipse(
-                pen,
-                (float)rect.X,
-                (float)rect.Y,
-                (float)rect.Width,
-                (float)rect.Height);
+            if (isStroked)
+            {
+                gfx.DrawEllipse(
+                    pen,
+                    (float)rect.X,
+                    (float)rect.Y,
+                    (float)rect.Width,
+                    (float)rect.Height);
+            }
         }
 
         /// <summary>
@@ -359,7 +374,7 @@ namespace Test2d
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
                         var gs = _gfx.Save();
                         _gfx.MultiplyTransform(t1);
-                        DrawRectangleInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsFilled, ref rect);
+                        DrawRectangleInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
                         _gfx.Restore(gs);
                     }
                     break;
@@ -371,7 +386,7 @@ namespace Test2d
                         var gs = _gfx.Save();
                         _gfx.MultiplyTransform(t1);
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        DrawEllipseInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsFilled, ref rect);
+                        DrawEllipseInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
                         _gfx.Restore(gs);
                     }
                     break;
@@ -391,8 +406,8 @@ namespace Test2d
                         var p21 = pts[2];
                         var p12 = pts[3];
                         var p22 = pts[4];
-                        DrawLineInternal(_gfx, strokeStartArrow, ref p11, ref p21);
-                        DrawLineInternal(_gfx, strokeStartArrow, ref p12, ref p22);
+                        DrawLineInternal(_gfx, strokeStartArrow, sas.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(_gfx, strokeStartArrow, sas.IsStroked, ref p12, ref p22);
                     }
                     break;
             }
@@ -418,7 +433,7 @@ namespace Test2d
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
                         var gs = _gfx.Save();
                         _gfx.MultiplyTransform(t2);
-                        DrawRectangleInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsFilled, ref rect);
+                        DrawRectangleInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
                         _gfx.Restore(gs);
                     }
                     break;
@@ -430,7 +445,7 @@ namespace Test2d
                         var gs = _gfx.Save();
                         _gfx.MultiplyTransform(t2);
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        DrawEllipseInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsFilled, ref rect);
+                        DrawEllipseInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
                         _gfx.Restore(gs);
                     }
                     break;
@@ -450,8 +465,8 @@ namespace Test2d
                         var p21 = pts[2];
                         var p12 = pts[3];
                         var p22 = pts[4];
-                        DrawLineInternal(_gfx, strokeEndArrow, ref p11, ref p21);
-                        DrawLineInternal(_gfx, strokeEndArrow, ref p12, ref p22);
+                        DrawLineInternal(_gfx, strokeEndArrow, eas.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(_gfx, strokeEndArrow, eas.IsStroked, ref p12, ref p22);
                     }
                     break;
             }
@@ -499,12 +514,15 @@ namespace Test2d
                     _scaleToPage(rect.Height));
             }
 
-            _gfx.DrawRectangle(
-                pen,
-                _scaleToPage(rect.X),
-                _scaleToPage(rect.Y),
-                _scaleToPage(rect.Width),
-                _scaleToPage(rect.Height));
+            if (rectangle.IsStroked)
+            {
+                _gfx.DrawRectangle(
+                    pen,
+                    _scaleToPage(rect.X),
+                    _scaleToPage(rect.Y),
+                    _scaleToPage(rect.Width),
+                    _scaleToPage(rect.Height));
+            }
 
             brush.Dispose();
             pen.Dispose();
@@ -541,12 +559,15 @@ namespace Test2d
                     _scaleToPage(rect.Height));
             }
 
-            _gfx.DrawEllipse(
-                pen,
-                _scaleToPage(rect.X),
-                _scaleToPage(rect.Y),
-                _scaleToPage(rect.Width),
-                _scaleToPage(rect.Height));
+            if (ellipse.IsStroked)
+            {
+                _gfx.DrawEllipse(
+                    pen,
+                    _scaleToPage(rect.X),
+                    _scaleToPage(rect.Y),
+                    _scaleToPage(rect.Width),
+                    _scaleToPage(rect.Height));
+            }
 
             brush.Dispose();
             pen.Dispose();
@@ -585,14 +606,17 @@ namespace Test2d
                 _gfx.FillPath(brush, path);
             }
 
-            _gfx.DrawArc(
-                pen,
-                _scaleToPage(a.X),
-                _scaleToPage(a.Y),
-                _scaleToPage(a.Width),
-                _scaleToPage(a.Height),
-                (float)a.StartAngle,
-                (float)a.SweepAngle);
+            if (arc.IsStroked)
+            {
+                _gfx.DrawArc(
+                    pen,
+                    _scaleToPage(a.X),
+                    _scaleToPage(a.Y),
+                    _scaleToPage(a.Width),
+                    _scaleToPage(a.Height),
+                    (float)a.StartAngle,
+                    (float)a.SweepAngle);
+            }
 
             brush.Dispose();
             pen.Dispose();
@@ -629,16 +653,19 @@ namespace Test2d
                 _gfx.FillPath(brush, path);
             }
 
-            _gfx.DrawBezier(
-                pen,
-                _scaleToPage(bezier.Point1.X),
-                _scaleToPage(bezier.Point1.Y),
-                _scaleToPage(bezier.Point2.X),
-                _scaleToPage(bezier.Point2.Y),
-                _scaleToPage(bezier.Point3.X),
-                _scaleToPage(bezier.Point3.Y),
-                _scaleToPage(bezier.Point4.X),
-                _scaleToPage(bezier.Point4.Y));
+            if (bezier.IsStroked)
+            {
+                _gfx.DrawBezier(
+                    pen,
+                    _scaleToPage(bezier.Point1.X),
+                    _scaleToPage(bezier.Point1.Y),
+                    _scaleToPage(bezier.Point2.X),
+                    _scaleToPage(bezier.Point2.Y),
+                    _scaleToPage(bezier.Point3.X),
+                    _scaleToPage(bezier.Point3.Y),
+                    _scaleToPage(bezier.Point4.X),
+                    _scaleToPage(bezier.Point4.Y));
+            }
 
             brush.Dispose();
             pen.Dispose();
@@ -683,17 +710,20 @@ namespace Test2d
                     _scaleToPage(y4 + dy));
                 _gfx.FillPath(brush, path);
             }
-            
-            _gfx.DrawBezier(
-                pen,
-                _scaleToPage(x1 + dx), 
-                _scaleToPage(y1 + dy),
-                _scaleToPage(x2 + dx), 
-                _scaleToPage(y2 + dy),
-                _scaleToPage(x3 + dx), 
-                _scaleToPage(y3 + dy),
-                _scaleToPage(x4 + dx), 
-                _scaleToPage(y4 + dy));
+
+            if (qbezier.IsStroked)
+            {
+                _gfx.DrawBezier(
+                    pen,
+                    _scaleToPage(x1 + dx),
+                    _scaleToPage(y1 + dy),
+                    _scaleToPage(x2 + dx),
+                    _scaleToPage(y2 + dy),
+                    _scaleToPage(x3 + dx),
+                    _scaleToPage(y3 + dy),
+                    _scaleToPage(x4 + dx),
+                    _scaleToPage(y4 + dy));
+            }
 
             brush.Dispose();
             pen.Dispose();
@@ -780,7 +810,19 @@ namespace Test2d
 
             if (text.IsFilled)
             {
-                _gfx.FillRectangle(ToSolidBrush(text.Style.Fill), srect);
+                _gfx.FillRectangle(
+                    ToSolidBrush(text.Style.Fill), 
+                    srect);
+            }
+
+            if (text.IsStroked)
+            {
+                _gfx.DrawRectangle(
+                    ToPen(text.Style, _scaleToPage), 
+                    srect.X,
+                    srect.Y,
+                    srect.Width,
+                    srect.Height);
             }
 
             _gfx.DrawString(
@@ -822,7 +864,19 @@ namespace Test2d
 
             if (image.IsFilled)
             {
-                _gfx.FillRectangle(ToSolidBrush(image.Style.Fill), srect);
+                _gfx.FillRectangle(
+                    ToSolidBrush(image.Style.Fill), 
+                    srect);
+            }
+
+            if (image.IsStroked)
+            {
+                _gfx.DrawRectangle(
+                    ToPen(image.Style, _scaleToPage),
+                    srect.X,
+                    srect.Y,
+                    srect.Width,
+                    srect.Height);
             }
 
             if (_enableImageCache
