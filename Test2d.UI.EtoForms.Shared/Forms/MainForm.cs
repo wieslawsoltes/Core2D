@@ -255,8 +255,6 @@ namespace TestEtoForms
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="drawable"></param>
         private void InitializeMenu()
         {
             #region File
