@@ -13,8 +13,6 @@ namespace Test2d
     {
         private XPoint _topLeft;
         private XPoint _bottomRight;
-        private double _radiusX;
-        private double _radiusY;
         private string _text;
 
         /// <summary>
@@ -33,24 +31,6 @@ namespace Test2d
         {
             get { return _bottomRight; }
             set { Update(ref _bottomRight, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double RadiusX
-        {
-            get { return _radiusX; }
-            set { Update(ref _radiusX, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public double RadiusY
-        {
-            get { return _radiusY; }
-            set { Update(ref _radiusY, value); }
         }
 
         /// <summary>
