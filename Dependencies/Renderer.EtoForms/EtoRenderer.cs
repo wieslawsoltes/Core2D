@@ -171,15 +171,20 @@ namespace TestEtoForms
         /// </summary>
         /// <param name="gfx"></param>
         /// <param name="pen"></param>
+        /// <param name="isStroked"></param>
         /// <param name="p0"></param>
         /// <param name="p1"></param>
         private static void DrawLineInternal(
             Graphics gfx,
             Pen pen,
+            bool isStroked,
             ref PointF p0,
             ref PointF p1)
         {
-            gfx.DrawLine(pen, p0, p1);
+            if (isStroked)
+            {
+                gfx.DrawLine(isStroked ? pen : null, p0, p1);
+            }
         }
 
         /// <summary>
@@ -188,12 +193,14 @@ namespace TestEtoForms
         /// <param name="gfx"></param>
         /// <param name="brush"></param>
         /// <param name="pen"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="rect"></param>
         private static void DrawRectangleInternal(
             Graphics gfx,
             Brush brush,
             Pen pen,
+            bool isStroked,
             bool isFilled,
             ref Rect2 rect)
         {
@@ -207,12 +214,15 @@ namespace TestEtoForms
                     (float)rect.Height);
             }
 
-            gfx.DrawRectangle(
-                pen,
-                (float)rect.X,
-                (float)rect.Y,
-                (float)rect.Width,
-                (float)rect.Height);
+            if (isStroked)
+            {
+                gfx.DrawRectangle(
+                    pen,
+                    (float)rect.X,
+                    (float)rect.Y,
+                    (float)rect.Width,
+                    (float)rect.Height);
+            }
         }
 
         /// <summary>
@@ -221,12 +231,14 @@ namespace TestEtoForms
         /// <param name="gfx"></param>
         /// <param name="brush"></param>
         /// <param name="pen"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="rect"></param>
         private static void DrawEllipseInternal(
             Graphics gfx,
             Brush brush,
             Pen pen,
+            bool isStroked,
             bool isFilled,
             ref Rect2 rect)
         {
@@ -240,12 +252,15 @@ namespace TestEtoForms
                     (float)rect.Height);
             }
 
-            gfx.DrawEllipse(
-                pen,
-                (float)rect.X,
-                (float)rect.Y,
-                (float)rect.Width,
-                (float)rect.Height);
+            if (isStroked)
+            {
+                gfx.DrawEllipse(
+                    pen,
+                    (float)rect.X,
+                    (float)rect.Y,
+                    (float)rect.Width,
+                    (float)rect.Height);
+            }
         }
 
         /// <summary>
@@ -387,7 +402,7 @@ namespace TestEtoForms
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
                         _gfx.SaveTransform();
                         _gfx.MultiplyTransform(t1);
-                        DrawRectangleInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsFilled, ref rect);
+                        DrawRectangleInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
                         _gfx.RestoreTransform();
                     }
                     break;
@@ -397,7 +412,7 @@ namespace TestEtoForms
                         _gfx.SaveTransform();
                         _gfx.MultiplyTransform(t1);
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        DrawEllipseInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsFilled, ref rect);
+                        DrawEllipseInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
                         _gfx.RestoreTransform();
                     }
                     break;
@@ -416,8 +431,8 @@ namespace TestEtoForms
                         var p21 = t1.TransformPoint(pts[2]);
                         var p12 = t1.TransformPoint(pts[3]);
                         var p22 = t1.TransformPoint(pts[4]);
-                        DrawLineInternal(_gfx, strokeStartArrow, ref p11, ref p21);
-                        DrawLineInternal(_gfx, strokeStartArrow, ref p12, ref p22);
+                        DrawLineInternal(_gfx, strokeStartArrow, sas.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(_gfx, strokeStartArrow, sas.IsStroked, ref p12, ref p22);
                     }
                     break;
             }
@@ -441,7 +456,7 @@ namespace TestEtoForms
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
                         _gfx.SaveTransform();
                         _gfx.MultiplyTransform(t2);
-                        DrawRectangleInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsFilled, ref rect);
+                        DrawRectangleInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
                         _gfx.RestoreTransform();
                     }
                     break;
@@ -451,7 +466,7 @@ namespace TestEtoForms
                         _gfx.SaveTransform();
                         _gfx.MultiplyTransform(t2);
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        DrawEllipseInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsFilled, ref rect);
+                        DrawEllipseInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
                         _gfx.RestoreTransform();
                     }
                     break;
@@ -470,8 +485,8 @@ namespace TestEtoForms
                         var p21 = t2.TransformPoint(pts[2]);
                         var p12 = t2.TransformPoint(pts[3]);
                         var p22 = t2.TransformPoint(pts[4]);
-                        DrawLineInternal(_gfx, strokeEndArrow, ref p11, ref p21);
-                        DrawLineInternal(_gfx, strokeEndArrow, ref p12, ref p22);
+                        DrawLineInternal(_gfx, strokeEndArrow, eas.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(_gfx, strokeEndArrow, eas.IsStroked, ref p12, ref p22);
                     }
                     break;
             }
@@ -519,12 +534,15 @@ namespace TestEtoForms
                     _scaleToPage(rect.Height));
             }
 
-            _gfx.DrawRectangle(
-                pen,
-                _scaleToPage(rect.X),
-                _scaleToPage(rect.Y),
-                _scaleToPage(rect.Width),
-                _scaleToPage(rect.Height));
+            if (rectangle.IsFilled)
+            {
+                _gfx.DrawRectangle(
+                    pen,
+                    _scaleToPage(rect.X),
+                    _scaleToPage(rect.Y),
+                    _scaleToPage(rect.Width),
+                    _scaleToPage(rect.Height));
+            }
 
             brush.Dispose();
             pen.Dispose();
@@ -561,12 +579,15 @@ namespace TestEtoForms
                     _scaleToPage(rect.Height));
             }
 
-            _gfx.DrawEllipse(
-                pen,
-                _scaleToPage(rect.X),
-                _scaleToPage(rect.Y),
-                _scaleToPage(rect.Width),
-                _scaleToPage(rect.Height));
+            if (ellipse.IsStroked)
+            {
+                _gfx.DrawEllipse(
+                    pen,
+                    _scaleToPage(rect.X),
+                    _scaleToPage(rect.Y),
+                    _scaleToPage(rect.Width),
+                    _scaleToPage(rect.Height));
+            }
 
             brush.Dispose();
             pen.Dispose();
@@ -602,20 +623,29 @@ namespace TestEtoForms
                     _scaleToPage(a.Height),
                     (float)a.StartAngle,
                     (float)a.SweepAngle);
+
                 _gfx.FillPath(brush, path);
-                _gfx.DrawPath(pen, path);
+
+                if (arc.IsStroked)
+                {
+                    _gfx.DrawPath(pen, path);
+                }
+
                 path.Dispose();
             }
             else
             {
-                _gfx.DrawArc(
-                    pen,
-                    _scaleToPage(a.X),
-                    _scaleToPage(a.Y),
-                    _scaleToPage(a.Width),
-                    _scaleToPage(a.Height),
-                    (float)a.StartAngle,
-                    (float)a.SweepAngle);
+                if (arc.IsStroked)
+                {
+                    _gfx.DrawArc(
+                        pen,
+                        _scaleToPage(a.X),
+                        _scaleToPage(a.Y),
+                        _scaleToPage(a.Width),
+                        _scaleToPage(a.Height),
+                        (float)a.StartAngle,
+                        (float)a.SweepAngle);
+                }
             }
 
             brush.Dispose();
@@ -657,9 +687,13 @@ namespace TestEtoForms
             {
                 _gfx.FillPath(brush, path);
             }
-            _gfx.DrawPath(pen, path);
-            path.Dispose();
 
+            if (bezier.IsStroked)
+            {
+                _gfx.DrawPath(pen, path);
+            }
+
+            path.Dispose();
             brush.Dispose();
             pen.Dispose();
         }
@@ -703,13 +737,18 @@ namespace TestEtoForms
                 new PointF(
                     _scaleToPage(x4 + dx),
                     _scaleToPage(y4 + dy)));
+
             if (qbezier.IsFilled)
             {
                 _gfx.FillPath(brush, path);
             }
-            _gfx.DrawPath(pen, path);
-            path.Dispose();
 
+            if (qbezier.IsStroked)
+            {
+                _gfx.DrawPath(pen, path);
+            }
+
+            path.Dispose();
             brush.Dispose();
             pen.Dispose();
         }
@@ -770,7 +809,16 @@ namespace TestEtoForms
 
             if (text.IsFilled)
             {
-                _gfx.FillRectangle(ToSolidBrush(text.Style.Fill), srect);
+                _gfx.FillRectangle(
+                    ToSolidBrush(text.Style.Fill), 
+                    srect);
+            }
+
+            if (text.IsStroked)
+            {
+                _gfx.DrawRectangle(
+                    ToPen(text.Style, _scaleToPage),
+                    srect);
             }
 
             var tbind = text.BindToTextProperty(db, r);
@@ -815,7 +863,16 @@ namespace TestEtoForms
 
             if (image.IsFilled)
             {
-                _gfx.FillRectangle(ToSolidBrush(image.Style.Fill), srect);
+                _gfx.FillRectangle(
+                    ToSolidBrush(image.Style.Fill),
+                    srect);
+            }
+
+            if (image.IsStroked)
+            {
+                _gfx.DrawRectangle(
+                    ToPen(image.Style, _scaleToPage),
+                    srect);
             }
 
             if (_enableImageCache
