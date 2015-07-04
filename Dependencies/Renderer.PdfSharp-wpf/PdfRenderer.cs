@@ -269,15 +269,20 @@ namespace PdfSharp
         /// </summary>
         /// <param name="gfx"></param>
         /// <param name="pen"></param>
+        /// <param name="isStroked"></param>
         /// <param name="p0"></param>
         /// <param name="p1"></param>
         private static void DrawLineInternal(
             XGraphics gfx,
             XPen pen,
+            bool isStroked,
             ref XPoint p0,
             ref XPoint p1)
         {
-            gfx.DrawLine(pen, p0, p1);
+            if (isStroked)
+            {
+                gfx.DrawLine(pen, p0, p1);
+            }
         }
 
         /// <summary>
@@ -286,22 +291,28 @@ namespace PdfSharp
         /// <param name="gfx"></param>
         /// <param name="brush"></param>
         /// <param name="pen"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="rect"></param>
         private static void DrawRectangleInternal(
             XGraphics gfx,
             XSolidBrush brush,
             XPen pen,
+            bool isStroked,
             bool isFilled,
             ref XRect rect)
         {
-            if (isFilled)
+            if (isStroked && isFilled)
             {
                 gfx.DrawRectangle(pen, brush, rect);
             }
-            else
+            else if (isStroked && !isFilled)
             {
                 gfx.DrawRectangle(pen, rect);
+            }
+            else if (!isStroked && isFilled)
+            {
+                gfx.DrawRectangle(brush, rect);
             }
         }
 
@@ -311,22 +322,28 @@ namespace PdfSharp
         /// <param name="gfx"></param>
         /// <param name="brush"></param>
         /// <param name="pen"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="rect"></param>
         private static void DrawEllipseInternal(
             XGraphics gfx,
             XSolidBrush brush,
             XPen pen,
+            bool isStroked,
             bool isFilled,
             ref XRect rect)
         {
-            if (isFilled)
+            if (isStroked && isFilled)
             {
                 gfx.DrawEllipse(pen, brush, rect);
             }
-            else
+            else if (isStroked && !isFilled)
             {
                 gfx.DrawEllipse(pen, rect);
+            }
+            else if (!isStroked && isFilled)
+            {
+                gfx.DrawEllipse(brush, rect);
             }
         }
 
@@ -468,7 +485,7 @@ namespace PdfSharp
                         var rect = new XRect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
                         _gfx.Save();
                         _gfx.RotateAtTransform(a1, c1);
-                        DrawRectangleInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsFilled, ref rect);
+                        DrawRectangleInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
                         _gfx.Restore();
                     }
                     break;
@@ -478,7 +495,7 @@ namespace PdfSharp
                         _gfx.Save();
                         _gfx.RotateAtTransform(a1, c1);
                         var rect = new XRect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        DrawEllipseInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsFilled, ref rect);
+                        DrawEllipseInternal(_gfx, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
                         _gfx.Restore();
                     }
                     break;
@@ -489,8 +506,8 @@ namespace PdfSharp
                         var p21 = t1.Transform(new XPoint(x1, y1));
                         var p12 = t1.Transform(new XPoint(x1 - sizeX1, y1 - sizeY1));
                         var p22 = t1.Transform(new XPoint(x1, y1));
-                        DrawLineInternal(_gfx, strokeStartArrow, ref p11, ref p21);
-                        DrawLineInternal(_gfx, strokeStartArrow, ref p12, ref p22);
+                        DrawLineInternal(_gfx, strokeStartArrow, sas.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(_gfx, strokeStartArrow, sas.IsStroked, ref p12, ref p22);
                     }
                     break;
             }
@@ -514,7 +531,7 @@ namespace PdfSharp
                         var rect = new XRect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
                         _gfx.Save();
                         _gfx.RotateAtTransform(a2, c2);
-                        DrawRectangleInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsFilled, ref rect);
+                        DrawRectangleInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
                         _gfx.Restore();
                     }
                     break;
@@ -524,7 +541,7 @@ namespace PdfSharp
                         _gfx.Save();
                         _gfx.RotateAtTransform(a2, c2);
                         var rect = new XRect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        DrawEllipseInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsFilled, ref rect);
+                        DrawEllipseInternal(_gfx, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
                         _gfx.Restore();
                     }
                     break;
@@ -535,8 +552,8 @@ namespace PdfSharp
                         var p21 = t2.Transform(new XPoint(x2, y2));
                         var p12 = t2.Transform(new XPoint(x2 - sizeX2, y2 - sizeY2));
                         var p22 = t2.Transform(new XPoint(x2, y2));
-                        DrawLineInternal(_gfx, strokeEndArrow, ref p11, ref p21);
-                        DrawLineInternal(_gfx, strokeEndArrow, ref p12, ref p22);
+                        DrawLineInternal(_gfx, strokeEndArrow, eas.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(_gfx, strokeEndArrow, eas.IsStroked, ref p12, ref p22);
                     }
                     break;
             }
@@ -562,7 +579,7 @@ namespace PdfSharp
                 rectangle.BottomRight,
                 dx, dy);
 
-            if (rectangle.IsFilled)
+            if (rectangle.IsStroked && rectangle.IsFilled)
             {
                 _gfx.DrawRectangle(
                     ToXPen(rectangle.Style, _scaleToPage),
@@ -572,10 +589,19 @@ namespace PdfSharp
                     _scaleToPage(rect.Width),
                     _scaleToPage(rect.Height));
             }
-            else
+            else if (rectangle.IsStroked && !rectangle.IsFilled)
             {
                 _gfx.DrawRectangle(
                     ToXPen(rectangle.Style, _scaleToPage),
+                    _scaleToPage(rect.X),
+                    _scaleToPage(rect.Y),
+                    _scaleToPage(rect.Width),
+                    _scaleToPage(rect.Height));
+            }
+            else if (!rectangle.IsStroked && rectangle.IsFilled)
+            {
+                _gfx.DrawRectangle(
+                    ToXSolidBrush(rectangle.Style.Fill),
                     _scaleToPage(rect.X),
                     _scaleToPage(rect.Y),
                     _scaleToPage(rect.Width),
@@ -601,7 +627,7 @@ namespace PdfSharp
                 ellipse.BottomRight,
                 dx, dy);
 
-            if (ellipse.IsFilled)
+            if (ellipse.IsStroked && ellipse.IsFilled)
             {
                 _gfx.DrawEllipse(
                     ToXPen(ellipse.Style, _scaleToPage),
@@ -611,10 +637,19 @@ namespace PdfSharp
                     _scaleToPage(rect.Width),
                     _scaleToPage(rect.Height));
             }
-            else
+            else if (ellipse.IsStroked && !ellipse.IsFilled)
             {
                 _gfx.DrawEllipse(
                     ToXPen(ellipse.Style, _scaleToPage),
+                    _scaleToPage(rect.X),
+                    _scaleToPage(rect.Y),
+                    _scaleToPage(rect.Width),
+                    _scaleToPage(rect.Height));
+            }
+            else if (!ellipse.IsStroked && ellipse.IsFilled)
+            {
+                _gfx.DrawEllipse(
+                    ToXSolidBrush(ellipse.Style.Fill),
                     _scaleToPage(rect.X),
                     _scaleToPage(rect.Y),
                     _scaleToPage(rect.Width),
@@ -648,21 +683,34 @@ namespace PdfSharp
                     _scaleToPage(a.Height),
                     a.StartAngle,
                     a.SweepAngle);
-                _gfx.DrawPath(
-                    ToXPen(arc.Style, _scaleToPage),
-                    ToXSolidBrush(arc.Style.Fill),
-                    path);
+
+                if (arc.IsStroked)
+                {
+                    _gfx.DrawPath(
+                        ToXPen(arc.Style, _scaleToPage),
+                        ToXSolidBrush(arc.Style.Fill),
+                        path);
+                }
+                else
+                {
+                    _gfx.DrawPath(
+                        ToXSolidBrush(arc.Style.Fill),
+                        path);
+                }
             }
             else
             {
-                _gfx.DrawArc(
-                    ToXPen(arc.Style, _scaleToPage),
-                    _scaleToPage(a.X),
-                    _scaleToPage(a.Y),
-                    _scaleToPage(a.Width),
-                    _scaleToPage(a.Height),
-                    a.StartAngle,
-                    a.SweepAngle);
+                if (arc.IsStroked)
+                {
+                    _gfx.DrawArc(
+                        ToXPen(arc.Style, _scaleToPage),
+                        _scaleToPage(a.X),
+                        _scaleToPage(a.Y),
+                        _scaleToPage(a.Width),
+                        _scaleToPage(a.Height),
+                        a.StartAngle,
+                        a.SweepAngle);
+                }
             }
         }
 
@@ -691,23 +739,36 @@ namespace PdfSharp
                     _scaleToPage(bezier.Point3.Y),
                     _scaleToPage(bezier.Point4.X),
                     _scaleToPage(bezier.Point4.Y));
-                _gfx.DrawPath(
-                    ToXPen(bezier.Style, _scaleToPage),
-                    ToXSolidBrush(bezier.Style.Fill),
-                    path);
+
+                if (bezier.IsStroked)
+                {
+                    _gfx.DrawPath(
+                        ToXPen(bezier.Style, _scaleToPage),
+                        ToXSolidBrush(bezier.Style.Fill),
+                        path);
+                }
+                else
+                {
+                    _gfx.DrawPath(
+                        ToXSolidBrush(bezier.Style.Fill),
+                        path);
+                }
             }
             else
             {
-                _gfx.DrawBezier(
-                    ToXPen(bezier.Style, _scaleToPage),
-                    _scaleToPage(bezier.Point1.X),
-                    _scaleToPage(bezier.Point1.Y),
-                    _scaleToPage(bezier.Point2.X),
-                    _scaleToPage(bezier.Point2.Y),
-                    _scaleToPage(bezier.Point3.X),
-                    _scaleToPage(bezier.Point3.Y),
-                    _scaleToPage(bezier.Point4.X),
-                    _scaleToPage(bezier.Point4.Y));
+                if (bezier.IsStroked)
+                {
+                    _gfx.DrawBezier(
+                        ToXPen(bezier.Style, _scaleToPage),
+                        _scaleToPage(bezier.Point1.X),
+                        _scaleToPage(bezier.Point1.Y),
+                        _scaleToPage(bezier.Point2.X),
+                        _scaleToPage(bezier.Point2.Y),
+                        _scaleToPage(bezier.Point3.X),
+                        _scaleToPage(bezier.Point3.Y),
+                        _scaleToPage(bezier.Point4.X),
+                        _scaleToPage(bezier.Point4.Y));
+                }
             }
         }
 
@@ -745,23 +806,36 @@ namespace PdfSharp
                     _scaleToPage(y3 + dy),
                     _scaleToPage(x4 + dx),
                     _scaleToPage(y4 + dy));
-                _gfx.DrawPath(
-                    ToXPen(qbezier.Style, _scaleToPage),
-                    ToXSolidBrush(qbezier.Style.Fill),
-                    path);
+
+                if (qbezier.IsStroked)
+                {
+                    _gfx.DrawPath(
+                        ToXPen(qbezier.Style, _scaleToPage),
+                        ToXSolidBrush(qbezier.Style.Fill),
+                        path);
+                }
+                else
+                {
+                    _gfx.DrawPath(
+                        ToXSolidBrush(qbezier.Style.Fill),
+                        path);
+                }
             }
             else
             {
-                _gfx.DrawBezier(
-                    ToXPen(qbezier.Style, _scaleToPage),
-                    _scaleToPage(x1 + dx), 
-                    _scaleToPage(y1 + dy),
-                    _scaleToPage(x2 + dx), 
-                    _scaleToPage(y2 + dy),
-                    _scaleToPage(x3 + dx), 
-                    _scaleToPage(y3 + dy),
-                    _scaleToPage(x4 + dx), 
-                    _scaleToPage(y4 + dy));
+                if (qbezier.IsStroked)
+                {
+                    _gfx.DrawBezier(
+                        ToXPen(qbezier.Style, _scaleToPage),
+                        _scaleToPage(x1 + dx),
+                        _scaleToPage(y1 + dy),
+                        _scaleToPage(x2 + dx),
+                        _scaleToPage(y2 + dy),
+                        _scaleToPage(x3 + dx),
+                        _scaleToPage(y3 + dy),
+                        _scaleToPage(x4 + dx),
+                        _scaleToPage(y4 + dy));
+                }
             }
         }
 
@@ -847,9 +921,24 @@ namespace PdfSharp
                     break;
             }
 
-            if (text.IsFilled)
+            if (text.IsStroked && text.IsFilled)
             {
-                _gfx.DrawRectangle(ToXSolidBrush(text.Style.Fill), srect);
+                _gfx.DrawRectangle(
+                    ToXPen(text.Style, _scaleToPage),
+                    ToXSolidBrush(text.Style.Fill),
+                    srect);
+            }
+            else if (text.IsStroked && !text.IsFilled)
+            {
+                _gfx.DrawRectangle(
+                    ToXPen(text.Style, _scaleToPage),
+                    srect);
+            }
+            else if (!text.IsStroked && text.IsFilled)
+            {
+                _gfx.DrawRectangle(
+                    ToXSolidBrush(text.Style.Fill), 
+                    srect);
             }
 
             _gfx.DrawString(
@@ -884,9 +973,24 @@ namespace PdfSharp
                 _scaleToPage(rect.Width),
                 _scaleToPage(rect.Height));
 
-            if (image.IsFilled)
+            if (image.IsStroked && image.IsFilled)
             {
-                _gfx.DrawRectangle(ToXSolidBrush(image.Style.Fill), srect);
+                _gfx.DrawRectangle(
+                    ToXPen(image.Style, _scaleToPage),
+                    ToXSolidBrush(image.Style.Fill),
+                    srect);
+            }
+            else if (image.IsStroked && !image.IsFilled)
+            {
+                _gfx.DrawRectangle(
+                    ToXPen(image.Style, _scaleToPage),
+                    srect);
+            }
+            else if (!image.IsStroked && image.IsFilled)
+            {
+                _gfx.DrawRectangle(
+                    ToXSolidBrush(image.Style.Fill),
+                    srect);
             }
 
             if (_enableImageCache
