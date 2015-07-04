@@ -223,9 +223,7 @@ namespace Test
             Pen pen, 
             bool isStroked,
             bool isFilled, 
-            ref Rect rect,
-            double rx = 0.0,
-            double ry = 0.0)
+            ref Rect rect)
         {
             if (_enableGuidelines)
             {
@@ -242,15 +240,11 @@ namespace Test
                         });
                 dc.PushGuidelineSet(gs);
             }
-
-            if (rx > 0.0 || ry > 0.0)
-            {
-                dc.DrawRoundedRectangle(isFilled ? brush : null, isStroked ? pen : null, rect, rx, ry);
-            }
-            else
-            {
-                dc.DrawRectangle(isFilled ? brush : null, isStroked ? pen : null, rect);
-            }
+            
+            dc.DrawRectangle(
+                isFilled ? brush : null, 
+                isStroked ? pen : null, 
+                rect);
 
             if (_enableGuidelines)
                 dc.Pop();
@@ -697,8 +691,7 @@ namespace Test
                 half, 
                 fill, stroke, 
                 rectangle.IsStroked, rectangle.IsFilled, 
-                ref rect, 
-                rectangle.RadiusX, rectangle.RadiusY);
+                ref rect);
         }
 
         /// <summary>
@@ -1034,8 +1027,7 @@ namespace Test
                 half, 
                 fill, stroke, 
                 text.IsStroked, text.IsFilled, 
-                ref rect, 
-                text.RadiusX, text.RadiusY);
+                ref rect);
 
             var tbind = text.BindToTextProperty(db, r);
 
