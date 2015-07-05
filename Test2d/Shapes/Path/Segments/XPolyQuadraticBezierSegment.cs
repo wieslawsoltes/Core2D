@@ -13,7 +13,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public IList<XPathPoint> Points { get; set; }
+        public IList<XPoint> Points { get; set; }
 
         /// <summary>
         /// 
@@ -23,7 +23,7 @@ namespace Test2d
         /// <param name="isSmoothJoin"></param>
         /// <returns></returns>
         public static XPolyQuadraticBezierSegment Create(
-            IList<XPathPoint> points,
+            IList<XPoint> points,
             bool isStroked,
             bool isSmoothJoin)
         {
