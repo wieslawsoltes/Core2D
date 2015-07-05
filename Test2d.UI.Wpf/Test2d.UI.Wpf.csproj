@@ -222,6 +222,7 @@
     <Compile Include="Converters\ArgbColorToBrushMultiConverter.cs" />
     <Compile Include="Converters\ColumnParameterConverter.cs" />
     <Compile Include="Converters\DoubleToStringConverter.cs" />
+    <Compile Include="Converters\EnumToBooleanConverter.cs" />
     <Compile Include="Converters\FlagsEnumConverter.cs" />
     <Compile Include="Converters\ObjectEqualityConverter.cs" />
     <Compile Include="Converters\RecordParameterConverter.cs" />

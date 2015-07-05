@@ -10,6 +10,7 @@
     <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
     <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
     <converters:DoubleToStringConverter x:Key="DoubleToStringConverter"/>
+    <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
     <converters:FlagsEnumConverter x:Key="FontStyleFlagsEnumConverter"/>
     <converters:FlagsEnumConverter x:Key="StateFlagsEnumConverter"/>
     <converters:FlagsEnumConverter x:Key="MagLengthFlagsEnumConverter"/>
