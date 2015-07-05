@@ -1227,7 +1227,14 @@ namespace Test2d
                     new DelegateCommand(
                         () => 
                         {
-                            _editor.CurrentTool = Tool.Line;
+                            if (_editor.CurrentTool == Tool.Path)
+                            {
+                                _editor.CurrentPathTool = PathTool.Line;
+                            }
+                            else
+                            {
+                                _editor.CurrentTool = Tool.Line;
+                            }
                         },
                         () => IsEditMode());
 
@@ -1235,7 +1242,14 @@ namespace Test2d
                     new DelegateCommand(
                         () => 
                         {
-                            _editor.CurrentTool = Tool.Arc;
+                            if (_editor.CurrentTool == Tool.Path)
+                            {
+                                _editor.CurrentPathTool = PathTool.Arc;
+                            }
+                            else
+                            {
+                                _editor.CurrentTool = Tool.Arc;
+                            }
                         },
                         () => IsEditMode());
 
@@ -1243,7 +1257,14 @@ namespace Test2d
                     new DelegateCommand(
                         () => 
                         {
-                            _editor.CurrentTool = Tool.Bezier;
+                            if (_editor.CurrentTool == Tool.Path)
+                            {
+                                _editor.CurrentPathTool = PathTool.Bezier;
+                            }
+                            else
+                            {
+                                _editor.CurrentTool = Tool.Bezier;
+                            }
                         },
                         () => IsEditMode());
 
@@ -1251,13 +1272,45 @@ namespace Test2d
                     new DelegateCommand(
                         () => 
                         {
-                            _editor.CurrentTool = Tool.QBezier;
+                            if (_editor.CurrentTool == Tool.Path)
+                            {
+                                _editor.CurrentPathTool = PathTool.QBezier;
+                            }
+                            else
+                            {
+                                _editor.CurrentTool = Tool.QBezier;
+                            }
                         },
                         () => IsEditMode());
 
                 _commands.ToolPathCommand =
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Path,
+                        () => 
+                        {
+                            if (_editor.CurrentTool == Tool.Path)
+                            {
+                                //switch (_editor.CurrentPathTool)
+                                //{
+                                //    case PathTool.Line:
+                                //        _editor.CurrentTool = Tool.Line;
+                                //        break;
+                                //    case PathTool.Arc:
+                                //        _editor.CurrentTool = Tool.Arc;
+                                //        break;
+                                //    case PathTool.Bezier:
+                                //        _editor.CurrentTool = Tool.Bezier;
+                                //        break;
+                                //    case PathTool.QBezier:
+                                //        _editor.CurrentTool = Tool.QBezier;
+                                //        break;
+                                //}
+                                _editor.CurrentTool = Tool.Selection;
+                            }
+                            else
+                            {
+                                _editor.CurrentTool = Tool.Path;
+                            }
+                        },
                         () => IsEditMode());
 
                 _commands.ToolRectangleCommand =
