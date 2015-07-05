@@ -14,7 +14,11 @@ namespace Test2d
         private double _snapY = 15.0;
         private double _hitTreshold = 7.0;
         private MoveMode _moveMode = MoveMode.Point;
+        private bool _defaultIsStroked = true;
         private bool _defaultIsFilled = false;
+        private bool _defaultIsClosed = true;
+        private bool _defaultIsSmoothJoin = true;
+        private XFillRule _defaultFillRule = XFillRule.EvenOdd;
         private bool _tryToConnect = false;
         private int _cycleResolution;
         private BaseShape _pointShape;
@@ -67,12 +71,48 @@ namespace Test2d
         }
 
         /// <summary>
-        /// Gets or sets value indicating whether shape is filled during creation.
+        /// Gets or sets value indicating whether path/shape is stroked during creation.
+        /// </summary>
+        public bool DefaultIsStroked
+        {
+            get { return _defaultIsStroked; }
+            set { Update(ref _defaultIsStroked, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets value indicating whether path/shape is filled during creation.
         /// </summary>
         public bool DefaultIsFilled
         {
             get { return _defaultIsFilled; }
             set { Update(ref _defaultIsFilled, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets value indicating whether path is closed during creation.
+        /// </summary>
+        public bool DefaultIsClosed
+        {
+            get { return _defaultIsClosed; }
+            set { Update(ref _defaultIsClosed, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets value indicating whether path segment is smooth join during creation.
+        /// </summary>
+        public bool DefaultIsSmoothJoin
+        {
+            get { return _defaultIsSmoothJoin; }
+            set { Update(ref _defaultIsSmoothJoin, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets value indicating path fill rule during creation.
+        /// </summary>
+        public XFillRule DefaultFillRule
+        {
+            get { return _defaultFillRule; }
+            set { Update(ref _defaultFillRule, value); }
         }
 
         /// <summary>
@@ -133,7 +173,11 @@ namespace Test2d
                 SnapY = 15.0,
                 HitTreshold = 7.0,
                 MoveMode = MoveMode.Point,
+                DefaultIsStroked = true,
                 DefaultIsFilled = false,
+                DefaultIsClosed = true,
+                DefaultIsSmoothJoin = true,
+                DefaultFillRule = XFillRule.EvenOdd,
                 TryToConnect = false,
                 CycleResolution = 100
             };
