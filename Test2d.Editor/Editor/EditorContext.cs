@@ -1225,32 +1225,49 @@ namespace Test2d
 
                 _commands.ToolLineCommand = 
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Line,
-                        () => IsEditMode());
-
-                _commands.ToolRectangleCommand = 
-                    new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Rectangle,
-                        () => IsEditMode());
-
-                _commands.ToolEllipseCommand = 
-                    new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Ellipse,
+                        () => 
+                        {
+                            _editor.CurrentTool = Tool.Line;
+                        },
                         () => IsEditMode());
 
                 _commands.ToolArcCommand = 
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Arc,
+                        () => 
+                        {
+                            _editor.CurrentTool = Tool.Arc;
+                        },
                         () => IsEditMode());
 
                 _commands.ToolBezierCommand = 
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Bezier,
+                        () => 
+                        {
+                            _editor.CurrentTool = Tool.Bezier;
+                        },
                         () => IsEditMode());
 
                 _commands.ToolQBezierCommand = 
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.QBezier,
+                        () => 
+                        {
+                            _editor.CurrentTool = Tool.QBezier;
+                        },
+                        () => IsEditMode());
+
+                _commands.ToolPathCommand =
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.Path,
+                        () => IsEditMode());
+
+                _commands.ToolRectangleCommand =
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.Rectangle,
+                        () => IsEditMode());
+
+                _commands.ToolEllipseCommand =
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.Ellipse,
                         () => IsEditMode());
 
                 _commands.ToolTextCommand = 
@@ -1261,11 +1278,6 @@ namespace Test2d
                 _commands.ToolImageCommand = 
                     new DelegateCommand(
                         () => _editor.CurrentTool = Tool.Image,
-                        () => IsEditMode());
-
-                _commands.ToolPathCommand = 
-                    new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Path,
                         () => IsEditMode());
 
                 _commands.EvalScriptCommand = 
@@ -3793,14 +3805,15 @@ namespace Test2d
             (_commands.ToolGroupCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolPointCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolLineCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolRectangleCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolEllipseCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolArcCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolBezierCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolQBezierCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolRectangleCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolEllipseCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolPathCommand as DelegateCommand).RaiseCanExecuteChanged();
+
             (_commands.ToolTextCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolImageCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolPathCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.EvalCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.EvalScriptCommand as DelegateCommand<string>).RaiseCanExecuteChanged();
