@@ -25,7 +25,7 @@ namespace Test2d
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        public static XPathSize Create(double width, double height)
+        public static XPathSize Create(double width = 0.0, double height = 0.0)
         {
             return new XPathSize()
             {
