@@ -532,10 +532,9 @@ namespace Test2d
         private void AddDatabaseCommandHandler()
         {
             var builder = ImmutableArray.CreateBuilder<Column>();
-            for (int i = 0; i < 4; i++)
-            {
-                builder.Add(Column.Create("Column" + i));
-            }
+            builder.Add(Column.Create("Column0"));
+            builder.Add(Column.Create("Column1"));
+
             var db = Database.Create("New", builder.ToImmutable());
 
             var previous = _editor.Project.Databases;
