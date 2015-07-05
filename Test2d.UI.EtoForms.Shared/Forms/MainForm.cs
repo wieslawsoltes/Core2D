@@ -416,28 +416,6 @@ namespace TestEtoForms
                     _context.Commands.ToolLineCommand.Execute(null);
                 };
 
-            var rectangleTool = new Command()
-            { 
-                MenuText = "&Rectangle",
-                Shortcut = Keys.R 
-            };
-            rectangleTool.Executed += 
-                (s, e) =>
-                {
-                    _context.Commands.ToolRectangleCommand.Execute(null);
-                };
-
-            var ellipseTool = new Command() 
-            { 
-                MenuText = "&Ellipse", 
-                Shortcut = Keys.E 
-            };
-            ellipseTool.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.ToolEllipseCommand.Execute(null);
-                };
-
             var arcTool = new Command() 
             { 
                 MenuText = "&Arc", 
@@ -471,6 +449,39 @@ namespace TestEtoForms
                     _context.Commands.ToolQBezierCommand.Execute(null);
                 };
 
+            var pathTool = new Command()
+            {
+                MenuText = "Pat&h",
+                Shortcut = Keys.H
+            };
+            pathTool.Executed +=
+                (s, e) =>
+                {
+                    _context.Commands.ToolPathCommand.Execute(null);
+                };
+
+            var rectangleTool = new Command()
+            {
+                MenuText = "&Rectangle",
+                Shortcut = Keys.R
+            };
+            rectangleTool.Executed +=
+                (s, e) =>
+                {
+                    _context.Commands.ToolRectangleCommand.Execute(null);
+                };
+
+            var ellipseTool = new Command()
+            {
+                MenuText = "&Ellipse",
+                Shortcut = Keys.E
+            };
+            ellipseTool.Executed +=
+                (s, e) =>
+                {
+                    _context.Commands.ToolEllipseCommand.Execute(null);
+                };
+
             var textTool = new Command() 
             { 
                 MenuText = "&Text", 
@@ -491,17 +502,6 @@ namespace TestEtoForms
                 (s, e) =>
                 {
                     _context.Commands.ToolImageCommand.Execute(null);
-                };
-
-            var pathTool = new Command()
-            {
-                MenuText = "Pat&h",
-                Shortcut = Keys.H
-            };
-            pathTool.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.ToolPathCommand.Execute(null);
                 };
 
             #endregion
@@ -768,18 +768,18 @@ namespace TestEtoForms
                     pointTool,
                     new SeparatorMenuItem(),
                     lineTool,
-                    rectangleTool,
-                    ellipseTool,
-                    new SeparatorMenuItem(),
                     arcTool,
                     bezierTool,
                     qbezierTool,
                     new SeparatorMenuItem(),
+                    pathTool,
+                    new SeparatorMenuItem(),
+                    rectangleTool,
+                    ellipseTool,
+                    new SeparatorMenuItem(),
                     textTool,
                     new SeparatorMenuItem(),
-                    imageTool,
-                    new SeparatorMenuItem(),
-                    pathTool
+                    imageTool
                 }
             };
 
