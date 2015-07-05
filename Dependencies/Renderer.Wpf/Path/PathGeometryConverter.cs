@@ -21,12 +21,12 @@ namespace Test
         /// </summary>
         /// <param name="points"></param>
         /// <returns></returns>
-        public static IList<XPathPoint> ToXPoints(this IList<Point> points)
+        public static IList<XPoint> ToXPoints(this IList<Point> points)
         {
-            var xpoints = new List<XPathPoint>();
+            var xpoints = new List<XPoint>();
             foreach (var point in points)
             {
-                xpoints.Add(XPathPoint.Create(point.X, point.Y));
+                xpoints.Add(XPoint.Create(point.X, point.Y));
             }
             return xpoints;
         }
@@ -46,7 +46,7 @@ namespace Test
             foreach (var pf in pg.Figures)
             {
                 xpg.BeginFigure(
-                    XPathPoint.Create(pf.StartPoint.X, pf.StartPoint.Y),
+                    XPoint.Create(pf.StartPoint.X, pf.StartPoint.Y),
                     pf.IsFilled,
                     pf.IsClosed);
 
@@ -56,7 +56,7 @@ namespace Test
                     {
                         var arcSegment = segment as ArcSegment;
                         xpg.ArcTo(
-                            XPathPoint.Create(arcSegment.Point.X, arcSegment.Point.Y),
+                            XPoint.Create(arcSegment.Point.X, arcSegment.Point.Y),
                             XPathSize.Create(arcSegment.Size.Width, arcSegment.Size.Height),
                             arcSegment.RotationAngle,
                             arcSegment.IsLargeArc,
@@ -68,9 +68,9 @@ namespace Test
                     {
                         var bezierSegment = segment as BezierSegment;
                         xpg.BezierTo(
-                            XPathPoint.Create(bezierSegment.Point1.X, bezierSegment.Point1.Y),
-                            XPathPoint.Create(bezierSegment.Point2.X, bezierSegment.Point2.Y),
-                            XPathPoint.Create(bezierSegment.Point3.X, bezierSegment.Point3.Y),
+                            XPoint.Create(bezierSegment.Point1.X, bezierSegment.Point1.Y),
+                            XPoint.Create(bezierSegment.Point2.X, bezierSegment.Point2.Y),
+                            XPoint.Create(bezierSegment.Point3.X, bezierSegment.Point3.Y),
                             bezierSegment.IsStroked,
                             bezierSegment.IsSmoothJoin);
                     }
@@ -78,7 +78,7 @@ namespace Test
                     {
                         var lineSegment = segment as LineSegment;
                         xpg.LineTo(
-                            XPathPoint.Create(lineSegment.Point.X, lineSegment.Point.Y),
+                            XPoint.Create(lineSegment.Point.X, lineSegment.Point.Y),
                             lineSegment.IsStroked,
                             lineSegment.IsSmoothJoin);
                     }
@@ -110,8 +110,8 @@ namespace Test
                     {
                         var qbezierSegment = segment as QuadraticBezierSegment;
                         xpg.QuadraticBezierTo(
-                            XPathPoint.Create(qbezierSegment.Point1.X, qbezierSegment.Point1.Y),
-                            XPathPoint.Create(qbezierSegment.Point2.X, qbezierSegment.Point2.Y),
+                            XPoint.Create(qbezierSegment.Point1.X, qbezierSegment.Point1.Y),
+                            XPoint.Create(qbezierSegment.Point2.X, qbezierSegment.Point2.Y),
                             qbezierSegment.IsStroked,
                             qbezierSegment.IsSmoothJoin);
                     }
