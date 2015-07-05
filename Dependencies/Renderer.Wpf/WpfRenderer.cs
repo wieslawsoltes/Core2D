@@ -1251,8 +1251,8 @@ namespace Test
             Tuple<string, XPathGeometry, StreamGeometry, TransformGroupHelper, ShapeStyle> pcache = null;
             StreamGeometry sg;
             TransformGroupHelper tgh;
-    
-            if (_enableTextCache
+
+            if (_enablePathCache
                 && _pathCache.TryGetValue(path, out pcache)
                 && string.Compare(pcache.Item1, path.Source) == 0
                 && pcache.Item2 == path.Geometry
