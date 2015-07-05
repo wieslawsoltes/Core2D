@@ -1029,7 +1029,7 @@ namespace PdfSharp
             var _gfx = gfx as XGraphics;
             var pg = path.Geometry;
             var gp = new XGraphicsPath();
-            gp.FillMode = pg.FillRule == Test2d.XFillRule.EvenOdd ? XFillMode.Winding : XFillMode.Alternate;
+            gp.FillMode = pg.FillRule == Test2d.XFillRule.EvenOdd ? XFillMode.Alternate : XFillMode.Winding;
 
             foreach (var pf in pg.Figures)
             {
