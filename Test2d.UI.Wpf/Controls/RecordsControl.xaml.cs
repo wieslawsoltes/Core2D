@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -62,6 +63,12 @@ namespace Test.Controls
             DataContextChanged += 
                 (sender, e) =>
                 {
+                    var old = e.OldValue as Database;
+                    if (old != null)
+                    {
+                        StopObservingColumns(old);
+                    }
+
                     InitializeColumnsView();
                 };
 
@@ -78,30 +85,8 @@ namespace Test.Controls
             if (database != null)
             {
                 listView.View = CreateColumnsView(database.Columns);
-
-                // TODO: Update ListView when database Columns change.
-                /*
-                if (database.Columns != null)
-                {
-                    foreach (var column in database.Columns)
-                    {
-                        column.PropertyChanged +=
-                            (s, e) =>
-                            {
-                                InitializeColumnsView();
-                            };
-                    }
-
-                    database.PropertyChanged +=
-                        (s, e) =>
-                        {
-                            if (e.PropertyName == "Columns")
-                            {
-                                InitializeColumnsView();
-                            }
-                        };
-                }
-                */
+                StopObservingColumns(database);
+                StartObservingColumns(database);
             }
         }
 
@@ -124,24 +109,92 @@ namespace Test.Controls
             {
                 if (column.IsVisible)
                 {
-                    gv.Columns.Add(
-                        new GridViewColumn 
-                        { 
-                            Header = column.Name, 
-                            Width = column.Width,
-                            DisplayMemberBinding = new Binding("Values[" + i + "].Content")
-                        });
+                    var gvc = new GridViewColumn 
+                    { 
+                        Header = column.Name, 
+                        Width = column.Width,
+                        DisplayMemberBinding = new Binding("Values[" + i + "].Content")
+                    };
+                    gv.Columns.Add(gvc);
                 }
                 i++;
             }
+
             return gv;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ColumnObserver(object sender, PropertyChangedEventArgs e)
+        {
+            InitializeColumnsView();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DatabaseObserver(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Columns")
+            {
+                InitializeColumnsView();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="database"></param>
+        private void StartObservingColumns(Database database)
+        {
+            if (database == null || database.Columns == null)
+                return;
+
+            foreach (var column in database.Columns)
+            {
+                column.PropertyChanged += ColumnObserver;
+            }
+
+            database.PropertyChanged += DatabaseObserver;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="database"></param>
+        private void StopObservingColumns(Database database)
+        {
+            if (database == null || database.Columns == null)
+                return;
+
+            foreach (var column in database.Columns)
+            {
+                column.PropertyChanged -= ColumnObserver;
+            }
+
+            database.PropertyChanged -= DatabaseObserver;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             dragStartPoint = e.GetPosition(null);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListView_PreviewMouseMove(object sender, MouseEventArgs e)
         {
             Point point = e.GetPosition(null);
