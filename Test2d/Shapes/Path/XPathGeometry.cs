@@ -54,7 +54,7 @@ namespace Test2d
         /// <param name="isFilled"></param>
         /// <param name="isClosed"></param>
         public void BeginFigure(
-            XPathPoint startPoint,
+            XPoint startPoint,
             bool isFilled,
             bool isClosed)
         {
@@ -77,7 +77,7 @@ namespace Test2d
         /// <param name="isStroked"></param>
         /// <param name="isSmoothJoin"></param>
         public void ArcTo(
-            XPathPoint point,
+            XPoint point,
             XPathSize size,
             double rotationAngle,
             bool isLargeArc,
@@ -105,9 +105,9 @@ namespace Test2d
         /// <param name="isStroked"></param>
         /// <param name="isSmoothJoin"></param>
         public void BezierTo(
-            XPathPoint point1,
-            XPathPoint point2,
-            XPathPoint point3,
+            XPoint point1,
+            XPoint point2,
+            XPoint point3,
             bool isStroked,
             bool isSmoothJoin)
         {
@@ -127,7 +127,7 @@ namespace Test2d
         /// <param name="isStroked"></param>
         /// <param name="isSmoothJoin"></param>
         public void LineTo(
-            XPathPoint point,
+            XPoint point,
             bool isStroked,
             bool isSmoothJoin)
         {
@@ -145,7 +145,7 @@ namespace Test2d
         /// <param name="isStroked"></param>
         /// <param name="isSmoothJoin"></param>
         public void PolyBezierTo(
-            IList<XPathPoint> points,
+            IList<XPoint> points,
             bool isStroked,
             bool isSmoothJoin)
         {
@@ -163,7 +163,7 @@ namespace Test2d
         /// <param name="isStroked"></param>
         /// <param name="isSmoothJoin"></param>
         public void PolyLineTo(
-            IList<XPathPoint> points,
+            IList<XPoint> points,
             bool isStroked,
             bool isSmoothJoin)
         {
@@ -181,7 +181,7 @@ namespace Test2d
         /// <param name="isStroked"></param>
         /// <param name="isSmoothJoin"></param>
         public void PolyQuadraticBezierTo(
-            IList<XPathPoint> points,
+            IList<XPoint> points,
             bool isStroked,
             bool isSmoothJoin)
         {
@@ -200,8 +200,8 @@ namespace Test2d
         /// <param name="isStroked"></param>
         /// <param name="isSmoothJoin"></param>
         public void QuadraticBezierTo(
-            XPathPoint point1,
-            XPathPoint point2,
+            XPoint point1,
+            XPoint point2,
             bool isStroked,
             bool isSmoothJoin)
         {

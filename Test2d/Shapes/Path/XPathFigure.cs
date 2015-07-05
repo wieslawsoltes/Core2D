@@ -13,7 +13,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public XPathPoint StartPoint { get; set; }
+        public XPoint StartPoint { get; set; }
 
         /// <summary>
         /// 
@@ -39,7 +39,7 @@ namespace Test2d
         /// <param name="isClosed"></param>
         /// <returns></returns>
         public static XPathFigure Create(
-            XPathPoint startPoint,
+            XPoint startPoint,
             IList<XPathSegment> segments,
             bool isFilled,
             bool isClosed)
