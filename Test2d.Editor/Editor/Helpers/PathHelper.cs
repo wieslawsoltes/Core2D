@@ -14,8 +14,8 @@ namespace Test2d
     public class PathHelper : Helper
     {
         private Editor _editor;
-        private State _currentState = State.None;
-        private XPath _shape;
+        //private State _currentState = State.None;
+        //private XPath _shape;
 
         /// <summary>
         /// 
@@ -33,21 +33,36 @@ namespace Test2d
         /// <param name="y"></param>
         public override void LeftDown(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
-            switch (_currentState)
+            //double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            //double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            //switch (_currentState)
+            //{
+            //    case State.None:
+            //        {
+            //            var transform = ShapeTransform.Create(offsetX: sx, offsetY: sy);
+            //            _shape = XPath.Create(
+            //                "Path", 
+            //                _editor.Project.CurrentStyleLibrary.CurrentStyle, 
+            //                null, null, 
+            //                transform, 
+            //                true, true);
+            //            _editor.AddWithHistory(_shape);
+            //        }
+            //        break;
+            //}
+            switch(_editor.CurrentPathTool)
             {
-                case State.None:
-                    {
-                        var transform = ShapeTransform.Create(offsetX: sx, offsetY: sy);
-                        _shape = XPath.Create(
-                            "Path", 
-                            _editor.Project.CurrentStyleLibrary.CurrentStyle, 
-                            null, null, 
-                            transform, 
-                            true, true);
-                        _editor.AddWithHistory(_shape);
-                    }
+                case PathTool.Line:
+                    _editor.LineHelper.LeftDown(x, y);
+                    break;
+                case PathTool.Arc:
+                    _editor.ArcHelper.LeftDown(x, y);
+                    break;
+                case PathTool.Bezier:
+                    _editor.BezierHelper.LeftDown(x, y);
+                    break;
+                case PathTool.QBezier:
+                    _editor.QBezierHelper.LeftDown(x, y);
                     break;
             }
         }
@@ -59,8 +74,23 @@ namespace Test2d
         /// <param name="y"></param>
         public override void LeftUp(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            //double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            //double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            switch (_editor.CurrentPathTool)
+            {
+                case PathTool.Line:
+                    _editor.LineHelper.LeftUp(x, y);
+                    break;
+                case PathTool.Arc:
+                    _editor.ArcHelper.LeftUp(x, y);
+                    break;
+                case PathTool.Bezier:
+                    _editor.BezierHelper.LeftUp(x, y);
+                    break;
+                case PathTool.QBezier:
+                    _editor.QBezierHelper.LeftUp(x, y);
+                    break;
+            }
         }
 
         /// <summary>
@@ -70,11 +100,26 @@ namespace Test2d
         /// <param name="y"></param>
         public override void RightDown(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
-            switch (_currentState)
+            //double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            //double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            //switch (_currentState)
+            //{
+            //    case State.None:
+            //        break;
+            //}
+            switch (_editor.CurrentPathTool)
             {
-                case State.None:
+                case PathTool.Line:
+                    _editor.LineHelper.RightDown(x, y);
+                    break;
+                case PathTool.Arc:
+                    _editor.ArcHelper.RightDown(x, y);
+                    break;
+                case PathTool.Bezier:
+                    _editor.BezierHelper.RightDown(x, y);
+                    break;
+                case PathTool.QBezier:
+                    _editor.QBezierHelper.RightDown(x, y);
                     break;
             }
         }
@@ -86,8 +131,23 @@ namespace Test2d
         /// <param name="y"></param>
         public override void RightUp(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            //double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            //double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            switch (_editor.CurrentPathTool)
+            {
+                case PathTool.Line:
+                    _editor.LineHelper.RightUp(x, y);
+                    break;
+                case PathTool.Arc:
+                    _editor.ArcHelper.RightUp(x, y);
+                    break;
+                case PathTool.Bezier:
+                    _editor.BezierHelper.RightUp(x, y);
+                    break;
+                case PathTool.QBezier:
+                    _editor.QBezierHelper.RightUp(x, y);
+                    break;
+            }
         }
 
         /// <summary>
@@ -97,17 +157,32 @@ namespace Test2d
         /// <param name="y"></param>
         public override void Move(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
-            switch (_currentState)
+            //double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            //double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            //switch (_currentState)
+            //{
+            //    case State.None:
+            //        {
+            //            if (_editor.Project.Options.TryToConnect)
+            //            {
+            //                _editor.TryToHoverShape(sx, sy);
+            //            }
+            //        }
+            //        break;
+            //}
+            switch (_editor.CurrentPathTool)
             {
-                case State.None:
-                    {
-                        if (_editor.Project.Options.TryToConnect)
-                        {
-                            _editor.TryToHoverShape(sx, sy);
-                        }
-                    }
+                case PathTool.Line:
+                    _editor.LineHelper.Move(x, y);
+                    break;
+                case PathTool.Arc:
+                    _editor.ArcHelper.Move(x, y);
+                    break;
+                case PathTool.Bezier:
+                    _editor.BezierHelper.Move(x, y);
+                    break;
+                case PathTool.QBezier:
+                    _editor.QBezierHelper.Move(x, y);
                     break;
             }
         }
