@@ -2732,9 +2732,13 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
@@ -2779,7 +2783,7 @@
                 VerticalAlignment="Center">
             </TextBlock>
             <TextBlock 
-                Text="DefaultIsFilled" 
+                Text="DefaultIsStroked" 
                 Margin="5,2,5,2" 
                 Grid.Row="5"
                 Grid.Column="0" 
@@ -2787,7 +2791,7 @@
                 VerticalAlignment="Center">
             </TextBlock>
             <TextBlock 
-                Text="TryToConnect" 
+                Text="DefaultIsFilled" 
                 Margin="5,2,5,2" 
                 Grid.Row="6"
                 Grid.Column="0" 
@@ -2795,9 +2799,41 @@
                 VerticalAlignment="Center">
             </TextBlock>
             <TextBlock 
-                Text="CycleResolution" 
+                Text="DefaultIsClosed" 
                 Margin="5,2,5,2" 
                 Grid.Row="7"
+                Grid.Column="0" 
+                TextAlignment="Left" 
+                VerticalAlignment="Center">
+            </TextBlock>
+            <TextBlock 
+                Text="DefaultIsSmoothJoin" 
+                Margin="5,2,5,2" 
+                Grid.Row="8"
+                Grid.Column="0" 
+                TextAlignment="Left" 
+                VerticalAlignment="Center">
+            </TextBlock>
+            <TextBlock 
+                Text="DefaultFillRule" 
+                Margin="5,2,5,2" 
+                Grid.Row="9"
+                Grid.Column="0" 
+                TextAlignment="Left" 
+                VerticalAlignment="Center">
+            </TextBlock>
+            <TextBlock 
+                Text="TryToConnect" 
+                Margin="5,2,5,2" 
+                Grid.Row="10"
+                Grid.Column="0" 
+                TextAlignment="Left" 
+                VerticalAlignment="Center">
+            </TextBlock>
+            <TextBlock 
+                Text="CycleResolution" 
+                Margin="5,2,5,2" 
+                Grid.Row="11"
                 Grid.Column="0" 
                 TextAlignment="Left" 
                 VerticalAlignment="Center">
@@ -2850,7 +2886,7 @@
             </ComboBox>
             <CheckBox 
                 Content=""
-                IsChecked="{Binding DefaultIsFilled}"
+                IsChecked="{Binding DefaultIsStroked}"
                 Grid.Row="5" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="2"
@@ -2858,8 +2894,40 @@
             </CheckBox>
             <CheckBox 
                 Content=""
-                IsChecked="{Binding TryToConnect}"
+                IsChecked="{Binding DefaultIsFilled}"
                 Grid.Row="6" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2"
+                Margin="5,2,5,2">
+            </CheckBox>
+            <CheckBox 
+                Content=""
+                IsChecked="{Binding DefaultIsClosed}"
+                Grid.Row="7" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2"
+                Margin="5,2,5,2">
+            </CheckBox>
+            <CheckBox 
+                Content=""
+                IsChecked="{Binding DefaultIsSmoothJoin}"
+                Grid.Row="8" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2"
+                Margin="5,2,5,2">
+            </CheckBox>
+            <ComboBox 
+                ItemsSource="{Binding Source={StaticResource ResourceKey=XFillRuleValues}}" 
+                SelectedItem="{Binding DefaultFillRule}" 
+                Margin="5,2,5,2" 
+                Grid.Row="9" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2">
+            </ComboBox>
+            <CheckBox 
+                Content=""
+                IsChecked="{Binding TryToConnect}"
+                Grid.Row="10" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="2"
                 Margin="5,2,5,2">
@@ -2868,7 +2936,7 @@
                 Text="{Binding CycleResolution, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                 BorderBrush="{x:Null}" 
                 Margin="5,2,5,2"
-                Grid.Row="7" 
+                Grid.Row="11" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="2"
                 TextAlignment="Center" 
