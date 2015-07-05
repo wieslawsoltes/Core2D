@@ -29,7 +29,8 @@ namespace Test
         private bool _enableQBezierCache = true;
         private bool _enableTextCache = true;
         private bool _enableImageCache = true;
-        private bool _enablePathCache = true;
+        // TODO: Enable XPath caching. Cache is disabled to enable PathHelper to work.
+        private bool _enablePathCache = false;
         private IDictionary<ShapeStyle, Tuple<Brush, Pen>> _styleCache;
         private IDictionary<ArrowStyle, Tuple<Brush, Pen>> _arrowStyleCache;
         private IDictionary<XArc, PathGeometry> _arcCache;
@@ -1275,7 +1276,8 @@ namespace Test
                     path.Geometry = xpg;
                 }
 
-                if (path.Geometry != null && string.IsNullOrEmpty(path.Source))
+                // TODO: When (path.Source != null) ToSource call only needed to enable PathHelper to work.
+                if (path.Geometry != null /* && string.IsNullOrEmpty(path.Source) */)
                 {
                     path.Source = path.Geometry.ToSource();
                 }
