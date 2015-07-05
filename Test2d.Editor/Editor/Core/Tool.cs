@@ -32,14 +32,6 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        Rectangle,
-        /// <summary>
-        /// 
-        /// </summary>
-        Ellipse,
-        /// <summary>
-        /// 
-        /// </summary>
         Arc,
         /// <summary>
         /// 
@@ -52,14 +44,22 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        Path,
+        /// <summary>
+        /// 
+        /// </summary>
+        Rectangle,
+        /// <summary>
+        /// 
+        /// </summary>
+        Ellipse,
+        /// <summary>
+        /// 
+        /// </summary>
         Text,
         /// <summary>
         /// 
         /// </summary>
-        Image,
-        /// <summary>
-        /// 
-        /// </summary>
-        Path
+        Image
     }
 }
