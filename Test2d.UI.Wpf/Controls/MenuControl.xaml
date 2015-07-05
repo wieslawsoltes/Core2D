@@ -167,33 +167,6 @@
                     </Style>
                 </MenuItem.Style>
             </MenuItem>
-            <MenuItem Header="_Rectangle" Command="{Binding Commands.ToolRectangleCommand}" InputGestureText="R">
-                <MenuItem.Style>
-                    <Style TargetType="MenuItem">
-                        <Setter Property="IsCheckable" Value="True"/>
-                        <Setter Property="IsChecked" Value="False"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Rectangle">
-                                <Setter Property="IsChecked" Value="True"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </MenuItem.Style>
-            </MenuItem>
-            <MenuItem Header="_Ellipse" Command="{Binding Commands.ToolEllipseCommand}" InputGestureText="E">
-                <MenuItem.Style>
-                    <Style TargetType="MenuItem">
-                        <Setter Property="IsCheckable" Value="True"/>
-                        <Setter Property="IsChecked" Value="False"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Ellipse">
-                                <Setter Property="IsChecked" Value="True"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </MenuItem.Style>
-            </MenuItem>
-            <Separator/>
             <MenuItem Header="_Arc" Command="{Binding Commands.ToolArcCommand}" InputGestureText="A">
                 <MenuItem.Style>
                     <Style TargetType="MenuItem">
@@ -234,6 +207,47 @@
                 </MenuItem.Style>
             </MenuItem>
             <Separator/>
+            <MenuItem Header="Pat_h" Command="{Binding Commands.ToolPathCommand}" InputGestureText="H">
+                <MenuItem.Style>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="IsCheckable" Value="True"/>
+                        <Setter Property="IsChecked" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Path">
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.Style>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="_Rectangle" Command="{Binding Commands.ToolRectangleCommand}" InputGestureText="R">
+                <MenuItem.Style>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="IsCheckable" Value="True"/>
+                        <Setter Property="IsChecked" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Rectangle">
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.Style>
+            </MenuItem>
+            <MenuItem Header="_Ellipse" Command="{Binding Commands.ToolEllipseCommand}" InputGestureText="E">
+                <MenuItem.Style>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="IsCheckable" Value="True"/>
+                        <Setter Property="IsChecked" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Ellipse">
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.Style>
+            </MenuItem>
+            <Separator/>
             <MenuItem Header="_Text" Command="{Binding Commands.ToolTextCommand}" InputGestureText="T">
                 <MenuItem.Style>
                     <Style TargetType="MenuItem">
@@ -255,20 +269,6 @@
                         <Setter Property="IsChecked" Value="False"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Image">
-                                <Setter Property="IsChecked" Value="True"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </MenuItem.Style>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="Pat_h" Command="{Binding Commands.ToolPathCommand}" InputGestureText="H">
-                <MenuItem.Style>
-                    <Style TargetType="MenuItem">
-                        <Setter Property="IsCheckable" Value="True"/>
-                        <Setter Property="IsChecked" Value="False"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="Path">
                                 <Setter Property="IsChecked" Value="True"/>
                             </DataTrigger>
                         </Style.Triggers>
