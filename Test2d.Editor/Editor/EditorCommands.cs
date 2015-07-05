@@ -219,14 +219,6 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public ICommand ToolRectangleCommand { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand ToolEllipseCommand { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
         public ICommand ToolArcCommand { get; set; }
         /// <summary>
         /// 
@@ -239,15 +231,23 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public ICommand ToolPathCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ToolRectangleCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ToolEllipseCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand ToolTextCommand { get; set; }
         /// <summary>
         /// 
         /// </summary>
         public ICommand ToolImageCommand { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand ToolPathCommand { get; set; }
 
         /// <summary>
         /// 
