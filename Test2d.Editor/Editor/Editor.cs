@@ -116,16 +116,6 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public RectangleHelper RectangleHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public EllipseHelper EllipseHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public ArcHelper ArcHelper { get; set; }
 
         /// <summary>
@@ -141,17 +131,27 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public PathHelper PathHelper { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public RectangleHelper RectangleHelper { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EllipseHelper EllipseHelper { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public TextHelper TextHelper { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public ImageHelper ImageHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public PathHelper PathHelper { get; set; }
 
         /// <summary>
         /// Creates a new Editor instance.
@@ -181,14 +181,14 @@ namespace Test2d
             editor.GroupHelper = new GroupHelper(editor);
             editor.PointHelper = new PointHelper(editor);
             editor.LineHelper = new LineHelper(editor);
-            editor.RectangleHelper = new RectangleHelper(editor);
-            editor.EllipseHelper = new EllipseHelper(editor);
             editor.ArcHelper = new ArcHelper(editor);
             editor.BezierHelper = new BezierHelper(editor);
             editor.QBezierHelper = new QBezierHelper(editor);
+            editor.PathHelper = new PathHelper(editor);
+            editor.RectangleHelper = new RectangleHelper(editor);
+            editor.EllipseHelper = new EllipseHelper(editor);
             editor.TextHelper = new TextHelper(editor);
             editor.ImageHelper = new ImageHelper(editor);
-            editor.PathHelper = new PathHelper(editor);
 
             return editor;
         }
