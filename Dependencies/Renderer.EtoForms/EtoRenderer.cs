@@ -916,7 +916,7 @@ namespace TestEtoForms
             var _gfx = gfx as Graphics;
             var pg = path.Geometry;
             var gp = new GraphicsPath();
-            gp.FillMode = pg.FillRule == Test2d.XFillRule.EvenOdd ? FillMode.Winding : FillMode.Alternate;
+            gp.FillMode = pg.FillRule == Test2d.XFillRule.EvenOdd ? FillMode.Alternate : FillMode.Winding;
 
             foreach (var pf in pg.Figures)
             {
