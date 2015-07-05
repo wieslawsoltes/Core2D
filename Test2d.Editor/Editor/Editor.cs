@@ -20,6 +20,7 @@ namespace Test2d
         private Project _project;
         private IRenderer[] _renderers;
         private Tool _currentTool;
+        private PathTool _currentPathTool;
         private bool _enableObserver;
         private Observer _observer;
         private History _history;
@@ -59,6 +60,15 @@ namespace Test2d
         {
             get { return _currentTool; }
             set { Update(ref _currentTool, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets current editor path tool.
+        /// </summary>
+        public PathTool CurrentPathTool
+        {
+            get { return _currentPathTool; }
+            set { Update(ref _currentPathTool, value); }
         }
 
         /// <summary>
@@ -164,6 +174,7 @@ namespace Test2d
             var editor = new Editor()
             {
                 CurrentTool = Tool.Selection,
+                CurrentPathTool = PathTool.Line,
                 EnableObserver = true
             };
 
