@@ -95,6 +95,11 @@ namespace Test2d
             Debug.Print(text);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DatabaseObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Database: " + sender.GetType() + ", Property: " + e.PropertyName);
@@ -116,12 +121,22 @@ namespace Test2d
             _invalidateShapes();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ColumnObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Column: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RecordObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Record: " + sender.GetType() + ", Property: " + e.PropertyName);
@@ -143,12 +158,22 @@ namespace Test2d
             _invalidateShapes();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ValueObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Value: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ProjectObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Project: " + sender.GetType() + ", Property: " + e.PropertyName);
@@ -184,6 +209,11 @@ namespace Test2d
             _invalidateShapes();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DocumentObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Document: " + sender.GetType() + ", Property: " + e.PropertyName);
@@ -198,6 +228,11 @@ namespace Test2d
             _invalidateShapes();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ContainerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Container: " + (sender is Container ? (sender as Container).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
@@ -219,6 +254,11 @@ namespace Test2d
             _invalidateContainer();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ContainerBackgroudObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Background: " + sender.GetType().ToString() + ", Property: " + e.PropertyName);
@@ -230,6 +270,11 @@ namespace Test2d
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LayerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Layer: " + (sender is Layer ? (sender as Layer).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
@@ -244,6 +289,11 @@ namespace Test2d
             _invalidateLayers();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ShapeObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Shape: " + sender.GetType() + ", Property: " + e.PropertyName);
@@ -265,6 +315,11 @@ namespace Test2d
             _invalidateShapes();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StyleLibraryObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Style Library: " + (sender is StyleLibrary ? (sender as StyleLibrary).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
@@ -279,18 +334,33 @@ namespace Test2d
             _invalidateStyles();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StyleObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Style: " + (sender is ShapeStyle ? (sender as ShapeStyle).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
             _invalidateStyles();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BindingObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Property: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PropertyObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Property: " + sender.GetType() + ", Property: " + e.PropertyName);
@@ -442,6 +512,56 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="options"></param>
+        public void Add(Options options)
+        {
+            if (options == null)
+                return;
+
+            if (options.PointShape != null)
+            {
+                Add(options.PointShape);
+            }
+
+            if (options.SelectionStyle != null)
+            {
+                Add(options.SelectionStyle);
+            }
+
+            if (options.HelperStyle != null)
+            {
+                Add(options.HelperStyle);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
+        public void Remove(Options options)
+        {
+            if (options == null)
+                return;
+
+            if (options.PointShape != null)
+            {
+                Remove(options.PointShape);
+            }
+
+            if (options.SelectionStyle != null)
+            {
+                Remove(options.SelectionStyle);
+            }
+
+            if (options.HelperStyle != null)
+            {
+                Remove(options.HelperStyle);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="project"></param>
         public void Add(Project project)
         {
@@ -451,6 +571,8 @@ namespace Test2d
             project.PropertyChanged += ProjectObserver;
             
             Verbose("Add Project: " + project.Name);
+
+            Add(project.Options);
 
             if (project.Databases != null)
             {
@@ -497,6 +619,8 @@ namespace Test2d
             project.PropertyChanged -= ProjectObserver;
 
             Verbose("Remove Project: " + project.Name);
+
+            Remove(project.Options);
 
             if (project.Databases != null)
             {
