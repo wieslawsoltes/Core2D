@@ -14,8 +14,6 @@ namespace Test2d
     public class GroupHelper : Helper
     {
         private Editor _editor;
-        //private State _currentState = State.None;
-        //private XGroup _shape;
 
         /// <summary>
         /// 
