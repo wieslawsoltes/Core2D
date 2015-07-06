@@ -113,6 +113,63 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        private void DeInitializePath()
+        {
+            _geometry = null;
+            _path = null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void RemoveLineSegment()
+        {
+            var figure = _geometry.Figures.LastOrDefault();
+            if (figure != null)
+            {
+                var segment = figure.Segments.LastOrDefault() as XLineSegment;
+                if (segment != null)
+                { 
+                    figure.Segments.Remove(segment);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void RemoveBezierSegment()
+        {
+            var figure = _geometry.Figures.LastOrDefault();
+            if (figure != null)
+            {
+                var segment = figure.Segments.LastOrDefault() as XBezierSegment;
+                if (segment != null)
+                {
+                    figure.Segments.Remove(segment);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void RemoveQuadraticBezierSegment()
+        {
+            var figure = _geometry.Figures.LastOrDefault();
+            if (figure != null)
+            {
+                var segment = figure.Segments.LastOrDefault() as XQuadraticBezierSegment;
+                if (segment != null)
+                {
+                    figure.Segments.Remove(segment);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
         private void LineLeftDown(double x, double y)
@@ -132,7 +189,6 @@ namespace Test2d
                             _editor.Project.Options.DefaultIsStroked,
                             _editor.Project.Options.DefaultIsSmoothJoin);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-
                         ToStateOne();
                         Move(null);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
@@ -148,15 +204,14 @@ namespace Test2d
                             var end = TryToConnect(sx, sy);
                             if (end != null)
                             {
-                                var figure = _geometry.Figures.Last();
-                                var line = figure.Segments.Last() as XLineSegment;
+                                var figure = _geometry.Figures.LastOrDefault();
+                                var line = figure.Segments.LastOrDefault() as XLineSegment;
                                 line.Point = end;
                             }
                         }
 
                         _lineStart = _lineEnd;
                         _lineEnd = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-
                         _geometry.LineTo(_lineEnd,
                             _editor.Project.Options.DefaultIsStroked,
                             _editor.Project.Options.DefaultIsSmoothJoin);
@@ -182,14 +237,13 @@ namespace Test2d
                     break;
                 case State.One:
                     {
-                        var figure = _geometry.Figures.Last();
-                        var line = figure.Segments.Last() as XLineSegment;
-                        figure.Segments.Remove(line);
+                        RemoveLineSegment();
 
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_path);
                         Remove();
                         Finalize(null);
                         _editor.AddWithHistory(_path);
+                        DeInitializePath();
                         _currentState = State.None;
                     }
                     break;
@@ -251,7 +305,7 @@ namespace Test2d
         /// <param name="y"></param>
         private void ArcLeftDown(double x, double y)
         {
-            // TODO:
+            // TODO: Add Arc path helper LeftDown method implementation.
         }
 
         /// <summary>
@@ -261,7 +315,7 @@ namespace Test2d
         /// <param name="y"></param>
         private void ArcRightDown(double x, double y)
         {
-            // TODO:
+            // TODO: Add Arc path helper RightDown method implementation.
         }
 
         /// <summary>
@@ -271,7 +325,7 @@ namespace Test2d
         /// <param name="y"></param>
         private void ArcMove(double x, double y)
         {
-            // TODO:
+            // TODO: Add Arc path helper Move method implementation.
         }
 
         /// <summary>
@@ -281,7 +335,110 @@ namespace Test2d
         /// <param name="y"></param>
         private void BezierLeftDown(double x, double y)
         {
-            // TODO:
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            switch (_currentState)
+            {
+                case State.None:
+                    {
+                        _bezierPoint1 = TryToConnect(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        InitializePath(_bezierPoint1);
+
+                        _bezierPoint2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _bezierPoint3 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _bezierPoint4 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _geometry.BezierTo(
+                            _bezierPoint2,
+                            _bezierPoint3,
+                            _bezierPoint4,
+                            _editor.Project.Options.DefaultIsStroked,
+                            _editor.Project.Options.DefaultIsSmoothJoin);
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        ToStateOne();
+                        Move(null);
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                        _currentState = State.One;
+                    }
+                    break;
+                case State.One:
+                    {
+                        _bezierPoint4.X = sx;
+                        _bezierPoint4.Y = sy;
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            var point3 = TryToConnect(sx, sy);
+                            if (point3 != null)
+                            {
+                                var figure = _geometry.Figures.LastOrDefault();
+                                var bezier = figure.Segments.LastOrDefault() as XBezierSegment;
+                                bezier.Point3 = point3;
+                                _bezierPoint4 = point3;
+                            }
+                        }
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        ToStateTwo();
+                        Move(null);
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                        _currentState = State.Two;
+                    }
+                    break;
+                case State.Two:
+                    {
+                        _bezierPoint2.X = sx;
+                        _bezierPoint2.Y = sy;
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            var point1 = TryToConnect(sx, sy);
+                            if (point1 != null)
+                            {
+                                var figure = _geometry.Figures.LastOrDefault();
+                                var bezier = figure.Segments.LastOrDefault() as XBezierSegment;
+                                bezier.Point1 = point1;
+                                _bezierPoint2 = point1;
+                            }
+                        }
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        ToStateThree();
+                        Move(null);
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                        _currentState = State.Three;
+                    }
+                    break;
+                case State.Three:
+                    {
+                        _bezierPoint3.X = sx;
+                        _bezierPoint3.Y = sy;
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            var point2 = TryToConnect(sx, sy);
+                            if (point2 != null)
+                            {
+                                var figure = _geometry.Figures.LastOrDefault();
+                                var bezier = figure.Segments.LastOrDefault() as XBezierSegment;
+                                bezier.Point2 = point2;
+                                _bezierPoint3 = point2;
+                            }
+                        }
+
+                        _bezierPoint1 = _bezierPoint4;
+                        _bezierPoint2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _bezierPoint3 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _bezierPoint4 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _geometry.BezierTo(
+                            _bezierPoint2,
+                            _bezierPoint3,
+                            _bezierPoint4,
+                            _editor.Project.Options.DefaultIsStroked,
+                            _editor.Project.Options.DefaultIsSmoothJoin);
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Remove();
+                        ToStateOne();
+                        Move(null);
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                        _currentState = State.One;
+                    }
+                    break;
+            }
         }
 
         /// <summary>
@@ -291,7 +448,25 @@ namespace Test2d
         /// <param name="y"></param>
         private void BezierRightDown(double x, double y)
         {
-            // TODO:
+            switch (_currentState)
+            {
+                case State.None:
+                    break;
+                case State.One:
+                case State.Two:
+                case State.Three:
+                    {
+                        RemoveBezierSegment();
+
+                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_path);
+                        Remove();
+                        Finalize(null);
+                        _editor.AddWithHistory(_path);
+                        DeInitializePath();
+                        _currentState = State.None;
+                    }
+                    break;
+            }
         }
 
         /// <summary>
@@ -301,7 +476,101 @@ namespace Test2d
         /// <param name="y"></param>
         private void BezierMove(double x, double y)
         {
-            // TODO:
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            switch (_currentState)
+            {
+                case State.None:
+                    {
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            _editor.TryToHoverShape(sx, sy);
+                        }
+                    }
+                    break;
+                case State.One:
+                    {
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            if (_editor.TryToHoverShape(sx, sy))
+                            {
+                                if (_bezierEllipsePoint4 != null)
+                                {
+                                    _bezierEllipsePoint4.State &= ~ShapeState.Visible;
+                                }
+                            }
+                            else
+                            {
+                                if (_bezierEllipsePoint4 != null)
+                                {
+                                    _bezierEllipsePoint4.State |= ShapeState.Visible;
+                                }
+                            }
+                        }
+                        _bezierPoint2.X = sx;
+                        _bezierPoint2.Y = sy;
+                        _bezierPoint3.X = sx;
+                        _bezierPoint3.Y = sy;
+                        _bezierPoint4.X = sx;
+                        _bezierPoint4.Y = sy;
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Move(null);
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                    }
+                    break;
+                case State.Two:
+                    {
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            if (_editor.TryToHoverShape(sx, sy))
+                            {
+                                if (_bezierEllipsePoint2 != null)
+                                {
+                                    _bezierEllipsePoint2.State &= ~ShapeState.Visible;
+                                }
+                            }
+                            else
+                            {
+                                if (_bezierEllipsePoint2 != null)
+                                {
+                                    _bezierEllipsePoint2.State |= ShapeState.Visible;
+                                }
+                            }
+                        }
+                        _bezierPoint2.X = sx;
+                        _bezierPoint2.Y = sy;
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Move(null);
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                    }
+                    break;
+                case State.Three:
+                    {
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            if (_editor.TryToHoverShape(sx, sy))
+                            {
+                                if (_bezierEllipsePoint3 != null)
+                                {
+                                    _bezierEllipsePoint3.State &= ~ShapeState.Visible;
+                                }
+                            }
+                            else
+                            {
+                                if (_bezierEllipsePoint3 != null)
+                                {
+                                    _bezierEllipsePoint3.State |= ShapeState.Visible;
+                                }
+                            }
+                        }
+                        _bezierPoint3.X = sx;
+                        _bezierPoint3.Y = sy;
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Move(null);
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                    }
+                    break;
+            }
         }
 
         /// <summary>
@@ -311,7 +580,84 @@ namespace Test2d
         /// <param name="y"></param>
         private void QBezierLeftDown(double x, double y)
         {
-            // TODO:
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            switch (_currentState)
+            {
+                case State.None:
+                    {
+                        _qbezierPoint1 = TryToConnect(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        InitializePath(_qbezierPoint1);
+
+                        _qbezierPoint2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _qbezierPoint3 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _geometry.QuadraticBezierTo(
+                            _qbezierPoint2,
+                            _qbezierPoint3,
+                            _editor.Project.Options.DefaultIsStroked,
+                            _editor.Project.Options.DefaultIsSmoothJoin);
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        ToStateOne();
+                        Move(null);
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                        _currentState = State.One;
+                    }
+                    break;
+                case State.One:
+                    {
+                        _qbezierPoint3.X = sx;
+                        _qbezierPoint3.Y = sy;
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            var point2 = TryToConnect(sx, sy);
+                            if (point2 != null)
+                            {
+                                var figure = _geometry.Figures.LastOrDefault();
+                                var qbezier = figure.Segments.LastOrDefault() as XQuadraticBezierSegment;
+                                qbezier.Point2 = point2;
+                                _qbezierPoint3 = point2;
+                            }
+                        }
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        ToStateTwo();
+                        Move(null);
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                        _currentState = State.Two;
+                    }
+                    break;
+                case State.Two:
+                    {
+                        _qbezierPoint2.X = sx;
+                        _qbezierPoint2.Y = sy;
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            var point1 = TryToConnect(sx, sy);
+                            if (point1 != null)
+                            {
+                                var figure = _geometry.Figures.LastOrDefault();
+                                var qbezier = figure.Segments.LastOrDefault() as XQuadraticBezierSegment;
+                                qbezier.Point1 = point1;
+                                _qbezierPoint2 = point1;
+                            }
+                        }
+
+                        _qbezierPoint1 = _qbezierPoint3;
+                        _qbezierPoint2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _qbezierPoint3 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _geometry.QuadraticBezierTo(
+                            _qbezierPoint2,
+                            _qbezierPoint3,
+                            _editor.Project.Options.DefaultIsStroked,
+                            _editor.Project.Options.DefaultIsSmoothJoin);
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Remove();
+                        ToStateOne();
+                        Move(null);
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                        _currentState = State.One;
+                    }
+                    break;
+            }
         }
 
         /// <summary>
@@ -321,7 +667,24 @@ namespace Test2d
         /// <param name="y"></param>
         private void QBezierRightDown(double x, double y)
         {
-            // TODO:
+            switch (_currentState)
+            {
+                case State.None:
+                    break;
+                case State.One:
+                case State.Two:
+                    {
+                        RemoveQuadraticBezierSegment();
+
+                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_path);
+                        Remove();
+                        Finalize(null);
+                        _editor.AddWithHistory(_path);
+                        DeInitializePath();
+                        _currentState = State.None;
+                    }
+                    break;
+            }
         }
 
         /// <summary>
@@ -331,7 +694,73 @@ namespace Test2d
         /// <param name="y"></param>
         private void QBezierMove(double x, double y)
         {
-            // TODO:
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            switch (_currentState)
+            {
+                case State.None:
+                    {
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            _editor.TryToHoverShape(sx, sy);
+                        }
+                    }
+                    break;
+                case State.One:
+                    {
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            if (_editor.TryToHoverShape(sx, sy))
+                            {
+                                if (_qbezierEllipsePoint3 != null)
+                                {
+                                    _qbezierEllipsePoint3.State &= ~ShapeState.Visible;
+                                }
+                            }
+                            else
+                            {
+                                if (_qbezierEllipsePoint3 != null)
+                                {
+                                    _qbezierEllipsePoint3.State |= ShapeState.Visible;
+                                }
+                            }
+                        }
+                        _qbezierPoint2.X = sx;
+                        _qbezierPoint2.Y = sy;
+                        _qbezierPoint3.X = sx;
+                        _qbezierPoint3.Y = sy;
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Move(null);
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                    }
+                    break;
+                case State.Two:
+                    {
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            if (_editor.TryToHoverShape(sx, sy))
+                            {
+                                if (_qbezierEllipsePoint2 != null)
+                                {
+                                    _qbezierEllipsePoint2.State &= ~ShapeState.Visible;
+                                }
+                            }
+                            else
+                            {
+                                if (_qbezierEllipsePoint2 != null)
+                                {
+                                    _qbezierEllipsePoint2.State |= ShapeState.Visible;
+                                }
+                            }
+                        }
+                        _qbezierPoint2.X = sx;
+                        _qbezierPoint2.Y = sy;
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Move(null);
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                    }
+                    break;
+            }
         }
 
         /// <summary>
@@ -466,7 +895,7 @@ namespace Test2d
                     break;
                 case PathTool.Arc:
                     {
-                        // TODO:
+                        // TODO: Add Arc path helper ToStateOne method implementation.
                     }
                     break;
                 case PathTool.Bezier:
@@ -501,7 +930,7 @@ namespace Test2d
                     break;
                 case PathTool.Arc:
                     {
-                        // TODO:
+                        // TODO: Add Arc path helper ToStateTwo method implementation.
                     }
                     break;
                 case PathTool.Bezier:
@@ -538,7 +967,7 @@ namespace Test2d
                     break;
                 case PathTool.Arc:
                     {
-                        // TODO:
+                        // TODO: Add Arc path helper ToStateThree method implementation.
                     }
                     break;
                 case PathTool.Bezier:
@@ -592,7 +1021,7 @@ namespace Test2d
                     break;
                 case PathTool.Arc:
                     {
-                        // TODO:
+                        // TODO: Add Arc path helper Move method implementation.
                     }
                     break;
                 case PathTool.Bezier:
@@ -728,11 +1157,13 @@ namespace Test2d
                             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_lineEllipseEnd);
                             _lineEllipseEnd = null;
                         }
+
+                        _style = null;
                     }
                     break;
                 case PathTool.Arc:
                     {
-                        // TODO:
+                        // TODO: Add Arc path helper Remove method implementation.
                     }
                     break;
                 case PathTool.Bezier:
