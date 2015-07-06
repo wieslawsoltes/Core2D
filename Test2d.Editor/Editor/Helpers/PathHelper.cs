@@ -16,17 +16,31 @@ namespace Test2d
         private Editor _editor;
         private State _currentState = State.None;
 
+        // path
         private XPath _path;
         private XPathGeometry _geometry;
-
+        // line
         private XPoint _lineStart;
         private XPoint _lineEnd;
-
+        // bezier
+        private XPoint _bezierPoint1;
+        private XPoint _bezierPoint2;
+        private XPoint _bezierPoint3;
+        private XPoint _bezierPoint4;
+        // helpers
         private ShapeStyle _style;
         private double _pointEllipseRadius = 3.0;
-
+        // line helper
         private XEllipse _lineEllipseStart;
         private XEllipse _lineEllipseEnd;
+        // bezier helper
+        private XLine _bezierLine12;
+        private XLine _bezierLine43;
+        private XLine _bezierLine23;
+        private XEllipse _bezierEllipsePoint1;
+        private XEllipse _bezierEllipsePoint2;
+        private XEllipse _bezierEllipsePoint3;
+        private XEllipse _bezierEllipsePoint4;
 
         /// <summary>
         /// 
@@ -363,7 +377,11 @@ namespace Test2d
                     break;
                 case PathTool.Bezier:
                     {
-                        // TODO:
+                        _style = _editor.Project.Options.HelperStyle;
+                        _bezierEllipsePoint1 = XEllipse.Create(0, 0, _style, null, true);
+                        _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierEllipsePoint1);
+                        _bezierEllipsePoint4 = XEllipse.Create(0, 0, _style, null, true);
+                        _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierEllipsePoint4);
                     }
                     break;
                 case PathTool.QBezier:
@@ -393,7 +411,11 @@ namespace Test2d
                     break;
                 case PathTool.Bezier:
                     {
-                        // TODO:
+                        _style = _editor.Project.Options.HelperStyle;
+                        _bezierLine12 = XLine.Create(0, 0, _style, null);
+                        _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierLine12);
+                        _bezierEllipsePoint2 = XEllipse.Create(0, 0, _style, null, true);
+                        _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierEllipsePoint2);
                     }
                     break;
                 case PathTool.QBezier:
@@ -423,7 +445,12 @@ namespace Test2d
                     break;
                 case PathTool.Bezier:
                     {
-                        // TODO:
+                        _bezierLine43 = XLine.Create(0, 0, _style, null);
+                        _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierLine43);
+                        _bezierLine23 = XLine.Create(0, 0, _style, null);
+                        _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierLine23);
+                        _bezierEllipsePoint3 = XEllipse.Create(0, 0, _style, null, true);
+                        _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierEllipsePoint3);
                     }
                     break;
                 case PathTool.QBezier:
@@ -475,7 +502,61 @@ namespace Test2d
                     break;
                 case PathTool.Bezier:
                     {
-                        // TODO:
+                        if (_bezierLine12 != null)
+                        {
+                            _bezierLine12.Start.X = _bezierPoint1.X;
+                            _bezierLine12.Start.Y = _bezierPoint1.Y;
+                            _bezierLine12.End.X = _bezierPoint2.X;
+                            _bezierLine12.End.Y = _bezierPoint2.Y;
+                        }
+
+                        if (_bezierLine43 != null)
+                        {
+                            _bezierLine43.Start.X = _bezierPoint4.X;
+                            _bezierLine43.Start.Y = _bezierPoint4.Y;
+                            _bezierLine43.End.X = _bezierPoint3.X;
+                            _bezierLine43.End.Y = _bezierPoint3.Y;
+                        }
+
+                        if (_bezierLine23 != null)
+                        {
+                            _bezierLine23.Start.X = _bezierPoint2.X;
+                            _bezierLine23.Start.Y = _bezierPoint2.Y;
+                            _bezierLine23.End.X = _bezierPoint3.X;
+                            _bezierLine23.End.Y = _bezierPoint3.Y;
+                        }
+
+                        if (_bezierEllipsePoint1 != null)
+                        {
+                            _bezierEllipsePoint1.TopLeft.X = _bezierPoint1.X - _pointEllipseRadius;
+                            _bezierEllipsePoint1.TopLeft.Y = _bezierPoint1.Y - _pointEllipseRadius;
+                            _bezierEllipsePoint1.BottomRight.X = _bezierPoint1.X + _pointEllipseRadius;
+                            _bezierEllipsePoint1.BottomRight.Y = _bezierPoint1.Y + _pointEllipseRadius;
+                        }
+
+                        if (_bezierEllipsePoint2 != null)
+                        {
+                            _bezierEllipsePoint2.TopLeft.X = _bezierPoint2.X - _pointEllipseRadius;
+                            _bezierEllipsePoint2.TopLeft.Y = _bezierPoint2.Y - _pointEllipseRadius;
+                            _bezierEllipsePoint2.BottomRight.X = _bezierPoint2.X + _pointEllipseRadius;
+                            _bezierEllipsePoint2.BottomRight.Y = _bezierPoint2.Y + _pointEllipseRadius;
+                        }
+
+                        if (_bezierEllipsePoint3 != null)
+                        {
+                            _bezierEllipsePoint3.TopLeft.X = _bezierPoint3.X - _pointEllipseRadius;
+                            _bezierEllipsePoint3.TopLeft.Y = _bezierPoint3.Y - _pointEllipseRadius;
+                            _bezierEllipsePoint3.BottomRight.X = _bezierPoint3.X + _pointEllipseRadius;
+                            _bezierEllipsePoint3.BottomRight.Y = _bezierPoint3.Y + _pointEllipseRadius;
+                        }
+
+                        if (_bezierEllipsePoint4 != null)
+                        {
+                            _bezierEllipsePoint4.TopLeft.X = _bezierPoint4.X - _pointEllipseRadius;
+                            _bezierEllipsePoint4.TopLeft.Y = _bezierPoint4.Y - _pointEllipseRadius;
+                            _bezierEllipsePoint4.BottomRight.X = _bezierPoint4.X + _pointEllipseRadius;
+                            _bezierEllipsePoint4.BottomRight.Y = _bezierPoint4.Y + _pointEllipseRadius;
+                        }
                     }
                     break;
                 case PathTool.QBezier:
@@ -523,7 +604,49 @@ namespace Test2d
                     break;
                 case PathTool.Bezier:
                     {
-                        // TODO:
+                        if (_bezierLine12 != null)
+                        {
+                            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bezierLine12);
+                            _bezierLine12 = null;
+                        }
+
+                        if (_bezierLine43 != null)
+                        {
+                            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bezierLine43);
+                            _bezierLine43 = null;
+                        }
+
+                        if (_bezierLine23 != null)
+                        {
+                            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bezierLine23);
+                            _bezierLine23 = null;
+                        }
+
+                        if (_bezierEllipsePoint1 != null)
+                        {
+                            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bezierEllipsePoint1);
+                            _bezierEllipsePoint1 = null;
+                        }
+
+                        if (_bezierEllipsePoint2 != null)
+                        {
+                            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bezierEllipsePoint2);
+                            _bezierEllipsePoint2 = null;
+                        }
+
+                        if (_bezierEllipsePoint3 != null)
+                        {
+                            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bezierEllipsePoint3);
+                            _bezierEllipsePoint3 = null;
+                        }
+
+                        if (_bezierEllipsePoint4 != null)
+                        {
+                            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bezierEllipsePoint4);
+                            _bezierEllipsePoint4 = null;
+                        }
+
+                        _style = null;
                     }
                     break;
                 case PathTool.QBezier:
