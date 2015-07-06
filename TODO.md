@@ -1,18 +1,22 @@
 ﻿# TODO
 
-## Editor
+## Path
 
 * Switch PathHelper tool during creation.
+* Add hover support for path points.
+* Path shape editor support.
+
+## Editor
+
 * Add Reference shape handling.
 * Improve image Uri handling.
-* Path shape editor support.
 * Add undo/redo for all property changes.
-* Detach point shape from connector on move.
+* Detach connector point from group when moving.
 
 ## Database
 
+* Add IsVisible property to column.
 * Database default row values.
-* Databases list view update after columns change.
 * Database editor with data grid.
 * Open exported database format.
 * Filter database records.
