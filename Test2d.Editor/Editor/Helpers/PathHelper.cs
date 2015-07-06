@@ -136,7 +136,6 @@ namespace Test2d
                         ToStateOne();
                         Move(null);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-
                         _currentState = State.One;
                     }
                     break;
@@ -162,10 +161,8 @@ namespace Test2d
                             _editor.Project.Options.DefaultIsStroked,
                             _editor.Project.Options.DefaultIsSmoothJoin);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-
                         Move(null);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-
                         _currentState = State.One;
                     }
                     break;
