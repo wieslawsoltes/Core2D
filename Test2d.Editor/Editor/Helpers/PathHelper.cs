@@ -19,14 +19,14 @@ namespace Test2d
         private XPath _path;
         private XPathGeometry _geometry;
 
-        private ShapeStyle _style;
-        private double _pointEllipseRadius = 3.0;
-
         private XPoint _lineStart;
         private XPoint _lineEnd;
 
-        private XEllipse _ellipseStart;
-        private XEllipse _ellipseEnd;
+        private ShapeStyle _style;
+        private double _pointEllipseRadius = 3.0;
+
+        private XEllipse _lineEllipseStart;
+        private XEllipse _lineEllipseEnd;
 
         /// <summary>
         /// 
@@ -63,7 +63,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="start"></param>
-        private void Initialize(XPoint start)
+        private void InitializePath(XPoint start)
         {
             _geometry = XPathGeometry.Create(
                 new List<XPathFigure>(),
@@ -92,65 +92,152 @@ namespace Test2d
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public override void LeftDown(double x, double y)
+        private void LeftDownLine(double x, double y)
         {
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            switch (_currentState)
+            {
+                case State.None:
+                    {
+                        _lineStart = TryToConnect(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        InitializePath(_lineStart);
+
+                        _lineEnd = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _geometry.LineTo(
+                            _lineEnd,
+                            _editor.Project.Options.DefaultIsStroked,
+                            _editor.Project.Options.DefaultIsSmoothJoin);
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+
+                        ToStateOne();
+                        Move(null);
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+
+                        _currentState = State.One;
+                    }
+                    break;
+                case State.One:
+                    {
+                        _lineEnd.X = sx;
+                        _lineEnd.Y = sy;
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            var end = TryToConnect(sx, sy);
+                            if (end != null)
+                            {
+                                var figure = _geometry.Figures.Last();
+                                var line = figure.Segments.Last() as XLineSegment;
+                                line.Point = end;
+                            }
+                        }
+
+                        _lineStart = _lineEnd;
+                        _lineEnd = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+
+                        _geometry.LineTo(_lineEnd,
+                            _editor.Project.Options.DefaultIsStroked,
+                            _editor.Project.Options.DefaultIsSmoothJoin);
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+
+                        Move(null);
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+
+                        _currentState = State.One;
+                    }
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        private void RightDownLine(double x, double y)
+        {
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            switch (_currentState)
+            {
+                case State.None:
+                    break;
+                case State.One:
+                    {
+                        var figure = _geometry.Figures.Last();
+                        var line = figure.Segments.Last() as XLineSegment;
+                        figure.Segments.Remove(line);
+
+                        _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_path);
+                        Remove();
+                        Finalize(null);
+                        _editor.AddWithHistory(_path);
+                        _currentState = State.None;
+                    }
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        private void MoveLine(double x, double y)
+        {
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            switch (_currentState)
+            {
+                case State.None:
+                    {
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            _editor.TryToHoverShape(sx, sy);
+                        }
+                    }
+                    break;
+                case State.One:
+                    {
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            if (_editor.TryToHoverShape(sx, sy))
+                            {
+                                if (_lineEllipseEnd != null)
+                                {
+                                    _lineEllipseEnd.State &= ~ShapeState.Visible;
+                                }
+                            }
+                            else
+                            {
+                                if (_lineEllipseEnd != null)
+                                {
+                                    _lineEllipseEnd.State |= ShapeState.Visible;
+                                }
+                            }
+                        }
+                        _lineEnd.X = sx;
+                        _lineEnd.Y = sy;
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        Move(null);
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                    }
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public override void LeftDown(double x, double y)
+        {
             switch(_editor.CurrentPathTool)
             {
                 case PathTool.Line:
                     {
-                        switch (_currentState)
-                        {
-                            case State.None:
-                                {
-                                    _lineStart = TryToConnect(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                                    Initialize(_lineStart);
-
-                                    _lineEnd = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                                    _geometry.LineTo(
-                                        _lineEnd, 
-                                        _editor.Project.Options.DefaultIsStroked, 
-                                        _editor.Project.Options.DefaultIsSmoothJoin);
-                                    _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-
-                                    ToStateOne();
-                                    Move(null);
-                                    _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-
-                                    _currentState = State.One;
-                                }
-                                break;
-                            case State.One:
-                                {
-                                    _lineEnd.X = sx;
-                                    _lineEnd.Y = sy;
-                                    if (_editor.Project.Options.TryToConnect)
-                                    {
-                                        var end = TryToConnect(sx, sy);
-                                        if (end != null)
-                                        {
-                                            var figure = _geometry.Figures.Last();
-                                            var line = figure.Segments.Last() as XLineSegment;
-                                            line.Point = end;
-                                        }
-                                    }
-
-                                    _lineStart = _lineEnd;
-                                    _lineEnd = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-
-                                    _geometry.LineTo(_lineEnd,
-                                        _editor.Project.Options.DefaultIsStroked,
-                                        _editor.Project.Options.DefaultIsSmoothJoin);
-                                    _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-
-                                    Move(null);
-                                    _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-
-                                    _currentState = State.One;
-                                }
-                                break;
-                        }
+                        LeftDownLine(x, y);
                     }
                     break;
                 case PathTool.Arc:
@@ -178,8 +265,6 @@ namespace Test2d
         /// <param name="y"></param>
         public override void LeftUp(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
         }
 
         /// <summary>
@@ -189,30 +274,11 @@ namespace Test2d
         /// <param name="y"></param>
         public override void RightDown(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_editor.CurrentPathTool)
             {
                 case PathTool.Line:
                     {
-                        switch (_currentState)
-                        {
-                            case State.None:
-                                break;
-                            case State.One:
-                                {
-                                    var figure = _geometry.Figures.Last();
-                                    var line = figure.Segments.Last() as XLineSegment;
-                                    figure.Segments.Remove(line);
-
-                                    _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_path);
-                                    Remove();
-                                    Finalize(null);
-                                    _editor.AddWithHistory(_path);
-                                    _currentState = State.None;
-                                }
-                                break;
-                        }
+                        RightDownLine(x, y);
                     }
                     break;
                 case PathTool.Arc:
@@ -240,8 +306,6 @@ namespace Test2d
         /// <param name="y"></param>
         public override void RightUp(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
         }
 
         /// <summary>
@@ -251,49 +315,11 @@ namespace Test2d
         /// <param name="y"></param>
         public override void Move(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_editor.CurrentPathTool)
             {
                 case PathTool.Line:
                     {
-                        switch (_currentState)
-                        {
-                            case State.None:
-                                {
-                                    if (_editor.Project.Options.TryToConnect)
-                                    {
-                                        _editor.TryToHoverShape(sx, sy);
-                                    }
-                                }
-                                break;
-                            case State.One:
-                                {
-                                    if (_editor.Project.Options.TryToConnect)
-                                    {
-                                        if (_editor.TryToHoverShape(sx, sy))
-                                        {
-                                            if (_ellipseEnd != null)
-                                            {
-                                                _ellipseEnd.State &= ~ShapeState.Visible;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if (_ellipseEnd != null)
-                                            {
-                                                _ellipseEnd.State |= ShapeState.Visible;
-                                            }
-                                        }
-                                    }
-                                    _lineEnd.X = sx;
-                                    _lineEnd.Y = sy;
-                                    _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
-                                    Move(null);
-                                    _editor.Project.CurrentContainer.HelperLayer.Invalidate();
-                                }
-                                break;
-                        }
+                        MoveLine(x, y);
                     }
                     break;
                 case PathTool.Arc:
@@ -324,10 +350,10 @@ namespace Test2d
                 case PathTool.Line:
                     {
                         _style = _editor.Project.Options.HelperStyle;
-                        _ellipseStart = XEllipse.Create(0, 0, _style, null, true);
-                        _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseStart);
-                        _ellipseEnd = XEllipse.Create(0, 0, _style, null, true);
-                        _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseEnd);
+                        _lineEllipseStart = XEllipse.Create(0, 0, _style, null, true);
+                        _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_lineEllipseStart);
+                        _lineEllipseEnd = XEllipse.Create(0, 0, _style, null, true);
+                        _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_lineEllipseEnd);
                     }
                     break;
                 case PathTool.Arc:
@@ -425,20 +451,20 @@ namespace Test2d
             {
                 case PathTool.Line:
                     {
-                        if (_ellipseStart != null)
+                        if (_lineEllipseStart != null)
                         {
-                            _ellipseStart.TopLeft.X = _lineStart.X - _pointEllipseRadius;
-                            _ellipseStart.TopLeft.Y = _lineStart.Y - _pointEllipseRadius;
-                            _ellipseStart.BottomRight.X = _lineStart.X + _pointEllipseRadius;
-                            _ellipseStart.BottomRight.Y = _lineStart.Y + _pointEllipseRadius;
+                            _lineEllipseStart.TopLeft.X = _lineStart.X - _pointEllipseRadius;
+                            _lineEllipseStart.TopLeft.Y = _lineStart.Y - _pointEllipseRadius;
+                            _lineEllipseStart.BottomRight.X = _lineStart.X + _pointEllipseRadius;
+                            _lineEllipseStart.BottomRight.Y = _lineStart.Y + _pointEllipseRadius;
                         }
 
-                        if (_ellipseEnd != null)
+                        if (_lineEllipseEnd != null)
                         {
-                            _ellipseEnd.TopLeft.X = _lineEnd.X - _pointEllipseRadius;
-                            _ellipseEnd.TopLeft.Y = _lineEnd.Y - _pointEllipseRadius;
-                            _ellipseEnd.BottomRight.X = _lineEnd.X + _pointEllipseRadius;
-                            _ellipseEnd.BottomRight.Y = _lineEnd.Y + _pointEllipseRadius;
+                            _lineEllipseEnd.TopLeft.X = _lineEnd.X - _pointEllipseRadius;
+                            _lineEllipseEnd.TopLeft.Y = _lineEnd.Y - _pointEllipseRadius;
+                            _lineEllipseEnd.BottomRight.X = _lineEnd.X + _pointEllipseRadius;
+                            _lineEllipseEnd.BottomRight.Y = _lineEnd.Y + _pointEllipseRadius;
                         }
                     }
                     break;
@@ -477,16 +503,16 @@ namespace Test2d
             {
                 case PathTool.Line:
                     {
-                        if (_ellipseStart != null)
+                        if (_lineEllipseStart != null)
                         {
-                            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipseStart);
-                            _ellipseStart = null;
+                            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_lineEllipseStart);
+                            _lineEllipseStart = null;
                         }
 
-                        if (_ellipseEnd != null)
+                        if (_lineEllipseEnd != null)
                         {
-                            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipseEnd);
-                            _ellipseEnd = null;
+                            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_lineEllipseEnd);
+                            _lineEllipseEnd = null;
                         }
                     }
                     break;
