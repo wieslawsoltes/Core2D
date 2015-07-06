@@ -1225,32 +1225,102 @@ namespace Test2d
 
                 _commands.ToolLineCommand = 
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Line,
-                        () => IsEditMode());
-
-                _commands.ToolRectangleCommand = 
-                    new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Rectangle,
-                        () => IsEditMode());
-
-                _commands.ToolEllipseCommand = 
-                    new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Ellipse,
+                        () => 
+                        {
+                            if (_editor.CurrentTool == Tool.Path)
+                            {
+                                _editor.CurrentPathTool = PathTool.Line;
+                            }
+                            else
+                            {
+                                _editor.CurrentTool = Tool.Line;
+                            }
+                        },
                         () => IsEditMode());
 
                 _commands.ToolArcCommand = 
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Arc,
+                        () => 
+                        {
+                            if (_editor.CurrentTool == Tool.Path)
+                            {
+                                _editor.CurrentPathTool = PathTool.Arc;
+                            }
+                            else
+                            {
+                                _editor.CurrentTool = Tool.Arc;
+                            }
+                        },
                         () => IsEditMode());
 
                 _commands.ToolBezierCommand = 
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Bezier,
+                        () => 
+                        {
+                            if (_editor.CurrentTool == Tool.Path)
+                            {
+                                _editor.CurrentPathTool = PathTool.Bezier;
+                            }
+                            else
+                            {
+                                _editor.CurrentTool = Tool.Bezier;
+                            }
+                        },
                         () => IsEditMode());
 
                 _commands.ToolQBezierCommand = 
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.QBezier,
+                        () => 
+                        {
+                            if (_editor.CurrentTool == Tool.Path)
+                            {
+                                _editor.CurrentPathTool = PathTool.QBezier;
+                            }
+                            else
+                            {
+                                _editor.CurrentTool = Tool.QBezier;
+                            }
+                        },
+                        () => IsEditMode());
+
+                _commands.ToolPathCommand =
+                    new DelegateCommand(
+                        () => 
+                        {
+                            if (_editor.CurrentTool == Tool.Path)
+                            {
+                                //switch (_editor.CurrentPathTool)
+                                //{
+                                //    case PathTool.Line:
+                                //        _editor.CurrentTool = Tool.Line;
+                                //        break;
+                                //    case PathTool.Arc:
+                                //        _editor.CurrentTool = Tool.Arc;
+                                //        break;
+                                //    case PathTool.Bezier:
+                                //        _editor.CurrentTool = Tool.Bezier;
+                                //        break;
+                                //    case PathTool.QBezier:
+                                //        _editor.CurrentTool = Tool.QBezier;
+                                //        break;
+                                //}
+                                _editor.CurrentTool = Tool.Selection;
+                            }
+                            else
+                            {
+                                _editor.CurrentTool = Tool.Path;
+                            }
+                        },
+                        () => IsEditMode());
+
+                _commands.ToolRectangleCommand =
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.Rectangle,
+                        () => IsEditMode());
+
+                _commands.ToolEllipseCommand =
+                    new DelegateCommand(
+                        () => _editor.CurrentTool = Tool.Ellipse,
                         () => IsEditMode());
 
                 _commands.ToolTextCommand = 
@@ -1261,11 +1331,6 @@ namespace Test2d
                 _commands.ToolImageCommand = 
                     new DelegateCommand(
                         () => _editor.CurrentTool = Tool.Image,
-                        () => IsEditMode());
-
-                _commands.ToolPathCommand = 
-                    new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Path,
                         () => IsEditMode());
 
                 _commands.EvalScriptCommand = 
@@ -3793,14 +3858,15 @@ namespace Test2d
             (_commands.ToolGroupCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolPointCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolLineCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolRectangleCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolEllipseCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolArcCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolBezierCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolQBezierCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolRectangleCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolEllipseCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolPathCommand as DelegateCommand).RaiseCanExecuteChanged();
+
             (_commands.ToolTextCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolImageCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolPathCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.EvalCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.EvalScriptCommand as DelegateCommand<string>).RaiseCanExecuteChanged();

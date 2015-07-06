@@ -38,10 +38,10 @@ namespace Test2d
         /// <param name="height"></param>
         /// <returns></returns>
         public static XPathRect Create(
-            double x, 
-            double y, 
-            double width, 
-            double height)
+            double x = 0.0,
+            double y = 0.0,
+            double width = 0.0,
+            double height = 0.0)
         {
             return new XPathRect()
             {

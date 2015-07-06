@@ -12,7 +12,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public XPathPoint Point { get; set; }
+        public XPoint Point { get; set; }
 
         /// <summary>
         /// 
@@ -46,7 +46,7 @@ namespace Test2d
         /// <param name="isSmoothJoin"></param>
         /// <returns></returns>
         public static XArcSegment Create(
-            XPathPoint point,
+            XPoint point,
             XPathSize size,
             double rotationAngle,
             bool isLargeArc,

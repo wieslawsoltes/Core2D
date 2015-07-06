@@ -314,12 +314,6 @@ namespace TestWinForms
                     case Keys.L:
                         context.Commands.ToolLineCommand.Execute(null);
                         break;
-                    case Keys.R:
-                        context.Commands.ToolRectangleCommand.Execute(null);
-                        break;
-                    case Keys.E:
-                        context.Commands.ToolEllipseCommand.Execute(null);
-                        break;
                     case Keys.A:
                         context.Commands.ToolArcCommand.Execute(null);
                         break;
@@ -329,14 +323,20 @@ namespace TestWinForms
                     case Keys.Q:
                         context.Commands.ToolQBezierCommand.Execute(null);
                         break;
+                    case Keys.H:
+                        context.Commands.ToolPathCommand.Execute(null);
+                        break;
+                    case Keys.R:
+                        context.Commands.ToolRectangleCommand.Execute(null);
+                        break;
+                    case Keys.E:
+                        context.Commands.ToolEllipseCommand.Execute(null);
+                        break;
                     case Keys.T:
                         context.Commands.ToolTextCommand.Execute(null);
                         break;
                     case Keys.I:
                         context.Commands.ToolImageCommand.Execute(null);
-                        break;
-                    case Keys.H:
-                        context.Commands.ToolPathCommand.Execute(null);
                         break;
                     case Keys.F:
                         context.Commands.DefaultIsFilledCommand.Execute(null);

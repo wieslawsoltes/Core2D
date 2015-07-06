@@ -172,7 +172,11 @@ namespace Test2d
         /// <param name="shape"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static XPoint Create(double x, double y, BaseShape shape, string name = "")
+        public static XPoint Create(
+            double x = 0.0, 
+            double y = 0.0, 
+            BaseShape shape = null, 
+            string name = "")
         {
             return new XPoint() 
             { 

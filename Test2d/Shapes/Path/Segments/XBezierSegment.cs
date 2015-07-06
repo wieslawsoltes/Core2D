@@ -12,17 +12,17 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public XPathPoint Point1 { get; set; }
+        public XPoint Point1 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public XPathPoint Point2 { get; set; }
+        public XPoint Point2 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public XPathPoint Point3 { get; set; }
+        public XPoint Point3 { get; set; }
 
         /// <summary>
         /// 
@@ -34,9 +34,9 @@ namespace Test2d
         /// <param name="isSmoothJoin"></param>
         /// <returns></returns>
         public static XBezierSegment Create(
-            XPathPoint point1,
-            XPathPoint point2,
-            XPathPoint point3,
+            XPoint point1,
+            XPoint point2,
+            XPoint point3,
             bool isStroked,
             bool isSmoothJoin)
         {

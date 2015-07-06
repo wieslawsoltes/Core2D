@@ -7,31 +7,23 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public class XPathPoint
+    public enum PathTool
     {
         /// <summary>
         /// 
         /// </summary>
-        public double X { get; set; }
-
+        Line,
         /// <summary>
         /// 
         /// </summary>
-        public double Y { get; set; }
-
+        Arc,
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        public static XPathPoint Create(double x, double y)
-        {
-            return new XPathPoint()
-            {
-                X = x,
-                Y = y
-            };
-        }
+        Bezier,
+        /// <summary>
+        /// 
+        /// </summary>
+        QBezier,
     }
 }

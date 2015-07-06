@@ -20,6 +20,7 @@ namespace Test2d
         private Project _project;
         private IRenderer[] _renderers;
         private Tool _currentTool;
+        private PathTool _currentPathTool;
         private bool _enableObserver;
         private Observer _observer;
         private History _history;
@@ -59,6 +60,15 @@ namespace Test2d
         {
             get { return _currentTool; }
             set { Update(ref _currentTool, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets current editor path tool.
+        /// </summary>
+        public PathTool CurrentPathTool
+        {
+            get { return _currentPathTool; }
+            set { Update(ref _currentPathTool, value); }
         }
 
         /// <summary>
@@ -116,16 +126,6 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public RectangleHelper RectangleHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public EllipseHelper EllipseHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public ArcHelper ArcHelper { get; set; }
 
         /// <summary>
@@ -141,17 +141,27 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public PathHelper PathHelper { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public RectangleHelper RectangleHelper { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EllipseHelper EllipseHelper { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public TextHelper TextHelper { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public ImageHelper ImageHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public PathHelper PathHelper { get; set; }
 
         /// <summary>
         /// Creates a new Editor instance.
@@ -164,6 +174,7 @@ namespace Test2d
             var editor = new Editor()
             {
                 CurrentTool = Tool.Selection,
+                CurrentPathTool = PathTool.Line,
                 EnableObserver = true
             };
 
@@ -181,14 +192,14 @@ namespace Test2d
             editor.GroupHelper = new GroupHelper(editor);
             editor.PointHelper = new PointHelper(editor);
             editor.LineHelper = new LineHelper(editor);
-            editor.RectangleHelper = new RectangleHelper(editor);
-            editor.EllipseHelper = new EllipseHelper(editor);
             editor.ArcHelper = new ArcHelper(editor);
             editor.BezierHelper = new BezierHelper(editor);
             editor.QBezierHelper = new QBezierHelper(editor);
+            editor.PathHelper = new PathHelper(editor);
+            editor.RectangleHelper = new RectangleHelper(editor);
+            editor.EllipseHelper = new EllipseHelper(editor);
             editor.TextHelper = new TextHelper(editor);
             editor.ImageHelper = new ImageHelper(editor);
-            editor.PathHelper = new PathHelper(editor);
 
             return editor;
         }

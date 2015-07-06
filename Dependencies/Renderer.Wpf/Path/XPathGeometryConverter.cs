@@ -21,7 +21,7 @@ namespace Test
         /// </summary>
         /// <param name="xpoints"></param>
         /// <returns></returns>
-        public static IList<Point> ToPoints(this IList<XPathPoint> xpoints)
+        public static IList<Point> ToPoints(this IList<XPoint> xpoints)
         {
             var points = new List<Point>();
             foreach (var point in xpoints)
