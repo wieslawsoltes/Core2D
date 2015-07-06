@@ -291,6 +291,8 @@ namespace Test2d
                 _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipseBottomRight);
                 _ellipseBottomRight = null;
             }
+
+            _style = null;
         }
     }
 }
