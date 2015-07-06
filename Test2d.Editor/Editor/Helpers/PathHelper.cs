@@ -115,7 +115,7 @@ namespace Test2d
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        private void LeftDownLine(double x, double y)
+        private void LineLeftDown(double x, double y)
         {
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
@@ -177,7 +177,7 @@ namespace Test2d
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        private void RightDownLine(double x, double y)
+        private void LineRightDown(double x, double y)
         {
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
@@ -206,7 +206,7 @@ namespace Test2d
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        private void MoveLine(double x, double y)
+        private void LineMove(double x, double y)
         {
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
@@ -254,28 +254,118 @@ namespace Test2d
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
+        private void ArcLeftDown(double x, double y)
+        {
+            // TODO:
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        private void ArcRightDown(double x, double y)
+        {
+            // TODO:
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        private void ArcMove(double x, double y)
+        {
+            // TODO:
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        private void BezierLeftDown(double x, double y)
+        {
+            // TODO:
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        private void BezierRightDown(double x, double y)
+        {
+            // TODO:
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        private void BezierMove(double x, double y)
+        {
+            // TODO:
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        private void QBezierLeftDown(double x, double y)
+        {
+            // TODO:
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        private void QBezierRightDown(double x, double y)
+        {
+            // TODO:
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        private void QBezierMove(double x, double y)
+        {
+            // TODO:
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public override void LeftDown(double x, double y)
         {
             switch(_editor.CurrentPathTool)
             {
                 case PathTool.Line:
                     {
-                        LeftDownLine(x, y);
+                        LineLeftDown(x, y);
                     }
                     break;
                 case PathTool.Arc:
                     {
-                        // TODO:
+                        ArcLeftDown(x, y);
                     }
                     break;
                 case PathTool.Bezier:
                     {
-                        // TODO:
+                        BezierLeftDown(x, y);
                     }
                     break;
                 case PathTool.QBezier:
                     {
-                        // TODO:
+                        QBezierLeftDown(x, y);
                     }
                     break;
             }
@@ -301,22 +391,22 @@ namespace Test2d
             {
                 case PathTool.Line:
                     {
-                        RightDownLine(x, y);
+                        LineRightDown(x, y);
                     }
                     break;
                 case PathTool.Arc:
                     {
-                        // TODO:
+                        ArcRightDown(x, y);
                     }
                     break;
                 case PathTool.Bezier:
                     {
-                        // TODO:
+                        BezierRightDown(x, y);
                     }
                     break;
                 case PathTool.QBezier:
                     {
-                        // TODO:
+                        QBezierRightDown(x, y);
                     }
                     break;
             }
@@ -342,22 +432,22 @@ namespace Test2d
             {
                 case PathTool.Line:
                     {
-                        MoveLine(x, y);
+                        LineMove(x, y);
                     }
                     break;
                 case PathTool.Arc:
                     {
-                        // TODO:
+                        ArcMove(x, y);
                     }
                     break;
                 case PathTool.Bezier:
                     {
-                        // TODO:
+                        BezierMove(x, y);
                     }
                     break;
                 case PathTool.QBezier:
                     {
-                        // TODO:
+                        QBezierMove(x, y);
                     }
                     break;
             }
