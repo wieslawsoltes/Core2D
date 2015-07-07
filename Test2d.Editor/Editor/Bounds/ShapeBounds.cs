@@ -116,12 +116,11 @@ namespace Test2d
         public static Rect2 GetPathBounds(XPath path, double dx, double dy)
         {
             var b = path.Geometry.Bounds;
-            var t = path.Transform;
             return Rect2.Create(
-                t.OffsetX + b.X + dx,
-                t.OffsetY + b.Y + dy,
-                t.OffsetX + b.X + b.Width + dx,
-                t.OffsetY + b.Y + b.Height + dy);
+                b.X + dx,
+                b.Y + dy,
+                b.X + b.Width + dx,
+                b.Y + b.Height + dy);
         }
 
         #endregion
