@@ -1024,11 +1024,6 @@ namespace Test2d
             // TODO: Switch path tool.
         }
 
-        private void SwitchPathToolOnRightDown()
-        {
-            // TODO: Switch path tool.
-        }
-
         private void SwitchPathToolOnMove()
         {
             // TODO: Switch path tool.
@@ -1087,11 +1082,6 @@ namespace Test2d
         /// <param name="y"></param>
         public override void RightDown(double x, double y)
         {
-            if (_isInitialized && _editor.CurrentPathTool != _previousPathTool)
-            {
-                SwitchPathToolOnRightDown();
-            }
-
             switch (_editor.CurrentPathTool)
             {
                 case PathTool.Line:
