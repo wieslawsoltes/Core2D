@@ -101,7 +101,6 @@ namespace Test2d
                 _editor.Project.CurrentStyleLibrary.CurrentStyle,
                 null,
                 _geometry,
-                ShapeTransform.Create(),
                 _editor.Project.Options.DefaultIsStroked,
                 _editor.Project.Options.DefaultIsFilled);
 
