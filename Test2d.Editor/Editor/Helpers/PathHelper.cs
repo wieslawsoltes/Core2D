@@ -84,7 +84,7 @@ namespace Test2d
             return null;
         }
 
-        private void InitializePath(XPoint start)
+        private void InitializeWorkingPath(XPoint start)
         {
             _geometry = XPathGeometry.Create(
                 new List<XPathFigure>(),
@@ -111,7 +111,7 @@ namespace Test2d
             _isInitialized = true;
         }
 
-        private void DeInitializePath()
+        private void DeInitializeWorkingPath()
         {
             _isInitialized = false;
             _geometry = null;
@@ -166,7 +166,7 @@ namespace Test2d
                 case State.None:
                     {
                         _lineStart = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        InitializePath(_lineStart);
+                        InitializeWorkingPath(_lineStart);
 
                         _lineEnd = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         _geometry.LineTo(
@@ -223,7 +223,7 @@ namespace Test2d
                 case State.None:
                     {
                         _bezierPoint1 = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        InitializePath(_bezierPoint1);
+                        InitializeWorkingPath(_bezierPoint1);
 
                         _bezierPoint2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         _bezierPoint3 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
@@ -331,7 +331,7 @@ namespace Test2d
                 case State.None:
                     {
                         _qbezierPoint1 = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        InitializePath(_qbezierPoint1);
+                        InitializeWorkingPath(_qbezierPoint1);
 
                         _qbezierPoint2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         _qbezierPoint3 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
@@ -426,7 +426,7 @@ namespace Test2d
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         }
-                        DeInitializePath();
+                        DeInitializeWorkingPath();
                         _currentState = State.None;
                     }
                     break;
@@ -462,7 +462,7 @@ namespace Test2d
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         }
-                        DeInitializePath();
+                        DeInitializeWorkingPath();
                         _currentState = State.None;
                     }
                     break;
@@ -492,7 +492,7 @@ namespace Test2d
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         }
-                        DeInitializePath();
+                        DeInitializeWorkingPath();
                         _currentState = State.None;
                     }
                     break;
