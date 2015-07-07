@@ -136,7 +136,6 @@
     <Compile Include="Shape\ShapeProperty.cs" />
     <Compile Include="Shape\ShapePropertyExtensions.cs" />
     <Compile Include="Shape\ShapeState.cs" />
-    <Compile Include="Shape\ShapeTransform.cs" />
     <Compile Include="Style\ArgbColor.cs" />
     <Compile Include="Style\ArrowStyle.cs" />
     <Compile Include="Style\ArrowType.cs" />
