@@ -357,6 +357,15 @@ namespace Test2d
 
                 if (path.Geometry != null)
                 {
+                    var points = path.GetAllPoints();
+                    foreach (var point in points)
+                    {
+                        if (GetPointBounds(point, treshold, dx, dy).Contains(p))
+                        {
+                            return point;
+                        }
+                    }
+
                     if (GetPathBounds(path, dx, dy).Contains(p))
                     {
                         return path;
