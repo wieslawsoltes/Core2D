@@ -68,7 +68,7 @@ namespace Test2d
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public XPoint TryToConnect(double x, double y)
+        public XPoint TryToGetConnectionPoint(double x, double y)
         {
             if (_editor.Project.Options.TryToConnect)
             {
@@ -165,7 +165,7 @@ namespace Test2d
             {
                 case State.None:
                     {
-                        _lineStart = TryToConnect(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _lineStart = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         InitializePath(_lineStart);
 
                         _lineEnd = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
@@ -186,7 +186,7 @@ namespace Test2d
                         _lineEnd.Y = sy;
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            var end = TryToConnect(sx, sy);
+                            var end = TryToGetConnectionPoint(sx, sy);
                             if (end != null)
                             {
                                 var figure = _geometry.Figures.LastOrDefault();
@@ -222,7 +222,7 @@ namespace Test2d
             {
                 case State.None:
                     {
-                        _bezierPoint1 = TryToConnect(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _bezierPoint1 = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         InitializePath(_bezierPoint1);
 
                         _bezierPoint2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
@@ -247,7 +247,7 @@ namespace Test2d
                         _bezierPoint4.Y = sy;
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            var point3 = TryToConnect(sx, sy);
+                            var point3 = TryToGetConnectionPoint(sx, sy);
                             if (point3 != null)
                             {
                                 var figure = _geometry.Figures.LastOrDefault();
@@ -269,7 +269,7 @@ namespace Test2d
                         _bezierPoint2.Y = sy;
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            var point1 = TryToConnect(sx, sy);
+                            var point1 = TryToGetConnectionPoint(sx, sy);
                             if (point1 != null)
                             {
                                 var figure = _geometry.Figures.LastOrDefault();
@@ -291,7 +291,7 @@ namespace Test2d
                         _bezierPoint3.Y = sy;
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            var point2 = TryToConnect(sx, sy);
+                            var point2 = TryToGetConnectionPoint(sx, sy);
                             if (point2 != null)
                             {
                                 var figure = _geometry.Figures.LastOrDefault();
@@ -330,7 +330,7 @@ namespace Test2d
             {
                 case State.None:
                     {
-                        _qbezierPoint1 = TryToConnect(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+                        _qbezierPoint1 = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         InitializePath(_qbezierPoint1);
 
                         _qbezierPoint2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
@@ -353,7 +353,7 @@ namespace Test2d
                         _qbezierPoint3.Y = sy;
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            var point2 = TryToConnect(sx, sy);
+                            var point2 = TryToGetConnectionPoint(sx, sy);
                             if (point2 != null)
                             {
                                 var figure = _geometry.Figures.LastOrDefault();
@@ -375,7 +375,7 @@ namespace Test2d
                         _qbezierPoint2.Y = sy;
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            var point1 = TryToConnect(sx, sy);
+                            var point1 = TryToGetConnectionPoint(sx, sy);
                             if (point1 != null)
                             {
                                 var figure = _geometry.Figures.LastOrDefault();
