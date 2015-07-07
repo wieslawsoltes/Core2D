@@ -247,6 +247,73 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static IEnumerable<XPoint> GetAllPathPoints(XPath path)
+        {
+            if (path != null && path.Geometry != null)
+            {
+                foreach (var figure in path.Geometry.Figures)
+                {
+                    yield return figure.StartPoint;
+
+                    foreach (var segment in figure.Segments)
+                    {
+                        if (segment is XArcSegment)
+                        {
+                            var arcSegment = segment as XArcSegment;
+                            yield return arcSegment.Point;
+                        }
+                        else if (segment is XBezierSegment)
+                        {
+                            var bezierSegment = segment as XBezierSegment;
+                            yield return bezierSegment.Point1;
+                            yield return bezierSegment.Point2;
+                            yield return bezierSegment.Point3;
+                        }
+                        else if (segment is XLineSegment)
+                        {
+                            var lineSegment = segment as XLineSegment;
+                            yield return lineSegment.Point;
+                        }
+                        else if (segment is XPolyBezierSegment)
+                        {
+                            var polyBezierSegment = segment as XPolyBezierSegment;
+                            foreach (var point in polyBezierSegment.Points)
+                            {
+                                yield return point;
+                            }
+                        }
+                        else if (segment is XPolyLineSegment)
+                        {
+                            var polyLineSegment = segment as XPolyLineSegment;
+                            foreach (var point in polyLineSegment.Points)
+                            {
+                                yield return point;
+                            }
+                        }
+                        else if (segment is XPolyQuadraticBezierSegment)
+                        {
+                            var polyQuadraticSegment = segment as XPolyQuadraticBezierSegment;
+                            foreach (var point in polyQuadraticSegment.Points)
+                            {
+                                yield return point;
+                            }
+                        }
+                        else if (segment is XQuadraticBezierSegment)
+                        {
+                            var qbezierSegment = segment as XQuadraticBezierSegment;
+                            yield return qbezierSegment.Point1;
+                            yield return qbezierSegment.Point2;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="shapes"></param>
         /// <param name="exclude"></param>
         /// <returns></returns>
@@ -405,6 +472,18 @@ namespace Test2d
                         yield return image.BottomRight;
                     }
                 }
+                else if (shape is XPath)
+                {
+                    var path = shape as XPath;
+
+                    foreach (var point in GetAllPathPoints(path))
+                    {
+                        if (!point.State.HasFlag(exclude))
+                        {
+                            yield return point;
+                        }
+                    }
+                }
                 else if (shape is XGroup)
                 {
                     var group = shape as XGroup;
@@ -483,6 +562,10 @@ namespace Test2d
                     yield return shape;
                 }
                 else if (shape is XImage)
+                {
+                    yield return shape;
+                }
+                else if (shape is XPath)
                 {
                     yield return shape;
                 }
