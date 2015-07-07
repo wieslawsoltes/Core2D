@@ -38,7 +38,7 @@ namespace Test
         private IDictionary<XQBezier, PathGeometry> _qbezierCache;
         private IDictionary<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache;
         private IDictionary<Uri, BitmapImage> _biCache;
-        private IDictionary<XPath, Tuple<string, XPathGeometry, StreamGeometry, TransformGroupHelper, ShapeStyle>> _pathCache;
+        private IDictionary<XPath, Tuple<string, XPathGeometry, StreamGeometry, ShapeStyle>> _pathCache;
         private RendererState _state = new RendererState();
 
         /// <summary>
@@ -389,7 +389,7 @@ namespace Test
             }
             _biCache = new Dictionary<Uri, BitmapImage>();
             
-            _pathCache = new Dictionary<XPath, Tuple<string, XPathGeometry, StreamGeometry, TransformGroupHelper, ShapeStyle>>();
+            _pathCache = new Dictionary<XPath, Tuple<string, XPathGeometry, StreamGeometry, ShapeStyle>>();
         }
 
         /// <summary>
@@ -1249,24 +1249,17 @@ namespace Test
                     _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
     
-            Tuple<string, XPathGeometry, StreamGeometry, TransformGroupHelper, ShapeStyle> pcache = null;
+            Tuple<string, XPathGeometry, StreamGeometry, ShapeStyle> pcache = null;
             StreamGeometry sg;
-            TransformGroupHelper tgh;
 
             if (_enablePathCache
                 && _pathCache.TryGetValue(path, out pcache)
                 && string.Compare(pcache.Item1, path.Source) == 0
                 && pcache.Item2 == path.Geometry
-                && pcache.Item5 == style)
+                && pcache.Item4 == style)
             {
                 sg = pcache.Item3;
-                tgh = pcache.Item4;
-
-                tgh.Update(path.Transform);
-                
-                _dc.PushTransform(tgh.Group);
                 _dc.DrawGeometry(path.IsFilled ? fill : null, path.IsStroked ? stroke : null, sg);
-                _dc.Pop();
             }
             else
             {
@@ -1288,11 +1281,9 @@ namespace Test
                 path.Geometry.Bounds.Width = sg.Bounds.Width;
                 path.Geometry.Bounds.Height = sg.Bounds.Height;
 
-                tgh = new TransformGroupHelper(path.Transform);
-
                 if (_enablePathCache)
                 {
-                    var tuple = Tuple.Create(path.Source, path.Geometry, sg, tgh, style);
+                    var tuple = Tuple.Create(path.Source, path.Geometry, sg, style);
                     if (_pathCache.ContainsKey(path))
                     {
                         _pathCache[path] = tuple;
@@ -1302,10 +1293,8 @@ namespace Test
                         _pathCache.Add(path, tuple);
                     }
                 }
-          
-                _dc.PushTransform(tgh.Group);
+
                 _dc.DrawGeometry(path.IsFilled ? fill : null, path.IsStroked ? stroke : null, sg);
-                _dc.Pop();
             }  
         }
     }

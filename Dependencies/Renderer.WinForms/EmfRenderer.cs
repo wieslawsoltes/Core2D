@@ -1115,44 +1115,6 @@ namespace Test2d
                 }
             }
 
-            var t = path.Transform;
-            var m = new Matrix();
-            var c = new PointF(
-                _scaleToPage(t.CenterX + dx), 
-                _scaleToPage(t.CenterY + dy));
-
-            // translate
-            m.Translate(
-                _scaleToPage(t.OffsetX + dx),
-                _scaleToPage(t.OffsetY + dy));
-            // rotate
-            m.RotateAt((float)t.RotateAngle, c);
-            // skew
-            m.Translate(-c.X, -c.Y);
-            m.Multiply(
-                new Matrix(
-                    1, 
-                    (float)Math.Tan(Math.PI * t.SkewAngleY / 180.0), 
-                    (float)Math.Tan(Math.PI * t.SkewAngleX / 180.0), 
-                    1, 
-                    0, 
-                    0),
-                MatrixOrder.Prepend);
-            m.Translate(c.X, c.Y);
-            // scale
-             m.Multiply(
-                new Matrix(
-                    (float)t.ScaleX, 
-                    0, 
-                    0, 
-                    (float)t.ScaleY, 
-                    (float)(c.X - c.X * t.ScaleX),
-                    (float)(c.Y - c.Y * t.ScaleY)),
-                MatrixOrder.Prepend);
- 
-            var gs = _gfx.Save();
-            _gfx.Transform = m;
-
             if (path.IsFilled && path.IsStroked)
             {
                 var brush = ToSolidBrush(path.Style.Fill);
@@ -1182,8 +1144,6 @@ namespace Test2d
                     gp);
                 pen.Dispose();
             }
-
-            _gfx.Restore(gs);
         }
     }
 }

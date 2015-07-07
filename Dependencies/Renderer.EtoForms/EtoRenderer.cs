@@ -1138,34 +1138,6 @@ namespace TestEtoForms
                 }
             }
 
-            var t = path.Transform;
-            var m = Matrix.Create();
-            var c = new PointF(
-                _scaleToPage(t.CenterX + dx), 
-                _scaleToPage(t.CenterY + dy));
-            // translate
-            m.Translate(
-                _scaleToPage(t.OffsetX + dx),
-                _scaleToPage(t.OffsetY + dy));
-            // rotate
-            m.RotateAt((float)t.RotateAngle, c);
-            // skew
-            m.Translate(-c.X, -c.Y);
-            m.Prepend(
-                Matrix.Create(
-                    1, 
-                    (float)Math.Tan(Math.PI * t.SkewAngleY / 180.0), 
-                    (float)Math.Tan(Math.PI * t.SkewAngleX / 180.0), 
-                    1, 
-                    0, 
-                    0));
-            m.Translate(c.X, c.Y);
-            // scale
-            m.ScaleAt((float)t.ScaleX, (float)t.ScaleY, c.X, c.Y);
-
-            _gfx.SaveTransform();
-            _gfx.MultiplyTransform(m);
-
             if (path.IsFilled && path.IsStroked)
             {
                 var brush = ToSolidBrush(path.Style.Fill);
@@ -1195,8 +1167,6 @@ namespace TestEtoForms
                     gp);
                 pen.Dispose();
             }
-
-            _gfx.RestoreTransform();
         }
     }
 }

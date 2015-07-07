@@ -1239,15 +1239,6 @@ namespace PdfSharp
                 }
             }
 
-            var t = path.Transform;
-            var c = new XPoint(t.CenterX, t.CenterY);
-            
-            _gfx.Save();
-            _gfx.TranslateTransform(t.OffsetX, t.OffsetY);
-            _gfx.RotateAtTransform(t.RotateAngle, c);
-            _gfx.SkewAtTransform(t.SkewAngleX, t.SkewAngleY, c);
-            _gfx.ScaleAtTransform(t.ScaleX, t.ScaleY, c);
-
             if (path.IsFilled && path.IsStroked)
             {
                 _gfx.DrawPath(
@@ -1267,8 +1258,6 @@ namespace PdfSharp
                     ToXPen(path.Style, _scaleToPage),
                     gp);
             }
-
-            _gfx.Restore();
         }
     }
 }
