@@ -118,7 +118,7 @@ namespace Test2d
             _path = null;
         }
 
-        private void RemoveLineSegment()
+        private void RemoveLastLineSegment()
         {
             var figure = _geometry.Figures.LastOrDefault();
             if (figure != null)
@@ -131,7 +131,7 @@ namespace Test2d
             }
         }
 
-        private void RemoveBezierSegment()
+        private void RemoveLastBezierSegment()
         {
             var figure = _geometry.Figures.LastOrDefault();
             if (figure != null)
@@ -144,7 +144,7 @@ namespace Test2d
             }
         }
 
-        private void RemoveQuadraticBezierSegment()
+        private void RemoveLastQBezierSegment()
         {
             var figure = _geometry.Figures.LastOrDefault();
             if (figure != null)
@@ -412,7 +412,7 @@ namespace Test2d
                     break;
                 case State.One:
                     {
-                        RemoveLineSegment();
+                        RemoveLastLineSegment();
 
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_path);
                         Remove();
@@ -448,7 +448,7 @@ namespace Test2d
                 case State.Two:
                 case State.Three:
                     {
-                        RemoveBezierSegment();
+                        RemoveLastBezierSegment();
 
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_path);
                         Remove();
@@ -478,7 +478,7 @@ namespace Test2d
                 case State.One:
                 case State.Two:
                     {
-                        RemoveQuadraticBezierSegment();
+                        RemoveLastQBezierSegment();
 
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_path);
                         Remove();
