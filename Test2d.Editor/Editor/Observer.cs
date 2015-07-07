@@ -969,10 +969,7 @@ namespace Test2d
             {
                 var path = shape as XPath;
 
-                if (path.Transform != null)
-                {
-                    path.Transform.PropertyChanged += ShapeObserver;
-                }
+                // TODO: Observer path sub properties.
             }
             else if (shape is XGroup)
             {
@@ -1182,10 +1179,7 @@ namespace Test2d
             {
                 var path = shape as XPath;
 
-                if (path.Transform != null)
-                {
-                    path.Transform.PropertyChanged -= ShapeObserver;
-                }
+                // TODO: Stop observing path sub properties;
             }
             else if (shape is XGroup)
             {
