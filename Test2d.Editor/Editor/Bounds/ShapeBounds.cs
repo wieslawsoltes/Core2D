@@ -355,9 +355,12 @@ namespace Test2d
             {
                 var path = shape as XPath;
 
-                if (GetPathBounds(path, dx, dy).Contains(p))
+                if (path.Geometry != null)
                 {
-                    return path;
+                    if (GetPathBounds(path, dx, dy).Contains(p))
+                    {
+                        return path;
+                    }
                 }
                 return null;
             }
@@ -614,16 +617,19 @@ namespace Test2d
             }
             else if (shape is XPath)
             {
-                if (GetPathBounds(shape as XPath, dx, dy).IntersectsWith(rect))
+                if ((shape as XPath).Geometry != null)
                 {
-                    if (builder != null)
+                    if (GetPathBounds(shape as XPath, dx, dy).IntersectsWith(rect))
                     {
-                        builder.Add(shape);
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
+                        if (builder != null)
+                        {
+                            builder.Add(shape);
+                            return false;
+                        }
+                        else
+                        {
+                            return true;
+                        }
                     }
                 }
                 return false;
