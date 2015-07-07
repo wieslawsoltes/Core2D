@@ -223,67 +223,60 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XArcSegment}">
         <StackPanel>
-            <Expander Header="Point" IsExpanded="True">
-                <ContentControl Content="{Binding Point}"/>
-            </Expander>
-            <Expander Header="Size" IsExpanded="True">
-                <ContentControl Content="{Binding Size}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock 
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
                         Text="RotationAngle" 
                         Margin="5,2,5,2" 
                         Grid.Row="0"
                         Grid.Column="0" 
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock 
+                </TextBlock>
+                <TextBlock 
                         Text="IsLargeArc" 
                         Margin="5,2,5,2" 
                         Grid.Row="1"
                         Grid.Column="0" 
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock 
+                </TextBlock>
+                <TextBlock 
                         Text="SweepDirection" 
                         Margin="5,2,5,2" 
                         Grid.Row="2" 
                         Grid.Column="0" 
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock 
+                </TextBlock>
+                <TextBlock 
                         Text="IsStroked" 
                         Margin="5,2,5,2" 
                         Grid.Row="3"
                         Grid.Column="0" 
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock 
+                </TextBlock>
+                <TextBlock 
                         Text="IsSmoothJoin" 
                         Margin="5,2,5,2" 
                         Grid.Row="4"
                         Grid.Column="0" 
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBox 
+                </TextBlock>
+                <TextBox 
                         Text="{Binding RotationAngle, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                         BorderBrush="{x:Null}"
                         Margin="5,2,5,2" 
@@ -292,156 +285,200 @@
                         Grid.ColumnSpan="2"
                         TextAlignment="Center" 
                         VerticalAlignment="Center">
-                    </TextBox>
-                    <CheckBox 
+                </TextBox>
+                <CheckBox 
                         Content=""
                         IsChecked="{Binding IsLargeArc}"
                         Margin="5,2,5,2" 
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <ComboBox 
+                </CheckBox>
+                <ComboBox 
                         ItemsSource="{Binding Source={StaticResource ResourceKey=XSweepDirectionValues}}" 
                         SelectedItem="{Binding SweepDirection}" 
                         Margin="5,2,5,2" 
                         Grid.Row="2" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
-                    </ComboBox>
-                    <CheckBox 
+                </ComboBox>
+                <CheckBox 
                         Content=""
                         IsChecked="{Binding IsStroked}"
                         Margin="5,2,5,2" 
                         Grid.Row="3" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <CheckBox 
+                </CheckBox>
+                <CheckBox 
                         Content=""
                         IsChecked="{Binding IsSmoothJoin}"
                         Margin="5,2,5,2" 
                         Grid.Row="4" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
-                    </CheckBox>
-                </Grid>
+                </CheckBox>
+            </Grid>
+            <Expander Header="Point">
+                <ContentControl Content="{Binding Point}"/>
+            </Expander>
+            <Expander Header="Size">
+                <ContentControl Content="{Binding Size}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XBezierSegment}">
         <StackPanel>
-            <Expander Header="Point1" IsExpanded="True">
-                <ContentControl Content="{Binding Point1}"/>
-            </Expander>
-            <Expander Header="Point2" IsExpanded="True">
-                <ContentControl Content="{Binding Point2}"/>
-            </Expander>
-            <Expander Header="Point3" IsExpanded="True">
-                <ContentControl Content="{Binding Point3}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock 
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
                         Text="IsStroked" 
                         Margin="5,2,5,2" 
                         Grid.Row="0"
                         Grid.Column="0" 
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock 
+                </TextBlock>
+                <TextBlock 
                         Text="IsSmoothJoin" 
                         Margin="5,2,5,2" 
                         Grid.Row="1"
                         Grid.Column="0" 
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
-                    </TextBlock>
-                    <CheckBox 
+                </TextBlock>
+                <CheckBox 
                         Content=""
                         IsChecked="{Binding IsStroked}"
                         Margin="5,2,5,2" 
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <CheckBox 
+                </CheckBox>
+                <CheckBox 
                         Content=""
                         IsChecked="{Binding IsSmoothJoin}"
                         Margin="5,2,5,2" 
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
-                    </CheckBox>
-                </Grid>
+                </CheckBox>
+            </Grid>
+            <Expander Header="Point1">
+                <ContentControl Content="{Binding Point1}"/>
+            </Expander>
+            <Expander Header="Point2">
+                <ContentControl Content="{Binding Point2}"/>
+            </Expander>
+            <Expander Header="Point3">
+                <ContentControl Content="{Binding Point3}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XLineSegment}">
         <StackPanel>
-            <Expander Header="Point" IsExpanded="True">
-                <ContentControl Content="{Binding Point}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock 
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
                         Text="IsStroked" 
                         Margin="5,2,5,2" 
                         Grid.Row="0"
                         Grid.Column="0" 
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock 
+                </TextBlock>
+                <TextBlock 
                         Text="IsSmoothJoin" 
                         Margin="5,2,5,2" 
                         Grid.Row="1"
                         Grid.Column="0" 
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
-                    </TextBlock>
-                    <CheckBox 
+                </TextBlock>
+                <CheckBox 
                         Content=""
                         IsChecked="{Binding IsStroked}"
                         Margin="5,2,5,2" 
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <CheckBox 
+                </CheckBox>
+                <CheckBox 
                         Content=""
                         IsChecked="{Binding IsSmoothJoin}"
                         Margin="5,2,5,2" 
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
-                    </CheckBox>
-                </Grid>
+                </CheckBox>
+            </Grid>
+            <Expander Header="Point">
+                <ContentControl Content="{Binding Point}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XPolyBezierSegment}">
         <StackPanel>
-            <Expander Header="Points" IsExpanded="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                        Text="IsStroked" 
+                        Margin="5,2,5,2" 
+                        Grid.Row="0"
+                        Grid.Column="0" 
+                        TextAlignment="Left" 
+                        VerticalAlignment="Center">
+                </TextBlock>
+                <TextBlock 
+                        Text="IsSmoothJoin" 
+                        Margin="5,2,5,2" 
+                        Grid.Row="1"
+                        Grid.Column="0" 
+                        TextAlignment="Left" 
+                        VerticalAlignment="Center">
+                </TextBlock>
+                <CheckBox 
+                        Content=""
+                        IsChecked="{Binding IsStroked}"
+                        Margin="5,2,5,2" 
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2">
+                </CheckBox>
+                <CheckBox 
+                        Content=""
+                        IsChecked="{Binding IsSmoothJoin}"
+                        Margin="5,2,5,2" 
+                        Grid.Row="1" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2">
+                </CheckBox>
+            </Grid>
+            <Expander Header="Points">
                 <ListBox
                     ItemsSource="{Binding Points}"
                     BorderBrush="{x:Null}"
@@ -450,113 +487,109 @@
                     Height="140">
                 </ListBox>
             </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock 
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type core:XPolyLineSegment}">
+        <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
                         Text="IsStroked" 
                         Margin="5,2,5,2" 
                         Grid.Row="0"
                         Grid.Column="0" 
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock 
+                </TextBlock>
+                <TextBlock 
                         Text="IsSmoothJoin" 
                         Margin="5,2,5,2" 
                         Grid.Row="1"
                         Grid.Column="0" 
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
-                    </TextBlock>
-                    <CheckBox 
+                </TextBlock>
+                <CheckBox 
                         Content=""
                         IsChecked="{Binding IsStroked}"
                         Margin="5,2,5,2" 
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <CheckBox 
+                </CheckBox>
+                <CheckBox 
                         Content=""
                         IsChecked="{Binding IsSmoothJoin}"
                         Margin="5,2,5,2" 
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
-                    </CheckBox>
-                </Grid>
-            </Expander>
-        </StackPanel>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type core:XPolyLineSegment}">
-        <StackPanel>
-            <Expander Header="Points" IsExpanded="True">
+                </CheckBox>
+            </Grid>
+            <Expander Header="Points">
                 <ListBox
                     ItemsSource="{Binding Points}"
                     BorderBrush="{x:Null}"
                     HorizontalContentAlignment="Stretch"
                     Height="140">
                 </ListBox>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock 
-                        Text="IsStroked" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="0"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="IsSmoothJoin" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="1"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                    </TextBlock>
-                    <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsStroked}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsSmoothJoin}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="1" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </CheckBox>
-                </Grid>
             </Expander>
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XPolyQuadraticBezierSegment}">
         <StackPanel>
-            <Expander Header="Points" IsExpanded="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                        Text="IsStroked" 
+                        Margin="5,2,5,2" 
+                        Grid.Row="0"
+                        Grid.Column="0" 
+                        TextAlignment="Left" 
+                        VerticalAlignment="Center">
+                </TextBlock>
+                <TextBlock 
+                        Text="IsSmoothJoin" 
+                        Margin="5,2,5,2" 
+                        Grid.Row="1"
+                        Grid.Column="0" 
+                        TextAlignment="Left" 
+                        VerticalAlignment="Center">
+                </TextBlock>
+                <CheckBox 
+                        Content=""
+                        IsChecked="{Binding IsStroked}"
+                        Margin="5,2,5,2" 
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2">
+                </CheckBox>
+                <CheckBox 
+                        Content=""
+                        IsChecked="{Binding IsSmoothJoin}"
+                        Margin="5,2,5,2" 
+                        Grid.Row="1" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2">
+                </CheckBox>
+            </Grid>
+            <Expander Header="Points">
                 <ListBox
                     ItemsSource="{Binding Points}"
                     BorderBrush="{x:Null}"
@@ -564,193 +597,179 @@
                     Height="140">
                 </ListBox>
             </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock 
-                        Text="IsStroked" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="0"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="IsSmoothJoin" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="1"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                    </TextBlock>
-                    <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsStroked}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsSmoothJoin}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="1" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </CheckBox>
-                </Grid>
-            </Expander>
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XQuadraticBezierSegment}">
         <StackPanel>
-            <Expander Header="Point1" IsExpanded="True">
-                <ContentControl Content="{Binding Point1}"/>
-            </Expander>
-            <Expander Header="Point2" IsExpanded="True">
-                <ContentControl Content="{Binding Point2}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock 
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
                         Text="IsStroked" 
                         Margin="5,2,5,2" 
                         Grid.Row="0"
                         Grid.Column="0" 
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock 
+                </TextBlock>
+                <TextBlock 
                         Text="IsSmoothJoin" 
                         Margin="5,2,5,2" 
                         Grid.Row="1"
                         Grid.Column="0" 
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
-                    </TextBlock>
-                    <CheckBox 
+                </TextBlock>
+                <CheckBox 
                         Content=""
                         IsChecked="{Binding IsStroked}"
                         Margin="5,2,5,2" 
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <CheckBox 
+                </CheckBox>
+                <CheckBox 
                         Content=""
                         IsChecked="{Binding IsSmoothJoin}"
                         Margin="5,2,5,2" 
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
-                    </CheckBox>
-                </Grid>
+                </CheckBox>
+            </Grid>
+            <Expander Header="Point1">
+                <ContentControl Content="{Binding Point1}"/>
+            </Expander>
+            <Expander Header="Point2">
+                <ContentControl Content="{Binding Point2}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XPathFigure}">
         <StackPanel>
-            <Expander Header="StartPoint" IsExpanded="True">
-                <ContentControl Content="{Binding StartPoint}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock 
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
                         Text="IsFilled" 
                         Margin="5,2,5,2" 
                         Grid.Row="0"
                         Grid.Column="0" 
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock 
+                </TextBlock>
+                <TextBlock 
                         Text="IsClosed" 
                         Margin="5,2,5,2" 
                         Grid.Row="1" 
                         Grid.Column="0" 
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
-                    </TextBlock>
-                    <CheckBox 
+                </TextBlock>
+                <CheckBox 
                         Content=""
                         IsChecked="{Binding IsFilled}"
                         Margin="5,2,5,2" 
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <CheckBox 
+                </CheckBox>
+                <CheckBox 
                         Content=""
                         IsChecked="{Binding IsClosed}"
                         Margin="5,2,5,2" 
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
-                    </CheckBox>
-                </Grid>
+                </CheckBox>
+            </Grid>
+            <Expander Header="StartPoint">
+                <ContentControl Content="{Binding StartPoint}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XPathGeometry}">
         <StackPanel>
-            <Expander Header="Bounds" IsExpanded="True">
-                <ContentControl Content="{Binding Bounds}"/>
-            </Expander>
-            <Expander Header="Properties" IsExpanded="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock 
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
                         Text="FillRule" 
                         Margin="5,2,5,2" 
                         Grid.Row="0"
                         Grid.Column="0" 
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
-                    </TextBlock>
-                    <ComboBox 
+                </TextBlock>
+                <ComboBox 
                         ItemsSource="{Binding Source={StaticResource ResourceKey=XFillRuleValues}}" 
                         SelectedItem="{Binding FillRule}" 
                         Margin="5,2,5,2" 
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
-                    </ComboBox>
-                </Grid>
-            </Expander>
+                </ComboBox>
+            </Grid>
+            <TabControl>
+                <TabItem Header="Bounds">
+                    <ContentControl Content="{Binding Bounds}"/>
+                </TabItem>
+                <TabItem Header="Figures">
+                    <TreeView 
+                        x:Name="tree" 
+                        ItemsSource="{Binding Figures}"
+                        Margin="5,2,5,2">
+                        <TreeView.ItemContainerStyle>
+                            <Style TargetType="TreeViewItem">
+                                <Setter Property="IsExpanded" Value="True"/>
+                            </Style>
+                        </TreeView.ItemContainerStyle>
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Segments}">
+                                <HierarchicalDataTemplate.ItemContainerStyle>
+                                    <Style TargetType="TreeViewItem">
+                                        <Setter Property="IsExpanded" Value="True"/>
+                                    </Style>
+                                </HierarchicalDataTemplate.ItemContainerStyle>
+                                <HierarchicalDataTemplate.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}"/>
+                                    </DataTemplate>
+                                </HierarchicalDataTemplate.ItemTemplate>
+                                <TextBlock Text="{Binding}"/>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </TabItem>
+                <TabItem Header="Selected">
+                    <ContentControl 
+                        Content="{Binding}"                
+                        DataContext="{Binding ElementName=tree, Path=SelectedItem}"
+                        Margin="5,5,5,5"
+                        Grid.Column="2">
+                    </ContentControl>
+                </TabItem>
+            </TabControl>
         </StackPanel>
     </DataTemplate>
     <!-- shape -->
@@ -914,188 +933,6 @@
             </TextBox>
         </Grid>
     </ControlTemplate>
-    <DataTemplate DataType="{x:Type core:ShapeTransform}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="40"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock 
-                Text="CenterX" 
-                Margin="5,2,5,2" 
-                Grid.Row="0" 
-                Grid.Column="0" 
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
-            </TextBlock>
-            <TextBlock 
-                Text="CenterY" 
-                Margin="5,2,5,2" 
-                Grid.Row="1" 
-                Grid.Column="0" 
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
-            </TextBlock>
-            <TextBlock 
-                Text="ScaleX" 
-                Margin="5,2,5,2" 
-                Grid.Row="2" 
-                Grid.Column="0" 
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
-            </TextBlock>
-            <TextBlock 
-                Text="ScaleY" 
-                Margin="5,2,5,2" 
-                Grid.Row="3" 
-                Grid.Column="0" 
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
-            </TextBlock>
-            <TextBlock 
-                Text="SkewAngleX" 
-                Margin="5,2,5,2" 
-                Grid.Row="4" 
-                Grid.Column="0" 
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
-            </TextBlock>
-            <TextBlock 
-                Text="SkewAngleY" 
-                Margin="5,2,5,2" 
-                Grid.Row="5" 
-                Grid.Column="0" 
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
-            </TextBlock>
-            <TextBlock 
-                Text="RotateAngle" 
-                Margin="5,2,5,2" 
-                Grid.Row="6" 
-                Grid.Column="0" 
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
-            </TextBlock>
-            <TextBlock 
-                Text="OffsetX" 
-                Margin="5,2,5,2" 
-                Grid.Row="7" 
-                Grid.Column="0" 
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
-            </TextBlock>
-            <TextBlock 
-                Text="OffsetY" 
-                Margin="5,2,5,2" 
-                Grid.Row="8" 
-                Grid.Column="0" 
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
-            </TextBlock>
-            <TextBox 
-                Text="{Binding CenterX, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                BorderBrush="{x:Null}"
-                Margin="5,2,5,2"
-                Grid.Row="0" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2"
-                TextAlignment="Center" 
-                VerticalAlignment="Center">
-            </TextBox>
-            <TextBox 
-                Text="{Binding CenterY, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                BorderBrush="{x:Null}"
-                Margin="5,2,5,2"
-                Grid.Row="1" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2"
-                TextAlignment="Center" 
-                VerticalAlignment="Center">
-            </TextBox>
-            <TextBox 
-                Text="{Binding ScaleX, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                BorderBrush="{x:Null}"
-                Margin="5,2,5,2"
-                Grid.Row="2" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2"
-                TextAlignment="Center" 
-                VerticalAlignment="Center">
-            </TextBox>
-            <TextBox 
-                Text="{Binding ScaleY, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                BorderBrush="{x:Null}"
-                Margin="5,2,5,2"
-                Grid.Row="3" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2"
-                TextAlignment="Center" 
-                VerticalAlignment="Center">
-            </TextBox>
-            <TextBox 
-                Text="{Binding SkewAngleX, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                BorderBrush="{x:Null}"
-                Margin="5,2,5,2"
-                Grid.Row="4" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2"
-                TextAlignment="Center" 
-                VerticalAlignment="Center">
-            </TextBox>
-            <TextBox 
-                Text="{Binding SkewAngleY, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                BorderBrush="{x:Null}"
-                Margin="5,2,5,2"
-                Grid.Row="5" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2"
-                TextAlignment="Center" 
-                VerticalAlignment="Center">
-            </TextBox>
-            <TextBox 
-                Text="{Binding RotateAngle, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                BorderBrush="{x:Null}"
-                Margin="5,2,5,2"
-                Grid.Row="6" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2"
-                TextAlignment="Center" 
-                VerticalAlignment="Center">
-            </TextBox>
-            <TextBox 
-                Text="{Binding OffsetX, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                BorderBrush="{x:Null}"
-                Margin="5,2,5,2"
-                Grid.Row="7" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2"
-                TextAlignment="Center" 
-                VerticalAlignment="Center">
-            </TextBox>
-            <TextBox 
-                Text="{Binding OffsetY, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                BorderBrush="{x:Null}"
-                Margin="5,2,5,2"
-                Grid.Row="8" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2"
-                TextAlignment="Center" 
-                VerticalAlignment="Center">
-            </TextBox>
-        </Grid>
-    </DataTemplate>
     <!-- code -->
     <ControlTemplate x:Key="CodeControlTemplateKey">
         <StackPanel>
@@ -2640,9 +2477,6 @@
                                 VerticalAlignment="Center">
                     </TextBox>
                 </Grid>
-            </Expander>
-            <Expander Header="Transform">
-                <ContentControl Content="{Binding Transform}"/>
             </Expander>
             <Expander Header="Geometry">
                 <ContentControl Content="{Binding Geometry}"/>
