@@ -131,6 +131,19 @@ namespace Test2d
             }
         }
 
+        private void RemoveLastArcSegment()
+        {
+            var figure = _geometry.Figures.LastOrDefault();
+            if (figure != null)
+            {
+                var segment = figure.Segments.LastOrDefault() as XArcSegment;
+                if (segment != null)
+                {
+                    figure.Segments.Remove(segment);
+                }
+            }
+        }
+
         private void RemoveLastBezierSegment()
         {
             var figure = _geometry.Figures.LastOrDefault();
@@ -157,6 +170,102 @@ namespace Test2d
             }
         }
 
+        private void SetLineStartPointFromLastSegment()
+        {
+            var figure = _geometry.Figures.LastOrDefault();
+            if (figure != null)
+            {
+                var segment = figure.Segments.LastOrDefault();
+                if (segment != null)
+                {
+                    if (segment is XLineSegment)
+                    {
+                        _lineStart = (segment as XLineSegment).Point;
+                    }
+                    else if (segment is XArcSegment)
+                    {
+                        // TODO: Set line start point using last arc point.
+                    }
+                    else if (segment is XBezierSegment)
+                    {
+                        _lineStart = (segment as XBezierSegment).Point3;
+                    }
+                    else if (segment is XQuadraticBezierSegment)
+                    {
+                        _lineStart = (segment as XQuadraticBezierSegment).Point2;
+                    }
+                }
+                else
+                {
+                    _lineStart = figure.StartPoint;
+                }
+            }
+        }
+
+        private void SetBezieFirstPointFromLastSegment()
+        {
+            var figure = _geometry.Figures.LastOrDefault();
+            if (figure != null)
+            {
+                var segment = figure.Segments.LastOrDefault();
+                if (segment != null)
+                {
+                    if (segment is XLineSegment)
+                    {
+                        _bezierPoint1 = (segment as XLineSegment).Point;
+                    }
+                    else if (segment is XArcSegment)
+                    {
+                        // TODO: Set bezier first point using last arc point.
+                    }
+                    else if (segment is XBezierSegment)
+                    {
+                        _bezierPoint1 = (segment as XBezierSegment).Point3;
+                    }
+                    else if (segment is XQuadraticBezierSegment)
+                    {
+                        _bezierPoint1 = (segment as XQuadraticBezierSegment).Point2;
+                    }
+                }
+                else
+                {
+                    _bezierPoint1 = figure.StartPoint;
+                }
+            }
+        }
+
+        private void SetQBezieFirstPointFromLastSegment()
+        {
+            var figure = _geometry.Figures.LastOrDefault();
+            if (figure != null)
+            {
+                var segment = figure.Segments.LastOrDefault();
+                if (segment != null)
+                {
+                    if (segment is XLineSegment)
+                    {
+                        _qbezierPoint1 = (segment as XLineSegment).Point;
+                    }
+                    else if (segment is XArcSegment)
+                    {
+                        // TODO: Set qbezier first point using last arc point.
+                    }
+                    else if (segment is XBezierSegment)
+                    {
+                        _qbezierPoint1 = (segment as XBezierSegment).Point3;
+                    }
+                    else if (segment is XQuadraticBezierSegment)
+                    {
+                        _qbezierPoint1 = (segment as XQuadraticBezierSegment).Point2;
+                    }
+                }
+                else
+                {
+                    _qbezierPoint1 = figure.StartPoint;
+                }
+            }
+        }
+
         private void LineLeftDown(double x, double y)
         {
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
@@ -166,7 +275,14 @@ namespace Test2d
                 case State.None:
                     {
                         _lineStart = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        InitializeWorkingPath(_lineStart);
+                        if (!_isInitialized)
+                        {
+                            InitializeWorkingPath(_lineStart);
+                        }
+                        else
+                        {
+                            SetLineStartPointFromLastSegment();
+                        }
 
                         _lineEnd = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         _geometry.LineTo(
@@ -223,7 +339,14 @@ namespace Test2d
                 case State.None:
                     {
                         _bezierPoint1 = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        InitializeWorkingPath(_bezierPoint1);
+                        if (!_isInitialized)
+                        {
+                            InitializeWorkingPath(_bezierPoint1);
+                        }
+                        else
+                        {
+                            SetBezieFirstPointFromLastSegment();
+                        }
 
                         _bezierPoint2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         _bezierPoint3 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
@@ -331,7 +454,14 @@ namespace Test2d
                 case State.None:
                     {
                         _qbezierPoint1 = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                        InitializeWorkingPath(_qbezierPoint1);
+                        if (!_isInitialized)
+                        {
+                            InitializeWorkingPath(_qbezierPoint1);
+                        }
+                        else
+                        {
+                            SetQBezieFirstPointFromLastSegment();
+                        }
 
                         _qbezierPoint2 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
                         _qbezierPoint3 = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
@@ -416,7 +546,7 @@ namespace Test2d
 
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_path);
                         Remove();
-                        if (_path.Geometry.Figures.FirstOrDefault().Segments.Count > 0)
+                        if (_path.Geometry.Figures.LastOrDefault().Segments.Count > 0)
                         {
                             Finalize(null);
                             _editor.AddWithHistory(_path);
@@ -452,7 +582,7 @@ namespace Test2d
 
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_path);
                         Remove();
-                        if (_path.Geometry.Figures.FirstOrDefault().Segments.Count > 0)
+                        if (_path.Geometry.Figures.LastOrDefault().Segments.Count > 0)
                         {
                             Finalize(null);
                             _editor.AddWithHistory(_path);
@@ -482,7 +612,7 @@ namespace Test2d
 
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_path);
                         Remove();
-                        if (_path.Geometry.Figures.FirstOrDefault().Segments.Count > 0)
+                        if (_path.Geometry.Figures.LastOrDefault().Segments.Count > 0)
                         {
                             Finalize(null);
                             _editor.AddWithHistory(_path);
@@ -1019,14 +1149,63 @@ namespace Test2d
             _style = null;
         }
 
-        private void SwitchPathToolOnLeftDown()
+        private void SwitchPathTool(double x, double y)
         {
-            // TODO: Switch path tool.
-        }
+            switch (_previousPathTool)
+            {
+                case PathTool.Line:
+                    {
+                        RemoveLastLineSegment();
+                        RemoveLineHelpers();
+                    }
+                    break;
+                case PathTool.Arc:
+                    {
+                        RemoveLastArcSegment();
+                        RemoveArcHelpers();
+                    }
+                    break;
+                case PathTool.Bezier:
+                    {
+                        RemoveLastBezierSegment();
+                        RemoveBezierHelpers();
+                    }
+                    break;
+                case PathTool.QBezier:
+                    {
+                        RemoveLastQBezierSegment();
+                        RemoveQBezierHelpers();
+                    }
+                    break;
+            }
 
-        private void SwitchPathToolOnMove()
-        {
-            // TODO: Switch path tool.
+            _currentState = State.None;
+
+            switch (_editor.CurrentPathTool)
+            {
+                case PathTool.Line:
+                    {
+                        LineLeftDown(x, y);
+                    }
+                    break;
+                case PathTool.Arc:
+                    {
+                        ArcLeftDown(x, y);
+                    }
+                    break;
+                case PathTool.Bezier:
+                    {
+                        BezierLeftDown(x, y);
+                    }
+                    break;
+                case PathTool.QBezier:
+                    {
+                        QBezierLeftDown(x, y);
+                    }
+                    break;
+            }
+
+            _previousPathTool = _editor.CurrentPathTool;
         }
 
         /// <summary>
@@ -1038,7 +1217,8 @@ namespace Test2d
         {
             if (_isInitialized && _editor.CurrentPathTool != _previousPathTool)
             {
-                SwitchPathToolOnLeftDown();
+                SwitchPathTool(x, y);
+                return;
             }
 
             switch(_editor.CurrentPathTool)
@@ -1125,7 +1305,7 @@ namespace Test2d
         {
             if (_isInitialized && _editor.CurrentPathTool != _previousPathTool)
             {
-                SwitchPathToolOnMove();
+                SwitchPathTool(x, y);
             }
 
             switch (_editor.CurrentPathTool)
