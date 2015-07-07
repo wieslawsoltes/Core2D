@@ -12,7 +12,6 @@ namespace Test2d
     {
         private string _source;
         private XPathGeometry _geometry;
-        private ShapeTransform _transform;
 
         /// <summary>
         /// Gets or sets path source markup used to draw shape.
@@ -32,15 +31,6 @@ namespace Test2d
         {
             get { return _geometry; }
             set { Update(ref _geometry, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ShapeTransform Transform
-        {
-            get { return _transform; }
-            set { Update(ref _transform, value); }
         }
 
         /// <summary>
@@ -183,8 +173,11 @@ namespace Test2d
         /// <param name="dy"></param>
         public override void Move(double dx, double dy)
         {
-            _transform.OffsetX += dx;
-            _transform.OffsetY += dy;
+            var points = this.GetAllPoints();
+            foreach (var point in points)
+            {
+                point.Move(dx, dy);
+            }
         }
 
         /// <summary>
@@ -194,7 +187,6 @@ namespace Test2d
         /// <param name="style"></param>
         /// <param name="source"></param>
         /// <param name="geometry"></param>
-        /// <param name="transform"></param>
         /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <returns></returns>
@@ -203,7 +195,6 @@ namespace Test2d
             ShapeStyle style,
             string source,
             XPathGeometry geometry,
-            ShapeTransform transform,
             bool isStroked = true,
             bool isFilled = true)
         {
@@ -217,8 +208,7 @@ namespace Test2d
                 Properties = ImmutableArray.Create<ShapeProperty>(),
                 Code = ShapeCode.Create(),
                 Source = source,
-                Geometry = geometry,
-                Transform = transform
+                Geometry = geometry
             };
         }
     }
