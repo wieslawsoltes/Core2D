@@ -1283,6 +1283,11 @@ namespace Test
                 }
 
                 sg = path.Geometry.ToStreamGeometry();
+                path.Geometry.Bounds.X = sg.Bounds.X;
+                path.Geometry.Bounds.Y = sg.Bounds.Y;
+                path.Geometry.Bounds.Width = sg.Bounds.Width;
+                path.Geometry.Bounds.Height = sg.Bounds.Height;
+
                 tgh = new TransformGroupHelper(path.Transform);
 
                 if (_enablePathCache)
