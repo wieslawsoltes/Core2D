@@ -197,7 +197,7 @@ namespace Test2d
         ///
         /// </summary>
         /// <param name="container"></param>
-        private void RenameTemplateLayers(Container container)
+        public void RenameTemplateLayers(Container container)
         {
             foreach (var layer in container.Layers)
             {
@@ -313,7 +313,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="item"></param>
-        private void NewCommandHandler(object item)
+        public void OnNew(object item)
         {
             if (item is Container)
             {
@@ -366,7 +366,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void ExitCommandHandler()
+        public void OnExit()
         {
             _view.Close();
         }
@@ -374,7 +374,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void UndoCommandHandler()
+        public void OnUndo()
         {
             Undo();
         }
@@ -382,7 +382,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void RedoCommandHandler()
+        public void OnRedo()
         {
             Redo();
         }
@@ -391,7 +391,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="item"></param>
-        private void CutCommandHandler(object item)
+        public void OnCut(object item)
         {
             if (item is Container)
             {
@@ -417,7 +417,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="item"></param>
-        private void CopyCommandHandler(object item)
+        public void OnCopy(object item)
         {
             if (item is Container)
             {
@@ -441,7 +441,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="item"></param>
-        private void PasteCommandHandler(object item)
+        public void OnPaste(object item)
         {
             if (item is Container)
             {
@@ -508,7 +508,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="item"></param>
-        private void DeleteCommandHandler(object item)
+        public void OnDelete(object item)
         {
             if (item is Container)
             {
@@ -529,7 +529,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void AddDatabaseCommandHandler()
+        public void OnAddDatabase()
         {
             var builder = ImmutableArray.CreateBuilder<Column>();
             builder.Add(Column.Create("Column0"));
@@ -549,7 +549,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="db"></param>
-        private void RemoveDatabaseCommandHandler(object db)
+        public void OnRemoveDatabase(object db)
         {
             if (db != null && db is Database)
             {
@@ -566,7 +566,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="owner"></param>
-        private void AddColumnCommandHandler(object owner)
+        public void OnAddColumn(object owner)
         {
             if (owner != null && owner is Database)
             {
@@ -587,7 +587,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="parameter"></param>
-        private void RemoveColumnCommandHandler(object parameter)
+        public void OnRemoveColumn(object parameter)
         {
             if (parameter != null && parameter is ColumnParameter)
             {
@@ -611,7 +611,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void AddRecordCommandHandler()
+        public void OnAddRecord()
         {
             if (_editor.Project.CurrentDatabase != null)
             {
@@ -632,7 +632,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void RemoveRecordCommandHandler()
+        public void OnRemoveRecord()
         {
             if (_editor.Project.CurrentDatabase != null)
             {
@@ -653,7 +653,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="owner"></param>
-        private void ResetRecordCommandHandler(object owner)
+        public void OnResetRecord(object owner)
         {
             if (owner != null && owner is BaseShape)
             {
@@ -674,7 +674,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="owner"></param>
-        private void AddBindingCommandHandler(object owner)
+        public void OnAddBinding(object owner)
         {
             if (owner != null && owner is BaseShape)
             {
@@ -695,7 +695,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="parameter"></param>
-        private void RemoveBindingCommandHandler(object parameter)
+        public void OnRemoveBinding(object parameter)
         {
             if (parameter != null && parameter is ShapeBindingParameter)
             {
@@ -720,7 +720,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="owner"></param>
-        private void AddPropertyCommandHandler(object owner)
+        public void OnAddProperty(object owner)
         {
             if (owner != null)
             {
@@ -757,7 +757,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="parameter"></param>
-        private void RemovePropertyCommandHandler(object parameter)
+        public void OnRemoveProperty(object parameter)
         {
             if (parameter != null && parameter is ShapePropertyParameter)
             {
@@ -792,7 +792,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void AddGroupLibraryCommandHandler()
+        public void OnAddGroupLibrary()
         {
             var gl = GroupLibrary.Create("New");
 
@@ -805,7 +805,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void RemoveGroupLibraryCommandHandler()
+        public void OnRemoveGroupLibrary()
         {
             _editor.RemoveCurrentGroupLibrary();
         }
@@ -813,7 +813,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void AddGroupCommandHandler()
+        public void OnAddGroup()
         {
             var group = _editor.Renderers[0].State.SelectedShape;
             if (group != null && group is XGroup)
@@ -836,7 +836,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void RemoveGroupCommandHandler()
+        public void OnRemoveGroup()
         {
             _editor.RemoveCurrentGroup();
         }
@@ -844,7 +844,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void AddLayerCommandHandler()
+        public void OnAddLayer()
         {
             var container = _editor.Project.CurrentContainer;
             var previous = container.Layers;
@@ -856,7 +856,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void RemoveLayerCommandHandler()
+        public void OnRemoveLayer()
         {
             _editor.RemoveCurrentLayer();
         }
@@ -864,7 +864,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void AddStyleLibraryCommandHandler()
+        public void OnAddStyleLibrary()
         {
             var sg = StyleLibrary.Create("New");
 
@@ -877,7 +877,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void RemoveStyleLibraryCommandHandler()
+        public void OnRemoveStyleLibrary()
         {
             _editor.RemoveCurrentStyleLibrary();
         }
@@ -885,7 +885,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void AddStyleCommandHandler()
+        public void OnAddStyle()
         {
             var sg = _editor.Project.CurrentStyleLibrary;
             var previous = sg.Styles;
@@ -897,7 +897,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void RemoveStyleCommandHandler()
+        public void OnRemoveStyle()
         {
             _editor.RemoveCurrentStyle();
         }
@@ -905,7 +905,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void RemoveShapeCommandHandler()
+        public void OnRemoveShape()
         {
             _editor.RemoveCurrentShape();
         }
@@ -913,7 +913,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void AddTemplateCommandHandler()
+        public void OnAddTemplate()
         {
             var previous = _editor.Project.Templates;
             var next = _editor.Project.Templates.Add(EmptyTemplate(_editor.Project));
@@ -924,7 +924,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void RemoveTemplateCommandHandler()
+        public void OnRemoveTemplate()
         {
             _editor.RemoveCurrentTemplate();
         }
@@ -932,7 +932,7 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        private void EditTemplateCommandHandler()
+        public void OnEditTemplate()
         {
             var template = _editor.Project.CurrentTemplate;
             if (template != null)
@@ -946,7 +946,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="item"></param>
-        private void ApplyTemplateCommandHandler(object item)
+        public void OnApplyTemplate(object item)
         {
             if (item is Container)
             {
@@ -963,7 +963,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="item"></param>
-        private void SelectedItemChangedCommandHandler(object item)
+        public void OnSelectedItemChanged(object item)
         {
             if (item is Container)
             {
@@ -987,7 +987,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="item"></param>
-        private void AddContainerCommandHandler(object item)
+        public void OnAddContainer(object item)
         {
             var container = DefaultContainer(_editor.Project);
 
@@ -1004,7 +1004,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="item"></param>
-        private void InsertContainerBeforeCommandHandler(object item)
+        public void OnInsertContainerBefore(object item)
         {
             if (item is Container)
             {
@@ -1026,7 +1026,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="item"></param>
-        private void InsertContainerAfterCommandHandler(object item)
+        public void OnInsertContainerAfter(object item)
         {
             if (item is Container)
             {
@@ -1048,7 +1048,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="item"></param>
-        private void AddDocumentCommandHandler(object item)
+        public void OnAddDocument(object item)
         {
             var document = DefaultDocument(_editor.Project);
 
@@ -1065,7 +1065,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="item"></param>
-        private void InsertDocumentBeforeCommandHandler(object item)
+        public void OnInsertDocumentBefore(object item)
         {
             if (item is Document)
             {
@@ -1087,7 +1087,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="item"></param>
-        private void InsertDocumentAfterCommandHandler(object item)
+        public void OnInsertDocumentAfter(object item)
         {
             if (item is Document)
             {
@@ -1120,42 +1120,42 @@ namespace Test2d
 
                 _commands.NewCommand = 
                     new DelegateCommand<object>(
-                        (item) => NewCommandHandler(item),
+                        (item) => OnNew(item),
                         (item) => IsEditMode());
 
                 _commands.ExitCommand = 
                     new DelegateCommand(
-                        () => ExitCommandHandler(),
+                        () => OnExit(),
                         () => true);
 
                 _commands.UndoCommand = 
                     new DelegateCommand(
-                        () => UndoCommandHandler(),
+                        () => OnUndo(),
                         () => IsEditMode() /* && CanUndo() */);
 
                 _commands.RedoCommand = 
                     new DelegateCommand(
-                        () => RedoCommandHandler(),
+                        () => OnRedo(),
                         () => IsEditMode() /* && CanRedo() */);
 
                 _commands.CutCommand = 
                     new DelegateCommand<object>(
-                        (item) => CutCommandHandler(item),
+                        (item) => OnCut(item),
                         (item) => IsEditMode() /* && CanCopy() */);
 
                 _commands.CopyCommand = 
                     new DelegateCommand<object>(
-                        (item) => CopyCommandHandler(item),
+                        (item) => OnCopy(item),
                         (item) => IsEditMode() /* && CanCopy() */);
 
                 _commands.PasteCommand = 
                     new DelegateCommand<object>(
-                        (item) => PasteCommandHandler(item),
+                        (item) => OnPaste(item),
                         (item) => IsEditMode() /* && CanPaste() */);
 
                 _commands.DeleteCommand = 
                     new DelegateCommand<object>(
-                        (item) => DeleteCommandHandler(item),
+                        (item) => OnDelete(item),
                         (item) => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
                 _commands.SelectAllCommand = 
@@ -1355,112 +1355,112 @@ namespace Test2d
 
                 _commands.AddDatabaseCommand = 
                     new DelegateCommand(
-                        () => AddDatabaseCommandHandler(),
+                        () => OnAddDatabase(),
                         () => IsEditMode());
 
                 _commands.RemoveDatabaseCommand = 
                     new DelegateCommand<object>(
-                        (db) => RemoveDatabaseCommandHandler(db),
+                        (db) => OnRemoveDatabase(db),
                         (db) => IsEditMode());
 
                 _commands.AddColumnCommand = 
                     new DelegateCommand<object>(
-                        (owner) => AddColumnCommandHandler(owner),
+                        (owner) => OnAddColumn(owner),
                         (owner) => IsEditMode());
 
                 _commands.RemoveColumnCommand = 
                     new DelegateCommand<object>(
-                        (parameter) => RemoveColumnCommandHandler(parameter),
+                        (parameter) => OnRemoveColumn(parameter),
                         (parameter) => IsEditMode());
 
                 _commands.AddRecordCommand = 
                     new DelegateCommand(
-                        () => AddRecordCommandHandler(),
+                        () => OnAddRecord(),
                         () => IsEditMode());
 
                 _commands.RemoveRecordCommand = 
                     new DelegateCommand(
-                        () => RemoveRecordCommandHandler(),
+                        () => OnRemoveRecord(),
                         () => IsEditMode());
 
                 _commands.ResetRecordCommand = 
                     new DelegateCommand<object>(
-                        (owner) => ResetRecordCommandHandler(owner),
+                        (owner) => OnResetRecord(owner),
                         (owner) => IsEditMode());
 
                 _commands.AddBindingCommand = 
                     new DelegateCommand<object>(
-                        (owner) => AddBindingCommandHandler(owner),
+                        (owner) => OnAddBinding(owner),
                         (owner) => IsEditMode());
 
                 _commands.RemoveBindingCommand = 
                     new DelegateCommand<object>(
-                        (parameter) => RemoveBindingCommandHandler(parameter),
+                        (parameter) => OnRemoveBinding(parameter),
                         (parameter) => IsEditMode());
 
                 _commands.AddPropertyCommand = 
                     new DelegateCommand<object>(
-                        (owner) => AddPropertyCommandHandler(owner),
+                        (owner) => OnAddProperty(owner),
                         (owner) => IsEditMode());
 
                 _commands.RemovePropertyCommand = 
                     new DelegateCommand<object>(
-                        (parameter) => RemovePropertyCommandHandler(parameter),
+                        (parameter) => OnRemoveProperty(parameter),
                         (parameter) => IsEditMode());
                 
                 _commands.AddGroupLibraryCommand = 
                     new DelegateCommand(
-                        () => AddGroupLibraryCommandHandler(),
+                        () => OnAddGroupLibrary(),
                         () => IsEditMode());
 
                 _commands.RemoveGroupLibraryCommand = 
                     new DelegateCommand(
-                        () => RemoveGroupLibraryCommandHandler(),
+                        () => OnRemoveGroupLibrary(),
                         () => IsEditMode());
 
                 _commands.AddGroupCommand = 
                     new DelegateCommand(
-                        () => AddGroupCommandHandler(),
+                        () => OnAddGroup(),
                         () => IsEditMode());
 
                 _commands.RemoveGroupCommand = 
                     new DelegateCommand(
-                        () => RemoveGroupCommandHandler(),
+                        () => OnRemoveGroup(),
                         () => IsEditMode());
 
                 _commands.AddLayerCommand = 
                     new DelegateCommand(
-                        () => AddLayerCommandHandler(),
+                        () => OnAddLayer(),
                         () => IsEditMode());
 
                 _commands.RemoveLayerCommand = 
                     new DelegateCommand(
-                        () => RemoveLayerCommandHandler(),
+                        () => OnRemoveLayer(),
                         () => IsEditMode());
 
                 _commands.AddStyleLibraryCommand = 
                     new DelegateCommand(
-                        () => AddStyleLibraryCommandHandler(),
+                        () => OnAddStyleLibrary(),
                         () => IsEditMode());
 
                 _commands.RemoveStyleLibraryCommand = 
                     new DelegateCommand(
-                        () => RemoveStyleLibraryCommandHandler(),
+                        () => OnRemoveStyleLibrary(),
                         () => IsEditMode());
 
                 _commands.AddStyleCommand = 
                     new DelegateCommand(
-                        () => AddStyleCommandHandler(),
+                        () => OnAddStyle(),
                         () => IsEditMode());
 
                 _commands.RemoveStyleCommand = 
                     new DelegateCommand(
-                        () => RemoveStyleCommandHandler(),
+                        () => OnRemoveStyle(),
                         () => IsEditMode());
 
                 _commands.RemoveShapeCommand = 
                     new DelegateCommand(
-                        () => RemoveShapeCommandHandler(),
+                        () => OnRemoveShape(),
                         () => IsEditMode());
 
                 _commands.StartSimulationCommand = 
@@ -1490,57 +1490,57 @@ namespace Test2d
 
                 _commands.AddTemplateCommand = 
                     new DelegateCommand(
-                        () => AddTemplateCommandHandler(),
+                        () => OnAddTemplate(),
                         () => IsEditMode());
 
                 _commands.RemoveTemplateCommand = 
                     new DelegateCommand(
-                        () => RemoveTemplateCommandHandler(),
+                        () => OnRemoveTemplate(),
                         () => IsEditMode());
 
                 _commands.EditTemplateCommand = 
                     new DelegateCommand(
-                        () => EditTemplateCommandHandler(),
+                        () => OnEditTemplate(),
                         () => IsEditMode());
 
                 _commands.ApplyTemplateCommand = 
                     new DelegateCommand<object>(
-                        (item) => ApplyTemplateCommandHandler(item),
+                        (item) => OnApplyTemplate(item),
                         (item) => true);
 
                 _commands.SelectedItemChangedCommand = 
                     new DelegateCommand<object>(
-                        (item) => SelectedItemChangedCommandHandler(item),
+                        (item) => OnSelectedItemChanged(item),
                         (item) => IsEditMode() || IsSimulationMode());
 
                 _commands.AddContainerCommand = 
                     new DelegateCommand<object>(
-                        (item) => AddContainerCommandHandler(item),
+                        (item) => OnAddContainer(item),
                         (item) => IsEditMode());
 
                 _commands.InsertContainerBeforeCommand = 
                     new DelegateCommand<object>(
-                        (item) => InsertContainerBeforeCommandHandler(item),
+                        (item) => OnInsertContainerBefore(item),
                         (item) => IsEditMode());
 
                 _commands.InsertContainerAfterCommand = 
                     new DelegateCommand<object>(
-                        (item) => InsertContainerAfterCommandHandler(item),
+                        (item) => OnInsertContainerAfter(item),
                         (item) => IsEditMode());
 
                 _commands.AddDocumentCommand = 
                     new DelegateCommand<object>(
-                        (item) => AddDocumentCommandHandler(item),
+                        (item) => OnAddDocument(item),
                         (item) => IsEditMode());
 
                 _commands.InsertDocumentBeforeCommand = 
                     new DelegateCommand<object>(
-                        (item) => InsertDocumentBeforeCommandHandler(item),
+                        (item) => OnInsertDocumentBefore(item),
                         (item) => IsEditMode());
 
                 _commands.InsertDocumentAfterCommand = 
                     new DelegateCommand<object>(
-                        (item) => InsertDocumentAfterCommandHandler(item),
+                        (item) => OnInsertDocumentAfter(item),
                         (item) => IsEditMode());
 
                 WarmUpCSharpScript();
