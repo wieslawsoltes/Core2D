@@ -50,6 +50,7 @@ namespace TestWinForms
             {
                 View = this,
                 Renderers = new IRenderer[] { new EmfRenderer(72.0 / 96.0) },
+                ProjectFactory = new ProjectFactory(),
                 SimulationTimer = new SimulationTimer(),
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),

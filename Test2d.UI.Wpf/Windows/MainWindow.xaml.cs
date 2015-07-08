@@ -260,6 +260,7 @@ namespace Test.Windows
             {
                 View = this,
                 Renderers = new IRenderer[] { new WpfRenderer(), new WpfRenderer() },
+                ProjectFactory = new ProjectFactory(),
                 SimulationTimer = new SimulationTimer(),
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),

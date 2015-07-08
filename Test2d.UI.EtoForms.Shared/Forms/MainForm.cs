@@ -44,6 +44,7 @@ namespace TestEtoForms
             {
                 View = this,
                 Renderers = new IRenderer[] { new EtoRenderer(72.0 / 96.0) },
+                ProjectFactory = new ProjectFactory(),
                 SimulationTimer = new SimulationTimer(),
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),
