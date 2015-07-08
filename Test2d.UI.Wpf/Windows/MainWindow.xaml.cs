@@ -273,7 +273,7 @@ namespace Test.Windows
             };
 
             context.InitializeEditor();
-            context.InitializeSctipts();
+            context.InitializeScripts();
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
             context.Editor.Renderers[1].State.DrawShapeState = ShapeState.Visible;
             context.Editor.GetImagePath = () => Image();

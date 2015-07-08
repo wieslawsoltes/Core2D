@@ -56,7 +56,7 @@ namespace TestEtoForms
                 CsvWriter = new CsvHelperWriter()
             };
             _context.InitializeEditor();
-            _context.InitializeSctipts();
+            _context.InitializeScripts();
             _context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
             _context.Editor.GetImagePath = () => Image();
 

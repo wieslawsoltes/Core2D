@@ -270,7 +270,24 @@ namespace Test2d
         /// </summary>
         public void OnUndo()
         {
-            Undo();
+            try
+            {
+                if (_editor.History.CanUndo())
+                {
+                    _editor.Deselect();
+                    _editor.History.Undo();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
         }
 
         /// <summary>
@@ -278,7 +295,110 @@ namespace Test2d
         /// </summary>
         public void OnRedo()
         {
-            Redo();
+            try
+            {
+                if (_editor.History.CanRedo())
+                {
+                    _editor.Deselect();
+                    _editor.History.Redo();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void OnCut()
+        {
+            try
+            {
+                if (CanCopy())
+                {
+                    OnCopy();
+
+                    _editor.DeleteSelected();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void OnCopy()
+        {
+            try
+            {
+                if (CanCopy())
+                {
+                    if (_editor.Renderers[0].State.SelectedShape != null)
+                    {
+                        Copy(Enumerable.Repeat(_editor.Renderers[0].State.SelectedShape, 1).ToList());
+                    }
+
+                    if (_editor.Renderers[0].State.SelectedShapes != null)
+                    {
+                        Copy(_editor.Renderers[0].State.SelectedShapes.ToList());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void OnPaste()
+        {
+            try
+            {
+                if (CanPaste())
+                {
+                    var json = _textClipboard.GetText();
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        Paste(json);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
         }
 
         /// <summary>
@@ -303,7 +423,7 @@ namespace Test2d
             }
             else if (item is EditorContext || item == null)
             {
-                Cut();
+                OnCut();
             }
         }
 
@@ -327,7 +447,7 @@ namespace Test2d
             }
             else if (item is EditorContext || item == null)
             {
-                Copy();
+                OnCopy();
             }
         }
 
@@ -394,7 +514,7 @@ namespace Test2d
             }
             else if (item is EditorContext || item == null)
             {
-                Paste();
+                OnPaste();
             }
         }
 
@@ -417,6 +537,53 @@ namespace Test2d
             else if (item is EditorContext || item == null)
             {
                 _editor.DeleteSelected();
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void OnSelectAll()
+        {
+            try
+            {
+                _editor.Deselect(_editor.Project.CurrentContainer);
+                _editor.Select(
+                    _editor.Project.CurrentContainer,
+                    ImmutableHashSet.CreateRange<BaseShape>(_editor.Project.CurrentContainer.CurrentLayer.Shapes));
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void OnClearAll()
+        {
+            try
+            {
+                // TODO: Add history snapshot.
+                _editor.Project.CurrentContainer.Clear();
+                _editor.Project.CurrentContainer.Invalidate();
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
             }
         }
 
@@ -996,6 +1163,177 @@ namespace Test2d
 
                 _editor.Project.CurrentDocument = document;
                 _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void OnTickSimulation()
+        {
+            try
+            {
+                if (IsSimulationMode())
+                {
+                    _editor.Observer.IsPaused = true;
+                    _codeEngine.Run();
+                    _editor.Observer.IsPaused = false;
+                    if (_editor.Project.CurrentContainer != null)
+                    {
+                        _editor.Project.CurrentContainer.Invalidate();
+                    }
+                    _clock.Tick();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+
+                if (IsSimulationMode())
+                {
+                    OnStopSimulation();
+                }
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void OnStartSimulation()
+        {
+            try
+            {
+                if (IsSimulationMode())
+                {
+                    return;
+                }
+
+                _clock = new Clock(
+                    cycle: 0L,
+                    resolution: _editor.Project.Options.CycleResolution);
+
+                var shapes = _editor.Project.Documents
+                    .SelectMany(d => d.Containers)
+                    .SelectMany(c => c.Layers)
+                    .SelectMany(l => l.Shapes).ToImmutableArray();
+                _codeEngine.Build(shapes, this);
+
+                IsSimulationPaused = false;
+
+                _simulationTimer.Start(
+                    () =>
+                    {
+                        if (!IsSimulationPaused)
+                        {
+                            OnTickSimulation();
+                        }
+                    },
+                    _clock.Resolution);
+
+                UpdateCanExecuteState();
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void OnStopSimulation()
+        {
+            try
+            {
+                if (IsSimulationMode())
+                {
+                    _simulationTimer.Stop();
+                    _codeEngine.Reset();
+                    IsSimulationPaused = false;
+                    UpdateCanExecuteState();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void OnRestartSimulation()
+        {
+            OnStopSimulation();
+            OnStartSimulation();
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void OnPauseSimulation()
+        {
+            try
+            {
+                if (IsSimulationMode())
+                {
+                    IsSimulationPaused = !IsSimulationPaused;
+                    UpdateCanExecuteState();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void Invalidate()
+        {
+            try
+            {
+                foreach (var renderer in _editor.Renderers)
+                {
+                    renderer.ClearCache();
+                }
+
+                _editor.Project.CurrentContainer.Invalidate();
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
             }
         }
 
@@ -2775,189 +3113,6 @@ namespace Test2d
         /// <summary>
         ///
         /// </summary>
-        public void Undo()
-        {
-            try
-            {
-                if (_editor.History.CanUndo())
-                {
-                    _editor.Deselect();
-                    _editor.History.Undo();
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void Redo()
-        {
-            try
-            {
-                if (_editor.History.CanRedo())
-                {
-                    _editor.Deselect();
-                    _editor.History.Redo();
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void Cut()
-        {
-            try
-            {
-                if (CanCopy())
-                {
-                    Copy();
-
-                    _editor.DeleteSelected();
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void Copy()
-        {
-            try
-            {
-                if (CanCopy())
-                {
-                    if (_editor.Renderers[0].State.SelectedShape != null)
-                    {
-                        Copy(Enumerable.Repeat(_editor.Renderers[0].State.SelectedShape, 1).ToList());
-                    }
-
-                    if (_editor.Renderers[0].State.SelectedShapes != null)
-                    {
-                        Copy(_editor.Renderers[0].State.SelectedShapes.ToList());
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void Paste()
-        {
-            try
-            {
-                if (CanPaste())
-                {
-                    var json = _textClipboard.GetText();
-                    if (!string.IsNullOrEmpty(json))
-                    {
-                        Paste(json);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void SelectAll()
-        {
-            try
-            {
-                _editor.Deselect(_editor.Project.CurrentContainer);
-                _editor.Select(
-                    _editor.Project.CurrentContainer,
-                    ImmutableHashSet.CreateRange<BaseShape>(_editor.Project.CurrentContainer.CurrentLayer.Shapes));
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void ClearAll()
-        {
-            try
-            {
-                // TODO: Add history snapshot.
-                _editor.Project.CurrentContainer.Clear();
-                _editor.Project.CurrentContainer.Invalidate();
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
         /// <returns></returns>
         public bool IsEditMode()
         {
@@ -2971,177 +3126,6 @@ namespace Test2d
         public bool IsSimulationMode()
         {
             return _simulationTimer.IsRunning;
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void TickSimulation()
-        {
-            try
-            {
-                if (IsSimulationMode())
-                {
-                    _editor.Observer.IsPaused = true;
-                    _codeEngine.Run();
-                    _editor.Observer.IsPaused = false;
-                    if (_editor.Project.CurrentContainer != null)
-                    {
-                        _editor.Project.CurrentContainer.Invalidate();
-                    }
-                    _clock.Tick();
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-
-                if (IsSimulationMode())
-                {
-                    StopSimulation();
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void StartSimulation()
-        {
-            try
-            {
-                if (IsSimulationMode())
-                {
-                    return;
-                }
-
-                _clock = new Clock(
-                    cycle: 0L, 
-                    resolution: _editor.Project.Options.CycleResolution);
-
-                var shapes = _editor.Project.Documents
-                    .SelectMany(d => d.Containers)
-                    .SelectMany(c => c.Layers)
-                    .SelectMany(l => l.Shapes).ToImmutableArray();
-                _codeEngine.Build(shapes, this);
-
-                IsSimulationPaused = false;
-
-                _simulationTimer.Start(
-                    () =>
-                    {
-                        if (!IsSimulationPaused)
-                        {
-                            TickSimulation();
-                        }
-                    },
-                    _clock.Resolution);
-
-                UpdateCanExecuteState();
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void StopSimulation()
-        {
-            try
-            {
-                if (IsSimulationMode())
-                {
-                    _simulationTimer.Stop();
-                    _codeEngine.Reset();
-                    IsSimulationPaused = false;
-                    UpdateCanExecuteState();
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void RestartSimulation()
-        {
-            StopSimulation();
-            StartSimulation();
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void PauseSimulation()
-        {
-            try
-            {
-                if (IsSimulationMode())
-                {
-                    IsSimulationPaused = !IsSimulationPaused;
-                    UpdateCanExecuteState();
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void Invalidate()
-        {
-            try
-            {
-                foreach (var renderer in _editor.Renderers)
-                {
-                    renderer.ClearCache();
-                }
-
-                _editor.Project.CurrentContainer.Invalidate();
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
         }
 
         /// <summary>
@@ -3199,12 +3183,12 @@ namespace Test2d
 
                 _commands.SelectAllCommand =
                     new DelegateCommand(
-                        () => SelectAll(),
+                        () => OnSelectAll(),
                         () => IsEditMode());
 
                 _commands.ClearAllCommand =
                     new DelegateCommand(
-                        () => ClearAll(),
+                        () => OnClearAll(),
                         () => IsEditMode());
 
                 _commands.GroupCommand =
@@ -3504,27 +3488,27 @@ namespace Test2d
 
                 _commands.StartSimulationCommand =
                     new DelegateCommand(
-                        () => StartSimulation(),
+                        () => OnStartSimulation(),
                         () => IsEditMode());
 
                 _commands.StopSimulationCommand =
                     new DelegateCommand(
-                        () => StopSimulation(),
+                        () => OnStopSimulation(),
                         () => IsSimulationMode());
 
                 _commands.RestartSimulationCommand =
                     new DelegateCommand(
-                        () => RestartSimulation(),
+                        () => OnRestartSimulation(),
                         () => IsSimulationMode());
 
                 _commands.PauseSimulationCommand =
                     new DelegateCommand(
-                        () => PauseSimulation(),
+                        () => OnPauseSimulation(),
                         () => IsSimulationMode());
 
                 _commands.TickSimulationCommand =
                     new DelegateCommand(
-                        () => TickSimulation(),
+                        () => OnTickSimulation(),
                         () => IsSimulationMode() && IsSimulationPaused);
 
                 _commands.AddTemplateCommand =
@@ -3630,7 +3614,7 @@ namespace Test2d
         /// <summary>
         ///
         /// </summary>
-        public void InitializeSctipts()
+        public void InitializeScripts()
         {
             try
             {
@@ -3871,7 +3855,7 @@ namespace Test2d
 
             if (IsSimulationMode())
             {
-                StopSimulation();
+                OnStopSimulation();
             }
         }
     }
