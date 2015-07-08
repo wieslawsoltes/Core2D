@@ -121,7 +121,8 @@
     <Compile Include="Editor\Helpers\TextHelper.cs" />
     <Compile Include="Editor\Core\History.cs" />
     <Compile Include="Editor\Core\ImportType.cs" />
-    <Compile Include="Editor\LineGrid.cs" />
+    <Compile Include="Editor\Factories\IProjectFactory.cs" />
+    <Compile Include="Editor\Factories\LineGrid.cs" />
     <Compile Include="Editor\Log\ILog.cs" />
     <Compile Include="Editor\Log\TraceLog.cs" />
     <Compile Include="Editor\Observer.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Editor\Parameters\ShapeBindingParamater.cs" />
     <Compile Include="Editor\Parameters\ShapePropertyParameter.cs" />
     <Compile Include="Editor\Parameters\ValueParamterer.cs" />
+    <Compile Include="Editor\Factories\ProjectFactory.cs" />
     <Compile Include="Editor\Script\ScriptDirectory.cs" />
     <Compile Include="Editor\Script\ScriptFile.cs" />
     <Compile Include="Editor\Core\State.cs" />
