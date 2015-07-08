@@ -23,6 +23,7 @@ namespace Test2d
         private Editor _editor;
         private IView _view;
         private IRenderer[] _renderers;
+        private IProjectFactory _projectFactory;
         private ISimulationTimer _simulationTimer;
         private ITextClipboard _textClipboard;
         private ISerializer _serializer;
@@ -74,6 +75,15 @@ namespace Test2d
         {
             get { return _renderers; }
             set { Update(ref _renderers, value); }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public IProjectFactory ProjectFactory
+        {
+            get { return _projectFactory; }
+            set { Update(ref _projectFactory, value); }
         }
 
         /// <summary>
@@ -194,122 +204,6 @@ namespace Test2d
         }
 
         /// <summary>
-        ///
-        /// </summary>
-        /// <param name="container"></param>
-        public void RenameTemplateLayers(Container container)
-        {
-            foreach (var layer in container.Layers)
-            {
-                layer.Name = string.Concat("Template", layer.Name);
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="project"></param>
-        /// <returns></returns>
-        public Container EmptyTemplate(Project project)
-        {
-            var container = Container.Create("Empty");
-
-            container.Background = ArgbColor.Create(0xFF, 0xFF, 0xFF, 0xFF);
-            
-            RenameTemplateLayers(container);
-
-            return container;
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="project"></param>
-        /// <returns></returns>
-        public Container GridTemplate(Project project)
-        {
-            var container = Container.Create("Grid");
-
-            container.Background = ArgbColor.Create(0xFF, 0xFF, 0xFF, 0xFF);
-            
-            RenameTemplateLayers(container);
-
-            var gs = project
-                .StyleLibraries.FirstOrDefault(g => g.Name == "Template")
-                .Styles.FirstOrDefault(s => s.Name == "Grid");
-            var settings = LineGrid.Settings.Create(0, 0, container.Width, container.Height, 30, 30);
-            var shapes = LineGrid.Create(gs, settings, project.Options.PointShape);
-            var layer = container.Layers.FirstOrDefault();
-
-            var builder = layer.Shapes.ToBuilder();
-            foreach (var shape in shapes)
-            {
-                builder.Add(shape);
-            }
-            layer.Shapes = builder.ToImmutable();
-
-            return container;
-        }
-        
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="project"></param>
-        /// <returns></returns>
-        public Container DefaultContainer(Project project)
-        {
-            var container = Container.Create();
-            container.Template = project.CurrentTemplate;
-            container.Width = container.Template.Width;
-            container.Height = container.Template.Height;
-            return container;
-        }
-        
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="project"></param>
-        /// <returns></returns>
-        public Document DefaultDocument(Project project)
-        {
-             var document = Document.Create();
-      
-             return document;
-        }
-        
-        /// <summary>
-        ///
-        /// </summary>
-        /// <returns></returns>
-        public Project DefaultProject()
-        {
-            var project = Project.Create();
-
-            var templateBuilder = project.Templates.ToBuilder();
-            templateBuilder.Add(EmptyTemplate(project));
-            templateBuilder.Add(GridTemplate(project));
-            project.Templates = templateBuilder.ToImmutable();
-
-            project.CurrentTemplate = project.Templates.FirstOrDefault(t => t.Name == "Grid");
-
-            var document = DefaultDocument(project);
-            var container = DefaultContainer(project);
-
-            var document1Builder = document.Containers.ToBuilder();
-            document1Builder.Add(container);
-            document.Containers = document1Builder.ToImmutable();
-
-            var documentBuilder = project.Documents.ToBuilder();
-            documentBuilder.Add(document);
-            project.Documents = documentBuilder.ToImmutable();
-
-            project.CurrentDocument = project.Documents.FirstOrDefault();
-            project.CurrentContainer = document.Containers.FirstOrDefault();
-
-            return project;
-        }
- 
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="item"></param>
@@ -321,7 +215,7 @@ namespace Test2d
                 var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(selected));
                 if (document != null)
                 {
-                    var container = DefaultContainer(_editor.Project);
+                    var container = _projectFactory.GetContainer(_editor.Project, "Container");
 
                     var previous = document.Containers;
                     var next = document.Containers.Add(container);
@@ -334,7 +228,7 @@ namespace Test2d
             else if (item is Document)
             {
                 var selected = item as Document;
-                var container = DefaultContainer(_editor.Project);
+                var container = _projectFactory.GetContainer(_editor.Project, "Container");
 
                 var previous = selected.Containers;
                 var next = selected.Containers.Add(container);
@@ -345,7 +239,7 @@ namespace Test2d
             }
             else if (item is Project)
             {
-                var document = DefaultDocument(_editor.Project);
+                var document = _projectFactory.GetDocument(_editor.Project, "Document");
 
                 var previous = _editor.Project.Documents;
                 var next = _editor.Project.Documents.Add(document);
@@ -359,7 +253,7 @@ namespace Test2d
             {
                 _editor.History.Reset();
 
-                _editor.Load(DefaultProject());
+                _editor.Load(_projectFactory.GetProject());
             }
         }
 
@@ -916,7 +810,7 @@ namespace Test2d
         public void OnAddTemplate()
         {
             var previous = _editor.Project.Templates;
-            var next = _editor.Project.Templates.Add(EmptyTemplate(_editor.Project));
+            var next = _editor.Project.Templates.Add(_projectFactory.GetTemplate(_editor.Project, "Empty"));
             _editor.History.Snapshot(previous, next, (p) => _editor.Project.Templates = p);
             _editor.Project.Templates = next;
         }
@@ -989,7 +883,7 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnAddContainer(object item)
         {
-            var container = DefaultContainer(_editor.Project);
+            var container = _projectFactory.GetContainer(_editor.Project, "Container");
 
             var document = _editor.Project.CurrentDocument;
             var previous = document.Containers;
@@ -1010,7 +904,7 @@ namespace Test2d
             {
                 var selected = item as Container;
                 int index = _editor.Project.CurrentDocument.Containers.IndexOf(selected);
-                var container = DefaultContainer(_editor.Project);
+                var container = _projectFactory.GetContainer(_editor.Project, "Container");
 
                 var document = _editor.Project.CurrentDocument;
                 var previous = document.Containers;
@@ -1032,7 +926,7 @@ namespace Test2d
             {
                 var selected = item as Container;
                 int index = _editor.Project.CurrentDocument.Containers.IndexOf(selected);
-                var container = DefaultContainer(_editor.Project);
+                var container = _projectFactory.GetContainer(_editor.Project, "Container");
 
                 var document = _editor.Project.CurrentDocument;
                 var previous = document.Containers;
@@ -1050,7 +944,7 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnAddDocument(object item)
         {
-            var document = DefaultDocument(_editor.Project);
+            var document = _projectFactory.GetDocument(_editor.Project, "Document");
 
             var previous = _editor.Project.Documents;
             var next = _editor.Project.Documents.Add(document);
@@ -1071,7 +965,7 @@ namespace Test2d
             {
                 var selected = item as Document;
                 int index = _editor.Project.Documents.IndexOf(selected);
-                var document = DefaultDocument(_editor.Project);
+                var document = _projectFactory.GetDocument(_editor.Project, "Document");
 
                 var previous = _editor.Project.Documents;
                 var next = _editor.Project.Documents.Insert(index, document);
@@ -1093,7 +987,7 @@ namespace Test2d
             {
                 var selected = item as Document;
                 int index = _editor.Project.Documents.IndexOf(selected);
-                var document = DefaultDocument(_editor.Project);
+                var document = _projectFactory.GetDocument(_editor.Project, "Document");
 
                 var previous = _editor.Project.Documents;
                 var next = _editor.Project.Documents.Insert(index + 1, document);
@@ -1112,7 +1006,7 @@ namespace Test2d
         {
             try
             {
-                _editor = Editor.Create(DefaultProject(), _renderers);
+                _editor = Editor.Create(_projectFactory.GetProject(), _renderers);
                 _editor.Log = new TraceLog();
                 _editor.Log.Initialize("Test.log");
 
