@@ -1,11 +1,5 @@
 ﻿# TODO
 
-## Path
-
-* Switch PathHelper tool during creation.
-* Add hover support for path points.
-* Path shape editor support.
-
 ## Editor
 
 * Add Reference shape handling.
