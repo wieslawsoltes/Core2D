@@ -21,7 +21,7 @@ Test2d [simulation mode description](SIMULATION.md).
 * Prism.Mvvm
 * Newtonsoft.Json
 * CsvHelper
-* PDFsharp-wpf (The core PDFsharp package does not implement XGraphicsPath.AddArc method.)
+* PDFsharp-wpf (Core PDFsharp does not implement XGraphicsPath.AddArc method.)
 * lz4net
 * Microsoft.CodeAnalysis.Analyzers
 * Microsoft.CodeAnalysis.Common
