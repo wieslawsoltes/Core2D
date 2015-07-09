@@ -21,7 +21,7 @@ Test2d [simulation mode description](SIMULATION.md).
 * Prism.Mvvm
 * Newtonsoft.Json
 * CsvHelper
-* PDFsharp-wpf (core PDFsharp package does not implement XGraphicsPath.AddArc method)
+* PDFsharp-wpf (The core PDFsharp package does not implement XGraphicsPath.AddArc method.)
 * lz4net
 * Microsoft.CodeAnalysis.Analyzers
 * Microsoft.CodeAnalysis.Common
@@ -34,8 +34,10 @@ Test2d [simulation mode description](SIMULATION.md).
 * Xceed.Wpf.AvalonDock
 * Xceed.Products.Wpf.Toolkit.AvalonDock
 * Eto.Forms
+* Eto.Platform.Gtk [GTK# for .NET](from http://www.mono-project.com/download/#download-win)
 * Eto.Platform.Direct2D
 * Eto.Platform.Windows
+* Eto.Platform.Wpf
 * SharpDX
 * SharpDX.Direct2D1
 * SharpDX.DXGI
