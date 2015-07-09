@@ -66,8 +66,17 @@ rmdir /Q /S Test2d.Interfaces\obj
 rmdir /Q /S Test2d.UI.EtoForms.Direct2D\bin
 rmdir /Q /S Test2d.UI.EtoForms.Direct2D\obj
 
+rmdir /Q /S Test2d.UI.EtoForms.Gtk2\bin
+rmdir /Q /S Test2d.UI.EtoForms.Gtk2\obj
+
 rmdir /Q /S Test2d.UI.EtoForms.Shared\bin
 rmdir /Q /S Test2d.UI.EtoForms.Shared\obj
+
+rmdir /Q /S Test2d.UI.EtoForms.WinForms\bin
+rmdir /Q /S Test2d.UI.EtoForms.WinForms\obj
+
+rmdir /Q /S Test2d.UI.EtoForms.Wpf\bin
+rmdir /Q /S Test2d.UI.EtoForms.Wpf\obj
 
 rmdir /Q /S Test2d.UI.WinForms\bin
 rmdir /Q /S Test2d.UI.WinForms\obj
