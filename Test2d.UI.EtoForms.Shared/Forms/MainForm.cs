@@ -441,7 +441,7 @@ namespace TestEtoForms
 
             var qbezierTool = new Command() 
             { 
-                MenuText = "&QBeezier", 
+                MenuText = "&QBezier", 
                 Shortcut = Keys.Q 
             };
             qbezierTool.Executed +=
