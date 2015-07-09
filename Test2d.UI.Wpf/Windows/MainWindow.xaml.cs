@@ -1113,11 +1113,9 @@ namespace Test.Windows
                 (z, x, y) =>
                 {
                     bool invalidate = context.Editor.Renderers[0].State.Zoom != z;
-
                     context.Editor.Renderers[0].State.Zoom = z;
                     context.Editor.Renderers[0].State.PanX = x;
                     context.Editor.Renderers[0].State.PanY = y;
-
                     if (invalidate)
                     {
                         context.Invalidate();
