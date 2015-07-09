@@ -537,7 +537,7 @@ namespace TestEtoForms
                     _scaleToPage(rect.Height));
             }
 
-            if (rectangle.IsFilled)
+            if (rectangle.IsStroked)
             {
                 _gfx.DrawRectangle(
                     pen,
