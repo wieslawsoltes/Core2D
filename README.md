@@ -34,7 +34,7 @@ Test2d [simulation mode description](SIMULATION.md).
 * Xceed.Wpf.AvalonDock
 * Xceed.Products.Wpf.Toolkit.AvalonDock
 * Eto.Forms
-* Eto.Platform.Gtk [GTK# for .NET](from http://www.mono-project.com/download/#download-win)
+* Eto.Platform.Gtk [GTK# for .NET](http://www.mono-project.com/download/#download-win)
 * Eto.Platform.Direct2D
 * Eto.Platform.Windows
 * Eto.Platform.Wpf
