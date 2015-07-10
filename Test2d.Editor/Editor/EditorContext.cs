@@ -33,6 +33,7 @@ namespace Test2d
         private IFileWriter _dxfWriter;
         private ITextFieldReader<Database> _csvReader;
         private ITextFieldWriter<Database> _csvWriter;
+        private ImmutableArray<RecentProject> _recentProjects = ImmutableArray.Create<RecentProject>();
         private string _rootScriptsPath;
         private ImmutableArray<ScriptDirectory> _scriptDirectories;
         private bool _isSimulationPaused;
@@ -165,6 +166,15 @@ namespace Test2d
         {
             get { return _csvWriter; }
             set { Update(ref _csvWriter, value); }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public ImmutableArray<RecentProject> RecentProjects
+        {
+            get { return _recentProjects; }
+            set { Update(ref _recentProjects, value); }
         }
 
         /// <summary>
@@ -1494,6 +1504,8 @@ namespace Test2d
 
                 _editor.History.Reset();
                 _editor.Load(project);
+
+                AddRecent(path, project.Name);
             }
             catch (Exception ex)
             {
@@ -1523,6 +1535,8 @@ namespace Test2d
                 WriteUtf8Text(path, json);
 
                 _editor.ToAbsoluteUri(root, images);
+
+                AddRecent(path, _editor.Project.Name);
             }
             catch (Exception ex)
             {
@@ -2101,6 +2115,88 @@ namespace Test2d
             try
             {
                 var json = _serializer.ToJson(shape.Code);
+                WriteUtf8Text(path, json, false);
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Add recent project file.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="name"></param>
+        private void AddRecent(string path, string name)
+        {
+            var q = _recentProjects.Where(x => x.Path.ToLower() == path.ToLower()).ToList();
+            var builder = _recentProjects.ToBuilder();
+
+            if (q.Count() > 0)
+            {
+                foreach (var r in q)
+                {
+                    builder.Remove(r);
+                }
+            }
+
+            builder.Insert(0, RecentProject.Create(name, path));
+
+            RecentProjects = builder.ToImmutable();
+        }
+
+        /// <summary>
+        /// Load recent project files.
+        /// </summary>
+        /// <param name="path"></param>
+        public void LoadRecent(string path)
+        {
+            try
+            {
+                var json = ReadUtf8Text(path, false);
+                var recent = _serializer.FromJson<ImmutableArray<RecentProject>>(json);
+
+                if (recent != null)
+                {
+                    var remove = recent.Where(x => System.IO.File.Exists(x.Path) == false).ToList();
+                    var builder = recent.ToBuilder();
+
+                    foreach (var file in remove)
+                    {
+                        builder.Remove(file);
+                    }
+
+                    RecentProjects = builder.ToImmutable();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Save recent project files.
+        /// </summary>
+        /// <param name="path"></param>
+        public void SaveRecent(string path)
+        {
+            try
+            {
+                var json = _serializer.ToJson(_recentProjects);
                 WriteUtf8Text(path, json, false);
             }
             catch (Exception ex)
@@ -3683,7 +3779,7 @@ namespace Test2d
         private void UpdateCanExecuteState()
         {
             (_commands.NewCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.OpenCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.OpenCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.SaveAsCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ExportCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ExitCommand as DelegateCommand).RaiseCanExecuteChanged();

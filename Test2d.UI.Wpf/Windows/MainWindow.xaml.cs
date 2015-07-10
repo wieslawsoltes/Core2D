@@ -26,9 +26,11 @@ namespace Test.Windows
     /// </summary>
     public partial class MainWindow : Window, IView
     {
+        private string _recentProjectsPath = "Test2d.UI.Wpf.recent";
         private string _resourceLayoutRoot = "Test2d.UI.Wpf.Layouts.";
         private string _resourceLayoutPath = "Test2d.UI.Wpf.layout";
         private string _defaultLayoutPath = "Test2d.UI.Wpf.layout";
+        private bool _enableRestoreRecent = true;
         private bool _enableRestoreLayout = true;
         private bool _isLoaded = false;
 
@@ -140,22 +142,33 @@ namespace Test.Windows
         /// <summary>
         /// 
         /// </summary>
-        private void OnOpen()
+        private void OnOpen(object parameter)
         {
             var context = DataContext as EditorContext;
             if (context == null)
                 return;
 
-            var dlg = new OpenFileDialog()
+            if (parameter == null)
             {
-                Filter = "Project (*.project)|*.project|All (*.*)|*.*",
-                FilterIndex = 0,
-                FileName = ""
-            };
+                var dlg = new OpenFileDialog()
+                {
+                    Filter = "Project (*.project)|*.project|All (*.*)|*.*",
+                    FilterIndex = 0,
+                    FileName = ""
+                };
 
-            if (dlg.ShowDialog() == true)
+                if (dlg.ShowDialog() == true)
+                {
+                    context.Open(dlg.FileName);
+                }
+            }
+            else
             {
-                context.Open(dlg.FileName);
+                string path = parameter as string;
+                if (path != null && System.IO.File.Exists(path))
+                {
+                    context.Open(path);
+                }
             }
         }
 
@@ -653,6 +666,79 @@ namespace Test.Windows
         }
 
         /// <summary>
+        /// Load recent project files.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="context"></param>
+        private void LoadRecent(string path, object context)
+        {
+            if (context == null)
+                return;
+
+            if (!System.IO.File.Exists(path))
+                return;
+
+            (context as EditorContext).LoadRecent(path);
+        }
+
+        /// <summary>
+        /// Save recent project files.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="context"></param>
+        private void SaveRecent(string path, object context)
+        {
+            if (context == null)
+                return;
+
+            (context as EditorContext).SaveRecent(path);
+        }
+
+        /// <summary>
+        /// Auto load recent project files.
+        /// </summary>
+        /// <param name="context"></param>
+        private void AutoLoadRecent(EditorContext context)
+        {
+            try
+            {
+                LoadRecent(_recentProjectsPath, context);
+            }
+            catch (Exception ex)
+            {
+                if (context.Editor.Log != null)
+                {
+                    context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Auto save recent project files.
+        /// </summary>
+        /// <param name="context"></param>
+        private void AutoSaveRecent(EditorContext context)
+        {
+            try
+            {
+                SaveRecent(_recentProjectsPath, context);
+            }
+            catch (Exception ex)
+            {
+                if (context.Editor.Log != null)
+                {
+                    context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
         /// Load docking manager layout from resource.
         /// </summary>
         /// <param name="path"></param>
@@ -805,6 +891,11 @@ namespace Test.Windows
                     else
                         _isLoaded = true;
 
+                    if (_enableRestoreRecent)
+                    {
+                        AutoLoadRecent(context);
+                    }
+
                     if (_enableRestoreLayout)
                     {
                         AutoLoadLayout(context);
@@ -819,6 +910,11 @@ namespace Test.Windows
                     _isLoaded = false;
 
                 DeInitializeContext();
+
+                if (_enableRestoreRecent)
+                {
+                    AutoSaveRecent(context);
+                }
 
                 if (_enableRestoreLayout)
                 {
@@ -836,9 +932,9 @@ namespace Test.Windows
         private void InitializeCommands(EditorContext context)
         {
             context.Commands.OpenCommand =
-                new DelegateCommand(
-                    () => OnOpen(),
-                    () => context.IsEditMode());
+                new DelegateCommand<object>(
+                    (parameter) => OnOpen(parameter),
+                    (parameter) => context.IsEditMode());
 
             context.Commands.SaveAsCommand =
                 new DelegateCommand(

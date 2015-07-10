@@ -53,6 +53,20 @@
                 <MenuItem Header="T_emplates..." Command="{Binding Commands.ExportTemplatesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
             </MenuItem>
             <Separator/>
+            <MenuItem Header="_Recent" ItemsSource="{Binding RecentProjects}">
+                <MenuItem.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </MenuItem.ItemTemplate>
+                <MenuItem.ItemContainerStyle>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Command" Value="{Binding DataContext.Commands.OpenCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                        <Setter Property="CommandParameter" Value="{Binding Path}"/>
+                    </Style>
+                </MenuItem.ItemContainerStyle>
+            </MenuItem>
+            <Separator/>
             <MenuItem Header="E_xit" Command="{Binding Commands.ExitCommand}" InputGestureText="Alt+F4"/>
         </MenuItem>
         <MenuItem Header="_Edit">
