@@ -18,6 +18,8 @@ namespace Test2d
     {
         private ILog _log;
         private Project _project;
+        private string _projectPath;
+        private bool _isProjectDirty;
         private IRenderer[] _renderers;
         private Tool _currentTool;
         private PathTool _currentPathTool;
@@ -42,6 +44,24 @@ namespace Test2d
         {
             get { return _project; }
             set { Update(ref _project, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets current project path.
+        /// </summary>
+        public string ProjectPath
+        {
+            get { return _projectPath; }
+            set { Update(ref _projectPath, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets flag indicating that current project was modified.
+        /// </summary>
+        public bool IsProjectDirty
+        {
+            get { return _isProjectDirty; }
+            set { Update(ref _isProjectDirty, value); }
         }
 
         /// <summary>
@@ -179,6 +199,8 @@ namespace Test2d
             };
 
             editor.Project = project;
+            editor.ProjectPath = string.Empty;
+            editor.IsProjectDirty = false;
             editor.Renderers = renderers;
 
             editor.History = new History();
@@ -803,7 +825,8 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="project"></param>
-        public void Load(Project project)
+        /// <param name="path"></param>
+        public void Load(Project project, string path)
         {
             Deselect();
 
@@ -813,6 +836,8 @@ namespace Test2d
             }
 
             Project = project;
+            ProjectPath = path;
+            IsProjectDirty = false;
 
             if (EnableObserver)
             {

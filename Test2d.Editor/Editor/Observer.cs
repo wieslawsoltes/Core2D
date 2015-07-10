@@ -98,6 +98,17 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        private void MarkAsDirty()
+        {
+            if (_editor != null)
+            {
+                _editor.IsProjectDirty = true;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void DatabaseObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -119,6 +130,7 @@ namespace Test2d
             }
 
             _invalidateShapes();
+            MarkAsDirty();
         }
 
         /// <summary>
@@ -130,6 +142,7 @@ namespace Test2d
         {
             Verbose("Column: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
+            MarkAsDirty();
         }
 
         /// <summary>
@@ -156,6 +169,7 @@ namespace Test2d
             }
 
             _invalidateShapes();
+            MarkAsDirty();
         }
 
         /// <summary>
@@ -167,6 +181,7 @@ namespace Test2d
         {
             Verbose("Value: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
+            MarkAsDirty();
         }
 
         /// <summary>
@@ -207,6 +222,14 @@ namespace Test2d
             }
 
             _invalidateShapes();
+
+            // NOTE: Do not mark project as dirty when current container changes.
+            // NOTE: Do not mark project as dirty when current document changes.
+            if (e.PropertyName != "CurrentContainer"
+                && e.PropertyName != "CurrentDocument")
+            {
+                MarkAsDirty();
+            }
         }
 
         /// <summary>
@@ -226,6 +249,7 @@ namespace Test2d
             }
 
             _invalidateShapes();
+            MarkAsDirty();
         }
 
         /// <summary>
@@ -252,6 +276,12 @@ namespace Test2d
             }
 
             _invalidateContainer();
+
+            // NOTE: Do not mark project as dirty when current shape changes.
+            if (e.PropertyName != "CurrentShape")
+            {
+                MarkAsDirty();
+            }
         }
 
         /// <summary>
@@ -268,6 +298,7 @@ namespace Test2d
             {
                 _editor.Project.CurrentContainer.Template.Notify("Background");
             }
+            MarkAsDirty();
         }
 
         /// <summary>
@@ -287,6 +318,7 @@ namespace Test2d
             }
 
             _invalidateLayers();
+            MarkAsDirty();
         }
 
         /// <summary>
@@ -313,6 +345,7 @@ namespace Test2d
             }
 
             _invalidateShapes();
+            MarkAsDirty();
         }
 
         /// <summary>
@@ -332,6 +365,7 @@ namespace Test2d
             }
 
             _invalidateStyles();
+            MarkAsDirty();
         }
 
         /// <summary>
@@ -343,6 +377,7 @@ namespace Test2d
         {
             Verbose("Style: " + (sender is ShapeStyle ? (sender as ShapeStyle).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
             _invalidateStyles();
+            MarkAsDirty();
         }
 
         /// <summary>
@@ -354,6 +389,7 @@ namespace Test2d
         {
             Verbose("Property: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
+            MarkAsDirty();
         }
         
         /// <summary>
@@ -365,6 +401,7 @@ namespace Test2d
         {
             Verbose("Property: " + sender.GetType() + ", Property: " + e.PropertyName);
             _invalidateShapes();
+            MarkAsDirty();
         }
 
         /// <summary>
