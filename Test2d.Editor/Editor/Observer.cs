@@ -207,6 +207,13 @@ namespace Test2d
                 Add(project.StyleLibraries);
             }
 
+            if (e.PropertyName == "GroupLibraries")
+            {
+                var project = sender as Project;
+                Remove(project.GroupLibraries);
+                Add(project.GroupLibraries);
+            }
+
             if (e.PropertyName == "Templates")
             {
                 var project = sender as Project;
@@ -223,10 +230,8 @@ namespace Test2d
 
             _invalidateShapes();
 
-            // NOTE: Do not mark project as dirty when current container changes.
-            // NOTE: Do not mark project as dirty when current document changes.
-            if (e.PropertyName != "CurrentContainer"
-                && e.PropertyName != "CurrentDocument")
+            // NOTE: Do not mark project as dirty when 'Current*' property changes.
+            if (!e.PropertyName.StartsWith("Current"))
             {
                 MarkAsDirty();
             }
@@ -278,7 +283,9 @@ namespace Test2d
             _invalidateContainer();
 
             // NOTE: Do not mark project as dirty when current shape changes.
-            if (e.PropertyName != "CurrentShape")
+            // NOTE: Do not mark project as dirty when current layer changes.
+            if (e.PropertyName != "CurrentShape"
+                && e.PropertyName != "CurrentLayer")
             {
                 MarkAsDirty();
             }
@@ -365,6 +372,30 @@ namespace Test2d
             }
 
             _invalidateStyles();
+
+            // NOTE: Do not mark project as dirty when current style changes.
+            if (e.PropertyName != "CurrentStyle")
+            {
+                MarkAsDirty();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GroupLibraryObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Verbose("Group Library: " + (sender is GroupLibrary ? (sender as GroupLibrary).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
+
+            if (e.PropertyName == "Groups")
+            {
+                var sg = sender as GroupLibrary;
+                Remove(sg.Groups);
+                Add(sg.Groups);
+            }
+
             MarkAsDirty();
         }
 
@@ -1295,6 +1326,42 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="gl"></param>
+        public void Add(GroupLibrary gl)
+        {
+            if (gl == null)
+                return;
+
+            if (gl.Groups != null)
+            {
+                Add(gl.Groups);
+            }
+
+            gl.PropertyChanged += GroupLibraryObserver;
+            Verbose("Add Group Library: " + gl.Name);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gl"></param>
+        public void Remove(GroupLibrary gl)
+        {
+            if (gl == null)
+                return;
+
+            if (gl.Groups != null)
+            {
+                Remove(gl.Groups);
+            }
+
+            gl.PropertyChanged -= GroupLibraryObserver;
+            Verbose("Remove Group Library: " + gl.Name);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="style"></param>
         public void Add(ShapeStyle style)
         {
@@ -1769,6 +1836,36 @@ namespace Test2d
             foreach (var sg in sgs)
             {
                 Remove(sg);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gl"></param>
+        public void Add(IEnumerable<GroupLibrary> gl)
+        {
+            if (gl == null)
+                return;
+
+            foreach (var g in gl)
+            {
+                Add(g);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gl"></param>
+        public void Remove(IEnumerable<GroupLibrary> gl)
+        {
+            if (gl == null)
+                return;
+
+            foreach (var g in gl)
+            {
+                Remove(g);
             }
         }
 
