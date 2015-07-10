@@ -220,6 +220,8 @@
     </Compile>
     <Compile Include="Converters\ArgbColorToBrushConverter.cs" />
     <Compile Include="Converters\ArgbColorToBrushMultiConverter.cs" />
+    <Compile Include="Converters\BooleanToStringConverter.cs" />
+    <Compile Include="Converters\BooleanToValueConverter.cs" />
     <Compile Include="Converters\ColumnParameterConverter.cs" />
     <Compile Include="Converters\DoubleToStringConverter.cs" />
     <Compile Include="Converters\EnumToBooleanConverter.cs" />
