@@ -172,6 +172,22 @@ namespace Test.Windows
             }
         }
 
+        private void OnSave()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            if (!string.IsNullOrEmpty(context.Editor.ProjectPath))
+            {
+                context.Save(context.Editor.ProjectPath);
+            }
+            else
+            {
+                OnSaveAs();
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -935,6 +951,11 @@ namespace Test.Windows
                 new DelegateCommand<object>(
                     (parameter) => OnOpen(parameter),
                     (parameter) => context.IsEditMode());
+
+            context.Commands.SaveCommand =
+                new DelegateCommand(
+                    () => OnSave(),
+                    () => context.IsEditMode());
 
             context.Commands.SaveAsCommand =
                 new DelegateCommand(
