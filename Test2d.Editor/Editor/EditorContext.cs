@@ -1537,6 +1537,12 @@ namespace Test2d
                 _editor.ToAbsoluteUri(root, images);
 
                 AddRecent(path, _editor.Project.Name);
+
+                if (string.IsNullOrEmpty(_editor.ProjectPath))
+                {
+                    _editor.ProjectPath = path;
+                }
+
                 _editor.IsProjectDirty = false;
             }
             catch (Exception ex)
