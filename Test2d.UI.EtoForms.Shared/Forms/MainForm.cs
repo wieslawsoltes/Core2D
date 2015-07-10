@@ -5,6 +5,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
@@ -58,7 +59,7 @@ namespace TestEtoForms
             _context.InitializeEditor();
             _context.InitializeScripts();
             _context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
-            _context.Editor.GetImagePath = () => Image();
+            _context.Editor.GetImagePath = () => GetImagePath();
 
             _state = new ZoomState(_context, InvalidateContainer);
 
@@ -70,7 +71,7 @@ namespace TestEtoForms
         /// </summary>
         private void InitializeDrawable()
         {
-            _drawable = new Drawable(true);
+            _drawable = new Drawable(false);
             _drawable.Width = (int)_context.Editor.Project.CurrentContainer.Width;
             _drawable.Height = (int)_context.Editor.Project.CurrentContainer.Height;
             _drawable.Paint += (s, e) => Draw(e.Graphics);
@@ -211,7 +212,7 @@ namespace TestEtoForms
         private void InitializeForm()
         {
             Title = "Test2d";
-            ClientSize = new Size(1000, 650);
+            ClientSize = new Size(900, 650);
             WindowState = WindowState.Maximized;
 
             Content = 
@@ -224,18 +225,20 @@ namespace TestEtoForms
                     null);
 
             _drawable.CanFocus = true;
-     
+
             this.MouseEnter += 
-                (sender, e) => 
+                (s, e) => 
                 {
                     _drawable.Focus();
                 };
             
             this.MouseLeave += 
-                (sender, e) => 
+                (s, e) => 
                 {
-                    if (_drawable.HasFocus) 
+                    if (_drawable.HasFocus)
+                    {
                         this.Focus();
+                    }
                 };
 
             this.Load +=
@@ -263,109 +266,107 @@ namespace TestEtoForms
                 MenuText = "&New",
                 Shortcut = Application.Instance.CommonModifier | Keys.N
             };
+
             newCommand.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.NewCommand.Execute(null);
-                    InvalidateContainer();
-                };
+            (s, e) =>
+            {
+                _context.Commands.NewCommand.Execute(null);
+                InvalidateContainer();
+            };
 
             var openCommand = new Command()
             {
                 MenuText = "&Open...",
                 Shortcut = Application.Instance.CommonModifier | Keys.O
             };
+
             openCommand.Executed +=
-                (s, e) =>
+            (s, e) =>
+            {
+                var dlg = new OpenFileDialog();
+                dlg.Filters.Add(new FileDialogFilter("Project", ".project"));
+                dlg.Filters.Add( new FileDialogFilter("All", ".*"));
+
+                var result = dlg.ShowDialog(this);
+                if (result == DialogResult.Ok)
                 {
-                    var dlg = new OpenFileDialog();
-                    dlg.Filters = new List<FileDialogFilter>()
-                    {
-                        new FileDialogFilter("Project", ".project"),
-                        new FileDialogFilter("All", ".*")
-                    };
-                    var result = dlg.ShowDialog(this);
-                    if (result == DialogResult.Ok)
-                    {
-                        _context.Open(dlg.FileName);
-                        InvalidateContainer();
-                    }
-                };
+                    _context.Open(dlg.FileName);
+                    InvalidateContainer();
+                }
+            };
 
             var saveAsCommand = new Command()
             {
                 MenuText = "Save &As...",
                 Shortcut = Application.Instance.CommonModifier | Keys.S
             };
+
             saveAsCommand.Executed +=
-                (s, e) =>
+            (s, e) =>
+            {
+                var dlg = new SaveFileDialog();
+                dlg.Filters.Add(new FileDialogFilter("Project", ".project"));
+                dlg.Filters.Add(new FileDialogFilter("All", ".*"));
+                dlg.FileName = _context.Editor.Project.Name;
+                var result = dlg.ShowDialog(this);
+                if (result == DialogResult.Ok)
                 {
-                    var dlg = new SaveFileDialog();
-                    dlg.Filters = new List<FileDialogFilter>()
-                    {
-                        new FileDialogFilter("Project", ".project"),
-                        new FileDialogFilter("All", ".*")
-                    };
-                    dlg.FileName = _context.Editor.Project.Name;
-                    var result = dlg.ShowDialog(this);
-                    if (result == DialogResult.Ok)
-                    {
-                        _context.Save(dlg.FileName);
-                    }
-                };
+                    _context.Save(dlg.FileName);
+                }
+            };
 
             var exportCommand = new Command()
             {
                 MenuText = "&Export...",
                 Shortcut = Application.Instance.CommonModifier | Keys.E
             };
+
             exportCommand.Executed +=
-                (s, e) =>
+            (s, e) =>
+            {
+                var dlg = new SaveFileDialog();
+                dlg.Filters.Add(new FileDialogFilter("Pdf", ".pdf"));
+                dlg.Filters.Add(new FileDialogFilter("Dxf AutoCAD 2000", ".dxf"));
+                dlg.Filters.Add(new FileDialogFilter("Dxf R10", ".dxf"));
+                dlg.Filters.Add(new FileDialogFilter("All", ".*"));
+
+                dlg.FileName = _context.Editor.Project.Name;
+                var result = dlg.ShowDialog(this);
+                if (result == DialogResult.Ok)
                 {
-                    var dlg = new SaveFileDialog();
-                    dlg.Filters = new List<FileDialogFilter>()
+                    string path = dlg.FileName;
+                    int filterIndex = dlg.CurrentFilterIndex;
+                    switch (filterIndex)
                     {
-                        new FileDialogFilter("Pdf", ".pdf"),
-                        new FileDialogFilter("Dxf AutoCAD 2000", ".dxf"),
-                        new FileDialogFilter("Dxf R10", ".dxf"),
-                        new FileDialogFilter("All", ".*")
-                    };
-                    dlg.FileName = _context.Editor.Project.Name;
-                    var result = dlg.ShowDialog(this);
-                    if (result == DialogResult.Ok)
-                    {
-                        string path = dlg.FileName;
-                        int filterIndex = dlg.CurrentFilterIndex;
-                        switch (filterIndex)
-                        {
-                            case 0:
-                                _context.ExportAsPdf(path, _context.Editor.Project);
-                                Process.Start(path);
-                                break;
-                            case 1:
-                                _context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1015);
-                                Process.Start(path);
-                                break;
-                            case 2:
-                                _context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1006);
-                                Process.Start(path);
-                                break;
-                            default:
-                                break;
-                        }
+                        case 0:
+                            _context.ExportAsPdf(path, _context.Editor.Project);
+                            Process.Start(path);
+                            break;
+                        case 1:
+                            _context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1015);
+                            Process.Start(path);
+                            break;
+                        case 2:
+                            _context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1006);
+                            Process.Start(path);
+                            break;
+                        default:
+                            break;
                     }
-                };
+                }
+            };
 
             var exitCommand = new Command()
             {
                 MenuText = "E&xit",
                 Shortcut = Application.Instance.AlternateModifier | Keys.F4
             };
+
             exitCommand.Executed += 
-                (s, e) =>
-                {
-                    Application.Instance.Quit();
-                };
+            (s, e) =>
+            {
+                Application.Instance.Quit();
+            };
 
             #endregion
 
@@ -376,132 +377,144 @@ namespace TestEtoForms
                 MenuText = "&None", 
                 Shortcut = Keys.N 
             };
+
             noneTool.Executed += 
-                (s, e) =>
-                {
-                    _context.Commands.ToolNoneCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.ToolNoneCommand.Execute(null);
+            };
 
             var selectionTool = new Command() 
             { 
                 MenuText = "&Selection", 
                 Shortcut = Keys.S 
             };
+
             selectionTool.Executed += 
-                (s, e) =>
-                {
-                    _context.Commands.ToolSelectionCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.ToolSelectionCommand.Execute(null);
+            };
 
             var pointTool = new Command() 
             { 
                 MenuText = "&Point", 
                 Shortcut = Keys.P 
             };
+
             pointTool.Executed += 
-                (s, e) =>
-                {
-                    _context.Commands.ToolPointCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.ToolPointCommand.Execute(null);
+            };
 
             var lineTool = new Command() 
             { 
                 MenuText = "&Line", 
                 Shortcut = Keys.L 
             };
+
             lineTool.Executed += 
-                (s, e) =>
-                {
-                    _context.Commands.ToolLineCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.ToolLineCommand.Execute(null);
+            };
 
             var arcTool = new Command() 
             { 
                 MenuText = "&Arc", 
                 Shortcut = Keys.A 
             };
+
             arcTool.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.ToolArcCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.ToolArcCommand.Execute(null);
+            };
 
             var bezierTool = new Command() 
             { 
                 MenuText = "&Bezier", 
                 Shortcut = Keys.B 
             };
+
             bezierTool.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.ToolBezierCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.ToolBezierCommand.Execute(null);
+            };
 
             var qbezierTool = new Command() 
             { 
                 MenuText = "&QBezier", 
                 Shortcut = Keys.Q 
             };
+
             qbezierTool.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.ToolQBezierCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.ToolQBezierCommand.Execute(null);
+            };
 
             var pathTool = new Command()
             {
                 MenuText = "Pat&h",
                 Shortcut = Keys.H
             };
+
             pathTool.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.ToolPathCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.ToolPathCommand.Execute(null);
+            };
 
             var rectangleTool = new Command()
             {
                 MenuText = "&Rectangle",
                 Shortcut = Keys.R
             };
+
             rectangleTool.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.ToolRectangleCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.ToolRectangleCommand.Execute(null);
+            };
 
             var ellipseTool = new Command()
             {
                 MenuText = "&Ellipse",
                 Shortcut = Keys.E
             };
+
             ellipseTool.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.ToolEllipseCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.ToolEllipseCommand.Execute(null);
+            };
 
             var textTool = new Command() 
             { 
                 MenuText = "&Text", 
                 Shortcut = Keys.T 
             };
+
             textTool.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.ToolTextCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.ToolTextCommand.Execute(null);
+            };
 
             var imageTool = new Command() 
             { 
                 MenuText = "&Image", 
                 Shortcut = Keys.I 
             };
+
             imageTool.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.ToolImageCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.ToolImageCommand.Execute(null);
+            };
 
             #endregion
 
@@ -512,120 +525,131 @@ namespace TestEtoForms
                 MenuText = "&Undo", 
                 Shortcut = Application.Instance.CommonModifier | Keys.Z 
             };
+
             undoCommand.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.UndoCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.UndoCommand.Execute(null);
+            };
 
             var redoCommand = new Command() 
             { 
                 MenuText = "&Redo", 
                 Shortcut = Application.Instance.CommonModifier | Keys.Y 
             };
+
             redoCommand.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.RedoCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.RedoCommand.Execute(null);
+            };
 
             var cutCommand = new Command() 
             { 
                 MenuText = "Cu&t", 
                 Shortcut = Application.Instance.CommonModifier | Keys.X 
             };
+
             cutCommand.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.CutCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.CutCommand.Execute(null);
+            };
 
             var copyCommand = new Command() 
             { 
                 MenuText = "&Copy", 
                 Shortcut = Application.Instance.CommonModifier | Keys.C 
             };
+
             copyCommand.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.CopyCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.CopyCommand.Execute(null);
+            };
 
             var pasteCommand = new Command() 
             { 
                 MenuText = "&Paste", 
                 Shortcut = Application.Instance.CommonModifier | Keys.V 
             };
+
             pasteCommand.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.PasteCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.PasteCommand.Execute(null);
+            };
 
             var deleteCommand = new Command() 
             { 
                 MenuText = "&Delete", 
                 Shortcut = Keys.Delete 
             };
+
             deleteCommand.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.DeleteCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.DeleteCommand.Execute(null);
+            };
 
             var selectAllCommand = new Command() 
             { 
                 MenuText = "Select &All", 
                 Shortcut = Application.Instance.CommonModifier | Keys.A 
             };
+
             selectAllCommand.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.SelectAllCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.SelectAllCommand.Execute(null);
+            };
 
             var clearAllCommand = new Command() 
             { 
                 MenuText = "Cl&ear All" 
             };
+
             clearAllCommand.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.ClearAllCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.ClearAllCommand.Execute(null);
+            };
 
             var referenceCommand = new Command()
             {
                 MenuText = "Re&ference",
                 Shortcut = Application.Instance.CommonModifier | Keys.R
             };
+
             referenceCommand.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.ReferenceCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.ReferenceCommand.Execute(null);
+            };
 
             var groupCommand = new Command() 
             { 
                 MenuText = "&Group",
                 Shortcut = Application.Instance.CommonModifier | Keys.G 
             };
+
             groupCommand.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.GroupCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.GroupCommand.Execute(null);
+            };
 
             var ungroupCommand = new Command() 
             { 
                 MenuText = "U&ngroup", 
                 Shortcut = Application.Instance.CommonModifier | Keys.U
             };
+
             ungroupCommand.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.UngroupCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.UngroupCommand.Execute(null);
+            };
 
             #endregion
 
@@ -636,22 +660,21 @@ namespace TestEtoForms
                 MenuText = "&Evaluate...",
                 Shortcut = Keys.F8
             };
+
             evalCommand.Executed +=
-                (s, e) =>
+            (s, e) =>
+            {
+                var dlg = new OpenFileDialog();
+                dlg.Filters.Add(new FileDialogFilter("C#", ".cs"));
+                dlg.Filters.Add(new FileDialogFilter("All", ".*"));
+
+                var result = dlg.ShowDialog(this);
+                if (result == DialogResult.Ok)
                 {
-                    var dlg = new OpenFileDialog();
-                    dlg.Filters = new List<FileDialogFilter>()
-                    {
-                        new FileDialogFilter("C#", ".cs"),
-                        new FileDialogFilter("All", ".*")
-                    };
-                    var result = dlg.ShowDialog(this);
-                    if (result == DialogResult.Ok)
-                    {
-                        _context.Eval(dlg.FileName);
-                        InvalidateContainer();
-                    }
-                };
+                    _context.Eval(dlg.FileName);
+                    InvalidateContainer();
+                }
+            };
 
             #endregion
 
@@ -662,55 +685,60 @@ namespace TestEtoForms
                 MenuText = "&Start",
                 Shortcut = Keys.F5,
             };
+
             startSimulation.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.StartSimulationCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.StartSimulationCommand.Execute(null);
+            };
 
             var stopSimulation = new Command()
             {
                 MenuText = "S&top",
                 Shortcut = Keys.F6
             };
+
             stopSimulation.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.StopSimulationCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.StopSimulationCommand.Execute(null);
+            };
 
             var restartSimulation = new Command()
             {
                 MenuText = "&Restart",
                 Shortcut = Keys.F7
             };
+
             restartSimulation.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.RestartSimulationCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.RestartSimulationCommand.Execute(null);
+            };
 
             var pauseSimulation = new Command()
             {
                 MenuText = "&Pause",
                 Shortcut = Keys.F9
             };
+
             pauseSimulation.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.PauseSimulationCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.PauseSimulationCommand.Execute(null);
+            };
 
             var tickSimulation = new Command()
             {
                 MenuText = "Ti&ck",
                 Shortcut = Keys.F10
             };
+
             tickSimulation.Executed +=
-                (s, e) =>
-                {
-                    _context.Commands.TickSimulationCommand.Execute(null);
-                };
+            (s, e) =>
+            {
+                _context.Commands.TickSimulationCommand.Execute(null);
+            };
 
             #endregion
 
@@ -812,10 +840,10 @@ namespace TestEtoForms
                 MenuText = "&About..."
             };
             aboutCommand.Executed +=
-                (s, e) =>
-                {
-                    MessageBox.Show(this, Platform.ID);
-                };
+            (s, e) =>
+            {
+                MessageBox.Show(this, Platform.ID);
+            };
 
             Menu = new MenuBar
             {
@@ -989,13 +1017,10 @@ namespace TestEtoForms
         /// 
         /// </summary>
         /// <returns></returns>
-        public string Image()
+        public string GetImagePath()
         {
             var dlg = new OpenFileDialog();
-            dlg.Filters = new List<FileDialogFilter>()
-            {
-                new FileDialogFilter("All", ".*")
-            };
+            dlg.Filters.Add(new FileDialogFilter("All", ".*"));
             dlg.FileName = "";
             var result = dlg.ShowDialog(this);
             if (result == DialogResult.Ok)
