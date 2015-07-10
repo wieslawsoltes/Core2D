@@ -172,6 +172,9 @@ namespace Test.Windows
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void OnSave()
         {
             var context = DataContext as EditorContext;
