@@ -263,7 +263,7 @@ namespace Test2d
             {
                 _editor.History.Reset();
 
-                _editor.Load(_projectFactory.GetProject());
+                _editor.Load(_projectFactory.GetProject(), string.Empty);
             }
         }
 
@@ -1503,7 +1503,7 @@ namespace Test2d
                 _editor.ToAbsoluteUri(root, images);
 
                 _editor.History.Reset();
-                _editor.Load(project);
+                _editor.Load(project, path);
 
                 AddRecent(path, project.Name);
             }
@@ -1537,6 +1537,7 @@ namespace Test2d
                 _editor.ToAbsoluteUri(root, images);
 
                 AddRecent(path, _editor.Project.Name);
+                _editor.IsProjectDirty = false;
             }
             catch (Exception ex)
             {
@@ -3780,6 +3781,7 @@ namespace Test2d
         {
             (_commands.NewCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.OpenCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.SaveCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.SaveAsCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ExportCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.ExitCommand as DelegateCommand).RaiseCanExecuteChanged();

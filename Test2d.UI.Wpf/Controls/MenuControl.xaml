@@ -15,7 +15,8 @@
             <Separator/>
             <MenuItem Header="_Open..." Command="{Binding Commands.OpenCommand}" InputGestureText="Ctrl+O"/>
             <Separator/>
-            <MenuItem Header="Save _As..." Command="{Binding Commands.SaveAsCommand}" InputGestureText="Ctrl+S"/>
+            <MenuItem Header="_Save" Command="{Binding Commands.SaveCommand}" InputGestureText="Ctrl+S"/>
+            <MenuItem Header="Save _As..." Command="{Binding Commands.SaveAsCommand}" InputGestureText="Ctrl+Shift+S"/>
             <Separator/>
             <MenuItem Header="_Export..." Command="{Binding Commands.ExportCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText="Ctrl+E"/>
             <Separator/>
