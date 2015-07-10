@@ -46,6 +46,7 @@ Test2d [simulation mode description](SIMULATION.md).
 
 * https://www.nuget.org/api/v2/
 * https://www.myget.org/F/roslyn-nightly/
+* https://www.myget.org/F/eto/
 
 ## Contact
 
