@@ -25,6 +25,10 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public ICommand SaveCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand SaveAsCommand { get; set; }
         /// <summary>
         /// 
