@@ -102,6 +102,7 @@
     <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeBounds.cs" />
     <Compile Include="Editor\Core\PathTool.cs" />
+    <Compile Include="Editor\Core\RecentProject.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\EditorCommands.cs" />
     <Compile Include="Editor\EditorContext.cs" />
