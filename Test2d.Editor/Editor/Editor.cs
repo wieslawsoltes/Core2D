@@ -881,12 +881,9 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="shapes"></param>
-        /// <param name="builder"></param>
+        /// <param name="original"></param>
         /// <param name="groupShapes"></param>
-        private void Ungroup(
-            IEnumerable<BaseShape> shapes, 
-            ImmutableArray<BaseShape>.Builder builder, 
-            bool groupShapes)
+        private void Ungroup(IEnumerable<BaseShape> shapes, IList<BaseShape> original, bool groupShapes)
         {
             if (shapes == null)
                 return;
@@ -896,9 +893,9 @@ namespace Test2d
                 if (shape is XGroup)
                 {
                     var g = shape as XGroup;
-                    Ungroup(g.Shapes, builder, groupShapes: true);
-                    Ungroup(g.Connectors, builder, groupShapes: true);
-                    builder.Remove(g);
+                    Ungroup(g.Shapes, original, groupShapes: true);
+                    Ungroup(g.Connectors, original, groupShapes: true);
+                    original.Remove(g);
                 }
                 else if (groupShapes)
                 {
@@ -910,12 +907,12 @@ namespace Test2d
                             | ShapeState.Input 
                             | ShapeState.Output);
                         shape.State |= ShapeState.Standalone;
-                        builder.Add(shape);
+                        original.Add(shape);
                     }
                     else
                     {
                         shape.State |= ShapeState.Standalone;
-                        builder.Add(shape);
+                        original.Add(shape);
                     }
                 }
             }
