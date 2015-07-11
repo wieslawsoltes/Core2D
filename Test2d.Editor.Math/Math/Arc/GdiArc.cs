@@ -63,14 +63,29 @@ namespace Test2d
         /// <returns></returns>
         public static GdiArc FromXArc(XArc arc, double dx, double dy)
         {
-            double x1 = arc.Point1.X + dx;
-            double y1 = arc.Point1.Y + dy;
-            double x2 = arc.Point2.X + dx;
-            double y2 = arc.Point2.Y + dy;
-            double x3 = arc.Point3.X + dx;
-            double y3 = arc.Point3.Y + dy;
-            double x4 = arc.Point4.X + dx;
-            double y4 = arc.Point4.Y + dy;
+            return FromXArc(arc.Point1, arc.Point2, arc.Point3, arc.Point4, dx, dy);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p1"></param>
+        /// <param name="p2"></param>
+        /// <param name="p3"></param>
+        /// <param name="p4"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static GdiArc FromXArc(XPoint p1, XPoint p2, XPoint p3, XPoint p4, double dx, double dy)
+        {
+            double x1 = p1.X + dx;
+            double y1 = p1.Y + dy;
+            double x2 = p2.X + dx;
+            double y2 = p2.Y + dy;
+            double x3 = p3.X + dx;
+            double y3 = p3.Y + dy;
+            double x4 = p4.X + dx;
+            double y4 = p4.Y + dy;
             var rect = Rect2.Create(x1, y1, x2, y2, dx, dy);
             double cx = rect.X + rect.Width / 2.0;
             double cy = rect.Y + rect.Height / 2.0;
@@ -95,7 +110,7 @@ namespace Test2d
                 RadiusX = radiusX,
                 RadiusY = radiusY,
                 StartAngle = startAngle,
-                EndAngle =  endAngle,
+                EndAngle = endAngle,
                 SweepAngle = sweepAngle
             };
         }
