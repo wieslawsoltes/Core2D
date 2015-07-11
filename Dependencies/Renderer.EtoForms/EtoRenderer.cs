@@ -810,29 +810,18 @@ namespace TestEtoForms
                 _scaleToPage(rect.Width),
                 _scaleToPage(rect.Height));
 
-            if (text.IsFilled)
-            {
-                _gfx.FillRectangle(
-                    ToSolidBrush(text.Style.Fill), 
-                    srect);
-            }
-
-            if (text.IsStroked)
-            {
-                _gfx.DrawRectangle(
-                    ToPen(text.Style, _scaleToPage),
-                    srect);
-            }
-
             var tbind = text.BindToTextProperty(db, r);
             var size = _gfx.MeasureString(font, tbind);
             var origin = GetTextOrigin(text.Style, ref srect, ref size);
 
-            _gfx.DrawText(
-                font,
-                ToSolidBrush(text.Style.Stroke),
-                origin,
-                tbind);
+            if (text.IsStroked)
+            {
+                _gfx.DrawText(
+                    font,
+                    ToSolidBrush(text.Style.Stroke),
+                    origin,
+                    tbind);
+            }
 
             brush.Dispose();
             font.Dispose();

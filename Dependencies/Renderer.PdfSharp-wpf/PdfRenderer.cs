@@ -923,32 +923,15 @@ namespace PdfSharp
                     break;
             }
 
-            if (text.IsStroked && text.IsFilled)
+            if (text.IsStroked)
             {
-                _gfx.DrawRectangle(
-                    ToXPen(text.Style, _scaleToPage),
-                    ToXSolidBrush(text.Style.Fill),
-                    srect);
+                _gfx.DrawString(
+                    text.BindToTextProperty(db, r),
+                    font,
+                    ToXSolidBrush(text.Style.Stroke),
+                    srect,
+                    format);
             }
-            else if (text.IsStroked && !text.IsFilled)
-            {
-                _gfx.DrawRectangle(
-                    ToXPen(text.Style, _scaleToPage),
-                    srect);
-            }
-            else if (!text.IsStroked && text.IsFilled)
-            {
-                _gfx.DrawRectangle(
-                    ToXSolidBrush(text.Style.Fill), 
-                    srect);
-            }
-
-            _gfx.DrawString(
-                text.BindToTextProperty(db, r),
-                font,
-                ToXSolidBrush(text.Style.Stroke),
-                srect,
-                format);
         }
 
         /// <summary>

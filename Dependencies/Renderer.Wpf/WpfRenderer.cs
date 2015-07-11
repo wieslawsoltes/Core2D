@@ -1028,13 +1028,6 @@ namespace Test
                 text.BottomRight,
                 dx, dy);
 
-            DrawRectangleInternal(
-                _dc, 
-                half, 
-                fill, stroke, 
-                text.IsStroked, text.IsFilled, 
-                ref rect);
-
             var tbind = text.BindToTextProperty(db, r);
 
             Tuple<string, FormattedText, ShapeStyle> tcache = null;
@@ -1045,12 +1038,15 @@ namespace Test
                 && string.Compare(tcache.Item1, tbind) == 0
                 && tcache.Item3 == style)
             {
-                ct = tcache.Item1;
-                ft = tcache.Item2;
+                if (text.IsStroked)
+                {
+                    ct = tcache.Item1;
+                    ft = tcache.Item2;
 
-                _dc.DrawText(
-                    ft, 
-                    GetTextOrigin(style, ref rect, ft));
+                    _dc.DrawText(
+                        ft,
+                        GetTextOrigin(style, ref rect, ft));
+                }
             }
             else
             {
@@ -1115,9 +1111,12 @@ namespace Test
                     }
                 }
 
-                _dc.DrawText(
-                    ft, 
-                    GetTextOrigin(style, ref rect, ft));
+                if (text.IsStroked)
+                {
+                    _dc.DrawText(
+                        ft,
+                        GetTextOrigin(style, ref rect, ft));
+                }
             }
         }
 

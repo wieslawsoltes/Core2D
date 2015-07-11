@@ -808,29 +808,15 @@ namespace Test2d
                     break;
             }
 
-            if (text.IsFilled)
-            {
-                _gfx.FillRectangle(
-                    ToSolidBrush(text.Style.Fill), 
-                    srect);
-            }
-
             if (text.IsStroked)
             {
-                _gfx.DrawRectangle(
-                    ToPen(text.Style, _scaleToPage), 
-                    srect.X,
-                    srect.Y,
-                    srect.Width,
-                    srect.Height);
+                _gfx.DrawString(
+                    text.BindToTextProperty(db, r),
+                    font,
+                    ToSolidBrush(text.Style.Stroke),
+                    srect,
+                    format);
             }
-
-            _gfx.DrawString(
-                text.BindToTextProperty(db, r),
-                font,
-                ToSolidBrush(text.Style.Stroke),
-                srect,
-                format);
 
             brush.Dispose();
             font.Dispose();
