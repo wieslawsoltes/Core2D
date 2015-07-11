@@ -76,7 +76,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PdfWriter.cs" />
+    <Compile Include="..\FileWriter.Pdf-wpf\PdfWriter.cs">
+      <Link>PdfWriter.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
