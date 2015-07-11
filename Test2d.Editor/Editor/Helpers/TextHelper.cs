@@ -78,8 +78,7 @@ namespace Test2d
                             sx, sy,
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape,
-                            "Text",
-                            _editor.Project.Options.DefaultIsFilled);
+                            "Text");
                         if (_editor.Project.Options.TryToConnect)
                         {
                             TryToConnectTopLeft(_shape as XText, sx, sy);
