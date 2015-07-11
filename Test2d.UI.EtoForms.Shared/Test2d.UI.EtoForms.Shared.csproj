@@ -104,9 +104,9 @@
       <Project>{d40b3bcd-0a26-40bb-960b-9464d248c934}</Project>
       <Name>FileWriter.Dxf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dependencies\FileWriter.Pdf-wpf\FileWriter.Pdf-wpf.csproj">
-      <Project>{5c5a31b5-8f76-42e7-aea8-55b32ca641fa}</Project>
-      <Name>FileWriter.Pdf-wpf</Name>
+    <ProjectReference Include="..\Dependencies\FileWriter.Pdf-core\FileWriter.Pdf-core.csproj">
+      <Project>{ec0efa51-83f0-4439-be9f-faebd3418c94}</Project>
+      <Name>FileWriter.Pdf-core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dependencies\Renderer.EtoForms\Renderer.EtoForms.csproj">
       <Project>{e4f69cd9-1373-4587-8bd2-a2f46ebb4912}</Project>
