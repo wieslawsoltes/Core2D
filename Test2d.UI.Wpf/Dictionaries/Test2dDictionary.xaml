@@ -2309,7 +2309,6 @@
             <Control Template="{StaticResource NameControlTemplateKey}"/>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
-            <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
             <Control Template="{StaticResource TextControlTemplateKey}"/>
             <Expander Header="TopLeft">
                 <ContentControl Content="{Binding TopLeft}"/>
