@@ -91,8 +91,8 @@ XGroup CreateInputSignal()
 {
     var g = XGroup.Create("INPUT");
 
-    var label = XText.Create(0, 0, 30, 30, styleTextBigCC, ps, "{0}", false, "");
-    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps, false, "");
+    var label = XText.Create(0, 0, 30, 30, styleTextBigCC, ps, "{0}");
+    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps);
     var co = XPoint.Create(30, 15, ps, "O");
 
     var labelProperty = ShapeProperty.Create("Label", "IN");
@@ -110,8 +110,8 @@ XGroup CreateOutputSignal()
 {
     var g = XGroup.Create("OUTPUT");
 
-    var label = XText.Create(0, 0, 30, 30, styleTextBigCC, ps, "{0}", false, "");
-    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps, false, "");
+    var label = XText.Create(0, 0, 30, 30, styleTextBigCC, ps, "{0}");
+    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps);
     var ci = XPoint.Create(0, 15, ps, "I");
     
     var labelProperty = ShapeProperty.Create("Label", "OUT");
@@ -129,11 +129,11 @@ XGroup CreateSignal()
 {
     var g = XGroup.Create("SIGNAL");
 
-    var labelDesignation = XText.Create(5, 0, 190, 15, styleTextMediumLC, ps, "{0}", false, "");
-    var labelDescription = XText.Create(5, 15, 190, 30, styleTextMediumLC, ps, "{0}", false, "");
-    var labelSignal = XText.Create(200, 0, 280, 15, styleTextMediumLC, ps, "{0}", false, "");
-    var labelCondition = XText.Create(200, 15, 280, 30, styleTextMediumLC, ps, "{0}", false, "");
-    var frame = XRectangle.Create(0, 0, 285, 30, styleLineThick, ps, false, "");
+    var labelDesignation = XText.Create(5, 0, 190, 15, styleTextMediumLC, ps, "{0}");
+    var labelDescription = XText.Create(5, 15, 190, 30, styleTextMediumLC, ps, "{0}");
+    var labelSignal = XText.Create(200, 0, 280, 15, styleTextMediumLC, ps, "{0}");
+    var labelCondition = XText.Create(200, 15, 280, 30, styleTextMediumLC, ps, "{0}");
+    var frame = XRectangle.Create(0, 0, 285, 30, styleLineThick, ps);
     var separator = XLine.Create(195, 0, 195, 30, styleLineThick, ps);
     var ci = XPoint.Create(0, 15, ps, "I");
     var co = XPoint.Create(285, 15, ps, "O");
@@ -172,8 +172,8 @@ XGroup CreateAndGate()
 {
     var g = XGroup.Create("AND");
 
-    var label = XText.Create(0, 0, 30, 30, styleTextBigCC, ps, "{0}", false, "");
-    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps, false, "");
+    var label = XText.Create(0, 0, 30, 30, styleTextBigCC, ps, "{0}");
+    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps);
     var cl = XPoint.Create(0, 15, ps, "L");
     var cr = XPoint.Create(30, 15, ps, "R");
     var ct = XPoint.Create(15, 0, ps, "T");
@@ -197,8 +197,8 @@ XGroup CreateOrGate()
 {
     var g = XGroup.Create("OR");
 
-    var label = XText.Create(0, 0, 30, 30, styleTextBigCC, ps, "{0}{1}", false, "");
-    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps, false, "");
+    var label = XText.Create(0, 0, 30, 30, styleTextBigCC, ps, "{0}{1}");
+    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps);
     var cl = XPoint.Create(0, 15, ps, "L");
     var cr = XPoint.Create(30, 15, ps, "R");
     var ct = XPoint.Create(15, 0, ps, "T");
@@ -224,8 +224,8 @@ XGroup CreateXorGate()
 {
     var g = XGroup.Create("XOR");
 
-    var label = XText.Create(0, 0, 30, 30, styleTextBigCC, ps, "{0}", false, "");
-    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps, false, "");
+    var label = XText.Create(0, 0, 30, 30, styleTextBigCC, ps, "{0}");
+    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps);
     var cl = XPoint.Create(0, 15, ps, "L");
     var cr = XPoint.Create(30, 15, ps, "R");
     var ct = XPoint.Create(15, 0, ps, "T");
@@ -249,8 +249,8 @@ XGroup CreateInverterGate()
 {
     var g = XGroup.Create("INVERTER");
 
-    var label = XText.Create(0, 0, 30, 30, styleTextBigCC, ps, "{0}", false, "");
-    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps, false, "");
+    var label = XText.Create(0, 0, 30, 30, styleTextBigCC, ps, "{0}");
+    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps);
     var cl = XPoint.Create(0, 15, ps, "L");
     var cr = XPoint.Create(30, 15, ps, "R");
     var ct = XPoint.Create(15, 0, ps, "T");
@@ -274,10 +274,10 @@ XGroup CreateTimerOn()
 {
     var g = XGroup.Create("TIMER-ON");
 
-    var label = XText.Create(-15, -15, 45, 0, styleTextMediumCC, ps, "{0}{1}{2}", false, "");
-    var t0 = XText.Create(0, 3, 15, 18, styleTextMediumCC, ps, "{0}", false, "");
-    var t1 = XText.Create(15, 3, 30, 18, styleTextMediumCC, ps, "{0}", false, "");
-    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps, false, "");
+    var label = XText.Create(-15, -15, 45, 0, styleTextMediumCC, ps, "{0}{1}{2}");
+    var t0 = XText.Create(0, 3, 15, 18, styleTextMediumCC, ps, "{0}");
+    var t1 = XText.Create(15, 3, 30, 18, styleTextMediumCC, ps, "{0}");
+    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps);
     var l0 = XLine.Create(7, 18, 7, 22, styleLineThick, ps);
     var l1 = XLine.Create(23, 18, 23, 22, styleLineThick, ps);
     var l2 = XLine.Create(23, 20, 7, 20, styleLineThick, ps);
@@ -319,10 +319,10 @@ XGroup CreateTimerOff()
 {
     var g = XGroup.Create("TIMER-OFF");
 
-    var label = XText.Create(-15, -15, 45, 0, styleTextMediumCC, ps, "{0}{1}{2}", false, "");
-    var t0 = XText.Create(0, 3, 15, 18, styleTextMediumCC, ps, "{0}", false, "");
-    var t1 = XText.Create(15, 3, 30, 18, styleTextMediumCC, ps, "{0}", false, "");
-    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps, false, "");
+    var label = XText.Create(-15, -15, 45, 0, styleTextMediumCC, ps, "{0}{1}{2}");
+    var t0 = XText.Create(0, 3, 15, 18, styleTextMediumCC, ps, "{0}");
+    var t1 = XText.Create(15, 3, 30, 18, styleTextMediumCC, ps, "{0}");
+    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps);
     var l0 = XLine.Create(7, 18, 7, 22, styleLineThick, ps);
     var l1 = XLine.Create(23, 18, 23, 22, styleLineThick, ps);
     var l2 = XLine.Create(23, 20, 7, 20, styleLineThick, ps);
@@ -364,9 +364,9 @@ XGroup CreateTimerPulse()
 {
     var g = XGroup.Create("TIMER-PULSE");
 
-    var label = XText.Create(-15, -15, 45, 0, styleTextMediumCC, ps, "{0}{1}{2}", false, "");
-    var t = XText.Create(7, 2, 23, 15, styleTextMediumCC, ps, "{0}", false, "");
-    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps, false, "");
+    var label = XText.Create(-15, -15, 45, 0, styleTextMediumCC, ps, "{0}{1}{2}");
+    var t = XText.Create(7, 2, 23, 15, styleTextMediumCC, ps, "{0}");
+    var frame = XRectangle.Create(0, 0, 30, 30, styleLineThick, ps);
     var l0 = XLine.Create(7, 24, 11, 24, styleLineThick, ps);
     var l1 = XLine.Create(19, 24, 23, 24, styleLineThick, ps);
     var l2 = XLine.Create(11, 16, 19, 16, styleLineThick, ps);
