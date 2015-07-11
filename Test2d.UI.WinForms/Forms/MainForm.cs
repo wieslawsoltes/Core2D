@@ -78,6 +78,9 @@ namespace TestWinForms
             HandleFileDialogs();
 
             FormClosing += (s, e) => DeInitializeContext();
+
+            UpdateToolMenu();
+            UpdateOptionsMenu();
         }
 
         /// <summary>
@@ -264,24 +267,77 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
+        private void UpdateToolMenu()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            var tool = context.Editor.CurrentTool;
+
+            noneToolStripMenuItem.Checked = tool == Tool.None;
+            selectionToolStripMenuItem.Checked = tool == Tool.Selection;
+            pointToolStripMenuItem.Checked = tool == Tool.Point;
+            lineToolStripMenuItem.Checked = tool == Tool.Line;
+            arcToolStripMenuItem.Checked = tool == Tool.Arc;
+            bezierToolStripMenuItem.Checked = tool == Tool.Bezier;
+            qBezierToolStripMenuItem.Checked = tool == Tool.QBezier;
+            pathToolStripMenuItem.Checked = tool == Tool.Path;
+            rectangleToolStripMenuItem.Checked = tool == Tool.Rectangle;
+            ellipseToolStripMenuItem.Checked = tool == Tool.Ellipse;
+            textToolStripMenuItem.Checked = tool == Tool.Text;
+            imageToolStripMenuItem.Checked = tool == Tool.Image;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void UpdateOptionsMenu()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            var options = context.Editor.Project.Options;
+
+            defaultIsFilledToolStripMenuItem.Checked = options.DefaultIsFilled;
+            snapToGridToolStripMenuItem.Checked = options.SnapToGrid;
+            tryToConnectToolStripMenuItem.Checked = options.TryToConnect;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void HandleMenuShortcutKeys()
         {
-            newToolStripMenuItem.Click += (sender, e) =>
-                {
-                    var context = DataContext as EditorContext;
-                    if (context == null)
-                        return;
-
-                    context.Commands.NewCommand.Execute(null);
-                    InvalidateContainer();
-                };
-
-            openToolStripMenuItem.Click += (sender, e) => Open();
-            saveAsToolStripMenuItem.Click += (sender, e) => Save();
-            exportToolStripMenuItem.Click += (sender, e) => Export();
+            // File
+            newToolStripMenuItem.Click += (sender, e) => OnNew();
+            openToolStripMenuItem.Click += (sender, e) => OnOpen();
+            saveAsToolStripMenuItem.Click += (sender, e) => OnSave();
+            exportToolStripMenuItem.Click += (sender, e) => OnExport();
             exitToolStripMenuItem.Click += (sender, e) => Close();
 
-            evaluateToolStripMenuItem.Click += (sender, e) => Eval();
+            // Tool
+            noneToolStripMenuItem.Click += (sender, e) => OnSetToolToNone();
+            selectionToolStripMenuItem.Click += (sender, e) => OnSetToolToSelection();
+            pointToolStripMenuItem.Click += (sender, e) => OnSetToolToPoint();
+            lineToolStripMenuItem.Click += (sender, e) => OnSetToolToLine();
+            arcToolStripMenuItem.Click += (sender, e) => OnSetToolToArc();
+            bezierToolStripMenuItem.Click += (sender, e) => OnSetToolToBezier();
+            qBezierToolStripMenuItem.Click += (sender, e) => OnSetToolToQBezier();
+            pathToolStripMenuItem.Click += (sender, e) => OnSetToolToPath();
+            rectangleToolStripMenuItem.Click += (sender, e) => OnSetToolToRectangle();
+            ellipseToolStripMenuItem.Click += (sender, e) => OnSetToolToEllipse();
+            textToolStripMenuItem.Click += (sender, e) => OnSetToolToText();
+            imageToolStripMenuItem.Click += (sender, e) => OnSetToolToImage();
+
+            // Options
+            defaultIsFilledToolStripMenuItem.Click += (sender, e) => OnSetDefaultIsFilled();
+            snapToGridToolStripMenuItem.Click += (sender, e) => OnSetSnapToGrid();
+            tryToConnectToolStripMenuItem.Click += (sender, e) => OnSetTryToConnect();
+
+            // Script
+            evaluateToolStripMenuItem.Click += (sender, e) => OnEval();
         }
 
         /// <summary>
@@ -304,49 +360,49 @@ namespace TestWinForms
                         context.Commands.DeleteCommand.Execute(null);
                         break;
                     case Keys.N:
-                        context.Commands.ToolNoneCommand.Execute(null);
+                        OnSetToolToNone();
                         break;
                     case Keys.S:
-                        context.Commands.ToolSelectionCommand.Execute(null);
+                        OnSetToolToSelection();
                         break;
                     case Keys.P:
-                        context.Commands.ToolPointCommand.Execute(null);
+                        OnSetToolToPoint();
                         break;
                     case Keys.L:
-                        context.Commands.ToolLineCommand.Execute(null);
+                        OnSetToolToLine();
                         break;
                     case Keys.A:
-                        context.Commands.ToolArcCommand.Execute(null);
+                        OnSetToolToArc();
                         break;
                     case Keys.B:
-                        context.Commands.ToolBezierCommand.Execute(null);
+                        OnSetToolToBezier();
                         break;
                     case Keys.Q:
-                        context.Commands.ToolQBezierCommand.Execute(null);
+                        OnSetToolToQBezier();
                         break;
                     case Keys.H:
-                        context.Commands.ToolPathCommand.Execute(null);
+                        OnSetToolToPath();
                         break;
                     case Keys.R:
-                        context.Commands.ToolRectangleCommand.Execute(null);
+                        OnSetToolToRectangle();
                         break;
                     case Keys.E:
-                        context.Commands.ToolEllipseCommand.Execute(null);
+                        OnSetToolToEllipse();
                         break;
                     case Keys.T:
-                        context.Commands.ToolTextCommand.Execute(null);
+                        OnSetToolToText();
                         break;
                     case Keys.I:
-                        context.Commands.ToolImageCommand.Execute(null);
+                        OnSetToolToImage();
                         break;
                     case Keys.F:
-                        context.Commands.DefaultIsFilledCommand.Execute(null);
+                        OnSetDefaultIsFilled();
                         break;
                     case Keys.G:
-                        context.Commands.SnapToGridCommand.Execute(null);
+                        OnSetSnapToGrid();
                         break;
                     case Keys.C:
-                        context.Commands.TryToConnectCommand.Execute(null);
+                        OnSetTryToConnect();
                         break;
                     case Keys.Z:
                         _panel.ResetZoom();
@@ -357,21 +413,24 @@ namespace TestWinForms
                 }
             };
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
-        private void Eval()
+        private void OnNew()
         {
-            openFileDialog2.Filter = "C# (*.cs)|*.cs|All (*.*)|*.*";
-            openFileDialog2.FilterIndex = 0;
-            openFileDialog2.ShowDialog(this);
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.NewCommand.Execute(null);
+            InvalidateContainer();
         }
 
         /// <summary>
         /// 
         /// </summary>
-        private void Open()
+        private void OnOpen()
         {
             openFileDialog1.Filter = "Project (*.project)|*.project|All (*.*)|*.*";
             openFileDialog1.FilterIndex = 0;
@@ -381,7 +440,7 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
-        private void Save()
+        private void OnSave()
         {
             saveFileDialog1.Filter = "Project (*.project)|*.project|All (*.*)|*.*";
             saveFileDialog1.FilterIndex = 0;
@@ -392,12 +451,217 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
-        private void Export()
+        private void OnExport()
         {
             saveFileDialog2.Filter = "Pdf (*.pdf)|*.pdf|Dxf AutoCAD 2000 (*.dxf)|*.dxf|Dxf R10 (*.dxf)|*.dxf|All (*.*)|*.*";
             saveFileDialog2.FilterIndex = 0;
             saveFileDialog2.FileName = "project";
             saveFileDialog2.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSetToolToNone()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.ToolNoneCommand.Execute(null);
+            UpdateToolMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSetToolToSelection()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.ToolSelectionCommand.Execute(null);
+            UpdateToolMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSetToolToPoint()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.ToolPointCommand.Execute(null);
+            UpdateToolMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSetToolToLine()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.ToolLineCommand.Execute(null);
+            UpdateToolMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSetToolToArc()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.ToolArcCommand.Execute(null);
+            UpdateToolMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSetToolToBezier()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.ToolBezierCommand.Execute(null);
+            UpdateToolMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSetToolToQBezier()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.ToolQBezierCommand.Execute(null);
+            UpdateToolMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSetToolToPath()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.ToolPathCommand.Execute(null);
+            UpdateToolMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSetToolToRectangle()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.ToolRectangleCommand.Execute(null);
+            UpdateToolMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSetToolToEllipse()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.ToolEllipseCommand.Execute(null);
+            UpdateToolMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSetToolToText()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.ToolTextCommand.Execute(null);
+            UpdateToolMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSetToolToImage()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.ToolImageCommand.Execute(null);
+            UpdateToolMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnEval()
+        {
+            openFileDialog2.Filter = "C# (*.cs)|*.cs|All (*.*)|*.*";
+            openFileDialog2.FilterIndex = 0;
+            openFileDialog2.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSetDefaultIsFilled()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.DefaultIsFilledCommand.Execute(null);
+            UpdateOptionsMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSetSnapToGrid()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.SnapToGridCommand.Execute(null);
+            UpdateOptionsMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSetTryToConnect()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.TryToConnectCommand.Execute(null);
+            UpdateOptionsMenu();
         }
     }
 }
