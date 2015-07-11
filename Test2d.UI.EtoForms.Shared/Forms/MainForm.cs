@@ -604,6 +604,18 @@ namespace TestEtoForms
                 _context.Commands.SelectAllCommand.Execute(null);
             };
 
+            var deSelectAllCommand = new Command()
+            {
+                MenuText = "De&select All",
+                Shortcut = Keys.Escape
+            };
+
+            deSelectAllCommand.Executed +=
+            (s, e) =>
+            {
+                _context.Commands.DeselectAllCommand.Execute(null);
+            };
+
             var clearAllCommand = new Command() 
             { 
                 MenuText = "Cl&ear All" 
@@ -773,6 +785,7 @@ namespace TestEtoForms
                     deleteCommand,
                     new SeparatorMenuItem(),
                     selectAllCommand,
+                    deSelectAllCommand,
                     new SeparatorMenuItem(),
                     clearAllCommand,
                     new SeparatorMenuItem(),

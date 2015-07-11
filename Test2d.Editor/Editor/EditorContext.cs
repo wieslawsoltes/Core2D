@@ -575,6 +575,27 @@ namespace Test2d
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public void OnDeselectAll()
+        {
+            try
+            {
+                _editor.Deselect(_editor.Project.CurrentContainer);
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
         ///
         /// </summary>
         public void OnClearAll()
@@ -3289,6 +3310,11 @@ namespace Test2d
                         () => OnSelectAll(),
                         () => IsEditMode());
 
+                _commands.DeselectAllCommand =
+                    new DelegateCommand(
+                        () => OnDeselectAll(),
+                        () => IsEditMode());
+
                 _commands.ClearAllCommand =
                     new DelegateCommand(
                         () => OnClearAll(),
@@ -3825,6 +3851,7 @@ namespace Test2d
             (_commands.PasteCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.DeleteCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.SelectAllCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.DeselectAllCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ClearAllCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.GroupCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.UngroupCommand as DelegateCommand).RaiseCanExecuteChanged();

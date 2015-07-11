@@ -168,6 +168,10 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public ICommand DeselectAllCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand ClearAllCommand { get; set; }
         
         /// <summary>

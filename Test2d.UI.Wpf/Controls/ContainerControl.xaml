@@ -31,6 +31,7 @@
         <KeyBinding Command="{Binding Commands.TryToConnectCommand}" Key="C" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ZoomResetCommand}" Key="Z" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ZoomExtentCommand}" Key="X" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.DeselectAllCommand}" Key="Esc" Modifiers=""/>
     </UserControl.InputBindings>
     <Control 
         DataContext="{Binding Editor.Project.CurrentContainer}"
