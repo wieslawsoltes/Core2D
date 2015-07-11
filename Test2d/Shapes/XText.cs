@@ -273,7 +273,6 @@ namespace Test2d
         /// <param name="style"></param>
         /// <param name="point"></param>
         /// <param name="text"></param>
-        /// <param name="isFilled"></param>
         /// <param name="name"></param>
         /// <returns></returns>
         public static XText Create(
@@ -282,15 +281,13 @@ namespace Test2d
             ShapeStyle style,
             BaseShape point,
             string text,
-            bool isFilled = false,
             string name = "")
         {
             return new XText()
             {
                 Name = name,
                 Style = style,
-                IsStroked = false,
-                IsFilled = isFilled,
+                IsStroked = true,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
                 Code = ShapeCode.Create(),
@@ -308,7 +305,6 @@ namespace Test2d
         /// <param name="style"></param>
         /// <param name="point"></param>
         /// <param name="text"></param>
-        /// <param name="isFilled"></param>
         /// <param name="name"></param>
         /// <returns></returns>
         public static XText Create(
@@ -316,10 +312,9 @@ namespace Test2d
             ShapeStyle style,
             BaseShape point,
             string text,
-            bool isFilled = false,
             string name = "")
         {
-            return Create(x, y, x, y, style, point, text, isFilled, name);
+            return Create(x, y, x, y, style, point, text, name);
         }
     }
 }
