@@ -9,7 +9,9 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+#if WPF
 using System.Windows.Media;
+#endif
 
 namespace PdfSharp
 {
@@ -1039,6 +1041,12 @@ namespace PdfSharp
                 {
                     if (segment is Test2d.XArcSegment)
                     {
+#if CORE
+                        //var arcSegment = segment as Test2d.XArcSegment;
+                        // TODO: Convert WPF/SVG elliptical arc segment format to GDI+ bezier curves.
+                        //startPoint = arcSegment.Point;
+#endif
+#if WPF
                         var arcSegment = segment as Test2d.XArcSegment;
                         var point1 = new XPoint(
                             _scaleToPage(startPoint.X), 
@@ -1055,6 +1063,7 @@ namespace PdfSharp
                             size, arcSegment.RotationAngle, arcSegment.IsLargeArc, 
                             arcSegment.SweepDirection == Test2d.XSweepDirection.Clockwise ? SweepDirection.Clockwise : SweepDirection.Counterclockwise);
                         startPoint = arcSegment.Point;
+#endif
                     }
                     else if (segment is Test2d.XBezierSegment)
                     {
