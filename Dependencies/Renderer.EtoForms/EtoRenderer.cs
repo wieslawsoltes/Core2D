@@ -821,14 +821,11 @@ namespace TestEtoForms
             var size = _gfx.MeasureString(font, tbind);
             var origin = GetTextOrigin(text.Style, ref srect, ref size);
 
-            //if (text.IsStroked)
-            //{
-                _gfx.DrawText(
-                    font,
-                    ToSolidBrush(text.Style.Stroke),
-                    origin,
-                    tbind);
-            //}
+            _gfx.DrawText(
+                font,
+                ToSolidBrush(text.Style.Stroke),
+                origin,
+                tbind);
 
             brush.Dispose();
             font.Dispose();

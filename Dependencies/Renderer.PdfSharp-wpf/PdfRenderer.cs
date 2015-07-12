@@ -931,15 +931,12 @@ namespace PdfSharp
                     break;
             }
 
-            //if (text.IsStroked)
-            //{
-                _gfx.DrawString(
-                    tbind,
-                    font,
-                    ToXSolidBrush(text.Style.Stroke),
-                    srect,
-                    format);
-            //}
+            _gfx.DrawString(
+                tbind,
+                font,
+                ToXSolidBrush(text.Style.Stroke),
+                srect,
+                format);
         }
 
         /// <summary>

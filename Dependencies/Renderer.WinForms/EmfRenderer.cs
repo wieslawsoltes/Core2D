@@ -816,15 +816,12 @@ namespace Test2d
                     break;
             }
 
-            //if (text.IsStroked)
-            //{
-                _gfx.DrawString(
-                    tbind,
-                    font,
-                    ToSolidBrush(text.Style.Stroke),
-                    srect,
-                    format);
-            //}
+            _gfx.DrawString(
+                tbind,
+                font,
+                ToSolidBrush(text.Style.Stroke),
+                srect,
+                format);
 
             brush.Dispose();
             font.Dispose();

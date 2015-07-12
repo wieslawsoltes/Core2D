@@ -1057,15 +1057,12 @@ namespace Test
                 && string.Compare(tcache.Item1, tbind) == 0
                 && tcache.Item3 == style)
             {
-                //if (text.IsStroked)
-                //{
-                    ct = tcache.Item1;
-                    ft = tcache.Item2;
+                ct = tcache.Item1;
+                ft = tcache.Item2;
 
-                    _dc.DrawText(
-                        ft,
-                        GetTextOrigin(style, ref rect, ft));
-                //}
+                _dc.DrawText(
+                    ft,
+                    GetTextOrigin(style, ref rect, ft));
             }
             else
             {
@@ -1130,12 +1127,9 @@ namespace Test
                     }
                 }
 
-                //if (text.IsStroked)
-                //{
-                    _dc.DrawText(
-                        ft,
-                        GetTextOrigin(style, ref rect, ft));
-                //}
+                _dc.DrawText(
+                    ft,
+                    GetTextOrigin(style, ref rect, ft));
             }
         }
 
