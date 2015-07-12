@@ -45,7 +45,7 @@ namespace TestEtoForms
         /// <param name="textScaleFactor"></param>
         public EtoRenderer(double textScaleFactor = 1.0)
         {
-            ClearCache();
+            ClearCache(isZooming: false);
 
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
@@ -287,17 +287,21 @@ namespace TestEtoForms
         /// <summary>
         /// 
         /// </summary>
-        public void ClearCache()
+        /// <param name="isZooming"></param>
+        public void ClearCache(bool isZooming)
         {
-            if (_biCache != null)
+            if (!isZooming)
             {
-                foreach (var kvp in _biCache)
+                if (_biCache != null)
                 {
-                    kvp.Value.Dispose();
+                    foreach (var kvp in _biCache)
+                    {
+                        kvp.Value.Dispose();
+                    }
+                    _biCache.Clear();
                 }
-                _biCache.Clear();
+                _biCache = new Dictionary<Uri, Bitmap>();
             }
-            _biCache = new Dictionary<Uri, Bitmap>();
         }
 
         /// <summary>
