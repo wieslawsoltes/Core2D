@@ -36,7 +36,55 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Gets current style.
+        /// </summary>
+        public ShapeStyle Style
+        {
+            get { return Context.Editor.Project.CurrentStyleLibrary.CurrentStyle; }
+        }
+
+        /// <summary>
+        /// Gets current project.
+        /// </summary>
+        public Project Project
+        {
+            get { return Context.Editor.Project; }
+        }
+
+        /// <summary>
+        /// Gets current document.
+        /// </summary>
+        public Document Document
+        {
+            get { return Context.Editor.Project.CurrentDocument; }
+        }
+
+        /// <summary>
+        /// Gets current container.
+        /// </summary>
+        public Container Container
+        {
+            get { return Context.Editor.Project.CurrentContainer; }
+        }
+
+        /// <summary>
+        /// Gets current template.
+        /// </summary>
+        public Container Template
+        {
+            get { return Context.Editor.Project.CurrentTemplate; }
+        }
+
+        /// <summary>
+        /// Gets current database.
+        /// </summary>
+        public Database Database
+        {
+            get { return Context.Editor.Project.CurrentDatabase; }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the ShapeFactory class.
         /// </summary>
         /// <param name="context"></param>
         public ShapeFactory(EditorContext context)
@@ -45,7 +93,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XPoint class.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -66,7 +114,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XLine class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -87,7 +135,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XLine class.
         /// </summary>
         /// <param name="start"></param>
         /// <param name="end"></param>
@@ -104,7 +152,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XArc class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -136,7 +184,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XArc class.
         /// </summary>
         /// <param name="point1"></param>
         /// <param name="point2"></param>
@@ -164,7 +212,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XBezier class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -196,7 +244,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XBezier class.
         /// </summary>
         /// <param name="point1"></param>
         /// <param name="point2"></param>
@@ -223,7 +271,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XQBezier class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -250,7 +298,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XQBezier class.
         /// </summary>
         /// <param name="point1"></param>
         /// <param name="point2"></param>
@@ -274,7 +322,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XPathGeometry class.
         /// </summary>
         /// <param name="fillRule"></param>
         /// <returns></returns>
@@ -287,7 +335,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XPath class.
         /// </summary>
         /// <param name="geometry"></param>
         /// <returns></returns>
@@ -303,7 +351,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XPath class.
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
@@ -319,7 +367,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XRectangle class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -346,7 +394,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XRectangle class.
         /// </summary>
         /// <param name="topLeft"></param>
         /// <param name="bottomRight"></param>
@@ -371,7 +419,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XEllipse class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -398,7 +446,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XEllipse class.
         /// </summary>
         /// <param name="topLeft"></param>
         /// <param name="bottomRight"></param>
@@ -423,7 +471,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XText class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -447,7 +495,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XText class.
         /// </summary>
         /// <param name="topLeft"></param>
         /// <param name="bottomRight"></param>
@@ -469,7 +517,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XImage class.
         /// </summary>
         /// <param name="path"></param>
         /// <param name="x1"></param>
@@ -499,7 +547,7 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the XImage class.
         /// </summary>
         /// <param name="path"></param>
         /// <param name="topLeft"></param>
