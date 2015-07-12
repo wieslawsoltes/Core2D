@@ -196,6 +196,9 @@ namespace Test
             ref Point p0, 
             ref Point p1)
         {
+            if (!isStroked)
+                return;
+
             if (_enableGuidelines)
             {
                 var gs = new GuidelineSet(
@@ -229,6 +232,9 @@ namespace Test
             bool isFilled, 
             ref Rect rect)
         {
+            if (!isStroked && !isFilled)
+                return;
+
             if (_enableGuidelines)
             {
                 var gs = new GuidelineSet(
@@ -276,6 +282,9 @@ namespace Test
             ref Point center,
             double rx, double ry)
         {
+            if (!isStroked && !isFilled)
+                return;
+
             if (_enableGuidelines)
             {
                 var gs = new GuidelineSet(
@@ -321,6 +330,9 @@ namespace Test
             bool isFilled,
             PathGeometry pg)
         {
+            if (!isStroked && !isFilled)
+                return;
+
             if (_enableGuidelines)
             {
                 var gs = new GuidelineSet(
@@ -1003,6 +1015,10 @@ namespace Test
             if (style == null)
                 return;
 
+            var tbind = text.BindToTextProperty(db, r);
+            if (string.IsNullOrEmpty(tbind))
+                return;
+
             double thickness = style.Thickness / _state.Zoom;
             double half = thickness / 2.0;
 
@@ -1028,8 +1044,6 @@ namespace Test
                 text.BottomRight,
                 dx, dy);
 
-            var tbind = text.BindToTextProperty(db, r);
-
             Tuple<string, FormattedText, ShapeStyle> tcache = null;
             FormattedText ft;
             string ct;
@@ -1038,15 +1052,15 @@ namespace Test
                 && string.Compare(tcache.Item1, tbind) == 0
                 && tcache.Item3 == style)
             {
-                if (text.IsStroked)
-                {
+                //if (text.IsStroked)
+                //{
                     ct = tcache.Item1;
                     ft = tcache.Item2;
 
                     _dc.DrawText(
                         ft,
                         GetTextOrigin(style, ref rect, ft));
-                }
+                //}
             }
             else
             {
@@ -1111,12 +1125,12 @@ namespace Test
                     }
                 }
 
-                if (text.IsStroked)
-                {
+                //if (text.IsStroked)
+                //{
                     _dc.DrawText(
                         ft,
                         GetTextOrigin(style, ref rect, ft));
-                }
+                //}
             }
         }
 

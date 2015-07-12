@@ -769,6 +769,10 @@ namespace TestEtoForms
         {
             var _gfx = gfx as Graphics;
 
+            var tbind = text.BindToTextProperty(db, r);
+            if (string.IsNullOrEmpty(tbind))
+                return;
+
             Brush brush = ToSolidBrush(text.Style.Stroke);
 
             var fontStyle = Eto.Drawing.FontStyle.None;
@@ -810,18 +814,17 @@ namespace TestEtoForms
                 _scaleToPage(rect.Width),
                 _scaleToPage(rect.Height));
 
-            var tbind = text.BindToTextProperty(db, r);
             var size = _gfx.MeasureString(font, tbind);
             var origin = GetTextOrigin(text.Style, ref srect, ref size);
 
-            if (text.IsStroked)
-            {
+            //if (text.IsStroked)
+            //{
                 _gfx.DrawText(
                     font,
                     ToSolidBrush(text.Style.Stroke),
                     origin,
                     tbind);
-            }
+            //}
 
             brush.Dispose();
             font.Dispose();

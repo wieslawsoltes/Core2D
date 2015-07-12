@@ -1521,7 +1521,7 @@ namespace Test2d
 
                 var root = new Uri(path);
                 var images = Editor.GetAllShapes<XImage>(project);
-                _editor.ToAbsoluteUri(root, images);
+                //_editor.ToAbsoluteUri(root, images);
 
                 _editor.History.Reset();
                 _editor.Load(project, path);
@@ -1550,12 +1550,12 @@ namespace Test2d
             {
                 var root = new Uri(path);
                 var images = Editor.GetAllShapes<XImage>(_editor.Project);
-                _editor.ToRelativeUri(root, images);
+                //_editor.ToRelativeUri(root, images);
 
                 var json = _serializer.ToJson(_editor.Project);
                 WriteUtf8Text(path, json);
 
-                _editor.ToAbsoluteUri(root, images);
+                //_editor.ToAbsoluteUri(root, images);
 
                 AddRecent(path, _editor.Project.Name);
 
@@ -1713,7 +1713,7 @@ namespace Test2d
                             TryToRestoreRecords(shapes);
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
-                            _editor.ToAbsoluteUri(root, images);
+                            //_editor.ToAbsoluteUri(root, images);
 
                             var previous = gl.Groups;
                             var next = gl.Groups.Add(import);
@@ -1732,7 +1732,7 @@ namespace Test2d
                             TryToRestoreRecords(shapes);
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
-                            _editor.ToAbsoluteUri(root, images);
+                            //_editor.ToAbsoluteUri(root, images);
 
                             var builder = gl.Groups.ToBuilder();
                             foreach (var group in import)
@@ -1757,7 +1757,7 @@ namespace Test2d
                             TryToRestoreRecords(shapes);
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
-                            _editor.ToAbsoluteUri(root, images);
+                            //_editor.ToAbsoluteUri(root, images);
 
                             var previous = project.GroupLibraries;
                             var next = project.GroupLibraries.Add(import);
@@ -1776,7 +1776,7 @@ namespace Test2d
                             TryToRestoreRecords(shapes);
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
-                            _editor.ToAbsoluteUri(root, images);
+                            //_editor.ToAbsoluteUri(root, images);
 
                             var builder = project.GroupLibraries.ToBuilder();
                             foreach (var library in import)
@@ -1801,7 +1801,7 @@ namespace Test2d
                             TryToRestoreRecords(shapes);
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
-                            _editor.ToAbsoluteUri(root, images);
+                            //_editor.ToAbsoluteUri(root, images);
 
                             var previous = project.Templates;
                             var next = project.Templates.Add(import);
@@ -1820,7 +1820,7 @@ namespace Test2d
                             TryToRestoreRecords(shapes);
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
-                            _editor.ToAbsoluteUri(root, images);
+                            //_editor.ToAbsoluteUri(root, images);
 
                             var builder = project.Templates.ToBuilder();
                             foreach (var template in import)
@@ -1889,12 +1889,12 @@ namespace Test2d
                             var shapes = Enumerable.Repeat(item as XGroup, 1);
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
-                            _editor.ToRelativeUri(root, images);
+                            //_editor.ToRelativeUri(root, images);
 
                             var json = _serializer.ToJson(item as XGroup);
                             WriteUtf8Text(path, json, false);
 
-                            _editor.ToAbsoluteUri(root, images);
+                            //_editor.ToAbsoluteUri(root, images);
                         }
                         break;
                     case ExportType.Groups:
@@ -1902,12 +1902,12 @@ namespace Test2d
                             var shapes = (item as GroupLibrary).Groups;
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
-                            _editor.ToRelativeUri(root, images);
+                            //_editor.ToRelativeUri(root, images);
 
                             var json = _serializer.ToJson((item as GroupLibrary).Groups);
                             WriteUtf8Text(path, json, false);
 
-                            _editor.ToAbsoluteUri(root, images);
+                            //_editor.ToAbsoluteUri(root, images);
                         }
                         break;
                     case ExportType.GroupLibrary:
@@ -1915,12 +1915,12 @@ namespace Test2d
                             var shapes = (item as GroupLibrary).Groups;
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
-                            _editor.ToRelativeUri(root, images);
+                            //_editor.ToRelativeUri(root, images);
 
                             var json = _serializer.ToJson(item as GroupLibrary);
                             WriteUtf8Text(path, json, false);
 
-                            _editor.ToAbsoluteUri(root, images);
+                            //_editor.ToAbsoluteUri(root, images);
                         }
                         break;
                     case ExportType.GroupLibraries:
@@ -1928,12 +1928,12 @@ namespace Test2d
                             var shapes = (item as Project).GroupLibraries.SelectMany(x => x.Groups);
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
-                            _editor.ToRelativeUri(root, images);
+                            //_editor.ToRelativeUri(root, images);
 
                             var json = _serializer.ToJson((item as Project).GroupLibraries);
                             WriteUtf8Text(path, json, false);
 
-                            _editor.ToAbsoluteUri(root, images);
+                            //_editor.ToAbsoluteUri(root, images);
                         }
                         break;
                     case ExportType.Template:
@@ -1941,12 +1941,12 @@ namespace Test2d
                             var shapes = (item as Container).Layers.SelectMany(x => x.Shapes);
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
-                            _editor.ToRelativeUri(root, images);
+                            //_editor.ToRelativeUri(root, images);
 
                             var json = _serializer.ToJson(item as Container);
                             WriteUtf8Text(path, json, false);
 
-                            _editor.ToAbsoluteUri(root, images);
+                            //_editor.ToAbsoluteUri(root, images);
                         }
                         break;
                     case ExportType.Templates:
@@ -1954,12 +1954,12 @@ namespace Test2d
                             var shapes = (item as Project).Templates.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
                             var root = new Uri(path);
                             var images = Editor.GetAllShapes<XImage>(shapes);
-                            _editor.ToRelativeUri(root, images);
+                            //_editor.ToRelativeUri(root, images);
 
                             var json = _serializer.ToJson((item as Project).Templates);
                             WriteUtf8Text(path, json, false);
 
-                            _editor.ToAbsoluteUri(root, images);
+                            //_editor.ToAbsoluteUri(root, images);
                         }
                         break;
                 }

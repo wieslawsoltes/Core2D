@@ -9,29 +9,9 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public class XImage : BaseShape
+    public class XImage : XText
     {
-        private XPoint _topLeft;
-        private XPoint _bottomRight;
         private Uri _path;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public XPoint TopLeft
-        {
-            get { return _topLeft; }
-            set { Update(ref _topLeft, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public XPoint BottomRight
-        {
-            get { return _bottomRight; }
-            set { Update(ref _bottomRight, value); }
-        }
 
         /// <summary>
         /// 
@@ -48,9 +28,7 @@ namespace Test2d
         /// <param name="r"></param>
         public override void Bind(Record r)
         {
-            var record = r ?? this.Record;
-            _topLeft.TryToBind("TopLeft", this.Bindings, record);
-            _bottomRight.TryToBind("BottomRight", this.Bindings, record);
+            base.Bind(r ?? this.Record);
         }
 
         /// <summary>
@@ -69,50 +47,7 @@ namespace Test2d
             if (State.HasFlag(ShapeState.Visible))
             {
                 renderer.Draw(dc, this, dx, dy, db, record);
-            }
-
-            if (renderer.State.SelectedShape != null)
-            {
-                if (this == renderer.State.SelectedShape)
-                {
-                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
-                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
-                }
-                else if (_topLeft == renderer.State.SelectedShape)
-                {
-                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
-                }
-                else if (_bottomRight == renderer.State.SelectedShape)
-                {
-                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
-                }
-            }
-
-            if (renderer.State.SelectedShapes != null)
-            {
-                if (renderer.State.SelectedShapes.Contains(this))
-                {
-                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
-                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        public override void Move(double dx, double dy)
-        {
-            if (!TopLeft.State.HasFlag(ShapeState.Connector))
-            {
-                TopLeft.Move(dx, dy);
-            }
-
-            if (!BottomRight.State.HasFlag(ShapeState.Connector))
-            {
-                BottomRight.Move(dx, dy);
+                base.Draw(dc, renderer, dx, dy, db, record);
             }
         }
 
@@ -127,6 +62,7 @@ namespace Test2d
         /// <param name="point"></param>
         /// <param name="path"></param>
         /// <param name="isFilled"></param>
+        /// <param name="text"></param>
         /// <param name="name"></param>
         /// <returns></returns>
         public static XImage Create(
@@ -136,6 +72,7 @@ namespace Test2d
             BaseShape point,
             Uri path,
             bool isFilled = false,
+            string text = null,
             string name = "")
         {
             return new XImage()
@@ -149,7 +86,8 @@ namespace Test2d
                 Code = ShapeCode.Create(),
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
-                Path = path
+                Path = path,
+                Text = text
             };
         }
 
@@ -162,6 +100,7 @@ namespace Test2d
         /// <param name="point"></param>
         /// <param name="path"></param>
         /// <param name="isFilled"></param>
+        /// <param name="text"></param>
         /// <param name="name"></param>
         /// <returns></returns>
         public static XImage Create(
@@ -170,9 +109,10 @@ namespace Test2d
             BaseShape point,
             Uri path,
             bool isFilled = false,
+            string text = null,
             string name = "")
         {
-            return Create(x, y, x, y, style, point, path, isFilled, name);
+            return Create(x, y, x, y, style, point, path, isFilled, text, name);
         }
     }
 }
