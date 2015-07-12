@@ -4,6 +4,7 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -26,17 +27,12 @@ namespace Test.Controls
     /// </summary>
     public partial class ScriptControl : UserControl
     {
-        private bool _enableAutoSave = false;
+        private bool _isLoaded = false;
 
         /// <summary>
         /// 
         /// </summary>
         public ICommand EvalCommand { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand NewCommand { get; set; }
 
         /// <summary>
         /// 
@@ -69,25 +65,53 @@ namespace Test.Controls
         private void Initialize()
         {
             EvalCommand = new DelegateCommand(() => Eval());
-            NewCommand = new DelegateCommand(() => New());
-            SaveCommand = new DelegateCommand(() => Save(tree.SelectedItem));
+            SaveCommand = new DelegateCommand(() => Save());
             ImportCommand = new DelegateCommand(() => Import());
-            ExportCommand = new DelegateCommand(() => Export(tree.SelectedItem));
+            ExportCommand = new DelegateCommand(() => Export());
 
             textEditor.Options.ConvertTabsToSpaces = true;
             textEditor.Options.ShowColumnRuler = true;
 
-            tree.SelectedItemChanged +=
-                (s, e) =>
-                {
-                    if (_enableAutoSave)
-                    {
-                        Save(e.OldValue);
-                    }
+            Loaded += (s, e) =>
+            {
+                if (_isLoaded)
+                    return;
+                else
+                    _isLoaded = true;
 
-                    Open(e.NewValue);
-                };
+                var context = DataContext as EditorContext;
+                if (context == null)
+                    return;
+
+                context.PropertyChanged += ObserveContext;
+            };
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ObserveContext(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "CurrentScript")
+            {
+                var context = DataContext as EditorContext;
+                if (context == null)
+                    return;
+
+                var value = context.CurrentScript;
+
+                if (value != null && value is ScriptFile)
+                {
+                    Open((value as ScriptFile).Path);
+                }
+                else
+                {
+                    textEditor.Text = "";
+                }
+            }
+        } 
 
         /// <summary>
         /// 
@@ -118,46 +142,17 @@ namespace Test.Controls
         /// <summary>
         /// 
         /// </summary>
-        private void New()
+        /// <param name="path"></param>
+        private void Open(string path)
         {
             var context = DataContext as EditorContext;
             if (context == null)
                 return;
 
-            var directory = tree.SelectedItem as ScriptDirectory;
-            if (directory == null || !(directory is ScriptDirectory))
-                return;
-
             try
             {
-                var template = "New";
-                int max = 4096;
-                int i = 0;
-                bool success = false;
-
-                while (success == false && i < max)
-                {
-                    var name = template + i;
-                    var path = System.IO.Path.Combine(directory.Path, name + ".cs");
-
-                    if (!System.IO.File.Exists(path))
-                    {
-                        success = true;
-
-                        var script = new ScriptFile()
-                        {
-                            Name = name,
-                            Path = path
-                        };
-
-                        System.IO.File.CreateText(script.Path);
-                        directory.Scripts = directory.Scripts.Add(script);
-                    }
-                    else
-                    {
-                        i++;
-                    }
-                }
+                var code = System.IO.File.ReadAllText(path);
+                textEditor.Text = code;
             }
             catch (Exception ex)
             {
@@ -174,47 +169,13 @@ namespace Test.Controls
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="value"></param>
-        private void Open(object value)
+        private void Save()
         {
             var context = DataContext as EditorContext;
             if (context == null)
                 return;
 
-            if (value != null && value is ScriptFile)
-            {
-                var script = value as ScriptFile;
-                try
-                {
-                    var code = System.IO.File.ReadAllText(script.Path);
-                    textEditor.Text = code;
-                }
-                catch (Exception ex)
-                {
-                    if (context.Editor.Log != null)
-                    {
-                        context.Editor.Log.LogError("{0}{1}{2}",
-                            ex.Message,
-                            Environment.NewLine,
-                            ex.StackTrace);
-                    }
-                }
-            }
-            else
-            {
-                textEditor.Text = "";
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        private void Save(object value)
-        {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
+            var value = context.CurrentScript;
 
             if (value != null && value is ScriptFile)
             {
@@ -276,12 +237,13 @@ namespace Test.Controls
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="value"></param>
-        private void Export(object value)
+        private void Export()
         {
             var context = DataContext as EditorContext;
             if (context == null)
                 return;
+
+            var value = context.CurrentScript;
 
             string name = "script";
 
