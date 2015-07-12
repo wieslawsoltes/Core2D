@@ -832,7 +832,7 @@ namespace Test2d
 
             foreach (var renderer in _renderers)
             {
-                renderer.ClearCache();
+                renderer.ClearCache(isZooming: false);
             }
 
             Project = project;
