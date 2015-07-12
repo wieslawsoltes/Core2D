@@ -252,7 +252,7 @@ namespace Test2d
                 try
                 {
                     var args = ToArgs(this.Properties);
-                    if (args != null && args.Length > 0)
+                    if (this.Text != null && args != null && args.Length > 0)
                     {
                         return string.Format(this.Text, args);
                     }
