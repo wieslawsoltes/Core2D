@@ -70,6 +70,24 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="point"></param>
+        /// <param name="isStroked"></param>
+        /// <param name="isSmoothJoin"></param>
+        public void LineTo(
+            XPoint point,
+            bool isStroked = true,
+            bool isSmoothJoin = true)
+        {
+            var segment = XLineSegment.Create(
+                point,
+                isStroked,
+                isSmoothJoin);
+            _figure.Segments.Add(segment);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
         /// <param name="size"></param>
         /// <param name="rotationAngle"></param>
         /// <param name="isLargeArc"></param>
@@ -123,34 +141,19 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="point"></param>
+        /// <param name="point1"></param>
+        /// <param name="point2"></param>
         /// <param name="isStroked"></param>
         /// <param name="isSmoothJoin"></param>
-        public void LineTo(
-            XPoint point,
+        public void QuadraticBezierTo(
+            XPoint point1,
+            XPoint point2,
             bool isStroked = true,
             bool isSmoothJoin = true)
         {
-            var segment = XLineSegment.Create(
-                point,
-                isStroked,
-                isSmoothJoin);
-            _figure.Segments.Add(segment);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="points"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isSmoothJoin"></param>
-        public void PolyBezierTo(
-            IList<XPoint> points,
-            bool isStroked = true,
-            bool isSmoothJoin = true)
-        {
-            var segment = XPolyBezierSegment.Create(
-                points,
+            var segment = XQuadraticBezierSegment.Create(
+                point1,
+                point2,
                 isStroked,
                 isSmoothJoin);
             _figure.Segments.Add(segment);
@@ -180,12 +183,12 @@ namespace Test2d
         /// <param name="points"></param>
         /// <param name="isStroked"></param>
         /// <param name="isSmoothJoin"></param>
-        public void PolyQuadraticBezierTo(
+        public void PolyBezierTo(
             IList<XPoint> points,
             bool isStroked = true,
             bool isSmoothJoin = true)
         {
-            var segment = XPolyQuadraticBezierSegment.Create(
+            var segment = XPolyBezierSegment.Create(
                 points,
                 isStroked,
                 isSmoothJoin);
@@ -195,19 +198,16 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="point1"></param>
-        /// <param name="point2"></param>
+        /// <param name="points"></param>
         /// <param name="isStroked"></param>
         /// <param name="isSmoothJoin"></param>
-        public void QuadraticBezierTo(
-            XPoint point1,
-            XPoint point2,
+        public void PolyQuadraticBezierTo(
+            IList<XPoint> points,
             bool isStroked = true,
             bool isSmoothJoin = true)
         {
-            var segment = XQuadraticBezierSegment.Create(
-                point1,
-                point2,
+            var segment = XPolyQuadraticBezierSegment.Create(
+                points,
                 isStroked,
                 isSmoothJoin);
             _figure.Segments.Add(segment);
