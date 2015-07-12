@@ -316,5 +316,37 @@ namespace Test2d
         {
             return Create(x, y, x, y, style, point, text, name);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="topLeft"></param>
+        /// <param name="bottomRight"></param>
+        /// <param name="style"></param>
+        /// <param name="point"></param>
+        /// <param name="text"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static XText Create(
+            XPoint topLeft,
+            XPoint bottomRight,
+            ShapeStyle style,
+            BaseShape point,
+            string text,
+            string name = "")
+        {
+            return new XText()
+            {
+                Name = name,
+                Style = style,
+                IsStroked = true,
+                Bindings = ImmutableArray.Create<ShapeBinding>(),
+                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Code = ShapeCode.Create(),
+                TopLeft = topLeft,
+                BottomRight = bottomRight,
+                Text = text
+            };
+        }
     }
 }

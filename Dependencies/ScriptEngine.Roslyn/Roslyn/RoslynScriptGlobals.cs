@@ -12,11 +12,7 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public class RoslynScriptGlobals
+    public class RoslynScriptGlobals : ShapeFactory
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public EditorContext Context;
     }
 }
