@@ -71,31 +71,150 @@
             <MenuItem Header="E_xit" Command="{Binding Commands.ExitCommand}" InputGestureText="Alt+F4"/>
         </MenuItem>
         <MenuItem Header="_Edit">
-            <MenuItem Header="_Undo" Command="{Binding Commands.UndoCommand}" InputGestureText="Ctrl+Z"/>
-            <MenuItem Header="_Redo" Command="{Binding Commands.RedoCommand}" InputGestureText="Ctrl+Y"/>
+            <MenuItem Header="_Undo" Command="{Binding Commands.UndoCommand}" InputGestureText="Ctrl+Z">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Undo"/>
+                        <TextBlock Text="Script: Context.OnUndo()"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
+            <MenuItem Header="_Redo" Command="{Binding Commands.RedoCommand}" InputGestureText="Ctrl+Y">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Undo"/>
+                        <TextBlock Text="Script: Context.OnRedo()"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
             <Separator/>
-            <MenuItem Header="Copy As _Metafile" Command="{Binding Commands.CopyAsEmfCommand}" InputGestureText="Ctrl+Shift+C"/>
+            <MenuItem Header="Copy As _Metafile" Command="{Binding Commands.CopyAsEmfCommand}" InputGestureText="Ctrl+Shift+C">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Copy As Metafile"/>
+                        <TextBlock Text="Script: Not Available"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
             <Separator/>
-            <MenuItem Header="Cu_t" Command="{Binding Commands.CutCommand}" CommandParameter="{Binding}" InputGestureText="Ctrl+X"/>
-            <MenuItem Header="_Copy" Command="{Binding Commands.CopyCommand}" CommandParameter="{Binding}" InputGestureText="Ctrl+C"/>
-            <MenuItem Header="_Paste" Command="{Binding Commands.PasteCommand}" CommandParameter="{Binding}" InputGestureText="Ctrl+V"/>
-            <MenuItem Header="_Delete" Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding}" InputGestureText="Del"/>
+            <MenuItem Header="Cu_t" Command="{Binding Commands.CutCommand}" CommandParameter="{Binding}" InputGestureText="Ctrl+X">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Cut"/>
+                        <TextBlock Text="Script: Context.OnCut()"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
+            <MenuItem Header="_Copy" Command="{Binding Commands.CopyCommand}" CommandParameter="{Binding}" InputGestureText="Ctrl+C">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Copy"/>
+                        <TextBlock Text="Script: Context.OnCopy()"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
+            <MenuItem Header="_Paste" Command="{Binding Commands.PasteCommand}" CommandParameter="{Binding}" InputGestureText="Ctrl+V">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Paste"/>
+                        <TextBlock Text="Script: Context.OnPaste()"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
+            <MenuItem Header="_Delete" Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding}" InputGestureText="Del">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Delete"/>
+                        <TextBlock Text="Script: Editor.DeleteSelected()"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
             <Separator/>
-            <MenuItem Header="Select _All" Command="{Binding Commands.SelectAllCommand}" InputGestureText="Ctrl+A"/>
-            <MenuItem Header="De_select All" Command="{Binding Commands.DeselectAllCommand}" InputGestureText="Esc"/>
+            <MenuItem Header="Select _All" Command="{Binding Commands.SelectAllCommand}" InputGestureText="Ctrl+A">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Select All"/>
+                        <TextBlock Text="Script: Context.OnSelectAll()"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
+            <MenuItem Header="De_select All" Command="{Binding Commands.DeselectAllCommand}" InputGestureText="Esc">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Deselect All"/>
+                        <TextBlock Text="Script: Context.OnDeselectAll()"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
             <Separator/>
-            <MenuItem Header="Cl_ear All" Command="{Binding Commands.ClearAllCommand}" InputGestureText=""/>
+            <MenuItem Header="Cl_ear All" Command="{Binding Commands.ClearAllCommand}" InputGestureText="">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Clear All"/>
+                        <TextBlock Text="Script: Context.OnClearAll()"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
             <Separator/>
-            <MenuItem Header="Re_ference" Command="{Binding Commands.ReferenceCommand}" InputGestureText="Ctrl+R"/>
+            <MenuItem Header="Re_ference" Command="{Binding Commands.ReferenceCommand}" InputGestureText="Ctrl+R">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Reference"/>
+                        <TextBlock Text="Script: Editor.ReferenceSelected()"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
             <Separator/>
-            <MenuItem Header="_Group" Command="{Binding Commands.GroupCommand}" InputGestureText="Ctrl+G"/>
-            <MenuItem Header="U_ngroup" Command="{Binding Commands.UngroupCommand}" InputGestureText="Ctrl+U"/>
+            <MenuItem Header="_Group" Command="{Binding Commands.GroupCommand}" InputGestureText="Ctrl+G">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Group"/>
+                        <TextBlock Text="Script: Editor.GroupSelected()"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
+            <MenuItem Header="U_ngroup" Command="{Binding Commands.UngroupCommand}" InputGestureText="Ctrl+U">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Ungroup"/>
+                        <TextBlock Text="Script: Editor.UngroupSelected()"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
             <Separator/>
             <MenuItem Header="_Order">
-                <MenuItem Header="Bring to _Front" Command="{Binding Commands.BringToFrontCommand}" InputGestureText=""/>
-                <MenuItem Header="Bring Fo_rward" Command="{Binding Commands.BringForwardCommand}" InputGestureText=""/>
-                <MenuItem Header="Send Ba_ckward" Command="{Binding Commands.SendBackwardCommand}" InputGestureText=""/>
-                <MenuItem Header="Send to _Back" Command="{Binding Commands.SendToBackCommand}" InputGestureText=""/>
+                <MenuItem Header="Bring to _Front" Command="{Binding Commands.BringToFrontCommand}" InputGestureText="">
+                    <MenuItem.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="Bring to Front"/>
+                            <TextBlock Text="Script: Editor.BringToFrontSelected()"/>
+                        </StackPanel>
+                    </MenuItem.ToolTip>
+                </MenuItem>
+                <MenuItem Header="Bring Fo_rward" Command="{Binding Commands.BringForwardCommand}" InputGestureText="">
+                    <MenuItem.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="Bring Forward"/>
+                            <TextBlock Text="Script: Editor.BringForwardSelected()"/>
+                        </StackPanel>
+                    </MenuItem.ToolTip>
+                </MenuItem>
+                <MenuItem Header="Send Ba_ckward" Command="{Binding Commands.SendBackwardCommand}" InputGestureText="">
+                    <MenuItem.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="Send Backward"/>
+                            <TextBlock Text="Script: Editor.SendBackwardSelected()"/>
+                        </StackPanel>
+                    </MenuItem.ToolTip>
+                </MenuItem>
+                <MenuItem Header="Send to _Back" Command="{Binding Commands.SendToBackCommand}" InputGestureText="">
+                    <MenuItem.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="Send To Back"/>
+                            <TextBlock Text="Script: Editor.SendToBackSelected()"/>
+                        </StackPanel>
+                    </MenuItem.ToolTip>
+                </MenuItem>
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_View">
