@@ -104,7 +104,7 @@
                 <MenuItem Header="_Extent" Command="{Binding Commands.ZoomExtentCommand}" InputGestureText="X"/>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="_Project Explorer" Command="{Binding Commands.ProjectWindowCommand}" InputGestureText="Ctrl+Alt+P"/>
+            <MenuItem Header="Project E_xplorer" Command="{Binding Commands.ProjectWindowCommand}" InputGestureText="Ctrl+Alt+X"/>
             <MenuItem Header="_Options" Command="{Binding Commands.OptionsWindowCommand}" InputGestureText="Ctrl+Alt+O"/>
             <MenuItem Header="_Templates" Command="{Binding Commands.TemplatesWindowCommand}" InputGestureText="Ctrl+Alt+T"/>
             <Separator/>
@@ -113,8 +113,10 @@
             <MenuItem Header="Data_base Window" Command="{Binding Commands.DatabaseWindowCommand}" InputGestureText="Ctrl+Alt+B"/>
             <Separator/>
             <MenuItem Header="Co_ntainer" Command="{Binding Commands.ContainerWindowCommand}" InputGestureText="Ctrl+Alt+N"/>
-            <MenuItem Header="Sc_ript Window" Command="{Binding Commands.ScriptWindowCommand}" InputGestureText="Ctrl+Alt+R"/>
             <MenuItem Header="Doc_ument Window" Command="{Binding Commands.DocumentWindowCommand}" InputGestureText="Ctrl+Alt+U"/>
+            <Separator/>
+            <MenuItem Header="Sc_ript Window" Command="{Binding Commands.ScriptWindowCommand}" InputGestureText="Ctrl+Alt+R"/>
+            <MenuItem Header="Scri_pts Window" Command="{Binding Commands.ScriptsWindowCommand}" InputGestureText="Ctrl+Alt+P"/>
             <Separator/>
             <MenuItem Header="_Styles" Command="{Binding Commands.StylesWindowCommand}" InputGestureText="Ctrl+Alt+S"/>
             <MenuItem Header="_Layers" Command="{Binding Commands.LayersWindowCommand}" InputGestureText="Ctrl+Alt+L"/>
