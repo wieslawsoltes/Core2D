@@ -742,6 +742,10 @@ namespace Test2d
         {
             var _gfx = gfx as Graphics;
 
+            var tbind = text.BindToTextProperty(db, r);
+            if (string.IsNullOrEmpty(tbind))
+                return;
+
             Brush brush = ToSolidBrush(text.Style.Stroke);
 
             var fontStyle = System.Drawing.FontStyle.Regular;
@@ -808,15 +812,15 @@ namespace Test2d
                     break;
             }
 
-            if (text.IsStroked)
-            {
+            //if (text.IsStroked)
+            //{
                 _gfx.DrawString(
-                    text.BindToTextProperty(db, r),
+                    tbind,
                     font,
                     ToSolidBrush(text.Style.Stroke),
                     srect,
                     format);
-            }
+            //}
 
             brush.Dispose();
             font.Dispose();

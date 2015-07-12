@@ -854,6 +854,10 @@ namespace PdfSharp
         {
             var _gfx = gfx as XGraphics;
 
+            var tbind = text.BindToTextProperty(db, r);
+            if (string.IsNullOrEmpty(tbind))
+                return;
+
             XPdfFontOptions options = new XPdfFontOptions(
                 PdfFontEncoding.Unicode,
                 PdfFontEmbedding.Always);
@@ -923,15 +927,15 @@ namespace PdfSharp
                     break;
             }
 
-            if (text.IsStroked)
-            {
+            //if (text.IsStroked)
+            //{
                 _gfx.DrawString(
-                    text.BindToTextProperty(db, r),
+                    tbind,
                     font,
                     ToXSolidBrush(text.Style.Stroke),
                     srect,
                     format);
-            }
+            //}
         }
 
         /// <summary>
