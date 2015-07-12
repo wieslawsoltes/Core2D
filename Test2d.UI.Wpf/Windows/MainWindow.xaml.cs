@@ -1145,12 +1145,17 @@ namespace Test.Windows
                     () => databaseWindow.Show(),
                     () => true);
 
-            //context.Commands.ContainerWindowCommand = 
-            //    new DelegateCommand(
-            //        () => ,
-            //        () => true);
+            context.Commands.ScriptWindowCommand = 
+                new DelegateCommand(
+                    () => scriptWindow.Show(),
+                    () => true);
 
-            //context.Commands.ScriptWindowCommand = 
+            context.Commands.ScriptsWindowCommand = 
+                new DelegateCommand(
+                    () => scriptsWindow.Show(),
+                    () => true);
+
+            //context.Commands.ContainerWindowCommand = 
             //    new DelegateCommand(
             //        () => ,
             //        () => true);
