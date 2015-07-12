@@ -60,7 +60,7 @@ namespace Test2d
                     }
 
                     r.Draw(g, container, container.Properties, null);
-                    r.ClearCache();
+                    r.ClearCache(isZooming: false);
                 }
             }
             finally
