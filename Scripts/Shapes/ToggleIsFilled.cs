@@ -1,0 +1,1 @@
+foreach (var shape in Shapes) shape.IsFilled = !shape.IsFilled;
