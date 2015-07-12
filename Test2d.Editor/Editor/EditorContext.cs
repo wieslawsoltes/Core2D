@@ -1345,13 +1345,14 @@ namespace Test2d
         /// <summary>
         ///
         /// </summary>
-        public void Invalidate()
+        /// <param name="isZooming"></param>
+        public void Invalidate(bool isZooming)
         {
             try
             {
                 foreach (var renderer in _editor.Renderers)
                 {
-                    renderer.ClearCache();
+                    renderer.ClearCache(isZooming);
                 }
 
                 _editor.Project.CurrentContainer.Invalidate();
