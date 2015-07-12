@@ -98,5 +98,40 @@ namespace Test2d
         {
             return Create(x, y, x, y, style, point, isFilled, text, name);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="topLeft"></param>
+        /// <param name="bottomRight"></param>
+        /// <param name="style"></param>
+        /// <param name="point"></param>
+        /// <param name="isFilled"></param>
+        /// <param name="text"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static XEllipse Create(
+            XPoint topLeft,
+            XPoint bottomRight,
+            ShapeStyle style,
+            BaseShape point,
+            bool isFilled = false,
+            string text = null,
+            string name = "")
+        {
+            return new XEllipse()
+            {
+                Name = name,
+                Style = style,
+                IsStroked = true,
+                IsFilled = isFilled,
+                Bindings = ImmutableArray.Create<ShapeBinding>(),
+                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Code = ShapeCode.Create(),
+                TopLeft = topLeft,
+                BottomRight = bottomRight,
+                Text = text,
+            };
+        }
     }
 }

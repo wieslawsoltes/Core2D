@@ -185,5 +185,40 @@ namespace Test2d
         {
             return Create(x, y, x, y, x, y, style, point, isFilled, name);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point1"></param>
+        /// <param name="point2"></param>
+        /// <param name="point3"></param>
+        /// <param name="style"></param>
+        /// <param name="point"></param>
+        /// <param name="isFilled"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static XQBezier Create(
+            XPoint point1,
+            XPoint point2,
+            XPoint point3,
+            ShapeStyle style,
+            BaseShape point,
+            bool isFilled = false,
+            string name = "")
+        {
+            return new XQBezier()
+            {
+                Name = name,
+                Style = style,
+                IsStroked = true,
+                IsFilled = isFilled,
+                Bindings = ImmutableArray.Create<ShapeBinding>(),
+                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Code = ShapeCode.Create(),
+                Point1 = point1,
+                Point2 = point2,
+                Point3 = point3
+            };
+        }
     }
 }
