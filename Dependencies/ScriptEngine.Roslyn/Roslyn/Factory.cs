@@ -52,6 +52,14 @@ namespace Test2d
         }
 
         /// <summary>
+        /// Gets current options.
+        /// </summary>
+        public Options Options
+        {
+            get { return Context.Editor.Project.Options; }
+        }
+
+        /// <summary>
         /// Gets current document.
         /// </summary>
         public Document Document
