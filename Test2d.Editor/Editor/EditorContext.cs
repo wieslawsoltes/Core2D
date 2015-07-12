@@ -36,6 +36,7 @@ namespace Test2d
         private ImmutableArray<RecentProject> _recentProjects = ImmutableArray.Create<RecentProject>();
         private string _rootScriptsPath;
         private ImmutableArray<ScriptDirectory> _scriptDirectories;
+        private ScriptFile _currentScript;
         private bool _isSimulationPaused;
         private Clock _clock = default(Clock);
         private System.IO.FileSystemWatcher _watcher = default(System.IO.FileSystemWatcher);
@@ -193,6 +194,15 @@ namespace Test2d
         {
             get { return _scriptDirectories; }
             set { Update(ref _scriptDirectories, value); }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public ScriptFile CurrentScript
+        {
+            get { return _currentScript; }
+            set { Update(ref _currentScript, value); }
         }
 
         /// <summary>
@@ -3937,8 +3947,9 @@ namespace Test2d
             (_commands.GroupsWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.DatabasesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.DatabaseWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ScriptWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ScriptsWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             //(_commands.ContainerWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            //(_commands.ScriptWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             //(_commands.DocumentWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.StylesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.LayersWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
