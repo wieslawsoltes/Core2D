@@ -1,0 +1,12 @@
+Options.SnapToGrid = true;
+Options.SnapX = 7.5;
+Options.SnapY = 7.5;
+Options.HitTreshold = 7;
+Options.MoveMode = MoveMode.Point;
+Options.DefaultIsStroked = true;
+Options.DefaultIsFilled = true;
+Options.DefaultIsClosed = true;
+Options.DefaultIsSmoothJoin = true;
+Options.DefaultFillRule = XFillRule.EvenOdd;
+Options.TryToConnect = true;
+Options.CycleResolution = 16;
