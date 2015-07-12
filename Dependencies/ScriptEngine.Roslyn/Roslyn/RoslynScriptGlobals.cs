@@ -14,5 +14,14 @@ namespace Test2d
     /// </summary>
     public class RoslynScriptGlobals : ShapeFactory
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        public RoslynScriptGlobals(EditorContext context)
+            : base(context)
+        {
+
+        }
     }
 }

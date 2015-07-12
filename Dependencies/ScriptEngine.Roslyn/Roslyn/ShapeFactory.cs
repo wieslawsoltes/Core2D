@@ -15,15 +15,24 @@ namespace Test2d
     public class ShapeFactory
     {
         /// <summary>
-        /// 
+        /// Gets or sets editor context.
         /// </summary>
-        public EditorContext Context;
+        public EditorContext Context { private set; get; }
 
         /// <summary>
-        /// 
+        /// Gets selected shape.
         /// </summary>
-        public ShapeFactory()
+        public BaseShape Shape
         {
+            get { return Context.Editor.Renderers[0].State.SelectedShape; }
+        }
+
+        /// <summary>
+        /// Gets selected shapes.
+        /// </summary>
+        public IEnumerable<BaseShape> Shapes
+        {
+            get { return Context.Editor.Renderers[0].State.SelectedShapes; }
         }
 
         /// <summary>
@@ -31,7 +40,6 @@ namespace Test2d
         /// </summary>
         /// <param name="context"></param>
         public ShapeFactory(EditorContext context)
-            : this()
         {
             Context = context;
         }

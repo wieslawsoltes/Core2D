@@ -28,10 +28,7 @@ namespace Test2d
             CSharpScript.Eval(
                 code,
                 options,
-                new RoslynScriptGlobals()
-                {
-                    Context = context as EditorContext
-                });
+                new RoslynScriptGlobals(context as EditorContext));
         }
     }
 }
