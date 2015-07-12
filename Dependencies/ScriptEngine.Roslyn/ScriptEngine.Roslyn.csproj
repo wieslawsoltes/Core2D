@@ -112,7 +112,7 @@
     <Compile Include="Roslyn\RoslynScriptGlobals.cs" />
     <Compile Include="Roslyn\RoslynCodeGlobals.cs" />
     <Compile Include="Roslyn\RoslynScriptEngine.cs" />
-    <Compile Include="Roslyn\ShapeFactory.cs" />
+    <Compile Include="Roslyn\Factory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

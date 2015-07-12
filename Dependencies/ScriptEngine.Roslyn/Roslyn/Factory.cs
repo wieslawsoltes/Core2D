@@ -10,9 +10,9 @@ using Test2d;
 namespace Test2d
 {
     /// <summary>
-    /// 
+    /// Base factory class used for script execution globals.
     /// </summary>
-    public class ShapeFactory
+    public class Factory
     {
         /// <summary>
         /// Gets or sets editor context.
@@ -92,10 +92,10 @@ namespace Test2d
         }
 
         /// <summary>
-        /// Initializes a new instance of the ShapeFactory class.
+        /// Initializes a new instance of the Factory class.
         /// </summary>
         /// <param name="context"></param>
-        public ShapeFactory(EditorContext context)
+        public Factory(EditorContext context)
         {
             Context = context;
         }

@@ -12,7 +12,7 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public class RoslynScriptGlobals : ShapeFactory
+    public class RoslynScriptGlobals : Factory
     {
         /// <summary>
         /// 
