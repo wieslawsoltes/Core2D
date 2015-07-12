@@ -22,18 +22,14 @@
         <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Database" ContentId="databaseControl" />
       </LayoutAnchorablePane>
     </LayoutAnchorablePaneGroup>
-    <LayoutDocumentPaneGroup Orientation="Vertical">
-      <LayoutDocumentPane DockHeight="1.6*">
-        <LayoutDocument Title="Container" IsSelected="True" IsLastFocusedDocument="True" ContentId="panAndZoomGrid" CanClose="False" LastActivationTimeStamp="07/12/2015 20:07:57" />
-      </LayoutDocumentPane>
-      <LayoutDocumentPane DockHeight="0.4*">
-        <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Code" IsSelected="True" ContentId="codeControl" LastActivationTimeStamp="07/12/2015 20:07:57" />
-        <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Script" ContentId="scriptControl" />
+    <LayoutDocumentPaneGroup Orientation="Horizontal">
+      <LayoutDocumentPane>
+        <LayoutDocument Title="Container" IsSelected="True" IsLastFocusedDocument="True" ContentId="panAndZoomGrid" CanClose="False" LastActivationTimeStamp="07/12/2015 21:01:44" />
       </LayoutDocumentPane>
     </LayoutDocumentPaneGroup>
-    <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="380">
-      <LayoutAnchorablePaneGroup Orientation="Horizontal" DockWidth="380">
-        <LayoutAnchorablePaneGroup Orientation="Vertical">
+    <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="400">
+      <LayoutAnchorablePaneGroup Orientation="Horizontal" DockWidth="400">
+        <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="0.55*">
           <LayoutAnchorablePane>
             <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Styles" IsSelected="True" ContentId="stylesControl" />
             <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Layers" ContentId="layersControl" />
@@ -43,13 +39,16 @@
             <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Properties" IsSelected="True" ContentId="shapeScrollViewer" />
           </LayoutAnchorablePane>
         </LayoutAnchorablePaneGroup>
-        <LayoutAnchorablePaneGroup Orientation="Vertical">
+        <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="0.6*">
           <LayoutAnchorablePane>
             <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Style" IsSelected="True" ContentId="styleScrollViewer" />
             <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="State" ContentId="stateControl" />
           </LayoutAnchorablePane>
           <LayoutAnchorablePane>
             <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Data" IsSelected="True" ContentId="dataControl" />
+            <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Code" ContentId="codeControl" />
+            <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Script" ContentId="scriptControl" />
+            <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Scripts" ContentId="scriptsControl" />
           </LayoutAnchorablePane>
         </LayoutAnchorablePaneGroup>
       </LayoutAnchorablePaneGroup>
