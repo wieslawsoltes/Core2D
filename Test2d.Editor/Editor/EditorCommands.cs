@@ -453,6 +453,10 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public ICommand ScriptsWindowCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand DocumentWindowCommand { get; set; }
         /// <summary>
         /// 
