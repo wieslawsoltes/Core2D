@@ -55,8 +55,8 @@ namespace Test2d
         /// <param name="isClosed"></param>
         public void BeginFigure(
             XPoint startPoint,
-            bool isFilled,
-            bool isClosed)
+            bool isFilled = true,
+            bool isClosed = true)
         {
             _figure = XPathFigure.Create(
                 startPoint,
@@ -80,10 +80,10 @@ namespace Test2d
             XPoint point,
             XPathSize size,
             double rotationAngle,
-            bool isLargeArc,
-            XSweepDirection sweepDirection,
-            bool isStroked,
-            bool isSmoothJoin)
+            bool isLargeArc = false,
+            XSweepDirection sweepDirection = XSweepDirection.Clockwise,
+            bool isStroked = true,
+            bool isSmoothJoin = false)
         {
             var segment = XArcSegment.Create(
                 point,
@@ -108,8 +108,8 @@ namespace Test2d
             XPoint point1,
             XPoint point2,
             XPoint point3,
-            bool isStroked,
-            bool isSmoothJoin)
+            bool isStroked = true,
+            bool isSmoothJoin = false)
         {
             var segment = XBezierSegment.Create(
                 point1,
@@ -128,8 +128,8 @@ namespace Test2d
         /// <param name="isSmoothJoin"></param>
         public void LineTo(
             XPoint point,
-            bool isStroked,
-            bool isSmoothJoin)
+            bool isStroked = true,
+            bool isSmoothJoin = false)
         {
             var segment = XLineSegment.Create(
                 point,
@@ -146,8 +146,8 @@ namespace Test2d
         /// <param name="isSmoothJoin"></param>
         public void PolyBezierTo(
             IList<XPoint> points,
-            bool isStroked,
-            bool isSmoothJoin)
+            bool isStroked = true,
+            bool isSmoothJoin = false)
         {
             var segment = XPolyBezierSegment.Create(
                 points,
@@ -164,8 +164,8 @@ namespace Test2d
         /// <param name="isSmoothJoin"></param>
         public void PolyLineTo(
             IList<XPoint> points,
-            bool isStroked,
-            bool isSmoothJoin)
+            bool isStroked = true,
+            bool isSmoothJoin = false)
         {
             var segment = XPolyLineSegment.Create(
                 points,
@@ -182,8 +182,8 @@ namespace Test2d
         /// <param name="isSmoothJoin"></param>
         public void PolyQuadraticBezierTo(
             IList<XPoint> points,
-            bool isStroked,
-            bool isSmoothJoin)
+            bool isStroked = true,
+            bool isSmoothJoin = false)
         {
             var segment = XPolyQuadraticBezierSegment.Create(
                 points,
@@ -202,8 +202,8 @@ namespace Test2d
         public void QuadraticBezierTo(
             XPoint point1,
             XPoint point2,
-            bool isStroked,
-            bool isSmoothJoin)
+            bool isStroked = true,
+            bool isSmoothJoin = false)
         {
             var segment = XQuadraticBezierSegment.Create(
                 point1,
