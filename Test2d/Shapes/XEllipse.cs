@@ -9,38 +9,15 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public class XEllipse : BaseShape
+    public class XEllipse : XText
     {
-        private XPoint _topLeft;
-        private XPoint _bottomRight;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public XPoint TopLeft
-        {
-            get { return _topLeft; }
-            set { Update(ref _topLeft, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public XPoint BottomRight
-        {
-            get { return _bottomRight; }
-            set { Update(ref _bottomRight, value); }
-        }
-
         /// <summary>
         /// 
         /// </summary>
         /// <param name="r"></param>
         public override void Bind(Record r)
         {
-            var record = r ?? this.Record;
-            _topLeft.TryToBind("TopLeft", this.Bindings, record);
-            _bottomRight.TryToBind("BottomRight", this.Bindings, record);
+            base.Bind(r ?? this.Record);
         }
 
         /// <summary>
@@ -59,50 +36,7 @@ namespace Test2d
             if (State.HasFlag(ShapeState.Visible))
             {
                 renderer.Draw(dc, this, dx, dy, db, record);
-            }
-
-            if (renderer.State.SelectedShape != null)
-            {
-                if (this == renderer.State.SelectedShape)
-                {
-                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
-                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
-                }
-                else if (_topLeft == renderer.State.SelectedShape)
-                {
-                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
-                }
-                else if (_bottomRight == renderer.State.SelectedShape)
-                {
-                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
-                }
-            }
-            
-            if (renderer.State.SelectedShapes != null)
-            {
-                if (renderer.State.SelectedShapes.Contains(this))
-                {
-                    _topLeft.Draw(dc, renderer, dx, dy, db, record);
-                    _bottomRight.Draw(dc, renderer, dx, dy, db, record);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        public override void Move(double dx, double dy)
-        {
-            if (!TopLeft.State.HasFlag(ShapeState.Connector))
-            {
-                TopLeft.Move(dx, dy);
-            }
-
-            if (!BottomRight.State.HasFlag(ShapeState.Connector))
-            {
-                BottomRight.Move(dx, dy);
+                base.Draw(dc, renderer, dx, dy, db, record);
             }
         }
 
@@ -116,6 +50,7 @@ namespace Test2d
         /// <param name="style"></param>
         /// <param name="point"></param>
         /// <param name="isFilled"></param>
+        /// <param name="text"></param>
         /// <param name="name"></param>
         /// <returns></returns>
         public static XEllipse Create(
@@ -124,6 +59,7 @@ namespace Test2d
             ShapeStyle style,
             BaseShape point,
             bool isFilled = false,
+            string text = null,
             string name = "")
         {
             return new XEllipse()
@@ -136,7 +72,8 @@ namespace Test2d
                 Properties = ImmutableArray.Create<ShapeProperty>(),
                 Code = ShapeCode.Create(),
                 TopLeft = XPoint.Create(x1, y1, point),
-                BottomRight = XPoint.Create(x2, y2, point)
+                BottomRight = XPoint.Create(x2, y2, point),
+                Text = text,
             };
         }
 
@@ -148,6 +85,7 @@ namespace Test2d
         /// <param name="style"></param>
         /// <param name="point"></param>
         /// <param name="isFilled"></param>
+        /// <param name="text"></param>
         /// <param name="name"></param>
         /// <returns></returns>
         public static XEllipse Create(
@@ -155,9 +93,10 @@ namespace Test2d
             ShapeStyle style,
             BaseShape point,
             bool isFilled = false,
+            string text = null,
             string name = "")
         {
-            return Create(x, y, x, y, style, point, isFilled, name);
+            return Create(x, y, x, y, style, point, isFilled, text, name);
         }
     }
 }
