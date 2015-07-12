@@ -74,12 +74,26 @@
         <ad:DockingManager x:Name="dockingManager" Background="White" Grid.Row="1" Margin="0,5,0,0">
             <ad:LayoutRoot>
                 <ad:LayoutPanel Orientation="Horizontal">
-                    <ad:LayoutAnchorablePaneGroup DockWidth="230" Orientation="Vertical">
+                    <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="170">
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable x:Name="projectWindow" Title="Project" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="projectWindow" Title="Project" AutoHideWidth="200">
                                 <controls:ProjectControl x:Name="projectControl"/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="optionsWindow" Title="Options" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="templatesWindow" Title="Templates" AutoHideWidth="200">
+                                <controls:TemplatesControl x:Name="templatesControl"/>
+                            </ad:LayoutAnchorable>
+                        </ad:LayoutAnchorablePane>
+                        <ad:LayoutAnchorablePaneGroup Orientation="Horizontal" DockWidth="200">
+                            <ad:LayoutAnchorablePane>
+                                <ad:LayoutAnchorable x:Name="databasesWindow" Title="Databases" AutoHideWidth="200">
+                                    <controls:DatabasesControl x:Name="databasesControl"/>
+                                </ad:LayoutAnchorable>
+                            </ad:LayoutAnchorablePane>
+                        </ad:LayoutAnchorablePaneGroup>
+                    </ad:LayoutAnchorablePaneGroup>
+                    <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="200">
+                        <ad:LayoutAnchorablePane>
+                            <ad:LayoutAnchorable x:Name="optionsWindow" Title="Options" AutoHideWidth="200">
                                 <ScrollViewer 
                                     x:Name="optionsScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
@@ -88,18 +102,21 @@
                                     <ContentControl Content="{Binding Editor.Project.Options}"/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="templatesWindow" Title="Templates" AutoHideWidth="230">
-                                <controls:TemplatesControl x:Name="templatesControll"/>
-                            </ad:LayoutAnchorable> 
+                            <ad:LayoutAnchorable x:Name="templateWindow" Title="Template" AutoHideWidth="200">
+                                <ScrollViewer 
+                                    x:Name="templateScrollViewer"
+                                    VerticalScrollBarVisibility="Auto" 
+                                    HorizontalScrollBarVisibility="Auto" 
+                                    Focusable="True">
+                                    <controls:TemplateControl/>
+                                </ScrollViewer>
+                            </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable x:Name="groupsWindow" Title="Groups" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="groupsWindow" Title="Groups" AutoHideWidth="200">
                                 <controls:GroupsControl x:Name="groupsControl"/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="databasesWindow" Title="Databases" AutoHideWidth="230">
-                                <controls:DatabasesControl x:Name="databasesControl"/>
-                            </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="databaseWindow" Title="Database" AutoHideWidth="230">
+                            <ad:LayoutAnchorable x:Name="databaseWindow" Title="Database" AutoHideWidth="200">
                                 <ScrollViewer 
                                     x:Name="databaseControl"
                                     VerticalScrollBarVisibility="Auto" 
@@ -110,8 +127,8 @@
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                     </ad:LayoutAnchorablePaneGroup>
-                    <ad:LayoutDocumentPaneGroup>
-                        <ad:LayoutDocumentPane>
+                    <ad:LayoutDocumentPaneGroup Orientation="Vertical">
+                        <ad:LayoutDocumentPane DockHeight="1.6*">
                             <ad:LayoutDocument x:Name="containerWindow" Title="Container" CanClose="False">
                                 <paz:PanAndZoomGrid 
                                     x:Name="panAndZoomGrid"
@@ -146,67 +163,9 @@
                                     </paz:PanAndZoomBorder>
                                 </paz:PanAndZoomGrid>
                             </ad:LayoutDocument>
-                            <!--
-                            <ad:LayoutDocument x:Name="documentWindow" Title="Document" CanClose="False">
-                                <controls:DocumentControl x:Name="documentControl"/>
-                            </ad:LayoutDocument>
-                            -->
-                            <!--
-                            <ad:LayoutDocument x:Name="pathWindow" Title="Path" CanClose="False">
-                                <controls:PathControl x:Name="pathControl"/>
-                            </ad:LayoutDocument>
-                            -->
-                            <ad:LayoutDocument x:Name="scriptWindow" Title="Script" CanClose="False">
-                                <controls:ScriptControl x:Name="scriptControl"/>
-                            </ad:LayoutDocument>
                         </ad:LayoutDocumentPane>
-                    </ad:LayoutDocumentPaneGroup>
-                    <ad:LayoutAnchorablePaneGroup DockWidth="270" Orientation="Vertical">
-                        <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable x:Name="stylesWindow" Title="Styles" AutoHideWidth="270">
-                                <controls:StylesControl x:Name="stylesControl"/>
-                            </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="layersWindow" Title="Layers" AutoHideWidth="270">
-                                <controls:LayersControl x:Name="layersControl"/>
-                            </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="shapesWindow" Title="Shapes" AutoHideWidth="270">
-                                <controls:ShapesControl x:Name="shapesControl"/>
-                            </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="templateWindow" Title="Template" AutoHideWidth="270">
-                                <ScrollViewer 
-                                    x:Name="templateScrollViewer"
-                                    VerticalScrollBarVisibility="Auto" 
-                                    HorizontalScrollBarVisibility="Auto" 
-                                    Focusable="True">
-                                    <controls:TemplateControl/>
-                                </ScrollViewer>
-                            </ad:LayoutAnchorable>
-                        </ad:LayoutAnchorablePane>
-                        <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable x:Name="propertiesWindow" Title="Properties" AutoHideWidth="270">
-                                <ScrollViewer 
-                                    x:Name="shapeScrollViewer"
-                                    VerticalScrollBarVisibility="Auto" 
-                                    HorizontalScrollBarVisibility="Auto" 
-                                    Focusable="True">
-                                    <controls:ShapeControl/>
-                                </ScrollViewer>
-                            </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="stateWindow" Title="State" AutoHideWidth="270">
-                                <controls:StateControl x:Name="stateControl">
-                                    <controls:StateControl.Style>
-                                        <Style TargetType="controls:StateControl">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Editor.Renderers[0].State.SelectedShape}" Value="{x:Null}">
-                                                    <Setter Property="Visibility" Value="Hidden"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </controls:StateControl.Style>
-                                </controls:StateControl>
-                            </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="codeWindow" Title="Code" AutoHideWidth="270">
+                        <ad:LayoutDocumentPane DockHeight="0.4*">
+                            <ad:LayoutAnchorable x:Name="codeWindow" Title="Code" AutoHideWidth="200">
                                 <controls:CodeControl x:Name="codeControl">
                                     <controls:CodeControl.Style>
                                         <Style TargetType="controls:CodeControl">
@@ -220,30 +179,81 @@
                                     </controls:CodeControl.Style>
                                 </controls:CodeControl>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="dataWindow" Title="Data" AutoHideWidth="270">
-                                <controls:DataControl x:Name="dataControl">
-                                    <controls:DataControl.Style>
-                                        <Style TargetType="controls:DataControl">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Editor.Renderers[0].State.SelectedShape}" Value="{x:Null}">
-                                                    <Setter Property="Visibility" Value="Hidden"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </controls:DataControl.Style>
-                                </controls:DataControl>
+                            <ad:LayoutAnchorable x:Name="scriptWindow" Title="Script" AutoHideWidth="200">
+                                <controls:ScriptControl x:Name="scriptControl"/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="styleWindow" Title="Style" AutoHideWidth="270">
-                                <ScrollViewer 
-                                    x:Name="styleScrollViewer"
-                                    VerticalScrollBarVisibility="Auto" 
-                                    HorizontalScrollBarVisibility="Auto" 
-                                    Focusable="True">
-                                    <controls:StyleControl/>
-                                </ScrollViewer>
-                            </ad:LayoutAnchorable>
-                        </ad:LayoutAnchorablePane>
+                        </ad:LayoutDocumentPane>
+                    </ad:LayoutDocumentPaneGroup>
+                    <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="380">
+                        <ad:LayoutAnchorablePaneGroup Orientation="Horizontal">
+                            <ad:LayoutAnchorablePaneGroup Orientation="Vertical">
+                                <ad:LayoutAnchorablePane>
+                                    <ad:LayoutAnchorable x:Name="stylesWindow" Title="Styles" AutoHideWidth="200">
+                                        <controls:StylesControl x:Name="stylesControl"/>
+                                    </ad:LayoutAnchorable>
+                                    <ad:LayoutAnchorable x:Name="layersWindow" Title="Layers" AutoHideWidth="200">
+                                        <controls:LayersControl x:Name="layersControl"/>
+                                    </ad:LayoutAnchorable>
+                                    <ad:LayoutAnchorable x:Name="shapesWindow" Title="Shapes" AutoHideWidth="200">
+                                        <controls:ShapesControl x:Name="shapesControl"/>
+                                    </ad:LayoutAnchorable>
+                                </ad:LayoutAnchorablePane>
+                                <ad:LayoutAnchorablePane>
+                                    <ad:LayoutAnchorable x:Name="propertiesWindow" Title="Properties" AutoHideWidth="200">
+                                        <ScrollViewer 
+                                            x:Name="shapeScrollViewer"
+                                            VerticalScrollBarVisibility="Auto" 
+                                            HorizontalScrollBarVisibility="Auto" 
+                                            Focusable="True">
+                                            <controls:ShapeControl/>
+                                        </ScrollViewer>
+                                    </ad:LayoutAnchorable>
+                                </ad:LayoutAnchorablePane>
+                            </ad:LayoutAnchorablePaneGroup>
+                            <ad:LayoutAnchorablePaneGroup Orientation="Vertical">
+                                <ad:LayoutAnchorablePane>
+                                    <ad:LayoutAnchorable x:Name="styleWindow" Title="Style" AutoHideWidth="200">
+                                        <ScrollViewer 
+                                            x:Name="styleScrollViewer"
+                                            VerticalScrollBarVisibility="Auto" 
+                                            HorizontalScrollBarVisibility="Auto" 
+                                            Focusable="True">
+                                            <controls:StyleControl/>
+                                        </ScrollViewer>
+                                    </ad:LayoutAnchorable>
+                                    <ad:LayoutAnchorable x:Name="stateWindow" Title="State" AutoHideWidth="200">
+                                        <controls:StateControl x:Name="stateControl">
+                                            <controls:StateControl.Style>
+                                                <Style TargetType="controls:StateControl">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Editor.Renderers[0].State.SelectedShape}" Value="{x:Null}">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </controls:StateControl.Style>
+                                        </controls:StateControl>
+                                    </ad:LayoutAnchorable>
+                                </ad:LayoutAnchorablePane>
+                                <ad:LayoutAnchorablePane>
+                                    <ad:LayoutAnchorable x:Name="dataWindow" Title="Data" AutoHideWidth="200">
+                                        <controls:DataControl x:Name="dataControl">
+                                            <controls:DataControl.Style>
+                                                <Style TargetType="controls:DataControl">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Editor.Renderers[0].State.SelectedShape}" Value="{x:Null}">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </controls:DataControl.Style>
+                                        </controls:DataControl>
+                                    </ad:LayoutAnchorable>
+                                </ad:LayoutAnchorablePane>
+                            </ad:LayoutAnchorablePaneGroup>
+                        </ad:LayoutAnchorablePaneGroup>
                     </ad:LayoutAnchorablePaneGroup>
                 </ad:LayoutPanel>
             </ad:LayoutRoot>
