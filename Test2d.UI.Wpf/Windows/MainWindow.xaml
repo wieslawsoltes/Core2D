@@ -9,7 +9,7 @@
         xmlns:converters="clr-namespace:Test.Converters"
         xmlns:paz="clr-namespace:Test.PanAndZoom"
         xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock"
-        Height="720" Width="1324"
+        Height="724" Width="1324"
         Background="White"
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
         UseLayoutRounding="True" SnapsToDevicePixels="True"
@@ -45,15 +45,16 @@
         <KeyBinding Command="{Binding Commands.RestartSimulationCommand}" Gesture="F7"/>
         <KeyBinding Command="{Binding Commands.PauseSimulationCommand}" Gesture="F9"/>
         <KeyBinding Command="{Binding Commands.TickSimulationCommand}" Gesture="F10"/>
-        <KeyBinding Command="{Binding Commands.ProjectWindowCommand}" Gesture="Ctrl+Alt+P"/>
+        <KeyBinding Command="{Binding Commands.ProjectWindowCommand}" Gesture="Ctrl+Alt+X"/>
         <KeyBinding Command="{Binding Commands.OptionsWindowCommand}" Gesture="Ctrl+Alt+O"/>
         <KeyBinding Command="{Binding Commands.TemplatesWindowCommand}" Gesture="Ctrl+Alt+T"/>
         <KeyBinding Command="{Binding Commands.GroupsWindowCommand}" Gesture="Ctrl+Alt+G"/>
         <KeyBinding Command="{Binding Commands.DatabasesWindowCommand}" Gesture="Ctrl+Alt+D"/>
         <KeyBinding Command="{Binding Commands.DatabaseWindowCommand}" Gesture="Ctrl+Alt+B"/>
         <KeyBinding Command="{Binding Commands.ContainerWindowCommand}" Gesture="Ctrl+Alt+N"/>
-        <KeyBinding Command="{Binding Commands.ScriptWindowCommand}" Gesture="Ctrl+Alt+R"/>
         <KeyBinding Command="{Binding Commands.DocumentWindowCommand}" Gesture="Ctrl+Alt+U"/>
+        <KeyBinding Command="{Binding Commands.ScriptWindowCommand}" Gesture="Ctrl+Alt+R"/>
+        <KeyBinding Command="{Binding Commands.ScriptsWindowCommand}" Gesture="Ctrl+Alt+P"/>
         <KeyBinding Command="{Binding Commands.StylesWindowCommand}" Gesture="Ctrl+Alt+S"/>
         <KeyBinding Command="{Binding Commands.LayersWindowCommand}" Gesture="Ctrl+Alt+L"/>
         <KeyBinding Command="{Binding Commands.ShapesWindowCommand}" Gesture="Ctrl+Alt+A"/>
@@ -127,8 +128,8 @@
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                     </ad:LayoutAnchorablePaneGroup>
-                    <ad:LayoutDocumentPaneGroup Orientation="Vertical">
-                        <ad:LayoutDocumentPane DockHeight="1.6*">
+                    <ad:LayoutDocumentPaneGroup Orientation="Horizontal">
+                        <ad:LayoutDocumentPane>
                             <ad:LayoutDocument x:Name="containerWindow" Title="Container" CanClose="False">
                                 <paz:PanAndZoomGrid 
                                     x:Name="panAndZoomGrid"
@@ -164,29 +165,10 @@
                                 </paz:PanAndZoomGrid>
                             </ad:LayoutDocument>
                         </ad:LayoutDocumentPane>
-                        <ad:LayoutDocumentPane DockHeight="0.4*">
-                            <ad:LayoutAnchorable x:Name="codeWindow" Title="Code" AutoHideWidth="200">
-                                <controls:CodeControl x:Name="codeControl">
-                                    <controls:CodeControl.Style>
-                                        <Style TargetType="controls:CodeControl">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Editor.Renderers[0].State.SelectedShape}" Value="{x:Null}">
-                                                    <Setter Property="Visibility" Value="Hidden"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </controls:CodeControl.Style>
-                                </controls:CodeControl>
-                            </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="scriptWindow" Title="Script" AutoHideWidth="200">
-                                <controls:ScriptControl x:Name="scriptControl"/>
-                            </ad:LayoutAnchorable>
-                        </ad:LayoutDocumentPane>
                     </ad:LayoutDocumentPaneGroup>
-                    <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="380">
+                    <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="400">
                         <ad:LayoutAnchorablePaneGroup Orientation="Horizontal">
-                            <ad:LayoutAnchorablePaneGroup Orientation="Vertical">
+                            <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="0.55*">
                                 <ad:LayoutAnchorablePane>
                                     <ad:LayoutAnchorable x:Name="stylesWindow" Title="Styles" AutoHideWidth="200">
                                         <controls:StylesControl x:Name="stylesControl"/>
@@ -210,7 +192,7 @@
                                     </ad:LayoutAnchorable>
                                 </ad:LayoutAnchorablePane>
                             </ad:LayoutAnchorablePaneGroup>
-                            <ad:LayoutAnchorablePaneGroup Orientation="Vertical">
+                            <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="0.6*">
                                 <ad:LayoutAnchorablePane>
                                     <ad:LayoutAnchorable x:Name="styleWindow" Title="Style" AutoHideWidth="200">
                                         <ScrollViewer 
@@ -250,6 +232,26 @@
                                                 </Style>
                                             </controls:DataControl.Style>
                                         </controls:DataControl>
+                                    </ad:LayoutAnchorable>
+                                    <ad:LayoutAnchorable x:Name="codeWindow" Title="Code" AutoHideWidth="200">
+                                        <controls:CodeControl x:Name="codeControl">
+                                            <controls:CodeControl.Style>
+                                                <Style TargetType="controls:CodeControl">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Editor.Renderers[0].State.SelectedShape}" Value="{x:Null}">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </controls:CodeControl.Style>
+                                        </controls:CodeControl>
+                                    </ad:LayoutAnchorable>
+                                    <ad:LayoutAnchorable x:Name="scriptWindow" Title="Script" AutoHideWidth="200">
+                                        <controls:ScriptControl x:Name="scriptControl"/>
+                                    </ad:LayoutAnchorable>
+                                    <ad:LayoutAnchorable x:Name="scriptsWindow" Title="Scripts" AutoHideWidth="200">
+                                        <controls:ScriptsControl x:Name="scriptsControl"/>
                                     </ad:LayoutAnchorable>
                                 </ad:LayoutAnchorablePane>
                             </ad:LayoutAnchorablePaneGroup>
