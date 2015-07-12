@@ -1,0 +1,1 @@
+Shape.IsFilled = !Shape.IsFilled;
