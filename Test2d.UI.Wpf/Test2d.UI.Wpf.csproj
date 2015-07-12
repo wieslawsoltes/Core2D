@@ -201,6 +201,9 @@
     <Compile Include="Controls\ScriptControl.xaml.cs">
       <DependentUpon>ScriptControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ScriptsControl.xaml.cs">
+      <DependentUpon>ScriptsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ShapeControl.xaml.cs">
       <DependentUpon>ShapeControl.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -274,6 +277,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ScriptControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ScriptsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
