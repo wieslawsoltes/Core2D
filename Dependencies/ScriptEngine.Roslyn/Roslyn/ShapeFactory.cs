@@ -20,6 +20,14 @@ namespace Test2d
         public EditorContext Context { private set; get; }
 
         /// <summary>
+        /// Gets current editor.
+        /// </summary>
+        public Editor Editor
+        {
+            get { return Context.Editor; }
+        }
+
+        /// <summary>
         /// Gets selected shape.
         /// </summary>
         public BaseShape Shape
@@ -33,14 +41,6 @@ namespace Test2d
         public IEnumerable<BaseShape> Shapes
         {
             get { return Context.Editor.Renderers[0].State.SelectedShapes; }
-        }
-
-        /// <summary>
-        /// Gets current style.
-        /// </summary>
-        public ShapeStyle Style
-        {
-            get { return Context.Editor.Project.CurrentStyleLibrary.CurrentStyle; }
         }
 
         /// <summary>
@@ -81,6 +81,14 @@ namespace Test2d
         public Database Database
         {
             get { return Context.Editor.Project.CurrentDatabase; }
+        }
+
+        /// <summary>
+        /// Gets current style.
+        /// </summary>
+        public ShapeStyle Style
+        {
+            get { return Context.Editor.Project.CurrentStyleLibrary.CurrentStyle; }
         }
 
         /// <summary>
