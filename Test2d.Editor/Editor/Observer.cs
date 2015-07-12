@@ -54,7 +54,7 @@ namespace Test2d
                 {
                     foreach (var renderer in _editor.Renderers)
                     {
-                        renderer.ClearCache();
+                        renderer.ClearCache(isZooming: false);
                     }
                     _editor.Project.CurrentContainer.Invalidate();
                 }

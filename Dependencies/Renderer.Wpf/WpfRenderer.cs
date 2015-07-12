@@ -55,7 +55,7 @@ namespace Test
         /// </summary>
         public WpfRenderer()
         {
-            ClearCache();
+            ClearCache(isZooming: false);
         }
 
         /// <summary>
@@ -382,26 +382,31 @@ namespace Test
         /// <summary>
         /// 
         /// </summary>
-        public void ClearCache()
+        /// <param name="isZooming"></param>
+        public void ClearCache(bool isZooming)
         {
             _styleCache = new Dictionary<ShapeStyle, Tuple<Brush, Pen>>();
             _arrowStyleCache = new Dictionary<ArrowStyle, Tuple<Brush, Pen>>();
-            _arcCache = new Dictionary<XArc, PathGeometry>();
-            _bezierCache = new Dictionary<XBezier, PathGeometry>();
-            _qbezierCache = new Dictionary<XQBezier, PathGeometry>();
-            _textCache = new Dictionary<XText, Tuple<string, FormattedText, ShapeStyle>>();
 
-            if (_biCache != null)
+            if (!isZooming)
             {
-                foreach (var kvp in _biCache)
+                _arcCache = new Dictionary<XArc, PathGeometry>();
+                _bezierCache = new Dictionary<XBezier, PathGeometry>();
+                _qbezierCache = new Dictionary<XQBezier, PathGeometry>();
+                _textCache = new Dictionary<XText, Tuple<string, FormattedText, ShapeStyle>>();
+
+                if (_biCache != null)
                 {
-                    kvp.Value.StreamSource.Dispose();
+                    foreach (var kvp in _biCache)
+                    {
+                        kvp.Value.StreamSource.Dispose();
+                    }
+                    _biCache.Clear();
                 }
-                _biCache.Clear();
+                _biCache = new Dictionary<Uri, BitmapImage>();
+
+                _pathCache = new Dictionary<XPath, Tuple<string, XPathGeometry, StreamGeometry, ShapeStyle>>();
             }
-            _biCache = new Dictionary<Uri, BitmapImage>();
-            
-            _pathCache = new Dictionary<XPath, Tuple<string, XPathGeometry, StreamGeometry, ShapeStyle>>();
         }
 
         /// <summary>
@@ -1052,15 +1057,12 @@ namespace Test
                 && string.Compare(tcache.Item1, tbind) == 0
                 && tcache.Item3 == style)
             {
-                //if (text.IsStroked)
-                //{
-                    ct = tcache.Item1;
-                    ft = tcache.Item2;
+                ct = tcache.Item1;
+                ft = tcache.Item2;
 
-                    _dc.DrawText(
-                        ft,
-                        GetTextOrigin(style, ref rect, ft));
-                //}
+                _dc.DrawText(
+                    ft,
+                    GetTextOrigin(style, ref rect, ft));
             }
             else
             {
@@ -1125,12 +1127,9 @@ namespace Test
                     }
                 }
 
-                //if (text.IsStroked)
-                //{
-                    _dc.DrawText(
-                        ft,
-                        GetTextOrigin(style, ref rect, ft));
-                //}
+                _dc.DrawText(
+                    ft,
+                    GetTextOrigin(style, ref rect, ft));
             }
         }
 

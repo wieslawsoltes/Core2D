@@ -18,7 +18,8 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        void ClearCache();
+        /// <param name="isZooming"></param>
+        void ClearCache(bool isZooming);
 
         /// <summary>
         /// 

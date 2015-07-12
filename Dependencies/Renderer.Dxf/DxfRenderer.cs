@@ -32,7 +32,7 @@ namespace Test2d
         /// </summary>
         public DxfRenderer()
         {
-            ClearCache();
+            ClearCache(isZooming: false);
         }
 
         /// <summary>
@@ -47,7 +47,8 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public void ClearCache()
+        /// <param name="isZooming"></param>
+        public void ClearCache(bool isZooming)
         {
         }
 

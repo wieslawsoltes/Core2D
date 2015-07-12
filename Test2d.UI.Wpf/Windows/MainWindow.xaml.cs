@@ -1238,7 +1238,7 @@ namespace Test.Windows
                     context.Editor.Renderers[0].State.PanY = y;
                     if (invalidate)
                     {
-                        context.Invalidate();
+                        context.Invalidate(isZooming: true);
                     }
                 };
 

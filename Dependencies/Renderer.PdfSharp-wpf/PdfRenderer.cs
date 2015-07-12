@@ -38,7 +38,7 @@ namespace PdfSharp
         /// </summary>
         public PdfRenderer()
         {
-            ClearCache();
+            ClearCache(isZooming: false);
 
             _scaleToPage = (value) => (float)(value * 1.0);
         }
@@ -105,7 +105,7 @@ namespace PdfSharp
                 }
 
                 pdf.Save(path);
-                ClearCache();
+                ClearCache(isZooming: false);
             }
         }
 
@@ -158,7 +158,7 @@ namespace PdfSharp
                 }
 
                 pdf.Save(path);
-                ClearCache();
+                ClearCache(isZooming: false);
             }
         }
 
@@ -369,17 +369,21 @@ namespace PdfSharp
         /// <summary>
         /// 
         /// </summary>
-        public void ClearCache()
+        /// <param name="isZooming"></param>
+        public void ClearCache(bool isZooming)
         {
-            if (_biCache != null)
+            if (!isZooming)
             {
-                foreach (var kvp in _biCache)
+                if (_biCache != null)
                 {
-                    kvp.Value.Dispose();
+                    foreach (var kvp in _biCache)
+                    {
+                        kvp.Value.Dispose();
+                    }
+                    _biCache.Clear();
                 }
-                _biCache.Clear();
+                _biCache = new Dictionary<Uri, XImage>();
             }
-            _biCache = new Dictionary<Uri, XImage>();
         }
 
         /// <summary>
@@ -927,15 +931,12 @@ namespace PdfSharp
                     break;
             }
 
-            //if (text.IsStroked)
-            //{
-                _gfx.DrawString(
-                    tbind,
-                    font,
-                    ToXSolidBrush(text.Style.Stroke),
-                    srect,
-                    format);
-            //}
+            _gfx.DrawString(
+                tbind,
+                font,
+                ToXSolidBrush(text.Style.Stroke),
+                srect,
+                format);
         }
 
         /// <summary>
