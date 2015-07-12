@@ -2165,6 +2165,7 @@
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
+            <Control Template="{StaticResource TextControlTemplateKey}"/>
             <Expander Header="TopLeft">
                 <ContentControl Content="{Binding TopLeft}"/>
             </Expander>
@@ -2191,6 +2192,7 @@
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
+            <Control Template="{StaticResource TextControlTemplateKey}"/>
             <Expander Header="TopLeft">
                 <ContentControl Content="{Binding TopLeft}"/>
             </Expander>
@@ -2336,6 +2338,7 @@
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
+            <Control Template="{StaticResource TextControlTemplateKey}"/>
             <Expander Header="Path">
                 <Grid>
                     <TextBox Text="{Binding Path, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
