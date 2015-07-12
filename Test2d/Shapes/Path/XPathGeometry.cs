@@ -83,7 +83,7 @@ namespace Test2d
             bool isLargeArc = false,
             XSweepDirection sweepDirection = XSweepDirection.Clockwise,
             bool isStroked = true,
-            bool isSmoothJoin = false)
+            bool isSmoothJoin = true)
         {
             var segment = XArcSegment.Create(
                 point,
@@ -109,7 +109,7 @@ namespace Test2d
             XPoint point2,
             XPoint point3,
             bool isStroked = true,
-            bool isSmoothJoin = false)
+            bool isSmoothJoin = true)
         {
             var segment = XBezierSegment.Create(
                 point1,
@@ -129,7 +129,7 @@ namespace Test2d
         public void LineTo(
             XPoint point,
             bool isStroked = true,
-            bool isSmoothJoin = false)
+            bool isSmoothJoin = true)
         {
             var segment = XLineSegment.Create(
                 point,
@@ -147,7 +147,7 @@ namespace Test2d
         public void PolyBezierTo(
             IList<XPoint> points,
             bool isStroked = true,
-            bool isSmoothJoin = false)
+            bool isSmoothJoin = true)
         {
             var segment = XPolyBezierSegment.Create(
                 points,
@@ -165,7 +165,7 @@ namespace Test2d
         public void PolyLineTo(
             IList<XPoint> points,
             bool isStroked = true,
-            bool isSmoothJoin = false)
+            bool isSmoothJoin = true)
         {
             var segment = XPolyLineSegment.Create(
                 points,
@@ -183,7 +183,7 @@ namespace Test2d
         public void PolyQuadraticBezierTo(
             IList<XPoint> points,
             bool isStroked = true,
-            bool isSmoothJoin = false)
+            bool isSmoothJoin = true)
         {
             var segment = XPolyQuadraticBezierSegment.Create(
                 points,
@@ -203,7 +203,7 @@ namespace Test2d
             XPoint point1,
             XPoint point2,
             bool isStroked = true,
-            bool isSmoothJoin = false)
+            bool isSmoothJoin = true)
         {
             var segment = XQuadraticBezierSegment.Create(
                 point1,
