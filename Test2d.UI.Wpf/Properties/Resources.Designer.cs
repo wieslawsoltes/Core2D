@@ -871,6 +871,15 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Order.
+        /// </summary>
+        public static string MenuTooltipEditOrder {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bring Forward.
         /// </summary>
         public static string MenuTooltipEditOrderBringForward {
@@ -1371,6 +1380,15 @@ namespace Test2d.UI.Wpf.Properties {
         public static string MenuTooltipScriptEditGroup {
             get {
                 return ResourceManager.GetString("MenuTooltipScriptEditGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptEditOrder {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditOrder", resourceCulture);
             }
         }
         

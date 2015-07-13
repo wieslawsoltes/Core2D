@@ -1059,8 +1059,14 @@
   <data name="MenuFileExit" xml:space="preserve">
     <value>E_xit</value>
   </data>
+  <data name="MenuTooltipEditOrder" xml:space="preserve">
+    <value>Order</value>
+  </data>
   <data name="MenuTooltipFileExit" xml:space="preserve">
     <value>Exit</value>
+  </data>
+  <data name="MenuTooltipScriptEditOrder" xml:space="preserve">
+    <value>Script: Not Available</value>
   </data>
   <data name="MenuTooltipScriptFileExit" xml:space="preserve">
     <value>Script: Not Available</value>

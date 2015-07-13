@@ -403,6 +403,12 @@
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuEditOrder}">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditOrder}"/>
+                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditOrder}"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
                 <MenuItem Header="{x:Static p:Resources.MenuEditOrderBringToFront}" Command="{Binding Commands.BringToFrontCommand}" InputGestureText="">
                     <MenuItem.ToolTip>
                         <StackPanel>
