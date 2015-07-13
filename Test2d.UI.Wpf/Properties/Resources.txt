@@ -136,7 +136,6 @@ MenuTooltipEdit
 		MenuTooltipEditOrderSendBackward
 		MenuTooltipEditOrderSendToBack
 
-
 MenuTooltipScriptEdit
 	MenuTooltipScriptEditUndo
 	MenuTooltipScriptEditRedo
