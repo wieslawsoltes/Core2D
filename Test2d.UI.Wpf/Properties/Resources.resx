@@ -1073,4 +1073,61 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   <data name="MenuTooltipScriptFileExit" xml:space="preserve">
     <value>Script: Not Available</value>
   </data>
+  <data name="WindowTitleCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="WindowTitleContainer" xml:space="preserve">
+    <value>Container</value>
+  </data>
+  <data name="WindowTitleData" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="WindowTitleDatabase" xml:space="preserve">
+    <value>Database</value>
+  </data>
+  <data name="WindowTitleDatabases" xml:space="preserve">
+    <value>Databases</value>
+  </data>
+  <data name="WindowTitleDocument" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="WindowTitleGroups" xml:space="preserve">
+    <value>Groups</value>
+  </data>
+  <data name="WindowTitleLayers" xml:space="preserve">
+    <value>Layers</value>
+  </data>
+  <data name="WindowTitleOptions" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="WindowTitleProject" xml:space="preserve">
+    <value>Project</value>
+  </data>
+  <data name="WindowTitleProperties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="WindowTitleScript" xml:space="preserve">
+    <value>Script</value>
+  </data>
+  <data name="WindowTitleScripts" xml:space="preserve">
+    <value>Scripts</value>
+  </data>
+  <data name="WindowTitleShapes" xml:space="preserve">
+    <value>Shapes</value>
+  </data>
+  <data name="WindowTitleState" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="WindowTitleStyle" xml:space="preserve">
+    <value>Style</value>
+  </data>
+  <data name="WindowTitleStyles" xml:space="preserve">
+    <value>Styles</value>
+  </data>
+  <data name="WindowTitleTemplate" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="WindowTitleTemplates" xml:space="preserve">
+    <value>Templates</value>
+  </data>
 </root>

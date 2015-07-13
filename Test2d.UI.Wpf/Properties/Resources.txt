@@ -372,3 +372,25 @@ MenuTooltipScriptWindow
 	MenuTooltipScriptWindowLoadLayout
 	MenuTooltipScriptWindowSaveLayout
 	MenuTooltipScriptWindowResetLayout
+
+[Window Titles]
+
+WindowTitleProject
+WindowTitleTemplates
+WindowTitleDatabases
+WindowTitleOptions
+WindowTitleTemplate
+WindowTitleGroups
+WindowTitleDatabase
+WindowTitleContainer
+WindowTitleStyles
+WindowTitleLayers
+WindowTitleShapes
+WindowTitleProperties
+WindowTitleStyle
+WindowTitleState
+WindowTitleData
+WindowTitleCode
+WindowTitleScript
+WindowTitleScripts
+WindowTitleDocument

@@ -2923,5 +2923,176 @@ namespace Test2d.UI.Wpf.Properties {
                 return ResourceManager.GetString("MenuWindowSaveLayout", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code.
+        /// </summary>
+        public static string WindowTitleCode {
+            get {
+                return ResourceManager.GetString("WindowTitleCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Container.
+        /// </summary>
+        public static string WindowTitleContainer {
+            get {
+                return ResourceManager.GetString("WindowTitleContainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data.
+        /// </summary>
+        public static string WindowTitleData {
+            get {
+                return ResourceManager.GetString("WindowTitleData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database.
+        /// </summary>
+        public static string WindowTitleDatabase {
+            get {
+                return ResourceManager.GetString("WindowTitleDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Databases.
+        /// </summary>
+        public static string WindowTitleDatabases {
+            get {
+                return ResourceManager.GetString("WindowTitleDatabases", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document.
+        /// </summary>
+        public static string WindowTitleDocument {
+            get {
+                return ResourceManager.GetString("WindowTitleDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Groups.
+        /// </summary>
+        public static string WindowTitleGroups {
+            get {
+                return ResourceManager.GetString("WindowTitleGroups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Layers.
+        /// </summary>
+        public static string WindowTitleLayers {
+            get {
+                return ResourceManager.GetString("WindowTitleLayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        public static string WindowTitleOptions {
+            get {
+                return ResourceManager.GetString("WindowTitleOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project1.
+        /// </summary>
+        public static string WindowTitleProject {
+            get {
+                return ResourceManager.GetString("WindowTitleProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Properties.
+        /// </summary>
+        public static string WindowTitleProperties {
+            get {
+                return ResourceManager.GetString("WindowTitleProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script.
+        /// </summary>
+        public static string WindowTitleScript {
+            get {
+                return ResourceManager.GetString("WindowTitleScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scripts.
+        /// </summary>
+        public static string WindowTitleScripts {
+            get {
+                return ResourceManager.GetString("WindowTitleScripts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shapes.
+        /// </summary>
+        public static string WindowTitleShapes {
+            get {
+                return ResourceManager.GetString("WindowTitleShapes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State.
+        /// </summary>
+        public static string WindowTitleState {
+            get {
+                return ResourceManager.GetString("WindowTitleState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Style.
+        /// </summary>
+        public static string WindowTitleStyle {
+            get {
+                return ResourceManager.GetString("WindowTitleStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Styles.
+        /// </summary>
+        public static string WindowTitleStyles {
+            get {
+                return ResourceManager.GetString("WindowTitleStyles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Template.
+        /// </summary>
+        public static string WindowTitleTemplate {
+            get {
+                return ResourceManager.GetString("WindowTitleTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Templates.
+        /// </summary>
+        public static string WindowTitleTemplates {
+            get {
+                return ResourceManager.GetString("WindowTitleTemplates", resourceCulture);
+            }
+        }
     }
 }
