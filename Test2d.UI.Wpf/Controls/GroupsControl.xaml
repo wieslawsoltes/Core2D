@@ -34,8 +34,8 @@
                         <MenuItem Header="_Group..." Command="{Binding Commands.ExportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.CurrentGroup}" InputGestureText=""/>
                         <MenuItem Header="G_roups..." Command="{Binding Commands.ExportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText=""/>
                     </MenuItem>
-                    <MenuItem Command="{Binding Commands.AddGroupCommand}" Header="_+"/>
-                    <MenuItem Command="{Binding Commands.RemoveGroupCommand}" Header="_-"/>
+                    <MenuItem Command="{Binding Commands.AddGroupCommand}" Header="+"/>
+                    <MenuItem Command="{Binding Commands.RemoveGroupCommand}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>

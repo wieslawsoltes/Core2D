@@ -13,7 +13,7 @@
         <Grid.Resources>
             <ControlTemplate x:Key="ShapesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Command="{Binding Commands.RemoveShapeCommand}" Header="_-"/>
+                    <MenuItem Command="{Binding Commands.RemoveShapeCommand}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>

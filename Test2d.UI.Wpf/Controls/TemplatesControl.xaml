@@ -21,8 +21,8 @@
                         <MenuItem Header="T_emplates..." Command="{Binding Commands.ExportTemplatesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
                     </MenuItem>
                     <MenuItem Command="{Binding Commands.EditTemplateCommand}" Header="edit"/>
-                    <MenuItem Command="{Binding Commands.AddTemplateCommand}" Header="_+"/>
-                    <MenuItem Command="{Binding Commands.RemoveTemplateCommand}" Header="_-"/>
+                    <MenuItem Command="{Binding Commands.AddTemplateCommand}" Header="+"/>
+                    <MenuItem Command="{Binding Commands.RemoveTemplateCommand}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>

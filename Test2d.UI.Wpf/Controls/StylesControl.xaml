@@ -34,8 +34,8 @@
                         <MenuItem Header="_Style..." Command="{Binding Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" InputGestureText=""/>
                         <MenuItem Header="S_tyles..." Command="{Binding Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
                     </MenuItem>
-                    <MenuItem Command="{Binding Commands.AddStyleCommand}" Header="_+"/>
-                    <MenuItem Command="{Binding Commands.RemoveStyleCommand}" Header="_-"/>
+                    <MenuItem Command="{Binding Commands.AddStyleCommand}" Header="+"/>
+                    <MenuItem Command="{Binding Commands.RemoveStyleCommand}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
