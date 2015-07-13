@@ -327,10 +327,7 @@ namespace Test.Windows
 
             if (dlg.ShowDialog() == true)
             {
-                if (context.CsvWriter != null)
-                {
-                    context.CsvWriter.Write(dlg.FileName, database);
-                }
+                context.ExportData(dlg.FileName, database);
             }
         }
 
@@ -423,7 +420,7 @@ namespace Test.Windows
 
                 foreach (var path in paths)
                 {
-                    context.ImportEx(path, item, type);
+                    context.ImportObject(path, item, type);
                 }
             }
         }
@@ -499,7 +496,7 @@ namespace Test.Windows
             if (dlg.ShowDialog() == true)
             {
                 var path = dlg.FileName;
-                context.ExportEx(path, item, type);
+                context.ExportObject(path, item, type);
             }
         }
 
