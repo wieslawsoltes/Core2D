@@ -1,5 +1,9 @@
 ﻿# TODO
 
+## UI
+
+* Main menu tooltips.
+
 ## Editor
 
 * Add Reference shape handling.
