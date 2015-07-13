@@ -237,6 +237,11 @@
     <Compile Include="Converters\ZoomScaleConverter.cs" />
     <Compile Include="Controls\Custom\PanAndZoomBorder.cs" />
     <Compile Include="Controls\Custom\PanAndZoomGrid.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Util\SimulationTimer.cs" />
     <Compile Include="Util\TextClipboard.cs" />
     <Page Include="Controls\CodeControl.xaml">
@@ -346,11 +351,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -359,6 +359,7 @@
     <EmbeddedResource Include="Layouts\Test2d.UI.Wpf.layout" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

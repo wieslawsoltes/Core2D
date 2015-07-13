@@ -2925,6 +2925,438 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CycleResolution.
+        /// </summary>
+        public static string OptionsCycleResolution {
+            get {
+                return ResourceManager.GetString("OptionsCycleResolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FillRule.
+        /// </summary>
+        public static string OptionsDefaultFillRule {
+            get {
+                return ResourceManager.GetString("OptionsDefaultFillRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IsClosed.
+        /// </summary>
+        public static string OptionsDefaultIsClosed {
+            get {
+                return ResourceManager.GetString("OptionsDefaultIsClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IsFilled.
+        /// </summary>
+        public static string OptionsDefaultIsFilled {
+            get {
+                return ResourceManager.GetString("OptionsDefaultIsFilled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IsSmoothJoin.
+        /// </summary>
+        public static string OptionsDefaultIsSmoothJoin {
+            get {
+                return ResourceManager.GetString("OptionsDefaultIsSmoothJoin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IsStroked.
+        /// </summary>
+        public static string OptionsDefaultIsStroked {
+            get {
+                return ResourceManager.GetString("OptionsDefaultIsStroked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced.
+        /// </summary>
+        public static string OptionsHeaderAdvanced {
+            get {
+                return ResourceManager.GetString("OptionsHeaderAdvanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Defaults.
+        /// </summary>
+        public static string OptionsHeaderDefaults {
+            get {
+                return ResourceManager.GetString("OptionsHeaderDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General.
+        /// </summary>
+        public static string OptionsHeaderGeneral {
+            get {
+                return ResourceManager.GetString("OptionsHeaderGeneral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HelperStyle.
+        /// </summary>
+        public static string OptionsHelperStyle {
+            get {
+                return ResourceManager.GetString("OptionsHelperStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HitTreshold.
+        /// </summary>
+        public static string OptionsHitTreshold {
+            get {
+                return ResourceManager.GetString("OptionsHitTreshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MoveMode.
+        /// </summary>
+        public static string OptionsMoveMode {
+            get {
+                return ResourceManager.GetString("OptionsMoveMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PointShape.
+        /// </summary>
+        public static string OptionsPointShape {
+            get {
+                return ResourceManager.GetString("OptionsPointShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SelectionStyle.
+        /// </summary>
+        public static string OptionsSelectionStyle {
+            get {
+                return ResourceManager.GetString("OptionsSelectionStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SnapToGrid.
+        /// </summary>
+        public static string OptionsSnapToGrid {
+            get {
+                return ResourceManager.GetString("OptionsSnapToGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SnapX.
+        /// </summary>
+        public static string OptionsSnapX {
+            get {
+                return ResourceManager.GetString("OptionsSnapX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SnapY.
+        /// </summary>
+        public static string OptionsSnapY {
+            get {
+                return ResourceManager.GetString("OptionsSnapY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cycle Resolution (in milliseconds).
+        /// </summary>
+        public static string OptionsTooltipCycleResolution {
+            get {
+                return ResourceManager.GetString("OptionsTooltipCycleResolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Fill Rule (path).
+        /// </summary>
+        public static string OptionsTooltipDefaultFillRule {
+            get {
+                return ResourceManager.GetString("OptionsTooltipDefaultFillRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default is Closed (path).
+        /// </summary>
+        public static string OptionsTooltipDefaultIsClosed {
+            get {
+                return ResourceManager.GetString("OptionsTooltipDefaultIsClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default is Filled (all shapes).
+        /// </summary>
+        public static string OptionsTooltipDefaultIsFilled {
+            get {
+                return ResourceManager.GetString("OptionsTooltipDefaultIsFilled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default is Smooth Join (path).
+        /// </summary>
+        public static string OptionsTooltipDefaultIsSmoothJoin {
+            get {
+                return ResourceManager.GetString("OptionsTooltipDefaultIsSmoothJoin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default is Stroked (all shapes).
+        /// </summary>
+        public static string OptionsTooltipDefaultIsStroked {
+            get {
+                return ResourceManager.GetString("OptionsTooltipDefaultIsStroked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Helper Style.
+        /// </summary>
+        public static string OptionsTooltipHelperStyle {
+            get {
+                return ResourceManager.GetString("OptionsTooltipHelperStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hit Treshold.
+        /// </summary>
+        public static string OptionsTooltipHitTreshold {
+            get {
+                return ResourceManager.GetString("OptionsTooltipHitTreshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Mode.
+        /// </summary>
+        public static string OptionsTooltipMoveMode {
+            get {
+                return ResourceManager.GetString("OptionsTooltipMoveMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Point Shape.
+        /// </summary>
+        public static string OptionsTooltipPointShape {
+            get {
+                return ResourceManager.GetString("OptionsTooltipPointShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.CycleResolution = int.
+        /// </summary>
+        public static string OptionsTooltipScriptCycleResolution {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptCycleResolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.DefaultFillRule = enum XFillRule.
+        /// </summary>
+        public static string OptionsTooltipScriptDefaultFillRule {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptDefaultFillRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.DefaultIsClosed = bool.
+        /// </summary>
+        public static string OptionsTooltipScriptDefaultIsClosed {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptDefaultIsClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.DefaultIsFilled = bool.
+        /// </summary>
+        public static string OptionsTooltipScriptDefaultIsFilled {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptDefaultIsFilled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.DefaultIsSmoothJoin = bool.
+        /// </summary>
+        public static string OptionsTooltipScriptDefaultIsSmoothJoin {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptDefaultIsSmoothJoin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.DefaultIsStroked = bool.
+        /// </summary>
+        public static string OptionsTooltipScriptDefaultIsStroked {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptDefaultIsStroked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.HelperStyle = ShapeStyle.
+        /// </summary>
+        public static string OptionsTooltipScriptHelperStyle {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptHelperStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.HitTreshold = double.
+        /// </summary>
+        public static string OptionsTooltipScriptHitTreshold {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptHitTreshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.MoveMode = enum MoveMode.
+        /// </summary>
+        public static string OptionsTooltipScriptMoveMode {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptMoveMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.PointShape = Shape.
+        /// </summary>
+        public static string OptionsTooltipScriptPointShape {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptPointShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.SelectionStyle = ShapeStyle.
+        /// </summary>
+        public static string OptionsTooltipScriptSelectionStyle {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptSelectionStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.SnapToGrid = bool.
+        /// </summary>
+        public static string OptionsTooltipScriptSnapToGrid {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptSnapToGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.SnapX = double.
+        /// </summary>
+        public static string OptionsTooltipScriptSnapX {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptSnapX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.SnapY = double.
+        /// </summary>
+        public static string OptionsTooltipScriptSnapY {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptSnapY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.TryToConnect = bool.
+        /// </summary>
+        public static string OptionsTooltipScriptTryToConnect {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptTryToConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selection Style.
+        /// </summary>
+        public static string OptionsTooltipSelectionStyle {
+            get {
+                return ResourceManager.GetString("OptionsTooltipSelectionStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snap to Grid.
+        /// </summary>
+        public static string OptionsTooltipSnapToGrid {
+            get {
+                return ResourceManager.GetString("OptionsTooltipSnapToGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snap X.
+        /// </summary>
+        public static string OptionsTooltipSnapX {
+            get {
+                return ResourceManager.GetString("OptionsTooltipSnapX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snap Y.
+        /// </summary>
+        public static string OptionsTooltipSnapY {
+            get {
+                return ResourceManager.GetString("OptionsTooltipSnapY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Try to Connect.
+        /// </summary>
+        public static string OptionsTooltipTryToConnect {
+            get {
+                return ResourceManager.GetString("OptionsTooltipTryToConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TryToConnect.
+        /// </summary>
+        public static string OptionsTryToConnect {
+            get {
+                return ResourceManager.GetString("OptionsTryToConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Code.
         /// </summary>
         public static string WindowTitleCode {
@@ -3006,7 +3438,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Project1.
+        ///   Looks up a localized string similar to Project.
         /// </summary>
         public static string WindowTitleProject {
             get {

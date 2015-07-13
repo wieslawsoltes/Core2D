@@ -5,7 +5,8 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:core="clr-namespace:Test2d;assembly=Test2d"
                     xmlns:converters="clr-namespace:Test.Converters"
-                    xmlns:controls="clr-namespace:Test.Controls">
+                    xmlns:controls="clr-namespace:Test.Controls"
+                    xmlns:p="clr-namespace:Test2d.UI.Wpf.Properties">
     <!-- converters -->
     <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
     <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
@@ -2559,7 +2560,7 @@
     </ContextMenu>
     <DataTemplate DataType="{x:Type core:Options}">
         <TabControl>
-            <TabItem Header="General">
+            <TabItem Header="{x:Static p:Resources.OptionsHeaderGeneral}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -2576,7 +2577,7 @@
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock 
-                        Text="SnapToGrid" 
+                        Text="{x:Static p:Resources.OptionsSnapToGrid}" 
                         Margin="5,2,5,2" 
                         Grid.Row="0"
                         Grid.Column="0" 
@@ -2584,7 +2585,7 @@
                         VerticalAlignment="Center">
                     </TextBlock>
                     <TextBlock 
-                        Text="SnapX" 
+                        Text="{x:Static p:Resources.OptionsSnapX}" 
                         Margin="5,2,5,2" 
                         Grid.Row="1" 
                         Grid.Column="0" 
@@ -2592,7 +2593,7 @@
                         VerticalAlignment="Center">
                     </TextBlock>
                     <TextBlock 
-                        Text="SnapY" 
+                        Text="{x:Static p:Resources.OptionsSnapY}" 
                         Margin="5,2,5,2" 
                         Grid.Row="2" 
                         Grid.Column="0" 
@@ -2600,7 +2601,7 @@
                         VerticalAlignment="Center">
                     </TextBlock>
                     <TextBlock 
-                        Text="HitTreshold" 
+                        Text="{x:Static p:Resources.OptionsHitTreshold}" 
                         Margin="5,2,5,2" 
                         Grid.Row="3" 
                         Grid.Column="0" 
@@ -2608,7 +2609,7 @@
                         VerticalAlignment="Center">
                     </TextBlock>
                     <TextBlock 
-                        Text="MoveMode" 
+                        Text="{x:Static p:Resources.OptionsMoveMode}" 
                         Margin="5,2,5,2" 
                         Grid.Row="4"
                         Grid.Column="0" 
@@ -2616,7 +2617,7 @@
                         VerticalAlignment="Center">
                     </TextBlock>
                     <TextBlock 
-                        Text="TryToConnect" 
+                        Text="{x:Static p:Resources.OptionsTryToConnect}" 
                         Margin="5,2,5,2" 
                         Grid.Row="5"
                         Grid.Column="0" 
@@ -2624,7 +2625,7 @@
                         VerticalAlignment="Center">
                     </TextBlock>
                     <TextBlock 
-                        Text="CycleResolution" 
+                        Text="{x:Static p:Resources.OptionsCycleResolution}" 
                         Margin="5,2,5,2" 
                         Grid.Row="6"
                         Grid.Column="0" 
@@ -2638,6 +2639,12 @@
                         Grid.Column="1" 
                         Grid.ColumnSpan="2"
                         Margin="5,2,5,2">
+                        <CheckBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipSnapToGrid}"/>
+                                <TextBlock Text="{x:Static p:Resources.OptionsTooltipScriptSnapToGrid}"/>
+                            </StackPanel>
+                        </CheckBox.ToolTip>
                     </CheckBox>
                     <TextBox 
                         Text="{Binding SnapX, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
@@ -2648,6 +2655,12 @@
                         Grid.ColumnSpan="2"
                         TextAlignment="Center" 
                         VerticalAlignment="Center">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipSnapX}"/>
+                                <TextBlock Text="{x:Static p:Resources.OptionsTooltipScriptSnapX}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                     <TextBox 
                         Text="{Binding SnapY, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
@@ -2658,6 +2671,12 @@
                         Grid.ColumnSpan="2"
                         TextAlignment="Center" 
                         VerticalAlignment="Center">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipSnapY}"/>
+                                <TextBlock Text="{x:Static p:Resources.OptionsTooltipScriptSnapY}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                     <TextBox 
                         Text="{Binding HitTreshold, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
@@ -2668,6 +2687,12 @@
                         Grid.ColumnSpan="2"
                         TextAlignment="Center" 
                         VerticalAlignment="Center">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipHitTreshold}"/>
+                                <TextBlock Text="{x:Static p:Resources.OptionsTooltipScriptHitTreshold}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                     <ComboBox 
                         ItemsSource="{Binding Source={StaticResource ResourceKey=MoveModeValues}}" 
@@ -2676,6 +2701,12 @@
                         Grid.Row="4" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                        <ComboBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipMoveMode}"/>
+                                <TextBlock Text="{x:Static p:Resources.OptionsTooltipScriptMoveMode}"/>
+                            </StackPanel>
+                        </ComboBox.ToolTip>
                     </ComboBox>
                     <CheckBox 
                         Content=""
@@ -2684,6 +2715,12 @@
                         Grid.Column="1" 
                         Grid.ColumnSpan="2"
                         Margin="5,2,5,2">
+                        <CheckBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipTryToConnect}"/>
+                                <TextBlock Text="{x:Static p:Resources.OptionsTooltipScriptTryToConnect}"/>
+                            </StackPanel>
+                        </CheckBox.ToolTip>
                     </CheckBox>
                     <TextBox 
                         Text="{Binding CycleResolution, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
@@ -2694,10 +2731,16 @@
                         Grid.ColumnSpan="2"
                         TextAlignment="Center" 
                         VerticalAlignment="Center">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipCycleResolution}"/>
+                                <TextBlock Text="{x:Static p:Resources.OptionsTooltipScriptCycleResolution}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Defaults">
+            <TabItem Header="{x:Static p:Resources.OptionsHeaderDefaults}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -2712,7 +2755,7 @@
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock 
-                        Text="IsStroked" 
+                        Text="{x:Static p:Resources.OptionsDefaultIsStroked}" 
                         Margin="5,2,5,2" 
                         Grid.Row="0"
                         Grid.Column="0" 
@@ -2720,7 +2763,7 @@
                         VerticalAlignment="Center">
                     </TextBlock>
                     <TextBlock 
-                        Text="IsFilled" 
+                        Text="{x:Static p:Resources.OptionsDefaultIsFilled}" 
                         Margin="5,2,5,2" 
                         Grid.Row="1"
                         Grid.Column="0" 
@@ -2728,7 +2771,7 @@
                         VerticalAlignment="Center">
                     </TextBlock>
                     <TextBlock 
-                        Text="IsClosed" 
+                        Text="{x:Static p:Resources.OptionsDefaultIsClosed}" 
                         Margin="5,2,5,2" 
                         Grid.Row="2"
                         Grid.Column="0" 
@@ -2736,7 +2779,7 @@
                         VerticalAlignment="Center">
                     </TextBlock>
                     <TextBlock 
-                        Text="IsSmoothJoin" 
+                        Text="{x:Static p:Resources.OptionsDefaultIsSmoothJoin}" 
                         Margin="5,2,5,2" 
                         Grid.Row="3"
                         Grid.Column="0" 
@@ -2744,7 +2787,7 @@
                         VerticalAlignment="Center">
                     </TextBlock>
                     <TextBlock 
-                        Text="FillRule" 
+                        Text="{x:Static p:Resources.OptionsDefaultFillRule}" 
                         Margin="5,2,5,2" 
                         Grid.Row="4"
                         Grid.Column="0" 
@@ -2758,6 +2801,12 @@
                         Grid.Column="1" 
                         Grid.ColumnSpan="2"
                         Margin="5,2,5,2">
+                        <CheckBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipDefaultIsStroked}"/>
+                                <TextBlock Text="{x:Static p:Resources.OptionsTooltipScriptDefaultIsStroked}"/>
+                            </StackPanel>
+                        </CheckBox.ToolTip>
                     </CheckBox>
                     <CheckBox 
                         Content=""
@@ -2766,6 +2815,12 @@
                         Grid.Column="1" 
                         Grid.ColumnSpan="2"
                         Margin="5,2,5,2">
+                        <CheckBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipDefaultIsFilled}"/>
+                                <TextBlock Text="{x:Static p:Resources.OptionsTooltipScriptDefaultIsFilled}"/>
+                            </StackPanel>
+                        </CheckBox.ToolTip>
                     </CheckBox>
                     <CheckBox 
                         Content=""
@@ -2774,6 +2829,12 @@
                         Grid.Column="1" 
                         Grid.ColumnSpan="2"
                         Margin="5,2,5,2">
+                        <CheckBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipDefaultIsClosed}"/>
+                                <TextBlock Text="{x:Static p:Resources.OptionsTooltipScriptDefaultIsClosed}"/>
+                            </StackPanel>
+                        </CheckBox.ToolTip>
                     </CheckBox>
                     <CheckBox 
                         Content=""
@@ -2782,6 +2843,12 @@
                         Grid.Column="1" 
                         Grid.ColumnSpan="2"
                         Margin="5,2,5,2">
+                        <CheckBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipDefaultIsSmoothJoin}"/>
+                                <TextBlock Text="{x:Static p:Resources.OptionsTooltipScriptDefaultIsSmoothJoin}"/>
+                            </StackPanel>
+                        </CheckBox.ToolTip>
                     </CheckBox>
                     <ComboBox 
                         ItemsSource="{Binding Source={StaticResource ResourceKey=XFillRuleValues}}" 
@@ -2790,18 +2857,42 @@
                         Grid.Row="4" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                        <ComboBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipDefaultFillRule}"/>
+                                <TextBlock Text="{x:Static p:Resources.OptionsTooltipScriptDefaultFillRule}"/>
+                            </StackPanel>
+                        </ComboBox.ToolTip>
                     </ComboBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Advanced">
+            <TabItem Header="{x:Static p:Resources.OptionsHeaderAdvanced}">
                 <StackPanel>
-                    <Expander Header="PointShape">
+                    <Expander Header="{x:Static p:Resources.OptionsPointShape}">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipPointShape}"/>
+                                <TextBlock Text="{x:Static p:Resources.OptionsTooltipScriptPointShape}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <ContentControl Content="{Binding PointShape}"/>
                     </Expander>
-                    <Expander Header="SelectionStyle">
+                    <Expander Header="{x:Static p:Resources.OptionsSelectionStyle}">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipSelectionStyle}"/>
+                                <TextBlock Text="{x:Static p:Resources.OptionsTooltipScriptSelectionStyle}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <ContentControl Content="{Binding SelectionStyle}"/>
                     </Expander>
-                    <Expander Header="HelperStyle">
+                    <Expander Header="{x:Static p:Resources.OptionsHelperStyle}">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipHelperStyle}"/>
+                                <TextBlock Text="{x:Static p:Resources.OptionsTooltipScriptHelperStyle}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <ContentControl Content="{Binding HelperStyle}"/>
                     </Expander>
                 </StackPanel>
