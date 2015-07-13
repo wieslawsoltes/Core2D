@@ -1285,7 +1285,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Not Applicable.
         /// </summary>
         public static string MenuTooltipScriptData {
             get {
@@ -1312,7 +1312,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Not Applicable.
         /// </summary>
         public static string MenuTooltipScriptEdit {
             get {
@@ -1384,7 +1384,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Not Applicable.
         /// </summary>
         public static string MenuTooltipScriptEditOrder {
             get {
@@ -1492,7 +1492,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Not Applicable.
         /// </summary>
         public static string MenuTooltipScriptFile {
             get {
@@ -1510,7 +1510,9 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Context.ExportAsPdf(@&quot;C:\Project.pdf&quot;, Project)
+        ///Script: Context.ExportAsPdf(@&quot;C:\Document.pdf&quot;, Document)
+        ///Script: Context.ExportAsPdf(@&quot;C:\Container.pdf&quot;, Container).
         /// </summary>
         public static string MenuTooltipScriptFileExport {
             get {
@@ -1717,7 +1719,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Not Applicable.
         /// </summary>
         public static string MenuTooltipScriptFileRecent {
             get {
@@ -1744,7 +1746,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Not Applicable.
         /// </summary>
         public static string MenuTooltipScriptFileSubMenuExport {
             get {
@@ -1753,7 +1755,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Not Applicable.
         /// </summary>
         public static string MenuTooltipScriptFileSubMenuImport {
             get {
@@ -1762,7 +1764,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Not Applicable.
         /// </summary>
         public static string MenuTooltipScriptOptions {
             get {
@@ -1807,7 +1809,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Not Applicable.
         /// </summary>
         public static string MenuTooltipScriptScript {
             get {
@@ -1825,7 +1827,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Not Applicable.
         /// </summary>
         public static string MenuTooltipScriptScripts {
             get {
@@ -1834,7 +1836,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Not Applicable.
         /// </summary>
         public static string MenuTooltipScriptSimulation {
             get {
@@ -1888,7 +1890,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Not Applicable.
         /// </summary>
         public static string MenuTooltipScriptTemplate {
             get {
@@ -1897,7 +1899,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Not Applicable.
         /// </summary>
         public static string MenuTooltipScriptTool {
             get {
@@ -2014,7 +2016,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Not Applicable.
         /// </summary>
         public static string MenuTooltipScriptView {
             get {
@@ -2194,7 +2196,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Not Applicable.
         /// </summary>
         public static string MenuTooltipScriptViewZoom {
             get {
@@ -2221,7 +2223,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Script: Not Available.
+        ///   Looks up a localized string similar to Script: Not Applicable.
         /// </summary>
         public static string MenuTooltipScriptWindow {
             get {

@@ -478,7 +478,7 @@
     <value>Recent</value>
   </data>
   <data name="MenuTooltipScriptFile" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuTooltipScriptFileNew" xml:space="preserve">
     <value>Script: Context.OnNew(null)</value>
@@ -493,10 +493,12 @@
     <value>Script: Context.Save(string path)</value>
   </data>
   <data name="MenuTooltipScriptFileExport" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Context.ExportAsPdf(@"C:\Project.pdf", Project)
+Script: Context.ExportAsPdf(@"C:\Document.pdf", Document)
+Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   </data>
   <data name="MenuTooltipScriptFileSubMenuImport" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuTooltipScriptFileImportStyle" xml:space="preserve">
     <value>Script: Context.ImportObject(string path, object item, ImportType.Style)</value>
@@ -529,7 +531,7 @@
     <value>Script: Context.ImportObject(string path, object item, ImportType.Templates)</value>
   </data>
   <data name="MenuTooltipScriptFileSubMenuExport" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuTooltipScriptFileExportStyle" xml:space="preserve">
     <value>Script: Context.ExportObject(string path, object item, ExportType.Style)</value>
@@ -562,7 +564,7 @@
     <value>Script: Context.ExportObject(string path, object item, ExportType.Templates)</value>
   </data>
   <data name="MenuTooltipScriptFileRecent" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuViewZoom" xml:space="preserve">
     <value>_Zoom</value>
@@ -700,10 +702,10 @@
     <value>Properties Window</value>
   </data>
   <data name="MenuTooltipScriptView" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuTooltipScriptViewZoom" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuTooltipScriptViewZoomReset" xml:space="preserve">
     <value>Script: Not Available</value>
@@ -844,7 +846,7 @@
     <value>Image Tool</value>
   </data>
   <data name="MenuTooltipScriptTool" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuTooltipScriptToolNone" xml:space="preserve">
     <value>Script: Context.OnToolNone()</value>
@@ -898,7 +900,7 @@
     <value>Export Data</value>
   </data>
   <data name="MenuTooltipScriptData" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuTooltipScriptDataImport" xml:space="preserve">
     <value>Script: Context.ImportData(string path)</value>
@@ -910,13 +912,13 @@
     <value>Template</value>
   </data>
   <data name="MenuTooltipScriptTemplate" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuTooltipEdit" xml:space="preserve">
     <value>Edit</value>
   </data>
   <data name="MenuTooltipScriptEdit" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuScriptEvaluate" xml:space="preserve">
     <value>_Evaluate...</value>
@@ -928,7 +930,7 @@
     <value>Evaluate Script</value>
   </data>
   <data name="MenuTooltipScriptScript" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuTooltipScriptScriptEvaluate" xml:space="preserve">
     <value>Script: Context.Eval(string path)</value>
@@ -937,7 +939,7 @@
     <value>Scripts</value>
   </data>
   <data name="MenuTooltipScriptScripts" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuOptionsDefaultIsFilled" xml:space="preserve">
     <value>Default is _Filled</value>
@@ -961,7 +963,7 @@
     <value>Try to Connect</value>
   </data>
   <data name="MenuTooltipScriptOptions" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuTooltipScriptOptionsDefaultIsFilled" xml:space="preserve">
     <value>Script: Context.OnToggleDefaultIsFilled()</value>
@@ -1006,7 +1008,7 @@
     <value>Tick Simulation</value>
   </data>
   <data name="MenuTooltipScriptSimulation" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuTooltipScriptSimulationStart" xml:space="preserve">
     <value>Script: Context.OnStartSimulation()</value>
@@ -1045,7 +1047,7 @@
     <value>Reset Window Layout</value>
   </data>
   <data name="MenuTooltipScriptWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuTooltipScriptWindowLoadLayout" xml:space="preserve">
     <value>Script: Not Available</value>
@@ -1066,7 +1068,7 @@
     <value>Exit</value>
   </data>
   <data name="MenuTooltipScriptEditOrder" xml:space="preserve">
-    <value>Script: Not Available</value>
+    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuTooltipScriptFileExit" xml:space="preserve">
     <value>Script: Not Available</value>
