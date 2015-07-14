@@ -2898,10 +2898,15 @@
                 </StackPanel>
             </TabItem>
         </TabControl>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type core:Project}">
+    </DataTemplate>    <DataTemplate DataType="{x:Type core:Project}">
         <StackPanel>
-            <Expander Header="Options" IsExpanded="False">
+            <Expander Header="{x:Static p:Resources.ProjectOptions}" IsExpanded="False">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ProjectTooltipOptions}"/>
+                        <TextBlock Text="{x:Static p:Resources.ProjectTooltipScriptOptions}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Options}"/>
             </Expander>
             <Grid>
@@ -2920,6 +2925,12 @@
                          Grid.ColumnSpan="2"
                          TextAlignment="Left" 
                          VerticalAlignment="Center">
+                    <TextBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ProjectTooltipName}"/>
+                            <TextBlock Text="{x:Static p:Resources.ProjectTooltipScriptName}"/>
+                        </StackPanel>
+                    </TextBox.ToolTip>
                 </TextBox>
             </Grid>
         </StackPanel>
@@ -2934,7 +2945,7 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" 
+                <TextBlock Text="{x:Static p:Resources.DocumentName}" 
                            Margin="5,2,5,2" 
                            Grid.Row="0" 
                            Grid.Column="0" 
@@ -2948,6 +2959,12 @@
                          Grid.Column="1" 
                          TextAlignment="Left" 
                          VerticalAlignment="Center">
+                    <TextBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.DocumentTooltipName}"/>
+                            <TextBlock Text="{x:Static p:Resources.DocumentTooltipScriptName}"/>
+                        </StackPanel>
+                    </TextBox.ToolTip>
                 </TextBox>
             </Grid>
         </StackPanel>
@@ -2962,7 +2979,7 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" 
+                <TextBlock Text="{x:Static p:Resources.ContainerName}" 
                            Margin="5,2,5,2" 
                            Grid.Row="0" 
                            Grid.Column="0" 
@@ -2976,16 +2993,34 @@
                          Grid.Column="1" 
                          TextAlignment="Left" 
                          VerticalAlignment="Center">
+                    <TextBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipName}"/>
+                            <TextBlock Text="{x:Static p:Resources.ContainerTooltipScriptName}"/>
+                        </StackPanel>
+                    </TextBox.ToolTip>
                 </TextBox>
             </Grid>
-            <Expander Header="Properties">
+            <Expander Header="{x:Static p:Resources.ContainerProperties}">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipProperties}"/>
+                        <TextBlock Text="{x:Static p:Resources.ContainerTooltipScriptProperties}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Template">
+            <Expander Header="{x:Static p:Resources.ContainerTemplate}">
                 <Grid>
                     <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.Templates, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                                 SelectedItem="{Binding Path=DataContext.Template, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" 
                                 Margin="5,2,5,2">
+                        <ComboBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipTemplate}"/>
+                                <TextBlock Text="{x:Static p:Resources.ContainerTooltipScriptTemplate}"/>
+                            </StackPanel>
+                        </ComboBox.ToolTip>
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
@@ -2994,7 +3029,7 @@
                     </ComboBox>
                 </Grid>
             </Expander>
-            <Expander Header="Size">
+            <Expander Header="{x:Static p:Resources.ContainerSize}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -3005,14 +3040,14 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Width" 
+                    <TextBlock Text="{x:Static p:Resources.ContainerWidth}" 
                                 Margin="5,2,5,2" 
                                 Grid.Row="0" 
                                 Grid.Column="0" 
                                 TextAlignment="Left" 
                                 VerticalAlignment="Center">
                     </TextBlock>
-                    <TextBlock Text="Height" 
+                    <TextBlock Text="{x:Static p:Resources.ContainerHeight}" 
                                 Margin="5,2,5,2" 
                                 Grid.Row="1" 
                                 Grid.Column="0" 
@@ -3027,6 +3062,12 @@
                                 Grid.ColumnSpan="2"
                                 TextAlignment="Center" 
                                 VerticalAlignment="Center">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipWidth}"/>
+                                <TextBlock Text="{x:Static p:Resources.ContainerTooltipScriptWidth}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                     <TextBox Text="{Binding Height, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                                 BorderBrush="{x:Null}" 
@@ -3036,10 +3077,22 @@
                                 Grid.ColumnSpan="2"
                                 TextAlignment="Center" 
                                 VerticalAlignment="Center">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipHeight}"/>
+                                <TextBlock Text="{x:Static p:Resources.ContainerTooltipScriptHeight}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                 </Grid>
             </Expander>
-            <Expander Header="Background">
+            <Expander Header="{x:Static p:Resources.ContainerBackground}">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipBackground}"/>
+                        <TextBlock Text="{x:Static p:Resources.ContainerTooltipScriptBackground}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Background}"/>
             </Expander>
         </StackPanel>

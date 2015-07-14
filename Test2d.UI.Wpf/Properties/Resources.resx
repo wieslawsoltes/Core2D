@@ -322,7 +322,7 @@
     <value>_Export...</value>
   </data>
   <data name="MenuFileSubMenuImport" xml:space="preserve">
-    <value>Impo_rt</value>
+    <value>I_mport</value>
   </data>
   <data name="MenuFileImportStyle" xml:space="preserve">
     <value>_Style...</value>
@@ -481,7 +481,7 @@
     <value>Script: Not Applicable</value>
   </data>
   <data name="MenuTooltipScriptFileNew" xml:space="preserve">
-    <value>Script: Context.OnNew(null)</value>
+    <value>Script: Context.New()</value>
   </data>
   <data name="MenuTooltipScriptFileOpen" xml:space="preserve">
     <value>Script: Context.Open(string path)</value>
@@ -1273,5 +1273,98 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   </data>
   <data name="OptionsTooltipTryToConnect" xml:space="preserve">
     <value>Try to Connect</value>
+  </data>
+  <data name="ProjectOptions" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ProjectTooltipName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ProjectTooltipScriptName" xml:space="preserve">
+    <value>Script: Project.Name = string</value>
+  </data>
+  <data name="DocumentName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="DocumentTooltipName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="DocumentTooltipScriptName" xml:space="preserve">
+    <value>Script: Document.Name = string</value>
+  </data>
+  <data name="ContainerName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ContainerProperties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="ContainerTemplate" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="ContainerSize" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="ContainerWidth" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="ContainerHeight" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="ContainerBackground" xml:space="preserve">
+    <value>Background</value>
+  </data>
+  <data name="ContainerTooltipName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ContainerTooltipTemplate" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="ContainerTooltipWidth" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="ContainerTooltipHeight" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="ContainerTooltipScriptName" xml:space="preserve">
+    <value>Script: Container.Name = string</value>
+  </data>
+  <data name="ContainerTooltipScriptTemplate" xml:space="preserve">
+    <value>Script: Container.Template = Conainer</value>
+  </data>
+  <data name="ContainerTooltipScriptWidth" xml:space="preserve">
+    <value>Script: Container.Width = double</value>
+  </data>
+  <data name="ContainerTooltipScriptHeight" xml:space="preserve">
+    <value>Script: Container.Height = double</value>
+  </data>
+  <data name="ProjectTooltipOptions" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="ProjectTooltipScriptOptions" xml:space="preserve">
+    <value>Script: Project.Options = Options</value>
+  </data>
+  <data name="ContainerTooltipProperties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="ContainerTooltipScriptProperties" xml:space="preserve">
+    <value>Script: Not Applicable</value>
+  </data>
+  <data name="ContainerTooltipBackground" xml:space="preserve">
+    <value>Background</value>
+  </data>
+  <data name="ContainerTooltipScriptBackground" xml:space="preserve">
+    <value>Script: Container.Background = ArgbColor</value>
+  </data>
+  <data name="MenuFileClose" xml:space="preserve">
+    <value>_Close</value>
+  </data>
+  <data name="MenuTooltipFileClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="MenuTooltipScriptFileClose" xml:space="preserve">
+    <value>Script: Context.Close()</value>
   </data>
 </root>

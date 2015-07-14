@@ -4,6 +4,7 @@
 MenuFile
 	MenuFileNew
 	MenuFileOpen
+	MenuFileClose
 	MenuFileSave
 	MenuFileSaveAs
 	MenuFileExport
@@ -35,6 +36,7 @@ MenuFile
 MenuTooltipFile
 	MenuTooltipFileNew
 	MenuTooltipFileOpen
+	MenuTooltipFileClose
 	MenuTooltipFileSave
 	MenuTooltipFileSaveAs
 	MenuTooltipFileExport
@@ -66,6 +68,7 @@ MenuTooltipFile
 MenuTooltipScriptFile
 	MenuTooltipScriptFileNew
 	MenuTooltipScriptFileOpen
+	MenuTooltipScriptFileClose
 	MenuTooltipScriptFileSave
 	MenuTooltipScriptFileSaveAs
 	MenuTooltipScriptFileExport
@@ -448,3 +451,46 @@ OptionsTooltipScriptPointShape
 OptionsTooltipScriptSelectionStyle
 OptionsTooltipScriptHelperStyle
 
+[Type: Project]
+
+ProjectOptions
+
+ProjectName
+
+ProjectTooltipName
+ProjectTooltipOptions
+
+ProjectTooltipScriptName
+ProjectTooltipScriptOptions
+
+[Type: Document]
+
+DocumentName
+
+DocumentTooltipName
+
+DocumentTooltipScriptName
+
+[Type: Container]
+
+ContainerName
+ContainerProperties
+ContainerTemplate
+ContainerSize
+ContainerWidth
+ContainerHeight
+ContainerBackground
+
+ContainerTooltipName
+ContainerTooltipProperties
+ContainerTooltipTemplate
+ContainerTooltipWidth
+ContainerTooltipHeight
+ContainerTooltipBackground
+
+ContainerTooltipScriptName
+ContainerTooltipScriptProperties
+ContainerTooltipScriptTemplate
+ContainerTooltipScriptWidth
+ContainerTooltipScriptHeight
+ContainerTooltipScriptBackground
