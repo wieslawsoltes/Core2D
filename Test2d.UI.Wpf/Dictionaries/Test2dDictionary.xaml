@@ -2898,7 +2898,8 @@
                 </StackPanel>
             </TabItem>
         </TabControl>
-    </DataTemplate>    <DataTemplate DataType="{x:Type core:Project}">
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type core:Project}">
         <StackPanel>
             <Expander Header="{x:Static p:Resources.ProjectOptions}" IsExpanded="False">
                 <Expander.ToolTip>
