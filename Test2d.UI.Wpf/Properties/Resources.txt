@@ -1,5 +1,5 @@
 
-[File Menu]
+[Menu: File]
 
 MenuFile
 	MenuFileNew
@@ -97,7 +97,7 @@ MenuTooltipScriptFile
 	MenuTooltipScriptFileRecent
 	MenuTooltipScriptFileExit
 
-[Edit Menu]
+[Menu: Edit]
 
 MenuEdit
 	MenuEditUndo
@@ -159,7 +159,7 @@ MenuTooltipScriptEdit
 		MenuTooltipScriptEditOrderSendBackward
 		MenuTooltipScriptEditOrderSendToBack
 
-[View Menu]
+[Menu: View]
 
 MenuView
 	MenuViewZoom
@@ -233,7 +233,7 @@ MenuTooltipScriptView
 	MenuTooltipScriptViewStyleWindow
 	MenuTooltipScriptViewPropertiesWindow
 
-[Tool Menu]
+[Menu: Tool]
 
 MenuTool
 	MenuToolNone
@@ -278,7 +278,7 @@ MenuTooltipScriptTool
 	MenuTooltipScriptToolText
 	MenuTooltipScriptToolImage
 
-[Data Menu]
+[Menu: Data]
 
 MenuData
 	MenuDataImport
@@ -292,7 +292,7 @@ MenuTooltipScriptData
 	MenuTooltipScriptDataImport
 	MenuTooltipScriptDataExport
 
-[Template Menu]
+[Menu: Template]
 
 MenuTemplate
 
@@ -300,7 +300,7 @@ MenuTooltipTemplate
 
 MenuTooltipScriptTemplate
 
-[Script Menu]
+[Menu: Script]
 
 MenuScript
 	MenuScriptEvaluate
@@ -311,7 +311,7 @@ MenuTooltipScript
 MenuTooltipScriptScript
 	MenuTooltipScriptScriptEvaluate
 
-[Scripts Menu]
+[Menu: Scripts]
 
 MenuScripts
 
@@ -319,7 +319,7 @@ MenuTooltipScripts
 
 MenuTooltipScriptScripts
 
-[Options Menu]
+[Menu: Options]
 
 MenuOptions
 	MenuOptionsDefaultIsFilled
@@ -336,7 +336,7 @@ MenuTooltipScriptOptions
 	MenuTooltipScriptOptionsSnapToGrid
 	MenuTooltipScriptOptionsTryToConnect
 
-[Simulation Menu]
+[Menu: Simulation]
 
 MenuSimulation
 	MenuSimulationStart
@@ -359,7 +359,7 @@ MenuTooltipScriptSimulation
 	MenuTooltipScriptSimulationPause
 	MenuTooltipScriptSimulationTick
 
-[Window Menu]
+[Menu: Window]
 
 MenuWindow
 	MenuWindowLoadLayout
@@ -376,7 +376,7 @@ MenuTooltipScriptWindow
 	MenuTooltipScriptWindowSaveLayout
 	MenuTooltipScriptWindowResetLayout
 
-[Main Window]
+[Window: Main]
 
 WindowTitleProject
 WindowTitleTemplates
@@ -398,87 +398,247 @@ WindowTitleScript
 WindowTitleScripts
 WindowTitleDocument
 
-[Code Control]
+[Control: Code]
 
 TODO
 
-[Container Control]
+[Control: Container]
 
 TODO
 
-[Database Control]
+[Control: Database]
 
 TODO
 
-[Databases Control]
+[Control: Databases]
 
 TODO
 
-[Data Control]
+[Control: Data]
 
 TODO
 
-[Document Control]
+[Control: Document]
 
 TODO
 
-[Groups Control]
+[Control: Groups]
 
 TODO
 
-[Layers Control]
+[Control: Layers]
 
 TODO
 
-[Menu Control]
+[Control: Menu]
 
 TODO
 
-[Path Control]
+[Control: Path]
 
 TODO
 
-[Project Control]
+[Control: Project]
 
 TODO
 
-[Records Control]
+[Control: Records]
 
 TODO
 
-[Script Control]
+[Control: Script]
 
 TODO
 
-[Scripts Control]
+[Control: Scripts]
 
 TODO
 
-[Shape Control]
+[Control: Shape]
 
 TODO
 
-[Shapes Control]
+[Control: Shapes]
 
 TODO
 
-[State Control]
+[Control: State]
 
 TODO
 
-[Style Control]
+[Control: Style]
 
 TODO
 
-[Styles Control]
+[Control: Styles]
 
 TODO
 
-[Template Control]
+[Control: Template]
 
 TODO
 
-[Templates Control]
+[Control: Templates]
+
+TODO
+
+[Type: XPathSize]
+
+TODO
+
+[Type: XPathRect]
+
+TODO
+
+[Type: XArcSegment]
+
+TODO
+
+[Type: XBezierSegment]
+
+TODO
+
+[Type: XLineSegment]
+
+TODO
+
+[Type: XPolyBezierSegment]
+
+TODO
+
+[Type: XPolyLineSegment]
+
+TODO
+
+[Type: XPolyQuadraticBezierSegment]
+
+TODO
+
+[Type: XQuadraticBezierSegment]
+
+TODO
+
+[Type: XPathFigure]
+
+TODO
+
+[Type: XPathGeometry]
+
+TODO
+
+[Template: Name]
+
+TODO
+
+[Template: Style]
+
+TODO
+
+[Template: State]
+
+TODO
+
+[Template: IsStroked]
+
+TODO
+
+[Template: IsFilled]
+
+TODO
+
+[Template: Text]
+
+TODO
+
+[Template: FontStyle]
+
+TODO
+
+[Template: MaxLength]
+
+TODO
+
+[Template: StartState]
+
+TODO
+
+[Template: EndState]
+
+TODO
+
+[Type: ArgbColor]
+
+TODO
+
+[Template: BaseStyle]
+
+TODO
+
+[Type: ArrowStyle]
+
+TODO
+
+[Type: TextStyle]
+
+TODO
+
+[Type: LineStyle]
+
+TODO
+
+[Type: ShapeStyle]
+
+TODO
+
+[Template: Code]
+
+TODO
+
+[Template: BindingsMenu]
+
+TODO
+
+[Template: Bindings]
+
+TODO
+
+[Template: PropertiesMenu]
+
+TODO
+
+[Template: Properties]
+
+TODO
+
+[Template: ShapesProperties]
+
+TODO
+
+[Template: RecordMenu]
+
+TODO
+
+[Type: Record]
+
+TODO
+
+[Template: Record]
+
+TODO
+
+[Template: ColumnsMenu]
+
+TODO
+
+[Template: Columns]
+
+TODO
+
+[Template: Database]
+
+TODO
+
+[Template: Data]
 
 TODO
 
