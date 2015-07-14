@@ -917,6 +917,17 @@
                     <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptOptions}"/>
                 </StackPanel>
             </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuOptionsDefaultIsStroked}" 
+                      IsCheckable="True" 
+                      IsChecked="{Binding Editor.Project.Options.DefaultIsStroked, Mode=OneWay}"
+                      Command="{Binding Commands.DefaultIsStrokedCommand}" InputGestureText="K">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipOptionsDefaultIsStroked}"/>
+                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptOptionsDefaultIsStroked}"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuOptionsDefaultIsFilled}" 
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.Project.Options.DefaultIsFilled, Mode=OneWay}"
@@ -925,6 +936,29 @@
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipOptionsDefaultIsFilled}"/>
                         <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptOptionsDefaultIsFilled}"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="{x:Static p:Resources.MenuOptionsDefaultIsClosed}" 
+                      IsCheckable="True" 
+                      IsChecked="{Binding Editor.Project.Options.DefaultIsClosed, Mode=OneWay}"
+                      Command="{Binding Commands.DefaultIsClosedCommand}" InputGestureText="D">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipOptionsDefaultIsClosed}"/>
+                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptOptionsDefaultIsClosed}"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
+            <MenuItem Header="{x:Static p:Resources.MenuOptionsDefaultIsSmoothJoin}" 
+                      IsCheckable="True" 
+                      IsChecked="{Binding Editor.Project.Options.DefaultIsSmoothJoin, Mode=OneWay}"
+                      Command="{Binding Commands.DefaultIsSmoothJoinCommand}" InputGestureText="J">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipOptionsDefaultIsSmoothJoin}"/>
+                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptOptionsDefaultIsSmoothJoin}"/>
                     </StackPanel>
                 </MenuItem.ToolTip>
             </MenuItem>

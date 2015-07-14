@@ -273,7 +273,19 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public ICommand DefaultIsStrokedCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand DefaultIsFilledCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand DefaultIsClosedCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand DefaultIsSmoothJoinCommand { get; set; }
         /// <summary>
         /// 
         /// </summary>

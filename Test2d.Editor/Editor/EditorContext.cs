@@ -3767,9 +3767,24 @@ namespace Test2d
                         (path) => Eval(path),
                         (path) => true);
 
+                _commands.DefaultIsStrokedCommand =
+                    new DelegateCommand(
+                        () => OnToggleDefaultIsStroked(),
+                        () => IsEditMode());
+
                 _commands.DefaultIsFilledCommand =
                     new DelegateCommand(
                         () => OnToggleDefaultIsFilled(),
+                        () => IsEditMode());
+
+                _commands.DefaultIsClosedCommand =
+                    new DelegateCommand(
+                        () => OnToggleDefaultIsClosed(),
+                        () => IsEditMode());
+
+                _commands.DefaultIsSmoothJoinCommand =
+                    new DelegateCommand(
+                        () => OnToggleDefaultIsSmoothJoin(),
                         () => IsEditMode());
 
                 _commands.SnapToGridCommand =
@@ -4158,7 +4173,10 @@ namespace Test2d
             (_commands.EvalCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.EvalScriptCommand as DelegateCommand<string>).RaiseCanExecuteChanged();
 
+            (_commands.DefaultIsStrokedCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.DefaultIsFilledCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.DefaultIsClosedCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.DefaultIsSmoothJoinCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.SnapToGridCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.TryToConnectCommand as DelegateCommand).RaiseCanExecuteChanged();
 
