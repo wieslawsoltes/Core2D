@@ -240,12 +240,18 @@ namespace Test.Windows
             else if (item is EditorContext)
             {
                 var editor = (item as EditorContext).Editor;
+                if (editor.Project == null)
+                    return;
+
                 name = editor.Project.Name;
                 item = editor.Project;
             }
             else if (item == null)
             {
                 var editor = context.Editor;
+                if (editor.Project == null)
+                    return;
+                
                 name = editor.Project.Name;
                 item = editor.Project;
             }
@@ -289,7 +295,7 @@ namespace Test.Windows
         private void OnImportData()
         {
             var context = DataContext as EditorContext;
-            if (context == null)
+            if (context == null || context.Editor.Project == null)
                 return;
 
             var dlg = new OpenFileDialog()
@@ -311,7 +317,7 @@ namespace Test.Windows
         private void OnExportData()
         {
             var context = DataContext as EditorContext;
-            if (context == null)
+            if (context == null || context.Editor.Project == null)
                 return;
 
             var database = context.Editor.Project.CurrentDatabase;
@@ -337,7 +343,7 @@ namespace Test.Windows
         private void OnUpdateData()
         {
             var context = DataContext as EditorContext;
-            if (context == null)
+            if (context == null || context.Editor.Project == null)
                 return;
 
             var database = context.Editor.Project.CurrentDatabase;
@@ -951,7 +957,7 @@ namespace Test.Windows
                 new DelegateCommand<object>(
                     (parameter) => OnOpen(parameter),
                     (parameter) => context.IsEditMode());
-
+            
             context.Commands.SaveCommand =
                 new DelegateCommand(
                     () => OnSave(),
@@ -1249,6 +1255,7 @@ namespace Test.Windows
                 {
                     if (border != null
                         && context != null
+                        && context.Editor.Project != null
                         && context.Editor.Project.CurrentContainer != null)
                     {
                         if (!context.Renderers[0].State.EnableAutofit)

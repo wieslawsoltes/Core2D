@@ -26,6 +26,7 @@
     <Window.InputBindings>
         <KeyBinding Command="{Binding Commands.NewCommand}" Gesture="Ctrl+N"/>
         <KeyBinding Command="{Binding Commands.OpenCommand}" Gesture="Ctrl+O"/>
+        <KeyBinding Command="{Binding Commands.CloseCommand}" Gesture="Ctrl+F4"/>
         <KeyBinding Command="{Binding Commands.SaveCommand}" Gesture="Ctrl+S"/>
         <KeyBinding Command="{Binding Commands.SaveAsCommand}" Gesture="Ctrl+Shift+S"/>
         <KeyBinding Command="{Binding Commands.ExportCommand}" Gesture="Ctrl+E"/>
