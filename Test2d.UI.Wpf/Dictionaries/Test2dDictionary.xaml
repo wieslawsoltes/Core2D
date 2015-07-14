@@ -2374,7 +2374,7 @@
             <TabItem Header="Group">
                 <StackPanel>
                     <Control Template="{StaticResource NameControlTemplateKey}"/>
-                    <Expander Header="Properties">
+                    <Expander Header="Properties" IsExpanded="True">
                         <Control Template="{StaticResource ShapesPropertiesControlTemplateKey}"/>
                     </Expander>
                     <Expander Header="State">
