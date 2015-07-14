@@ -1,1 +1,1 @@
-Shape.IsFilled = !Shape.IsFilled;
+SelectedShape.IsFilled = !SelectedShape.IsFilled;
