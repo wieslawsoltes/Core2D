@@ -79,16 +79,16 @@
                 <ad:LayoutPanel Orientation="Horizontal">
                     <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="170">
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable x:Name="projectWindow" Title="{x:Static p:Resources.WindowTitleProject}" AutoHideWidth="200">
+                            <ad:LayoutAnchorable x:Name="projectWindow" CanClose="False" ContentId="project" Title="{x:Static p:Resources.WindowTitleProject}" AutoHideWidth="200">
                                 <controls:ProjectControl x:Name="projectControl"/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="templatesWindow" Title="{x:Static p:Resources.WindowTitleTemplates}" AutoHideWidth="200">
+                            <ad:LayoutAnchorable x:Name="templatesWindow" CanClose="False" ContentId="templates" Title="{x:Static p:Resources.WindowTitleTemplates}" AutoHideWidth="200">
                                 <controls:TemplatesControl x:Name="templatesControl"/>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePaneGroup Orientation="Horizontal" DockWidth="200">
                             <ad:LayoutAnchorablePane>
-                                <ad:LayoutAnchorable x:Name="databasesWindow" Title="{x:Static p:Resources.WindowTitleDatabases}" AutoHideWidth="200">
+                                <ad:LayoutAnchorable x:Name="databasesWindow" CanClose="False" ContentId="databases" Title="{x:Static p:Resources.WindowTitleDatabases}" AutoHideWidth="200">
                                     <controls:DatabasesControl x:Name="databasesControl"/>
                                 </ad:LayoutAnchorable>
                             </ad:LayoutAnchorablePane>
@@ -96,7 +96,7 @@
                     </ad:LayoutAnchorablePaneGroup>
                     <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="200">
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable x:Name="optionsWindow" Title="{x:Static p:Resources.WindowTitleOptions}" AutoHideWidth="200">
+                            <ad:LayoutAnchorable x:Name="optionsWindow" CanClose="False" ContentId="options" Title="{x:Static p:Resources.WindowTitleOptions}" AutoHideWidth="200">
                                 <ScrollViewer 
                                     x:Name="optionsScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
@@ -105,7 +105,7 @@
                                     <ContentControl Content="{Binding Editor.Project.Options}"/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="templateWindow" Title="{x:Static p:Resources.WindowTitleTemplate}" AutoHideWidth="200">
+                            <ad:LayoutAnchorable x:Name="templateWindow" CanClose="False" ContentId="template" Title="{x:Static p:Resources.WindowTitleTemplate}" AutoHideWidth="200">
                                 <ScrollViewer 
                                     x:Name="templateScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
@@ -116,10 +116,10 @@
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable x:Name="groupsWindow" Title="{x:Static p:Resources.WindowTitleGroups}" AutoHideWidth="200">
+                            <ad:LayoutAnchorable x:Name="groupsWindow" CanClose="False" ContentId="groups" Title="{x:Static p:Resources.WindowTitleGroups}" AutoHideWidth="200">
                                 <controls:GroupsControl x:Name="groupsControl"/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="databaseWindow" Title="{x:Static p:Resources.WindowTitleDatabase}" AutoHideWidth="200">
+                            <ad:LayoutAnchorable x:Name="databaseWindow" CanClose="False" ContentId="database" Title="{x:Static p:Resources.WindowTitleDatabase}" AutoHideWidth="200">
                                 <ScrollViewer 
                                     x:Name="databaseControl"
                                     VerticalScrollBarVisibility="Auto" 
@@ -132,7 +132,7 @@
                     </ad:LayoutAnchorablePaneGroup>
                     <ad:LayoutDocumentPaneGroup Orientation="Horizontal">
                         <ad:LayoutDocumentPane>
-                            <ad:LayoutDocument x:Name="containerWindow" Title="{x:Static p:Resources.WindowTitleContainer}" CanClose="False">
+                            <ad:LayoutDocument x:Name="containerWindow" CanClose="False" ContentId="container" Title="{x:Static p:Resources.WindowTitleContainer}">
                                 <paz:PanAndZoomGrid 
                                     x:Name="panAndZoomGrid"
                                     ClipToBounds="True"
@@ -170,18 +170,18 @@
                     </ad:LayoutDocumentPaneGroup>
                     <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="180">
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable x:Name="stylesWindow" Title="{x:Static p:Resources.WindowTitleStyles}" AutoHideWidth="200">
+                            <ad:LayoutAnchorable x:Name="stylesWindow" CanClose="False" ContentId="styles" Title="{x:Static p:Resources.WindowTitleStyles}" AutoHideWidth="200">
                                 <controls:StylesControl x:Name="stylesControl"/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="layersWindow" Title="{x:Static p:Resources.WindowTitleLayers}" AutoHideWidth="200">
+                            <ad:LayoutAnchorable x:Name="layersWindow" CanClose="False" ContentId="layers" Title="{x:Static p:Resources.WindowTitleLayers}" AutoHideWidth="200">
                                 <controls:LayersControl x:Name="layersControl"/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="shapesWindow" Title="{x:Static p:Resources.WindowTitleShapes}" AutoHideWidth="200">
+                            <ad:LayoutAnchorable x:Name="shapesWindow" CanClose="False" ContentId="shapes" Title="{x:Static p:Resources.WindowTitleShapes}" AutoHideWidth="200">
                                 <controls:ShapesControl x:Name="shapesControl"/>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable x:Name="propertiesWindow" Title="{x:Static p:Resources.WindowTitleProperties}" AutoHideWidth="200">
+                            <ad:LayoutAnchorable x:Name="propertiesWindow" CanClose="False" ContentId="properties" Title="{x:Static p:Resources.WindowTitleProperties}" AutoHideWidth="200">
                                 <ScrollViewer 
                                     x:Name="shapeScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
@@ -194,7 +194,7 @@
                     </ad:LayoutAnchorablePaneGroup>
                     <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="210">
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable x:Name="styleWindow" Title="{x:Static p:Resources.WindowTitleStyle}" AutoHideWidth="200">
+                            <ad:LayoutAnchorable x:Name="styleWindow" CanClose="False" ContentId="style" Title="{x:Static p:Resources.WindowTitleStyle}" AutoHideWidth="200">
                                 <ScrollViewer 
                                     x:Name="styleScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
@@ -203,7 +203,7 @@
                                     <controls:StyleControl/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="stateWindow" Title="{x:Static p:Resources.WindowTitleState}" AutoHideWidth="200">
+                            <ad:LayoutAnchorable x:Name="stateWindow" CanClose="False" ContentId="state" Title="{x:Static p:Resources.WindowTitleState}" AutoHideWidth="200">
                                 <controls:StateControl x:Name="stateControl">
                                     <controls:StateControl.Style>
                                         <Style TargetType="controls:StateControl">
@@ -219,7 +219,7 @@
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable x:Name="dataWindow" Title="{x:Static p:Resources.WindowTitleData}" AutoHideWidth="200">
+                            <ad:LayoutAnchorable x:Name="dataWindow" CanClose="False" ContentId="data" Title="{x:Static p:Resources.WindowTitleData}" AutoHideWidth="200">
                                 <controls:DataControl x:Name="dataControl">
                                     <controls:DataControl.Style>
                                         <Style TargetType="controls:DataControl">
@@ -233,7 +233,7 @@
                                     </controls:DataControl.Style>
                                 </controls:DataControl>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="codeWindow" Title="{x:Static p:Resources.WindowTitleCode}" AutoHideWidth="200">
+                            <ad:LayoutAnchorable x:Name="codeWindow" CanClose="False" ContentId="code" Title="{x:Static p:Resources.WindowTitleCode}" AutoHideWidth="200">
                                 <controls:CodeControl x:Name="codeControl">
                                     <controls:CodeControl.Style>
                                         <Style TargetType="controls:CodeControl">
@@ -247,10 +247,10 @@
                                     </controls:CodeControl.Style>
                                 </controls:CodeControl>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="scriptWindow" Title="{x:Static p:Resources.WindowTitleScript}" AutoHideWidth="200">
+                            <ad:LayoutAnchorable x:Name="scriptWindow" CanClose="False" ContentId="script" Title="{x:Static p:Resources.WindowTitleScript}" AutoHideWidth="200">
                                 <controls:ScriptControl x:Name="scriptControl"/>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="scriptsWindow" Title="{x:Static p:Resources.WindowTitleScripts}" AutoHideWidth="200">
+                            <ad:LayoutAnchorable x:Name="scriptsWindow" CanClose="False" ContentId="scripts" Title="{x:Static p:Resources.WindowTitleScripts}" AutoHideWidth="200">
                                 <controls:ScriptsControl x:Name="scriptsControl"/>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
