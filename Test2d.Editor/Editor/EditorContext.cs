@@ -271,12 +271,18 @@ namespace Test2d
             }
             else if (item is EditorContext || item == null)
             {
-                _editor.History.Reset();
-
-                _editor.Load(_projectFactory.GetProject(), string.Empty);
+                New();
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnClose()
+        {
+            Close();
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -633,6 +639,9 @@ namespace Test2d
         /// </summary>
         public void OnAddDatabase()
         {
+            if (_editor.Project == null)
+                return;
+            
             var builder = ImmutableArray.CreateBuilder<Column>();
             builder.Add(Column.Create("Column0"));
             builder.Add(Column.Create("Column1"));
@@ -653,6 +662,9 @@ namespace Test2d
         /// <param name="db"></param>
         public void OnRemoveDatabase(object db)
         {
+            if (_editor.Project == null)
+                return;
+            
             if (db != null && db is Database)
             {
                 var previous = _editor.Project.Databases;
@@ -715,20 +727,20 @@ namespace Test2d
         /// </summary>
         public void OnAddRecord()
         {
-            if (_editor.Project.CurrentDatabase != null)
-            {
-                var db = _editor.Project.CurrentDatabase;
+            if (_editor.Project == null || _editor.Project.CurrentDatabase == null)
+                return;
 
-                var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Value.Create(c));
-                var record = Record.Create(
-                    db.Columns,
-                    ImmutableArray.CreateRange<Value>(values));
+            var db = _editor.Project.CurrentDatabase;
 
-                var previous = db.Records;
-                var next = db.Records.Add(record);
-                _editor.History.Snapshot(previous, next, (p) => db.Records = p);
-                db.Records = next;
-            }
+            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Value.Create(c));
+            var record = Record.Create(
+                db.Columns,
+                ImmutableArray.CreateRange<Value>(values));
+
+            var previous = db.Records;
+            var next = db.Records.Add(record);
+            _editor.History.Snapshot(previous, next, (p) => db.Records = p);
+            db.Records = next;
         }
 
         /// <summary>
@@ -736,18 +748,18 @@ namespace Test2d
         /// </summary>
         public void OnRemoveRecord()
         {
-            if (_editor.Project.CurrentDatabase != null)
+            if (_editor.Project == null || _editor.Project.CurrentDatabase == null)
+                return;
+            
+            var db = _editor.Project.CurrentDatabase;
+            if (db.CurrentRecord != null)
             {
-                var db = _editor.Project.CurrentDatabase;
-                if (db.CurrentRecord != null)
-                {
-                    var record = db.CurrentRecord;
+                var record = db.CurrentRecord;
 
-                    var previous = db.Records;
-                    var next = db.Records.Remove(record);
-                    _editor.History.Snapshot(previous, next, (p) => db.Records = p);
-                    db.Records = next;
-                }
+                var previous = db.Records;
+                var next = db.Records.Remove(record);
+                _editor.History.Snapshot(previous, next, (p) => db.Records = p);
+                db.Records = next;
             }
         }
 
@@ -896,6 +908,9 @@ namespace Test2d
         /// </summary>
         public void OnAddGroupLibrary()
         {
+            if (_editor.Project == null || _editor.Project.GroupLibraries == null)
+                return;
+            
             var gl = GroupLibrary.Create("New");
 
             var previous = _editor.Project.GroupLibraries;
@@ -917,6 +932,9 @@ namespace Test2d
         /// </summary>
         public void OnAddGroup()
         {
+            if (_editor.Project == null || _editor.Project.CurrentGroupLibrary == null)
+                return;
+            
             var group = _editor.Renderers[0].State.SelectedShape;
             if (group != null && group is XGroup)
             {
@@ -948,6 +966,9 @@ namespace Test2d
         /// </summary>
         public void OnAddLayer()
         {
+            if (_editor.Project == null || _editor.Project.CurrentContainer == null)
+                return;
+
             var container = _editor.Project.CurrentContainer;
             var previous = container.Layers;
             var next = container.Layers.Add(Layer.Create("New", container));
@@ -968,6 +989,9 @@ namespace Test2d
         /// </summary>
         public void OnAddStyleLibrary()
         {
+            if (_editor.Project == null || _editor.Project.StyleLibraries == null)
+                return;
+            
             var sg = StyleLibrary.Create("New");
 
             var previous = _editor.Project.StyleLibraries;
@@ -989,6 +1013,9 @@ namespace Test2d
         /// </summary>
         public void OnAddStyle()
         {
+            if (_editor.Project == null || _editor.Project.CurrentStyleLibrary == null)
+                return;
+            
             var sg = _editor.Project.CurrentStyleLibrary;
             var previous = sg.Styles;
             var next = sg.Styles.Add(ShapeStyle.Create("New"));
@@ -1017,6 +1044,9 @@ namespace Test2d
         /// </summary>
         public void OnAddTemplate()
         {
+            if (_editor.Project == null)
+                return;
+            
             var previous = _editor.Project.Templates;
             var next = _editor.Project.Templates.Add(_projectFactory.GetTemplate(_editor.Project, "Empty"));
             _editor.History.Snapshot(previous, next, (p) => _editor.Project.Templates = p);
@@ -1036,6 +1066,9 @@ namespace Test2d
         /// </summary>
         public void OnEditTemplate()
         {
+            if (_editor.Project == null || _editor.Project.CurrentTemplate == null)
+                return;
+            
             var template = _editor.Project.CurrentTemplate;
             if (template != null)
             {
@@ -1050,6 +1083,9 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnApplyTemplate(object item)
         {
+            if (_editor.Project == null || _editor.Project.CurrentContainer == null)
+                return;
+            
             if (item is Container)
             {
                 var template = item as Container;
@@ -1067,6 +1103,9 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnSelectedItemChanged(object item)
         {
+            if (_editor.Project == null)
+                return;
+            
             if (item is Container)
             {
                 var selected = item as Container;
@@ -1091,6 +1130,9 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnAddContainer(object item)
         {
+            if (_editor.Project == null || _editor.Project.CurrentDocument == null)
+                return;
+            
             var container = _projectFactory.GetContainer(_editor.Project, "Container");
 
             var document = _editor.Project.CurrentDocument;
@@ -1108,6 +1150,9 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnInsertContainerBefore(object item)
         {
+            if (_editor.Project == null || _editor.Project.CurrentDocument == null)
+                return;
+            
             if (item is Container)
             {
                 var selected = item as Container;
@@ -1130,6 +1175,9 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnInsertContainerAfter(object item)
         {
+            if (_editor.Project == null || _editor.Project.CurrentDocument == null)
+                return;
+            
             if (item is Container)
             {
                 var selected = item as Container;
@@ -1152,6 +1200,9 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnAddDocument(object item)
         {
+            if (_editor.Project == null)
+                return;
+            
             var document = _projectFactory.GetDocument(_editor.Project, "Document");
 
             var previous = _editor.Project.Documents;
@@ -1169,6 +1220,9 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnInsertDocumentBefore(object item)
         {
+            if (_editor.Project == null)
+                return;
+            
             if (item is Document)
             {
                 var selected = item as Document;
@@ -1191,6 +1245,9 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnInsertDocumentAfter(object item)
         {
+            if (_editor.Project == null)
+                return;
+            
             if (item is Document)
             {
                 var selected = item as Document;
@@ -1364,9 +1421,45 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public void OnToggleDefaultIsStroked()
+        {
+            if (_editor.Project == null || _editor.Project.Options == null)
+                return;
+            
+            _editor.Project.Options.DefaultIsStroked = !_editor.Project.Options.DefaultIsStroked;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public void OnToggleDefaultIsFilled()
         {
+            if (_editor.Project == null || _editor.Project.Options == null)
+                return;
+            
             _editor.Project.Options.DefaultIsFilled = !_editor.Project.Options.DefaultIsFilled;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToggleDefaultIsClosed()
+        {
+            if (_editor.Project == null || _editor.Project.Options == null)
+                return;
+            
+            _editor.Project.Options.DefaultIsClosed = !_editor.Project.Options.DefaultIsClosed;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToggleDefaultIsSmoothJoin()
+        {
+            if (_editor.Project == null || _editor.Project.Options == null)
+                return;
+            
+            _editor.Project.Options.DefaultIsSmoothJoin = !_editor.Project.Options.DefaultIsSmoothJoin;
         }
 
         /// <summary>
@@ -1374,6 +1467,9 @@ namespace Test2d
         /// </summary>
         public void OnToggleSnapToGrid()
         {
+            if (_editor.Project == null || _editor.Project.Options == null)
+                return;
+            
             _editor.Project.Options.SnapToGrid = !_editor.Project.Options.SnapToGrid;
         }
 
@@ -1382,6 +1478,9 @@ namespace Test2d
         /// </summary>
         public void OnToggleTryToConnect()
         {
+            if (_editor.Project == null || _editor.Project.Options == null)
+                return;
+            
             _editor.Project.Options.TryToConnect = !_editor.Project.Options.TryToConnect;
         }
 
@@ -1698,6 +1797,16 @@ namespace Test2d
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public void New()
+        {
+            _editor.History.Reset();
+            _editor.Unload();
+            _editor.Load(_projectFactory.GetProject(), string.Empty);
+        }
+        
+        /// <summary>
         ///
         /// </summary>
         /// <param name="path"></param>
@@ -1708,11 +1817,12 @@ namespace Test2d
                 var json = ReadUtf8Text(path);
                 var project = _serializer.FromJson<Project>(json);
 
-                var root = new Uri(path);
-                var images = Editor.GetAllShapes<XImage>(project);
+                //var root = new Uri(path);
+                //var images = Editor.GetAllShapes<XImage>(project);
                 //_editor.ToAbsoluteUri(root, images);
 
                 _editor.History.Reset();
+                _editor.Unload();
                 _editor.Load(project, path);
 
                 AddRecent(path, project.Name);
@@ -1737,8 +1847,8 @@ namespace Test2d
         {
             try
             {
-                var root = new Uri(path);
-                var images = Editor.GetAllShapes<XImage>(_editor.Project);
+                //var root = new Uri(path);
+                //var images = Editor.GetAllShapes<XImage>(_editor.Project);
                 //_editor.ToRelativeUri(root, images);
 
                 var json = _serializer.ToJson(_editor.Project);
@@ -1765,6 +1875,15 @@ namespace Test2d
                         ex.StackTrace);
                 }
             }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Close()
+        {
+            _editor.History.Reset();
+            _editor.Unload();
         }
 
         /// <summary>
@@ -2171,6 +2290,9 @@ namespace Test2d
         /// <param name="path"></param>
         public void ImportData(string path)
         {
+            if (_editor.Project == null)
+                return;
+            
             try
             {
                 if (_csvReader == null)
@@ -3484,6 +3606,11 @@ namespace Test2d
                     new DelegateCommand<object>(
                         (item) => OnNew(item),
                         (item) => IsEditMode());
+                
+                _commands.CloseCommand =
+                    new DelegateCommand(
+                        () => OnClose(),
+                        () => IsEditMode());
 
                 _commands.ExitCommand =
                     new DelegateCommand(
@@ -3963,6 +4090,7 @@ namespace Test2d
         {
             (_commands.NewCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.OpenCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.CloseCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.SaveCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.SaveAsCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ExportCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
