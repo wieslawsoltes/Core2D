@@ -36,6 +36,15 @@
                 </MenuItem.ToolTip>
             </MenuItem>
             <Separator/>
+            <MenuItem Header="{x:Static p:Resources.MenuFileClose}" Command="{Binding Commands.CloseCommand}" InputGestureText="Ctrl+F4">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileClose}"/>
+                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileClose}"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
+            <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuFileSave}" Command="{Binding Commands.SaveCommand}" InputGestureText="Ctrl+S">
                 <MenuItem.ToolTip>
                     <StackPanel>
