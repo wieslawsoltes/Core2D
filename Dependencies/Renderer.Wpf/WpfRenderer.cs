@@ -1091,7 +1091,7 @@ namespace Test
                     ci,
                     ci.TextInfo.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight,
                     tf,
-                    style.TextStyle.FontSize,
+                    style.TextStyle.FontSize > 0.0 ? style.TextStyle.FontSize : double.Epsilon,
                     stroke.Brush, null, TextFormattingMode.Ideal);
 
                 if (style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline)
