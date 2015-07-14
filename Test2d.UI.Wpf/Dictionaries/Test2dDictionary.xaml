@@ -3002,7 +3002,7 @@
                     </TextBox.ToolTip>
                 </TextBox>
             </Grid>
-            <Expander Header="{x:Static p:Resources.ContainerProperties}">
+            <Expander Header="{x:Static p:Resources.ContainerProperties}" IsExpanded="True">
                 <Expander.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipProperties}"/>
