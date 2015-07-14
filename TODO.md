@@ -3,6 +3,7 @@
 ## UI
 
 * Main menu tooltips.
+* Add Close project command.
 
 ## Editor
 
