@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Test2d;
 
 namespace Test2d
 {
@@ -30,7 +29,7 @@ namespace Test2d
         /// <summary>
         /// Gets selected shape.
         /// </summary>
-        public BaseShape Shape
+        public BaseShape SelectedShape
         {
             get { return Context.Editor.Renderers[0].State.SelectedShape; }
         }
@@ -38,7 +37,7 @@ namespace Test2d
         /// <summary>
         /// Gets selected shapes.
         /// </summary>
-        public IEnumerable<BaseShape> Shapes
+        public IEnumerable<BaseShape> SelectedShapes
         {
             get { return Context.Editor.Renderers[0].State.SelectedShapes; }
         }
@@ -74,7 +73,31 @@ namespace Test2d
         {
             get { return Context.Editor.Project.CurrentContainer; }
         }
+        
+        /// <summary>
+        /// Gets current layer.
+        /// </summary>
+        public Layer Layer
+        {
+            get { return Context.Editor.Project.CurrentContainer.CurrentLayer; }
+        }
 
+        /// <summary>
+        /// Gets current shapes.
+        /// </summary>
+        public IEnumerable<BaseShape> Shapes
+        {
+            get { return Context.Editor.Project.CurrentContainer.CurrentLayer.Shapes; }
+        }
+
+        /// <summary>
+        /// Gets current shape.
+        /// </summary>
+        public BaseShape Shape
+        {
+            get { return Context.Editor.Project.CurrentContainer.CurrentShape; }
+        }
+        
         /// <summary>
         /// Gets current template.
         /// </summary>

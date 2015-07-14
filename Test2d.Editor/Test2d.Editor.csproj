@@ -108,6 +108,7 @@
     <Compile Include="Editor\EditorContext.cs" />
     <Compile Include="Editor\Core\ExportType.cs" />
     <Compile Include="Editor\Core\Helper.cs" />
+    <Compile Include="Editor\Factory.cs" />
     <Compile Include="Editor\Helpers\ArcHelper.cs" />
     <Compile Include="Editor\Helpers\BezierHelper.cs" />
     <Compile Include="Editor\Helpers\EllipseHelper.cs" />
