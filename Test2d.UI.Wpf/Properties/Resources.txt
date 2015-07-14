@@ -376,7 +376,7 @@ MenuTooltipScriptWindow
 	MenuTooltipScriptWindowSaveLayout
 	MenuTooltipScriptWindowResetLayout
 
-[Window Titles]
+[Main Window]
 
 WindowTitleProject
 WindowTitleTemplates
@@ -397,6 +397,138 @@ WindowTitleCode
 WindowTitleScript
 WindowTitleScripts
 WindowTitleDocument
+
+[Code Control]
+
+TODO
+
+[Container Control]
+
+TODO
+
+[Database Control]
+
+TODO
+
+[Databases Control]
+
+TODO
+
+[Data Control]
+
+TODO
+
+[Document Control]
+
+TODO
+
+[Groups Control]
+
+TODO
+
+[Layers Control]
+
+TODO
+
+[Menu Control]
+
+TODO
+
+[Path Control]
+
+TODO
+
+[Project Control]
+
+TODO
+
+[Records Control]
+
+TODO
+
+[Script Control]
+
+TODO
+
+[Scripts Control]
+
+TODO
+
+[Shape Control]
+
+TODO
+
+[Shapes Control]
+
+TODO
+
+[State Control]
+
+TODO
+
+[Style Control]
+
+TODO
+
+[Styles Control]
+
+TODO
+
+[Template Control]
+
+TODO
+
+[Templates Control]
+
+TODO
+
+[Type: XPoint]
+
+TODO
+
+[Type: XLine]
+
+TODO
+
+[Type: XRectangle]
+
+TODO
+
+[Type: XEllipse]
+
+TODO
+
+[Type: XArc]
+
+TODO
+
+[Type: XBezier]
+
+TODO
+
+[Type: XQBezier]
+
+TODO
+
+[Type: XText]
+
+TODO
+
+[Type: XImage]
+
+TODO
+
+[Type: XGroup]
+
+TODO
+
+[Type: XReference]
+
+TODO
+
+[Type: XPath]
+
+TODO
 
 [Type: Options]
 
