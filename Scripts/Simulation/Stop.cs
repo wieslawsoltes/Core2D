@@ -1,1 +1,1 @@
-Context.StopSimulation();
+Context.OnStopSimulation();
