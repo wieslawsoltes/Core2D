@@ -239,20 +239,6 @@ namespace Test2d
                 Templates = ImmutableArray.Create<Container>(),
                 Documents = ImmutableArray.Create<Document>(),
             };
-
-            var glBuilder = p.GroupLibraries.ToBuilder();
-            glBuilder.Add(GroupLibrary.Create("Default"));
-            p.GroupLibraries = glBuilder.ToImmutable();
-
-            var sgBuilder = p.StyleLibraries.ToBuilder();
-            sgBuilder.Add(DefaultStyleLibrary());
-            sgBuilder.Add(LinesStyleLibrary());
-            sgBuilder.Add(TemplateStyleLibrary());
-            p.StyleLibraries = sgBuilder.ToImmutable();
-
-            p.CurrentGroupLibrary = p.GroupLibraries.FirstOrDefault();
-            p.CurrentStyleLibrary = p.StyleLibraries.FirstOrDefault();
-
             return p;
         }
     }

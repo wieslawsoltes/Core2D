@@ -76,6 +76,16 @@ namespace Test2d
         public Container GetContainer(Project project, string name)
         {
             var container = Container.Create(name);
+
+            if (project.CurrentTemplate == null)
+            {
+                var template = GetTemplate(project, "Empty");
+                var templateBuilder = project.Templates.ToBuilder();
+                templateBuilder.Add(template);
+                project.Templates = templateBuilder.ToImmutable();
+                project.CurrentTemplate = template;
+            }
+            
             container.Template = project.CurrentTemplate;
             container.Width = container.Template.Width;
             container.Height = container.Template.Height;
@@ -102,6 +112,19 @@ namespace Test2d
         {
             var project = Project.Create();
 
+            var glBuilder = project.GroupLibraries.ToBuilder();
+            glBuilder.Add(GroupLibrary.Create("Default"));
+            project.GroupLibraries = glBuilder.ToImmutable();
+
+            var sgBuilder = project.StyleLibraries.ToBuilder();
+            sgBuilder.Add(Project.DefaultStyleLibrary());
+            sgBuilder.Add(Project.LinesStyleLibrary());
+            sgBuilder.Add(Project.TemplateStyleLibrary());
+            project.StyleLibraries = sgBuilder.ToImmutable();
+
+            project.CurrentGroupLibrary = project.GroupLibraries.FirstOrDefault();
+            project.CurrentStyleLibrary = project.StyleLibraries.FirstOrDefault();
+            
             var templateBuilder = project.Templates.ToBuilder();
             templateBuilder.Add(GetTemplate(project, "Empty"));
             templateBuilder.Add(CreateGridTemplate(project, "Grid"));
