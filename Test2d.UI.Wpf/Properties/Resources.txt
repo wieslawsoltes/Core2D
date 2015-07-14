@@ -322,17 +322,26 @@ MenuTooltipScriptScripts
 [Menu: Options]
 
 MenuOptions
+	MenuOptionsDefaultIsStroked
 	MenuOptionsDefaultIsFilled
+	MenuOptionsDefaultIsClosed
+	MenuOptionsDefaultIsSmoothJoin
 	MenuOptionsSnapToGrid
 	MenuOptionsTryToConnect
 
 MenuTooltipOptions
+	MenuTooltipOptionsDefaultIsStroked
 	MenuTooltipOptionsDefaultIsFilled
+	MenuTooltipOptionsDefaultIsClosed
+	MenuTooltipOptionsDefaultIsSmoothJoin
 	MenuTooltipOptionsSnapToGrid
 	MenuTooltipOptionsTryToConnect
 
 MenuTooltipScriptOptions
+	MenuTooltipScriptOptionsDefaultIsStroked
 	MenuTooltipScriptOptionsDefaultIsFilled
+	MenuTooltipScriptOptionsDefaultIsClosed
+	MenuTooltipScriptOptionsDefaultIsSmoothJoin
 	MenuTooltipScriptOptionsSnapToGrid
 	MenuTooltipScriptOptionsTryToConnect
 

@@ -945,7 +945,7 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
     <value>Default is _Filled</value>
   </data>
   <data name="MenuOptionsSnapToGrid" xml:space="preserve">
-    <value>_Snap to Grid</value>
+    <value>Snap to _Grid</value>
   </data>
   <data name="MenuOptionsTryToConnect" xml:space="preserve">
     <value>Try To _Connect</value>
@@ -954,7 +954,7 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
     <value>Options</value>
   </data>
   <data name="MenuTooltipOptionsDefaultIsFilled" xml:space="preserve">
-    <value>Default is Filled</value>
+    <value>Default is Filled (all shapes)</value>
   </data>
   <data name="MenuTooltipOptionsSnapToGrid" xml:space="preserve">
     <value>Snap to Grid</value>
@@ -1366,5 +1366,32 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   </data>
   <data name="MenuTooltipScriptFileClose" xml:space="preserve">
     <value>Script: Context.Close()</value>
+  </data>
+  <data name="MenuOptionsDefaultIsClosed" xml:space="preserve">
+    <value>Default is Close_d</value>
+  </data>
+  <data name="MenuOptionsDefaultIsSmoothJoin" xml:space="preserve">
+    <value>Default is Smooth _Join</value>
+  </data>
+  <data name="MenuOptionsDefaultIsStroked" xml:space="preserve">
+    <value>Default is Stro_ked</value>
+  </data>
+  <data name="MenuTooltipOptionsDefaultIsClosed" xml:space="preserve">
+    <value>Default is Closed (path)</value>
+  </data>
+  <data name="MenuTooltipOptionsDefaultIsSmoothJoin" xml:space="preserve">
+    <value>Default is Smooth Join (path)</value>
+  </data>
+  <data name="MenuTooltipOptionsDefaultIsStroked" xml:space="preserve">
+    <value>Default is Stroked (all shapes)</value>
+  </data>
+  <data name="MenuTooltipScriptOptionsDefaultIsClosed" xml:space="preserve">
+    <value>Script: Context.OnToggleDefaultIsClosed()</value>
+  </data>
+  <data name="MenuTooltipScriptOptionsDefaultIsSmoothJoin" xml:space="preserve">
+    <value>Script: Context.OnToggleDefaultIsSmoothJoin()</value>
+  </data>
+  <data name="MenuTooltipScriptOptionsDefaultIsStroked" xml:space="preserve">
+    <value>Script: Context.OnToggleDefaultIsStroked()</value>
   </data>
 </root>
