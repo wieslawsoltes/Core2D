@@ -121,7 +121,7 @@
                 Grid.Row="0" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="2"
-                TextAlignment="Center" 
+                TextAlignment="Left" 
                 VerticalAlignment="Center">
             </TextBox>
             <TextBox 
@@ -131,7 +131,7 @@
                 Grid.Row="1" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="2"
-                TextAlignment="Center" 
+                TextAlignment="Left" 
                 VerticalAlignment="Center">
             </TextBox>
         </Grid>
@@ -188,7 +188,7 @@
                 Grid.Row="0" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="2"
-                TextAlignment="Center" 
+                TextAlignment="Left" 
                 VerticalAlignment="Center">
             </TextBox>
             <TextBox 
@@ -198,7 +198,7 @@
                 Grid.Row="1" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="2"
-                TextAlignment="Center" 
+                TextAlignment="Left" 
                 VerticalAlignment="Center">
             </TextBox>
             <TextBox 
@@ -208,7 +208,7 @@
                 Grid.Row="2" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="2"
-                TextAlignment="Center" 
+                TextAlignment="Left" 
                 VerticalAlignment="Center">
             </TextBox>
             <TextBox 
@@ -218,7 +218,7 @@
                 Grid.Row="3" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="2"
-                TextAlignment="Center" 
+                TextAlignment="Left" 
                 VerticalAlignment="Center">
             </TextBox>
         </Grid>
@@ -285,7 +285,7 @@
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2"
-                        TextAlignment="Center" 
+                        TextAlignment="Left" 
                         VerticalAlignment="Center">
                 </TextBox>
                 <CheckBox 
@@ -1293,7 +1293,7 @@
                              Grid.Row="0" 
                              Grid.Column="1" 
                              Grid.ColumnSpan="2"
-                             TextAlignment="Center" 
+                             TextAlignment="Left" 
                              VerticalAlignment="Center">
                     </TextBox>
                     <Slider Value="{Binding DashOffset}" 
@@ -2653,7 +2653,7 @@
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2"
-                        TextAlignment="Center" 
+                        TextAlignment="Left" 
                         VerticalAlignment="Center">
                         <TextBox.ToolTip>
                             <StackPanel>
@@ -2669,7 +2669,7 @@
                         Grid.Row="2" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2"
-                        TextAlignment="Center" 
+                        TextAlignment="Left" 
                         VerticalAlignment="Center">
                         <TextBox.ToolTip>
                             <StackPanel>
@@ -2685,7 +2685,7 @@
                         Grid.Row="3" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2"
-                        TextAlignment="Center" 
+                        TextAlignment="Left" 
                         VerticalAlignment="Center">
                         <TextBox.ToolTip>
                             <StackPanel>
@@ -2729,7 +2729,7 @@
                         Grid.Row="6" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2"
-                        TextAlignment="Center" 
+                        TextAlignment="Left" 
                         VerticalAlignment="Center">
                         <TextBox.ToolTip>
                             <StackPanel>
@@ -3061,7 +3061,7 @@
                                 Grid.Row="0" 
                                 Grid.Column="1" 
                                 Grid.ColumnSpan="2"
-                                TextAlignment="Center" 
+                                TextAlignment="Left" 
                                 VerticalAlignment="Center">
                         <TextBox.ToolTip>
                             <StackPanel>
@@ -3076,7 +3076,7 @@
                                 Grid.Row="1" 
                                 Grid.Column="1" 
                                 Grid.ColumnSpan="2"
-                                TextAlignment="Center" 
+                                TextAlignment="Left" 
                                 VerticalAlignment="Center">
                         <TextBox.ToolTip>
                             <StackPanel>
