@@ -168,6 +168,7 @@
     <Compile Include="Controls\Custom\LayerElement.cs" />
     <Compile Include="Controls\Custom\ListBoxDropMode.cs" />
     <Compile Include="Controls\Custom\ProjectViewer.cs" />
+    <Compile Include="Controls\Custom\TooltipTemplate.cs" />
     <Compile Include="Controls\DatabaseControl.xaml.cs">
       <DependentUpon>DatabaseControl.xaml</DependentUpon>
     </Compile>
