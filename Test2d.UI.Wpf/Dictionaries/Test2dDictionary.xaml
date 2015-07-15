@@ -2609,7 +2609,7 @@
         </Menu>
     </ControlTemplate>
     <ControlTemplate x:Key="BindingsControlTemplateKey">
-         <Grid>
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -2710,7 +2710,7 @@
         </Menu>
     </ControlTemplate>
     <ControlTemplate x:Key="PropertiesControlTemplateKey">
-         <Grid>
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -3640,7 +3640,7 @@
                 </Expander.ToolTip>
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
-    </StackPanel>
+        </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XText}">
         <StackPanel>
