@@ -7,6 +7,90 @@
                     xmlns:converters="clr-namespace:Test.Converters"
                     xmlns:controls="clr-namespace:Test.Controls"
                     xmlns:p="clr-namespace:Test2d.UI.Wpf.Properties">
+    <!-- tooltips -->
+    <ControlTemplate x:Key="TooltipControlTemplateKey">
+        <StackPanel>
+            <TextBlock FontWeight="Bold" Text="{TemplateBinding controls:TooltipTemplate.Header}"/>
+            <TextBlock Text="{TemplateBinding controls:TooltipTemplate.Script}"/>
+        </StackPanel>
+    </ControlTemplate>
+    <Style TargetType="TextBox">
+        <Style.Triggers>
+            <Trigger Property="controls:TooltipTemplate.Enabled" Value="True">
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="Slider">
+        <Style.Triggers>
+            <Trigger Property="controls:TooltipTemplate.Enabled" Value="True">
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="Expander">
+        <Style.Triggers>
+            <Trigger Property="controls:TooltipTemplate.Enabled" Value="True">
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="TabItem">
+        <Style.Triggers>
+            <Trigger Property="controls:TooltipTemplate.Enabled" Value="True">
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="MenuItem">
+        <Style.Triggers>
+            <Trigger Property="controls:TooltipTemplate.Enabled" Value="True">
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="CheckBox">
+        <Style.Triggers>
+            <Trigger Property="controls:TooltipTemplate.Enabled" Value="True">
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="ComboBox">
+        <Style.Triggers>
+            <Trigger Property="controls:TooltipTemplate.Enabled" Value="True">
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
     <!-- converters -->
     <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
     <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
