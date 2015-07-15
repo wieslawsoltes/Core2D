@@ -3717,6 +3717,15 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TODO.
+        /// </summary>
+        public static string TODO {
+            get {
+                return ResourceManager.GetString("TODO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Code.
         /// </summary>
         public static string WindowTitleCode {

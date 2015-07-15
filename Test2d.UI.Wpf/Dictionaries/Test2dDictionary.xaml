@@ -123,6 +123,12 @@
                 Grid.ColumnSpan="2"
                 TextAlignment="Left" 
                 VerticalAlignment="Center">
+                <TextBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TextBox.ToolTip>
             </TextBox>
             <TextBox 
                 Text="{Binding Height, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
@@ -133,6 +139,12 @@
                 Grid.ColumnSpan="2"
                 TextAlignment="Left" 
                 VerticalAlignment="Center">
+                <TextBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TextBox.ToolTip>
             </TextBox>
         </Grid>
     </DataTemplate>
@@ -190,6 +202,12 @@
                 Grid.ColumnSpan="2"
                 TextAlignment="Left" 
                 VerticalAlignment="Center">
+                <TextBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TextBox.ToolTip>
             </TextBox>
             <TextBox 
                 Text="{Binding Y, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
@@ -200,6 +218,12 @@
                 Grid.ColumnSpan="2"
                 TextAlignment="Left" 
                 VerticalAlignment="Center">
+                <TextBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TextBox.ToolTip>
             </TextBox>
             <TextBox 
                 Text="{Binding Width, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
@@ -210,6 +234,12 @@
                 Grid.ColumnSpan="2"
                 TextAlignment="Left" 
                 VerticalAlignment="Center">
+                <TextBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TextBox.ToolTip>
             </TextBox>
             <TextBox 
                 Text="{Binding Height, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
@@ -220,6 +250,12 @@
                 Grid.ColumnSpan="2"
                 TextAlignment="Left" 
                 VerticalAlignment="Center">
+                <TextBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TextBox.ToolTip>
             </TextBox>
         </Grid>
     </DataTemplate>
@@ -287,6 +323,12 @@
                         Grid.ColumnSpan="2"
                         TextAlignment="Left" 
                         VerticalAlignment="Center">
+                    <TextBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </TextBox.ToolTip>
                 </TextBox>
                 <CheckBox 
                         Content=""
@@ -295,6 +337,12 @@
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
                 <ComboBox 
                         ItemsSource="{Binding Source={StaticResource ResourceKey=XSweepDirectionValues}}" 
@@ -303,6 +351,12 @@
                         Grid.Row="2" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <ComboBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </ComboBox.ToolTip>
                 </ComboBox>
                 <CheckBox 
                         Content=""
@@ -311,6 +365,12 @@
                         Grid.Row="3" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
                 <CheckBox 
                         Content=""
@@ -319,12 +379,30 @@
                         Grid.Row="4" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
             </Grid>
             <Expander Header="Point">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point}"/>
             </Expander>
             <Expander Header="Size">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Size}"/>
             </Expander>
         </StackPanel>
@@ -364,6 +442,12 @@
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
                 <CheckBox 
                         Content=""
@@ -372,15 +456,39 @@
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
             </Grid>
             <Expander Header="Point1">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point1}"/>
             </Expander>
             <Expander Header="Point2">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point2}"/>
             </Expander>
             <Expander Header="Point3">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point3}"/>
             </Expander>
         </StackPanel>
@@ -420,6 +528,12 @@
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
                 <CheckBox 
                         Content=""
@@ -428,9 +542,21 @@
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
             </Grid>
             <Expander Header="Point">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point}"/>
             </Expander>
         </StackPanel>
@@ -470,6 +596,12 @@
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
                 <CheckBox 
                         Content=""
@@ -478,9 +610,21 @@
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
             </Grid>
             <Expander Header="Points">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ListBox
                     ItemsSource="{Binding Points}"
                     BorderBrush="{x:Null}"
@@ -526,6 +670,12 @@
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
                 <CheckBox 
                         Content=""
@@ -534,9 +684,21 @@
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
             </Grid>
             <Expander Header="Points">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ListBox
                     ItemsSource="{Binding Points}"
                     BorderBrush="{x:Null}"
@@ -581,6 +743,12 @@
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
                 <CheckBox 
                         Content=""
@@ -589,9 +757,21 @@
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
             </Grid>
             <Expander Header="Points">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ListBox
                     ItemsSource="{Binding Points}"
                     BorderBrush="{x:Null}"
@@ -636,6 +816,12 @@
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
                 <CheckBox 
                         Content=""
@@ -644,12 +830,30 @@
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
             </Grid>
             <Expander Header="Point1">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point1}"/>
             </Expander>
             <Expander Header="Point2">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point2}"/>
             </Expander>
         </StackPanel>
@@ -689,6 +893,12 @@
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
                 <CheckBox 
                         Content=""
@@ -697,9 +907,21 @@
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
             </Grid>
             <Expander Header="StartPoint">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding StartPoint}"/>
             </Expander>
         </StackPanel>
@@ -730,13 +952,31 @@
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
+                    <ComboBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </ComboBox.ToolTip>
                 </ComboBox>
             </Grid>
             <TabControl>
                 <TabItem Header="Bounds">
+                    <TabItem.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </TabItem.ToolTip>
                     <ContentControl Content="{Binding Bounds}"/>
                 </TabItem>
                 <TabItem Header="Figures">
+                    <TabItem.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </TabItem.ToolTip>
                     <TreeView 
                         x:Name="tree" 
                         ItemsSource="{Binding Figures}"
@@ -764,6 +1004,12 @@
                     </TreeView>
                 </TabItem>
                 <TabItem Header="Selected">
+                    <TabItem.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </TabItem.ToolTip>
                     <ContentControl 
                         Content="{Binding}"                
                         DataContext="{Binding ElementName=tree, Path=SelectedItem}"
@@ -798,6 +1044,12 @@
                      Grid.Column="1" 
                      TextAlignment="Left" 
                      VerticalAlignment="Center">
+                <TextBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TextBox.ToolTip>
             </TextBox>
         </Grid>
     </ControlTemplate>
@@ -822,6 +1074,12 @@
                       Margin="5,2,5,2"
                       Grid.Row="0" 
                       Grid.Column="1">
+                <ComboBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </ComboBox.ToolTip>
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
@@ -834,30 +1092,84 @@
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Default" Margin="1"
                       IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Visible" Margin="1"
                       IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Printable" Margin="1"
                       IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Locked" Margin="1"
                       IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Connector" Margin="1"
                       IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="None" Margin="1"
                       IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Standalone" Margin="1"
                       IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Input" Margin="1"
                       IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Output" Margin="1"
                       IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
@@ -882,6 +1194,12 @@
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Margin="5,2,5,2">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
         </Grid>
     </ControlTemplate>
@@ -906,6 +1224,12 @@
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Margin="5,2,5,2">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
         </Grid>
     </ControlTemplate>
@@ -931,6 +1255,12 @@
                       Grid.Row="0" 
                       Grid.Column="1" 
                       VerticalAlignment="Center">
+                <ComboBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </ComboBox.ToolTip>
                 <ComboBoxItem>{0}</ComboBoxItem>
                 <ComboBoxItem>{0} {1}</ComboBoxItem>
                 <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
@@ -942,18 +1272,48 @@
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Regular" Margin="1"
                       IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Regular}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Bold" Margin="1"
                       IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Bold}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Italic" Margin="1"
                       IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Italic}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Underline" Margin="1"
                       IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Underline}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Strikeout" Margin="1"
                       IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Strikeout}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
@@ -961,21 +1321,57 @@
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Disabled" Margin="1"
                       IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Disabled}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Start" Margin="1"
                       IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Start}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="End" Margin="1"
                       IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.End}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Vertical" Margin="1"
                       IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Vertical}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Horizontal" Margin="1"
                       IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Horizontal}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="All" Margin="1"
                       IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.All}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
@@ -983,30 +1379,84 @@
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Default" Margin="1"
                       IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Visible" Margin="1"
                       IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Printable" Margin="1"
                       IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Locked" Margin="1"
                       IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Connector" Margin="1"
                       IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="None" Margin="1"
                       IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Standalone" Margin="1"
                       IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Input" Margin="1"
                       IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Output" Margin="1"
                       IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
@@ -1014,30 +1464,84 @@
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Default" Margin="1"
                       IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Visible" Margin="1"
                       IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Printable" Margin="1"
                       IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Locked" Margin="1"
                       IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Connector" Margin="1"
                       IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="None" Margin="1"
                       IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Standalone" Margin="1"
                       IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Input" Margin="1"
                       IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
             <CheckBox Content="Output" Margin="1"
                       IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
@@ -1069,6 +1573,12 @@
                 Grid.ColumnSpan="3" 
                 Margin="5,2,5,2"
                 Height="20">
+                <Rectangle.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Rectangle.ToolTip>
                 <Rectangle.Fill>
                     <MultiBinding Converter="{StaticResource ArgbColorToBrushMultiConverter}">
                         <Binding Path="DataContext.A" RelativeSource="{RelativeSource Self}"/>
@@ -1114,6 +1624,12 @@
                     Grid.Row="1" 
                     Grid.Column="1" 
                     Margin="5,2,5,2">
+                <Slider.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Slider.ToolTip>
             </Slider>
             <Slider Value="{Binding R}" 
                     Minimum="0" 
@@ -1123,6 +1639,12 @@
                     Grid.Row="2" 
                     Grid.Column="1" 
                     Margin="5,2,5,2">
+                <Slider.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Slider.ToolTip>
             </Slider>
             <Slider Value="{Binding G}" 
                     Minimum="0" 
@@ -1132,6 +1654,12 @@
                     Grid.Row="3" 
                     Grid.Column="1" 
                     Margin="5,2,5,2">
+                <Slider.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Slider.ToolTip>
             </Slider>
             <Slider Value="{Binding B}" 
                     Minimum="0" 
@@ -1141,6 +1669,12 @@
                     Grid.Row="4" 
                     Grid.Column="1" 
                     Margin="5,2,5,2">
+                <Slider.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Slider.ToolTip>
             </Slider>
             <TextBox Text="{Binding A, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                      BorderBrush="{x:Null}" 
@@ -1149,6 +1683,12 @@
                      Grid.Column="2" 
                      TextAlignment="Center" 
                      VerticalAlignment="Center">
+                <TextBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TextBox.ToolTip>
             </TextBox>
             <TextBox Text="{Binding R, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                      BorderBrush="{x:Null}" 
@@ -1157,6 +1697,12 @@
                      Grid.Column="2" 
                      TextAlignment="Center" 
                      VerticalAlignment="Center">
+                <TextBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TextBox.ToolTip>
             </TextBox>
             <TextBox Text="{Binding G, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                      BorderBrush="{x:Null}" 
@@ -1165,6 +1711,12 @@
                      Grid.Column="2" 
                      TextAlignment="Center" 
                      VerticalAlignment="Center">
+                <TextBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TextBox.ToolTip>
             </TextBox>
             <TextBox Text="{Binding B, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                      BorderBrush="{x:Null}" 
@@ -1173,6 +1725,12 @@
                      Grid.Column="2" 
                      TextAlignment="Center" 
                      VerticalAlignment="Center">
+                <TextBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TextBox.ToolTip>
             </TextBox>
         </Grid>
     </DataTemplate>
@@ -1200,15 +1758,39 @@
                          Grid.Column="1" 
                          TextAlignment="Left" 
                          VerticalAlignment="Center">
+                    <TextBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </TextBox.ToolTip>
                 </TextBox>
             </Grid>
             <Expander Header="Stroke" IsExpanded="False">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Stroke}"/>
             </Expander>
             <Expander Header="Fill" IsExpanded="False">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Fill}"/>
             </Expander>
             <Expander Header="Thickness" IsExpanded="False">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -1227,6 +1809,12 @@
                             Grid.Row="0" 
                             Grid.Column="0" 
                             Margin="5,2,5,2">
+                        <Slider.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Slider.ToolTip>
                     </Slider>
                     <TextBox Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                              BorderBrush="{x:Null}"
@@ -1235,10 +1823,22 @@
                              Grid.Column="1" 
                              TextAlignment="Center" 
                              VerticalAlignment="Center">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                 </Grid>
             </Expander>
             <Expander Header="Cap" IsExpanded="False">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -1261,6 +1861,12 @@
                               Grid.Column="1" 
                               Grid.ColumnSpan="2"
                               Margin="5,2,5,2">
+                        <ComboBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </ComboBox.ToolTip>
                     </ComboBox>
                 </Grid>
             </Expander>
@@ -1297,6 +1903,12 @@
                              Grid.ColumnSpan="2"
                              TextAlignment="Left" 
                              VerticalAlignment="Center">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                     <Slider Value="{Binding DashOffset}" 
                             Minimum="0" 
@@ -1308,6 +1920,12 @@
                             Grid.Row="1" 
                             Grid.Column="1" 
                             Margin="5,2,5,2">
+                        <Slider.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Slider.ToolTip>
                     </Slider>
                     <TextBox Text="{Binding DashOffset, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                              BorderBrush="{x:Null}" 
@@ -1316,6 +1934,12 @@
                              Grid.Column="2" 
                              TextAlignment="Center" 
                              VerticalAlignment="Center">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                 </Grid>
             </Expander>
@@ -1324,6 +1948,12 @@
     <DataTemplate DataType="{x:Type core:ArrowStyle}">
         <TabControl>
             <TabItem Header="Arrow">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -1379,6 +2009,12 @@
                               Grid.Column="1" 
                               Grid.ColumnSpan="2"
                               Margin="5,2,5,2">
+                        <ComboBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </ComboBox.ToolTip>
                     </ComboBox>
                     <CheckBox Content=""
                               IsChecked="{Binding IsStroked}"
@@ -1386,6 +2022,12 @@
                               Grid.Column="1" 
                               Grid.ColumnSpan="2"
                               Margin="5,2,5,2">
+                        <CheckBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </CheckBox.ToolTip>
                     </CheckBox>
                     <CheckBox Content=""
                               IsChecked="{Binding IsFilled}"
@@ -1393,6 +2035,12 @@
                               Grid.Column="1" 
                               Grid.ColumnSpan="2"
                               Margin="5,2,5,2">
+                        <CheckBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </CheckBox.ToolTip>
                     </CheckBox>
                     <Slider Value="{Binding RadiusX}" 
                             Minimum="0" 
@@ -1404,6 +2052,12 @@
                             Grid.Row="3" 
                             Grid.Column="1" 
                             Margin="5,2,5,2">
+                        <Slider.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Slider.ToolTip>
                     </Slider>
                     <Slider Value="{Binding RadiusY}" 
                             Minimum="0" 
@@ -1415,6 +2069,12 @@
                             Grid.Row="4" 
                             Grid.Column="1" 
                             Margin="5,2,5,2">
+                        <Slider.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Slider.ToolTip>
                     </Slider>
                     <TextBox Text="{Binding RadiusX, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                              BorderBrush="{x:Null}" 
@@ -1423,6 +2083,12 @@
                              Grid.Column="2" 
                              TextAlignment="Center" 
                              VerticalAlignment="Center">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                     <TextBox Text="{Binding RadiusY, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                              BorderBrush="{x:Null}" 
@@ -1431,10 +2097,22 @@
                              Grid.Column="2" 
                              TextAlignment="Center" 
                              VerticalAlignment="Center">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                 </Grid>
             </TabItem>
             <TabItem Header="Style">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <Control Template="{StaticResource BaseStyleControlTemplateKey}"/>
             </TabItem>
         </TabControl>
@@ -1504,6 +2182,12 @@
                     Grid.Row="2" 
                     Grid.Column="1" 
                     Margin="5,2,5,2">
+                <Slider.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Slider.ToolTip>
             </Slider>
             <TextBox Text="{Binding FontName, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                      BorderBrush="{x:Null}" 
@@ -1513,6 +2197,12 @@
                      Grid.ColumnSpan="2"
                      TextAlignment="Left" 
                      VerticalAlignment="Center">
+                <TextBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TextBox.ToolTip>
             </TextBox>
             <TextBox Text="{Binding FontFile, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                      BorderBrush="{x:Null}" 
@@ -1522,6 +2212,12 @@
                      Grid.ColumnSpan="2"
                      TextAlignment="Left" 
                      VerticalAlignment="Center">
+                <TextBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TextBox.ToolTip>
             </TextBox>
             <TextBox Text="{Binding FontSize, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
                      BorderBrush="{x:Null}" 
@@ -1530,6 +2226,12 @@
                      Grid.Column="2" 
                      TextAlignment="Center" 
                      VerticalAlignment="Center">
+                <TextBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TextBox.ToolTip>
             </TextBox>
             <Control Template="{StaticResource FontStyleControlTemplateKey}"
                      Grid.Row="3" 
@@ -1542,6 +2244,12 @@
                       Grid.Column="1" 
                       Grid.ColumnSpan="2"
                       Margin="5,2,5,2">
+                <ComboBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </ComboBox.ToolTip>
             </ComboBox>
             <ComboBox ItemsSource="{Binding Source={StaticResource ResourceKey=TextVAlignmentValues}}" 
                       SelectedItem="{Binding TextVAlignment}" 
@@ -1549,15 +2257,33 @@
                       Grid.Column="1" 
                       Grid.ColumnSpan="2"
                       Margin="5,2,5,2">
+                <ComboBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </ComboBox.ToolTip>
             </ComboBox>
         </Grid>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:LineStyle}">
         <TabControl>
             <TabItem Header="Flags">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <Control Template="{StaticResource MaxLengthControlTemplateKey}"/>
             </TabItem>
             <TabItem Header="Length">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -1573,6 +2299,12 @@
                         IsSnapToTickEnabled="True" 
                         Grid.Column="0" 
                         Margin="5,2,5,2">
+                        <Slider.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Slider.ToolTip>
                     </Slider>
                     <TextBox
                         Text="{Binding MaxLength, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
@@ -1581,13 +2313,31 @@
                         Grid.Column="1" 
                         TextAlignment="Center" 
                         VerticalAlignment="Center">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                 </Grid>
             </TabItem>
             <TabItem Header="Start">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <Control Template="{StaticResource StartStateControlTemplateKey}"/>
             </TabItem>
             <TabItem Header="End">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <Control Template="{StaticResource EndStateControlTemplateKey}"/>
             </TabItem>
         </TabControl>
@@ -1595,20 +2345,56 @@
     <DataTemplate DataType="{x:Type core:ShapeStyle}">
         <TabControl>
             <TabItem Header="Base">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <Control Template="{StaticResource BaseStyleControlTemplateKey}"/>
             </TabItem>
             <TabItem Header="Text">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <ContentControl Content="{Binding TextStyle}"/>
             </TabItem>
             <TabItem Header="Line">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <StackPanel>
                     <Expander Header="Line Start Arrow" IsExpanded="False">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <ContentControl Content="{Binding StartArrowStyle}"/>
                     </Expander>
                     <Expander Header="Line End Arrow" IsExpanded="False">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <ContentControl Content="{Binding EndArrowStyle}"/>
                     </Expander>
                     <Expander Header="Line MaxLength" IsExpanded="False">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <ContentControl Content="{Binding LineStyle}"/>
                     </Expander>
                 </StackPanel>
@@ -1642,40 +2428,82 @@
                     Grid.Column="1" 
                     Grid.ColumnSpan="2"
                     Margin="5,2,5,2">
+                    <CheckBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </CheckBox.ToolTip>
                 </CheckBox>
             </Grid>
             <TabControl>
                 <TabItem Header="Definitions">
+                    <TabItem.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </TabItem.ToolTip>
                     <TextBox 
                         Text="{Binding Code.Definitions, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center"
-                         AcceptsReturn="True"
-                         AcceptsTab="True">
+                        BorderBrush="{x:Null}" 
+                        Margin="5,2,5,2"
+                        TextAlignment="Left" 
+                        VerticalAlignment="Center"
+                        AcceptsReturn="True"
+                        AcceptsTab="True">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                 </TabItem>
                 <TabItem Header="Initialization">
+                    <TabItem.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </TabItem.ToolTip>
                     <TextBox 
                         Text="{Binding Code.Initialization, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center"
-                         AcceptsReturn="True"
-                         AcceptsTab="True">
+                        BorderBrush="{x:Null}" 
+                        Margin="5,2,5,2"
+                        TextAlignment="Left" 
+                        VerticalAlignment="Center"
+                        AcceptsReturn="True"
+                        AcceptsTab="True">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                 </TabItem>
                 <TabItem Header="Script">
+                    <TabItem.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        </StackPanel>
+                    </TabItem.ToolTip>
                     <TextBox 
                         Text="{Binding Code.Script, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center"
-                         AcceptsReturn="True"
-                         AcceptsTab="True">
+                        BorderBrush="{x:Null}" 
+                        Margin="5,2,5,2"
+                        TextAlignment="Left" 
+                        VerticalAlignment="Center"
+                        AcceptsReturn="True"
+                        AcceptsTab="True">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                 </TabItem>
             </TabControl>
@@ -1686,7 +2514,14 @@
         <Menu Background="Transparent" HorizontalAlignment="Right">
             <MenuItem Command="{Binding DataContext.Commands.AddBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                       CommandParameter="{Binding}" 
-                      Header="+"/>
+                      Header="+">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
         </Menu>
     </ControlTemplate>
     <ControlTemplate x:Key="BindingsControlTemplateKey">
@@ -1738,11 +2573,32 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <TextBox Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Property, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                                     Text="{Binding Path=Property, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                <TextBox.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                                    </StackPanel>
+                                </TextBox.ToolTip>
+                            </TextBox>
                             <TextBox Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                                     Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+
+                                <TextBox.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                                    </StackPanel>
+                                </TextBox.ToolTip>
+                            </TextBox>
                             <Button Grid.Column="2" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Content="-" 
                                     Command="{Binding DataContext.Commands.RemoveBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+                                <Button.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                                    </StackPanel>
+                                </Button.ToolTip>
                                 <Button.CommandParameter>
                                     <MultiBinding Converter="{StaticResource ShapeBindingParameterConverter}">
                                         <Binding Path="DataContext" ElementName="bindingsItemsControls"/>
@@ -1760,7 +2616,14 @@
         <Menu Background="Transparent" HorizontalAlignment="Right">
             <MenuItem Command="{Binding DataContext.Commands.AddPropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                       CommandParameter="{Binding}" 
-                      Header="+"/>
+                      Header="+">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
         </Menu>
     </ControlTemplate>
     <ControlTemplate x:Key="PropertiesControlTemplateKey">
@@ -1812,11 +2675,31 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <TextBox Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                <TextBox.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                                    </StackPanel>
+                                </TextBox.ToolTip>
+                            </TextBox>
                             <TextBox Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                                     Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                <TextBox.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                                    </StackPanel>
+                                </TextBox.ToolTip>
+                            </TextBox>
                             <Button Grid.Column="2" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Content="-" 
                                     Command="{Binding DataContext.Commands.RemovePropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+                                <Button.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                                    </StackPanel>
+                                </Button.ToolTip>
                                 <Button.CommandParameter>
                                     <MultiBinding Converter="{StaticResource ShapePropertyParameterConverter}">
                                         <Binding Path="DataContext" ElementName="propertiesItemsControls"/>
@@ -1877,9 +2760,23 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <TextBox Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                <TextBox.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                                    </StackPanel>
+                                </TextBox.ToolTip>
+                            </TextBox>
                             <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                                     Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                <TextBox.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                                    </StackPanel>
+                                </TextBox.ToolTip>
+                            </TextBox>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -1890,7 +2787,14 @@
         <Menu Background="Transparent" HorizontalAlignment="Right">
             <MenuItem Command="{Binding DataContext.Commands.ResetRecordCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                       CommandParameter="{Binding}" 
-                      Header="X"/>
+                      Header="X">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
         </Menu>
     </ControlTemplate>
     <DataTemplate DataType="{x:Type core:Record}">
@@ -1944,7 +2848,14 @@
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
                             <TextBox Grid.Column="0" Grid.Row="0" Margin="5,2,0,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                <TextBox.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                                    </StackPanel>
+                                </TextBox.ToolTip>
+                            </TextBox>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -1956,7 +2867,14 @@
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
                             <TextBox Grid.Column="0" Grid.Row="0" Margin="0,2,5,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                                     Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                <TextBox.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                                    </StackPanel>
+                                </TextBox.ToolTip>
+                            </TextBox>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -1977,7 +2895,14 @@
         <Menu Background="Transparent" HorizontalAlignment="Right">
             <MenuItem Command="{Binding DataContext.Commands.AddColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                       CommandParameter="{Binding}" 
-                      Header="+"/>
+                      Header="+">
+                <MenuItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </MenuItem.ToolTip>
+            </MenuItem>
         </Menu>
     </ControlTemplate>
     <ControlTemplate x:Key="ColumnsControlTemplateKey">
@@ -2027,9 +2952,22 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <TextBox Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                <TextBox.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                                    </StackPanel>
+                                </TextBox.ToolTip>
+                            </TextBox>
                             <Button Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Content="-" 
                                     Command="{Binding DataContext.Commands.RemoveColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+                                <Button.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                                    </StackPanel>
+                                </Button.ToolTip>
                                 <Button.CommandParameter>
                                     <MultiBinding Converter="{StaticResource ColumnParameterConverter}">
                                         <Binding Path="DataContext" ElementName="columnsItemsControls"/>
@@ -2047,9 +2985,21 @@
         <StackPanel>
             <Control Template="{StaticResource NameControlTemplateKey}"/>
             <Expander Header="Columns" IsExpanded="True">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource ColumnsControlTemplateKey}"/>
             </Expander>
             <Expander Header="Current Record" IsExpanded="False">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding CurrentRecord}"/>
             </Expander>
         </StackPanel>
@@ -2057,12 +3007,30 @@
     <ControlTemplate x:Key="DataControlTemplate">
         <TabControl>
             <TabItem Header="Record">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <Control Template="{StaticResource RecordControlTemplateKey}"/>
             </TabItem>
             <TabItem Header="Bindings">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <Control Template="{StaticResource BindingsControlTemplateKey}"/>
             </TabItem>
             <TabItem Header="Properties">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
             </TabItem>
         </TabControl>
@@ -2071,6 +3039,12 @@
     <DataTemplate DataType="{x:Type core:XPoint}">
         <TabControl>
             <TabItem Header="Point">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <StackPanel>
                     <Control Template="{StaticResource NameControlTemplateKey}"/>
                     <Grid>
@@ -2095,6 +3069,12 @@
                                  Grid.Column="1" 
                                  TextAlignment="Left" 
                                  VerticalAlignment="Center">
+                            <TextBox.ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                                </StackPanel>
+                            </TextBox.ToolTip>
                         </TextBox>
                     </Grid>
                     <Grid>
@@ -2119,15 +3099,39 @@
                                  Grid.Column="1" 
                                  TextAlignment="Left" 
                                  VerticalAlignment="Center">
+                            <TextBox.ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                                </StackPanel>
+                            </TextBox.ToolTip>
                         </TextBox>
                     </Grid>
                     <Expander Header="State">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <Control Template="{StaticResource StateControlTemplateKey}"/>
                     </Expander>
                     <Expander Header="Code">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <Control Template="{StaticResource CodeControlTemplateKey}"/>
                     </Expander>
                     <Expander Header="Data">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <Control Template="{StaticResource DataControlTemplate}"/>
                     </Expander>
                 </StackPanel>
@@ -2143,21 +3147,57 @@
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Expander Header="Start">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Start}"/>
             </Expander>
             <Expander Header="End">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding End}"/>
             </Expander>
             <Expander Header="State">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Code">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
             <Expander Header="Style">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
@@ -2170,21 +3210,57 @@
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
             <Control Template="{StaticResource TextControlTemplateKey}"/>
             <Expander Header="TopLeft">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding TopLeft}"/>
             </Expander>
             <Expander Header="BottomRight">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding BottomRight}"/>
             </Expander>
             <Expander Header="State">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Code">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
             <Expander Header="Style">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
@@ -2197,21 +3273,57 @@
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
             <Control Template="{StaticResource TextControlTemplateKey}"/>
             <Expander Header="TopLeft">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding TopLeft}"/>
             </Expander>
             <Expander Header="BottomRight">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding BottomRight}"/>
             </Expander>
             <Expander Header="State">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Code">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
             <Expander Header="Style">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
@@ -2223,27 +3335,75 @@
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
             <Expander Header="Point1">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point1}"/>
             </Expander>
             <Expander Header="Point2">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point2}"/>
             </Expander>
             <Expander Header="Point3">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point3}"/>
             </Expander>
             <Expander Header="Point4">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point4}"/>
             </Expander>
             <Expander Header="State">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Code">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
             <Expander Header="Style">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
@@ -2255,27 +3415,75 @@
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
             <Expander Header="Point1">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point1}"/>
             </Expander>
             <Expander Header="Point2">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point2}"/>
             </Expander>
             <Expander Header="Point3">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point3}"/>
             </Expander>
             <Expander Header="Point4">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point4}"/>
             </Expander>
             <Expander Header="State">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Code">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
             <Expander Header="Style">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
@@ -2287,24 +3495,66 @@
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
             <Expander Header="Point1">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point1}"/>
             </Expander>
             <Expander Header="Point2">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point2}"/>
             </Expander>
             <Expander Header="Point3">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Point3}"/>
             </Expander>
             <Expander Header="State">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Code">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
             <Expander Header="Style">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
     </StackPanel>
@@ -2315,21 +3565,57 @@
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource TextControlTemplateKey}"/>
             <Expander Header="TopLeft">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding TopLeft}"/>
             </Expander>
             <Expander Header="BottomRight">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding BottomRight}"/>
             </Expander>
             <Expander Header="State">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Code">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
             <Expander Header="Style">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
@@ -2348,25 +3634,67 @@
                                 Margin="5,2,5,2"
                                 TextAlignment="Left" 
                                 VerticalAlignment="Center">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                 </Grid>
             </Expander>
             <Expander Header="TopLeft">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding TopLeft}"/>
             </Expander>
             <Expander Header="BottomRight">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding BottomRight}"/>
             </Expander>
             <Expander Header="State">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Code">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
             <Expander Header="Style">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
@@ -2374,23 +3702,59 @@
     <DataTemplate DataType="{x:Type core:XGroup}">
         <TabControl>
             <TabItem Header="Group">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <StackPanel>
                     <Control Template="{StaticResource NameControlTemplateKey}"/>
                     <Expander Header="Properties" IsExpanded="True">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <Control Template="{StaticResource ShapesPropertiesControlTemplateKey}"/>
                     </Expander>
                     <Expander Header="State">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <Control Template="{StaticResource StateControlTemplateKey}"/>
                     </Expander>
                     <Expander Header="Code">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <Control Template="{StaticResource CodeControlTemplateKey}"/>
                     </Expander>
                     <Expander Header="Data">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <Control Template="{StaticResource DataControlTemplate}"/>
                     </Expander>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Shapes">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -2414,6 +3778,12 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Connectors">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -2441,26 +3811,68 @@
     <DataTemplate DataType="{x:Type core:XReference}">
         <TabControl>
             <TabItem Header="Reference">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <StackPanel>
                     <Control Template="{StaticResource NameControlTemplateKey}"/>
                     <Expander Header="Properties">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <Control Template="{StaticResource ShapesPropertiesControlTemplateKey}"/>
                     </Expander>
                     <Expander Header="State">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <Control Template="{StaticResource StateControlTemplateKey}"/>
                     </Expander>
                     <Expander Header="Code">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <Control Template="{StaticResource CodeControlTemplateKey}"/>
                     </Expander>
                     <Expander Header="Data">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
                         <Control Template="{StaticResource DataControlTemplate}"/>
                     </Expander>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Origin">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <ContentControl Content="{Binding Origin}"/>
             </TabItem>
             <TabItem Header="Shape">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <ContentControl Content="{Binding Shape}"/>
             </TabItem>
         </TabControl>
@@ -2480,22 +3892,58 @@
                                 Margin="5,2,5,2"
                                 TextAlignment="Left" 
                                 VerticalAlignment="Center">
+                        <TextBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </TextBox.ToolTip>
                     </TextBox>
                 </Grid>
             </Expander>
             <Expander Header="Geometry">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Geometry}"/>
             </Expander>
             <Expander Header="State">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Code">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource CodeControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
             <Expander Header="Style">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
@@ -2506,9 +3954,23 @@
         <MenuItem Header="Te_mplate" 
                   Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
                   DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Editor.Project.Templates}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
             <MenuItem.ItemContainerStyle>
                 <Style TargetType="MenuItem">
                     <Setter Property="Header" Value="{Binding Name}"/>
+                    <Setter Property="ToolTip">
+                        <Setter.Value>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                                <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                            </StackPanel>
+                        </Setter.Value>
+                    </Setter>
                     <Setter Property="Command" Value="{Binding Path=Tag.Commands.ApplyTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}, FallbackValue={x:Null}}"/>
                     <Setter Property="CommandParameter" Value="{Binding}"/>
                     <Setter Property="IsCheckable" Value="True"/>
@@ -2528,41 +3990,166 @@
             </MenuItem.ItemContainerStyle>
         </MenuItem>
         <Separator/>
-        <MenuItem Header="Insert Container Bef_ore" InputGestureText="" Command="{Binding DataContext.Commands.InsertContainerBeforeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
-        <MenuItem Header="Insert Container Aft_er" InputGestureText="" Command="{Binding DataContext.Commands.InsertContainerAfterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="Insert Container Bef_ore" InputGestureText="" Command="{Binding DataContext.Commands.InsertContainerBeforeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
+        <MenuItem Header="Insert Container Aft_er" InputGestureText="" Command="{Binding DataContext.Commands.InsertContainerAfterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
         <Separator/>
-        <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{Binding DataContext.Commands.CutCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
-        <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{Binding DataContext.Commands.CopyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
-        <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{Binding DataContext.Commands.PasteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{Binding DataContext.Commands.CutCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
+        <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{Binding DataContext.Commands.CopyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
+        <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{Binding DataContext.Commands.PasteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
         <Separator/>
-        <MenuItem Header="_Delete" InputGestureText="Del" Command="{Binding DataContext.Commands.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="_Delete" InputGestureText="Del" Command="{Binding DataContext.Commands.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
         <Separator/>
-        <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
     </ContextMenu>
     <ContextMenu x:Key="DocumentContextMenu" 
                  DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-        <MenuItem Header="_Add Container" InputGestureText="Ctrl+N" Command="{Binding DataContext.Commands.AddContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="_Add Container" InputGestureText="Ctrl+N" Command="{Binding DataContext.Commands.AddContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
         <Separator/>
-        <MenuItem Header="Insert Document Bef_ore" InputGestureText="" Command="{Binding DataContext.Commands.InsertDocumentBeforeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
-        <MenuItem Header="Insert Document Aft_er" InputGestureText="" Command="{Binding DataContext.Commands.InsertDocumentAfterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="Insert Document Bef_ore" InputGestureText="" Command="{Binding DataContext.Commands.InsertDocumentBeforeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
+        <MenuItem Header="Insert Document Aft_er" InputGestureText="" Command="{Binding DataContext.Commands.InsertDocumentAfterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
         <Separator/>
-        <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{Binding DataContext.Commands.CutCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
-        <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{Binding DataContext.Commands.CopyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
-        <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{Binding DataContext.Commands.PasteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{Binding DataContext.Commands.CutCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
+        <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{Binding DataContext.Commands.CopyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
+        <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{Binding DataContext.Commands.PasteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
         <Separator/>
-        <MenuItem Header="_Delete" InputGestureText="Del" Command="{Binding DataContext.Commands.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="_Delete" InputGestureText="Del" Command="{Binding DataContext.Commands.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
         <Separator/>
-        <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
     </ContextMenu>
     <ContextMenu x:Key="PojectContextMenu" 
                  DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-        <MenuItem Header="_Add Document" InputGestureText="Ctrl+N" Command="{Binding DataContext.Commands.AddDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="_Add Document" InputGestureText="Ctrl+N" Command="{Binding DataContext.Commands.AddDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
         <Separator/>
-        <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}"/>
+        <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding}">
+            <MenuItem.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </MenuItem.ToolTip>
+        </MenuItem>
     </ContextMenu>
     <DataTemplate DataType="{x:Type core:Options}">
         <TabControl>
             <TabItem Header="{x:Static p:Resources.OptionsHeaderGeneral}">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -2743,6 +4330,12 @@
                 </Grid>
             </TabItem>
             <TabItem Header="{x:Static p:Resources.OptionsHeaderDefaults}">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -2869,6 +4462,12 @@
                 </Grid>
             </TabItem>
             <TabItem Header="{x:Static p:Resources.OptionsHeaderAdvanced}">
+                <TabItem.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TabItem.ToolTip>
                 <StackPanel>
                     <Expander Header="{x:Static p:Resources.OptionsPointShape}">
                         <Expander.ToolTip>
@@ -3014,6 +4613,12 @@
                 <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
             </Expander>
             <Expander Header="{x:Static p:Resources.ContainerTemplate}">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Grid>
                     <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.Templates, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                                 SelectedItem="{Binding Path=DataContext.Template, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" 
@@ -3033,6 +4638,12 @@
                 </Grid>
             </Expander>
             <Expander Header="{x:Static p:Resources.ContainerSize}">
+                <Expander.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </Expander.ToolTip>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -3105,6 +4716,12 @@
                  BorderBrush="{x:Null}" 
                  TextAlignment="Left" 
                  VerticalAlignment="Center">
+            <TextBox.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </TextBox.ToolTip>
         </TextBox>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:GroupLibrary}">
@@ -3112,6 +4729,12 @@
                  BorderBrush="{x:Null}" 
                  TextAlignment="Left" 
                  VerticalAlignment="Center">
+            <TextBox.ToolTip>
+                <StackPanel>
+                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                    <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                </StackPanel>
+            </TextBox.ToolTip>
         </TextBox>
     </DataTemplate>
     <ControlTemplate x:Key="ContainerControlTemplateKey">
