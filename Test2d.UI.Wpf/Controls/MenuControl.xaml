@@ -873,20 +873,17 @@
                     </HierarchicalDataTemplate.ItemContainerStyle>
                     <HierarchicalDataTemplate.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}">
-                                <TextBlock.ToolTip>
-                                    <StackPanel>
-                                        <TextBlock FontWeight="Bold" Text="{Binding Name}"/>
-                                        <TextBlock Text="{Binding Path}"/>
-                                    </StackPanel>
-                                </TextBlock.ToolTip>
+                            <TextBlock Text="{Binding Name}"
+                                       Style="{StaticResource ToolTipTextBlockStyleKey}"
+                                       controls:TooltipTemplate.Header="{Binding Name}"
+                                       controls:TooltipTemplate.Script="{Binding Path}">
                             </TextBlock>
                         </DataTemplate>
                     </HierarchicalDataTemplate.ItemTemplate>
-                    <TextBlock Text="{Binding Name}">
-                        <TextBlock.ToolTip>
-                            <TextBlock Text="{Binding Name}"/>
-                        </TextBlock.ToolTip>
+                    <TextBlock Text="{Binding Name}"
+                               Style="{StaticResource ToolTipTextBlockStyleKey}"
+                               controls:TooltipTemplate.Header="{Binding Name}"
+                               controls:TooltipTemplate.Script="{Binding Path}">
                     </TextBlock>
                 </HierarchicalDataTemplate>
             </MenuItem.ItemTemplate>
