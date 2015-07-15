@@ -14,82 +14,61 @@
             <TextBlock Text="{TemplateBinding controls:TooltipTemplate.Script}"/>
         </StackPanel>
     </ControlTemplate>
-    <Style TargetType="TextBox">
-        <Style.Triggers>
-            <Trigger Property="controls:TooltipTemplate.Enabled" Value="True">
-                <Setter Property="ToolTip">
-                    <Setter.Value>
-                        <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-        </Style.Triggers>
+    <Style x:Key="ToolTipTextBlockStyleKey" TargetType="TextBlock">
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+            </Setter.Value>
+        </Setter>
     </Style>
-    <Style TargetType="Slider">
-        <Style.Triggers>
-            <Trigger Property="controls:TooltipTemplate.Enabled" Value="True">
-                <Setter Property="ToolTip">
-                    <Setter.Value>
-                        <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-        </Style.Triggers>
+    <Style x:Key="ToolTipTextBoxStyleKey" TargetType="TextBox">
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+            </Setter.Value>
+        </Setter>
     </Style>
-    <Style TargetType="Expander">
-        <Style.Triggers>
-            <Trigger Property="controls:TooltipTemplate.Enabled" Value="True">
-                <Setter Property="ToolTip">
-                    <Setter.Value>
-                        <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-        </Style.Triggers>
+    <Style x:Key="ToolTipSliderStyleKey" TargetType="Slider">
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+            </Setter.Value>
+        </Setter>
     </Style>
-    <Style TargetType="TabItem">
-        <Style.Triggers>
-            <Trigger Property="controls:TooltipTemplate.Enabled" Value="True">
-                <Setter Property="ToolTip">
-                    <Setter.Value>
-                        <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-        </Style.Triggers>
+    <Style x:Key="ToolTipExpanderStyleKey" TargetType="Expander">
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+            </Setter.Value>
+        </Setter>
     </Style>
-    <Style TargetType="MenuItem">
-        <Style.Triggers>
-            <Trigger Property="controls:TooltipTemplate.Enabled" Value="True">
-                <Setter Property="ToolTip">
-                    <Setter.Value>
-                        <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-        </Style.Triggers>
+    <Style x:Key="ToolTipTabItemStyleKey" TargetType="TabItem">
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+            </Setter.Value>
+        </Setter>
     </Style>
-    <Style TargetType="CheckBox">
-        <Style.Triggers>
-            <Trigger Property="controls:TooltipTemplate.Enabled" Value="True">
-                <Setter Property="ToolTip">
-                    <Setter.Value>
-                        <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-        </Style.Triggers>
+    <Style x:Key="ToolTipMenuItemStyleKey" TargetType="MenuItem">
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+            </Setter.Value>
+        </Setter>
     </Style>
-    <Style TargetType="ComboBox">
-        <Style.Triggers>
-            <Trigger Property="controls:TooltipTemplate.Enabled" Value="True">
-                <Setter Property="ToolTip">
-                    <Setter.Value>
-                        <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-        </Style.Triggers>
+    <Style x:Key="ToolTipCheckBoxStyleKey" TargetType="CheckBox">
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ToolTipComboBoxStyleKey" TargetType="ComboBox">
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+            </Setter.Value>
+        </Setter>
     </Style>
     <!-- converters -->
     <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
