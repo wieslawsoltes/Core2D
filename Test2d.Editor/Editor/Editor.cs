@@ -702,6 +702,45 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="property"></param>
+        public void AddWithHistory(BaseShape shape, ShapeProperty property)
+        {
+            var previous = shape.Properties;
+            var next = shape.Properties.Add(property);
+            _history.Snapshot(previous, next, (p) => shape.Properties = p);
+            shape.Properties = next;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="property"></param>
+        public void AddWithHistory(Container container, ShapeProperty property)
+        {
+            var previous = container.Properties;
+            var next = container.Properties.Add(property);
+            _history.Snapshot(previous, next, (p) => container.Properties = p);
+            container.Properties = next;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="binding"></param>
+        public void AddWithHistory(BaseShape shape, ShapeBinding binding)
+        {
+            var previous = shape.Bindings;
+            var next = shape.Bindings.Add(binding);
+            _history.Snapshot(previous, next, (p) => shape.Bindings = p);
+            shape.Bindings = next;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void RemoveCurrentTemplate()
         {
             if (_project == null)

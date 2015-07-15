@@ -798,10 +798,7 @@ namespace Test2d
                     shape.Bindings = ImmutableArray.Create<ShapeBinding>();
                 }
 
-                var previous = shape.Bindings;
-                var next = shape.Bindings.Add(ShapeBinding.Create("", ""));
-                _editor.History.Snapshot(previous, next, (p) => shape.Bindings = p);
-                shape.Bindings = next;
+                _editor.AddWithHistory(shape, ShapeBinding.Create("", ""));
             }
         }
 
@@ -845,11 +842,8 @@ namespace Test2d
                     {
                         shape.Properties = ImmutableArray.Create<ShapeProperty>();
                     }
-
-                    var previous = shape.Properties;
-                    var next = shape.Properties.Add(ShapeProperty.Create("New", ""));
-                    _editor.History.Snapshot(previous, next, (p) => shape.Properties = p);
-                    shape.Properties = next;
+                    
+                    _editor.AddWithHistory(shape, ShapeProperty.Create("New", ""));
                 }
                 else if (owner is Container)
                 {
@@ -858,11 +852,8 @@ namespace Test2d
                     {
                         container.Properties = ImmutableArray.Create<ShapeProperty>();
                     }
-
-                    var previous = container.Properties;
-                    var next = container.Properties.Add(ShapeProperty.Create("New", ""));
-                    _editor.History.Snapshot(previous, next, (p) => container.Properties = p);
-                    container.Properties = next;
+                    
+                    _editor.AddWithHistory(container, ShapeProperty.Create("New", ""));
                 }
             }
         }
