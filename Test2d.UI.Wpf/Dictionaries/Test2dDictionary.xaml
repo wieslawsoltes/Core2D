@@ -2583,7 +2583,6 @@
                             </TextBox>
                             <TextBox Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" 
                                      Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
-
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
