@@ -15,36 +15,6 @@ namespace Test.Controls
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static bool GetEnabled(DependencyObject obj)
-        {
-            return (bool)obj.GetValue(EnabledProperty);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <param name="value"></param>
-        public static void SetEnabled(DependencyObject obj, bool value)
-        {
-            obj.SetValue(EnabledProperty, value);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public static readonly DependencyProperty EnabledProperty =
-            DependencyProperty.RegisterAttached(
-                "Enabled",
-                typeof(bool),
-                typeof(TooltipTemplate),
-                new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.Inherits));
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
         public static string GetHeader(DependencyObject obj)
         {
             return (string)obj.GetValue(HeaderProperty);
