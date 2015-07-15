@@ -75,13 +75,11 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Eto, Version=2.0.5668.42515, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Forms.2.1.0-build0310\lib\net45\Eto.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Eto">
+      <HintPath>..\packages\Eto.Forms.2.1.0-build0312\lib\net45\Eto.dll</HintPath>
     </Reference>
-    <Reference Include="Eto.Wpf, Version=2.0.5668.42529, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Wpf.2.1.0-build0310\lib\net45\Eto.Wpf.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Eto.Wpf">
+      <HintPath>..\packages\Eto.Platform.Wpf.2.1.0-build0312\lib\net45\Eto.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
