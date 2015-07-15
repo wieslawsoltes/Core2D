@@ -7,272 +7,254 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:editor="clr-namespace:Test2d;assembly=Test2d.Editor"
              xmlns:converters="clr-namespace:Test.Converters"
+             xmlns:controls="clr-namespace:Test.Controls"
              xmlns:p="clr-namespace:Test2d.UI.Wpf.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="20" d:DesignWidth="810">
     <Menu Background="Transparent">
-        <MenuItem Header="{x:Static p:Resources.MenuFile}">
-            <MenuItem.ToolTip>
-                <StackPanel>
-                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFile}"/>
-                    <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFile}"/>
-                </StackPanel>
-            </MenuItem.ToolTip>
-            <MenuItem Header="{x:Static p:Resources.MenuFileNew}" Command="{Binding Commands.NewCommand}" CommandParameter="{Binding}" InputGestureText="Ctrl+N">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileNew}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileNew}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+        <MenuItem Header="{x:Static p:Resources.MenuFile}"
+                  Style="{StaticResource ToolTipMenuItemStyleKey}"
+                  controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFile}"
+                  controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFile}">
+            <MenuItem Header="{x:Static p:Resources.MenuFileNew}" 
+                      Command="{Binding Commands.NewCommand}" CommandParameter="{Binding}" 
+                      InputGestureText="Ctrl+N"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileNew}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileNew}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileOpen}" Command="{Binding Commands.OpenCommand}" InputGestureText="Ctrl+O">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileOpen}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileOpen}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuFileOpen}" 
+                      Command="{Binding Commands.OpenCommand}" 
+                      InputGestureText="Ctrl+O"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileOpen}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileOpen}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileClose}" Command="{Binding Commands.CloseCommand}" InputGestureText="Ctrl+F4">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileClose}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileClose}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuFileClose}" 
+                      Command="{Binding Commands.CloseCommand}" 
+                      InputGestureText="Ctrl+F4"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileClose}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileClose}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileSave}" Command="{Binding Commands.SaveCommand}" InputGestureText="Ctrl+S">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileSave}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileSave}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuFileSave}" 
+                      Command="{Binding Commands.SaveCommand}" 
+                      InputGestureText="Ctrl+S"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileSave}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileSave}">
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuFileSaveAs}" Command="{Binding Commands.SaveAsCommand}" InputGestureText="Ctrl+Shift+S">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileSaveAs}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileSaveAs}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuFileSaveAs}" 
+                      Command="{Binding Commands.SaveAsCommand}" 
+                      InputGestureText="Ctrl+Shift+S"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileSaveAs}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileSaveAs}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileExport}" Command="{Binding Commands.ExportCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText="Ctrl+E">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileExport}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileExport}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuFileExport}" 
+                      Command="{Binding Commands.ExportCommand}" 
+                      CommandParameter="{Binding Editor.Project}" 
+                      InputGestureText="Ctrl+E"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileExport}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileExport}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileSubMenuImport}">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileSubMenuImport}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileSubMenuImport}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
-                <MenuItem Header="{x:Static p:Resources.MenuFileImportStyle}" Command="{Binding Commands.ImportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileImportStyle}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileImportStyle}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuFileSubMenuImport}"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileSubMenuImport}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileSubMenuImport}">
+                <MenuItem Header="{x:Static p:Resources.MenuFileImportStyle}" 
+                          Command="{Binding Commands.ImportStyleCommand}" 
+                          CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileImportStyle}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileImportStyle}">
                 </MenuItem>
-                <MenuItem Header="{x:Static p:Resources.MenuFileImportStyles}" Command="{Binding Commands.ImportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileImportStyles}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileImportStyles}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuFileImportStyles}" 
+                          Command="{Binding Commands.ImportStylesCommand}" 
+                          CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileImportStyles}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileImportStyles}">
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="{x:Static p:Resources.MenuFileImportStyleLibrary}" Command="{Binding Commands.ImportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileImportStyleLibrary}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileImportStyleLibrary}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuFileImportStyleLibrary}" 
+                          Command="{Binding Commands.ImportStyleLibraryCommand}" 
+                          CommandParameter="{Binding Editor.Project}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileImportStyleLibrary}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileImportStyleLibrary}">
                 </MenuItem>
-                <MenuItem Header="{x:Static p:Resources.MenuFileImportStyleLibraries}" Command="{Binding Commands.ImportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileImportStyleLibraries}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileImportStyleLibraries}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
-                </MenuItem>
-                <Separator/>
-                <MenuItem Header="{x:Static p:Resources.MenuFileImportGroup}" Command="{Binding Commands.ImportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileImportGroup}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileImportGroup}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
-                </MenuItem>
-                <MenuItem Header="{x:Static p:Resources.MenuFileImportGroups}" Command="{Binding Commands.ImportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileImportGroups}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileImportGroups}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuFileImportStyleLibraries}" 
+                          Command="{Binding Commands.ImportStyleLibrariesCommand}" 
+                          CommandParameter="{Binding Editor.Project}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileImportStyleLibraries}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileImportStyleLibraries}">
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="{x:Static p:Resources.MenuFileImportGroupLibrary}" Command="{Binding Commands.ImportGroupLibraryCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileImportGroupLibrary}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileImportGroupLibrary}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuFileImportGroup}" 
+                          Command="{Binding Commands.ImportGroupCommand}" 
+                          CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileImportGroup}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileImportGroup}">
                 </MenuItem>
-                <MenuItem Header="{x:Static p:Resources.MenuFileImportGroupLibraries}" Command="{Binding Commands.ImportGroupLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileImportGroupLibraries}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileImportGroupLibraries}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuFileImportGroups}" 
+                          Command="{Binding Commands.ImportGroupsCommand}" 
+                          CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileImportGroups}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileImportGroups}">
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="{x:Static p:Resources.MenuFileImportTemplate}" Command="{Binding Commands.ImportTemplateCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileImportTemplate}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileImportTemplate}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuFileImportGroupLibrary}" 
+                          Command="{Binding Commands.ImportGroupLibraryCommand}" 
+                          CommandParameter="{Binding Editor.Project}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileImportGroupLibrary}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileImportGroupLibrary}">
                 </MenuItem>
-                <MenuItem Header="{x:Static p:Resources.MenuFileImportTemplates}" Command="{Binding Commands.ImportTemplatesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileImportTemplates}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileImportTemplates}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuFileImportGroupLibraries}" 
+                          Command="{Binding Commands.ImportGroupLibrariesCommand}" 
+                          CommandParameter="{Binding Editor.Project}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileImportGroupLibraries}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileImportGroupLibraries}">
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="{x:Static p:Resources.MenuFileImportTemplate}" 
+                          Command="{Binding Commands.ImportTemplateCommand}" 
+                          CommandParameter="{Binding Editor.Project}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileImportTemplate}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileImportTemplate}">
+                </MenuItem>
+                <MenuItem Header="{x:Static p:Resources.MenuFileImportTemplates}"
+                          Command="{Binding Commands.ImportTemplatesCommand}" 
+                          CommandParameter="{Binding Editor.Project}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileImportTemplates}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileImportTemplates}">
                 </MenuItem>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileSubMenuExport}">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileSubMenuExport}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileSubMenuExport}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
-                <MenuItem Header="{x:Static p:Resources.MenuFileExportStyle}" Command="{Binding Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileExportStyle}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileExportStyle}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuFileSubMenuExport}"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileSubMenuExport}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileSubMenuExport}">
+                <MenuItem Header="{x:Static p:Resources.MenuFileExportStyle}" 
+                          Command="{Binding Commands.ExportStyleCommand}" 
+                          CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileExportStyle}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileExportStyle}">
                 </MenuItem>
-                <MenuItem Header="{x:Static p:Resources.MenuFileExportStyles}" Command="{Binding Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileExportStyles}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileExportStyles}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuFileExportStyles}" 
+                          Command="{Binding Commands.ExportStylesCommand}" 
+                          CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileExportStyles}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileExportStyles}">
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="{x:Static p:Resources.MenuFileExportStyleLibrary}" Command="{Binding Commands.ExportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileExportStyleLibrary}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileExportStyleLibrary}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuFileExportStyleLibrary}" 
+                          Command="{Binding Commands.ExportStyleLibraryCommand}" 
+                          CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileExportStyleLibrary}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileExportStyleLibrary}">
                 </MenuItem>
-                <MenuItem Header="{x:Static p:Resources.MenuFileExportStyleLibraries}" Command="{Binding Commands.ExportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileExportStyleLibraries}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileExportStyleLibraries}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
-                </MenuItem>
-                <Separator/>
-                <MenuItem Header="{x:Static p:Resources.MenuFileExportGroup}" Command="{Binding Commands.ExportGroupCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.CurrentGroup}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileExportGroup}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileExportGroup}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
-                </MenuItem>
-                <MenuItem Header="{x:Static p:Resources.MenuFileExportGroups}" Command="{Binding Commands.ExportGroupsCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileExportGroups}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileExportGroups}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuFileExportStyleLibraries}" 
+                          Command="{Binding Commands.ExportStyleLibrariesCommand}" 
+                          CommandParameter="{Binding Editor.Project}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileExportStyleLibraries}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileExportStyleLibraries}">
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="{x:Static p:Resources.MenuFileExportGroupLibrary}" Command="{Binding Commands.ExportGroupLibraryCommand}" CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileExportGroupLibrary}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileExportGroupLibrary}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuFileExportGroup}" 
+                          Command="{Binding Commands.ExportGroupCommand}" 
+                          CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.CurrentGroup}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileExportGroup}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileExportGroup}">
                 </MenuItem>
-                <MenuItem Header="{x:Static p:Resources.MenuFileExportGroupLibraries}" Command="{Binding Commands.ExportGroupLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileExportGroupLibraries}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileExportGroupLibraries}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuFileExportGroups}" 
+                          Command="{Binding Commands.ExportGroupsCommand}" 
+                          CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileExportGroups}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileExportGroups}">
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="{x:Static p:Resources.MenuFileExportTemplate}" Command="{Binding Commands.ExportTemplateCommand}" CommandParameter="{Binding Editor.Project.CurrentTemplate}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileExportTemplate}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileExportTemplate}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuFileExportGroupLibrary}" 
+                          Command="{Binding Commands.ExportGroupLibraryCommand}" 
+                          CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileExportGroupLibrary}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileExportGroupLibrary}">
                 </MenuItem>
-                <MenuItem Header="{x:Static p:Resources.MenuFileExportTemplates}" Command="{Binding Commands.ExportTemplatesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileExportTemplates}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileExportTemplates}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuFileExportGroupLibraries}" 
+                          Command="{Binding Commands.ExportGroupLibrariesCommand}" 
+                          CommandParameter="{Binding Editor.Project}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileExportGroupLibraries}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileExportGroupLibraries}">
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="{x:Static p:Resources.MenuFileExportTemplate}" 
+                          Command="{Binding Commands.ExportTemplateCommand}" 
+                          CommandParameter="{Binding Editor.Project.CurrentTemplate}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileExportTemplate}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileExportTemplate}">
+                </MenuItem>
+                <MenuItem Header="{x:Static p:Resources.MenuFileExportTemplates}" 
+                          Command="{Binding Commands.ExportTemplatesCommand}" 
+                          CommandParameter="{Binding Editor.Project}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileExportTemplates}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileExportTemplates}">
                 </MenuItem>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileRecent}" ItemsSource="{Binding RecentProjects}">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileRecent}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileRecent}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuFileRecent}" 
+                      ItemsSource="{Binding RecentProjects}"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileRecent}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileRecent}">
                 <MenuItem.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}">
-                            <TextBlock.ToolTip>
-                                <StackPanel>
-                                    <TextBlock FontWeight="Bold" Text="{Binding Name}"/>
-                                    <TextBlock Text="{Binding Path}"/>
-                                </StackPanel>
-                            </TextBlock.ToolTip>
+                        <TextBlock Text="{Binding Name}"
+                                   Style="{StaticResource ToolTipTextBlockStyleKey}"
+                                   controls:TooltipTemplate.Header="{Binding Name}"
+                                   controls:TooltipTemplate.Script="{Binding Path}">
                         </TextBlock>
                     </DataTemplate>
                 </MenuItem.ItemTemplate>
@@ -284,13 +266,12 @@
                 </MenuItem.ItemContainerStyle>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuFileExit}" Command="{Binding Commands.ExitCommand}" InputGestureText="Alt+F4">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipFileExit}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptFileExit}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuFileExit}" 
+                      Command="{Binding Commands.ExitCommand}" 
+                      InputGestureText="Alt+F4"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileExit}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileExit}">
             </MenuItem>
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuEdit}">
@@ -848,10 +829,10 @@
                     <Style.Triggers>
                         <DataTrigger Value="True">
                             <DataTrigger.Binding>
-                                <MultiBinding Converter="{StaticResource ObjectEqualityConverter}">  
-                                    <Binding Path="Tag.Editor.Project.CurrentContainer.Template" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}"/>  
-                                    <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>  
-                                </MultiBinding> 
+                                <MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
+                                    <Binding Path="Tag.Editor.Project.CurrentContainer.Template" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}"/>
+                                    <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
+                                </MultiBinding>
                             </DataTrigger.Binding>
                             <Setter Property="IsChecked" Value="True"/>
                         </DataTrigger>
@@ -892,14 +873,14 @@
                     </HierarchicalDataTemplate.ItemContainerStyle>
                     <HierarchicalDataTemplate.ItemTemplate>
                         <DataTemplate>
-                        <TextBlock Text="{Binding Name}">
-                            <TextBlock.ToolTip>
-                                <StackPanel>
-                                    <TextBlock FontWeight="Bold" Text="{Binding Name}"/>
-                                    <TextBlock Text="{Binding Path}"/>
-                                </StackPanel>
-                            </TextBlock.ToolTip>
-                        </TextBlock>
+                            <TextBlock Text="{Binding Name}">
+                                <TextBlock.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" Text="{Binding Name}"/>
+                                        <TextBlock Text="{Binding Path}"/>
+                                    </StackPanel>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
                         </DataTemplate>
                     </HierarchicalDataTemplate.ItemTemplate>
                     <TextBlock Text="{Binding Name}">
