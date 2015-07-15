@@ -4,6 +4,7 @@
 
 * Main menu tooltips.
 * Add Close project command.
+* Fix window.Show() failing after layout loaded.
 
 ## Editor
 
