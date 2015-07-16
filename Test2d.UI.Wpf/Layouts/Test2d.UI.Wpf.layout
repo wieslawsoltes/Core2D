@@ -24,11 +24,11 @@
     </LayoutAnchorablePaneGroup>
     <LayoutDocumentPaneGroup Orientation="Horizontal">
       <LayoutDocumentPane>
-        <LayoutDocument Title="Container" IsSelected="True" IsLastFocusedDocument="True" ContentId="container" CanClose="False" LastActivationTimeStamp="07/16/2015 18:54:43" />
+        <LayoutDocument Title="Container" IsSelected="True" IsLastFocusedDocument="True" ContentId="container" CanClose="False" LastActivationTimeStamp="07/16/2015 22:32:29" />
       </LayoutDocumentPane>
     </LayoutDocumentPaneGroup>
-    <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="180">
-      <LayoutAnchorablePane DockWidth="180">
+    <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="190">
+      <LayoutAnchorablePane DockWidth="190">
         <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Styles" IsSelected="True" ContentId="styles" CanClose="False" />
         <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Layers" ContentId="layers" CanClose="False" />
         <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Shapes" ContentId="shapes" CanClose="False" />
