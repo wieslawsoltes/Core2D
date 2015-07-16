@@ -5,6 +5,7 @@
 * Main menu tooltips.
 * Add Close project command.
 * Fix window.Show() failing after layout loaded.
+* Drag & drop support for Group shapes and connectors.
 
 ## Editor
 
