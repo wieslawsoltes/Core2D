@@ -1304,9 +1304,6 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   <data name="ContainerTemplate" xml:space="preserve">
     <value>Template</value>
   </data>
-  <data name="ContainerSize" xml:space="preserve">
-    <value>Size</value>
-  </data>
   <data name="ContainerWidth" xml:space="preserve">
     <value>Width</value>
   </data>

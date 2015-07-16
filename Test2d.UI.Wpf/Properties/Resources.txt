@@ -777,7 +777,6 @@ DocumentTooltipScriptName
 ContainerName
 ContainerProperties
 ContainerTemplate
-ContainerSize
 ContainerWidth
 ContainerHeight
 ContainerBackground

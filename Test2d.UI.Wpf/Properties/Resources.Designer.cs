@@ -97,15 +97,6 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Size.
-        /// </summary>
-        public static string ContainerSize {
-            get {
-                return ResourceManager.GetString("ContainerSize", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Template.
         /// </summary>
         public static string ContainerTemplate {
