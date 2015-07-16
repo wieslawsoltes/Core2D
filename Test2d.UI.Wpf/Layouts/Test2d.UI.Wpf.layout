@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LayoutRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RootPanel Orientation="Horizontal">
-    <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="170">
-      <LayoutAnchorablePane DockWidth="170">
+    <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="200">
+      <LayoutAnchorablePane DockWidth="200">
         <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Project" IsSelected="True" ContentId="project" CanClose="False" />
         <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Templates" ContentId="templates" CanClose="False" />
       </LayoutAnchorablePane>
@@ -24,7 +24,7 @@
     </LayoutAnchorablePaneGroup>
     <LayoutDocumentPaneGroup Orientation="Horizontal">
       <LayoutDocumentPane>
-        <LayoutDocument Title="Container" IsSelected="True" IsLastFocusedDocument="True" ContentId="container" CanClose="False" LastActivationTimeStamp="07/14/2015 21:56:14" />
+        <LayoutDocument Title="Container" IsSelected="True" IsLastFocusedDocument="True" ContentId="container" CanClose="False" LastActivationTimeStamp="07/16/2015 18:54:43" />
       </LayoutDocumentPane>
     </LayoutDocumentPaneGroup>
     <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="180">
@@ -41,12 +41,12 @@
       <LayoutAnchorablePane DockWidth="210">
         <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Style" IsSelected="True" ContentId="style" CanClose="False" />
         <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="State" ContentId="state" CanClose="False" />
+        <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Scripts" ContentId="scripts" CanClose="False" />
       </LayoutAnchorablePane>
       <LayoutAnchorablePane>
         <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Data" IsSelected="True" ContentId="data" CanClose="False" />
         <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Code" ContentId="code" CanClose="False" />
         <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Script" ContentId="script" CanClose="False" />
-        <LayoutAnchorable AutoHideWidth="200" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Scripts" ContentId="scripts" CanClose="False" />
       </LayoutAnchorablePane>
     </LayoutAnchorablePaneGroup>
   </RootPanel>
