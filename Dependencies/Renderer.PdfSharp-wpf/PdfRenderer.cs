@@ -172,7 +172,7 @@ namespace PdfSharp
         {
             // create A4 page with landscape orientation
             PdfPage page = pdf.AddPage();
-            page.Size = PageSize.A4;
+            page.Size = PageSize.A3;
             page.Orientation = PageOrientation.Landscape;
 
             using (XGraphics gfx = XGraphics.FromPdfPage(page))

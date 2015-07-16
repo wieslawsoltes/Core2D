@@ -22,6 +22,7 @@ namespace Test2d
         private Layer _workingLayer;
         private Layer _helperLayer;
         private BaseShape _currentShape;
+        private bool _isTemplate;
 
         /// <summary>
         /// 
@@ -125,6 +126,15 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public bool IsTemplate
+        {
+            get { return _isTemplate; }
+            set { Update(ref _isTemplate, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void Clear()
         {
             foreach (var layer in Layers)
@@ -171,7 +181,7 @@ namespace Test2d
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        public static Container Create(string name = "Container", double width = 810, double height = 600)
+        public static Container Create(string name = "Container", double width = 840, double height = 600)
         {
             var c = new Container()
             {
