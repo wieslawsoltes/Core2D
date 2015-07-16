@@ -2691,9 +2691,9 @@
     <ControlTemplate x:Key="PropertiesControlTemplateKey">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="40*"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="60*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -2796,14 +2796,27 @@
     </ControlTemplate>
     <ControlTemplate x:Key="ShapesPropertiesControlTemplateKey">
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Grid Height="Auto" VerticalAlignment="Top" Grid.Row="0">
-                <Grid.Style>
-                    <Style TargetType="Grid">
+            <GridSplitter 
+                Grid.Column="1" 
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Width="10" 
+                Background="Transparent" 
+                ResizeBehavior="PreviousAndNext" 
+                ShowsPreview="True">
+            </GridSplitter>
+            <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,2,0,2" VerticalAlignment="Center" Text="Name">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding ShapesProperties.Length, FallbackValue=0}" Value="0">
@@ -2811,36 +2824,27 @@
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </Grid.Style>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="30"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="Name"/>
-                <TextBlock Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="Value"/>
-            </Grid>
-            <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1"
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock Grid.Column="2" Grid.Row="0" Margin="0,2,5,2" VerticalAlignment="Center" Text="Value">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ShapesProperties.Length, FallbackValue=0}" Value="0">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" 
+                          Grid.Column="0" Grid.Row="1"
                           ItemsSource="{Binding ShapesProperties, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="30"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <TextBox Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" 
+                            <TextBox Margin="5,2,0,2" VerticalAlignment="Center" 
                                      Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
@@ -2849,7 +2853,17 @@
                                     </StackPanel>
                                 </TextBox.ToolTip>
                             </TextBox>
-                            <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" 
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" 
+                          Grid.Column="2" Grid.Row="1"
+                          ItemsSource="{Binding ShapesProperties, UpdateSourceTrigger=PropertyChanged}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="Auto" VerticalAlignment="Top">
+                            <TextBox Margin="0,2,5,2" VerticalAlignment="Center" 
                                      Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
@@ -2881,9 +2895,9 @@
     <DataTemplate DataType="{x:Type core:Record}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="40*"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="60*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
