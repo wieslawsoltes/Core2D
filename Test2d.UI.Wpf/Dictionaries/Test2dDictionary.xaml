@@ -3822,17 +3822,18 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <ListBox 
+                    <controls:GroupShapesDragAndDropListBox 
                         x:Name="shapesListBox"
+                        Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
                         ItemsSource="{Binding Shapes}"
                         BorderBrush="{x:Null}"
                         Grid.Row="0">
-                        <ListBox.ItemTemplate>
+                        <controls:GroupShapesDragAndDropListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding}" Margin="0,5,0,5"/>
                             </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                        </controls:GroupShapesDragAndDropListBox.ItemTemplate>
+                    </controls:GroupShapesDragAndDropListBox>
                     <ContentControl 
                         Content="{Binding ElementName=shapesListBox, Path=SelectedItem}" 
                         Grid.Row="1" Margin="5,2,5,2">
@@ -3851,17 +3852,18 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <ListBox 
+                    <controls:GroupConnectorsDragAndDropListBox 
                         x:Name="connectorsListBox"
+                        Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
                         ItemsSource="{Binding Connectors}"
                         BorderBrush="{x:Null}"
                         Grid.Row="0">
-                        <ListBox.ItemTemplate>
+                        <controls:GroupConnectorsDragAndDropListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding}" Margin="0,5,0,5"/>
                             </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                        </controls:GroupConnectorsDragAndDropListBox.ItemTemplate>
+                    </controls:GroupConnectorsDragAndDropListBox>
                     <ContentControl 
                         Content="{Binding ElementName=connectorsListBox, Path=SelectedItem}" 
                         Grid.Row="1" Margin="5,2,5,2">
