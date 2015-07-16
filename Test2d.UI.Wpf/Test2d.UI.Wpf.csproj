@@ -175,6 +175,8 @@
     <Compile Include="Controls\DataControl.xaml.cs">
       <DependentUpon>DataControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DragAndDropListBoxes\GroupConnectorsDragAndDropListBox.cs" />
+    <Compile Include="Controls\DragAndDropListBoxes\GroupShapesDragAndDropListBox.cs" />
     <Compile Include="Controls\RecordsControl.xaml.cs">
       <DependentUpon>RecordsControl.xaml</DependentUpon>
     </Compile>
