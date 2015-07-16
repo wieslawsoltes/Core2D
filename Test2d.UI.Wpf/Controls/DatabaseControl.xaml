@@ -35,7 +35,7 @@
                   Margin="2,2,2,2">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                    <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
             <ComboBox.Style>

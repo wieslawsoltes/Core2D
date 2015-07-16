@@ -178,7 +178,7 @@
                 VerticalAlignment="Center">
             </TextBlock>
             <TextBox 
-                Text="{Binding Width, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
                 BorderBrush="{x:Null}"
                 Margin="5,2,5,2"
                 Grid.Row="0" 
@@ -194,7 +194,7 @@
                 </TextBox.ToolTip>
             </TextBox>
             <TextBox 
-                Text="{Binding Height, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
                 BorderBrush="{x:Null}" 
                 Margin="5,2,5,2"
                 Grid.Row="1" 
@@ -257,7 +257,7 @@
                 VerticalAlignment="Center">
             </TextBlock>
             <TextBox 
-                Text="{Binding X, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" 
                 BorderBrush="{x:Null}"
                 Margin="5,2,5,2"
                 Grid.Row="0" 
@@ -273,7 +273,7 @@
                 </TextBox.ToolTip>
             </TextBox>
             <TextBox 
-                Text="{Binding Y, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                Text="{Binding Y, UpdateSourceTrigger=PropertyChanged}" 
                 BorderBrush="{x:Null}" 
                 Margin="5,2,5,2"
                 Grid.Row="1" 
@@ -289,7 +289,7 @@
                 </TextBox.ToolTip>
             </TextBox>
             <TextBox 
-                Text="{Binding Width, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
                 BorderBrush="{x:Null}"
                 Margin="5,2,5,2"
                 Grid.Row="2" 
@@ -305,7 +305,7 @@
                 </TextBox.ToolTip>
             </TextBox>
             <TextBox 
-                Text="{Binding Height, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
                 BorderBrush="{x:Null}" 
                 Margin="5,2,5,2"
                 Grid.Row="3" 
@@ -378,7 +378,7 @@
                         VerticalAlignment="Center">
                 </TextBlock>
                 <TextBox 
-                        Text="{Binding RotationAngle, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                        Text="{Binding RotationAngle, UpdateSourceTrigger=PropertyChanged}" 
                         BorderBrush="{x:Null}"
                         Margin="5,2,5,2" 
                         Grid.Row="0" 
@@ -1100,7 +1100,7 @@
                        TextAlignment="Left" 
                        VerticalAlignment="Center">
             </TextBlock>
-            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                      BorderBrush="{x:Null}" 
                      Margin="5,2,5,2"
                      Grid.Row="0" 
@@ -1145,7 +1145,7 @@
                 </ComboBox.ToolTip>
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                        <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
@@ -1313,7 +1313,7 @@
                        VerticalAlignment="Center">
             </TextBlock>
             <ComboBox IsEditable="True" 
-                      Text="{Binding Text, UpdateSourceTrigger=PropertyChanged, Delay=500}"
+                      Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
                       Margin="5,2,5,2"
                       Grid.Row="0" 
                       Grid.Column="1" 
@@ -1739,7 +1739,7 @@
                     </StackPanel>
                 </Slider.ToolTip>
             </Slider>
-            <TextBox Text="{Binding A, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+            <TextBox Text="{Binding A, UpdateSourceTrigger=PropertyChanged}" 
                      BorderBrush="{x:Null}" 
                      Margin="5,2,5,2"
                      Grid.Row="1" 
@@ -1753,7 +1753,7 @@
                     </StackPanel>
                 </TextBox.ToolTip>
             </TextBox>
-            <TextBox Text="{Binding R, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+            <TextBox Text="{Binding R, UpdateSourceTrigger=PropertyChanged}" 
                      BorderBrush="{x:Null}" 
                      Margin="5,2,5,2"
                      Grid.Row="2" 
@@ -1767,7 +1767,7 @@
                     </StackPanel>
                 </TextBox.ToolTip>
             </TextBox>
-            <TextBox Text="{Binding G, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+            <TextBox Text="{Binding G, UpdateSourceTrigger=PropertyChanged}" 
                      BorderBrush="{x:Null}" 
                      Margin="5,2,5,2"
                      Grid.Row="3" 
@@ -1781,7 +1781,7 @@
                     </StackPanel>
                 </TextBox.ToolTip>
             </TextBox>
-            <TextBox Text="{Binding B, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+            <TextBox Text="{Binding B, UpdateSourceTrigger=PropertyChanged}" 
                      BorderBrush="{x:Null}" 
                      Margin="5,2,5,2"
                      Grid.Row="4" 
@@ -1814,7 +1814,7 @@
                            TextAlignment="Left" 
                            VerticalAlignment="Center">
                 </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                          BorderBrush="{x:Null}" 
                          Margin="5,2,5,2"
                          Grid.Row="0" 
@@ -1879,7 +1879,7 @@
                             </StackPanel>
                         </Slider.ToolTip>
                     </Slider>
-                    <TextBox Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                    <TextBox Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged}" 
                              BorderBrush="{x:Null}"
                              Margin="5,2,5,2"
                              Grid.Row="0" 
@@ -1990,7 +1990,7 @@
                             </StackPanel>
                         </Slider.ToolTip>
                     </Slider>
-                    <TextBox Text="{Binding DashOffset, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                    <TextBox Text="{Binding DashOffset, UpdateSourceTrigger=PropertyChanged}" 
                              BorderBrush="{x:Null}" 
                              Margin="5,2,5,2"
                              Grid.Row="1" 
@@ -2139,7 +2139,7 @@
                             </StackPanel>
                         </Slider.ToolTip>
                     </Slider>
-                    <TextBox Text="{Binding RadiusX, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                    <TextBox Text="{Binding RadiusX, UpdateSourceTrigger=PropertyChanged}" 
                              BorderBrush="{x:Null}" 
                              Margin="5,2,5,2"
                              Grid.Row="3" 
@@ -2153,7 +2153,7 @@
                             </StackPanel>
                         </TextBox.ToolTip>
                     </TextBox>
-                    <TextBox Text="{Binding RadiusY, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                    <TextBox Text="{Binding RadiusY, UpdateSourceTrigger=PropertyChanged}" 
                              BorderBrush="{x:Null}" 
                              Margin="5,2,5,2"
                              Grid.Row="4" 
@@ -2252,7 +2252,7 @@
                     </StackPanel>
                 </Slider.ToolTip>
             </Slider>
-            <TextBox Text="{Binding FontName, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+            <TextBox Text="{Binding FontName, UpdateSourceTrigger=PropertyChanged}" 
                      BorderBrush="{x:Null}" 
                      Margin="5,2,5,2"
                      Grid.Row="0" 
@@ -2267,7 +2267,7 @@
                     </StackPanel>
                 </TextBox.ToolTip>
             </TextBox>
-            <TextBox Text="{Binding FontFile, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+            <TextBox Text="{Binding FontFile, UpdateSourceTrigger=PropertyChanged}" 
                      BorderBrush="{x:Null}" 
                      Margin="5,2,5,2"
                      Grid.Row="1" 
@@ -2282,7 +2282,7 @@
                     </StackPanel>
                 </TextBox.ToolTip>
             </TextBox>
-            <TextBox Text="{Binding FontSize, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+            <TextBox Text="{Binding FontSize, UpdateSourceTrigger=PropertyChanged}" 
                      BorderBrush="{x:Null}" 
                      Margin="5,2,5,2"
                      Grid.Row="2" 
@@ -2370,7 +2370,7 @@
                         </Slider.ToolTip>
                     </Slider>
                     <TextBox
-                        Text="{Binding MaxLength, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                        Text="{Binding MaxLength, UpdateSourceTrigger=PropertyChanged}" 
                         BorderBrush="{x:Null}" 
                         Margin="5,2,5,2"
                         Grid.Column="1" 
@@ -2508,7 +2508,7 @@
                         </StackPanel>
                     </TabItem.ToolTip>
                     <TextBox 
-                        Text="{Binding Code.Definitions, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                        Text="{Binding Code.Definitions, UpdateSourceTrigger=PropertyChanged}" 
                         BorderBrush="{x:Null}" 
                         Margin="5,2,5,2"
                         TextAlignment="Left" 
@@ -2531,7 +2531,7 @@
                         </StackPanel>
                     </TabItem.ToolTip>
                     <TextBox 
-                        Text="{Binding Code.Initialization, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                        Text="{Binding Code.Initialization, UpdateSourceTrigger=PropertyChanged}" 
                         BorderBrush="{x:Null}" 
                         Margin="5,2,5,2"
                         TextAlignment="Left" 
@@ -2554,7 +2554,7 @@
                         </StackPanel>
                     </TabItem.ToolTip>
                     <TextBox 
-                        Text="{Binding Code.Script, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                        Text="{Binding Code.Script, UpdateSourceTrigger=PropertyChanged}" 
                         BorderBrush="{x:Null}" 
                         Margin="5,2,5,2"
                         TextAlignment="Left" 
@@ -2640,7 +2640,7 @@
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
                             <TextBox Margin="5,2,0,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Property, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                     Text="{Binding Path=Property, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2664,7 +2664,7 @@
                                 <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
                             <TextBox Grid.Column="0" Margin="0,2,5,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                     Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2760,7 +2760,7 @@
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
                             <TextBox Margin="5,2,0,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2784,7 +2784,7 @@
                                 <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
                             <TextBox Grid.Column="0" Margin="0,2,5,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                     Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2864,7 +2864,7 @@
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
                             <TextBox Margin="5,2,0,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2883,7 +2883,7 @@
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
                             <TextBox Margin="0,2,5,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                     Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2962,7 +2962,7 @@
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
                             <TextBox Margin="5,2,0,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2981,7 +2981,7 @@
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
                             <TextBox Margin="0,2,5,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                     Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -3066,7 +3066,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <TextBox Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=500}">
+                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -3176,7 +3176,7 @@
                                    TextAlignment="Left" 
                                    VerticalAlignment="Center">
                         </TextBlock>
-                        <TextBox Text="{Binding X, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                        <TextBox Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" 
                                  BorderBrush="{x:Null}" 
                                  Margin="5,2,5,2"
                                  Grid.Row="0" 
@@ -3206,7 +3206,7 @@
                                    TextAlignment="Left" 
                                    VerticalAlignment="Center">
                         </TextBlock>
-                        <TextBox Text="{Binding Y, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                        <TextBox Text="{Binding Y, UpdateSourceTrigger=PropertyChanged}" 
                                  BorderBrush="{x:Null}" 
                                  Margin="5,2,5,2"
                                  Grid.Row="0" 
@@ -3743,7 +3743,7 @@
             <Control Template="{StaticResource TextControlTemplateKey}"/>
             <Expander Header="Path">
                 <Grid>
-                    <TextBox Text="{Binding Path, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                    <TextBox Text="{Binding Path, UpdateSourceTrigger=PropertyChanged}" 
                                 BorderBrush="{x:Null}" 
                                 Margin="5,2,5,2"
                                 TextAlignment="Left" 
@@ -4001,7 +4001,7 @@
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
             <Expander Header="Source">
                 <Grid>
-                    <TextBox Text="{Binding Source, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                    <TextBox Text="{Binding Source, UpdateSourceTrigger=PropertyChanged}" 
                                 AcceptsReturn="True"
                                 AcceptsTab="True"
                                 BorderBrush="{x:Null}" 
@@ -4352,7 +4352,7 @@
                         </CheckBox.ToolTip>
                     </CheckBox>
                     <TextBox 
-                        Text="{Binding SnapX, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                        Text="{Binding SnapX, UpdateSourceTrigger=PropertyChanged}" 
                         BorderBrush="{x:Null}" 
                         Margin="5,2,5,2"
                         Grid.Row="1" 
@@ -4368,7 +4368,7 @@
                         </TextBox.ToolTip>
                     </TextBox>
                     <TextBox 
-                        Text="{Binding SnapY, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                        Text="{Binding SnapY, UpdateSourceTrigger=PropertyChanged}" 
                         BorderBrush="{x:Null}" 
                         Margin="5,2,5,2"
                         Grid.Row="2" 
@@ -4384,7 +4384,7 @@
                         </TextBox.ToolTip>
                     </TextBox>
                     <TextBox 
-                        Text="{Binding HitTreshold, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                        Text="{Binding HitTreshold, UpdateSourceTrigger=PropertyChanged}" 
                         BorderBrush="{x:Null}" 
                         Margin="5,2,5,2"
                         Grid.Row="3" 
@@ -4428,7 +4428,7 @@
                         </CheckBox.ToolTip>
                     </CheckBox>
                     <TextBox 
-                        Text="{Binding CycleResolution, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                        Text="{Binding CycleResolution, UpdateSourceTrigger=PropertyChanged}" 
                         BorderBrush="{x:Null}" 
                         Margin="5,2,5,2"
                         Grid.Row="6" 
@@ -4635,7 +4635,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                          BorderBrush="{x:Null}" 
                          Margin="5,2,5,2"
                          Grid.Row="0" 
@@ -4670,7 +4670,7 @@
                            TextAlignment="Left" 
                            VerticalAlignment="Center">
                 </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                          BorderBrush="{x:Null}" 
                          Margin="5,2,5,2"
                          Grid.Row="0" 
@@ -4704,7 +4704,7 @@
                            TextAlignment="Left" 
                            VerticalAlignment="Center">
                 </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                          BorderBrush="{x:Null}" 
                          Margin="5,2,5,2"
                          Grid.Row="0" 
@@ -4747,7 +4747,7 @@
                         </ComboBox.ToolTip>
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                                <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
@@ -4784,7 +4784,7 @@
                                 TextAlignment="Left" 
                                 VerticalAlignment="Center">
                     </TextBlock>
-                    <TextBox Text="{Binding Width, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                    <TextBox Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
                                 BorderBrush="{x:Null}"
                                 Margin="5,2,5,2"
                                 Grid.Row="0" 
@@ -4799,7 +4799,7 @@
                             </StackPanel>
                         </TextBox.ToolTip>
                     </TextBox>
-                    <TextBox Text="{Binding Height, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+                    <TextBox Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
                                 BorderBrush="{x:Null}" 
                                 Margin="5,2,5,2"
                                 Grid.Row="1" 
@@ -4828,7 +4828,7 @@
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:StyleLibrary}">
-        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                  BorderBrush="{x:Null}" 
                  TextAlignment="Left" 
                  VerticalAlignment="Center">
@@ -4841,7 +4841,7 @@
         </TextBox>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:GroupLibrary}">
-        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Delay=500}" 
+        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                  BorderBrush="{x:Null}" 
                  TextAlignment="Left" 
                  VerticalAlignment="Center">
