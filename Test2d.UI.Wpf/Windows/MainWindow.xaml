@@ -168,7 +168,7 @@
                             </ad:LayoutDocument>
                         </ad:LayoutDocumentPane>
                     </ad:LayoutDocumentPaneGroup>
-                    <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="180">
+                    <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="190">
                         <ad:LayoutAnchorablePane>
                             <ad:LayoutAnchorable x:Name="stylesWindow" CanClose="False" ContentId="styles" Title="{x:Static p:Resources.WindowTitleStyles}" AutoHideWidth="200">
                                 <controls:StylesControl x:Name="stylesControl"/>
