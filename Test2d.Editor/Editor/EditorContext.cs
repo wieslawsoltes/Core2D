@@ -2807,7 +2807,14 @@ namespace Test2d
                 _editor.History.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
-                _editor.Select(_editor.Project.CurrentContainer, ImmutableHashSet.CreateRange<BaseShape>(shapes));
+                if (shapes.Count() == 1)
+                {
+                    _editor.Select(_editor.Project.CurrentContainer, shapes.FirstOrDefault());
+                }
+                else
+                {
+                    _editor.Select(_editor.Project.CurrentContainer, ImmutableHashSet.CreateRange<BaseShape>(shapes));
+                }
             }
             catch (Exception ex)
             {
