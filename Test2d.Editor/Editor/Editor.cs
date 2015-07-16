@@ -870,7 +870,7 @@ namespace Test2d
                 return;
             
             var style = _project.CurrentStyleLibrary.CurrentStyle;
-            if (style != null)
+            if (style == null)
                 return;
             
             var sg = _project.CurrentStyleLibrary;
@@ -1397,7 +1397,7 @@ namespace Test2d
         {
             if (container == null)
                 return;
-            
+  
             container.CurrentShape = default(BaseShape);
             _renderers[0].State.SelectedShape = default(BaseShape);
             _renderers[0].State.SelectedShapes = shapes;
