@@ -8,7 +8,7 @@
              xmlns:controls="clr-namespace:Test.Controls"
              xmlns:converters="clr-namespace:Test.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="810"
+             d:DesignHeight="600" d:DesignWidth="840"
              Width="{Binding Editor.Project.CurrentContainer.Width}" 
              Height="{Binding Editor.Project.CurrentContainer.Height}"
              controls:LayerElement.Renderer="{Binding Editor.Renderers[0]}">
