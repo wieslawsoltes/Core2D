@@ -172,7 +172,7 @@ namespace PdfSharp
         {
             // create A4 page with landscape orientation
             PdfPage page = pdf.AddPage();
-            page.Size = PageSize.A3;
+            page.Size = PageSize.A4;
             page.Orientation = PageOrientation.Landscape;
 
             using (XGraphics gfx = XGraphics.FromPdfPage(page))
@@ -889,7 +889,7 @@ namespace PdfSharp
 
             XFont font = new XFont(
                 text.Style.TextStyle.FontName,
-                XUnit.FromPoint(text.Style.TextStyle.FontSize),
+                _scaleToPage(text.Style.TextStyle.FontSize),
                 fontStyle,
                 options);
 
