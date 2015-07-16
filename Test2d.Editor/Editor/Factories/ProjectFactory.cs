@@ -57,6 +57,7 @@ namespace Test2d
         {
             var container = Container.Create(name);
 
+            container.IsTemplate = true;
             container.Background = ArgbColor.Create(0xFF, 0xFF, 0xFF, 0xFF);
 
             foreach (var layer in container.Layers)
