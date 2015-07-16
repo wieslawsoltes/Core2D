@@ -4719,14 +4719,66 @@
                     </TextBox.ToolTip>
                 </TextBox>
             </Grid>
-            <Expander Header="{x:Static p:Resources.ContainerProperties}" IsExpanded="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{x:Static p:Resources.ContainerWidth}" 
+                           Margin="5,2,5,2" 
+                           Grid.Row="0" 
+                           Grid.Column="0" 
+                           TextAlignment="Left" 
+                           VerticalAlignment="Center">
+                </TextBlock>
+                <TextBlock Text="{x:Static p:Resources.ContainerHeight}" 
+                           Margin="5,2,5,2" 
+                           Grid.Row="1" 
+                           Grid.Column="0" 
+                           TextAlignment="Left" 
+                           VerticalAlignment="Center">
+                </TextBlock>
+                <TextBox Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
+                         BorderBrush="{x:Null}"
+                         Margin="5,2,5,2"
+                         Grid.Row="0" 
+                         Grid.Column="1" 
+                         TextAlignment="Left" 
+                         VerticalAlignment="Center">
+                    <TextBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipWidth}"/>
+                            <TextBlock Text="{x:Static p:Resources.ContainerTooltipScriptWidth}"/>
+                        </StackPanel>
+                    </TextBox.ToolTip>
+                </TextBox>
+                <TextBox Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
+                         BorderBrush="{x:Null}" 
+                         Margin="5,2,5,2"
+                         Grid.Row="1" 
+                         Grid.Column="1" 
+                         TextAlignment="Left" 
+                         VerticalAlignment="Center">
+                    <TextBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipHeight}"/>
+                            <TextBlock Text="{x:Static p:Resources.ContainerTooltipScriptHeight}"/>
+                        </StackPanel>
+                    </TextBox.ToolTip>
+                </TextBox>
+            </Grid>
+            <Expander Header="{x:Static p:Resources.ContainerBackground}">
                 <Expander.ToolTip>
                     <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipProperties}"/>
-                        <TextBlock Text="{x:Static p:Resources.ContainerTooltipScriptProperties}"/>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipBackground}"/>
+                        <TextBlock Text="{x:Static p:Resources.ContainerTooltipScriptBackground}"/>
                     </StackPanel>
                 </Expander.ToolTip>
-                <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
+                <ContentControl Content="{Binding Background}"/>
             </Expander>
             <Expander Header="{x:Static p:Resources.ContainerTemplate}">
                 <Expander.ToolTip>
@@ -4735,10 +4787,11 @@
                         <TextBlock Text="{x:Static p:Resources.TODO}"/>
                     </StackPanel>
                 </Expander.ToolTip>
-                <Grid>
-                    <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.Templates, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                                SelectedItem="{Binding Path=DataContext.Template, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" 
-                                Margin="5,2,5,2">
+                <StackPanel>
+                    <ComboBox 
+                        ItemsSource="{Binding Path=DataContext.Editor.Project.Templates, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                        SelectedItem="{Binding Path=DataContext.Template, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" 
+                        Margin="5,2,5,2">
                         <ComboBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipTemplate}"/>
@@ -4751,79 +4804,17 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                </Grid>
+                    <ContentControl Content="{Binding Template}"/>
+                </StackPanel>
             </Expander>
-            <Expander Header="{x:Static p:Resources.ContainerSize}">
+            <Expander Header="{x:Static p:Resources.ContainerProperties}" IsExpanded="True">
                 <Expander.ToolTip>
                     <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipProperties}"/>
+                        <TextBlock Text="{x:Static p:Resources.ContainerTooltipScriptProperties}"/>
                     </StackPanel>
                 </Expander.ToolTip>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="{x:Static p:Resources.ContainerWidth}" 
-                                Margin="5,2,5,2" 
-                                Grid.Row="0" 
-                                Grid.Column="0" 
-                                TextAlignment="Left" 
-                                VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBlock Text="{x:Static p:Resources.ContainerHeight}" 
-                                Margin="5,2,5,2" 
-                                Grid.Row="1" 
-                                Grid.Column="0" 
-                                TextAlignment="Left" 
-                                VerticalAlignment="Center">
-                    </TextBlock>
-                    <TextBox Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
-                                BorderBrush="{x:Null}"
-                                Margin="5,2,5,2"
-                                Grid.Row="0" 
-                                Grid.Column="1" 
-                                Grid.ColumnSpan="2"
-                                TextAlignment="Left" 
-                                VerticalAlignment="Center">
-                        <TextBox.ToolTip>
-                            <StackPanel>
-                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipWidth}"/>
-                                <TextBlock Text="{x:Static p:Resources.ContainerTooltipScriptWidth}"/>
-                            </StackPanel>
-                        </TextBox.ToolTip>
-                    </TextBox>
-                    <TextBox Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
-                                BorderBrush="{x:Null}" 
-                                Margin="5,2,5,2"
-                                Grid.Row="1" 
-                                Grid.Column="1" 
-                                Grid.ColumnSpan="2"
-                                TextAlignment="Left" 
-                                VerticalAlignment="Center">
-                        <TextBox.ToolTip>
-                            <StackPanel>
-                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipHeight}"/>
-                                <TextBlock Text="{x:Static p:Resources.ContainerTooltipScriptHeight}"/>
-                            </StackPanel>
-                        </TextBox.ToolTip>
-                    </TextBox>
-                </Grid>
-            </Expander>
-            <Expander Header="{x:Static p:Resources.ContainerBackground}">
-                <Expander.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipBackground}"/>
-                        <TextBlock Text="{x:Static p:Resources.ContainerTooltipScriptBackground}"/>
-                    </StackPanel>
-                </Expander.ToolTip>
-                <ContentControl Content="{Binding Background}"/>
+                <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -4878,19 +4869,33 @@
         </ItemsControl>
     </ControlTemplate>
     <ControlTemplate x:Key="ContainerEditorControlTemplateKey">
-        <Grid Width="{Binding Width}" Height="{Binding Height}" Background="Transparent">
-            <Control DataContext="{Binding Template}" Template="{StaticResource ContainerControlTemplateKey}"/>
-            <Control DataContext="{Binding}" Template="{StaticResource ContainerControlTemplateKey}"/>
-            <controls:EditorCanvas 
-                Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                Background="Transparent"
-                Focusable="True"
-                FocusVisualStyle="{x:Null}"
-                Width="{Binding Width}" 
-                Height="{Binding Height}">
-                <controls:LayerElement DataContext="{Binding WorkingLayer}"/>
-                <controls:LayerElement DataContext="{Binding HelperLayer}"/>
-            </controls:EditorCanvas>
-        </Grid>
+        <Border Width="{Binding Width}" Height="{Binding Height}">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsTemplate}" Value="True">
+                            <Setter Property="BorderBrush" Value="Red"/>
+                            <Setter Property="BorderThickness" Value="2"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Grid Width="{Binding Width}" Height="{Binding Height}" Background="Transparent">
+                <Control DataContext="{Binding Template}" Template="{StaticResource ContainerControlTemplateKey}"/>
+                <Control DataContext="{Binding}" Template="{StaticResource ContainerControlTemplateKey}"/>
+                <controls:EditorCanvas 
+                    Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                    Background="Transparent"
+                    Focusable="True"
+                    FocusVisualStyle="{x:Null}"
+                    Width="{Binding Width}" 
+                    Height="{Binding Height}">
+                    <controls:LayerElement DataContext="{Binding WorkingLayer}"/>
+                    <controls:LayerElement DataContext="{Binding HelperLayer}"/>
+                </controls:EditorCanvas>
+            </Grid>
+            </Border>
     </ControlTemplate>
 </ResourceDictionary>
