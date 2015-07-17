@@ -48,6 +48,11 @@ Test2d [simulation mode description](SIMULATION.md).
 * https://www.myget.org/F/roslyn-nightly/
 * https://www.myget.org/F/eto/
 
+### Icons
+
+* http://modernuiicons.com/
+* https://materialdesignicons.com/
+
 ## Contact
 
 https://github.com/wieslawsoltes/Test2d
