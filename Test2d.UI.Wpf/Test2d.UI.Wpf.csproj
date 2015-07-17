@@ -224,6 +224,9 @@
       <DependentUpon>TemplatesControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\ToolbarControl.xaml.cs">
+      <DependentUpon>ToolbarControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\ArgbColorToBrushConverter.cs" />
     <Compile Include="Converters\ArgbColorToBrushMultiConverter.cs" />
     <Compile Include="Converters\BooleanToStringConverter.cs" />
@@ -301,6 +304,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TemplatesControl.xaml" />
+    <Page Include="Controls\ToolbarControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dictionaries\Test2dDictionary.xaml">
       <SubType>Designer</SubType>
     </Page>
