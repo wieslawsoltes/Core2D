@@ -70,11 +70,14 @@
     <Grid FocusVisualStyle="{x:Null}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
         <controls:MenuControl Grid.Row="0"/>
-        <ad:DockingManager x:Name="dockingManager" Background="White" Grid.Row="1" Margin="0,5,0,0">
+        <controls:ToolbarControl Grid.Row="2"/>
+        <ad:DockingManager x:Name="dockingManager" Background="White" Grid.Row="3" Margin="0,5,0,0">
             <ad:LayoutRoot>
                 <ad:LayoutPanel Orientation="Horizontal">
                     <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="200">
