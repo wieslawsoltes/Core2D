@@ -646,20 +646,7 @@ namespace Test2d
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            if (_editor.TryToHoverShape(sx, sy))
-                            {
-                                if (_lineEllipseEnd != null)
-                                {
-                                    _lineEllipseEnd.State &= ~ShapeState.Visible;
-                                }
-                            }
-                            else
-                            {
-                                if (_lineEllipseEnd != null)
-                                {
-                                    _lineEllipseEnd.State |= ShapeState.Visible;
-                                }
-                            }
+                            _editor.TryToHoverShape(sx, sy);
                         }
                         _lineEnd.X = sx;
                         _lineEnd.Y = sy;
@@ -694,20 +681,7 @@ namespace Test2d
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            if (_editor.TryToHoverShape(sx, sy))
-                            {
-                                if (_bezierEllipsePoint4 != null)
-                                {
-                                    _bezierEllipsePoint4.State &= ~ShapeState.Visible;
-                                }
-                            }
-                            else
-                            {
-                                if (_bezierEllipsePoint4 != null)
-                                {
-                                    _bezierEllipsePoint4.State |= ShapeState.Visible;
-                                }
-                            }
+                            _editor.TryToHoverShape(sx, sy);
                         }
                         _bezierPoint2.X = sx;
                         _bezierPoint2.Y = sy;
@@ -724,20 +698,7 @@ namespace Test2d
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            if (_editor.TryToHoverShape(sx, sy))
-                            {
-                                if (_bezierEllipsePoint2 != null)
-                                {
-                                    _bezierEllipsePoint2.State &= ~ShapeState.Visible;
-                                }
-                            }
-                            else
-                            {
-                                if (_bezierEllipsePoint2 != null)
-                                {
-                                    _bezierEllipsePoint2.State |= ShapeState.Visible;
-                                }
-                            }
+                            _editor.TryToHoverShape(sx, sy);
                         }
                         _bezierPoint2.X = sx;
                         _bezierPoint2.Y = sy;
@@ -750,20 +711,7 @@ namespace Test2d
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            if (_editor.TryToHoverShape(sx, sy))
-                            {
-                                if (_bezierEllipsePoint3 != null)
-                                {
-                                    _bezierEllipsePoint3.State &= ~ShapeState.Visible;
-                                }
-                            }
-                            else
-                            {
-                                if (_bezierEllipsePoint3 != null)
-                                {
-                                    _bezierEllipsePoint3.State |= ShapeState.Visible;
-                                }
-                            }
+                            _editor.TryToHoverShape(sx, sy);
                         }
                         _bezierPoint3.X = sx;
                         _bezierPoint3.Y = sy;
@@ -793,20 +741,7 @@ namespace Test2d
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            if (_editor.TryToHoverShape(sx, sy))
-                            {
-                                if (_qbezierEllipsePoint3 != null)
-                                {
-                                    _qbezierEllipsePoint3.State &= ~ShapeState.Visible;
-                                }
-                            }
-                            else
-                            {
-                                if (_qbezierEllipsePoint3 != null)
-                                {
-                                    _qbezierEllipsePoint3.State |= ShapeState.Visible;
-                                }
-                            }
+                            _editor.TryToHoverShape(sx, sy);
                         }
                         _qbezierPoint2.X = sx;
                         _qbezierPoint2.Y = sy;
@@ -821,20 +756,7 @@ namespace Test2d
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            if (_editor.TryToHoverShape(sx, sy))
-                            {
-                                if (_qbezierEllipsePoint2 != null)
-                                {
-                                    _qbezierEllipsePoint2.State &= ~ShapeState.Visible;
-                                }
-                            }
-                            else
-                            {
-                                if (_qbezierEllipsePoint2 != null)
-                                {
-                                    _qbezierEllipsePoint2.State |= ShapeState.Visible;
-                                }
-                            }
+                            _editor.TryToHoverShape(sx, sy);
                         }
                         _qbezierPoint2.X = sx;
                         _qbezierPoint2.Y = sy;

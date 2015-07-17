@@ -220,20 +220,7 @@ namespace Test2d
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                if (_editor.TryToHoverShape(sx, sy))
-                                {
-                                    if (_ellipsePoint3 != null)
-                                    {
-                                        _ellipsePoint3.State &= ~ShapeState.Visible;
-                                    }
-                                }
-                                else
-                                {
-                                    if (_ellipsePoint3 != null)
-                                    {
-                                        _ellipsePoint3.State |= ShapeState.Visible;
-                                    }
-                                }
+                                _editor.TryToHoverShape(sx, sy);
                             }
                             qbezier.Point2.X = sx;
                             qbezier.Point2.Y = sy;
@@ -252,20 +239,7 @@ namespace Test2d
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                if (_editor.TryToHoverShape(sx, sy))
-                                {
-                                    if (_ellipsePoint2 != null)
-                                    {
-                                        _ellipsePoint2.State &= ~ShapeState.Visible;
-                                    }
-                                }
-                                else
-                                {
-                                    if (_ellipsePoint2 != null)
-                                    {
-                                        _ellipsePoint2.State |= ShapeState.Visible;
-                                    }
-                                }
+                                _editor.TryToHoverShape(sx, sy);
                             }
                             qbezier.Point2.X = sx;
                             qbezier.Point2.Y = sy;

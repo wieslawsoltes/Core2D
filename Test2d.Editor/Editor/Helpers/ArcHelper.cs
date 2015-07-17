@@ -274,20 +274,7 @@ namespace Test2d
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                if (_editor.TryToHoverShape(sx, sy))
-                                {
-                                    if (_ellipseP2 != null)
-                                    {
-                                        _ellipseP2.State &= ~ShapeState.Visible;
-                                    }
-                                }
-                                else
-                                {
-                                    if (_ellipseP2 != null)
-                                    {
-                                        _ellipseP2.State |= ShapeState.Visible;
-                                    }
-                                }
+                                _editor.TryToHoverShape(sx, sy);
                             }
                             _shape.Point2.X = sx;
                             _shape.Point2.Y = sy;
@@ -303,20 +290,7 @@ namespace Test2d
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                if (_editor.TryToHoverShape(sx, sy))
-                                {
-                                    if (_ellipseStart != null)
-                                    {
-                                        _ellipseStart.State &= ~ShapeState.Visible;
-                                    }
-                                }
-                                else
-                                {
-                                    if (_ellipseStart != null)
-                                    {
-                                        _ellipseStart.State |= ShapeState.Visible;
-                                    }
-                                }
+                                _editor.TryToHoverShape(sx, sy);
                             }
                             _shape.Point3.X = sx;
                             _shape.Point3.Y = sy;
@@ -332,20 +306,7 @@ namespace Test2d
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                if (_editor.TryToHoverShape(sx, sy))
-                                {
-                                    if (_ellipseEnd != null)
-                                    {
-                                        _ellipseEnd.State &= ~ShapeState.Visible;
-                                    }
-                                }
-                                else
-                                {
-                                    if (_ellipseEnd != null)
-                                    {
-                                        _ellipseEnd.State |= ShapeState.Visible;
-                                    }
-                                }
+                                _editor.TryToHoverShape(sx, sy);
                             }
                             _shape.Point4.X = sx;
                             _shape.Point4.Y = sy;

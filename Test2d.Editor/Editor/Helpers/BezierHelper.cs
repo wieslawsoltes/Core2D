@@ -257,20 +257,7 @@ namespace Test2d
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                if (_editor.TryToHoverShape(sx, sy))
-                                {
-                                    if (_ellipsePoint4 != null)
-                                    {
-                                        _ellipsePoint4.State &= ~ShapeState.Visible;
-                                    }
-                                }
-                                else
-                                {
-                                    if (_ellipsePoint4 != null)
-                                    {
-                                        _ellipsePoint4.State |= ShapeState.Visible;
-                                    }
-                                }
+                                _editor.TryToHoverShape(sx, sy);
                             }
                             bezier.Point2.X = sx;
                             bezier.Point2.Y = sy;
@@ -291,20 +278,7 @@ namespace Test2d
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                if (_editor.TryToHoverShape(sx, sy))
-                                {
-                                    if (_ellipsePoint2 != null)
-                                    {
-                                        _ellipsePoint2.State &= ~ShapeState.Visible;
-                                    }
-                                }
-                                else
-                                {
-                                    if (_ellipsePoint2 != null)
-                                    {
-                                        _ellipsePoint2.State |= ShapeState.Visible;
-                                    }
-                                }
+                                _editor.TryToHoverShape(sx, sy);
                             }
                             bezier.Point2.X = sx;
                             bezier.Point2.Y = sy;
@@ -321,20 +295,7 @@ namespace Test2d
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                if (_editor.TryToHoverShape(sx, sy))
-                                {
-                                    if (_ellipsePoint3 != null)
-                                    {
-                                        _ellipsePoint3.State &= ~ShapeState.Visible;
-                                    }
-                                }
-                                else
-                                {
-                                    if (_ellipsePoint3 != null)
-                                    {
-                                        _ellipsePoint3.State |= ShapeState.Visible;
-                                    }
-                                }
+                                _editor.TryToHoverShape(sx, sy);
                             }
                             bezier.Point3.X = sx;
                             bezier.Point3.Y = sy;

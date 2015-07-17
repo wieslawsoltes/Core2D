@@ -195,20 +195,7 @@ namespace Test2d
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                if (_editor.TryToHoverShape(sx, sy))
-                                {
-                                    if (_ellipseEnd != null)
-                                    {
-                                        _ellipseEnd.State &= ~ShapeState.Visible;
-                                    }
-                                }
-                                else
-                                {
-                                    if (_ellipseEnd != null)
-                                    {
-                                        _ellipseEnd.State |= ShapeState.Visible;
-                                    }
-                                }
+                                _editor.TryToHoverShape(sx, sy);
                             }
                             line.End.X = sx;
                             line.End.Y = sy;

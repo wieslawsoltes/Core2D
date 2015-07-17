@@ -180,20 +180,7 @@ namespace Test2d
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                if (_editor.TryToHoverShape(sx, sy))
-                                {
-                                    if (_ellipseBottomRight != null)
-                                    {
-                                        _ellipseBottomRight.State &= ~ShapeState.Visible;
-                                    }
-                                }
-                                else
-                                {
-                                    if (_ellipseBottomRight != null)
-                                    {
-                                        _ellipseBottomRight.State |= ShapeState.Visible;
-                                    }
-                                }
+                                _editor.TryToHoverShape(sx, sy);
                             }
                             text.BottomRight.X = sx;
                             text.BottomRight.Y = sy;
