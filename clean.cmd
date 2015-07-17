@@ -12,6 +12,9 @@ rmdir /Q /S Dependencies\FileWriter.Dxf\obj
 rmdir /Q /S Dependencies\FileWriter.Emf\bin
 rmdir /Q /S Dependencies\FileWriter.Emf\obj
 
+rmdir /Q /S Dependencies\FileWriter.Pdf-core\bin
+rmdir /Q /S Dependencies\FileWriter.Pdf-core\obj
+
 rmdir /Q /S Dependencies\FileWriter.Pdf-wpf\bin
 rmdir /Q /S Dependencies\FileWriter.Pdf-wpf\obj
 
@@ -20,6 +23,9 @@ rmdir /Q /S Dependencies\Renderer.Dxf\obj
 
 rmdir /Q /S Dependencies\Renderer.EtoForms\bin
 rmdir /Q /S Dependencies\Renderer.EtoForms\obj
+
+rmdir /Q /S Dependencies\Renderer.PdfSharp-core\bin
+rmdir /Q /S Dependencies\Renderer.PdfSharp-core\obj
 
 rmdir /Q /S Dependencies\Renderer.PdfSharp-wpf\bin
 rmdir /Q /S Dependencies\Renderer.PdfSharp-wpf\obj
