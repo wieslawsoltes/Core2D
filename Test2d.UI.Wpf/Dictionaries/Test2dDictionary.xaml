@@ -70,6 +70,13 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="ToolTipButtonStyleKey" TargetType="Button">
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <!-- converters -->
     <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
     <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
