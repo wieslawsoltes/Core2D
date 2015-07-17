@@ -73,7 +73,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Eto">
-      <HintPath>..\packages\Eto.Forms.2.1.0-build0312\lib\net45\Eto.dll</HintPath>
+      <HintPath>..\packages\Eto.Forms.2.1.0-build0313\lib\net45\Eto.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">

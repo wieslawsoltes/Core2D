@@ -76,10 +76,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Eto">
-      <HintPath>..\packages\Eto.Forms.2.1.0-build0312\lib\net45\Eto.dll</HintPath>
+      <HintPath>..\packages\Eto.Forms.2.1.0-build0313\lib\net45\Eto.dll</HintPath>
     </Reference>
     <Reference Include="Eto.WinForms">
-      <HintPath>..\packages\Eto.Platform.Windows.2.1.0-build0312\lib\net45\Eto.WinForms.dll</HintPath>
+      <HintPath>..\packages\Eto.Platform.Windows.2.1.0-build0313\lib\net45\Eto.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

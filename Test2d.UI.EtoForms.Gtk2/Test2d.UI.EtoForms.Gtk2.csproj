@@ -77,10 +77,10 @@
   <ItemGroup>
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL" />
     <Reference Include="Eto">
-      <HintPath>..\packages\Eto.Forms.2.1.0-build0312\lib\net45\Eto.dll</HintPath>
+      <HintPath>..\packages\Eto.Forms.2.1.0-build0313\lib\net45\Eto.dll</HintPath>
     </Reference>
     <Reference Include="Eto.Gtk2">
-      <HintPath>..\packages\Eto.Platform.Gtk.2.1.0-build0312\lib\net45\Eto.Gtk2.dll</HintPath>
+      <HintPath>..\packages\Eto.Platform.Gtk.2.1.0-build0313\lib\net45\Eto.Gtk2.dll</HintPath>
     </Reference>
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL" />
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL" />
