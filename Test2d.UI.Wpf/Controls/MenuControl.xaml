@@ -392,44 +392,37 @@
                 </MenuItem.ToolTip>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuEditOrder}">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditOrder}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditOrder}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
-                <MenuItem Header="{x:Static p:Resources.MenuEditOrderBringToFront}" Command="{Binding Commands.BringToFrontCommand}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditOrderBringToFront}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditOrderBringToFront}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuEditOrder}"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditOrder}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditOrder}">
+                <MenuItem Header="{x:Static p:Resources.MenuEditOrderSendToBack}" 
+                          Command="{Binding Commands.SendToBackCommand}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditOrderSendToBack}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditOrderSendToBack}">
                 </MenuItem>
-                <MenuItem Header="{x:Static p:Resources.MenuEditOrderBringForward}" Command="{Binding Commands.BringForwardCommand}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditOrderBringForward}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditOrderBringForward}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuEditOrderSendBackward}" 
+                          Command="{Binding Commands.SendBackwardCommand}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditOrderSendBackward}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditOrderSendBackward}">
                 </MenuItem>
-                <MenuItem Header="{x:Static p:Resources.MenuEditOrderSendBackward}" Command="{Binding Commands.SendBackwardCommand}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditOrderSendBackward}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditOrderSendBackward}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuEditOrderBringForward}" 
+                          Command="{Binding Commands.BringForwardCommand}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditOrderBringForward}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditOrderBringForward}">
                 </MenuItem>
-                <MenuItem Header="{x:Static p:Resources.MenuEditOrderSendToBack}" Command="{Binding Commands.SendToBackCommand}" InputGestureText="">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditOrderSendToBack}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditOrderSendToBack}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuEditOrderBringToFront}" 
+                          Command="{Binding Commands.BringToFrontCommand}" 
+                          InputGestureText=""
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditOrderBringToFront}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditOrderBringToFront}">
                 </MenuItem>
             </MenuItem>
         </MenuItem>
@@ -624,163 +617,124 @@
                 </MenuItem.ToolTip>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuTool}">
-            <MenuItem.ToolTip>
-                <StackPanel>
-                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipTool}"/>
-                    <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptTool}"/>
-                </StackPanel>
-            </MenuItem.ToolTip>
+        <MenuItem Header="{x:Static p:Resources.MenuTool}"
+                  Style="{StaticResource ToolTipMenuItemStyleKey}"
+                  controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipTool}"
+                  controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptTool}">
             <MenuItem Header="{x:Static p:Resources.MenuToolNone}" 
                       Command="{Binding Commands.ToolNoneCommand}"
-                      IsCheckable="False"
+                      IsCheckable="True"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.None}}" 
-                      InputGestureText="N">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipToolNone}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptToolNone}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="N"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolNone}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolNone}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolSelection}" 
                       Command="{Binding Commands.ToolSelectionCommand}" 
-                      IsCheckable="False"
+                      IsCheckable="True"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Selection}}"
-                      InputGestureText="S">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipToolSelection}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptToolSelection}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="S"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolSelection}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolSelection}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolPoint}" 
                       Command="{Binding Commands.ToolPointCommand}"
-                      IsCheckable="False"
+                      IsCheckable="True"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Point}}" 
-                      InputGestureText="P">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipToolPoint}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptToolPoint}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="P"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolPoint}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolPoint}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolLine}" 
                       Command="{Binding Commands.ToolLineCommand}" 
-                      IsCheckable="False"
+                      IsCheckable="True"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Line}}"
-                      InputGestureText="L">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipToolLine}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptToolLine}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="L"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolLine}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolLine}">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuToolArc}" 
                       Command="{Binding Commands.ToolArcCommand}" 
-                      IsCheckable="False"
+                      IsCheckable="True"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Arc}}"
-                      InputGestureText="A">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipToolArc}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptToolArc}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="A"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolArc}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolArc}">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuToolBezier}" 
                       Command="{Binding Commands.ToolBezierCommand}" 
-                      IsCheckable="False"
+                      IsCheckable="True"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Bezier}}"
-                      InputGestureText="B">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipToolBezier}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptToolBezier}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="B"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolBezier}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolBezier}">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuToolQBezier}" 
                       Command="{Binding Commands.ToolQBezierCommand}"
-                      IsCheckable="False"
+                      IsCheckable="True"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.QBezier}}" 
-                      InputGestureText="Q">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipToolQBezier}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptToolQBezier}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="Q"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolQBezier}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolQBezier}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolPath}" 
                       Command="{Binding Commands.ToolPathCommand}" 
-                      IsCheckable="False"
+                      IsCheckable="True"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Path}}"
-                      InputGestureText="H">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipToolPath}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptToolPath}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="H"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolPath}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolPath}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolRectangle}" 
                       Command="{Binding Commands.ToolRectangleCommand}" 
-                      IsCheckable="False"
+                      IsCheckable="True"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Rectangle}}"
-                      InputGestureText="R">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipToolRectangle}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptToolRectangle}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="R"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolRectangle}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolRectangle}">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuToolEllipse}" 
                       Command="{Binding Commands.ToolEllipseCommand}" 
-                      IsCheckable="False"
+                      IsCheckable="True"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Ellipse}}"
-                      InputGestureText="E">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipToolEllipse}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptToolEllipse}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="E"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolEllipse}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolEllipse}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolText}" 
                       Command="{Binding Commands.ToolTextCommand}" 
-                      IsCheckable="False"
+                      IsCheckable="True"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Text}}"
-                      InputGestureText="T">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipToolText}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptToolText}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="T"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolText}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolText}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolImage}" 
                       Command="{Binding Commands.ToolImageCommand}" 
-                      IsCheckable="False"
+                      IsCheckable="True"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Image}}"
-                      InputGestureText="I">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipToolImage}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptToolImage}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="I"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolImage}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolImage}">
             </MenuItem>
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuData}">
