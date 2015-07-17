@@ -717,6 +717,7 @@ OptionsDefaultIsClosed
 OptionsDefaultIsSmoothJoin
 OptionsDefaultFillRule
 OptionsPointShape
+OptionsPointStyle
 OptionsSelectionStyle
 OptionsHelperStyle
 
@@ -733,6 +734,7 @@ OptionsTooltipDefaultIsClosed
 OptionsTooltipDefaultIsSmoothJoin
 OptionsTooltipDefaultFillRule
 OptionsTooltipPointShape
+OptionsTooltipPointStyle
 OptionsTooltipSelectionStyle
 OptionsTooltipHelperStyle
 
@@ -749,6 +751,7 @@ OptionsTooltipScriptDefaultIsClosed
 OptionsTooltipScriptDefaultIsSmoothJoin
 OptionsTooltipScriptDefaultFillRule
 OptionsTooltipScriptPointShape
+OptionsTooltipScriptPointStyle
 OptionsTooltipScriptSelectionStyle
 OptionsTooltipScriptHelperStyle
 

@@ -3339,6 +3339,15 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PointStyle.
+        /// </summary>
+        public static string OptionsPointStyle {
+            get {
+                return ResourceManager.GetString("OptionsPointStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SelectionStyle.
         /// </summary>
         public static string OptionsSelectionStyle {
@@ -3465,6 +3474,15 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Point Style.
+        /// </summary>
+        public static string OptionsTooltipPointStyle {
+            get {
+                return ResourceManager.GetString("OptionsTooltipPointStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Script: Options.CycleResolution = int.
         /// </summary>
         public static string OptionsTooltipScriptCycleResolution {
@@ -3551,6 +3569,15 @@ namespace Test2d.UI.Wpf.Properties {
         public static string OptionsTooltipScriptPointShape {
             get {
                 return ResourceManager.GetString("OptionsTooltipScriptPointShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.PointStyle = ShapeStyle.
+        /// </summary>
+        public static string OptionsTooltipScriptPointStyle {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptPointStyle", resourceCulture);
             }
         }
         

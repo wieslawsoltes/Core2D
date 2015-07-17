@@ -1394,4 +1394,13 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   <data name="TODO" xml:space="preserve">
     <value>TODO</value>
   </data>
+  <data name="OptionsPointStyle" xml:space="preserve">
+    <value>PointStyle</value>
+  </data>
+  <data name="OptionsTooltipPointStyle" xml:space="preserve">
+    <value>Point Style</value>
+  </data>
+  <data name="OptionsTooltipScriptPointStyle" xml:space="preserve">
+    <value>Script: Options.PointStyle = ShapeStyle</value>
+  </data>
 </root>
