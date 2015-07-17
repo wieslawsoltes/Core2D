@@ -594,6 +594,11 @@ namespace Test2d
                 Add(options.PointShape);
             }
 
+            if (options.PointStyle != null)
+            {
+                Add(options.PointStyle);
+            }
+
             if (options.SelectionStyle != null)
             {
                 Add(options.SelectionStyle);
@@ -617,6 +622,11 @@ namespace Test2d
             if (options.PointShape != null)
             {
                 Remove(options.PointShape);
+            }
+
+            if (options.PointStyle != null)
+            {
+                Remove(options.PointStyle);
             }
 
             if (options.SelectionStyle != null)
