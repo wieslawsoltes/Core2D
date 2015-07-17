@@ -1258,33 +1258,33 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public Tool OnToolNone()
+        public void OnToolNone()
         {
-            return _editor.CurrentTool = Tool.None;
+            _editor.CurrentTool = Tool.None;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public Tool OnToolSelection()
+        public void OnToolSelection()
         {
-            return _editor.CurrentTool = Tool.Selection;
+            _editor.CurrentTool = Tool.Selection;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public Tool OnToolGroup()
+        public void OnToolGroup()
         {
-            return _editor.CurrentTool = Tool.Group;
+            _editor.CurrentTool = Tool.Group;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public Tool OnToolPoint()
+        public void OnToolPoint()
         {
-            return _editor.CurrentTool = Tool.Point;
+            _editor.CurrentTool = Tool.Point;
         }
 
         /// <summary>
@@ -1352,61 +1352,39 @@ namespace Test2d
         /// </summary>
         public void OnToolPath()
         {
-            if (_editor.CurrentTool == Tool.Path)
-            {
-                //switch (_editor.CurrentPathTool)
-                //{
-                //    case PathTool.Line:
-                //        _editor.CurrentTool = Tool.Line;
-                //        break;
-                //    case PathTool.Arc:
-                //        _editor.CurrentTool = Tool.Arc;
-                //        break;
-                //    case PathTool.Bezier:
-                //        _editor.CurrentTool = Tool.Bezier;
-                //        break;
-                //    case PathTool.QBezier:
-                //        _editor.CurrentTool = Tool.QBezier;
-                //        break;
-                //}
-                _editor.CurrentTool = Tool.Selection;
-            }
-            else
-            {
-                _editor.CurrentTool = Tool.Path;
-            }
+            _editor.CurrentTool = Tool.Path;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public Tool OnToolRectangle()
+        public void OnToolRectangle()
         {
-            return _editor.CurrentTool = Tool.Rectangle;
+            _editor.CurrentTool = Tool.Rectangle;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public Tool OnToolEllipse()
+        public void OnToolEllipse()
         {
-            return _editor.CurrentTool = Tool.Ellipse;
+            _editor.CurrentTool = Tool.Ellipse;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public Tool OnToolText()
+        public void OnToolText()
         {
-            return _editor.CurrentTool = Tool.Text;
+            _editor.CurrentTool = Tool.Text;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public Tool OnToolImage()
+        public void OnToolImage()
         {
-            return _editor.CurrentTool = Tool.Image;
+            _editor.CurrentTool = Tool.Image;
         }
 
         /// <summary>
