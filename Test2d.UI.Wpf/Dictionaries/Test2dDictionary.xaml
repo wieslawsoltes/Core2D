@@ -4594,6 +4594,15 @@
                         </Expander.ToolTip>
                         <ContentControl Content="{Binding PointShape}"/>
                     </Expander>
+                    <Expander Header="{x:Static p:Resources.OptionsPointStyle}">
+                        <Expander.ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipPointStyle}"/>
+                                <TextBlock Text="{x:Static p:Resources.OptionsTooltipScriptPointStyle}"/>
+                            </StackPanel>
+                        </Expander.ToolTip>
+                        <ContentControl Content="{Binding PointStyle}"/>
+                    </Expander>
                     <Expander Header="{x:Static p:Resources.OptionsSelectionStyle}">
                         <Expander.ToolTip>
                             <StackPanel>
