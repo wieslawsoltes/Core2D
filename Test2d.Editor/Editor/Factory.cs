@@ -159,16 +159,19 @@ namespace Test2d
         /// <param name="y1"></param>
         /// <param name="x2"></param>
         /// <param name="y2"></param>
+        /// <param name="isStroked"></param>
         /// <returns></returns>
         public XLine Line(
             double x1 = 30, double y1 = 30,
-            double x2 = 60, double y2 = 30)
+            double x2 = 60, double y2 = 30,
+            bool isStroked = true)
         {
             var line = XLine.Create(
                 x1, y1,
                 x2, y2,
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape);
+                Context.Editor.Project.Options.PointShape,
+                isStroked);
             Context.Editor.AddWithHistory(line);
             return line;
         }
@@ -178,14 +181,16 @@ namespace Test2d
         /// </summary>
         /// <param name="start"></param>
         /// <param name="end"></param>
+        /// <param name="isStroked"></param>
         /// <returns></returns>
-        public XLine Line(XPoint start, XPoint end)
+        public XLine Line(XPoint start, XPoint end, bool isStroked = true)
         {
             var line = XLine.Create(
                 start,
                 end,
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape);
+                Context.Editor.Project.Options.PointShape,
+                isStroked);
             Context.Editor.AddWithHistory(line);
             return line;
         }
@@ -201,6 +206,7 @@ namespace Test2d
         /// <param name="y3"></param>
         /// <param name="x4"></param>
         /// <param name="y4"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <returns></returns>
         public XArc Arc(
@@ -208,6 +214,7 @@ namespace Test2d
             double x2 = 60, double y2 = 60,
             double x3 = 30, double y3 = 45,
             double x4 = 60, double y4 = 45,
+            bool isStroked = true,
             bool isFilled = false)
         {
             var arc = XArc.Create(
@@ -217,6 +224,7 @@ namespace Test2d
                 x4, y4,
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 Context.Editor.Project.Options.PointShape,
+                isStroked,
                 isFilled);
             Context.Editor.AddWithHistory(arc);
             return arc;
@@ -229,6 +237,7 @@ namespace Test2d
         /// <param name="point2"></param>
         /// <param name="point3"></param>
         /// <param name="point4"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <returns></returns>
         public XArc Arc(
@@ -236,6 +245,7 @@ namespace Test2d
             XPoint point2,
             XPoint point3,
             XPoint point4,
+            bool isStroked = true,
             bool isFilled = false)
         {
             var arc = XArc.Create(
@@ -245,6 +255,7 @@ namespace Test2d
                 point4,
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 Context.Editor.Project.Options.PointShape,
+                isStroked,
                 isFilled);
             Context.Editor.AddWithHistory(arc);
             return arc;
@@ -261,6 +272,7 @@ namespace Test2d
         /// <param name="y3"></param>
         /// <param name="x4"></param>
         /// <param name="y4"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <returns></returns>
         public XBezier Bezier(
@@ -268,6 +280,7 @@ namespace Test2d
             double x2 = 30, double y2 = 60,
             double x3 = 60, double y3 = 60,
             double x4 = 60, double y4 = 30,
+            bool isStroked = true,
             bool isFilled = false)
         {
             var bezier = XBezier.Create(
@@ -277,6 +290,7 @@ namespace Test2d
                 x4, y4,
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 Context.Editor.Project.Options.PointShape,
+                isStroked,
                 isFilled);
             Context.Editor.AddWithHistory(bezier);
             return bezier;
@@ -289,6 +303,7 @@ namespace Test2d
         /// <param name="point2"></param>
         /// <param name="point3"></param>
         /// <param name="point4"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <returns></returns>
         public XBezier Bezier(
@@ -296,6 +311,7 @@ namespace Test2d
             XPoint point2,
             XPoint point3,
             XPoint point4,
+            bool isStroked = true,
             bool isFilled = false)
         {
             var bezier = XBezier.Create(
@@ -304,7 +320,9 @@ namespace Test2d
                 point3,
                 point4,
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape);
+                Context.Editor.Project.Options.PointShape,
+                isStroked,
+                isFilled);
             Context.Editor.AddWithHistory(bezier);
             return bezier;
         }
@@ -318,12 +336,14 @@ namespace Test2d
         /// <param name="y2"></param>
         /// <param name="x3"></param>
         /// <param name="y3"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <returns></returns>
         public XQBezier QBezier(
             double x1 = 30, double y1 = 30,
             double x2 = 45, double y2 = 60,
             double x3 = 60, double y3 = 30,
+            bool isStroked = true,
             bool isFilled = false)
         {
             var qbezier = XQBezier.Create(
@@ -331,7 +351,9 @@ namespace Test2d
                 x2, y2,
                 x3, y3,
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape);
+                Context.Editor.Project.Options.PointShape,
+                isStroked,
+                isFilled);
             Context.Editor.AddWithHistory(qbezier);
             return qbezier;
         }
@@ -342,12 +364,14 @@ namespace Test2d
         /// <param name="point1"></param>
         /// <param name="point2"></param>
         /// <param name="point3"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <returns></returns>
         public XQBezier QBezier(
             XPoint point1,
             XPoint point2,
             XPoint point3,
+            bool isStroked = true,
             bool isFilled = false)
         {
             var qbezier = XQBezier.Create(
@@ -355,7 +379,9 @@ namespace Test2d
                 point2,
                 point3,
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape);
+                Context.Editor.Project.Options.PointShape,
+                isStroked,
+                isFilled);
             Context.Editor.AddWithHistory(qbezier);
             return qbezier;
         }
@@ -377,14 +403,21 @@ namespace Test2d
         /// Creates a new instance of the XPath class.
         /// </summary>
         /// <param name="geometry"></param>
+        /// <param name="isStroked"></param>
+        /// <param name="isFilled"></param>
         /// <returns></returns>
-        public XPath Path(XPathGeometry geometry)
+        public XPath Path(
+            XPathGeometry geometry,
+            bool isStroked = true,
+            bool isFilled = false)
         {
             var path = XPath.Create(
                 "",
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 null,
-                geometry);
+                geometry,
+                isStroked,
+                isFilled);
             Context.Editor.AddWithHistory(path);
             return path;
         }
@@ -393,14 +426,21 @@ namespace Test2d
         /// Creates a new instance of the XPath class.
         /// </summary>
         /// <param name="source"></param>
+        /// <param name="isStroked"></param>
+        /// <param name="isFilled"></param>
         /// <returns></returns>
-        public XPath Path(string source)
+        public XPath Path(
+            string source,
+            bool isStroked = true,
+            bool isFilled = false)
         {
             var path = XPath.Create(
                 "",
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 source,
-                null);
+                null,
+                isStroked,
+                isFilled);
             Context.Editor.AddWithHistory(path);
             return path;
         }
@@ -412,12 +452,14 @@ namespace Test2d
         /// <param name="y1"></param>
         /// <param name="x2"></param>
         /// <param name="y2"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="text"></param>
         /// <returns></returns>
         public XRectangle Rectangle(
             double x1 = 30, double y1 = 30,
             double x2 = 60, double y2 = 60,
+            bool isStroked = true,
             bool isFilled = false,
             string text = null)
         {
@@ -426,6 +468,7 @@ namespace Test2d
                 x2, y2,
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 Context.Editor.Project.Options.PointShape,
+                isStroked,
                 isFilled,
                 text);
             Context.Editor.AddWithHistory(rectangle);
@@ -437,12 +480,14 @@ namespace Test2d
         /// </summary>
         /// <param name="topLeft"></param>
         /// <param name="bottomRight"></param>
+        /// /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="text"></param>
         /// <returns></returns>
         public XRectangle Rectangle(
             XPoint topLeft,
             XPoint bottomRight,
+            bool isStroked = true,
             bool isFilled = false,
             string text = null)
         {
@@ -451,6 +496,7 @@ namespace Test2d
                 bottomRight,
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 Context.Editor.Project.Options.PointShape,
+                isStroked,
                 isFilled,
                 text);
             Context.Editor.AddWithHistory(rectangle);
@@ -464,12 +510,14 @@ namespace Test2d
         /// <param name="y1"></param>
         /// <param name="x2"></param>
         /// <param name="y2"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="text"></param>
         /// <returns></returns>
         public XEllipse Ellipse(
             double x1 = 30, double y1 = 30,
             double x2 = 60, double y2 = 60,
+            bool isStroked = true,
             bool isFilled = false,
             string text = null)
         {
@@ -478,6 +526,7 @@ namespace Test2d
                 x2, y2,
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 Context.Editor.Project.Options.PointShape,
+                isStroked,
                 isFilled,
                 text);
             Context.Editor.AddWithHistory(ellipse);
@@ -489,12 +538,14 @@ namespace Test2d
         /// </summary>
         /// <param name="topLeft"></param>
         /// <param name="bottomRight"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="text"></param>
         /// <returns></returns>
         public XEllipse Ellipse(
             XPoint topLeft,
             XPoint bottomRight,
+            bool isStroked = true,
             bool isFilled = false,
             string text = null)
         {
@@ -503,6 +554,7 @@ namespace Test2d
                 bottomRight,
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 Context.Editor.Project.Options.PointShape,
+                isStroked,
                 isFilled,
                 text);
             Context.Editor.AddWithHistory(ellipse);
@@ -517,18 +569,21 @@ namespace Test2d
         /// <param name="x2"></param>
         /// <param name="y2"></param>
         /// <param name="text"></param>
+        /// <param name="isStroked"></param>
         /// <returns></returns>
         public XText Text(
             double x1 = 30, double y1 = 30,
             double x2 = 60, double y2 = 60,
-            string text = "Text")
+            string text = "Text",
+            bool isStroked = true)
         {
             var txt = XText.Create(
                 x1, y1,
                 x2, y2,
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 Context.Editor.Project.Options.PointShape,
-                text);
+                text,
+                isStroked);
             Context.Editor.AddWithHistory(txt);
             return txt;
         }
@@ -539,18 +594,21 @@ namespace Test2d
         /// <param name="topLeft"></param>
         /// <param name="bottomRight"></param>
         /// <param name="text"></param>
+        /// <param name="isStroked"></param>
         /// <returns></returns>
         public XText Text(
             XPoint topLeft,
             XPoint bottomRight,
-            string text = "Text")
+            string text = "Text",
+            bool isStroked = true)
         {
             var txt = XText.Create(
                 topLeft,
                 bottomRight,
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 Context.Editor.Project.Options.PointShape,
-                text);
+                text,
+                isStroked);
             Context.Editor.AddWithHistory(txt);
             return txt;
         }
@@ -563,6 +621,7 @@ namespace Test2d
         /// <param name="y1"></param>
         /// <param name="x2"></param>
         /// <param name="y2"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="text"></param>
         /// <returns></returns>
@@ -570,6 +629,7 @@ namespace Test2d
             string path,
             double x1 = 30, double y1 = 30,
             double x2 = 120, double y2 = 120,
+            bool isStroked = false,
             bool isFilled = false,
             string text = null)
         {
@@ -579,6 +639,7 @@ namespace Test2d
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 Context.Editor.Project.Options.PointShape,
                 new Uri(path),
+                isStroked,
                 isFilled,
                 text);
             Context.Editor.AddWithHistory(image);
@@ -591,6 +652,7 @@ namespace Test2d
         /// <param name="path"></param>
         /// <param name="topLeft"></param>
         /// <param name="bottomRight"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="text"></param>
         /// <returns></returns>
@@ -598,6 +660,7 @@ namespace Test2d
             string path,
             XPoint topLeft,
             XPoint bottomRight,
+            bool isStroked = false,
             bool isFilled = false,
             string text = null)
         {
@@ -607,6 +670,7 @@ namespace Test2d
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 Context.Editor.Project.Options.PointShape,
                 new Uri(path),
+                isStroked,
                 isFilled,
                 text);
             Context.Editor.AddWithHistory(image);
