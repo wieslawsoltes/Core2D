@@ -3,6 +3,7 @@
 ## UI
 
 * Main menu tooltips.
+* Add toolbar control.
 
 ## Editor
 
