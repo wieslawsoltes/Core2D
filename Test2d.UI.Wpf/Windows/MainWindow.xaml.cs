@@ -180,7 +180,7 @@ namespace Test.Windows
         private void OnSave()
         {
             var context = DataContext as EditorContext;
-            if (context == null)
+            if (context == null || context.Editor.Project == null)
                 return;
 
             if (!string.IsNullOrEmpty(context.Editor.ProjectPath))
@@ -199,7 +199,7 @@ namespace Test.Windows
         private void OnSaveAs()
         {
             var context = DataContext as EditorContext;
-            if (context == null)
+            if (context == null || context.Editor.Project == null)
                 return;
 
             var dlg = new SaveFileDialog()
