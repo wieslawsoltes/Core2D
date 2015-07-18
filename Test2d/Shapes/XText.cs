@@ -273,6 +273,7 @@ namespace Test2d
         /// <param name="style"></param>
         /// <param name="point"></param>
         /// <param name="text"></param>
+        /// <param name="isStroked"></param>
         /// <param name="name"></param>
         /// <returns></returns>
         public static XText Create(
@@ -281,13 +282,14 @@ namespace Test2d
             ShapeStyle style,
             BaseShape point,
             string text,
+            bool isStroked = true,
             string name = "")
         {
             return new XText()
             {
                 Name = name,
                 Style = style,
-                IsStroked = true,
+                IsStroked = isStroked,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
                 Code = ShapeCode.Create(),
@@ -305,6 +307,7 @@ namespace Test2d
         /// <param name="style"></param>
         /// <param name="point"></param>
         /// <param name="text"></param>
+        /// <param name="isStroked"></param>
         /// <param name="name"></param>
         /// <returns></returns>
         public static XText Create(
@@ -312,9 +315,10 @@ namespace Test2d
             ShapeStyle style,
             BaseShape point,
             string text,
+            bool isStroked = true,
             string name = "")
         {
-            return Create(x, y, x, y, style, point, text, name);
+            return Create(x, y, x, y, style, point, text, isStroked, name);
         }
 
         /// <summary>
@@ -325,6 +329,7 @@ namespace Test2d
         /// <param name="style"></param>
         /// <param name="point"></param>
         /// <param name="text"></param>
+        /// <param name="isStroked"></param>
         /// <param name="name"></param>
         /// <returns></returns>
         public static XText Create(
@@ -333,13 +338,14 @@ namespace Test2d
             ShapeStyle style,
             BaseShape point,
             string text,
+            bool isStroked = true,
             string name = "")
         {
             return new XText()
             {
                 Name = name,
                 Style = style,
-                IsStroked = true,
+                IsStroked = isStroked,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
                 Code = ShapeCode.Create(),
