@@ -225,7 +225,7 @@ namespace Test2d
         /// <returns></returns>
         public static BaseShape EllipsePointShape(ShapeStyle pss)
         {
-            return XEllipse.Create(-4, -4, 4, 4, pss, null, false);
+            return XEllipse.Create(-4, -4, 4, 4, pss, null, true, false);
         }
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace Test2d
         /// <returns></returns>
         public static BaseShape FilledEllipsePointShape(ShapeStyle pss)
         {
-            return XEllipse.Create(-3, -3, 3, 3, pss, null, true);
+            return XEllipse.Create(-3, -3, 3, 3, pss, null, true, true);
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace Test2d
         /// <returns></returns>
         public static BaseShape RectanglePointShape(ShapeStyle pss)
         {
-            return XRectangle.Create(-4, -4, 4, 4, pss, null, false);
+            return XRectangle.Create(-4, -4, 4, 4, pss, null, true, false);
         }
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace Test2d
         /// <returns></returns>
         public static BaseShape FilledRectanglePointShape(ShapeStyle pss)
         {
-            return XRectangle.Create(-3, -3, 3, 3, pss, null, true);
+            return XRectangle.Create(-3, -3, 3, 3, pss, null, true, true);
         }
 
         /// <summary>
