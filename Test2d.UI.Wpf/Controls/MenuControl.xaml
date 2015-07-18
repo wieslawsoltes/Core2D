@@ -375,21 +375,19 @@
                 </MenuItem.ToolTip>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuEditGroup}" Command="{Binding Commands.GroupCommand}" InputGestureText="Ctrl+G">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditGroup}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditGroup}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuEditGroup}" 
+                      Command="{Binding Commands.GroupCommand}" 
+                      InputGestureText="Ctrl+G"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditGroup}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditGroup}">
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuEditUngroup}" Command="{Binding Commands.UngroupCommand}" InputGestureText="Ctrl+U">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditUngroup}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditUngroup}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuEditUngroup}" 
+                      Command="{Binding Commands.UngroupCommand}" 
+                      InputGestureText="Ctrl+U"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditUngroup}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditUngroup}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuEditOrder}"
