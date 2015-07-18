@@ -1,4 +1,6 @@
-﻿<UserControl x:Class="Test.Controls.ToolbarControl"
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Test.Controls.ToolbarControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -240,7 +242,7 @@
                          Style="{StaticResource ToolTipRadioButtonStyleKey}"
                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolText}"
                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolText}">
-                <Path Style="{StaticResource FillPathStyleKey}" Data="M 54.1869,53.8333L 46.2043,53.8333L 44.1143,47.3311L 32.1476,47.3311L 30.0794,53.8333L 22.1403,53.8333L 33.9618,21.3222L 42.6339,21.3222L 54.1869,53.8333 Z M 42.1622,40.8286L 38.7514,30.0523C 38.4853,29.2347 38.3015,28.2599 38.1999,27.1278L 38.0185,27.1278C 37.9604,28.0809 37.7693,29.0243 37.4452,29.958L 33.9691,40.8286L 42.1622,40.8286 Z "/>
+                <Path Style="{StaticResource FillPathStyleKey}" Data="M 54.1869,53.8333L 46.2043,53.8333L 44.1143,47.3311L 32.1476,47.3311L 30.0794,53.8333L 22.1403,53.8333L 33.9618,21.3222L 42.6339,21.3222L 54.1869,53.8333 Z M 42.1622,40.8286L 38.7514,30.0523C 38.4853,29.2347 38.3015,28.2599 38.1999,27.1278L 38.0185,27.1278C 37.9604,28.0809 37.7693,29.0243 37.4452,29.958L 33.9691,40.8286L 42.1622,40.8286 Z"/>
             </RadioButton>
             <Separator/>
             <RadioButton Command="{Binding Commands.ToolImageCommand}"
