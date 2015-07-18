@@ -89,6 +89,8 @@
     <Compile Include="Interfaces\ICodeEngine.cs" />
     <Compile Include="Interfaces\ICompressor.cs" />
     <Compile Include="Interfaces\IFileWriter.cs" />
+    <Compile Include="Interfaces\ILog.cs" />
+    <Compile Include="Interfaces\IProjectFactory.cs" />
     <Compile Include="Interfaces\IScriptEngine.cs" />
     <Compile Include="Interfaces\ISerializer.cs" />
     <Compile Include="Interfaces\ISimulationTimer.cs" />
