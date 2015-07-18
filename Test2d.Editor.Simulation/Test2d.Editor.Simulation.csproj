@@ -85,6 +85,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Test2d\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Simulation\Boolean\BoolInput.cs" />
     <Compile Include="Simulation\Boolean\BoolSimulation.cs" />
     <Compile Include="Simulation\Boolean\BoolSimulationFactory.cs" />

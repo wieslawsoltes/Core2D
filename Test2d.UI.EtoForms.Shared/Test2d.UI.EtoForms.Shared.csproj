@@ -92,6 +92,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Test2d\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Forms\MainForm.cs" />
     <Compile Include="Util\SimulationTimer.cs" />
     <Compile Include="Util\TextClipboard.cs" />

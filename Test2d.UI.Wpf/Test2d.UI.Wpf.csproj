@@ -157,6 +157,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\Test2d\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Controls\CodeControl.xaml.cs">
       <DependentUpon>CodeControl.xaml</DependentUpon>
     </Compile>
