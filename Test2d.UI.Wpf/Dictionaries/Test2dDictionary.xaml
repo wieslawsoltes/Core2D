@@ -63,6 +63,13 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="ToolTipRadioButtonStyleKey" TargetType="RadioButton">
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style x:Key="ToolTipComboBoxStyleKey" TargetType="ComboBox">
         <Setter Property="ToolTip">
             <Setter.Value>
