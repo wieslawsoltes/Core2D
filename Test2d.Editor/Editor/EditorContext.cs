@@ -1292,7 +1292,7 @@ namespace Test2d
         /// </summary>
         public void OnToolLine()
         {
-            if (_editor.CurrentTool == Tool.Path)
+            if (_editor.CurrentTool == Tool.Path && _editor.CurrentPathTool != PathTool.Line)
             {
                 _editor.CurrentPathTool = PathTool.Line;
             }
@@ -1307,7 +1307,7 @@ namespace Test2d
         /// </summary>
         public void OnToolArc()
         {
-            if (_editor.CurrentTool == Tool.Path)
+            if (_editor.CurrentTool == Tool.Path && _editor.CurrentPathTool != PathTool.Arc)
             {
                 _editor.CurrentPathTool = PathTool.Arc;
             }
@@ -1322,7 +1322,7 @@ namespace Test2d
         /// </summary>
         public void OnToolBezier()
         {
-            if (_editor.CurrentTool == Tool.Path)
+            if (_editor.CurrentTool == Tool.Path && _editor.CurrentPathTool != PathTool.Bezier)
             {
                 _editor.CurrentPathTool = PathTool.Bezier;
             }
@@ -1337,7 +1337,7 @@ namespace Test2d
         /// </summary>
         public void OnToolQBezier()
         {
-            if (_editor.CurrentTool == Tool.Path)
+            if (_editor.CurrentTool == Tool.Path && _editor.CurrentPathTool != PathTool.QBezier)
             {
                 _editor.CurrentPathTool = PathTool.QBezier;
             }
