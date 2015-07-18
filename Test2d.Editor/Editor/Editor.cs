@@ -1592,7 +1592,8 @@ namespace Test2d
                 var split = XLine.Create(
                     x, y,
                     line.Style,
-                    _project.Options.PointShape);
+                    _project.Options.PointShape,
+                    line.IsStroked);
 
                 double ds = point.Distance(line.Start);
                 double de = point.Distance(line.End);
@@ -1652,7 +1653,8 @@ namespace Test2d
                     p0,
                     line.End,
                     line.Style,
-                    _project.Options.PointShape);
+                    _project.Options.PointShape,
+                    line.IsStroked);
                 line.End = p1;
             }
             else
@@ -1661,7 +1663,8 @@ namespace Test2d
                     p1,
                     line.End,
                     line.Style,
-                    _project.Options.PointShape);
+                    _project.Options.PointShape,
+                    line.IsStroked);
                 line.End = p0;
             }
 
