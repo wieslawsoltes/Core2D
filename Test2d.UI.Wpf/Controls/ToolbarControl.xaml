@@ -9,26 +9,26 @@
              xmlns:p="clr-namespace:Test2d.UI.Wpf.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="840">
+    <UserControl.Resources>
+        <Style x:Key="StrokePathStyleKey" TargetType="Path">
+            <Setter Property="Stroke" Value="#FF404040"/>
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="StrokeStartLineCap" Value="Flat"/>
+            <Setter Property="StrokeEndLineCap" Value="Flat"/>
+            <Setter Property="Fill" Value="{x:Null}"/>
+            <Setter Property="Stretch" Value="Uniform"/>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+        </Style>
+        <Style x:Key="FillPathStyleKey" TargetType="Path">
+            <Setter Property="Stroke" Value="{x:Null}"/>
+            <Setter Property="Fill" Value="#FF404040"/>
+            <Setter Property="Stretch" Value="Uniform"/>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+        </Style>
+    </UserControl.Resources>
     <ToolBarTray VerticalAlignment="Top" Background="{x:Null}" ToolBarTray.IsLocked="False">
-        <ToolBarTray.Resources>
-            <Style x:Key="StrokePathStyleKey" TargetType="Path">
-                <Setter Property="Stroke" Value="#FF404040"/>
-                <Setter Property="StrokeThickness" Value="2"/>
-                <Setter Property="StrokeStartLineCap" Value="Flat"/>
-                <Setter Property="StrokeEndLineCap" Value="Flat"/>
-                <Setter Property="Fill" Value="{x:Null}"/>
-                <Setter Property="Stretch" Value="Uniform"/>
-                <Setter Property="Width" Value="20"/>
-                <Setter Property="Height" Value="20"/>
-            </Style>
-            <Style x:Key="FillPathStyleKey" TargetType="Path">
-                <Setter Property="Stroke" Value="{x:Null}"/>
-                <Setter Property="Fill" Value="#FF404040"/>
-                <Setter Property="Stretch" Value="Uniform"/>
-                <Setter Property="Width" Value="20"/>
-                <Setter Property="Height" Value="20"/>
-            </Style>
-        </ToolBarTray.Resources>
         <ToolBar x:Name="tool" Background="{x:Null}" Header="" ToolBar.OverflowMode="Never" Loaded="ToolBar_Loaded">
             <RadioButton Command="{Binding Commands.ToolNoneCommand}"
                          IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.None}}" 
