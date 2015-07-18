@@ -771,9 +771,9 @@ namespace Test2d
         private void ToStateOneLine()
         {
             _style = _editor.Project.Options.HelperStyle;
-            _lineEllipseStart = XEllipse.Create(0, 0, _style, null, true);
+            _lineEllipseStart = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_lineEllipseStart);
-            _lineEllipseEnd = XEllipse.Create(0, 0, _style, null, true);
+            _lineEllipseEnd = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_lineEllipseEnd);
         }
 
@@ -785,18 +785,18 @@ namespace Test2d
         private void ToStateOneBezier()
         {
             _style = _editor.Project.Options.HelperStyle;
-            _bezierEllipsePoint1 = XEllipse.Create(0, 0, _style, null, true);
+            _bezierEllipsePoint1 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierEllipsePoint1);
-            _bezierEllipsePoint4 = XEllipse.Create(0, 0, _style, null, true);
+            _bezierEllipsePoint4 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierEllipsePoint4);
         }
 
         private void ToStateOneQBezier()
         {
             _style = _editor.Project.Options.HelperStyle;
-            _qbezierEllipsePoint1 = XEllipse.Create(0, 0, _style, null, true);
+            _qbezierEllipsePoint1 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierEllipsePoint1);
-            _qbezierEllipsePoint3 = XEllipse.Create(0, 0, _style, null, true);
+            _qbezierEllipsePoint3 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierEllipsePoint3);
         }
 
@@ -810,7 +810,7 @@ namespace Test2d
             _style = _editor.Project.Options.HelperStyle;
             _bezierLine12 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierLine12);
-            _bezierEllipsePoint2 = XEllipse.Create(0, 0, _style, null, true);
+            _bezierEllipsePoint2 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierEllipsePoint2);
         }
 
@@ -821,7 +821,7 @@ namespace Test2d
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierLine12);
             _qbezierLine32 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierLine32);
-            _qbezierEllipsePoint2 = XEllipse.Create(0, 0, _style, null, true);
+            _qbezierEllipsePoint2 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierEllipsePoint2);
         }
 
@@ -836,7 +836,7 @@ namespace Test2d
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierLine43);
             _bezierLine23 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierLine23);
-            _bezierEllipsePoint3 = XEllipse.Create(0, 0, _style, null, true);
+            _bezierEllipsePoint3 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierEllipsePoint3);
         }
 

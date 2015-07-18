@@ -78,7 +78,8 @@ namespace Test2d
                             sx, sy,
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape,
-                            "Text");
+                            "Text",
+                            _editor.Project.Options.DefaultIsStroked);
                         if (_editor.Project.Options.TryToConnect)
                         {
                             TryToConnectTopLeft(_shape as XText, sx, sy);
@@ -199,9 +200,9 @@ namespace Test2d
         public override void ToStateOne()
         {
             _style = _editor.Project.Options.HelperStyle;
-            _ellipseTopLeft = XEllipse.Create(0, 0, _style, null, true);
+            _ellipseTopLeft = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseTopLeft);
-            _ellipseBottomRight = XEllipse.Create(0, 0, _style, null, true);
+            _ellipseBottomRight = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseBottomRight);
         }
         

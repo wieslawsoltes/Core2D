@@ -130,6 +130,7 @@ namespace Test2d
                             sx, sy,
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape,
+                            _editor.Project.Options.DefaultIsStroked,
                             _editor.Project.Options.DefaultIsFilled);
                         if (_editor.Project.Options.TryToConnect)
                         {
@@ -327,11 +328,11 @@ namespace Test2d
             _style = _editor.Project.Options.HelperStyle;
             _ellipse = XEllipse.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipse);
-            _ellipseP1 = XEllipse.Create(0, 0, _style, null, true);
+            _ellipseP1 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseP1);
-            _ellipseP2 = XEllipse.Create(0, 0, _style, null, true);
+            _ellipseP2 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseP2);
-            _ellipseCenter = XEllipse.Create(0, 0, _style, null, true);
+            _ellipseCenter = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseCenter);
         }
 
@@ -354,7 +355,7 @@ namespace Test2d
             
             _startLine = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_startLine);
-            _ellipseStart = XEllipse.Create(0, 0, _style, null, true);
+            _ellipseStart = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseStart);
         }
 
@@ -371,7 +372,7 @@ namespace Test2d
             
             _endLine = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_endLine);
-            _ellipseEnd = XEllipse.Create(0, 0, _style, null, true);
+            _ellipseEnd = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseEnd);
         }
 

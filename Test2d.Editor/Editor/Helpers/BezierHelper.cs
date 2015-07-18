@@ -113,6 +113,7 @@ namespace Test2d
                             sx, sy,
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape,
+                            _editor.Project.Options.DefaultIsStroked,
                             _editor.Project.Options.DefaultIsFilled);
                         if (_editor.Project.Options.TryToConnect)
                         {
@@ -314,9 +315,9 @@ namespace Test2d
         public override void ToStateOne()
         {
             _style = _editor.Project.Options.HelperStyle;
-            _ellipsePoint1 = XEllipse.Create(0, 0, _style, null, true);
+            _ellipsePoint1 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint1);
-            _ellipsePoint4 = XEllipse.Create(0, 0, _style, null, true);
+            _ellipsePoint4 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint4);
         }
         
@@ -328,7 +329,7 @@ namespace Test2d
             _style = _editor.Project.Options.HelperStyle;
             _line12 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line12);
-            _ellipsePoint2 = XEllipse.Create(0, 0, _style, null, true);
+            _ellipsePoint2 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint2);
         }
 
@@ -341,7 +342,7 @@ namespace Test2d
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line43);
             _line23 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line23);
-            _ellipsePoint3 = XEllipse.Create(0, 0, _style, null, true);
+            _ellipsePoint3 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint3);
         }
 

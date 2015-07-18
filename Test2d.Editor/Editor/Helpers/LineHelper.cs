@@ -83,7 +83,8 @@ namespace Test2d
                         _shape = XLine.Create(
                             sx, sy,
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
-                            _editor.Project.Options.PointShape);
+                            _editor.Project.Options.PointShape,
+                            _editor.Project.Options.DefaultIsStroked);
                         if (_editor.Project.Options.TryToConnect)
                         {
                             var result = TryToConnectStart(_shape as XLine, sx, sy);
@@ -214,9 +215,9 @@ namespace Test2d
         public override void ToStateOne()
         {
             _style = _editor.Project.Options.HelperStyle;
-            _ellipseStart = XEllipse.Create(0, 0, _style, null, true);
+            _ellipseStart = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseStart);
-            _ellipseEnd = XEllipse.Create(0, 0, _style, null, true);
+            _ellipseEnd = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseEnd);
         }
         
