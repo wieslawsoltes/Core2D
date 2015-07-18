@@ -281,7 +281,9 @@
                     <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEdit}"/>
                 </StackPanel>
             </MenuItem.ToolTip>
-            <MenuItem Header="{x:Static p:Resources.MenuEditUndo}" Command="{Binding Commands.UndoCommand}" InputGestureText="Ctrl+Z">
+            <MenuItem Header="{x:Static p:Resources.MenuEditUndo}" 
+                      Command="{Binding Commands.UndoCommand}" 
+                      InputGestureText="Ctrl+Z">
                 <MenuItem.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditUndo}"/>
@@ -289,7 +291,9 @@
                     </StackPanel>
                 </MenuItem.ToolTip>
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuEditRedo}" Command="{Binding Commands.RedoCommand}" InputGestureText="Ctrl+Y">
+            <MenuItem Header="{x:Static p:Resources.MenuEditRedo}" 
+                      Command="{Binding Commands.RedoCommand}" 
+                      InputGestureText="Ctrl+Y">
                 <MenuItem.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditRedo}"/>
@@ -298,7 +302,9 @@
                 </MenuItem.ToolTip>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuEditCopyAsEmf}" Command="{Binding Commands.CopyAsEmfCommand}" InputGestureText="Ctrl+Shift+C">
+            <MenuItem Header="{x:Static p:Resources.MenuEditCopyAsEmf}"
+                      Command="{Binding Commands.CopyAsEmfCommand}" 
+                      InputGestureText="Ctrl+Shift+C">
                 <MenuItem.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditCopyAsEmf}"/>
@@ -307,7 +313,10 @@
                 </MenuItem.ToolTip>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuEditCut}" Command="{Binding Commands.CutCommand}" CommandParameter="{Binding}" InputGestureText="Ctrl+X">
+            <MenuItem Header="{x:Static p:Resources.MenuEditCut}" 
+                      Command="{Binding Commands.CutCommand}" 
+                      CommandParameter="{Binding}" 
+                      InputGestureText="Ctrl+X">
                 <MenuItem.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditCut}"/>
@@ -315,7 +324,10 @@
                     </StackPanel>
                 </MenuItem.ToolTip>
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuEditCopy}" Command="{Binding Commands.CopyCommand}" CommandParameter="{Binding}" InputGestureText="Ctrl+C">
+            <MenuItem Header="{x:Static p:Resources.MenuEditCopy}" 
+                      Command="{Binding Commands.CopyCommand}" 
+                      CommandParameter="{Binding}" 
+                      InputGestureText="Ctrl+C">
                 <MenuItem.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditCopy}"/>
@@ -323,7 +335,10 @@
                     </StackPanel>
                 </MenuItem.ToolTip>
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuEditPaste}" Command="{Binding Commands.PasteCommand}" CommandParameter="{Binding}" InputGestureText="Ctrl+V">
+            <MenuItem Header="{x:Static p:Resources.MenuEditPaste}" 
+                      Command="{Binding Commands.PasteCommand}"
+                      CommandParameter="{Binding}" 
+                      InputGestureText="Ctrl+V">
                 <MenuItem.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditPaste}"/>
@@ -331,7 +346,10 @@
                     </StackPanel>
                 </MenuItem.ToolTip>
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuEditDelete}" Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding}" InputGestureText="Del">
+            <MenuItem Header="{x:Static p:Resources.MenuEditDelete}" 
+                      Command="{Binding Commands.DeleteCommand}" 
+                      CommandParameter="{Binding}" 
+                      InputGestureText="Del">
                 <MenuItem.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditDelete}"/>
@@ -340,7 +358,9 @@
                 </MenuItem.ToolTip>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuEditSelectAll}" Command="{Binding Commands.SelectAllCommand}" InputGestureText="Ctrl+A">
+            <MenuItem Header="{x:Static p:Resources.MenuEditSelectAll}" 
+                      Command="{Binding Commands.SelectAllCommand}" 
+                      InputGestureText="Ctrl+A">
                 <MenuItem.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditSelectAll}"/>
@@ -348,7 +368,9 @@
                     </StackPanel>
                 </MenuItem.ToolTip>
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuEditDeselectAll}" Command="{Binding Commands.DeselectAllCommand}" InputGestureText="Esc">
+            <MenuItem Header="{x:Static p:Resources.MenuEditDeselectAll}" 
+                      Command="{Binding Commands.DeselectAllCommand}" 
+                      InputGestureText="Esc">
                 <MenuItem.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditDeselectAll}"/>
@@ -357,7 +379,9 @@
                 </MenuItem.ToolTip>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuEditClearAll}" Command="{Binding Commands.ClearAllCommand}" InputGestureText="">
+            <MenuItem Header="{x:Static p:Resources.MenuEditClearAll}" 
+                      Command="{Binding Commands.ClearAllCommand}" 
+                      InputGestureText="">
                 <MenuItem.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditClearAll}"/>
@@ -366,7 +390,9 @@
                 </MenuItem.ToolTip>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuEditReference}" Command="{Binding Commands.ReferenceCommand}" InputGestureText="Ctrl+R">
+            <MenuItem Header="{x:Static p:Resources.MenuEditReference}" 
+                      Command="{Binding Commands.ReferenceCommand}" 
+                      InputGestureText="Ctrl+R">
                 <MenuItem.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditReference}"/>
