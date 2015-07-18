@@ -14,8 +14,8 @@
             <Style x:Key="StrokePathStyleKey" TargetType="Path">
                 <Setter Property="Stroke" Value="#FF404040"/>
                 <Setter Property="StrokeThickness" Value="2"/>
-                <Setter Property="StrokeStartLineCap" Value="Round"/>
-                <Setter Property="StrokeEndLineCap" Value="Round"/>
+                <Setter Property="StrokeStartLineCap" Value="Flat"/>
+                <Setter Property="StrokeEndLineCap" Value="Flat"/>
                 <Setter Property="Fill" Value="{x:Null}"/>
                 <Setter Property="Stretch" Value="Uniform"/>
                 <Setter Property="Width" Value="20"/>
@@ -122,7 +122,21 @@
                 <Path Style="{StaticResource FillPathStyleKey}" Data="M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z"/>
             </CheckBox>
         </ToolBar>
-        <ToolBar x:Name="orderToolbar" Background="{x:Null}" Header="" ToolBar.OverflowMode="Never" Loaded="ToolBar_Loaded">
+        <ToolBar x:Name="group" Background="{x:Null}" Header="" ToolBar.OverflowMode="Never" Loaded="ToolBar_Loaded">
+            <Button Command="{Binding Commands.UngroupCommand}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditUngroup}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditUngroup}">
+                <Path Style="{StaticResource StrokePathStyleKey}" Data="M0,0H6V3H3V6H0Z M3,3H9V9H3Z"/>
+            </Button>
+            <Button Command="{Binding Commands.GroupCommand}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditGroup}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditGroup}">
+                <Path Style="{StaticResource StrokePathStyleKey}" Data="M0,0H6V6H0Z M3,3H9V9H3Z M8,0H9V1H8Z M0,8V9H1V8Z"/>
+            </Button>
+        </ToolBar>
+        <ToolBar x:Name="order" Background="{x:Null}" Header="" ToolBar.OverflowMode="Never" Loaded="ToolBar_Loaded">
             <Button Command="{Binding Commands.SendToBackCommand}"
                     Style="{StaticResource ToolTipButtonStyleKey}"
                     controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditOrderSendToBack}"
