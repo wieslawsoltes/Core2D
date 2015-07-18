@@ -8,7 +8,7 @@
              xmlns:controls="clr-namespace:Test.Controls"
              xmlns:p="clr-namespace:Test2d.UI.Wpf.Properties"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="840">
+             d:DesignHeight="30" d:DesignWidth="1200">
     <UserControl.Resources>
         <Style x:Key="StrokePathStyleKey" TargetType="Path">
             <Setter Property="Stroke" Value="#FF404040"/>
@@ -29,6 +29,132 @@
         </Style>
     </UserControl.Resources>
     <ToolBarTray VerticalAlignment="Top" Background="{x:Null}" ToolBarTray.IsLocked="False">
+        <ToolBar x:Name="file" Background="{x:Null}" Header="" ToolBar.OverflowMode="Never" Loaded="ToolBar_Loaded">
+            <Button Command="{Binding Commands.NewCommand}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileNew}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileNew}">
+                <Path Style="{StaticResource FillPathStyleKey}" Data="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M11,4H6V20H11L18,20V11H11V4Z"/>
+            </Button>
+            <Separator/>
+            <Button Command="{Binding Commands.OpenCommand}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileOpen}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileOpen}">
+                <Path Style="{StaticResource FillPathStyleKey}" Data="M20,18H4V8H20M20,6H12L10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6Z"/>
+            </Button>
+            <Separator/>
+            <Button Command="{Binding Commands.CloseCommand}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileClose}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileClose}">
+                <Path Style="{StaticResource FillPathStyleKey}" Data="M19,3H16.3H7.7H5A2,2 0 0,0 3,5V7.7V16.4V19A2,2 0 0,0 5,21H7.7H16.4H19A2,2 0 0,0 21,19V16.3V7.7V5A2,2 0 0,0 19,3M15.6,17L12,13.4L8.4,17L7,15.6L10.6,12L7,8.4L8.4,7L12,10.6L15.6,7L17,8.4L13.4,12L17,15.6L15.6,17Z"/>
+            </Button>
+            <Separator/>
+            <Button Command="{Binding Commands.SaveCommand}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileSave}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileSave}">
+                <Path Style="{StaticResource FillPathStyleKey}" Data="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z"/>
+            </Button>
+            <Separator/>
+            <Button Command="{Binding Commands.ExportCommand}"
+                    CommandParameter="{Binding Editor.Project}" 
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipFileExport}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileExport}">
+                <Path Style="{StaticResource FillPathStyleKey}" Data="M11.43,10.94C11.2,11.68 10.87,12.47 10.42,13.34C10.22,13.72 10,14.08 9.92,14.38L10.03,14.34V14.34C11.3,13.85 12.5,13.57 13.37,13.41C13.22,13.31 13.08,13.2 12.96,13.09C12.36,12.58 11.84,11.84 11.43,10.94M17.91,14.75C17.74,14.94 17.44,15.05 17,15.05C16.24,15.05 15,14.82 14,14.31C12.28,14.5 11,14.73 9.97,15.06C9.92,15.08 9.86,15.1 9.79,15.13C8.55,17.25 7.63,18.2 6.82,18.2C6.66,18.2 6.5,18.16 6.38,18.09L5.9,17.78L5.87,17.73C5.8,17.55 5.78,17.38 5.82,17.19C5.93,16.66 6.5,15.82 7.7,15.07C7.89,14.93 8.19,14.77 8.59,14.58C8.89,14.06 9.21,13.45 9.55,12.78C10.06,11.75 10.38,10.73 10.63,9.85V9.84C10.26,8.63 10.04,7.9 10.41,6.57C10.5,6.19 10.83,5.8 11.2,5.8H11.44C11.67,5.8 11.89,5.88 12.05,6.04C12.71,6.7 12.4,8.31 12.07,9.64C12.05,9.7 12.04,9.75 12.03,9.78C12.43,10.91 13,11.82 13.63,12.34C13.89,12.54 14.18,12.74 14.5,12.92C14.95,12.87 15.38,12.85 15.79,12.85C17.03,12.85 17.78,13.07 18.07,13.54C18.17,13.7 18.22,13.89 18.19,14.09C18.18,14.34 18.09,14.57 17.91,14.75M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M17.5,14.04C17.4,13.94 17,13.69 15.6,13.69C15.53,13.69 15.46,13.69 15.37,13.79C16.1,14.11 16.81,14.3 17.27,14.3C17.34,14.3 17.4,14.29 17.46,14.28H17.5C17.55,14.26 17.58,14.25 17.59,14.15C17.57,14.12 17.55,14.08 17.5,14.04M8.33,15.5C8.12,15.62 7.95,15.73 7.85,15.81C7.14,16.46 6.69,17.12 6.64,17.5C7.09,17.35 7.68,16.69 8.33,15.5M11.35,8.59L11.4,8.55C11.47,8.23 11.5,7.95 11.56,7.73L11.59,7.57C11.69,7 11.67,6.71 11.5,6.47L11.35,6.42C11.33,6.45 11.3,6.5 11.28,6.54C11.11,6.96 11.12,7.69 11.35,8.59Z"/>
+            </Button>
+        </ToolBar>
+        <ToolBar x:Name="edit" Background="{x:Null}" Header="" ToolBar.OverflowMode="Never" Loaded="ToolBar_Loaded">
+            <Button Command="{Binding Commands.UndoCommand}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditUndo}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditUndo}">
+                <Path Style="{StaticResource FillPathStyleKey}" Data="M12.5,8C9.85,8 7.45,9 5.6,10.6L2,7V16H11L7.38,12.38C8.77,11.22 10.54,10.5 12.5,10.5C16.04,10.5 19.05,12.81 20.1,16L22.47,15.22C21.08,11.03 17.15,8 12.5,8Z"/>
+            </Button>
+            <Button Command="{Binding Commands.RedoCommand}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditRedo}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditRedo}">
+                <Path Style="{StaticResource FillPathStyleKey}" Data="M18.4,10.6C16.55,9 14.15,8 11.5,8C6.85,8 2.92,11.03 1.54,15.22L3.9,16C4.95,12.81 7.95,10.5 11.5,10.5C13.45,10.5 15.23,11.22 16.62,12.38L13,16H22V7L18.4,10.6Z"/>
+            </Button>
+            <Separator/>
+            <Button Command="{Binding Commands.CutCommand}"
+                    CommandParameter="{Binding}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditCut}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditCut}">
+                <Path Style="{StaticResource FillPathStyleKey}" Data="M19,3L13,9L15,11L22,4V3M12,12.5A0.5,0.5 0 0,1 11.5,12A0.5,0.5 0 0,1 12,11.5A0.5,0.5 0 0,1 12.5,12A0.5,0.5 0 0,1 12,12.5M6,20A2,2 0 0,1 4,18C4,16.89 4.9,16 6,16A2,2 0 0,1 8,18C8,19.11 7.1,20 6,20M6,8A2,2 0 0,1 4,6C4,4.89 4.9,4 6,4A2,2 0 0,1 8,6C8,7.11 7.1,8 6,8M9.64,7.64C9.87,7.14 10,6.59 10,6A4,4 0 0,0 6,2A4,4 0 0,0 2,6A4,4 0 0,0 6,10C6.59,10 7.14,9.87 7.64,9.64L10,12L7.64,14.36C7.14,14.13 6.59,14 6,14A4,4 0 0,0 2,18A4,4 0 0,0 6,22A4,4 0 0,0 10,18C10,17.41 9.87,16.86 9.64,16.36L12,14L19,21H22V20L9.64,7.64Z"/>
+            </Button>
+            <Button Command="{Binding Commands.CopyCommand}"
+                    CommandParameter="{Binding}" 
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditCopy}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditCopy}">
+                <Path Style="{StaticResource FillPathStyleKey}" Data="F1 M 27,20L 38.75,20L 37.75,19L 24,19L 24,50L 27,50L 27,20 Z M 46.25,20L 59,32.75L 59,59L 27,59L 27,54L 20,54L 20,15L 39.25,15L 44.25,20L 46.25,20 Z M 31,24L 31,55L 55,55L 55,37L 42,37L 42,24L 31,24 Z M 46,25.25L 46,33L 53.75,33L 46,25.25 Z"/>
+            </Button>
+            <Button Command="{Binding Commands.PasteCommand}"
+                    CommandParameter="{Binding}" 
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditPaste}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditPaste}">
+                <Path Style="{StaticResource FillPathStyleKey}" Data="F1 M 23,54L 23,26C 23,24.3432 24.3431,23 26,23L 30.5001,22.9999C 30.5001,22.9999 31.4999,22.8807 31.4999,21.5C 31.4999,20.1193 33.1191,19 34.4998,19L 41.5001,19C 42.8809,19 44.5001,20.1193 44.5001,21.5C 44.5001,22.8807 45.4999,22.9999 45.4999,22.9999L 50,23.0001C 51.6569,23.0001 53,24.3432 53,26.0001L 53,54.0001C 53,55.6569 51.6568,57 50,57.0001L 26,57C 24.3431,57 23,55.6569 23,54 Z M 35.9997,22.0002C 34.619,22.0002 33.4997,23.1195 33.4997,24.5002C 33.4997,25.8809 32.5,27.0001 32.5,27.0001L 43.5,27.0001C 43.5,27.0001 42.5002,25.8809 42.5002,24.5002C 42.5002,23.1195 41.3809,22.0002 40.0002,22.0002L 35.9997,22.0002 Z M 28.5,30.0001L 30,26L 26,26L 26,54L 50,54L 50,26L 46,26.0001L 47.5,30.0001L 28.5,30.0001 Z"/>
+            </Button>
+            <Button Command="{Binding Commands.DeleteCommand}"
+                    CommandParameter="{Binding}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditDelete}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditDelete}">
+                <Path Style="{StaticResource FillPathStyleKey}" Data="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z"/>
+            </Button>
+            <Separator/>
+            <Button Command="{Binding Commands.ReferenceCommand}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditReference}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditReference}">
+                <Path Style="{StaticResource FillPathStyleKey}" Data="M16,6H13V7.9H16C18.26,7.9 20.1,9.73 20.1,12A4.1,4.1 0 0,1 16,16.1H13V18H16A6,6 0 0,0 22,12C22,8.68 19.31,6 16,6M3.9,12C3.9,9.73 5.74,7.9 8,7.9H11V6H8A6,6 0 0,0 2,12A6,6 0 0,0 8,18H11V16.1H8C5.74,16.1 3.9,14.26 3.9,12M8,13H16V11H8V13Z"/>
+            </Button>
+            <Separator/>
+            <Button Command="{Binding Commands.UngroupCommand}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditUngroup}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditUngroup}">
+                <Path Style="{StaticResource StrokePathStyleKey}" Data="M0,0H6V3H3V6H0Z M3,3H9V9H3Z"/>
+            </Button>
+            <Button Command="{Binding Commands.GroupCommand}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditGroup}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditGroup}">
+                <Path Style="{StaticResource StrokePathStyleKey}" Data="M0,0H6V6H0Z M3,3H9V9H3Z M8,0H9V1H8Z M0,8V9H1V8Z"/>
+            </Button>
+        </ToolBar>
+        <ToolBar x:Name="order" Background="{x:Null}" Header="" ToolBar.OverflowMode="Never" Loaded="ToolBar_Loaded">
+            <Button Command="{Binding Commands.SendToBackCommand}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditOrderSendToBack}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditOrderSendToBack}">
+                <Path Style="{StaticResource FillPathStyleKey}" Data="M2,2H11V11H2V2M9,4H4V9H9V4M22,13V22H13V13H22M15,20H20V15H15V20M16,8V11H13V8H16M11,16H8V13H11V16Z"/>
+            </Button>
+            <Button Command="{Binding Commands.SendBackwardCommand}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditOrderSendBackward}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditOrderSendBackward}">
+                <Path Style="{StaticResource FillPathStyleKey}" Data="M2,2H16V16H2V2M22,8V22H8V18H18V8H22M4,4V14H14V4H4Z"/>
+            </Button>
+            <Button Command="{Binding Commands.BringForwardCommand}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditOrderBringForward}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditOrderBringForward}">
+                <Path Style="{StaticResource FillPathStyleKey}" Data="M2,2H16V16H2V2M22,8V22H8V18H10V20H20V10H18V8H22Z"/>
+            </Button>
+            <Button Command="{Binding Commands.BringToFrontCommand}"
+                    Style="{StaticResource ToolTipButtonStyleKey}"
+                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditOrderBringToFront}"
+                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditOrderBringToFront}">
+                <Path Style="{StaticResource FillPathStyleKey}" Data="M2,2H11V6H9V4H4V9H6V11H2V2M22,13V22H13V18H15V20H20V15H18V13H22M8,8H16V16H8V8Z"/>
+            </Button>
+        </ToolBar>
         <ToolBar x:Name="tool" Background="{x:Null}" Header="" ToolBar.OverflowMode="Never" Loaded="ToolBar_Loaded">
             <RadioButton Command="{Binding Commands.ToolNoneCommand}"
                          IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.None}}" 
@@ -43,7 +169,10 @@
                          Style="{StaticResource ToolTipRadioButtonStyleKey}"
                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolSelection}"
                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolSelection}">
-                <Path Style="{StaticResource FillPathStyleKey}" Data="M4,3H5V5H3V4A1,1 0 0,1 4,3M20,3A1,1 0 0,1 21,4V5H19V3H20M15,5V3H17V5H15M11,5V3H13V5H11M7,5V3H9V5H7M21,20A1,1 0 0,1 20,21H19V19H21V20M15,21V19H17V21H15M11,21V19H13V21H11M7,21V19H9V21H7M4,21A1,1 0 0,1 3,20V19H5V21H4M3,15H5V17H3V15M21,15V17H19V15H21M3,11H5V13H3V11M21,11V13H19V11H21M3,7H5V9H3V7M21,7V9H19V7H21Z"/>
+                <Path Style="{StaticResource StrokePathStyleKey}" Data="M2,2 L4,2 M6,2 L8,2 M10,2 L12,2 M14,2 L16,2 M18,2 L20,2
+                                                                        M6,18 L8,18 M10,18 L12,18 M14,18 L16,18
+                                                                        M19,5 L19,7 M19,9 L19,11 M19,13 L19,15 M19,17 L19,19
+                                                                        M3,5 L3,7 M3,9 L3,11 M 3,13 L3,15 M3,17 L3,19"/>
             </RadioButton>
             <Separator/>
             <RadioButton Command="{Binding Commands.ToolPointCommand}"
@@ -88,7 +217,7 @@
                          Style="{StaticResource ToolTipRadioButtonStyleKey}"
                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolPath}"
                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolPath}">
-                <Path Style="{StaticResource FillPathStyleKey}" Data="F1 M 28,50C 28,48.8954 28.8954,48 30,48L 32,48L 26.5,38L 34.25,19L 41.75,19L 49.5,38L 44,48L 46,48C 47.1045,48 48,48.8954 48,50L 48,53.5C 48,55.1568 46.1568,57 44.5,57L 31.5,57C 29.8432,57 28,55.1568 28,53.5L 28,50 Z M 38,39C 36.3431,39 35,37.6569 35,36C 35,34.6938 35.8348,33.5826 37,33.1707L 37,22L 36.3947,22L 30.25,38L 35.75,48L 40.25,48L 45.75,38L 39.6052,22L 39,22L 39,33.1707C 40.1652,33.5826 41,34.6938 41,36C 41,37.6569 39.6568,39 38,39 Z M 31,51L 31,52.5C 31,53.3284 31.6716,54 32.5,54L 43.5,54C 44.3284,54 45,53.3284 45,52.5L 45,51L 31,51 Z "/>
+                <Path Style="{StaticResource FillPathStyleKey}" Data="F1 M 48.9159,10.8501L 50.3154,12.2495L 54.1556,7.12923C 57.2053,8.72639 60.0681,10.8063 62.6308,13.3691C 65.1936,15.9319 67.2736,18.7946 68.8707,21.8443L 63.7504,25.6846L 65.1499,27.084L 62.6308,29.6031L 60.1118,27.084L 44.7175,49.1959C 44.7175,49.1959 30.1629,48.0763 21.2062,57.033L 20.6464,56.4732L 35.3638,41.7558C 36.5166,42.2442 38.1798,42.2985 39.1195,41.3587C 40.3562,40.1221 40.3562,38.1171 39.1195,36.8804C 37.8829,35.6437 35.8779,35.6437 34.6412,36.8804C 33.7015,37.8201 33.4758,39.2035 33.9643,40.3563L 19.2469,55.0737L 18.967,54.7938C 27.9237,45.8371 26.8041,31.2825 26.8041,31.2825L 48.9159,15.8882L 46.3969,13.3691L 48.9159,10.8501 Z"/>
             </RadioButton>
             <Separator/>
             <RadioButton Command="{Binding Commands.ToolRectangleCommand}"
@@ -121,46 +250,6 @@
                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolImage}">
                 <Path Style="{StaticResource FillPathStyleKey}" Data="M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z"/>
             </RadioButton>
-        </ToolBar>
-        <ToolBar x:Name="group" Background="{x:Null}" Header="" ToolBar.OverflowMode="Never" Loaded="ToolBar_Loaded">
-            <Button Command="{Binding Commands.UngroupCommand}"
-                    Style="{StaticResource ToolTipButtonStyleKey}"
-                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditUngroup}"
-                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditUngroup}">
-                <Path Style="{StaticResource StrokePathStyleKey}" Data="M0,0H6V3H3V6H0Z M3,3H9V9H3Z"/>
-            </Button>
-            <Button Command="{Binding Commands.GroupCommand}"
-                    Style="{StaticResource ToolTipButtonStyleKey}"
-                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditGroup}"
-                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditGroup}">
-                <Path Style="{StaticResource StrokePathStyleKey}" Data="M0,0H6V6H0Z M3,3H9V9H3Z M8,0H9V1H8Z M0,8V9H1V8Z"/>
-            </Button>
-        </ToolBar>
-        <ToolBar x:Name="order" Background="{x:Null}" Header="" ToolBar.OverflowMode="Never" Loaded="ToolBar_Loaded">
-            <Button Command="{Binding Commands.SendToBackCommand}"
-                    Style="{StaticResource ToolTipButtonStyleKey}"
-                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditOrderSendToBack}"
-                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditOrderSendToBack}">
-                <Path Style="{StaticResource FillPathStyleKey}" Data="M2,2H11V11H2V2M9,4H4V9H9V4M22,13V22H13V13H22M15,20H20V15H15V20M16,8V11H13V8H16M11,16H8V13H11V16Z"/>
-            </Button>
-            <Button Command="{Binding Commands.SendBackwardCommand}"
-                    Style="{StaticResource ToolTipButtonStyleKey}"
-                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditOrderSendBackward}"
-                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditOrderSendBackward}">
-                <Path Style="{StaticResource FillPathStyleKey}" Data="M2,2H16V16H2V2M22,8V22H8V18H18V8H22M4,4V14H14V4H4Z"/>
-            </Button>
-            <Button Command="{Binding Commands.BringForwardCommand}"
-                    Style="{StaticResource ToolTipButtonStyleKey}"
-                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditOrderBringForward}"
-                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditOrderBringForward}">
-                <Path Style="{StaticResource FillPathStyleKey}" Data="M2,2H16V16H2V2M22,8V22H8V18H10V20H20V10H18V8H22Z"/>
-            </Button>
-            <Button Command="{Binding Commands.BringToFrontCommand}"
-                    Style="{StaticResource ToolTipButtonStyleKey}"
-                    controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditOrderBringToFront}"
-                    controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditOrderBringToFront}">
-                <Path Style="{StaticResource FillPathStyleKey}" Data="M2,2H11V6H9V4H4V9H6V11H2V2M22,13V22H13V18H15V20H20V15H18V13H22M8,8H16V16H8V8Z"/>
-            </Button>
         </ToolBar>
         <ToolBar x:Name="path" Background="{x:Null}" Header="Path:" ToolBar.OverflowMode="Never" Loaded="ToolBar_Loaded">
             <ToolBar.Style>
