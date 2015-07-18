@@ -202,15 +202,15 @@ namespace Test2d
             options.HelperStyle =
                 ShapeStyle.Create(
                     "Helper",
-                    0xFF, 0xFF, 0x00, 0x00,
-                    0xFF, 0xFF, 0x00, 0x00,
+                    0xFF, 0x00, 0x00, 0x00,
+                    0xFF, 0x00, 0x00, 0x00,
                     1.0);
 
             options.PointStyle =
                 ShapeStyle.Create(
                     "Point",
-                    0xFF, 0xFF, 0x00, 0x00,
-                    0xFF, 0xFF, 0x00, 0x00, 
+                    0xFF, 0x00, 0x00, 0x00,
+                    0xFF, 0x00, 0x00, 0x00, 
                     1.0);
 
             options.PointShape = RectanglePointShape(options.PointStyle);
