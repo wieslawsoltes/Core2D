@@ -30,97 +30,97 @@
             </Style>
         </ToolBarTray.Resources>
         <ToolBar x:Name="tool" Background="{x:Null}" Header="" ToolBar.OverflowMode="Never" Loaded="ToolBar_Loaded">
-            <CheckBox Command="{Binding Commands.ToolNoneCommand}"
-                      IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.None}}" 
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolNone}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolNone}">
+            <RadioButton Command="{Binding Commands.ToolNoneCommand}"
+                         IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.None}}" 
+                         Style="{StaticResource ToolTipRadioButtonStyleKey}"
+                         controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolNone}"
+                         controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolNone}">
                 <Path Style="{StaticResource FillPathStyleKey}" Data="M10.07,14.27C10.57,14.03 11.16,14.25 11.4,14.75L13.7,19.74L15.5,18.89L13.19,13.91C12.95,13.41 13.17,12.81 13.67,12.58L13.95,12.5L16.25,12.05L8,5.12V15.9L9.82,14.43L10.07,14.27M13.64,21.97C13.14,22.21 12.54,22 12.31,21.5L10.13,16.76L7.62,18.78C7.45,18.92 7.24,19 7,19A1,1 0 0,1 6,18V3A1,1 0 0,1 7,2C7.24,2 7.47,2.09 7.64,2.23L7.65,2.22L19.14,11.86C19.57,12.22 19.62,12.85 19.27,13.27C19.12,13.45 18.91,13.57 18.7,13.61L15.54,14.23L17.74,18.96C18,19.46 17.76,20.05 17.26,20.28L13.64,21.97Z"/>
-            </CheckBox>
+            </RadioButton>
             <Separator/>
-            <CheckBox Command="{Binding Commands.ToolSelectionCommand}"
-                      IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Selection}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolSelection}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolSelection}">
+            <RadioButton Command="{Binding Commands.ToolSelectionCommand}"
+                         IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Selection}}"
+                         Style="{StaticResource ToolTipRadioButtonStyleKey}"
+                         controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolSelection}"
+                         controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolSelection}">
                 <Path Style="{StaticResource FillPathStyleKey}" Data="M4,3H5V5H3V4A1,1 0 0,1 4,3M20,3A1,1 0 0,1 21,4V5H19V3H20M15,5V3H17V5H15M11,5V3H13V5H11M7,5V3H9V5H7M21,20A1,1 0 0,1 20,21H19V19H21V20M15,21V19H17V21H15M11,21V19H13V21H11M7,21V19H9V21H7M4,21A1,1 0 0,1 3,20V19H5V21H4M3,15H5V17H3V15M21,15V17H19V15H21M3,11H5V13H3V11M21,11V13H19V11H21M3,7H5V9H3V7M21,7V9H19V7H21Z"/>
-            </CheckBox>
+            </RadioButton>
             <Separator/>
-            <CheckBox Command="{Binding Commands.ToolPointCommand}"
-                      IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Point}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolPoint}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolPoint}">
+            <RadioButton Command="{Binding Commands.ToolPointCommand}"
+                         IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Point}}"
+                         Style="{StaticResource ToolTipRadioButtonStyleKey}"
+                         controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolPoint}"
+                         controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolPoint}">
                 <Path Style="{StaticResource FillPathStyleKey}" Data="M12,20L7,22L12,11L17,22L12,20M8,2H16V5H22V7H16V10H8V7H2V5H8V2M10,4V8H14V4H10Z"/>
-            </CheckBox>
+            </RadioButton>
             <Separator/>
-            <CheckBox Command="{Binding Commands.ToolLineCommand}"
-                      IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Line}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolLine}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolLine}">
+            <RadioButton Command="{Binding Commands.ToolLineCommand}"
+                         IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Line}}"
+                         Style="{StaticResource ToolTipRadioButtonStyleKey}"
+                         controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolLine}"
+                         controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolLine}">
                 <Path Style="{StaticResource StrokePathStyleKey}" Data="M 2,2 L 14,14"/>
-            </CheckBox>
-            <CheckBox Command="{Binding Commands.ToolArcCommand}"
-                      IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Arc}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolArc}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolArc}">
+            </RadioButton>
+            <RadioButton Command="{Binding Commands.ToolArcCommand}"
+                         IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Arc}}"
+                         Style="{StaticResource ToolTipRadioButtonStyleKey}"
+                         controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolArc}"
+                         controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolArc}">
                 <Path Style="{StaticResource StrokePathStyleKey}" Data="M 100,100 A 50,50 0 1 1 200,100"/>
-            </CheckBox>
-            <CheckBox Command="{Binding Commands.ToolBezierCommand}"
-                      IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Bezier}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolBezier}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolBezier}">
+            </RadioButton>
+            <RadioButton Command="{Binding Commands.ToolBezierCommand}"
+                         IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Bezier}}"
+                         Style="{StaticResource ToolTipRadioButtonStyleKey}"
+                         controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolBezier}"
+                         controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolBezier}">
                 <Path Style="{StaticResource StrokePathStyleKey}" Data="M 0,60 C 0,0 30,90 30,30"/>
-            </CheckBox>
-            <CheckBox Command="{Binding Commands.ToolQBezierCommand}"
-                      IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.QBezier}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolQBezier}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolQBezier}">
+            </RadioButton>
+            <RadioButton Command="{Binding Commands.ToolQBezierCommand}"
+                         IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.QBezier}}"
+                         Style="{StaticResource ToolTipRadioButtonStyleKey}"
+                         controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolQBezier}"
+                         controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolQBezier}">
                 <Path Style="{StaticResource StrokePathStyleKey}" Data="M 0,0 Q 30,0 30,30"/>
-            </CheckBox>
+            </RadioButton>
             <Separator/>
-            <CheckBox Command="{Binding Commands.ToolPathCommand}"
-                      IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Path}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolPath}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolPath}">
+            <RadioButton Command="{Binding Commands.ToolPathCommand}"
+                         IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Path}}"
+                         Style="{StaticResource ToolTipRadioButtonStyleKey}"
+                         controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolPath}"
+                         controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolPath}">
                 <Path Style="{StaticResource FillPathStyleKey}" Data="F1 M 28,50C 28,48.8954 28.8954,48 30,48L 32,48L 26.5,38L 34.25,19L 41.75,19L 49.5,38L 44,48L 46,48C 47.1045,48 48,48.8954 48,50L 48,53.5C 48,55.1568 46.1568,57 44.5,57L 31.5,57C 29.8432,57 28,55.1568 28,53.5L 28,50 Z M 38,39C 36.3431,39 35,37.6569 35,36C 35,34.6938 35.8348,33.5826 37,33.1707L 37,22L 36.3947,22L 30.25,38L 35.75,48L 40.25,48L 45.75,38L 39.6052,22L 39,22L 39,33.1707C 40.1652,33.5826 41,34.6938 41,36C 41,37.6569 39.6568,39 38,39 Z M 31,51L 31,52.5C 31,53.3284 31.6716,54 32.5,54L 43.5,54C 44.3284,54 45,53.3284 45,52.5L 45,51L 31,51 Z "/>
-            </CheckBox>
+            </RadioButton>
             <Separator/>
-            <CheckBox Command="{Binding Commands.ToolRectangleCommand}"
-                      IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Rectangle}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolRectangle}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolRectangle}">
+            <RadioButton Command="{Binding Commands.ToolRectangleCommand}"
+                         IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Rectangle}}"
+                         Style="{StaticResource ToolTipRadioButtonStyleKey}"
+                         controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolRectangle}"
+                         controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolRectangle}">
                 <Path Style="{StaticResource StrokePathStyleKey}" Data="M 2,2 L 14,2 14,14 2,14 Z"/>
-            </CheckBox>
-            <CheckBox Command="{Binding Commands.ToolEllipseCommand}"
-                      IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Ellipse}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolEllipse}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolEllipse}">
+            </RadioButton>
+            <RadioButton Command="{Binding Commands.ToolEllipseCommand}"
+                         IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Ellipse}}"
+                         Style="{StaticResource ToolTipRadioButtonStyleKey}"
+                         controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolEllipse}"
+                         controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolEllipse}">
                 <Path Style="{StaticResource StrokePathStyleKey}" Data="M 100,100 A 50,50 0 1 1 200,100 M 100,100 A 50,50 0 1 0 200,100"/>
-            </CheckBox>
+            </RadioButton>
             <Separator/>
-            <CheckBox Command="{Binding Commands.ToolTextCommand}"
-                      IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Text}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolText}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolText}">
+            <RadioButton Command="{Binding Commands.ToolTextCommand}"
+                         IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Text}}"
+                         Style="{StaticResource ToolTipRadioButtonStyleKey}"
+                         controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolText}"
+                         controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolText}">
                 <Path Style="{StaticResource FillPathStyleKey}" Data="M 54.1869,53.8333L 46.2043,53.8333L 44.1143,47.3311L 32.1476,47.3311L 30.0794,53.8333L 22.1403,53.8333L 33.9618,21.3222L 42.6339,21.3222L 54.1869,53.8333 Z M 42.1622,40.8286L 38.7514,30.0523C 38.4853,29.2347 38.3015,28.2599 38.1999,27.1278L 38.0185,27.1278C 37.9604,28.0809 37.7693,29.0243 37.4452,29.958L 33.9691,40.8286L 42.1622,40.8286 Z "/>
-            </CheckBox>
+            </RadioButton>
             <Separator/>
-            <CheckBox Command="{Binding Commands.ToolImageCommand}"
-                      IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Image}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolImage}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolImage}">
+            <RadioButton Command="{Binding Commands.ToolImageCommand}"
+                         IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Image}}"
+                         Style="{StaticResource ToolTipRadioButtonStyleKey}"
+                         controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolImage}"
+                         controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolImage}">
                 <Path Style="{StaticResource FillPathStyleKey}" Data="M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z"/>
-            </CheckBox>
+            </RadioButton>
         </ToolBar>
         <ToolBar x:Name="group" Background="{x:Null}" Header="" ToolBar.OverflowMode="Never" Loaded="ToolBar_Loaded">
             <Button Command="{Binding Commands.UngroupCommand}"
@@ -161,6 +161,46 @@
                     controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditOrderBringToFront}">
                 <Path Style="{StaticResource FillPathStyleKey}" Data="M2,2H11V6H9V4H4V9H6V11H2V2M22,13V22H13V18H15V20H20V15H18V13H22M8,8H16V16H8V8Z"/>
             </Button>
+        </ToolBar>
+        <ToolBar x:Name="path" Background="{x:Null}" Header="Path:" ToolBar.OverflowMode="Never" Loaded="ToolBar_Loaded">
+            <ToolBar.Style>
+                <Style TargetType="ToolBar">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Editor.CurrentTool}" Value="{x:Static editor:Tool.Path}">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ToolBar.Style>
+            <RadioButton Command="{Binding Commands.ToolLineCommand}"
+                         IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:PathTool.Line}}"
+                         Style="{StaticResource ToolTipRadioButtonStyleKey}"
+                         controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolLine}"
+                         controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolLine}">
+                <Path Style="{StaticResource StrokePathStyleKey}" Data="M 2,2 L 14,14"/>
+            </RadioButton>
+            <RadioButton Command="{Binding Commands.ToolArcCommand}"
+                         IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:PathTool.Arc}}"
+                         Style="{StaticResource ToolTipRadioButtonStyleKey}"
+                         controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolArc}"
+                         controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolArc}">
+                <Path Style="{StaticResource StrokePathStyleKey}" Data="M 100,100 A 50,50 0 1 1 200,100"/>
+            </RadioButton>
+            <RadioButton Command="{Binding Commands.ToolBezierCommand}"
+                         IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:PathTool.Bezier}}"
+                         Style="{StaticResource ToolTipRadioButtonStyleKey}"
+                         controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolBezier}"
+                         controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolBezier}">
+                <Path Style="{StaticResource StrokePathStyleKey}" Data="M 0,60 C 0,0 30,90 30,30"/>
+            </RadioButton>
+            <RadioButton Command="{Binding Commands.ToolQBezierCommand}"
+                         IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:PathTool.QBezier}}"
+                         Style="{StaticResource ToolTipRadioButtonStyleKey}"
+                         controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipToolQBezier}"
+                         controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolQBezier}">
+                <Path Style="{StaticResource StrokePathStyleKey}" Data="M 0,0 Q 30,0 30,30"/>
+            </RadioButton>
         </ToolBar>
     </ToolBarTray>
 </UserControl>
