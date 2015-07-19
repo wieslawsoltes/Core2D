@@ -383,6 +383,9 @@ namespace TestWinForms
                     case Keys.H:
                         OnSetToolToPath();
                         break;
+                    case Keys.M:
+                        OnSetToolToMove();
+                        break;
                     case Keys.R:
                         OnSetToolToRectangle();
                         break;
@@ -560,6 +563,19 @@ namespace TestWinForms
                 return;
 
             context.Commands.ToolPathCommand.Execute(null);
+            UpdateToolMenu();
+        }
+                
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSetToolToMove()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            context.Commands.ToolMoveCommand.Execute(null);
             UpdateToolMenu();
         }
 

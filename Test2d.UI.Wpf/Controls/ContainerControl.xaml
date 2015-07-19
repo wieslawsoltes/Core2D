@@ -26,6 +26,7 @@
         <KeyBinding Command="{Binding Commands.ToolTextCommand}" Key="T" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolImageCommand}" Key="I" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolPathCommand}" Key="H" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolMoveCommand}" Key="M" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.DefaultIsStrokedCommand}" Key="K" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.DefaultIsFilledCommand}" Key="F" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.DefaultIsClosedCommand}" Key="D" Modifiers=""/>
