@@ -4,6 +4,7 @@
 
 * Main menu tooltips.
 * Add toolbar control.
+* Add application icon.
 
 ## Editor
 
