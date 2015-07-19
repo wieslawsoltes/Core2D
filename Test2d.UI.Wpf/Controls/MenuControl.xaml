@@ -274,131 +274,95 @@
                       controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptFileExit}">
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuEdit}">
-            <MenuItem.ToolTip>
-                <StackPanel>
-                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEdit}"/>
-                    <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEdit}"/>
-                </StackPanel>
-            </MenuItem.ToolTip>
+        <MenuItem Header="{x:Static p:Resources.MenuEdit}"
+                  Style="{StaticResource ToolTipMenuItemStyleKey}"
+                  controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEdit}"
+                  controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEdit}">
             <MenuItem Header="{x:Static p:Resources.MenuEditUndo}" 
                       Command="{Binding Commands.UndoCommand}" 
-                      InputGestureText="Ctrl+Z">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditUndo}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditUndo}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="Ctrl+Z"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditUndo}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditUndo}">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuEditRedo}" 
                       Command="{Binding Commands.RedoCommand}" 
-                      InputGestureText="Ctrl+Y">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditRedo}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditRedo}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="Ctrl+Y"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditRedo}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditRedo}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuEditCopyAsEmf}"
                       Command="{Binding Commands.CopyAsEmfCommand}" 
-                      InputGestureText="Ctrl+Shift+C">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditCopyAsEmf}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditCopyAsEmf}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="Ctrl+Shift+C"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditCopyAsEmf}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditCopyAsEmf}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuEditCut}" 
                       Command="{Binding Commands.CutCommand}" 
                       CommandParameter="{Binding}" 
-                      InputGestureText="Ctrl+X">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditCut}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditCut}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="Ctrl+X"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditCut}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditCut}">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuEditCopy}" 
                       Command="{Binding Commands.CopyCommand}" 
                       CommandParameter="{Binding}" 
-                      InputGestureText="Ctrl+C">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditCopy}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditCopy}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="Ctrl+C"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditCopy}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditCopy}">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuEditPaste}" 
                       Command="{Binding Commands.PasteCommand}"
                       CommandParameter="{Binding}" 
-                      InputGestureText="Ctrl+V">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditPaste}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditPaste}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="Ctrl+V"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditPaste}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditPaste}">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuEditDelete}" 
                       Command="{Binding Commands.DeleteCommand}" 
                       CommandParameter="{Binding}" 
-                      InputGestureText="Del">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditDelete}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditDelete}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="Del"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditDelete}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditDelete}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuEditSelectAll}" 
                       Command="{Binding Commands.SelectAllCommand}" 
-                      InputGestureText="Ctrl+A">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditSelectAll}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditSelectAll}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="Ctrl+A"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditSelectAll}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditSelectAll}">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuEditDeselectAll}" 
                       Command="{Binding Commands.DeselectAllCommand}" 
-                      InputGestureText="Esc">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditDeselectAll}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditDeselectAll}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="Esc"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditDeselectAll}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditDeselectAll}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuEditClearAll}" 
                       Command="{Binding Commands.ClearAllCommand}" 
-                      InputGestureText="">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditClearAll}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditClearAll}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText=""
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditClearAll}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditClearAll}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuEditReference}" 
                       Command="{Binding Commands.ReferenceCommand}" 
-                      InputGestureText="Ctrl+R">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipEditReference}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptEditReference}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      InputGestureText="Ctrl+R"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipEditReference}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptEditReference}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuEditGroup}" 
@@ -450,195 +414,168 @@
                 </MenuItem>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuView}">
-            <MenuItem.ToolTip>
-                <StackPanel>
-                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipView}"/>
-                    <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptView}"/>
-                </StackPanel>
-            </MenuItem.ToolTip>
-            <MenuItem Header="{x:Static p:Resources.MenuViewZoom}">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewZoom}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewZoom}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
-                <MenuItem Header="{x:Static p:Resources.MenuViewZoomReset}" Command="{Binding Commands.ZoomResetCommand}" InputGestureText="Z">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewZoomReset}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewZoomReset}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+        <MenuItem Header="{x:Static p:Resources.MenuView}"
+                  Style="{StaticResource ToolTipMenuItemStyleKey}"
+                  controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipView}"
+                  controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptView}">
+            <MenuItem Header="{x:Static p:Resources.MenuViewZoom}"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewZoom}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewZoom}">
+                <MenuItem Header="{x:Static p:Resources.MenuViewZoomReset}" 
+                          Command="{Binding Commands.ZoomResetCommand}" 
+                          InputGestureText="Z"
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewZoomReset}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewZoomReset}">
                 </MenuItem>
-                <MenuItem Header="{x:Static p:Resources.MenuViewZoomExtent}" Command="{Binding Commands.ZoomExtentCommand}" InputGestureText="X">
-                    <MenuItem.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewZoomExtent}"/>
-                            <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewZoomExtent}"/>
-                        </StackPanel>
-                    </MenuItem.ToolTip>
+                <MenuItem Header="{x:Static p:Resources.MenuViewZoomExtent}" 
+                          Command="{Binding Commands.ZoomExtentCommand}" 
+                          InputGestureText="X"
+                          Style="{StaticResource ToolTipMenuItemStyleKey}"
+                          controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewZoomExtent}"
+                          controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewZoomExtent}">
                 </MenuItem>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuViewProjectWindow}" Command="{Binding Commands.ProjectWindowCommand}" InputGestureText="Ctrl+Alt+X">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewProjectWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewProjectWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewProjectWindow}" 
+                      Command="{Binding Commands.ProjectWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+X"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewProjectWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewProjectWindow}">
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuViewOptionsWindow}" Command="{Binding Commands.OptionsWindowCommand}" InputGestureText="Ctrl+Alt+O">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewOptionsWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewOptionsWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewOptionsWindow}" 
+                      Command="{Binding Commands.OptionsWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+O"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewOptionsWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewOptionsWindow}">
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuViewTemplatesWindow}" Command="{Binding Commands.TemplatesWindowCommand}" InputGestureText="Ctrl+Alt+T">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewTemplatesWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewTemplatesWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewTemplatesWindow}" 
+                      Command="{Binding Commands.TemplatesWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+T"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewTemplatesWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewTemplatesWindow}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuViewGroupsWindow}" Command="{Binding Commands.GroupsWindowCommand}" InputGestureText="Ctrl+Alt+G">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewGroupsWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewGroupsWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewGroupsWindow}" 
+                      Command="{Binding Commands.GroupsWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+G"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewGroupsWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewGroupsWindow}">
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuViewDatabasesWindow}" Command="{Binding Commands.DatabasesWindowCommand}" InputGestureText="Ctrl+Alt+D">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewDatabasesWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewDatabasesWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewDatabasesWindow}" 
+                      Command="{Binding Commands.DatabasesWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+D"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewDatabasesWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewDatabasesWindow}">
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuViewDatabaseWindow}" Command="{Binding Commands.DatabaseWindowCommand}" InputGestureText="Ctrl+Alt+B">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewDatabaseWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewDatabaseWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewDatabaseWindow}" 
+                      Command="{Binding Commands.DatabaseWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+B"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewDatabaseWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewDatabaseWindow}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuViewContainerWindow}" Command="{Binding Commands.ContainerWindowCommand}" InputGestureText="Ctrl+Alt+N">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewContainerWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewContainerWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewContainerWindow}" 
+                      Command="{Binding Commands.ContainerWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+N"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewContainerWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewContainerWindow}">
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuViewDocumentWindow}" Command="{Binding Commands.DocumentWindowCommand}" InputGestureText="Ctrl+Alt+U">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewDocumentWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewDocumentWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewDocumentWindow}" 
+                      Command="{Binding Commands.DocumentWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+U"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewDocumentWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewDocumentWindow}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuViewScriptWindow}" Command="{Binding Commands.ScriptWindowCommand}" InputGestureText="Ctrl+Alt+R">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewScriptWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewScriptWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewScriptWindow}" 
+                      Command="{Binding Commands.ScriptWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+R"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewScriptWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewScriptWindow}">
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuViewScriptsWindow}" Command="{Binding Commands.ScriptsWindowCommand}" InputGestureText="Ctrl+Alt+P">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewScriptsWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewScriptsWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewScriptsWindow}" 
+                      Command="{Binding Commands.ScriptsWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+P"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewScriptsWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewScriptsWindow}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuViewStylesWindow}" Command="{Binding Commands.StylesWindowCommand}" InputGestureText="Ctrl+Alt+S">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewStylesWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewStylesWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewStylesWindow}" 
+                      Command="{Binding Commands.StylesWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+S"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewStylesWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewStylesWindow}">
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuViewLayersWindow}" Command="{Binding Commands.LayersWindowCommand}" InputGestureText="Ctrl+Alt+L">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewLayersWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewLayersWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewLayersWindow}" 
+                      Command="{Binding Commands.LayersWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+L"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewLayersWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewLayersWindow}">
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuViewShapesWindow}" Command="{Binding Commands.ShapesWindowCommand}" InputGestureText="Ctrl+Alt+A">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewShapesWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewShapesWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewShapesWindow}" 
+                      Command="{Binding Commands.ShapesWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+A"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewShapesWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewShapesWindow}">
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuViewTemplateWindow}" Command="{Binding Commands.TemplateWindowCommand}" InputGestureText="Ctrl+Alt+M">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewTemplateWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewTemplateWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewTemplateWindow}" 
+                      Command="{Binding Commands.TemplateWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+M"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewTemplateWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewTemplateWindow}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuViewStateWindow}" Command="{Binding Commands.StateWindowCommand}" InputGestureText="Ctrl+Alt+W">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewStateWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewStateWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewStateWindow}" 
+                      Command="{Binding Commands.StateWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+W"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewStateWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewStateWindow}">
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuViewCodeWindow}" Command="{Binding Commands.CodeWindowCommand}" InputGestureText="Ctrl+Alt+C">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewCodeWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewCodeWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewCodeWindow}"
+                      Command="{Binding Commands.CodeWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+C"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewCodeWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewCodeWindow}">
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuViewDataWindow}" Command="{Binding Commands.DataWindowCommand}" InputGestureText="Ctrl+Alt+I">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewDataWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewDataWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewDataWindow}" 
+                      Command="{Binding Commands.DataWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+I"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewDataWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewDataWindow}">
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuViewStyleWindow}" Command="{Binding Commands.StyleWindowCommand}" InputGestureText="Ctrl+Alt+Y">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewStyleWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewStyleWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewStyleWindow}"
+                      Command="{Binding Commands.StyleWindowCommand}" 
+                      InputGestureText="Ctrl+Alt+Y"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewStyleWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewStyleWindow}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuViewPropertiesWindow}" Command="{Binding Commands.PropertiesWindowCommand}" InputGestureText="F4">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipViewPropertiesWindow}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptViewPropertiesWindow}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuViewPropertiesWindow}" 
+                      Command="{Binding Commands.PropertiesWindowCommand}" 
+                      InputGestureText="F4"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewPropertiesWindow}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewPropertiesWindow}">
             </MenuItem>
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuTool}"
@@ -761,38 +698,32 @@
                       controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptToolImage}">
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuData}">
-            <MenuItem.ToolTip>
-                <StackPanel>
-                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipData}"/>
-                    <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptData}"/>
-                </StackPanel>
-            </MenuItem.ToolTip>
-            <MenuItem Header="{x:Static p:Resources.MenuDataImport}" Command="{Binding Commands.ImportDataCommand}" InputGestureText="">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipDataImport}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptDataImport}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+        <MenuItem Header="{x:Static p:Resources.MenuData}"
+                  Style="{StaticResource ToolTipMenuItemStyleKey}"
+                  controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipData}"
+                  controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptData}">
+            <MenuItem Header="{x:Static p:Resources.MenuDataImport}" 
+                      Command="{Binding Commands.ImportDataCommand}" 
+                      InputGestureText=""
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipDataImport}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptDataImport}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuDataExport}" Command="{Binding Commands.ExportDataCommand}" InputGestureText="">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipDataExport}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptDataExport}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuDataExport}" 
+                      Command="{Binding Commands.ExportDataCommand}" 
+                      InputGestureText=""
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipDataExport}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptDataExport}">
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuTemplate}" Tag="{Binding}" ItemsSource="{Binding Editor.Project.Templates}">
-            <MenuItem.ToolTip>
-                <StackPanel>
-                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipTemplate}"/>
-                    <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptTemplate}"/>
-                </StackPanel>
-            </MenuItem.ToolTip>
+        <MenuItem Header="{x:Static p:Resources.MenuTemplate}" 
+                  Tag="{Binding}"
+                  ItemsSource="{Binding Editor.Project.Templates}"
+                  Style="{StaticResource ToolTipMenuItemStyleKey}"
+                  controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipTemplate}"
+                  controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptTemplate}">
             <MenuItem.Resources>
                 <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
             </MenuItem.Resources>
@@ -818,29 +749,23 @@
                 </Style>
             </MenuItem.ItemContainerStyle>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuScript}">
-            <MenuItem.ToolTip>
-                <StackPanel>
-                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipScript}"/>
-                    <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptScript}"/>
-                </StackPanel>
-            </MenuItem.ToolTip>
-            <MenuItem Header="{x:Static p:Resources.MenuScriptEvaluate}" Command="{Binding Commands.EvalCommand}" InputGestureText="F8">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipScriptEvaluate}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptScriptEvaluate}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+        <MenuItem Header="{x:Static p:Resources.MenuScript}"
+                  Style="{StaticResource ToolTipMenuItemStyleKey}"
+                  controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipScript}"
+                  controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptScript}">
+            <MenuItem Header="{x:Static p:Resources.MenuScriptEvaluate}" 
+                      Command="{Binding Commands.EvalCommand}" 
+                      InputGestureText="F8"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipScriptEvaluate}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptScriptEvaluate}">
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuScripts}" ItemsSource="{Binding ScriptDirectories}">
-            <MenuItem.ToolTip>
-                <StackPanel>
-                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipScripts}"/>
-                    <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptScripts}"/>
-                </StackPanel>
-            </MenuItem.ToolTip>
+        <MenuItem Header="{x:Static p:Resources.MenuScripts}" 
+                  ItemsSource="{Binding ScriptDirectories}"
+                  Style="{StaticResource ToolTipMenuItemStyleKey}"
+                  controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipScripts}"
+                  controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptScripts}">
             <MenuItem.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Scripts}">
                     <HierarchicalDataTemplate.ItemContainerStyle>
@@ -866,125 +791,102 @@
                 </HierarchicalDataTemplate>
             </MenuItem.ItemTemplate>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuOptions}">
-            <MenuItem.ToolTip>
-                <StackPanel>
-                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipOptions}"/>
-                    <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptOptions}"/>
-                </StackPanel>
-            </MenuItem.ToolTip>
+        <MenuItem Header="{x:Static p:Resources.MenuOptions}"
+                  Style="{StaticResource ToolTipMenuItemStyleKey}"
+                  controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipOptions}"
+                  controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptOptions}">
             <MenuItem Header="{x:Static p:Resources.MenuOptionsDefaultIsStroked}" 
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.Project.Options.DefaultIsStroked, Mode=OneWay}"
-                      Command="{Binding Commands.DefaultIsStrokedCommand}" InputGestureText="K">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipOptionsDefaultIsStroked}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptOptionsDefaultIsStroked}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      Command="{Binding Commands.DefaultIsStrokedCommand}" 
+                      InputGestureText="K"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipOptionsDefaultIsStroked}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptOptionsDefaultIsStroked}">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuOptionsDefaultIsFilled}" 
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.Project.Options.DefaultIsFilled, Mode=OneWay}"
-                      Command="{Binding Commands.DefaultIsFilledCommand}" InputGestureText="F">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipOptionsDefaultIsFilled}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptOptionsDefaultIsFilled}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      Command="{Binding Commands.DefaultIsFilledCommand}" 
+                      InputGestureText="F"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipOptionsDefaultIsFilled}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptOptionsDefaultIsFilled}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuOptionsDefaultIsClosed}" 
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.Project.Options.DefaultIsClosed, Mode=OneWay}"
-                      Command="{Binding Commands.DefaultIsClosedCommand}" InputGestureText="D">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipOptionsDefaultIsClosed}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptOptionsDefaultIsClosed}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      Command="{Binding Commands.DefaultIsClosedCommand}" 
+                      InputGestureText="D"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipOptionsDefaultIsClosed}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptOptionsDefaultIsClosed}">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuOptionsDefaultIsSmoothJoin}" 
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.Project.Options.DefaultIsSmoothJoin, Mode=OneWay}"
-                      Command="{Binding Commands.DefaultIsSmoothJoinCommand}" InputGestureText="J">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipOptionsDefaultIsSmoothJoin}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptOptionsDefaultIsSmoothJoin}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      Command="{Binding Commands.DefaultIsSmoothJoinCommand}" 
+                      InputGestureText="J"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipOptionsDefaultIsSmoothJoin}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptOptionsDefaultIsSmoothJoin}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuOptionsSnapToGrid}" 
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.Project.Options.SnapToGrid, Mode=OneWay}"
-                      Command="{Binding Commands.SnapToGridCommand}" InputGestureText="G">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipOptionsSnapToGrid}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptOptionsSnapToGrid}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      Command="{Binding Commands.SnapToGridCommand}" 
+                      InputGestureText="G"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipOptionsSnapToGrid}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptOptionsSnapToGrid}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuOptionsTryToConnect}" 
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.Project.Options.TryToConnect, Mode=OneWay}"
-                      Command="{Binding Commands.TryToConnectCommand}" InputGestureText="C">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipOptionsTryToConnect}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptOptionsTryToConnect}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+                      Command="{Binding Commands.TryToConnectCommand}" 
+                      InputGestureText="C"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipOptionsTryToConnect}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptOptionsTryToConnect}">
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuSimulation}">
-            <MenuItem.ToolTip>
-                <StackPanel>
-                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipSimulation}"/>
-                    <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptSimulation}"/>
-                </StackPanel>
-            </MenuItem.ToolTip>
-            <MenuItem Header="{x:Static p:Resources.MenuSimulationStart}" Command="{Binding Commands.StartSimulationCommand}" InputGestureText="F5">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipSimulationStart}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptSimulationStart}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+        <MenuItem Header="{x:Static p:Resources.MenuSimulation}"
+                  Style="{StaticResource ToolTipMenuItemStyleKey}"
+                  controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipSimulation}"
+                  controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptSimulation}">
+            <MenuItem Header="{x:Static p:Resources.MenuSimulationStart}" 
+                      Command="{Binding Commands.StartSimulationCommand}" 
+                      InputGestureText="F5"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipSimulationStart}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptSimulationStart}">
             </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuSimulationStop}" Command="{Binding Commands.StopSimulationCommand}" InputGestureText="F6">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipSimulationStop}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptSimulationStop}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuSimulationStop}" 
+                      Command="{Binding Commands.StopSimulationCommand}" 
+                      InputGestureText="F6"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipSimulationStop}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptSimulationStop}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuSimulationRestart}" Command="{Binding Commands.RestartSimulationCommand}" InputGestureText="F7">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipSimulationRestart}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptSimulationRestart}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuSimulationRestart}" 
+                      Command="{Binding Commands.RestartSimulationCommand}"
+                      InputGestureText="F7"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipSimulationRestart}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptSimulationRestart}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuSimulationPause}" Command="{Binding Commands.PauseSimulationCommand}" InputGestureText="F9">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipSimulationPause}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptSimulationPause}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuSimulationPause}" 
+                      Command="{Binding Commands.PauseSimulationCommand}" 
+                      InputGestureText="F9"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipSimulationPause}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptSimulationPause}">
                 <MenuItem.Style>
-                    <Style TargetType="MenuItem">
+                    <Style TargetType="MenuItem" BasedOn="{StaticResource ToolTipMenuItemStyleKey}">
                         <Setter Property="IsChecked" Value="False"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsSimulationPaused}" Value="True">
@@ -995,47 +897,40 @@
                 </MenuItem.Style>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuSimulationTick}" Command="{Binding Commands.TickSimulationCommand}" InputGestureText="F10">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipSimulationTick}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptSimulationTick}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuSimulationTick}" 
+                      Command="{Binding Commands.TickSimulationCommand}" 
+                      InputGestureText="F10"
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipSimulationTick}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptSimulationTick}">
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuWindow}">
-            <MenuItem.ToolTip>
-                <StackPanel>
-                    <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipWindow}"/>
-                    <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptWindow}"/>
-                </StackPanel>
-            </MenuItem.ToolTip>
-            <MenuItem Header="{x:Static p:Resources.MenuWindowLoadLayout}" Command="{Binding Commands.LoadWindowLayoutCommand}" InputGestureText="">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipWindowLoadLayout}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptWindowLoadLayout}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+        <MenuItem Header="{x:Static p:Resources.MenuWindow}"
+                  Style="{StaticResource ToolTipMenuItemStyleKey}"
+                  controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipWindow}"
+                  controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptWindow}">
+            <MenuItem Header="{x:Static p:Resources.MenuWindowLoadLayout}" 
+                      Command="{Binding Commands.LoadWindowLayoutCommand}" 
+                      InputGestureText=""
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipWindowLoadLayout}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptWindowLoadLayout}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuWindowSaveLayout}" Command="{Binding Commands.SaveWindowLayoutCommand}" InputGestureText="">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipWindowSaveLayout}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptWindowSaveLayout}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuWindowSaveLayout}" 
+                      Command="{Binding Commands.SaveWindowLayoutCommand}" 
+                      InputGestureText=""
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipWindowSaveLayout}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptWindowSaveLayout}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuWindowResetLayout}" Command="{Binding Commands.ResetWindowLayoutCommand}" InputGestureText="">
-                <MenuItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.MenuTooltipWindowResetLayout}"/>
-                        <TextBlock Text="{x:Static p:Resources.MenuTooltipScriptWindowResetLayout}"/>
-                    </StackPanel>
-                </MenuItem.ToolTip>
+            <MenuItem Header="{x:Static p:Resources.MenuWindowResetLayout}" 
+                      Command="{Binding Commands.ResetWindowLayoutCommand}" 
+                      InputGestureText=""
+                      Style="{StaticResource ToolTipMenuItemStyleKey}"
+                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipWindowResetLayout}"
+                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptWindowResetLayout}">
             </MenuItem>
         </MenuItem>
     </Menu>
