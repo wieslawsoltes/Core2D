@@ -1811,7 +1811,6 @@
             </Slider>
             <TextBox Text="{Binding FontName, UpdateSourceTrigger=PropertyChanged}" 
                      Style="{StaticResource TextBoxLeftStyleKey}"
-                     Margin="5,2,5,2"
                      Grid.Row="0" 
                      Grid.Column="1" 
                      Grid.ColumnSpan="2">
@@ -4005,13 +4004,10 @@
                     </CheckBox>
                     <TextBox 
                         Text="{Binding CycleResolution, UpdateSourceTrigger=PropertyChanged}" 
-                        BorderBrush="{x:Null}" 
-                        Margin="5,2,5,2"
+                        Style="{StaticResource TextBoxLeftStyleKey}"
                         Grid.Row="6" 
                         Grid.Column="1" 
-                        Grid.ColumnSpan="2"
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                        Grid.ColumnSpan="2">
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipCycleResolution}"/>
@@ -4236,11 +4232,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{x:Static p:Resources.DocumentName}" 
-                           Margin="5,2,5,2" 
+                           Style="{StaticResource TextBlockLeftStyleKey}"
                            Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
+                           Grid.Column="0">
                 </TextBlock>
                 <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                          Style="{StaticResource TextBoxLeftStyleKey}"
@@ -4267,11 +4261,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{x:Static p:Resources.ContainerName}" 
-                           Margin="5,2,5,2" 
+                           Style="{StaticResource TextBlockLeftStyleKey}"
                            Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
+                           Grid.Column="0">
                 </TextBlock>
                 <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                          BorderBrush="{x:Null}" 
