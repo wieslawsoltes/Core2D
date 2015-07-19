@@ -25,5 +25,9 @@ namespace Test2d
         /// 
         /// </summary>
         QBezier,
+        /// <summary>
+        /// 
+        /// </summary>
+        Move
     }
 }
