@@ -11,7 +11,7 @@
         xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:p="clr-namespace:Test2d.UI.Wpf.Properties"
         Height="724" Width="1324"
-        Background="White"
+        Background="{StaticResource BackgroundColor}"
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
         UseLayoutRounding="True" SnapsToDevicePixels="True"
         TextOptions.TextFormattingMode="Display"
@@ -67,6 +67,53 @@
         <KeyBinding Command="{Binding Commands.DataWindowCommand}" Gesture="Ctrl+Alt+I"/>
         <KeyBinding Command="{Binding Commands.StyleWindowCommand}" Gesture="Ctrl+Alt+Y"/>
     </Window.InputBindings>
+    <Window.Resources>
+        <Style TargetType="{x:Type ad:LayoutDocumentPaneControl}">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        </Style>
+        <Style TargetType="{x:Type ad:LayoutAnchorablePaneControl}">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        </Style>
+        <Style TargetType="{x:Type ad:AnchorablePaneTitle}">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        </Style>
+        <Style TargetType="{x:Type ad:LayoutAnchorSideControl}">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        </Style>
+        <Style TargetType="{x:Type ad:LayoutAnchorGroupControl}">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        </Style>
+        <Style TargetType="{x:Type ad:LayoutAnchorControl}">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        </Style>
+        <Style TargetType="{x:Type ad:OverlayWindow}">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        </Style>
+        <Style TargetType="{x:Type ad:DockingManager}">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        </Style>
+        <Style TargetType="{x:Type ad:LayoutGridResizerControl}">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        </Style>
+        <Style TargetType="{x:Type ad:LayoutDocumentControl}">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        </Style>
+        <Style TargetType="{x:Type ad:LayoutAnchorableControl}">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        </Style>
+        <Style TargetType="{x:Type ad:LayoutDocumentFloatingWindowControl}">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        </Style>
+        <Style TargetType="{x:Type ad:LayoutAnchorableFloatingWindowControl}">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        </Style>
+        <Style TargetType="{x:Type ad:LayoutAutoHideWindowControl}">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        </Style>
+        <Style TargetType="{x:Type ad:NavigatorWindow}">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+        </Style>
+    </Window.Resources>
     <Grid FocusVisualStyle="{x:Null}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -77,7 +124,7 @@
         </Grid.RowDefinitions>
         <controls:MenuControl Grid.Row="0"/>
         <controls:ToolbarControl Grid.Row="2"/>
-        <ad:DockingManager x:Name="dockingManager" Background="White" Grid.Row="3" Margin="0,5,0,0">
+        <ad:DockingManager x:Name="dockingManager" Grid.Row="3" Margin="0,5,0,0">
             <ad:LayoutRoot>
                 <ad:LayoutPanel Orientation="Horizontal">
                     <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="200">
