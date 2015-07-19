@@ -721,7 +721,7 @@
     <DataTemplate DataType="{x:Type core:XPathFigure}">
         <StackPanel>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
-            <Control Template="{StaticResource IsClosedJoinControlTemplateKey}"/>
+            <Control Template="{StaticResource IsClosedControlTemplateKey}"/>
             <Expander Header="StartPoint">
                 <Expander.ToolTip>
                     <StackPanel>
@@ -1301,34 +1301,39 @@
                     </MultiBinding>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock Text="A" 
-                       Style="{StaticResource TextBlockCenterStyleKey}"
-                       Grid.Row="1"
-                       Grid.Column="0">
+            <TextBlock 
+                Text="A" 
+                Style="{StaticResource TextBlockCenterStyleKey}"
+                Grid.Row="1"
+                Grid.Column="0">
             </TextBlock>
-            <TextBlock Text="R" 
-                       Style="{StaticResource TextBlockCenterStyleKey}"
-                       Grid.Row="2" 
-                       Grid.Column="0">
+            <TextBlock 
+                Text="R" 
+                Style="{StaticResource TextBlockCenterStyleKey}"
+                Grid.Row="2" 
+                Grid.Column="0">
             </TextBlock>
-            <TextBlock Text="G" 
-                       Style="{StaticResource TextBlockCenterStyleKey}"
-                       Grid.Row="3" 
-                       Grid.Column="0">
+            <TextBlock 
+                Text="G" 
+                Style="{StaticResource TextBlockCenterStyleKey}"
+                Grid.Row="3" 
+                Grid.Column="0">
             </TextBlock>
-            <TextBlock Text="B" 
-                       Style="{StaticResource TextBlockCenterStyleKey}"
-                       Grid.Row="4" 
-                       Grid.Column="0">
+            <TextBlock 
+                Text="B" 
+                Style="{StaticResource TextBlockCenterStyleKey}"
+                Grid.Row="4" 
+                Grid.Column="0">
             </TextBlock>
-            <Slider Value="{Binding A}" 
-                    Style="{StaticResource SliderStyleKey}"
-                    Minimum="0" 
-                    Maximum="255" 
-                    TickFrequency="1" 
-                    IsSnapToTickEnabled="True" 
-                    Grid.Row="1" 
-                    Grid.Column="1">
+            <Slider 
+                Value="{Binding A}" 
+                Style="{StaticResource SliderStyleKey}"
+                Minimum="0" 
+                Maximum="255" 
+                TickFrequency="1" 
+                IsSnapToTickEnabled="True" 
+                Grid.Row="1" 
+                Grid.Column="1">
                 <Slider.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1336,14 +1341,15 @@
                     </StackPanel>
                 </Slider.ToolTip>
             </Slider>
-            <Slider Value="{Binding R}" 
-                    Style="{StaticResource SliderStyleKey}"
-                    Minimum="0" 
-                    Maximum="255" 
-                    TickFrequency="1" 
-                    IsSnapToTickEnabled="True" 
-                    Grid.Row="2" 
-                    Grid.Column="1">
+            <Slider 
+                Value="{Binding R}" 
+                Style="{StaticResource SliderStyleKey}"
+                Minimum="0" 
+                Maximum="255" 
+                TickFrequency="1" 
+                IsSnapToTickEnabled="True" 
+                Grid.Row="2" 
+                Grid.Column="1">
                 <Slider.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1351,14 +1357,15 @@
                     </StackPanel>
                 </Slider.ToolTip>
             </Slider>
-            <Slider Value="{Binding G}"
-                    Style="{StaticResource SliderStyleKey}"
-                    Minimum="0" 
-                    Maximum="255" 
-                    TickFrequency="1" 
-                    IsSnapToTickEnabled="True" 
-                    Grid.Row="3" 
-                    Grid.Column="1">
+            <Slider 
+                Value="{Binding G}"
+                Style="{StaticResource SliderStyleKey}"
+                Minimum="0" 
+                Maximum="255" 
+                TickFrequency="1" 
+                IsSnapToTickEnabled="True" 
+                Grid.Row="3" 
+                Grid.Column="1">
                 <Slider.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1366,14 +1373,15 @@
                     </StackPanel>
                 </Slider.ToolTip>
             </Slider>
-            <Slider Value="{Binding B}" 
-                    Style="{StaticResource SliderStyleKey}"
-                    Minimum="0" 
-                    Maximum="255" 
-                    TickFrequency="1" 
-                    IsSnapToTickEnabled="True" 
-                    Grid.Row="4" 
-                    Grid.Column="1">
+            <Slider 
+                Value="{Binding B}" 
+                Style="{StaticResource SliderStyleKey}"
+                Minimum="0" 
+                Maximum="255" 
+                TickFrequency="1" 
+                IsSnapToTickEnabled="True" 
+                Grid.Row="4" 
+                Grid.Column="1">
                 <Slider.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1381,10 +1389,11 @@
                     </StackPanel>
                 </Slider.ToolTip>
             </Slider>
-            <TextBox Text="{Binding A, UpdateSourceTrigger=PropertyChanged}" 
-                     Style="{StaticResource TextBoxCenterStyleKey}"
-                     Grid.Row="1" 
-                     Grid.Column="2">
+            <TextBox 
+                Text="{Binding A, UpdateSourceTrigger=PropertyChanged}" 
+                Style="{StaticResource TextBoxCenterStyleKey}"
+                Grid.Row="1" 
+                Grid.Column="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1392,10 +1401,11 @@
                     </StackPanel>
                 </TextBox.ToolTip>
             </TextBox>
-            <TextBox Text="{Binding R, UpdateSourceTrigger=PropertyChanged}" 
-                     Style="{StaticResource TextBoxCenterStyleKey}"
-                     Grid.Row="2" 
-                     Grid.Column="2">
+            <TextBox 
+                Text="{Binding R, UpdateSourceTrigger=PropertyChanged}" 
+                Style="{StaticResource TextBoxCenterStyleKey}"
+                Grid.Row="2" 
+                Grid.Column="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1403,10 +1413,11 @@
                     </StackPanel>
                 </TextBox.ToolTip>
             </TextBox>
-            <TextBox Text="{Binding G, UpdateSourceTrigger=PropertyChanged}" 
-                     Style="{StaticResource TextBoxCenterStyleKey}"
-                     Grid.Row="3" 
-                     Grid.Column="2">
+            <TextBox 
+                Text="{Binding G, UpdateSourceTrigger=PropertyChanged}" 
+                Style="{StaticResource TextBoxCenterStyleKey}"
+                Grid.Row="3" 
+                Grid.Column="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1414,10 +1425,11 @@
                     </StackPanel>
                 </TextBox.ToolTip>
             </TextBox>
-            <TextBox Text="{Binding B, UpdateSourceTrigger=PropertyChanged}" 
-                     Style="{StaticResource TextBoxCenterStyleKey}"
-                     Grid.Row="4" 
-                     Grid.Column="2">
+            <TextBox 
+                Text="{Binding B, UpdateSourceTrigger=PropertyChanged}" 
+                Style="{StaticResource TextBoxCenterStyleKey}"
+                Grid.Row="4" 
+                Grid.Column="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1463,16 +1475,17 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <Slider Value="{Binding Thickness}" 
-                            Style="{StaticResource SliderStyleKey}"
-                            Minimum="0" 
-                            Maximum="50" 
-                            TickFrequency="0.1" 
-                            SmallChange="0.1" 
-                            LargeChange="1" 
-                            IsSnapToTickEnabled="True" 
-                            Grid.Row="0" 
-                            Grid.Column="0">
+                    <Slider 
+                        Value="{Binding Thickness}" 
+                        Style="{StaticResource SliderStyleKey}"
+                        Minimum="0" 
+                        Maximum="50" 
+                        TickFrequency="0.1" 
+                        SmallChange="0.1" 
+                        LargeChange="1" 
+                        IsSnapToTickEnabled="True" 
+                        Grid.Row="0" 
+                        Grid.Column="0">
                         <Slider.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1480,10 +1493,11 @@
                             </StackPanel>
                         </Slider.ToolTip>
                     </Slider>
-                    <TextBox Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged}" 
-                             Style="{StaticResource TextBoxCenterStyleKey}"
-                             Grid.Row="0" 
-                             Grid.Column="1">
+                    <TextBox 
+                        Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource TextBoxCenterStyleKey}"
+                        Grid.Row="0" 
+                        Grid.Column="1">
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1509,17 +1523,19 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Line Cap" 
-                               Style="{StaticResource TextBlockLeftStyleKey}"
-                               Grid.Row="0"
-                               Grid.Column="0" >
+                    <TextBlock 
+                        Text="Line Cap" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
+                        Grid.Row="0"
+                        Grid.Column="0" >
                     </TextBlock>
-                    <ComboBox ItemsSource="{Binding Source={StaticResource ResourceKey=LineCapValues}}" 
-                              SelectedItem="{Binding LineCap}" 
-                              Style="{StaticResource ComboBoxStyleKey}"
-                              Grid.Row="0" 
-                              Grid.Column="1" 
-                              Grid.ColumnSpan="2">
+                    <ComboBox 
+                        ItemsSource="{Binding Source={StaticResource ResourceKey=LineCapValues}}" 
+                        SelectedItem="{Binding LineCap}" 
+                        Style="{StaticResource ComboBoxStyleKey}"
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2">
                         <ComboBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1540,21 +1556,24 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Dashes" 
-                               Style="{StaticResource TextBlockLeftStyleKey}"
-                               Grid.Row="0" 
-                               Grid.Column="0">
+                    <TextBlock 
+                        Text="Dashes" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
+                        Grid.Row="0" 
+                        Grid.Column="0">
                     </TextBlock>
-                    <TextBlock Text="Dash Offset" 
-                               Style="{StaticResource TextBlockLeftStyleKey}"
-                               Grid.Row="1" 
-                               Grid.Column="0">
+                    <TextBlock 
+                        Text="Dash Offset" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
+                        Grid.Row="1" 
+                        Grid.Column="0">
                     </TextBlock>
-                    <TextBox Text="{Binding Dashes, Converter={StaticResource DoubleToStringConverter}}" 
-                             Style="{StaticResource TextBoxLeftStyleKey}"
-                             Grid.Row="0" 
-                             Grid.Column="1" 
-                             Grid.ColumnSpan="2">
+                    <TextBox 
+                        Text="{Binding Dashes, Converter={StaticResource DoubleToStringConverter}}" 
+                        Style="{StaticResource TextBoxLeftStyleKey}"
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2">
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1562,16 +1581,17 @@
                             </StackPanel>
                         </TextBox.ToolTip>
                     </TextBox>
-                    <Slider Value="{Binding DashOffset}" 
-                            Style="{StaticResource SliderStyleKey}"
-                            Minimum="0" 
-                            Maximum="15" 
-                            TickFrequency="0.1" 
-                            SmallChange="0.1"
-                            LargeChange="1"
-                            IsSnapToTickEnabled="True" 
-                            Grid.Row="1" 
-                            Grid.Column="1">
+                    <Slider 
+                        Value="{Binding DashOffset}" 
+                        Style="{StaticResource SliderStyleKey}"
+                        Minimum="0" 
+                        Maximum="15" 
+                        TickFrequency="0.1" 
+                        SmallChange="0.1"
+                        LargeChange="1"
+                        IsSnapToTickEnabled="True" 
+                        Grid.Row="1" 
+                        Grid.Column="1">
                         <Slider.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1579,10 +1599,11 @@
                             </StackPanel>
                         </Slider.ToolTip>
                     </Slider>
-                    <TextBox Text="{Binding DashOffset, UpdateSourceTrigger=PropertyChanged}" 
-                             Style="{StaticResource TextBoxCenterStyleKey}"
-                             Grid.Row="1" 
-                             Grid.Column="2">
+                    <TextBox 
+                        Text="{Binding DashOffset, UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource TextBoxCenterStyleKey}"
+                        Grid.Row="1" 
+                        Grid.Column="2">
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1617,37 +1638,43 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Arrow Type" 
-                               Style="{StaticResource TextBlockLeftStyleKey}"
-                               Grid.Row="0"
-                               Grid.Column="0">
+                    <TextBlock 
+                        Text="Arrow Type" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
+                        Grid.Row="0"
+                        Grid.Column="0">
                     </TextBlock>
-                    <TextBlock Text="IsStroked" 
-                               Style="{StaticResource TextBlockLeftStyleKey}"
-                               Grid.Row="1"
-                               Grid.Column="0">
+                    <TextBlock 
+                        Text="IsStroked" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
+                        Grid.Row="1"
+                        Grid.Column="0">
                     </TextBlock>
-                    <TextBlock Text="IsFilled" 
-                               Style="{StaticResource TextBlockLeftStyleKey}"
-                               Grid.Row="2"
-                               Grid.Column="0">
+                    <TextBlock 
+                        Text="IsFilled" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
+                        Grid.Row="2"
+                        Grid.Column="0">
                     </TextBlock>
-                    <TextBlock Text="RadiusX" 
-                               Style="{StaticResource TextBlockLeftStyleKey}"
-                               Grid.Row="3" 
-                               Grid.Column="0">
+                    <TextBlock 
+                        Text="RadiusX" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
+                        Grid.Row="3" 
+                        Grid.Column="0">
                     </TextBlock>
-                    <TextBlock Text="RadiusY" 
-                               Style="{StaticResource TextBlockLeftStyleKey}"
-                               Grid.Row="4" 
-                               Grid.Column="0">
+                    <TextBlock 
+                        Text="RadiusY" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
+                        Grid.Row="4" 
+                        Grid.Column="0">
                     </TextBlock>
-                    <ComboBox ItemsSource="{Binding Source={StaticResource ResourceKey=ArrowTypeValues}}" 
-                              SelectedItem="{Binding ArrowType}" 
-                              Style="{StaticResource ComboBoxStyleKey}"
-                              Grid.Row="0" 
-                              Grid.Column="1" 
-                              Grid.ColumnSpan="2">
+                    <ComboBox 
+                        ItemsSource="{Binding Source={StaticResource ResourceKey=ArrowTypeValues}}" 
+                        SelectedItem="{Binding ArrowType}" 
+                        Style="{StaticResource ComboBoxStyleKey}"
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2">
                         <ComboBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1655,12 +1682,13 @@
                             </StackPanel>
                         </ComboBox.ToolTip>
                     </ComboBox>
-                    <CheckBox Content=""
-                              IsChecked="{Binding IsStroked}"
-                              Style="{StaticResource CheckBoxStyleKey}"
-                              Grid.Row="1" 
-                              Grid.Column="1" 
-                              Grid.ColumnSpan="2">
+                    <CheckBox 
+                        Content=""
+                        IsChecked="{Binding IsStroked}"
+                        Style="{StaticResource CheckBoxStyleKey}"
+                        Grid.Row="1" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2">
                         <CheckBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1668,11 +1696,12 @@
                             </StackPanel>
                         </CheckBox.ToolTip>
                     </CheckBox>
-                    <CheckBox Content=""
-                              Style="{StaticResource CheckBoxStyleKey}"
-                              Grid.Row="2" 
-                              Grid.Column="1" 
-                              Grid.ColumnSpan="2">
+                    <CheckBox
+                        Content=""
+                        Style="{StaticResource CheckBoxStyleKey}"
+                        Grid.Row="2" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2">
                         <CheckBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1680,16 +1709,17 @@
                             </StackPanel>
                         </CheckBox.ToolTip>
                     </CheckBox>
-                    <Slider Value="{Binding RadiusX}"
-                            Style="{StaticResource SliderStyleKey}"
-                            Minimum="0" 
-                            Maximum="15" 
-                            TickFrequency="0.1" 
-                            SmallChange="0.1"
-                            LargeChange="1"
-                            IsSnapToTickEnabled="True" 
-                            Grid.Row="3" 
-                            Grid.Column="1">
+                    <Slider 
+                        Value="{Binding RadiusX}"
+                        Style="{StaticResource SliderStyleKey}"
+                        Minimum="0" 
+                        Maximum="15" 
+                        TickFrequency="0.1" 
+                        SmallChange="0.1"
+                        LargeChange="1"
+                        IsSnapToTickEnabled="True" 
+                        Grid.Row="3" 
+                        Grid.Column="1">
                         <Slider.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1697,16 +1727,17 @@
                             </StackPanel>
                         </Slider.ToolTip>
                     </Slider>
-                    <Slider Value="{Binding RadiusY}" 
-                            Style="{StaticResource SliderStyleKey}"
-                            Minimum="0" 
-                            Maximum="15" 
-                            TickFrequency="0.1" 
-                            SmallChange="0.1"
-                            LargeChange="1"
-                            IsSnapToTickEnabled="True" 
-                            Grid.Row="4" 
-                            Grid.Column="1">
+                    <Slider 
+                        Value="{Binding RadiusY}" 
+                        Style="{StaticResource SliderStyleKey}"
+                        Minimum="0" 
+                        Maximum="15" 
+                        TickFrequency="0.1" 
+                        SmallChange="0.1"
+                        LargeChange="1"
+                        IsSnapToTickEnabled="True" 
+                        Grid.Row="4" 
+                        Grid.Column="1">
                         <Slider.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1714,10 +1745,11 @@
                             </StackPanel>
                         </Slider.ToolTip>
                     </Slider>
-                    <TextBox Text="{Binding RadiusX, UpdateSourceTrigger=PropertyChanged}" 
-                             Style="{StaticResource TextBoxCenterStyleKey}"
-                             Grid.Row="3" 
-                             Grid.Column="2">
+                    <TextBox 
+                        Text="{Binding RadiusX, UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource TextBoxCenterStyleKey}"
+                        Grid.Row="3" 
+                        Grid.Column="2">
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1725,10 +1757,11 @@
                             </StackPanel>
                         </TextBox.ToolTip>
                     </TextBox>
-                    <TextBox Text="{Binding RadiusY, UpdateSourceTrigger=PropertyChanged}" 
-                             Style="{StaticResource TextBoxCenterStyleKey}"
-                             Grid.Row="4" 
-                             Grid.Column="2">
+                    <TextBox
+                        Text="{Binding RadiusY, UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource TextBoxCenterStyleKey}"
+                        Grid.Row="4" 
+                        Grid.Column="2">
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1764,44 +1797,51 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="FontName" 
-                       Style="{StaticResource TextBlockLeftStyleKey}"
-                       Grid.Row="0"
-                       Grid.Column="0">
+            <TextBlock 
+                Text="FontName" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
+                Grid.Row="0"
+                Grid.Column="0">
             </TextBlock>
-            <TextBlock Text="FontFile" 
-                       Style="{StaticResource TextBlockLeftStyleKey}"
-                       Grid.Row="1"
-                       Grid.Column="0">
+            <TextBlock 
+                Text="FontFile" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
+                Grid.Row="1"
+                Grid.Column="0">
             </TextBlock>
-            <TextBlock Text="FontSize" 
-                       Style="{StaticResource TextBlockLeftStyleKey}"
-                       Grid.Row="2" 
-                       Grid.Column="0">
+            <TextBlock 
+                Text="FontSize" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
+                Grid.Row="2" 
+                Grid.Column="0">
             </TextBlock>
-            <TextBlock Text="FontStyle" 
-                       Style="{StaticResource TextBlockLeftStyleKey}"
-                       Grid.Row="3" 
-                       Grid.Column="0">
+            <TextBlock 
+                Text="FontStyle" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
+                Grid.Row="3" 
+                Grid.Column="0">
             </TextBlock>
-            <TextBlock Text="HAlignment" 
-                       Style="{StaticResource TextBlockLeftStyleKey}"
-                       Grid.Row="4" 
-                       Grid.Column="0">
+            <TextBlock 
+                Text="HAlignment" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
+                Grid.Row="4" 
+                Grid.Column="0">
             </TextBlock>
-            <TextBlock Text="VAlignment" 
-                       Style="{StaticResource TextBlockLeftStyleKey}"
-                       Grid.Row="5" 
-                       Grid.Column="0">
+            <TextBlock 
+                Text="VAlignment" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
+                Grid.Row="5" 
+                Grid.Column="0">
             </TextBlock>
-            <Slider Value="{Binding FontSize}" 
-                    Style="{StaticResource SliderStyleKey}"
-                    Minimum="0" 
-                    Maximum="72" 
-                    TickFrequency="1" 
-                    IsSnapToTickEnabled="True" 
-                    Grid.Row="2" 
-                    Grid.Column="1">
+            <Slider 
+                Value="{Binding FontSize}" 
+                Style="{StaticResource SliderStyleKey}"
+                Minimum="0" 
+                Maximum="72" 
+                TickFrequency="1" 
+                IsSnapToTickEnabled="True" 
+                Grid.Row="2" 
+                Grid.Column="1">
                 <Slider.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1809,11 +1849,12 @@
                     </StackPanel>
                 </Slider.ToolTip>
             </Slider>
-            <TextBox Text="{Binding FontName, UpdateSourceTrigger=PropertyChanged}" 
-                     Style="{StaticResource TextBoxLeftStyleKey}"
-                     Grid.Row="0" 
-                     Grid.Column="1" 
-                     Grid.ColumnSpan="2">
+            <TextBox 
+                Text="{Binding FontName, UpdateSourceTrigger=PropertyChanged}" 
+                Style="{StaticResource TextBoxLeftStyleKey}"
+                Grid.Row="0" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1821,11 +1862,12 @@
                     </StackPanel>
                 </TextBox.ToolTip>
             </TextBox>
-            <TextBox Text="{Binding FontFile, UpdateSourceTrigger=PropertyChanged}" 
-                     Style="{StaticResource TextBoxLeftStyleKey}"
-                     Grid.Row="1" 
-                     Grid.Column="1" 
-                     Grid.ColumnSpan="2">
+            <TextBox 
+                Text="{Binding FontFile, UpdateSourceTrigger=PropertyChanged}" 
+                Style="{StaticResource TextBoxLeftStyleKey}"
+                Grid.Row="1" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1833,10 +1875,11 @@
                     </StackPanel>
                 </TextBox.ToolTip>
             </TextBox>
-            <TextBox Text="{Binding FontSize, UpdateSourceTrigger=PropertyChanged}" 
-                     Style="{StaticResource TextBoxCenterStyleKey}"
-                     Grid.Row="2" 
-                     Grid.Column="2">
+            <TextBox 
+                Text="{Binding FontSize, UpdateSourceTrigger=PropertyChanged}" 
+                Style="{StaticResource TextBoxCenterStyleKey}"
+                Grid.Row="2" 
+                Grid.Column="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1844,17 +1887,19 @@
                     </StackPanel>
                 </TextBox.ToolTip>
             </TextBox>
-            <Control Template="{StaticResource FontStyleControlTemplateKey}"
-                     Grid.Row="3" 
-                     Grid.Column="1"
-                     Grid.ColumnSpan="2">
+            <Control 
+                Template="{StaticResource FontStyleControlTemplateKey}"
+                Grid.Row="3" 
+                Grid.Column="1"
+                Grid.ColumnSpan="2">
             </Control>
-            <ComboBox ItemsSource="{Binding Source={StaticResource ResourceKey=TextHAlignmentValues}}" 
-                      SelectedItem="{Binding TextHAlignment}"
-                      Style="{StaticResource ComboBoxStyleKey}"
-                      Grid.Row="4" 
-                      Grid.Column="1" 
-                      Grid.ColumnSpan="2">
+            <ComboBox 
+                ItemsSource="{Binding Source={StaticResource ResourceKey=TextHAlignmentValues}}" 
+                SelectedItem="{Binding TextHAlignment}"
+                Style="{StaticResource ComboBoxStyleKey}"
+                Grid.Row="4" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2">
                 <ComboBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1862,12 +1907,13 @@
                     </StackPanel>
                 </ComboBox.ToolTip>
             </ComboBox>
-            <ComboBox ItemsSource="{Binding Source={StaticResource ResourceKey=TextVAlignmentValues}}" 
-                      SelectedItem="{Binding TextVAlignment}" 
-                      Style="{StaticResource ComboBoxStyleKey}"
-                      Grid.Row="5" 
-                      Grid.Column="1" 
-                      Grid.ColumnSpan="2">
+            <ComboBox 
+                ItemsSource="{Binding Source={StaticResource ResourceKey=TextVAlignmentValues}}" 
+                SelectedItem="{Binding TextVAlignment}" 
+                Style="{StaticResource ComboBoxStyleKey}"
+                Grid.Row="5" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2">
                 <ComboBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2143,11 +2189,12 @@
                 ResizeBehavior="PreviousAndNext" 
                 ShowsPreview="True">
             </GridSplitter>
-            <TextBlock Grid.Column="0" 
-                       Grid.Row="1" 
-                       Margin="5,2,0,2" 
-                       VerticalAlignment="Center" 
-                       Text="Property">
+            <TextBlock 
+                Grid.Column="0" 
+                Grid.Row="1" 
+                Margin="5,2,0,2" 
+                VerticalAlignment="Center" 
+                Text="Property">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -2159,11 +2206,12 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBlock Grid.Column="2" 
-                       Grid.Row="1" 
-                       Margin="0,2,5,2" 
-                       VerticalAlignment="Center" 
-                       Text="Path">
+            <TextBlock 
+                Grid.Column="2" 
+                Grid.Row="1" 
+                Margin="0,2,5,2" 
+                VerticalAlignment="Center" 
+                Text="Path">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -2175,17 +2223,19 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <ItemsControl VerticalContentAlignment="Stretch" 
-                          VerticalAlignment="Stretch" 
-                          Grid.Column="0"
-                          Grid.Row="2"
-                          ItemsSource="{Binding Bindings, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl 
+                VerticalContentAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                Grid.Column="0"
+                Grid.Row="2"
+                ItemsSource="{Binding Bindings, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
-                            <TextBox Margin="5,2,0,2" 
-                                     VerticalAlignment="Center" 
-                                     Text="{Binding Path=Property, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox 
+                                Margin="5,2,0,2" 
+                                VerticalAlignment="Center" 
+                                Text="{Binding Path=Property, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2197,12 +2247,13 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <ItemsControl x:Name="bindingsItemsControls"
-                          VerticalContentAlignment="Stretch" 
-                          VerticalAlignment="Stretch" 
-                          Grid.Column="2" 
-                          Grid.Row="2"
-                          ItemsSource="{Binding Bindings, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl 
+                x:Name="bindingsItemsControls"
+                VerticalContentAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                Grid.Column="2" 
+                Grid.Row="2"
+                ItemsSource="{Binding Bindings, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
@@ -2210,10 +2261,11 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" 
-                                     Margin="0,2,5,2" 
-                                     VerticalAlignment="Center" 
-                                     Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox 
+                                Grid.Column="0" 
+                                Margin="0,2,5,2" 
+                                VerticalAlignment="Center" 
+                                Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2221,11 +2273,12 @@
                                     </StackPanel>
                                 </TextBox.ToolTip>
                             </TextBox>
-                            <Button Grid.Column="1" 
-                                    Margin="5,0,5,0" 
-                                    VerticalAlignment="Center" 
-                                    Content="-" 
-                                    Command="{Binding DataContext.Commands.RemoveBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+                            <Button 
+                                Grid.Column="1" 
+                                Margin="5,0,5,0" 
+                                VerticalAlignment="Center" 
+                                Content="-" 
+                                Command="{Binding DataContext.Commands.RemoveBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                                 <Button.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2247,9 +2300,10 @@
     </ControlTemplate>
     <ControlTemplate x:Key="PropertiesMenu">
         <Menu Background="Transparent" HorizontalAlignment="Right">
-            <MenuItem Command="{Binding DataContext.Commands.AddPropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                      CommandParameter="{Binding}" 
-                      Header="+">
+            <MenuItem 
+                Command="{Binding DataContext.Commands.AddPropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                CommandParameter="{Binding}" 
+                Header="+">
                 <MenuItem.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2271,7 +2325,13 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Control Template="{StaticResource PropertiesMenu}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="2,0,2,0"/>
+            <Control 
+                Template="{StaticResource PropertiesMenu}" 
+                Grid.Row="0" 
+                Grid.Column="0" 
+                Grid.ColumnSpan="3" 
+                Margin="2,0,2,0">
+            </Control>
             <GridSplitter 
                 Grid.Column="1" 
                 Grid.Row="1"
@@ -2281,11 +2341,12 @@
                 ResizeBehavior="PreviousAndNext" 
                 ShowsPreview="True">
             </GridSplitter>
-            <TextBlock Grid.Column="0" 
-                       Grid.Row="1" 
-                       Margin="5,2,0,2" 
-                       VerticalAlignment="Center" 
-                       Text="Name">
+            <TextBlock 
+                Grid.Column="0" 
+                Grid.Row="1" 
+                Margin="5,2,0,2" 
+                VerticalAlignment="Center" 
+                Text="Name">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -2297,11 +2358,12 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBlock Grid.Column="2" 
-                       Grid.Row="1" 
-                       Margin="0,2,5,2" 
-                       VerticalAlignment="Center"
-                       Text="Value">
+            <TextBlock 
+                Grid.Column="2" 
+                Grid.Row="1" 
+                Margin="0,2,5,2" 
+                VerticalAlignment="Center"
+                Text="Value">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -2313,17 +2375,19 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <ItemsControl VerticalContentAlignment="Stretch" 
-                          VerticalAlignment="Stretch" 
-                          Grid.Column="0" 
-                          Grid.Row="2"
-                          ItemsSource="{Binding Properties, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl 
+                VerticalContentAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                Grid.Column="0" 
+                Grid.Row="2"
+                ItemsSource="{Binding Properties, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
-                            <TextBox Margin="5,2,0,2" 
-                                     VerticalAlignment="Center" 
-                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox 
+                                Margin="5,2,0,2" 
+                                VerticalAlignment="Center" 
+                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2335,12 +2399,13 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <ItemsControl x:Name="propertiesItemsControls"
-                          VerticalContentAlignment="Stretch" 
-                          VerticalAlignment="Stretch" 
-                          Grid.Column="2" 
-                          Grid.Row="2"
-                          ItemsSource="{Binding Properties, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl 
+                x:Name="propertiesItemsControls"
+                VerticalContentAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                Grid.Column="2" 
+                Grid.Row="2"
+                ItemsSource="{Binding Properties, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
@@ -2348,10 +2413,11 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" 
-                                     Margin="0,2,5,2" 
-                                     VerticalAlignment="Center" 
-                                     Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox 
+                                Grid.Column="0" 
+                                Margin="0,2,5,2" 
+                                VerticalAlignment="Center" 
+                                Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2359,11 +2425,12 @@
                                     </StackPanel>
                                 </TextBox.ToolTip>
                             </TextBox>
-                            <Button Grid.Column="1" 
-                                    Margin="5,0,5,0" 
-                                    VerticalAlignment="Center" 
-                                    Content="-" 
-                                    Command="{Binding DataContext.Commands.RemovePropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+                            <Button 
+                                Grid.Column="1" 
+                                Margin="5,0,5,0" 
+                                VerticalAlignment="Center" 
+                                Content="-" 
+                                Command="{Binding DataContext.Commands.RemovePropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                                 <Button.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2403,11 +2470,12 @@
                 ResizeBehavior="PreviousAndNext" 
                 ShowsPreview="True">
             </GridSplitter>
-            <TextBlock Grid.Column="0"
-                       Grid.Row="0" 
-                       Margin="5,2,0,2" 
-                       VerticalAlignment="Center" 
-                       Text="Name">
+            <TextBlock 
+                Grid.Column="0"
+                Grid.Row="0" 
+                Margin="5,2,0,2" 
+                VerticalAlignment="Center" 
+                Text="Name">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -2419,11 +2487,12 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBlock Grid.Column="2" 
-                       Grid.Row="0" 
-                       Margin="0,2,5,2" 
-                       VerticalAlignment="Center" 
-                       Text="Value">
+            <TextBlock 
+                Grid.Column="2" 
+                Grid.Row="0" 
+                Margin="0,2,5,2" 
+                VerticalAlignment="Center" 
+                Text="Value">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -2435,16 +2504,18 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <ItemsControl VerticalContentAlignment="Stretch" 
-                          VerticalAlignment="Stretch" 
-                          Grid.Column="0" 
-                          Grid.Row="1"
-                          ItemsSource="{Binding ShapesProperties, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl 
+                VerticalContentAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                Grid.Column="0" 
+                Grid.Row="1"
+                ItemsSource="{Binding ShapesProperties, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
-                            <TextBox Margin="5,2,0,2" VerticalAlignment="Center" 
-                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox
+                                Margin="5,2,0,2" VerticalAlignment="Center" 
+                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2456,11 +2527,12 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <ItemsControl VerticalContentAlignment="Stretch" 
-                          VerticalAlignment="Stretch" 
-                          Grid.Column="2" 
-                          Grid.Row="1"
-                          ItemsSource="{Binding ShapesProperties, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl 
+                VerticalContentAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                Grid.Column="2" 
+                Grid.Row="1"
+                ItemsSource="{Binding ShapesProperties, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
@@ -2514,11 +2586,12 @@
                 ResizeBehavior="PreviousAndNext" 
                 ShowsPreview="True">
             </GridSplitter>
-            <TextBlock Grid.Column="0" 
-                       Grid.Row="0" 
-                       Margin="5,2,0,2" 
-                       VerticalAlignment="Center" 
-                       Text="Name">
+            <TextBlock 
+                Grid.Column="0" 
+                Grid.Row="0" 
+                Margin="5,2,0,2" 
+                VerticalAlignment="Center" 
+                Text="Name">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -2530,11 +2603,12 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBlock Grid.Column="2" 
-                       Grid.Row="0" 
-                       Margin="0,2,5,2" 
-                       VerticalAlignment="Center" 
-                       Text="Value">
+            <TextBlock 
+                Grid.Column="2" 
+                Grid.Row="0" 
+                Margin="0,2,5,2" 
+                VerticalAlignment="Center" 
+                Text="Value">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -2546,11 +2620,12 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <ItemsControl VerticalContentAlignment="Stretch" 
-                          VerticalAlignment="Stretch" 
-                          Grid.Row="1" 
-                          Grid.Column="0"
-                          ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl 
+                VerticalContentAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                Grid.Row="1" 
+                Grid.Column="0"
+                ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
@@ -2567,17 +2642,19 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <ItemsControl VerticalContentAlignment="Stretch" 
-                          VerticalAlignment="Stretch" 
-                          Grid.Row="1" 
-                          Grid.Column="2"
-                          ItemsSource="{Binding Values, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl 
+                VerticalContentAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                Grid.Row="1" 
+                Grid.Column="2"
+                ItemsSource="{Binding Values, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
-                            <TextBox Margin="0,2,5,2" 
-                                     VerticalAlignment="Center" 
-                                     Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox 
+                                Margin="0,2,5,2" 
+                                VerticalAlignment="Center" 
+                                Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2603,9 +2680,10 @@
     </ControlTemplate>
     <ControlTemplate x:Key="ColumnsMenu">
         <Menu Background="Transparent" HorizontalAlignment="Right">
-            <MenuItem Command="{Binding DataContext.Commands.AddColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                      CommandParameter="{Binding}" 
-                      Header="+">
+            <MenuItem 
+                Command="{Binding DataContext.Commands.AddColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                CommandParameter="{Binding}" 
+                Header="+">
                 <MenuItem.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2644,18 +2722,20 @@
                     <RowDefinition/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Column="0" 
-                           Grid.Row="0"
-                           Margin="5,2,5,2" 
-                           VerticalAlignment="Center" 
-                           Text="Name">
+                <TextBlock 
+                    Grid.Column="0" 
+                    Grid.Row="0"
+                    Margin="5,2,5,2" 
+                    VerticalAlignment="Center" 
+                    Text="Name">
                 </TextBlock>
             </Grid>
-            <ItemsControl x:Name="columnsItemsControls"
-                          VerticalContentAlignment="Stretch" 
-                          VerticalAlignment="Stretch" 
-                          Grid.Row="2"
-                          ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl 
+                x:Name="columnsItemsControls"
+                VerticalContentAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                Grid.Row="2"
+                ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
@@ -2668,11 +2748,12 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <TextBox Grid.Column="0" 
-                                     Grid.Row="0"
-                                     Margin="5,2,5,2" 
-                                     VerticalAlignment="Center" 
-                                     Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox 
+                                Grid.Column="0" 
+                                Grid.Row="0"
+                                Margin="5,2,5,2" 
+                                VerticalAlignment="Center" 
+                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2680,12 +2761,13 @@
                                     </StackPanel>
                                 </TextBox.ToolTip>
                             </TextBox>
-                            <Button Grid.Column="1" 
-                                    Grid.Row="0" 
-                                    Margin="5,2,5,2" 
-                                    VerticalAlignment="Center" 
-                                    Content="-" 
-                                    Command="{Binding DataContext.Commands.RemoveColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+                            <Button 
+                                Grid.Column="1" 
+                                Grid.Row="0" 
+                                Margin="5,2,5,2" 
+                                VerticalAlignment="Center" 
+                                Content="-" 
+                                Command="{Binding DataContext.Commands.RemoveColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                                 <Button.ToolTip>
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2762,13 +2844,11 @@
     <!-- shapes -->
     <DataTemplate DataType="{x:Type core:XPoint}">
         <TabControl>
-            <TabItem Header="Point">
-                <TabItem.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                    </StackPanel>
-                </TabItem.ToolTip>
+            <TabItem 
+                Header="Point"
+                Style="{StaticResource ToolTipTabItemStyleKey}"
+                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
+                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
                 <StackPanel>
                     <Control Template="{StaticResource NameControlTemplateKey}"/>
                     <Grid>
@@ -2779,15 +2859,17 @@
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="X" 
-                                   Style="{StaticResource TextBlockLeftStyleKey}"
-                                   Grid.Row="0" 
-                                   Grid.Column="0">
+                        <TextBlock 
+                            Text="X" 
+                            Style="{StaticResource TextBlockLeftStyleKey}"
+                            Grid.Row="0" 
+                            Grid.Column="0">
                         </TextBlock>
-                        <TextBox Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" 
-                                 Style="{StaticResource TextBoxLeftStyleKey}"
-                                 Grid.Row="0" 
-                                 Grid.Column="1">
+                        <TextBox 
+                            Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" 
+                            Style="{StaticResource TextBoxLeftStyleKey}"
+                            Grid.Row="0" 
+                            Grid.Column="1">
                             <TextBox.ToolTip>
                                 <StackPanel>
                                     <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2804,15 +2886,17 @@
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Y" 
-                                  Style="{StaticResource TextBlockLeftStyleKey}"
-                                   Grid.Row="0" 
-                                   Grid.Column="0">
+                        <TextBlock 
+                            Text="Y" 
+                            Style="{StaticResource TextBlockLeftStyleKey}"
+                            Grid.Row="0" 
+                            Grid.Column="0">
                         </TextBlock>
-                        <TextBox Text="{Binding Y, UpdateSourceTrigger=PropertyChanged}" 
-                                 Style="{StaticResource TextBoxLeftStyleKey}"
-                                 Grid.Row="0" 
-                                 Grid.Column="1">
+                        <TextBox 
+                            Text="{Binding Y, UpdateSourceTrigger=PropertyChanged}" 
+                            Style="{StaticResource TextBoxLeftStyleKey}"
+                            Grid.Row="0" 
+                            Grid.Column="1">
                             <TextBox.ToolTip>
                                 <StackPanel>
                                     <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -4206,11 +4290,12 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                         Style="{StaticResource TextBoxLeftStyleKey}"
-                         Grid.Row="0" 
-                         Grid.Column="0" 
-                         Grid.ColumnSpan="2">
+                <TextBox 
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0" 
+                    Grid.ColumnSpan="2">
                     <TextBox.ToolTip>
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ProjectTooltipName}"/>
@@ -4231,15 +4316,17 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{x:Static p:Resources.DocumentName}" 
-                           Style="{StaticResource TextBlockLeftStyleKey}"
-                           Grid.Row="0" 
-                           Grid.Column="0">
+                <TextBlock 
+                    Text="{x:Static p:Resources.DocumentName}" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
                 </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                         Style="{StaticResource TextBoxLeftStyleKey}"
-                         Grid.Row="0" 
-                         Grid.Column="1">
+                <TextBox 
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
                     <TextBox.ToolTip>
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.DocumentTooltipName}"/>
@@ -4260,16 +4347,18 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{x:Static p:Resources.ContainerName}" 
-                           Style="{StaticResource TextBlockLeftStyleKey}"
-                           Grid.Row="0" 
-                           Grid.Column="0">
+                <TextBlock 
+                    Text="{x:Static p:Resources.ContainerName}" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
                 </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                         BorderBrush="{x:Null}" 
-                         Style="{StaticResource TextBoxLeftStyleKey}"
-                         Grid.Row="0" 
-                         Grid.Column="1">
+                <TextBox 
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                    BorderBrush="{x:Null}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
                     <TextBox.ToolTip>
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipName}"/>
@@ -4287,20 +4376,23 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{x:Static p:Resources.ContainerWidth}" 
-                           Style="{StaticResource TextBlockLeftStyleKey}" 
-                           Grid.Row="0" 
-                           Grid.Column="0">
+                <TextBlock 
+                    Text="{x:Static p:Resources.ContainerWidth}" 
+                    Style="{StaticResource TextBlockLeftStyleKey}" 
+                    Grid.Row="0" 
+                    Grid.Column="0">
                 </TextBlock>
-                <TextBlock Text="{x:Static p:Resources.ContainerHeight}" 
-                           Style="{StaticResource TextBlockLeftStyleKey}"
-                           Grid.Row="1" 
-                           Grid.Column="0">
+                <TextBlock 
+                    Text="{x:Static p:Resources.ContainerHeight}" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="1" 
+                    Grid.Column="0">
                 </TextBlock>
-                <TextBox Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
-                         Style="{StaticResource TextBoxLeftStyleKey}"
-                         Grid.Row="0" 
-                         Grid.Column="1">
+                <TextBox 
+                    Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
                     <TextBox.ToolTip>
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipWidth}"/>
@@ -4308,10 +4400,11 @@
                         </StackPanel>
                     </TextBox.ToolTip>
                 </TextBox>
-                <TextBox Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
-                         Style="{StaticResource TextBoxLeftStyleKey}"
-                         Grid.Row="1" 
-                         Grid.Column="1">
+                <TextBox 
+                    Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}"
+                    Grid.Row="1" 
+                    Grid.Column="1">
                     <TextBox.ToolTip>
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipHeight}"/>
@@ -4368,10 +4461,11 @@
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:StyleLibrary}">
-        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                 BorderBrush="{x:Null}" 
-                 TextAlignment="Left" 
-                 VerticalAlignment="Center">
+        <TextBox 
+            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+            BorderBrush="{x:Null}" 
+            TextAlignment="Left" 
+            VerticalAlignment="Center">
             <TextBox.ToolTip>
                 <StackPanel>
                     <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -4381,10 +4475,11 @@
         </TextBox>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:GroupLibrary}">
-        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                 BorderBrush="{x:Null}" 
-                 TextAlignment="Left" 
-                 VerticalAlignment="Center">
+        <TextBox 
+            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+            BorderBrush="{x:Null}" 
+            TextAlignment="Left" 
+            VerticalAlignment="Center">
             <TextBox.ToolTip>
                 <StackPanel>
                     <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
