@@ -70,6 +70,40 @@ namespace Test2d
         }
 
         /// <summary>
+        /// Gets or sets property Value using Name as key for Properties array values. If property with the specified key does not exist it is created.
+        /// </summary>
+        /// <param name="name">The property name value.</param>
+        /// <returns>The property Value.</returns>
+        public object this[string name]
+        {
+            get
+            {
+                var result = _properties.FirstOrDefault(p => p.Name == name);
+                if (result != null)
+                {
+                    return result.Value;
+                }
+                return null;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    var result = _properties.FirstOrDefault(p => p.Name == name);
+                    if (result != null)
+                    {
+                        result.Value = value;
+                    }
+                    else
+                    {
+                        var property = ShapeProperty.Create(name, value);
+                        Properties = Properties.Add(property);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         public ImmutableArray<Layer> Layers
