@@ -260,6 +260,10 @@ namespace Test2d
         /// 
         /// </summary>
         public ICommand ToolImageCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ToolMoveCommand { get; set; }
 
         /// <summary>
         /// 
