@@ -139,6 +139,7 @@
         </ObjectDataProvider.MethodParameters>
     </ObjectDataProvider>
     <!-- brushes -->
+    <SolidColorBrush x:Key="BackgroundColor" Color="White" />
     <SolidColorBrush x:Key="DarkSquareColor" Color="DarkGray" />
     <SolidColorBrush x:Key="LightSquareColor" Color="LightGray" />
     <DrawingBrush x:Key="CheckerBoard" Viewport="0,0,20,20" ViewportUnits="Absolute" Stretch="None" TileMode="Tile">
