@@ -164,6 +164,189 @@
             </DrawingGroup>
         </DrawingBrush.Drawing>
     </DrawingBrush>
+    <!-- styles -->
+    <Style x:Key="TextBlockLeftStyleKey" TargetType="TextBlock">
+        <Setter Property="Margin" Value="5,2,5,2"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style x:Key="TextBoxLeftStyleKey" TargetType="TextBox">
+        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="Margin" Value="5,2,5,2"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style x:Key="TextBlockCenterStyleKey" TargetType="TextBlock">
+        <Setter Property="Margin" Value="5,2,5,2"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style x:Key="TextBoxCenterStyleKey" TargetType="TextBox">
+        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="Margin" Value="5,2,5,2"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style x:Key="CheckBoxStyleKey" TargetType="CheckBox">
+        <Setter Property="Margin" Value="5,2,5,2"/>
+    </Style>
+    <Style x:Key="ComboBoxStyleKey" TargetType="ComboBox">
+        <Setter Property="Margin" Value="5,2,5,2"/>
+    </Style>
+    <Style x:Key="SliderStyleKey" TargetType="Slider">
+        <Setter Property="Margin" Value="5,2,5,2"/>
+    </Style>
+    <!-- common -->
+    <ControlTemplate x:Key="NameControlTemplateKey">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock 
+                Text="Name" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
+                Grid.Row="0" 
+                Grid.Column="0">
+            </TextBlock>
+            <TextBox 
+                Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                BorderBrush="{x:Null}" 
+                Style="{StaticResource TextBoxLeftStyleKey}"
+                Grid.Row="0" 
+                Grid.Column="1">
+                <TextBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </TextBox.ToolTip>
+            </TextBox>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="IsStrokedControlTemplateKey">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock 
+                Text="IsStroked" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
+                Grid.Row="0"
+                Grid.Column="0">
+            </TextBlock>
+            <CheckBox 
+                Content=""
+                IsChecked="{Binding IsStroked}"
+                Style="{StaticResource CheckBoxStyleKey}"
+                Grid.Row="0" 
+                Grid.Column="1">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
+            </CheckBox>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="IsFilledControlTemplateKey">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock 
+                Text="IsFilled" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
+                Grid.Row="0"
+                Grid.Column="0">
+            </TextBlock>
+            <CheckBox 
+                Content=""
+                IsChecked="{Binding IsFilled}"
+                Style="{StaticResource CheckBoxStyleKey}"
+                Grid.Row="0" 
+                Grid.Column="1">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
+            </CheckBox>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="IsSmoothJoinControlTemplateKey">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock 
+                Text="IsSmoothJoin" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
+                Grid.Row="0"
+                Grid.Column="0">
+            </TextBlock>
+            <CheckBox 
+                Content=""
+                IsChecked="{Binding IsSmoothJoin}"
+                Style="{StaticResource CheckBoxStyleKey}"
+                Grid.Row="0" 
+                Grid.Column="1">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
+            </CheckBox>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="IsClosedControlTemplateKey">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock 
+                Text="IsClosed" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
+                Grid.Row="0"
+                Grid.Column="0">
+            </TextBlock>
+            <CheckBox 
+                Content=""
+                IsChecked="{Binding IsClosed}"
+                Style="{StaticResource CheckBoxStyleKey}"
+                Grid.Row="0" 
+                Grid.Column="1">
+                <CheckBox.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
+                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
+                    </StackPanel>
+                </CheckBox.ToolTip>
+            </CheckBox>
+        </Grid>
+    </ControlTemplate>
     <!-- path -->
     <DataTemplate DataType="{x:Type core:XPathSize}">
         <Grid>
@@ -178,29 +361,22 @@
             </Grid.ColumnDefinitions>
             <TextBlock 
                 Text="Width" 
-                Margin="5,2,5,2" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
                 Grid.Row="0" 
-                Grid.Column="0" 
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
+                Grid.Column="0" >
             </TextBlock>
             <TextBlock 
                 Text="Height" 
-                Margin="5,2,5,2" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
                 Grid.Row="1" 
-                Grid.Column="0" 
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
+                Grid.Column="0" >
             </TextBlock>
             <TextBox 
                 Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
-                BorderBrush="{x:Null}"
-                Margin="5,2,5,2"
+                Style="{StaticResource TextBoxLeftStyleKey}"
                 Grid.Row="0" 
                 Grid.Column="1" 
-                Grid.ColumnSpan="2"
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
+                Grid.ColumnSpan="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -210,13 +386,10 @@
             </TextBox>
             <TextBox 
                 Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
-                BorderBrush="{x:Null}" 
-                Margin="5,2,5,2"
+                Style="{StaticResource TextBoxLeftStyleKey}"
                 Grid.Row="1" 
                 Grid.Column="1" 
-                Grid.ColumnSpan="2"
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
+                Grid.ColumnSpan="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -241,45 +414,34 @@
             </Grid.ColumnDefinitions>
             <TextBlock 
                 Text="X" 
-                Margin="5,2,5,2" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
                 Grid.Row="0" 
-                Grid.Column="0" 
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
+                Grid.Column="0">
             </TextBlock>
             <TextBlock 
                 Text="Y" 
-                Margin="5,2,5,2" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
                 Grid.Row="1" 
-                Grid.Column="0" 
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
+                Grid.Column="0">
             </TextBlock>
             <TextBlock 
                 Text="Width" 
-                Margin="5,2,5,2" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
                 Grid.Row="2" 
-                Grid.Column="0" 
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
+                Grid.Column="0" >
             </TextBlock>
             <TextBlock 
                 Text="Height" 
-                Margin="5,2,5,2" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
                 Grid.Row="3" 
-                Grid.Column="0" 
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
+                Grid.Column="0">
             </TextBlock>
             <TextBox 
                 Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" 
-                BorderBrush="{x:Null}"
-                Margin="5,2,5,2"
+                Style="{StaticResource TextBoxLeftStyleKey}"
                 Grid.Row="0" 
                 Grid.Column="1" 
-                Grid.ColumnSpan="2"
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
+                Grid.ColumnSpan="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -289,13 +451,10 @@
             </TextBox>
             <TextBox 
                 Text="{Binding Y, UpdateSourceTrigger=PropertyChanged}" 
-                BorderBrush="{x:Null}" 
-                Margin="5,2,5,2"
+                Style="{StaticResource TextBoxLeftStyleKey}"
                 Grid.Row="1" 
                 Grid.Column="1" 
-                Grid.ColumnSpan="2"
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
+                Grid.ColumnSpan="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -305,13 +464,10 @@
             </TextBox>
             <TextBox 
                 Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
-                BorderBrush="{x:Null}"
-                Margin="5,2,5,2"
+                Style="{StaticResource TextBoxLeftStyleKey}"
                 Grid.Row="2" 
                 Grid.Column="1" 
-                Grid.ColumnSpan="2"
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
+                Grid.ColumnSpan="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -321,13 +477,10 @@
             </TextBox>
             <TextBox 
                 Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
-                BorderBrush="{x:Null}" 
-                Margin="5,2,5,2"
+                Style="{StaticResource TextBoxLeftStyleKey}"
                 Grid.Row="3" 
                 Grid.Column="1" 
-                Grid.ColumnSpan="2"
-                TextAlignment="Left" 
-                VerticalAlignment="Center">
+                Grid.ColumnSpan="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -339,10 +492,10 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XArcSegment}">
         <StackPanel>
+            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
+            <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -353,54 +506,29 @@
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock 
-                        Text="RotationAngle" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="0"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                    Text="RotationAngle" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
                 </TextBlock>
                 <TextBlock 
-                        Text="IsLargeArc" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="1"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                    Text="IsLargeArc" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="1"
+                    Grid.Column="0">
                 </TextBlock>
                 <TextBlock 
-                        Text="SweepDirection" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="2" 
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                </TextBlock>
-                <TextBlock 
-                        Text="IsStroked" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="3"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                </TextBlock>
-                <TextBlock 
-                        Text="IsSmoothJoin" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="4"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                    Text="SweepDirection" 
+                    Style="{StaticResource TextBlockLeftStyleKey}" 
+                    Grid.Row="2" 
+                    Grid.Column="0">
                 </TextBlock>
                 <TextBox 
-                        Text="{Binding RotationAngle, UpdateSourceTrigger=PropertyChanged}" 
-                        BorderBrush="{x:Null}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2"
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                    Text="{Binding RotationAngle, UpdateSourceTrigger=PropertyChanged}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    Grid.ColumnSpan="2">
                     <TextBox.ToolTip>
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -409,12 +537,12 @@
                     </TextBox.ToolTip>
                 </TextBox>
                 <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsLargeArc}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="1" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
+                    Content=""
+                    IsChecked="{Binding IsLargeArc}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="1" 
+                    Grid.Column="1" 
+                    Grid.ColumnSpan="2">
                     <CheckBox.ToolTip>
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -423,12 +551,12 @@
                     </CheckBox.ToolTip>
                 </CheckBox>
                 <ComboBox 
-                        ItemsSource="{Binding Source={StaticResource ResourceKey=XSweepDirectionValues}}" 
-                        SelectedItem="{Binding SweepDirection}" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="2" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
+                    ItemsSource="{Binding Source={StaticResource ResourceKey=XSweepDirectionValues}}" 
+                    SelectedItem="{Binding SweepDirection}" 
+                    Style="{StaticResource ComboBoxStyleKey}"
+                    Grid.Row="2" 
+                    Grid.Column="1" 
+                    Grid.ColumnSpan="2">
                     <ComboBox.ToolTip>
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -436,34 +564,6 @@
                         </StackPanel>
                     </ComboBox.ToolTip>
                 </ComboBox>
-                <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsStroked}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="3" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    <CheckBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </CheckBox.ToolTip>
-                </CheckBox>
-                <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsSmoothJoin}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="4" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    <CheckBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </CheckBox.ToolTip>
-                </CheckBox>
             </Grid>
             <Expander Header="Point">
                 <Expander.ToolTip>
@@ -487,61 +587,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XBezierSegment}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                        Text="IsStroked" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="0"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                </TextBlock>
-                <TextBlock 
-                        Text="IsSmoothJoin" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="1"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                </TextBlock>
-                <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsStroked}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    <CheckBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </CheckBox.ToolTip>
-                </CheckBox>
-                <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsSmoothJoin}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="1" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    <CheckBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </CheckBox.ToolTip>
-                </CheckBox>
-            </Grid>
+            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
+            <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
             <Expander Header="Point1">
                 <Expander.ToolTip>
                     <StackPanel>
@@ -573,61 +620,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XLineSegment}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                        Text="IsStroked" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="0"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                </TextBlock>
-                <TextBlock 
-                        Text="IsSmoothJoin" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="1"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                </TextBlock>
-                <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsStroked}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    <CheckBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </CheckBox.ToolTip>
-                </CheckBox>
-                <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsSmoothJoin}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="1" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    <CheckBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </CheckBox.ToolTip>
-                </CheckBox>
-            </Grid>
+            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
+            <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
             <Expander Header="Point">
                 <Expander.ToolTip>
                     <StackPanel>
@@ -641,61 +635,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XPolyBezierSegment}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                        Text="IsStroked" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="0"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                </TextBlock>
-                <TextBlock 
-                        Text="IsSmoothJoin" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="1"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                </TextBlock>
-                <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsStroked}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    <CheckBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </CheckBox.ToolTip>
-                </CheckBox>
-                <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsSmoothJoin}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="1" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    <CheckBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </CheckBox.ToolTip>
-                </CheckBox>
-            </Grid>
+            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
+            <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
             <Expander Header="Points">
                 <Expander.ToolTip>
                     <StackPanel>
@@ -715,61 +656,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XPolyLineSegment}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                        Text="IsStroked" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="0"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                </TextBlock>
-                <TextBlock 
-                        Text="IsSmoothJoin" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="1"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                </TextBlock>
-                <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsStroked}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    <CheckBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </CheckBox.ToolTip>
-                </CheckBox>
-                <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsSmoothJoin}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="1" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    <CheckBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </CheckBox.ToolTip>
-                </CheckBox>
-            </Grid>
+            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
+            <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
             <Expander Header="Points">
                 <Expander.ToolTip>
                     <StackPanel>
@@ -788,61 +676,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XPolyQuadraticBezierSegment}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                        Text="IsStroked" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="0"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                </TextBlock>
-                <TextBlock 
-                        Text="IsSmoothJoin" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="1"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                </TextBlock>
-                <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsStroked}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    <CheckBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </CheckBox.ToolTip>
-                </CheckBox>
-                <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsSmoothJoin}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="1" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    <CheckBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </CheckBox.ToolTip>
-                </CheckBox>
-            </Grid>
+            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
+            <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
             <Expander Header="Points">
                 <Expander.ToolTip>
                     <StackPanel>
@@ -861,61 +696,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XQuadraticBezierSegment}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                        Text="IsStroked" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="0"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                </TextBlock>
-                <TextBlock 
-                        Text="IsSmoothJoin" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="1"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                </TextBlock>
-                <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsStroked}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    <CheckBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </CheckBox.ToolTip>
-                </CheckBox>
-                <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsSmoothJoin}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="1" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    <CheckBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </CheckBox.ToolTip>
-                </CheckBox>
-            </Grid>
+            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
+            <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
             <Expander Header="Point1">
                 <Expander.ToolTip>
                     <StackPanel>
@@ -938,61 +720,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XPathFigure}">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                        Text="IsFilled" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="0"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                </TextBlock>
-                <TextBlock 
-                        Text="IsClosed" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="1" 
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-                </TextBlock>
-                <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsFilled}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    <CheckBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </CheckBox.ToolTip>
-                </CheckBox>
-                <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsClosed}"
-                        Margin="5,2,5,2" 
-                        Grid.Row="1" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    <CheckBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </CheckBox.ToolTip>
-                </CheckBox>
-            </Grid>
+            <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
+            <Control Template="{StaticResource IsClosedJoinControlTemplateKey}"/>
             <Expander Header="StartPoint">
                 <Expander.ToolTip>
                     <StackPanel>
@@ -1016,20 +745,18 @@
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock 
-                        Text="FillRule" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="0"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                    Text="FillRule" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
                 </TextBlock>
                 <ComboBox 
-                        ItemsSource="{Binding Source={StaticResource ResourceKey=XFillRuleValues}}" 
-                        SelectedItem="{Binding FillRule}" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
+                    ItemsSource="{Binding Source={StaticResource ResourceKey=XFillRuleValues}}" 
+                    SelectedItem="{Binding FillRule}" 
+                    Style="{StaticResource ComboBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    Grid.ColumnSpan="2">
                     <ComboBox.ToolTip>
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1099,38 +826,6 @@
         </StackPanel>
     </DataTemplate>
     <!-- shape -->
-    <ControlTemplate x:Key="NameControlTemplateKey">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Name" 
-                       Margin="5,2,5,2" 
-                       Grid.Row="0" 
-                       Grid.Column="0" 
-                       TextAlignment="Left" 
-                       VerticalAlignment="Center">
-            </TextBlock>
-            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                     BorderBrush="{x:Null}" 
-                     Margin="5,2,5,2"
-                     Grid.Row="0" 
-                     Grid.Column="1" 
-                     TextAlignment="Left" 
-                     VerticalAlignment="Center">
-                <TextBox.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                    </StackPanel>
-                </TextBox.ToolTip>
-            </TextBox>
-        </Grid>
-    </ControlTemplate>
     <ControlTemplate x:Key="StyleControlTemplateKey">
         <Grid>
             <Grid.RowDefinitions>
@@ -1140,18 +835,18 @@
                 <ColumnDefinition Width="60"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Style" 
-                       Margin="5,2,5,2" 
-                       Grid.Row="0" 
-                       Grid.Column="0" 
-                       TextAlignment="Left" 
-                       VerticalAlignment="Center">
+            <TextBlock 
+                Text="Style" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
+                Grid.Row="0" 
+                Grid.Column="0">
             </TextBlock>
-            <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                      SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
-                      Margin="5,2,5,2"
-                      Grid.Row="0" 
-                      Grid.Column="1">
+            <ComboBox 
+                ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
+                Style="{StaticResource ComboBoxStyleKey}"
+                Grid.Row="0" 
+                Grid.Column="1">
                 <ComboBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1251,66 +946,6 @@
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
-    <ControlTemplate x:Key="IsStrokedControlTemplateKey">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="IsStroked" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="0"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-            </TextBlock>
-            <CheckBox Content=""
-                        IsChecked="{Binding IsStroked}"
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Margin="5,2,5,2">
-                <CheckBox.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                    </StackPanel>
-                </CheckBox.ToolTip>
-            </CheckBox>
-        </Grid>
-    </ControlTemplate>
-    <ControlTemplate x:Key="IsFilledControlTemplateKey">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="IsFilled" 
-                        Margin="5,2,5,2" 
-                        Grid.Row="0"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
-            </TextBlock>
-            <CheckBox Content=""
-                        IsChecked="{Binding IsFilled}"
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Margin="5,2,5,2">
-                <CheckBox.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                    </StackPanel>
-                </CheckBox.ToolTip>
-            </CheckBox>
-        </Grid>
-    </ControlTemplate>
     <ControlTemplate x:Key="TextControlTemplateKey">
         <Grid>
             <Grid.RowDefinitions>
@@ -1320,19 +955,19 @@
                 <ColumnDefinition Width="60"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Text" 
-                       Margin="5,2,5,2" 
-                       Grid.Row="0" 
-                       Grid.Column="0" 
-                       TextAlignment="Left" 
-                       VerticalAlignment="Center">
+            <TextBlock 
+                Text="Text" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
+                Grid.Row="0" 
+                Grid.Column="0">
             </TextBlock>
-            <ComboBox IsEditable="True" 
-                      Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
-                      Margin="5,2,5,2"
-                      Grid.Row="0" 
-                      Grid.Column="1" 
-                      VerticalAlignment="Center">
+            <ComboBox 
+                IsEditable="True" 
+                Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource ComboBoxStyleKey}"
+                Grid.Row="0" 
+                Grid.Column="1" 
+                VerticalAlignment="Center">
                 <ComboBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1667,41 +1302,33 @@
                 </Rectangle.Fill>
             </Rectangle>
             <TextBlock Text="A" 
-                       Margin="5,2,5,2" 
+                       Style="{StaticResource TextBlockCenterStyleKey}"
                        Grid.Row="1"
-                       Grid.Column="0" 
-                       TextAlignment="Center" 
-                       VerticalAlignment="Center">
+                       Grid.Column="0">
             </TextBlock>
             <TextBlock Text="R" 
-                       Margin="5,2,5,2" 
+                       Style="{StaticResource TextBlockCenterStyleKey}"
                        Grid.Row="2" 
-                       Grid.Column="0" 
-                       TextAlignment="Center" 
-                       VerticalAlignment="Center">
+                       Grid.Column="0">
             </TextBlock>
             <TextBlock Text="G" 
-                       Margin="5,2,5,2" 
+                       Style="{StaticResource TextBlockCenterStyleKey}"
                        Grid.Row="3" 
-                       Grid.Column="0" 
-                       TextAlignment="Center" 
-                       VerticalAlignment="Center">
+                       Grid.Column="0">
             </TextBlock>
             <TextBlock Text="B" 
-                       Margin="5,2,5,2" 
+                       Style="{StaticResource TextBlockCenterStyleKey}"
                        Grid.Row="4" 
-                       Grid.Column="0" 
-                       TextAlignment="Center" 
-                       VerticalAlignment="Center">
+                       Grid.Column="0">
             </TextBlock>
             <Slider Value="{Binding A}" 
+                    Style="{StaticResource SliderStyleKey}"
                     Minimum="0" 
                     Maximum="255" 
                     TickFrequency="1" 
                     IsSnapToTickEnabled="True" 
                     Grid.Row="1" 
-                    Grid.Column="1" 
-                    Margin="5,2,5,2">
+                    Grid.Column="1">
                 <Slider.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1710,13 +1337,13 @@
                 </Slider.ToolTip>
             </Slider>
             <Slider Value="{Binding R}" 
+                    Style="{StaticResource SliderStyleKey}"
                     Minimum="0" 
                     Maximum="255" 
                     TickFrequency="1" 
                     IsSnapToTickEnabled="True" 
                     Grid.Row="2" 
-                    Grid.Column="1" 
-                    Margin="5,2,5,2">
+                    Grid.Column="1">
                 <Slider.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1724,14 +1351,14 @@
                     </StackPanel>
                 </Slider.ToolTip>
             </Slider>
-            <Slider Value="{Binding G}" 
+            <Slider Value="{Binding G}"
+                    Style="{StaticResource SliderStyleKey}"
                     Minimum="0" 
                     Maximum="255" 
                     TickFrequency="1" 
                     IsSnapToTickEnabled="True" 
                     Grid.Row="3" 
-                    Grid.Column="1" 
-                    Margin="5,2,5,2">
+                    Grid.Column="1">
                 <Slider.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1740,13 +1367,13 @@
                 </Slider.ToolTip>
             </Slider>
             <Slider Value="{Binding B}" 
+                    Style="{StaticResource SliderStyleKey}"
                     Minimum="0" 
                     Maximum="255" 
                     TickFrequency="1" 
                     IsSnapToTickEnabled="True" 
                     Grid.Row="4" 
-                    Grid.Column="1" 
-                    Margin="5,2,5,2">
+                    Grid.Column="1">
                 <Slider.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1755,12 +1382,9 @@
                 </Slider.ToolTip>
             </Slider>
             <TextBox Text="{Binding A, UpdateSourceTrigger=PropertyChanged}" 
-                     BorderBrush="{x:Null}" 
-                     Margin="5,2,5,2"
+                     Style="{StaticResource TextBoxCenterStyleKey}"
                      Grid.Row="1" 
-                     Grid.Column="2" 
-                     TextAlignment="Center" 
-                     VerticalAlignment="Center">
+                     Grid.Column="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1769,12 +1393,9 @@
                 </TextBox.ToolTip>
             </TextBox>
             <TextBox Text="{Binding R, UpdateSourceTrigger=PropertyChanged}" 
-                     BorderBrush="{x:Null}" 
-                     Margin="5,2,5,2"
+                     Style="{StaticResource TextBoxCenterStyleKey}"
                      Grid.Row="2" 
-                     Grid.Column="2" 
-                     TextAlignment="Center" 
-                     VerticalAlignment="Center">
+                     Grid.Column="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1783,12 +1404,9 @@
                 </TextBox.ToolTip>
             </TextBox>
             <TextBox Text="{Binding G, UpdateSourceTrigger=PropertyChanged}" 
-                     BorderBrush="{x:Null}" 
-                     Margin="5,2,5,2"
+                     Style="{StaticResource TextBoxCenterStyleKey}"
                      Grid.Row="3" 
-                     Grid.Column="2" 
-                     TextAlignment="Center" 
-                     VerticalAlignment="Center">
+                     Grid.Column="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1797,12 +1415,9 @@
                 </TextBox.ToolTip>
             </TextBox>
             <TextBox Text="{Binding B, UpdateSourceTrigger=PropertyChanged}" 
-                     BorderBrush="{x:Null}" 
-                     Margin="5,2,5,2"
+                     Style="{StaticResource TextBoxCenterStyleKey}"
                      Grid.Row="4" 
-                     Grid.Column="2" 
-                     TextAlignment="Center" 
-                     VerticalAlignment="Center">
+                     Grid.Column="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1814,36 +1429,7 @@
     </DataTemplate>
     <ControlTemplate x:Key="BaseStyleControlTemplateKey">
         <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Name" 
-                           Margin="5,2,5,2" 
-                           Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
-                </TextBlock>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
-                         Grid.Row="0" 
-                         Grid.Column="1" 
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
-                    <TextBox.ToolTip>
-                        <StackPanel>
-                            <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                            <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                        </StackPanel>
-                    </TextBox.ToolTip>
-                </TextBox>
-            </Grid>
+            <Control Template="{StaticResource NameControlTemplateKey}"/>
             <Expander Header="Stroke" IsExpanded="False">
                 <Expander.ToolTip>
                     <StackPanel>
@@ -1878,6 +1464,7 @@
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
                     <Slider Value="{Binding Thickness}" 
+                            Style="{StaticResource SliderStyleKey}"
                             Minimum="0" 
                             Maximum="50" 
                             TickFrequency="0.1" 
@@ -1885,8 +1472,7 @@
                             LargeChange="1" 
                             IsSnapToTickEnabled="True" 
                             Grid.Row="0" 
-                            Grid.Column="0" 
-                            Margin="5,2,5,2">
+                            Grid.Column="0">
                         <Slider.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1895,12 +1481,9 @@
                         </Slider.ToolTip>
                     </Slider>
                     <TextBox Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged}" 
-                             BorderBrush="{x:Null}"
-                             Margin="5,2,5,2"
+                             Style="{StaticResource TextBoxCenterStyleKey}"
                              Grid.Row="0" 
-                             Grid.Column="1" 
-                             TextAlignment="Center" 
-                             VerticalAlignment="Center">
+                             Grid.Column="1">
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1927,18 +1510,16 @@
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Line Cap" 
-                               Margin="5,2,5,2" 
+                               Style="{StaticResource TextBlockLeftStyleKey}"
                                Grid.Row="0"
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
+                               Grid.Column="0" >
                     </TextBlock>
                     <ComboBox ItemsSource="{Binding Source={StaticResource ResourceKey=LineCapValues}}" 
                               SelectedItem="{Binding LineCap}" 
+                              Style="{StaticResource ComboBoxStyleKey}"
                               Grid.Row="0" 
                               Grid.Column="1" 
-                              Grid.ColumnSpan="2"
-                              Margin="5,2,5,2">
+                              Grid.ColumnSpan="2">
                         <ComboBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1960,27 +1541,20 @@
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Dashes" 
-                               Margin="5,2,5,2" 
+                               Style="{StaticResource TextBlockLeftStyleKey}"
                                Grid.Row="0" 
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
+                               Grid.Column="0">
                     </TextBlock>
                     <TextBlock Text="Dash Offset" 
-                               Margin="5,2,5,2" 
+                               Style="{StaticResource TextBlockLeftStyleKey}"
                                Grid.Row="1" 
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
+                               Grid.Column="0">
                     </TextBlock>
                     <TextBox Text="{Binding Dashes, Converter={StaticResource DoubleToStringConverter}}" 
-                             BorderBrush="{x:Null}" 
-                             Margin="5,2,5,2"
+                             Style="{StaticResource TextBoxLeftStyleKey}"
                              Grid.Row="0" 
                              Grid.Column="1" 
-                             Grid.ColumnSpan="2"
-                             TextAlignment="Left" 
-                             VerticalAlignment="Center">
+                             Grid.ColumnSpan="2">
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -1989,6 +1563,7 @@
                         </TextBox.ToolTip>
                     </TextBox>
                     <Slider Value="{Binding DashOffset}" 
+                            Style="{StaticResource SliderStyleKey}"
                             Minimum="0" 
                             Maximum="15" 
                             TickFrequency="0.1" 
@@ -1996,8 +1571,7 @@
                             LargeChange="1"
                             IsSnapToTickEnabled="True" 
                             Grid.Row="1" 
-                            Grid.Column="1" 
-                            Margin="5,2,5,2">
+                            Grid.Column="1">
                         <Slider.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2006,12 +1580,9 @@
                         </Slider.ToolTip>
                     </Slider>
                     <TextBox Text="{Binding DashOffset, UpdateSourceTrigger=PropertyChanged}" 
-                             BorderBrush="{x:Null}" 
-                             Margin="5,2,5,2"
+                             Style="{StaticResource TextBoxCenterStyleKey}"
                              Grid.Row="1" 
-                             Grid.Column="2" 
-                             TextAlignment="Center" 
-                             VerticalAlignment="Center">
+                             Grid.Column="2">
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2047,46 +1618,36 @@
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Arrow Type" 
-                               Margin="5,2,5,2" 
+                               Style="{StaticResource TextBlockLeftStyleKey}"
                                Grid.Row="0"
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
+                               Grid.Column="0">
                     </TextBlock>
                     <TextBlock Text="IsStroked" 
-                               Margin="5,2,5,2" 
+                               Style="{StaticResource TextBlockLeftStyleKey}"
                                Grid.Row="1"
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
+                               Grid.Column="0">
                     </TextBlock>
                     <TextBlock Text="IsFilled" 
-                               Margin="5,2,5,2" 
+                               Style="{StaticResource TextBlockLeftStyleKey}"
                                Grid.Row="2"
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
+                               Grid.Column="0">
                     </TextBlock>
                     <TextBlock Text="RadiusX" 
-                               Margin="5,2,5,2" 
+                               Style="{StaticResource TextBlockLeftStyleKey}"
                                Grid.Row="3" 
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
+                               Grid.Column="0">
                     </TextBlock>
                     <TextBlock Text="RadiusY" 
-                               Margin="5,2,5,2" 
+                               Style="{StaticResource TextBlockLeftStyleKey}"
                                Grid.Row="4" 
-                               Grid.Column="0" 
-                               TextAlignment="Left" 
-                               VerticalAlignment="Center">
+                               Grid.Column="0">
                     </TextBlock>
                     <ComboBox ItemsSource="{Binding Source={StaticResource ResourceKey=ArrowTypeValues}}" 
                               SelectedItem="{Binding ArrowType}" 
+                              Style="{StaticResource ComboBoxStyleKey}"
                               Grid.Row="0" 
                               Grid.Column="1" 
-                              Grid.ColumnSpan="2"
-                              Margin="5,2,5,2">
+                              Grid.ColumnSpan="2">
                         <ComboBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2096,10 +1657,10 @@
                     </ComboBox>
                     <CheckBox Content=""
                               IsChecked="{Binding IsStroked}"
+                              Style="{StaticResource CheckBoxStyleKey}"
                               Grid.Row="1" 
                               Grid.Column="1" 
-                              Grid.ColumnSpan="2"
-                              Margin="5,2,5,2">
+                              Grid.ColumnSpan="2">
                         <CheckBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2108,11 +1669,10 @@
                         </CheckBox.ToolTip>
                     </CheckBox>
                     <CheckBox Content=""
-                              IsChecked="{Binding IsFilled}"
+                              Style="{StaticResource CheckBoxStyleKey}"
                               Grid.Row="2" 
                               Grid.Column="1" 
-                              Grid.ColumnSpan="2"
-                              Margin="5,2,5,2">
+                              Grid.ColumnSpan="2">
                         <CheckBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2120,7 +1680,8 @@
                             </StackPanel>
                         </CheckBox.ToolTip>
                     </CheckBox>
-                    <Slider Value="{Binding RadiusX}" 
+                    <Slider Value="{Binding RadiusX}"
+                            Style="{StaticResource SliderStyleKey}"
                             Minimum="0" 
                             Maximum="15" 
                             TickFrequency="0.1" 
@@ -2128,8 +1689,7 @@
                             LargeChange="1"
                             IsSnapToTickEnabled="True" 
                             Grid.Row="3" 
-                            Grid.Column="1" 
-                            Margin="5,2,5,2">
+                            Grid.Column="1">
                         <Slider.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2138,6 +1698,7 @@
                         </Slider.ToolTip>
                     </Slider>
                     <Slider Value="{Binding RadiusY}" 
+                            Style="{StaticResource SliderStyleKey}"
                             Minimum="0" 
                             Maximum="15" 
                             TickFrequency="0.1" 
@@ -2145,8 +1706,7 @@
                             LargeChange="1"
                             IsSnapToTickEnabled="True" 
                             Grid.Row="4" 
-                            Grid.Column="1" 
-                            Margin="5,2,5,2">
+                            Grid.Column="1">
                         <Slider.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2155,12 +1715,9 @@
                         </Slider.ToolTip>
                     </Slider>
                     <TextBox Text="{Binding RadiusX, UpdateSourceTrigger=PropertyChanged}" 
-                             BorderBrush="{x:Null}" 
-                             Margin="5,2,5,2"
+                             Style="{StaticResource TextBoxCenterStyleKey}"
                              Grid.Row="3" 
-                             Grid.Column="2" 
-                             TextAlignment="Center" 
-                             VerticalAlignment="Center">
+                             Grid.Column="2">
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2169,12 +1726,9 @@
                         </TextBox.ToolTip>
                     </TextBox>
                     <TextBox Text="{Binding RadiusY, UpdateSourceTrigger=PropertyChanged}" 
-                             BorderBrush="{x:Null}" 
-                             Margin="5,2,5,2"
+                             Style="{StaticResource TextBoxCenterStyleKey}"
                              Grid.Row="4" 
-                             Grid.Column="2" 
-                             TextAlignment="Center" 
-                             VerticalAlignment="Center">
+                             Grid.Column="2">
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2211,55 +1765,43 @@
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="FontName" 
-                       Margin="5,2,5,2" 
+                       Style="{StaticResource TextBlockLeftStyleKey}"
                        Grid.Row="0"
-                       Grid.Column="0" 
-                       TextAlignment="Left" 
-                       VerticalAlignment="Center">
+                       Grid.Column="0">
             </TextBlock>
             <TextBlock Text="FontFile" 
-                       Margin="5,2,5,2" 
+                       Style="{StaticResource TextBlockLeftStyleKey}"
                        Grid.Row="1"
-                       Grid.Column="0" 
-                       TextAlignment="Left" 
-                       VerticalAlignment="Center">
+                       Grid.Column="0">
             </TextBlock>
             <TextBlock Text="FontSize" 
-                       Margin="5,2,5,2" 
+                       Style="{StaticResource TextBlockLeftStyleKey}"
                        Grid.Row="2" 
-                       Grid.Column="0" 
-                       TextAlignment="Left" 
-                       VerticalAlignment="Center">
+                       Grid.Column="0">
             </TextBlock>
             <TextBlock Text="FontStyle" 
-                       Margin="5,2,5,2" 
+                       Style="{StaticResource TextBlockLeftStyleKey}"
                        Grid.Row="3" 
-                       Grid.Column="0" 
-                       TextAlignment="Left" 
-                       VerticalAlignment="Center">
+                       Grid.Column="0">
             </TextBlock>
             <TextBlock Text="HAlignment" 
-                       Margin="5,2,5,2" 
+                       Style="{StaticResource TextBlockLeftStyleKey}"
                        Grid.Row="4" 
-                       Grid.Column="0" 
-                       TextAlignment="Left" 
-                       VerticalAlignment="Center">
+                       Grid.Column="0">
             </TextBlock>
             <TextBlock Text="VAlignment" 
-                       Margin="5,2,5,2" 
+                       Style="{StaticResource TextBlockLeftStyleKey}"
                        Grid.Row="5" 
-                       Grid.Column="0" 
-                       TextAlignment="Left" 
-                       VerticalAlignment="Center">
+                       Grid.Column="0">
             </TextBlock>
             <Slider Value="{Binding FontSize}" 
+                    Style="{StaticResource SliderStyleKey}"
                     Minimum="0" 
                     Maximum="72" 
                     TickFrequency="1" 
                     IsSnapToTickEnabled="True" 
                     Grid.Row="2" 
-                    Grid.Column="1" 
-                    Margin="5,2,5,2">
+                    Grid.Column="1">
                 <Slider.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2268,13 +1810,11 @@
                 </Slider.ToolTip>
             </Slider>
             <TextBox Text="{Binding FontName, UpdateSourceTrigger=PropertyChanged}" 
-                     BorderBrush="{x:Null}" 
+                     Style="{StaticResource TextBoxLeftStyleKey}"
                      Margin="5,2,5,2"
                      Grid.Row="0" 
                      Grid.Column="1" 
-                     Grid.ColumnSpan="2"
-                     TextAlignment="Left" 
-                     VerticalAlignment="Center">
+                     Grid.ColumnSpan="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2283,13 +1823,10 @@
                 </TextBox.ToolTip>
             </TextBox>
             <TextBox Text="{Binding FontFile, UpdateSourceTrigger=PropertyChanged}" 
-                     BorderBrush="{x:Null}" 
-                     Margin="5,2,5,2"
+                     Style="{StaticResource TextBoxLeftStyleKey}"
                      Grid.Row="1" 
                      Grid.Column="1" 
-                     Grid.ColumnSpan="2"
-                     TextAlignment="Left" 
-                     VerticalAlignment="Center">
+                     Grid.ColumnSpan="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2298,12 +1835,9 @@
                 </TextBox.ToolTip>
             </TextBox>
             <TextBox Text="{Binding FontSize, UpdateSourceTrigger=PropertyChanged}" 
-                     BorderBrush="{x:Null}" 
-                     Margin="5,2,5,2"
+                     Style="{StaticResource TextBoxCenterStyleKey}"
                      Grid.Row="2" 
-                     Grid.Column="2" 
-                     TextAlignment="Center" 
-                     VerticalAlignment="Center">
+                     Grid.Column="2">
                 <TextBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2317,11 +1851,11 @@
                      Grid.ColumnSpan="2">
             </Control>
             <ComboBox ItemsSource="{Binding Source={StaticResource ResourceKey=TextHAlignmentValues}}" 
-                      SelectedItem="{Binding TextHAlignment}" 
+                      SelectedItem="{Binding TextHAlignment}"
+                      Style="{StaticResource ComboBoxStyleKey}"
                       Grid.Row="4" 
                       Grid.Column="1" 
-                      Grid.ColumnSpan="2"
-                      Margin="5,2,5,2">
+                      Grid.ColumnSpan="2">
                 <ComboBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2331,10 +1865,10 @@
             </ComboBox>
             <ComboBox ItemsSource="{Binding Source={StaticResource ResourceKey=TextVAlignmentValues}}" 
                       SelectedItem="{Binding TextVAlignment}" 
+                      Style="{StaticResource ComboBoxStyleKey}"
                       Grid.Row="5" 
                       Grid.Column="1" 
-                      Grid.ColumnSpan="2"
-                      Margin="5,2,5,2">
+                      Grid.ColumnSpan="2">
                 <ComboBox.ToolTip>
                     <StackPanel>
                         <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2369,14 +1903,14 @@
                     </Grid.ColumnDefinitions>
                     <Slider
                         Value="{Binding MaxLength}" 
+                        Style="{StaticResource SliderStyleKey}"
                         Minimum="0" 
                         Maximum="30" 
                         TickFrequency="0.1" 
                         SmallChange="0.1"
                         LargeChange="1"
                         IsSnapToTickEnabled="True" 
-                        Grid.Column="0" 
-                        Margin="5,2,5,2">
+                        Grid.Column="0">
                         <Slider.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2386,11 +1920,8 @@
                     </Slider>
                     <TextBox
                         Text="{Binding MaxLength, UpdateSourceTrigger=PropertyChanged}" 
-                        BorderBrush="{x:Null}" 
-                        Margin="5,2,5,2"
-                        Grid.Column="1" 
-                        TextAlignment="Center" 
-                        VerticalAlignment="Center">
+                        Style="{StaticResource TextBoxCenterStyleKey}"
+                        Grid.Column="1" >
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2493,19 +2024,17 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock 
                     Text="IsExecutable" 
-                    Margin="5,2,5,2" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
                     Grid.Row="0"
-                    Grid.Column="0" 
-                    TextAlignment="Left" 
-                    VerticalAlignment="Center">
+                    Grid.Column="0">
                 </TextBlock>
                 <CheckBox 
                     Content=""
                     IsChecked="{Binding Code.IsExecutable}"
+                    Style="{StaticResource CheckBoxStyleKey}"
                     Grid.Row="0" 
                     Grid.Column="1" 
-                    Grid.ColumnSpan="2"
-                    Margin="5,2,5,2">
+                    Grid.ColumnSpan="2">
                     <CheckBox.ToolTip>
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -2524,10 +2053,7 @@
                     </TabItem.ToolTip>
                     <TextBox 
                         Text="{Binding Code.Definitions, UpdateSourceTrigger=PropertyChanged}" 
-                        BorderBrush="{x:Null}" 
-                        Margin="5,2,5,2"
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center"
+                        Style="{StaticResource TextBoxLeftStyleKey}"
                         AcceptsReturn="True"
                         AcceptsTab="True">
                         <TextBox.ToolTip>
@@ -2547,10 +2073,7 @@
                     </TabItem.ToolTip>
                     <TextBox 
                         Text="{Binding Code.Initialization, UpdateSourceTrigger=PropertyChanged}" 
-                        BorderBrush="{x:Null}" 
-                        Margin="5,2,5,2"
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center"
+                        Style="{StaticResource TextBoxLeftStyleKey}"
                         AcceptsReturn="True"
                         AcceptsTab="True">
                         <TextBox.ToolTip>
@@ -2570,10 +2093,7 @@
                     </TabItem.ToolTip>
                     <TextBox 
                         Text="{Binding Code.Script, UpdateSourceTrigger=PropertyChanged}" 
-                        BorderBrush="{x:Null}" 
-                        Margin="5,2,5,2"
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center"
+                        Style="{StaticResource TextBoxLeftStyleKey}"
                         AcceptsReturn="True"
                         AcceptsTab="True">
                         <TextBox.ToolTip>
@@ -2624,7 +2144,11 @@
                 ResizeBehavior="PreviousAndNext" 
                 ShowsPreview="True">
             </GridSplitter>
-            <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,2,0,2" VerticalAlignment="Center" Text="Property">
+            <TextBlock Grid.Column="0" 
+                       Grid.Row="1" 
+                       Margin="5,2,0,2" 
+                       VerticalAlignment="Center" 
+                       Text="Property">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -2636,7 +2160,11 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBlock Grid.Column="2" Grid.Row="1" Margin="0,2,5,2" VerticalAlignment="Center" Text="Path">
+            <TextBlock Grid.Column="2" 
+                       Grid.Row="1" 
+                       Margin="0,2,5,2" 
+                       VerticalAlignment="Center" 
+                       Text="Path">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -2648,13 +2176,16 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" 
-                          Grid.Column="0" Grid.Row="2"
+            <ItemsControl VerticalContentAlignment="Stretch" 
+                          VerticalAlignment="Stretch" 
+                          Grid.Column="0"
+                          Grid.Row="2"
                           ItemsSource="{Binding Bindings, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
-                            <TextBox Margin="5,2,0,2" VerticalAlignment="Center" 
+                            <TextBox Margin="5,2,0,2" 
+                                     VerticalAlignment="Center" 
                                      Text="{Binding Path=Property, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
@@ -2668,8 +2199,10 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             <ItemsControl x:Name="bindingsItemsControls"
-                          VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" 
-                          Grid.Column="2" Grid.Row="2"
+                          VerticalContentAlignment="Stretch" 
+                          VerticalAlignment="Stretch" 
+                          Grid.Column="2" 
+                          Grid.Row="2"
                           ItemsSource="{Binding Bindings, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -2678,7 +2211,9 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" Margin="0,2,5,2" VerticalAlignment="Center" 
+                            <TextBox Grid.Column="0" 
+                                     Margin="0,2,5,2" 
+                                     VerticalAlignment="Center" 
                                      Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
@@ -2687,7 +2222,10 @@
                                     </StackPanel>
                                 </TextBox.ToolTip>
                             </TextBox>
-                            <Button Grid.Column="1" Margin="5,0,5,0" VerticalAlignment="Center" Content="-" 
+                            <Button Grid.Column="1" 
+                                    Margin="5,0,5,0" 
+                                    VerticalAlignment="Center" 
+                                    Content="-" 
                                     Command="{Binding DataContext.Commands.RemoveBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                                 <Button.ToolTip>
                                     <StackPanel>
@@ -2744,7 +2282,11 @@
                 ResizeBehavior="PreviousAndNext" 
                 ShowsPreview="True">
             </GridSplitter>
-            <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,2,0,2" VerticalAlignment="Center" Text="Name">
+            <TextBlock Grid.Column="0" 
+                       Grid.Row="1" 
+                       Margin="5,2,0,2" 
+                       VerticalAlignment="Center" 
+                       Text="Name">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -2756,7 +2298,11 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBlock Grid.Column="2" Grid.Row="1" Margin="0,2,5,2" VerticalAlignment="Center" Text="Value">
+            <TextBlock Grid.Column="2" 
+                       Grid.Row="1" 
+                       Margin="0,2,5,2" 
+                       VerticalAlignment="Center"
+                       Text="Value">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -2768,13 +2314,16 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" 
-                          Grid.Column="0" Grid.Row="2"
+            <ItemsControl VerticalContentAlignment="Stretch" 
+                          VerticalAlignment="Stretch" 
+                          Grid.Column="0" 
+                          Grid.Row="2"
                           ItemsSource="{Binding Properties, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
-                            <TextBox Margin="5,2,0,2" VerticalAlignment="Center" 
+                            <TextBox Margin="5,2,0,2" 
+                                     VerticalAlignment="Center" 
                                      Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
@@ -2788,8 +2337,10 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             <ItemsControl x:Name="propertiesItemsControls"
-                          VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" 
-                          Grid.Column="2" Grid.Row="2"
+                          VerticalContentAlignment="Stretch" 
+                          VerticalAlignment="Stretch" 
+                          Grid.Column="2" 
+                          Grid.Row="2"
                           ItemsSource="{Binding Properties, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -2798,7 +2349,9 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" Margin="0,2,5,2" VerticalAlignment="Center" 
+                            <TextBox Grid.Column="0" 
+                                     Margin="0,2,5,2" 
+                                     VerticalAlignment="Center" 
                                      Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
@@ -2807,7 +2360,10 @@
                                     </StackPanel>
                                 </TextBox.ToolTip>
                             </TextBox>
-                            <Button Grid.Column="1" Margin="5,0,5,0" VerticalAlignment="Center" Content="-" 
+                            <Button Grid.Column="1" 
+                                    Margin="5,0,5,0" 
+                                    VerticalAlignment="Center" 
+                                    Content="-" 
                                     Command="{Binding DataContext.Commands.RemovePropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                                 <Button.ToolTip>
                                     <StackPanel>
@@ -2848,7 +2404,11 @@
                 ResizeBehavior="PreviousAndNext" 
                 ShowsPreview="True">
             </GridSplitter>
-            <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,2,0,2" VerticalAlignment="Center" Text="Name">
+            <TextBlock Grid.Column="0"
+                       Grid.Row="0" 
+                       Margin="5,2,0,2" 
+                       VerticalAlignment="Center" 
+                       Text="Name">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -2860,7 +2420,11 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBlock Grid.Column="2" Grid.Row="0" Margin="0,2,5,2" VerticalAlignment="Center" Text="Value">
+            <TextBlock Grid.Column="2" 
+                       Grid.Row="0" 
+                       Margin="0,2,5,2" 
+                       VerticalAlignment="Center" 
+                       Text="Value">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -2872,8 +2436,10 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" 
-                          Grid.Column="0" Grid.Row="1"
+            <ItemsControl VerticalContentAlignment="Stretch" 
+                          VerticalAlignment="Stretch" 
+                          Grid.Column="0" 
+                          Grid.Row="1"
                           ItemsSource="{Binding ShapesProperties, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -2891,13 +2457,16 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" 
-                          Grid.Column="2" Grid.Row="1"
+            <ItemsControl VerticalContentAlignment="Stretch" 
+                          VerticalAlignment="Stretch" 
+                          Grid.Column="2" 
+                          Grid.Row="1"
                           ItemsSource="{Binding ShapesProperties, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
-                            <TextBox Margin="0,2,5,2" VerticalAlignment="Center" 
+                            <TextBox Margin="0,2,5,2" 
+                                     VerticalAlignment="Center" 
                                      Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
@@ -2946,7 +2515,11 @@
                 ResizeBehavior="PreviousAndNext" 
                 ShowsPreview="True">
             </GridSplitter>
-            <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,2,0,2" VerticalAlignment="Center" Text="Name">
+            <TextBlock Grid.Column="0" 
+                       Grid.Row="0" 
+                       Margin="5,2,0,2" 
+                       VerticalAlignment="Center" 
+                       Text="Name">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -2958,7 +2531,11 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBlock Grid.Column="2" Grid.Row="0" Margin="0,2,5,2" VerticalAlignment="Center" Text="Value">
+            <TextBlock Grid.Column="2" 
+                       Grid.Row="0" 
+                       Margin="0,2,5,2" 
+                       VerticalAlignment="Center" 
+                       Text="Value">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -2970,8 +2547,10 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" 
-                          Grid.Row="1" Grid.Column="0"
+            <ItemsControl VerticalContentAlignment="Stretch" 
+                          VerticalAlignment="Stretch" 
+                          Grid.Row="1" 
+                          Grid.Column="0"
                           ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -2989,13 +2568,16 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" 
-                          Grid.Row="1" Grid.Column="2"
+            <ItemsControl VerticalContentAlignment="Stretch" 
+                          VerticalAlignment="Stretch" 
+                          Grid.Row="1" 
+                          Grid.Column="2"
                           ItemsSource="{Binding Values, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
-                            <TextBox Margin="0,2,5,2" VerticalAlignment="Center" 
+                            <TextBox Margin="0,2,5,2" 
+                                     VerticalAlignment="Center" 
                                      Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
@@ -3063,10 +2645,17 @@
                     <RowDefinition/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="Name"/>
+                <TextBlock Grid.Column="0" 
+                           Grid.Row="0"
+                           Margin="5,2,5,2" 
+                           VerticalAlignment="Center" 
+                           Text="Name">
+                </TextBlock>
             </Grid>
             <ItemsControl x:Name="columnsItemsControls"
-                          VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2"
+                          VerticalContentAlignment="Stretch" 
+                          VerticalAlignment="Stretch" 
+                          Grid.Row="2"
                           ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -3080,7 +2669,10 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <TextBox Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" 
+                            <TextBox Grid.Column="0" 
+                                     Grid.Row="0"
+                                     Margin="5,2,5,2" 
+                                     VerticalAlignment="Center" 
                                      Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.ToolTip>
                                     <StackPanel>
@@ -3089,7 +2681,11 @@
                                     </StackPanel>
                                 </TextBox.ToolTip>
                             </TextBox>
-                            <Button Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Content="-" 
+                            <Button Grid.Column="1" 
+                                    Grid.Row="0" 
+                                    Margin="5,2,5,2" 
+                                    VerticalAlignment="Center" 
+                                    Content="-" 
                                     Command="{Binding DataContext.Commands.RemoveColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                                 <Button.ToolTip>
                                     <StackPanel>
@@ -3185,19 +2781,14 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="X" 
-                                   Margin="5,2,5,2" 
+                                   Style="{StaticResource TextBlockLeftStyleKey}"
                                    Grid.Row="0" 
-                                   Grid.Column="0" 
-                                   TextAlignment="Left" 
-                                   VerticalAlignment="Center">
+                                   Grid.Column="0">
                         </TextBlock>
                         <TextBox Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" 
-                                 BorderBrush="{x:Null}" 
-                                 Margin="5,2,5,2"
+                                 Style="{StaticResource TextBoxLeftStyleKey}"
                                  Grid.Row="0" 
-                                 Grid.Column="1" 
-                                 TextAlignment="Left" 
-                                 VerticalAlignment="Center">
+                                 Grid.Column="1">
                             <TextBox.ToolTip>
                                 <StackPanel>
                                     <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -3215,19 +2806,14 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Y" 
-                                   Margin="5,2,5,2" 
+                                  Style="{StaticResource TextBlockLeftStyleKey}"
                                    Grid.Row="0" 
-                                   Grid.Column="0" 
-                                   TextAlignment="Left" 
-                                   VerticalAlignment="Center">
+                                   Grid.Column="0">
                         </TextBlock>
                         <TextBox Text="{Binding Y, UpdateSourceTrigger=PropertyChanged}" 
-                                 BorderBrush="{x:Null}" 
-                                 Margin="5,2,5,2"
+                                 Style="{StaticResource TextBoxLeftStyleKey}"
                                  Grid.Row="0" 
-                                 Grid.Column="1" 
-                                 TextAlignment="Left" 
-                                 VerticalAlignment="Center">
+                                 Grid.Column="1">
                             <TextBox.ToolTip>
                                 <StackPanel>
                                     <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -3758,11 +3344,9 @@
             <Control Template="{StaticResource TextControlTemplateKey}"/>
             <Expander Header="Path">
                 <Grid>
-                    <TextBox Text="{Binding Path, UpdateSourceTrigger=PropertyChanged}" 
-                                BorderBrush="{x:Null}" 
-                                Margin="5,2,5,2"
-                                TextAlignment="Left" 
-                                VerticalAlignment="Center">
+                    <TextBox 
+                        Text="{Binding Path, UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource TextBoxLeftStyleKey}">
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -3903,7 +3487,8 @@
                     </controls:GroupShapesDragAndDropListBox>
                     <ContentControl 
                         Content="{Binding ElementName=shapesListBox, Path=SelectedItem}" 
-                        Grid.Row="1" Margin="5,2,5,2">
+                        Grid.Row="1" 
+                        Margin="5,2,5,2">
                     </ContentControl>
                 </Grid>
             </TabItem>
@@ -3933,7 +3518,8 @@
                     </controls:GroupConnectorsDragAndDropListBox>
                     <ContentControl 
                         Content="{Binding ElementName=connectorsListBox, Path=SelectedItem}" 
-                        Grid.Row="1" Margin="5,2,5,2">
+                        Grid.Row="1" 
+                        Margin="5,2,5,2">
                     </ContentControl>
                 </Grid>
             </TabItem>
@@ -4016,13 +3602,11 @@
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
             <Expander Header="Source">
                 <Grid>
-                    <TextBox Text="{Binding Source, UpdateSourceTrigger=PropertyChanged}" 
-                                AcceptsReturn="True"
-                                AcceptsTab="True"
-                                BorderBrush="{x:Null}" 
-                                Margin="5,2,5,2"
-                                TextAlignment="Left" 
-                                VerticalAlignment="Center">
+                    <TextBox 
+                        Text="{Binding Source, UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource TextBoxLeftStyleKey}"
+                        AcceptsReturn="True"
+                        AcceptsTab="True">
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
@@ -4298,67 +3882,53 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock 
                         Text="{x:Static p:Resources.OptionsSnapToGrid}" 
-                        Margin="5,2,5,2" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
                         Grid.Row="0"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                        Grid.Column="0">
                     </TextBlock>
                     <TextBlock 
                         Text="{x:Static p:Resources.OptionsSnapX}" 
-                        Margin="5,2,5,2" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
                         Grid.Row="1" 
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                        Grid.Column="0">
                     </TextBlock>
                     <TextBlock 
                         Text="{x:Static p:Resources.OptionsSnapY}" 
-                        Margin="5,2,5,2" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
                         Grid.Row="2" 
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                        Grid.Column="0">
                     </TextBlock>
                     <TextBlock 
                         Text="{x:Static p:Resources.OptionsHitTreshold}" 
-                        Margin="5,2,5,2" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
                         Grid.Row="3" 
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                        Grid.Column="0">
                     </TextBlock>
                     <TextBlock 
                         Text="{x:Static p:Resources.OptionsMoveMode}" 
-                        Margin="5,2,5,2" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
                         Grid.Row="4"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                        Grid.Column="0">
                     </TextBlock>
                     <TextBlock 
                         Text="{x:Static p:Resources.OptionsTryToConnect}" 
-                        Margin="5,2,5,2" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
                         Grid.Row="5"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                        Grid.Column="0">
                     </TextBlock>
                     <TextBlock 
                         Text="{x:Static p:Resources.OptionsCycleResolution}" 
-                        Margin="5,2,5,2" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
                         Grid.Row="6"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                        Grid.Column="0">
                     </TextBlock>
                     <CheckBox 
                         Content=""
                         IsChecked="{Binding SnapToGrid}"
+                        Style="{StaticResource CheckBoxStyleKey}"
                         Grid.Row="0" 
                         Grid.Column="1" 
-                        Grid.ColumnSpan="2"
-                        Margin="5,2,5,2">
+                        Grid.ColumnSpan="2">
                         <CheckBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipSnapToGrid}"/>
@@ -4368,13 +3938,10 @@
                     </CheckBox>
                     <TextBox 
                         Text="{Binding SnapX, UpdateSourceTrigger=PropertyChanged}" 
-                        BorderBrush="{x:Null}" 
-                        Margin="5,2,5,2"
+                        Style="{StaticResource TextBoxLeftStyleKey}"
                         Grid.Row="1" 
                         Grid.Column="1" 
-                        Grid.ColumnSpan="2"
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                        Grid.ColumnSpan="2">
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipSnapX}"/>
@@ -4384,13 +3951,10 @@
                     </TextBox>
                     <TextBox 
                         Text="{Binding SnapY, UpdateSourceTrigger=PropertyChanged}" 
-                        BorderBrush="{x:Null}" 
-                        Margin="5,2,5,2"
+                        Style="{StaticResource TextBoxLeftStyleKey}"
                         Grid.Row="2" 
                         Grid.Column="1" 
-                        Grid.ColumnSpan="2"
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                        Grid.ColumnSpan="2">
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipSnapY}"/>
@@ -4400,13 +3964,10 @@
                     </TextBox>
                     <TextBox 
                         Text="{Binding HitTreshold, UpdateSourceTrigger=PropertyChanged}" 
-                        BorderBrush="{x:Null}" 
-                        Margin="5,2,5,2"
+                        Style="{StaticResource TextBoxLeftStyleKey}"
                         Grid.Row="3" 
                         Grid.Column="1" 
-                        Grid.ColumnSpan="2"
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                        Grid.ColumnSpan="2">
                         <TextBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipHitTreshold}"/>
@@ -4417,7 +3978,7 @@
                     <ComboBox 
                         ItemsSource="{Binding Source={StaticResource ResourceKey=MoveModeValues}}" 
                         SelectedItem="{Binding MoveMode}" 
-                        Margin="5,2,5,2" 
+                        Style="{StaticResource ComboBoxStyleKey}" 
                         Grid.Row="4" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
@@ -4431,10 +3992,10 @@
                     <CheckBox 
                         Content=""
                         IsChecked="{Binding TryToConnect}"
+                        Style="{StaticResource CheckBoxStyleKey}"
                         Grid.Row="5" 
                         Grid.Column="1" 
-                        Grid.ColumnSpan="2"
-                        Margin="5,2,5,2">
+                        Grid.ColumnSpan="2">
                         <CheckBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipTryToConnect}"/>
@@ -4482,51 +4043,41 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock 
                         Text="{x:Static p:Resources.OptionsDefaultIsStroked}" 
-                        Margin="5,2,5,2" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
                         Grid.Row="0"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                        Grid.Column="0">
                     </TextBlock>
                     <TextBlock 
                         Text="{x:Static p:Resources.OptionsDefaultIsFilled}" 
-                        Margin="5,2,5,2" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
                         Grid.Row="1"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                        Grid.Column="0">
                     </TextBlock>
                     <TextBlock 
                         Text="{x:Static p:Resources.OptionsDefaultIsClosed}" 
-                        Margin="5,2,5,2" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
                         Grid.Row="2"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                        Grid.Column="0">
                     </TextBlock>
                     <TextBlock 
                         Text="{x:Static p:Resources.OptionsDefaultIsSmoothJoin}" 
-                        Margin="5,2,5,2" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
                         Grid.Row="3"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                        Grid.Column="0">
                     </TextBlock>
                     <TextBlock 
                         Text="{x:Static p:Resources.OptionsDefaultFillRule}" 
-                        Margin="5,2,5,2" 
+                        Style="{StaticResource TextBlockLeftStyleKey}" 
                         Grid.Row="4"
-                        Grid.Column="0" 
-                        TextAlignment="Left" 
-                        VerticalAlignment="Center">
+                        Grid.Column="0">
                     </TextBlock>
                     <CheckBox 
                         Content=""
                         IsChecked="{Binding DefaultIsStroked}"
+                        Style="{StaticResource CheckBoxStyleKey}"
                         Grid.Row="0" 
                         Grid.Column="1" 
-                        Grid.ColumnSpan="2"
-                        Margin="5,2,5,2">
+                        Grid.ColumnSpan="2">
                         <CheckBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipDefaultIsStroked}"/>
@@ -4537,10 +4088,10 @@
                     <CheckBox 
                         Content=""
                         IsChecked="{Binding DefaultIsFilled}"
+                        Style="{StaticResource CheckBoxStyleKey}"
                         Grid.Row="1" 
                         Grid.Column="1" 
-                        Grid.ColumnSpan="2"
-                        Margin="5,2,5,2">
+                        Grid.ColumnSpan="2">
                         <CheckBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipDefaultIsFilled}"/>
@@ -4551,10 +4102,10 @@
                     <CheckBox 
                         Content=""
                         IsChecked="{Binding DefaultIsClosed}"
+                        Style="{StaticResource CheckBoxStyleKey}"
                         Grid.Row="2" 
                         Grid.Column="1" 
-                        Grid.ColumnSpan="2"
-                        Margin="5,2,5,2">
+                        Grid.ColumnSpan="2">
                         <CheckBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipDefaultIsClosed}"/>
@@ -4565,10 +4116,10 @@
                     <CheckBox 
                         Content=""
                         IsChecked="{Binding DefaultIsSmoothJoin}"
+                        Style="{StaticResource CheckBoxStyleKey}"
                         Grid.Row="3" 
                         Grid.Column="1" 
-                        Grid.ColumnSpan="2"
-                        Margin="5,2,5,2">
+                        Grid.ColumnSpan="2">
                         <CheckBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.OptionsTooltipDefaultIsSmoothJoin}"/>
@@ -4579,7 +4130,7 @@
                     <ComboBox 
                         ItemsSource="{Binding Source={StaticResource ResourceKey=XFillRuleValues}}" 
                         SelectedItem="{Binding DefaultFillRule}" 
-                        Margin="5,2,5,2" 
+                        Style="{StaticResource ComboBoxStyleKey}"
                         Grid.Row="4" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
@@ -4660,13 +4211,10 @@
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
                 <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
+                         Style="{StaticResource TextBoxLeftStyleKey}"
                          Grid.Row="0" 
                          Grid.Column="0" 
-                         Grid.ColumnSpan="2"
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
+                         Grid.ColumnSpan="2">
                     <TextBox.ToolTip>
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ProjectTooltipName}"/>
@@ -4695,12 +4243,9 @@
                            VerticalAlignment="Center">
                 </TextBlock>
                 <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
+                         Style="{StaticResource TextBoxLeftStyleKey}"
                          Grid.Row="0" 
-                         Grid.Column="1" 
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
+                         Grid.Column="1">
                     <TextBox.ToolTip>
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.DocumentTooltipName}"/>
@@ -4730,11 +4275,9 @@
                 </TextBlock>
                 <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                          BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
+                         Style="{StaticResource TextBoxLeftStyleKey}"
                          Grid.Row="0" 
-                         Grid.Column="1" 
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
+                         Grid.Column="1">
                     <TextBox.ToolTip>
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipName}"/>
@@ -4753,26 +4296,19 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{x:Static p:Resources.ContainerWidth}" 
-                           Margin="5,2,5,2" 
+                           Style="{StaticResource TextBlockLeftStyleKey}" 
                            Grid.Row="0" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
+                           Grid.Column="0">
                 </TextBlock>
                 <TextBlock Text="{x:Static p:Resources.ContainerHeight}" 
-                           Margin="5,2,5,2" 
+                           Style="{StaticResource TextBlockLeftStyleKey}"
                            Grid.Row="1" 
-                           Grid.Column="0" 
-                           TextAlignment="Left" 
-                           VerticalAlignment="Center">
+                           Grid.Column="0">
                 </TextBlock>
                 <TextBox Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
-                         BorderBrush="{x:Null}"
-                         Margin="5,2,5,2"
+                         Style="{StaticResource TextBoxLeftStyleKey}"
                          Grid.Row="0" 
-                         Grid.Column="1" 
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
+                         Grid.Column="1">
                     <TextBox.ToolTip>
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipWidth}"/>
@@ -4781,12 +4317,9 @@
                     </TextBox.ToolTip>
                 </TextBox>
                 <TextBox Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
-                         BorderBrush="{x:Null}" 
-                         Margin="5,2,5,2"
+                         Style="{StaticResource TextBoxLeftStyleKey}"
                          Grid.Row="1" 
-                         Grid.Column="1" 
-                         TextAlignment="Left" 
-                         VerticalAlignment="Center">
+                         Grid.Column="1">
                     <TextBox.ToolTip>
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipHeight}"/>
@@ -4815,7 +4348,7 @@
                     <ComboBox 
                         ItemsSource="{Binding Path=DataContext.Editor.Project.Templates, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                         SelectedItem="{Binding Path=DataContext.Template, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" 
-                        Margin="5,2,5,2">
+                        Style="{StaticResource ComboBoxStyleKey}">
                         <ComboBox.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.ContainerTooltipTemplate}"/>
@@ -4920,6 +4453,6 @@
                     <controls:LayerElement DataContext="{Binding HelperLayer}"/>
                 </controls:EditorCanvas>
             </Grid>
-            </Border>
+        </Border>
     </ControlTemplate>
 </ResourceDictionary>
