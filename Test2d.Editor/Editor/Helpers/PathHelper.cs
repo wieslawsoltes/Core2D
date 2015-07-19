@@ -20,6 +20,7 @@ namespace Test2d
         private XPathGeometry _geometry;
         private bool _isInitialized = false;
         private PathTool _previousPathTool;
+        private PathTool _movePathTool;
         // line
         private XPoint _lineStart;
         private XPoint _lineEnd;
@@ -1124,9 +1125,54 @@ namespace Test2d
                         QBezierLeftDown(x, y);
                     }
                     break;
+                case PathTool.Move:
+                    {
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                    }
+                    break;
+            }
+
+            if (_editor.CurrentPathTool == PathTool.Move)
+            {
+                _movePathTool = _previousPathTool;
             }
 
             _previousPathTool = _editor.CurrentPathTool;
+        }
+
+        private void StartFigureLeftDown(double x, double y)
+        {
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+
+            // start new figure
+            var start = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+            _geometry.BeginFigure(
+                start,
+                _editor.Project.Options.DefaultIsFilled,
+                _editor.Project.Options.DefaultIsClosed);
+
+            // switch to path tool before Move tool
+            _editor.CurrentPathTool = _movePathTool;
+            SwitchPathTool(x, y);
+        }
+
+        private void StartFigureMove(double x, double y)
+        {
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            switch (_currentState)
+            {
+                case State.None:
+                    {
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            _editor.TryToHoverShape(sx, sy);
+                        }
+                    }
+                    break;
+            }
         }
 
         /// <summary>
@@ -1162,6 +1208,11 @@ namespace Test2d
                 case PathTool.QBezier:
                     {
                         QBezierLeftDown(x, y);
+                    }
+                    break;
+                case PathTool.Move:
+                    {
+                        StartFigureLeftDown(x, y);
                     }
                     break;
             }
@@ -1249,6 +1300,11 @@ namespace Test2d
                 case PathTool.QBezier:
                     {
                         QBezierMove(x, y);
+                    }
+                    break;
+                case PathTool.Move:
+                    {
+                        StartFigureMove(x, y);
                     }
                     break;
             }
