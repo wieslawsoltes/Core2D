@@ -1390,6 +1390,17 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public void OnToolMove()
+        {
+            if (_editor.CurrentTool == Tool.Path && _editor.CurrentPathTool != PathTool.Move)
+            {
+                _editor.CurrentPathTool = PathTool.Move;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void OnToggleDefaultIsStroked()
         {
             if (_editor.Project == null || _editor.Project.Options == null)
@@ -3738,6 +3749,11 @@ namespace Test2d
                         () => OnToolImage(),
                         () => IsEditMode());
 
+                _commands.ToolMoveCommand =
+                    new DelegateCommand(
+                        () => OnToolMove(),
+                        () => IsEditMode());
+
                 _commands.EvalScriptCommand =
                     new DelegateCommand<string>(
                         (path) => Eval(path),
@@ -4142,9 +4158,9 @@ namespace Test2d
             (_commands.ToolRectangleCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolEllipseCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolPathCommand as DelegateCommand).RaiseCanExecuteChanged();
-
             (_commands.ToolTextCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolImageCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolMoveCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.EvalCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.EvalScriptCommand as DelegateCommand<string>).RaiseCanExecuteChanged();
