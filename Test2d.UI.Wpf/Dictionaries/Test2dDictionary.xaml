@@ -170,7 +170,7 @@
         <Setter Property="TextAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-    <Style x:Key="TextBoxLeftStyleKey" TargetType="TextBox">
+    <Style x:Key="TextBoxLeftStyleKey" TargetType="TextBox" BasedOn="{StaticResource ToolTipTextBoxStyleKey}">
         <Setter Property="BorderBrush" Value="{x:Null}"/>
         <Setter Property="Margin" Value="5,2,5,2"/>
         <Setter Property="TextAlignment" Value="Left"/>
@@ -181,19 +181,19 @@
         <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-    <Style x:Key="TextBoxCenterStyleKey" TargetType="TextBox">
+    <Style x:Key="TextBoxCenterStyleKey" TargetType="TextBox" BasedOn="{StaticResource ToolTipTextBoxStyleKey}">
         <Setter Property="BorderBrush" Value="{x:Null}"/>
         <Setter Property="Margin" Value="5,2,5,2"/>
         <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-    <Style x:Key="CheckBoxStyleKey" TargetType="CheckBox">
+    <Style x:Key="CheckBoxStyleKey" TargetType="CheckBox" BasedOn="{StaticResource ToolTipCheckBoxStyleKey}">
         <Setter Property="Margin" Value="5,2,5,2"/>
     </Style>
-    <Style x:Key="ComboBoxStyleKey" TargetType="ComboBox">
+    <Style x:Key="ComboBoxStyleKey" TargetType="ComboBox" BasedOn="{StaticResource ToolTipComboBoxStyleKey}">
         <Setter Property="Margin" Value="5,2,5,2"/>
     </Style>
-    <Style x:Key="SliderStyleKey" TargetType="Slider">
+    <Style x:Key="SliderStyleKey" TargetType="Slider" BasedOn="{StaticResource ToolTipSliderStyleKey}">
         <Setter Property="Margin" Value="5,2,5,2"/>
     </Style>
     <!-- common -->
@@ -216,14 +216,10 @@
                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                 BorderBrush="{x:Null}" 
                 Style="{StaticResource TextBoxLeftStyleKey}"
+                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
+                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="0" 
                 Grid.Column="1">
-                <TextBox.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                    </StackPanel>
-                </TextBox.ToolTip>
             </TextBox>
         </Grid>
     </ControlTemplate>
@@ -246,14 +242,10 @@
                 Content=""
                 IsChecked="{Binding IsStroked}"
                 Style="{StaticResource CheckBoxStyleKey}"
+                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
+                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="0" 
                 Grid.Column="1">
-                <CheckBox.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                    </StackPanel>
-                </CheckBox.ToolTip>
             </CheckBox>
         </Grid>
     </ControlTemplate>
@@ -276,14 +268,10 @@
                 Content=""
                 IsChecked="{Binding IsFilled}"
                 Style="{StaticResource CheckBoxStyleKey}"
+                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
+                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="0" 
                 Grid.Column="1">
-                <CheckBox.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                    </StackPanel>
-                </CheckBox.ToolTip>
             </CheckBox>
         </Grid>
     </ControlTemplate>
@@ -306,14 +294,10 @@
                 Content=""
                 IsChecked="{Binding IsSmoothJoin}"
                 Style="{StaticResource CheckBoxStyleKey}"
+                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
+                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="0" 
                 Grid.Column="1">
-                <CheckBox.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                    </StackPanel>
-                </CheckBox.ToolTip>
             </CheckBox>
         </Grid>
     </ControlTemplate>
@@ -336,14 +320,10 @@
                 Content=""
                 IsChecked="{Binding IsClosed}"
                 Style="{StaticResource CheckBoxStyleKey}"
+                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
+                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="0" 
                 Grid.Column="1">
-                <CheckBox.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" Text="{x:Static p:Resources.TODO}"/>
-                        <TextBlock Text="{x:Static p:Resources.TODO}"/>
-                    </StackPanel>
-                </CheckBox.ToolTip>
             </CheckBox>
         </Grid>
     </ControlTemplate>
