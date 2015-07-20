@@ -213,7 +213,7 @@ namespace Test2d
 
             project.CurrentTemplate = project.Templates.FirstOrDefault(t => t.Name == "Grid");
 
-            var document = GetDocument(project, "Dcoument");
+            var document = GetDocument(project, "Document");
             var container = GetContainer(project, "Container");
 
             var containerBuilder = document.Containers.ToBuilder();
