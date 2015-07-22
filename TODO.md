@@ -2,13 +2,13 @@
 
 ## UI
 
+* Main window tooltips.
 * Main menu tooltips.
-* Add toolbar control.
-* Add application icon.
+* Controls tooltips.
+* Properties tooltips.
 
 ## Editor
 
-* Add Move path tool to start new path figures.
 * Add Reference shape handling.
 * Improve image Uri handling.
 * Add undo/redo for all property changes.
