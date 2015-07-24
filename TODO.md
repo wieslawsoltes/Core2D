@@ -2,7 +2,6 @@
 
 ## UI
 
-* Main window tooltips.
 * Main menu tooltips.
 * Controls tooltips.
 * Properties tooltips.
