@@ -50,7 +50,7 @@ Test2d [simulation mode description](SIMULATION.md).
 
 ## TODO
 
-Test2d [TODO list](TODO.md).
+Test2d [TODO](TODO.md) list.
 
 ## Contact
 
