@@ -48,6 +48,10 @@ Test2d [simulation mode description](SIMULATION.md).
 * https://www.myget.org/F/roslyn-nightly/
 * https://www.myget.org/F/eto/
 
+## TODO
+
+Test2d [TODO list](TODO.md).
+
 ## Contact
 
 https://github.com/wieslawsoltes/Test2d
