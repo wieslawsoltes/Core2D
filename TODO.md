@@ -8,16 +8,16 @@
 
 ## Editor
 
-* Add Reference shape handling.
+* Add reference shape handling.
 * Improve image Uri handling.
-* Add undo/redo for all property changes.
-* Detach connector point from group when moving.
+* Add undo/redo for property changes.
+* Detach connector from group on move.
 
 ## Database
 
-* Add IsVisible property to column.
+* Add IsVisible column property.
 * Database default row values.
-* Database editor with data grid.
+* Database editor using data grid.
 * Open exported database format.
 * Filter database records.
 
