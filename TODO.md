@@ -17,7 +17,6 @@
 
 * Add IsVisible column property.
 * Database default row values.
-* Database editor using data grid.
 * Open exported database format.
 * Filter database records.
 
