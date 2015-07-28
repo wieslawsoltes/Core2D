@@ -2,9 +2,7 @@
 
 ## UI
 
-* Main menu tooltips.
-* Controls tooltips.
-* Properties tooltips.
+* Tooltips.
 
 ## Editor
 
