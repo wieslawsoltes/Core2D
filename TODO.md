@@ -2,7 +2,7 @@
 
 ## UI
 
-* Tooltips.
+* Menu and control tooltips.
 
 ## Editor
 
