@@ -10,6 +10,7 @@
 * Improve image Uri handling.
 * Add undo/redo for property changes.
 * Detach connector from group on move.
+* Snap modes for lines.
 
 ## Database
 
