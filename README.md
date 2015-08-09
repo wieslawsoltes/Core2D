@@ -14,9 +14,11 @@ Test2d is an application for making data driven 2D diagrams.
 ### NuGet Packages
 
 * System.Collections.Immutable
-* Prism.Mvvm
 * Newtonsoft.Json
+* CsvHelper
 * PDFsharp-wpf (Core PDFsharp does not implement XGraphicsPath.AddArc method.)
+* PDFsharp (Core PDFsharp for WinForms Linux builds.)
+* Prism.Mvvm
 * System.Windows.Interactivity.WPF
 * Xceed.Wpf.AvalonDock
 * Xceed.Products.Wpf.Toolkit.AvalonDock
