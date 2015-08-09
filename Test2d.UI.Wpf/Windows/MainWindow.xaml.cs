@@ -523,112 +523,6 @@ namespace Test.Windows
         /// <summary>
         /// 
         /// </summary>
-        private void OnEval()
-        {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            var dlg = new OpenFileDialog()
-            {
-                Filter = "C# (*.cs)|*.cs|All (*.*)|*.*",
-                FilterIndex = 0,
-                FileName = "",
-                Multiselect = true
-            };
-
-            if (dlg.ShowDialog() == true)
-            {
-                foreach (var path in dlg.FileNames)
-                {
-                    context.Eval(path);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void OnImportShapeCode()
-        {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            var shape = context.Editor.Renderers[0].State.SelectedShape;
-            if (shape == null)
-                return;
-
-            try
-            {
-                var dlg = new OpenFileDialog()
-                {
-                    Filter = "Code (*.code)|*.code|All (*.*)|*.*",
-                    FilterIndex = 0,
-                    FileName = ""
-                };
-
-                if (dlg.ShowDialog() == true)
-                {
-                    context.ImportShapeCode(dlg.FileName, shape);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (context.Editor.Log != null)
-                {
-                    context.Editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void OnExportShapeCode()
-        {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            var shape = context.Editor.Renderers[0].State.SelectedShape;
-            if (shape == null)
-                return;
-
-            try
-            {
-                string name = "shape";
-
-                var dlg = new SaveFileDialog()
-                {
-                    Filter = "Code (*.code)|*.code|All (*.*)|*.*",
-                    FilterIndex = 0,
-                    FileName = name
-                };
-
-                if (dlg.ShowDialog() == true)
-                {
-                    context.ExportShapeCode(dlg.FileName, shape);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (context.Editor.Log != null)
-                {
-                    context.Editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         private void OnZoomReset()
         {
             panAndZoomGrid.ResetZoomAndPan();
@@ -890,11 +784,8 @@ namespace Test.Windows
                 View = this,
                 Renderers = new IRenderer[] { new WpfRenderer(), new WpfRenderer() },
                 ProjectFactory = new ProjectFactory(),
-                SimulationTimer = new SimulationTimer(),
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),
-                ScriptEngine = new RoslynScriptEngine(),
-                CodeEngine = new RoslynCodeEngine(),
                 PdfWriter = new PdfWriter(),
                 DxfWriter = new DxfWriter(),
                 CsvReader = new CsvHelperReader(),
@@ -902,7 +793,6 @@ namespace Test.Windows
             };
 
             context.InitializeEditor();
-            context.InitializeScripts();
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
             context.Editor.Renderers[1].State.DrawShapeState = ShapeState.Visible;
             context.Editor.GetImagePath = () => GetImagePath();
@@ -977,8 +867,6 @@ namespace Test.Windows
             _layouts.Add("state", shapesWindow);
             _layouts.Add("data", shapesWindow);
             _layouts.Add("code", shapesWindow);
-            _layouts.Add("script", scriptWindow);
-            _layouts.Add("scripts", scriptsWindow);
         }
 
         /// <summary>
@@ -1126,22 +1014,7 @@ namespace Test.Windows
                 new DelegateCommand(
                     () => OnCopyAsEmf(),
                     () => context.IsEditMode());
-
-            context.Commands.EvalCommand =
-                new DelegateCommand(
-                    () => OnEval(),
-                    () => context.IsEditMode());
-
-            context.Commands.ImportShapeCodeCommand =
-                new DelegateCommand(
-                    () => OnImportShapeCode(),
-                    () => context.IsEditMode());
-
-            context.Commands.ExportShapeCodeCommand =
-                new DelegateCommand(
-                    () => OnExportShapeCode(),
-                    () => context.IsEditMode());
-
+            
             context.Commands.ZoomResetCommand =
                 new DelegateCommand(
                     () => OnZoomReset(),
@@ -1180,16 +1053,6 @@ namespace Test.Windows
             context.Commands.DatabaseWindowCommand =
                 new DelegateCommand(
                     () => (_layouts["database"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            context.Commands.ScriptWindowCommand =
-                new DelegateCommand(
-                    () => (_layouts["script"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            context.Commands.ScriptsWindowCommand = 
-                new DelegateCommand(
-                    () => (_layouts["scripts"] as LayoutAnchorable).Show(),
                     () => true);
 
             //context.Commands.ContainerWindowCommand = 

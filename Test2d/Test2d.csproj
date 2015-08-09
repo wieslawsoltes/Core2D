@@ -31,46 +31,6 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Test2d.XML</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\x64\Debug\Test2d.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\x64\Release\Test2d.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\x86\Debug\Test2d.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\x86\Release\Test2d.XML</DocumentationFile>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -87,9 +47,18 @@
   <ItemGroup>
     <Compile Include="Binding\PropertyBinding.cs" />
     <Compile Include="Binding\PropertyBindingMode.cs" />
+    <Compile Include="Math\Arc\GdiArc.cs" />
+    <Compile Include="Math\Arc\WpfArc.cs" />
+    <Compile Include="Math\Core\Point2.cs" />
+    <Compile Include="Math\Core\Polygon2.cs" />
+    <Compile Include="Math\Core\Rect2.cs" />
+    <Compile Include="Math\Core\Size2.cs" />
+    <Compile Include="Math\Core\Vector2.cs" />
+    <Compile Include="Math\MathHelpers.cs" />
+    <Compile Include="Math\MonotoneChain.cs" />
+    <Compile Include="Math\Sat.cs" />
     <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="Shapes\XReference.cs" />
-    <Compile Include="Simulation\Clock.cs" />
     <Compile Include="Data\Column.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="Data\Record.cs" />
@@ -133,7 +102,6 @@
     <Compile Include="Shapes\XText.cs" />
     <Compile Include="Shape\BaseShape.cs" />
     <Compile Include="Shape\ShapeBinding.cs" />
-    <Compile Include="Shape\ShapeCode.cs" />
     <Compile Include="Shape\ShapeProperty.cs" />
     <Compile Include="Shape\ShapePropertyExtensions.cs" />
     <Compile Include="Shape\ShapeState.cs" />

@@ -51,18 +51,14 @@ namespace TestWinForms
                 View = this,
                 Renderers = new IRenderer[] { new EmfRenderer(72.0 / 96.0) },
                 ProjectFactory = new ProjectFactory(),
-                SimulationTimer = new SimulationTimer(),
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),
-                ScriptEngine = new RoslynScriptEngine(),
-                CodeEngine = new RoslynCodeEngine(),
                 PdfWriter = new PdfWriter(),
                 DxfWriter = new DxfWriter(),
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter()
             };
             context.InitializeEditor();
-            context.InitializeScripts();
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
 
             DataContext = context;
@@ -198,18 +194,6 @@ namespace TestWinForms
                         break;
                 }
             };
-
-            // eval script
-            this.openFileDialog2.FileOk += (sender, e) =>
-            {
-                var context = DataContext as EditorContext;
-                if (context == null)
-                    return;
-
-                string path = openFileDialog2.FileName;
-                int filterIndex = openFileDialog2.FilterIndex;
-                context.Eval(path);
-            };
         }
 
         /// <summary>
@@ -335,9 +319,6 @@ namespace TestWinForms
             defaultIsFilledToolStripMenuItem.Click += (sender, e) => OnSetDefaultIsFilled();
             snapToGridToolStripMenuItem.Click += (sender, e) => OnSetSnapToGrid();
             tryToConnectToolStripMenuItem.Click += (sender, e) => OnSetTryToConnect();
-
-            // Script
-            evaluateToolStripMenuItem.Click += (sender, e) => OnEval();
         }
 
         /// <summary>
@@ -629,16 +610,6 @@ namespace TestWinForms
 
             context.Commands.ToolImageCommand.Execute(null);
             UpdateToolMenu();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void OnEval()
-        {
-            openFileDialog2.Filter = "C# (*.cs)|*.cs|All (*.*)|*.*";
-            openFileDialog2.FilterIndex = 0;
-            openFileDialog2.ShowDialog(this);
         }
 
         /// <summary>

@@ -58,56 +58,9 @@
     <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>bin\x64\Debug\Test2d.UI.Wpf.XML</DocumentationFile>
-    <DebugType>Full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>bin\x64\Release\Test2d.UI.Wpf.XML</DocumentationFile>
-    <Optimize>true</Optimize>
-    <DebugType>PdbOnly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>bin\x86\Debug\Test2d.UI.Wpf.XML</DocumentationFile>
-    <DebugType>Full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>bin\x86\Release\Test2d.UI.Wpf.XML</DocumentationFile>
-    <Optimize>true</Optimize>
-    <DebugType>PdbOnly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.1.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
@@ -163,9 +116,6 @@
     <Compile Include="..\Test2d\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Controls\CodeControl.xaml.cs">
-      <DependentUpon>CodeControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ContainerControl.xaml.cs">
       <DependentUpon>ContainerControl.xaml</DependentUpon>
     </Compile>
@@ -207,12 +157,6 @@
     <Compile Include="Controls\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ScriptControl.xaml.cs">
-      <DependentUpon>ScriptControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ScriptsControl.xaml.cs">
-      <DependentUpon>ScriptsControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ShapeControl.xaml.cs">
       <DependentUpon>ShapeControl.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -229,9 +173,6 @@
     <Compile Include="Controls\TemplatesControl.xaml.cs">
       <DependentUpon>TemplatesControl.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Controls\ToolbarControl.xaml.cs">
-      <DependentUpon>ToolbarControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ArgbColorToBrushConverter.cs" />
     <Compile Include="Converters\ArgbColorToBrushMultiConverter.cs" />
@@ -254,12 +195,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Util\SimulationTimer.cs" />
     <Compile Include="Util\TextClipboard.cs" />
-    <Page Include="Controls\CodeControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\ContainerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -293,14 +229,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ScriptControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ScriptsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\StateControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -310,10 +238,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TemplatesControl.xaml" />
-    <Page Include="Controls\ToolbarControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Dictionaries\Test2dDictionary.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -400,13 +324,13 @@
       <Project>{5c5a31b5-8f76-42e7-aea8-55b32ca641fa}</Project>
       <Name>FileWriter.Pdf-wpf</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dependencies\Renderer.Dxf\Renderer.Dxf.csproj">
+      <Project>{acc2c898-b49b-4ed9-b18c-389f50801b39}</Project>
+      <Name>Renderer.Dxf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dependencies\Renderer.Wpf\Renderer.Wpf.csproj">
       <Project>{3bfbd239-8979-480d-b1cb-b763f7c915c8}</Project>
       <Name>Renderer.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dependencies\ScriptEngine.Roslyn\ScriptEngine.Roslyn.csproj">
-      <Project>{dfbeacc3-406d-4216-8841-56398b9500d5}</Project>
-      <Name>ScriptEngine.Roslyn</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
       <Project>{08e4e8bf-e513-4a8d-835c-1eed6ecb4a21}</Project>
@@ -415,10 +339,6 @@
     <ProjectReference Include="..\Dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
       <Project>{87302d12-1184-402d-bf23-a5699f3d0bb4}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Test2d.Editor.Dxf\Test2d.Editor.Dxf.csproj">
-      <Project>{304b499e-9fb2-45ff-acb9-1c5224028be6}</Project>
-      <Name>Test2d.Editor.Dxf</Name>
     </ProjectReference>
     <ProjectReference Include="..\Test2d.Editor\Test2d.Editor.csproj">
       <Project>{c2e7cc66-b36e-4f1a-998a-029ae107c2e6}</Project>

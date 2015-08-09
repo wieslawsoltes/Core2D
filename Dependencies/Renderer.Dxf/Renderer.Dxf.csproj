@@ -31,46 +31,6 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Renderer.Dxf.XML</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\x64\Debug\Renderer.Dxf.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\x64\Release\Renderer.Dxf.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\x86\Debug\Renderer.Dxf.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\x86\Release\Renderer.Dxf.XML</DocumentationFile>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -89,20 +49,102 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="DxfRenderer.cs" />
+    <Compile Include="Dxf\Blocks\DxfBlock.cs" />
+    <Compile Include="Dxf\Blocks\DxfBlocks.cs" />
+    <Compile Include="Dxf\Classes\DxfClass.cs" />
+    <Compile Include="Dxf\Classes\DxfClasses.cs" />
+    <Compile Include="Dxf\Core\DxfCodeName.cs" />
+    <Compile Include="Dxf\Core\DxfExtensions.cs" />
+    <Compile Include="Dxf\Core\DxfObject.cs" />
+    <Compile Include="Dxf\Core\DxfSubclassMarker.cs" />
+    <Compile Include="Dxf\Core\DxfVector2.cs" />
+    <Compile Include="Dxf\Core\DxfVector3.cs" />
+    <Compile Include="Dxf\DxfFile.cs" />
+    <Compile Include="Dxf\DxfHeader.cs" />
+    <Compile Include="Dxf\DxfInspect.cs" />
+    <Compile Include="Dxf\DxfRawTag.cs" />
+    <Compile Include="Dxf\Entities\Dxf3Dface.cs" />
+    <Compile Include="Dxf\Entities\Dxf3Dsolid.cs" />
+    <Compile Include="Dxf\Entities\DxfAcadProxyEntity.cs" />
+    <Compile Include="Dxf\Entities\DxfArc.cs" />
+    <Compile Include="Dxf\Entities\DxfArcAlignedText.cs" />
+    <Compile Include="Dxf\Entities\DxfAttdef.cs" />
+    <Compile Include="Dxf\Entities\DxfAttrib.cs" />
+    <Compile Include="Dxf\Entities\DxfBody.cs" />
+    <Compile Include="Dxf\Entities\DxfCircle.cs" />
+    <Compile Include="Dxf\Entities\DxfDimension.cs" />
+    <Compile Include="Dxf\Entities\DxfEllipse.cs" />
+    <Compile Include="Dxf\Entities\DxfEntities.cs" />
+    <Compile Include="Dxf\Entities\DxfHatch.cs" />
+    <Compile Include="Dxf\Entities\DxfImage.cs" />
+    <Compile Include="Dxf\Entities\DxfInsert.cs" />
+    <Compile Include="Dxf\Entities\DxfLeader.cs" />
+    <Compile Include="Dxf\Entities\DxfLine.cs" />
+    <Compile Include="Dxf\Entities\DxfLwpolyline.cs" />
+    <Compile Include="Dxf\Entities\DxfLwpolylineVertex.cs" />
+    <Compile Include="Dxf\Entities\DxfMline.cs" />
+    <Compile Include="Dxf\Entities\DxfMText.cs" />
+    <Compile Include="Dxf\Entities\DxfOle2Frame.cs" />
+    <Compile Include="Dxf\Entities\DxfOleFrame.cs" />
+    <Compile Include="Dxf\Entities\DxfPoint.cs" />
+    <Compile Include="Dxf\Entities\DxfPolyline.cs" />
+    <Compile Include="Dxf\Entities\DxfRay.cs" />
+    <Compile Include="Dxf\Entities\DxfRegion.cs" />
+    <Compile Include="Dxf\Entities\DxfRText.cs" />
+    <Compile Include="Dxf\Entities\DxfSeqend.cs" />
+    <Compile Include="Dxf\Entities\DxfShape.cs" />
+    <Compile Include="Dxf\Entities\DxfSolid.cs" />
+    <Compile Include="Dxf\Entities\DxfSpline.cs" />
+    <Compile Include="Dxf\Entities\DxfText.cs" />
+    <Compile Include="Dxf\Entities\DxfTolerance.cs" />
+    <Compile Include="Dxf\Entities\DxfTrace.cs" />
+    <Compile Include="Dxf\Entities\DxfVertex.cs" />
+    <Compile Include="Dxf\Entities\DxfViewport.cs" />
+    <Compile Include="Dxf\Entities\DxfWipeout.cs" />
+    <Compile Include="Dxf\Entities\DxfXline.cs" />
+    <Compile Include="Dxf\Enums\DxfAcadVer.cs" />
+    <Compile Include="Dxf\Enums\DxfAppidStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfAttributeFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfBlockTypeFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfDefaultColors.cs" />
+    <Compile Include="Dxf\Enums\DxfDimstyleStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfDuplicateRecordCloningFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfHorizontalTextJustification.cs" />
+    <Compile Include="Dxf\Enums\DxfLayerStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfLineWeight.cs" />
+    <Compile Include="Dxf\Enums\DxfLtypeStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfLwpolylineFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfOrthographicType.cs" />
+    <Compile Include="Dxf\Enums\DxfOrthographicViewType.cs" />
+    <Compile Include="Dxf\Enums\DxfProxyCapabilitiesFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfSplineFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfStyleFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfTableStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfTextGenerationFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfVerticalTextJustification.cs" />
+    <Compile Include="Dxf\Enums\DxfViewMode.cs" />
+    <Compile Include="Dxf\Enums\DxfViewRenderMode.cs" />
+    <Compile Include="Dxf\Enums\DxfViewStandardFlags.cs" />
+    <Compile Include="Dxf\Enums\DxfVportStandardFlags.cs" />
+    <Compile Include="Dxf\Objects\DxfDictionary.cs" />
+    <Compile Include="Dxf\Objects\DxfObjects.cs" />
+    <Compile Include="Dxf\Tables\DxfAppid.cs" />
+    <Compile Include="Dxf\Tables\DxfBlockRecord.cs" />
+    <Compile Include="Dxf\Tables\DxfDimstyle.cs" />
+    <Compile Include="Dxf\Tables\DxfLayer.cs" />
+    <Compile Include="Dxf\Tables\DxfLtype.cs" />
+    <Compile Include="Dxf\Tables\DxfStyle.cs" />
+    <Compile Include="Dxf\Tables\DxfTable.cs" />
+    <Compile Include="Dxf\Tables\DxfTables.cs" />
+    <Compile Include="Dxf\Tables\DxfUcs.cs" />
+    <Compile Include="Dxf\Tables\DxfView.cs" />
+    <Compile Include="Dxf\Tables\DxfVport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Test2d.Editor.Dxf\Test2d.Editor.Dxf.csproj">
-      <Project>{304b499e-9fb2-45ff-acb9-1c5224028be6}</Project>
-      <Name>Test2d.Editor.Dxf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Test2d.Editor.Math\Test2d.Editor.Math.csproj">
-      <Project>{3292a90c-b664-4f71-af59-f4bfa04020f8}</Project>
-      <Name>Test2d.Editor.Math</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Test2d\Test2d.csproj">
       <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
       <Name>Test2d</Name>

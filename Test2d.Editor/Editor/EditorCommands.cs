@@ -268,15 +268,6 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public ICommand EvalCommand { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand EvalScriptCommand { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public ICommand DefaultIsStrokedCommand { get; set; }
         /// <summary>
         /// 
@@ -398,37 +389,7 @@ namespace Test2d
         /// 
         /// </summary>
         public ICommand RemoveShapeCommand { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand StartSimulationCommand { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand StopSimulationCommand { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand RestartSimulationCommand { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand PauseSimulationCommand { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand TickSimulationCommand { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand ImportShapeCodeCommand { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand ExportShapeCodeCommand { get; set; }
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -466,14 +427,6 @@ namespace Test2d
         /// 
         /// </summary>
         public ICommand ContainerWindowCommand { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand ScriptWindowCommand { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand ScriptsWindowCommand { get; set; }
         /// <summary>
         /// 
         /// </summary>

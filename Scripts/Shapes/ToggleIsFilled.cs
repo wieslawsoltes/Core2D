@@ -1,1 +1,0 @@
-foreach (var shape in SelectedShapes) shape.IsFilled = !shape.IsFilled;

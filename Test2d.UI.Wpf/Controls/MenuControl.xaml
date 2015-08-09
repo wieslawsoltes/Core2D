@@ -497,21 +497,6 @@
                       controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewDocumentWindow}">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuViewScriptWindow}" 
-                      Command="{Binding Commands.ScriptWindowCommand}" 
-                      InputGestureText="Ctrl+Alt+R"
-                      Style="{StaticResource ToolTipMenuItemStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewScriptWindow}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewScriptWindow}">
-            </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuViewScriptsWindow}" 
-                      Command="{Binding Commands.ScriptsWindowCommand}" 
-                      InputGestureText="Ctrl+Alt+P"
-                      Style="{StaticResource ToolTipMenuItemStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipViewScriptsWindow}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptViewScriptsWindow}">
-            </MenuItem>
-            <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuViewStylesWindow}" 
                       Command="{Binding Commands.StylesWindowCommand}" 
                       InputGestureText="Ctrl+Alt+S"
@@ -749,48 +734,6 @@
                 </Style>
             </MenuItem.ItemContainerStyle>
         </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuScript}"
-                  Style="{StaticResource ToolTipMenuItemStyleKey}"
-                  controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipScript}"
-                  controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptScript}">
-            <MenuItem Header="{x:Static p:Resources.MenuScriptEvaluate}" 
-                      Command="{Binding Commands.EvalCommand}" 
-                      InputGestureText="F8"
-                      Style="{StaticResource ToolTipMenuItemStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipScriptEvaluate}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptScriptEvaluate}">
-            </MenuItem>
-        </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuScripts}" 
-                  ItemsSource="{Binding ScriptDirectories}"
-                  Style="{StaticResource ToolTipMenuItemStyleKey}"
-                  controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipScripts}"
-                  controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptScripts}">
-            <MenuItem.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Scripts}">
-                    <HierarchicalDataTemplate.ItemContainerStyle>
-                        <Style TargetType="MenuItem">
-                            <Setter Property="Command" Value="{Binding DataContext.Commands.EvalScriptCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
-                            <Setter Property="CommandParameter" Value="{Binding Path}"/>
-                        </Style>
-                    </HierarchicalDataTemplate.ItemContainerStyle>
-                    <HierarchicalDataTemplate.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"
-                                       Style="{StaticResource ToolTipTextBlockStyleKey}"
-                                       controls:TooltipTemplate.Header="{Binding Name}"
-                                       controls:TooltipTemplate.Script="{Binding Path}">
-                            </TextBlock>
-                        </DataTemplate>
-                    </HierarchicalDataTemplate.ItemTemplate>
-                    <TextBlock Text="{Binding Name}"
-                               Style="{StaticResource ToolTipTextBlockStyleKey}"
-                               controls:TooltipTemplate.Header="{Binding Name}"
-                               controls:TooltipTemplate.Script="{Binding Path}">
-                    </TextBlock>
-                </HierarchicalDataTemplate>
-            </MenuItem.ItemTemplate>
-        </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuOptions}"
                   Style="{StaticResource ToolTipMenuItemStyleKey}"
                   controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipOptions}"
@@ -851,58 +794,6 @@
                       Style="{StaticResource ToolTipMenuItemStyleKey}"
                       controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipOptionsTryToConnect}"
                       controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptOptionsTryToConnect}">
-            </MenuItem>
-        </MenuItem>
-        <MenuItem Header="{x:Static p:Resources.MenuSimulation}"
-                  Style="{StaticResource ToolTipMenuItemStyleKey}"
-                  controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipSimulation}"
-                  controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptSimulation}">
-            <MenuItem Header="{x:Static p:Resources.MenuSimulationStart}" 
-                      Command="{Binding Commands.StartSimulationCommand}" 
-                      InputGestureText="F5"
-                      Style="{StaticResource ToolTipMenuItemStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipSimulationStart}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptSimulationStart}">
-            </MenuItem>
-            <MenuItem Header="{x:Static p:Resources.MenuSimulationStop}" 
-                      Command="{Binding Commands.StopSimulationCommand}" 
-                      InputGestureText="F6"
-                      Style="{StaticResource ToolTipMenuItemStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipSimulationStop}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptSimulationStop}">
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuSimulationRestart}" 
-                      Command="{Binding Commands.RestartSimulationCommand}"
-                      InputGestureText="F7"
-                      Style="{StaticResource ToolTipMenuItemStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipSimulationRestart}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptSimulationRestart}">
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuSimulationPause}" 
-                      Command="{Binding Commands.PauseSimulationCommand}" 
-                      InputGestureText="F9"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipSimulationPause}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptSimulationPause}">
-                <MenuItem.Style>
-                    <Style TargetType="MenuItem" BasedOn="{StaticResource ToolTipMenuItemStyleKey}">
-                        <Setter Property="IsChecked" Value="False"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsSimulationPaused}" Value="True">
-                                <Setter Property="IsChecked" Value="True"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </MenuItem.Style>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuSimulationTick}" 
-                      Command="{Binding Commands.TickSimulationCommand}" 
-                      InputGestureText="F10"
-                      Style="{StaticResource ToolTipMenuItemStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.MenuTooltipSimulationTick}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.MenuTooltipScriptSimulationTick}">
             </MenuItem>
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuWindow}"

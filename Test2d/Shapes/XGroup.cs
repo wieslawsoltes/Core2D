@@ -223,7 +223,6 @@ namespace Test2d
                 Style = default(ShapeStyle),
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
-                Code = ShapeCode.Create(),
                 Shapes = ImmutableArray.Create<BaseShape>(),
                 Connectors = ImmutableArray.Create<XPoint>()
             };

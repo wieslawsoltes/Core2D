@@ -10,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using TestSIM;
 
 namespace Test2d
 {
@@ -24,22 +23,13 @@ namespace Test2d
         private IView _view;
         private IRenderer[] _renderers;
         private IProjectFactory _projectFactory;
-        private ISimulationTimer _simulationTimer;
         private ITextClipboard _textClipboard;
         private ISerializer _serializer;
-        private IScriptEngine _scriptEngine;
-        private ICodeEngine _codeEngine;
         private IFileWriter _pdfWriter;
         private IFileWriter _dxfWriter;
         private ITextFieldReader<Database> _csvReader;
         private ITextFieldWriter<Database> _csvWriter;
         private ImmutableArray<RecentProject> _recentProjects = ImmutableArray.Create<RecentProject>();
-        private string _rootScriptsPath;
-        private ImmutableArray<ScriptDirectory> _scriptDirectories;
-        private ScriptFile _currentScript;
-        private bool _isSimulationPaused;
-        private Clock _clock = default(Clock);
-        private System.IO.FileSystemWatcher _watcher = default(System.IO.FileSystemWatcher);
         private Container _containerToCopy = default(Container);
         private Document _documentToCopy = default(Document);
 
@@ -91,15 +81,6 @@ namespace Test2d
         /// <summary>
         ///
         /// </summary>
-        public ISimulationTimer SimulationTimer
-        {
-            get { return _simulationTimer; }
-            set { Update(ref _simulationTimer, value); }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
         public ITextClipboard TextClipboard
         {
             get { return _textClipboard; }
@@ -113,24 +94,6 @@ namespace Test2d
         {
             get { return _serializer; }
             set { Update(ref _serializer, value); }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public IScriptEngine ScriptEngine
-        {
-            get { return _scriptEngine; }
-            set { Update(ref _scriptEngine, value); }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public ICodeEngine CodeEngine
-        {
-            get { return _codeEngine; }
-            set { Update(ref _codeEngine, value); }
         }
 
         /// <summary>
@@ -177,52 +140,7 @@ namespace Test2d
             get { return _recentProjects; }
             set { Update(ref _recentProjects, value); }
         }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public string RootScriptsPath
-        {
-            get { return _rootScriptsPath; }
-            set { Update(ref _rootScriptsPath, value); }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public ImmutableArray<ScriptDirectory> ScriptDirectories
-        {
-            get { return _scriptDirectories; }
-            set { Update(ref _scriptDirectories, value); }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public ScriptFile CurrentScript
-        {
-            get { return _currentScript; }
-            set { Update(ref _currentScript, value); }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public Clock Clock
-        {
-            get { return _clock; }
-            set { Update(ref _clock, value); }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public bool IsSimulationPaused
-        {
-            get { return _isSimulationPaused; }
-            set { Update(ref _isSimulationPaused, value); }
-        }
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -1467,151 +1385,6 @@ namespace Test2d
         /// <summary>
         ///
         /// </summary>
-        public void OnTickSimulation()
-        {
-            try
-            {
-                if (IsSimulationMode())
-                {
-                    _editor.Observer.IsPaused = true;
-                    _codeEngine.Run();
-                    _editor.Observer.IsPaused = false;
-                    if (_editor.Project.CurrentContainer != null)
-                    {
-                        _editor.Project.CurrentContainer.Invalidate();
-                    }
-                    _clock.Tick();
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-
-                if (IsSimulationMode())
-                {
-                    OnStopSimulation();
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void OnStartSimulation()
-        {
-            try
-            {
-                if (IsSimulationMode())
-                {
-                    return;
-                }
-
-                _clock = new Clock(
-                    cycle: 0L,
-                    resolution: _editor.Project.Options.CycleResolution);
-
-                var shapes = _editor.Project.Documents
-                    .SelectMany(d => d.Containers)
-                    .SelectMany(c => c.Layers)
-                    .SelectMany(l => l.Shapes).ToImmutableArray();
-                _codeEngine.Build(shapes, this);
-
-                IsSimulationPaused = false;
-
-                _simulationTimer.Start(
-                    () =>
-                    {
-                        if (!IsSimulationPaused)
-                        {
-                            OnTickSimulation();
-                        }
-                    },
-                    _clock.Resolution);
-
-                UpdateCanExecuteState();
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void OnStopSimulation()
-        {
-            try
-            {
-                if (IsSimulationMode())
-                {
-                    _simulationTimer.Stop();
-                    _codeEngine.Reset();
-                    IsSimulationPaused = false;
-                    UpdateCanExecuteState();
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void OnRestartSimulation()
-        {
-            OnStopSimulation();
-            OnStartSimulation();
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void OnPauseSimulation()
-        {
-            try
-            {
-                if (IsSimulationMode())
-                {
-                    IsSimulationPaused = !IsSimulationPaused;
-                    UpdateCanExecuteState();
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
         /// <param name="isZooming"></param>
         public void Invalidate(bool isZooming)
         {
@@ -1623,53 +1396,6 @@ namespace Test2d
                 }
 
                 _editor.Project.CurrentContainer.Invalidate();
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="code"></param>
-        /// <param name="context"></param>
-        public void Eval(string code, EditorContext context)
-        {
-            try
-            {
-                _scriptEngine.Eval(code, context);
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="path"></param>
-        public void Eval(string path)
-        {
-            try
-            {
-                var code = System.IO.File.ReadAllText(path);
-                var context = this;
-                Eval(code, context);
             }
             catch (Exception ex)
             {
@@ -2422,59 +2148,6 @@ namespace Test2d
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="shape"></param>
-        public void ImportShapeCode(string path, BaseShape shape)
-        {
-            try
-            {
-                var json = ReadUtf8Text(path, false);
-                var code = _serializer.FromJson<ShapeCode>(json);
-
-                var previous = shape.Code;
-                var next = code;
-                _editor.History.Snapshot(previous, next, (p) => shape.Code = p);
-                shape.Code = next;
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="shape"></param>
-        public void ExportShapeCode(string path, BaseShape shape)
-        {
-            try
-            {
-                var json = _serializer.ToJson(shape.Code);
-                WriteUtf8Text(path, json, false);
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
         /// Add recent project file.
         /// </summary>
         /// <param name="path"></param>
@@ -2955,31 +2628,6 @@ namespace Test2d
                         if (string.Compare(ext, ".project", true, CultureInfo.InvariantCulture) == 0)
                         {
                             Open(path);
-                            result = true;
-                        }
-                        if (string.Compare(ext, ".code", true, CultureInfo.InvariantCulture) == 0)
-                        {
-                            var selectedShape = _editor.Renderers[0].State.SelectedShape;
-                            var selectedShapes = _editor.Renderers[0].State.SelectedShapes;
-
-                            if (selectedShape != null)
-                            {
-                                ImportShapeCode(path, selectedShape);
-                            }
-
-                            if (selectedShapes != null)
-                            {
-                                foreach (var shape in selectedShapes)
-                                {
-                                    ImportShapeCode(path, shape);
-                                }
-                            }
-
-                            result = true;
-                        }
-                        else if (string.Compare(ext, ".cs", true, CultureInfo.InvariantCulture) == 0)
-                        {
-                            Eval(path);
                             result = true;
                         }
                         else if (string.Compare(ext, ".csv", true, CultureInfo.InvariantCulture) == 0)
@@ -3564,17 +3212,9 @@ namespace Test2d
         /// <returns></returns>
         public bool IsEditMode()
         {
-            return !_simulationTimer.IsRunning;
+            return true;
         }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <returns></returns>
-        public bool IsSimulationMode()
-        {
-            return _simulationTimer.IsRunning;
-        }
 
         /// <summary>
         /// 
@@ -3754,11 +3394,6 @@ namespace Test2d
                         () => OnToolMove(),
                         () => IsEditMode());
 
-                _commands.EvalScriptCommand =
-                    new DelegateCommand<string>(
-                        (path) => Eval(path),
-                        (path) => true);
-
                 _commands.DefaultIsStrokedCommand =
                     new DelegateCommand(
                         () => OnToggleDefaultIsStroked(),
@@ -3899,31 +3534,6 @@ namespace Test2d
                         () => OnRemoveShape(),
                         () => IsEditMode());
 
-                _commands.StartSimulationCommand =
-                    new DelegateCommand(
-                        () => OnStartSimulation(),
-                        () => IsEditMode());
-
-                _commands.StopSimulationCommand =
-                    new DelegateCommand(
-                        () => OnStopSimulation(),
-                        () => IsSimulationMode());
-
-                _commands.RestartSimulationCommand =
-                    new DelegateCommand(
-                        () => OnRestartSimulation(),
-                        () => IsSimulationMode());
-
-                _commands.PauseSimulationCommand =
-                    new DelegateCommand(
-                        () => OnPauseSimulation(),
-                        () => IsSimulationMode());
-
-                _commands.TickSimulationCommand =
-                    new DelegateCommand(
-                        () => OnTickSimulation(),
-                        () => IsSimulationMode() && IsSimulationPaused);
-
                 _commands.AddTemplateCommand =
                     new DelegateCommand(
                         () => OnAddTemplate(),
@@ -3947,7 +3557,7 @@ namespace Test2d
                 _commands.SelectedItemChangedCommand =
                     new DelegateCommand<object>(
                         (item) => OnSelectedItemChanged(item),
-                        (item) => IsEditMode() || IsSimulationMode());
+                        (item) => IsEditMode());
 
                 _commands.AddContainerCommand =
                     new DelegateCommand<object>(
@@ -3978,8 +3588,6 @@ namespace Test2d
                     new DelegateCommand<object>(
                         (item) => OnInsertDocumentAfter(item),
                         (item) => IsEditMode());
-
-                WarmUpCSharpScript();
             }
             catch (Exception ex)
             {
@@ -3994,98 +3602,6 @@ namespace Test2d
                 {
                     Debug.Print(ex.Message);
                     Debug.Print(ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        private void WarmUpCSharpScript()
-        {
-            // NOTE: Warmup Roslyn script engine.
-            try
-            {
-                Task.Run(
-                    () =>
-                    {
-                        Eval("Action a = () => { };", this);
-                    });
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void InitializeScripts()
-        {
-            try
-            {
-#if DEBUG
-                _rootScriptsPath = "../../../Scripts";
-#else
-                _rootScriptsPath = "Scripts";
-#endif
-                ScriptDirectories = ImmutableArray.Create<ScriptDirectory>();
-
-                Action update = () =>
-                {
-                    try
-                    {
-                        ScriptDirectories =
-                            ScriptDirectory.CreateScriptDirectories(_rootScriptsPath);
-                    }
-                    catch (Exception ex)
-                    {
-                        if (_editor.Log != null)
-                        {
-                            _editor.Log.LogError("{0}{1}{2}",
-                                ex.Message,
-                                Environment.NewLine,
-                                ex.StackTrace);
-                        }
-                    }
-                };
-
-                if (System.IO.Directory.Exists(_rootScriptsPath))
-                {
-                    update();
-
-                    _watcher = new System.IO.FileSystemWatcher();
-                    _watcher.Path = _rootScriptsPath;
-                    _watcher.Filter = "*.*";
-                    _watcher.NotifyFilter =
-                        System.IO.NotifyFilters.LastAccess
-                        | System.IO.NotifyFilters.LastWrite
-                        | System.IO.NotifyFilters.FileName
-                        | System.IO.NotifyFilters.DirectoryName;
-                    _watcher.IncludeSubdirectories = true;
-                    _watcher.Filter = "*.*";
-                    _watcher.Changed += (s, e) => update();
-                    _watcher.Created += (s, e) => update();
-                    _watcher.Deleted += (s, e) => update();
-                    _watcher.Renamed += (s, e) => update();
-                    _watcher.EnableRaisingEvents = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
                 }
             }
         }
@@ -4162,9 +3678,6 @@ namespace Test2d
             (_commands.ToolImageCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolMoveCommand as DelegateCommand).RaiseCanExecuteChanged();
 
-            (_commands.EvalCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.EvalScriptCommand as DelegateCommand<string>).RaiseCanExecuteChanged();
-
             (_commands.DefaultIsStrokedCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.DefaultIsFilledCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.DefaultIsClosedCommand as DelegateCommand).RaiseCanExecuteChanged();
@@ -4206,15 +3719,6 @@ namespace Test2d
 
             (_commands.RemoveShapeCommand as DelegateCommand).RaiseCanExecuteChanged();
 
-            (_commands.StartSimulationCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.StopSimulationCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.RestartSimulationCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.PauseSimulationCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.TickSimulationCommand as DelegateCommand).RaiseCanExecuteChanged();
-
-            (_commands.ImportShapeCodeCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ExportShapeCodeCommand as DelegateCommand).RaiseCanExecuteChanged();
-
             (_commands.ZoomResetCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ZoomExtentCommand as DelegateCommand).RaiseCanExecuteChanged();
 
@@ -4224,8 +3728,6 @@ namespace Test2d
             (_commands.GroupsWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.DatabasesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.DatabaseWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ScriptWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ScriptsWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             //(_commands.ContainerWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             //(_commands.DocumentWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.StylesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
@@ -4266,16 +3768,6 @@ namespace Test2d
             if (_editor.Log != null)
             {
                 _editor.Log.Close();
-            }
-
-            if (_watcher != null)
-            {
-                _watcher.Dispose();
-            }
-
-            if (IsSimulationMode())
-            {
-                OnStopSimulation();
             }
         }
     }

@@ -1,1 +1,0 @@
-foreach (var shape in SelectedShape) shape.IsStroked = !shape.IsStroked;

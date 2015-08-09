@@ -41,12 +41,6 @@
         <KeyBinding Command="{Binding Commands.GroupCommand}" Gesture="Ctrl+G"/>
         <KeyBinding Command="{Binding Commands.UngroupCommand}" Gesture="Ctrl+U"/>
         <KeyBinding Command="{Binding Commands.ReferenceCommand}" Gesture="Ctrl+R"/>
-        <KeyBinding Command="{Binding Commands.EvalCommand}" Gesture="F8"/>
-        <KeyBinding Command="{Binding Commands.StartSimulationCommand}" Gesture="F5"/>
-        <KeyBinding Command="{Binding Commands.StopSimulationCommand}" Gesture="F6"/>
-        <KeyBinding Command="{Binding Commands.RestartSimulationCommand}" Gesture="F7"/>
-        <KeyBinding Command="{Binding Commands.PauseSimulationCommand}" Gesture="F9"/>
-        <KeyBinding Command="{Binding Commands.TickSimulationCommand}" Gesture="F10"/>
         <KeyBinding Command="{Binding Commands.ProjectWindowCommand}" Gesture="Ctrl+Alt+X"/>
         <KeyBinding Command="{Binding Commands.OptionsWindowCommand}" Gesture="Ctrl+Alt+O"/>
         <KeyBinding Command="{Binding Commands.TemplatesWindowCommand}" Gesture="Ctrl+Alt+T"/>
@@ -55,8 +49,6 @@
         <KeyBinding Command="{Binding Commands.DatabaseWindowCommand}" Gesture="Ctrl+Alt+B"/>
         <KeyBinding Command="{Binding Commands.ContainerWindowCommand}" Gesture="Ctrl+Alt+N"/>
         <KeyBinding Command="{Binding Commands.DocumentWindowCommand}" Gesture="Ctrl+Alt+U"/>
-        <KeyBinding Command="{Binding Commands.ScriptWindowCommand}" Gesture="Ctrl+Alt+R"/>
-        <KeyBinding Command="{Binding Commands.ScriptsWindowCommand}" Gesture="Ctrl+Alt+P"/>
         <KeyBinding Command="{Binding Commands.StylesWindowCommand}" Gesture="Ctrl+Alt+S"/>
         <KeyBinding Command="{Binding Commands.LayersWindowCommand}" Gesture="Ctrl+Alt+L"/>
         <KeyBinding Command="{Binding Commands.ShapesWindowCommand}" Gesture="Ctrl+Alt+A"/>
@@ -118,13 +110,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="3"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
         <controls:MenuControl Grid.Row="0"/>
-        <!--<controls:ToolbarControl Grid.Row="2"/>-->
-        <ad:DockingManager x:Name="dockingManager" Grid.Row="3" Margin="0,5,0,0">
+        <ad:DockingManager x:Name="dockingManager" Grid.Row="2" Margin="0,5,0,0">
             <ad:LayoutRoot>
                 <ad:LayoutPanel Orientation="Horizontal">
                     <ad:LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="200">
@@ -267,9 +257,6 @@
                                     </controls:StateControl.Style>
                                 </controls:StateControl>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="scriptsWindow" CanClose="False" ContentId="scripts" Title="{x:Static p:Resources.WindowTitleScripts}" AutoHideWidth="200">
-                                <controls:ScriptsControl x:Name="scriptsControl"/>
-                            </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
                             <ad:LayoutAnchorable x:Name="dataWindow" CanClose="False" ContentId="data" Title="{x:Static p:Resources.WindowTitleData}" AutoHideWidth="200">
@@ -285,23 +272,6 @@
                                         </Style>
                                     </controls:DataControl.Style>
                                 </controls:DataControl>
-                            </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="codeWindow" CanClose="False" ContentId="code" Title="{x:Static p:Resources.WindowTitleCode}" AutoHideWidth="200">
-                                <controls:CodeControl x:Name="codeControl">
-                                    <controls:CodeControl.Style>
-                                        <Style TargetType="controls:CodeControl">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Editor.Renderers[0].State.SelectedShape}" Value="{x:Null}">
-                                                    <Setter Property="Visibility" Value="Hidden"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </controls:CodeControl.Style>
-                                </controls:CodeControl>
-                            </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="scriptWindow" CanClose="False" ContentId="script" Title="{x:Static p:Resources.WindowTitleScript}" AutoHideWidth="200">
-                                <controls:ScriptControl x:Name="scriptControl"/>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                     </ad:LayoutAnchorablePaneGroup>

@@ -1,8 +1,0 @@
-﻿{
-  "$id": "1",
-  "$type": "Test2d.ShapeCode, Test2d",
-  "Definitions": null,
-  "Initialization": null,
-  "Script": "shape.Text = DateTime.Now.ToString();",
-  "IsExecutable": true
-}

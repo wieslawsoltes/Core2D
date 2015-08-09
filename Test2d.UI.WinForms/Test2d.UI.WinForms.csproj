@@ -50,52 +50,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <DocumentationFile>bin\Release\Test2d.UI.WinForms.XML</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <DocumentationFile>bin\x64\Debug\Test2d.UI.WinForms.XML</DocumentationFile>
-    <FileAlignment>4096</FileAlignment>
-    <DebugType>Full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <DocumentationFile>bin\x64\Release\Test2d.UI.WinForms.XML</DocumentationFile>
-    <Optimize>true</Optimize>
-    <FileAlignment>4096</FileAlignment>
-    <DebugType>None</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <DocumentationFile>bin\x86\Debug\Test2d.UI.WinForms.XML</DocumentationFile>
-    <FileAlignment>4096</FileAlignment>
-    <DebugType>Full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <DocumentationFile>bin\x86\Release\Test2d.UI.WinForms.XML</DocumentationFile>
-    <Optimize>true</Optimize>
-    <FileAlignment>4096</FileAlignment>
-    <DebugType>None</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
@@ -124,9 +78,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Test2d.UI.EtoForms.Shared\Util\ZoomState.cs">
-      <Link>Util\ZoomState.cs</Link>
-    </Compile>
     <Compile Include="..\Test2d\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
@@ -139,10 +90,10 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Util\SimulationTimer.cs" />
     <Compile Include="Util\TextClipboard.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\ZoomState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -162,13 +113,13 @@
       <Project>{5c5a31b5-8f76-42e7-aea8-55b32ca641fa}</Project>
       <Name>FileWriter.Pdf-wpf</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dependencies\Renderer.Dxf\Renderer.Dxf.csproj">
+      <Project>{acc2c898-b49b-4ed9-b18c-389f50801b39}</Project>
+      <Name>Renderer.Dxf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dependencies\Renderer.WinForms\Renderer.WinForms.csproj">
       <Project>{3dc476e6-5032-4888-9337-221b88653c40}</Project>
       <Name>Renderer.WinForms</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dependencies\ScriptEngine.Roslyn\ScriptEngine.Roslyn.csproj">
-      <Project>{dfbeacc3-406d-4216-8841-56398b9500d5}</Project>
-      <Name>ScriptEngine.Roslyn</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
       <Project>{08e4e8bf-e513-4a8d-835c-1eed6ecb4a21}</Project>
@@ -177,14 +128,6 @@
     <ProjectReference Include="..\Dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
       <Project>{87302d12-1184-402d-bf23-a5699f3d0bb4}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Test2d.Editor.Dxf\Test2d.Editor.Dxf.csproj">
-      <Project>{304b499e-9fb2-45ff-acb9-1c5224028be6}</Project>
-      <Name>Test2d.Editor.Dxf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Test2d.Editor.Math\Test2d.Editor.Math.csproj">
-      <Project>{3292a90c-b664-4f71-af59-f4bfa04020f8}</Project>
-      <Name>Test2d.Editor.Math</Name>
     </ProjectReference>
     <ProjectReference Include="..\Test2d.Editor\Test2d.Editor.csproj">
       <Project>{c2e7cc66-b36e-4f1a-998a-029ae107c2e6}</Project>

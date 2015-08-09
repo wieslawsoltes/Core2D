@@ -206,7 +206,6 @@ namespace Test2d
                 IsFilled = isFilled,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
-                Code = ShapeCode.Create(),
                 Source = source,
                 Geometry = geometry
             };

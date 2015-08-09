@@ -73,7 +73,6 @@ namespace Test2d
                 IsFilled = isFilled,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
-                Code = ShapeCode.Create(),
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
                 Text = text
@@ -134,7 +133,6 @@ namespace Test2d
                 IsFilled = isFilled,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
-                Code = ShapeCode.Create(),
                 TopLeft = topLeft,
                 BottomRight = bottomRight,
                 Text = text

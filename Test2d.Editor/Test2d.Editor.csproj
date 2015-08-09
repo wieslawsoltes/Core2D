@@ -31,46 +31,6 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Test2d.Editor.XML</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\x64\Debug\Test2d.Editor.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\x64\Release\Test2d.Editor.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\x86\Debug\Test2d.Editor.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\x86\Release\Test2d.Editor.XML</DocumentationFile>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.Prism.Mvvm, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
@@ -135,8 +95,6 @@
     <Compile Include="Editor\Parameters\ShapePropertyParameter.cs" />
     <Compile Include="Editor\Parameters\ValueParamterer.cs" />
     <Compile Include="Editor\Factories\ProjectFactory.cs" />
-    <Compile Include="Editor\Script\ScriptDirectory.cs" />
-    <Compile Include="Editor\Script\ScriptFile.cs" />
     <Compile Include="Editor\Core\State.cs" />
     <Compile Include="Editor\Core\Tool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -145,17 +103,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Test2d.Editor.Dxf\Test2d.Editor.Dxf.csproj">
-      <Project>{304b499e-9fb2-45ff-acb9-1c5224028be6}</Project>
-      <Name>Test2d.Editor.Dxf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Test2d.Editor.Math\Test2d.Editor.Math.csproj">
-      <Project>{3292a90c-b664-4f71-af59-f4bfa04020f8}</Project>
-      <Name>Test2d.Editor.Math</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Test2d.Editor.Simulation\Test2d.Editor.Simulation.csproj">
-      <Project>{426fe776-be71-4860-a0b0-09178b06c22e}</Project>
-      <Name>Test2d.Editor.Simulation</Name>
+    <ProjectReference Include="..\Dependencies\Renderer.Dxf\Renderer.Dxf.csproj">
+      <Project>{acc2c898-b49b-4ed9-b18c-389f50801b39}</Project>
+      <Name>Renderer.Dxf</Name>
     </ProjectReference>
     <ProjectReference Include="..\Test2d.Interfaces\Test2d.Interfaces.csproj">
       <Project>{c3e348e1-bf9e-4a71-a1f7-61b7607e0a20}</Project>

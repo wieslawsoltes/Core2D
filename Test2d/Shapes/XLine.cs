@@ -132,7 +132,6 @@ namespace Test2d
                 IsFilled = false,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
-                Code = ShapeCode.Create(),
                 Start = start,
                 End = end
             };
@@ -166,7 +165,6 @@ namespace Test2d
                 IsFilled = false,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
-                Code = ShapeCode.Create(),
                 Start = XPoint.Create(x1, y1, point),
                 End = XPoint.Create(x2, y2, point)
             };

@@ -20,7 +20,6 @@ namespace Test2d
         private ImmutableArray<ShapeBinding> _bindings;
         private ImmutableArray<ShapeProperty> _properties;
         private Record _record;
-        private ShapeCode _code;
 
         /// <summary>
         /// Gets or sets shape name.
@@ -135,15 +134,6 @@ namespace Test2d
         {
             get { return _record; }
             set { Update(ref _record, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets shape C# code used in simulation mode.
-        /// </summary>
-        public ShapeCode Code
-        {
-            get { return _code; }
-            set { Update(ref _code, value); }
         }
 
         /// <summary>

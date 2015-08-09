@@ -50,26 +50,24 @@ namespace TestWinForms
             this.pointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.lineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rectangleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ellipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.arcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bezierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.qBezierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.pathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.rectangleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ellipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.pathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.evaluateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.defaultIsFilledToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.snapToGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.tryToConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,7 +76,6 @@ namespace TestWinForms
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.toolToolStripMenuItem,
-            this.scriptToolStripMenuItem,
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -226,20 +223,6 @@ namespace TestWinForms
             this.lineToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.lineToolStripMenuItem.Text = "&Line";
             // 
-            // rectangleToolStripMenuItem
-            // 
-            this.rectangleToolStripMenuItem.Name = "rectangleToolStripMenuItem";
-            this.rectangleToolStripMenuItem.ShortcutKeyDisplayString = "R";
-            this.rectangleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.rectangleToolStripMenuItem.Text = "&Rectangle";
-            // 
-            // ellipseToolStripMenuItem
-            // 
-            this.ellipseToolStripMenuItem.Name = "ellipseToolStripMenuItem";
-            this.ellipseToolStripMenuItem.ShortcutKeyDisplayString = "E";
-            this.ellipseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.ellipseToolStripMenuItem.Text = "&Ellipse";
-            // 
             // arcToolStripMenuItem
             // 
             this.arcToolStripMenuItem.Name = "arcToolStripMenuItem";
@@ -260,6 +243,37 @@ namespace TestWinForms
             this.qBezierToolStripMenuItem.ShortcutKeyDisplayString = "Q";
             this.qBezierToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.qBezierToolStripMenuItem.Text = "&QBezier";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
+            // 
+            // pathToolStripMenuItem
+            // 
+            this.pathToolStripMenuItem.Name = "pathToolStripMenuItem";
+            this.pathToolStripMenuItem.ShortcutKeyDisplayString = "H";
+            this.pathToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pathToolStripMenuItem.Text = "Pat&h";
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(149, 6);
+            // 
+            // rectangleToolStripMenuItem
+            // 
+            this.rectangleToolStripMenuItem.Name = "rectangleToolStripMenuItem";
+            this.rectangleToolStripMenuItem.ShortcutKeyDisplayString = "R";
+            this.rectangleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rectangleToolStripMenuItem.Text = "&Rectangle";
+            // 
+            // ellipseToolStripMenuItem
+            // 
+            this.ellipseToolStripMenuItem.Name = "ellipseToolStripMenuItem";
+            this.ellipseToolStripMenuItem.ShortcutKeyDisplayString = "E";
+            this.ellipseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ellipseToolStripMenuItem.Text = "&Ellipse";
             // 
             // toolStripSeparator10
             // 
@@ -284,33 +298,6 @@ namespace TestWinForms
             this.imageToolStripMenuItem.ShortcutKeyDisplayString = "I";
             this.imageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.imageToolStripMenuItem.Text = "&Image";
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
-            // 
-            // pathToolStripMenuItem
-            // 
-            this.pathToolStripMenuItem.Name = "pathToolStripMenuItem";
-            this.pathToolStripMenuItem.ShortcutKeyDisplayString = "H";
-            this.pathToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.pathToolStripMenuItem.Text = "Pat&h";
-            // 
-            // scriptToolStripMenuItem
-            // 
-            this.scriptToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.evaluateToolStripMenuItem});
-            this.scriptToolStripMenuItem.Name = "scriptToolStripMenuItem";
-            this.scriptToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
-            this.scriptToolStripMenuItem.Text = "&Script";
-            // 
-            // evaluateToolStripMenuItem
-            // 
-            this.evaluateToolStripMenuItem.Name = "evaluateToolStripMenuItem";
-            this.evaluateToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F8;
-            this.evaluateToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.evaluateToolStripMenuItem.Text = "&Evaluate...";
             // 
             // optionsToolStripMenuItem
             // 
@@ -355,11 +342,6 @@ namespace TestWinForms
             this.tryToConnectToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.tryToConnectToolStripMenuItem.Text = "Try To &Connect";
             // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(149, 6);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -396,7 +378,6 @@ namespace TestWinForms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem scriptToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
@@ -410,7 +391,6 @@ namespace TestWinForms
         private System.Windows.Forms.ToolStripMenuItem qBezierToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem evaluateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem defaultIsFilledToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripMenuItem snapToGridToolStripMenuItem;
