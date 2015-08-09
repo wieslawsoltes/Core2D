@@ -1,1 +1,1 @@
-Context.PauseSimulation();
+Context.OnPauseSimulation();

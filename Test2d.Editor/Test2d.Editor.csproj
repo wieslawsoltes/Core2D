@@ -99,6 +99,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Test2d\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeBounds.cs" />
     <Compile Include="Editor\Core\PathTool.cs" />
@@ -108,6 +111,7 @@
     <Compile Include="Editor\EditorContext.cs" />
     <Compile Include="Editor\Core\ExportType.cs" />
     <Compile Include="Editor\Core\Helper.cs" />
+    <Compile Include="Editor\Factory.cs" />
     <Compile Include="Editor\Helpers\ArcHelper.cs" />
     <Compile Include="Editor\Helpers\BezierHelper.cs" />
     <Compile Include="Editor\Helpers\EllipseHelper.cs" />
@@ -122,9 +126,7 @@
     <Compile Include="Editor\Helpers\TextHelper.cs" />
     <Compile Include="Editor\Core\History.cs" />
     <Compile Include="Editor\Core\ImportType.cs" />
-    <Compile Include="Editor\Factories\IProjectFactory.cs" />
     <Compile Include="Editor\Factories\LineGrid.cs" />
-    <Compile Include="Editor\Log\ILog.cs" />
     <Compile Include="Editor\Log\TraceLog.cs" />
     <Compile Include="Editor\Observer.cs" />
     <Compile Include="Editor\Parameters\ColumnParameter.cs" />

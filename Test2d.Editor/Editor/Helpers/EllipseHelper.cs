@@ -78,6 +78,7 @@ namespace Test2d
                             sx, sy,
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape,
+                            _editor.Project.Options.DefaultIsStroked,
                             _editor.Project.Options.DefaultIsFilled);
                         if (_editor.Project.Options.TryToConnect)
                         {
@@ -183,20 +184,7 @@ namespace Test2d
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                if (_editor.TryToHoverShape(sx, sy))
-                                {
-                                    if (_ellipseBottomRight != null)
-                                    {
-                                        _ellipseBottomRight.State &= ~ShapeState.Visible;
-                                    }
-                                }
-                                else
-                                {
-                                    if (_ellipseBottomRight != null)
-                                    {
-                                        _ellipseBottomRight.State |= ShapeState.Visible;
-                                    }
-                                }
+                                _editor.TryToHoverShape(sx, sy);
                             }
                             ellipse.BottomRight.X = sx;
                             ellipse.BottomRight.Y = sy;
@@ -215,9 +203,9 @@ namespace Test2d
         public override void ToStateOne()
         {
             _style = _editor.Project.Options.HelperStyle;
-            _ellipseTopLeft = XEllipse.Create(0, 0, _style, null, true);
+            _ellipseTopLeft = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseTopLeft);
-            _ellipseBottomRight = XEllipse.Create(0, 0, _style, null, true);
+            _ellipseBottomRight = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseBottomRight);
         }
         

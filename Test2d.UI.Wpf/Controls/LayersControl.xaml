@@ -12,8 +12,8 @@
         <Grid.Resources>
             <ControlTemplate x:Key="LayersMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Command="{Binding Commands.AddLayerCommand}" Header="_+"/>
-                    <MenuItem Command="{Binding Commands.RemoveLayerCommand}" Header="_-"/>
+                    <MenuItem Command="{Binding Commands.AddLayerCommand}" Header="+"/>
+                    <MenuItem Command="{Binding Commands.RemoveLayerCommand}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>

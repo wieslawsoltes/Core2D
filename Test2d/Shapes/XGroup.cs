@@ -27,6 +27,7 @@ namespace Test2d
                     if (_shapes != null)
                     {
                         var builder = ImmutableArray.CreateBuilder<ShapeProperty>();
+
                         foreach (var shape in _shapes)
                         {
                             foreach (var property in shape.Properties)
@@ -34,6 +35,15 @@ namespace Test2d
                                 builder.Add(property);
                             }
                         }
+
+                        foreach (var connector in _connectors)
+                        {
+                            foreach (var property in connector.Properties)
+                            {
+                                builder.Add(property);
+                            }
+                        }
+
                         _shapesProperties = builder.ToImmutable();
                     }
                 }

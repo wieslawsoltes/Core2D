@@ -22,7 +22,7 @@ namespace Test2d.UI.Wpf.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Test2d.UI.Wpf.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Test2d.UI.Wpf.Properties.Resources", typeof(Resources).Assembly);
@@ -51,12 +51,3866 @@ namespace Test2d.UI.Wpf.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Background.
+        /// </summary>
+        public static string ContainerBackground {
+            get {
+                return ResourceManager.GetString("ContainerBackground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height.
+        /// </summary>
+        public static string ContainerHeight {
+            get {
+                return ResourceManager.GetString("ContainerHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string ContainerName {
+            get {
+                return ResourceManager.GetString("ContainerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Properties.
+        /// </summary>
+        public static string ContainerProperties {
+            get {
+                return ResourceManager.GetString("ContainerProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Template.
+        /// </summary>
+        public static string ContainerTemplate {
+            get {
+                return ResourceManager.GetString("ContainerTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Background.
+        /// </summary>
+        public static string ContainerTooltipBackground {
+            get {
+                return ResourceManager.GetString("ContainerTooltipBackground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height.
+        /// </summary>
+        public static string ContainerTooltipHeight {
+            get {
+                return ResourceManager.GetString("ContainerTooltipHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string ContainerTooltipName {
+            get {
+                return ResourceManager.GetString("ContainerTooltipName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Properties.
+        /// </summary>
+        public static string ContainerTooltipProperties {
+            get {
+                return ResourceManager.GetString("ContainerTooltipProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Container.Background = ArgbColor.
+        /// </summary>
+        public static string ContainerTooltipScriptBackground {
+            get {
+                return ResourceManager.GetString("ContainerTooltipScriptBackground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Container.Height = double.
+        /// </summary>
+        public static string ContainerTooltipScriptHeight {
+            get {
+                return ResourceManager.GetString("ContainerTooltipScriptHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Container.Name = string.
+        /// </summary>
+        public static string ContainerTooltipScriptName {
+            get {
+                return ResourceManager.GetString("ContainerTooltipScriptName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string ContainerTooltipScriptProperties {
+            get {
+                return ResourceManager.GetString("ContainerTooltipScriptProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Container.Template = Conainer.
+        /// </summary>
+        public static string ContainerTooltipScriptTemplate {
+            get {
+                return ResourceManager.GetString("ContainerTooltipScriptTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Container.Width = double.
+        /// </summary>
+        public static string ContainerTooltipScriptWidth {
+            get {
+                return ResourceManager.GetString("ContainerTooltipScriptWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Template.
+        /// </summary>
+        public static string ContainerTooltipTemplate {
+            get {
+                return ResourceManager.GetString("ContainerTooltipTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width.
+        /// </summary>
+        public static string ContainerTooltipWidth {
+            get {
+                return ResourceManager.GetString("ContainerTooltipWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width.
+        /// </summary>
+        public static string ContainerWidth {
+            get {
+                return ResourceManager.GetString("ContainerWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string DocumentName {
+            get {
+                return ResourceManager.GetString("DocumentName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string DocumentTooltipName {
+            get {
+                return ResourceManager.GetString("DocumentTooltipName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Document.Name = string.
+        /// </summary>
+        public static string DocumentTooltipScriptName {
+            get {
+                return ResourceManager.GetString("DocumentTooltipScriptName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Data.
+        /// </summary>
+        public static string MenuData {
+            get {
+                return ResourceManager.GetString("MenuData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Export....
+        /// </summary>
+        public static string MenuDataExport {
+            get {
+                return ResourceManager.GetString("MenuDataExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Import....
+        /// </summary>
+        public static string MenuDataImport {
+            get {
+                return ResourceManager.GetString("MenuDataImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Edit.
+        /// </summary>
+        public static string MenuEdit {
+            get {
+                return ResourceManager.GetString("MenuEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cl_ear All.
+        /// </summary>
+        public static string MenuEditClearAll {
+            get {
+                return ResourceManager.GetString("MenuEditClearAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Copy.
+        /// </summary>
+        public static string MenuEditCopy {
+            get {
+                return ResourceManager.GetString("MenuEditCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy As _Metafile.
+        /// </summary>
+        public static string MenuEditCopyAsEmf {
+            get {
+                return ResourceManager.GetString("MenuEditCopyAsEmf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cu_t.
+        /// </summary>
+        public static string MenuEditCut {
+            get {
+                return ResourceManager.GetString("MenuEditCut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Delete.
+        /// </summary>
+        public static string MenuEditDelete {
+            get {
+                return ResourceManager.GetString("MenuEditDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to De_select All.
+        /// </summary>
+        public static string MenuEditDeselectAll {
+            get {
+                return ResourceManager.GetString("MenuEditDeselectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Group.
+        /// </summary>
+        public static string MenuEditGroup {
+            get {
+                return ResourceManager.GetString("MenuEditGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Order.
+        /// </summary>
+        public static string MenuEditOrder {
+            get {
+                return ResourceManager.GetString("MenuEditOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bring Fo_rward.
+        /// </summary>
+        public static string MenuEditOrderBringForward {
+            get {
+                return ResourceManager.GetString("MenuEditOrderBringForward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bring to _Front.
+        /// </summary>
+        public static string MenuEditOrderBringToFront {
+            get {
+                return ResourceManager.GetString("MenuEditOrderBringToFront", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send Ba_ckward.
+        /// </summary>
+        public static string MenuEditOrderSendBackward {
+            get {
+                return ResourceManager.GetString("MenuEditOrderSendBackward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send to _Back.
+        /// </summary>
+        public static string MenuEditOrderSendToBack {
+            get {
+                return ResourceManager.GetString("MenuEditOrderSendToBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Paste.
+        /// </summary>
+        public static string MenuEditPaste {
+            get {
+                return ResourceManager.GetString("MenuEditPaste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Redo.
+        /// </summary>
+        public static string MenuEditRedo {
+            get {
+                return ResourceManager.GetString("MenuEditRedo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Re_ference.
+        /// </summary>
+        public static string MenuEditReference {
+            get {
+                return ResourceManager.GetString("MenuEditReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select _All.
+        /// </summary>
+        public static string MenuEditSelectAll {
+            get {
+                return ResourceManager.GetString("MenuEditSelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Undo.
+        /// </summary>
+        public static string MenuEditUndo {
+            get {
+                return ResourceManager.GetString("MenuEditUndo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to U_ngroup.
+        /// </summary>
+        public static string MenuEditUngroup {
+            get {
+                return ResourceManager.GetString("MenuEditUngroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _File.
+        /// </summary>
+        public static string MenuFile {
+            get {
+                return ResourceManager.GetString("MenuFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Close.
+        /// </summary>
+        public static string MenuFileClose {
+            get {
+                return ResourceManager.GetString("MenuFileClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to E_xit.
+        /// </summary>
+        public static string MenuFileExit {
+            get {
+                return ResourceManager.GetString("MenuFileExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Export....
+        /// </summary>
+        public static string MenuFileExport {
+            get {
+                return ResourceManager.GetString("MenuFileExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Group....
+        /// </summary>
+        public static string MenuFileExportGroup {
+            get {
+                return ResourceManager.GetString("MenuFileExportGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gro_up Libraries....
+        /// </summary>
+        public static string MenuFileExportGroupLibraries {
+            get {
+                return ResourceManager.GetString("MenuFileExportGroupLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gr_oup Library....
+        /// </summary>
+        public static string MenuFileExportGroupLibrary {
+            get {
+                return ResourceManager.GetString("MenuFileExportGroupLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to G_roups....
+        /// </summary>
+        public static string MenuFileExportGroups {
+            get {
+                return ResourceManager.GetString("MenuFileExportGroups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Style....
+        /// </summary>
+        public static string MenuFileExportStyle {
+            get {
+                return ResourceManager.GetString("MenuFileExportStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sty_le Libraries....
+        /// </summary>
+        public static string MenuFileExportStyleLibraries {
+            get {
+                return ResourceManager.GetString("MenuFileExportStyleLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to St_yle Library....
+        /// </summary>
+        public static string MenuFileExportStyleLibrary {
+            get {
+                return ResourceManager.GetString("MenuFileExportStyleLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S_tyles....
+        /// </summary>
+        public static string MenuFileExportStyles {
+            get {
+                return ResourceManager.GetString("MenuFileExportStyles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Template....
+        /// </summary>
+        public static string MenuFileExportTemplate {
+            get {
+                return ResourceManager.GetString("MenuFileExportTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to T_emplates....
+        /// </summary>
+        public static string MenuFileExportTemplates {
+            get {
+                return ResourceManager.GetString("MenuFileExportTemplates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Group....
+        /// </summary>
+        public static string MenuFileImportGroup {
+            get {
+                return ResourceManager.GetString("MenuFileImportGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gro_up Libraries....
+        /// </summary>
+        public static string MenuFileImportGroupLibraries {
+            get {
+                return ResourceManager.GetString("MenuFileImportGroupLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gr_oup Library....
+        /// </summary>
+        public static string MenuFileImportGroupLibrary {
+            get {
+                return ResourceManager.GetString("MenuFileImportGroupLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to G_roups....
+        /// </summary>
+        public static string MenuFileImportGroups {
+            get {
+                return ResourceManager.GetString("MenuFileImportGroups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Style....
+        /// </summary>
+        public static string MenuFileImportStyle {
+            get {
+                return ResourceManager.GetString("MenuFileImportStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sty_le Libraries....
+        /// </summary>
+        public static string MenuFileImportStyleLibraries {
+            get {
+                return ResourceManager.GetString("MenuFileImportStyleLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to St_yle Library....
+        /// </summary>
+        public static string MenuFileImportStyleLibrary {
+            get {
+                return ResourceManager.GetString("MenuFileImportStyleLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S_tyles....
+        /// </summary>
+        public static string MenuFileImportStyles {
+            get {
+                return ResourceManager.GetString("MenuFileImportStyles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Template....
+        /// </summary>
+        public static string MenuFileImportTemplate {
+            get {
+                return ResourceManager.GetString("MenuFileImportTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to T_emplates....
+        /// </summary>
+        public static string MenuFileImportTemplates {
+            get {
+                return ResourceManager.GetString("MenuFileImportTemplates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _New.
+        /// </summary>
+        public static string MenuFileNew {
+            get {
+                return ResourceManager.GetString("MenuFileNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Open....
+        /// </summary>
+        public static string MenuFileOpen {
+            get {
+                return ResourceManager.GetString("MenuFileOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Recent.
+        /// </summary>
+        public static string MenuFileRecent {
+            get {
+                return ResourceManager.GetString("MenuFileRecent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Save.
+        /// </summary>
+        public static string MenuFileSave {
+            get {
+                return ResourceManager.GetString("MenuFileSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save _As....
+        /// </summary>
+        public static string MenuFileSaveAs {
+            get {
+                return ResourceManager.GetString("MenuFileSaveAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expor_t.
+        /// </summary>
+        public static string MenuFileSubMenuExport {
+            get {
+                return ResourceManager.GetString("MenuFileSubMenuExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I_mport.
+        /// </summary>
+        public static string MenuFileSubMenuImport {
+            get {
+                return ResourceManager.GetString("MenuFileSubMenuImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Options.
+        /// </summary>
+        public static string MenuOptions {
+            get {
+                return ResourceManager.GetString("MenuOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default is Close_d.
+        /// </summary>
+        public static string MenuOptionsDefaultIsClosed {
+            get {
+                return ResourceManager.GetString("MenuOptionsDefaultIsClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default is _Filled.
+        /// </summary>
+        public static string MenuOptionsDefaultIsFilled {
+            get {
+                return ResourceManager.GetString("MenuOptionsDefaultIsFilled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default is Smooth _Join.
+        /// </summary>
+        public static string MenuOptionsDefaultIsSmoothJoin {
+            get {
+                return ResourceManager.GetString("MenuOptionsDefaultIsSmoothJoin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default is Stro_ked.
+        /// </summary>
+        public static string MenuOptionsDefaultIsStroked {
+            get {
+                return ResourceManager.GetString("MenuOptionsDefaultIsStroked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snap to _Grid.
+        /// </summary>
+        public static string MenuOptionsSnapToGrid {
+            get {
+                return ResourceManager.GetString("MenuOptionsSnapToGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Try To _Connect.
+        /// </summary>
+        public static string MenuOptionsTryToConnect {
+            get {
+                return ResourceManager.GetString("MenuOptionsTryToConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Script.
+        /// </summary>
+        public static string MenuScript {
+            get {
+                return ResourceManager.GetString("MenuScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Evaluate....
+        /// </summary>
+        public static string MenuScriptEvaluate {
+            get {
+                return ResourceManager.GetString("MenuScriptEvaluate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S_cripts.
+        /// </summary>
+        public static string MenuScripts {
+            get {
+                return ResourceManager.GetString("MenuScripts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S_imulation.
+        /// </summary>
+        public static string MenuSimulation {
+            get {
+                return ResourceManager.GetString("MenuSimulation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Pause.
+        /// </summary>
+        public static string MenuSimulationPause {
+            get {
+                return ResourceManager.GetString("MenuSimulationPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Restart.
+        /// </summary>
+        public static string MenuSimulationRestart {
+            get {
+                return ResourceManager.GetString("MenuSimulationRestart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Start.
+        /// </summary>
+        public static string MenuSimulationStart {
+            get {
+                return ResourceManager.GetString("MenuSimulationStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S_top.
+        /// </summary>
+        public static string MenuSimulationStop {
+            get {
+                return ResourceManager.GetString("MenuSimulationStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ti_ck.
+        /// </summary>
+        public static string MenuSimulationTick {
+            get {
+                return ResourceManager.GetString("MenuSimulationTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Te_mplate.
+        /// </summary>
+        public static string MenuTemplate {
+            get {
+                return ResourceManager.GetString("MenuTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Tool.
+        /// </summary>
+        public static string MenuTool {
+            get {
+                return ResourceManager.GetString("MenuTool", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Arc.
+        /// </summary>
+        public static string MenuToolArc {
+            get {
+                return ResourceManager.GetString("MenuToolArc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Bezier.
+        /// </summary>
+        public static string MenuToolBezier {
+            get {
+                return ResourceManager.GetString("MenuToolBezier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Ellipse.
+        /// </summary>
+        public static string MenuToolEllipse {
+            get {
+                return ResourceManager.GetString("MenuToolEllipse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Image.
+        /// </summary>
+        public static string MenuToolImage {
+            get {
+                return ResourceManager.GetString("MenuToolImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Line.
+        /// </summary>
+        public static string MenuToolLine {
+            get {
+                return ResourceManager.GetString("MenuToolLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _None.
+        /// </summary>
+        public static string MenuToolNone {
+            get {
+                return ResourceManager.GetString("MenuToolNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pat_h.
+        /// </summary>
+        public static string MenuToolPath {
+            get {
+                return ResourceManager.GetString("MenuToolPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Point.
+        /// </summary>
+        public static string MenuToolPoint {
+            get {
+                return ResourceManager.GetString("MenuToolPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _QBezier.
+        /// </summary>
+        public static string MenuToolQBezier {
+            get {
+                return ResourceManager.GetString("MenuToolQBezier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Rectangle.
+        /// </summary>
+        public static string MenuToolRectangle {
+            get {
+                return ResourceManager.GetString("MenuToolRectangle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Selection.
+        /// </summary>
+        public static string MenuToolSelection {
+            get {
+                return ResourceManager.GetString("MenuToolSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Text.
+        /// </summary>
+        public static string MenuToolText {
+            get {
+                return ResourceManager.GetString("MenuToolText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data.
+        /// </summary>
+        public static string MenuTooltipData {
+            get {
+                return ResourceManager.GetString("MenuTooltipData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Data.
+        /// </summary>
+        public static string MenuTooltipDataExport {
+            get {
+                return ResourceManager.GetString("MenuTooltipDataExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Data.
+        /// </summary>
+        public static string MenuTooltipDataImport {
+            get {
+                return ResourceManager.GetString("MenuTooltipDataImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string MenuTooltipEdit {
+            get {
+                return ResourceManager.GetString("MenuTooltipEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear All.
+        /// </summary>
+        public static string MenuTooltipEditClearAll {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditClearAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy.
+        /// </summary>
+        public static string MenuTooltipEditCopy {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy As Metafile.
+        /// </summary>
+        public static string MenuTooltipEditCopyAsEmf {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditCopyAsEmf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cut.
+        /// </summary>
+        public static string MenuTooltipEditCut {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditCut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string MenuTooltipEditDelete {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deselect All.
+        /// </summary>
+        public static string MenuTooltipEditDeselectAll {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditDeselectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Group.
+        /// </summary>
+        public static string MenuTooltipEditGroup {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order.
+        /// </summary>
+        public static string MenuTooltipEditOrder {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bring Forward.
+        /// </summary>
+        public static string MenuTooltipEditOrderBringForward {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditOrderBringForward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bring to Front.
+        /// </summary>
+        public static string MenuTooltipEditOrderBringToFront {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditOrderBringToFront", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send Backward.
+        /// </summary>
+        public static string MenuTooltipEditOrderSendBackward {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditOrderSendBackward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send to Back.
+        /// </summary>
+        public static string MenuTooltipEditOrderSendToBack {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditOrderSendToBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paste.
+        /// </summary>
+        public static string MenuTooltipEditPaste {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditPaste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redo.
+        /// </summary>
+        public static string MenuTooltipEditRedo {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditRedo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reference.
+        /// </summary>
+        public static string MenuTooltipEditReference {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select All.
+        /// </summary>
+        public static string MenuTooltipEditSelectAll {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditSelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undo.
+        /// </summary>
+        public static string MenuTooltipEditUndo {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditUndo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ungroup.
+        /// </summary>
+        public static string MenuTooltipEditUngroup {
+            get {
+                return ResourceManager.GetString("MenuTooltipEditUngroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File.
+        /// </summary>
+        public static string MenuTooltipFile {
+            get {
+                return ResourceManager.GetString("MenuTooltipFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string MenuTooltipFileClose {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        public static string MenuTooltipFileExit {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        public static string MenuTooltipFileExport {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Group.
+        /// </summary>
+        public static string MenuTooltipFileExportGroup {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileExportGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Group Libraries.
+        /// </summary>
+        public static string MenuTooltipFileExportGroupLibraries {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileExportGroupLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Group Library.
+        /// </summary>
+        public static string MenuTooltipFileExportGroupLibrary {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileExportGroupLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Groups.
+        /// </summary>
+        public static string MenuTooltipFileExportGroups {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileExportGroups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Style.
+        /// </summary>
+        public static string MenuTooltipFileExportStyle {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileExportStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Style Libraries.
+        /// </summary>
+        public static string MenuTooltipFileExportStyleLibraries {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileExportStyleLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Style Library.
+        /// </summary>
+        public static string MenuTooltipFileExportStyleLibrary {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileExportStyleLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Styles.
+        /// </summary>
+        public static string MenuTooltipFileExportStyles {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileExportStyles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Template.
+        /// </summary>
+        public static string MenuTooltipFileExportTemplate {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileExportTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Templates.
+        /// </summary>
+        public static string MenuTooltipFileExportTemplates {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileExportTemplates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Group.
+        /// </summary>
+        public static string MenuTooltipFileImportGroup {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileImportGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Group Libraries.
+        /// </summary>
+        public static string MenuTooltipFileImportGroupLibraries {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileImportGroupLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Group Library.
+        /// </summary>
+        public static string MenuTooltipFileImportGroupLibrary {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileImportGroupLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Groups.
+        /// </summary>
+        public static string MenuTooltipFileImportGroups {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileImportGroups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Style.
+        /// </summary>
+        public static string MenuTooltipFileImportStyle {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileImportStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Style Libraries.
+        /// </summary>
+        public static string MenuTooltipFileImportStyleLibraries {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileImportStyleLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Style Library.
+        /// </summary>
+        public static string MenuTooltipFileImportStyleLibrary {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileImportStyleLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Styles.
+        /// </summary>
+        public static string MenuTooltipFileImportStyles {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileImportStyles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Template.
+        /// </summary>
+        public static string MenuTooltipFileImportTemplate {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileImportTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Templates.
+        /// </summary>
+        public static string MenuTooltipFileImportTemplates {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileImportTemplates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        public static string MenuTooltipFileNew {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string MenuTooltipFileOpen {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent.
+        /// </summary>
+        public static string MenuTooltipFileRecent {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileRecent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string MenuTooltipFileSave {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SaveAs.
+        /// </summary>
+        public static string MenuTooltipFileSaveAs {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileSaveAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        public static string MenuTooltipFileSubMenuExport {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileSubMenuExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import.
+        /// </summary>
+        public static string MenuTooltipFileSubMenuImport {
+            get {
+                return ResourceManager.GetString("MenuTooltipFileSubMenuImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        public static string MenuTooltipOptions {
+            get {
+                return ResourceManager.GetString("MenuTooltipOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default is Closed (path).
+        /// </summary>
+        public static string MenuTooltipOptionsDefaultIsClosed {
+            get {
+                return ResourceManager.GetString("MenuTooltipOptionsDefaultIsClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default is Filled (all shapes).
+        /// </summary>
+        public static string MenuTooltipOptionsDefaultIsFilled {
+            get {
+                return ResourceManager.GetString("MenuTooltipOptionsDefaultIsFilled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default is Smooth Join (path).
+        /// </summary>
+        public static string MenuTooltipOptionsDefaultIsSmoothJoin {
+            get {
+                return ResourceManager.GetString("MenuTooltipOptionsDefaultIsSmoothJoin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default is Stroked (all shapes).
+        /// </summary>
+        public static string MenuTooltipOptionsDefaultIsStroked {
+            get {
+                return ResourceManager.GetString("MenuTooltipOptionsDefaultIsStroked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snap to Grid.
+        /// </summary>
+        public static string MenuTooltipOptionsSnapToGrid {
+            get {
+                return ResourceManager.GetString("MenuTooltipOptionsSnapToGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Try to Connect.
+        /// </summary>
+        public static string MenuTooltipOptionsTryToConnect {
+            get {
+                return ResourceManager.GetString("MenuTooltipOptionsTryToConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script.
+        /// </summary>
+        public static string MenuTooltipScript {
+            get {
+                return ResourceManager.GetString("MenuTooltipScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string MenuTooltipScriptData {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ExportData(string path, Database database).
+        /// </summary>
+        public static string MenuTooltipScriptDataExport {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptDataExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ImportData(string path).
+        /// </summary>
+        public static string MenuTooltipScriptDataImport {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptDataImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string MenuTooltipScriptEdit {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnClearAll().
+        /// </summary>
+        public static string MenuTooltipScriptEditClearAll {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditClearAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnCopy().
+        /// </summary>
+        public static string MenuTooltipScriptEditCopy {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptEditCopyAsEmf {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditCopyAsEmf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnCut().
+        /// </summary>
+        public static string MenuTooltipScriptEditCut {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditCut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Editor.DeleteSelected().
+        /// </summary>
+        public static string MenuTooltipScriptEditDelete {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnDeselectAll().
+        /// </summary>
+        public static string MenuTooltipScriptEditDeselectAll {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditDeselectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Editor.GroupSelected().
+        /// </summary>
+        public static string MenuTooltipScriptEditGroup {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string MenuTooltipScriptEditOrder {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Editor.BringForwardSelected().
+        /// </summary>
+        public static string MenuTooltipScriptEditOrderBringForward {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditOrderBringForward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Editor.BringToFrontSelected().
+        /// </summary>
+        public static string MenuTooltipScriptEditOrderBringToFront {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditOrderBringToFront", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Editor.SendBackwardSelected().
+        /// </summary>
+        public static string MenuTooltipScriptEditOrderSendBackward {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditOrderSendBackward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Editor.SendToBackSelected().
+        /// </summary>
+        public static string MenuTooltipScriptEditOrderSendToBack {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditOrderSendToBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnPaste().
+        /// </summary>
+        public static string MenuTooltipScriptEditPaste {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditPaste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnRedo().
+        /// </summary>
+        public static string MenuTooltipScriptEditRedo {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditRedo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Editor.ReferenceSelected().
+        /// </summary>
+        public static string MenuTooltipScriptEditReference {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnSelectAll().
+        /// </summary>
+        public static string MenuTooltipScriptEditSelectAll {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditSelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnUndo().
+        /// </summary>
+        public static string MenuTooltipScriptEditUndo {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditUndo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Editor.UngroupSelected().
+        /// </summary>
+        public static string MenuTooltipScriptEditUngroup {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEditUngroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Evaluate Script.
+        /// </summary>
+        public static string MenuTooltipScriptEvaluate {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptEvaluate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string MenuTooltipScriptFile {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.Close().
+        /// </summary>
+        public static string MenuTooltipScriptFileClose {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptFileExit {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ExportAsPdf(@&quot;C:\Project.pdf&quot;, Project)
+        ///Script: Context.ExportAsPdf(@&quot;C:\Document.pdf&quot;, Document)
+        ///Script: Context.ExportAsPdf(@&quot;C:\Container.pdf&quot;, Container).
+        /// </summary>
+        public static string MenuTooltipScriptFileExport {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ExportObject(string path, object item, ExportType.Group).
+        /// </summary>
+        public static string MenuTooltipScriptFileExportGroup {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileExportGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ExportObject(string path, object item, ExportType.GroupLibraries).
+        /// </summary>
+        public static string MenuTooltipScriptFileExportGroupLibraries {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileExportGroupLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ExportObject(string path, object item, ExportType.GroupLibrary).
+        /// </summary>
+        public static string MenuTooltipScriptFileExportGroupLibrary {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileExportGroupLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ExportObject(string path, object item, ExportType.Groups).
+        /// </summary>
+        public static string MenuTooltipScriptFileExportGroups {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileExportGroups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ExportObject(string path, object item, ExportType.Style).
+        /// </summary>
+        public static string MenuTooltipScriptFileExportStyle {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileExportStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ExportObject(string path, object item, ExportType.StyleLibraries).
+        /// </summary>
+        public static string MenuTooltipScriptFileExportStyleLibraries {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileExportStyleLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ExportObject(string path, object item, ExportType.StyleLibrary).
+        /// </summary>
+        public static string MenuTooltipScriptFileExportStyleLibrary {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileExportStyleLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ExportObject(string path, object item, ExportType.Styles).
+        /// </summary>
+        public static string MenuTooltipScriptFileExportStyles {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileExportStyles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ExportObject(string path, object item, ExportType.Template).
+        /// </summary>
+        public static string MenuTooltipScriptFileExportTemplate {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileExportTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ExportObject(string path, object item, ExportType.Templates).
+        /// </summary>
+        public static string MenuTooltipScriptFileExportTemplates {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileExportTemplates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ImportObject(string path, object item, ImportType.Group).
+        /// </summary>
+        public static string MenuTooltipScriptFileImportGroup {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileImportGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ImportObject(string path, object item, ImportType.GroupLibraries).
+        /// </summary>
+        public static string MenuTooltipScriptFileImportGroupLibraries {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileImportGroupLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ImportObject(string path, object item, ImportType.GroupLibrary).
+        /// </summary>
+        public static string MenuTooltipScriptFileImportGroupLibrary {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileImportGroupLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ImportObject(string path, object item, ImportType.Groups).
+        /// </summary>
+        public static string MenuTooltipScriptFileImportGroups {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileImportGroups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ImportObject(string path, object item, ImportType.Style).
+        /// </summary>
+        public static string MenuTooltipScriptFileImportStyle {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileImportStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ImportObject(string path, object item, ImportType.StyleLibraries).
+        /// </summary>
+        public static string MenuTooltipScriptFileImportStyleLibraries {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileImportStyleLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ImportObject(string path, object item, ImportType.StyleLibrary).
+        /// </summary>
+        public static string MenuTooltipScriptFileImportStyleLibrary {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileImportStyleLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ImportObject(string path, object item, ImportType.Styles).
+        /// </summary>
+        public static string MenuTooltipScriptFileImportStyles {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileImportStyles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ImportObject(string path, object item, ImportType.Template).
+        /// </summary>
+        public static string MenuTooltipScriptFileImportTemplate {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileImportTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.ImportObject(string path, object item, ImportType.Templates).
+        /// </summary>
+        public static string MenuTooltipScriptFileImportTemplates {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileImportTemplates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.New().
+        /// </summary>
+        public static string MenuTooltipScriptFileNew {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.Open(string path).
+        /// </summary>
+        public static string MenuTooltipScriptFileOpen {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string MenuTooltipScriptFileRecent {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileRecent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.Save(Context.Editor.ProjectPath).
+        /// </summary>
+        public static string MenuTooltipScriptFileSave {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.Save(string path).
+        /// </summary>
+        public static string MenuTooltipScriptFileSaveAs {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileSaveAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string MenuTooltipScriptFileSubMenuExport {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileSubMenuExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string MenuTooltipScriptFileSubMenuImport {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptFileSubMenuImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string MenuTooltipScriptOptions {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToggleDefaultIsClosed().
+        /// </summary>
+        public static string MenuTooltipScriptOptionsDefaultIsClosed {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptOptionsDefaultIsClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToggleDefaultIsFilled().
+        /// </summary>
+        public static string MenuTooltipScriptOptionsDefaultIsFilled {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptOptionsDefaultIsFilled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToggleDefaultIsSmoothJoin().
+        /// </summary>
+        public static string MenuTooltipScriptOptionsDefaultIsSmoothJoin {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptOptionsDefaultIsSmoothJoin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToggleDefaultIsStroked().
+        /// </summary>
+        public static string MenuTooltipScriptOptionsDefaultIsStroked {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptOptionsDefaultIsStroked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToggleSnapToGrid().
+        /// </summary>
+        public static string MenuTooltipScriptOptionsSnapToGrid {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptOptionsSnapToGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToggleTryToConnect().
+        /// </summary>
+        public static string MenuTooltipScriptOptionsTryToConnect {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptOptionsTryToConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scripts.
+        /// </summary>
+        public static string MenuTooltipScripts {
+            get {
+                return ResourceManager.GetString("MenuTooltipScripts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string MenuTooltipScriptScript {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.Eval(string path).
+        /// </summary>
+        public static string MenuTooltipScriptScriptEvaluate {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptScriptEvaluate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string MenuTooltipScriptScripts {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptScripts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string MenuTooltipScriptSimulation {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptSimulation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnPauseSimulation().
+        /// </summary>
+        public static string MenuTooltipScriptSimulationPause {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptSimulationPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnRestartSimulation().
+        /// </summary>
+        public static string MenuTooltipScriptSimulationRestart {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptSimulationRestart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnStartSimulation().
+        /// </summary>
+        public static string MenuTooltipScriptSimulationStart {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptSimulationStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnStopSimulation().
+        /// </summary>
+        public static string MenuTooltipScriptSimulationStop {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptSimulationStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnTickSimulation().
+        /// </summary>
+        public static string MenuTooltipScriptSimulationTick {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptSimulationTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string MenuTooltipScriptTemplate {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string MenuTooltipScriptTool {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptTool", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToolArc().
+        /// </summary>
+        public static string MenuTooltipScriptToolArc {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptToolArc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToolBezier().
+        /// </summary>
+        public static string MenuTooltipScriptToolBezier {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptToolBezier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToolEllipse().
+        /// </summary>
+        public static string MenuTooltipScriptToolEllipse {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptToolEllipse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToolImage().
+        /// </summary>
+        public static string MenuTooltipScriptToolImage {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptToolImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToolLine().
+        /// </summary>
+        public static string MenuTooltipScriptToolLine {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptToolLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToolNone().
+        /// </summary>
+        public static string MenuTooltipScriptToolNone {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptToolNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToolPath().
+        /// </summary>
+        public static string MenuTooltipScriptToolPath {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptToolPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToolPoint().
+        /// </summary>
+        public static string MenuTooltipScriptToolPoint {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptToolPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToolQBezier().
+        /// </summary>
+        public static string MenuTooltipScriptToolQBezier {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptToolQBezier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToolRectangle().
+        /// </summary>
+        public static string MenuTooltipScriptToolRectangle {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptToolRectangle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToolSelection().
+        /// </summary>
+        public static string MenuTooltipScriptToolSelection {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptToolSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Context.OnToolText().
+        /// </summary>
+        public static string MenuTooltipScriptToolText {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptToolText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string MenuTooltipScriptView {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewCodeWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewCodeWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewContainerWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewContainerWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewDatabasesWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewDatabasesWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewDatabaseWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewDatabaseWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewDataWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewDataWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewDocumentWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewDocumentWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewGroupsWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewGroupsWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewLayersWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewLayersWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewOptionsWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewOptionsWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewProjectWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewProjectWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewPropertiesWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewPropertiesWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewScriptsWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewScriptsWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewScriptWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewScriptWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewShapesWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewShapesWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewStateWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewStateWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewStylesWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewStylesWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewStyleWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewStyleWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewTemplatesWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewTemplatesWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewTemplateWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewTemplateWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string MenuTooltipScriptViewZoom {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewZoom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewZoomExtent {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewZoomExtent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptViewZoomReset {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptViewZoomReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Applicable.
+        /// </summary>
+        public static string MenuTooltipScriptWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptWindowLoadLayout {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptWindowLoadLayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptWindowResetLayout {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptWindowResetLayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Not Available.
+        /// </summary>
+        public static string MenuTooltipScriptWindowSaveLayout {
+            get {
+                return ResourceManager.GetString("MenuTooltipScriptWindowSaveLayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Simulation.
+        /// </summary>
+        public static string MenuTooltipSimulation {
+            get {
+                return ResourceManager.GetString("MenuTooltipSimulation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pause Simulation.
+        /// </summary>
+        public static string MenuTooltipSimulationPause {
+            get {
+                return ResourceManager.GetString("MenuTooltipSimulationPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restart Simulation.
+        /// </summary>
+        public static string MenuTooltipSimulationRestart {
+            get {
+                return ResourceManager.GetString("MenuTooltipSimulationRestart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Simulation.
+        /// </summary>
+        public static string MenuTooltipSimulationStart {
+            get {
+                return ResourceManager.GetString("MenuTooltipSimulationStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop Simulation.
+        /// </summary>
+        public static string MenuTooltipSimulationStop {
+            get {
+                return ResourceManager.GetString("MenuTooltipSimulationStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tick Simulation.
+        /// </summary>
+        public static string MenuTooltipSimulationTick {
+            get {
+                return ResourceManager.GetString("MenuTooltipSimulationTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Template.
+        /// </summary>
+        public static string MenuTooltipTemplate {
+            get {
+                return ResourceManager.GetString("MenuTooltipTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tool.
+        /// </summary>
+        public static string MenuTooltipTool {
+            get {
+                return ResourceManager.GetString("MenuTooltipTool", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arc Tool.
+        /// </summary>
+        public static string MenuTooltipToolArc {
+            get {
+                return ResourceManager.GetString("MenuTooltipToolArc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bezier Tool.
+        /// </summary>
+        public static string MenuTooltipToolBezier {
+            get {
+                return ResourceManager.GetString("MenuTooltipToolBezier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ellipse Tool.
+        /// </summary>
+        public static string MenuTooltipToolEllipse {
+            get {
+                return ResourceManager.GetString("MenuTooltipToolEllipse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image Tool.
+        /// </summary>
+        public static string MenuTooltipToolImage {
+            get {
+                return ResourceManager.GetString("MenuTooltipToolImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line Tool.
+        /// </summary>
+        public static string MenuTooltipToolLine {
+            get {
+                return ResourceManager.GetString("MenuTooltipToolLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None Tool.
+        /// </summary>
+        public static string MenuTooltipToolNone {
+            get {
+                return ResourceManager.GetString("MenuTooltipToolNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path Tool.
+        /// </summary>
+        public static string MenuTooltipToolPath {
+            get {
+                return ResourceManager.GetString("MenuTooltipToolPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Point Tool.
+        /// </summary>
+        public static string MenuTooltipToolPoint {
+            get {
+                return ResourceManager.GetString("MenuTooltipToolPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QBezier Tool.
+        /// </summary>
+        public static string MenuTooltipToolQBezier {
+            get {
+                return ResourceManager.GetString("MenuTooltipToolQBezier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rectangle Tool.
+        /// </summary>
+        public static string MenuTooltipToolRectangle {
+            get {
+                return ResourceManager.GetString("MenuTooltipToolRectangle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selection Tool.
+        /// </summary>
+        public static string MenuTooltipToolSelection {
+            get {
+                return ResourceManager.GetString("MenuTooltipToolSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text Tool.
+        /// </summary>
+        public static string MenuTooltipToolText {
+            get {
+                return ResourceManager.GetString("MenuTooltipToolText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View.
+        /// </summary>
+        public static string MenuTooltipView {
+            get {
+                return ResourceManager.GetString("MenuTooltipView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code Window.
+        /// </summary>
+        public static string MenuTooltipViewCodeWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewCodeWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Container Window.
+        /// </summary>
+        public static string MenuTooltipViewContainerWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewContainerWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Databases Window.
+        /// </summary>
+        public static string MenuTooltipViewDatabasesWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewDatabasesWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database Window.
+        /// </summary>
+        public static string MenuTooltipViewDatabaseWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewDatabaseWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Window.
+        /// </summary>
+        public static string MenuTooltipViewDataWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewDataWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document Window.
+        /// </summary>
+        public static string MenuTooltipViewDocumentWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewDocumentWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Groups Window.
+        /// </summary>
+        public static string MenuTooltipViewGroupsWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewGroupsWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Layers Window.
+        /// </summary>
+        public static string MenuTooltipViewLayersWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewLayersWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options Window.
+        /// </summary>
+        public static string MenuTooltipViewOptionsWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewOptionsWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project Window.
+        /// </summary>
+        public static string MenuTooltipViewProjectWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewProjectWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Properties Window.
+        /// </summary>
+        public static string MenuTooltipViewPropertiesWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewPropertiesWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scripts Window.
+        /// </summary>
+        public static string MenuTooltipViewScriptsWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewScriptsWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script Window.
+        /// </summary>
+        public static string MenuTooltipViewScriptWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewScriptWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shapes Window.
+        /// </summary>
+        public static string MenuTooltipViewShapesWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewShapesWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State Window.
+        /// </summary>
+        public static string MenuTooltipViewStateWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewStateWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Styles Window.
+        /// </summary>
+        public static string MenuTooltipViewStylesWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewStylesWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Style Window.
+        /// </summary>
+        public static string MenuTooltipViewStyleWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewStyleWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Templates Window.
+        /// </summary>
+        public static string MenuTooltipViewTemplatesWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewTemplatesWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Template Window.
+        /// </summary>
+        public static string MenuTooltipViewTemplateWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewTemplateWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zoom.
+        /// </summary>
+        public static string MenuTooltipViewZoom {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewZoom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zoom to Extent.
+        /// </summary>
+        public static string MenuTooltipViewZoomExtent {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewZoomExtent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset Zoom.
+        /// </summary>
+        public static string MenuTooltipViewZoomReset {
+            get {
+                return ResourceManager.GetString("MenuTooltipViewZoomReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Window.
+        /// </summary>
+        public static string MenuTooltipWindow {
+            get {
+                return ResourceManager.GetString("MenuTooltipWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load Window Layout.
+        /// </summary>
+        public static string MenuTooltipWindowLoadLayout {
+            get {
+                return ResourceManager.GetString("MenuTooltipWindowLoadLayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset Window Layout.
+        /// </summary>
+        public static string MenuTooltipWindowResetLayout {
+            get {
+                return ResourceManager.GetString("MenuTooltipWindowResetLayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Window Layout.
+        /// </summary>
+        public static string MenuTooltipWindowSaveLayout {
+            get {
+                return ResourceManager.GetString("MenuTooltipWindowSaveLayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _View.
+        /// </summary>
+        public static string MenuView {
+            get {
+                return ResourceManager.GetString("MenuView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Code Window.
+        /// </summary>
+        public static string MenuViewCodeWindow {
+            get {
+                return ResourceManager.GetString("MenuViewCodeWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Co_ntainer.
+        /// </summary>
+        public static string MenuViewContainerWindow {
+            get {
+                return ResourceManager.GetString("MenuViewContainerWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Databases.
+        /// </summary>
+        public static string MenuViewDatabasesWindow {
+            get {
+                return ResourceManager.GetString("MenuViewDatabasesWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data_base Window.
+        /// </summary>
+        public static string MenuViewDatabaseWindow {
+            get {
+                return ResourceManager.GetString("MenuViewDatabaseWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data W_indow.
+        /// </summary>
+        public static string MenuViewDataWindow {
+            get {
+                return ResourceManager.GetString("MenuViewDataWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doc_ument Window.
+        /// </summary>
+        public static string MenuViewDocumentWindow {
+            get {
+                return ResourceManager.GetString("MenuViewDocumentWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Groups.
+        /// </summary>
+        public static string MenuViewGroupsWindow {
+            get {
+                return ResourceManager.GetString("MenuViewGroupsWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Layers.
+        /// </summary>
+        public static string MenuViewLayersWindow {
+            get {
+                return ResourceManager.GetString("MenuViewLayersWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Options.
+        /// </summary>
+        public static string MenuViewOptionsWindow {
+            get {
+                return ResourceManager.GetString("MenuViewOptionsWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project E_xplorer.
+        /// </summary>
+        public static string MenuViewProjectWindow {
+            get {
+                return ResourceManager.GetString("MenuViewProjectWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prop_erties Window.
+        /// </summary>
+        public static string MenuViewPropertiesWindow {
+            get {
+                return ResourceManager.GetString("MenuViewPropertiesWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scri_pts Window.
+        /// </summary>
+        public static string MenuViewScriptsWindow {
+            get {
+                return ResourceManager.GetString("MenuViewScriptsWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sc_ript Window.
+        /// </summary>
+        public static string MenuViewScriptWindow {
+            get {
+                return ResourceManager.GetString("MenuViewScriptWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sh_apes.
+        /// </summary>
+        public static string MenuViewShapesWindow {
+            get {
+                return ResourceManager.GetString("MenuViewShapesWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State _Window.
+        /// </summary>
+        public static string MenuViewStateWindow {
+            get {
+                return ResourceManager.GetString("MenuViewStateWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Styles.
+        /// </summary>
+        public static string MenuViewStylesWindow {
+            get {
+                return ResourceManager.GetString("MenuViewStylesWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to St_yle Window.
+        /// </summary>
+        public static string MenuViewStyleWindow {
+            get {
+                return ResourceManager.GetString("MenuViewStyleWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Templates.
+        /// </summary>
+        public static string MenuViewTemplatesWindow {
+            get {
+                return ResourceManager.GetString("MenuViewTemplatesWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Te_mplate Window.
+        /// </summary>
+        public static string MenuViewTemplateWindow {
+            get {
+                return ResourceManager.GetString("MenuViewTemplateWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Zoom.
+        /// </summary>
+        public static string MenuViewZoom {
+            get {
+                return ResourceManager.GetString("MenuViewZoom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Extent.
+        /// </summary>
+        public static string MenuViewZoomExtent {
+            get {
+                return ResourceManager.GetString("MenuViewZoomExtent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Reset.
+        /// </summary>
+        public static string MenuViewZoomReset {
+            get {
+                return ResourceManager.GetString("MenuViewZoomReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Window.
+        /// </summary>
+        public static string MenuWindow {
+            get {
+                return ResourceManager.GetString("MenuWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Load Layout....
+        /// </summary>
+        public static string MenuWindowLoadLayout {
+            get {
+                return ResourceManager.GetString("MenuWindowLoadLayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Reset Layout.
+        /// </summary>
+        public static string MenuWindowResetLayout {
+            get {
+                return ResourceManager.GetString("MenuWindowResetLayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Save Layout....
+        /// </summary>
+        public static string MenuWindowSaveLayout {
+            get {
+                return ResourceManager.GetString("MenuWindowSaveLayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CycleResolution.
+        /// </summary>
+        public static string OptionsCycleResolution {
+            get {
+                return ResourceManager.GetString("OptionsCycleResolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FillRule.
+        /// </summary>
+        public static string OptionsDefaultFillRule {
+            get {
+                return ResourceManager.GetString("OptionsDefaultFillRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IsClosed.
+        /// </summary>
+        public static string OptionsDefaultIsClosed {
+            get {
+                return ResourceManager.GetString("OptionsDefaultIsClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IsFilled.
+        /// </summary>
+        public static string OptionsDefaultIsFilled {
+            get {
+                return ResourceManager.GetString("OptionsDefaultIsFilled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IsSmoothJoin.
+        /// </summary>
+        public static string OptionsDefaultIsSmoothJoin {
+            get {
+                return ResourceManager.GetString("OptionsDefaultIsSmoothJoin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IsStroked.
+        /// </summary>
+        public static string OptionsDefaultIsStroked {
+            get {
+                return ResourceManager.GetString("OptionsDefaultIsStroked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced.
+        /// </summary>
+        public static string OptionsHeaderAdvanced {
+            get {
+                return ResourceManager.GetString("OptionsHeaderAdvanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Defaults.
+        /// </summary>
+        public static string OptionsHeaderDefaults {
+            get {
+                return ResourceManager.GetString("OptionsHeaderDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General.
+        /// </summary>
+        public static string OptionsHeaderGeneral {
+            get {
+                return ResourceManager.GetString("OptionsHeaderGeneral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HelperStyle.
+        /// </summary>
+        public static string OptionsHelperStyle {
+            get {
+                return ResourceManager.GetString("OptionsHelperStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HitTreshold.
+        /// </summary>
+        public static string OptionsHitTreshold {
+            get {
+                return ResourceManager.GetString("OptionsHitTreshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MoveMode.
+        /// </summary>
+        public static string OptionsMoveMode {
+            get {
+                return ResourceManager.GetString("OptionsMoveMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PointShape.
+        /// </summary>
+        public static string OptionsPointShape {
+            get {
+                return ResourceManager.GetString("OptionsPointShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PointStyle.
+        /// </summary>
+        public static string OptionsPointStyle {
+            get {
+                return ResourceManager.GetString("OptionsPointStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SelectionStyle.
+        /// </summary>
+        public static string OptionsSelectionStyle {
+            get {
+                return ResourceManager.GetString("OptionsSelectionStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SnapToGrid.
+        /// </summary>
+        public static string OptionsSnapToGrid {
+            get {
+                return ResourceManager.GetString("OptionsSnapToGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SnapX.
+        /// </summary>
+        public static string OptionsSnapX {
+            get {
+                return ResourceManager.GetString("OptionsSnapX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SnapY.
+        /// </summary>
+        public static string OptionsSnapY {
+            get {
+                return ResourceManager.GetString("OptionsSnapY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cycle Resolution (in milliseconds).
+        /// </summary>
+        public static string OptionsTooltipCycleResolution {
+            get {
+                return ResourceManager.GetString("OptionsTooltipCycleResolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Fill Rule (path).
+        /// </summary>
+        public static string OptionsTooltipDefaultFillRule {
+            get {
+                return ResourceManager.GetString("OptionsTooltipDefaultFillRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default is Closed (path).
+        /// </summary>
+        public static string OptionsTooltipDefaultIsClosed {
+            get {
+                return ResourceManager.GetString("OptionsTooltipDefaultIsClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default is Filled (all shapes).
+        /// </summary>
+        public static string OptionsTooltipDefaultIsFilled {
+            get {
+                return ResourceManager.GetString("OptionsTooltipDefaultIsFilled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default is Smooth Join (path).
+        /// </summary>
+        public static string OptionsTooltipDefaultIsSmoothJoin {
+            get {
+                return ResourceManager.GetString("OptionsTooltipDefaultIsSmoothJoin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default is Stroked (all shapes).
+        /// </summary>
+        public static string OptionsTooltipDefaultIsStroked {
+            get {
+                return ResourceManager.GetString("OptionsTooltipDefaultIsStroked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Helper Style.
+        /// </summary>
+        public static string OptionsTooltipHelperStyle {
+            get {
+                return ResourceManager.GetString("OptionsTooltipHelperStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hit Treshold.
+        /// </summary>
+        public static string OptionsTooltipHitTreshold {
+            get {
+                return ResourceManager.GetString("OptionsTooltipHitTreshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Mode.
+        /// </summary>
+        public static string OptionsTooltipMoveMode {
+            get {
+                return ResourceManager.GetString("OptionsTooltipMoveMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Point Shape.
+        /// </summary>
+        public static string OptionsTooltipPointShape {
+            get {
+                return ResourceManager.GetString("OptionsTooltipPointShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Point Style.
+        /// </summary>
+        public static string OptionsTooltipPointStyle {
+            get {
+                return ResourceManager.GetString("OptionsTooltipPointStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.CycleResolution = int.
+        /// </summary>
+        public static string OptionsTooltipScriptCycleResolution {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptCycleResolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.DefaultFillRule = enum XFillRule.
+        /// </summary>
+        public static string OptionsTooltipScriptDefaultFillRule {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptDefaultFillRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.DefaultIsClosed = bool.
+        /// </summary>
+        public static string OptionsTooltipScriptDefaultIsClosed {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptDefaultIsClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.DefaultIsFilled = bool.
+        /// </summary>
+        public static string OptionsTooltipScriptDefaultIsFilled {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptDefaultIsFilled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.DefaultIsSmoothJoin = bool.
+        /// </summary>
+        public static string OptionsTooltipScriptDefaultIsSmoothJoin {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptDefaultIsSmoothJoin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.DefaultIsStroked = bool.
+        /// </summary>
+        public static string OptionsTooltipScriptDefaultIsStroked {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptDefaultIsStroked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.HelperStyle = ShapeStyle.
+        /// </summary>
+        public static string OptionsTooltipScriptHelperStyle {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptHelperStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.HitTreshold = double.
+        /// </summary>
+        public static string OptionsTooltipScriptHitTreshold {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptHitTreshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.MoveMode = enum MoveMode.
+        /// </summary>
+        public static string OptionsTooltipScriptMoveMode {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptMoveMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.PointShape = Shape.
+        /// </summary>
+        public static string OptionsTooltipScriptPointShape {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptPointShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.PointStyle = ShapeStyle.
+        /// </summary>
+        public static string OptionsTooltipScriptPointStyle {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptPointStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.SelectionStyle = ShapeStyle.
+        /// </summary>
+        public static string OptionsTooltipScriptSelectionStyle {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptSelectionStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.SnapToGrid = bool.
+        /// </summary>
+        public static string OptionsTooltipScriptSnapToGrid {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptSnapToGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.SnapX = double.
+        /// </summary>
+        public static string OptionsTooltipScriptSnapX {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptSnapX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.SnapY = double.
+        /// </summary>
+        public static string OptionsTooltipScriptSnapY {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptSnapY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Options.TryToConnect = bool.
+        /// </summary>
+        public static string OptionsTooltipScriptTryToConnect {
+            get {
+                return ResourceManager.GetString("OptionsTooltipScriptTryToConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selection Style.
+        /// </summary>
+        public static string OptionsTooltipSelectionStyle {
+            get {
+                return ResourceManager.GetString("OptionsTooltipSelectionStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snap to Grid.
+        /// </summary>
+        public static string OptionsTooltipSnapToGrid {
+            get {
+                return ResourceManager.GetString("OptionsTooltipSnapToGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snap X.
+        /// </summary>
+        public static string OptionsTooltipSnapX {
+            get {
+                return ResourceManager.GetString("OptionsTooltipSnapX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snap Y.
+        /// </summary>
+        public static string OptionsTooltipSnapY {
+            get {
+                return ResourceManager.GetString("OptionsTooltipSnapY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Try to Connect.
+        /// </summary>
+        public static string OptionsTooltipTryToConnect {
+            get {
+                return ResourceManager.GetString("OptionsTooltipTryToConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TryToConnect.
+        /// </summary>
+        public static string OptionsTryToConnect {
+            get {
+                return ResourceManager.GetString("OptionsTryToConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string ProjectName {
+            get {
+                return ResourceManager.GetString("ProjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        public static string ProjectOptions {
+            get {
+                return ResourceManager.GetString("ProjectOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string ProjectTooltipName {
+            get {
+                return ResourceManager.GetString("ProjectTooltipName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        public static string ProjectTooltipOptions {
+            get {
+                return ResourceManager.GetString("ProjectTooltipOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Project.Name = string.
+        /// </summary>
+        public static string ProjectTooltipScriptName {
+            get {
+                return ResourceManager.GetString("ProjectTooltipScriptName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script: Project.Options = Options.
+        /// </summary>
+        public static string ProjectTooltipScriptOptions {
+            get {
+                return ResourceManager.GetString("ProjectTooltipScriptOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TODO.
+        /// </summary>
+        public static string TODO {
+            get {
+                return ResourceManager.GetString("TODO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code.
+        /// </summary>
+        public static string WindowTitleCode {
+            get {
+                return ResourceManager.GetString("WindowTitleCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Container.
+        /// </summary>
+        public static string WindowTitleContainer {
+            get {
+                return ResourceManager.GetString("WindowTitleContainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data.
+        /// </summary>
+        public static string WindowTitleData {
+            get {
+                return ResourceManager.GetString("WindowTitleData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database.
+        /// </summary>
+        public static string WindowTitleDatabase {
+            get {
+                return ResourceManager.GetString("WindowTitleDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Databases.
+        /// </summary>
+        public static string WindowTitleDatabases {
+            get {
+                return ResourceManager.GetString("WindowTitleDatabases", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document.
+        /// </summary>
+        public static string WindowTitleDocument {
+            get {
+                return ResourceManager.GetString("WindowTitleDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Groups.
+        /// </summary>
+        public static string WindowTitleGroups {
+            get {
+                return ResourceManager.GetString("WindowTitleGroups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Layers.
+        /// </summary>
+        public static string WindowTitleLayers {
+            get {
+                return ResourceManager.GetString("WindowTitleLayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        public static string WindowTitleOptions {
+            get {
+                return ResourceManager.GetString("WindowTitleOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project.
+        /// </summary>
+        public static string WindowTitleProject {
+            get {
+                return ResourceManager.GetString("WindowTitleProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Properties.
+        /// </summary>
+        public static string WindowTitleProperties {
+            get {
+                return ResourceManager.GetString("WindowTitleProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Script.
+        /// </summary>
+        public static string WindowTitleScript {
+            get {
+                return ResourceManager.GetString("WindowTitleScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scripts.
+        /// </summary>
+        public static string WindowTitleScripts {
+            get {
+                return ResourceManager.GetString("WindowTitleScripts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shapes.
+        /// </summary>
+        public static string WindowTitleShapes {
+            get {
+                return ResourceManager.GetString("WindowTitleShapes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State.
+        /// </summary>
+        public static string WindowTitleState {
+            get {
+                return ResourceManager.GetString("WindowTitleState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Style.
+        /// </summary>
+        public static string WindowTitleStyle {
+            get {
+                return ResourceManager.GetString("WindowTitleStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Styles.
+        /// </summary>
+        public static string WindowTitleStyles {
+            get {
+                return ResourceManager.GetString("WindowTitleStyles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Template.
+        /// </summary>
+        public static string WindowTitleTemplate {
+            get {
+                return ResourceManager.GetString("WindowTitleTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Templates.
+        /// </summary>
+        public static string WindowTitleTemplates {
+            get {
+                return ResourceManager.GetString("WindowTitleTemplates", resourceCulture);
             }
         }
     }

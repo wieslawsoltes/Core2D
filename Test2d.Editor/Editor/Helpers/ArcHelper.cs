@@ -130,6 +130,7 @@ namespace Test2d
                             sx, sy,
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape,
+                            _editor.Project.Options.DefaultIsStroked,
                             _editor.Project.Options.DefaultIsFilled);
                         if (_editor.Project.Options.TryToConnect)
                         {
@@ -274,20 +275,7 @@ namespace Test2d
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                if (_editor.TryToHoverShape(sx, sy))
-                                {
-                                    if (_ellipseP2 != null)
-                                    {
-                                        _ellipseP2.State &= ~ShapeState.Visible;
-                                    }
-                                }
-                                else
-                                {
-                                    if (_ellipseP2 != null)
-                                    {
-                                        _ellipseP2.State |= ShapeState.Visible;
-                                    }
-                                }
+                                _editor.TryToHoverShape(sx, sy);
                             }
                             _shape.Point2.X = sx;
                             _shape.Point2.Y = sy;
@@ -303,20 +291,7 @@ namespace Test2d
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                if (_editor.TryToHoverShape(sx, sy))
-                                {
-                                    if (_ellipseStart != null)
-                                    {
-                                        _ellipseStart.State &= ~ShapeState.Visible;
-                                    }
-                                }
-                                else
-                                {
-                                    if (_ellipseStart != null)
-                                    {
-                                        _ellipseStart.State |= ShapeState.Visible;
-                                    }
-                                }
+                                _editor.TryToHoverShape(sx, sy);
                             }
                             _shape.Point3.X = sx;
                             _shape.Point3.Y = sy;
@@ -332,20 +307,7 @@ namespace Test2d
                         {
                             if (_editor.Project.Options.TryToConnect)
                             {
-                                if (_editor.TryToHoverShape(sx, sy))
-                                {
-                                    if (_ellipseEnd != null)
-                                    {
-                                        _ellipseEnd.State &= ~ShapeState.Visible;
-                                    }
-                                }
-                                else
-                                {
-                                    if (_ellipseEnd != null)
-                                    {
-                                        _ellipseEnd.State |= ShapeState.Visible;
-                                    }
-                                }
+                                _editor.TryToHoverShape(sx, sy);
                             }
                             _shape.Point4.X = sx;
                             _shape.Point4.Y = sy;
@@ -366,11 +328,11 @@ namespace Test2d
             _style = _editor.Project.Options.HelperStyle;
             _ellipse = XEllipse.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipse);
-            _ellipseP1 = XEllipse.Create(0, 0, _style, null, true);
+            _ellipseP1 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseP1);
-            _ellipseP2 = XEllipse.Create(0, 0, _style, null, true);
+            _ellipseP2 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseP2);
-            _ellipseCenter = XEllipse.Create(0, 0, _style, null, true);
+            _ellipseCenter = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseCenter);
         }
 
@@ -393,7 +355,7 @@ namespace Test2d
             
             _startLine = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_startLine);
-            _ellipseStart = XEllipse.Create(0, 0, _style, null, true);
+            _ellipseStart = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseStart);
         }
 
@@ -410,7 +372,7 @@ namespace Test2d
             
             _endLine = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_endLine);
-            _ellipseEnd = XEllipse.Create(0, 0, _style, null, true);
+            _ellipseEnd = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseEnd);
         }
 

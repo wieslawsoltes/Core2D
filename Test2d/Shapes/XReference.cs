@@ -31,9 +31,18 @@ namespace Test2d
                         if (_shape is XGroup)
                         {
                             var group = _shape as XGroup;
+
                             foreach (var shape in group.Shapes)
                             {
                                 foreach (var property in shape.Properties)
+                                {
+                                    builder.Add(property);
+                                }
+                            }
+
+                            foreach (var connector in group.Connectors)
+                            {
+                                foreach (var property in connector.Properties)
                                 {
                                     builder.Add(property);
                                 }

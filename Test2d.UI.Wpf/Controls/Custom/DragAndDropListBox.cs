@@ -156,7 +156,7 @@ namespace Test.Controls
         {
             if (sourceIndex < targetIndex)
             {
-                var items = (ImmutableArray<T>)this.DataContext;
+                var items = (ImmutableArray<T>)this.ItemsSource;
                 if (items != null)
                 {
                     var builder = items.ToBuilder();
@@ -167,7 +167,7 @@ namespace Test.Controls
             }
             else
             {
-                var items = (ImmutableArray<T>)this.DataContext;
+                var items = (ImmutableArray<T>)this.ItemsSource;
                 if (items != null)
                 {
                     int removeIndex = sourceIndex + 1;

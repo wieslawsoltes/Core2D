@@ -889,7 +889,7 @@ namespace PdfSharp
 
             XFont font = new XFont(
                 text.Style.TextStyle.FontName,
-                XUnit.FromPoint(text.Style.TextStyle.FontSize),
+                _scaleToPage(text.Style.TextStyle.FontSize),
                 fontStyle,
                 options);
 

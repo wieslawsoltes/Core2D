@@ -163,6 +163,7 @@ namespace Test2d
         /// <param name="y4"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -173,6 +174,7 @@ namespace Test2d
             double x4, double y4,
             ShapeStyle style,
             BaseShape point,
+            bool isStroked = true,
             bool isFilled = false,
             string name = "")
         {
@@ -180,7 +182,7 @@ namespace Test2d
             {
                 Name = name,
                 Style = style,
-                IsStroked = true,
+                IsStroked = isStroked,
                 IsFilled = isFilled,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
@@ -199,6 +201,7 @@ namespace Test2d
         /// <param name="y"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -206,10 +209,11 @@ namespace Test2d
             double x, double y,
             ShapeStyle style,
             BaseShape point,
+            bool isStroked = true,
             bool isFilled = false,
             string name = "")
         {
-            return Create(x, y, x, y, x, y, x, y, style, point, isFilled, name);
+            return Create(x, y, x, y, x, y, x, y, style, point, isStroked, isFilled, name);
         }
 
         /// <summary>
@@ -221,6 +225,7 @@ namespace Test2d
         /// <param name="point4"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -231,6 +236,7 @@ namespace Test2d
             XPoint point4,
             ShapeStyle style,
             BaseShape point,
+            bool isStroked = true,
             bool isFilled = false,
             string name = "")
         {
@@ -238,7 +244,7 @@ namespace Test2d
             {
                 Name = name,
                 Style = style,
-                IsStroked = true,
+                IsStroked = isStroked,
                 IsFilled = isFilled,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),

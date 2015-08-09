@@ -50,7 +50,7 @@ namespace Test2d
                     return;
                 }
 
-                if (_editor.Project.CurrentContainer != null)
+                if (_editor.Project != null && _editor.Project.CurrentContainer != null)
                 {
                     foreach (var renderer in _editor.Renderers)
                     {
@@ -67,7 +67,7 @@ namespace Test2d
                     return;
                 }
 
-                if (_editor.Project.CurrentContainer != null)
+                if (_editor.Project != null && _editor.Project.CurrentContainer != null)
                 {
                     _editor.Project.CurrentContainer.Invalidate();
                 }
@@ -80,13 +80,16 @@ namespace Test2d
                     return;
                 }
 
-                if (_editor.Project.CurrentContainer != null)
+                if (_editor.Project != null && _editor.Project.CurrentContainer != null)
                 {
                     _editor.Project.CurrentContainer.Invalidate();
                 }
             };
 
-            Add(_editor.Project);
+            if (_editor.Project != null)
+            {
+                Add(_editor.Project);
+            }
         }
 
         [Conditional("VERBOSE")]
@@ -591,6 +594,11 @@ namespace Test2d
                 Add(options.PointShape);
             }
 
+            if (options.PointStyle != null)
+            {
+                Add(options.PointStyle);
+            }
+
             if (options.SelectionStyle != null)
             {
                 Add(options.SelectionStyle);
@@ -614,6 +622,11 @@ namespace Test2d
             if (options.PointShape != null)
             {
                 Remove(options.PointShape);
+            }
+
+            if (options.PointStyle != null)
+            {
+                Remove(options.PointStyle);
             }
 
             if (options.SelectionStyle != null)

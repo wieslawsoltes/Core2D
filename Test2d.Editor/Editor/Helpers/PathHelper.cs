@@ -20,6 +20,7 @@ namespace Test2d
         private XPathGeometry _geometry;
         private bool _isInitialized = false;
         private PathTool _previousPathTool;
+        private PathTool _movePathTool;
         // line
         private XPoint _lineStart;
         private XPoint _lineEnd;
@@ -646,20 +647,7 @@ namespace Test2d
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            if (_editor.TryToHoverShape(sx, sy))
-                            {
-                                if (_lineEllipseEnd != null)
-                                {
-                                    _lineEllipseEnd.State &= ~ShapeState.Visible;
-                                }
-                            }
-                            else
-                            {
-                                if (_lineEllipseEnd != null)
-                                {
-                                    _lineEllipseEnd.State |= ShapeState.Visible;
-                                }
-                            }
+                            _editor.TryToHoverShape(sx, sy);
                         }
                         _lineEnd.X = sx;
                         _lineEnd.Y = sy;
@@ -694,20 +682,7 @@ namespace Test2d
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            if (_editor.TryToHoverShape(sx, sy))
-                            {
-                                if (_bezierEllipsePoint4 != null)
-                                {
-                                    _bezierEllipsePoint4.State &= ~ShapeState.Visible;
-                                }
-                            }
-                            else
-                            {
-                                if (_bezierEllipsePoint4 != null)
-                                {
-                                    _bezierEllipsePoint4.State |= ShapeState.Visible;
-                                }
-                            }
+                            _editor.TryToHoverShape(sx, sy);
                         }
                         _bezierPoint2.X = sx;
                         _bezierPoint2.Y = sy;
@@ -724,20 +699,7 @@ namespace Test2d
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            if (_editor.TryToHoverShape(sx, sy))
-                            {
-                                if (_bezierEllipsePoint2 != null)
-                                {
-                                    _bezierEllipsePoint2.State &= ~ShapeState.Visible;
-                                }
-                            }
-                            else
-                            {
-                                if (_bezierEllipsePoint2 != null)
-                                {
-                                    _bezierEllipsePoint2.State |= ShapeState.Visible;
-                                }
-                            }
+                            _editor.TryToHoverShape(sx, sy);
                         }
                         _bezierPoint2.X = sx;
                         _bezierPoint2.Y = sy;
@@ -750,20 +712,7 @@ namespace Test2d
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            if (_editor.TryToHoverShape(sx, sy))
-                            {
-                                if (_bezierEllipsePoint3 != null)
-                                {
-                                    _bezierEllipsePoint3.State &= ~ShapeState.Visible;
-                                }
-                            }
-                            else
-                            {
-                                if (_bezierEllipsePoint3 != null)
-                                {
-                                    _bezierEllipsePoint3.State |= ShapeState.Visible;
-                                }
-                            }
+                            _editor.TryToHoverShape(sx, sy);
                         }
                         _bezierPoint3.X = sx;
                         _bezierPoint3.Y = sy;
@@ -793,20 +742,7 @@ namespace Test2d
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            if (_editor.TryToHoverShape(sx, sy))
-                            {
-                                if (_qbezierEllipsePoint3 != null)
-                                {
-                                    _qbezierEllipsePoint3.State &= ~ShapeState.Visible;
-                                }
-                            }
-                            else
-                            {
-                                if (_qbezierEllipsePoint3 != null)
-                                {
-                                    _qbezierEllipsePoint3.State |= ShapeState.Visible;
-                                }
-                            }
+                            _editor.TryToHoverShape(sx, sy);
                         }
                         _qbezierPoint2.X = sx;
                         _qbezierPoint2.Y = sy;
@@ -821,20 +757,7 @@ namespace Test2d
                     {
                         if (_editor.Project.Options.TryToConnect)
                         {
-                            if (_editor.TryToHoverShape(sx, sy))
-                            {
-                                if (_qbezierEllipsePoint2 != null)
-                                {
-                                    _qbezierEllipsePoint2.State &= ~ShapeState.Visible;
-                                }
-                            }
-                            else
-                            {
-                                if (_qbezierEllipsePoint2 != null)
-                                {
-                                    _qbezierEllipsePoint2.State |= ShapeState.Visible;
-                                }
-                            }
+                            _editor.TryToHoverShape(sx, sy);
                         }
                         _qbezierPoint2.X = sx;
                         _qbezierPoint2.Y = sy;
@@ -849,9 +772,9 @@ namespace Test2d
         private void ToStateOneLine()
         {
             _style = _editor.Project.Options.HelperStyle;
-            _lineEllipseStart = XEllipse.Create(0, 0, _style, null, true);
+            _lineEllipseStart = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_lineEllipseStart);
-            _lineEllipseEnd = XEllipse.Create(0, 0, _style, null, true);
+            _lineEllipseEnd = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_lineEllipseEnd);
         }
 
@@ -863,18 +786,18 @@ namespace Test2d
         private void ToStateOneBezier()
         {
             _style = _editor.Project.Options.HelperStyle;
-            _bezierEllipsePoint1 = XEllipse.Create(0, 0, _style, null, true);
+            _bezierEllipsePoint1 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierEllipsePoint1);
-            _bezierEllipsePoint4 = XEllipse.Create(0, 0, _style, null, true);
+            _bezierEllipsePoint4 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierEllipsePoint4);
         }
 
         private void ToStateOneQBezier()
         {
             _style = _editor.Project.Options.HelperStyle;
-            _qbezierEllipsePoint1 = XEllipse.Create(0, 0, _style, null, true);
+            _qbezierEllipsePoint1 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierEllipsePoint1);
-            _qbezierEllipsePoint3 = XEllipse.Create(0, 0, _style, null, true);
+            _qbezierEllipsePoint3 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierEllipsePoint3);
         }
 
@@ -888,7 +811,7 @@ namespace Test2d
             _style = _editor.Project.Options.HelperStyle;
             _bezierLine12 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierLine12);
-            _bezierEllipsePoint2 = XEllipse.Create(0, 0, _style, null, true);
+            _bezierEllipsePoint2 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierEllipsePoint2);
         }
 
@@ -899,7 +822,7 @@ namespace Test2d
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierLine12);
             _qbezierLine32 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierLine32);
-            _qbezierEllipsePoint2 = XEllipse.Create(0, 0, _style, null, true);
+            _qbezierEllipsePoint2 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierEllipsePoint2);
         }
 
@@ -914,7 +837,7 @@ namespace Test2d
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierLine43);
             _bezierLine23 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierLine23);
-            _bezierEllipsePoint3 = XEllipse.Create(0, 0, _style, null, true);
+            _bezierEllipsePoint3 = XEllipse.Create(0, 0, _style, null, true, true);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierEllipsePoint3);
         }
 
@@ -1202,9 +1125,54 @@ namespace Test2d
                         QBezierLeftDown(x, y);
                     }
                     break;
+                case PathTool.Move:
+                    {
+                        _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
+                        _editor.Project.CurrentContainer.HelperLayer.Invalidate();
+                    }
+                    break;
+            }
+
+            if (_editor.CurrentPathTool == PathTool.Move)
+            {
+                _movePathTool = _previousPathTool;
             }
 
             _previousPathTool = _editor.CurrentPathTool;
+        }
+
+        private void StartFigureLeftDown(double x, double y)
+        {
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+
+            // start new figure
+            var start = TryToGetConnectionPoint(sx, sy) ?? XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
+            _geometry.BeginFigure(
+                start,
+                _editor.Project.Options.DefaultIsFilled,
+                _editor.Project.Options.DefaultIsClosed);
+
+            // switch to path tool before Move tool
+            _editor.CurrentPathTool = _movePathTool;
+            SwitchPathTool(x, y);
+        }
+
+        private void StartFigureMove(double x, double y)
+        {
+            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+            switch (_currentState)
+            {
+                case State.None:
+                    {
+                        if (_editor.Project.Options.TryToConnect)
+                        {
+                            _editor.TryToHoverShape(sx, sy);
+                        }
+                    }
+                    break;
+            }
         }
 
         /// <summary>
@@ -1240,6 +1208,11 @@ namespace Test2d
                 case PathTool.QBezier:
                     {
                         QBezierLeftDown(x, y);
+                    }
+                    break;
+                case PathTool.Move:
+                    {
+                        StartFigureLeftDown(x, y);
                     }
                     break;
             }
@@ -1327,6 +1300,11 @@ namespace Test2d
                 case PathTool.QBezier:
                     {
                         QBezierMove(x, y);
+                    }
+                    break;
+                case PathTool.Move:
+                    {
+                        StartFigureMove(x, y);
                     }
                     break;
             }

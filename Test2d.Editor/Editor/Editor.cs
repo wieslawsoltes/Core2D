@@ -202,7 +202,6 @@ namespace Test2d
             editor.ProjectPath = string.Empty;
             editor.IsProjectDirty = false;
             editor.Renderers = renderers;
-
             editor.History = new History();
 
             if (editor.EnableObserver)
@@ -245,6 +244,9 @@ namespace Test2d
         /// <param name="images">The collection if XImage shapes.</param>
         public void ToRelativeUri(Uri baseUri, IEnumerable<XImage> images)
         {
+            if (baseUri == null || images == null)
+                return;
+            
             foreach (var image in images)
             {
                 var relative = baseUri.MakeRelativeUri(image.Path);
@@ -259,6 +261,9 @@ namespace Test2d
         /// <param name="images">The collection if XImage shapes.</param>
         public void ToAbsoluteUri(Uri baseUri, IEnumerable<XImage> images)
         {
+            if (baseUri == null || images == null)
+                return;
+            
             foreach (var image in images)
             {
                 var absolute = new Uri(baseUri, image.Path);
@@ -273,61 +278,61 @@ namespace Test2d
         /// <returns></returns>
         public static IEnumerable<XPoint> GetAllPathPoints(XPath path)
         {
-            if (path != null && path.Geometry != null)
-            {
-                foreach (var figure in path.Geometry.Figures)
-                {
-                    yield return figure.StartPoint;
+            if (path == null || path.Geometry == null)
+                yield break;
 
-                    foreach (var segment in figure.Segments)
+            foreach (var figure in path.Geometry.Figures)
+            {
+                yield return figure.StartPoint;
+
+                foreach (var segment in figure.Segments)
+                {
+                    if (segment is XArcSegment)
                     {
-                        if (segment is XArcSegment)
+                        var arcSegment = segment as XArcSegment;
+                        yield return arcSegment.Point;
+                    }
+                    else if (segment is XBezierSegment)
+                    {
+                        var bezierSegment = segment as XBezierSegment;
+                        yield return bezierSegment.Point1;
+                        yield return bezierSegment.Point2;
+                        yield return bezierSegment.Point3;
+                    }
+                    else if (segment is XLineSegment)
+                    {
+                        var lineSegment = segment as XLineSegment;
+                        yield return lineSegment.Point;
+                    }
+                    else if (segment is XPolyBezierSegment)
+                    {
+                        var polyBezierSegment = segment as XPolyBezierSegment;
+                        foreach (var point in polyBezierSegment.Points)
                         {
-                            var arcSegment = segment as XArcSegment;
-                            yield return arcSegment.Point;
+                            yield return point;
                         }
-                        else if (segment is XBezierSegment)
+                    }
+                    else if (segment is XPolyLineSegment)
+                    {
+                        var polyLineSegment = segment as XPolyLineSegment;
+                        foreach (var point in polyLineSegment.Points)
                         {
-                            var bezierSegment = segment as XBezierSegment;
-                            yield return bezierSegment.Point1;
-                            yield return bezierSegment.Point2;
-                            yield return bezierSegment.Point3;
+                            yield return point;
                         }
-                        else if (segment is XLineSegment)
+                    }
+                    else if (segment is XPolyQuadraticBezierSegment)
+                    {
+                        var polyQuadraticSegment = segment as XPolyQuadraticBezierSegment;
+                        foreach (var point in polyQuadraticSegment.Points)
                         {
-                            var lineSegment = segment as XLineSegment;
-                            yield return lineSegment.Point;
+                            yield return point;
                         }
-                        else if (segment is XPolyBezierSegment)
-                        {
-                            var polyBezierSegment = segment as XPolyBezierSegment;
-                            foreach (var point in polyBezierSegment.Points)
-                            {
-                                yield return point;
-                            }
-                        }
-                        else if (segment is XPolyLineSegment)
-                        {
-                            var polyLineSegment = segment as XPolyLineSegment;
-                            foreach (var point in polyLineSegment.Points)
-                            {
-                                yield return point;
-                            }
-                        }
-                        else if (segment is XPolyQuadraticBezierSegment)
-                        {
-                            var polyQuadraticSegment = segment as XPolyQuadraticBezierSegment;
-                            foreach (var point in polyQuadraticSegment.Points)
-                            {
-                                yield return point;
-                            }
-                        }
-                        else if (segment is XQuadraticBezierSegment)
-                        {
-                            var qbezierSegment = segment as XQuadraticBezierSegment;
-                            yield return qbezierSegment.Point1;
-                            yield return qbezierSegment.Point2;
-                        }
+                    }
+                    else if (segment is XQuadraticBezierSegment)
+                    {
+                        var qbezierSegment = segment as XQuadraticBezierSegment;
+                        yield return qbezierSegment.Point1;
+                        yield return qbezierSegment.Point2;
                     }
                 }
             }
@@ -342,9 +347,7 @@ namespace Test2d
         public static IEnumerable<XPoint> GetAllPoints(IEnumerable<BaseShape> shapes, ShapeState exclude)
         {
             if (shapes == null)
-            {
                 yield break;
-            }
 
             foreach (var shape in shapes)
             {
@@ -545,9 +548,7 @@ namespace Test2d
         public static IEnumerable<BaseShape> GetAllShapes(IEnumerable<BaseShape> shapes)
         {
             if (shapes == null)
-            {
                 yield break;
-            }
 
             foreach (var shape in shapes)
             {
@@ -701,18 +702,60 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="property"></param>
+        public void AddWithHistory(BaseShape shape, ShapeProperty property)
+        {
+            var previous = shape.Properties;
+            var next = shape.Properties.Add(property);
+            _history.Snapshot(previous, next, (p) => shape.Properties = p);
+            shape.Properties = next;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="property"></param>
+        public void AddWithHistory(Container container, ShapeProperty property)
+        {
+            var previous = container.Properties;
+            var next = container.Properties.Add(property);
+            _history.Snapshot(previous, next, (p) => container.Properties = p);
+            container.Properties = next;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="binding"></param>
+        public void AddWithHistory(BaseShape shape, ShapeBinding binding)
+        {
+            var previous = shape.Bindings;
+            var next = shape.Bindings.Add(binding);
+            _history.Snapshot(previous, next, (p) => shape.Bindings = p);
+            shape.Bindings = next;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void RemoveCurrentTemplate()
         {
+            if (_project == null)
+                return;
+            
             var template = _project.CurrentTemplate;
-            if (template != null)
-            {
-                var previous = _project.Templates;
-                var next =  _project.Templates.Remove(_project.CurrentTemplate);
-                _history.Snapshot(previous, next, (p) => _project.Templates = p);
-                _project.Templates = next;
+            if (template == null)
+                return;
+            
+            var previous = _project.Templates;
+            var next =  _project.Templates.Remove(_project.CurrentTemplate);
+            _history.Snapshot(previous, next, (p) => _project.Templates = p);
+            _project.Templates = next;
 
-                _project.CurrentTemplate = _project.Templates.FirstOrDefault();
-            }
+            _project.CurrentTemplate = _project.Templates.FirstOrDefault();
         }
 
         /// <summary>
@@ -720,16 +763,19 @@ namespace Test2d
         /// </summary>
         public void RemoveCurrentGroupLibrary()
         {
+            if (_project == null)
+                return;
+            
             var gl = _project.CurrentGroupLibrary;
-            if (gl != null)
-            {
-                var previous = _project.GroupLibraries;
-                var next = _project.GroupLibraries.Remove(gl);
-                _history.Snapshot(previous, next, (p) => _project.GroupLibraries = p);
-                _project.GroupLibraries = next;
+            if (gl == null)
+                return;
+            
+            var previous = _project.GroupLibraries;
+            var next = _project.GroupLibraries.Remove(gl);
+            _history.Snapshot(previous, next, (p) => _project.GroupLibraries = p);
+            _project.GroupLibraries = next;
 
-                _project.CurrentGroupLibrary = _project.GroupLibraries.FirstOrDefault();
-            }
+            _project.CurrentGroupLibrary = _project.GroupLibraries.FirstOrDefault();
         }
 
         /// <summary>
@@ -737,17 +783,20 @@ namespace Test2d
         /// </summary>
         public void RemoveCurrentGroup()
         {
+            if (_project == null || _project.CurrentGroupLibrary == null)
+                return;
+            
             var group = _project.CurrentGroupLibrary.CurrentGroup;
-            if (group != null)
-            {
-                var gl = _project.CurrentGroupLibrary;
-                var previous = gl.Groups;
-                var next = gl.Groups.Remove(group);
-                _history.Snapshot(previous, next, (p) => gl.Groups = p);
-                gl.Groups = next;
+            if (group == null)
+                return;
+            
+            var gl = _project.CurrentGroupLibrary;
+            var previous = gl.Groups;
+            var next = gl.Groups.Remove(group);
+            _history.Snapshot(previous, next, (p) => gl.Groups = p);
+            gl.Groups = next;
 
-                _project.CurrentGroupLibrary.CurrentGroup = _project.CurrentGroupLibrary.Groups.FirstOrDefault();
-            }
+            _project.CurrentGroupLibrary.CurrentGroup = _project.CurrentGroupLibrary.Groups.FirstOrDefault();
         }
 
         /// <summary>
@@ -755,17 +804,20 @@ namespace Test2d
         /// </summary>
         public void RemoveCurrentLayer()
         {
+            if (_project == null || _project.CurrentContainer == null)
+                return;
+            
             var layer = _project.CurrentContainer.CurrentLayer;
-            if (layer != null)
-            {
-                var container = _project.CurrentContainer;
-                var previous = container.Layers;
-                var next = container.Layers.Remove(layer);
-                _history.Snapshot(previous, next, (p) => container.Layers = p);
-                container.Layers = next;
+            if (layer == null)
+                return;
+            
+            var container = _project.CurrentContainer;
+            var previous = container.Layers;
+            var next = container.Layers.Remove(layer);
+            _history.Snapshot(previous, next, (p) => container.Layers = p);
+            container.Layers = next;
 
-                _project.CurrentContainer.CurrentLayer = _project.CurrentContainer.Layers.FirstOrDefault();
-            }
+            _project.CurrentContainer.CurrentLayer = _project.CurrentContainer.Layers.FirstOrDefault();
         }
 
         /// <summary>
@@ -773,17 +825,20 @@ namespace Test2d
         /// </summary>
         public void RemoveCurrentShape()
         {
+            if (_project == null || _project.CurrentContainer == null)
+                return;
+            
             var shape = _project.CurrentContainer.CurrentShape;
-            if (shape != null)
-            {
-                var layer = _project.CurrentContainer.CurrentLayer;
-                var previous = layer.Shapes;
-                var next = layer.Shapes.Remove(shape);
-                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
+            if (shape == null)
+                return;
 
-                _project.CurrentContainer.CurrentShape = _project.CurrentContainer.CurrentLayer.Shapes.FirstOrDefault();
-            }
+            var layer = _project.CurrentContainer.CurrentLayer;
+            var previous = layer.Shapes;
+            var next = layer.Shapes.Remove(shape);
+            _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            _project.CurrentContainer.CurrentShape = _project.CurrentContainer.CurrentLayer.Shapes.FirstOrDefault();
         }
 
         /// <summary>
@@ -791,16 +846,19 @@ namespace Test2d
         /// </summary>
         public void RemoveCurrentStyleLibrary()
         {
+            if (_project == null)
+                return;
+            
             var sg = _project.CurrentStyleLibrary;
-            if (sg != null)
-            {
-                var previous = _project.StyleLibraries;
-                var next = _project.StyleLibraries.Remove(sg);
-                _history.Snapshot(previous, next, (p) => _project.StyleLibraries = p);
-                _project.StyleLibraries = next;
+            if (sg == null)
+                return;
+            
+            var previous = _project.StyleLibraries;
+            var next = _project.StyleLibraries.Remove(sg);
+            _history.Snapshot(previous, next, (p) => _project.StyleLibraries = p);
+            _project.StyleLibraries = next;
 
-                _project.CurrentStyleLibrary = _project.StyleLibraries.FirstOrDefault();
-            }
+            _project.CurrentStyleLibrary = _project.StyleLibraries.FirstOrDefault();
         }
 
         /// <summary>
@@ -808,17 +866,20 @@ namespace Test2d
         /// </summary>
         public void RemoveCurrentStyle()
         {
+            if (_project == null || _project.CurrentStyleLibrary == null)
+                return;
+            
             var style = _project.CurrentStyleLibrary.CurrentStyle;
-            if (style != null)
-            {
-                var sg = _project.CurrentStyleLibrary;
-                var previous = sg.Styles;
-                var next = sg.Styles.Remove(style);
-                _history.Snapshot(previous, next, (p) => sg.Styles = p);
-                sg.Styles = next;
+            if (style == null)
+                return;
+            
+            var sg = _project.CurrentStyleLibrary;
+            var previous = sg.Styles;
+            var next = sg.Styles.Remove(style);
+            _history.Snapshot(previous, next, (p) => sg.Styles = p);
+            sg.Styles = next;
 
-                _project.CurrentStyleLibrary.CurrentStyle = _project.CurrentStyleLibrary.Styles.FirstOrDefault();
-            }
+            _project.CurrentStyleLibrary.CurrentStyle = _project.CurrentStyleLibrary.Styles.FirstOrDefault();
         }
 
         /// <summary>
@@ -826,7 +887,7 @@ namespace Test2d
         /// </summary>
         /// <param name="project"></param>
         /// <param name="path"></param>
-        public void Load(Project project, string path)
+        public void Load(Project project, string path = null)
         {
             Deselect();
 
@@ -844,6 +905,28 @@ namespace Test2d
                 Observer = new Observer(this);
             }
         }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Unload()
+        {
+            if (EnableObserver && _project != null)
+            {
+                Observer.Remove(_project);
+            }
+
+            Deselect();
+
+            foreach (var renderer in _renderers)
+            {
+                renderer.ClearCache(isZooming: false);
+            }
+            
+            Project = null;
+            ProjectPath = string.Empty;
+            IsProjectDirty = false;  
+        }
 
         /// <summary>
         /// 
@@ -852,29 +935,27 @@ namespace Test2d
         {
             var shapes = _renderers[0].State.SelectedShapes;
             var layer = _project.CurrentContainer.CurrentLayer;
-            if (shapes != null)
+            if (shapes == null)
+                return null;
+            
+            // TODO: Group method changes SelectedShapes State properties.
+            var g = XGroup.Group("g", shapes);
+
+            var builder = layer.Shapes.ToBuilder();
+            foreach (var shape in shapes)
             {
-                // TODO: Group method changes SelectedShapes State properties.
-                var g = XGroup.Group("g", shapes);
-
-                var builder = layer.Shapes.ToBuilder();
-                foreach (var shape in shapes)
-                {
-                    builder.Remove(shape);
-                }
-                builder.Add(g);
-
-                var previous = layer.Shapes;
-                var next = builder.ToImmutable();
-                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
-
-                Select(_project.CurrentContainer, g);
-
-                return g;
+                builder.Remove(shape);
             }
+            builder.Add(g);
 
-            return null;
+            var previous = layer.Shapes;
+            var next = builder.ToImmutable();
+            _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+            layer.Shapes = next;
+
+            Select(_project.CurrentContainer, g);
+
+            return g;
         }
 
         /// <summary>
@@ -1036,6 +1117,11 @@ namespace Test2d
         /// <param name="source"></param>
         public void BringToFront(BaseShape source)
         {
+            if (_project == null 
+                || _project.CurrentContainer == null 
+                || _project.CurrentContainer.CurrentLayer == null)
+                return;
+            
             var layer = _project.CurrentContainer.CurrentLayer;
             var items = layer.Shapes;
             
@@ -1053,6 +1139,11 @@ namespace Test2d
         /// <param name="source"></param>
         public void BringForward(BaseShape source)
         {
+            if (_project == null 
+                || _project.CurrentContainer == null 
+                || _project.CurrentContainer.CurrentLayer == null)
+                return;
+            
             var layer = _project.CurrentContainer.CurrentLayer;
             var items = layer.Shapes;
             
@@ -1070,6 +1161,11 @@ namespace Test2d
         /// <param name="source"></param>
         public void SendBackward(BaseShape source)
         {
+            if (_project == null 
+                || _project.CurrentContainer == null 
+                || _project.CurrentContainer.CurrentLayer == null)
+                return;
+            
             var layer = _project.CurrentContainer.CurrentLayer;
             var items = layer.Shapes;
             
@@ -1087,6 +1183,11 @@ namespace Test2d
         /// <param name="source"></param>
         public void SendToBack(BaseShape source)
         {
+            if (_project == null 
+                || _project.CurrentContainer == null 
+                || _project.CurrentContainer.CurrentLayer == null)
+                return;
+            
             var layer = _project.CurrentContainer.CurrentLayer;
             var items = layer.Shapes;
             
@@ -1188,6 +1289,9 @@ namespace Test2d
         /// <param name="container">The container object to remove from document Containers collection.</param>
         public void Delete(Container container)
         {
+            if (_project == null || _project.Documents == null)
+                return;
+
             var document = _project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
             if (document != null)
             {
@@ -1207,6 +1311,9 @@ namespace Test2d
         /// <param name="document">The document object to remove from project Documents collection.</param>
         public void Delete(Document document)
         {
+            if (_project == null || _project.Documents == null)
+                return;
+            
             var previous = _project.Documents;
             var next = _project.Documents.Remove(document);
             _history.Snapshot(previous, next, (p) => _project.Documents = p);
@@ -1228,6 +1335,11 @@ namespace Test2d
         /// </summary>
         public void DeleteSelected()
         {
+            if (_project == null 
+                || _project.CurrentContainer == null 
+                || _project.CurrentContainer.CurrentLayer == null)
+                return;
+            
             if (_renderers[0].State.SelectedShape != null)
             {
                 var layer = _project.CurrentContainer.CurrentLayer;
@@ -1267,6 +1379,9 @@ namespace Test2d
         /// <param name="shape"></param>
         public void Select(Container container, BaseShape shape)
         {
+            if (container == null)
+                return;
+            
             container.CurrentShape = shape;
             _renderers[0].State.SelectedShape = shape;
             _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
@@ -1280,6 +1395,9 @@ namespace Test2d
         /// <param name="shapes"></param>
         public void Select(Container container, ImmutableHashSet<BaseShape> shapes)
         {
+            if (container == null)
+                return;
+  
             container.CurrentShape = default(BaseShape);
             _renderers[0].State.SelectedShape = default(BaseShape);
             _renderers[0].State.SelectedShapes = shapes;
@@ -1301,6 +1419,9 @@ namespace Test2d
         /// <param name="container"></param>
         public void Deselect(Container container)
         {
+            if (container == null)
+                return;
+            
             if (_renderers[0].State.SelectedShape != null
                 || _renderers[0].State.SelectedShapes != null)
             {
@@ -1320,6 +1441,9 @@ namespace Test2d
         /// <returns></returns>
         public bool TryToSelectShapes(Container container, XRectangle rectangle)
         {
+            if (container == null)
+                return false;
+            
             var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
 
             var result = ShapeBounds.HitTest(container, rect, _project.Options.HitTreshold);
@@ -1353,6 +1477,9 @@ namespace Test2d
         /// <returns></returns>
         public bool TryToSelectShape(Container container, double x, double y)
         {
+            if (container == null)
+                return false;
+            
             var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null)
             {
@@ -1400,6 +1527,9 @@ namespace Test2d
         /// <param name="y"></param>
         public bool TryToHoverShape(double x, double y)
         {
+            if (_project == null || _project.CurrentContainer == null)
+                return false;
+            
             if (_renderers[0].State.SelectedShapes == null
                 && !(_renderers[0].State.SelectedShape != null && _hover != _renderers[0].State.SelectedShape))
             {
@@ -1438,6 +1568,9 @@ namespace Test2d
         /// <returns></returns>
         public bool TryToSplitLine(double x, double y, XPoint point, bool select = false)
         {
+            if (_project == null || _project.CurrentContainer == null || _project.Options == null)
+                return false;
+            
             var result = ShapeBounds.HitTest(
                 _project.CurrentContainer,
                 new Vector2(x, y),
@@ -1459,7 +1592,8 @@ namespace Test2d
                 var split = XLine.Create(
                     x, y,
                     line.Style,
-                    _project.Options.PointShape);
+                    _project.Options.PointShape,
+                    line.IsStroked);
 
                 double ds = point.Distance(line.Start);
                 double de = point.Distance(line.End);
@@ -1501,6 +1635,9 @@ namespace Test2d
         /// <returns></returns>
         public bool TryToSplitLine(XLine line, XPoint p0, XPoint p1)
         {
+            if (_project == null || _project.Options == null)
+                return false;
+            
             // points must be aligned horizontally or vertically
             if (p0.X != p1.X && p0.Y != p1.Y)
                 return false;
@@ -1516,7 +1653,8 @@ namespace Test2d
                     p0,
                     line.End,
                     line.Style,
-                    _project.Options.PointShape);
+                    _project.Options.PointShape,
+                    line.IsStroked);
                 line.End = p1;
             }
             else
@@ -1525,7 +1663,8 @@ namespace Test2d
                     p1,
                     line.End,
                     line.Style,
-                    _project.Options.PointShape);
+                    _project.Options.PointShape,
+                    line.IsStroked);
                 line.End = p0;
             }
 
@@ -1541,6 +1680,12 @@ namespace Test2d
         /// <returns></returns>
         public bool TryToConnect(XGroup group)
         {
+            if (_project == null 
+                || _project.CurrentContainer == null 
+                || _project.CurrentContainer.CurrentLayer == null 
+                || _project.Options == null)
+                return false;
+            
             var layer = _project.CurrentContainer.CurrentLayer;
             if (group.Connectors.Length > 0)
             {
@@ -1600,7 +1745,8 @@ namespace Test2d
         /// <returns></returns>
         public bool IsLeftDownAvailable()
         {
-            return _project.CurrentContainer != null
+            return _project != null
+                && _project.CurrentContainer != null
                 && _project.CurrentContainer.CurrentLayer != null
                 && _project.CurrentContainer.CurrentLayer.IsVisible
                 && _project.CurrentStyleLibrary != null
@@ -1613,7 +1759,8 @@ namespace Test2d
         /// <returns></returns>
         public bool IsLeftUpAvailable()
         {
-            return _project.CurrentContainer != null
+            return _project != null
+                && _project.CurrentContainer != null
                 && _project.CurrentContainer.CurrentLayer != null
                 && _project.CurrentContainer.CurrentLayer.IsVisible
                 && _project.CurrentStyleLibrary != null
@@ -1626,7 +1773,8 @@ namespace Test2d
         /// <returns></returns>
         public bool IsRightDownAvailable()
         {
-            return _project.CurrentContainer != null
+            return _project != null
+                && _project.CurrentContainer != null
                 && _project.CurrentContainer.CurrentLayer != null
                 && _project.CurrentContainer.CurrentLayer.IsVisible
                 && _project.CurrentStyleLibrary != null
@@ -1639,7 +1787,8 @@ namespace Test2d
         /// <returns></returns>
         public bool IsRightUpAvailable()
         {
-            return _project.CurrentContainer != null
+            return _project != null
+                && _project.CurrentContainer != null
                 && _project.CurrentContainer.CurrentLayer != null
                 && _project.CurrentContainer.CurrentLayer.IsVisible
                 && _project.CurrentStyleLibrary != null
@@ -1652,7 +1801,8 @@ namespace Test2d
         /// <returns></returns>
         public bool IsMoveAvailable()
         {
-            return _project.CurrentContainer != null
+            return _project != null
+                && _project.CurrentContainer != null
                 && _project.CurrentContainer.CurrentLayer != null
                 && _project.CurrentContainer.CurrentLayer.IsVisible
                 && _project.CurrentStyleLibrary != null

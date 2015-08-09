@@ -271,12 +271,18 @@ namespace Test2d
             }
             else if (item is EditorContext || item == null)
             {
-                _editor.History.Reset();
-
-                _editor.Load(_projectFactory.GetProject(), string.Empty);
+                New();
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnClose()
+        {
+            Close();
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -633,6 +639,9 @@ namespace Test2d
         /// </summary>
         public void OnAddDatabase()
         {
+            if (_editor.Project == null)
+                return;
+            
             var builder = ImmutableArray.CreateBuilder<Column>();
             builder.Add(Column.Create("Column0"));
             builder.Add(Column.Create("Column1"));
@@ -653,6 +662,9 @@ namespace Test2d
         /// <param name="db"></param>
         public void OnRemoveDatabase(object db)
         {
+            if (_editor.Project == null)
+                return;
+            
             if (db != null && db is Database)
             {
                 var previous = _editor.Project.Databases;
@@ -715,20 +727,20 @@ namespace Test2d
         /// </summary>
         public void OnAddRecord()
         {
-            if (_editor.Project.CurrentDatabase != null)
-            {
-                var db = _editor.Project.CurrentDatabase;
+            if (_editor.Project == null || _editor.Project.CurrentDatabase == null)
+                return;
 
-                var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Value.Create(c));
-                var record = Record.Create(
-                    db.Columns,
-                    ImmutableArray.CreateRange<Value>(values));
+            var db = _editor.Project.CurrentDatabase;
 
-                var previous = db.Records;
-                var next = db.Records.Add(record);
-                _editor.History.Snapshot(previous, next, (p) => db.Records = p);
-                db.Records = next;
-            }
+            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Value.Create(c));
+            var record = Record.Create(
+                db.Columns,
+                ImmutableArray.CreateRange<Value>(values));
+
+            var previous = db.Records;
+            var next = db.Records.Add(record);
+            _editor.History.Snapshot(previous, next, (p) => db.Records = p);
+            db.Records = next;
         }
 
         /// <summary>
@@ -736,18 +748,18 @@ namespace Test2d
         /// </summary>
         public void OnRemoveRecord()
         {
-            if (_editor.Project.CurrentDatabase != null)
+            if (_editor.Project == null || _editor.Project.CurrentDatabase == null)
+                return;
+            
+            var db = _editor.Project.CurrentDatabase;
+            if (db.CurrentRecord != null)
             {
-                var db = _editor.Project.CurrentDatabase;
-                if (db.CurrentRecord != null)
-                {
-                    var record = db.CurrentRecord;
+                var record = db.CurrentRecord;
 
-                    var previous = db.Records;
-                    var next = db.Records.Remove(record);
-                    _editor.History.Snapshot(previous, next, (p) => db.Records = p);
-                    db.Records = next;
-                }
+                var previous = db.Records;
+                var next = db.Records.Remove(record);
+                _editor.History.Snapshot(previous, next, (p) => db.Records = p);
+                db.Records = next;
             }
         }
 
@@ -786,10 +798,7 @@ namespace Test2d
                     shape.Bindings = ImmutableArray.Create<ShapeBinding>();
                 }
 
-                var previous = shape.Bindings;
-                var next = shape.Bindings.Add(ShapeBinding.Create("", ""));
-                _editor.History.Snapshot(previous, next, (p) => shape.Bindings = p);
-                shape.Bindings = next;
+                _editor.AddWithHistory(shape, ShapeBinding.Create("", ""));
             }
         }
 
@@ -833,11 +842,8 @@ namespace Test2d
                     {
                         shape.Properties = ImmutableArray.Create<ShapeProperty>();
                     }
-
-                    var previous = shape.Properties;
-                    var next = shape.Properties.Add(ShapeProperty.Create("New", ""));
-                    _editor.History.Snapshot(previous, next, (p) => shape.Properties = p);
-                    shape.Properties = next;
+                    
+                    _editor.AddWithHistory(shape, ShapeProperty.Create("New", ""));
                 }
                 else if (owner is Container)
                 {
@@ -846,11 +852,8 @@ namespace Test2d
                     {
                         container.Properties = ImmutableArray.Create<ShapeProperty>();
                     }
-
-                    var previous = container.Properties;
-                    var next = container.Properties.Add(ShapeProperty.Create("New", ""));
-                    _editor.History.Snapshot(previous, next, (p) => container.Properties = p);
-                    container.Properties = next;
+                    
+                    _editor.AddWithHistory(container, ShapeProperty.Create("New", ""));
                 }
             }
         }
@@ -896,6 +899,9 @@ namespace Test2d
         /// </summary>
         public void OnAddGroupLibrary()
         {
+            if (_editor.Project == null || _editor.Project.GroupLibraries == null)
+                return;
+            
             var gl = GroupLibrary.Create("New");
 
             var previous = _editor.Project.GroupLibraries;
@@ -917,6 +923,9 @@ namespace Test2d
         /// </summary>
         public void OnAddGroup()
         {
+            if (_editor.Project == null || _editor.Project.CurrentGroupLibrary == null)
+                return;
+            
             var group = _editor.Renderers[0].State.SelectedShape;
             if (group != null && group is XGroup)
             {
@@ -948,6 +957,9 @@ namespace Test2d
         /// </summary>
         public void OnAddLayer()
         {
+            if (_editor.Project == null || _editor.Project.CurrentContainer == null)
+                return;
+
             var container = _editor.Project.CurrentContainer;
             var previous = container.Layers;
             var next = container.Layers.Add(Layer.Create("New", container));
@@ -968,6 +980,9 @@ namespace Test2d
         /// </summary>
         public void OnAddStyleLibrary()
         {
+            if (_editor.Project == null || _editor.Project.StyleLibraries == null)
+                return;
+            
             var sg = StyleLibrary.Create("New");
 
             var previous = _editor.Project.StyleLibraries;
@@ -989,6 +1004,9 @@ namespace Test2d
         /// </summary>
         public void OnAddStyle()
         {
+            if (_editor.Project == null || _editor.Project.CurrentStyleLibrary == null)
+                return;
+            
             var sg = _editor.Project.CurrentStyleLibrary;
             var previous = sg.Styles;
             var next = sg.Styles.Add(ShapeStyle.Create("New"));
@@ -1017,6 +1035,9 @@ namespace Test2d
         /// </summary>
         public void OnAddTemplate()
         {
+            if (_editor.Project == null)
+                return;
+            
             var previous = _editor.Project.Templates;
             var next = _editor.Project.Templates.Add(_projectFactory.GetTemplate(_editor.Project, "Empty"));
             _editor.History.Snapshot(previous, next, (p) => _editor.Project.Templates = p);
@@ -1036,6 +1057,9 @@ namespace Test2d
         /// </summary>
         public void OnEditTemplate()
         {
+            if (_editor.Project == null || _editor.Project.CurrentTemplate == null)
+                return;
+            
             var template = _editor.Project.CurrentTemplate;
             if (template != null)
             {
@@ -1050,6 +1074,9 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnApplyTemplate(object item)
         {
+            if (_editor.Project == null || _editor.Project.CurrentContainer == null)
+                return;
+            
             if (item is Container)
             {
                 var template = item as Container;
@@ -1067,6 +1094,9 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnSelectedItemChanged(object item)
         {
+            if (_editor.Project == null)
+                return;
+            
             if (item is Container)
             {
                 var selected = item as Container;
@@ -1091,6 +1121,9 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnAddContainer(object item)
         {
+            if (_editor.Project == null || _editor.Project.CurrentDocument == null)
+                return;
+            
             var container = _projectFactory.GetContainer(_editor.Project, "Container");
 
             var document = _editor.Project.CurrentDocument;
@@ -1108,6 +1141,9 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnInsertContainerBefore(object item)
         {
+            if (_editor.Project == null || _editor.Project.CurrentDocument == null)
+                return;
+            
             if (item is Container)
             {
                 var selected = item as Container;
@@ -1130,6 +1166,9 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnInsertContainerAfter(object item)
         {
+            if (_editor.Project == null || _editor.Project.CurrentDocument == null)
+                return;
+            
             if (item is Container)
             {
                 var selected = item as Container;
@@ -1152,6 +1191,9 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnAddDocument(object item)
         {
+            if (_editor.Project == null)
+                return;
+            
             var document = _projectFactory.GetDocument(_editor.Project, "Document");
 
             var previous = _editor.Project.Documents;
@@ -1169,6 +1211,9 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnInsertDocumentBefore(object item)
         {
+            if (_editor.Project == null)
+                return;
+            
             if (item is Document)
             {
                 var selected = item as Document;
@@ -1191,6 +1236,9 @@ namespace Test2d
         /// <param name="item"></param>
         public void OnInsertDocumentAfter(object item)
         {
+            if (_editor.Project == null)
+                return;
+            
             if (item is Document)
             {
                 var selected = item as Document;
@@ -1205,6 +1253,215 @@ namespace Test2d
                 _editor.Project.CurrentDocument = document;
                 _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToolNone()
+        {
+            _editor.CurrentTool = Tool.None;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToolSelection()
+        {
+            _editor.CurrentTool = Tool.Selection;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToolGroup()
+        {
+            _editor.CurrentTool = Tool.Group;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToolPoint()
+        {
+            _editor.CurrentTool = Tool.Point;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToolLine()
+        {
+            if (_editor.CurrentTool == Tool.Path && _editor.CurrentPathTool != PathTool.Line)
+            {
+                _editor.CurrentPathTool = PathTool.Line;
+            }
+            else
+            {
+                _editor.CurrentTool = Tool.Line;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToolArc()
+        {
+            if (_editor.CurrentTool == Tool.Path && _editor.CurrentPathTool != PathTool.Arc)
+            {
+                _editor.CurrentPathTool = PathTool.Arc;
+            }
+            else
+            {
+                _editor.CurrentTool = Tool.Arc;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToolBezier()
+        {
+            if (_editor.CurrentTool == Tool.Path && _editor.CurrentPathTool != PathTool.Bezier)
+            {
+                _editor.CurrentPathTool = PathTool.Bezier;
+            }
+            else
+            {
+                _editor.CurrentTool = Tool.Bezier;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToolQBezier()
+        {
+            if (_editor.CurrentTool == Tool.Path && _editor.CurrentPathTool != PathTool.QBezier)
+            {
+                _editor.CurrentPathTool = PathTool.QBezier;
+            }
+            else
+            {
+                _editor.CurrentTool = Tool.QBezier;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToolPath()
+        {
+            _editor.CurrentTool = Tool.Path;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToolRectangle()
+        {
+            _editor.CurrentTool = Tool.Rectangle;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToolEllipse()
+        {
+            _editor.CurrentTool = Tool.Ellipse;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToolText()
+        {
+            _editor.CurrentTool = Tool.Text;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToolImage()
+        {
+            _editor.CurrentTool = Tool.Image;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToolMove()
+        {
+            if (_editor.CurrentTool == Tool.Path && _editor.CurrentPathTool != PathTool.Move)
+            {
+                _editor.CurrentPathTool = PathTool.Move;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToggleDefaultIsStroked()
+        {
+            if (_editor.Project == null || _editor.Project.Options == null)
+                return;
+            
+            _editor.Project.Options.DefaultIsStroked = !_editor.Project.Options.DefaultIsStroked;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToggleDefaultIsFilled()
+        {
+            if (_editor.Project == null || _editor.Project.Options == null)
+                return;
+            
+            _editor.Project.Options.DefaultIsFilled = !_editor.Project.Options.DefaultIsFilled;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToggleDefaultIsClosed()
+        {
+            if (_editor.Project == null || _editor.Project.Options == null)
+                return;
+            
+            _editor.Project.Options.DefaultIsClosed = !_editor.Project.Options.DefaultIsClosed;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToggleDefaultIsSmoothJoin()
+        {
+            if (_editor.Project == null || _editor.Project.Options == null)
+                return;
+            
+            _editor.Project.Options.DefaultIsSmoothJoin = !_editor.Project.Options.DefaultIsSmoothJoin;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToggleSnapToGrid()
+        {
+            if (_editor.Project == null || _editor.Project.Options == null)
+                return;
+            
+            _editor.Project.Options.SnapToGrid = !_editor.Project.Options.SnapToGrid;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnToggleTryToConnect()
+        {
+            if (_editor.Project == null || _editor.Project.Options == null)
+                return;
+            
+            _editor.Project.Options.TryToConnect = !_editor.Project.Options.TryToConnect;
         }
 
         /// <summary>
@@ -1520,6 +1777,16 @@ namespace Test2d
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public void New()
+        {
+            _editor.History.Reset();
+            _editor.Unload();
+            _editor.Load(_projectFactory.GetProject(), string.Empty);
+        }
+        
+        /// <summary>
         ///
         /// </summary>
         /// <param name="path"></param>
@@ -1530,11 +1797,12 @@ namespace Test2d
                 var json = ReadUtf8Text(path);
                 var project = _serializer.FromJson<Project>(json);
 
-                var root = new Uri(path);
-                var images = Editor.GetAllShapes<XImage>(project);
+                //var root = new Uri(path);
+                //var images = Editor.GetAllShapes<XImage>(project);
                 //_editor.ToAbsoluteUri(root, images);
 
                 _editor.History.Reset();
+                _editor.Unload();
                 _editor.Load(project, path);
 
                 AddRecent(path, project.Name);
@@ -1559,8 +1827,8 @@ namespace Test2d
         {
             try
             {
-                var root = new Uri(path);
-                var images = Editor.GetAllShapes<XImage>(_editor.Project);
+                //var root = new Uri(path);
+                //var images = Editor.GetAllShapes<XImage>(_editor.Project);
                 //_editor.ToRelativeUri(root, images);
 
                 var json = _serializer.ToJson(_editor.Project);
@@ -1587,6 +1855,15 @@ namespace Test2d
                         ex.StackTrace);
                 }
             }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Close()
+        {
+            _editor.History.Reset();
+            _editor.Unload();
         }
 
         /// <summary>
@@ -1647,7 +1924,7 @@ namespace Test2d
         /// <param name="path"></param>
         /// <param name="item"></param>
         /// <param name="type"></param>
-        public void ImportEx(string path, object item, ImportType type)
+        public void ImportObject(string path, object item, ImportType type)
         {
             try
             {
@@ -1865,7 +2142,7 @@ namespace Test2d
         /// <param name="path"></param>
         /// <param name="item"></param>
         /// <param name="type"></param>
-        public void ExportEx(string path, object item, ExportType type)
+        public void ExportObject(string path, object item, ExportType type)
         {
             try
             {
@@ -1993,6 +2270,9 @@ namespace Test2d
         /// <param name="path"></param>
         public void ImportData(string path)
         {
+            if (_editor.Project == null)
+                return;
+            
             try
             {
                 if (_csvReader == null)
@@ -2006,6 +2286,32 @@ namespace Test2d
                 _editor.Project.Databases = next;
 
                 _editor.Project.CurrentDatabase = db;
+            }
+            catch (Exception ex)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="database"></param>
+        public void ExportData(string path, Database database)
+        {
+            try
+            {
+                if (_csvWriter == null)
+                    return;
+
+                _csvWriter.Write(path, database);
             }
             catch (Exception ex)
             {
@@ -2490,7 +2796,14 @@ namespace Test2d
                 _editor.History.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
 
-                _editor.Select(_editor.Project.CurrentContainer, ImmutableHashSet.CreateRange<BaseShape>(shapes));
+                if (shapes.Count() == 1)
+                {
+                    _editor.Select(_editor.Project.CurrentContainer, shapes.FirstOrDefault());
+                }
+                else
+                {
+                    _editor.Select(_editor.Project.CurrentContainer, ImmutableHashSet.CreateRange<BaseShape>(shapes));
+                }
             }
             catch (Exception ex)
             {
@@ -2676,52 +2989,52 @@ namespace Test2d
                         }
                         else if (string.Compare(ext, ".style", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project.CurrentStyleLibrary, ImportType.Style);
+                            ImportObject(path, _editor.Project.CurrentStyleLibrary, ImportType.Style);
                             result = true;
                         }
                         else if (string.Compare(ext, ".styles", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project.CurrentStyleLibrary, ImportType.Styles);
+                            ImportObject(path, _editor.Project.CurrentStyleLibrary, ImportType.Styles);
                             result = true;
                         }
                         else if (string.Compare(ext, ".StyleLibrary", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project, ImportType.StyleLibrary);
+                            ImportObject(path, _editor.Project, ImportType.StyleLibrary);
                             result = true;
                         }
                         else if (string.Compare(ext, ".StyleLibraries", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project, ImportType.StyleLibraries);
+                            ImportObject(path, _editor.Project, ImportType.StyleLibraries);
                             result = true;
                         }
                         else if (string.Compare(ext, ".group", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project.CurrentGroupLibrary, ImportType.Group);
+                            ImportObject(path, _editor.Project.CurrentGroupLibrary, ImportType.Group);
                             result = true;
                         }
                         else if (string.Compare(ext, ".groups", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project.CurrentGroupLibrary, ImportType.Groups);
+                            ImportObject(path, _editor.Project.CurrentGroupLibrary, ImportType.Groups);
                             result = true;
                         }
                         else if (string.Compare(ext, ".grouplibrary", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project, ImportType.GroupLibrary);
+                            ImportObject(path, _editor.Project, ImportType.GroupLibrary);
                             result = true;
                         }
                         else if (string.Compare(ext, ".grouplibraries", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project, ImportType.GroupLibraries);
+                            ImportObject(path, _editor.Project, ImportType.GroupLibraries);
                             result = true;
                         }
                         else if (string.Compare(ext, ".template", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project, ImportType.Template);
+                            ImportObject(path, _editor.Project, ImportType.Template);
                             result = true;
                         }
                         else if (string.Compare(ext, ".templates", true, CultureInfo.InvariantCulture) == 0)
                         {
-                            ImportEx(path, _editor.Project, ImportType.Templates);
+                            ImportObject(path, _editor.Project, ImportType.Templates);
                             result = true;
                         }
                     }
@@ -3280,6 +3593,11 @@ namespace Test2d
                     new DelegateCommand<object>(
                         (item) => OnNew(item),
                         (item) => IsEditMode());
+                
+                _commands.CloseCommand =
+                    new DelegateCommand(
+                        () => OnClose(),
+                        () => IsEditMode());
 
                 _commands.ExitCommand =
                     new DelegateCommand(
@@ -3368,132 +3686,72 @@ namespace Test2d
 
                 _commands.ToolNoneCommand =
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.None,
+                        () => OnToolNone(),
                         () => IsEditMode());
 
                 _commands.ToolSelectionCommand =
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Selection,
+                        () => OnToolSelection(),
                         () => IsEditMode());
 
                 _commands.ToolGroupCommand =
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Group,
+                        () => OnToolGroup(),
                         () => IsEditMode());
 
                 _commands.ToolPointCommand =
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Point,
+                        () => OnToolPoint(),
                         () => IsEditMode());
 
                 _commands.ToolLineCommand =
                     new DelegateCommand(
-                        () =>
-                        {
-                            if (_editor.CurrentTool == Tool.Path)
-                            {
-                                _editor.CurrentPathTool = PathTool.Line;
-                            }
-                            else
-                            {
-                                _editor.CurrentTool = Tool.Line;
-                            }
-                        },
+                        () => OnToolLine(),
                         () => IsEditMode());
 
                 _commands.ToolArcCommand =
                     new DelegateCommand(
-                        () =>
-                        {
-                            if (_editor.CurrentTool == Tool.Path)
-                            {
-                                _editor.CurrentPathTool = PathTool.Arc;
-                            }
-                            else
-                            {
-                                _editor.CurrentTool = Tool.Arc;
-                            }
-                        },
+                        () => OnToolArc(),
                         () => IsEditMode());
 
                 _commands.ToolBezierCommand =
                     new DelegateCommand(
-                        () =>
-                        {
-                            if (_editor.CurrentTool == Tool.Path)
-                            {
-                                _editor.CurrentPathTool = PathTool.Bezier;
-                            }
-                            else
-                            {
-                                _editor.CurrentTool = Tool.Bezier;
-                            }
-                        },
+                        () => OnToolBezier(),
                         () => IsEditMode());
 
                 _commands.ToolQBezierCommand =
                     new DelegateCommand(
-                        () =>
-                        {
-                            if (_editor.CurrentTool == Tool.Path)
-                            {
-                                _editor.CurrentPathTool = PathTool.QBezier;
-                            }
-                            else
-                            {
-                                _editor.CurrentTool = Tool.QBezier;
-                            }
-                        },
+                        () => OnToolQBezier(),
                         () => IsEditMode());
 
                 _commands.ToolPathCommand =
                     new DelegateCommand(
-                        () =>
-                        {
-                            if (_editor.CurrentTool == Tool.Path)
-                            {
-                                //switch (_editor.CurrentPathTool)
-                                //{
-                                //    case PathTool.Line:
-                                //        _editor.CurrentTool = Tool.Line;
-                                //        break;
-                                //    case PathTool.Arc:
-                                //        _editor.CurrentTool = Tool.Arc;
-                                //        break;
-                                //    case PathTool.Bezier:
-                                //        _editor.CurrentTool = Tool.Bezier;
-                                //        break;
-                                //    case PathTool.QBezier:
-                                //        _editor.CurrentTool = Tool.QBezier;
-                                //        break;
-                                //}
-                                _editor.CurrentTool = Tool.Selection;
-                            }
-                            else
-                            {
-                                _editor.CurrentTool = Tool.Path;
-                            }
-                        },
+                        () => OnToolPath(),
                         () => IsEditMode());
 
                 _commands.ToolRectangleCommand =
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Rectangle,
+                        () => OnToolRectangle(),
                         () => IsEditMode());
 
                 _commands.ToolEllipseCommand =
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Ellipse,
+                        () => OnToolEllipse(),
                         () => IsEditMode());
 
                 _commands.ToolTextCommand =
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Text,
+                        () => OnToolText(),
                         () => IsEditMode());
 
                 _commands.ToolImageCommand =
                     new DelegateCommand(
-                        () => _editor.CurrentTool = Tool.Image,
+                        () => OnToolImage(),
+                        () => IsEditMode());
+
+                _commands.ToolMoveCommand =
+                    new DelegateCommand(
+                        () => OnToolMove(),
                         () => IsEditMode());
 
                 _commands.EvalScriptCommand =
@@ -3501,19 +3759,34 @@ namespace Test2d
                         (path) => Eval(path),
                         (path) => true);
 
+                _commands.DefaultIsStrokedCommand =
+                    new DelegateCommand(
+                        () => OnToggleDefaultIsStroked(),
+                        () => IsEditMode());
+
                 _commands.DefaultIsFilledCommand =
                     new DelegateCommand(
-                        () => _editor.Project.Options.DefaultIsFilled = !_editor.Project.Options.DefaultIsFilled,
+                        () => OnToggleDefaultIsFilled(),
+                        () => IsEditMode());
+
+                _commands.DefaultIsClosedCommand =
+                    new DelegateCommand(
+                        () => OnToggleDefaultIsClosed(),
+                        () => IsEditMode());
+
+                _commands.DefaultIsSmoothJoinCommand =
+                    new DelegateCommand(
+                        () => OnToggleDefaultIsSmoothJoin(),
                         () => IsEditMode());
 
                 _commands.SnapToGridCommand =
                     new DelegateCommand(
-                        () => _editor.Project.Options.SnapToGrid = !_editor.Project.Options.SnapToGrid,
+                        () => OnToggleSnapToGrid(),
                         () => IsEditMode());
 
                 _commands.TryToConnectCommand =
                     new DelegateCommand(
-                        () => _editor.Project.Options.TryToConnect = !_editor.Project.Options.TryToConnect,
+                        () => OnToggleTryToConnect(),
                         () => IsEditMode());
 
                 _commands.AddDatabaseCommand =
@@ -3824,6 +4097,7 @@ namespace Test2d
         {
             (_commands.NewCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
             (_commands.OpenCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.CloseCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.SaveCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.SaveAsCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ExportCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
@@ -3884,14 +4158,17 @@ namespace Test2d
             (_commands.ToolRectangleCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolEllipseCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolPathCommand as DelegateCommand).RaiseCanExecuteChanged();
-
             (_commands.ToolTextCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.ToolImageCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolMoveCommand as DelegateCommand).RaiseCanExecuteChanged();
 
             (_commands.EvalCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.EvalScriptCommand as DelegateCommand<string>).RaiseCanExecuteChanged();
 
+            (_commands.DefaultIsStrokedCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.DefaultIsFilledCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.DefaultIsClosedCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.DefaultIsSmoothJoinCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.SnapToGridCommand as DelegateCommand).RaiseCanExecuteChanged();
             (_commands.TryToConnectCommand as DelegateCommand).RaiseCanExecuteChanged();
 

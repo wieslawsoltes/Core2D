@@ -183,6 +183,9 @@ namespace TestEtoForms
                         case Keys.H:
                             _context.Commands.ToolPathCommand.Execute(null);
                             break;
+                        case Keys.M:
+                            _context.Commands.ToolMoveCommand.Execute(null);
+                            break;
                         case Keys.F:
                             _context.Commands.DefaultIsFilledCommand.Execute(null);
                             break;

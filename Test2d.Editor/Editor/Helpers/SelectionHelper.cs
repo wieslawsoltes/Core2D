@@ -75,7 +75,7 @@ namespace Test2d
                             x, y,
                             _editor.Project.Options.SelectionStyle,
                             null,
-                            true);
+                            true, true);
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         _currentState = State.One;

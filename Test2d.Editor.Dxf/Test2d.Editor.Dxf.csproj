@@ -80,6 +80,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Test2d\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Dxf\Blocks\DxfBlock.cs" />
     <Compile Include="Dxf\Blocks\DxfBlocks.cs" />
     <Compile Include="Dxf\Classes\DxfClass.cs" />

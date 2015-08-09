@@ -14,8 +14,8 @@
         <Grid.Resources>
             <ControlTemplate x:Key="ProjectMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Command="{Binding Commands.NewCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="_+"/>
-                    <MenuItem Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="_-"/>
+                    <MenuItem Command="{Binding Commands.NewCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="+"/>
+                    <MenuItem Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>

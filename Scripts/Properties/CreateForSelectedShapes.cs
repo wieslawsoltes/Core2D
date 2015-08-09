@@ -1,0 +1,1 @@
+foreach (var shape in SelectedShapes) shape["Name"] = "Value";

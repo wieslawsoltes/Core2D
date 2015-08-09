@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Test2d;
+using Xceed.Wpf.AvalonDock.Layout;
 using Xceed.Wpf.AvalonDock.Layout.Serialization;
 
 namespace Test.Windows
@@ -26,13 +27,14 @@ namespace Test.Windows
     /// </summary>
     public partial class MainWindow : Window, IView
     {
+        private bool _isLoaded = false;
         private string _recentProjectsPath = "Test2d.UI.Wpf.recent";
         private string _resourceLayoutRoot = "Test2d.UI.Wpf.Layouts.";
         private string _resourceLayoutPath = "Test2d.UI.Wpf.layout";
         private string _defaultLayoutPath = "Test2d.UI.Wpf.layout";
-        private bool _enableRestoreRecent = true;
-        private bool _enableRestoreLayout = true;
-        private bool _isLoaded = false;
+        private bool _autoRestoreLayout = true;
+        private IDictionary<string, LayoutContent> _layouts;
+        private bool _autoLoadRecent = true;
 
         /// <summary>
         /// 
@@ -178,7 +180,7 @@ namespace Test.Windows
         private void OnSave()
         {
             var context = DataContext as EditorContext;
-            if (context == null)
+            if (context == null || context.Editor.Project == null)
                 return;
 
             if (!string.IsNullOrEmpty(context.Editor.ProjectPath))
@@ -197,7 +199,7 @@ namespace Test.Windows
         private void OnSaveAs()
         {
             var context = DataContext as EditorContext;
-            if (context == null)
+            if (context == null || context.Editor.Project == null)
                 return;
 
             var dlg = new SaveFileDialog()
@@ -240,12 +242,18 @@ namespace Test.Windows
             else if (item is EditorContext)
             {
                 var editor = (item as EditorContext).Editor;
+                if (editor.Project == null)
+                    return;
+
                 name = editor.Project.Name;
                 item = editor.Project;
             }
             else if (item == null)
             {
                 var editor = context.Editor;
+                if (editor.Project == null)
+                    return;
+                
                 name = editor.Project.Name;
                 item = editor.Project;
             }
@@ -289,7 +297,7 @@ namespace Test.Windows
         private void OnImportData()
         {
             var context = DataContext as EditorContext;
-            if (context == null)
+            if (context == null || context.Editor.Project == null)
                 return;
 
             var dlg = new OpenFileDialog()
@@ -311,7 +319,7 @@ namespace Test.Windows
         private void OnExportData()
         {
             var context = DataContext as EditorContext;
-            if (context == null)
+            if (context == null || context.Editor.Project == null)
                 return;
 
             var database = context.Editor.Project.CurrentDatabase;
@@ -327,10 +335,7 @@ namespace Test.Windows
 
             if (dlg.ShowDialog() == true)
             {
-                if (context.CsvWriter != null)
-                {
-                    context.CsvWriter.Write(dlg.FileName, database);
-                }
+                context.ExportData(dlg.FileName, database);
             }
         }
 
@@ -340,7 +345,7 @@ namespace Test.Windows
         private void OnUpdateData()
         {
             var context = DataContext as EditorContext;
-            if (context == null)
+            if (context == null || context.Editor.Project == null)
                 return;
 
             var database = context.Editor.Project.CurrentDatabase;
@@ -423,7 +428,7 @@ namespace Test.Windows
 
                 foreach (var path in paths)
                 {
-                    context.ImportEx(path, item, type);
+                    context.ImportObject(path, item, type);
                 }
             }
         }
@@ -499,7 +504,7 @@ namespace Test.Windows
             if (dlg.ShowDialog() == true)
             {
                 var path = dlg.FileName;
-                context.ExportEx(path, item, type);
+                context.ExportObject(path, item, type);
             }
         }
 
@@ -769,6 +774,8 @@ namespace Test.Windows
             serializer.LayoutSerializationCallback +=
                 (s, e) =>
                 {
+                    _layouts[e.Model.ContentId] = e.Model;
+
                     var element = e.Content as FrameworkElement;
                     if (element != null)
                     {
@@ -801,6 +808,8 @@ namespace Test.Windows
             serializer.LayoutSerializationCallback +=
                 (s, e) =>
                 {
+                    _layouts[e.Model.ContentId] = e.Model;
+
                     var element = e.Content as FrameworkElement;
                     if (element != null)
                     {
@@ -910,12 +919,14 @@ namespace Test.Windows
                     else
                         _isLoaded = true;
 
-                    if (_enableRestoreRecent)
+                    InitializeLayouts();
+
+                    if (_autoLoadRecent)
                     {
                         AutoLoadRecent(context);
                     }
 
-                    if (_enableRestoreLayout)
+                    if (_autoRestoreLayout)
                     {
                         AutoLoadLayout(context);
                     }
@@ -930,18 +941,44 @@ namespace Test.Windows
 
                 DeInitializeContext();
 
-                if (_enableRestoreRecent)
+                if (_autoLoadRecent)
                 {
                     AutoSaveRecent(context);
                 }
 
-                if (_enableRestoreLayout)
+                if (_autoRestoreLayout)
                 {
                     AutoSaveLayout(context);
                 }
             };
 
             DataContext = context;
+        }
+
+        /// <summary>
+        /// Initialize docking manager layouts dictionary.
+        /// </summary>
+        private void InitializeLayouts()
+        {
+            _layouts = new Dictionary<string, LayoutContent>();
+            _layouts.Add("project", projectWindow);
+            _layouts.Add("templates", templatesWindow);
+            _layouts.Add("databases", databasesWindow);
+            _layouts.Add("options", optionsWindow);
+            _layouts.Add("template", templateWindow);
+            _layouts.Add("groups", groupsWindow);
+            _layouts.Add("database", databaseWindow);
+            _layouts.Add("container", containerWindow);
+            _layouts.Add("styles", stylesWindow);
+            _layouts.Add("layers", layersWindow);
+            _layouts.Add("shapes", shapesWindow);
+            _layouts.Add("properties", propertiesWindow);
+            _layouts.Add("style", shapesWindow);
+            _layouts.Add("state", shapesWindow);
+            _layouts.Add("data", shapesWindow);
+            _layouts.Add("code", shapesWindow);
+            _layouts.Add("script", scriptWindow);
+            _layouts.Add("scripts", scriptsWindow);
         }
 
         /// <summary>
@@ -954,7 +991,7 @@ namespace Test.Windows
                 new DelegateCommand<object>(
                     (parameter) => OnOpen(parameter),
                     (parameter) => context.IsEditMode());
-
+            
             context.Commands.SaveCommand =
                 new DelegateCommand(
                     () => OnSave(),
@@ -1117,42 +1154,42 @@ namespace Test.Windows
 
             context.Commands.ProjectWindowCommand =
                 new DelegateCommand(
-                    () => projectWindow.Show(),
+                    () => (_layouts["project"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.OptionsWindowCommand =
                 new DelegateCommand(
-                    () => optionsWindow.Show(),
+                    () => (_layouts["options"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.TemplatesWindowCommand =
                 new DelegateCommand(
-                    () => templatesWindow.Show(),
+                    () => (_layouts["templates"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.GroupsWindowCommand =
                 new DelegateCommand(
-                    () => groupsWindow.Show(),
+                    () => (_layouts["groups"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.DatabasesWindowCommand =
                 new DelegateCommand(
-                    () => databasesWindow.Show(),
+                    () => (_layouts["databases"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.DatabaseWindowCommand =
                 new DelegateCommand(
-                    () => databaseWindow.Show(),
+                    () => (_layouts["database"] as LayoutAnchorable).Show(),
                     () => true);
 
-            context.Commands.ScriptWindowCommand = 
+            context.Commands.ScriptWindowCommand =
                 new DelegateCommand(
-                    () => scriptWindow.Show(),
+                    () => (_layouts["script"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.ScriptsWindowCommand = 
                 new DelegateCommand(
-                    () => scriptsWindow.Show(),
+                    () => (_layouts["scripts"] as LayoutAnchorable).Show(),
                     () => true);
 
             //context.Commands.ContainerWindowCommand = 
@@ -1167,47 +1204,47 @@ namespace Test.Windows
 
             context.Commands.StylesWindowCommand =
                 new DelegateCommand(
-                    () => stylesWindow.Show(),
+                    () => (_layouts["styles"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.LayersWindowCommand =
                 new DelegateCommand(
-                    () => layersWindow.Show(),
+                    () => (_layouts["layers"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.ShapesWindowCommand =
                 new DelegateCommand(
-                    () => shapesWindow.Show(),
+                    () => (_layouts["shapes"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.TemplateWindowCommand =
                 new DelegateCommand(
-                    () => templateWindow.Show(),
+                    () => (_layouts["template"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.PropertiesWindowCommand =
                 new DelegateCommand(
-                    () => propertiesWindow.Show(),
+                    () => (_layouts["properties"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.StateWindowCommand =
                 new DelegateCommand(
-                    () => stateWindow.Show(),
+                    () => (_layouts["state"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.CodeWindowCommand =
                 new DelegateCommand(
-                    () => codeWindow.Show(),
+                    () => (_layouts["code"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.DataWindowCommand =
                 new DelegateCommand(
-                    () => dataWindow.Show(),
+                    () => (_layouts["data"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.StyleWindowCommand =
                 new DelegateCommand(
-                    () => styleWindow.Show(),
+                    () => (_layouts["style"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.LoadWindowLayoutCommand =
@@ -1252,6 +1289,7 @@ namespace Test.Windows
                 {
                     if (border != null
                         && context != null
+                        && context.Editor.Project != null
                         && context.Editor.Project.CurrentContainer != null)
                     {
                         if (!context.Renderers[0].State.EnableAutofit)

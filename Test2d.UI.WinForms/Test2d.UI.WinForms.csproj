@@ -127,6 +127,9 @@
     <Compile Include="..\Test2d.UI.EtoForms.Shared\Util\ZoomState.cs">
       <Link>Util\ZoomState.cs</Link>
     </Compile>
+    <Compile Include="..\Test2d\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Controls\ContainerPanel.cs">
       <SubType>Component</SubType>
     </Compile>

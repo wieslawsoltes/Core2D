@@ -1,1 +1,1 @@
-Context.RestartSimulation();
+Context.OnRestartSimulation();

@@ -1,0 +1,799 @@
+
+[Menu: File]
+
+MenuFile
+	MenuFileNew
+	MenuFileOpen
+	MenuFileClose
+	MenuFileSave
+	MenuFileSaveAs
+	MenuFileExport
+	MenuFileSubMenuImport
+		MenuFileImportStyle
+		MenuFileImportStyles
+		MenuFileImportStyleLibrary
+		MenuFileImportStyleLibraries
+		MenuFileImportGroup
+		MenuFileImportGroups
+		MenuFileImportGroupLibrary
+		MenuFileImportGroupLibraries
+		MenuFileImportTemplate
+		MenuFileImportTemplates
+	MenuFileSubMenuExport
+		MenuFileExportStyle
+		MenuFileExportStyles
+		MenuFileExportStyleLibrary
+		MenuFileExportStyleLibraries
+		MenuFileExportGroup
+		MenuFileExportGroups
+		MenuFileExportGroupLibrary
+		MenuFileExportGroupLibraries
+		MenuFileExportTemplate
+		MenuFileExportTemplates
+	MenuFileRecent
+	MenuFileExit
+
+MenuTooltipFile
+	MenuTooltipFileNew
+	MenuTooltipFileOpen
+	MenuTooltipFileClose
+	MenuTooltipFileSave
+	MenuTooltipFileSaveAs
+	MenuTooltipFileExport
+	MenuTooltipFileSubMenuImport
+		MenuTooltipFileImportStyle
+		MenuTooltipFileImportStyles
+		MenuTooltipFileImportStyleLibrary
+		MenuTooltipFileImportStyleLibraries
+		MenuTooltipFileImportGroup
+		MenuTooltipFileImportGroups
+		MenuTooltipFileImportGroupLibrary
+		MenuTooltipFileImportGroupLibraries
+		MenuTooltipFileImportTemplate
+		MenuTooltipFileImportTemplates
+	MenuTooltipFileSubMenuExport
+		MenuTooltipFileExportStyle
+		MenuTooltipFileExportStyles
+		MenuTooltipFileExportStyleLibrary
+		MenuTooltipFileExportStyleLibraries
+		MenuTooltipFileExportGroup
+		MenuTooltipFileExportGroups
+		MenuTooltipFileExportGroupLibrary
+		MenuTooltipFileExportGroupLibraries
+		MenuTooltipFileExportTemplate
+		MenuTooltipFileExportTemplates
+	MenuTooltipFileRecent
+	MenuTooltipFileExit
+
+MenuTooltipScriptFile
+	MenuTooltipScriptFileNew
+	MenuTooltipScriptFileOpen
+	MenuTooltipScriptFileClose
+	MenuTooltipScriptFileSave
+	MenuTooltipScriptFileSaveAs
+	MenuTooltipScriptFileExport
+	MenuTooltipScriptFileSubMenuImport
+		MenuTooltipScriptFileImportStyle
+		MenuTooltipScriptFileImportStyles
+		MenuTooltipScriptFileImportStyleLibrary
+		MenuTooltipScriptFileImportStyleLibraries
+		MenuTooltipScriptFileImportGroup
+		MenuTooltipScriptFileImportGroups
+		MenuTooltipScriptFileImportGroupLibrary
+		MenuTooltipScriptFileImportGroupLibraries
+		MenuTooltipScriptFileImportTemplate
+		MenuTooltipScriptFileImportTemplates
+	MenuTooltipScriptFileSubMenuExport
+		MenuTooltipScriptFileExportStyle
+		MenuTooltipScriptFileExportStyles
+		MenuTooltipScriptFileExportStyleLibrary
+		MenuTooltipScriptFileExportStyleLibraries
+		MenuTooltipScriptFileExportGroup
+		MenuTooltipScriptFileExportGroups
+		MenuTooltipScriptFileExportGroupLibrary
+		MenuTooltipScriptFileExportGroupLibraries
+		MenuTooltipScriptFileExportTemplate
+		MenuTooltipScriptFileExportTemplates
+	MenuTooltipScriptFileRecent
+	MenuTooltipScriptFileExit
+
+[Menu: Edit]
+
+MenuEdit
+	MenuEditUndo
+	MenuEditRedo
+	MenuEditCopyAsEmf
+	MenuEditCut
+	MenuEditCopy
+	MenuEditPaste
+	MenuEditDelete
+	MenuEditSelectAll
+	MenuEditDeselectAll
+	MenuEditClearAll
+	MenuEditReference
+	MenuEditGroup
+	MenuEditUngroup
+	MenuEditOrder
+		MenuEditOrderBringToFront
+		MenuEditOrderBringForward
+		MenuEditOrderSendBackward
+		MenuEditOrderSendToBack
+
+MenuTooltipEdit
+	MenuTooltipEditUndo
+	MenuTooltipEditRedo
+	MenuTooltipEditCopyAsEmf
+	MenuTooltipEditCut
+	MenuTooltipEditCopy
+	MenuTooltipEditPaste
+	MenuTooltipEditDelete
+	MenuTooltipEditSelectAll
+	MenuTooltipEditDeselectAll
+	MenuTooltipEditClearAll
+	MenuTooltipEditReference
+	MenuTooltipEditGroup
+	MenuTooltipEditUngroup
+	MenuTooltipEditOrder
+		MenuTooltipEditOrderBringToFront
+		MenuTooltipEditOrderBringForward
+		MenuTooltipEditOrderSendBackward
+		MenuTooltipEditOrderSendToBack
+
+MenuTooltipScriptEdit
+	MenuTooltipScriptEditUndo
+	MenuTooltipScriptEditRedo
+	MenuTooltipScriptEditCopyAsEmf
+	MenuTooltipScriptEditCut
+	MenuTooltipScriptEditCopy
+	MenuTooltipScriptEditPaste
+	MenuTooltipScriptEditDelete
+	MenuTooltipScriptEditSelectAll
+	MenuTooltipScriptEditDeselectAll
+	MenuTooltipScriptEditClearAll
+	MenuTooltipScriptEditReference
+	MenuTooltipScriptEditGroup
+	MenuTooltipScriptEditUngroup
+	MenuTooltipScriptEditOrder
+		MenuTooltipScriptEditOrderBringToFront
+		MenuTooltipScriptEditOrderBringForward
+		MenuTooltipScriptEditOrderSendBackward
+		MenuTooltipScriptEditOrderSendToBack
+
+[Menu: View]
+
+MenuView
+	MenuViewZoom
+		MenuViewZoomReset
+		MenuViewZoomExtent
+	MenuViewProjectWindow
+	MenuViewOptionsWindow
+	MenuViewTemplatesWindow
+	MenuViewGroupsWindow
+	MenuViewDatabasesWindow
+	MenuViewDatabaseWindow
+	MenuViewContainerWindow
+	MenuViewDocumentWindow
+	MenuViewScriptWindow
+	MenuViewScriptsWindow
+	MenuViewStylesWindow
+	MenuViewLayersWindow
+	MenuViewShapesWindow
+	MenuViewTemplateWindow
+	MenuViewStateWindow
+	MenuViewCodeWindow
+	MenuViewDataWindow
+	MenuViewStyleWindow
+	MenuViewPropertiesWindow
+
+MenuTooltipView
+	MenuTooltipViewZoom
+		MenuTooltipViewZoomReset
+		MenuTooltipViewZoomExtent
+	MenuTooltipViewProjectWindow
+	MenuTooltipViewOptionsWindow
+	MenuTooltipViewTemplatesWindow
+	MenuTooltipViewGroupsWindow
+	MenuTooltipViewDatabasesWindow
+	MenuTooltipViewDatabaseWindow
+	MenuTooltipViewContainerWindow
+	MenuTooltipViewDocumentWindow
+	MenuTooltipViewScriptWindow
+	MenuTooltipViewScriptsWindow
+	MenuTooltipViewStylesWindow
+	MenuTooltipViewLayersWindow
+	MenuTooltipViewShapesWindow
+	MenuTooltipViewTemplateWindow
+	MenuTooltipViewStateWindow
+	MenuTooltipViewCodeWindow
+	MenuTooltipViewDataWindow
+	MenuTooltipViewStyleWindow
+	MenuTooltipViewPropertiesWindow
+
+MenuTooltipScriptView
+	MenuTooltipScriptViewZoom
+		MenuTooltipScriptViewZoomReset
+		MenuTooltipScriptViewZoomExtent
+	MenuTooltipScriptViewProjectWindow
+	MenuTooltipScriptViewOptionsWindow
+	MenuTooltipScriptViewTemplatesWindow
+	MenuTooltipScriptViewGroupsWindow
+	MenuTooltipScriptViewDatabasesWindow
+	MenuTooltipScriptViewDatabaseWindow
+	MenuTooltipScriptViewContainerWindow
+	MenuTooltipScriptViewDocumentWindow
+	MenuTooltipScriptViewScriptWindow
+	MenuTooltipScriptViewScriptsWindow
+	MenuTooltipScriptViewStylesWindow
+	MenuTooltipScriptViewLayersWindow
+	MenuTooltipScriptViewShapesWindow
+	MenuTooltipScriptViewTemplateWindow
+	MenuTooltipScriptViewStateWindow
+	MenuTooltipScriptViewCodeWindow
+	MenuTooltipScriptViewDataWindow
+	MenuTooltipScriptViewStyleWindow
+	MenuTooltipScriptViewPropertiesWindow
+
+[Menu: Tool]
+
+MenuTool
+	MenuToolNone
+	MenuToolSelection
+	MenuToolPoint
+	MenuToolLine
+	MenuToolArc
+	MenuToolBezier
+	MenuToolQBezier
+	MenuToolPath
+	MenuToolRectangle
+	MenuToolEllipse
+	MenuToolText
+	MenuToolImage
+
+MenuTooltipTool
+	MenuTooltipToolNone
+	MenuTooltipToolSelection
+	MenuTooltipToolPoint
+	MenuTooltipToolLine
+	MenuTooltipToolArc
+	MenuTooltipToolBezier
+	MenuTooltipToolQBezier
+	MenuTooltipToolPath
+	MenuTooltipToolRectangle
+	MenuTooltipToolEllipse
+	MenuTooltipToolText
+	MenuTooltipToolImage
+
+
+MenuTooltipScriptTool
+	MenuTooltipScriptToolNone
+	MenuTooltipScriptToolSelection
+	MenuTooltipScriptToolPoint
+	MenuTooltipScriptToolLine
+	MenuTooltipScriptToolArc
+	MenuTooltipScriptToolBezier
+	MenuTooltipScriptToolQBezier
+	MenuTooltipScriptToolPath
+	MenuTooltipScriptToolRectangle
+	MenuTooltipScriptToolEllipse
+	MenuTooltipScriptToolText
+	MenuTooltipScriptToolImage
+
+[Menu: Data]
+
+MenuData
+	MenuDataImport
+	MenuDataExport
+
+MenuTooltipData
+	MenuTooltipDataImport
+	MenuTooltipDataExport
+
+MenuTooltipScriptData
+	MenuTooltipScriptDataImport
+	MenuTooltipScriptDataExport
+
+[Menu: Template]
+
+MenuTemplate
+
+MenuTooltipTemplate
+
+MenuTooltipScriptTemplate
+
+[Menu: Script]
+
+MenuScript
+	MenuScriptEvaluate
+
+MenuTooltipScript
+	MenuTooltipScriptEvaluate
+
+MenuTooltipScriptScript
+	MenuTooltipScriptScriptEvaluate
+
+[Menu: Scripts]
+
+MenuScripts
+
+MenuTooltipScripts
+
+MenuTooltipScriptScripts
+
+[Menu: Options]
+
+MenuOptions
+	MenuOptionsDefaultIsStroked
+	MenuOptionsDefaultIsFilled
+	MenuOptionsDefaultIsClosed
+	MenuOptionsDefaultIsSmoothJoin
+	MenuOptionsSnapToGrid
+	MenuOptionsTryToConnect
+
+MenuTooltipOptions
+	MenuTooltipOptionsDefaultIsStroked
+	MenuTooltipOptionsDefaultIsFilled
+	MenuTooltipOptionsDefaultIsClosed
+	MenuTooltipOptionsDefaultIsSmoothJoin
+	MenuTooltipOptionsSnapToGrid
+	MenuTooltipOptionsTryToConnect
+
+MenuTooltipScriptOptions
+	MenuTooltipScriptOptionsDefaultIsStroked
+	MenuTooltipScriptOptionsDefaultIsFilled
+	MenuTooltipScriptOptionsDefaultIsClosed
+	MenuTooltipScriptOptionsDefaultIsSmoothJoin
+	MenuTooltipScriptOptionsSnapToGrid
+	MenuTooltipScriptOptionsTryToConnect
+
+[Menu: Simulation]
+
+MenuSimulation
+	MenuSimulationStart
+	MenuSimulationStop
+	MenuSimulationRestart
+	MenuSimulationPause
+	MenuSimulationTick
+
+MenuTooltipSimulation
+	MenuTooltipSimulationStart
+	MenuTooltipSimulationStop
+	MenuTooltipSimulationRestart
+	MenuTooltipSimulationPause
+	MenuTooltipSimulationTick
+
+MenuTooltipScriptSimulation
+	MenuTooltipScriptSimulationStart
+	MenuTooltipScriptSimulationStop
+	MenuTooltipScriptSimulationRestart
+	MenuTooltipScriptSimulationPause
+	MenuTooltipScriptSimulationTick
+
+[Menu: Window]
+
+MenuWindow
+	MenuWindowLoadLayout
+	MenuWindowSaveLayout
+	MenuWindowResetLayout
+
+MenuTooltipWindow
+	MenuTooltipWindowLoadLayout
+	MenuTooltipWindowSaveLayout
+	MenuTooltipWindowResetLayout
+
+MenuTooltipScriptWindow
+	MenuTooltipScriptWindowLoadLayout
+	MenuTooltipScriptWindowSaveLayout
+	MenuTooltipScriptWindowResetLayout
+
+[Window: Main]
+
+WindowTitleProject
+WindowTitleTemplates
+WindowTitleDatabases
+WindowTitleOptions
+WindowTitleTemplate
+WindowTitleGroups
+WindowTitleDatabase
+WindowTitleContainer
+WindowTitleStyles
+WindowTitleLayers
+WindowTitleShapes
+WindowTitleProperties
+WindowTitleStyle
+WindowTitleState
+WindowTitleData
+WindowTitleCode
+WindowTitleScript
+WindowTitleScripts
+WindowTitleDocument
+
+[Control: Code]
+
+TODO
+
+[Control: Container]
+
+TODO
+
+[Control: Database]
+
+TODO
+
+[Control: Databases]
+
+TODO
+
+[Control: Data]
+
+TODO
+
+[Control: Document]
+
+TODO
+
+[Control: Groups]
+
+TODO
+
+[Control: Layers]
+
+TODO
+
+[Control: Menu]
+
+TODO
+
+[Control: Path]
+
+TODO
+
+[Control: Project]
+
+TODO
+
+[Control: Records]
+
+TODO
+
+[Control: Script]
+
+TODO
+
+[Control: Scripts]
+
+TODO
+
+[Control: Shape]
+
+TODO
+
+[Control: Shapes]
+
+TODO
+
+[Control: State]
+
+TODO
+
+[Control: Style]
+
+TODO
+
+[Control: Styles]
+
+TODO
+
+[Control: Template]
+
+TODO
+
+[Control: Templates]
+
+TODO
+
+[Type: XPathSize]
+
+TODO
+
+[Type: XPathRect]
+
+TODO
+
+[Type: XArcSegment]
+
+TODO
+
+[Type: XBezierSegment]
+
+TODO
+
+[Type: XLineSegment]
+
+TODO
+
+[Type: XPolyBezierSegment]
+
+TODO
+
+[Type: XPolyLineSegment]
+
+TODO
+
+[Type: XPolyQuadraticBezierSegment]
+
+TODO
+
+[Type: XQuadraticBezierSegment]
+
+TODO
+
+[Type: XPathFigure]
+
+TODO
+
+[Type: XPathGeometry]
+
+TODO
+
+[Template: Name]
+
+TODO
+
+[Template: Style]
+
+TODO
+
+[Template: State]
+
+TODO
+
+[Template: IsStroked]
+
+TODO
+
+[Template: IsFilled]
+
+TODO
+
+[Template: Text]
+
+TODO
+
+[Template: FontStyle]
+
+TODO
+
+[Template: MaxLength]
+
+TODO
+
+[Template: StartState]
+
+TODO
+
+[Template: EndState]
+
+TODO
+
+[Type: ArgbColor]
+
+TODO
+
+[Template: BaseStyle]
+
+TODO
+
+[Type: ArrowStyle]
+
+TODO
+
+[Type: TextStyle]
+
+TODO
+
+[Type: LineStyle]
+
+TODO
+
+[Type: ShapeStyle]
+
+TODO
+
+[Template: Code]
+
+TODO
+
+[Template: BindingsMenu]
+
+TODO
+
+[Template: Bindings]
+
+TODO
+
+[Template: PropertiesMenu]
+
+TODO
+
+[Template: Properties]
+
+TODO
+
+[Template: ShapesProperties]
+
+TODO
+
+[Template: RecordMenu]
+
+TODO
+
+[Type: Record]
+
+TODO
+
+[Template: Record]
+
+TODO
+
+[Template: ColumnsMenu]
+
+TODO
+
+[Template: Columns]
+
+TODO
+
+[Template: Database]
+
+TODO
+
+[Template: Data]
+
+TODO
+
+[Type: XPoint]
+
+TODO
+
+[Type: XLine]
+
+TODO
+
+[Type: XRectangle]
+
+TODO
+
+[Type: XEllipse]
+
+TODO
+
+[Type: XArc]
+
+TODO
+
+[Type: XBezier]
+
+TODO
+
+[Type: XQBezier]
+
+TODO
+
+[Type: XText]
+
+TODO
+
+[Type: XImage]
+
+TODO
+
+[Type: XGroup]
+
+TODO
+
+[Type: XReference]
+
+TODO
+
+[Type: XPath]
+
+TODO
+
+[Type: Options]
+
+OptionsHeaderGeneral
+OptionsHeaderDefaults
+OptionsHeaderAdvanced
+OptionsSnapToGrid
+OptionsSnapX
+OptionsSnapY
+OptionsHitTreshold
+OptionsMoveMode
+OptionsTryToConnect
+OptionsCycleResolution
+OptionsDefaultIsStroked
+OptionsDefaultIsFilled
+OptionsDefaultIsClosed
+OptionsDefaultIsSmoothJoin
+OptionsDefaultFillRule
+OptionsPointShape
+OptionsPointStyle
+OptionsSelectionStyle
+OptionsHelperStyle
+
+OptionsTooltipSnapToGrid
+OptionsTooltipSnapX
+OptionsTooltipSnapY
+OptionsTooltipHitTreshold
+OptionsTooltipMoveMode
+OptionsTooltipTryToConnect
+OptionsTooltipCycleResolution
+OptionsTooltipDefaultIsStroked
+OptionsTooltipDefaultIsFilled
+OptionsTooltipDefaultIsClosed
+OptionsTooltipDefaultIsSmoothJoin
+OptionsTooltipDefaultFillRule
+OptionsTooltipPointShape
+OptionsTooltipPointStyle
+OptionsTooltipSelectionStyle
+OptionsTooltipHelperStyle
+
+OptionsTooltipScriptSnapToGrid
+OptionsTooltipScriptSnapX
+OptionsTooltipScriptSnapY
+OptionsTooltipScriptHitTreshold
+OptionsTooltipScriptMoveMode
+OptionsTooltipScriptTryToConnect
+OptionsTooltipScriptCycleResolution
+OptionsTooltipScriptDefaultIsStroked
+OptionsTooltipScriptDefaultIsFilled
+OptionsTooltipScriptDefaultIsClosed
+OptionsTooltipScriptDefaultIsSmoothJoin
+OptionsTooltipScriptDefaultFillRule
+OptionsTooltipScriptPointShape
+OptionsTooltipScriptPointStyle
+OptionsTooltipScriptSelectionStyle
+OptionsTooltipScriptHelperStyle
+
+[Type: Project]
+
+ProjectOptions
+
+ProjectName
+
+ProjectTooltipName
+ProjectTooltipOptions
+
+ProjectTooltipScriptName
+ProjectTooltipScriptOptions
+
+[Type: Document]
+
+DocumentName
+
+DocumentTooltipName
+
+DocumentTooltipScriptName
+
+[Type: Container]
+
+ContainerName
+ContainerProperties
+ContainerTemplate
+ContainerWidth
+ContainerHeight
+ContainerBackground
+
+ContainerTooltipName
+ContainerTooltipProperties
+ContainerTooltipTemplate
+ContainerTooltipWidth
+ContainerTooltipHeight
+ContainerTooltipBackground
+
+ContainerTooltipScriptName
+ContainerTooltipScriptProperties
+ContainerTooltipScriptTemplate
+ContainerTooltipScriptWidth
+ContainerTooltipScriptHeight
+ContainerTooltipScriptBackground

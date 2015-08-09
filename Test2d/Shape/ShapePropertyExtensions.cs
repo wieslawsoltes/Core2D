@@ -71,6 +71,36 @@ namespace Test2d
         /// <param name="group"></param>
         /// <param name="key"></param>
         /// <returns></returns>
+        public static bool GetBoolPropertyValue(this XGroup group, string key)
+        {
+            if (group == null || group.ShapesProperties == null)
+            {
+                throw new ArgumentNullException();
+            }
+            ShapeProperty property = group.ShapesProperties.FirstOrDefault(p => p.Name == key);
+            bool value;
+            if (property != null
+                && property.Value != null
+                && property.Value is string)
+            {
+                if (!bool.TryParse(property.Value as string, out value))
+                {
+                    throw new Exception(string.Format("Invalid format of {0} property.", key));
+                }
+            }
+            else
+            {
+                throw new Exception(string.Format("Can not find {0} property.", key));
+            }
+            return value;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static double GetDoublePropertyValue(this XGroup group, string key)
         {
             if (group == null || group.ShapesProperties == null)

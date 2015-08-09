@@ -22,6 +22,7 @@ namespace Test2d
         private Layer _workingLayer;
         private Layer _helperLayer;
         private BaseShape _currentShape;
+        private bool _isTemplate;
 
         /// <summary>
         /// 
@@ -66,6 +67,40 @@ namespace Test2d
         {
             get { return _properties; }
             set { Update(ref _properties, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets property Value using Name as key for Properties array values. If property with the specified key does not exist it is created.
+        /// </summary>
+        /// <param name="name">The property name value.</param>
+        /// <returns>The property Value.</returns>
+        public object this[string name]
+        {
+            get
+            {
+                var result = _properties.FirstOrDefault(p => p.Name == name);
+                if (result != null)
+                {
+                    return result.Value;
+                }
+                return null;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    var result = _properties.FirstOrDefault(p => p.Name == name);
+                    if (result != null)
+                    {
+                        result.Value = value;
+                    }
+                    else
+                    {
+                        var property = ShapeProperty.Create(name, value);
+                        Properties = Properties.Add(property);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -125,6 +160,15 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public bool IsTemplate
+        {
+            get { return _isTemplate; }
+            set { Update(ref _isTemplate, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void Clear()
         {
             foreach (var layer in Layers)
@@ -171,7 +215,7 @@ namespace Test2d
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        public static Container Create(string name = "Container", double width = 810, double height = 600)
+        public static Container Create(string name = "Container", double width = 840, double height = 600)
         {
             var c = new Container()
             {

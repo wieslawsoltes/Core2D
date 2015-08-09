@@ -113,6 +113,7 @@ namespace Test2d
         /// <param name="end"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
+        /// <param name="isStroked"></param>
         /// <param name="name"></param>
         /// <returns></returns>
         public static XLine Create(
@@ -120,13 +121,14 @@ namespace Test2d
             XPoint end,
             ShapeStyle style,
             BaseShape point,
+            bool isStroked = true,
             string name = "")
         {
             return new XLine()
             {
                 Name = name,
                 Style = style,
-                IsStroked = true,
+                IsStroked = isStroked,
                 IsFilled = false,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
@@ -145,6 +147,7 @@ namespace Test2d
         /// <param name="y2"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
+        /// <param name="isStroked"></param>
         /// <param name="name"></param>
         /// <returns></returns>
         public static XLine Create(
@@ -152,13 +155,14 @@ namespace Test2d
             double x2, double y2,
             ShapeStyle style,
             BaseShape point,
+            bool isStroked = true,
             string name = "")
         {
             return new XLine()
             {
                 Name = name,
                 Style = style,
-                IsStroked = true,
+                IsStroked = isStroked,
                 IsFilled = false,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
@@ -175,15 +179,17 @@ namespace Test2d
         /// <param name="y"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
+        /// <param name="isStroked"></param>
         /// <param name="name"></param>
         /// <returns></returns>
         public static XLine Create(
             double x, double y,
             ShapeStyle style,
             BaseShape point,
+            bool isStroked = true,
             string name = "")
         {
-            return Create(x, y, x, y, style, point, name);
+            return Create(x, y, x, y, style, point, isStroked, name);
         }
 
         /// <summary>

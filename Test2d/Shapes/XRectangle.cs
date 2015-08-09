@@ -50,6 +50,7 @@ namespace Test2d
         /// <param name="y2"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="text"></param>
         /// <param name="name"></param>
@@ -59,6 +60,7 @@ namespace Test2d
             double x2, double y2,
             ShapeStyle style,
             BaseShape point,
+            bool isStroked = true,
             bool isFilled = false,
             string text = null,
             string name = "")
@@ -67,7 +69,7 @@ namespace Test2d
             {
                 Name = name,
                 Style = style,
-                IsStroked = true,
+                IsStroked = isStroked,
                 IsFilled = isFilled,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
@@ -85,6 +87,7 @@ namespace Test2d
         /// <param name="y"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="text"></param>
         /// <param name="name"></param>
@@ -93,11 +96,12 @@ namespace Test2d
             double x, double y,
             ShapeStyle style,
             BaseShape point,
+            bool isStroked = true,
             bool isFilled = false,
             string text = null,
             string name = "")
         {
-            return Create(x, y, x, y, style, point, isFilled, text, name);
+            return Create(x, y, x, y, style, point, isStroked, isFilled, text, name);
         }
 
         /// <summary>
@@ -107,6 +111,7 @@ namespace Test2d
         /// <param name="bottomRight"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
+        /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="text"></param>
         /// <param name="name"></param>
@@ -116,6 +121,7 @@ namespace Test2d
             XPoint bottomRight,
             ShapeStyle style,
             BaseShape point,
+            bool isStroked = true,
             bool isFilled = false,
             string text = null,
             string name = "")
@@ -124,7 +130,7 @@ namespace Test2d
             {
                 Name = name,
                 Style = style,
-                IsStroked = true,
+                IsStroked = isStroked,
                 IsFilled = isFilled,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
