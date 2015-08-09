@@ -11,9 +11,6 @@ mkdir "%ReleaseName%"
 
 copy "%ProjectPath%\*.txt" "%ReleaseName%"
 copy "%ProjectPath%\*.md" "%ReleaseName%"
-xcopy "%ProjectPath%\Code" "%ReleaseName%\Code" /E
-xcopy "%ProjectPath%\Scripts" "%ReleaseName%\Scripts" /E
-
 copy "%ReleasePath%\*.dll" "%ReleaseName%"
 copy "%ReleasePath%\Test2d.UI.Wpf.exe" "%ReleaseName%"
 
