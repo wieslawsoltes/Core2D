@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Microsoft.Practices.Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -3230,362 +3229,362 @@ namespace Test2d
                 _commands = new EditorCommands();
 
                 _commands.NewCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (item) => OnNew(item),
                         (item) => IsEditMode());
                 
                 _commands.CloseCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnClose(),
                         () => IsEditMode());
 
                 _commands.ExitCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnExit(),
                         () => true);
 
                 _commands.UndoCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnUndo(),
                         () => IsEditMode() /* && CanUndo() */);
 
                 _commands.RedoCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnRedo(),
                         () => IsEditMode() /* && CanRedo() */);
 
                 _commands.CutCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (item) => OnCut(item),
                         (item) => IsEditMode() /* && CanCopy() */);
 
                 _commands.CopyCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (item) => OnCopy(item),
                         (item) => IsEditMode() /* && CanCopy() */);
 
                 _commands.PasteCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (item) => OnPaste(item),
                         (item) => IsEditMode() /* && CanPaste() */);
 
                 _commands.DeleteCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (item) => OnDelete(item),
                         (item) => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
                 _commands.SelectAllCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnSelectAll(),
                         () => IsEditMode());
 
                 _commands.DeselectAllCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnDeselectAll(),
                         () => IsEditMode());
 
                 _commands.ClearAllCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnClearAll(),
                         () => IsEditMode());
 
                 _commands.GroupCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => _editor.GroupSelected(),
                         () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
                 _commands.UngroupCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => _editor.UngroupSelected(),
                         () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
                 _commands.ReferenceCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => _editor.ReferenceSelected(),
                         () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
                 _commands.BringToFrontCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => _editor.BringToFrontSelected(),
                         () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
                 _commands.SendToBackCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => _editor.SendToBackSelected(),
                         () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
                 _commands.BringForwardCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => _editor.BringForwardSelected(),
                         () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
                 _commands.SendBackwardCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => _editor.SendBackwardSelected(),
                         () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
                 _commands.ToolNoneCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToolNone(),
                         () => IsEditMode());
 
                 _commands.ToolSelectionCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToolSelection(),
                         () => IsEditMode());
 
                 _commands.ToolGroupCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToolGroup(),
                         () => IsEditMode());
 
                 _commands.ToolPointCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToolPoint(),
                         () => IsEditMode());
 
                 _commands.ToolLineCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToolLine(),
                         () => IsEditMode());
 
                 _commands.ToolArcCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToolArc(),
                         () => IsEditMode());
 
                 _commands.ToolBezierCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToolBezier(),
                         () => IsEditMode());
 
                 _commands.ToolQBezierCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToolQBezier(),
                         () => IsEditMode());
 
                 _commands.ToolPathCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToolPath(),
                         () => IsEditMode());
 
                 _commands.ToolRectangleCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToolRectangle(),
                         () => IsEditMode());
 
                 _commands.ToolEllipseCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToolEllipse(),
                         () => IsEditMode());
 
                 _commands.ToolTextCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToolText(),
                         () => IsEditMode());
 
                 _commands.ToolImageCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToolImage(),
                         () => IsEditMode());
 
                 _commands.ToolMoveCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToolMove(),
                         () => IsEditMode());
 
                 _commands.DefaultIsStrokedCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToggleDefaultIsStroked(),
                         () => IsEditMode());
 
                 _commands.DefaultIsFilledCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToggleDefaultIsFilled(),
                         () => IsEditMode());
 
                 _commands.DefaultIsClosedCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToggleDefaultIsClosed(),
                         () => IsEditMode());
 
                 _commands.DefaultIsSmoothJoinCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToggleDefaultIsSmoothJoin(),
                         () => IsEditMode());
 
                 _commands.SnapToGridCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToggleSnapToGrid(),
                         () => IsEditMode());
 
                 _commands.TryToConnectCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnToggleTryToConnect(),
                         () => IsEditMode());
 
                 _commands.AddDatabaseCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnAddDatabase(),
                         () => IsEditMode());
 
                 _commands.RemoveDatabaseCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (db) => OnRemoveDatabase(db),
                         (db) => IsEditMode());
 
                 _commands.AddColumnCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (owner) => OnAddColumn(owner),
                         (owner) => IsEditMode());
 
                 _commands.RemoveColumnCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (parameter) => OnRemoveColumn(parameter),
                         (parameter) => IsEditMode());
 
                 _commands.AddRecordCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnAddRecord(),
                         () => IsEditMode());
 
                 _commands.RemoveRecordCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnRemoveRecord(),
                         () => IsEditMode());
 
                 _commands.ResetRecordCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (owner) => OnResetRecord(owner),
                         (owner) => IsEditMode());
 
                 _commands.AddBindingCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (owner) => OnAddBinding(owner),
                         (owner) => IsEditMode());
 
                 _commands.RemoveBindingCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (parameter) => OnRemoveBinding(parameter),
                         (parameter) => IsEditMode());
 
                 _commands.AddPropertyCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (owner) => OnAddProperty(owner),
                         (owner) => IsEditMode());
 
                 _commands.RemovePropertyCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (parameter) => OnRemoveProperty(parameter),
                         (parameter) => IsEditMode());
 
                 _commands.AddGroupLibraryCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnAddGroupLibrary(),
                         () => IsEditMode());
 
                 _commands.RemoveGroupLibraryCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnRemoveGroupLibrary(),
                         () => IsEditMode());
 
                 _commands.AddGroupCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnAddGroup(),
                         () => IsEditMode());
 
                 _commands.RemoveGroupCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnRemoveGroup(),
                         () => IsEditMode());
 
                 _commands.AddLayerCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnAddLayer(),
                         () => IsEditMode());
 
                 _commands.RemoveLayerCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnRemoveLayer(),
                         () => IsEditMode());
 
                 _commands.AddStyleLibraryCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnAddStyleLibrary(),
                         () => IsEditMode());
 
                 _commands.RemoveStyleLibraryCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnRemoveStyleLibrary(),
                         () => IsEditMode());
 
                 _commands.AddStyleCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnAddStyle(),
                         () => IsEditMode());
 
                 _commands.RemoveStyleCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnRemoveStyle(),
                         () => IsEditMode());
 
                 _commands.RemoveShapeCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnRemoveShape(),
                         () => IsEditMode());
 
                 _commands.AddTemplateCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnAddTemplate(),
                         () => IsEditMode());
 
                 _commands.RemoveTemplateCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnRemoveTemplate(),
                         () => IsEditMode());
 
                 _commands.EditTemplateCommand =
-                    new DelegateCommand(
+                    Command.Create(
                         () => OnEditTemplate(),
                         () => IsEditMode());
 
                 _commands.ApplyTemplateCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (item) => OnApplyTemplate(item),
                         (item) => true);
 
                 _commands.SelectedItemChangedCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (item) => OnSelectedItemChanged(item),
                         (item) => IsEditMode());
 
                 _commands.AddContainerCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (item) => OnAddContainer(item),
                         (item) => IsEditMode());
 
                 _commands.InsertContainerBeforeCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (item) => OnInsertContainerBefore(item),
                         (item) => IsEditMode());
 
                 _commands.InsertContainerAfterCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (item) => OnInsertContainerAfter(item),
                         (item) => IsEditMode());
 
                 _commands.AddDocumentCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (item) => OnAddDocument(item),
                         (item) => IsEditMode());
 
                 _commands.InsertDocumentBeforeCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (item) => OnInsertDocumentBefore(item),
                         (item) => IsEditMode());
 
                 _commands.InsertDocumentAfterCommand =
-                    new DelegateCommand<object>(
+                    Command<object>.Create(
                         (item) => OnInsertDocumentAfter(item),
                         (item) => IsEditMode());
             }
@@ -3611,153 +3610,153 @@ namespace Test2d
         /// </summary>
         private void UpdateCanExecuteState()
         {
-            (_commands.NewCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.OpenCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.CloseCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.SaveCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.SaveAsCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ExportCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ExitCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.NewCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.OpenCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.CloseCommand as Command).NotifyCanExecuteChanged();
+            (_commands.SaveCommand as Command).NotifyCanExecuteChanged();
+            (_commands.SaveAsCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ExportCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExitCommand as Command).NotifyCanExecuteChanged();
 
-            (_commands.ImportDataCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ExportDataCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.UpdateDataCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ImportDataCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportDataCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.UpdateDataCommand as Command<object>).NotifyCanExecuteChanged();
 
-            (_commands.ImportStyleCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ImportStylesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ImportStyleLibraryCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ImportStyleLibrariesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ImportGroupCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ImportGroupsCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ImportGroupLibraryCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ImportGroupLibrariesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ImportTemplateCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ImportTemplatesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ExportStyleCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ExportStylesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ExportStyleLibraryCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ExportStyleLibrariesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ExportGroupCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ExportGroupsCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ExportGroupLibraryCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ExportGroupLibrariesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ExportTemplateCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.ExportTemplatesCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ImportStyleCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportStylesCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportStyleLibraryCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportStyleLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportGroupCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportGroupsCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportGroupLibraryCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportGroupLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportTemplateCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportTemplatesCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportStyleCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportStylesCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportStyleLibraryCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportStyleLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportGroupCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportGroupsCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportGroupLibraryCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportGroupLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportTemplateCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportTemplatesCommand as Command<object>).NotifyCanExecuteChanged();
  
-            (_commands.UndoCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.RedoCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.CopyAsEmfCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.CutCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.CopyCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.PasteCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.DeleteCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.SelectAllCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.DeselectAllCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ClearAllCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.GroupCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.UngroupCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ReferenceCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.UndoCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RedoCommand as Command).NotifyCanExecuteChanged();
+            (_commands.CopyAsEmfCommand as Command).NotifyCanExecuteChanged();
+            (_commands.CutCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.CopyCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.PasteCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.DeleteCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.SelectAllCommand as Command).NotifyCanExecuteChanged();
+            (_commands.DeselectAllCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ClearAllCommand as Command).NotifyCanExecuteChanged();
+            (_commands.GroupCommand as Command).NotifyCanExecuteChanged();
+            (_commands.UngroupCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ReferenceCommand as Command).NotifyCanExecuteChanged();
 
-            (_commands.BringToFrontCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.BringForwardCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.SendBackwardCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.SendToBackCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.BringToFrontCommand as Command).NotifyCanExecuteChanged();
+            (_commands.BringForwardCommand as Command).NotifyCanExecuteChanged();
+            (_commands.SendBackwardCommand as Command).NotifyCanExecuteChanged();
+            (_commands.SendToBackCommand as Command).NotifyCanExecuteChanged();
                         
-            (_commands.ToolNoneCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolSelectionCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolGroupCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolPointCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolLineCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolArcCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolBezierCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolQBezierCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolRectangleCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolEllipseCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolPathCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolTextCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolImageCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ToolMoveCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ToolNoneCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolSelectionCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolGroupCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolPointCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolLineCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolArcCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolBezierCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolQBezierCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolRectangleCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolEllipseCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolPathCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolTextCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolImageCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolMoveCommand as Command).NotifyCanExecuteChanged();
 
-            (_commands.DefaultIsStrokedCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.DefaultIsFilledCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.DefaultIsClosedCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.DefaultIsSmoothJoinCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.SnapToGridCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.TryToConnectCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.DefaultIsStrokedCommand as Command).NotifyCanExecuteChanged();
+            (_commands.DefaultIsFilledCommand as Command).NotifyCanExecuteChanged();
+            (_commands.DefaultIsClosedCommand as Command).NotifyCanExecuteChanged();
+            (_commands.DefaultIsSmoothJoinCommand as Command).NotifyCanExecuteChanged();
+            (_commands.SnapToGridCommand as Command).NotifyCanExecuteChanged();
+            (_commands.TryToConnectCommand as Command).NotifyCanExecuteChanged();
 
-            (_commands.AddDatabaseCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.RemoveDatabaseCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.AddDatabaseCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RemoveDatabaseCommand as Command<object>).NotifyCanExecuteChanged();
 
-            (_commands.AddColumnCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.RemoveColumnCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.AddColumnCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.RemoveColumnCommand as Command<object>).NotifyCanExecuteChanged();
 
-            (_commands.AddRecordCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.RemoveRecordCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.AddRecordCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RemoveRecordCommand as Command).NotifyCanExecuteChanged();
 
-            (_commands.ResetRecordCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.ResetRecordCommand as Command<object>).NotifyCanExecuteChanged();
 
-            (_commands.AddBindingCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.RemoveBindingCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.AddBindingCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.RemoveBindingCommand as Command<object>).NotifyCanExecuteChanged();
             
-            (_commands.AddPropertyCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.RemovePropertyCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.AddPropertyCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.RemovePropertyCommand as Command<object>).NotifyCanExecuteChanged();
 
-            (_commands.AddGroupLibraryCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.RemoveGroupLibraryCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.AddGroupLibraryCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RemoveGroupLibraryCommand as Command).NotifyCanExecuteChanged();
 
-            (_commands.AddGroupCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.RemoveGroupCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.AddGroupCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RemoveGroupCommand as Command).NotifyCanExecuteChanged();
 
-            (_commands.AddLayerCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.RemoveLayerCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.AddLayerCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RemoveLayerCommand as Command).NotifyCanExecuteChanged();
 
-            (_commands.AddStyleCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.RemoveStyleCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.AddStyleCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RemoveStyleCommand as Command).NotifyCanExecuteChanged();
 
-            (_commands.AddStyleLibraryCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.RemoveStyleLibraryCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.AddStyleLibraryCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RemoveStyleLibraryCommand as Command).NotifyCanExecuteChanged();
 
-            (_commands.RemoveShapeCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.RemoveShapeCommand as Command).NotifyCanExecuteChanged();
 
-            (_commands.ZoomResetCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ZoomExtentCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ZoomResetCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ZoomExtentCommand as Command).NotifyCanExecuteChanged();
 
-            (_commands.ProjectWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.OptionsWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.TemplatesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.GroupsWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.DatabasesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.DatabaseWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            //(_commands.ContainerWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            //(_commands.DocumentWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.StylesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.LayersWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ShapesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.TemplateWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.PropertiesWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.StateWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.CodeWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.DataWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.StyleWindowCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.ProjectWindowCommand as Command).NotifyCanExecuteChanged();
+            (_commands.OptionsWindowCommand as Command).NotifyCanExecuteChanged();
+            (_commands.TemplatesWindowCommand as Command).NotifyCanExecuteChanged();
+            (_commands.GroupsWindowCommand as Command).NotifyCanExecuteChanged();
+            (_commands.DatabasesWindowCommand as Command).NotifyCanExecuteChanged();
+            (_commands.DatabaseWindowCommand as Command).NotifyCanExecuteChanged();
+            //(_commands.ContainerWindowCommand as Command).NotifyCanExecuteChanged();
+            //(_commands.DocumentWindowCommand as Command).NotifyCanExecuteChanged();
+            (_commands.StylesWindowCommand as Command).NotifyCanExecuteChanged();
+            (_commands.LayersWindowCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ShapesWindowCommand as Command).NotifyCanExecuteChanged();
+            (_commands.TemplateWindowCommand as Command).NotifyCanExecuteChanged();
+            (_commands.PropertiesWindowCommand as Command).NotifyCanExecuteChanged();
+            (_commands.StateWindowCommand as Command).NotifyCanExecuteChanged();
+            (_commands.CodeWindowCommand as Command).NotifyCanExecuteChanged();
+            (_commands.DataWindowCommand as Command).NotifyCanExecuteChanged();
+            (_commands.StyleWindowCommand as Command).NotifyCanExecuteChanged();
 
-            (_commands.AddTemplateCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.RemoveTemplateCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.EditTemplateCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ApplyTemplateCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.AddTemplateCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RemoveTemplateCommand as Command).NotifyCanExecuteChanged();
+            (_commands.EditTemplateCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ApplyTemplateCommand as Command<object>).NotifyCanExecuteChanged();
             
-            (_commands.SelectedItemChangedCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.SelectedItemChangedCommand as Command<object>).NotifyCanExecuteChanged();
 
-            (_commands.AddContainerCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.InsertContainerBeforeCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.InsertContainerAfterCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.AddContainerCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.InsertContainerBeforeCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.InsertContainerAfterCommand as Command<object>).NotifyCanExecuteChanged();
 
-            (_commands.AddDocumentCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.InsertDocumentBeforeCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
-            (_commands.InsertDocumentAfterCommand as DelegateCommand<object>).RaiseCanExecuteChanged();
+            (_commands.AddDocumentCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.InsertDocumentBeforeCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.InsertDocumentAfterCommand as Command<object>).NotifyCanExecuteChanged();
 
-            (_commands.LoadWindowLayoutCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.SaveWindowLayoutCommand as DelegateCommand).RaiseCanExecuteChanged();
-            (_commands.ResetWindowLayoutCommand as DelegateCommand).RaiseCanExecuteChanged();
+            (_commands.LoadWindowLayoutCommand as Command).NotifyCanExecuteChanged();
+            (_commands.SaveWindowLayoutCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ResetWindowLayoutCommand as Command).NotifyCanExecuteChanged();
         }
 
         /// <summary>

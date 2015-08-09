@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Microsoft.Practices.Prism.Commands;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -876,252 +875,252 @@ namespace Test.Windows
         private void InitializeCommands(EditorContext context)
         {
             context.Commands.OpenCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (parameter) => OnOpen(parameter),
                     (parameter) => context.IsEditMode());
             
             context.Commands.SaveCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => OnSave(),
                     () => context.IsEditMode());
 
             context.Commands.SaveAsCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => OnSaveAs(),
                     () => context.IsEditMode());
 
             context.Commands.ExportCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExport(item),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportDataCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportData(),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportDataCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportData(),
                     (item) => context.IsEditMode());
 
             context.Commands.UpdateDataCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnUpdateData(),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportStyleCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Style),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportStylesCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Styles),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportStyleLibraryCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.StyleLibrary),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportStyleLibrariesCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.StyleLibraries),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportGroupCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Group),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportGroupsCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Groups),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportGroupLibraryCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.GroupLibrary),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportGroupLibrariesCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.GroupLibraries),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportTemplateCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Template),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportTemplatesCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Templates),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportStyleCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Style),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportStylesCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Styles),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportStyleLibraryCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.StyleLibrary),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportStyleLibrariesCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.StyleLibraries),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportGroupCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Group),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportGroupsCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Groups),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportGroupLibraryCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.GroupLibrary),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportGroupLibrariesCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.GroupLibraries),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportTemplateCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Template),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportTemplatesCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Templates),
                     (item) => context.IsEditMode());
 
             context.Commands.CopyAsEmfCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => OnCopyAsEmf(),
                     () => context.IsEditMode());
             
             context.Commands.ZoomResetCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => OnZoomReset(),
                     () => true);
 
             context.Commands.ZoomExtentCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => OnZoomExtent(),
                     () => true);
 
             context.Commands.ProjectWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["project"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.OptionsWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["options"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.TemplatesWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["templates"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.GroupsWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["groups"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.DatabasesWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["databases"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.DatabaseWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["database"] as LayoutAnchorable).Show(),
                     () => true);
 
             //context.Commands.ContainerWindowCommand = 
-            //    new DelegateCommand(
+            //    Command.Create(
             //        () => ,
             //        () => true);
 
             //context.Commands.DocumentWindowCommand = 
-            //    new DelegateCommand(
+            //    Command.Create(
             //        () => ,
             //        () => true);
 
             context.Commands.StylesWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["styles"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.LayersWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["layers"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.ShapesWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["shapes"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.TemplateWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["template"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.PropertiesWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["properties"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.StateWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["state"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.CodeWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["code"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.DataWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["data"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.StyleWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["style"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.LoadWindowLayoutCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => OnLoadLayout(),
                     () => true);
 
             context.Commands.SaveWindowLayoutCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => OnSaveLayout(),
                     () => true);
 
             context.Commands.ResetWindowLayoutCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => OnResetLayout(),
                     () => true);
         }
