@@ -2322,7 +2322,7 @@
                                 VerticalAlignment="Center" 
                                 Content="-" 
                                 Command="{Binding DataContext.Commands.RemoveColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                                Style="{StaticResource ToolTipTextBoxStyleKey}"
+                                Style="{StaticResource ToolTipButtonStyleKey}"
                                 controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
                                 controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
                                 <Button.CommandParameter>
