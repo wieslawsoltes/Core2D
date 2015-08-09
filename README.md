@@ -1,6 +1,6 @@
 # Test2d
 
-2D Diagram Editor
+Data driven 2D diagram editor.
 
 ## About
 
