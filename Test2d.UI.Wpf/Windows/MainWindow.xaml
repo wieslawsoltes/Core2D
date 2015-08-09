@@ -123,7 +123,7 @@
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
         <controls:MenuControl Grid.Row="0"/>
-        <controls:ToolbarControl Grid.Row="2"/>
+        <!--<controls:ToolbarControl Grid.Row="2"/>-->
         <ad:DockingManager x:Name="dockingManager" Grid.Row="3" Margin="0,5,0,0">
             <ad:LayoutRoot>
                 <ad:LayoutPanel Orientation="Horizontal">
