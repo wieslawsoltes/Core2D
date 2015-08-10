@@ -865,7 +865,6 @@ namespace Test.Windows
             _layouts.Add("style", shapesWindow);
             _layouts.Add("state", shapesWindow);
             _layouts.Add("data", shapesWindow);
-            _layouts.Add("code", shapesWindow);
         }
 
         /// <summary>
@@ -1092,11 +1091,6 @@ namespace Test.Windows
             context.Commands.StateWindowCommand =
                 Command.Create(
                     () => (_layouts["state"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            context.Commands.CodeWindowCommand =
-                Command.Create(
-                    () => (_layouts["code"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.DataWindowCommand =

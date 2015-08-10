@@ -20,7 +20,6 @@ namespace Test2d
         private bool _defaultIsSmoothJoin = true;
         private XFillRule _defaultFillRule = XFillRule.EvenOdd;
         private bool _tryToConnect = false;
-        private int _cycleResolution;
         private BaseShape _pointShape;
         private ShapeStyle _pointStyle;
         private ShapeStyle _selectionStyle;
@@ -126,15 +125,6 @@ namespace Test2d
         }
 
         /// <summary>
-        /// Gets or sets simulation clock cycle resolution in milliseconds.
-        /// </summary>
-        public int CycleResolution
-        {
-            get { return _cycleResolution; }
-            set { Update(ref _cycleResolution, value); }
-        }
-
-        /// <summary>
         /// Gets or sets shape used to draw points.
         /// </summary>
         public BaseShape PointShape
@@ -188,8 +178,7 @@ namespace Test2d
                 DefaultIsClosed = true,
                 DefaultIsSmoothJoin = true,
                 DefaultFillRule = XFillRule.EvenOdd,
-                TryToConnect = false,
-                CycleResolution = 100
+                TryToConnect = false
             };
 
             options.SelectionStyle =

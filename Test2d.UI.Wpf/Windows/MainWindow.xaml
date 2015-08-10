@@ -55,7 +55,6 @@
         <KeyBinding Command="{Binding Commands.TemplateWindowCommand}" Gesture="Ctrl+Alt+M"/>
         <KeyBinding Command="{Binding Commands.PropertiesWindowCommand}" Gesture="F4"/>
         <KeyBinding Command="{Binding Commands.StateWindowCommand}" Gesture="Ctrl+Alt+W"/>
-        <KeyBinding Command="{Binding Commands.CodeWindowCommand}" Gesture="Ctrl+Alt+C"/>
         <KeyBinding Command="{Binding Commands.DataWindowCommand}" Gesture="Ctrl+Alt+I"/>
         <KeyBinding Command="{Binding Commands.StyleWindowCommand}" Gesture="Ctrl+Alt+Y"/>
     </Window.InputBindings>

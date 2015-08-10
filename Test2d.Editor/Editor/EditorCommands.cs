@@ -458,10 +458,6 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public ICommand CodeWindowCommand { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
         public ICommand DataWindowCommand { get; set; }
         /// <summary>
         /// 

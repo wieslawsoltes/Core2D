@@ -117,83 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MenuTooltipEditUndo" xml:space="preserve">
-    <value>Undo</value>
-  </data>
-  <data name="MenuTooltipScriptEditUndo" xml:space="preserve">
-    <value>Script: Context.OnUndo()</value>
-  </data>
-  <data name="MenuTooltipEditRedo" xml:space="preserve">
-    <value>Redo</value>
-  </data>
-  <data name="MenuTooltipScriptEditOrderBringToFront" xml:space="preserve">
-    <value>Script: Editor.BringToFrontSelected()</value>
-  </data>
   <data name="MenuEditCopyAsEmf" xml:space="preserve">
     <value>Copy As _Metafile</value>
-  </data>
-  <data name="MenuTooltipScriptEditRedo" xml:space="preserve">
-    <value>Script: Context.OnRedo()</value>
-  </data>
-  <data name="MenuTooltipEditCut" xml:space="preserve">
-    <value>Cut</value>
-  </data>
-  <data name="MenuTooltipScriptEditCut" xml:space="preserve">
-    <value>Script: Context.OnCut()</value>
-  </data>
-  <data name="MenuTooltipEditDelete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="MenuTooltipScriptEditSelectAll" xml:space="preserve">
-    <value>Script: Context.OnSelectAll()</value>
-  </data>
-  <data name="MenuTooltipEditCopy" xml:space="preserve">
-    <value>Copy</value>
-  </data>
-  <data name="MenuTooltipScriptEditDelete" xml:space="preserve">
-    <value>Script: Editor.DeleteSelected()</value>
-  </data>
-  <data name="MenuTooltipEditPaste" xml:space="preserve">
-    <value>Paste</value>
-  </data>
-  <data name="MenuTooltipScriptEditPaste" xml:space="preserve">
-    <value>Script: Context.OnPaste()</value>
-  </data>
-  <data name="MenuTooltipEditSelectAll" xml:space="preserve">
-    <value>Select All</value>
-  </data>
-  <data name="MenuTooltipScriptEditCopy" xml:space="preserve">
-    <value>Script: Context.OnCopy()</value>
   </data>
   <data name="MenuEditDeselectAll" xml:space="preserve">
     <value>De_select All</value>
   </data>
-  <data name="MenuTooltipScriptEditDeselectAll" xml:space="preserve">
-    <value>Script: Context.OnDeselectAll()</value>
-  </data>
   <data name="MenuEditUngroup" xml:space="preserve">
     <value>U_ngroup</value>
-  </data>
-  <data name="MenuTooltipScriptEditClearAll" xml:space="preserve">
-    <value>Script: Context.OnClearAll()</value>
   </data>
   <data name="MenuEditReference" xml:space="preserve">
     <value>Re_ference</value>
   </data>
-  <data name="MenuTooltipScriptEditReference" xml:space="preserve">
-    <value>Script: Editor.ReferenceSelected()</value>
-  </data>
   <data name="MenuEditGroup" xml:space="preserve">
     <value>_Group</value>
-  </data>
-  <data name="MenuTooltipScriptEditGroup" xml:space="preserve">
-    <value>Script: Editor.GroupSelected()</value>
-  </data>
-  <data name="MenuTooltipEditClearAll" xml:space="preserve">
-    <value>Clear All</value>
-  </data>
-  <data name="MenuTooltipScriptEditCopyAsEmf" xml:space="preserve">
-    <value>Script: Not Available</value>
   </data>
   <data name="MenuEditOrderBringToFront" xml:space="preserve">
     <value>Bring to _Front</value>
@@ -207,26 +144,11 @@
   <data name="MenuEditOrderSendBackward" xml:space="preserve">
     <value>Send Ba_ckward</value>
   </data>
-  <data name="MenuTooltipScriptEditUngroup" xml:space="preserve">
-    <value>Script: Editor.UngroupSelected()</value>
-  </data>
-  <data name="MenuTooltipScriptEditOrderBringForward" xml:space="preserve">
-    <value>Script: Editor.BringForwardSelected()</value>
-  </data>
-  <data name="MenuTooltipScriptEditOrderSendBackward" xml:space="preserve">
-    <value>Script: Editor.SendBackwardSelected()</value>
-  </data>
-  <data name="MenuTooltipScriptEditOrderSendToBack" xml:space="preserve">
-    <value>Script: Editor.SendToBackSelected()</value>
-  </data>
   <data name="MenuEditClearAll" xml:space="preserve">
     <value>Cl_ear All</value>
   </data>
   <data name="MenuEditCopy" xml:space="preserve">
     <value>_Copy</value>
-  </data>
-  <data name="MenuTooltipEditCopyAsEmf" xml:space="preserve">
-    <value>Copy As Metafile</value>
   </data>
   <data name="MenuEditCut" xml:space="preserve">
     <value>Cu_t</value>
@@ -234,38 +156,14 @@
   <data name="MenuEditDelete" xml:space="preserve">
     <value>_Delete</value>
   </data>
-  <data name="MenuTooltipEditDeselectAll" xml:space="preserve">
-    <value>Deselect All</value>
-  </data>
-  <data name="MenuTooltipEditGroup" xml:space="preserve">
-    <value>Group</value>
-  </data>
-  <data name="MenuTooltipEditOrderBringForward" xml:space="preserve">
-    <value>Bring Forward</value>
-  </data>
-  <data name="MenuTooltipEditOrderBringToFront" xml:space="preserve">
-    <value>Bring to Front</value>
-  </data>
-  <data name="MenuTooltipEditOrderSendBackward" xml:space="preserve">
-    <value>Send Backward</value>
-  </data>
-  <data name="MenuTooltipEditOrderSendToBack" xml:space="preserve">
-    <value>Send to Back</value>
-  </data>
   <data name="MenuEditPaste" xml:space="preserve">
     <value>_Paste</value>
   </data>
   <data name="MenuEditRedo" xml:space="preserve">
     <value>_Redo</value>
   </data>
-  <data name="MenuTooltipEditReference" xml:space="preserve">
-    <value>Reference</value>
-  </data>
   <data name="MenuEditSelectAll" xml:space="preserve">
     <value>Select _All</value>
-  </data>
-  <data name="MenuTooltipEditUngroup" xml:space="preserve">
-    <value>Ungroup</value>
   </data>
   <data name="MenuEditUndo" xml:space="preserve">
     <value>_Undo</value>
@@ -291,17 +189,8 @@
   <data name="MenuTemplate" xml:space="preserve">
     <value>Te_mplate</value>
   </data>
-  <data name="MenuScript" xml:space="preserve">
-    <value>_Script</value>
-  </data>
-  <data name="MenuScripts" xml:space="preserve">
-    <value>S_cripts</value>
-  </data>
   <data name="MenuOptions" xml:space="preserve">
     <value>_Options</value>
-  </data>
-  <data name="MenuSimulation" xml:space="preserve">
-    <value>S_imulation</value>
   </data>
   <data name="MenuWindow" xml:space="preserve">
     <value>_Window</value>
@@ -390,182 +279,6 @@
   <data name="MenuFileRecent" xml:space="preserve">
     <value>_Recent</value>
   </data>
-  <data name="MenuTooltipFile" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="MenuTooltipFileNew" xml:space="preserve">
-    <value>New</value>
-  </data>
-  <data name="MenuTooltipFileOpen" xml:space="preserve">
-    <value>Open</value>
-  </data>
-  <data name="MenuTooltipFileSave" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="MenuTooltipFileSaveAs" xml:space="preserve">
-    <value>SaveAs</value>
-  </data>
-  <data name="MenuTooltipFileExport" xml:space="preserve">
-    <value>Export</value>
-  </data>
-  <data name="MenuTooltipFileSubMenuImport" xml:space="preserve">
-    <value>Import</value>
-  </data>
-  <data name="MenuTooltipFileImportStyle" xml:space="preserve">
-    <value>Import Style</value>
-  </data>
-  <data name="MenuTooltipFileImportStyles" xml:space="preserve">
-    <value>Import Styles</value>
-  </data>
-  <data name="MenuTooltipFileImportStyleLibrary" xml:space="preserve">
-    <value>Import Style Library</value>
-  </data>
-  <data name="MenuTooltipFileImportStyleLibraries" xml:space="preserve">
-    <value>Import Style Libraries</value>
-  </data>
-  <data name="MenuTooltipFileImportGroup" xml:space="preserve">
-    <value>Import Group</value>
-  </data>
-  <data name="MenuTooltipFileImportGroups" xml:space="preserve">
-    <value>Import Groups</value>
-  </data>
-  <data name="MenuTooltipFileImportGroupLibrary" xml:space="preserve">
-    <value>Import Group Library</value>
-  </data>
-  <data name="MenuTooltipFileImportGroupLibraries" xml:space="preserve">
-    <value>Import Group Libraries</value>
-  </data>
-  <data name="MenuTooltipFileImportTemplate" xml:space="preserve">
-    <value>Import Template</value>
-  </data>
-  <data name="MenuTooltipFileImportTemplates" xml:space="preserve">
-    <value>Import Templates</value>
-  </data>
-  <data name="MenuTooltipFileSubMenuExport" xml:space="preserve">
-    <value>Export</value>
-  </data>
-  <data name="MenuTooltipFileExportStyle" xml:space="preserve">
-    <value>Export Style</value>
-  </data>
-  <data name="MenuTooltipFileExportStyles" xml:space="preserve">
-    <value>Export Styles</value>
-  </data>
-  <data name="MenuTooltipFileExportStyleLibrary" xml:space="preserve">
-    <value>Export Style Library</value>
-  </data>
-  <data name="MenuTooltipFileExportStyleLibraries" xml:space="preserve">
-    <value>Export Style Libraries</value>
-  </data>
-  <data name="MenuTooltipFileExportGroup" xml:space="preserve">
-    <value>Export Group</value>
-  </data>
-  <data name="MenuTooltipFileExportGroups" xml:space="preserve">
-    <value>Export Groups</value>
-  </data>
-  <data name="MenuTooltipFileExportGroupLibrary" xml:space="preserve">
-    <value>Export Group Library</value>
-  </data>
-  <data name="MenuTooltipFileExportGroupLibraries" xml:space="preserve">
-    <value>Export Group Libraries</value>
-  </data>
-  <data name="MenuTooltipFileExportTemplate" xml:space="preserve">
-    <value>Export Template</value>
-  </data>
-  <data name="MenuTooltipFileExportTemplates" xml:space="preserve">
-    <value>Export Templates</value>
-  </data>
-  <data name="MenuTooltipFileRecent" xml:space="preserve">
-    <value>Recent</value>
-  </data>
-  <data name="MenuTooltipScriptFile" xml:space="preserve">
-    <value>Script: Not Applicable</value>
-  </data>
-  <data name="MenuTooltipScriptFileNew" xml:space="preserve">
-    <value>Script: Context.New()</value>
-  </data>
-  <data name="MenuTooltipScriptFileOpen" xml:space="preserve">
-    <value>Script: Context.Open(string path)</value>
-  </data>
-  <data name="MenuTooltipScriptFileSave" xml:space="preserve">
-    <value>Script: Context.Save(Context.Editor.ProjectPath)</value>
-  </data>
-  <data name="MenuTooltipScriptFileSaveAs" xml:space="preserve">
-    <value>Script: Context.Save(string path)</value>
-  </data>
-  <data name="MenuTooltipScriptFileExport" xml:space="preserve">
-    <value>Script: Context.ExportAsPdf(@"C:\Project.pdf", Project)
-Script: Context.ExportAsPdf(@"C:\Document.pdf", Document)
-Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
-  </data>
-  <data name="MenuTooltipScriptFileSubMenuImport" xml:space="preserve">
-    <value>Script: Not Applicable</value>
-  </data>
-  <data name="MenuTooltipScriptFileImportStyle" xml:space="preserve">
-    <value>Script: Context.ImportObject(string path, object item, ImportType.Style)</value>
-  </data>
-  <data name="MenuTooltipScriptFileImportStyles" xml:space="preserve">
-    <value>Script: Context.ImportObject(string path, object item, ImportType.Styles)</value>
-  </data>
-  <data name="MenuTooltipScriptFileImportStyleLibrary" xml:space="preserve">
-    <value>Script: Context.ImportObject(string path, object item, ImportType.StyleLibrary)</value>
-  </data>
-  <data name="MenuTooltipScriptFileImportStyleLibraries" xml:space="preserve">
-    <value>Script: Context.ImportObject(string path, object item, ImportType.StyleLibraries)</value>
-  </data>
-  <data name="MenuTooltipScriptFileImportGroup" xml:space="preserve">
-    <value>Script: Context.ImportObject(string path, object item, ImportType.Group)</value>
-  </data>
-  <data name="MenuTooltipScriptFileImportGroups" xml:space="preserve">
-    <value>Script: Context.ImportObject(string path, object item, ImportType.Groups)</value>
-  </data>
-  <data name="MenuTooltipScriptFileImportGroupLibrary" xml:space="preserve">
-    <value>Script: Context.ImportObject(string path, object item, ImportType.GroupLibrary)</value>
-  </data>
-  <data name="MenuTooltipScriptFileImportGroupLibraries" xml:space="preserve">
-    <value>Script: Context.ImportObject(string path, object item, ImportType.GroupLibraries)</value>
-  </data>
-  <data name="MenuTooltipScriptFileImportTemplate" xml:space="preserve">
-    <value>Script: Context.ImportObject(string path, object item, ImportType.Template)</value>
-  </data>
-  <data name="MenuTooltipScriptFileImportTemplates" xml:space="preserve">
-    <value>Script: Context.ImportObject(string path, object item, ImportType.Templates)</value>
-  </data>
-  <data name="MenuTooltipScriptFileSubMenuExport" xml:space="preserve">
-    <value>Script: Not Applicable</value>
-  </data>
-  <data name="MenuTooltipScriptFileExportStyle" xml:space="preserve">
-    <value>Script: Context.ExportObject(string path, object item, ExportType.Style)</value>
-  </data>
-  <data name="MenuTooltipScriptFileExportStyles" xml:space="preserve">
-    <value>Script: Context.ExportObject(string path, object item, ExportType.Styles)</value>
-  </data>
-  <data name="MenuTooltipScriptFileExportStyleLibrary" xml:space="preserve">
-    <value>Script: Context.ExportObject(string path, object item, ExportType.StyleLibrary)</value>
-  </data>
-  <data name="MenuTooltipScriptFileExportStyleLibraries" xml:space="preserve">
-    <value>Script: Context.ExportObject(string path, object item, ExportType.StyleLibraries)</value>
-  </data>
-  <data name="MenuTooltipScriptFileExportGroup" xml:space="preserve">
-    <value>Script: Context.ExportObject(string path, object item, ExportType.Group)</value>
-  </data>
-  <data name="MenuTooltipScriptFileExportGroups" xml:space="preserve">
-    <value>Script: Context.ExportObject(string path, object item, ExportType.Groups)</value>
-  </data>
-  <data name="MenuTooltipScriptFileExportGroupLibrary" xml:space="preserve">
-    <value>Script: Context.ExportObject(string path, object item, ExportType.GroupLibrary)</value>
-  </data>
-  <data name="MenuTooltipScriptFileExportGroupLibraries" xml:space="preserve">
-    <value>Script: Context.ExportObject(string path, object item, ExportType.GroupLibraries)</value>
-  </data>
-  <data name="MenuTooltipScriptFileExportTemplate" xml:space="preserve">
-    <value>Script: Context.ExportObject(string path, object item, ExportType.Template)</value>
-  </data>
-  <data name="MenuTooltipScriptFileExportTemplates" xml:space="preserve">
-    <value>Script: Context.ExportObject(string path, object item, ExportType.Templates)</value>
-  </data>
-  <data name="MenuTooltipScriptFileRecent" xml:space="preserve">
-    <value>Script: Not Applicable</value>
-  </data>
   <data name="MenuViewZoom" xml:space="preserve">
     <value>_Zoom</value>
   </data>
@@ -599,12 +312,6 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   <data name="MenuViewDocumentWindow" xml:space="preserve">
     <value>Doc_ument Window</value>
   </data>
-  <data name="MenuViewScriptWindow" xml:space="preserve">
-    <value>Sc_ript Window</value>
-  </data>
-  <data name="MenuViewScriptsWindow" xml:space="preserve">
-    <value>Scri_pts Window</value>
-  </data>
   <data name="MenuViewStylesWindow" xml:space="preserve">
     <value>_Styles</value>
   </data>
@@ -620,9 +327,6 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   <data name="MenuViewStateWindow" xml:space="preserve">
     <value>State _Window</value>
   </data>
-  <data name="MenuViewCodeWindow" xml:space="preserve">
-    <value>_Code Window</value>
-  </data>
   <data name="MenuViewDataWindow" xml:space="preserve">
     <value>Data W_indow</value>
   </data>
@@ -631,144 +335,6 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   </data>
   <data name="MenuViewPropertiesWindow" xml:space="preserve">
     <value>Prop_erties Window</value>
-  </data>
-  <data name="MenuTooltipView" xml:space="preserve">
-    <value>View</value>
-  </data>
-  <data name="MenuTooltipViewZoom" xml:space="preserve">
-    <value>Zoom</value>
-  </data>
-  <data name="MenuTooltipViewZoomReset" xml:space="preserve">
-    <value>Reset Zoom</value>
-  </data>
-  <data name="MenuTooltipViewZoomExtent" xml:space="preserve">
-    <value>Zoom to Extent</value>
-  </data>
-  <data name="MenuTooltipViewProjectWindow" xml:space="preserve">
-    <value>Project Window</value>
-  </data>
-  <data name="MenuTooltipViewOptionsWindow" xml:space="preserve">
-    <value>Options Window</value>
-  </data>
-  <data name="MenuTooltipViewTemplatesWindow" xml:space="preserve">
-    <value>Templates Window</value>
-  </data>
-  <data name="MenuTooltipViewGroupsWindow" xml:space="preserve">
-    <value>Groups Window</value>
-  </data>
-  <data name="MenuTooltipViewDatabasesWindow" xml:space="preserve">
-    <value>Databases Window</value>
-  </data>
-  <data name="MenuTooltipViewDatabaseWindow" xml:space="preserve">
-    <value>Database Window</value>
-  </data>
-  <data name="MenuTooltipViewContainerWindow" xml:space="preserve">
-    <value>Container Window</value>
-  </data>
-  <data name="MenuTooltipViewDocumentWindow" xml:space="preserve">
-    <value>Document Window</value>
-  </data>
-  <data name="MenuTooltipViewScriptWindow" xml:space="preserve">
-    <value>Script Window</value>
-  </data>
-  <data name="MenuTooltipViewScriptsWindow" xml:space="preserve">
-    <value>Scripts Window</value>
-  </data>
-  <data name="MenuTooltipViewStylesWindow" xml:space="preserve">
-    <value>Styles Window</value>
-  </data>
-  <data name="MenuTooltipViewLayersWindow" xml:space="preserve">
-    <value>Layers Window</value>
-  </data>
-  <data name="MenuTooltipViewShapesWindow" xml:space="preserve">
-    <value>Shapes Window</value>
-  </data>
-  <data name="MenuTooltipViewTemplateWindow" xml:space="preserve">
-    <value>Template Window</value>
-  </data>
-  <data name="MenuTooltipViewStateWindow" xml:space="preserve">
-    <value>State Window</value>
-  </data>
-  <data name="MenuTooltipViewCodeWindow" xml:space="preserve">
-    <value>Code Window</value>
-  </data>
-  <data name="MenuTooltipViewDataWindow" xml:space="preserve">
-    <value>Data Window</value>
-  </data>
-  <data name="MenuTooltipViewStyleWindow" xml:space="preserve">
-    <value>Style Window</value>
-  </data>
-  <data name="MenuTooltipViewPropertiesWindow" xml:space="preserve">
-    <value>Properties Window</value>
-  </data>
-  <data name="MenuTooltipScriptView" xml:space="preserve">
-    <value>Script: Not Applicable</value>
-  </data>
-  <data name="MenuTooltipScriptViewZoom" xml:space="preserve">
-    <value>Script: Not Applicable</value>
-  </data>
-  <data name="MenuTooltipScriptViewZoomReset" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewZoomExtent" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewProjectWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewOptionsWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewTemplatesWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewGroupsWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewDatabasesWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewDatabaseWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewContainerWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewDocumentWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewScriptWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewScriptsWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewStylesWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewLayersWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewShapesWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewTemplateWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewStateWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewCodeWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewDataWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewStyleWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptViewPropertiesWindow" xml:space="preserve">
-    <value>Script: Not Available</value>
   </data>
   <data name="MenuToolNone" xml:space="preserve">
     <value>_None</value>
@@ -806,140 +372,11 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   <data name="MenuToolImage" xml:space="preserve">
     <value>_Image</value>
   </data>
-  <data name="MenuTooltipTool" xml:space="preserve">
-    <value>Tool</value>
-  </data>
-  <data name="MenuTooltipToolNone" xml:space="preserve">
-    <value>None Tool</value>
-  </data>
-  <data name="MenuTooltipToolSelection" xml:space="preserve">
-    <value>Selection Tool</value>
-  </data>
-  <data name="MenuTooltipToolPoint" xml:space="preserve">
-    <value>Point Tool</value>
-  </data>
-  <data name="MenuTooltipToolLine" xml:space="preserve">
-    <value>Line Tool</value>
-  </data>
-  <data name="MenuTooltipToolArc" xml:space="preserve">
-    <value>Arc Tool</value>
-  </data>
-  <data name="MenuTooltipToolBezier" xml:space="preserve">
-    <value>Bezier Tool</value>
-  </data>
-  <data name="MenuTooltipToolQBezier" xml:space="preserve">
-    <value>QBezier Tool</value>
-  </data>
-  <data name="MenuTooltipToolPath" xml:space="preserve">
-    <value>Path Tool</value>
-  </data>
-  <data name="MenuTooltipToolRectangle" xml:space="preserve">
-    <value>Rectangle Tool</value>
-  </data>
-  <data name="MenuTooltipToolEllipse" xml:space="preserve">
-    <value>Ellipse Tool</value>
-  </data>
-  <data name="MenuTooltipToolText" xml:space="preserve">
-    <value>Text Tool</value>
-  </data>
-  <data name="MenuTooltipToolImage" xml:space="preserve">
-    <value>Image Tool</value>
-  </data>
-  <data name="MenuTooltipScriptTool" xml:space="preserve">
-    <value>Script: Not Applicable</value>
-  </data>
-  <data name="MenuTooltipScriptToolNone" xml:space="preserve">
-    <value>Script: Context.OnToolNone()</value>
-  </data>
-  <data name="MenuTooltipScriptToolSelection" xml:space="preserve">
-    <value>Script: Context.OnToolSelection()</value>
-  </data>
-  <data name="MenuTooltipScriptToolPoint" xml:space="preserve">
-    <value>Script: Context.OnToolPoint()</value>
-  </data>
-  <data name="MenuTooltipScriptToolLine" xml:space="preserve">
-    <value>Script: Context.OnToolLine()</value>
-  </data>
-  <data name="MenuTooltipScriptToolArc" xml:space="preserve">
-    <value>Script: Context.OnToolArc()</value>
-  </data>
-  <data name="MenuTooltipScriptToolBezier" xml:space="preserve">
-    <value>Script: Context.OnToolBezier()</value>
-  </data>
-  <data name="MenuTooltipScriptToolQBezier" xml:space="preserve">
-    <value>Script: Context.OnToolQBezier()</value>
-  </data>
-  <data name="MenuTooltipScriptToolPath" xml:space="preserve">
-    <value>Script: Context.OnToolPath()</value>
-  </data>
-  <data name="MenuTooltipScriptToolRectangle" xml:space="preserve">
-    <value>Script: Context.OnToolRectangle()</value>
-  </data>
-  <data name="MenuTooltipScriptToolEllipse" xml:space="preserve">
-    <value>Script: Context.OnToolEllipse()</value>
-  </data>
-  <data name="MenuTooltipScriptToolText" xml:space="preserve">
-    <value>Script: Context.OnToolText()</value>
-  </data>
-  <data name="MenuTooltipScriptToolImage" xml:space="preserve">
-    <value>Script: Context.OnToolImage()</value>
-  </data>
   <data name="MenuDataImport" xml:space="preserve">
     <value>_Import...</value>
   </data>
   <data name="MenuDataExport" xml:space="preserve">
     <value>_Export...</value>
-  </data>
-  <data name="MenuTooltipData" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="MenuTooltipDataImport" xml:space="preserve">
-    <value>Import Data</value>
-  </data>
-  <data name="MenuTooltipDataExport" xml:space="preserve">
-    <value>Export Data</value>
-  </data>
-  <data name="MenuTooltipScriptData" xml:space="preserve">
-    <value>Script: Not Applicable</value>
-  </data>
-  <data name="MenuTooltipScriptDataImport" xml:space="preserve">
-    <value>Script: Context.ImportData(string path)</value>
-  </data>
-  <data name="MenuTooltipScriptDataExport" xml:space="preserve">
-    <value>Script: Context.ExportData(string path, Database database)</value>
-  </data>
-  <data name="MenuTooltipTemplate" xml:space="preserve">
-    <value>Template</value>
-  </data>
-  <data name="MenuTooltipScriptTemplate" xml:space="preserve">
-    <value>Script: Not Applicable</value>
-  </data>
-  <data name="MenuTooltipEdit" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="MenuTooltipScriptEdit" xml:space="preserve">
-    <value>Script: Not Applicable</value>
-  </data>
-  <data name="MenuScriptEvaluate" xml:space="preserve">
-    <value>_Evaluate...</value>
-  </data>
-  <data name="MenuTooltipScript" xml:space="preserve">
-    <value>Script</value>
-  </data>
-  <data name="MenuTooltipScriptEvaluate" xml:space="preserve">
-    <value>Evaluate Script</value>
-  </data>
-  <data name="MenuTooltipScriptScript" xml:space="preserve">
-    <value>Script: Not Applicable</value>
-  </data>
-  <data name="MenuTooltipScriptScriptEvaluate" xml:space="preserve">
-    <value>Script: Context.Eval(string path)</value>
-  </data>
-  <data name="MenuTooltipScripts" xml:space="preserve">
-    <value>Scripts</value>
-  </data>
-  <data name="MenuTooltipScriptScripts" xml:space="preserve">
-    <value>Script: Not Applicable</value>
   </data>
   <data name="MenuOptionsDefaultIsFilled" xml:space="preserve">
     <value>Default is _Filled</value>
@@ -950,81 +387,6 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   <data name="MenuOptionsTryToConnect" xml:space="preserve">
     <value>Try To _Connect</value>
   </data>
-  <data name="MenuTooltipOptions" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="MenuTooltipOptionsDefaultIsFilled" xml:space="preserve">
-    <value>Default is Filled (all shapes)</value>
-  </data>
-  <data name="MenuTooltipOptionsSnapToGrid" xml:space="preserve">
-    <value>Snap to Grid</value>
-  </data>
-  <data name="MenuTooltipOptionsTryToConnect" xml:space="preserve">
-    <value>Try to Connect</value>
-  </data>
-  <data name="MenuTooltipScriptOptions" xml:space="preserve">
-    <value>Script: Not Applicable</value>
-  </data>
-  <data name="MenuTooltipScriptOptionsDefaultIsFilled" xml:space="preserve">
-    <value>Script: Context.OnToggleDefaultIsFilled()</value>
-  </data>
-  <data name="MenuTooltipScriptOptionsSnapToGrid" xml:space="preserve">
-    <value>Script: Context.OnToggleSnapToGrid()</value>
-  </data>
-  <data name="MenuTooltipScriptOptionsTryToConnect" xml:space="preserve">
-    <value>Script: Context.OnToggleTryToConnect()</value>
-  </data>
-  <data name="MenuSimulationStart" xml:space="preserve">
-    <value>_Start</value>
-  </data>
-  <data name="MenuSimulationStop" xml:space="preserve">
-    <value>S_top</value>
-  </data>
-  <data name="MenuSimulationRestart" xml:space="preserve">
-    <value>_Restart</value>
-  </data>
-  <data name="MenuSimulationPause" xml:space="preserve">
-    <value>_Pause</value>
-  </data>
-  <data name="MenuSimulationTick" xml:space="preserve">
-    <value>Ti_ck</value>
-  </data>
-  <data name="MenuTooltipSimulation" xml:space="preserve">
-    <value>Simulation</value>
-  </data>
-  <data name="MenuTooltipSimulationStart" xml:space="preserve">
-    <value>Start Simulation</value>
-  </data>
-  <data name="MenuTooltipSimulationStop" xml:space="preserve">
-    <value>Stop Simulation</value>
-  </data>
-  <data name="MenuTooltipSimulationRestart" xml:space="preserve">
-    <value>Restart Simulation</value>
-  </data>
-  <data name="MenuTooltipSimulationPause" xml:space="preserve">
-    <value>Pause Simulation</value>
-  </data>
-  <data name="MenuTooltipSimulationTick" xml:space="preserve">
-    <value>Tick Simulation</value>
-  </data>
-  <data name="MenuTooltipScriptSimulation" xml:space="preserve">
-    <value>Script: Not Applicable</value>
-  </data>
-  <data name="MenuTooltipScriptSimulationStart" xml:space="preserve">
-    <value>Script: Context.OnStartSimulation()</value>
-  </data>
-  <data name="MenuTooltipScriptSimulationStop" xml:space="preserve">
-    <value>Script: Context.OnStopSimulation()</value>
-  </data>
-  <data name="MenuTooltipScriptSimulationRestart" xml:space="preserve">
-    <value>Script: Context.OnRestartSimulation()</value>
-  </data>
-  <data name="MenuTooltipScriptSimulationPause" xml:space="preserve">
-    <value>Script: Context.OnPauseSimulation()</value>
-  </data>
-  <data name="MenuTooltipScriptSimulationTick" xml:space="preserve">
-    <value>Script: Context.OnTickSimulation()</value>
-  </data>
   <data name="MenuWindowLoadLayout" xml:space="preserve">
     <value>_Load Layout...</value>
   </data>
@@ -1034,47 +396,8 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   <data name="MenuWindowResetLayout" xml:space="preserve">
     <value>_Reset Layout</value>
   </data>
-  <data name="MenuTooltipWindow" xml:space="preserve">
-    <value>Window</value>
-  </data>
-  <data name="MenuTooltipWindowLoadLayout" xml:space="preserve">
-    <value>Load Window Layout</value>
-  </data>
-  <data name="MenuTooltipWindowSaveLayout" xml:space="preserve">
-    <value>Save Window Layout</value>
-  </data>
-  <data name="MenuTooltipWindowResetLayout" xml:space="preserve">
-    <value>Reset Window Layout</value>
-  </data>
-  <data name="MenuTooltipScriptWindow" xml:space="preserve">
-    <value>Script: Not Applicable</value>
-  </data>
-  <data name="MenuTooltipScriptWindowLoadLayout" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptWindowSaveLayout" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="MenuTooltipScriptWindowResetLayout" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
   <data name="MenuFileExit" xml:space="preserve">
     <value>E_xit</value>
-  </data>
-  <data name="MenuTooltipEditOrder" xml:space="preserve">
-    <value>Order</value>
-  </data>
-  <data name="MenuTooltipFileExit" xml:space="preserve">
-    <value>Exit</value>
-  </data>
-  <data name="MenuTooltipScriptEditOrder" xml:space="preserve">
-    <value>Script: Not Applicable</value>
-  </data>
-  <data name="MenuTooltipScriptFileExit" xml:space="preserve">
-    <value>Script: Not Available</value>
-  </data>
-  <data name="OptionsCycleResolution" xml:space="preserve">
-    <value>CycleResolution</value>
   </data>
   <data name="OptionsDefaultFillRule" xml:space="preserve">
     <value>FillRule</value>
@@ -1127,9 +450,6 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   <data name="OptionsTryToConnect" xml:space="preserve">
     <value>TryToConnect</value>
   </data>
-  <data name="WindowTitleCode" xml:space="preserve">
-    <value>Code</value>
-  </data>
   <data name="WindowTitleContainer" xml:space="preserve">
     <value>Container</value>
   </data>
@@ -1160,12 +480,6 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   <data name="WindowTitleProperties" xml:space="preserve">
     <value>Properties</value>
   </data>
-  <data name="WindowTitleScript" xml:space="preserve">
-    <value>Script</value>
-  </data>
-  <data name="WindowTitleScripts" xml:space="preserve">
-    <value>Scripts</value>
-  </data>
   <data name="WindowTitleShapes" xml:space="preserve">
     <value>Shapes</value>
   </data>
@@ -1184,116 +498,14 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   <data name="WindowTitleTemplates" xml:space="preserve">
     <value>Templates</value>
   </data>
-  <data name="OptionsTooltipCycleResolution" xml:space="preserve">
-    <value>Cycle Resolution (in milliseconds)</value>
-  </data>
-  <data name="OptionsTooltipDefaultFillRule" xml:space="preserve">
-    <value>Default Fill Rule (path)</value>
-  </data>
-  <data name="OptionsTooltipDefaultIsClosed" xml:space="preserve">
-    <value>Default is Closed (path)</value>
-  </data>
-  <data name="OptionsTooltipDefaultIsFilled" xml:space="preserve">
-    <value>Default is Filled (all shapes)</value>
-  </data>
-  <data name="OptionsTooltipDefaultIsSmoothJoin" xml:space="preserve">
-    <value>Default is Smooth Join (path)</value>
-  </data>
-  <data name="OptionsTooltipDefaultIsStroked" xml:space="preserve">
-    <value>Default is Stroked (all shapes)</value>
-  </data>
-  <data name="OptionsTooltipHelperStyle" xml:space="preserve">
-    <value>Helper Style</value>
-  </data>
-  <data name="OptionsTooltipHitTreshold" xml:space="preserve">
-    <value>Hit Treshold</value>
-  </data>
-  <data name="OptionsTooltipMoveMode" xml:space="preserve">
-    <value>Move Mode</value>
-  </data>
-  <data name="OptionsTooltipPointShape" xml:space="preserve">
-    <value>Point Shape</value>
-  </data>
-  <data name="OptionsTooltipScriptCycleResolution" xml:space="preserve">
-    <value>Script: Options.CycleResolution = int</value>
-  </data>
-  <data name="OptionsTooltipScriptDefaultFillRule" xml:space="preserve">
-    <value>Script: Options.DefaultFillRule = enum XFillRule</value>
-  </data>
-  <data name="OptionsTooltipScriptDefaultIsClosed" xml:space="preserve">
-    <value>Script: Options.DefaultIsClosed = bool</value>
-  </data>
-  <data name="OptionsTooltipScriptDefaultIsFilled" xml:space="preserve">
-    <value>Script: Options.DefaultIsFilled = bool</value>
-  </data>
-  <data name="OptionsTooltipScriptDefaultIsSmoothJoin" xml:space="preserve">
-    <value>Script: Options.DefaultIsSmoothJoin = bool</value>
-  </data>
-  <data name="OptionsTooltipScriptDefaultIsStroked" xml:space="preserve">
-    <value>Script: Options.DefaultIsStroked = bool</value>
-  </data>
-  <data name="OptionsTooltipScriptHelperStyle" xml:space="preserve">
-    <value>Script: Options.HelperStyle = ShapeStyle</value>
-  </data>
-  <data name="OptionsTooltipScriptHitTreshold" xml:space="preserve">
-    <value>Script: Options.HitTreshold = double</value>
-  </data>
-  <data name="OptionsTooltipScriptMoveMode" xml:space="preserve">
-    <value>Script: Options.MoveMode = enum MoveMode</value>
-  </data>
-  <data name="OptionsTooltipScriptPointShape" xml:space="preserve">
-    <value>Script: Options.PointShape = Shape</value>
-  </data>
-  <data name="OptionsTooltipScriptSelectionStyle" xml:space="preserve">
-    <value>Script: Options.SelectionStyle = ShapeStyle</value>
-  </data>
-  <data name="OptionsTooltipScriptSnapToGrid" xml:space="preserve">
-    <value>Script: Options.SnapToGrid = bool</value>
-  </data>
-  <data name="OptionsTooltipScriptSnapX" xml:space="preserve">
-    <value>Script: Options.SnapX = double</value>
-  </data>
-  <data name="OptionsTooltipScriptSnapY" xml:space="preserve">
-    <value>Script: Options.SnapY = double</value>
-  </data>
-  <data name="OptionsTooltipScriptTryToConnect" xml:space="preserve">
-    <value>Script: Options.TryToConnect = bool</value>
-  </data>
-  <data name="OptionsTooltipSelectionStyle" xml:space="preserve">
-    <value>Selection Style</value>
-  </data>
-  <data name="OptionsTooltipSnapToGrid" xml:space="preserve">
-    <value>Snap to Grid</value>
-  </data>
-  <data name="OptionsTooltipSnapX" xml:space="preserve">
-    <value>Snap X</value>
-  </data>
-  <data name="OptionsTooltipSnapY" xml:space="preserve">
-    <value>Snap Y</value>
-  </data>
-  <data name="OptionsTooltipTryToConnect" xml:space="preserve">
-    <value>Try to Connect</value>
-  </data>
   <data name="ProjectOptions" xml:space="preserve">
     <value>Options</value>
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="ProjectTooltipName" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="ProjectTooltipScriptName" xml:space="preserve">
-    <value>Script: Project.Name = string</value>
-  </data>
   <data name="DocumentName" xml:space="preserve">
     <value>Name</value>
-  </data>
-  <data name="DocumentTooltipName" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="DocumentTooltipScriptName" xml:space="preserve">
-    <value>Script: Document.Name = string</value>
   </data>
   <data name="ContainerName" xml:space="preserve">
     <value>Name</value>
@@ -1313,56 +525,8 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   <data name="ContainerBackground" xml:space="preserve">
     <value>Background</value>
   </data>
-  <data name="ContainerTooltipName" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="ContainerTooltipTemplate" xml:space="preserve">
-    <value>Template</value>
-  </data>
-  <data name="ContainerTooltipWidth" xml:space="preserve">
-    <value>Width</value>
-  </data>
-  <data name="ContainerTooltipHeight" xml:space="preserve">
-    <value>Height</value>
-  </data>
-  <data name="ContainerTooltipScriptName" xml:space="preserve">
-    <value>Script: Container.Name = string</value>
-  </data>
-  <data name="ContainerTooltipScriptTemplate" xml:space="preserve">
-    <value>Script: Container.Template = Conainer</value>
-  </data>
-  <data name="ContainerTooltipScriptWidth" xml:space="preserve">
-    <value>Script: Container.Width = double</value>
-  </data>
-  <data name="ContainerTooltipScriptHeight" xml:space="preserve">
-    <value>Script: Container.Height = double</value>
-  </data>
-  <data name="ProjectTooltipOptions" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="ProjectTooltipScriptOptions" xml:space="preserve">
-    <value>Script: Project.Options = Options</value>
-  </data>
-  <data name="ContainerTooltipProperties" xml:space="preserve">
-    <value>Properties</value>
-  </data>
-  <data name="ContainerTooltipScriptProperties" xml:space="preserve">
-    <value>Script: Not Applicable</value>
-  </data>
-  <data name="ContainerTooltipBackground" xml:space="preserve">
-    <value>Background</value>
-  </data>
-  <data name="ContainerTooltipScriptBackground" xml:space="preserve">
-    <value>Script: Container.Background = ArgbColor</value>
-  </data>
   <data name="MenuFileClose" xml:space="preserve">
     <value>_Close</value>
-  </data>
-  <data name="MenuTooltipFileClose" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="MenuTooltipScriptFileClose" xml:space="preserve">
-    <value>Script: Context.Close()</value>
   </data>
   <data name="MenuOptionsDefaultIsClosed" xml:space="preserve">
     <value>Default is Close_d</value>
@@ -1373,34 +537,7 @@ Script: Context.ExportAsPdf(@"C:\Container.pdf", Container)</value>
   <data name="MenuOptionsDefaultIsStroked" xml:space="preserve">
     <value>Default is Stro_ked</value>
   </data>
-  <data name="MenuTooltipOptionsDefaultIsClosed" xml:space="preserve">
-    <value>Default is Closed (path)</value>
-  </data>
-  <data name="MenuTooltipOptionsDefaultIsSmoothJoin" xml:space="preserve">
-    <value>Default is Smooth Join (path)</value>
-  </data>
-  <data name="MenuTooltipOptionsDefaultIsStroked" xml:space="preserve">
-    <value>Default is Stroked (all shapes)</value>
-  </data>
-  <data name="MenuTooltipScriptOptionsDefaultIsClosed" xml:space="preserve">
-    <value>Script: Context.OnToggleDefaultIsClosed()</value>
-  </data>
-  <data name="MenuTooltipScriptOptionsDefaultIsSmoothJoin" xml:space="preserve">
-    <value>Script: Context.OnToggleDefaultIsSmoothJoin()</value>
-  </data>
-  <data name="MenuTooltipScriptOptionsDefaultIsStroked" xml:space="preserve">
-    <value>Script: Context.OnToggleDefaultIsStroked()</value>
-  </data>
-  <data name="TODO" xml:space="preserve">
-    <value>TODO</value>
-  </data>
   <data name="OptionsPointStyle" xml:space="preserve">
     <value>PointStyle</value>
-  </data>
-  <data name="OptionsTooltipPointStyle" xml:space="preserve">
-    <value>Point Style</value>
-  </data>
-  <data name="OptionsTooltipScriptPointStyle" xml:space="preserve">
-    <value>Script: Options.PointStyle = ShapeStyle</value>
   </data>
 </root>

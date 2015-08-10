@@ -3735,7 +3735,6 @@ namespace Test2d
             (_commands.TemplateWindowCommand as Command).NotifyCanExecuteChanged();
             (_commands.PropertiesWindowCommand as Command).NotifyCanExecuteChanged();
             (_commands.StateWindowCommand as Command).NotifyCanExecuteChanged();
-            (_commands.CodeWindowCommand as Command).NotifyCanExecuteChanged();
             (_commands.DataWindowCommand as Command).NotifyCanExecuteChanged();
             (_commands.StyleWindowCommand as Command).NotifyCanExecuteChanged();
 
