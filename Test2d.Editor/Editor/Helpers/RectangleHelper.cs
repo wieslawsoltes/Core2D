@@ -130,8 +130,6 @@ namespace Test2d
         /// <param name="y"></param>
         public override void RightDown(double x, double y)
         {
-            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
             switch (_currentState)
             {
                 case State.None:
