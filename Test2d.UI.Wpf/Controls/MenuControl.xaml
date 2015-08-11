@@ -245,19 +245,20 @@
             <MenuItem Header="{x:Static p:Resources.MenuEditOrder}">
                 <MenuItem Header="{x:Static p:Resources.MenuEditOrderSendToBack}" 
                           Command="{Binding Commands.SendToBackCommand}" 
-                          InputGestureText="">
+                          InputGestureText="Shift+-">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuEditOrderSendBackward}" 
                           Command="{Binding Commands.SendBackwardCommand}" 
-                          InputGestureText="">
+                          InputGestureText="-">
                 </MenuItem>
+                <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuEditOrderBringForward}" 
                           Command="{Binding Commands.BringForwardCommand}" 
-                          InputGestureText="">
+                          InputGestureText="+">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuEditOrderBringToFront}" 
                           Command="{Binding Commands.BringToFrontCommand}" 
-                          InputGestureText="">
+                          InputGestureText="Shift++">
                 </MenuItem>
             </MenuItem>
         </MenuItem>
