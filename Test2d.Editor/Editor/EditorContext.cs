@@ -3253,6 +3253,26 @@ namespace Test2d
                         () => _editor.SendBackwardSelected(),
                         () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
+                _commands.MoveUpCommand =
+                    Command.Create(
+                        () => _editor.MoveUpSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+                _commands.MoveDownCommand =
+                    Command.Create(
+                        () => _editor.MoveDownSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+                _commands.MoveLeftCommand =
+                    Command.Create(
+                        () => _editor.MoveLeftSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+                _commands.MoveRightCommand =
+                    Command.Create(
+                        () => _editor.MoveRightSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
                 _commands.ToolNoneCommand =
                     Command.Create(
                         () => OnToolNone(),
@@ -3586,7 +3606,12 @@ namespace Test2d
             (_commands.BringForwardCommand as Command).NotifyCanExecuteChanged();
             (_commands.SendBackwardCommand as Command).NotifyCanExecuteChanged();
             (_commands.SendToBackCommand as Command).NotifyCanExecuteChanged();
-                        
+
+            (_commands.MoveUpCommand as Command).NotifyCanExecuteChanged();
+            (_commands.MoveDownCommand as Command).NotifyCanExecuteChanged();
+            (_commands.MoveLeftCommand as Command).NotifyCanExecuteChanged();
+            (_commands.MoveRightCommand as Command).NotifyCanExecuteChanged();
+
             (_commands.ToolNoneCommand as Command).NotifyCanExecuteChanged();
             (_commands.ToolSelectionCommand as Command).NotifyCanExecuteChanged();
             (_commands.ToolPointCommand as Command).NotifyCanExecuteChanged();
