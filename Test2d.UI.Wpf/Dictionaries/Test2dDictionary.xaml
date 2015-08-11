@@ -1838,7 +1838,7 @@
             </Expander>
             <Expander 
                 Header="Current Record" 
-                IsExpanded="False">
+                IsExpanded="True">
                 <ContentControl Content="{Binding CurrentRecord}"/>
             </Expander>
         </StackPanel>
