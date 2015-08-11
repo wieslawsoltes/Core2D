@@ -211,6 +211,23 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        public ICommand MoveUpCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand MoveDownCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand MoveLeftCommand { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand MoveRightCommand { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand ToolNoneCommand { get; set; }
         /// <summary>
         /// 
