@@ -1191,14 +1191,6 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public void OnToolGroup()
-        {
-            _editor.CurrentTool = Tool.Group;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public void OnToolPoint()
         {
             _editor.CurrentTool = Tool.Point;
@@ -1881,42 +1873,36 @@ namespace Test2d
                         break;
                     case ExportType.Group:
                         {
-                            var shapes = Enumerable.Repeat(item as XGroup, 1);
                             var json = _serializer.ToJson(item as XGroup);
                             WriteUtf8Text(path, json, false);
                         }
                         break;
                     case ExportType.Groups:
                         {
-                            var shapes = (item as GroupLibrary).Groups;
                             var json = _serializer.ToJson((item as GroupLibrary).Groups);
                             WriteUtf8Text(path, json, false);
                         }
                         break;
                     case ExportType.GroupLibrary:
                         {
-                            var shapes = (item as GroupLibrary).Groups;
                             var json = _serializer.ToJson(item as GroupLibrary);
                             WriteUtf8Text(path, json, false);
                         }
                         break;
                     case ExportType.GroupLibraries:
                         {
-                            var shapes = (item as Project).GroupLibraries.SelectMany(x => x.Groups);
                             var json = _serializer.ToJson((item as Project).GroupLibraries);
                             WriteUtf8Text(path, json, false);
                         }
                         break;
                     case ExportType.Template:
                         {
-                            var shapes = (item as Container).Layers.SelectMany(x => x.Shapes);
                             var json = _serializer.ToJson(item as Container);
                             WriteUtf8Text(path, json, false);
                         }
                         break;
                     case ExportType.Templates:
                         {
-                            var shapes = (item as Project).Templates.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
                             var json = _serializer.ToJson((item as Project).Templates);
                             WriteUtf8Text(path, json, false);
                         }
@@ -2769,7 +2755,6 @@ namespace Test2d
                         {
                             if (_editor.CurrentTool == Tool.None
                                 || _editor.CurrentTool == Tool.Selection
-                                || _editor.CurrentTool == Tool.Group
                                 || _editor.CurrentTool == Tool.Image
                                 || _editor.CurrentTool == Tool.Path)
                             {
@@ -3278,11 +3263,6 @@ namespace Test2d
                         () => OnToolSelection(),
                         () => IsEditMode());
 
-                _commands.ToolGroupCommand =
-                    Command.Create(
-                        () => OnToolGroup(),
-                        () => IsEditMode());
-
                 _commands.ToolPointCommand =
                     Command.Create(
                         () => OnToolPoint(),
@@ -3609,7 +3589,6 @@ namespace Test2d
                         
             (_commands.ToolNoneCommand as Command).NotifyCanExecuteChanged();
             (_commands.ToolSelectionCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolGroupCommand as Command).NotifyCanExecuteChanged();
             (_commands.ToolPointCommand as Command).NotifyCanExecuteChanged();
             (_commands.ToolLineCommand as Command).NotifyCanExecuteChanged();
             (_commands.ToolArcCommand as Command).NotifyCanExecuteChanged();

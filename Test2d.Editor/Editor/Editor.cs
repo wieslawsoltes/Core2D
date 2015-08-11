@@ -131,11 +131,6 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public GroupHelper GroupHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public PointHelper PointHelper { get; set; }
 
         /// <summary>
@@ -210,7 +205,6 @@ namespace Test2d
             }
 
             editor.SelectionHelper = new SelectionHelper(editor);
-            editor.GroupHelper = new GroupHelper(editor);
             editor.PointHelper = new PointHelper(editor);
             editor.LineHelper = new LineHelper(editor);
             editor.ArcHelper = new ArcHelper(editor);
@@ -1801,11 +1795,6 @@ namespace Test2d
                         SelectionHelper.LeftDown(x, y);
                     }
                     break;
-                case Tool.Group:
-                    {
-                        GroupHelper.LeftDown(x, y);
-                    }
-                    break;
                 case Tool.Point:
                     {
                         PointHelper.LeftDown(x, y);
@@ -1873,11 +1862,6 @@ namespace Test2d
                 case Tool.Selection:
                     {
                         SelectionHelper.LeftUp(x, y);
-                    }
-                    break;
-                case Tool.Group:
-                    {
-                        GroupHelper.LeftUp(x, y);
                     }
                     break;
                 case Tool.Point:
@@ -1949,11 +1933,6 @@ namespace Test2d
                         SelectionHelper.RightDown(x, y);
                     }
                     break;
-                case Tool.Group:
-                    {
-                        GroupHelper.RightDown(x, y);
-                    }
-                    break;
                 case Tool.Point:
                     {
                         PointHelper.RightDown(x, y);
@@ -2023,11 +2002,6 @@ namespace Test2d
                         SelectionHelper.RightUp(x, y);
                     }
                     break;
-                case Tool.Group:
-                    {
-                        GroupHelper.RightUp(x, y);
-                    }
-                    break;
                 case Tool.Point:
                     {
                         PointHelper.RightUp(x, y);
@@ -2095,11 +2069,6 @@ namespace Test2d
                 case Tool.Selection:
                     {
                         SelectionHelper.Move(x, y);
-                    }
-                    break;
-                case Tool.Group:
-                    {
-                        GroupHelper.Move(x, y);
                     }
                     break;
                 case Tool.Point:

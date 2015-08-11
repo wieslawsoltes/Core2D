@@ -61,7 +61,6 @@
     <Compile Include="Editor\Helpers\ArcHelper.cs" />
     <Compile Include="Editor\Helpers\BezierHelper.cs" />
     <Compile Include="Editor\Helpers\EllipseHelper.cs" />
-    <Compile Include="Editor\Helpers\GroupHelper.cs" />
     <Compile Include="Editor\Helpers\ImageHelper.cs" />
     <Compile Include="Editor\Helpers\LineHelper.cs" />
     <Compile Include="Editor\Helpers\PathHelper.cs" />
