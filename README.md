@@ -21,10 +21,16 @@ Test2d is an application for making data driven 2D diagrams.
 * System.Windows.Interactivity.WPF
 * Xceed.Wpf.AvalonDock
 * Xceed.Products.Wpf.Toolkit.AvalonDock
+* Eto.Forms
+* Eto.Platform.Direct2D
+* Eto.Platform.Gtk [GTK# for .NET](http://www.mono-project.com/download/#download-win)
+* Eto.Platform.Windows
+* Eto.Platform.Wpf
 
 ### NuGet Package Sources
 
 * https://www.nuget.org/api/v2/
+* https://www.myget.org/F/eto/
 
 ## Contact
 
