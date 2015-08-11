@@ -30,12 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PdfSharp">
-      <HintPath>..\..\packages\PDFsharp.1.50.3638-beta\lib\net20\PdfSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="PdfSharp.Charting">
-      <HintPath>..\..\packages\PDFsharp.1.50.3638-beta\lib\net20\PdfSharp.Charting.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -46,6 +40,12 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>..\..\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting">
+      <HintPath>..\..\packages\PDFsharp.1.50.3638-beta\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\..\packages\PDFsharp.1.50.3638-beta\lib\net20\PdfSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
