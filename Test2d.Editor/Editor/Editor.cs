@@ -238,40 +238,6 @@ namespace Test2d
         }
 
         /// <summary>
-        /// Sets image Path property to relative Uri using the specified base Uri.
-        /// </summary>
-        /// <param name="baseUri">The base absolute Uri.</param>
-        /// <param name="images">The collection if XImage shapes.</param>
-        public void ToRelativeUri(Uri baseUri, IEnumerable<XImage> images)
-        {
-            if (baseUri == null || images == null)
-                return;
-            
-            foreach (var image in images)
-            {
-                var relative = baseUri.MakeRelativeUri(image.Path);
-                image.Path = relative;
-            }
-        }
-
-        /// <summary>
-        /// Sets image Path property to absolute Uri using the specified base Uri.
-        /// </summary>
-        /// <param name="baseUri">The base absolute Uri.</param>
-        /// <param name="images">The collection if XImage shapes.</param>
-        public void ToAbsoluteUri(Uri baseUri, IEnumerable<XImage> images)
-        {
-            if (baseUri == null || images == null)
-                return;
-            
-            foreach (var image in images)
-            {
-                var absolute = new Uri(baseUri, image.Path);
-                image.Path = absolute;
-            }
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="path"></param>
