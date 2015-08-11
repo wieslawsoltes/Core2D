@@ -1048,8 +1048,6 @@ namespace Test2d
             }
             else if (shape is XPath)
             {
-                var path = shape as XPath;
-
                 // TODO: Observer path sub properties.
             }
             else if (shape is XGroup)
@@ -1258,8 +1256,6 @@ namespace Test2d
             }
             else if (shape is XPath)
             {
-                var path = shape as XPath;
-
                 // TODO: Stop observing path sub properties;
             }
             else if (shape is XGroup)
