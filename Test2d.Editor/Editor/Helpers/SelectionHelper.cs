@@ -215,7 +215,7 @@ namespace Test2d
                             {
                                 var shape = _editor.Renderers[0].State.SelectedShape;
                                 var shapes = Enumerable.Repeat(shape, 1);
-                                _pointsCache = Editor.GetAllPoints(shapes, ShapeState.Connector).Distinct();
+                                _pointsCache = Editor.GetAllPoints(shapes, ShapeState.Connector).Distinct().ToList();
                             }
                         }
                         break;
@@ -224,7 +224,7 @@ namespace Test2d
                             if (!state.HasFlag(ShapeState.Locked) && !state.HasFlag(ShapeState.Connector))
                             {
                                 var shape = _editor.Renderers[0].State.SelectedShape;
-                                var shapes = Enumerable.Repeat(shape, 1);
+                                var shapes = Enumerable.Repeat(shape, 1).ToList();
                                 _shapesCache = shapes;
                             }
                         }
@@ -240,12 +240,12 @@ namespace Test2d
                 {
                     case MoveMode.Point:
                         {
-                            _pointsCache = Editor.GetAllPoints(shapes, ShapeState.Connector).Distinct();
+                            _pointsCache = Editor.GetAllPoints(shapes, ShapeState.Connector).Distinct().ToList();
                         }
                         break;
                     case MoveMode.Shape:
                         {
-                            _shapesCache = shapes;
+                            _shapesCache = shapes.ToList();
                         }
                         break;
                 }
