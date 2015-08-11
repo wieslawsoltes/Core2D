@@ -37,10 +37,6 @@
       <HintPath>..\..\packages\PDFsharp.1.50.3638-beta\lib\net20\PdfSharp.Charting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +44,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\..\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Test2d\Properties\SharedAssemblyInfo.cs">
@@ -60,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Test2d\Test2d.csproj">
-      <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
+      <Project>{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}</Project>
       <Name>Test2d</Name>
     </ProjectReference>
   </ItemGroup>
