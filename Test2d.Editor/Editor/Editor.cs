@@ -1244,6 +1244,119 @@ namespace Test2d
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        public void MoveSelectedByWithHistory(double dx, double dy)
+        {
+            if (_renderers[0].State.SelectedShape != null)
+            {
+                var state = _renderers[0].State.SelectedShape.State;
+
+                switch (_project.Options.MoveMode)
+                {
+                    case MoveMode.Point:
+                        {
+                            if (!state.HasFlag(ShapeState.Locked))
+                            {
+                                var shape = _renderers[0].State.SelectedShape;
+                                var shapes = Enumerable.Repeat(shape, 1);
+                                var points = GetAllPoints(shapes, ShapeState.Connector).Distinct().ToList();
+
+                                MovePointsBy(points, dx, dy);
+
+                                var previous = new {  DeltaX = -dx, DeltaY = -dy, Points = points };
+                                var next = new { DeltaX = dx, DeltaY = dy, Points = points };
+                                _history.Snapshot(previous, next, (s) => MovePointsBy(s.Points, s.DeltaX, s.DeltaY));
+                            }
+                        }
+                        break;
+                    case MoveMode.Shape:
+                        {
+                            if (!state.HasFlag(ShapeState.Locked) && !state.HasFlag(ShapeState.Connector))
+                            {
+                                var shape = _renderers[0].State.SelectedShape;
+                                var shapes = Enumerable.Repeat(shape, 1).ToList();
+
+                                MoveShapesBy(shapes, dx, dy);
+
+                                var previous = new { DeltaX = -dx, DeltaY = -dy, Shapes = shapes };
+                                var next = new { DeltaX = dx, DeltaY = dy, Shapes = shapes };
+                                _history.Snapshot(previous, next, (s) => MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY));
+                            }
+                        }
+                        break;
+                }
+            }
+
+            if (_renderers[0].State.SelectedShapes != null)
+            {
+                var shapes = _renderers[0].State.SelectedShapes.Where(s => !s.State.HasFlag(ShapeState.Locked));
+
+                switch (_project.Options.MoveMode)
+                {
+                    case MoveMode.Point:
+                        {
+                            var points = GetAllPoints(shapes, ShapeState.Connector).Distinct().ToList();
+
+                            MovePointsBy(points, dx, dy);
+
+                            var previous = new { DeltaX = -dx, DeltaY = -dy, Points = points };
+                            var next = new { DeltaX = dx, DeltaY = dy, Points = points };
+                            _history.Snapshot(previous, next, (s) => MovePointsBy(s.Points, s.DeltaX, s.DeltaY));
+                        }
+                        break;
+                    case MoveMode.Shape:
+                        {
+                            MoveShapesBy(shapes, dx, dy);
+
+                            var previous = new { DeltaX = -dx, DeltaY = -dy, Shapes = shapes.ToList() };
+                            var next = new { DeltaX = dx, DeltaY = dy, Shapes = shapes.ToList() };
+                            _history.Snapshot(previous, next, (s) => MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY));
+                        }
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void MoveUpSelected()
+        {
+            double dy = _project.Options.SnapToGrid ? -_project.Options.SnapY : -1.0;
+            MoveSelectedByWithHistory(0.0, dy);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void MoveDownSelected()
+        {
+            double dy = _project.Options.SnapToGrid ? _project.Options.SnapY : 1.0;
+            MoveSelectedByWithHistory(0.0, dy);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void MoveLeftSelected()
+        {
+            double dx = _project.Options.SnapToGrid ? -_project.Options.SnapX : -1.0;
+            MoveSelectedByWithHistory(dx, 0.0);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void MoveRightSelected()
+        {
+            double dx = _project.Options.SnapToGrid ? _project.Options.SnapX : 1.0;
+            MoveSelectedByWithHistory(dx, 0.0);
+        }
+
+        /// <summary>
         /// Removes container object from owner document Containers collection.
         /// </summary>
         /// <param name="container">The container object to remove from document Containers collection.</param>
