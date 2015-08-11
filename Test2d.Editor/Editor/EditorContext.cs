@@ -3708,9 +3708,30 @@ namespace Test2d
         /// </summary>
         public void Dispose()
         {
-            if (_editor.Log != null)
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        ~EditorContext()
+        {
+            Dispose(false);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                _editor.Log.Close();
+                if (_editor.Log != null)
+                {
+                    _editor.Log.Close();
+                }
             }
         }
     }
