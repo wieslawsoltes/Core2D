@@ -73,7 +73,6 @@
     <Compile Include="Editor\Helpers\TextHelper.cs" />
     <Compile Include="Editor\Core\History.cs" />
     <Compile Include="Editor\Core\ImportType.cs" />
-    <Compile Include="Editor\Factories\LineGrid.cs" />
     <Compile Include="Editor\Log\TraceLog.cs" />
     <Compile Include="Editor\Observer.cs" />
     <Compile Include="Editor\Parameters\ColumnParameter.cs" />
