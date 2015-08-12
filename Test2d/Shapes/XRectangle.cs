@@ -12,6 +12,57 @@ namespace Test2d
     /// </summary>
     public class XRectangle : XText
     {
+        private bool _isGrid;
+        private double _offsetX;
+        private double _offsetY;
+        private double _cellWidth;
+        private double _cellHeight;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsGrid
+        {
+            get { return _isGrid; }
+            set { Update(ref _isGrid, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double OffsetX
+        {
+            get { return _offsetX; }
+            set { Update(ref _offsetX, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double OffsetY
+        {
+            get { return _offsetY; }
+            set { Update(ref _offsetY, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double CellWidth
+        {
+            get { return _cellWidth; }
+            set { Update(ref _cellWidth, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double CellHeight
+        {
+            get { return _cellHeight; }
+            set { Update(ref _cellHeight, value); }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -75,7 +126,12 @@ namespace Test2d
                 Properties = ImmutableArray.Create<ShapeProperty>(),
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
-                Text = text
+                Text = text,
+                IsGrid = false,
+                OffsetX = 30.0,
+                OffsetY = 30.0,
+                CellWidth = 30.0,
+                CellHeight = 30.0
             };
         }
 
@@ -135,7 +191,12 @@ namespace Test2d
                 Properties = ImmutableArray.Create<ShapeProperty>(),
                 TopLeft = topLeft,
                 BottomRight = bottomRight,
-                Text = text
+                Text = text,
+                IsGrid = false,
+                OffsetX = 30.0,
+                OffsetY = 30.0,
+                CellWidth = 30.0,
+                CellHeight = 30.0
             };
         }
     }
