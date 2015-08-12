@@ -353,6 +353,55 @@ namespace PdfSharp
         /// 
         /// </summary>
         /// <param name="gfx"></param>
+        /// <param name="stroke"></param>
+        /// <param name="rect"></param>
+        /// <param name="offsetX"></param>
+        /// <param name="offsetY"></param>
+        /// <param name="cellWidth"></param>
+        /// <param name="cellHeight"></param>
+        /// <param name="isStroked"></param>
+        private void DrawGridInternal(
+            XGraphics gfx,
+            XPen stroke,
+            ref Test2d.Rect2 rect,
+            double offsetX, double offsetY,
+            double cellWidth, double cellHeight,
+            bool isStroked)
+        {
+            double ox = rect.X;
+            double oy = rect.Y;
+            double sx = ox + offsetX;
+            double sy = oy + offsetY;
+            double ex = ox + rect.Width;
+            double ey = oy + rect.Height;
+
+            for (double x = sx; x < ex; x += cellWidth)
+            {
+                var p0 = new XPoint(
+                    _scaleToPage(x), 
+                    _scaleToPage(oy));
+                var p1 = new XPoint(
+                    _scaleToPage(x), 
+                    _scaleToPage(ey));
+                DrawLineInternal(gfx, stroke, isStroked, ref p0, ref p1);
+            }
+
+            for (double y = sy; y < ey; y += cellHeight)
+            {
+                var p0 = new XPoint(
+                    _scaleToPage(ox),
+                    _scaleToPage(y));
+                var p1 = new XPoint(
+                    _scaleToPage(ex),
+                    _scaleToPage(y));
+                DrawLineInternal(gfx, stroke, isStroked, ref p0, ref p1);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
         /// <param name="color"></param>
         /// <param name="rect"></param>
         private void DrawBackgroundInternal(XGraphics gfx, Test2d.ArgbColor color, Test2d.Rect2 rect)
@@ -612,6 +661,17 @@ namespace PdfSharp
                     _scaleToPage(rect.Y),
                     _scaleToPage(rect.Width),
                     _scaleToPage(rect.Height));
+            }
+
+            if (rectangle.IsGrid)
+            {
+                DrawGridInternal(
+                    _gfx,
+                    ToXPen(rectangle.Style, _scaleToPage),
+                    ref rect,
+                    rectangle.OffsetX, rectangle.OffsetY,
+                    rectangle.CellWidth, rectangle.CellHeight,
+                    true);
             }
         }
 

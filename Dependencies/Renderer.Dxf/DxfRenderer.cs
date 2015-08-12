@@ -956,6 +956,7 @@ namespace Test2d
                     {
                         var rectangle = shape as XRectangle;
                         DrawRectangle(entities, rectangle, layer);
+                        // TODO: Draw rectangle grid.
                     }
                     else if (shape is XEllipse)
                     {

@@ -359,6 +359,49 @@ namespace Test
         /// 
         /// </summary>
         /// <param name="dc"></param>
+        /// <param name="half"></param>
+        /// <param name="stroke"></param>
+        /// <param name="rect"></param>
+        /// <param name="offsetX"></param>
+        /// <param name="offsetY"></param>
+        /// <param name="cellWidth"></param>
+        /// <param name="cellHeight"></param>
+        /// <param name="isStroked"></param>
+        private static void DrawGridInternal(
+            DrawingContext dc,
+            double half,
+            Pen stroke,
+            ref Rect rect,
+            double offsetX, double offsetY,
+            double cellWidth, double cellHeight,
+            bool isStroked)
+        {
+            double ox = rect.X;
+            double oy = rect.Y;
+            double sx = ox + offsetX;
+            double sy = oy + offsetY;
+            double ex = ox + rect.Width;
+            double ey = oy + rect.Height;
+
+            for (double x = sx; x < ex; x += cellWidth)
+            {
+                var p0 = new Point(x, oy);
+                var p1 = new Point(x, ey);
+                DrawLineInternal(dc, half, stroke, isStroked, ref p0, ref p1);
+            }
+
+            for (double y = sy; y < ey; y += cellHeight)
+            {
+                var p0 = new Point(ox, y);
+                var p1 = new Point(ex, y);
+                DrawLineInternal(dc, half, stroke, isStroked, ref p0, ref p1);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
         /// <param name="container"></param>
         private static void DrawBackground(DrawingContext dc, Container container)
         {
@@ -709,12 +752,25 @@ namespace Test
                 rectangle.TopLeft, 
                 rectangle.BottomRight, 
                 dx, dy);
+
             DrawRectangleInternal(
                 _dc, 
                 half, 
                 fill, stroke, 
                 rectangle.IsStroked, rectangle.IsFilled, 
                 ref rect);
+
+            if (rectangle.IsGrid)
+            {
+                DrawGridInternal(
+                    _dc,
+                    half,
+                    stroke,
+                    ref rect,
+                    rectangle.OffsetX, rectangle.OffsetY,
+                    rectangle.CellWidth, rectangle.CellHeight,
+                    true);
+            }
         }
 
         /// <summary>
