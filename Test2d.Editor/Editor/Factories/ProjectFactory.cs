@@ -100,15 +100,22 @@ namespace Test2d
             var style = project
                 .StyleLibraries.FirstOrDefault(g => g.Name == "Template")
                 .Styles.FirstOrDefault(s => s.Name == "Grid");
-            var settings = LineGrid.Settings.Create(0, 0, container.Width, container.Height, 30, 30);
-            var shapes = LineGrid.Create(style, settings, project.Options.PointShape);
             var layer = container.Layers.FirstOrDefault();
-
             var builder = layer.Shapes.ToBuilder();
-            foreach (var shape in shapes)
-            {
-                builder.Add(shape);
-            }
+            var grid = XRectangle.Create(
+                0, 0,
+                container.Width, container.Height,
+                style, 
+                project.Options.PointShape);
+            grid.IsStroked = false;
+            grid.IsFilled = false;
+            grid.IsGrid = true;
+            grid.OffsetX = 30.0;
+            grid.OffsetY = 30.0;
+            grid.CellWidth = 30.0;
+            grid.CellHeight = 30.0;
+            grid.State &= ~ShapeState.Printable;
+            builder.Add(grid);
             layer.Shapes = builder.ToImmutable();
         }
 
