@@ -38,6 +38,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -57,7 +58,6 @@
     <Compile Include="Math\MonotoneChain.cs" />
     <Compile Include="Math\Sat.cs" />
     <Compile Include="Properties\SharedAssemblyInfo.cs" />
-    <Compile Include="Shapes\XReference.cs" />
     <Compile Include="Data\Column.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="Data\Record.cs" />
