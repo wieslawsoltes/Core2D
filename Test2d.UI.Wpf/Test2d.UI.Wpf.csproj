@@ -135,10 +135,6 @@
     <Compile Include="Controls\GroupsControl.xaml.cs">
       <DependentUpon>GroupsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PathControl.xaml.cs">
-      <DependentUpon>PathControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Controls\ProjectControl.xaml.cs">
       <DependentUpon>ProjectControl.xaml</DependentUpon>
     </Compile>
@@ -208,7 +204,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\PathControl.xaml" />
     <Page Include="Controls\ProjectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

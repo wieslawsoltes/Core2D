@@ -395,8 +395,7 @@ namespace Test2d
         {
             return XPathGeometry.Create(
                 new List<XPathFigure>(),
-                fillRule,
-                XPathRect.Create());
+                fillRule);
         }
 
         /// <summary>
@@ -414,31 +413,7 @@ namespace Test2d
             var path = XPath.Create(
                 "",
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                null,
                 geometry,
-                isStroked,
-                isFilled);
-            Context.Editor.AddWithHistory(path);
-            return path;
-        }
-
-        /// <summary>
-        /// Creates a new instance of the XPath class.
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <returns></returns>
-        public XPath Path(
-            string source,
-            bool isStroked = true,
-            bool isFilled = false)
-        {
-            var path = XPath.Create(
-                "",
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                source,
-                null,
                 isStroked,
                 isFilled);
             Context.Editor.AddWithHistory(path);

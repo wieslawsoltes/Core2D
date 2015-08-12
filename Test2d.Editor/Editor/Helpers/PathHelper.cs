@@ -89,8 +89,7 @@ namespace Test2d
         {
             _geometry = XPathGeometry.Create(
                 new List<XPathFigure>(),
-                _editor.Project.Options.DefaultFillRule,
-                XPathRect.Create());
+                _editor.Project.Options.DefaultFillRule);
 
             _geometry.BeginFigure(
                 start, 
@@ -100,7 +99,6 @@ namespace Test2d
             _path = XPath.Create(
                 "Path",
                 _editor.Project.CurrentStyleLibrary.CurrentStyle,
-                null,
                 _geometry,
                 _editor.Project.Options.DefaultIsStroked,
                 _editor.Project.Options.DefaultIsFilled);

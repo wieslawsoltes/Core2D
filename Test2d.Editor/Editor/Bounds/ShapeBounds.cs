@@ -106,23 +106,6 @@ namespace Test2d
             return Rect2.Create(image.TopLeft, image.BottomRight, dx, dy);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <returns></returns>
-        public static Rect2 GetPathBounds(XPath path, double dx, double dy)
-        {
-            var b = path.Geometry.Bounds;
-            return Rect2.Create(
-                b.X + dx,
-                b.Y + dy,
-                b.X + b.Width + dx,
-                b.Y + b.Height + dy);
-        }
-
         #endregion
 
         #region HitTest Point
@@ -365,7 +348,7 @@ namespace Test2d
                         }
                     }
 
-                    if (GetPathBounds(path, dx, dy).Contains(p))
+                    if (ConvexHullBounds.Contains(points, p, dx, dy))
                     {
                         return path;
                     }
@@ -610,7 +593,8 @@ namespace Test2d
             {
                 if ((shape as XPath).Geometry != null)
                 {
-                    if (GetPathBounds(shape as XPath, dx, dy).IntersectsWith(rect))
+                    var points = (shape as XPath).GetAllPoints();
+                    if (ConvexHullBounds.Overlap(selection, ConvexHullBounds.GetVertices(points, dx, dy)))
                     {
                         if (builder != null)
                         {

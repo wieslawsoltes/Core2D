@@ -279,73 +279,6 @@
             </TextBox>
         </Grid>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type core:XPathRect}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="40"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock 
-                Text="X" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="0">
-            </TextBlock>
-            <TextBlock 
-                Text="Y" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="1" 
-                Grid.Column="0">
-            </TextBlock>
-            <TextBlock 
-                Text="Width" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="2" 
-                Grid.Column="0" >
-            </TextBlock>
-            <TextBlock 
-                Text="Height" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="3" 
-                Grid.Column="0">
-            </TextBlock>
-            <TextBox 
-                Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxLeftStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2">
-            </TextBox>
-            <TextBox 
-                Text="{Binding Y, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxLeftStyleKey}"
-                Grid.Row="1" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2">
-            </TextBox>
-            <TextBox 
-                Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxLeftStyleKey}"
-                Grid.Row="2" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2">
-            </TextBox>
-            <TextBox 
-                Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxLeftStyleKey}"
-                Grid.Row="3" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2">
-            </TextBox>
-        </Grid>
-    </DataTemplate>
     <DataTemplate DataType="{x:Type core:XArcSegment}">
         <StackPanel>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
@@ -526,9 +459,6 @@
                 </ComboBox>
             </Grid>
             <TabControl>
-                <TabItem Header="Bounds">
-                    <ContentControl Content="{Binding Bounds}"/>
-                </TabItem>
                 <TabItem Header="Figures">
                     <TreeView 
                         x:Name="tree" 
@@ -2326,16 +2256,6 @@
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
-            <Expander Header="Source">
-                <Grid>
-                    <TextBox 
-                        Text="{Binding Source, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxLeftStyleKey}"
-                        AcceptsReturn="True"
-                        AcceptsTab="True">
-                    </TextBox>
-                </Grid>
-            </Expander>
             <Expander Header="Geometry">
                 <ContentControl Content="{Binding Geometry}"/>
             </Expander>
