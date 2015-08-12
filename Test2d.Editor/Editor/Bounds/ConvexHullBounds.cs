@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Test2d
@@ -33,6 +34,30 @@ namespace Test2d
                 }
             }
             return contains;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="points"></param>
+        /// <param name="point"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static bool Contains(IList<XPoint> points, Vector2 point, double dx, double dy)
+        {
+            Vector2[] vertices = new Vector2[points.Count];
+            int k;
+            Vector2[] convexHull;
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                vertices[i] = new Vector2(points[i].X + dx, points[i].Y + dy);
+            }
+
+            mc.ConvexHull(vertices, out convexHull, out k);
+
+            return Contains(point.X, point.Y, convexHull, k);
         }
 
         /// <summary>
@@ -80,6 +105,29 @@ namespace Test2d
             mc.ConvexHull(vertices, out convexHull, out k);
 
             return Contains(point.X, point.Y, convexHull, k);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="points"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns></returns>
+        public static Vector2[] GetVertices(IList<XPoint> points, double dx, double dy)
+        {
+            Vector2[] vertices = new Vector2[points.Count];
+            int k;
+            Vector2[] convexHull;
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                vertices[i] = new Vector2(points[i].X + dx, points[i].Y + dy);
+            }
+
+            mc.ConvexHull(vertices, out convexHull, out k);
+
+            return convexHull.Take(k).ToArray();
         }
 
         /// <summary>
