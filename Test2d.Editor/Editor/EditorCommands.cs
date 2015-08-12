@@ -186,10 +186,6 @@ namespace Test2d
         /// 
         /// </summary>
         public ICommand UngroupCommand { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICommand ReferenceCommand { get; set; }
 
         /// <summary>
         /// 

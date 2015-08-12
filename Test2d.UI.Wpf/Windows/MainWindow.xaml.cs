@@ -1228,18 +1228,7 @@ namespace Test.Windows
                             if (group != null)
                             {
                                 var p = e.GetPosition(containerControl);
-
-                                // NOTE: Drop XGroup as reference (hold Shift key).
-                                if (Keyboard.Modifiers == ModifierKeys.Shift)
-                                {
-                                    context.DropAsReference(group, p.X, p.Y);
-                                }
-                                // NOTE: Drop XGroup as clone (without Shift key).
-                                else
-                                {
-                                    context.DropAsClone(group, p.X, p.Y);
-                                }
-
+                                context.DropAsClone(group, p.X, p.Y);
                                 e.Handled = true;
                             }
                         }

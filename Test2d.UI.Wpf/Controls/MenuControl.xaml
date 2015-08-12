@@ -228,11 +228,6 @@
                       InputGestureText="">
             </MenuItem>
             <Separator/>
-            <MenuItem Header="{x:Static p:Resources.MenuEditReference}" 
-                      Command="{Binding Commands.ReferenceCommand}" 
-                      InputGestureText="Ctrl+R">
-            </MenuItem>
-            <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuEditGroup}" 
                       Command="{Binding Commands.GroupCommand}" 
                       InputGestureText="Ctrl+G">

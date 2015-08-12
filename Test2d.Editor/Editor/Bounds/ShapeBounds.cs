@@ -391,23 +391,6 @@ namespace Test2d
                 }
                 return null;
             }
-            else if (shape is XReference)
-            {
-                var reference = shape as XReference;
-
-                if (GetPointBounds(reference.Origin, treshold, dx, dy).Contains(p))
-                {
-                    return reference.Origin;
-                }
-
-                var origin = reference.Origin;
-                var result = HitTest(reference.Shape, p, treshold, origin.X + dx, origin.Y + dy);
-                if (result != null)
-                {
-                    return shape;
-                }
-                return null;
-            }
 
             return null;
         }
@@ -645,24 +628,6 @@ namespace Test2d
             else if (shape is XGroup)
             {
                 if (HitTest((shape as XGroup).Shapes.Reverse(), rect, selection, null, treshold, dx, dy) == true)
-                {
-                    if (builder != null)
-                    {
-                        builder.Add(shape);
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            else if (shape is XReference)
-            {
-                var reference = shape as XReference;
-                var origin = reference.Origin;
-                if (HitTest(reference.Shape, rect, selection, null, treshold, origin.X + dx, origin.Y + dy) == true)
                 {
                     if (builder != null)
                     {

@@ -40,7 +40,6 @@
         <KeyBinding Command="{Binding Commands.SelectAllCommand}" Gesture="Ctrl+A"/>
         <KeyBinding Command="{Binding Commands.GroupCommand}" Gesture="Ctrl+G"/>
         <KeyBinding Command="{Binding Commands.UngroupCommand}" Gesture="Ctrl+U"/>
-        <KeyBinding Command="{Binding Commands.ReferenceCommand}" Gesture="Ctrl+R"/>
         <KeyBinding Command="{Binding Commands.ProjectWindowCommand}" Gesture="Ctrl+Alt+X"/>
         <KeyBinding Command="{Binding Commands.OptionsWindowCommand}" Gesture="Ctrl+Alt+O"/>
         <KeyBinding Command="{Binding Commands.TemplatesWindowCommand}" Gesture="Ctrl+Alt+T"/>

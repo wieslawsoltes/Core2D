@@ -486,17 +486,6 @@ namespace Test2d
                         yield return point;
                     }
                 }
-                else if (shape is XReference)
-                {
-                    var reference = shape as XReference;
-
-                    if (!reference.Origin.State.HasFlag(exclude))
-                    {
-                        yield return reference.Origin;
-                    }
-
-                    // TODO: Add reference.Shape support.
-                }
             }
         }
 
@@ -559,10 +548,6 @@ namespace Test2d
                         yield return s;
                     }
 
-                    yield return shape;
-                }
-                else if (shape is XReference)
-                {
                     yield return shape;
                 }
             }
@@ -1001,30 +986,7 @@ namespace Test2d
                 _renderers[0].State.SelectedShapes = null;
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void ReferenceSelected()
-        {
-            if (_renderers[0].State.SelectedShape != null)
-            {
-                var shape = _renderers[0].State.SelectedShape;
-                var origin = XPoint.Create(0, 0, _project.Options.PointShape);
-                var reference = XReference.Create("r", origin, shape);
-
-                Deselect(_project.CurrentContainer);
-                AddWithHistory(reference);
-
-                Select(_project.CurrentContainer, reference);
-            }
-
-            if (_renderers[0].State.SelectedShapes != null)
-            {
-                // TODO: Group and reference selected shapes.
-            }
-        }
-
+        
         /// <summary>
         /// Move shape from source index to target index position in an array. 
         /// </summary>

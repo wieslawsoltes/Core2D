@@ -626,18 +626,6 @@ namespace TestEtoForms
                 _context.Commands.ClearAllCommand.Execute(null);
             };
 
-            var referenceCommand = new Command()
-            {
-                MenuText = "Re&ference",
-                Shortcut = Application.Instance.CommonModifier | Keys.R
-            };
-
-            referenceCommand.Executed +=
-            (s, e) =>
-            {
-                _context.Commands.ReferenceCommand.Execute(null);
-            };
-
             var groupCommand = new Command() 
             { 
                 MenuText = "&Group",
@@ -698,8 +686,6 @@ namespace TestEtoForms
                     deSelectAllCommand,
                     new SeparatorMenuItem(),
                     clearAllCommand,
-                    new SeparatorMenuItem(),
-                    referenceCommand,
                     new SeparatorMenuItem(),
                     groupCommand,
                     ungroupCommand

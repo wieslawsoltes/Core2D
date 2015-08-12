@@ -2679,45 +2679,6 @@ namespace Test2d
         /// <summary>
         ///
         /// </summary>
-        /// <param name="group"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void DropAsReference(XGroup group, double x, double y)
-        {
-            try
-            {
-                double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-                double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
-
-                var origin = XPoint.Create(sx, sy, _editor.Project.Options.PointShape);
-                var reference = XReference.Create(string.Concat("r-", group.Name), origin, group);
-               
-                _editor.Deselect(_editor.Project.CurrentContainer);
-                _editor.AddWithHistory(reference);
-
-                _editor.Select(_editor.Project.CurrentContainer, reference);
-
-                if (_editor.Project.Options.TryToConnect)
-                {
-                    // TODO: Implement TryToConnect for XReference.
-                    //_editor.TryToConnect(reference);
-                } 
-            }
-            catch (Exception ex)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
         /// <param name="record"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -3228,11 +3189,6 @@ namespace Test2d
                         () => _editor.UngroupSelected(),
                         () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
 
-                _commands.ReferenceCommand =
-                    Command.Create(
-                        () => _editor.ReferenceSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
                 _commands.BringToFrontCommand =
                     Command.Create(
                         () => _editor.BringToFrontSelected(),
@@ -3600,7 +3556,6 @@ namespace Test2d
             (_commands.ClearAllCommand as Command).NotifyCanExecuteChanged();
             (_commands.GroupCommand as Command).NotifyCanExecuteChanged();
             (_commands.UngroupCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ReferenceCommand as Command).NotifyCanExecuteChanged();
 
             (_commands.BringToFrontCommand as Command).NotifyCanExecuteChanged();
             (_commands.BringForwardCommand as Command).NotifyCanExecuteChanged();

@@ -24,7 +24,6 @@
     <converters:ValueParameterConverter x:Key="ValueParameterConverter"/>
     <converters:ShapeBindingParameterConverter x:Key="ShapeBindingParameterConverter"/>
     <converters:ShapePropertyParameterConverter x:Key="ShapePropertyParameterConverter"/>
-    <converters:ZoomScaleConverter x:Key="ZoomScaleConverter"/>
     <!-- enums -->
     <ObjectDataProvider x:Key="MoveModeValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
         <ObjectDataProvider.MethodParameters>
@@ -2191,30 +2190,6 @@
                         Margin="5,2,5,2">
                     </ContentControl>
                 </Grid>
-            </TabItem>
-        </TabControl>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type core:XReference}">
-        <TabControl>
-            <TabItem Header="Reference">
-                <StackPanel>
-                    <Control Template="{StaticResource NameControlTemplateKey}"/>
-                    <Expander Header="Properties">
-                        <Control Template="{StaticResource ShapesPropertiesControlTemplateKey}"/>
-                    </Expander>
-                    <Expander Header="State">
-                        <Control Template="{StaticResource StateControlTemplateKey}"/>
-                    </Expander>
-                    <Expander Header="Data">
-                        <Control Template="{StaticResource DataControlTemplate}"/>
-                    </Expander>
-                </StackPanel>
-            </TabItem>
-            <TabItem Header="Origin">
-                <ContentControl Content="{Binding Origin}"/>
-            </TabItem>
-            <TabItem Header="Shape">
-                <ContentControl Content="{Binding Shape}"/>
             </TabItem>
         </TabControl>
     </DataTemplate>

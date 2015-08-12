@@ -126,9 +126,6 @@
   <data name="MenuEditUngroup" xml:space="preserve">
     <value>U_ngroup</value>
   </data>
-  <data name="MenuEditReference" xml:space="preserve">
-    <value>Re_ference</value>
-  </data>
   <data name="MenuEditGroup" xml:space="preserve">
     <value>_Group</value>
   </data>

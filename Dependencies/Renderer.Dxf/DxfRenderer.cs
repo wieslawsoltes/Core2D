@@ -1007,11 +1007,6 @@ namespace Test2d
                         var group = shape as XGroup;
                         DrawShapes(entities, group.Shapes, layer, db, r == null ? group.Record : r);
                     }
-                    else if (shape is XReference)
-                    {
-                        var reference = shape as XReference;
-                        // TODO: Draw reference.
-                    }
                     else if (shape is XPath)
                     {
                         var path = shape as XPath;
