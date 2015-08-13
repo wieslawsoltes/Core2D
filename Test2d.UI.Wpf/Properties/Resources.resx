@@ -537,4 +537,22 @@
   <data name="OptionsPointStyle" xml:space="preserve">
     <value>PointStyle</value>
   </data>
+  <data name="MenuPathTool" xml:space="preserve">
+    <value>Path T_ool</value>
+  </data>
+  <data name="MenuPathToolArc" xml:space="preserve">
+    <value>_Arc</value>
+  </data>
+  <data name="MenuPathToolBezier" xml:space="preserve">
+    <value>_Bezier</value>
+  </data>
+  <data name="MenuPathToolLine" xml:space="preserve">
+    <value>_Line</value>
+  </data>
+  <data name="MenuPathToolMove" xml:space="preserve">
+    <value>_Move</value>
+  </data>
+  <data name="MenuPathToolQBezier" xml:space="preserve">
+    <value>_QBezier</value>
+  </data>
 </root>

@@ -392,6 +392,40 @@
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Path}}"
                       InputGestureText="H">
             </MenuItem>
+            <MenuItem Header="{x:Static p:Resources.MenuPathTool}"
+                      IsEnabled="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Path}}">
+                <MenuItem Header="{x:Static p:Resources.MenuPathToolLine}" 
+                      Command="{Binding Commands.ToolLineCommand}" 
+                      IsCheckable="False"
+                      IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:PathTool.Line}}"
+                      InputGestureText="L">
+                </MenuItem>
+                <MenuItem Header="{x:Static p:Resources.MenuPathToolArc}" 
+                      Command="{Binding Commands.ToolArcCommand}" 
+                      IsCheckable="False"
+                      IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:PathTool.Arc}}"
+                      InputGestureText="A">
+                </MenuItem>
+                <MenuItem Header="{x:Static p:Resources.MenuPathToolBezier}" 
+                      Command="{Binding Commands.ToolBezierCommand}" 
+                      IsCheckable="False"
+                      IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:PathTool.Bezier}}"
+                      InputGestureText="B">
+                </MenuItem>
+                <MenuItem Header="{x:Static p:Resources.MenuPathToolQBezier}" 
+                      Command="{Binding Commands.ToolQBezierCommand}"
+                      IsCheckable="False"
+                      IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:PathTool.QBezier}}" 
+                      InputGestureText="Q">
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="{x:Static p:Resources.MenuPathToolMove}" 
+                      Command="{Binding Commands.ToolMoveCommand}" 
+                      IsCheckable="False"
+                      IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:PathTool.Move}}"
+                      InputGestureText="M">
+                </MenuItem>
+            </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolRectangle}" 
                       Command="{Binding Commands.ToolRectangleCommand}" 
