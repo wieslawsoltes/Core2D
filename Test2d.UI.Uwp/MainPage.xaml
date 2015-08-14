@@ -11,6 +11,13 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
-
+        <canvas:CanvasControl 
+            x:Name="canvas"
+            PointerPressed="CanvasControl_PointerPressed"
+            PointerReleased="CanvasControl_PointerReleased"
+            PointerMoved="CanvasControl_PointerMoved"
+            PointerWheelChanged="CanvasControl_PointerWheelChanged"
+            Draw="CanvasControl_Draw">
+        </canvas:CanvasControl>
     </Grid>
 </Page>
