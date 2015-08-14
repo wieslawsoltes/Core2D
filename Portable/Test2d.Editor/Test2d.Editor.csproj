@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{73CD6596-0391-4A41-B837-9553E23B799E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Test2d.Editor</RootNamespace>
+    <AssemblyName>Test2d.Editor</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="project.json" />
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Test2d.Editor\Editor\Bounds\ConvexHullBounds.cs">
+      <Link>Editor\Bounds\ConvexHullBounds.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Bounds\ShapeBounds.cs">
+      <Link>Editor\Bounds\ShapeBounds.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Core\Command.cs">
+      <Link>Editor\Core\Command.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Core\ExportType.cs">
+      <Link>Editor\Core\ExportType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Core\Helper.cs">
+      <Link>Editor\Core\Helper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Core\History.cs">
+      <Link>Editor\Core\History.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Core\ImportType.cs">
+      <Link>Editor\Core\ImportType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Core\PathTool.cs">
+      <Link>Editor\Core\PathTool.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Core\RecentProject.cs">
+      <Link>Editor\Core\RecentProject.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Core\State.cs">
+      <Link>Editor\Core\State.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Core\Tool.cs">
+      <Link>Editor\Core\Tool.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Editor.cs">
+      <Link>Editor\Editor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\EditorCommands.cs">
+      <Link>Editor\EditorCommands.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\EditorContext.cs">
+      <Link>Editor\EditorContext.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Factories\ProjectFactory.cs">
+      <Link>Editor\Factories\ProjectFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Factory.cs">
+      <Link>Editor\Factory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Helpers\ArcHelper.cs">
+      <Link>Editor\Helpers\ArcHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Helpers\BezierHelper.cs">
+      <Link>Editor\Helpers\BezierHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Helpers\EllipseHelper.cs">
+      <Link>Editor\Helpers\EllipseHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Helpers\ImageHelper.cs">
+      <Link>Editor\Helpers\ImageHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Helpers\LineHelper.cs">
+      <Link>Editor\Helpers\LineHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Helpers\PathHelper.cs">
+      <Link>Editor\Helpers\PathHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Helpers\PointHelper.cs">
+      <Link>Editor\Helpers\PointHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Helpers\QBezierHelper.cs">
+      <Link>Editor\Helpers\QBezierHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Helpers\RectangleHelper.cs">
+      <Link>Editor\Helpers\RectangleHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Helpers\SelectionHelper.cs">
+      <Link>Editor\Helpers\SelectionHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Helpers\TextHelper.cs">
+      <Link>Editor\Helpers\TextHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Observer.cs">
+      <Link>Editor\Observer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Parameters\ColumnParameter.cs">
+      <Link>Editor\Parameters\ColumnParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Parameters\RecordParameter.cs">
+      <Link>Editor\Parameters\RecordParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Parameters\ShapeBindingParamater.cs">
+      <Link>Editor\Parameters\ShapeBindingParamater.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Parameters\ShapePropertyParameter.cs">
+      <Link>Editor\Parameters\ShapePropertyParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Editor\Editor\Parameters\ValueParamterer.cs">
+      <Link>Editor\Parameters\ValueParamterer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Test2d.Interfaces\Test2d.Interfaces.csproj">
+      <Project>{a400a28a-cf53-4d7e-a40e-1204a5f06a6d}</Project>
+      <Name>Test2d.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test2d\Test2d.csproj">
+      <Project>{1d45ea4f-d2af-447a-8a8e-e94f19be226a}</Project>
+      <Name>Test2d</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
