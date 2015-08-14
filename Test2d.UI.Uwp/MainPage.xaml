@@ -1,0 +1,15 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<Page
+    x:Class="Test2d.UI.Uwp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Test2d.UI.Uwp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+
+    </Grid>
+</Page>
