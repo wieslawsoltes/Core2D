@@ -1673,11 +1673,11 @@ namespace Test2d
             if (_project == null || _project.Options == null)
                 return false;
             
-            // points must be aligned horizontally or vertically
+            // Points must be aligned horizontally or vertically.
             if (p0.X != p1.X && p0.Y != p1.Y)
                 return false;
 
-            // line must be horizontal or vertical
+            // Line must be horizontal or vertical.
             if (line.Start.X != line.End.X && line.Start.Y != line.End.Y)
                 return false;
 
@@ -1727,7 +1727,7 @@ namespace Test2d
                 var wires = Editor.GetAllShapes<XLine>(layer.Shapes);
                 var dict = new Dictionary<XLine, IList<XPoint>>();
 
-                // find possible group to line connections
+                // Find possible group to line connections.
                 foreach (var connector in group.Connectors)
                 {
                     var p = new Vector2(connector.X, connector.Y);
@@ -1758,7 +1758,7 @@ namespace Test2d
 
                 bool success = false;
 
-                // try to split lines using group connectors
+                // Try to split lines using group connectors.
                 foreach (var kv in dict)
                 {
                     IList<XPoint> points = kv.Value;
