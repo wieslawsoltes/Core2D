@@ -48,7 +48,6 @@
     <Compile Include="..\Test2d\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Interfaces\ICompressor.cs" />
     <Compile Include="Interfaces\IFileWriter.cs" />
     <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Interfaces\IProjectFactory.cs" />
