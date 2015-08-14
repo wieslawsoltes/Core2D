@@ -95,7 +95,7 @@ namespace Test2d
         [Conditional("VERBOSE")]
         private void Verbose(string text)
         {
-            Debug.Print(text);
+            Debug.WriteLine(text);
         }
 
         /// <summary>
