@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1D45EA4F-D2AF-447A-8A8E-E94F19BE226A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Test2d</RootNamespace>
+    <AssemblyName>Test2d</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="project.json" />
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Test2d\Binding\PropertyBinding.cs">
+      <Link>Binding\PropertyBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Binding\PropertyBindingMode.cs">
+      <Link>Binding\PropertyBindingMode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Core\ObservableObject.cs">
+      <Link>Core\ObservableObject.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Data\Column.cs">
+      <Link>Data\Column.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Data\Database.cs">
+      <Link>Data\Database.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Data\Record.cs">
+      <Link>Data\Record.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Data\Value.cs">
+      <Link>Data\Value.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\IO\Utf8TextFile.cs">
+      <Link>IO\Utf8TextFile.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Libraries\GroupLibrary.cs">
+      <Link>Libraries\GroupLibrary.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Libraries\StyleLibrary.cs">
+      <Link>Libraries\StyleLibrary.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Math\Arc\GdiArc.cs">
+      <Link>Math\Arc\GdiArc.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Math\Arc\WpfArc.cs">
+      <Link>Math\Arc\WpfArc.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Math\Core\Point2.cs">
+      <Link>Math\Core\Point2.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Math\Core\Polygon2.cs">
+      <Link>Math\Core\Polygon2.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Math\Core\Rect2.cs">
+      <Link>Math\Core\Rect2.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Math\Core\Size2.cs">
+      <Link>Math\Core\Size2.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Math\Core\Vector2.cs">
+      <Link>Math\Core\Vector2.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Math\MathHelpers.cs">
+      <Link>Math\MathHelpers.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Math\MonotoneChain.cs">
+      <Link>Math\MonotoneChain.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Math\Sat.cs">
+      <Link>Math\Sat.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Project\Container.cs">
+      <Link>Project\Container.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Project\Document.cs">
+      <Link>Project\Document.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Project\Layer.cs">
+      <Link>Project\Layer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Project\MoveMode.cs">
+      <Link>Project\MoveMode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Project\Options.cs">
+      <Link>Project\Options.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Project\Project.cs">
+      <Link>Project\Project.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Renderer\IRenderer.cs">
+      <Link>Renderer\IRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Renderer\RendererState.cs">
+      <Link>Renderer\RendererState.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\Path\Segments\XArcSegment.cs">
+      <Link>Shapes\Path\Segments\XArcSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\Path\Segments\XBezierSegment.cs">
+      <Link>Shapes\Path\Segments\XBezierSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\Path\Segments\XLineSegment.cs">
+      <Link>Shapes\Path\Segments\XLineSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\Path\Segments\XPolyBezierSegment.cs">
+      <Link>Shapes\Path\Segments\XPolyBezierSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\Path\Segments\XPolyLineSegment.cs">
+      <Link>Shapes\Path\Segments\XPolyLineSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\Path\Segments\XPolyQuadraticBezierSegment.cs">
+      <Link>Shapes\Path\Segments\XPolyQuadraticBezierSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\Path\Segments\XQuadraticBezierSegment.cs">
+      <Link>Shapes\Path\Segments\XQuadraticBezierSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\Path\XFillRule.cs">
+      <Link>Shapes\Path\XFillRule.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\Path\XPathFigure.cs">
+      <Link>Shapes\Path\XPathFigure.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\Path\XPathGeometry.cs">
+      <Link>Shapes\Path\XPathGeometry.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\Path\XPathSegment.cs">
+      <Link>Shapes\Path\XPathSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\Path\XPathSize.cs">
+      <Link>Shapes\Path\XPathSize.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\Path\XSweepDirection.cs">
+      <Link>Shapes\Path\XSweepDirection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\XArc.cs">
+      <Link>Shapes\XArc.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\XBezier.cs">
+      <Link>Shapes\XBezier.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\XEllipse.cs">
+      <Link>Shapes\XEllipse.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\XGroup.cs">
+      <Link>Shapes\XGroup.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\XImage.cs">
+      <Link>Shapes\XImage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\XLine.cs">
+      <Link>Shapes\XLine.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\XPath.cs">
+      <Link>Shapes\XPath.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\XPoint.cs">
+      <Link>Shapes\XPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\XQBezier.cs">
+      <Link>Shapes\XQBezier.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\XRectangle.cs">
+      <Link>Shapes\XRectangle.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shapes\XText.cs">
+      <Link>Shapes\XText.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shape\BaseShape.cs">
+      <Link>Shape\BaseShape.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shape\ShapeBinding.cs">
+      <Link>Shape\ShapeBinding.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shape\ShapeProperty.cs">
+      <Link>Shape\ShapeProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shape\ShapePropertyExtensions.cs">
+      <Link>Shape\ShapePropertyExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Shape\ShapeState.cs">
+      <Link>Shape\ShapeState.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Style\ArgbColor.cs">
+      <Link>Style\ArgbColor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Style\ArrowStyle.cs">
+      <Link>Style\ArrowStyle.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Style\ArrowType.cs">
+      <Link>Style\ArrowType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Style\BaseStyle.cs">
+      <Link>Style\BaseStyle.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Style\FontStyle.cs">
+      <Link>Style\FontStyle.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Style\LineCap.cs">
+      <Link>Style\LineCap.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Style\LineStyle.cs">
+      <Link>Style\LineStyle.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Style\MaxLengthFlags.cs">
+      <Link>Style\MaxLengthFlags.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Style\ShapeStyle.cs">
+      <Link>Style\ShapeStyle.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Style\StyleComparer.cs">
+      <Link>Style\StyleComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Style\TextHAlignment.cs">
+      <Link>Style\TextHAlignment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Style\TextStyle.cs">
+      <Link>Style\TextStyle.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Style\TextVAlignment.cs">
+      <Link>Style\TextVAlignment.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
