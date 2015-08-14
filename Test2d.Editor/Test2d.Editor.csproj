@@ -73,7 +73,6 @@
     <Compile Include="Editor\Helpers\TextHelper.cs" />
     <Compile Include="Editor\Core\History.cs" />
     <Compile Include="Editor\Core\ImportType.cs" />
-    <Compile Include="Editor\Log\TraceLog.cs" />
     <Compile Include="Editor\Observer.cs" />
     <Compile Include="Editor\Parameters\ColumnParameter.cs" />
     <Compile Include="Editor\Parameters\RecordParameter.cs" />
@@ -89,10 +88,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dependencies\Renderer.Dxf\Renderer.Dxf.csproj">
-      <Project>{acc2c898-b49b-4ed9-b18c-389f50801b39}</Project>
-      <Name>Renderer.Dxf</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Test2d.Interfaces\Test2d.Interfaces.csproj">
       <Project>{c3e348e1-bf9e-4a71-a1f7-61b7607e0a20}</Project>
       <Name>Test2d.Interfaces</Name>
