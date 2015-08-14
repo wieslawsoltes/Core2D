@@ -861,7 +861,7 @@ namespace TestEtoForms
                 fontDecoration |= Eto.Drawing.FontDecoration.Strikethrough;
             }
 
-            Font font = new Font(
+            var font = new Font(
                 text.Style.TextStyle.FontName,
                 (float)(text.Style.TextStyle.FontSize * _textScaleFactor),
                 fontStyle,
