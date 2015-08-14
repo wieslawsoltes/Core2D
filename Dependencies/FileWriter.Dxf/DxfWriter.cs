@@ -26,7 +26,10 @@ namespace Test2d
 
             if (item is Container)
             {
-                renderer.Save(path, item as Container, (Dxf.DxfAcadVer)options);
+                renderer.Save(
+                    path, 
+                    item as Container, 
+                    options == null ? Dxf.DxfAcadVer.AC1015 : (Dxf.DxfAcadVer)options);
             }
         }
     }
