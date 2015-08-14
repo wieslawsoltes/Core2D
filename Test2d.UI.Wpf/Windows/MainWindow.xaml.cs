@@ -791,7 +791,7 @@ namespace Test.Windows
                 CsvWriter = new CsvHelperWriter()
             };
 
-            context.InitializeEditor();
+            context.InitializeEditor(new TraceLog());
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
             context.Editor.Renderers[1].State.DrawShapeState = ShapeState.Visible;
             context.Editor.GetImagePath = () => GetImagePath();

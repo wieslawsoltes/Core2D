@@ -53,7 +53,7 @@ namespace TestEtoForms
                 CsvReader = new T2d.CsvHelperReader(),
                 CsvWriter = new T2d.CsvHelperWriter()
             };
-            _context.InitializeEditor();
+            _context.InitializeEditor(new T2d.TraceLog());
             _context.Editor.Renderers[0].State.DrawShapeState = T2d.ShapeState.Visible;
             _context.Editor.GetImagePath = () => GetImagePath();
 

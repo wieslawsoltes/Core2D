@@ -302,6 +302,10 @@
       <Project>{5c5a31b5-8f76-42e7-aea8-55b32ca641fa}</Project>
       <Name>FileWriter.Pdf-wpf</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dependencies\Log.Trace\Log.Trace.csproj">
+      <Project>{68a36926-df55-4f05-9f89-b9ab1463227e}</Project>
+      <Name>Log.Trace</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dependencies\Renderer.Dxf\Renderer.Dxf.csproj">
       <Project>{acc2c898-b49b-4ed9-b18c-389f50801b39}</Project>
       <Name>Renderer.Dxf</Name>

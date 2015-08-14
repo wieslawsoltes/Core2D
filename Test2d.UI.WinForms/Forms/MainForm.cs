@@ -58,7 +58,7 @@ namespace TestWinForms
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter()
             };
-            context.InitializeEditor();
+            context.InitializeEditor(new TraceLog());
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
 
             DataContext = context;
