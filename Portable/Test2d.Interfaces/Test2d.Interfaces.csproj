@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A400A28A-CF53-4D7E-A40E-1204A5F06A6D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Test2d.Interfaces</RootNamespace>
+    <AssemblyName>Test2d.Interfaces</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="project.json" />
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Test2d.Interfaces\Interfaces\IFileWriter.cs">
+      <Link>Interfaces\IFileWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Interfaces\Interfaces\ILog.cs">
+      <Link>Interfaces\ILog.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Interfaces\Interfaces\IProjectFactory.cs">
+      <Link>Interfaces\IProjectFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Interfaces\Interfaces\ISerializer.cs">
+      <Link>Interfaces\ISerializer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Interfaces\Interfaces\ITextClipboard.cs">
+      <Link>Interfaces\ITextClipboard.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Interfaces\Interfaces\ITextFieldReader.cs">
+      <Link>Interfaces\ITextFieldReader.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Interfaces\Interfaces\ITextFieldWriter.cs">
+      <Link>Interfaces\ITextFieldWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d.Interfaces\Interfaces\IView.cs">
+      <Link>Interfaces\IView.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Properties\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Test2d\Test2d.csproj">
+      <Project>{1d45ea4f-d2af-447a-8a8e-e94f19be226a}</Project>
+      <Name>Test2d</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
