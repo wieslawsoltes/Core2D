@@ -3007,7 +3007,7 @@ namespace Test2d
             {
                 _editor = Editor.Create(_projectFactory.GetProject(), _renderers);
                 _editor.Log = new TraceLog();
-                _editor.Log.Initialize("Test.log");
+                _editor.Log.Initialize("Test2d.log");
 
                 _commands = new EditorCommands();
 
