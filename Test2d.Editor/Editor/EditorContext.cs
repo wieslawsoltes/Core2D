@@ -1511,7 +1511,7 @@ namespace Test2d
         /// </summary>
         /// <param name="path"></param>
         /// <param name="version"></param>
-        public void ExportAsDxf(string path, Dxf.DxfAcadVer version)
+        public void ExportAsDxf(string path, object version)
         {
             try
             {
@@ -2448,62 +2448,62 @@ namespace Test2d
 
                         string ext = System.IO.Path.GetExtension(path);
 
-                        if (string.Compare(ext, ".project", true, CultureInfo.InvariantCulture) == 0)
+                        if (string.Compare(ext, ".project", true) == 0)
                         {
                             Open(path);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".csv", true, CultureInfo.InvariantCulture) == 0)
+                        else if (string.Compare(ext, ".csv", true) == 0)
                         {
                             ImportData(path);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".style", true, CultureInfo.InvariantCulture) == 0)
+                        else if (string.Compare(ext, ".style", true) == 0)
                         {
                             ImportObject(path, _editor.Project.CurrentStyleLibrary, ImportType.Style);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".styles", true, CultureInfo.InvariantCulture) == 0)
+                        else if (string.Compare(ext, ".styles", true) == 0)
                         {
                             ImportObject(path, _editor.Project.CurrentStyleLibrary, ImportType.Styles);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".StyleLibrary", true, CultureInfo.InvariantCulture) == 0)
+                        else if (string.Compare(ext, ".StyleLibrary", true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.StyleLibrary);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".StyleLibraries", true, CultureInfo.InvariantCulture) == 0)
+                        else if (string.Compare(ext, ".StyleLibraries", true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.StyleLibraries);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".group", true, CultureInfo.InvariantCulture) == 0)
+                        else if (string.Compare(ext, ".group", true) == 0)
                         {
                             ImportObject(path, _editor.Project.CurrentGroupLibrary, ImportType.Group);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".groups", true, CultureInfo.InvariantCulture) == 0)
+                        else if (string.Compare(ext, ".groups", true) == 0)
                         {
                             ImportObject(path, _editor.Project.CurrentGroupLibrary, ImportType.Groups);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".grouplibrary", true, CultureInfo.InvariantCulture) == 0)
+                        else if (string.Compare(ext, ".grouplibrary", true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.GroupLibrary);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".grouplibraries", true, CultureInfo.InvariantCulture) == 0)
+                        else if (string.Compare(ext, ".grouplibraries", true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.GroupLibraries);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".template", true, CultureInfo.InvariantCulture) == 0)
+                        else if (string.Compare(ext, ".template", true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.Template);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".templates", true, CultureInfo.InvariantCulture) == 0)
+                        else if (string.Compare(ext, ".templates", true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.Templates);
                             result = true;
@@ -3001,13 +3001,17 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public void InitializeEditor()
+        public void InitializeEditor(ILog log)
         {
             try
             {
                 _editor = Editor.Create(_projectFactory.GetProject(), _renderers);
-                _editor.Log = new TraceLog();
-                _editor.Log.Initialize("Test2d.log");
+
+                if (log != null)
+                {
+                    _editor.Log = log;
+                    _editor.Log.Initialize("Test2d.log");
+                }
 
                 _commands = new EditorCommands();
 
@@ -3392,8 +3396,8 @@ namespace Test2d
                 }
                 else
                 {
-                    Debug.Print(ex.Message);
-                    Debug.Print(ex.StackTrace);
+                    Debug.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.StackTrace);
                 }
             }
         }
