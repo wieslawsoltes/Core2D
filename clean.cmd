@@ -1,8 +1,5 @@
 @echo off
 
-rmdir /Q /S Dependencies\Compressor.GZip\bin
-rmdir /Q /S Dependencies\Compressor.GZip\obj
-
 rmdir /Q /S Dependencies\FileWriter.Dxf\bin
 rmdir /Q /S Dependencies\FileWriter.Dxf\obj
 
@@ -14,6 +11,9 @@ rmdir /Q /S Dependencies\FileWriter.Pdf-core\obj
 
 rmdir /Q /S Dependencies\FileWriter.Pdf-wpf\bin
 rmdir /Q /S Dependencies\FileWriter.Pdf-wpf\obj
+
+rmdir /Q /S Dependencies\Log.Trace\bin
+rmdir /Q /S Dependencies\Log.Trace\obj
 
 rmdir /Q /S Dependencies\Renderer.Dxf\bin
 rmdir /Q /S Dependencies\Renderer.Dxf\obj
@@ -41,6 +41,15 @@ rmdir /Q /S Dependencies\TextFieldReader.CsvHelper\obj
 
 rmdir /Q /S Dependencies\TextFieldWriter.CsvHelper\bin
 rmdir /Q /S Dependencies\TextFieldWriter.CsvHelper\obj
+
+rmdir /Q /S Portable\Test2d\bin
+rmdir /Q /S Portable\Test2d\obj
+
+rmdir /Q /S Portable\Test2d.Editor\bin
+rmdir /Q /S Portable\Test2d.Editor\obj
+
+rmdir /Q /S Portable\Test2d.Interfaces\bin
+rmdir /Q /S Portable\Test2d.Interfaces\obj
 
 rmdir /Q /S Test2d\bin
 rmdir /Q /S Test2d\obj
