@@ -93,6 +93,9 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Dependencies\Serializer.Newtonsoft\NewtonsoftSerializer.cs">
+      <Link>Serializer\NewtonsoftSerializer.cs</Link>
+    </Compile>
     <Compile Include="..\Test2d\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
@@ -103,6 +106,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderer\Path\XPathGeometryConverter.cs" />
     <Compile Include="Util\PointerPressType.cs" />
     <Compile Include="Util\TextClipboard.cs" />
     <Compile Include="Renderer\Win2dRenderer.cs" />
