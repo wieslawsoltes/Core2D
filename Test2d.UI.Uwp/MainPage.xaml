@@ -1,23 +1,57 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
 <Page
-    x:Class="Test2d.UI.Uwp.MainPage"
+    x:Class="Test.Uwp.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Test2d.UI.Uwp"
+    xmlns:local="using:Test.Uwp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    xmlns:core="using:Test2d"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
-        <canvas:CanvasControl 
-            x:Name="canvas"
-            PointerPressed="CanvasControl_PointerPressed"
-            PointerReleased="CanvasControl_PointerReleased"
-            PointerMoved="CanvasControl_PointerMoved"
-            PointerWheelChanged="CanvasControl_PointerWheelChanged"
-            Draw="CanvasControl_Draw">
-        </canvas:CanvasControl>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto"            
+            Grid.Column="0" 
+            Grid.Row="0" 
+            Grid.RowSpan="2">
+            <canvas:CanvasControl x:Name="canvas"/>
+        </ScrollViewer>
+        <ComboBox 
+            ItemsSource="{Binding Editor.Project.StyleLibraries, Mode=TwoWay}" 
+            SelectedItem="{Binding Editor.Project.CurrentStyleLibrary, Mode=TwoWay}" 
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+            Grid.Column="1" 
+            Grid.Row="0"
+            HorizontalAlignment="Stretch">
+            <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="core:StyleLibrary">
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ListBox 
+            ItemsSource="{Binding Editor.Project.CurrentStyleLibrary.Styles, Mode=TwoWay}" 
+            SelectedItem="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}" 
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+            Grid.Column="1"
+            Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="core:BaseStyle">
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Page>
