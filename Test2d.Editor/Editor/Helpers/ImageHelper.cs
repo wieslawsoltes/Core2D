@@ -74,6 +74,9 @@ namespace Test2d
             {
                 case State.None:
                     {
+                        if (_editor.GetImagePath == null)
+                            return;
+
                         var path = _editor.GetImagePath();
                         if (string.IsNullOrEmpty(path))
                             return;

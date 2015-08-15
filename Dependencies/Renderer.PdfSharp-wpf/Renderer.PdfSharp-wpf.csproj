@@ -59,6 +59,7 @@
     <Compile Include="..\..\Test2d\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Path\XPathGeometryConverter.cs" />
     <Compile Include="PdfRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

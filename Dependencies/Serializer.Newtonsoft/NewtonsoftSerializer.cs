@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Bson;
 using System;
@@ -28,8 +30,7 @@ namespace Test2d
                 Formatting = Formatting.Indented,
                 TypeNameHandling = TypeNameHandling.Objects,
                 PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ProjectContractResolver()
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize
             };
             settings.Converters.Add(new KeyValuePairConverter());
             var json = JsonConvert.SerializeObject(value, settings);
@@ -52,8 +53,7 @@ namespace Test2d
                     {
                         TypeNameHandling = TypeNameHandling.Objects,
                         PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                        ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                        ContractResolver = new ProjectContractResolver()
+                        ReferenceLoopHandling = ReferenceLoopHandling.Serialize
                     };
                     serializer.Serialize(writer, value);
                 }
@@ -77,8 +77,7 @@ namespace Test2d
                     {
                         TypeNameHandling = TypeNameHandling.Objects,
                         PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                        ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                        ContractResolver = new ProjectContractResolver()
+                        ReferenceLoopHandling = ReferenceLoopHandling.Serialize
                     };
                     var value = serializer.Deserialize<T>(reader);
                     return value;
@@ -99,8 +98,7 @@ namespace Test2d
                 Formatting = Formatting.Indented,
                 TypeNameHandling = TypeNameHandling.Objects,
                 PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ProjectContractResolver()
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize
             };
             settings.Converters.Add(new KeyValuePairConverter());
             var value = JsonConvert.DeserializeObject<T>(json, settings);
