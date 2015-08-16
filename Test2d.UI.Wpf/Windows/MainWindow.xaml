@@ -172,7 +172,8 @@
                                         VerticalAlignment="Stretch" 
                                         HorizontalAlignment="Stretch"
                                         Width="{Binding Editor.Project.CurrentContainer.Width}" 
-                                        Height="{Binding Editor.Project.CurrentContainer.Height}">
+                                        Height="{Binding Editor.Project.CurrentContainer.Height}"
+                                        Tag="{Binding Editor.CancelAvailable}">
                                         <controls:ContainerControl x:Name="containerControl">
                                             <controls:ContainerControl.Style>
                                                 <Style TargetType="controls:ContainerControl">
