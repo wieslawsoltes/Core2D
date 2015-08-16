@@ -184,119 +184,119 @@ namespace TestWinForms
             // 
             this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
             this.noneToolStripMenuItem.ShortcutKeyDisplayString = "N";
-            this.noneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.noneToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.noneToolStripMenuItem.Text = "&None";
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(137, 6);
             // 
             // selectionToolStripMenuItem
             // 
             this.selectionToolStripMenuItem.Name = "selectionToolStripMenuItem";
             this.selectionToolStripMenuItem.ShortcutKeyDisplayString = "S";
-            this.selectionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.selectionToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.selectionToolStripMenuItem.Text = "&Selection";
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(137, 6);
             // 
             // pointToolStripMenuItem
             // 
             this.pointToolStripMenuItem.Name = "pointToolStripMenuItem";
             this.pointToolStripMenuItem.ShortcutKeyDisplayString = "P";
-            this.pointToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pointToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.pointToolStripMenuItem.Text = "&Point";
             // 
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator17.Size = new System.Drawing.Size(137, 6);
             // 
             // lineToolStripMenuItem
             // 
             this.lineToolStripMenuItem.Name = "lineToolStripMenuItem";
             this.lineToolStripMenuItem.ShortcutKeyDisplayString = "L";
-            this.lineToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lineToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.lineToolStripMenuItem.Text = "&Line";
             // 
             // arcToolStripMenuItem
             // 
             this.arcToolStripMenuItem.Name = "arcToolStripMenuItem";
             this.arcToolStripMenuItem.ShortcutKeyDisplayString = "A";
-            this.arcToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.arcToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.arcToolStripMenuItem.Text = "&Arc";
             // 
             // bezierToolStripMenuItem
             // 
             this.bezierToolStripMenuItem.Name = "bezierToolStripMenuItem";
             this.bezierToolStripMenuItem.ShortcutKeyDisplayString = "B";
-            this.bezierToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.bezierToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.bezierToolStripMenuItem.Text = "&Bezier";
             // 
             // qBezierToolStripMenuItem
             // 
             this.qBezierToolStripMenuItem.Name = "qBezierToolStripMenuItem";
             this.qBezierToolStripMenuItem.ShortcutKeyDisplayString = "Q";
-            this.qBezierToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.qBezierToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.qBezierToolStripMenuItem.Text = "&QBezier";
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(137, 6);
             // 
             // pathToolStripMenuItem
             // 
             this.pathToolStripMenuItem.Name = "pathToolStripMenuItem";
             this.pathToolStripMenuItem.ShortcutKeyDisplayString = "H";
-            this.pathToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pathToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.pathToolStripMenuItem.Text = "Pat&h";
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(137, 6);
             // 
             // rectangleToolStripMenuItem
             // 
             this.rectangleToolStripMenuItem.Name = "rectangleToolStripMenuItem";
             this.rectangleToolStripMenuItem.ShortcutKeyDisplayString = "R";
-            this.rectangleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rectangleToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.rectangleToolStripMenuItem.Text = "&Rectangle";
             // 
             // ellipseToolStripMenuItem
             // 
             this.ellipseToolStripMenuItem.Name = "ellipseToolStripMenuItem";
             this.ellipseToolStripMenuItem.ShortcutKeyDisplayString = "E";
-            this.ellipseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ellipseToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.ellipseToolStripMenuItem.Text = "&Ellipse";
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(137, 6);
             // 
             // textToolStripMenuItem
             // 
             this.textToolStripMenuItem.Name = "textToolStripMenuItem";
             this.textToolStripMenuItem.ShortcutKeyDisplayString = "T";
-            this.textToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.textToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.textToolStripMenuItem.Text = "&Text";
             // 
             // toolStripSeparator23
             // 
             this.toolStripSeparator23.Name = "toolStripSeparator23";
-            this.toolStripSeparator23.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator23.Size = new System.Drawing.Size(137, 6);
             // 
             // imageToolStripMenuItem
             // 
             this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
             this.imageToolStripMenuItem.ShortcutKeyDisplayString = "I";
-            this.imageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.imageToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.imageToolStripMenuItem.Text = "&Image";
             // 
             // optionsToolStripMenuItem
