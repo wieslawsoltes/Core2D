@@ -18,6 +18,7 @@ using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Provider;
+using Windows.Storage.Streams;
 using Windows.System;
 using Windows.UI;
 using Windows.UI.Core;
@@ -37,8 +38,9 @@ namespace Test.Uwp
     public sealed partial class MainPage : Page, T2d.IView
     {
         private T2d.EditorContext _context;
+        private Win2dRenderer _renderer;
         private PointerPressType _pressed;
-        private string _imagePath;
+        private Uri _imagePath;
 
         public MainPage()
         {
@@ -55,10 +57,12 @@ namespace Test.Uwp
 
         private void InitializeContext()
         {
+            _renderer = new Win2dRenderer();
+
             _context = new T2d.EditorContext()
             {
                 View = this,
-                Renderers = new T2d.IRenderer[] { new Win2dRenderer() },
+                Renderers = new T2d.IRenderer[] { _renderer },
                 ProjectFactory = new T2d.ProjectFactory(),
                 TextClipboard = new TextClipboard(),
                 Serializer = new T2d.NewtonsoftSerializer(),
@@ -179,13 +183,23 @@ namespace Test.Uwp
                         {
                             if (_context.Editor.IsLeftDownAvailable())
                             {
-                                if (_context.Editor.CurrentTool == T2d.Tool.Image)
+                                if (_context.Editor.CurrentTool == T2d.Tool.Image && _imagePath == null)
                                 {
-                                    var path = await GetImagePathAsync();
-                                    if (path == null)
+                                    var file = await GetImagePathAsync();
+                                    if (file == null)
                                         return;
-                                    else
-                                        _imagePath = path;
+
+                                    var bi = await LoadImage(file, canvas);
+                                    if (bi == null)
+                                        return;
+
+                                    var uri = new Uri(file.Path);
+                                    _renderer.CacheImage(uri, bi);
+                                    _imagePath = uri;
+                                }
+                                else
+                                {
+                                    _imagePath = null;
                                 }
 
                                 _context.Editor.LeftDown(pos.X, pos.Y);
@@ -553,6 +567,9 @@ namespace Test.Uwp
                 var project = _context.Serializer.FromJson<T2d.Project>(json);
                 _context.Editor.History.Reset();
                 _context.Editor.Unload();
+
+                await CacheImages(project);
+
                 _context.Editor.Load(project);
 
                 InvalidateContainer();
@@ -576,7 +593,31 @@ namespace Test.Uwp
             }
         }
 
-        public async Task<string> GetImagePathAsync()
+        private async Task<CanvasBitmap> LoadImage(IStorageFile file, ICanvasResourceCreator resourceCreator)
+        {
+            var stream = await file.OpenReadAsync();
+            var bi = await CanvasBitmap.LoadAsync(resourceCreator, stream);
+            return bi;
+        }
+
+        private async Task CacheImages(T2d.Project project)
+        {
+            var images = T2d.Editor.GetAllShapes<T2d.XImage>(project);
+            if (images != null)
+            {
+                foreach (var image in images)
+                {
+                    var file = await StorageFile.GetFileFromPathAsync(image.Path.LocalPath);
+                    var bi = await LoadImage(file, canvas);
+                    if (bi != null)
+                    {
+                        _renderer.CacheImage(image.Path, bi);
+                    }
+                }
+            }
+        }
+
+        private async Task<IStorageFile> GetImagePathAsync()
         {
             var picker = new FileOpenPicker();
             picker.ViewMode = PickerViewMode.Thumbnail;
@@ -590,12 +631,12 @@ namespace Test.Uwp
             var file = await picker.PickSingleFileAsync();
             if (file != null)
             {
-                return file.Path;
+                return file;
             }
             return null;
         }
 
-        public async Task<IStorageFile> GetOpenProjectPathAsync()
+        private async Task<IStorageFile> GetOpenProjectPathAsync()
         {
             var picker = new FileOpenPicker();
             picker.ViewMode = PickerViewMode.List;
@@ -609,7 +650,7 @@ namespace Test.Uwp
             return null;
         }
 
-        public async Task<IStorageFile> GetSaveProjectPathAsync(string name)
+        private async Task<IStorageFile> GetSaveProjectPathAsync(string name)
         {
             var picker = new FileSavePicker();
             picker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
