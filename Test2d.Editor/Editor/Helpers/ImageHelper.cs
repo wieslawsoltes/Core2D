@@ -77,11 +77,9 @@ namespace Test2d
                         if (_editor.GetImagePath == null)
                             return;
 
-                        var path = _editor.GetImagePath();
-                        if (string.IsNullOrEmpty(path))
+                        var uri = _editor.GetImagePath();
+                        if (string.IsNullOrEmpty(uri.LocalPath))
                             return;
-
-                        var uri = new Uri(path);
 
                         _shape = XImage.Create(
                             sx, sy,
