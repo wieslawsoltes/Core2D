@@ -71,6 +71,16 @@ namespace Test.Uwp
             _context.Editor.Renderers[0].State.DrawShapeState = T2d.ShapeState.Visible;
             _context.Editor.GetImagePath = () => _imagePath;
 
+            _context.Commands.OpenCommand =
+                T2d.Command<object>.Create(
+                    async (parameter) => await OnOpen(),
+                    (parameter) => _context.IsEditMode());
+
+            _context.Commands.SaveAsCommand =
+                T2d.Command.Create(
+                    async () => await OnSaveAs(),
+                    () => _context.IsEditMode());
+
             DataContext = _context;
         }
 
@@ -88,6 +98,9 @@ namespace Test.Uwp
 
         private void SetCanvasSize()
         {
+            if (_context.Editor.Project == null)
+                return;
+
             var container = _context.Editor.Project.CurrentContainer;
             if (container == null)
                 return;
@@ -98,6 +111,9 @@ namespace Test.Uwp
 
         private void SetContainerInvalidation()
         {
+            if (_context.Editor.Project == null)
+                return;
+
             var container = _context.Editor.Project.CurrentContainer;
             if (container == null)
                 return;
@@ -134,6 +150,9 @@ namespace Test.Uwp
         {
             SetContainerInvalidation();
             SetCanvasSize();
+
+            if (_context.Editor.Project == null)
+                return;
 
             var container = _context.Editor.Project.CurrentContainer;
             if (_context == null)
@@ -602,6 +621,11 @@ namespace Test.Uwp
                 return file;
             }
             return null;
+        }
+
+        private void ContainersListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            InvalidateContainer();
         }
     }
 }
