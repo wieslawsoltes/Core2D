@@ -140,8 +140,15 @@ namespace Test.PanAndZoom
 
                     this.PreviewMouseDown += (s, e) =>
                     {
+                        if (this.Tag != null)
+                        {
+                            bool cancelAvailable = (bool)this.Tag;
+                            if (cancelAvailable)
+                                return;
+                        }
+
                         if (child != null
-                            && e.ChangedButton == MouseButton.Middle
+                            && e.ChangedButton == MouseButton.Right
                             && e.ClickCount == 1
                             && e.ButtonState == MouseButtonState.Pressed)
                         {
@@ -154,8 +161,15 @@ namespace Test.PanAndZoom
 
                     this.MouseUp += (s, e) =>
                     {
+                        if (this.Tag != null)
+                        {
+                            bool cancelAvailable = (bool)this.Tag;
+                            if (cancelAvailable)
+                                return;
+                        }
+
                         if (child != null
-                            && e.ChangedButton == MouseButton.Middle
+                            && e.ChangedButton == MouseButton.Right
                             && e.ClickCount == 1
                             && e.ButtonState == MouseButtonState.Released)
                         {

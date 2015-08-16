@@ -26,6 +26,7 @@ namespace Test2d
         private bool _enableObserver;
         private Observer _observer;
         private History _history;
+        private bool _cancelAvailable;
         private BaseShape _hover;
 
         /// <summary>
@@ -116,6 +117,15 @@ namespace Test2d
         {
             get { return _history; }
             set { Update(ref _history, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets flag indicating that current operation can be canceled.
+        /// </summary>
+        public bool CancelAvailable
+        {
+            get { return _cancelAvailable; }
+            set { Update(ref _cancelAvailable, value); }
         }
 
         /// <summary>
