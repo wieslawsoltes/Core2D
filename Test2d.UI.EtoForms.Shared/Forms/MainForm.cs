@@ -899,15 +899,14 @@ namespace TestEtoForms
         /// 
         /// </summary>
         /// <returns></returns>
-        public string GetImagePath()
+        public Uri GetImagePath()
         {
             var dlg = new OpenFileDialog();
             dlg.Filters.Add(new FileDialogFilter("All", ".*"));
-            dlg.FileName = "";
             var result = dlg.ShowDialog(this);
             if (result == DialogResult.Ok)
             {
-                return dlg.FileName;
+                return new Uri(dlg.FileName);
             }
             return null;
         }
