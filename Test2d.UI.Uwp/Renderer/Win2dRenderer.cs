@@ -200,6 +200,15 @@ namespace Test.Uwp
             }
         }
 
+        public void CacheImage(Uri path, CanvasBitmap bi)
+        {
+            if (_enableImageCache
+                && !_biCache.ContainsKey(path))
+            {
+                _biCache[path] = bi;
+            }
+        }
+
         public void ClearCache(bool isZooming)
         {
             if (!isZooming)
