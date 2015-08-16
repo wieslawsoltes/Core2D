@@ -566,7 +566,7 @@ namespace Test.Windows
         /// 
         /// </summary>
         /// <returns></returns>
-        private string GetImagePath()
+        private Uri GetImagePath()
         {
             var dlg = new OpenFileDialog()
             {
@@ -577,7 +577,7 @@ namespace Test.Windows
 
             if (dlg.ShowDialog() == true)
             {
-                return dlg.FileName;
+                return new Uri(dlg.FileName);
             }
             return null;
         }
