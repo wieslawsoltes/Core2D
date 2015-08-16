@@ -997,7 +997,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Extent.
+        ///   Looks up a localized string similar to Zoom to _Extent.
         /// </summary>
         public static string MenuViewZoomExtent {
             get {
@@ -1006,7 +1006,7 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Reset.
+        ///   Looks up a localized string similar to _Reset Zoom.
         /// </summary>
         public static string MenuViewZoomReset {
             get {
