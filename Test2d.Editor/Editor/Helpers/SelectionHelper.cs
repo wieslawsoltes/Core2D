@@ -56,6 +56,7 @@ namespace Test2d
                                 _historyY = _startY;
                                 GenerateMoveSelectionCache();
                                 _currentState = State.One;
+                                _editor.CancelAvailable = true;
                                 break;
                             }
                         }
@@ -68,6 +69,7 @@ namespace Test2d
                             _historyY = _startY;
                             GenerateMoveSelectionCache();
                             _currentState = State.One;
+                            _editor.CancelAvailable = true;
                             break;
                         }
 
@@ -79,6 +81,7 @@ namespace Test2d
                         _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Add(_shape);
                         _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                         _currentState = State.One;
+                        _editor.CancelAvailable = true;
                     }
                     break;
                 case State.One:
@@ -91,6 +94,7 @@ namespace Test2d
                             _editor.Project.CurrentContainer.WorkingLayer.Shapes = _editor.Project.CurrentContainer.WorkingLayer.Shapes.Remove(_shape);
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = State.None;
+                            _editor.CancelAvailable = false;
                         }
                     }
                     break;
@@ -149,6 +153,7 @@ namespace Test2d
                             }
                             DisposeMoveSelectionCache();
                             _currentState = State.None;
+                            _editor.CancelAvailable = false;
                             break;
                         }
 
@@ -161,6 +166,7 @@ namespace Test2d
                             _editor.Project.CurrentContainer.WorkingLayer.Invalidate();
                             _currentState = State.None;
                             _editor.TryToSelectShapes(_editor.Project.CurrentContainer, rectangle);
+                            _editor.CancelAvailable = false;
                         }
                     }
                     break;
@@ -184,6 +190,7 @@ namespace Test2d
                 case State.One:
                     {
                         DisposeMoveSelectionCache();
+                        _editor.CancelAvailable = false;
                     }
                     break;
             }

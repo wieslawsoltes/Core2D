@@ -90,6 +90,7 @@ namespace Test2d
                         Move(_shape);
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         _currentState = State.One;
+                        _editor.CancelAvailable = true;
                     }
                     break;
                 case State.One:
@@ -108,6 +109,7 @@ namespace Test2d
                             Finalize(_shape);
                             _editor.AddWithHistory(_shape);
                             _currentState = State.None;
+                            _editor.CancelAvailable = false;
                         }
                     }
                     break;
@@ -141,6 +143,7 @@ namespace Test2d
                         Remove();
                         _editor.Project.CurrentContainer.HelperLayer.Invalidate();
                         _currentState = State.None;
+                        _editor.CancelAvailable = false;
                     }
                     break;
             }
