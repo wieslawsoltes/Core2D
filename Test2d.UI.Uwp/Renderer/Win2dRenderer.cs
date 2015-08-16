@@ -694,7 +694,7 @@ namespace Test.Uwp
                 if (!image.Path.IsAbsoluteUri /*|| !System.IO.File.Exists(image.Path.LocalPath)*/)
                     return;
 
-                // TODO: CanvasBitmap.LoadAsync
+                // TODO: CanvasBitmap.LoadAsync throws access denied.
                 var bi = CanvasBitmap.LoadAsync(_ds, image.Path.LocalPath).GetResults();
 
                 if (_enableImageCache)
