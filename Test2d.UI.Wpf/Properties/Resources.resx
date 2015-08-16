@@ -280,10 +280,10 @@
     <value>_Zoom</value>
   </data>
   <data name="MenuViewZoomReset" xml:space="preserve">
-    <value>_Reset</value>
+    <value>_Reset Zoom</value>
   </data>
   <data name="MenuViewZoomExtent" xml:space="preserve">
-    <value>_Extent</value>
+    <value>Zoom to _Extent</value>
   </data>
   <data name="MenuViewProjectWindow" xml:space="preserve">
     <value>Project E_xplorer</value>
