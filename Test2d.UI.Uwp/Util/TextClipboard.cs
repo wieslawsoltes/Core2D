@@ -62,6 +62,7 @@ namespace Test.Uwp
         /// <returns></returns>
         public bool ContainsText()
         {
+            // TODO: Do not use .Result.
             return ContainsTextAsync().Result;
         }
     }
