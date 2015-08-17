@@ -14,7 +14,17 @@ namespace Test.PanAndZoom
         /// <summary>
         /// 
         /// </summary>
-        public bool EnableAutoFit { get; set; }
+        public bool EnableAutoFit
+        {
+            get { return (bool)GetValue(EnableAutoFitProperty); }
+            set { SetValue(EnableAutoFitProperty, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static readonly DependencyProperty EnableAutoFitProperty =
+            DependencyProperty.Register("EnableAutoFit", typeof(bool), typeof(PanAndZoomGrid), new PropertyMetadata(true));
 
         /// <summary>
         /// 
