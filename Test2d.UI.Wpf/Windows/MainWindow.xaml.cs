@@ -1144,8 +1144,6 @@ namespace Test.Windows
         /// <param name="context"></param>
         private void InitializeZoom(EditorContext context)
         {
-            panAndZoomGrid.EnableAutoFit = context.Renderers[0].State.EnableAutofit;
-
             border.InvalidateChild =
                 (z, x, y) =>
                 {
@@ -1167,9 +1165,6 @@ namespace Test.Windows
                         && context.Editor.Project != null
                         && context.Editor.Project.CurrentContainer != null)
                     {
-                        if (!context.Renderers[0].State.EnableAutofit)
-                            return;
-
                         border.AutoFit(
                             width,
                             height,
