@@ -1231,6 +1231,312 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Containers.
+        /// </summary>
+        public static string StatusContainers {
+            get {
+                return ResourceManager.GetString("StatusContainers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Documents.
+        /// </summary>
+        public static string StatusDocuments {
+            get {
+                return ResourceManager.GetString("StatusDocuments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Layers.
+        /// </summary>
+        public static string StatusLayers {
+            get {
+                return ResourceManager.GetString("StatusLayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.
+        /// </summary>
+        public static string StatusNoContainers {
+            get {
+                return ResourceManager.GetString("StatusNoContainers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.
+        /// </summary>
+        public static string StatusNoDocuments {
+            get {
+                return ResourceManager.GetString("StatusNoDocuments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.
+        /// </summary>
+        public static string StatusNoLayers {
+            get {
+                return ResourceManager.GetString("StatusNoLayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.
+        /// </summary>
+        public static string StatusNoSelected {
+            get {
+                return ResourceManager.GetString("StatusNoSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.
+        /// </summary>
+        public static string StatusNoShapes {
+            get {
+                return ResourceManager.GetString("StatusNoShapes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Closed.
+        /// </summary>
+        public static string StatusOptionsClosed {
+            get {
+                return ResourceManager.GetString("StatusOptionsClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connect.
+        /// </summary>
+        public static string StatusOptionsConnect {
+            get {
+                return ResourceManager.GetString("StatusOptionsConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filled.
+        /// </summary>
+        public static string StatusOptionsFilled {
+            get {
+                return ResourceManager.GetString("StatusOptionsFilled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SmoothJoin.
+        /// </summary>
+        public static string StatusOptionsSmoothJoin {
+            get {
+                return ResourceManager.GetString("StatusOptionsSmoothJoin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snap.
+        /// </summary>
+        public static string StatusOptionsSnap {
+            get {
+                return ResourceManager.GetString("StatusOptionsSnap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stroked.
+        /// </summary>
+        public static string StatusOptionsStroked {
+            get {
+                return ResourceManager.GetString("StatusOptionsStroked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arc.
+        /// </summary>
+        public static string StatusPathToolArc {
+            get {
+                return ResourceManager.GetString("StatusPathToolArc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bezier.
+        /// </summary>
+        public static string StatusPathToolBezier {
+            get {
+                return ResourceManager.GetString("StatusPathToolBezier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line.
+        /// </summary>
+        public static string StatusPathToolLine {
+            get {
+                return ResourceManager.GetString("StatusPathToolLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move.
+        /// </summary>
+        public static string StatusPathToolMove {
+            get {
+                return ResourceManager.GetString("StatusPathToolMove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QBezier.
+        /// </summary>
+        public static string StatusPathToolQBezier {
+            get {
+                return ResourceManager.GetString("StatusPathToolQBezier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected.
+        /// </summary>
+        public static string StatusSelected {
+            get {
+                return ResourceManager.GetString("StatusSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected: 1.
+        /// </summary>
+        public static string StatusSelectedOne {
+            get {
+                return ResourceManager.GetString("StatusSelectedOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shapes.
+        /// </summary>
+        public static string StatusShapes {
+            get {
+                return ResourceManager.GetString("StatusShapes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arc.
+        /// </summary>
+        public static string StatusToolArc {
+            get {
+                return ResourceManager.GetString("StatusToolArc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bezier.
+        /// </summary>
+        public static string StatusToolBezier {
+            get {
+                return ResourceManager.GetString("StatusToolBezier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ellipse.
+        /// </summary>
+        public static string StatusToolEllipse {
+            get {
+                return ResourceManager.GetString("StatusToolEllipse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image.
+        /// </summary>
+        public static string StatusToolImage {
+            get {
+                return ResourceManager.GetString("StatusToolImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line.
+        /// </summary>
+        public static string StatusToolLine {
+            get {
+                return ResourceManager.GetString("StatusToolLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string StatusToolNone {
+            get {
+                return ResourceManager.GetString("StatusToolNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path.
+        /// </summary>
+        public static string StatusToolPath {
+            get {
+                return ResourceManager.GetString("StatusToolPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Point.
+        /// </summary>
+        public static string StatusToolPoint {
+            get {
+                return ResourceManager.GetString("StatusToolPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QBezier.
+        /// </summary>
+        public static string StatusToolQBezier {
+            get {
+                return ResourceManager.GetString("StatusToolQBezier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rectangle.
+        /// </summary>
+        public static string StatusToolRectangle {
+            get {
+                return ResourceManager.GetString("StatusToolRectangle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selection.
+        /// </summary>
+        public static string StatusToolSelection {
+            get {
+                return ResourceManager.GetString("StatusToolSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text.
+        /// </summary>
+        public static string StatusToolText {
+            get {
+                return ResourceManager.GetString("StatusToolText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Container.
         /// </summary>
         public static string WindowTitleContainer {

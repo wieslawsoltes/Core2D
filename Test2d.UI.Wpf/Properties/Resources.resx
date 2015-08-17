@@ -555,4 +555,106 @@
   <data name="MenuPathToolQBezier" xml:space="preserve">
     <value>_QBezier</value>
   </data>
+  <data name="StatusContainers" xml:space="preserve">
+    <value>Containers</value>
+  </data>
+  <data name="StatusDocuments" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="StatusLayers" xml:space="preserve">
+    <value>Layers</value>
+  </data>
+  <data name="StatusNoContainers" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="StatusNoDocuments" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="StatusNoLayers" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="StatusNoSelected" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="StatusNoShapes" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="StatusOptionsClosed" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="StatusOptionsConnect" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="StatusOptionsFilled" xml:space="preserve">
+    <value>Filled</value>
+  </data>
+  <data name="StatusOptionsSmoothJoin" xml:space="preserve">
+    <value>SmoothJoin</value>
+  </data>
+  <data name="StatusOptionsSnap" xml:space="preserve">
+    <value>Snap</value>
+  </data>
+  <data name="StatusOptionsStroked" xml:space="preserve">
+    <value>Stroked</value>
+  </data>
+  <data name="StatusPathToolArc" xml:space="preserve">
+    <value>Arc</value>
+  </data>
+  <data name="StatusPathToolBezier" xml:space="preserve">
+    <value>Bezier</value>
+  </data>
+  <data name="StatusPathToolLine" xml:space="preserve">
+    <value>Line</value>
+  </data>
+  <data name="StatusPathToolMove" xml:space="preserve">
+    <value>Move</value>
+  </data>
+  <data name="StatusPathToolQBezier" xml:space="preserve">
+    <value>QBezier</value>
+  </data>
+  <data name="StatusSelected" xml:space="preserve">
+    <value>Selected</value>
+  </data>
+  <data name="StatusSelectedOne" xml:space="preserve">
+    <value>Selected: 1</value>
+  </data>
+  <data name="StatusShapes" xml:space="preserve">
+    <value>Shapes</value>
+  </data>
+  <data name="StatusToolArc" xml:space="preserve">
+    <value>Arc</value>
+  </data>
+  <data name="StatusToolBezier" xml:space="preserve">
+    <value>Bezier</value>
+  </data>
+  <data name="StatusToolEllipse" xml:space="preserve">
+    <value>Ellipse</value>
+  </data>
+  <data name="StatusToolImage" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="StatusToolLine" xml:space="preserve">
+    <value>Line</value>
+  </data>
+  <data name="StatusToolNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="StatusToolPath" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="StatusToolPoint" xml:space="preserve">
+    <value>Point</value>
+  </data>
+  <data name="StatusToolQBezier" xml:space="preserve">
+    <value>QBezier</value>
+  </data>
+  <data name="StatusToolRectangle" xml:space="preserve">
+    <value>Rectangle</value>
+  </data>
+  <data name="StatusToolSelection" xml:space="preserve">
+    <value>Selection</value>
+  </data>
+  <data name="StatusToolText" xml:space="preserve">
+    <value>Text</value>
+  </data>
 </root>
