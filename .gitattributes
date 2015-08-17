@@ -21,6 +21,8 @@
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
 
+*.png  diff=exif
+
 # New lines
 * eol=crlf
 
