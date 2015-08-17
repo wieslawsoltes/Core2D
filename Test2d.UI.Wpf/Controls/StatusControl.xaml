@@ -311,97 +311,121 @@
         </StatusBarItem>
         <Separator Grid.Column="5"/>
         <StatusBarItem Grid.Column="6">
-            <StatusBarItem.Style>
-                <Style TargetType="StatusBarItem">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Editor.Project.Options.DefaultIsStroked, Mode=OneWay}" Value="False">
-                            <Setter Property="Foreground" Value="DarkGray"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </StatusBarItem.Style>
-            <StatusBarItem.InputBindings>
-                <MouseBinding Command="{Binding Commands.DefaultIsStrokedCommand}" MouseAction="LeftClick" />
-            </StatusBarItem.InputBindings>
-            <TextBlock Text="{x:Static p:Resources.StatusOptionsStroked}" VerticalAlignment="Center"/>
+            <CheckBox IsChecked="{Binding Editor.Project.Options.DefaultIsStroked}">
+                <CheckBox.Template>
+                    <ControlTemplate>
+                        <TextBlock Text="{x:Static p:Resources.StatusOptionsStroked}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Editor.Project.Options.DefaultIsStroked, Mode=OneWay}" Value="False">
+                                            <Setter Property="Foreground" Value="DarkGray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </ControlTemplate>
+                </CheckBox.Template>
+            </CheckBox>
         </StatusBarItem>
         <StatusBarItem Grid.Column="7">
-            <StatusBarItem.Style>
-                <Style TargetType="StatusBarItem">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Editor.Project.Options.DefaultIsFilled, Mode=OneWay}" Value="False">
-                            <Setter Property="Foreground" Value="DarkGray"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </StatusBarItem.Style>
-            <StatusBarItem.InputBindings>
-                <MouseBinding Command="{Binding Commands.DefaultIsFilledCommand}" MouseAction="LeftClick" />
-            </StatusBarItem.InputBindings>
-            <TextBlock Text="{x:Static p:Resources.StatusOptionsFilled}" VerticalAlignment="Center"/>
+            <CheckBox IsChecked="{Binding Editor.Project.Options.DefaultIsFilled}">
+                <CheckBox.Template>
+                    <ControlTemplate>
+                        <TextBlock Text="{x:Static p:Resources.StatusOptionsFilled}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Editor.Project.Options.DefaultIsFilled, Mode=OneWay}" Value="False">
+                                            <Setter Property="Foreground" Value="DarkGray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </ControlTemplate>
+                </CheckBox.Template>
+            </CheckBox>
         </StatusBarItem>
         <Separator Grid.Column="8"/>
         <StatusBarItem Grid.Column="9">
-            <StatusBarItem.Style>
-                <Style TargetType="StatusBarItem">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Editor.Project.Options.DefaultIsClosed, Mode=OneWay}" Value="False">
-                            <Setter Property="Foreground" Value="DarkGray"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </StatusBarItem.Style>
-            <StatusBarItem.InputBindings>
-                <MouseBinding Command="{Binding Commands.DefaultIsClosedCommand}" MouseAction="LeftClick" />
-            </StatusBarItem.InputBindings>
-            <TextBlock Text="{x:Static p:Resources.StatusOptionsClosed}" VerticalAlignment="Center"/>
+            <CheckBox IsChecked="{Binding Editor.Project.Options.DefaultIsClosed}">
+                <CheckBox.Template>
+                    <ControlTemplate>
+                        <TextBlock Text="{x:Static p:Resources.StatusOptionsClosed}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Editor.Project.Options.DefaultIsClosed, Mode=OneWay}" Value="False">
+                                            <Setter Property="Foreground" Value="DarkGray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </ControlTemplate>
+                </CheckBox.Template>
+            </CheckBox>
         </StatusBarItem>
         <StatusBarItem Grid.Column="10">
-            <StatusBarItem.Style>
-                <Style TargetType="StatusBarItem">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Editor.Project.Options.DefaultIsSmoothJoin, Mode=OneWay}" Value="False">
-                            <Setter Property="Foreground" Value="DarkGray"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </StatusBarItem.Style>
-            <StatusBarItem.InputBindings>
-                <MouseBinding Command="{Binding Commands.DefaultIsSmoothJoinCommand}" MouseAction="LeftClick" />
-            </StatusBarItem.InputBindings>
-            <TextBlock Text="{x:Static p:Resources.StatusOptionsSmoothJoin}" VerticalAlignment="Center"/>
+            <CheckBox IsChecked="{Binding Editor.Project.Options.DefaultIsSmoothJoin}">
+                <CheckBox.Template>
+                    <ControlTemplate>
+                        <TextBlock Text="{x:Static p:Resources.StatusOptionsSmoothJoin}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Editor.Project.Options.DefaultIsSmoothJoin, Mode=OneWay}" Value="False">
+                                            <Setter Property="Foreground" Value="DarkGray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </ControlTemplate>
+                </CheckBox.Template>
+            </CheckBox>
         </StatusBarItem>
         <Separator Grid.Column="11"/>
         <StatusBarItem Grid.Column="12">
-            <StatusBarItem.Style>
-                <Style TargetType="StatusBarItem">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Editor.Project.Options.SnapToGrid, Mode=OneWay}" Value="False">
-                            <Setter Property="Foreground" Value="DarkGray"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </StatusBarItem.Style>
-            <StatusBarItem.InputBindings>
-                <MouseBinding Command="{Binding Commands.SnapToGridCommand}" MouseAction="LeftClick" />
-            </StatusBarItem.InputBindings>
-            <TextBlock Text="{x:Static p:Resources.StatusOptionsSnap}" VerticalAlignment="Center"/>
+            <CheckBox IsChecked="{Binding Editor.Project.Options.SnapToGrid}">
+                <CheckBox.Template>
+                    <ControlTemplate>
+                        <TextBlock Text="{x:Static p:Resources.StatusOptionsSnap}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Editor.Project.Options.SnapToGrid, Mode=OneWay}" Value="False">
+                                            <Setter Property="Foreground" Value="DarkGray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </ControlTemplate>
+                </CheckBox.Template>
+            </CheckBox>
         </StatusBarItem>
         <Separator Grid.Column="13"/>
         <StatusBarItem Grid.Column="14">
-            <StatusBarItem.Style>
-                <Style TargetType="StatusBarItem">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Editor.Project.Options.TryToConnect, Mode=OneWay}" Value="False">
-                            <Setter Property="Foreground" Value="DarkGray"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </StatusBarItem.Style>
-            <StatusBarItem.InputBindings>
-                <MouseBinding Command="{Binding Commands.TryToConnectCommand}" MouseAction="LeftClick" />
-            </StatusBarItem.InputBindings>
-            <TextBlock Text="{x:Static p:Resources.StatusOptionsConnect}" VerticalAlignment="Center"/>
+            <CheckBox IsChecked="{Binding Editor.Project.Options.TryToConnect}">
+                <CheckBox.Template>
+                    <ControlTemplate>
+                        <TextBlock Text="{x:Static p:Resources.StatusOptionsConnect}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Editor.Project.Options.TryToConnect, Mode=OneWay}" Value="False">
+                                            <Setter Property="Foreground" Value="DarkGray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </ControlTemplate>
+                </CheckBox.Template>
+            </CheckBox>
         </StatusBarItem>
         <Separator Grid.Column="15"/>
         <StatusBarItem Grid.Column="16">
