@@ -263,9 +263,16 @@
                           Command="{Binding Commands.ZoomResetCommand}" 
                           InputGestureText="Z">
                 </MenuItem>
+                <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuViewZoomExtent}" 
                           Command="{Binding Commands.ZoomExtentCommand}" 
                           InputGestureText="X">
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="{x:Static p:Resources.MenuViewZoomAutofit}" 
+                          IsCheckable="True" 
+                          IsChecked="{Binding Editor.Renderers[0].State.EnableAutofit, Mode=TwoWay}"
+                          InputGestureText="">
                 </MenuItem>
             </MenuItem>
             <Separator/>
