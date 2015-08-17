@@ -513,10 +513,29 @@ namespace Test.Windows
         private void OnCopyAsEmf()
         {
             var context = DataContext as EditorContext;
-            if (context == null)
+            if (context == null 
+                || context.Editor == null 
+                || context.Editor.Project == null
+                || context.Editor.Project.CurrentContainer == null)
                 return;
 
-            (new EmfWriter()).SetClipboard(context.Editor.Project.CurrentContainer);
+            if (context.Editor.Renderers[0].State.SelectedShape != null)
+            {
+                var container = context.Editor.Project.CurrentContainer;
+                var shapes = Enumerable.Repeat(context.Editor.Renderers[0].State.SelectedShape, 1).ToList();
+                (new EmfWriter()).SetClipboard(shapes, container.Width, container.Height, container.Properties);
+            }
+            else if (context.Editor.Renderers[0].State.SelectedShapes != null)
+            {
+                var container = context.Editor.Project.CurrentContainer;
+                var shapes = context.Editor.Renderers[0].State.SelectedShapes.ToList();
+                (new EmfWriter()).SetClipboard(shapes, container.Width, container.Height, container.Properties);
+            }
+            else
+            {
+                var container = context.Editor.Project.CurrentContainer;
+                (new EmfWriter()).SetClipboard(container);
+            }
         }
 
         /// <summary>
