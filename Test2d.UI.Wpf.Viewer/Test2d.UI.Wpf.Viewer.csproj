@@ -42,6 +42,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -106,6 +107,10 @@
     <ProjectReference Include="..\Dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
       <Project>{08e4e8bf-e513-4a8d-835c-1eed6ecb4a21}</Project>
       <Name>Serializer.Newtonsoft</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test2d.Interfaces\Test2d.Interfaces.csproj">
+      <Project>{C3E348E1-BF9E-4A71-A1F7-61B7607E0A20}</Project>
+      <Name>Test2d.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Test2d\Test2d.csproj">
       <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
