@@ -112,6 +112,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="5"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="3"/>
         </Grid.RowDefinitions>
         <controls:MenuControl Grid.Row="0"/>
         <ad:DockingManager x:Name="dockingManager" Grid.Row="2" Margin="0,5,0,0">
@@ -160,7 +161,8 @@
                                     ClipToBounds="True"
                                     Background="Transparent"
                                     FocusVisualStyle="{x:Null}"
-                                    Focusable="False">
+                                    Focusable="False"
+                                    EnableAutoFit="{Binding Editor.Renderers[0].State.EnableAutofit}">
                                     <paz:PanAndZoomBorder 
                                         x:Name="border"
                                         ClipToBounds="False"
@@ -275,6 +277,6 @@
                 </ad:LayoutRoot.LeftSide>
             </ad:LayoutRoot>
         </ad:DockingManager>
-        <controls:StatusControl Grid.Row="4"/>
+        <controls:StatusControl Grid.Row="4" Margin="5,0,5,0"/>
     </Grid>
 </Window>
