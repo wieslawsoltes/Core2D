@@ -9,7 +9,18 @@ Test2d is an application for making data driven 2D diagrams.
 ## Building Test2d
 
 * [Visual Studio Community 2015](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx)
-* [SharpDevelop 5.1 RC](http://www.icsharpcode.net/OpenSource/SD/Download/#SharpDevelop5x)
+* [SharpDevelop](http://www.icsharpcode.net/OpenSource/SD/Download/#SharpDevelop5x)
+* [MonoDevelop](http://www.monodevelop.com/)
+
+### Supported Platforms
+
+The recommended UI for Test2d is Test2d.UI.Wpf.
+
+* Windows 7/8/8.1/10 for WPF, EtoForms.Direct2D, EtoForms.Gtk2, EtoForms.WinForms, EtoForms.Wpf and WinForms builds.
+* Windows 10 for Universal Windows Platform (UWP) build.
+* Ubuntu 15.04 for EtoForms.Gtk2, EtoForms.WinForms and WinForms builds.
+
+The core library and editor are portable and should work on all platforms where C# is supported.
 
 ### NuGet Packages
 
