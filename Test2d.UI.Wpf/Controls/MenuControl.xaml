@@ -10,7 +10,7 @@
              xmlns:controls="clr-namespace:Test.Controls"
              xmlns:p="clr-namespace:Test2d.UI.Wpf.Properties"
              mc:Ignorable="d" 
-             d:DesignHeight="20" d:DesignWidth="500">
+             d:DesignHeight="20" d:DesignWidth="1324">
     <Menu Background="Transparent">
         <MenuItem Header="{x:Static p:Resources.MenuFile}">
             <MenuItem Header="{x:Static p:Resources.MenuFileNew}" 
