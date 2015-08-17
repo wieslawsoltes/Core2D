@@ -31,6 +31,8 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                 </Grid>
             </ItemsPanelTemplate>
@@ -311,7 +313,6 @@
         <StatusBarItem Grid.Column="6">
             <StatusBarItem.Style>
                 <Style TargetType="StatusBarItem">
-                    <Setter Property="Cursor" Value="Hand"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Editor.Project.Options.DefaultIsStroked, Mode=OneWay}" Value="False">
                             <Setter Property="Foreground" Value="DarkGray"/>
@@ -327,7 +328,6 @@
         <StatusBarItem Grid.Column="7">
             <StatusBarItem.Style>
                 <Style TargetType="StatusBarItem">
-                    <Setter Property="Cursor" Value="Hand"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Editor.Project.Options.DefaultIsFilled, Mode=OneWay}" Value="False">
                             <Setter Property="Foreground" Value="DarkGray"/>
@@ -344,7 +344,6 @@
         <StatusBarItem Grid.Column="9">
             <StatusBarItem.Style>
                 <Style TargetType="StatusBarItem">
-                    <Setter Property="Cursor" Value="Hand"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Editor.Project.Options.DefaultIsClosed, Mode=OneWay}" Value="False">
                             <Setter Property="Foreground" Value="DarkGray"/>
@@ -360,7 +359,6 @@
         <StatusBarItem Grid.Column="10">
             <StatusBarItem.Style>
                 <Style TargetType="StatusBarItem">
-                    <Setter Property="Cursor" Value="Hand"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Editor.Project.Options.DefaultIsSmoothJoin, Mode=OneWay}" Value="False">
                             <Setter Property="Foreground" Value="DarkGray"/>
@@ -377,7 +375,6 @@
         <StatusBarItem Grid.Column="12">
             <StatusBarItem.Style>
                 <Style TargetType="StatusBarItem">
-                    <Setter Property="Cursor" Value="Hand"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Editor.Project.Options.SnapToGrid, Mode=OneWay}" Value="False">
                             <Setter Property="Foreground" Value="DarkGray"/>
@@ -394,7 +391,6 @@
         <StatusBarItem Grid.Column="14">
             <StatusBarItem.Style>
                 <Style TargetType="StatusBarItem">
-                    <Setter Property="Cursor" Value="Hand"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Editor.Project.Options.TryToConnect, Mode=OneWay}" Value="False">
                             <Setter Property="Foreground" Value="DarkGray"/>
@@ -406,6 +402,26 @@
                 <MouseBinding Command="{Binding Commands.TryToConnectCommand}" MouseAction="LeftClick" />
             </StatusBarItem.InputBindings>
             <TextBlock Text="{x:Static p:Resources.StatusOptionsConnect}" VerticalAlignment="Center"/>
+        </StatusBarItem>
+        <Separator Grid.Column="15"/>
+        <StatusBarItem Grid.Column="16">
+            <CheckBox IsChecked="{Binding Editor.Renderers[0].State.EnableAutofit}">
+                <CheckBox.Template>
+                    <ControlTemplate>
+                        <TextBlock Text="{x:Static p:Resources.StatusOptionsAutofit}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Editor.Renderers[0].State.EnableAutofit, Mode=OneWay}" Value="False">
+                                            <Setter Property="Foreground" Value="DarkGray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </ControlTemplate>
+                </CheckBox.Template>
+            </CheckBox>
         </StatusBarItem>
     </StatusBar>
 </UserControl>
