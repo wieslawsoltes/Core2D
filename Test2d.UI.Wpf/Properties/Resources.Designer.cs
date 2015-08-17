@@ -997,6 +997,15 @@ namespace Test2d.UI.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable _Autofit.
+        /// </summary>
+        public static string MenuViewZoomAutofit {
+            get {
+                return ResourceManager.GetString("MenuViewZoomAutofit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zoom to _Extent.
         /// </summary>
         public static string MenuViewZoomExtent {
@@ -1299,6 +1308,15 @@ namespace Test2d.UI.Wpf.Properties {
         public static string StatusNoShapes {
             get {
                 return ResourceManager.GetString("StatusNoShapes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Autofit.
+        /// </summary>
+        public static string StatusOptionsAutofit {
+            get {
+                return ResourceManager.GetString("StatusOptionsAutofit", resourceCulture);
             }
         }
         
