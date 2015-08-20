@@ -60,6 +60,9 @@
     <Compile Include="..\..\Test2d\Data\Value.cs">
       <Link>Data\Value.cs</Link>
     </Compile>
+    <Compile Include="..\..\Test2d\IO\ProjectFile.cs">
+      <Link>IO\ProjectFile.cs</Link>
+    </Compile>
     <Compile Include="..\..\Test2d\IO\Utf8TextFile.cs">
       <Link>IO\Utf8TextFile.cs</Link>
     </Compile>
