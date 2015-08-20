@@ -38,6 +38,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Binding\PropertyBinding.cs" />
     <Compile Include="Binding\PropertyBindingMode.cs" />
+    <Compile Include="IO\ProjectFile.cs" />
     <Compile Include="IO\Utf8TextFile.cs" />
     <Compile Include="Math\Arc\GdiArc.cs" />
     <Compile Include="Math\Arc\WpfArc.cs" />
