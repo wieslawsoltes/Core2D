@@ -45,20 +45,8 @@ rmdir /Q /S Dependencies\TextFieldWriter.CsvHelper\obj
 rmdir /Q /S Portable\Test2d\bin
 rmdir /Q /S Portable\Test2d\obj
 
-rmdir /Q /S Portable\Test2d.Editor\bin
-rmdir /Q /S Portable\Test2d.Editor\obj
-
-rmdir /Q /S Portable\Test2d.Interfaces\bin
-rmdir /Q /S Portable\Test2d.Interfaces\obj
-
 rmdir /Q /S Test2d\bin
 rmdir /Q /S Test2d\obj
-
-rmdir /Q /S Test2d.Editor\bin
-rmdir /Q /S Test2d.Editor\obj
-
-rmdir /Q /S Test2d.Interfaces\bin
-rmdir /Q /S Test2d.Interfaces\obj
 
 rmdir /Q /S Test2d.UI.EtoForms.Direct2D\bin
 rmdir /Q /S Test2d.UI.EtoForms.Direct2D\obj
