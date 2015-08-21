@@ -17,6 +17,7 @@ namespace Test2d
         private ShapeState _drawShapeState;
         private BaseShape _selectedShape;
         private ImmutableHashSet<BaseShape> _selectedShapes;
+        private Project _project;
 
         /// <summary>
         /// 
@@ -79,6 +80,15 @@ namespace Test2d
         {
             get { return _selectedShapes; }
             set { Update(ref _selectedShapes, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Project Project
+        {
+            get { return _project; }
+            set { Update(ref _project, value); }
         }
 
         /// <summary>
