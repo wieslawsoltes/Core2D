@@ -60,7 +60,7 @@ namespace TestWinForms
             };
             context.InitializeEditor(new TraceLog());
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
-            context.Editor.GetImageKey = () => GetImagePath();
+            context.Editor.GetImageKey = () => GetImageKey();
 
             DataContext = context;
 
@@ -656,7 +656,7 @@ namespace TestWinForms
         /// 
         /// </summary>
         /// <returns></returns>
-        private string GetImagePath()
+        private string GetImageKey()
         {
             openFileDialog2.Filter = "All (*.*)|*.*";
             openFileDialog2.FilterIndex = 0;

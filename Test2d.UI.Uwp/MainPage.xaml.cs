@@ -185,7 +185,7 @@ namespace Test.Uwp
                             {
                                 if (_context.Editor.CurrentTool == T2d.Tool.Image && _imagePath == null)
                                 {
-                                    var file = await GetImagePathAsync();
+                                    var file = await GetImageKeyAsync();
                                     if (file == null)
                                         return;
 
@@ -617,7 +617,7 @@ namespace Test.Uwp
             }
         }
 
-        private async Task<IStorageFile> GetImagePathAsync()
+        private async Task<IStorageFile> GetImageKeyAsync()
         {
             var picker = new FileOpenPicker();
             picker.ViewMode = PickerViewMode.Thumbnail;
