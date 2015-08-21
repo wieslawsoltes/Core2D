@@ -243,6 +243,9 @@
     <Compile Include="..\..\Test2d\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\..\Test2d\Renderer\IImageCache.cs">
+      <Link>Renderer\IImageCache.cs</Link>
+    </Compile>
     <Compile Include="..\..\Test2d\Renderer\IRenderer.cs">
       <Link>Renderer\IRenderer.cs</Link>
     </Compile>
