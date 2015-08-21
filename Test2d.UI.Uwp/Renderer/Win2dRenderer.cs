@@ -6,6 +6,7 @@ using Microsoft.Graphics.Canvas.Text;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace Test.Uwp
     public class Win2dRenderer : ObservableObject, IRenderer
     {
         private bool _enableImageCache = true;
-        private IDictionary<Uri, CanvasBitmap> _biCache;
+        private IDictionary<string, CanvasBitmap> _biCache;
         private RendererState _state = new RendererState();
 
         public RendererState State
@@ -200,7 +201,7 @@ namespace Test.Uwp
             }
         }
 
-        public void CacheImage(Uri path, CanvasBitmap bi)
+        public void CacheImage(string path, CanvasBitmap bi)
         {
             if (_enableImageCache
                 && !_biCache.ContainsKey(path))
@@ -221,7 +222,7 @@ namespace Test.Uwp
                     }
                     _biCache.Clear();
                 }
-                _biCache = new Dictionary<Uri, CanvasBitmap>();
+                _biCache = new Dictionary<string, CanvasBitmap>();
             }
         }
 
@@ -691,19 +692,26 @@ namespace Test.Uwp
             }
             else
             {
-                if (!image.Path.IsAbsoluteUri /*|| !System.IO.File.Exists(image.Path.LocalPath)*/)
+                if (_state.Project == null || string.IsNullOrEmpty(image.Path))
                     return;
 
-                // TODO: CanvasBitmap.LoadAsync throws access denied.
-                var bi = CanvasBitmap.LoadAsync(_ds, image.Path.LocalPath).GetResults();
+                var bytes = _state.Project.GetImage(image.Path);
+                if (bytes != null)
+                {
+                    var ms = new MemoryStream(bytes);
+                    var stream = ms.AsRandomAccessStream();
+                    var bi = CanvasBitmap.LoadAsync(_ds, stream).GetResults();
+                    stream.Dispose();
+                    ms.Dispose();
 
-                if (_enableImageCache)
-                    _biCache[image.Path] = bi;
+                    if (_enableImageCache)
+                        _biCache[image.Path] = bi;
 
-                _ds.DrawImage(bi, srect);
+                    _ds.DrawImage(bi, srect);
 
-                if (!_enableImageCache)
-                    bi.Dispose();
+                    if (!_enableImageCache)
+                        bi.Dispose();
+                }
             }
         }
 
