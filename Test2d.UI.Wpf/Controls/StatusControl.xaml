@@ -5,7 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:editor="clr-namespace:Test2d;assembly=Test2d.Editor"
+             xmlns:core="clr-namespace:Test2d;assembly=Test2d"
              xmlns:converters="clr-namespace:Test.Converters"
              xmlns:controls="clr-namespace:Test.Controls"
              xmlns:p="clr-namespace:Test2d.UI.Wpf.Properties"
@@ -104,80 +104,80 @@
                     <MenuItem Header="{x:Static p:Resources.MenuToolNone}" 
                               Command="{Binding Commands.ToolNoneCommand}"
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.None}}" 
+                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.None}}" 
                               InputGestureText="N">
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolSelection}" 
                               Command="{Binding Commands.ToolSelectionCommand}" 
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Selection}}"
+                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Selection}}"
                               InputGestureText="S">
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolPoint}" 
                               Command="{Binding Commands.ToolPointCommand}"
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Point}}" 
+                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Point}}" 
                               InputGestureText="P">
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolLine}" 
                               Command="{Binding Commands.ToolLineCommand}" 
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Line}}"
+                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Line}}"
                               InputGestureText="L">
                     </MenuItem>
                     <MenuItem Header="{x:Static p:Resources.MenuToolArc}" 
                               Command="{Binding Commands.ToolArcCommand}" 
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Arc}}"
+                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Arc}}"
                               InputGestureText="A">
                     </MenuItem>
                     <MenuItem Header="{x:Static p:Resources.MenuToolBezier}" 
                               Command="{Binding Commands.ToolBezierCommand}" 
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Bezier}}"
+                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Bezier}}"
                               InputGestureText="B">
                     </MenuItem>
                     <MenuItem Header="{x:Static p:Resources.MenuToolQBezier}" 
                               Command="{Binding Commands.ToolQBezierCommand}"
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.QBezier}}" 
+                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.QBezier}}" 
                               InputGestureText="Q">
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolPath}" 
                               Command="{Binding Commands.ToolPathCommand}" 
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Path}}"
+                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Path}}"
                               InputGestureText="H">
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolRectangle}" 
                               Command="{Binding Commands.ToolRectangleCommand}" 
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Rectangle}}"
+                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Rectangle}}"
                               InputGestureText="R">
                     </MenuItem>
                     <MenuItem Header="{x:Static p:Resources.MenuToolEllipse}" 
                               Command="{Binding Commands.ToolEllipseCommand}" 
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Ellipse}}"
+                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Ellipse}}"
                               InputGestureText="E">
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolText}" 
                               Command="{Binding Commands.ToolTextCommand}" 
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Text}}"
+                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Text}}"
                               InputGestureText="T">
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolImage}" 
                               Command="{Binding Commands.ToolImageCommand}" 
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Image}}"
+                              IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Image}}"
                               InputGestureText="I">
                     </MenuItem>
                 </ContextMenu>
@@ -187,40 +187,40 @@
                     <Style TargetType="TextBlock">
                         <Setter Property="Text" Value="{Binding Path=Editor.CurrentTool}"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static editor:Tool.None}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static core:Tool.None}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolNone}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static editor:Tool.Selection}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static core:Tool.Selection}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolSelection}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static editor:Tool.Point}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static core:Tool.Point}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolPoint}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static editor:Tool.Line}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static core:Tool.Line}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolLine}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static editor:Tool.Arc}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static core:Tool.Arc}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolArc}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static editor:Tool.Bezier}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static core:Tool.Bezier}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolBezier}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static editor:Tool.QBezier}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static core:Tool.QBezier}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolQBezier}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static editor:Tool.Path}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static core:Tool.Path}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolPath}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static editor:Tool.Rectangle}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static core:Tool.Rectangle}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolRectangle}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static editor:Tool.Ellipse}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static core:Tool.Ellipse}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolEllipse}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static editor:Tool.Text}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static core:Tool.Text}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolText}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static editor:Tool.Image}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentTool}" Value="{x:Static core:Tool.Image}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusToolImage}"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -233,7 +233,7 @@
                 <Style TargetType="Separator">
                     <Setter Property="Visibility" Value="Collapsed"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Path}}" Value="True">
+                        <DataTrigger Binding="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Path}}" Value="True">
                             <Setter Property="Visibility" Value="Visible"/>
                         </DataTrigger>
                     </Style.Triggers>
@@ -245,7 +245,7 @@
                 <Style TargetType="StatusBarItem">
                     <Setter Property="Visibility" Value="Collapsed"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:Tool.Path}}" Value="True">
+                        <DataTrigger Binding="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Path}}" Value="True">
                             <Setter Property="Visibility" Value="Visible"/>
                         </DataTrigger>
                     </Style.Triggers>
@@ -256,32 +256,32 @@
                     <MenuItem Header="{x:Static p:Resources.MenuPathToolLine}" 
                               Command="{Binding Commands.ToolLineCommand}" 
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:PathTool.Line}}"
+                              IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.Line}}"
                               InputGestureText="L">
                     </MenuItem>
                     <MenuItem Header="{x:Static p:Resources.MenuPathToolArc}" 
                               Command="{Binding Commands.ToolArcCommand}" 
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:PathTool.Arc}}"
+                              IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.Arc}}"
                               InputGestureText="A">
                     </MenuItem>
                     <MenuItem Header="{x:Static p:Resources.MenuPathToolBezier}" 
                               Command="{Binding Commands.ToolBezierCommand}" 
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:PathTool.Bezier}}"
+                              IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.Bezier}}"
                               InputGestureText="B">
                     </MenuItem>
                     <MenuItem Header="{x:Static p:Resources.MenuPathToolQBezier}" 
                               Command="{Binding Commands.ToolQBezierCommand}"
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:PathTool.QBezier}}" 
+                              IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.QBezier}}" 
                               InputGestureText="Q">
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuPathToolMove}" 
                               Command="{Binding Commands.ToolMoveCommand}" 
                               IsCheckable="False"
-                              IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static editor:PathTool.Move}}"
+                              IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.Move}}"
                               InputGestureText="M">
                     </MenuItem>
                 </ContextMenu>
@@ -291,19 +291,19 @@
                     <Style TargetType="TextBlock">
                         <Setter Property="Text" Value="{Binding Path=Editor.CurrentPathTool}"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentPathTool}" Value="{x:Static editor:PathTool.Line}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentPathTool}" Value="{x:Static core:PathTool.Line}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolLine}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentPathTool}" Value="{x:Static editor:PathTool.Arc}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentPathTool}" Value="{x:Static core:PathTool.Arc}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolArc}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentPathTool}" Value="{x:Static editor:PathTool.Bezier}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentPathTool}" Value="{x:Static core:PathTool.Bezier}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolBezier}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentPathTool}" Value="{x:Static editor:PathTool.QBezier}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentPathTool}" Value="{x:Static core:PathTool.QBezier}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolQBezier}"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=Editor.CurrentPathTool}" Value="{x:Static editor:PathTool.Move}">
+                            <DataTrigger Binding="{Binding Path=Editor.CurrentPathTool}" Value="{x:Static core:PathTool.Move}">
                                 <Setter Property="Text" Value="{x:Static p:Resources.StatusPathToolMove}"/>
                             </DataTrigger>
                         </Style.Triggers>
