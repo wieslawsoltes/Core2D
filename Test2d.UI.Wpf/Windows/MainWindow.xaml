@@ -5,7 +5,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Test"
         xmlns:core="clr-namespace:Test2d;assembly=Test2d"
-        xmlns:editor="clr-namespace:Test2d;assembly=Test2d.Editor"
         xmlns:converters="clr-namespace:Test.Converters"
         xmlns:controls="clr-namespace:Test.Controls"
         xmlns:paz="clr-namespace:Test.PanAndZoom"
