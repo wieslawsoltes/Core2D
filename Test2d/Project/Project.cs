@@ -13,7 +13,7 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    public class Project : ObservableObject
+    public class Project : ObservableObject, IImageCache
     {
         private static string ProjectEntryName = "Project.json";
         private static string ImageEntryNamePrefix = "Images\\";
@@ -85,7 +85,7 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="used"></param>
-        public void PurgeUnusedImages(HashSet<string> used)
+        public void PurgeUnusedImages(ICollection<string> used)
         {
             foreach (var kvp in _images.ToList())
             {
@@ -194,7 +194,7 @@ namespace Test2d
         /// </summary>
         /// <param name="stream"></param>
         /// <returns></returns>
-        public static byte[] ReadBinary(Stream stream)
+        private static byte[] ReadBinary(Stream stream)
         {
             byte[] buffer = new byte[16 * 1024];
             using (MemoryStream ms = new MemoryStream())
@@ -213,7 +213,7 @@ namespace Test2d
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="bytes"></param>
-        public static void WriteBinary(Stream stream, byte[] bytes)
+        private static void WriteBinary(Stream stream, byte[] bytes)
         {
             using (var bw = new BinaryWriter(stream))
             {
@@ -226,7 +226,7 @@ namespace Test2d
         /// </summary>
         /// <param name="stream"></param>
         /// <returns></returns>
-        public static string ReadUtf8Text(Stream stream)
+        private static string ReadUtf8Text(Stream stream)
         {
             using (var sr = new StreamReader(stream, Encoding.UTF8))
             {
@@ -239,7 +239,7 @@ namespace Test2d
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="text"></param>
-        public static void WriteUtf8Text(Stream stream, string text)
+        private static void WriteUtf8Text(Stream stream, string text)
         {
             using (var sw = new StreamWriter(stream, Encoding.UTF8))
             {
