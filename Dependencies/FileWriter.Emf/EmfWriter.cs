@@ -48,6 +48,8 @@ namespace Test2d
                 {
                     var r = new EmfRenderer(72.0 / 96.0);
 
+                    // TODO: Set r.State.Project to enable image rendering.
+
                     g.SmoothingMode = SmoothingMode.HighQuality;
                     g.PixelOffsetMode = PixelOffsetMode.HighQuality;
                     g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
@@ -106,6 +108,8 @@ namespace Test2d
                 using (g = Graphics.FromImage(mf))
                 {
                     var r = new EmfRenderer(72.0 / 96.0);
+
+                    // TODO: Set r.State.Project to enable image rendering.
 
                     g.SmoothingMode = SmoothingMode.HighQuality;
                     g.PixelOffsetMode = PixelOffsetMode.HighQuality;

@@ -22,20 +22,22 @@ namespace Test2d
             if (string.IsNullOrEmpty(path) || item == null)
                 return;
 
-            var renderer = new PdfRenderer();
-            renderer.State.DrawShapeState = ShapeState.Printable;
+            var r = new PdfRenderer();
+            r.State.DrawShapeState = ShapeState.Printable;
+
+            // TODO: Set r.State.Project to enable image rendering.
 
             if (item is Container)
             {
-                renderer.Save(path, item as Container);
+                r.Save(path, item as Container);
             }
             else if (item is Document)
             {
-                renderer.Save(path, item as Document);
+                r.Save(path, item as Document);
             }
             else if (item is Project)
             {
-                renderer.Save(path, item as Project);
+                r.Save(path, item as Project);
             }
         }
     }

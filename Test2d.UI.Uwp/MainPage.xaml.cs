@@ -554,6 +554,8 @@ namespace Test.Uwp
             var file = await GetOpenProjectPathAsync();
             if (file != null)
             {
+                // TODO: Add support for new project file format.
+                /*
                 var buffer = await FileIO.ReadBufferAsync(file);
 
                 string json = await Task.Run(() =>
@@ -573,6 +575,7 @@ namespace Test.Uwp
                 _context.Editor.Load(project);
 
                 InvalidateContainer();
+                */
             }
         }
 
@@ -581,6 +584,8 @@ namespace Test.Uwp
             var file = await GetSaveProjectPathAsync(_context.Editor.Project.Name);
             if (file != null)
             {
+                // TODO: Add support for new project file format.
+                /*
                 var json = await Task.Run(() => _context.Serializer.ToJson(_context.Editor.Project));
 
                 CachedFileManager.DeferUpdates(file);
@@ -590,6 +595,7 @@ namespace Test.Uwp
                 fs.Dispose();
 
                 await CachedFileManager.CompleteUpdatesAsync(file);
+                */
             }
         }
 
