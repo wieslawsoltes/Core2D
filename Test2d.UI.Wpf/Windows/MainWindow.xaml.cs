@@ -585,8 +585,12 @@ namespace Test.Windows
         /// 
         /// </summary>
         /// <returns></returns>
-        private Uri GetImagePath()
+        private string GetImageKey()
         {
+            var context = DataContext as EditorContext;
+            if (context == null || context.Editor.Project == null)
+                return null;
+
             var dlg = new OpenFileDialog()
             {
                 Filter = "All (*.*)|*.*",
@@ -596,7 +600,23 @@ namespace Test.Windows
 
             if (dlg.ShowDialog() == true)
             {
-                return new Uri(dlg.FileName);
+                try
+                {
+                    var path = dlg.FileName;
+                    var bytes = System.IO.File.ReadAllBytes(path);
+                    var key = context.Editor.Project.AddImageFromFile(path, bytes);
+                    return key;
+                }
+                catch (Exception ex)
+                {
+                    if (context.Editor.Log != null)
+                    {
+                        context.Editor.Log.LogError("{0}{1}{2}",
+                            ex.Message,
+                            Environment.NewLine,
+                            ex.StackTrace);
+                    }
+                }
             }
             return null;
         }
@@ -813,7 +833,7 @@ namespace Test.Windows
             context.InitializeEditor(new TraceLog());
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
             context.Editor.Renderers[1].State.DrawShapeState = ShapeState.Visible;
-            context.Editor.GetImagePath = () => GetImagePath();
+            context.Editor.GetImageKey = () => GetImageKey();
 
             InitializeCommands(context);
             InitializeZoom(context);
