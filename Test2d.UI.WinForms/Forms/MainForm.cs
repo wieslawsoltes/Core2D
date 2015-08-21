@@ -60,7 +60,7 @@ namespace TestWinForms
             };
             context.InitializeEditor(new TraceLog());
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
-            context.Editor.GetImagePath = () => GetImagePath();
+            context.Editor.GetImageKey = () => GetImagePath();
 
             DataContext = context;
 
@@ -656,14 +656,14 @@ namespace TestWinForms
         /// 
         /// </summary>
         /// <returns></returns>
-        private Uri GetImagePath()
+        private string GetImagePath()
         {
             openFileDialog2.Filter = "All (*.*)|*.*";
             openFileDialog2.FilterIndex = 0;
             var result = openFileDialog2.ShowDialog(this);
             if (result == DialogResult.OK)
             {
-                return new Uri(openFileDialog2.FileName);
+                return openFileDialog2.FileName;
             }
             return null;
         }
