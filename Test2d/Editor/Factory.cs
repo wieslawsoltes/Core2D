@@ -613,7 +613,7 @@ namespace Test2d
                 x2, y2,
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 Context.Editor.Project.Options.PointShape,
-                new Uri(path),
+                path,
                 isStroked,
                 isFilled,
                 text);
@@ -644,7 +644,7 @@ namespace Test2d
                 bottomRight,
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 Context.Editor.Project.Options.PointShape,
-                new Uri(path),
+                path,
                 isStroked,
                 isFilled,
                 text);

@@ -1418,8 +1418,7 @@ namespace Test2d
         {
             try
             {
-                var json = Utf8TextFile.Read(path);
-                var project = _serializer.FromJson<Project>(json);
+                var project = Project.Open(path, _serializer);
 
                 _editor.History.Reset();
                 _editor.Unload();
@@ -1447,8 +1446,7 @@ namespace Test2d
         {
             try
             {
-                var json = _serializer.ToJson(_editor.Project);
-                Utf8TextFile.Write(path, json);
+                Project.Save(path, _editor.Project, _serializer);
 
                 AddRecent(path, _editor.Project.Name);
 
