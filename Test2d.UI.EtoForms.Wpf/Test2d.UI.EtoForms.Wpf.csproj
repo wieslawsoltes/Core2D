@@ -68,10 +68,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Test2d.Interfaces\Test2d.Interfaces.csproj">
-      <Project>{c3e348e1-bf9e-4a71-a1f7-61b7607e0a20}</Project>
-      <Name>Test2d.Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Test2d.UI.EtoForms.Shared\Test2d.UI.EtoForms.Shared.csproj">
       <Project>{c2d17c89-b904-4bce-8bce-fc65020de7bb}</Project>
       <Name>Test2d.UI.EtoForms.Shared</Name>
