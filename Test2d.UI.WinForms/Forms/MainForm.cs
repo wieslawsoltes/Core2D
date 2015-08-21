@@ -658,12 +658,19 @@ namespace TestWinForms
         /// <returns></returns>
         private string GetImageKey()
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return null;
+
             openFileDialog2.Filter = "All (*.*)|*.*";
             openFileDialog2.FilterIndex = 0;
             var result = openFileDialog2.ShowDialog(this);
             if (result == DialogResult.OK)
             {
-                return openFileDialog2.FileName;
+                var path = openFileDialog2.FileName;
+                var bytes = System.IO.File.ReadAllBytes(path);
+                var key = context.Editor.Project.AddImageFromFile(path, bytes);
+                return key;
             }
             return null;
         }
