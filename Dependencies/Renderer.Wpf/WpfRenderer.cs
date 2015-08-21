@@ -1251,12 +1251,12 @@ namespace Test
             }
             else
             {
-                if (_state.Project == null || string.IsNullOrEmpty(image.Path))
+                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Path))
                     return;
 
                 try
                 {
-                    var bytes = _state.Project.GetImage(image.Path);
+                    var bytes = _state.ImageCache.GetImage(image.Path);
                     if (bytes != null)
                     {
                         var ms = new System.IO.MemoryStream(bytes);

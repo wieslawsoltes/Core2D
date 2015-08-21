@@ -212,7 +212,7 @@ namespace Test2d
             {
                 if (renderer.State != null)
                 {
-                    renderer.State.Project = project;
+                    renderer.State.ImageCache = project;
                 }
             }
 
@@ -858,7 +858,7 @@ namespace Test2d
             foreach (var renderer in _renderers)
             {
                 renderer.ClearCache(isZooming: false);
-                renderer.State.Project = project;
+                renderer.State.ImageCache = project;
             }
 
             Project = project;

@@ -938,10 +938,10 @@ namespace TestEtoForms
             }
             else
             {
-                if (_state.Project == null || string.IsNullOrEmpty(image.Path))
+                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Path))
                     return;
 
-                var bytes = _state.Project.GetImage(image.Path);
+                var bytes = _state.ImageCache.GetImage(image.Path);
                 if (bytes != null)
                 {
                     var bi = new Bitmap(bytes);
