@@ -631,8 +631,6 @@ namespace Test.Uwp
             var file = await picker.PickSingleFileAsync();
             if (file != null)
             {
-
-
                 return file;
             }
             return null;
