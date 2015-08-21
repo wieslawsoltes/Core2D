@@ -906,7 +906,10 @@ namespace TestEtoForms
             var result = dlg.ShowDialog(this);
             if (result == DialogResult.Ok)
             {
-                return dlg.FileName;
+                var path = dlg.FileName;
+                var bytes = System.IO.File.ReadAllBytes(path);
+                var key = _context.Editor.Project.AddImageFromFile(path, bytes);
+                return key;
             }
             return null;
         }
