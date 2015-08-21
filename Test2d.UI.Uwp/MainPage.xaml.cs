@@ -40,7 +40,7 @@ namespace Test.Uwp
         private T2d.EditorContext _context;
         private Win2dRenderer _renderer;
         private PointerPressType _pressed;
-        private Uri _imagePath;
+        private string _imagePath;
 
         public MainPage()
         {
@@ -73,7 +73,7 @@ namespace Test.Uwp
             };
             _context.InitializeEditor(null/*new T2d.TraceLog()*/);
             _context.Editor.Renderers[0].State.DrawShapeState = T2d.ShapeState.Visible;
-            _context.Editor.GetImagePath = () => _imagePath;
+            _context.Editor.GetImageKey = () => _imagePath;
 
             _context.Commands.OpenCommand =
                 T2d.Command<object>.Create(
@@ -193,9 +193,9 @@ namespace Test.Uwp
                                     if (bi == null)
                                         return;
 
-                                    var uri = new Uri(file.Path);
-                                    _renderer.CacheImage(uri, bi);
-                                    _imagePath = uri;
+                                    var path = file.Path;
+                                    _renderer.CacheImage(path, bi);
+                                    _imagePath = path;
                                 }
                                 else
                                 {
@@ -607,7 +607,7 @@ namespace Test.Uwp
             {
                 foreach (var image in images)
                 {
-                    var file = await StorageFile.GetFileFromPathAsync(image.Path.LocalPath);
+                    var file = await StorageFile.GetFileFromPathAsync(image.Path);
                     var bi = await LoadImage(file, canvas);
                     if (bi != null)
                     {
@@ -631,6 +631,8 @@ namespace Test.Uwp
             var file = await picker.PickSingleFileAsync();
             if (file != null)
             {
+
+
                 return file;
             }
             return null;
