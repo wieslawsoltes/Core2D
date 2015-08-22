@@ -22,10 +22,13 @@ namespace Test2d
             if (string.IsNullOrEmpty(path) || item == null)
                 return;
 
+            var ic = options as IImageCache;
+            if (options == null)
+                return;
+
             var r = new PdfRenderer();
             r.State.DrawShapeState = ShapeState.Printable;
-
-            // TODO: Set r.State.Project to enable image rendering.
+            r.State.ImageCache = ic;
 
             if (item is Container)
             {
