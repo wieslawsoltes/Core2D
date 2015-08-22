@@ -523,18 +523,30 @@ namespace Test.Windows
             {
                 var container = context.Editor.Project.CurrentContainer;
                 var shapes = Enumerable.Repeat(context.Editor.Renderers[0].State.SelectedShape, 1).ToList();
-                (new EmfWriter()).SetClipboard(shapes, container.Width, container.Height, container.Properties);
+                (new EmfWriter()).SetClipboard(
+                    shapes, 
+                    container.Width, 
+                    container.Height, 
+                    container.Properties,
+                    context.Editor.Project);
             }
             else if (context.Editor.Renderers[0].State.SelectedShapes != null)
             {
                 var container = context.Editor.Project.CurrentContainer;
                 var shapes = context.Editor.Renderers[0].State.SelectedShapes.ToList();
-                (new EmfWriter()).SetClipboard(shapes, container.Width, container.Height, container.Properties);
+                (new EmfWriter()).SetClipboard(
+                    shapes, 
+                    container.Width, 
+                    container.Height, 
+                    container.Properties,
+                    context.Editor.Project);
             }
             else
             {
                 var container = context.Editor.Project.CurrentContainer;
-                (new EmfWriter()).SetClipboard(container);
+                (new EmfWriter()).SetClipboard(
+                    container,
+                    context.Editor.Project);
             }
         }
 
@@ -566,8 +578,11 @@ namespace Test.Windows
 
             try
             {
-                var container = context.Editor.Project.CurrentContainer;
-                (new EmfWriter()).Save(path, container);
+                var writer = new EmfWriter();
+                writer.Save(
+                    path,
+                    context.Editor.Project.CurrentContainer,
+                    context.Editor.Project);
             }
             catch (Exception ex)
             {
