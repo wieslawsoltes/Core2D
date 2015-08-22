@@ -21,7 +21,7 @@ namespace PdfSharp
     public class PdfRenderer : Test2d.ObservableObject, Test2d.IRenderer
     {
         private bool _enableImageCache = true;
-        private IDictionary<Uri, XImage> _biCache;
+        private IDictionary<string, XImage> _biCache;
         private Test2d.RendererState _state = new Test2d.RendererState();
 
         /// <summary>
@@ -431,7 +431,7 @@ namespace PdfSharp
                     }
                     _biCache.Clear();
                 }
-                _biCache = new Dictionary<Uri, XImage>();
+                _biCache = new Dictionary<string, XImage>();
             }
         }
 
@@ -1050,18 +1050,24 @@ namespace PdfSharp
             }
             else
             {
-                if (!image.Path.IsAbsoluteUri || !System.IO.File.Exists(image.Path.LocalPath))
+                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Path))
                     return;
 
-                var bi = XImage.FromFile(image.Path.LocalPath);
+                var bytes = _state.ImageCache.GetImage(image.Path);
+                if (bytes != null)
+                {
+                    var ms = new System.IO.MemoryStream(bytes);
+                    var bi = XImage.FromStream(ms);
+                    // TODO: ms.Dispose();
 
-                if (_enableImageCache)
-                    _biCache[image.Path] = bi;
+                    if (_enableImageCache)
+                        _biCache[image.Path] = bi;
 
-                _gfx.DrawImage(bi, srect);
+                    _gfx.DrawImage(bi, srect);
 
-                if (!_enableImageCache)
-                    bi.Dispose();
+                    if (!_enableImageCache)
+                        bi.Dispose();
+                }
             }
         }
         

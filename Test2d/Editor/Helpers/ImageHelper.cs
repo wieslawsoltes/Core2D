@@ -74,18 +74,18 @@ namespace Test2d
             {
                 case State.None:
                     {
-                        if (_editor.GetImagePath == null)
+                        if (_editor.GetImageKey == null)
                             return;
 
-                        var uri = _editor.GetImagePath();
-                        if (uri == null || string.IsNullOrEmpty(uri.LocalPath))
+                        var path = _editor.GetImageKey();
+                        if (path == null || string.IsNullOrEmpty(path))
                             return;
 
                         _shape = XImage.Create(
                             sx, sy,
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape,
-                            uri);
+                            path);
                         if (_editor.Project.Options.TryToConnect)
                         {
                             TryToConnectTopLeft(_shape as XImage, sx, sy);

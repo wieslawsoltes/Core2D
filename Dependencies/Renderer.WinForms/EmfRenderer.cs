@@ -20,7 +20,7 @@ namespace Test2d
     public class EmfRenderer : ObservableObject, IRenderer
     {
         private bool _enableImageCache = true;
-        private IDictionary<Uri, Image> _biCache;
+        private IDictionary<string, Image> _biCache;
         private RendererState _state = new RendererState();
 
         /// <summary>
@@ -316,7 +316,7 @@ namespace Test2d
                     }
                     _biCache.Clear();
                 }
-                _biCache = new Dictionary<Uri, Image>();
+                _biCache = new Dictionary<string, Image>();
             }
         }
 
@@ -937,18 +937,24 @@ namespace Test2d
             }
             else
             {
-                if (!image.Path.IsAbsoluteUri || !System.IO.File.Exists(image.Path.LocalPath))
+                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Path))
                     return;
 
-                var bi = Image.FromFile(image.Path.LocalPath);
+                var bytes = _state.ImageCache.GetImage(image.Path);
+                if (bytes != null)
+                {
+                    var ms = new System.IO.MemoryStream(bytes);
+                    var bi = Image.FromStream(ms);
+                    ms.Dispose();
 
-                if (_enableImageCache)
-                    _biCache[image.Path] = bi;
+                    if (_enableImageCache)
+                        _biCache[image.Path] = bi;
 
-                _gfx.DrawImage(bi, srect);
+                    _gfx.DrawImage(bi, srect);
 
-                if (!_enableImageCache)
-                    bi.Dispose();
+                    if (!_enableImageCache)
+                        bi.Dispose();
+                }
             }
 
             brush.Dispose();

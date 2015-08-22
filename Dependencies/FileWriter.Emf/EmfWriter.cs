@@ -28,8 +28,13 @@ namespace Test2d
         /// <param name="bitmap"></param>
         /// <param name="shapes"></param>
         /// <param name="properties"></param>
+        /// <param name="ic"></param>
         /// <returns></returns>
-        public MemoryStream MakeMetafileStream(Bitmap bitmap, IEnumerable<BaseShape> shapes, ImmutableArray<ShapeProperty> properties)
+        public MemoryStream MakeMetafileStream(
+            Bitmap bitmap, 
+            IEnumerable<BaseShape> shapes, 
+            ImmutableArray<ShapeProperty> properties,
+            IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -47,6 +52,7 @@ namespace Test2d
                 using (g = Graphics.FromImage(mf))
                 {
                     var r = new EmfRenderer(72.0 / 96.0);
+                    r.State.ImageCache = ic;
 
                     g.SmoothingMode = SmoothingMode.HighQuality;
                     g.PixelOffsetMode = PixelOffsetMode.HighQuality;
@@ -87,8 +93,12 @@ namespace Test2d
         /// </summary>
         /// <param name="bitmap"></param>
         /// <param name="container"></param>
+        /// <param name="ic"></param>
         /// <returns></returns>
-        public MemoryStream MakeMetafileStream(Bitmap bitmap, Container container)
+        public MemoryStream MakeMetafileStream(
+            Bitmap bitmap, 
+            Container container,
+            IImageCache ic)
         {
             var g = default(Graphics);
             var mf = default(Metafile);
@@ -106,6 +116,7 @@ namespace Test2d
                 using (g = Graphics.FromImage(mf))
                 {
                     var r = new EmfRenderer(72.0 / 96.0);
+                    r.State.ImageCache = ic;
 
                     g.SmoothingMode = SmoothingMode.HighQuality;
                     g.PixelOffsetMode = PixelOffsetMode.HighQuality;
@@ -146,13 +157,19 @@ namespace Test2d
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <param name="properties"></param>
-        public void SetClipboard(IEnumerable<BaseShape> shapes, double width, double height, ImmutableArray<ShapeProperty> properties)
+        /// <param name="ic"></param>
+        public void SetClipboard(
+            IEnumerable<BaseShape> shapes, 
+            double width, 
+            double height, 
+            ImmutableArray<ShapeProperty> properties,
+            IImageCache ic)
         {
             try
             {
                 using (var bitmap = new Bitmap((int)width, (int)height))
                 {
-                    using (var ms = MakeMetafileStream(bitmap, shapes, properties))
+                    using (var ms = MakeMetafileStream(bitmap, shapes, properties, ic))
                     {
                         var data = new WPF.DataObject();
                         data.SetData(WPF.DataFormats.EnhancedMetafile, ms);
@@ -166,18 +183,19 @@ namespace Test2d
                 Debug.Print(ex.StackTrace);
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="container"></param>
-        public void SetClipboard(Container container)
+        /// <param name="ic"></param>
+        public void SetClipboard(Container container, IImageCache ic)
         {
             try
             {
                 using (var bitmap = new Bitmap((int)container.Width, (int)container.Height))
                 {
-                    using (var ms = MakeMetafileStream(bitmap, container))
+                    using (var ms = MakeMetafileStream(bitmap, container, ic))
                     {
                         var data = new WPF.DataObject();
                         data.SetData(WPF.DataFormats.EnhancedMetafile, ms);
@@ -197,11 +215,12 @@ namespace Test2d
         /// </summary>
         /// <param name="path"></param>
         /// <param name="container"></param>
-        public void Save(string path, Container container)
+        /// <param name="ic"></param>
+        public void Save(string path, Container container, IImageCache ic)
         {
             using (var bitmap = new Bitmap((int)container.Width, (int)container.Height))
             {
-                using (var ms = MakeMetafileStream(bitmap, container))
+                using (var ms = MakeMetafileStream(bitmap, container, ic))
                 {
                     using (var fs = File.Create(path))
                     {
@@ -222,9 +241,13 @@ namespace Test2d
             if (string.IsNullOrEmpty(path) || item == null)
                 return;
 
+            var ic = options as IImageCache;
+            if (options == null)
+                return;
+
             if (item is Container)
             {
-                this.Save(path, item as Container);
+                this.Save(path, item as Container, ic);
             }
         }
     }

@@ -90,14 +90,6 @@
       <Project>{87302d12-1184-402d-bf23-a5699f3d0bb4}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Test2d.Editor\Test2d.Editor.csproj">
-      <Project>{c2e7cc66-b36e-4f1a-998a-029ae107c2e6}</Project>
-      <Name>Test2d.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Test2d.Interfaces\Test2d.Interfaces.csproj">
-      <Project>{c3e348e1-bf9e-4a71-a1f7-61b7607e0a20}</Project>
-      <Name>Test2d.Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Test2d\Test2d.csproj">
       <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
       <Name>Test2d</Name>

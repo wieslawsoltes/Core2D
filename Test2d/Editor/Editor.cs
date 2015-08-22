@@ -131,7 +131,7 @@ namespace Test2d
         /// <summary>
         /// Get image path using common system open file dialog.
         /// </summary>
-        public Func<Uri> GetImagePath { get; set; }
+        public Func<string> GetImageKey { get; set; }
 
         /// <summary>
         /// 
@@ -207,6 +207,15 @@ namespace Test2d
             editor.ProjectPath = string.Empty;
             editor.IsProjectDirty = false;
             editor.Renderers = renderers;
+
+            foreach (var renderer in editor.Renderers)
+            {
+                if (renderer.State != null)
+                {
+                    renderer.State.ImageCache = project;
+                }
+            }
+
             editor.History = new History();
 
             if (editor.EnableObserver)
@@ -849,6 +858,7 @@ namespace Test2d
             foreach (var renderer in _renderers)
             {
                 renderer.ClearCache(isZooming: false);
+                renderer.State.ImageCache = project;
             }
 
             Project = project;
@@ -876,6 +886,11 @@ namespace Test2d
             foreach (var renderer in _renderers)
             {
                 renderer.ClearCache(isZooming: false);
+            }
+
+            if (_project != null)
+            {
+                _project.PurgeUnusedImages(new HashSet<string>(Enumerable.Empty<string>()));
             }
             
             Project = null;

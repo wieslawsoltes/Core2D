@@ -37,7 +37,7 @@ namespace Test
         private IDictionary<XBezier, PathGeometry> _bezierCache;
         private IDictionary<XQBezier, PathGeometry> _qbezierCache;
         private IDictionary<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache;
-        private IDictionary<Uri, BitmapImage> _biCache;
+        private IDictionary<string, BitmapImage> _biCache;
         private IDictionary<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>> _pathCache;
         private RendererState _state = new RendererState();
 
@@ -446,7 +446,7 @@ namespace Test
                     }
                     _biCache.Clear();
                 }
-                _biCache = new Dictionary<Uri, BitmapImage>();
+                _biCache = new Dictionary<string, BitmapImage>();
 
                 _pathCache = new Dictionary<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>>();
             }
@@ -1251,23 +1251,26 @@ namespace Test
             }
             else
             {
-                if (!image.Path.IsAbsoluteUri || !System.IO.File.Exists(image.Path.LocalPath))
+                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Path))
                     return;
 
                 try
                 {
-                    byte[] buffer = System.IO.File.ReadAllBytes(image.Path.LocalPath);
-                    var ms = new System.IO.MemoryStream(buffer);
-                    var bi = new BitmapImage();
-                    bi.BeginInit();
-                    bi.StreamSource = ms;
-                    bi.EndInit();
-                    bi.Freeze();
+                    var bytes = _state.ImageCache.GetImage(image.Path);
+                    if (bytes != null)
+                    {
+                        var ms = new System.IO.MemoryStream(bytes);
+                        var bi = new BitmapImage();
+                        bi.BeginInit();
+                        bi.StreamSource = ms;
+                        bi.EndInit();
+                        bi.Freeze();
 
-                    if (_enableImageCache)
-                        _biCache[image.Path] = bi;
+                        if (_enableImageCache)
+                            _biCache[image.Path] = bi;
 
-                    _dc.DrawImage(bi, rect);
+                        _dc.DrawImage(bi, rect);
+                    }
                 }
                 catch (Exception ex)
                 {

@@ -17,6 +17,7 @@ namespace Test2d
         private ShapeState _drawShapeState;
         private BaseShape _selectedShape;
         private ImmutableHashSet<BaseShape> _selectedShapes;
+        private IImageCache _imageCache;
 
         /// <summary>
         /// 
@@ -79,6 +80,15 @@ namespace Test2d
         {
             get { return _selectedShapes; }
             set { Update(ref _selectedShapes, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IImageCache ImageCache
+        {
+            get { return _imageCache; }
+            set { Update(ref _imageCache, value); }
         }
 
         /// <summary>

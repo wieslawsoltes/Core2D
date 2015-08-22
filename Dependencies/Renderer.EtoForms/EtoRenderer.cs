@@ -17,7 +17,7 @@ namespace TestEtoForms
     public class EtoRenderer : ObservableObject, IRenderer
     {
         private bool _enableImageCache = true;
-        private IDictionary<Uri, Bitmap> _biCache;
+        private IDictionary<string, Bitmap> _biCache;
         private RendererState _state = new RendererState();
 
         /// <summary>
@@ -349,7 +349,7 @@ namespace TestEtoForms
                     }
                     _biCache.Clear();
                 }
-                _biCache = new Dictionary<Uri, Bitmap>();
+                _biCache = new Dictionary<string, Bitmap>();
             }
         }
 
@@ -938,18 +938,22 @@ namespace TestEtoForms
             }
             else
             {
-                if (!image.Path.IsAbsoluteUri || !System.IO.File.Exists(image.Path.LocalPath))
+                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Path))
                     return;
 
-                var bi = new Bitmap(image.Path.LocalPath);
-                
-                if (_enableImageCache)
-                    _biCache[image.Path] = bi;
+                var bytes = _state.ImageCache.GetImage(image.Path);
+                if (bytes != null)
+                {
+                    var bi = new Bitmap(bytes);
 
-                _gfx.DrawImage(bi, srect);
+                    if (_enableImageCache)
+                        _biCache[image.Path] = bi;
 
-                if (!_enableImageCache)
-                    bi.Dispose();
+                    _gfx.DrawImage(bi, srect);
+
+                    if (!_enableImageCache)
+                        bi.Dispose();
+                }
             }
 
             brush.Dispose();

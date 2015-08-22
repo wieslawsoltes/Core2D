@@ -137,14 +137,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Portable\Test2d.Editor\Test2d.Editor.csproj">
-      <Project>{73cd6596-0391-4a41-b837-9553e23b799e}</Project>
-      <Name>Test2d.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Portable\Test2d.Interfaces\Test2d.Interfaces.csproj">
-      <Project>{a400a28a-cf53-4d7e-a40e-1204a5f06a6d}</Project>
-      <Name>Test2d.Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Portable\Test2d\Test2d.csproj">
       <Project>{1d45ea4f-d2af-447a-8a8e-e94f19be226a}</Project>
       <Name>Test2d</Name>

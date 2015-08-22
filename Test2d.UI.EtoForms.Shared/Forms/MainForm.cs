@@ -55,7 +55,7 @@ namespace TestEtoForms
             };
             _context.InitializeEditor(new T2d.TraceLog());
             _context.Editor.Renderers[0].State.DrawShapeState = T2d.ShapeState.Visible;
-            _context.Editor.GetImagePath = () => GetImagePath();
+            _context.Editor.GetImageKey = () => GetImageKey();
 
             _state = new T2d.ZoomState(_context, InvalidateContainer);
 
@@ -899,14 +899,17 @@ namespace TestEtoForms
         /// 
         /// </summary>
         /// <returns></returns>
-        public Uri GetImagePath()
+        public string GetImageKey()
         {
             var dlg = new OpenFileDialog();
             dlg.Filters.Add(new FileDialogFilter("All", ".*"));
             var result = dlg.ShowDialog(this);
             if (result == DialogResult.Ok)
             {
-                return new Uri(dlg.FileName);
+                var path = dlg.FileName;
+                var bytes = System.IO.File.ReadAllBytes(path);
+                var key = _context.Editor.Project.AddImageFromFile(path, bytes);
+                return key;
             }
             return null;
         }

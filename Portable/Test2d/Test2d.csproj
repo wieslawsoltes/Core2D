@@ -60,6 +60,129 @@
     <Compile Include="..\..\Test2d\Data\Value.cs">
       <Link>Data\Value.cs</Link>
     </Compile>
+    <Compile Include="..\..\Test2d\Editor\Bounds\ConvexHullBounds.cs">
+      <Link>Editor\Bounds\ConvexHullBounds.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Bounds\ShapeBounds.cs">
+      <Link>Editor\Bounds\ShapeBounds.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Core\Command.cs">
+      <Link>Editor\Core\Command.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Core\ExportType.cs">
+      <Link>Editor\Core\ExportType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Core\Helper.cs">
+      <Link>Editor\Core\Helper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Core\History.cs">
+      <Link>Editor\Core\History.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Core\ImportType.cs">
+      <Link>Editor\Core\ImportType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Core\PathTool.cs">
+      <Link>Editor\Core\PathTool.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Core\RecentProject.cs">
+      <Link>Editor\Core\RecentProject.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Core\State.cs">
+      <Link>Editor\Core\State.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Core\Tool.cs">
+      <Link>Editor\Core\Tool.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Editor.cs">
+      <Link>Editor\Editor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\EditorCommands.cs">
+      <Link>Editor\EditorCommands.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\EditorContext.cs">
+      <Link>Editor\EditorContext.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Factories\ProjectFactory.cs">
+      <Link>Editor\Factories\ProjectFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Factory.cs">
+      <Link>Editor\Factory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Helpers\ArcHelper.cs">
+      <Link>Editor\Helpers\ArcHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Helpers\BezierHelper.cs">
+      <Link>Editor\Helpers\BezierHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Helpers\EllipseHelper.cs">
+      <Link>Editor\Helpers\EllipseHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Helpers\ImageHelper.cs">
+      <Link>Editor\Helpers\ImageHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Helpers\LineHelper.cs">
+      <Link>Editor\Helpers\LineHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Helpers\PathHelper.cs">
+      <Link>Editor\Helpers\PathHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Helpers\PointHelper.cs">
+      <Link>Editor\Helpers\PointHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Helpers\QBezierHelper.cs">
+      <Link>Editor\Helpers\QBezierHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Helpers\RectangleHelper.cs">
+      <Link>Editor\Helpers\RectangleHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Helpers\SelectionHelper.cs">
+      <Link>Editor\Helpers\SelectionHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Helpers\TextHelper.cs">
+      <Link>Editor\Helpers\TextHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Observer.cs">
+      <Link>Editor\Observer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Parameters\ColumnParameter.cs">
+      <Link>Editor\Parameters\ColumnParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Parameters\RecordParameter.cs">
+      <Link>Editor\Parameters\RecordParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Parameters\ShapeBindingParamater.cs">
+      <Link>Editor\Parameters\ShapeBindingParamater.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Parameters\ShapePropertyParameter.cs">
+      <Link>Editor\Parameters\ShapePropertyParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Editor\Parameters\ValueParamterer.cs">
+      <Link>Editor\Parameters\ValueParamterer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Interfaces\IFileWriter.cs">
+      <Link>Interfaces\IFileWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Interfaces\ILog.cs">
+      <Link>Interfaces\ILog.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Interfaces\IProjectFactory.cs">
+      <Link>Interfaces\IProjectFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Interfaces\ISerializer.cs">
+      <Link>Interfaces\ISerializer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Interfaces\ITextClipboard.cs">
+      <Link>Interfaces\ITextClipboard.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Interfaces\ITextFieldReader.cs">
+      <Link>Interfaces\ITextFieldReader.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Interfaces\ITextFieldWriter.cs">
+      <Link>Interfaces\ITextFieldWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Interfaces\IView.cs">
+      <Link>Interfaces\IView.cs</Link>
+    </Compile>
     <Compile Include="..\..\Test2d\IO\Utf8TextFile.cs">
       <Link>IO\Utf8TextFile.cs</Link>
     </Compile>
@@ -119,6 +242,9 @@
     </Compile>
     <Compile Include="..\..\Test2d\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Renderer\IImageCache.cs">
+      <Link>Renderer\IImageCache.cs</Link>
     </Compile>
     <Compile Include="..\..\Test2d\Renderer\IRenderer.cs">
       <Link>Renderer\IRenderer.cs</Link>

@@ -38,6 +38,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,6 +48,47 @@
   <ItemGroup>
     <Compile Include="Binding\PropertyBinding.cs" />
     <Compile Include="Binding\PropertyBindingMode.cs" />
+    <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
+    <Compile Include="Editor\Bounds\ShapeBounds.cs" />
+    <Compile Include="Editor\Core\Command.cs" />
+    <Compile Include="Editor\Core\ExportType.cs" />
+    <Compile Include="Editor\Core\Helper.cs" />
+    <Compile Include="Editor\Core\History.cs" />
+    <Compile Include="Editor\Core\ImportType.cs" />
+    <Compile Include="Editor\Core\PathTool.cs" />
+    <Compile Include="Editor\Core\RecentProject.cs" />
+    <Compile Include="Editor\Core\State.cs" />
+    <Compile Include="Editor\Core\Tool.cs" />
+    <Compile Include="Editor\Editor.cs" />
+    <Compile Include="Editor\EditorCommands.cs" />
+    <Compile Include="Editor\EditorContext.cs" />
+    <Compile Include="Editor\Factories\ProjectFactory.cs" />
+    <Compile Include="Editor\Factory.cs" />
+    <Compile Include="Editor\Helpers\ArcHelper.cs" />
+    <Compile Include="Editor\Helpers\BezierHelper.cs" />
+    <Compile Include="Editor\Helpers\EllipseHelper.cs" />
+    <Compile Include="Editor\Helpers\ImageHelper.cs" />
+    <Compile Include="Editor\Helpers\LineHelper.cs" />
+    <Compile Include="Editor\Helpers\PathHelper.cs" />
+    <Compile Include="Editor\Helpers\PointHelper.cs" />
+    <Compile Include="Editor\Helpers\QBezierHelper.cs" />
+    <Compile Include="Editor\Helpers\RectangleHelper.cs" />
+    <Compile Include="Editor\Helpers\SelectionHelper.cs" />
+    <Compile Include="Editor\Helpers\TextHelper.cs" />
+    <Compile Include="Editor\Observer.cs" />
+    <Compile Include="Editor\Parameters\ColumnParameter.cs" />
+    <Compile Include="Editor\Parameters\RecordParameter.cs" />
+    <Compile Include="Editor\Parameters\ShapeBindingParamater.cs" />
+    <Compile Include="Editor\Parameters\ShapePropertyParameter.cs" />
+    <Compile Include="Editor\Parameters\ValueParamterer.cs" />
+    <Compile Include="Interfaces\IFileWriter.cs" />
+    <Compile Include="Interfaces\ILog.cs" />
+    <Compile Include="Interfaces\IProjectFactory.cs" />
+    <Compile Include="Interfaces\ISerializer.cs" />
+    <Compile Include="Interfaces\ITextClipboard.cs" />
+    <Compile Include="Interfaces\ITextFieldReader.cs" />
+    <Compile Include="Interfaces\ITextFieldWriter.cs" />
+    <Compile Include="Interfaces\IView.cs" />
     <Compile Include="IO\Utf8TextFile.cs" />
     <Compile Include="Math\Arc\GdiArc.cs" />
     <Compile Include="Math\Arc\WpfArc.cs" />
@@ -73,6 +115,7 @@
     <Compile Include="Project\Options.cs" />
     <Compile Include="Project\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderer\IImageCache.cs" />
     <Compile Include="Renderer\IRenderer.cs" />
     <Compile Include="Renderer\RendererState.cs" />
     <Compile Include="Shapes\Path\Segments\XArcSegment.cs" />

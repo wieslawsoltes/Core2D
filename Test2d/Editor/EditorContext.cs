@@ -4,11 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace Test2d
 {
@@ -139,7 +135,7 @@ namespace Test2d
             get { return _recentProjects; }
             set { Update(ref _recentProjects, value); }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -199,7 +195,7 @@ namespace Test2d
         {
             Close();
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -558,7 +554,7 @@ namespace Test2d
         {
             if (_editor.Project == null)
                 return;
-            
+
             var builder = ImmutableArray.CreateBuilder<Column>();
             builder.Add(Column.Create("Column0"));
             builder.Add(Column.Create("Column1"));
@@ -581,7 +577,7 @@ namespace Test2d
         {
             if (_editor.Project == null)
                 return;
-            
+
             if (db != null && db is Database)
             {
                 var previous = _editor.Project.Databases;
@@ -667,7 +663,7 @@ namespace Test2d
         {
             if (_editor.Project == null || _editor.Project.CurrentDatabase == null)
                 return;
-            
+
             var db = _editor.Project.CurrentDatabase;
             if (db.CurrentRecord != null)
             {
@@ -759,7 +755,7 @@ namespace Test2d
                     {
                         shape.Properties = ImmutableArray.Create<ShapeProperty>();
                     }
-                    
+
                     _editor.AddWithHistory(shape, ShapeProperty.Create("New", ""));
                 }
                 else if (owner is Container)
@@ -769,7 +765,7 @@ namespace Test2d
                     {
                         container.Properties = ImmutableArray.Create<ShapeProperty>();
                     }
-                    
+
                     _editor.AddWithHistory(container, ShapeProperty.Create("New", ""));
                 }
             }
@@ -818,7 +814,7 @@ namespace Test2d
         {
             if (_editor.Project == null || _editor.Project.GroupLibraries == null)
                 return;
-            
+
             var gl = GroupLibrary.Create("New");
 
             var previous = _editor.Project.GroupLibraries;
@@ -834,7 +830,7 @@ namespace Test2d
         {
             _editor.RemoveCurrentGroupLibrary();
         }
- 
+
         /// <summary>
         /// 
         /// </summary>
@@ -842,7 +838,7 @@ namespace Test2d
         {
             if (_editor.Project == null || _editor.Project.CurrentGroupLibrary == null)
                 return;
-            
+
             var group = _editor.Renderers[0].State.SelectedShape;
             if (group != null && group is XGroup)
             {
@@ -899,7 +895,7 @@ namespace Test2d
         {
             if (_editor.Project == null || _editor.Project.StyleLibraries == null)
                 return;
-            
+
             var sg = StyleLibrary.Create("New");
 
             var previous = _editor.Project.StyleLibraries;
@@ -907,7 +903,7 @@ namespace Test2d
             _editor.History.Snapshot(previous, next, (p) => _editor.Project.StyleLibraries = p);
             _editor.Project.StyleLibraries = next;
         }
- 
+
         /// <summary>
         /// 
         /// </summary>
@@ -923,7 +919,7 @@ namespace Test2d
         {
             if (_editor.Project == null || _editor.Project.CurrentStyleLibrary == null)
                 return;
-            
+
             var sg = _editor.Project.CurrentStyleLibrary;
             var previous = sg.Styles;
             var next = sg.Styles.Add(ShapeStyle.Create("New"));
@@ -954,7 +950,7 @@ namespace Test2d
         {
             if (_editor.Project == null)
                 return;
-            
+
             var previous = _editor.Project.Templates;
             var next = _editor.Project.Templates.Add(_projectFactory.GetTemplate(_editor.Project, "Empty"));
             _editor.History.Snapshot(previous, next, (p) => _editor.Project.Templates = p);
@@ -976,7 +972,7 @@ namespace Test2d
         {
             if (_editor.Project == null || _editor.Project.CurrentTemplate == null)
                 return;
-            
+
             var template = _editor.Project.CurrentTemplate;
             if (template != null)
             {
@@ -993,7 +989,7 @@ namespace Test2d
         {
             if (_editor.Project == null || _editor.Project.CurrentContainer == null)
                 return;
-            
+
             if (item is Container)
             {
                 var template = item as Container;
@@ -1013,7 +1009,7 @@ namespace Test2d
         {
             if (_editor.Project == null)
                 return;
-            
+
             if (item is Container)
             {
                 var selected = item as Container;
@@ -1031,7 +1027,7 @@ namespace Test2d
                 _editor.Project.CurrentDocument = selected;
             }
         }
-  
+
         /// <summary>
         /// 
         /// </summary>
@@ -1040,7 +1036,7 @@ namespace Test2d
         {
             if (_editor.Project == null || _editor.Project.CurrentDocument == null)
                 return;
-            
+
             var container = _projectFactory.GetContainer(_editor.Project, "Container");
 
             var document = _editor.Project.CurrentDocument;
@@ -1060,7 +1056,7 @@ namespace Test2d
         {
             if (_editor.Project == null || _editor.Project.CurrentDocument == null)
                 return;
-            
+
             if (item is Container)
             {
                 var selected = item as Container;
@@ -1085,7 +1081,7 @@ namespace Test2d
         {
             if (_editor.Project == null || _editor.Project.CurrentDocument == null)
                 return;
-            
+
             if (item is Container)
             {
                 var selected = item as Container;
@@ -1110,7 +1106,7 @@ namespace Test2d
         {
             if (_editor.Project == null)
                 return;
-            
+
             var document = _projectFactory.GetDocument(_editor.Project, "Document");
 
             var previous = _editor.Project.Documents;
@@ -1130,7 +1126,7 @@ namespace Test2d
         {
             if (_editor.Project == null)
                 return;
-            
+
             if (item is Document)
             {
                 var selected = item as Document;
@@ -1155,7 +1151,7 @@ namespace Test2d
         {
             if (_editor.Project == null)
                 return;
-            
+
             if (item is Document)
             {
                 var selected = item as Document;
@@ -1314,10 +1310,10 @@ namespace Test2d
         {
             if (_editor.Project == null || _editor.Project.Options == null)
                 return;
-            
+
             _editor.Project.Options.DefaultIsStroked = !_editor.Project.Options.DefaultIsStroked;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -1325,7 +1321,7 @@ namespace Test2d
         {
             if (_editor.Project == null || _editor.Project.Options == null)
                 return;
-            
+
             _editor.Project.Options.DefaultIsFilled = !_editor.Project.Options.DefaultIsFilled;
         }
 
@@ -1336,7 +1332,7 @@ namespace Test2d
         {
             if (_editor.Project == null || _editor.Project.Options == null)
                 return;
-            
+
             _editor.Project.Options.DefaultIsClosed = !_editor.Project.Options.DefaultIsClosed;
         }
 
@@ -1347,7 +1343,7 @@ namespace Test2d
         {
             if (_editor.Project == null || _editor.Project.Options == null)
                 return;
-            
+
             _editor.Project.Options.DefaultIsSmoothJoin = !_editor.Project.Options.DefaultIsSmoothJoin;
         }
 
@@ -1358,7 +1354,7 @@ namespace Test2d
         {
             if (_editor.Project == null || _editor.Project.Options == null)
                 return;
-            
+
             _editor.Project.Options.SnapToGrid = !_editor.Project.Options.SnapToGrid;
         }
 
@@ -1369,7 +1365,7 @@ namespace Test2d
         {
             if (_editor.Project == null || _editor.Project.Options == null)
                 return;
-            
+
             _editor.Project.Options.TryToConnect = !_editor.Project.Options.TryToConnect;
         }
 
@@ -1409,7 +1405,7 @@ namespace Test2d
             _editor.Unload();
             _editor.Load(_projectFactory.GetProject(), string.Empty);
         }
-        
+
         /// <summary>
         ///
         /// </summary>
@@ -1418,8 +1414,7 @@ namespace Test2d
         {
             try
             {
-                var json = Utf8TextFile.Read(path);
-                var project = _serializer.FromJson<Project>(json);
+                var project = Project.Open(path, _serializer);
 
                 _editor.History.Reset();
                 _editor.Unload();
@@ -1447,8 +1442,7 @@ namespace Test2d
         {
             try
             {
-                var json = _serializer.ToJson(_editor.Project);
-                Utf8TextFile.Write(path, json);
+                Project.Save(path, _editor.Project, _serializer);
 
                 AddRecent(path, _editor.Project.Name);
 
@@ -1470,7 +1464,7 @@ namespace Test2d
                 }
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -1491,7 +1485,7 @@ namespace Test2d
             {
                 if (_pdfWriter != null)
                 {
-                    _pdfWriter.Save(path, item, null);
+                    _pdfWriter.Save(path, item, _editor.Project);
                 }
             }
             catch (Exception ex)
@@ -1505,7 +1499,7 @@ namespace Test2d
                 }
             }
         }
-        
+
         /// <summary>
         ///
         /// </summary>
@@ -1547,7 +1541,7 @@ namespace Test2d
                     case ImportType.Style:
                         {
                             var sg = item as StyleLibrary;
-                            var json = Utf8TextFile.Read(path, false);
+                            var json = Utf8TextFile.Read(path);
                             var import = _serializer.FromJson<ShapeStyle>(json);
 
                             var previous = sg.Styles;
@@ -1559,7 +1553,7 @@ namespace Test2d
                     case ImportType.Styles:
                         {
                             var sg = item as StyleLibrary;
-                            var json = Utf8TextFile.Read(path, false);
+                            var json = Utf8TextFile.Read(path);
                             var import = _serializer.FromJson<IList<ShapeStyle>>(json);
 
                             var builder = sg.Styles.ToBuilder();
@@ -1577,7 +1571,7 @@ namespace Test2d
                     case ImportType.StyleLibrary:
                         {
                             var project = item as Project;
-                            var json = Utf8TextFile.Read(path, false);
+                            var json = Utf8TextFile.Read(path);
                             var import = _serializer.FromJson<StyleLibrary>(json);
 
                             var previous = project.StyleLibraries;
@@ -1589,7 +1583,7 @@ namespace Test2d
                     case ImportType.StyleLibraries:
                         {
                             var project = item as Project;
-                            var json = Utf8TextFile.Read(path, false);
+                            var json = Utf8TextFile.Read(path);
                             var import = _serializer.FromJson<IList<StyleLibrary>>(json);
 
                             var builder = project.StyleLibraries.ToBuilder();
@@ -1607,7 +1601,7 @@ namespace Test2d
                     case ImportType.Group:
                         {
                             var gl = item as GroupLibrary;
-                            var json = Utf8TextFile.Read(path, false);
+                            var json = Utf8TextFile.Read(path);
                             var import = _serializer.FromJson<XGroup>(json);
 
                             var shapes = Enumerable.Repeat(import as XGroup, 1);
@@ -1623,7 +1617,7 @@ namespace Test2d
                     case ImportType.Groups:
                         {
                             var gl = item as GroupLibrary;
-                            var json = Utf8TextFile.Read(path, false);
+                            var json = Utf8TextFile.Read(path);
                             var import = _serializer.FromJson<IList<XGroup>>(json);
 
                             var shapes = import;
@@ -1645,7 +1639,7 @@ namespace Test2d
                     case ImportType.GroupLibrary:
                         {
                             var project = item as Project;
-                            var json = Utf8TextFile.Read(path, false);
+                            var json = Utf8TextFile.Read(path);
                             var import = _serializer.FromJson<GroupLibrary>(json);
 
                             var shapes = import.Groups;
@@ -1661,7 +1655,7 @@ namespace Test2d
                     case ImportType.GroupLibraries:
                         {
                             var project = item as Project;
-                            var json = Utf8TextFile.Read(path, false);
+                            var json = Utf8TextFile.Read(path);
                             var import = _serializer.FromJson<IList<GroupLibrary>>(json);
 
                             var shapes = import.SelectMany(x => x.Groups);
@@ -1683,7 +1677,7 @@ namespace Test2d
                     case ImportType.Template:
                         {
                             var project = item as Project;
-                            var json = Utf8TextFile.Read(path, false);
+                            var json = Utf8TextFile.Read(path);
                             var import = _serializer.FromJson<Container>(json);
 
                             var shapes = import.Layers.SelectMany(x => x.Shapes);
@@ -1699,7 +1693,7 @@ namespace Test2d
                     case ImportType.Templates:
                         {
                             var project = item as Project;
-                            var json = Utf8TextFile.Read(path, false);
+                            var json = Utf8TextFile.Read(path);
                             var import = _serializer.FromJson<IList<Container>>(json);
 
                             var shapes = import.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
@@ -1747,61 +1741,61 @@ namespace Test2d
                     case ExportType.Style:
                         {
                             var json = _serializer.ToJson(item as ShapeStyle);
-                            Utf8TextFile.Write(path, json, false);
+                            Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.Styles:
                         {
                             var json = _serializer.ToJson((item as StyleLibrary).Styles);
-                            Utf8TextFile.Write(path, json, false);
+                            Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.StyleLibrary:
                         {
                             var json = _serializer.ToJson((item as StyleLibrary));
-                            Utf8TextFile.Write(path, json, false);
+                            Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.StyleLibraries:
                         {
                             var json = _serializer.ToJson((item as Project).StyleLibraries);
-                            Utf8TextFile.Write(path, json, false);
+                            Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.Group:
                         {
                             var json = _serializer.ToJson(item as XGroup);
-                            Utf8TextFile.Write(path, json, false);
+                            Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.Groups:
                         {
                             var json = _serializer.ToJson((item as GroupLibrary).Groups);
-                            Utf8TextFile.Write(path, json, false);
+                            Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.GroupLibrary:
                         {
                             var json = _serializer.ToJson(item as GroupLibrary);
-                            Utf8TextFile.Write(path, json, false);
+                            Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.GroupLibraries:
                         {
                             var json = _serializer.ToJson((item as Project).GroupLibraries);
-                            Utf8TextFile.Write(path, json, false);
+                            Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.Template:
                         {
                             var json = _serializer.ToJson(item as Container);
-                            Utf8TextFile.Write(path, json, false);
+                            Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.Templates:
                         {
                             var json = _serializer.ToJson((item as Project).Templates);
-                            Utf8TextFile.Write(path, json, false);
+                            Utf8TextFile.Write(path, json);
                         }
                         break;
                 }
@@ -1826,7 +1820,7 @@ namespace Test2d
         {
             if (_editor.Project == null)
                 return;
-            
+
             try
             {
                 if (_csvReader == null)
@@ -1917,7 +1911,7 @@ namespace Test2d
                 for (int i = 0; i < database.Records.Length; i++)
                 {
                     var record = database.Records[i];
-                    
+
                     var result = db.Records.FirstOrDefault(r => r.Id == record.Id);
                     if (result != null)
                     {
@@ -2001,7 +1995,7 @@ namespace Test2d
         {
             try
             {
-                var json = Utf8TextFile.Read(path, false);
+                var json = Utf8TextFile.Read(path);
                 var recent = _serializer.FromJson<ImmutableArray<RecentProject>>(json);
 
                 if (recent != null)
@@ -2038,7 +2032,7 @@ namespace Test2d
             try
             {
                 var json = _serializer.ToJson(_recentProjects);
-                Utf8TextFile.Write(path, json, false);
+                Utf8TextFile.Write(path, json);
             }
             catch (Exception ex)
             {
@@ -2348,7 +2342,7 @@ namespace Test2d
 
             return null;
         }
-        
+
         /// <summary>
         ///
         /// </summary>
@@ -2386,7 +2380,7 @@ namespace Test2d
 
             return null;
         }
-        
+
         /// <summary>
         ///
         /// </summary>
@@ -2660,7 +2654,7 @@ namespace Test2d
                 case Tool.Line:
                     {
                         var line = XLine.Create(
-                            x, y, 
+                            x, y,
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape);
                         line.Record = record;
@@ -3019,7 +3013,7 @@ namespace Test2d
                     Command<object>.Create(
                         (item) => OnNew(item),
                         (item) => IsEditMode());
-                
+
                 _commands.CloseCommand =
                     Command.Create(
                         () => OnClose(),
@@ -3439,7 +3433,7 @@ namespace Test2d
             (_commands.ExportGroupLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
             (_commands.ExportTemplateCommand as Command<object>).NotifyCanExecuteChanged();
             (_commands.ExportTemplatesCommand as Command<object>).NotifyCanExecuteChanged();
- 
+
             (_commands.UndoCommand as Command).NotifyCanExecuteChanged();
             (_commands.RedoCommand as Command).NotifyCanExecuteChanged();
             (_commands.CopyAsEmfCommand as Command).NotifyCanExecuteChanged();
@@ -3497,7 +3491,7 @@ namespace Test2d
 
             (_commands.AddBindingCommand as Command<object>).NotifyCanExecuteChanged();
             (_commands.RemoveBindingCommand as Command<object>).NotifyCanExecuteChanged();
-            
+
             (_commands.AddPropertyCommand as Command<object>).NotifyCanExecuteChanged();
             (_commands.RemovePropertyCommand as Command<object>).NotifyCanExecuteChanged();
 
@@ -3542,7 +3536,7 @@ namespace Test2d
             (_commands.RemoveTemplateCommand as Command).NotifyCanExecuteChanged();
             (_commands.EditTemplateCommand as Command).NotifyCanExecuteChanged();
             (_commands.ApplyTemplateCommand as Command<object>).NotifyCanExecuteChanged();
-            
+
             (_commands.SelectedItemChangedCommand as Command<object>).NotifyCanExecuteChanged();
 
             (_commands.AddContainerCommand as Command<object>).NotifyCanExecuteChanged();

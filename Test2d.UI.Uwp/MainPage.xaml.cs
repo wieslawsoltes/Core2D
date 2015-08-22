@@ -1,12 +1,10 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -40,7 +38,7 @@ namespace Test.Uwp
         private T2d.EditorContext _context;
         private Win2dRenderer _renderer;
         private PointerPressType _pressed;
-        private Uri _imagePath;
+        private string _imagePath;
 
         public MainPage()
         {
@@ -73,7 +71,7 @@ namespace Test.Uwp
             };
             _context.InitializeEditor(null/*new T2d.TraceLog()*/);
             _context.Editor.Renderers[0].State.DrawShapeState = T2d.ShapeState.Visible;
-            _context.Editor.GetImagePath = () => _imagePath;
+            _context.Editor.GetImageKey = () => _imagePath;
 
             _context.Commands.OpenCommand =
                 T2d.Command<object>.Create(
@@ -185,17 +183,15 @@ namespace Test.Uwp
                             {
                                 if (_context.Editor.CurrentTool == T2d.Tool.Image && _imagePath == null)
                                 {
-                                    var file = await GetImagePathAsync();
+                                    var file = await GetImageKeyAsync();
                                     if (file == null)
                                         return;
 
-                                    var bi = await LoadImage(file, canvas);
-                                    if (bi == null)
-                                        return;
+                                    string key = await GetImageKey(file);
 
-                                    var uri = new Uri(file.Path);
-                                    _renderer.CacheImage(uri, bi);
-                                    _imagePath = uri;
+                                    await CacheImage(key);
+
+                                    _imagePath = key;
                                 }
                                 else
                                 {
@@ -554,23 +550,20 @@ namespace Test.Uwp
             var file = await GetOpenProjectPathAsync();
             if (file != null)
             {
-                var buffer = await FileIO.ReadBufferAsync(file);
-
-                string json = await Task.Run(() =>
+                var project = default(T2d.Project);
+                using (var stream = await file.OpenStreamForReadAsync())
                 {
-                    using (var fs = buffer.AsStream())
+                    project = await Task.Run(() =>
                     {
-                        return T2d.Utf8TextFile.Decompress(fs);
-                    }
-                });
+                        return T2d.Project.Open(stream, _context.Serializer);
+                    });
+                }
 
-                var project = _context.Serializer.FromJson<T2d.Project>(json);
                 _context.Editor.History.Reset();
                 _context.Editor.Unload();
+                _context.Editor.Load(project);
 
                 await CacheImages(project);
-
-                _context.Editor.Load(project);
 
                 InvalidateContainer();
             }
@@ -581,23 +574,35 @@ namespace Test.Uwp
             var file = await GetSaveProjectPathAsync(_context.Editor.Project.Name);
             if (file != null)
             {
-                var json = await Task.Run(() => _context.Serializer.ToJson(_context.Editor.Project));
-
                 CachedFileManager.DeferUpdates(file);
 
-                var fs = await file.OpenStreamForWriteAsync();
-                await Task.Run(() => T2d.Utf8TextFile.Compress(fs, json));
-                fs.Dispose();
+                using (var stream = await file.OpenStreamForWriteAsync())
+                {
+                    await Task.Run(() =>
+                    {
+                        T2d.Project.Save(stream, _context.Editor.Project, _context.Serializer);
+                    });
+                }
 
                 await CachedFileManager.CompleteUpdatesAsync(file);
             }
         }
 
-        private async Task<CanvasBitmap> LoadImage(IStorageFile file, ICanvasResourceCreator resourceCreator)
+        private async Task CacheImage(string key)
         {
-            var stream = await file.OpenReadAsync();
-            var bi = await CanvasBitmap.LoadAsync(resourceCreator, stream);
-            return bi;
+            var bytes = _context.Renderers[0].State.ImageCache.GetImage(key);
+            if (bytes != null)
+            {
+                using (var ms = new MemoryStream(bytes))
+                {
+                    using (var ras = ms.AsRandomAccessStream())
+                    {
+                        var bi = await CanvasBitmap.LoadAsync(canvas, ras);
+                        _renderer.CacheImage(key, bi);
+                        ras.Dispose();
+                    }
+                }
+            }
         }
 
         private async Task CacheImages(T2d.Project project)
@@ -607,17 +612,25 @@ namespace Test.Uwp
             {
                 foreach (var image in images)
                 {
-                    var file = await StorageFile.GetFileFromPathAsync(image.Path.LocalPath);
-                    var bi = await LoadImage(file, canvas);
-                    if (bi != null)
-                    {
-                        _renderer.CacheImage(image.Path, bi);
-                    }
+                    await CacheImage(image.Path);
                 }
             }
         }
 
-        private async Task<IStorageFile> GetImagePathAsync()
+        private async Task<string> GetImageKey(IStorageFile file)
+        {
+            var key = default(string);
+
+            using (var fileStream = await file.OpenStreamForReadAsync())
+            {
+                var bytes = T2d.Project.ReadBinary(fileStream);
+                key = _context.Editor.Project.AddImageFromFile(file.Path, bytes);
+            }
+
+            return key;
+        }
+
+        private async Task<IStorageFile> GetImageKeyAsync()
         {
             var picker = new FileOpenPicker();
             picker.ViewMode = PickerViewMode.Thumbnail;

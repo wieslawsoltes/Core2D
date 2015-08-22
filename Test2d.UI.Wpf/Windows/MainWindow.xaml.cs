@@ -523,18 +523,30 @@ namespace Test.Windows
             {
                 var container = context.Editor.Project.CurrentContainer;
                 var shapes = Enumerable.Repeat(context.Editor.Renderers[0].State.SelectedShape, 1).ToList();
-                (new EmfWriter()).SetClipboard(shapes, container.Width, container.Height, container.Properties);
+                (new EmfWriter()).SetClipboard(
+                    shapes, 
+                    container.Width, 
+                    container.Height, 
+                    container.Properties,
+                    context.Editor.Project);
             }
             else if (context.Editor.Renderers[0].State.SelectedShapes != null)
             {
                 var container = context.Editor.Project.CurrentContainer;
                 var shapes = context.Editor.Renderers[0].State.SelectedShapes.ToList();
-                (new EmfWriter()).SetClipboard(shapes, container.Width, container.Height, container.Properties);
+                (new EmfWriter()).SetClipboard(
+                    shapes, 
+                    container.Width, 
+                    container.Height, 
+                    container.Properties,
+                    context.Editor.Project);
             }
             else
             {
                 var container = context.Editor.Project.CurrentContainer;
-                (new EmfWriter()).SetClipboard(container);
+                (new EmfWriter()).SetClipboard(
+                    container,
+                    context.Editor.Project);
             }
         }
 
@@ -566,8 +578,11 @@ namespace Test.Windows
 
             try
             {
-                var container = context.Editor.Project.CurrentContainer;
-                (new EmfWriter()).Save(path, container);
+                var writer = new EmfWriter();
+                writer.Save(
+                    path,
+                    context.Editor.Project.CurrentContainer,
+                    context.Editor.Project);
             }
             catch (Exception ex)
             {
@@ -585,8 +600,12 @@ namespace Test.Windows
         /// 
         /// </summary>
         /// <returns></returns>
-        private Uri GetImagePath()
+        private string GetImageKey()
         {
+            var context = DataContext as EditorContext;
+            if (context == null || context.Editor.Project == null)
+                return null;
+
             var dlg = new OpenFileDialog()
             {
                 Filter = "All (*.*)|*.*",
@@ -596,7 +615,23 @@ namespace Test.Windows
 
             if (dlg.ShowDialog() == true)
             {
-                return new Uri(dlg.FileName);
+                try
+                {
+                    var path = dlg.FileName;
+                    var bytes = System.IO.File.ReadAllBytes(path);
+                    var key = context.Editor.Project.AddImageFromFile(path, bytes);
+                    return key;
+                }
+                catch (Exception ex)
+                {
+                    if (context.Editor.Log != null)
+                    {
+                        context.Editor.Log.LogError("{0}{1}{2}",
+                            ex.Message,
+                            Environment.NewLine,
+                            ex.StackTrace);
+                    }
+                }
             }
             return null;
         }
@@ -813,7 +848,7 @@ namespace Test.Windows
             context.InitializeEditor(new TraceLog());
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
             context.Editor.Renderers[1].State.DrawShapeState = ShapeState.Visible;
-            context.Editor.GetImagePath = () => GetImagePath();
+            context.Editor.GetImageKey = () => GetImageKey();
 
             InitializeCommands(context);
             InitializeZoom(context);
