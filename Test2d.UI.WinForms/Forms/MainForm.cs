@@ -427,9 +427,13 @@ namespace TestWinForms
         /// </summary>
         private void OnSave()
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             saveFileDialog1.Filter = "Project (*.project)|*.project|All (*.*)|*.*";
             saveFileDialog1.FilterIndex = 0;
-            saveFileDialog1.FileName = "project";
+            saveFileDialog1.FileName = context.Editor.Project.Name;
             saveFileDialog1.ShowDialog(this);
         }
 
@@ -438,9 +442,13 @@ namespace TestWinForms
         /// </summary>
         private void OnExport()
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             saveFileDialog2.Filter = "Pdf (*.pdf)|*.pdf|Dxf AutoCAD 2000 (*.dxf)|*.dxf|Dxf R10 (*.dxf)|*.dxf|All (*.*)|*.*";
             saveFileDialog2.FilterIndex = 0;
-            saveFileDialog2.FileName = "project";
+            saveFileDialog2.FileName = context.Editor.Project.Name;
             saveFileDialog2.ShowDialog(this);
         }
 
