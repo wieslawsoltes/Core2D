@@ -1485,7 +1485,7 @@ namespace Test2d
             {
                 if (_pdfWriter != null)
                 {
-                    _pdfWriter.Save(path, item, null);
+                    _pdfWriter.Save(path, item, _editor.Project);
                 }
             }
             catch (Exception ex)
