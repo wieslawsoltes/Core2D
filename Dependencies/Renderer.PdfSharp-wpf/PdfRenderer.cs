@@ -1058,7 +1058,7 @@ namespace PdfSharp
                 {
                     var ms = new System.IO.MemoryStream(bytes);
                     var bi = XImage.FromStream(ms);
-                    ms.Dispose();
+                    // TODO: ms.Dispose();
 
                     if (_enableImageCache)
                         _biCache[image.Path] = bi;
