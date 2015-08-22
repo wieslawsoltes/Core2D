@@ -6,11 +6,8 @@ using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 #if WPF
-using System.Windows.Media;
+using System.Windows.Media.Imaging;
 #endif
 
 namespace PdfSharp
@@ -1057,9 +1054,16 @@ namespace PdfSharp
                 if (bytes != null)
                 {
                     var ms = new System.IO.MemoryStream(bytes);
+#if WPF
+                    var bs = new BitmapImage();
+                    bs.BeginInit();
+                    bs.StreamSource = ms;
+                    bs.EndInit();
+                    bs.Freeze();
+                    var bi = XImage.FromBitmapSource(bs);
+#else
                     var bi = XImage.FromStream(ms);
-                    // TODO: ms.Dispose();
-
+#endif
                     if (_enableImageCache)
                         _biCache[image.Path] = bi;
 
