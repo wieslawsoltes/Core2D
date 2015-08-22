@@ -692,6 +692,8 @@ namespace Test.Uwp
             }
             else
             {
+                // TODO: Image caching is done in MainPage because calls to GetResults() throw exception.
+                /*
                 if (_state.ImageCache == null || string.IsNullOrEmpty(image.Path))
                     return;
 
@@ -699,9 +701,9 @@ namespace Test.Uwp
                 if (bytes != null)
                 {
                     var ms = new MemoryStream(bytes);
-                    var stream = ms.AsRandomAccessStream();
-                    var bi = CanvasBitmap.LoadAsync(_ds, stream).GetResults();
-                    stream.Dispose();
+                    var ras = ms.AsRandomAccessStream();
+                    var bi = CanvasBitmap.LoadAsync(_ds, ras).GetResults();
+                    ras.Dispose();
                     ms.Dispose();
 
                     if (_enableImageCache)
@@ -712,6 +714,7 @@ namespace Test.Uwp
                     if (!_enableImageCache)
                         bi.Dispose();
                 }
+                */
             }
         }
 
