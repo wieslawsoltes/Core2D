@@ -107,43 +107,53 @@ namespace Test2d
             if (string.IsNullOrEmpty(path) || !File.Exists(path) || serializer == null)
                 return null;
 
-            Project project;
-            string json = null;
-
-            using (var fs = new FileStream(path, FileMode.Open))
+            using (var stream = new FileStream(path, FileMode.Open))
             {
-                using (var archive = new ZipArchive(fs, ZipArchiveMode.Read))
+                return Open(stream, serializer);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="serializer"></param>
+        /// <returns></returns>
+        public static Project Open(Stream stream, ISerializer serializer)
+        {
+            using (var archive = new ZipArchive(stream, ZipArchiveMode.Read))
+            {
+                var projectEntry = archive.Entries.FirstOrDefault(e => e.FullName == ProjectEntryName);
+                if (projectEntry == null)
+                    return null;
+
+                var project = default(Project);
+
+                // First step is to read project entry and deserialize project object.
+                using (var entryStream = projectEntry.Open())
                 {
-                    var projectEntry = archive.Entries.FirstOrDefault(e => e.FullName == ProjectEntryName);
-                    if (projectEntry == null)
-                        return null;
-
-                    // First step is to read project entry and deserialize project object.
-                    using (var stream = projectEntry.Open())
-                    {
-                        json = ReadUtf8Text(stream);
-                        project = serializer.FromJson<Project>(json);
-                    }
-
-                    // Second step is to read (if any) project images.
-                    foreach (var entry in archive.Entries)
-                    {
-                        if (entry.FullName.StartsWith(ImageEntryNamePrefix))
-                        {
-                            using (var stream = entry.Open())
-                            {
-                                var bytes = ReadBinary(stream);
-                                project.AddImage(entry.FullName, bytes);
-                            }
-                        }
-                        else
-                        {
-                            // Ignore all other entries.
-                        }
-                    }
-
-                    return project;
+                    string json = ReadUtf8Text(entryStream);
+                    project = serializer.FromJson<Project>(json);
                 }
+
+                // Second step is to read (if any) project images.
+                foreach (var entry in archive.Entries)
+                {
+                    if (entry.FullName.StartsWith(ImageEntryNamePrefix))
+                    {
+                        using (var entryStream = entry.Open())
+                        {
+                            var bytes = ReadBinary(entryStream);
+                            project.AddImage(entry.FullName, bytes);
+                        }
+                    }
+                    else
+                    {
+                        // Ignore all other entries.
+                    }
+                }
+
+                return project;
             }
         }
 
@@ -156,36 +166,47 @@ namespace Test2d
         /// <returns></returns>
         public static void Save(string path, Project project, ISerializer serializer)
         {
-            using (var fs = new FileStream(path, FileMode.Create))
+            using (var stream = new FileStream(path, FileMode.Create))
             {
-                using (var archive = new ZipArchive(fs, ZipArchiveMode.Create))
-                {
-                    // First step is to write project entry.
-                    var jsonEntry = archive.CreateEntry(ProjectEntryName);
-                    using (var jsonStream = jsonEntry.Open())
-                    {
-                        var json = serializer.ToJson(project);
-                        WriteUtf8Text(jsonStream, json);
-                    }
+                Save(stream, project, serializer);
+            }
+        }
 
-                    // Second step is to write (if any) project images.
-                    var keys = Editor.GetAllShapes<XImage>(project).Select(i => i.Path).Distinct();
-                    foreach (var key in keys)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="project"></param>
+        /// <param name="serializer"></param>
+        public static void Save(Stream stream, Project project, ISerializer serializer)
+        {
+            using (var archive = new ZipArchive(stream, ZipArchiveMode.Create))
+            {
+                // First step is to write project entry.
+                var jsonEntry = archive.CreateEntry(ProjectEntryName);
+                using (var jsonStream = jsonEntry.Open())
+                {
+                    var json = serializer.ToJson(project);
+                    WriteUtf8Text(jsonStream, json);
+                }
+
+                // Second step is to write (if any) project images.
+                var keys = Editor.GetAllShapes<XImage>(project).Select(i => i.Path).Distinct();
+                foreach (var key in keys)
+                {
+                    var bytes = project.GetImage(key);
+                    if (bytes != null)
                     {
-                        var bytes = project.GetImage(key);
-                        if (bytes != null)
+                        var imageEntry = archive.CreateEntry(key);
+                        using (var imageStream = imageEntry.Open())
                         {
-                            var imageEntry = archive.CreateEntry(key);
-                            using (var imageStream = imageEntry.Open())
-                            {
-                                WriteBinary(imageStream, bytes);
-                            }
+                            WriteBinary(imageStream, bytes);
                         }
                     }
-
-                    // NOTE: Purge deleted images from memory is not called here to enable Undo/Redo.
-                    //project.PurgeUnusedImages(new HashSet<string>(keys));
                 }
+
+                // NOTE: Purge deleted images from memory is not called here to enable Undo/Redo.
+                //project.PurgeUnusedImages(new HashSet<string>(keys));
             }
         }
 
@@ -194,7 +215,7 @@ namespace Test2d
         /// </summary>
         /// <param name="stream"></param>
         /// <returns></returns>
-        private static byte[] ReadBinary(Stream stream)
+        public static byte[] ReadBinary(Stream stream)
         {
             byte[] buffer = new byte[16 * 1024];
             using (MemoryStream ms = new MemoryStream())
@@ -213,7 +234,7 @@ namespace Test2d
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="bytes"></param>
-        private static void WriteBinary(Stream stream, byte[] bytes)
+        public static void WriteBinary(Stream stream, byte[] bytes)
         {
             using (var bw = new BinaryWriter(stream))
             {
@@ -226,7 +247,7 @@ namespace Test2d
         /// </summary>
         /// <param name="stream"></param>
         /// <returns></returns>
-        private static string ReadUtf8Text(Stream stream)
+        public static string ReadUtf8Text(Stream stream)
         {
             using (var sr = new StreamReader(stream, Encoding.UTF8))
             {
@@ -239,7 +260,7 @@ namespace Test2d
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="text"></param>
-        private static void WriteUtf8Text(Stream stream, string text)
+        public static void WriteUtf8Text(Stream stream, string text)
         {
             using (var sw = new StreamWriter(stream, Encoding.UTF8))
             {
