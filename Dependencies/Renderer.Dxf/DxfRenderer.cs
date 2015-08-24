@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Dxf;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -202,324 +201,30 @@ namespace Test2d
             // TODO: Implement Draw().
         }
 
-        private DxfAcadVer _version;
-        private int _handle = 0;
-        private string _defaultStyle = "Standard";
-        private double _pageWidth;
-        private double _pageHeight;
-        private string _stylePrimaryFont = "calibri.ttf"; // "arial.ttf"; "arialuni.ttf";
-        private string _stylePrimaryFontDescription = "Calibri"; // "Arial"; "Arial Unicode MS"
-        private string _styleBigFont = "";
-
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        private int NextHandle() 
-        { 
-            return _handle += 1; 
+        /// <param name="path"></param>
+        /// <param name="container"></param>
+        public void Save(string path, Container container)
+        {
+            // TODO: Use netDxf library to create DXF file.
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <returns></returns>
+        /*
+        private double _pageWidth;
+        private double _pageHeight;
+
         private double ToDxfX(double x) 
         { 
             return x; 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="y"></param>
-        /// <returns></returns>
         private double ToDxfY(double y) 
         { 
             return _pageHeight - y;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="appids"></param>
-        private void TableAppids(DxfTable<DxfAppid> appids)
-        {
-            // NOTE: Appid "ACAD" - default must be present
-            if (_version > DxfAcadVer.AC1009)
-            {
-                appids.Items.Add(new DxfAppid(_version, NextHandle())
-                {
-                    ApplicationName = "ACAD",
-                    AppidStandardFlags = DxfAppidStandardFlags.Default
-                });
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dimstyles"></param>
-        private void TableDimstyles(DxfTable<DxfDimstyle> dimstyles)
-        {
-            if (_version > DxfAcadVer.AC1009)
-            {
-                dimstyles.Items.Add(new DxfDimstyle(_version, NextHandle())
-                {
-                    Name = "Standard"
-                });
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="layers"></param>
-        /// <param name="container"></param>
-        private void TableLayers(DxfTable<DxfLayer> layers, Container container)
-        {
-            // NOTE: Default layer "0" - must be present.
-            if (_version > DxfAcadVer.AC1009)
-            {
-                layers.Items.Add(new DxfLayer(_version, NextHandle())
-                {
-                    Name = "0",
-                    LayerStandardFlags = DxfLayerStandardFlags.Default,
-                    Color = DxfDefaultColors.Default.ToDxfColor(),
-                    LineType = "Continuous",
-                    PlottingFlag = true,
-                    LineWeight = DxfLineWeight.LnWtByLwDefault,
-                    PlotStyleNameHandle = "0"
-                });
-            }
-
-            if (container.Template != null)
-            {
-                foreach (var layer in container.Template.Layers) 
-                {
-                    if (layer.IsVisible)
-                    {
-                        layers.Items.Add(new DxfLayer(_version, NextHandle())
-                        {
-                            Name = layer.Name,
-                            LayerStandardFlags = DxfLayerStandardFlags.Default,
-                            Color = DxfDefaultColors.Default.ToDxfColor(),
-                            LineType = "Continuous",
-                            PlottingFlag = true,
-                            LineWeight = DxfLineWeight.LnWtByLwDefault,
-                            PlotStyleNameHandle = "0"
-                        });
-                    }
-                }
-            }
-            
-            foreach (var layer in container.Layers) 
-            {
-                if (layer.IsVisible)
-                {
-                    layers.Items.Add(new DxfLayer(_version, NextHandle())
-                    {
-                        Name = layer.Name,
-                        LayerStandardFlags = DxfLayerStandardFlags.Default,
-                        Color = DxfDefaultColors.Default.ToDxfColor(),
-                        LineType = "Continuous",
-                        PlottingFlag = true,
-                        LineWeight = DxfLineWeight.LnWtByLwDefault,
-                        PlotStyleNameHandle = "0"
-                    });
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ltypes"></param>
-        private void TableLtypes(DxfTable<DxfLtype> ltypes)
-        {
-            // NOTE: Default ltypes ByLayer, ByBlock and Continuous - must be present.
-
-            // ByLayer
-            ltypes.Items.Add(new DxfLtype(_version, NextHandle())
-            {
-                Name = "ByLayer",
-                LtypeStandardFlags = DxfLtypeStandardFlags.Default,
-                Description = "ByLayer",
-                DashLengthItems = 0,
-                TotalPatternLength = 0,
-                DashLengths = default(double[]),
-            });
-
-            // ByBlock
-            ltypes.Items.Add(new DxfLtype(_version, NextHandle())
-            {
-                Name = "ByBlock",
-                LtypeStandardFlags = DxfLtypeStandardFlags.Default,
-                Description = "ByBlock",
-                DashLengthItems = 0,
-                TotalPatternLength = 0,
-                DashLengths = default(double[]),
-            });
-
-            // Continuous
-            ltypes.Items.Add(new DxfLtype(_version, NextHandle())
-            {
-                Name = "Continuous",
-                LtypeStandardFlags = DxfLtypeStandardFlags.Default,
-                Description = "Solid line",
-                DashLengthItems = 0,
-                TotalPatternLength = 0,
-                DashLengths = default(double[]),
-            });
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="styles"></param>
-        private void TableStyles(DxfTable<DxfStyle> styles)
-        {
-            // style: Standard
-            styles.Items.Add(new DxfStyle(_version, NextHandle())
-            {
-                Name = "Standard",
-                StyleStandardFlags = DxfStyleFlags.Default,
-                FixedTextHeight = 0,
-                WidthFactor = 1,
-                ObliqueAngle = 0,
-                TextGenerationFlags = DxfTextGenerationFlags.Default,
-                LastHeightUsed = 1,
-                PrimaryFontFile = _stylePrimaryFont,
-                BifFontFile = _styleBigFont,
-                PrimatyFontDescription = _stylePrimaryFontDescription
-            });
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ucss"></param>
-        private void TableUcss(DxfTable<DxfUcs> ucss)
-        {
-            // NOTE: Currently not used.
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="views"></param>
-        private void TableViews(DxfTable<DxfView> views)
-        {
-            views.Items.Add(new DxfView(_version, NextHandle())
-            {
-                Name = "View",
-                ViewStandardFlags = DxfViewStandardFlags.Default,
-                Height = _pageHeight,
-                Width = _pageWidth,
-                Center = new DxfVector2(_pageWidth / 2, _pageHeight / 2),
-                ViewDirection = new DxfVector3(0, 0, 1),
-                TargetPoint = new DxfVector3(0, 0, 0),
-                FrontClippingPlane = 0,
-                BackClippingPlane = 0,
-                TwistAngle = 0
-            });
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="vports"></param>
-        private void TableVports(DxfTable<DxfVport> vports)
-        {
-            if (_version > DxfAcadVer.AC1009)
-            {
-                vports.Items.Add(new DxfVport(_version, NextHandle())
-                {
-                    Name = "*Active"
-                });
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        private IEnumerable<DxfBlock> DefaultBlocks()
-        {
-            if (_version > DxfAcadVer.AC1009)
-            {
-                var blocks = new List<DxfBlock>();
-                string layer = "0";
-
-                blocks.Add(new DxfBlock(_version, NextHandle())
-                {
-                    Name = "*Model_Space",
-                    Layer = layer,
-                    BlockTypeFlags = DxfBlockTypeFlags.Default,
-                    BasePoint = new DxfVector3(0, 0, 0),
-                    XrefPathName = default(string),
-                    Description = default(string),
-                    EndId = NextHandle(),
-                    EndLayer = layer,
-                    Entities = default(IList<object>)
-                });
-
-                blocks.Add(new DxfBlock(_version, NextHandle())
-                {
-                    Name = "*Paper_Space",
-                    Layer = layer,
-                    BlockTypeFlags = DxfBlockTypeFlags.Default,
-                    BasePoint = new DxfVector3(0, 0, 0),
-                    XrefPathName = default(string),
-                    Description = default(string),
-                    EndId = NextHandle(),
-                    EndLayer = layer,
-                    Entities = default(IList<object>)
-                });
-
-                blocks.Add(new DxfBlock(_version, NextHandle())
-                {
-                    Name = "*Paper_Space0",
-                    Layer = layer,
-                    BlockTypeFlags = DxfBlockTypeFlags.Default,
-                    BasePoint = new DxfVector3(0, 0, 0),
-                    XrefPathName = default(string),
-                    Description = default(string),
-                    EndId = NextHandle(),
-                    EndLayer = layer,
-                    Entities = default(IList<object>)
-                });
-
-                return blocks;
-            }
-
-            return Enumerable.Empty<DxfBlock>();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        private DxfBlockRecord CreateBlockRecordForBlock(string name)
-        {
-            return new DxfBlockRecord(_version, NextHandle())
-            {
-                Name = name
-            };
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="line"></param>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="layer"></param>
-        /// <returns></returns>
         private DxfLine CreateLine(XLine line, double x1, double y1, double x2, double y2, string layer)
         {
             if (line != null)
@@ -541,14 +246,6 @@ namespace Test2d
             };
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cx"></param>
-        /// <param name="cy"></param>
-        /// <param name="radius"></param>
-        /// <param name="layer"></param>
-        /// <returns></returns>
         private DxfCircle CreateCircle(double cx, double cy, double radius, string layer)
         {
             double _cx = ToDxfX(cx);
@@ -565,17 +262,6 @@ namespace Test2d
             };
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <param name="startAngle">The start angle in radians.</param>
-        /// <param name="endAngle">The end angle in radians.</param>
-        /// <param name="layer"></param>
-        /// <returns></returns>
         private DxfEllipse CreateEllipse(
             double x, double y, 
             double width, double height, 
@@ -602,16 +288,6 @@ namespace Test2d
             };
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="radius"></param>
-        /// <param name="startAngle"></param>
-        /// <param name="endAngle"></param>
-        /// <param name="layer"></param>
-        /// <returns></returns>
         private DxfArc CreateArc(
             double x, double y,
             double radius,
@@ -633,20 +309,7 @@ namespace Test2d
                 ExtrusionDirection = new DxfVector3(0, 0, 1),
             };
         }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="p1x"></param>
-        /// <param name="p1y"></param>
-        /// <param name="p2x"></param>
-        /// <param name="p2y"></param>
-        /// <param name="p3x"></param>
-        /// <param name="p3y"></param>
-        /// <param name="p4x"></param>
-        /// <param name="p4y"></param>
-        /// <param name="layer"></param>
-        /// <returns></returns>
+
         private DxfSpline CreateSpline(
             double p1x, double p1y, 
             double p2x, double p2y,
@@ -699,18 +362,6 @@ namespace Test2d
             return spline;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="height"></param>
-        /// <param name="horizontalJustification"></param>
-        /// <param name="verticalJustification"></param>
-        /// <param name="style"></param>
-        /// <param name="layer"></param>
-        /// <returns></returns>
         private DxfText CreateText(
             string text, 
             double x, double y, 
@@ -740,24 +391,12 @@ namespace Test2d
             };
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="entities"></param>
-        /// <param name="line"></param>
-        /// <param name="layer"></param>
         private void DrawLine(DxfEntities entities, XLine line, string layer)
         {
             var dxfLine = CreateLine(line, line.Start.X, line.Start.Y, line.End.X, line.End.Y, layer);
             entities.Entities.Add(dxfLine);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="entities"></param>
-        /// <param name="rectangle"></param>
-        /// <param name="layer"></param>
         private void DrawRectangle(DxfEntities entities, XRectangle rectangle, string layer)
         {
             var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
@@ -771,12 +410,6 @@ namespace Test2d
             entities.Entities.Add(dxfLine4);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="entities"></param>
-        /// <param name="ellipse"></param>
-        /// <param name="layer"></param>
         private void DrawEllipse(DxfEntities entities, XEllipse ellipse, string layer)
         {
             var rect = Rect2.Create(ellipse.TopLeft, ellipse.BottomRight);
@@ -788,12 +421,6 @@ namespace Test2d
             entities.Entities.Add(dxfEllipse);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="entities"></param>
-        /// <param name="arc"></param>
-        /// <param name="layer"></param>
         private void DrawArc(DxfEntities entities, XArc arc, string layer)
         {
             var a = GdiArc.FromXArc(arc, 0.0, 0.0);
@@ -821,12 +448,6 @@ namespace Test2d
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="entities"></param>
-        /// <param name="bezier"></param>
-        /// <param name="layer"></param>
         private void DrawBezier(DxfEntities entities, XBezier bezier, string layer)
         {
             var dxfSpline = CreateSpline(
@@ -838,12 +459,6 @@ namespace Test2d
             entities.Entities.Add(dxfSpline);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="entities"></param>
-        /// <param name="qbezier"></param>
-        /// <param name="layer"></param>
         private void DrawQBezier(DxfEntities entities, XQBezier qbezier, string layer)
         {
             double x1 = qbezier.Point1.X;
@@ -865,14 +480,6 @@ namespace Test2d
             entities.Entities.Add(dxfSpline);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="entities"></param>
-        /// <param name="text"></param>
-        /// <param name="layer"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
         private void DrawText(DxfEntities entities, XText text, string layer, ImmutableArray<ShapeProperty> db, Record r)
         {
             DxfHorizontalTextJustification halign;
@@ -927,14 +534,6 @@ namespace Test2d
             entities.Entities.Add(dxfText);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="entities"></param>
-        /// <param name="shapes"></param>
-        /// <param name="layer"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
         private void DrawShapes(DxfEntities entities, IEnumerable<BaseShape> shapes, string layer, ImmutableArray<ShapeProperty> db, Record r)
         {
             foreach (var shape in shapes) 
@@ -1017,11 +616,6 @@ namespace Test2d
             }
         }
  
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="text"></param>
         private void Save(string path, string text)
         {
             try
@@ -1041,97 +635,10 @@ namespace Test2d
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="container"></param>
-        /// <param name="version"></param>
-        public void Save(string path, Container container, DxfAcadVer version)
+        public void Save(string path, Container container)
         {
-            _version = version;
-
             _pageWidth = container.Width;
             _pageHeight = container.Height;
-
-            //_layer = "0";
-            _handle = 0;
-
-            // create dxf file
-            var file = new DxfFile(_version, NextHandle());
-
-            // create header
-            file.Header = new DxfHeader(_version, NextHandle());
-
-            // create classes
-            if (_version > DxfAcadVer.AC1009)
-            {
-                file.Classes = new DxfClasses(_version, NextHandle());
-
-                // file.Classes.Add(new DxfClass(...));
-
-                // end of classes
-            }
-
-            // create tables
-            file.Tables = new DxfTables(_version, NextHandle());
-
-            file.Tables.AppidTable.Id = NextHandle();
-            TableAppids(file.Tables.AppidTable);
-
-            file.Tables.DimstyleTable.Id = NextHandle();
-            TableDimstyles(file.Tables.DimstyleTable);
-
-            file.Tables.BlockRecordTable.Id = NextHandle();
-            if (_version > DxfAcadVer.AC1009)
-            {
-                // NOTE: Required block records by Dxf format.
-                file.Tables.BlockRecordTable.Items.Add(
-                    CreateBlockRecordForBlock("*Model_Space"));
-
-                file.Tables.BlockRecordTable.Items.Add(
-                    CreateBlockRecordForBlock("*Paper_Space"));
-
-                file.Tables.BlockRecordTable.Items.Add(
-                    CreateBlockRecordForBlock("*Paper_Space0"));
-
-                // NOTE: Each BLOCK must have BLOCK_RECORD entry.
-                
-                //file.Tables.BlockRecordTable.Items.Add(
-                //    CreateBlockRecordForBlock("BLOCK_NAME));
-            }
-
-            file.Tables.LtypeTable.Id = NextHandle();
-            TableLtypes(file.Tables.LtypeTable);
-
-            file.Tables.LayerTable.Id = NextHandle();
-            TableLayers(file.Tables.LayerTable, container);
-
-            file.Tables.StyleTable.Id = NextHandle();
-            TableStyles(file.Tables.StyleTable);
-
-            file.Tables.UcsTable.Id = NextHandle();
-            TableUcss(file.Tables.UcsTable);
-
-            file.Tables.ViewTable.Id = NextHandle();
-            TableViews(file.Tables.ViewTable);
-
-            file.Tables.VportTable.Id = NextHandle();
-            TableVports(file.Tables.VportTable);
-
-            // create blocks
-            file.Blocks = new DxfBlocks(_version, NextHandle());
-            foreach (var block in DefaultBlocks())
-            {
-                file.Blocks.Blocks.Add(block);
-            }
-
-            // TODO: Add user blocks.
-
-            // create entities
-            file.Entities = new DxfEntities(_version, NextHandle());
-
-            // TODO: Add user entities.
 
             if (container.Template != null)
             {
@@ -1152,47 +659,8 @@ namespace Test2d
                 }
             }
 
-            // end of entities
-
-            // create objects
-            if (_version > DxfAcadVer.AC1009)
-            {
-                file.Objects = new DxfObjects(_version, NextHandle());
-
-                // mamed dictionary
-                var namedDict = new DxfDictionary(_version, NextHandle())
-                {
-                    OwnerDictionaryHandle = 0.ToDxfHandle(),
-                    HardOwnerFlag = false,
-                    DuplicateRecordCloningFlags = DxfDuplicateRecordCloningFlags.KeepExisting
-                };
-
-                // base dictionary
-                var baseDict = new DxfDictionary(_version, NextHandle())
-                {
-                    OwnerDictionaryHandle = namedDict.Id.ToDxfHandle(),
-                    HardOwnerFlag = false,
-                    DuplicateRecordCloningFlags = DxfDuplicateRecordCloningFlags.KeepExisting
-                };
-
-                // add baseDict to namedDict
-                namedDict.Entries.Add(baseDict.Id.ToDxfHandle(), "ACAD_GROUP");
-
-                // finalize dictionaries
-                file.Objects.Objects.Add(namedDict);
-                file.Objects.Objects.Add(baseDict);
-
-                // TODO: Add Group dictionary.
-                // TODO: Add MLine style dictionary.
-                // TODO: Add image dictionary dictionary.
-
-                // end of objects
-            }
-
-            // set only after file is finilized
-            file.Header.NextAvailableHandle = NextHandle();
-
             Save(path, file.Create());
         }
+        */
     }
 }
