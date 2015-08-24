@@ -1504,14 +1504,13 @@ namespace Test2d
         ///
         /// </summary>
         /// <param name="path"></param>
-        /// <param name="version"></param>
-        public void ExportAsDxf(string path, object version)
+        public void ExportAsDxf(string path)
         {
             try
             {
                 if (_dxfWriter != null)
                 {
-                    _dxfWriter.Save(path, _editor.Project.CurrentContainer, version);
+                    _dxfWriter.Save(path, _editor.Project.CurrentContainer, null);
                 }
             }
             catch (Exception ex)
