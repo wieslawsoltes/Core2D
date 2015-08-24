@@ -8,9 +8,9 @@ Test2d is an application for making data driven 2D diagrams.
 
 ## Building Test2d
 
-* [Visual Studio Community 2015](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx)
-* [SharpDevelop](http://www.icsharpcode.net/OpenSource/SD/Download/#SharpDevelop5x)
-* [MonoDevelop](http://www.monodevelop.com/)
+* [Visual Studio Community 2015](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx) for Windows builds.
+* [SharpDevelop](http://www.icsharpcode.net/OpenSource/SD/Download/#SharpDevelop5x) for Windows builds.
+* [MonoDevelop](http://www.monodevelop.com/) for Linux builds.
 
 ### Supported Platforms
 
