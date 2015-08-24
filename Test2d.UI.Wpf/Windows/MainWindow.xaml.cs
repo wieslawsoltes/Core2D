@@ -259,7 +259,7 @@ namespace Test.Windows
 
             var dlg = new SaveFileDialog()
             {
-                Filter = "Pdf (*.pdf)|*.pdf|Emf (*.emf)|*.emf|Dxf AutoCAD 2000 (*.dxf)|*.dxf|Dxf R10 (*.dxf)|*.dxf|All (*.*)|*.*",
+                Filter = "Pdf (*.pdf)|*.pdf|Emf (*.emf)|*.emf|Dxf (*.dxf)|*.dxf|All (*.*)|*.*",
                 FilterIndex = 0,
                 FileName = name
             };
@@ -277,11 +277,7 @@ namespace Test.Windows
                         Process.Start(dlg.FileName);
                         break;
                     case 3:
-                        context.ExportAsDxf(dlg.FileName, Dxf.DxfAcadVer.AC1015);
-                        Process.Start(dlg.FileName);
-                        break;
-                    case 4:
-                        context.ExportAsDxf(dlg.FileName, Dxf.DxfAcadVer.AC1006);
+                        context.ExportAsDxf(dlg.FileName);
                         Process.Start(dlg.FileName);
                         break;
                     default:

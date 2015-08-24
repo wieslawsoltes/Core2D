@@ -325,8 +325,7 @@ namespace TestEtoForms
             {
                 var dlg = new SaveFileDialog();
                 dlg.Filters.Add(new FileDialogFilter("Pdf", ".pdf"));
-                dlg.Filters.Add(new FileDialogFilter("Dxf AutoCAD 2000", ".dxf"));
-                dlg.Filters.Add(new FileDialogFilter("Dxf R10", ".dxf"));
+                dlg.Filters.Add(new FileDialogFilter("Dxf", ".dxf"));
                 dlg.Filters.Add(new FileDialogFilter("All", ".*"));
 
                 dlg.FileName = _context.Editor.Project.Name;
@@ -342,11 +341,7 @@ namespace TestEtoForms
                             Process.Start(path);
                             break;
                         case 1:
-                            _context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1015);
-                            Process.Start(path);
-                            break;
-                        case 2:
-                            _context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1006);
+                            _context.ExportAsDxf(path);
                             Process.Start(path);
                             break;
                         default:
