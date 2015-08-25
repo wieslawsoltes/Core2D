@@ -72,6 +72,9 @@ rmdir /Q /S Test2d.UI.WinForms\obj
 rmdir /Q /S Test2d.UI.Wpf\bin
 rmdir /Q /S Test2d.UI.Wpf\obj
 
+rmdir /Q /S Test2d.UI.Wpf.Viewer\bin
+rmdir /Q /S Test2d.UI.Wpf.Viewer\obj
+
 rmdir /Q /S packages
 
 pause

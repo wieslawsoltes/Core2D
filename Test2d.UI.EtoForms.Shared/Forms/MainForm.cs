@@ -11,17 +11,16 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using T2d=Test2d;
 
 namespace TestEtoForms
 {
     /// <summary>
     /// 
     /// </summary>
-    public class MainForm : Form, T2d.IView
+    public class MainForm : Form, Test2d.IView
     {
-        private T2d.EditorContext _context;
-        private T2d.ZoomState _state;
+        private Test2d.EditorContext _context;
+        private Test2d.ZoomState _state;
         private Drawable _drawable;
         private Color _background = Color.FromArgb(211, 211, 211, 255);
 
@@ -41,23 +40,23 @@ namespace TestEtoForms
         /// </summary>
         private void InitializeContext()
         {
-            _context = new T2d.EditorContext()
+            _context = new Test2d.EditorContext()
             {
                 View = this,
-                Renderers = new T2d.IRenderer[] { new EtoRenderer(72.0 / 96.0) },
-                ProjectFactory = new T2d.ProjectFactory(),
+                Renderers = new Test2d.IRenderer[] { new EtoRenderer(72.0 / 96.0) },
+                ProjectFactory = new Test2d.ProjectFactory(),
                 TextClipboard = new TextClipboard(),
-                Serializer = new T2d.NewtonsoftSerializer(),
-                PdfWriter = new T2d.PdfWriter(),
-                DxfWriter = new T2d.DxfWriter(),
-                CsvReader = new T2d.CsvHelperReader(),
-                CsvWriter = new T2d.CsvHelperWriter()
+                Serializer = new Test2d.NewtonsoftSerializer(),
+                PdfWriter = new Test2d.PdfWriter(),
+                DxfWriter = new Test2d.DxfWriter(),
+                CsvReader = new Test2d.CsvHelperReader(),
+                CsvWriter = new Test2d.CsvHelperWriter()
             };
-            _context.InitializeEditor(new T2d.TraceLog());
-            _context.Editor.Renderers[0].State.DrawShapeState = T2d.ShapeState.Visible;
+            _context.InitializeEditor(new Test2d.TraceLog());
+            _context.Editor.Renderers[0].State.DrawShapeState = Test2d.ShapeState.Visible;
             _context.Editor.GetImageKey = () => GetImageKey();
 
-            _state = new T2d.ZoomState(_context, InvalidateContainer);
+            _state = new Test2d.ZoomState(_context, this.InvalidateContainer);
 
             DataContext = _context;
         }
@@ -325,8 +324,7 @@ namespace TestEtoForms
             {
                 var dlg = new SaveFileDialog();
                 dlg.Filters.Add(new FileDialogFilter("Pdf", ".pdf"));
-                dlg.Filters.Add(new FileDialogFilter("Dxf AutoCAD 2000", ".dxf"));
-                dlg.Filters.Add(new FileDialogFilter("Dxf R10", ".dxf"));
+                dlg.Filters.Add(new FileDialogFilter("Dxf", ".dxf"));
                 dlg.Filters.Add(new FileDialogFilter("All", ".*"));
 
                 dlg.FileName = _context.Editor.Project.Name;
@@ -342,11 +340,7 @@ namespace TestEtoForms
                             Process.Start(path);
                             break;
                         case 1:
-                            _context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1015);
-                            Process.Start(path);
-                            break;
-                        case 2:
-                            _context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1006);
+                            _context.ExportAsDxf(path);
                             Process.Start(path);
                             break;
                         default:
@@ -816,11 +810,11 @@ namespace TestEtoForms
         /// <param name="c"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        private void DrawBackground(Graphics g, T2d.ArgbColor c, double width, double height)
+        private void DrawBackground(Graphics g, Test2d.ArgbColor c, double width, double height)
         {
             var color = Color.FromArgb(c.R, c.G, c.B, c.A);
             var brush = new SolidBrush(color);
-            var rect = T2d.Rect2.Create(0, 0, width, height);
+            var rect = Test2d.Rect2.Create(0, 0, width, height);
             g.FillRectangle(
                 brush,
                 (float)rect.X,

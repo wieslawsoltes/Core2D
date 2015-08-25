@@ -184,11 +184,7 @@ namespace TestWinForms
                         Process.Start(path);
                         break;
                     case 2:
-                        context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1015);
-                        Process.Start(path);
-                        break;
-                    case 3:
-                        context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1006);
+                        context.ExportAsDxf(path);
                         Process.Start(path);
                         break;
                     default:
@@ -446,7 +442,7 @@ namespace TestWinForms
             if (context == null)
                 return;
 
-            saveFileDialog2.Filter = "Pdf (*.pdf)|*.pdf|Dxf AutoCAD 2000 (*.dxf)|*.dxf|Dxf R10 (*.dxf)|*.dxf|All (*.*)|*.*";
+            saveFileDialog2.Filter = "Pdf (*.pdf)|*.pdf|Dxf (*.dxf)|*.dxf|All (*.*)|*.*";
             saveFileDialog2.FilterIndex = 0;
             saveFileDialog2.FileName = context.Editor.Project.Name;
             saveFileDialog2.ShowDialog(this);

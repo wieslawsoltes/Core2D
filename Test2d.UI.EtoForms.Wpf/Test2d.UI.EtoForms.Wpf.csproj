@@ -72,6 +72,10 @@
       <Project>{c2d17c89-b904-4bce-8bce-fc65020de7bb}</Project>
       <Name>Test2d.UI.EtoForms.Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Test2d\Test2d.csproj">
+      <Project>{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}</Project>
+      <Name>Test2d</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
