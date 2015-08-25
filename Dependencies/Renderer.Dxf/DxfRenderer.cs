@@ -48,6 +48,9 @@ namespace netDxf
         }
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
     public class DxfRenderer : T2d.ObservableObject, T2d.IRenderer
     {
         private T2d.RendererState _state = new T2d.RendererState();
