@@ -19,6 +19,7 @@ namespace PdfSharp
     {
         private bool _enableImageCache = true;
         private IDictionary<string, XImage> _biCache;
+        private Func<double, double> _scaleToPage;
         private Test2d.RendererState _state = new Test2d.RendererState();
 
         /// <summary>
@@ -48,11 +49,6 @@ namespace PdfSharp
         {
             return new PdfRenderer();
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private Func<double, double> _scaleToPage;
 
         /// <summary>
         /// 
@@ -479,6 +475,9 @@ namespace PdfSharp
         /// <param name="r"></param>
         public void Draw(object gfx, Test2d.XLine line, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
         {
+            if (!line.IsStroked)
+                return;
+
             var _gfx = gfx as XGraphics;
 
             XSolidBrush fillLine = ToXSolidBrush(line.Style.Fill);
@@ -660,7 +659,7 @@ namespace PdfSharp
                     _scaleToPage(rect.Height));
             }
 
-            if (rectangle.IsGrid)
+            if (rectangle.IsGrid && rectangle.IsStroked)
             {
                 DrawGridInternal(
                     _gfx,
@@ -794,14 +793,14 @@ namespace PdfSharp
             {
                 var path = new XGraphicsPath();
                 path.AddBezier(
-                    _scaleToPage(bezier.Point1.X),
-                    _scaleToPage(bezier.Point1.Y),
-                    _scaleToPage(bezier.Point2.X), 
-                    _scaleToPage(bezier.Point2.Y),
-                    _scaleToPage(bezier.Point3.X), 
-                    _scaleToPage(bezier.Point3.Y),
-                    _scaleToPage(bezier.Point4.X),
-                    _scaleToPage(bezier.Point4.Y));
+                    _scaleToPage(bezier.Point1.X + dx),
+                    _scaleToPage(bezier.Point1.Y + dy),
+                    _scaleToPage(bezier.Point2.X + dx), 
+                    _scaleToPage(bezier.Point2.Y + dy),
+                    _scaleToPage(bezier.Point3.X + dx), 
+                    _scaleToPage(bezier.Point3.Y + dy),
+                    _scaleToPage(bezier.Point4.X + dx),
+                    _scaleToPage(bezier.Point4.Y + dy));
 
                 if (bezier.IsStroked)
                 {
@@ -823,14 +822,14 @@ namespace PdfSharp
                 {
                     _gfx.DrawBezier(
                         ToXPen(bezier.Style, _scaleToPage),
-                        _scaleToPage(bezier.Point1.X),
-                        _scaleToPage(bezier.Point1.Y),
-                        _scaleToPage(bezier.Point2.X),
-                        _scaleToPage(bezier.Point2.Y),
-                        _scaleToPage(bezier.Point3.X),
-                        _scaleToPage(bezier.Point3.Y),
-                        _scaleToPage(bezier.Point4.X),
-                        _scaleToPage(bezier.Point4.Y));
+                        _scaleToPage(bezier.Point1.X + dx),
+                        _scaleToPage(bezier.Point1.Y + dy),
+                        _scaleToPage(bezier.Point2.X + dx),
+                        _scaleToPage(bezier.Point2.Y + dy),
+                        _scaleToPage(bezier.Point3.X + dx),
+                        _scaleToPage(bezier.Point3.Y + dy),
+                        _scaleToPage(bezier.Point4.X + dx),
+                        _scaleToPage(bezier.Point4.Y + dy));
                 }
             }
         }
