@@ -21,6 +21,33 @@ namespace netDxf
     /// <summary>
     /// 
     /// </summary>
+    public static class DxfHelpers
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public static double LineweightFactor = 96.0/2540.0;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public static short[] Lineweights = 
+        {
+            -3, -2, -1, 0, 5, 9, 13, 15, 18, 20, 25, 30, 35, 40, 50, 53, 60, 70, 80, 90, 100, 106, 120, 140, 158, 200, 211 
+        };
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="thickness"></param>
+        /// <returns></returns>
+        public static short ThicknessToLineweight(double thickness)
+        {
+            short lineweight = (short)(thickness / LineweightFactor);
+            return Lineweights.OrderBy(x => Math.Abs((long) x - lineweight)).First();
+        }
+    }
+    
     public class DxfRenderer : T2d.ObservableObject, T2d.IRenderer
     {
         private T2d.RendererState _state = new T2d.RendererState();
