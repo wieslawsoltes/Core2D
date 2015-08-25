@@ -267,7 +267,7 @@ namespace netDxf
             return new Line(new Vector3(_x1, _y1, 0), new Vector3(_x2, _y2, 0));
         }
 
-        private Ellipse CreateEllipse(double x, double y, double width, double height, double startAngle, double endAngle)
+        private Ellipse CreateEllipse(double x, double y, double width, double height)
         {
             double _cx = ToDxfX(x + width / 2.0);
             double _cy = ToDxfY(y + height / 2.0);
@@ -279,12 +279,11 @@ namespace netDxf
                 Center = new Vector3(_cx, _cy, 0),
                 MajorAxis = major,
                 MinorAxis = minor,
-                StartAngle = startAngle,
-                EndAngle = endAngle
+                Rotation  = height > width ? 90.0 : 0.0
             };
         }
 
-        private Arc CreateArc( double x, double y, double radius, double startAngle, double endAngle)
+        private Arc CreateArc(double x, double y, double radius, double startAngle, double endAngle)
         {
             double _cx = ToDxfX(x + radius / 2.0);
             double _cy = ToDxfY(y + radius / 2.0);
@@ -323,23 +322,39 @@ namespace netDxf
 
         private void DrawLine(DxfDocument doc, T2d.XLine line, Layer layer)
         {
+            var style = line.Style;
             var dxfLine = CreateLine(line, line.Start.X, line.Start.Y, line.End.X, line.End.Y);
             dxfLine.Layer = layer;
-
+            //dxfLine.Color = new AciColor(style.Stroke.R, style.Stroke.G, style.Stroke.B);
+            //dxfLine.Transparency.Value = (short)((double)style.Stroke.A * 90.0/255.0);
+            //dxfLine.Lineweight.Value = DxfHelpers.ThicknessToLineweight(style.Thickness);
             doc.AddEntity(dxfLine);
         }
 
         private void DrawRectangle(DxfDocument doc, T2d.XRectangle rectangle, Layer layer)
         {
+            var style = rectangle.Style;
             var rect = T2d.Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
             var dxfLine1 = CreateLine(null, rect.X, rect.Y, rect.X + rect.Width, rect.Y);
             var dxfLine2 = CreateLine(null, rect.X, rect.Y + rect.Height, rect.X + rect.Width, rect.Y + rect.Height);
             var dxfLine3 = CreateLine(null, rect.X, rect.Y, rect.X, rect.Y + rect.Height);
             var dxfLine4 = CreateLine(null, rect.X + rect.Width, rect.Y, rect.X + rect.Width, rect.Y + rect.Height);
             dxfLine1.Layer = layer;
+            //dxfLine1.Color = new AciColor(style.Stroke.R, style.Stroke.G, style.Stroke.B);
+            //dxfLine1.Transparency.Value = (short)((double)style.Stroke.A * 90.0/255.0);
+            //dxfLine1.Lineweight.Value = DxfHelpers.ThicknessToLineweight(style.Thickness);
             dxfLine2.Layer = layer;
+            //dxfLine2.Color = new AciColor(style.Stroke.R, style.Stroke.G, style.Stroke.B);
+            //dxfLine2.Transparency.Value = (short)((double)style.Stroke.A * 90.0/255.0);
+            //dxfLine2.Lineweight.Value = DxfHelpers.ThicknessToLineweight(style.Thickness);
             dxfLine3.Layer = layer;
+            //dxfLine3.Color = new AciColor(style.Stroke.R, style.Stroke.G, style.Stroke.B);
+            //dxfLine3.Transparency.Value = (short)((double)style.Stroke.A * 90.0/255.0);
+            //dxfLine3.Lineweight.Value = DxfHelpers.ThicknessToLineweight(style.Thickness);
             dxfLine4.Layer = layer;
+            //dxfLine4.Color = new AciColor(style.Stroke.R, style.Stroke.G, style.Stroke.B);
+            //dxfLine4.Transparency.Value = (short)((double)style.Stroke.A * 90.0/255.0);
+            //dxfLine4.Lineweight.Value = DxfHelpers.ThicknessToLineweight(style.Thickness);
             doc.AddEntity(dxfLine1);
             doc.AddEntity(dxfLine2);
             doc.AddEntity(dxfLine3);
@@ -348,57 +363,131 @@ namespace netDxf
 
         private void DrawEllipse(DxfDocument doc, T2d.XEllipse ellipse, Layer layer)
         {
+            var style = ellipse.Style;
             var rect = T2d.Rect2.Create(ellipse.TopLeft, ellipse.BottomRight);
             var dxfEllipse = CreateEllipse(
-                rect.X, rect.Y, 
-                rect.Width, rect.Height, 
-                0.0, 360.0);
+                rect.X, 
+                rect.Y,
+                rect.Width, 
+                rect.Height);
             dxfEllipse.Layer = layer;
-
+            //dxfEllipse.Color = new AciColor(style.Stroke.R, style.Stroke.G, style.Stroke.B);
+            //dxfEllipse.Transparency.Value = (short)((double)style.Stroke.A * 90.0/255.0);
+            //dxfEllipse.Lineweight.Value = DxfHelpers.ThicknessToLineweight(style.Thickness);
             doc.AddEntity(dxfEllipse);
         }
 
         private void DrawArc(DxfDocument doc, T2d.XArc arc, Layer layer)
         {
+            var style = arc.Style;
             var a = T2d.GdiArc.FromXArc(arc, 0.0, 0.0);
 
-            if (a.RadiusX != a.RadiusY)
+            double _cx = ToDxfX(a.X + a.Width / 2.0);
+            double _cy = ToDxfY(a.Y + a.Height / 2.0);
+            double minor = Math.Min(a.Height, a.Width);
+            double major = Math.Max(a.Height, a.Width);
+
+            if (a.Height == a.Width)
             {
-                var dxfEllipse = CreateEllipse(
-                    a.X, a.Y,
-                    a.Width, a.Height,
-                    a.StartAngle,
-                    a.EndAngle);
+                //*/
+                double startAngle = a.StartAngle;
+                double endAngle = a.EndAngle;
+                double rotation  = 0.0;
+                
+                var dxfEllipse = new Ellipse()
+                {
+                    Center = new Vector3(_cx, _cy, 0),
+                    MajorAxis = major,
+                    MinorAxis = minor,
+                    StartAngle = startAngle,
+                    EndAngle = endAngle,
+                    Rotation  = rotation
+                };
                 dxfEllipse.Layer = layer;
-
+                //dxfEllipse.Color = new AciColor(style.Stroke.R, style.Stroke.G, style.Stroke.B);
+                //dxfEllipse.Transparency.Value = (short)((double)style.Stroke.A * 90.0/255.0);
+                //dxfEllipse.Lineweight.Value = DxfHelpers.ThicknessToLineweight(style.Thickness);
                 doc.AddEntity(dxfEllipse);
+                //*/
             }
-            else
+            else if (a.Height > a.Width)
             {
-                var dxfArc = CreateArc(
-                    a.X, a.Y, 
-                    a.RadiusX, 
-                    a.StartAngle, a.EndAngle);
-                dxfArc.Layer = layer;
-
-                doc.AddEntity(dxfArc);
+                //*
+                double startAngle = a.StartAngle;
+                double endAngle = a.EndAngle;
+                double rotation  = 90.0;
+                
+                var dxfEllipse = new Ellipse()
+                {
+                    Center = new Vector3(_cx, _cy, 0),
+                    MajorAxis = major,
+                    MinorAxis = minor,
+                    StartAngle = startAngle,
+                    EndAngle = endAngle,
+                    Rotation  = rotation
+                };
+                dxfEllipse.Layer = layer;
+                //dxfEllipse.Color = new AciColor(style.Stroke.R, style.Stroke.G, style.Stroke.B);
+                //dxfEllipse.Transparency.Value = (short)((double)style.Stroke.A * 90.0/255.0);
+                //dxfEllipse.Lineweight.Value = DxfHelpers.ThicknessToLineweight(style.Thickness);
+                doc.AddEntity(dxfEllipse);
+                //*/
             }
+            else if (a.Height < a.Width)
+            {
+                //*
+                double startAngle = a.StartAngle;
+                double endAngle = a.EndAngle;
+                double rotation  = 0.0;
+                
+                var dxfEllipse = new Ellipse()
+                {
+                    Center = new Vector3(_cx, _cy, 0),
+                    MajorAxis = major,
+                    MinorAxis = minor,
+                    StartAngle = startAngle,
+                    EndAngle = endAngle,
+                    Rotation  = rotation
+                };
+                dxfEllipse.Layer = layer;
+                //dxfEllipse.Color = new AciColor(style.Stroke.R, style.Stroke.G, style.Stroke.B);
+                //dxfEllipse.Transparency.Value = (short)((double)style.Stroke.A * 90.0/255.0);
+                //dxfEllipse.Lineweight.Value = DxfHelpers.ThicknessToLineweight(style.Thickness);
+                doc.AddEntity(dxfEllipse);
+                //*/
+            }
+
+            /*
+            var dxfArc = CreateArc(
+                a.X, 
+                a.Y,
+                a.RadiusX, 
+                a.StartAngle, 
+                a.EndAngle);
+            dxfArc.Layer = layer;
+
+            doc.AddEntity(dxfArc);
+            */
         }
 
         private void DrawBezier(DxfDocument doc, T2d.XBezier bezier, Layer layer)
         {
+            var style = bezier.Style;
             var dxfSpline = CreateSpline(
                 bezier.Point1.X, bezier.Point1.Y,
                 bezier.Point2.X, bezier.Point2.Y,
                 bezier.Point3.X, bezier.Point3.Y,
                 bezier.Point4.X, bezier.Point4.Y);
             dxfSpline.Layer = layer;
-
+            //dxfSpline.Color = new AciColor(style.Stroke.R, style.Stroke.G, style.Stroke.B);
+            //dxfSpline.Transparency.Value = (short)((double)style.Stroke.A * 90.0/255.0);
+            //dxfSpline.Lineweight.Value = DxfHelpers.ThicknessToLineweight(style.Thickness);
             doc.AddEntity(dxfSpline);
         }
 
         private void DrawQBezier(DxfDocument doc, T2d.XQBezier qbezier, Layer layer)
         {
+            var style = qbezier.Style;
             double x1 = qbezier.Point1.X;
             double y1 = qbezier.Point1.Y;
             double x2 = qbezier.Point1.X + (2.0 * (qbezier.Point2.X - qbezier.Point1.X)) / 3.0;
@@ -414,12 +503,15 @@ namespace netDxf
                 x3, y3,
                 x4, y4);
             dxfSpline.Layer = layer;
-
+            //dxfSpline.Color = new AciColor(style.Stroke.R, style.Stroke.G, style.Stroke.B);
+            //dxfSpline.Transparency.Value = (short)((double)style.Stroke.A * 90.0/255.0);
+            //dxfSpline.Lineweight.Value = DxfHelpers.ThicknessToLineweight(style.Thickness);
             doc.AddEntity(dxfSpline);
         }
 
         private void DrawText(DxfDocument doc, T2d.XText text, Layer layer, ImmutableArray<T2d.ShapeProperty> db, T2d.Record r)
         {
+            var style = text.Style;
             var alignment = default(TextAlignment);
             double x, y;
             var rect = T2d.Rect2.Create(text.TopLeft, text.BottomRight);
@@ -509,7 +601,9 @@ namespace netDxf
                 text.Style.TextStyle.FontSize * (72.0 / 96.0),
                 alignment);
             dxfText.Layer = layer;
-
+            //dxfText.Color = new AciColor(style.Stroke.R, style.Stroke.G, style.Stroke.B);
+            //dxfText.Transparency.Value = (short)((double)style.Stroke.A * 90.0/255.0);
+            //dxfText.Lineweight.Value = DxfHelpers.ThicknessToLineweight(style.Thickness);
             doc.AddEntity(dxfText);
         }
 
