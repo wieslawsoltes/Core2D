@@ -22,12 +22,17 @@ namespace Test2d
             if (string.IsNullOrEmpty(path) || item == null)
                 return;
 
-            var renderer = new DxfRenderer();
-            renderer.State.DrawShapeState = ShapeState.Printable;
-
+            var ic = options as IImageCache;
+            if (options == null)
+                return;
+            
+            var r = new DxfRenderer();
+            r.State.DrawShapeState = ShapeState.Printable;
+            r.State.ImageCache = ic;
+            
             if (item is Container)
             {
-                renderer.Save(path, item as Container);
+                r.Save(path, item as Container);
             }
         }
     }
