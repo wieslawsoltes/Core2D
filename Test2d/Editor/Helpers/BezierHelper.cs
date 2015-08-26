@@ -21,11 +21,10 @@ namespace Test2d
         private XLine _line12;
         private XLine _line43;
         private XLine _line23;
-        private double _pointEllipseRadius = 3.0;
-        private XEllipse _ellipsePoint1;
-        private XEllipse _ellipsePoint2;
-        private XEllipse _ellipsePoint3;
-        private XEllipse _ellipsePoint4;
+        private XPoint _helperPoint1;
+        private XPoint _helperPoint2;
+        private XPoint _helperPoint3;
+        private XPoint _helperPoint4;
 
         /// <summary>
         /// 
@@ -318,10 +317,10 @@ namespace Test2d
         public override void ToStateOne()
         {
             _style = _editor.Project.Options.HelperStyle;
-            _ellipsePoint1 = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint1);
-            _ellipsePoint4 = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint4);
+            _helperPoint1 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint1);
+            _helperPoint4 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint4);
         }
         
         /// <summary>
@@ -332,8 +331,8 @@ namespace Test2d
             _style = _editor.Project.Options.HelperStyle;
             _line12 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line12);
-            _ellipsePoint2 = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint2);
+            _helperPoint2 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint2);
         }
 
         /// <summary>
@@ -345,8 +344,8 @@ namespace Test2d
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line43);
             _line23 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line23);
-            _ellipsePoint3 = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint3);
+            _helperPoint3 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint3);
         }
 
         /// <summary>
@@ -388,36 +387,28 @@ namespace Test2d
                 _line23.End.Y = bezier.Point3.Y;
             }
  
-            if (_ellipsePoint1 != null)
+            if (_helperPoint1 != null)
             {
-                _ellipsePoint1.TopLeft.X = bezier.Point1.X - _pointEllipseRadius;
-                _ellipsePoint1.TopLeft.Y = bezier.Point1.Y - _pointEllipseRadius;
-                _ellipsePoint1.BottomRight.X = bezier.Point1.X + _pointEllipseRadius;
-                _ellipsePoint1.BottomRight.Y = bezier.Point1.Y + _pointEllipseRadius;
+                _helperPoint1.X = bezier.Point1.X;
+                _helperPoint1.Y = bezier.Point1.Y;
             }
             
-            if (_ellipsePoint2 != null)
+            if (_helperPoint2 != null)
             {
-                _ellipsePoint2.TopLeft.X = bezier.Point2.X - _pointEllipseRadius;
-                _ellipsePoint2.TopLeft.Y = bezier.Point2.Y - _pointEllipseRadius;
-                _ellipsePoint2.BottomRight.X = bezier.Point2.X + _pointEllipseRadius;
-                _ellipsePoint2.BottomRight.Y = bezier.Point2.Y + _pointEllipseRadius;
+                _helperPoint2.X = bezier.Point2.X;
+                _helperPoint2.Y = bezier.Point2.Y;
             }
             
-            if (_ellipsePoint3 != null)
+            if (_helperPoint3 != null)
             {
-                _ellipsePoint3.TopLeft.X = bezier.Point3.X - _pointEllipseRadius;
-                _ellipsePoint3.TopLeft.Y = bezier.Point3.Y - _pointEllipseRadius;
-                _ellipsePoint3.BottomRight.X = bezier.Point3.X + _pointEllipseRadius;
-                _ellipsePoint3.BottomRight.Y = bezier.Point3.Y + _pointEllipseRadius;
+                _helperPoint3.X = bezier.Point3.X;
+                _helperPoint3.Y = bezier.Point3.Y;
             }
             
-            if (_ellipsePoint4 != null)
+            if (_helperPoint4 != null)
             {
-                _ellipsePoint4.TopLeft.X = bezier.Point4.X - _pointEllipseRadius;
-                _ellipsePoint4.TopLeft.Y = bezier.Point4.Y - _pointEllipseRadius;
-                _ellipsePoint4.BottomRight.X = bezier.Point4.X + _pointEllipseRadius;
-                _ellipsePoint4.BottomRight.Y = bezier.Point4.Y + _pointEllipseRadius;
+                _helperPoint4.X = bezier.Point4.X;
+                _helperPoint4.Y = bezier.Point4.Y;
             }
         }
 
@@ -452,28 +443,28 @@ namespace Test2d
                 _line23 = null;
             }
             
-            if (_ellipsePoint1 != null)
+            if (_helperPoint1 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint1);
-                _ellipsePoint1 = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint1);
+                _helperPoint1 = null;
             }
             
-            if (_ellipsePoint2 != null)
+            if (_helperPoint2 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint2);
-                _ellipsePoint2 = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint2);
+                _helperPoint2 = null;
             }
    
-            if (_ellipsePoint3 != null)
+            if (_helperPoint3 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint3);
-                _ellipsePoint3 = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint3);
+                _helperPoint3 = null;
             }
             
-            if (_ellipsePoint4 != null)
+            if (_helperPoint4 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint4);
-                _ellipsePoint4 = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint4);
+                _helperPoint4 = null;
             }
 
             _style = null;

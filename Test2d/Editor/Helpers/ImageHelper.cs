@@ -17,10 +17,8 @@ namespace Test2d
         private State _currentState = State.None;
         private XImage _shape;
 
-        private ShapeStyle _style;
-        private double _pointEllipseRadius = 3.0;
-        private XEllipse _ellipseTopLeft;
-        private XEllipse _ellipseBottomRight;
+        private XPoint _topLeftHelperPoint;
+        private XPoint _bottomRightHelperPoint;
 
         /// <summary>
         /// 
@@ -206,11 +204,10 @@ namespace Test2d
         /// </summary>
         public override void ToStateOne()
         {
-            _style = _editor.Project.Options.HelperStyle;
-            _ellipseTopLeft = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseTopLeft);
-            _ellipseBottomRight = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseBottomRight);
+            _topLeftHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_topLeftHelperPoint);
+            _bottomRightHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bottomRightHelperPoint);
         }
         
         /// <summary>
@@ -240,20 +237,16 @@ namespace Test2d
         /// <param name="shape"></param>
         public override void Move(BaseShape shape)
         {
-            if (_ellipseTopLeft != null)
+            if (_topLeftHelperPoint != null)
             {
-                _ellipseTopLeft.TopLeft.X = _shape.TopLeft.X - _pointEllipseRadius;
-                _ellipseTopLeft.TopLeft.Y = _shape.TopLeft.Y - _pointEllipseRadius;
-                _ellipseTopLeft.BottomRight.X = _shape.TopLeft.X + _pointEllipseRadius;
-                _ellipseTopLeft.BottomRight.Y = _shape.TopLeft.Y + _pointEllipseRadius;
+                _topLeftHelperPoint.X = _shape.TopLeft.X;
+                _topLeftHelperPoint.Y = _shape.TopLeft.Y;
             }
 
-            if (_ellipseBottomRight != null)
+            if (_bottomRightHelperPoint != null)
             {
-                _ellipseBottomRight.TopLeft.X = _shape.BottomRight.X - _pointEllipseRadius;
-                _ellipseBottomRight.TopLeft.Y = _shape.BottomRight.Y - _pointEllipseRadius;
-                _ellipseBottomRight.BottomRight.X = _shape.BottomRight.X + _pointEllipseRadius;
-                _ellipseBottomRight.BottomRight.Y = _shape.BottomRight.Y + _pointEllipseRadius;
+                _bottomRightHelperPoint.X = _shape.BottomRight.X;
+                _bottomRightHelperPoint.Y = _shape.BottomRight.Y;
             }
         }
 
@@ -270,19 +263,17 @@ namespace Test2d
         /// </summary>
         public override void Remove()
         {
-            if (_ellipseTopLeft != null)
+            if (_topLeftHelperPoint != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipseTopLeft);
-                _ellipseTopLeft = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_topLeftHelperPoint);
+                _topLeftHelperPoint = null;
             }
 
-            if (_ellipseBottomRight != null)
+            if (_bottomRightHelperPoint != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipseBottomRight);
-                _ellipseBottomRight = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bottomRightHelperPoint);
+                _bottomRightHelperPoint = null;
             }
-
-            _style = null;
         }
     }
 }

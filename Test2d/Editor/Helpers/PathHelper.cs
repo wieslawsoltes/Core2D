@@ -35,24 +35,23 @@ namespace Test2d
         private XPoint _qbezierPoint3;
         // helpers
         private ShapeStyle _style;
-        private double _pointEllipseRadius = 3.0;
         // line helper
-        private XEllipse _lineEllipseStart;
-        private XEllipse _lineEllipseEnd;
+        private XPoint _lineStartHelperPoint;
+        private XPoint _lineEndHelperPoint;
         // bezier helper
         private XLine _bezierLine12;
         private XLine _bezierLine43;
         private XLine _bezierLine23;
-        private XEllipse _bezierEllipsePoint1;
-        private XEllipse _bezierEllipsePoint2;
-        private XEllipse _bezierEllipsePoint3;
-        private XEllipse _bezierEllipsePoint4;
+        private XPoint _bezierHelperPoint1;
+        private XPoint _bezierHelperPoint2;
+        private XPoint _bezierHelperPoint3;
+        private XPoint _bezierHelperPoint4;
         // qbezier helper
         private XLine _qbezierLine12;
         private XLine _qbezierLine32;
-        private XEllipse _qbezierEllipsePoint1;
-        private XEllipse _qbezierEllipsePoint2;
-        private XEllipse _qbezierEllipsePoint3;
+        private XPoint _qbezierHelperPoint1;
+        private XPoint _qbezierHelperPoint2;
+        private XPoint _qbezierHelperPoint3;
 
         /// <summary>
         /// 
@@ -776,10 +775,10 @@ namespace Test2d
         private void ToStateOneLine()
         {
             _style = _editor.Project.Options.HelperStyle;
-            _lineEllipseStart = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_lineEllipseStart);
-            _lineEllipseEnd = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_lineEllipseEnd);
+            _lineStartHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_lineStartHelperPoint);
+            _lineEndHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_lineEndHelperPoint);
         }
 
         private void ToStateOneArc()
@@ -790,19 +789,19 @@ namespace Test2d
         private void ToStateOneBezier()
         {
             _style = _editor.Project.Options.HelperStyle;
-            _bezierEllipsePoint1 = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierEllipsePoint1);
-            _bezierEllipsePoint4 = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierEllipsePoint4);
+            _bezierHelperPoint1 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierHelperPoint1);
+            _bezierHelperPoint4 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierHelperPoint4);
         }
 
         private void ToStateOneQBezier()
         {
             _style = _editor.Project.Options.HelperStyle;
-            _qbezierEllipsePoint1 = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierEllipsePoint1);
-            _qbezierEllipsePoint3 = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierEllipsePoint3);
+            _qbezierHelperPoint1 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierHelperPoint1);
+            _qbezierHelperPoint3 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierHelperPoint3);
         }
 
         private void ToStateTwoArc()
@@ -815,8 +814,8 @@ namespace Test2d
             _style = _editor.Project.Options.HelperStyle;
             _bezierLine12 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierLine12);
-            _bezierEllipsePoint2 = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierEllipsePoint2);
+            _bezierHelperPoint2 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierHelperPoint2);
         }
 
         private void ToStateTwoQBezier()
@@ -826,8 +825,8 @@ namespace Test2d
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierLine12);
             _qbezierLine32 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierLine32);
-            _qbezierEllipsePoint2 = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierEllipsePoint2);
+            _qbezierHelperPoint2 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_qbezierHelperPoint2);
         }
 
         private void ToStateThreeArc()
@@ -841,26 +840,22 @@ namespace Test2d
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierLine43);
             _bezierLine23 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierLine23);
-            _bezierEllipsePoint3 = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierEllipsePoint3);
+            _bezierHelperPoint3 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bezierHelperPoint3);
         }
 
         private void MoveLineHelpers()
         {
-            if (_lineEllipseStart != null)
+            if (_lineStartHelperPoint != null)
             {
-                _lineEllipseStart.TopLeft.X = _lineStart.X - _pointEllipseRadius;
-                _lineEllipseStart.TopLeft.Y = _lineStart.Y - _pointEllipseRadius;
-                _lineEllipseStart.BottomRight.X = _lineStart.X + _pointEllipseRadius;
-                _lineEllipseStart.BottomRight.Y = _lineStart.Y + _pointEllipseRadius;
+                _lineStartHelperPoint.X = _lineStart.X;
+                _lineStartHelperPoint.Y = _lineStart.Y;
             }
 
-            if (_lineEllipseEnd != null)
+            if (_lineEndHelperPoint != null)
             {
-                _lineEllipseEnd.TopLeft.X = _lineEnd.X - _pointEllipseRadius;
-                _lineEllipseEnd.TopLeft.Y = _lineEnd.Y - _pointEllipseRadius;
-                _lineEllipseEnd.BottomRight.X = _lineEnd.X + _pointEllipseRadius;
-                _lineEllipseEnd.BottomRight.Y = _lineEnd.Y + _pointEllipseRadius;
+                _lineEndHelperPoint.X = _lineEnd.X;
+                _lineEndHelperPoint.Y = _lineEnd.Y;
             }
         }
 
@@ -895,36 +890,28 @@ namespace Test2d
                 _bezierLine23.End.Y = _bezierPoint3.Y;
             }
 
-            if (_bezierEllipsePoint1 != null)
+            if (_bezierHelperPoint1 != null)
             {
-                _bezierEllipsePoint1.TopLeft.X = _bezierPoint1.X - _pointEllipseRadius;
-                _bezierEllipsePoint1.TopLeft.Y = _bezierPoint1.Y - _pointEllipseRadius;
-                _bezierEllipsePoint1.BottomRight.X = _bezierPoint1.X + _pointEllipseRadius;
-                _bezierEllipsePoint1.BottomRight.Y = _bezierPoint1.Y + _pointEllipseRadius;
+                _bezierHelperPoint1.X = _bezierPoint1.X;
+                _bezierHelperPoint1.Y = _bezierPoint1.Y;
             }
 
-            if (_bezierEllipsePoint2 != null)
+            if (_bezierHelperPoint2 != null)
             {
-                _bezierEllipsePoint2.TopLeft.X = _bezierPoint2.X - _pointEllipseRadius;
-                _bezierEllipsePoint2.TopLeft.Y = _bezierPoint2.Y - _pointEllipseRadius;
-                _bezierEllipsePoint2.BottomRight.X = _bezierPoint2.X + _pointEllipseRadius;
-                _bezierEllipsePoint2.BottomRight.Y = _bezierPoint2.Y + _pointEllipseRadius;
+                _bezierHelperPoint2.X = _bezierPoint2.X;
+                _bezierHelperPoint2.Y = _bezierPoint2.Y;
             }
 
-            if (_bezierEllipsePoint3 != null)
+            if (_bezierHelperPoint3 != null)
             {
-                _bezierEllipsePoint3.TopLeft.X = _bezierPoint3.X - _pointEllipseRadius;
-                _bezierEllipsePoint3.TopLeft.Y = _bezierPoint3.Y - _pointEllipseRadius;
-                _bezierEllipsePoint3.BottomRight.X = _bezierPoint3.X + _pointEllipseRadius;
-                _bezierEllipsePoint3.BottomRight.Y = _bezierPoint3.Y + _pointEllipseRadius;
+                _bezierHelperPoint3.X = _bezierPoint3.X;
+                _bezierHelperPoint3.Y = _bezierPoint3.Y;
             }
 
-            if (_bezierEllipsePoint4 != null)
+            if (_bezierHelperPoint4 != null)
             {
-                _bezierEllipsePoint4.TopLeft.X = _bezierPoint4.X - _pointEllipseRadius;
-                _bezierEllipsePoint4.TopLeft.Y = _bezierPoint4.Y - _pointEllipseRadius;
-                _bezierEllipsePoint4.BottomRight.X = _bezierPoint4.X + _pointEllipseRadius;
-                _bezierEllipsePoint4.BottomRight.Y = _bezierPoint4.Y + _pointEllipseRadius;
+                _bezierHelperPoint4.X = _bezierPoint4.X;
+                _bezierHelperPoint4.Y = _bezierPoint4.Y;
             }
         }
 
@@ -946,43 +933,37 @@ namespace Test2d
                 _qbezierLine32.End.Y = _qbezierPoint2.Y;
             }
 
-            if (_qbezierEllipsePoint1 != null)
+            if (_qbezierHelperPoint1 != null)
             {
-                _qbezierEllipsePoint1.TopLeft.X = _qbezierPoint1.X - _pointEllipseRadius;
-                _qbezierEllipsePoint1.TopLeft.Y = _qbezierPoint1.Y - _pointEllipseRadius;
-                _qbezierEllipsePoint1.BottomRight.X = _qbezierPoint1.X + _pointEllipseRadius;
-                _qbezierEllipsePoint1.BottomRight.Y = _qbezierPoint1.Y + _pointEllipseRadius;
+                _qbezierHelperPoint1.X = _qbezierPoint1.X;
+                _qbezierHelperPoint1.Y = _qbezierPoint1.Y;
             }
 
-            if (_qbezierEllipsePoint2 != null)
+            if (_qbezierHelperPoint2 != null)
             {
-                _qbezierEllipsePoint2.TopLeft.X = _qbezierPoint2.X - _pointEllipseRadius;
-                _qbezierEllipsePoint2.TopLeft.Y = _qbezierPoint2.Y - _pointEllipseRadius;
-                _qbezierEllipsePoint2.BottomRight.X = _qbezierPoint2.X + _pointEllipseRadius;
-                _qbezierEllipsePoint2.BottomRight.Y = _qbezierPoint2.Y + _pointEllipseRadius;
+                _qbezierHelperPoint2.X = _qbezierPoint2.X;
+                _qbezierHelperPoint2.Y = _qbezierPoint2.Y;
             }
 
-            if (_qbezierEllipsePoint3 != null)
+            if (_qbezierHelperPoint3 != null)
             {
-                _qbezierEllipsePoint3.TopLeft.X = _qbezierPoint3.X - _pointEllipseRadius;
-                _qbezierEllipsePoint3.TopLeft.Y = _qbezierPoint3.Y - _pointEllipseRadius;
-                _qbezierEllipsePoint3.BottomRight.X = _qbezierPoint3.X + _pointEllipseRadius;
-                _qbezierEllipsePoint3.BottomRight.Y = _qbezierPoint3.Y + _pointEllipseRadius;
+                _qbezierHelperPoint3.X = _qbezierPoint3.X;
+                _qbezierHelperPoint3.Y = _qbezierPoint3.Y;
             }
         }
 
         private void RemoveLineHelpers()
         {
-            if (_lineEllipseStart != null)
+            if (_lineStartHelperPoint != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_lineEllipseStart);
-                _lineEllipseStart = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_lineStartHelperPoint);
+                _lineStartHelperPoint = null;
             }
 
-            if (_lineEllipseEnd != null)
+            if (_lineEndHelperPoint != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_lineEllipseEnd);
-                _lineEllipseEnd = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_lineEndHelperPoint);
+                _lineEndHelperPoint = null;
             }
 
             _style = null;
@@ -1013,28 +994,28 @@ namespace Test2d
                 _bezierLine23 = null;
             }
 
-            if (_bezierEllipsePoint1 != null)
+            if (_bezierHelperPoint1 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bezierEllipsePoint1);
-                _bezierEllipsePoint1 = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bezierHelperPoint1);
+                _bezierHelperPoint1 = null;
             }
 
-            if (_bezierEllipsePoint2 != null)
+            if (_bezierHelperPoint2 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bezierEllipsePoint2);
-                _bezierEllipsePoint2 = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bezierHelperPoint2);
+                _bezierHelperPoint2 = null;
             }
 
-            if (_bezierEllipsePoint3 != null)
+            if (_bezierHelperPoint3 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bezierEllipsePoint3);
-                _bezierEllipsePoint3 = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bezierHelperPoint3);
+                _bezierHelperPoint3 = null;
             }
 
-            if (_bezierEllipsePoint4 != null)
+            if (_bezierHelperPoint4 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bezierEllipsePoint4);
-                _bezierEllipsePoint4 = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_bezierHelperPoint4);
+                _bezierHelperPoint4 = null;
             }
 
             _style = null;
@@ -1054,22 +1035,22 @@ namespace Test2d
                 _qbezierLine32 = null;
             }
 
-            if (_qbezierEllipsePoint1 != null)
+            if (_qbezierHelperPoint1 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_qbezierEllipsePoint1);
-                _qbezierEllipsePoint1 = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_qbezierHelperPoint1);
+                _qbezierHelperPoint1 = null;
             }
 
-            if (_qbezierEllipsePoint2 != null)
+            if (_qbezierHelperPoint2 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_qbezierEllipsePoint2);
-                _qbezierEllipsePoint2 = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_qbezierHelperPoint2);
+                _qbezierHelperPoint2 = null;
             }
 
-            if (_qbezierEllipsePoint3 != null)
+            if (_qbezierHelperPoint3 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_qbezierEllipsePoint3);
-                _qbezierEllipsePoint3 = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_qbezierHelperPoint3);
+                _qbezierHelperPoint3 = null;
             }
 
             _style = null;

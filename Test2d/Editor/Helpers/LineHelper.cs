@@ -17,10 +17,8 @@ namespace Test2d
         private State _currentState = State.None;
         private XLine _shape;
 
-        private ShapeStyle _style;
-        private double _pointEllipseRadius = 3.0;
-        private XEllipse _ellipseStart;
-        private XEllipse _ellipseEnd;
+        private XPoint _startHelperPoint;
+        private XPoint _endHelperPoint;
 
         /// <summary>
         /// 
@@ -215,11 +213,10 @@ namespace Test2d
         /// </summary>
         public override void ToStateOne()
         {
-            _style = _editor.Project.Options.HelperStyle;
-            _ellipseStart = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseStart);
-            _ellipseEnd = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipseEnd);
+            _startHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_startHelperPoint);
+            _endHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_endHelperPoint);
         }
         
         /// <summary>
@@ -249,20 +246,16 @@ namespace Test2d
         /// <param name="shape"></param>
         public override void Move(BaseShape shape)
         {
-            if (_ellipseStart != null)
+            if (_startHelperPoint != null)
             {
-                _ellipseStart.TopLeft.X = _shape.Start.X - _pointEllipseRadius;
-                _ellipseStart.TopLeft.Y = _shape.Start.Y - _pointEllipseRadius;
-                _ellipseStart.BottomRight.X = _shape.Start.X + _pointEllipseRadius;
-                _ellipseStart.BottomRight.Y = _shape.Start.Y + _pointEllipseRadius;
+                _startHelperPoint.X = _shape.Start.X;
+                _startHelperPoint.Y = _shape.Start.Y;
             }
 
-            if (_ellipseEnd != null)
+            if (_endHelperPoint != null)
             {
-                _ellipseEnd.TopLeft.X = _shape.End.X - _pointEllipseRadius;
-                _ellipseEnd.TopLeft.Y = _shape.End.Y - _pointEllipseRadius;
-                _ellipseEnd.BottomRight.X = _shape.End.X + _pointEllipseRadius;
-                _ellipseEnd.BottomRight.Y = _shape.End.Y + _pointEllipseRadius;
+                _endHelperPoint.X = _shape.End.X;
+                _endHelperPoint.Y = _shape.End.Y;
             }
         }
 
@@ -279,19 +272,17 @@ namespace Test2d
         /// </summary>
         public override void Remove()
         {
-            if (_ellipseStart != null)
+            if (_startHelperPoint != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipseStart);
-                _ellipseStart = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_startHelperPoint);
+                _startHelperPoint = null;
             }
 
-            if (_ellipseEnd != null)
+            if (_endHelperPoint != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipseEnd);
-                _ellipseEnd = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_endHelperPoint);
+                _endHelperPoint = null;
             }
-
-            _style = null;
         }
     }
 }

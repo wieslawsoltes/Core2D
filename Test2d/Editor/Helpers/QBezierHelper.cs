@@ -20,10 +20,9 @@ namespace Test2d
         private ShapeStyle _style;
         private XLine _line12;
         private XLine _line32;
-        private double _pointEllipseRadius = 3.0;
-        private XEllipse _ellipsePoint1;
-        private XEllipse _ellipsePoint2;
-        private XEllipse _ellipsePoint3;
+        private XPoint _helperPoint1;
+        private XPoint _helperPoint2;
+        private XPoint _helperPoint3;
 
         /// <summary>
         /// 
@@ -262,10 +261,10 @@ namespace Test2d
         public override void ToStateOne()
         {
             _style = _editor.Project.Options.HelperStyle;
-            _ellipsePoint1 = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint1);
-            _ellipsePoint3 = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint3);
+            _helperPoint1 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint1);
+            _helperPoint3 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint3);
         }
         
         /// <summary>
@@ -278,8 +277,8 @@ namespace Test2d
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line12);
             _line32 = XLine.Create(0, 0, _style, null);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_line32);
-            _ellipsePoint2 = XEllipse.Create(0, 0, _style, null, true, true);
-            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_ellipsePoint2);
+            _helperPoint2 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
+            _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint2);
         }
 
         /// <summary>
@@ -320,28 +319,22 @@ namespace Test2d
                 _line32.End.Y = qbezier.Point2.Y;
             }
 
-            if (_ellipsePoint1 != null)
+            if (_helperPoint1 != null)
             {
-                _ellipsePoint1.TopLeft.X = qbezier.Point1.X - _pointEllipseRadius;
-                _ellipsePoint1.TopLeft.Y = qbezier.Point1.Y - _pointEllipseRadius;
-                _ellipsePoint1.BottomRight.X = qbezier.Point1.X + _pointEllipseRadius;
-                _ellipsePoint1.BottomRight.Y = qbezier.Point1.Y + _pointEllipseRadius;
+                _helperPoint1.X = qbezier.Point1.X;
+                _helperPoint1.Y = qbezier.Point1.Y;
             }
             
-            if (_ellipsePoint2 != null)
+            if (_helperPoint2 != null)
             {
-                _ellipsePoint2.TopLeft.X = qbezier.Point2.X - _pointEllipseRadius;
-                _ellipsePoint2.TopLeft.Y = qbezier.Point2.Y - _pointEllipseRadius;
-                _ellipsePoint2.BottomRight.X = qbezier.Point2.X + _pointEllipseRadius;
-                _ellipsePoint2.BottomRight.Y = qbezier.Point2.Y + _pointEllipseRadius;
+                _helperPoint2.X = qbezier.Point2.X;
+                _helperPoint2.Y = qbezier.Point2.Y;
             }
             
-            if (_ellipsePoint3 != null)
+            if (_helperPoint3 != null)
             {
-                _ellipsePoint3.TopLeft.X = qbezier.Point3.X - _pointEllipseRadius;
-                _ellipsePoint3.TopLeft.Y = qbezier.Point3.Y - _pointEllipseRadius;
-                _ellipsePoint3.BottomRight.X = qbezier.Point3.X + _pointEllipseRadius;
-                _ellipsePoint3.BottomRight.Y = qbezier.Point3.Y + _pointEllipseRadius;
+                _helperPoint3.X = qbezier.Point3.X;
+                _helperPoint3.Y = qbezier.Point3.Y;
             }
         }
 
@@ -370,22 +363,22 @@ namespace Test2d
                 _line32 = null;
             }
             
-            if (_ellipsePoint1 != null)
+            if (_helperPoint1 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint1);
-                _ellipsePoint1 = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint1);
+                _helperPoint1 = null;
             }
             
-            if (_ellipsePoint2 != null)
+            if (_helperPoint2 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint2);
-                _ellipsePoint2 = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint2);
+                _helperPoint2 = null;
             }
    
-            if (_ellipsePoint3 != null)
+            if (_helperPoint3 != null)
             {
-                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_ellipsePoint3);
-                _ellipsePoint3 = null;
+                _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint3);
+                _helperPoint3 = null;
             }
 
             _style = null;
