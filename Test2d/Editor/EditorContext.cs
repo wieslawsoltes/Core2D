@@ -1510,7 +1510,7 @@ namespace Test2d
             {
                 if (_dxfWriter != null)
                 {
-                    _dxfWriter.Save(path, _editor.Project.CurrentContainer, null);
+                    _dxfWriter.Save(path, _editor.Project.CurrentContainer, _editor.Project);
                 }
             }
             catch (Exception ex)
