@@ -8,12 +8,24 @@
              xmlns:controls="clr-namespace:Test.Controls"
              xmlns:converters="clr-namespace:Test.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="840"
+             d:DesignHeight="600" d:DesignWidth="600"
              Width="{Binding Editor.Project.CurrentContainer.Width}" 
              Height="{Binding Editor.Project.CurrentContainer.Height}"
              controls:LayerElement.Renderer="{Binding Editor.Renderers[0]}">
     <UserControl.InputBindings>
         <KeyBinding Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding}" Key="Delete" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.SendToBackCommand}" Key="OemMinus" Modifiers="Shift"/>
+        <KeyBinding Command="{Binding Commands.SendBackwardCommand}" Key="OemMinus" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.BringForwardCommand}" Key="OemPlus" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.BringToFrontCommand}" Key="OemPlus" Modifiers="Shift"/>
+        <KeyBinding Command="{Binding Commands.SendToBackCommand}" Key="Subtract" Modifiers="Shift"/>
+        <KeyBinding Command="{Binding Commands.SendBackwardCommand}" Key="Subtract" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.BringForwardCommand}" Key="Add" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.BringToFrontCommand}" Key="Add" Modifiers="Shift"/>
+        <KeyBinding Command="{Binding Commands.MoveUpCommand}" Key="Up" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.MoveDownCommand}" Key="Down" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.MoveLeftCommand}" Key="Left" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.MoveRightCommand}" Key="Right" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolNoneCommand}" Key="N" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolSelectionCommand}" Key="S" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.ToolPointCommand}" Key="P" Modifiers=""/>

@@ -1,1 +1,0 @@
-SelectedShape.IsStroked = !SelectedShape.IsStroked;

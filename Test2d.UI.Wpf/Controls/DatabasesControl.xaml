@@ -5,7 +5,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:controls="clr-namespace:Test.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="280">
     <Grid>
@@ -13,60 +12,53 @@
             <ControlTemplate x:Key="DatabasesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Header="database">
-                        <MenuItem Header="_New" Command="{Binding Commands.AddDatabaseCommand}" InputGestureText=""/>
-                        <Separator/>
-                        <MenuItem Header="Import..." Command="{Binding Commands.ImportDataCommand}" InputGestureText=""/>
-                        <MenuItem Header="Export..." Command="{Binding Commands.ExportDataCommand}" InputGestureText=""/>
-                        <Separator/>
-                        <MenuItem Header="Update..." Command="{Binding Commands.UpdateDataCommand}" InputGestureText=""/>
+                        <MenuItem Header="_Import..." Command="{Binding Commands.ImportDataCommand}" InputGestureText=""/>
                     </MenuItem>
-                    <MenuItem Command="{Binding Commands.AddRecordCommand}" Header="+"/>
-                    <MenuItem Command="{Binding Commands.RemoveRecordCommand}" Header="-"/>
+                    <MenuItem Command="{Binding Commands.AddDatabaseCommand}" Header="+"/>
+                    <MenuItem Command="{Binding Commands.RemoveDatabaseCommand}" CommandParameter="{Binding Editor.Project.CurrentDatabase}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Control Template="{StaticResource DatabasesMenu}" Grid.Row="0" Margin="2,0,2,0"/>
-        <TabControl VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch"
-                    TabStripPlacement="Bottom"
-                    Grid.Row="1"
-                    ItemsSource="{Binding Editor.Project.Databases}"
-                    SelectedItem="{Binding Editor.Project.CurrentDatabase}">
-            <TabControl.ItemTemplate>
+        <ComboBox ItemsSource="{Binding Editor.Project.Databases}" 
+                  SelectedItem="{Binding Editor.Project.CurrentDatabase}" 
+                  Grid.Row="1" 
+                  Margin="2,2,2,2">
+            <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Name}" 
-                                   VerticalAlignment="Center" 
-                                   HorizontalAlignment="Left" 
-                                   Grid.Column="0">
-                        </TextBlock>
-                        <Button Command="{Binding DataContext.Commands.RemoveDatabaseCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                                CommandParameter="{Binding}"
-                                Content="X" 
-                                Padding="2,0,2,0"
-                                BorderBrush="{x:Null}" 
-                                Background="{x:Null}" 
-                                VerticalAlignment="Center"  
-                                Grid.Column="2">
-                        </Button>
-                    </Grid>
+                    <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
                 </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
-                <DataTemplate>
-                    <controls:RecordsControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                </DataTemplate>
-            </TabControl.ContentTemplate>
-        </TabControl>
+            </ComboBox.ItemTemplate>
+            <ComboBox.Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Editor.Project.CurrentDatabase}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ComboBox.Style>
+        </ComboBox>
+        <Control Template="{StaticResource DatabaseControlTemplateKey}" 
+                 DataContext="{Binding Editor.Project.CurrentDatabase}" 
+                 Grid.Row="2">
+            <Control.Style>
+                <Style TargetType="Control">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding DataContext.Editor.Project.CurrentDatabase, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Control.Style>
+        </Control>
     </Grid>
 </UserControl>

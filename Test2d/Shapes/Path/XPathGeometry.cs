@@ -20,11 +20,6 @@ namespace Test2d
         /// </summary>
         public XFillRule FillRule { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public XPathRect Bounds { get; set; }
-
         private XPathFigure _figure;
 
         /// <summary>
@@ -32,18 +27,15 @@ namespace Test2d
         /// </summary>
         /// <param name="figures"></param>
         /// <param name="fillRule"></param>
-        /// <param name="bounds"></param>
         /// <returns></returns>
         public static XPathGeometry Create(
             IList<XPathFigure> figures,
-            XFillRule fillRule,
-            XPathRect bounds)
+            XFillRule fillRule)
         {
             return new XPathGeometry()
             {
                 Figures = figures,
-                FillRule = fillRule,
-                Bounds = bounds
+                FillRule = fillRule
             };
         }
 

@@ -11,12 +11,12 @@ namespace Test2d
     /// </summary>
     public class XImage : XText
     {
-        private Uri _path;
+        private string _path;
 
         /// <summary>
         /// 
         /// </summary>
-        public Uri Path
+        public string Path
         {
             get { return _path; }
             set { Update(ref _path, value); }
@@ -71,7 +71,7 @@ namespace Test2d
             double x2, double y2,
             ShapeStyle style,
             BaseShape point,
-            Uri path,
+            string path,
             bool isStroked = false,
             bool isFilled = false,
             string text = null,
@@ -85,7 +85,6 @@ namespace Test2d
                 IsFilled = isFilled,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
-                Code = ShapeCode.Create(),
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
                 Path = path,
@@ -110,7 +109,7 @@ namespace Test2d
             double x, double y,
             ShapeStyle style,
             BaseShape point,
-            Uri path,
+            string path,
             bool isStroked = false,
             bool isFilled = false,
             string text = null,
@@ -137,7 +136,7 @@ namespace Test2d
             XPoint bottomRight,
             ShapeStyle style,
             BaseShape point,
-            Uri path,
+            string path,
             bool isStroked = false,
             bool isFilled = false,
             string text = null,
@@ -151,7 +150,6 @@ namespace Test2d
                 IsFilled = isFilled,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
-                Code = ShapeCode.Create(),
                 TopLeft = topLeft,
                 BottomRight = bottomRight,
                 Path = path,

@@ -37,8 +37,8 @@ namespace Test
         private IDictionary<XBezier, PathGeometry> _bezierCache;
         private IDictionary<XQBezier, PathGeometry> _qbezierCache;
         private IDictionary<XText, Tuple<string, FormattedText, ShapeStyle>> _textCache;
-        private IDictionary<Uri, BitmapImage> _biCache;
-        private IDictionary<XPath, Tuple<string, XPathGeometry, StreamGeometry, ShapeStyle>> _pathCache;
+        private IDictionary<string, BitmapImage> _biCache;
+        private IDictionary<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>> _pathCache;
         private RendererState _state = new RendererState();
 
         /// <summary>
@@ -359,6 +359,49 @@ namespace Test
         /// 
         /// </summary>
         /// <param name="dc"></param>
+        /// <param name="half"></param>
+        /// <param name="stroke"></param>
+        /// <param name="rect"></param>
+        /// <param name="offsetX"></param>
+        /// <param name="offsetY"></param>
+        /// <param name="cellWidth"></param>
+        /// <param name="cellHeight"></param>
+        /// <param name="isStroked"></param>
+        private static void DrawGridInternal(
+            DrawingContext dc,
+            double half,
+            Pen stroke,
+            ref Rect rect,
+            double offsetX, double offsetY,
+            double cellWidth, double cellHeight,
+            bool isStroked)
+        {
+            double ox = rect.X;
+            double oy = rect.Y;
+            double sx = ox + offsetX;
+            double sy = oy + offsetY;
+            double ex = ox + rect.Width;
+            double ey = oy + rect.Height;
+
+            for (double x = sx; x < ex; x += cellWidth)
+            {
+                var p0 = new Point(x, oy);
+                var p1 = new Point(x, ey);
+                DrawLineInternal(dc, half, stroke, isStroked, ref p0, ref p1);
+            }
+
+            for (double y = sy; y < ey; y += cellHeight)
+            {
+                var p0 = new Point(ox, y);
+                var p1 = new Point(ex, y);
+                DrawLineInternal(dc, half, stroke, isStroked, ref p0, ref p1);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
         /// <param name="container"></param>
         private static void DrawBackground(DrawingContext dc, Container container)
         {
@@ -403,9 +446,9 @@ namespace Test
                     }
                     _biCache.Clear();
                 }
-                _biCache = new Dictionary<Uri, BitmapImage>();
+                _biCache = new Dictionary<string, BitmapImage>();
 
-                _pathCache = new Dictionary<XPath, Tuple<string, XPathGeometry, StreamGeometry, ShapeStyle>>();
+                _pathCache = new Dictionary<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>>();
             }
         }
 
@@ -709,12 +752,25 @@ namespace Test
                 rectangle.TopLeft, 
                 rectangle.BottomRight, 
                 dx, dy);
+
             DrawRectangleInternal(
                 _dc, 
                 half, 
                 fill, stroke, 
                 rectangle.IsStroked, rectangle.IsFilled, 
                 ref rect);
+
+            if (rectangle.IsGrid)
+            {
+                DrawGridInternal(
+                    _dc,
+                    half,
+                    stroke,
+                    ref rect,
+                    rectangle.OffsetX, rectangle.OffsetY,
+                    rectangle.CellWidth, rectangle.CellHeight,
+                    true);
+            }
         }
 
         /// <summary>
@@ -1195,23 +1251,26 @@ namespace Test
             }
             else
             {
-                if (!image.Path.IsAbsoluteUri || !System.IO.File.Exists(image.Path.LocalPath))
+                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Path))
                     return;
 
                 try
                 {
-                    byte[] buffer = System.IO.File.ReadAllBytes(image.Path.LocalPath);
-                    var ms = new System.IO.MemoryStream(buffer);
-                    var bi = new BitmapImage();
-                    bi.BeginInit();
-                    bi.StreamSource = ms;
-                    bi.EndInit();
-                    bi.Freeze();
+                    var bytes = _state.ImageCache.GetImage(image.Path);
+                    if (bytes != null)
+                    {
+                        var ms = new System.IO.MemoryStream(bytes);
+                        var bi = new BitmapImage();
+                        bi.BeginInit();
+                        bi.StreamSource = ms;
+                        bi.EndInit();
+                        bi.Freeze();
 
-                    if (_enableImageCache)
-                        _biCache[image.Path] = bi;
+                        if (_enableImageCache)
+                            _biCache[image.Path] = bi;
 
-                    _dc.DrawImage(bi, rect);
+                        _dc.DrawImage(bi, rect);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -1232,7 +1291,7 @@ namespace Test
         /// <param name="r"></param>
         public void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            if (path.Source == null && path.Geometry == null)
+            if (path.Geometry == null)
                 return;
 
             var _dc = dc as DrawingContext;
@@ -1261,41 +1320,24 @@ namespace Test
                     _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
     
-            Tuple<string, XPathGeometry, StreamGeometry, ShapeStyle> pcache = null;
+            Tuple<XPathGeometry, StreamGeometry, ShapeStyle> pcache = null;
             StreamGeometry sg;
 
             if (_enablePathCache
                 && _pathCache.TryGetValue(path, out pcache)
-                && string.Compare(pcache.Item1, path.Source) == 0
-                && pcache.Item2 == path.Geometry
-                && pcache.Item4 == style)
+                && pcache.Item1 == path.Geometry
+                && pcache.Item3 == style)
             {
-                sg = pcache.Item3;
+                sg = pcache.Item2;
                 _dc.DrawGeometry(path.IsFilled ? fill : null, path.IsStroked ? stroke : null, sg);
             }
             else
             {
-                if (path.Geometry == null && !string.IsNullOrEmpty(path.Source))
-                {
-                    var xpg = path.Source.ToXPathGeometry();
-                    path.Geometry = xpg;
-                }
-
-                // TODO: When (path.Source != null) ToSource call only needed to enable PathHelper to work.
-                if (path.Geometry != null /* && string.IsNullOrEmpty(path.Source) */)
-                {
-                    path.Source = path.Geometry.ToSource();
-                }
-
                 sg = path.Geometry.ToStreamGeometry();
-                path.Geometry.Bounds.X = sg.Bounds.X;
-                path.Geometry.Bounds.Y = sg.Bounds.Y;
-                path.Geometry.Bounds.Width = sg.Bounds.Width;
-                path.Geometry.Bounds.Height = sg.Bounds.Height;
 
                 if (_enablePathCache)
                 {
-                    var tuple = Tuple.Create(path.Source, path.Geometry, sg, style);
+                    var tuple = Tuple.Create(path.Geometry, sg, style);
                     if (_pathCache.ContainsKey(path))
                     {
                         _pathCache[path] = tuple;

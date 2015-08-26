@@ -10,23 +10,16 @@ namespace Test2d
     /// </summary>
     public class XPath : BaseShape
     {
-        private string _source;
         private XPathGeometry _geometry;
 
         /// <summary>
-        /// Gets or sets path source markup used to draw shape.
-        /// Source markup syntax: 
-        /// https://msdn.microsoft.com/en-us/library/ms752293(v=vs.110).aspx
+        /// Gets or sets path geometry used to draw shape.
         /// </summary>
-        public string Source
-        {
-            get { return _source; }
-            set { Update(ref _source, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <remarks>
+        /// Geometry is based on path markup syntax.
+        /// XAML abbreviated geometry https://msdn.microsoft.com/en-us/library/ms752293(v=vs.110).aspx
+        /// SVG path specification http://www.w3.org/TR/SVG11/paths.html
+        /// </remarks>
         public XPathGeometry Geometry
         {
             get { return _geometry; }
@@ -185,7 +178,6 @@ namespace Test2d
         /// </summary>
         /// <param name="name"></param>
         /// <param name="style"></param>
-        /// <param name="source"></param>
         /// <param name="geometry"></param>
         /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
@@ -193,7 +185,6 @@ namespace Test2d
         public static XPath Create(
             string name,
             ShapeStyle style,
-            string source,
             XPathGeometry geometry,
             bool isStroked = true,
             bool isFilled = true)
@@ -206,8 +197,6 @@ namespace Test2d
                 IsFilled = isFilled,
                 Bindings = ImmutableArray.Create<ShapeBinding>(),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
-                Code = ShapeCode.Create(),
-                Source = source,
                 Geometry = geometry
             };
         }

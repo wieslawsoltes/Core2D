@@ -78,6 +78,8 @@ build/
 *.log
 *.scc
 
+project.lock.json
+
 # Visual C++ cache files
 ipch/
 *.aps

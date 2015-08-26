@@ -11,17 +11,16 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Test2d;
 
 namespace TestEtoForms
 {
     /// <summary>
     /// 
     /// </summary>
-    public class MainForm : Form, IView
+    public class MainForm : Form, Test2d.IView
     {
-        private EditorContext _context;
-        private ZoomState _state;
+        private Test2d.EditorContext _context;
+        private Test2d.ZoomState _state;
         private Drawable _drawable;
         private Color _background = Color.FromArgb(211, 211, 211, 255);
 
@@ -41,27 +40,23 @@ namespace TestEtoForms
         /// </summary>
         private void InitializeContext()
         {
-            _context = new EditorContext()
+            _context = new Test2d.EditorContext()
             {
                 View = this,
-                Renderers = new IRenderer[] { new EtoRenderer(72.0 / 96.0) },
-                ProjectFactory = new ProjectFactory(),
-                SimulationTimer = new SimulationTimer(),
+                Renderers = new Test2d.IRenderer[] { new EtoRenderer(72.0 / 96.0) },
+                ProjectFactory = new Test2d.ProjectFactory(),
                 TextClipboard = new TextClipboard(),
-                Serializer = new NewtonsoftSerializer(),
-                ScriptEngine = new RoslynScriptEngine(),
-                CodeEngine = new RoslynCodeEngine(),
-                PdfWriter = new PdfWriter(),
-                DxfWriter = new DxfWriter(),
-                CsvReader = new CsvHelperReader(),
-                CsvWriter = new CsvHelperWriter()
+                Serializer = new Test2d.NewtonsoftSerializer(),
+                PdfWriter = new Test2d.PdfWriter(),
+                DxfWriter = new Test2d.DxfWriter(),
+                CsvReader = new Test2d.CsvHelperReader(),
+                CsvWriter = new Test2d.CsvHelperWriter()
             };
-            _context.InitializeEditor();
-            _context.InitializeScripts();
-            _context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
-            _context.Editor.GetImagePath = () => GetImagePath();
+            _context.InitializeEditor(new Test2d.TraceLog());
+            _context.Editor.Renderers[0].State.DrawShapeState = Test2d.ShapeState.Visible;
+            _context.Editor.GetImageKey = () => GetImageKey();
 
-            _state = new ZoomState(_context, InvalidateContainer);
+            _state = new Test2d.ZoomState(_context, this.InvalidateContainer);
 
             DataContext = _context;
         }
@@ -329,8 +324,7 @@ namespace TestEtoForms
             {
                 var dlg = new SaveFileDialog();
                 dlg.Filters.Add(new FileDialogFilter("Pdf", ".pdf"));
-                dlg.Filters.Add(new FileDialogFilter("Dxf AutoCAD 2000", ".dxf"));
-                dlg.Filters.Add(new FileDialogFilter("Dxf R10", ".dxf"));
+                dlg.Filters.Add(new FileDialogFilter("Dxf", ".dxf"));
                 dlg.Filters.Add(new FileDialogFilter("All", ".*"));
 
                 dlg.FileName = _context.Editor.Project.Name;
@@ -346,11 +340,7 @@ namespace TestEtoForms
                             Process.Start(path);
                             break;
                         case 1:
-                            _context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1015);
-                            Process.Start(path);
-                            break;
-                        case 2:
-                            _context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1006);
+                            _context.ExportAsDxf(path);
                             Process.Start(path);
                             break;
                         default:
@@ -630,18 +620,6 @@ namespace TestEtoForms
                 _context.Commands.ClearAllCommand.Execute(null);
             };
 
-            var referenceCommand = new Command()
-            {
-                MenuText = "Re&ference",
-                Shortcut = Application.Instance.CommonModifier | Keys.R
-            };
-
-            referenceCommand.Executed +=
-            (s, e) =>
-            {
-                _context.Commands.ReferenceCommand.Execute(null);
-            };
-
             var groupCommand = new Command() 
             { 
                 MenuText = "&Group",
@@ -664,95 +642,6 @@ namespace TestEtoForms
             (s, e) =>
             {
                 _context.Commands.UngroupCommand.Execute(null);
-            };
-
-            #endregion
-
-            #region Script
-
-            var evalCommand = new Command()
-            {
-                MenuText = "&Evaluate...",
-                Shortcut = Keys.F8
-            };
-
-            evalCommand.Executed +=
-            (s, e) =>
-            {
-                var dlg = new OpenFileDialog();
-                dlg.Filters.Add(new FileDialogFilter("C#", ".cs"));
-                dlg.Filters.Add(new FileDialogFilter("All", ".*"));
-
-                var result = dlg.ShowDialog(this);
-                if (result == DialogResult.Ok)
-                {
-                    _context.Eval(dlg.FileName);
-                    InvalidateContainer();
-                }
-            };
-
-            #endregion
-
-            #region Simulation
-
-            var startSimulation = new Command()
-            {
-                MenuText = "&Start",
-                Shortcut = Keys.F5,
-            };
-
-            startSimulation.Executed +=
-            (s, e) =>
-            {
-                _context.Commands.StartSimulationCommand.Execute(null);
-            };
-
-            var stopSimulation = new Command()
-            {
-                MenuText = "S&top",
-                Shortcut = Keys.F6
-            };
-
-            stopSimulation.Executed +=
-            (s, e) =>
-            {
-                _context.Commands.StopSimulationCommand.Execute(null);
-            };
-
-            var restartSimulation = new Command()
-            {
-                MenuText = "&Restart",
-                Shortcut = Keys.F7
-            };
-
-            restartSimulation.Executed +=
-            (s, e) =>
-            {
-                _context.Commands.RestartSimulationCommand.Execute(null);
-            };
-
-            var pauseSimulation = new Command()
-            {
-                MenuText = "&Pause",
-                Shortcut = Keys.F9
-            };
-
-            pauseSimulation.Executed +=
-            (s, e) =>
-            {
-                _context.Commands.PauseSimulationCommand.Execute(null);
-            };
-
-            var tickSimulation = new Command()
-            {
-                MenuText = "Ti&ck",
-                Shortcut = Keys.F10
-            };
-
-            tickSimulation.Executed +=
-            (s, e) =>
-            {
-                _context.Commands.TickSimulationCommand.Execute(null);
             };
 
             #endregion
@@ -792,8 +681,6 @@ namespace TestEtoForms
                     new SeparatorMenuItem(),
                     clearAllCommand,
                     new SeparatorMenuItem(),
-                    referenceCommand,
-                    new SeparatorMenuItem(),
                     groupCommand,
                     ungroupCommand
                 }
@@ -826,31 +713,6 @@ namespace TestEtoForms
                 }
             };
 
-            var scriptMenu = new ButtonMenuItem()
-            {
-                Text = "&Script",
-                Items = 
-                { 
-                    evalCommand
-                }
-            };
-
-            var simulationMenu = new ButtonMenuItem()
-            {
-                Text = "S&imulation",
-                Items =
-                { 
-                    startSimulation,
-                    stopSimulation,
-                    new SeparatorMenuItem(),
-                    restartSimulation,
-                    new SeparatorMenuItem(),
-                    pauseSimulation,
-                    new SeparatorMenuItem(),
-                    tickSimulation
-                }
-            };
-
             var aboutCommand = new Command()
             {
                 MenuText = "&About..."
@@ -867,9 +729,7 @@ namespace TestEtoForms
                 {
                     fileMenu,
                     editMenu,
-                    toolMenu,
-                    scriptMenu,
-                    simulationMenu
+                    toolMenu
                 },
                 QuitItem = exitCommand,
                 AboutItem = aboutCommand
@@ -950,11 +810,11 @@ namespace TestEtoForms
         /// <param name="c"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        private void DrawBackground(Graphics g, ArgbColor c, double width, double height)
+        private void DrawBackground(Graphics g, Test2d.ArgbColor c, double width, double height)
         {
             var color = Color.FromArgb(c.R, c.G, c.B, c.A);
             var brush = new SolidBrush(color);
-            var rect = Rect2.Create(0, 0, width, height);
+            var rect = Test2d.Rect2.Create(0, 0, width, height);
             g.FillRectangle(
                 brush,
                 (float)rect.X,
@@ -1033,15 +893,17 @@ namespace TestEtoForms
         /// 
         /// </summary>
         /// <returns></returns>
-        public string GetImagePath()
+        public string GetImageKey()
         {
             var dlg = new OpenFileDialog();
             dlg.Filters.Add(new FileDialogFilter("All", ".*"));
-            dlg.FileName = "";
             var result = dlg.ShowDialog(this);
             if (result == DialogResult.Ok)
             {
-                return dlg.FileName;
+                var path = dlg.FileName;
+                var bytes = System.IO.File.ReadAllBytes(path);
+                var key = _context.Editor.Project.AddImageFromFile(path, bytes);
+                return key;
             }
             return null;
         }

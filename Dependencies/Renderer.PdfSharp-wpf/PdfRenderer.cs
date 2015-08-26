@@ -6,11 +6,8 @@ using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 #if WPF
-using System.Windows.Media;
+using System.Windows.Media.Imaging;
 #endif
 
 namespace PdfSharp
@@ -21,7 +18,8 @@ namespace PdfSharp
     public class PdfRenderer : Test2d.ObservableObject, Test2d.IRenderer
     {
         private bool _enableImageCache = true;
-        private IDictionary<Uri, XImage> _biCache;
+        private IDictionary<string, XImage> _biCache;
+        private Func<double, double> _scaleToPage;
         private Test2d.RendererState _state = new Test2d.RendererState();
 
         /// <summary>
@@ -51,11 +49,6 @@ namespace PdfSharp
         {
             return new PdfRenderer();
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private Func<double, double> _scaleToPage;
 
         /// <summary>
         /// 
@@ -353,6 +346,55 @@ namespace PdfSharp
         /// 
         /// </summary>
         /// <param name="gfx"></param>
+        /// <param name="stroke"></param>
+        /// <param name="rect"></param>
+        /// <param name="offsetX"></param>
+        /// <param name="offsetY"></param>
+        /// <param name="cellWidth"></param>
+        /// <param name="cellHeight"></param>
+        /// <param name="isStroked"></param>
+        private void DrawGridInternal(
+            XGraphics gfx,
+            XPen stroke,
+            ref Test2d.Rect2 rect,
+            double offsetX, double offsetY,
+            double cellWidth, double cellHeight,
+            bool isStroked)
+        {
+            double ox = rect.X;
+            double oy = rect.Y;
+            double sx = ox + offsetX;
+            double sy = oy + offsetY;
+            double ex = ox + rect.Width;
+            double ey = oy + rect.Height;
+
+            for (double x = sx; x < ex; x += cellWidth)
+            {
+                var p0 = new XPoint(
+                    _scaleToPage(x), 
+                    _scaleToPage(oy));
+                var p1 = new XPoint(
+                    _scaleToPage(x), 
+                    _scaleToPage(ey));
+                DrawLineInternal(gfx, stroke, isStroked, ref p0, ref p1);
+            }
+
+            for (double y = sy; y < ey; y += cellHeight)
+            {
+                var p0 = new XPoint(
+                    _scaleToPage(ox),
+                    _scaleToPage(y));
+                var p1 = new XPoint(
+                    _scaleToPage(ex),
+                    _scaleToPage(y));
+                DrawLineInternal(gfx, stroke, isStroked, ref p0, ref p1);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gfx"></param>
         /// <param name="color"></param>
         /// <param name="rect"></param>
         private void DrawBackgroundInternal(XGraphics gfx, Test2d.ArgbColor color, Test2d.Rect2 rect)
@@ -382,7 +424,7 @@ namespace PdfSharp
                     }
                     _biCache.Clear();
                 }
-                _biCache = new Dictionary<Uri, XImage>();
+                _biCache = new Dictionary<string, XImage>();
             }
         }
 
@@ -433,6 +475,9 @@ namespace PdfSharp
         /// <param name="r"></param>
         public void Draw(object gfx, Test2d.XLine line, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
         {
+            if (!line.IsStroked)
+                return;
+
             var _gfx = gfx as XGraphics;
 
             XSolidBrush fillLine = ToXSolidBrush(line.Style.Fill);
@@ -613,6 +658,17 @@ namespace PdfSharp
                     _scaleToPage(rect.Width),
                     _scaleToPage(rect.Height));
             }
+
+            if (rectangle.IsGrid && rectangle.IsStroked)
+            {
+                DrawGridInternal(
+                    _gfx,
+                    ToXPen(rectangle.Style, _scaleToPage),
+                    ref rect,
+                    rectangle.OffsetX, rectangle.OffsetY,
+                    rectangle.CellWidth, rectangle.CellHeight,
+                    true);
+            }
         }
 
         /// <summary>
@@ -737,14 +793,14 @@ namespace PdfSharp
             {
                 var path = new XGraphicsPath();
                 path.AddBezier(
-                    _scaleToPage(bezier.Point1.X),
-                    _scaleToPage(bezier.Point1.Y),
-                    _scaleToPage(bezier.Point2.X), 
-                    _scaleToPage(bezier.Point2.Y),
-                    _scaleToPage(bezier.Point3.X), 
-                    _scaleToPage(bezier.Point3.Y),
-                    _scaleToPage(bezier.Point4.X),
-                    _scaleToPage(bezier.Point4.Y));
+                    _scaleToPage(bezier.Point1.X + dx),
+                    _scaleToPage(bezier.Point1.Y + dy),
+                    _scaleToPage(bezier.Point2.X + dx), 
+                    _scaleToPage(bezier.Point2.Y + dy),
+                    _scaleToPage(bezier.Point3.X + dx), 
+                    _scaleToPage(bezier.Point3.Y + dy),
+                    _scaleToPage(bezier.Point4.X + dx),
+                    _scaleToPage(bezier.Point4.Y + dy));
 
                 if (bezier.IsStroked)
                 {
@@ -766,14 +822,14 @@ namespace PdfSharp
                 {
                     _gfx.DrawBezier(
                         ToXPen(bezier.Style, _scaleToPage),
-                        _scaleToPage(bezier.Point1.X),
-                        _scaleToPage(bezier.Point1.Y),
-                        _scaleToPage(bezier.Point2.X),
-                        _scaleToPage(bezier.Point2.Y),
-                        _scaleToPage(bezier.Point3.X),
-                        _scaleToPage(bezier.Point3.Y),
-                        _scaleToPage(bezier.Point4.X),
-                        _scaleToPage(bezier.Point4.Y));
+                        _scaleToPage(bezier.Point1.X + dx),
+                        _scaleToPage(bezier.Point1.Y + dy),
+                        _scaleToPage(bezier.Point2.X + dx),
+                        _scaleToPage(bezier.Point2.Y + dy),
+                        _scaleToPage(bezier.Point3.X + dx),
+                        _scaleToPage(bezier.Point3.Y + dy),
+                        _scaleToPage(bezier.Point4.X + dx),
+                        _scaleToPage(bezier.Point4.Y + dy));
                 }
             }
         }
@@ -990,18 +1046,31 @@ namespace PdfSharp
             }
             else
             {
-                if (!image.Path.IsAbsoluteUri || !System.IO.File.Exists(image.Path.LocalPath))
+                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Path))
                     return;
 
-                var bi = XImage.FromFile(image.Path.LocalPath);
+                var bytes = _state.ImageCache.GetImage(image.Path);
+                if (bytes != null)
+                {
+                    var ms = new System.IO.MemoryStream(bytes);
+#if WPF
+                    var bs = new BitmapImage();
+                    bs.BeginInit();
+                    bs.StreamSource = ms;
+                    bs.EndInit();
+                    bs.Freeze();
+                    var bi = XImage.FromBitmapSource(bs);
+#else
+                    var bi = XImage.FromStream(ms);
+#endif
+                    if (_enableImageCache)
+                        _biCache[image.Path] = bi;
 
-                if (_enableImageCache)
-                    _biCache[image.Path] = bi;
+                    _gfx.DrawImage(bi, srect);
 
-                _gfx.DrawImage(bi, srect);
-
-                if (!_enableImageCache)
-                    bi.Dispose();
+                    if (!_enableImageCache)
+                        bi.Dispose();
+                }
             }
         }
         
@@ -1017,224 +1086,8 @@ namespace PdfSharp
         public void Draw(object gfx, Test2d.XPath path, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
         {
             var _gfx = gfx as XGraphics;
-            var pg = path.Geometry;
-            var gp = new XGraphicsPath();
-            gp.FillMode = pg.FillRule == Test2d.XFillRule.EvenOdd ? XFillMode.Alternate : XFillMode.Winding;
 
-            foreach (var pf in pg.Figures)
-            {
-                var startPoint = pf.StartPoint;
-
-                foreach (var segment in pf.Segments)
-                {
-                    if (segment is Test2d.XArcSegment)
-                    {
-#if CORE
-                        //var arcSegment = segment as Test2d.XArcSegment;
-                        // TODO: Convert WPF/SVG elliptical arc segment format to GDI+ bezier curves.
-                        //startPoint = arcSegment.Point;
-#endif
-#if WPF
-                        var arcSegment = segment as Test2d.XArcSegment;
-                        var point1 = new XPoint(
-                            _scaleToPage(startPoint.X), 
-                            _scaleToPage(startPoint.Y));
-                        var point2 = new XPoint(
-                            _scaleToPage(arcSegment.Point.X), 
-                            _scaleToPage(arcSegment.Point.Y));
-                        var size = new XSize(
-                            _scaleToPage(arcSegment.Size.Width), 
-                            _scaleToPage(arcSegment.Size.Height));
-                        gp.AddArc(
-                            point1,
-                            point2, 
-                            size, arcSegment.RotationAngle, arcSegment.IsLargeArc, 
-                            arcSegment.SweepDirection == Test2d.XSweepDirection.Clockwise ? SweepDirection.Clockwise : SweepDirection.Counterclockwise);
-                        startPoint = arcSegment.Point;
-#endif
-                    }
-                    else if (segment is Test2d.XBezierSegment)
-                    {
-                        var bezierSegment = segment as Test2d.XBezierSegment;
-                        gp.AddBezier(
-                            _scaleToPage(startPoint.X),
-                            _scaleToPage(startPoint.Y),
-                            _scaleToPage(bezierSegment.Point1.X),
-                            _scaleToPage(bezierSegment.Point1.Y),
-                            _scaleToPage(bezierSegment.Point2.X),
-                            _scaleToPage(bezierSegment.Point2.Y),
-                            _scaleToPage(bezierSegment.Point3.X),
-                            _scaleToPage(bezierSegment.Point3.Y));
-                        startPoint = bezierSegment.Point3;
-                    }
-                    else if (segment is Test2d.XLineSegment)
-                    {
-                        var lineSegment = segment as Test2d.XLineSegment;
-                        gp.AddLine(
-                            _scaleToPage(startPoint.X),
-                            _scaleToPage(startPoint.Y),
-                            _scaleToPage(lineSegment.Point.X),
-                            _scaleToPage(lineSegment.Point.Y));
-                        startPoint = lineSegment.Point;
-                    }
-                    else if (segment is Test2d.XPolyBezierSegment)
-                    {
-                        var polyBezierSegment = segment as Test2d.XPolyBezierSegment;
-                        if (polyBezierSegment.Points.Count >= 3)
-                        {
-                            gp.AddBezier(
-                                _scaleToPage(startPoint.X),
-                                _scaleToPage(startPoint.Y),
-                                _scaleToPage(polyBezierSegment.Points[0].X),
-                                _scaleToPage(polyBezierSegment.Points[0].Y),
-                                _scaleToPage(polyBezierSegment.Points[1].X),
-                                _scaleToPage(polyBezierSegment.Points[1].Y),
-                                _scaleToPage(polyBezierSegment.Points[2].X),
-                                _scaleToPage(polyBezierSegment.Points[2].Y));
-                        }
-
-                        if (polyBezierSegment.Points.Count > 3 
-                            && polyBezierSegment.Points.Count % 3 == 0)
-                        {
-                            for (int i = 3; i < polyBezierSegment.Points.Count; i += 3)
-                            {
-                                gp.AddBezier(
-                                    _scaleToPage(polyBezierSegment.Points[i - 1].X),
-                                    _scaleToPage(polyBezierSegment.Points[i - 1].Y),
-                                    _scaleToPage(polyBezierSegment.Points[i].X),
-                                    _scaleToPage(polyBezierSegment.Points[i].Y),
-                                    _scaleToPage(polyBezierSegment.Points[i + 1].X),
-                                    _scaleToPage(polyBezierSegment.Points[i + 1].Y),
-                                    _scaleToPage(polyBezierSegment.Points[i + 2].X),
-                                    _scaleToPage(polyBezierSegment.Points[i + 2].Y));
-                            }
-                        }
-
-                        startPoint = polyBezierSegment.Points.Last();
-                    }
-                    else if (segment is Test2d.XPolyLineSegment)
-                    {
-                        var polyLineSegment = segment as Test2d.XPolyLineSegment;
-                        if (polyLineSegment.Points.Count >= 1)
-                        {
-                            gp.AddLine(
-                                _scaleToPage(startPoint.X),
-                                _scaleToPage(startPoint.Y),
-                                _scaleToPage(polyLineSegment.Points[0].X),
-                                _scaleToPage(polyLineSegment.Points[0].Y));
-                        }
-
-                        if (polyLineSegment.Points.Count > 1)
-                        {
-                            for (int i = 1; i < polyLineSegment.Points.Count; i++)
-                            {
-                                gp.AddLine(
-                                    _scaleToPage(polyLineSegment.Points[i - 1].X),
-                                    _scaleToPage(polyLineSegment.Points[i - 1].Y),
-                                    _scaleToPage(polyLineSegment.Points[i].X),
-                                    _scaleToPage(polyLineSegment.Points[i].Y));
-                            }
-                        }
-
-                        startPoint = polyLineSegment.Points.Last();
-                    }
-                    else if (segment is Test2d.XPolyQuadraticBezierSegment)
-                    {
-                        var polyQuadraticSegment = segment as Test2d.XPolyQuadraticBezierSegment;
-                        if (polyQuadraticSegment.Points.Count >= 2)
-                        {
-                            var p1 = startPoint;
-                            var p2 = polyQuadraticSegment.Points[0];
-                            var p3 = polyQuadraticSegment.Points[1];
-                            double x1 = p1.X;
-                            double y1 = p1.Y;
-                            double x2 = p1.X + (2.0 * (p2.X - p1.X)) / 3.0;
-                            double y2 = p1.Y + (2.0 * (p2.Y - p1.Y)) / 3.0;
-                            double x3 = x2 + (p3.X - p1.X) / 3.0;
-                            double y3 = y2 + (p3.Y - p1.Y) / 3.0;
-                            double x4 = p3.X;
-                            double y4 = p3.Y;
-                            gp.AddBezier(
-                                _scaleToPage(x1 + dx),
-                                _scaleToPage(y1 + dy),
-                                _scaleToPage(x2 + dx),
-                                _scaleToPage(y2 + dy),
-                                _scaleToPage(x3 + dx),
-                                _scaleToPage(y3 + dy),
-                                _scaleToPage(x4 + dx),
-                                _scaleToPage(y4 + dy));
-                        }
-
-                        if (polyQuadraticSegment.Points.Count > 2
-                            && polyQuadraticSegment.Points.Count % 2 == 0)
-                        {
-                            for (int i = 3; i < polyQuadraticSegment.Points.Count; i += 3)
-                            {
-                                var p1 = polyQuadraticSegment.Points[i - 1];
-                                var p2 = polyQuadraticSegment.Points[i];
-                                var p3 = polyQuadraticSegment.Points[i + 1];
-                                double x1 = p1.X;
-                                double y1 = p1.Y;
-                                double x2 = p1.X + (2.0 * (p2.X - p1.X)) / 3.0;
-                                double y2 = p1.Y + (2.0 * (p2.Y - p1.Y)) / 3.0;
-                                double x3 = x2 + (p3.X - p1.X) / 3.0;
-                                double y3 = y2 + (p3.Y - p1.Y) / 3.0;
-                                double x4 = p3.X;
-                                double y4 = p3.Y;
-                                gp.AddBezier(
-                                    _scaleToPage(x1 + dx),
-                                    _scaleToPage(y1 + dy),
-                                    _scaleToPage(x2 + dx),
-                                    _scaleToPage(y2 + dy),
-                                    _scaleToPage(x3 + dx),
-                                    _scaleToPage(y3 + dy),
-                                    _scaleToPage(x4 + dx),
-                                    _scaleToPage(y4 + dy));
-                            }
-                        }
-
-                        startPoint = polyQuadraticSegment.Points.Last();
-                    }
-                    else if (segment is Test2d.XQuadraticBezierSegment)
-                    {
-                        var qbezierSegment = segment as Test2d.XQuadraticBezierSegment;
-                        var p1 = startPoint;
-                        var p2 = qbezierSegment.Point1;
-                        var p3 = qbezierSegment.Point2;
-                        double x1 = p1.X;
-                        double y1 = p1.Y;
-                        double x2 = p1.X + (2.0 * (p2.X - p1.X)) / 3.0;
-                        double y2 = p1.Y + (2.0 * (p2.Y - p1.Y)) / 3.0;
-                        double x3 = x2 + (p3.X - p1.X) / 3.0;
-                        double y3 = y2 + (p3.Y - p1.Y) / 3.0;
-                        double x4 = p3.X;
-                        double y4 = p3.Y;
-                        gp.AddBezier(
-                            _scaleToPage(x1 + dx),
-                            _scaleToPage(y1 + dy),
-                            _scaleToPage(x2 + dx), 
-                            _scaleToPage(y2 + dy),
-                            _scaleToPage(x3 + dx), 
-                            _scaleToPage(y3 + dy),
-                            _scaleToPage(x4 + dx),
-                            _scaleToPage(y4 + dy));
-                        startPoint = qbezierSegment.Point2;
-                    }
-                    else
-                    {
-                        throw new NotSupportedException("Not supported segment type: " + segment.GetType());
-                    }
-                }
-
-                if (pf.IsClosed)
-                {
-                    gp.CloseFigure();
-                }
-                else
-                {
-                    gp.StartFigure();
-                }
-            }
+            var gp = path.Geometry.ToXGraphicsPath(dx, dy, _scaleToPage);
 
             if (path.IsFilled && path.IsStroked)
             {

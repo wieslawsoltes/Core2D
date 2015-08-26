@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Microsoft.Practices.Prism.Commands;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -260,7 +259,7 @@ namespace Test.Windows
 
             var dlg = new SaveFileDialog()
             {
-                Filter = "Pdf (*.pdf)|*.pdf|Emf (*.emf)|*.emf|Dxf AutoCAD 2000 (*.dxf)|*.dxf|Dxf R10 (*.dxf)|*.dxf|All (*.*)|*.*",
+                Filter = "Pdf (*.pdf)|*.pdf|Emf (*.emf)|*.emf|Dxf (*.dxf)|*.dxf|All (*.*)|*.*",
                 FilterIndex = 0,
                 FileName = name
             };
@@ -278,11 +277,7 @@ namespace Test.Windows
                         Process.Start(dlg.FileName);
                         break;
                     case 3:
-                        context.ExportAsDxf(dlg.FileName, Dxf.DxfAcadVer.AC1015);
-                        Process.Start(dlg.FileName);
-                        break;
-                    case 4:
-                        context.ExportAsDxf(dlg.FileName, Dxf.DxfAcadVer.AC1006);
+                        context.ExportAsDxf(dlg.FileName);
                         Process.Start(dlg.FileName);
                         break;
                     default:
@@ -514,115 +509,40 @@ namespace Test.Windows
         private void OnCopyAsEmf()
         {
             var context = DataContext as EditorContext;
-            if (context == null)
+            if (context == null 
+                || context.Editor == null 
+                || context.Editor.Project == null
+                || context.Editor.Project.CurrentContainer == null)
                 return;
 
-            (new EmfWriter()).SetClipboard(context.Editor.Project.CurrentContainer);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void OnEval()
-        {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            var dlg = new OpenFileDialog()
+            if (context.Editor.Renderers[0].State.SelectedShape != null)
             {
-                Filter = "C# (*.cs)|*.cs|All (*.*)|*.*",
-                FilterIndex = 0,
-                FileName = "",
-                Multiselect = true
-            };
-
-            if (dlg.ShowDialog() == true)
-            {
-                foreach (var path in dlg.FileNames)
-                {
-                    context.Eval(path);
-                }
+                var container = context.Editor.Project.CurrentContainer;
+                var shapes = Enumerable.Repeat(context.Editor.Renderers[0].State.SelectedShape, 1).ToList();
+                (new EmfWriter()).SetClipboard(
+                    shapes, 
+                    container.Width, 
+                    container.Height, 
+                    container.Properties,
+                    context.Editor.Project);
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void OnImportShapeCode()
-        {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            var shape = context.Editor.Renderers[0].State.SelectedShape;
-            if (shape == null)
-                return;
-
-            try
+            else if (context.Editor.Renderers[0].State.SelectedShapes != null)
             {
-                var dlg = new OpenFileDialog()
-                {
-                    Filter = "Code (*.code)|*.code|All (*.*)|*.*",
-                    FilterIndex = 0,
-                    FileName = ""
-                };
-
-                if (dlg.ShowDialog() == true)
-                {
-                    context.ImportShapeCode(dlg.FileName, shape);
-                }
+                var container = context.Editor.Project.CurrentContainer;
+                var shapes = context.Editor.Renderers[0].State.SelectedShapes.ToList();
+                (new EmfWriter()).SetClipboard(
+                    shapes, 
+                    container.Width, 
+                    container.Height, 
+                    container.Properties,
+                    context.Editor.Project);
             }
-            catch (Exception ex)
+            else
             {
-                if (context.Editor.Log != null)
-                {
-                    context.Editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void OnExportShapeCode()
-        {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            var shape = context.Editor.Renderers[0].State.SelectedShape;
-            if (shape == null)
-                return;
-
-            try
-            {
-                string name = "shape";
-
-                var dlg = new SaveFileDialog()
-                {
-                    Filter = "Code (*.code)|*.code|All (*.*)|*.*",
-                    FilterIndex = 0,
-                    FileName = name
-                };
-
-                if (dlg.ShowDialog() == true)
-                {
-                    context.ExportShapeCode(dlg.FileName, shape);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (context.Editor.Log != null)
-                {
-                    context.Editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
+                var container = context.Editor.Project.CurrentContainer;
+                (new EmfWriter()).SetClipboard(
+                    container,
+                    context.Editor.Project);
             }
         }
 
@@ -654,8 +574,11 @@ namespace Test.Windows
 
             try
             {
-                var container = context.Editor.Project.CurrentContainer;
-                (new EmfWriter()).Save(path, container);
+                var writer = new EmfWriter();
+                writer.Save(
+                    path,
+                    context.Editor.Project.CurrentContainer,
+                    context.Editor.Project);
             }
             catch (Exception ex)
             {
@@ -673,8 +596,12 @@ namespace Test.Windows
         /// 
         /// </summary>
         /// <returns></returns>
-        private string GetImagePath()
+        private string GetImageKey()
         {
+            var context = DataContext as EditorContext;
+            if (context == null || context.Editor.Project == null)
+                return null;
+
             var dlg = new OpenFileDialog()
             {
                 Filter = "All (*.*)|*.*",
@@ -684,7 +611,23 @@ namespace Test.Windows
 
             if (dlg.ShowDialog() == true)
             {
-                return dlg.FileName;
+                try
+                {
+                    var path = dlg.FileName;
+                    var bytes = System.IO.File.ReadAllBytes(path);
+                    var key = context.Editor.Project.AddImageFromFile(path, bytes);
+                    return key;
+                }
+                catch (Exception ex)
+                {
+                    if (context.Editor.Log != null)
+                    {
+                        context.Editor.Log.LogError("{0}{1}{2}",
+                            ex.Message,
+                            Environment.NewLine,
+                            ex.StackTrace);
+                    }
+                }
             }
             return null;
         }
@@ -890,22 +833,18 @@ namespace Test.Windows
                 View = this,
                 Renderers = new IRenderer[] { new WpfRenderer(), new WpfRenderer() },
                 ProjectFactory = new ProjectFactory(),
-                SimulationTimer = new SimulationTimer(),
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),
-                ScriptEngine = new RoslynScriptEngine(),
-                CodeEngine = new RoslynCodeEngine(),
                 PdfWriter = new PdfWriter(),
                 DxfWriter = new DxfWriter(),
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter()
             };
 
-            context.InitializeEditor();
-            context.InitializeScripts();
+            context.InitializeEditor(new TraceLog());
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
             context.Editor.Renderers[1].State.DrawShapeState = ShapeState.Visible;
-            context.Editor.GetImagePath = () => GetImagePath();
+            context.Editor.GetImageKey = () => GetImageKey();
 
             InitializeCommands(context);
             InitializeZoom(context);
@@ -976,9 +915,6 @@ namespace Test.Windows
             _layouts.Add("style", shapesWindow);
             _layouts.Add("state", shapesWindow);
             _layouts.Add("data", shapesWindow);
-            _layouts.Add("code", shapesWindow);
-            _layouts.Add("script", scriptWindow);
-            _layouts.Add("scripts", scriptsWindow);
         }
 
         /// <summary>
@@ -988,277 +924,247 @@ namespace Test.Windows
         private void InitializeCommands(EditorContext context)
         {
             context.Commands.OpenCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (parameter) => OnOpen(parameter),
                     (parameter) => context.IsEditMode());
             
             context.Commands.SaveCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => OnSave(),
                     () => context.IsEditMode());
 
             context.Commands.SaveAsCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => OnSaveAs(),
                     () => context.IsEditMode());
 
             context.Commands.ExportCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExport(item),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportDataCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportData(),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportDataCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportData(),
                     (item) => context.IsEditMode());
 
             context.Commands.UpdateDataCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnUpdateData(),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportStyleCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Style),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportStylesCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Styles),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportStyleLibraryCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.StyleLibrary),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportStyleLibrariesCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.StyleLibraries),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportGroupCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Group),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportGroupsCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Groups),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportGroupLibraryCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.GroupLibrary),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportGroupLibrariesCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.GroupLibraries),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportTemplateCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Template),
                     (item) => context.IsEditMode());
 
             context.Commands.ImportTemplatesCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnImportObject(item, ImportType.Templates),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportStyleCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Style),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportStylesCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Styles),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportStyleLibraryCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.StyleLibrary),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportStyleLibrariesCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.StyleLibraries),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportGroupCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Group),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportGroupsCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Groups),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportGroupLibraryCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.GroupLibrary),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportGroupLibrariesCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.GroupLibraries),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportTemplateCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Template),
                     (item) => context.IsEditMode());
 
             context.Commands.ExportTemplatesCommand =
-                new DelegateCommand<object>(
+                Command<object>.Create(
                     (item) => OnExportObject(item, ExportType.Templates),
                     (item) => context.IsEditMode());
 
             context.Commands.CopyAsEmfCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => OnCopyAsEmf(),
                     () => context.IsEditMode());
-
-            context.Commands.EvalCommand =
-                new DelegateCommand(
-                    () => OnEval(),
-                    () => context.IsEditMode());
-
-            context.Commands.ImportShapeCodeCommand =
-                new DelegateCommand(
-                    () => OnImportShapeCode(),
-                    () => context.IsEditMode());
-
-            context.Commands.ExportShapeCodeCommand =
-                new DelegateCommand(
-                    () => OnExportShapeCode(),
-                    () => context.IsEditMode());
-
+            
             context.Commands.ZoomResetCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => OnZoomReset(),
                     () => true);
 
             context.Commands.ZoomExtentCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => OnZoomExtent(),
                     () => true);
 
             context.Commands.ProjectWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["project"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.OptionsWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["options"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.TemplatesWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["templates"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.GroupsWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["groups"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.DatabasesWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["databases"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.DatabaseWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["database"] as LayoutAnchorable).Show(),
                     () => true);
 
-            context.Commands.ScriptWindowCommand =
-                new DelegateCommand(
-                    () => (_layouts["script"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            context.Commands.ScriptsWindowCommand = 
-                new DelegateCommand(
-                    () => (_layouts["scripts"] as LayoutAnchorable).Show(),
-                    () => true);
-
             //context.Commands.ContainerWindowCommand = 
-            //    new DelegateCommand(
+            //    Command.Create(
             //        () => ,
             //        () => true);
 
             //context.Commands.DocumentWindowCommand = 
-            //    new DelegateCommand(
+            //    Command.Create(
             //        () => ,
             //        () => true);
 
             context.Commands.StylesWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["styles"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.LayersWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["layers"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.ShapesWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["shapes"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.TemplateWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["template"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.PropertiesWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["properties"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.StateWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["state"] as LayoutAnchorable).Show(),
                     () => true);
 
-            context.Commands.CodeWindowCommand =
-                new DelegateCommand(
-                    () => (_layouts["code"] as LayoutAnchorable).Show(),
-                    () => true);
-
             context.Commands.DataWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["data"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.StyleWindowCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => (_layouts["style"] as LayoutAnchorable).Show(),
                     () => true);
 
             context.Commands.LoadWindowLayoutCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => OnLoadLayout(),
                     () => true);
 
             context.Commands.SaveWindowLayoutCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => OnSaveLayout(),
                     () => true);
 
             context.Commands.ResetWindowLayoutCommand =
-                new DelegateCommand(
+                Command.Create(
                     () => OnResetLayout(),
                     () => true);
         }
@@ -1269,8 +1175,6 @@ namespace Test.Windows
         /// <param name="context"></param>
         private void InitializeZoom(EditorContext context)
         {
-            panAndZoomGrid.EnableAutoFit = context.Renderers[0].State.EnableAutofit;
-
             border.InvalidateChild =
                 (z, x, y) =>
                 {
@@ -1292,9 +1196,6 @@ namespace Test.Windows
                         && context.Editor.Project != null
                         && context.Editor.Project.CurrentContainer != null)
                     {
-                        if (!context.Renderers[0].State.EnableAutofit)
-                            return;
-
                         border.AutoFit(
                             width,
                             height,
@@ -1372,18 +1273,7 @@ namespace Test.Windows
                             if (group != null)
                             {
                                 var p = e.GetPosition(containerControl);
-
-                                // NOTE: Drop XGroup as reference (hold Shift key).
-                                if (Keyboard.Modifiers == ModifierKeys.Shift)
-                                {
-                                    context.DropAsReference(group, p.X, p.Y);
-                                }
-                                // NOTE: Drop XGroup as clone (without Shift key).
-                                else
-                                {
-                                    context.DropAsClone(group, p.X, p.Y);
-                                }
-
+                                context.DropAsClone(group, p.X, p.Y);
                                 e.Handled = true;
                             }
                         }

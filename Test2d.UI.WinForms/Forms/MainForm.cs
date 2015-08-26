@@ -51,19 +51,16 @@ namespace TestWinForms
                 View = this,
                 Renderers = new IRenderer[] { new EmfRenderer(72.0 / 96.0) },
                 ProjectFactory = new ProjectFactory(),
-                SimulationTimer = new SimulationTimer(),
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),
-                ScriptEngine = new RoslynScriptEngine(),
-                CodeEngine = new RoslynCodeEngine(),
                 PdfWriter = new PdfWriter(),
                 DxfWriter = new DxfWriter(),
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter()
             };
-            context.InitializeEditor();
-            context.InitializeScripts();
+            context.InitializeEditor(new TraceLog());
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
+            context.Editor.GetImageKey = () => GetImageKey();
 
             DataContext = context;
 
@@ -187,28 +184,12 @@ namespace TestWinForms
                         Process.Start(path);
                         break;
                     case 2:
-                        context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1015);
-                        Process.Start(path);
-                        break;
-                    case 3:
-                        context.ExportAsDxf(path, Dxf.DxfAcadVer.AC1006);
+                        context.ExportAsDxf(path);
                         Process.Start(path);
                         break;
                     default:
                         break;
                 }
-            };
-
-            // eval script
-            this.openFileDialog2.FileOk += (sender, e) =>
-            {
-                var context = DataContext as EditorContext;
-                if (context == null)
-                    return;
-
-                string path = openFileDialog2.FileName;
-                int filterIndex = openFileDialog2.FilterIndex;
-                context.Eval(path);
             };
         }
 
@@ -335,9 +316,6 @@ namespace TestWinForms
             defaultIsFilledToolStripMenuItem.Click += (sender, e) => OnSetDefaultIsFilled();
             snapToGridToolStripMenuItem.Click += (sender, e) => OnSetSnapToGrid();
             tryToConnectToolStripMenuItem.Click += (sender, e) => OnSetTryToConnect();
-
-            // Script
-            evaluateToolStripMenuItem.Click += (sender, e) => OnEval();
         }
 
         /// <summary>
@@ -445,9 +423,13 @@ namespace TestWinForms
         /// </summary>
         private void OnSave()
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             saveFileDialog1.Filter = "Project (*.project)|*.project|All (*.*)|*.*";
             saveFileDialog1.FilterIndex = 0;
-            saveFileDialog1.FileName = "project";
+            saveFileDialog1.FileName = context.Editor.Project.Name;
             saveFileDialog1.ShowDialog(this);
         }
 
@@ -456,9 +438,13 @@ namespace TestWinForms
         /// </summary>
         private void OnExport()
         {
-            saveFileDialog2.Filter = "Pdf (*.pdf)|*.pdf|Dxf AutoCAD 2000 (*.dxf)|*.dxf|Dxf R10 (*.dxf)|*.dxf|All (*.*)|*.*";
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            saveFileDialog2.Filter = "Pdf (*.pdf)|*.pdf|Dxf (*.dxf)|*.dxf|All (*.*)|*.*";
             saveFileDialog2.FilterIndex = 0;
-            saveFileDialog2.FileName = "project";
+            saveFileDialog2.FileName = context.Editor.Project.Name;
             saveFileDialog2.ShowDialog(this);
         }
 
@@ -634,16 +620,6 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
-        private void OnEval()
-        {
-            openFileDialog2.Filter = "C# (*.cs)|*.cs|All (*.*)|*.*";
-            openFileDialog2.FilterIndex = 0;
-            openFileDialog2.ShowDialog(this);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         private void OnSetDefaultIsFilled()
         {
             var context = DataContext as EditorContext;
@@ -678,6 +654,29 @@ namespace TestWinForms
 
             context.Commands.TryToConnectCommand.Execute(null);
             UpdateOptionsMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private string GetImageKey()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return null;
+
+            openFileDialog2.Filter = "All (*.*)|*.*";
+            openFileDialog2.FilterIndex = 0;
+            var result = openFileDialog2.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                var path = openFileDialog2.FileName;
+                var bytes = System.IO.File.ReadAllBytes(path);
+                var key = context.Editor.Project.AddImageFromFile(path, bytes);
+                return key;
+            }
+            return null;
         }
     }
 }

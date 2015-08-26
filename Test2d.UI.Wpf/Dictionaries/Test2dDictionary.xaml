@@ -1,12 +1,13 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-                    xmlns:core="clr-namespace:Test2d;assembly=Test2d"
-                    xmlns:converters="clr-namespace:Test.Converters"
-                    xmlns:controls="clr-namespace:Test.Controls"
-                    xmlns:p="clr-namespace:Test2d.UI.Wpf.Properties">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:core="clr-namespace:Test2d;assembly=Test2d"
+    xmlns:converters="clr-namespace:Test.Converters"
+    xmlns:controls="clr-namespace:Test.Controls"
+    xmlns:p="clr-namespace:Test2d.UI.Wpf.Properties">
     <!-- converters -->
     <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
     <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
@@ -24,7 +25,6 @@
     <converters:ValueParameterConverter x:Key="ValueParameterConverter"/>
     <converters:ShapeBindingParameterConverter x:Key="ShapeBindingParameterConverter"/>
     <converters:ShapePropertyParameterConverter x:Key="ShapePropertyParameterConverter"/>
-    <converters:ZoomScaleConverter x:Key="ZoomScaleConverter"/>
     <!-- enums -->
     <ObjectDataProvider x:Key="MoveModeValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
         <ObjectDataProvider.MethodParameters>
@@ -87,97 +87,13 @@
             </DrawingGroup>
         </DrawingBrush.Drawing>
     </DrawingBrush>
-    <!-- tooltips -->
-    <ControlTemplate x:Key="TooltipControlTemplateKey">
-        <StackPanel>
-            <TextBlock FontWeight="Bold" Text="{TemplateBinding controls:TooltipTemplate.Header}"/>
-            <TextBlock Text="{TemplateBinding controls:TooltipTemplate.Script}"/>
-        </StackPanel>
-    </ControlTemplate>
-    <Style x:Key="ToolTipTextBlockStyleKey" TargetType="TextBlock">
-        <Setter Property="ToolTip">
-            <Setter.Value>
-                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style x:Key="ToolTipTextBoxStyleKey" TargetType="TextBox">
-        <Setter Property="ToolTip">
-            <Setter.Value>
-                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style x:Key="ToolTipSliderStyleKey" TargetType="Slider">
-        <Setter Property="ToolTip">
-            <Setter.Value>
-                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style x:Key="ToolTipExpanderStyleKey" TargetType="Expander">
-        <Setter Property="ToolTip">
-            <Setter.Value>
-                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style x:Key="ToolTipTabItemStyleKey" TargetType="TabItem">
-        <Setter Property="ToolTip">
-            <Setter.Value>
-                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style x:Key="ToolTipMenuItemStyleKey" TargetType="MenuItem">
-        <Setter Property="ToolTip">
-            <Setter.Value>
-                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style x:Key="ToolTipCheckBoxStyleKey" TargetType="CheckBox">
-        <Setter Property="ToolTip">
-            <Setter.Value>
-                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style x:Key="ToolTipRadioButtonStyleKey" TargetType="RadioButton">
-        <Setter Property="ToolTip">
-            <Setter.Value>
-                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style x:Key="ToolTipComboBoxStyleKey" TargetType="ComboBox">
-        <Setter Property="ToolTip">
-            <Setter.Value>
-                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style x:Key="ToolTipButtonStyleKey" TargetType="Button">
-        <Setter Property="ToolTip">
-            <Setter.Value>
-                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style x:Key="ToolTipRectangleStyleKey" TargetType="Rectangle">
-        <Setter Property="ToolTip">
-            <Setter.Value>
-                <Control Template="{StaticResource TooltipControlTemplateKey}"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
     <!-- styles -->
     <Style x:Key="TextBlockLeftStyleKey" TargetType="TextBlock">
         <Setter Property="Margin" Value="5,2,5,2"/>
         <Setter Property="TextAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-    <Style x:Key="TextBoxLeftStyleKey" TargetType="TextBox" BasedOn="{StaticResource ToolTipTextBoxStyleKey}">
+    <Style x:Key="TextBoxLeftStyleKey" TargetType="TextBox">
         <Setter Property="BorderBrush" Value="{x:Null}"/>
         <Setter Property="Margin" Value="5,2,5,2"/>
         <Setter Property="TextAlignment" Value="Left"/>
@@ -188,19 +104,19 @@
         <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-    <Style x:Key="TextBoxCenterStyleKey" TargetType="TextBox" BasedOn="{StaticResource ToolTipTextBoxStyleKey}">
+    <Style x:Key="TextBoxCenterStyleKey" TargetType="TextBox">
         <Setter Property="BorderBrush" Value="{x:Null}"/>
         <Setter Property="Margin" Value="5,2,5,2"/>
         <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-    <Style x:Key="CheckBoxStyleKey" TargetType="CheckBox" BasedOn="{StaticResource ToolTipCheckBoxStyleKey}">
+    <Style x:Key="CheckBoxStyleKey" TargetType="CheckBox">
         <Setter Property="Margin" Value="5,2,5,2"/>
     </Style>
-    <Style x:Key="ComboBoxStyleKey" TargetType="ComboBox" BasedOn="{StaticResource ToolTipComboBoxStyleKey}">
+    <Style x:Key="ComboBoxStyleKey" TargetType="ComboBox">
         <Setter Property="Margin" Value="5,2,5,2"/>
     </Style>
-    <Style x:Key="SliderStyleKey" TargetType="Slider" BasedOn="{StaticResource ToolTipSliderStyleKey}">
+    <Style x:Key="SliderStyleKey" TargetType="Slider">
         <Setter Property="Margin" Value="5,2,5,2"/>
     </Style>
     <!-- common -->
@@ -222,9 +138,7 @@
             <TextBox 
                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                 BorderBrush="{x:Null}" 
-                Style="{StaticResource TextBoxLeftStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
+                Style="{StaticResource TextBoxLeftStyleKey}" 
                 Grid.Row="0" 
                 Grid.Column="1">
             </TextBox>
@@ -249,8 +163,6 @@
                 Content=""
                 IsChecked="{Binding IsStroked}"
                 Style="{StaticResource CheckBoxStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="0" 
                 Grid.Column="1">
             </CheckBox>
@@ -275,8 +187,6 @@
                 Content=""
                 IsChecked="{Binding IsFilled}"
                 Style="{StaticResource CheckBoxStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="0" 
                 Grid.Column="1">
             </CheckBox>
@@ -301,8 +211,6 @@
                 Content=""
                 IsChecked="{Binding IsSmoothJoin}"
                 Style="{StaticResource CheckBoxStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="0" 
                 Grid.Column="1">
             </CheckBox>
@@ -327,8 +235,6 @@
                 Content=""
                 IsChecked="{Binding IsClosed}"
                 Style="{StaticResource CheckBoxStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="0" 
                 Grid.Column="1">
             </CheckBox>
@@ -361,8 +267,6 @@
             <TextBox 
                 Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
                 Style="{StaticResource TextBoxLeftStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="0" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="2">
@@ -370,84 +274,7 @@
             <TextBox 
                 Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
                 Style="{StaticResource TextBoxLeftStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="1" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2">
-            </TextBox>
-        </Grid>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type core:XPathRect}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="40"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock 
-                Text="X" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="0">
-            </TextBlock>
-            <TextBlock 
-                Text="Y" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="1" 
-                Grid.Column="0">
-            </TextBlock>
-            <TextBlock 
-                Text="Width" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="2" 
-                Grid.Column="0" >
-            </TextBlock>
-            <TextBlock 
-                Text="Height" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="3" 
-                Grid.Column="0">
-            </TextBlock>
-            <TextBox 
-                Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxLeftStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
-                Grid.Row="0" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2">
-            </TextBox>
-            <TextBox 
-                Text="{Binding Y, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxLeftStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
-                Grid.Row="1" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2">
-            </TextBox>
-            <TextBox 
-                Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxLeftStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
-                Grid.Row="2" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2">
-            </TextBox>
-            <TextBox 
-                Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxLeftStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
-                Grid.Row="3" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="2">
             </TextBox>
@@ -489,8 +316,6 @@
                 <TextBox 
                     Text="{Binding RotationAngle, UpdateSourceTrigger=PropertyChanged}" 
                     Style="{StaticResource TextBoxLeftStyleKey}"
-                    controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                    controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                     Grid.Row="0" 
                     Grid.Column="1" 
                     Grid.ColumnSpan="2">
@@ -499,8 +324,6 @@
                     Content=""
                     IsChecked="{Binding IsLargeArc}"
                     Style="{StaticResource CheckBoxStyleKey}"
-                    controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                    controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                     Grid.Row="1" 
                     Grid.Column="1" 
                     Grid.ColumnSpan="2">
@@ -509,23 +332,15 @@
                     ItemsSource="{Binding Source={StaticResource ResourceKey=XSweepDirectionValues}}" 
                     SelectedItem="{Binding SweepDirection}" 
                     Style="{StaticResource ComboBoxStyleKey}"
-                    controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                    controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                     Grid.Row="2" 
                     Grid.Column="1" 
                     Grid.ColumnSpan="2">
                 </ComboBox>
             </Grid>
-            <Expander Header="Point"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point">
                 <ContentControl Content="{Binding Point}"/>
             </Expander>
-            <Expander Header="Size"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Size">
                 <ContentControl Content="{Binding Size}"/>
             </Expander>
         </StackPanel>
@@ -534,22 +349,13 @@
         <StackPanel>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
-            <Expander Header="Point1"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
             </Expander>
-            <Expander Header="Point2"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point2">
                 <ContentControl Content="{Binding Point2}"/>
             </Expander>
-            <Expander Header="Point3"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point3">
                 <ContentControl Content="{Binding Point3}"/>
             </Expander>
         </StackPanel>
@@ -558,10 +364,7 @@
         <StackPanel>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
-            <Expander Header="Point"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point">
                 <ContentControl Content="{Binding Point}"/>
             </Expander>
         </StackPanel>
@@ -570,10 +373,7 @@
         <StackPanel>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
-            <Expander Header="Points"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Points">
                 <ListBox
                     ItemsSource="{Binding Points}"
                     BorderBrush="{x:Null}"
@@ -588,10 +388,7 @@
         <StackPanel>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
-            <Expander Header="Points"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Points">
                 <ListBox
                     ItemsSource="{Binding Points}"
                     BorderBrush="{x:Null}"
@@ -605,10 +402,7 @@
         <StackPanel>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
-            <Expander Header="Points"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Points">
                 <ListBox
                     ItemsSource="{Binding Points}"
                     BorderBrush="{x:Null}"
@@ -622,16 +416,10 @@
         <StackPanel>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
-            <Expander Header="Point1"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
             </Expander>
-            <Expander Header="Point2"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point2">
                 <ContentControl Content="{Binding Point2}"/>
             </Expander>
         </StackPanel>
@@ -640,10 +428,7 @@
         <StackPanel>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
             <Control Template="{StaticResource IsClosedControlTemplateKey}"/>
-            <Expander Header="StartPoint"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="StartPoint">
                 <ContentControl Content="{Binding StartPoint}"/>
             </Expander>
         </StackPanel>
@@ -668,25 +453,14 @@
                 <ComboBox 
                     ItemsSource="{Binding Source={StaticResource ResourceKey=XFillRuleValues}}" 
                     SelectedItem="{Binding FillRule}" 
-                    Style="{StaticResource ComboBoxStyleKey}"
-                    controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                    controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
+                    Style="{StaticResource ComboBoxStyleKey}"          
                     Grid.Row="0" 
                     Grid.Column="1" 
                     Grid.ColumnSpan="2">
                 </ComboBox>
             </Grid>
             <TabControl>
-                <TabItem Header="Bounds"
-                         Style="{StaticResource ToolTipTabItemStyleKey}"
-                         controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                         controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                    <ContentControl Content="{Binding Bounds}"/>
-                </TabItem>
-                <TabItem Header="Figures"
-                         Style="{StaticResource ToolTipTabItemStyleKey}"
-                         controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                         controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                <TabItem Header="Figures">
                     <TreeView 
                         x:Name="tree" 
                         ItemsSource="{Binding Figures}"
@@ -713,10 +487,7 @@
                         </TreeView.ItemTemplate>
                     </TreeView>
                 </TabItem>
-                <TabItem Header="Selected"
-                         Style="{StaticResource ToolTipTabItemStyleKey}"
-                         controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                         controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                <TabItem Header="Selected">
                     <ContentControl 
                         Content="{Binding}"                
                         DataContext="{Binding ElementName=tree, Path=SelectedItem}"
@@ -747,8 +518,6 @@
                 ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                 SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
                 Style="{StaticResource ComboBoxStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="0" 
                 Grid.Column="1">
                 <ComboBox.ItemTemplate>
@@ -762,58 +531,31 @@
     <ControlTemplate x:Key="StateControlTemplateKey">
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Default" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
             </CheckBox>
             <CheckBox Content="Visible" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
             </CheckBox>
             <CheckBox Content="Printable" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
             </CheckBox>
             <CheckBox Content="Locked" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
             </CheckBox>
             <CheckBox Content="Connector" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
             </CheckBox>
             <CheckBox Content="None" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
             </CheckBox>
             <CheckBox Content="Standalone" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
             </CheckBox>
             <CheckBox Content="Input" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
             </CheckBox>
             <CheckBox Content="Output" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
@@ -836,8 +578,6 @@
                 IsEditable="True" 
                 Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource ComboBoxStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="0" 
                 Grid.Column="1" 
                 VerticalAlignment="Center">
@@ -851,190 +591,103 @@
     <ControlTemplate x:Key="FontStyleControlTemplateKey">
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Regular" Margin="1"
-                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Regular}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Regular}}">
             </CheckBox>
             <CheckBox Content="Bold" Margin="1"
-                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Bold}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Bold}}">
             </CheckBox>
             <CheckBox Content="Italic" Margin="1"
-                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Italic}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Italic}}">
             </CheckBox>
             <CheckBox Content="Underline" Margin="1"
-                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Underline}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Underline}}">
             </CheckBox>
             <CheckBox Content="Strikeout" Margin="1"
-                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Strikeout}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Strikeout}}">
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
     <ControlTemplate x:Key="MaxLengthControlTemplateKey">
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Disabled" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Disabled}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Disabled}}">
             </CheckBox>
             <CheckBox Content="Start" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Start}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Start}}">
             </CheckBox>
             <CheckBox Content="End" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.End}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.End}}">
             </CheckBox>
             <CheckBox Content="Vertical" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Vertical}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Vertical}}">
             </CheckBox>
             <CheckBox Content="Horizontal" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Horizontal}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Horizontal}}">
             </CheckBox>
             <CheckBox Content="All" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.All}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.All}}">
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
     <ControlTemplate x:Key="StartStateControlTemplateKey">
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Default" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
             </CheckBox>
             <CheckBox Content="Visible" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
             </CheckBox>
             <CheckBox Content="Printable" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
             </CheckBox>
             <CheckBox Content="Locked" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
             </CheckBox>
             <CheckBox Content="Connector" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
             </CheckBox>
             <CheckBox Content="None" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
             </CheckBox>
             <CheckBox Content="Standalone" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
             </CheckBox>
             <CheckBox Content="Input" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
             </CheckBox>
             <CheckBox Content="Output" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
     <ControlTemplate x:Key="EndStateControlTemplateKey">
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Default" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
             </CheckBox>
             <CheckBox Content="Visible" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
             </CheckBox>
             <CheckBox Content="Printable" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
             </CheckBox>
             <CheckBox Content="Locked" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
             </CheckBox>
             <CheckBox Content="Connector" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
             </CheckBox>
             <CheckBox Content="None" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
             </CheckBox>
             <CheckBox Content="Standalone" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
             </CheckBox>
             <CheckBox Content="Input" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
             </CheckBox>
             <CheckBox Content="Output" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}"
-                      Style="{StaticResource ToolTipCheckBoxStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
@@ -1061,9 +714,6 @@
                 Height="20">
             </Rectangle>
             <Rectangle 
-                Style="{StaticResource ToolTipRectangleStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="0" 
                 Grid.Column="0" 
                 Grid.ColumnSpan="3" 
@@ -1105,8 +755,6 @@
             <Slider 
                 Value="{Binding A}" 
                 Style="{StaticResource SliderStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Minimum="0" 
                 Maximum="255" 
                 TickFrequency="1" 
@@ -1117,8 +765,6 @@
             <Slider 
                 Value="{Binding R}" 
                 Style="{StaticResource SliderStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Minimum="0" 
                 Maximum="255" 
                 TickFrequency="1" 
@@ -1129,8 +775,6 @@
             <Slider 
                 Value="{Binding G}"
                 Style="{StaticResource SliderStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Minimum="0" 
                 Maximum="255" 
                 TickFrequency="1" 
@@ -1141,8 +785,6 @@
             <Slider 
                 Value="{Binding B}" 
                 Style="{StaticResource SliderStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Minimum="0" 
                 Maximum="255" 
                 TickFrequency="1" 
@@ -1153,32 +795,24 @@
             <TextBox 
                 Text="{Binding A, UpdateSourceTrigger=PropertyChanged}" 
                 Style="{StaticResource TextBoxCenterStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="1" 
                 Grid.Column="2">
             </TextBox>
             <TextBox 
                 Text="{Binding R, UpdateSourceTrigger=PropertyChanged}" 
                 Style="{StaticResource TextBoxCenterStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="2" 
                 Grid.Column="2">
             </TextBox>
             <TextBox 
                 Text="{Binding G, UpdateSourceTrigger=PropertyChanged}" 
                 Style="{StaticResource TextBoxCenterStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="3" 
                 Grid.Column="2">
             </TextBox>
             <TextBox 
                 Text="{Binding B, UpdateSourceTrigger=PropertyChanged}" 
                 Style="{StaticResource TextBoxCenterStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="4" 
                 Grid.Column="2">
             </TextBox>
@@ -1187,22 +821,13 @@
     <ControlTemplate x:Key="BaseStyleControlTemplateKey">
         <StackPanel>
             <Control Template="{StaticResource NameControlTemplateKey}"/>
-            <Expander Header="Stroke" IsExpanded="False"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Stroke" IsExpanded="False">
                 <ContentControl Content="{Binding Stroke}"/>
             </Expander>
-            <Expander Header="Fill" IsExpanded="False"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Fill" IsExpanded="False">
                 <ContentControl Content="{Binding Fill}"/>
             </Expander>
-            <Expander Header="Thickness" IsExpanded="False"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Thickness" IsExpanded="False">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -1214,8 +839,6 @@
                     <Slider 
                         Value="{Binding Thickness}" 
                         Style="{StaticResource SliderStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                         Minimum="0" 
                         Maximum="50" 
                         TickFrequency="0.1" 
@@ -1228,17 +851,12 @@
                     <TextBox 
                         Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged}" 
                         Style="{StaticResource TextBoxCenterStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                         Grid.Row="0" 
                         Grid.Column="1">
                     </TextBox>
                 </Grid>
             </Expander>
-            <Expander Header="Cap" IsExpanded="False"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Cap" IsExpanded="False">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -1258,18 +876,13 @@
                         ItemsSource="{Binding Source={StaticResource ResourceKey=LineCapValues}}" 
                         SelectedItem="{Binding LineCap}" 
                         Style="{StaticResource ComboBoxStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
                     </ComboBox>
                 </Grid>
             </Expander>
-            <Expander Header="Dash" IsExpanded="False"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Dash" IsExpanded="False">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -1295,8 +908,6 @@
                     <TextBox 
                         Text="{Binding Dashes, Converter={StaticResource DoubleToStringConverter}}" 
                         Style="{StaticResource TextBoxLeftStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
@@ -1304,8 +915,6 @@
                     <Slider 
                         Value="{Binding DashOffset}" 
                         Style="{StaticResource SliderStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                         Minimum="0" 
                         Maximum="15" 
                         TickFrequency="0.1" 
@@ -1318,8 +927,6 @@
                     <TextBox 
                         Text="{Binding DashOffset, UpdateSourceTrigger=PropertyChanged}" 
                         Style="{StaticResource TextBoxCenterStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                         Grid.Row="1" 
                         Grid.Column="2">
                     </TextBox>
@@ -1329,10 +936,7 @@
     </ControlTemplate>
     <DataTemplate DataType="{x:Type core:ArrowStyle}">
         <TabControl>
-            <TabItem Header="Arrow"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="Arrow">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -1381,8 +985,6 @@
                         ItemsSource="{Binding Source={StaticResource ResourceKey=ArrowTypeValues}}" 
                         SelectedItem="{Binding ArrowType}" 
                         Style="{StaticResource ComboBoxStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
@@ -1391,17 +993,14 @@
                         Content=""
                         IsChecked="{Binding IsStroked}"
                         Style="{StaticResource CheckBoxStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
                     </CheckBox>
                     <CheckBox
                         Content=""
+                        IsChecked="{Binding IsFilled}"
                         Style="{StaticResource CheckBoxStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                         Grid.Row="2" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
@@ -1409,8 +1008,6 @@
                     <Slider 
                         Value="{Binding RadiusX}"
                         Style="{StaticResource SliderStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                         Minimum="0" 
                         Maximum="15" 
                         TickFrequency="0.1" 
@@ -1423,8 +1020,6 @@
                     <Slider 
                         Value="{Binding RadiusY}" 
                         Style="{StaticResource SliderStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                         Minimum="0" 
                         Maximum="15" 
                         TickFrequency="0.1" 
@@ -1437,25 +1032,18 @@
                     <TextBox 
                         Text="{Binding RadiusX, UpdateSourceTrigger=PropertyChanged}" 
                         Style="{StaticResource TextBoxCenterStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                         Grid.Row="3" 
                         Grid.Column="2">
                     </TextBox>
                     <TextBox
                         Text="{Binding RadiusY, UpdateSourceTrigger=PropertyChanged}" 
                         Style="{StaticResource TextBoxCenterStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                         Grid.Row="4" 
                         Grid.Column="2">
                     </TextBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Style"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="Style">
                 <Control Template="{StaticResource BaseStyleControlTemplateKey}"/>
             </TabItem>
         </TabControl>
@@ -1514,8 +1102,6 @@
             <Slider 
                 Value="{Binding FontSize}" 
                 Style="{StaticResource SliderStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Minimum="0" 
                 Maximum="72" 
                 TickFrequency="1" 
@@ -1526,8 +1112,6 @@
             <TextBox 
                 Text="{Binding FontName, UpdateSourceTrigger=PropertyChanged}" 
                 Style="{StaticResource TextBoxLeftStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="0" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="2">
@@ -1535,8 +1119,6 @@
             <TextBox 
                 Text="{Binding FontFile, UpdateSourceTrigger=PropertyChanged}" 
                 Style="{StaticResource TextBoxLeftStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="1" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="2">
@@ -1544,8 +1126,6 @@
             <TextBox 
                 Text="{Binding FontSize, UpdateSourceTrigger=PropertyChanged}" 
                 Style="{StaticResource TextBoxCenterStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="2" 
                 Grid.Column="2">
             </TextBox>
@@ -1559,8 +1139,6 @@
                 ItemsSource="{Binding Source={StaticResource ResourceKey=TextHAlignmentValues}}" 
                 SelectedItem="{Binding TextHAlignment}"
                 Style="{StaticResource ComboBoxStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="4" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="2">
@@ -1569,8 +1147,6 @@
                 ItemsSource="{Binding Source={StaticResource ResourceKey=TextVAlignmentValues}}" 
                 SelectedItem="{Binding TextVAlignment}" 
                 Style="{StaticResource ComboBoxStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                 Grid.Row="5" 
                 Grid.Column="1" 
                 Grid.ColumnSpan="2">
@@ -1579,17 +1155,10 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:LineStyle}">
         <TabControl>
-            <TabItem Header="Flags"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-
+            <TabItem Header="Flags">
                 <Control Template="{StaticResource MaxLengthControlTemplateKey}"/>
             </TabItem>
-            <TabItem Header="Length"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="Length">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -1598,8 +1167,6 @@
                     <Slider
                         Value="{Binding MaxLength}" 
                         Style="{StaticResource SliderStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                         Minimum="0" 
                         Maximum="30" 
                         TickFrequency="0.1" 
@@ -1611,152 +1178,51 @@
                     <TextBox
                         Text="{Binding MaxLength, UpdateSourceTrigger=PropertyChanged}" 
                         Style="{StaticResource TextBoxCenterStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                         Grid.Column="1" >
                     </TextBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Start"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="Start">
                 <Control Template="{StaticResource StartStateControlTemplateKey}"/>
             </TabItem>
-            <TabItem Header="End"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="End">
                 <Control Template="{StaticResource EndStateControlTemplateKey}"/>
             </TabItem>
         </TabControl>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:ShapeStyle}">
         <TabControl>
-            <TabItem Header="Base"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="Base">
                 <Control Template="{StaticResource BaseStyleControlTemplateKey}"/>
             </TabItem>
-            <TabItem Header="Text"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="Text">
                 <ContentControl Content="{Binding TextStyle}"/>
             </TabItem>
-            <TabItem Header="Line"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="Line">
                 <StackPanel>
                     <Expander Header="Line Start Arrow" 
-                              IsExpanded="False"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                              IsExpanded="False">
                         <ContentControl Content="{Binding StartArrowStyle}"/>
                     </Expander>
                     <Expander Header="Line End Arrow" 
-                              IsExpanded="False"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                              IsExpanded="False">
                         <ContentControl Content="{Binding EndArrowStyle}"/>
                     </Expander>
                     <Expander Header="Line MaxLength" 
-                              IsExpanded="False"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                              IsExpanded="False">
                         <ContentControl Content="{Binding LineStyle}"/>
                     </Expander>
                 </StackPanel>
             </TabItem>
         </TabControl>
     </DataTemplate>
-    <!-- code -->
-    <ControlTemplate x:Key="CodeControlTemplateKey">
-        <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsExecutable" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding Code.IsExecutable}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                    controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
-                    Grid.Row="0" 
-                    Grid.Column="1" 
-                    Grid.ColumnSpan="2">
-                </CheckBox>
-            </Grid>
-            <TabControl>
-                <TabItem Header="Definitions"
-                         Style="{StaticResource ToolTipTabItemStyleKey}"
-                         controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                         controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                    <TextBox 
-                        Text="{Binding Code.Definitions, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxLeftStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
-                        AcceptsReturn="True"
-                        AcceptsTab="True">
-                    </TextBox>
-                </TabItem>
-                <TabItem Header="Initialization"
-                         Style="{StaticResource ToolTipTabItemStyleKey}"
-                         controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                         controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                    <TextBox 
-                        Text="{Binding Code.Initialization, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxLeftStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
-                        AcceptsReturn="True"
-                        AcceptsTab="True">
-                    </TextBox>
-                </TabItem>
-                <TabItem Header="Script"
-                         Style="{StaticResource ToolTipTabItemStyleKey}"
-                         controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                         controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                    <TextBox 
-                        Text="{Binding Code.Script, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxLeftStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
-                        AcceptsReturn="True"
-                        AcceptsTab="True">
-                    </TextBox>
-                </TabItem>
-            </TabControl>
-        </StackPanel>
-    </ControlTemplate>
     <!-- data -->
     <ControlTemplate x:Key="BindingsMenu">
         <Menu Background="Transparent" HorizontalAlignment="Right">
             <MenuItem
                 Command="{Binding DataContext.Commands.AddBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                 CommandParameter="{Binding}" 
-                Header="+"
-                Style="{StaticResource ToolTipMenuItemStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                Header="+">
             </MenuItem>
         </Menu>
     </ControlTemplate>
@@ -1828,10 +1294,7 @@
                             <TextBox 
                                 Margin="5,2,0,2" 
                                 VerticalAlignment="Center" 
-                                Text="{Binding Path=Property, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource ToolTipTextBoxStyleKey}"
-                                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                                Text="{Binding Path=Property, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             </TextBox>
                         </Grid>
                     </DataTemplate>
@@ -1855,20 +1318,14 @@
                                 Grid.Column="0" 
                                 Margin="0,2,5,2" 
                                 VerticalAlignment="Center" 
-                                Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource ToolTipTextBoxStyleKey}"
-                                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                                Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             </TextBox>
                             <Button 
                                 Grid.Column="1" 
                                 Margin="5,0,5,0" 
                                 VerticalAlignment="Center" 
                                 Content="-" 
-                                Command="{Binding DataContext.Commands.RemoveBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                                Style="{StaticResource ToolTipButtonStyleKey}"
-                                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                                Command="{Binding DataContext.Commands.RemoveBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                                 <Button.CommandParameter>
                                     <MultiBinding Converter="{StaticResource ShapeBindingParameterConverter}">
                                         <Binding Path="DataContext" ElementName="bindingsItemsControls"/>
@@ -1887,10 +1344,7 @@
             <MenuItem 
                 Command="{Binding DataContext.Commands.AddPropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                 CommandParameter="{Binding}" 
-                Header="+"
-                Style="{StaticResource ToolTipMenuItemStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                Header="+">
             </MenuItem>
         </Menu>
     </ControlTemplate>
@@ -1968,10 +1422,7 @@
                             <TextBox 
                                 Margin="5,2,0,2" 
                                 VerticalAlignment="Center" 
-                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource ToolTipTextBoxStyleKey}"
-                                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             </TextBox>
                         </Grid>
                     </DataTemplate>
@@ -1995,20 +1446,14 @@
                                 Grid.Column="0" 
                                 Margin="0,2,5,2" 
                                 VerticalAlignment="Center" 
-                                Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource ToolTipTextBoxStyleKey}"
-                                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                                Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             </TextBox>
                             <Button 
                                 Grid.Column="1" 
                                 Margin="5,0,5,0" 
                                 VerticalAlignment="Center" 
                                 Content="-" 
-                                Command="{Binding DataContext.Commands.RemovePropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                                Style="{StaticResource ToolTipButtonStyleKey}"
-                                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                                Command="{Binding DataContext.Commands.RemovePropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                                 <Button.CommandParameter>
                                     <MultiBinding Converter="{StaticResource ShapePropertyParameterConverter}">
                                         <Binding Path="DataContext" ElementName="propertiesItemsControls"/>
@@ -2087,10 +1532,7 @@
                         <Grid Height="Auto" VerticalAlignment="Top">
                             <TextBox
                                 Margin="5,2,0,2" VerticalAlignment="Center" 
-                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource ToolTipTextBoxStyleKey}"
-                                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             </TextBox>
                         </Grid>
                     </DataTemplate>
@@ -2108,10 +1550,7 @@
                             <TextBox 
                                 Margin="0,2,5,2" 
                                 VerticalAlignment="Center" 
-                                Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource ToolTipTextBoxStyleKey}"
-                                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                                Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             </TextBox>
                         </Grid>
                     </DataTemplate>
@@ -2124,10 +1563,7 @@
             <MenuItem 
                 Command="{Binding DataContext.Commands.ResetRecordCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                 CommandParameter="{Binding}" 
-                Header="X"
-                Style="{StaticResource ToolTipMenuItemStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                Header="X">
             </MenuItem>
         </Menu>
     </ControlTemplate>
@@ -2196,10 +1632,7 @@
                         <Grid Height="Auto" VerticalAlignment="Top">
                             <TextBox 
                                 Margin="5,2,0,2" VerticalAlignment="Center" 
-                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource ToolTipTextBoxStyleKey}"
-                                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             </TextBox>
                         </Grid>
                     </DataTemplate>
@@ -2217,10 +1650,7 @@
                             <TextBox 
                                 Margin="0,2,5,2" 
                                 VerticalAlignment="Center" 
-                                Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource ToolTipTextBoxStyleKey}"
-                                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                                Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             </TextBox>
                         </Grid>
                     </DataTemplate>
@@ -2243,10 +1673,7 @@
             <MenuItem 
                 Command="{Binding DataContext.Commands.AddColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                 CommandParameter="{Binding}" 
-                Header="+"
-                Style="{StaticResource ToolTipMenuItemStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                Header="+">
             </MenuItem>
         </Menu>
     </ControlTemplate>
@@ -2310,10 +1737,7 @@
                                 Grid.Row="0"
                                 Margin="5,2,5,2" 
                                 VerticalAlignment="Center" 
-                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource ToolTipTextBoxStyleKey}"
-                                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             </TextBox>
                             <Button 
                                 Grid.Column="1" 
@@ -2321,10 +1745,7 @@
                                 Margin="5,2,5,2" 
                                 VerticalAlignment="Center" 
                                 Content="-" 
-                                Command="{Binding DataContext.Commands.RemoveColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                                Style="{StaticResource ToolTipTextBoxStyleKey}"
-                                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                                Command="{Binding DataContext.Commands.RemoveColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                                 <Button.CommandParameter>
                                     <MultiBinding Converter="{StaticResource ColumnParameterConverter}">
                                         <Binding Path="DataContext" ElementName="columnsItemsControls"/>
@@ -2343,40 +1764,25 @@
             <Control Template="{StaticResource NameControlTemplateKey}"/>
             <Expander
                 Header="Columns" 
-                IsExpanded="True"
-                Style="{StaticResource ToolTipExpanderStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                IsExpanded="True">
                 <Control Template="{StaticResource ColumnsControlTemplateKey}"/>
             </Expander>
             <Expander 
                 Header="Current Record" 
-                IsExpanded="False"
-                Style="{StaticResource ToolTipExpanderStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                IsExpanded="True">
                 <ContentControl Content="{Binding CurrentRecord}"/>
             </Expander>
         </StackPanel>
     </ControlTemplate>
     <ControlTemplate x:Key="DataControlTemplate">
         <TabControl>
-            <TabItem Header="Record"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="Record">
                 <Control Template="{StaticResource RecordControlTemplateKey}"/>
             </TabItem>
-            <TabItem Header="Bindings"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="Bindings">
                 <Control Template="{StaticResource BindingsControlTemplateKey}"/>
             </TabItem>
-            <TabItem Header="Properties"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="Properties">
                 <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
             </TabItem>
         </TabControl>
@@ -2384,11 +1790,7 @@
     <!-- shapes -->
     <DataTemplate DataType="{x:Type core:XPoint}">
         <TabControl>
-            <TabItem 
-                Header="Point"
-                Style="{StaticResource ToolTipTabItemStyleKey}"
-                controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="Point">
                 <StackPanel>
                     <Control Template="{StaticResource NameControlTemplateKey}"/>
                     <Grid>
@@ -2408,8 +1810,6 @@
                         <TextBox 
                             Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" 
                             Style="{StaticResource TextBoxLeftStyleKey}"
-                            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                             Grid.Row="0" 
                             Grid.Column="1">
                         </TextBox>
@@ -2431,36 +1831,19 @@
                         <TextBox 
                             Text="{Binding Y, UpdateSourceTrigger=PropertyChanged}" 
                             Style="{StaticResource TextBoxLeftStyleKey}"
-                            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
                             Grid.Row="0" 
                             Grid.Column="1">
                         </TextBox>
                     </Grid>
-                    <Expander Header="State"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                    <Expander Header="State">
                         <Control Template="{StaticResource StateControlTemplateKey}"/>
                     </Expander>
-                    <Expander Header="Code"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                        <Control Template="{StaticResource CodeControlTemplateKey}"/>
-                    </Expander>
-                    <Expander Header="Data"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                    <Expander Header="Data">
                         <Control Template="{StaticResource DataControlTemplate}"/>
                     </Expander>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Shape"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="Shape">
                 <ContentControl Content="{Binding Shape}"/>
             </TabItem>
         </TabControl>
@@ -2470,40 +1853,19 @@
             <Control Template="{StaticResource NameControlTemplateKey}"/>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
-            <Expander Header="Start"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Start">
                 <ContentControl Content="{Binding Start}"/>
             </Expander>
-            <Expander Header="End"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="End">
                 <ContentControl Content="{Binding End}"/>
             </Expander>
-            <Expander Header="State"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="State">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                <Control Template="{StaticResource CodeControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Data"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Data">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
-            <Expander Header="Style"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
@@ -2515,40 +1877,145 @@
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
             <Control Template="{StaticResource TextControlTemplateKey}"/>
-            <Expander Header="TopLeft"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="TopLeft">
                 <ContentControl Content="{Binding TopLeft}"/>
             </Expander>
-            <Expander Header="BottomRight"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="BottomRight">
                 <ContentControl Content="{Binding BottomRight}"/>
             </Expander>
-            <Expander Header="State"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Grid">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock 
+                        Text="IsGrid" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
+                        Grid.Row="0"
+                        Grid.Column="0">
+                    </TextBlock>
+                    <TextBlock 
+                        Text="OffsetX" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
+                        Grid.Row="1" 
+                        Grid.Column="0">
+                    </TextBlock>
+                    <TextBlock 
+                        Text="OffsetY" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
+                        Grid.Row="2" 
+                        Grid.Column="0">
+                    </TextBlock>
+                    <TextBlock 
+                        Text="CellWidth" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
+                        Grid.Row="3" 
+                        Grid.Column="0">
+                    </TextBlock>
+                    <TextBlock 
+                        Text="CellHeight" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
+                        Grid.Row="4" 
+                        Grid.Column="0">
+                    </TextBlock>
+                    <CheckBox 
+                        Content=""
+                        IsChecked="{Binding IsGrid}"
+                        Style="{StaticResource CheckBoxStyleKey}"
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2">
+                    </CheckBox>
+                    <Slider 
+                        Value="{Binding OffsetX}"
+                        Style="{StaticResource SliderStyleKey}"
+                        Minimum="0" 
+                        Maximum="60" 
+                        TickFrequency="0.1" 
+                        SmallChange="0.1"
+                        LargeChange="1"
+                        IsSnapToTickEnabled="True" 
+                        Grid.Row="1" 
+                        Grid.Column="1">
+                    </Slider>
+                    <Slider 
+                        Value="{Binding OffsetY}" 
+                        Style="{StaticResource SliderStyleKey}"
+                        Minimum="0" 
+                        Maximum="60" 
+                        TickFrequency="0.1" 
+                        SmallChange="0.1"
+                        LargeChange="1"
+                        IsSnapToTickEnabled="True" 
+                        Grid.Row="2" 
+                        Grid.Column="1">
+                    </Slider>
+                    <Slider 
+                        Value="{Binding CellWidth}"
+                        Style="{StaticResource SliderStyleKey}"
+                        Minimum="0" 
+                        Maximum="60" 
+                        TickFrequency="0.1" 
+                        SmallChange="0.1"
+                        LargeChange="1"
+                        IsSnapToTickEnabled="True" 
+                        Grid.Row="3" 
+                        Grid.Column="1">
+                    </Slider>
+                    <Slider 
+                        Value="{Binding CellHeight}" 
+                        Style="{StaticResource SliderStyleKey}"
+                        Minimum="0" 
+                        Maximum="60" 
+                        TickFrequency="0.1" 
+                        SmallChange="0.1"
+                        LargeChange="1"
+                        IsSnapToTickEnabled="True" 
+                        Grid.Row="4" 
+                        Grid.Column="1">
+                    </Slider>
+                    <TextBox 
+                        Text="{Binding OffsetX, UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource TextBoxCenterStyleKey}"
+                        Grid.Row="1" 
+                        Grid.Column="2">
+                    </TextBox>
+                    <TextBox
+                        Text="{Binding OffsetY, UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource TextBoxCenterStyleKey}"
+                        Grid.Row="2" 
+                        Grid.Column="2">
+                    </TextBox>
+                    <TextBox 
+                        Text="{Binding CellWidth, UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource TextBoxCenterStyleKey}"
+                        Grid.Row="3" 
+                        Grid.Column="2">
+                    </TextBox>
+                    <TextBox
+                        Text="{Binding CellHeight, UpdateSourceTrigger=PropertyChanged}" 
+                        Style="{StaticResource TextBoxCenterStyleKey}"
+                        Grid.Row="4" 
+                        Grid.Column="2">
+                    </TextBox>
+                </Grid>
+            </Expander>
+            <Expander Header="State">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                <Control Template="{StaticResource CodeControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Data"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Data">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
-            <Expander Header="Style"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
@@ -2560,40 +2027,19 @@
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
             <Control Template="{StaticResource TextControlTemplateKey}"/>
-            <Expander Header="TopLeft"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="TopLeft">
                 <ContentControl Content="{Binding TopLeft}"/>
             </Expander>
-            <Expander Header="BottomRight"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="BottomRight">
                 <ContentControl Content="{Binding BottomRight}"/>
             </Expander>
-            <Expander Header="State"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="State">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                <Control Template="{StaticResource CodeControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Data"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Data">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
-            <Expander Header="Style"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
@@ -2604,52 +2050,25 @@
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
-            <Expander Header="Point1"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
             </Expander>
-            <Expander Header="Point2"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point2">
                 <ContentControl Content="{Binding Point2}"/>
             </Expander>
-            <Expander Header="Point3"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point3">
                 <ContentControl Content="{Binding Point3}"/>
             </Expander>
-            <Expander Header="Point4"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point4">
                 <ContentControl Content="{Binding Point4}"/>
             </Expander>
-            <Expander Header="State"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="State">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                <Control Template="{StaticResource CodeControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Data"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Data">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
-            <Expander Header="Style"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
@@ -2660,52 +2079,25 @@
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
-            <Expander Header="Point1"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
             </Expander>
-            <Expander Header="Point2"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point2">
                 <ContentControl Content="{Binding Point2}"/>
             </Expander>
-            <Expander Header="Point3"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point3">
                 <ContentControl Content="{Binding Point3}"/>
             </Expander>
-            <Expander Header="Point4"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point4">
                 <ContentControl Content="{Binding Point4}"/>
             </Expander>
-            <Expander Header="State"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="State">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                <Control Template="{StaticResource CodeControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Data"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Data">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
-            <Expander Header="Style"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
@@ -2716,46 +2108,22 @@
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
-            <Expander Header="Point1"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
             </Expander>
-            <Expander Header="Point2"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point2">
                 <ContentControl Content="{Binding Point2}"/>
             </Expander>
-            <Expander Header="Point3"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Point3">
                 <ContentControl Content="{Binding Point3}"/>
             </Expander>
-            <Expander Header="State"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="State">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                <Control Template="{StaticResource CodeControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Data"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Data">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
-            <Expander Header="Style"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
@@ -2765,40 +2133,19 @@
             <Control Template="{StaticResource NameControlTemplateKey}"/>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource TextControlTemplateKey}"/>
-            <Expander Header="TopLeft"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="TopLeft">
                 <ContentControl Content="{Binding TopLeft}"/>
             </Expander>
-            <Expander Header="BottomRight"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="BottomRight">
                 <ContentControl Content="{Binding BottomRight}"/>
             </Expander>
-            <Expander Header="State"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="State">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                <Control Template="{StaticResource CodeControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Data"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Data">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
-            <Expander Header="Style"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
@@ -2810,96 +2157,49 @@
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
             <Control Template="{StaticResource TextControlTemplateKey}"/>
-            <Expander Header="Path"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Path">
                 <Grid>
                     <TextBox 
                         Text="{Binding Path, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxLeftStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                        Style="{StaticResource TextBoxLeftStyleKey}">
                     </TextBox>
                 </Grid>
             </Expander>
-            <Expander Header="TopLeft"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="TopLeft">
                 <ContentControl Content="{Binding TopLeft}"/>
             </Expander>
-            <Expander Header="BottomRight"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="BottomRight">
                 <ContentControl Content="{Binding BottomRight}"/>
             </Expander>
-            <Expander Header="State"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="State">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                <Control Template="{StaticResource CodeControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Data"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Data">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
-            <Expander Header="Style"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XGroup}">
         <TabControl>
-            <TabItem Header="Group"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="Group">
                 <StackPanel>
                     <Control Template="{StaticResource NameControlTemplateKey}"/>
                     <Expander Header="Properties" 
-                              IsExpanded="True"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                              IsExpanded="True">
                         <Control Template="{StaticResource ShapesPropertiesControlTemplateKey}"/>
                     </Expander>
-                    <Expander Header="State"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                    <Expander Header="State">
                         <Control Template="{StaticResource StateControlTemplateKey}"/>
                     </Expander>
-                    <Expander Header="Code"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                        <Control Template="{StaticResource CodeControlTemplateKey}"/>
-                    </Expander>
-                    <Expander Header="Data"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+                    <Expander Header="Data">
                         <Control Template="{StaticResource DataControlTemplate}"/>
                     </Expander>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Shapes"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="Shapes">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -2924,10 +2224,7 @@
                     </ContentControl>
                 </Grid>
             </TabItem>
-            <TabItem Header="Connectors"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="Connectors">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -2954,103 +2251,22 @@
             </TabItem>
         </TabControl>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type core:XReference}">
-        <TabControl>
-            <TabItem Header="Reference"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                <StackPanel>
-                    <Control Template="{StaticResource NameControlTemplateKey}"/>
-                    <Expander Header="Properties"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                        <Control Template="{StaticResource ShapesPropertiesControlTemplateKey}"/>
-                    </Expander>
-                    <Expander Header="State"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                        <Control Template="{StaticResource StateControlTemplateKey}"/>
-                    </Expander>
-                    <Expander Header="Code"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                        <Control Template="{StaticResource CodeControlTemplateKey}"/>
-                    </Expander>
-                    <Expander Header="Data"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                        <Control Template="{StaticResource DataControlTemplate}"/>
-                    </Expander>
-                </StackPanel>
-            </TabItem>
-            <TabItem Header="Origin"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                <ContentControl Content="{Binding Origin}"/>
-            </TabItem>
-            <TabItem Header="Shape"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                <ContentControl Content="{Binding Shape}"/>
-            </TabItem>
-        </TabControl>
-    </DataTemplate>
     <DataTemplate DataType="{x:Type core:XPath}">
         <StackPanel>
             <Control Template="{StaticResource NameControlTemplateKey}"/>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
-            <Expander Header="Source"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                <Grid>
-                    <TextBox 
-                        Text="{Binding Source, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxLeftStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
-                        AcceptsReturn="True"
-                        AcceptsTab="True">
-                    </TextBox>
-                </Grid>
-            </Expander>
-            <Expander Header="Geometry"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Geometry">
                 <ContentControl Content="{Binding Geometry}"/>
             </Expander>
-            <Expander Header="State"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="State">
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
-            <Expander Header="Code"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
-                <Control Template="{StaticResource CodeControlTemplateKey}"/>
-            </Expander>
-            <Expander Header="Data"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Data">
                 <Control Template="{StaticResource DataControlTemplate}"/>
             </Expander>
-            <Expander Header="Style"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
         </StackPanel>
@@ -3060,15 +2276,10 @@
         <MenuItem 
             Header="Te_mplate" 
             Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-            DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Editor.Project.Templates}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Editor.Project.Templates}">
             <MenuItem.ItemContainerStyle>
                 <Style TargetType="MenuItem">
                     <Setter Property="Header" Value="{Binding Name}"/>
-                    <Setter Property="controls:TooltipTemplate.Header" Value="{Binding Name}"/>
-                    <Setter Property="controls:TooltipTemplate.Script" Value="{x:Static p:Resources.TODO}"/>
                     <Setter Property="Command" Value="{Binding Path=Tag.Commands.ApplyTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}, FallbackValue={x:Null}}"/>
                     <Setter Property="CommandParameter" Value="{Binding}"/>
                     <Setter Property="IsCheckable" Value="True"/>
@@ -3092,67 +2303,46 @@
             Header="Insert Container Bef_ore" 
             InputGestureText="" 
             Command="{Binding DataContext.Commands.InsertContainerBeforeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
         <MenuItem 
             Header="Insert Container Aft_er" 
             InputGestureText="" 
             Command="{Binding DataContext.Commands.InsertContainerAfterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
         <Separator/>
         <MenuItem 
             Header="Cu_t" 
             InputGestureText="Ctrl+X" 
             Command="{Binding DataContext.Commands.CutCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
         <MenuItem 
             Header="_Copy" 
             InputGestureText="Ctrl+C" 
             Command="{Binding DataContext.Commands.CopyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}"
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
         <MenuItem 
             Header="_Paste" 
             InputGestureText="Ctrl+V" 
             Command="{Binding DataContext.Commands.PasteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
         <Separator/>
         <MenuItem 
             Header="_Delete" 
             InputGestureText="Del" 
             Command="{Binding DataContext.Commands.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
         <Separator/>
         <MenuItem 
             Header="E_xport" 
             InputGestureText="Ctrl+E" 
             Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
     </ContextMenu>
     <ContextMenu x:Key="DocumentContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
@@ -3160,77 +2350,53 @@
             Header="_Add Container" 
             InputGestureText="Ctrl+N" 
             Command="{Binding DataContext.Commands.AddContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
         <Separator/>
         <MenuItem 
             Header="Insert Document Bef_ore" 
             InputGestureText="" 
             Command="{Binding DataContext.Commands.InsertDocumentBeforeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
         <MenuItem 
             Header="Insert Document Aft_er" 
             InputGestureText="" 
             Command="{Binding DataContext.Commands.InsertDocumentAfterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
         <Separator/>
         <MenuItem 
             Header="Cu_t" 
             InputGestureText="Ctrl+X" 
             Command="{Binding DataContext.Commands.CutCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
         <MenuItem 
             Header="_Copy" 
             InputGestureText="Ctrl+C"
             Command="{Binding DataContext.Commands.CopyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
         <MenuItem 
             Header="_Paste" 
             InputGestureText="Ctrl+V" 
             Command="{Binding DataContext.Commands.PasteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
         <Separator/>
         <MenuItem 
             Header="_Delete" 
             InputGestureText="Del" 
             Command="{Binding DataContext.Commands.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
         <Separator/>
         <MenuItem 
             Header="E_xport" 
             InputGestureText="Ctrl+E" 
             Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
     </ContextMenu>
     <ContextMenu x:Key="PojectContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
@@ -3238,31 +2404,21 @@
             Header="_Add Document" 
             InputGestureText="Ctrl+N" 
             Command="{Binding DataContext.Commands.AddDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
         <Separator/>
         <MenuItem 
             Header="E_xport" 
             InputGestureText="Ctrl+E" 
             Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}"
-            Style="{StaticResource ToolTipMenuItemStyleKey}"
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            CommandParameter="{Binding}">
         </MenuItem>
     </ContextMenu>
     <DataTemplate DataType="{x:Type core:Options}">
         <TabControl>
-            <TabItem Header="{x:Static p:Resources.OptionsHeaderGeneral}"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="{x:Static p:Resources.OptionsHeaderGeneral}">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -3311,18 +2467,10 @@
                         Grid.Row="5"
                         Grid.Column="0">
                     </TextBlock>
-                    <TextBlock 
-                        Text="{x:Static p:Resources.OptionsCycleResolution}" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="6"
-                        Grid.Column="0">
-                    </TextBlock>
                     <CheckBox 
                         Content=""
                         IsChecked="{Binding SnapToGrid}"
                         Style="{StaticResource CheckBoxStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.OptionsTooltipSnapToGrid}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.OptionsTooltipScriptSnapToGrid}"
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
@@ -3330,8 +2478,6 @@
                     <TextBox 
                         Text="{Binding SnapX, UpdateSourceTrigger=PropertyChanged}" 
                         Style="{StaticResource TextBoxLeftStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.OptionsTooltipSnapX}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.OptionsTooltipScriptSnapX}"
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
@@ -3339,8 +2485,6 @@
                     <TextBox 
                         Text="{Binding SnapY, UpdateSourceTrigger=PropertyChanged}" 
                         Style="{StaticResource TextBoxLeftStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.OptionsTooltipSnapY}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.OptionsTooltipScriptSnapY}"
                         Grid.Row="2" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
@@ -3348,8 +2492,6 @@
                     <TextBox 
                         Text="{Binding HitTreshold, UpdateSourceTrigger=PropertyChanged}" 
                         Style="{StaticResource TextBoxLeftStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.OptionsTooltipHitTreshold}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.OptionsTooltipScriptHitTreshold}"
                         Grid.Row="3" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
@@ -3358,8 +2500,6 @@
                         ItemsSource="{Binding Source={StaticResource ResourceKey=MoveModeValues}}" 
                         SelectedItem="{Binding MoveMode}" 
                         Style="{StaticResource ComboBoxStyleKey}" 
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.OptionsTooltipMoveMode}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.OptionsTooltipScriptMoveMode}"
                         Grid.Row="4" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
@@ -3368,27 +2508,13 @@
                         Content=""
                         IsChecked="{Binding TryToConnect}"
                         Style="{StaticResource CheckBoxStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.OptionsTooltipTryToConnect}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.OptionsTooltipScriptTryToConnect}"
                         Grid.Row="5" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
                     </CheckBox>
-                    <TextBox 
-                        Text="{Binding CycleResolution, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxLeftStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.OptionsTooltipCycleResolution}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.OptionsTooltipScriptCycleResolution}"
-                        Grid.Row="6" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </TextBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="{x:Static p:Resources.OptionsHeaderDefaults}"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="{x:Static p:Resources.OptionsHeaderDefaults}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -3436,8 +2562,6 @@
                         Content=""
                         IsChecked="{Binding DefaultIsStroked}"
                         Style="{StaticResource CheckBoxStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.OptionsTooltipDefaultIsStroked}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.OptionsTooltipScriptDefaultIsStroked}"
                         Grid.Row="0" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
@@ -3446,8 +2570,6 @@
                         Content=""
                         IsChecked="{Binding DefaultIsFilled}"
                         Style="{StaticResource CheckBoxStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.OptionsTooltipDefaultIsFilled}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.OptionsTooltipScriptDefaultIsFilled}"
                         Grid.Row="1" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
@@ -3456,8 +2578,6 @@
                         Content=""
                         IsChecked="{Binding DefaultIsClosed}"
                         Style="{StaticResource CheckBoxStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.OptionsTooltipDefaultIsClosed}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.OptionsTooltipScriptDefaultIsClosed}"
                         Grid.Row="2" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
@@ -3466,8 +2586,6 @@
                         Content=""
                         IsChecked="{Binding DefaultIsSmoothJoin}"
                         Style="{StaticResource CheckBoxStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.OptionsTooltipDefaultIsSmoothJoin}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.OptionsTooltipScriptDefaultIsSmoothJoin}"
                         Grid.Row="3" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
@@ -3476,41 +2594,24 @@
                         ItemsSource="{Binding Source={StaticResource ResourceKey=XFillRuleValues}}" 
                         SelectedItem="{Binding DefaultFillRule}" 
                         Style="{StaticResource ComboBoxStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.OptionsTooltipDefaultFillRule}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.OptionsTooltipScriptDefaultFillRule}"
                         Grid.Row="4" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2">
                     </ComboBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="{x:Static p:Resources.OptionsHeaderAdvanced}"
-                     Style="{StaticResource ToolTipTabItemStyleKey}"
-                     controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-                     controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}">
+            <TabItem Header="{x:Static p:Resources.OptionsHeaderAdvanced}">
                 <StackPanel>
-                    <Expander Header="{x:Static p:Resources.OptionsPointShape}"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.OptionsTooltipPointShape}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.OptionsTooltipScriptPointShape}">
+                    <Expander Header="{x:Static p:Resources.OptionsPointShape}">
                         <ContentControl Content="{Binding PointShape}"/>
                     </Expander>
-                    <Expander Header="{x:Static p:Resources.OptionsPointStyle}"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.OptionsTooltipPointStyle}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.OptionsTooltipScriptPointStyle}">
+                    <Expander Header="{x:Static p:Resources.OptionsPointStyle}">
                         <ContentControl Content="{Binding PointStyle}"/>
                     </Expander>
-                    <Expander Header="{x:Static p:Resources.OptionsSelectionStyle}"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.OptionsTooltipSelectionStyle}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.OptionsTooltipScriptSelectionStyle}">
+                    <Expander Header="{x:Static p:Resources.OptionsSelectionStyle}">
                         <ContentControl Content="{Binding SelectionStyle}"/>
                     </Expander>
-                    <Expander Header="{x:Static p:Resources.OptionsHelperStyle}"
-                              Style="{StaticResource ToolTipExpanderStyleKey}"
-                              controls:TooltipTemplate.Header="{x:Static p:Resources.OptionsTooltipHelperStyle}"
-                              controls:TooltipTemplate.Script="{x:Static p:Resources.OptionsTooltipScriptHelperStyle}">
+                    <Expander Header="{x:Static p:Resources.OptionsHelperStyle}">
                         <ContentControl Content="{Binding HelperStyle}"/>
                     </Expander>
                 </StackPanel>
@@ -3520,10 +2621,7 @@
     <DataTemplate DataType="{x:Type core:Project}">
         <StackPanel>
             <Expander Header="{x:Static p:Resources.ProjectOptions}" 
-                      IsExpanded="False"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.ProjectTooltipOptions}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.ProjectTooltipScriptOptions}">
+                      IsExpanded="False">
                 <ContentControl Content="{Binding Options}"/>
             </Expander>
             <Grid>
@@ -3537,8 +2635,6 @@
                 <TextBox 
                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                     Style="{StaticResource TextBoxLeftStyleKey}"
-                    controls:TooltipTemplate.Header="{x:Static p:Resources.ProjectTooltipName}"
-                    controls:TooltipTemplate.Script="{x:Static p:Resources.ProjectTooltipScriptName}"
                     Grid.Row="0" 
                     Grid.Column="0" 
                     Grid.ColumnSpan="2">
@@ -3565,8 +2661,6 @@
                 <TextBox 
                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                     Style="{StaticResource TextBoxLeftStyleKey}"
-                    controls:TooltipTemplate.Header="{x:Static p:Resources.DocumentTooltipName}"
-                    controls:TooltipTemplate.Script="{x:Static p:Resources.DocumentTooltipScriptName}"
                     Grid.Row="0" 
                     Grid.Column="1">
                 </TextBox>
@@ -3593,8 +2687,6 @@
                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
                     BorderBrush="{x:Null}" 
                     Style="{StaticResource TextBoxLeftStyleKey}"
-                    controls:TooltipTemplate.Header="{x:Static p:Resources.ContainerTooltipName}"
-                    controls:TooltipTemplate.Script="{x:Static p:Resources.ContainerTooltipScriptName}"
                     Grid.Row="0" 
                     Grid.Column="1">
                 </TextBox>
@@ -3623,37 +2715,25 @@
                 <TextBox 
                     Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
                     Style="{StaticResource TextBoxLeftStyleKey}"
-                    controls:TooltipTemplate.Header="{x:Static p:Resources.ContainerTooltipWidth}"
-                    controls:TooltipTemplate.Script="{x:Static p:Resources.ContainerTooltipScriptWidth}"
                     Grid.Row="0" 
                     Grid.Column="1">
                 </TextBox>
                 <TextBox 
                     Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
                     Style="{StaticResource TextBoxLeftStyleKey}"
-                    controls:TooltipTemplate.Header="{x:Static p:Resources.ContainerTooltipHeight}"
-                    controls:TooltipTemplate.Script="{x:Static p:Resources.ContainerTooltipScriptHeight}"
                     Grid.Row="1" 
                     Grid.Column="1">
                 </TextBox>
             </Grid>
-            <Expander Header="{x:Static p:Resources.ContainerBackground}"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.ContainerTooltipBackground}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.ContainerTooltipScriptBackground}">
+            <Expander Header="{x:Static p:Resources.ContainerBackground}">
                 <ContentControl Content="{Binding Background}"/>
             </Expander>
-            <Expander Header="{x:Static p:Resources.ContainerTemplate}"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.ContainerTooltipTemplate}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.ContainerTooltipScriptTemplate}">
+            <Expander Header="{x:Static p:Resources.ContainerTemplate}">
                 <StackPanel>
                     <ComboBox 
                         ItemsSource="{Binding Path=DataContext.Editor.Project.Templates, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                         SelectedItem="{Binding Path=DataContext.Template, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" 
-                        Style="{StaticResource ComboBoxStyleKey}"
-                        controls:TooltipTemplate.Header="{x:Static p:Resources.ContainerTooltipTemplate}"
-                        controls:TooltipTemplate.Script="{x:Static p:Resources.ContainerTooltipScriptTemplate}">
+                        Style="{StaticResource ComboBoxStyleKey}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -3664,10 +2744,7 @@
                 </StackPanel>
             </Expander>
             <Expander Header="{x:Static p:Resources.ContainerProperties}" 
-                      IsExpanded="True"
-                      Style="{StaticResource ToolTipExpanderStyleKey}"
-                      controls:TooltipTemplate.Header="{x:Static p:Resources.ContainerTooltipProperties}"
-                      controls:TooltipTemplate.Script="{x:Static p:Resources.ContainerTooltipScriptProperties}">
+                      IsExpanded="True">
                 <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
             </Expander>
         </StackPanel>
@@ -3675,8 +2752,6 @@
     <DataTemplate DataType="{x:Type core:StyleLibrary}">
         <TextBox 
             Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
             BorderBrush="{x:Null}" 
             TextAlignment="Left" 
             VerticalAlignment="Center">
@@ -3685,8 +2760,6 @@
     <DataTemplate DataType="{x:Type core:GroupLibrary}">
         <TextBox 
             Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-            controls:TooltipTemplate.Header="{x:Static p:Resources.TODO}"
-            controls:TooltipTemplate.Script="{x:Static p:Resources.TODO}"
             BorderBrush="{x:Null}" 
             TextAlignment="Left" 
             VerticalAlignment="Center">
