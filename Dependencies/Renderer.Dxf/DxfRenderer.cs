@@ -22,8 +22,11 @@ namespace netDxf
     /// </summary>
     public class DxfRenderer : Test2d.ObservableObject, Test2d.IRenderer
     {
+        private bool _enableImageCache = true;
+        private IDictionary<string, ImageDef> _biCache;
         private double _pageWidth;
         private double _pageHeight;
+        private string _outputPath;
         private Layer _currentLayer;
         private Test2d.RendererState _state = new Test2d.RendererState();
 
@@ -60,9 +63,11 @@ namespace netDxf
         /// <param name="container"></param>
         public void Save(string path, Test2d.Container container)
         {
+            _outputPath = System.IO.Path.GetDirectoryName(path);
             var doc = new DxfDocument(DxfVersion.AutoCad2010);
             Add(doc, container);
             doc.Save(path);
+            ClearCache(isZooming: false);
         }
 
         /// <summary>
@@ -149,7 +154,25 @@ namespace netDxf
             };
         }
 
-        private Spline CreateSpline(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y, double p4x, double p4y)
+        private Spline CreateQuadraticSpline(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y)
+        {
+            double _p1x = ToDxfX(p1x);
+            double _p1y = ToDxfY(p1y);
+            double _p2x = ToDxfX(p2x);
+            double _p2y = ToDxfY(p2y);
+            double _p3x = ToDxfX(p3x);
+            double _p3y = ToDxfY(p3y);
+            
+            return new Spline(
+                new List<SplineVertex>
+                {
+                    new SplineVertex(_p1x, _p1y, 0.0),
+                    new SplineVertex(_p2x, _p2y, 0.0),
+                    new SplineVertex(_p3x, _p3y, 0.0)
+                }, 2);
+        }
+        
+        private Spline CreateCubicSpline(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y, double p4x, double p4y)
         {
             double _p1x = ToDxfX(p1x);
             double _p1y = ToDxfY(p1y);
@@ -318,12 +341,200 @@ namespace netDxf
             }
         }
 
+        private void CreateHatchBoundsAndEntitiess(Test2d.XPathGeometry pg, double dx, double dy, out ICollection<HatchBoundaryPath> bounds, out ICollection<EntityObject> entities)
+        {
+            bounds = new List<HatchBoundaryPath>();
+            entities = new List<EntityObject>();
+
+            //TODO: FillMode = pg.FillRule == Test2d.XFillRule.EvenOdd ? FillMode.Alternate : FillMode.Winding;
+
+            foreach (var pf in pg.Figures)
+            {
+                var edges = new List<EntityObject>();
+                var startPoint = pf.StartPoint;
+
+                foreach (var segment in pf.Segments)
+                {
+                    if (segment is Test2d.XArcSegment)
+                    {
+                        throw new NotSupportedException("Not supported segment type: " + segment.GetType());
+                        //var arcSegment = segment as Test2d.XArcSegment;
+                        // TODO: Convert WPF/SVG elliptical arc segment format to DXF ellipse arc.
+                        //startPoint = arcSegment.Point;
+                    }
+                    else if (segment is Test2d.XBezierSegment)
+                    {
+                        var bezierSegment = segment as Test2d.XBezierSegment;
+                        var dxfSpline = CreateCubicSpline(
+                            startPoint.X + dx,
+                            startPoint.Y + dy,
+                            bezierSegment.Point1.X + dx,
+                            bezierSegment.Point1.Y + dy,
+                            bezierSegment.Point2.X + dx,
+                            bezierSegment.Point2.Y + dy,
+                            bezierSegment.Point3.X + dx,
+                            bezierSegment.Point3.Y + dy);
+                        edges.Add(dxfSpline);
+                        entities.Add((Spline)dxfSpline.Clone());
+                        startPoint = bezierSegment.Point3;
+                    }
+                    else if (segment is Test2d.XLineSegment)
+                    {
+                        var lineSegment = segment as Test2d.XLineSegment;
+                        var dxfLine = CreateLine(
+                            startPoint.X + dx,
+                            startPoint.Y + dy,
+                            lineSegment.Point.X + dx,
+                            lineSegment.Point.Y + dy);
+                        edges.Add(dxfLine);
+                        entities.Add((Line)dxfLine.Clone());
+                        startPoint = lineSegment.Point;
+                    }
+                    else if (segment is Test2d.XPolyBezierSegment)
+                    {
+                        var polyBezierSegment = segment as Test2d.XPolyBezierSegment;
+                        if (polyBezierSegment.Points.Count >= 3)
+                        {
+                            var dxfSpline = CreateCubicSpline(
+                                startPoint.X + dx,
+                                startPoint.Y + dy,
+                                polyBezierSegment.Points[0].X + dx,
+                                polyBezierSegment.Points[0].Y + dy,
+                                polyBezierSegment.Points[1].X + dx,
+                                polyBezierSegment.Points[1].Y + dy,
+                                polyBezierSegment.Points[2].X + dx,
+                                polyBezierSegment.Points[2].Y + dy);
+                            edges.Add(dxfSpline);
+                            entities.Add((Spline)dxfSpline.Clone());
+                        }
+
+                        if (polyBezierSegment.Points.Count > 3
+                            && polyBezierSegment.Points.Count % 3 == 0)
+                        {
+                            for (int i = 3; i < polyBezierSegment.Points.Count; i += 3)
+                            {
+                                var dxfSpline = CreateCubicSpline(
+                                    polyBezierSegment.Points[i - 1].X + dx,
+                                    polyBezierSegment.Points[i - 1].Y + dy,
+                                    polyBezierSegment.Points[i].X + dx,
+                                    polyBezierSegment.Points[i].Y + dy,
+                                    polyBezierSegment.Points[i + 1].X + dx,
+                                    polyBezierSegment.Points[i + 1].Y + dy,
+                                    polyBezierSegment.Points[i + 2].X + dx,
+                                    polyBezierSegment.Points[i + 2].Y + dy);
+                                edges.Add(dxfSpline);
+                                entities.Add((Spline)dxfSpline.Clone());
+                            }
+                        }
+
+                        startPoint = polyBezierSegment.Points.Last();
+                    }
+                    else if (segment is Test2d.XPolyLineSegment)
+                    {
+                        var polyLineSegment = segment as Test2d.XPolyLineSegment;
+                        if (polyLineSegment.Points.Count >= 1)
+                        {
+                            var dxfLine = CreateLine(
+                                startPoint.X + dx,
+                                startPoint.Y + dy,
+                                polyLineSegment.Points[0].X + dx,
+                                polyLineSegment.Points[0].Y + dy);
+                            edges.Add(dxfLine);
+                            entities.Add((Line)dxfLine.Clone());
+                        }
+
+                        if (polyLineSegment.Points.Count > 1)
+                        {
+                            for (int i = 1; i < polyLineSegment.Points.Count; i++)
+                            {
+                                var dxfLine = CreateLine(
+                                    polyLineSegment.Points[i - 1].X + dx,
+                                    polyLineSegment.Points[i - 1].Y + dy,
+                                    polyLineSegment.Points[i].X + dx,
+                                    polyLineSegment.Points[i].Y + dy);
+                                edges.Add(dxfLine);
+                                entities.Add((Line)dxfLine.Clone());
+                            }
+                        }
+
+                        startPoint = polyLineSegment.Points.Last();
+                    }
+                    else if (segment is Test2d.XPolyQuadraticBezierSegment)
+                    {
+                        var polyQuadraticSegment = segment as Test2d.XPolyQuadraticBezierSegment;
+                        if (polyQuadraticSegment.Points.Count >= 2)
+                        {
+                            var dxfSpline = CreateQuadraticSpline(
+                                startPoint.X + dx,
+                                startPoint.Y + dy,
+                                polyQuadraticSegment.Points[0].X + dx,
+                                polyQuadraticSegment.Points[0].Y + dy,
+                                polyQuadraticSegment.Points[1].X + dx,
+                                polyQuadraticSegment.Points[1].Y + dy);
+                            edges.Add(dxfSpline);
+                            entities.Add((Spline)dxfSpline.Clone());
+                        }
+
+                        if (polyQuadraticSegment.Points.Count > 2
+                            && polyQuadraticSegment.Points.Count % 2 == 0)
+                        {
+                            for (int i = 3; i < polyQuadraticSegment.Points.Count; i += 3)
+                            {
+                                var dxfSpline = CreateQuadraticSpline(
+                                    polyQuadraticSegment.Points[i - 1].X + dx,
+                                    polyQuadraticSegment.Points[i - 1].Y + dy,
+                                    polyQuadraticSegment.Points[i].X + dx,
+                                    polyQuadraticSegment.Points[i].Y + dy,
+                                    polyQuadraticSegment.Points[i + 1].X + dx,
+                                    polyQuadraticSegment.Points[i + 1].Y + dy);
+                                edges.Add(dxfSpline);
+                                entities.Add((Spline)dxfSpline.Clone());
+                            }
+                        }
+
+                        startPoint = polyQuadraticSegment.Points.Last();
+                    }
+                    else if (segment is Test2d.XQuadraticBezierSegment)
+                    {
+                        var qbezierSegment = segment as Test2d.XQuadraticBezierSegment;
+                        var dxfSpline = CreateQuadraticSpline(
+                            startPoint.X + dx,
+                            startPoint.Y + dy,
+                            qbezierSegment.Point1.X + dx,
+                            qbezierSegment.Point1.Y + dy,
+                            qbezierSegment.Point2.X + dx,
+                            qbezierSegment.Point2.Y + dy);
+                        edges.Add(dxfSpline);
+                        entities.Add((Spline)dxfSpline.Clone());
+                        startPoint = qbezierSegment.Point2;
+                    }
+                    else
+                    {
+                        throw new NotSupportedException("Not supported segment type: " + segment.GetType());
+                    }
+                }
+                
+                // TODO: Add support for pf.IsClosed
+
+                var path  = new HatchBoundaryPath(edges);
+                bounds.Add(path);
+            }
+        }
+        
         /// <summary>
         /// 
         /// </summary>
         /// <param name="isZooming"></param>
         public void ClearCache(bool isZooming)
         {
+            if (!isZooming)
+            {
+                if (_biCache != null)
+                {
+                    _biCache.Clear();
+                }
+                _biCache = new Dictionary<string, ImageDef>();
+            }
         }
 
         /// <summary>
@@ -425,7 +636,7 @@ namespace netDxf
         /// <param name="r"></param>
         public void Draw(object doc, Test2d.XRectangle rectangle, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
         {
-            if (!rectangle.IsStroked && !rectangle.IsFilled)
+            if (!rectangle.IsStroked && !rectangle.IsFilled && !rectangle.IsGrid)
                 return;
 
             var _doc = doc as DxfDocument;
@@ -434,7 +645,7 @@ namespace netDxf
 
             DrawRectangleInternal(_doc, _currentLayer, rectangle.IsFilled, rectangle.IsStroked, style, ref rect);
 
-            if (rectangle.IsGrid && rectangle.IsStroked)
+            if (rectangle.IsGrid)
             {
                 DrawGridInternal(
                     _doc, 
@@ -604,7 +815,7 @@ namespace netDxf
             var fill = GetColor(style.Fill);
             var fillTransparency = GetTransparency(style.Fill);
 
-            var dxfSpline = CreateSpline(
+            var dxfSpline = CreateCubicSpline(
                 bezier.Point1.X + dx, 
                 bezier.Point1.Y + dy,
                 bezier.Point2.X + dx, 
@@ -668,24 +879,13 @@ namespace netDxf
             var fill = GetColor(style.Fill);
             var fillTransparency = GetTransparency(style.Fill);
 
-            double x1 = qbezier.Point1.X;
-            double y1 = qbezier.Point1.Y;
-            double x2 = qbezier.Point1.X + (2.0 * (qbezier.Point2.X - qbezier.Point1.X)) / 3.0;
-            double y2 = qbezier.Point1.Y + (2.0 * (qbezier.Point2.Y - qbezier.Point1.Y)) / 3.0;
-            double x3 = x2 + (qbezier.Point3.X - qbezier.Point1.X) / 3.0;
-            double y3 = y2 + (qbezier.Point3.Y - qbezier.Point1.Y) / 3.0;
-            double x4 = qbezier.Point3.X;
-            double y4 = qbezier.Point3.Y;
-
-            var dxfSpline = CreateSpline(
-                x1 + dx, 
-                y1 + dy,
-                x2 + dx, 
-                y2 + dy,
-                x3 + dx, 
-                y3 + dy,
-                x4 + dx,
-                y4 + dy);
+            var dxfSpline = CreateQuadraticSpline(
+                qbezier.Point1.X + dx, 
+                qbezier.Point1.Y + dy,
+                qbezier.Point2.X + dx, 
+                qbezier.Point2.Y + dy,
+                qbezier.Point3.X + dx, 
+                qbezier.Point3.Y + dy);
 
             if (qbezier.IsFilled)
             {
@@ -867,29 +1067,106 @@ namespace netDxf
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="dc"></param>
+        /// <param name="doc"></param>
         /// <param name="image"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object dc, Test2d.XImage image, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object doc, Test2d.XImage image, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
         {
-            // TODO: Implement Dxf Draw() method for XImage.
+            var _doc = doc as DxfDocument;
+            
+            var bytes = _state.ImageCache.GetImage(image.Path);
+            if (bytes != null)
+            {
+                var rect = Test2d.Rect2.Create(image.TopLeft, image.BottomRight, dx, dy);
+
+                if (_enableImageCache
+                    && _biCache.ContainsKey(image.Path))
+                {
+                    var dxfImageDefinition = _biCache[image.Path];
+                    var dxfImage = new Image(
+                        dxfImageDefinition,
+                        new Vector3(ToDxfX(rect.X), ToDxfY(rect.Y +  rect.Height), 0), 
+                        rect.Width, 
+                        rect.Height);
+                    _doc.AddEntity(dxfImage);
+                }
+                else
+                {
+                    if (_state.ImageCache == null || string.IsNullOrEmpty(image.Path))
+                        return;
+
+                    var path = System.IO.Path.Combine(_outputPath, System.IO.Path.GetFileName(image.Path));
+                    System.IO.File.WriteAllBytes(path, bytes);
+                    var dxfImageDefinition = new ImageDef(path);
+
+                    if (_enableImageCache)
+                        _biCache[image.Path] = dxfImageDefinition;
+
+                    var dxfImage = new Image(
+                        dxfImageDefinition, 
+                        new Vector3(ToDxfX(rect.X), ToDxfY(rect.Y +  rect.Height), 0), 
+                        rect.Width, 
+                        rect.Height);
+                    _doc.AddEntity(dxfImage);
+                }
+            }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="dc"></param>
+        /// <param name="doc"></param>
         /// <param name="path"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object dc, Test2d.XPath path, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object doc, Test2d.XPath path, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
         {
-            // TODO: Implement Dxf Draw() method for XPath.
+            if (!path.IsStroked && !path.IsFilled)
+                return;
+
+            var _doc = doc as DxfDocument;
+
+            var style = path.Style;
+            var stroke = GetColor(style.Stroke);
+            var strokeTansparency = GetTransparency(style.Stroke);
+            var lineweight = ThicknessToLineweight(style.Thickness);
+            var fill = GetColor(style.Fill);
+            var fillTransparency = GetTransparency(style.Fill);
+
+            ICollection<HatchBoundaryPath> bounds;
+            ICollection<EntityObject> entities;
+            CreateHatchBoundsAndEntitiess(path.Geometry, dx, dy, out bounds, out entities);
+            if (entities == null || bounds == null)
+                return;
+
+            if (path.IsFilled)
+            {
+                var hatch = new Hatch(HatchPattern.Solid, bounds, false);
+                hatch.Layer = _currentLayer;
+                hatch.Color = fill;
+                hatch.Transparency.Value = fillTransparency;
+
+                _doc.AddEntity(hatch);
+            }
+
+            if (path.IsStroked)
+            {
+                // TODO: Add support for Closed paths.
+
+                foreach (var entity in entities) 
+                {
+                    entity.Layer = _currentLayer;
+                    entity.Color = stroke;
+                    entity.Transparency.Value = strokeTansparency;
+                    entity.Lineweight.Value = lineweight;
+                    _doc.AddEntity(entity);
+                }
+            }
         }
     }
 }
