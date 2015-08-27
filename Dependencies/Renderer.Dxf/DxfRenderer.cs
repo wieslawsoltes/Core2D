@@ -154,6 +154,36 @@ namespace netDxf
             };
         }
 
+        private Ellipse CreateEllipticalArc(Test2d.XArc arc, double dx, double dy)
+        {
+            var a = Test2d.GdiArc.FromXArc(arc, dx, dy);
+            
+            double _cx = ToDxfX(a.X + a.Width / 2.0);
+            double _cy = ToDxfY(a.Y + a.Height / 2.0);
+            double minor = Math.Min(a.Height, a.Width);
+            double major = Math.Max(a.Height, a.Width);
+            double startAngle = -a.EndAngle;
+            double endAngle = -a.StartAngle;
+            double rotation = 0;
+
+            if (a.Height > a.Width)
+            {
+                startAngle += 90;
+                endAngle += 90;
+                rotation = -90;
+            }
+
+            return new Ellipse()
+            {
+                Center = new Vector3(_cx, _cy, 0),
+                MajorAxis = major,
+                MinorAxis = minor,
+                StartAngle = startAngle,
+                EndAngle = endAngle,
+                Rotation = rotation
+            };
+        }
+
         private Spline CreateQuadraticSpline(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y)
         {
             double _p1x = ToDxfX(p1x);
@@ -692,66 +722,7 @@ namespace netDxf
             var _doc = doc as DxfDocument;
             var style = arc.Style;
 
-            var a = Test2d.GdiArc.FromXArc(arc, dx, dy);
-
-            double _cx = ToDxfX(a.X + a.Width / 2.0);
-            double _cy = ToDxfY(a.Y + a.Height / 2.0);
-            double minor = Math.Min(a.Height, a.Width);
-            double major = Math.Max(a.Height, a.Width);
-
-            var dxfEllipse = default(Ellipse);
-
-            if (a.Height == a.Width)
-            {
-                // TODO: Fix arc angle and rotation.
-                double startAngle = a.StartAngle;
-                double endAngle = a.EndAngle;
-                double rotation = 0.0;
-
-                dxfEllipse = new Ellipse()
-                {
-                    Center = new Vector3(_cx, _cy, 0),
-                    MajorAxis = major,
-                    MinorAxis = minor,
-                    StartAngle = startAngle,
-                    EndAngle = endAngle,
-                    Rotation = rotation
-                };
-            }
-            else if (a.Height > a.Width)
-            {
-                // TODO: Fix arc angle and rotation.
-                double startAngle = a.StartAngle;
-                double endAngle = a.EndAngle;
-                double rotation = 90.0;
-
-                dxfEllipse = new Ellipse()
-                {
-                    Center = new Vector3(_cx, _cy, 0),
-                    MajorAxis = major,
-                    MinorAxis = minor,
-                    StartAngle = startAngle,
-                    EndAngle = endAngle,
-                    Rotation = rotation
-                };
-            }
-            else if (a.Height < a.Width)
-            {
-                // TODO: Fix arc angle and rotation.
-                double startAngle = a.StartAngle;
-                double endAngle = a.EndAngle;
-                double rotation = 0.0;
-
-                dxfEllipse = new Ellipse()
-                {
-                    Center = new Vector3(_cx, _cy, 0),
-                    MajorAxis = major,
-                    MinorAxis = minor,
-                    StartAngle = startAngle,
-                    EndAngle = endAngle,
-                    Rotation = rotation
-                };
-            }
+            var dxfEllipse = CreateEllipticalArc(arc, dx, dy);
 
             if (arc.IsFilled)
             {
@@ -807,13 +778,7 @@ namespace netDxf
                 return;
 
             var _doc = doc as DxfDocument;
-
             var style = bezier.Style;
-            var stroke = GetColor(style.Stroke);
-            var strokeTansparency = GetTransparency(style.Stroke);
-            var lineweight = ThicknessToLineweight(style.Thickness);
-            var fill = GetColor(style.Fill);
-            var fillTransparency = GetTransparency(style.Fill);
 
             var dxfSpline = CreateCubicSpline(
                 bezier.Point1.X + dx, 
@@ -827,6 +792,9 @@ namespace netDxf
 
             if (bezier.IsFilled)
             {
+                var fill = GetColor(style.Fill);
+                var fillTransparency = GetTransparency(style.Fill);
+                
                 var bounds =
                     new List<HatchBoundaryPath>
                     {
@@ -847,6 +815,10 @@ namespace netDxf
 
             if (bezier.IsStroked)
             {
+                var stroke = GetColor(style.Stroke);
+                var strokeTansparency = GetTransparency(style.Stroke);
+                var lineweight = ThicknessToLineweight(style.Thickness);
+                
                 dxfSpline.Layer = _currentLayer;
                 dxfSpline.Color = stroke;
                 dxfSpline.Transparency.Value = strokeTansparency;
@@ -871,14 +843,8 @@ namespace netDxf
                 return;
 
             var _doc = doc as DxfDocument;
-
             var style = qbezier.Style;
-            var stroke = GetColor(style.Stroke);
-            var strokeTansparency = GetTransparency(style.Stroke);
-            var lineweight = ThicknessToLineweight(style.Thickness);
-            var fill = GetColor(style.Fill);
-            var fillTransparency = GetTransparency(style.Fill);
-
+    
             var dxfSpline = CreateQuadraticSpline(
                 qbezier.Point1.X + dx, 
                 qbezier.Point1.Y + dy,
@@ -889,6 +855,9 @@ namespace netDxf
 
             if (qbezier.IsFilled)
             {
+                var fill = GetColor(style.Fill);
+                var fillTransparency = GetTransparency(style.Fill);
+                
                 var bounds =
                     new List<HatchBoundaryPath>
                     {
@@ -909,6 +878,10 @@ namespace netDxf
 
             if (qbezier.IsStroked)
             {
+                var stroke = GetColor(style.Stroke);
+                var strokeTansparency = GetTransparency(style.Stroke);
+                var lineweight = ThicknessToLineweight(style.Thickness);
+                
                 dxfSpline.Layer = _currentLayer;
                 dxfSpline.Color = stroke;
                 dxfSpline.Transparency.Value = strokeTansparency;
@@ -1022,7 +995,6 @@ namespace netDxf
             }
 
             var ts = new TextStyle(style.TextStyle.FontName, style.TextStyle.FontFile);
-
             var dxfMText = new MText(
                 new Vector3(ToDxfX(x), ToDxfY(y), 0), 
                 text.Style.TextStyle.FontSize * 72.0 / 96.0,
@@ -1030,28 +1002,12 @@ namespace netDxf
                 ts);
             dxfMText.AttachmentPoint = attachmentPoint;
 
+            var fs = text.Style.TextStyle.FontStyle;
             var options = new MTextFormattingOptions(dxfMText.Style);
-            
-
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Bold))
-            {
-                options.Bold = true;
-            }
-
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Italic))
-            {
-                options.Italic = true;
-            }
-
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline))
-            {
-                options.Underline = true;
-            }
-
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
-            {
-                options.StrikeThrough = true;
-            }
+            options.Bold = fs.HasFlag(Test2d.FontStyle.Bold);
+            options.Italic = fs.HasFlag(Test2d.FontStyle.Italic);
+            options.Underline = fs.HasFlag(Test2d.FontStyle.Underline);
+            options.StrikeThrough = fs.HasFlag(Test2d.FontStyle.Strikeout);
 
             options.Aligment = MTextFormattingOptions.TextAligment.Default;
             options.Color = null;
@@ -1130,13 +1086,7 @@ namespace netDxf
                 return;
 
             var _doc = doc as DxfDocument;
-
             var style = path.Style;
-            var stroke = GetColor(style.Stroke);
-            var strokeTansparency = GetTransparency(style.Stroke);
-            var lineweight = ThicknessToLineweight(style.Thickness);
-            var fill = GetColor(style.Fill);
-            var fillTransparency = GetTransparency(style.Fill);
 
             ICollection<HatchBoundaryPath> bounds;
             ICollection<EntityObject> entities;
@@ -1146,6 +1096,9 @@ namespace netDxf
 
             if (path.IsFilled)
             {
+                var fill = GetColor(style.Fill);
+                var fillTransparency = GetTransparency(style.Fill);
+                
                 var hatch = new Hatch(HatchPattern.Solid, bounds, false);
                 hatch.Layer = _currentLayer;
                 hatch.Color = fill;
@@ -1157,7 +1110,11 @@ namespace netDxf
             if (path.IsStroked)
             {
                 // TODO: Add support for Closed paths.
-
+                
+                var stroke = GetColor(style.Stroke);
+                var strokeTansparency = GetTransparency(style.Stroke);
+                var lineweight = ThicknessToLineweight(style.Thickness);
+                
                 foreach (var entity in entities) 
                 {
                     entity.Layer = _currentLayer;
