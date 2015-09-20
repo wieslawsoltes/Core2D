@@ -32,8 +32,8 @@
     <DocumentationFile>bin\Release\Test2d.UI.EtoForms.Shared.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Eto, Version=2.0.5714.42861, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Forms.2.1.0-build0347\lib\net45\Eto.dll</HintPath>
+    <Reference Include="Eto, Version=2.1.5738.32609, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Forms.2.2.0-build0369\lib\net45\Eto.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
