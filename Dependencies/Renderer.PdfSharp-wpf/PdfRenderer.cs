@@ -918,9 +918,7 @@ namespace PdfSharp
             if (string.IsNullOrEmpty(tbind))
                 return;
 
-            XPdfFontOptions options = new XPdfFontOptions(
-                PdfFontEncoding.Unicode,
-                PdfFontEmbedding.Always);
+            XPdfFontOptions options = new XPdfFontOptions(PdfFontEncoding.Unicode);
 
             var fontStyle = XFontStyle.Regular;
             if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Bold))
