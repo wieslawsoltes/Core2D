@@ -43,8 +43,7 @@ namespace Test.Viewer
             try
             {
                 var serializer = new NewtonsoftSerializer();
-                var json = Utf8TextFile.Read(path);
-                var project = serializer.FromJson<Project>(json);
+                var project = Project.Open(path, serializer);
                 if (project != null)
                 {
                     var documents = project.Documents.FirstOrDefault();
