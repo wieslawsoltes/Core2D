@@ -250,7 +250,7 @@ namespace Test.Uwp
 
         public void Draw(object ds, XLine line, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            // TODO: Finish draw line implementation.
             var _ds = ds as CanvasDrawingSession;
 
             double thicknessLine = line.Style.Thickness / _state.Zoom;

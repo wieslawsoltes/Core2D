@@ -376,7 +376,7 @@ namespace netDxf
             bounds = new List<HatchBoundaryPath>();
             entities = new List<EntityObject>();
 
-            //TODO: FillMode = pg.FillRule == Test2d.XFillRule.EvenOdd ? FillMode.Alternate : FillMode.Winding;
+            // TODO: FillMode = pg.FillRule == Test2d.XFillRule.EvenOdd ? FillMode.Alternate : FillMode.Winding;
 
             foreach (var pf in pg.Figures)
             {

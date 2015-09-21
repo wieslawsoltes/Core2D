@@ -1239,7 +1239,7 @@ namespace Test2d
             }
             else if (shape is XPath)
             {
-                // TODO: Stop observing path sub properties;
+                // TODO: Stop observing path sub properties.
             }
             else if (shape is XGroup)
             {

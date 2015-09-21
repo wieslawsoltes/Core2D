@@ -222,13 +222,13 @@ namespace Test.Uwp
                     break;
                 case PointerDeviceType.Pen:
                     {
-                        // TODO:
+                        // TODO: Add pen support.
                         //_pressed = PointerPressType.Pen;
                     }
                     break;
                 case PointerDeviceType.Touch:
                     {
-                        // TODO:
+                        // TODO: Add touch support.
                         //_pressed = PointerPressType.Touch;
                     }
                     break;
@@ -283,7 +283,7 @@ namespace Test.Uwp
                                 break;
                             case PointerPressType.Pen:
                                 {
-                                    // TODO:
+                                    // TODO: Add pen support.
                                 }
                                 break;
                             case PointerPressType.Touch:
@@ -302,7 +302,7 @@ namespace Test.Uwp
                             case PointerPressType.Pen:
                             case PointerPressType.Touch:
                                 {
-                                    // TODO:
+                                    // TODO: Add touch support.
                                 }
                                 break;
                         }
@@ -326,7 +326,7 @@ namespace Test.Uwp
 
         private void CanvasControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
-            // TODO: 
+            // TODO: Add zoom support.
             //var p = e.GetCurrentPoint(sender as CanvasControl);
             //var delta = p.Properties.MouseWheelDelta;
             //Debug.WriteLine("Delta: {0}", p.Properties.MouseWheelDelta);
