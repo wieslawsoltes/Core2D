@@ -73,7 +73,7 @@ namespace PdfSharp
         {
             using (var pdf = new PdfDocument())
             {
-                PdfOutline documentOutline = default(PdfOutline);
+                var documentOutline = default(PdfOutline);
 
                 foreach (var container in document.Containers)
                 {
@@ -111,11 +111,11 @@ namespace PdfSharp
         {
             using (var pdf = new PdfDocument())
             {
-                PdfOutline projectOutline = default(PdfOutline);
+                var projectOutline = default(PdfOutline);
 
                 foreach (var document in project.Documents)
                 {
-                    PdfOutline documentOutline = default(PdfOutline);
+                    var documentOutline = default(PdfOutline);
 
                     foreach (var container in document.Containers)
                     {
@@ -918,7 +918,7 @@ namespace PdfSharp
             if (string.IsNullOrEmpty(tbind))
                 return;
 
-            XPdfFontOptions options = new XPdfFontOptions(PdfFontEncoding.Unicode);
+            var options = new XPdfFontOptions(PdfFontEncoding.Unicode);
 
             var fontStyle = XFontStyle.Regular;
             if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Bold))
@@ -941,7 +941,7 @@ namespace PdfSharp
                 fontStyle |= XFontStyle.Strikeout;
             }
 
-            XFont font = new XFont(
+            var font = new XFont(
                 text.Style.TextStyle.FontName,
                 _scaleToPage(text.Style.TextStyle.FontSize),
                 fontStyle,
@@ -952,13 +952,13 @@ namespace PdfSharp
                 text.BottomRight,
                 dx, dy);
 
-            XRect srect = new XRect(
+            var srect = new XRect(
                 _scaleToPage(rect.X),
                 _scaleToPage(rect.Y),
                 _scaleToPage(rect.Width),
                 _scaleToPage(rect.Height));
 
-            XStringFormat format = new XStringFormat();
+            var format = new XStringFormat();
             switch (text.Style.TextStyle.TextHAlignment)
             {
                 case Test2d.TextHAlignment.Left:
@@ -1011,7 +1011,7 @@ namespace PdfSharp
                 image.BottomRight,
                 dx, dy);
 
-            XRect srect = new XRect(
+            var srect = new XRect(
                 _scaleToPage(rect.X),
                 _scaleToPage(rect.Y),
                 _scaleToPage(rect.Width),
