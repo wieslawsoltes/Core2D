@@ -61,7 +61,7 @@ namespace PdfSharp
                             point1,
                             point2,
                             size, arcSegment.RotationAngle, arcSegment.IsLargeArc,
-                            arcSegment.SweepDirection == Test2d.XSweepDirection.Clockwise ? SweepDirection.Clockwise : SweepDirection.Counterclockwise);
+                            arcSegment.SweepDirection == Test2d.XSweepDirection.Clockwise ? XSweepDirection.Clockwise : XSweepDirection.Counterclockwise);
                         startPoint = arcSegment.Point;
 #endif
                     }
