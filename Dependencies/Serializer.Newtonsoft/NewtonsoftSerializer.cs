@@ -61,7 +61,7 @@ namespace Test2d
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
         /// <returns></returns>
-        public string ToJson<T>(T value)
+        public string Serialize<T>(T value)
         {
             var settings = new JsonSerializerSettings()
             {
@@ -80,59 +80,9 @@ namespace Test2d
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public byte[] ToBson<T>(T value)
-        {
-            using (var ms = new System.IO.MemoryStream())
-            {
-                using (var writer = new BsonWriter(ms))
-                {
-                    var serializer = new JsonSerializer()
-                    {
-                        TypeNameHandling = TypeNameHandling.Objects,
-                        PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                        ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                        ContractResolver = new ProjectContractResolver()
-                    };
-                    serializer.Serialize(writer, value);
-                }
-                return ms.ToArray();
-            }
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="bson"></param>
-        /// <returns></returns>
-        public T FromBson<T>(byte[] bson) 
-        {
-            using (var ms = new System.IO.MemoryStream(bson))
-            {
-                using (var reader = new BsonReader(ms))
-                {
-                    var serializer = new JsonSerializer()
-                    {
-                        TypeNameHandling = TypeNameHandling.Objects,
-                        PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                        ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                        ContractResolver = new ProjectContractResolver()
-                    };
-                    var value = serializer.Deserialize<T>(reader);
-                    return value;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="json"></param>
         /// <returns></returns>
-        public T FromJson<T>(string json)
+        public T Deserialize<T>(string json)
         {
             var settings = new JsonSerializerSettings()
             {

@@ -133,7 +133,7 @@ namespace Test2d
                 using (var entryStream = projectEntry.Open())
                 {
                     string json = ReadUtf8Text(entryStream);
-                    project = serializer.FromJson<Project>(json);
+                    project = serializer.Deserialize<Project>(json);
                 }
 
                 // Second step is to read (if any) project images.
@@ -186,7 +186,7 @@ namespace Test2d
                 var jsonEntry = archive.CreateEntry(ProjectEntryName);
                 using (var jsonStream = jsonEntry.Open())
                 {
-                    var json = serializer.ToJson(project);
+                    var json = serializer.Serialize(project);
                     WriteUtf8Text(jsonStream, json);
                 }
 

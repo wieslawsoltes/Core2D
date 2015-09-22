@@ -15,27 +15,13 @@ namespace Test2d
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
         /// <returns></returns>
-        string ToJson<T>(T value);
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        byte[] ToBson<T>(T value);
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="bson"></param>
-        /// <returns></returns>
-        T FromBson<T>(byte[] bson);
+        string Serialize<T>(T value);
         /// <summary>
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="json"></param>
         /// <returns></returns>
-        T FromJson<T>(string json);
+        T Deserialize<T>(string json);
     }
 }

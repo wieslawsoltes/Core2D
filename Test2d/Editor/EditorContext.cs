@@ -1541,7 +1541,7 @@ namespace Test2d
                         {
                             var sg = item as StyleLibrary;
                             var json = Utf8TextFile.Read(path);
-                            var import = _serializer.FromJson<ShapeStyle>(json);
+                            var import = _serializer.Deserialize<ShapeStyle>(json);
 
                             var previous = sg.Styles;
                             var next = sg.Styles.Add(import);
@@ -1553,7 +1553,7 @@ namespace Test2d
                         {
                             var sg = item as StyleLibrary;
                             var json = Utf8TextFile.Read(path);
-                            var import = _serializer.FromJson<IList<ShapeStyle>>(json);
+                            var import = _serializer.Deserialize<IList<ShapeStyle>>(json);
 
                             var builder = sg.Styles.ToBuilder();
                             foreach (var style in import)
@@ -1571,7 +1571,7 @@ namespace Test2d
                         {
                             var project = item as Project;
                             var json = Utf8TextFile.Read(path);
-                            var import = _serializer.FromJson<StyleLibrary>(json);
+                            var import = _serializer.Deserialize<StyleLibrary>(json);
 
                             var previous = project.StyleLibraries;
                             var next = project.StyleLibraries.Add(import);
@@ -1583,7 +1583,7 @@ namespace Test2d
                         {
                             var project = item as Project;
                             var json = Utf8TextFile.Read(path);
-                            var import = _serializer.FromJson<IList<StyleLibrary>>(json);
+                            var import = _serializer.Deserialize<IList<StyleLibrary>>(json);
 
                             var builder = project.StyleLibraries.ToBuilder();
                             foreach (var sg in import)
@@ -1601,7 +1601,7 @@ namespace Test2d
                         {
                             var gl = item as GroupLibrary;
                             var json = Utf8TextFile.Read(path);
-                            var import = _serializer.FromJson<XGroup>(json);
+                            var import = _serializer.Deserialize<XGroup>(json);
 
                             var shapes = Enumerable.Repeat(import as XGroup, 1);
                             TryToRestoreStyles(shapes);
@@ -1617,7 +1617,7 @@ namespace Test2d
                         {
                             var gl = item as GroupLibrary;
                             var json = Utf8TextFile.Read(path);
-                            var import = _serializer.FromJson<IList<XGroup>>(json);
+                            var import = _serializer.Deserialize<IList<XGroup>>(json);
 
                             var shapes = import;
                             TryToRestoreStyles(shapes);
@@ -1639,7 +1639,7 @@ namespace Test2d
                         {
                             var project = item as Project;
                             var json = Utf8TextFile.Read(path);
-                            var import = _serializer.FromJson<GroupLibrary>(json);
+                            var import = _serializer.Deserialize<GroupLibrary>(json);
 
                             var shapes = import.Groups;
                             TryToRestoreStyles(shapes);
@@ -1655,7 +1655,7 @@ namespace Test2d
                         {
                             var project = item as Project;
                             var json = Utf8TextFile.Read(path);
-                            var import = _serializer.FromJson<IList<GroupLibrary>>(json);
+                            var import = _serializer.Deserialize<IList<GroupLibrary>>(json);
 
                             var shapes = import.SelectMany(x => x.Groups);
                             TryToRestoreStyles(shapes);
@@ -1677,7 +1677,7 @@ namespace Test2d
                         {
                             var project = item as Project;
                             var json = Utf8TextFile.Read(path);
-                            var import = _serializer.FromJson<Container>(json);
+                            var import = _serializer.Deserialize<Container>(json);
 
                             var shapes = import.Layers.SelectMany(x => x.Shapes);
                             TryToRestoreStyles(shapes);
@@ -1693,7 +1693,7 @@ namespace Test2d
                         {
                             var project = item as Project;
                             var json = Utf8TextFile.Read(path);
-                            var import = _serializer.FromJson<IList<Container>>(json);
+                            var import = _serializer.Deserialize<IList<Container>>(json);
 
                             var shapes = import.SelectMany(x => x.Layers).SelectMany(x => x.Shapes);
                             TryToRestoreStyles(shapes);
@@ -1739,61 +1739,61 @@ namespace Test2d
                 {
                     case ExportType.Style:
                         {
-                            var json = _serializer.ToJson(item as ShapeStyle);
+                            var json = _serializer.Serialize(item as ShapeStyle);
                             Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.Styles:
                         {
-                            var json = _serializer.ToJson((item as StyleLibrary).Styles);
+                            var json = _serializer.Serialize((item as StyleLibrary).Styles);
                             Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.StyleLibrary:
                         {
-                            var json = _serializer.ToJson((item as StyleLibrary));
+                            var json = _serializer.Serialize((item as StyleLibrary));
                             Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.StyleLibraries:
                         {
-                            var json = _serializer.ToJson((item as Project).StyleLibraries);
+                            var json = _serializer.Serialize((item as Project).StyleLibraries);
                             Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.Group:
                         {
-                            var json = _serializer.ToJson(item as XGroup);
+                            var json = _serializer.Serialize(item as XGroup);
                             Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.Groups:
                         {
-                            var json = _serializer.ToJson((item as GroupLibrary).Groups);
+                            var json = _serializer.Serialize((item as GroupLibrary).Groups);
                             Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.GroupLibrary:
                         {
-                            var json = _serializer.ToJson(item as GroupLibrary);
+                            var json = _serializer.Serialize(item as GroupLibrary);
                             Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.GroupLibraries:
                         {
-                            var json = _serializer.ToJson((item as Project).GroupLibraries);
+                            var json = _serializer.Serialize((item as Project).GroupLibraries);
                             Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.Template:
                         {
-                            var json = _serializer.ToJson(item as Container);
+                            var json = _serializer.Serialize(item as Container);
                             Utf8TextFile.Write(path, json);
                         }
                         break;
                     case ExportType.Templates:
                         {
-                            var json = _serializer.ToJson((item as Project).Templates);
+                            var json = _serializer.Serialize((item as Project).Templates);
                             Utf8TextFile.Write(path, json);
                         }
                         break;
@@ -1995,7 +1995,7 @@ namespace Test2d
             try
             {
                 var json = Utf8TextFile.Read(path);
-                var recent = _serializer.FromJson<ImmutableArray<RecentProject>>(json);
+                var recent = _serializer.Deserialize<ImmutableArray<RecentProject>>(json);
 
                 if (recent != null)
                 {
@@ -2030,7 +2030,7 @@ namespace Test2d
         {
             try
             {
-                var json = _serializer.ToJson(_recentProjects);
+                var json = _serializer.Serialize(_recentProjects);
                 Utf8TextFile.Write(path, json);
             }
             catch (Exception ex)
@@ -2085,7 +2085,7 @@ namespace Test2d
         {
             try
             {
-                var json = _serializer.ToJson(shapes);
+                var json = _serializer.Serialize(shapes);
                 if (!string.IsNullOrEmpty(json))
                 {
                     _textClipboard.SetText(json);
@@ -2111,7 +2111,7 @@ namespace Test2d
         {
             try
             {
-                var shapes = _serializer.FromJson<IList<BaseShape>>(json);
+                var shapes = _serializer.Deserialize<IList<BaseShape>>(json);
                 if (shapes != null && shapes.Count() > 0)
                 {
                     Paste(shapes);
@@ -2315,10 +2315,10 @@ namespace Test2d
         {
             try
             {
-                var json = _serializer.ToJson(group);
+                var json = _serializer.Serialize(group);
                 if (!string.IsNullOrEmpty(json))
                 {
-                    var clone = _serializer.FromJson<XGroup>(json);
+                    var clone = _serializer.Deserialize<XGroup>(json);
                     if (clone != null)
                     {
                         var shapes = Enumerable.Repeat(clone, 1).ToList();
@@ -2352,10 +2352,10 @@ namespace Test2d
             try
             {
                 var template = container.Template;
-                var json = _serializer.ToJson(container);
+                var json = _serializer.Serialize(container);
                 if (!string.IsNullOrEmpty(json))
                 {
-                    var clone = _serializer.FromJson<Container>(json);
+                    var clone = _serializer.Deserialize<Container>(json);
                     if (clone != null)
                     {
                         var shapes = clone.Layers.SelectMany(l => l.Shapes);
@@ -2390,10 +2390,10 @@ namespace Test2d
             try
             {
                 var templates = document.Containers.Select(c => c.Template).ToArray();
-                var json = _serializer.ToJson(document);
+                var json = _serializer.Serialize(document);
                 if (!string.IsNullOrEmpty(json))
                 {
-                    var clone = _serializer.FromJson<Document>(json);
+                    var clone = _serializer.Deserialize<Document>(json);
                     if (clone != null)
                     {
                         for (int i = 0; i < clone.Containers.Length; i++)
