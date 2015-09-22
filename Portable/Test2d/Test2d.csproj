@@ -39,12 +39,6 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Test2d\Binding\PropertyBinding.cs">
-      <Link>Binding\PropertyBinding.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Test2d\Binding\PropertyBindingMode.cs">
-      <Link>Binding\PropertyBindingMode.cs</Link>
-    </Compile>
     <Compile Include="..\..\Test2d\Core\ObservableObject.cs">
       <Link>Core\ObservableObject.cs</Link>
     </Compile>

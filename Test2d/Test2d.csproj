@@ -47,8 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Binding\PropertyBinding.cs" />
-    <Compile Include="Binding\PropertyBindingMode.cs" />
     <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeBounds.cs" />
     <Compile Include="Editor\Core\Command.cs" />
