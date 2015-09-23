@@ -327,9 +327,6 @@
     <Compile Include="..\..\Test2d\Shape\ShapeProperty.cs">
       <Link>Shape\ShapeProperty.cs</Link>
     </Compile>
-    <Compile Include="..\..\Test2d\Shape\ShapePropertyExtensions.cs">
-      <Link>Shape\ShapePropertyExtensions.cs</Link>
-    </Compile>
     <Compile Include="..\..\Test2d\Shape\ShapeState.cs">
       <Link>Shape\ShapeState.cs</Link>
     </Compile>
