@@ -62,7 +62,7 @@
     <Compile Include="Editor\EditorCommands.cs" />
     <Compile Include="Editor\EditorContext.cs" />
     <Compile Include="Editor\Factories\ProjectFactory.cs" />
-    <Compile Include="Editor\Factory.cs" />
+    <Compile Include="Editor\Factories\ShapeFactory.cs" />
     <Compile Include="Editor\Helpers\ArcHelper.cs" />
     <Compile Include="Editor\Helpers\BezierHelper.cs" />
     <Compile Include="Editor\Helpers\EllipseHelper.cs" />
@@ -74,6 +74,7 @@
     <Compile Include="Editor\Helpers\RectangleHelper.cs" />
     <Compile Include="Editor\Helpers\SelectionHelper.cs" />
     <Compile Include="Editor\Helpers\TextHelper.cs" />
+    <Compile Include="Interfaces\IShapeFactory.cs" />
     <Compile Include="Editor\Observer.cs" />
     <Compile Include="Editor\Parameters\ColumnParameter.cs" />
     <Compile Include="Editor\Parameters\RecordParameter.cs" />

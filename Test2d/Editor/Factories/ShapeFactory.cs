@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace Test2d
 {
     /// <summary>
-    /// Base factory class used for script execution globals.
+    /// Factory used to create shapes.
     /// </summary>
-    public class Factory
+    public class Factory : IShapeFactory
     {
         /// <summary>
         /// Gets or sets editor context.

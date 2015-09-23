@@ -99,8 +99,8 @@
     <Compile Include="..\..\Test2d\Editor\Factories\ProjectFactory.cs">
       <Link>Editor\Factories\ProjectFactory.cs</Link>
     </Compile>
-    <Compile Include="..\..\Test2d\Editor\Factory.cs">
-      <Link>Editor\Factory.cs</Link>
+    <Compile Include="..\..\Test2d\Editor\Factories\ShapeFactory.cs">
+      <Link>Editor\Factories\ShapeFactory.cs</Link>
     </Compile>
     <Compile Include="..\..\Test2d\Editor\Helpers\ArcHelper.cs">
       <Link>Editor\Helpers\ArcHelper.cs</Link>
@@ -164,6 +164,9 @@
     </Compile>
     <Compile Include="..\..\Test2d\Interfaces\ISerializer.cs">
       <Link>Interfaces\ISerializer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Test2d\Interfaces\IShapeFactory.cs">
+      <Link>Interfaces\IShapeFactory.cs</Link>
     </Compile>
     <Compile Include="..\..\Test2d\Interfaces\ITextClipboard.cs">
       <Link>Interfaces\ITextClipboard.cs</Link>
