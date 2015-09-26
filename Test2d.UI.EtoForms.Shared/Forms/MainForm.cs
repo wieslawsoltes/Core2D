@@ -283,7 +283,7 @@ namespace TestEtoForms
             {
                 var dlg = new OpenFileDialog();
                 dlg.Filters.Add(new FileDialogFilter("Project", ".project"));
-                dlg.Filters.Add( new FileDialogFilter("All", ".*"));
+                dlg.Filters.Add(new FileDialogFilter("All", ".*"));
 
                 var result = dlg.ShowDialog(this);
                 if (result == DialogResult.Ok)
