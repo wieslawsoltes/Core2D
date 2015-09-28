@@ -34,14 +34,21 @@ The core library and editor are portable and should work on all platforms where 
 * Xceed.Products.Wpf.Toolkit.AvalonDock
 * Eto.Forms
 * Eto.Platform.Direct2D
-* Eto.Platform.Gtk [GTK# for .NET](http://www.mono-project.com/download/#download-win)
+* Eto.Platform.Gtk
 * Eto.Platform.Windows
 * Eto.Platform.Wpf
+* Perspex
 
 ### NuGet Package Sources
 
 * https://www.nuget.org/api/v2/
 * https://www.myget.org/F/eto/
+* https://www.myget.org/F/perspex-nightly/api/v2
+
+### Other Dependencies
+
+* [GTK# for .NET](http://www.mono-project.com/download/#download-win) Needed for Eto.Platform.Gtk on Windows.
+* [.net dxf Reader-Writer](http://netdxf.codeplex.com/) Run "git clone https://git01.codeplex.com/netdxf" in project parent directory.
 
 ## Contact
 
