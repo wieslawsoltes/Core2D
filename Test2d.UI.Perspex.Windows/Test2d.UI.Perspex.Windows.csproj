@@ -150,11 +150,11 @@
     <Compile Include="Renderer\PerspexRenderer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Renderer\Path\XPathGeometryConverter.cs" />
-    <EmbeddedResource Include="Windows\MainWindow.paml">
+    <EmbeddedResource Include="MainWindow.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Util\TextClipboard.cs" />
-    <Compile Include="Windows\MainWindow.paml.cs">
+    <Compile Include="MainWindow.paml.cs">
       <DependentUpon>MainWindow.paml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
