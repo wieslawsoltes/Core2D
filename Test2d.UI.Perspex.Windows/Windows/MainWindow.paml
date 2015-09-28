@@ -1,0 +1,12 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<Window xmlns="https://github.com/perspex"
+        xmlns:local="clr-namespace:Test2d.UI.Perspex.Windows;assembly=Test2d.UI.Perspex.Windows"
+        Width="800" Height="600"
+        Title="PrespexDemo">
+    <Grid>
+        <Canvas Width="500" Height="500" Background="LightGray">
+            <local:Drawable/>
+        </Canvas>
+    </Grid>
+</Window>
