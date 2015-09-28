@@ -44,6 +44,7 @@ namespace Test.Uwp
         /// <returns></returns>
         public string GetText()
         {
+            // TODO: Do not use Result.
             return GetTextAsync().Result;
         }
 
@@ -62,7 +63,7 @@ namespace Test.Uwp
         /// <returns></returns>
         public bool ContainsText()
         {
-            // TODO: Do not use .Result.
+            // TODO: Do not use Result.
             return ContainsTextAsync().Result;
         }
     }
