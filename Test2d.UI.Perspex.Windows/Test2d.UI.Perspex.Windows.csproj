@@ -139,6 +139,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Test2d.UI.WinForms\Util\ZoomState.cs">
+      <Link>Util\ZoomState.cs</Link>
+    </Compile>
     <Compile Include="..\Test2d\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
@@ -147,7 +150,10 @@
     <Compile Include="Renderer\PerspexRenderer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Renderer\Path\XPathGeometryConverter.cs" />
-    <EmbeddedResource Include="Windows\MainWindow.paml" />
+    <EmbeddedResource Include="Windows\MainWindow.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Util\TextClipboard.cs" />
     <Compile Include="Windows\MainWindow.paml.cs">
       <DependentUpon>MainWindow.paml</DependentUpon>
     </Compile>
@@ -190,6 +196,7 @@
       <Name>Test2d</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Perspex.9999.0.478-nightly\build\net45\perspex.targets" Condition="Exists('..\packages\Perspex.9999.0.478-nightly\build\net45\perspex.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
