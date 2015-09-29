@@ -26,6 +26,7 @@ namespace Test2d
         private ITextFieldReader<Database> _csvReader;
         private ITextFieldWriter<Database> _csvWriter;
         private ImmutableArray<RecentProject> _recentProjects = ImmutableArray.Create<RecentProject>();
+        private Action _invalidate;
         private Container _containerToCopy = default(Container);
         private Document _documentToCopy = default(Document);
 
@@ -135,6 +136,15 @@ namespace Test2d
         {
             get { return _recentProjects; }
             set { Update(ref _recentProjects, value); }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public Action Invalidate
+        {
+            get { return _invalidate; }
+            set { Update(ref _invalidate, value); }
         }
 
         /// <summary>
@@ -1374,7 +1384,7 @@ namespace Test2d
         ///
         /// </summary>
         /// <param name="isZooming"></param>
-        public void Invalidate(bool isZooming)
+        public void InvalidateCache(bool isZooming)
         {
             try
             {
