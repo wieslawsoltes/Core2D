@@ -54,7 +54,7 @@ namespace TestEtoForms
             };
             _context.InitializeEditor(new Test2d.TraceLog());
             _context.Editor.Renderers[0].State.DrawShapeState = Test2d.ShapeState.Visible;
-            _context.Editor.GetImageKey = () => GetImageKey();
+            _context.Editor.GetImageKey = async () => GetImageKey();
 
             _state = new Test2d.ZoomState(_context, this.InvalidateContainer);
 
@@ -797,7 +797,6 @@ namespace TestEtoForms
             SetDrawableSize();
 
             var container = _context.Editor.Project.CurrentContainer;
-            if (_context == null)
             if (container == null)
                 return;
 

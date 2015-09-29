@@ -131,7 +131,7 @@ namespace Test2d
         /// <summary>
         /// Get image path using common system open file dialog.
         /// </summary>
-        public Func<string> GetImageKey { get; set; }
+        public Func<Task<string>> GetImageKey { get; set; }
 
         /// <summary>
         /// 

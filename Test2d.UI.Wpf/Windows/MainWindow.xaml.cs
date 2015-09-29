@@ -596,7 +596,7 @@ namespace Test.Windows
         /// 
         /// </summary>
         /// <returns></returns>
-        private string GetImageKey()
+        private async Task<string> GetImageKey()
         {
             var context = DataContext as EditorContext;
             if (context == null || context.Editor.Project == null)
@@ -844,7 +844,7 @@ namespace Test.Windows
             context.InitializeEditor(new TraceLog());
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
             context.Editor.Renderers[1].State.DrawShapeState = ShapeState.Visible;
-            context.Editor.GetImageKey = () => GetImageKey();
+            context.Editor.GetImageKey = async () => await GetImageKey();
 
             InitializeCommands(context);
             InitializeZoom(context);

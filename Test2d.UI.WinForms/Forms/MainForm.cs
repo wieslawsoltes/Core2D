@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Test2d;
 
@@ -60,7 +61,7 @@ namespace TestWinForms
             };
             context.InitializeEditor(new TraceLog());
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
-            context.Editor.GetImageKey = () => GetImageKey();
+            context.Editor.GetImageKey = async () => await GetImageKey();
 
             DataContext = context;
 
@@ -660,7 +661,7 @@ namespace TestWinForms
         /// 
         /// </summary>
         /// <returns></returns>
-        private string GetImageKey()
+        private async Task<string> GetImageKey()
         {
             var context = DataContext as EditorContext;
             if (context == null)

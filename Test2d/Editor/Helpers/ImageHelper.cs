@@ -75,7 +75,7 @@ namespace Test2d
                         if (_editor.GetImageKey == null)
                             return;
 
-                        var path = _editor.GetImageKey();
+                        var path = _editor.GetImageKey().Result;
                         if (path == null || string.IsNullOrEmpty(path))
                             return;
 
