@@ -13,6 +13,9 @@ using Test2d;
 
 namespace TestPerspex
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class PerspexRenderer : ObservableObject, IRenderer
     {
         private bool _enableImageCache = true;
