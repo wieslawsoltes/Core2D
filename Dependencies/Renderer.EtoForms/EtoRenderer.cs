@@ -124,7 +124,10 @@ namespace TestEtoForms
         /// <returns></returns>
         private Pen ToPen(BaseStyle style, Func<double, float> scale)
         {
-            var pen = new Pen(ToColor(style.Stroke), (float)(style.Thickness / _state.Zoom));
+            var pen = new Pen(
+                ToColor(style.Stroke), 
+                scale(style.Thickness / _state.Zoom));
+
             switch (style.LineCap)
             {
                 case Test2d.LineCap.Flat:
@@ -186,7 +189,7 @@ namespace TestEtoForms
         {
             if (isStroked)
             {
-                gfx.DrawLine(isStroked ? pen : null, p0, p1);
+                gfx.DrawLine(pen, p0, p1);
             }
         }
 
