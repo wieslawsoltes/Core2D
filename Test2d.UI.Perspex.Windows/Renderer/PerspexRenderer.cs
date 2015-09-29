@@ -11,7 +11,7 @@ using Perspex.Media;
 using Perspex.Media.Imaging;
 using Test2d;
 
-namespace Test2d.UI.Perspex.Windows
+namespace TestPerspex
 {
     public class PerspexRenderer : ObservableObject, IRenderer
     {
@@ -58,7 +58,49 @@ namespace Test2d.UI.Perspex.Windows
         {
             return new PerspexRenderer();
         }
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="rect"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        private Point GetTextOrigin(ShapeStyle style, ref Rect2 rect, ref Size size)
+        {
+            double ox, oy;
+
+            switch (style.TextStyle.TextHAlignment)
+            {
+                case TextHAlignment.Left:
+                    ox = rect.X;
+                    break;
+                case TextHAlignment.Right:
+                    ox = rect.Right - size.Width;
+                    break;
+                case TextHAlignment.Center:
+                default:
+                    ox = (rect.Left + rect.Width / 2.0) - (size.Width / 2.0);
+                    break;
+            }
+
+            switch (style.TextStyle.TextVAlignment)
+            {
+                case TextVAlignment.Top:
+                    oy = rect.Y;
+                    break;
+                case TextVAlignment.Bottom:
+                    oy = rect.Bottom - size.Height;
+                    break;
+                case TextVAlignment.Center:
+                default:
+                    oy = (rect.Bottom - rect.Height / 2f) - (size.Height / 2f);
+                    break;
+            }
+
+            return new Point(ox, oy);
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -172,16 +214,21 @@ namespace Test2d.UI.Perspex.Windows
             Pen pen,
             bool isStroked,
             bool isFilled,
-            ref Rect rect)
+            ref Rect2 rect)
         {
+            if (!isStroked && !isFilled)
+                return;
+
+            var r = new Rect(rect.X, rect.Y, rect.Width, rect.Height);
+
             if (isFilled)
             {
-                dc.FillRectange(brush, rect);
+                dc.FillRectange(brush, r);
             }
 
             if (isStroked)
             {
-                dc.DrawRectange(pen, rect);
+                dc.DrawRectange(pen, r);
             }
         }
 
@@ -200,17 +247,20 @@ namespace Test2d.UI.Perspex.Windows
             Pen pen,
             bool isStroked,
             bool isFilled,
-            ref Rect rect)
+            ref Rect2 rect)
         {
             if (!isFilled && !isStroked)
                 return;
 
-            var g = new EllipseGeometry(rect);
+            var r = new Rect(rect.X, rect.Y, rect.Width, rect.Height);
+            var g = new EllipseGeometry(r);
 
             dc.DrawGeometry(
                 isFilled ? brush : null,
                 isStroked ? pen : null,
                 g);
+
+            // TODO: g.Dispose();
         }
 
         /// <summary>
@@ -342,15 +392,184 @@ namespace Test2d.UI.Perspex.Windows
         /// <param name="r"></param>
         public void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
             var _dc = dc as IDrawingContext;
 
+            Brush fillLine = ToSolidBrush(line.Style.Fill);
             Pen strokeLine = ToPen(line.Style, _scaleToPage);
-            
-            _dc.DrawLine(
-                strokeLine,
-                new Point(line.Start.X, line.Start.Y),
-                new Point(line.End.X, line.End.Y)); 
+
+            Brush fillStartArrow = ToSolidBrush(line.Style.StartArrowStyle.Fill);
+            Pen strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
+
+            Brush fillEndArrow = ToSolidBrush(line.Style.EndArrowStyle.Fill);
+            Pen strokeEndArrow = ToPen(line.Style.EndArrowStyle, _scaleToPage);
+
+            double _x1 = line.Start.X + dx;
+            double _y1 = line.Start.Y + dy;
+            double _x2 = line.End.X + dx;
+            double _y2 = line.End.Y + dy;
+
+            XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
+
+            float x1 = _scaleToPage(_x1);
+            float y1 = _scaleToPage(_y1);
+            float x2 = _scaleToPage(_x2);
+            float y2 = _scaleToPage(_y2);
+
+            var sas = line.Style.StartArrowStyle;
+            var eas = line.Style.EndArrowStyle;
+            float a1 = (float)(Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI);
+            float a2 = (float)(Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI);
+
+            // TODO:
+            /*
+            var t1 = new Matrix();
+            var c1 = new Point(x1, y1);
+            t1.RotateAt(a1, c1);
+
+            var t2 = new Matrix();
+            var c2 = new Point(x2, y2);
+            t2.RotateAt(a2, c2);
+            */
+
+            Point pt1 = default(Point);
+            Point pt2 = default(Point);
+
+            double radiusX1 = sas.RadiusX;
+            double radiusY1 = sas.RadiusY;
+            double sizeX1 = 2.0 * radiusX1;
+            double sizeY1 = 2.0 * radiusY1;
+
+            switch (sas.ArrowType)
+            {
+                default:
+                case ArrowType.None:
+                    {
+                        pt1 = new Point(x1, y1);
+                    }
+                    break;
+                case ArrowType.Rectangle:
+                    {
+                        // TODO:
+                        /*
+                        pt1 = t1.TransformPoint(new Point(x1 - (float)sizeX1, y1));
+                        var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
+                        _dc.SaveTransform();
+                        _dc.MultiplyTransform(t1);
+                        DrawRectangleInternal(_dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
+                        _dc.RestoreTransform();
+                        */
+                    }
+                    break;
+                case ArrowType.Ellipse:
+                    {
+                        // TODO:
+                        /*
+                        pt1 = t1.TransformPoint(new Point(x1 - (float)sizeX1, y1));
+                        _dc.SaveTransform();
+                        _dc.MultiplyTransform(t1);
+                        var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
+                        DrawEllipseInternal(_dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
+                        _dc.RestoreTransform();
+                        */
+                    }
+                    break;
+                case ArrowType.Arrow:
+                    {
+                        // TODO:
+                        /*
+                        var pts = new Point[]
+                        {
+                            new Point(x1, y1),
+                            new Point(x1 - (float)sizeX1, y1 + (float)sizeY1),
+                            new Point(x1, y1),
+                            new Point(x1 - (float)sizeX1, y1 - (float)sizeY1),
+                            new Point(x1, y1)
+                        };
+                        pt1 = t1.TransformPoint(pts[0]);
+                        var p11 = t1.TransformPoint(pts[1]);
+                        var p21 = t1.TransformPoint(pts[2]);
+                        var p12 = t1.TransformPoint(pts[3]);
+                        var p22 = t1.TransformPoint(pts[4]);
+                        DrawLineInternal(_dc, strokeStartArrow, sas.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(_dc, strokeStartArrow, sas.IsStroked, ref p12, ref p22);
+                        */
+                    }
+                    break;
+            }
+
+            double radiusX2 = eas.RadiusX;
+            double radiusY2 = eas.RadiusY;
+            double sizeX2 = 2.0 * radiusX2;
+            double sizeY2 = 2.0 * radiusY2;
+
+            switch (eas.ArrowType)
+            {
+                default:
+                case ArrowType.None:
+                    {
+                        pt2 = new Point(x2, y2);
+                    }
+                    break;
+                case ArrowType.Rectangle:
+                    {
+                        // TODO:
+                        /*
+                        pt2 = t2.TransformPoint(new Point(x2 - (float)sizeX2, y2));
+                        var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
+                        _dc.SaveTransform();
+                        _dc.MultiplyTransform(t2);
+                        DrawRectangleInternal(_dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
+                        _dc.RestoreTransform();
+                        */
+                    }
+                    break;
+                case ArrowType.Ellipse:
+                    {
+                        // TODO:
+                        /*
+                        pt2 = t2.TransformPoint(new Point(x2 - (float)sizeX2, y2));
+                        _dc.SaveTransform();
+                        _dc.MultiplyTransform(t2);
+                        var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
+                        DrawEllipseInternal(_dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
+                        _dc.RestoreTransform();
+                        */
+                    }
+                    break;
+                case ArrowType.Arrow:
+                    {
+                        // TODO:
+                        /*
+                        var pts = new Point[]
+                        {
+                            new Point(x2, y2),
+                            new Point(x2 - (float)sizeX2, y2 + (float)sizeY2),
+                            new Point(x2, y2),
+                            new Point(x2 - (float)sizeX2, y2 - (float)sizeY2),
+                            new Point(x2, y2)
+                        };
+                        pt2 = t2.TransformPoint(pts[0]);
+                        var p11 = t2.TransformPoint(pts[1]);
+                        var p21 = t2.TransformPoint(pts[2]);
+                        var p12 = t2.TransformPoint(pts[3]);
+                        var p22 = t2.TransformPoint(pts[4]);
+                        DrawLineInternal(_dc, strokeEndArrow, eas.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(_dc, strokeEndArrow, eas.IsStroked, ref p12, ref p22);
+                        */
+                    }
+                    break;
+            }
+
+            _dc.DrawLine(strokeLine, pt1, pt2);
+
+            // TODO: fillLine.Dispose();
+            // TODO: strokeLine.Dispose();
+
+            // TODO: fillStartArrow.Dispose();
+            // TODO: strokeStartArrow.Dispose();
+
+            // TODO: fillEndArrow.Dispose();
+            // TODO: strokeEndArrow.Dispose();
         }
 
         /// <summary>
@@ -364,7 +583,37 @@ namespace Test2d.UI.Perspex.Windows
         /// <param name="r"></param>
         public void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            var _dc = dc as IDrawingContext;
+
+            Brush brush = ToSolidBrush(rectangle.Style.Fill);
+            Pen pen = ToPen(rectangle.Style, _scaleToPage);
+
+            var rect = CreateRect(
+                rectangle.TopLeft,
+                rectangle.BottomRight,
+                dx, dy);
+
+            DrawRectangleInternal(
+                _dc,
+                brush,
+                pen,
+                rectangle.IsStroked,
+                rectangle.IsFilled,
+                ref rect);
+
+            if (rectangle.IsGrid)
+            {
+                DrawGridInternal(
+                    _dc,
+                    pen,
+                    ref rect,
+                    rectangle.OffsetX, rectangle.OffsetY,
+                    rectangle.CellWidth, rectangle.CellHeight,
+                    true);
+            }
+
+            // TODO: brush.Dispose();
+            // TODO: pen.Dispose();
         }
 
         /// <summary>
@@ -378,7 +627,26 @@ namespace Test2d.UI.Perspex.Windows
         /// <param name="r"></param>
         public void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            var _dc = dc as IDrawingContext;
+
+            Brush brush = ToSolidBrush(ellipse.Style.Fill);
+            Pen pen = ToPen(ellipse.Style, _scaleToPage);
+
+            var rect = CreateRect(
+                ellipse.TopLeft,
+                ellipse.BottomRight,
+                dx, dy);
+
+            DrawEllipseInternal(
+                _dc,
+                brush,
+                pen,
+                ellipse.IsStroked,
+                ellipse.IsFilled,
+                ref rect);
+
+            // TODO: brush.Dispose();
+            // TODO: pen.Dispose();
         }
 
         /// <summary>
@@ -392,7 +660,41 @@ namespace Test2d.UI.Perspex.Windows
         /// <param name="r"></param>
         public void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            if (!arc.IsFilled && !arc.IsStroked)
+                return;
+
+            var _dc = dc as IDrawingContext;
+
+            Brush brush = ToSolidBrush(arc.Style.Fill);
+            Pen pen = ToPen(arc.Style, _scaleToPage);
+
+            var sg = new StreamGeometry();
+            using (var sgc = sg.Open())
+            {
+                var a = WpfArc.FromXArc(arc, dx, dy);
+
+                sgc.BeginFigure(
+                    new Point(a.Start.X, a.Start.Y),
+                    arc.IsFilled);
+
+                sgc.ArcTo(
+                    new Point(a.End.X, a.End.Y),
+                    new Size(a.Radius.Width, a.Radius.Height),
+                    0.0,
+                    a.IsLargeArc,
+                    SweepDirection.Clockwise);
+
+                sgc.EndFigure(false);
+            }
+
+            _dc.DrawGeometry(
+                arc.IsFilled ? brush : null,
+                arc.IsStroked ? pen : null,
+                sg);
+
+            // TODO: sg.Dispose();
+            // TODO: brush.Dispose();
+            // TODO: pen.Dispose();
         }
 
         /// <summary>
@@ -406,7 +708,37 @@ namespace Test2d.UI.Perspex.Windows
         /// <param name="r"></param>
         public void Draw(object dc, XBezier bezier, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            if (!bezier.IsFilled && !bezier.IsStroked)
+                return;
+
+            var _dc = dc as IDrawingContext;
+
+            Brush brush = ToSolidBrush(bezier.Style.Fill);
+            Pen pen = ToPen(bezier.Style, _scaleToPage);
+
+            var sg = new StreamGeometry();
+            using (var sgc = sg.Open())
+            {
+                sgc.BeginFigure(
+                    new Point(bezier.Point1.X, bezier.Point1.Y),
+                    bezier.IsFilled);
+
+                sgc.BezierTo(
+                    new Point(bezier.Point2.X, bezier.Point2.Y),
+                    new Point(bezier.Point3.X, bezier.Point3.Y),
+                    new Point(bezier.Point4.X, bezier.Point4.Y));
+
+                sgc.EndFigure(false);
+            }
+
+            _dc.DrawGeometry(
+                bezier.IsFilled ? brush : null,
+                bezier.IsStroked ? pen : null,
+                sg);
+
+            // TODO: sg.Dispose();
+            // TODO: brush.Dispose();
+            // TODO: pen.Dispose();
         }
 
         /// <summary>
@@ -420,7 +752,49 @@ namespace Test2d.UI.Perspex.Windows
         /// <param name="r"></param>
         public void Draw(object dc, XQBezier qbezier, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            if (!qbezier.IsFilled && !qbezier.IsStroked)
+                return;
+
+            var _dc = dc as IDrawingContext;
+
+            Brush brush = ToSolidBrush(qbezier.Style.Fill);
+            Pen pen = ToPen(qbezier.Style, _scaleToPage);
+
+            var sg = new StreamGeometry();
+            using (var sgc = sg.Open())
+            {
+                var p1 = qbezier.Point1;
+                var p2 = qbezier.Point2;
+                var p3 = qbezier.Point3;
+                double x1 = p1.X;
+                double y1 = p1.Y;
+                double x2 = p1.X + (2.0 * (p2.X - p1.X)) / 3.0;
+                double y2 = p1.Y + (2.0 * (p2.Y - p1.Y)) / 3.0;
+                double x3 = x2 + (p3.X - p1.X) / 3.0;
+                double y3 = y2 + (p3.Y - p1.Y) / 3.0;
+                double x4 = p3.X;
+                double y4 = p3.Y;
+
+                sgc.BeginFigure(
+                    new Point(x1, y1),
+                    qbezier.IsFilled);
+
+                sgc.BezierTo(
+                    new Point(x2, y2),
+                    new Point(x3, y3),
+                    new Point(x4, y4));
+
+                sgc.EndFigure(false);
+            }
+
+            _dc.DrawGeometry(
+                qbezier.IsFilled ? brush : null,
+                qbezier.IsStroked ? pen : null,
+                sg);
+
+            // TODO: sg.Dispose();
+            // TODO: brush.Dispose();
+            // TODO: pen.Dispose();
         }
 
         /// <summary>
@@ -434,7 +808,60 @@ namespace Test2d.UI.Perspex.Windows
         /// <param name="r"></param>
         public void Draw(object dc, XText text, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
+            var _gfx = dc as IDrawingContext;
+
+            var tbind = text.BindToTextProperty(db, r);
+            if (string.IsNullOrEmpty(tbind))
+                return;
+
+            Brush brush = ToSolidBrush(text.Style.Stroke);
+
+            var fontStyle = Perspex.Media.FontStyle.Normal;
+            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Italic))
+            {
+                fontStyle |= Perspex.Media.FontStyle.Italic;
+            }
+
+            var fontWeight = Perspex.Media.FontWeight.Normal;
+            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Bold))
+            {
+                fontWeight |= Perspex.Media.FontWeight.Bold;
+            }
+
             // TODO:
+            /*
+            var fontDecoration = Perspex.Media.FontDecoration.None;
+            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline))
+            {
+                fontDecoration |= Perspex.Media.FontDecoration.Underline;
+            }
+
+            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
+            {
+                fontDecoration |= Perspex.Media.FontDecoration.Strikethrough;
+            }
+            */
+
+            var ft = new FormattedText(
+                tbind,
+                text.Style.TextStyle.FontName,
+                text.Style.TextStyle.FontSize * _textScaleFactor,
+                fontStyle,
+                TextAlignment.Left,
+                fontWeight);
+
+            var rect = CreateRect(
+                text.TopLeft,
+                text.BottomRight,
+                dx, dy);
+
+            var size = ft.Measure();
+            var origin = GetTextOrigin(text.Style, ref rect, ref size);
+
+            _gfx.DrawText(brush, origin, ft);
+
+            // TODO: brush.Dispose();
+            ft.Dispose();
         }
 
         /// <summary>
@@ -448,7 +875,67 @@ namespace Test2d.UI.Perspex.Windows
         /// <param name="r"></param>
         public void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            var _dc = dc as IDrawingContext;
+
+            var rect = CreateRect(
+                image.TopLeft,
+                image.BottomRight,
+                dx, dy);
+
+            if (image.IsStroked || image.IsFilled)
+            {
+                Brush brush = ToSolidBrush(image.Style.Fill);
+                Pen pen = ToPen(image.Style, _scaleToPage);
+
+                DrawRectangleInternal(
+                    _dc, 
+                    brush, 
+                    pen, 
+                    image.IsStroked, 
+                    image.IsFilled, 
+                    ref rect);
+
+                // TODO: brush.Dispose();
+                // TODO: pen.Dispose();
+            }
+
+            if (_enableImageCache
+                && _biCache.ContainsKey(image.Path))
+            {
+                var bi = _biCache[image.Path];
+                _dc.DrawImage(
+                    bi, 
+                    1.0, 
+                    new Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
+                    new Rect(rect.X, rect.Y, rect.Width, rect.Height));
+            }
+            else
+            {
+                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Path))
+                    return;
+
+                var bytes = _state.ImageCache.GetImage(image.Path);
+                if (bytes != null)
+                {
+                    using (var ms = new System.IO.MemoryStream(bytes))
+                    {
+                        var bi = new Bitmap(ms);
+
+                        if (_enableImageCache)
+                            _biCache[image.Path] = bi;
+
+                        _dc.DrawImage(
+                            bi,
+                            1.0,
+                            new Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
+                            new Rect(rect.X, rect.Y, rect.Width, rect.Height));
+
+                        // TODO:
+                        //if (!_enableImageCache)
+                        //    bi.Dispose();
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -462,7 +949,23 @@ namespace Test2d.UI.Perspex.Windows
         /// <param name="r"></param>
         public void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            // TODO:
+            if (!path.IsFilled && !path.IsStroked)
+                return;
+
+            var _dc = dc as IDrawingContext;
+
+            var g = path.Geometry.ToGeometry();
+
+            var brush = ToSolidBrush(path.Style.Fill);
+            var pen = ToPen(path.Style, _scaleToPage);
+            _dc.DrawGeometry(
+                path.IsFilled ? brush : null,
+                path.IsStroked ? pen : null,
+                g);
+
+            // TODO: g.Dispose();
+            // TODO: brush.Dispose();
+            // TODO: pen.Dispose();
         }
     }
 }
