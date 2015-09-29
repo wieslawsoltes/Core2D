@@ -7,8 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Perspex;
 using Perspex.Media;
+using Test2d;
 
-namespace Test2d.UI.Perspex.Windows
+namespace TestPerspex
 {
     /// <summary>
     /// 

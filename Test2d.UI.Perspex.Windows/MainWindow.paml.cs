@@ -8,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
+using Test2d;
 
-namespace Test2d.UI.Perspex.Windows
+namespace TestPerspex
 {
     /// <summary>
     /// 

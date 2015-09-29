@@ -8,7 +8,7 @@
     <ProjectGuid>{4868069E-3AD4-497E-9B8E-148D1EEACFD7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test2d.UI.Perspex.Windows</RootNamespace>
+    <RootNamespace>TestPerspex</RootNamespace>
     <AssemblyName>Test2d.UI.Perspex.Windows</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

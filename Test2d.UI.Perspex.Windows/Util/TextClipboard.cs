@@ -3,9 +3,8 @@
 using System;
 using System.Threading.Tasks;
 using Test2d;
-using Perspex;
 
-namespace Test2d.UI.Perspex.Windows
+namespace TestPerspex
 {
     /// <summary>
     /// Wrapper class for App.Current.Clipboard clipboard class.
@@ -16,9 +15,9 @@ namespace Test2d.UI.Perspex.Windows
         /// 
         /// </summary>
         /// <param name="text"></param>
-        public void SetText(string text)
+        public Task SetText(string text)
         {
-            App.Current.Clipboard.SetTextAsync(text);
+            return App.Current.Clipboard.SetTextAsync(text);
         }
 
         /// <summary>
@@ -34,10 +33,10 @@ namespace Test2d.UI.Perspex.Windows
         /// 
         /// </summary>
         /// <returns></returns>
-        public string GetText()
+        public Task<string> GetText()
         {
             // TODO: Do not use Result.
-            return GetTextAsync().Result;
+            return GetTextAsync();
         }
 
         /// <summary>
@@ -53,10 +52,10 @@ namespace Test2d.UI.Perspex.Windows
         /// 
         /// </summary>
         /// <returns></returns>
-        public bool ContainsText()
+        public async Task<bool> ContainsText()
         {
             // TODO: Do not use Result.
-            return ContainsTextAsync().Result;
+            return await ContainsTextAsync();
         }
     }
 }

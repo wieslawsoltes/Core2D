@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test2d.UI.Perspex.Windows
+namespace TestPerspex
 {
     /// <summary>
     /// 

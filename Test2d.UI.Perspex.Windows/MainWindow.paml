@@ -1,7 +1,7 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
 <Window xmlns="https://github.com/perspex"
-        xmlns:local="clr-namespace:Test2d.UI.Perspex.Windows;assembly=Test2d.UI.Perspex.Windows"
+        xmlns:local="clr-namespace:TestPerspex;assembly=Test2d.UI.Perspex.Windows"
         xmlns:core="clr-namespace:Test2d;assembly=Test2d"
         Width="1324" Height="724"
         Title="Test2d">

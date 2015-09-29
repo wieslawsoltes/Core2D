@@ -6,7 +6,7 @@ using Perspex.Controls;
 using Perspex.Diagnostics;
 using Perspex.Themes.Default;
 
-namespace Test2d.UI.Perspex.Windows
+namespace TestPerspex
 {
     /// <summary>
     /// 
