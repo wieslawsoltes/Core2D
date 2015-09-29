@@ -2,7 +2,7 @@
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
 <Window xmlns="https://github.com/perspex"
         xmlns:local="clr-namespace:Test2d.UI.Perspex.Windows;assembly=Test2d.UI.Perspex.Windows"
-        Width="800" Height="600"
+        Width="900" Height="650"
         Title="PrespexDemo">
     <Grid RowDefinitions="Auto,*">
         <Menu Grid.Row="0">
@@ -15,9 +15,28 @@
                 <MenuItem Header="_Export" HotKey="Ctrl+E" Command="{Binding Commands.ExportCommand}"/>
                 <MenuItem Header="E_xit" HotKey="Alt+F4" Command="{Binding Commands.ExitCommand}"/>
             </MenuItem>
+            <MenuItem Header="_Tool">
+                <MenuItem Header="_None" HotKey="N" Command="{Binding Commands.ToolNoneCommand}"/>
+                <MenuItem Header="_Selection" HotKey="S" Command="{Binding Commands.ToolSelectionCommand}"/>
+                <MenuItem Header="_Point" HotKey="P" Command="{Binding Commands.ToolPointCommand}"/>
+                <MenuItem Header="_Line" HotKey="L" Command="{Binding Commands.ToolLineCommand}"/>
+                <MenuItem Header="_Arc" HotKey="A" Command="{Binding Commands.ToolArcCommand}"/>
+                <MenuItem Header="_Bezier" HotKey="B" Command="{Binding Commands.ToolBezierCommand}"/>
+                <MenuItem Header="_QBezier" HotKey="Q" Command="{Binding Commands.ToolQBezierCommand}"/>
+                <MenuItem Header="Pat_h" HotKey="H" Command="{Binding Commands.ToolPathCommand}"/>
+                <MenuItem Header="_Move" HotKey="M" Command="{Binding Commands.ToolMoveCommand}"/>
+                <MenuItem Header="_Rectangle" HotKey="R" Command="{Binding Commands.ToolRectangleCommand}"/>
+                <MenuItem Header="_Ellipse" HotKey="E" Command="{Binding Commands.ToolEllipseCommand}"/>
+                <MenuItem Header="_Text" HotKey="T" Command="{Binding Commands.ToolTextCommand}"/>
+                <MenuItem Header="_Image" HotKey="I" Command="{Binding Commands.ToolImageCommand}"/>
+            </MenuItem>
         </Menu>
-        <Canvas Grid.Row="1" Width="500" Height="500" Background="LightGray">
-            <local:Drawable/>
-        </Canvas>
+        <local:Drawable Grid.Row="1">
+            <!--
+            <local:Drawable.KeyBindings>
+                <KeyBinding Gesture="N" Command="{Binding Commands.ToolNoneCommand}"/>
+            </local:Drawable.KeyBindings>
+            -->
+        </local:Drawable>
     </Grid>
 </Window>
