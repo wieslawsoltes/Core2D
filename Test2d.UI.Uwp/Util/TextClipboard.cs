@@ -16,12 +16,15 @@ namespace Test.Uwp
         /// 
         /// </summary>
         /// <param name="text"></param>
-        public void SetText(string text)
+        public Task SetText(string text)
         {
-            var package = new DataPackage();
-            package.RequestedOperation = DataPackageOperation.Copy;
-            package.SetText(text);
-            Clipboard.SetContent(package);
+            return Task.Run(() =>
+            {
+                var package = new DataPackage();
+                package.RequestedOperation = DataPackageOperation.Copy;
+                package.SetText(text);
+                Clipboard.SetContent(package);
+            });
         }
 
         /// <summary>
@@ -42,10 +45,10 @@ namespace Test.Uwp
         /// 
         /// </summary>
         /// <returns></returns>
-        public string GetText()
+        public Task<string> GetText()
         {
             // TODO: Do not use Result.
-            return GetTextAsync().Result;
+            return GetTextAsync();
         }
 
         /// <summary>
@@ -61,10 +64,10 @@ namespace Test.Uwp
         /// 
         /// </summary>
         /// <returns></returns>
-        public bool ContainsText()
+        public Task<bool> ContainsText()
         {
             // TODO: Do not use Result.
-            return ContainsTextAsync().Result;
+            return ContainsTextAsync();
         }
     }
 }
