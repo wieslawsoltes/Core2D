@@ -64,7 +64,7 @@ namespace Test2d
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public override void LeftDown(double x, double y)
+        public override async void LeftDown(double x, double y)
         {
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
@@ -75,7 +75,7 @@ namespace Test2d
                         if (_editor.GetImageKey == null)
                             return;
 
-                        var path = _editor.GetImageKey().Result;
+                        var path = await _editor.GetImageKey();
                         if (path == null || string.IsNullOrEmpty(path))
                             return;
 
