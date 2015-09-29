@@ -71,7 +71,7 @@ namespace Test.Uwp
             };
             _context.InitializeEditor(null/*new T2d.TraceLog()*/);
             _context.Editor.Renderers[0].State.DrawShapeState = T2d.ShapeState.Visible;
-            _context.Editor.GetImageKey = () => _imagePath;
+            _context.Editor.GetImageKey = async () => await Task.Run(() => _imagePath);
 
             _context.Commands.OpenCommand =
                 T2d.Command<object>.Create(
