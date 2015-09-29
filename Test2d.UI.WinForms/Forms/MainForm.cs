@@ -675,7 +675,7 @@ namespace TestWinForms
                 var path = openFileDialog2.FileName;
                 var bytes = System.IO.File.ReadAllBytes(path);
                 var key = context.Editor.Project.AddImageFromFile(path, bytes);
-                return key;
+                return await Task.Run(() => key);
             }
             return null;
         }

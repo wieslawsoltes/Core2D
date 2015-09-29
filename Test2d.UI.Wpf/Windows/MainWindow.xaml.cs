@@ -616,7 +616,7 @@ namespace Test.Windows
                     var path = dlg.FileName;
                     var bytes = System.IO.File.ReadAllBytes(path);
                     var key = context.Editor.Project.AddImageFromFile(path, bytes);
-                    return key;
+                    return await Task.Run(() => key);
                 }
                 catch (Exception ex)
                 {

@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using Eto.Forms;
 using System;
+using System.Threading.Tasks;
 using Test2d;
 
 namespace TestEtoForms
@@ -15,27 +16,36 @@ namespace TestEtoForms
         /// 
         /// </summary>
         /// <param name="text"></param>
-        public void SetText(string text)
+        public Task SetText(string text)
         {
-            new Clipboard().Text = text;
+            return Task.Run(() =>
+            {
+                new Clipboard().Text = text;
+            });
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public string GetText()
+        public Task<string> GetText()
         {
-            return new Clipboard().Text;
+            return Task.Run(() =>
+            {
+                return new Clipboard().Text;
+            });
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public bool ContainsText()
+        public Task<bool> ContainsText()
         {
-            return !string.IsNullOrEmpty(new Clipboard().Text);
+            return Task.Run(() =>
+            {
+                return !string.IsNullOrEmpty(new Clipboard().Text);
+            });
         }
     }
 }
