@@ -798,6 +798,7 @@ namespace TestEtoForms
 
             var container = _context.Editor.Project.CurrentContainer;
             if (_context == null)
+            if (container == null)
                 return;
 
             container.Invalidate();
