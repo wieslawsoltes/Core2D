@@ -56,7 +56,9 @@ namespace TestEtoForms
             _context.Editor.Renderers[0].State.DrawShapeState = Test2d.ShapeState.Visible;
             _context.Editor.GetImageKey = async () => await GetImageKey();
 
-            _state = new Test2d.ZoomState(_context, this.InvalidateContainer);
+            _context.Invalidate = this.UpdateAndInvalidate;
+
+            _state = new Test2d.ZoomState(_context, this.UpdateAndInvalidate);
 
             DataContext = _context;
         }
@@ -192,7 +194,7 @@ namespace TestEtoForms
                             break;
                         case Keys.Z:
                             _state.ResetZoom();
-                            InvalidateContainer();
+                            _context.Invalidate();
                             break;
                         case Keys.X:
                             // TODO: Autofit drawable.
@@ -269,7 +271,7 @@ namespace TestEtoForms
             (s, e) =>
             {
                 _context.Commands.NewCommand.Execute(null);
-                InvalidateContainer();
+                _context.Invalidate();
             };
 
             var openCommand = new Command()
@@ -289,7 +291,7 @@ namespace TestEtoForms
                 if (result == DialogResult.Ok)
                 {
                     _context.Open(dlg.FileName);
-                    InvalidateContainer();
+                    _context.Invalidate();
                 }
             };
 
@@ -791,7 +793,7 @@ namespace TestEtoForms
         /// <summary>
         /// 
         /// </summary>
-        private void InvalidateContainer()
+        private void UpdateAndInvalidate()
         {
             SetContainerInvalidation();
             SetDrawableSize();
@@ -841,6 +843,10 @@ namespace TestEtoForms
             brush.Dispose();
 
             var renderer = _context.Editor.Renderers[0];
+
+            if (_context.Editor.Project == null)
+                return;
+
             var container = _context.Editor.Project.CurrentContainer;
 
             if (container.Template != null)

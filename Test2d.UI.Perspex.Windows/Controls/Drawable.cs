@@ -38,7 +38,9 @@ namespace TestPerspex
             if (context == null)
                 return;
 
-            _state = new ZoomState(context, this.InvalidateContainer);
+            context.Invalidate = this.UpdateAndInvalidate;
+
+            _state = new ZoomState(context, this.UpdateAndInvalidate);
 
             this.Width = (int)context.Editor.Project.CurrentContainer.Width;
             this.Height = (int)context.Editor.Project.CurrentContainer.Height;
@@ -183,7 +185,7 @@ namespace TestPerspex
         /// <summary>
         /// 
         /// </summary>
-        private void InvalidateContainer()
+        private void UpdateAndInvalidate()
         {
             SetContainerInvalidation();
             SetDrawableSize();
@@ -231,6 +233,10 @@ namespace TestPerspex
             var scale = dc.PushTransform(Matrix.CreateScale(_state.Zoom, _state.Zoom));
 
             var renderer = context.Editor.Renderers[0];
+
+            if (context.Editor.Project == null)
+                return;
+
             var container = context.Editor.Project.CurrentContainer;
 
             if (container.Template != null)
