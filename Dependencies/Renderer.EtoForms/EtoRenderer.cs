@@ -840,7 +840,7 @@ namespace TestEtoForms
             if (string.IsNullOrEmpty(tbind))
                 return;
 
-            Brush brush = ToSolidBrush(text.Style.Stroke);
+            var brush = ToSolidBrush(text.Style.Stroke);
 
             var fontStyle = Eto.Drawing.FontStyle.None;
             if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Bold))
@@ -886,7 +886,7 @@ namespace TestEtoForms
 
             _gfx.DrawText(
                 font,
-                ToSolidBrush(text.Style.Stroke),
+                brush,
                 origin,
                 tbind);
 
