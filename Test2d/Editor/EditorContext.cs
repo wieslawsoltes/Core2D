@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Test2d
 {
@@ -315,13 +316,13 @@ namespace Test2d
         /// <summary>
         ///
         /// </summary>
-        public void OnPaste()
+        public async void OnPaste()
         {
             try
             {
-                if (CanPaste())
+                if (await CanPaste())
                 {
-                    var json = _textClipboard.GetText();
+                    var json = await _textClipboard.GetText();
                     if (!string.IsNullOrEmpty(json))
                     {
                         Paste(json);
@@ -2058,11 +2059,11 @@ namespace Test2d
         ///
         /// </summary>
         /// <returns></returns>
-        public bool CanPaste()
+        public async Task<bool> CanPaste()
         {
             try
             {
-                return _textClipboard.ContainsText();
+                return await _textClipboard.ContainsText();
             }
             catch (Exception ex)
             {
