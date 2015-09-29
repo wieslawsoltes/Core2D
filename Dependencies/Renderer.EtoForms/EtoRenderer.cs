@@ -907,8 +907,6 @@ namespace TestEtoForms
         {
             var _gfx = gfx as Graphics;
 
-            Brush brush = ToSolidBrush(image.Style.Stroke);
-
             var rect = CreateRect(
                 image.TopLeft,
                 image.BottomRight,
@@ -922,16 +920,20 @@ namespace TestEtoForms
 
             if (image.IsFilled)
             {
+                Brush brush = ToSolidBrush(image.Style.Fill);
                 _gfx.FillRectangle(
-                    ToSolidBrush(image.Style.Fill),
+                    brush,
                     srect);
+                brush.Dispose();
             }
 
             if (image.IsStroked)
             {
+                Pen pen = ToPen(image.Style, _scaleToPage);
                 _gfx.DrawRectangle(
-                    ToPen(image.Style, _scaleToPage),
+                    pen,
                     srect);
+                pen.Dispose();
             }
 
             if (_enableImageCache
@@ -958,8 +960,6 @@ namespace TestEtoForms
                         bi.Dispose();
                 }
             }
-
-            brush.Dispose();
         }
 
         /// <summary>
