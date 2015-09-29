@@ -17,7 +17,6 @@ namespace Test2d.UI.Perspex.Windows
     public class MainWindow : Window, IView
     {
         private EditorContext _context;
-        private ZoomState _state;
 
         /// <summary>
         /// 
@@ -26,8 +25,10 @@ namespace Test2d.UI.Perspex.Windows
         {
             this.InitializeComponent();
             App.AttachDevTools(this);
-
+            
             this.InitializeContext();
+            
+            this.Closed += (sender, e) => _context.Dispose();
         }
 
         /// <summary>
@@ -36,6 +37,68 @@ namespace Test2d.UI.Perspex.Windows
         private void InitializeComponent()
         {
             PerspexXamlLoader.Load(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private async Task OnOpen(object parameter)
+        {
+            if (parameter == null)
+            {
+                var dlg = new OpenFileDialog();
+                dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
+                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+                dlg.InitialFileName = "ddd";
+                var result = await dlg.ShowAsync(this);
+                if (result != null)
+                {
+                    var path = result.FirstOrDefault();
+                    _context.Open(path);
+                    // TODO: InvalidateContainer();
+                }
+            }
+            else
+            {
+                string path = parameter as string;
+                if (path != null && System.IO.File.Exists(path))
+                {
+                    _context.Open(path);
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private async Task OnSave()
+        {
+            if (!string.IsNullOrEmpty(_context.Editor.ProjectPath))
+            {
+                _context.Save(_context.Editor.ProjectPath);
+            }
+            else
+            {
+                await OnSaveAs();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private async Task OnSaveAs()
+        {
+            var dlg = new SaveFileDialog();
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+            dlg.InitialFileName = _context.Editor.Project.Name;
+            var result = await dlg.ShowAsync(this);
+            if (result != null)
+            {
+                _context.Save(result);
+            }
         }
 
         /// <summary>
@@ -57,93 +120,37 @@ namespace Test2d.UI.Perspex.Windows
             };
             _context.InitializeEditor(new TraceLog());
             _context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
-            _context.Editor.GetImageKey = () => GetImageKey();
+            _context.Editor.GetImageKey = async () => await GetImageKey();
 
-            _state = new ZoomState(_context, this.InvalidateContainer);
+            _context.Commands.OpenCommand =
+                Command<object>.Create(
+                    async (parameter) => await OnOpen(parameter),
+                    (parameter) => _context.IsEditMode());
 
+            _context.Commands.SaveCommand =
+                Command.Create(
+                    async () => await OnSave(),
+                    () => _context.IsEditMode());
+
+            _context.Commands.SaveAsCommand =
+                Command.Create(
+                    async () => await OnSaveAs(),
+                    () => _context.IsEditMode());
+
+            // TODO: Initialize other commands.
+            
             DataContext = _context;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        private void SetDrawableSize()
-        {
-            var container = _context.Editor.Project.CurrentContainer;
-            if (container == null)
-                return;
-
-            // TODO: Use binding co CurrentContainer in Paml.
-            //_drawable.Width = (int)container.Width;
-            //_drawable.Height = (int)container.Height;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void SetContainerInvalidation()
-        {
-            var container = _context.Editor.Project.CurrentContainer;
-            if (container == null)
-                return;
-
-            foreach (var layer in container.Layers)
-            {
-                layer.InvalidateLayer +=
-                    (s, e) =>
-                    {
-                        // TODO: Use events, same as in Wpf version?
-                        //_drawable.Invalidate();
-                    };
-            }
-
-            if (container.WorkingLayer != null)
-            {
-                container.WorkingLayer.InvalidateLayer +=
-                    (s, e) =>
-                    {
-                        // TODO: Use events, same as in Wpf version?
-                        //_drawable.Invalidate();
-                    };
-            }
-
-            if (container.HelperLayer != null)
-            {
-                container.HelperLayer.InvalidateLayer +=
-                    (s, e) =>
-                    {
-                        // TODO: Use events, same as in Wpf version?
-                        //_drawable.Invalidate();
-                    };
-            }
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void InvalidateContainer()
-        {
-            SetContainerInvalidation();
-            SetDrawableSize();
-
-            var container = _context.Editor.Project.CurrentContainer;
-            if (_context == null)
-                return;
-
-            container.Invalidate();
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <returns></returns>
-        public string GetImageKey()
+        public async Task<string> GetImageKey()
         {
             var dlg = new OpenFileDialog();
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            var result = dlg.ShowAsync(this).Result;
+            var result = await dlg.ShowAsync(this);
             if (result != null)
             {
                 var path = result.FirstOrDefault();
