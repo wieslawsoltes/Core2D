@@ -213,6 +213,7 @@ namespace Test2d.UI.Perspex.Windows
 
             // TODO: Perspex does not need to dispose StreamGeometryContext?
             //sgc.Close();
+            sgc.Dispose();
 
             // TODO: Perspex has not yet implemented FillRule.
             //sg.FillRule = xpg.FillRule == XFillRule.Nonzero ? FillRule.Nonzero : FillRule.EvenOdd;
