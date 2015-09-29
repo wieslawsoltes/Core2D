@@ -3,6 +3,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using Test2d;
 
 namespace Test.Windows
@@ -20,7 +21,10 @@ namespace Test.Windows
         {
             return Task.Run(() =>
             {
-                Clipboard.SetText(text, TextDataFormat.UnicodeText);
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    Clipboard.SetText(text, TextDataFormat.UnicodeText);
+                });
             });
         }
 
@@ -32,7 +36,10 @@ namespace Test.Windows
         {
             return Task.Run(() =>
             {
-                return Clipboard.GetText(TextDataFormat.UnicodeText);
+                return App.Current.Dispatcher.Invoke(() =>
+                {
+                    return Clipboard.GetText(TextDataFormat.UnicodeText);
+                });
             });
         }
 
@@ -44,7 +51,10 @@ namespace Test.Windows
         {
             return Task.Run(() =>
             {
-                return Clipboard.ContainsText(TextDataFormat.UnicodeText);
+                return App.Current.Dispatcher.Invoke(() =>
+                {
+                    return Clipboard.ContainsText(TextDataFormat.UnicodeText);
+                });
             });
         }
     }
