@@ -228,7 +228,7 @@ namespace TestPerspex
 
             if (isStroked)
             {
-                dc.DrawRectange(pen, r);
+                dc.DrawRectangle(pen, r);
             }
         }
 
