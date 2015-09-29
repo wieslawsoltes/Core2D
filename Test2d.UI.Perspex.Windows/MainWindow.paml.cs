@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
 using Test2d;
+using System.Diagnostics;
 
 namespace TestPerspex
 {
@@ -55,7 +56,7 @@ namespace TestPerspex
                 {
                     var path = result.FirstOrDefault();
                     _context.Open(path);
-                    // TODO: InvalidateContainer();
+                    _context.Invalidate();
                 }
             }
             else
@@ -104,6 +105,36 @@ namespace TestPerspex
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        private async Task OnExport()
+        {
+            var dlg = new SaveFileDialog();
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Pdf", Extensions = { "pdf" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "Dxf", Extensions = { "dxf" } });
+            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+            dlg.InitialFileName = _context.Editor.Project.Name;
+            var result = await dlg.ShowAsync(this);
+            if (result != null)
+            {
+                var ext = System.IO.Path.GetExtension(result).ToLower();
+
+                if (ext == ".pdf")
+                {
+                    _context.ExportAsPdf(result, _context.Editor.Project);
+                    Process.Start(result);
+                }
+
+                if (ext == ".dxf")
+                {
+                    _context.ExportAsDxf(result);
+                    Process.Start(result);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitializeContext()
         {
             _context = new EditorContext()
@@ -136,6 +167,11 @@ namespace TestPerspex
                 Command.Create(
                     async () => await OnSaveAs(),
                     () => _context.IsEditMode());
+
+            _context.Commands.ExportCommand =
+                Command<object>.Create(
+                    async  (item) => await OnExport(),
+                    (item) => _context.IsEditMode());
 
             // TODO: Initialize other commands.
 
