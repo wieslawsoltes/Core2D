@@ -16,6 +16,14 @@
                 <MenuItem Header="_Export" HotKey="Ctrl+E" Command="{Binding Commands.ExportCommand}"/>
                 <MenuItem Header="E_xit" HotKey="Alt+F4" Command="{Binding Commands.ExitCommand}"/>
             </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Undo" HotKey="Ctrl+Z" Command="{Binding Commands.UndoCommand}"/>
+                <MenuItem Header="_Redo" HotKey="Ctrl+Y" Command="{Binding Commands.RedoCommand}"/>
+                <MenuItem Header="Cu_t" HotKey="Ctrl+X" Command="{Binding Commands.CutCommand}"/>
+                <MenuItem Header="_Copy" HotKey="Ctrl+C" Command="{Binding Commands.CopyCommand}"/>
+                <MenuItem Header="_Paste" HotKey="Ctrl+V" Command="{Binding Commands.PasteCommand}"/>
+                <MenuItem Header="_Delete" HotKey="Delete" Command="{Binding Commands.DeleteCommand}"/>
+            </MenuItem>
             <MenuItem Header="_Tool">
                 <MenuItem Header="_None" HotKey="N" Command="{Binding Commands.ToolNoneCommand}"/>
                 <MenuItem Header="_Selection" HotKey="S" Command="{Binding Commands.ToolSelectionCommand}"/>
