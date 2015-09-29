@@ -27,6 +27,83 @@ namespace Test2d.UI.Perspex.Windows
         /// <summary>
         /// 
         /// </summary>
+        public PerspexRenderer() { }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static IRenderer Create()
+        {
+            return new PerspexRenderer();
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
+        private Color ToColor(ArgbColor color)
+        {
+            return Color.FromArgb(
+                color.A,
+                color.R,
+                color.G,
+                color.B);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="style"></param>
+        /// <returns></returns>
+        private Pen ToPen(BaseStyle style)
+        {
+            var lineCap = default(PenLineCap);
+            var dashStyle = default(DashStyle);
+            
+            switch (style.LineCap)
+            {
+                case LineCap.Flat:
+                    lineCap = PenLineCap.Flat;
+                    break;
+                case LineCap.Square:
+                    lineCap = PenLineCap.Square;
+                    break;
+                case LineCap.Round:
+                    lineCap = PenLineCap.Round;
+                    break;
+            }
+            
+            if (style.Dashes != null)
+            {
+                dashStyle = new DashStyle(
+                    style.Dashes,
+                    style.DashOffset);
+            }
+            
+            var pen = new Pen(
+                ToSolidBrush(style.Stroke), 
+                style.Thickness / _state.Zoom,
+                dashStyle, lineCap, 
+                lineCap, lineCap);
+  
+            return pen;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
+        private SolidColorBrush ToSolidBrush(ArgbColor color)
+        {
+            return new SolidColorBrush(ToColor(color));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="isZooming"></param>
         public void ClearCache(bool isZooming)
         {
@@ -36,17 +113,17 @@ namespace Test2d.UI.Perspex.Windows
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="dc"></param>
         /// <param name="container"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object context, Container container, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object dc, Container container, ImmutableArray<ShapeProperty> db, Record r)
         {
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
                 {
-                    Draw(context, layer, db, r);
+                    Draw(dc, layer, db, r);
                 }
             }
         }
@@ -54,17 +131,17 @@ namespace Test2d.UI.Perspex.Windows
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="dc"></param>
         /// <param name="layer"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object context, Layer layer, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object dc, Layer layer, ImmutableArray<ShapeProperty> db, Record r)
         {
             foreach (var shape in layer.Shapes)
             {
                 if (shape.State.HasFlag(_state.DrawShapeState))
                 {
-                    shape.Draw(context, this, 0, 0, db, r);
+                    shape.Draw(dc, this, 0, 0, db, r);
                 }
             }
         }
@@ -72,27 +149,35 @@ namespace Test2d.UI.Perspex.Windows
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="dc"></param>
         /// <param name="line"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object context, XLine line, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             // TODO:
+            var _dc = dc as IDrawingContext;
+
+            Pen strokeLine = ToPen(line.Style);
+            
+            _dc.DrawLine(
+                strokeLine,
+                new Point(line.Start.X, line.Start.Y),
+                new Point(line.End.X, line.End.Y)); 
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="dc"></param>
         /// <param name="rectangle"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object context, XRectangle rectangle, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             // TODO:
         }
@@ -100,13 +185,13 @@ namespace Test2d.UI.Perspex.Windows
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="dc"></param>
         /// <param name="ellipse"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object context, XEllipse ellipse, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             // TODO:
         }
@@ -114,13 +199,13 @@ namespace Test2d.UI.Perspex.Windows
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="dc"></param>
         /// <param name="arc"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object context, XArc arc, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             // TODO:
         }
@@ -128,13 +213,13 @@ namespace Test2d.UI.Perspex.Windows
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="dc"></param>
         /// <param name="bezier"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object context, XBezier bezier, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object dc, XBezier bezier, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             // TODO:
         }
@@ -142,13 +227,13 @@ namespace Test2d.UI.Perspex.Windows
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="dc"></param>
         /// <param name="qbezier"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object context, XQBezier qbezier, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object dc, XQBezier qbezier, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             // TODO:
         }
@@ -156,13 +241,13 @@ namespace Test2d.UI.Perspex.Windows
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="dc"></param>
         /// <param name="text"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object context, XText text, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object dc, XText text, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             // TODO:
         }
@@ -170,13 +255,13 @@ namespace Test2d.UI.Perspex.Windows
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="dc"></param>
         /// <param name="image"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object context, XImage image, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             // TODO:
         }
@@ -184,13 +269,13 @@ namespace Test2d.UI.Perspex.Windows
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="dc"></param>
         /// <param name="path"></param>
         /// <param name="dx"></param>
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object context, XPath path, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
             // TODO:
         }
