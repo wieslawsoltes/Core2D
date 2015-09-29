@@ -36,12 +36,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL" />
-    <Reference Include="Eto, Version=2.1.5738.32609, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Forms.2.2.0-build0369\lib\net45\Eto.dll</HintPath>
+    <Reference Include="Eto, Version=2.1.5750.36077, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Forms.2.2.0-build0381\lib\net45\Eto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Eto.Gtk2, Version=2.1.5738.32618, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Gtk.2.2.0-build0369\lib\net45\Eto.Gtk2.dll</HintPath>
+    <Reference Include="Eto.Gtk2, Version=2.1.5750.36080, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.Gtk.2.2.0-build0381\lib\net45\Eto.Gtk2.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL" />
