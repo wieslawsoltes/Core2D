@@ -2,10 +2,11 @@
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
 <Window xmlns="https://github.com/perspex"
         xmlns:local="clr-namespace:Test2d.UI.Perspex.Windows;assembly=Test2d.UI.Perspex.Windows"
-        Width="900" Height="650"
-        Title="PrespexDemo">
-    <Grid RowDefinitions="Auto,*">
-        <Menu Grid.Row="0">
+        xmlns:core="clr-namespace:Test2d;assembly=Test2d"
+        Width="1324" Height="724"
+        Title="Test2d">
+    <Grid RowDefinitions="Auto,*" ColumnDefinitions="150,*,150">
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <MenuItem Header="_File">
                 <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Binding Commands.NewCommand}"/>
                 <MenuItem Header="_Open" HotKey="Ctrl+O" Command="{Binding Commands.OpenCommand}"/>
@@ -31,12 +32,43 @@
                 <MenuItem Header="_Image" HotKey="I" Command="{Binding Commands.ToolImageCommand}"/>
             </MenuItem>
         </Menu>
-        <local:Drawable Grid.Row="1">
+        <TreeView
+            Items="{Binding Editor.Project.Documents}"
+            Grid.Row="1" Grid.Column="0">
+        </TreeView>
+        <local:Drawable Grid.Row="1" Grid.Column="1">
             <!--
             <local:Drawable.KeyBindings>
                 <KeyBinding Gesture="N" Command="{Binding Commands.ToolNoneCommand}"/>
             </local:Drawable.KeyBindings>
             -->
         </local:Drawable>
+        <Grid RowDefinitions="Auto,*" Grid.Row="1" Grid.Column="2">
+            <!--
+            <ComboBox
+                Items="{Binding Editor.Project.StyleLibraries}"
+                SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}"
+                HorizontalAlignment="Stretch"
+                Grid.Row="0">
+                <ComboBox.DataTemplates>
+                    <DataTemplate DataType="core:StyleLibrary">
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.DataTemplates>
+            </ComboBox>
+            -->
+            <ListBox
+                Items="{Binding Editor.Project.CurrentStyleLibrary.Styles}"
+                SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}"
+                Grid.Row="1">
+                <!--
+                <ListBox.DataTemplates>
+                    <DataTemplate DataType="core:ShapeStyle">
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListBox.DataTemplates>
+                -->
+            </ListBox>
+        </Grid>
     </Grid>
 </Window>
