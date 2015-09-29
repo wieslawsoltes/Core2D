@@ -63,6 +63,9 @@ rmdir /Q /S Test2d.UI.EtoForms.WinForms\obj
 rmdir /Q /S Test2d.UI.EtoForms.Wpf\bin
 rmdir /Q /S Test2d.UI.EtoForms.Wpf\obj
 
+rmdir /Q /S Test2d.UI.Perspex.Windows\bin
+rmdir /Q /S Test2d.UI.Perspex.Windows\obj
+
 rmdir /Q /S Test2d.UI.Uwp\bin
 rmdir /Q /S Test2d.UI.Uwp\obj
 
