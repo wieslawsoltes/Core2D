@@ -20,7 +20,10 @@ namespace TestEtoForms
         {
             return Task.Run(() =>
             {
-                new Clipboard().Text = text;
+                Application.Instance.Invoke(() =>
+                {
+                    new Clipboard().Text = text;
+                });
             });
         }
 
@@ -32,7 +35,10 @@ namespace TestEtoForms
         {
             return Task.Run(() =>
             {
-                return new Clipboard().Text;
+                return Application.Instance.Invoke(() =>
+                {
+                    return new Clipboard().Text;
+                });
             });
         }
 
@@ -44,7 +50,10 @@ namespace TestEtoForms
         {
             return Task.Run(() =>
             {
-                return !string.IsNullOrEmpty(new Clipboard().Text);
+                return Application.Instance.Invoke(() =>
+                {
+                    return !string.IsNullOrEmpty(new Clipboard().Text);
+                });
             });
         }
     }
