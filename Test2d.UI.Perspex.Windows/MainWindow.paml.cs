@@ -49,7 +49,6 @@ namespace Test2d.UI.Perspex.Windows
                 var dlg = new OpenFileDialog();
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                dlg.InitialFileName = "ddd";
                 var result = await dlg.ShowAsync(this);
                 if (result != null)
                 {
@@ -138,7 +137,7 @@ namespace Test2d.UI.Perspex.Windows
                     () => _context.IsEditMode());
 
             // TODO: Initialize other commands.
-            
+
             DataContext = _context;
         }
 
