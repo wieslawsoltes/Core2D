@@ -23,6 +23,11 @@
                 <MenuItem Header="_Copy" HotKey="Ctrl+C" Command="{Binding Commands.CopyCommand}"/>
                 <MenuItem Header="_Paste" HotKey="Ctrl+V" Command="{Binding Commands.PasteCommand}"/>
                 <MenuItem Header="_Delete" HotKey="Delete" Command="{Binding Commands.DeleteCommand}"/>
+            <MenuItem Header="_View">
+                <MenuItem Header="_Zoom">
+                    <MenuItem Header="_Reset Zoom" HotKey="Z" Command="{Binding Commands.ZoomResetCommand}"/>
+                    <MenuItem Header="Zoom to _Extent" HotKey="X" Command="{Binding Commands.ZoomExtentCommand}"/>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="_Tool">
                 <MenuItem Header="_None" HotKey="N" Command="{Binding Commands.ToolNoneCommand}"/>
