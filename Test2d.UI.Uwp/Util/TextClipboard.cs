@@ -2,7 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.UI.Core;
 using Test2d;
 
 namespace Test.Uwp
@@ -16,15 +18,17 @@ namespace Test.Uwp
         /// 
         /// </summary>
         /// <param name="text"></param>
-        public Task SetText(string text)
+        public async Task SetText(string text)
         {
-            return Task.Run(() =>
-            {
-                var package = new DataPackage();
-                package.RequestedOperation = DataPackageOperation.Copy;
-                package.SetText(text);
-                Clipboard.SetContent(package);
-            });
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                CoreDispatcherPriority.Normal,
+                () =>
+                {
+                    var package = new DataPackage();
+                    package.RequestedOperation = DataPackageOperation.Copy;
+                    package.SetText(text);
+                    Clipboard.SetContent(package);
+                });
         }
 
         /// <summary>
