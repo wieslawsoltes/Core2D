@@ -262,6 +262,8 @@ namespace TestPerspex
                 return;
 
             var container = context.Editor.Project.CurrentContainer;
+            if (container == null)
+                return;
 
             if (container.Template != null)
             {
