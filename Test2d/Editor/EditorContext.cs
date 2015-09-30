@@ -1415,6 +1415,10 @@ namespace Test2d
             _editor.History.Reset();
             _editor.Unload();
             _editor.Load(_projectFactory.GetProject(), string.Empty);
+            if (_invalidate != null)
+            {
+                _invalidate();
+            }
         }
 
         /// <summary>
