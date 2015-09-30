@@ -74,10 +74,19 @@
                 <MenuItem Header="Try To _Connect" HotKey="C" Command="{Binding Commands.TryToConnectCommand}"/>
             </MenuItem>
         </Menu>
-        <TreeView
-            Items="{Binding Editor.Project.Documents}"
-            Grid.Row="1" Grid.Column="0">
-        </TreeView>
+        <Grid RowDefinitions="50*,50*" Grid.Row="1" Grid.Column="0">
+            <ListBox
+                DataContext="{Binding Editor.Project}"
+                Items="{Binding Documents}"
+                SelectedItem="{Binding Path=CurrentDocument, Mode=TwoWay}"
+                Grid.Row="0">
+            </ListBox>
+            <TreeView
+                DataContext="{Binding Editor.Project}"
+                Items="{Binding Documents}"
+                Grid.Row="1">
+            </TreeView>
+        </Grid>
         <Grid Grid.Row="1" Grid.Column="1" ClipToBounds="True">
             <local:Drawable>
                 <!--
@@ -90,8 +99,9 @@
         <Grid RowDefinitions="Auto,*" Grid.Row="1" Grid.Column="2">
             <!--
             <ComboBox
-                Items="{Binding Editor.Project.StyleLibraries}"
-                SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}"
+                DataContext="{Binding Editor.Project}"
+                Items="{Binding StyleLibraries}"
+                SelectedItem="{Binding Path=CurrentStyleLibrary, Mode=TwoWay}"
                 HorizontalAlignment="Stretch"
                 Grid.Row="0">
                 <ComboBox.DataTemplates>
@@ -102,8 +112,9 @@
             </ComboBox>
             -->
             <ListBox
-                Items="{Binding Editor.Project.CurrentStyleLibrary.Styles}"
-                SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}"
+                DataContext="{Binding Editor.Project}"
+                Items="{Binding CurrentStyleLibrary.Styles}"
+                SelectedItem="{Binding Path=CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}"
                 Grid.Row="1">
                 <!--
                 <ListBox.DataTemplates>
