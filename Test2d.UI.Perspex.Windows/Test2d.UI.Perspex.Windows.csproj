@@ -126,9 +126,10 @@
     </Compile>
     <Compile Include="App.cs" />
     <Compile Include="Controls\Drawable.cs" />
+    <Compile Include="Renderer\MatrixHelper.cs" />
     <Compile Include="Renderer\PerspexRenderer.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Renderer\Path\XPathGeometryConverter.cs" />
+    <Compile Include="Renderer\XPathGeometryConverter.cs" />
     <Compile Include="Util\ZoomState.cs" />
     <EmbeddedResource Include="MainWindow.paml">
       <SubType>Designer</SubType>
