@@ -38,7 +38,13 @@
                 <MenuItem Header="_Bezier" HotKey="B" Command="{Binding Commands.ToolBezierCommand}"/>
                 <MenuItem Header="_QBezier" HotKey="Q" Command="{Binding Commands.ToolQBezierCommand}"/>
                 <MenuItem Header="Pat_h" HotKey="H" Command="{Binding Commands.ToolPathCommand}"/>
-                <MenuItem Header="_Move" HotKey="M" Command="{Binding Commands.ToolMoveCommand}"/>
+                <MenuItem Header="Path T_ool">
+                    <MenuItem Header="_Line" Command="{Binding Commands.ToolLineCommand}"/>
+                    <MenuItem Header="_Arc" Command="{Binding Commands.ToolArcCommand}"/>
+                    <MenuItem Header="_Bezier" Command="{Binding Commands.ToolBezierCommand}"/>
+                    <MenuItem Header="_QBezier" Command="{Binding Commands.ToolQBezierCommand}"/>
+                    <MenuItem Header="_Move" HotKey="M" Command="{Binding Commands.ToolMoveCommand}"/>
+                </MenuItem>
                 <MenuItem Header="_Rectangle" HotKey="R" Command="{Binding Commands.ToolRectangleCommand}"/>
                 <MenuItem Header="_Ellipse" HotKey="E" Command="{Binding Commands.ToolEllipseCommand}"/>
                 <MenuItem Header="_Text" HotKey="T" Command="{Binding Commands.ToolTextCommand}"/>
