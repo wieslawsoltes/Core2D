@@ -194,7 +194,10 @@ namespace TestEtoForms
                             break;
                         case Keys.Z:
                             _state.ResetZoom();
-                            _context.Invalidate();
+                            if (_context.Invalidate != null)
+                            {
+                                _context.Invalidate();
+                            }
                             break;
                         case Keys.X:
                             // TODO: Autofit drawable.
@@ -271,7 +274,10 @@ namespace TestEtoForms
             (s, e) =>
             {
                 _context.Commands.NewCommand.Execute(null);
-                _context.Invalidate();
+                if (_context.Invalidate != null)
+                {
+                    _context.Invalidate();
+                }
             };
 
             var openCommand = new Command()
@@ -291,7 +297,10 @@ namespace TestEtoForms
                 if (result == DialogResult.Ok)
                 {
                     _context.Open(dlg.FileName);
-                    _context.Invalidate();
+                    if (_context.Invalidate != null)
+                    {
+                        _context.Invalidate();
+                    }
                 }
             };
 
