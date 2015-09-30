@@ -23,12 +23,18 @@
                 <MenuItem Header="_Copy" HotKey="Ctrl+C" Command="{Binding Commands.CopyCommand}"/>
                 <MenuItem Header="_Paste" HotKey="Ctrl+V" Command="{Binding Commands.PasteCommand}"/>
                 <MenuItem Header="_Delete" HotKey="Delete" Command="{Binding Commands.DeleteCommand}"/>
+                <MenuItem Header="Select _All" HotKey="Ctrl+A" Command="{Binding Commands.SelectAllCommand}"/>
+                <MenuItem Header="De_select All" HotKey="Escape" Command="{Binding Commands.DeselectAllCommand}"/>
+                <MenuItem Header="Cl_ear All" Command="{Binding Commands.ClearAllCommand}"/>
+                <MenuItem Header="_Group" HotKey="Ctrl+G" Command="{Binding Commands.GroupCommand}"/>
+                <MenuItem Header="U_ngroup" HotKey="Ctrl+U" Command="{Binding Commands.UngroupCommand}"/>
                 <MenuItem Header="_Order">
                     <MenuItem Header="Send to _Back" HotKey="Shift+-" Command="{Binding Commands.SendToBackCommand}"/>
                     <MenuItem Header="Send Ba_ckward" HotKey="-" Command="{Binding Commands.SendBackwardCommand}"/>
                     <MenuItem Header="Bring Fo_rward" HotKey="+" Command="{Binding Commands.BringForwardCommand}"/>
                     <MenuItem Header="Bring to _Front" HotKey="Shift++" Command="{Binding Commands.BringToFrontCommand}"/>
                 </MenuItem>
+            </MenuItem>
             <MenuItem Header="_View">
                 <MenuItem Header="_Zoom">
                     <MenuItem Header="_Reset Zoom" HotKey="Z" Command="{Binding Commands.ZoomResetCommand}"/>
