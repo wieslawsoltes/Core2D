@@ -74,17 +74,23 @@
                 <MenuItem Header="Try To _Connect" HotKey="C" Command="{Binding Commands.TryToConnectCommand}"/>
             </MenuItem>
         </Menu>
-        <Grid RowDefinitions="50*,50*" Grid.Row="1" Grid.Column="0">
+        <Grid RowDefinitions="35*,35*,30*" Grid.Row="1" Grid.Column="0">
             <ListBox
                 DataContext="{Binding Editor.Project}"
                 Items="{Binding Documents}"
                 SelectedItem="{Binding Path=CurrentDocument, Mode=TwoWay}"
                 Grid.Row="0">
             </ListBox>
+            <ListBox
+                DataContext="{Binding Editor.Project}"
+                Items="{Binding CurrentDocument.Containers}"
+                SelectedItem="{Binding Path=CurrentContainer, Mode=TwoWay}"
+                Grid.Row="1">
+            </ListBox>
             <TreeView
                 DataContext="{Binding Editor.Project}"
                 Items="{Binding Documents}"
-                Grid.Row="1">
+                Grid.Row="2">
             </TreeView>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1" ClipToBounds="True">
