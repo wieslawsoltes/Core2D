@@ -58,6 +58,10 @@ namespace TestPerspex
                     var path = result.FirstOrDefault();
                     _context.Open(path);
                     _context.Invalidate();
+                    if (_context.Invalidate != null)
+                    {
+                        _context.Invalidate();
+                    }
                 }
             }
             else
