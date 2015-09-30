@@ -313,5 +313,13 @@ namespace Test2d
             _context.Editor.Renderers[0].State.PanX = PanX;
             _context.Editor.Renderers[0].State.PanY = PanY;
         }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public void AutoFit()
+        {
+            // TODO: Implement zoom auto-fit.
+        }
     }
 }
