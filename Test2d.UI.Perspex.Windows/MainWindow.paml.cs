@@ -97,7 +97,7 @@ namespace TestPerspex
             var dlg = new SaveFileDialog();
             dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            dlg.InitialFileName = _context.Editor.Project.Name;
+            dlg.InitialFileName = _context.Editor.Project.Name + ".project";
             var result = await dlg.ShowAsync(this);
             if (result != null)
             {
@@ -115,7 +115,7 @@ namespace TestPerspex
             dlg.Filters.Add(new FileDialogFilter() { Name = "Pdf", Extensions = { "pdf" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "Dxf", Extensions = { "dxf" } });
             dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            dlg.InitialFileName = _context.Editor.Project.Name;
+            dlg.InitialFileName = _context.Editor.Project.Name + ".pdf";
             var result = await dlg.ShowAsync(this);
             if (result != null)
             {
