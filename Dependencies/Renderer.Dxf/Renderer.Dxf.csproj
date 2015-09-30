@@ -32,9 +32,6 @@
     <DocumentationFile>bin\Release\Renderer.Dxf.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="netDxf">
-      <HintPath>..\..\..\netdxf\netDxf\bin\Release\netDxf.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
@@ -58,6 +55,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\netdxf\netDxf\netDxf.csproj">
+      <Project>{785380E0-CEB9-4C34-82E5-60D0E33E848E}</Project>
+      <Name>netDxf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Test2d\Test2d.csproj">
       <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
       <Name>Test2d</Name>
