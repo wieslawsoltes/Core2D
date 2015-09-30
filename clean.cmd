@@ -1,5 +1,11 @@
 @echo off
 
+rmdir /Q /S Dependencies\netDxf\netDxf\bin
+rmdir /Q /S Dependencies\netDxf\netDxf\obj
+
+rmdir /Q /S Dependencies\netDxf\TestDxfDocument\bin
+rmdir /Q /S Dependencies\netDxf\TestDxfDocument\obj
+
 rmdir /Q /S Dependencies\FileWriter.Dxf\bin
 rmdir /Q /S Dependencies\FileWriter.Dxf\obj
 
