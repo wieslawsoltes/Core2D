@@ -3,7 +3,7 @@
 <Window xmlns="https://github.com/perspex"
         xmlns:local="clr-namespace:TestPerspex;assembly=Test2d.UI.Perspex.Windows"
         xmlns:core="clr-namespace:Test2d;assembly=Test2d"
-        Width="1324" Height="724"
+        Width="1240" Height="670"
         Title="Test2d">
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="150,*,150">
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
