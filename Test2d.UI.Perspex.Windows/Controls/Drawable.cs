@@ -253,7 +253,7 @@ namespace TestPerspex
             
             // TODO: Disable anti-aliasing.
 
-            var pan = dc.PushTransform(Matrix.CreateTranslation(_state.PanX, _state.PanY));
+            var translate = dc.PushTransform(Matrix.CreateTranslation(_state.PanX, _state.PanY));
             var scale = dc.PushTransform(Matrix.CreateScale(_state.Zoom, _state.Zoom));
 
             var renderer = context.Editor.Renderers[0];
@@ -309,7 +309,7 @@ namespace TestPerspex
             }
             
             scale.Dispose();
-            pan.Dispose();
+            translate.Dispose();
         }
         
         /// <summary>
