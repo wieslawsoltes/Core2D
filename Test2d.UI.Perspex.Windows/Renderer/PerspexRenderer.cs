@@ -801,7 +801,7 @@ namespace TestPerspex
                 fontWeight |= Perspex.Media.FontWeight.Bold;
             }
 
-            // TODO:
+            // TODO: Implement font decoration after Perspex adds support for them.
             /*
             var fontDecoration = Perspex.Media.FontDecoration.None;
             if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline))
