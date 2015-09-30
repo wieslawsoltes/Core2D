@@ -44,6 +44,9 @@
                 <MenuItem Header="_Text" HotKey="T" Command="{Binding Commands.ToolTextCommand}"/>
                 <MenuItem Header="_Image" HotKey="I" Command="{Binding Commands.ToolImageCommand}"/>
             </MenuItem>
+            <!--  
+            <MenuItem Header="Te_mplate" Items="{Binding Editor.Project.Templates}"/>
+            -->
         </Menu>
         <TreeView
             Items="{Binding Editor.Project.Documents}"
