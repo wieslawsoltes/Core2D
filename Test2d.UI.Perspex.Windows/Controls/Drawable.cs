@@ -38,10 +38,34 @@ namespace TestPerspex
             if (context == null)
                 return;
 
-            context.Invalidate = this.UpdateAndInvalidate;
-
             _state = new ZoomState(context, this.UpdateAndInvalidate);
 
+            context.Invalidate = this.UpdateAndInvalidate;
+
+            context.Commands.ZoomResetCommand =
+                Command.Create(
+                    () => 
+                    {
+                        _state.ResetZoom();
+                        if (context.Invalidate != null)
+                        {
+                            context.Invalidate();
+                        }
+                    },
+                    () => true);
+
+            context.Commands.ZoomExtentCommand =
+                Command.Create(
+                    () => 
+                    {
+                        _state.AutoFit();
+                        if (context.Invalidate != null)
+                        {
+                            context.Invalidate();
+                        }
+                    },
+                    () => true);
+            
             this.Width = (int)context.Editor.Project.CurrentContainer.Width;
             this.Height = (int)context.Editor.Project.CurrentContainer.Height;
 
@@ -213,7 +237,7 @@ namespace TestPerspex
             var color = Color.FromArgb(c.A, c.R, c.G, c.B);
             var brush = new SolidColorBrush(color);
             var rect = new Rect(0, 0, width, height);
-            dc.FillRectange(brush, rect);
+            dc.FillRectangle(brush, rect);
             // TODO: brush.Dispose();
         }
 
