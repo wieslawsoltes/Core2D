@@ -48,7 +48,7 @@ The core library and editor are portable and should work on all platforms where 
 ### Other Dependencies
 
 * [GTK# for .NET](http://www.mono-project.com/download/#download-win) Needed for Eto.Platform.Gtk on Windows.
-* [.net dxf Reader-Writer](http://netdxf.codeplex.com/) Run "git clone https://git01.codeplex.com/netdxf" in project parent directory.
+* [.net dxf Reader-Writer](http://netdxf.codeplex.com/) Run "git submodule update --init" in project directory.
 
 ## Contact
 

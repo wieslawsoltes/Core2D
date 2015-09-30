@@ -55,13 +55,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\netdxf\netDxf\netDxf.csproj">
-      <Project>{785380E0-CEB9-4C34-82E5-60D0E33E848E}</Project>
-      <Name>netDxf</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Test2d\Test2d.csproj">
       <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
       <Name>Test2d</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\netDxf\netDxf\netDxf.csproj">
+      <Project>{785380e0-ceb9-4c34-82e5-60d0e33e848e}</Project>
+      <Name>netDxf</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
