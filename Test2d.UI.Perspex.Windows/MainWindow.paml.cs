@@ -30,6 +30,7 @@ namespace TestPerspex
             
             this.InitializeContext();
             
+
             this.Closed += (sender, e) => _context.Dispose();
         }
 
