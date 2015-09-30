@@ -49,13 +49,15 @@
             Items="{Binding Editor.Project.Documents}"
             Grid.Row="1" Grid.Column="0">
         </TreeView>
-        <local:Drawable Grid.Row="1" Grid.Column="1">
-            <!--
-            <local:Drawable.KeyBindings>
-                <KeyBinding Gesture="N" Command="{Binding Commands.ToolNoneCommand}"/>
-            </local:Drawable.KeyBindings>
-            -->
-        </local:Drawable>
+        <Grid Grid.Row="1" Grid.Column="1" ClipToBounds="True">
+            <local:Drawable>
+                <!--
+                <local:Drawable.KeyBindings>
+                    <KeyBinding Gesture="N" Command="{Binding Commands.ToolNoneCommand}"/>
+                </local:Drawable.KeyBindings>
+                -->
+            </local:Drawable>
+        </Grid>
         <Grid RowDefinitions="Auto,*" Grid.Row="1" Grid.Column="2">
             <!--
             <ComboBox
