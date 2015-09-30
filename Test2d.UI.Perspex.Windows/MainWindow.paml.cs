@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
 using Test2d;
-using System.Diagnostics;
 
 namespace TestPerspex
 {
@@ -30,7 +29,6 @@ namespace TestPerspex
             App.AttachDevTools(this);
             
             this.InitializeContext();
-            
 
             this.Closed += (sender, e) => _context.Dispose();
         }
@@ -58,7 +56,6 @@ namespace TestPerspex
                 {
                     var path = result.FirstOrDefault();
                     _context.Open(path);
-                    _context.Invalidate();
                     if (_context.Invalidate != null)
                     {
                         _context.Invalidate();
