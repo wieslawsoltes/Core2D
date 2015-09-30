@@ -420,19 +420,11 @@ namespace TestPerspex
 
             var sas = line.Style.StartArrowStyle;
             var eas = line.Style.EndArrowStyle;
-            float a1 = (float)(Math.Atan2(y1 - y2, x1 - x2) * 180.0 / Math.PI);
-            float a2 = (float)(Math.Atan2(y2 - y1, x2 - x1) * 180.0 / Math.PI);
+            double a1 = Math.Atan2(y1 - y2, x1 - x2);
+            double a2 = Math.Atan2(y2 - y1, x2 - x1);
 
-            // TODO:
-            /*
-            var t1 = new Matrix();
-            var c1 = new Point(x1, y1);
-            t1.RotateAt(a1, c1);
-
-            var t2 = new Matrix();
-            var c2 = new Point(x2, y2);
-            t2.RotateAt(a2, c2);
-            */
+            var t1 = MatrixHelper.Rotation(a1, new Vector(x1, y1));
+            var t2 = MatrixHelper.Rotation(a2, new Vector(x2, y2));
 
             Point pt1 = default(Point);
             Point pt2 = default(Point);
@@ -452,34 +444,24 @@ namespace TestPerspex
                     break;
                 case ArrowType.Rectangle:
                     {
-                        // TODO:
-                        /*
-                        pt1 = t1.TransformPoint(new Point(x1 - (float)sizeX1, y1));
+                        pt1 = MatrixHelper.TransformPoint(t1, new Point(x1 - (float)sizeX1, y1));
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        _dc.SaveTransform();
-                        _dc.MultiplyTransform(t1);
+                        var d = _dc.PushTransform(t1);
                         DrawRectangleInternal(_dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
-                        _dc.RestoreTransform();
-                        */
+                        d.Dispose();
                     }
                     break;
                 case ArrowType.Ellipse:
                     {
-                        // TODO:
-                        /*
-                        pt1 = t1.TransformPoint(new Point(x1 - (float)sizeX1, y1));
-                        _dc.SaveTransform();
-                        _dc.MultiplyTransform(t1);
+                        pt1 = MatrixHelper.TransformPoint(t1, new Point(x1 - (float)sizeX1, y1));
+                        var d = _dc.PushTransform(t1);
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
                         DrawEllipseInternal(_dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
-                        _dc.RestoreTransform();
-                        */
+                        d.Dispose();
                     }
                     break;
                 case ArrowType.Arrow:
                     {
-                        // TODO:
-                        /*
                         var pts = new Point[]
                         {
                             new Point(x1, y1),
@@ -488,14 +470,13 @@ namespace TestPerspex
                             new Point(x1 - (float)sizeX1, y1 - (float)sizeY1),
                             new Point(x1, y1)
                         };
-                        pt1 = t1.TransformPoint(pts[0]);
-                        var p11 = t1.TransformPoint(pts[1]);
-                        var p21 = t1.TransformPoint(pts[2]);
-                        var p12 = t1.TransformPoint(pts[3]);
-                        var p22 = t1.TransformPoint(pts[4]);
+                        pt1 = MatrixHelper.TransformPoint(t1, pts[0]);
+                        var p11 = MatrixHelper.TransformPoint(t1, pts[1]);
+                        var p21 = MatrixHelper.TransformPoint(t1, pts[2]);
+                        var p12 = MatrixHelper.TransformPoint(t1, pts[3]);
+                        var p22 = MatrixHelper.TransformPoint(t1, pts[4]);
                         DrawLineInternal(_dc, strokeStartArrow, sas.IsStroked, ref p11, ref p21);
                         DrawLineInternal(_dc, strokeStartArrow, sas.IsStroked, ref p12, ref p22);
-                        */
                     }
                     break;
             }
@@ -515,34 +496,24 @@ namespace TestPerspex
                     break;
                 case ArrowType.Rectangle:
                     {
-                        // TODO:
-                        /*
-                        pt2 = t2.TransformPoint(new Point(x2 - (float)sizeX2, y2));
+                        pt2 = MatrixHelper.TransformPoint(t2, new Point(x2 - (float)sizeX2, y2));
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        _dc.SaveTransform();
-                        _dc.MultiplyTransform(t2);
+                        var d = _dc.PushTransform(t2);
                         DrawRectangleInternal(_dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
-                        _dc.RestoreTransform();
-                        */
+                        d.Dispose();
                     }
                     break;
                 case ArrowType.Ellipse:
                     {
-                        // TODO:
-                        /*
-                        pt2 = t2.TransformPoint(new Point(x2 - (float)sizeX2, y2));
-                        _dc.SaveTransform();
-                        _dc.MultiplyTransform(t2);
+                        pt2 = MatrixHelper.TransformPoint(t2, new Point(x2 - (float)sizeX2, y2));
+                        var d = _dc.PushTransform(t2);
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
                         DrawEllipseInternal(_dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
-                        _dc.RestoreTransform();
-                        */
+                        d.Dispose();
                     }
                     break;
                 case ArrowType.Arrow:
                     {
-                        // TODO:
-                        /*
                         var pts = new Point[]
                         {
                             new Point(x2, y2),
@@ -551,14 +522,13 @@ namespace TestPerspex
                             new Point(x2 - (float)sizeX2, y2 - (float)sizeY2),
                             new Point(x2, y2)
                         };
-                        pt2 = t2.TransformPoint(pts[0]);
-                        var p11 = t2.TransformPoint(pts[1]);
-                        var p21 = t2.TransformPoint(pts[2]);
-                        var p12 = t2.TransformPoint(pts[3]);
-                        var p22 = t2.TransformPoint(pts[4]);
+                        pt2 = MatrixHelper.TransformPoint(t2, pts[0]);
+                        var p11 = MatrixHelper.TransformPoint(t2, pts[1]);
+                        var p21 = MatrixHelper.TransformPoint(t2, pts[2]);
+                        var p12 = MatrixHelper.TransformPoint(t2, pts[3]);
+                        var p22 = MatrixHelper.TransformPoint(t2, pts[4]);
                         DrawLineInternal(_dc, strokeEndArrow, eas.IsStroked, ref p11, ref p21);
                         DrawLineInternal(_dc, strokeEndArrow, eas.IsStroked, ref p12, ref p22);
-                        */
                     }
                     break;
             }
