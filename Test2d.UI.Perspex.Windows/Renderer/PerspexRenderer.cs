@@ -226,7 +226,7 @@ namespace TestPerspex
 
             if (isFilled)
             {
-                dc.FillRectange(brush, r);
+                dc.FillRectangle(brush, r);
             }
 
             if (isStroked)
@@ -324,7 +324,7 @@ namespace TestPerspex
         {
             Brush brush = ToSolidBrush(container.Background);
             var rect = new Rect(0, 0, container.Width, container.Height);
-            dc.FillRectange(brush, rect);
+            dc.FillRectangle(brush, rect);
             // TODO: brush.Dispose();
         }
 
