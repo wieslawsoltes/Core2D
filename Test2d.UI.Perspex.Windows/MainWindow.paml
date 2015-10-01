@@ -103,20 +103,19 @@
             </local:Drawable>
         </Grid>
         <Grid RowDefinitions="Auto,*" Grid.Row="1" Grid.Column="2">
-            <!--
-            <ComboBox
+            <DropDown
                 DataContext="{Binding Editor.Project}"
                 Items="{Binding StyleLibraries}"
                 SelectedItem="{Binding Path=CurrentStyleLibrary, Mode=TwoWay}"
-                HorizontalAlignment="Stretch"
                 Grid.Row="0">
-                <ComboBox.DataTemplates>
+                <!--
+                <DropDown.DataTemplates>
                     <DataTemplate DataType="core:StyleLibrary">
                         <TextBlock Text="{Binding Name}"/>
                     </DataTemplate>
-                </ComboBox.DataTemplates>
-            </ComboBox>
-            -->
+                </DropDown.DataTemplates>
+                -->
+            </DropDown>
             <ListBox
                 DataContext="{Binding Editor.Project}"
                 Items="{Binding CurrentStyleLibrary.Styles}"
