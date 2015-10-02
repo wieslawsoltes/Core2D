@@ -3,7 +3,7 @@
 using System;
 using Test2d;
 
-namespace Test2d
+namespace TestPerspex
 {
     /// <summary>
     /// 
@@ -11,7 +11,6 @@ namespace Test2d
     public class ZoomState
     {
         private EditorContext _context;
-        private Action _invalidate;
 
         /// <summary>
         /// 
@@ -72,11 +71,9 @@ namespace Test2d
         /// 
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="invalidate"></param>
-        public ZoomState(EditorContext context, Action invalidate)
+        public ZoomState(EditorContext context)
         {
             _context = context;
-            _invalidate = invalidate;
         }
 
         /// <summary>
@@ -178,7 +175,10 @@ namespace Test2d
                 PanY = OriginY - vy;
                 _context.Editor.Renderers[0].State.PanX = PanX;
                 _context.Editor.Renderers[0].State.PanY = PanY;
-                _invalidate();
+                if (_context.Invalidate != null)
+                {
+                    _context.Invalidate();
+                }
             }
             else
             {
@@ -208,7 +208,11 @@ namespace Test2d
                 return;
 
             ZoomTo(zoom, x, y);
-            _invalidate();
+            
+            if (_context.Invalidate != null)
+            {
+                _context.Invalidate();
+            }
         }
 
         /// <summary>
