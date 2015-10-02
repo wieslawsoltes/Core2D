@@ -38,9 +38,20 @@ namespace TestPerspex
             if (context == null)
                 return;
 
-            _state = new ZoomState(context, this.UpdateAndInvalidate);
+            context.Invalidate = 
+                () =>
+                {
+                    InitializeLayers();
+                    ResizeDrawable();
 
-            context.Invalidate = this.UpdateAndInvalidate;
+                    var container = context.Editor.Project.CurrentContainer;
+                    if (container != null)
+                    {
+                        container.Invalidate();
+                    }
+                };
+            
+            _state = new ZoomState(context);
 
             context.Commands.ZoomResetCommand =
                 Command.Create(
@@ -65,9 +76,6 @@ namespace TestPerspex
                         }
                     },
                     () => true);
-            
-            this.Width = (int)context.Editor.Project.CurrentContainer.Width;
-            this.Height = (int)context.Editor.Project.CurrentContainer.Height;
 
             this.PointerPressed +=
                 (sender, e) =>
@@ -79,20 +87,20 @@ namespace TestPerspex
 
                     if (e.MouseButton == MouseButton.Middle)
                     {
-                        _state.MiddleDown((float)p.X, (float)p.Y);
+                        _state.MiddleDown(p.X, p.Y);
                         // TODO: this.Cursor = Cursors.Pointer;
                     }
 
                     if (e.MouseButton == MouseButton.Left)
                     {
                         this.Focus();
-                        _state.PrimaryDown((float)p.X, (float)p.Y);
+                        _state.PrimaryDown(p.X, p.Y);
                     }
 
                     if (e.MouseButton == MouseButton.Right)
                     {
                         this.Focus();
-                        _state.AlternateDown((float)p.X, (float)p.Y);
+                        _state.AlternateDown(p.X, p.Y);
                     }
                 };
 
@@ -107,20 +115,20 @@ namespace TestPerspex
                     if (e.MouseButton == MouseButton.Middle)
                     {
                         this.Focus();
-                        _state.MiddleUp((float)p.X, (float)p.Y);
+                        _state.MiddleUp(p.X, p.Y);
                         // TODO: this.Cursor = Cursors.Default;
                     }
 
                     if (e.MouseButton == MouseButton.Left)
                     {
                         this.Focus();
-                        _state.PrimaryUp((float)p.X, (float)p.Y);
+                        _state.PrimaryUp(p.X, p.Y);
                     }
 
                     if (e.MouseButton == MouseButton.Right)
                     {
                         this.Focus();
-                        _state.AlternateUp((float)p.X, (float)p.Y);
+                        _state.AlternateUp(p.X, p.Y);
                     }
                 };
 
@@ -131,7 +139,7 @@ namespace TestPerspex
                         return;
                     
                     var p = e.GetPosition(this);
-                    _state.Move((float)p.X, (float)p.Y);
+                    _state.Move(p.X, p.Y);
                 };
 
             this.PointerWheelChanged +=
@@ -141,17 +149,14 @@ namespace TestPerspex
                         return;
                     
                     var p = e.GetPosition(this);
-                    _state.Wheel((float)p.X, (float)p.Y, (float)e.Delta.Y);
+                    _state.Wheel(p.X, p.Y, e.Delta.Y);
                 };
-
-            SetContainerInvalidation();
-            SetDrawableSize();
         }
 
         /// <summary>
         /// 
         /// </summary>
-        private void SetDrawableSize()
+        private void ResizeDrawable()
         {
             var context = this.DataContext as EditorContext;
             if (context == null)
@@ -168,7 +173,7 @@ namespace TestPerspex
         /// <summary>
         /// 
         /// </summary>
-        private void SetContainerInvalidation()
+        private void InitializeLayers()
         {
             var context = this.DataContext as EditorContext;
             if (context == null)
@@ -204,25 +209,6 @@ namespace TestPerspex
                         this.InvalidateVisual();
                     };
             }
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        private void UpdateAndInvalidate()
-        {
-            SetContainerInvalidation();
-            SetDrawableSize();
-
-            var context = this.DataContext as EditorContext;
-            if (context == null)
-                return;
-            
-            var container = context.Editor.Project.CurrentContainer;
-            if (container == null)
-                return;
-
-            container.Invalidate();
         }
 
         /// <summary>
@@ -325,8 +311,10 @@ namespace TestPerspex
             if (_state == null)
             {
                 InitializeDrawable();
+                InitializeLayers();
+                ResizeDrawable();
             }
-            
+
             Draw(context);
         }
     }
