@@ -12,7 +12,7 @@ namespace TestWinForms
     /// <summary>
     /// 
     /// </summary>
-    internal class ContainerPanel : Panel
+    internal class Drawable : Panel
     {
         private ZoomState _state;
 
@@ -29,7 +29,7 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
-        public ContainerPanel()
+        public Drawable()
         {
         }
 
@@ -170,7 +170,7 @@ namespace TestWinForms
         /// <param name="c"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        private void Background(Graphics g, ArgbColor c, double width, double height)
+        private void DrawBackground(Graphics g, ArgbColor c, double width, double height)
         {
             var brush = new SolidBrush(Color.FromArgb(c.A, c.R, c.G, c.B));
             var rect = Rect2.Create(0, 0, width, height);
@@ -207,11 +207,11 @@ namespace TestWinForms
 
             if (container.Template != null)
             {
-                Background(g, container.Template.Background, this.Width, this.Height);
+                DrawBackground(g, container.Template.Background, this.Width, this.Height);
                 renderer.Draw(g, container.Template, container.Properties, null);
             }
 
-            Background(g, container.Background, this.Width, this.Height);
+            DrawBackground(g, container.Background, this.Width, this.Height);
             renderer.Draw(g, container, container.Properties, null);
 
             if (container.WorkingLayer != null)

@@ -72,7 +72,7 @@
     <Compile Include="..\Test2d\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Controls\ContainerPanel.cs">
+    <Compile Include="Controls\Drawable.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\MainForm.cs">

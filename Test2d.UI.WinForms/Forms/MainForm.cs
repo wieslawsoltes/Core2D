@@ -18,7 +18,7 @@ namespace TestWinForms
     /// </summary>
     public partial class MainForm : Form, IView
     {
-        private ContainerPanel _panel;
+        private Drawable _drawable;
 
         /// <summary>
         /// 
@@ -33,6 +33,21 @@ namespace TestWinForms
             InitializeComponent();
 
             InitializeContext();
+            
+            InitializePanel();
+
+            SetContainerInvalidation();
+            SetPanelSize();
+
+            HandlePanelShorcutKeys();
+            HandleMenuShortcutKeys();
+
+            HandleFileDialogs();
+
+            FormClosing += (s, e) => DeInitializeContext();
+
+            UpdateToolMenu();
+            UpdateOptionsMenu();
         }
 
         /// <summary>
@@ -64,21 +79,6 @@ namespace TestWinForms
             context.Editor.GetImageKey = async () => await GetImageKey();
 
             DataContext = context;
-
-            InitializePanel();
-
-            SetContainerInvalidation();
-            SetPanelSize();
-
-            HandlePanelShorcutKeys();
-            HandleMenuShortcutKeys();
-
-            HandleFileDialogs();
-
-            FormClosing += (s, e) => DeInitializeContext();
-
-            UpdateToolMenu();
-            UpdateOptionsMenu();
         }
 
         /// <summary>
@@ -103,21 +103,21 @@ namespace TestWinForms
             if (context == null)
                 return;
 
-            _panel = new ContainerPanel();
+            _drawable = new Drawable();
 
-            _panel.Context = context;
-            _panel.InvalidateContainer = InvalidateContainer;
-            _panel.Initialize();
+            _drawable.Context = context;
+            _drawable.InvalidateContainer = InvalidateContainer;
+            _drawable.Initialize();
 
-            _panel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            _panel.Name = "containerPanel";
-            _panel.TabIndex = 0;
+            _drawable.Anchor = System.Windows.Forms.AnchorStyles.None;
+            _drawable.Name = "containerPanel";
+            _drawable.TabIndex = 0;
 
             this.SuspendLayout();
-            this.Controls.Add(_panel);
+            this.Controls.Add(_drawable);
             this.ResumeLayout(false);
 
-            _panel.Select();
+            _drawable.Select();
         }
 
         /// <summary>
@@ -213,8 +213,8 @@ namespace TestWinForms
             int x = (this.Width - width) / 2;
             int y = (((this.Height) - height) / 2) - (this.menuStrip1.Height / 3);
 
-            _panel.Location = new System.Drawing.Point(x, y);
-            _panel.Size = new System.Drawing.Size(width, height);
+            _drawable.Location = new System.Drawing.Point(x, y);
+            _drawable.Size = new System.Drawing.Size(width, height);
         }
 
         /// <summary>
@@ -232,17 +232,17 @@ namespace TestWinForms
 
             foreach (var layer in container.Layers)
             {
-                layer.InvalidateLayer += (s, e) => _panel.Invalidate();
+                layer.InvalidateLayer += (s, e) => _drawable.Invalidate();
             }
 
             if (container.WorkingLayer != null)
             {
-                container.WorkingLayer.InvalidateLayer += (s, e) => _panel.Invalidate();
+                container.WorkingLayer.InvalidateLayer += (s, e) => _drawable.Invalidate();
             }
             
             if (container.HelperLayer != null)
             {
-                container.HelperLayer.InvalidateLayer += (s, e) => _panel.Invalidate();
+                container.HelperLayer.InvalidateLayer += (s, e) => _drawable.Invalidate();
             }
         }
 
@@ -324,7 +324,7 @@ namespace TestWinForms
         /// </summary>
         private void HandlePanelShorcutKeys()
         {
-            _panel.KeyDown += (sender, e) =>
+            _drawable.KeyDown += (sender, e) =>
             {
                 if (e.Control || e.Alt || e.Shift)
                     return;
@@ -387,10 +387,10 @@ namespace TestWinForms
                         OnSetTryToConnect();
                         break;
                     case Keys.Z:
-                        _panel.ResetZoom();
+                        _drawable.ResetZoom();
                         break;
                     case Keys.X:
-                        _panel.AutoFit();
+                        _drawable.AutoFit();
                         break;
                 }
             };
