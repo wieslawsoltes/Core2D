@@ -62,8 +62,14 @@
                 <MenuItem Header="_Text" HotKey="T" Command="{Binding Commands.ToolTextCommand}"/>
                 <MenuItem Header="_Image" HotKey="I" Command="{Binding Commands.ToolImageCommand}"/>
             </MenuItem>
-            <!--  
-            <MenuItem Header="Te_mplate" Items="{Binding Editor.Project.Templates}"/>
+            <!--
+            <MenuItem Header="Te_mplate" Items="{Binding Editor.Project.Templates}">
+                <DropDown.DataTemplates>
+                    <DataTemplate DataType="core:Container">
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </DropDown.DataTemplates>
+            </MenuItem>
             -->
             <MenuItem Header="_Options">
                 <MenuItem Header="Default is Stro_ked" HotKey="K" Command="{Binding Commands.DefaultIsStrokedCommand}"/>
@@ -76,22 +82,39 @@
         </Menu>
         <Grid RowDefinitions="35*,35*,30*" Grid.Row="1" Grid.Column="0">
             <ListBox
-                DataContext="{Binding Editor.Project}"
-                Items="{Binding Documents}"
-                SelectedItem="{Binding Path=CurrentDocument, Mode=TwoWay}"
+                Items="{Binding Editor.Project.Documents}"
+                SelectedItem="{Binding Path=Editor.Project.CurrentDocument, Mode=TwoWay}"
                 Grid.Row="0">
+                <ListBox.DataTemplates>
+                    <DataTemplate DataType="core:Document">
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListBox.DataTemplates>
             </ListBox>
             <ListBox
-                DataContext="{Binding Editor.Project}"
-                Items="{Binding CurrentDocument.Containers}"
-                SelectedItem="{Binding Path=CurrentContainer, Mode=TwoWay}"
+                Items="{Binding Editor.Project.CurrentDocument.Containers}"
+                SelectedItem="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}"
                 Grid.Row="1">
+                <ListBox.DataTemplates>
+                    <DataTemplate DataType="core:Container">
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListBox.DataTemplates>
             </ListBox>
+            <!--
             <TreeView
-                DataContext="{Binding Editor.Project}"
-                Items="{Binding Documents}"
+                Items="{Binding Editor.Project.Documents}"
                 Grid.Row="2">
+                <ListBox.DataTemplates>
+                    <DataTemplate DataType="core:Document">
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="core:Container">
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListBox.DataTemplates>
             </TreeView>
+            -->
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1" ClipToBounds="True">
             <local:Drawable>
@@ -104,30 +127,24 @@
         </Grid>
         <Grid RowDefinitions="Auto,*" Grid.Row="1" Grid.Column="2">
             <DropDown
-                DataContext="{Binding Editor.Project}"
-                Items="{Binding StyleLibraries}"
-                SelectedItem="{Binding Path=CurrentStyleLibrary, Mode=TwoWay}"
+                Items="{Binding Editor.Project.StyleLibraries}"
+                SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}"
                 Grid.Row="0">
-                <!--
                 <DropDown.DataTemplates>
                     <DataTemplate DataType="core:StyleLibrary">
                         <TextBlock Text="{Binding Name}"/>
                     </DataTemplate>
                 </DropDown.DataTemplates>
-                -->
             </DropDown>
             <ListBox
-                DataContext="{Binding Editor.Project}"
-                Items="{Binding CurrentStyleLibrary.Styles}"
-                SelectedItem="{Binding Path=CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}"
+                Items="{Binding Editor.Project.CurrentStyleLibrary.Styles}"
+                SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}"
                 Grid.Row="1">
-                <!--
                 <ListBox.DataTemplates>
                     <DataTemplate DataType="core:ShapeStyle">
                         <TextBlock Text="{Binding Name}"/>
                     </DataTemplate>
                 </ListBox.DataTemplates>
-                -->
             </ListBox>
         </Grid>
     </Grid>
