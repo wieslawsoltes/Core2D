@@ -44,6 +44,73 @@ namespace TestPerspex
         /// <summary>
         /// 
         /// </summary>
+        private void InitializeContext()
+        {
+            _context = new EditorContext()
+            {
+                View = this,
+                Renderers = new IRenderer[] { new PerspexRenderer() },
+                ProjectFactory = new ProjectFactory(),
+                TextClipboard = new TextClipboard(),
+                Serializer = new NewtonsoftSerializer(),
+                PdfWriter = new PdfWriter(),
+                DxfWriter = new DxfWriter(),
+                CsvReader = new CsvHelperReader(),
+                CsvWriter = new CsvHelperWriter()
+            };
+
+            _context.InitializeEditor(new TraceLog());
+
+            _context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
+            _context.Editor.GetImageKey = async () => await OnGetImageKey();
+
+            _context.Commands.OpenCommand =
+                Command<object>.Create(
+                    async (parameter) => await OnOpen(parameter),
+                    (parameter) => _context.IsEditMode());
+
+            _context.Commands.SaveCommand =
+                Command.Create(
+                    async () => await OnSave(),
+                    () => _context.IsEditMode());
+
+            _context.Commands.SaveAsCommand =
+                Command.Create(
+                    async () => await OnSaveAs(),
+                    () => _context.IsEditMode());
+
+            _context.Commands.ExportCommand =
+                Command<object>.Create(
+                    async (item) => await OnExport(),
+                    (item) => _context.IsEditMode());
+
+            // TODO: Initialize other commands.
+
+            DataContext = _context;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private async Task<string> OnGetImageKey()
+        {
+            var dlg = new OpenFileDialog();
+            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+            var result = await dlg.ShowAsync(this);
+            if (result != null)
+            {
+                var path = result.FirstOrDefault();
+                var bytes = System.IO.File.ReadAllBytes(path);
+                var key = _context.Editor.Project.AddImageFromFile(path, bytes);
+                return key;
+            }
+            return null;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         private async Task OnOpen(object parameter)
         {
             if (parameter == null)
@@ -133,71 +200,6 @@ namespace TestPerspex
                     Process.Start(result);
                 }
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void InitializeContext()
-        {
-            _context = new EditorContext()
-            {
-                View = this,
-                Renderers = new IRenderer[] { new PerspexRenderer() },
-                ProjectFactory = new ProjectFactory(),
-                TextClipboard = new TextClipboard(),
-                Serializer = new NewtonsoftSerializer(),
-                PdfWriter = new PdfWriter(),
-                DxfWriter = new DxfWriter(),
-                CsvReader = new CsvHelperReader(),
-                CsvWriter = new CsvHelperWriter()
-            };
-            _context.InitializeEditor(new TraceLog());
-            _context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
-            _context.Editor.GetImageKey = async () => await GetImageKey();
-
-            _context.Commands.OpenCommand =
-                Command<object>.Create(
-                    async (parameter) => await OnOpen(parameter),
-                    (parameter) => _context.IsEditMode());
-
-            _context.Commands.SaveCommand =
-                Command.Create(
-                    async () => await OnSave(),
-                    () => _context.IsEditMode());
-
-            _context.Commands.SaveAsCommand =
-                Command.Create(
-                    async () => await OnSaveAs(),
-                    () => _context.IsEditMode());
-
-            _context.Commands.ExportCommand =
-                Command<object>.Create(
-                    async  (item) => await OnExport(),
-                    (item) => _context.IsEditMode());
-
-            // TODO: Initialize other commands.
-
-            DataContext = _context;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public async Task<string> GetImageKey()
-        {
-            var dlg = new OpenFileDialog();
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            var result = await dlg.ShowAsync(this);
-            if (result != null)
-            {
-                var path = result.FirstOrDefault();
-                var bytes = System.IO.File.ReadAllBytes(path);
-                var key = _context.Editor.Project.AddImageFromFile(path, bytes);
-                return key;
-            }
-            return null;
         }
     }
 }
