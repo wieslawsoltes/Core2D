@@ -159,9 +159,11 @@ namespace TestPerspex
         private void ResizeDrawable()
         {
             var context = this.DataContext as EditorContext;
-            if (context == null)
+            if (context == null
+                || context.Editor == null
+                || context.Editor.Project == null)
                 return;
-            
+
             var container = context.Editor.Project.CurrentContainer;
             if (container == null)
                 return;
@@ -176,7 +178,9 @@ namespace TestPerspex
         private void InitializeLayers()
         {
             var context = this.DataContext as EditorContext;
-            if (context == null)
+            if (context == null 
+                || context.Editor == null 
+                || context.Editor.Project == null)
                 return;
             
             var container = context.Editor.Project.CurrentContainer;
@@ -234,9 +238,11 @@ namespace TestPerspex
         private void Draw(IDrawingContext dc)
         {
             var context = this.DataContext as EditorContext;
-            if (context == null)
+            if (context == null
+                || context.Editor == null
+                || context.Editor.Project == null)
                 return;
-            
+
             // TODO: Disable anti-aliasing.
 
             var translate = dc.PushTransform(Matrix.CreateTranslation(_state.PanX, _state.PanY));
