@@ -62,7 +62,6 @@
                 <MenuItem Header="_Text" HotKey="T" Command="{Binding Commands.ToolTextCommand}"/>
                 <MenuItem Header="_Image" HotKey="I" Command="{Binding Commands.ToolImageCommand}"/>
             </MenuItem>
-            <!--
             <MenuItem Header="Te_mplate" Items="{Binding Editor.Project.Templates}">
                 <DropDown.DataTemplates>
                     <DataTemplate DataType="core:Container">
@@ -70,7 +69,6 @@
                     </DataTemplate>
                 </DropDown.DataTemplates>
             </MenuItem>
-            -->
             <MenuItem Header="_Options">
                 <MenuItem Header="Default is Stro_ked" HotKey="K" Command="{Binding Commands.DefaultIsStrokedCommand}"/>
                 <MenuItem Header="Default is _Filled" HotKey="F" Command="{Binding Commands.DefaultIsFilledCommand}"/>
