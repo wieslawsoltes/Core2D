@@ -80,11 +80,23 @@
                 <MenuItem Header="Try To _Connect" HotKey="C" Command="{Binding Commands.TryToConnectCommand}"/>
             </MenuItem>
         </Menu>
-        <Grid RowDefinitions="35*,35*,30*" Grid.Row="1" Grid.Column="0">
+        <Grid RowDefinitions="40*,30*,30*" Grid.Row="1" Grid.Column="0">
+            <TreeView
+                Items="{Binding Editor.Project.Documents}"
+                Grid.Row="0">
+                <TreeView.DataTemplates>
+                    <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Containers}">
+                        <TextBlock Text="{Binding Name}"/>
+                    </TreeDataTemplate>
+                    <DataTemplate DataType="core:Container">
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </TreeView.DataTemplates>
+            </TreeView>
             <ListBox
                 Items="{Binding Editor.Project.Documents}"
                 SelectedItem="{Binding Path=Editor.Project.CurrentDocument, Mode=TwoWay}"
-                Grid.Row="0">
+                Grid.Row="1">
                 <ListBox.DataTemplates>
                     <DataTemplate DataType="core:Document">
                         <TextBlock Text="{Binding Name}"/>
@@ -94,25 +106,13 @@
             <ListBox
                 Items="{Binding Editor.Project.CurrentDocument.Containers}"
                 SelectedItem="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}"
-                Grid.Row="1">
+                Grid.Row="2">
                 <ListBox.DataTemplates>
                     <DataTemplate DataType="core:Container">
                         <TextBlock Text="{Binding Name}"/>
                     </DataTemplate>
                 </ListBox.DataTemplates>
             </ListBox>
-            <TreeView
-                Items="{Binding Editor.Project.Documents}"
-                Grid.Row="2">
-                <ListBox.DataTemplates>
-                    <DataTemplate DataType="core:Document">
-                        <TextBlock Text="{Binding Name}"/>
-                    </DataTemplate>
-                    <DataTemplate DataType="core:Container">
-                        <TextBlock Text="{Binding Name}"/>
-                    </DataTemplate>
-                </ListBox.DataTemplates>
-            </TreeView>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1" ClipToBounds="True">
             <local:Drawable>
