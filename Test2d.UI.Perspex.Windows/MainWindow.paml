@@ -101,7 +101,6 @@
                     </DataTemplate>
                 </ListBox.DataTemplates>
             </ListBox>
-            <!--
             <TreeView
                 Items="{Binding Editor.Project.Documents}"
                 Grid.Row="2">
@@ -114,7 +113,6 @@
                     </DataTemplate>
                 </ListBox.DataTemplates>
             </TreeView>
-            -->
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1" ClipToBounds="True">
             <local:Drawable>
