@@ -1759,99 +1759,7 @@
             </ItemsControl>
         </Grid>
     </DataTemplate>
-    <ControlTemplate x:Key="RecordControlTemplateKey">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Control Template="{StaticResource RecordMenu}" Grid.Row="0" Margin="2,0,2,0"/>
-            <ContentControl Content="{Binding Record}" Grid.Row="1"/>
-        </Grid>
-    </ControlTemplate>
-    <ControlTemplate x:Key="ColumnsControlTemplateKey">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Control Template="{StaticResource ColumnsMenu}" Grid.Row="0" Margin="2,0,2,0"/>
-            <Grid Height="Auto" VerticalAlignment="Top" Grid.Row="1">
-                <Grid.Style>
-                    <Style TargetType="Grid">
-                        <Setter Property="Visibility" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Columns.Length, FallbackValue=0}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Grid.Style>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="30"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock 
-                    Grid.Column="0" 
-                    Grid.Row="0"
-                    Margin="5,2,5,2" 
-                    VerticalAlignment="Center" 
-                    Text="Name">
-                </TextBlock>
-            </Grid>
-            <ItemsControl 
-                x:Name="columnsItemsControls"
-                VerticalContentAlignment="Stretch" 
-                VerticalAlignment="Stretch" 
-                Grid.Row="2"
-                ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Height="Auto" VerticalAlignment="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="30"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <TextBox 
-                                Grid.Column="0" 
-                                Grid.Row="0"
-                                Margin="5,2,5,2" 
-                                VerticalAlignment="Center" 
-                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            </TextBox>
-                            <Button 
-                                Grid.Column="1" 
-                                Grid.Row="0" 
-                                Margin="5,2,5,2" 
-                                VerticalAlignment="Center" 
-                                Content="-" 
-                                Command="{Binding DataContext.Commands.RemoveColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
-                                <Button.CommandParameter>
-                                    <MultiBinding Converter="{StaticResource ColumnParameterConverter}">
-                                        <Binding Path="DataContext" ElementName="columnsItemsControls"/>
-                                        <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
-                                    </MultiBinding>
-                                </Button.CommandParameter>
-                            </Button>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </Grid>
-    </ControlTemplate>
-    <ControlTemplate x:Key="DatabaseControlTemplateKey">
+    <DataTemplate DataType="{x:Type core:Database}">
         <StackPanel>
             <Grid>
                 <Grid.RowDefinitions>
@@ -1878,7 +1786,86 @@
             <Expander
                 Header="Columns" 
                 IsExpanded="True">
-                <Control Template="{StaticResource ColumnsControlTemplateKey}"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Control Template="{StaticResource ColumnsMenu}" Grid.Row="0" Margin="2,0,2,0"/>
+                    <Grid Height="Auto" VerticalAlignment="Top" Grid.Row="1">
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Columns.Length, FallbackValue=0}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock 
+                            Grid.Column="0" 
+                            Grid.Row="0"
+                            Margin="5,2,5,2" 
+                            VerticalAlignment="Center" 
+                            Text="Name">
+                        </TextBlock>
+                    </Grid>
+                    <ItemsControl 
+                        x:Name="columnsItemsControls"
+                        VerticalContentAlignment="Stretch" 
+                        VerticalAlignment="Stretch" 
+                        Grid.Row="2"
+                        ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="Auto" VerticalAlignment="Top">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBox 
+                                        Grid.Column="0" 
+                                        Grid.Row="0"
+                                        Margin="5,2,5,2" 
+                                        VerticalAlignment="Center" 
+                                        Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    </TextBox>
+                                    <Button 
+                                        Grid.Column="1" 
+                                        Grid.Row="0" 
+                                        Margin="5,2,5,2" 
+                                        VerticalAlignment="Center" 
+                                        Content="-" 
+                                        Command="{Binding DataContext.Commands.RemoveColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+                                        <Button.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource ColumnParameterConverter}">
+                                                <Binding Path="DataContext" ElementName="columnsItemsControls"/>
+                                                <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
+                                            </MultiBinding>
+                                        </Button.CommandParameter>
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
             </Expander>
             <Expander 
                 Header="Current Record" 
@@ -1886,11 +1873,18 @@
                 <ContentControl Content="{Binding CurrentRecord}"/>
             </Expander>
         </StackPanel>
-    </ControlTemplate>
+    </DataTemplate>
     <ControlTemplate x:Key="DataControlTemplate">
         <TabControl>
             <TabItem Header="Record">
-                <Control Template="{StaticResource RecordControlTemplateKey}"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Control Template="{StaticResource RecordMenu}" Grid.Row="0" Margin="2,0,2,0"/>
+                    <ContentControl Content="{Binding Record}" Grid.Row="1"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Bindings">
                 <Control Template="{StaticResource BindingsControlTemplateKey}"/>
