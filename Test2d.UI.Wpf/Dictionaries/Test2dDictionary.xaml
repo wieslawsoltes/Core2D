@@ -8,6 +8,42 @@
     xmlns:converters="clr-namespace:Test.Converters"
     xmlns:controls="clr-namespace:Test.Controls"
     xmlns:p="clr-namespace:Test2d.UI.Wpf.Properties">
+    <!-- enums -->
+    <ObjectDataProvider x:Key="MoveModeValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+        <ObjectDataProvider.MethodParameters>
+            <x:Type TypeName="core:MoveMode"/>
+        </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
+    <ObjectDataProvider x:Key="TextHAlignmentValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+        <ObjectDataProvider.MethodParameters>
+            <x:Type TypeName="core:TextHAlignment"/>
+        </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
+    <ObjectDataProvider x:Key="TextVAlignmentValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+        <ObjectDataProvider.MethodParameters>
+            <x:Type TypeName="core:TextVAlignment"/>
+        </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
+    <ObjectDataProvider x:Key="ArrowTypeValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+        <ObjectDataProvider.MethodParameters>
+            <x:Type TypeName="core:ArrowType"/>
+        </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
+    <ObjectDataProvider x:Key="LineCapValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+        <ObjectDataProvider.MethodParameters>
+            <x:Type TypeName="core:LineCap"/>
+        </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
+    <ObjectDataProvider x:Key="XSweepDirectionValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+        <ObjectDataProvider.MethodParameters>
+            <x:Type TypeName="core:XSweepDirection"/>
+        </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
+    <ObjectDataProvider x:Key="XFillRuleValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+        <ObjectDataProvider.MethodParameters>
+            <x:Type TypeName="core:XFillRule"/>
+        </ObjectDataProvider.MethodParameters>
+    </ObjectDataProvider>
     <!-- brushes -->
     <SolidColorBrush x:Key="BackgroundColor" Color="White" />
     <SolidColorBrush x:Key="DarkSquareColor" Color="DarkGray" />
@@ -231,42 +267,6 @@
     <converters:ValueParameterConverter x:Key="ValueParameterConverter"/>
     <converters:ShapeBindingParameterConverter x:Key="ShapeBindingParameterConverter"/>
     <converters:ShapePropertyParameterConverter x:Key="ShapePropertyParameterConverter"/>
-    <!-- enums -->
-    <ObjectDataProvider x:Key="MoveModeValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
-        <ObjectDataProvider.MethodParameters>
-            <x:Type TypeName="core:MoveMode"/>
-        </ObjectDataProvider.MethodParameters>
-    </ObjectDataProvider>
-    <ObjectDataProvider x:Key="TextHAlignmentValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
-        <ObjectDataProvider.MethodParameters>
-            <x:Type TypeName="core:TextHAlignment"/>
-        </ObjectDataProvider.MethodParameters>
-    </ObjectDataProvider>
-    <ObjectDataProvider x:Key="TextVAlignmentValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
-        <ObjectDataProvider.MethodParameters>
-            <x:Type TypeName="core:TextVAlignment"/>
-        </ObjectDataProvider.MethodParameters>
-    </ObjectDataProvider>
-    <ObjectDataProvider x:Key="ArrowTypeValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
-        <ObjectDataProvider.MethodParameters>
-            <x:Type TypeName="core:ArrowType"/>
-        </ObjectDataProvider.MethodParameters>
-    </ObjectDataProvider>
-    <ObjectDataProvider x:Key="LineCapValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
-        <ObjectDataProvider.MethodParameters>
-            <x:Type TypeName="core:LineCap"/>
-        </ObjectDataProvider.MethodParameters>
-    </ObjectDataProvider>
-    <ObjectDataProvider x:Key="XSweepDirectionValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
-        <ObjectDataProvider.MethodParameters>
-            <x:Type TypeName="core:XSweepDirection"/>
-        </ObjectDataProvider.MethodParameters>
-    </ObjectDataProvider>
-    <ObjectDataProvider x:Key="XFillRuleValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
-        <ObjectDataProvider.MethodParameters>
-            <x:Type TypeName="core:XFillRule"/>
-        </ObjectDataProvider.MethodParameters>
-    </ObjectDataProvider>
     <!-- styles -->
     <Style x:Key="TextBlockLeftStyleKey" TargetType="TextBlock">
         <Setter Property="Margin" Value="5,2,5,2"/>
