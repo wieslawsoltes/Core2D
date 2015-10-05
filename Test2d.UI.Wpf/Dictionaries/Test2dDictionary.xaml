@@ -1310,7 +1310,7 @@
             </TabItem>
         </TabControl>
     </DataTemplate>
-    <!-- data -->
+    <!-- menus -->
     <ControlTemplate x:Key="BindingsMenu">
         <Menu Background="Transparent" HorizontalAlignment="Right">
             <MenuItem
@@ -1320,6 +1320,34 @@
             </MenuItem>
         </Menu>
     </ControlTemplate>
+    <ControlTemplate x:Key="PropertiesMenu">
+        <Menu Background="Transparent" HorizontalAlignment="Right">
+            <MenuItem 
+                Command="{Binding DataContext.Commands.AddPropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                CommandParameter="{Binding}" 
+                Header="+">
+            </MenuItem>
+        </Menu>
+    </ControlTemplate>
+    <ControlTemplate x:Key="RecordMenu">
+        <Menu Background="Transparent" HorizontalAlignment="Right">
+            <MenuItem 
+                Command="{Binding DataContext.Commands.ResetRecordCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                CommandParameter="{Binding}" 
+                Header="X">
+            </MenuItem>
+        </Menu>
+    </ControlTemplate>
+    <ControlTemplate x:Key="ColumnsMenu">
+        <Menu Background="Transparent" HorizontalAlignment="Right">
+            <MenuItem 
+                Command="{Binding DataContext.Commands.AddColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                CommandParameter="{Binding}" 
+                Header="+">
+            </MenuItem>
+        </Menu>
+    </ControlTemplate>
+    <!-- data -->
     <ControlTemplate x:Key="BindingsControlTemplateKey">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -1432,15 +1460,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
-    </ControlTemplate>
-    <ControlTemplate x:Key="PropertiesMenu">
-        <Menu Background="Transparent" HorizontalAlignment="Right">
-            <MenuItem 
-                Command="{Binding DataContext.Commands.AddPropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                CommandParameter="{Binding}" 
-                Header="+">
-            </MenuItem>
-        </Menu>
     </ControlTemplate>
     <ControlTemplate x:Key="PropertiesControlTemplateKey">
         <Grid>
@@ -1652,15 +1671,6 @@
             </ItemsControl>
         </Grid>
     </ControlTemplate>
-    <ControlTemplate x:Key="RecordMenu">
-        <Menu Background="Transparent" HorizontalAlignment="Right">
-            <MenuItem 
-                Command="{Binding DataContext.Commands.ResetRecordCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                CommandParameter="{Binding}" 
-                Header="X">
-            </MenuItem>
-        </Menu>
-    </ControlTemplate>
     <DataTemplate DataType="{x:Type core:Record}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -1761,15 +1771,6 @@
             <Control Template="{StaticResource RecordMenu}" Grid.Row="0" Margin="2,0,2,0"/>
             <ContentControl Content="{Binding Record}" Grid.Row="1"/>
         </Grid>
-    </ControlTemplate>
-    <ControlTemplate x:Key="ColumnsMenu">
-        <Menu Background="Transparent" HorizontalAlignment="Right">
-            <MenuItem 
-                Command="{Binding DataContext.Commands.AddColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                CommandParameter="{Binding}" 
-                Header="+">
-            </MenuItem>
-        </Menu>
     </ControlTemplate>
     <ControlTemplate x:Key="ColumnsControlTemplateKey">
         <Grid>
@@ -2717,7 +2718,7 @@
             </Expander>
         </StackPanel>
     </DataTemplate>
-    <!-- project -->
+    <!-- context menus -->
     <ContextMenu x:Key="ContainerContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
         <MenuItem 
             Header="Te_mplate" 
@@ -2860,6 +2861,7 @@
             CommandParameter="{Binding}">
         </MenuItem>
     </ContextMenu>
+    <!-- project -->
     <DataTemplate DataType="{x:Type core:Options}">
         <TabControl>
             <TabItem Header="{x:Static p:Resources.OptionsHeaderGeneral}">
