@@ -300,35 +300,6 @@
         <Setter Property="Margin" Value="5,2,5,2"/>
     </Style>
     <!-- shape -->
-    <ControlTemplate x:Key="StyleControlTemplateKey">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock 
-                Text="Style" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="0">
-            </TextBlock>
-            <ComboBox 
-                ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
-                Style="{StaticResource ComboBoxStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="1">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-        </Grid>
-    </ControlTemplate>
     <ControlTemplate x:Key="StateControlTemplateKey">
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Default" Margin="1"
@@ -1694,7 +1665,33 @@
                     Grid.Column="1">
                 </TextBox>
             </Grid>
-            <Control Template="{StaticResource StyleControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Style" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <ComboBox 
+                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
+                    Style="{StaticResource ComboBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -1758,7 +1755,33 @@
                     Grid.Column="1">
                 </TextBox>
             </Grid>
-            <Control Template="{StaticResource StyleControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Style" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <ComboBox 
+                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
+                    Style="{StaticResource ComboBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -1996,7 +2019,33 @@
                     Grid.Column="1">
                 </TextBox>
             </Grid>
-            <Control Template="{StaticResource StyleControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Style" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <ComboBox 
+                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
+                    Style="{StaticResource ComboBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2108,7 +2157,33 @@
                     Grid.Column="1">
                 </TextBox>
             </Grid>
-            <Control Template="{StaticResource StyleControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Style" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <ComboBox 
+                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
+                    Style="{StaticResource ComboBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2200,7 +2275,33 @@
                     Grid.Column="1">
                 </TextBox>
             </Grid>
-            <Control Template="{StaticResource StyleControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Style" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <ComboBox 
+                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
+                    Style="{StaticResource ComboBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2292,7 +2393,33 @@
                     Grid.Column="1">
                 </TextBox>
             </Grid>
-            <Control Template="{StaticResource StyleControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Style" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <ComboBox 
+                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
+                    Style="{StaticResource ComboBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2381,7 +2508,33 @@
                     Grid.Column="1">
                 </TextBox>
             </Grid>
-            <Control Template="{StaticResource StyleControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Style" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <ComboBox 
+                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
+                    Style="{StaticResource ComboBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2449,7 +2602,33 @@
                     Grid.Column="1">
                 </TextBox>
             </Grid>
-            <Control Template="{StaticResource StyleControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Style" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <ComboBox 
+                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
+                    Style="{StaticResource ComboBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2748,7 +2927,33 @@
                     Grid.Column="1">
                 </TextBox>
             </Grid>
-            <Control Template="{StaticResource StyleControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Style" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <ComboBox 
+                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
+                    Style="{StaticResource ComboBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
