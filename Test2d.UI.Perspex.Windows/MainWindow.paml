@@ -5,6 +5,52 @@
         xmlns:core="clr-namespace:Test2d;assembly=Test2d"
         Width="1240" Height="670"
         Title="Test2d">
+    
+    <Window.Styles>
+        <Style Selector="TextBlock.left">
+            <Setter Property="TextBlock.Margin" Value="5,2,5,2"/>
+            <Setter Property="TextBlock.TextAlignment" Value="Left"/>
+            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="TextBox.left">
+            <Setter Property="TextBox.BorderBrush" Value="Transparent"/>
+            <Setter Property="TextBox.Margin" Value="5,2,5,2"/>
+            <!--<Setter Property="TextBox.TextAlignment" Value="Left"/>-->
+            <Setter Property="TextBox.VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="TextBlock.center">
+            <Setter Property="TextBlock.Margin" Value="5,2,5,2"/>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="TextBox.center">
+            <Setter Property="TextBox.BorderBrush" Value="Transparent"/>
+            <Setter Property="TextBox.Margin" Value="5,2,5,2"/>
+            <!--<Setter Property="TextBox.TextAlignment" Value="Center"/>-->
+            <Setter Property="TextBox.VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="CheckBox.default">
+            <Setter Property="CheckBox.Margin" Value="5,2,5,2"/>
+        </Style>
+        <!--
+        <Style Selector="ComboBox.default">
+            <Setter Property="ComboBox.Margin" Value="5,2,5,2"/>
+        </Style>
+        <Style TargetType="Slider.default">
+            <Setter Property="Slider.Margin" Value="5,2,5,2"/>
+        </Style>
+        -->
+    </Window.Styles>
+    
+    <Window.DataTemplates>
+        <DataTemplate DataType="core:XRectangle">
+            <TextBlock Text="{Binding Style.Name}"/>
+        </DataTemplate>
+        <DataTemplate DataType="core:XEllipse">
+            <TextBlock Text="{Binding Style.Name}"/>
+        </DataTemplate>
+    </Window.DataTemplates>
+            
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="150,*,150">
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <MenuItem Header="_File">
@@ -121,7 +167,7 @@
                 -->
             </local:Drawable>
         </Grid>
-        <Grid RowDefinitions="Auto,*" Grid.Row="1" Grid.Column="2">
+        <Grid RowDefinitions="Auto,50*,50*" Grid.Row="1" Grid.Column="2">
             <DropDown
                 Items="{Binding Editor.Project.StyleLibraries}"
                 SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}"
@@ -142,6 +188,17 @@
                     </DataTemplate>
                 </ListBox.DataTemplates>
             </ListBox>
+
+            
+                
+            <ContentControl 
+                Content="{Binding Editor.Project.CurrentContainer.CurrentShape}"
+                Grid.Row="2">
+            </ContentControl>  
+        
+        
+    
         </Grid>
     </Grid>
+
 </Window>
