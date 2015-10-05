@@ -45,9 +45,9 @@
         </ObjectDataProvider.MethodParameters>
     </ObjectDataProvider>
     <!-- brushes -->
-    <SolidColorBrush x:Key="BackgroundColor" Color="White" />
-    <SolidColorBrush x:Key="DarkSquareColor" Color="DarkGray" />
-    <SolidColorBrush x:Key="LightSquareColor" Color="LightGray" />
+    <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
+    <SolidColorBrush x:Key="DarkSquareColor" Color="DarkGray"/>
+    <SolidColorBrush x:Key="LightSquareColor" Color="LightGray"/>
     <DrawingBrush x:Key="CheckerBoard" Viewport="0,0,20,20" ViewportUnits="Absolute" Stretch="None" TileMode="Tile">
         <DrawingBrush.Drawing>
             <DrawingGroup>
@@ -4454,8 +4454,8 @@
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemContainerStyle>
                 <Style TargetType="ContentPresenter">
-                    <Setter Property="Width" Value="{Binding Path=DataContext.Width, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}" />
-                    <Setter Property="Height" Value="{Binding Path=DataContext.Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}" />
+                    <Setter Property="Width" Value="{Binding Path=DataContext.Width, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}"/>
+                    <Setter Property="Height" Value="{Binding Path=DataContext.Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}"/>
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>
