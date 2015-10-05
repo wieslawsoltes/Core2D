@@ -119,79 +119,6 @@
     <Style x:Key="SliderStyleKey" TargetType="Slider">
         <Setter Property="Margin" Value="5,2,5,2"/>
     </Style>
-    <!-- common -->
-    <ControlTemplate x:Key="IsStrokedControlTemplateKey">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock 
-                Text="IsStroked" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="0"
-                Grid.Column="0">
-            </TextBlock>
-            <CheckBox 
-                Content=""
-                IsChecked="{Binding IsStroked}"
-                Style="{StaticResource CheckBoxStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="1">
-            </CheckBox>
-        </Grid>
-    </ControlTemplate>
-    <ControlTemplate x:Key="IsFilledControlTemplateKey">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock 
-                Text="IsFilled" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="0"
-                Grid.Column="0">
-            </TextBlock>
-            <CheckBox 
-                Content=""
-                IsChecked="{Binding IsFilled}"
-                Style="{StaticResource CheckBoxStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="1">
-            </CheckBox>
-        </Grid>
-    </ControlTemplate>
-    <ControlTemplate x:Key="IsSmoothJoinControlTemplateKey">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock 
-                Text="IsSmoothJoin" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="0"
-                Grid.Column="0">
-            </TextBlock>
-            <CheckBox 
-                Content=""
-                IsChecked="{Binding IsSmoothJoin}"
-                Style="{StaticResource CheckBoxStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="1">
-            </CheckBox>
-        </Grid>
-    </ControlTemplate>
     <!-- path -->
     <DataTemplate DataType="{x:Type core:XPathSize}">
         <Grid>
@@ -234,8 +161,50 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XArcSegment}">
         <StackPanel>
-            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
-            <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsSmoothJoin" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsSmoothJoin}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -299,8 +268,50 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XBezierSegment}">
         <StackPanel>
-            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
-            <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsSmoothJoin" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsSmoothJoin}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Expander Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
             </Expander>
@@ -314,8 +325,50 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XLineSegment}">
         <StackPanel>
-            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
-            <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsSmoothJoin" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsSmoothJoin}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Expander Header="Point">
                 <ContentControl Content="{Binding Point}"/>
             </Expander>
@@ -323,8 +376,50 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XPolyBezierSegment}">
         <StackPanel>
-            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
-            <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsSmoothJoin" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsSmoothJoin}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Expander Header="Points">
                 <ListBox
                     ItemsSource="{Binding Points}"
@@ -338,8 +433,72 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XPolyLineSegment}">
         <StackPanel>
-            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
-            <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsSmoothJoin" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsSmoothJoin}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Expander Header="Points">
                 <ListBox
                     ItemsSource="{Binding Points}"
@@ -352,8 +511,50 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XPolyQuadraticBezierSegment}">
         <StackPanel>
-            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
-            <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsSmoothJoin" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsSmoothJoin}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Expander Header="Points">
                 <ListBox
                     ItemsSource="{Binding Points}"
@@ -366,8 +567,50 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XQuadraticBezierSegment}">
         <StackPanel>
-            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
-            <Control Template="{StaticResource IsSmoothJoinControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsSmoothJoin" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsSmoothJoin}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Expander Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
             </Expander>
@@ -378,7 +621,28 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XPathFigure}">
         <StackPanel>
-            <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsFilled" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsFilled}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2001,7 +2265,28 @@
                 </TextBox>
             </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
-            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Expander Header="Start">
                 <ContentControl Content="{Binding Start}"/>
             </Expander>
@@ -2044,8 +2329,50 @@
                 </TextBox>
             </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
-            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
-            <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsFilled" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsFilled}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2240,8 +2567,50 @@
                 </TextBox>
             </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
-            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
-            <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsFilled" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsFilled}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2310,8 +2679,50 @@
                 </TextBox>
             </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
-            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
-            <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsFilled" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsFilled}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Expander Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
             </Expander>
@@ -2360,8 +2771,50 @@
                 </TextBox>
             </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
-            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
-            <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsFilled" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsFilled}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Expander Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
             </Expander>
@@ -2410,8 +2863,50 @@
                 </TextBox>
             </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
-            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
-            <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsFilled" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsFilled}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Expander Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
             </Expander>
@@ -2525,8 +3020,50 @@
                 </TextBox>
             </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
-            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
-            <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsFilled" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsFilled}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -2693,8 +3230,50 @@
                 </TextBox>
             </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
-            <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
-            <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsFilled" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsFilled}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Expander Header="Geometry">
                 <ContentControl Content="{Binding Geometry}"/>
             </Expander>
