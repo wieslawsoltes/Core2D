@@ -3891,6 +3891,7 @@
             VerticalAlignment="Center">
         </TextBox>
     </DataTemplate>
+    <!-- container -->
     <ControlTemplate x:Key="ContainerControlTemplateKey">
         <ItemsControl ItemsSource="{Binding Layers}">
             <ItemsControl.ItemsPanel>
