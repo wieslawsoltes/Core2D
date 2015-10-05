@@ -192,30 +192,6 @@
             </CheckBox>
         </Grid>
     </ControlTemplate>
-    <ControlTemplate x:Key="IsClosedControlTemplateKey">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock 
-                Text="IsClosed" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="0"
-                Grid.Column="0">
-            </TextBlock>
-            <CheckBox 
-                Content=""
-                IsChecked="{Binding IsClosed}"
-                Style="{StaticResource CheckBoxStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="1">
-            </CheckBox>
-        </Grid>
-    </ControlTemplate>
     <!-- path -->
     <DataTemplate DataType="{x:Type core:XPathSize}">
         <Grid>
@@ -403,7 +379,28 @@
     <DataTemplate DataType="{x:Type core:XPathFigure}">
         <StackPanel>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
-            <Control Template="{StaticResource IsClosedControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsClosed" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsClosed}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
             <Expander Header="StartPoint">
                 <ContentControl Content="{Binding StartPoint}"/>
             </Expander>
