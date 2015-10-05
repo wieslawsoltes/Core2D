@@ -1572,7 +1572,7 @@
         </TabControl>
     </DataTemplate>
     <!-- menus -->
-    <ControlTemplate x:Key="BindingsMenu">
+    <ControlTemplate x:Key="BindingsMenuControlTemplateKey">
         <Menu Background="Transparent" HorizontalAlignment="Right">
             <MenuItem
                 Command="{Binding DataContext.Commands.AddBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
@@ -1581,7 +1581,7 @@
             </MenuItem>
         </Menu>
     </ControlTemplate>
-    <ControlTemplate x:Key="PropertiesMenu">
+    <ControlTemplate x:Key="PropertiesMenuControlTemplateKey">
         <Menu Background="Transparent" HorizontalAlignment="Right">
             <MenuItem 
                 Command="{Binding DataContext.Commands.AddPropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
@@ -1590,7 +1590,7 @@
             </MenuItem>
         </Menu>
     </ControlTemplate>
-    <ControlTemplate x:Key="RecordMenu">
+    <ControlTemplate x:Key="RecordMenuControlTemplateKey">
         <Menu Background="Transparent" HorizontalAlignment="Right">
             <MenuItem 
                 Command="{Binding DataContext.Commands.ResetRecordCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
@@ -1599,7 +1599,7 @@
             </MenuItem>
         </Menu>
     </ControlTemplate>
-    <ControlTemplate x:Key="ColumnsMenu">
+    <ControlTemplate x:Key="ColumnsMenuControlTemplateKey">
         <Menu Background="Transparent" HorizontalAlignment="Right">
             <MenuItem 
                 Command="{Binding DataContext.Commands.AddColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
@@ -1734,7 +1734,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Control Template="{StaticResource ColumnsMenu}" Grid.Row="0" Margin="2,0,2,0"/>
+                    <Control Template="{StaticResource ColumnsMenuControlTemplateKey}" Grid.Row="0" Margin="2,0,2,0"/>
                     <Grid Height="Auto" VerticalAlignment="Top" Grid.Row="1">
                         <Grid.Style>
                             <Style TargetType="Grid">
@@ -1823,7 +1823,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Control Template="{StaticResource RecordMenu}" Grid.Row="0" Margin="2,0,2,0"/>
+                    <Control Template="{StaticResource RecordMenuControlTemplateKey}" Grid.Row="0" Margin="2,0,2,0"/>
                     <ContentControl Content="{Binding Record}" Grid.Row="1"/>
                 </Grid>
             </TabItem>
@@ -1839,7 +1839,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Control Template="{StaticResource BindingsMenu}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="2,0,2,0"/>
+                    <Control Template="{StaticResource BindingsMenuControlTemplateKey}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="2,0,2,0"/>
                     <GridSplitter 
                         Grid.Column="1" 
                         Grid.Row="1"
@@ -1953,7 +1953,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Control 
-                        Template="{StaticResource PropertiesMenu}" 
+                        Template="{StaticResource PropertiesMenuControlTemplateKey}" 
                         Grid.Row="0" 
                         Grid.Column="0" 
                         Grid.ColumnSpan="3" 
@@ -3281,7 +3281,7 @@
         </StackPanel>
     </DataTemplate>
     <!-- context menus -->
-    <ContextMenu x:Key="ContainerContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+    <ContextMenu x:Key="ContainerContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
         <MenuItem 
             Header="Te_mplate" 
             Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
@@ -3354,7 +3354,7 @@
             CommandParameter="{Binding}">
         </MenuItem>
     </ContextMenu>
-    <ContextMenu x:Key="DocumentContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+    <ContextMenu x:Key="DocumentContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
         <MenuItem 
             Header="_Add Container" 
             InputGestureText="Ctrl+N" 
@@ -3408,7 +3408,7 @@
             CommandParameter="{Binding}">
         </MenuItem>
     </ContextMenu>
-    <ContextMenu x:Key="PojectContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+    <ContextMenu x:Key="PojectContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
         <MenuItem 
             Header="_Add Document" 
             InputGestureText="Ctrl+N" 
@@ -3768,7 +3768,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Control 
-                        Template="{StaticResource PropertiesMenu}" 
+                        Template="{StaticResource PropertiesMenuControlTemplateKey}" 
                         Grid.Row="0" 
                         Grid.Column="0" 
                         Grid.ColumnSpan="3" 
