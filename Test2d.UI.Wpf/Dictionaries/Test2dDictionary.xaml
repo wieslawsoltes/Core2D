@@ -120,30 +120,6 @@
         <Setter Property="Margin" Value="5,2,5,2"/>
     </Style>
     <!-- common -->
-    <ControlTemplate x:Key="NameControlTemplateKey">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock 
-                Text="Name" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="0">
-            </TextBlock>
-            <TextBox 
-                Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                BorderBrush="{x:Null}" 
-                Style="{StaticResource TextBoxLeftStyleKey}" 
-                Grid.Row="0" 
-                Grid.Column="1">
-            </TextBox>
-        </Grid>
-    </ControlTemplate>
     <ControlTemplate x:Key="IsStrokedControlTemplateKey">
         <Grid>
             <Grid.RowDefinitions>
@@ -559,138 +535,7 @@
             </CheckBox>
         </StackPanel>
     </ControlTemplate>
-    <ControlTemplate x:Key="TextControlTemplateKey">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock 
-                Text="Text" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="0">
-            </TextBlock>
-            <ComboBox 
-                IsEditable="True" 
-                Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
-                Style="{StaticResource ComboBoxStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="1" 
-                VerticalAlignment="Center">
-                <ComboBoxItem>{0}</ComboBoxItem>
-                <ComboBoxItem>{0} {1}</ComboBoxItem>
-                <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
-            </ComboBox>
-        </Grid>
-    </ControlTemplate>
     <!-- style -->
-    <ControlTemplate x:Key="FontStyleControlTemplateKey">
-        <StackPanel Margin="5,2,5,2">
-            <CheckBox Content="Regular" Margin="1"
-                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Regular}}">
-            </CheckBox>
-            <CheckBox Content="Bold" Margin="1"
-                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Bold}}">
-            </CheckBox>
-            <CheckBox Content="Italic" Margin="1"
-                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Italic}}">
-            </CheckBox>
-            <CheckBox Content="Underline" Margin="1"
-                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Underline}}">
-            </CheckBox>
-            <CheckBox Content="Strikeout" Margin="1"
-                      IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Strikeout}}">
-            </CheckBox>
-        </StackPanel>
-    </ControlTemplate>
-    <ControlTemplate x:Key="MaxLengthControlTemplateKey">
-        <StackPanel Margin="5,2,5,2">
-            <CheckBox Content="Disabled" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Disabled}}">
-            </CheckBox>
-            <CheckBox Content="Start" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Start}}">
-            </CheckBox>
-            <CheckBox Content="End" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.End}}">
-            </CheckBox>
-            <CheckBox Content="Vertical" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Vertical}}">
-            </CheckBox>
-            <CheckBox Content="Horizontal" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Horizontal}}">
-            </CheckBox>
-            <CheckBox Content="All" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.All}}">
-            </CheckBox>
-        </StackPanel>
-    </ControlTemplate>
-    <ControlTemplate x:Key="StartStateControlTemplateKey">
-        <StackPanel Margin="5,2,5,2">
-            <CheckBox Content="Default" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
-            </CheckBox>
-            <CheckBox Content="Visible" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
-            </CheckBox>
-            <CheckBox Content="Printable" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
-            </CheckBox>
-            <CheckBox Content="Locked" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
-            </CheckBox>
-            <CheckBox Content="Connector" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
-            </CheckBox>
-            <CheckBox Content="None" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
-            </CheckBox>
-            <CheckBox Content="Standalone" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
-            </CheckBox>
-            <CheckBox Content="Input" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
-            </CheckBox>
-            <CheckBox Content="Output" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
-            </CheckBox>
-        </StackPanel>
-    </ControlTemplate>
-    <ControlTemplate x:Key="EndStateControlTemplateKey">
-        <StackPanel Margin="5,2,5,2">
-            <CheckBox Content="Default" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
-            </CheckBox>
-            <CheckBox Content="Visible" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
-            </CheckBox>
-            <CheckBox Content="Printable" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
-            </CheckBox>
-            <CheckBox Content="Locked" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
-            </CheckBox>
-            <CheckBox Content="Connector" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
-            </CheckBox>
-            <CheckBox Content="None" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
-            </CheckBox>
-            <CheckBox Content="Standalone" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
-            </CheckBox>
-            <CheckBox Content="Input" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
-            </CheckBox>
-            <CheckBox Content="Output" Margin="1"
-                      IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
-            </CheckBox>
-        </StackPanel>
-    </ControlTemplate>
     <DataTemplate DataType="{x:Type core:ArgbColor}">
         <Grid>
             <Grid.RowDefinitions>
@@ -818,122 +663,6 @@
             </TextBox>
         </Grid>
     </DataTemplate>
-    <ControlTemplate x:Key="BaseStyleControlTemplateKey">
-        <StackPanel>
-            <Control Template="{StaticResource NameControlTemplateKey}"/>
-            <Expander Header="Stroke" IsExpanded="False">
-                <ContentControl Content="{Binding Stroke}"/>
-            </Expander>
-            <Expander Header="Fill" IsExpanded="False">
-                <ContentControl Content="{Binding Fill}"/>
-            </Expander>
-            <Expander Header="Thickness" IsExpanded="False">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <Slider 
-                        Value="{Binding Thickness}" 
-                        Style="{StaticResource SliderStyleKey}"
-                        Minimum="0" 
-                        Maximum="50" 
-                        TickFrequency="0.1" 
-                        SmallChange="0.1" 
-                        LargeChange="1" 
-                        IsSnapToTickEnabled="True" 
-                        Grid.Row="0" 
-                        Grid.Column="0">
-                    </Slider>
-                    <TextBox 
-                        Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxCenterStyleKey}"
-                        Grid.Row="0" 
-                        Grid.Column="1">
-                    </TextBox>
-                </Grid>
-            </Expander>
-            <Expander Header="Cap" IsExpanded="False">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock 
-                        Text="Line Cap" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="0"
-                        Grid.Column="0" >
-                    </TextBlock>
-                    <ComboBox 
-                        ItemsSource="{Binding Source={StaticResource ResourceKey=LineCapValues}}" 
-                        SelectedItem="{Binding LineCap}" 
-                        Style="{StaticResource ComboBoxStyleKey}"
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </ComboBox>
-                </Grid>
-            </Expander>
-            <Expander Header="Dash" IsExpanded="False">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock 
-                        Text="Dashes" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="0" 
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="Dash Offset" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="1" 
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBox 
-                        Text="{Binding Dashes, Converter={StaticResource DoubleToStringConverter}}" 
-                        Style="{StaticResource TextBoxLeftStyleKey}"
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </TextBox>
-                    <Slider 
-                        Value="{Binding DashOffset}" 
-                        Style="{StaticResource SliderStyleKey}"
-                        Minimum="0" 
-                        Maximum="15" 
-                        TickFrequency="0.1" 
-                        SmallChange="0.1"
-                        LargeChange="1"
-                        IsSnapToTickEnabled="True" 
-                        Grid.Row="1" 
-                        Grid.Column="1">
-                    </Slider>
-                    <TextBox 
-                        Text="{Binding DashOffset, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxCenterStyleKey}"
-                        Grid.Row="1" 
-                        Grid.Column="2">
-                    </TextBox>
-                </Grid>
-            </Expander>
-        </StackPanel>
-    </ControlTemplate>
     <DataTemplate DataType="{x:Type core:ArrowStyle}">
         <TabControl>
             <TabItem Header="Arrow">
@@ -1044,7 +773,119 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Style">
-                <Control Template="{StaticResource BaseStyleControlTemplateKey}"/>
+                <StackPanel>
+                    <Expander Header="Stroke" IsExpanded="False">
+                        <ContentControl Content="{Binding Stroke}"/>
+                    </Expander>
+                    <Expander Header="Fill" IsExpanded="False">
+                        <ContentControl Content="{Binding Fill}"/>
+                    </Expander>
+                    <Expander Header="Thickness" IsExpanded="False">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <Slider 
+                                Value="{Binding Thickness}" 
+                                Style="{StaticResource SliderStyleKey}"
+                                Minimum="0" 
+                                Maximum="50" 
+                                TickFrequency="0.1" 
+                                SmallChange="0.1" 
+                                LargeChange="1" 
+                                IsSnapToTickEnabled="True" 
+                                Grid.Row="0" 
+                                Grid.Column="0">
+                            </Slider>
+                            <TextBox 
+                                Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged}" 
+                                Style="{StaticResource TextBoxCenterStyleKey}"
+                                Grid.Row="0" 
+                                Grid.Column="1">
+                            </TextBox>
+                        </Grid>
+                    </Expander>
+                    <Expander Header="Cap" IsExpanded="False">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock 
+                                Text="Line Cap" 
+                                Style="{StaticResource TextBlockLeftStyleKey}"
+                                Grid.Row="0"
+                                Grid.Column="0" >
+                            </TextBlock>
+                            <ComboBox 
+                                ItemsSource="{Binding Source={StaticResource ResourceKey=LineCapValues}}" 
+                                SelectedItem="{Binding LineCap}" 
+                                Style="{StaticResource ComboBoxStyleKey}"
+                                Grid.Row="0" 
+                                Grid.Column="1" 
+                                Grid.ColumnSpan="2">
+                            </ComboBox>
+                        </Grid>
+                    </Expander>
+                    <Expander Header="Dash" IsExpanded="False">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock 
+                                Text="Dashes" 
+                                Style="{StaticResource TextBlockLeftStyleKey}"
+                                Grid.Row="0" 
+                                Grid.Column="0">
+                            </TextBlock>
+                            <TextBlock 
+                                Text="Dash Offset" 
+                                Style="{StaticResource TextBlockLeftStyleKey}"
+                                Grid.Row="1" 
+                                Grid.Column="0">
+                            </TextBlock>
+                            <TextBox 
+                                Text="{Binding Dashes, Converter={StaticResource DoubleToStringConverter}}" 
+                                Style="{StaticResource TextBoxLeftStyleKey}"
+                                Grid.Row="0" 
+                                Grid.Column="1" 
+                                Grid.ColumnSpan="2">
+                            </TextBox>
+                            <Slider 
+                                Value="{Binding DashOffset}" 
+                                Style="{StaticResource SliderStyleKey}"
+                                Minimum="0" 
+                                Maximum="15" 
+                                TickFrequency="0.1" 
+                                SmallChange="0.1"
+                                LargeChange="1"
+                                IsSnapToTickEnabled="True" 
+                                Grid.Row="1" 
+                                Grid.Column="1">
+                            </Slider>
+                            <TextBox 
+                                Text="{Binding DashOffset, UpdateSourceTrigger=PropertyChanged}" 
+                                Style="{StaticResource TextBoxCenterStyleKey}"
+                                Grid.Row="1" 
+                                Grid.Column="2">
+                            </TextBox>
+                        </Grid>
+                    </Expander>
+                </StackPanel>
             </TabItem>
         </TabControl>
     </DataTemplate>
@@ -1129,12 +970,32 @@
                 Grid.Row="2" 
                 Grid.Column="2">
             </TextBox>
-            <Control 
-                Template="{StaticResource FontStyleControlTemplateKey}"
+            <StackPanel 
+                Margin="5,2,5,2"   
                 Grid.Row="3" 
                 Grid.Column="1"
                 Grid.ColumnSpan="2">
-            </Control>
+                <CheckBox 
+                    Content="Regular" Margin="1"
+                    IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Regular}}">
+                </CheckBox>
+                <CheckBox 
+                    Content="Bold" Margin="1"
+                    IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Bold}}">
+                </CheckBox>
+                <CheckBox 
+                    Content="Italic" Margin="1"
+                    IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Italic}}">
+                </CheckBox>
+                <CheckBox 
+                    Content="Underline" Margin="1"
+                    IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Underline}}">
+                </CheckBox>
+                <CheckBox 
+                    Content="Strikeout" Margin="1"
+                    IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Strikeout}}">
+                </CheckBox>
+            </StackPanel>
             <ComboBox 
                 ItemsSource="{Binding Source={StaticResource ResourceKey=TextHAlignmentValues}}" 
                 SelectedItem="{Binding TextHAlignment}"
@@ -1156,7 +1017,32 @@
     <DataTemplate DataType="{x:Type core:LineStyle}">
         <TabControl>
             <TabItem Header="Flags">
-                <Control Template="{StaticResource MaxLengthControlTemplateKey}"/>
+                <StackPanel Margin="5,2,5,2">
+                    <CheckBox 
+                        Content="Disabled" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Disabled}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Start" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Start}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="End" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.End}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Vertical" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Vertical}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Horizontal" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Horizontal}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="All" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.All}}">
+                    </CheckBox>
+                </StackPanel>
             </TabItem>
             <TabItem Header="Length">
                 <Grid>
@@ -1183,17 +1069,225 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Start">
-                <Control Template="{StaticResource StartStateControlTemplateKey}"/>
+                <StackPanel Margin="5,2,5,2">
+                    <CheckBox 
+                        Content="Default" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Visible" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Printable" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Locked" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Connector" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="None" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Standalone" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Input" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Output" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthStartState, Converter={StaticResource StartStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                    </CheckBox>
+                </StackPanel>
             </TabItem>
             <TabItem Header="End">
-                <Control Template="{StaticResource EndStateControlTemplateKey}"/>
+                <StackPanel Margin="5,2,5,2">
+                    <CheckBox 
+                        Content="Default" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Visible" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Printable" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Locked" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Connector" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="None" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Standalone" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Input" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Output" Margin="1"
+                        IsChecked="{Binding Path=MaxLengthEndState, Converter={StaticResource EndStateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                    </CheckBox>
+                </StackPanel>
             </TabItem>
         </TabControl>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:ShapeStyle}">
         <TabControl>
             <TabItem Header="Base">
-                <Control Template="{StaticResource BaseStyleControlTemplateKey}"/>
+                <StackPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock 
+                            Text="Name" 
+                            Style="{StaticResource TextBlockLeftStyleKey}"
+                            Grid.Row="0" 
+                            Grid.Column="0">
+                        </TextBlock>
+                        <TextBox 
+                            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                            BorderBrush="{x:Null}" 
+                            Style="{StaticResource TextBoxLeftStyleKey}" 
+                            Grid.Row="0" 
+                            Grid.Column="1">
+                        </TextBox>
+                    </Grid>
+                    <Expander Header="Stroke" IsExpanded="False">
+                        <ContentControl Content="{Binding Stroke}"/>
+                    </Expander>
+                    <Expander Header="Fill" IsExpanded="False">
+                        <ContentControl Content="{Binding Fill}"/>
+                    </Expander>
+                    <Expander Header="Thickness" IsExpanded="False">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <Slider 
+                                Value="{Binding Thickness}" 
+                                Style="{StaticResource SliderStyleKey}"
+                                Minimum="0" 
+                                Maximum="50" 
+                                TickFrequency="0.1" 
+                                SmallChange="0.1" 
+                                LargeChange="1" 
+                                IsSnapToTickEnabled="True" 
+                                Grid.Row="0" 
+                                Grid.Column="0">
+                            </Slider>
+                            <TextBox 
+                                Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged}" 
+                                Style="{StaticResource TextBoxCenterStyleKey}"
+                                Grid.Row="0" 
+                                Grid.Column="1">
+                            </TextBox>
+                        </Grid>
+                    </Expander>
+                    <Expander Header="Cap" IsExpanded="False">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock 
+                                Text="Line Cap" 
+                                Style="{StaticResource TextBlockLeftStyleKey}"
+                                Grid.Row="0"
+                                Grid.Column="0" >
+                            </TextBlock>
+                            <ComboBox 
+                                ItemsSource="{Binding Source={StaticResource ResourceKey=LineCapValues}}" 
+                                SelectedItem="{Binding LineCap}" 
+                                Style="{StaticResource ComboBoxStyleKey}"
+                                Grid.Row="0" 
+                                Grid.Column="1" 
+                                Grid.ColumnSpan="2">
+                            </ComboBox>
+                        </Grid>
+                    </Expander>
+                    <Expander Header="Dash" IsExpanded="False">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock 
+                                Text="Dashes" 
+                                Style="{StaticResource TextBlockLeftStyleKey}"
+                                Grid.Row="0" 
+                                Grid.Column="0">
+                            </TextBlock>
+                            <TextBlock 
+                                Text="Dash Offset" 
+                                Style="{StaticResource TextBlockLeftStyleKey}"
+                                Grid.Row="1" 
+                                Grid.Column="0">
+                            </TextBlock>
+                            <TextBox 
+                                Text="{Binding Dashes, Converter={StaticResource DoubleToStringConverter}}" 
+                                Style="{StaticResource TextBoxLeftStyleKey}"
+                                Grid.Row="0" 
+                                Grid.Column="1" 
+                                Grid.ColumnSpan="2">
+                            </TextBox>
+                            <Slider 
+                                Value="{Binding DashOffset}" 
+                                Style="{StaticResource SliderStyleKey}"
+                                Minimum="0" 
+                                Maximum="15" 
+                                TickFrequency="0.1" 
+                                SmallChange="0.1"
+                                LargeChange="1"
+                                IsSnapToTickEnabled="True" 
+                                Grid.Row="1" 
+                                Grid.Column="1">
+                            </Slider>
+                            <TextBox 
+                                Text="{Binding DashOffset, UpdateSourceTrigger=PropertyChanged}" 
+                                Style="{StaticResource TextBoxCenterStyleKey}"
+                                Grid.Row="1" 
+                                Grid.Column="2">
+                            </TextBox>
+                        </Grid>
+                    </Expander>
+                </StackPanel>
             </TabItem>
             <TabItem Header="Text">
                 <ContentControl Content="{Binding TextStyle}"/>
@@ -1761,7 +1855,28 @@
     </ControlTemplate>
     <ControlTemplate x:Key="DatabaseControlTemplateKey">
         <StackPanel>
-            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Name" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <TextBox 
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                    BorderBrush="{x:Null}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}" 
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </TextBox>
+            </Grid>
             <Expander
                 Header="Columns" 
                 IsExpanded="True">
@@ -1792,7 +1907,28 @@
         <TabControl>
             <TabItem Header="Point">
                 <StackPanel>
-                    <Control Template="{StaticResource NameControlTemplateKey}"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock 
+                            Text="Name" 
+                            Style="{StaticResource TextBlockLeftStyleKey}"
+                            Grid.Row="0" 
+                            Grid.Column="0">
+                        </TextBlock>
+                        <TextBox 
+                            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                            BorderBrush="{x:Null}" 
+                            Style="{StaticResource TextBoxLeftStyleKey}" 
+                            Grid.Row="0" 
+                            Grid.Column="1">
+                        </TextBox>
+                    </Grid>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -1850,7 +1986,28 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XLine}">
         <StackPanel>
-            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Name" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <TextBox 
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                    BorderBrush="{x:Null}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}" 
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </TextBox>
+            </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Expander Header="Start">
@@ -1872,11 +2029,57 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XRectangle}">
         <StackPanel>
-            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Name" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <TextBox 
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                    BorderBrush="{x:Null}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}" 
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </TextBox>
+            </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
-            <Control Template="{StaticResource TextControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Text" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <ComboBox 
+                    IsEditable="True" 
+                    Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource ComboBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    VerticalAlignment="Center">
+                    <ComboBoxItem>{0}</ComboBoxItem>
+                    <ComboBoxItem>{0} {1}</ComboBoxItem>
+                    <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
+                </ComboBox>
+            </Grid>
             <Expander Header="TopLeft">
                 <ContentControl Content="{Binding TopLeft}"/>
             </Expander>
@@ -2022,11 +2225,57 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XEllipse}">
         <StackPanel>
-            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Name" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <TextBox 
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                    BorderBrush="{x:Null}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}" 
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </TextBox>
+            </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
-            <Control Template="{StaticResource TextControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Text" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <ComboBox 
+                    IsEditable="True" 
+                    Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource ComboBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    VerticalAlignment="Center">
+                    <ComboBoxItem>{0}</ComboBoxItem>
+                    <ComboBoxItem>{0} {1}</ComboBoxItem>
+                    <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
+                </ComboBox>
+            </Grid>
             <Expander Header="TopLeft">
                 <ContentControl Content="{Binding TopLeft}"/>
             </Expander>
@@ -2046,7 +2295,28 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XArc}">
         <StackPanel>
-            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Name" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <TextBox 
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                    BorderBrush="{x:Null}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}" 
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </TextBox>
+            </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
@@ -2075,7 +2345,28 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XBezier}">
         <StackPanel>
-            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Name" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <TextBox 
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                    BorderBrush="{x:Null}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}" 
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </TextBox>
+            </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
@@ -2104,7 +2395,28 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XQBezier}">
         <StackPanel>
-            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Name" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <TextBox 
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                    BorderBrush="{x:Null}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}" 
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </TextBox>
+            </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
@@ -2130,9 +2442,55 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XText}">
         <StackPanel>
-            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Name" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <TextBox 
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                    BorderBrush="{x:Null}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}" 
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </TextBox>
+            </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
-            <Control Template="{StaticResource TextControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Text" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <ComboBox 
+                    IsEditable="True" 
+                    Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource ComboBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    VerticalAlignment="Center">
+                    <ComboBoxItem>{0}</ComboBoxItem>
+                    <ComboBoxItem>{0} {1}</ComboBoxItem>
+                    <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
+                </ComboBox>
+            </Grid>
             <Expander Header="TopLeft">
                 <ContentControl Content="{Binding TopLeft}"/>
             </Expander>
@@ -2152,11 +2510,57 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XImage}">
         <StackPanel>
-            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Name" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <TextBox 
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                    BorderBrush="{x:Null}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}" 
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </TextBox>
+            </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
-            <Control Template="{StaticResource TextControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Text" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <ComboBox 
+                    IsEditable="True" 
+                    Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource ComboBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    VerticalAlignment="Center">
+                    <ComboBoxItem>{0}</ComboBoxItem>
+                    <ComboBoxItem>{0} {1}</ComboBoxItem>
+                    <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
+                </ComboBox>
+            </Grid>
             <Expander Header="Path">
                 <Grid>
                     <TextBox 
@@ -2186,7 +2590,28 @@
         <TabControl>
             <TabItem Header="Group">
                 <StackPanel>
-                    <Control Template="{StaticResource NameControlTemplateKey}"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock 
+                        Text="Name" 
+                        Style="{StaticResource TextBlockLeftStyleKey}"
+                        Grid.Row="0" 
+                        Grid.Column="0">
+                    </TextBlock>
+                    <TextBox 
+                        Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                        BorderBrush="{x:Null}" 
+                        Style="{StaticResource TextBoxLeftStyleKey}" 
+                        Grid.Row="0" 
+                        Grid.Column="1">
+                    </TextBox>
+                </Grid>
                     <Expander Header="Properties" 
                               IsExpanded="True">
                         <Control Template="{StaticResource ShapesPropertiesControlTemplateKey}"/>
@@ -2253,7 +2678,28 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XPath}">
         <StackPanel>
-            <Control Template="{StaticResource NameControlTemplateKey}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="Name" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="0">
+                </TextBlock>
+                <TextBox 
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                    BorderBrush="{x:Null}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}" 
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </TextBox>
+            </Grid>
             <Control Template="{StaticResource StyleControlTemplateKey}"/>
             <Control Template="{StaticResource IsStrokedControlTemplateKey}"/>
             <Control Template="{StaticResource IsFilledControlTemplateKey}"/>
