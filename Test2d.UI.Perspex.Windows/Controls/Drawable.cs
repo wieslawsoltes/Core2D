@@ -222,7 +222,7 @@ namespace TestPerspex
         /// <param name="c"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        private void DrawBackground(IDrawingContext dc, ArgbColor c, double width, double height)
+        private void DrawBackground(DrawingContext dc, ArgbColor c, double width, double height)
         {
             var color = Color.FromArgb(c.A, c.R, c.G, c.B);
             var brush = new SolidColorBrush(color);
@@ -235,7 +235,7 @@ namespace TestPerspex
         /// 
         /// </summary>
         /// <param name="dc"></param>
-        private void Draw(IDrawingContext dc)
+        private void Draw(DrawingContext dc)
         {
             var context = this.DataContext as EditorContext;
             if (context == null
@@ -245,8 +245,8 @@ namespace TestPerspex
 
             // TODO: Disable anti-aliasing.
 
-            var translate = dc.PushTransform(Matrix.CreateTranslation(_state.PanX, _state.PanY));
-            var scale = dc.PushTransform(Matrix.CreateScale(_state.Zoom, _state.Zoom));
+            var translate = dc.PushPreTransform(Matrix.CreateTranslation(_state.PanX, _state.PanY));
+            var scale = dc.PushPreTransform(Matrix.CreateScale(_state.Zoom, _state.Zoom));
 
             var renderer = context.Editor.Renderers[0];
 
@@ -310,7 +310,7 @@ namespace TestPerspex
         /// 
         /// </summary>
         /// <param name="context"></param>
-        public override void Render(IDrawingContext context)
+        public override void Render(DrawingContext context)
         {
             base.Render(context);
             

@@ -190,7 +190,7 @@ namespace TestPerspex
         /// <param name="p0"></param>
         /// <param name="p1"></param>
         private static void DrawLineInternal(
-            IDrawingContext dc,
+            DrawingContext dc,
             Pen pen,
             bool isStroked,
             ref Point p0,
@@ -212,7 +212,7 @@ namespace TestPerspex
         /// <param name="isFilled"></param>
         /// <param name="rect"></param>
         private static void DrawRectangleInternal(
-            IDrawingContext dc,
+            DrawingContext dc,
             Brush brush,
             Pen pen,
             bool isStroked,
@@ -245,7 +245,7 @@ namespace TestPerspex
         /// <param name="isFilled"></param>
         /// <param name="rect"></param>
         private static void DrawEllipseInternal(
-            IDrawingContext dc,
+            DrawingContext dc,
             Brush brush,
             Pen pen,
             bool isStroked,
@@ -278,7 +278,7 @@ namespace TestPerspex
         /// <param name="cellHeight"></param>
         /// <param name="isStroked"></param>
         private void DrawGridInternal(
-            IDrawingContext dc,
+            DrawingContext dc,
             Pen stroke,
             ref Rect2 rect,
             double offsetX, double offsetY,
@@ -320,7 +320,7 @@ namespace TestPerspex
         /// </summary>
         /// <param name="dc"></param>
         /// <param name="container"></param>
-        private void DrawBackgroundInternal(IDrawingContext dc, Container container)
+        private void DrawBackgroundInternal(DrawingContext dc, Container container)
         {
             Brush brush = ToSolidBrush(container.Background);
             var rect = new Rect(0, 0, container.Width, container.Height);
@@ -395,7 +395,7 @@ namespace TestPerspex
         /// <param name="r"></param>
         public void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            var _dc = dc as IDrawingContext;
+            var _dc = dc as DrawingContext;
 
             Brush fillLine = ToSolidBrush(line.Style.Fill);
             Pen strokeLine = ToPen(line.Style, _scaleToPage);
@@ -446,7 +446,7 @@ namespace TestPerspex
                     {
                         pt1 = MatrixHelper.TransformPoint(t1, new Point(x1 - (float)sizeX1, y1));
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        var d = _dc.PushTransform(t1);
+                        var d = _dc.PushPreTransform(t1);
                         DrawRectangleInternal(_dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
                         d.Dispose();
                     }
@@ -454,7 +454,7 @@ namespace TestPerspex
                 case ArrowType.Ellipse:
                     {
                         pt1 = MatrixHelper.TransformPoint(t1, new Point(x1 - (float)sizeX1, y1));
-                        var d = _dc.PushTransform(t1);
+                        var d = _dc.PushPreTransform(t1);
                         var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
                         DrawEllipseInternal(_dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
                         d.Dispose();
@@ -498,7 +498,7 @@ namespace TestPerspex
                     {
                         pt2 = MatrixHelper.TransformPoint(t2, new Point(x2 - (float)sizeX2, y2));
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        var d = _dc.PushTransform(t2);
+                        var d = _dc.PushPreTransform(t2);
                         DrawRectangleInternal(_dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
                         d.Dispose();
                     }
@@ -506,7 +506,7 @@ namespace TestPerspex
                 case ArrowType.Ellipse:
                     {
                         pt2 = MatrixHelper.TransformPoint(t2, new Point(x2 - (float)sizeX2, y2));
-                        var d = _dc.PushTransform(t2);
+                        var d = _dc.PushPreTransform(t2);
                         var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
                         DrawEllipseInternal(_dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
                         d.Dispose();
@@ -556,7 +556,7 @@ namespace TestPerspex
         /// <param name="r"></param>
         public void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            var _dc = dc as IDrawingContext;
+            var _dc = dc as DrawingContext;
 
             Brush brush = ToSolidBrush(rectangle.Style.Fill);
             Pen pen = ToPen(rectangle.Style, _scaleToPage);
@@ -600,7 +600,7 @@ namespace TestPerspex
         /// <param name="r"></param>
         public void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            var _dc = dc as IDrawingContext;
+            var _dc = dc as DrawingContext;
 
             Brush brush = ToSolidBrush(ellipse.Style.Fill);
             Pen pen = ToPen(ellipse.Style, _scaleToPage);
@@ -636,7 +636,7 @@ namespace TestPerspex
             if (!arc.IsFilled && !arc.IsStroked)
                 return;
 
-            var _dc = dc as IDrawingContext;
+            var _dc = dc as DrawingContext;
 
             Brush brush = ToSolidBrush(arc.Style.Fill);
             Pen pen = ToPen(arc.Style, _scaleToPage);
@@ -684,7 +684,7 @@ namespace TestPerspex
             if (!bezier.IsFilled && !bezier.IsStroked)
                 return;
 
-            var _dc = dc as IDrawingContext;
+            var _dc = dc as DrawingContext;
 
             Brush brush = ToSolidBrush(bezier.Style.Fill);
             Pen pen = ToPen(bezier.Style, _scaleToPage);
@@ -728,7 +728,7 @@ namespace TestPerspex
             if (!qbezier.IsFilled && !qbezier.IsStroked)
                 return;
 
-            var _dc = dc as IDrawingContext;
+            var _dc = dc as DrawingContext;
 
             Brush brush = ToSolidBrush(qbezier.Style.Fill);
             Pen pen = ToPen(qbezier.Style, _scaleToPage);
@@ -781,7 +781,7 @@ namespace TestPerspex
         /// <param name="r"></param>
         public void Draw(object dc, XText text, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            var _gfx = dc as IDrawingContext;
+            var _gfx = dc as DrawingContext;
 
             var tbind = text.BindToTextProperty(db, r);
             if (string.IsNullOrEmpty(tbind))
@@ -848,7 +848,7 @@ namespace TestPerspex
         /// <param name="r"></param>
         public void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            var _dc = dc as IDrawingContext;
+            var _dc = dc as DrawingContext;
 
             var rect = CreateRect(
                 image.TopLeft,
@@ -925,7 +925,7 @@ namespace TestPerspex
             if (!path.IsFilled && !path.IsStroked)
                 return;
 
-            var _dc = dc as IDrawingContext;
+            var _dc = dc as DrawingContext;
 
             var g = path.Geometry.ToGeometry();
 
