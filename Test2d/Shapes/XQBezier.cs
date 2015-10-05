@@ -48,10 +48,10 @@ namespace Test2d
         /// <param name="r"></param>
         public override void Bind(Record r)
         {
-            var record = r ?? this.Record;
-            _point1.TryToBind("Point1", this.Bindings, record);
-            _point2.TryToBind("Point2", this.Bindings, record);
-            _point3.TryToBind("Point3", this.Bindings, record);
+            var record = r ?? this.Data.Record;
+            _point1.TryToBind("Point1", this.Data.Bindings, record);
+            _point2.TryToBind("Point2", this.Data.Bindings, record);
+            _point3.TryToBind("Point3", this.Data.Bindings, record);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Test2d
         /// <param name="r"></param>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            var record = r ?? this.Record;
+            var record = r ?? this.Data.Record;
 
             if (State.HasFlag(ShapeState.Visible))
             {
@@ -159,8 +159,11 @@ namespace Test2d
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Bindings = ImmutableArray.Create<ShapeBinding>(),
-                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Data = new Data()
+                {
+                    Bindings = ImmutableArray.Create<ShapeBinding>(),
+                    Properties = ImmutableArray.Create<ShapeProperty>()
+                },
                 Point1 = XPoint.Create(x1, y1, point),
                 Point2 = XPoint.Create(x2, y2, point),
                 Point3 = XPoint.Create(x3, y3, point)
@@ -217,8 +220,11 @@ namespace Test2d
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Bindings = ImmutableArray.Create<ShapeBinding>(),
-                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Data = new Data()
+                {
+                    Bindings = ImmutableArray.Create<ShapeBinding>(),
+                    Properties = ImmutableArray.Create<ShapeProperty>()
+                },
                 Point1 = point1,
                 Point2 = point2,
                 Point3 = point3

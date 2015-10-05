@@ -124,8 +124,8 @@ namespace Test2d
         /// <param name="r"></param>
         public override void Bind(Record r)
         {
-            var record = r ?? this.Record;
-            var bindings = this.Bindings;
+            var record = r ?? this.Data.Record;
+            var bindings = this.Data.Bindings;
             string propertyNameX = "X";
             string propertyNameY = "Y";
             TryToBind(bindings, record, propertyNameX, propertyNameY);
@@ -142,7 +142,7 @@ namespace Test2d
         /// <param name="r"></param>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            var record = r ?? this.Record;
+            var record = r ?? this.Data.Record;
 
             if (_shape != null)
             {
@@ -182,8 +182,11 @@ namespace Test2d
             { 
                 Name = name,
                 Style = default(ShapeStyle),
-                Bindings = ImmutableArray.Create<ShapeBinding>(),
-                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Data = new Data()
+                {
+                    Bindings = ImmutableArray.Create<ShapeBinding>(),
+                    Properties = ImmutableArray.Create<ShapeProperty>()
+                },
                 X = x, 
                 Y = y, 
                 Shape = shape 

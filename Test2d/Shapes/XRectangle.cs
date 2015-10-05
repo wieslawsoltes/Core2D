@@ -69,7 +69,7 @@ namespace Test2d
         /// <param name="r"></param>
         public override void Bind(Record r)
         {
-            base.Bind(r ?? this.Record);
+            base.Bind(r ?? this.Data.Record);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Test2d
         /// <param name="r"></param>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            var record = r ?? this.Record;
+            var record = r ?? this.Data.Record;
 
             if (State.HasFlag(ShapeState.Visible))
             {
@@ -122,8 +122,11 @@ namespace Test2d
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Bindings = ImmutableArray.Create<ShapeBinding>(),
-                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Data = new Data()
+                {
+                    Bindings = ImmutableArray.Create<ShapeBinding>(),
+                    Properties = ImmutableArray.Create<ShapeProperty>()
+                },
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
                 Text = text,
@@ -187,8 +190,11 @@ namespace Test2d
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = isFilled,
-                Bindings = ImmutableArray.Create<ShapeBinding>(),
-                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Data = new Data()
+                {
+                    Bindings = ImmutableArray.Create<ShapeBinding>(),
+                    Properties = ImmutableArray.Create<ShapeProperty>()
+                },
                 TopLeft = topLeft,
                 BottomRight = bottomRight,
                 Text = text,

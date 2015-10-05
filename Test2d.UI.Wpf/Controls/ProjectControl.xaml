@@ -62,13 +62,13 @@
             </TreeView.InputBindings>
             <TreeView.Style>
                 <Style TargetType="TreeView">
-                    <Setter Property="ContextMenu" Value="{StaticResource PojectContextMenu}"/>
+                    <Setter Property="ContextMenu" Value="{StaticResource PojectContextMenuKey}"/>
                 </Style>
             </TreeView.Style>
             <TreeView.ItemContainerStyle>
                 <Style TargetType="TreeViewItem">
                     <Setter Property="IsExpanded" Value="True"/>
-                    <Setter Property="ContextMenu" Value="{StaticResource DocumentContextMenu}"/>
+                    <Setter Property="ContextMenu" Value="{StaticResource DocumentContextMenuKey}"/>
                     <EventSetter Event="TreeViewItem.MouseRightButtonDown" Handler="TreeViewItem_MouseRightButtonDown"/>
                 </Style>
             </TreeView.ItemContainerStyle>
@@ -77,7 +77,7 @@
                     <HierarchicalDataTemplate.ItemContainerStyle>
                         <Style TargetType="TreeViewItem">
                             <Setter Property="IsExpanded" Value="False"/>
-                            <Setter Property="ContextMenu" Value="{StaticResource ContainerContextMenu}"/>
+                            <Setter Property="ContextMenu" Value="{StaticResource ContainerContextMenuKey}"/>
                             <EventSetter Event="TreeViewItem.MouseRightButtonDown" Handler="TreeViewItem_MouseRightButtonDown"/>
                             <Setter Property="IsSelected" Value="False"/>
                             <Style.Triggers>

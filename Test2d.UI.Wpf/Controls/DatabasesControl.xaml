@@ -46,11 +46,11 @@
                 </Style>
             </ComboBox.Style>
         </ComboBox>
-        <Control Template="{StaticResource DatabaseControlTemplateKey}" 
-                 DataContext="{Binding Editor.Project.CurrentDatabase}" 
+        <ContentControl
+                 Content="{Binding Editor.Project.CurrentDatabase}" 
                  Grid.Row="2">
-            <Control.Style>
-                <Style TargetType="Control">
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
                     <Setter Property="Visibility" Value="Visible"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding DataContext.Editor.Project.CurrentDatabase, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Value="{x:Null}">
@@ -58,7 +58,7 @@
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-            </Control.Style>
-        </Control>
+            </ContentControl.Style>
+        </ContentControl>
     </Grid>
 </UserControl>

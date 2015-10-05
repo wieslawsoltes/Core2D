@@ -38,9 +38,9 @@ namespace Test2d
         /// <param name="r"></param>
         public override void Bind(Record r)
         {
-            var record = r ?? this.Record;
-            _start.TryToBind("Start", this.Bindings, record);
-            _end.TryToBind("End", this.Bindings, record);
+            var record = r ?? this.Data.Record;
+            _start.TryToBind("Start", this.Data.Bindings, record);
+            _end.TryToBind("End", this.Data.Bindings, record);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Test2d
         /// <param name="r"></param>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            var record = r ?? this.Record;
+            var record = r ?? this.Data.Record;
 
             if (State.HasFlag(ShapeState.Visible))
             {
@@ -130,8 +130,11 @@ namespace Test2d
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = false,
-                Bindings = ImmutableArray.Create<ShapeBinding>(),
-                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Data = new Data()
+                {
+                    Bindings = ImmutableArray.Create<ShapeBinding>(),
+                    Properties = ImmutableArray.Create<ShapeProperty>()
+                },
                 Start = start,
                 End = end
             };
@@ -163,8 +166,11 @@ namespace Test2d
                 Style = style,
                 IsStroked = isStroked,
                 IsFilled = false,
-                Bindings = ImmutableArray.Create<ShapeBinding>(),
-                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Data = new Data()
+                {
+                    Bindings = ImmutableArray.Create<ShapeBinding>(),
+                    Properties = ImmutableArray.Create<ShapeProperty>()
+                },
                 Start = XPoint.Create(x1, y1, point),
                 End = XPoint.Create(x2, y2, point)
             };

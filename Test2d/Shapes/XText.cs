@@ -48,9 +48,9 @@ namespace Test2d
         /// <param name="r"></param>
         public override void Bind(Record r)
         {
-            var record = r ?? this.Record;
-            _topLeft.TryToBind("TopLeft", this.Bindings, record);
-            _bottomRight.TryToBind("BottomRight", this.Bindings, record);
+            var record = r ?? this.Data.Record;
+            _topLeft.TryToBind("TopLeft", this.Data.Bindings, record);
+            _bottomRight.TryToBind("BottomRight", this.Data.Bindings, record);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Test2d
         /// <param name="r"></param>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            var record = r ?? this.Record;
+            var record = r ?? this.Data.Record;
 
             if (State.HasFlag(ShapeState.Visible))
             {
@@ -217,15 +217,15 @@ namespace Test2d
         /// <returns></returns>
         public string BindToTextProperty(ImmutableArray<ShapeProperty> db, Record r)
         {
-            var record = r ?? this.Record;
+            var record = r ?? this.Data.Record;
 
-            // try to bind to internal (this.Record) or external (r) data record using Bindings
+            // try to bind to internal (this.Data.Record) or external (r) data record using Bindings
             if (record != null 
-                && this.Bindings != null 
-                && this.Bindings.Length > 0)
+                && this.Data.Bindings != null 
+                && this.Data.Bindings.Length > 0)
             {
                 string value;
-                bool success = TryToBind(this.Bindings, record, "Text", out value);
+                bool success = TryToBind(this.Data.Bindings, record, "Text", out value);
                 if (success)
                 {
                     return value;
@@ -234,11 +234,11 @@ namespace Test2d
 
             // try to bind to external properties database using Bindings
             if (db != null 
-                && this.Bindings != null 
-                && this.Bindings.Length > 0)
+                && this.Data.Bindings != null 
+                && this.Data.Bindings.Length > 0)
             {
                 string value;
-                bool success = TryToBind(this.Bindings, db, "Text", out value);
+                bool success = TryToBind(this.Data.Bindings, db, "Text", out value);
                 if (success)
                 {
                     return value;
@@ -246,12 +246,12 @@ namespace Test2d
             }
 
             // try to bind to Properties using Text as formatting
-            if (this.Properties != null 
-                && this.Properties.Length > 0)
+            if (this.Data.Properties != null 
+                && this.Data.Properties.Length > 0)
             {
                 try
                 {
-                    var args = ToArgs(this.Properties);
+                    var args = ToArgs(this.Data.Properties);
                     if (this.Text != null && args != null && args.Length > 0)
                     {
                         return string.Format(this.Text, args);
@@ -290,8 +290,11 @@ namespace Test2d
                 Name = name,
                 Style = style,
                 IsStroked = isStroked,
-                Bindings = ImmutableArray.Create<ShapeBinding>(),
-                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Data = new Data()
+                {
+                    Bindings = ImmutableArray.Create<ShapeBinding>(),
+                    Properties = ImmutableArray.Create<ShapeProperty>()
+                },
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
                 Text = text
@@ -345,8 +348,11 @@ namespace Test2d
                 Name = name,
                 Style = style,
                 IsStroked = isStroked,
-                Bindings = ImmutableArray.Create<ShapeBinding>(),
-                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Data = new Data()
+                {
+                    Bindings = ImmutableArray.Create<ShapeBinding>(),
+                    Properties = ImmutableArray.Create<ShapeProperty>()
+                },
                 TopLeft = topLeft,
                 BottomRight = bottomRight,
                 Text = text
