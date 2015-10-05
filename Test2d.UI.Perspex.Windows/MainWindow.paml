@@ -5,7 +5,6 @@
         xmlns:core="clr-namespace:Test2d;assembly=Test2d"
         Width="1240" Height="670"
         Title="Test2d">
-    
     <Window.Styles>
         <Style Selector="TextBlock.left">
             <Setter Property="TextBlock.Margin" Value="5,2,5,2"/>
@@ -41,7 +40,6 @@
         </Style>
         -->
     </Window.Styles>
-    
     <Window.DataTemplates>
         <DataTemplate DataType="core:XRectangle">
             <TextBlock Text="{Binding Style.Name}"/>
@@ -49,8 +47,7 @@
         <DataTemplate DataType="core:XEllipse">
             <TextBlock Text="{Binding Style.Name}"/>
         </DataTemplate>
-    </Window.DataTemplates>
-            
+    </Window.DataTemplates>    
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="150,*,150">
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <MenuItem Header="_File">
@@ -187,18 +184,11 @@
                         <TextBlock Text="{Binding Name}"/>
                     </DataTemplate>
                 </ListBox.DataTemplates>
-            </ListBox>
-
-            
-                
+            </ListBox> 
             <ContentControl 
                 Content="{Binding Editor.Project.CurrentContainer.CurrentShape}"
                 Grid.Row="2">
             </ContentControl>  
-        
-        
-    
         </Grid>
     </Grid>
-
 </Window>
