@@ -299,38 +299,6 @@
     <Style x:Key="SliderStyleKey" TargetType="Slider">
         <Setter Property="Margin" Value="5,2,5,2"/>
     </Style>
-    <!-- state -->
-    <ControlTemplate x:Key="StateControlTemplateKey">
-        <StackPanel Margin="5,2,5,2">
-            <CheckBox Content="Default" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
-            </CheckBox>
-            <CheckBox Content="Visible" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
-            </CheckBox>
-            <CheckBox Content="Printable" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
-            </CheckBox>
-            <CheckBox Content="Locked" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
-            </CheckBox>
-            <CheckBox Content="Connector" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
-            </CheckBox>
-            <CheckBox Content="None" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
-            </CheckBox>
-            <CheckBox Content="Standalone" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
-            </CheckBox>
-            <CheckBox Content="Input" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
-            </CheckBox>
-            <CheckBox Content="Output" Margin="1"
-                      IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
-            </CheckBox>
-        </StackPanel>
-    </ControlTemplate>
     <!-- style -->
     <DataTemplate DataType="{x:Type core:ArgbColor}">
         <Grid>
@@ -1721,7 +1689,44 @@
                 <ContentControl Content="{Binding End}"/>
             </Expander>
             <Expander Header="State">
-                <Control Template="{StaticResource StateControlTemplateKey}"/>
+                <StackPanel Margin="5,2,5,2">
+                    <CheckBox 
+                        Content="Default" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Visible" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Printable" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Locked" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Connector" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="None" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Standalone" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Input" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Output" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                    </CheckBox>
+                </StackPanel>
             </Expander>
             <Expander Header="Data">
                 <ContentControl Content="{Binding Data}"/>
@@ -1985,7 +1990,44 @@
                 </Grid>
             </Expander>
             <Expander Header="State">
-                <Control Template="{StaticResource StateControlTemplateKey}"/>
+                <StackPanel Margin="5,2,5,2">
+                    <CheckBox 
+                        Content="Default" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Visible" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Printable" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Locked" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Connector" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="None" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Standalone" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Input" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Output" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                    </CheckBox>
+                </StackPanel>
             </Expander>
             <Expander Header="Data">
                 <ContentControl Content="{Binding Data}"/>
@@ -2123,7 +2165,44 @@
                 <ContentControl Content="{Binding BottomRight}"/>
             </Expander>
             <Expander Header="State">
-                <Control Template="{StaticResource StateControlTemplateKey}"/>
+                <StackPanel Margin="5,2,5,2">
+                    <CheckBox 
+                        Content="Default" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Visible" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Printable" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Locked" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Connector" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="None" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Standalone" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Input" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Output" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                    </CheckBox>
+                </StackPanel>
             </Expander>
             <Expander Header="Data">
                 <ContentControl Content="{Binding Data}"/>
@@ -2241,7 +2320,44 @@
                 <ContentControl Content="{Binding Point4}"/>
             </Expander>
             <Expander Header="State">
-                <Control Template="{StaticResource StateControlTemplateKey}"/>
+                <StackPanel Margin="5,2,5,2">
+                    <CheckBox 
+                        Content="Default" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Visible" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Printable" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Locked" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Connector" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="None" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Standalone" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Input" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Output" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                    </CheckBox>
+                </StackPanel>
             </Expander>
             <Expander Header="Data">
                 <ContentControl Content="{Binding Data}"/>
@@ -2359,7 +2475,44 @@
                 <ContentControl Content="{Binding Point4}"/>
             </Expander>
             <Expander Header="State">
-                <Control Template="{StaticResource StateControlTemplateKey}"/>
+                <StackPanel Margin="5,2,5,2">
+                    <CheckBox 
+                        Content="Default" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Visible" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Printable" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Locked" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Connector" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="None" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Standalone" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Input" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Output" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                    </CheckBox>
+                </StackPanel>
             </Expander>
             <Expander Header="Data">
                 <ContentControl Content="{Binding Data}"/>
@@ -2474,7 +2627,44 @@
                 <ContentControl Content="{Binding Point3}"/>
             </Expander>
             <Expander Header="State">
-                <Control Template="{StaticResource StateControlTemplateKey}"/>
+                <StackPanel Margin="5,2,5,2">
+                    <CheckBox 
+                        Content="Default" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Visible" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Printable" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Locked" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Connector" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="None" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Standalone" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Input" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Output" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                    </CheckBox>
+                </StackPanel>
             </Expander>
             <Expander Header="Data">
                 <ContentControl Content="{Binding Data}"/>
@@ -2568,7 +2758,44 @@
                 <ContentControl Content="{Binding BottomRight}"/>
             </Expander>
             <Expander Header="State">
-                <Control Template="{StaticResource StateControlTemplateKey}"/>
+                <StackPanel Margin="5,2,5,2">
+                    <CheckBox 
+                        Content="Default" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Visible" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Printable" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Locked" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Connector" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="None" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Standalone" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Input" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Output" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                    </CheckBox>
+                </StackPanel>
             </Expander>
             <Expander Header="Data">
                 <ContentControl Content="{Binding Data}"/>
@@ -2714,7 +2941,44 @@
                 <ContentControl Content="{Binding BottomRight}"/>
             </Expander>
             <Expander Header="State">
-                <Control Template="{StaticResource StateControlTemplateKey}"/>
+                <StackPanel Margin="5,2,5,2">
+                    <CheckBox 
+                        Content="Default" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Visible" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Printable" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Locked" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Connector" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="None" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Standalone" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Input" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Output" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                    </CheckBox>
+                </StackPanel>
             </Expander>
             <Expander Header="Data">
                 <ContentControl Content="{Binding Data}"/>
@@ -2844,7 +3108,44 @@
                         </Grid>
                     </Expander>
                     <Expander Header="State">
-                        <Control Template="{StaticResource StateControlTemplateKey}"/>
+                        <StackPanel Margin="5,2,5,2">
+                            <CheckBox 
+                                Content="Default" Margin="1"
+                                IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                            </CheckBox>
+                            <CheckBox 
+                                Content="Visible" Margin="1"
+                                IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                            </CheckBox>
+                            <CheckBox 
+                                Content="Printable" Margin="1"
+                                IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                            </CheckBox>
+                            <CheckBox 
+                                Content="Locked" Margin="1"
+                                IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                            </CheckBox>
+                            <CheckBox 
+                                Content="Connector" Margin="1"
+                                IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                            </CheckBox>
+                            <CheckBox 
+                                Content="None" Margin="1"
+                                IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                            </CheckBox>
+                            <CheckBox 
+                                Content="Standalone" Margin="1"
+                                IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                            </CheckBox>
+                            <CheckBox 
+                                Content="Input" Margin="1"
+                                IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                            </CheckBox>
+                            <CheckBox 
+                                Content="Output" Margin="1"
+                                IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                            </CheckBox>
+                        </StackPanel>
                     </Expander>
                     <Expander Header="Data">
                         <ContentControl Content="{Binding Data}"/>
@@ -3002,7 +3303,44 @@
                 <ContentControl Content="{Binding Geometry}"/>
             </Expander>
             <Expander Header="State">
-                <Control Template="{StaticResource StateControlTemplateKey}"/>
+                <StackPanel Margin="5,2,5,2">
+                    <CheckBox 
+                        Content="Default" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Default}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Visible" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Visible}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Printable" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Printable}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Locked" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Locked}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Connector" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Connector}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="None" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.None}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Standalone" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Standalone}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Input" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Input}}">
+                    </CheckBox>
+                    <CheckBox 
+                        Content="Output" Margin="1"
+                        IsChecked="{Binding Path=State, Converter={StaticResource StateFlagsEnumConverter}, ConverterParameter={x:Static core:ShapeState.Output}}">
+                    </CheckBox>
+                </StackPanel>
             </Expander>
             <Expander Header="Data">
                 <ContentControl Content="{Binding Data}"/>
