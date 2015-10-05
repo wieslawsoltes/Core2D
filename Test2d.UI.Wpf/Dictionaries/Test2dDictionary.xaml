@@ -299,7 +299,7 @@
     <Style x:Key="SliderStyleKey" TargetType="Slider">
         <Setter Property="Margin" Value="5,2,5,2"/>
     </Style>
-    <!-- shape -->
+    <!-- state -->
     <ControlTemplate x:Key="StateControlTemplateKey">
         <StackPanel Margin="5,2,5,2">
             <CheckBox Content="Default" Margin="1"
