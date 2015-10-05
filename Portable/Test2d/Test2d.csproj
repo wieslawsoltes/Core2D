@@ -45,6 +45,9 @@
     <Compile Include="..\..\Test2d\Data\Column.cs">
       <Link>Data\Column.cs</Link>
     </Compile>
+    <Compile Include="..\..\Test2d\Data\Data.cs">
+      <Link>Data\Data.cs</Link>
+    </Compile>
     <Compile Include="..\..\Test2d\Data\Database.cs">
       <Link>Data\Database.cs</Link>
     </Compile>
