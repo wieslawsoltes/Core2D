@@ -1609,329 +1609,6 @@
         </Menu>
     </ControlTemplate>
     <!-- data -->
-    <ControlTemplate x:Key="BindingsControlTemplateKey">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="60*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Control Template="{StaticResource BindingsMenu}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="2,0,2,0"/>
-            <GridSplitter 
-                Grid.Column="1" 
-                Grid.Row="1"
-                Grid.RowSpan="2"
-                Width="10" 
-                Background="Transparent" 
-                ResizeBehavior="PreviousAndNext" 
-                ShowsPreview="True">
-            </GridSplitter>
-            <TextBlock 
-                Grid.Column="0" 
-                Grid.Row="1" 
-                Margin="5,2,0,2" 
-                VerticalAlignment="Center" 
-                Text="Property">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Visibility" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Bindings.Length, FallbackValue=0}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-            <TextBlock 
-                Grid.Column="2" 
-                Grid.Row="1" 
-                Margin="0,2,5,2" 
-                VerticalAlignment="Center" 
-                Text="Path">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Visibility" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Bindings.Length, FallbackValue=0}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-            <ItemsControl 
-                VerticalContentAlignment="Stretch" 
-                VerticalAlignment="Stretch" 
-                Grid.Column="0"
-                Grid.Row="2"
-                ItemsSource="{Binding Bindings, UpdateSourceTrigger=PropertyChanged}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Height="Auto" VerticalAlignment="Top">
-                            <TextBox 
-                                Margin="5,2,0,2" 
-                                VerticalAlignment="Center" 
-                                Text="{Binding Path=Property, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            </TextBox>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <ItemsControl 
-                x:Name="bindingsItemsControls"
-                VerticalContentAlignment="Stretch" 
-                VerticalAlignment="Stretch" 
-                Grid.Column="2" 
-                Grid.Row="2"
-                ItemsSource="{Binding Bindings, UpdateSourceTrigger=PropertyChanged}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Height="Auto" VerticalAlignment="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="30"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox 
-                                Grid.Column="0" 
-                                Margin="0,2,5,2" 
-                                VerticalAlignment="Center" 
-                                Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            </TextBox>
-                            <Button 
-                                Grid.Column="1" 
-                                Margin="5,0,5,0" 
-                                VerticalAlignment="Center" 
-                                Content="-" 
-                                Command="{Binding DataContext.Commands.RemoveBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
-                                <Button.CommandParameter>
-                                    <MultiBinding Converter="{StaticResource ShapeBindingParameterConverter}">
-                                        <Binding Path="DataContext" ElementName="bindingsItemsControls"/>
-                                        <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
-                                    </MultiBinding>
-                                </Button.CommandParameter>
-                            </Button>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </Grid>
-    </ControlTemplate>
-    <ControlTemplate x:Key="PropertiesControlTemplateKey">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="60*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Control 
-                Template="{StaticResource PropertiesMenu}" 
-                Grid.Row="0" 
-                Grid.Column="0" 
-                Grid.ColumnSpan="3" 
-                Margin="2,0,2,0">
-            </Control>
-            <GridSplitter 
-                Grid.Column="1" 
-                Grid.Row="1"
-                Grid.RowSpan="2"
-                Width="10" 
-                Background="Transparent" 
-                ResizeBehavior="PreviousAndNext" 
-                ShowsPreview="True">
-            </GridSplitter>
-            <TextBlock 
-                Grid.Column="0" 
-                Grid.Row="1" 
-                Margin="5,2,0,2" 
-                VerticalAlignment="Center" 
-                Text="Name">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Visibility" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Properties.Length, FallbackValue=0}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-            <TextBlock 
-                Grid.Column="2" 
-                Grid.Row="1" 
-                Margin="0,2,5,2" 
-                VerticalAlignment="Center"
-                Text="Value">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Visibility" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Properties.Length, FallbackValue=0}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-            <ItemsControl 
-                VerticalContentAlignment="Stretch" 
-                VerticalAlignment="Stretch" 
-                Grid.Column="0" 
-                Grid.Row="2"
-                ItemsSource="{Binding Properties, UpdateSourceTrigger=PropertyChanged}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Height="Auto" VerticalAlignment="Top">
-                            <TextBox 
-                                Margin="5,2,0,2" 
-                                VerticalAlignment="Center" 
-                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            </TextBox>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <ItemsControl 
-                x:Name="propertiesItemsControls"
-                VerticalContentAlignment="Stretch" 
-                VerticalAlignment="Stretch" 
-                Grid.Column="2" 
-                Grid.Row="2"
-                ItemsSource="{Binding Properties, UpdateSourceTrigger=PropertyChanged}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Height="Auto" VerticalAlignment="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="30"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox 
-                                Grid.Column="0" 
-                                Margin="0,2,5,2" 
-                                VerticalAlignment="Center" 
-                                Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            </TextBox>
-                            <Button 
-                                Grid.Column="1" 
-                                Margin="5,0,5,0" 
-                                VerticalAlignment="Center" 
-                                Content="-" 
-                                Command="{Binding DataContext.Commands.RemovePropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
-                                <Button.CommandParameter>
-                                    <MultiBinding Converter="{StaticResource ShapePropertyParameterConverter}">
-                                        <Binding Path="DataContext" ElementName="propertiesItemsControls"/>
-                                        <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
-                                    </MultiBinding>
-                                </Button.CommandParameter>
-                            </Button>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </Grid>
-    </ControlTemplate>
-    <ControlTemplate x:Key="ShapesPropertiesControlTemplateKey">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="50*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <GridSplitter 
-                Grid.Column="1" 
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Width="10" 
-                Background="Transparent" 
-                ResizeBehavior="PreviousAndNext" 
-                ShowsPreview="True">
-            </GridSplitter>
-            <TextBlock 
-                Grid.Column="0"
-                Grid.Row="0" 
-                Margin="5,2,0,2" 
-                VerticalAlignment="Center" 
-                Text="Name">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Visibility" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ShapesProperties.Length, FallbackValue=0}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-            <TextBlock 
-                Grid.Column="2" 
-                Grid.Row="0" 
-                Margin="0,2,5,2" 
-                VerticalAlignment="Center" 
-                Text="Value">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Visibility" Value="Visible"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ShapesProperties.Length, FallbackValue=0}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-            <ItemsControl 
-                VerticalContentAlignment="Stretch" 
-                VerticalAlignment="Stretch" 
-                Grid.Column="0" 
-                Grid.Row="1"
-                ItemsSource="{Binding ShapesProperties, UpdateSourceTrigger=PropertyChanged}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Height="Auto" VerticalAlignment="Top">
-                            <TextBox
-                                Margin="5,2,0,2" VerticalAlignment="Center" 
-                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            </TextBox>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <ItemsControl 
-                VerticalContentAlignment="Stretch" 
-                VerticalAlignment="Stretch" 
-                Grid.Column="2" 
-                Grid.Row="1"
-                ItemsSource="{Binding ShapesProperties, UpdateSourceTrigger=PropertyChanged}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Height="Auto" VerticalAlignment="Top">
-                            <TextBox 
-                                Margin="0,2,5,2" 
-                                VerticalAlignment="Center" 
-                                Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            </TextBox>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </Grid>
-    </ControlTemplate>
     <DataTemplate DataType="{x:Type core:Record}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -2138,7 +1815,7 @@
             </Expander>
         </StackPanel>
     </DataTemplate>
-    <ControlTemplate x:Key="DataControlTemplate">
+    <DataTemplate DataType="{x:Type core:Data}">
         <TabControl>
             <TabItem Header="Record">
                 <Grid>
@@ -2151,13 +1828,239 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Bindings">
-                <Control Template="{StaticResource BindingsControlTemplateKey}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Control Template="{StaticResource BindingsMenu}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="2,0,2,0"/>
+                    <GridSplitter 
+                        Grid.Column="1" 
+                        Grid.Row="1"
+                        Grid.RowSpan="2"
+                        Width="10" 
+                        Background="Transparent" 
+                        ResizeBehavior="PreviousAndNext" 
+                        ShowsPreview="True">
+                    </GridSplitter>
+                    <TextBlock 
+                        Grid.Column="0" 
+                        Grid.Row="1" 
+                        Margin="5,2,0,2" 
+                        VerticalAlignment="Center" 
+                        Text="Property">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Bindings.Length, FallbackValue=0}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock 
+                        Grid.Column="2" 
+                        Grid.Row="1" 
+                        Margin="0,2,5,2" 
+                        VerticalAlignment="Center" 
+                        Text="Path">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Bindings.Length, FallbackValue=0}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <ItemsControl 
+                        VerticalContentAlignment="Stretch" 
+                        VerticalAlignment="Stretch" 
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        ItemsSource="{Binding Bindings, UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="Auto" VerticalAlignment="Top">
+                                    <TextBox 
+                                        Margin="5,2,0,2" 
+                                        VerticalAlignment="Center" 
+                                        Text="{Binding Path=Property, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    </TextBox>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <ItemsControl 
+                        x:Name="bindingsItemsControls"
+                        VerticalContentAlignment="Stretch" 
+                        VerticalAlignment="Stretch" 
+                        Grid.Column="2" 
+                        Grid.Row="2"
+                        ItemsSource="{Binding Bindings, UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="Auto" VerticalAlignment="Top">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox 
+                                        Grid.Column="0" 
+                                        Margin="0,2,5,2" 
+                                        VerticalAlignment="Center" 
+                                        Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    </TextBox>
+                                    <Button 
+                                        Grid.Column="1" 
+                                        Margin="5,0,5,0" 
+                                        VerticalAlignment="Center" 
+                                        Content="-" 
+                                        Command="{Binding DataContext.Commands.RemoveBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+                                        <Button.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource ShapeBindingParameterConverter}">
+                                                <Binding Path="DataContext" ElementName="bindingsItemsControls"/>
+                                                <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
+                                            </MultiBinding>
+                                        </Button.CommandParameter>
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
             </TabItem>
             <TabItem Header="Properties">
-                <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Control 
+                        Template="{StaticResource PropertiesMenu}" 
+                        Grid.Row="0" 
+                        Grid.Column="0" 
+                        Grid.ColumnSpan="3" 
+                        Margin="2,0,2,0">
+                    </Control>
+                    <GridSplitter 
+                        Grid.Column="1" 
+                        Grid.Row="1"
+                        Grid.RowSpan="2"
+                        Width="10" 
+                        Background="Transparent" 
+                        ResizeBehavior="PreviousAndNext" 
+                        ShowsPreview="True">
+                    </GridSplitter>
+                    <TextBlock 
+                        Grid.Column="0" 
+                        Grid.Row="1" 
+                        Margin="5,2,0,2" 
+                        VerticalAlignment="Center" 
+                        Text="Name">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Properties.Length, FallbackValue=0}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock 
+                        Grid.Column="2" 
+                        Grid.Row="1" 
+                        Margin="0,2,5,2" 
+                        VerticalAlignment="Center"
+                        Text="Value">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Properties.Length, FallbackValue=0}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <ItemsControl 
+                        VerticalContentAlignment="Stretch" 
+                        VerticalAlignment="Stretch" 
+                        Grid.Column="0" 
+                        Grid.Row="2"
+                        ItemsSource="{Binding Properties, UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="Auto" VerticalAlignment="Top">
+                                    <TextBox 
+                                        Margin="5,2,0,2" 
+                                        VerticalAlignment="Center" 
+                                        Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    </TextBox>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <ItemsControl 
+                        x:Name="propertiesItemsControls"
+                        VerticalContentAlignment="Stretch" 
+                        VerticalAlignment="Stretch" 
+                        Grid.Column="2" 
+                        Grid.Row="2"
+                        ItemsSource="{Binding Properties, UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="Auto" VerticalAlignment="Top">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox 
+                                        Grid.Column="0" 
+                                        Margin="0,2,5,2" 
+                                        VerticalAlignment="Center" 
+                                        Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    </TextBox>
+                                    <Button 
+                                        Grid.Column="1" 
+                                        Margin="5,0,5,0" 
+                                        VerticalAlignment="Center" 
+                                        Content="-" 
+                                        Command="{Binding DataContext.Commands.RemovePropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+                                        <Button.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource ShapePropertyParameterConverter}">
+                                                <Binding Path="DataContext" ElementName="propertiesItemsControls"/>
+                                                <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
+                                            </MultiBinding>
+                                        </Button.CommandParameter>
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
             </TabItem>
         </TabControl>
-    </ControlTemplate>
+    </DataTemplate>
     <!-- shapes -->
     <DataTemplate DataType="{x:Type core:XPoint}">
         <TabControl>
@@ -2231,7 +2134,7 @@
                         <Control Template="{StaticResource StateControlTemplateKey}"/>
                     </Expander>
                     <Expander Header="Data">
-                        <Control Template="{StaticResource DataControlTemplate}"/>
+                        <ContentControl Content="{Binding Data}"/>
                     </Expander>
                 </StackPanel>
             </TabItem>
@@ -2297,7 +2200,7 @@
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
-                <Control Template="{StaticResource DataControlTemplate}"/>
+                <ContentControl Content="{Binding Data}"/>
             </Expander>
             <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
@@ -2535,7 +2438,7 @@
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
-                <Control Template="{StaticResource DataControlTemplate}"/>
+                <ContentControl Content="{Binding Data}"/>
             </Expander>
             <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
@@ -2647,7 +2550,7 @@
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
-                <Control Template="{StaticResource DataControlTemplate}"/>
+                <ContentControl Content="{Binding Data}"/>
             </Expander>
             <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
@@ -2739,7 +2642,7 @@
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
-                <Control Template="{StaticResource DataControlTemplate}"/>
+                <ContentControl Content="{Binding Data}"/>
             </Expander>
             <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
@@ -2831,7 +2734,7 @@
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
-                <Control Template="{StaticResource DataControlTemplate}"/>
+                <ContentControl Content="{Binding Data}"/>
             </Expander>
             <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
@@ -2920,7 +2823,7 @@
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
-                <Control Template="{StaticResource DataControlTemplate}"/>
+                <ContentControl Content="{Binding Data}"/>
             </Expander>
             <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
@@ -2988,7 +2891,7 @@
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
-                <Control Template="{StaticResource DataControlTemplate}"/>
+                <ContentControl Content="{Binding Data}"/>
             </Expander>
             <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
@@ -3108,7 +3011,7 @@
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
-                <Control Template="{StaticResource DataControlTemplate}"/>
+                <ContentControl Content="{Binding Data}"/>
             </Expander>
             <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
@@ -3141,15 +3044,104 @@
                         Grid.Column="1">
                     </TextBox>
                 </Grid>
-                    <Expander Header="Properties" 
-                              IsExpanded="True">
-                        <Control Template="{StaticResource ShapesPropertiesControlTemplateKey}"/>
+                    <Expander 
+                        Header="Properties" 
+                        IsExpanded="True">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="50*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <GridSplitter 
+                                Grid.Column="1" 
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Width="10" 
+                                Background="Transparent" 
+                                ResizeBehavior="PreviousAndNext" 
+                                ShowsPreview="True">
+                            </GridSplitter>
+                            <TextBlock 
+                                Grid.Column="0"
+                                Grid.Row="0" 
+                                Margin="5,2,0,2" 
+                                VerticalAlignment="Center" 
+                                Text="Name">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ShapesProperties.Length, FallbackValue=0}" Value="0">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock 
+                                Grid.Column="2" 
+                                Grid.Row="0" 
+                                Margin="0,2,5,2" 
+                                VerticalAlignment="Center" 
+                                Text="Value">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ShapesProperties.Length, FallbackValue=0}" Value="0">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <ItemsControl 
+                                VerticalContentAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                Grid.Column="0" 
+                                Grid.Row="1"
+                                ItemsSource="{Binding ShapesProperties, UpdateSourceTrigger=PropertyChanged}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Height="Auto" VerticalAlignment="Top">
+                                            <TextBox
+                                                Margin="5,2,0,2" VerticalAlignment="Center" 
+                                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                            </TextBox>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <ItemsControl 
+                                VerticalContentAlignment="Stretch" 
+                                VerticalAlignment="Stretch" 
+                                Grid.Column="2" 
+                                Grid.Row="1"
+                                ItemsSource="{Binding ShapesProperties, UpdateSourceTrigger=PropertyChanged}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Height="Auto" VerticalAlignment="Top">
+                                            <TextBox 
+                                                Margin="0,2,5,2" 
+                                                VerticalAlignment="Center" 
+                                                Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                            </TextBox>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
                     </Expander>
                     <Expander Header="State">
                         <Control Template="{StaticResource StateControlTemplateKey}"/>
                     </Expander>
                     <Expander Header="Data">
-                        <Control Template="{StaticResource DataControlTemplate}"/>
+                        <ContentControl Content="{Binding Data}"/>
                     </Expander>
                 </StackPanel>
             </TabItem>
@@ -3281,7 +3273,7 @@
                 <Control Template="{StaticResource StateControlTemplateKey}"/>
             </Expander>
             <Expander Header="Data">
-                <Control Template="{StaticResource DataControlTemplate}"/>
+                <ContentControl Content="{Binding Data}"/>
             </Expander>
             <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
@@ -3761,9 +3753,126 @@
                     <ContentControl Content="{Binding Template}"/>
                 </StackPanel>
             </Expander>
-            <Expander Header="{x:Static p:Resources.ContainerProperties}" 
-                      IsExpanded="True">
-                <Control Template="{StaticResource PropertiesControlTemplateKey}"/>
+            <Expander 
+                Header="{x:Static p:Resources.ContainerProperties}"   
+                IsExpanded="True">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="60*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Control 
+                        Template="{StaticResource PropertiesMenu}" 
+                        Grid.Row="0" 
+                        Grid.Column="0" 
+                        Grid.ColumnSpan="3" 
+                        Margin="2,0,2,0">
+                    </Control>
+                    <GridSplitter 
+                        Grid.Column="1" 
+                        Grid.Row="1"
+                        Grid.RowSpan="2"
+                        Width="10" 
+                        Background="Transparent" 
+                        ResizeBehavior="PreviousAndNext" 
+                        ShowsPreview="True">
+                    </GridSplitter>
+                    <TextBlock 
+                        Grid.Column="0" 
+                        Grid.Row="1" 
+                        Margin="5,2,0,2" 
+                        VerticalAlignment="Center" 
+                        Text="Name">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Properties.Length, FallbackValue=0}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock 
+                        Grid.Column="2" 
+                        Grid.Row="1" 
+                        Margin="0,2,5,2" 
+                        VerticalAlignment="Center"
+                        Text="Value">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Properties.Length, FallbackValue=0}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <ItemsControl 
+                        VerticalContentAlignment="Stretch" 
+                        VerticalAlignment="Stretch" 
+                        Grid.Column="0" 
+                        Grid.Row="2"
+                        ItemsSource="{Binding Properties, UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="Auto" VerticalAlignment="Top">
+                                    <TextBox 
+                                        Margin="5,2,0,2" 
+                                        VerticalAlignment="Center" 
+                                        Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    </TextBox>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <ItemsControl 
+                        x:Name="propertiesItemsControls"
+                        VerticalContentAlignment="Stretch" 
+                        VerticalAlignment="Stretch" 
+                        Grid.Column="2" 
+                        Grid.Row="2"
+                        ItemsSource="{Binding Properties, UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="Auto" VerticalAlignment="Top">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox 
+                                        Grid.Column="0" 
+                                        Margin="0,2,5,2" 
+                                        VerticalAlignment="Center" 
+                                        Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    </TextBox>
+                                    <Button 
+                                        Grid.Column="1" 
+                                        Margin="5,0,5,0" 
+                                        VerticalAlignment="Center" 
+                                        Content="-" 
+                                        Command="{Binding DataContext.Commands.RemovePropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+                                        <Button.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource ShapePropertyParameterConverter}">
+                                                <Binding Path="DataContext" ElementName="propertiesItemsControls"/>
+                                                <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
+                                            </MultiBinding>
+                                        </Button.CommandParameter>
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
             </Expander>
         </StackPanel>
     </DataTemplate>
