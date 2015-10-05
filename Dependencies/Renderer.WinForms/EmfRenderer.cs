@@ -876,6 +876,9 @@ namespace Test2d
                     break;
             }
 
+            format.FormatFlags = StringFormatFlags.NoWrap | StringFormatFlags.NoClip;
+            format.Trimming = StringTrimming.None;
+
             _gfx.DrawString(
                 tbind,
                 font,
