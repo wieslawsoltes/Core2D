@@ -666,14 +666,14 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="shape"></param>
+        /// <param name="data"></param>
         /// <param name="property"></param>
-        public void AddWithHistory(BaseShape shape, ShapeProperty property)
+        public void AddWithHistory(Data data, ShapeProperty property)
         {
-            var previous = shape.Properties;
-            var next = shape.Properties.Add(property);
-            _history.Snapshot(previous, next, (p) => shape.Properties = p);
-            shape.Properties = next;
+            var previous = data.Properties;
+            var next = data.Properties.Add(property);
+            _history.Snapshot(previous, next, (p) => data.Properties = p);
+            data.Properties = next;
         }
 
         /// <summary>
@@ -688,18 +688,18 @@ namespace Test2d
             _history.Snapshot(previous, next, (p) => container.Properties = p);
             container.Properties = next;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="shape"></param>
+        /// <param name="data"></param>
         /// <param name="binding"></param>
-        public void AddWithHistory(BaseShape shape, ShapeBinding binding)
+        public void AddWithHistory(Data data, ShapeBinding binding)
         {
-            var previous = shape.Bindings;
-            var next = shape.Bindings.Add(binding);
-            _history.Snapshot(previous, next, (p) => shape.Bindings = p);
-            shape.Bindings = next;
+            var previous = data.Bindings;
+            var next = data.Bindings.Add(binding);
+            _history.Snapshot(previous, next, (p) => data.Bindings = p);
+            data.Bindings = next;
         }
 
         /// <summary>

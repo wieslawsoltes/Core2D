@@ -693,17 +693,17 @@ namespace Test2d
         /// <param name="owner"></param>
         public void OnResetRecord(object owner)
         {
-            if (owner != null && owner is BaseShape)
+            if (owner != null && owner is Data)
             {
-                var shape = owner as BaseShape;
-                var record = shape.Record;
+                var data = owner as Data;
+                var record = data.Record;
 
                 if (record != null)
                 {
                     var previous = record;
                     var next = default(Record);
-                    _editor.History.Snapshot(previous, next, (p) => shape.Record = p);
-                    shape.Record = next;
+                    _editor.History.Snapshot(previous, next, (p) => data.Record = p);
+                    data.Record = next;
                 }
             }
         }
@@ -714,15 +714,15 @@ namespace Test2d
         /// <param name="owner"></param>
         public void OnAddBinding(object owner)
         {
-            if (owner != null && owner is BaseShape)
+            if (owner != null && owner is Data)
             {
-                var shape = owner as BaseShape;
-                if (shape.Bindings == null)
+                var data = owner as Data;
+                if (data.Bindings == null)
                 {
-                    shape.Bindings = ImmutableArray.Create<ShapeBinding>();
+                    data.Bindings = ImmutableArray.Create<ShapeBinding>();
                 }
 
-                _editor.AddWithHistory(shape, ShapeBinding.Create("", ""));
+                _editor.AddWithHistory(data, ShapeBinding.Create("", ""));
             }
         }
 
@@ -737,15 +737,15 @@ namespace Test2d
                 var owner = (parameter as ShapeBindingParameter).Owner;
                 var binding = (parameter as ShapeBindingParameter).Binding;
 
-                if (owner != null && owner is BaseShape)
+                if (owner != null && owner is Data)
                 {
-                    var shape = owner as BaseShape;
-                    if (shape.Bindings != null)
+                    var data = owner as Data;
+                    if (data.Bindings != null)
                     {
-                        var previous = shape.Bindings;
-                        var next = shape.Bindings.Remove(binding);
-                        _editor.History.Snapshot(previous, next, (p) => shape.Bindings = p);
-                        shape.Bindings = next;
+                        var previous = data.Bindings;
+                        var next = data.Bindings.Remove(binding);
+                        _editor.History.Snapshot(previous, next, (p) => data.Bindings = p);
+                        data.Bindings = next;
                     }
                 }
             }
@@ -759,15 +759,15 @@ namespace Test2d
         {
             if (owner != null)
             {
-                if (owner is BaseShape)
+                if (owner is Data)
                 {
-                    var shape = owner as BaseShape;
-                    if (shape.Properties == null)
+                    var data = owner as Data;
+                    if (data.Properties == null)
                     {
-                        shape.Properties = ImmutableArray.Create<ShapeProperty>();
+                        data.Properties = ImmutableArray.Create<ShapeProperty>();
                     }
 
-                    _editor.AddWithHistory(shape, ShapeProperty.Create("New", ""));
+                    _editor.AddWithHistory(data, ShapeProperty.Create("New", ""));
                 }
                 else if (owner is Container)
                 {
@@ -793,15 +793,15 @@ namespace Test2d
                 var owner = (parameter as ShapePropertyParameter).Owner;
                 var property = (parameter as ShapePropertyParameter).Property;
 
-                if (owner is BaseShape)
+                if (owner is Data)
                 {
-                    var shape = owner as BaseShape;
-                    if (shape.Properties != null)
+                    var data = owner as Data;
+                    if (data.Properties != null)
                     {
-                        var previous = shape.Properties;
-                        var next = shape.Properties.Remove(property);
-                        _editor.History.Snapshot(previous, next, (p) => shape.Properties = p);
-                        shape.Properties = next;
+                        var previous = data.Properties;
+                        var next = data.Properties.Remove(property);
+                        _editor.History.Snapshot(previous, next, (p) => data.Properties = p);
+                        data.Properties = next;
                     }
                 }
                 else if (owner is Container)
@@ -2232,27 +2232,27 @@ namespace Test2d
                 // try to restore shape record
                 foreach (var shape in Editor.GetAllShapes(shapes))
                 {
-                    if (shape.Record == null)
+                    if (shape.Data.Record == null)
                         continue;
 
                     Record record;
-                    if (records.TryGetValue(shape.Record.Id, out record))
+                    if (records.TryGetValue(shape.Data.Record.Id, out record))
                     {
                         // use existing record
-                        shape.Record = record;
+                        shape.Data.Record = record;
                     }
                     else
                     {
                         // create Imported database
                         if (_editor.Project.CurrentDatabase == null)
                         {
-                            var db = Database.Create("Imported", shape.Record.Columns);
+                            var db = Database.Create("Imported", shape.Data.Record.Columns);
                             _editor.Project.Databases = _editor.Project.Databases.Add(db);
                             _editor.Project.CurrentDatabase = db;
                         }
 
                         // add missing data record
-                        _editor.Project.CurrentDatabase.Records = _editor.Project.CurrentDatabase.Records.Add(shape.Record);
+                        _editor.Project.CurrentDatabase.Records = _editor.Project.CurrentDatabase.Records.Add(shape.Data.Record);
 
                         // recreate records dictionary
                         records = _editor.Project.Databases
@@ -2589,14 +2589,14 @@ namespace Test2d
                 if (_editor.Renderers[0].State.SelectedShape != null)
                 {
                     // TODO: Add history snapshot.
-                    _editor.Renderers[0].State.SelectedShape.Record = record;
+                    _editor.Renderers[0].State.SelectedShape.Data.Record = record;
                 }
                 else if (_editor.Renderers[0].State.SelectedShapes != null && _editor.Renderers[0].State.SelectedShapes.Count > 0)
                 {
                     // TODO: Add history snapshot.
                     foreach (var shape in _editor.Renderers[0].State.SelectedShapes)
                     {
-                        shape.Record = record;
+                        shape.Data.Record = record;
                     }
                 }
                 else
@@ -2607,10 +2607,10 @@ namespace Test2d
                         var result = ShapeBounds.HitTest(container, new Vector2(x, y), _editor.Project.Options.HitTreshold);
                         if (result != null)
                         {
-                            var previous = result.Record;
+                            var previous = result.Data.Record;
                             var next = record;
-                            _editor.History.Snapshot(previous, next, (p) => result.Record = p);
-                            result.Record = next;
+                            _editor.History.Snapshot(previous, next, (p) => result.Data.Record = p);
+                            result.Data.Record = next;
                         }
                         else
                         {
@@ -2654,12 +2654,12 @@ namespace Test2d
                 case Tool.Point:
                     {
                         var point = XPoint.Create(x, y, _editor.Project.Options.PointShape);
-                        point.Record = record;
+                        point.Data.Record = record;
 
                         if (record.Columns.Length >= 2)
                         {
-                            point.Bindings = point.Bindings.Add(ShapeBinding.Create("X", record.Columns[0].Name));
-                            point.Bindings = point.Bindings.Add(ShapeBinding.Create("Y", record.Columns[1].Name));
+                            point.Data.Bindings = point.Data.Bindings.Add(ShapeBinding.Create("X", record.Columns[0].Name));
+                            point.Data.Bindings = point.Data.Bindings.Add(ShapeBinding.Create("Y", record.Columns[1].Name));
                         }
 
                         _editor.AddWithHistory(point);
@@ -2671,18 +2671,18 @@ namespace Test2d
                             x, y,
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape);
-                        line.Record = record;
+                        line.Data.Record = record;
 
                         if (record.Columns.Length >= 2)
                         {
-                            line.Bindings = line.Bindings.Add(ShapeBinding.Create("Start.X", record.Columns[0].Name));
-                            line.Bindings = line.Bindings.Add(ShapeBinding.Create("Start.Y", record.Columns[1].Name));
+                            line.Data.Bindings = line.Data.Bindings.Add(ShapeBinding.Create("Start.X", record.Columns[0].Name));
+                            line.Data.Bindings = line.Data.Bindings.Add(ShapeBinding.Create("Start.Y", record.Columns[1].Name));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            line.Bindings = line.Bindings.Add(ShapeBinding.Create("End.X", record.Columns[2].Name));
-                            line.Bindings = line.Bindings.Add(ShapeBinding.Create("End.Y", record.Columns[3].Name));
+                            line.Data.Bindings = line.Data.Bindings.Add(ShapeBinding.Create("End.X", record.Columns[2].Name));
+                            line.Data.Bindings = line.Data.Bindings.Add(ShapeBinding.Create("End.Y", record.Columns[3].Name));
                         }
 
                         _editor.AddWithHistory(line);
@@ -2694,18 +2694,18 @@ namespace Test2d
                             x, y,
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape);
-                        rectangle.Record = record;
+                        rectangle.Data.Record = record;
 
                         if (record.Columns.Length >= 2)
                         {
-                            rectangle.Bindings = rectangle.Bindings.Add(ShapeBinding.Create("TopLeft.X", record.Columns[0].Name));
-                            rectangle.Bindings = rectangle.Bindings.Add(ShapeBinding.Create("TopLeft.Y", record.Columns[1].Name));
+                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(ShapeBinding.Create("TopLeft.X", record.Columns[0].Name));
+                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(ShapeBinding.Create("TopLeft.Y", record.Columns[1].Name));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            rectangle.Bindings = rectangle.Bindings.Add(ShapeBinding.Create("BottomRight.X", record.Columns[2].Name));
-                            rectangle.Bindings = rectangle.Bindings.Add(ShapeBinding.Create("BottomRight.Y", record.Columns[3].Name));
+                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(ShapeBinding.Create("BottomRight.X", record.Columns[2].Name));
+                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(ShapeBinding.Create("BottomRight.Y", record.Columns[3].Name));
                         }
 
                         _editor.AddWithHistory(rectangle);
@@ -2717,18 +2717,18 @@ namespace Test2d
                             x, y,
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape);
-                        ellipse.Record = record;
+                        ellipse.Data.Record = record;
 
                         if (record.Columns.Length >= 2)
                         {
-                            ellipse.Bindings = ellipse.Bindings.Add(ShapeBinding.Create("TopLeft.X", record.Columns[0].Name));
-                            ellipse.Bindings = ellipse.Bindings.Add(ShapeBinding.Create("TopLeft.Y", record.Columns[1].Name));
+                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(ShapeBinding.Create("TopLeft.X", record.Columns[0].Name));
+                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(ShapeBinding.Create("TopLeft.Y", record.Columns[1].Name));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            ellipse.Bindings = ellipse.Bindings.Add(ShapeBinding.Create("BottomRight.X", record.Columns[2].Name));
-                            ellipse.Bindings = ellipse.Bindings.Add(ShapeBinding.Create("BottomRight.Y", record.Columns[3].Name));
+                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(ShapeBinding.Create("BottomRight.X", record.Columns[2].Name));
+                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(ShapeBinding.Create("BottomRight.Y", record.Columns[3].Name));
                         }
 
                         _editor.AddWithHistory(ellipse);
@@ -2740,30 +2740,30 @@ namespace Test2d
                             x, y,
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape);
-                        arc.Record = record;
+                        arc.Data.Record = record;
 
                         if (record.Columns.Length >= 2)
                         {
-                            arc.Bindings = arc.Bindings.Add(ShapeBinding.Create("Point1.X", record.Columns[0].Name));
-                            arc.Bindings = arc.Bindings.Add(ShapeBinding.Create("Point1.Y", record.Columns[1].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point1.X", record.Columns[0].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point1.Y", record.Columns[1].Name));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            arc.Bindings = arc.Bindings.Add(ShapeBinding.Create("Point2.X", record.Columns[2].Name));
-                            arc.Bindings = arc.Bindings.Add(ShapeBinding.Create("Point2.Y", record.Columns[3].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point2.X", record.Columns[2].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point2.Y", record.Columns[3].Name));
                         }
 
                         if (record.Columns.Length >= 6)
                         {
-                            arc.Bindings = arc.Bindings.Add(ShapeBinding.Create("Point3.X", record.Columns[4].Name));
-                            arc.Bindings = arc.Bindings.Add(ShapeBinding.Create("Point3.Y", record.Columns[5].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point3.X", record.Columns[4].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point3.Y", record.Columns[5].Name));
                         }
 
                         if (record.Columns.Length >= 8)
                         {
-                            arc.Bindings = arc.Bindings.Add(ShapeBinding.Create("Point4.X", record.Columns[6].Name));
-                            arc.Bindings = arc.Bindings.Add(ShapeBinding.Create("Point4.Y", record.Columns[7].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point4.X", record.Columns[6].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point4.Y", record.Columns[7].Name));
                         }
 
                         _editor.AddWithHistory(arc);
@@ -2775,30 +2775,30 @@ namespace Test2d
                             x, y,
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape);
-                        bezier.Record = record;
+                        bezier.Data.Record = record;
 
                         if (record.Columns.Length >= 2)
                         {
-                            bezier.Bindings = bezier.Bindings.Add(ShapeBinding.Create("Point1.X", record.Columns[0].Name));
-                            bezier.Bindings = bezier.Bindings.Add(ShapeBinding.Create("Point1.Y", record.Columns[1].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point1.X", record.Columns[0].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point1.Y", record.Columns[1].Name));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            bezier.Bindings = bezier.Bindings.Add(ShapeBinding.Create("Point2.X", record.Columns[2].Name));
-                            bezier.Bindings = bezier.Bindings.Add(ShapeBinding.Create("Point2.Y", record.Columns[3].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point2.X", record.Columns[2].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point2.Y", record.Columns[3].Name));
                         }
 
                         if (record.Columns.Length >= 6)
                         {
-                            bezier.Bindings = bezier.Bindings.Add(ShapeBinding.Create("Point3.X", record.Columns[4].Name));
-                            bezier.Bindings = bezier.Bindings.Add(ShapeBinding.Create("Point3.Y", record.Columns[5].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point3.X", record.Columns[4].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point3.Y", record.Columns[5].Name));
                         }
 
                         if (record.Columns.Length >= 8)
                         {
-                            bezier.Bindings = bezier.Bindings.Add(ShapeBinding.Create("Point4.X", record.Columns[6].Name));
-                            bezier.Bindings = bezier.Bindings.Add(ShapeBinding.Create("Point4.Y", record.Columns[7].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point4.X", record.Columns[6].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point4.Y", record.Columns[7].Name));
                         }
 
                         _editor.AddWithHistory(bezier);
@@ -2810,24 +2810,24 @@ namespace Test2d
                             x, y,
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape);
-                        qbezier.Record = record;
+                        qbezier.Data.Record = record;
 
                         if (record.Columns.Length >= 2)
                         {
-                            qbezier.Bindings = qbezier.Bindings.Add(ShapeBinding.Create("Point1.X", record.Columns[0].Name));
-                            qbezier.Bindings = qbezier.Bindings.Add(ShapeBinding.Create("Point1.Y", record.Columns[1].Name));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(ShapeBinding.Create("Point1.X", record.Columns[0].Name));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(ShapeBinding.Create("Point1.Y", record.Columns[1].Name));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            qbezier.Bindings = qbezier.Bindings.Add(ShapeBinding.Create("Point2.X", record.Columns[2].Name));
-                            qbezier.Bindings = qbezier.Bindings.Add(ShapeBinding.Create("Point2.Y", record.Columns[3].Name));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(ShapeBinding.Create("Point2.X", record.Columns[2].Name));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(ShapeBinding.Create("Point2.Y", record.Columns[3].Name));
                         }
 
                         if (record.Columns.Length >= 6)
                         {
-                            qbezier.Bindings = qbezier.Bindings.Add(ShapeBinding.Create("Point3.X", record.Columns[4].Name));
-                            qbezier.Bindings = qbezier.Bindings.Add(ShapeBinding.Create("Point3.Y", record.Columns[5].Name));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(ShapeBinding.Create("Point3.X", record.Columns[4].Name));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(ShapeBinding.Create("Point3.Y", record.Columns[5].Name));
                         }
 
                         _editor.AddWithHistory(qbezier);
@@ -2840,18 +2840,18 @@ namespace Test2d
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape,
                             "Text");
-                        text.Record = record;
+                        text.Data.Record = record;
 
                         if (record.Columns.Length >= 2)
                         {
-                            text.Bindings = text.Bindings.Add(ShapeBinding.Create("TopLeft.X", record.Columns[0].Name));
-                            text.Bindings = text.Bindings.Add(ShapeBinding.Create("TopLeft.Y", record.Columns[1].Name));
+                            text.Data.Bindings = text.Data.Bindings.Add(ShapeBinding.Create("TopLeft.X", record.Columns[0].Name));
+                            text.Data.Bindings = text.Data.Bindings.Add(ShapeBinding.Create("TopLeft.Y", record.Columns[1].Name));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            text.Bindings = text.Bindings.Add(ShapeBinding.Create("BottomRight.X", record.Columns[2].Name));
-                            text.Bindings = text.Bindings.Add(ShapeBinding.Create("BottomRight.Y", record.Columns[3].Name));
+                            text.Data.Bindings = text.Data.Bindings.Add(ShapeBinding.Create("BottomRight.X", record.Columns[2].Name));
+                            text.Data.Bindings = text.Data.Bindings.Add(ShapeBinding.Create("BottomRight.Y", record.Columns[3].Name));
                         }
 
                         _editor.AddWithHistory(text);
@@ -2869,7 +2869,7 @@ namespace Test2d
         public void DropAsGroup(Record record, double x, double y)
         {
             var g = XGroup.Create("g");
-            g.Record = record;
+            g.Data.Record = record;
 
             double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
             double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
@@ -2891,7 +2891,7 @@ namespace Test2d
                         _editor.Project.CurrentStyleLibrary.CurrentStyle,
                         _editor.Project.Options.PointShape, "");
                     var binding = ShapeBinding.Create("Text", record.Columns[i].Name);
-                    text.Bindings = text.Bindings.Add(binding);
+                    text.Data.Bindings = text.Data.Bindings.Add(binding);
                     g.AddShape(text);
 
                     py += height;

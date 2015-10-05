@@ -339,21 +339,6 @@ namespace Test2d
         private void ShapeObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Shape: " + sender.GetType() + ", Property: " + e.PropertyName);
-
-            if (e.PropertyName == "Bindings")
-            {
-                var shape = sender as BaseShape;
-                Remove(shape.Bindings);
-                Add(shape.Bindings);
-            }
-
-            if (e.PropertyName == "Properties")
-            {
-                var shape = sender as BaseShape;
-                Remove(shape.Properties);
-                Add(shape.Properties);
-            }
-
             _invalidateShapes();
             MarkAsDirty();
         }
@@ -434,6 +419,33 @@ namespace Test2d
         private void PropertyObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Property: " + sender.GetType() + ", Property: " + e.PropertyName);
+            _invalidateShapes();
+            MarkAsDirty();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Verbose("Data: " + sender.GetType() + ", Property: " + e.PropertyName);
+
+            if (e.PropertyName == "Bindings")
+            {
+                var data = sender as Data;
+                Remove(data.Bindings);
+                Add(data.Bindings);
+            }
+
+            if (e.PropertyName == "Properties")
+            {
+                var data = sender as Data;
+                Remove(data.Properties);
+                Add(data.Properties);
+            }
+
             _invalidateShapes();
             MarkAsDirty();
         }
@@ -891,16 +903,21 @@ namespace Test2d
             
             shape.PropertyChanged += ShapeObserver;
 
-            if (shape.Bindings != null)
+            if (shape.Data != null)
             {
-                Add(shape.Bindings);
+                if (shape.Data.Bindings != null)
+                {
+                    Add(shape.Data.Bindings);
+                }
+
+                if (shape.Data.Properties != null)
+                {
+                    Add(shape.Data.Properties);
+                }
+
+                shape.Data.PropertyChanged += DataObserver;
             }
-            
-            if (shape.Properties != null)
-            {
-                Add(shape.Properties);
-            }
-            
+
             if (shape is XPoint)
             {
                 var point = shape as XPoint;
@@ -1082,16 +1099,21 @@ namespace Test2d
             
             shape.PropertyChanged -= ShapeObserver;
 
-            if (shape.Bindings != null)
+            if (shape.Data != null)
             {
-                Remove(shape.Bindings);
+                if (shape.Data.Bindings != null)
+                {
+                    Remove(shape.Data.Bindings);
+                }
+
+                if (shape.Data.Properties != null)
+                {
+                    Remove(shape.Data.Properties);
+                }
+
+                shape.Data.PropertyChanged -= DataObserver;
             }
-            
-            if (shape.Properties != null)
-            {
-                Remove(shape.Properties);
-            }
-            
+
             if (shape is XPoint)
             {
                 var point = shape as XPoint;

@@ -30,7 +30,7 @@ namespace Test2d
 
                         foreach (var shape in _shapes)
                         {
-                            foreach (var property in shape.Properties)
+                            foreach (var property in shape.Data.Properties)
                             {
                                 builder.Add(property);
                             }
@@ -38,7 +38,7 @@ namespace Test2d
 
                         foreach (var connector in _connectors)
                         {
-                            foreach (var property in connector.Properties)
+                            foreach (var property in connector.Data.Properties)
                             {
                                 builder.Add(property);
                             }
@@ -75,7 +75,7 @@ namespace Test2d
         /// <param name="r"></param>
         public override void Bind(Record r)
         {
-            var record = r ?? this.Record;
+            var record = r ?? this.Data.Record;
 
             foreach (var shape in Shapes)
             {
@@ -99,7 +99,7 @@ namespace Test2d
         /// <param name="r"></param>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            var record = r ?? this.Record;
+            var record = r ?? this.Data.Record;
 
             if (State.HasFlag(ShapeState.Visible))
             {
@@ -221,8 +221,11 @@ namespace Test2d
             {
                 Name = name,
                 Style = default(ShapeStyle),
-                Bindings = ImmutableArray.Create<ShapeBinding>(),
-                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Data = new Data()
+                {
+                    Bindings = ImmutableArray.Create<ShapeBinding>(),
+                    Properties = ImmutableArray.Create<ShapeProperty>()
+                },
                 Shapes = ImmutableArray.Create<BaseShape>(),
                 Connectors = ImmutableArray.Create<XPoint>()
             };
