@@ -8,6 +8,186 @@
     xmlns:converters="clr-namespace:Test.Converters"
     xmlns:controls="clr-namespace:Test.Controls"
     xmlns:p="clr-namespace:Test2d.UI.Wpf.Properties">
+    <!-- menus -->
+    <ControlTemplate x:Key="BindingsMenuControlTemplateKey">
+        <Menu Background="Transparent" HorizontalAlignment="Right">
+            <MenuItem
+                Command="{Binding DataContext.Commands.AddBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                CommandParameter="{Binding}" 
+                Header="+">
+            </MenuItem>
+        </Menu>
+    </ControlTemplate>
+    <ControlTemplate x:Key="PropertiesMenuControlTemplateKey">
+        <Menu Background="Transparent" HorizontalAlignment="Right">
+            <MenuItem 
+                Command="{Binding DataContext.Commands.AddPropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                CommandParameter="{Binding}" 
+                Header="+">
+            </MenuItem>
+        </Menu>
+    </ControlTemplate>
+    <ControlTemplate x:Key="RecordMenuControlTemplateKey">
+        <Menu Background="Transparent" HorizontalAlignment="Right">
+            <MenuItem 
+                Command="{Binding DataContext.Commands.ResetRecordCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                CommandParameter="{Binding}" 
+                Header="X">
+            </MenuItem>
+        </Menu>
+    </ControlTemplate>
+    <ControlTemplate x:Key="ColumnsMenuControlTemplateKey">
+        <Menu Background="Transparent" HorizontalAlignment="Right">
+            <MenuItem 
+                Command="{Binding DataContext.Commands.AddColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                CommandParameter="{Binding}" 
+                Header="+">
+            </MenuItem>
+        </Menu>
+    </ControlTemplate>
+    <!-- context menus -->
+    <ContextMenu x:Key="ContainerContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+        <MenuItem 
+            Header="Te_mplate" 
+            Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+            DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Editor.Project.Templates}">
+            <MenuItem.ItemContainerStyle>
+                <Style TargetType="MenuItem">
+                    <Setter Property="Header" Value="{Binding Name}"/>
+                    <Setter Property="Command" Value="{Binding Path=Tag.Commands.ApplyTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}, FallbackValue={x:Null}}"/>
+                    <Setter Property="CommandParameter" Value="{Binding}"/>
+                    <Setter Property="IsCheckable" Value="True"/>
+                    <Setter Property="IsChecked" Value="False"/>
+                    <Style.Triggers>
+                        <DataTrigger Value="True">
+                            <DataTrigger.Binding>
+                                <MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
+                                    <Binding Path="Tag.Editor.Project.CurrentContainer.Template" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}"/>
+                                    <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
+                                </MultiBinding>
+                            </DataTrigger.Binding>
+                            <Setter Property="IsChecked" Value="True"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </MenuItem.ItemContainerStyle>
+        </MenuItem>
+        <Separator/>
+        <MenuItem 
+            Header="Insert Container Bef_ore" 
+            InputGestureText="" 
+            Command="{Binding DataContext.Commands.InsertContainerBeforeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
+            CommandParameter="{Binding}">
+        </MenuItem>
+        <MenuItem 
+            Header="Insert Container Aft_er" 
+            InputGestureText="" 
+            Command="{Binding DataContext.Commands.InsertContainerAfterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
+            CommandParameter="{Binding}">
+        </MenuItem>
+        <Separator/>
+        <MenuItem 
+            Header="Cu_t" 
+            InputGestureText="Ctrl+X" 
+            Command="{Binding DataContext.Commands.CutCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
+            CommandParameter="{Binding}">
+        </MenuItem>
+        <MenuItem 
+            Header="_Copy" 
+            InputGestureText="Ctrl+C" 
+            Command="{Binding DataContext.Commands.CopyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}"
+            CommandParameter="{Binding}">
+        </MenuItem>
+        <MenuItem 
+            Header="_Paste" 
+            InputGestureText="Ctrl+V" 
+            Command="{Binding DataContext.Commands.PasteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
+            CommandParameter="{Binding}">
+        </MenuItem>
+        <Separator/>
+        <MenuItem 
+            Header="_Delete" 
+            InputGestureText="Del" 
+            Command="{Binding DataContext.Commands.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
+            CommandParameter="{Binding}">
+        </MenuItem>
+        <Separator/>
+        <MenuItem 
+            Header="E_xport" 
+            InputGestureText="Ctrl+E" 
+            Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
+            CommandParameter="{Binding}">
+        </MenuItem>
+    </ContextMenu>
+    <ContextMenu x:Key="DocumentContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+        <MenuItem 
+            Header="_Add Container" 
+            InputGestureText="Ctrl+N" 
+            Command="{Binding DataContext.Commands.AddContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
+            CommandParameter="{Binding}">
+        </MenuItem>
+        <Separator/>
+        <MenuItem 
+            Header="Insert Document Bef_ore" 
+            InputGestureText="" 
+            Command="{Binding DataContext.Commands.InsertDocumentBeforeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
+            CommandParameter="{Binding}">
+        </MenuItem>
+        <MenuItem 
+            Header="Insert Document Aft_er" 
+            InputGestureText="" 
+            Command="{Binding DataContext.Commands.InsertDocumentAfterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
+            CommandParameter="{Binding}">
+        </MenuItem>
+        <Separator/>
+        <MenuItem 
+            Header="Cu_t" 
+            InputGestureText="Ctrl+X" 
+            Command="{Binding DataContext.Commands.CutCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
+            CommandParameter="{Binding}">
+        </MenuItem>
+        <MenuItem 
+            Header="_Copy" 
+            InputGestureText="Ctrl+C"
+            Command="{Binding DataContext.Commands.CopyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
+            CommandParameter="{Binding}">
+        </MenuItem>
+        <MenuItem 
+            Header="_Paste" 
+            InputGestureText="Ctrl+V" 
+            Command="{Binding DataContext.Commands.PasteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
+            CommandParameter="{Binding}">
+        </MenuItem>
+        <Separator/>
+        <MenuItem 
+            Header="_Delete" 
+            InputGestureText="Del" 
+            Command="{Binding DataContext.Commands.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
+            CommandParameter="{Binding}">
+        </MenuItem>
+        <Separator/>
+        <MenuItem 
+            Header="E_xport" 
+            InputGestureText="Ctrl+E" 
+            Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
+            CommandParameter="{Binding}">
+        </MenuItem>
+    </ContextMenu>
+    <ContextMenu x:Key="PojectContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+        <MenuItem 
+            Header="_Add Document" 
+            InputGestureText="Ctrl+N" 
+            Command="{Binding DataContext.Commands.AddDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
+            CommandParameter="{Binding}">
+        </MenuItem>
+        <Separator/>
+        <MenuItem 
+            Header="E_xport" 
+            InputGestureText="Ctrl+E" 
+            Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
+            CommandParameter="{Binding}">
+        </MenuItem>
+    </ContextMenu>
     <!-- converters -->
     <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
     <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
@@ -119,622 +299,6 @@
     <Style x:Key="SliderStyleKey" TargetType="Slider">
         <Setter Property="Margin" Value="5,2,5,2"/>
     </Style>
-    <!-- path -->
-    <DataTemplate DataType="{x:Type core:XPathSize}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="40"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock 
-                Text="Width" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="0" >
-            </TextBlock>
-            <TextBlock 
-                Text="Height" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="1" 
-                Grid.Column="0" >
-            </TextBlock>
-            <TextBox 
-                Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxLeftStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2">
-            </TextBox>
-            <TextBox 
-                Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxLeftStyleKey}"
-                Grid.Row="1" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2">
-            </TextBox>
-        </Grid>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type core:XArcSegment}">
-        <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsSmoothJoin" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsSmoothJoin}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="RotationAngle" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBlock 
-                    Text="IsLargeArc" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="1"
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBlock 
-                    Text="SweepDirection" 
-                    Style="{StaticResource TextBlockLeftStyleKey}" 
-                    Grid.Row="2" 
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBox 
-                    Text="{Binding RotationAngle, UpdateSourceTrigger=PropertyChanged}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1" 
-                    Grid.ColumnSpan="2">
-                </TextBox>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsLargeArc}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="1" 
-                    Grid.Column="1" 
-                    Grid.ColumnSpan="2">
-                </CheckBox>
-                <ComboBox 
-                    ItemsSource="{Binding Source={StaticResource ResourceKey=XSweepDirectionValues}}" 
-                    SelectedItem="{Binding SweepDirection}" 
-                    Style="{StaticResource ComboBoxStyleKey}"
-                    Grid.Row="2" 
-                    Grid.Column="1" 
-                    Grid.ColumnSpan="2">
-                </ComboBox>
-            </Grid>
-            <Expander Header="Point">
-                <ContentControl Content="{Binding Point}"/>
-            </Expander>
-            <Expander Header="Size">
-                <ContentControl Content="{Binding Size}"/>
-            </Expander>
-        </StackPanel>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type core:XBezierSegment}">
-        <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsSmoothJoin" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsSmoothJoin}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Expander Header="Point1">
-                <ContentControl Content="{Binding Point1}"/>
-            </Expander>
-            <Expander Header="Point2">
-                <ContentControl Content="{Binding Point2}"/>
-            </Expander>
-            <Expander Header="Point3">
-                <ContentControl Content="{Binding Point3}"/>
-            </Expander>
-        </StackPanel>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type core:XLineSegment}">
-        <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsSmoothJoin" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsSmoothJoin}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Expander Header="Point">
-                <ContentControl Content="{Binding Point}"/>
-            </Expander>
-        </StackPanel>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type core:XPolyBezierSegment}">
-        <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsSmoothJoin" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsSmoothJoin}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Expander Header="Points">
-                <ListBox
-                    ItemsSource="{Binding Points}"
-                    BorderBrush="{x:Null}"
-                    BorderThickness="0"
-                    HorizontalContentAlignment="Stretch"
-                    Height="140">
-                </ListBox>
-            </Expander>
-        </StackPanel>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type core:XPolyLineSegment}">
-        <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsSmoothJoin" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsSmoothJoin}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Expander Header="Points">
-                <ListBox
-                    ItemsSource="{Binding Points}"
-                    BorderBrush="{x:Null}"
-                    HorizontalContentAlignment="Stretch"
-                    Height="140">
-                </ListBox>
-            </Expander>
-        </StackPanel>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type core:XPolyQuadraticBezierSegment}">
-        <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsSmoothJoin" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsSmoothJoin}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Expander Header="Points">
-                <ListBox
-                    ItemsSource="{Binding Points}"
-                    BorderBrush="{x:Null}"
-                    HorizontalContentAlignment="Stretch"
-                    Height="140">
-                </ListBox>
-            </Expander>
-        </StackPanel>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type core:XQuadraticBezierSegment}">
-        <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsSmoothJoin" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsSmoothJoin}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Expander Header="Point1">
-                <ContentControl Content="{Binding Point1}"/>
-            </Expander>
-            <Expander Header="Point2">
-                <ContentControl Content="{Binding Point2}"/>
-            </Expander>
-        </StackPanel>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type core:XPathFigure}">
-        <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsFilled" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsFilled}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsClosed" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsClosed}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Expander Header="StartPoint">
-                <ContentControl Content="{Binding StartPoint}"/>
-            </Expander>
-        </StackPanel>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type core:XPathGeometry}">
-        <StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="FillRule" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <ComboBox 
-                    ItemsSource="{Binding Source={StaticResource ResourceKey=XFillRuleValues}}" 
-                    SelectedItem="{Binding FillRule}" 
-                    Style="{StaticResource ComboBoxStyleKey}"          
-                    Grid.Row="0" 
-                    Grid.Column="1" 
-                    Grid.ColumnSpan="2">
-                </ComboBox>
-            </Grid>
-            <TabControl>
-                <TabItem Header="Figures">
-                    <TreeView 
-                        x:Name="tree" 
-                        ItemsSource="{Binding Figures}"
-                        Margin="5,2,5,2">
-                        <TreeView.ItemContainerStyle>
-                            <Style TargetType="TreeViewItem">
-                                <Setter Property="IsExpanded" Value="True"/>
-                            </Style>
-                        </TreeView.ItemContainerStyle>
-                        <TreeView.ItemTemplate>
-                            <HierarchicalDataTemplate ItemsSource="{Binding Segments}">
-                                <HierarchicalDataTemplate.ItemContainerStyle>
-                                    <Style TargetType="TreeViewItem">
-                                        <Setter Property="IsExpanded" Value="True"/>
-                                    </Style>
-                                </HierarchicalDataTemplate.ItemContainerStyle>
-                                <HierarchicalDataTemplate.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}"/>
-                                    </DataTemplate>
-                                </HierarchicalDataTemplate.ItemTemplate>
-                                <TextBlock Text="{Binding}"/>
-                            </HierarchicalDataTemplate>
-                        </TreeView.ItemTemplate>
-                    </TreeView>
-                </TabItem>
-                <TabItem Header="Selected">
-                    <ContentControl 
-                        Content="{Binding}"                
-                        DataContext="{Binding ElementName=tree, Path=SelectedItem}"
-                        Margin="5,5,5,5"
-                        Grid.Column="2">
-                    </ContentControl>
-                </TabItem>
-            </TabControl>
-        </StackPanel>
-    </DataTemplate>
     <!-- shape -->
     <ControlTemplate x:Key="StyleControlTemplateKey">
         <Grid>
@@ -1571,186 +1135,6 @@
             </TabItem>
         </TabControl>
     </DataTemplate>
-    <!-- menus -->
-    <ControlTemplate x:Key="BindingsMenuControlTemplateKey">
-        <Menu Background="Transparent" HorizontalAlignment="Right">
-            <MenuItem
-                Command="{Binding DataContext.Commands.AddBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                CommandParameter="{Binding}" 
-                Header="+">
-            </MenuItem>
-        </Menu>
-    </ControlTemplate>
-    <ControlTemplate x:Key="PropertiesMenuControlTemplateKey">
-        <Menu Background="Transparent" HorizontalAlignment="Right">
-            <MenuItem 
-                Command="{Binding DataContext.Commands.AddPropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                CommandParameter="{Binding}" 
-                Header="+">
-            </MenuItem>
-        </Menu>
-    </ControlTemplate>
-    <ControlTemplate x:Key="RecordMenuControlTemplateKey">
-        <Menu Background="Transparent" HorizontalAlignment="Right">
-            <MenuItem 
-                Command="{Binding DataContext.Commands.ResetRecordCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                CommandParameter="{Binding}" 
-                Header="X">
-            </MenuItem>
-        </Menu>
-    </ControlTemplate>
-    <ControlTemplate x:Key="ColumnsMenuControlTemplateKey">
-        <Menu Background="Transparent" HorizontalAlignment="Right">
-            <MenuItem 
-                Command="{Binding DataContext.Commands.AddColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                CommandParameter="{Binding}" 
-                Header="+">
-            </MenuItem>
-        </Menu>
-    </ControlTemplate>
-    <!-- context menus -->
-    <ContextMenu x:Key="ContainerContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-        <MenuItem 
-            Header="Te_mplate" 
-            Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-            DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Editor.Project.Templates}">
-            <MenuItem.ItemContainerStyle>
-                <Style TargetType="MenuItem">
-                    <Setter Property="Header" Value="{Binding Name}"/>
-                    <Setter Property="Command" Value="{Binding Path=Tag.Commands.ApplyTemplateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}, FallbackValue={x:Null}}"/>
-                    <Setter Property="CommandParameter" Value="{Binding}"/>
-                    <Setter Property="IsCheckable" Value="True"/>
-                    <Setter Property="IsChecked" Value="False"/>
-                    <Style.Triggers>
-                        <DataTrigger Value="True">
-                            <DataTrigger.Binding>
-                                <MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
-                                    <Binding Path="Tag.Editor.Project.CurrentContainer.Template" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}"/>
-                                    <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
-                                </MultiBinding>
-                            </DataTrigger.Binding>
-                            <Setter Property="IsChecked" Value="True"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </MenuItem.ItemContainerStyle>
-        </MenuItem>
-        <Separator/>
-        <MenuItem 
-            Header="Insert Container Bef_ore" 
-            InputGestureText="" 
-            Command="{Binding DataContext.Commands.InsertContainerBeforeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <MenuItem 
-            Header="Insert Container Aft_er" 
-            InputGestureText="" 
-            Command="{Binding DataContext.Commands.InsertContainerAfterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <Separator/>
-        <MenuItem 
-            Header="Cu_t" 
-            InputGestureText="Ctrl+X" 
-            Command="{Binding DataContext.Commands.CutCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <MenuItem 
-            Header="_Copy" 
-            InputGestureText="Ctrl+C" 
-            Command="{Binding DataContext.Commands.CopyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}"
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <MenuItem 
-            Header="_Paste" 
-            InputGestureText="Ctrl+V" 
-            Command="{Binding DataContext.Commands.PasteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <Separator/>
-        <MenuItem 
-            Header="_Delete" 
-            InputGestureText="Del" 
-            Command="{Binding DataContext.Commands.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <Separator/>
-        <MenuItem 
-            Header="E_xport" 
-            InputGestureText="Ctrl+E" 
-            Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-    </ContextMenu>
-    <ContextMenu x:Key="DocumentContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-        <MenuItem 
-            Header="_Add Container" 
-            InputGestureText="Ctrl+N" 
-            Command="{Binding DataContext.Commands.AddContainerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <Separator/>
-        <MenuItem 
-            Header="Insert Document Bef_ore" 
-            InputGestureText="" 
-            Command="{Binding DataContext.Commands.InsertDocumentBeforeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <MenuItem 
-            Header="Insert Document Aft_er" 
-            InputGestureText="" 
-            Command="{Binding DataContext.Commands.InsertDocumentAfterCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <Separator/>
-        <MenuItem 
-            Header="Cu_t" 
-            InputGestureText="Ctrl+X" 
-            Command="{Binding DataContext.Commands.CutCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <MenuItem 
-            Header="_Copy" 
-            InputGestureText="Ctrl+C"
-            Command="{Binding DataContext.Commands.CopyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <MenuItem 
-            Header="_Paste" 
-            InputGestureText="Ctrl+V" 
-            Command="{Binding DataContext.Commands.PasteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <Separator/>
-        <MenuItem 
-            Header="_Delete" 
-            InputGestureText="Del" 
-            Command="{Binding DataContext.Commands.DeleteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <Separator/>
-        <MenuItem 
-            Header="E_xport" 
-            InputGestureText="Ctrl+E" 
-            Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-    </ContextMenu>
-    <ContextMenu x:Key="PojectContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-        <MenuItem 
-            Header="_Add Document" 
-            InputGestureText="Ctrl+N" 
-            Command="{Binding DataContext.Commands.AddDocumentCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <Separator/>
-        <MenuItem 
-            Header="E_xport" 
-            InputGestureText="Ctrl+E" 
-            Command="{Binding DataContext.Commands.ExportCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-    </ContextMenu>
     <!-- data -->
     <DataTemplate DataType="{x:Type core:Record}">
         <Grid>
@@ -3421,6 +2805,622 @@
             <Expander Header="Style">
                 <ContentControl Content="{Binding Style}"/>
             </Expander>
+        </StackPanel>
+    </DataTemplate>
+    <!-- path -->
+    <DataTemplate DataType="{x:Type core:XPathSize}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock 
+                Text="Width" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
+                Grid.Row="0" 
+                Grid.Column="0" >
+            </TextBlock>
+            <TextBlock 
+                Text="Height" 
+                Style="{StaticResource TextBlockLeftStyleKey}"
+                Grid.Row="1" 
+                Grid.Column="0" >
+            </TextBlock>
+            <TextBox 
+                Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
+                Style="{StaticResource TextBoxLeftStyleKey}"
+                Grid.Row="0" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2">
+            </TextBox>
+            <TextBox 
+                Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
+                Style="{StaticResource TextBoxLeftStyleKey}"
+                Grid.Row="1" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="2">
+            </TextBox>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type core:XArcSegment}">
+        <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsSmoothJoin" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsSmoothJoin}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="RotationAngle" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <TextBlock 
+                    Text="IsLargeArc" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="1"
+                    Grid.Column="0">
+                </TextBlock>
+                <TextBlock 
+                    Text="SweepDirection" 
+                    Style="{StaticResource TextBlockLeftStyleKey}" 
+                    Grid.Row="2" 
+                    Grid.Column="0">
+                </TextBlock>
+                <TextBox 
+                    Text="{Binding RotationAngle, UpdateSourceTrigger=PropertyChanged}" 
+                    Style="{StaticResource TextBoxLeftStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    Grid.ColumnSpan="2">
+                </TextBox>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsLargeArc}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="1" 
+                    Grid.Column="1" 
+                    Grid.ColumnSpan="2">
+                </CheckBox>
+                <ComboBox 
+                    ItemsSource="{Binding Source={StaticResource ResourceKey=XSweepDirectionValues}}" 
+                    SelectedItem="{Binding SweepDirection}" 
+                    Style="{StaticResource ComboBoxStyleKey}"
+                    Grid.Row="2" 
+                    Grid.Column="1" 
+                    Grid.ColumnSpan="2">
+                </ComboBox>
+            </Grid>
+            <Expander Header="Point">
+                <ContentControl Content="{Binding Point}"/>
+            </Expander>
+            <Expander Header="Size">
+                <ContentControl Content="{Binding Size}"/>
+            </Expander>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type core:XBezierSegment}">
+        <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsSmoothJoin" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsSmoothJoin}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Expander Header="Point1">
+                <ContentControl Content="{Binding Point1}"/>
+            </Expander>
+            <Expander Header="Point2">
+                <ContentControl Content="{Binding Point2}"/>
+            </Expander>
+            <Expander Header="Point3">
+                <ContentControl Content="{Binding Point3}"/>
+            </Expander>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type core:XLineSegment}">
+        <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsSmoothJoin" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsSmoothJoin}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Expander Header="Point">
+                <ContentControl Content="{Binding Point}"/>
+            </Expander>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type core:XPolyBezierSegment}">
+        <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsSmoothJoin" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsSmoothJoin}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Expander Header="Points">
+                <ListBox
+                    ItemsSource="{Binding Points}"
+                    BorderBrush="{x:Null}"
+                    BorderThickness="0"
+                    HorizontalContentAlignment="Stretch"
+                    Height="140">
+                </ListBox>
+            </Expander>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type core:XPolyLineSegment}">
+        <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsSmoothJoin" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsSmoothJoin}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Expander Header="Points">
+                <ListBox
+                    ItemsSource="{Binding Points}"
+                    BorderBrush="{x:Null}"
+                    HorizontalContentAlignment="Stretch"
+                    Height="140">
+                </ListBox>
+            </Expander>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type core:XPolyQuadraticBezierSegment}">
+        <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsSmoothJoin" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsSmoothJoin}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Expander Header="Points">
+                <ListBox
+                    ItemsSource="{Binding Points}"
+                    BorderBrush="{x:Null}"
+                    HorizontalContentAlignment="Stretch"
+                    Height="140">
+                </ListBox>
+            </Expander>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type core:XQuadraticBezierSegment}">
+        <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsStroked" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsStroked}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsSmoothJoin" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsSmoothJoin}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Expander Header="Point1">
+                <ContentControl Content="{Binding Point1}"/>
+            </Expander>
+            <Expander Header="Point2">
+                <ContentControl Content="{Binding Point2}"/>
+            </Expander>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type core:XPathFigure}">
+        <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsFilled" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsFilled}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="IsClosed" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <CheckBox 
+                    Content=""
+                    IsChecked="{Binding IsClosed}"
+                    Style="{StaticResource CheckBoxStyleKey}"
+                    Grid.Row="0" 
+                    Grid.Column="1">
+                </CheckBox>
+            </Grid>
+            <Expander Header="StartPoint">
+                <ContentControl Content="{Binding StartPoint}"/>
+            </Expander>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type core:XPathGeometry}">
+        <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Text="FillRule" 
+                    Style="{StaticResource TextBlockLeftStyleKey}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                </TextBlock>
+                <ComboBox 
+                    ItemsSource="{Binding Source={StaticResource ResourceKey=XFillRuleValues}}" 
+                    SelectedItem="{Binding FillRule}" 
+                    Style="{StaticResource ComboBoxStyleKey}"          
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    Grid.ColumnSpan="2">
+                </ComboBox>
+            </Grid>
+            <TabControl>
+                <TabItem Header="Figures">
+                    <TreeView 
+                        x:Name="tree" 
+                        ItemsSource="{Binding Figures}"
+                        Margin="5,2,5,2">
+                        <TreeView.ItemContainerStyle>
+                            <Style TargetType="TreeViewItem">
+                                <Setter Property="IsExpanded" Value="True"/>
+                            </Style>
+                        </TreeView.ItemContainerStyle>
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Segments}">
+                                <HierarchicalDataTemplate.ItemContainerStyle>
+                                    <Style TargetType="TreeViewItem">
+                                        <Setter Property="IsExpanded" Value="True"/>
+                                    </Style>
+                                </HierarchicalDataTemplate.ItemContainerStyle>
+                                <HierarchicalDataTemplate.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}"/>
+                                    </DataTemplate>
+                                </HierarchicalDataTemplate.ItemTemplate>
+                                <TextBlock Text="{Binding}"/>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </TabItem>
+                <TabItem Header="Selected">
+                    <ContentControl 
+                        Content="{Binding}"                
+                        DataContext="{Binding ElementName=tree, Path=SelectedItem}"
+                        Margin="5,5,5,5"
+                        Grid.Column="2">
+                    </ContentControl>
+                </TabItem>
+            </TabControl>
         </StackPanel>
     </DataTemplate>
     <!-- project -->
