@@ -8,6 +8,32 @@
     xmlns:converters="clr-namespace:Test.Converters"
     xmlns:controls="clr-namespace:Test.Controls"
     xmlns:p="clr-namespace:Test2d.UI.Wpf.Properties">
+    <!-- brushes -->
+    <SolidColorBrush x:Key="BackgroundColor" Color="White" />
+    <SolidColorBrush x:Key="DarkSquareColor" Color="DarkGray" />
+    <SolidColorBrush x:Key="LightSquareColor" Color="LightGray" />
+    <DrawingBrush x:Key="CheckerBoard" Viewport="0,0,20,20" ViewportUnits="Absolute" Stretch="None" TileMode="Tile">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Brush="{DynamicResource DarkSquareColor}">
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <RectangleGeometry Rect="0,0,10,10"/>
+                            <RectangleGeometry Rect="10,10,10,10"/>
+                        </GeometryGroup>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="{DynamicResource LightSquareColor}">
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <RectangleGeometry Rect="10,0,10,10"/>
+                            <RectangleGeometry Rect="0,10,10,10"/>
+                        </GeometryGroup>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
     <!-- menus -->
     <ControlTemplate x:Key="BindingsMenuControlTemplateKey">
         <Menu Background="Transparent" HorizontalAlignment="Right">
@@ -241,32 +267,6 @@
             <x:Type TypeName="core:XFillRule"/>
         </ObjectDataProvider.MethodParameters>
     </ObjectDataProvider>
-    <!-- brushes -->
-    <SolidColorBrush x:Key="BackgroundColor" Color="White" />
-    <SolidColorBrush x:Key="DarkSquareColor" Color="DarkGray" />
-    <SolidColorBrush x:Key="LightSquareColor" Color="LightGray" />
-    <DrawingBrush x:Key="CheckerBoard" Viewport="0,0,20,20" ViewportUnits="Absolute" Stretch="None" TileMode="Tile">
-        <DrawingBrush.Drawing>
-            <DrawingGroup>
-                <GeometryDrawing Brush="{DynamicResource DarkSquareColor}">
-                    <GeometryDrawing.Geometry>
-                        <GeometryGroup>
-                            <RectangleGeometry Rect="0,0,10,10"/>
-                            <RectangleGeometry Rect="10,10,10,10"/>
-                        </GeometryGroup>
-                    </GeometryDrawing.Geometry>
-                </GeometryDrawing>
-                <GeometryDrawing Brush="{DynamicResource LightSquareColor}">
-                    <GeometryDrawing.Geometry>
-                        <GeometryGroup>
-                            <RectangleGeometry Rect="10,0,10,10"/>
-                            <RectangleGeometry Rect="0,10,10,10"/>
-                        </GeometryGroup>
-                    </GeometryDrawing.Geometry>
-                </GeometryDrawing>
-            </DrawingGroup>
-        </DrawingBrush.Drawing>
-    </DrawingBrush>
     <!-- styles -->
     <Style x:Key="TextBlockLeftStyleKey" TargetType="TextBlock">
         <Setter Property="Margin" Value="5,2,5,2"/>
