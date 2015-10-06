@@ -457,7 +457,7 @@ namespace PdfSharp
         {
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.HasFlag(_state.DrawShapeState))
+                if (shape.State.Value.HasFlag(_state.DrawShapeState.Value))
                 {
                     shape.Draw(gfx, this, 0, 0, db, r);
                 }

@@ -27,7 +27,7 @@ namespace Test2d
                 return;
 
             var r = new PdfRenderer();
-            r.State.DrawShapeState = ShapeState.Printable;
+            r.State.DrawShapeState.Value = ShapeStateFlags.Printable;
             r.State.ImageCache = ic;
 
             if (item is Container)
