@@ -63,9 +63,9 @@
                         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                         <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                         <TextBlock Text="X" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                        <TextBox Text="{Binding Path=X, Mode=OneWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                        <TextBox Text="{Binding Path=X, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                         <TextBlock Text="Y" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                        <TextBox Text="{Binding Path=Y, Mode=OneWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                        <TextBox Text="{Binding Path=Y, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="State" Classes="property">
