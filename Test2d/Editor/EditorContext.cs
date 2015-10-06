@@ -3009,16 +3009,18 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
-        public void InitializeEditor(ILog log)
+        /// <param name="log"></param>
+        /// <param name="logFileName"></param>
+        public void InitializeEditor(ILog log = null, string logFileName = null)
         {
             try
             {
                 _editor = Editor.Create(_projectFactory.GetProject(), _renderers);
 
-                if (log != null)
+                if (log != null && logFileName != null)
                 {
                     _editor.Log = log;
-                    _editor.Log.Initialize("Test2d.log");
+                    _editor.Log.Initialize(logFileName);
                 }
 
                 _commands = new EditorCommands();

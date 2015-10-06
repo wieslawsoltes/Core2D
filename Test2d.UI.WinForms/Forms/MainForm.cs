@@ -74,7 +74,7 @@ namespace TestWinForms
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter()
             };
-            context.InitializeEditor(new TraceLog());
+            context.InitializeEditor(new TraceLog(), "Test2d.log");
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
             context.Editor.GetImageKey = async () => await GetImageKey();
 

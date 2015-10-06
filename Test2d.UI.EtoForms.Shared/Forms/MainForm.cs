@@ -52,7 +52,7 @@ namespace TestEtoForms
                 CsvReader = new Test2d.CsvHelperReader(),
                 CsvWriter = new Test2d.CsvHelperWriter()
             };
-            _context.InitializeEditor(new Test2d.TraceLog());
+            _context.InitializeEditor(new Test2d.TraceLog(), "Test2d.log");
             _context.Editor.Renderers[0].State.DrawShapeState = Test2d.ShapeState.Visible;
             _context.Editor.GetImageKey = async () => await GetImageKey();
 

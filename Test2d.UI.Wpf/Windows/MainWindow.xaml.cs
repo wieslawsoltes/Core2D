@@ -27,13 +27,13 @@ namespace Test.Windows
     public partial class MainWindow : Window, IView
     {
         private bool _isLoaded = false;
-        private string _recentProjectsPath = "Test2d.UI.Wpf.recent";
+        private string _recentFileName = "Test2d.UI.Wpf.recent";
         private string _resourceLayoutRoot = "Test2d.UI.Wpf.Layouts.";
-        private string _resourceLayoutPath = "Test2d.UI.Wpf.layout";
-        private string _defaultLayoutPath = "Test2d.UI.Wpf.layout";
-        private bool _autoRestoreLayout = true;
+        private string _resourceLayoutFileName = "Test2d.UI.Wpf.layout";
+        private string _defaultLayoutFileName = "Test2d.UI.Wpf.layout";
+        private bool _restoreLayout = true;
         private IDictionary<string, LayoutContent> _layouts;
-        private bool _autoLoadRecent = true;
+        private bool _autoRecent = true;
 
         /// <summary>
         /// 
@@ -93,7 +93,7 @@ namespace Test.Windows
             {
                 Filter = "Layout (*.layout)|*.layout|All (*.*)|*.*",
                 FilterIndex = 0,
-                FileName = _defaultLayoutPath
+                FileName = _defaultLayoutFileName
             };
 
             if (dlg.ShowDialog() == true)
@@ -126,7 +126,7 @@ namespace Test.Windows
             
             try
             {
-                LoadLayoutFromResource(_resourceLayoutRoot + _resourceLayoutPath, context);
+                LoadLayoutFromResource(_resourceLayoutRoot + _resourceLayoutFileName, context);
             }
             catch (Exception ex)
             {
@@ -669,7 +669,7 @@ namespace Test.Windows
         {
             try
             {
-                LoadRecent(_recentProjectsPath, context);
+                LoadRecent(_recentFileName, context);
             }
             catch (Exception ex)
             {
@@ -691,7 +691,7 @@ namespace Test.Windows
         {
             try
             {
-                SaveRecent(_recentProjectsPath, context);
+                SaveRecent(_recentFileName, context);
             }
             catch (Exception ex)
             {
@@ -787,7 +787,7 @@ namespace Test.Windows
         {
             try
             {
-                LoadLayout(_defaultLayoutPath, context);
+                LoadLayout(_defaultLayoutFileName, context);
             }
             catch (Exception ex)
             {
@@ -809,7 +809,7 @@ namespace Test.Windows
         {
             try
             {
-                SaveLayout(_defaultLayoutPath);
+                SaveLayout(_defaultLayoutFileName);
             }
             catch (Exception ex)
             {
@@ -841,7 +841,7 @@ namespace Test.Windows
                 CsvWriter = new CsvHelperWriter()
             };
 
-            context.InitializeEditor(new TraceLog());
+            context.InitializeEditor(new TraceLog(), "Test2d.log");
             context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
             context.Editor.Renderers[1].State.DrawShapeState = ShapeState.Visible;
             context.Editor.GetImageKey = async () => await GetImageKey();
@@ -860,12 +860,12 @@ namespace Test.Windows
 
                     InitializeLayouts();
 
-                    if (_autoLoadRecent)
+                    if (_autoRecent)
                     {
                         AutoLoadRecent(context);
                     }
 
-                    if (_autoRestoreLayout)
+                    if (_restoreLayout)
                     {
                         AutoLoadLayout(context);
                     }
@@ -880,12 +880,12 @@ namespace Test.Windows
 
                 DeInitializeContext();
 
-                if (_autoLoadRecent)
+                if (_autoRecent)
                 {
                     AutoSaveRecent(context);
                 }
 
-                if (_autoRestoreLayout)
+                if (_restoreLayout)
                 {
                     AutoSaveLayout(context);
                 }
