@@ -218,17 +218,17 @@ namespace Test2d
                 {
                     case MoveMode.Point:
                         {
-                            if (!state.HasFlag(ShapeState.Locked))
+                            if (!state.Value.HasFlag(ShapeStateFlags.Locked))
                             {
                                 var shape = _editor.Renderers[0].State.SelectedShape;
                                 var shapes = Enumerable.Repeat(shape, 1);
-                                _pointsCache = Editor.GetAllPoints(shapes, ShapeState.Connector).Distinct().ToList();
+                                _pointsCache = Editor.GetAllPoints(shapes, ShapeStateFlags.Connector).Distinct().ToList();
                             }
                         }
                         break;
                     case MoveMode.Shape:
                         {
-                            if (!state.HasFlag(ShapeState.Locked) && !state.HasFlag(ShapeState.Connector))
+                            if (!state.Value.HasFlag(ShapeStateFlags.Locked) && !state.Value.HasFlag(ShapeStateFlags.Connector))
                             {
                                 var shape = _editor.Renderers[0].State.SelectedShape;
                                 var shapes = Enumerable.Repeat(shape, 1).ToList();
@@ -241,13 +241,13 @@ namespace Test2d
 
             if (_editor.Renderers[0].State.SelectedShapes != null)
             {
-                var shapes = _editor.Renderers[0].State.SelectedShapes.Where(s => !s.State.HasFlag(ShapeState.Locked));
+                var shapes = _editor.Renderers[0].State.SelectedShapes.Where(s => !s.State.Value.HasFlag(ShapeStateFlags.Locked));
 
                 switch (_editor.Project.Options.MoveMode)
                 {
                     case MoveMode.Point:
                         {
-                            _pointsCache = Editor.GetAllPoints(shapes, ShapeState.Connector).Distinct().ToList();
+                            _pointsCache = Editor.GetAllPoints(shapes, ShapeStateFlags.Connector).Distinct().ToList();
                         }
                         break;
                     case MoveMode.Shape:

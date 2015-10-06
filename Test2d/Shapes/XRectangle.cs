@@ -85,7 +85,7 @@ namespace Test2d
         {
             var record = r ?? this.Data.Record;
 
-            if (State.HasFlag(ShapeState.Visible))
+            if (State.Value.HasFlag(ShapeStateFlags.Visible))
             {
                 renderer.Draw(dc, this, dx, dy, db, record);
                 base.Draw(dc, renderer, dx, dy, db, record);

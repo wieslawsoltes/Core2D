@@ -70,7 +70,7 @@ namespace Test.Uwp
                 //CsvWriter = new T2d.CsvHelperWriter()
             };
             _context.InitializeEditor(null/*new T2d.TraceLog()*/);
-            _context.Editor.Renderers[0].State.DrawShapeState = T2d.ShapeState.Visible;
+            _context.Editor.Renderers[0].State.DrawShapeState.Value = T2d.ShapeStateFlags.Visible;
             _context.Editor.GetImageKey = async () => await Task.Run(() => _imagePath);
 
             _context.Commands.OpenCommand =

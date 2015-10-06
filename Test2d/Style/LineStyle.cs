@@ -73,16 +73,16 @@ namespace Test2d
             string name = "",
             MaxLengthFlags maxLengthFlags = MaxLengthFlags.Disabled,
             double maxLength = 15.0,
-            ShapeState maxLengthStartState = ShapeState.Connector | ShapeState.Output,
-            ShapeState maxLengthEndState = ShapeState.Connector | ShapeState.Input)
+            ShapeState maxLengthStartState = null,
+            ShapeState maxLengthEndState = null)
         {
             return new LineStyle() 
             { 
                 Name = name,
                 MaxLengthFlags = maxLengthFlags,
                 MaxLength = maxLength,
-                MaxLengthStartState = maxLengthStartState,
-                MaxLengthEndState = maxLengthEndState
+                MaxLengthStartState = maxLengthStartState ?? ShapeState.Create(ShapeStateFlags.Connector | ShapeStateFlags.Output),
+                MaxLengthEndState = maxLengthEndState ?? ShapeState.Create(ShapeStateFlags.Connector | ShapeStateFlags.Input)
             };
         }
     }

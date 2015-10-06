@@ -2162,7 +2162,7 @@ namespace Test2d
                     .ToDictionary(s => s.Name);
 
                 // reset point shape to container default
-                foreach (var point in Editor.GetAllPoints(shapes, ShapeState.Connector))
+                foreach (var point in Editor.GetAllPoints(shapes, ShapeStateFlags.Connector))
                 {
                     point.Shape = _editor.Project.Options.PointShape;
                 }

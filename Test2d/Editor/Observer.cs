@@ -453,6 +453,18 @@ namespace Test2d
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StateObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Verbose("State: " + sender.GetType() + ", Property: " + e.PropertyName);
+            _invalidateShapes();
+            MarkAsDirty();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="database"></param>
         public void Add(Database database)
         {
@@ -918,6 +930,11 @@ namespace Test2d
                 shape.Data.PropertyChanged += DataObserver;
             }
 
+            if (shape.State != null)
+            {
+                shape.State.PropertyChanged += StateObserver;
+            }
+
             if (shape is XPoint)
             {
                 var point = shape as XPoint;
@@ -1112,6 +1129,11 @@ namespace Test2d
                 }
 
                 shape.Data.PropertyChanged -= DataObserver;
+            }
+
+            if (shape.State != null)
+            {
+                shape.State.PropertyChanged -= StateObserver;
             }
 
             if (shape is XPoint)

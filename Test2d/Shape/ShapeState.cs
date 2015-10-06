@@ -7,44 +7,165 @@ namespace Test2d
     /// <summary>
     /// 
     /// </summary>
-    [Flags]
-    public enum ShapeState
+    public class ShapeState : ObservableObject
     {
+        private ShapeStateFlags _value;
+
         /// <summary>
         /// 
         /// </summary>
-        Default = 0,
+        public ShapeStateFlags Value
+        {
+            get { return _value; }
+            set { Update(ref _value, value); }
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        Visible = 1,
+        public bool Default
+        {
+            get { return _value.HasFlag(ShapeStateFlags.Default); }
+            set
+            {
+                if (value == true)
+                    Value = _value | ShapeStateFlags.Default;
+                else
+                    Value = _value & ~ShapeStateFlags.Default;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        Printable = 2,
+        public bool Visible
+        {
+            get { return _value.HasFlag(ShapeStateFlags.Visible); }
+            set
+            {
+                if (value == true)
+                    Value = _value | ShapeStateFlags.Visible;
+                else
+                    Value = _value & ~ShapeStateFlags.Visible;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        Locked = 4,
+        public bool Printable
+        {
+            get { return _value.HasFlag(ShapeStateFlags.Printable); }
+            set
+            {
+                if (value == true)
+                    Value = _value | ShapeStateFlags.Printable;
+                else
+                    Value = _value & ~ShapeStateFlags.Printable;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        Connector = 8,
+        public bool Locked
+        {
+            get { return _value.HasFlag(ShapeStateFlags.Locked); }
+            set
+            {
+                if (value == true)
+                    Value = _value | ShapeStateFlags.Locked;
+                else
+                    Value = _value & ~ShapeStateFlags.Locked;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        None = 16,
+        public bool Connector
+        {
+            get { return _value.HasFlag(ShapeStateFlags.Connector); }
+            set
+            {
+                if (value == true)
+                    Value = _value | ShapeStateFlags.Connector;
+                else
+                    Value = _value & ~ShapeStateFlags.Connector;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        Standalone = 32,
+        public bool None
+        {
+            get { return _value.HasFlag(ShapeStateFlags.None); }
+            set
+            {
+                if (value == true)
+                    Value = _value | ShapeStateFlags.None;
+                else
+                    Value = _value & ~ShapeStateFlags.None;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        Input = 64,
+        public bool Standalone
+        {
+            get { return _value.HasFlag(ShapeStateFlags.Standalone); }
+            set
+            {
+                if (value == true)
+                    Value = _value | ShapeStateFlags.Standalone;
+                else
+                    Value = _value & ~ShapeStateFlags.Standalone;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        Output = 128
+        public bool Input
+        {
+            get { return _value.HasFlag(ShapeStateFlags.Input); }
+            set
+            {
+                if (value == true)
+                    Value = _value | ShapeStateFlags.Input;
+                else
+                    Value = _value & ~ShapeStateFlags.Input;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool Output
+        {
+            get { return _value.HasFlag(ShapeStateFlags.Output); }
+            set
+            {
+                if (value == true)
+                    Value = _value | ShapeStateFlags.Output;
+                else
+                    Value = _value & ~ShapeStateFlags.Output;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="flags"></param>
+        /// <returns></returns>
+        public static ShapeState Create(ShapeStateFlags flags = ShapeStateFlags.Default)
+        {
+            return new ShapeState()
+            {
+                Value = flags
+            };
+        }
     }
 }

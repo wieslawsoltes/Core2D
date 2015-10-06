@@ -56,7 +56,7 @@ namespace Test2d
         {
             var record = r ?? this.Data.Record;
 
-            if (State.HasFlag(ShapeState.Visible))
+            if (State.Value.HasFlag(ShapeStateFlags.Visible))
             {
                 renderer.Draw(dc, this, dx, dy, db, record); 
             }
@@ -95,12 +95,12 @@ namespace Test2d
         /// <param name="dy"></param>
         public override void Move(double dx, double dy)
         {
-            if (!Start.State.HasFlag(ShapeState.Connector))
+            if (!Start.State.Value.HasFlag(ShapeStateFlags.Connector))
             {
                 Start.Move(dx, dy);
             }
 
-            if (!End.State.HasFlag(ShapeState.Connector))
+            if (!End.State.Value.HasFlag(ShapeStateFlags.Connector))
             {
                 End.Move(dx, dy);
             }
@@ -255,12 +255,12 @@ namespace Test2d
         {
             var ls = line.Style.LineStyle;
 
-            bool shortenStart = ls.MaxLengthStartState != ShapeState.Default
-                && line.Start.State.HasFlag(ls.MaxLengthStartState)
+            bool shortenStart = ls.MaxLengthStartState.Value != ShapeStateFlags.Default
+                && line.Start.State.Value.HasFlag(ls.MaxLengthStartState.Value)
                 && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.Start);
 
-            bool shortenEnd = ls.MaxLengthEndState != ShapeState.Default
-                && line.End.State.HasFlag(ls.MaxLengthEndState)
+            bool shortenEnd = ls.MaxLengthEndState.Value != ShapeStateFlags.Default
+                && line.End.State.Value.HasFlag(ls.MaxLengthEndState.Value)
                 && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.End);
 
             if (shortenStart && !shortenEnd)
@@ -297,12 +297,12 @@ namespace Test2d
         {
             var ls = line.Style.LineStyle;
 
-            bool shortenStart = ls.MaxLengthStartState != ShapeState.Default
-                && line.Start.State.HasFlag(ls.MaxLengthStartState)
+            bool shortenStart = ls.MaxLengthStartState.Value != ShapeStateFlags.Default
+                && line.Start.State.Value.HasFlag(ls.MaxLengthStartState.Value)
                 && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.Start);
 
-            bool shortenEnd = ls.MaxLengthEndState != ShapeState.Default
-                && line.End.State.HasFlag(ls.MaxLengthEndState)
+            bool shortenEnd = ls.MaxLengthEndState.Value != ShapeStateFlags.Default
+                && line.End.State.Value.HasFlag(ls.MaxLengthEndState.Value)
                 && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.End);
 
             if (shortenStart && !shortenEnd)
@@ -337,12 +337,12 @@ namespace Test2d
         {
             var ls = line.Style.LineStyle;
 
-            bool shortenStart = ls.MaxLengthStartState != ShapeState.Default
-                && line.Start.State.HasFlag(ls.MaxLengthStartState)
+            bool shortenStart = ls.MaxLengthStartState.Value != ShapeStateFlags.Default
+                && line.Start.State.Value.HasFlag(ls.MaxLengthStartState.Value)
                 && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.Start);
 
-            bool shortenEnd = ls.MaxLengthEndState != ShapeState.Default
-                && line.End.State.HasFlag(ls.MaxLengthEndState)
+            bool shortenEnd = ls.MaxLengthEndState.Value != ShapeStateFlags.Default
+                && line.End.State.Value.HasFlag(ls.MaxLengthEndState.Value)
                 && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.End);
 
             if (shortenStart && !shortenEnd)

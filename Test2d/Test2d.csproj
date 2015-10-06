@@ -147,6 +147,7 @@
     <Compile Include="Shape\ShapeBinding.cs" />
     <Compile Include="Shape\ShapeProperty.cs" />
     <Compile Include="Shape\ShapeState.cs" />
+    <Compile Include="Shape\ShapeStateFlags.cs" />
     <Compile Include="Style\ArgbColor.cs" />
     <Compile Include="Style\ArrowStyle.cs" />
     <Compile Include="Style\ArrowType.cs" />

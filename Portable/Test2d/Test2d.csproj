@@ -336,6 +336,9 @@
     <Compile Include="..\..\Test2d\Shape\ShapeState.cs">
       <Link>Shape\ShapeState.cs</Link>
     </Compile>
+    <Compile Include="..\..\Test2d\Shape\ShapeStateFlags.cs">
+      <Link>Shape\ShapeStateFlags.cs</Link>
+    </Compile>
     <Compile Include="..\..\Test2d\Style\ArgbColor.cs">
       <Link>Style\ArgbColor.cs</Link>
     </Compile>

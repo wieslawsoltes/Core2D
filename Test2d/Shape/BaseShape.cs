@@ -12,7 +12,7 @@ namespace Test2d
     {
         private string _name;
         private BaseShape _owner;
-        private ShapeState _state = ShapeState.Visible | ShapeState.Printable | ShapeState.Standalone;
+        private ShapeState _state = ShapeState.Create(ShapeStateFlags.Visible | ShapeStateFlags.Printable | ShapeStateFlags.Standalone);
         private ShapeStyle _style;
         private bool _isStroked;
         private bool _isFilled;

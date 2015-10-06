@@ -75,7 +75,7 @@ namespace TestPerspex
 
             _context.InitializeEditor(new TraceLog(), "Test2d.log");
 
-            _context.Editor.Renderers[0].State.DrawShapeState = ShapeState.Visible;
+            _context.Editor.Renderers[0].State.DrawShapeState.Value = ShapeStateFlags.Visible;
             _context.Editor.GetImageKey = async () => await OnGetImageKey();
 
             _context.Commands.OpenCommand =

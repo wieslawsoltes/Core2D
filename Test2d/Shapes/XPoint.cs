@@ -146,7 +146,7 @@ namespace Test2d
 
             if (_shape != null)
             {
-                if (State.HasFlag(ShapeState.Visible))
+                if (State.Value.HasFlag(ShapeStateFlags.Visible))
                 {
                     _shape.Draw(dc, renderer, X + dx, Y + dy, db, record);
                 }

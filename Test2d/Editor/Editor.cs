@@ -323,7 +323,7 @@ namespace Test2d
         /// <param name="shapes"></param>
         /// <param name="exclude"></param>
         /// <returns></returns>
-        public static IEnumerable<XPoint> GetAllPoints(IEnumerable<BaseShape> shapes, ShapeState exclude)
+        public static IEnumerable<XPoint> GetAllPoints(IEnumerable<BaseShape> shapes, ShapeStateFlags exclude)
         {
             if (shapes == null)
                 yield break;
@@ -334,7 +334,7 @@ namespace Test2d
                 {
                     var point = shape as XPoint;
 
-                    if (!point.State.HasFlag(exclude))
+                    if (!point.State.Value.HasFlag(exclude))
                     {
                         yield return shape as XPoint;
                     }
@@ -343,12 +343,12 @@ namespace Test2d
                 {
                     var line = shape as XLine;
 
-                    if (!line.Start.State.HasFlag(exclude))
+                    if (!line.Start.State.Value.HasFlag(exclude))
                     {
                         yield return line.Start;
                     }
 
-                    if (!line.End.State.HasFlag(exclude))
+                    if (!line.End.State.Value.HasFlag(exclude))
                     {
                         yield return line.End;
                     }
@@ -357,12 +357,12 @@ namespace Test2d
                 {
                     var rectangle = shape as XRectangle;
 
-                    if (!rectangle.TopLeft.State.HasFlag(exclude))
+                    if (!rectangle.TopLeft.State.Value.HasFlag(exclude))
                     {
                         yield return rectangle.TopLeft; 
                     }
 
-                    if (!rectangle.BottomRight.State.HasFlag(exclude))
+                    if (!rectangle.BottomRight.State.Value.HasFlag(exclude))
                     {
                         yield return rectangle.BottomRight; 
                     }
@@ -371,12 +371,12 @@ namespace Test2d
                 {
                     var ellipse = shape as XEllipse;
 
-                    if (!ellipse.TopLeft.State.HasFlag(exclude))
+                    if (!ellipse.TopLeft.State.Value.HasFlag(exclude))
                     {
                         yield return ellipse.TopLeft; 
                     }
 
-                    if (!ellipse.BottomRight.State.HasFlag(exclude))
+                    if (!ellipse.BottomRight.State.Value.HasFlag(exclude))
                     {
                         yield return ellipse.BottomRight; 
                     }
@@ -385,22 +385,22 @@ namespace Test2d
                 {
                     var arc = shape as XArc;
 
-                    if (!arc.Point1.State.HasFlag(exclude))
+                    if (!arc.Point1.State.Value.HasFlag(exclude))
                     {
                         yield return arc.Point1; 
                     }
 
-                    if (!arc.Point2.State.HasFlag(exclude))
+                    if (!arc.Point2.State.Value.HasFlag(exclude))
                     {
                         yield return arc.Point2; 
                     }
 
-                    if (!arc.Point3.State.HasFlag(exclude))
+                    if (!arc.Point3.State.Value.HasFlag(exclude))
                     {
                         yield return arc.Point3;
                     }
 
-                    if (!arc.Point4.State.HasFlag(exclude))
+                    if (!arc.Point4.State.Value.HasFlag(exclude))
                     {
                         yield return arc.Point4;
                     }
@@ -409,22 +409,22 @@ namespace Test2d
                 {
                     var bezier = shape as XBezier;
 
-                    if (!bezier.Point1.State.HasFlag(exclude))
+                    if (!bezier.Point1.State.Value.HasFlag(exclude))
                     {
                         yield return bezier.Point1; 
                     }
 
-                    if (!bezier.Point2.State.HasFlag(exclude))
+                    if (!bezier.Point2.State.Value.HasFlag(exclude))
                     {
                         yield return bezier.Point2; 
                     }
 
-                    if (!bezier.Point3.State.HasFlag(exclude))
+                    if (!bezier.Point3.State.Value.HasFlag(exclude))
                     {
                         yield return bezier.Point3; 
                     }
 
-                    if (!bezier.Point4.State.HasFlag(exclude))
+                    if (!bezier.Point4.State.Value.HasFlag(exclude))
                     {
                         yield return bezier.Point4; 
                     }
@@ -433,17 +433,17 @@ namespace Test2d
                 {
                     var qbezier = shape as XQBezier;
 
-                    if (!qbezier.Point1.State.HasFlag(exclude))
+                    if (!qbezier.Point1.State.Value.HasFlag(exclude))
                     {
                         yield return qbezier.Point1; 
                     }
 
-                    if (!qbezier.Point2.State.HasFlag(exclude))
+                    if (!qbezier.Point2.State.Value.HasFlag(exclude))
                     {
                         yield return qbezier.Point2; 
                     }
 
-                    if (!qbezier.Point3.State.HasFlag(exclude))
+                    if (!qbezier.Point3.State.Value.HasFlag(exclude))
                     {
                         yield return qbezier.Point3; 
                     }
@@ -452,12 +452,12 @@ namespace Test2d
                 {
                     var text = shape as XText;
 
-                    if (!text.TopLeft.State.HasFlag(exclude))
+                    if (!text.TopLeft.State.Value.HasFlag(exclude))
                     {
                         yield return text.TopLeft; 
                     }
 
-                    if (!text.BottomRight.State.HasFlag(exclude))
+                    if (!text.BottomRight.State.Value.HasFlag(exclude))
                     {
                         yield return text.BottomRight; 
                     }
@@ -466,12 +466,12 @@ namespace Test2d
                 {
                     var image = shape as XImage;
 
-                    if (!image.TopLeft.State.HasFlag(exclude))
+                    if (!image.TopLeft.State.Value.HasFlag(exclude))
                     {
                         yield return image.TopLeft;
                     }
 
-                    if (!image.BottomRight.State.HasFlag(exclude))
+                    if (!image.BottomRight.State.Value.HasFlag(exclude))
                     {
                         yield return image.BottomRight;
                     }
@@ -482,7 +482,7 @@ namespace Test2d
 
                     foreach (var point in GetAllPathPoints(path))
                     {
-                        if (!point.State.HasFlag(exclude))
+                        if (!point.State.Value.HasFlag(exclude))
                         {
                             yield return point;
                         }
@@ -494,7 +494,7 @@ namespace Test2d
 
                     foreach (var point in GetAllPoints(group.Shapes, exclude))
                     {
-                        if (!point.State.HasFlag(exclude))
+                        if (!point.State.Value.HasFlag(exclude))
                         {
                             yield return point; 
                         }
@@ -613,7 +613,7 @@ namespace Test2d
         {
             foreach (var point in points)
             {
-                if (!point.State.HasFlag(ShapeState.Locked))
+                if (!point.State.Value.HasFlag(ShapeStateFlags.Locked))
                 {
                     point.Move(dx, dy);
                 }
@@ -630,7 +630,7 @@ namespace Test2d
         {
             foreach (var shape in shapes)
             {
-                if (!shape.State.HasFlag(ShapeState.Locked))
+                if (!shape.State.Value.HasFlag(ShapeStateFlags.Locked))
                 {
                     shape.Move(dx, dy);
                 }
@@ -952,17 +952,17 @@ namespace Test2d
                 {
                     if (shape is XPoint)
                     {
-                        shape.State &= 
-                            ~(ShapeState.Connector 
-                            | ShapeState.None 
-                            | ShapeState.Input 
-                            | ShapeState.Output);
-                        shape.State |= ShapeState.Standalone;
+                        shape.State.Value &= 
+                            ~(ShapeStateFlags.Connector 
+                            | ShapeStateFlags.None 
+                            | ShapeStateFlags.Input 
+                            | ShapeStateFlags.Output);
+                        shape.State.Value |= ShapeStateFlags.Standalone;
                         original.Add(shape);
                     }
                     else
                     {
-                        shape.State |= ShapeState.Standalone;
+                        shape.State.Value |= ShapeStateFlags.Standalone;
                         original.Add(shape);
                     }
                 }
@@ -1245,11 +1245,11 @@ namespace Test2d
                 {
                     case MoveMode.Point:
                         {
-                            if (!state.HasFlag(ShapeState.Locked))
+                            if (!state.Value.HasFlag(ShapeStateFlags.Locked))
                             {
                                 var shape = _renderers[0].State.SelectedShape;
                                 var shapes = Enumerable.Repeat(shape, 1);
-                                var points = GetAllPoints(shapes, ShapeState.Connector).Distinct().ToList();
+                                var points = GetAllPoints(shapes, ShapeStateFlags.Connector).Distinct().ToList();
 
                                 MovePointsBy(points, dx, dy);
 
@@ -1261,7 +1261,7 @@ namespace Test2d
                         break;
                     case MoveMode.Shape:
                         {
-                            if (!state.HasFlag(ShapeState.Locked) && !state.HasFlag(ShapeState.Connector))
+                            if (!state.Value.HasFlag(ShapeStateFlags.Locked) && !state.Value.HasFlag(ShapeStateFlags.Connector))
                             {
                                 var shape = _renderers[0].State.SelectedShape;
                                 var shapes = Enumerable.Repeat(shape, 1).ToList();
@@ -1279,13 +1279,13 @@ namespace Test2d
 
             if (_renderers[0].State.SelectedShapes != null)
             {
-                var shapes = _renderers[0].State.SelectedShapes.Where(s => !s.State.HasFlag(ShapeState.Locked));
+                var shapes = _renderers[0].State.SelectedShapes.Where(s => !s.State.Value.HasFlag(ShapeStateFlags.Locked));
 
                 switch (_project.Options.MoveMode)
                 {
                     case MoveMode.Point:
                         {
-                            var points = GetAllPoints(shapes, ShapeState.Connector).Distinct().ToList();
+                            var points = GetAllPoints(shapes, ShapeStateFlags.Connector).Distinct().ToList();
 
                             MovePointsBy(points, dx, dy);
 

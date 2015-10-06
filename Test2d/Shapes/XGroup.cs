@@ -101,7 +101,7 @@ namespace Test2d
         {
             var record = r ?? this.Data.Record;
 
-            if (State.HasFlag(ShapeState.Visible))
+            if (State.Value.HasFlag(ShapeStateFlags.Visible))
             {
                 foreach (var shape in Shapes)
                 {
@@ -151,7 +151,7 @@ namespace Test2d
         {
             foreach (var shape in Shapes)
             {
-                if (!shape.State.HasFlag(ShapeState.Connector))
+                if (!shape.State.Value.HasFlag(ShapeStateFlags.Connector))
                 {
                     shape.Move(dx, dy);
                 }
@@ -170,7 +170,7 @@ namespace Test2d
         public void AddShape(BaseShape shape)
         {
             shape.Owner = this;
-            shape.State &= ~ShapeState.Standalone;
+            shape.State.Value &= ~ShapeStateFlags.Standalone;
             Shapes = Shapes.Add(shape);
         }
 
@@ -181,8 +181,8 @@ namespace Test2d
         public void AddConnectorAsNone(XPoint point)
         {
             point.Owner = this;
-            point.State |= ShapeState.Connector | ShapeState.None;
-            point.State &= ~ShapeState.Standalone;
+            point.State.Value |= ShapeStateFlags.Connector | ShapeStateFlags.None;
+            point.State.Value &= ~ShapeStateFlags.Standalone;
             Connectors = Connectors.Add(point);
         }
 
@@ -193,8 +193,8 @@ namespace Test2d
         public void AddConnectorAsInput(XPoint point)
         {
             point.Owner = this;
-            point.State |= ShapeState.Connector | ShapeState.Input;
-            point.State &= ~ShapeState.Standalone;
+            point.State.Value |= ShapeStateFlags.Connector | ShapeStateFlags.Input;
+            point.State.Value &= ~ShapeStateFlags.Standalone;
             Connectors = Connectors.Add(point);
         }
 
@@ -205,8 +205,8 @@ namespace Test2d
         public void AddConnectorAsOutput(XPoint point)
         {
             point.Owner = this;
-            point.State |= ShapeState.Connector | ShapeState.Output;
-            point.State &= ~ShapeState.Standalone;
+            point.State.Value |= ShapeStateFlags.Connector | ShapeStateFlags.Output;
+            point.State.Value &= ~ShapeStateFlags.Standalone;
             Connectors = Connectors.Add(point);
         }
 

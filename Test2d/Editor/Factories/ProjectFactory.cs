@@ -114,7 +114,7 @@ namespace Test2d
             grid.OffsetY = 30.0;
             grid.CellWidth = 30.0;
             grid.CellHeight = 30.0;
-            grid.State &= ~ShapeState.Printable;
+            grid.State.Value &= ~ShapeStateFlags.Printable;
             builder.Add(grid);
             layer.Shapes = builder.ToImmutable();
         }

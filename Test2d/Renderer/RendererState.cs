@@ -100,7 +100,7 @@ namespace Test2d
             _panY = 0.0;
             _zoom = 1.0;
             _enableAutofit = true;
-            _drawShapeState = ShapeState.Visible | ShapeState.Printable;
+            _drawShapeState = ShapeState.Create(ShapeStateFlags.Visible | ShapeStateFlags.Printable);
             _selectedShape = default(BaseShape);
             _selectedShapes = default(ImmutableHashSet<BaseShape>);
         }
