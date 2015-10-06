@@ -6,49 +6,112 @@
         Width="1240" Height="670" 
         Title="Test2d">
     <Window.Styles>
+        <Style Selector="TabItem.property">
+            <Setter Property="TabItem.FontSize" Value="12" />
+            <Setter Property="TabItem.FontWeight" Value="Normal" />
+        </Style>
+        <Style Selector="TextBlock.header">
+            <Setter Property="TextBox.FontSize" Value="12" />
+            <Setter Property="TextBox.FontWeight" Value="Bold" />
+        </Style>
         <Style Selector="TextBlock.left">
-            <Setter Property="TextBlock.Margin" Value="5,2,5,2" />
+            <!--
+            <Setter Property="TextBox.FontSize" Value="18" />
+            <Setter Property="TextBox.FontWeight" Value="Bold" />
+            -->
             <Setter Property="TextBlock.TextAlignment" Value="Left" />
             <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
         </Style>
         <Style Selector="TextBox.left">
-            <Setter Property="TextBox.BorderBrush" Value="Transparent" />
-            <Setter Property="TextBox.Margin" Value="5,2,5,2" />
             <!--<Setter Property="TextBox.TextAlignment" Value="Left"/>-->
             <Setter Property="TextBox.VerticalAlignment" Value="Center" />
         </Style>
         <Style Selector="TextBlock.center">
-            <Setter Property="TextBlock.Margin" Value="5,2,5,2" />
             <Setter Property="TextBlock.TextAlignment" Value="Center" />
             <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
         </Style>
         <Style Selector="TextBox.center">
             <Setter Property="TextBox.BorderBrush" Value="Transparent" />
-            <Setter Property="TextBox.Margin" Value="5,2,5,2" />
             <!--<Setter Property="TextBox.TextAlignment" Value="Center"/>-->
             <Setter Property="TextBox.VerticalAlignment" Value="Center" />
         </Style>
         <Style Selector="CheckBox.default">
-            <Setter Property="CheckBox.Margin" Value="5,2,5,2" />
         </Style>
-        <!--
-        <Style Selector="ComboBox.default">
-            <Setter Property="ComboBox.Margin" Value="5,2,5,2"/>
+        <Style Selector="DropDown.default">
         </Style>
-        <Style TargetType="Slider.default">
-            <Setter Property="Slider.Margin" Value="5,2,5,2"/>
-        </Style>
-        -->
     </Window.Styles>
     <Window.DataTemplates>
-        <DataTemplate DataType="core:XRectangle">
-            <TextBlock Text="{Binding Style.Name}" />
+        <!-- state -->
+        <DataTemplate DataType="core:ShapeState">
+            <StackPanel>
+                <CheckBox Content="Default" IsChecked="{Binding Default}"/>
+                <CheckBox Content="Visible" IsChecked="{Binding Visible}"/>
+                <CheckBox Content="Printable" IsChecked="{Binding Printable}"/>
+                <CheckBox Content="Locked" IsChecked="{Binding Locked}"/>
+                <CheckBox Content="Connector" IsChecked="{Binding Connector}"/>
+                <CheckBox Content="None" IsChecked="{Binding None}"/>
+                <CheckBox Content="Standalone" IsChecked="{Binding Standalone}"/>
+                <CheckBox Content="Input" IsChecked="{Binding Input}"/>
+                <CheckBox Content="Output" IsChecked="{Binding Output}"/>
+            </StackPanel>
         </DataTemplate>
-        <DataTemplate DataType="core:XEllipse">
-            <TextBlock Text="{Binding Style.Name}" />
+         <!-- shapes -->
+        <DataTemplate DataType="core:XPoint">
+            <TabControl>
+                <TabItem Header="Point" Classes="property">
+                    <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                        <TextBlock Text="X" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=X, Mode=OneWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                        <TextBlock Text="Y" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Y, Mode=OneWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="State" Classes="property">
+                   <ContentControl Content="{Binding State}"/>
+                </TabItem>
+                <TabItem Header="Data" Classes="property">
+                    <ContentControl Content="{Binding Data}"/>
+                </TabItem>
+                <TabItem Header="Shape" Classes="property">
+                    <ContentControl Content="{Binding Shape}"/>
+                </TabItem>
+            </TabControl>
+        </DataTemplate>
+        <DataTemplate DataType="core:XLine">
+            <TabControl>
+                <TabItem Header="Line" Classes="property">
+                    <StackPanel>
+                        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
+                            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                            <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                            <CheckBox IsChecked="{Binding Path=IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                        </Grid>
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                            <TextBlock Text="Start" Classes="header" Grid.Row="0" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Start}" Grid.Row="1" Grid.Column="0"/>
+                        </Grid>
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                            <TextBlock Text="End" Classes="header" Grid.Row="0" Grid.Column="0"/>
+                            <ContentControl Content="{Binding End}" Grid.Row="1" Grid.Column="0"/>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="State" Classes="property">
+                   <ContentControl Content="{Binding State}"/>
+                </TabItem>
+                <TabItem Header="Data" Classes="property">
+                    <ContentControl Content="{Binding Data}"/>
+                </TabItem>
+                <TabItem Header="Style" Classes="property">
+                    <ContentControl Content="{Binding Style}"/>
+                </TabItem>
+            </TabControl>
         </DataTemplate>
     </Window.DataTemplates>
-    <Grid RowDefinitions="Auto,*" ColumnDefinitions="150,*,150">
+    <Grid RowDefinitions="Auto,*" ColumnDefinitions="150,*,230">
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <MenuItem Header="_File">
                 <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Binding Commands.NewCommand}" />
