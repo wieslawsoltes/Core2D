@@ -533,7 +533,7 @@ namespace TestPerspex
                     break;
             }
 
-            _dc.DrawLine(strokeLine, pt1, pt2);
+            DrawLineInternal(_dc, strokeLine, line.IsStroked, ref pt1, ref pt2);
 
             // TODO: fillLine.Dispose();
             // TODO: strokeLine.Dispose();
