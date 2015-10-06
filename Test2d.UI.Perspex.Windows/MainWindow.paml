@@ -15,10 +15,6 @@
             <Setter Property="TextBox.FontWeight" Value="Bold" />
         </Style>
         <Style Selector="TextBlock.left">
-            <!--
-            <Setter Property="TextBox.FontSize" Value="18" />
-            <Setter Property="TextBox.FontWeight" Value="Bold" />
-            -->
             <Setter Property="TextBlock.TextAlignment" Value="Left" />
             <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
         </Style>
