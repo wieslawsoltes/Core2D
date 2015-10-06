@@ -8,42 +8,6 @@
     xmlns:converters="clr-namespace:Test.Converters"
     xmlns:controls="clr-namespace:Test.Controls"
     xmlns:p="clr-namespace:Test2d.UI.Wpf.Properties">
-    <!-- enums -->
-    <ObjectDataProvider x:Key="MoveModeValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
-        <ObjectDataProvider.MethodParameters>
-            <x:Type TypeName="core:MoveMode"/>
-        </ObjectDataProvider.MethodParameters>
-    </ObjectDataProvider>
-    <ObjectDataProvider x:Key="TextHAlignmentValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
-        <ObjectDataProvider.MethodParameters>
-            <x:Type TypeName="core:TextHAlignment"/>
-        </ObjectDataProvider.MethodParameters>
-    </ObjectDataProvider>
-    <ObjectDataProvider x:Key="TextVAlignmentValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
-        <ObjectDataProvider.MethodParameters>
-            <x:Type TypeName="core:TextVAlignment"/>
-        </ObjectDataProvider.MethodParameters>
-    </ObjectDataProvider>
-    <ObjectDataProvider x:Key="ArrowTypeValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
-        <ObjectDataProvider.MethodParameters>
-            <x:Type TypeName="core:ArrowType"/>
-        </ObjectDataProvider.MethodParameters>
-    </ObjectDataProvider>
-    <ObjectDataProvider x:Key="LineCapValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
-        <ObjectDataProvider.MethodParameters>
-            <x:Type TypeName="core:LineCap"/>
-        </ObjectDataProvider.MethodParameters>
-    </ObjectDataProvider>
-    <ObjectDataProvider x:Key="XSweepDirectionValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
-        <ObjectDataProvider.MethodParameters>
-            <x:Type TypeName="core:XSweepDirection"/>
-        </ObjectDataProvider.MethodParameters>
-    </ObjectDataProvider>
-    <ObjectDataProvider x:Key="XFillRuleValues" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
-        <ObjectDataProvider.MethodParameters>
-            <x:Type TypeName="core:XFillRule"/>
-        </ObjectDataProvider.MethodParameters>
-    </ObjectDataProvider>
     <!-- brushes -->
     <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
     <SolidColorBrush x:Key="DarkSquareColor" Color="DarkGray"/>
@@ -475,7 +439,7 @@
                         Grid.Column="0">
                     </TextBlock>
                     <ComboBox 
-                        ItemsSource="{Binding Source={StaticResource ResourceKey=ArrowTypeValues}}" 
+                        ItemsSource="{Binding Path=ArrowTypeValues, Mode=OneWay}" 
                         SelectedItem="{Binding ArrowType}" 
                         Style="{StaticResource ComboBoxStyleKey}"
                         Grid.Row="0" 
@@ -590,7 +554,7 @@
                                 Grid.Column="0" >
                             </TextBlock>
                             <ComboBox 
-                                ItemsSource="{Binding Source={StaticResource ResourceKey=LineCapValues}}" 
+                                ItemsSource="{Binding Path=LineCapValues, Mode=OneWay}" 
                                 SelectedItem="{Binding LineCap}" 
                                 Style="{StaticResource ComboBoxStyleKey}"
                                 Grid.Row="0" 
@@ -761,7 +725,7 @@
                 </CheckBox>
             </StackPanel>
             <ComboBox 
-                ItemsSource="{Binding Source={StaticResource ResourceKey=TextHAlignmentValues}}" 
+                ItemsSource="{Binding Path=TextHAlignmentValues, Mode=OneWay}" 
                 SelectedItem="{Binding TextHAlignment}"
                 Style="{StaticResource ComboBoxStyleKey}"
                 Grid.Row="4" 
@@ -769,7 +733,7 @@
                 Grid.ColumnSpan="2">
             </ComboBox>
             <ComboBox 
-                ItemsSource="{Binding Source={StaticResource ResourceKey=TextVAlignmentValues}}" 
+                ItemsSource="{Binding Path=TextVAlignmentValues, Mode=OneWay}" 
                 SelectedItem="{Binding TextVAlignment}" 
                 Style="{StaticResource ComboBoxStyleKey}"
                 Grid.Row="5" 
@@ -992,7 +956,7 @@
                                 Grid.Column="0" >
                             </TextBlock>
                             <ComboBox 
-                                ItemsSource="{Binding Source={StaticResource ResourceKey=LineCapValues}}" 
+                                ItemsSource="{Binding Path=LineCapValues, Mode=OneWay}" 
                                 SelectedItem="{Binding LineCap}" 
                                 Style="{StaticResource ComboBoxStyleKey}"
                                 Grid.Row="0" 
@@ -3481,7 +3445,7 @@
                     Grid.ColumnSpan="2">
                 </CheckBox>
                 <ComboBox 
-                    ItemsSource="{Binding Source={StaticResource ResourceKey=XSweepDirectionValues}}" 
+                    ItemsSource="{Binding Path=XSweepDirectionValues, Mode=OneWay}" 
                     SelectedItem="{Binding SweepDirection}" 
                     Style="{StaticResource ComboBoxStyleKey}"
                     Grid.Row="2" 
@@ -3919,7 +3883,7 @@
                     Grid.Column="0">
                 </TextBlock>
                 <ComboBox 
-                    ItemsSource="{Binding Source={StaticResource ResourceKey=XFillRuleValues}}" 
+                    ItemsSource="{Binding Path=XFillRuleValues, Mode=OneWay}" 
                     SelectedItem="{Binding FillRule}" 
                     Style="{StaticResource ComboBoxStyleKey}"          
                     Grid.Row="0" 
@@ -4050,7 +4014,7 @@
                         Grid.ColumnSpan="2">
                     </TextBox>
                     <ComboBox 
-                        ItemsSource="{Binding Source={StaticResource ResourceKey=MoveModeValues}}" 
+                        ItemsSource="{Binding Path=MoveModeValues, Mode=OneWay}" 
                         SelectedItem="{Binding MoveMode}" 
                         Style="{StaticResource ComboBoxStyleKey}" 
                         Grid.Row="4" 
@@ -4144,7 +4108,7 @@
                         Grid.ColumnSpan="2">
                     </CheckBox>
                     <ComboBox 
-                        ItemsSource="{Binding Source={StaticResource ResourceKey=XFillRuleValues}}" 
+                        ItemsSource="{Binding Path=XFillRuleValues, Mode=OneWay}" 
                         SelectedItem="{Binding DefaultFillRule}" 
                         Style="{StaticResource ComboBoxStyleKey}"
                         Grid.Row="4" 
