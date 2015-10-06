@@ -44,6 +44,23 @@
             BorderBrush="{x:Null}" 
             Grid.Row="2">
             <TreeView.Resources>
+                <Style x:Key="ContainerTreeViewItemStyleKey" TargetType="TreeViewItem">
+                    <Setter Property="IsExpanded" Value="False"/>
+                    <Setter Property="ContextMenu" Value="{StaticResource ContainerContextMenuKey}"/>
+                    <EventSetter Event="TreeViewItem.MouseRightButtonDown" Handler="TreeViewItem_MouseRightButtonDown"/>
+                    <Setter Property="IsSelected" Value="False"/>
+                    <Style.Triggers>
+                        <DataTrigger Value="True">
+                            <DataTrigger.Binding>
+                                <MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
+                                    <Binding Path="Tag.Editor.Project.CurrentContainer" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type TreeView}}"/>
+                                    <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
+                                </MultiBinding>
+                            </DataTrigger.Binding>
+                            <Setter Property="IsSelected" Value="True"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
             </TreeView.Resources>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectedItemChanged">
@@ -71,26 +88,7 @@
                 </Style>
             </TreeView.ItemContainerStyle>
             <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Containers}">
-                    <HierarchicalDataTemplate.ItemContainerStyle>
-                        <Style TargetType="TreeViewItem">
-                            <Setter Property="IsExpanded" Value="False"/>
-                            <Setter Property="ContextMenu" Value="{StaticResource ContainerContextMenuKey}"/>
-                            <EventSetter Event="TreeViewItem.MouseRightButtonDown" Handler="TreeViewItem_MouseRightButtonDown"/>
-                            <Setter Property="IsSelected" Value="False"/>
-                            <Style.Triggers>
-                                <DataTrigger Value="True">
-                                    <DataTrigger.Binding>
-                                        <MultiBinding Converter="{StaticResource ObjectEqualityConverter}">
-                                            <Binding Path="Tag.Editor.Project.CurrentContainer" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type TreeView}}"/>
-                                            <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
-                                        </MultiBinding>
-                                    </DataTrigger.Binding>
-                                    <Setter Property="IsSelected" Value="True"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </HierarchicalDataTemplate.ItemContainerStyle>
+                <HierarchicalDataTemplate ItemsSource="{Binding Containers}" ItemContainerStyle="{StaticResource ContainerTreeViewItemStyleKey}">
                     <HierarchicalDataTemplate.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}" FontWeight="Normal"/>
