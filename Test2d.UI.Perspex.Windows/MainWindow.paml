@@ -1,35 +1,35 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<Window xmlns="https://github.com/perspex"
-        xmlns:local="clr-namespace:TestPerspex;assembly=Test2d.UI.Perspex.Windows"
-        xmlns:core="clr-namespace:Test2d;assembly=Test2d"
-        Width="1240" Height="670"
+<Window xmlns="https://github.com/perspex" 
+        xmlns:local="clr-namespace:TestPerspex;assembly=Test2d.UI.Perspex.Windows" 
+        xmlns:core="clr-namespace:Test2d;assembly=Test2d" 
+        Width="1240" Height="670" 
         Title="Test2d">
     <Window.Styles>
         <Style Selector="TextBlock.left">
-            <Setter Property="TextBlock.Margin" Value="5,2,5,2"/>
-            <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+            <Setter Property="TextBlock.Margin" Value="5,2,5,2" />
+            <Setter Property="TextBlock.TextAlignment" Value="Left" />
+            <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
         </Style>
         <Style Selector="TextBox.left">
-            <Setter Property="TextBox.BorderBrush" Value="Transparent"/>
-            <Setter Property="TextBox.Margin" Value="5,2,5,2"/>
+            <Setter Property="TextBox.BorderBrush" Value="Transparent" />
+            <Setter Property="TextBox.Margin" Value="5,2,5,2" />
             <!--<Setter Property="TextBox.TextAlignment" Value="Left"/>-->
-            <Setter Property="TextBox.VerticalAlignment" Value="Center"/>
+            <Setter Property="TextBox.VerticalAlignment" Value="Center" />
         </Style>
         <Style Selector="TextBlock.center">
-            <Setter Property="TextBlock.Margin" Value="5,2,5,2"/>
-            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+            <Setter Property="TextBlock.Margin" Value="5,2,5,2" />
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+            <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
         </Style>
         <Style Selector="TextBox.center">
-            <Setter Property="TextBox.BorderBrush" Value="Transparent"/>
-            <Setter Property="TextBox.Margin" Value="5,2,5,2"/>
+            <Setter Property="TextBox.BorderBrush" Value="Transparent" />
+            <Setter Property="TextBox.Margin" Value="5,2,5,2" />
             <!--<Setter Property="TextBox.TextAlignment" Value="Center"/>-->
-            <Setter Property="TextBox.VerticalAlignment" Value="Center"/>
+            <Setter Property="TextBox.VerticalAlignment" Value="Center" />
         </Style>
         <Style Selector="CheckBox.default">
-            <Setter Property="CheckBox.Margin" Value="5,2,5,2"/>
+            <Setter Property="CheckBox.Margin" Value="5,2,5,2" />
         </Style>
         <!--
         <Style Selector="ComboBox.default">
@@ -42,115 +42,267 @@
     </Window.Styles>
     <Window.DataTemplates>
         <DataTemplate DataType="core:XRectangle">
-            <TextBlock Text="{Binding Style.Name}"/>
+            <TextBlock Text="{Binding Style.Name}" />
         </DataTemplate>
         <DataTemplate DataType="core:XEllipse">
-            <TextBlock Text="{Binding Style.Name}"/>
+            <TextBlock Text="{Binding Style.Name}" />
         </DataTemplate>
-    </Window.DataTemplates>    
+    </Window.DataTemplates>
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="150,*,150">
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <MenuItem Header="_File">
-                <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Binding Commands.NewCommand}"/>
-                <MenuItem Header="_Open" HotKey="Ctrl+O" Command="{Binding Commands.OpenCommand}"/>
-                <MenuItem Header="_Close" HotKey="Ctrl+F4" Command="{Binding Commands.CloseCommand}"/>
-                <MenuItem Header="_Save" HotKey="Ctrl+S" Command="{Binding Commands.SaveCommand}"/>
-                <MenuItem Header="Save _As" HotKey="Ctrl+Shift+S" Command="{Binding Commands.SaveAsCommand}"/>
-                <MenuItem Header="_Export" HotKey="Ctrl+E" Command="{Binding Commands.ExportCommand}"/>
-                <MenuItem Header="E_xit" HotKey="Alt+F4" Command="{Binding Commands.ExitCommand}"/>
+                <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Binding Commands.NewCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="_Open" HotKey="Ctrl+O" Command="{Binding Commands.OpenCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="_Close" HotKey="Ctrl+F4" Command="{Binding Commands.CloseCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="_Save" HotKey="Ctrl+S" Command="{Binding Commands.SaveCommand}" />
+                <MenuItem Header="Save _As" HotKey="Ctrl+Shift+S" Command="{Binding Commands.SaveAsCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="_Export" HotKey="Ctrl+E" Command="{Binding Commands.ExportCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="I_mport">
+                    <MenuItem 
+                        Header="_Style..."
+                        Command="{Binding Commands.ImportStyleCommand}" 
+                        CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}">
+                    </MenuItem>
+                    <MenuItem 
+                        Header="S_tyles..."
+                        Command="{Binding Commands.ImportStylesCommand}"
+                        CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}">
+                    </MenuItem>
+                    <!--<Separator/>-->
+                    <MenuItem 
+                        Header="St_yle Library..."
+                        Command="{Binding Commands.ImportStyleLibraryCommand}"
+                        CommandParameter="{Binding Editor.Project}">
+                    </MenuItem>
+                    <MenuItem 
+                        Header="Sty_le Libraries..."
+                        Command="{Binding Commands.ImportStyleLibrariesCommand}"
+                        CommandParameter="{Binding Editor.Project}">
+                    </MenuItem>
+                    <!--<Separator/>-->
+                    <MenuItem 
+                        Header="_Group..."
+                        Command="{Binding Commands.ImportGroupCommand}"
+                        CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}">
+                    </MenuItem>
+                    <MenuItem 
+                        Header="G_roups..."
+                        Command="{Binding Commands.ImportGroupsCommand}"
+                        CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}">
+                    </MenuItem>
+                    <!--<Separator/>-->
+                    <MenuItem 
+                        Header="Gr_oup Library..."
+                        Command="{Binding Commands.ImportGroupLibraryCommand}"
+                        CommandParameter="{Binding Editor.Project}">
+                    </MenuItem>
+                    <MenuItem 
+                        Header="Gro_up Libraries..."
+                        Command="{Binding Commands.ImportGroupLibrariesCommand}"
+                        CommandParameter="{Binding Editor.Project}">
+                    </MenuItem>
+                    <!--<Separator/>-->
+                    <MenuItem 
+                        Header="_Template..."
+                        Command="{Binding Commands.ImportTemplateCommand}"
+                        CommandParameter="{Binding Editor.Project}">
+                    </MenuItem>
+                    <MenuItem 
+                        Header="T_emplates..."
+                        Command="{Binding Commands.ImportTemplatesCommand}"
+                        CommandParameter="{Binding Editor.Project}">
+                    </MenuItem>
+                </MenuItem>
+                <!--<Separator/>-->
+                <MenuItem Header="Expor_t">
+                    <MenuItem 
+                        Header="_Style..."
+                        Command="{Binding Commands.ExportStyleCommand}"
+                        CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}">
+                    </MenuItem>
+                    <MenuItem 
+                        Header="S_tyles..."
+                        Command="{Binding Commands.ExportStylesCommand}"
+                        CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}">
+                    </MenuItem>
+                    <!--<Separator/>-->
+                    <MenuItem 
+                        Header="St_yle Library..."
+                        Command="{Binding Commands.ExportStyleLibraryCommand}"
+                        CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}">
+                    </MenuItem>
+                    <MenuItem 
+                        Header="Sty_le Libraries..."
+                        Command="{Binding Commands.ExportStyleLibrariesCommand}"
+                        CommandParameter="{Binding Editor.Project}">
+                    </MenuItem>
+                    <!--<Separator/>-->
+                    <MenuItem 
+                        Header="_Group..."
+                        Command="{Binding Commands.ExportGroupCommand}"
+                        CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.CurrentGroup}">
+                    </MenuItem>
+                    <MenuItem 
+                        Header="G_roups..."
+                        Command="{Binding Commands.ExportGroupsCommand}"
+                        CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}">
+                    </MenuItem>
+                    <!--<Separator/>-->
+                    <MenuItem 
+                        Header="Gr_oup Library..."
+                        Command="{Binding Commands.ExportGroupLibraryCommand}"
+                        CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}">
+                    </MenuItem>
+                    <MenuItem 
+                        Header="Gro_up Libraries..."
+                        Command="{Binding Commands.ExportGroupLibrariesCommand}"
+                        CommandParameter="{Binding Editor.Project}">
+                    </MenuItem>
+                    <!--<Separator/>-->
+                    <MenuItem 
+                        Header="_Template..."
+                        Command="{Binding Commands.ExportTemplateCommand}"
+                        CommandParameter="{Binding Editor.Project.CurrentTemplate}">
+                    </MenuItem>
+                    <MenuItem 
+                        Header="T_emplates..."
+                        Command="{Binding Commands.ExportTemplatesCommand}"
+                        CommandParameter="{Binding Editor.Project}">
+                    </MenuItem>
+                </MenuItem>
+                <!--<Separator/>-->
+                <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
+                    <MenuItem.DataTemplates>
+                        <DataTemplate DataType="core:RecentProject">
+                            <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Path=Path}"/>
+                        </DataTemplate>
+                    </MenuItem.DataTemplates>
+                    <!--
+                    <MenuItem.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Command" Value="{Binding DataContext.Commands.OpenCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                            <Setter Property="CommandParameter" Value="{Binding Path}"/>
+                        </Style>
+                    </MenuItem.ItemContainerStyle>
+                    -->
+                </MenuItem>
+                <!--<Separator/>-->
+                <MenuItem Header="E_xit" HotKey="Alt+F4" Command="{Binding Commands.ExitCommand}" />
             </MenuItem>
             <MenuItem Header="_Edit">
-                <MenuItem Header="_Undo" HotKey="Ctrl+Z" Command="{Binding Commands.UndoCommand}"/>
-                <MenuItem Header="_Redo" HotKey="Ctrl+Y" Command="{Binding Commands.RedoCommand}"/>
-                <MenuItem Header="Cu_t" HotKey="Ctrl+X" Command="{Binding Commands.CutCommand}"/>
-                <MenuItem Header="_Copy" HotKey="Ctrl+C" Command="{Binding Commands.CopyCommand}"/>
-                <MenuItem Header="_Paste" HotKey="Ctrl+V" Command="{Binding Commands.PasteCommand}"/>
-                <MenuItem Header="_Delete" HotKey="Delete" Command="{Binding Commands.DeleteCommand}"/>
-                <MenuItem Header="Select _All" HotKey="Ctrl+A" Command="{Binding Commands.SelectAllCommand}"/>
-                <MenuItem Header="De_select All" HotKey="Escape" Command="{Binding Commands.DeselectAllCommand}"/>
-                <MenuItem Header="Cl_ear All" Command="{Binding Commands.ClearAllCommand}"/>
-                <MenuItem Header="_Group" HotKey="Ctrl+G" Command="{Binding Commands.GroupCommand}"/>
-                <MenuItem Header="U_ngroup" HotKey="Ctrl+U" Command="{Binding Commands.UngroupCommand}"/>
+                <MenuItem Header="_Undo" HotKey="Ctrl+Z" Command="{Binding Commands.UndoCommand}" />
+                <MenuItem Header="_Redo" HotKey="Ctrl+Y" Command="{Binding Commands.RedoCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="Cu_t" HotKey="Ctrl+X" Command="{Binding Commands.CutCommand}" />
+                <MenuItem Header="_Copy" HotKey="Ctrl+C" Command="{Binding Commands.CopyCommand}" />
+                <MenuItem Header="_Paste" HotKey="Ctrl+V" Command="{Binding Commands.PasteCommand}" />
+                <MenuItem Header="_Delete" HotKey="Delete" Command="{Binding Commands.DeleteCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="Select _All" HotKey="Ctrl+A" Command="{Binding Commands.SelectAllCommand}" />
+                <MenuItem Header="De_select All" HotKey="Escape" Command="{Binding Commands.DeselectAllCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="Cl_ear All" Command="{Binding Commands.ClearAllCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="_Group" HotKey="Ctrl+G" Command="{Binding Commands.GroupCommand}" />
+                <MenuItem Header="U_ngroup" HotKey="Ctrl+U" Command="{Binding Commands.UngroupCommand}" />
+                <!--<Separator/>-->
                 <MenuItem Header="_Order">
-                    <MenuItem Header="Send to _Back" HotKey="Shift+-" Command="{Binding Commands.SendToBackCommand}"/>
-                    <MenuItem Header="Send Ba_ckward" HotKey="-" Command="{Binding Commands.SendBackwardCommand}"/>
-                    <MenuItem Header="Bring Fo_rward" HotKey="+" Command="{Binding Commands.BringForwardCommand}"/>
-                    <MenuItem Header="Bring to _Front" HotKey="Shift++" Command="{Binding Commands.BringToFrontCommand}"/>
+                    <MenuItem Header="Send to _Back" HotKey="Shift+-" Command="{Binding Commands.SendToBackCommand}" />
+                    <MenuItem Header="Send Ba_ckward" HotKey="-" Command="{Binding Commands.SendBackwardCommand}" />
+                    <!--<Separator/>-->
+                    <MenuItem Header="Bring Fo_rward" HotKey="+" Command="{Binding Commands.BringForwardCommand}" />
+                    <MenuItem Header="Bring to _Front" HotKey="Shift++" Command="{Binding Commands.BringToFrontCommand}" />
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_View">
                 <MenuItem Header="_Zoom">
-                    <MenuItem Header="_Reset Zoom" HotKey="Z" Command="{Binding Commands.ZoomResetCommand}"/>
-                    <MenuItem Header="Zoom to _Extent" HotKey="X" Command="{Binding Commands.ZoomExtentCommand}"/>
+                    <MenuItem Header="_Reset Zoom" HotKey="Z" Command="{Binding Commands.ZoomResetCommand}" />
+                    <!--<Separator/>-->
+                    <MenuItem Header="Zoom to _Extent" HotKey="X" Command="{Binding Commands.ZoomExtentCommand}" />
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_Tool">
-                <MenuItem Header="_None" HotKey="N" Command="{Binding Commands.ToolNoneCommand}"/>
-                <MenuItem Header="_Selection" HotKey="S" Command="{Binding Commands.ToolSelectionCommand}"/>
-                <MenuItem Header="_Point" HotKey="P" Command="{Binding Commands.ToolPointCommand}"/>
-                <MenuItem Header="_Line" HotKey="L" Command="{Binding Commands.ToolLineCommand}"/>
-                <MenuItem Header="_Arc" HotKey="A" Command="{Binding Commands.ToolArcCommand}"/>
-                <MenuItem Header="_Bezier" HotKey="B" Command="{Binding Commands.ToolBezierCommand}"/>
-                <MenuItem Header="_QBezier" HotKey="Q" Command="{Binding Commands.ToolQBezierCommand}"/>
-                <MenuItem Header="Pat_h" HotKey="H" Command="{Binding Commands.ToolPathCommand}"/>
+                <MenuItem Header="_None" HotKey="N" Command="{Binding Commands.ToolNoneCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="_Selection" HotKey="S" Command="{Binding Commands.ToolSelectionCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="_Point" HotKey="P" Command="{Binding Commands.ToolPointCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="_Line" HotKey="L" Command="{Binding Commands.ToolLineCommand}" />
+                <MenuItem Header="_Arc" HotKey="A" Command="{Binding Commands.ToolArcCommand}" />
+                <MenuItem Header="_Bezier" HotKey="B" Command="{Binding Commands.ToolBezierCommand}" />
+                <MenuItem Header="_QBezier" HotKey="Q" Command="{Binding Commands.ToolQBezierCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="Pat_h" HotKey="H" Command="{Binding Commands.ToolPathCommand}" />
                 <MenuItem Header="Path T_ool">
-                    <MenuItem Header="_Line" Command="{Binding Commands.ToolLineCommand}"/>
-                    <MenuItem Header="_Arc" Command="{Binding Commands.ToolArcCommand}"/>
-                    <MenuItem Header="_Bezier" Command="{Binding Commands.ToolBezierCommand}"/>
-                    <MenuItem Header="_QBezier" Command="{Binding Commands.ToolQBezierCommand}"/>
-                    <MenuItem Header="_Move" HotKey="M" Command="{Binding Commands.ToolMoveCommand}"/>
+                    <MenuItem Header="_Line" Command="{Binding Commands.ToolLineCommand}" />
+                    <MenuItem Header="_Arc" Command="{Binding Commands.ToolArcCommand}" />
+                    <MenuItem Header="_Bezier" Command="{Binding Commands.ToolBezierCommand}" />
+                    <MenuItem Header="_QBezier" Command="{Binding Commands.ToolQBezierCommand}" />
+                    <!--<Separator/>-->
+                    <MenuItem Header="_Move" HotKey="M" Command="{Binding Commands.ToolMoveCommand}" />
                 </MenuItem>
-                <MenuItem Header="_Rectangle" HotKey="R" Command="{Binding Commands.ToolRectangleCommand}"/>
-                <MenuItem Header="_Ellipse" HotKey="E" Command="{Binding Commands.ToolEllipseCommand}"/>
-                <MenuItem Header="_Text" HotKey="T" Command="{Binding Commands.ToolTextCommand}"/>
-                <MenuItem Header="_Image" HotKey="I" Command="{Binding Commands.ToolImageCommand}"/>
+                <!--<Separator/>-->
+                <MenuItem Header="_Rectangle" HotKey="R" Command="{Binding Commands.ToolRectangleCommand}" />
+                <MenuItem Header="_Ellipse" HotKey="E" Command="{Binding Commands.ToolEllipseCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="_Text" HotKey="T" Command="{Binding Commands.ToolTextCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="_Image" HotKey="I" Command="{Binding Commands.ToolImageCommand}" />
+            </MenuItem>
+            <MenuItem Header="_Data">
+                <MenuItem Header="_Import..." Command="{Binding Commands.ImportDataCommand}"/>
+                <!--<Separator/>-->
+                <MenuItem Header="_Export..." Command="{Binding Commands.ExportDataCommand}"/>
+                <!--<Separator/>-->
+                <MenuItem Header="_Update..." Command="{Binding Commands.UpdateDataCommand}"/>
             </MenuItem>
             <MenuItem Header="Te_mplate" Items="{Binding Editor.Project.Templates}">
-                <DropDown.DataTemplates>
+                <MenuItem.DataTemplates>
                     <DataTemplate DataType="core:Container">
-                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Name}" />
                     </DataTemplate>
-                </DropDown.DataTemplates>
+                </MenuItem.DataTemplates>
             </MenuItem>
             <MenuItem Header="_Options">
-                <MenuItem Header="Default is Stro_ked" HotKey="K" Command="{Binding Commands.DefaultIsStrokedCommand}"/>
-                <MenuItem Header="Default is _Filled" HotKey="F" Command="{Binding Commands.DefaultIsFilledCommand}"/>
-                <MenuItem Header="Default is Close_d" HotKey="D" Command="{Binding Commands.DefaultIsClosedCommand}"/>
-                <MenuItem Header="Default is Smooth _Join" HotKey="J" Command="{Binding Commands.DefaultIsSmoothJoinCommand}"/>
-                <MenuItem Header="Snap to _Grid" HotKey="G" Command="{Binding Commands.SnapToGridCommand}"/>
-                <MenuItem Header="Try To _Connect" HotKey="C" Command="{Binding Commands.TryToConnectCommand}"/>
+                <MenuItem Header="Default is Stro_ked" HotKey="K" Command="{Binding Commands.DefaultIsStrokedCommand}" />
+                <MenuItem Header="Default is _Filled" HotKey="F" Command="{Binding Commands.DefaultIsFilledCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="Default is Close_d" HotKey="D" Command="{Binding Commands.DefaultIsClosedCommand}" />
+                <MenuItem Header="Default is Smooth _Join" HotKey="J" Command="{Binding Commands.DefaultIsSmoothJoinCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="Snap to _Grid" HotKey="G" Command="{Binding Commands.SnapToGridCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="Try To _Connect" HotKey="C" Command="{Binding Commands.TryToConnectCommand}" />
             </MenuItem>
         </Menu>
         <Grid RowDefinitions="40*,30*,30*" Grid.Row="1" Grid.Column="0">
-            <TreeView
-                Items="{Binding Editor.Project.Documents}"
-                Grid.Row="0">
+            <TreeView Items="{Binding Editor.Project.Documents}" Grid.Row="0">
                 <TreeView.DataTemplates>
                     <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Containers}">
-                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Name}" />
                     </TreeDataTemplate>
                     <DataTemplate DataType="core:Container">
-                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Name}" />
                     </DataTemplate>
                 </TreeView.DataTemplates>
             </TreeView>
-            <ListBox
-                Items="{Binding Editor.Project.Documents}"
-                SelectedItem="{Binding Path=Editor.Project.CurrentDocument, Mode=TwoWay}"
-                Grid.Row="1">
+            <ListBox Items="{Binding Editor.Project.Documents}" SelectedItem="{Binding Path=Editor.Project.CurrentDocument, Mode=TwoWay}" Grid.Row="1">
                 <ListBox.DataTemplates>
                     <DataTemplate DataType="core:Document">
-                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Name}" />
                     </DataTemplate>
                 </ListBox.DataTemplates>
             </ListBox>
-            <ListBox
-                Items="{Binding Editor.Project.CurrentDocument.Containers}"
-                SelectedItem="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}"
-                Grid.Row="2">
+            <ListBox Items="{Binding Editor.Project.CurrentDocument.Containers}" SelectedItem="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}" Grid.Row="2">
                 <ListBox.DataTemplates>
                     <DataTemplate DataType="core:Container">
-                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Name}" />
                     </DataTemplate>
                 </ListBox.DataTemplates>
             </ListBox>
@@ -165,30 +317,21 @@
             </local:Drawable>
         </Grid>
         <Grid RowDefinitions="Auto,50*,50*" Grid.Row="1" Grid.Column="2">
-            <DropDown
-                Items="{Binding Editor.Project.StyleLibraries}"
-                SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}"
-                Grid.Row="0">
+            <DropDown Items="{Binding Editor.Project.StyleLibraries}" SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="0">
                 <DropDown.DataTemplates>
                     <DataTemplate DataType="core:StyleLibrary">
-                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Name}" />
                     </DataTemplate>
                 </DropDown.DataTemplates>
             </DropDown>
-            <ListBox
-                Items="{Binding Editor.Project.CurrentStyleLibrary.Styles}"
-                SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}"
-                Grid.Row="1">
+            <ListBox Items="{Binding Editor.Project.CurrentStyleLibrary.Styles}" SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}" Grid.Row="1">
                 <ListBox.DataTemplates>
                     <DataTemplate DataType="core:ShapeStyle">
-                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Name}" />
                     </DataTemplate>
                 </ListBox.DataTemplates>
-            </ListBox> 
-            <ContentControl 
-                Content="{Binding Editor.Project.CurrentContainer.CurrentShape}"
-                Grid.Row="2">
-            </ContentControl>  
+            </ListBox>
+            <ContentControl Content="{Binding Editor.Project.CurrentContainer.CurrentShape}" Grid.Row="2"/>
         </Grid>
     </Grid>
 </Window>
