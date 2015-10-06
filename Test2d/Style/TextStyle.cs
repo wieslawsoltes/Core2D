@@ -9,6 +9,8 @@ namespace Test2d
     /// </summary>
     public class TextStyle : ObservableObject
     {
+        private static TextHAlignment[] _textHAlignmentValues = (TextHAlignment[])Enum.GetValues(typeof(TextHAlignment));
+        private static TextVAlignment[] _textVAlignmentValues = (TextVAlignment[])Enum.GetValues(typeof(TextVAlignment));
         private string _name;
         private string _fontName;
         private string _fontFile;
@@ -16,7 +18,23 @@ namespace Test2d
         private FontStyle _fontStyle;
         private TextHAlignment _textHAlignment;
         private TextVAlignment _textVAlignment;
+
+        /// <summary>
+        /// The TextHAlignment enum values.
+        /// </summary>
+        public static TextHAlignment[] TextHAlignmentValues 
+        { 
+            get { return _textHAlignmentValues; } 
+        }
         
+        /// <summary>
+        /// The TextVAlignment enum values.
+        /// </summary>
+        public static TextVAlignment[] TextVAlignmentValues 
+        { 
+            get { return _textVAlignmentValues; } 
+        }
+
         /// <summary>
         /// 
         /// </summary>

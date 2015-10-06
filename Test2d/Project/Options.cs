@@ -9,6 +9,8 @@ namespace Test2d
     /// </summary>
     public class Options : ObservableObject
     {
+        private static MoveMode[] _moveModeValues = (MoveMode[])Enum.GetValues(typeof(MoveMode));
+        private static XFillRule[] _xFillRuleValues = (XFillRule[])Enum.GetValues(typeof(XFillRule));
         private bool _snapToGrid = true;
         private double _snapX = 15.0;
         private double _snapY = 15.0;
@@ -25,6 +27,22 @@ namespace Test2d
         private ShapeStyle _selectionStyle;
         private ShapeStyle _helperStyle;
 
+        /// <summary>
+        /// The MoveMode enum values.
+        /// </summary>
+        public static MoveMode[] MoveModeValues 
+        { 
+            get { return _moveModeValues; } 
+        }
+
+        /// <summary>
+        /// The XFillRule enum values.
+        /// </summary>
+        public static XFillRule[] XFillRuleValues 
+        { 
+            get { return _xFillRuleValues; } 
+        }
+        
         /// <summary>
         /// Gets or sets how grid snapping is handled. 
         /// </summary>

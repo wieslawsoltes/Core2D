@@ -9,6 +9,7 @@ namespace Test2d
     /// </summary>
     public class BaseStyle : ObservableObject
     {
+        private static LineCap[] _lineCapValues = (LineCap[])Enum.GetValues(typeof(LineCap));
         private string _name;
         private ArgbColor _stroke;
         private ArgbColor _fill;
@@ -17,6 +18,14 @@ namespace Test2d
         private double[] _dashes;
         private double _dashOffset;
 
+        /// <summary>
+        /// The LineCap enum values.
+        /// </summary>
+        public static LineCap[] LineCapValues 
+        { 
+            get { return _lineCapValues; } 
+        }
+        
         /// <summary>
         /// 
         /// </summary>
