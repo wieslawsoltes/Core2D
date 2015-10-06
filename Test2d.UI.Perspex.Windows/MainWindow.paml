@@ -309,6 +309,37 @@
                 </TabItem>
             </TabControl>
         </DataTemplate>
+        <DataTemplate DataType="core:XText">
+            <TabControl>
+                <TabItem Header="Text" Classes="property">
+                    <StackPanel>
+                        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
+                            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                            <TextBlock Text="Text" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                            <TextBox Text="{Binding Path=Text, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                        </Grid>
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                            <TextBlock Text="TopLeft" Classes="header" Grid.Row="0" Grid.Column="0"/>
+                            <ContentControl Content="{Binding TopLeft}" Grid.Row="1" Grid.Column="0"/>
+                        </Grid>
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                            <TextBlock Text="BottomRight" Classes="header" Grid.Row="0" Grid.Column="0"/>
+                            <ContentControl Content="{Binding BottomRight}" Grid.Row="1" Grid.Column="0"/>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="State" Classes="property">
+                    <ContentControl Content="{Binding State}"/>
+                </TabItem>
+                <TabItem Header="Data" Classes="property">
+                    <ContentControl Content="{Binding Data}"/>
+                </TabItem>
+                <TabItem Header="Style" Classes="property">
+                    <ContentControl Content="{Binding Style}"/>
+                </TabItem>
+            </TabControl>
+        </DataTemplate>
     </Window.DataTemplates>
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="150,*,230">
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
