@@ -6,7 +6,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:core="clr-namespace:Test2d;assembly=Test2d"
-             xmlns:converters="clr-namespace:Test.Converters"
              xmlns:controls="clr-namespace:Test.Controls"
              xmlns:p="clr-namespace:Test2d.UI.Wpf.Properties"
              mc:Ignorable="d" 
@@ -475,9 +474,6 @@
         <MenuItem Header="{x:Static p:Resources.MenuTemplate}" 
                   Tag="{Binding}"
                   ItemsSource="{Binding Editor.Project.Templates}">
-            <MenuItem.Resources>
-                <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
-            </MenuItem.Resources>
             <MenuItem.ItemContainerStyle>
                 <Style TargetType="MenuItem">
                     <Setter Property="Header" Value="{Binding Name}"/>
