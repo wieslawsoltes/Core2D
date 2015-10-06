@@ -106,6 +106,37 @@
                 </TabItem>
             </TabControl>
         </DataTemplate>
+        <DataTemplate DataType="core:XText">
+            <TabControl>
+                <TabItem Header="Text" Classes="property">
+                    <StackPanel>
+                        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
+                            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                            <TextBlock Text="Text" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                            <TextBox Text="{Binding Path=Text, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                        </Grid>
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                            <TextBlock Text="TopLeft" Classes="header" Grid.Row="0" Grid.Column="0"/>
+                            <ContentControl Content="{Binding TopLeft}" Grid.Row="1" Grid.Column="0"/>
+                        </Grid>
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                            <TextBlock Text="BottomRight" Classes="header" Grid.Row="0" Grid.Column="0"/>
+                            <ContentControl Content="{Binding BottomRight}" Grid.Row="1" Grid.Column="0"/>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="State" Classes="property">
+                    <ContentControl Content="{Binding State}"/>
+                </TabItem>
+                <TabItem Header="Data" Classes="property">
+                    <ContentControl Content="{Binding Data}"/>
+                </TabItem>
+                <TabItem Header="Style" Classes="property">
+                    <ContentControl Content="{Binding Style}"/>
+                </TabItem>
+            </TabControl>
+        </DataTemplate>
         <DataTemplate DataType="core:XRectangle">
             <TabControl>
                 <TabItem Header="Rectangle" Classes="property">
@@ -309,37 +340,6 @@
                 </TabItem>
             </TabControl>
         </DataTemplate>
-        <DataTemplate DataType="core:XText">
-            <TabControl>
-                <TabItem Header="Text" Classes="property">
-                    <StackPanel>
-                        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-                            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                            <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                            <TextBlock Text="Text" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                            <TextBox Text="{Binding Path=Text, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                        </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
-                            <TextBlock Text="TopLeft" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding TopLeft}" Grid.Row="1" Grid.Column="0"/>
-                        </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
-                            <TextBlock Text="BottomRight" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding BottomRight}" Grid.Row="1" Grid.Column="0"/>
-                        </Grid>
-                    </StackPanel>
-                </TabItem>
-                <TabItem Header="State" Classes="property">
-                    <ContentControl Content="{Binding State}"/>
-                </TabItem>
-                <TabItem Header="Data" Classes="property">
-                    <ContentControl Content="{Binding Data}"/>
-                </TabItem>
-                <TabItem Header="Style" Classes="property">
-                    <ContentControl Content="{Binding Style}"/>
-                </TabItem>
-            </TabControl>
-        </DataTemplate>
         <DataTemplate DataType="core:XImage">
             <TabControl>
                 <TabItem Header="Image" Classes="property">
@@ -363,6 +363,77 @@
                             <ContentControl Content="{Binding BottomRight}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                     </StackPanel>
+                </TabItem>
+                <TabItem Header="State" Classes="property">
+                    <ContentControl Content="{Binding State}"/>
+                </TabItem>
+                <TabItem Header="Data" Classes="property">
+                    <ContentControl Content="{Binding Data}"/>
+                </TabItem>
+                <TabItem Header="Style" Classes="property">
+                    <ContentControl Content="{Binding Style}"/>
+                </TabItem>
+            </TabControl>
+        </DataTemplate>
+        <DataTemplate DataType="core:XGroup">
+            <TabControl>
+                <TabItem Header="Group" Classes="property">
+                    <StackPanel>
+                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
+                            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                        </Grid>
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                            <TextBlock Text="Properties" Classes="header" Grid.Row="0" Grid.Column="0"/>
+                            <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" Grid.Row="1" Grid.Column="0">
+                                <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10">
+                                </GridSplitter>
+                                <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
+                                <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
+                                <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding ShapesProperties}">
+                                    <ItemsControl.DataTemplates>
+                                        <DataTemplate DataType="core:ShapeProperty">
+                                            <Grid Height="Auto" VerticalAlignment="Top">
+                                                <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.DataTemplates>
+                                </ItemsControl>
+                                <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding ShapesProperties}">
+                                    <ItemsControl.DataTemplates>
+                                        <DataTemplate DataType="core:ShapeProperty">
+                                            <Grid Height="Auto" VerticalAlignment="Top">
+                                                <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.DataTemplates>
+                                </ItemsControl>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="State" Classes="property">
+                    <ContentControl Content="{Binding State}"/>
+                </TabItem>
+                <TabItem Header="Data" Classes="property">
+                    <ContentControl Content="{Binding Data}"/>
+                </TabItem>
+            </TabControl>
+        </DataTemplate>
+        <DataTemplate DataType="core:XPath">
+            <TabControl>
+                <TabItem Header="Path" Classes="property">
+                    <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                        <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding Path=IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                        <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding Path=IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Geometry" Classes="property">
+                    <ContentControl Content="{Binding Geometry}"/>
                 </TabItem>
                 <TabItem Header="State" Classes="property">
                     <ContentControl Content="{Binding State}"/>
