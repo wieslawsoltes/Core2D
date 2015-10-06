@@ -157,7 +157,7 @@
         </DataTemplate>
         <DataTemplate DataType="core:XEllipse">
             <TabControl>
-                <TabItem Header="XEllipse" Classes="property">
+                <TabItem Header="Ellipse" Classes="property">
                     <StackPanel>
                         <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
