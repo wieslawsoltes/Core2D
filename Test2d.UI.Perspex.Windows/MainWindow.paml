@@ -394,7 +394,9 @@
                     </DataTemplate>
                 </ListBox.DataTemplates>
             </ListBox>
-            <ContentControl Content="{Binding Editor.Project.CurrentContainer.CurrentShape}" Grid.Row="2"/>
+            <ScrollViewer Grid.Row="2">
+                <ContentControl Content="{Binding Editor.Project.CurrentContainer.CurrentShape}"/>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>
