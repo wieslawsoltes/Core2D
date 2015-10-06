@@ -2619,9 +2619,7 @@
                             Grid.Column="1">
                         </TextBox>
                     </Grid>
-                    <Expander 
-                        Header="Properties" 
-                        IsExpanded="True">
+                    <Expander Header="Properties" IsExpanded="True">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50*"/>
