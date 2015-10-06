@@ -7,7 +7,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:core="clr-namespace:Test2d;assembly=Test2d"
-             xmlns:converters="clr-namespace:Test.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="200">
     <Grid>
@@ -45,7 +44,6 @@
             BorderBrush="{x:Null}" 
             Grid.Row="2">
             <TreeView.Resources>
-                <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
             </TreeView.Resources>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectedItemChanged">
