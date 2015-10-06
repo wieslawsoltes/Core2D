@@ -190,6 +190,47 @@
                 </TabItem>
             </TabControl>
         </DataTemplate>
+        <DataTemplate DataType="core:XArc">
+            <TabControl>
+                <TabItem Header="Arc" Classes="property">
+                    <StackPanel>
+                        <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                            <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                            <CheckBox IsChecked="{Binding Path=IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                            <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                            <CheckBox IsChecked="{Binding Path=IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                        </Grid>
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                            <TextBlock Text="Point1" Classes="header" Grid.Row="0" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Point1}" Grid.Row="1" Grid.Column="0"/>
+                        </Grid>
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                            <TextBlock Text="Point2" Classes="header" Grid.Row="0" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Point2}" Grid.Row="1" Grid.Column="0"/>
+                        </Grid>
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                            <TextBlock Text="Point3" Classes="header" Grid.Row="0" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Point3}" Grid.Row="1" Grid.Column="0"/>
+                        </Grid>
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                            <TextBlock Text="Point4" Classes="header" Grid.Row="0" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Point4}" Grid.Row="1" Grid.Column="0"/>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="State" Classes="property">
+                    <ContentControl Content="{Binding State}"/>
+                </TabItem>
+                <TabItem Header="Data" Classes="property">
+                    <ContentControl Content="{Binding Data}"/>
+                </TabItem>
+                <TabItem Header="Style" Classes="property">
+                    <ContentControl Content="{Binding Style}"/>
+                </TabItem>
+            </TabControl>
+        </DataTemplate>
     </Window.DataTemplates>
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="150,*,230">
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
