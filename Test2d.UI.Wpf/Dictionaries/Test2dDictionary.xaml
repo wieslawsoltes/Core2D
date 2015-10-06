@@ -2597,28 +2597,28 @@
         <TabControl>
             <TabItem Header="Group">
                 <StackPanel>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock 
-                        Text="Name" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="0" 
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBox 
-                        Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                        BorderBrush="{x:Null}" 
-                        Style="{StaticResource TextBoxLeftStyleKey}" 
-                        Grid.Row="0" 
-                        Grid.Column="1">
-                    </TextBox>
-                </Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock 
+                            Text="Name" 
+                            Style="{StaticResource TextBlockLeftStyleKey}"
+                            Grid.Row="0" 
+                            Grid.Column="0">
+                        </TextBlock>
+                        <TextBox 
+                            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                            BorderBrush="{x:Null}" 
+                            Style="{StaticResource TextBoxLeftStyleKey}" 
+                            Grid.Row="0" 
+                            Grid.Column="1">
+                        </TextBox>
+                    </Grid>
                     <Expander 
                         Header="Properties" 
                         IsExpanded="True">
