@@ -114,7 +114,7 @@ namespace Test2d
             string fontName = "Calibri", 
             string fontFile = "calibri.ttf",
             double fontSize = 12.0,
-            FontStyle fontStyle = FontStyle.Regular,
+            FontStyle fontStyle = null,
             TextHAlignment textHAlignment = TextHAlignment.Center,
             TextVAlignment textVAlignment = TextVAlignment.Center)
         {
@@ -124,7 +124,7 @@ namespace Test2d
                 FontName = fontName,
                 FontFile = fontFile,
                 FontSize = fontSize,
-                FontStyle = fontStyle,
+                FontStyle = fontStyle ?? FontStyle.Create(FontStyleFlags.Regular),
                 TextHAlignment = textHAlignment,
                 TextVAlignment = textVAlignment
             };

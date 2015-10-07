@@ -1402,6 +1402,11 @@ namespace Test2d
             if (style.LineStyle != null)
             {
                 style.LineStyle.PropertyChanged += StyleObserver;
+
+                if (style.LineStyle.FixedLength != null)
+                {
+                    style.LineStyle.FixedLength.PropertyChanged += StyleObserver;
+                }
             }
             
             if (style.StartArrowStyle != null)
@@ -1437,6 +1442,11 @@ namespace Test2d
             if (style.TextStyle != null)
             {
                 style.TextStyle.PropertyChanged += StyleObserver;
+
+                if (style.TextStyle.FontStyle != null)
+                {
+                    style.TextStyle.FontStyle.PropertyChanged += StyleObserver;
+                }
             }
             
             Verbose("Add Style: " + style.Name);
@@ -1462,12 +1472,17 @@ namespace Test2d
             {
                 style.Fill.PropertyChanged -= StyleObserver;
             }
-            
+
             if (style.LineStyle != null)
             {
                 style.LineStyle.PropertyChanged -= StyleObserver;
+
+                if (style.LineStyle.FixedLength != null)
+                {
+                    style.LineStyle.FixedLength.PropertyChanged -= StyleObserver;
+                }
             }
-        
+
             if (style.StartArrowStyle != null)
             {
                 style.StartArrowStyle.PropertyChanged -= StyleObserver;
@@ -1497,12 +1512,17 @@ namespace Test2d
                     style.EndArrowStyle.Fill.PropertyChanged -= StyleObserver;
                 }
             }
-            
+
             if (style.TextStyle != null)
             {
                 style.TextStyle.PropertyChanged -= StyleObserver;
+
+                if (style.TextStyle.FontStyle != null)
+                {
+                    style.TextStyle.FontStyle.PropertyChanged -= StyleObserver;
+                }
             }
-            
+
             Verbose("Removee Style: " + style.Name);
         }
 

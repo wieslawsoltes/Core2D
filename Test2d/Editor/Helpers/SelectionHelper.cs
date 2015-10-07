@@ -218,7 +218,7 @@ namespace Test2d
                 {
                     case MoveMode.Point:
                         {
-                            if (!state.Value.HasFlag(ShapeStateFlags.Locked))
+                            if (!state.Flags.HasFlag(ShapeStateFlags.Locked))
                             {
                                 var shape = _editor.Renderers[0].State.SelectedShape;
                                 var shapes = Enumerable.Repeat(shape, 1);
@@ -228,7 +228,7 @@ namespace Test2d
                         break;
                     case MoveMode.Shape:
                         {
-                            if (!state.Value.HasFlag(ShapeStateFlags.Locked) && !state.Value.HasFlag(ShapeStateFlags.Connector))
+                            if (!state.Flags.HasFlag(ShapeStateFlags.Locked) && !state.Flags.HasFlag(ShapeStateFlags.Connector))
                             {
                                 var shape = _editor.Renderers[0].State.SelectedShape;
                                 var shapes = Enumerable.Repeat(shape, 1).ToList();
@@ -241,7 +241,7 @@ namespace Test2d
 
             if (_editor.Renderers[0].State.SelectedShapes != null)
             {
-                var shapes = _editor.Renderers[0].State.SelectedShapes.Where(s => !s.State.Value.HasFlag(ShapeStateFlags.Locked));
+                var shapes = _editor.Renderers[0].State.SelectedShapes.Where(s => !s.State.Flags.HasFlag(ShapeStateFlags.Locked));
 
                 switch (_editor.Project.Options.MoveMode)
                 {

@@ -66,7 +66,7 @@ namespace Test2d
         {
             var record = r ?? this.Data.Record;
 
-            if (State.Value.HasFlag(ShapeStateFlags.Visible))
+            if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
                 renderer.Draw(dc, this, dx, dy, db, record);
             }
@@ -105,12 +105,12 @@ namespace Test2d
         /// <param name="dy"></param>
         public override void Move(double dx, double dy)
         {
-            if (!TopLeft.State.Value.HasFlag(ShapeStateFlags.Connector))
+            if (!TopLeft.State.Flags.HasFlag(ShapeStateFlags.Connector))
             {
                 TopLeft.Move(dx, dy);
             }
 
-            if (!BottomRight.State.Value.HasFlag(ShapeStateFlags.Connector))
+            if (!BottomRight.State.Flags.HasFlag(ShapeStateFlags.Connector))
             {
                 BottomRight.Move(dx, dy);
             }

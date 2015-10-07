@@ -5,30 +5,115 @@ using System;
 namespace Test2d
 {
     /// <summary>
-    /// Specifies style information applied to text.
+    /// Specifies style flags proxy information applied to text.
     /// </summary>
-    [Flags]
-    public enum FontStyle
+    public class FontStyle : ObservableObject
     {
+        private FontStyleFlags _flags;
+
+        /// <summary>
+        /// Specifies style flags information applied to text.
+        /// </summary>
+        public FontStyleFlags Flags
+        {
+            get { return _flags; }
+            set
+            {
+                Update(ref _flags, value);
+                Notify("Regular");
+                Notify("Bold");
+                Notify("Italic");
+                Notify("Underline");
+                Notify("Strikeout");
+            }
+        }
+
         /// <summary>
         /// Normal text.
         /// </summary>
-        Regular = 0,
+        public bool Regular
+        {
+            get { return _flags == FontStyleFlags.Regular; }
+            set
+            {
+                if (value == true)
+                    Flags = _flags | FontStyleFlags.Regular;
+                else
+                    Flags = _flags & ~FontStyleFlags.Regular;
+            }
+        }
+
         /// <summary>
         /// Bold text.
         /// </summary>
-        Bold = 1,
+        public bool Bold
+        {
+            get { return _flags.HasFlag(FontStyleFlags.Bold); }
+            set
+            {
+                if (value == true)
+                    Flags = _flags | FontStyleFlags.Bold;
+                else
+                    Flags = _flags & ~FontStyleFlags.Bold;
+            }
+        }
+
         /// <summary>
         /// Italic text.
         /// </summary>
-        Italic = 2,
+        public bool Italic
+        {
+            get { return _flags.HasFlag(FontStyleFlags.Italic); }
+            set
+            {
+                if (value == true)
+                    Flags = _flags | FontStyleFlags.Italic;
+                else
+                    Flags = _flags & ~FontStyleFlags.Italic;
+            }
+        }
+
         /// <summary>
         /// Underlined text.
         /// </summary>
-        Underline = 4,
+        public bool Underline
+        {
+            get { return _flags.HasFlag(FontStyleFlags.Underline); }
+            set
+            {
+                if (value == true)
+                    Flags = _flags | FontStyleFlags.Underline;
+                else
+                    Flags = _flags & ~FontStyleFlags.Underline;
+            }
+        }
+
         /// <summary>
         /// Text with a line through the middle.
         /// </summary>
-        Strikeout = 8
+        public bool Strikeout
+        {
+            get { return _flags.HasFlag(FontStyleFlags.Strikeout); }
+            set
+            {
+                if (value == true)
+                    Flags = _flags | FontStyleFlags.Strikeout;
+                else
+                    Flags = _flags & ~FontStyleFlags.Strikeout;
+            }
+        }
+
+        /// <summary>
+        /// Creates a new instance of the FontStyle class.
+        /// </summary>
+        /// <param name="flags">The style flags information applied to text.</param>
+        /// <returns>The new instance of the FontStyle class.</returns>
+        public static FontStyle Create(FontStyleFlags flags = FontStyleFlags.Regular)
+        {
+            return new FontStyle()
+            {
+                Flags = flags
+            };
+        }
     }
 }

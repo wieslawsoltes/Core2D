@@ -10,10 +10,7 @@ namespace Test2d
     public class LineStyle : ObservableObject
     {
         private string _name;
-        private MaxLengthFlags _maxLengthFlags;
-        private double _maxLength;
-        private ShapeState _maxLengthStartState;
-        private ShapeState _maxLengthEndState;
+        private LineFixedLength _fixedLength;
 
         /// <summary>
         /// 
@@ -23,66 +20,30 @@ namespace Test2d
             get { return _name; }
             set { Update(ref _name, value); }
         }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public MaxLengthFlags MaxLengthFlags
-        {
-            get { return _maxLengthFlags; }
-            set { Update(ref _maxLengthFlags, value); }
-        }
 
         /// <summary>
         /// 
         /// </summary>
-        public double MaxLength
+        public LineFixedLength FixedLength
         {
-            get { return _maxLength; }
-            set { Update(ref _maxLength, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ShapeState MaxLengthStartState
-        {
-            get { return _maxLengthStartState; }
-            set { Update(ref _maxLengthStartState, value); }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ShapeState MaxLengthEndState
-        {
-            get { return _maxLengthEndState; }
-            set { Update(ref _maxLengthEndState, value); }
+            get { return _fixedLength; }
+            set { Update(ref _fixedLength, value); }
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="maxLengthFlags"></param>
-        /// <param name="maxLength"></param>
-        /// <param name="maxLengthStartState"></param>
-        /// <param name="maxLengthEndState"></param>
+        /// <param name="fixedLength"></param>
         /// <returns></returns>
         public static LineStyle Create(
             string name = "",
-            MaxLengthFlags maxLengthFlags = MaxLengthFlags.Disabled,
-            double maxLength = 15.0,
-            ShapeState maxLengthStartState = null,
-            ShapeState maxLengthEndState = null)
+            LineFixedLength fixedLength = null)
         {
             return new LineStyle() 
             { 
                 Name = name,
-                MaxLengthFlags = maxLengthFlags,
-                MaxLength = maxLength,
-                MaxLengthStartState = maxLengthStartState ?? ShapeState.Create(ShapeStateFlags.Connector | ShapeStateFlags.Output),
-                MaxLengthEndState = maxLengthEndState ?? ShapeState.Create(ShapeStateFlags.Connector | ShapeStateFlags.Input)
+                FixedLength = fixedLength ?? LineFixedLength.Create()
             };
         }
     }

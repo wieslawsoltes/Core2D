@@ -5,34 +5,30 @@ using System;
 namespace Test2d
 {
     /// <summary>
-    /// 
+    /// Specifies style flags information applied to text.
     /// </summary>
     [Flags]
-    public enum MaxLengthFlags
+    public enum FontStyleFlags
     {
         /// <summary>
-        /// 
+        /// Normal text.
         /// </summary>
-        Disabled = 0,
+        Regular = 0,
         /// <summary>
-        /// 
+        /// Bold text.
         /// </summary>
-        Start = 1,
+        Bold = 1,
         /// <summary>
-        /// 
+        /// Italic text.
         /// </summary>
-        End = 2,
+        Italic = 2,
         /// <summary>
-        /// 
+        /// Underlined text.
         /// </summary>
-        Vertical = 4,
+        Underline = 4,
         /// <summary>
-        /// 
+        /// Text with a line through the middle.
         /// </summary>
-        Horizontal = 8,
-        /// <summary>
-        /// 
-        /// </summary>
-        All = 16
+        Strikeout = 8
     }
 }

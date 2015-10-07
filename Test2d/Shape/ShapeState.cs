@@ -9,15 +9,27 @@ namespace Test2d
     /// </summary>
     public class ShapeState : ObservableObject
     {
-        private ShapeStateFlags _value;
+        private ShapeStateFlags _flags;
 
         /// <summary>
         /// 
         /// </summary>
-        public ShapeStateFlags Value
+        public ShapeStateFlags Flags
         {
-            get { return _value; }
-            set { Update(ref _value, value); }
+            get { return _flags; }
+            set
+            {
+                Update(ref _flags, value);
+                Notify("Default");
+                Notify("Visible");
+                Notify("Printable");
+                Notify("Locked");
+                Notify("Connector");
+                Notify("None");
+                Notify("Standalone");
+                Notify("Input");
+                Notify("Output");
+            }
         }
 
         /// <summary>
@@ -25,13 +37,13 @@ namespace Test2d
         /// </summary>
         public bool Default
         {
-            get { return _value.HasFlag(ShapeStateFlags.Default); }
+            get { return _flags == ShapeStateFlags.Default; }
             set
             {
                 if (value == true)
-                    Value = _value | ShapeStateFlags.Default;
+                    Flags = _flags | ShapeStateFlags.Default;
                 else
-                    Value = _value & ~ShapeStateFlags.Default;
+                    Flags = _flags & ~ShapeStateFlags.Default;
             }
         }
 
@@ -40,13 +52,13 @@ namespace Test2d
         /// </summary>
         public bool Visible
         {
-            get { return _value.HasFlag(ShapeStateFlags.Visible); }
+            get { return _flags.HasFlag(ShapeStateFlags.Visible); }
             set
             {
                 if (value == true)
-                    Value = _value | ShapeStateFlags.Visible;
+                    Flags = _flags | ShapeStateFlags.Visible;
                 else
-                    Value = _value & ~ShapeStateFlags.Visible;
+                    Flags = _flags & ~ShapeStateFlags.Visible;
             }
         }
 
@@ -55,13 +67,13 @@ namespace Test2d
         /// </summary>
         public bool Printable
         {
-            get { return _value.HasFlag(ShapeStateFlags.Printable); }
+            get { return _flags.HasFlag(ShapeStateFlags.Printable); }
             set
             {
                 if (value == true)
-                    Value = _value | ShapeStateFlags.Printable;
+                    Flags = _flags | ShapeStateFlags.Printable;
                 else
-                    Value = _value & ~ShapeStateFlags.Printable;
+                    Flags = _flags & ~ShapeStateFlags.Printable;
             }
         }
 
@@ -70,13 +82,13 @@ namespace Test2d
         /// </summary>
         public bool Locked
         {
-            get { return _value.HasFlag(ShapeStateFlags.Locked); }
+            get { return _flags.HasFlag(ShapeStateFlags.Locked); }
             set
             {
                 if (value == true)
-                    Value = _value | ShapeStateFlags.Locked;
+                    Flags = _flags | ShapeStateFlags.Locked;
                 else
-                    Value = _value & ~ShapeStateFlags.Locked;
+                    Flags = _flags & ~ShapeStateFlags.Locked;
             }
         }
 
@@ -85,13 +97,13 @@ namespace Test2d
         /// </summary>
         public bool Connector
         {
-            get { return _value.HasFlag(ShapeStateFlags.Connector); }
+            get { return _flags.HasFlag(ShapeStateFlags.Connector); }
             set
             {
                 if (value == true)
-                    Value = _value | ShapeStateFlags.Connector;
+                    Flags = _flags | ShapeStateFlags.Connector;
                 else
-                    Value = _value & ~ShapeStateFlags.Connector;
+                    Flags = _flags & ~ShapeStateFlags.Connector;
             }
         }
 
@@ -100,13 +112,13 @@ namespace Test2d
         /// </summary>
         public bool None
         {
-            get { return _value.HasFlag(ShapeStateFlags.None); }
+            get { return _flags.HasFlag(ShapeStateFlags.None); }
             set
             {
                 if (value == true)
-                    Value = _value | ShapeStateFlags.None;
+                    Flags = _flags | ShapeStateFlags.None;
                 else
-                    Value = _value & ~ShapeStateFlags.None;
+                    Flags = _flags & ~ShapeStateFlags.None;
             }
         }
 
@@ -115,13 +127,13 @@ namespace Test2d
         /// </summary>
         public bool Standalone
         {
-            get { return _value.HasFlag(ShapeStateFlags.Standalone); }
+            get { return _flags.HasFlag(ShapeStateFlags.Standalone); }
             set
             {
                 if (value == true)
-                    Value = _value | ShapeStateFlags.Standalone;
+                    Flags = _flags | ShapeStateFlags.Standalone;
                 else
-                    Value = _value & ~ShapeStateFlags.Standalone;
+                    Flags = _flags & ~ShapeStateFlags.Standalone;
             }
         }
 
@@ -130,13 +142,13 @@ namespace Test2d
         /// </summary>
         public bool Input
         {
-            get { return _value.HasFlag(ShapeStateFlags.Input); }
+            get { return _flags.HasFlag(ShapeStateFlags.Input); }
             set
             {
                 if (value == true)
-                    Value = _value | ShapeStateFlags.Input;
+                    Flags = _flags | ShapeStateFlags.Input;
                 else
-                    Value = _value & ~ShapeStateFlags.Input;
+                    Flags = _flags & ~ShapeStateFlags.Input;
             }
         }
 
@@ -145,13 +157,13 @@ namespace Test2d
         /// </summary>
         public bool Output
         {
-            get { return _value.HasFlag(ShapeStateFlags.Output); }
+            get { return _flags.HasFlag(ShapeStateFlags.Output); }
             set
             {
                 if (value == true)
-                    Value = _value | ShapeStateFlags.Output;
+                    Flags = _flags | ShapeStateFlags.Output;
                 else
-                    Value = _value & ~ShapeStateFlags.Output;
+                    Flags = _flags & ~ShapeStateFlags.Output;
             }
         }
 
@@ -164,7 +176,7 @@ namespace Test2d
         {
             return new ShapeState()
             {
-                Value = flags
+                Flags = flags
             };
         }
     }

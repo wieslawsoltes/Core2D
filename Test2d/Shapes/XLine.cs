@@ -56,7 +56,7 @@ namespace Test2d
         {
             var record = r ?? this.Data.Record;
 
-            if (State.Value.HasFlag(ShapeStateFlags.Visible))
+            if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
                 renderer.Draw(dc, this, dx, dy, db, record); 
             }
@@ -95,12 +95,12 @@ namespace Test2d
         /// <param name="dy"></param>
         public override void Move(double dx, double dy)
         {
-            if (!Start.State.Value.HasFlag(ShapeStateFlags.Connector))
+            if (!Start.State.Flags.HasFlag(ShapeStateFlags.Connector))
             {
                 Start.Move(dx, dy);
             }
 
-            if (!End.State.Value.HasFlag(ShapeStateFlags.Connector))
+            if (!End.State.Flags.HasFlag(ShapeStateFlags.Connector))
             {
                 End.Move(dx, dy);
             }
@@ -211,16 +211,16 @@ namespace Test2d
         {
             var ls = line.Style.LineStyle;
 
-            if (ls.MaxLengthFlags == MaxLengthFlags.Disabled)
+            if (ls.FixedLength.Flags == LineFixedLengthFlags.Disabled)
                 return;
 
-            if (ls.MaxLengthFlags.HasFlag(MaxLengthFlags.All))
+            if (ls.FixedLength.Flags.HasFlag(LineFixedLengthFlags.All))
             {
                 SetMaxLengthAll(line, ref x1, ref y1, ref x2, ref y2);
             }
             else
             {
-                if (ls.MaxLengthFlags.HasFlag(MaxLengthFlags.Vertical))
+                if (ls.FixedLength.Flags.HasFlag(LineFixedLengthFlags.Vertical))
                 {
                     bool isVertical = Math.Round(x1, 1) == Math.Round(x2, 1);
                     if (isVertical)
@@ -229,7 +229,7 @@ namespace Test2d
                     }
                 }
 
-                if (ls.MaxLengthFlags.HasFlag(MaxLengthFlags.Horizontal))
+                if (ls.FixedLength.Flags.HasFlag(LineFixedLengthFlags.Horizontal))
                 {
                     bool isHorizontal = Math.Round(y1, 1) == Math.Round(y2, 1);
                     if (isHorizontal)
@@ -255,21 +255,21 @@ namespace Test2d
         {
             var ls = line.Style.LineStyle;
 
-            bool shortenStart = ls.MaxLengthStartState.Value != ShapeStateFlags.Default
-                && line.Start.State.Value.HasFlag(ls.MaxLengthStartState.Value)
-                && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.Start);
+            bool shortenStart = ls.FixedLength.StartTrigger.Flags != ShapeStateFlags.Default
+                && line.Start.State.Flags.HasFlag(ls.FixedLength.StartTrigger.Flags)
+                && ls.FixedLength.Flags.HasFlag(LineFixedLengthFlags.Start);
 
-            bool shortenEnd = ls.MaxLengthEndState.Value != ShapeStateFlags.Default
-                && line.End.State.Value.HasFlag(ls.MaxLengthEndState.Value)
-                && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.End);
+            bool shortenEnd = ls.FixedLength.EndTrigger.Flags != ShapeStateFlags.Default
+                && line.End.State.Flags.HasFlag(ls.FixedLength.EndTrigger.Flags)
+                && ls.FixedLength.Flags.HasFlag(LineFixedLengthFlags.End);
 
             if (shortenStart && !shortenEnd)
             {
                 double dx = x1 - x2;
                 double dy = y1 - y2;
                 double distance = Math.Sqrt(dx * dx + dy * dy);
-                x1 = x2 - (x2 - x1) / distance * ls.MaxLength;
-                y1 = y2 - (y2 - y1) / distance * ls.MaxLength;
+                x1 = x2 - (x2 - x1) / distance * ls.FixedLength.Length;
+                y1 = y2 - (y2 - y1) / distance * ls.FixedLength.Length;
             }
 
             if (!shortenStart && shortenEnd)
@@ -277,8 +277,8 @@ namespace Test2d
                 double dx = x2 - x1;
                 double dy = y2 - y1;
                 double distance = Math.Sqrt(dx * dx + dy * dy);
-                x2 = x1 - (x1 - x2) / distance * ls.MaxLength;
-                y2 = y1 - (y1 - y2) / distance * ls.MaxLength;
+                x2 = x1 - (x1 - x2) / distance * ls.FixedLength.Length;
+                y2 = y1 - (y1 - y2) / distance * ls.FixedLength.Length;
             }
 
             if (shortenStart && shortenEnd)
@@ -297,28 +297,28 @@ namespace Test2d
         {
             var ls = line.Style.LineStyle;
 
-            bool shortenStart = ls.MaxLengthStartState.Value != ShapeStateFlags.Default
-                && line.Start.State.Value.HasFlag(ls.MaxLengthStartState.Value)
-                && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.Start);
+            bool shortenStart = ls.FixedLength.StartTrigger.Flags != ShapeStateFlags.Default
+                && line.Start.State.Flags.HasFlag(ls.FixedLength.StartTrigger.Flags)
+                && ls.FixedLength.Flags.HasFlag(LineFixedLengthFlags.Start);
 
-            bool shortenEnd = ls.MaxLengthEndState.Value != ShapeStateFlags.Default
-                && line.End.State.Value.HasFlag(ls.MaxLengthEndState.Value)
-                && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.End);
+            bool shortenEnd = ls.FixedLength.EndTrigger.Flags != ShapeStateFlags.Default
+                && line.End.State.Flags.HasFlag(ls.FixedLength.EndTrigger.Flags)
+                && ls.FixedLength.Flags.HasFlag(LineFixedLengthFlags.End);
 
             if (shortenStart && !shortenEnd)
             {
                 if (x2 > x1)
-                    x1 = x2 - ls.MaxLength;
+                    x1 = x2 - ls.FixedLength.Length;
                 else
-                    x1 = x2 + ls.MaxLength;
+                    x1 = x2 + ls.FixedLength.Length;
             }
 
             if (!shortenStart && shortenEnd)
             {
                 if (x2 > x1)
-                    x2 = x1 + ls.MaxLength;
+                    x2 = x1 + ls.FixedLength.Length;
                 else
-                    x2 = x1 - ls.MaxLength;
+                    x2 = x1 - ls.FixedLength.Length;
             }
 
             if (shortenStart && shortenEnd)
@@ -337,28 +337,28 @@ namespace Test2d
         {
             var ls = line.Style.LineStyle;
 
-            bool shortenStart = ls.MaxLengthStartState.Value != ShapeStateFlags.Default
-                && line.Start.State.Value.HasFlag(ls.MaxLengthStartState.Value)
-                && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.Start);
+            bool shortenStart = ls.FixedLength.StartTrigger.Flags != ShapeStateFlags.Default
+                && line.Start.State.Flags.HasFlag(ls.FixedLength.StartTrigger.Flags)
+                && ls.FixedLength.Flags.HasFlag(LineFixedLengthFlags.Start);
 
-            bool shortenEnd = ls.MaxLengthEndState.Value != ShapeStateFlags.Default
-                && line.End.State.Value.HasFlag(ls.MaxLengthEndState.Value)
-                && ls.MaxLengthFlags.HasFlag(MaxLengthFlags.End);
+            bool shortenEnd = ls.FixedLength.EndTrigger.Flags != ShapeStateFlags.Default
+                && line.End.State.Flags.HasFlag(ls.FixedLength.EndTrigger.Flags)
+                && ls.FixedLength.Flags.HasFlag(LineFixedLengthFlags.End);
 
             if (shortenStart && !shortenEnd)
             {
                 if (y2 > y1)
-                    y1 = y2 - ls.MaxLength;
+                    y1 = y2 - ls.FixedLength.Length;
                 else
-                    y1 = y2 + ls.MaxLength;
+                    y1 = y2 + ls.FixedLength.Length;
             }
 
             if (!shortenStart && shortenEnd)
             {
                 if (y2 > y1)
-                    y2 = y1 + ls.MaxLength;
+                    y2 = y1 + ls.FixedLength.Length;
                 else
-                    y2 = y1 - ls.MaxLength;
+                    y2 = y1 - ls.FixedLength.Length;
             }
 
             if (shortenStart && shortenEnd)

@@ -153,9 +153,11 @@
     <Compile Include="Style\ArrowType.cs" />
     <Compile Include="Style\BaseStyle.cs" />
     <Compile Include="Style\FontStyle.cs" />
+    <Compile Include="Style\FontStyleFlags.cs" />
+    <Compile Include="Style\LineFixedLength.cs" />
     <Compile Include="Style\LineCap.cs" />
     <Compile Include="Style\LineStyle.cs" />
-    <Compile Include="Style\MaxLengthFlags.cs" />
+    <Compile Include="Style\LineFixedLengthFlags.cs" />
     <Compile Include="Style\ShapeStyle.cs" />
     <Compile Include="Style\StyleComparer.cs" />
     <Compile Include="Style\TextHAlignment.cs" />
