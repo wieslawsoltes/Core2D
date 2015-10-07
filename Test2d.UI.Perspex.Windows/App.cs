@@ -44,10 +44,18 @@ namespace TestPerspex
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            var app = new App();
-            var window = new MainWindow();
-            window.Show();
-            app.Run(window);
+            try
+            {
+                var app = new App();
+                var window = new MainWindow();
+                window.Show();
+                app.Run(window);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print(ex.Message);
+                System.Diagnostics.Debug.Print(ex.StackTrace);
+            }
         }
     }
 }
