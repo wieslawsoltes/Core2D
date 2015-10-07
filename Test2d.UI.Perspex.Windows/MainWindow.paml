@@ -1,9 +1,9 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<Window xmlns="https://github.com/perspex" 
-        xmlns:local="clr-namespace:TestPerspex;assembly=Test2d.UI.Perspex.Windows" 
-        xmlns:core="clr-namespace:Test2d;assembly=Test2d" 
-        Width="1240" Height="670" 
+<Window xmlns="https://github.com/perspex"
+        xmlns:local="clr-namespace:TestPerspex;assembly=Test2d.UI.Perspex.Windows"
+        xmlns:core="clr-namespace:Test2d;assembly=Test2d"
+        Width="1240" Height="670"
         Title="Test2d">
     <Window.Styles>
         <Style Selector="TabItem.property">
@@ -219,7 +219,7 @@
                 <CheckBox Content="Output" IsChecked="{Binding Path=Output, Mode=TwoWay}"/>
             </StackPanel>
         </DataTemplate>
-         <!-- shapes -->
+        <!-- shapes -->
         <DataTemplate DataType="core:XPoint">
             <TabControl>
                 <TabItem Header="Point" Classes="property">
@@ -233,7 +233,7 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="State" Classes="property">
-                   <ContentControl Content="{Binding State}"/>
+                    <ContentControl Content="{Binding State}"/>
                 </TabItem>
                 <TabItem Header="Data" Classes="property">
                     <ContentControl Content="{Binding Data}"/>
@@ -264,7 +264,7 @@
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="State" Classes="property">
-                   <ContentControl Content="{Binding State}"/>
+                    <ContentControl Content="{Binding State}"/>
                 </TabItem>
                 <TabItem Header="Data" Classes="property">
                     <ContentControl Content="{Binding Data}"/>
@@ -629,56 +629,56 @@
                 <MenuItem Header="_Export" HotKey="Ctrl+E" Command="{Binding Commands.ExportCommand}" />
                 <!--<Separator/>-->
                 <MenuItem Header="I_mport">
-                    <MenuItem 
+                    <MenuItem
                         Header="_Style..."
-                        Command="{Binding Commands.ImportStyleCommand}" 
+                        Command="{Binding Commands.ImportStyleCommand}"
                         CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}">
                     </MenuItem>
-                    <MenuItem 
+                    <MenuItem
                         Header="S_tyles..."
                         Command="{Binding Commands.ImportStylesCommand}"
                         CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}">
                     </MenuItem>
                     <!--<Separator/>-->
-                    <MenuItem 
+                    <MenuItem
                         Header="St_yle Library..."
                         Command="{Binding Commands.ImportStyleLibraryCommand}"
                         CommandParameter="{Binding Editor.Project}">
                     </MenuItem>
-                    <MenuItem 
+                    <MenuItem
                         Header="Sty_le Libraries..."
                         Command="{Binding Commands.ImportStyleLibrariesCommand}"
                         CommandParameter="{Binding Editor.Project}">
                     </MenuItem>
                     <!--<Separator/>-->
-                    <MenuItem 
+                    <MenuItem
                         Header="_Group..."
                         Command="{Binding Commands.ImportGroupCommand}"
                         CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}">
                     </MenuItem>
-                    <MenuItem 
+                    <MenuItem
                         Header="G_roups..."
                         Command="{Binding Commands.ImportGroupsCommand}"
                         CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}">
                     </MenuItem>
                     <!--<Separator/>-->
-                    <MenuItem 
+                    <MenuItem
                         Header="Gr_oup Library..."
                         Command="{Binding Commands.ImportGroupLibraryCommand}"
                         CommandParameter="{Binding Editor.Project}">
                     </MenuItem>
-                    <MenuItem 
+                    <MenuItem
                         Header="Gro_up Libraries..."
                         Command="{Binding Commands.ImportGroupLibrariesCommand}"
                         CommandParameter="{Binding Editor.Project}">
                     </MenuItem>
                     <!--<Separator/>-->
-                    <MenuItem 
+                    <MenuItem
                         Header="_Template..."
                         Command="{Binding Commands.ImportTemplateCommand}"
                         CommandParameter="{Binding Editor.Project}">
                     </MenuItem>
-                    <MenuItem 
+                    <MenuItem
                         Header="T_emplates..."
                         Command="{Binding Commands.ImportTemplatesCommand}"
                         CommandParameter="{Binding Editor.Project}">
@@ -686,56 +686,56 @@
                 </MenuItem>
                 <!--<Separator/>-->
                 <MenuItem Header="Expor_t">
-                    <MenuItem 
+                    <MenuItem
                         Header="_Style..."
                         Command="{Binding Commands.ExportStyleCommand}"
                         CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}">
                     </MenuItem>
-                    <MenuItem 
+                    <MenuItem
                         Header="S_tyles..."
                         Command="{Binding Commands.ExportStylesCommand}"
                         CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}">
                     </MenuItem>
                     <!--<Separator/>-->
-                    <MenuItem 
+                    <MenuItem
                         Header="St_yle Library..."
                         Command="{Binding Commands.ExportStyleLibraryCommand}"
                         CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}">
                     </MenuItem>
-                    <MenuItem 
+                    <MenuItem
                         Header="Sty_le Libraries..."
                         Command="{Binding Commands.ExportStyleLibrariesCommand}"
                         CommandParameter="{Binding Editor.Project}">
                     </MenuItem>
                     <!--<Separator/>-->
-                    <MenuItem 
+                    <MenuItem
                         Header="_Group..."
                         Command="{Binding Commands.ExportGroupCommand}"
                         CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.CurrentGroup}">
                     </MenuItem>
-                    <MenuItem 
+                    <MenuItem
                         Header="G_roups..."
                         Command="{Binding Commands.ExportGroupsCommand}"
                         CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}">
                     </MenuItem>
                     <!--<Separator/>-->
-                    <MenuItem 
+                    <MenuItem
                         Header="Gr_oup Library..."
                         Command="{Binding Commands.ExportGroupLibraryCommand}"
                         CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}">
                     </MenuItem>
-                    <MenuItem 
+                    <MenuItem
                         Header="Gro_up Libraries..."
                         Command="{Binding Commands.ExportGroupLibrariesCommand}"
                         CommandParameter="{Binding Editor.Project}">
                     </MenuItem>
                     <!--<Separator/>-->
-                    <MenuItem 
+                    <MenuItem
                         Header="_Template..."
                         Command="{Binding Commands.ExportTemplateCommand}"
                         CommandParameter="{Binding Editor.Project.CurrentTemplate}">
                     </MenuItem>
-                    <MenuItem 
+                    <MenuItem
                         Header="T_emplates..."
                         Command="{Binding Commands.ExportTemplatesCommand}"
                         CommandParameter="{Binding Editor.Project}">
