@@ -349,7 +349,7 @@ namespace Test2d
         {
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.Value.HasFlag(_state.DrawShapeState.Value))
+                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
                 {
                     shape.Draw(gfx, this, 0, 0, db, r);
                 }
@@ -813,22 +813,22 @@ namespace Test2d
             Brush brush = ToSolidBrush(text.Style.Stroke);
 
             var fontStyle = System.Drawing.FontStyle.Regular;
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Bold))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Bold))
             {
                 fontStyle |= System.Drawing.FontStyle.Bold;
             }
 
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Italic))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Italic))
             {
                 fontStyle |= System.Drawing.FontStyle.Italic;
             }
 
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Underline))
             {
                 fontStyle |= System.Drawing.FontStyle.Underline;
             }
 
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Strikeout))
             {
                 fontStyle |= System.Drawing.FontStyle.Strikeout;
             }

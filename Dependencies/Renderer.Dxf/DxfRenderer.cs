@@ -606,7 +606,7 @@ namespace netDxf
 
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.Value.HasFlag(_state.DrawShapeState.Value))
+                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
                 {
                     shape.Draw(_doc, this, 0, 0, db, r);
                 }
@@ -1004,10 +1004,10 @@ namespace netDxf
 
             var fs = text.Style.TextStyle.FontStyle;
             var options = new MTextFormattingOptions(dxfMText.Style);
-            options.Bold = fs.HasFlag(Test2d.FontStyle.Bold);
-            options.Italic = fs.HasFlag(Test2d.FontStyle.Italic);
-            options.Underline = fs.HasFlag(Test2d.FontStyle.Underline);
-            options.StrikeThrough = fs.HasFlag(Test2d.FontStyle.Strikeout);
+            options.Bold = fs.Flags.HasFlag(Test2d.FontStyleFlags.Bold);
+            options.Italic = fs.Flags.HasFlag(Test2d.FontStyleFlags.Italic);
+            options.Underline = fs.Flags.HasFlag(Test2d.FontStyleFlags.Underline);
+            options.StrikeThrough = fs.Flags.HasFlag(Test2d.FontStyleFlags.Strikeout);
 
             options.Aligment = MTextFormattingOptions.TextAligment.Default;
             options.Color = null;

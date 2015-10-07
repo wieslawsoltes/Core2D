@@ -457,7 +457,7 @@ namespace PdfSharp
         {
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.Value.HasFlag(_state.DrawShapeState.Value))
+                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
                 {
                     shape.Draw(gfx, this, 0, 0, db, r);
                 }
@@ -921,22 +921,22 @@ namespace PdfSharp
             var options = new XPdfFontOptions(PdfFontEncoding.Unicode);
 
             var fontStyle = XFontStyle.Regular;
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Bold))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Bold))
             {
                 fontStyle |= XFontStyle.Bold;
             }
 
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Italic))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Italic))
             {
                 fontStyle |= XFontStyle.Italic;
             }
 
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Underline))
             {
                 fontStyle |= XFontStyle.Underline;
             }
 
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Strikeout))
             {
                 fontStyle |= XFontStyle.Strikeout;
             }

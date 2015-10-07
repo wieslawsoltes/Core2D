@@ -385,7 +385,7 @@ namespace TestEtoForms
         {
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.Value.HasFlag(_state.DrawShapeState.Value))
+                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
                 {
                     shape.Draw(gfx, this, 0, 0, db, r);
                 }
@@ -843,23 +843,23 @@ namespace TestEtoForms
             var brush = ToSolidBrush(text.Style.Stroke);
 
             var fontStyle = Eto.Drawing.FontStyle.None;
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Bold))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Bold))
             {
                 fontStyle |= Eto.Drawing.FontStyle.Bold;
             }
 
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Italic))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Italic))
             {
                 fontStyle |= Eto.Drawing.FontStyle.Italic;
             }
 
             var fontDecoration = Eto.Drawing.FontDecoration.None;
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Underline))
             {
                 fontDecoration |= Eto.Drawing.FontDecoration.Underline;
             }
 
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Strikeout))
             {
                 fontDecoration |= Eto.Drawing.FontDecoration.Strikethrough;
             }
