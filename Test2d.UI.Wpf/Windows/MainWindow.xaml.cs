@@ -842,8 +842,8 @@ namespace Test.Windows
             };
 
             context.InitializeEditor(new TraceLog(), "Test2d.log");
-            context.Editor.Renderers[0].State.DrawShapeState.Value = ShapeStateFlags.Visible;
-            context.Editor.Renderers[1].State.DrawShapeState.Value = ShapeStateFlags.Visible;
+            context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
+            context.Editor.Renderers[1].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
             context.Editor.GetImageKey = async () => await GetImageKey();
 
             InitializeCommands(context);

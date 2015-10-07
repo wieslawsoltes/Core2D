@@ -220,8 +220,6 @@
     <converters:BooleanToStringConverter x:Key="BooleanToStarConverter" FalseValue="" TrueValue="*"/>
     <converters:DoubleToStringConverter x:Key="DoubleToStringConverter"/>
     <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
-    <converters:FlagsEnumConverter x:Key="FontStyleFlagsEnumConverter"/>
-    <converters:FlagsEnumConverter x:Key="MagLengthFlagsEnumConverter"/>
     <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
     <converters:ColumnParameterConverter x:Key="ColumnParameterConverter"/>
     <converters:RecordParameterConverter x:Key="RecordParameterConverter"/>
@@ -614,6 +612,15 @@
             </TabItem>
         </TabControl>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type core:FontStyle}">
+        <StackPanel Margin="5,2,5,2">
+            <CheckBox Content="Regular" Margin="1" IsChecked="{Binding Regular}"/>
+            <CheckBox Content="Bold" Margin="1" IsChecked="{Binding Bold}"/>
+            <CheckBox Content="Italic" Margin="1" IsChecked="{Binding Italic}"/>
+            <CheckBox Content="Underline" Margin="1" IsChecked="{Binding Underline}"/>
+            <CheckBox Content="Strikeout" Margin="1" IsChecked="{Binding Strikeout}"/>
+        </StackPanel>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type core:TextStyle}">
         <Grid>
             <Grid.RowDefinitions>
@@ -695,32 +702,13 @@
                 Grid.Row="2" 
                 Grid.Column="2">
             </TextBox>
-            <StackPanel 
+            <ContentControl 
+                Content="{Binding FontStyle}"
                 Margin="5,2,5,2"   
                 Grid.Row="3" 
                 Grid.Column="1"
                 Grid.ColumnSpan="2">
-                <CheckBox 
-                    Content="Regular" Margin="1"
-                    IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Regular}}">
-                </CheckBox>
-                <CheckBox 
-                    Content="Bold" Margin="1"
-                    IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Bold}}">
-                </CheckBox>
-                <CheckBox 
-                    Content="Italic" Margin="1"
-                    IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Italic}}">
-                </CheckBox>
-                <CheckBox 
-                    Content="Underline" Margin="1"
-                    IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Underline}}">
-                </CheckBox>
-                <CheckBox 
-                    Content="Strikeout" Margin="1"
-                    IsChecked="{Binding Path=FontStyle, Converter={StaticResource FontStyleFlagsEnumConverter}, ConverterParameter={x:Static core:FontStyle.Strikeout}}">
-                </CheckBox>
-            </StackPanel>
+            </ContentControl>
             <ComboBox 
                 ItemsSource="{Binding Path=TextHAlignmentValues, Mode=OneWay}" 
                 SelectedItem="{Binding TextHAlignment}"
@@ -742,31 +730,13 @@
     <DataTemplate DataType="{x:Type core:LineStyle}">
         <TabControl>
             <TabItem Header="Flags">
-                <StackPanel Margin="5,2,5,2">
-                    <CheckBox 
-                        Content="Disabled" Margin="1"
-                        IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Disabled}}">
-                    </CheckBox>
-                    <CheckBox 
-                        Content="Start" Margin="1"
-                        IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Start}}">
-                    </CheckBox>
-                    <CheckBox 
-                        Content="End" Margin="1"
-                        IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.End}}">
-                    </CheckBox>
-                    <CheckBox 
-                        Content="Vertical" Margin="1"
-                        IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Vertical}}">
-                    </CheckBox>
-                    <CheckBox 
-                        Content="Horizontal" Margin="1"
-                        IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.Horizontal}}">
-                    </CheckBox>
-                    <CheckBox 
-                        Content="All" Margin="1"
-                        IsChecked="{Binding Path=MaxLengthFlags, Converter={StaticResource MagLengthFlagsEnumConverter}, ConverterParameter={x:Static core:MaxLengthFlags.All}}">
-                    </CheckBox>
+                <StackPanel Margin="5,2,5,2" DataContext="{Binding FixedLength}">
+                    <CheckBox Content="Disabled" Margin="1" IsChecked="{Binding Disabled}"/>
+                    <CheckBox Content="Start" Margin="1" IsChecked="{Binding Start}"/>
+                    <CheckBox Content="End" Margin="1" IsChecked="{Binding End}"/>
+                    <CheckBox Content="Vertical" Margin="1" IsChecked="{Binding Vertical}"/>
+                    <CheckBox Content="Horizontal" Margin="1" IsChecked="{Binding Horizontal}"/>
+                    <CheckBox Content="All" Margin="1" IsChecked="{Binding All}"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Length">
@@ -776,7 +746,7 @@
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
                     <Slider
-                        Value="{Binding MaxLength}" 
+                        Value="{Binding FixedLength.Length}" 
                         Style="{StaticResource SliderStyleKey}"
                         Minimum="0" 
                         Maximum="30" 
@@ -787,17 +757,17 @@
                         Grid.Column="0">
                     </Slider>
                     <TextBox
-                        Text="{Binding MaxLength, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding FixedLength.Length, UpdateSourceTrigger=PropertyChanged}" 
                         Style="{StaticResource TextBoxCenterStyleKey}"
                         Grid.Column="1" >
                     </TextBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Start">
-                <ContentControl Content="{Binding MaxLengthStartState}"/>
+            <TabItem Header="StartTrigger">
+                <ContentControl Content="{Binding FixedLength.StartTrigger}"/>
             </TabItem>
-            <TabItem Header="End">
-                <ContentControl Content="{Binding MaxLengthEndState}"/>
+            <TabItem Header="EndTrigger">
+                <ContentControl Content="{Binding FixedLength.EndTrigger}"/>
             </TabItem>
         </TabControl>
     </DataTemplate>
@@ -945,15 +915,15 @@
             </TabItem>
             <TabItem Header="Line">
                 <StackPanel>
-                    <Expander Header="Line Start Arrow" 
+                    <Expander Header="Start Arrow" 
                               IsExpanded="False">
                         <ContentControl Content="{Binding StartArrowStyle}"/>
                     </Expander>
-                    <Expander Header="Line End Arrow" 
+                    <Expander Header="End Arrow" 
                               IsExpanded="False">
                         <ContentControl Content="{Binding EndArrowStyle}"/>
                     </Expander>
-                    <Expander Header="Line MaxLength" 
+                    <Expander Header="FixedLength" 
                               IsExpanded="False">
                         <ContentControl Content="{Binding LineStyle}"/>
                     </Expander>
