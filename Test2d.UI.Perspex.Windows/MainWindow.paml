@@ -72,11 +72,11 @@
                             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Stroke" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding Stroke}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Fill" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding Fill}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
@@ -150,7 +150,7 @@
                     <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                     <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                 </Grid>
-                <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                     <TextBlock Text="FixedLength" Classes="header" Grid.Row="0" Grid.Column="0"/>
                     <ContentControl Content="{Binding FixedLength}" Grid.Row="1" Grid.Column="0"/>
                 </Grid>
@@ -164,11 +164,11 @@
                             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Stroke" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding Stroke}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Fill" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding Fill}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
@@ -189,15 +189,15 @@
                 </TabItem>
                 <TabItem Header="Line" Classes="property">
                     <StackPanel>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="StartArrowStyle" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding StartArrowStyle}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="EndArrowStyle" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding EndArrowStyle}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="FixedLength" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding LineStyle}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
@@ -253,11 +253,11 @@
                             <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
                             <CheckBox IsChecked="{Binding Path=IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Start" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding Start}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="End" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding End}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
@@ -284,11 +284,11 @@
                             <TextBlock Text="Text" Classes="left" Grid.Row="1" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=Text, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="TopLeft" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding TopLeft}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="BottomRight" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding BottomRight}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
@@ -319,11 +319,11 @@
                             <TextBlock Text="Text" Classes="left" Grid.Row="3" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=Text, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="TopLeft" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding TopLeft}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="BottomRight" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding BottomRight}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
@@ -368,11 +368,11 @@
                             <TextBlock Text="Text" Classes="left" Grid.Row="3" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=Text, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="TopLeft" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding TopLeft}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="BottomRight" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding BottomRight}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
@@ -403,11 +403,11 @@
                             <TextBlock Text="Path" Classes="left" Grid.Row="3" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=Path, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="TopLeft" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding TopLeft}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="BottomRight" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding BottomRight}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
@@ -436,19 +436,19 @@
                             <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
                             <CheckBox IsChecked="{Binding Path=IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point1" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding Point1}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point2" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding Point2}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point3" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding Point3}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point4" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding Point4}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
@@ -477,19 +477,19 @@
                             <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
                             <CheckBox IsChecked="{Binding Path=IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point1" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding Point1}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point2" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding Point2}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point3" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding Point3}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point4" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding Point4}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
@@ -518,15 +518,15 @@
                             <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
                             <CheckBox IsChecked="{Binding Path=IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point1" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding Point1}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point2" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding Point2}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point3" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <ContentControl Content="{Binding Point3}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
@@ -551,7 +551,7 @@
                             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                         </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto">
+                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Properties" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" Grid.Row="1" Grid.Column="0">
                                 <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
@@ -560,7 +560,7 @@
                                 <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding ShapesProperties}">
                                     <ItemsControl.DataTemplates>
                                         <DataTemplate DataType="core:ShapeProperty">
-                                            <Grid Height="Auto" VerticalAlignment="Top">
+                                            <Grid VerticalAlignment="Top">
                                                 <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}"/>
                                             </Grid>
                                         </DataTemplate>
@@ -569,7 +569,7 @@
                                 <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding ShapesProperties}">
                                     <ItemsControl.DataTemplates>
                                         <DataTemplate DataType="core:ShapeProperty">
-                                            <Grid Height="Auto" VerticalAlignment="Top">
+                                            <Grid VerticalAlignment="Top">
                                                 <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}"/>
                                             </Grid>
                                         </DataTemplate>
