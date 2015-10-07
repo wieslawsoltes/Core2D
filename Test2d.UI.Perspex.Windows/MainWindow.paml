@@ -205,6 +205,7 @@
                 </TabItem>
             </TabControl>
         </DataTemplate>
+        <!-- data -->
         <!-- state -->
         <DataTemplate DataType="core:ShapeState">
             <StackPanel>
