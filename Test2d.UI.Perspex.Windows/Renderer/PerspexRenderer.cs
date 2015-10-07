@@ -377,7 +377,7 @@ namespace TestPerspex
         {
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.Value.HasFlag(_state.DrawShapeState.Value))
+                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
                 {
                     shape.Draw(dc, this, 0, 0, db, r);
                 }
@@ -790,13 +790,13 @@ namespace TestPerspex
             Brush brush = ToSolidBrush(text.Style.Stroke);
 
             var fontStyle = Perspex.Media.FontStyle.Normal;
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Italic))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Italic))
             {
                 fontStyle |= Perspex.Media.FontStyle.Italic;
             }
 
             var fontWeight = Perspex.Media.FontWeight.Normal;
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Bold))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Bold))
             {
                 fontWeight |= Perspex.Media.FontWeight.Bold;
             }
@@ -804,12 +804,12 @@ namespace TestPerspex
             // TODO: Implement font decoration after Perspex adds support for them.
             /*
             var fontDecoration = Perspex.Media.FontDecoration.None;
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Underline))
             {
                 fontDecoration |= Perspex.Media.FontDecoration.Underline;
             }
 
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Strikeout))
             {
                 fontDecoration |= Perspex.Media.FontDecoration.Strikethrough;
             }

@@ -241,7 +241,7 @@ namespace Test.Uwp
         {
             foreach (var shape in layer.Shapes)
             {
-                if (shape.State.Value.HasFlag(_state.DrawShapeState.Value))
+                if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
                 {
                     shape.Draw(ds, this, 0, 0, db, r);
                 }
@@ -591,13 +591,13 @@ namespace Test.Uwp
             var brush = ToColor(text.Style.Stroke);
 
             var fontWeight = FontWeights.Normal;
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Bold))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Bold))
             {
                 fontWeight = FontWeights.Bold;
             }
 
             var fontStyle = Windows.UI.Text.FontStyle.Normal;
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Italic))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Italic))
             {
                 fontStyle = Windows.UI.Text.FontStyle.Italic;
             }
@@ -615,12 +615,12 @@ namespace Test.Uwp
 
             var layout = new CanvasTextLayout(_ds, tbind, format, (float)rect.Width, (float)rect.Height);
 
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Underline))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Underline))
             {
                 layout.SetUnderline(0, tbind.Length, true);
             }
 
-            if (text.Style.TextStyle.FontStyle.HasFlag(Test2d.FontStyle.Strikeout))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Strikeout))
             {
                 layout.SetStrikethrough(0, tbind.Length, true);
             }

@@ -56,7 +56,7 @@ namespace Test.Viewer
         public static void Show(IList<Container> containers)
         {
             var renderer = new WpfRenderer();
-            renderer.State.DrawShapeState.Value = ShapeStateFlags.Printable;
+            renderer.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
 
             var sw = new ScrollViewer()
             {
