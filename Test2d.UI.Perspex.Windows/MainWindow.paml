@@ -3,7 +3,7 @@
 <Window xmlns="https://github.com/perspex"
         xmlns:local="clr-namespace:TestPerspex;assembly=Test2d.UI.Perspex.Windows"
         xmlns:core="clr-namespace:Test2d;assembly=Test2d"
-        Width="1240" Height="670"
+        Width="1260" Height="670"
         Title="Test2d">
     <Window.Styles>
         <Style Selector="TabItem.property">
