@@ -207,11 +207,11 @@ namespace TestWinForms
 
             if (container.Template != null)
             {
-                DrawBackground(g, container.Template.Background, this.Width, this.Height);
+                DrawBackground(g, container.Template.Background, container.Template.Width, container.Template.Height);
                 renderer.Draw(g, container.Template, container.Properties, null);
             }
 
-            DrawBackground(g, container.Background, this.Width, this.Height);
+            DrawBackground(g, container.Background, container.Width, container.Height);
             renderer.Draw(g, container, container.Properties, null);
 
             if (container.WorkingLayer != null)
