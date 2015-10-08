@@ -1024,6 +1024,24 @@
                 </TabItem>
             </TabControl>
         </DataTemplate>
+        <DataTemplate DataType="core:XPathFigure">
+            <TabControl>
+                <TabItem Header="PathFigure" Classes="property">
+                    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
+                        <TextBlock Text="IsFilled" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding Path=IsFilled, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                        <TextBlock Text="IsClosed" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding Path=IsClosed, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="StartPoint" Classes="property">
+                    <ContentControl Content="{Binding StartPoint}"/>
+                </TabItem>
+                <TabItem Header="Segments" Classes="property">
+                    <ListBox Items="{Binding Segments}"/>
+                </TabItem>
+            </TabControl>
+        </DataTemplate>
     </Window.DataTemplates>
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="150,*,230">
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
