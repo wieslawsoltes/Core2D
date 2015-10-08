@@ -1006,6 +1006,24 @@
                 </TabItem>
             </TabControl>
         </DataTemplate>
+        <DataTemplate DataType="core:XQuadraticBezierSegment">
+            <TabControl>
+                <TabItem Header="QuadraticBezierSegment" Classes="property">
+                    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
+                        <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding Path=IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                        <TextBlock Text="IsSmoothJoin" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding Path=IsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Point1" Classes="property">
+                    <ContentControl Content="{Binding Point1}"/>
+                </TabItem>
+                <TabItem Header="Point2" Classes="property">
+                    <ContentControl Content="{Binding Point2}"/>
+                </TabItem>
+            </TabControl>
+        </DataTemplate>
     </Window.DataTemplates>
     <Grid RowDefinitions="Auto,*" ColumnDefinitions="150,*,230">
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
