@@ -1174,7 +1174,6 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:Document">
-            <!-- TODO -->
         </DataTemplate>
         <DataTemplate DataType="core:Container">
             <TabControl>
