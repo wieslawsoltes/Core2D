@@ -1174,6 +1174,23 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:Document">
+            <TabControl>
+                <TabItem Header="Document" Classes="property">
+                    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
+                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Containers" Classes="property">
+                    <ListBox Items="{Binding Containers}">
+                        <ListBox.DataTemplates>
+                            <DataTemplate DataType="core:Container">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ListBox.DataTemplates>
+                    </ListBox>
+                </TabItem>
+            </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:Container">
             <TabControl>
