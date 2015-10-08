@@ -1070,8 +1070,8 @@
             </TabControl>
         </DataTemplate>
     </Window.DataTemplates>
-    <Grid RowDefinitions="Auto,*" ColumnDefinitions="150,*,230">
-        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+    <Grid RowDefinitions="Auto,*" ColumnDefinitions="150,Auto,*,Auto,240">
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
             <MenuItem Header="_File">
                 <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Binding Commands.NewCommand}" />
                 <!--<Separator/>-->
@@ -1329,7 +1329,8 @@
                 </ListBox.DataTemplates>
             </ListBox>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="1" ClipToBounds="True">
+        <GridSplitter Grid.Row="1" Grid.RowSpan="1" Grid.Column="1" Width="10"/>
+        <Grid Grid.Row="1" Grid.Column="2" ClipToBounds="True">
             <local:Drawable>
                 <!--
                 <local:Drawable.KeyBindings>
@@ -1338,7 +1339,8 @@
                 -->
             </local:Drawable>
         </Grid>
-        <Grid RowDefinitions="Auto,50*,50*" Grid.Row="1" Grid.Column="2">
+        <GridSplitter Grid.Row="1" Grid.RowSpan="1" Grid.Column="3" Width="10"/>
+        <Grid RowDefinitions="Auto,50*,50*" Grid.Row="1" Grid.Column="4">
             <DropDown Items="{Binding Editor.Project.StyleLibraries}" SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="0">
                 <DropDown.DataTemplates>
                     <DataTemplate DataType="core:StyleLibrary">
