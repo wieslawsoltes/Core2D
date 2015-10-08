@@ -1080,7 +1080,27 @@
             <!-- TODO -->
         </DataTemplate>
         <DataTemplate DataType="core:Container">
-            <!-- TODO -->
+            <TabControl>
+                <TabItem Header="Container" Classes="property">
+                    <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                        <TextBlock Text="Width" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Text, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                        <TextBlock Text="Width" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Text, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Background" Classes="property">
+                    <ContentControl Content="{Binding Background}"/>
+                </TabItem>
+                <TabItem Header="Template" Classes="property">
+                    <ContentControl Content="{Binding Template}"/>
+                </TabItem>
+                <TabItem Header="Properties" Classes="property">
+                    <!-- TODO -->
+                </TabItem>
+            </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:StyleLibrary">
             <!-- TODO -->
