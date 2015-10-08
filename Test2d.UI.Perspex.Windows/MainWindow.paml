@@ -1129,6 +1129,49 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:Project">
+            <TabControl>
+                <TabItem Header="Project" Classes="property">
+                    <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*" Grid.Row="0">
+                        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0"/>
+                        <TreeView
+                            Items="{Binding Documents}"
+                            SelectedItem="{Binding Path=Selected, Mode=TwoWay}"
+                            Grid.Row="1">
+                            <TreeView.DataTemplates>
+                                <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Containers}">
+                                    <TextBlock Text="{Binding Name}" />
+                                </TreeDataTemplate>
+                                <DataTemplate DataType="core:Container">
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </TreeView.DataTemplates>
+                        </TreeView>
+                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2">
+                            <TextBlock Text="Selected" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox Text="{Binding Path=Selected.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Options" Classes="property">
+                    <ContentControl Content="{Binding Options}"/>
+                </TabItem>
+                <TabItem Header="Templates" Classes="property">
+                    <ListBox
+                        Items="{Binding Templates}"
+                        SelectedItem="{Binding Path=CurrentTemplate, Mode=TwoWay}">
+                        <ListBox.DataTemplates>
+                            <DataTemplate DataType="core:Container">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ListBox.DataTemplates>
+                    </ListBox>
+                </TabItem>
+                <TabItem Header="Template" Classes="property">
+                    <ScrollViewer>
+                        <ContentControl Content="{Binding CurrentTemplate}"/>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:Document">
             <!-- TODO -->
