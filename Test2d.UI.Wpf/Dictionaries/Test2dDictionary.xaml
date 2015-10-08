@@ -3194,28 +3194,6 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
                     Text="IsSmoothJoin" 
                     Style="{StaticResource TextBlockLeftStyleKey}"
                     Grid.Row="0"
