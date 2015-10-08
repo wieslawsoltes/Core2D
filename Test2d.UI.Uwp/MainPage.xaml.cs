@@ -358,8 +358,8 @@ namespace Test.Uwp
                 DrawBackground(
                     ds,
                     container.Template.Background,
-                    container.Width,
-                    container.Height);
+                    container.Template.Width,
+                    container.Template.Height);
 
                 renderer.Draw(
                     ds,

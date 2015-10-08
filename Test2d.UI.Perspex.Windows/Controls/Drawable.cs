@@ -262,8 +262,8 @@ namespace TestPerspex
                 DrawBackground(
                     dc, 
                     container.Template.Background,
-                    container.Width,
-                    container.Height);
+                    container.Template.Width,
+                    container.Template.Height);
 
                 renderer.Draw(
                     dc, 

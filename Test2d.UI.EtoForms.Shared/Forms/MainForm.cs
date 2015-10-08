@@ -863,8 +863,8 @@ namespace TestEtoForms
                 DrawBackground(
                     g, 
                     container.Template.Background,
-                    container.Width,
-                    container.Height);
+                    container.Template.Width,
+                    container.Template.Height);
 
                 renderer.Draw(
                     g, 
