@@ -1070,7 +1070,7 @@
             </TabControl>
         </DataTemplate>
     </Window.DataTemplates>
-    <Grid RowDefinitions="Auto,*" ColumnDefinitions="150,Auto,*,Auto,240">
+    <Grid RowDefinitions="Auto,50*,50*" ColumnDefinitions="150,Auto,*,Auto,240">
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
             <MenuItem Header="_File">
                 <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Binding Commands.NewCommand}" />
