@@ -1324,8 +1324,7 @@
         </Menu>
         <TabControl Grid.Row="1" Grid.Column="0">
             <TabItem Header="Project" Classes="property">
-                <Grid RowDefinitions="50*,50*">
-                    <!--
+                <Grid RowDefinitions="*" ColumnDefinitions="*">
                     <TreeView Items="{Binding Editor.Project.Documents}" Grid.Row="0">
                         <TreeView.DataTemplates>
                             <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Containers}">
@@ -1336,7 +1335,7 @@
                             </DataTemplate>
                         </TreeView.DataTemplates>
                     </TreeView>
-                    -->
+                    <!--
                     <ListBox Items="{Binding Editor.Project.Documents}" SelectedItem="{Binding Path=Editor.Project.CurrentDocument, Mode=TwoWay}" Grid.Row="0">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:Document">
@@ -1351,6 +1350,7 @@
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>
+                    -->
                 </Grid>
             </TabItem>
             <TabItem Header="Options" Classes="property">
