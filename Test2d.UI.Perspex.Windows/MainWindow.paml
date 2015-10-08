@@ -1455,60 +1455,7 @@
                 <MenuItem Header="Try To _Connect" HotKey="C" Command="{Binding Commands.TryToConnectCommand}" />
             </MenuItem>
         </Menu>
-        <TabControl Grid.Row="1" Grid.Column="0">
-            <TabItem Header="Project" Classes="property">
-                <Grid RowDefinitions="*" ColumnDefinitions="*">
-                    <TreeView 
-                        Items="{Binding Editor.Project.Documents}" 
-                        SelectedItem="{Binding Path=Editor.Project.Selected, Mode=TwoWay}" 
-                        Grid.Row="0">
-                        <TreeView.DataTemplates>
-                            <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Containers}">
-                                <TextBlock Text="{Binding Name}" />
-                            </TreeDataTemplate>
-                            <DataTemplate DataType="core:Container">
-                                <TextBlock Text="{Binding Name}" />
-                            </DataTemplate>
-                        </TreeView.DataTemplates>
-                    </TreeView>
-                    <!--
-                    <ListBox Items="{Binding Editor.Project.Documents}" SelectedItem="{Binding Path=Editor.Project.CurrentDocument, Mode=TwoWay}" Grid.Row="0">
-                        <ListBox.DataTemplates>
-                            <DataTemplate DataType="core:Document">
-                                <TextBlock Text="{Binding Name}" />
-                            </DataTemplate>
-                        </ListBox.DataTemplates>
-                    </ListBox>
-                    <ListBox Items="{Binding Editor.Project.CurrentDocument.Containers}" SelectedItem="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}" Grid.Row="1">
-                        <ListBox.DataTemplates>
-                            <DataTemplate DataType="core:Container">
-                                <TextBlock Text="{Binding Name}" />
-                            </DataTemplate>
-                        </ListBox.DataTemplates>
-                    </ListBox>
-                    -->
-                </Grid>
-            </TabItem>
-            <TabItem Header="Options" Classes="property">
-                <ContentControl Content="{Binding Editor.Project.Options}"/>
-            </TabItem>
-            <TabItem Header="Templates" Classes="property">
-                <ListBox
-                    Items="{Binding Editor.Project.Templates}"
-                    SelectedItem="{Binding Path=Editor.Project.CurrentTemplate, Mode=TwoWay}">
-                    <ListBox.DataTemplates>
-                        <DataTemplate DataType="core:Container">
-                            <TextBlock Text="{Binding Name}" />
-                        </DataTemplate>
-                    </ListBox.DataTemplates>
-                </ListBox>
-            </TabItem>
-            <TabItem Header="Template" Classes="property">
-                <ScrollViewer>
-                    <ContentControl Content="{Binding Editor.Project.CurrentTemplate}"/>
-                </ScrollViewer>
-            </TabItem>
-        </TabControl>
+        <ContentControl Content="{Binding Editor.Project}" Grid.Row="1" Grid.Column="0"/>
         <TabControl Grid.Row="2" Grid.Column="0">
             <TabItem Header="Groups" Classes="property">
                 <Grid RowDefinitions="Auto,*">
