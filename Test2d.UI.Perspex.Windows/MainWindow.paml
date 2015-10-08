@@ -1071,6 +1071,62 @@
         </DataTemplate>
         <!-- project -->
         <DataTemplate DataType="core:Options">
+            <TabControl>
+                <TabItem Header="General" Classes="property">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                        <TextBlock Text="SnapToGrid" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding Path=SnapToGrid, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                        <TextBlock Text="SnapX" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=SnapX, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                        <TextBlock Text="SnapY" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=SnapY, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                        <TextBlock Text="HitTreshold" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=HitTreshold, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                        <TextBlock Text="MoveMode" Classes="left" Grid.Row="4" Grid.Column="0"/>
+                        <DropDown Items="{Binding MoveModeValues}" SelectedItem="{Binding Path=MoveMode, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
+                        <TextBlock Text="TryToConnect" Classes="left" Grid.Row="5" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding Path=TryToConnect, Mode=TwoWay}" Classes="left" Grid.Row="5" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Defaults" Classes="property">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+                        <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding Path=DefaultIsStroked, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                        <TextBlock Text="IsFilled" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding Path=DefaultIsFilled, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                        <TextBlock Text="IsClosed" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding Path=DefaultIsClosed, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                        <TextBlock Text="IsSmoothJoin" Classes="left" Grid.Row="3" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding Path=DefaultIsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                        <TextBlock Text="FillRule" Classes="left" Grid.Row="4" Grid.Column="0"/>
+                        <DropDown Items="{Binding XFillRuleValues}" SelectedItem="{Binding Path=DefaultFillRule, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Advanced" Classes="property">
+                    <TabControl>
+                        <TabItem Header="PointShape" Classes="property">
+                            <ScrollViewer>
+                                <ContentControl Content="{Binding PointShape}"/>
+                            </ScrollViewer>
+                        </TabItem>
+                        <TabItem Header="PointStyle" Classes="property">
+                            <ScrollViewer>
+                                <ContentControl Content="{Binding PointStyle}"/>
+                            </ScrollViewer>
+                        </TabItem>
+                        <TabItem Header="SelectionStyle" Classes="property">
+                            <ScrollViewer>
+                                <ContentControl Content="{Binding SelectionStyle}"/>
+                            </ScrollViewer>
+                        </TabItem>
+                        <TabItem Header="HelperStyle" Classes="property">
+                            <ScrollViewer>
+                                <ContentControl Content="{Binding HelperStyle}"/>
+                            </ScrollViewer>
+                        </TabItem>
+                    </TabControl>
+                </TabItem>
+            </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:Project">
             <!-- TODO -->
