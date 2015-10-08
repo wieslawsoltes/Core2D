@@ -1071,7 +1071,6 @@
         </DataTemplate>
         <!-- project -->
         <DataTemplate DataType="core:Options">
-            <!-- TODO -->
         </DataTemplate>
         <DataTemplate DataType="core:Project">
             <!-- TODO -->
