@@ -1467,6 +1467,9 @@
                     </ListBox>
                 </Grid>
             </TabItem>
+            <TabItem Header="Container" Classes="property">
+                <ContentControl Content="{Binding Editor.Project.CurrentContainer}"/>
+            </TabItem>
             <TabItem Header="Layers" Classes="property">
                 <ListBox
                     Items="{Binding Editor.Project.CurrentContainer.Layers}"
