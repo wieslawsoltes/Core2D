@@ -1303,61 +1303,175 @@
                 <MenuItem Header="Try To _Connect" HotKey="C" Command="{Binding Commands.TryToConnectCommand}" />
             </MenuItem>
         </Menu>
-        <Grid RowDefinitions="40*,30*,30*" Grid.Row="1" Grid.Column="0">
-            <TreeView Items="{Binding Editor.Project.Documents}" Grid.Row="0">
-                <TreeView.DataTemplates>
-                    <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Containers}">
-                        <TextBlock Text="{Binding Name}" />
-                    </TreeDataTemplate>
-                    <DataTemplate DataType="core:Container">
-                        <TextBlock Text="{Binding Name}" />
-                    </DataTemplate>
-                </TreeView.DataTemplates>
-            </TreeView>
-            <ListBox Items="{Binding Editor.Project.Documents}" SelectedItem="{Binding Path=Editor.Project.CurrentDocument, Mode=TwoWay}" Grid.Row="1">
-                <ListBox.DataTemplates>
-                    <DataTemplate DataType="core:Document">
-                        <TextBlock Text="{Binding Name}" />
-                    </DataTemplate>
-                </ListBox.DataTemplates>
-            </ListBox>
-            <ListBox Items="{Binding Editor.Project.CurrentDocument.Containers}" SelectedItem="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}" Grid.Row="2">
-                <ListBox.DataTemplates>
-                    <DataTemplate DataType="core:Container">
-                        <TextBlock Text="{Binding Name}" />
-                    </DataTemplate>
-                </ListBox.DataTemplates>
-            </ListBox>
+        <TabControl Grid.Row="1" Grid.Column="0">
+            <TabItem Header="Project" Classes="property">
+                <Grid RowDefinitions="50*,50*">
+                    <!--
+                    <TreeView Items="{Binding Editor.Project.Documents}" Grid.Row="0">
+                        <TreeView.DataTemplates>
+                            <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Containers}">
+                                <TextBlock Text="{Binding Name}" />
+                            </TreeDataTemplate>
+                            <DataTemplate DataType="core:Container">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </TreeView.DataTemplates>
+                    </TreeView>
+                    -->
+                    <ListBox Items="{Binding Editor.Project.Documents}" SelectedItem="{Binding Path=Editor.Project.CurrentDocument, Mode=TwoWay}" Grid.Row="0">
+                        <ListBox.DataTemplates>
+                            <DataTemplate DataType="core:Document">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ListBox.DataTemplates>
+                    </ListBox>
+                    <ListBox Items="{Binding Editor.Project.CurrentDocument.Containers}" SelectedItem="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}" Grid.Row="1">
+                        <ListBox.DataTemplates>
+                            <DataTemplate DataType="core:Container">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ListBox.DataTemplates>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Options" Classes="property">
+                <ContentControl Content="{Binding Editor.Project.Options}"/>
+            </TabItem>
+            <TabItem Header="Templates" Classes="property">
+                <ListBox
+                    Items="{Binding Editor.Project.Templates}"
+                    SelectedItem="{Binding Editor.Project.CurrentTemplate}">
+                    <ListBox.DataTemplates>
+                        <DataTemplate DataType="core:Container">
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.DataTemplates>
+                </ListBox>
+            </TabItem>
+            <TabItem Header="Template" Classes="property">
+                <ScrollViewer>
+                    <ContentControl Content="{Binding Editor.Project.CurrentTemplate}"/>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+        <TabControl Grid.Row="2" Grid.Column="0">
+            <TabItem Header="Groups" Classes="property">
+                <Grid RowDefinitions="Auto,*">
+                    <DropDown Items="{Binding Editor.Project.GroupLibraries}" SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary, Mode=TwoWay}" Grid.Row="0">
+                        <DropDown.DataTemplates>
+                            <DataTemplate DataType="core:GroupLibrary">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </DropDown.DataTemplates>
+                    </DropDown>
+                    <ListBox Items="{Binding Editor.Project.CurrentGroupLibrary.Groups}" SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary.CurrentGroup, Mode=TwoWay}" Grid.Row="1">
+                        <ListBox.DataTemplates>
+                            <DataTemplate DataType="core:XGroup">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ListBox.DataTemplates>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Database" Classes="property">
+                <Grid RowDefinitions="Auto,*">
+                    <DropDown Items="{Binding Editor.Project.Databases}" SelectedItem="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}" Grid.Row="0">
+                        <DropDown.DataTemplates>
+                            <DataTemplate DataType="core:Database">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </DropDown.DataTemplates>
+                    </DropDown>
+                    <ContentControl Content="{Binding Editor.Project.CurrentDatabase}" Grid.Row="1"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Records" Classes="property">
+                <Grid RowDefinitions="Auto,*">
+                    <DropDown Items="{Binding Editor.Project.Databases}" SelectedItem="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}" Grid.Row="0">
+                        <DropDown.DataTemplates>
+                            <DataTemplate DataType="core:Database">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </DropDown.DataTemplates>
+                    </DropDown>
+                    <ListBox Items="{Binding Editor.Project.CurrentDatabase.Records}" SelectedItem="{Binding Path=Editor.Project.CurrentDatabase.CurrentRecord, Mode=TwoWay}" Grid.Row="1">
+                        <DropDown.DataTemplates>
+                            <DataTemplate DataType="core:Record">
+                                <TextBlock Text="{Binding Id}" />
+                            </DataTemplate>
+                        </DropDown.DataTemplates>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <GridSplitter Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Width="10"/>
+        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" ClipToBounds="True">
+            <local:Drawable/>
         </Grid>
-        <GridSplitter Grid.Row="1" Grid.RowSpan="1" Grid.Column="1" Width="10"/>
-        <Grid Grid.Row="1" Grid.Column="2" ClipToBounds="True">
-            <local:Drawable>
-                <!--
-                <local:Drawable.KeyBindings>
-                    <KeyBinding Gesture="N" Command="{Binding Commands.ToolNoneCommand}"/>
-                </local:Drawable.KeyBindings>
-                -->
-            </local:Drawable>
-        </Grid>
-        <GridSplitter Grid.Row="1" Grid.RowSpan="1" Grid.Column="3" Width="10"/>
-        <Grid RowDefinitions="Auto,50*,50*" Grid.Row="1" Grid.Column="4">
-            <DropDown Items="{Binding Editor.Project.StyleLibraries}" SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="0">
-                <DropDown.DataTemplates>
-                    <DataTemplate DataType="core:StyleLibrary">
-                        <TextBlock Text="{Binding Name}" />
-                    </DataTemplate>
-                </DropDown.DataTemplates>
-            </DropDown>
-            <ListBox Items="{Binding Editor.Project.CurrentStyleLibrary.Styles}" SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}" Grid.Row="1">
-                <ListBox.DataTemplates>
-                    <DataTemplate DataType="core:ShapeStyle">
-                        <TextBlock Text="{Binding Name}" />
-                    </DataTemplate>
-                </ListBox.DataTemplates>
-            </ListBox>
-            <ScrollViewer Grid.Row="2">
-                <ContentControl Content="{Binding Editor.Project.CurrentContainer.CurrentShape}"/>
-            </ScrollViewer>
-        </Grid>
+        <GridSplitter Grid.Row="1" Grid.RowSpan="2" Grid.Column="3" Width="10"/>
+        <TabControl Grid.Row="1" Grid.Column="4">
+            <TabItem Header="Styles" Classes="property">
+                <Grid RowDefinitions="Auto,*">
+                    <DropDown Items="{Binding Editor.Project.StyleLibraries}" SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="0">
+                        <DropDown.DataTemplates>
+                            <DataTemplate DataType="core:StyleLibrary">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </DropDown.DataTemplates>
+                    </DropDown>
+                    <ListBox Items="{Binding Editor.Project.CurrentStyleLibrary.Styles}" SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}" Grid.Row="1">
+                        <ListBox.DataTemplates>
+                            <DataTemplate DataType="core:ShapeStyle">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ListBox.DataTemplates>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Layers" Classes="property">
+                <ListBox
+                    Items="{Binding Editor.Project.CurrentContainer.Layers}"
+                    SelectedItem="{Binding Editor.Project.CurrentContainer.CurrentLayer}">
+                    <ListBox.DataTemplates>
+                        <DataTemplate DataType="core:Layer">
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.DataTemplates>
+                </ListBox>
+            </TabItem>
+            <TabItem Header="Shapes" Classes="property">
+                <ListBox 
+                    Items="{Binding Editor.Project.CurrentContainer.CurrentLayer.Shapes}"
+                    SelectedItem="{Binding Editor.Project.CurrentContainer.CurrentShape}">
+                    <ListBox.DataTemplates>
+                        <DataTemplate DataType="core:BaseShape">
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.DataTemplates>
+                </ListBox>
+            </TabItem>
+        </TabControl>
+        <TabControl Grid.Row="2" Grid.Column="4">
+            <TabItem Header="Properties" Classes="property">
+                <ScrollViewer>
+                    <ContentControl Content="{Binding Editor.Project.CurrentContainer.CurrentShape}"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Data" Classes="property">
+                <ScrollViewer>
+                    <ContentControl Content="{Binding Editor.Renderers[0].State.SelectedShape.Data}"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="State" Classes="property">
+                <ScrollViewer>
+                    <ContentControl Content="{Binding Editor.Renderers[0].State.SelectedShape.State}"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Style" Classes="property">
+                <ScrollViewer>
+                    <ContentControl Content="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}"/>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>   
     </Grid>
 </Window>
