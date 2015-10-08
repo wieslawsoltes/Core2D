@@ -1129,7 +1129,6 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:Project">
-            <!-- TODO -->
         </DataTemplate>
         <DataTemplate DataType="core:Document">
             <!-- TODO -->
