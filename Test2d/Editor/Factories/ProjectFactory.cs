@@ -231,8 +231,7 @@ namespace Test2d
             documentBuilder.Add(document);
             project.Documents = documentBuilder.ToImmutable();
 
-            project.CurrentDocument = project.Documents.FirstOrDefault();
-            project.CurrentContainer = document.Containers.FirstOrDefault();
+            project.Selected = document.Containers.FirstOrDefault();
 
             return project;
         }

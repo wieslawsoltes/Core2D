@@ -281,6 +281,7 @@ namespace Test2d
         private ImmutableArray<Document> _documents;
         private Document _currentDocument;
         private Container _currentContainer;
+        private object _selected;
 
         /// <summary>
         /// 
@@ -397,6 +398,37 @@ namespace Test2d
         {
             get { return _currentContainer; }
             set { Update(ref _currentContainer, value); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public object Selected
+        {
+            get { return _selected; }
+            set
+            {
+                var item = value;
+
+                if (item is Container)
+                {
+                    var container = item as Container;
+                    var document = _documents.FirstOrDefault(d => d.Containers.Contains(container));
+                    if (document != null)
+                    {
+                        CurrentDocument = document;
+                        CurrentContainer = container;
+                        CurrentContainer.Invalidate();
+                    }
+                }
+                else if (item is Document)
+                {
+                    var document = item as Document;
+                    CurrentDocument = document;
+                }
+
+                Update(ref _selected, value);
+            }
         }
 
         /// <summary>

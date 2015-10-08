@@ -1021,22 +1021,7 @@ namespace Test2d
             if (_editor.Project == null)
                 return;
 
-            if (item is Container)
-            {
-                var selected = item as Container;
-                var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(selected));
-                if (document != null)
-                {
-                    _editor.Project.CurrentDocument = document;
-                    _editor.Project.CurrentContainer = selected;
-                    _editor.Project.CurrentContainer.Invalidate();
-                }
-            }
-            else if (item is Document)
-            {
-                var selected = item as Document;
-                _editor.Project.CurrentDocument = selected;
-            }
+            _editor.Project.Selected = item;
         }
 
         /// <summary>

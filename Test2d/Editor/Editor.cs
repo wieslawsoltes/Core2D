@@ -1362,6 +1362,7 @@ namespace Test2d
 
                 _project.CurrentDocument = document;
                 _project.CurrentContainer = document.Containers.FirstOrDefault();
+                _project.Selected = _project.CurrentContainer;
             }
         }
         
@@ -1388,6 +1389,7 @@ namespace Test2d
             {
                 _project.CurrentContainer = default(Container);
             }
+            _project.Selected = _project.CurrentContainer;
         }
         
         /// <summary>

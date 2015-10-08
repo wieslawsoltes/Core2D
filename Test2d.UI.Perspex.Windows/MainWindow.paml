@@ -1400,7 +1400,10 @@
         <TabControl Grid.Row="1" Grid.Column="0">
             <TabItem Header="Project" Classes="property">
                 <Grid RowDefinitions="*" ColumnDefinitions="*">
-                    <TreeView Items="{Binding Editor.Project.Documents}" Grid.Row="0">
+                    <TreeView 
+                        Items="{Binding Editor.Project.Documents}" 
+                        SelectedItem="{Binding Path=Editor.Project.Selected, Mode=TwoWay}" 
+                        Grid.Row="0">
                         <TreeView.DataTemplates>
                             <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Containers}">
                                 <TextBlock Text="{Binding Name}" />
@@ -1434,7 +1437,7 @@
             <TabItem Header="Templates" Classes="property">
                 <ListBox
                     Items="{Binding Editor.Project.Templates}"
-                    SelectedItem="{Binding Editor.Project.CurrentTemplate}">
+                    SelectedItem="{Binding Path=Editor.Project.CurrentTemplate, Mode=TwoWay}">
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="core:Container">
                             <TextBlock Text="{Binding Name}" />
@@ -1528,7 +1531,7 @@
             <TabItem Header="Layers" Classes="property">
                 <ListBox
                     Items="{Binding Editor.Project.CurrentContainer.Layers}"
-                    SelectedItem="{Binding Editor.Project.CurrentContainer.CurrentLayer}">
+                    SelectedItem="{Binding Path=Editor.Project.CurrentContainer.CurrentLayer, Mode=TwoWay}">
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="core:Layer">
                             <TextBlock Text="{Binding Name}" />
@@ -1539,7 +1542,7 @@
             <TabItem Header="Shapes" Classes="property">
                 <ListBox 
                     Items="{Binding Editor.Project.CurrentContainer.CurrentLayer.Shapes}"
-                    SelectedItem="{Binding Editor.Project.CurrentContainer.CurrentShape}">
+                    SelectedItem="{Binding Path=Editor.Project.CurrentContainer.CurrentShape, Mode=TwoWay}">
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="core:BaseShape">
                             <TextBlock Text="{Binding Name}" />
