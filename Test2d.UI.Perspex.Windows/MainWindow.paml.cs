@@ -344,7 +344,7 @@ namespace TestPerspex
                 var dlg = new SaveFileDialog();
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                dlg.InitialFileName = _context.Editor.Project.Name + ".project";
+                dlg.InitialFileName = _context.Editor.Project.Name;
                 var result = await dlg.ShowAsync(this);
                 if (result != null)
                 {
@@ -365,7 +365,7 @@ namespace TestPerspex
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Pdf", Extensions = { "pdf" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Dxf", Extensions = { "dxf" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                dlg.InitialFileName = _context.Editor.Project.Name + ".pdf";
+                dlg.InitialFileName = _context.Editor.Project.Name;
                 var result = await dlg.ShowAsync(this);
                 if (result != null)
                 {
@@ -419,7 +419,7 @@ namespace TestPerspex
                 var dlg = new SaveFileDialog();
                 dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                dlg.InitialFileName = database.Name + ".csv";
+                dlg.InitialFileName = database.Name;
                 var result = await dlg.ShowAsync(this);
                 if (result != null)
                 {
@@ -591,7 +591,7 @@ namespace TestPerspex
                 var dlg = new SaveFileDialog();
                 dlg.Filters.Add(new FileDialogFilter() { Name = name, Extensions = { ext } });
                 dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                dlg.InitialFileName = initial + "." + ext;
+                dlg.InitialFileName = initial;
                 var result = await dlg.ShowAsync(this);
                 if (result != null)
                 {
