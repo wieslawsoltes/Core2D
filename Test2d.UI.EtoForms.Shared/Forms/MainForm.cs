@@ -78,22 +78,17 @@ namespace TestEtoForms
                 {
                     var p = e.Location;
 
-                    if (e.Buttons == MouseButtons.Middle)
-                    {
-                        _state.MiddleDown(p.X, p.Y);
-                        this.Cursor = Cursors.Pointer;
-                    }
-
                     if (e.Buttons == MouseButtons.Primary)
                     {
                         _drawable.Focus();
-                        _state.PrimaryDown(p.X, p.Y);
+                        _state.LeftDown(p.X, p.Y);
                     }
 
                     if (e.Buttons == MouseButtons.Alternate)
                     {
                         _drawable.Focus();
-                        _state.AlternateDown(p.X, p.Y);
+                        this.Cursor = Cursors.Move;
+                        _state.RightDown(p.X, p.Y);
                     }
                 };
 
@@ -102,23 +97,17 @@ namespace TestEtoForms
                 {
                     var p = e.Location;
 
-                    if (e.Buttons == MouseButtons.Middle)
-                    {
-                        _drawable.Focus();
-                        _state.MiddleUp(p.X, p.Y);
-                        this.Cursor = Cursors.Default;
-                    }
-
                     if (e.Buttons == MouseButtons.Primary)
                     {
                         _drawable.Focus();
-                        _state.PrimaryUp(p.X, p.Y);
+                        _state.LeftUp(p.X, p.Y);
                     }
 
                     if (e.Buttons == MouseButtons.Alternate)
                     {
                         _drawable.Focus();
-                        _state.AlternateUp(p.X, p.Y);
+                        this.Cursor = Cursors.Default;
+                        _state.RightUp(p.X, p.Y);
                     }
                 };
 
