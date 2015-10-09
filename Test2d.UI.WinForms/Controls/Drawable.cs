@@ -29,6 +29,11 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
+        public bool EnableAutoFit { get; set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public Drawable()
         {
         }
@@ -54,22 +59,17 @@ namespace TestWinForms
                 {
                     var p = e.Location;
 
-                    if (e.Button == MouseButtons.Middle)
-                    {
-                        _state.MiddleDown(p.X, p.Y);
-                        this.Cursor = Cursors.Hand;
-                    }
-
                     if (e.Button == MouseButtons.Left)
                     {
                         this.Focus();
-                        _state.PrimaryDown(p.X, p.Y);
+                        _state.LeftDown(p.X, p.Y);
                     }
 
                     if (e.Button == MouseButtons.Right)
                     {
                         this.Focus();
-                        _state.AlternateDown(p.X, p.Y);
+                        this.Cursor = Cursors.Hand;
+                        _state.RightDown(p.X, p.Y);
                     }
                 };
 
@@ -78,23 +78,17 @@ namespace TestWinForms
                 {
                     var p = e.Location;
 
-                    if (e.Button == MouseButtons.Middle)
-                    {
-                        this.Focus();
-                        _state.MiddleUp(p.X, p.Y);
-                        this.Cursor = Cursors.Default;
-                    }
-
                     if (e.Button == MouseButtons.Left)
                     {
                         this.Focus();
-                        _state.PrimaryUp(p.X, p.Y);
+                        _state.LeftUp(p.X, p.Y);
                     }
 
                     if (e.Button == MouseButtons.Right)
                     {
                         this.Focus();
-                        _state.AlternateUp(p.X, p.Y);
+                        this.Cursor = Cursors.Default;
+                        _state.RightUp(p.X, p.Y);
                     }
                 };
 
@@ -119,7 +113,6 @@ namespace TestWinForms
         public void ResetZoom()
         {
             _state.ResetZoom();
-            InvalidateContainer();
         }
 
         /// <summary>
@@ -127,7 +120,15 @@ namespace TestWinForms
         /// </summary>
         public void AutoFit()
         {
-            // TODO: Autofit panel.
+            if (Context != null && Context.Editor.Project != null)
+            {
+                var container = Context.Editor.Project.CurrentContainer;
+                _state.AutoFit(
+                    this.Width, 
+                    this.Height, 
+                    (float)container.Width, 
+                    (float)container.Height);
+            }
         }
 
         /// <summary>
@@ -155,12 +156,23 @@ namespace TestWinForms
         /// 
         /// </summary>
         /// <param name="e"></param>
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+            
+            if (EnableAutoFit)
+            {
+                AutoFit();
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (Context != null)
-            {
-                Draw(e.Graphics);
-            }
+            Draw(e.Graphics);
         }
 
         /// <summary>
@@ -194,16 +206,20 @@ namespace TestWinForms
             g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
             g.CompositingQuality = CompositingQuality.HighQuality;
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-            g.TranslateTransform(_state.PanX, _state.PanY);
-            g.ScaleTransform(_state.Zoom, _state.Zoom);
+            g.PageUnit = GraphicsUnit.Display;
 
             g.Clear(Color.FromArgb(255, 211, 211, 211));
 
-            g.PageUnit = GraphicsUnit.Display;
+            if (Context == null || Context.Editor.Project == null)
+                return;
 
-            var renderer = Context.Editor.Renderers[0];
             var container = Context.Editor.Project.CurrentContainer;
+            var renderer = Context.Editor.Renderers[0];
+
+            var gs = g.Save();
+            
+            g.TranslateTransform(_state.PanX, _state.PanY);
+            g.ScaleTransform(_state.Zoom, _state.Zoom);
 
             if (container.Template != null)
             {
@@ -223,6 +239,8 @@ namespace TestWinForms
             {
                 renderer.Draw(g, container.HelperLayer, container.Properties, null);
             }
+            
+            g.Restore(gs);
         }
     }
 }
