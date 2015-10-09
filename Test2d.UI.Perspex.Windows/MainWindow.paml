@@ -3,7 +3,7 @@
 <Window xmlns="https://github.com/perspex"
         xmlns:local="clr-namespace:TestPerspex;assembly=Test2d.UI.Perspex.Windows"
         xmlns:core="clr-namespace:Test2d;assembly=Test2d"
-        Width="1260" Height="670"
+        Width="1300" Height="670"
         Title="Test2d">
     <Window.Styles>
         <Style Selector="TabItem.property">
@@ -1222,7 +1222,7 @@
             <!-- TODO -->
         </DataTemplate>
     </Window.DataTemplates>
-    <Grid RowDefinitions="Auto,50*,50*" ColumnDefinitions="150,Auto,*,Auto,240">
+    <Grid RowDefinitions="Auto,50*,50*" ColumnDefinitions="170,Auto,*,Auto,240">
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
             <MenuItem Header="_File">
                 <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Binding Commands.NewCommand}" />
