@@ -81,21 +81,7 @@ namespace TestPerspex
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void MiddleDown(double x, double y)
-        {
-            StartX = x;
-            StartY = y;
-            OriginX = PanX;
-            OriginY = PanY;
-            IsPanMode = true;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void PrimaryDown(double x, double y)
+        public void LeftDown(double x, double y)
         {
             if (_context.Editor.IsLeftDownAvailable())
             {
@@ -110,9 +96,32 @@ namespace TestPerspex
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void AlternateDown(double x, double y)
+        public void LeftUp(double x, double y)
         {
-            if (_context.Editor.IsRightDownAvailable())
+            if (_context.Editor.IsLeftUpAvailable())
+            {
+                _context.Editor.LeftUp(
+                    (x - PanX) / Zoom,
+                    (y - PanY) / Zoom);
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void RightDown(double x, double y)
+        {
+            if (!_context.Editor.CancelAvailable)
+            {
+                StartX = x;
+                StartY = y;
+                OriginX = PanX;
+                OriginY = PanY;
+                IsPanMode = true;
+            }
+            else if (_context.Editor.IsRightDownAvailable())
             {
                 _context.Editor.RightDown(
                     (x - PanX) / Zoom,
@@ -125,34 +134,13 @@ namespace TestPerspex
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void MiddleUp(double x, double y)
+        public void RightUp(double x, double y)
         {
-            IsPanMode = false;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void PrimaryUp(double x, double y)
-        {
-            if (_context.Editor.IsLeftUpAvailable())
+            if (!_context.Editor.CancelAvailable)
             {
-                _context.Editor.LeftUp(
-                    (x - PanX) / Zoom,
-                    (y - PanY) / Zoom);
+                IsPanMode = false;
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void AlternateUp(double x, double y)
-        {
-            if (_context.Editor.IsRightUpAvailable())
+            else if (_context.Editor.IsRightUpAvailable())
             {
                 _context.Editor.RightUp(
                     (x - PanX) / Zoom,
