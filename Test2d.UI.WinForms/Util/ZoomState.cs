@@ -120,25 +120,7 @@ namespace Test2d
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void MiddleDown(float x, float y)
-        {
-            Debug.Print("Pan Offset: {0}, {1}", PanOffsetX, PanOffsetY);
-
-            StartX = x;
-            StartY = y;
-
-            OriginX = PanX;
-            OriginY = PanY;
-
-            IsPanMode = true;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void PrimaryDown(float x, float y)
+        public void LeftDown(float x, float y)
         {
             if (_context.Editor.IsLeftDownAvailable())
             {
@@ -153,35 +135,7 @@ namespace Test2d
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void AlternateDown(float x, float y)
-        {
-            if (_context.Editor.IsRightDownAvailable())
-            {
-                _context.Editor.RightDown(
-                    (x - PanX) / Zoom,
-                    (y - PanY) / Zoom);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void MiddleUp(float x, float y)
-        {
-            PanOffsetX += PanX - OriginX;
-            PanOffsetY += PanY - OriginY;
-            Debug.Print("Pan Offset: {0}, {1}", PanOffsetX, PanOffsetY);
-            IsPanMode = false;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void PrimaryUp(float x, float y)
+        public void LeftUp(float x, float y)
         {
             if (_context.Editor.IsLeftUpAvailable())
             {
@@ -196,9 +150,40 @@ namespace Test2d
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void AlternateUp(float x, float y)
+        public void RightDown(float x, float y)
         {
-            if (_context.Editor.IsRightUpAvailable())
+            if (!_context.Editor.CancelAvailable)
+            {
+                //Debug.Print("Pan Offset: {0}, {1}", PanOffsetX, PanOffsetY);
+                StartX = x;
+                StartY = y;
+                OriginX = PanX;
+                OriginY = PanY;
+                IsPanMode = true;
+            }
+            else if (_context.Editor.IsRightDownAvailable())
+            {
+                _context.Editor.RightDown(
+                    (x - PanX) / Zoom,
+                    (y - PanY) / Zoom);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void RightUp(float x, float y)
+        {
+            if (!_context.Editor.CancelAvailable)
+            {
+                //PanOffsetX += PanX - OriginX;
+                //PanOffsetY += PanY - OriginY;
+                //Debug.Print("Pan Offset: {0}, {1}", PanOffsetX, PanOffsetY);
+                IsPanMode = false;      
+            }
+            else if (_context.Editor.IsRightUpAvailable())
             {
                 _context.Editor.RightUp(
                     (x - PanX) / Zoom,
@@ -217,13 +202,10 @@ namespace Test2d
             {
                 float vx = StartX - x;
                 float vy = StartY - y;
-
                 PanX = OriginX - vx;
                 PanY = OriginY - vy;
-
                 _context.Editor.Renderers[0].State.PanX = PanX;
                 _context.Editor.Renderers[0].State.PanY = PanY;
-
                 _invalidate();
             }
             else
@@ -253,16 +235,16 @@ namespace Test2d
             if (zoom < MinimumZoom || zoom > MaximumZoom)
                 return;
 
-            if (!HaveWheelOrigin)
-            {
-                WheelOriginX = x;
-                WheelOriginY = y;
-                HaveWheelOrigin = true;
-            }
+            //if (!HaveWheelOrigin)
+            //{
+            //    WheelOriginX = x;
+            //    WheelOriginY = y;
+            //    HaveWheelOrigin = true;
+            //}
 
-            WheelOffsetX = x - WheelOriginX;
-            WheelOffsetY = y - WheelOriginY;
-            Debug.Print("Wheel Offset: {0}, {1}", WheelOffsetX, WheelOffsetY);
+            //WheelOffsetX = x - WheelOriginX;
+            //WheelOffsetY = y - WheelOriginY;
+            //Debug.Print("Wheel Offset: {0}, {1}", WheelOffsetX, WheelOffsetY);
 
             ZoomTo(
                 zoom,
@@ -282,12 +264,9 @@ namespace Test2d
         {
             float ax = (rx * Zoom) + PanX;
             float ay = (ry * Zoom) + PanY;
-
             Zoom = zoom;
-
             PanX = ax - (rx * Zoom);
             PanY = ay - (ry * Zoom);
-
             _context.Editor.Renderers[0].State.Zoom = Zoom;
             _context.Editor.Renderers[0].State.PanX = PanX;
             _context.Editor.Renderers[0].State.PanY = PanY;
@@ -308,18 +287,29 @@ namespace Test2d
             WheelOffsetX = 0f;
             WheelOffsetY = 0f;
             HaveWheelOrigin = false;
-
             _context.Editor.Renderers[0].State.Zoom = Zoom;
             _context.Editor.Renderers[0].State.PanX = PanX;
             _context.Editor.Renderers[0].State.PanY = PanY;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
-        public void AutoFit()
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="twidth"></param>
+        /// <param name="theight"></param>
+        public void AutoFit(float width, float height, float twidth, float theight)
         {
-            // TODO: Implement zoom auto-fit.
+            float zoom = Math.Min(width / twidth, height / theight) - 0.001f;
+            float px = (width - (twidth * zoom)) / 2.0f;
+            float py = (height - (theight * zoom)) / 2.0f;
+            Zoom = zoom;
+            PanX = px;
+            PanY = py;
+            _context.Editor.Renderers[0].State.Zoom = Zoom;
+            _context.Editor.Renderers[0].State.PanX = PanX;
+            _context.Editor.Renderers[0].State.PanY = PanY;
         }
     }
 }
