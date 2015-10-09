@@ -85,22 +85,17 @@ namespace TestPerspex
                 
                     var p = e.GetPosition(this);
 
-                    if (e.MouseButton == MouseButton.Middle)
-                    {
-                        _state.MiddleDown(p.X, p.Y);
-                        // TODO: this.Cursor = Cursors.Pointer;
-                    }
-
                     if (e.MouseButton == MouseButton.Left)
                     {
                         this.Focus();
-                        _state.PrimaryDown(p.X, p.Y);
+                        _state.LeftDown(p.X, p.Y);
                     }
 
                     if (e.MouseButton == MouseButton.Right)
                     {
                         this.Focus();
-                        _state.AlternateDown(p.X, p.Y);
+                       // TODO: this.Cursor = Cursors.Pointer;
+                        _state.RightDown(p.X, p.Y);
                     }
                 };
 
@@ -112,23 +107,17 @@ namespace TestPerspex
                     
                     var p = e.GetPosition(this);
 
-                    if (e.MouseButton == MouseButton.Middle)
-                    {
-                        this.Focus();
-                        _state.MiddleUp(p.X, p.Y);
-                        // TODO: this.Cursor = Cursors.Default;
-                    }
-
                     if (e.MouseButton == MouseButton.Left)
                     {
                         this.Focus();
-                        _state.PrimaryUp(p.X, p.Y);
+                        _state.LeftUp(p.X, p.Y);
                     }
 
                     if (e.MouseButton == MouseButton.Right)
                     {
                         this.Focus();
-                        _state.AlternateUp(p.X, p.Y);
+                        // TODO: this.Cursor = Cursors.Default;
+                        _state.RightUp(p.X, p.Y);
                     }
                 };
 
