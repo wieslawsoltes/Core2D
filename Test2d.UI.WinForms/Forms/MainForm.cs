@@ -33,18 +33,15 @@ namespace TestWinForms
             InitializeComponent();
 
             InitializeContext();
+            FormClosing += (s, e) => DeInitializeContext();
             
             InitializePanel();
 
             SetContainerInvalidation();
-            SetPanelSize();
-
+            
             HandlePanelShorcutKeys();
             HandleMenuShortcutKeys();
-
             HandleFileDialogs();
-
-            FormClosing += (s, e) => DeInitializeContext();
 
             UpdateToolMenu();
             UpdateOptionsMenu();
@@ -104,17 +101,19 @@ namespace TestWinForms
                 return;
 
             _drawable = new Drawable();
-
+  
             _drawable.Context = context;
             _drawable.InvalidateContainer = InvalidateContainer;
+            _drawable.EnableAutoFit = true;
             _drawable.Initialize();
 
-            _drawable.Anchor = System.Windows.Forms.AnchorStyles.None;
+            _drawable.Dock = DockStyle.Fill;
             _drawable.Name = "containerPanel";
+            _drawable.Margin = new System.Windows.Forms.Padding(0);
             _drawable.TabIndex = 0;
 
             this.SuspendLayout();
-            this.Controls.Add(_drawable);
+            this.tableLayoutPanel1.Controls.Add(_drawable);
             this.ResumeLayout(false);
 
             _drawable.Select();
@@ -126,16 +125,19 @@ namespace TestWinForms
         private void InvalidateContainer()
         {
             SetContainerInvalidation();
-            SetPanelSize();
 
             var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            var container = context.Editor.Project.CurrentContainer;
-            if (container != null)
+            if (context == null || context.Editor.Project == null)
             {
-                container.Invalidate();
+                _drawable.Invalidate();
+            }
+            else
+            {
+                var container = context.Editor.Project.CurrentContainer;
+                if (container != null)
+                {
+                    container.Invalidate();
+                }
             }
         }
 
@@ -161,7 +163,7 @@ namespace TestWinForms
             this.saveFileDialog1.FileOk += (sender, e) =>
             {
                 var context = DataContext as EditorContext;
-                if (context == null)
+                if (context == null || context.Editor.Project == null)
                     return;
 
                 string path = saveFileDialog1.FileName;
@@ -173,7 +175,7 @@ namespace TestWinForms
             this.saveFileDialog2.FileOk += (sender, e) =>
             {
                 var context = DataContext as EditorContext;
-                if (context == null)
+                if (context == null || context.Editor.Project == null)
                     return;
 
                 string path = saveFileDialog2.FileName;
@@ -197,33 +199,10 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
-        private void SetPanelSize()
-        {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            var container = context.Editor.Project.CurrentContainer;
-            if (container == null)
-                return;
-
-            int width = (int)container.Width;
-            int height = (int)container.Height;
-
-            int x = (this.Width - width) / 2;
-            int y = (((this.Height) - height) / 2) - (this.menuStrip1.Height / 3);
-
-            _drawable.Location = new System.Drawing.Point(x, y);
-            _drawable.Size = new System.Drawing.Size(width, height);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         private void SetContainerInvalidation()
         {
             var context = DataContext as EditorContext;
-            if (context == null)
+            if (context == null || context.Editor.Project == null)
                 return;
 
             var container = context.Editor.Project.CurrentContainer;
@@ -277,9 +256,9 @@ namespace TestWinForms
         private void UpdateOptionsMenu()
         {
             var context = DataContext as EditorContext;
-            if (context == null)
+            if (context == null || context.Editor.Project == null)
                 return;
-
+            
             var options = context.Editor.Project.Options;
 
             defaultIsFilledToolStripMenuItem.Checked = options.DefaultIsFilled;
@@ -295,10 +274,19 @@ namespace TestWinForms
             // File
             newToolStripMenuItem.Click += (sender, e) => OnNew();
             openToolStripMenuItem.Click += (sender, e) => OnOpen();
+            closeToolStripMenuItem.Click += (sender, e) => OnClose();
             saveAsToolStripMenuItem.Click += (sender, e) => OnSave();
             exportToolStripMenuItem.Click += (sender, e) => OnExport();
             exitToolStripMenuItem.Click += (sender, e) => Close();
 
+            // Edit
+            
+            // TODO:
+            
+            // View
+            
+            // TODO:
+            
             // Tool
             noneToolStripMenuItem.Click += (sender, e) => OnSetToolToNone();
             selectionToolStripMenuItem.Click += (sender, e) => OnSetToolToSelection();
@@ -330,9 +318,9 @@ namespace TestWinForms
                     return;
 
                 var context = DataContext as EditorContext;
-                if (context == null)
+                if (context == null || context.Editor.Project == null)
                     return;
-
+                
                 switch (e.KeyCode)
                 {
                     case Keys.Delete:
@@ -388,9 +376,11 @@ namespace TestWinForms
                         break;
                     case Keys.Z:
                         _drawable.ResetZoom();
+                        InvalidateContainer();
                         break;
                     case Keys.X:
                         _drawable.AutoFit();
+                        InvalidateContainer();
                         break;
                 }
             };
@@ -422,10 +412,23 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
-        private void OnSave()
+        private void OnClose()
         {
             var context = DataContext as EditorContext;
             if (context == null)
+                return;
+
+            context.Commands.CloseCommand.Execute(null);
+            InvalidateContainer();
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnSave()
+        {
+            var context = DataContext as EditorContext;
+            if (context == null || context.Editor.Project == null)
                 return;
 
             saveFileDialog1.Filter = "Project (*.project)|*.project|All (*.*)|*.*";
@@ -440,7 +443,7 @@ namespace TestWinForms
         private void OnExport()
         {
             var context = DataContext as EditorContext;
-            if (context == null)
+            if (context == null || context.Editor.Project == null)
                 return;
 
             saveFileDialog2.Filter = "Pdf (*.pdf)|*.pdf|Dxf (*.dxf)|*.dxf|All (*.*)|*.*";
@@ -664,7 +667,7 @@ namespace TestWinForms
         private async Task<string> GetImageKey()
         {
             var context = DataContext as EditorContext;
-            if (context == null)
+            if (context == null || context.Editor.Project == null)
                 return null;
 
             openFileDialog2.Filter = "All (*.*)|*.*";
