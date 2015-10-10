@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Core;
-using Test2d;
+using Core2D;
 
 namespace Test.Uwp
 {

@@ -3,7 +3,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     /// 

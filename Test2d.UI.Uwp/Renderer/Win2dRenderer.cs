@@ -14,7 +14,7 @@ using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Text;
 using N = System.Numerics;
-using Test2d;
+using Core2D;
 
 namespace Test.Uwp
 {
@@ -591,13 +591,13 @@ namespace Test.Uwp
             var brush = ToColor(text.Style.Stroke);
 
             var fontWeight = FontWeights.Normal;
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Bold))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Bold))
             {
                 fontWeight = FontWeights.Bold;
             }
 
             var fontStyle = Windows.UI.Text.FontStyle.Normal;
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Italic))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Italic))
             {
                 fontStyle = Windows.UI.Text.FontStyle.Italic;
             }
@@ -615,12 +615,12 @@ namespace Test.Uwp
 
             var layout = new CanvasTextLayout(_ds, tbind, format, (float)rect.Width, (float)rect.Height);
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Underline))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline))
             {
                 layout.SetUnderline(0, tbind.Length, true);
             }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Strikeout))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
             {
                 layout.SetStrikethrough(0, tbind.Length, true);
             }

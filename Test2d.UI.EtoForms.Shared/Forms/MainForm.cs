@@ -1,28 +1,30 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Eto;
-using Eto.Drawing;
-using Eto.Forms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Eto;
+using Eto.Drawing;
+using Eto.Forms;
 
 namespace TestEtoForms
 {
     /// <summary>
     /// 
     /// </summary>
-    public class MainForm : Form, Test2d.IView
+    public class MainForm : Form, Core2D.IView
     {
-        private Test2d.EditorContext _context;
-        private Test2d.ZoomState _state;
+        private Core2D.EditorContext _context;
+        private Core2D.ZoomState _state;
         private Drawable _drawable;
         private Color _background = Color.FromArgb(211, 211, 211, 255);
+        private string _logFileName = "Core2D.log";
 
         /// <summary>
         /// 
@@ -36,29 +38,41 @@ namespace TestEtoForms
         }
 
         /// <summary>
+        /// Gets the location of the assembly as specified originally.
+        /// </summary>
+        /// <returns>The location of the assembly as specified originally.</returns>
+        private string GetAssemblyPath()
+        {
+            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+            var uri = new UriBuilder(codeBase);
+            string path = Uri.UnescapeDataString(uri.Path);
+            return System.IO.Path.GetDirectoryName(path);
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         private void InitializeContext()
         {
-            _context = new Test2d.EditorContext()
+            _context = new Core2D.EditorContext()
             {
                 View = this,
-                Renderers = new Test2d.IRenderer[] { new EtoRenderer(72.0 / 96.0) },
-                ProjectFactory = new Test2d.ProjectFactory(),
+                Renderers = new Core2D.IRenderer[] { new EtoRenderer(72.0 / 96.0) },
+                ProjectFactory = new Core2D.ProjectFactory(),
                 TextClipboard = new TextClipboard(),
-                Serializer = new Test2d.NewtonsoftSerializer(),
-                PdfWriter = new Test2d.PdfWriter(),
-                DxfWriter = new Test2d.DxfWriter(),
-                CsvReader = new Test2d.CsvHelperReader(),
-                CsvWriter = new Test2d.CsvHelperWriter()
+                Serializer = new Core2D.NewtonsoftSerializer(),
+                PdfWriter = new Core2D.PdfWriter(),
+                DxfWriter = new Core2D.DxfWriter(),
+                CsvReader = new Core2D.CsvHelperReader(),
+                CsvWriter = new Core2D.CsvHelperWriter()
             };
-            _context.InitializeEditor(new Test2d.TraceLog(), "Test2d.log");
-            _context.Editor.Renderers[0].State.DrawShapeState.Flags = Test2d.ShapeStateFlags.Visible;
+            _context.InitializeEditor(new Core2D.TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
+            _context.Editor.Renderers[0].State.DrawShapeState.Flags = Core2D.ShapeStateFlags.Visible;
             _context.Editor.GetImageKey = async () => await GetImageKey();
 
             _context.Invalidate = this.UpdateAndInvalidate;
 
-            _state = new Test2d.ZoomState(_context, this.UpdateAndInvalidate);
+            _state = new Core2D.ZoomState(_context, this.UpdateAndInvalidate);
 
             DataContext = _context;
         }
@@ -203,7 +217,7 @@ namespace TestEtoForms
         /// </summary>
         private void InitializeForm()
         {
-            Title = "Test2d";
+            Title = "Core2D";
             ClientSize = new Size(900, 650);
             WindowState = WindowState.Maximized;
 
@@ -810,11 +824,11 @@ namespace TestEtoForms
         /// <param name="c"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        private void DrawBackground(Graphics g, Test2d.ArgbColor c, double width, double height)
+        private void DrawBackground(Graphics g, Core2D.ArgbColor c, double width, double height)
         {
             var color = Color.FromArgb(c.R, c.G, c.B, c.A);
             var brush = new SolidBrush(color);
-            var rect = Test2d.Rect2.Create(0, 0, width, height);
+            var rect = Core2D.Rect2.Create(0, 0, width, height);
             g.FillRectangle(
                 brush,
                 (float)rect.X,

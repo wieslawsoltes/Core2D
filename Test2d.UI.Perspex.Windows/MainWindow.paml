@@ -1,10 +1,10 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
 <Window xmlns="https://github.com/perspex"
-        xmlns:local="clr-namespace:TestPerspex;assembly=Test2d.UI.Perspex.Windows"
-        xmlns:core="clr-namespace:Test2d;assembly=Test2d"
+        xmlns:local="clr-namespace:TestPerspex;assembly=Core2D.UI.Perspex.Windows"
+        xmlns:core="clr-namespace:Core2D;assembly=Core2D"
         Width="1300" Height="670"
-        Title="Test2d">
+        Title="Core2D">
     <Window.Styles>
         <Style Selector="TabItem.property">
             <Setter Property="TabItem.FontSize" Value="12" />

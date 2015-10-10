@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Perspex;
 using Perspex.Media;
-using Test2d;
+using Core2D;
 
 namespace TestPerspex
 {

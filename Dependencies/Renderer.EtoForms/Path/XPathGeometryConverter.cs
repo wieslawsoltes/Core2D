@@ -3,7 +3,7 @@
 using System;
 using System.Linq;
 using Eto.Drawing;
-using Test2d;
+using Core2D;
 
 namespace TestEtoForms
 {
@@ -23,7 +23,7 @@ namespace TestEtoForms
         public static GraphicsPath ToGraphicsPath(this XPathGeometry pg, double dx, double dy, Func<double, float> scale)
         {
             var gp = new GraphicsPath();
-            gp.FillMode = pg.FillRule == Test2d.XFillRule.EvenOdd ? FillMode.Alternate : FillMode.Winding;
+            gp.FillMode = pg.FillRule == Core2D.XFillRule.EvenOdd ? FillMode.Alternate : FillMode.Winding;
 
             foreach (var pf in pg.Figures)
             {
@@ -31,16 +31,16 @@ namespace TestEtoForms
 
                 foreach (var segment in pf.Segments)
                 {
-                    if (segment is Test2d.XArcSegment)
+                    if (segment is Core2D.XArcSegment)
                     {
                         throw new NotSupportedException("Not supported segment type: " + segment.GetType());
-                        //var arcSegment = segment as Test2d.XArcSegment;
+                        //var arcSegment = segment as Core2D.XArcSegment;
                         // TODO: Convert WPF/SVG elliptical arc segment format to GDI+ bezier curves.
                         //startPoint = arcSegment.Point;
                     }
-                    else if (segment is Test2d.XBezierSegment)
+                    else if (segment is Core2D.XBezierSegment)
                     {
-                        var bezierSegment = segment as Test2d.XBezierSegment;
+                        var bezierSegment = segment as Core2D.XBezierSegment;
                         gp.AddBezier(
                             new PointF(
                                 scale(startPoint.X),
@@ -56,9 +56,9 @@ namespace TestEtoForms
                                 scale(bezierSegment.Point3.Y)));
                         startPoint = bezierSegment.Point3;
                     }
-                    else if (segment is Test2d.XLineSegment)
+                    else if (segment is Core2D.XLineSegment)
                     {
-                        var lineSegment = segment as Test2d.XLineSegment;
+                        var lineSegment = segment as Core2D.XLineSegment;
                         gp.AddLine(
                             scale(startPoint.X),
                             scale(startPoint.Y),
@@ -66,9 +66,9 @@ namespace TestEtoForms
                             scale(lineSegment.Point.Y));
                         startPoint = lineSegment.Point;
                     }
-                    else if (segment is Test2d.XPolyBezierSegment)
+                    else if (segment is Core2D.XPolyBezierSegment)
                     {
-                        var polyBezierSegment = segment as Test2d.XPolyBezierSegment;
+                        var polyBezierSegment = segment as Core2D.XPolyBezierSegment;
                         if (polyBezierSegment.Points.Count >= 3)
                         {
                             gp.AddBezier(
@@ -109,9 +109,9 @@ namespace TestEtoForms
 
                         startPoint = polyBezierSegment.Points.Last();
                     }
-                    else if (segment is Test2d.XPolyLineSegment)
+                    else if (segment is Core2D.XPolyLineSegment)
                     {
-                        var polyLineSegment = segment as Test2d.XPolyLineSegment;
+                        var polyLineSegment = segment as Core2D.XPolyLineSegment;
                         if (polyLineSegment.Points.Count >= 1)
                         {
                             gp.AddLine(
@@ -135,9 +135,9 @@ namespace TestEtoForms
 
                         startPoint = polyLineSegment.Points.Last();
                     }
-                    else if (segment is Test2d.XPolyQuadraticBezierSegment)
+                    else if (segment is Core2D.XPolyQuadraticBezierSegment)
                     {
-                        var polyQuadraticSegment = segment as Test2d.XPolyQuadraticBezierSegment;
+                        var polyQuadraticSegment = segment as Core2D.XPolyQuadraticBezierSegment;
                         if (polyQuadraticSegment.Points.Count >= 2)
                         {
                             var p1 = startPoint;
@@ -200,9 +200,9 @@ namespace TestEtoForms
 
                         startPoint = polyQuadraticSegment.Points.Last();
                     }
-                    else if (segment is Test2d.XQuadraticBezierSegment)
+                    else if (segment is Core2D.XQuadraticBezierSegment)
                     {
-                        var qbezierSegment = segment as Test2d.XQuadraticBezierSegment;
+                        var qbezierSegment = segment as Core2D.XQuadraticBezierSegment;
                         var p1 = startPoint;
                         var p2 = qbezierSegment.Point1;
                         var p3 = qbezierSegment.Point2;

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Test2d;
+using Core2D;
 
 namespace Test.Viewer
 {
@@ -82,7 +82,7 @@ namespace Test.Viewer
 
             var window = new Window()
             {
-                Title = "Test2d Viewer",
+                Title = "Core2D Viewer",
                 Width = 900,
                 Height = 680,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,

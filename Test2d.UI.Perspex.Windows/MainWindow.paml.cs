@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
-using Test2d;
+using Core2D;
 
 namespace TestPerspex
 {
@@ -20,7 +20,8 @@ namespace TestPerspex
     public class MainWindow : Window, IView
     {
         private EditorContext _context;
-        private string _recentFileName = "Test2d.UI.Perspex.Windows.recent";
+        private string _recentFileName = "Core2D.recent";
+        private string _logFileName = "Core2D.log";
         private bool _enableRecent = true;
         
         /// <summary>
@@ -73,7 +74,7 @@ namespace TestPerspex
                 CsvWriter = new CsvHelperWriter()
             };
 
-            _context.InitializeEditor(new TraceLog(), "Test2d.log");
+            _context.InitializeEditor(new TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
 
             _context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
             _context.Editor.GetImageKey = async () => await OnGetImageKey();

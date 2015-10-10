@@ -10,9 +10,9 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Test2d;
+using Core2D;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     /// 

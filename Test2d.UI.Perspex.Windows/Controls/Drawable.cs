@@ -18,7 +18,7 @@ using Perspex.Input;
 using Perspex.Layout;
 using Perspex.Media;
 using Perspex.Media.Imaging;
-using Test2d;
+using Core2D;
 
 namespace TestPerspex
 {

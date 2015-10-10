@@ -3,7 +3,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Test2d;
+using Core2D;
 
 namespace TestWinForms
 {

@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Test2d")]
+[assembly: AssemblyTitle("Core2D")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("Test2d")]
+[assembly: AssemblyProduct("Core2D")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]

@@ -4,7 +4,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using Test2d;
+using Core2D;
 
 namespace Test.Windows
 {

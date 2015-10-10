@@ -15,14 +15,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Test2d;
+using Core2D;
 
 namespace Test.Controls
 {
     /// <summary>
     /// 
     /// </summary>
-    public class LayerDragAndDropListBox : DragAndDropListBox<Test2d.Layer>
+    public class LayerDragAndDropListBox : DragAndDropListBox<Core2D.Layer>
     { 
         /// <summary>
         /// 
@@ -37,9 +37,9 @@ namespace Test.Controls
         /// Updates DataContext binding to ImmutableArray collection property.
         /// </summary>
         /// <param name="array">The updated immutable array.</param>
-        public override void UpdateDataContext(ImmutableArray<Test2d.Layer> array)
+        public override void UpdateDataContext(ImmutableArray<Core2D.Layer> array)
         {
-            var editor = (Test2d.Editor)this.Tag;
+            var editor = (Core2D.Editor)this.Tag;
 
             var container = editor.Project.CurrentContainer;
             var previous = container.Layers;

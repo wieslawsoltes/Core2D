@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Perspex;
 using Perspex.Media;
 using Perspex.Media.Imaging;
-using Test2d;
+using Core2D;
 
 namespace TestPerspex
 {
@@ -790,13 +790,13 @@ namespace TestPerspex
             Brush brush = ToSolidBrush(text.Style.Stroke);
 
             var fontStyle = Perspex.Media.FontStyle.Normal;
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Italic))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Italic))
             {
                 fontStyle |= Perspex.Media.FontStyle.Italic;
             }
 
             var fontWeight = Perspex.Media.FontWeight.Normal;
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Bold))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Bold))
             {
                 fontWeight |= Perspex.Media.FontWeight.Bold;
             }
@@ -804,12 +804,12 @@ namespace TestPerspex
             // TODO: Implement font decoration after Perspex adds support for them.
             /*
             var fontDecoration = Perspex.Media.FontDecoration.None;
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Underline))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Underline))
             {
                 fontDecoration |= Perspex.Media.FontDecoration.Underline;
             }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Strikeout))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(FontStyleFlags.Strikeout))
             {
                 fontDecoration |= Perspex.Media.FontDecoration.Strikethrough;
             }

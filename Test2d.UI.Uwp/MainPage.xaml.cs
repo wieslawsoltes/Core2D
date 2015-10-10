@@ -29,7 +29,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using T2d = Test2d;
+using T2d = Core2D;
 
 namespace Test.Uwp
 {

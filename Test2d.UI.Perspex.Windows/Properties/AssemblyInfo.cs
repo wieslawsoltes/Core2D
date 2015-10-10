@@ -7,10 +7,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Test2d.UI.Perspex.Windows")]
+[assembly: AssemblyTitle("Core2D.UI.Perspex.Windows")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("Test2d.UI.Perspex.Windows")]
+[assembly: AssemblyProduct("Core2D.UI.Perspex.Windows")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]

@@ -4,7 +4,7 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using System;
 using N = System.Numerics;
-using Test2d;
+using Core2D;
 
 namespace Test.Uwp
 {

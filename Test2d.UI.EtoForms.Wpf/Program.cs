@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestEtoForms;
 
-namespace Test2d.UI.EtoForms.Wpf
+namespace Core2D.UI.EtoForms.Wpf
 {
     class Program
     {

@@ -10,9 +10,9 @@ using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Test2d;
+using Core2D;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     /// 
@@ -88,17 +88,17 @@ namespace Test2d
             var pen = new Pen(ToColor(style.Stroke), (float)(style.Thickness / _state.Zoom));
             switch (style.LineCap)
             {
-                case Test2d.LineCap.Flat:
+                case Core2D.LineCap.Flat:
                     pen.StartCap = System.Drawing.Drawing2D.LineCap.Flat;
                     pen.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
                     pen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
                     break;
-                case Test2d.LineCap.Square:
+                case Core2D.LineCap.Square:
                     pen.StartCap = System.Drawing.Drawing2D.LineCap.Square;
                     pen.EndCap = System.Drawing.Drawing2D.LineCap.Square;
                     pen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
                     break;
-                case Test2d.LineCap.Round:
+                case Core2D.LineCap.Round:
                     pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
                     pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
                     pen.DashCap = System.Drawing.Drawing2D.DashCap.Round;
@@ -813,22 +813,22 @@ namespace Test2d
             Brush brush = ToSolidBrush(text.Style.Stroke);
 
             var fontStyle = System.Drawing.FontStyle.Regular;
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Bold))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Bold))
             {
                 fontStyle |= System.Drawing.FontStyle.Bold;
             }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Italic))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Italic))
             {
                 fontStyle |= System.Drawing.FontStyle.Italic;
             }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Underline))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline))
             {
                 fontStyle |= System.Drawing.FontStyle.Underline;
             }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Strikeout))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
             {
                 fontStyle |= System.Drawing.FontStyle.Strikeout;
             }

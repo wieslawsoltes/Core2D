@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using Test2d;
+using Core2D;
 
 namespace Test.Converters
 {

@@ -7,9 +7,10 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Test2d;
+using Core2D;
 
 namespace TestWinForms
 {
@@ -19,6 +20,7 @@ namespace TestWinForms
     public partial class MainForm : Form, IView
     {
         private Drawable _drawable;
+        private string _logFileName = "Core2D.log";
 
         /// <summary>
         /// 
@@ -48,6 +50,18 @@ namespace TestWinForms
         }
 
         /// <summary>
+        /// Gets the location of the assembly as specified originally.
+        /// </summary>
+        /// <returns>The location of the assembly as specified originally.</returns>
+        private string GetAssemblyPath()
+        {
+            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+            var uri = new UriBuilder(codeBase);
+            string path = Uri.UnescapeDataString(uri.Path);
+            return System.IO.Path.GetDirectoryName(path);
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         private void InitializeContext()
@@ -71,7 +85,7 @@ namespace TestWinForms
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter()
             };
-            context.InitializeEditor(new TraceLog(), "Test2d.log");
+            context.InitializeEditor(new TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
             context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
             context.Editor.GetImageKey = async () => await GetImageKey();
 

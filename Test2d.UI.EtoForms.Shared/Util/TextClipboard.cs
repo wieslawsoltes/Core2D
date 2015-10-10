@@ -3,7 +3,7 @@
 using Eto.Forms;
 using System;
 using System.Threading.Tasks;
-using Test2d;
+using Core2D;
 
 namespace TestEtoForms
 {

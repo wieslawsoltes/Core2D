@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,9 +16,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Test2d;
 using Xceed.Wpf.AvalonDock.Layout;
 using Xceed.Wpf.AvalonDock.Layout.Serialization;
+using Core2D;
 
 namespace Test.Windows
 {
@@ -27,10 +28,11 @@ namespace Test.Windows
     public partial class MainWindow : Window, IView
     {
         private bool _isLoaded = false;
-        private string _recentFileName = "Test2d.UI.Wpf.recent";
-        private string _resourceLayoutRoot = "Test2d.UI.Wpf.Layouts.";
-        private string _resourceLayoutFileName = "Test2d.UI.Wpf.layout";
-        private string _defaultLayoutFileName = "Test2d.UI.Wpf.layout";
+        private string _recentFileName = "Core2D.recent";
+        private string _logFileName = "Core2D.log";
+        private string _resourceLayoutRoot = "Core2D.UI.Wpf.Layouts.";
+        private string _resourceLayoutFileName = "Core2D.UI.Wpf.layout";
+        private string _defaultLayoutFileName = "Core2D.layout";
         private bool _restoreLayout = true;
         private IDictionary<string, LayoutContent> _layouts;
         private bool _autoRecent = true;
@@ -43,6 +45,18 @@ namespace Test.Windows
             InitializeComponent();
 
             InitializeContext();
+        }
+
+        /// <summary>
+        /// Gets the location of the assembly as specified originally.
+        /// </summary>
+        /// <returns>The location of the assembly as specified originally.</returns>
+        private string GetAssemblyPath()
+        {
+            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+            var uri = new UriBuilder(codeBase);
+            string path = Uri.UnescapeDataString(uri.Path);
+            return System.IO.Path.GetDirectoryName(path);
         }
 
         /// <summary>
@@ -841,7 +855,7 @@ namespace Test.Windows
                 CsvWriter = new CsvHelperWriter()
             };
 
-            context.InitializeEditor(new TraceLog(), "Test2d.log");
+            context.InitializeEditor(new TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
             context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
             context.Editor.Renderers[1].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
             context.Editor.GetImageKey = async () => await GetImageKey();

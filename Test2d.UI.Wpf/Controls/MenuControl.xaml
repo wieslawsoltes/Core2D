@@ -5,9 +5,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:core="clr-namespace:Test2d;assembly=Test2d"
+             xmlns:core="clr-namespace:Core2D;assembly=Core2D"
              xmlns:controls="clr-namespace:Test.Controls"
-             xmlns:p="clr-namespace:Test2d.UI.Wpf.Properties"
+             xmlns:p="clr-namespace:Core2D.UI.Wpf.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="20" d:DesignWidth="1324">
     <Menu Background="Transparent">

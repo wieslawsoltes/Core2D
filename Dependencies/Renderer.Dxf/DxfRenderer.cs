@@ -20,7 +20,7 @@ namespace netDxf
     /// <summary>
     /// 
     /// </summary>
-    public class DxfRenderer : Test2d.ObservableObject, Test2d.IRenderer
+    public class DxfRenderer : Core2D.ObservableObject, Core2D.IRenderer
     {
         private bool _enableImageCache = true;
         private IDictionary<string, ImageDef> _biCache;
@@ -28,12 +28,12 @@ namespace netDxf
         private double _pageHeight;
         private string _outputPath;
         private Layer _currentLayer;
-        private Test2d.RendererState _state = new Test2d.RendererState();
+        private Core2D.RendererState _state = new Core2D.RendererState();
 
         /// <summary>
         /// 
         /// </summary>
-        public Test2d.RendererState State
+        public Core2D.RendererState State
         {
             get { return _state; }
             set { Update(ref _state, value); }
@@ -51,7 +51,7 @@ namespace netDxf
         /// 
         /// </summary>
         /// <returns></returns>
-        public static Test2d.IRenderer Create()
+        public static Core2D.IRenderer Create()
         {
             return new DxfRenderer();
         }
@@ -61,7 +61,7 @@ namespace netDxf
         /// </summary>
         /// <param name="path"></param>
         /// <param name="container"></param>
-        public void Save(string path, Test2d.Container container)
+        public void Save(string path, Core2D.Container container)
         {
             _outputPath = System.IO.Path.GetDirectoryName(path);
             var doc = new DxfDocument(DxfVersion.AutoCad2010);
@@ -75,7 +75,7 @@ namespace netDxf
         /// </summary>
         /// <param name="doc"></param>
         /// <param name="container"></param>
-        private void Add(DxfDocument doc, Test2d.Container container)
+        private void Add(DxfDocument doc, Core2D.Container container)
         {
             _pageWidth = container.Width;
             _pageHeight = container.Height;
@@ -97,12 +97,12 @@ namespace netDxf
             return Lineweights.OrderBy(x => Math.Abs((long)x - lineweight)).First();
         }
 
-        private static AciColor GetColor(Test2d.ArgbColor color)
+        private static AciColor GetColor(Core2D.ArgbColor color)
         {
             return new AciColor(color.R, color.G, color.B);
         }
 
-        private static short GetTransparency(Test2d.ArgbColor color)
+        private static short GetTransparency(Core2D.ArgbColor color)
         {
             return (short)(90.0 - color.A * 90.0 / 255.0);
         }
@@ -154,9 +154,9 @@ namespace netDxf
             };
         }
 
-        private Ellipse CreateEllipticalArc(Test2d.XArc arc, double dx, double dy)
+        private Ellipse CreateEllipticalArc(Core2D.XArc arc, double dx, double dy)
         {
-            var a = Test2d.GdiArc.FromXArc(arc, dx, dy);
+            var a = Core2D.GdiArc.FromXArc(arc, dx, dy);
             
             double _cx = ToDxfX(a.X + a.Width / 2.0);
             double _cy = ToDxfY(a.Y + a.Height / 2.0);
@@ -223,7 +223,7 @@ namespace netDxf
                 }, 3);
         }
 
-        private void DrawRectangleInternal(DxfDocument doc, Layer layer, bool isFilled, bool isStroked, Test2d.BaseStyle style, ref Test2d.Rect2 rect)
+        private void DrawRectangleInternal(DxfDocument doc, Layer layer, bool isFilled, bool isStroked, Core2D.BaseStyle style, ref Core2D.Rect2 rect)
         {
             double x = rect.X;
             double y = rect.Y;
@@ -294,7 +294,7 @@ namespace netDxf
             }
         }
 
-        private void DrawEllipseInternal(DxfDocument doc, Layer layer, bool isFilled, bool isStroked, Test2d.BaseStyle style, ref Test2d.Rect2 rect)
+        private void DrawEllipseInternal(DxfDocument doc, Layer layer, bool isFilled, bool isStroked, Core2D.BaseStyle style, ref Core2D.Rect2 rect)
         {
             var dxfEllipse = CreateEllipse(rect.X, rect.Y, rect.Width, rect.Height);
 
@@ -337,7 +337,7 @@ namespace netDxf
             }
         }
 
-        private void DrawGridInternal(DxfDocument doc, Layer layer, Test2d.ShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Test2d.Rect2 rect)
+        private void DrawGridInternal(DxfDocument doc, Layer layer, Core2D.ShapeStyle style, double offsetX, double offsetY, double cellWidth, double cellHeight, ref Core2D.Rect2 rect)
         {
             var stroke = GetColor(style.Stroke);
             var strokeTansparency = GetTransparency(style.Stroke);
@@ -371,12 +371,12 @@ namespace netDxf
             }
         }
 
-        private void CreateHatchBoundsAndEntitiess(Test2d.XPathGeometry pg, double dx, double dy, out ICollection<HatchBoundaryPath> bounds, out ICollection<EntityObject> entities)
+        private void CreateHatchBoundsAndEntitiess(Core2D.XPathGeometry pg, double dx, double dy, out ICollection<HatchBoundaryPath> bounds, out ICollection<EntityObject> entities)
         {
             bounds = new List<HatchBoundaryPath>();
             entities = new List<EntityObject>();
 
-            // TODO: FillMode = pg.FillRule == Test2d.XFillRule.EvenOdd ? FillMode.Alternate : FillMode.Winding;
+            // TODO: FillMode = pg.FillRule == Core2D.XFillRule.EvenOdd ? FillMode.Alternate : FillMode.Winding;
 
             foreach (var pf in pg.Figures)
             {
@@ -385,16 +385,16 @@ namespace netDxf
 
                 foreach (var segment in pf.Segments)
                 {
-                    if (segment is Test2d.XArcSegment)
+                    if (segment is Core2D.XArcSegment)
                     {
                         throw new NotSupportedException("Not supported segment type: " + segment.GetType());
-                        //var arcSegment = segment as Test2d.XArcSegment;
+                        //var arcSegment = segment as Core2D.XArcSegment;
                         // TODO: Convert WPF/SVG elliptical arc segment format to DXF ellipse arc.
                         //startPoint = arcSegment.Point;
                     }
-                    else if (segment is Test2d.XBezierSegment)
+                    else if (segment is Core2D.XBezierSegment)
                     {
-                        var bezierSegment = segment as Test2d.XBezierSegment;
+                        var bezierSegment = segment as Core2D.XBezierSegment;
                         var dxfSpline = CreateCubicSpline(
                             startPoint.X + dx,
                             startPoint.Y + dy,
@@ -408,9 +408,9 @@ namespace netDxf
                         entities.Add((Spline)dxfSpline.Clone());
                         startPoint = bezierSegment.Point3;
                     }
-                    else if (segment is Test2d.XLineSegment)
+                    else if (segment is Core2D.XLineSegment)
                     {
-                        var lineSegment = segment as Test2d.XLineSegment;
+                        var lineSegment = segment as Core2D.XLineSegment;
                         var dxfLine = CreateLine(
                             startPoint.X + dx,
                             startPoint.Y + dy,
@@ -420,9 +420,9 @@ namespace netDxf
                         entities.Add((Line)dxfLine.Clone());
                         startPoint = lineSegment.Point;
                     }
-                    else if (segment is Test2d.XPolyBezierSegment)
+                    else if (segment is Core2D.XPolyBezierSegment)
                     {
-                        var polyBezierSegment = segment as Test2d.XPolyBezierSegment;
+                        var polyBezierSegment = segment as Core2D.XPolyBezierSegment;
                         if (polyBezierSegment.Points.Count >= 3)
                         {
                             var dxfSpline = CreateCubicSpline(
@@ -459,9 +459,9 @@ namespace netDxf
 
                         startPoint = polyBezierSegment.Points.Last();
                     }
-                    else if (segment is Test2d.XPolyLineSegment)
+                    else if (segment is Core2D.XPolyLineSegment)
                     {
-                        var polyLineSegment = segment as Test2d.XPolyLineSegment;
+                        var polyLineSegment = segment as Core2D.XPolyLineSegment;
                         if (polyLineSegment.Points.Count >= 1)
                         {
                             var dxfLine = CreateLine(
@@ -489,9 +489,9 @@ namespace netDxf
 
                         startPoint = polyLineSegment.Points.Last();
                     }
-                    else if (segment is Test2d.XPolyQuadraticBezierSegment)
+                    else if (segment is Core2D.XPolyQuadraticBezierSegment)
                     {
-                        var polyQuadraticSegment = segment as Test2d.XPolyQuadraticBezierSegment;
+                        var polyQuadraticSegment = segment as Core2D.XPolyQuadraticBezierSegment;
                         if (polyQuadraticSegment.Points.Count >= 2)
                         {
                             var dxfSpline = CreateQuadraticSpline(
@@ -524,9 +524,9 @@ namespace netDxf
 
                         startPoint = polyQuadraticSegment.Points.Last();
                     }
-                    else if (segment is Test2d.XQuadraticBezierSegment)
+                    else if (segment is Core2D.XQuadraticBezierSegment)
                     {
-                        var qbezierSegment = segment as Test2d.XQuadraticBezierSegment;
+                        var qbezierSegment = segment as Core2D.XQuadraticBezierSegment;
                         var dxfSpline = CreateQuadraticSpline(
                             startPoint.X + dx,
                             startPoint.Y + dy,
@@ -574,7 +574,7 @@ namespace netDxf
         /// <param name="container"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Test2d.Container container, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object doc, Core2D.Container container, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             var _doc = doc as DxfDocument;
 
@@ -600,7 +600,7 @@ namespace netDxf
         /// <param name="layer"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Test2d.Layer layer, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object doc, Core2D.Layer layer, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             var _doc = doc as DxfDocument;
 
@@ -622,7 +622,7 @@ namespace netDxf
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Test2d.XLine line, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object doc, Core2D.XLine line, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             if (!line.IsStroked)
                 return;
@@ -639,7 +639,7 @@ namespace netDxf
             double _x2 = line.End.X + dx;
             double _y2 = line.End.Y + dy;
 
-            Test2d.XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
+            Core2D.XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
 
             var dxfLine = CreateLine(_x1, _y1, _x2, _y2);
 
@@ -664,14 +664,14 @@ namespace netDxf
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Test2d.XRectangle rectangle, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object doc, Core2D.XRectangle rectangle, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             if (!rectangle.IsStroked && !rectangle.IsFilled && !rectangle.IsGrid)
                 return;
 
             var _doc = doc as DxfDocument;
             var style = rectangle.Style;
-            var rect = Test2d.Rect2.Create(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
+            var rect = Core2D.Rect2.Create(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
 
             DrawRectangleInternal(_doc, _currentLayer, rectangle.IsFilled, rectangle.IsStroked, style, ref rect);
 
@@ -696,14 +696,14 @@ namespace netDxf
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Test2d.XEllipse ellipse, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object doc, Core2D.XEllipse ellipse, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             if (!ellipse.IsStroked && !ellipse.IsFilled)
                 return;
 
             var _doc = doc as DxfDocument;
             var style = ellipse.Style;
-            var rect = Test2d.Rect2.Create(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
+            var rect = Core2D.Rect2.Create(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
 
             DrawEllipseInternal(_doc, _currentLayer, ellipse.IsFilled, ellipse.IsStroked, style, ref rect);
         }
@@ -717,7 +717,7 @@ namespace netDxf
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Test2d.XArc arc, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object doc, Core2D.XArc arc, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             var _doc = doc as DxfDocument;
             var style = arc.Style;
@@ -772,7 +772,7 @@ namespace netDxf
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Test2d.XBezier bezier, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object doc, Core2D.XBezier bezier, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             if (!bezier.IsStroked && !bezier.IsFilled)
                 return;
@@ -837,7 +837,7 @@ namespace netDxf
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Test2d.XQBezier qbezier, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object doc, Core2D.XQBezier qbezier, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             if (!qbezier.IsStroked && !qbezier.IsFilled)
                 return;
@@ -900,7 +900,7 @@ namespace netDxf
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Test2d.XText text, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object doc, Core2D.XText text, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             var _doc = doc as DxfDocument;
 
@@ -914,18 +914,18 @@ namespace netDxf
 
             var attachmentPoint = default(MTextAttachmentPoint);
             double x, y;
-            var rect = Test2d.Rect2.Create(text.TopLeft, text.BottomRight, dx, dy);
+            var rect = Core2D.Rect2.Create(text.TopLeft, text.BottomRight, dx, dy);
 
             switch (text.Style.TextStyle.TextHAlignment)
             {
                 default:
-                case Test2d.TextHAlignment.Left:
+                case Core2D.TextHAlignment.Left:
                     x = rect.X;
                     break;
-                case Test2d.TextHAlignment.Center:
+                case Core2D.TextHAlignment.Center:
                     x = rect.X + rect.Width / 2.0;
                     break;
-                case Test2d.TextHAlignment.Right:
+                case Core2D.TextHAlignment.Right:
                     x = rect.X + rect.Width;
                     break;
             }
@@ -933,13 +933,13 @@ namespace netDxf
             switch (text.Style.TextStyle.TextVAlignment)
             {
                 default:
-                case Test2d.TextVAlignment.Top:
+                case Core2D.TextVAlignment.Top:
                     y = rect.Y;
                     break;
-                case Test2d.TextVAlignment.Center:
+                case Core2D.TextVAlignment.Center:
                     y = rect.Y + rect.Height / 2.0;
                     break;
-                case Test2d.TextVAlignment.Bottom:
+                case Core2D.TextVAlignment.Bottom:
                     y = rect.Y + rect.Height;
                     break;
             }
@@ -947,47 +947,47 @@ namespace netDxf
             switch (text.Style.TextStyle.TextVAlignment)
             {
                 default:
-                case Test2d.TextVAlignment.Top:
+                case Core2D.TextVAlignment.Top:
                     switch (text.Style.TextStyle.TextHAlignment)
                     {
                         default:
-                        case Test2d.TextHAlignment.Left:
+                        case Core2D.TextHAlignment.Left:
                             attachmentPoint = MTextAttachmentPoint.TopLeft;
                             break;
-                        case Test2d.TextHAlignment.Center:
+                        case Core2D.TextHAlignment.Center:
                             attachmentPoint = MTextAttachmentPoint.TopCenter;
                             break;
-                        case Test2d.TextHAlignment.Right:
+                        case Core2D.TextHAlignment.Right:
                             attachmentPoint = MTextAttachmentPoint.TopRight;
                             break;
                     }
                     break;
-                case Test2d.TextVAlignment.Center:
+                case Core2D.TextVAlignment.Center:
                     switch (text.Style.TextStyle.TextHAlignment)
                     {
                         default:
-                        case Test2d.TextHAlignment.Left:
+                        case Core2D.TextHAlignment.Left:
                             attachmentPoint = MTextAttachmentPoint.MiddleLeft;
                             break;
-                        case Test2d.TextHAlignment.Center:
+                        case Core2D.TextHAlignment.Center:
                             attachmentPoint = MTextAttachmentPoint.MiddleCenter;
                             break;
-                        case Test2d.TextHAlignment.Right:
+                        case Core2D.TextHAlignment.Right:
                             attachmentPoint = MTextAttachmentPoint.MiddleRight;
                             break;
                     }
                     break;
-                case Test2d.TextVAlignment.Bottom:
+                case Core2D.TextVAlignment.Bottom:
                     switch (text.Style.TextStyle.TextHAlignment)
                     {
                         default:
-                        case Test2d.TextHAlignment.Left:
+                        case Core2D.TextHAlignment.Left:
                             attachmentPoint = MTextAttachmentPoint.BottomLeft;
                             break;
-                        case Test2d.TextHAlignment.Center:
+                        case Core2D.TextHAlignment.Center:
                             attachmentPoint = MTextAttachmentPoint.BottomCenter;
                             break;
-                        case Test2d.TextHAlignment.Right:
+                        case Core2D.TextHAlignment.Right:
                             attachmentPoint = MTextAttachmentPoint.BottomRight;
                             break;
                     }
@@ -1004,10 +1004,10 @@ namespace netDxf
 
             var fs = text.Style.TextStyle.FontStyle;
             var options = new MTextFormattingOptions(dxfMText.Style);
-            options.Bold = fs.Flags.HasFlag(Test2d.FontStyleFlags.Bold);
-            options.Italic = fs.Flags.HasFlag(Test2d.FontStyleFlags.Italic);
-            options.Underline = fs.Flags.HasFlag(Test2d.FontStyleFlags.Underline);
-            options.StrikeThrough = fs.Flags.HasFlag(Test2d.FontStyleFlags.Strikeout);
+            options.Bold = fs.Flags.HasFlag(Core2D.FontStyleFlags.Bold);
+            options.Italic = fs.Flags.HasFlag(Core2D.FontStyleFlags.Italic);
+            options.Underline = fs.Flags.HasFlag(Core2D.FontStyleFlags.Underline);
+            options.StrikeThrough = fs.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout);
 
             options.Aligment = MTextFormattingOptions.TextAligment.Default;
             options.Color = null;
@@ -1029,14 +1029,14 @@ namespace netDxf
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Test2d.XImage image, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object doc, Core2D.XImage image, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             var _doc = doc as DxfDocument;
             
             var bytes = _state.ImageCache.GetImage(image.Path);
             if (bytes != null)
             {
-                var rect = Test2d.Rect2.Create(image.TopLeft, image.BottomRight, dx, dy);
+                var rect = Core2D.Rect2.Create(image.TopLeft, image.BottomRight, dx, dy);
 
                 if (_enableImageCache
                     && _biCache.ContainsKey(image.Path))
@@ -1080,7 +1080,7 @@ namespace netDxf
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Test2d.XPath path, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object doc, Core2D.XPath path, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             if (!path.IsStroked && !path.IsFilled)
                 return;

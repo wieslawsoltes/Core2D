@@ -12,10 +12,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Test2d;
+using Core2D;
 using WPF = System.Windows;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     /// 

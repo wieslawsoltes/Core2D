@@ -3,9 +3,9 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
-using Test2d;
+using Core2D;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     /// 

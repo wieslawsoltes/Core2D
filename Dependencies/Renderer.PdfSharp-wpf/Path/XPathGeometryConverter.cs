@@ -28,10 +28,10 @@ namespace PdfSharp
         /// <param name="dy"></param>
         /// <param name="scale"></param>
         /// <returns></returns>
-        public static XGraphicsPath ToXGraphicsPath(this Test2d.XPathGeometry pg, double dx, double dy, Func<double, double> scale)
+        public static XGraphicsPath ToXGraphicsPath(this Core2D.XPathGeometry pg, double dx, double dy, Func<double, double> scale)
         {
             var gp = new XGraphicsPath();
-            gp.FillMode = pg.FillRule == Test2d.XFillRule.EvenOdd ? XFillMode.Alternate : XFillMode.Winding;
+            gp.FillMode = pg.FillRule == Core2D.XFillRule.EvenOdd ? XFillMode.Alternate : XFillMode.Winding;
 
             foreach (var pf in pg.Figures)
             {
@@ -39,15 +39,15 @@ namespace PdfSharp
 
                 foreach (var segment in pf.Segments)
                 {
-                    if (segment is Test2d.XArcSegment)
+                    if (segment is Core2D.XArcSegment)
                     {
 #if CORE
-                        //var arcSegment = segment as Test2d.XArcSegment;
+                        //var arcSegment = segment as Core2D.XArcSegment;
                         // TODO: Convert WPF/SVG elliptical arc segment format to GDI+ bezier curves.
                         //startPoint = arcSegment.Point;
 #endif
 #if WPF
-                        var arcSegment = segment as Test2d.XArcSegment;
+                        var arcSegment = segment as Core2D.XArcSegment;
                         var point1 = new XPoint(
                             scale(startPoint.X),
                             scale(startPoint.Y));
@@ -61,13 +61,13 @@ namespace PdfSharp
                             point1,
                             point2,
                             size, arcSegment.RotationAngle, arcSegment.IsLargeArc,
-                            arcSegment.SweepDirection == Test2d.XSweepDirection.Clockwise ? XSweepDirection.Clockwise : XSweepDirection.Counterclockwise);
+                            arcSegment.SweepDirection == Core2D.XSweepDirection.Clockwise ? XSweepDirection.Clockwise : XSweepDirection.Counterclockwise);
                         startPoint = arcSegment.Point;
 #endif
                     }
-                    else if (segment is Test2d.XBezierSegment)
+                    else if (segment is Core2D.XBezierSegment)
                     {
-                        var bezierSegment = segment as Test2d.XBezierSegment;
+                        var bezierSegment = segment as Core2D.XBezierSegment;
                         gp.AddBezier(
                             scale(startPoint.X),
                             scale(startPoint.Y),
@@ -79,9 +79,9 @@ namespace PdfSharp
                             scale(bezierSegment.Point3.Y));
                         startPoint = bezierSegment.Point3;
                     }
-                    else if (segment is Test2d.XLineSegment)
+                    else if (segment is Core2D.XLineSegment)
                     {
-                        var lineSegment = segment as Test2d.XLineSegment;
+                        var lineSegment = segment as Core2D.XLineSegment;
                         gp.AddLine(
                             scale(startPoint.X),
                             scale(startPoint.Y),
@@ -89,9 +89,9 @@ namespace PdfSharp
                             scale(lineSegment.Point.Y));
                         startPoint = lineSegment.Point;
                     }
-                    else if (segment is Test2d.XPolyBezierSegment)
+                    else if (segment is Core2D.XPolyBezierSegment)
                     {
-                        var polyBezierSegment = segment as Test2d.XPolyBezierSegment;
+                        var polyBezierSegment = segment as Core2D.XPolyBezierSegment;
                         if (polyBezierSegment.Points.Count >= 3)
                         {
                             gp.AddBezier(
@@ -124,9 +124,9 @@ namespace PdfSharp
 
                         startPoint = polyBezierSegment.Points.Last();
                     }
-                    else if (segment is Test2d.XPolyLineSegment)
+                    else if (segment is Core2D.XPolyLineSegment)
                     {
-                        var polyLineSegment = segment as Test2d.XPolyLineSegment;
+                        var polyLineSegment = segment as Core2D.XPolyLineSegment;
                         if (polyLineSegment.Points.Count >= 1)
                         {
                             gp.AddLine(
@@ -150,9 +150,9 @@ namespace PdfSharp
 
                         startPoint = polyLineSegment.Points.Last();
                     }
-                    else if (segment is Test2d.XPolyQuadraticBezierSegment)
+                    else if (segment is Core2D.XPolyQuadraticBezierSegment)
                     {
-                        var polyQuadraticSegment = segment as Test2d.XPolyQuadraticBezierSegment;
+                        var polyQuadraticSegment = segment as Core2D.XPolyQuadraticBezierSegment;
                         if (polyQuadraticSegment.Points.Count >= 2)
                         {
                             var p1 = startPoint;
@@ -207,9 +207,9 @@ namespace PdfSharp
 
                         startPoint = polyQuadraticSegment.Points.Last();
                     }
-                    else if (segment is Test2d.XQuadraticBezierSegment)
+                    else if (segment is Core2D.XQuadraticBezierSegment)
                     {
-                        var qbezierSegment = segment as Test2d.XQuadraticBezierSegment;
+                        var qbezierSegment = segment as Core2D.XQuadraticBezierSegment;
                         var p1 = startPoint;
                         var p2 = qbezierSegment.Point1;
                         var p3 = qbezierSegment.Point2;

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Eto.Drawing;
-using Test2d;
+using Core2D;
 
 namespace TestEtoForms
 {
@@ -130,13 +130,13 @@ namespace TestEtoForms
 
             switch (style.LineCap)
             {
-                case Test2d.LineCap.Flat:
+                case Core2D.LineCap.Flat:
                     pen.LineCap = PenLineCap.Butt;
                     break;
-                case Test2d.LineCap.Square:
+                case Core2D.LineCap.Square:
                     pen.LineCap = PenLineCap.Square;
                     break;
-                case Test2d.LineCap.Round:
+                case Core2D.LineCap.Round:
                     pen.LineCap = PenLineCap.Round;
                     break;
             }
@@ -843,23 +843,23 @@ namespace TestEtoForms
             var brush = ToSolidBrush(text.Style.Stroke);
 
             var fontStyle = Eto.Drawing.FontStyle.None;
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Bold))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Bold))
             {
                 fontStyle |= Eto.Drawing.FontStyle.Bold;
             }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Italic))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Italic))
             {
                 fontStyle |= Eto.Drawing.FontStyle.Italic;
             }
 
             var fontDecoration = Eto.Drawing.FontDecoration.None;
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Underline))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline))
             {
                 fontDecoration |= Eto.Drawing.FontDecoration.Underline;
             }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Strikeout))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
             {
                 fontDecoration |= Eto.Drawing.FontDecoration.Strikethrough;
             }
