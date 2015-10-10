@@ -64,9 +64,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Test2d\Test2d.csproj">
+    <ProjectReference Include="..\..\Test2d\Core2D.csproj">
       <Project>{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}</Project>
-      <Name>Test2d</Name>
+      <Name>Core2D</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

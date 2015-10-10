@@ -7,8 +7,8 @@
     <ProjectGuid>{1C74A7B6-A80B-406B-A53F-465740D3742F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test2d.UI.EtoForms.Direct2D</RootNamespace>
-    <AssemblyName>Test2d.UI.EtoForms.Direct2D</AssemblyName>
+    <RootNamespace>Core2D.UI.EtoForms.Direct2D</RootNamespace>
+    <AssemblyName>Core2D.UI.EtoForms.Direct2D</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Test2d.UI.EtoForms.Direct2D.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Core2D.UI.EtoForms.Direct2D.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,7 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Test2d.UI.EtoForms.Direct2D.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\Core2D.UI.EtoForms.Direct2D.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -88,13 +88,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Test2d.UI.EtoForms.Shared\Test2d.UI.EtoForms.Shared.csproj">
+    <ProjectReference Include="..\Test2d.UI.EtoForms.Shared\Core2D.UI.EtoForms.Shared.csproj">
       <Project>{c2d17c89-b904-4bce-8bce-fc65020de7bb}</Project>
-      <Name>Test2d.UI.EtoForms.Shared</Name>
+      <Name>Core2D.UI.EtoForms.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Test2d\Test2d.csproj">
+    <ProjectReference Include="..\Test2d\Core2D.csproj">
       <Project>{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}</Project>
-      <Name>Test2d</Name>
+      <Name>Core2D</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

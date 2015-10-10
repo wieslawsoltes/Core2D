@@ -7,8 +7,8 @@
     <ProjectGuid>{844B05A9-E1F0-4496-ACEE-3074D17D759C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test2d.UI.Wpf.Viewer</RootNamespace>
-    <AssemblyName>Test2d.UI.Wpf.Viewer</AssemblyName>
+    <RootNamespace>Core2D.UI.Wpf.Viewer</RootNamespace>
+    <AssemblyName>Core2D.UI.Wpf.Viewer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -108,9 +108,9 @@
       <Project>{08e4e8bf-e513-4a8d-835c-1eed6ecb4a21}</Project>
       <Name>Serializer.Newtonsoft</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Test2d\Test2d.csproj">
+    <ProjectReference Include="..\Test2d\Core2D.csproj">
       <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
-      <Name>Test2d</Name>
+      <Name>Core2D</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

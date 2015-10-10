@@ -6,8 +6,8 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Test2d.UI.WinForms</RootNamespace>
-    <AssemblyName>Test2d.UI.WinForms</AssemblyName>
+    <RootNamespace>Core2D.UI.WinForms</RootNamespace>
+    <AssemblyName>Core2D.UI.WinForms</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <TargetFrameworkProfile />
@@ -45,10 +45,10 @@
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\Test2d.UI.WinForms.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Core2D.UI.WinForms.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <DocumentationFile>bin\Release\Test2d.UI.WinForms.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\Core2D.UI.WinForms.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp">
@@ -124,9 +124,9 @@
       <Project>{87302d12-1184-402d-bf23-a5699f3d0bb4}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Test2d\Test2d.csproj">
+    <ProjectReference Include="..\Test2d\Core2D.csproj">
       <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
-      <Name>Test2d</Name>
+      <Name>Core2D</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dependencies\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
       <Project>{64bae9e8-93b5-4edc-8ad6-5a3dcba8c051}</Project>

@@ -7,8 +7,8 @@
     <ProjectGuid>{9A474916-EA8C-48FB-8CF6-425D95B6B7FD}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test2d.UI.Uwp</RootNamespace>
-    <AssemblyName>Test2d.UI.Uwp</AssemblyName>
+    <RootNamespace>Core2D.UI.Uwp</RootNamespace>
+    <AssemblyName>Core2D.UI.Uwp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
@@ -17,7 +17,6 @@
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Test2d.UI.Uwp_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -137,9 +136,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Portable\Test2d\Test2d.csproj">
+    <ProjectReference Include="..\Portable\Test2d\Core2D.csproj">
       <Project>{1d45ea4f-d2af-447a-8a8e-e94f19be226a}</Project>
-      <Name>Test2d</Name>
+      <Name>Core2D</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -8,8 +8,8 @@
     <ProjectGuid>{1D45EA4F-D2AF-447A-8A8E-E94F19BE226A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test2d</RootNamespace>
-    <AssemblyName>Test2d</AssemblyName>
+    <RootNamespace>Core2D</RootNamespace>
+    <AssemblyName>Core2D</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

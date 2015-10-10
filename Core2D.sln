@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.Wpf", "Test2d.UI.Wpf\Test2d.UI.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.Wpf", "Test2d.UI.Wpf\Core2D.UI.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.WinForms", "Test2d.UI.WinForms\Test2d.UI.WinForms.csproj", "{89476BE1-326D-4548-B62A-DE7B2ACC56F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.WinForms", "Test2d.UI.WinForms\Core2D.UI.WinForms.csproj", "{89476BE1-326D-4548-B62A-DE7B2ACC56F9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{2D76C6F5-844B-4D2D-96D8-B39D49C70706}"
 EndProject
@@ -37,27 +37,27 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.EtoForms", "Depend
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log.Trace", "Dependencies\Log.Trace\Log.Trace.csproj", "{68A36926-DF55-4F05-9F89-B9AB1463227E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d", "Test2d\Test2d.csproj", "{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D", "Test2d\Core2D.csproj", "{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.EtoForms.Shared", "Test2d.UI.EtoForms.Shared\Test2d.UI.EtoForms.Shared.csproj", "{C2D17C89-B904-4BCE-8BCE-FC65020DE7BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.EtoForms.Shared", "Test2d.UI.EtoForms.Shared\Core2D.UI.EtoForms.Shared.csproj", "{C2D17C89-B904-4BCE-8BCE-FC65020DE7BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.EtoForms.Direct2D", "Test2d.UI.EtoForms.Direct2D\Test2d.UI.EtoForms.Direct2D.csproj", "{1C74A7B6-A80B-406B-A53F-465740D3742F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.EtoForms.Direct2D", "Test2d.UI.EtoForms.Direct2D\Core2D.UI.EtoForms.Direct2D.csproj", "{1C74A7B6-A80B-406B-A53F-465740D3742F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.EtoForms.Gtk2", "Test2d.UI.EtoForms.Gtk2\Test2d.UI.EtoForms.Gtk2.csproj", "{8FFCD889-06F4-483D-A776-3AE815348D4A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.EtoForms.Gtk2", "Test2d.UI.EtoForms.Gtk2\Core2D.UI.EtoForms.Gtk2.csproj", "{8FFCD889-06F4-483D-A776-3AE815348D4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.EtoForms.WinForms", "Test2d.UI.EtoForms.WinForms\Test2d.UI.EtoForms.WinForms.csproj", "{9B4C0A7C-1412-4BFC-A54D-CFC5DBAA8673}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.EtoForms.WinForms", "Test2d.UI.EtoForms.WinForms\Core2D.UI.EtoForms.WinForms.csproj", "{9B4C0A7C-1412-4BFC-A54D-CFC5DBAA8673}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.EtoForms.Wpf", "Test2d.UI.EtoForms.Wpf\Test2d.UI.EtoForms.Wpf.csproj", "{DB118714-04E2-4D0C-8AB5-6A76AE3312A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.EtoForms.Wpf", "Test2d.UI.EtoForms.Wpf\Core2D.UI.EtoForms.Wpf.csproj", "{DB118714-04E2-4D0C-8AB5-6A76AE3312A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.Wpf.Viewer", "Test2d.UI.Wpf.Viewer\Test2d.UI.Wpf.Viewer.csproj", "{844B05A9-E1F0-4496-ACEE-3074D17D759C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.Wpf.Viewer", "Test2d.UI.Wpf.Viewer\Core2D.UI.Wpf.Viewer.csproj", "{844B05A9-E1F0-4496-ACEE-3074D17D759C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portable", "Portable", "{4EDE26D2-EA90-4EA8-B2DA-54B89A733D9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d", "Portable\Test2d\Test2d.csproj", "{1D45EA4F-D2AF-447A-8A8E-E94F19BE226A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D", "Portable\Test2d\Core2D.csproj", "{1D45EA4F-D2AF-447A-8A8E-E94F19BE226A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.Uwp", "Test2d.UI.Uwp\Test2d.UI.Uwp.csproj", "{9A474916-EA8C-48FB-8CF6-425D95B6B7FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.Uwp", "Test2d.UI.Uwp\Core2D.UI.Uwp.csproj", "{9A474916-EA8C-48FB-8CF6-425D95B6B7FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test2d.UI.Perspex.Windows", "Test2d.UI.Perspex.Windows\Test2d.UI.Perspex.Windows.csproj", "{4868069E-3AD4-497E-9B8E-148D1EEACFD7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.Perspex.Windows", "Test2d.UI.Perspex.Windows\Core2D.UI.Perspex.Windows.csproj", "{4868069E-3AD4-497E-9B8E-148D1EEACFD7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netDxf", "Dependencies\netDxf\netDxf\netDxf.csproj", "{785380E0-CEB9-4C34-82E5-60D0E33E848E}"
 EndProject
