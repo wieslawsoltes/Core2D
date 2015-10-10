@@ -1,12 +1,12 @@
-# Test2d
+# Core2D
 
 Data driven 2D diagram editor.
 
 ## About
 
-Test2d is an application for making data driven 2D diagrams.
+Core2D is an application for making data driven 2D diagrams.
 
-## Building Test2d
+## Building Core2D
 
 * [Visual Studio Community 2015](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx) for Windows builds.
 * [SharpDevelop](http://www.icsharpcode.net/OpenSource/SD/Download/#SharpDevelop5x) for Windows builds.
@@ -14,7 +14,7 @@ Test2d is an application for making data driven 2D diagrams.
 
 ### Supported Platforms
 
-The recommended UI for Test2d is Test2d.UI.Wpf.
+The recommended UI for Core2D is Core2D.UI.Wpf.
 
 * Windows 7/8/8.1/10 for WPF, EtoForms.Direct2D, EtoForms.Gtk2, EtoForms.WinForms, EtoForms.Wpf and WinForms builds.
 * Windows 10 for Universal Windows Platform (UWP) build.
@@ -52,8 +52,8 @@ The core library and editor are portable and should work on all platforms where 
 
 ## Contact
 
-https://github.com/wieslawsoltes/Test2d
+https://github.com/Core2D/Core2D
 
 ## License
 
-Test2d is licensed under the [MIT license](LICENSE.TXT).
+Core2D is licensed under the [MIT license](LICENSE.TXT).
