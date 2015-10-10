@@ -120,7 +120,6 @@ namespace TestWinForms
   
             _drawable.Context = context;
             _drawable.InvalidateContainer = InvalidateContainer;
-            _drawable.EnableAutoFit = true;
             _drawable.Initialize();
 
             _drawable.Dock = DockStyle.Fill;
