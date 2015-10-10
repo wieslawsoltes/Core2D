@@ -29,18 +29,6 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
-        public bool EnableAutoFit { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Drawable()
-        {
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public void Initialize()
         {
             this.SetStyle(
@@ -159,10 +147,13 @@ namespace TestWinForms
         protected override void OnSizeChanged(EventArgs e)
         {
             base.OnSizeChanged(e);
-            
-            if (EnableAutoFit)
+
+            if (Context != null && Context.Editor.Project != null)
             {
-                AutoFit();
+                if (Context.Renderers[0].State.EnableAutofit)
+                {
+                    AutoFit();
+                }
             }
         }
         
