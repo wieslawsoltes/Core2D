@@ -85,6 +85,8 @@ namespace TestWinForms
                 CsvReader = new CsvHelperReader(),
                 CsvWriter = new CsvHelperWriter()
             };
+
+            context.Renderers[0].State.EnableAutofit = true;
             context.InitializeEditor(new TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
             context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
             context.Editor.GetImageKey = async () => await GetImageKey();
