@@ -66,6 +66,8 @@ namespace TestEtoForms
                 CsvReader = new Core2D.CsvHelperReader(),
                 CsvWriter = new Core2D.CsvHelperWriter()
             };
+
+            _context.Renderers[0].State.EnableAutofit = true;
             _context.InitializeEditor(new Core2D.TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
             _context.Editor.Renderers[0].State.DrawShapeState.Flags = Core2D.ShapeStateFlags.Visible;
             _context.Editor.GetImageKey = async () => await GetImageKey();
