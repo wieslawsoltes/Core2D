@@ -9,10 +9,10 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Test2d.UI.Wpf.Viewer")]
+[assembly: AssemblyTitle("Core2D.UI.Wpf.Viewer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("Test2d.UI.Wpf.Viewer")]
+[assembly: AssemblyProduct("Core2D.UI.Wpf.Viewer")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

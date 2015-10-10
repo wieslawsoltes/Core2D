@@ -48,41 +48,41 @@ rmdir /Q /S Dependencies\TextFieldReader.CsvHelper\obj
 rmdir /Q /S Dependencies\TextFieldWriter.CsvHelper\bin
 rmdir /Q /S Dependencies\TextFieldWriter.CsvHelper\obj
 
-rmdir /Q /S Portable\Test2d\bin
-rmdir /Q /S Portable\Test2d\obj
+rmdir /Q /S Portable\Core2D\bin
+rmdir /Q /S Portable\Core2D\obj
 
-rmdir /Q /S Test2d\bin
-rmdir /Q /S Test2d\obj
+rmdir /Q /S Core2D\bin
+rmdir /Q /S Core2D\obj
 
-rmdir /Q /S Test2d.UI.EtoForms.Direct2D\bin
-rmdir /Q /S Test2d.UI.EtoForms.Direct2D\obj
+rmdir /Q /S Core2D.UI.EtoForms.Direct2D\bin
+rmdir /Q /S Core2D.UI.EtoForms.Direct2D\obj
 
-rmdir /Q /S Test2d.UI.EtoForms.Gtk2\bin
-rmdir /Q /S Test2d.UI.EtoForms.Gtk2\obj
+rmdir /Q /S Core2D.UI.EtoForms.Gtk2\bin
+rmdir /Q /S Core2D.UI.EtoForms.Gtk2\obj
 
-rmdir /Q /S Test2d.UI.EtoForms.Shared\bin
-rmdir /Q /S Test2d.UI.EtoForms.Shared\obj
+rmdir /Q /S Core2D.UI.EtoForms.Shared\bin
+rmdir /Q /S Core2D.UI.EtoForms.Shared\obj
 
-rmdir /Q /S Test2d.UI.EtoForms.WinForms\bin
-rmdir /Q /S Test2d.UI.EtoForms.WinForms\obj
+rmdir /Q /S Core2D.UI.EtoForms.WinForms\bin
+rmdir /Q /S Core2D.UI.EtoForms.WinForms\obj
 
-rmdir /Q /S Test2d.UI.EtoForms.Wpf\bin
-rmdir /Q /S Test2d.UI.EtoForms.Wpf\obj
+rmdir /Q /S Core2D.UI.EtoForms.Wpf\bin
+rmdir /Q /S Core2D.UI.EtoForms.Wpf\obj
 
-rmdir /Q /S Test2d.UI.Perspex.Windows\bin
-rmdir /Q /S Test2d.UI.Perspex.Windows\obj
+rmdir /Q /S Core2D.UI.Perspex.Windows\bin
+rmdir /Q /S Core2D.UI.Perspex.Windows\obj
 
-rmdir /Q /S Test2d.UI.Uwp\bin
-rmdir /Q /S Test2d.UI.Uwp\obj
+rmdir /Q /S Core2D.UI.Uwp\bin
+rmdir /Q /S Core2D.UI.Uwp\obj
 
-rmdir /Q /S Test2d.UI.WinForms\bin
-rmdir /Q /S Test2d.UI.WinForms\obj
+rmdir /Q /S Core2D.UI.WinForms\bin
+rmdir /Q /S Core2D.UI.WinForms\obj
 
-rmdir /Q /S Test2d.UI.Wpf\bin
-rmdir /Q /S Test2d.UI.Wpf\obj
+rmdir /Q /S Core2D.UI.Wpf\bin
+rmdir /Q /S Core2D.UI.Wpf\obj
 
-rmdir /Q /S Test2d.UI.Wpf.Viewer\bin
-rmdir /Q /S Test2d.UI.Wpf.Viewer\obj
+rmdir /Q /S Core2D.UI.Wpf.Viewer\bin
+rmdir /Q /S Core2D.UI.Wpf.Viewer\obj
 
 rmdir /Q /S packages
 

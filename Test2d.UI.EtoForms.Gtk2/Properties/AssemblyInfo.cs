@@ -7,10 +7,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Test2d.UI.EtoForms.Gtk2")]
+[assembly: AssemblyTitle("Core2D.UI.EtoForms.Gtk2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("Test2d.UI.EtoForms.Gtk2")]
+[assembly: AssemblyProduct("Core2D.UI.EtoForms.Gtk2")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

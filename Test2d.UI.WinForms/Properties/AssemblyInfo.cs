@@ -7,10 +7,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Test2d.UI.WinForms")]
+[assembly: AssemblyTitle("Core2D.UI.WinForms")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("Test2d.UI.WinForms")]
+[assembly: AssemblyProduct("Core2D.UI.WinForms")]
 [assembly: AssemblyCulture("")]
 
 // This sets the default COM visibility of types in the assembly to invisible.
