@@ -3,14 +3,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4868069E-3AD4-497E-9B8E-148D1EEACFD7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestPerspex</RootNamespace>
     <AssemblyName>Core2D.UI.Perspex.Windows</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -29,6 +27,12 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <BaseAddress>4194304</BaseAddress>
+    <Prefer32Bit>True</Prefer32Bit>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +41,11 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <BaseAddress>4194304</BaseAddress>
+    <Prefer32Bit>True</Prefer32Bit>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
@@ -50,108 +59,12 @@
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Perspex.Animation, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Animation.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Perspex.Application, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Application.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Perspex.Base, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Base.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Perspex.Controls, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Controls.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Perspex.Diagnostics, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Diagnostics.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Perspex.HtmlRenderer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.HtmlRenderer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Perspex.Input, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Input.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Perspex.Interactivity, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Interactivity.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Perspex.Layout, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Layout.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Perspex.Markup, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Markup.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Perspex.Markup.Xaml, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Markup.Xaml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Perspex.ReactiveUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.ReactiveUI.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Perspex.SceneGraph, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.SceneGraph.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Perspex.Styling, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Styling.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Perspex.Themes.Default, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Themes.Default.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.1.5.9\lib\net45\Serilog.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Serilog.FullNetFx, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.1.5.9\lib\net45\Serilog.FullNetFx.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Splat.1.6.2\lib\Net45\Splat.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Sprache, Version=2.0.0.47, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Sprache.2.0.0.47\lib\portable-net4+netcore45+win8+wp8+sl5+MonoAndroid1+MonoTouch1\Sprache.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections" />
-    <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO" />
     <Reference Include="System.ObjectModel" />
-    <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Runtime" />
     <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Windows.Forms" />
@@ -161,6 +74,78 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="Perspex.Animation, Version=0.0.0.1, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Animation.dll</HintPath>
+    </Reference>
+    <Reference Include="Perspex.Application, Version=0.0.0.1, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Application.dll</HintPath>
+    </Reference>
+    <Reference Include="Perspex.Base, Version=0.0.0.1, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Perspex.Controls, Version=0.0.0.1, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Perspex.Diagnostics, Version=0.0.0.1, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="Perspex.HtmlRenderer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.HtmlRenderer.dll</HintPath>
+    </Reference>
+    <Reference Include="Perspex.Input, Version=0.0.0.1, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Perspex.Interactivity, Version=0.0.0.1, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Perspex.Layout, Version=0.0.0.1, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Layout.dll</HintPath>
+    </Reference>
+    <Reference Include="Perspex.Markup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Markup.dll</HintPath>
+    </Reference>
+    <Reference Include="Perspex.Markup.Xaml, Version=0.0.0.1, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Markup.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="Perspex.ReactiveUI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.ReactiveUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Perspex.SceneGraph, Version=0.0.0.1, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.SceneGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="Perspex.Styling, Version=0.0.0.1, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Styling.dll</HintPath>
+    </Reference>
+    <Reference Include="Perspex.Themes.Default, Version=0.0.0.1, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Perspex.9999.0.603-nightly\lib\portable-windows8+net45\Perspex.Themes.Default.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10">
+      <HintPath>..\packages\Serilog.1.5.9\lib\net45\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.FullNetFx, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10">
+      <HintPath>..\packages\Serilog.1.5.9\lib\net45\Serilog.FullNetFx.dll</HintPath>
+    </Reference>
+    <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Splat.1.6.2\lib\Net45\Splat.dll</HintPath>
+    </Reference>
+    <Reference Include="Sprache, Version=2.0.0.47, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Sprache.2.0.0.47\lib\portable-net4+netcore45+win8+wp8+sl5+MonoAndroid1+MonoTouch1\Sprache.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
@@ -187,35 +172,35 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj">
-      <Project>{d40b3bcd-0a26-40bb-960b-9464d248c934}</Project>
+      <Project>{D40B3BCD-0A26-40BB-960B-9464D248C934}</Project>
       <Name>FileWriter.Dxf</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dependencies\FileWriter.Pdf-core\FileWriter.Pdf-core.csproj">
-      <Project>{ec0efa51-83f0-4439-be9f-faebd3418c94}</Project>
+      <Project>{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}</Project>
       <Name>FileWriter.Pdf-core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dependencies\Log.Trace\Log.Trace.csproj">
-      <Project>{68a36926-df55-4f05-9f89-b9ab1463227e}</Project>
+      <Project>{68A36926-DF55-4F05-9F89-B9AB1463227E}</Project>
       <Name>Log.Trace</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dependencies\Renderer.Dxf\Renderer.Dxf.csproj">
-      <Project>{acc2c898-b49b-4ed9-b18c-389f50801b39}</Project>
+      <Project>{ACC2C898-B49B-4ED9-B18C-389F50801B39}</Project>
       <Name>Renderer.Dxf</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
-      <Project>{08e4e8bf-e513-4a8d-835c-1eed6ecb4a21}</Project>
+      <Project>{08E4E8BF-E513-4A8D-835C-1EED6ECB4A21}</Project>
       <Name>Serializer.Newtonsoft</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dependencies\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
-      <Project>{64bae9e8-93b5-4edc-8ad6-5a3dcba8c051}</Project>
+      <Project>{64BAE9E8-93B5-4EDC-8AD6-5A3DCBA8C051}</Project>
       <Name>TextFieldReader.CsvHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
-      <Project>{87302d12-1184-402d-bf23-a5699f3d0bb4}</Project>
+      <Project>{87302D12-1184-402D-BF23-A5699F3D0BB4}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core2D\Core2D.csproj">
-      <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
+      <Project>{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}</Project>
       <Name>Core2D</Name>
     </ProjectReference>
   </ItemGroup>
