@@ -42,7 +42,6 @@ namespace TestPerspex
                 () =>
                 {
                     InitializeLayers();
-                    ResizeDrawable();
 
                     var container = context.Editor.Project.CurrentContainer;
                     if (container != null)
@@ -52,6 +51,11 @@ namespace TestPerspex
                 };
             
             _state = new ZoomState(context);
+
+            if (context.Renderers[0].State.EnableAutofit)
+            {
+                AutoFit(this.Bounds.Width, this.Bounds.Height);
+            }
 
             context.Commands.ZoomResetCommand =
                 Command.Create(
@@ -69,7 +73,7 @@ namespace TestPerspex
                 Command.Create(
                     () => 
                     {
-                        _state.AutoFit();
+                        AutoFit(this.Bounds.Width, this.Bounds.Height);
                         if (context.Invalidate != null)
                         {
                             context.Invalidate();
@@ -145,8 +149,34 @@ namespace TestPerspex
         /// <summary>
         /// 
         /// </summary>
-        private void ResizeDrawable()
+        /// <param name="finalSize"></param>
+        /// <returns></returns>
+        protected override Size ArrangeOverride(Size finalSize)
         {
+            var context = this.DataContext as EditorContext;
+            if (context != null
+                && context.Editor != null
+                && context.Editor.Project != null)
+            {
+                if (context.Renderers[0].State.EnableAutofit)
+                {
+                    AutoFit(finalSize.Width, finalSize.Height);
+                }
+            }
+
+            return base.ArrangeOverride(finalSize);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public void AutoFit(double width, double height)
+        {
+            if (_state == null)
+                return;
+
             var context = this.DataContext as EditorContext;
             if (context == null
                 || context.Editor == null
@@ -157,8 +187,13 @@ namespace TestPerspex
             if (container == null)
                 return;
 
-            this.Width = container.Width;
-            this.Height = container.Height;
+            _state.AutoFit(
+                width,
+                height,
+                container.Width,
+                container.Height);
+
+            context.Invalidate();
         }
 
         /// <summary>
@@ -307,7 +342,6 @@ namespace TestPerspex
             {
                 InitializeDrawable();
                 InitializeLayers();
-                ResizeDrawable();
             }
 
             Draw(context);
