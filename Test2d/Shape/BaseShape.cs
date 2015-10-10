@@ -3,10 +3,10 @@
 using System;
 using System.Collections.Immutable;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
-    /// Base class for Test2d shapes.
+    /// Base class for Core2D shapes.
     /// </summary>
     public abstract class BaseShape : ObservableObject
     {

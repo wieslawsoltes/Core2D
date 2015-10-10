@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     /// 

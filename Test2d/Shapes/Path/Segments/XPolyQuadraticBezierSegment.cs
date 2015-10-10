@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     /// 

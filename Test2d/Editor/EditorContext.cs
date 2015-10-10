@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     ///

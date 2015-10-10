@@ -4,10 +4,10 @@ using System;
 using System.Collections.Immutable;
 using System.Linq;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
-    /// Test2d data context.
+    /// Core2D data context.
     /// </summary>
     public class Data : ObservableObject
     {

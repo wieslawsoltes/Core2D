@@ -8,7 +8,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     /// 

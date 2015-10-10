@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     /// 

@@ -5,7 +5,7 @@ using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     /// 

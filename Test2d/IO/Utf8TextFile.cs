@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     /// 

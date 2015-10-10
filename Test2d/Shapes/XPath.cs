@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Immutable;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     /// 

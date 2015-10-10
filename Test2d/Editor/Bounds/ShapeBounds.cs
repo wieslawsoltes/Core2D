@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     /// 

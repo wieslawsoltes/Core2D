@@ -3,7 +3,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     /// 

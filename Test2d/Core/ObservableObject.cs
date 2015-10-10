@@ -4,7 +4,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     /// 

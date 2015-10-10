@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test2d
+namespace Core2D
 {
     /// <summary>
     /// Factory used to create shapes.
