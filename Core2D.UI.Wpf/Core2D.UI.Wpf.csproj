@@ -99,7 +99,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="..\Test2d\Properties\SharedAssemblyInfo.cs">
+    <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Controls\ContainerControl.xaml.cs">
@@ -328,7 +328,7 @@
       <Project>{87302d12-1184-402d-bf23-a5699f3d0bb4}</Project>
       <Name>TextFieldWriter.CsvHelper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Test2d\Core2D.csproj">
+    <ProjectReference Include="..\Core2D\Core2D.csproj">
       <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
       <Name>Core2D</Name>
     </ProjectReference>

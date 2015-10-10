@@ -59,7 +59,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Test2d\Properties\SharedAssemblyInfo.cs">
+    <Compile Include="..\..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Path\XPathGeometryConverter.cs" />
@@ -70,7 +70,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Test2d\Core2D.csproj">
+    <ProjectReference Include="..\..\Core2D\Core2D.csproj">
       <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
       <Name>Core2D</Name>
     </ProjectReference>

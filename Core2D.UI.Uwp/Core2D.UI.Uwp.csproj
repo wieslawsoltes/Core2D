@@ -95,7 +95,7 @@
     <Compile Include="..\Dependencies\Serializer.Newtonsoft\NewtonsoftSerializer.cs">
       <Link>Serializer\NewtonsoftSerializer.cs</Link>
     </Compile>
-    <Compile Include="..\Test2d\Properties\SharedAssemblyInfo.cs">
+    <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="App.xaml.cs">
@@ -136,7 +136,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Portable\Test2d\Core2D.csproj">
+    <ProjectReference Include="..\Core2D.Portable\Core2D.csproj">
       <Project>{1d45ea4f-d2af-447a-8a8e-e94f19be226a}</Project>
       <Name>Core2D</Name>
     </ProjectReference>
