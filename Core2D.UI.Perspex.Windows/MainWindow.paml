@@ -1508,7 +1508,7 @@
         </TabControl>
         <GridSplitter Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Width="10"/>
         <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" ClipToBounds="True">
-            <local:Drawable/>
+            <local:Drawable HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Grid>
         <GridSplitter Grid.Row="1" Grid.RowSpan="2" Grid.Column="3" Width="10"/>
         <TabControl Grid.Row="1" Grid.Column="4">
