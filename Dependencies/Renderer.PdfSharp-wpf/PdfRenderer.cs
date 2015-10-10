@@ -15,17 +15,17 @@ namespace PdfSharp
     /// <summary>
     /// 
     /// </summary>
-    public class PdfRenderer : Test2d.ObservableObject, Test2d.IRenderer
+    public class PdfRenderer : Core2D.ObservableObject, Core2D.IRenderer
     {
         private bool _enableImageCache = true;
         private IDictionary<string, XImage> _biCache;
         private Func<double, double> _scaleToPage;
-        private Test2d.RendererState _state = new Test2d.RendererState();
+        private Core2D.RendererState _state = new Core2D.RendererState();
 
         /// <summary>
         /// 
         /// </summary>
-        public Test2d.RendererState State
+        public Core2D.RendererState State
         {
             get { return _state; }
             set { Update(ref _state, value); }
@@ -45,7 +45,7 @@ namespace PdfSharp
         /// 
         /// </summary>
         /// <returns></returns>
-        public static Test2d.IRenderer Create()
+        public static Core2D.IRenderer Create()
         {
             return new PdfRenderer();
         }
@@ -55,7 +55,7 @@ namespace PdfSharp
         /// </summary>
         /// <param name="path"></param>
         /// <param name="container"></param>
-        public void Save(string path, Test2d.Container container)
+        public void Save(string path, Core2D.Container container)
         {
             using (var pdf = new PdfDocument())
             {
@@ -69,7 +69,7 @@ namespace PdfSharp
         /// </summary>
         /// <param name="path"></param>
         /// <param name="document"></param>
-        public void Save(string path, Test2d.Document document)
+        public void Save(string path, Core2D.Document document)
         {
             using (var pdf = new PdfDocument())
             {
@@ -107,7 +107,7 @@ namespace PdfSharp
         /// </summary>
         /// <param name="path"></param>
         /// <param name="project"></param>
-        public void Save(string path, Test2d.Project project)
+        public void Save(string path, Core2D.Project project)
         {
             using (var pdf = new PdfDocument())
             {
@@ -161,7 +161,7 @@ namespace PdfSharp
         /// <param name="pdf"></param>
         /// <param name="container"></param>
         /// <returns></returns>
-        private PdfPage Add(PdfDocument pdf, Test2d.Container container)
+        private PdfPage Add(PdfDocument pdf, Core2D.Container container)
         {
             // create A4 page with landscape orientation
             PdfPage page = pdf.AddPage();
@@ -186,7 +186,7 @@ namespace PdfSharp
                         DrawBackgroundInternal(
                             gfx,
                             container.Template.Background,
-                            Test2d.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
+                            Core2D.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
                     }
                     Draw(gfx, container.Template, container.Properties, null);
                 }
@@ -197,7 +197,7 @@ namespace PdfSharp
                     DrawBackgroundInternal(
                         gfx,
                         container.Background,
-                        Test2d.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
+                        Core2D.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
                 }
                 Draw(gfx, container, container.Properties, null);
             }
@@ -210,7 +210,7 @@ namespace PdfSharp
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        private static XColor ToXColor(Test2d.ArgbColor color)
+        private static XColor ToXColor(Core2D.ArgbColor color)
         {
             return XColor.FromArgb(
                 color.A,
@@ -225,18 +225,18 @@ namespace PdfSharp
         /// <param name="style"></param>
         /// <param name="scale"></param>
         /// <returns></returns>
-        private static XPen ToXPen(Test2d.BaseStyle style, Func<double, double> scale)
+        private static XPen ToXPen(Core2D.BaseStyle style, Func<double, double> scale)
         {
             var pen = new XPen(ToXColor(style.Stroke), XUnit.FromPresentation(style.Thickness));
             switch (style.LineCap)
             {
-                case Test2d.LineCap.Flat:
+                case Core2D.LineCap.Flat:
                     pen.LineCap = XLineCap.Flat;
                     break;
-                case Test2d.LineCap.Square:
+                case Core2D.LineCap.Square:
                     pen.LineCap = XLineCap.Square;
                     break;
-                case Test2d.LineCap.Round:
+                case Core2D.LineCap.Round:
                     pen.LineCap = XLineCap.Round;
                     break;
             }
@@ -254,7 +254,7 @@ namespace PdfSharp
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        private static XSolidBrush ToXSolidBrush(Test2d.ArgbColor color)
+        private static XSolidBrush ToXSolidBrush(Core2D.ArgbColor color)
         {
             return new XSolidBrush(ToXColor(color));
         }
@@ -356,7 +356,7 @@ namespace PdfSharp
         private void DrawGridInternal(
             XGraphics gfx,
             XPen stroke,
-            ref Test2d.Rect2 rect,
+            ref Core2D.Rect2 rect,
             double offsetX, double offsetY,
             double cellWidth, double cellHeight,
             bool isStroked)
@@ -397,7 +397,7 @@ namespace PdfSharp
         /// <param name="gfx"></param>
         /// <param name="color"></param>
         /// <param name="rect"></param>
-        private void DrawBackgroundInternal(XGraphics gfx, Test2d.ArgbColor color, Test2d.Rect2 rect)
+        private void DrawBackgroundInternal(XGraphics gfx, Core2D.ArgbColor color, Core2D.Rect2 rect)
         {
             gfx.DrawRectangle(
                 null,
@@ -435,7 +435,7 @@ namespace PdfSharp
         /// <param name="container"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.Container container, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Core2D.Container container, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             foreach (var layer in container.Layers)
             {
@@ -453,7 +453,7 @@ namespace PdfSharp
         /// <param name="layer"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.Layer layer, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Core2D.Layer layer, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             foreach (var shape in layer.Shapes)
             {
@@ -473,7 +473,7 @@ namespace PdfSharp
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XLine line, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Core2D.XLine line, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             if (!line.IsStroked)
                 return;
@@ -494,7 +494,7 @@ namespace PdfSharp
             double _x2 = line.End.X + dx;
             double _y2 = line.End.Y + dy;
 
-            Test2d.XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
+            Core2D.XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
 
             double x1 = _scaleToPage(_x1);
             double y1 = _scaleToPage(_y1);
@@ -525,12 +525,12 @@ namespace PdfSharp
             switch (sas.ArrowType)
             {
                 default:
-                case Test2d.ArrowType.None:
+                case Core2D.ArrowType.None:
                     {
                         pt1 = new XPoint(x1, y1);
                     }
                     break;
-                case Test2d.ArrowType.Rectangle:
+                case Core2D.ArrowType.Rectangle:
                     {
                         pt1 = t1.Transform(new XPoint(x1 - sizeX1, y1));
                         var rect = new XRect(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
@@ -540,7 +540,7 @@ namespace PdfSharp
                         _gfx.Restore();
                     }
                     break;
-                case Test2d.ArrowType.Ellipse:
+                case Core2D.ArrowType.Ellipse:
                     {
                         pt1 = t1.Transform(new XPoint(x1 - sizeX1, y1));
                         _gfx.Save();
@@ -550,7 +550,7 @@ namespace PdfSharp
                         _gfx.Restore();
                     }
                     break;
-                case Test2d.ArrowType.Arrow:
+                case Core2D.ArrowType.Arrow:
                     {
                         pt1 = t1.Transform(new XPoint(x1, y1));
                         var p11 = t1.Transform(new XPoint(x1 - sizeX1, y1 + sizeY1));
@@ -571,12 +571,12 @@ namespace PdfSharp
             switch (eas.ArrowType)
             {
                 default:
-                case Test2d.ArrowType.None:
+                case Core2D.ArrowType.None:
                     {
                         pt2 = new XPoint(x2, y2);
                     }
                     break;
-                case Test2d.ArrowType.Rectangle:
+                case Core2D.ArrowType.Rectangle:
                     {
                         pt2 = t2.Transform(new XPoint(x2 - sizeX2, y2));
                         var rect = new XRect(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
@@ -586,7 +586,7 @@ namespace PdfSharp
                         _gfx.Restore();
                     }
                     break;
-                case Test2d.ArrowType.Ellipse:
+                case Core2D.ArrowType.Ellipse:
                     {
                         pt2 = t2.Transform(new XPoint(x2 - sizeX2, y2));
                         _gfx.Save();
@@ -596,7 +596,7 @@ namespace PdfSharp
                         _gfx.Restore();
                     }
                     break;
-                case Test2d.ArrowType.Arrow:
+                case Core2D.ArrowType.Arrow:
                     {
                         pt2 = t2.Transform(new XPoint(x2, y2));
                         var p11 = t2.Transform(new XPoint(x2 - sizeX2, y2 + sizeY2));
@@ -621,11 +621,11 @@ namespace PdfSharp
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XRectangle rectangle, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Core2D.XRectangle rectangle, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             var _gfx = gfx as XGraphics;
 
-            var rect = Test2d.Rect2.Create(
+            var rect = Core2D.Rect2.Create(
                 rectangle.TopLeft,
                 rectangle.BottomRight,
                 dx, dy);
@@ -680,11 +680,11 @@ namespace PdfSharp
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XEllipse ellipse, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Core2D.XEllipse ellipse, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             var _gfx = gfx as XGraphics;
 
-            var rect = Test2d.Rect2.Create(
+            var rect = Core2D.Rect2.Create(
                 ellipse.TopLeft,
                 ellipse.BottomRight,
                 dx, dy);
@@ -728,11 +728,11 @@ namespace PdfSharp
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XArc arc, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Core2D.XArc arc, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             var _gfx = gfx as XGraphics;
 
-            var a = Test2d.GdiArc.FromXArc(arc, dx, dy);
+            var a = Core2D.GdiArc.FromXArc(arc, dx, dy);
 
             if (arc.IsFilled)
             {
@@ -785,7 +785,7 @@ namespace PdfSharp
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XBezier bezier, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Core2D.XBezier bezier, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -843,7 +843,7 @@ namespace PdfSharp
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XQBezier qbezier, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Core2D.XQBezier qbezier, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -910,7 +910,7 @@ namespace PdfSharp
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XText text, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Core2D.XText text, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             var _gfx = gfx as XGraphics;
 
@@ -921,22 +921,22 @@ namespace PdfSharp
             var options = new XPdfFontOptions(PdfFontEncoding.Unicode);
 
             var fontStyle = XFontStyle.Regular;
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Bold))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Bold))
             {
                 fontStyle |= XFontStyle.Bold;
             }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Italic))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Italic))
             {
                 fontStyle |= XFontStyle.Italic;
             }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Underline))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline))
             {
                 fontStyle |= XFontStyle.Underline;
             }
 
-            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Strikeout))
+            if (text.Style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
             {
                 fontStyle |= XFontStyle.Strikeout;
             }
@@ -947,7 +947,7 @@ namespace PdfSharp
                 fontStyle,
                 options);
 
-            var rect = Test2d.Rect2.Create(
+            var rect = Core2D.Rect2.Create(
                 text.TopLeft,
                 text.BottomRight,
                 dx, dy);
@@ -961,26 +961,26 @@ namespace PdfSharp
             var format = new XStringFormat();
             switch (text.Style.TextStyle.TextHAlignment)
             {
-                case Test2d.TextHAlignment.Left:
+                case Core2D.TextHAlignment.Left:
                     format.Alignment = XStringAlignment.Near;
                     break;
-                case Test2d.TextHAlignment.Center:
+                case Core2D.TextHAlignment.Center:
                     format.Alignment = XStringAlignment.Center;
                     break;
-                case Test2d.TextHAlignment.Right:
+                case Core2D.TextHAlignment.Right:
                     format.Alignment = XStringAlignment.Far;
                     break;
             }
 
             switch (text.Style.TextStyle.TextVAlignment)
             {
-                case Test2d.TextVAlignment.Top:
+                case Core2D.TextVAlignment.Top:
                     format.LineAlignment = XLineAlignment.Near;
                     break;
-                case Test2d.TextVAlignment.Center:
+                case Core2D.TextVAlignment.Center:
                     format.LineAlignment = XLineAlignment.Center;
                     break;
-                case Test2d.TextVAlignment.Bottom:
+                case Core2D.TextVAlignment.Bottom:
                     format.LineAlignment = XLineAlignment.Far;
                     break;
             }
@@ -1002,11 +1002,11 @@ namespace PdfSharp
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XImage image, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Core2D.XImage image, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             var _gfx = gfx as XGraphics;
 
-            var rect = Test2d.Rect2.Create(
+            var rect = Core2D.Rect2.Create(
                 image.TopLeft,
                 image.BottomRight,
                 dx, dy);
@@ -1081,7 +1081,7 @@ namespace PdfSharp
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Test2d.XPath path, double dx, double dy, ImmutableArray<Test2d.ShapeProperty> db, Test2d.Record r)
+        public void Draw(object gfx, Core2D.XPath path, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             var _gfx = gfx as XGraphics;
 

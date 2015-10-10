@@ -47,16 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Test2d\Properties\SharedAssemblyInfo.cs">
+    <Compile Include="..\..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="EmfWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Test2d\Test2d.csproj">
+    <ProjectReference Include="..\..\Core2D\Core2D.csproj">
       <Project>{8c419cd0-f8a2-4a85-b72b-84bc7ff59616}</Project>
-      <Name>Test2d</Name>
+      <Name>Core2D</Name>
     </ProjectReference>
     <ProjectReference Include="..\Renderer.WinForms\Renderer.WinForms.csproj">
       <Project>{3dc476e6-5032-4888-9337-221b88653c40}</Project>

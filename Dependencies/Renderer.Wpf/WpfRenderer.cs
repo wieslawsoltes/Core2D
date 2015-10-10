@@ -12,7 +12,7 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Test2d;
+using Core2D;
 
 namespace Test
 {
@@ -1125,13 +1125,13 @@ namespace Test
                 var ci = CultureInfo.InvariantCulture;
 
                 var fontStyle = System.Windows.FontStyles.Normal;
-                if (style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Italic))
+                if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Italic))
                 {
                     fontStyle = System.Windows.FontStyles.Italic;
                 }
 
                 var fontWeight = FontWeights.Regular;
-                if (style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Bold))
+                if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Bold))
                 {
                     fontWeight = FontWeights.Bold;
                 }
@@ -1150,18 +1150,18 @@ namespace Test
                     style.TextStyle.FontSize > 0.0 ? style.TextStyle.FontSize : double.Epsilon,
                     stroke.Brush, null, TextFormattingMode.Ideal);
 
-                if (style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Underline)
-                    || style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Strikeout))
+                if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline)
+                    || style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
                 {
                     var decorations = new TextDecorationCollection();
 
-                    if (style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Underline))
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Underline))
                     {
                         decorations = new TextDecorationCollection(
                             decorations.Union(TextDecorations.Underline));
                     }
 
-                    if (style.TextStyle.FontStyle.Flags.HasFlag(Test2d.FontStyleFlags.Strikeout))
+                    if (style.TextStyle.FontStyle.Flags.HasFlag(Core2D.FontStyleFlags.Strikeout))
                     {
                         decorations = new TextDecorationCollection(
                             decorations.Union(TextDecorations.Strikethrough));
