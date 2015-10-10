@@ -48,8 +48,8 @@ rmdir /Q /S Dependencies\TextFieldReader.CsvHelper\obj
 rmdir /Q /S Dependencies\TextFieldWriter.CsvHelper\bin
 rmdir /Q /S Dependencies\TextFieldWriter.CsvHelper\obj
 
-rmdir /Q /S Portable\Core2D\bin
-rmdir /Q /S Portable\Core2D\obj
+rmdir /Q /S Core2D.Portable\bin
+rmdir /Q /S Core2D.Portable\obj
 
 rmdir /Q /S Core2D\bin
 rmdir /Q /S Core2D\obj
