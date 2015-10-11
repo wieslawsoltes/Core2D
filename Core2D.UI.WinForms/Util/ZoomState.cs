@@ -1,8 +1,6 @@
 ﻿﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
-using System.Diagnostics;
-using Core2D;
 
 namespace Core2D
 {
@@ -12,37 +10,36 @@ namespace Core2D
     public class ZoomState
     {
         private EditorContext _context;
-        private Action _invalidate;
 
         /// <summary>
         /// 
         /// </summary>
-        public float MinimumZoom = 0.01f;
+        public double MinimumZoom = 0.01;
 
         /// <summary>
         /// 
         /// </summary>
-        public float MaximumZoom = 1000.0f;
+        public double MaximumZoom = 1000.0;
 
         /// <summary>
         /// 
         /// </summary>
-        public float ZoomSpeed = 3.5f;
+        public double ZoomSpeed = 3.5;
 
         /// <summary>
         /// 
         /// </summary>
-        public float Zoom = 1f;
+        public double Zoom = 1.0;
 
         /// <summary>
         /// 
         /// </summary>
-        public float PanX = 0f;
+        public double PanX = 0.0;
 
         /// <summary>
         /// 
         /// </summary>
-        public float PanY = 0f;
+        public double PanY = 0.0;
 
         /// <summary>
         /// 
@@ -52,67 +49,30 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public float PanOffsetX = 0f;
+        public double StartX = 0.0;
 
         /// <summary>
         /// 
         /// </summary>
-        public float PanOffsetY = 0f;
+        public double StartY = 0.0;
 
         /// <summary>
         /// 
         /// </summary>
-        public float OriginX = 0f;
+        public double OriginX = 0.0;
 
         /// <summary>
         /// 
         /// </summary>
-        public float OriginY = 0f;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public float StartX = 0f;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public float StartY = 0f;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public float WheelOriginX = 0f;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public float WheelOriginY = 0f;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool HaveWheelOrigin = false;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public float WheelOffsetX = 0f;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public float WheelOffsetY = 0f;
-
+        public double OriginY = 0.0;
+        
         /// <summary>
         /// 
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="invalidate"></param>
-        public ZoomState(EditorContext context, Action invalidate)
+        public ZoomState(EditorContext context)
         {
             _context = context;
-            _invalidate = invalidate;
         }
 
         /// <summary>
@@ -120,7 +80,7 @@ namespace Core2D
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void LeftDown(float x, float y)
+        public void LeftDown(double x, double y)
         {
             if (_context.Editor.IsLeftDownAvailable())
             {
@@ -135,7 +95,7 @@ namespace Core2D
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void LeftUp(float x, float y)
+        public void LeftUp(double x, double y)
         {
             if (_context.Editor.IsLeftUpAvailable())
             {
@@ -144,17 +104,16 @@ namespace Core2D
                     (y - PanY) / Zoom);
             }
         }
-
+        
         /// <summary>
         /// 
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void RightDown(float x, float y)
+        public void RightDown(double x, double y)
         {
             if (!_context.Editor.CancelAvailable)
             {
-                //Debug.Print("Pan Offset: {0}, {1}", PanOffsetX, PanOffsetY);
                 StartX = x;
                 StartY = y;
                 OriginX = PanX;
@@ -174,14 +133,11 @@ namespace Core2D
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void RightUp(float x, float y)
+        public void RightUp(double x, double y)
         {
             if (!_context.Editor.CancelAvailable)
             {
-                //PanOffsetX += PanX - OriginX;
-                //PanOffsetY += PanY - OriginY;
-                //Debug.Print("Pan Offset: {0}, {1}", PanOffsetX, PanOffsetY);
-                IsPanMode = false;      
+                IsPanMode = false;
             }
             else if (_context.Editor.IsRightUpAvailable())
             {
@@ -196,17 +152,20 @@ namespace Core2D
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void Move(float x, float y)
+        public void Move(double x, double y)
         {
             if (IsPanMode)
             {
-                float vx = StartX - x;
-                float vy = StartY - y;
+                double vx = StartX - x;
+                double vy = StartY - y;
                 PanX = OriginX - vx;
                 PanY = OriginY - vy;
                 _context.Editor.Renderers[0].State.PanX = PanX;
                 _context.Editor.Renderers[0].State.PanY = PanY;
-                _invalidate();
+                if (_context.Invalidate != null)
+                {
+                    _context.Invalidate();
+                }
             }
             else
             {
@@ -225,33 +184,22 @@ namespace Core2D
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="delta"></param>
-        public void Wheel(float x, float y, float delta)
+        public void Wheel(double x, double y, double delta)
         {
-            float zoom = Zoom;
-            zoom = delta > 0 ?
+            double zoom = Zoom;
+            zoom = delta > 0.0 ?
                 zoom + zoom / ZoomSpeed :
                 zoom - zoom / ZoomSpeed;
 
             if (zoom < MinimumZoom || zoom > MaximumZoom)
                 return;
 
-            //if (!HaveWheelOrigin)
-            //{
-            //    WheelOriginX = x;
-            //    WheelOriginY = y;
-            //    HaveWheelOrigin = true;
-            //}
-
-            //WheelOffsetX = x - WheelOriginX;
-            //WheelOffsetY = y - WheelOriginY;
-            //Debug.Print("Wheel Offset: {0}, {1}", WheelOffsetX, WheelOffsetY);
-
-            ZoomTo(
-                zoom,
-                x - PanOffsetX - WheelOffsetX,
-                y - PanOffsetY - WheelOffsetY);
-
-            _invalidate();
+            ZoomTo(zoom, x, y);
+            
+            if (_context.Invalidate != null)
+            {
+                _context.Invalidate();
+            }
         }
 
         /// <summary>
@@ -260,10 +208,10 @@ namespace Core2D
         /// <param name="zoom"></param>
         /// <param name="rx"></param>
         /// <param name="ry"></param>
-        public void ZoomTo(float zoom, float rx, float ry)
+        public void ZoomTo(double zoom, double rx, double ry)
         {
-            float ax = (rx * Zoom) + PanX;
-            float ay = (ry * Zoom) + PanY;
+            double ax = (rx * Zoom) + PanX;
+            double ay = (ry * Zoom) + PanY;
             Zoom = zoom;
             PanX = ax - (rx * Zoom);
             PanY = ay - (ry * Zoom);
@@ -277,16 +225,9 @@ namespace Core2D
         /// </summary>
         public void ResetZoom()
         {
-            Zoom = 1f;
-            PanX = 0f;
-            PanY = 0f;
-            PanOffsetX = 0f;
-            PanOffsetY = 0f;
-            WheelOriginX = 0f;
-            WheelOriginY = 0f;
-            WheelOffsetX = 0f;
-            WheelOffsetY = 0f;
-            HaveWheelOrigin = false;
+            Zoom = 1.0;
+            PanX = 0.0;
+            PanY = 0.0;
             _context.Editor.Renderers[0].State.Zoom = Zoom;
             _context.Editor.Renderers[0].State.PanX = PanX;
             _context.Editor.Renderers[0].State.PanY = PanY;
@@ -299,11 +240,11 @@ namespace Core2D
         /// <param name="height"></param>
         /// <param name="twidth"></param>
         /// <param name="theight"></param>
-        public void AutoFit(float width, float height, float twidth, float theight)
+        public void AutoFit(double width, double height, double twidth, double theight)
         {
-            float zoom = Math.Min(width / twidth, height / theight) - 0.001f;
-            float px = (width - (twidth * zoom)) / 2.0f;
-            float py = (height - (theight * zoom)) / 2.0f;
+            double zoom = Math.Min(width / twidth, height / theight) - 0.001;
+            double px = (width - (twidth * zoom)) / 2.0;
+            double py = (height - (theight * zoom)) / 2.0;
             Zoom = zoom;
             PanX = px;
             PanY = py;

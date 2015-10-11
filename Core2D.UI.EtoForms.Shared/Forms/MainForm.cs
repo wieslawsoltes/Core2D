@@ -74,7 +74,7 @@ namespace TestEtoForms
 
             _context.Invalidate = this.UpdateAndInvalidate;
 
-            _state = new Core2D.ZoomState(_context, this.UpdateAndInvalidate);
+            _state = new Core2D.ZoomState(_context);
 
             DataContext = _context;
         }
@@ -849,8 +849,8 @@ namespace TestEtoForms
             g.AntiAlias = false;
             g.PixelOffsetMode = PixelOffsetMode.Half;
 
-            g.TranslateTransform(_state.PanX, _state.PanY);
-            g.ScaleTransform(_state.Zoom);
+            g.TranslateTransform((float)_state.PanX, (float)_state.PanY);
+            g.ScaleTransform((float)_state.Zoom);
 
             var brush = new SolidBrush(_background);
             g.Clear(brush);

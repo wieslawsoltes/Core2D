@@ -24,11 +24,6 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
-        public Action InvalidateContainer { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public void Initialize()
         {
             this.SetStyle(
@@ -40,7 +35,7 @@ namespace TestWinForms
 
             this.BackColor = Color.Transparent;
 
-            _state = new ZoomState(Context, InvalidateContainer);
+            _state = new ZoomState(Context);
 
             this.MouseDown +=
                 (sender, e) =>
@@ -209,8 +204,8 @@ namespace TestWinForms
 
             var gs = g.Save();
             
-            g.TranslateTransform(_state.PanX, _state.PanY);
-            g.ScaleTransform(_state.Zoom, _state.Zoom);
+            g.TranslateTransform((float)_state.PanX, (float)_state.PanY);
+            g.ScaleTransform((float)_state.Zoom, (float)_state.Zoom);
 
             if (container.Template != null)
             {

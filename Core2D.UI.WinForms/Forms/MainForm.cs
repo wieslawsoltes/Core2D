@@ -91,6 +91,8 @@ namespace TestWinForms
             context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
             context.Editor.GetImageKey = async () => await GetImageKey();
 
+            context.Invalidate = this.InvalidateContainer;
+
             DataContext = context;
         }
 
@@ -119,7 +121,6 @@ namespace TestWinForms
             _drawable = new Drawable();
   
             _drawable.Context = context;
-            _drawable.InvalidateContainer = InvalidateContainer;
             _drawable.Initialize();
 
             _drawable.Dock = DockStyle.Fill;

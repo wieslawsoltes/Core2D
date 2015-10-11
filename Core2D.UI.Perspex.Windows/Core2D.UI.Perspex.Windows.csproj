@@ -148,6 +148,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Core2D.UI.WinForms\Util\ZoomState.cs">
+      <Link>Util\ZoomState.cs</Link>
+    </Compile>
     <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
@@ -156,7 +159,6 @@
     <Compile Include="Renderer\MatrixHelper.cs" />
     <Compile Include="Renderer\PerspexRenderer.cs" />
     <Compile Include="Renderer\XPathGeometryConverter.cs" />
-    <Compile Include="Util\ZoomState.cs" />
     <EmbeddedResource Include="MainWindow.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
