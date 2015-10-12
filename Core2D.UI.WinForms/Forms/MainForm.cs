@@ -160,6 +160,9 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
         private void HandleFileDialogs()
         {
             // open container
