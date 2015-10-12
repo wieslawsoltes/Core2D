@@ -211,7 +211,6 @@ namespace TestEtoForms
                 };
 
             SetContainerInvalidation();
-            SetDrawableSize();
         }
 
         /// <summary>
@@ -757,19 +756,6 @@ namespace TestEtoForms
         /// <summary>
         /// 
         /// </summary>
-        private void SetDrawableSize()
-        {
-            var container = _context.Editor.Project.CurrentContainer;
-            if (container == null)
-                return;
-            
-            _drawable.Width = (int)container.Width;
-            _drawable.Height = (int)container.Height;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         private void SetContainerInvalidation()
         {
             var container = _context.Editor.Project.CurrentContainer;
@@ -810,7 +796,6 @@ namespace TestEtoForms
         private void UpdateAndInvalidate()
         {
             SetContainerInvalidation();
-            SetDrawableSize();
 
             var container = _context.Editor.Project.CurrentContainer;
             if (container == null)
