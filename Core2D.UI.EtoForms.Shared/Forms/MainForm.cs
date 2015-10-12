@@ -85,7 +85,12 @@ namespace TestEtoForms
         private void InitializeDrawable()
         {
             _drawable = new Drawable(false);
-            _drawable.Paint += (s, e) => Draw(e.Graphics);
+            
+            _drawable.Paint += 
+                (s, e) =>
+                {
+                    Draw(e.Graphics);
+                };
 
             _drawable.MouseDown +=
                 (sender, e) =>
