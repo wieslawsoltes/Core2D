@@ -61,7 +61,7 @@ namespace TestPerspex
                 Command.Create(
                     () => 
                     {
-                        _state.ResetZoom();
+                        ResetZoom(this.Bounds.Width, this.Bounds.Height);
                         if (context.Invalidate != null)
                         {
                             context.Invalidate();
@@ -167,6 +167,35 @@ namespace TestPerspex
             return base.ArrangeOverride(finalSize);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public void ResetZoom(double width, double height)
+        {
+            if (_state == null)
+                return;
+
+            var context = this.DataContext as EditorContext;
+            if (context == null
+                || context.Editor == null
+                || context.Editor.Project == null)
+                return;
+
+            var container = context.Editor.Project.CurrentContainer;
+            if (container == null)
+                return;
+
+            _state.ResetZoom(
+                width,
+                height,
+                container.Width,
+                container.Height);
+
+            context.Invalidate();
+        }
+        
         /// <summary>
         /// 
         /// </summary>
