@@ -85,8 +85,6 @@ namespace TestEtoForms
         private void InitializeDrawable()
         {
             _drawable = new Drawable(false);
-            _drawable.Width = (int)_context.Editor.Project.CurrentContainer.Width;
-            _drawable.Height = (int)_context.Editor.Project.CurrentContainer.Height;
             _drawable.Paint += (s, e) => Draw(e.Graphics);
 
             _drawable.MouseDown +=
