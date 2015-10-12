@@ -240,6 +240,26 @@ namespace Core2D
         /// <param name="height"></param>
         /// <param name="twidth"></param>
         /// <param name="theight"></param>
+        public void ResetZoom(double width, double height, double twidth, double theight)
+        {
+            double zoom = 1.0;
+            double px = (width - (twidth * zoom)) / 2.0;
+            double py = (height - (theight * zoom)) / 2.0;
+            Zoom = zoom;
+            PanX = px;
+            PanY = py;
+            _context.Editor.Renderers[0].State.Zoom = Zoom;
+            _context.Editor.Renderers[0].State.PanX = PanX;
+            _context.Editor.Renderers[0].State.PanY = PanY;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="twidth"></param>
+        /// <param name="theight"></param>
         public void AutoFit(double width, double height, double twidth, double theight)
         {
             double zoom = Math.Min(width / twidth, height / theight) - 0.001;
