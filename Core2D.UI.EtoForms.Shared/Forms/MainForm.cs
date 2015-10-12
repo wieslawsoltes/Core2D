@@ -92,6 +92,18 @@ namespace TestEtoForms
                     Draw(e.Graphics);
                 };
 
+            _drawable.SizeChanged += 
+                (sender, e) =>
+                {
+                    if (_context != null && _context.Editor.Project != null)
+                    {
+                        if (_context.Renderers[0].State.EnableAutofit)
+                        {
+                            AutoFit();
+                        }
+                    }
+                };
+            
             _drawable.MouseDown +=
                 (sender, e) =>
                 {
