@@ -95,7 +95,15 @@ namespace TestWinForms
         /// </summary>
         public void ResetZoom()
         {
-            _state.ResetZoom();
+            if (Context != null && Context.Editor.Project != null)
+            {
+                var container = Context.Editor.Project.CurrentContainer;
+                _state.ResetZoom(
+                    this.Width, 
+                    this.Height, 
+                    container.Width, 
+                    container.Height);
+            }
         }
 
         /// <summary>
@@ -109,8 +117,8 @@ namespace TestWinForms
                 _state.AutoFit(
                     this.Width, 
                     this.Height, 
-                    (float)container.Width, 
-                    (float)container.Height);
+                    container.Width, 
+                    container.Height);
             }
         }
 
