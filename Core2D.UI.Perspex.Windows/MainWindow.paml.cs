@@ -31,7 +31,7 @@ namespace TestPerspex
         {
             this.InitializeComponent();
             App.AttachDevTools(this);
-            
+
             this.InitializeContext();
             this.Closed += (sender, e) => this.DeInitializeContext();
         }
