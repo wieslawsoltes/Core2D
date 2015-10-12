@@ -198,19 +198,55 @@ namespace TestEtoForms
                             _context.Commands.TryToConnectCommand.Execute(null);
                             break;
                         case Keys.Z:
-                            _state.ResetZoom();
+                            ResetZoom();
                             if (_context.Invalidate != null)
                             {
                                 _context.Invalidate();
                             }
                             break;
                         case Keys.X:
-                            // TODO: Autofit drawable.
+                            AutoFit();
+                            if (_context.Invalidate != null)
+                            {
+                                _context.Invalidate();
+                            }
                             break;
                     }
                 };
 
             SetContainerInvalidation();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ResetZoom()
+        {
+            if (_context != null && _context.Editor.Project != null)
+            {
+                var container = _context.Editor.Project.CurrentContainer;
+                _state.ResetZoom(
+                    _drawable.Bounds.Width, 
+                    _drawable.Bounds.Height, 
+                    container.Width, 
+                    container.Height);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void AutoFit()
+        {
+            if (_context != null && _context.Editor.Project != null)
+            {
+                var container = _context.Editor.Project.CurrentContainer;
+                _state.AutoFit(
+                    _drawable.Bounds.Width, 
+                    _drawable.Bounds.Height, 
+                    container.Width, 
+                    container.Height);
+            }
         }
 
         /// <summary>
