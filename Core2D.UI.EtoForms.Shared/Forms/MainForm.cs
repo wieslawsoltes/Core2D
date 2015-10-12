@@ -222,15 +222,8 @@ namespace TestEtoForms
             ClientSize = new Size(900, 650);
             WindowState = WindowState.Maximized;
 
-            Content = 
-                new TableLayout(
-                    null,
-                    new TableRow(
-                        null, 
-                        _drawable, 
-                        null),
-                    null);
-
+            Content = new TableLayout(_drawable);
+            
             _drawable.CanFocus = true;
 
             this.MouseEnter += 
