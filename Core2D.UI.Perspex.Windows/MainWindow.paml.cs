@@ -272,17 +272,31 @@ namespace TestPerspex
         /// <returns></returns>
         private async Task<string> OnGetImageKey()
         {
-            var dlg = new OpenFileDialog();
-            dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-            var result = await dlg.ShowAsync(this);
-            if (result != null)
+            try
             {
-                var path = result.FirstOrDefault();
-                var bytes = System.IO.File.ReadAllBytes(path);
-                var key = _context.Editor.Project.AddImageFromFile(path, bytes);
-                return key;
+                var dlg = new OpenFileDialog();
+                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+                var result = await dlg.ShowAsync(this);
+                if (result != null)
+                {
+                    var path = result.FirstOrDefault();
+                    var bytes = System.IO.File.ReadAllBytes(path);
+                    var key = _context.Editor.Project.AddImageFromFile(path, bytes);
+                    return key;
+                }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                if (_context.Editor.Log != null)
+                {
+                    _context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+                return null;
+            }
         }
         
         /// <summary>
@@ -290,28 +304,41 @@ namespace TestPerspex
         /// </summary>
         private async Task OnOpen(object parameter)
         {
-            if (parameter == null)
+            try
             {
-                var dlg = new OpenFileDialog();
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                var result = await dlg.ShowAsync(this);
-                if (result != null)
+                if (parameter == null)
                 {
-                    var path = result.FirstOrDefault();
-                    _context.Open(path);
-                    if (_context.Invalidate != null)
+                    var dlg = new OpenFileDialog();
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+                    var result = await dlg.ShowAsync(this);
+                    if (result != null)
                     {
-                        _context.Invalidate();
+                        var path = result.FirstOrDefault();
+                        _context.Open(path);
+                        if (_context.Invalidate != null)
+                        {
+                            _context.Invalidate();
+                        }
+                    }
+                }
+                else
+                {
+                    string path = parameter as string;
+                    if (path != null && System.IO.File.Exists(path))
+                    {
+                        _context.Open(path);
                     }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                string path = parameter as string;
-                if (path != null && System.IO.File.Exists(path))
+                if (_context.Editor.Log != null)
                 {
-                    _context.Open(path);
+                    _context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
                 }
             }
         }
@@ -322,13 +349,26 @@ namespace TestPerspex
         /// <returns></returns>
         private async Task OnSave()
         {
-            if (!string.IsNullOrEmpty(_context.Editor.ProjectPath))
+            try
             {
-                _context.Save(_context.Editor.ProjectPath);
+                if (!string.IsNullOrEmpty(_context.Editor.ProjectPath))
+                {
+                    _context.Save(_context.Editor.ProjectPath);
+                }
+                else
+                {
+                    await OnSaveAs();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await OnSaveAs();
+                if (_context.Editor.Log != null)
+                {
+                    _context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
             }
         }
 
@@ -338,16 +378,29 @@ namespace TestPerspex
         /// <returns></returns>
         private async Task OnSaveAs()
         {
-            if (_context.Editor.Project != null)
+            try
             {
-                var dlg = new SaveFileDialog();
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                dlg.InitialFileName = _context.Editor.Project.Name;
-                var result = await dlg.ShowAsync(this);
-                if (result != null)
+                if (_context.Editor.Project != null)
                 {
-                    _context.Save(result);
+                    var dlg = new SaveFileDialog();
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "Project", Extensions = { "project" } });
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+                    dlg.InitialFileName = _context.Editor.Project.Name;
+                    var result = await dlg.ShowAsync(this);
+                    if (result != null)
+                    {
+                        _context.Save(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_context.Editor.Log != null)
+                {
+                    _context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
                 }
             }
         }
@@ -358,29 +411,42 @@ namespace TestPerspex
         /// <returns></returns>
         private async Task OnExport()
         {
-            if (_context.Editor.Project != null)
+            try
             {
-                var dlg = new SaveFileDialog();
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Pdf", Extensions = { "pdf" } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Dxf", Extensions = { "dxf" } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                dlg.InitialFileName = _context.Editor.Project.Name;
-                var result = await dlg.ShowAsync(this);
-                if (result != null)
+                if (_context.Editor.Project != null)
                 {
-                    var ext = System.IO.Path.GetExtension(result).ToLower();
-    
-                    if (ext == ".pdf")
+                    var dlg = new SaveFileDialog();
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "Pdf", Extensions = { "pdf" } });
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "Dxf", Extensions = { "dxf" } });
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+                    dlg.InitialFileName = _context.Editor.Project.Name;
+                    var result = await dlg.ShowAsync(this);
+                    if (result != null)
                     {
-                        _context.ExportAsPdf(result, _context.Editor.Project);
-                        Process.Start(result);
+                        var ext = System.IO.Path.GetExtension(result).ToLower();
+
+                        if (ext == ".pdf")
+                        {
+                            _context.ExportAsPdf(result, _context.Editor.Project);
+                            Process.Start(result);
+                        }
+
+                        if (ext == ".dxf")
+                        {
+                            _context.ExportAsDxf(result);
+                            Process.Start(result);
+                        }
                     }
-    
-                    if (ext == ".dxf")
-                    {
-                        _context.ExportAsDxf(result);
-                        Process.Start(result);
-                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_context.Editor.Log != null)
+                {
+                    _context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
                 }
             }
         }
@@ -391,16 +457,29 @@ namespace TestPerspex
         /// <returns></returns>
         private async Task OnImportData()
         {
-            if (_context.Editor.Project != null)
+            try
             {
-                var dlg = new OpenFileDialog();
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                var result = await dlg.ShowAsync(this);
-                if (result != null)
+                if (_context.Editor.Project != null)
                 {
-                    var path = result.FirstOrDefault();
-                    _context.ImportData(path);
+                    var dlg = new OpenFileDialog();
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+                    var result = await dlg.ShowAsync(this);
+                    if (result != null)
+                    {
+                        var path = result.FirstOrDefault();
+                        _context.ImportData(path);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_context.Editor.Log != null)
+                {
+                    _context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
                 }
             }
         }
@@ -411,18 +490,31 @@ namespace TestPerspex
         /// <returns></returns>
         private async Task OnExportData()
         {
-            if (_context.Editor.Project != null && _context.Editor.Project.CurrentDatabase != null)
+            try
             {
-                var database = _context.Editor.Project.CurrentDatabase;
-
-                var dlg = new SaveFileDialog();
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                dlg.InitialFileName = database.Name;
-                var result = await dlg.ShowAsync(this);
-                if (result != null)
+                if (_context.Editor.Project != null && _context.Editor.Project.CurrentDatabase != null)
                 {
-                    _context.ExportData(result, database);
+                    var database = _context.Editor.Project.CurrentDatabase;
+
+                    var dlg = new SaveFileDialog();
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+                    dlg.InitialFileName = database.Name;
+                    var result = await dlg.ShowAsync(this);
+                    if (result != null)
+                    {
+                        _context.ExportData(result, database);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_context.Editor.Log != null)
+                {
+                    _context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
                 }
             }
         }
@@ -433,18 +525,31 @@ namespace TestPerspex
         /// <returns></returns>
         private async Task OnUpdateData()
         {
-            if (_context.Editor.Project != null && _context.Editor.Project.CurrentDatabase != null)
+            try
             {
-                var database = _context.Editor.Project.CurrentDatabase;
-                
-                var dlg = new OpenFileDialog();
-                dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                var result = await dlg.ShowAsync(this);
-                if (result != null)
+                if (_context.Editor.Project != null && _context.Editor.Project.CurrentDatabase != null)
                 {
-                    var path = result.FirstOrDefault();
-                    _context.UpdateData(path, database);
+                    var database = _context.Editor.Project.CurrentDatabase;
+
+                    var dlg = new OpenFileDialog();
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "Csv", Extensions = { "csv" } });
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+                    var result = await dlg.ShowAsync(this);
+                    if (result != null)
+                    {
+                        var path = result.FirstOrDefault();
+                        _context.UpdateData(path, database);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_context.Editor.Log != null)
+                {
+                    _context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
                 }
             }
         }
@@ -456,66 +561,79 @@ namespace TestPerspex
         /// <param name="type"></param>
         private async Task OnImportObject(object item, ImportType type)
         {
-            if (item != null)
+            try
             {
-                string name = string.Empty;
-                string ext = string.Empty;
-                
-                switch (type)
+                if (item != null)
                 {
-                    case ImportType.Style:
-                        name = "Style";
-                        ext = "style";
-                        break;
-                    case ImportType.Styles:
-                        name = "Styles";
-                        ext = "styles";
-                        break;
-                    case ImportType.StyleLibrary:
-                        name = "StyleLibrary";
-                        ext = "stylelibrary";
-                        break;
-                    case ImportType.StyleLibraries:
-                        name = "StyleLibraries";
-                        ext = "stylelibraries";
-                        break;
-                    case ImportType.Group:
-                        name = "Group";
-                        ext = "group";
-                        break;
-                    case ImportType.Groups:
-                        name = "Groups";
-                        ext = "groups";
-                        break;
-                    case ImportType.GroupLibrary:
-                        name = "GroupLibrary";
-                        ext = "grouplibrary";
-                        break;
-                    case ImportType.GroupLibraries:
-                        name = "GroupLibraries";
-                        ext = "grouplibraries";
-                        break;
-                    case ImportType.Template:
-                        name = "Template";
-                        ext = "template";
-                        break;
-                    case ImportType.Templates:
-                        name = "Templates";
-                        ext = "templates";
-                        break;
-                }
-                
-                var dlg = new OpenFileDialog();
-                dlg.AllowMultiple = true;
-                dlg.Filters.Add(new FileDialogFilter() { Name = name, Extensions = { ext } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                var results = await dlg.ShowAsync(this);
-                if (results != null)
-                {
-                    foreach (var path in results)
+                    string name = string.Empty;
+                    string ext = string.Empty;
+
+                    switch (type)
                     {
-                        _context.ImportObject(path, item, type);
+                        case ImportType.Style:
+                            name = "Style";
+                            ext = "style";
+                            break;
+                        case ImportType.Styles:
+                            name = "Styles";
+                            ext = "styles";
+                            break;
+                        case ImportType.StyleLibrary:
+                            name = "StyleLibrary";
+                            ext = "stylelibrary";
+                            break;
+                        case ImportType.StyleLibraries:
+                            name = "StyleLibraries";
+                            ext = "stylelibraries";
+                            break;
+                        case ImportType.Group:
+                            name = "Group";
+                            ext = "group";
+                            break;
+                        case ImportType.Groups:
+                            name = "Groups";
+                            ext = "groups";
+                            break;
+                        case ImportType.GroupLibrary:
+                            name = "GroupLibrary";
+                            ext = "grouplibrary";
+                            break;
+                        case ImportType.GroupLibraries:
+                            name = "GroupLibraries";
+                            ext = "grouplibraries";
+                            break;
+                        case ImportType.Template:
+                            name = "Template";
+                            ext = "template";
+                            break;
+                        case ImportType.Templates:
+                            name = "Templates";
+                            ext = "templates";
+                            break;
                     }
+
+                    var dlg = new OpenFileDialog();
+                    dlg.AllowMultiple = true;
+                    dlg.Filters.Add(new FileDialogFilter() { Name = name, Extensions = { ext } });
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+                    var results = await dlg.ShowAsync(this);
+                    if (results != null)
+                    {
+                        foreach (var path in results)
+                        {
+                            _context.ImportObject(path, item, type);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_context.Editor.Log != null)
+                {
+                    _context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
                 }
             }
         }
@@ -527,74 +645,87 @@ namespace TestPerspex
         /// <param name="type"></param>
         private async Task OnExportObject(object item, ExportType type)
         {
-            if (item != null)
+            try
             {
-                string initial = string.Empty;
-                string name = string.Empty;
-                string ext = string.Empty;
-                
-                switch (type)
+                if (item != null)
                 {
-                    case ExportType.Style:
-                        name = "Style";
-                        ext = "style";
-                        initial = (item as ShapeStyle).Name;
-                        break;
-                    case ExportType.Styles:
-                        name = "Styles";
-                        ext = "styles";
-                        initial = (item as StyleLibrary).Name;
-                        break;
-                    case ExportType.StyleLibrary:
-                        name = "StyleLibrary";
-                        ext = "stylelibrary";
-                        initial = (item as StyleLibrary).Name;
-                        break;
-                    case ExportType.StyleLibraries:
-                        name = "StyleLibraries";
-                        ext = "stylelibraries";
-                        initial = (item as Project).Name;
-                        break;
-                    case ExportType.Group:
-                        name = "Group";
-                        ext = "group";
-                        initial = (item as XGroup).Name;
-                        break;
-                    case ExportType.Groups:
-                        name = "Groups";
-                        ext = "groups";
-                        initial = (item as GroupLibrary).Name;
-                        break;
-                    case ExportType.GroupLibrary:
-                        name = "GroupLibrary";
-                        ext = "grouplibrary";
-                        initial = (item as GroupLibrary).Name;
-                        break;
-                    case ExportType.GroupLibraries:
-                        name = "GroupLibraries";
-                        ext = "grouplibraries";
-                        initial = (item as Project).Name;
-                        break;
-                    case ExportType.Template:
-                        name = "Template";
-                        ext = "template";
-                        initial = (item as Container).Name;
-                        break;
-                    case ExportType.Templates:
-                        name = "Templates";
-                        ext = "templates";
-                        initial = (item as Project).Name;
-                        break;
+                    string initial = string.Empty;
+                    string name = string.Empty;
+                    string ext = string.Empty;
+
+                    switch (type)
+                    {
+                        case ExportType.Style:
+                            name = "Style";
+                            ext = "style";
+                            initial = (item as ShapeStyle).Name;
+                            break;
+                        case ExportType.Styles:
+                            name = "Styles";
+                            ext = "styles";
+                            initial = (item as StyleLibrary).Name;
+                            break;
+                        case ExportType.StyleLibrary:
+                            name = "StyleLibrary";
+                            ext = "stylelibrary";
+                            initial = (item as StyleLibrary).Name;
+                            break;
+                        case ExportType.StyleLibraries:
+                            name = "StyleLibraries";
+                            ext = "stylelibraries";
+                            initial = (item as Project).Name;
+                            break;
+                        case ExportType.Group:
+                            name = "Group";
+                            ext = "group";
+                            initial = (item as XGroup).Name;
+                            break;
+                        case ExportType.Groups:
+                            name = "Groups";
+                            ext = "groups";
+                            initial = (item as GroupLibrary).Name;
+                            break;
+                        case ExportType.GroupLibrary:
+                            name = "GroupLibrary";
+                            ext = "grouplibrary";
+                            initial = (item as GroupLibrary).Name;
+                            break;
+                        case ExportType.GroupLibraries:
+                            name = "GroupLibraries";
+                            ext = "grouplibraries";
+                            initial = (item as Project).Name;
+                            break;
+                        case ExportType.Template:
+                            name = "Template";
+                            ext = "template";
+                            initial = (item as Container).Name;
+                            break;
+                        case ExportType.Templates:
+                            name = "Templates";
+                            ext = "templates";
+                            initial = (item as Project).Name;
+                            break;
+                    }
+
+                    var dlg = new SaveFileDialog();
+                    dlg.Filters.Add(new FileDialogFilter() { Name = name, Extensions = { ext } });
+                    dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+                    dlg.InitialFileName = initial;
+                    var result = await dlg.ShowAsync(this);
+                    if (result != null)
+                    {
+                        _context.ExportObject(result, item, type);
+                    }
                 }
-                
-                var dlg = new SaveFileDialog();
-                dlg.Filters.Add(new FileDialogFilter() { Name = name, Extensions = { ext } });
-                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                dlg.InitialFileName = initial;
-                var result = await dlg.ShowAsync(this);
-                if (result != null)
+            }
+            catch (Exception ex)
+            {
+                if (_context.Editor.Log != null)
                 {
-                    _context.ExportObject(result, item, type);
+                    _context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
                 }
             }
         }
