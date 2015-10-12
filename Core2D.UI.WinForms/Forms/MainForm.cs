@@ -160,6 +160,21 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
+        private void ResetZoom()
+        {
+            _drawable.ResetZoom();
+            InvalidateContainer();
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        private void AutoFit()
+        {
+            _drawable.AutoFit();
+            InvalidateContainer();
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -394,12 +409,10 @@ namespace TestWinForms
                         OnSetTryToConnect();
                         break;
                     case Keys.Z:
-                        _drawable.ResetZoom();
-                        InvalidateContainer();
+                        ResetZoom();
                         break;
                     case Keys.X:
-                        _drawable.AutoFit();
-                        InvalidateContainer();
+                        AutoFit();
                         break;
                 }
             };
