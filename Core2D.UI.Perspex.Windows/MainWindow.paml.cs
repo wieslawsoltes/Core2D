@@ -214,8 +214,6 @@ namespace TestPerspex
                     async (item) => await OnExportObject(item, ExportType.Templates),
                     (item) => _context.IsEditMode());
 
-            // TODO: Initialize other commands.
-
             if (_enableRecent)
             {
                 try
