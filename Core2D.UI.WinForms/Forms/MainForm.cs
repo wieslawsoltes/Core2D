@@ -300,8 +300,8 @@ namespace TestWinForms
             // TODO:
             
             // View
-            
-            // TODO:
+            resetZoomToolStripMenuItem.Click += (sender, e) => ResetZoom();
+            zoomToExtentToolStripMenuItem.Click += (sender, e) => AutoFit();
             
             // Tool
             noneToolStripMenuItem.Click += (sender, e) => OnSetToolToNone();
