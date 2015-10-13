@@ -232,76 +232,31 @@
             </Grid>
         </DataTemplate>
         <DataTemplate DataType="core:Database">
-            <StackPanel>
-                <!-- 
-                <Grid ColumnDefinitions="60,*" RowDefinitions="Auto">
-                    <TextBlock 
-                        Text="Name" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="0" 
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBox 
-                        Text="{Binding Name}" 
-                        BorderBrush="{x:Null}" 
-                        Style="{StaticResource TextBoxLeftStyleKey}" 
-                        Grid.Row="0" 
-                        Grid.Column="1">
-                    </TextBox>
-                </Grid>
-                <Expander Header="Columns" IsExpanded="True">
-                    <Grid RowDefinitions="Auto,Auto,*,Auto">
-                        <Control Template="{StaticResource ColumnsMenuControlTemplateKey}" Grid.Row="0" Margin="2,0,2,0"/>
-                        <Grid ColumnDefinitions="*,30" RowDefinitions="Auto,Auto,*" Height="Auto" VerticalAlignment="Top" Grid.Row="1">
-                            <TextBlock 
-                                Grid.Column="0" 
-                                Grid.Row="0"
-                                Margin="5,2,5,2" 
-                                VerticalAlignment="Center" 
-                                Text="Name">
-                            </TextBlock>
-                        </Grid>
-                        <ItemsControl 
-                            x:Name="columnsItemsControls"
-                            VerticalContentAlignment="Stretch" 
-                            VerticalAlignment="Stretch" 
-                            Grid.Row="2"
-                            ItemsSource="{Binding Columns}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid ColumnDefinitions="*,30" RowDefinitions="Auto,Auto,*" Height="Auto" VerticalAlignment="Top">
-                                        <TextBox 
-                                            Grid.Column="0" 
-                                            Grid.Row="0"
-                                            Margin="5,2,5,2" 
-                                            VerticalAlignment="Center" 
-                                            Text="{Binding Path=Name, Mode=TwoWay}">
-                                        </TextBox>
-                                        <Button 
-                                            Grid.Column="1" 
-                                            Grid.Row="0" 
-                                            Margin="5,2,5,2" 
-                                            VerticalAlignment="Center" 
-                                            Content="-" 
-                                            Command="{Binding DataContext.Commands.RemoveColumnCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
-                                            <Button.CommandParameter>
-                                                <MultiBinding Converter="{StaticResource ColumnParameterConverter}">
-                                                    <Binding Path="DataContext" ElementName="columnsItemsControls"/>
-                                                    <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
-                                                </MultiBinding>
-                                            </Button.CommandParameter>
-                                        </Button>
+            <TabControl>
+                <TabItem Header="Database" Classes="property">
+                    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
+                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Columns" Classes="property">
+                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" >
+                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Property"/>
+                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Columns}">
+                            <ItemsControl.DataTemplates>
+                                <DataTemplate DataType="core:Column">
+                                    <Grid VerticalAlignment="Top">
+                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}"/>
                                     </Grid>
                                 </DataTemplate>
-                            </ItemsControl.ItemTemplate>
+                            </ItemsControl.DataTemplates>
                         </ItemsControl>
                     </Grid>
-                </Expander>
-                <Expander Header="Current Record" IsExpanded="True">
+                </TabItem>
+                <TabItem Header="Current Record" Classes="property">
                     <ContentControl Content="{Binding CurrentRecord}"/>
-                </Expander>
-                -->
-            </StackPanel>
+                </TabItem>
+            </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:Data">
             <TabControl>
