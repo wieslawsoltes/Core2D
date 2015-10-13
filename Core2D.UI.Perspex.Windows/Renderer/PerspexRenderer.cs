@@ -52,7 +52,7 @@ namespace TestPerspex
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -128,7 +128,7 @@ namespace TestPerspex
         {
             var lineCap = default(PenLineCap);
             var dashStyle = default(DashStyle);
-            
+
             switch (style.LineCap)
             {
                 case LineCap.Flat:
@@ -141,20 +141,20 @@ namespace TestPerspex
                     lineCap = PenLineCap.Round;
                     break;
             }
-            
+
             if (style.Dashes != null)
             {
                 dashStyle = new DashStyle(
                     style.Dashes,
                     style.DashOffset);
             }
-            
+
             var pen = new Pen(
                 ToSolidBrush(style.Stroke),
                 scale(style.Thickness / _state.Zoom),
-                dashStyle, lineCap, 
+                dashStyle, lineCap,
                 lineCap, lineCap);
-  
+
             return pen;
         }
 
@@ -859,11 +859,11 @@ namespace TestPerspex
                 Pen pen = ToPen(image.Style, _scaleToPage);
 
                 DrawRectangleInternal(
-                    _dc, 
-                    brush, 
-                    pen, 
-                    image.IsStroked, 
-                    image.IsFilled, 
+                    _dc,
+                    brush,
+                    pen,
+                    image.IsStroked,
+                    image.IsFilled,
                     ref rect);
 
                 // TODO: brush.Dispose();
@@ -875,8 +875,8 @@ namespace TestPerspex
             {
                 var bi = _biCache[image.Path];
                 _dc.DrawImage(
-                    bi, 
-                    1.0, 
+                    bi,
+                    1.0,
                     new Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
                     new Rect(rect.X, rect.Y, rect.Width, rect.Height));
             }
