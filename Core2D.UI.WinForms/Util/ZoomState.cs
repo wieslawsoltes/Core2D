@@ -1,4 +1,4 @@
-﻿﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
+﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 
@@ -65,7 +65,7 @@ namespace Core2D
         /// 
         /// </summary>
         public double OriginY = 0.0;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -104,7 +104,7 @@ namespace Core2D
                     (y - PanY) / Zoom);
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -195,7 +195,7 @@ namespace Core2D
                 return;
 
             ZoomTo(zoom, x, y);
-            
+
             if (_context.Invalidate != null)
             {
                 _context.Invalidate();
@@ -252,7 +252,7 @@ namespace Core2D
             _context.Editor.Renderers[0].State.PanX = PanX;
             _context.Editor.Renderers[0].State.PanY = PanY;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

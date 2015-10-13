@@ -38,7 +38,7 @@ namespace TestPerspex
             if (context == null)
                 return;
 
-            context.Invalidate = 
+            context.Invalidate =
                 () =>
                 {
                     InitializeLayers();
@@ -49,7 +49,7 @@ namespace TestPerspex
                         container.Invalidate();
                     }
                 };
-            
+
             _state = new ZoomState(context);
 
             if (context.Renderers[0].State.EnableAutofit)
@@ -59,7 +59,7 @@ namespace TestPerspex
 
             context.Commands.ZoomResetCommand =
                 Command.Create(
-                    () => 
+                    () =>
                     {
                         ResetZoom(this.Bounds.Width, this.Bounds.Height);
                         if (context.Invalidate != null)
@@ -71,7 +71,7 @@ namespace TestPerspex
 
             context.Commands.ZoomExtentCommand =
                 Command.Create(
-                    () => 
+                    () =>
                     {
                         AutoFit(this.Bounds.Width, this.Bounds.Height);
                         if (context.Invalidate != null)
@@ -86,7 +86,7 @@ namespace TestPerspex
                 {
                     if (_state == null)
                         return;
-                
+
                     var p = e.GetPosition(this);
 
                     if (e.MouseButton == MouseButton.Left)
@@ -98,7 +98,7 @@ namespace TestPerspex
                     if (e.MouseButton == MouseButton.Right)
                     {
                         this.Focus();
-                       // TODO: this.Cursor = Cursors.Pointer;
+                        // TODO: this.Cursor = Cursors.Pointer;
                         _state.RightDown(p.X, p.Y);
                     }
                 };
@@ -108,7 +108,7 @@ namespace TestPerspex
                 {
                     if (_state == null)
                         return;
-                    
+
                     var p = e.GetPosition(this);
 
                     if (e.MouseButton == MouseButton.Left)
@@ -130,7 +130,7 @@ namespace TestPerspex
                 {
                     if (_state == null)
                         return;
-                    
+
                     var p = e.GetPosition(this);
                     _state.Move(p.X, p.Y);
                 };
@@ -140,7 +140,7 @@ namespace TestPerspex
                 {
                     if (_state == null)
                         return;
-                    
+
                     var p = e.GetPosition(this);
                     _state.Wheel(p.X, p.Y, e.Delta.Y);
                 };
@@ -195,7 +195,7 @@ namespace TestPerspex
 
             context.Invalidate();
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -231,11 +231,11 @@ namespace TestPerspex
         private void InitializeLayers()
         {
             var context = this.DataContext as EditorContext;
-            if (context == null 
-                || context.Editor == null 
+            if (context == null
+                || context.Editor == null
                 || context.Editor.Project == null)
                 return;
-            
+
             var container = context.Editor.Project.CurrentContainer;
             if (container == null)
                 return;
@@ -254,7 +254,7 @@ namespace TestPerspex
                 container.WorkingLayer.InvalidateLayer +=
                     (s, e) =>
                     {
-                       this.InvalidateVisual();
+                        this.InvalidateVisual();
                     };
             }
 
@@ -313,52 +313,52 @@ namespace TestPerspex
             if (container.Template != null)
             {
                 DrawBackground(
-                    dc, 
+                    dc,
                     container.Template.Background,
                     container.Template.Width,
                     container.Template.Height);
 
                 renderer.Draw(
-                    dc, 
-                    container.Template, 
-                    container.Properties, 
+                    dc,
+                    container.Template,
+                    container.Properties,
                     null);
             }
 
             DrawBackground(
-                dc, 
+                dc,
                 container.Background,
                 container.Width,
                 container.Height);
 
             renderer.Draw(
-                dc, 
-                container, 
-                container.Properties, 
+                dc,
+                container,
+                container.Properties,
                 null);
-            
+
             if (container.WorkingLayer != null)
             {
                 renderer.Draw(
-                    dc, 
-                    container.WorkingLayer, 
-                    container.Properties, 
+                    dc,
+                    container.WorkingLayer,
+                    container.Properties,
                     null);
             }
-            
+
             if (container.HelperLayer != null)
             {
                 renderer.Draw(
-                    dc, 
-                    container.HelperLayer, 
-                    container.Properties, 
+                    dc,
+                    container.HelperLayer,
+                    container.Properties,
                     null);
             }
-            
+
             scale.Dispose();
             translate.Dispose();
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -366,7 +366,7 @@ namespace TestPerspex
         public override void Render(DrawingContext context)
         {
             base.Render(context);
-            
+
             if (_state == null)
             {
                 InitializeDrawable();
