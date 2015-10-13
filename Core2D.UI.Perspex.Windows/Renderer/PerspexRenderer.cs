@@ -206,6 +206,162 @@ namespace TestPerspex
         /// 
         /// </summary>
         /// <param name="dc"></param>
+        /// <param name="line"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <param name="pt1"></param>
+        /// <param name="pt2"></param>
+        private void DrawLineArrowsInternal(
+            DrawingContext dc, 
+            XLine line, 
+            double dx, 
+            double dy, 
+            out Point pt1, 
+            out Point pt2)
+        {
+            Brush fillStartArrow = ToSolidBrush(line.Style.StartArrowStyle.Fill);
+            Pen strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
+
+            Brush fillEndArrow = ToSolidBrush(line.Style.EndArrowStyle.Fill);
+            Pen strokeEndArrow = ToPen(line.Style.EndArrowStyle, _scaleToPage);
+
+            double _x1 = line.Start.X + dx;
+            double _y1 = line.Start.Y + dy;
+            double _x2 = line.End.X + dx;
+            double _y2 = line.End.Y + dy;
+
+            XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
+
+            float x1 = _scaleToPage(_x1);
+            float y1 = _scaleToPage(_y1);
+            float x2 = _scaleToPage(_x2);
+            float y2 = _scaleToPage(_y2);
+
+            var sas = line.Style.StartArrowStyle;
+            var eas = line.Style.EndArrowStyle;
+            double a1 = Math.Atan2(y1 - y2, x1 - x2);
+            double a2 = Math.Atan2(y2 - y1, x2 - x1);
+
+            var t1 = MatrixHelper.Rotation(a1, new Vector(x1, y1));
+            var t2 = MatrixHelper.Rotation(a2, new Vector(x2, y2));
+
+            pt1 = default(Point);
+            pt2 = default(Point);
+            double radiusX1 = sas.RadiusX;
+            double radiusY1 = sas.RadiusY;
+            double sizeX1 = 2.0 * radiusX1;
+            double sizeY1 = 2.0 * radiusY1;
+
+            switch (sas.ArrowType)
+            {
+                default:
+                case ArrowType.None:
+                    {
+                        pt1 = new Point(x1, y1);
+                    }
+                    break;
+                case ArrowType.Rectangle:
+                    {
+                        pt1 = MatrixHelper.TransformPoint(t1, new Point(x1 - (float)sizeX1, y1));
+                        var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
+                        var d = dc.PushPreTransform(t1);
+                        DrawRectangleInternal(dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
+                        d.Dispose();
+                    }
+                    break;
+                case ArrowType.Ellipse:
+                    {
+                        pt1 = MatrixHelper.TransformPoint(t1, new Point(x1 - (float)sizeX1, y1));
+                        var d = dc.PushPreTransform(t1);
+                        var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
+                        DrawEllipseInternal(dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
+                        d.Dispose();
+                    }
+                    break;
+                case ArrowType.Arrow:
+                    {
+                        var pts = new Point[]
+                        {
+                            new Point(x1, y1),
+                            new Point(x1 - (float)sizeX1, y1 + (float)sizeY1),
+                            new Point(x1, y1),
+                            new Point(x1 - (float)sizeX1, y1 - (float)sizeY1),
+                            new Point(x1, y1)
+                        };
+                        pt1 = MatrixHelper.TransformPoint(t1, pts[0]);
+                        var p11 = MatrixHelper.TransformPoint(t1, pts[1]);
+                        var p21 = MatrixHelper.TransformPoint(t1, pts[2]);
+                        var p12 = MatrixHelper.TransformPoint(t1, pts[3]);
+                        var p22 = MatrixHelper.TransformPoint(t1, pts[4]);
+                        DrawLineInternal(dc, strokeStartArrow, sas.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(dc, strokeStartArrow, sas.IsStroked, ref p12, ref p22);
+                    }
+                    break;
+            }
+
+            double radiusX2 = eas.RadiusX;
+            double radiusY2 = eas.RadiusY;
+            double sizeX2 = 2.0 * radiusX2;
+            double sizeY2 = 2.0 * radiusY2;
+
+            switch (eas.ArrowType)
+            {
+                default:
+                case ArrowType.None:
+                    {
+                        pt2 = new Point(x2, y2);
+                    }
+                    break;
+                case ArrowType.Rectangle:
+                    {
+                        pt2 = MatrixHelper.TransformPoint(t2, new Point(x2 - (float)sizeX2, y2));
+                        var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
+                        var d = dc.PushPreTransform(t2);
+                        DrawRectangleInternal(dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
+                        d.Dispose();
+                    }
+                    break;
+                case ArrowType.Ellipse:
+                    {
+                        pt2 = MatrixHelper.TransformPoint(t2, new Point(x2 - (float)sizeX2, y2));
+                        var d = dc.PushPreTransform(t2);
+                        var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
+                        DrawEllipseInternal(dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
+                        d.Dispose();
+                    }
+                    break;
+                case ArrowType.Arrow:
+                    {
+                        var pts = new Point[]
+                        {
+                            new Point(x2, y2),
+                            new Point(x2 - (float)sizeX2, y2 + (float)sizeY2),
+                            new Point(x2, y2),
+                            new Point(x2 - (float)sizeX2, y2 - (float)sizeY2),
+                            new Point(x2, y2)
+                        };
+                        pt2 = MatrixHelper.TransformPoint(t2, pts[0]);
+                        var p11 = MatrixHelper.TransformPoint(t2, pts[1]);
+                        var p21 = MatrixHelper.TransformPoint(t2, pts[2]);
+                        var p12 = MatrixHelper.TransformPoint(t2, pts[3]);
+                        var p22 = MatrixHelper.TransformPoint(t2, pts[4]);
+                        DrawLineInternal(dc, strokeEndArrow, eas.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(dc, strokeEndArrow, eas.IsStroked, ref p12, ref p22);
+                    }
+                    break;
+            }
+
+            // TODO: fillStartArrow.Dispose();
+            // TODO: strokeStartArrow.Dispose();
+
+            // TODO: fillEndArrow.Dispose();
+            // TODO: strokeEndArrow.Dispose();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dc"></param>
         /// <param name="brush"></param>
         /// <param name="pen"></param>
         /// <param name="isStroked"></param>
@@ -398,149 +554,12 @@ namespace TestPerspex
             var _dc = dc as DrawingContext;
 
             Pen strokeLine = ToPen(line.Style, _scaleToPage);
+            Point pt1, pt2;
 
-            Brush fillStartArrow = ToSolidBrush(line.Style.StartArrowStyle.Fill);
-            Pen strokeStartArrow = ToPen(line.Style.StartArrowStyle, _scaleToPage);
-
-            Brush fillEndArrow = ToSolidBrush(line.Style.EndArrowStyle.Fill);
-            Pen strokeEndArrow = ToPen(line.Style.EndArrowStyle, _scaleToPage);
-
-            double _x1 = line.Start.X + dx;
-            double _y1 = line.Start.Y + dy;
-            double _x2 = line.End.X + dx;
-            double _y2 = line.End.Y + dy;
-
-            XLine.SetMaxLength(line, ref _x1, ref _y1, ref _x2, ref _y2);
-
-            float x1 = _scaleToPage(_x1);
-            float y1 = _scaleToPage(_y1);
-            float x2 = _scaleToPage(_x2);
-            float y2 = _scaleToPage(_y2);
-
-            var sas = line.Style.StartArrowStyle;
-            var eas = line.Style.EndArrowStyle;
-            double a1 = Math.Atan2(y1 - y2, x1 - x2);
-            double a2 = Math.Atan2(y2 - y1, x2 - x1);
-
-            var t1 = MatrixHelper.Rotation(a1, new Vector(x1, y1));
-            var t2 = MatrixHelper.Rotation(a2, new Vector(x2, y2));
-
-            Point pt1 = default(Point);
-            Point pt2 = default(Point);
-
-            double radiusX1 = sas.RadiusX;
-            double radiusY1 = sas.RadiusY;
-            double sizeX1 = 2.0 * radiusX1;
-            double sizeY1 = 2.0 * radiusY1;
-
-            switch (sas.ArrowType)
-            {
-                default:
-                case ArrowType.None:
-                    {
-                        pt1 = new Point(x1, y1);
-                    }
-                    break;
-                case ArrowType.Rectangle:
-                    {
-                        pt1 = MatrixHelper.TransformPoint(t1, new Point(x1 - (float)sizeX1, y1));
-                        var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        var d = _dc.PushPreTransform(t1);
-                        DrawRectangleInternal(_dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
-                        d.Dispose();
-                    }
-                    break;
-                case ArrowType.Ellipse:
-                    {
-                        pt1 = MatrixHelper.TransformPoint(t1, new Point(x1 - (float)sizeX1, y1));
-                        var d = _dc.PushPreTransform(t1);
-                        var rect = new Rect2(x1 - sizeX1, y1 - radiusY1, sizeX1, sizeY1);
-                        DrawEllipseInternal(_dc, fillStartArrow, strokeStartArrow, sas.IsStroked, sas.IsFilled, ref rect);
-                        d.Dispose();
-                    }
-                    break;
-                case ArrowType.Arrow:
-                    {
-                        var pts = new Point[]
-                        {
-                            new Point(x1, y1),
-                            new Point(x1 - (float)sizeX1, y1 + (float)sizeY1),
-                            new Point(x1, y1),
-                            new Point(x1 - (float)sizeX1, y1 - (float)sizeY1),
-                            new Point(x1, y1)
-                        };
-                        pt1 = MatrixHelper.TransformPoint(t1, pts[0]);
-                        var p11 = MatrixHelper.TransformPoint(t1, pts[1]);
-                        var p21 = MatrixHelper.TransformPoint(t1, pts[2]);
-                        var p12 = MatrixHelper.TransformPoint(t1, pts[3]);
-                        var p22 = MatrixHelper.TransformPoint(t1, pts[4]);
-                        DrawLineInternal(_dc, strokeStartArrow, sas.IsStroked, ref p11, ref p21);
-                        DrawLineInternal(_dc, strokeStartArrow, sas.IsStroked, ref p12, ref p22);
-                    }
-                    break;
-            }
-
-            double radiusX2 = eas.RadiusX;
-            double radiusY2 = eas.RadiusY;
-            double sizeX2 = 2.0 * radiusX2;
-            double sizeY2 = 2.0 * radiusY2;
-
-            switch (eas.ArrowType)
-            {
-                default:
-                case ArrowType.None:
-                    {
-                        pt2 = new Point(x2, y2);
-                    }
-                    break;
-                case ArrowType.Rectangle:
-                    {
-                        pt2 = MatrixHelper.TransformPoint(t2, new Point(x2 - (float)sizeX2, y2));
-                        var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        var d = _dc.PushPreTransform(t2);
-                        DrawRectangleInternal(_dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
-                        d.Dispose();
-                    }
-                    break;
-                case ArrowType.Ellipse:
-                    {
-                        pt2 = MatrixHelper.TransformPoint(t2, new Point(x2 - (float)sizeX2, y2));
-                        var d = _dc.PushPreTransform(t2);
-                        var rect = new Rect2(x2 - sizeX2, y2 - radiusY2, sizeX2, sizeY2);
-                        DrawEllipseInternal(_dc, fillEndArrow, strokeEndArrow, eas.IsStroked, eas.IsFilled, ref rect);
-                        d.Dispose();
-                    }
-                    break;
-                case ArrowType.Arrow:
-                    {
-                        var pts = new Point[]
-                        {
-                            new Point(x2, y2),
-                            new Point(x2 - (float)sizeX2, y2 + (float)sizeY2),
-                            new Point(x2, y2),
-                            new Point(x2 - (float)sizeX2, y2 - (float)sizeY2),
-                            new Point(x2, y2)
-                        };
-                        pt2 = MatrixHelper.TransformPoint(t2, pts[0]);
-                        var p11 = MatrixHelper.TransformPoint(t2, pts[1]);
-                        var p21 = MatrixHelper.TransformPoint(t2, pts[2]);
-                        var p12 = MatrixHelper.TransformPoint(t2, pts[3]);
-                        var p22 = MatrixHelper.TransformPoint(t2, pts[4]);
-                        DrawLineInternal(_dc, strokeEndArrow, eas.IsStroked, ref p11, ref p21);
-                        DrawLineInternal(_dc, strokeEndArrow, eas.IsStroked, ref p12, ref p22);
-                    }
-                    break;
-            }
-
+            DrawLineArrowsInternal(_dc, line, dx, dy, out pt1, out pt2);
             DrawLineInternal(_dc, strokeLine, line.IsStroked, ref pt1, ref pt2);
 
             // TODO: strokeLine.Dispose();
-
-            // TODO: fillStartArrow.Dispose();
-            // TODO: strokeStartArrow.Dispose();
-
-            // TODO: fillEndArrow.Dispose();
-            // TODO: strokeEndArrow.Dispose();
         }
 
         /// <summary>
