@@ -31,7 +31,7 @@ namespace Core2D
             {
                 Trace.Listeners.Add(
                     new TextWriterTraceListener(
-                        path, 
+                        path,
                         "listener"));
             }
             catch (Exception ex)

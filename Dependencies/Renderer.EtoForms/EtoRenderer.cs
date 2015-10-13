@@ -38,7 +38,7 @@ namespace TestEtoForms
         /// 
         /// </summary>
         private double _textScaleFactor;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -50,7 +50,7 @@ namespace TestEtoForms
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -125,7 +125,7 @@ namespace TestEtoForms
         private Pen ToPen(BaseStyle style, Func<double, float> scale)
         {
             var pen = new Pen(
-                ToColor(style.Stroke), 
+                ToColor(style.Stroke),
                 scale(style.Thickness / _state.Zoom));
 
             switch (style.LineCap)
@@ -143,7 +143,7 @@ namespace TestEtoForms
             if (style.Dashes != null)
             {
                 pen.DashStyle = new DashStyle(
-                    (float)style.DashOffset, 
+                    (float)style.DashOffset,
                     style.Dashes.Select(x => (float)x).ToArray());
             }
             return pen;
@@ -477,8 +477,8 @@ namespace TestEtoForms
                     break;
                 case ArrowType.Arrow:
                     {
-                        var pts = new PointF[] 
-                        { 
+                        var pts = new PointF[]
+                        {
                             new PointF(x1, y1),
                             new PointF(x1 - (float)sizeX1, y1 + (float)sizeY1),
                             new PointF(x1, y1),
@@ -531,8 +531,8 @@ namespace TestEtoForms
                     break;
                 case ArrowType.Arrow:
                     {
-                        var pts = new PointF[] 
-                        { 
+                        var pts = new PointF[]
+                        {
                             new PointF(x2, y2),
                             new PointF(x2 - (float)sizeX2, y2 + (float)sizeY2),
                             new PointF(x2, y2),
@@ -557,7 +557,7 @@ namespace TestEtoForms
 
             fillStartArrow.Dispose();
             strokeStartArrow.Dispose();
-            
+
             fillEndArrow.Dispose();
             strokeEndArrow.Dispose();
         }
@@ -737,17 +737,17 @@ namespace TestEtoForms
 
             Brush brush = ToSolidBrush(bezier.Style.Fill);
             Pen pen = ToPen(bezier.Style, _scaleToPage);
-                
+
             var path = new GraphicsPath();
             path.AddBezier(
                 new PointF(
-                    _scaleToPage(bezier.Point1.X), 
+                    _scaleToPage(bezier.Point1.X),
                     _scaleToPage(bezier.Point1.Y)),
                 new PointF(
-                    _scaleToPage(bezier.Point2.X), 
+                    _scaleToPage(bezier.Point2.X),
                     _scaleToPage(bezier.Point2.Y)),
                 new PointF(
-                    _scaleToPage(bezier.Point3.X), 
+                    _scaleToPage(bezier.Point3.X),
                     _scaleToPage(bezier.Point3.Y)),
                 new PointF(
                     _scaleToPage(bezier.Point4.X),

@@ -49,7 +49,7 @@ namespace Core2D
             return base.CreateProperties(type, memberSerialization).Where(p => p.Writable).ToList();
         }
     }
-    
+
     /// <summary>
     /// 
     /// </summary>

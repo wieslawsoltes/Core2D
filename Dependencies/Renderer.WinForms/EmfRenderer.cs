@@ -31,7 +31,7 @@ namespace Core2D
             get { return _state; }
             set { Update(ref _state, value); }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -41,7 +41,7 @@ namespace Core2D
         /// 
         /// </summary>
         private double _textScaleFactor;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -53,7 +53,7 @@ namespace Core2D
             _textScaleFactor = textScaleFactor;
             _scaleToPage = (value) => (float)(value);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -445,8 +445,8 @@ namespace Core2D
                     break;
                 case ArrowType.Arrow:
                     {
-                        var pts = new PointF[] 
-                        { 
+                        var pts = new PointF[]
+                        {
                             new PointF(x1, y1),
                             new PointF(x1 - (float)sizeX1, y1 + (float)sizeY1),
                             new PointF(x1, y1),
@@ -504,8 +504,8 @@ namespace Core2D
                     break;
                 case ArrowType.Arrow:
                     {
-                        var pts = new PointF[] 
-                        { 
+                        var pts = new PointF[]
+                        {
                             new PointF(x2, y2),
                             new PointF(x2 - (float)sizeX2, y2 + (float)sizeY2),
                             new PointF(x2, y2),
@@ -708,9 +708,9 @@ namespace Core2D
                 path.AddBezier(
                     _scaleToPage(bezier.Point1.X),
                     _scaleToPage(bezier.Point1.Y),
-                    _scaleToPage(bezier.Point2.X), 
+                    _scaleToPage(bezier.Point2.X),
                     _scaleToPage(bezier.Point2.Y),
-                    _scaleToPage(bezier.Point3.X), 
+                    _scaleToPage(bezier.Point3.X),
                     _scaleToPage(bezier.Point3.Y),
                     _scaleToPage(bezier.Point4.X),
                     _scaleToPage(bezier.Point4.Y));
@@ -764,13 +764,13 @@ namespace Core2D
             {
                 var path = new GraphicsPath();
                 path.AddBezier(
-                    _scaleToPage(x1 + dx), 
+                    _scaleToPage(x1 + dx),
                     _scaleToPage(y1 + dy),
-                    _scaleToPage(x2 + dx), 
+                    _scaleToPage(x2 + dx),
                     _scaleToPage(y2 + dy),
-                    _scaleToPage(x3 + dx), 
+                    _scaleToPage(x3 + dx),
                     _scaleToPage(y3 + dy),
-                    _scaleToPage(x4 + dx), 
+                    _scaleToPage(x4 + dx),
                     _scaleToPage(y4 + dy));
                 _gfx.FillPath(brush, path);
             }
@@ -792,7 +792,7 @@ namespace Core2D
             brush.Dispose();
             pen.Dispose();
         }
-   
+
         /// <summary>
         /// 
         /// </summary>
@@ -834,7 +834,7 @@ namespace Core2D
             }
 
             Font font = new Font(
-                text.Style.TextStyle.FontName, 
+                text.Style.TextStyle.FontName,
                 (float)(text.Style.TextStyle.FontSize * _textScaleFactor),
                 fontStyle);
 
@@ -919,7 +919,7 @@ namespace Core2D
             if (image.IsFilled)
             {
                 _gfx.FillRectangle(
-                    ToSolidBrush(image.Style.Fill), 
+                    ToSolidBrush(image.Style.Fill),
                     srect);
             }
 

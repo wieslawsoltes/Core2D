@@ -190,7 +190,7 @@ namespace PdfSharp
                     }
                     Draw(gfx, container.Template, container.Properties, null);
                 }
-                
+
                 // draw container contents to pdf graphics
                 if (container.Background.A > 0)
                 {
@@ -371,10 +371,10 @@ namespace PdfSharp
             for (double x = sx; x < ex; x += cellWidth)
             {
                 var p0 = new XPoint(
-                    _scaleToPage(x), 
+                    _scaleToPage(x),
                     _scaleToPage(oy));
                 var p1 = new XPoint(
-                    _scaleToPage(x), 
+                    _scaleToPage(x),
                     _scaleToPage(ey));
                 DrawLineInternal(gfx, stroke, isStroked, ref p0, ref p1);
             }
@@ -794,9 +794,9 @@ namespace PdfSharp
                 path.AddBezier(
                     _scaleToPage(bezier.Point1.X + dx),
                     _scaleToPage(bezier.Point1.Y + dy),
-                    _scaleToPage(bezier.Point2.X + dx), 
+                    _scaleToPage(bezier.Point2.X + dx),
                     _scaleToPage(bezier.Point2.Y + dy),
-                    _scaleToPage(bezier.Point3.X + dx), 
+                    _scaleToPage(bezier.Point3.X + dx),
                     _scaleToPage(bezier.Point3.Y + dy),
                     _scaleToPage(bezier.Point4.X + dx),
                     _scaleToPage(bezier.Point4.Y + dy));
@@ -861,9 +861,9 @@ namespace PdfSharp
                 path.AddBezier(
                     _scaleToPage(x1 + dx),
                     _scaleToPage(y1 + dy),
-                    _scaleToPage(x2 + dx), 
+                    _scaleToPage(x2 + dx),
                     _scaleToPage(y2 + dy),
-                    _scaleToPage(x3 + dx), 
+                    _scaleToPage(x3 + dx),
                     _scaleToPage(y3 + dy),
                     _scaleToPage(x4 + dx),
                     _scaleToPage(y4 + dy));
@@ -1070,7 +1070,7 @@ namespace PdfSharp
                 }
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

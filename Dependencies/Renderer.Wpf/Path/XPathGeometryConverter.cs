@@ -149,7 +149,7 @@ namespace Test
             var sg = ToStreamGeometry(xpg);
             return sg.ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

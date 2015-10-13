@@ -157,7 +157,7 @@ namespace netDxf
         private Ellipse CreateEllipticalArc(Core2D.XArc arc, double dx, double dy)
         {
             var a = Core2D.GdiArc.FromXArc(arc, dx, dy);
-            
+
             double _cx = ToDxfX(a.X + a.Width / 2.0);
             double _cy = ToDxfY(a.Y + a.Height / 2.0);
             double minor = Math.Min(a.Height, a.Width);
@@ -192,7 +192,7 @@ namespace netDxf
             double _p2y = ToDxfY(p2y);
             double _p3x = ToDxfX(p3x);
             double _p3y = ToDxfY(p3y);
-            
+
             return new Spline(
                 new List<SplineVertex>
                 {
@@ -201,7 +201,7 @@ namespace netDxf
                     new SplineVertex(_p3x, _p3y, 0.0)
                 }, 2);
         }
-        
+
         private Spline CreateCubicSpline(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y, double p4x, double p4y)
         {
             double _p1x = ToDxfX(p1x);
@@ -543,14 +543,14 @@ namespace netDxf
                         throw new NotSupportedException("Not supported segment type: " + segment.GetType());
                     }
                 }
-                
+
                 // TODO: Add support for pf.IsClosed
 
-                var path  = new HatchBoundaryPath(edges);
+                var path = new HatchBoundaryPath(edges);
                 bounds.Add(path);
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -678,11 +678,11 @@ namespace netDxf
             if (rectangle.IsGrid)
             {
                 DrawGridInternal(
-                    _doc, 
+                    _doc,
                     _currentLayer,
                     style,
                     rectangle.OffsetX, rectangle.OffsetY,
-                    rectangle.CellWidth, rectangle.CellHeight, 
+                    rectangle.CellWidth, rectangle.CellHeight,
                     ref rect);
             }
         }
@@ -781,20 +781,20 @@ namespace netDxf
             var style = bezier.Style;
 
             var dxfSpline = CreateCubicSpline(
-                bezier.Point1.X + dx, 
+                bezier.Point1.X + dx,
                 bezier.Point1.Y + dy,
-                bezier.Point2.X + dx, 
+                bezier.Point2.X + dx,
                 bezier.Point2.Y + dy,
-                bezier.Point3.X + dx, 
+                bezier.Point3.X + dx,
                 bezier.Point3.Y + dy,
-                bezier.Point4.X + dx, 
+                bezier.Point4.X + dx,
                 bezier.Point4.Y + dy);
 
             if (bezier.IsFilled)
             {
                 var fill = GetColor(style.Fill);
                 var fillTransparency = GetTransparency(style.Fill);
-                
+
                 var bounds =
                     new List<HatchBoundaryPath>
                     {
@@ -818,7 +818,7 @@ namespace netDxf
                 var stroke = GetColor(style.Stroke);
                 var strokeTansparency = GetTransparency(style.Stroke);
                 var lineweight = ThicknessToLineweight(style.Thickness);
-                
+
                 dxfSpline.Layer = _currentLayer;
                 dxfSpline.Color = stroke;
                 dxfSpline.Transparency.Value = strokeTansparency;
@@ -844,20 +844,20 @@ namespace netDxf
 
             var _doc = doc as DxfDocument;
             var style = qbezier.Style;
-    
+
             var dxfSpline = CreateQuadraticSpline(
-                qbezier.Point1.X + dx, 
+                qbezier.Point1.X + dx,
                 qbezier.Point1.Y + dy,
-                qbezier.Point2.X + dx, 
+                qbezier.Point2.X + dx,
                 qbezier.Point2.Y + dy,
-                qbezier.Point3.X + dx, 
+                qbezier.Point3.X + dx,
                 qbezier.Point3.Y + dy);
 
             if (qbezier.IsFilled)
             {
                 var fill = GetColor(style.Fill);
                 var fillTransparency = GetTransparency(style.Fill);
-                
+
                 var bounds =
                     new List<HatchBoundaryPath>
                     {
@@ -881,7 +881,7 @@ namespace netDxf
                 var stroke = GetColor(style.Stroke);
                 var strokeTansparency = GetTransparency(style.Stroke);
                 var lineweight = ThicknessToLineweight(style.Thickness);
-                
+
                 dxfSpline.Layer = _currentLayer;
                 dxfSpline.Color = stroke;
                 dxfSpline.Transparency.Value = strokeTansparency;
@@ -996,7 +996,7 @@ namespace netDxf
 
             var ts = new TextStyle(style.TextStyle.FontName, style.TextStyle.FontFile);
             var dxfMText = new MText(
-                new Vector3(ToDxfX(x), ToDxfY(y), 0), 
+                new Vector3(ToDxfX(x), ToDxfY(y), 0),
                 text.Style.TextStyle.FontSize * 72.0 / 96.0,
                 rect.Width,
                 ts);
@@ -1032,7 +1032,7 @@ namespace netDxf
         public void Draw(object doc, Core2D.XImage image, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
         {
             var _doc = doc as DxfDocument;
-            
+
             var bytes = _state.ImageCache.GetImage(image.Path);
             if (bytes != null)
             {
@@ -1044,8 +1044,8 @@ namespace netDxf
                     var dxfImageDefinition = _biCache[image.Path];
                     var dxfImage = new Image(
                         dxfImageDefinition,
-                        new Vector3(ToDxfX(rect.X), ToDxfY(rect.Y +  rect.Height), 0), 
-                        rect.Width, 
+                        new Vector3(ToDxfX(rect.X), ToDxfY(rect.Y + rect.Height), 0),
+                        rect.Width,
                         rect.Height);
                     _doc.AddEntity(dxfImage);
                 }
@@ -1062,9 +1062,9 @@ namespace netDxf
                         _biCache[image.Path] = dxfImageDefinition;
 
                     var dxfImage = new Image(
-                        dxfImageDefinition, 
-                        new Vector3(ToDxfX(rect.X), ToDxfY(rect.Y +  rect.Height), 0), 
-                        rect.Width, 
+                        dxfImageDefinition,
+                        new Vector3(ToDxfX(rect.X), ToDxfY(rect.Y + rect.Height), 0),
+                        rect.Width,
                         rect.Height);
                     _doc.AddEntity(dxfImage);
                 }
@@ -1098,7 +1098,7 @@ namespace netDxf
             {
                 var fill = GetColor(style.Fill);
                 var fillTransparency = GetTransparency(style.Fill);
-                
+
                 var hatch = new Hatch(HatchPattern.Solid, bounds, false);
                 hatch.Layer = _currentLayer;
                 hatch.Color = fill;
@@ -1110,12 +1110,12 @@ namespace netDxf
             if (path.IsStroked)
             {
                 // TODO: Add support for Closed paths.
-                
+
                 var stroke = GetColor(style.Stroke);
                 var strokeTansparency = GetTransparency(style.Stroke);
                 var lineweight = ThicknessToLineweight(style.Thickness);
-                
-                foreach (var entity in entities) 
+
+                foreach (var entity in entities)
                 {
                     entity.Layer = _currentLayer;
                     entity.Color = stroke;

@@ -108,7 +108,7 @@ namespace Test
 
             return new Point(ox, oy);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -189,11 +189,11 @@ namespace Test
         /// <param name="p0"></param>
         /// <param name="p1"></param>
         private static void DrawLineInternal(
-            DrawingContext dc, 
-            double half, 
-            Pen pen, 
+            DrawingContext dc,
+            double half,
+            Pen pen,
             bool isStroked,
-            ref Point p0, 
+            ref Point p0,
             ref Point p1)
         {
             if (!isStroked)
@@ -224,12 +224,12 @@ namespace Test
         /// <param name="isFilled"></param>
         /// <param name="rect"></param>
         private static void DrawRectangleInternal(
-            DrawingContext dc, 
-            double half, 
-            Brush brush, 
-            Pen pen, 
+            DrawingContext dc,
+            double half,
+            Brush brush,
+            Pen pen,
             bool isStroked,
-            bool isFilled, 
+            bool isFilled,
             ref Rect rect)
         {
             if (!isStroked && !isFilled)
@@ -238,22 +238,22 @@ namespace Test
             if (_enableGuidelines)
             {
                 var gs = new GuidelineSet(
-                    new double[] 
-                        { 
-                            rect.TopLeft.X + half, 
-                            rect.BottomRight.X + half 
+                    new double[]
+                        {
+                            rect.TopLeft.X + half,
+                            rect.BottomRight.X + half
                         },
-                    new double[] 
-                        { 
+                    new double[]
+                        {
                             rect.TopLeft.Y + half,
                             rect.BottomRight.Y + half
                         });
                 dc.PushGuidelineSet(gs);
             }
-            
+
             dc.DrawRectangle(
-                isFilled ? brush : null, 
-                isStroked ? pen : null, 
+                isFilled ? brush : null,
+                isStroked ? pen : null,
                 rect);
 
             if (_enableGuidelines)
@@ -273,12 +273,12 @@ namespace Test
         /// <param name="rx"></param>
         /// <param name="ry"></param>
         private static void DrawEllipseInternal(
-            DrawingContext dc, 
-            double half, 
-            Brush brush, 
-            Pen pen, 
+            DrawingContext dc,
+            double half,
+            Brush brush,
+            Pen pen,
             bool isStroked,
-            bool isFilled, 
+            bool isFilled,
             ref Point center,
             double rx, double ry)
         {
@@ -288,13 +288,13 @@ namespace Test
             if (_enableGuidelines)
             {
                 var gs = new GuidelineSet(
-                    new double[] 
-                        { 
-                            center.X - rx + half, 
-                            center.X + rx + half 
+                    new double[]
+                        {
+                            center.X - rx + half,
+                            center.X + rx + half
                         },
-                    new double[] 
-                        { 
+                    new double[]
+                        {
                             center.Y - ry + half,
                             center.Y + ry + half
                         });
@@ -336,13 +336,13 @@ namespace Test
             if (_enableGuidelines)
             {
                 var gs = new GuidelineSet(
-                    new double[] 
-                        { 
-                            pg.Bounds.TopLeft.X + half, 
-                            pg.Bounds.BottomRight.X + half 
+                    new double[]
+                        {
+                            pg.Bounds.TopLeft.X + half,
+                            pg.Bounds.BottomRight.X + half
                         },
-                    new double[] 
-                        { 
+                    new double[]
+                        {
                             pg.Bounds.TopLeft.Y + half,
                             pg.Bounds.BottomRight.Y + half
                         });
@@ -524,12 +524,12 @@ namespace Test
             double halfStartArrow = thicknessStartArrow / 2.0;
             double thicknessEndArrow = style.EndArrowStyle.Thickness / zoom;
             double halfEndArrow = thicknessEndArrow / 2.0;
-            
+
             // line style
             Tuple<Brush, Pen> lineCache = null;
             Brush fillLine;
             Pen strokeLine;
-            if (_enableStyleCache 
+            if (_enableStyleCache
                 && _styleCache.TryGetValue(style, out lineCache))
             {
                 fillLine = lineCache.Item1;
@@ -542,12 +542,12 @@ namespace Test
                 if (_enableStyleCache)
                     _styleCache.Add(style, Tuple.Create(fillLine, strokeLine));
             }
-        
+
             // start arrow style
             Tuple<Brush, Pen> startArrowCache = null;
             Brush fillStartArrow;
             Pen strokeStartArrow;
-            if (_enableArrowStyleCache 
+            if (_enableArrowStyleCache
                 && _arrowStyleCache.TryGetValue(style.StartArrowStyle, out startArrowCache))
             {
                 fillStartArrow = startArrowCache.Item1;
@@ -560,12 +560,12 @@ namespace Test
                 if (_enableArrowStyleCache)
                     _arrowStyleCache.Add(style.StartArrowStyle, Tuple.Create(fillStartArrow, strokeStartArrow));
             }
-            
+
             // end arrow style
             Tuple<Brush, Pen> endArrowCache = null;
             Brush fillEndArrow;
             Pen strokeEndArrow;
-            if (_enableArrowStyleCache 
+            if (_enableArrowStyleCache
                 && _arrowStyleCache.TryGetValue(style.EndArrowStyle, out endArrowCache))
             {
                 fillEndArrow = endArrowCache.Item1;
@@ -600,14 +600,14 @@ namespace Test
 
             Point pt1;
             Point pt2;
-   
+
             // draw start arrow
             double radiusX1 = sas.RadiusX;
             double radiusY1 = sas.RadiusY;
             double sizeX1 = 2.0 * radiusX1;
             double sizeY1 = 2.0 * radiusY1;
 
-            switch (sas.ArrowType) 
+            switch (sas.ArrowType)
             {
                 default:
                 case ArrowType.None:
@@ -653,14 +653,14 @@ namespace Test
                     }
                     break;
             }
-            
+
             // draw end arrow
             double radiusX2 = eas.RadiusX;
             double radiusY2 = eas.RadiusY;
             double sizeX2 = 2.0 * radiusX2;
             double sizeY2 = 2.0 * radiusY2;
-            
-            switch (eas.ArrowType) 
+
+            switch (eas.ArrowType)
             {
                 default:
                 case ArrowType.None:
@@ -696,13 +696,13 @@ namespace Test
                     break;
                 case ArrowType.Arrow:
                     {
-                         pt2 = t2.Transform(new Point(x2, y2));
-                         var p11 = t2.Transform(new Point(x2 - sizeX2, y2 + sizeY2));
-                         var p21 = t2.Transform(new Point(x2, y2));
-                         var p12 = t2.Transform(new Point(x2 - sizeX2, y2 - sizeY2));
-                         var p22 = t2.Transform(new Point(x2, y2));
-                         DrawLineInternal(_dc, halfEndArrow, strokeEndArrow, eas.IsStroked, ref p11, ref p21);
-                         DrawLineInternal(_dc, halfEndArrow, strokeEndArrow, eas.IsStroked, ref p12, ref p22);
+                        pt2 = t2.Transform(new Point(x2, y2));
+                        var p11 = t2.Transform(new Point(x2 - sizeX2, y2 + sizeY2));
+                        var p21 = t2.Transform(new Point(x2, y2));
+                        var p12 = t2.Transform(new Point(x2 - sizeX2, y2 - sizeY2));
+                        var p22 = t2.Transform(new Point(x2, y2));
+                        DrawLineInternal(_dc, halfEndArrow, strokeEndArrow, eas.IsStroked, ref p11, ref p21);
+                        DrawLineInternal(_dc, halfEndArrow, strokeEndArrow, eas.IsStroked, ref p12, ref p22);
                     }
                     break;
             }
@@ -749,15 +749,15 @@ namespace Test
             }
 
             var rect = CreateRect(
-                rectangle.TopLeft, 
-                rectangle.BottomRight, 
+                rectangle.TopLeft,
+                rectangle.BottomRight,
                 dx, dy);
 
             DrawRectangleInternal(
-                _dc, 
-                half, 
-                fill, stroke, 
-                rectangle.IsStroked, rectangle.IsFilled, 
+                _dc,
+                half,
+                fill, stroke,
+                rectangle.IsStroked, rectangle.IsFilled,
                 ref rect);
 
             if (rectangle.IsGrid)
@@ -796,7 +796,7 @@ namespace Test
             Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache 
+            if (_enableStyleCache
                 && _styleCache.TryGetValue(style, out cache))
             {
                 fill = cache.Item1;
@@ -819,10 +819,10 @@ namespace Test
             var center = new Point(rect.X + rx, rect.Y + ry);
 
             DrawEllipseInternal(
-                _dc, 
-                half, 
-                fill, stroke, 
-                ellipse.IsStroked, ellipse.IsFilled, 
+                _dc,
+                half,
+                fill, stroke,
+                ellipse.IsStroked, ellipse.IsFilled,
                 ref center,
                 rx, ry);
         }
@@ -889,9 +889,9 @@ namespace Test
 
                 var segment = new ArcSegment(
                     new Point(a.End.X, a.End.Y),
-                    new Size(a.Radius.Width, a.Radius.Height), 
-                    0.0, 
-                    a.IsLargeArc, SweepDirection.Clockwise, 
+                    new Size(a.Radius.Width, a.Radius.Height),
+                    0.0,
+                    a.IsLargeArc, SweepDirection.Clockwise,
                     arc.IsStroked);
 
                 //segment.Freeze();
@@ -931,7 +931,7 @@ namespace Test
             Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache 
+            if (_enableStyleCache
                 && _styleCache.TryGetValue(style, out cache))
             {
                 fill = cache.Item1;
@@ -946,7 +946,7 @@ namespace Test
             }
 
             PathGeometry pg = null;
-            if (_enableBezierCache 
+            if (_enableBezierCache
                 && _bezierCache.TryGetValue(bezier, out pg))
             {
                 var pf = pg.Figures[0];
@@ -1007,7 +1007,7 @@ namespace Test
             Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache 
+            if (_enableStyleCache
                 && _styleCache.TryGetValue(style, out cache))
             {
                 fill = cache.Item1;
@@ -1023,7 +1023,7 @@ namespace Test
 
             PathGeometry pg = null;
 
-            if (_enableQBezierCache 
+            if (_enableQBezierCache
                 && _qbezierCache.TryGetValue(qbezier, out pg))
             {
                 var pf = pg.Figures[0];
@@ -1086,7 +1086,7 @@ namespace Test
             Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache 
+            if (_enableStyleCache
                 && _styleCache.TryGetValue(style, out cache))
             {
                 fill = cache.Item1;
@@ -1306,7 +1306,7 @@ namespace Test
             Tuple<Brush, Pen> cache = null;
             Brush fill;
             Pen stroke;
-            if (_enableStyleCache 
+            if (_enableStyleCache
                 && _styleCache.TryGetValue(style, out cache))
             {
                 fill = cache.Item1;
@@ -1319,7 +1319,7 @@ namespace Test
                 if (_enableStyleCache)
                     _styleCache.Add(style, Tuple.Create(fill, stroke));
             }
-    
+
             Tuple<XPathGeometry, StreamGeometry, ShapeStyle> pcache = null;
             StreamGeometry sg;
 
@@ -1349,7 +1349,7 @@ namespace Test
                 }
 
                 _dc.DrawGeometry(path.IsFilled ? fill : null, path.IsStroked ? stroke : null, sg);
-            }  
+            }
         }
     }
 }

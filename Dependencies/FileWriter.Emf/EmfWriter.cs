@@ -31,8 +31,8 @@ namespace Core2D
         /// <param name="ic"></param>
         /// <returns></returns>
         public MemoryStream MakeMetafileStream(
-            Bitmap bitmap, 
-            IEnumerable<BaseShape> shapes, 
+            Bitmap bitmap,
+            IEnumerable<BaseShape> shapes,
             ImmutableArray<ShapeProperty> properties,
             IImageCache ic)
         {
@@ -64,7 +64,7 @@ namespace Core2D
 
                     if (shapes != null)
                     {
-                        foreach (var shape in shapes) 
+                        foreach (var shape in shapes)
                         {
                             shape.Draw(g, r, 0, 0, properties, null);
                         }
@@ -96,7 +96,7 @@ namespace Core2D
         /// <param name="ic"></param>
         /// <returns></returns>
         public MemoryStream MakeMetafileStream(
-            Bitmap bitmap, 
+            Bitmap bitmap,
             Container container,
             IImageCache ic)
         {
@@ -159,9 +159,9 @@ namespace Core2D
         /// <param name="properties"></param>
         /// <param name="ic"></param>
         public void SetClipboard(
-            IEnumerable<BaseShape> shapes, 
-            double width, 
-            double height, 
+            IEnumerable<BaseShape> shapes,
+            double width,
+            double height,
             ImmutableArray<ShapeProperty> properties,
             IImageCache ic)
         {

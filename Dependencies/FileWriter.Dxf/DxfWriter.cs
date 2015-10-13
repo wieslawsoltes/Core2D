@@ -25,11 +25,11 @@ namespace Core2D
             var ic = options as IImageCache;
             if (options == null)
                 return;
-            
+
             var r = new DxfRenderer();
             r.State.DrawShapeState.Flags = ShapeStateFlags.Printable;
             r.State.ImageCache = ic;
-            
+
             if (item is Container)
             {
                 r.Save(path, item as Container);
