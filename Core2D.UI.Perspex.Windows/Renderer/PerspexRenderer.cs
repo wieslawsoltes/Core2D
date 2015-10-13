@@ -397,7 +397,6 @@ namespace TestPerspex
         {
             var _dc = dc as DrawingContext;
 
-            Brush fillLine = ToSolidBrush(line.Style.Fill);
             Pen strokeLine = ToPen(line.Style, _scaleToPage);
 
             Brush fillStartArrow = ToSolidBrush(line.Style.StartArrowStyle.Fill);
@@ -535,7 +534,6 @@ namespace TestPerspex
 
             DrawLineInternal(_dc, strokeLine, line.IsStroked, ref pt1, ref pt2);
 
-            // TODO: fillLine.Dispose();
             // TODO: strokeLine.Dispose();
 
             // TODO: fillStartArrow.Dispose();
