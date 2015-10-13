@@ -233,7 +233,7 @@
         </DataTemplate>
         <DataTemplate DataType="core:Database">
             <StackPanel>
-            <!-- 
+                <!-- 
                 <Grid ColumnDefinitions="60,*" RowDefinitions="Auto">
                     <TextBlock 
                         Text="Name" 
@@ -300,9 +300,9 @@
                 <Expander Header="Current Record" IsExpanded="True">
                     <ContentControl Content="{Binding CurrentRecord}"/>
                 </Expander>
-            -->
+                -->
             </StackPanel>
-        </DataTemplate> 
+        </DataTemplate>
         <DataTemplate DataType="core:Data">
             <TabControl>
                 <TabItem Header="Record" Classes="property">
@@ -451,7 +451,7 @@
                     -->
                 </TabItem>
             </TabControl>
-        </DataTemplate>       
+        </DataTemplate>
         <!-- state -->
         <DataTemplate DataType="core:ShapeState">
             <StackPanel>
@@ -860,7 +860,7 @@
                 </TabItem>
             </TabControl>
         </DataTemplate>
-        <!-- path -->  
+        <!-- path -->
         <DataTemplate DataType="core:XPathSize">
             <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                 <TextBlock Text="Width" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -1513,7 +1513,7 @@
                 </ListBox>
             </TabItem>
             <TabItem Header="Shapes" Classes="property">
-                <ListBox 
+                <ListBox
                     Items="{Binding Editor.Project.CurrentContainer.CurrentLayer.Shapes}"
                     SelectedItem="{Binding Path=Editor.Project.CurrentContainer.CurrentShape, Mode=TwoWay}">
                     <ListBox.DataTemplates>
@@ -1545,6 +1545,6 @@
                     <ContentControl Content="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}"/>
                 </ScrollViewer>
             </TabItem>
-        </TabControl>   
+        </TabControl>
     </Grid>
 </Window>
