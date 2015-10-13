@@ -241,7 +241,7 @@
                 </TabItem>
                 <TabItem Header="Columns" Classes="property">
                     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" >
-                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Property"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
                         <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Columns}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:Column">
