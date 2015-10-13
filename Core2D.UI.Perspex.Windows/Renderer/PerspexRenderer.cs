@@ -212,11 +212,11 @@ namespace TestPerspex
         /// <param name="pt1"></param>
         /// <param name="pt2"></param>
         private void DrawLineArrowsInternal(
-            DrawingContext dc, 
-            XLine line, 
-            double dx, 
-            double dy, 
-            out Point pt1, 
+            DrawingContext dc,
+            XLine line,
+            double dx,
+            double dy,
+            out Point pt1,
             out Point pt2)
         {
             Brush fillStartArrow = ToSolidBrush(line.Style.StartArrowStyle.Fill);

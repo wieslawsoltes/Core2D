@@ -178,8 +178,8 @@ namespace Test.Controls
                 if (renderer != null)
                 {
                     renderer.Draw(
-                        drawingContext, 
-                        layer, 
+                        drawingContext,
+                        layer,
                         layer.Owner.Properties,
                         null);
                 }

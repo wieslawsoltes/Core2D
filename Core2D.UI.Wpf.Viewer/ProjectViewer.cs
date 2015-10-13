@@ -39,9 +39,9 @@ namespace Test.Viewer
 
             host.Visuals.Add(visual);
 
-            var vb = new Viewbox() 
-            { 
-                Stretch = Stretch.Uniform 
+            var vb = new Viewbox()
+            {
+                Stretch = Stretch.Uniform
             };
 
             vb.Child = host;

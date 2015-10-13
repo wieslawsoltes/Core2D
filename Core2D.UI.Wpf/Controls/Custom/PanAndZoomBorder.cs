@@ -103,8 +103,8 @@ namespace Test.PanAndZoom
                         if (child != null)
                         {
                             double zoom = st.ScaleX;
-                            zoom = e.Delta > 0 ? 
-                                zoom + zoom / _zoomSpeed : 
+                            zoom = e.Delta > 0 ?
+                                zoom + zoom / _zoomSpeed :
                                 zoom - zoom / _zoomSpeed;
                             if (zoom < _minimum || zoom > _maximum)
                                 return;

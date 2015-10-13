@@ -23,11 +23,11 @@ namespace Test.Converters
         /// <param name="parameter"></param>
         /// <param name="culture"></param>
         /// <returns></returns>
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)  
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             return (values[0] == values[1]) ? true : false;
-        }  
- 
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -36,9 +36,9 @@ namespace Test.Converters
         /// <param name="parameter"></param>
         /// <param name="culture"></param>
         /// <returns></returns>
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)  
-        {  
-            throw new NotImplementedException();  
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

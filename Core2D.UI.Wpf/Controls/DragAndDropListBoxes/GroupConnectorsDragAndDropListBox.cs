@@ -43,7 +43,7 @@ namespace Test.Controls
             var group = this.DataContext as XGroup;
             if (group == null)
                 return;
-            
+
             var previous = group.Connectors;
             var next = array;
             editor.History.Snapshot(previous, next, (p) => group.Connectors = p);

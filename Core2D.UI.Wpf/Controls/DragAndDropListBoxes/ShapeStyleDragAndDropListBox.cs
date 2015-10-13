@@ -23,7 +23,7 @@ namespace Test.Controls
     /// 
     /// </summary>
     public class ShapeStyleDragAndDropListBox : DragAndDropListBox<Core2D.ShapeStyle>
-    { 
+    {
         /// <summary>
         /// 
         /// </summary>

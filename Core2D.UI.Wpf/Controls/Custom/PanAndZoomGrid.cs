@@ -42,7 +42,7 @@ namespace Test.PanAndZoom
                 }
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -56,9 +56,9 @@ namespace Test.PanAndZoom
                     zoom.ZoomAndPanChild(0.0, 0.0, 1.0);
                 }
             }
-            
+
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

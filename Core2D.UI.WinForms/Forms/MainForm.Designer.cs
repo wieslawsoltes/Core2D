@@ -5,16 +5,16 @@ namespace TestWinForms
     partial class MainForm
     {
         private System.ComponentModel.IContainer components = null;
-        
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing) 
+            if (disposing)
             {
-                if (components != null) 
+                if (components != null)
                 {
                     components.Dispose();
                 }
@@ -621,7 +621,7 @@ namespace TestWinForms
             this.PerformLayout();
 
         }
-        
+
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;

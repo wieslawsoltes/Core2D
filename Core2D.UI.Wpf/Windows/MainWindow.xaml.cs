@@ -81,7 +81,7 @@ namespace Test.Windows
                 {
                     LoadLayout(dlg.FileName, context);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     if (context.Editor.Log != null)
                     {
@@ -137,7 +137,7 @@ namespace Test.Windows
             var context = DataContext as EditorContext;
             if (context == null)
                 return;
-            
+
             try
             {
                 LoadLayoutFromResource(_resourceLayoutRoot + _resourceLayoutFileName, context);
@@ -266,7 +266,7 @@ namespace Test.Windows
                 var editor = context.Editor;
                 if (editor.Project == null)
                     return;
-                
+
                 name = editor.Project.Name;
                 item = editor.Project;
             }
@@ -523,8 +523,8 @@ namespace Test.Windows
         private void OnCopyAsEmf()
         {
             var context = DataContext as EditorContext;
-            if (context == null 
-                || context.Editor == null 
+            if (context == null
+                || context.Editor == null
                 || context.Editor.Project == null
                 || context.Editor.Project.CurrentContainer == null)
                 return;
@@ -534,9 +534,9 @@ namespace Test.Windows
                 var container = context.Editor.Project.CurrentContainer;
                 var shapes = Enumerable.Repeat(context.Editor.Renderers[0].State.SelectedShape, 1).ToList();
                 (new EmfWriter()).SetClipboard(
-                    shapes, 
-                    container.Width, 
-                    container.Height, 
+                    shapes,
+                    container.Width,
+                    container.Height,
                     container.Properties,
                     context.Editor.Project);
             }
@@ -545,9 +545,9 @@ namespace Test.Windows
                 var container = context.Editor.Project.CurrentContainer;
                 var shapes = context.Editor.Renderers[0].State.SelectedShapes.ToList();
                 (new EmfWriter()).SetClipboard(
-                    shapes, 
-                    container.Width, 
-                    container.Height, 
+                    shapes,
+                    container.Width,
+                    container.Height,
                     container.Properties,
                     context.Editor.Project);
             }
@@ -942,7 +942,7 @@ namespace Test.Windows
                 Command<object>.Create(
                     (parameter) => OnOpen(parameter),
                     (parameter) => context.IsEditMode());
-            
+
             context.Commands.SaveCommand =
                 Command.Create(
                     () => OnSave(),
@@ -1077,7 +1077,7 @@ namespace Test.Windows
                 Command.Create(
                     () => OnCopyAsEmf(),
                     () => context.IsEditMode());
-            
+
             context.Commands.ZoomResetCommand =
                 Command.Create(
                     () => OnZoomReset(),

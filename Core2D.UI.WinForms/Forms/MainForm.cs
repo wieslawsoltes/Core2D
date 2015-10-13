@@ -26,7 +26,7 @@ namespace TestWinForms
         /// 
         /// </summary>
         public object DataContext { get; set; }
-    
+
         /// <summary>
         /// 
         /// </summary>
@@ -36,11 +36,11 @@ namespace TestWinForms
 
             InitializeContext();
             FormClosing += (s, e) => DeInitializeContext();
-            
+
             InitializePanel();
 
             SetContainerInvalidation();
-            
+
             HandlePanelShorcutKeys();
             HandleMenuShortcutKeys();
             HandleFileDialogs();
@@ -119,7 +119,7 @@ namespace TestWinForms
                 return;
 
             _drawable = new Drawable();
-  
+
             _drawable.Context = context;
             _drawable.Initialize();
 
@@ -165,7 +165,7 @@ namespace TestWinForms
             _drawable.ResetZoom();
             InvalidateContainer();
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -174,7 +174,7 @@ namespace TestWinForms
             _drawable.AutoFit();
             InvalidateContainer();
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -252,7 +252,7 @@ namespace TestWinForms
             {
                 container.WorkingLayer.InvalidateLayer += (s, e) => _drawable.Invalidate();
             }
-            
+
             if (container.HelperLayer != null)
             {
                 container.HelperLayer.InvalidateLayer += (s, e) => _drawable.Invalidate();
@@ -292,7 +292,7 @@ namespace TestWinForms
             var context = DataContext as EditorContext;
             if (context == null || context.Editor.Project == null)
                 return;
-            
+
             var options = context.Editor.Project.Options;
 
             defaultIsFilledToolStripMenuItem.Checked = options.DefaultIsFilled;
@@ -314,13 +314,13 @@ namespace TestWinForms
             exitToolStripMenuItem.Click += (sender, e) => Close();
 
             // Edit
-            
+
             // TODO:
-            
+
             // View
             resetZoomToolStripMenuItem.Click += (sender, e) => ResetZoom();
             zoomToExtentToolStripMenuItem.Click += (sender, e) => AutoFit();
-            
+
             // Tool
             noneToolStripMenuItem.Click += (sender, e) => OnSetToolToNone();
             selectionToolStripMenuItem.Click += (sender, e) => OnSetToolToSelection();
@@ -354,7 +354,7 @@ namespace TestWinForms
                 var context = DataContext as EditorContext;
                 if (context == null || context.Editor.Project == null)
                     return;
-                
+
                 switch (e.KeyCode)
                 {
                     case Keys.Delete:
@@ -453,7 +453,7 @@ namespace TestWinForms
             context.Commands.CloseCommand.Execute(null);
             InvalidateContainer();
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -587,7 +587,7 @@ namespace TestWinForms
             context.Commands.ToolPathCommand.Execute(null);
             UpdateToolMenu();
         }
-                
+
         /// <summary>
         /// 
         /// </summary>

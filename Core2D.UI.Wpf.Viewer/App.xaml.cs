@@ -23,7 +23,7 @@ namespace Test.Viewer
                 Open(e.Args[0]);
             }
             else
-            { 
+            {
                 var dlg = new OpenFileDialog()
                 {
                     Filter = "Project (*.project)|*.project|All (*.*)|*.*",

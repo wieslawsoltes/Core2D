@@ -407,13 +407,13 @@ namespace Test.Uwp
                 dx, dy);
 
             DrawRectangleInternal(
-                _ds, 
-                brush, 
-                pen, 
+                _ds,
+                brush,
+                pen,
                 ss,
-                rectangle.IsStroked, 
-                rectangle.IsFilled, 
-                ref rect, 
+                rectangle.IsStroked,
+                rectangle.IsFilled,
+                ref rect,
                 thickness);
 
             if (rectangle.IsGrid)
@@ -447,12 +447,12 @@ namespace Test.Uwp
                 dx, dy);
 
             DrawEllipseInternal(
-                _ds, 
-                brush, 
-                pen, 
+                _ds,
+                brush,
+                pen,
                 ss,
-                ellipse.IsStroked, 
-                ellipse.IsFilled, 
+                ellipse.IsStroked,
+                ellipse.IsFilled,
                 ref rect,
                 thickness);
 
@@ -476,12 +476,12 @@ namespace Test.Uwp
                 builder.BeginFigure((float)a.Start.X, (float)a.Start.Y);
                 builder.AddArc(
                     new N.Vector2(
-                        (float)a.End.X, 
+                        (float)a.End.X,
                         (float)a.End.Y),
                     (float)a.Radius.Width,
                     (float)a.Radius.Height,
                     0f,
-                    CanvasSweepDirection.Clockwise, 
+                    CanvasSweepDirection.Clockwise,
                     a.IsLargeArc ? CanvasArcSize.Large : CanvasArcSize.Small);
                 builder.EndFigure(CanvasFigureLoop.Open);
                 g = CanvasGeometry.CreatePath(builder);
@@ -654,8 +654,8 @@ namespace Test.Uwp
             _ds.DrawTextLayout(
                 layout,
                 new N.Vector2(
-                    (float)rect.X, 
-                    (float)rect.Y), 
+                    (float)rect.X,
+                    (float)rect.Y),
                 brush);
 
             layout.Dispose();

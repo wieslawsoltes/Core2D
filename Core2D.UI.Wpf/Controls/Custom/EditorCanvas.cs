@@ -30,7 +30,7 @@ namespace Test.Controls
         /// </summary>
         public EditorCanvas()
         {
-            Loaded += 
+            Loaded +=
                 (s, e) =>
                 {
                     if (_isLoaded)

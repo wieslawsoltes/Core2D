@@ -23,7 +23,7 @@ namespace Test.Controls
     /// 
     /// </summary>
     public class TemplateDragAndDropListBox : DragAndDropListBox<Core2D.Container>
-    { 
+    {
         /// <summary>
         /// 
         /// </summary>

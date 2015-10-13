@@ -21,7 +21,7 @@ namespace Test.Controls
     /// <summary>
     /// 
     /// </summary>
-    public class DragAndDropListBox<T> : ListBox 
+    public class DragAndDropListBox<T> : ListBox
         where T : class
     {
         /// <summary>
@@ -31,7 +31,7 @@ namespace Test.Controls
 
         private Point _dragStartPoint;
 
-        private P FindVisualParent<P>(DependencyObject child) 
+        private P FindVisualParent<P>(DependencyObject child)
             where P : DependencyObject
         {
             var parentObject = VisualTreeHelper.GetParent(child);
@@ -44,7 +44,7 @@ namespace Test.Controls
 
             return FindVisualParent<P>(parentObject);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -109,7 +109,7 @@ namespace Test.Controls
                 }
             }
         }
- 
+
         private void ListBoxItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             _dragStartPoint = e.GetPosition(null);
@@ -124,7 +124,7 @@ namespace Test.Controls
                     var source = e.Data.GetData(typeof(T)) as T;
                     var listBoxItem = sender as ListBoxItem;
                     var target = listBoxItem.DataContext as T;
-            
+
                     int sourceIndex = this.Items.IndexOf(source);
                     int targetIndex = this.Items.IndexOf(target);
 

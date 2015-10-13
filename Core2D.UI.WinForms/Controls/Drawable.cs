@@ -99,9 +99,9 @@ namespace TestWinForms
             {
                 var container = Context.Editor.Project.CurrentContainer;
                 _state.ResetZoom(
-                    this.Width, 
-                    this.Height, 
-                    container.Width, 
+                    this.Width,
+                    this.Height,
+                    container.Width,
                     container.Height);
             }
         }
@@ -115,9 +115,9 @@ namespace TestWinForms
             {
                 var container = Context.Editor.Project.CurrentContainer;
                 _state.AutoFit(
-                    this.Width, 
-                    this.Height, 
-                    container.Width, 
+                    this.Width,
+                    this.Height,
+                    container.Width,
                     container.Height);
             }
         }
@@ -159,7 +159,7 @@ namespace TestWinForms
                 }
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -211,7 +211,7 @@ namespace TestWinForms
             var renderer = Context.Editor.Renderers[0];
 
             var gs = g.Save();
-            
+
             g.TranslateTransform((float)_state.PanX, (float)_state.PanY);
             g.ScaleTransform((float)_state.Zoom, (float)_state.Zoom);
 
@@ -233,7 +233,7 @@ namespace TestWinForms
             {
                 renderer.Draw(g, container.HelperLayer, container.Properties, null);
             }
-            
+
             g.Restore(gs);
         }
     }

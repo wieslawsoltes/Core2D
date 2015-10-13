@@ -15,7 +15,7 @@ namespace Test.Converters
     /// <summary>
     /// 
     /// </summary>
-    public class BooleanToStringConverter : BooleanToValueConverter<string> 
-    { 
+    public class BooleanToStringConverter : BooleanToValueConverter<string>
+    {
     }
 }

@@ -85,14 +85,14 @@ namespace TestEtoForms
         private void InitializeDrawable()
         {
             _drawable = new Drawable(false);
-            
-            _drawable.Paint += 
+
+            _drawable.Paint +=
                 (s, e) =>
                 {
                     Draw(e.Graphics);
                 };
 
-            _drawable.SizeChanged += 
+            _drawable.SizeChanged +=
                 (sender, e) =>
                 {
                     if (_context != null && _context.Editor.Project != null)
@@ -103,7 +103,7 @@ namespace TestEtoForms
                         }
                     }
                 };
-            
+
             _drawable.MouseDown +=
                 (sender, e) =>
                 {
@@ -241,9 +241,9 @@ namespace TestEtoForms
             {
                 var container = _context.Editor.Project.CurrentContainer;
                 _state.ResetZoom(
-                    _drawable.Bounds.Width, 
-                    _drawable.Bounds.Height, 
-                    container.Width, 
+                    _drawable.Bounds.Width,
+                    _drawable.Bounds.Height,
+                    container.Width,
                     container.Height);
             }
         }
@@ -257,9 +257,9 @@ namespace TestEtoForms
             {
                 var container = _context.Editor.Project.CurrentContainer;
                 _state.AutoFit(
-                    _drawable.Bounds.Width, 
-                    _drawable.Bounds.Height, 
-                    container.Width, 
+                    _drawable.Bounds.Width,
+                    _drawable.Bounds.Height,
+                    container.Width,
                     container.Height);
             }
         }
@@ -274,17 +274,17 @@ namespace TestEtoForms
             WindowState = WindowState.Maximized;
 
             Content = new TableLayout(_drawable);
-            
+
             _drawable.CanFocus = true;
 
-            this.MouseEnter += 
-                (s, e) => 
+            this.MouseEnter +=
+                (s, e) =>
                 {
                     _drawable.Focus();
                 };
-            
-            this.MouseLeave += 
-                (s, e) => 
+
+            this.MouseLeave +=
+                (s, e) =>
                 {
                     if (_drawable.HasFocus)
                     {
@@ -414,7 +414,7 @@ namespace TestEtoForms
                 Shortcut = Application.Instance.AlternateModifier | Keys.F4
             };
 
-            exitCommand.Executed += 
+            exitCommand.Executed +=
             (s, e) =>
             {
                 Application.Instance.Quit();
@@ -424,58 +424,58 @@ namespace TestEtoForms
 
             #region Tool
 
-            var noneTool = new Command() 
-            { 
-                MenuText = "&None", 
-                Shortcut = Keys.N 
+            var noneTool = new Command()
+            {
+                MenuText = "&None",
+                Shortcut = Keys.N
             };
 
-            noneTool.Executed += 
+            noneTool.Executed +=
             (s, e) =>
             {
                 _context.Commands.ToolNoneCommand.Execute(null);
             };
 
-            var selectionTool = new Command() 
-            { 
-                MenuText = "&Selection", 
-                Shortcut = Keys.S 
+            var selectionTool = new Command()
+            {
+                MenuText = "&Selection",
+                Shortcut = Keys.S
             };
 
-            selectionTool.Executed += 
+            selectionTool.Executed +=
             (s, e) =>
             {
                 _context.Commands.ToolSelectionCommand.Execute(null);
             };
 
-            var pointTool = new Command() 
-            { 
-                MenuText = "&Point", 
-                Shortcut = Keys.P 
+            var pointTool = new Command()
+            {
+                MenuText = "&Point",
+                Shortcut = Keys.P
             };
 
-            pointTool.Executed += 
+            pointTool.Executed +=
             (s, e) =>
             {
                 _context.Commands.ToolPointCommand.Execute(null);
             };
 
-            var lineTool = new Command() 
-            { 
-                MenuText = "&Line", 
-                Shortcut = Keys.L 
+            var lineTool = new Command()
+            {
+                MenuText = "&Line",
+                Shortcut = Keys.L
             };
 
-            lineTool.Executed += 
+            lineTool.Executed +=
             (s, e) =>
             {
                 _context.Commands.ToolLineCommand.Execute(null);
             };
 
-            var arcTool = new Command() 
-            { 
-                MenuText = "&Arc", 
-                Shortcut = Keys.A 
+            var arcTool = new Command()
+            {
+                MenuText = "&Arc",
+                Shortcut = Keys.A
             };
 
             arcTool.Executed +=
@@ -484,10 +484,10 @@ namespace TestEtoForms
                 _context.Commands.ToolArcCommand.Execute(null);
             };
 
-            var bezierTool = new Command() 
-            { 
-                MenuText = "&Bezier", 
-                Shortcut = Keys.B 
+            var bezierTool = new Command()
+            {
+                MenuText = "&Bezier",
+                Shortcut = Keys.B
             };
 
             bezierTool.Executed +=
@@ -496,10 +496,10 @@ namespace TestEtoForms
                 _context.Commands.ToolBezierCommand.Execute(null);
             };
 
-            var qbezierTool = new Command() 
-            { 
-                MenuText = "&QBezier", 
-                Shortcut = Keys.Q 
+            var qbezierTool = new Command()
+            {
+                MenuText = "&QBezier",
+                Shortcut = Keys.Q
             };
 
             qbezierTool.Executed +=
@@ -544,10 +544,10 @@ namespace TestEtoForms
                 _context.Commands.ToolEllipseCommand.Execute(null);
             };
 
-            var textTool = new Command() 
-            { 
-                MenuText = "&Text", 
-                Shortcut = Keys.T 
+            var textTool = new Command()
+            {
+                MenuText = "&Text",
+                Shortcut = Keys.T
             };
 
             textTool.Executed +=
@@ -556,10 +556,10 @@ namespace TestEtoForms
                 _context.Commands.ToolTextCommand.Execute(null);
             };
 
-            var imageTool = new Command() 
-            { 
-                MenuText = "&Image", 
-                Shortcut = Keys.I 
+            var imageTool = new Command()
+            {
+                MenuText = "&Image",
+                Shortcut = Keys.I
             };
 
             imageTool.Executed +=
@@ -572,10 +572,10 @@ namespace TestEtoForms
 
             #region Edit
 
-            var undoCommand = new Command() 
-            { 
-                MenuText = "&Undo", 
-                Shortcut = Application.Instance.CommonModifier | Keys.Z 
+            var undoCommand = new Command()
+            {
+                MenuText = "&Undo",
+                Shortcut = Application.Instance.CommonModifier | Keys.Z
             };
 
             undoCommand.Executed +=
@@ -584,10 +584,10 @@ namespace TestEtoForms
                 _context.Commands.UndoCommand.Execute(null);
             };
 
-            var redoCommand = new Command() 
-            { 
-                MenuText = "&Redo", 
-                Shortcut = Application.Instance.CommonModifier | Keys.Y 
+            var redoCommand = new Command()
+            {
+                MenuText = "&Redo",
+                Shortcut = Application.Instance.CommonModifier | Keys.Y
             };
 
             redoCommand.Executed +=
@@ -596,10 +596,10 @@ namespace TestEtoForms
                 _context.Commands.RedoCommand.Execute(null);
             };
 
-            var cutCommand = new Command() 
-            { 
-                MenuText = "Cu&t", 
-                Shortcut = Application.Instance.CommonModifier | Keys.X 
+            var cutCommand = new Command()
+            {
+                MenuText = "Cu&t",
+                Shortcut = Application.Instance.CommonModifier | Keys.X
             };
 
             cutCommand.Executed +=
@@ -608,10 +608,10 @@ namespace TestEtoForms
                 _context.Commands.CutCommand.Execute(null);
             };
 
-            var copyCommand = new Command() 
-            { 
-                MenuText = "&Copy", 
-                Shortcut = Application.Instance.CommonModifier | Keys.C 
+            var copyCommand = new Command()
+            {
+                MenuText = "&Copy",
+                Shortcut = Application.Instance.CommonModifier | Keys.C
             };
 
             copyCommand.Executed +=
@@ -620,10 +620,10 @@ namespace TestEtoForms
                 _context.Commands.CopyCommand.Execute(null);
             };
 
-            var pasteCommand = new Command() 
-            { 
-                MenuText = "&Paste", 
-                Shortcut = Application.Instance.CommonModifier | Keys.V 
+            var pasteCommand = new Command()
+            {
+                MenuText = "&Paste",
+                Shortcut = Application.Instance.CommonModifier | Keys.V
             };
 
             pasteCommand.Executed +=
@@ -632,10 +632,10 @@ namespace TestEtoForms
                 _context.Commands.PasteCommand.Execute(null);
             };
 
-            var deleteCommand = new Command() 
-            { 
-                MenuText = "&Delete", 
-                Shortcut = Keys.Delete 
+            var deleteCommand = new Command()
+            {
+                MenuText = "&Delete",
+                Shortcut = Keys.Delete
             };
 
             deleteCommand.Executed +=
@@ -644,10 +644,10 @@ namespace TestEtoForms
                 _context.Commands.DeleteCommand.Execute(null);
             };
 
-            var selectAllCommand = new Command() 
-            { 
-                MenuText = "Select &All", 
-                Shortcut = Application.Instance.CommonModifier | Keys.A 
+            var selectAllCommand = new Command()
+            {
+                MenuText = "Select &All",
+                Shortcut = Application.Instance.CommonModifier | Keys.A
             };
 
             selectAllCommand.Executed +=
@@ -668,9 +668,9 @@ namespace TestEtoForms
                 _context.Commands.DeselectAllCommand.Execute(null);
             };
 
-            var clearAllCommand = new Command() 
-            { 
-                MenuText = "Cl&ear All" 
+            var clearAllCommand = new Command()
+            {
+                MenuText = "Cl&ear All"
             };
 
             clearAllCommand.Executed +=
@@ -679,10 +679,10 @@ namespace TestEtoForms
                 _context.Commands.ClearAllCommand.Execute(null);
             };
 
-            var groupCommand = new Command() 
-            { 
+            var groupCommand = new Command()
+            {
                 MenuText = "&Group",
-                Shortcut = Application.Instance.CommonModifier | Keys.G 
+                Shortcut = Application.Instance.CommonModifier | Keys.G
             };
 
             groupCommand.Executed +=
@@ -691,9 +691,9 @@ namespace TestEtoForms
                 _context.Commands.GroupCommand.Execute(null);
             };
 
-            var ungroupCommand = new Command() 
-            { 
-                MenuText = "U&ngroup", 
+            var ungroupCommand = new Command()
+            {
+                MenuText = "U&ngroup",
                 Shortcut = Application.Instance.CommonModifier | Keys.U
             };
 
@@ -708,10 +708,10 @@ namespace TestEtoForms
             #region Menu
 
             var fileMenu = new ButtonMenuItem()
-            { 
-                Text = "&File", 
-                Items = 
-                { 
+            {
+                Text = "&File",
+                Items =
+                {
                     newCommand,
                     new SeparatorMenuItem(),
                     openCommand,
@@ -725,7 +725,7 @@ namespace TestEtoForms
             var editMenu = new ButtonMenuItem()
             {
                 Text = "&Edit",
-                Items = 
+                Items =
                 {
                     undoCommand,
                     redoCommand,
@@ -749,7 +749,7 @@ namespace TestEtoForms
             {
                 Text = "&Tool",
                 Items =
-                { 
+                {
                     noneTool,
                     new SeparatorMenuItem(),
                     selectionTool,
@@ -823,7 +823,7 @@ namespace TestEtoForms
                         _drawable.Invalidate();
                     };
             }
-            
+
             if (container.HelperLayer != null)
             {
                 container.HelperLayer.InvalidateLayer +=
@@ -833,7 +833,7 @@ namespace TestEtoForms
                     };
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -895,45 +895,45 @@ namespace TestEtoForms
             if (container.Template != null)
             {
                 DrawBackground(
-                    g, 
+                    g,
                     container.Template.Background,
                     container.Template.Width,
                     container.Template.Height);
 
                 renderer.Draw(
-                    g, 
-                    container.Template, 
-                    container.Properties, 
+                    g,
+                    container.Template,
+                    container.Properties,
                     null);
             }
 
             DrawBackground(
-                g, 
+                g,
                 container.Background,
                 container.Width,
                 container.Height);
 
             renderer.Draw(
-                g, 
-                container, 
-                container.Properties, 
+                g,
+                container,
+                container.Properties,
                 null);
-            
+
             if (container.WorkingLayer != null)
             {
                 renderer.Draw(
-                    g, 
-                    container.WorkingLayer, 
-                    container.Properties, 
+                    g,
+                    container.WorkingLayer,
+                    container.Properties,
                     null);
             }
-            
+
             if (container.HelperLayer != null)
             {
                 renderer.Draw(
-                    g, 
-                    container.HelperLayer, 
-                    container.Properties, 
+                    g,
+                    container.HelperLayer,
+                    container.Properties,
                     null);
             }
         }

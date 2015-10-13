@@ -49,7 +49,7 @@ namespace Test.Controls
         {
             InitializeComponent();
 
-            Loaded += 
+            Loaded +=
                 (sender, e) =>
                 {
                     if (_isLoaded)
@@ -60,7 +60,7 @@ namespace Test.Controls
                     InitializeColumnsView();
                 };
 
-            DataContextChanged += 
+            DataContextChanged +=
                 (sender, e) =>
                 {
                     var old = e.OldValue as Database;
@@ -109,9 +109,9 @@ namespace Test.Controls
             {
                 if (column.IsVisible)
                 {
-                    var gvc = new GridViewColumn 
-                    { 
-                        Header = column.Name, 
+                    var gvc = new GridViewColumn
+                    {
+                        Header = column.Name,
                         Width = column.Width,
                         DisplayMemberBinding = new Binding("Values[" + i + "].Content")
                     };
@@ -213,7 +213,7 @@ namespace Test.Controls
                     DataObject dragData = new DataObject(typeof(Record), record);
                     DragDrop.DoDragDrop(
                         listViewItem,
-                        dragData, 
+                        dragData,
                         DragDropEffects.Move);
                 }
             }

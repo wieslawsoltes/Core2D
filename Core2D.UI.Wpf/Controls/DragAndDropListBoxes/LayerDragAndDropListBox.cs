@@ -23,7 +23,7 @@ namespace Test.Controls
     /// 
     /// </summary>
     public class LayerDragAndDropListBox : DragAndDropListBox<Core2D.Layer>
-    { 
+    {
         /// <summary>
         /// 
         /// </summary>
