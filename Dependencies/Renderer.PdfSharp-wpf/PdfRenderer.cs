@@ -480,7 +480,6 @@ namespace PdfSharp
 
             var _gfx = gfx as XGraphics;
 
-            XSolidBrush fillLine = ToXSolidBrush(line.Style.Fill);
             XPen strokeLine = ToXPen(line.Style, _scaleToPage);
 
             XSolidBrush fillStartArrow = ToXSolidBrush(line.Style.StartArrowStyle.Fill);
