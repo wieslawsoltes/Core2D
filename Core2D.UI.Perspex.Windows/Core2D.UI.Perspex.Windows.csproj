@@ -156,6 +156,9 @@
     </Compile>
     <Compile Include="App.cs" />
     <Compile Include="Controls\Drawable.cs" />
+    <Compile Include="MainView.paml.cs">
+      <DependentUpon>MainView.paml</DependentUpon>
+    </Compile>
     <Compile Include="Renderer\MatrixHelper.cs" />
     <Compile Include="Renderer\PerspexRenderer.cs" />
     <Compile Include="Renderer\XPathGeometryConverter.cs" />
@@ -206,7 +209,11 @@
       <Name>Core2D</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="MainView.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
