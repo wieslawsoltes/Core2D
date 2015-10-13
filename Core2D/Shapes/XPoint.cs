@@ -173,13 +173,13 @@ namespace Core2D
         /// <param name="name"></param>
         /// <returns></returns>
         public static XPoint Create(
-            double x = 0.0, 
-            double y = 0.0, 
-            BaseShape shape = null, 
+            double x = 0.0,
+            double y = 0.0,
+            BaseShape shape = null,
             string name = "")
         {
-            return new XPoint() 
-            { 
+            return new XPoint()
+            {
                 Name = name,
                 Style = default(ShapeStyle),
                 Data = new Data()
@@ -187,12 +187,12 @@ namespace Core2D
                     Bindings = ImmutableArray.Create<ShapeBinding>(),
                     Properties = ImmutableArray.Create<ShapeProperty>()
                 },
-                X = x, 
-                Y = y, 
-                Shape = shape 
+                X = x,
+                Y = y,
+                Shape = shape
             };
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

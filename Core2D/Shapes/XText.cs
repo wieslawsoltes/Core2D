@@ -87,7 +87,7 @@ namespace Core2D
                     _bottomRight.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
-            
+
             if (renderer.State.SelectedShapes != null)
             {
                 if (renderer.State.SelectedShapes.Contains(this))
@@ -125,9 +125,9 @@ namespace Core2D
         /// <param name="value"></param>
         /// <returns></returns>
         private static bool TryToBind(
-            ImmutableArray<ShapeBinding> bindings, 
-            Record r, 
-            string propertyName, 
+            ImmutableArray<ShapeBinding> bindings,
+            Record r,
+            string propertyName,
             out string value)
         {
             if (r == null || bindings == null || bindings.Length <= 0)
@@ -174,9 +174,9 @@ namespace Core2D
         /// <param name="value"></param>
         /// <returns></returns>
         private static bool TryToBind(
-            ImmutableArray<ShapeBinding> bindings, 
+            ImmutableArray<ShapeBinding> bindings,
             ImmutableArray<ShapeProperty> db,
-            string propertyName, 
+            string propertyName,
             out string value)
         {
             foreach (var binding in bindings)
@@ -190,7 +190,7 @@ namespace Core2D
                 var result = db.FirstOrDefault(p => p.Name == binding.Path);
                 if (result != null && result.Value != null)
                 {
-                    value =  result.Value.ToString();
+                    value = result.Value.ToString();
                     return true;
                 }
             }
@@ -220,8 +220,8 @@ namespace Core2D
             var record = r ?? this.Data.Record;
 
             // try to bind to internal (this.Data.Record) or external (r) data record using Bindings
-            if (record != null 
-                && this.Data.Bindings != null 
+            if (record != null
+                && this.Data.Bindings != null
                 && this.Data.Bindings.Length > 0)
             {
                 string value;
@@ -233,8 +233,8 @@ namespace Core2D
             }
 
             // try to bind to external properties database using Bindings
-            if (db != null 
-                && this.Data.Bindings != null 
+            if (db != null
+                && this.Data.Bindings != null
                 && this.Data.Bindings.Length > 0)
             {
                 string value;
@@ -246,7 +246,7 @@ namespace Core2D
             }
 
             // try to bind to Properties using Text as formatting
-            if (this.Data.Properties != null 
+            if (this.Data.Properties != null
                 && this.Data.Properties.Length > 0)
             {
                 try

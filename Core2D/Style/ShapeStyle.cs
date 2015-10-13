@@ -31,7 +31,7 @@ namespace Core2D
             get { return _startArrowStyle; }
             set { Update(ref _startArrowStyle, value); }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -40,7 +40,7 @@ namespace Core2D
             get { return _endArrowStyle; }
             set { Update(ref _endArrowStyle, value); }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -96,10 +96,10 @@ namespace Core2D
                 LineStyle = lineStyle ?? LineStyle.Create("Line"),
                 TextStyle = textStyle ?? TextStyle.Create("Text")
             };
-            
+
             style.StartArrowStyle = startArrowStyle ?? ArrowStyle.Create("Start", style);
             style.EndArrowStyle = endArrowStyle ?? ArrowStyle.Create("End", style);
-            
+
             return style;
         }
 

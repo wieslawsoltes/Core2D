@@ -26,9 +26,9 @@ namespace Core2D
         {
             double radius = treshold / 2.0;
             return new Rect2(
-                point.X - radius + dx, 
-                point.Y - radius + dy, 
-                treshold, 
+                point.X - radius + dx,
+                point.Y - radius + dy,
+                treshold,
                 treshold);
         }
 
@@ -418,7 +418,7 @@ namespace Core2D
 
             return null;
         }
-      
+
         #endregion
 
         #region HitTest Rect
@@ -435,10 +435,10 @@ namespace Core2D
         /// <param name="dy"></param>
         /// <returns></returns>
         private static bool HitTest(
-            BaseShape shape, 
-            Rect2 rect, 
-            Vector2[] selection, 
-            ImmutableHashSet<BaseShape>.Builder builder, 
+            BaseShape shape,
+            Rect2 rect,
+            Vector2[] selection,
+            ImmutableHashSet<BaseShape>.Builder builder,
             double treshold,
             double dx,
             double dy)
@@ -641,10 +641,10 @@ namespace Core2D
         /// <param name="dy"></param>
         /// <returns></returns>
         private static bool HitTest(
-            IEnumerable<BaseShape> shapes, 
-            Rect2 rect, 
-            Vector2[] selection, 
-            ImmutableHashSet<BaseShape>.Builder builder, 
+            IEnumerable<BaseShape> shapes,
+            Rect2 rect,
+            Vector2[] selection,
+            ImmutableHashSet<BaseShape>.Builder builder,
             double treshold,
             double dx,
             double dy)

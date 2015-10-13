@@ -20,7 +20,7 @@ namespace Core2D
         /// </summary>
         public ImmutableArray<ShapeProperty> ShapesProperties
         {
-            get 
+            get
             {
                 if (_shapesProperties == null)
                 {
@@ -108,7 +108,7 @@ namespace Core2D
                     shape.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
- 
+
             if (renderer.State.SelectedShape != null)
             {
                 if (this == renderer.State.SelectedShape)
@@ -129,7 +129,7 @@ namespace Core2D
                     }
                 }
             }
-            
+
             if (renderer.State.SelectedShapes != null)
             {
                 if (renderer.State.SelectedShapes.Contains(this))
@@ -156,7 +156,7 @@ namespace Core2D
                     shape.Move(dx, dy);
                 }
             }
-            
+
             foreach (var connector in Connectors)
             {
                 connector.Move(dx, dy);

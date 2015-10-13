@@ -21,11 +21,11 @@ namespace Core2D
         /// <summary>
         /// The LineCap enum values.
         /// </summary>
-        public static LineCap[] LineCapValues 
-        { 
-            get { return _lineCapValues; } 
+        public static LineCap[] LineCapValues
+        {
+            get { return _lineCapValues; }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

@@ -40,8 +40,8 @@ namespace Core2D
             string name = "",
             LineFixedLength fixedLength = null)
         {
-            return new LineStyle() 
-            { 
+            return new LineStyle()
+            {
                 Name = name,
                 FixedLength = fixedLength ?? LineFixedLength.Create()
             };

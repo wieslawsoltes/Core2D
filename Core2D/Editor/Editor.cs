@@ -359,12 +359,12 @@ namespace Core2D
 
                     if (!rectangle.TopLeft.State.Flags.HasFlag(exclude))
                     {
-                        yield return rectangle.TopLeft; 
+                        yield return rectangle.TopLeft;
                     }
 
                     if (!rectangle.BottomRight.State.Flags.HasFlag(exclude))
                     {
-                        yield return rectangle.BottomRight; 
+                        yield return rectangle.BottomRight;
                     }
                 }
                 else if (shape is XEllipse)
@@ -373,12 +373,12 @@ namespace Core2D
 
                     if (!ellipse.TopLeft.State.Flags.HasFlag(exclude))
                     {
-                        yield return ellipse.TopLeft; 
+                        yield return ellipse.TopLeft;
                     }
 
                     if (!ellipse.BottomRight.State.Flags.HasFlag(exclude))
                     {
-                        yield return ellipse.BottomRight; 
+                        yield return ellipse.BottomRight;
                     }
                 }
                 else if (shape is XArc)
@@ -387,12 +387,12 @@ namespace Core2D
 
                     if (!arc.Point1.State.Flags.HasFlag(exclude))
                     {
-                        yield return arc.Point1; 
+                        yield return arc.Point1;
                     }
 
                     if (!arc.Point2.State.Flags.HasFlag(exclude))
                     {
-                        yield return arc.Point2; 
+                        yield return arc.Point2;
                     }
 
                     if (!arc.Point3.State.Flags.HasFlag(exclude))
@@ -411,22 +411,22 @@ namespace Core2D
 
                     if (!bezier.Point1.State.Flags.HasFlag(exclude))
                     {
-                        yield return bezier.Point1; 
+                        yield return bezier.Point1;
                     }
 
                     if (!bezier.Point2.State.Flags.HasFlag(exclude))
                     {
-                        yield return bezier.Point2; 
+                        yield return bezier.Point2;
                     }
 
                     if (!bezier.Point3.State.Flags.HasFlag(exclude))
                     {
-                        yield return bezier.Point3; 
+                        yield return bezier.Point3;
                     }
 
                     if (!bezier.Point4.State.Flags.HasFlag(exclude))
                     {
-                        yield return bezier.Point4; 
+                        yield return bezier.Point4;
                     }
                 }
                 else if (shape is XQBezier)
@@ -435,17 +435,17 @@ namespace Core2D
 
                     if (!qbezier.Point1.State.Flags.HasFlag(exclude))
                     {
-                        yield return qbezier.Point1; 
+                        yield return qbezier.Point1;
                     }
 
                     if (!qbezier.Point2.State.Flags.HasFlag(exclude))
                     {
-                        yield return qbezier.Point2; 
+                        yield return qbezier.Point2;
                     }
 
                     if (!qbezier.Point3.State.Flags.HasFlag(exclude))
                     {
-                        yield return qbezier.Point3; 
+                        yield return qbezier.Point3;
                     }
                 }
                 else if (shape is XText)
@@ -454,12 +454,12 @@ namespace Core2D
 
                     if (!text.TopLeft.State.Flags.HasFlag(exclude))
                     {
-                        yield return text.TopLeft; 
+                        yield return text.TopLeft;
                     }
 
                     if (!text.BottomRight.State.Flags.HasFlag(exclude))
                     {
-                        yield return text.BottomRight; 
+                        yield return text.BottomRight;
                     }
                 }
                 else if (shape is XImage)
@@ -496,7 +496,7 @@ namespace Core2D
                     {
                         if (!point.State.Flags.HasFlag(exclude))
                         {
-                            yield return point; 
+                            yield return point;
                         }
                     }
 
@@ -709,13 +709,13 @@ namespace Core2D
         {
             if (_project == null)
                 return;
-            
+
             var template = _project.CurrentTemplate;
             if (template == null)
                 return;
-            
+
             var previous = _project.Templates;
-            var next =  _project.Templates.Remove(_project.CurrentTemplate);
+            var next = _project.Templates.Remove(_project.CurrentTemplate);
             _history.Snapshot(previous, next, (p) => _project.Templates = p);
             _project.Templates = next;
 
@@ -729,11 +729,11 @@ namespace Core2D
         {
             if (_project == null)
                 return;
-            
+
             var gl = _project.CurrentGroupLibrary;
             if (gl == null)
                 return;
-            
+
             var previous = _project.GroupLibraries;
             var next = _project.GroupLibraries.Remove(gl);
             _history.Snapshot(previous, next, (p) => _project.GroupLibraries = p);
@@ -749,11 +749,11 @@ namespace Core2D
         {
             if (_project == null || _project.CurrentGroupLibrary == null)
                 return;
-            
+
             var group = _project.CurrentGroupLibrary.CurrentGroup;
             if (group == null)
                 return;
-            
+
             var gl = _project.CurrentGroupLibrary;
             var previous = gl.Groups;
             var next = gl.Groups.Remove(group);
@@ -770,11 +770,11 @@ namespace Core2D
         {
             if (_project == null || _project.CurrentContainer == null)
                 return;
-            
+
             var layer = _project.CurrentContainer.CurrentLayer;
             if (layer == null)
                 return;
-            
+
             var container = _project.CurrentContainer;
             var previous = container.Layers;
             var next = container.Layers.Remove(layer);
@@ -791,7 +791,7 @@ namespace Core2D
         {
             if (_project == null || _project.CurrentContainer == null)
                 return;
-            
+
             var shape = _project.CurrentContainer.CurrentShape;
             if (shape == null)
                 return;
@@ -812,11 +812,11 @@ namespace Core2D
         {
             if (_project == null)
                 return;
-            
+
             var sg = _project.CurrentStyleLibrary;
             if (sg == null)
                 return;
-            
+
             var previous = _project.StyleLibraries;
             var next = _project.StyleLibraries.Remove(sg);
             _history.Snapshot(previous, next, (p) => _project.StyleLibraries = p);
@@ -832,11 +832,11 @@ namespace Core2D
         {
             if (_project == null || _project.CurrentStyleLibrary == null)
                 return;
-            
+
             var style = _project.CurrentStyleLibrary.CurrentStyle;
             if (style == null)
                 return;
-            
+
             var sg = _project.CurrentStyleLibrary;
             var previous = sg.Styles;
             var next = sg.Styles.Remove(style);
@@ -870,7 +870,7 @@ namespace Core2D
                 Observer = new Observer(this);
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -892,10 +892,10 @@ namespace Core2D
             {
                 _project.PurgeUnusedImages(new HashSet<string>(Enumerable.Empty<string>()));
             }
-            
+
             Project = null;
             ProjectPath = string.Empty;
-            IsProjectDirty = false;  
+            IsProjectDirty = false;
         }
 
         /// <summary>
@@ -907,7 +907,7 @@ namespace Core2D
             var layer = _project.CurrentContainer.CurrentLayer;
             if (shapes == null)
                 return null;
-            
+
             // TODO: Group method changes SelectedShapes State properties.
             var g = XGroup.Group("g", shapes);
 
@@ -952,10 +952,10 @@ namespace Core2D
                 {
                     if (shape is XPoint)
                     {
-                        shape.State.Flags &= 
-                            ~(ShapeStateFlags.Connector 
-                            | ShapeStateFlags.None 
-                            | ShapeStateFlags.Input 
+                        shape.State.Flags &=
+                            ~(ShapeStateFlags.Connector
+                            | ShapeStateFlags.None
+                            | ShapeStateFlags.Input
                             | ShapeStateFlags.Output);
                         shape.State.Flags |= ShapeStateFlags.Standalone;
                         original.Add(shape);
@@ -1011,7 +1011,7 @@ namespace Core2D
                 _renderers[0].State.SelectedShapes = null;
             }
         }
-        
+
         /// <summary>
         /// Move shape from source index to target index position in an array. 
         /// </summary>
@@ -1057,21 +1057,21 @@ namespace Core2D
                 }
             }
         }
-        
+
         /// <summary>
         /// Bring a shape to the top of the stack.
         /// </summary>
         /// <param name="source"></param>
         public void BringToFront(BaseShape source)
         {
-            if (_project == null 
-                || _project.CurrentContainer == null 
+            if (_project == null
+                || _project.CurrentContainer == null
                 || _project.CurrentContainer.CurrentLayer == null)
                 return;
-            
+
             var layer = _project.CurrentContainer.CurrentLayer;
             var items = layer.Shapes;
-            
+
             int sourceIndex = items.IndexOf(source);
             int targetIndex = items.Length - 1;
             if (targetIndex >= 0 && sourceIndex != targetIndex)
@@ -1086,14 +1086,14 @@ namespace Core2D
         /// <param name="source"></param>
         public void BringForward(BaseShape source)
         {
-            if (_project == null 
-                || _project.CurrentContainer == null 
+            if (_project == null
+                || _project.CurrentContainer == null
                 || _project.CurrentContainer.CurrentLayer == null)
                 return;
-            
+
             var layer = _project.CurrentContainer.CurrentLayer;
             var items = layer.Shapes;
-            
+
             int sourceIndex = items.IndexOf(source);
             int targetIndex = sourceIndex + 1;
             if (targetIndex < items.Length)
@@ -1101,21 +1101,21 @@ namespace Core2D
                 Move(source, sourceIndex, targetIndex);
             }
         }
-        
+
         /// <summary>
         /// Move a shape one step down within the stack.
         /// </summary>
         /// <param name="source"></param>
         public void SendBackward(BaseShape source)
         {
-            if (_project == null 
-                || _project.CurrentContainer == null 
+            if (_project == null
+                || _project.CurrentContainer == null
                 || _project.CurrentContainer.CurrentLayer == null)
                 return;
-            
+
             var layer = _project.CurrentContainer.CurrentLayer;
             var items = layer.Shapes;
-            
+
             int sourceIndex = items.IndexOf(source);
             int targetIndex = sourceIndex - 1;
             if (targetIndex >= 0)
@@ -1123,21 +1123,21 @@ namespace Core2D
                 Move(source, sourceIndex, targetIndex);
             }
         }
-        
+
         /// <summary>
         /// Move a shape to the bottom of the stack.
         /// </summary>
         /// <param name="source"></param>
         public void SendToBack(BaseShape source)
         {
-            if (_project == null 
-                || _project.CurrentContainer == null 
+            if (_project == null
+                || _project.CurrentContainer == null
                 || _project.CurrentContainer.CurrentLayer == null)
                 return;
-            
+
             var layer = _project.CurrentContainer.CurrentLayer;
             var items = layer.Shapes;
-            
+
             int sourceIndex = items.IndexOf(source);
             int targetIndex = 0;
             if (sourceIndex != targetIndex)
@@ -1145,7 +1145,7 @@ namespace Core2D
                 Move(source, sourceIndex, targetIndex);
             }
         }
-        
+
         /// <summary>
         /// Bring selected shapes to the top of the stack.
         /// </summary>
@@ -1156,11 +1156,11 @@ namespace Core2D
             {
                 BringToFront(source);
             }
-            
+
             var sources = _renderers[0].State.SelectedShapes;
             if (sources != null)
             {
-                foreach (var s in sources) 
+                foreach (var s in sources)
                 {
                     BringToFront(s);
                 }
@@ -1177,11 +1177,11 @@ namespace Core2D
             {
                 BringForward(source);
             }
-            
+
             var sources = _renderers[0].State.SelectedShapes;
             if (sources != null)
             {
-                foreach (var s in sources) 
+                foreach (var s in sources)
                 {
                     BringForward(s);
                 }
@@ -1198,17 +1198,17 @@ namespace Core2D
             {
                 SendBackward(source);
             }
-            
+
             var sources = _renderers[0].State.SelectedShapes;
             if (sources != null)
             {
-                foreach (var s in sources.Reverse()) 
+                foreach (var s in sources.Reverse())
                 {
                     SendBackward(s);
                 }
             }
         }
-        
+
         /// <summary>
         /// Move selected shapes to the bottom of the stack.
         /// </summary>
@@ -1219,7 +1219,7 @@ namespace Core2D
             {
                 SendToBack(source);
             }
-            
+
             var sources = _renderers[0].State.SelectedShapes;
             if (sources != null)
             {
@@ -1253,7 +1253,7 @@ namespace Core2D
 
                                 MovePointsBy(points, dx, dy);
 
-                                var previous = new {  DeltaX = -dx, DeltaY = -dy, Points = points };
+                                var previous = new { DeltaX = -dx, DeltaY = -dy, Points = points };
                                 var next = new { DeltaX = dx, DeltaY = dy, Points = points };
                                 _history.Snapshot(previous, next, (s) => MovePointsBy(s.Points, s.DeltaX, s.DeltaY));
                             }
@@ -1365,7 +1365,7 @@ namespace Core2D
                 _project.Selected = _project.CurrentContainer;
             }
         }
-        
+
         /// <summary>
         /// Removes document object from project Documents collection.
         /// </summary>
@@ -1374,7 +1374,7 @@ namespace Core2D
         {
             if (_project == null || _project.Documents == null)
                 return;
-            
+
             var previous = _project.Documents;
             var next = _project.Documents.Remove(document);
             _history.Snapshot(previous, next, (p) => _project.Documents = p);
@@ -1391,17 +1391,17 @@ namespace Core2D
             }
             _project.Selected = _project.CurrentContainer;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
         public void DeleteSelected()
         {
-            if (_project == null 
-                || _project.CurrentContainer == null 
+            if (_project == null
+                || _project.CurrentContainer == null
                 || _project.CurrentContainer.CurrentLayer == null)
                 return;
-            
+
             if (_renderers[0].State.SelectedShape != null)
             {
                 var layer = _project.CurrentContainer.CurrentLayer;
@@ -1409,7 +1409,7 @@ namespace Core2D
                 var next = layer.Shapes.Remove(_renderers[0].State.SelectedShape);
                 _history.Snapshot(previous, next, (p) => layer.Shapes = p);
                 layer.Shapes = next;
- 
+
                 _project.CurrentContainer.CurrentLayer.Invalidate();
                 _renderers[0].State.SelectedShape = default(BaseShape);
             }
@@ -1443,7 +1443,7 @@ namespace Core2D
         {
             if (container == null)
                 return;
-            
+
             container.CurrentShape = shape;
             _renderers[0].State.SelectedShape = shape;
             _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
@@ -1459,7 +1459,7 @@ namespace Core2D
         {
             if (container == null)
                 return;
-  
+
             container.CurrentShape = default(BaseShape);
             _renderers[0].State.SelectedShape = default(BaseShape);
             _renderers[0].State.SelectedShapes = shapes;
@@ -1483,7 +1483,7 @@ namespace Core2D
         {
             if (container == null)
                 return;
-            
+
             if (_renderers[0].State.SelectedShape != null
                 || _renderers[0].State.SelectedShapes != null)
             {
@@ -1505,7 +1505,7 @@ namespace Core2D
         {
             if (container == null)
                 return false;
-            
+
             var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
 
             var result = ShapeBounds.HitTest(container, rect, _project.Options.HitTreshold);
@@ -1541,7 +1541,7 @@ namespace Core2D
         {
             if (container == null)
                 return false;
-            
+
             var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null)
             {
@@ -1591,7 +1591,7 @@ namespace Core2D
         {
             if (_project == null || _project.CurrentContainer == null)
                 return false;
-            
+
             if (_renderers[0].State.SelectedShapes == null
                 && !(_renderers[0].State.SelectedShape != null && _hover != _renderers[0].State.SelectedShape))
             {
@@ -1608,7 +1608,7 @@ namespace Core2D
                 }
                 else
                 {
-                    if (_renderers[0].State.SelectedShape != null 
+                    if (_renderers[0].State.SelectedShape != null
                         && _renderers[0].State.SelectedShape == _hover)
                     {
                         _hover = default(BaseShape);
@@ -1632,7 +1632,7 @@ namespace Core2D
         {
             if (_project == null || _project.CurrentContainer == null || _project.Options == null)
                 return false;
-            
+
             var result = ShapeBounds.HitTest(
                 _project.CurrentContainer,
                 new Vector2(x, y),
@@ -1699,7 +1699,7 @@ namespace Core2D
         {
             if (_project == null || _project.Options == null)
                 return false;
-            
+
             // Points must be aligned horizontally or vertically.
             if (p0.X != p1.X && p0.Y != p1.Y)
                 return false;
@@ -1742,12 +1742,12 @@ namespace Core2D
         /// <returns></returns>
         public bool TryToConnect(XGroup group)
         {
-            if (_project == null 
-                || _project.CurrentContainer == null 
-                || _project.CurrentContainer.CurrentLayer == null 
+            if (_project == null
+                || _project.CurrentContainer == null
+                || _project.CurrentContainer.CurrentLayer == null
                 || _project.Options == null)
                 return false;
-            
+
             var layer = _project.CurrentContainer.CurrentLayer;
             if (group.Connectors.Length > 0)
             {
@@ -1828,7 +1828,7 @@ namespace Core2D
                 && _project.CurrentStyleLibrary != null
                 && _project.CurrentStyleLibrary.CurrentStyle != null;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -1842,7 +1842,7 @@ namespace Core2D
                 && _project.CurrentStyleLibrary != null
                 && _project.CurrentStyleLibrary.CurrentStyle != null;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -1880,7 +1880,7 @@ namespace Core2D
             return _renderers[0].State.SelectedShape != null
                 || _renderers[0].State.SelectedShapes != null;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -2018,7 +2018,7 @@ namespace Core2D
                     break;
             }
         }
-   
+
         /// <summary>
         /// 
         /// </summary>
@@ -2156,7 +2156,7 @@ namespace Core2D
                     break;
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

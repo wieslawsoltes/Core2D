@@ -58,7 +58,7 @@ namespace Core2D
 
             if (State.Flags.HasFlag(ShapeStateFlags.Visible))
             {
-                renderer.Draw(dc, this, dx, dy, db, record); 
+                renderer.Draw(dc, this, dx, dy, db, record);
             }
 
             if (renderer.State.SelectedShape != null)
@@ -77,7 +77,7 @@ namespace Core2D
                     _end.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
-            
+
             if (renderer.State.SelectedShapes != null)
             {
                 if (renderer.State.SelectedShapes.Contains(this))
@@ -249,8 +249,8 @@ namespace Core2D
         /// <param name="x2"></param>
         /// <param name="y2"></param>
         public static void SetMaxLengthAll(
-            XLine line, 
-            ref double x1, ref double y1, 
+            XLine line,
+            ref double x1, ref double y1,
             ref double x2, ref double y2)
         {
             var ls = line.Style.LineStyle;

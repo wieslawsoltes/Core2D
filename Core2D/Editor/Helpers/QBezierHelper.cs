@@ -266,7 +266,7 @@ namespace Core2D
             _helperPoint3 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint3);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -287,7 +287,7 @@ namespace Core2D
         public override void ToStateThree()
         {
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -302,7 +302,7 @@ namespace Core2D
         public override void Move(BaseShape shape)
         {
             var qbezier = shape as XQBezier;
-            
+
             if (_line12 != null)
             {
                 _line12.Start.X = qbezier.Point1.X;
@@ -324,13 +324,13 @@ namespace Core2D
                 _helperPoint1.X = qbezier.Point1.X;
                 _helperPoint1.Y = qbezier.Point1.Y;
             }
-            
+
             if (_helperPoint2 != null)
             {
                 _helperPoint2.X = qbezier.Point2.X;
                 _helperPoint2.Y = qbezier.Point2.Y;
             }
-            
+
             if (_helperPoint3 != null)
             {
                 _helperPoint3.X = qbezier.Point3.X;
@@ -362,19 +362,19 @@ namespace Core2D
                 _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line32);
                 _line32 = null;
             }
-            
+
             if (_helperPoint1 != null)
             {
                 _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint1);
                 _helperPoint1 = null;
             }
-            
+
             if (_helperPoint2 != null)
             {
                 _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint2);
                 _helperPoint2 = null;
             }
-   
+
             if (_helperPoint3 != null)
             {
                 _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint3);

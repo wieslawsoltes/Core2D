@@ -48,7 +48,7 @@ namespace Core2D
         /// <param name="values"></param>
         /// <returns></returns>
         public static Record Create(
-            ImmutableArray<Column> columns, 
+            ImmutableArray<Column> columns,
             ImmutableArray<Value> values)
         {
             return new Record()

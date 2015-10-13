@@ -73,7 +73,7 @@ namespace Core2D
         {
             get { return Context.Editor.Project.CurrentContainer; }
         }
-        
+
         /// <summary>
         /// Gets current layer.
         /// </summary>
@@ -97,7 +97,7 @@ namespace Core2D
         {
             get { return Context.Editor.Project.CurrentContainer.CurrentShape; }
         }
-        
+
         /// <summary>
         /// Gets current template.
         /// </summary>

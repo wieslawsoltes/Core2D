@@ -105,7 +105,7 @@ namespace Core2D
             var grid = XRectangle.Create(
                 0, 0,
                 container.Width, container.Height,
-                style, 
+                style,
                 project.Options.PointShape);
             grid.IsStroked = false;
             grid.IsFilled = false;
@@ -173,7 +173,7 @@ namespace Core2D
                 project.Templates = templateBuilder.ToImmutable();
                 project.CurrentTemplate = template;
             }
-            
+
             container.Template = project.CurrentTemplate;
             container.Width = container.Template.Width;
             container.Height = container.Template.Height;
@@ -212,7 +212,7 @@ namespace Core2D
 
             project.CurrentGroupLibrary = project.GroupLibraries.FirstOrDefault();
             project.CurrentStyleLibrary = project.StyleLibraries.FirstOrDefault();
-            
+
             var templateBuilder = project.Templates.ToBuilder();
             templateBuilder.Add(GetTemplate(project, "Empty"));
             templateBuilder.Add(CreateGridTemplate(project, "Grid"));

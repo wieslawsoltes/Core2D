@@ -73,7 +73,7 @@ namespace Core2D
             if (_editor.Project.Options.TryToConnect)
             {
                 var result = ShapeBounds.HitTest(
-                    _editor.Project.CurrentContainer, 
+                    _editor.Project.CurrentContainer,
                     new Vector2(x, y),
                     _editor.Project.Options.HitTreshold);
                 if (result != null && result is XPoint)
@@ -91,8 +91,8 @@ namespace Core2D
                 _editor.Project.Options.DefaultFillRule);
 
             _geometry.BeginFigure(
-                start, 
-                _editor.Project.Options.DefaultIsFilled, 
+                start,
+                _editor.Project.Options.DefaultIsFilled,
                 _editor.Project.Options.DefaultIsClosed);
 
             _path = XPath.Create(
@@ -122,7 +122,7 @@ namespace Core2D
             {
                 var segment = figure.Segments.LastOrDefault() as XLineSegment;
                 if (segment != null)
-                { 
+                {
                     figure.Segments.Remove(segment);
                 }
             }
@@ -1173,7 +1173,7 @@ namespace Core2D
                 return;
             }
 
-            switch(_editor.CurrentPathTool)
+            switch (_editor.CurrentPathTool)
             {
                 case PathTool.Line:
                     {

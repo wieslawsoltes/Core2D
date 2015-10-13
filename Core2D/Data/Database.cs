@@ -75,7 +75,7 @@ namespace Core2D
         /// <param name="columns"></param>
         /// <returns></returns>
         public static Database Create(
-            string name, 
+            string name,
             ImmutableArray<Column> columns)
         {
             return new Database()

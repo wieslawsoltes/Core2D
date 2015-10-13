@@ -322,7 +322,7 @@ namespace Core2D
             _helperPoint4 = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_helperPoint4);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -354,7 +354,7 @@ namespace Core2D
         public override void ToStateFour()
         {
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -362,7 +362,7 @@ namespace Core2D
         public override void Move(BaseShape shape)
         {
             var bezier = shape as XBezier;
-            
+
             if (_line12 != null)
             {
                 _line12.Start.X = bezier.Point1.X;
@@ -378,7 +378,7 @@ namespace Core2D
                 _line43.End.X = bezier.Point3.X;
                 _line43.End.Y = bezier.Point3.Y;
             }
-            
+
             if (_line23 != null)
             {
                 _line23.Start.X = bezier.Point2.X;
@@ -386,25 +386,25 @@ namespace Core2D
                 _line23.End.X = bezier.Point3.X;
                 _line23.End.Y = bezier.Point3.Y;
             }
- 
+
             if (_helperPoint1 != null)
             {
                 _helperPoint1.X = bezier.Point1.X;
                 _helperPoint1.Y = bezier.Point1.Y;
             }
-            
+
             if (_helperPoint2 != null)
             {
                 _helperPoint2.X = bezier.Point2.X;
                 _helperPoint2.Y = bezier.Point2.Y;
             }
-            
+
             if (_helperPoint3 != null)
             {
                 _helperPoint3.X = bezier.Point3.X;
                 _helperPoint3.Y = bezier.Point3.Y;
             }
-            
+
             if (_helperPoint4 != null)
             {
                 _helperPoint4.X = bezier.Point4.X;
@@ -436,31 +436,31 @@ namespace Core2D
                 _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line43);
                 _line43 = null;
             }
-            
+
             if (_line23 != null)
             {
                 _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_line23);
                 _line23 = null;
             }
-            
+
             if (_helperPoint1 != null)
             {
                 _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint1);
                 _helperPoint1 = null;
             }
-            
+
             if (_helperPoint2 != null)
             {
                 _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint2);
                 _helperPoint2 = null;
             }
-   
+
             if (_helperPoint3 != null)
             {
                 _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint3);
                 _helperPoint3 = null;
             }
-            
+
             if (_helperPoint4 != null)
             {
                 _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Remove(_helperPoint4);

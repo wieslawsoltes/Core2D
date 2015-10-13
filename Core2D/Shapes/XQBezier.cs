@@ -93,7 +93,7 @@ namespace Core2D
                     _point3.Draw(dc, renderer, dx, dy, db, record);
                 }
             }
-            
+
             if (renderer.State.SelectedShapes != null)
             {
                 if (renderer.State.SelectedShapes.Contains(this))

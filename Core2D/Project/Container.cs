@@ -138,7 +138,7 @@ namespace Core2D
             get { return _workingLayer; }
             set { Update(ref _workingLayer, value); }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -188,7 +188,7 @@ namespace Core2D
             {
                 Template.Invalidate();
             }
-            
+
             if (Layers != null)
             {
                 foreach (var layer in Layers)
@@ -196,12 +196,12 @@ namespace Core2D
                     layer.Invalidate();
                 }
             }
-            
+
             if (WorkingLayer != null)
             {
                 WorkingLayer.Invalidate();
             }
-            
+
             if (HelperLayer != null)
             {
                 HelperLayer.Invalidate();

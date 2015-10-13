@@ -23,7 +23,7 @@ namespace Core2D
             get { return _id; }
             set { Update(ref _id, value); }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -32,7 +32,7 @@ namespace Core2D
             get { return _name; }
             set { Update(ref _name, value); }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -41,7 +41,7 @@ namespace Core2D
             get { return _width; }
             set { Update(ref _width, value); }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -50,7 +50,7 @@ namespace Core2D
             get { return _isVisible; }
             set { Update(ref _isVisible, value); }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

@@ -30,19 +30,19 @@ namespace Core2D
         /// <summary>
         /// The MoveMode enum values.
         /// </summary>
-        public static MoveMode[] MoveModeValues 
-        { 
-            get { return _moveModeValues; } 
+        public static MoveMode[] MoveModeValues
+        {
+            get { return _moveModeValues; }
         }
 
         /// <summary>
         /// The XFillRule enum values.
         /// </summary>
-        public static XFillRule[] XFillRuleValues 
-        { 
-            get { return _xFillRuleValues; } 
+        public static XFillRule[] XFillRuleValues
+        {
+            get { return _xFillRuleValues; }
         }
-        
+
         /// <summary>
         /// Gets or sets how grid snapping is handled. 
         /// </summary>
@@ -168,7 +168,7 @@ namespace Core2D
             get { return _selectionStyle; }
             set { Update(ref _selectionStyle, value); }
         }
-        
+
         /// <summary>
         /// Gets or sets editor helper shapes style.
         /// </summary>
@@ -217,7 +217,7 @@ namespace Core2D
                 ShapeStyle.Create(
                     "Point",
                     0xFF, 0x00, 0x00, 0x00,
-                    0xFF, 0x00, 0x00, 0x00, 
+                    0xFF, 0x00, 0x00, 0x00,
                     1.0);
 
             options.PointShape = RectanglePointShape(options.PointStyle);

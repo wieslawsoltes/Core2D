@@ -123,12 +123,12 @@ namespace Core2D
                                 double dx = sx - _historyX;
                                 double dy = sy - _historyY;
 
-                                var previous = new 
-                                { 
-                                    DeltaX = -dx, 
-                                    DeltaY = -dy, 
-                                    Points = _pointsCache, 
-                                    Shapes = _shapesCache 
+                                var previous = new
+                                {
+                                    DeltaX = -dx,
+                                    DeltaY = -dy,
+                                    Points = _pointsCache,
+                                    Shapes = _shapesCache
                                 };
                                 var next = new
                                 {
@@ -137,8 +137,8 @@ namespace Core2D
                                     Points = _pointsCache,
                                     Shapes = _shapesCache
                                 };
-                                _editor.History.Snapshot(previous, next, 
-                                    (state) => 
+                                _editor.History.Snapshot(previous, next,
+                                    (state) =>
                                     {
                                         if (state.Points != null)
                                         {

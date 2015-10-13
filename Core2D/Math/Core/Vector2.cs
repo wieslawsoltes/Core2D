@@ -115,7 +115,7 @@ namespace Core2D
         public int CompareTo(Vector2 v)
         {
             return (this > v) ? -1 : ((this < v) ? 1 : 0);
-        } 
+        }
 
         #endregion
 

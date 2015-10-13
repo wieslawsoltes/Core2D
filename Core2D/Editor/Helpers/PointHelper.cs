@@ -112,7 +112,7 @@ namespace Core2D
         public override void ToStateOne()
         {
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -126,14 +126,14 @@ namespace Core2D
         public override void ToStateThree()
         {
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
         public override void ToStateFour()
         {
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

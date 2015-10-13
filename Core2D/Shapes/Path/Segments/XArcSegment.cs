@@ -10,15 +10,15 @@ namespace Core2D
     public class XArcSegment : XPathSegment
     {
         private static XSweepDirection[] _xSweepDirectionValues = (XSweepDirection[])Enum.GetValues(typeof(XSweepDirection));
-        
+
         /// <summary>
         /// The XSweepDirection enum values.
         /// </summary>
-        public static XSweepDirection[] XSweepDirectionValues 
-        { 
-            get { return _xSweepDirectionValues; } 
+        public static XSweepDirection[] XSweepDirectionValues
+        {
+            get { return _xSweepDirectionValues; }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

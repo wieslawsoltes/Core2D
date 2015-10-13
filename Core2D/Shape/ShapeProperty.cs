@@ -39,10 +39,10 @@ namespace Core2D
         /// <returns></returns>
         public static ShapeProperty Create(string name, object value)
         {
-            return new ShapeProperty() 
-            { 
+            return new ShapeProperty()
+            {
                 Name = name,
-                Value = value 
+                Value = value
             };
         }
 
@@ -50,9 +50,9 @@ namespace Core2D
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() 
-        { 
-            return _value.ToString(); 
+        public override string ToString()
+        {
+            return _value.ToString();
         }
     }
 }

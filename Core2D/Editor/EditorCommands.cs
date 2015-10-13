@@ -177,7 +177,7 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand ClearAllCommand { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -339,7 +339,7 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand RemoveBindingCommand { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -398,7 +398,7 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand RemoveShapeCommand { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -489,7 +489,7 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand ApplyTemplateCommand { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>

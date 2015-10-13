@@ -46,7 +46,7 @@ namespace Core2D
                     Flags = _flags & ~LineFixedLengthFlags.Disabled;
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -61,7 +61,7 @@ namespace Core2D
                     Flags = _flags & ~LineFixedLengthFlags.Start;
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -76,7 +76,7 @@ namespace Core2D
                     Flags = _flags & ~LineFixedLengthFlags.End;
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -91,7 +91,7 @@ namespace Core2D
                     Flags = _flags & ~LineFixedLengthFlags.Vertical;
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -106,7 +106,7 @@ namespace Core2D
                     Flags = _flags & ~LineFixedLengthFlags.Horizontal;
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

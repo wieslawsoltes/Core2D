@@ -22,17 +22,17 @@ namespace Core2D
         /// <summary>
         /// The TextHAlignment enum values.
         /// </summary>
-        public static TextHAlignment[] TextHAlignmentValues 
-        { 
-            get { return _textHAlignmentValues; } 
+        public static TextHAlignment[] TextHAlignmentValues
+        {
+            get { return _textHAlignmentValues; }
         }
-        
+
         /// <summary>
         /// The TextVAlignment enum values.
         /// </summary>
-        public static TextVAlignment[] TextVAlignmentValues 
-        { 
-            get { return _textVAlignmentValues; } 
+        public static TextVAlignment[] TextVAlignmentValues
+        {
+            get { return _textVAlignmentValues; }
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Core2D
             get { return _name; }
             set { Update(ref _name, value); }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -88,7 +88,7 @@ namespace Core2D
             get { return _textHAlignment; }
             set { Update(ref _textHAlignment, value); }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -111,7 +111,7 @@ namespace Core2D
         /// <returns></returns>
         public static TextStyle Create(
             string name = "",
-            string fontName = "Calibri", 
+            string fontName = "Calibri",
             string fontFile = "calibri.ttf",
             double fontSize = 12.0,
             FontStyle fontStyle = null,

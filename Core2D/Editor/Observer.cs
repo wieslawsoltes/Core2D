@@ -410,7 +410,7 @@ namespace Core2D
             _invalidateShapes();
             MarkAsDirty();
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -674,7 +674,7 @@ namespace Core2D
                 return;
 
             project.PropertyChanged += ProjectObserver;
-            
+
             Verbose("Add Project: " + project.Name);
 
             Add(project.Options);
@@ -686,7 +686,7 @@ namespace Core2D
                     Add(database);
                 }
             }
-            
+
             if (project.Documents != null)
             {
                 foreach (var document in project.Documents)
@@ -694,7 +694,7 @@ namespace Core2D
                     Add(document);
                 }
             }
-            
+
             if (project.Templates != null)
             {
                 foreach (var template in project.Templates)
@@ -702,7 +702,7 @@ namespace Core2D
                     Add(template);
                 }
             }
-            
+
             if (project.StyleLibraries != null)
             {
                 foreach (var sg in project.StyleLibraries)
@@ -734,7 +734,7 @@ namespace Core2D
                     Remove(database);
                 }
             }
-            
+
             if (project.Documents != null)
             {
                 foreach (var document in project.Documents)
@@ -812,26 +812,26 @@ namespace Core2D
         {
             if (container == null)
                 return;
-            
+
             container.PropertyChanged += ContainerObserver;
-            
+
             if (container.Background != null)
             {
                 container.Background.PropertyChanged += ContainerBackgroudObserver;
             }
-            
+
             Verbose("Add Container: " + container.Name);
-            
+
             if (container.Layers != null)
             {
                 Add(container.Layers);
             }
-            
+
             if (container.Properties != null)
             {
                 Add(container.Properties);
             }
-            
+
             //Add(container.WorkingLayer);
         }
 
@@ -843,26 +843,26 @@ namespace Core2D
         {
             if (container == null)
                 return;
-            
+
             container.PropertyChanged -= ContainerObserver;
-            
+
             if (container.Background != null)
             {
                 container.Background.PropertyChanged -= ContainerBackgroudObserver;
             }
-            
+
             Verbose("Remove Container: " + container.Name);
-            
+
             if (container.Layers != null)
             {
                 Add(container.Layers);
             }
-            
+
             if (container.Properties != null)
             {
                 Remove(container.Properties);
             }
-            
+
             //Remove(container.WorkingLayer);
         }
 
@@ -874,11 +874,11 @@ namespace Core2D
         {
             if (layer == null)
                 return;
-            
+
             layer.PropertyChanged += LayerObserver;
-            
+
             Verbose("Add Layer: " + layer.Name);
-            
+
             if (layer.Shapes != null)
             {
                 Add(layer.Shapes);
@@ -893,11 +893,11 @@ namespace Core2D
         {
             if (layer == null)
                 return;
-            
+
             layer.PropertyChanged -= LayerObserver;
-            
+
             Verbose("Remove Layer: " + layer.Name);
-            
+
             if (layer.Shapes != null)
             {
                 Remove(layer.Shapes);
@@ -912,7 +912,7 @@ namespace Core2D
         {
             if (shape == null)
                 return;
-            
+
             shape.PropertyChanged += ShapeObserver;
 
             if (shape.Data != null)
@@ -946,12 +946,12 @@ namespace Core2D
             else if (shape is XLine)
             {
                 var line = shape as XLine;
-                
+
                 if (line.Start != null)
                 {
                     line.Start.PropertyChanged += ShapeObserver;
                 }
-                
+
                 if (line.End != null)
                 {
                     line.End.PropertyChanged += ShapeObserver;
@@ -960,12 +960,12 @@ namespace Core2D
             else if (shape is XRectangle)
             {
                 var rectangle = shape as XRectangle;
-                
+
                 if (rectangle.TopLeft != null)
                 {
                     rectangle.TopLeft.PropertyChanged += ShapeObserver;
                 }
-                
+
                 if (rectangle.BottomRight != null)
                 {
                     rectangle.BottomRight.PropertyChanged += ShapeObserver;
@@ -979,7 +979,7 @@ namespace Core2D
                 {
                     ellipse.TopLeft.PropertyChanged += ShapeObserver;
                 }
-                
+
                 if (ellipse.BottomRight != null)
                 {
                     ellipse.BottomRight.PropertyChanged += ShapeObserver;
@@ -988,22 +988,22 @@ namespace Core2D
             else if (shape is XArc)
             {
                 var arc = shape as XArc;
-                
+
                 if (arc.Point1 != null)
                 {
                     arc.Point1.PropertyChanged += ShapeObserver;
                 }
-                
+
                 if (arc.Point2 != null)
                 {
                     arc.Point2.PropertyChanged += ShapeObserver;
                 }
-                
+
                 if (arc.Point3 != null)
                 {
                     arc.Point3.PropertyChanged += ShapeObserver;
                 }
-                
+
                 if (arc.Point4 != null)
                 {
                     arc.Point4.PropertyChanged += ShapeObserver;
@@ -1017,17 +1017,17 @@ namespace Core2D
                 {
                     bezier.Point1.PropertyChanged += ShapeObserver;
                 }
-                
+
                 if (bezier.Point2 != null)
                 {
                     bezier.Point2.PropertyChanged += ShapeObserver;
                 }
-                
+
                 if (bezier.Point3 != null)
                 {
                     bezier.Point3.PropertyChanged += ShapeObserver;
                 }
-                
+
                 if (bezier.Point4 != null)
                 {
                     bezier.Point4.PropertyChanged += ShapeObserver;
@@ -1041,12 +1041,12 @@ namespace Core2D
                 {
                     qbezier.Point1.PropertyChanged += ShapeObserver;
                 }
-                
+
                 if (qbezier.Point2 != null)
                 {
                     qbezier.Point2.PropertyChanged += ShapeObserver;
                 }
-                
+
                 if (qbezier.Point3 != null)
                 {
                     qbezier.Point3.PropertyChanged += ShapeObserver;
@@ -1060,7 +1060,7 @@ namespace Core2D
                 {
                     text.TopLeft.PropertyChanged += ShapeObserver;
                 }
-                
+
                 if (text.BottomRight != null)
                 {
                     text.BottomRight.PropertyChanged += ShapeObserver;
@@ -1069,12 +1069,12 @@ namespace Core2D
             else if (shape is XImage)
             {
                 var image = shape as XImage;
- 
+
                 if (image.TopLeft != null)
                 {
                     image.TopLeft.PropertyChanged += ShapeObserver;
                 }
-                
+
                 if (image.BottomRight != null)
                 {
                     image.BottomRight.PropertyChanged += ShapeObserver;
@@ -1087,14 +1087,14 @@ namespace Core2D
             else if (shape is XGroup)
             {
                 var group = shape as XGroup;
-                
+
                 if (group != null)
                 {
                     if (group.Shapes != null)
                     {
                         Add(group.Shapes);
                     }
-                    
+
                     if (group.Connectors != null)
                     {
                         Add(group.Connectors);
@@ -1113,7 +1113,7 @@ namespace Core2D
         {
             if (shape == null)
                 return;
-            
+
             shape.PropertyChanged -= ShapeObserver;
 
             if (shape.Data != null)
@@ -1147,12 +1147,12 @@ namespace Core2D
             else if (shape is XLine)
             {
                 var line = shape as XLine;
-                
+
                 if (line.Start != null)
                 {
                     line.Start.PropertyChanged -= ShapeObserver;
                 }
-                
+
                 if (line.End != null)
                 {
                     line.End.PropertyChanged -= ShapeObserver;
@@ -1161,12 +1161,12 @@ namespace Core2D
             else if (shape is XRectangle)
             {
                 var rectangle = shape as XRectangle;
-                
+
                 if (rectangle.TopLeft != null)
                 {
                     rectangle.TopLeft.PropertyChanged -= ShapeObserver;
                 }
-                
+
                 if (rectangle.BottomRight != null)
                 {
                     rectangle.BottomRight.PropertyChanged -= ShapeObserver;
@@ -1180,7 +1180,7 @@ namespace Core2D
                 {
                     ellipse.TopLeft.PropertyChanged -= ShapeObserver;
                 }
-                
+
                 if (ellipse.BottomRight != null)
                 {
                     ellipse.BottomRight.PropertyChanged -= ShapeObserver;
@@ -1189,22 +1189,22 @@ namespace Core2D
             else if (shape is XArc)
             {
                 var arc = shape as XArc;
-                
+
                 if (arc.Point1 != null)
                 {
                     arc.Point1.PropertyChanged -= ShapeObserver;
                 }
-                
+
                 if (arc.Point2 != null)
                 {
                     arc.Point2.PropertyChanged -= ShapeObserver;
                 }
-                
+
                 if (arc.Point3 != null)
                 {
                     arc.Point3.PropertyChanged -= ShapeObserver;
                 }
-                
+
                 if (arc.Point4 != null)
                 {
                     arc.Point4.PropertyChanged -= ShapeObserver;
@@ -1218,17 +1218,17 @@ namespace Core2D
                 {
                     bezier.Point1.PropertyChanged -= ShapeObserver;
                 }
-                
+
                 if (bezier.Point2 != null)
                 {
                     bezier.Point2.PropertyChanged -= ShapeObserver;
                 }
-                
+
                 if (bezier.Point3 != null)
                 {
                     bezier.Point3.PropertyChanged -= ShapeObserver;
                 }
-                
+
                 if (bezier.Point4 != null)
                 {
                     bezier.Point4.PropertyChanged -= ShapeObserver;
@@ -1242,12 +1242,12 @@ namespace Core2D
                 {
                     qbezier.Point1.PropertyChanged -= ShapeObserver;
                 }
-                
+
                 if (qbezier.Point2 != null)
                 {
                     qbezier.Point2.PropertyChanged -= ShapeObserver;
                 }
-                
+
                 if (qbezier.Point3 != null)
                 {
                     qbezier.Point3.PropertyChanged -= ShapeObserver;
@@ -1261,7 +1261,7 @@ namespace Core2D
                 {
                     text.TopLeft.PropertyChanged -= ShapeObserver;
                 }
-                
+
                 if (text.BottomRight != null)
                 {
                     text.BottomRight.PropertyChanged -= ShapeObserver;
@@ -1270,12 +1270,12 @@ namespace Core2D
             else if (shape is XImage)
             {
                 var image = shape as XImage;
- 
+
                 if (image.TopLeft != null)
                 {
                     image.TopLeft.PropertyChanged -= ShapeObserver;
                 }
-                
+
                 if (image.BottomRight != null)
                 {
                     image.BottomRight.PropertyChanged -= ShapeObserver;
@@ -1288,14 +1288,14 @@ namespace Core2D
             else if (shape is XGroup)
             {
                 var group = shape as XGroup;
-                
+
                 if (group != null)
                 {
                     if (group.Shapes != null)
                     {
                         Remove(group.Shapes);
                     }
-                    
+
                     if (group.Connectors != null)
                     {
                         Remove(group.Connectors);
@@ -1314,12 +1314,12 @@ namespace Core2D
         {
             if (sg == null)
                 return;
-            
+
             if (sg.Styles != null)
             {
                 Add(sg.Styles);
             }
-            
+
             sg.PropertyChanged += StyleLibraryObserver;
             Verbose("Add Style Library: " + sg.Name);
         }
@@ -1332,12 +1332,12 @@ namespace Core2D
         {
             if (sg == null)
                 return;
-            
+
             if (sg.Styles != null)
             {
                 Remove(sg.Styles);
             }
-            
+
             sg.PropertyChanged -= StyleLibraryObserver;
             Verbose("Remove Style Library: " + sg.Name);
         }
@@ -1386,19 +1386,19 @@ namespace Core2D
         {
             if (style == null)
                 return;
-            
+
             style.PropertyChanged += StyleObserver;
-            
+
             if (style.Stroke != null)
             {
                 style.Stroke.PropertyChanged += StyleObserver;
             }
-            
+
             if (style.Fill != null)
             {
                 style.Fill.PropertyChanged += StyleObserver;
             }
-            
+
             if (style.LineStyle != null)
             {
                 style.LineStyle.PropertyChanged += StyleObserver;
@@ -1408,37 +1408,37 @@ namespace Core2D
                     style.LineStyle.FixedLength.PropertyChanged += StyleObserver;
                 }
             }
-            
+
             if (style.StartArrowStyle != null)
             {
                 style.StartArrowStyle.PropertyChanged += StyleObserver;
-                
+
                 if (style.StartArrowStyle.Stroke != null)
                 {
                     style.StartArrowStyle.Stroke.PropertyChanged += StyleObserver;
                 }
-                
+
                 if (style.StartArrowStyle.Fill != null)
                 {
                     style.StartArrowStyle.Fill.PropertyChanged += StyleObserver;
                 }
             }
-        
+
             if (style.EndArrowStyle != null)
             {
                 style.EndArrowStyle.PropertyChanged += StyleObserver;
-                
+
                 if (style.EndArrowStyle.Stroke != null)
                 {
                     style.EndArrowStyle.Stroke.PropertyChanged += StyleObserver;
                 }
-                
+
                 if (style.EndArrowStyle.Fill != null)
                 {
                     style.EndArrowStyle.Fill.PropertyChanged += StyleObserver;
                 }
             }
-        
+
             if (style.TextStyle != null)
             {
                 style.TextStyle.PropertyChanged += StyleObserver;
@@ -1448,7 +1448,7 @@ namespace Core2D
                     style.TextStyle.FontStyle.PropertyChanged += StyleObserver;
                 }
             }
-            
+
             Verbose("Add Style: " + style.Name);
         }
 
@@ -1460,14 +1460,14 @@ namespace Core2D
         {
             if (style == null)
                 return;
-            
+
             style.PropertyChanged -= StyleObserver;
-            
+
             if (style.Stroke != null)
             {
                 style.Stroke.PropertyChanged -= StyleObserver;
             }
-            
+
             if (style.Fill != null)
             {
                 style.Fill.PropertyChanged -= StyleObserver;
@@ -1486,27 +1486,27 @@ namespace Core2D
             if (style.StartArrowStyle != null)
             {
                 style.StartArrowStyle.PropertyChanged -= StyleObserver;
-                
+
                 if (style.StartArrowStyle.Stroke != null)
                 {
                     style.StartArrowStyle.Stroke.PropertyChanged -= StyleObserver;
                 }
-                
+
                 if (style.StartArrowStyle.Fill != null)
                 {
                     style.StartArrowStyle.Fill.PropertyChanged -= StyleObserver;
                 }
             }
-        
+
             if (style.EndArrowStyle != null)
             {
                 style.EndArrowStyle.PropertyChanged -= StyleObserver;
-                
+
                 if (style.EndArrowStyle.Stroke != null)
                 {
                     style.EndArrowStyle.Stroke.PropertyChanged -= StyleObserver;
                 }
-                
+
                 if (style.EndArrowStyle.Fill != null)
                 {
                     style.EndArrowStyle.Fill.PropertyChanged -= StyleObserver;
@@ -1534,7 +1534,7 @@ namespace Core2D
         {
             if (binding == null)
                 return;
-            
+
             binding.PropertyChanged += BindingObserver;
             Verbose("Add Bnding: " + binding.Property + ", path: " + binding.Path);
         }
@@ -1547,7 +1547,7 @@ namespace Core2D
         {
             if (binding == null)
                 return;
-            
+
             binding.PropertyChanged += BindingObserver;
             Verbose("Remove Bnding: " + binding.Property + ", path: " + binding.Path);
         }
@@ -1560,7 +1560,7 @@ namespace Core2D
         {
             if (property == null)
                 return;
-            
+
             property.PropertyChanged += PropertyObserver;
             Verbose("Add Property: " + property.Name + ", type: " + property.Value.GetType());
         }
@@ -1573,7 +1573,7 @@ namespace Core2D
         {
             if (property == null)
                 return;
-            
+
             property.PropertyChanged += PropertyObserver;
             Verbose("Remove Property: " + property.Name + ", type: " + property.Value.GetType());
         }
@@ -1586,7 +1586,7 @@ namespace Core2D
         {
             if (databases == null)
                 return;
-            
+
             foreach (var database in databases)
             {
                 Add(database);
@@ -1601,7 +1601,7 @@ namespace Core2D
         {
             if (databases == null)
                 return;
-            
+
             foreach (var database in databases)
             {
                 Remove(database);
@@ -1616,7 +1616,7 @@ namespace Core2D
         {
             if (columns == null)
                 return;
-            
+
             foreach (var column in columns)
             {
                 Add(column);
@@ -1631,7 +1631,7 @@ namespace Core2D
         {
             if (columns == null)
                 return;
-            
+
             foreach (var column in columns)
             {
                 Remove(column);
@@ -1646,7 +1646,7 @@ namespace Core2D
         {
             if (records == null)
                 return;
-            
+
             foreach (var record in records)
             {
                 Add(record);
@@ -1661,7 +1661,7 @@ namespace Core2D
         {
             if (records == null)
                 return;
-            
+
             foreach (var record in records)
             {
                 Remove(record);
@@ -1676,7 +1676,7 @@ namespace Core2D
         {
             if (values == null)
                 return;
-            
+
             foreach (var value in values)
             {
                 Add(value);
@@ -1691,7 +1691,7 @@ namespace Core2D
         {
             if (values == null)
                 return;
-            
+
             foreach (var value in values)
             {
                 Remove(value);
@@ -1706,7 +1706,7 @@ namespace Core2D
         {
             if (documents == null)
                 return;
-            
+
             foreach (var document in documents)
             {
                 Add(document);
@@ -1721,7 +1721,7 @@ namespace Core2D
         {
             if (documents == null)
                 return;
-            
+
             foreach (var document in documents)
             {
                 Remove(document);
@@ -1736,7 +1736,7 @@ namespace Core2D
         {
             if (containers == null)
                 return;
-            
+
             foreach (var container in containers)
             {
                 Add(container);
@@ -1751,7 +1751,7 @@ namespace Core2D
         {
             if (containers == null)
                 return;
-            
+
             foreach (var container in containers)
             {
                 Remove(container);
@@ -1781,7 +1781,7 @@ namespace Core2D
         {
             if (layers == null)
                 return;
-            
+
             foreach (var layer in layers)
             {
                 Remove(layer);
@@ -1796,7 +1796,7 @@ namespace Core2D
         {
             if (shapes == null)
                 return;
-            
+
             foreach (var shape in shapes)
             {
                 Add(shape);
@@ -1811,7 +1811,7 @@ namespace Core2D
         {
             if (shapes == null)
                 return;
-            
+
             foreach (var shape in shapes)
             {
                 Remove(shape);
@@ -1826,7 +1826,7 @@ namespace Core2D
         {
             if (styles == null)
                 return;
-            
+
             foreach (var style in styles)
             {
                 Add(style);
@@ -1841,7 +1841,7 @@ namespace Core2D
         {
             if (styles == null)
                 return;
-            
+
             foreach (var style in styles)
             {
                 Remove(style);
@@ -1856,7 +1856,7 @@ namespace Core2D
         {
             if (sgs == null)
                 return;
-            
+
             foreach (var sg in sgs)
             {
                 Add(sg);
@@ -1871,7 +1871,7 @@ namespace Core2D
         {
             if (sgs == null)
                 return;
-            
+
             foreach (var sg in sgs)
             {
                 Remove(sg);
@@ -1916,7 +1916,7 @@ namespace Core2D
         {
             if (bindings == null)
                 return;
-            
+
             foreach (var binding in bindings)
             {
                 Add(binding);
@@ -1931,7 +1931,7 @@ namespace Core2D
         {
             if (bindings == null)
                 return;
-            
+
             foreach (var binding in bindings)
             {
                 Remove(binding);
@@ -1946,7 +1946,7 @@ namespace Core2D
         {
             if (properties == null)
                 return;
-            
+
             foreach (var property in properties)
             {
                 Add(property);
@@ -1961,7 +1961,7 @@ namespace Core2D
         {
             if (properties == null)
                 return;
-            
+
             foreach (var property in properties)
             {
                 Remove(property);

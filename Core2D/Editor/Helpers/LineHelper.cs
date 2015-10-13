@@ -28,7 +28,7 @@ namespace Core2D
         {
             _editor = editor;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -218,7 +218,7 @@ namespace Core2D
             _endHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_endHelperPoint);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -232,14 +232,14 @@ namespace Core2D
         public override void ToStateThree()
         {
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
         public override void ToStateFour()
         {
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

@@ -20,11 +20,11 @@ namespace Core2D
         /// <summary>
         /// The ArrowType enum values.
         /// </summary>
-        public static ArrowType[] ArrowTypeValues 
-        { 
-            get { return _arrowTypeValues; } 
+        public static ArrowType[] ArrowTypeValues
+        {
+            get { return _arrowTypeValues; }
         }
-        
+
         /// <summary>
         /// Gets or sets arrow type.
         /// </summary>
@@ -51,7 +51,7 @@ namespace Core2D
             get { return _isFilled; }
             set { Update(ref _isFilled, value); }
         }
-        
+
         /// <summary>
         /// Gets or sets arrow X axis radius.
         /// </summary>
@@ -60,7 +60,7 @@ namespace Core2D
             get { return _radiusX; }
             set { Update(ref _radiusX, value); }
         }
-        
+
         /// <summary>
         /// Gets or sets arrow Y axis radius.
         /// </summary>
@@ -84,21 +84,21 @@ namespace Core2D
         public ArrowStyle(BaseStyle source)
         {
             Stroke = ArgbColor.Create
-                (source.Stroke.A, 
-                 source.Stroke.R, 
-                 source.Stroke.G, 
+                (source.Stroke.A,
+                 source.Stroke.R,
+                 source.Stroke.G,
                  source.Stroke.B);
             Fill = ArgbColor.Create
-                (source.Fill.A, 
-                 source.Fill.R, 
-                 source.Fill.G, 
+                (source.Fill.A,
+                 source.Fill.R,
+                 source.Fill.G,
                  source.Fill.B);
             Thickness = source.Thickness;
             LineCap = source.LineCap;
             Dashes = source.Dashes != null ? source.Dashes.ToArray() : default(double[]);
             DashOffset = source.DashOffset;
         }
-        
+
         /// <summary>
         /// Creates a new instance of the ArrowStyle class.
         /// </summary>
@@ -115,15 +115,15 @@ namespace Core2D
             double radiusX = 5.0,
             double radiusY = 3.0)
         {
-            return new ArrowStyle() 
-            { 
+            return new ArrowStyle()
+            {
                 ArrowType = arrowType,
                 IsFilled = isFilled,
                 RadiusX = radiusX,
                 RadiusY = radiusY
             };
         }
-        
+
         /// <summary>
         /// Creates a new instance of the ArrowStyle class.
         /// </summary>
@@ -144,8 +144,8 @@ namespace Core2D
             double radiusX = 5.0,
             double radiusY = 5.0)
         {
-            return new ArrowStyle(source) 
-            { 
+            return new ArrowStyle(source)
+            {
                 Name = name,
                 ArrowType = arrowType,
                 IsStroked = isStroked,

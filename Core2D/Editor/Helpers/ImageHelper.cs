@@ -209,7 +209,7 @@ namespace Core2D
             _bottomRightHelperPoint = XPoint.Create(0, 0, _editor.Project.Options.PointShape);
             _editor.Project.CurrentContainer.HelperLayer.Shapes = _editor.Project.CurrentContainer.HelperLayer.Shapes.Add(_bottomRightHelperPoint);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -223,14 +223,14 @@ namespace Core2D
         public override void ToStateThree()
         {
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
         public override void ToStateFour()
         {
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

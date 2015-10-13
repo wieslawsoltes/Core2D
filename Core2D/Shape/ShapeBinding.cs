@@ -39,10 +39,10 @@ namespace Core2D
         /// <returns></returns>
         public static ShapeBinding Create(string property, string path)
         {
-            return new ShapeBinding() 
-            { 
+            return new ShapeBinding()
+            {
                 Property = property,
-                Path = path 
+                Path = path
             };
         }
 
@@ -50,9 +50,9 @@ namespace Core2D
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() 
-        { 
-            return _path; 
+        public override string ToString()
+        {
+            return _path;
         }
     }
 }

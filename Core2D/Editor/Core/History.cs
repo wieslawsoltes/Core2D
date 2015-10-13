@@ -15,7 +15,7 @@ namespace Core2D
     {
         public readonly Action Undo;
         public readonly Action Redo;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -26,7 +26,7 @@ namespace Core2D
             this.Undo = undo;
             this.Redo = redo;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -69,7 +69,7 @@ namespace Core2D
         {
             return _undos.Count > 0;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -78,7 +78,7 @@ namespace Core2D
         {
             return _redos.Count > 0;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -123,8 +123,8 @@ namespace Core2D
                 return true;
             }
             return false;
-        } 
-        
+        }
+
         /// <summary>
         /// 
         /// </summary>
