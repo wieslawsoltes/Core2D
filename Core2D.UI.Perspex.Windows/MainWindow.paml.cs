@@ -23,7 +23,7 @@ namespace TestPerspex
         private string _recentFileName = "Core2D.recent";
         private string _logFileName = "Core2D.log";
         private bool _enableRecent = true;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -55,7 +55,7 @@ namespace TestPerspex
             string path = Uri.UnescapeDataString(uri.Path);
             return System.IO.Path.GetDirectoryName(path);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -113,7 +113,7 @@ namespace TestPerspex
                 Command<object>.Create(
                     async (item) => await OnUpdateData(),
                     (item) => _context.IsEditMode());
-            
+
             _context.Commands.ImportStyleCommand =
                 Command<object>.Create(
                     async (item) => await OnImportObject(item, ImportType.Style),
@@ -235,7 +235,7 @@ namespace TestPerspex
                     }
                 }
             }
-            
+
             DataContext = _context;
         }
 
@@ -262,10 +262,10 @@ namespace TestPerspex
                     }
                 }
             }
-            
+
             _context.Dispose();
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -298,7 +298,7 @@ namespace TestPerspex
                 return null;
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -342,7 +342,7 @@ namespace TestPerspex
                 }
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -553,7 +553,7 @@ namespace TestPerspex
                 }
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
