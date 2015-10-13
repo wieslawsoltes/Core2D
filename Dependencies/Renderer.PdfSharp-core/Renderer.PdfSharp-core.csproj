@@ -55,11 +55,11 @@
     <Compile Include="..\..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Renderer.PdfSharp-wpf\Path\XPathGeometryConverter.cs">
-      <Link>Path\XPathGeometryConverter.cs</Link>
-    </Compile>
     <Compile Include="..\Renderer.PdfSharp-wpf\PdfRenderer.cs">
       <Link>PdfRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Renderer.PdfSharp-wpf\XPathGeometryConverter.cs">
+      <Link>XPathGeometryConverter.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

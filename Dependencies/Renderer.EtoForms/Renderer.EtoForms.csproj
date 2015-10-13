@@ -54,7 +54,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="EtoRenderer.cs" />
-    <Compile Include="Path\XPathGeometryConverter.cs" />
+    <Compile Include="XPathGeometryConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
