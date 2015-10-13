@@ -207,7 +207,7 @@
         </DataTemplate>
         <!-- data -->
         <DataTemplate DataType="core:Record">
-            <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" Grid.Row="1" Grid.Column="0">
+            <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
                 <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
                 <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
                 <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
@@ -315,7 +315,7 @@
                     <ContentControl Content="{Binding Record}"/>
                 </TabItem>
                 <TabItem Header="Bindings" Classes="property">
-                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" Grid.Row="1" Grid.Column="0">
+                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
                         <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
                         <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Property"/>
                         <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Path"/>
@@ -378,7 +378,7 @@
                     -->
                 </TabItem>
                 <TabItem Header="Properties" Classes="property">
-                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" Grid.Row="1" Grid.Column="0">
+                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
                         <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
                         <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
                         <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
