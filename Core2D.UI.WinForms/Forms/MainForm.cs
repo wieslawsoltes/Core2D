@@ -180,7 +180,6 @@ namespace TestWinForms
         /// </summary>
         private void HandleFileDialogs()
         {
-            // open container
             this.openFileDialog1.FileOk += (sender, e) =>
             {
                 var context = DataContext as EditorContext;
@@ -193,7 +192,6 @@ namespace TestWinForms
                 InvalidateContainer();
             };
 
-            // save container
             this.saveFileDialog1.FileOk += (sender, e) =>
             {
                 var context = DataContext as EditorContext;
@@ -205,7 +203,6 @@ namespace TestWinForms
                 context.Save(path);
             };
 
-            // export container
             this.saveFileDialog2.FileOk += (sender, e) =>
             {
                 var context = DataContext as EditorContext;
