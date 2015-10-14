@@ -131,6 +131,9 @@
                                     <ContentControl Content="{Binding Editor.Project.Options}"/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
+                            <ad:LayoutAnchorable x:Name="templatesWindow" CanClose="False" ContentId="templates" Title="{x:Static p:Resources.WindowTitleTemplates}" AutoHideWidth="210">
+                                <controls:TemplatesControl x:Name="templatesControl"/>
+                            </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePaneGroup Orientation="Horizontal" DockWidth="210">
                             <ad:LayoutAnchorablePane>
@@ -203,6 +206,15 @@
                             <ad:LayoutAnchorable x:Name="shapesWindow" CanClose="False" ContentId="shapes" Title="{x:Static p:Resources.WindowTitleShapes}" AutoHideWidth="210">
                                 <controls:ShapesControl x:Name="shapesControl"/>
                             </ad:LayoutAnchorable>
+                            <ad:LayoutAnchorable x:Name="templateWindow" CanClose="False" ContentId="template" Title="{x:Static p:Resources.WindowTitleTemplate}" AutoHideWidth="210">
+                                <ScrollViewer 
+                                    x:Name="templateScrollViewer"
+                                    VerticalScrollBarVisibility="Auto" 
+                                    HorizontalScrollBarVisibility="Auto" 
+                                    Focusable="True">
+                                    <controls:TemplateControl/>
+                                </ScrollViewer>
+                            </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
                             <ad:LayoutAnchorable x:Name="propertiesWindow" CanClose="False" ContentId="properties" Title="{x:Static p:Resources.WindowTitleProperties}" AutoHideWidth="210">
@@ -254,26 +266,6 @@
                         </ad:LayoutAnchorablePane>
                     </ad:LayoutAnchorablePaneGroup>
                 </ad:LayoutPanel>
-                <ad:LayoutRoot.LeftSide>
-                    <ad:LayoutAnchorSide>
-                        <ad:LayoutAnchorGroup>
-                            <ad:LayoutAnchorable x:Name="templatesWindow" CanClose="False" ContentId="templates" Title="{x:Static p:Resources.WindowTitleTemplates}" AutoHideWidth="210">
-                                <controls:TemplatesControl x:Name="templatesControl"/>
-                            </ad:LayoutAnchorable>
-                        </ad:LayoutAnchorGroup>
-                        <ad:LayoutAnchorGroup>
-                            <ad:LayoutAnchorable x:Name="templateWindow" CanClose="False" ContentId="template" Title="{x:Static p:Resources.WindowTitleTemplate}" AutoHideWidth="210">
-                                <ScrollViewer 
-                                    x:Name="templateScrollViewer"
-                                    VerticalScrollBarVisibility="Auto" 
-                                    HorizontalScrollBarVisibility="Auto" 
-                                    Focusable="True">
-                                    <controls:TemplateControl/>
-                                </ScrollViewer>
-                            </ad:LayoutAnchorable>
-                        </ad:LayoutAnchorGroup>
-                    </ad:LayoutAnchorSide>
-                </ad:LayoutRoot.LeftSide>
             </ad:LayoutRoot>
         </ad:DockingManager>
         <controls:StatusControl Grid.Row="4" Margin="5,0,5,0"/>
