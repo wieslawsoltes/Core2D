@@ -86,14 +86,9 @@
             <SplitView.Content>
                 <SplitView PanePlacement="Right" IsPaneOpen="True" DisplayMode="Inline" OpenPaneLength="150">
                     <SplitView.Content>
-                        <ScrollViewer
-                            HorizontalScrollBarVisibility="Auto"
-                            VerticalScrollBarVisibility="Auto"            
-                            Grid.Column="0" 
-                            Grid.Row="0" 
-                            Grid.RowSpan="2">
-                            <canvas:CanvasControl x:Name="canvas"/>
-                        </ScrollViewer>
+                        <Grid Margin="10">
+                            <canvas:CanvasControl x:Name="canvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        </Grid>
                     </SplitView.Content>
                     <SplitView.Pane>
                         <Grid>
