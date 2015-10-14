@@ -218,7 +218,6 @@
     <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
     <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
     <converters:BooleanToStringConverter x:Key="BooleanToStarConverter" FalseValue="" TrueValue="*"/>
-    <converters:DoubleToStringConverter x:Key="DoubleToStringConverter"/>
     <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
     <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
     <converters:ColumnParameterConverter x:Key="ColumnParameterConverter"/>
@@ -582,7 +581,7 @@
                                 Grid.Column="0">
                             </TextBlock>
                             <TextBox 
-                                Text="{Binding Dashes, Converter={StaticResource DoubleToStringConverter}}" 
+                                Text="{Binding Dashes}" 
                                 Style="{StaticResource TextBoxLeftStyleKey}"
                                 Grid.Row="0" 
                                 Grid.Column="1" 
@@ -882,7 +881,7 @@
                                 Grid.Column="0">
                             </TextBlock>
                             <TextBox 
-                                Text="{Binding Dashes, Converter={StaticResource DoubleToStringConverter}}" 
+                                Text="{Binding Dashes}" 
                                 Style="{StaticResource TextBoxLeftStyleKey}"
                                 Grid.Row="0" 
                                 Grid.Column="1" 
