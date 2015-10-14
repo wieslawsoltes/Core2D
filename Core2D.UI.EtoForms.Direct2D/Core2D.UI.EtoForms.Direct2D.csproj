@@ -84,9 +84,6 @@
     <Compile Include="..\Core2D.UI.EtoForms.Gtk2\Util\TextClipboard.cs">
       <Link>Util\TextClipboard.cs</Link>
     </Compile>
-    <Compile Include="..\Core2D.UI.WinForms\Util\ZoomState.cs">
-      <Link>Util\ZoomState.cs</Link>
-    </Compile>
     <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
@@ -135,10 +132,7 @@
       <Name>TextFieldWriter.CsvHelper</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Forms" />
-    <Folder Include="Util" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

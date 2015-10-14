@@ -252,6 +252,9 @@
     <Compile Include="..\Core2D\Renderer\RendererState.cs">
       <Link>Renderer\RendererState.cs</Link>
     </Compile>
+    <Compile Include="..\Core2D\Renderer\ZoomState.cs">
+      <Link>Renderer\ZoomState.cs</Link>
+    </Compile>
     <Compile Include="..\Core2D\Shapes\Path\Segments\XArcSegment.cs">
       <Link>Shapes\Path\Segments\XArcSegment.cs</Link>
     </Compile>

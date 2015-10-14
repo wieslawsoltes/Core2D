@@ -148,9 +148,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Core2D.UI.WinForms\Util\ZoomState.cs">
-      <Link>Util\ZoomState.cs</Link>
-    </Compile>
     <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>

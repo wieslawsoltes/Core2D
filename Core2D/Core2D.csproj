@@ -119,6 +119,7 @@
     <Compile Include="Renderer\IImageCache.cs" />
     <Compile Include="Renderer\IRenderer.cs" />
     <Compile Include="Renderer\RendererState.cs" />
+    <Compile Include="Renderer\ZoomState.cs" />
     <Compile Include="Shapes\Path\Segments\XArcSegment.cs" />
     <Compile Include="Shapes\Path\Segments\XBezierSegment.cs" />
     <Compile Include="Shapes\Path\Segments\XLineSegment.cs" />
