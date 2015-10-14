@@ -1,6 +1,9 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Globalization;
 
 namespace Core2D
 {
@@ -87,6 +90,114 @@ namespace Core2D
         {
             get { return _dashOffset; }
             set { Update(ref _dashOffset, value); }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string DoubleArrayToDashes(double[] value)
+        {
+            try
+            {
+                if (value != null)
+                {
+                    return string.Join(
+                        " ",
+                        value.Select(x => x.ToString(CultureInfo.InvariantCulture)));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.StackTrace);
+            }
+
+            return null;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string FloatArrayToDashes(float[] value)
+        {
+            try
+            {
+                if (value != null)
+                {
+                    return string.Join(
+                        " ",
+                        value.Select(x => x.ToString(CultureInfo.InvariantCulture)));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.StackTrace);
+            }
+
+            return null;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static double[] DashesToDoubleArray(string value)
+        {
+            try
+            {
+                if (value != null)
+                {
+                    string[] a = value.Split(
+                        new char[] { ' ' },
+                        StringSplitOptions.RemoveEmptyEntries);
+                    if (a != null && a.Length > 0)
+                    {
+                        return a.Select(x => double.Parse(x, CultureInfo.InvariantCulture)).ToArray();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.StackTrace);
+            }
+
+            return null;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static float[] DashesToFloatArray(string value)
+        {
+            try
+            {
+                if (value != null)
+                {
+                    string[] a = value.Split(
+                        new char[] { ' ' },
+                        StringSplitOptions.RemoveEmptyEntries);
+                    if (a != null && a.Length > 0)
+                    {
+                        return a.Select(x => float.Parse(x, CultureInfo.InvariantCulture)).ToArray();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.StackTrace);
+            }
+
+            return null;
         }
     }
 }
