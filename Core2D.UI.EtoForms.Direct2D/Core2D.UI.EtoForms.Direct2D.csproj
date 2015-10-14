@@ -68,6 +68,7 @@
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ObjectModel" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -77,6 +78,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Core2D.UI.EtoForms.Gtk2\Forms\MainForm.cs">
+      <Link>Forms\MainForm.cs</Link>
+    </Compile>
+    <Compile Include="..\Core2D.UI.EtoForms.Gtk2\Util\TextClipboard.cs">
+      <Link>Util\TextClipboard.cs</Link>
+    </Compile>
+    <Compile Include="..\Core2D.UI.WinForms\Util\ZoomState.cs">
+      <Link>Util\ZoomState.cs</Link>
+    </Compile>
     <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
@@ -88,14 +98,46 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core2D.UI.EtoForms.Shared\Core2D.UI.EtoForms.Shared.csproj">
-      <Project>{c2d17c89-b904-4bce-8bce-fc65020de7bb}</Project>
-      <Name>Core2D.UI.EtoForms.Shared</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core2D\Core2D.csproj">
       <Project>{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}</Project>
       <Name>Core2D</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dependencies\FileWriter.Dxf\FileWriter.Dxf.csproj">
+      <Project>{D40B3BCD-0A26-40BB-960B-9464D248C934}</Project>
+      <Name>FileWriter.Dxf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\FileWriter.Pdf-core\FileWriter.Pdf-core.csproj">
+      <Project>{EC0EFA51-83F0-4439-BE9F-FAEBD3418C94}</Project>
+      <Name>FileWriter.Pdf-core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\Log.Trace\Log.Trace.csproj">
+      <Project>{68A36926-DF55-4F05-9F89-B9AB1463227E}</Project>
+      <Name>Log.Trace</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\Renderer.Dxf\Renderer.Dxf.csproj">
+      <Project>{ACC2C898-B49B-4ED9-B18C-389F50801B39}</Project>
+      <Name>Renderer.Dxf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\Renderer.EtoForms\Renderer.EtoForms.csproj">
+      <Project>{E4F69CD9-1373-4587-8BD2-A2F46EBB4912}</Project>
+      <Name>Renderer.EtoForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\Serializer.Newtonsoft\Serializer.Newtonsoft.csproj">
+      <Project>{08E4E8BF-E513-4A8D-835C-1EED6ECB4A21}</Project>
+      <Name>Serializer.Newtonsoft</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\TextFieldReader.CsvHelper\TextFieldReader.CsvHelper.csproj">
+      <Project>{64BAE9E8-93B5-4EDC-8AD6-5A3DCBA8C051}</Project>
+      <Name>TextFieldReader.CsvHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\TextFieldWriter.CsvHelper\TextFieldWriter.CsvHelper.csproj">
+      <Project>{87302D12-1184-402D-BF23-A5699F3D0BB4}</Project>
+      <Name>TextFieldWriter.CsvHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Forms" />
+    <Folder Include="Util" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
