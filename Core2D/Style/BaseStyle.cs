@@ -15,7 +15,7 @@ namespace Core2D
         private ArgbColor _fill;
         private double _thickness;
         private LineCap _lineCap;
-        private double[] _dashes;
+        private string _dashes;
         private double _dashOffset;
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public double[] Dashes
+        public string Dashes
         {
             get { return _dashes; }
             set { Update(ref _dashes, value); }
