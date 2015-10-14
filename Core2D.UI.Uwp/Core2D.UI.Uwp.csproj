@@ -92,6 +92,9 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Core2D.UI.WinForms\Util\ZoomState.cs">
+      <Link>Util\ZoomState.cs</Link>
+    </Compile>
     <Compile Include="..\Dependencies\Serializer.Newtonsoft\NewtonsoftSerializer.cs">
       <Link>Serializer\NewtonsoftSerializer.cs</Link>
     </Compile>
