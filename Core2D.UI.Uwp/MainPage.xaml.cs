@@ -29,13 +29,13 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using T2d = Core2D;
 
 namespace Test.Uwp
 {
-    public sealed partial class MainPage : Page, T2d.IView
+    public sealed partial class MainPage : Page, Core2D.IView
     {
-        private T2d.EditorContext _context;
+        private Core2D.EditorContext _context;
+        private Core2D.ZoomState _state;
         private Win2dRenderer _renderer;
         private PointerPressType _pressed;
         private string _imagePath;
@@ -57,33 +57,71 @@ namespace Test.Uwp
         {
             _renderer = new Win2dRenderer();
 
-            _context = new T2d.EditorContext()
+            _context = new Core2D.EditorContext()
             {
                 View = this,
-                Renderers = new T2d.IRenderer[] { _renderer },
-                ProjectFactory = new T2d.ProjectFactory(),
+                Renderers = new Core2D.IRenderer[] { _renderer },
+                ProjectFactory = new Core2D.ProjectFactory(),
                 TextClipboard = new TextClipboard(),
-                Serializer = new T2d.NewtonsoftSerializer(),
+                Serializer = new Core2D.NewtonsoftSerializer(),
                 //PdfWriter = new T2d.PdfWriter(),
                 //DxfWriter = new T2d.DxfWriter(),
                 //CsvReader = new T2d.CsvHelperReader(),
                 //CsvWriter = new T2d.CsvHelperWriter()
             };
+
+            _context.Renderers[0].State.EnableAutofit = true;
             _context.InitializeEditor(null/*new T2d.TraceLog()*/);
-            _context.Editor.Renderers[0].State.DrawShapeState.Flags = T2d.ShapeStateFlags.Visible;
+            _context.Editor.Renderers[0].State.DrawShapeState.Flags = Core2D.ShapeStateFlags.Visible;
             _context.Editor.GetImageKey = async () => await Task.Run(() => _imagePath);
 
             _context.Commands.OpenCommand =
-                T2d.Command<object>.Create(
+                Core2D.Command<object>.Create(
                     async (parameter) => await OnOpen(),
                     (parameter) => _context.IsEditMode());
 
             _context.Commands.SaveAsCommand =
-                T2d.Command.Create(
+                Core2D.Command.Create(
                     async () => await OnSaveAs(),
                     () => _context.IsEditMode());
 
+            _context.Invalidate = this.UpdateAndInvalidate;
+
+            _state = new Core2D.ZoomState(_context);
+
             DataContext = _context;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ResetZoom()
+        {
+            if (_context != null && _context.Editor.Project != null)
+            {
+                var container = _context.Editor.Project.CurrentContainer;
+                _state.ResetZoom(
+                    canvas.ActualWidth,
+                    canvas.ActualHeight,
+                    container.Width,
+                    container.Height);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void AutoFit()
+        {
+            if (_context != null && _context.Editor.Project != null)
+            {
+                var container = _context.Editor.Project.CurrentContainer;
+                _state.AutoFit(
+                    canvas.ActualWidth,
+                    canvas.ActualHeight,
+                    container.Width,
+                    container.Height);
+            }
         }
 
         private void InitializeCanvas()
@@ -94,21 +132,20 @@ namespace Test.Uwp
             canvas.PointerMoved += CanvasControl_PointerMoved;
             canvas.PointerWheelChanged += CanvasControl_PointerWheelChanged;
 
+            canvas.SizeChanged += Canvas_SizeChanged;
+
             SetContainerInvalidation();
-            SetCanvasSize();
         }
 
-        private void SetCanvasSize()
+        private void Canvas_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (_context.Editor.Project == null)
-                return;
-
-            var container = _context.Editor.Project.CurrentContainer;
-            if (container == null)
-                return;
-
-            canvas.Width = container.Width;
-            canvas.Height = container.Height;
+            if (_context != null && _context.Editor.Project != null)
+            {
+                if (_context.Renderers[0].State.EnableAutofit)
+                {
+                    AutoFit();
+                }
+            }
         }
 
         private void SetContainerInvalidation()
@@ -148,10 +185,9 @@ namespace Test.Uwp
             }
         }
 
-        private void InvalidateContainer()
+        private void UpdateAndInvalidate()
         {
             SetContainerInvalidation();
-            SetCanvasSize();
 
             if (_context.Editor.Project == null)
                 return;
@@ -181,7 +217,7 @@ namespace Test.Uwp
                         {
                             if (_context.Editor.IsLeftDownAvailable())
                             {
-                                if (_context.Editor.CurrentTool == T2d.Tool.Image && _imagePath == null)
+                                if (_context.Editor.CurrentTool == Core2D.Tool.Image && _imagePath == null)
                                 {
                                     var file = await GetImageKeyAsync();
                                     if (file == null)
@@ -198,7 +234,7 @@ namespace Test.Uwp
                                     _imagePath = null;
                                 }
 
-                                _context.Editor.LeftDown(pos.X, pos.Y);
+                                _state.LeftDown(pos.X, pos.Y);
                                 _pressed = PointerPressType.Left;
                             }
                         }
@@ -210,7 +246,7 @@ namespace Test.Uwp
                         {
                             if (_context.Editor.IsRightDownAvailable())
                             {
-                                _context.Editor.RightDown(pos.X, pos.Y);
+                                _state.RightDown(pos.X, pos.Y);
                                 _pressed = PointerPressType.Right;
                             }
                         }
@@ -252,7 +288,7 @@ namespace Test.Uwp
                                 {
                                     if (_context.Editor.IsLeftUpAvailable())
                                     {
-                                        _context.Editor.LeftUp(pos.X, pos.Y);
+                                        _state.LeftUp(pos.X, pos.Y);
                                     }
                                 }
                                 break;
@@ -262,7 +298,7 @@ namespace Test.Uwp
                                 {
                                     if (_context.Editor.IsRightUpAvailable())
                                     {
-                                        _context.Editor.RightUp(pos.X, pos.Y);
+                                        _state.RightUp(pos.X, pos.Y);
                                     }
                                 }
                                 break;
@@ -320,26 +356,30 @@ namespace Test.Uwp
 
             if (_context.Editor.IsMoveAvailable())
             {
-                _context.Editor.Move(pos.X, pos.Y);
+                _state.Move(pos.X, pos.Y);
             }
         }
 
         private void CanvasControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
-            // TODO: Add zoom support.
-            //var p = e.GetCurrentPoint(sender as CanvasControl);
-            //var delta = p.Properties.MouseWheelDelta;
-            //Debug.WriteLine("Delta: {0}", p.Properties.MouseWheelDelta);
+            var p = e.GetCurrentPoint(sender as CanvasControl);
+            var pos = p.Position;
+            var delta = p.Properties.MouseWheelDelta;
+
+            if (_context.Editor.IsMoveAvailable())
+            {
+                _state.Wheel(pos.X, pos.Y, delta);
+            }
         }
 
-        private void DrawBackground(CanvasDrawingSession ds, T2d.ArgbColor c, double width, double height)
+        private void DrawBackground(CanvasDrawingSession ds, Core2D.ArgbColor c, double width, double height)
         {
             var color = Color.FromArgb(
-                (byte)c.A, 
-                (byte)c.R, 
-                (byte)c.G, 
+                (byte)c.A,
+                (byte)c.R,
+                (byte)c.G,
                 (byte)c.B);
-            var rect = T2d.Rect2.Create(0, 0, width, height);
+            var rect = Core2D.Rect2.Create(0, 0, width, height);
             ds.FillRectangle(
                 (float)rect.X,
                 (float)rect.Y,
@@ -353,6 +393,12 @@ namespace Test.Uwp
             ds.Antialiasing = CanvasAntialiasing.Aliased;
             ds.TextAntialiasing = CanvasTextAntialiasing.Auto;
             ds.Clear(Colors.Transparent);
+
+            var t = Matrix3x2.CreateTranslation((float)_state.PanX, (float)_state.PanY);
+            var s = Matrix3x2.CreateScale((float)_state.Zoom);
+
+            var old = ds.Transform;
+            ds.Transform = s * t;
 
             var renderer = _context.Editor.Renderers[0];
             var container = _context.Editor.Project.CurrentContainer;
@@ -401,6 +447,8 @@ namespace Test.Uwp
                     container.Properties,
                     null);
             }
+
+            ds.Transform = old;
         }
 
         private void InitializePage()
@@ -529,12 +577,18 @@ namespace Test.Uwp
                         _context.Commands.TryToConnectCommand.Execute(null);
                         break;
                     case VirtualKey.Z:
-                        // TODO: Zoom canvas.
-                        //InvalidateContainer();
+                        ResetZoom();
+                        if (_context.Invalidate != null)
+                        {
+                            _context.Invalidate();
+                        }
                         break;
                     case VirtualKey.X:
-                        // TODO: Autofit canvas.
-                        //InvalidateContainer();
+                        AutoFit();
+                        if (_context.Invalidate != null)
+                        {
+                            _context.Invalidate();
+                        }
                         break;
                     case VirtualKey.Delete:
                         _context.Commands.DeleteCommand.Execute(null);
@@ -546,7 +600,7 @@ namespace Test.Uwp
         private void OnNew()
         {
             _context.Commands.NewCommand.Execute(null);
-            InvalidateContainer();
+            UpdateAndInvalidate();
         }
 
         private async Task OnOpen()
@@ -554,12 +608,12 @@ namespace Test.Uwp
             var file = await GetOpenProjectPathAsync();
             if (file != null)
             {
-                var project = default(T2d.Project);
+                var project = default(Core2D.Project);
                 using (var stream = await file.OpenStreamForReadAsync())
                 {
                     project = await Task.Run(() =>
                     {
-                        return T2d.Project.Open(stream, _context.Serializer);
+                        return Core2D.Project.Open(stream, _context.Serializer);
                     });
                 }
 
@@ -569,7 +623,7 @@ namespace Test.Uwp
 
                 await CacheImages(project);
 
-                InvalidateContainer();
+                UpdateAndInvalidate();
             }
         }
 
@@ -584,7 +638,7 @@ namespace Test.Uwp
                 {
                     await Task.Run(() =>
                     {
-                        T2d.Project.Save(stream, _context.Editor.Project, _context.Serializer);
+                        Core2D.Project.Save(stream, _context.Editor.Project, _context.Serializer);
                     });
                 }
 
@@ -609,9 +663,9 @@ namespace Test.Uwp
             }
         }
 
-        private async Task CacheImages(T2d.Project project)
+        private async Task CacheImages(Core2D.Project project)
         {
-            var images = T2d.Editor.GetAllShapes<T2d.XImage>(project);
+            var images = Core2D.Editor.GetAllShapes<Core2D.XImage>(project);
             if (images != null)
             {
                 foreach (var image in images)
@@ -627,7 +681,7 @@ namespace Test.Uwp
 
             using (var fileStream = await file.OpenStreamForReadAsync())
             {
-                var bytes = T2d.Project.ReadBinary(fileStream);
+                var bytes = Core2D.Project.ReadBinary(fileStream);
                 key = _context.Editor.Project.AddImageFromFile(file.Path, bytes);
             }
 
@@ -683,7 +737,7 @@ namespace Test.Uwp
 
         private void ContainersListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            InvalidateContainer();
+            UpdateAndInvalidate();
         }
     }
 }
