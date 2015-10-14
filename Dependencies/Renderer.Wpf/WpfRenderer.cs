@@ -118,10 +118,10 @@ namespace Test
         {
             var brush = new SolidColorBrush(
                 Color.FromArgb(
-                    color.A,
-                    color.R,
-                    color.G,
-                    color.B));
+                    (byte)color.A,
+                    (byte)color.R,
+                    (byte)color.G,
+                    (byte)color.B));
             brush.Freeze();
             return brush;
         }
@@ -154,7 +154,9 @@ namespace Test
                     pen.DashCap = PenLineCap.Round;
                     break;
             }
-            pen.DashStyle = new DashStyle(style.Dashes, style.DashOffset);
+            pen.DashStyle = new DashStyle(
+                ShapeStyle.DashesToDoubleArray(style.Dashes),
+                style.DashOffset);
             pen.DashStyle.Offset = style.DashOffset;
             pen.Freeze();
             return pen;

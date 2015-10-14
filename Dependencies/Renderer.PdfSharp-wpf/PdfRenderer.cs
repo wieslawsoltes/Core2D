@@ -243,7 +243,7 @@ namespace PdfSharp
             if (style.Dashes != null)
             {
                 // TODO: Convert to correct dash values.
-                pen.DashPattern = style.Dashes;
+                pen.DashPattern = Core2D.ShapeStyle.DashesToDoubleArray(style.Dashes);
             }
             pen.DashOffset = style.DashOffset;
             return pen;

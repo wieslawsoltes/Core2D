@@ -95,7 +95,7 @@ namespace Core2D
                  source.Fill.B);
             Thickness = source.Thickness;
             LineCap = source.LineCap;
-            Dashes = source.Dashes != null ? source.Dashes.ToArray() : default(double[]);
+            Dashes = source.Dashes != null ? source.Dashes : default(string);
             DashOffset = source.DashOffset;
         }
 

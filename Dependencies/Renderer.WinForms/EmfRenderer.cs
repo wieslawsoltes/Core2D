@@ -107,7 +107,7 @@ namespace Core2D
             if (style.Dashes != null)
             {
                 // TODO: Convert to correct dash values.
-                pen.DashPattern = style.Dashes.Select(x => (float)x).ToArray();
+                pen.DashPattern = ShapeStyle.DashesToFloatArray(style.Dashes);
             }
             pen.DashOffset = (float)style.DashOffset;
             return pen;

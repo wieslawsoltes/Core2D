@@ -40,23 +40,23 @@ namespace Core2D
             var sgdl = StyleLibrary.Create("Lines");
 
             var solid = ShapeStyle.Create("Solid", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
-            solid.Dashes = default(double[]);
+            solid.Dashes = default(string);
             solid.DashOffset = 0.0;
 
             var dash = ShapeStyle.Create("Dash", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
-            dash.Dashes = new double[] { 2, 2 };
+            dash.Dashes = "2 2";
             dash.DashOffset = 1.0;
 
             var dot = ShapeStyle.Create("Dot", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
-            dot.Dashes = new double[] { 0, 2 };
+            dot.Dashes = "0 2";
             dot.DashOffset = 0.0;
 
             var dashDot = ShapeStyle.Create("DashDot", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
-            dashDot.Dashes = new double[] { 2, 2, 0, 2 };
+            dashDot.Dashes = "2 2 0 2";
             dashDot.DashOffset = 1.0;
 
             var dashDotDot = ShapeStyle.Create("DashDotDot", 255, 0, 0, 0, 80, 0, 0, 0, 2.0);
-            dashDotDot.Dashes = new double[] { 2, 2, 0, 2, 0, 2 };
+            dashDotDot.Dashes = "2 2 0 2 0 2";
             dashDotDot.DashOffset = 1.0;
 
             var builder = sgdl.Styles.ToBuilder();

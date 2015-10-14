@@ -43,10 +43,10 @@ namespace Test.Uwp
         private Color ToColor(ArgbColor color)
         {
             return Color.FromArgb(
-                color.A,
-                color.R,
-                color.G,
-                color.B);
+                (byte)color.A,
+                (byte)color.R,
+                (byte)color.G,
+                (byte)color.B);
         }
 
         private static CanvasStrokeStyle CreateStrokeStyle(BaseStyle style)
@@ -72,7 +72,7 @@ namespace Test.Uwp
             }
             if (style.Dashes != null)
             {
-                ss.CustomDashStyle = style.Dashes.Select(x => (float)x).ToArray();
+                ss.CustomDashStyle = ShapeStyle.DashesToFloatArray(style.Dashes);
             }
             ss.DashOffset = (float)style.DashOffset;
             return ss;

@@ -277,7 +277,11 @@ namespace TestPerspex
         /// <param name="height"></param>
         private void DrawBackground(DrawingContext dc, ArgbColor c, double width, double height)
         {
-            var color = Color.FromArgb(c.A, c.R, c.G, c.B);
+            var color = Color.FromArgb(
+                (byte)c.A, 
+                (byte)c.R, 
+                (byte)c.G, 
+                (byte)c.B);
             var brush = new SolidColorBrush(color);
             var rect = new Rect(0, 0, width, height);
             dc.FillRectangle(brush, rect);

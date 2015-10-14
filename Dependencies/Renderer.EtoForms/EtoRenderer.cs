@@ -144,7 +144,7 @@ namespace TestEtoForms
             {
                 pen.DashStyle = new DashStyle(
                     (float)style.DashOffset,
-                    style.Dashes.Select(x => (float)x).ToArray());
+                    ShapeStyle.DashesToFloatArray(style.Dashes));
             }
             return pen;
         }

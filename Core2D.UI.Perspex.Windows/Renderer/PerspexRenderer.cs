@@ -112,10 +112,10 @@ namespace TestPerspex
         private Color ToColor(ArgbColor color)
         {
             return Color.FromArgb(
-                color.A,
-                color.R,
-                color.G,
-                color.B);
+                (byte)color.A,
+                (byte)color.R,
+                (byte)color.G,
+                (byte)color.B);
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace TestPerspex
             if (style.Dashes != null)
             {
                 dashStyle = new DashStyle(
-                    style.Dashes,
+                    ShapeStyle.DashesToDoubleArray(style.Dashes),
                     style.DashOffset);
             }
 

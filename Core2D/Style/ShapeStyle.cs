@@ -81,7 +81,7 @@ namespace Core2D
             ArrowStyle startArrowStyle = null,
             ArrowStyle endArrowStyle = null,
             LineCap lineCap = LineCap.Round,
-            double[] dashes = default(double[]),
+            string dashes = default(string),
             double dashOffset = 0.0)
         {
             var style = new ShapeStyle()
@@ -132,7 +132,7 @@ namespace Core2D
                 Fill = fill,
                 Thickness = thickness,
                 LineCap = LineCap.Round,
-                Dashes = default(double[]),
+                Dashes = default(string),
                 DashOffset = 0.0,
                 LineStyle = lineStyle,
                 TextStyle = textStyle,
