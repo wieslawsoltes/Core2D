@@ -60,15 +60,6 @@ rmdir /Q /S Core2D.UI.EtoForms.Direct2D\obj
 rmdir /Q /S Core2D.UI.EtoForms.Gtk2\bin
 rmdir /Q /S Core2D.UI.EtoForms.Gtk2\obj
 
-rmdir /Q /S Core2D.UI.EtoForms.Shared\bin
-rmdir /Q /S Core2D.UI.EtoForms.Shared\obj
-
-rmdir /Q /S Core2D.UI.EtoForms.WinForms\bin
-rmdir /Q /S Core2D.UI.EtoForms.WinForms\obj
-
-rmdir /Q /S Core2D.UI.EtoForms.Wpf\bin
-rmdir /Q /S Core2D.UI.EtoForms.Wpf\obj
-
 rmdir /Q /S Core2D.UI.Perspex.Windows\bin
 rmdir /Q /S Core2D.UI.Perspex.Windows\obj
 
@@ -80,9 +71,6 @@ rmdir /Q /S Core2D.UI.WinForms\obj
 
 rmdir /Q /S Core2D.UI.Wpf\bin
 rmdir /Q /S Core2D.UI.Wpf\obj
-
-rmdir /Q /S Core2D.UI.Wpf.Viewer\bin
-rmdir /Q /S Core2D.UI.Wpf.Viewer\obj
 
 rmdir /Q /S packages
 

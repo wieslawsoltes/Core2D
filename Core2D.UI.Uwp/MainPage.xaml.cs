@@ -334,7 +334,11 @@ namespace Test.Uwp
 
         private void DrawBackground(CanvasDrawingSession ds, T2d.ArgbColor c, double width, double height)
         {
-            var color = Color.FromArgb(c.A, c.R, c.G, c.B);
+            var color = Color.FromArgb(
+                (byte)c.A, 
+                (byte)c.R, 
+                (byte)c.G, 
+                (byte)c.B);
             var rect = T2d.Rect2.Create(0, 0, width, height);
             ds.FillRectangle(
                 (float)rect.X,
