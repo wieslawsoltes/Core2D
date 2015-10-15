@@ -49,8 +49,61 @@
         <KeyBinding Command="{Binding Commands.ZoomExtentCommand}" Key="X" Modifiers=""/>
         <KeyBinding Command="{Binding Commands.DeselectAllCommand}" Key="Esc" Modifiers=""/>
     </UserControl.InputBindings>
-    <Control 
-        DataContext="{Binding Editor.Project.CurrentContainer}"
-        Template="{StaticResource ContainerEditorControlTemplateKey}">
-    </Control>
+    <UserControl.Resources>
+        <ControlTemplate x:Key="ContainerControlTemplateKey">
+            <ItemsControl ItemsSource="{Binding Layers}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas 
+                        Width="{Binding Width}" 
+                        Height="{Binding Height}" 
+                        Background="{Binding Background, Converter={StaticResource ArgbColorToBrushConverter}}">
+                        </Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:LayerElement/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Width" Value="{Binding Path=DataContext.Width, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}"/>
+                        <Setter Property="Height" Value="{Binding Path=DataContext.Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
+        </ControlTemplate>
+    </UserControl.Resources>
+    <Border 
+        Width="{Binding Width}" 
+        Height="{Binding Height}" 
+        DataContext="{Binding Editor.Project.CurrentContainer}">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsTemplate}" Value="True">
+                        <Setter Property="BorderBrush" Value="Red"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+        <Grid Width="{Binding Width}" Height="{Binding Height}" Background="Transparent">
+            <Control DataContext="{Binding Template}" Template="{StaticResource ContainerControlTemplateKey}"/>
+            <Control DataContext="{Binding}" Template="{StaticResource ContainerControlTemplateKey}"/>
+            <controls:EditorCanvas 
+                    Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                    Background="Transparent"
+                    Focusable="True"
+                    FocusVisualStyle="{x:Null}"
+                    Width="{Binding Width}" 
+                    Height="{Binding Height}">
+                <controls:LayerElement DataContext="{Binding WorkingLayer}"/>
+                <controls:LayerElement DataContext="{Binding HelperLayer}"/>
+            </controls:EditorCanvas>
+        </Grid>
+    </Border>
 </UserControl>
