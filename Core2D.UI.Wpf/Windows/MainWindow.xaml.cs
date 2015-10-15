@@ -33,7 +33,7 @@ namespace Test.Windows
         private string _resourceLayoutRoot = "Core2D.UI.Wpf.Layouts.";
         private string _resourceLayoutFileName = "Core2D.UI.Wpf.layout";
         private string _defaultLayoutFileName = "Core2D.layout";
-        private bool _restoreLayout = false;
+        private bool _restoreLayout = true;
         private bool _autoRecent = true;
 
         /// <summary>
