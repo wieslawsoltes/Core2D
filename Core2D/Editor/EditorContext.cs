@@ -3515,24 +3515,7 @@ namespace Core2D
 
             (_commands.ZoomResetCommand as Command).NotifyCanExecuteChanged();
             (_commands.ZoomExtentCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.ProjectWindowCommand as Command).NotifyCanExecuteChanged();
-            (_commands.OptionsWindowCommand as Command).NotifyCanExecuteChanged();
-            (_commands.TemplatesWindowCommand as Command).NotifyCanExecuteChanged();
-            (_commands.GroupsWindowCommand as Command).NotifyCanExecuteChanged();
-            (_commands.DatabasesWindowCommand as Command).NotifyCanExecuteChanged();
-            (_commands.DatabaseWindowCommand as Command).NotifyCanExecuteChanged();
-            //(_commands.ContainerWindowCommand as Command).NotifyCanExecuteChanged();
-            //(_commands.DocumentWindowCommand as Command).NotifyCanExecuteChanged();
-            (_commands.StylesWindowCommand as Command).NotifyCanExecuteChanged();
-            (_commands.LayersWindowCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ShapesWindowCommand as Command).NotifyCanExecuteChanged();
-            (_commands.TemplateWindowCommand as Command).NotifyCanExecuteChanged();
-            (_commands.PropertiesWindowCommand as Command).NotifyCanExecuteChanged();
-            (_commands.StateWindowCommand as Command).NotifyCanExecuteChanged();
-            (_commands.DataWindowCommand as Command).NotifyCanExecuteChanged();
-            (_commands.StyleWindowCommand as Command).NotifyCanExecuteChanged();
-
+            
             (_commands.AddTemplateCommand as Command).NotifyCanExecuteChanged();
             (_commands.RemoveTemplateCommand as Command).NotifyCanExecuteChanged();
             (_commands.EditTemplateCommand as Command).NotifyCanExecuteChanged();

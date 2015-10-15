@@ -33,8 +33,7 @@ namespace Test.Windows
         private string _resourceLayoutRoot = "Core2D.UI.Wpf.Layouts.";
         private string _resourceLayoutFileName = "Core2D.UI.Wpf.layout";
         private string _defaultLayoutFileName = "Core2D.layout";
-        private bool _restoreLayout = true;
-        private IDictionary<string, LayoutContent> _layouts;
+        private bool _restoreLayout = false;
         private bool _autoRecent = true;
 
         /// <summary>
@@ -43,7 +42,6 @@ namespace Test.Windows
         public MainWindow()
         {
             InitializeComponent();
-
             InitializeContext();
         }
 
@@ -731,8 +729,6 @@ namespace Test.Windows
             serializer.LayoutSerializationCallback +=
                 (s, e) =>
                 {
-                    _layouts[e.Model.ContentId] = e.Model;
-
                     var element = e.Content as FrameworkElement;
                     if (element != null)
                     {
@@ -765,8 +761,6 @@ namespace Test.Windows
             serializer.LayoutSerializationCallback +=
                 (s, e) =>
                 {
-                    _layouts[e.Model.ContentId] = e.Model;
-
                     var element = e.Content as FrameworkElement;
                     if (element != null)
                     {
@@ -873,8 +867,6 @@ namespace Test.Windows
                     else
                         _isLoaded = true;
 
-                    InitializeLayouts();
-
                     if (_autoRecent)
                     {
                         AutoLoadRecent(context);
@@ -907,29 +899,6 @@ namespace Test.Windows
             };
 
             DataContext = context;
-        }
-
-        /// <summary>
-        /// Initialize docking manager layouts dictionary.
-        /// </summary>
-        private void InitializeLayouts()
-        {
-            _layouts = new Dictionary<string, LayoutContent>();
-            _layouts.Add("project", projectWindow);
-            _layouts.Add("templates", templatesWindow);
-            _layouts.Add("databases", databasesWindow);
-            _layouts.Add("options", optionsWindow);
-            _layouts.Add("template", templateWindow);
-            _layouts.Add("groups", groupsWindow);
-            _layouts.Add("database", databaseWindow);
-            _layouts.Add("container", containerWindow);
-            _layouts.Add("styles", stylesWindow);
-            _layouts.Add("layers", layersWindow);
-            _layouts.Add("shapes", shapesWindow);
-            _layouts.Add("properties", propertiesWindow);
-            _layouts.Add("style", shapesWindow);
-            _layouts.Add("state", shapesWindow);
-            _layouts.Add("data", shapesWindow);
         }
 
         /// <summary>
@@ -1087,87 +1056,7 @@ namespace Test.Windows
                 Command.Create(
                     () => OnZoomExtent(),
                     () => true);
-
-            context.Commands.ProjectWindowCommand =
-                Command.Create(
-                    () => (_layouts["project"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            context.Commands.OptionsWindowCommand =
-                Command.Create(
-                    () => (_layouts["options"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            context.Commands.TemplatesWindowCommand =
-                Command.Create(
-                    () => (_layouts["templates"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            context.Commands.GroupsWindowCommand =
-                Command.Create(
-                    () => (_layouts["groups"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            context.Commands.DatabasesWindowCommand =
-                Command.Create(
-                    () => (_layouts["databases"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            context.Commands.DatabaseWindowCommand =
-                Command.Create(
-                    () => (_layouts["database"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            //context.Commands.ContainerWindowCommand = 
-            //    Command.Create(
-            //        () => ,
-            //        () => true);
-
-            //context.Commands.DocumentWindowCommand = 
-            //    Command.Create(
-            //        () => ,
-            //        () => true);
-
-            context.Commands.StylesWindowCommand =
-                Command.Create(
-                    () => (_layouts["styles"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            context.Commands.LayersWindowCommand =
-                Command.Create(
-                    () => (_layouts["layers"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            context.Commands.ShapesWindowCommand =
-                Command.Create(
-                    () => (_layouts["shapes"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            context.Commands.TemplateWindowCommand =
-                Command.Create(
-                    () => (_layouts["template"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            context.Commands.PropertiesWindowCommand =
-                Command.Create(
-                    () => (_layouts["properties"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            context.Commands.StateWindowCommand =
-                Command.Create(
-                    () => (_layouts["state"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            context.Commands.DataWindowCommand =
-                Command.Create(
-                    () => (_layouts["data"] as LayoutAnchorable).Show(),
-                    () => true);
-
-            context.Commands.StyleWindowCommand =
-                Command.Create(
-                    () => (_layouts["style"] as LayoutAnchorable).Show(),
-                    () => true);
-
+            
             context.Commands.LoadWindowLayoutCommand =
                 Command.Create(
                     () => OnLoadLayout(),
