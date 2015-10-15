@@ -31,10 +31,10 @@ namespace Test.Converters
             {
                 var brush = new SolidColorBrush(
                     Color.FromArgb(
-                        (byte)values[0],
-                        (byte)values[1],
-                        (byte)values[2],
-                        (byte)values[3]));
+                        (byte)((int)values[0]),
+                        (byte)((int)values[1]),
+                        (byte)((int)values[2]),
+                        (byte)((int)values[3])));
                 brush.Freeze();
                 return brush;
             }
