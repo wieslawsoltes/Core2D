@@ -8,6 +8,17 @@
     xmlns:converters="clr-namespace:Test.Converters"
     xmlns:controls="clr-namespace:Test.Controls"
     xmlns:p="clr-namespace:Core2D.UI.Wpf.Properties">
+    <!-- converters -->
+    <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
+    <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
+    <converters:BooleanToStringConverter x:Key="BooleanToStarConverter" FalseValue="" TrueValue="*"/>
+    <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
+    <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
+    <converters:ColumnParameterConverter x:Key="ColumnParameterConverter"/>
+    <converters:RecordParameterConverter x:Key="RecordParameterConverter"/>
+    <converters:ValueParameterConverter x:Key="ValueParameterConverter"/>
+    <converters:ShapeBindingParameterConverter x:Key="ShapeBindingParameterConverter"/>
+    <converters:ShapePropertyParameterConverter x:Key="ShapePropertyParameterConverter"/>
     <!-- brushes -->
     <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
     <SolidColorBrush x:Key="DarkSquareColor" Color="DarkGray"/>
@@ -214,17 +225,6 @@
             CommandParameter="{Binding}">
         </MenuItem>
     </ContextMenu>
-    <!-- converters -->
-    <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
-    <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
-    <converters:BooleanToStringConverter x:Key="BooleanToStarConverter" FalseValue="" TrueValue="*"/>
-    <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
-    <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
-    <converters:ColumnParameterConverter x:Key="ColumnParameterConverter"/>
-    <converters:RecordParameterConverter x:Key="RecordParameterConverter"/>
-    <converters:ValueParameterConverter x:Key="ValueParameterConverter"/>
-    <converters:ShapeBindingParameterConverter x:Key="ShapeBindingParameterConverter"/>
-    <converters:ShapePropertyParameterConverter x:Key="ShapePropertyParameterConverter"/>
     <!-- styles -->
     <Style x:Key="TextBlockLeftStyleKey" TargetType="TextBlock">
         <Setter Property="Margin" Value="5,2,5,2"/>
