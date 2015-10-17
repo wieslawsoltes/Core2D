@@ -1645,11 +1645,11 @@ namespace Core2D.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Properties.
+        ///   Looks up a localized string similar to Shape.
         /// </summary>
-        public static string WindowTitleProperties {
+        public static string WindowTitleShape {
             get {
-                return ResourceManager.GetString("WindowTitleProperties", resourceCulture);
+                return ResourceManager.GetString("WindowTitleShape", resourceCulture);
             }
         }
         
@@ -1659,15 +1659,6 @@ namespace Core2D.UI.Wpf.Properties {
         public static string WindowTitleShapes {
             get {
                 return ResourceManager.GetString("WindowTitleShapes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to State.
-        /// </summary>
-        public static string WindowTitleState {
-            get {
-                return ResourceManager.GetString("WindowTitleState", resourceCulture);
             }
         }
         

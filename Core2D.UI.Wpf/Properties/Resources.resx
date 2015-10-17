@@ -474,14 +474,11 @@
   <data name="WindowTitleProject" xml:space="preserve">
     <value>Project</value>
   </data>
-  <data name="WindowTitleProperties" xml:space="preserve">
-    <value>Properties</value>
+  <data name="WindowTitleShape" xml:space="preserve">
+    <value>Shape</value>
   </data>
   <data name="WindowTitleShapes" xml:space="preserve">
     <value>Shapes</value>
-  </data>
-  <data name="WindowTitleState" xml:space="preserve">
-    <value>State</value>
   </data>
   <data name="WindowTitleStyle" xml:space="preserve">
     <value>Style</value>
