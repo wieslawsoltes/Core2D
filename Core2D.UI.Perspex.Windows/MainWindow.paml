@@ -4,7 +4,8 @@
         xmlns:local="clr-namespace:TestPerspex;assembly=Core2D.UI.Perspex.Windows"
         xmlns:core="clr-namespace:Core2D;assembly=Core2D"
         Width="1300" Height="670"
-        Title="Core2D">
+        Title="Core2D"
+        UseLayoutRounding="True">
     <Grid RowDefinitions="Auto,*">
         <Menu Grid.Row="0">
             <MenuItem Header="_File">
