@@ -19,6 +19,57 @@
                 <!--<Separator/>-->
                 <MenuItem Header="_Export" HotKey="Ctrl+E" Command="{Binding Commands.ExportCommand}" />
                 <!--<Separator/>-->
+                <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
+                    <MenuItem.DataTemplates>
+                        <DataTemplate DataType="core:RecentProject">
+                            <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Path=Path}"/>
+                        </DataTemplate>
+                    </MenuItem.DataTemplates>
+                    <!--
+                    <MenuItem.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Command" Value="{Binding Commands.OpenCommand}"/>
+                            <Setter Property="CommandParameter" Value="{Binding Path}"/>
+                        </Style>
+                    </MenuItem.ItemContainerStyle>
+                    -->
+                </MenuItem>
+                <!--<Separator/>-->
+                <MenuItem Header="E_xit" HotKey="Alt+F4" Command="{Binding Commands.ExitCommand}" />
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Undo" HotKey="Ctrl+Z" Command="{Binding Commands.UndoCommand}" />
+                <MenuItem Header="_Redo" HotKey="Ctrl+Y" Command="{Binding Commands.RedoCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="Cu_t" HotKey="Ctrl+X" Command="{Binding Commands.CutCommand}" />
+                <MenuItem Header="_Copy" HotKey="Ctrl+C" Command="{Binding Commands.CopyCommand}" />
+                <MenuItem Header="_Paste" HotKey="Ctrl+V" Command="{Binding Commands.PasteCommand}" />
+                <MenuItem Header="_Delete" HotKey="Delete" Command="{Binding Commands.DeleteCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="Select _All" HotKey="Ctrl+A" Command="{Binding Commands.SelectAllCommand}" />
+                <MenuItem Header="De_select All" HotKey="Escape" Command="{Binding Commands.DeselectAllCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="Cl_ear All" Command="{Binding Commands.ClearAllCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="_Group" HotKey="Ctrl+G" Command="{Binding Commands.GroupCommand}" />
+                <MenuItem Header="U_ngroup" HotKey="Ctrl+U" Command="{Binding Commands.UngroupCommand}" />
+                <!--<Separator/>-->
+                <MenuItem Header="_Order">
+                    <MenuItem Header="Send to _Back" HotKey="Shift+-" Command="{Binding Commands.SendToBackCommand}" />
+                    <MenuItem Header="Send Ba_ckward" HotKey="-" Command="{Binding Commands.SendBackwardCommand}" />
+                    <!--<Separator/>-->
+                    <MenuItem Header="Bring Fo_rward" HotKey="+" Command="{Binding Commands.BringForwardCommand}" />
+                    <MenuItem Header="Bring to _Front" HotKey="Shift++" Command="{Binding Commands.BringToFrontCommand}" />
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="_Zoom">
+                    <MenuItem Header="_Reset Zoom" HotKey="Z" Command="{Binding Commands.ZoomResetCommand}" />
+                    <!--<Separator/>-->
+                    <MenuItem Header="Zoom to _Extent" HotKey="X" Command="{Binding Commands.ZoomExtentCommand}" />
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Project">
                 <MenuItem Header="I_mport">
                     <MenuItem
                         Header="_Style..."
@@ -131,56 +182,6 @@
                         Command="{Binding Commands.ExportTemplatesCommand}"
                         CommandParameter="{Binding Editor.Project}">
                     </MenuItem>
-                </MenuItem>
-                <!--<Separator/>-->
-                <MenuItem Header="_Recent" Items="{Binding RecentProjects}">
-                    <MenuItem.DataTemplates>
-                        <DataTemplate DataType="core:RecentProject">
-                            <TextBlock Text="{Binding Name}" ToolTip.Tip="{Binding Path=Path}"/>
-                        </DataTemplate>
-                    </MenuItem.DataTemplates>
-                    <!--
-                    <MenuItem.ItemContainerStyle>
-                        <Style TargetType="MenuItem">
-                            <Setter Property="Command" Value="{Binding Commands.OpenCommand}"/>
-                            <Setter Property="CommandParameter" Value="{Binding Path}"/>
-                        </Style>
-                    </MenuItem.ItemContainerStyle>
-                    -->
-                </MenuItem>
-                <!--<Separator/>-->
-                <MenuItem Header="E_xit" HotKey="Alt+F4" Command="{Binding Commands.ExitCommand}" />
-            </MenuItem>
-            <MenuItem Header="_Edit">
-                <MenuItem Header="_Undo" HotKey="Ctrl+Z" Command="{Binding Commands.UndoCommand}" />
-                <MenuItem Header="_Redo" HotKey="Ctrl+Y" Command="{Binding Commands.RedoCommand}" />
-                <!--<Separator/>-->
-                <MenuItem Header="Cu_t" HotKey="Ctrl+X" Command="{Binding Commands.CutCommand}" />
-                <MenuItem Header="_Copy" HotKey="Ctrl+C" Command="{Binding Commands.CopyCommand}" />
-                <MenuItem Header="_Paste" HotKey="Ctrl+V" Command="{Binding Commands.PasteCommand}" />
-                <MenuItem Header="_Delete" HotKey="Delete" Command="{Binding Commands.DeleteCommand}" />
-                <!--<Separator/>-->
-                <MenuItem Header="Select _All" HotKey="Ctrl+A" Command="{Binding Commands.SelectAllCommand}" />
-                <MenuItem Header="De_select All" HotKey="Escape" Command="{Binding Commands.DeselectAllCommand}" />
-                <!--<Separator/>-->
-                <MenuItem Header="Cl_ear All" Command="{Binding Commands.ClearAllCommand}" />
-                <!--<Separator/>-->
-                <MenuItem Header="_Group" HotKey="Ctrl+G" Command="{Binding Commands.GroupCommand}" />
-                <MenuItem Header="U_ngroup" HotKey="Ctrl+U" Command="{Binding Commands.UngroupCommand}" />
-                <!--<Separator/>-->
-                <MenuItem Header="_Order">
-                    <MenuItem Header="Send to _Back" HotKey="Shift+-" Command="{Binding Commands.SendToBackCommand}" />
-                    <MenuItem Header="Send Ba_ckward" HotKey="-" Command="{Binding Commands.SendBackwardCommand}" />
-                    <!--<Separator/>-->
-                    <MenuItem Header="Bring Fo_rward" HotKey="+" Command="{Binding Commands.BringForwardCommand}" />
-                    <MenuItem Header="Bring to _Front" HotKey="Shift++" Command="{Binding Commands.BringToFrontCommand}" />
-                </MenuItem>
-            </MenuItem>
-            <MenuItem Header="_View">
-                <MenuItem Header="_Zoom">
-                    <MenuItem Header="_Reset Zoom" HotKey="Z" Command="{Binding Commands.ZoomResetCommand}" />
-                    <!--<Separator/>-->
-                    <MenuItem Header="Zoom to _Extent" HotKey="X" Command="{Binding Commands.ZoomExtentCommand}" />
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_Tool">

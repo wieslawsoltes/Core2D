@@ -570,7 +570,7 @@ namespace Core2D
             builder.Add(Column.Create("Column0"));
             builder.Add(Column.Create("Column1"));
 
-            var db = Database.Create("New", builder.ToImmutable());
+            var db = Database.Create("Db", builder.ToImmutable());
 
             var previous = _editor.Project.Databases;
             var next = _editor.Project.Databases.Add(db);

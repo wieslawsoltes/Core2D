@@ -1,0 +1,109 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Test.Controls.CanvasControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:Test.Controls"
+             xmlns:converters="clr-namespace:Test.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="600"
+             Width="{Binding Editor.Project.CurrentContainer.Width}" 
+             Height="{Binding Editor.Project.CurrentContainer.Height}"
+             controls:LayerElement.Renderer="{Binding Editor.Renderers[0]}">
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding}" Key="Delete" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.SendToBackCommand}" Key="OemMinus" Modifiers="Shift"/>
+        <KeyBinding Command="{Binding Commands.SendBackwardCommand}" Key="OemMinus" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.BringForwardCommand}" Key="OemPlus" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.BringToFrontCommand}" Key="OemPlus" Modifiers="Shift"/>
+        <KeyBinding Command="{Binding Commands.SendToBackCommand}" Key="Subtract" Modifiers="Shift"/>
+        <KeyBinding Command="{Binding Commands.SendBackwardCommand}" Key="Subtract" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.BringForwardCommand}" Key="Add" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.BringToFrontCommand}" Key="Add" Modifiers="Shift"/>
+        <KeyBinding Command="{Binding Commands.MoveUpCommand}" Key="Up" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.MoveDownCommand}" Key="Down" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.MoveLeftCommand}" Key="Left" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.MoveRightCommand}" Key="Right" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolNoneCommand}" Key="N" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolSelectionCommand}" Key="S" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolPointCommand}" Key="P" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolLineCommand}" Key="L" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolRectangleCommand}" Key="R" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolEllipseCommand}" Key="E" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolArcCommand}" Key="A" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolBezierCommand}" Key="B" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolQBezierCommand}" Key="Q" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolTextCommand}" Key="T" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolImageCommand}" Key="I" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolPathCommand}" Key="H" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ToolMoveCommand}" Key="M" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.DefaultIsStrokedCommand}" Key="K" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.DefaultIsFilledCommand}" Key="F" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.DefaultIsClosedCommand}" Key="D" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.DefaultIsSmoothJoinCommand}" Key="J" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.SnapToGridCommand}" Key="G" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.TryToConnectCommand}" Key="C" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ZoomResetCommand}" Key="Z" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.ZoomExtentCommand}" Key="X" Modifiers=""/>
+        <KeyBinding Command="{Binding Commands.DeselectAllCommand}" Key="Esc" Modifiers=""/>
+    </UserControl.InputBindings>
+    <UserControl.Resources>
+        <ControlTemplate x:Key="ContainerControlTemplateKey">
+            <ItemsControl ItemsSource="{Binding Layers}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas 
+                        Width="{Binding Width}" 
+                        Height="{Binding Height}" 
+                        Background="{Binding Background, Converter={StaticResource ArgbColorToBrushConverter}}">
+                        </Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:LayerElement/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Width" Value="{Binding Path=DataContext.Width, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}"/>
+                        <Setter Property="Height" Value="{Binding Path=DataContext.Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
+        </ControlTemplate>
+    </UserControl.Resources>
+    <Border 
+        Width="{Binding Width}" 
+        Height="{Binding Height}" 
+        DataContext="{Binding Editor.Project.CurrentContainer}">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsTemplate}" Value="True">
+                        <Setter Property="BorderBrush" Value="Red"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+        <Grid Width="{Binding Width}" Height="{Binding Height}" Background="Transparent">
+            <Control DataContext="{Binding Template}" Template="{StaticResource ContainerControlTemplateKey}"/>
+            <Control DataContext="{Binding}" Template="{StaticResource ContainerControlTemplateKey}"/>
+            <controls:EditorCanvas 
+                    Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                    Background="Transparent"
+                    Focusable="True"
+                    FocusVisualStyle="{x:Null}"
+                    Width="{Binding Width}" 
+                    Height="{Binding Height}">
+                <controls:LayerElement DataContext="{Binding WorkingLayer}"/>
+                <controls:LayerElement DataContext="{Binding HelperLayer}"/>
+            </controls:EditorCanvas>
+        </Grid>
+    </Border>
+</UserControl>

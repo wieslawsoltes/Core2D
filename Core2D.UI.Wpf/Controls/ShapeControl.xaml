@@ -15,7 +15,7 @@
                     <Setter Property="Content" Value="{Binding Editor.Project.CurrentContainer.CurrentShape}"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Editor.Project.CurrentContainer.CurrentShape}" Value="{x:Null}">
-                            <Setter Property="Content" Value="{Binding Editor.Project.CurrentContainer}"/>
+                            <Setter Property="Content" Value="{x:Null}"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

@@ -102,16 +102,14 @@
     <Compile Include="..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Controls\ContainerControl.xaml.cs">
-      <DependentUpon>ContainerControl.xaml</DependentUpon>
+    <Compile Include="Controls\CanvasControl.xaml.cs">
+      <DependentUpon>CanvasControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Custom\DragAndDropListBox.cs" />
     <Compile Include="Controls\Custom\EditorCanvas.cs" />
     <Compile Include="Controls\Custom\LayerElement.cs" />
     <Compile Include="Controls\Custom\ListBoxDropMode.cs" />
-    <Compile Include="Controls\DatabaseControl.xaml.cs">
-      <DependentUpon>DatabaseControl.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Controls\Custom\RecordsListView.cs" />
     <Compile Include="Controls\DataControl.xaml.cs">
       <DependentUpon>DataControl.xaml</DependentUpon>
     </Compile>
@@ -138,17 +136,14 @@
       <DependentUpon>ShapeControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\StateControl.xaml.cs">
-      <DependentUpon>StateControl.xaml</DependentUpon>
+    <Compile Include="Controls\ContainerControl.xaml.cs">
+      <DependentUpon>ContainerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\StatusControl.xaml.cs">
       <DependentUpon>StatusControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\StyleControl.xaml.cs">
       <DependentUpon>StyleControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TemplateControl.xaml.cs">
-      <DependentUpon>TemplateControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TemplatesControl.xaml.cs">
       <DependentUpon>TemplatesControl.xaml</DependentUpon>
@@ -173,13 +168,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Util\TextClipboard.cs" />
-    <Page Include="Controls\ContainerControl.xaml">
+    <Page Include="Controls\CanvasControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\DatabaseControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\DataControl.xaml">
       <SubType>Designer</SubType>
@@ -201,7 +192,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\StateControl.xaml">
+    <Page Include="Controls\ContainerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -209,16 +200,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\TemplateControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\TemplatesControl.xaml" />
     <Page Include="Dictionaries\Dictionary.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\LayersControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\MenuControl.xaml">
@@ -226,10 +209,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ShapeControl.xaml" />
-    <Page Include="Controls\ShapesControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\StyleControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -246,14 +225,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\LayersControl.xaml.cs">
-      <DependentUpon>LayersControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ShapesControl.xaml.cs">
-      <DependentUpon>ShapesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\StylesControl.xaml.cs">
       <DependentUpon>StylesControl.xaml</DependentUpon>
