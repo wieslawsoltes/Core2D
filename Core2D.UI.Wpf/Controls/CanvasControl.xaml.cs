@@ -20,12 +20,12 @@ namespace Test.Controls
     /// <summary>
     /// 
     /// </summary>
-    public partial class ContainerControl : UserControl
+    public partial class CanvasControl : UserControl
     {
         /// <summary>
         /// 
         /// </summary>
-        public ContainerControl()
+        public CanvasControl()
         {
             InitializeComponent();
         }
