@@ -663,4 +663,7 @@
   <data name="StatusToolText" xml:space="preserve">
     <value>Text</value>
   </data>
+  <data name="WindowTitleCanvas" xml:space="preserve">
+    <value>Canvas</value>
+  </data>
 </root>

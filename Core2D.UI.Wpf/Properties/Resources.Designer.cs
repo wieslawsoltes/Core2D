@@ -1555,6 +1555,15 @@ namespace Core2D.UI.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Canvas.
+        /// </summary>
+        public static string WindowTitleCanvas {
+            get {
+                return ResourceManager.GetString("WindowTitleCanvas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Container.
         /// </summary>
         public static string WindowTitleContainer {
