@@ -141,7 +141,7 @@
                     </ad:LayoutAnchorablePaneGroup>
                     <ad:LayoutDocumentPaneGroup Orientation="Horizontal">
                         <ad:LayoutDocumentPane>
-                            <ad:LayoutDocument x:Name="containerWindow" CanClose="False" ContentId="container" Title="{x:Static p:Resources.WindowTitleContainer}">
+                            <ad:LayoutDocument x:Name="canvasWindow" CanClose="False" ContentId="canvas" Title="{x:Static p:Resources.WindowTitleCanvas}">
                                 <paz:PanAndZoomGrid 
                                     x:Name="panAndZoomGrid"
                                     ClipToBounds="True"
@@ -162,9 +162,9 @@
                                         Width="{Binding Editor.Project.CurrentContainer.Width}" 
                                         Height="{Binding Editor.Project.CurrentContainer.Height}"
                                         Tag="{Binding Editor.CancelAvailable}">
-                                        <controls:ContainerControl x:Name="containerControl">
-                                            <controls:ContainerControl.Style>
-                                                <Style TargetType="controls:ContainerControl">
+                                        <controls:CanvasControl x:Name="containerControl">
+                                            <controls:CanvasControl.Style>
+                                                <Style TargetType="controls:CanvasControl">
                                                     <Setter Property="Visibility" Value="Visible"/>
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding Editor.Project.CurrentContainer}" Value="{x:Null}">
@@ -172,8 +172,8 @@
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
-                                            </controls:ContainerControl.Style>
-                                        </controls:ContainerControl>
+                                            </controls:CanvasControl.Style>
+                                        </controls:CanvasControl>
                                     </paz:PanAndZoomBorder>
                                 </paz:PanAndZoomGrid>
                             </ad:LayoutDocument>
