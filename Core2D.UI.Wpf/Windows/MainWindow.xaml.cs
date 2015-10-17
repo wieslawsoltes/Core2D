@@ -1129,9 +1129,9 @@ namespace Test.Windows
         /// <param name="context"></param>
         private void InitializeDrop(EditorContext context)
         {
-            containerControl.AllowDrop = true;
+            canvasControl.AllowDrop = true;
 
-            containerControl.DragEnter +=
+            canvasControl.DragEnter +=
                 (s, e) =>
                 {
                     if (!e.Data.GetDataPresent(DataFormats.FileDrop)
@@ -1144,7 +1144,7 @@ namespace Test.Windows
                     }
                 };
 
-            containerControl.Drop +=
+            canvasControl.Drop +=
                 (s, e) =>
                 {
                     if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -1176,7 +1176,7 @@ namespace Test.Windows
                             var group = e.Data.GetData(typeof(XGroup)) as XGroup;
                             if (group != null)
                             {
-                                var p = e.GetPosition(containerControl);
+                                var p = e.GetPosition(canvasControl);
                                 context.DropAsClone(group, p.X, p.Y);
                                 e.Handled = true;
                             }
@@ -1200,7 +1200,7 @@ namespace Test.Windows
                             var record = e.Data.GetData(typeof(Record)) as Record;
                             if (record != null)
                             {
-                                var p = e.GetPosition(containerControl);
+                                var p = e.GetPosition(canvasControl);
                                 context.Drop(record, p.X, p.Y);
                                 e.Handled = true;
                             }
@@ -1224,7 +1224,7 @@ namespace Test.Windows
                             var style = e.Data.GetData(typeof(ShapeStyle)) as ShapeStyle;
                             if (style != null)
                             {
-                                var p = e.GetPosition(containerControl);
+                                var p = e.GetPosition(canvasControl);
                                 context.Drop(style, p.X, p.Y);
                                 e.Handled = true;
                             }
