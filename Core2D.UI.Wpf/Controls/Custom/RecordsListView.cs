@@ -88,6 +88,10 @@ namespace Test.Controls
                 StopObservingColumns(database);
                 StartObservingColumns(database);
             }
+            else
+            {
+                this.View = null;
+            }
         }
 
         /// <summary>
