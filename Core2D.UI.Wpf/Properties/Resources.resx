@@ -207,70 +207,70 @@
   <data name="MenuFileExport" xml:space="preserve">
     <value>_Export...</value>
   </data>
-  <data name="MenuFileSubMenuImport" xml:space="preserve">
+  <data name="MenuProjectSubMenuImport" xml:space="preserve">
     <value>I_mport</value>
   </data>
-  <data name="MenuFileImportStyle" xml:space="preserve">
+  <data name="MenuProjectImportStyle" xml:space="preserve">
     <value>_Style...</value>
   </data>
-  <data name="MenuFileImportStyles" xml:space="preserve">
+  <data name="MenuProjectImportStyles" xml:space="preserve">
     <value>S_tyles...</value>
   </data>
-  <data name="MenuFileImportStyleLibrary" xml:space="preserve">
+  <data name="MenuProjectImportStyleLibrary" xml:space="preserve">
     <value>St_yle Library...</value>
   </data>
-  <data name="MenuFileImportStyleLibraries" xml:space="preserve">
+  <data name="MenuProjectImportStyleLibraries" xml:space="preserve">
     <value>Sty_le Libraries...</value>
   </data>
-  <data name="MenuFileImportGroup" xml:space="preserve">
+  <data name="MenuProjectImportGroup" xml:space="preserve">
     <value>_Group...</value>
   </data>
-  <data name="MenuFileImportGroups" xml:space="preserve">
+  <data name="MenuProjectImportGroups" xml:space="preserve">
     <value>G_roups...</value>
   </data>
-  <data name="MenuFileImportGroupLibrary" xml:space="preserve">
+  <data name="MenuProjectImportGroupLibrary" xml:space="preserve">
     <value>Gr_oup Library...</value>
   </data>
-  <data name="MenuFileImportGroupLibraries" xml:space="preserve">
+  <data name="MenuProjectImportGroupLibraries" xml:space="preserve">
     <value>Gro_up Libraries...</value>
   </data>
-  <data name="MenuFileImportTemplate" xml:space="preserve">
+  <data name="MenuProjectImportTemplate" xml:space="preserve">
     <value>_Template...</value>
   </data>
-  <data name="MenuFileImportTemplates" xml:space="preserve">
+  <data name="MenuProjectImportTemplates" xml:space="preserve">
     <value>T_emplates...</value>
   </data>
-  <data name="MenuFileSubMenuExport" xml:space="preserve">
+  <data name="MenuProjectSubMenuExport" xml:space="preserve">
     <value>Expor_t</value>
   </data>
-  <data name="MenuFileExportStyle" xml:space="preserve">
+  <data name="MenuProjectExportStyle" xml:space="preserve">
     <value>_Style...</value>
   </data>
-  <data name="MenuFileExportStyles" xml:space="preserve">
+  <data name="MenuProjectExportStyles" xml:space="preserve">
     <value>S_tyles...</value>
   </data>
-  <data name="MenuFileExportStyleLibrary" xml:space="preserve">
+  <data name="MenuProjectExportStyleLibrary" xml:space="preserve">
     <value>St_yle Library...</value>
   </data>
-  <data name="MenuFileExportStyleLibraries" xml:space="preserve">
+  <data name="MenuProjectExportStyleLibraries" xml:space="preserve">
     <value>Sty_le Libraries...</value>
   </data>
-  <data name="MenuFileExportGroup" xml:space="preserve">
+  <data name="MenuProjectExportGroup" xml:space="preserve">
     <value>_Group...</value>
   </data>
-  <data name="MenuFileExportGroups" xml:space="preserve">
+  <data name="MenuProjectExportGroups" xml:space="preserve">
     <value>G_roups...</value>
   </data>
-  <data name="MenuFileExportGroupLibrary" xml:space="preserve">
+  <data name="MenuProjectExportGroupLibrary" xml:space="preserve">
     <value>Gr_oup Library...</value>
   </data>
-  <data name="MenuFileExportGroupLibraries" xml:space="preserve">
+  <data name="MenuProjectExportGroupLibraries" xml:space="preserve">
     <value>Gro_up Libraries...</value>
   </data>
-  <data name="MenuFileExportTemplate" xml:space="preserve">
+  <data name="MenuProjectExportTemplate" xml:space="preserve">
     <value>_Template...</value>
   </data>
-  <data name="MenuFileExportTemplates" xml:space="preserve">
+  <data name="MenuProjectExportTemplates" xml:space="preserve">
     <value>T_emplates...</value>
   </data>
   <data name="MenuFileRecent" xml:space="preserve">
@@ -662,5 +662,8 @@
   </data>
   <data name="WindowTitleCanvas" xml:space="preserve">
     <value>Canvas</value>
+  </data>
+  <data name="MenuProject" xml:space="preserve">
+    <value>_Project</value>
   </data>
 </root>
