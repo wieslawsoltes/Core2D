@@ -453,8 +453,8 @@
   <data name="WindowTitleData" xml:space="preserve">
     <value>Data</value>
   </data>
-  <data name="WindowTitleDatabase" xml:space="preserve">
-    <value>Database</value>
+  <data name="WindowTitleRecords" xml:space="preserve">
+    <value>Records</value>
   </data>
   <data name="WindowTitleDatabases" xml:space="preserve">
     <value>Databases</value>

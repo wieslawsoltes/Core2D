@@ -121,7 +121,7 @@
                                 <ad:LayoutAnchorable x:Name="groupsWindow" CanClose="False" ContentId="groups" Title="{x:Static p:Resources.WindowTitleGroups}" AutoHideWidth="210">
                                     <controls:GroupsControl x:Name="groupsControl"/>
                                 </ad:LayoutAnchorable>
-                                <ad:LayoutAnchorable x:Name="databasesWindow" CanClose="False" ContentId="databases" Title="{x:Static p:Resources.WindowTitleDatabase}" AutoHideWidth="210">
+                                <ad:LayoutAnchorable x:Name="databasesWindow" CanClose="False" ContentId="databases" Title="{x:Static p:Resources.WindowTitleDatabases}" AutoHideWidth="210">
                                     <ScrollViewer 
                                         x:Name="databasesControl"
                                         VerticalScrollBarVisibility="Auto" 
@@ -130,8 +130,8 @@
                                         <controls:DatabasesControl/>
                                     </ScrollViewer>
                                 </ad:LayoutAnchorable>
-                                <ad:LayoutAnchorable x:Name="databaseWindow" CanClose="False" ContentId="database" Title="{x:Static p:Resources.WindowTitleDatabases}" AutoHideWidth="210">
-                                    <controls:DatabaseControl x:Name="databaseControl"/>
+                                <ad:LayoutAnchorable x:Name="recordsWindow" CanClose="False" ContentId="records" Title="{x:Static p:Resources.WindowTitleRecords}" AutoHideWidth="210">
+                                    <controls:RecordsControl x:Name="recordsControl"/>
                                 </ad:LayoutAnchorable>
                             </ad:LayoutAnchorablePane>
                         </ad:LayoutAnchorablePaneGroup>

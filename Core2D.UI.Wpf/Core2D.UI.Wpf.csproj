@@ -109,9 +109,7 @@
     <Compile Include="Controls\Custom\EditorCanvas.cs" />
     <Compile Include="Controls\Custom\LayerElement.cs" />
     <Compile Include="Controls\Custom\ListBoxDropMode.cs" />
-    <Compile Include="Controls\DatabaseControl.xaml.cs">
-      <DependentUpon>DatabaseControl.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Controls\Custom\RecordsListView.cs" />
     <Compile Include="Controls\DataControl.xaml.cs">
       <DependentUpon>DataControl.xaml</DependentUpon>
     </Compile>
@@ -173,10 +171,6 @@
     <Page Include="Controls\CanvasControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\DatabaseControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\DataControl.xaml">
       <SubType>Designer</SubType>

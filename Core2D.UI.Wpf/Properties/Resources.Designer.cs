@@ -1591,15 +1591,6 @@ namespace Core2D.UI.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Database.
-        /// </summary>
-        public static string WindowTitleDatabase {
-            get {
-                return ResourceManager.GetString("WindowTitleDatabase", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Databases.
         /// </summary>
         public static string WindowTitleDatabases {
@@ -1650,6 +1641,15 @@ namespace Core2D.UI.Wpf.Properties {
         public static string WindowTitleProject {
             get {
                 return ResourceManager.GetString("WindowTitleProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Records.
+        /// </summary>
+        public static string WindowTitleRecords {
+            get {
+                return ResourceManager.GetString("WindowTitleRecords", resourceCulture);
             }
         }
         
