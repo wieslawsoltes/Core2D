@@ -162,7 +162,7 @@
                                         Width="{Binding Editor.Project.CurrentContainer.Width}" 
                                         Height="{Binding Editor.Project.CurrentContainer.Height}"
                                         Tag="{Binding Editor.CancelAvailable}">
-                                        <controls:CanvasControl x:Name="containerControl">
+                                        <controls:CanvasControl x:Name="canvasControl">
                                             <controls:CanvasControl.Style>
                                                 <Style TargetType="controls:CanvasControl">
                                                     <Setter Property="Visibility" Value="Visible"/>
@@ -201,7 +201,7 @@
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                         <ad:LayoutAnchorablePane>
-                            <ad:LayoutAnchorable x:Name="propertiesWindow" CanClose="False" ContentId="properties" Title="{x:Static p:Resources.WindowTitleProperties}" AutoHideWidth="210">
+                            <ad:LayoutAnchorable x:Name="shapeWindow" CanClose="False" ContentId="shape" Title="{x:Static p:Resources.WindowTitleShape}" AutoHideWidth="210">
                                 <ScrollViewer 
                                     x:Name="shapeScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
@@ -233,19 +233,19 @@
                                     <controls:StyleControl/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
-                            <ad:LayoutAnchorable x:Name="stateWindow" CanClose="False" ContentId="state" Title="{x:Static p:Resources.WindowTitleState}" AutoHideWidth="210">
-                                <controls:StateControl x:Name="stateControl">
-                                    <controls:StateControl.Style>
-                                        <Style TargetType="controls:StateControl">
+                            <ad:LayoutAnchorable x:Name="containerWindow" CanClose="False" ContentId="container" Title="{x:Static p:Resources.WindowTitleContainer}" AutoHideWidth="210">
+                                <controls:ContainerControl x:Name="containerControl">
+                                    <controls:ContainerControl.Style>
+                                        <Style TargetType="controls:ContainerControl">
                                             <Setter Property="Visibility" Value="Visible"/>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Editor.Renderers[0].State.SelectedShape}" Value="{x:Null}">
+                                                <DataTrigger Binding="{Binding Editor.Project.CurrentContainer}" Value="{x:Null}">
                                                     <Setter Property="Visibility" Value="Hidden"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </controls:StateControl.Style>
-                                </controls:StateControl>
+                                    </controls:ContainerControl.Style>
+                                </controls:ContainerControl>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
                     </ad:LayoutAnchorablePaneGroup>
