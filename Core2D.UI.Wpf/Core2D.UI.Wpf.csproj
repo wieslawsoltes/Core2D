@@ -147,9 +147,6 @@
     <Compile Include="Controls\StyleControl.xaml.cs">
       <DependentUpon>StyleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TemplateControl.xaml.cs">
-      <DependentUpon>TemplateControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\TemplatesControl.xaml.cs">
       <DependentUpon>TemplatesControl.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -209,16 +206,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\TemplateControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\TemplatesControl.xaml" />
     <Page Include="Dictionaries\Dictionary.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\LayersControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\MenuControl.xaml">
@@ -226,10 +215,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ShapeControl.xaml" />
-    <Page Include="Controls\ShapesControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\StyleControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -246,14 +231,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\LayersControl.xaml.cs">
-      <DependentUpon>LayersControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\MenuControl.xaml.cs">
       <DependentUpon>MenuControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ShapesControl.xaml.cs">
-      <DependentUpon>ShapesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\StylesControl.xaml.cs">
       <DependentUpon>StylesControl.xaml</DependentUpon>
