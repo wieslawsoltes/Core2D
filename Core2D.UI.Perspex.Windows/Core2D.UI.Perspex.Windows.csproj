@@ -204,9 +204,6 @@
     <Compile Include="MainView.paml.cs">
       <DependentUpon>MainView.paml</DependentUpon>
     </Compile>
-    <Compile Include="Renderer\MatrixHelper.cs" />
-    <Compile Include="Renderer\PerspexRenderer.cs" />
-    <Compile Include="Renderer\XPathGeometryConverter.cs" />
     <EmbeddedResource Include="MainWindow.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -252,6 +249,10 @@
     <ProjectReference Include="..\Core2D\Core2D.csproj">
       <Project>{8C419CD0-F8A2-4A85-B72B-84BC7FF59616}</Project>
       <Name>Core2D</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\Renderer.Perspex\Renderer.Perspex.csproj">
+      <Project>{dee86be6-43b1-45fb-8a56-7977c1d0964e}</Project>
+      <Name>Renderer.Perspex</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

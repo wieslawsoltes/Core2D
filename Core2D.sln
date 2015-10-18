@@ -1,7 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-# SharpDevelop 5.1
+# Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.Wpf", "Core2D.UI.Wpf\Core2D.UI.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
@@ -53,6 +52,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portable", "Portable", "{C2901FB6-30FA-45B1-9B87-05016213A28D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D", "Core2D.Portable\Core2D.csproj", "{1D45EA4F-D2AF-447A-8A8E-E94F19BE226A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Perspex", "Dependencies\Renderer.Perspex\Renderer.Perspex.csproj", "{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -442,6 +443,22 @@ Global
 		{1D45EA4F-D2AF-447A-8A8E-E94F19BE226A}.Release|x64.Build.0 = Release|Any CPU
 		{1D45EA4F-D2AF-447A-8A8E-E94F19BE226A}.Release|x86.ActiveCfg = Release|Any CPU
 		{1D45EA4F-D2AF-447A-8A8E-E94F19BE226A}.Release|x86.Build.0 = Release|Any CPU
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Debug|ARM.Build.0 = Debug|Any CPU
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Debug|x64.Build.0 = Debug|Any CPU
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Debug|x86.Build.0 = Debug|Any CPU
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Release|ARM.ActiveCfg = Release|Any CPU
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Release|ARM.Build.0 = Release|Any CPU
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Release|x64.ActiveCfg = Release|Any CPU
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Release|x64.Build.0 = Release|Any CPU
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Release|x86.ActiveCfg = Release|Any CPU
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -463,5 +480,6 @@ Global
 		{68A36926-DF55-4F05-9F89-B9AB1463227E} = {2D76C6F5-844B-4D2D-96D8-B39D49C70706}
 		{785380E0-CEB9-4C34-82E5-60D0E33E848E} = {2D76C6F5-844B-4D2D-96D8-B39D49C70706}
 		{1D45EA4F-D2AF-447A-8A8E-E94F19BE226A} = {C2901FB6-30FA-45B1-9B87-05016213A28D}
+		{DEE86BE6-43B1-45FB-8A56-7977C1D0964E} = {2D76C6F5-844B-4D2D-96D8-B39D49C70706}
 	EndGlobalSection
 EndGlobal

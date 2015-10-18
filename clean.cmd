@@ -33,6 +33,9 @@ rmdir /Q /S Dependencies\Renderer.PdfSharp-core\obj
 rmdir /Q /S Dependencies\Renderer.PdfSharp-wpf\bin
 rmdir /Q /S Dependencies\Renderer.PdfSharp-wpf\obj
 
+rmdir /Q /S Dependencies\Renderer.Perspex\bin
+rmdir /Q /S Dependencies\Renderer.Perspex\obj
+
 rmdir /Q /S Dependencies\Renderer.WinForms\bin
 rmdir /Q /S Dependencies\Renderer.WinForms\obj
 
