@@ -40,7 +40,8 @@ The core library and editor are portable and should work on all platforms where 
 * Eto.Platform.Windows
 * Eto.Platform.Wpf
 * Perspex
-
+* Perspex.Desktop
+* 
 ### NuGet Package Sources
 
 * https://www.nuget.org/api/v2/
