@@ -66,6 +66,9 @@
     <Compile Include="..\Core2D\Editor\Core\Command.cs">
       <Link>Editor\Core\Command.cs</Link>
     </Compile>
+    <Compile Include="..\Core2D\Editor\Core\Command`1.cs">
+      <Link>Editor\Core\Command`1.cs</Link>
+    </Compile>
     <Compile Include="..\Core2D\Editor\Core\ExportType.cs">
       <Link>Editor\Core\ExportType.cs</Link>
     </Compile>

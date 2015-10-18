@@ -51,6 +51,7 @@
     <Compile Include="Editor\Bounds\ConvexHullBounds.cs" />
     <Compile Include="Editor\Bounds\ShapeBounds.cs" />
     <Compile Include="Editor\Core\Command.cs" />
+    <Compile Include="Editor\Core\Command`1.cs" />
     <Compile Include="Editor\Core\ExportType.cs" />
     <Compile Include="Editor\Core\Helper.cs" />
     <Compile Include="Editor\Core\History.cs" />

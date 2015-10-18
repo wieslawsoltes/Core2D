@@ -12,7 +12,8 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    public class Command : ICommand
+    /// <typeparam name="T"></typeparam>
+    public class Command<T> : ICommand where T : class
     {
         /// <summary>
         /// 
@@ -31,15 +32,15 @@ namespace Core2D
             }
         }
 
-        private Action _execute;
-        private Func<bool> _canExecute;
+        private Action<T> _execute;
+        private Func<T, bool> _canExecute;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="execute"></param>
         /// <param name="canExecute"></param>
-        public Command(Action execute, Func<bool> canExecute = null)
+        public Command(Action<T> execute, Func<T, bool> canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;
@@ -54,7 +55,7 @@ namespace Core2D
         {
             if (_canExecute == null)
                 return true;
-            return _canExecute();
+            return _canExecute(parameter as T);
         }
 
         /// <summary>
@@ -65,7 +66,7 @@ namespace Core2D
         {
             if (_execute == null)
                 return;
-            _execute();
+            _execute(parameter as T);
         }
 
         /// <summary>
@@ -74,9 +75,9 @@ namespace Core2D
         /// <param name="execute"></param>
         /// <param name="canExecute"></param>
         /// <returns></returns>
-        public static ICommand Create(Action execute, Func<bool> canExecute = null)
+        public static ICommand Create(Action<T> execute, Func<T, bool> canExecute = null)
         {
-            return new Command(execute, canExecute);
+            return new Command<T>(execute, canExecute);
         }
     }
 }
