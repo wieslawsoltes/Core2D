@@ -1207,37 +1207,8 @@
                     </ListBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Container" Classes="property">
-                <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}"/>
-            </TabItem>
-            <TabItem Header="Layers" Classes="property">
-                <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
-                    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
-                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                        <TextBox Text="{Binding Path=Editor.Project.CurrentContainer.CurrentLayer.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                    </Grid>
-                    <ListBox
-                        Items="{Binding Path=Editor.Project.CurrentContainer.Layers}"
-                        SelectedItem="{Binding Path=Editor.Project.CurrentContainer.CurrentLayer, Mode=TwoWay}"
-                        Grid.Row="1">
-                        <ListBox.DataTemplates>
-                            <DataTemplate DataType="core:Layer">
-                                <Grid ColumnDefinitions="Auto,*">
-                                    <CheckBox Content="" IsChecked="{Binding Path=IsVisible, Mode=TwoWay}" Grid.Column="0"/>
-                                    <TextBlock Text="{Binding Path=Name}" Grid.Column="1"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.DataTemplates>
-                    </ListBox>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Shapes" Classes="property">
                 <ListBox
-                    Items="{Binding Path=Editor.Project.CurrentContainer.CurrentLayer.Shapes}"
-                    SelectedItem="{Binding Path=Editor.Project.CurrentContainer.CurrentShape, Mode=TwoWay}">
                     <ListBox.DataTemplates>
-                        <DataTemplate DataType="core:BaseShape">
-                            <TextBlock Text="{Binding Path=Name}" />
                         </DataTemplate>
                     </ListBox.DataTemplates>
                 </ListBox>
