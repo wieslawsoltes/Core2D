@@ -1078,7 +1078,23 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:StyleLibrary">
-            <!-- TODO -->
+            <TabControl>
+                <TabItem Header="StyleLibrary" Classes="property">
+                    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
+                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Styles" Classes="property">
+                    <ListBox Items="{Binding Path=Styles}">
+                        <ListBox.DataTemplates>
+                            <DataTemplate DataType="core:ShapeStyle">
+                                <TextBlock Text="{Binding Path=Name}" />
+                            </DataTemplate>
+                        </ListBox.DataTemplates>
+                    </ListBox>
+                </TabItem>
+            </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:GroupLibrary">
             <!-- TODO -->
