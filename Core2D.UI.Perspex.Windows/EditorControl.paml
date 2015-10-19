@@ -1211,15 +1211,22 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Templates" Classes="property">
-                <ListBox
-                    Items="{Binding Path=Editor.Project.Templates}"
-                    SelectedItem="{Binding Path=Editor.Project.CurrentTemplate, Mode=TwoWay}">
-                    <ListBox.DataTemplates>
-                        <DataTemplate DataType="core:Container">
-                            <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" />
-                        </DataTemplate>
-                    </ListBox.DataTemplates>
-                </ListBox>
+                <Grid RowDefinitions="Auto,*">
+                    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
+                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Editor.Project.CurrentTemplate.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    </Grid>
+                    <ListBox
+                        Items="{Binding Path=Editor.Project.Templates}"
+                        SelectedItem="{Binding Path=Editor.Project.CurrentTemplate, Mode=TwoWay}"
+                        Grid.Row="1">
+                        <ListBox.DataTemplates>
+                            <DataTemplate DataType="core:Container">
+                                <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" />
+                            </DataTemplate>
+                        </ListBox.DataTemplates>
+                    </ListBox>
+                </Grid>
             </TabItem>
         </TabControl>
         <TabControl Grid.Row="1" Grid.Column="4">
