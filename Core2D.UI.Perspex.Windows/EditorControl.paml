@@ -1235,6 +1235,9 @@
                     <ContentControl Content="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}"/>
                 </ScrollViewer>
             </TabItem>
+            <TabItem Header="Container" Classes="property">
+                <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}"/>
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>
