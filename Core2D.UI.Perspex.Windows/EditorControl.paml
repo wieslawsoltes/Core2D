@@ -1028,9 +1028,9 @@
                         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                         <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                         <TextBlock Text="Width" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                        <TextBox Text="{Binding Path=Text, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                        <TextBlock Text="Width" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                        <TextBox Text="{Binding Path=Text, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                        <TextBox Text="{Binding Path=Width, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                        <TextBlock Text="Height" Classes="left" Grid.Row="2" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Height, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Background" Classes="property">
