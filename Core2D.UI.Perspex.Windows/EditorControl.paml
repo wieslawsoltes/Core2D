@@ -1198,7 +1198,10 @@
                             </DataTemplate>
                         </DropDown.DataTemplates>
                     </DropDown>
-                    <ListBox Items="{Binding Path=Editor.Project.CurrentStyleLibrary.Styles}" SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}" Grid.Row="2">
+                    <ListBox 
+                        Items="{Binding Path=Editor.Project.CurrentStyleLibrary.Styles}" 
+                        SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}" 
+                        Grid.Row="2">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:ShapeStyle">
                                 <TextBlock Text="{Binding Path=Name}" />
