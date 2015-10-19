@@ -1254,11 +1254,6 @@
                     <ContentControl Content="{Binding Path=Editor.Renderers[0].State.SelectedShape.Data, Mode=TwoWay}"/>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="State" Classes="property">
-                <ScrollViewer>
-                    <ContentControl Content="{Binding Path=Editor.Renderers[0].State.SelectedShape.State, Mode=TwoWay}"/>
-                </ScrollViewer>
-            </TabItem>
             <TabItem Header="Style" Classes="property">
                 <ScrollViewer>
                     <ContentControl Content="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}"/>
