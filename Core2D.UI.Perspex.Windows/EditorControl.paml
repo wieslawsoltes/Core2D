@@ -1097,7 +1097,23 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:GroupLibrary">
-            <!-- TODO -->
+            <TabControl>
+                <TabItem Header="GroupLibrary" Classes="property">
+                    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
+                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Groups" Classes="property">
+                    <ListBox Items="{Binding Path=Groups}">
+                        <ListBox.DataTemplates>
+                            <DataTemplate DataType="core:XGroup">
+                                <TextBlock Text="{Binding Path=Name}" />
+                            </DataTemplate>
+                        </ListBox.DataTemplates>
+                    </ListBox>
+                </TabItem>
+            </TabControl>
         </DataTemplate>
     </UserControl.DataTemplates>
     <Grid RowDefinitions="50*,50*" ColumnDefinitions="170,Auto,*,Auto,240">
