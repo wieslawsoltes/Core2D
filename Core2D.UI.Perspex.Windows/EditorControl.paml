@@ -53,7 +53,7 @@
                 <TabItem Header="Arrow" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="Arrow Type" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                        <DropDown Items="{Binding ArrowTypeValues}" SelectedItem="{Binding Path=ArrowType, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
+                        <DropDown Items="{Binding Path=ArrowTypeValues}" SelectedItem="{Binding Path=ArrowType, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
                         <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
                         <CheckBox IsChecked="{Binding Path=IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                         <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
@@ -72,17 +72,17 @@
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Stroke" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Stroke}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=Stroke, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Fill" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Fill}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=Fill, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                             <TextBlock Text="Thickness" Classes="left" Grid.Row="0" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=Thickness, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                             <TextBlock Text="Line Cap" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                            <DropDown Items="{Binding LineCapValues}" SelectedItem="{Binding Path=LineCap, Mode=TwoWay}" Classes="default" Grid.Row="1" Grid.Column="1"/>
+                            <DropDown Items="{Binding Path=LineCapValues}" SelectedItem="{Binding Path=LineCap, Mode=TwoWay}" Classes="default" Grid.Row="1" Grid.Column="1"/>
                             <TextBlock Text="Dashes" Classes="left" Grid.Row="2" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=Dashes, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                             <TextBlock Text="Dash Offset" Classes="left" Grid.Row="3" Grid.Column="0"/>
@@ -115,11 +115,11 @@
                     <TextBlock Text="FontSize" Classes="left" Grid.Row="2" Grid.Column="0"/>
                     <TextBox Text="{Binding Path=FontSize, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                     <TextBlock Text="FontStyle" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                    <ContentControl Content="{Binding FontStyle}" Grid.Row="3" Grid.Column="1"/>
+                    <ContentControl Content="{Binding Path=FontStyle, Mode=TwoWay}" Grid.Row="3" Grid.Column="1"/>
                     <TextBlock Text="HAlignment" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                    <DropDown Items="{Binding TextHAlignmentValues}" SelectedItem="{Binding Path=TextHAlignment, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
+                    <DropDown Items="{Binding Path=TextHAlignmentValues}" SelectedItem="{Binding Path=TextHAlignment, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
                     <TextBlock Text="VAlignment" Classes="left" Grid.Row="5" Grid.Column="0"/>
-                    <DropDown Items="{Binding TextVAlignmentValues}" SelectedItem="{Binding Path=TextVAlignment, Mode=TwoWay}" Classes="default" Grid.Row="5" Grid.Column="1"/>
+                    <DropDown Items="{Binding Path=TextVAlignmentValues}" SelectedItem="{Binding Path=TextVAlignment, Mode=TwoWay}" Classes="default" Grid.Row="5" Grid.Column="1"/>
                 </Grid>
             </StackPanel>
         </DataTemplate>
@@ -137,9 +137,9 @@
                 <TextBlock Text="Length" Classes="left" Grid.Row="1" Grid.Column="0"/>
                 <TextBox Text="{Binding Path=Length, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                 <TextBlock Text="StartTrigger" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                <ContentControl Content="{Binding StartTrigger}" Grid.Row="2" Grid.Column="1"/>
+                <ContentControl Content="{Binding Path=StartTrigger, Mode=TwoWay}" Grid.Row="2" Grid.Column="1"/>
                 <TextBlock Text="EndTrigger" Classes="left" Grid.Row="3" Grid.Column="0"/>
-                <ContentControl Content="{Binding EndTrigger}" Grid.Row="3" Grid.Column="1"/>
+                <ContentControl Content="{Binding Path=EndTrigger, Mode=TwoWay}" Grid.Row="3" Grid.Column="1"/>
             </Grid>
         </DataTemplate>
         <DataTemplate DataType="core:LineStyle">
@@ -150,7 +150,7 @@
                 </Grid>
                 <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                     <TextBlock Text="FixedLength" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                    <ContentControl Content="{Binding FixedLength}" Grid.Row="1" Grid.Column="0"/>
+                    <ContentControl Content="{Binding Path=FixedLength, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                 </Grid>
             </StackPanel>
         </DataTemplate>
@@ -164,17 +164,17 @@
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Stroke" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Stroke}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=Stroke, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Fill" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Fill}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=Fill, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                             <TextBlock Text="Thickness" Classes="left" Grid.Row="0" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=Thickness, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                             <TextBlock Text="Line Cap" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                            <DropDown Items="{Binding LineCapValues}" SelectedItem="{Binding Path=LineCap, Mode=TwoWay}" Classes="default" Grid.Row="1" Grid.Column="1"/>
+                            <DropDown Items="{Binding Path=LineCapValues}" SelectedItem="{Binding Path=LineCap, Mode=TwoWay}" Classes="default" Grid.Row="1" Grid.Column="1"/>
                             <TextBlock Text="Dashes" Classes="left" Grid.Row="2" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=Dashes, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                             <TextBlock Text="Dash Offset" Classes="left" Grid.Row="3" Grid.Column="0"/>
@@ -183,21 +183,21 @@
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="Text" Classes="property">
-                    <ContentControl Content="{Binding TextStyle}"/>
+                    <ContentControl Content="{Binding Path=TextStyle, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Line" Classes="property">
                     <StackPanel>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="StartArrowStyle" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding StartArrowStyle}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=StartArrowStyle, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="EndArrowStyle" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding EndArrowStyle}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=EndArrowStyle, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="FixedLength" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding LineStyle}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=LineStyle, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
@@ -209,7 +209,7 @@
                 <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
                 <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
                 <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
-                <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Columns}">
+                <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Columns}">
                     <ItemsControl.DataTemplates>
                         <DataTemplate DataType="core:Column">
                             <Grid VerticalAlignment="Top">
@@ -218,7 +218,7 @@
                         </DataTemplate>
                     </ItemsControl.DataTemplates>
                 </ItemsControl>
-                <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Values}">
+                <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Path=Values}">
                     <ItemsControl.DataTemplates>
                         <DataTemplate DataType="core:Value">
                             <Grid VerticalAlignment="Top">
@@ -240,7 +240,7 @@
                 <TabItem Header="Columns" Classes="property">
                     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" >
                         <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Columns}">
+                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Columns}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:Column">
                                     <Grid VerticalAlignment="Top">
@@ -252,21 +252,21 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Current Record" Classes="property">
-                    <ContentControl Content="{Binding CurrentRecord}"/>
+                    <ContentControl Content="{Binding Path=CurrentRecord, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:Data">
             <TabControl>
                 <TabItem Header="Record" Classes="property">
-                    <ContentControl Content="{Binding Record}"/>
+                    <ContentControl Content="{Binding Path=Record, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Bindings" Classes="property">
                     <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
                         <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
                         <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Property"/>
                         <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Path"/>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Bindings}">
+                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Bindings}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:ShapeBinding">
                                     <Grid VerticalAlignment="Top">
@@ -275,7 +275,7 @@
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
                         </ItemsControl>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Bindings}">
+                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Path=Bindings}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:ShapeBinding">
                                     <Grid VerticalAlignment="Top">
@@ -291,7 +291,7 @@
                         <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
                         <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
                         <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Properties}">
+                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Properties}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:ShapeProperty">
                                     <Grid VerticalAlignment="Top">
@@ -300,7 +300,7 @@
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
                         </ItemsControl>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Properties}">
+                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Path=Properties}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:ShapeProperty">
                                     <Grid VerticalAlignment="Top">
@@ -341,13 +341,13 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="State" Classes="property">
-                    <ContentControl Content="{Binding State}"/>
+                    <ContentControl Content="{Binding Path=State, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Data" Classes="property">
-                    <ContentControl Content="{Binding Data}"/>
+                    <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Shape" Classes="property">
-                    <ContentControl Content="{Binding Shape}"/>
+                    <ContentControl Content="{Binding Path=Shape, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -363,22 +363,22 @@
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Start" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Start}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=Start, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="End" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding End}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=End, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="State" Classes="property">
-                    <ContentControl Content="{Binding State}"/>
+                    <ContentControl Content="{Binding Path=State, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Data" Classes="property">
-                    <ContentControl Content="{Binding Data}"/>
+                    <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Style" Classes="property">
-                    <ContentControl Content="{Binding Style}"/>
+                    <ContentControl Content="{Binding Path=Style, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -394,22 +394,22 @@
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="TopLeft" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding TopLeft}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=TopLeft, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="BottomRight" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding BottomRight}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=BottomRight, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="State" Classes="property">
-                    <ContentControl Content="{Binding State}"/>
+                    <ContentControl Content="{Binding Path=State, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Data" Classes="property">
-                    <ContentControl Content="{Binding Data}"/>
+                    <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Style" Classes="property">
-                    <ContentControl Content="{Binding Style}"/>
+                    <ContentControl Content="{Binding Path=Style, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -429,11 +429,11 @@
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="TopLeft" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding TopLeft}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=TopLeft, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="BottomRight" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding BottomRight}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=BottomRight, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
@@ -452,13 +452,13 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="State" Classes="property">
-                    <ContentControl Content="{Binding State}"/>
+                    <ContentControl Content="{Binding Path=State, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Data" Classes="property">
-                    <ContentControl Content="{Binding Data}"/>
+                    <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Style" Classes="property">
-                    <ContentControl Content="{Binding Style}"/>
+                    <ContentControl Content="{Binding Path=Style, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -478,22 +478,22 @@
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="TopLeft" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding TopLeft}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=TopLeft, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="BottomRight" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding BottomRight}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=BottomRight, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="State" Classes="property">
-                    <ContentControl Content="{Binding State}"/>
+                    <ContentControl Content="{Binding Path=State, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Data" Classes="property">
-                    <ContentControl Content="{Binding Data}"/>
+                    <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Style" Classes="property">
-                    <ContentControl Content="{Binding Style}"/>
+                    <ContentControl Content="{Binding Path=Style, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -513,22 +513,22 @@
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="TopLeft" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding TopLeft}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=TopLeft, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="BottomRight" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding BottomRight}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=BottomRight, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="State" Classes="property">
-                    <ContentControl Content="{Binding State}"/>
+                    <ContentControl Content="{Binding Path=State, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Data" Classes="property">
-                    <ContentControl Content="{Binding Data}"/>
+                    <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Style" Classes="property">
-                    <ContentControl Content="{Binding Style}"/>
+                    <ContentControl Content="{Binding Path=Style, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -546,30 +546,30 @@
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point1" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Point1}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=Point1, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point2" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Point2}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=Point2, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point3" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Point3}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=Point3, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point4" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Point4}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=Point4, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="State" Classes="property">
-                    <ContentControl Content="{Binding State}"/>
+                    <ContentControl Content="{Binding Path=State, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Data" Classes="property">
-                    <ContentControl Content="{Binding Data}"/>
+                    <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Style" Classes="property">
-                    <ContentControl Content="{Binding Style}"/>
+                    <ContentControl Content="{Binding Path=Style, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -587,30 +587,30 @@
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point1" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Point1}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=Point1, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point2" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Point2}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=Point2, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point3" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Point3}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=Point3, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point4" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Point4}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=Point4, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="State" Classes="property">
-                    <ContentControl Content="{Binding State}"/>
+                    <ContentControl Content="{Binding Path=State, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Data" Classes="property">
-                    <ContentControl Content="{Binding Data}"/>
+                    <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Style" Classes="property">
-                    <ContentControl Content="{Binding Style}"/>
+                    <ContentControl Content="{Binding Path=Style, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -628,26 +628,26 @@
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point1" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Point1}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=Point1, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point2" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Point2}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=Point2, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                         <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                             <TextBlock Text="Point3" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Point3}" Grid.Row="1" Grid.Column="0"/>
+                            <ContentControl Content="{Binding Path=Point3, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
                         </Grid>
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="State" Classes="property">
-                    <ContentControl Content="{Binding State}"/>
+                    <ContentControl Content="{Binding Path=State, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Data" Classes="property">
-                    <ContentControl Content="{Binding Data}"/>
+                    <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Style" Classes="property">
-                    <ContentControl Content="{Binding Style}"/>
+                    <ContentControl Content="{Binding Path=Style, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -665,7 +665,7 @@
                                 <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
                                 <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
                                 <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
-                                <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding ShapesProperties}">
+                                <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=ShapesProperties}">
                                     <ItemsControl.DataTemplates>
                                         <DataTemplate DataType="core:ShapeProperty">
                                             <Grid VerticalAlignment="Top">
@@ -674,7 +674,7 @@
                                         </DataTemplate>
                                     </ItemsControl.DataTemplates>
                                 </ItemsControl>
-                                <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding ShapesProperties}">
+                                <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Path=ShapesProperties}">
                                     <ItemsControl.DataTemplates>
                                         <DataTemplate DataType="core:ShapeProperty">
                                             <Grid VerticalAlignment="Top">
@@ -688,10 +688,10 @@
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="State" Classes="property">
-                    <ContentControl Content="{Binding State}"/>
+                    <ContentControl Content="{Binding Path=State, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Data" Classes="property">
-                    <ContentControl Content="{Binding Data}"/>
+                    <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -708,16 +708,16 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Geometry" Classes="property">
-                    <ContentControl Content="{Binding Geometry}"/>
+                    <ContentControl Content="{Binding Path=Geometry, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="State" Classes="property">
-                    <ContentControl Content="{Binding State}"/>
+                    <ContentControl Content="{Binding Path=State, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Data" Classes="property">
-                    <ContentControl Content="{Binding Data}"/>
+                    <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Style" Classes="property">
-                    <ContentControl Content="{Binding Style}"/>
+                    <ContentControl Content="{Binding Path=Style, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -743,14 +743,14 @@
                         <TextBlock Text="IsLargeArc" Classes="left" Grid.Row="3" Grid.Column="0"/>
                         <CheckBox IsChecked="{Binding Path=IsLargeArc, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
                         <TextBlock Text="SweepDirection" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                        <DropDown Items="{Binding XSweepDirectionValues}" SelectedItem="{Binding Path=SweepDirection, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
+                        <DropDown Items="{Binding Path=XSweepDirectionValues}" SelectedItem="{Binding Path=SweepDirection, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Point" Classes="property">
-                    <ContentControl Content="{Binding Point}"/>
+                    <ContentControl Content="{Binding Path=Point, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Size" Classes="property">
-                    <ContentControl Content="{Binding Size}"/>
+                    <ContentControl Content="{Binding Path=Size, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -765,13 +765,13 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Point1" Classes="property">
-                    <ContentControl Content="{Binding Point1}"/>
+                    <ContentControl Content="{Binding Path=Point1, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Point2" Classes="property">
-                    <ContentControl Content="{Binding Point2}"/>
+                    <ContentControl Content="{Binding Path=Point2, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Point3" Classes="property">
-                    <ContentControl Content="{Binding Point3}"/>
+                    <ContentControl Content="{Binding Path=Point3, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -786,7 +786,7 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Point" Classes="property">
-                    <ContentControl Content="{Binding Point}"/>
+                    <ContentControl Content="{Binding Path=Point, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -801,7 +801,7 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Points" Classes="property">
-                    <ListBox Items="{Binding Points}"/>
+                    <ListBox Items="{Binding Path=Points}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -816,7 +816,7 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Points" Classes="property">
-                    <ListBox Items="{Binding Points}"/>
+                    <ListBox Items="{Binding Path=Points}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -831,7 +831,7 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Points" Classes="property">
-                    <ListBox Items="{Binding Points}"/>
+                    <ListBox Items="{Binding Path=Points}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -846,10 +846,10 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Point1" Classes="property">
-                    <ContentControl Content="{Binding Point1}"/>
+                    <ContentControl Content="{Binding Path=Point1, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Point2" Classes="property">
-                    <ContentControl Content="{Binding Point2}"/>
+                    <ContentControl Content="{Binding Path=Point2, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -864,10 +864,10 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="StartPoint" Classes="property">
-                    <ContentControl Content="{Binding StartPoint}"/>
+                    <ContentControl Content="{Binding Path=StartPoint, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Segments" Classes="property">
-                    <ListBox Items="{Binding Segments}"/>
+                    <ListBox Items="{Binding Path=Segments}"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -876,15 +876,15 @@
                 <TabItem Header="PathGeometry" Classes="property">
                     <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="FillRule" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                        <DropDown Items="{Binding XFillRuleValues}" SelectedItem="{Binding Path=FillRule, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
+                        <DropDown Items="{Binding Path=XFillRuleValues}" SelectedItem="{Binding Path=FillRule, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Figures" Classes="property">
                     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                         <!--
-                        <TreeView Items="{Binding Figures}" Grid.Row="0" Grid.Column="0">
+                        <TreeView Items="{Binding Path=Figures}" Grid.Row="0" Grid.Column="0">
                             <TreeView.DataTemplates>
-                                <TreeDataTemplate DataType="core:XPathFigure" ItemsSource="{Binding Segments}">
+                                <TreeDataTemplate DataType="core:XPathFigure" ItemsSource="{Binding Path=Segments}">
                                     <TextBlock Text="Figure"/>
                                 </TreeDataTemplate>
                                 <DataTemplate DataType="core:XPathSegment">
@@ -893,7 +893,7 @@
                             </TreeView.DataTemplates>
                         </TreeView>
                         -->
-                        <ListBox Items="{Binding Figures}" Grid.Row="1" Grid.Column="0"/>
+                        <ListBox Items="{Binding Path=Figures}" Grid.Row="1" Grid.Column="0"/>
                     </Grid>
                 </TabItem>
             </TabControl>
@@ -912,7 +912,7 @@
                         <TextBlock Text="HitTreshold" Classes="left" Grid.Row="3" Grid.Column="0"/>
                         <TextBox Text="{Binding Path=HitTreshold, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
                         <TextBlock Text="MoveMode" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                        <DropDown Items="{Binding MoveModeValues}" SelectedItem="{Binding Path=MoveMode, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
+                        <DropDown Items="{Binding Path=MoveModeValues}" SelectedItem="{Binding Path=MoveMode, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
                         <TextBlock Text="TryToConnect" Classes="left" Grid.Row="5" Grid.Column="0"/>
                         <CheckBox IsChecked="{Binding Path=TryToConnect, Mode=TwoWay}" Classes="left" Grid.Row="5" Grid.Column="1"/>
                     </Grid>
@@ -928,29 +928,29 @@
                         <TextBlock Text="IsSmoothJoin" Classes="left" Grid.Row="3" Grid.Column="0"/>
                         <CheckBox IsChecked="{Binding Path=DefaultIsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
                         <TextBlock Text="FillRule" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                        <DropDown Items="{Binding XFillRuleValues}" SelectedItem="{Binding Path=DefaultFillRule, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
+                        <DropDown Items="{Binding Path=XFillRuleValues}" SelectedItem="{Binding Path=DefaultFillRule, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Advanced" Classes="property">
                     <TabControl>
                         <TabItem Header="PointShape" Classes="property">
                             <ScrollViewer>
-                                <ContentControl Content="{Binding PointShape}"/>
+                                <ContentControl Content="{Binding Path=PointShape, Mode=TwoWay}"/>
                             </ScrollViewer>
                         </TabItem>
                         <TabItem Header="PointStyle" Classes="property">
                             <ScrollViewer>
-                                <ContentControl Content="{Binding PointStyle}"/>
+                                <ContentControl Content="{Binding Path=PointStyle, Mode=TwoWay}"/>
                             </ScrollViewer>
                         </TabItem>
                         <TabItem Header="SelectionStyle" Classes="property">
                             <ScrollViewer>
-                                <ContentControl Content="{Binding SelectionStyle}"/>
+                                <ContentControl Content="{Binding Path=SelectionStyle, Mode=TwoWay}"/>
                             </ScrollViewer>
                         </TabItem>
                         <TabItem Header="HelperStyle" Classes="property">
                             <ScrollViewer>
-                                <ContentControl Content="{Binding HelperStyle}"/>
+                                <ContentControl Content="{Binding Path=HelperStyle, Mode=TwoWay}"/>
                             </ScrollViewer>
                         </TabItem>
                     </TabControl>
@@ -960,18 +960,18 @@
         <DataTemplate DataType="core:Project">
             <TabControl>
                 <TabItem Header="Project" Classes="property">
-                    <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*" Grid.Row="0">
+                    <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*">
                         <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0"/>
                         <TreeView
-                            Items="{Binding Documents}"
+                            Items="{Binding Path=Documents, Mode=TwoWay}"
                             SelectedItem="{Binding Path=Selected, Mode=TwoWay}"
                             Grid.Row="1">
                             <TreeView.DataTemplates>
-                                <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Containers}">
-                                    <TextBlock Text="{Binding Name}" />
+                                <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Path=Containers, Mode=TwoWay}">
+                                    <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" />
                                 </TreeDataTemplate>
                                 <DataTemplate DataType="core:Container">
-                                    <TextBlock Text="{Binding Name}" />
+                                    <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" />
                                 </DataTemplate>
                             </TreeView.DataTemplates>
                         </TreeView>
@@ -982,22 +982,22 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Options" Classes="property">
-                    <ContentControl Content="{Binding Options}"/>
+                    <ContentControl Content="{Binding Path=Options, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Templates" Classes="property">
                     <ListBox
-                        Items="{Binding Templates}"
+                        Items="{Binding Path=Templates}"
                         SelectedItem="{Binding Path=CurrentTemplate, Mode=TwoWay}">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:Container">
-                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" />
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>
                 </TabItem>
                 <TabItem Header="Template" Classes="property">
                     <ScrollViewer>
-                        <ContentControl Content="{Binding CurrentTemplate}"/>
+                        <ContentControl Content="{Binding Path=CurrentTemplate, Mode=TwoWay}"/>
                     </ScrollViewer>
                 </TabItem>
             </TabControl>
@@ -1011,10 +1011,10 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Containers" Classes="property">
-                    <ListBox Items="{Binding Containers}">
+                    <ListBox Items="{Binding Path=Containers}">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:Container">
-                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text="{Binding Path=Name}" />
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>
@@ -1034,13 +1034,35 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Background" Classes="property">
-                    <ContentControl Content="{Binding Background}"/>
+                    <ContentControl Content="{Binding Path=Background, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Template" Classes="property">
-                    <ContentControl Content="{Binding Template}"/>
+                    <ContentControl Content="{Binding Path=Template, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Properties" Classes="property">
-                    <!-- TODO -->
+                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
+                        <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
+                        <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
+                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Properties}">
+                            <ItemsControl.DataTemplates>
+                                <DataTemplate DataType="core:ShapeProperty">
+                                    <Grid VerticalAlignment="Top">
+                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.DataTemplates>
+                        </ItemsControl>
+                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Path=Properties}">
+                            <ItemsControl.DataTemplates>
+                                <DataTemplate DataType="core:ShapeProperty">
+                                    <Grid VerticalAlignment="Top">
+                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.DataTemplates>
+                        </ItemsControl>
+                    </Grid>
                 </TabItem>
             </TabControl>
         </DataTemplate>
@@ -1052,21 +1074,25 @@
         </DataTemplate>
     </UserControl.DataTemplates>
     <Grid RowDefinitions="50*,50*" ColumnDefinitions="170,Auto,*,Auto,240">
-        <ContentControl Content="{Binding Editor.Project}" Grid.Row="0" Grid.Column="0"/>
+        <ContentControl Content="{Binding Path=Editor.Project, Mode=TwoWay}" Grid.Row="0" Grid.Column="0"/>
         <TabControl Grid.Row="1" Grid.Column="0">
             <TabItem Header="Groups" Classes="property">
-                <Grid RowDefinitions="Auto,*">
-                    <DropDown Items="{Binding Editor.Project.GroupLibraries}" SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary, Mode=TwoWay}" Grid.Row="0">
+                <Grid RowDefinitions="Auto,Auto,*">
+                    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
+                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Editor.Project.CurrentGroupLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    </Grid>
+                    <DropDown Items="{Binding Path=Editor.Project.GroupLibraries}" SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary, Mode=TwoWay}" Grid.Row="1">
                         <DropDown.DataTemplates>
                             <DataTemplate DataType="core:GroupLibrary">
-                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text="{Binding Path=Name}" />
                             </DataTemplate>
                         </DropDown.DataTemplates>
                     </DropDown>
-                    <ListBox Items="{Binding Editor.Project.CurrentGroupLibrary.Groups}" SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary.CurrentGroup, Mode=TwoWay}" Grid.Row="1">
+                    <ListBox Items="{Binding Path=Editor.Project.CurrentGroupLibrary.Groups}" SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary.CurrentGroup, Mode=TwoWay}" Grid.Row="2">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:XGroup">
-                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text="{Binding Path=Name}" />
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>
@@ -1074,29 +1100,29 @@
             </TabItem>
             <TabItem Header="Database" Classes="property">
                 <Grid RowDefinitions="Auto,*">
-                    <DropDown Items="{Binding Editor.Project.Databases}" SelectedItem="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}" Grid.Row="0">
+                    <DropDown Items="{Binding Path=Editor.Project.Databases}" SelectedItem="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}" Grid.Row="0">
                         <DropDown.DataTemplates>
                             <DataTemplate DataType="core:Database">
-                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text="{Binding Path=Name}" />
                             </DataTemplate>
                         </DropDown.DataTemplates>
                     </DropDown>
-                    <ContentControl Content="{Binding Editor.Project.CurrentDatabase}" Grid.Row="1"/>
+                    <ContentControl Content="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}" Grid.Row="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Records" Classes="property">
                 <Grid RowDefinitions="Auto,*">
-                    <DropDown Items="{Binding Editor.Project.Databases}" SelectedItem="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}" Grid.Row="0">
+                    <DropDown Items="{Binding Path=Editor.Project.Databases}" SelectedItem="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}" Grid.Row="0">
                         <DropDown.DataTemplates>
                             <DataTemplate DataType="core:Database">
-                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text="{Binding Path=Name}" />
                             </DataTemplate>
                         </DropDown.DataTemplates>
                     </DropDown>
-                    <ListBox Items="{Binding Editor.Project.CurrentDatabase.Records}" SelectedItem="{Binding Path=Editor.Project.CurrentDatabase.CurrentRecord, Mode=TwoWay}" Grid.Row="1">
+                    <ListBox Items="{Binding Path=Editor.Project.CurrentDatabase.Records}" SelectedItem="{Binding Path=Editor.Project.CurrentDatabase.CurrentRecord, Mode=TwoWay}" Grid.Row="1">
                         <DropDown.DataTemplates>
                             <DataTemplate DataType="core:Record">
-                                <TextBlock Text="{Binding Id}" />
+                                <TextBlock Text="{Binding Path=Id}" />
                             </DataTemplate>
                         </DropDown.DataTemplates>
                     </ListBox>
@@ -1110,44 +1136,58 @@
         <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Width="10"/>
         <TabControl Grid.Row="0" Grid.Column="4">
             <TabItem Header="Styles" Classes="property">
-                <Grid RowDefinitions="Auto,*">
-                    <DropDown Items="{Binding Editor.Project.StyleLibraries}" SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="0">
+                <Grid RowDefinitions="Auto,Auto,*">
+                    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
+                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Editor.Project.CurrentStyleLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    </Grid>
+                    <DropDown Items="{Binding Path=Editor.Project.StyleLibraries}" SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="1">
                         <DropDown.DataTemplates>
                             <DataTemplate DataType="core:StyleLibrary">
-                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text="{Binding Path=Name}" />
                             </DataTemplate>
                         </DropDown.DataTemplates>
                     </DropDown>
-                    <ListBox Items="{Binding Editor.Project.CurrentStyleLibrary.Styles}" SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}" Grid.Row="1">
+                    <ListBox Items="{Binding Path=Editor.Project.CurrentStyleLibrary.Styles}" SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}" Grid.Row="2">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:ShapeStyle">
-                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text="{Binding Path=Name}" />
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>
                 </Grid>
             </TabItem>
             <TabItem Header="Container" Classes="property">
-                <ContentControl Content="{Binding Editor.Project.CurrentContainer}"/>
+                <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}"/>
             </TabItem>
             <TabItem Header="Layers" Classes="property">
-                <ListBox
-                    Items="{Binding Editor.Project.CurrentContainer.Layers}"
-                    SelectedItem="{Binding Path=Editor.Project.CurrentContainer.CurrentLayer, Mode=TwoWay}">
-                    <ListBox.DataTemplates>
-                        <DataTemplate DataType="core:Layer">
-                            <TextBlock Text="{Binding Name}" />
-                        </DataTemplate>
-                    </ListBox.DataTemplates>
-                </ListBox>
+                <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
+                    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
+                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Editor.Project.CurrentContainer.CurrentLayer.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    </Grid>
+                    <ListBox
+                        Items="{Binding Path=Editor.Project.CurrentContainer.Layers}"
+                        SelectedItem="{Binding Path=Editor.Project.CurrentContainer.CurrentLayer, Mode=TwoWay}"
+                        Grid.Row="1">
+                        <ListBox.DataTemplates>
+                            <DataTemplate DataType="core:Layer">
+                                <Grid ColumnDefinitions="Auto,*">
+                                    <CheckBox Content="" IsChecked="{Binding Path=IsVisible, Mode=TwoWay}" Grid.Column="0"/>
+                                    <TextBlock Text="{Binding Path=Name}" Grid.Column="1"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.DataTemplates>
+                    </ListBox>
+                </Grid>
             </TabItem>
             <TabItem Header="Shapes" Classes="property">
                 <ListBox
-                    Items="{Binding Editor.Project.CurrentContainer.CurrentLayer.Shapes}"
+                    Items="{Binding Path=Editor.Project.CurrentContainer.CurrentLayer.Shapes}"
                     SelectedItem="{Binding Path=Editor.Project.CurrentContainer.CurrentShape, Mode=TwoWay}">
                     <ListBox.DataTemplates>
                         <DataTemplate DataType="core:BaseShape">
-                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock Text="{Binding Path=Name}" />
                         </DataTemplate>
                     </ListBox.DataTemplates>
                 </ListBox>
@@ -1156,22 +1196,22 @@
         <TabControl Grid.Row="1" Grid.Column="4">
             <TabItem Header="Properties" Classes="property">
                 <ScrollViewer>
-                    <ContentControl Content="{Binding Editor.Project.CurrentContainer.CurrentShape}"/>
+                    <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer.CurrentShape, Mode=TwoWay}"/>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Data" Classes="property">
                 <ScrollViewer>
-                    <ContentControl Content="{Binding Editor.Renderers[0].State.SelectedShape.Data}"/>
+                    <ContentControl Content="{Binding Path=Editor.Renderers[0].State.SelectedShape.Data, Mode=TwoWay}"/>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="State" Classes="property">
                 <ScrollViewer>
-                    <ContentControl Content="{Binding Editor.Renderers[0].State.SelectedShape.State}"/>
+                    <ContentControl Content="{Binding Path=Editor.Renderers[0].State.SelectedShape.State, Mode=TwoWay}"/>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Style" Classes="property">
                 <ScrollViewer>
-                    <ContentControl Content="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}"/>
+                    <ContentControl Content="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}"/>
                 </ScrollViewer>
             </TabItem>
         </TabControl>

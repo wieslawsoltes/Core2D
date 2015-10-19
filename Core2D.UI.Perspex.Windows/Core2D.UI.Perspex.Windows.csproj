@@ -201,16 +201,16 @@
     </Compile>
     <Compile Include="App.cs" />
     <Compile Include="Controls\Drawable.cs" />
-    <Compile Include="MainView.paml.cs">
-      <DependentUpon>MainView.paml</DependentUpon>
+    <Compile Include="MenuControl.paml.cs">
+      <DependentUpon>MenuControl.paml</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="MainWindow.paml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Util\TextClipboard.cs" />
+    <Compile Include="EditorControl.paml.cs">
+      <DependentUpon>EditorControl.paml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.paml.cs">
       <DependentUpon>MainWindow.paml</DependentUpon>
     </Compile>
+    <Compile Include="Util\TextClipboard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -256,7 +256,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MainView.paml">
+    <EmbeddedResource Include="MenuControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

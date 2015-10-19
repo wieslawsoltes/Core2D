@@ -16,12 +16,12 @@ namespace TestPerspex
     /// <summary>
     /// 
     /// </summary>
-    public class MainView : UserControl
+    public class EditorControl : UserControl
     {
         /// <summary>
         /// 
         /// </summary>
-        public MainView()
+        public EditorControl()
         {
             this.InitializeComponent();
         }
