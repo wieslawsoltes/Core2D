@@ -958,49 +958,26 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:Project">
-            <TabControl>
-                <TabItem Header="Project" Classes="property">
-                    <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*">
-                        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0"/>
-                        <TreeView
-                            Items="{Binding Path=Documents, Mode=TwoWay}"
-                            SelectedItem="{Binding Path=Selected, Mode=TwoWay}"
-                            Grid.Row="1">
-                            <TreeView.DataTemplates>
-                                <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Path=Containers, Mode=TwoWay}">
-                                    <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" />
-                                </TreeDataTemplate>
-                                <DataTemplate DataType="core:Container">
-                                    <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" />
-                                </DataTemplate>
-                            </TreeView.DataTemplates>
-                        </TreeView>
-                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2">
-                            <TextBlock Text="Selected" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                            <TextBox Text="{Binding Path=Selected.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                        </Grid>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Options" Classes="property">
-                    <ContentControl Content="{Binding Path=Options, Mode=TwoWay}"/>
-                </TabItem>
-                <TabItem Header="Templates" Classes="property">
-                    <ListBox
-                        Items="{Binding Path=Templates}"
-                        SelectedItem="{Binding Path=CurrentTemplate, Mode=TwoWay}">
-                        <ListBox.DataTemplates>
-                            <DataTemplate DataType="core:Container">
-                                <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" />
-                            </DataTemplate>
-                        </ListBox.DataTemplates>
-                    </ListBox>
-                </TabItem>
-                <TabItem Header="Template" Classes="property">
-                    <ScrollViewer>
-                        <ContentControl Content="{Binding Path=CurrentTemplate, Mode=TwoWay}"/>
-                    </ScrollViewer>
-                </TabItem>
-            </TabControl>
+            <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*">
+                <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0"/>
+                <TreeView
+                    Items="{Binding Path=Documents, Mode=TwoWay}"
+                    SelectedItem="{Binding Path=Selected, Mode=TwoWay}"
+                    Grid.Row="1">
+                    <TreeView.DataTemplates>
+                        <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Path=Containers, Mode=TwoWay}">
+                            <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" />
+                        </TreeDataTemplate>
+                        <DataTemplate DataType="core:Container">
+                            <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" />
+                        </DataTemplate>
+                    </TreeView.DataTemplates>
+                </TreeView>
+                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="2">
+                    <TextBlock Text="Selected" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Text="{Binding Path=Selected.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                </Grid>
+            </Grid>
         </DataTemplate>
         <DataTemplate DataType="core:Document">
             <TabControl>
