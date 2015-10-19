@@ -1117,7 +1117,14 @@
         </DataTemplate>
     </UserControl.DataTemplates>
     <Grid RowDefinitions="50*,50*" ColumnDefinitions="170,Auto,*,Auto,240">
-        <ContentControl Content="{Binding Path=Editor.Project, Mode=TwoWay}" Grid.Row="0" Grid.Column="0"/>
+        <TabControl Grid.Row="0" Grid.Column="0">
+            <TabItem Header="Project" Classes="property">
+                <ContentControl Content="{Binding Path=Editor.Project, Mode=TwoWay}"/>
+            </TabItem>
+            <TabItem Header="Options" Classes="property">
+                <ContentControl Content="{Binding Path=Editor.Project.Options, Mode=TwoWay}"/>
+            </TabItem>
+        </TabControl>
         <TabControl Grid.Row="1" Grid.Column="0">
             <TabItem Header="Groups" Classes="property">
                 <Grid RowDefinitions="Auto,Auto,*">
