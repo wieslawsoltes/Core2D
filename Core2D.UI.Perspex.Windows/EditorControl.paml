@@ -1244,7 +1244,7 @@
             </TabItem>
         </TabControl>
         <TabControl Grid.Row="1" Grid.Column="4">
-            <TabItem Header="Properties" Classes="property">
+            <TabItem Header="Shape" Classes="property">
                 <ScrollViewer>
                     <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer.CurrentShape, Mode=TwoWay}"/>
                 </ScrollViewer>
