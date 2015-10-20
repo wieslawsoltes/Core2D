@@ -1,0 +1,48 @@
+version: 0.1.{build}
+os: Visual Studio 2015
+configuration:
+- Debug
+- Release
+before_build:
+- cmd: >-
+    git submodule update --init
+
+    appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+
+    restore.cmd
+build:
+  project: Core2D.sln
+  verbosity: minimal
+after_build:
+- cmd: >-
+    7z a Core2D-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Core2D\bin\%CONFIGURATION%
+
+    7z a Core2D.UI.EtoForms.Direct2D-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Core2D.UI.EtoForms.Direct2D\bin\%CONFIGURATION%
+
+    7z a Core2D.UI.EtoForms.Gtk2-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Core2D.UI.EtoForms.Gtk2\bin\%CONFIGURATION%
+
+    7z a Core2D.UI.Perspex.Windows-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Core2D.UI.Perspex.Windows\bin\%CONFIGURATION%
+
+    7z a Core2D.UI.WinForms-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Core2D.UI.WinForms\bin\%CONFIGURATION%
+
+    7z a Core2D.UI.Wpf-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Core2D.UI.Wpf\bin\%CONFIGURATION%
+
+    appveyor PushArtifact Core2D-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
+
+    appveyor PushArtifact Core2D.UI.EtoForms.Direct2D-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
+
+    appveyor PushArtifact Core2D.UI.EtoForms.Gtk2-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
+
+    appveyor PushArtifact Core2D.UI.Perspex.Windows-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
+
+    appveyor PushArtifact Core2D.UI.WinForms-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
+
+    appveyor PushArtifact Core2D.UI.Wpf-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
+test: off
+deploy: off
+notifications:
+- provider: Webhook
+  url: https://webhooks.gitter.im/e/cc9eb0e869ca5a539718
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: true
