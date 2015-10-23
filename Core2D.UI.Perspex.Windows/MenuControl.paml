@@ -5,16 +5,16 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D">
    <Menu>
         <MenuItem Header="_File">
-            <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Binding Path=Commands.NewCommand}" />
+            <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Binding Path=Commands.NewCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="_Open" HotKey="Ctrl+O" Command="{Binding Path=Commands.OpenCommand}" />
+            <MenuItem Header="_Open" HotKey="Ctrl+O" Command="{Binding Path=Commands.OpenCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="_Close" HotKey="Ctrl+F4" Command="{Binding Path=Commands.CloseCommand}" />
+            <MenuItem Header="_Close" HotKey="Ctrl+F4" Command="{Binding Path=Commands.CloseCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="_Save" HotKey="Ctrl+S" Command="{Binding Path=Commands.SaveCommand}" />
-            <MenuItem Header="Save _As" HotKey="Ctrl+Shift+S" Command="{Binding Path=Commands.SaveAsCommand}" />
+            <MenuItem Header="_Save" HotKey="Ctrl+S" Command="{Binding Path=Commands.SaveCommand}"/>
+            <MenuItem Header="Save _As" HotKey="Ctrl+Shift+S" Command="{Binding Path=Commands.SaveAsCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="_Export" HotKey="Ctrl+E" Command="{Binding Path=Commands.ExportCommand}" />
+            <MenuItem Header="_Export" HotKey="Ctrl+E" Command="{Binding Path=Commands.ExportCommand}"/>
             <!--<Separator/>-->
             <MenuItem Header="_Recent" Items="{Binding Path=RecentProjects}">
                 <MenuItem.DataTemplates>
@@ -32,38 +32,38 @@
                 -->
             </MenuItem>
             <!--<Separator/>-->
-            <MenuItem Header="E_xit" HotKey="Alt+F4" Command="{Binding Path=Commands.ExitCommand}" />
+            <MenuItem Header="E_xit" HotKey="Alt+F4" Command="{Binding Path=Commands.ExitCommand}"/>
         </MenuItem>
         <MenuItem Header="_Edit">
-            <MenuItem Header="_Undo" HotKey="Ctrl+Z" Command="{Binding Path=Commands.UndoCommand}" />
-            <MenuItem Header="_Redo" HotKey="Ctrl+Y" Command="{Binding Path=Commands.RedoCommand}" />
+            <MenuItem Header="_Undo" HotKey="Ctrl+Z" Command="{Binding Path=Commands.UndoCommand}"/>
+            <MenuItem Header="_Redo" HotKey="Ctrl+Y" Command="{Binding Path=Commands.RedoCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="Cu_t" HotKey="Ctrl+X" Command="{Binding Path=Commands.CutCommand}" />
-            <MenuItem Header="_Copy" HotKey="Ctrl+C" Command="{Binding Path=Commands.CopyCommand}" />
-            <MenuItem Header="_Paste" HotKey="Ctrl+V" Command="{Binding Path=Commands.PasteCommand}" />
-            <MenuItem Header="_Delete" HotKey="Delete" Command="{Binding Path=Commands.DeleteCommand}" />
+            <MenuItem Header="Cu_t" HotKey="Ctrl+X" Command="{Binding Path=Commands.CutCommand}"/>
+            <MenuItem Header="_Copy" HotKey="Ctrl+C" Command="{Binding Path=Commands.CopyCommand}"/>
+            <MenuItem Header="_Paste" HotKey="Ctrl+V" Command="{Binding Path=Commands.PasteCommand}"/>
+            <MenuItem Header="_Delete" HotKey="Delete" Command="{Binding Path=Commands.DeleteCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="Select _All" HotKey="Ctrl+A" Command="{Binding Path=Commands.SelectAllCommand}" />
-            <MenuItem Header="De_select All" HotKey="Escape" Command="{Binding Path=Commands.DeselectAllCommand}" />
+            <MenuItem Header="Select _All" HotKey="Ctrl+A" Command="{Binding Path=Commands.SelectAllCommand}"/>
+            <MenuItem Header="De_select All" HotKey="Escape" Command="{Binding Path=Commands.DeselectAllCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="Cl_ear All" Command="{Binding Path=Commands.ClearAllCommand}" />
+            <MenuItem Header="Cl_ear All" Command="{Binding Path=Commands.ClearAllCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="_Group" HotKey="Ctrl+G" Command="{Binding Path=Commands.GroupCommand}" />
-            <MenuItem Header="U_ngroup" HotKey="Ctrl+U" Command="{Binding Path=Commands.UngroupCommand}" />
+            <MenuItem Header="_Group" HotKey="Ctrl+G" Command="{Binding Path=Commands.GroupCommand}"/>
+            <MenuItem Header="U_ngroup" HotKey="Ctrl+U" Command="{Binding Path=Commands.UngroupCommand}"/>
             <!--<Separator/>-->
             <MenuItem Header="_Order">
-                <MenuItem Header="Send to _Back" HotKey="Shift+-" Command="{Binding Path=Commands.SendToBackCommand}" />
-                <MenuItem Header="Send Ba_ckward" HotKey="-" Command="{Binding Path=Commands.SendBackwardCommand}" />
+                <MenuItem Header="Send to _Back" HotKey="Shift+-" Command="{Binding Path=Commands.SendToBackCommand}"/>
+                <MenuItem Header="Send Ba_ckward" HotKey="-" Command="{Binding Path=Commands.SendBackwardCommand}"/>
                 <!--<Separator/>-->
-                <MenuItem Header="Bring Fo_rward" HotKey="+" Command="{Binding Path=Commands.BringForwardCommand}" />
-                <MenuItem Header="Bring to _Front" HotKey="Shift++" Command="{Binding Path=Commands.BringToFrontCommand}" />
+                <MenuItem Header="Bring Fo_rward" HotKey="+" Command="{Binding Path=Commands.BringForwardCommand}"/>
+                <MenuItem Header="Bring to _Front" HotKey="Shift++" Command="{Binding Path=Commands.BringToFrontCommand}"/>
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_View">
             <MenuItem Header="_Zoom">
-                <MenuItem Header="_Reset Zoom" HotKey="Z" Command="{Binding Path=Commands.ZoomResetCommand}" />
+                <MenuItem Header="_Reset Zoom" HotKey="Z" Command="{Binding Path=Commands.ZoomResetCommand}"/>
                 <!--<Separator/>-->
-                <MenuItem Header="Zoom to _Extent" HotKey="X" Command="{Binding Path=Commands.ZoomExtentCommand}" />
+                <MenuItem Header="Zoom to _Extent" HotKey="X" Command="{Binding Path=Commands.ZoomExtentCommand}"/>
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Project">
@@ -206,33 +206,33 @@
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Tool">
-            <MenuItem Header="_None" HotKey="N" Command="{Binding Path=Commands.ToolNoneCommand}" />
+            <MenuItem Header="_None" HotKey="N" Command="{Binding Path=Commands.ToolNoneCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="_Selection" HotKey="S" Command="{Binding Path=Commands.ToolSelectionCommand}" />
+            <MenuItem Header="_Selection" HotKey="S" Command="{Binding Path=Commands.ToolSelectionCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="_Point" HotKey="P" Command="{Binding Path=Commands.ToolPointCommand}" />
+            <MenuItem Header="_Point" HotKey="P" Command="{Binding Path=Commands.ToolPointCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="_Line" HotKey="L" Command="{Binding Path=Commands.ToolLineCommand}" />
-            <MenuItem Header="_Arc" HotKey="A" Command="{Binding Path=Commands.ToolArcCommand}" />
-            <MenuItem Header="_Bezier" HotKey="B" Command="{Binding Path=Commands.ToolBezierCommand}" />
-            <MenuItem Header="_QBezier" HotKey="Q" Command="{Binding Path=Commands.ToolQBezierCommand}" />
+            <MenuItem Header="_Line" HotKey="L" Command="{Binding Path=Commands.ToolLineCommand}"/>
+            <MenuItem Header="_Arc" HotKey="A" Command="{Binding Path=Commands.ToolArcCommand}"/>
+            <MenuItem Header="_Bezier" HotKey="B" Command="{Binding Path=Commands.ToolBezierCommand}"/>
+            <MenuItem Header="_QBezier" HotKey="Q" Command="{Binding Path=Commands.ToolQBezierCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="Pat_h" HotKey="H" Command="{Binding Path=Commands.ToolPathCommand}" />
+            <MenuItem Header="Pat_h" HotKey="H" Command="{Binding Path=Commands.ToolPathCommand}"/>
             <MenuItem Header="Path T_ool">
-                <MenuItem Header="_Line" Command="{Binding Path=Commands.ToolLineCommand}" />
-                <MenuItem Header="_Arc" Command="{Binding Path=Commands.ToolArcCommand}" />
-                <MenuItem Header="_Bezier" Command="{Binding Path=Commands.ToolBezierCommand}" />
-                <MenuItem Header="_QBezier" Command="{Binding Path=Commands.ToolQBezierCommand}" />
+                <MenuItem Header="_Line" Command="{Binding Path=Commands.ToolLineCommand}"/>
+                <MenuItem Header="_Arc" Command="{Binding Path=Commands.ToolArcCommand}"/>
+                <MenuItem Header="_Bezier" Command="{Binding Path=Commands.ToolBezierCommand}"/>
+                <MenuItem Header="_QBezier" Command="{Binding Path=Commands.ToolQBezierCommand}"/>
                 <!--<Separator/>-->
-                <MenuItem Header="_Move" HotKey="M" Command="{Binding Path=Commands.ToolMoveCommand}" />
+                <MenuItem Header="_Move" HotKey="M" Command="{Binding Path=Commands.ToolMoveCommand}"/>
             </MenuItem>
             <!--<Separator/>-->
-            <MenuItem Header="_Rectangle" HotKey="R" Command="{Binding Path=Commands.ToolRectangleCommand}" />
-            <MenuItem Header="_Ellipse" HotKey="E" Command="{Binding Path=Commands.ToolEllipseCommand}" />
+            <MenuItem Header="_Rectangle" HotKey="R" Command="{Binding Path=Commands.ToolRectangleCommand}"/>
+            <MenuItem Header="_Ellipse" HotKey="E" Command="{Binding Path=Commands.ToolEllipseCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="_Text" HotKey="T" Command="{Binding Path=Commands.ToolTextCommand}" />
+            <MenuItem Header="_Text" HotKey="T" Command="{Binding Path=Commands.ToolTextCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="_Image" HotKey="I" Command="{Binding Path=Commands.ToolImageCommand}" />
+            <MenuItem Header="_Image" HotKey="I" Command="{Binding Path=Commands.ToolImageCommand}"/>
         </MenuItem>
         <MenuItem Header="_Data">
             <MenuItem Header="_Import..." Command="{Binding Path=Commands.ImportDataCommand}"/>
@@ -244,20 +244,20 @@
         <MenuItem Header="Te_mplate" Items="{Binding Path=Editor.Project.Templates}">
             <MenuItem.DataTemplates>
                 <DataTemplate DataType="core:Container">
-                    <TextBlock Text="{Binding Path=Name}" />
+                    <TextBlock Text="{Binding Path=Name}"/>
                 </DataTemplate>
             </MenuItem.DataTemplates>
         </MenuItem>
         <MenuItem Header="_Options">
-            <MenuItem Header="Default is Stro_ked" HotKey="K" Command="{Binding Path=Commands.DefaultIsStrokedCommand}" />
-            <MenuItem Header="Default is _Filled" HotKey="F" Command="{Binding Path=Commands.DefaultIsFilledCommand}" />
+            <MenuItem Header="Default is Stro_ked" HotKey="K" Command="{Binding Path=Commands.DefaultIsStrokedCommand}"/>
+            <MenuItem Header="Default is _Filled" HotKey="F" Command="{Binding Path=Commands.DefaultIsFilledCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="Default is Close_d" HotKey="D" Command="{Binding Path=Commands.DefaultIsClosedCommand}" />
-            <MenuItem Header="Default is Smooth _Join" HotKey="J" Command="{Binding Path=Commands.DefaultIsSmoothJoinCommand}" />
+            <MenuItem Header="Default is Close_d" HotKey="D" Command="{Binding Path=Commands.DefaultIsClosedCommand}"/>
+            <MenuItem Header="Default is Smooth _Join" HotKey="J" Command="{Binding Path=Commands.DefaultIsSmoothJoinCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="Snap to _Grid" HotKey="G" Command="{Binding Path=Commands.SnapToGridCommand}" />
+            <MenuItem Header="Snap to _Grid" HotKey="G" Command="{Binding Path=Commands.SnapToGridCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="Try To _Connect" HotKey="C" Command="{Binding Path=Commands.TryToConnectCommand}" />
+            <MenuItem Header="Try To _Connect" HotKey="C" Command="{Binding Path=Commands.TryToConnectCommand}"/>
         </MenuItem>
     </Menu>
 </UserControl>
