@@ -42,6 +42,7 @@ namespace TestPerspex
         /// 
         /// </summary>
         /// <param name="args"></param>
+        [STAThread]
         static void Main(string[] args)
         {
             try
