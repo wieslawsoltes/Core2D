@@ -687,6 +687,9 @@
                         </Grid>
                     </StackPanel>
                 </TabItem>
+                <TabItem Header="Connectors" Classes="property">
+                    <ListBox Items="{Binding Path=Connectors}" Classes="default"/>
+                </TabItem>
                 <TabItem Header="State" Classes="property">
                     <ContentControl Content="{Binding Path=State, Mode=TwoWay}"/>
                 </TabItem>
