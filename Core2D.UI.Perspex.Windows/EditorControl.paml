@@ -4,34 +4,67 @@
              xmlns:local="clr-namespace:TestPerspex;assembly=Core2D.UI.Perspex.Windows"
              xmlns:core="clr-namespace:Core2D;assembly=Core2D">
     <UserControl.Styles>
-        <Style Selector="TabItem.property">
-            <Setter Property="TabItem.FontSize" Value="12" />
-            <Setter Property="TabItem.FontWeight" Value="Normal" />
-        </Style>
-        <Style Selector="TextBlock.header">
-            <Setter Property="TextBox.FontSize" Value="12" />
-            <Setter Property="TextBox.FontWeight" Value="Bold" />
+        <Style Selector="TextBlock.default">
+            <Setter Property="TextBlock.Margin" Value="1"/>
         </Style>
         <Style Selector="TextBlock.left">
-            <Setter Property="TextBlock.TextAlignment" Value="Left" />
-            <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+            <Setter Property="TextBlock.TextAlignment" Value="Left"/>
+            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+            <Setter Property="TextBlock.Margin" Value="1"/>
+        </Style>
+        <Style Selector="TextBlock.center">
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+            <Setter Property="TextBlock.Margin" Value="1"/>
+        </Style>
+        <Style Selector="TextBlock.header">
+            <Setter Property="TextBlock.FontSize" Value="12"/>
+            <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+            <Setter Property="TextBlock.Margin" Value="1"/>
+        </Style>
+        <Style Selector="TextBox.default">
+            <Setter Property="TextBox.Margin" Value="1"/>
+            <Setter Property="TextBox.BorderThickness" Value="1"/>
         </Style>
         <Style Selector="TextBox.left">
             <!--<Setter Property="TextBox.TextAlignment" Value="Left"/>-->
-            <Setter Property="TextBox.VerticalAlignment" Value="Center" />
-        </Style>
-        <Style Selector="TextBlock.center">
-            <Setter Property="TextBlock.TextAlignment" Value="Center" />
-            <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+            <Setter Property="TextBox.VerticalAlignment" Value="Center"/>
+            <Setter Property="TextBox.Margin" Value="1"/>
+            <Setter Property="TextBox.BorderThickness" Value="1"/>
         </Style>
         <Style Selector="TextBox.center">
-            <Setter Property="TextBox.BorderBrush" Value="Transparent" />
             <!--<Setter Property="TextBox.TextAlignment" Value="Center"/>-->
-            <Setter Property="TextBox.VerticalAlignment" Value="Center" />
+            <Setter Property="TextBox.VerticalAlignment" Value="Center"/>
+            <Setter Property="TextBox.Margin" Value="1"/>
+            <Setter Property="TextBox.BorderBrush" Value="Transparent"/>
+            <Setter Property="TextBox.BorderThickness" Value="1"/>
         </Style>
         <Style Selector="CheckBox.default">
+            <Setter Property="CheckBox.Margin" Value="1"/>
+            <Setter Property="CheckBox.BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="CheckBox.left">
+            <Setter Property="CheckBox.Margin" Value="1"/>
+            <Setter Property="CheckBox.BorderThickness" Value="1"/>
         </Style>
         <Style Selector="DropDown.default">
+            <Setter Property="DropDown.Margin" Value="1"/>
+            <Setter Property="DropDown.BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="ListBox.default">
+            <Setter Property="ListBox.Margin" Value="1"/>
+            <Setter Property="ListBox.BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="TreeView.default">
+            <Setter Property="TreeView.Margin" Value="1"/>
+            <Setter Property="TreeView.BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="TabControl.default">
+            <Setter Property="TabControl.Margin" Value="1"/>
+        </Style>
+        <Style Selector="TabItem.property">
+            <Setter Property="TabItem.FontSize" Value="12"/>
+            <Setter Property="TabItem.FontWeight" Value="Normal"/>
         </Style>
     </UserControl.Styles>
     <UserControl.DataTemplates>
@@ -49,7 +82,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate DataType="core:ArrowStyle">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="Arrow" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="Arrow Type" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -94,11 +127,11 @@
         </DataTemplate>
         <DataTemplate DataType="core:FontStyle">
             <StackPanel>
-                <CheckBox Content="Regular" IsChecked="{Binding Path=Regular, Mode=TwoWay}"/>
-                <CheckBox Content="Bold" IsChecked="{Binding Path=Bold, Mode=TwoWay}"/>
-                <CheckBox Content="Italic" IsChecked="{Binding Path=Italic, Mode=TwoWay}"/>
-                <CheckBox Content="Underline" IsChecked="{Binding Path=Underline, Mode=TwoWay}"/>
-                <CheckBox Content="Strikeout" IsChecked="{Binding Path=Strikeout, Mode=TwoWay}"/>
+                <CheckBox Content="Regular" IsChecked="{Binding Path=Regular, Mode=TwoWay}" Classes="default"/>
+                <CheckBox Content="Bold" IsChecked="{Binding Path=Bold, Mode=TwoWay}" Classes="default"/>
+                <CheckBox Content="Italic" IsChecked="{Binding Path=Italic, Mode=TwoWay}" Classes="default"/>
+                <CheckBox Content="Underline" IsChecked="{Binding Path=Underline, Mode=TwoWay}" Classes="default"/>
+                <CheckBox Content="Strikeout" IsChecked="{Binding Path=Strikeout, Mode=TwoWay}" Classes="default"/>
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="core:TextStyle">
@@ -127,12 +160,12 @@
             <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                 <TextBlock Text="Flags" Classes="left" Grid.Row="0" Grid.Column="0"/>
                 <StackPanel Grid.Row="0" Grid.Column="1">
-                    <CheckBox Content="Disabled" IsChecked="{Binding Path=Disabled, Mode=TwoWay}"/>
-                    <CheckBox Content="Start" IsChecked="{Binding Path=Start, Mode=TwoWay}"/>
-                    <CheckBox Content="End" IsChecked="{Binding Path=End, Mode=TwoWay}"/>
-                    <CheckBox Content="Vertical" IsChecked="{Binding Path=Vertical, Mode=TwoWay}"/>
-                    <CheckBox Content="Horizontal" IsChecked="{Binding Path=Horizontal, Mode=TwoWay}"/>
-                    <CheckBox Content="All" IsChecked="{Binding Path=All, Mode=TwoWay}"/>
+                    <CheckBox Content="Disabled" IsChecked="{Binding Path=Disabled, Mode=TwoWay}" Classes="default"/>
+                    <CheckBox Content="Start" IsChecked="{Binding Path=Start, Mode=TwoWay}" Classes="default"/>
+                    <CheckBox Content="End" IsChecked="{Binding Path=End, Mode=TwoWay}" Classes="default"/>
+                    <CheckBox Content="Vertical" IsChecked="{Binding Path=Vertical, Mode=TwoWay}" Classes="default"/>
+                    <CheckBox Content="Horizontal" IsChecked="{Binding Path=Horizontal, Mode=TwoWay}" Classes="default"/>
+                    <CheckBox Content="All" IsChecked="{Binding Path=All, Mode=TwoWay}" Classes="default"/>
                 </StackPanel>
                 <TextBlock Text="Length" Classes="left" Grid.Row="1" Grid.Column="0"/>
                 <TextBox Text="{Binding Path=Length, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
@@ -155,7 +188,7 @@
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="core:ShapeStyle">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="Base" Classes="property">
                     <StackPanel>
                         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
@@ -207,13 +240,13 @@
         <DataTemplate DataType="core:Record">
             <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
                 <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
-                <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
-                <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
+                <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
+                <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
                 <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Columns}">
                     <ItemsControl.DataTemplates>
                         <DataTemplate DataType="core:Column">
                             <Grid VerticalAlignment="Top">
-                                <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}"/>
+                                <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.DataTemplates>
@@ -222,7 +255,7 @@
                     <ItemsControl.DataTemplates>
                         <DataTemplate DataType="core:Value">
                             <Grid VerticalAlignment="Top">
-                                <TextBox VerticalAlignment="Center" Text="{Binding Path=Content, Mode=TwoWay}"/>
+                                <TextBox VerticalAlignment="Center" Text="{Binding Path=Content, Mode=TwoWay}" Classes="default"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.DataTemplates>
@@ -230,7 +263,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate DataType="core:Database">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="Database" Classes="property">
                     <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -239,12 +272,12 @@
                 </TabItem>
                 <TabItem Header="Columns" Classes="property">
                     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" >
-                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
                         <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Columns}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:Column">
                                     <Grid VerticalAlignment="Top">
-                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}"/>
+                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
@@ -257,20 +290,20 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:Data">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="Record" Classes="property">
                     <ContentControl Content="{Binding Path=Record, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Bindings" Classes="property">
                     <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
                         <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
-                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Property"/>
-                        <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Path"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Property" Classes="default"/>
+                        <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Path" Classes="default"/>
                         <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Bindings}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:ShapeBinding">
                                     <Grid VerticalAlignment="Top">
-                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Property, Mode=TwoWay}"/>
+                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Property, Mode=TwoWay}" Classes="default"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
@@ -279,7 +312,7 @@
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:ShapeBinding">
                                     <Grid VerticalAlignment="Top">
-                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Path, Mode=TwoWay}"/>
+                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Path, Mode=TwoWay}" Classes="default"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
@@ -289,13 +322,13 @@
                 <TabItem Header="Properties" Classes="property">
                     <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
                         <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
-                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
-                        <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
+                        <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
                         <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Properties}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:ShapeProperty">
                                     <Grid VerticalAlignment="Top">
-                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}"/>
+                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
@@ -304,7 +337,7 @@
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:ShapeProperty">
                                     <Grid VerticalAlignment="Top">
-                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}"/>
+                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}" Classes="default"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
@@ -316,20 +349,20 @@
         <!-- state -->
         <DataTemplate DataType="core:ShapeState">
             <StackPanel>
-                <CheckBox Content="Default" IsChecked="{Binding Path=Default, Mode=TwoWay}"/>
-                <CheckBox Content="Visible" IsChecked="{Binding Path=Visible, Mode=TwoWay}"/>
-                <CheckBox Content="Printable" IsChecked="{Binding Path=Printable, Mode=TwoWay}"/>
-                <CheckBox Content="Locked" IsChecked="{Binding Path=Locked, Mode=TwoWay}"/>
-                <CheckBox Content="Connector" IsChecked="{Binding Path=Connector, Mode=TwoWay}"/>
-                <CheckBox Content="None" IsChecked="{Binding Path=None, Mode=TwoWay}"/>
-                <CheckBox Content="Standalone" IsChecked="{Binding Path=Standalone, Mode=TwoWay}"/>
-                <CheckBox Content="Input" IsChecked="{Binding Path=Input, Mode=TwoWay}"/>
-                <CheckBox Content="Output" IsChecked="{Binding Path=Output, Mode=TwoWay}"/>
+                <CheckBox Content="Default" IsChecked="{Binding Path=Default, Mode=TwoWay}" Classes="default"/>
+                <CheckBox Content="Visible" IsChecked="{Binding Path=Visible, Mode=TwoWay}" Classes="default"/>
+                <CheckBox Content="Printable" IsChecked="{Binding Path=Printable, Mode=TwoWay}" Classes="default"/>
+                <CheckBox Content="Locked" IsChecked="{Binding Path=Locked, Mode=TwoWay}" Classes="default"/>
+                <CheckBox Content="Connector" IsChecked="{Binding Path=Connector, Mode=TwoWay}" Classes="default"/>
+                <CheckBox Content="None" IsChecked="{Binding Path=None, Mode=TwoWay}" Classes="default"/>
+                <CheckBox Content="Standalone" IsChecked="{Binding Path=Standalone, Mode=TwoWay}" Classes="default"/>
+                <CheckBox Content="Input" IsChecked="{Binding Path=Input, Mode=TwoWay}" Classes="default"/>
+                <CheckBox Content="Output" IsChecked="{Binding Path=Output, Mode=TwoWay}" Classes="default"/>
             </StackPanel>
         </DataTemplate>
         <!-- shapes -->
         <DataTemplate DataType="core:XPoint">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="Point" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -352,7 +385,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XLine">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="Line" Classes="property">
                     <StackPanel>
                         <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
@@ -383,7 +416,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XText">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="Text" Classes="property">
                     <StackPanel>
                         <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
@@ -414,7 +447,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XRectangle">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="Rectangle" Classes="property">
                     <StackPanel>
                         <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
@@ -463,7 +496,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XEllipse">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="Ellipse" Classes="property">
                     <StackPanel>
                         <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
@@ -498,7 +531,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XImage">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="Image" Classes="property">
                     <StackPanel>
                         <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
@@ -533,7 +566,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XArc">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="Arc" Classes="property">
                     <StackPanel>
                         <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
@@ -574,7 +607,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XBezier">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="Bezier" Classes="property">
                     <StackPanel>
                         <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
@@ -615,7 +648,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XQBezier">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="QBezier" Classes="property">
                     <StackPanel>
                         <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
@@ -652,7 +685,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XGroup">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="Group" Classes="property">
                     <StackPanel>
                         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
@@ -663,13 +696,13 @@
                             <TextBlock Text="Properties" Classes="header" Grid.Row="0" Grid.Column="0"/>
                             <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*" Grid.Row="1" Grid.Column="0">
                                 <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
-                                <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
-                                <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
+                                <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
+                                <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
                                 <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=ShapesProperties}">
                                     <ItemsControl.DataTemplates>
                                         <DataTemplate DataType="core:ShapeProperty">
                                             <Grid VerticalAlignment="Top">
-                                                <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}"/>
+                                                <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
                                             </Grid>
                                         </DataTemplate>
                                     </ItemsControl.DataTemplates>
@@ -678,7 +711,7 @@
                                     <ItemsControl.DataTemplates>
                                         <DataTemplate DataType="core:ShapeProperty">
                                             <Grid VerticalAlignment="Top">
-                                                <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}"/>
+                                                <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}" Classes="default"/>
                                             </Grid>
                                         </DataTemplate>
                                     </ItemsControl.DataTemplates>
@@ -699,7 +732,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XPath">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="Path" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -734,7 +767,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate DataType="core:XArcSegment">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="ArcSegment" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -758,7 +791,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XBezierSegment">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="BezierSegment" Classes="property">
                     <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -779,7 +812,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XLineSegment">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="LineSegment" Classes="property">
                     <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -794,7 +827,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XPolyBezierSegment">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="PolyBezierSegment" Classes="property">
                     <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -804,12 +837,12 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Points" Classes="property">
-                    <ListBox Items="{Binding Path=Points}"/>
+                    <ListBox Items="{Binding Path=Points}" Classes="default"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XPolyLineSegment">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="PolyLineSegment" Classes="property">
                     <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -819,12 +852,12 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Points" Classes="property">
-                    <ListBox Items="{Binding Path=Points}"/>
+                    <ListBox Items="{Binding Path=Points}" Classes="default"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XPolyQuadraticBezierSegment">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="PolyQuadraticBezierSegment" Classes="property">
                     <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -834,12 +867,12 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Points" Classes="property">
-                    <ListBox Items="{Binding Path=Points}"/>
+                    <ListBox Items="{Binding Path=Points}" Classes="default"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XQuadraticBezierSegment">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="QuadraticBezierSegment" Classes="property">
                     <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="IsStroked" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -857,7 +890,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XPathFigure">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="PathFigure" Classes="property">
                     <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="IsFilled" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -870,12 +903,12 @@
                     <ContentControl Content="{Binding Path=StartPoint, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Segments" Classes="property">
-                    <ListBox Items="{Binding Path=Segments}"/>
+                    <ListBox Items="{Binding Path=Segments}" Classes="default"/>
                 </TabItem>
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:XPathGeometry">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="PathGeometry" Classes="property">
                     <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="FillRule" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -885,25 +918,25 @@
                 <TabItem Header="Figures" Classes="property">
                     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
                         <!--
-                        <TreeView Items="{Binding Path=Figures}" Grid.Row="0" Grid.Column="0">
+                        <TreeView Items="{Binding Path=Figures}" Classes="default" Grid.Row="0" Grid.Column="0">
                             <TreeView.DataTemplates>
                                 <TreeDataTemplate DataType="core:XPathFigure" ItemsSource="{Binding Path=Segments}">
-                                    <TextBlock Text="Figure"/>
+                                    <TextBlock Text="Figure" Classes="default"/>
                                 </TreeDataTemplate>
                                 <DataTemplate DataType="core:XPathSegment">
-                                    <TextBlock Text="Segment"/>
+                                    <TextBlock Text="Segment" Classes="default"/>
                                 </DataTemplate>
                             </TreeView.DataTemplates>
                         </TreeView>
                         -->
-                        <ListBox Items="{Binding Path=Figures}" Grid.Row="1" Grid.Column="0"/>
+                        <ListBox Items="{Binding Path=Figures}" Grid.Row="1" Grid.Column="0" Classes="default"/>
                     </Grid>
                 </TabItem>
             </TabControl>
         </DataTemplate>
         <!-- project -->
         <DataTemplate DataType="core:Options">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="General" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="SnapToGrid" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -935,7 +968,7 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Advanced" Classes="property">
-                    <TabControl>
+                    <TabControl Classes="default">
                         <TabItem Header="PointShape" Classes="property">
                             <ScrollViewer>
                                 <ContentControl Content="{Binding Path=PointShape, Mode=TwoWay}"/>
@@ -966,13 +999,14 @@
                 <TreeView
                     Items="{Binding Path=Documents, Mode=TwoWay}"
                     SelectedItem="{Binding Path=Selected, Mode=TwoWay}"
-                    Grid.Row="1">
+                    Grid.Row="1"
+                    Classes="default">
                     <TreeView.DataTemplates>
                         <TreeDataTemplate DataType="core:Document" ItemsSource="{Binding Path=Containers, Mode=TwoWay}">
-                            <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" />
+                            <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
                         </TreeDataTemplate>
                         <DataTemplate DataType="core:Container">
-                            <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" />
+                            <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
                         </DataTemplate>
                     </TreeView.DataTemplates>
                 </TreeView>
@@ -983,7 +1017,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate DataType="core:Document">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="Document" Classes="property">
                     <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -991,10 +1025,10 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Containers" Classes="property">
-                    <ListBox Items="{Binding Path=Containers}">
+                    <ListBox Items="{Binding Path=Containers}" Classes="default">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:Container">
-                                <TextBlock Text="{Binding Path=Name}" />
+                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>
@@ -1002,7 +1036,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:Container">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="Container" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="Auto,*">
                         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -1011,7 +1045,7 @@
                         <TextBox Text="{Binding Path=Width, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                         <TextBlock Text="Height" Classes="left" Grid.Row="2" Grid.Column="0"/>
                         <TextBox Text="{Binding Path=Height, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                        <TabControl Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                        <TabControl Classes="default" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
                             <TabItem Header="Background" Classes="property">
                                 <ContentControl Content="{Binding Path=Background, Mode=TwoWay}"/>
                             </TabItem>
@@ -1021,13 +1055,13 @@
                             <TabItem Header="Properties" Classes="property">
                                 <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
                                     <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name"/>
-                                    <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
+                                    <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
                                     <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Properties}">
                                         <ItemsControl.DataTemplates>
                                             <DataTemplate DataType="core:ShapeProperty">
                                                 <Grid VerticalAlignment="Top">
-                                                    <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}"/>
+                                                    <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
                                                 </Grid>
                                             </DataTemplate>
                                         </ItemsControl.DataTemplates>
@@ -1036,7 +1070,7 @@
                                         <ItemsControl.DataTemplates>
                                             <DataTemplate DataType="core:ShapeProperty">
                                                 <Grid VerticalAlignment="Top">
-                                                    <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}"/>
+                                                    <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}" Classes="default"/>
                                                 </Grid>
                                             </DataTemplate>
                                         </ItemsControl.DataTemplates>
@@ -1055,12 +1089,13 @@
                         <ListBox
                             Items="{Binding Path=Layers}"
                             SelectedItem="{Binding Path=CurrentLayer, Mode=TwoWay}"
-                            Grid.Row="1">
+                            Grid.Row="1"
+                            Classes="default">
                             <ListBox.DataTemplates>
                                 <DataTemplate DataType="core:Layer">
                                     <Grid ColumnDefinitions="Auto,*">
-                                        <CheckBox Content="" IsChecked="{Binding Path=IsVisible, Mode=TwoWay}" Grid.Column="0"/>
-                                        <TextBlock Text="{Binding Path=Name}" Grid.Column="1"/>
+                                        <CheckBox Content="" IsChecked="{Binding Path=IsVisible, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
+                                        <TextBlock Text="{Binding Path=Name}" Classes="default" Grid.Column="1"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.DataTemplates>
@@ -1070,10 +1105,11 @@
                 <TabItem Header="Shapes" Classes="property">
                     <ListBox
                         Items="{Binding Path=CurrentLayer.Shapes}"
-                        SelectedItem="{Binding Path=CurrentShape, Mode=TwoWay}">
+                        SelectedItem="{Binding Path=CurrentShape, Mode=TwoWay}"
+                        Classes="default">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:BaseShape">
-                                <TextBlock Text="{Binding Path=Name}" />
+                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>
@@ -1081,7 +1117,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:StyleLibrary">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="StyleLibrary" Classes="property">
                     <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -1089,10 +1125,10 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Styles" Classes="property">
-                    <ListBox Items="{Binding Path=Styles}">
+                    <ListBox Items="{Binding Path=Styles}" Classes="default">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:ShapeStyle">
-                                <TextBlock Text="{Binding Path=Name}" />
+                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>
@@ -1100,7 +1136,7 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:GroupLibrary">
-            <TabControl>
+            <TabControl Classes="default">
                 <TabItem Header="GroupLibrary" Classes="property">
                     <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -1108,10 +1144,10 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Groups" Classes="property">
-                    <ListBox Items="{Binding Path=Groups}">
+                    <ListBox Items="{Binding Path=Groups}" Classes="default">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:XGroup">
-                                <TextBlock Text="{Binding Path=Name}" />
+                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>
@@ -1120,7 +1156,7 @@
         </DataTemplate>
     </UserControl.DataTemplates>
     <Grid RowDefinitions="50*,50*" ColumnDefinitions="170,Auto,*,Auto,240">
-        <TabControl Grid.Row="0" Grid.Column="0">
+        <TabControl Classes="default" Grid.Row="0" Grid.Column="0">
             <TabItem Header="Project" Classes="property">
                 <ContentControl Content="{Binding Path=Editor.Project, Mode=TwoWay}"/>
             </TabItem>
@@ -1128,24 +1164,32 @@
                 <ContentControl Content="{Binding Path=Editor.Project.Options, Mode=TwoWay}"/>
             </TabItem>
         </TabControl>
-        <TabControl Grid.Row="1" Grid.Column="0">
+        <TabControl Classes="default" Grid.Row="1" Grid.Column="0">
             <TabItem Header="Groups" Classes="property">
                 <Grid RowDefinitions="Auto,Auto,*">
                     <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
                         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                         <TextBox Text="{Binding Path=Editor.Project.CurrentGroupLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                     </Grid>
-                    <DropDown Items="{Binding Path=Editor.Project.GroupLibraries}" SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary, Mode=TwoWay}" Grid.Row="1">
+                    <DropDown 
+                        Items="{Binding Path=Editor.Project.GroupLibraries}" 
+                        SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary, Mode=TwoWay}" 
+                        Classes="default" 
+                        Grid.Row="1">
                         <DropDown.DataTemplates>
                             <DataTemplate DataType="core:GroupLibrary">
-                                <TextBlock Text="{Binding Path=Name}" />
+                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
                             </DataTemplate>
                         </DropDown.DataTemplates>
                     </DropDown>
-                    <ListBox Items="{Binding Path=Editor.Project.CurrentGroupLibrary.Groups}" SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary.CurrentGroup, Mode=TwoWay}" Grid.Row="2">
+                    <ListBox 
+                        Items="{Binding Path=Editor.Project.CurrentGroupLibrary.Groups}" 
+                        SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary.CurrentGroup, Mode=TwoWay}" 
+                        Grid.Row="2"
+                        Classes="default">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:XGroup">
-                                <TextBlock Text="{Binding Path=Name}" />
+                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>
@@ -1153,10 +1197,14 @@
             </TabItem>
             <TabItem Header="Database" Classes="property">
                 <Grid RowDefinitions="Auto,*">
-                    <DropDown Items="{Binding Path=Editor.Project.Databases}" SelectedItem="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}" Grid.Row="0">
+                    <DropDown 
+                        Items="{Binding Path=Editor.Project.Databases}" 
+                        SelectedItem="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}" 
+                        Grid.Row="0"
+                        Classes="default">
                         <DropDown.DataTemplates>
                             <DataTemplate DataType="core:Database">
-                                <TextBlock Text="{Binding Path=Name}" />
+                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
                             </DataTemplate>
                         </DropDown.DataTemplates>
                     </DropDown>
@@ -1165,19 +1213,27 @@
             </TabItem>
             <TabItem Header="Records" Classes="property">
                 <Grid RowDefinitions="Auto,*">
-                    <DropDown Items="{Binding Path=Editor.Project.Databases}" SelectedItem="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}" Grid.Row="0">
+                    <DropDown 
+                        Items="{Binding Path=Editor.Project.Databases}" 
+                        SelectedItem="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}" 
+                        Grid.Row="0"
+                        Classes="default">
                         <DropDown.DataTemplates>
                             <DataTemplate DataType="core:Database">
-                                <TextBlock Text="{Binding Path=Name}" />
+                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
                             </DataTemplate>
                         </DropDown.DataTemplates>
                     </DropDown>
-                    <ListBox Items="{Binding Path=Editor.Project.CurrentDatabase.Records}" SelectedItem="{Binding Path=Editor.Project.CurrentDatabase.CurrentRecord, Mode=TwoWay}" Grid.Row="1">
-                        <DropDown.DataTemplates>
+                    <ListBox 
+                        Items="{Binding Path=Editor.Project.CurrentDatabase.Records}" 
+                        SelectedItem="{Binding Path=Editor.Project.CurrentDatabase.CurrentRecord, Mode=TwoWay}" 
+                        Grid.Row="1"
+                        Classes="default">
+                        <ListBox.DataTemplates>
                             <DataTemplate DataType="core:Record">
-                                <TextBlock Text="{Binding Path=Id}" />
+                                <TextBlock Text="{Binding Path=Id}" Classes="default"/>
                             </DataTemplate>
-                        </DropDown.DataTemplates>
+                        </ListBox.DataTemplates>
                     </ListBox>
                 </Grid>
             </TabItem>
@@ -1187,27 +1243,32 @@
             <local:Drawable HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Grid>
         <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Width="10"/>
-        <TabControl Grid.Row="0" Grid.Column="4">
+        <TabControl Classes="default" Grid.Row="0" Grid.Column="4">
             <TabItem Header="Styles" Classes="property">
                 <Grid RowDefinitions="Auto,Auto,*">
                     <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
                         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                         <TextBox Text="{Binding Path=Editor.Project.CurrentStyleLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                     </Grid>
-                    <DropDown Items="{Binding Path=Editor.Project.StyleLibraries}" SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}" Grid.Row="1">
+                    <DropDown 
+                        Items="{Binding Path=Editor.Project.StyleLibraries}" 
+                        SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}" 
+                        Grid.Row="1"
+                        Classes="default">
                         <DropDown.DataTemplates>
                             <DataTemplate DataType="core:StyleLibrary">
-                                <TextBlock Text="{Binding Path=Name}" />
+                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
                             </DataTemplate>
                         </DropDown.DataTemplates>
                     </DropDown>
                     <ListBox 
                         Items="{Binding Path=Editor.Project.CurrentStyleLibrary.Styles}" 
                         SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}" 
-                        Grid.Row="2">
+                        Grid.Row="2"
+                        Classes="default">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:ShapeStyle">
-                                <TextBlock Text="{Binding Path=Name}" />
+                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>
@@ -1222,17 +1283,18 @@
                     <ListBox
                         Items="{Binding Path=Editor.Project.Templates}"
                         SelectedItem="{Binding Path=Editor.Project.CurrentTemplate, Mode=TwoWay}"
-                        Grid.Row="1">
+                        Grid.Row="1"
+                        Classes="default">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:Container">
-                                <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" />
+                                <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>
                 </Grid>
             </TabItem>
         </TabControl>
-        <TabControl Grid.Row="1" Grid.Column="4">
+        <TabControl Classes="default" Grid.Row="1" Grid.Column="4">
             <TabItem Header="Shape" Classes="property">
                 <ScrollViewer>
                     <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer.CurrentShape, Mode=TwoWay}"/>
