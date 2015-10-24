@@ -85,7 +85,20 @@ namespace Test.Uwp
                     async () => await OnSaveAs(),
                     () => _context.IsEditMode());
 
-            _context.Invalidate = this.UpdateAndInvalidate;
+            _context.Invalidate =
+                () =>
+                {
+                    InitializeLayers();
+
+                    if (_context.Editor.Project == null)
+                        return;
+
+                    var container = _context.Editor.Project.CurrentContainer;
+                    if (container == null)
+                        return;
+
+                    container.Invalidate();
+                };
 
             _state = new Core2D.ZoomState(_context);
 
@@ -134,7 +147,7 @@ namespace Test.Uwp
 
             canvas.SizeChanged += Canvas_SizeChanged;
 
-            SetContainerInvalidation();
+            InitializeLayers();
         }
 
         private void Canvas_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -148,7 +161,7 @@ namespace Test.Uwp
             }
         }
 
-        private void SetContainerInvalidation()
+        private void InitializeLayers()
         {
             if (_context.Editor.Project == null)
                 return;
@@ -183,20 +196,6 @@ namespace Test.Uwp
                         canvas.Invalidate();
                     };
             }
-        }
-
-        private void UpdateAndInvalidate()
-        {
-            SetContainerInvalidation();
-
-            if (_context.Editor.Project == null)
-                return;
-
-            var container = _context.Editor.Project.CurrentContainer;
-            if (_context == null)
-                return;
-
-            container.Invalidate();
         }
 
         private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
@@ -600,7 +599,7 @@ namespace Test.Uwp
         private void OnNew()
         {
             _context.Commands.NewCommand.Execute(null);
-            UpdateAndInvalidate();
+            _context.Invalidate();
         }
 
         private async Task OnOpen()
@@ -623,7 +622,7 @@ namespace Test.Uwp
 
                 await CacheImages(project);
 
-                UpdateAndInvalidate();
+                _context.Invalidate();
             }
         }
 
@@ -737,7 +736,7 @@ namespace Test.Uwp
 
         private void ContainersListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateAndInvalidate();
+            _context.Invalidate();
         }
     }
 }
