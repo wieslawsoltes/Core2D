@@ -316,6 +316,19 @@ namespace Core2D
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void InvalidateLayerObserver(object sender, InvalidateLayerEventArgs e)
+        {
+            if (_editor.Invalidate != null)
+            {
+                _editor.Invalidate();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LayerObserver(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Verbose("Layer: " + (sender is Layer ? (sender as Layer).Name : sender.GetType().ToString()) + ", Property: " + e.PropertyName);
@@ -832,7 +845,10 @@ namespace Core2D
                 Add(container.Properties);
             }
 
+            container.WorkingLayer.InvalidateLayer += InvalidateLayerObserver;
+            container.HelperLayer.InvalidateLayer += InvalidateLayerObserver;
             //Add(container.WorkingLayer);
+            //Add(container.HelperLayer);
         }
 
         /// <summary>
@@ -863,7 +879,10 @@ namespace Core2D
                 Remove(container.Properties);
             }
 
+            container.WorkingLayer.InvalidateLayer -= InvalidateLayerObserver;
+            container.HelperLayer.InvalidateLayer -= InvalidateLayerObserver;
             //Remove(container.WorkingLayer);
+            //Remove(container.HelperLayer);
         }
 
         /// <summary>
@@ -883,6 +902,8 @@ namespace Core2D
             {
                 Add(layer.Shapes);
             }
+
+            layer.InvalidateLayer += InvalidateLayerObserver;
         }
 
         /// <summary>
@@ -902,6 +923,8 @@ namespace Core2D
             {
                 Remove(layer.Shapes);
             }
+
+            layer.InvalidateLayer -= InvalidateLayerObserver;
         }
 
         /// <summary>
