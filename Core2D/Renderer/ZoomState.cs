@@ -162,10 +162,7 @@ namespace Core2D
                 PanY = OriginY - vy;
                 _context.Editor.Renderers[0].State.PanX = PanX;
                 _context.Editor.Renderers[0].State.PanY = PanY;
-                if (_context.Invalidate != null)
-                {
-                    _context.Invalidate();
-                }
+                _context.Editor.Invalidate();
             }
             else
             {
@@ -196,10 +193,7 @@ namespace Core2D
 
             ZoomTo(zoom, x, y);
 
-            if (_context.Invalidate != null)
-            {
-                _context.Invalidate();
-            }
+            _context.Editor.Invalidate();
         }
 
         /// <summary>
