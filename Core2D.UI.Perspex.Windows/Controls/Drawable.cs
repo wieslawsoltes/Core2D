@@ -43,11 +43,14 @@ namespace TestPerspex
                 {
                     InitializeLayers();
 
+                    if (context.Editor.Project == null)
+                        return;
+
                     var container = context.Editor.Project.CurrentContainer;
-                    if (container != null)
-                    {
-                        container.Invalidate();
-                    }
+                    if (container == null)
+                        return;
+
+                    container.Invalidate();
                 };
 
             _state = new ZoomState(context);
