@@ -26,6 +26,7 @@ namespace Core2D
         private bool _enableObserver;
         private Observer _observer;
         private History _history;
+        private Action _invalidate;
         private bool _cancelAvailable;
         private BaseShape _hover;
 
@@ -117,6 +118,15 @@ namespace Core2D
         {
             get { return _history; }
             set { Update(ref _history, value); }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public Action Invalidate
+        {
+            get { return _invalidate; }
+            set { Update(ref _invalidate, value); }
         }
 
         /// <summary>

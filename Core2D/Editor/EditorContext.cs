@@ -26,7 +26,6 @@ namespace Core2D
         private ITextFieldReader<Database> _csvReader;
         private ITextFieldWriter<Database> _csvWriter;
         private ImmutableArray<RecentProject> _recentProjects = ImmutableArray.Create<RecentProject>();
-        private Action _invalidate;
         private Container _containerToCopy = default(Container);
         private Document _documentToCopy = default(Document);
 
@@ -136,15 +135,6 @@ namespace Core2D
         {
             get { return _recentProjects; }
             set { Update(ref _recentProjects, value); }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public Action Invalidate
-        {
-            get { return _invalidate; }
-            set { Update(ref _invalidate, value); }
         }
 
         /// <summary>
@@ -1400,10 +1390,7 @@ namespace Core2D
             _editor.History.Reset();
             _editor.Unload();
             _editor.Load(_projectFactory.GetProject(), string.Empty);
-            if (_invalidate != null)
-            {
-                _invalidate();
-            }
+            _editor.Invalidate();
         }
 
         /// <summary>
