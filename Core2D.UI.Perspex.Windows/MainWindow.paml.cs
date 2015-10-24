@@ -316,10 +316,7 @@ namespace TestPerspex
                     {
                         var path = result.FirstOrDefault();
                         _context.Open(path);
-                        if (_context.Invalidate != null)
-                        {
-                            _context.Invalidate();
-                        }
+                        _context.Editor.Invalidate();
                     }
                 }
                 else
