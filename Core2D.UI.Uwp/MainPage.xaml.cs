@@ -32,6 +32,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Test.Uwp
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed partial class MainPage : Page, Core2D.IView
     {
         private Core2D.EditorContext _context;
@@ -40,6 +43,9 @@ namespace Test.Uwp
         private PointerPressType _pressed;
         private string _imagePath;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public MainPage()
         {
             InitializeComponent();
@@ -48,11 +54,17 @@ namespace Test.Uwp
             InitializePage();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Close()
         {
             this.Close();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitializeContext()
         {
             _renderer = new Win2dRenderer();
@@ -64,14 +76,14 @@ namespace Test.Uwp
                 ProjectFactory = new Core2D.ProjectFactory(),
                 TextClipboard = new TextClipboard(),
                 Serializer = new Core2D.NewtonsoftSerializer(),
-                //PdfWriter = new T2d.PdfWriter(),
-                //DxfWriter = new T2d.DxfWriter(),
-                //CsvReader = new T2d.CsvHelperReader(),
-                //CsvWriter = new T2d.CsvHelperWriter()
+                //PdfWriter = new Core2D.PdfWriter(),
+                //DxfWriter = new Core2D.DxfWriter(),
+                //CsvReader = new Core2D.CsvHelperReader(),
+                //CsvWriter = new Core2D.CsvHelperWriter()
             };
 
             _context.Renderers[0].State.EnableAutofit = true;
-            _context.InitializeEditor(null/*new T2d.TraceLog()*/);
+            _context.InitializeEditor(null/*new Core2D.TraceLog()*/);
             _context.Editor.Renderers[0].State.DrawShapeState.Flags = Core2D.ShapeStateFlags.Visible;
             _context.Editor.GetImageKey = async () => await Task.Run(() => _imagePath);
 
@@ -137,6 +149,9 @@ namespace Test.Uwp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitializeCanvas()
         {
             canvas.Draw += CanvasControl_Draw;
@@ -150,6 +165,11 @@ namespace Test.Uwp
             InitializeLayers();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Canvas_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (_context != null && _context.Editor.Project != null)
@@ -161,6 +181,9 @@ namespace Test.Uwp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitializeLayers()
         {
             if (_context.Editor.Project == null)
@@ -198,11 +221,21 @@ namespace Test.Uwp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             Draw(args.DrawingSession);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void CanvasControl_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             var p = e.GetCurrentPoint(sender as CanvasControl);
@@ -270,6 +303,11 @@ namespace Test.Uwp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CanvasControl_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
             var p = e.GetCurrentPoint(sender as CanvasControl);
@@ -348,6 +386,11 @@ namespace Test.Uwp
             _pressed = PointerPressType.None;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CanvasControl_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
             var p = e.GetCurrentPoint(sender as CanvasControl);
@@ -359,6 +402,11 @@ namespace Test.Uwp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CanvasControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
             var p = e.GetCurrentPoint(sender as CanvasControl);
@@ -371,6 +419,13 @@ namespace Test.Uwp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ds"></param>
+        /// <param name="c"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         private void DrawBackground(CanvasDrawingSession ds, Core2D.ArgbColor c, double width, double height)
         {
             var color = Color.FromArgb(
@@ -387,6 +442,10 @@ namespace Test.Uwp
                 color);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ds"></param>
         private void Draw(CanvasDrawingSession ds)
         {
             ds.Antialiasing = CanvasAntialiasing.Aliased;
@@ -457,6 +516,11 @@ namespace Test.Uwp
             Unloaded += (sender, e) => _context.Dispose();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private async void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs args)
         {
             var state = Window.Current.CoreWindow.GetKeyState(VirtualKey.Control);
@@ -596,12 +660,19 @@ namespace Test.Uwp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void OnNew()
         {
             _context.Commands.NewCommand.Execute(null);
             _context.Invalidate();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private async Task OnOpen()
         {
             var file = await GetOpenProjectPathAsync();
@@ -626,6 +697,10 @@ namespace Test.Uwp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private async Task OnSaveAs()
         {
             var file = await GetSaveProjectPathAsync(_context.Editor.Project.Name);
@@ -645,6 +720,11 @@ namespace Test.Uwp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         private async Task CacheImage(string key)
         {
             var bytes = _context.Renderers[0].State.ImageCache.GetImage(key);
@@ -662,6 +742,11 @@ namespace Test.Uwp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns></returns>
         private async Task CacheImages(Core2D.Project project)
         {
             var images = Core2D.Editor.GetAllShapes<Core2D.XImage>(project);
@@ -674,6 +759,11 @@ namespace Test.Uwp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         private async Task<string> GetImageKey(IStorageFile file)
         {
             var key = default(string);
@@ -687,6 +777,10 @@ namespace Test.Uwp
             return key;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private async Task<IStorageFile> GetImageKeyAsync()
         {
             var picker = new FileOpenPicker();
@@ -706,6 +800,10 @@ namespace Test.Uwp
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private async Task<IStorageFile> GetOpenProjectPathAsync()
         {
             var picker = new FileOpenPicker();
@@ -720,6 +818,11 @@ namespace Test.Uwp
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         private async Task<IStorageFile> GetSaveProjectPathAsync(string name)
         {
             var picker = new FileSavePicker();
@@ -734,6 +837,11 @@ namespace Test.Uwp
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ContainersListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _context.Invalidate();
