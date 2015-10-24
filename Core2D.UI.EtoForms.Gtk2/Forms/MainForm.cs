@@ -71,8 +71,7 @@ namespace TestEtoForms
             _context.InitializeEditor(new Core2D.TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
             _context.Editor.Renderers[0].State.DrawShapeState.Flags = Core2D.ShapeStateFlags.Visible;
             _context.Editor.GetImageKey = async () => await GetImageKey();
-
-            _context.Invalidate = this.UpdateAndInvalidate;
+            _context.Editor.Invalidate = () => _drawable.Invalidate();
 
             _state = new Core2D.ZoomState(_context);
 
@@ -214,22 +213,14 @@ namespace TestEtoForms
                             break;
                         case Keys.Z:
                             ResetZoom();
-                            if (_context.Invalidate != null)
-                            {
-                                _context.Invalidate();
-                            }
+                            _context.Editor.Invalidate();
                             break;
                         case Keys.X:
                             AutoFit();
-                            if (_context.Invalidate != null)
-                            {
-                                _context.Invalidate();
-                            }
+                            _context.Editor.Invalidate();
                             break;
                     }
                 };
-
-            SetContainerInvalidation();
         }
 
         /// <summary>
@@ -322,10 +313,7 @@ namespace TestEtoForms
             (s, e) =>
             {
                 _context.Commands.NewCommand.Execute(null);
-                if (_context.Invalidate != null)
-                {
-                    _context.Invalidate();
-                }
+                _context.Editor.Invalidate();
             };
 
             var openCommand = new Command()
@@ -345,10 +333,7 @@ namespace TestEtoForms
                 if (result == DialogResult.Ok)
                 {
                     _context.Open(dlg.FileName);
-                    if (_context.Invalidate != null)
-                    {
-                        _context.Invalidate();
-                    }
+                    _context.Editor.Invalidate();
                 }
             };
 
@@ -795,57 +780,6 @@ namespace TestEtoForms
             };
 
             #endregion
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void SetContainerInvalidation()
-        {
-            var container = _context.Editor.Project.CurrentContainer;
-            if (container == null)
-                return;
-
-            foreach (var layer in container.Layers)
-            {
-                layer.InvalidateLayer +=
-                    (s, e) =>
-                    {
-                        _drawable.Invalidate();
-                    };
-            }
-
-            if (container.WorkingLayer != null)
-            {
-                container.WorkingLayer.InvalidateLayer +=
-                    (s, e) =>
-                    {
-                        _drawable.Invalidate();
-                    };
-            }
-
-            if (container.HelperLayer != null)
-            {
-                container.HelperLayer.InvalidateLayer +=
-                    (s, e) =>
-                    {
-                        _drawable.Invalidate();
-                    };
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void UpdateAndInvalidate()
-        {
-            SetContainerInvalidation();
-
-            var container = _context.Editor.Project.CurrentContainer;
-            if (container == null)
-                return;
-
-            container.Invalidate();
         }
 
         /// <summary>

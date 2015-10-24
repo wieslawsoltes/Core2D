@@ -39,8 +39,6 @@ namespace TestWinForms
 
             InitializePanel();
 
-            SetContainerInvalidation();
-
             HandlePanelShorcutKeys();
             HandleMenuShortcutKeys();
             HandleFileDialogs();
@@ -90,8 +88,7 @@ namespace TestWinForms
             context.InitializeEditor(new TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
             context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
             context.Editor.GetImageKey = async () => await GetImageKey();
-
-            context.Invalidate = this.InvalidateContainer;
+            context.Editor.Invalidate = () => _drawable.Invalidate();
 
             DataContext = context;
         }
@@ -138,32 +135,14 @@ namespace TestWinForms
         /// <summary>
         /// 
         /// </summary>
-        private void InvalidateContainer()
-        {
-            SetContainerInvalidation();
-
-            var context = DataContext as EditorContext;
-            if (context == null || context.Editor.Project == null)
-            {
-                _drawable.Invalidate();
-            }
-            else
-            {
-                var container = context.Editor.Project.CurrentContainer;
-                if (container != null)
-                {
-                    container.Invalidate();
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         private void ResetZoom()
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             _drawable.ResetZoom();
-            InvalidateContainer();
+            context.Editor.Invalidate();
         }
 
         /// <summary>
@@ -171,8 +150,12 @@ namespace TestWinForms
         /// </summary>
         private void AutoFit()
         {
+            var context = DataContext as EditorContext;
+            if (context == null)
+                return;
+
             _drawable.AutoFit();
-            InvalidateContainer();
+            context.Editor.Invalidate();
         }
 
         /// <summary>
@@ -189,7 +172,7 @@ namespace TestWinForms
                 string path = openFileDialog1.FileName;
                 int filterIndex = openFileDialog1.FilterIndex;
                 context.Open(path);
-                InvalidateContainer();
+                context.Editor.Invalidate();
             };
 
             this.saveFileDialog1.FileOk += (sender, e) =>
@@ -225,35 +208,6 @@ namespace TestWinForms
                         break;
                 }
             };
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void SetContainerInvalidation()
-        {
-            var context = DataContext as EditorContext;
-            if (context == null || context.Editor.Project == null)
-                return;
-
-            var container = context.Editor.Project.CurrentContainer;
-            if (container == null)
-                return;
-
-            foreach (var layer in container.Layers)
-            {
-                layer.InvalidateLayer += (s, e) => _drawable.Invalidate();
-            }
-
-            if (container.WorkingLayer != null)
-            {
-                container.WorkingLayer.InvalidateLayer += (s, e) => _drawable.Invalidate();
-            }
-
-            if (container.HelperLayer != null)
-            {
-                container.HelperLayer.InvalidateLayer += (s, e) => _drawable.Invalidate();
-            }
         }
 
         /// <summary>
@@ -425,7 +379,7 @@ namespace TestWinForms
                 return;
 
             context.Commands.NewCommand.Execute(null);
-            InvalidateContainer();
+            context.Editor.Invalidate();
         }
 
         /// <summary>
@@ -448,7 +402,7 @@ namespace TestWinForms
                 return;
 
             context.Commands.CloseCommand.Execute(null);
-            InvalidateContainer();
+            context.Editor.Invalidate();
         }
 
         /// <summary>

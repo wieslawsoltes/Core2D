@@ -86,6 +86,7 @@ namespace Test.Uwp
             _context.InitializeEditor(null/*new Core2D.TraceLog()*/);
             _context.Editor.Renderers[0].State.DrawShapeState.Flags = Core2D.ShapeStateFlags.Visible;
             _context.Editor.GetImageKey = async () => await Task.Run(() => _imagePath);
+            _context.Editor.Invalidate = () => canvas.Invalidate();
 
             _context.Commands.OpenCommand =
                 Core2D.Command<object>.Create(
@@ -96,21 +97,6 @@ namespace Test.Uwp
                 Core2D.Command.Create(
                     async () => await OnSaveAs(),
                     () => _context.IsEditMode());
-
-            _context.Invalidate =
-                () =>
-                {
-                    InitializeLayers();
-
-                    if (_context.Editor.Project == null)
-                        return;
-
-                    var container = _context.Editor.Project.CurrentContainer;
-                    if (container == null)
-                        return;
-
-                    container.Invalidate();
-                };
 
             _state = new Core2D.ZoomState(_context);
 
@@ -161,8 +147,6 @@ namespace Test.Uwp
             canvas.PointerWheelChanged += CanvasControl_PointerWheelChanged;
 
             canvas.SizeChanged += Canvas_SizeChanged;
-
-            InitializeLayers();
         }
 
         /// <summary>
@@ -178,46 +162,6 @@ namespace Test.Uwp
                 {
                     AutoFit();
                 }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void InitializeLayers()
-        {
-            if (_context.Editor.Project == null)
-                return;
-
-            var container = _context.Editor.Project.CurrentContainer;
-            if (container == null)
-                return;
-
-            foreach (var layer in container.Layers)
-            {
-                layer.InvalidateLayer +=
-                    (s, e) =>
-                    {
-                        canvas.Invalidate();
-                    };
-            }
-
-            if (container.WorkingLayer != null)
-            {
-                container.WorkingLayer.InvalidateLayer +=
-                    (s, e) =>
-                    {
-                        canvas.Invalidate();
-                    };
-            }
-
-            if (container.HelperLayer != null)
-            {
-                container.HelperLayer.InvalidateLayer +=
-                    (s, e) =>
-                    {
-                        canvas.Invalidate();
-                    };
             }
         }
 
@@ -460,6 +404,8 @@ namespace Test.Uwp
 
             var renderer = _context.Editor.Renderers[0];
             var container = _context.Editor.Project.CurrentContainer;
+            if (container == null)
+                return;
 
             if (container.Template != null)
             {
@@ -641,17 +587,11 @@ namespace Test.Uwp
                         break;
                     case VirtualKey.Z:
                         ResetZoom();
-                        if (_context.Invalidate != null)
-                        {
-                            _context.Invalidate();
-                        }
+                        _context.Editor.Invalidate();
                         break;
                     case VirtualKey.X:
                         AutoFit();
-                        if (_context.Invalidate != null)
-                        {
-                            _context.Invalidate();
-                        }
+                        _context.Editor.Invalidate();
                         break;
                     case VirtualKey.Delete:
                         _context.Commands.DeleteCommand.Execute(null);
@@ -666,7 +606,7 @@ namespace Test.Uwp
         private void OnNew()
         {
             _context.Commands.NewCommand.Execute(null);
-            _context.Invalidate();
+            _context.Editor.Invalidate();
         }
 
         /// <summary>
@@ -693,7 +633,7 @@ namespace Test.Uwp
 
                 await CacheImages(project);
 
-                _context.Invalidate();
+                _context.Editor.Invalidate();
             }
         }
 
@@ -844,7 +784,7 @@ namespace Test.Uwp
         /// <param name="e"></param>
         private void ContainersListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _context.Invalidate();
+            _context.Editor.Invalidate();
         }
     }
 }

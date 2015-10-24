@@ -38,20 +38,7 @@ namespace TestPerspex
             if (context == null)
                 return;
 
-            context.Invalidate =
-                () =>
-                {
-                    InitializeLayers();
-
-                    if (context.Editor.Project == null)
-                        return;
-
-                    var container = context.Editor.Project.CurrentContainer;
-                    if (container == null)
-                        return;
-
-                    container.Invalidate();
-                };
+            context.Editor.Invalidate = () => this.InvalidateVisual();
 
             _state = new ZoomState(context);
 
@@ -65,10 +52,7 @@ namespace TestPerspex
                     () =>
                     {
                         ResetZoom(this.Bounds.Width, this.Bounds.Height);
-                        if (context.Invalidate != null)
-                        {
-                            context.Invalidate();
-                        }
+                        context.Editor.Invalidate();
                     },
                     () => true);
 
@@ -77,10 +61,7 @@ namespace TestPerspex
                     () =>
                     {
                         AutoFit(this.Bounds.Width, this.Bounds.Height);
-                        if (context.Invalidate != null)
-                        {
-                            context.Invalidate();
-                        }
+                        context.Editor.Invalidate();
                     },
                     () => true);
 
@@ -196,7 +177,7 @@ namespace TestPerspex
                 container.Width,
                 container.Height);
 
-            context.Invalidate();
+            context.Editor.Invalidate();
         }
 
         /// <summary>
@@ -225,50 +206,7 @@ namespace TestPerspex
                 container.Width,
                 container.Height);
 
-            context.Invalidate();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void InitializeLayers()
-        {
-            var context = this.DataContext as EditorContext;
-            if (context == null
-                || context.Editor == null
-                || context.Editor.Project == null)
-                return;
-
-            var container = context.Editor.Project.CurrentContainer;
-            if (container == null)
-                return;
-
-            foreach (var layer in container.Layers)
-            {
-                layer.InvalidateLayer +=
-                    (s, e) =>
-                    {
-                        this.InvalidateVisual();
-                    };
-            }
-
-            if (container.WorkingLayer != null)
-            {
-                container.WorkingLayer.InvalidateLayer +=
-                    (s, e) =>
-                    {
-                        this.InvalidateVisual();
-                    };
-            }
-
-            if (container.HelperLayer != null)
-            {
-                container.HelperLayer.InvalidateLayer +=
-                    (s, e) =>
-                    {
-                        this.InvalidateVisual();
-                    };
-            }
+            context.Editor.Invalidate();
         }
 
         /// <summary>
@@ -377,7 +315,6 @@ namespace TestPerspex
             if (_state == null)
             {
                 InitializeDrawable();
-                InitializeLayers();
             }
 
             Draw(context);
