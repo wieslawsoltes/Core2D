@@ -57,13 +57,13 @@ namespace TestPerspex
                 Print(ex);
             }
         }
-        
+
         static void Print(Exception ex)
         {
             System.Diagnostics.Debug.Print(ex.GetType().ToString());
             System.Diagnostics.Debug.Print(ex.Message);
             System.Diagnostics.Debug.Print(ex.StackTrace);
-            
+
             if (ex.InnerException != null)
             {
                 System.Diagnostics.Debug.Print("Inner exception:");
