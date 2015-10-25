@@ -14,7 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Core2D;
 
-namespace Test.Controls
+namespace Core2D.UI.Wpf.Controls
 {
     /// <summary>
     /// 

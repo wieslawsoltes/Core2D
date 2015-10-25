@@ -18,9 +18,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Xceed.Wpf.AvalonDock.Layout;
 using Xceed.Wpf.AvalonDock.Layout.Serialization;
-using Core2D;
+using Renderer.Wpf;
+using Core2D.UI.Wpf.Util;
 
-namespace Test.Windows
+namespace Core2D.UI.Wpf.Windows
 {
     /// <summary>
     /// 

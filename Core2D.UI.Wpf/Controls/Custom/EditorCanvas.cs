@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Core2D;
 
-namespace Test.Controls
+namespace Core2D.UI.Wpf.Controls
 {
     /// <summary>
     /// 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using Core2D;
 
-namespace Test.Converters
+namespace Core2D.UI.Wpf.Converters
 {
     /// <summary>
     /// 

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace Test.Converters
+namespace Core2D.UI.Wpf.Converters
 {
     /// <summary>
     /// 

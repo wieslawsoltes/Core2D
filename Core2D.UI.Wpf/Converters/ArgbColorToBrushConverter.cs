@@ -10,7 +10,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using Core2D;
 
-namespace Test.Converters
+namespace Core2D.UI.Wpf.Converters
 {
     /// <summary>
     /// 

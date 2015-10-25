@@ -4,7 +4,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Test.PanAndZoom
+namespace Core2D.UI.Wpf.PanAndZoom
 {
     /// <summary>
     /// 

@@ -5,8 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:core="clr-namespace:Core2D;assembly=Core2D"
-    xmlns:converters="clr-namespace:Test.Converters"
-    xmlns:controls="clr-namespace:Test.Controls"
+    xmlns:converters="clr-namespace:Core2D.UI.Wpf.Converters"
+    xmlns:controls="clr-namespace:Core2D.UI.Wpf.Controls"
     xmlns:p="clr-namespace:Core2D.UI.Wpf.Properties">
     <!-- converters -->
     <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>

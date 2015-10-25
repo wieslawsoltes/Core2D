@@ -1,13 +1,13 @@
 <!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<Window x:Class="Test.Windows.MainWindow"
+<Window x:Class="Core2D.UI.Wpf.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:Test"
+        xmlns:local="clr-namespace:Core2D.UI.Wpf"
         xmlns:core="clr-namespace:Core2D;assembly=Core2D"
-        xmlns:converters="clr-namespace:Test.Converters"
-        xmlns:controls="clr-namespace:Test.Controls"
-        xmlns:paz="clr-namespace:Test.PanAndZoom"
+        xmlns:converters="clr-namespace:Core2D.UI.Wpf.Converters"
+        xmlns:controls="clr-namespace:Core2D.UI.Wpf.Controls"
+        xmlns:paz="clr-namespace:Core2D.UI.Wpf.PanAndZoom"
         xmlns:ad="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:p="clr-namespace:Core2D.UI.Wpf.Properties"
         Height="724" Width="1324"

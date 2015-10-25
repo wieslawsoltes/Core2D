@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 
-namespace Test.Controls
+namespace Core2D.UI.Wpf.Controls
 {
     /// <summary>
     /// 
