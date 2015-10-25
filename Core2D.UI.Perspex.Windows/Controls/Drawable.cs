@@ -18,9 +18,8 @@ using Perspex.Input;
 using Perspex.Layout;
 using Perspex.Media;
 using Perspex.Media.Imaging;
-using Core2D;
 
-namespace TestPerspex
+namespace Core2D.UI.Perspex.Windows
 {
     /// <summary>
     /// 

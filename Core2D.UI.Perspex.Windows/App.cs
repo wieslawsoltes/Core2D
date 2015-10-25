@@ -10,7 +10,7 @@ using Perspex.Controls;
 using Perspex.Diagnostics;
 using Perspex.Themes.Default;
 
-namespace TestPerspex
+namespace Core2D.UI.Perspex.Windows
 {
     /// <summary>
     /// 

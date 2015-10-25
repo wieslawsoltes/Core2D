@@ -10,9 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
-using Core2D;
+using Dependencies;
 
-namespace TestPerspex
+namespace Core2D.UI.Perspex.Windows
 {
     /// <summary>
     /// 

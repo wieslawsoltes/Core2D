@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
 
-namespace TestPerspex
+namespace Core2D.UI.Perspex.Windows
 {
     /// <summary>
     /// 
