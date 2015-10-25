@@ -1340,15 +1340,20 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Templates" Classes="property">
-                    <Grid RowDefinitions="Auto,*">
-                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
+                    <Grid RowDefinitions="Auto,Auto,*">
+                        <Menu Grid.Row="0" HorizontalAlignment="Right">
+                            <MenuItem Header="edit" Command="{Binding Path=Commands.EditTemplateCommand}"/>
+                            <MenuItem Header="+" Command="{Binding Path=Commands.AddTemplateCommand}"/>
+                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveTemplateCommand}"/>
+                        </Menu>
+                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
                             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=Editor.Project.CurrentTemplate.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                         </Grid>
                         <ListBox
                             Items="{Binding Path=Editor.Project.Templates}"
                             SelectedItem="{Binding Path=Editor.Project.CurrentTemplate, Mode=TwoWay}"
-                            Grid.Row="1"
+                            Grid.Row="2"
                             Classes="default">
                             <ListBox.DataTemplates>
                                 <DataTemplate DataType="core:Container">
