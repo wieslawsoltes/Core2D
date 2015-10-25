@@ -396,16 +396,15 @@ namespace Test.Uwp
             ds.TextAntialiasing = CanvasTextAntialiasing.Auto;
             ds.Clear(Colors.Transparent);
 
-            var t = Matrix3x2.CreateTranslation((float)_state.PanX, (float)_state.PanY);
-            var s = Matrix3x2.CreateScale((float)_state.Zoom);
-
-            var old = ds.Transform;
-            ds.Transform = s * t;
-
             var renderer = _context.Editor.Renderers[0];
             var container = _context.Editor.Project.CurrentContainer;
             if (container == null)
                 return;
+
+            var t = Matrix3x2.CreateTranslation((float)_state.PanX, (float)_state.PanY);
+            var s = Matrix3x2.CreateScale((float)_state.Zoom);
+            var old = ds.Transform;
+            ds.Transform = s * t;
 
             if (container.Template != null)
             {
