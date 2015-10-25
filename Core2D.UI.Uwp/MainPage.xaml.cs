@@ -75,15 +75,15 @@ namespace Test.Uwp
                 Renderers = new Core2D.IRenderer[] { _renderer },
                 ProjectFactory = new Core2D.ProjectFactory(),
                 TextClipboard = new TextClipboard(),
-                Serializer = new Core2D.NewtonsoftSerializer(),
-                //PdfWriter = new Core2D.PdfWriter(),
-                //DxfWriter = new Core2D.DxfWriter(),
-                //CsvReader = new Core2D.CsvHelperReader(),
-                //CsvWriter = new Core2D.CsvHelperWriter()
+                Serializer = new Dependencies.NewtonsoftSerializer(),
+                //PdfWriter = new Dependencies.PdfWriter(),
+                //DxfWriter = new Dependencies.DxfWriter(),
+                //CsvReader = new Dependencies.CsvHelperReader(),
+                //CsvWriter = new Dependencies.CsvHelperWriter()
             };
 
             _context.Renderers[0].State.EnableAutofit = true;
-            _context.InitializeEditor(null/*new Core2D.TraceLog()*/);
+            _context.InitializeEditor(null/*new Dependencies.TraceLog()*/);
             _context.Editor.Renderers[0].State.DrawShapeState.Flags = Core2D.ShapeStateFlags.Visible;
             _context.Editor.GetImageKey = async () => await Task.Run(() => _imagePath);
             _context.Editor.Invalidate = () => canvas.Invalidate();
