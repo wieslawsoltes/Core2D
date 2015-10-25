@@ -1203,8 +1203,12 @@
         <Border Classes="left" Grid.Row="1" Grid.Column="0">
             <TabControl Classes="default">
                 <TabItem Header="Groups" Classes="property">
-                    <Grid RowDefinitions="Auto,Auto,*">
-                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
+                        <Menu Grid.Row="0" HorizontalAlignment="Right">
+                            <MenuItem Header="+" Command="{Binding Path=Commands.AddGroupLibraryCommand}"/>
+                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveGroupLibraryCommand}"/>
+                        </Menu>
+                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
                             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=Editor.Project.CurrentGroupLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                         </Grid>
@@ -1212,17 +1216,21 @@
                             Items="{Binding Path=Editor.Project.GroupLibraries}"
                             SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary, Mode=TwoWay}"
                             Classes="default"
-                            Grid.Row="1">
+                            Grid.Row="2">
                             <DropDown.DataTemplates>
                                 <DataTemplate DataType="core:GroupLibrary">
                                     <TextBlock Text="{Binding Path=Name}" Classes="default"/>
                                 </DataTemplate>
                             </DropDown.DataTemplates>
                         </DropDown>
+                        <Menu Grid.Row="3" HorizontalAlignment="Right">
+                            <MenuItem Header="+" Command="{Binding Path=Commands.AddGroupCommand}"/>
+                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveGroupCommand}"/>
+                        </Menu>
                         <ListBox
                             Items="{Binding Path=Editor.Project.CurrentGroupLibrary.Groups}"
                             SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary.CurrentGroup, Mode=TwoWay}"
-                            Grid.Row="2"
+                            Grid.Row="4"
                             Classes="default">
                             <ListBox.DataTemplates>
                                 <DataTemplate DataType="core:XGroup">
