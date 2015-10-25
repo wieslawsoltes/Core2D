@@ -12,10 +12,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Core2D;
 using WPF = System.Windows;
+using Core2D;
+using Renderer.WinForms;
 
-namespace Core2D
+namespace FileWriter.Emf
 {
     /// <summary>
     /// 
