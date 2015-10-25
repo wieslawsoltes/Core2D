@@ -1302,15 +1302,19 @@
         <Border Classes="right" Grid.Row="0" Grid.Column="4">
             <TabControl Classes="default">
                 <TabItem Header="Styles" Classes="property">
-                    <Grid RowDefinitions="Auto,Auto,*">
-                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
+                        <Menu Grid.Row="0" HorizontalAlignment="Right">
+                            <MenuItem Header="+" Command="{Binding Path=Commands.AddStyleLibraryCommand}"/>
+                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveStyleLibraryCommand}"/>
+                        </Menu>
+                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
                             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                             <TextBox Text="{Binding Path=Editor.Project.CurrentStyleLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                         </Grid>
                         <DropDown
                             Items="{Binding Path=Editor.Project.StyleLibraries}"
                             SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}"
-                            Grid.Row="1"
+                            Grid.Row="2"
                             Classes="default">
                             <DropDown.DataTemplates>
                                 <DataTemplate DataType="core:StyleLibrary">
@@ -1318,10 +1322,14 @@
                                 </DataTemplate>
                             </DropDown.DataTemplates>
                         </DropDown>
+                        <Menu Grid.Row="3" HorizontalAlignment="Right">
+                            <MenuItem Header="+" Command="{Binding Path=Commands.AddStyleCommand}"/>
+                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveStyleCommand}"/>
+                        </Menu>
                         <ListBox
                             Items="{Binding Path=Editor.Project.CurrentStyleLibrary.Styles}"
                             SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}"
-                            Grid.Row="2"
+                            Grid.Row="4"
                             Classes="default">
                             <ListBox.DataTemplates>
                                 <DataTemplate DataType="core:ShapeStyle">
