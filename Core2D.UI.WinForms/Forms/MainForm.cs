@@ -11,7 +11,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Core2D.UI.WinForms.Util;
-using Renderer.WinForms;
+using Dependencies;
 
 namespace Core2D.UI.WinForms
 {
