@@ -3,7 +3,7 @@
 <UserControl xmlns="https://github.com/perspex"
              xmlns:local="clr-namespace:TestPerspex;assembly=Core2D.UI.Perspex.Windows"
              xmlns:core="clr-namespace:Core2D;assembly=Core2D">
-   <Menu>
+    <Menu>
         <MenuItem Header="_File">
             <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Binding Path=Commands.NewCommand}"/>
             <!--<Separator/>-->

@@ -16,7 +16,7 @@
     <Grid ColumnDefinitions="50*,50*">
         <StackPanel Grid.Column="0" HorizontalAlignment="Left" Orientation="Horizontal" Margin="2">
             <!-- TODO -->
-        </StackPanel>  
+        </StackPanel>
         <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal" Margin="2">
             <CheckBox Classes="default" Content="Stroked" IsChecked="{Binding Editor.Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
             <CheckBox Classes="default" Content="Filled" IsChecked="{Binding Editor.Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
