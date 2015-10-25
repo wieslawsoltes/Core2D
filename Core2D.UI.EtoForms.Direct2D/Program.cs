@@ -6,9 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Eto.Forms;
-using TestEtoForms;
 
-namespace TestDirect2D
+namespace Core2D.UI.EtoForms
 {
     class Program
     {

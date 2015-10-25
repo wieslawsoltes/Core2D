@@ -1,14 +1,13 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Eto.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestEtoForms;
+using Eto.Forms;
 
-namespace Core2D.UI.EtoForms.Gtk2
+namespace Core2D.UI.EtoForms
 {
     class Program
     {

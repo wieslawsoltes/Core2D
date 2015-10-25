@@ -12,8 +12,9 @@ using System.Threading.Tasks;
 using Eto;
 using Eto.Drawing;
 using Eto.Forms;
+using Dependencies;
 
-namespace TestEtoForms
+namespace Core2D.UI.EtoForms
 {
     /// <summary>
     /// 
@@ -60,15 +61,15 @@ namespace TestEtoForms
                 Renderers = new Core2D.IRenderer[] { new EtoRenderer(72.0 / 96.0) },
                 ProjectFactory = new Core2D.ProjectFactory(),
                 TextClipboard = new TextClipboard(),
-                Serializer = new Core2D.NewtonsoftSerializer(),
-                PdfWriter = new Core2D.PdfWriter(),
-                DxfWriter = new Core2D.DxfWriter(),
-                CsvReader = new Core2D.CsvHelperReader(),
-                CsvWriter = new Core2D.CsvHelperWriter()
+                Serializer = new NewtonsoftSerializer(),
+                PdfWriter = new PdfWriter(),
+                DxfWriter = new DxfWriter(),
+                CsvReader = new CsvHelperReader(),
+                CsvWriter = new CsvHelperWriter()
             };
 
             _context.Renderers[0].State.EnableAutofit = true;
-            _context.InitializeEditor(new Core2D.TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
+            _context.InitializeEditor(new TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
             _context.Editor.Renderers[0].State.DrawShapeState.Flags = Core2D.ShapeStateFlags.Visible;
             _context.Editor.GetImageKey = async () => await GetImageKey();
             _context.Editor.Invalidate = () => _drawable.Invalidate();
@@ -303,7 +304,7 @@ namespace TestEtoForms
         {
             #region File
 
-            var newCommand = new Command()
+            var newCommand = new Eto.Forms.Command()
             {
                 MenuText = "&New",
                 Shortcut = Application.Instance.CommonModifier | Keys.N
@@ -316,7 +317,7 @@ namespace TestEtoForms
                 _context.Editor.Invalidate();
             };
 
-            var openCommand = new Command()
+            var openCommand = new Eto.Forms.Command()
             {
                 MenuText = "&Open...",
                 Shortcut = Application.Instance.CommonModifier | Keys.O
@@ -337,7 +338,7 @@ namespace TestEtoForms
                 }
             };
 
-            var saveAsCommand = new Command()
+            var saveAsCommand = new Eto.Forms.Command()
             {
                 MenuText = "Save &As...",
                 Shortcut = Application.Instance.CommonModifier | Keys.S
@@ -357,7 +358,7 @@ namespace TestEtoForms
                 }
             };
 
-            var exportCommand = new Command()
+            var exportCommand = new Eto.Forms.Command()
             {
                 MenuText = "&Export...",
                 Shortcut = Application.Instance.CommonModifier | Keys.E
@@ -393,7 +394,7 @@ namespace TestEtoForms
                 }
             };
 
-            var exitCommand = new Command()
+            var exitCommand = new Eto.Forms.Command()
             {
                 MenuText = "E&xit",
                 Shortcut = Application.Instance.AlternateModifier | Keys.F4
@@ -409,7 +410,7 @@ namespace TestEtoForms
 
             #region Tool
 
-            var noneTool = new Command()
+            var noneTool = new Eto.Forms.Command()
             {
                 MenuText = "&None",
                 Shortcut = Keys.N
@@ -421,7 +422,7 @@ namespace TestEtoForms
                 _context.Commands.ToolNoneCommand.Execute(null);
             };
 
-            var selectionTool = new Command()
+            var selectionTool = new Eto.Forms.Command()
             {
                 MenuText = "&Selection",
                 Shortcut = Keys.S
@@ -433,7 +434,7 @@ namespace TestEtoForms
                 _context.Commands.ToolSelectionCommand.Execute(null);
             };
 
-            var pointTool = new Command()
+            var pointTool = new Eto.Forms.Command()
             {
                 MenuText = "&Point",
                 Shortcut = Keys.P
@@ -445,7 +446,7 @@ namespace TestEtoForms
                 _context.Commands.ToolPointCommand.Execute(null);
             };
 
-            var lineTool = new Command()
+            var lineTool = new Eto.Forms.Command()
             {
                 MenuText = "&Line",
                 Shortcut = Keys.L
@@ -457,7 +458,7 @@ namespace TestEtoForms
                 _context.Commands.ToolLineCommand.Execute(null);
             };
 
-            var arcTool = new Command()
+            var arcTool = new Eto.Forms.Command()
             {
                 MenuText = "&Arc",
                 Shortcut = Keys.A
@@ -469,7 +470,7 @@ namespace TestEtoForms
                 _context.Commands.ToolArcCommand.Execute(null);
             };
 
-            var bezierTool = new Command()
+            var bezierTool = new Eto.Forms.Command()
             {
                 MenuText = "&Bezier",
                 Shortcut = Keys.B
@@ -481,7 +482,7 @@ namespace TestEtoForms
                 _context.Commands.ToolBezierCommand.Execute(null);
             };
 
-            var qbezierTool = new Command()
+            var qbezierTool = new Eto.Forms.Command()
             {
                 MenuText = "&QBezier",
                 Shortcut = Keys.Q
@@ -493,7 +494,7 @@ namespace TestEtoForms
                 _context.Commands.ToolQBezierCommand.Execute(null);
             };
 
-            var pathTool = new Command()
+            var pathTool = new Eto.Forms.Command()
             {
                 MenuText = "Pat&h",
                 Shortcut = Keys.H
@@ -505,7 +506,7 @@ namespace TestEtoForms
                 _context.Commands.ToolPathCommand.Execute(null);
             };
 
-            var rectangleTool = new Command()
+            var rectangleTool = new Eto.Forms.Command()
             {
                 MenuText = "&Rectangle",
                 Shortcut = Keys.R
@@ -517,7 +518,7 @@ namespace TestEtoForms
                 _context.Commands.ToolRectangleCommand.Execute(null);
             };
 
-            var ellipseTool = new Command()
+            var ellipseTool = new Eto.Forms.Command()
             {
                 MenuText = "&Ellipse",
                 Shortcut = Keys.E
@@ -529,7 +530,7 @@ namespace TestEtoForms
                 _context.Commands.ToolEllipseCommand.Execute(null);
             };
 
-            var textTool = new Command()
+            var textTool = new Eto.Forms.Command()
             {
                 MenuText = "&Text",
                 Shortcut = Keys.T
@@ -541,7 +542,7 @@ namespace TestEtoForms
                 _context.Commands.ToolTextCommand.Execute(null);
             };
 
-            var imageTool = new Command()
+            var imageTool = new Eto.Forms.Command()
             {
                 MenuText = "&Image",
                 Shortcut = Keys.I
@@ -557,7 +558,7 @@ namespace TestEtoForms
 
             #region Edit
 
-            var undoCommand = new Command()
+            var undoCommand = new Eto.Forms.Command()
             {
                 MenuText = "&Undo",
                 Shortcut = Application.Instance.CommonModifier | Keys.Z
@@ -569,7 +570,7 @@ namespace TestEtoForms
                 _context.Commands.UndoCommand.Execute(null);
             };
 
-            var redoCommand = new Command()
+            var redoCommand = new Eto.Forms.Command()
             {
                 MenuText = "&Redo",
                 Shortcut = Application.Instance.CommonModifier | Keys.Y
@@ -581,7 +582,7 @@ namespace TestEtoForms
                 _context.Commands.RedoCommand.Execute(null);
             };
 
-            var cutCommand = new Command()
+            var cutCommand = new Eto.Forms.Command()
             {
                 MenuText = "Cu&t",
                 Shortcut = Application.Instance.CommonModifier | Keys.X
@@ -593,7 +594,7 @@ namespace TestEtoForms
                 _context.Commands.CutCommand.Execute(null);
             };
 
-            var copyCommand = new Command()
+            var copyCommand = new Eto.Forms.Command()
             {
                 MenuText = "&Copy",
                 Shortcut = Application.Instance.CommonModifier | Keys.C
@@ -605,7 +606,7 @@ namespace TestEtoForms
                 _context.Commands.CopyCommand.Execute(null);
             };
 
-            var pasteCommand = new Command()
+            var pasteCommand = new Eto.Forms.Command()
             {
                 MenuText = "&Paste",
                 Shortcut = Application.Instance.CommonModifier | Keys.V
@@ -617,7 +618,7 @@ namespace TestEtoForms
                 _context.Commands.PasteCommand.Execute(null);
             };
 
-            var deleteCommand = new Command()
+            var deleteCommand = new Eto.Forms.Command()
             {
                 MenuText = "&Delete",
                 Shortcut = Keys.Delete
@@ -629,7 +630,7 @@ namespace TestEtoForms
                 _context.Commands.DeleteCommand.Execute(null);
             };
 
-            var selectAllCommand = new Command()
+            var selectAllCommand = new Eto.Forms.Command()
             {
                 MenuText = "Select &All",
                 Shortcut = Application.Instance.CommonModifier | Keys.A
@@ -641,7 +642,7 @@ namespace TestEtoForms
                 _context.Commands.SelectAllCommand.Execute(null);
             };
 
-            var deSelectAllCommand = new Command()
+            var deSelectAllCommand = new Eto.Forms.Command()
             {
                 MenuText = "De&select All",
                 Shortcut = Keys.Escape
@@ -653,7 +654,7 @@ namespace TestEtoForms
                 _context.Commands.DeselectAllCommand.Execute(null);
             };
 
-            var clearAllCommand = new Command()
+            var clearAllCommand = new Eto.Forms.Command()
             {
                 MenuText = "Cl&ear All"
             };
@@ -664,7 +665,7 @@ namespace TestEtoForms
                 _context.Commands.ClearAllCommand.Execute(null);
             };
 
-            var groupCommand = new Command()
+            var groupCommand = new Eto.Forms.Command()
             {
                 MenuText = "&Group",
                 Shortcut = Application.Instance.CommonModifier | Keys.G
@@ -676,7 +677,7 @@ namespace TestEtoForms
                 _context.Commands.GroupCommand.Execute(null);
             };
 
-            var ungroupCommand = new Command()
+            var ungroupCommand = new Eto.Forms.Command()
             {
                 MenuText = "U&ngroup",
                 Shortcut = Application.Instance.CommonModifier | Keys.U
@@ -757,7 +758,7 @@ namespace TestEtoForms
                 }
             };
 
-            var aboutCommand = new Command()
+            var aboutCommand = new Eto.Forms.Command()
             {
                 MenuText = "&About..."
             };

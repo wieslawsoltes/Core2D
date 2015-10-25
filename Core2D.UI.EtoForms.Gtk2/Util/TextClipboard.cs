@@ -1,11 +1,10 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-using Eto.Forms;
 using System;
 using System.Threading.Tasks;
-using Core2D;
+using Eto.Forms;
 
-namespace TestEtoForms
+namespace Core2D.UI.EtoForms
 {
     /// <summary>
     /// Wrapper class for Eto.Forms.Clipboard clipboard class.
