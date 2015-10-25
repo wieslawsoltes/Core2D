@@ -244,19 +244,14 @@ namespace Core2D.UI.Perspex.Windows
                 || context.Editor.Project == null)
                 return;
 
-            // TODO: Disable anti-aliasing.
-
-            var translate = dc.PushPreTransform(Matrix.CreateTranslation(_state.PanX, _state.PanY));
-            var scale = dc.PushPreTransform(Matrix.CreateScale(_state.Zoom, _state.Zoom));
-
             var renderer = context.Editor.Renderers[0];
-
-            if (context.Editor.Project == null)
-                return;
-
             var container = context.Editor.Project.CurrentContainer;
             if (container == null)
                 return;
+
+            // TODO: Disable anti-aliasing.
+            var translate = dc.PushPreTransform(Matrix.CreateTranslation(_state.PanX, _state.PanY));
+            var scale = dc.PushPreTransform(Matrix.CreateScale(_state.Zoom, _state.Zoom));
 
             if (container.Template != null)
             {
