@@ -410,7 +410,7 @@ namespace Core2D
             {
                 var item = value;
 
-                if (item is Container)
+                if (item is Container && _documents != null)
                 {
                     var container = item as Container;
                     var document = _documents.FirstOrDefault(d => d.Containers.Contains(container));
