@@ -1187,7 +1187,13 @@
         <Border Classes="left" Grid.Row="0" Grid.Column="0">
             <TabControl Classes="default">
                 <TabItem Header="Project" Classes="property">
-                    <ContentControl Content="{Binding Path=Editor.Project, Mode=TwoWay}"/>
+                    <Grid RowDefinitions="Auto,*">
+                        <Menu Grid.Row="0" HorizontalAlignment="Right">
+                            <MenuItem Header="+" Command="{Binding Path=Commands.NewCommand}" CommandParameter="{Binding Path=Editor.Project.Selected}"/>
+                            <MenuItem Header="-" Command="{Binding Path=Commands.DeleteCommand}" CommandParameter="{Binding Path=Editor.Project.Selected}"/>
+                        </Menu>
+                        <ContentControl Content="{Binding Path=Editor.Project, Mode=TwoWay}" Grid.Row="1"/>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="Options" Classes="property">
                     <ContentControl Content="{Binding Path=Editor.Project.Options, Mode=TwoWay}"/>
