@@ -748,6 +748,9 @@
                         </Grid>
                     </StackPanel>
                 </TabItem>
+                <TabItem Header="Shapes" Classes="property">
+                    <ListBox Items="{Binding Path=Shapes}" Classes="default"/>
+                </TabItem>
                 <TabItem Header="Connectors" Classes="property">
                     <ListBox Items="{Binding Path=Connectors}" Classes="default"/>
                 </TabItem>
