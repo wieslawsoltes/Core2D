@@ -1261,11 +1261,15 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Records" Classes="property">
-                    <Grid RowDefinitions="Auto,*">
+                    <Grid RowDefinitions="Auto,Auto,*">
+                        <Menu Grid.Row="0" HorizontalAlignment="Right">
+                            <MenuItem Header="+" Command="{Binding Path=Commands.AddRecordCommand}"/>
+                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveRecordCommand}"/>
+                        </Menu>
                         <DropDown
                             Items="{Binding Path=Editor.Project.Databases}"
                             SelectedItem="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}"
-                            Grid.Row="0"
+                            Grid.Row="1"
                             Classes="default">
                             <DropDown.DataTemplates>
                                 <DataTemplate DataType="core:Database">
@@ -1276,7 +1280,7 @@
                         <ListBox
                             Items="{Binding Path=Editor.Project.CurrentDatabase.Records}"
                             SelectedItem="{Binding Path=Editor.Project.CurrentDatabase.CurrentRecord, Mode=TwoWay}"
-                            Grid.Row="1"
+                            Grid.Row="2"
                             Classes="default">
                             <ListBox.DataTemplates>
                                 <DataTemplate DataType="core:Record">
