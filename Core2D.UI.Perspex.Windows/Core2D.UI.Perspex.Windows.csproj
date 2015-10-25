@@ -207,6 +207,9 @@
     <Compile Include="EditorControl.paml.cs">
       <DependentUpon>EditorControl.paml</DependentUpon>
     </Compile>
+    <Compile Include="StatusControl.paml.cs">
+      <DependentUpon>StatusControl.paml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.paml.cs">
       <DependentUpon>MainWindow.paml</DependentUpon>
     </Compile>
@@ -260,6 +263,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="EditorControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatusControl.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.paml">

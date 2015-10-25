@@ -51,12 +51,10 @@
         <Style Selector="CheckBox.default">
             <Setter Property="CheckBox.Margin" Value="3,1,3,1"/>
             <Setter Property="CheckBox.FontSize" Value="12"/>
-            <Setter Property="CheckBox.BorderThickness" Value="1"/>
         </Style>
         <Style Selector="CheckBox.left">
             <Setter Property="CheckBox.Margin" Value="3,1,3,1"/>
             <Setter Property="CheckBox.FontSize" Value="12"/>
-            <Setter Property="CheckBox.BorderThickness" Value="1"/>
         </Style>
         <Style Selector="DropDown.default">
             <Setter Property="DropDown.Margin" Value="3,1,3,1"/>
@@ -1185,7 +1183,7 @@
             </TabControl>
         </DataTemplate>
     </UserControl.DataTemplates>
-    <Grid RowDefinitions="50*,50*,Auto" ColumnDefinitions="200,Auto,*,Auto,240">
+    <Grid RowDefinitions="50*,50*" ColumnDefinitions="200,Auto,*,Auto,250">
         <Border Classes="left" Grid.Row="0" Grid.Column="0">
             <TabControl Classes="default">
                 <TabItem Header="Project" Classes="property">
@@ -1354,19 +1352,5 @@
                 </TabItem>
             </TabControl>
         </Border>
-        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" ColumnDefinitions="50*,50*">
-            <StackPanel Grid.Column="0" HorizontalAlignment="Left" Orientation="Horizontal" Margin="2">
-                <!-- TODO -->
-            </StackPanel>  
-            <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal" Margin="2">
-                <CheckBox Classes="default" Content="Stroked" IsChecked="{Binding Editor.Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
-                <CheckBox Classes="default" Content="Filled" IsChecked="{Binding Editor.Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
-                <CheckBox Classes="default" Content="Closed" IsChecked="{Binding Editor.Project.Options.DefaultIsClosed, Mode=TwoWay}"/>
-                <CheckBox Classes="default" Content="SmoothJoin" IsChecked="{Binding Editor.Project.Options.DefaultIsSmoothJoin, Mode=TwoWay}"/>
-                <CheckBox Classes="default" Content="Snap" IsChecked="{Binding Editor.Project.Options.SnapToGrid, Mode=TwoWay}"/>
-                <CheckBox Classes="default" Content="Connect" IsChecked="{Binding Editor.Project.Options.TryToConnect, Mode=TwoWay}"/>
-                <CheckBox Classes="default" Content="Autofit" IsChecked="{Binding Editor.Renderers[0].State.EnableAutofit, Mode=TwoWay}"/>
-            </StackPanel>
-        </Grid>
     </Grid>
 </UserControl>

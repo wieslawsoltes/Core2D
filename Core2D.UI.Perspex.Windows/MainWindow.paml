@@ -7,8 +7,9 @@
         Background="#FFFFFFFF"
         Title="Core2D"
         UseLayoutRounding="True">
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,*,Auto">
         <local:MenuControl Grid.Row="0"/>
         <local:EditorControl Grid.Row="1"/>
+        <local:StatusControl Grid.Row="2"/>
     </Grid>
 </Window>
