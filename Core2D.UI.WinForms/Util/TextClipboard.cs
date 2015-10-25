@@ -3,9 +3,8 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Core2D;
 
-namespace TestWinForms
+namespace Core2D.UI.WinForms.Util
 {
     /// <summary>
     /// Wrapper class for System.Windows.Forms.Clipboard clipboard class.

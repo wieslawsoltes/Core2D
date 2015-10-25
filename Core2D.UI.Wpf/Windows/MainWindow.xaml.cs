@@ -19,6 +19,7 @@ using System.Windows.Shapes;
 using Xceed.Wpf.AvalonDock.Layout;
 using Xceed.Wpf.AvalonDock.Layout.Serialization;
 using Renderer.Wpf;
+using FileWriter.Emf;
 using Core2D.UI.Wpf.Util;
 
 namespace Core2D.UI.Wpf.Windows

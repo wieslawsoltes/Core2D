@@ -10,9 +10,10 @@ using System.Drawing.Text;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Core2D;
+using Core2D.UI.WinForms.Util;
+using Renderer.WinForms;
 
-namespace TestWinForms
+namespace Core2D.UI.WinForms
 {
     /// <summary>
     /// 

@@ -3,7 +3,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace TestWinForms
+namespace Core2D.UI.WinForms
 {
     /// <summary>
     /// 
