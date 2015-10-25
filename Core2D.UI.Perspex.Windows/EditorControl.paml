@@ -6,65 +6,95 @@
     <UserControl.Styles>
         <Style Selector="TextBlock.default">
             <Setter Property="TextBlock.Margin" Value="1"/>
+            <Setter Property="TextBlock.FontSize" Value="12"/>
         </Style>
         <Style Selector="TextBlock.left">
+            <Setter Property="TextBlock.Margin" Value="3,1,3,1"/>
+            <Setter Property="TextBlock.FontSize" Value="12"/>
             <Setter Property="TextBlock.TextAlignment" Value="Left"/>
             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
-            <Setter Property="TextBlock.Margin" Value="1"/>
         </Style>
         <Style Selector="TextBlock.center">
+            <Setter Property="TextBlock.Margin" Value="3,1,3,1"/>
+            <Setter Property="TextBlock.FontSize" Value="12"/>
             <Setter Property="TextBlock.TextAlignment" Value="Center"/>
             <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
-            <Setter Property="TextBlock.Margin" Value="1"/>
         </Style>
         <Style Selector="TextBlock.header">
+            <Setter Property="TextBlock.Margin" Value="3,1,3,1"/>
             <Setter Property="TextBlock.FontSize" Value="12"/>
             <Setter Property="TextBlock.FontWeight" Value="Bold"/>
-            <Setter Property="TextBlock.Margin" Value="1"/>
         </Style>
         <Style Selector="TextBox.default">
-            <Setter Property="TextBox.Margin" Value="1"/>
-            <Setter Property="TextBox.BorderThickness" Value="1"/>
+            <Setter Property="TextBox.Margin" Value="3,1,3,1"/>
+            <Setter Property="TextBox.FontSize" Value="12"/>
+            <Setter Property="TextBox.Background" Value="#FFDEDEDE"/>
+            <Setter Property="TextBox.BorderThickness" Value="0"/>
         </Style>
         <Style Selector="TextBox.left">
+            <Setter Property="TextBox.Margin" Value="3,1,3,1"/>
+            <Setter Property="TextBox.FontSize" Value="12"/>
+            <Setter Property="TextBox.Background" Value="#FFDEDEDE"/>
             <!--<Setter Property="TextBox.TextAlignment" Value="Left"/>-->
             <Setter Property="TextBox.VerticalAlignment" Value="Center"/>
-            <Setter Property="TextBox.Margin" Value="1"/>
-            <Setter Property="TextBox.BorderThickness" Value="1"/>
+            <Setter Property="TextBox.BorderThickness" Value="0"/>
         </Style>
         <Style Selector="TextBox.center">
+            <Setter Property="TextBox.Margin" Value="3,1,3,1"/>
+            <Setter Property="TextBox.FontSize" Value="12"/>
+            <Setter Property="TextBox.Background" Value="#FFDEDEDE"/>
             <!--<Setter Property="TextBox.TextAlignment" Value="Center"/>-->
             <Setter Property="TextBox.VerticalAlignment" Value="Center"/>
-            <Setter Property="TextBox.Margin" Value="1"/>
             <Setter Property="TextBox.BorderBrush" Value="Transparent"/>
-            <Setter Property="TextBox.BorderThickness" Value="1"/>
+            <Setter Property="TextBox.BorderThickness" Value="0"/>
         </Style>
         <Style Selector="CheckBox.default">
-            <Setter Property="CheckBox.Margin" Value="1"/>
+            <Setter Property="CheckBox.Margin" Value="3,1,3,1"/>
+            <Setter Property="CheckBox.FontSize" Value="12"/>
             <Setter Property="CheckBox.BorderThickness" Value="1"/>
         </Style>
         <Style Selector="CheckBox.left">
-            <Setter Property="CheckBox.Margin" Value="1"/>
+            <Setter Property="CheckBox.Margin" Value="3,1,3,1"/>
+            <Setter Property="CheckBox.FontSize" Value="12"/>
             <Setter Property="CheckBox.BorderThickness" Value="1"/>
         </Style>
         <Style Selector="DropDown.default">
-            <Setter Property="DropDown.Margin" Value="1"/>
-            <Setter Property="DropDown.BorderThickness" Value="1"/>
+            <Setter Property="DropDown.Margin" Value="3,1,3,1"/>
+            <Setter Property="DropDown.Background" Value="#FFDEDEDE"/>
+            <Setter Property="DropDown.BorderThickness" Value="0"/>
         </Style>
         <Style Selector="ListBox.default">
-            <Setter Property="ListBox.Margin" Value="1"/>
-            <Setter Property="ListBox.BorderThickness" Value="1"/>
+            <Setter Property="ListBox.Margin" Value="0"/>
+            <Setter Property="ListBox.BorderThickness" Value="0"/>
         </Style>
         <Style Selector="TreeView.default">
-            <Setter Property="TreeView.Margin" Value="1"/>
-            <Setter Property="TreeView.BorderThickness" Value="1"/>
+            <Setter Property="TreeView.Margin" Value="0"/>
+            <Setter Property="TreeView.BorderThickness" Value="0"/>
         </Style>
         <Style Selector="TabControl.default">
-            <Setter Property="TabControl.Margin" Value="1"/>
+            <Setter Property="TabControl.Margin" Value="0"/>
         </Style>
         <Style Selector="TabItem.property">
             <Setter Property="TabItem.FontSize" Value="12"/>
             <Setter Property="TabItem.FontWeight" Value="Normal"/>
+        </Style>
+        <Style Selector="Border.left">
+            <Setter Property="Border.Margin" Value="4,2,0,2"/>
+            <Setter Property="Border.Padding" Value="3,3,3,3"/>
+            <Setter Property="Border.BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="Border.BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="Border.right">
+            <Setter Property="Border.Margin" Value="0,2,4,2"/>
+            <Setter Property="Border.Padding" Value="3,3,3,3"/>
+            <Setter Property="Border.BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="Border.BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="Border.drawable">
+            <Setter Property="Border.Margin" Value="0,2,0,2"/>
+            <Setter Property="Border.Padding" Value="3,3,3,3"/>
+            <Setter Property="Border.BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="Border.BorderThickness" Value="1"/>
         </Style>
     </UserControl.Styles>
     <UserControl.DataTemplates>
@@ -1155,164 +1185,185 @@
             </TabControl>
         </DataTemplate>
     </UserControl.DataTemplates>
-    <Grid RowDefinitions="50*,50*" ColumnDefinitions="170,Auto,*,Auto,240">
-        <TabControl Classes="default" Grid.Row="0" Grid.Column="0">
-            <TabItem Header="Project" Classes="property">
-                <ContentControl Content="{Binding Path=Editor.Project, Mode=TwoWay}"/>
-            </TabItem>
-            <TabItem Header="Options" Classes="property">
-                <ContentControl Content="{Binding Path=Editor.Project.Options, Mode=TwoWay}"/>
-            </TabItem>
-        </TabControl>
-        <TabControl Classes="default" Grid.Row="1" Grid.Column="0">
-            <TabItem Header="Groups" Classes="property">
-                <Grid RowDefinitions="Auto,Auto,*">
-                    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
-                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                        <TextBox Text="{Binding Path=Editor.Project.CurrentGroupLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+    <Grid RowDefinitions="50*,50*,Auto" ColumnDefinitions="200,Auto,*,Auto,240">
+        <Border Classes="left" Grid.Row="0" Grid.Column="0">
+            <TabControl Classes="default">
+                <TabItem Header="Project" Classes="property">
+                    <ContentControl Content="{Binding Path=Editor.Project, Mode=TwoWay}"/>
+                </TabItem>
+                <TabItem Header="Options" Classes="property">
+                    <ContentControl Content="{Binding Path=Editor.Project.Options, Mode=TwoWay}"/>
+                </TabItem>
+            </TabControl>
+        </Border>
+        <Border Classes="left" Grid.Row="1" Grid.Column="0">
+            <TabControl Classes="default">
+                <TabItem Header="Groups" Classes="property">
+                    <Grid RowDefinitions="Auto,Auto,*">
+                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
+                            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox Text="{Binding Path=Editor.Project.CurrentGroupLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                        </Grid>
+                        <DropDown
+                            Items="{Binding Path=Editor.Project.GroupLibraries}"
+                            SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary, Mode=TwoWay}"
+                            Classes="default"
+                            Grid.Row="1">
+                            <DropDown.DataTemplates>
+                                <DataTemplate DataType="core:GroupLibrary">
+                                    <TextBlock Text="{Binding Path=Name}" Classes="default"/>
+                                </DataTemplate>
+                            </DropDown.DataTemplates>
+                        </DropDown>
+                        <ListBox
+                            Items="{Binding Path=Editor.Project.CurrentGroupLibrary.Groups}"
+                            SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary.CurrentGroup, Mode=TwoWay}"
+                            Grid.Row="2"
+                            Classes="default">
+                            <ListBox.DataTemplates>
+                                <DataTemplate DataType="core:XGroup">
+                                    <TextBlock Text="{Binding Path=Name}" Classes="default"/>
+                                </DataTemplate>
+                            </ListBox.DataTemplates>
+                        </ListBox>
                     </Grid>
-                    <DropDown 
-                        Items="{Binding Path=Editor.Project.GroupLibraries}" 
-                        SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary, Mode=TwoWay}" 
-                        Classes="default" 
-                        Grid.Row="1">
-                        <DropDown.DataTemplates>
-                            <DataTemplate DataType="core:GroupLibrary">
-                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
-                            </DataTemplate>
-                        </DropDown.DataTemplates>
-                    </DropDown>
-                    <ListBox 
-                        Items="{Binding Path=Editor.Project.CurrentGroupLibrary.Groups}" 
-                        SelectedItem="{Binding Path=Editor.Project.CurrentGroupLibrary.CurrentGroup, Mode=TwoWay}" 
-                        Grid.Row="2"
-                        Classes="default">
-                        <ListBox.DataTemplates>
-                            <DataTemplate DataType="core:XGroup">
-                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
-                            </DataTemplate>
-                        </ListBox.DataTemplates>
-                    </ListBox>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Database" Classes="property">
-                <Grid RowDefinitions="Auto,*">
-                    <DropDown 
-                        Items="{Binding Path=Editor.Project.Databases}" 
-                        SelectedItem="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}" 
-                        Grid.Row="0"
-                        Classes="default">
-                        <DropDown.DataTemplates>
-                            <DataTemplate DataType="core:Database">
-                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
-                            </DataTemplate>
-                        </DropDown.DataTemplates>
-                    </DropDown>
-                    <ContentControl Content="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}" Grid.Row="1"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Records" Classes="property">
-                <Grid RowDefinitions="Auto,*">
-                    <DropDown 
-                        Items="{Binding Path=Editor.Project.Databases}" 
-                        SelectedItem="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}" 
-                        Grid.Row="0"
-                        Classes="default">
-                        <DropDown.DataTemplates>
-                            <DataTemplate DataType="core:Database">
-                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
-                            </DataTemplate>
-                        </DropDown.DataTemplates>
-                    </DropDown>
-                    <ListBox 
-                        Items="{Binding Path=Editor.Project.CurrentDatabase.Records}" 
-                        SelectedItem="{Binding Path=Editor.Project.CurrentDatabase.CurrentRecord, Mode=TwoWay}" 
-                        Grid.Row="1"
-                        Classes="default">
-                        <ListBox.DataTemplates>
-                            <DataTemplate DataType="core:Record">
-                                <TextBlock Text="{Binding Path=Id}" Classes="default"/>
-                            </DataTemplate>
-                        </ListBox.DataTemplates>
-                    </ListBox>
-                </Grid>
-            </TabItem>
-        </TabControl>
-        <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Width="10"/>
+                </TabItem>
+                <TabItem Header="Database" Classes="property">
+                    <Grid RowDefinitions="Auto,*">
+                        <DropDown
+                            Items="{Binding Path=Editor.Project.Databases}"
+                            SelectedItem="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}"
+                            Grid.Row="0"
+                            Classes="default">
+                            <DropDown.DataTemplates>
+                                <DataTemplate DataType="core:Database">
+                                    <TextBlock Text="{Binding Path=Name}" Classes="default"/>
+                                </DataTemplate>
+                            </DropDown.DataTemplates>
+                        </DropDown>
+                        <ContentControl Content="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}" Grid.Row="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Records" Classes="property">
+                    <Grid RowDefinitions="Auto,*">
+                        <DropDown
+                            Items="{Binding Path=Editor.Project.Databases}"
+                            SelectedItem="{Binding Path=Editor.Project.CurrentDatabase, Mode=TwoWay}"
+                            Grid.Row="0"
+                            Classes="default">
+                            <DropDown.DataTemplates>
+                                <DataTemplate DataType="core:Database">
+                                    <TextBlock Text="{Binding Path=Name}" Classes="default"/>
+                                </DataTemplate>
+                            </DropDown.DataTemplates>
+                        </DropDown>
+                        <ListBox
+                            Items="{Binding Path=Editor.Project.CurrentDatabase.Records}"
+                            SelectedItem="{Binding Path=Editor.Project.CurrentDatabase.CurrentRecord, Mode=TwoWay}"
+                            Grid.Row="1"
+                            Classes="default">
+                            <ListBox.DataTemplates>
+                                <DataTemplate DataType="core:Record">
+                                    <TextBlock Text="{Binding Path=Id}" Classes="default"/>
+                                </DataTemplate>
+                            </ListBox.DataTemplates>
+                        </ListBox>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Border>
+        <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Width="8"/>
         <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" ClipToBounds="True">
-            <local:Drawable HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Border Classes="drawable">
+                <local:Drawable HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </Border>
         </Grid>
-        <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Width="10"/>
-        <TabControl Classes="default" Grid.Row="0" Grid.Column="4">
-            <TabItem Header="Styles" Classes="property">
-                <Grid RowDefinitions="Auto,Auto,*">
-                    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
-                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                        <TextBox Text="{Binding Path=Editor.Project.CurrentStyleLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+        <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Width="8"/>
+        <Border Classes="right" Grid.Row="0" Grid.Column="4">
+            <TabControl Classes="default">
+                <TabItem Header="Styles" Classes="property">
+                    <Grid RowDefinitions="Auto,Auto,*">
+                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
+                            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox Text="{Binding Path=Editor.Project.CurrentStyleLibrary.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                        </Grid>
+                        <DropDown
+                            Items="{Binding Path=Editor.Project.StyleLibraries}"
+                            SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}"
+                            Grid.Row="1"
+                            Classes="default">
+                            <DropDown.DataTemplates>
+                                <DataTemplate DataType="core:StyleLibrary">
+                                    <TextBlock Text="{Binding Path=Name}" Classes="default"/>
+                                </DataTemplate>
+                            </DropDown.DataTemplates>
+                        </DropDown>
+                        <ListBox
+                            Items="{Binding Path=Editor.Project.CurrentStyleLibrary.Styles}"
+                            SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}"
+                            Grid.Row="2"
+                            Classes="default">
+                            <ListBox.DataTemplates>
+                                <DataTemplate DataType="core:ShapeStyle">
+                                    <TextBlock Text="{Binding Path=Name}" Classes="default"/>
+                                </DataTemplate>
+                            </ListBox.DataTemplates>
+                        </ListBox>
                     </Grid>
-                    <DropDown 
-                        Items="{Binding Path=Editor.Project.StyleLibraries}" 
-                        SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary, Mode=TwoWay}" 
-                        Grid.Row="1"
-                        Classes="default">
-                        <DropDown.DataTemplates>
-                            <DataTemplate DataType="core:StyleLibrary">
-                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
-                            </DataTemplate>
-                        </DropDown.DataTemplates>
-                    </DropDown>
-                    <ListBox 
-                        Items="{Binding Path=Editor.Project.CurrentStyleLibrary.Styles}" 
-                        SelectedItem="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}" 
-                        Grid.Row="2"
-                        Classes="default">
-                        <ListBox.DataTemplates>
-                            <DataTemplate DataType="core:ShapeStyle">
-                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
-                            </DataTemplate>
-                        </ListBox.DataTemplates>
-                    </ListBox>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Templates" Classes="property">
-                <Grid RowDefinitions="Auto,*">
-                    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
-                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                        <TextBox Text="{Binding Path=Editor.Project.CurrentTemplate.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                </TabItem>
+                <TabItem Header="Templates" Classes="property">
+                    <Grid RowDefinitions="Auto,*">
+                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
+                            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox Text="{Binding Path=Editor.Project.CurrentTemplate.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                        </Grid>
+                        <ListBox
+                            Items="{Binding Path=Editor.Project.Templates}"
+                            SelectedItem="{Binding Path=Editor.Project.CurrentTemplate, Mode=TwoWay}"
+                            Grid.Row="1"
+                            Classes="default">
+                            <ListBox.DataTemplates>
+                                <DataTemplate DataType="core:Container">
+                                    <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
+                                </DataTemplate>
+                            </ListBox.DataTemplates>
+                        </ListBox>
                     </Grid>
-                    <ListBox
-                        Items="{Binding Path=Editor.Project.Templates}"
-                        SelectedItem="{Binding Path=Editor.Project.CurrentTemplate, Mode=TwoWay}"
-                        Grid.Row="1"
-                        Classes="default">
-                        <ListBox.DataTemplates>
-                            <DataTemplate DataType="core:Container">
-                                <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
-                            </DataTemplate>
-                        </ListBox.DataTemplates>
-                    </ListBox>
-                </Grid>
-            </TabItem>
-        </TabControl>
-        <TabControl Classes="default" Grid.Row="1" Grid.Column="4">
-            <TabItem Header="Shape" Classes="property">
-                <ScrollViewer>
-                    <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer.CurrentShape, Mode=TwoWay}"/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Data" Classes="property">
-                <ScrollViewer>
-                    <ContentControl Content="{Binding Path=Editor.Renderers[0].State.SelectedShape.Data, Mode=TwoWay}"/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Style" Classes="property">
-                <ScrollViewer>
-                    <ContentControl Content="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}"/>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Container" Classes="property">
-                <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}"/>
-            </TabItem>
-        </TabControl>
+                </TabItem>
+            </TabControl>
+        </Border>
+        <Border Classes="right" Grid.Row="1" Grid.Column="4">
+            <TabControl Classes="default">
+                <TabItem Header="Shape" Classes="property">
+                    <ScrollViewer>
+                        <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer.CurrentShape, Mode=TwoWay}"/>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Data" Classes="property">
+                    <ScrollViewer>
+                        <ContentControl Content="{Binding Path=Editor.Renderers[0].State.SelectedShape.Data, Mode=TwoWay}"/>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Style" Classes="property">
+                    <ScrollViewer>
+                        <ContentControl Content="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle, Mode=TwoWay}"/>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Container" Classes="property">
+                    <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}"/>
+                </TabItem>
+            </TabControl>
+        </Border>
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" ColumnDefinitions="50*,50*">
+            <StackPanel Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal" Margin="2">
+                <CheckBox Classes="default" Content="Stroked" IsChecked="{Binding Editor.Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
+                <CheckBox Classes="default" Content="Filled" IsChecked="{Binding Editor.Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
+                <CheckBox Classes="default" Content="Closed" IsChecked="{Binding Editor.Project.Options.DefaultIsClosed, Mode=TwoWay}"/>
+                <CheckBox Classes="default" Content="SmoothJoin" IsChecked="{Binding Editor.Project.Options.DefaultIsSmoothJoin, Mode=TwoWay}"/>
+                <CheckBox Classes="default" Content="Snap" IsChecked="{Binding Editor.Project.Options.SnapToGrid, Mode=TwoWay}"/>
+                <CheckBox Classes="default" Content="Connect" IsChecked="{Binding Editor.Project.Options.TryToConnect, Mode=TwoWay}"/>
+                <CheckBox Classes="default" Content="Autofit" IsChecked="{Binding Editor.Renderers[0].State.EnableAutofit, Mode=TwoWay}"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
