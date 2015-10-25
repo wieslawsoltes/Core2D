@@ -146,6 +146,10 @@ namespace TestPerspex
                 {
                     AutoFit(finalSize.Width, finalSize.Height);
                 }
+                else
+                {
+                    ResetZoom(finalSize.Width, finalSize.Height);
+                }
             }
 
             return base.ArrangeOverride(finalSize);
