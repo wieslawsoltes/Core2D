@@ -10,7 +10,7 @@ using System.Collections.Immutable;
 using System.Windows.Media.Imaging;
 #endif
 
-namespace PdfSharp
+namespace Dependencies
 {
     /// <summary>
     /// 

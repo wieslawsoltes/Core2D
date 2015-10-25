@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 #endif
 
-namespace PdfSharp
+namespace Dependencies
 {
     /// <summary>
     /// 

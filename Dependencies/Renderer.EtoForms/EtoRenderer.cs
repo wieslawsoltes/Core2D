@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Eto.Drawing;
 using Core2D;
 
-namespace TestEtoForms
+namespace Dependencies
 {
     /// <summary>
     /// 

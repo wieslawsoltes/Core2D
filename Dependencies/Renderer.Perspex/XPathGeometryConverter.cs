@@ -9,7 +9,7 @@ using Perspex;
 using Perspex.Media;
 using Core2D;
 
-namespace TestPerspex
+namespace Dependencies
 {
     /// <summary>
     /// 

@@ -14,9 +14,8 @@ using System.Text;
 using System.Threading.Tasks;
 using WPF = System.Windows;
 using Core2D;
-using Renderer.WinForms;
 
-namespace FileWriter.Emf
+namespace Dependencies
 {
     /// <summary>
     /// 

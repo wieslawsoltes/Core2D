@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core2D;
 
-namespace Renderer.WinForms
+namespace Dependencies
 {
     /// <summary>
     /// 

@@ -11,7 +11,7 @@ using Perspex.Media;
 using Perspex.Media.Imaging;
 using Core2D;
 
-namespace TestPerspex
+namespace Dependencies
 {
     /// <summary>
     /// 

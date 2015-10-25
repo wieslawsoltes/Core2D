@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Media;
 using Core2D;
 
-namespace Renderer.Wpf
+namespace Dependencies
 {
     /// <summary>
     /// 

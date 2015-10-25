@@ -5,7 +5,7 @@ using System.Linq;
 using Eto.Drawing;
 using Core2D;
 
-namespace TestEtoForms
+namespace Dependencies
 {
     /// <summary>
     /// 

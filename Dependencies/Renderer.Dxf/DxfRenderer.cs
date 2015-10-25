@@ -15,7 +15,7 @@ using netDxf.Objects;
 using netDxf.Tables;
 using netDxf.Units;
 
-namespace netDxf
+namespace Dependencies
 {
     /// <summary>
     /// 

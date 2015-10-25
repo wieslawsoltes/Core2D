@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Core2D;
 
-namespace Renderer.Wpf
+namespace Dependencies
 {
     /// <summary>
     /// 

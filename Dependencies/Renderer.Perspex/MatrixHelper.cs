@@ -3,7 +3,7 @@
 using System;
 using Perspex;
 
-namespace TestPerspex
+namespace Dependencies
 {
     /// <summary>
     /// Perspex Matrix helper methods.

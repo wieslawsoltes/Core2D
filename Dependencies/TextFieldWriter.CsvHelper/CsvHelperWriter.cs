@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Globalization;
 using Core2D;
 
-namespace Core2D
+namespace Dependencies
 {
     /// <summary>
     /// 
