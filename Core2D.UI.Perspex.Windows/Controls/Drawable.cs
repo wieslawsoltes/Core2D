@@ -39,7 +39,7 @@ namespace Core2D.UI.Perspex.Windows
 
             context.Editor.Invalidate = () => this.InvalidateVisual();
 
-            _state = new ZoomState(context);
+            _state = new ZoomState(context.Editor);
 
             if (context.Renderers[0].State.EnableAutofit)
             {

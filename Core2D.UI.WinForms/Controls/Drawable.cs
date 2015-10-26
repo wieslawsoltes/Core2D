@@ -34,7 +34,7 @@ namespace Core2D.UI.WinForms
 
             this.BackColor = Color.Transparent;
 
-            _state = new ZoomState(Context);
+            _state = new ZoomState(Context.Editor);
 
             this.MouseDown +=
                 (sender, e) =>

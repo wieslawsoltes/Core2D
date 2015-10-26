@@ -74,7 +74,7 @@ namespace Core2D.UI.EtoForms
             _context.Editor.GetImageKey = async () => await GetImageKey();
             _context.Editor.Invalidate = () => _drawable.Invalidate();
 
-            _state = new Core2D.ZoomState(_context);
+            _state = new Core2D.ZoomState(_context.Editor);
 
             DataContext = _context;
         }

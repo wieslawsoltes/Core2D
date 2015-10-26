@@ -98,7 +98,7 @@ namespace Test.Uwp
                     async () => await OnSaveAs(),
                     () => _context.IsEditMode());
 
-            _state = new Core2D.ZoomState(_context);
+            _state = new Core2D.ZoomState(_context.Editor);
 
             DataContext = _context;
         }
