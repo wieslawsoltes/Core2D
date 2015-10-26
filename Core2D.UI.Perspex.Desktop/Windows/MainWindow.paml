@@ -1,15 +1,15 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
 <Window xmlns="https://github.com/perspex"
-        xmlns:local="clr-namespace:Core2D.UI.Perspex.Windows;assembly=Core2D.UI.Perspex.Windows"
+        xmlns:controls="clr-namespace:Core2D.UI.Perspex.Desktop.Controls;assembly=Core2D.UI.Perspex.Desktop"
         xmlns:core="clr-namespace:Core2D;assembly=Core2D"
         Width="1300" Height="670"
         Background="#FFFFFFFF"
         Title="Core2D"
         UseLayoutRounding="True">
     <Grid RowDefinitions="Auto,*,Auto">
-        <local:MenuControl Grid.Row="0"/>
-        <local:EditorControl Grid.Row="1"/>
-        <local:StatusControl Grid.Row="2"/>
+        <controls:MenuControl Grid.Row="0"/>
+        <controls:EditorControl Grid.Row="1"/>
+        <controls:StatusControl Grid.Row="2"/>
     </Grid>
 </Window>

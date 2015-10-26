@@ -21,7 +21,7 @@ after_build:
 
     7z a Core2D.UI.EtoForms.Gtk2-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Core2D.UI.EtoForms.Gtk2\bin\%CONFIGURATION%
 
-    7z a Core2D.UI.Perspex.Windows-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Core2D.UI.Perspex.Windows\bin\%CONFIGURATION%
+    7z a Core2D.UI.Perspex.Desktop-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Core2D.UI.Perspex.Desktop\bin\%CONFIGURATION%
 
     7z a Core2D.UI.WinForms-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Core2D.UI.WinForms\bin\%CONFIGURATION%
 
@@ -33,7 +33,7 @@ after_build:
 
     appveyor PushArtifact Core2D.UI.EtoForms.Gtk2-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
 
-    appveyor PushArtifact Core2D.UI.Perspex.Windows-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
+    appveyor PushArtifact Core2D.UI.Perspex.Desktop-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
 
     appveyor PushArtifact Core2D.UI.WinForms-%CONFIGURATION%-%APPVEYOR_BUILD_VERSION%.zip
 

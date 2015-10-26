@@ -3,7 +3,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Core2D.UI.Perspex.Windows
+namespace Core2D.UI.Perspex.Desktop
 {
     /// <summary>
     /// Wrapper class for App.Current.Clipboard clipboard class.

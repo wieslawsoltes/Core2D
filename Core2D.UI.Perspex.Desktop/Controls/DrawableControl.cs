@@ -19,19 +19,19 @@ using Perspex.Layout;
 using Perspex.Media;
 using Perspex.Media.Imaging;
 
-namespace Core2D.UI.Perspex.Windows
+namespace Core2D.UI.Perspex.Desktop.Controls
 {
     /// <summary>
     /// 
     /// </summary>
-    public class Drawable : Control
+    public class DrawableControl : Control
     {
         private ZoomState _state;
 
         /// <summary>
         /// 
         /// </summary>
-        private void InitializeDrawable()
+        private void Initialize()
         {
             var context = this.DataContext as EditorContext;
             if (context == null)
@@ -312,7 +312,7 @@ namespace Core2D.UI.Perspex.Windows
 
             if (_state == null)
             {
-                InitializeDrawable();
+                Initialize();
             }
 
             Draw(context);

@@ -10,7 +10,7 @@ using Perspex.Controls;
 using Perspex.Diagnostics;
 using Perspex.Themes.Default;
 
-namespace Core2D.UI.Perspex.Windows
+namespace Core2D.UI.Perspex.Desktop
 {
     /// <summary>
     /// 
@@ -43,12 +43,12 @@ namespace Core2D.UI.Perspex.Windows
         /// </summary>
         /// <param name="args"></param>
         [STAThread]
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             try
             {
                 var app = new App();
-                var window = new MainWindow();
+                var window = new Windows.MainWindow();
                 window.Show();
                 app.Run(window);
             }
@@ -58,7 +58,11 @@ namespace Core2D.UI.Perspex.Windows
             }
         }
 
-        static void Print(Exception ex)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ex"></param>
+        private static void Print(Exception ex)
         {
             System.Diagnostics.Debug.Print(ex.GetType().ToString());
             System.Diagnostics.Debug.Print(ex.Message);

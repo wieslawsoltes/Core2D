@@ -45,7 +45,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.EtoForms.Direct2D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.EtoForms.Gtk2", "Core2D.UI.EtoForms.Gtk2\Core2D.UI.EtoForms.Gtk2.csproj", "{8FFCD889-06F4-483D-A776-3AE815348D4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.Perspex.Windows", "Core2D.UI.Perspex.Windows\Core2D.UI.Perspex.Windows.csproj", "{4868069E-3AD4-497E-9B8E-148D1EEACFD7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.Perspex.Desktop", "Core2D.UI.Perspex.Desktop\Core2D.UI.Perspex.Desktop.csproj", "{4868069E-3AD4-497E-9B8E-148D1EEACFD7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Perspex", "Dependencies\Renderer.Perspex\Renderer.Perspex.csproj", "{DEE86BE6-43B1-45FB-8A56-7977C1D0964E}"
 EndProject

@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 using Perspex.Controls;
 using Perspex.Markup.Xaml;
 
-namespace Core2D.UI.Perspex.Windows
+namespace Core2D.UI.Perspex.Desktop.Controls
 {
     /// <summary>
     /// 
     /// </summary>
-    public class MenuControl : UserControl
+    public class EditorControl : UserControl
     {
         /// <summary>
         /// 
         /// </summary>
-        public MenuControl()
+        public EditorControl()
         {
             this.InitializeComponent();
         }

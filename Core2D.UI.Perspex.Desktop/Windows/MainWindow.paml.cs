@@ -12,7 +12,7 @@ using Perspex.Controls;
 using Perspex.Markup.Xaml;
 using Dependencies;
 
-namespace Core2D.UI.Perspex.Windows
+namespace Core2D.UI.Perspex.Desktop.Windows
 {
     /// <summary>
     /// 

@@ -63,8 +63,8 @@ rmdir /Q /S Core2D.UI.EtoForms.Direct2D\obj
 rmdir /Q /S Core2D.UI.EtoForms.Gtk2\bin
 rmdir /Q /S Core2D.UI.EtoForms.Gtk2\obj
 
-rmdir /Q /S Core2D.UI.Perspex.Windows\bin
-rmdir /Q /S Core2D.UI.Perspex.Windows\obj
+rmdir /Q /S Core2D.UI.Perspex.Desktop\bin
+rmdir /Q /S Core2D.UI.Perspex.Desktop\obj
 
 rmdir /Q /S Core2D.UI.Uwp\bin
 rmdir /Q /S Core2D.UI.Uwp\obj

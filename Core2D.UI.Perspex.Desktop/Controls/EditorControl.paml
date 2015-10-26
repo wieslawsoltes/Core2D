@@ -1,7 +1,7 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
 <UserControl xmlns="https://github.com/perspex"
-             xmlns:local="clr-namespace:Core2D.UI.Perspex.Windows;assembly=Core2D.UI.Perspex.Windows"
+             xmlns:controls="clr-namespace:Core2D.UI.Perspex.Desktop.Controls;assembly=Core2D.UI.Perspex.Desktop"
              xmlns:core="clr-namespace:Core2D;assembly=Core2D">
     <UserControl.Styles>
         <Style Selector="TextBlock.default">
@@ -1298,7 +1298,7 @@
         <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Width="8"/>
         <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="2">
             <Border Classes="drawable">
-                <local:Drawable ClipToBounds="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <controls:DrawableControl ClipToBounds="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </Border>
         </Grid>
         <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Width="8"/>

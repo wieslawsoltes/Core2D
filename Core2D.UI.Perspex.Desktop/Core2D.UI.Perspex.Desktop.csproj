@@ -6,8 +6,8 @@
     <ProjectGuid>{4868069E-3AD4-497E-9B8E-148D1EEACFD7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core2D.UI.Perspex.Windows</RootNamespace>
-    <AssemblyName>Core2D.UI.Perspex.Windows</AssemblyName>
+    <RootNamespace>Core2D.UI.Perspex.Desktop</RootNamespace>
+    <AssemblyName>Core2D.UI.Perspex.Desktop</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -200,17 +200,17 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="App.cs" />
-    <Compile Include="Controls\Drawable.cs" />
-    <Compile Include="MenuControl.paml.cs">
+    <Compile Include="Controls\DrawableControl.cs" />
+    <Compile Include="Controls\MenuControl.paml.cs">
       <DependentUpon>MenuControl.paml</DependentUpon>
     </Compile>
-    <Compile Include="EditorControl.paml.cs">
+    <Compile Include="Controls\EditorControl.paml.cs">
       <DependentUpon>EditorControl.paml</DependentUpon>
     </Compile>
-    <Compile Include="StatusControl.paml.cs">
+    <Compile Include="Controls\StatusControl.paml.cs">
       <DependentUpon>StatusControl.paml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.paml.cs">
+    <Compile Include="Windows\MainWindow.paml.cs">
       <DependentUpon>MainWindow.paml</DependentUpon>
     </Compile>
     <Compile Include="Util\TextClipboard.cs" />
@@ -259,19 +259,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MenuControl.paml">
+    <EmbeddedResource Include="Controls\MenuControl.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditorControl.paml">
+    <EmbeddedResource Include="Controls\EditorControl.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="StatusControl.paml">
+    <EmbeddedResource Include="Controls\StatusControl.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow.paml">
+    <EmbeddedResource Include="Windows\MainWindow.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SharpDX.2.6.3\build\SharpDX.targets" Condition="Exists('..\packages\SharpDX.2.6.3\build\SharpDX.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
