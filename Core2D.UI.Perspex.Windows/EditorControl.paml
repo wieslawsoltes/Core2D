@@ -1296,9 +1296,9 @@
             </TabControl>
         </Border>
         <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Width="8"/>
-        <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" ClipToBounds="True">
+        <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="2">
             <Border Classes="drawable">
-                <local:Drawable HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <local:Drawable ClipToBounds="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </Border>
         </Grid>
         <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Width="8"/>
