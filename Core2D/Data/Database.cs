@@ -20,6 +20,11 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        public const string IdColumnName = "Id";
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -118,7 +123,7 @@ namespace Core2D
             var tempColumns = fields.FirstOrDefault().Select(c => Column.Create(c));
             var columns = ImmutableArray.CreateRange<Column>(tempColumns);
 
-            if (columns.Length >= 1 && columns[0].Name == "Id")
+            if (columns.Length >= 1 && columns[0].Name == IdColumnName)
             {
                 // use existing record Id's
                 var tempRecords = fields
