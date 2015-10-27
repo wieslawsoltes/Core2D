@@ -251,7 +251,7 @@ namespace Core2D
                 }
             }
 
-            editor.Invalidate = () => { };
+            editor.Invalidate = () => { throw new InvalidOperationException(); };
 
             if (editor.EnableObserver)
             {
