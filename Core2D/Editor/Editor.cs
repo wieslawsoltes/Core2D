@@ -218,11 +218,14 @@ namespace Core2D
             editor.IsProjectDirty = false;
             editor.Renderers = renderers;
 
-            foreach (var renderer in editor.Renderers)
+            if (editor.Renderers != null)
             {
-                if (renderer.State != null)
+                foreach (var renderer in editor.Renderers)
                 {
-                    renderer.State.ImageCache = project;
+                    if (renderer.State != null)
+                    {
+                        renderer.State.ImageCache = project;
+                    }
                 }
             }
 
@@ -866,10 +869,13 @@ namespace Core2D
         {
             Deselect();
 
-            foreach (var renderer in _renderers)
+            if (_renderers != null)
             {
-                renderer.ClearCache(isZooming: false);
-                renderer.State.ImageCache = project;
+                foreach (var renderer in _renderers)
+                {
+                    renderer.ClearCache(isZooming: false);
+                    renderer.State.ImageCache = project;
+                }
             }
 
             Project = project;
@@ -894,9 +900,12 @@ namespace Core2D
 
             Deselect();
 
-            foreach (var renderer in _renderers)
+            if (_renderers != null)
             {
-                renderer.ClearCache(isZooming: false);
+                foreach (var renderer in _renderers)
+                {
+                    renderer.ClearCache(isZooming: false);
+                }
             }
 
             if (_project != null)
@@ -1482,6 +1491,9 @@ namespace Core2D
         /// </summary>
         public void Deselect()
         {
+            if (_renderers == null)
+                return;
+
             _renderers[0].State.SelectedShape = default(BaseShape);
             _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
         }
@@ -1514,7 +1526,7 @@ namespace Core2D
         /// <returns></returns>
         public bool TryToSelectShapes(Container container, XRectangle rectangle)
         {
-            if (container == null)
+            if (container == null || _renderers == null)
                 return false;
 
             var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
