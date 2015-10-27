@@ -220,12 +220,13 @@ namespace Core2D
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,
-                EnableObserver = true
+                EnableHistory = true
             };
 
             editor.Project = project;
             editor.ProjectPath = string.Empty;
             editor.IsProjectDirty = false;
+
             editor.Renderers = renderers;
 
             if (editor.Renderers != null)
@@ -239,12 +240,16 @@ namespace Core2D
                 }
             }
 
-            editor.History = new History();
             editor.Invalidate = () => { };
 
             if (editor.EnableObserver)
             {
                 editor.Observer = new Observer(editor);
+            }
+
+            if (editor.EnableHistory)
+            {
+                editor.History = new History();
             }
 
             editor.SelectionHelper = new SelectionHelper(editor);
