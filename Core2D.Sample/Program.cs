@@ -35,8 +35,6 @@ namespace Core2D.Sample
 
             context.Editor = Editor.Create(project);
 
-            context.New();
-
             return context;
         }
 
