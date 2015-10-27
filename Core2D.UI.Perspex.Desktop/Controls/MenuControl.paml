@@ -68,6 +68,44 @@
         <MenuItem Header="_Project">
             <MenuItem Header="_Add Document" Command="{Binding Path=Commands.AddDocumentCommand}" CommandParameter="{Binding Path=Editor.Project}"/>
             <!--<Separator/>-->
+            <MenuItem Header="_Add Container" Command="{Binding Path=Commands.AddContainerCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+            <!--<Separator/>-->
+            <MenuItem Header="_Document">
+                <MenuItem Header="Insert Document Bef_ore" Command="{Binding Path=Commands.InsertDocumentBeforeCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+                <MenuItem Header="Insert Document Aft_er" Command="{Binding Path=Commands.InsertDocumentAfterCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+                <!--<Separator/>-->
+                <MenuItem Header="Cu_t Document" Command="{Binding Path=Commands.CutCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+                <MenuItem Header="_Copy Document" Command="{Binding Path=Commands.CopyCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+                <MenuItem Header="_Paste Document" Command="{Binding Path=Commands.PasteCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+                <!--<Separator/>-->
+                <MenuItem Header="_Delete Document" Command="{Binding Path=Commands.DeleteCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+                <!--<Separator/>-->
+                <MenuItem Header="E_xport Document" Command="{Binding Path=Commands.ExportCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+            </MenuItem>
+            <!--<Separator/>-->
+            <MenuItem Header="_Container">
+                <MenuItem Header="Insert Container Bef_ore" Command="{Binding Path=Commands.InsertContainerBeforeCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
+                <MenuItem Header="Insert Container Aft_er" Command="{Binding Path=Commands.InsertContainerAfterCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
+                <!--<Separator/>-->
+                <MenuItem Header="Cu_t Container" Command="{Binding Path=Commands.CutCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
+                <MenuItem Header="_Copy Container" Command="{Binding Path=Commands.CopyCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
+                <MenuItem Header="_Paste Container" Command="{Binding Path=Commands.PasteCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
+                <!--<Separator/>-->
+                <MenuItem Header="_Delete Container" Command="{Binding Path=Commands.DeleteCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
+                <!--<Separator/>-->
+                <MenuItem Header="E_xport Container" Command="{Binding Path=Commands.ExportCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
+            </MenuItem>
+            <!--<Separator/>-->
+            <MenuItem Header="_Layers">
+                <MenuItem Header="_Add Layer" Command="{Binding Path=Commands.AddLayerCommand}"/>
+                <!--<Separator/>-->
+                <MenuItem Header="_Delete Layer" Command="{Binding Path=Commands.RemoveLayerCommand}"/>
+            </MenuItem>
+            <!--<Separator/>-->
+            <MenuItem Header="S_hapes">
+                <MenuItem Header="_Delete Shape" Command="{Binding Path=Commands.RemoveShapeCommand}"/>
+            </MenuItem>
+            <!--<Separator/>-->
             <MenuItem Header="Sha_pe">
                 <MenuItem Header="_Bindings">
                     <MenuItem Header="_Add Binding" Command="{Binding Path=Commands.AddBindingCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer.CurrentShape.Data}"/>
@@ -84,42 +122,10 @@
                 </MenuItem>
             </MenuItem>
             <!--<Separator/>-->
-            <MenuItem Header="S_hapes">
-                <MenuItem Header="_Delete Shape" Command="{Binding Path=Commands.RemoveShapeCommand}"/>
-            </MenuItem>
-            <!--<Separator/>-->
-            <MenuItem Header="_Layers">
-                <MenuItem Header="_Add Layer" Command="{Binding Path=Commands.AddLayerCommand}"/>
+            <MenuItem Header="Style Li_braries">
+                <MenuItem Header="_Add Style Library" Command="{Binding Path=Commands.AddStyleLibraryCommand}"/>
                 <!--<Separator/>-->
-                <MenuItem Header="_Delete Layer" Command="{Binding Path=Commands.RemoveLayerCommand}"/>
-            </MenuItem>
-            <!--<Separator/>-->
-            <MenuItem Header="_Container">
-                <MenuItem Header="Insert Container Bef_ore" Command="{Binding Path=Commands.InsertContainerBeforeCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
-                <MenuItem Header="Insert Container Aft_er" Command="{Binding Path=Commands.InsertContainerAfterCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
-                <!--<Separator/>-->
-                <MenuItem Header="Cu_t Container" Command="{Binding Path=Commands.CutCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
-                <MenuItem Header="_Copy Container" Command="{Binding Path=Commands.CopyCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
-                <MenuItem Header="_Paste Container" Command="{Binding Path=Commands.PasteCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
-                <!--<Separator/>-->
-                <MenuItem Header="_Delete Container" Command="{Binding Path=Commands.DeleteCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
-                <!--<Separator/>-->
-                <MenuItem Header="E_xport Container" Command="{Binding Path=Commands.ExportCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentContainer}"/>
-            </MenuItem>
-            <!--<Separator/>-->
-            <MenuItem Header="_Document">
-                <MenuItem Header="_Add Container" Command="{Binding Path=Commands.AddContainerCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
-                <!--<Separator/>-->
-                <MenuItem Header="Insert Document Bef_ore" Command="{Binding Path=Commands.InsertDocumentBeforeCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
-                <MenuItem Header="Insert Document Aft_er" Command="{Binding Path=Commands.InsertDocumentAfterCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
-                <!--<Separator/>-->
-                <MenuItem Header="Cu_t Document" Command="{Binding Path=Commands.CutCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
-                <MenuItem Header="_Copy Document" Command="{Binding Path=Commands.CopyCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
-                <MenuItem Header="_Paste Document" Command="{Binding Path=Commands.PasteCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
-                <!--<Separator/>-->
-                <MenuItem Header="_Delete Document" Command="{Binding Path=Commands.DeleteCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
-                <!--<Separator/>-->
-                <MenuItem Header="E_xport Document" Command="{Binding Path=Commands.ExportCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
+                <MenuItem Header="_Delete Style Library" Command="{Binding Path=Commands.RemoveStyleLibraryCommand}"/>
             </MenuItem>
             <!--<Separator/>-->
             <MenuItem Header="_Styles">
@@ -128,10 +134,10 @@
                 <MenuItem Header="_Delete Style" Command="{Binding Path=Commands.RemoveStyleCommand}"/>
             </MenuItem>
             <!--<Separator/>-->
-            <MenuItem Header="Style Li_braries">
-                <MenuItem Header="_Add Style Library" Command="{Binding Path=Commands.AddStyleLibraryCommand}"/>
+            <MenuItem Header="Group _Libraries">
+                <MenuItem Header="_Add Group Library" Command="{Binding Path=Commands.AddGroupLibraryCommand}"/>
                 <!--<Separator/>-->
-                <MenuItem Header="_Delete Style Library" Command="{Binding Path=Commands.RemoveStyleLibraryCommand}"/>
+                <MenuItem Header="_Delete Group Library" Command="{Binding Path=Commands.RemoveGroupLibraryCommand}"/>
             </MenuItem>
             <!--<Separator/>-->
             <MenuItem Header="_Groups">
@@ -140,34 +146,12 @@
                 <MenuItem Header="_Delete Group" Command="{Binding Path=Commands.RemoveGroupCommand}"/>
             </MenuItem>
             <!--<Separator/>-->
-            <MenuItem Header="Group _Libraries">
-                <MenuItem Header="_Add Group Library" Command="{Binding Path=Commands.AddGroupLibraryCommand}"/>
-                <!--<Separator/>-->
-                <MenuItem Header="_Delete Group Library" Command="{Binding Path=Commands.RemoveGroupLibraryCommand}"/>
-            </MenuItem>
-            <!--<Separator/>-->
             <MenuItem Header="_Templates">
                 <MenuItem Header="_Edit Template" Command="{Binding Path=Commands.EditTemplateCommand}"/>
                 <!--<Separator/>-->
                 <MenuItem Header="_Add Template" Command="{Binding Path=Commands.AddTemplateCommand}"/>
                 <!--<Separator/>-->
                 <MenuItem Header="_Delete Template" Command="{Binding Path=Commands.RemoveTemplateCommand}"/>
-            </MenuItem>
-            <!--<Separator/>-->
-            <MenuItem Header="Data_base">
-                <MenuItem Header="Add _Record" Command="{Binding Path=Commands.AddRecordCommand}"/>
-                <!--<Separator/>-->
-                <MenuItem Header="Delete Recor_d" Command="{Binding Path=Commands.RemoveRecordCommand}"/>
-                <!--<Separator/>-->
-                <MenuItem Header="Add _Column" Command="{Binding Path=Commands.AddColumnCommand}"/>
-                <!--<Separator/>-->
-                <MenuItem Header="Delete Co_lumn" Command="{Binding Path=Commands.RemoveColumnCommand}"/>
-            </MenuItem>
-            <!--<Separator/>-->
-            <MenuItem Header="_Databases">
-                <MenuItem Header="_Add Database" Command="{Binding Path=Commands.AddDatabaseCommand}"/>
-                <!--<Separator/>-->
-                <MenuItem Header="_Delete Database" Command="{Binding Path=Commands.RemoveDatabaseCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDatabase}"/>
             </MenuItem>
             <!--<Separator/>-->
             <MenuItem Header="I_mport">
@@ -239,6 +223,22 @@
             <MenuItem Header="_Export..." Command="{Binding Path=Commands.ExportDataCommand}"/>
             <!--<Separator/>-->
             <MenuItem Header="_Update..." Command="{Binding Path=Commands.UpdateDataCommand}"/>
+            <!--<Separator/>-->
+            <MenuItem Header="_Databases">
+                <MenuItem Header="_Add Database" Command="{Binding Path=Commands.AddDatabaseCommand}"/>
+                <!--<Separator/>-->
+                <MenuItem Header="_Delete Database" Command="{Binding Path=Commands.RemoveDatabaseCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDatabase}"/>
+            </MenuItem>
+            <!--<Separator/>-->
+            <MenuItem Header="Data_base">
+                <MenuItem Header="Add _Record" Command="{Binding Path=Commands.AddRecordCommand}"/>
+                <!--<Separator/>-->
+                <MenuItem Header="Delete Recor_d" Command="{Binding Path=Commands.RemoveRecordCommand}"/>
+                <!--<Separator/>-->
+                <MenuItem Header="Add _Column" Command="{Binding Path=Commands.AddColumnCommand}"/>
+                <!--<Separator/>-->
+                <MenuItem Header="Delete Co_lumn" Command="{Binding Path=Commands.RemoveColumnCommand}"/>
+            </MenuItem>
         </MenuItem>
         <MenuItem Header="Te_mplate" Items="{Binding Path=Editor.Project.Templates}">
             <MenuItem.DataTemplates>
