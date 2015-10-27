@@ -34,7 +34,6 @@ namespace Core2D.UI.Perspex.Desktop
         /// <returns></returns>
         public Task<string> GetText()
         {
-            // TODO: Do not use Result.
             return GetTextAsync();
         }
 
@@ -53,7 +52,6 @@ namespace Core2D.UI.Perspex.Desktop
         /// <returns></returns>
         public async Task<bool> ContainsText()
         {
-            // TODO: Do not use Result.
             return await ContainsTextAsync();
         }
     }
