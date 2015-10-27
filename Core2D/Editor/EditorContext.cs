@@ -2994,7 +2994,31 @@ namespace Core2D
                     _editor.Log = log;
                     _editor.Log.Initialize(logFileName);
                 }
+            }
+            catch (Exception ex)
+            {
+                if (_editor != null && _editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+                else
+                {
+                    Debug.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.StackTrace);
+                }
+            }
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public void InitializeCommands()
+        {
+            try
+            {
                 _commands = new EditorCommands();
 
                 _commands.NewCommand =

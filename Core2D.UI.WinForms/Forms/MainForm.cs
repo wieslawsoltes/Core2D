@@ -87,6 +87,7 @@ namespace Core2D.UI.WinForms
 
             context.Renderers[0].State.EnableAutofit = true;
             context.InitializeEditor(new TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
+            context.InitializeCommands();
             context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
             context.Editor.GetImageKey = async () => await GetImageKey();
             context.Editor.Invalidate = () => _drawable.Invalidate();
