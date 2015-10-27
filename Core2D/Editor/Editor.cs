@@ -25,6 +25,7 @@ namespace Core2D
         private PathTool _currentPathTool;
         private bool _enableObserver;
         private Observer _observer;
+        private bool _enableHistory;
         private History _history;
         private Action _invalidate;
         private bool _cancelAvailable;
@@ -109,6 +110,15 @@ namespace Core2D
         {
             get { return _observer; }
             set { Update(ref _observer, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets if undo/redo history handler is enabled.
+        /// </summary>
+        public bool EnableHistory
+        {
+            get { return _enableHistory; }
+            set { Update(ref _enableHistory, value); }
         }
 
         /// <summary>
