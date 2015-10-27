@@ -84,6 +84,7 @@ namespace Test.Uwp
 
             _context.Renderers[0].State.EnableAutofit = true;
             _context.InitializeEditor(null/*new Dependencies.TraceLog()*/);
+            _context.InitializeCommands();
             _context.Editor.Renderers[0].State.DrawShapeState.Flags = Core2D.ShapeStateFlags.Visible;
             _context.Editor.GetImageKey = async () => await Task.Run(() => _imagePath);
             _context.Editor.Invalidate = () => canvas.Invalidate();
