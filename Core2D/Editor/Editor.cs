@@ -219,11 +219,11 @@ namespace Core2D
         /// <param name="enableHistory">Enable project history.</param>
         /// <returns></returns>
         public static Editor Create(
-            Project project, 
-            IRenderer[] renderers = null, 
+            Project project,
+            IRenderer[] renderers = null,
             Tool currentTool = Tool.Selection,
             PathTool currentPathTool = PathTool.Line,
-            bool enableObserver = true, 
+            bool enableObserver = true,
             bool enableHistory = true)
         {
             var editor = new Editor()
@@ -1894,7 +1894,7 @@ namespace Core2D
                             {
                                 var previous = new { DeltaX = -dx, DeltaY = -dy, Points = points };
                                 var next = new { DeltaX = dx, DeltaY = dy, Points = points };
-                                _history.Snapshot(previous, next, (s) => MovePointsBy(s.Points, s.DeltaX, s.DeltaY)); 
+                                _history.Snapshot(previous, next, (s) => MovePointsBy(s.Points, s.DeltaX, s.DeltaY));
                             }
                         }
                         break;
@@ -1906,7 +1906,7 @@ namespace Core2D
                             {
                                 var previous = new { DeltaX = -dx, DeltaY = -dy, Shapes = shapes.ToList() };
                                 var next = new { DeltaX = dx, DeltaY = dy, Shapes = shapes.ToList() };
-                                _history.Snapshot(previous, next, (s) => MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY)); 
+                                _history.Snapshot(previous, next, (s) => MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY));
                             }
                         }
                         break;

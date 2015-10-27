@@ -1094,7 +1094,7 @@ namespace Core2D
                         var previous = _editor.Project.Documents;
                         var next = builder.ToImmutable();
                         _editor.History.Snapshot(previous, next, (p) => _editor.Project.Documents = p);
-                        _editor.Project.Documents = next; 
+                        _editor.Project.Documents = next;
                     }
                     else
                     {
@@ -1344,7 +1344,7 @@ namespace Core2D
                 var previous = document.Containers;
                 var next = document.Containers.Add(container);
                 _editor.History.Snapshot(previous, next, (p) => document.Containers = p);
-                document.Containers = next; 
+                document.Containers = next;
             }
             else
             {
@@ -1467,7 +1467,7 @@ namespace Core2D
                     var previous = _editor.Project.Documents;
                     var next = _editor.Project.Documents.Insert(index, document);
                     _editor.History.Snapshot(previous, next, (p) => _editor.Project.Documents = p);
-                    _editor.Project.Documents = next; 
+                    _editor.Project.Documents = next;
                 }
                 else
                 {
@@ -1499,7 +1499,7 @@ namespace Core2D
                     var previous = _editor.Project.Documents;
                     var next = _editor.Project.Documents.Insert(index + 1, document);
                     _editor.History.Snapshot(previous, next, (p) => _editor.Project.Documents = p);
-                    _editor.Project.Documents = next; 
+                    _editor.Project.Documents = next;
                 }
                 else
                 {
@@ -1904,7 +1904,7 @@ namespace Core2D
                                 var previous = sg.Styles;
                                 var next = sg.Styles.Add(import);
                                 _editor.History.Snapshot(previous, next, (p) => sg.Styles = p);
-                                sg.Styles = next; 
+                                sg.Styles = next;
                             }
                             else
                             {
@@ -1929,7 +1929,7 @@ namespace Core2D
                                 var previous = sg.Styles;
                                 var next = builder.ToImmutable();
                                 _editor.History.Snapshot(previous, next, (p) => sg.Styles = p);
-                                sg.Styles = next; 
+                                sg.Styles = next;
                             }
                             else
                             {
@@ -1948,7 +1948,7 @@ namespace Core2D
                                 var previous = project.StyleLibraries;
                                 var next = project.StyleLibraries.Add(import);
                                 _editor.History.Snapshot(previous, next, (p) => project.StyleLibraries = p);
-                                project.StyleLibraries = next; 
+                                project.StyleLibraries = next;
                             }
                             else
                             {
