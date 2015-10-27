@@ -213,18 +213,18 @@ namespace Core2D
         /// </summary>
         /// <param name="project">The project to edit.</param>
         /// <param name="renderers">The shape renderers.</param>
-        /// <param name="currentTool">The current tool.</param>
-        /// <param name="currentPathTool">The current path tool.</param>
         /// <param name="enableObserver">Enable project observer.</param>
         /// <param name="enableHistory">Enable project history.</param>
+        /// <param name="currentTool">The current tool.</param>
+        /// <param name="currentPathTool">The current path tool.</param>
         /// <returns></returns>
         public static Editor Create(
             Project project,
             IRenderer[] renderers = null,
-            Tool currentTool = Tool.Selection,
-            PathTool currentPathTool = PathTool.Line,
             bool enableObserver = true,
-            bool enableHistory = true)
+            bool enableHistory = true,
+            Tool currentTool = Tool.Selection,
+            PathTool currentPathTool = PathTool.Line)
         {
             var editor = new Editor()
             {
