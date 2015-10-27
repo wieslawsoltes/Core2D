@@ -102,12 +102,6 @@
     <Compile Include="..\Core2D\Editor\EditorContext.cs">
       <Link>Editor\EditorContext.cs</Link>
     </Compile>
-    <Compile Include="..\Core2D\Editor\Factories\ProjectFactory.cs">
-      <Link>Editor\Factories\ProjectFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\Core2D\Editor\Factories\ShapeFactory.cs">
-      <Link>Editor\Factories\ShapeFactory.cs</Link>
-    </Compile>
     <Compile Include="..\Core2D\Editor\Helpers\ArcHelper.cs">
       <Link>Editor\Helpers\ArcHelper.cs</Link>
     </Compile>
@@ -158,6 +152,12 @@
     </Compile>
     <Compile Include="..\Core2D\Editor\Parameters\ValueParamterer.cs">
       <Link>Editor\Parameters\ValueParamterer.cs</Link>
+    </Compile>
+    <Compile Include="..\Core2D\Factories\ProjectFactory.cs">
+      <Link>Factories\ProjectFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Core2D\Factories\ShapeFactory.cs">
+      <Link>Factories\ShapeFactory.cs</Link>
     </Compile>
     <Compile Include="..\Core2D\Interfaces\IFileWriter.cs">
       <Link>Interfaces\IFileWriter.cs</Link>
