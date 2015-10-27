@@ -784,16 +784,21 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public void AddDatabase()
+        /// <param name="name"></param>
+        /// <param name="columns"></param>
+        public void AddDatabase(string name = "Db", int columns = 2)
         {
             if (_project == null)
                 return;
 
             var builder = ImmutableArray.CreateBuilder<Column>();
-            builder.Add(Column.Create("Column0"));
-            builder.Add(Column.Create("Column1"));
 
-            var db = Database.Create("Db", builder.ToImmutable());
+            for (int i = 0; i < columns; i++)
+            {
+                builder.Add(Column.Create("Column" + i));
+            }
+
+            var db = Database.Create(name, builder.ToImmutable());
 
             if (_enableHistory)
             {
@@ -814,7 +819,8 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="owner"></param>
-        public void AddColumn(object owner)
+        /// <param name="name"></param>
+        public void AddColumn(object owner, string name = "Column")
         {
             if (owner != null && owner is Database)
             {
@@ -827,13 +833,13 @@ namespace Core2D
                 if (_enableHistory)
                 {
                     var previous = db.Columns;
-                    var next = db.Columns.Add(Column.Create("Column" + db.Columns.Length));
+                    var next = db.Columns.Add(Column.Create(name + db.Columns.Length));
                     _history.Snapshot(previous, next, (p) => db.Columns = p);
                     db.Columns = next;
                 }
                 else
                 {
-                    db.Columns = db.Columns.Add(Column.Create("Column" + db.Columns.Length));
+                    db.Columns = db.Columns.Add(Column.Create(name + db.Columns.Length));
                 }
             }
         }
@@ -841,14 +847,15 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public void AddRecord()
+        /// <param name="value"></param>
+        public void AddRecord(string value = "<empty>")
         {
             if (_project == null || _project.CurrentDatabase == null)
                 return;
 
             var db = _project.CurrentDatabase;
 
-            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Value.Create(c));
+            var values = Enumerable.Repeat(value, db.Columns.Length).Select(c => Value.Create(c));
             var record = Record.Create(
                 db.Columns,
                 ImmutableArray.CreateRange<Value>(values));
@@ -870,7 +877,9 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="owner"></param>
-        public void AddBinding(object owner)
+        /// <param name="property"></param>
+        /// <param name="path"></param>
+        public void AddBinding(object owner, string property = "", string path = "")
         {
             if (owner != null && owner is Data)
             {
@@ -880,7 +889,7 @@ namespace Core2D
                     data.Bindings = ImmutableArray.Create<ShapeBinding>();
                 }
 
-                AddBinding(data, ShapeBinding.Create("", ""));
+                AddBinding(data, ShapeBinding.Create(property, path));
             }
         }
 
@@ -888,7 +897,9 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="owner"></param>
-        public void AddProperty(object owner)
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        public void AddProperty(object owner, string name = "New", string value = "")
         {
             if (owner != null)
             {
@@ -900,7 +911,7 @@ namespace Core2D
                         data.Properties = ImmutableArray.Create<ShapeProperty>();
                     }
 
-                    AddProperty(data, ShapeProperty.Create("New", ""));
+                    AddProperty(data, ShapeProperty.Create(name, value));
                 }
                 else if (owner is Container)
                 {
@@ -910,7 +921,7 @@ namespace Core2D
                         container.Properties = ImmutableArray.Create<ShapeProperty>();
                     }
 
-                    AddProperty(container, ShapeProperty.Create("New", ""));
+                    AddProperty(container, ShapeProperty.Create(name, value));
                 }
             }
         }
@@ -918,12 +929,13 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public void AddGroupLibrary()
+        /// <param name="name"></param>
+        public void AddGroupLibrary(string name = "New")
         {
             if (_project == null || _project.GroupLibraries == null)
                 return;
 
-            var gl = GroupLibrary.Create("New");
+            var gl = GroupLibrary.Create(name);
 
             if (_enableHistory)
             {
@@ -941,7 +953,8 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public void AddLayer()
+        /// <param name="name"></param>
+        public void AddLayer(string name = "New")
         {
             if (_project == null || _project.CurrentContainer == null)
                 return;
@@ -951,25 +964,26 @@ namespace Core2D
             if (_enableHistory)
             {
                 var previous = container.Layers;
-                var next = container.Layers.Add(Layer.Create("New", container));
+                var next = container.Layers.Add(Layer.Create(name, container));
                 _history.Snapshot(previous, next, (p) => container.Layers = p);
                 container.Layers = next;
             }
             else
             {
-                container.Layers = container.Layers.Add(Layer.Create("New", container));
+                container.Layers = container.Layers.Add(Layer.Create(name, container));
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void AddStyleLibrary()
+        /// <param name="name"></param>
+        public void AddStyleLibrary(string name = "New")
         {
             if (_project == null || _project.StyleLibraries == null)
                 return;
 
-            var sg = StyleLibrary.Create("New");
+            var sg = StyleLibrary.Create(name);
 
             if (_enableHistory)
             {
@@ -987,7 +1001,8 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public void AddStyle()
+        /// <param name="name"></param>
+        public void AddStyle(string name = "New")
         {
             if (_project == null || _project.CurrentStyleLibrary == null)
                 return;
@@ -997,13 +1012,13 @@ namespace Core2D
             if (_enableHistory)
             {
                 var previous = sg.Styles;
-                var next = sg.Styles.Add(ShapeStyle.Create("New"));
+                var next = sg.Styles.Add(ShapeStyle.Create(name));
                 _history.Snapshot(previous, next, (p) => sg.Styles = p);
                 sg.Styles = next;
             }
             else
             {
-                sg.Styles = sg.Styles.Add(ShapeStyle.Create("New"));
+                sg.Styles = sg.Styles.Add(ShapeStyle.Create(name));
             }
         }
 
@@ -1461,7 +1476,8 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public XGroup GroupSelected()
+        /// <param name="name"></param>
+        public XGroup GroupSelected(string name = "g")
         {
             var shapes = _renderers[0].State.SelectedShapes;
             var layer = _project.CurrentContainer.CurrentLayer;
@@ -1469,7 +1485,7 @@ namespace Core2D
                 return null;
 
             // TODO: Group method changes SelectedShapes State properties.
-            var g = XGroup.Group("g", shapes);
+            var g = XGroup.Group(name, shapes);
 
             var builder = layer.Shapes.ToBuilder();
             foreach (var shape in shapes)
