@@ -96,7 +96,7 @@ namespace Core2D.UI.Perspex.Desktop.Windows
 
             _context.Commands.ExportCommand =
                 Command<object>.Create(
-                    async (item) => await OnExport(),
+                    async (item) => await OnExport(item),
                     (item) => _context.IsEditMode());
 
             _context.Commands.ImportDataCommand =
@@ -405,34 +405,64 @@ namespace Core2D.UI.Perspex.Desktop.Windows
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="item"></param>
         /// <returns></returns>
-        private async Task OnExport()
+        private async Task OnExport(object item)
         {
             try
             {
-                if (_context.Editor.Project != null)
+                string name = string.Empty;
+
+                if (item is Container)
                 {
-                    var dlg = new SaveFileDialog();
-                    dlg.Filters.Add(new FileDialogFilter() { Name = "Pdf", Extensions = { "pdf" } });
-                    dlg.Filters.Add(new FileDialogFilter() { Name = "Dxf", Extensions = { "dxf" } });
-                    dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
-                    dlg.InitialFileName = _context.Editor.Project.Name;
-                    var result = await dlg.ShowAsync(this);
-                    if (result != null)
+                    name = (item as Container).Name;
+                }
+                else if (item is Document)
+                {
+                    name = (item as Document).Name;
+                }
+                else if (item is Project)
+                {
+                    name = (item as Project).Name;
+                }
+                else if (item is EditorContext)
+                {
+                    var editor = (item as EditorContext).Editor;
+                    if (editor.Project == null)
+                        return;
+
+                    name = editor.Project.Name;
+                    item = editor.Project;
+                }
+                else if (item == null)
+                {
+                    if (_context.Editor.Project == null)
+                        return;
+
+                    name = _context.Editor.Project.Name;
+                    item = _context.Editor.Project;
+                }
+
+                var dlg = new SaveFileDialog();
+                dlg.Filters.Add(new FileDialogFilter() { Name = "Pdf", Extensions = { "pdf" } });
+                dlg.Filters.Add(new FileDialogFilter() { Name = "Dxf", Extensions = { "dxf" } });
+                dlg.Filters.Add(new FileDialogFilter() { Name = "All", Extensions = { "*" } });
+                dlg.InitialFileName = name;
+                var result = await dlg.ShowAsync(this);
+                if (result != null)
+                {
+                    var ext = System.IO.Path.GetExtension(result).ToLower();
+
+                    if (ext == ".pdf")
                     {
-                        var ext = System.IO.Path.GetExtension(result).ToLower();
+                        _context.ExportAsPdf(result, item);
+                        Process.Start(result);
+                    }
 
-                        if (ext == ".pdf")
-                        {
-                            _context.ExportAsPdf(result, _context.Editor.Project);
-                            Process.Start(result);
-                        }
-
-                        if (ext == ".dxf")
-                        {
-                            _context.ExportAsDxf(result);
-                            Process.Start(result);
-                        }
+                    if (ext == ".dxf")
+                    {
+                        _context.ExportAsDxf(result);
+                        Process.Start(result);
                     }
                 }
             }
