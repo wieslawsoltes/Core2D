@@ -227,6 +227,7 @@ namespace Core2D
             }
 
             editor.History = new History();
+            editor.Invalidate = () => { };
 
             if (editor.EnableObserver)
             {
