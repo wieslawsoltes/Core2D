@@ -30,7 +30,7 @@ namespace Dependencies
                     using (var csv = new CsvHelper.CsvWriter(writer, configuration))
                     {
                         // columns
-                        csv.WriteField("Id");
+                        csv.WriteField(Database.IdColumnName);
                         foreach (var column in database.Columns)
                         {
                             csv.WriteField(column.Name);
