@@ -684,10 +684,18 @@ namespace Core2D
         public void AddWithHistory(BaseShape shape)
         {
             var layer = _project.CurrentContainer.CurrentLayer;
-            var previous = layer.Shapes;
-            var next = layer.Shapes.Add(shape);
-            _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-            layer.Shapes = next;
+
+            if (_enableHistory)
+            {
+                var previous = layer.Shapes;
+                var next = layer.Shapes.Add(shape);
+                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+            }
+            else
+            {
+                layer.Shapes = layer.Shapes.Add(shape);
+            }
         }
 
         /// <summary>
@@ -697,10 +705,18 @@ namespace Core2D
         public void AddWithHistory(IEnumerable<BaseShape> shapes)
         {
             var layer = _project.CurrentContainer.CurrentLayer;
-            var previous = layer.Shapes;
-            var next = layer.Shapes.AddRange(shapes);
-            _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-            layer.Shapes = next;
+
+            if (_enableHistory)
+            {
+                var previous = layer.Shapes;
+                var next = layer.Shapes.AddRange(shapes);
+                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+            }
+            else
+            {
+                layer.Shapes = layer.Shapes.AddRange(shapes);
+            }
         }
 
         /// <summary>
@@ -711,9 +727,17 @@ namespace Core2D
         public void AddWithHistory(Data data, ShapeProperty property)
         {
             var previous = data.Properties;
-            var next = data.Properties.Add(property);
-            _history.Snapshot(previous, next, (p) => data.Properties = p);
-            data.Properties = next;
+
+            if (_enableHistory)
+            {
+                var next = data.Properties.Add(property);
+                _history.Snapshot(previous, next, (p) => data.Properties = p);
+                data.Properties = next;
+            }
+            else
+            {
+                data.Properties = data.Properties.Add(property);
+            }
         }
 
         /// <summary>
@@ -724,9 +748,17 @@ namespace Core2D
         public void AddWithHistory(Container container, ShapeProperty property)
         {
             var previous = container.Properties;
-            var next = container.Properties.Add(property);
-            _history.Snapshot(previous, next, (p) => container.Properties = p);
-            container.Properties = next;
+
+            if (_enableHistory)
+            {
+                var next = container.Properties.Add(property);
+                _history.Snapshot(previous, next, (p) => container.Properties = p);
+                container.Properties = next;
+            }
+            else
+            {
+                container.Properties = container.Properties.Add(property);
+            }
         }
 
         /// <summary>
@@ -736,10 +768,17 @@ namespace Core2D
         /// <param name="binding"></param>
         public void AddWithHistory(Data data, ShapeBinding binding)
         {
-            var previous = data.Bindings;
-            var next = data.Bindings.Add(binding);
-            _history.Snapshot(previous, next, (p) => data.Bindings = p);
-            data.Bindings = next;
+            if (_enableHistory)
+            {
+                var previous = data.Bindings;
+                var next = data.Bindings.Add(binding);
+                _history.Snapshot(previous, next, (p) => data.Bindings = p);
+                data.Bindings = next;
+            }
+            else
+            {
+                data.Bindings = data.Bindings.Add(binding);
+            }
         }
 
         /// <summary>
@@ -754,10 +793,17 @@ namespace Core2D
             if (template == null)
                 return;
 
-            var previous = _project.Templates;
-            var next = _project.Templates.Remove(_project.CurrentTemplate);
-            _history.Snapshot(previous, next, (p) => _project.Templates = p);
-            _project.Templates = next;
+            if (_enableHistory)
+            {
+                var previous = _project.Templates;
+                var next = _project.Templates.Remove(_project.CurrentTemplate);
+                _history.Snapshot(previous, next, (p) => _project.Templates = p);
+                _project.Templates = next;
+            }
+            else
+            {
+                _project.Templates = _project.Templates.Remove(_project.CurrentTemplate);
+            }
 
             _project.CurrentTemplate = _project.Templates.FirstOrDefault();
         }
@@ -774,10 +820,17 @@ namespace Core2D
             if (gl == null)
                 return;
 
-            var previous = _project.GroupLibraries;
-            var next = _project.GroupLibraries.Remove(gl);
-            _history.Snapshot(previous, next, (p) => _project.GroupLibraries = p);
-            _project.GroupLibraries = next;
+            if (_enableHistory)
+            {
+                var previous = _project.GroupLibraries;
+                var next = _project.GroupLibraries.Remove(gl);
+                _history.Snapshot(previous, next, (p) => _project.GroupLibraries = p);
+                _project.GroupLibraries = next;
+            }
+            else
+            {
+                _project.GroupLibraries = _project.GroupLibraries.Remove(gl);
+            }
 
             _project.CurrentGroupLibrary = _project.GroupLibraries.FirstOrDefault();
         }
@@ -795,10 +848,18 @@ namespace Core2D
                 return;
 
             var gl = _project.CurrentGroupLibrary;
-            var previous = gl.Groups;
-            var next = gl.Groups.Remove(group);
-            _history.Snapshot(previous, next, (p) => gl.Groups = p);
-            gl.Groups = next;
+
+            if (_enableHistory)
+            {
+                var previous = gl.Groups;
+                var next = gl.Groups.Remove(group);
+                _history.Snapshot(previous, next, (p) => gl.Groups = p);
+                gl.Groups = next;
+            }
+            else
+            {
+                gl.Groups = gl.Groups.Remove(group);
+            }
 
             _project.CurrentGroupLibrary.CurrentGroup = _project.CurrentGroupLibrary.Groups.FirstOrDefault();
         }
@@ -816,10 +877,18 @@ namespace Core2D
                 return;
 
             var container = _project.CurrentContainer;
-            var previous = container.Layers;
-            var next = container.Layers.Remove(layer);
-            _history.Snapshot(previous, next, (p) => container.Layers = p);
-            container.Layers = next;
+
+            if (_enableHistory)
+            {
+                var previous = container.Layers;
+                var next = container.Layers.Remove(layer);
+                _history.Snapshot(previous, next, (p) => container.Layers = p);
+                container.Layers = next;
+            }
+            else
+            {
+                container.Layers = container.Layers.Remove(layer);
+            }
 
             _project.CurrentContainer.CurrentLayer = _project.CurrentContainer.Layers.FirstOrDefault();
         }
@@ -837,10 +906,18 @@ namespace Core2D
                 return;
 
             var layer = _project.CurrentContainer.CurrentLayer;
-            var previous = layer.Shapes;
-            var next = layer.Shapes.Remove(shape);
-            _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-            layer.Shapes = next;
+
+            if (_enableHistory)
+            {
+                var previous = layer.Shapes;
+                var next = layer.Shapes.Remove(shape);
+                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+            }
+            else
+            {
+                layer.Shapes = layer.Shapes.Remove(shape);
+            }
 
             _project.CurrentContainer.CurrentShape = _project.CurrentContainer.CurrentLayer.Shapes.FirstOrDefault();
         }
@@ -857,10 +934,17 @@ namespace Core2D
             if (sg == null)
                 return;
 
-            var previous = _project.StyleLibraries;
-            var next = _project.StyleLibraries.Remove(sg);
-            _history.Snapshot(previous, next, (p) => _project.StyleLibraries = p);
-            _project.StyleLibraries = next;
+            if (_enableHistory)
+            {
+                var previous = _project.StyleLibraries;
+                var next = _project.StyleLibraries.Remove(sg);
+                _history.Snapshot(previous, next, (p) => _project.StyleLibraries = p);
+                _project.StyleLibraries = next;
+            }
+            else
+            {
+                _project.StyleLibraries = _project.StyleLibraries.Remove(sg);
+            }
 
             _project.CurrentStyleLibrary = _project.StyleLibraries.FirstOrDefault();
         }
@@ -878,10 +962,18 @@ namespace Core2D
                 return;
 
             var sg = _project.CurrentStyleLibrary;
-            var previous = sg.Styles;
-            var next = sg.Styles.Remove(style);
-            _history.Snapshot(previous, next, (p) => sg.Styles = p);
-            sg.Styles = next;
+
+            if (_enableHistory)
+            {
+                var previous = sg.Styles;
+                var next = sg.Styles.Remove(style);
+                _history.Snapshot(previous, next, (p) => sg.Styles = p);
+                sg.Styles = next;
+            }
+            else
+            {
+                sg.Styles = sg.Styles.Remove(style);
+            }
 
             _project.CurrentStyleLibrary.CurrentStyle = _project.CurrentStyleLibrary.Styles.FirstOrDefault();
         }
@@ -908,7 +1000,7 @@ namespace Core2D
             ProjectPath = path;
             IsProjectDirty = false;
 
-            if (EnableObserver)
+            if (_enableObserver)
             {
                 Observer = new Observer(this);
             }
@@ -919,7 +1011,7 @@ namespace Core2D
         /// </summary>
         public void Unload()
         {
-            if (EnableObserver && _project != null)
+            if (_enableObserver && _project != null)
             {
                 Observer.Remove(_project);
             }
@@ -964,10 +1056,17 @@ namespace Core2D
             }
             builder.Add(g);
 
-            var previous = layer.Shapes;
-            var next = builder.ToImmutable();
-            _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-            layer.Shapes = next;
+            if (_enableHistory)
+            {
+                var previous = layer.Shapes;
+                var next = builder.ToImmutable();
+                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                layer.Shapes = next;
+            }
+            else
+            {
+                layer.Shapes = builder.ToImmutable();
+            }
 
             Select(_project.CurrentContainer, g);
 
@@ -1033,10 +1132,17 @@ namespace Core2D
                 Ungroup(g.Connectors, builder, groupShapes: true);
                 builder.Remove(g);
 
-                var previous = layer.Shapes;
-                var next = builder.ToImmutable();
-                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
+                if (_enableHistory)
+                {
+                    var previous = layer.Shapes;
+                    var next = builder.ToImmutable();
+                    _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                    layer.Shapes = next;
+                }
+                else
+                {
+                    layer.Shapes = builder.ToImmutable();
+                }
 
                 _renderers[0].State.SelectedShape = null;
                 layer.Invalidate();
@@ -1048,10 +1154,17 @@ namespace Core2D
 
                 Ungroup(shapes, builder, groupShapes: false);
 
-                var previous = layer.Shapes;
-                var next = builder.ToImmutable();
-                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
+                if (_enableHistory)
+                {
+                    var previous = layer.Shapes;
+                    var next = builder.ToImmutable();
+                    _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                    layer.Shapes = next;
+                }
+                else
+                {
+                    layer.Shapes = builder.ToImmutable();
+                }
 
                 layer.Invalidate();
                 _renderers[0].State.SelectedShapes = null;
@@ -1076,10 +1189,17 @@ namespace Core2D
                     builder.Insert(targetIndex + 1, source);
                     builder.RemoveAt(sourceIndex);
 
-                    var previous = layer.Shapes;
-                    var next = builder.ToImmutable();
-                    _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-                    layer.Shapes = next;
+                    if (_enableHistory)
+                    {
+                        var previous = layer.Shapes;
+                        var next = builder.ToImmutable();
+                        _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                        layer.Shapes = next;
+                    }
+                    else
+                    {
+                        layer.Shapes = builder.ToImmutable();
+                    }
                 }
             }
             else
@@ -1095,10 +1215,17 @@ namespace Core2D
                         builder.Insert(targetIndex, source);
                         builder.RemoveAt(removeIndex);
 
-                        var previous = layer.Shapes;
-                        var next = builder.ToImmutable();
-                        _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-                        layer.Shapes = next;
+                        if (_enableHistory)
+                        {
+                            var previous = layer.Shapes;
+                            var next = builder.ToImmutable();
+                            _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                            layer.Shapes = next;
+                        }
+                        else
+                        {
+                            layer.Shapes = builder.ToImmutable();
+                        }
                     }
                 }
             }
@@ -1299,9 +1426,12 @@ namespace Core2D
 
                                 MovePointsBy(points, dx, dy);
 
-                                var previous = new { DeltaX = -dx, DeltaY = -dy, Points = points };
-                                var next = new { DeltaX = dx, DeltaY = dy, Points = points };
-                                _history.Snapshot(previous, next, (s) => MovePointsBy(s.Points, s.DeltaX, s.DeltaY));
+                                if (_enableHistory)
+                                {
+                                    var previous = new { DeltaX = -dx, DeltaY = -dy, Points = points };
+                                    var next = new { DeltaX = dx, DeltaY = dy, Points = points };
+                                    _history.Snapshot(previous, next, (s) => MovePointsBy(s.Points, s.DeltaX, s.DeltaY));
+                                }
                             }
                         }
                         break;
@@ -1314,9 +1444,12 @@ namespace Core2D
 
                                 MoveShapesBy(shapes, dx, dy);
 
-                                var previous = new { DeltaX = -dx, DeltaY = -dy, Shapes = shapes };
-                                var next = new { DeltaX = dx, DeltaY = dy, Shapes = shapes };
-                                _history.Snapshot(previous, next, (s) => MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY));
+                                if (_enableHistory)
+                                {
+                                    var previous = new { DeltaX = -dx, DeltaY = -dy, Shapes = shapes };
+                                    var next = new { DeltaX = dx, DeltaY = dy, Shapes = shapes };
+                                    _history.Snapshot(previous, next, (s) => MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY));
+                                }
                             }
                         }
                         break;
@@ -1335,18 +1468,24 @@ namespace Core2D
 
                             MovePointsBy(points, dx, dy);
 
-                            var previous = new { DeltaX = -dx, DeltaY = -dy, Points = points };
-                            var next = new { DeltaX = dx, DeltaY = dy, Points = points };
-                            _history.Snapshot(previous, next, (s) => MovePointsBy(s.Points, s.DeltaX, s.DeltaY));
+                            if (_enableHistory)
+                            {
+                                var previous = new { DeltaX = -dx, DeltaY = -dy, Points = points };
+                                var next = new { DeltaX = dx, DeltaY = dy, Points = points };
+                                _history.Snapshot(previous, next, (s) => MovePointsBy(s.Points, s.DeltaX, s.DeltaY)); 
+                            }
                         }
                         break;
                     case MoveMode.Shape:
                         {
                             MoveShapesBy(shapes, dx, dy);
 
-                            var previous = new { DeltaX = -dx, DeltaY = -dy, Shapes = shapes.ToList() };
-                            var next = new { DeltaX = dx, DeltaY = dy, Shapes = shapes.ToList() };
-                            _history.Snapshot(previous, next, (s) => MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY));
+                            if (_enableHistory)
+                            {
+                                var previous = new { DeltaX = -dx, DeltaY = -dy, Shapes = shapes.ToList() };
+                                var next = new { DeltaX = dx, DeltaY = dy, Shapes = shapes.ToList() };
+                                _history.Snapshot(previous, next, (s) => MoveShapesBy(s.Shapes, s.DeltaX, s.DeltaY)); 
+                            }
                         }
                         break;
                 }
@@ -1401,10 +1540,17 @@ namespace Core2D
             var document = _project.Documents.FirstOrDefault(d => d.Containers.Contains(container));
             if (document != null)
             {
-                var previous = document.Containers;
-                var next = document.Containers.Remove(container);
-                _history.Snapshot(previous, next, (p) => document.Containers = p);
-                document.Containers = next;
+                if (_enableHistory)
+                {
+                    var previous = document.Containers;
+                    var next = document.Containers.Remove(container);
+                    _history.Snapshot(previous, next, (p) => document.Containers = p);
+                    document.Containers = next;
+                }
+                else
+                {
+                    document.Containers = document.Containers.Remove(container);
+                }
 
                 _project.CurrentDocument = document;
                 _project.CurrentContainer = document.Containers.FirstOrDefault();
@@ -1421,10 +1567,17 @@ namespace Core2D
             if (_project == null || _project.Documents == null)
                 return;
 
-            var previous = _project.Documents;
-            var next = _project.Documents.Remove(document);
-            _history.Snapshot(previous, next, (p) => _project.Documents = p);
-            _project.Documents = next;
+            if (_enableHistory)
+            {
+                var previous = _project.Documents;
+                var next = _project.Documents.Remove(document);
+                _history.Snapshot(previous, next, (p) => _project.Documents = p);
+                _project.Documents = next;
+            }
+            else
+            {
+                _project.Documents = _project.Documents.Remove(document);
+            }
 
             _project.CurrentDocument = _project.Documents.FirstOrDefault();
             if (_project.CurrentDocument != null)
@@ -1451,10 +1604,18 @@ namespace Core2D
             if (_renderers[0].State.SelectedShape != null)
             {
                 var layer = _project.CurrentContainer.CurrentLayer;
-                var previous = layer.Shapes;
-                var next = layer.Shapes.Remove(_renderers[0].State.SelectedShape);
-                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
+
+                if (_enableHistory)
+                {
+                    var previous = layer.Shapes;
+                    var next = layer.Shapes.Remove(_renderers[0].State.SelectedShape);
+                    _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                    layer.Shapes = next;
+                }
+                else
+                {
+                    layer.Shapes = layer.Shapes.Remove(_renderers[0].State.SelectedShape);
+                }
 
                 _project.CurrentContainer.CurrentLayer.Invalidate();
                 _renderers[0].State.SelectedShape = default(BaseShape);
@@ -1470,10 +1631,17 @@ namespace Core2D
                     builder.Remove(shape);
                 }
 
-                var previous = layer.Shapes;
-                var next = builder.ToImmutable();
-                _history.Snapshot(previous, next, (p) => layer.Shapes = p);
-                layer.Shapes = next;
+                if (_enableHistory)
+                {
+                    var previous = layer.Shapes;
+                    var next = builder.ToImmutable();
+                    _history.Snapshot(previous, next, (p) => layer.Shapes = p);
+                    layer.Shapes = next;
+                }
+                else
+                {
+                    layer.Shapes = builder.ToImmutable();
+                }
 
                 _renderers[0].State.SelectedShapes = default(ImmutableHashSet<BaseShape>);
                 layer.Invalidate();
