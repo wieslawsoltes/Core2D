@@ -42,10 +42,18 @@ namespace Core2D.UI.Wpf.Controls
             var editor = (Core2D.Editor)this.Tag;
 
             var container = editor.Project.CurrentContainer;
-            var previous = container.Layers;
-            var next = array;
-            editor.History.Snapshot(previous, next, (p) => container.Layers = p);
-            container.Layers = next;
+
+            if (editor.EnableHistory)
+            {
+                var previous = container.Layers;
+                var next = array;
+                editor.History.Snapshot(previous, next, (p) => container.Layers = p);
+                container.Layers = next;
+            }
+            else
+            {
+                container.Layers = array;
+            }
         }
     }
 }

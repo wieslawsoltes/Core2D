@@ -44,10 +44,17 @@ namespace Core2D.UI.Wpf.Controls
             if (group == null)
                 return;
 
-            var previous = group.Connectors;
-            var next = array;
-            editor.History.Snapshot(previous, next, (p) => group.Connectors = p);
-            group.Connectors = next;
+            if (editor.EnableHistory)
+            {
+                var previous = group.Connectors;
+                var next = array;
+                editor.History.Snapshot(previous, next, (p) => group.Connectors = p);
+                group.Connectors = next;
+            }
+            else
+            {
+                group.Connectors = array;
+            }
         }
     }
 }

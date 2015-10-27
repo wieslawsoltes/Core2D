@@ -42,10 +42,18 @@ namespace Core2D.UI.Wpf.Controls
             var editor = (Core2D.Editor)this.Tag;
 
             var gl = editor.Project.CurrentGroupLibrary;
-            var previous = gl.Groups;
-            var next = array;
-            editor.History.Snapshot(previous, next, (p) => gl.Groups = p);
-            gl.Groups = next;
+
+            if (editor.EnableHistory)
+            {
+                var previous = gl.Groups;
+                var next = array;
+                editor.History.Snapshot(previous, next, (p) => gl.Groups = p);
+                gl.Groups = next;
+            }
+            else
+            {
+                gl.Groups = array;
+            }
         }
     }
 }

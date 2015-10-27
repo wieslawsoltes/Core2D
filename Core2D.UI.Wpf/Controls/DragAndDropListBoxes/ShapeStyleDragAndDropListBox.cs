@@ -42,10 +42,18 @@ namespace Core2D.UI.Wpf.Controls
             var editor = (Core2D.Editor)this.Tag;
 
             var sg = editor.Project.CurrentStyleLibrary;
-            var previous = sg.Styles;
-            var next = array;
-            editor.History.Snapshot(previous, next, (p) => sg.Styles = p);
-            sg.Styles = next;
+
+            if (editor.EnableHistory)
+            {
+                var previous = sg.Styles;
+                var next = array;
+                editor.History.Snapshot(previous, next, (p) => sg.Styles = p);
+                sg.Styles = next;
+            }
+            else
+            {
+                sg.Styles = array;
+            }
         }
     }
 }

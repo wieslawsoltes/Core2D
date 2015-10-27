@@ -42,10 +42,18 @@ namespace Core2D.UI.Wpf.Controls
             var editor = (Core2D.Editor)this.Tag;
 
             var project = editor.Project;
-            var previous = project.Templates;
-            var next = array;
-            editor.History.Snapshot(previous, next, (p) => project.Templates = p);
-            project.Templates = next;
+
+            if (editor.EnableHistory)
+            {
+                var previous = project.Templates;
+                var next = array;
+                editor.History.Snapshot(previous, next, (p) => project.Templates = p);
+                project.Templates = next;
+            }
+            else
+            {
+                project.Templates = array;
+            }
         }
     }
 }

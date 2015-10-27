@@ -44,10 +44,17 @@ namespace Core2D.UI.Wpf.Controls
             if (group == null)
                 return;
 
-            var previous = group.Shapes;
-            var next = array;
-            editor.History.Snapshot(previous, next, (p) => group.Shapes = p);
-            group.Shapes = next;
+            if (editor.EnableHistory)
+            {
+                var previous = group.Shapes;
+                var next = array;
+                editor.History.Snapshot(previous, next, (p) => group.Shapes = p);
+                group.Shapes = next;
+            }
+            else
+            {
+                group.Shapes = array;
+            }
         }
     }
 }
