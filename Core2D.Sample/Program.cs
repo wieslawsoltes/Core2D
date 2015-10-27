@@ -16,33 +16,26 @@ namespace Core2D.Sample
             CreateSampleProject();
         }
 
-        static EditorContext CreateContext()
-        {
-            var context = new EditorContext()
-            {
-                View = null,
-                Renderers = null,
-                ProjectFactory = new ProjectFactory(),
-                TextClipboard = null,
-                Serializer = new NewtonsoftSerializer(),
-                PdfWriter = null,
-                DxfWriter = null,
-                CsvReader = null,
-                CsvWriter = null
-            };
-
-            var project = context.ProjectFactory.GetProject();
-
-            context.Editor = Editor.Create(project, null, false, false);
-
-            return context;
-        }
-
         static void CreateSampleProject()
         {
             try
             {
-                var context = CreateContext();
+                var context = new EditorContext()
+                {
+                    View = null,
+                    Renderers = null,
+                    ProjectFactory = new ProjectFactory(),
+                    TextClipboard = null,
+                    Serializer = new NewtonsoftSerializer(),
+                    PdfWriter = null,
+                    DxfWriter = null,
+                    CsvReader = null,
+                    CsvWriter = null
+                };
+
+                var project = context.ProjectFactory.GetProject();
+
+                context.Editor = Editor.Create(project, null, false, false);
 
                 var factory = new ShapeFactory(context);
 
