@@ -759,7 +759,7 @@ namespace Core2D
                 var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(selected));
                 if (document != null)
                 {
-                    var container = _projectFactory.GetContainer(_editor.Project, "Container");
+                    var container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
 
                     if (_editor.EnableHistory)
                     {
@@ -779,7 +779,7 @@ namespace Core2D
             else if (item is Document)
             {
                 var selected = item as Document;
-                var container = _projectFactory.GetContainer(_editor.Project, "Container");
+                var container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
 
                 if (_editor.EnableHistory)
                 {
@@ -797,7 +797,7 @@ namespace Core2D
             }
             else if (item is Project)
             {
-                var document = _projectFactory.GetDocument(_editor.Project, "Document");
+                var document = _projectFactory.GetDocument(_editor.Project, EditorConstants.DefaultDocumentName);
 
                 if (_editor.EnableHistory)
                 {
@@ -1335,7 +1335,7 @@ namespace Core2D
             if (_editor.Project == null || _editor.Project.CurrentDocument == null)
                 return;
 
-            var container = _projectFactory.GetContainer(_editor.Project, "Container");
+            var container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
 
             var document = _editor.Project.CurrentDocument;
 
@@ -1367,7 +1367,7 @@ namespace Core2D
             {
                 var selected = item as Container;
                 int index = _editor.Project.CurrentDocument.Containers.IndexOf(selected);
-                var container = _projectFactory.GetContainer(_editor.Project, "Container");
+                var container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
 
                 var document = _editor.Project.CurrentDocument;
 
@@ -1400,7 +1400,7 @@ namespace Core2D
             {
                 var selected = item as Container;
                 int index = _editor.Project.CurrentDocument.Containers.IndexOf(selected);
-                var container = _projectFactory.GetContainer(_editor.Project, "Container");
+                var container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
 
                 var document = _editor.Project.CurrentDocument;
 
@@ -1429,7 +1429,7 @@ namespace Core2D
             if (_editor.Project == null)
                 return;
 
-            var document = _projectFactory.GetDocument(_editor.Project, "Document");
+            var document = _projectFactory.GetDocument(_editor.Project, EditorConstants.DefaultDocumentName);
 
             if (_editor.EnableHistory)
             {
@@ -1460,7 +1460,7 @@ namespace Core2D
             {
                 var selected = item as Document;
                 int index = _editor.Project.Documents.IndexOf(selected);
-                var document = _projectFactory.GetDocument(_editor.Project, "Document");
+                var document = _projectFactory.GetDocument(_editor.Project, EditorConstants.DefaultDocumentName);
 
                 if (_editor.EnableHistory)
                 {
@@ -1492,7 +1492,7 @@ namespace Core2D
             {
                 var selected = item as Document;
                 int index = _editor.Project.Documents.IndexOf(selected);
-                var document = _projectFactory.GetDocument(_editor.Project, "Document");
+                var document = _projectFactory.GetDocument(_editor.Project, EditorConstants.DefaultDocumentName);
 
                 if (_editor.EnableHistory)
                 {
@@ -2323,7 +2323,7 @@ namespace Core2D
                     return;
 
                 // check for the Id column
-                if (db.Columns[0].Name != "Id")
+                if (db.Columns[0].Name != Database.IdColumnName)
                     return;
 
                 // skip Id column for update
@@ -2609,7 +2609,7 @@ namespace Core2D
                         // create Imported style library
                         if (_editor.Project.CurrentStyleLibrary == null)
                         {
-                            var sg = StyleLibrary.Create("Imported");
+                            var sg = StyleLibrary.Create(EditorConstants.ImportedStyleLibraryName);
                             _editor.Project.StyleLibraries = _editor.Project.StyleLibraries.Add(sg);
                             _editor.Project.CurrentStyleLibrary = sg;
                         }
@@ -2671,7 +2671,7 @@ namespace Core2D
                         // create Imported database
                         if (_editor.Project.CurrentDatabase == null)
                         {
-                            var db = Database.Create("Imported", shape.Data.Record.Columns);
+                            var db = Database.Create(EditorConstants.ImportedDatabaseName, shape.Data.Record.Columns);
                             _editor.Project.Databases = _editor.Project.Databases.Add(db);
                             _editor.Project.CurrentDatabase = db;
                         }
@@ -2888,62 +2888,62 @@ namespace Core2D
 
                         string ext = System.IO.Path.GetExtension(path);
 
-                        if (string.Compare(ext, ".project", true) == 0)
+                        if (string.Compare(ext, EditorConstants.ProjectExtension, true) == 0)
                         {
                             Open(path);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".csv", true) == 0)
+                        else if (string.Compare(ext, EditorConstants.CsvExtension, true) == 0)
                         {
                             ImportData(path);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".style", true) == 0)
+                        else if (string.Compare(ext, EditorConstants.StyleExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project.CurrentStyleLibrary, ImportType.Style);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".styles", true) == 0)
+                        else if (string.Compare(ext, EditorConstants.StylesExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project.CurrentStyleLibrary, ImportType.Styles);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".StyleLibrary", true) == 0)
+                        else if (string.Compare(ext, EditorConstants.StyleLibraryExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.StyleLibrary);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".StyleLibraries", true) == 0)
+                        else if (string.Compare(ext, EditorConstants.StyleLibrariesExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.StyleLibraries);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".group", true) == 0)
+                        else if (string.Compare(ext, EditorConstants.GroupExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project.CurrentGroupLibrary, ImportType.Group);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".groups", true) == 0)
+                        else if (string.Compare(ext, EditorConstants.GroupsExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project.CurrentGroupLibrary, ImportType.Groups);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".grouplibrary", true) == 0)
+                        else if (string.Compare(ext, EditorConstants.GroupLibraryExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.GroupLibrary);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".grouplibraries", true) == 0)
+                        else if (string.Compare(ext, EditorConstants.GroupLibrariesExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.GroupLibraries);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".template", true) == 0)
+                        else if (string.Compare(ext, EditorConstants.TemplateExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.Template);
                             result = true;
                         }
-                        else if (string.Compare(ext, ".templates", true) == 0)
+                        else if (string.Compare(ext, EditorConstants.TemplatesExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.Templates);
                             result = true;
