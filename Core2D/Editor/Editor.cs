@@ -1520,7 +1520,7 @@ namespace Core2D
         /// <param name="container"></param>
         public void Deselect(Container container)
         {
-            if (container == null)
+            if (container == null || _renderers == null)
                 return;
 
             if (_renderers[0].State.SelectedShape != null
@@ -1542,7 +1542,7 @@ namespace Core2D
         /// <returns></returns>
         public bool TryToSelectShapes(Container container, XRectangle rectangle)
         {
-            if (container == null || _renderers == null)
+            if (container == null)
                 return false;
 
             var rect = Rect2.Create(rectangle.TopLeft, rectangle.BottomRight);
