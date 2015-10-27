@@ -140,6 +140,616 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="log"></param>
+        /// <param name="logFileName"></param>
+        public void InitializeEditor(ILog log = null, string logFileName = null)
+        {
+            try
+            {
+                _editor = Editor.Create(_projectFactory.GetProject(), _renderers);
+
+                if (log != null && logFileName != null)
+                {
+                    _editor.Log = log;
+                    _editor.Log.Initialize(logFileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_editor != null && _editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+                else
+                {
+                    Debug.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
+        public bool IsEditMode()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void InitializeCommands()
+        {
+            try
+            {
+                _commands = new EditorCommands();
+
+                _commands.NewCommand =
+                    Command<object>.Create(
+                        (item) => OnNew(item),
+                        (item) => IsEditMode());
+
+                _commands.CloseCommand =
+                    Command.Create(
+                        () => OnClose(),
+                        () => IsEditMode());
+
+                _commands.ExitCommand =
+                    Command.Create(
+                        () => OnExit(),
+                        () => true);
+
+                _commands.UndoCommand =
+                    Command.Create(
+                        () => OnUndo(),
+                        () => IsEditMode() /* && CanUndo() */);
+
+                _commands.RedoCommand =
+                    Command.Create(
+                        () => OnRedo(),
+                        () => IsEditMode() /* && CanRedo() */);
+
+                _commands.CutCommand =
+                    Command<object>.Create(
+                        (item) => OnCut(item),
+                        (item) => IsEditMode() /* && CanCopy() */);
+
+                _commands.CopyCommand =
+                    Command<object>.Create(
+                        (item) => OnCopy(item),
+                        (item) => IsEditMode() /* && CanCopy() */);
+
+                _commands.PasteCommand =
+                    Command<object>.Create(
+                        (item) => OnPaste(item),
+                        (item) => IsEditMode() /* && CanPaste() */);
+
+                _commands.DeleteCommand =
+                    Command<object>.Create(
+                        (item) => OnDelete(item),
+                        (item) => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+                _commands.SelectAllCommand =
+                    Command.Create(
+                        () => OnSelectAll(),
+                        () => IsEditMode());
+
+                _commands.DeselectAllCommand =
+                    Command.Create(
+                        () => OnDeselectAll(),
+                        () => IsEditMode());
+
+                _commands.ClearAllCommand =
+                    Command.Create(
+                        () => OnClearAll(),
+                        () => IsEditMode());
+
+                _commands.GroupCommand =
+                    Command.Create(
+                        () => _editor.GroupSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+                _commands.UngroupCommand =
+                    Command.Create(
+                        () => _editor.UngroupSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+                _commands.BringToFrontCommand =
+                    Command.Create(
+                        () => _editor.BringToFrontSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+                _commands.SendToBackCommand =
+                    Command.Create(
+                        () => _editor.SendToBackSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+                _commands.BringForwardCommand =
+                    Command.Create(
+                        () => _editor.BringForwardSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+                _commands.SendBackwardCommand =
+                    Command.Create(
+                        () => _editor.SendBackwardSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+                _commands.MoveUpCommand =
+                    Command.Create(
+                        () => _editor.MoveUpSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+                _commands.MoveDownCommand =
+                    Command.Create(
+                        () => _editor.MoveDownSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+                _commands.MoveLeftCommand =
+                    Command.Create(
+                        () => _editor.MoveLeftSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+                _commands.MoveRightCommand =
+                    Command.Create(
+                        () => _editor.MoveRightSelected(),
+                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
+
+                _commands.ToolNoneCommand =
+                    Command.Create(
+                        () => OnToolNone(),
+                        () => IsEditMode());
+
+                _commands.ToolSelectionCommand =
+                    Command.Create(
+                        () => OnToolSelection(),
+                        () => IsEditMode());
+
+                _commands.ToolPointCommand =
+                    Command.Create(
+                        () => OnToolPoint(),
+                        () => IsEditMode());
+
+                _commands.ToolLineCommand =
+                    Command.Create(
+                        () => OnToolLine(),
+                        () => IsEditMode());
+
+                _commands.ToolArcCommand =
+                    Command.Create(
+                        () => OnToolArc(),
+                        () => IsEditMode());
+
+                _commands.ToolBezierCommand =
+                    Command.Create(
+                        () => OnToolBezier(),
+                        () => IsEditMode());
+
+                _commands.ToolQBezierCommand =
+                    Command.Create(
+                        () => OnToolQBezier(),
+                        () => IsEditMode());
+
+                _commands.ToolPathCommand =
+                    Command.Create(
+                        () => OnToolPath(),
+                        () => IsEditMode());
+
+                _commands.ToolRectangleCommand =
+                    Command.Create(
+                        () => OnToolRectangle(),
+                        () => IsEditMode());
+
+                _commands.ToolEllipseCommand =
+                    Command.Create(
+                        () => OnToolEllipse(),
+                        () => IsEditMode());
+
+                _commands.ToolTextCommand =
+                    Command.Create(
+                        () => OnToolText(),
+                        () => IsEditMode());
+
+                _commands.ToolImageCommand =
+                    Command.Create(
+                        () => OnToolImage(),
+                        () => IsEditMode());
+
+                _commands.ToolMoveCommand =
+                    Command.Create(
+                        () => OnToolMove(),
+                        () => IsEditMode());
+
+                _commands.DefaultIsStrokedCommand =
+                    Command.Create(
+                        () => OnToggleDefaultIsStroked(),
+                        () => IsEditMode());
+
+                _commands.DefaultIsFilledCommand =
+                    Command.Create(
+                        () => OnToggleDefaultIsFilled(),
+                        () => IsEditMode());
+
+                _commands.DefaultIsClosedCommand =
+                    Command.Create(
+                        () => OnToggleDefaultIsClosed(),
+                        () => IsEditMode());
+
+                _commands.DefaultIsSmoothJoinCommand =
+                    Command.Create(
+                        () => OnToggleDefaultIsSmoothJoin(),
+                        () => IsEditMode());
+
+                _commands.SnapToGridCommand =
+                    Command.Create(
+                        () => OnToggleSnapToGrid(),
+                        () => IsEditMode());
+
+                _commands.TryToConnectCommand =
+                    Command.Create(
+                        () => OnToggleTryToConnect(),
+                        () => IsEditMode());
+
+                _commands.AddDatabaseCommand =
+                    Command.Create(
+                        () => _editor.AddDatabase(),
+                        () => IsEditMode());
+
+                _commands.RemoveDatabaseCommand =
+                    Command<object>.Create(
+                        (db) => _editor.RemoveDatabase(db),
+                        (db) => IsEditMode());
+
+                _commands.AddColumnCommand =
+                    Command<object>.Create(
+                        (owner) => _editor.AddColumn(owner),
+                        (owner) => IsEditMode());
+
+                _commands.RemoveColumnCommand =
+                    Command<object>.Create(
+                        (parameter) => _editor.RemoveColumn(parameter),
+                        (parameter) => IsEditMode());
+
+                _commands.AddRecordCommand =
+                    Command.Create(
+                        () => _editor.AddRecord(),
+                        () => IsEditMode());
+
+                _commands.RemoveRecordCommand =
+                    Command.Create(
+                        () => _editor.RemoveRecord(),
+                        () => IsEditMode());
+
+                _commands.ResetRecordCommand =
+                    Command<object>.Create(
+                        (owner) => _editor.ResetRecord(owner),
+                        (owner) => IsEditMode());
+
+                _commands.AddBindingCommand =
+                    Command<object>.Create(
+                        (owner) => _editor.AddBinding(owner),
+                        (owner) => IsEditMode());
+
+                _commands.RemoveBindingCommand =
+                    Command<object>.Create(
+                        (parameter) => _editor.RemoveBinding(parameter),
+                        (parameter) => IsEditMode());
+
+                _commands.AddPropertyCommand =
+                    Command<object>.Create(
+                        (owner) => _editor.AddProperty(owner),
+                        (owner) => IsEditMode());
+
+                _commands.RemovePropertyCommand =
+                    Command<object>.Create(
+                        (parameter) => _editor.RemoveProperty(parameter),
+                        (parameter) => IsEditMode());
+
+                _commands.AddGroupLibraryCommand =
+                    Command.Create(
+                        () => _editor.AddGroupLibrary(),
+                        () => IsEditMode());
+
+                _commands.RemoveGroupLibraryCommand =
+                    Command.Create(
+                        () => _editor.RemoveCurrentGroupLibrary(),
+                        () => IsEditMode());
+
+                _commands.AddGroupCommand =
+                    Command.Create(
+                        () => OnAddGroup(),
+                        () => IsEditMode());
+
+                _commands.RemoveGroupCommand =
+                    Command.Create(
+                        () => OnRemoveGroup(),
+                        () => IsEditMode());
+
+                _commands.AddLayerCommand =
+                    Command.Create(
+                        () => _editor.AddLayer(),
+                        () => IsEditMode());
+
+                _commands.RemoveLayerCommand =
+                    Command.Create(
+                        () => _editor.RemoveCurrentLayer(),
+                        () => IsEditMode());
+
+                _commands.AddStyleLibraryCommand =
+                    Command.Create(
+                        () => _editor.AddStyleLibrary(),
+                        () => IsEditMode());
+
+                _commands.RemoveStyleLibraryCommand =
+                    Command.Create(
+                        () => _editor.RemoveCurrentStyleLibrary(),
+                        () => IsEditMode());
+
+                _commands.AddStyleCommand =
+                    Command.Create(
+                        () => _editor.AddStyle(),
+                        () => IsEditMode());
+
+                _commands.RemoveStyleCommand =
+                    Command.Create(
+                        () => _editor.RemoveCurrentStyle(),
+                        () => IsEditMode());
+
+                _commands.RemoveShapeCommand =
+                    Command.Create(
+                        () => _editor.RemoveCurrentShape(),
+                        () => IsEditMode());
+
+                _commands.AddTemplateCommand =
+                    Command.Create(
+                        () => OnAddTemplate(),
+                        () => IsEditMode());
+
+                _commands.RemoveTemplateCommand =
+                    Command.Create(
+                        () => OnRemoveTemplate(),
+                        () => IsEditMode());
+
+                _commands.EditTemplateCommand =
+                    Command.Create(
+                        () => OnEditTemplate(),
+                        () => IsEditMode());
+
+                _commands.ApplyTemplateCommand =
+                    Command<object>.Create(
+                        (item) => OnApplyTemplate(item),
+                        (item) => true);
+
+                _commands.SelectedItemChangedCommand =
+                    Command<object>.Create(
+                        (item) => OnSelectedItemChanged(item),
+                        (item) => IsEditMode());
+
+                _commands.AddContainerCommand =
+                    Command<object>.Create(
+                        (item) => OnAddContainer(item),
+                        (item) => IsEditMode());
+
+                _commands.InsertContainerBeforeCommand =
+                    Command<object>.Create(
+                        (item) => OnInsertContainerBefore(item),
+                        (item) => IsEditMode());
+
+                _commands.InsertContainerAfterCommand =
+                    Command<object>.Create(
+                        (item) => OnInsertContainerAfter(item),
+                        (item) => IsEditMode());
+
+                _commands.AddDocumentCommand =
+                    Command<object>.Create(
+                        (item) => OnAddDocument(item),
+                        (item) => IsEditMode());
+
+                _commands.InsertDocumentBeforeCommand =
+                    Command<object>.Create(
+                        (item) => OnInsertDocumentBefore(item),
+                        (item) => IsEditMode());
+
+                _commands.InsertDocumentAfterCommand =
+                    Command<object>.Create(
+                        (item) => OnInsertDocumentAfter(item),
+                        (item) => IsEditMode());
+            }
+            catch (Exception ex)
+            {
+                if (_editor != null && _editor.Log != null)
+                {
+                    _editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+                else
+                {
+                    Debug.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.StackTrace);
+                }
+            }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        private void UpdateCanExecuteState()
+        {
+            (_commands.NewCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.OpenCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.CloseCommand as Command).NotifyCanExecuteChanged();
+            (_commands.SaveCommand as Command).NotifyCanExecuteChanged();
+            (_commands.SaveAsCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ExportCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExitCommand as Command).NotifyCanExecuteChanged();
+
+            (_commands.ImportDataCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportDataCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.UpdateDataCommand as Command<object>).NotifyCanExecuteChanged();
+
+            (_commands.ImportStyleCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportStylesCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportStyleLibraryCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportStyleLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportGroupCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportGroupsCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportGroupLibraryCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportGroupLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportTemplateCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ImportTemplatesCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportStyleCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportStylesCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportStyleLibraryCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportStyleLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportGroupCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportGroupsCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportGroupLibraryCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportGroupLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportTemplateCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ExportTemplatesCommand as Command<object>).NotifyCanExecuteChanged();
+
+            (_commands.UndoCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RedoCommand as Command).NotifyCanExecuteChanged();
+            (_commands.CopyAsEmfCommand as Command).NotifyCanExecuteChanged();
+            (_commands.CutCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.CopyCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.PasteCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.DeleteCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.SelectAllCommand as Command).NotifyCanExecuteChanged();
+            (_commands.DeselectAllCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ClearAllCommand as Command).NotifyCanExecuteChanged();
+            (_commands.GroupCommand as Command).NotifyCanExecuteChanged();
+            (_commands.UngroupCommand as Command).NotifyCanExecuteChanged();
+
+            (_commands.BringToFrontCommand as Command).NotifyCanExecuteChanged();
+            (_commands.BringForwardCommand as Command).NotifyCanExecuteChanged();
+            (_commands.SendBackwardCommand as Command).NotifyCanExecuteChanged();
+            (_commands.SendToBackCommand as Command).NotifyCanExecuteChanged();
+
+            (_commands.MoveUpCommand as Command).NotifyCanExecuteChanged();
+            (_commands.MoveDownCommand as Command).NotifyCanExecuteChanged();
+            (_commands.MoveLeftCommand as Command).NotifyCanExecuteChanged();
+            (_commands.MoveRightCommand as Command).NotifyCanExecuteChanged();
+
+            (_commands.ToolNoneCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolSelectionCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolPointCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolLineCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolArcCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolBezierCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolQBezierCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolRectangleCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolEllipseCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolPathCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolTextCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolImageCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ToolMoveCommand as Command).NotifyCanExecuteChanged();
+
+            (_commands.DefaultIsStrokedCommand as Command).NotifyCanExecuteChanged();
+            (_commands.DefaultIsFilledCommand as Command).NotifyCanExecuteChanged();
+            (_commands.DefaultIsClosedCommand as Command).NotifyCanExecuteChanged();
+            (_commands.DefaultIsSmoothJoinCommand as Command).NotifyCanExecuteChanged();
+            (_commands.SnapToGridCommand as Command).NotifyCanExecuteChanged();
+            (_commands.TryToConnectCommand as Command).NotifyCanExecuteChanged();
+
+            (_commands.AddDatabaseCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RemoveDatabaseCommand as Command<object>).NotifyCanExecuteChanged();
+
+            (_commands.AddColumnCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.RemoveColumnCommand as Command<object>).NotifyCanExecuteChanged();
+
+            (_commands.AddRecordCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RemoveRecordCommand as Command).NotifyCanExecuteChanged();
+
+            (_commands.ResetRecordCommand as Command<object>).NotifyCanExecuteChanged();
+
+            (_commands.AddBindingCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.RemoveBindingCommand as Command<object>).NotifyCanExecuteChanged();
+
+            (_commands.AddPropertyCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.RemovePropertyCommand as Command<object>).NotifyCanExecuteChanged();
+
+            (_commands.AddGroupLibraryCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RemoveGroupLibraryCommand as Command).NotifyCanExecuteChanged();
+
+            (_commands.AddGroupCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RemoveGroupCommand as Command).NotifyCanExecuteChanged();
+
+            (_commands.AddLayerCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RemoveLayerCommand as Command).NotifyCanExecuteChanged();
+
+            (_commands.AddStyleCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RemoveStyleCommand as Command).NotifyCanExecuteChanged();
+
+            (_commands.AddStyleLibraryCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RemoveStyleLibraryCommand as Command).NotifyCanExecuteChanged();
+
+            (_commands.RemoveShapeCommand as Command).NotifyCanExecuteChanged();
+
+            (_commands.ZoomResetCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ZoomExtentCommand as Command).NotifyCanExecuteChanged();
+
+            (_commands.AddTemplateCommand as Command).NotifyCanExecuteChanged();
+            (_commands.RemoveTemplateCommand as Command).NotifyCanExecuteChanged();
+            (_commands.EditTemplateCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ApplyTemplateCommand as Command<object>).NotifyCanExecuteChanged();
+
+            (_commands.SelectedItemChangedCommand as Command<object>).NotifyCanExecuteChanged();
+
+            (_commands.AddContainerCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.InsertContainerBeforeCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.InsertContainerAfterCommand as Command<object>).NotifyCanExecuteChanged();
+
+            (_commands.AddDocumentCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.InsertDocumentBeforeCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.InsertDocumentAfterCommand as Command<object>).NotifyCanExecuteChanged();
+
+            (_commands.LoadWindowLayoutCommand as Command).NotifyCanExecuteChanged();
+            (_commands.SaveWindowLayoutCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ResetWindowLayoutCommand as Command).NotifyCanExecuteChanged();
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        ~EditorContext()
+        {
+            Dispose(false);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_editor.Log != null)
+                {
+                    _editor.Log.Close();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="item"></param>
         public void OnNew(object item)
         {
@@ -593,373 +1203,12 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        public void OnAddDatabase()
-        {
-            if (_editor.Project == null)
-                return;
-
-            var builder = ImmutableArray.CreateBuilder<Column>();
-            builder.Add(Column.Create("Column0"));
-            builder.Add(Column.Create("Column1"));
-
-            var db = Database.Create("Db", builder.ToImmutable());
-
-            if (_editor.EnableHistory)
-            {
-                var previous = _editor.Project.Databases;
-                var next = _editor.Project.Databases.Add(db);
-                _editor.History.Snapshot(previous, next, (p) => _editor.Project.Databases = p);
-                _editor.Project.Databases = next;
-            }
-            else
-            {
-                _editor.Project.Databases = _editor.Project.Databases.Add(db);
-            }
-
-            _editor.Project.CurrentDatabase = db;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="db"></param>
-        public void OnRemoveDatabase(object db)
-        {
-            if (_editor.Project == null)
-                return;
-
-            if (db != null && db is Database)
-            {
-                if (_editor.EnableHistory)
-                {
-                    var previous = _editor.Project.Databases;
-                    var next = _editor.Project.Databases.Remove(db as Database);
-                    _editor.History.Snapshot(previous, next, (p) => _editor.Project.Databases = p);
-                    _editor.Project.Databases = next;
-                }
-                else
-                {
-                    _editor.Project.Databases = _editor.Project.Databases.Remove(db as Database);
-                }
-
-                _editor.Project.CurrentDatabase = _editor.Project.Databases.FirstOrDefault();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="owner"></param>
-        public void OnAddColumn(object owner)
-        {
-            if (owner != null && owner is Database)
-            {
-                var db = owner as Database;
-                if (db.Columns == null)
-                {
-                    db.Columns = ImmutableArray.Create<Column>();
-                }
-
-                if (_editor.EnableHistory)
-                {
-                    var previous = db.Columns;
-                    var next = db.Columns.Add(Column.Create("Column" + db.Columns.Length));
-                    _editor.History.Snapshot(previous, next, (p) => db.Columns = p);
-                    db.Columns = next;
-                }
-                else
-                {
-                    db.Columns = db.Columns.Add(Column.Create("Column" + db.Columns.Length));
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="parameter"></param>
-        public void OnRemoveColumn(object parameter)
-        {
-            if (parameter != null && parameter is ColumnParameter)
-            {
-                var owner = (parameter as ColumnParameter).Owner;
-                var column = (parameter as ColumnParameter).Column;
-
-                if (owner is Database)
-                {
-                    var db = owner as Database;
-                    if (db.Columns != null)
-                    {
-                        if (_editor.EnableHistory)
-                        {
-                            var previous = db.Columns;
-                            var next = db.Columns.Remove(column);
-                            _editor.History.Snapshot(previous, next, (p) => db.Columns = p);
-                            db.Columns = next;
-                        }
-                        else
-                        {
-                            db.Columns = db.Columns.Remove(column);
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnAddRecord()
-        {
-            if (_editor.Project == null || _editor.Project.CurrentDatabase == null)
-                return;
-
-            var db = _editor.Project.CurrentDatabase;
-
-            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Value.Create(c));
-            var record = Record.Create(
-                db.Columns,
-                ImmutableArray.CreateRange<Value>(values));
-
-            if (_editor.EnableHistory)
-            {
-                var previous = db.Records;
-                var next = db.Records.Add(record);
-                _editor.History.Snapshot(previous, next, (p) => db.Records = p);
-                db.Records = next;
-            }
-            else
-            {
-                db.Records = db.Records.Add(record);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnRemoveRecord()
-        {
-            if (_editor.Project == null || _editor.Project.CurrentDatabase == null)
-                return;
-
-            var db = _editor.Project.CurrentDatabase;
-            if (db.CurrentRecord != null)
-            {
-                var record = db.CurrentRecord;
-
-                if (_editor.EnableHistory)
-                {
-                    var previous = db.Records;
-                    var next = db.Records.Remove(record);
-                    _editor.History.Snapshot(previous, next, (p) => db.Records = p);
-                    db.Records = next;
-                }
-                else
-                {
-                    db.Records = db.Records.Remove(record);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="owner"></param>
-        public void OnResetRecord(object owner)
-        {
-            if (owner != null && owner is Data)
-            {
-                var data = owner as Data;
-                var record = data.Record;
-
-                if (record != null)
-                {
-                    if (_editor.EnableHistory)
-                    {
-                        var previous = record;
-                        var next = default(Record);
-                        _editor.History.Snapshot(previous, next, (p) => data.Record = p);
-                        data.Record = next;
-                    }
-                    else
-                    {
-                        data.Record = default(Record);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="owner"></param>
-        public void OnAddBinding(object owner)
-        {
-            if (owner != null && owner is Data)
-            {
-                var data = owner as Data;
-                if (data.Bindings == null)
-                {
-                    data.Bindings = ImmutableArray.Create<ShapeBinding>();
-                }
-
-                _editor.AddWithHistory(data, ShapeBinding.Create("", ""));
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="parameter"></param>
-        public void OnRemoveBinding(object parameter)
-        {
-            if (parameter != null && parameter is ShapeBindingParameter)
-            {
-                var owner = (parameter as ShapeBindingParameter).Owner;
-                var binding = (parameter as ShapeBindingParameter).Binding;
-
-                if (owner != null && owner is Data)
-                {
-                    var data = owner as Data;
-                    if (data.Bindings != null)
-                    {
-                        if (_editor.EnableHistory)
-                        {
-                            var previous = data.Bindings;
-                            var next = data.Bindings.Remove(binding);
-                            _editor.History.Snapshot(previous, next, (p) => data.Bindings = p);
-                            data.Bindings = next;
-                        }
-                        else
-                        {
-                            data.Bindings = data.Bindings.Remove(binding);
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="owner"></param>
-        public void OnAddProperty(object owner)
-        {
-            if (owner != null)
-            {
-                if (owner is Data)
-                {
-                    var data = owner as Data;
-                    if (data.Properties == null)
-                    {
-                        data.Properties = ImmutableArray.Create<ShapeProperty>();
-                    }
-
-                    _editor.AddWithHistory(data, ShapeProperty.Create("New", ""));
-                }
-                else if (owner is Container)
-                {
-                    var container = owner as Container;
-                    if (container.Properties == null)
-                    {
-                        container.Properties = ImmutableArray.Create<ShapeProperty>();
-                    }
-
-                    _editor.AddWithHistory(container, ShapeProperty.Create("New", ""));
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="parameter"></param>
-        public void OnRemoveProperty(object parameter)
-        {
-            if (parameter != null && parameter is ShapePropertyParameter)
-            {
-                var owner = (parameter as ShapePropertyParameter).Owner;
-                var property = (parameter as ShapePropertyParameter).Property;
-
-                if (owner is Data)
-                {
-                    var data = owner as Data;
-                    if (data.Properties != null)
-                    {
-                        if (_editor.EnableHistory)
-                        {
-                            var previous = data.Properties;
-                            var next = data.Properties.Remove(property);
-                            _editor.History.Snapshot(previous, next, (p) => data.Properties = p);
-                            data.Properties = next;
-                        }
-                        else
-                        {
-                            data.Properties = data.Properties.Remove(property);
-                        }
-                    }
-                }
-                else if (owner is Container)
-                {
-                    var container = owner as Container;
-                    if (container.Properties != null)
-                    {
-                        if (_editor.EnableHistory)
-                        {
-                            var previous = container.Properties;
-                            var next = container.Properties.Remove(property);
-                            _editor.History.Snapshot(previous, next, (p) => container.Properties = p);
-                            container.Properties = next;
-                        }
-                        else
-                        {
-                            container.Properties = container.Properties.Remove(property);
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnAddGroupLibrary()
-        {
-            if (_editor.Project == null || _editor.Project.GroupLibraries == null)
-                return;
-
-            var gl = GroupLibrary.Create("New");
-
-            if (_editor.EnableHistory)
-            {
-                var previous = _editor.Project.GroupLibraries;
-                var next = _editor.Project.GroupLibraries.Add(gl);
-                _editor.History.Snapshot(previous, next, (p) => _editor.Project.GroupLibraries = p);
-                _editor.Project.GroupLibraries = next; 
-            }
-            else
-            {
-                _editor.Project.GroupLibraries = _editor.Project.GroupLibraries.Add(gl);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnRemoveGroupLibrary()
-        {
-            _editor.RemoveCurrentGroupLibrary();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public void OnAddGroup()
         {
             if (_editor.Project == null || _editor.Project.CurrentGroupLibrary == null)
                 return;
 
-            var group = _editor.Renderers[0].State.SelectedShape;
+            var group = _renderers[0].State.SelectedShape;
             if (group != null && group is XGroup)
             {
                 if (_editor.Project.CurrentGroupLibrary != null)
@@ -991,107 +1240,6 @@ namespace Core2D
         public void OnRemoveGroup()
         {
             _editor.RemoveCurrentGroup();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnAddLayer()
-        {
-            if (_editor.Project == null || _editor.Project.CurrentContainer == null)
-                return;
-
-            var container = _editor.Project.CurrentContainer;
-
-            if (_editor.EnableHistory)
-            {
-                var previous = container.Layers;
-                var next = container.Layers.Add(Layer.Create("New", container));
-                _editor.History.Snapshot(previous, next, (p) => container.Layers = p);
-                container.Layers = next;
-            }
-            else
-            {
-                container.Layers = container.Layers.Add(Layer.Create("New", container));
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnRemoveLayer()
-        {
-            _editor.RemoveCurrentLayer();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnAddStyleLibrary()
-        {
-            if (_editor.Project == null || _editor.Project.StyleLibraries == null)
-                return;
-
-            var sg = StyleLibrary.Create("New");
-
-            if (_editor.EnableHistory)
-            {
-                var previous = _editor.Project.StyleLibraries;
-                var next = _editor.Project.StyleLibraries.Add(sg);
-                _editor.History.Snapshot(previous, next, (p) => _editor.Project.StyleLibraries = p);
-                _editor.Project.StyleLibraries = next;
-            }
-            else
-            {
-                _editor.Project.StyleLibraries = _editor.Project.StyleLibraries.Add(sg);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnRemoveStyleLibrary()
-        {
-            _editor.RemoveCurrentStyleLibrary();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnAddStyle()
-        {
-            if (_editor.Project == null || _editor.Project.CurrentStyleLibrary == null)
-                return;
-
-            var sg = _editor.Project.CurrentStyleLibrary;
-
-            if (_editor.EnableHistory)
-            {
-                var previous = sg.Styles;
-                var next = sg.Styles.Add(ShapeStyle.Create("New"));
-                _editor.History.Snapshot(previous, next, (p) => sg.Styles = p);
-                sg.Styles = next;
-            }
-            else
-            {
-                sg.Styles = sg.Styles.Add(ShapeStyle.Create("New"));
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnRemoveStyle()
-        {
-            _editor.RemoveCurrentStyle();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnRemoveShape()
-        {
-            _editor.RemoveCurrentShape();
         }
 
         /// <summary>
@@ -2838,7 +2986,7 @@ namespace Core2D
                     _editor.Deselect(_editor.Project.CurrentContainer);
                     clone.Move(sx, sy);
 
-                    _editor.AddWithHistory(clone);
+                    _editor.AddShape(clone);
 
                     _editor.Select(_editor.Project.CurrentContainer, clone);
 
@@ -2953,7 +3101,7 @@ namespace Core2D
                             point.Data.Bindings = point.Data.Bindings.Add(ShapeBinding.Create("Y", record.Columns[1].Name));
                         }
 
-                        _editor.AddWithHistory(point);
+                        _editor.AddShape(point);
                     }
                     break;
                 case Tool.Line:
@@ -2976,7 +3124,7 @@ namespace Core2D
                             line.Data.Bindings = line.Data.Bindings.Add(ShapeBinding.Create("End.Y", record.Columns[3].Name));
                         }
 
-                        _editor.AddWithHistory(line);
+                        _editor.AddShape(line);
                     }
                     break;
                 case Tool.Rectangle:
@@ -2999,7 +3147,7 @@ namespace Core2D
                             rectangle.Data.Bindings = rectangle.Data.Bindings.Add(ShapeBinding.Create("BottomRight.Y", record.Columns[3].Name));
                         }
 
-                        _editor.AddWithHistory(rectangle);
+                        _editor.AddShape(rectangle);
                     }
                     break;
                 case Tool.Ellipse:
@@ -3022,7 +3170,7 @@ namespace Core2D
                             ellipse.Data.Bindings = ellipse.Data.Bindings.Add(ShapeBinding.Create("BottomRight.Y", record.Columns[3].Name));
                         }
 
-                        _editor.AddWithHistory(ellipse);
+                        _editor.AddShape(ellipse);
                     }
                     break;
                 case Tool.Arc:
@@ -3057,7 +3205,7 @@ namespace Core2D
                             arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point4.Y", record.Columns[7].Name));
                         }
 
-                        _editor.AddWithHistory(arc);
+                        _editor.AddShape(arc);
                     }
                     break;
                 case Tool.Bezier:
@@ -3092,7 +3240,7 @@ namespace Core2D
                             bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point4.Y", record.Columns[7].Name));
                         }
 
-                        _editor.AddWithHistory(bezier);
+                        _editor.AddShape(bezier);
                     }
                     break;
                 case Tool.QBezier:
@@ -3121,7 +3269,7 @@ namespace Core2D
                             qbezier.Data.Bindings = qbezier.Data.Bindings.Add(ShapeBinding.Create("Point3.Y", record.Columns[5].Name));
                         }
 
-                        _editor.AddWithHistory(qbezier);
+                        _editor.AddShape(qbezier);
                     }
                     break;
                 case Tool.Text:
@@ -3145,7 +3293,7 @@ namespace Core2D
                             text.Data.Bindings = text.Data.Bindings.Add(ShapeBinding.Create("BottomRight.Y", record.Columns[3].Name));
                         }
 
-                        _editor.AddWithHistory(text);
+                        _editor.AddShape(text);
                     }
                     break;
             }
@@ -3218,7 +3366,7 @@ namespace Core2D
             g.AddConnectorAsNone(pl);
             g.AddConnectorAsNone(pr);
 
-            _editor.AddWithHistory(g);
+            _editor.AddShape(g);
         }
 
         /// <summary>
@@ -3286,616 +3434,6 @@ namespace Core2D
         public bool CanRedo()
         {
             return _editor.EnableHistory && _editor.History.CanRedo();
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <returns></returns>
-        public bool IsEditMode()
-        {
-            return true;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="log"></param>
-        /// <param name="logFileName"></param>
-        public void InitializeEditor(ILog log = null, string logFileName = null)
-        {
-            try
-            {
-                _editor = Editor.Create(_projectFactory.GetProject(), _renderers);
-
-                if (log != null && logFileName != null)
-                {
-                    _editor.Log = log;
-                    _editor.Log.Initialize(logFileName);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_editor != null && _editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-                else
-                {
-                    Debug.WriteLine(ex.Message);
-                    Debug.WriteLine(ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void InitializeCommands()
-        {
-            try
-            {
-                _commands = new EditorCommands();
-
-                _commands.NewCommand =
-                    Command<object>.Create(
-                        (item) => OnNew(item),
-                        (item) => IsEditMode());
-
-                _commands.CloseCommand =
-                    Command.Create(
-                        () => OnClose(),
-                        () => IsEditMode());
-
-                _commands.ExitCommand =
-                    Command.Create(
-                        () => OnExit(),
-                        () => true);
-
-                _commands.UndoCommand =
-                    Command.Create(
-                        () => OnUndo(),
-                        () => IsEditMode() /* && CanUndo() */);
-
-                _commands.RedoCommand =
-                    Command.Create(
-                        () => OnRedo(),
-                        () => IsEditMode() /* && CanRedo() */);
-
-                _commands.CutCommand =
-                    Command<object>.Create(
-                        (item) => OnCut(item),
-                        (item) => IsEditMode() /* && CanCopy() */);
-
-                _commands.CopyCommand =
-                    Command<object>.Create(
-                        (item) => OnCopy(item),
-                        (item) => IsEditMode() /* && CanCopy() */);
-
-                _commands.PasteCommand =
-                    Command<object>.Create(
-                        (item) => OnPaste(item),
-                        (item) => IsEditMode() /* && CanPaste() */);
-
-                _commands.DeleteCommand =
-                    Command<object>.Create(
-                        (item) => OnDelete(item),
-                        (item) => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.SelectAllCommand =
-                    Command.Create(
-                        () => OnSelectAll(),
-                        () => IsEditMode());
-
-                _commands.DeselectAllCommand =
-                    Command.Create(
-                        () => OnDeselectAll(),
-                        () => IsEditMode());
-
-                _commands.ClearAllCommand =
-                    Command.Create(
-                        () => OnClearAll(),
-                        () => IsEditMode());
-
-                _commands.GroupCommand =
-                    Command.Create(
-                        () => _editor.GroupSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.UngroupCommand =
-                    Command.Create(
-                        () => _editor.UngroupSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.BringToFrontCommand =
-                    Command.Create(
-                        () => _editor.BringToFrontSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.SendToBackCommand =
-                    Command.Create(
-                        () => _editor.SendToBackSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.BringForwardCommand =
-                    Command.Create(
-                        () => _editor.BringForwardSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.SendBackwardCommand =
-                    Command.Create(
-                        () => _editor.SendBackwardSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.MoveUpCommand =
-                    Command.Create(
-                        () => _editor.MoveUpSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.MoveDownCommand =
-                    Command.Create(
-                        () => _editor.MoveDownSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.MoveLeftCommand =
-                    Command.Create(
-                        () => _editor.MoveLeftSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.MoveRightCommand =
-                    Command.Create(
-                        () => _editor.MoveRightSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.ToolNoneCommand =
-                    Command.Create(
-                        () => OnToolNone(),
-                        () => IsEditMode());
-
-                _commands.ToolSelectionCommand =
-                    Command.Create(
-                        () => OnToolSelection(),
-                        () => IsEditMode());
-
-                _commands.ToolPointCommand =
-                    Command.Create(
-                        () => OnToolPoint(),
-                        () => IsEditMode());
-
-                _commands.ToolLineCommand =
-                    Command.Create(
-                        () => OnToolLine(),
-                        () => IsEditMode());
-
-                _commands.ToolArcCommand =
-                    Command.Create(
-                        () => OnToolArc(),
-                        () => IsEditMode());
-
-                _commands.ToolBezierCommand =
-                    Command.Create(
-                        () => OnToolBezier(),
-                        () => IsEditMode());
-
-                _commands.ToolQBezierCommand =
-                    Command.Create(
-                        () => OnToolQBezier(),
-                        () => IsEditMode());
-
-                _commands.ToolPathCommand =
-                    Command.Create(
-                        () => OnToolPath(),
-                        () => IsEditMode());
-
-                _commands.ToolRectangleCommand =
-                    Command.Create(
-                        () => OnToolRectangle(),
-                        () => IsEditMode());
-
-                _commands.ToolEllipseCommand =
-                    Command.Create(
-                        () => OnToolEllipse(),
-                        () => IsEditMode());
-
-                _commands.ToolTextCommand =
-                    Command.Create(
-                        () => OnToolText(),
-                        () => IsEditMode());
-
-                _commands.ToolImageCommand =
-                    Command.Create(
-                        () => OnToolImage(),
-                        () => IsEditMode());
-
-                _commands.ToolMoveCommand =
-                    Command.Create(
-                        () => OnToolMove(),
-                        () => IsEditMode());
-
-                _commands.DefaultIsStrokedCommand =
-                    Command.Create(
-                        () => OnToggleDefaultIsStroked(),
-                        () => IsEditMode());
-
-                _commands.DefaultIsFilledCommand =
-                    Command.Create(
-                        () => OnToggleDefaultIsFilled(),
-                        () => IsEditMode());
-
-                _commands.DefaultIsClosedCommand =
-                    Command.Create(
-                        () => OnToggleDefaultIsClosed(),
-                        () => IsEditMode());
-
-                _commands.DefaultIsSmoothJoinCommand =
-                    Command.Create(
-                        () => OnToggleDefaultIsSmoothJoin(),
-                        () => IsEditMode());
-
-                _commands.SnapToGridCommand =
-                    Command.Create(
-                        () => OnToggleSnapToGrid(),
-                        () => IsEditMode());
-
-                _commands.TryToConnectCommand =
-                    Command.Create(
-                        () => OnToggleTryToConnect(),
-                        () => IsEditMode());
-
-                _commands.AddDatabaseCommand =
-                    Command.Create(
-                        () => OnAddDatabase(),
-                        () => IsEditMode());
-
-                _commands.RemoveDatabaseCommand =
-                    Command<object>.Create(
-                        (db) => OnRemoveDatabase(db),
-                        (db) => IsEditMode());
-
-                _commands.AddColumnCommand =
-                    Command<object>.Create(
-                        (owner) => OnAddColumn(owner),
-                        (owner) => IsEditMode());
-
-                _commands.RemoveColumnCommand =
-                    Command<object>.Create(
-                        (parameter) => OnRemoveColumn(parameter),
-                        (parameter) => IsEditMode());
-
-                _commands.AddRecordCommand =
-                    Command.Create(
-                        () => OnAddRecord(),
-                        () => IsEditMode());
-
-                _commands.RemoveRecordCommand =
-                    Command.Create(
-                        () => OnRemoveRecord(),
-                        () => IsEditMode());
-
-                _commands.ResetRecordCommand =
-                    Command<object>.Create(
-                        (owner) => OnResetRecord(owner),
-                        (owner) => IsEditMode());
-
-                _commands.AddBindingCommand =
-                    Command<object>.Create(
-                        (owner) => OnAddBinding(owner),
-                        (owner) => IsEditMode());
-
-                _commands.RemoveBindingCommand =
-                    Command<object>.Create(
-                        (parameter) => OnRemoveBinding(parameter),
-                        (parameter) => IsEditMode());
-
-                _commands.AddPropertyCommand =
-                    Command<object>.Create(
-                        (owner) => OnAddProperty(owner),
-                        (owner) => IsEditMode());
-
-                _commands.RemovePropertyCommand =
-                    Command<object>.Create(
-                        (parameter) => OnRemoveProperty(parameter),
-                        (parameter) => IsEditMode());
-
-                _commands.AddGroupLibraryCommand =
-                    Command.Create(
-                        () => OnAddGroupLibrary(),
-                        () => IsEditMode());
-
-                _commands.RemoveGroupLibraryCommand =
-                    Command.Create(
-                        () => OnRemoveGroupLibrary(),
-                        () => IsEditMode());
-
-                _commands.AddGroupCommand =
-                    Command.Create(
-                        () => OnAddGroup(),
-                        () => IsEditMode());
-
-                _commands.RemoveGroupCommand =
-                    Command.Create(
-                        () => OnRemoveGroup(),
-                        () => IsEditMode());
-
-                _commands.AddLayerCommand =
-                    Command.Create(
-                        () => OnAddLayer(),
-                        () => IsEditMode());
-
-                _commands.RemoveLayerCommand =
-                    Command.Create(
-                        () => OnRemoveLayer(),
-                        () => IsEditMode());
-
-                _commands.AddStyleLibraryCommand =
-                    Command.Create(
-                        () => OnAddStyleLibrary(),
-                        () => IsEditMode());
-
-                _commands.RemoveStyleLibraryCommand =
-                    Command.Create(
-                        () => OnRemoveStyleLibrary(),
-                        () => IsEditMode());
-
-                _commands.AddStyleCommand =
-                    Command.Create(
-                        () => OnAddStyle(),
-                        () => IsEditMode());
-
-                _commands.RemoveStyleCommand =
-                    Command.Create(
-                        () => OnRemoveStyle(),
-                        () => IsEditMode());
-
-                _commands.RemoveShapeCommand =
-                    Command.Create(
-                        () => OnRemoveShape(),
-                        () => IsEditMode());
-
-                _commands.AddTemplateCommand =
-                    Command.Create(
-                        () => OnAddTemplate(),
-                        () => IsEditMode());
-
-                _commands.RemoveTemplateCommand =
-                    Command.Create(
-                        () => OnRemoveTemplate(),
-                        () => IsEditMode());
-
-                _commands.EditTemplateCommand =
-                    Command.Create(
-                        () => OnEditTemplate(),
-                        () => IsEditMode());
-
-                _commands.ApplyTemplateCommand =
-                    Command<object>.Create(
-                        (item) => OnApplyTemplate(item),
-                        (item) => true);
-
-                _commands.SelectedItemChangedCommand =
-                    Command<object>.Create(
-                        (item) => OnSelectedItemChanged(item),
-                        (item) => IsEditMode());
-
-                _commands.AddContainerCommand =
-                    Command<object>.Create(
-                        (item) => OnAddContainer(item),
-                        (item) => IsEditMode());
-
-                _commands.InsertContainerBeforeCommand =
-                    Command<object>.Create(
-                        (item) => OnInsertContainerBefore(item),
-                        (item) => IsEditMode());
-
-                _commands.InsertContainerAfterCommand =
-                    Command<object>.Create(
-                        (item) => OnInsertContainerAfter(item),
-                        (item) => IsEditMode());
-
-                _commands.AddDocumentCommand =
-                    Command<object>.Create(
-                        (item) => OnAddDocument(item),
-                        (item) => IsEditMode());
-
-                _commands.InsertDocumentBeforeCommand =
-                    Command<object>.Create(
-                        (item) => OnInsertDocumentBefore(item),
-                        (item) => IsEditMode());
-
-                _commands.InsertDocumentAfterCommand =
-                    Command<object>.Create(
-                        (item) => OnInsertDocumentAfter(item),
-                        (item) => IsEditMode());
-            }
-            catch (Exception ex)
-            {
-                if (_editor != null && _editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-                else
-                {
-                    Debug.WriteLine(ex.Message);
-                    Debug.WriteLine(ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        private void UpdateCanExecuteState()
-        {
-            (_commands.NewCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.OpenCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.CloseCommand as Command).NotifyCanExecuteChanged();
-            (_commands.SaveCommand as Command).NotifyCanExecuteChanged();
-            (_commands.SaveAsCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ExportCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExitCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.ImportDataCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportDataCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.UpdateDataCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.ImportStyleCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportStylesCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportStyleLibraryCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportStyleLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportGroupCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportGroupsCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportGroupLibraryCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportGroupLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportTemplateCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportTemplatesCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportStyleCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportStylesCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportStyleLibraryCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportStyleLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportGroupCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportGroupsCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportGroupLibraryCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportGroupLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportTemplateCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportTemplatesCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.UndoCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RedoCommand as Command).NotifyCanExecuteChanged();
-            (_commands.CopyAsEmfCommand as Command).NotifyCanExecuteChanged();
-            (_commands.CutCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.CopyCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.PasteCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.DeleteCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.SelectAllCommand as Command).NotifyCanExecuteChanged();
-            (_commands.DeselectAllCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ClearAllCommand as Command).NotifyCanExecuteChanged();
-            (_commands.GroupCommand as Command).NotifyCanExecuteChanged();
-            (_commands.UngroupCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.BringToFrontCommand as Command).NotifyCanExecuteChanged();
-            (_commands.BringForwardCommand as Command).NotifyCanExecuteChanged();
-            (_commands.SendBackwardCommand as Command).NotifyCanExecuteChanged();
-            (_commands.SendToBackCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.MoveUpCommand as Command).NotifyCanExecuteChanged();
-            (_commands.MoveDownCommand as Command).NotifyCanExecuteChanged();
-            (_commands.MoveLeftCommand as Command).NotifyCanExecuteChanged();
-            (_commands.MoveRightCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.ToolNoneCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolSelectionCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolPointCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolLineCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolArcCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolBezierCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolQBezierCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolRectangleCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolEllipseCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolPathCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolTextCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolImageCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolMoveCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.DefaultIsStrokedCommand as Command).NotifyCanExecuteChanged();
-            (_commands.DefaultIsFilledCommand as Command).NotifyCanExecuteChanged();
-            (_commands.DefaultIsClosedCommand as Command).NotifyCanExecuteChanged();
-            (_commands.DefaultIsSmoothJoinCommand as Command).NotifyCanExecuteChanged();
-            (_commands.SnapToGridCommand as Command).NotifyCanExecuteChanged();
-            (_commands.TryToConnectCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.AddDatabaseCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RemoveDatabaseCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.AddColumnCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.RemoveColumnCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.AddRecordCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RemoveRecordCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.ResetRecordCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.AddBindingCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.RemoveBindingCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.AddPropertyCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.RemovePropertyCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.AddGroupLibraryCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RemoveGroupLibraryCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.AddGroupCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RemoveGroupCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.AddLayerCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RemoveLayerCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.AddStyleCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RemoveStyleCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.AddStyleLibraryCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RemoveStyleLibraryCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.RemoveShapeCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.ZoomResetCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ZoomExtentCommand as Command).NotifyCanExecuteChanged();
-            
-            (_commands.AddTemplateCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RemoveTemplateCommand as Command).NotifyCanExecuteChanged();
-            (_commands.EditTemplateCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ApplyTemplateCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.SelectedItemChangedCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.AddContainerCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.InsertContainerBeforeCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.InsertContainerAfterCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.AddDocumentCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.InsertDocumentBeforeCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.InsertDocumentAfterCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.LoadWindowLayoutCommand as Command).NotifyCanExecuteChanged();
-            (_commands.SaveWindowLayoutCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ResetWindowLayoutCommand as Command).NotifyCanExecuteChanged();
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        ~EditorContext()
-        {
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="disposing"></param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_editor.Log != null)
-                {
-                    _editor.Log.Close();
-                }
-            }
         }
     }
 }

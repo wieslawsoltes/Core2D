@@ -251,7 +251,7 @@ namespace Core2D
                 }
             }
 
-            editor.Invalidate = () => { throw new InvalidOperationException(); };
+            editor.Invalidate = () => { };
 
             if (editor.EnableObserver)
             {
@@ -681,7 +681,7 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="shape"></param>
-        public void AddWithHistory(BaseShape shape)
+        public void AddShape(BaseShape shape)
         {
             var layer = _project.CurrentContainer.CurrentLayer;
 
@@ -702,7 +702,7 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="shapes"></param>
-        public void AddWithHistory(IEnumerable<BaseShape> shapes)
+        public void AddShapes(IEnumerable<BaseShape> shapes)
         {
             var layer = _project.CurrentContainer.CurrentLayer;
 
@@ -724,7 +724,7 @@ namespace Core2D
         /// </summary>
         /// <param name="data"></param>
         /// <param name="property"></param>
-        public void AddWithHistory(Data data, ShapeProperty property)
+        public void AddProperty(Data data, ShapeProperty property)
         {
             var previous = data.Properties;
 
@@ -743,9 +743,29 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="data"></param>
+        /// <param name="binding"></param>
+        public void AddBinding(Data data, ShapeBinding binding)
+        {
+            if (_enableHistory)
+            {
+                var previous = data.Bindings;
+                var next = data.Bindings.Add(binding);
+                _history.Snapshot(previous, next, (p) => data.Bindings = p);
+                data.Bindings = next;
+            }
+            else
+            {
+                data.Bindings = data.Bindings.Add(binding);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="container"></param>
         /// <param name="property"></param>
-        public void AddWithHistory(Container container, ShapeProperty property)
+        public void AddProperty(Container container, ShapeProperty property)
         {
             var previous = container.Properties;
 
@@ -764,20 +784,226 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="data"></param>
-        /// <param name="binding"></param>
-        public void AddWithHistory(Data data, ShapeBinding binding)
+        public void AddDatabase()
         {
+            if (_project == null)
+                return;
+
+            var builder = ImmutableArray.CreateBuilder<Column>();
+            builder.Add(Column.Create("Column0"));
+            builder.Add(Column.Create("Column1"));
+
+            var db = Database.Create("Db", builder.ToImmutable());
+
             if (_enableHistory)
             {
-                var previous = data.Bindings;
-                var next = data.Bindings.Add(binding);
-                _history.Snapshot(previous, next, (p) => data.Bindings = p);
-                data.Bindings = next;
+                var previous = _project.Databases;
+                var next = _project.Databases.Add(db);
+                _history.Snapshot(previous, next, (p) => _project.Databases = p);
+                _project.Databases = next;
             }
             else
             {
-                data.Bindings = data.Bindings.Add(binding);
+                _project.Databases = _project.Databases.Add(db);
+            }
+
+            _project.CurrentDatabase = db;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="owner"></param>
+        public void AddColumn(object owner)
+        {
+            if (owner != null && owner is Database)
+            {
+                var db = owner as Database;
+                if (db.Columns == null)
+                {
+                    db.Columns = ImmutableArray.Create<Column>();
+                }
+
+                if (_enableHistory)
+                {
+                    var previous = db.Columns;
+                    var next = db.Columns.Add(Column.Create("Column" + db.Columns.Length));
+                    _history.Snapshot(previous, next, (p) => db.Columns = p);
+                    db.Columns = next;
+                }
+                else
+                {
+                    db.Columns = db.Columns.Add(Column.Create("Column" + db.Columns.Length));
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void AddRecord()
+        {
+            if (_project == null || _project.CurrentDatabase == null)
+                return;
+
+            var db = _project.CurrentDatabase;
+
+            var values = Enumerable.Repeat("<empty>", db.Columns.Length).Select(c => Value.Create(c));
+            var record = Record.Create(
+                db.Columns,
+                ImmutableArray.CreateRange<Value>(values));
+
+            if (_enableHistory)
+            {
+                var previous = db.Records;
+                var next = db.Records.Add(record);
+                _history.Snapshot(previous, next, (p) => db.Records = p);
+                db.Records = next;
+            }
+            else
+            {
+                db.Records = db.Records.Add(record);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="owner"></param>
+        public void AddBinding(object owner)
+        {
+            if (owner != null && owner is Data)
+            {
+                var data = owner as Data;
+                if (data.Bindings == null)
+                {
+                    data.Bindings = ImmutableArray.Create<ShapeBinding>();
+                }
+
+                AddBinding(data, ShapeBinding.Create("", ""));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="owner"></param>
+        public void AddProperty(object owner)
+        {
+            if (owner != null)
+            {
+                if (owner is Data)
+                {
+                    var data = owner as Data;
+                    if (data.Properties == null)
+                    {
+                        data.Properties = ImmutableArray.Create<ShapeProperty>();
+                    }
+
+                    AddProperty(data, ShapeProperty.Create("New", ""));
+                }
+                else if (owner is Container)
+                {
+                    var container = owner as Container;
+                    if (container.Properties == null)
+                    {
+                        container.Properties = ImmutableArray.Create<ShapeProperty>();
+                    }
+
+                    AddProperty(container, ShapeProperty.Create("New", ""));
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void AddGroupLibrary()
+        {
+            if (_project == null || _project.GroupLibraries == null)
+                return;
+
+            var gl = GroupLibrary.Create("New");
+
+            if (_enableHistory)
+            {
+                var previous = _project.GroupLibraries;
+                var next = _project.GroupLibraries.Add(gl);
+                _history.Snapshot(previous, next, (p) => _project.GroupLibraries = p);
+                _project.GroupLibraries = next;
+            }
+            else
+            {
+                _project.GroupLibraries = _project.GroupLibraries.Add(gl);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void AddLayer()
+        {
+            if (_project == null || _project.CurrentContainer == null)
+                return;
+
+            var container = _project.CurrentContainer;
+
+            if (_enableHistory)
+            {
+                var previous = container.Layers;
+                var next = container.Layers.Add(Layer.Create("New", container));
+                _history.Snapshot(previous, next, (p) => container.Layers = p);
+                container.Layers = next;
+            }
+            else
+            {
+                container.Layers = container.Layers.Add(Layer.Create("New", container));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void AddStyleLibrary()
+        {
+            if (_project == null || _project.StyleLibraries == null)
+                return;
+
+            var sg = StyleLibrary.Create("New");
+
+            if (_enableHistory)
+            {
+                var previous = _project.StyleLibraries;
+                var next = _project.StyleLibraries.Add(sg);
+                _history.Snapshot(previous, next, (p) => _project.StyleLibraries = p);
+                _project.StyleLibraries = next;
+            }
+            else
+            {
+                _project.StyleLibraries = _project.StyleLibraries.Add(sg);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void AddStyle()
+        {
+            if (_project == null || _project.CurrentStyleLibrary == null)
+                return;
+
+            var sg = _project.CurrentStyleLibrary;
+
+            if (_enableHistory)
+            {
+                var previous = sg.Styles;
+                var next = sg.Styles.Add(ShapeStyle.Create("New"));
+                _history.Snapshot(previous, next, (p) => sg.Styles = p);
+                sg.Styles = next;
+            }
+            else
+            {
+                sg.Styles = sg.Styles.Add(ShapeStyle.Create("New"));
             }
         }
 
@@ -976,6 +1202,202 @@ namespace Core2D
             }
 
             _project.CurrentStyleLibrary.CurrentStyle = _project.CurrentStyleLibrary.Styles.FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="db"></param>
+        public void RemoveDatabase(object db)
+        {
+            if (_project == null)
+                return;
+
+            if (db != null && db is Database)
+            {
+                if (_enableHistory)
+                {
+                    var previous = _project.Databases;
+                    var next = _project.Databases.Remove(db as Database);
+                    _history.Snapshot(previous, next, (p) => _project.Databases = p);
+                    _project.Databases = next;
+                }
+                else
+                {
+                    _project.Databases = _project.Databases.Remove(db as Database);
+                }
+
+                _project.CurrentDatabase = _project.Databases.FirstOrDefault();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameter"></param>
+        public void RemoveColumn(object parameter)
+        {
+            if (parameter != null && parameter is ColumnParameter)
+            {
+                var owner = (parameter as ColumnParameter).Owner;
+                var column = (parameter as ColumnParameter).Column;
+
+                if (owner is Database)
+                {
+                    var db = owner as Database;
+                    if (db.Columns != null)
+                    {
+                        if (_enableHistory)
+                        {
+                            var previous = db.Columns;
+                            var next = db.Columns.Remove(column);
+                            _history.Snapshot(previous, next, (p) => db.Columns = p);
+                            db.Columns = next;
+                        }
+                        else
+                        {
+                            db.Columns = db.Columns.Remove(column);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void RemoveRecord()
+        {
+            if (_project == null || _project.CurrentDatabase == null)
+                return;
+
+            var db = _project.CurrentDatabase;
+            if (db.CurrentRecord != null)
+            {
+                var record = db.CurrentRecord;
+
+                if (_enableHistory)
+                {
+                    var previous = db.Records;
+                    var next = db.Records.Remove(record);
+                    _history.Snapshot(previous, next, (p) => db.Records = p);
+                    db.Records = next;
+                }
+                else
+                {
+                    db.Records = db.Records.Remove(record);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="owner"></param>
+        public void ResetRecord(object owner)
+        {
+            if (owner != null && owner is Data)
+            {
+                var data = owner as Data;
+                var record = data.Record;
+
+                if (record != null)
+                {
+                    if (_enableHistory)
+                    {
+                        var previous = record;
+                        var next = default(Record);
+                        _history.Snapshot(previous, next, (p) => data.Record = p);
+                        data.Record = next;
+                    }
+                    else
+                    {
+                        data.Record = default(Record);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameter"></param>
+        public void RemoveBinding(object parameter)
+        {
+            if (parameter != null && parameter is ShapeBindingParameter)
+            {
+                var owner = (parameter as ShapeBindingParameter).Owner;
+                var binding = (parameter as ShapeBindingParameter).Binding;
+
+                if (owner != null && owner is Data)
+                {
+                    var data = owner as Data;
+                    if (data.Bindings != null)
+                    {
+                        if (_enableHistory)
+                        {
+                            var previous = data.Bindings;
+                            var next = data.Bindings.Remove(binding);
+                            _history.Snapshot(previous, next, (p) => data.Bindings = p);
+                            data.Bindings = next;
+                        }
+                        else
+                        {
+                            data.Bindings = data.Bindings.Remove(binding);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameter"></param>
+        public void RemoveProperty(object parameter)
+        {
+            if (parameter != null && parameter is ShapePropertyParameter)
+            {
+                var owner = (parameter as ShapePropertyParameter).Owner;
+                var property = (parameter as ShapePropertyParameter).Property;
+
+                if (owner is Data)
+                {
+                    var data = owner as Data;
+                    if (data.Properties != null)
+                    {
+                        if (_enableHistory)
+                        {
+                            var previous = data.Properties;
+                            var next = data.Properties.Remove(property);
+                            _history.Snapshot(previous, next, (p) => data.Properties = p);
+                            data.Properties = next;
+                        }
+                        else
+                        {
+                            data.Properties = data.Properties.Remove(property);
+                        }
+                    }
+                }
+                else if (owner is Container)
+                {
+                    var container = owner as Container;
+                    if (container.Properties != null)
+                    {
+                        if (_enableHistory)
+                        {
+                            var previous = container.Properties;
+                            var next = container.Properties.Remove(property);
+                            _history.Snapshot(previous, next, (p) => container.Properties = p);
+                            container.Properties = next;
+                        }
+                        else
+                        {
+                            container.Properties = container.Properties.Remove(property);
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -1892,7 +2314,7 @@ namespace Core2D
                     line.End = point;
                 }
 
-                AddWithHistory(split);
+                AddShape(split);
 
                 if (select)
                 {
@@ -1947,7 +2369,7 @@ namespace Core2D
                 line.End = p0;
             }
 
-            AddWithHistory(split);
+            AddShape(split);
 
             return true;
         }
