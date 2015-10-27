@@ -99,6 +99,9 @@
     <Compile Include="..\Core2D\Editor\EditorCommands.cs">
       <Link>Editor\EditorCommands.cs</Link>
     </Compile>
+    <Compile Include="..\Core2D\Editor\EditorConstants.cs">
+      <Link>Editor\EditorConstants.cs</Link>
+    </Compile>
     <Compile Include="..\Core2D\Editor\EditorContext.cs">
       <Link>Editor\EditorContext.cs</Link>
     </Compile>

@@ -62,6 +62,7 @@
     <Compile Include="Editor\Core\Tool.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\EditorCommands.cs" />
+    <Compile Include="Editor\EditorConstants.cs" />
     <Compile Include="Editor\EditorContext.cs" />
     <Compile Include="Factories\ProjectFactory.cs" />
     <Compile Include="Factories\ShapeFactory.cs" />
