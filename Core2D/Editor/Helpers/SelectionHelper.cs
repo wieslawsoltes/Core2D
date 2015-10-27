@@ -116,40 +116,43 @@ namespace Core2D
                     {
                         if (_editor.IsSelectionAvailable())
                         {
-                            double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
-                            double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
-                            if (_historyX != sx || _historyY != sy)
+                            if (_editor.EnableHistory)
                             {
-                                double dx = sx - _historyX;
-                                double dy = sy - _historyY;
+                                double sx = _editor.Project.Options.SnapToGrid ? Editor.Snap(x, _editor.Project.Options.SnapX) : x;
+                                double sy = _editor.Project.Options.SnapToGrid ? Editor.Snap(y, _editor.Project.Options.SnapY) : y;
+                                if (_historyX != sx || _historyY != sy)
+                                {
+                                    double dx = sx - _historyX;
+                                    double dy = sy - _historyY;
 
-                                var previous = new
-                                {
-                                    DeltaX = -dx,
-                                    DeltaY = -dy,
-                                    Points = _pointsCache,
-                                    Shapes = _shapesCache
-                                };
-                                var next = new
-                                {
-                                    DeltaX = dx,
-                                    DeltaY = dy,
-                                    Points = _pointsCache,
-                                    Shapes = _shapesCache
-                                };
-                                _editor.History.Snapshot(previous, next,
-                                    (state) =>
+                                    var previous = new
                                     {
-                                        if (state.Points != null)
+                                        DeltaX = -dx,
+                                        DeltaY = -dy,
+                                        Points = _pointsCache,
+                                        Shapes = _shapesCache
+                                    };
+                                    var next = new
+                                    {
+                                        DeltaX = dx,
+                                        DeltaY = dy,
+                                        Points = _pointsCache,
+                                        Shapes = _shapesCache
+                                    };
+                                    _editor.History.Snapshot(previous, next,
+                                        (state) =>
                                         {
-                                            Editor.MovePointsBy(state.Points, state.DeltaX, state.DeltaY);
-                                        }
+                                            if (state.Points != null)
+                                            {
+                                                Editor.MovePointsBy(state.Points, state.DeltaX, state.DeltaY);
+                                            }
 
-                                        if (state.Shapes != null)
-                                        {
-                                            Editor.MoveShapesBy(state.Shapes, state.DeltaX, state.DeltaY);
-                                        }
-                                    });
+                                            if (state.Shapes != null)
+                                            {
+                                                Editor.MoveShapesBy(state.Shapes, state.DeltaX, state.DeltaY);
+                                            }
+                                        });
+                                }
                             }
                             DisposeMoveSelectionCache();
                             _currentState = State.None;
