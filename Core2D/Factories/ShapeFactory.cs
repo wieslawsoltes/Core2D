@@ -11,7 +11,7 @@ namespace Core2D
     /// <summary>
     /// Factory used to create shapes.
     /// </summary>
-    public class Factory : IShapeFactory
+    public class ShapeFactory : IShapeFactory
     {
         /// <summary>
         /// Gets or sets editor context.
@@ -126,7 +126,7 @@ namespace Core2D
         /// Initializes a new instance of the Factory class.
         /// </summary>
         /// <param name="context"></param>
-        public Factory(EditorContext context)
+        public ShapeFactory(EditorContext context)
         {
             Context = context;
         }
