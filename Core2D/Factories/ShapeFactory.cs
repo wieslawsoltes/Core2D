@@ -61,7 +61,7 @@ namespace Core2D
         /// <summary>
         /// Gets current document.
         /// </summary>
-        public Document Document
+        public Document CurrentDocument
         {
             get { return Context.Editor.Project.CurrentDocument; }
         }
@@ -69,7 +69,7 @@ namespace Core2D
         /// <summary>
         /// Gets current container.
         /// </summary>
-        public Container Container
+        public Container CurrentContainer
         {
             get { return Context.Editor.Project.CurrentContainer; }
         }
@@ -77,7 +77,7 @@ namespace Core2D
         /// <summary>
         /// Gets current layer.
         /// </summary>
-        public Layer Layer
+        public Layer CurrentLayer
         {
             get { return Context.Editor.Project.CurrentContainer.CurrentLayer; }
         }
@@ -85,7 +85,7 @@ namespace Core2D
         /// <summary>
         /// Gets current shapes.
         /// </summary>
-        public IEnumerable<BaseShape> Shapes
+        public IEnumerable<BaseShape> CurrentShapes
         {
             get { return Context.Editor.Project.CurrentContainer.CurrentLayer.Shapes; }
         }
@@ -93,7 +93,7 @@ namespace Core2D
         /// <summary>
         /// Gets current shape.
         /// </summary>
-        public BaseShape Shape
+        public BaseShape CurrentShape
         {
             get { return Context.Editor.Project.CurrentContainer.CurrentShape; }
         }
@@ -101,7 +101,7 @@ namespace Core2D
         /// <summary>
         /// Gets current template.
         /// </summary>
-        public Container Template
+        public Container CurrentTemplate
         {
             get { return Context.Editor.Project.CurrentTemplate; }
         }
@@ -109,7 +109,7 @@ namespace Core2D
         /// <summary>
         /// Gets current database.
         /// </summary>
-        public Database Database
+        public Database CurrentDatabase
         {
             get { return Context.Editor.Project.CurrentDatabase; }
         }
@@ -117,7 +117,7 @@ namespace Core2D
         /// <summary>
         /// Gets current style.
         /// </summary>
-        public ShapeStyle Style
+        public ShapeStyle CurrentStyle
         {
             get { return Context.Editor.Project.CurrentStyleLibrary.CurrentStyle; }
         }
