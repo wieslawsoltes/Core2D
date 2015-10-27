@@ -220,6 +220,7 @@ namespace Core2D
             {
                 CurrentTool = Tool.Selection,
                 CurrentPathTool = PathTool.Line,
+                EnableObserver = true,
                 EnableHistory = true
             };
 
