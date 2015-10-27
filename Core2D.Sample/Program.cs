@@ -33,7 +33,7 @@ namespace Core2D.Sample
 
             var project = context.ProjectFactory.GetProject();
 
-            context.Editor = Editor.Create(project);
+            context.Editor = Editor.Create(project, null, false, false);
 
             return context;
         }
