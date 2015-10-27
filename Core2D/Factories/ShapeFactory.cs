@@ -147,7 +147,7 @@ namespace Core2D
                 Context.Editor.Project.Options.PointShape);
             if (isStandalone)
             {
-                Context.Editor.AddWithHistory(point);
+                Context.Editor.AddShape(point);
             }
             return point;
         }
@@ -172,7 +172,7 @@ namespace Core2D
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 Context.Editor.Project.Options.PointShape,
                 isStroked);
-            Context.Editor.AddWithHistory(line);
+            Context.Editor.AddShape(line);
             return line;
         }
 
@@ -191,7 +191,7 @@ namespace Core2D
                 Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
                 Context.Editor.Project.Options.PointShape,
                 isStroked);
-            Context.Editor.AddWithHistory(line);
+            Context.Editor.AddShape(line);
             return line;
         }
 
@@ -226,7 +226,7 @@ namespace Core2D
                 Context.Editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            Context.Editor.AddWithHistory(arc);
+            Context.Editor.AddShape(arc);
             return arc;
         }
 
@@ -257,7 +257,7 @@ namespace Core2D
                 Context.Editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            Context.Editor.AddWithHistory(arc);
+            Context.Editor.AddShape(arc);
             return arc;
         }
 
@@ -292,7 +292,7 @@ namespace Core2D
                 Context.Editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            Context.Editor.AddWithHistory(bezier);
+            Context.Editor.AddShape(bezier);
             return bezier;
         }
 
@@ -323,7 +323,7 @@ namespace Core2D
                 Context.Editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            Context.Editor.AddWithHistory(bezier);
+            Context.Editor.AddShape(bezier);
             return bezier;
         }
 
@@ -354,7 +354,7 @@ namespace Core2D
                 Context.Editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            Context.Editor.AddWithHistory(qbezier);
+            Context.Editor.AddShape(qbezier);
             return qbezier;
         }
 
@@ -382,7 +382,7 @@ namespace Core2D
                 Context.Editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            Context.Editor.AddWithHistory(qbezier);
+            Context.Editor.AddShape(qbezier);
             return qbezier;
         }
 
@@ -416,7 +416,7 @@ namespace Core2D
                 geometry,
                 isStroked,
                 isFilled);
-            Context.Editor.AddWithHistory(path);
+            Context.Editor.AddShape(path);
             return path;
         }
 
@@ -446,7 +446,7 @@ namespace Core2D
                 isStroked,
                 isFilled,
                 text);
-            Context.Editor.AddWithHistory(rectangle);
+            Context.Editor.AddShape(rectangle);
             return rectangle;
         }
 
@@ -474,7 +474,7 @@ namespace Core2D
                 isStroked,
                 isFilled,
                 text);
-            Context.Editor.AddWithHistory(rectangle);
+            Context.Editor.AddShape(rectangle);
             return rectangle;
         }
 
@@ -504,7 +504,7 @@ namespace Core2D
                 isStroked,
                 isFilled,
                 text);
-            Context.Editor.AddWithHistory(ellipse);
+            Context.Editor.AddShape(ellipse);
             return ellipse;
         }
 
@@ -532,7 +532,7 @@ namespace Core2D
                 isStroked,
                 isFilled,
                 text);
-            Context.Editor.AddWithHistory(ellipse);
+            Context.Editor.AddShape(ellipse);
             return ellipse;
         }
 
@@ -559,7 +559,7 @@ namespace Core2D
                 Context.Editor.Project.Options.PointShape,
                 text,
                 isStroked);
-            Context.Editor.AddWithHistory(txt);
+            Context.Editor.AddShape(txt);
             return txt;
         }
 
@@ -584,7 +584,7 @@ namespace Core2D
                 Context.Editor.Project.Options.PointShape,
                 text,
                 isStroked);
-            Context.Editor.AddWithHistory(txt);
+            Context.Editor.AddShape(txt);
             return txt;
         }
 
@@ -617,7 +617,7 @@ namespace Core2D
                 isStroked,
                 isFilled,
                 text);
-            Context.Editor.AddWithHistory(image);
+            Context.Editor.AddShape(image);
             return image;
         }
 
@@ -648,7 +648,7 @@ namespace Core2D
                 isStroked,
                 isFilled,
                 text);
-            Context.Editor.AddWithHistory(image);
+            Context.Editor.AddShape(image);
             return image;
         }
     }

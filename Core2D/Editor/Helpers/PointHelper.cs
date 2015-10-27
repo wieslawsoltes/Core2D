@@ -45,12 +45,12 @@ namespace Core2D
                         {
                             if (!_editor.TryToSplitLine(x, y, _shape, true))
                             {
-                                _editor.AddWithHistory(_shape);
+                                _editor.AddShape(_shape);
                             }
                         }
                         else
                         {
-                            _editor.AddWithHistory(_shape);
+                            _editor.AddShape(_shape);
                         }
                     }
                     break;
