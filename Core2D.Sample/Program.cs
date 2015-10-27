@@ -31,8 +31,10 @@ namespace Core2D.Sample
                 CsvWriter = null
             };
 
-            context.InitializeEditor();
-            context.InitializeCommands();
+            var project = context.ProjectFactory.GetProject();
+
+            context.Editor = Editor.Create(project);
+
             context.New();
 
             return context;
