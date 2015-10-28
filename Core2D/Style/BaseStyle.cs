@@ -12,7 +12,6 @@ namespace Core2D
     /// </summary>
     public class BaseStyle : ObservableObject
     {
-        private static LineCap[] _lineCapValues = (LineCap[])Enum.GetValues(typeof(LineCap));
         private string _name;
         private ArgbColor _stroke;
         private ArgbColor _fill;
@@ -20,14 +19,6 @@ namespace Core2D
         private LineCap _lineCap;
         private string _dashes;
         private double _dashOffset;
-
-        /// <summary>
-        /// The LineCap enum values.
-        /// </summary>
-        public static LineCap[] LineCapValues
-        {
-            get { return _lineCapValues; }
-        }
 
         /// <summary>
         /// 
