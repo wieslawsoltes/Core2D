@@ -13,43 +13,70 @@ namespace Core2D.Sample
     {
         static void Main(string[] args)
         {
-            CreateSampleProject();
+            CreateProjectUsingContext();
+            CreateProjectUsingEditor();
+            CreateProjectUsingEditorWithoutFactories();
+        }
+        
+        static void CreateProjectUsingContext()
+        {
+            var context = new EditorContext()
+            {
+                ProjectFactory = new ProjectFactory(),
+                Serializer = new NewtonsoftSerializer()
+            };
+
+            var project = context.ProjectFactory.GetProject();
+            context.Editor = Editor.Create(project, null, false, false);
+
+            var factory = new ShapeFactory(context.Editor);
+            factory.Line(30, 30, 60, 30);
+            factory.Text(30, 30, 60, 60, "Sample1");
+
+            context.Save("sample1.project");
+        }
+        
+        static void CreateProjectUsingEditor()
+        {
+            var project = new ProjectFactory().GetProject();
+            var editor = Editor.Create(project, null, false, false);
+
+            var factory = new ShapeFactory(editor);
+            factory.Line(30, 30, 60, 30);
+            factory.Text(30, 30, 60, 60, "Sample2");
+            
+            Project.Save(project, "sample2.project", new NewtonsoftSerializer());
         }
 
-        static void CreateSampleProject()
+        static void CreateProjectUsingEditorWithoutFactories()
         {
-            try
-            {
-                var context = new EditorContext()
-                {
-                    View = null,
-                    Renderers = null,
-                    ProjectFactory = new ProjectFactory(),
-                    TextClipboard = null,
-                    Serializer = new NewtonsoftSerializer(),
-                    PdfWriter = null,
-                    DxfWriter = null,
-                    CsvReader = null,
-                    CsvWriter = null
-                };
+            var project = Project.Create();
+            var editor = Editor.Create(project, null, false, false);
 
-                var project = context.ProjectFactory.GetProject();
+            var document = Document.Create();
+            editor.AddDocument(document);
+            project.CurrentDocument = document;
 
-                context.Editor = Editor.Create(project, null, false, false);
+            var container = Container.Create();
+            editor.AddContainer(container);
+            project.CurrentContainer = container;
 
-                var factory = new ShapeFactory(context);
+            var layer = Layer.Create(owner: container);
+            editor.AddLayer(layer);
+            project.CurrentContainer.CurrentLayer = layer;
 
-                factory.Line(30, 30, 60, 30);
-                factory.Text(30, 30, 60, 60, "Sample");
+            editor.AddStyleLibrary();
+            project.CurrentStyleLibrary = project.StyleLibraries.FirstOrDefault();
 
-                context.Save("sample.project");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                Console.ReadKey(true);
-            }
+            editor.AddStyle();
+            project.CurrentStyleLibrary.CurrentStyle = project.CurrentStyleLibrary.Styles.FirstOrDefault();
+
+            var line = XLine.Create(30, 30, 60, 30, project.CurrentStyleLibrary.CurrentStyle, project.Options.PointShape);
+            editor.AddShape(line);
+            var text = XText.Create(30, 30, 60, 60, project.CurrentStyleLibrary.CurrentStyle, project.Options.PointShape, "Sample3");
+            editor.AddShape(text);
+
+            Project.Save(project, "sample3.project", new NewtonsoftSerializer());
         }
     }
 }
