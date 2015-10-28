@@ -160,25 +160,25 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="path"></param>
         /// <param name="project"></param>
+        /// <param name="path"></param>
         /// <param name="serializer"></param>
         /// <returns></returns>
-        public static void Save(string path, Project project, ISerializer serializer)
+        public static void Save(Project project, string path, ISerializer serializer)
         {
             using (var stream = new FileStream(path, FileMode.Create))
             {
-                Save(stream, project, serializer);
+                Save(project, stream, serializer);
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="stream"></param>
         /// <param name="project"></param>
+        /// <param name="stream"></param>
         /// <param name="serializer"></param>
-        public static void Save(Stream stream, Project project, ISerializer serializer)
+        public static void Save(Project project, Stream stream, ISerializer serializer)
         {
             using (var archive = new ZipArchive(stream, ZipArchiveMode.Create))
             {
@@ -191,7 +191,7 @@ namespace Core2D
                 }
 
                 // Second step is to write (if any) project images.
-                var keys = Editor.GetAllShapes<XImage>(project).Select(i => i.Path).Distinct();
+                var keys = Editor.GetAllShapes<XImage>(project).Select(i => i.Key).Distinct();
                 foreach (var key in keys)
                 {
                     var bytes = project.GetImage(key);
