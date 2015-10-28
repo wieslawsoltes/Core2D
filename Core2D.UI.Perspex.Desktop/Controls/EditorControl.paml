@@ -76,20 +76,32 @@
             <Setter Property="TabItem.FontSize" Value="12"/>
             <Setter Property="TabItem.FontWeight" Value="Normal"/>
         </Style>
-        <Style Selector="Border.left">
-            <Setter Property="Border.Margin" Value="4,2,0,2"/>
+        <Style Selector="Border.leftTop">
+            <Setter Property="Border.Margin" Value="4,6,0,4"/>
             <Setter Property="Border.Padding" Value="3,3,3,3"/>
             <Setter Property="Border.BorderBrush" Value="#FFACACAC"/>
             <Setter Property="Border.BorderThickness" Value="1"/>
         </Style>
-        <Style Selector="Border.right">
-            <Setter Property="Border.Margin" Value="0,2,4,2"/>
+        <Style Selector="Border.leftBottom">
+            <Setter Property="Border.Margin" Value="4,4,0,2"/>
+            <Setter Property="Border.Padding" Value="3,3,3,3"/>
+            <Setter Property="Border.BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="Border.BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="Border.rightTop">
+            <Setter Property="Border.Margin" Value="0,6,4,4"/>
+            <Setter Property="Border.Padding" Value="3,3,3,3"/>
+            <Setter Property="Border.BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="Border.BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="Border.rightBottom">
+            <Setter Property="Border.Margin" Value="0,4,4,2"/>
             <Setter Property="Border.Padding" Value="3,3,3,3"/>
             <Setter Property="Border.BorderBrush" Value="#FFACACAC"/>
             <Setter Property="Border.BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Border.drawable">
-            <Setter Property="Border.Margin" Value="0,2,0,2"/>
+            <Setter Property="Border.Margin" Value="0,6,0,2"/>
             <Setter Property="Border.Padding" Value="3,3,3,3"/>
             <Setter Property="Border.BorderBrush" Value="#FFACACAC"/>
             <Setter Property="Border.BorderThickness" Value="1"/>
@@ -1187,7 +1199,7 @@
         </DataTemplate>
     </UserControl.DataTemplates>
     <Grid RowDefinitions="50*,50*" ColumnDefinitions="200,Auto,*,Auto,250">
-        <Border Classes="left" Grid.Row="0" Grid.Column="0">
+        <Border Classes="leftTop" Grid.Row="0" Grid.Column="0">
             <TabControl Classes="default">
                 <TabItem Header="Project" Classes="property">
                     <Grid RowDefinitions="Auto,*">
@@ -1203,7 +1215,7 @@
                 </TabItem>
             </TabControl>
         </Border>
-        <Border Classes="left" Grid.Row="1" Grid.Column="0">
+        <Border Classes="leftBottom" Grid.Row="1" Grid.Column="0">
             <TabControl Classes="default">
                 <TabItem Header="Groups" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
@@ -1302,7 +1314,7 @@
             </Border>
         </Grid>
         <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Width="8"/>
-        <Border Classes="right" Grid.Row="0" Grid.Column="4">
+        <Border Classes="rightTop" Grid.Row="0" Grid.Column="4">
             <TabControl Classes="default">
                 <TabItem Header="Styles" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
@@ -1368,7 +1380,7 @@
                 </TabItem>
             </TabControl>
         </Border>
-        <Border Classes="right" Grid.Row="1" Grid.Column="4">
+        <Border Classes="rightBottom" Grid.Row="1" Grid.Column="4">
             <TabControl Classes="default">
                 <TabItem Header="Shape" Classes="property">
                     <ScrollViewer>
