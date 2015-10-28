@@ -652,7 +652,7 @@ namespace Test.Uwp
                 {
                     await Task.Run(() =>
                     {
-                        Core2D.Project.Save(stream, _context.Editor.Project, _context.Serializer);
+                        Core2D.Project.Save(_context.Editor.Project, stream, _context.Serializer);
                     });
                 }
 
@@ -694,7 +694,7 @@ namespace Test.Uwp
             {
                 foreach (var image in images)
                 {
-                    await CacheImage(image.Path);
+                    await CacheImage(image.Key);
                 }
             }
         }

@@ -686,9 +686,9 @@ namespace Test.Uwp
             var srect = new Rect(rect.X, rect.Y, rect.Width, rect.Height);
 
             if (_enableImageCache
-                && _biCache.ContainsKey(image.Path))
+                && _biCache.ContainsKey(image.Key))
             {
-                _ds.DrawImage(_biCache[image.Path], srect);
+                _ds.DrawImage(_biCache[image.Key], srect);
             }
             else
             {
