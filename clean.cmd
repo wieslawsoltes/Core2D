@@ -57,6 +57,9 @@ rmdir /Q /S Core2D.Portable\obj
 rmdir /Q /S Core2D\bin
 rmdir /Q /S Core2D\obj
 
+rmdir /Q /S Core2D.Sample\bin
+rmdir /Q /S Core2D.Sample\obj
+
 rmdir /Q /S Core2D.UI.EtoForms.Direct2D\bin
 rmdir /Q /S Core2D.UI.EtoForms.Direct2D\obj
 
