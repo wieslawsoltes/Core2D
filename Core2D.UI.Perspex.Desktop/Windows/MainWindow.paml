@@ -1,6 +1,9 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<Window xmlns="https://github.com/perspex"
+<Window x:Class="Core2D.UI.Perspex.Desktop.MainWindow"
+        xmlns="https://github.com/perspex"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Core2D.UI.Perspex.Desktop;assembly=Core2D.UI.Perspex.Desktop"
         xmlns:controls="clr-namespace:Core2D.UI.Perspex.Desktop.Controls;assembly=Core2D.UI.Perspex.Desktop"
         xmlns:core="clr-namespace:Core2D;assembly=Core2D"
         Width="1300" Height="670"
