@@ -1229,7 +1229,9 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Options" Classes="property">
-                    <ContentControl Content="{Binding Path=Editor.Project.Options, Mode=TwoWay}"/>
+                    <ScrollViewer>
+                        <ContentControl Content="{Binding Path=Editor.Project.Options, Mode=TwoWay}"/>
+                    </ScrollViewer>
                 </TabItem>
             </TabControl>
         </Border>
@@ -1416,7 +1418,9 @@
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Container" Classes="property">
-                    <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}"/>
+                    <ScrollViewer>
+                        <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}"/>
+                    </ScrollViewer>
                 </TabItem>
             </TabControl>
         </Border>
