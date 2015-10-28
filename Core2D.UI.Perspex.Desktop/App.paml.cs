@@ -16,12 +16,12 @@ using Perspex.Media;
 namespace Core2D.UI.Perspex.Desktop
 {
     /// <summary>
-    /// 
+    /// Encapsulates a Core2D Prespex application.
     /// </summary>
     public class App : Application
     {
         /// <summary>
-        /// 
+        /// Initializes a new instance of the App class.
         /// </summary>
         public App()
         {
@@ -32,7 +32,7 @@ namespace Core2D.UI.Perspex.Desktop
         }
 
         /// <summary>
-        /// 
+        /// Initialize the Xaml components.
         /// </summary>
         private void InitializeComponent()
         {
@@ -41,7 +41,7 @@ namespace Core2D.UI.Perspex.Desktop
         }
 
         /// <summary>
-        /// 
+        /// Attach development tool in debug mode.
         /// </summary>
         /// <param name="window"></param>
         public static void AttachDevTools(Window window)
@@ -52,9 +52,9 @@ namespace Core2D.UI.Perspex.Desktop
         }
 
         /// <summary>
-        /// 
+        /// Program entry point.
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="args">The program arguments.</param>
         [STAThread]
         private static void Main(string[] args)
         {
@@ -72,9 +72,9 @@ namespace Core2D.UI.Perspex.Desktop
         }
 
         /// <summary>
-        /// 
+        /// Print exception details.
         /// </summary>
-        /// <param name="ex"></param>
+        /// <param name="ex">The exception object.</param>
         private static void Print(Exception ex)
         {
             System.Diagnostics.Debug.Print(ex.GetType().ToString());
