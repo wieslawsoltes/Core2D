@@ -18,29 +18,28 @@ Core2D is an application for making data driven 2D diagrams.
 
 ### Supported Platforms
 
-The recommended UI for Core2D is Core2D.UI.Wpf.
+The recommended UI for Core2D is `Core2D.UI.Wpf`.
 
-* Windows 7/8/8.1/10 for WPF, EtoForms.Direct2D, EtoForms.Gtk2, Perspex.Desktop and WinForms builds.
+* Windows 7/8/8.1/10 for `WPF`, `EtoForms.Direct2D`, `EtoForms.Gtk2`, `Perspex.Desktop` and `WinForms` builds.
 * Windows 10 for Universal Windows Platform (UWP) build.
-* XUbuntu 15.04 for EtoForms.Gtk2, Perspex.Desktop and WinForms builds.
+* XUbuntu 15.04 for `Perspex.Desktop`, `EtoForms.Gtk2` and `WinForms` builds.
 
-The core library and editor are portable and should work on all platforms where C# is supported.
+The core library and editor are portable and should work on all platforms where C# is supported. For basic usage of core library see project `Core2D.Sample`.
 
 ### NuGet Packages
 
 * System.Collections.Immutable
 * Newtonsoft.Json
 * CsvHelper
-* PDFsharp (Core PDFsharp for WinForms Linux builds.)
-* PDFsharp-wpf (Core PDFsharp does not implement XGraphicsPath.AddArc method.)
+* PDFsharp (PDFsharp core for WinForms Linux builds.)
+* PDFsharp-wpf (PDFsharp core does not implement XGraphicsPath.AddArc method.)
 * System.Windows.Interactivity.WPF
 * Xceed.Wpf.AvalonDock
 * Xceed.Products.Wpf.Toolkit.AvalonDock
 * Eto.Forms
 * Eto.Platform.Direct2D
-* Eto.Platform.Gtk
 * Eto.Platform.Windows
-* Eto.Platform.Wpf
+* Eto.Platform.Gtk
 * Perspex
 * Perspex.Desktop
 
