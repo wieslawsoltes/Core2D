@@ -214,6 +214,7 @@
     <Compile Include="Controls\StatusControl.paml.cs">
       <DependentUpon>StatusControl.paml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\CoreConverters.cs" />
     <Compile Include="Windows\MainWindow.paml.cs">
       <DependentUpon>MainWindow.paml</DependentUpon>
     </Compile>
