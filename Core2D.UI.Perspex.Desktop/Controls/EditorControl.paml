@@ -122,11 +122,11 @@
             <Grid RowDefinitions="20,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
                 <Border Classes="color" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
                     <Border.Background>
-                        <MultiBinding Converter="{Static local:CoreConverters.ArgbColorsToBrush}">
-                            <Binding SourcePropertyPath="A" Converter="{Static local:CoreConverters.IntToInt}"/>
-                            <Binding SourcePropertyPath="R" Converter="{Static local:CoreConverters.IntToInt}"/>
-                            <Binding SourcePropertyPath="G" Converter="{Static local:CoreConverters.IntToInt}"/>
-                            <Binding SourcePropertyPath="B" Converter="{Static local:CoreConverters.IntToInt}"/>
+                        <MultiBinding Converter="{Static converters:CoreConverters.ArgbColorsToBrush}">
+                            <Binding SourcePropertyPath="A" Converter="{Static converters:CoreConverters.IntToInt}"/>
+                            <Binding SourcePropertyPath="R" Converter="{Static converters:CoreConverters.IntToInt}"/>
+                            <Binding SourcePropertyPath="G" Converter="{Static converters:CoreConverters.IntToInt}"/>
+                            <Binding SourcePropertyPath="B" Converter="{Static converters:CoreConverters.IntToInt}"/>
                         </MultiBinding>
                     </Border.Background>
                 </Border>
