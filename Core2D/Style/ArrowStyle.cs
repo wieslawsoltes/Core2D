@@ -10,12 +10,21 @@ namespace Core2D
     /// </summary>
     public class ArrowStyle : BaseStyle
     {
+        private static LineCap[] _lineCapValues = (LineCap[])Enum.GetValues(typeof(LineCap));
         private static ArrowType[] _arrowTypeValues = (ArrowType[])Enum.GetValues(typeof(ArrowType));
         private ArrowType _arrowType;
         private bool _isStroked;
         private bool _isFilled;
         private double _radiusX;
         private double _radiusY;
+
+        /// <summary>
+        /// The LineCap enum values.
+        /// </summary>
+        public static LineCap[] LineCapValues
+        {
+            get { return _lineCapValues; }
+        }
 
         /// <summary>
         /// The ArrowType enum values.

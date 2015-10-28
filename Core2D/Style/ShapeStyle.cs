@@ -9,10 +9,19 @@ namespace Core2D
     /// </summary>
     public class ShapeStyle : BaseStyle
     {
+        private static LineCap[] _lineCapValues = (LineCap[])Enum.GetValues(typeof(LineCap));
         private LineStyle _lineStyle;
         private ArrowStyle _startArrowStyle;
         private ArrowStyle _endArrowStyle;
         private TextStyle _textStyle;
+
+        /// <summary>
+        /// The LineCap enum values.
+        /// </summary>
+        public static LineCap[] LineCapValues
+        {
+            get { return _lineCapValues; }
+        }
 
         /// <summary>
         /// 
