@@ -109,12 +109,17 @@
             <Setter Property="Border.BorderBrush" Value="#FFACACAC"/>
             <Setter Property="Border.BorderThickness" Value="1"/>
         </Style>
+        <Style Selector="Border.color">
+            <Setter Property="Border.Margin" Value="3,1,3,1"/>
+            <Setter Property="Border.BorderBrush" Value="Transparent"/>
+            <Setter Property="Border.BorderThickness" Value="0"/>
+        </Style>
     </UserControl.Styles>
     <UserControl.DataTemplates>
         <!-- style -->
         <DataTemplate DataType="core:ArgbColor">
             <Grid RowDefinitions="20,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
-                <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                <Border Classes="color" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
                     <Border.Background>
                         <MultiBinding Converter="{Static local:CoreConverters.ArgbColorsToBrush}">
                             <Binding SourcePropertyPath="A" Converter="{Static local:CoreConverters.IntToInt}"/>
