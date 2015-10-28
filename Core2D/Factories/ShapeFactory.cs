@@ -532,16 +532,17 @@ namespace Core2D
             bool isFilled = false,
             string text = null)
         {
+            var bytes = System.IO.File.ReadAllBytes(path);
+            var key = _editor.Project.AddImageFromFile(path, bytes);
             var image = XImage.Create(
                 topLeft,
                 bottomRight,
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape,
-                path,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.Options.PointShape,
+                key,
                 isStroked,
                 isFilled,
                 text);
-            Context.Editor.AddShape(image);
             _editor.AddShape(image);
             return image;
         }
