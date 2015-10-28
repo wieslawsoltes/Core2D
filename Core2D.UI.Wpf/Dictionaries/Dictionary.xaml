@@ -2537,10 +2537,10 @@
                     <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
                 </ComboBox>
             </Grid>
-            <Expander Header="Path">
+            <Expander Header="Key">
                 <Grid>
                     <TextBox 
-                        Text="{Binding Path, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding Key, UpdateSourceTrigger=PropertyChanged}" 
                         Style="{StaticResource TextBoxLeftStyleKey}">
                     </TextBox>
                 </Grid>

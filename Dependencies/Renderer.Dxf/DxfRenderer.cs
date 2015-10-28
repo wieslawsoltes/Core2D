@@ -1036,15 +1036,15 @@ namespace Dependencies
         {
             var _doc = doc as DxfDocument;
 
-            var bytes = _state.ImageCache.GetImage(image.Path);
+            var bytes = _state.ImageCache.GetImage(image.Key);
             if (bytes != null)
             {
                 var rect = Core2D.Rect2.Create(image.TopLeft, image.BottomRight, dx, dy);
 
                 if (_enableImageCache
-                    && _biCache.ContainsKey(image.Path))
+                    && _biCache.ContainsKey(image.Key))
                 {
-                    var dxfImageDefinition = _biCache[image.Path];
+                    var dxfImageDefinition = _biCache[image.Key];
                     var dxfImage = new Image(
                         dxfImageDefinition,
                         new Vector3(ToDxfX(rect.X), ToDxfY(rect.Y + rect.Height), 0),
@@ -1054,15 +1054,15 @@ namespace Dependencies
                 }
                 else
                 {
-                    if (_state.ImageCache == null || string.IsNullOrEmpty(image.Path))
+                    if (_state.ImageCache == null || string.IsNullOrEmpty(image.Key))
                         return;
 
-                    var path = System.IO.Path.Combine(_outputPath, System.IO.Path.GetFileName(image.Path));
+                    var path = System.IO.Path.Combine(_outputPath, System.IO.Path.GetFileName(image.Key));
                     System.IO.File.WriteAllBytes(path, bytes);
                     var dxfImageDefinition = new ImageDef(path);
 
                     if (_enableImageCache)
-                        _biCache[image.Path] = dxfImageDefinition;
+                        _biCache[image.Key] = dxfImageDefinition;
 
                     var dxfImage = new Image(
                         dxfImageDefinition,

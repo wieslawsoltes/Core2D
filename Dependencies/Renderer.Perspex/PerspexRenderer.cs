@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -890,40 +891,56 @@ namespace Dependencies
             }
 
             if (_enableImageCache
-                && _biCache.ContainsKey(image.Path))
+                && _biCache.ContainsKey(image.Key))
             {
-                var bi = _biCache[image.Path];
-                _dc.DrawImage(
-                    bi,
-                    1.0,
-                    new Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
-                    new Rect(rect.X, rect.Y, rect.Width, rect.Height));
+                try
+                {
+                    var bi = _biCache[image.Key];
+                    _dc.DrawImage(
+                        bi,
+                        1.0,
+                        new Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
+                        new Rect(rect.X, rect.Y, rect.Width, rect.Height));
+                }
+                catch (Exception ex)
+                {
+                    Debug.Print(ex.Message);
+                    Debug.Print(ex.StackTrace);
+                }
             }
             else
             {
-                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Path))
+                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Key))
                     return;
 
-                var bytes = _state.ImageCache.GetImage(image.Path);
-                if (bytes != null)
+                try
                 {
-                    using (var ms = new System.IO.MemoryStream(bytes))
+                    var bytes = _state.ImageCache.GetImage(image.Key);
+                    if (bytes != null)
                     {
-                        var bi = new Bitmap(ms);
-
-                        if (_enableImageCache)
-                            _biCache[image.Path] = bi;
-
-                        _dc.DrawImage(
-                            bi,
-                            1.0,
-                            new Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
-                            new Rect(rect.X, rect.Y, rect.Width, rect.Height));
-
-                        // TODO:
-                        //if (!_enableImageCache)
-                        //    bi.Dispose();
+                        using (var ms = new System.IO.MemoryStream(bytes))
+                        {
+                            var bi = new Bitmap(ms);
+    
+                            if (_enableImageCache)
+                                _biCache[image.Key] = bi;
+    
+                            _dc.DrawImage(
+                                bi,
+                                1.0,
+                                new Rect(0, 0, bi.PixelWidth, bi.PixelHeight),
+                                new Rect(rect.X, rect.Y, rect.Width, rect.Height));
+    
+                            // TODO:
+                            //if (!_enableImageCache)
+                            //    bi.Dispose();
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    Debug.Print(ex.Message);
+                    Debug.Print(ex.StackTrace);
                 }
             }
         }

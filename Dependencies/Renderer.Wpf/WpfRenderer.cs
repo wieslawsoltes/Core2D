@@ -1202,7 +1202,7 @@ namespace Dependencies
         /// <param name="r"></param>
         public void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
         {
-            if (image.Path == null)
+            if (image.Key == null)
                 return;
 
             var _dc = dc as DrawingContext;
@@ -1239,11 +1239,11 @@ namespace Dependencies
             DrawRectangleInternal(_dc, half, fill, stroke, image.IsStroked, image.IsFilled, ref rect);
 
             if (_enableImageCache
-                && _biCache.ContainsKey(image.Path))
+                && _biCache.ContainsKey(image.Key))
             {
                 try
                 {
-                    _dc.DrawImage(_biCache[image.Path], rect);
+                    _dc.DrawImage(_biCache[image.Key], rect);
                 }
                 catch (Exception ex)
                 {
@@ -1253,12 +1253,12 @@ namespace Dependencies
             }
             else
             {
-                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Path))
+                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Key))
                     return;
 
                 try
                 {
-                    var bytes = _state.ImageCache.GetImage(image.Path);
+                    var bytes = _state.ImageCache.GetImage(image.Key);
                     if (bytes != null)
                     {
                         var ms = new System.IO.MemoryStream(bytes);
@@ -1269,7 +1269,7 @@ namespace Dependencies
                         bi.Freeze();
 
                         if (_enableImageCache)
-                            _biCache[image.Path] = bi;
+                            _biCache[image.Key] = bi;
 
                         _dc.DrawImage(bi, rect);
                     }

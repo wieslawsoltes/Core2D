@@ -75,15 +75,15 @@ namespace Core2D
                         if (_editor.GetImageKey == null)
                             return;
 
-                        var path = await _editor.GetImageKey();
-                        if (path == null || string.IsNullOrEmpty(path))
+                        var key = await _editor.GetImageKey();
+                        if (key == null || string.IsNullOrEmpty(key))
                             return;
 
                         _shape = XImage.Create(
                             sx, sy,
                             _editor.Project.CurrentStyleLibrary.CurrentStyle,
                             _editor.Project.Options.PointShape,
-                            path);
+                            key);
                         if (_editor.Project.Options.TryToConnect)
                         {
                             TryToConnectTopLeft(_shape as XImage, sx, sy);

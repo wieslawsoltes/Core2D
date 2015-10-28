@@ -11,15 +11,15 @@ namespace Core2D
     /// </summary>
     public class XImage : XText
     {
-        private string _path;
+        private string _key;
 
         /// <summary>
         /// 
         /// </summary>
-        public string Path
+        public string Key
         {
-            get { return _path; }
-            set { Update(ref _path, value); }
+            get { return _key; }
+            set { Update(ref _key, value); }
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Core2D
         /// <param name="y2"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
-        /// <param name="path"></param>
+        /// <param name="key"></param>
         /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="text"></param>
@@ -71,7 +71,7 @@ namespace Core2D
             double x2, double y2,
             ShapeStyle style,
             BaseShape point,
-            string path,
+            string key,
             bool isStroked = false,
             bool isFilled = false,
             string text = null,
@@ -90,7 +90,7 @@ namespace Core2D
                 },
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
-                Path = path,
+                Key = key,
                 Text = text
             };
         }
@@ -102,7 +102,7 @@ namespace Core2D
         /// <param name="y"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
-        /// <param name="path"></param>
+        /// <param name="key"></param>
         /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="text"></param>
@@ -112,13 +112,13 @@ namespace Core2D
             double x, double y,
             ShapeStyle style,
             BaseShape point,
-            string path,
+            string key,
             bool isStroked = false,
             bool isFilled = false,
             string text = null,
             string name = "")
         {
-            return Create(x, y, x, y, style, point, path, isStroked, isFilled, text, name);
+            return Create(x, y, x, y, style, point, key, isStroked, isFilled, text, name);
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Core2D
         /// <param name="bottomRight"></param>
         /// <param name="style"></param>
         /// <param name="point"></param>
-        /// <param name="path"></param>
+        /// <param name="key"></param>
         /// <param name="isStroked"></param>
         /// <param name="isFilled"></param>
         /// <param name="text"></param>
@@ -139,7 +139,7 @@ namespace Core2D
             XPoint bottomRight,
             ShapeStyle style,
             BaseShape point,
-            string path,
+            string key,
             bool isStroked = false,
             bool isFilled = false,
             string text = null,
@@ -158,7 +158,7 @@ namespace Core2D
                 },
                 TopLeft = topLeft,
                 BottomRight = bottomRight,
-                Path = path,
+                Key = key,
                 Text = text
             };
         }

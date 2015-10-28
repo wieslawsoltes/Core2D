@@ -1037,16 +1037,16 @@ namespace Dependencies
             }
 
             if (_enableImageCache
-                && _biCache.ContainsKey(image.Path))
+                && _biCache.ContainsKey(image.Key))
             {
-                _gfx.DrawImage(_biCache[image.Path], srect);
+                _gfx.DrawImage(_biCache[image.Key], srect);
             }
             else
             {
-                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Path))
+                if (_state.ImageCache == null || string.IsNullOrEmpty(image.Key))
                     return;
 
-                var bytes = _state.ImageCache.GetImage(image.Path);
+                var bytes = _state.ImageCache.GetImage(image.Key);
                 if (bytes != null)
                 {
                     var ms = new System.IO.MemoryStream(bytes);
@@ -1061,7 +1061,7 @@ namespace Dependencies
                     var bi = XImage.FromStream(ms);
 #endif
                     if (_enableImageCache)
-                        _biCache[image.Path] = bi;
+                        _biCache[image.Key] = bi;
 
                     _gfx.DrawImage(bi, srect);
 
