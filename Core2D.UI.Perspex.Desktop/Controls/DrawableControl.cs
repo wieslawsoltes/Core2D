@@ -41,7 +41,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
 
             _state = new ZoomState(context.Editor);
 
-            if (context.Renderers[0].State.EnableAutofit)
+            if (context.Renderers != null && context.Renderers[0].State.EnableAutofit)
             {
                 AutoFit(this.Bounds.Width, this.Bounds.Height);
             }
@@ -141,7 +141,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
                 && context.Editor != null
                 && context.Editor.Project != null)
             {
-                if (context.Renderers[0].State.EnableAutofit)
+                if (context.Renderers != null && context.Renderers[0].State.EnableAutofit)
                 {
                     AutoFit(finalSize.Width, finalSize.Height);
                 }

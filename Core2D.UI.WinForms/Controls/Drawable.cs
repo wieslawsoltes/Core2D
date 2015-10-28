@@ -150,7 +150,7 @@ namespace Core2D.UI.WinForms
         {
             base.OnSizeChanged(e);
 
-            if (Context != null && Context.Editor.Project != null)
+            if (Context != null && Context.Renderers != null && Context.Editor.Project != null)
             {
                 if (Context.Renderers[0].State.EnableAutofit)
                 {

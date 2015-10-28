@@ -96,7 +96,7 @@ namespace Core2D.UI.EtoForms
             _drawable.SizeChanged +=
                 (sender, e) =>
                 {
-                    if (_context != null && _context.Editor.Project != null)
+                    if (_context != null && _context.Renderers != null && _context.Editor.Project != null)
                     {
                         if (_context.Renderers[0].State.EnableAutofit)
                         {
