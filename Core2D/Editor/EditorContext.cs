@@ -146,7 +146,14 @@ namespace Core2D
         {
             try
             {
-                _editor = Editor.Create(_projectFactory.GetProject(), _renderers);
+                if (_projectFactory != null)
+                {
+                    _editor = Editor.Create(_projectFactory.GetProject(), _renderers);
+                }
+                else
+                {
+                    _editor = Editor.Create(Project.Create(), _renderers);
+                }
 
                 if (log != null && logFileName != null)
                 {
@@ -759,7 +766,15 @@ namespace Core2D
                 var document = _editor.Project.Documents.FirstOrDefault(d => d.Containers.Contains(selected));
                 if (document != null)
                 {
-                    var container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
+                    var container = default(Container);
+                    if (_projectFactory != null)
+                    {
+                        container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
+                    }
+                    else
+                    {
+                        container = Container.Create(EditorConstants.DefaultContainerName);
+                    }
 
                     if (_editor.EnableHistory)
                     {
@@ -779,7 +794,16 @@ namespace Core2D
             else if (item is Document)
             {
                 var selected = item as Document;
-                var container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
+                
+                var container = default(Container);
+                if (_projectFactory != null)
+                {
+                    container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
+                }
+                else
+                {
+                    container = Container.Create(EditorConstants.DefaultContainerName);
+                }
 
                 if (_editor.EnableHistory)
                 {
@@ -797,8 +821,16 @@ namespace Core2D
             }
             else if (item is Project)
             {
-                var document = _projectFactory.GetDocument(_editor.Project, EditorConstants.DefaultDocumentName);
-
+                var document = default(Document);
+                if (_projectFactory != null)
+                {
+                    document = _projectFactory.GetDocument(_editor.Project, EditorConstants.DefaultDocumentName);
+                }
+                else
+                {
+                    document = Document.Create(EditorConstants.DefaultDocumentName);
+                }
+                
                 if (_editor.EnableHistory)
                 {
                     var previous = _editor.Project.Documents;
@@ -816,7 +848,23 @@ namespace Core2D
             }
             else if (item is EditorContext || item == null)
             {
-                New();
+                if (_editor.EnableHistory)
+                {
+                    _editor.History.Reset();
+                }
+    
+                _editor.Unload();
+                
+                if (_projectFactory != null)
+                {
+                    _editor.Load(_projectFactory.GetProject(), string.Empty);
+                }
+                else
+                {
+                    _editor.Load(Project.Create(), string.Empty);
+                }
+    
+                _editor.Invalidate();
             }
         }
 
@@ -833,7 +881,10 @@ namespace Core2D
         /// </summary>
         public void OnExit()
         {
-            _view.Close();
+            if (_view != null)
+            {
+                _view.Close();
+            }
         }
 
         /// <summary>
@@ -951,7 +1002,7 @@ namespace Core2D
         {
             try
             {
-                if (await CanPaste())
+                if (_textClipboard != null && await CanPaste())
                 {
                     var json = await _textClipboard.GetText();
                     if (!string.IsNullOrEmpty(json))
@@ -1205,31 +1256,16 @@ namespace Core2D
         /// </summary>
         public void OnAddGroup()
         {
-            if (_editor.Project == null || _editor.Project.CurrentGroupLibrary == null)
+            if (_renderers != null && _editor.Project == null || _editor.Project.CurrentGroupLibrary == null)
                 return;
 
             var group = _renderers[0].State.SelectedShape;
             if (group != null && group is XGroup)
             {
-                if (_editor.Project.CurrentGroupLibrary != null)
+                var clone = Clone(group as XGroup);
+                if (clone != null)
                 {
-                    var clone = Clone(group as XGroup);
-                    if (clone != null)
-                    {
-                        var gl = _editor.Project.CurrentGroupLibrary;
-
-                        if (_editor.EnableHistory)
-                        {
-                            var previous = gl.Groups;
-                            var next = gl.Groups.Add(clone);
-                            _editor.History.Snapshot(previous, next, (p) => gl.Groups = p);
-                            gl.Groups = next;
-                        }
-                        else
-                        {
-                            gl.Groups = gl.Groups.Add(clone);
-                        }
-                    }
+                    _editor.AddGroup(clone);
                 }
             }
         }
@@ -1250,17 +1286,18 @@ namespace Core2D
             if (_editor.Project == null)
                 return;
 
-            if (_editor.EnableHistory)
+            var template = default(Container);
+            if (_projectFactory != null)
             {
-                var previous = _editor.Project.Templates;
-                var next = _editor.Project.Templates.Add(_projectFactory.GetTemplate(_editor.Project, "Empty"));
-                _editor.History.Snapshot(previous, next, (p) => _editor.Project.Templates = p);
-                _editor.Project.Templates = next;
+                 template = _projectFactory.GetTemplate(_editor.Project, "Empty");
             }
             else
             {
-                _editor.Project.Templates = _editor.Project.Templates.Add(_projectFactory.GetTemplate(_editor.Project, "Empty"));
+                template = Container.Create();
+                template.IsTemplate = true;
             }
+
+            _editor.AddTemplate(template);
         }
 
         /// <summary>
@@ -1298,19 +1335,7 @@ namespace Core2D
 
             if (item is Container)
             {
-                var template = item as Container;
-
-                if (_editor.EnableHistory)
-                {
-                    var previous = _editor.Project.CurrentContainer.Template;
-                    var next = template;
-                    _editor.History.Snapshot(previous, next, (p) => _editor.Project.CurrentContainer.Template = p);
-                    _editor.Project.CurrentContainer.Template = next;
-                }
-                else
-                {
-                    _editor.Project.CurrentContainer.Template = template;
-                }
+                _editor.ApplyTemplate(item as Container);
             }
         }
 
@@ -1335,22 +1360,17 @@ namespace Core2D
             if (_editor.Project == null || _editor.Project.CurrentDocument == null)
                 return;
 
-            var container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
-
-            var document = _editor.Project.CurrentDocument;
-
-            if (_editor.EnableHistory)
+            var container = default(Container);
+            if (_projectFactory != null)
             {
-                var previous = document.Containers;
-                var next = document.Containers.Add(container);
-                _editor.History.Snapshot(previous, next, (p) => document.Containers = p);
-                document.Containers = next;
+                container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
             }
             else
             {
-                document.Containers = document.Containers.Add(container);
+                container = Container.Create(EditorConstants.DefaultContainerName);
             }
 
+            _editor.AddContainer(container);
             _editor.Project.CurrentContainer = container;
         }
 
@@ -1367,22 +1387,18 @@ namespace Core2D
             {
                 var selected = item as Container;
                 int index = _editor.Project.CurrentDocument.Containers.IndexOf(selected);
-                var container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
-
-                var document = _editor.Project.CurrentDocument;
-
-                if (_editor.EnableHistory)
+                
+                var container = default(Container);
+                if (_projectFactory != null)
                 {
-                    var previous = document.Containers;
-                    var next = document.Containers.Insert(index, container);
-                    _editor.History.Snapshot(previous, next, (p) => document.Containers = p);
-                    document.Containers = next;
+                    container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
                 }
                 else
                 {
-                    document.Containers = document.Containers.Insert(index, container);
+                    container = Container.Create(EditorConstants.DefaultContainerName);
                 }
 
+                _editor.AddContainerAt(container, index);
                 _editor.Project.CurrentContainer = container;
             }
         }
@@ -1400,22 +1416,18 @@ namespace Core2D
             {
                 var selected = item as Container;
                 int index = _editor.Project.CurrentDocument.Containers.IndexOf(selected);
-                var container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
-
-                var document = _editor.Project.CurrentDocument;
-
-                if (_editor.EnableHistory)
+                
+                var container = default(Container);
+                if (_projectFactory != null)
                 {
-                    var previous = document.Containers;
-                    var next = document.Containers.Insert(index + 1, container);
-                    _editor.History.Snapshot(previous, next, (p) => document.Containers = p);
-                    document.Containers = next;
+                    container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
                 }
                 else
                 {
-                    document.Containers = document.Containers.Insert(index + 1, container);
+                    container = Container.Create(EditorConstants.DefaultContainerName);
                 }
 
+                _editor.AddContainerAt(container, index + 1);
                 _editor.Project.CurrentContainer = container;
             }
         }
@@ -1429,20 +1441,17 @@ namespace Core2D
             if (_editor.Project == null)
                 return;
 
-            var document = _projectFactory.GetDocument(_editor.Project, EditorConstants.DefaultDocumentName);
-
-            if (_editor.EnableHistory)
+            var document = default(Document);
+            if (_projectFactory != null)
             {
-                var previous = _editor.Project.Documents;
-                var next = _editor.Project.Documents.Add(document);
-                _editor.History.Snapshot(previous, next, (p) => _editor.Project.Documents = p);
-                _editor.Project.Documents = next;
+                document = _projectFactory.GetDocument(_editor.Project, EditorConstants.DefaultDocumentName);
             }
             else
             {
-                _editor.Project.Documents = _editor.Project.Documents.Add(document);
+                document = Document.Create(EditorConstants.DefaultDocumentName);
             }
-
+            
+            _editor.AddDocument(document);
             _editor.Project.CurrentDocument = document;
             _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
         }
@@ -1460,20 +1469,18 @@ namespace Core2D
             {
                 var selected = item as Document;
                 int index = _editor.Project.Documents.IndexOf(selected);
-                var document = _projectFactory.GetDocument(_editor.Project, EditorConstants.DefaultDocumentName);
-
-                if (_editor.EnableHistory)
+                
+                var document = default(Document);
+                if (_projectFactory != null)
                 {
-                    var previous = _editor.Project.Documents;
-                    var next = _editor.Project.Documents.Insert(index, document);
-                    _editor.History.Snapshot(previous, next, (p) => _editor.Project.Documents = p);
-                    _editor.Project.Documents = next;
+                    document = _projectFactory.GetDocument(_editor.Project, EditorConstants.DefaultDocumentName);
                 }
                 else
                 {
-                    _editor.Project.Documents = _editor.Project.Documents.Insert(index, document);
+                    document = Document.Create(EditorConstants.DefaultDocumentName);
                 }
 
+                _editor.AddDocumentAt(document, index);
                 _editor.Project.CurrentDocument = document;
                 _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
             }
@@ -1492,20 +1499,18 @@ namespace Core2D
             {
                 var selected = item as Document;
                 int index = _editor.Project.Documents.IndexOf(selected);
-                var document = _projectFactory.GetDocument(_editor.Project, EditorConstants.DefaultDocumentName);
 
-                if (_editor.EnableHistory)
+                var document = default(Document);
+                if (_projectFactory != null)
                 {
-                    var previous = _editor.Project.Documents;
-                    var next = _editor.Project.Documents.Insert(index + 1, document);
-                    _editor.History.Snapshot(previous, next, (p) => _editor.Project.Documents = p);
-                    _editor.Project.Documents = next;
+                    document = _projectFactory.GetDocument(_editor.Project, EditorConstants.DefaultDocumentName);
                 }
                 else
                 {
-                    _editor.Project.Documents = _editor.Project.Documents.Insert(index + 1, document);
+                    document = Document.Create(EditorConstants.DefaultDocumentName);
                 }
 
+                _editor.AddDocumentAt(document, index + 1);
                 _editor.Project.CurrentDocument = document;
                 _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
             }
@@ -1740,26 +1745,14 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        public void New()
-        {
-            if (_editor.EnableHistory)
-            {
-                _editor.History.Reset();
-            }
-
-            _editor.Unload();
-            _editor.Load(_projectFactory.GetProject(), string.Empty);
-            _editor.Invalidate();
-        }
-
-        /// <summary>
         ///
         /// </summary>
         /// <param name="path"></param>
         public void Open(string path)
         {
+            if (_serializer == null)
+                return;
+            
             try
             {
                 var project = Project.Open(path, _serializer);
@@ -1792,9 +1785,12 @@ namespace Core2D
         /// <param name="path"></param>
         public void Save(string path)
         {
+            if (_serializer == null)
+                return;
+            
             try
             {
-                Project.Save(path, _editor.Project, _serializer);
+                Project.Save(_editor.Project, path, _serializer);
 
                 AddRecent(path, _editor.Project.Name);
 
@@ -1889,6 +1885,9 @@ namespace Core2D
         /// <param name="type"></param>
         public void ImportObject(string path, object item, ImportType type)
         {
+            if (_serializer == null)
+                return;
+            
             try
             {
                 switch (type)
@@ -2159,6 +2158,9 @@ namespace Core2D
         /// <param name="type"></param>
         public void ExportObject(string path, object item, ExportType type)
         {
+            if (_serializer == null)
+                return;
+            
             try
             {
                 switch (type)
@@ -2252,19 +2254,7 @@ namespace Core2D
                     return;
 
                 var db = _csvReader.Read(path);
-
-                if (_editor.EnableHistory)
-                {
-                    var previous = _editor.Project.Databases;
-                    var next = _editor.Project.Databases.Add(db);
-                    _editor.History.Snapshot(previous, next, (p) => _editor.Project.Databases = p);
-                    _editor.Project.Databases = next;
-                }
-                else
-                {
-                    _editor.Project.Databases = _editor.Project.Databases.Add(db);
-                }
-
+                _editor.AddDatabase(db);
                 _editor.Project.CurrentDatabase = db;
             }
             catch (Exception ex)
@@ -2318,78 +2308,7 @@ namespace Core2D
                     return;
 
                 var db = _csvReader.Read(path);
-
-                if (db.Columns.Length <= 1)
-                    return;
-
-                // check for the Id column
-                if (db.Columns[0].Name != Database.IdColumnName)
-                    return;
-
-                // skip Id column for update
-                if (db.Columns.Length - 1 != database.Columns.Length)
-                    return;
-
-                // check column names
-                for (int i = 1; i < db.Columns.Length; i++)
-                {
-                    if (db.Columns[i].Name != database.Columns[i - 1].Name)
-                        return;
-                }
-
-                bool isDirty = false;
-                var recordsBuilder = database.Records.ToBuilder();
-
-                for (int i = 0; i < database.Records.Length; i++)
-                {
-                    var record = database.Records[i];
-
-                    var result = db.Records.FirstOrDefault(r => r.Id == record.Id);
-                    if (result != null)
-                    {
-                        // update existing record
-                        for (int j = 1; j < result.Values.Length; j++)
-                        {
-                            var valuesBuilder = record.Values.ToBuilder();
-                            valuesBuilder[j - 1] = result.Values[j];
-                            record.Values = valuesBuilder.ToImmutable();
-                        }
-                        isDirty = true;
-                    }
-                    else
-                    {
-                        var r = db.Records[i];
-
-                        // use existing columns
-                        r.Columns = database.Columns;
-
-                        // skip Id column
-                        r.Values = r.Values.Skip(1).ToImmutableArray();
-
-                        recordsBuilder.Add(r);
-                        isDirty = true;
-                    }
-                }
-
-                if (isDirty)
-                {
-                    var builder = _editor.Project.Databases.ToBuilder();
-                    var index = builder.IndexOf(database);
-                    database.Records = recordsBuilder.ToImmutable();
-                    builder[index] = database;
-
-                    if (_editor.EnableHistory)
-                    {
-                        var previous = _editor.Project.Databases;
-                        var next = builder.ToImmutable();
-                        _editor.History.Snapshot(previous, next, (p) => _editor.Project.Databases = p);
-                        _editor.Project.Databases = next;
-                    }
-                    else
-                    {
-                        _editor.Project.Databases = builder.ToImmutable();
-                    }
-                }
+                _editor.ApplyDatabase(database, db);
             }
             catch (Exception ex)
             {
@@ -2432,6 +2351,9 @@ namespace Core2D
         /// <param name="path"></param>
         public void LoadRecent(string path)
         {
+            if (_serializer == null)
+                return;
+            
             try
             {
                 var json = Utf8TextFile.Read(path);
@@ -2468,6 +2390,9 @@ namespace Core2D
         /// <param name="path"></param>
         public void SaveRecent(string path)
         {
+            if (_serializer == null)
+                return;
+            
             try
             {
                 var json = _serializer.Serialize(_recentProjects);
@@ -2502,7 +2427,7 @@ namespace Core2D
         {
             try
             {
-                return await _textClipboard.ContainsText();
+                return _textClipboard != null && await _textClipboard.ContainsText();
             }
             catch (Exception ex)
             {
@@ -2525,10 +2450,13 @@ namespace Core2D
         {
             try
             {
-                var json = _serializer.Serialize(shapes);
-                if (!string.IsNullOrEmpty(json))
+                if (_textClipboard != null && _serializer != null)
                 {
-                    _textClipboard.SetText(json);
+                    var json = _serializer.Serialize(shapes);
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        _textClipboard.SetText(json);
+                    }
                 }
             }
             catch (Exception ex)
@@ -2549,6 +2477,9 @@ namespace Core2D
         /// <param name="json"></param>
         public void Paste(string json)
         {
+            if (_serializer == null)
+                return;
+            
             try
             {
                 var shapes = _serializer.Deserialize<IList<BaseShape>>(json);
@@ -2760,6 +2691,9 @@ namespace Core2D
         /// <returns></returns>
         public XGroup Clone(XGroup group)
         {
+            if (_serializer == null)
+                return null;
+            
             try
             {
                 var json = _serializer.Serialize(group);
@@ -2796,6 +2730,9 @@ namespace Core2D
         /// <returns></returns>
         public Container Clone(Container container)
         {
+            if (_serializer == null)
+                return null;
+            
             try
             {
                 var template = container.Template;
@@ -2834,6 +2771,9 @@ namespace Core2D
         /// <returns></returns>
         public Document Clone(Document document)
         {
+            if (_serializer == null)
+                return null;
+            
             try
             {
                 var templates = document.Containers.Select(c => c.Template).ToArray();
@@ -3039,17 +2979,7 @@ namespace Core2D
                         var result = ShapeBounds.HitTest(container, new Vector2(x, y), _editor.Project.Options.HitTreshold);
                         if (result != null)
                         {
-                            if (_editor.EnableHistory)
-                            {
-                                var previous = result.Data.Record;
-                                var next = record;
-                                _editor.History.Snapshot(previous, next, (p) => result.Data.Record = p);
-                                result.Data.Record = next;
-                            }
-                            else
-                            {
-                                result.Data.Record = record;
-                            }
+                            _editor.ApplyRecord(result, record);
                         }
                         else
                         {

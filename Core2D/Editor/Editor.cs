@@ -149,7 +149,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Get image path using common system open file dialog.
+        /// Get image key using common system open file dialog.
         /// </summary>
         public Func<Task<string>> GetImageKey { get; set; }
 
@@ -680,6 +680,245 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="name"></param>
+        public void AddDocument(string name = "New")
+        {
+            if (_project == null)
+                return;
+            
+            var document = Document.Create(name);
+            
+            if (_enableHistory)
+            {
+                var previous = _project.Documents;
+                var next = _project.Documents.Add(document);
+                _history.Snapshot(previous, next, (p) => _project.Documents = p);
+                _project.Documents = next;
+            }
+            else
+            {
+                _project.Documents = _project.Documents.Add(document);
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="document"></param>
+        public void AddDocument(Document document)
+        {
+            if (_project == null)
+                return;
+
+            if (_enableHistory)
+            {
+                var previous = _project.Documents;
+                var next = _project.Documents.Add(document);
+                _history.Snapshot(previous, next, (p) => _project.Documents = p);
+                _project.Documents = next;
+            }
+            else
+            {
+                _project.Documents = _project.Documents.Add(document);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="index"></param>
+        public void AddDocumentAt(Document document, int index)
+        {
+            if (_project == null)
+                return;
+            
+            if (_enableHistory)
+            {
+                var previous = _project.Documents;
+                var next = _project.Documents.Insert(index, document);
+                _history.Snapshot(previous, next, (p) => _project.Documents = p);
+                _project.Documents = next;
+            }
+            else
+            {
+                _project.Documents = _project.Documents.Insert(index, document);
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        public void AddContainer(string name = "New")
+        {
+            if (_project == null || _project.CurrentDocument == null)
+                return;
+            
+            var document = _project.CurrentDocument;
+            var container = Container.Create(name);
+
+            if (_enableHistory)
+            {
+                var previous = document.Containers;
+                var next = document.Containers.Add(container);
+                _history.Snapshot(previous, next, (p) => document.Containers = p);
+                document.Containers = next;
+            }
+            else
+            {
+                document.Containers = document.Containers.Add(container);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        public void AddContainer(Container container)
+        {
+            if (_project == null || _project.CurrentDocument == null)
+                return;
+            
+            var document = _project.CurrentDocument;
+
+            if (_enableHistory)
+            {
+                var previous = document.Containers;
+                var next = document.Containers.Add(container);
+                _history.Snapshot(previous, next, (p) => document.Containers = p);
+                document.Containers = next;
+            }
+            else
+            {
+                document.Containers = document.Containers.Add(container);
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="index"></param>
+        public void AddContainerAt(Container container, int index)
+        {
+            if (_project == null || _project.CurrentDocument == null)
+                return;
+            
+            var document = _project.CurrentDocument;
+
+            if (_enableHistory)
+            {
+                var previous = document.Containers;
+                var next = document.Containers.Insert(index, container);
+                _history.Snapshot(previous, next, (p) => document.Containers = p);
+                document.Containers = next;
+            }
+            else
+            {
+                document.Containers = document.Containers.Insert(index, container);
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        public void AddTemplate(string name = "New")
+        {
+            if (_project == null)
+                return;
+            
+            var template = Container.Create(name);
+            template.IsTemplate = true;
+            
+            if (_enableHistory)
+            {
+                var previous = _project.Templates;
+                var next = _project.Templates.Add(template);
+                _history.Snapshot(previous, next, (p) => _project.Templates = p);
+                _project.Templates = next;
+            }
+            else
+            {
+                _project.Templates = _project.Templates.Add(template);
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="template"></param>
+        public void AddTemplate(Container template)
+        {
+            if (_project == null)
+                return;
+            
+            if (_enableHistory)
+            {
+                var previous = _project.Templates;
+                var next = _project.Templates.Add(template);
+                _history.Snapshot(previous, next, (p) => _project.Templates = p);
+                _project.Templates = next;
+            }
+            else
+            {
+                _project.Templates = _project.Templates.Add(template);
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        public void AddLayer(string name = "New")
+        {
+            if (_project == null || _project.CurrentContainer == null)
+                return;
+
+            var container = _project.CurrentContainer;
+            var layer = Layer.Create(name, container);
+
+            if (_enableHistory)
+            {
+                var previous = container.Layers;
+                var next = container.Layers.Add(layer);
+                _history.Snapshot(previous, next, (p) => container.Layers = p);
+                container.Layers = next;
+            }
+            else
+            {
+                container.Layers = container.Layers.Add(layer);
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="layer"></param>
+        public void AddLayer(Layer layer)
+        {
+            if (_project == null || _project.CurrentContainer == null)
+                return;
+
+            var container = _project.CurrentContainer;
+
+            if (_enableHistory)
+            {
+                var previous = container.Layers;
+                var next = container.Layers.Add(layer);
+                _history.Snapshot(previous, next, (p) => container.Layers = p);
+                container.Layers = next;
+            }
+            else
+            {
+                container.Layers = container.Layers.Add(layer);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="shape"></param>
         public void AddShape(BaseShape shape)
         {
@@ -726,10 +965,9 @@ namespace Core2D
         /// <param name="property"></param>
         public void AddProperty(Data data, ShapeProperty property)
         {
-            var previous = data.Properties;
-
             if (_enableHistory)
             {
+                var previous = data.Properties;
                 var next = data.Properties.Add(property);
                 _history.Snapshot(previous, next, (p) => data.Properties = p);
                 data.Properties = next;
@@ -813,6 +1051,28 @@ namespace Core2D
             }
 
             _project.CurrentDatabase = db;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="db"></param>
+        public void AddDatabase(Database db)
+        {
+            if (_project == null)
+                return;
+            
+            if (_enableHistory)
+            {
+                var previous = _project.Databases;
+                var next = _project.Databases.Add(db);
+                _history.Snapshot(previous, next, (p) => _project.Databases = p);
+                _project.Databases = next;
+            }
+            else
+            {
+                _project.Databases = _project.Databases.Add(db);
+            }
         }
 
         /// <summary>
@@ -954,47 +1214,23 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="name"></param>
-        public void AddLayer(string name = "New")
-        {
-            if (_project == null || _project.CurrentContainer == null)
-                return;
-
-            var container = _project.CurrentContainer;
-
-            if (_enableHistory)
-            {
-                var previous = container.Layers;
-                var next = container.Layers.Add(Layer.Create(name, container));
-                _history.Snapshot(previous, next, (p) => container.Layers = p);
-                container.Layers = next;
-            }
-            else
-            {
-                container.Layers = container.Layers.Add(Layer.Create(name, container));
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name"></param>
         public void AddStyleLibrary(string name = "New")
         {
             if (_project == null || _project.StyleLibraries == null)
                 return;
 
-            var sg = StyleLibrary.Create(name);
+            var sl = StyleLibrary.Create(name);
 
             if (_enableHistory)
             {
                 var previous = _project.StyleLibraries;
-                var next = _project.StyleLibraries.Add(sg);
+                var next = _project.StyleLibraries.Add(sl);
                 _history.Snapshot(previous, next, (p) => _project.StyleLibraries = p);
                 _project.StyleLibraries = next;
             }
             else
             {
-                _project.StyleLibraries = _project.StyleLibraries.Add(sg);
+                _project.StyleLibraries = _project.StyleLibraries.Add(sl);
             }
         }
 
@@ -1007,21 +1243,70 @@ namespace Core2D
             if (_project == null || _project.CurrentStyleLibrary == null)
                 return;
 
-            var sg = _project.CurrentStyleLibrary;
+            var sl = _project.CurrentStyleLibrary;
 
             if (_enableHistory)
             {
-                var previous = sg.Styles;
-                var next = sg.Styles.Add(ShapeStyle.Create(name));
-                _history.Snapshot(previous, next, (p) => sg.Styles = p);
-                sg.Styles = next;
+                var previous = sl.Styles;
+                var next = sl.Styles.Add(ShapeStyle.Create(name));
+                _history.Snapshot(previous, next, (p) => sl.Styles = p);
+                sl.Styles = next;
             }
             else
             {
-                sg.Styles = sg.Styles.Add(ShapeStyle.Create(name));
+                sl.Styles = sl.Styles.Add(ShapeStyle.Create(name));
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="group"></param>
+        public void AddGroup(XGroup group)
+        {
+            if (_project == null || _project.CurrentGroupLibrary == null)
+                return;
+            
+            var gl = _project.CurrentGroupLibrary;
+
+            if (_enableHistory)
+            {
+                var previous = gl.Groups;
+                var next = gl.Groups.Add(group);
+                _history.Snapshot(previous, next, (p) => gl.Groups = p);
+                gl.Groups = next;
+            }
+            else
+            {
+                gl.Groups = gl.Groups.Add(group);
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        public void AddGroup(string name = "New")
+        {
+            if (_project == null || _project.CurrentGroupLibrary == null)
+                return;
+            
+            var gl = _project.CurrentGroupLibrary;
+            var group = XGroup.Create(name);
+
+            if (_enableHistory)
+            {
+                var previous = gl.Groups;
+                var next = gl.Groups.Add(group);
+                _history.Snapshot(previous, next, (p) => gl.Groups = p);
+                gl.Groups = next;
+            }
+            else
+            {
+                gl.Groups = gl.Groups.Add(group);
+            }
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -1412,6 +1697,133 @@ namespace Core2D
                         }
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="template"></param>
+        public void ApplyTemplate(Container template)
+        {
+            if (_project == null || _project.CurrentContainer == null)
+                return;
+            
+            var container = _project.CurrentContainer;
+            
+            if (_enableHistory)
+            {
+                var previous = container.Template;
+                var next = template;
+                _history.Snapshot(previous, next, (p) => container.Template = p);
+                container.Template = next;
+            }
+            else
+            {
+                container.Template = template;
+            }
+        }
+        
+        /// <summary>
+        /// Update the destination database using data from source database.
+        /// </summary>
+        /// <param name="destination">The destination database.</param>
+        /// <param name="source">The source database.</param>
+        public void ApplyDatabase(Database destination, Database source)
+        {
+            if (_project == null)
+                return;
+            
+            if (source.Columns.Length <= 1)
+                return;
+
+            // check for the Id column
+            if (source.Columns[0].Name != Database.IdColumnName)
+                return;
+
+            // skip Id column for update
+            if (source.Columns.Length - 1 != destination.Columns.Length)
+                return;
+
+            // check column names
+            for (int i = 1; i < source.Columns.Length; i++)
+            {
+                if (source.Columns[i].Name != destination.Columns[i - 1].Name)
+                    return;
+            }
+
+            bool isDirty = false;
+            var recordsBuilder = destination.Records.ToBuilder();
+
+            for (int i = 0; i < destination.Records.Length; i++)
+            {
+                var record = destination.Records[i];
+
+                var result = source.Records.FirstOrDefault(r => r.Id == record.Id);
+                if (result != null)
+                {
+                    // update existing record
+                    for (int j = 1; j < result.Values.Length; j++)
+                    {
+                        var valuesBuilder = record.Values.ToBuilder();
+                        valuesBuilder[j - 1] = result.Values[j];
+                        record.Values = valuesBuilder.ToImmutable();
+                    }
+                    isDirty = true;
+                }
+                else
+                {
+                    var r = source.Records[i];
+
+                    // use existing columns
+                    r.Columns = destination.Columns;
+
+                    // skip Id column
+                    r.Values = r.Values.Skip(1).ToImmutableArray();
+
+                    recordsBuilder.Add(r);
+                    isDirty = true;
+                }
+            }
+
+            if (isDirty)
+            {
+                var builder = _project.Databases.ToBuilder();
+                var index = builder.IndexOf(destination);
+                destination.Records = recordsBuilder.ToImmutable();
+                builder[index] = destination;
+
+                if (_enableHistory)
+                {
+                    var previous = _project.Databases;
+                    var next = builder.ToImmutable();
+                    _history.Snapshot(previous, next, (p) => _project.Databases = p);
+                    _project.Databases = next;
+                }
+                else
+                {
+                    _project.Databases = builder.ToImmutable();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="record"></param>
+        public void ApplyRecord(BaseShape shape, Record record)
+        {
+            if (_enableHistory)
+            {
+                var previous = shape.Data.Record;
+                var next = record;
+                _history.Snapshot(previous, next, (p) => shape.Data.Record = p);
+                shape.Data.Record = next;
+            }
+            else
+            {
+                shape.Data.Record = record;
             }
         }
 
