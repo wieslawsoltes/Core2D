@@ -13,122 +13,15 @@ namespace Core2D
     /// </summary>
     public class ShapeFactory : IShapeFactory
     {
-        /// <summary>
-        /// Gets or sets editor context.
-        /// </summary>
-        public EditorContext Context { private set; get; }
-
-        /// <summary>
-        /// Gets current editor.
-        /// </summary>
-        public Editor Editor
-        {
-            get { return Context.Editor; }
-        }
-
-        /// <summary>
-        /// Gets selected shape.
-        /// </summary>
-        public BaseShape SelectedShape
-        {
-            get { return Context.Editor.Renderers[0].State.SelectedShape; }
-        }
-
-        /// <summary>
-        /// Gets selected shapes.
-        /// </summary>
-        public IEnumerable<BaseShape> SelectedShapes
-        {
-            get { return Context.Editor.Renderers[0].State.SelectedShapes; }
-        }
-
-        /// <summary>
-        /// Gets current project.
-        /// </summary>
-        public Project Project
-        {
-            get { return Context.Editor.Project; }
-        }
-
-        /// <summary>
-        /// Gets current options.
-        /// </summary>
-        public Options Options
-        {
-            get { return Context.Editor.Project.Options; }
-        }
-
-        /// <summary>
-        /// Gets current document.
-        /// </summary>
-        public Document CurrentDocument
-        {
-            get { return Context.Editor.Project.CurrentDocument; }
-        }
-
-        /// <summary>
-        /// Gets current container.
-        /// </summary>
-        public Container CurrentContainer
-        {
-            get { return Context.Editor.Project.CurrentContainer; }
-        }
-
-        /// <summary>
-        /// Gets current layer.
-        /// </summary>
-        public Layer CurrentLayer
-        {
-            get { return Context.Editor.Project.CurrentContainer.CurrentLayer; }
-        }
-
-        /// <summary>
-        /// Gets current shapes.
-        /// </summary>
-        public IEnumerable<BaseShape> CurrentShapes
-        {
-            get { return Context.Editor.Project.CurrentContainer.CurrentLayer.Shapes; }
-        }
-
-        /// <summary>
-        /// Gets current shape.
-        /// </summary>
-        public BaseShape CurrentShape
-        {
-            get { return Context.Editor.Project.CurrentContainer.CurrentShape; }
-        }
-
-        /// <summary>
-        /// Gets current template.
-        /// </summary>
-        public Container CurrentTemplate
-        {
-            get { return Context.Editor.Project.CurrentTemplate; }
-        }
-
-        /// <summary>
-        /// Gets current database.
-        /// </summary>
-        public Database CurrentDatabase
-        {
-            get { return Context.Editor.Project.CurrentDatabase; }
-        }
-
-        /// <summary>
-        /// Gets current style.
-        /// </summary>
-        public ShapeStyle CurrentStyle
-        {
-            get { return Context.Editor.Project.CurrentStyleLibrary.CurrentStyle; }
-        }
-
+        private Editor _editor;
+        
         /// <summary>
         /// Initializes a new instance of the Factory class.
         /// </summary>
-        /// <param name="context"></param>
-        public ShapeFactory(EditorContext context)
+        /// <param name="editor">The current Editor instance.</param>
+        public ShapeFactory(Editor editor)
         {
-            Context = context;
+            _editor = editor;
         }
 
         /// <summary>
@@ -144,10 +37,10 @@ namespace Core2D
         {
             var point = XPoint.Create(
                 x, y,
-                Context.Editor.Project.Options.PointShape);
+                _editor.Project.Options.PointShape);
             if (isStandalone)
             {
-                Context.Editor.AddShape(point);
+                _editor.AddShape(point);
             }
             return point;
         }
@@ -169,10 +62,10 @@ namespace Core2D
             var line = XLine.Create(
                 x1, y1,
                 x2, y2,
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.Options.PointShape,
                 isStroked);
-            Context.Editor.AddShape(line);
+            _editor.AddShape(line);
             return line;
         }
 
@@ -188,10 +81,10 @@ namespace Core2D
             var line = XLine.Create(
                 start,
                 end,
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.Options.PointShape,
                 isStroked);
-            Context.Editor.AddShape(line);
+            _editor.AddShape(line);
             return line;
         }
 
@@ -222,11 +115,11 @@ namespace Core2D
                 x2, y2,
                 x3, y3,
                 x4, y4,
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            Context.Editor.AddShape(arc);
+            _editor.AddShape(arc);
             return arc;
         }
 
@@ -253,11 +146,11 @@ namespace Core2D
                 point2,
                 point3,
                 point4,
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            Context.Editor.AddShape(arc);
+            _editor.AddShape(arc);
             return arc;
         }
 
@@ -288,11 +181,11 @@ namespace Core2D
                 x2, y2,
                 x3, y3,
                 x4, y4,
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            Context.Editor.AddShape(bezier);
+            _editor.AddShape(bezier);
             return bezier;
         }
 
@@ -319,11 +212,11 @@ namespace Core2D
                 point2,
                 point3,
                 point4,
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            Context.Editor.AddShape(bezier);
+            _editor.AddShape(bezier);
             return bezier;
         }
 
@@ -350,11 +243,11 @@ namespace Core2D
                 x1, y1,
                 x2, y2,
                 x3, y3,
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            Context.Editor.AddShape(qbezier);
+            _editor.AddShape(qbezier);
             return qbezier;
         }
 
@@ -378,11 +271,11 @@ namespace Core2D
                 point1,
                 point2,
                 point3,
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled);
-            Context.Editor.AddShape(qbezier);
+            _editor.AddShape(qbezier);
             return qbezier;
         }
 
@@ -412,11 +305,11 @@ namespace Core2D
         {
             var path = XPath.Create(
                 "",
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
                 geometry,
                 isStroked,
                 isFilled);
-            Context.Editor.AddShape(path);
+            _editor.AddShape(path);
             return path;
         }
 
@@ -441,12 +334,12 @@ namespace Core2D
             var rectangle = XRectangle.Create(
                 x1, y1,
                 x2, y2,
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled,
                 text);
-            Context.Editor.AddShape(rectangle);
+            _editor.AddShape(rectangle);
             return rectangle;
         }
 
@@ -469,12 +362,12 @@ namespace Core2D
             var rectangle = XRectangle.Create(
                 topLeft,
                 bottomRight,
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled,
                 text);
-            Context.Editor.AddShape(rectangle);
+            _editor.AddShape(rectangle);
             return rectangle;
         }
 
@@ -499,12 +392,12 @@ namespace Core2D
             var ellipse = XEllipse.Create(
                 x1, y1,
                 x2, y2,
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled,
                 text);
-            Context.Editor.AddShape(ellipse);
+            _editor.AddShape(ellipse);
             return ellipse;
         }
 
@@ -527,12 +420,12 @@ namespace Core2D
             var ellipse = XEllipse.Create(
                 topLeft,
                 bottomRight,
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.Options.PointShape,
                 isStroked,
                 isFilled,
                 text);
-            Context.Editor.AddShape(ellipse);
+            _editor.AddShape(ellipse);
             return ellipse;
         }
 
@@ -555,11 +448,11 @@ namespace Core2D
             var txt = XText.Create(
                 x1, y1,
                 x2, y2,
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.Options.PointShape,
                 text,
                 isStroked);
-            Context.Editor.AddShape(txt);
+            _editor.AddShape(txt);
             return txt;
         }
 
@@ -580,11 +473,11 @@ namespace Core2D
             var txt = XText.Create(
                 topLeft,
                 bottomRight,
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.Options.PointShape,
                 text,
                 isStroked);
-            Context.Editor.AddShape(txt);
+            _editor.AddShape(txt);
             return txt;
         }
 
@@ -611,13 +504,13 @@ namespace Core2D
             var image = XImage.Create(
                 x1, y1,
                 x2, y2,
-                Context.Editor.Project.CurrentStyleLibrary.CurrentStyle,
-                Context.Editor.Project.Options.PointShape,
+                _editor.Project.CurrentStyleLibrary.CurrentStyle,
+                _editor.Project.Options.PointShape,
                 path,
                 isStroked,
                 isFilled,
                 text);
-            Context.Editor.AddShape(image);
+            _editor.AddShape(image);
             return image;
         }
 
@@ -649,6 +542,7 @@ namespace Core2D
                 isFilled,
                 text);
             Context.Editor.AddShape(image);
+            _editor.AddShape(image);
             return image;
         }
     }
