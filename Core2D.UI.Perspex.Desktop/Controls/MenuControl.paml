@@ -24,14 +24,6 @@
                         <TextBlock Text="{Binding Path=Name}" ToolTip.Tip="{Binding Path=Path}"/>
                     </DataTemplate>
                 </MenuItem.DataTemplates>
-                <!--
-                <MenuItem.ItemContainerStyle>
-                    <Style TargetType="MenuItem">
-                        <Setter Property="Command" Value="{Binding Path=Commands.OpenCommand}"/>
-                        <Setter Property="CommandParameter" Value="{Binding Path=Path}"/>
-                    </Style>
-                </MenuItem.ItemContainerStyle>
-                -->
             </MenuItem>
             <!--<Separator/>-->
             <MenuItem Header="E_xit" HotKey="Alt+F4" Command="{Binding Path=Commands.ExitCommand}"/>
