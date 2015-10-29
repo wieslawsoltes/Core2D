@@ -279,20 +279,17 @@
                     <ContentControl Content="{Binding Path=TextStyle, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Line" Classes="property">
-                    <StackPanel>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
-                            <TextBlock Text="StartArrowStyle" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Path=StartArrowStyle, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
-                        </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
-                            <TextBlock Text="EndArrowStyle" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Path=EndArrowStyle, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
-                        </Grid>
-                        <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
-                            <TextBlock Text="FixedLength" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                            <ContentControl Content="{Binding Path=LineStyle, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
-                        </Grid>
-                    </StackPanel>
+                    <TabControl Classes="default">
+                        <TabItem Header="StartArrow" Classes="property">
+                            <ContentControl Content="{Binding Path=StartArrowStyle, Mode=TwoWay}"/>
+                        </TabItem>
+                        <TabItem Header="EndArrow" Classes="property">
+                            <ContentControl Content="{Binding Path=EndArrowStyle, Mode=TwoWay}"/>
+                        </TabItem>
+                        <TabItem Header="LineStyle" Classes="property">
+                            <ContentControl Content="{Binding Path=LineStyle, Mode=TwoWay}"/>
+                        </TabItem>
+                    </TabControl>
                 </TabItem>
             </TabControl>
         </DataTemplate>
