@@ -954,21 +954,21 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Figures" Classes="property">
-                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
-                        <!--
-                        <TreeView Items="{Binding Path=Figures}" Classes="default" Grid.Row="0" Grid.Column="0">
-                            <TreeView.DataTemplates>
-                                <TreeDataTemplate DataType="core:XPathFigure" ItemsSource="{Binding Path=Segments}">
-                                    <TextBlock Text="Figure" Classes="default"/>
-                                </TreeDataTemplate>
-                                <DataTemplate DataType="core:XPathSegment">
-                                    <TextBlock Text="Segment" Classes="default"/>
-                                </DataTemplate>
-                            </TreeView.DataTemplates>
-                        </TreeView>
-                        -->
-                        <ListBox Items="{Binding Path=Figures}" Grid.Row="1" Grid.Column="0" Classes="default"/>
+                    <Grid ColumnDefinitions="*">
+                        <ListBox Items="{Binding Path=Figures}" Grid.Column="0" Classes="default"/>
                     </Grid>
+                </TabItem>
+                <TabItem Header="Tree" Classes="property">
+                    <TreeView Items="{Binding Path=Figures}" Classes="default">
+                        <TreeView.DataTemplates>
+                            <TreeDataTemplate DataType="core:XPathFigure" ItemsSource="{Binding Path=Segments}">
+                                <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:CoreConverters.ObjectToTypeString}}" Classes="default"/>
+                            </TreeDataTemplate>
+                            <DataTemplate DataType="core:XPathSegment">
+                                <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:CoreConverters.ObjectToTypeString}}" Classes="default"/>
+                            </DataTemplate>
+                        </TreeView.DataTemplates>
+                    </TreeView>
                 </TabItem>
             </TabControl>
         </DataTemplate>
