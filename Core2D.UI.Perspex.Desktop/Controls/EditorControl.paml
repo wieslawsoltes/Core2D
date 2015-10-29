@@ -368,8 +368,9 @@
                         <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Path=Bindings}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:ShapeBinding">
-                                    <Grid VerticalAlignment="Top">
-                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Path, Mode=TwoWay}" Classes="default"/>
+                                    <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
+                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Path, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
+                                        <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
