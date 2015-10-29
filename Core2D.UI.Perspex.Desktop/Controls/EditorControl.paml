@@ -341,7 +341,7 @@
                         </ItemsControl>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Current Record" Classes="property">
+                <TabItem Header="Record" Classes="property">
                     <ContentControl Content="{Binding Path=CurrentRecord, Mode=TwoWay}"/>
                 </TabItem>
             </TabControl>
