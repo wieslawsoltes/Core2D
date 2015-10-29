@@ -47,7 +47,11 @@ namespace Core2D.UI.Perspex.Desktop.Converters
             new FuncValueConverter<ArgbColor, SolidColorBrush>(x => ToSolidBrush(x));
 
         /// <summary>
-        /// 
+        /// HACK: Convert object type to string.
+        /// </summary>
+        public static readonly IValueConverter ObjectToTypeString =
+            new FuncValueConverter<object, string>(x => x != null ? x.GetType().ToString() : "<null>");
+        
         /// <summary>
         /// HACK: Convert int to int to fix ArgbColorsToBrush converter.
         /// </summary>
