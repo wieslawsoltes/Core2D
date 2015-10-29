@@ -48,6 +48,8 @@ namespace Core2D.UI.Perspex.Desktop.Converters
 
         /// <summary>
         /// 
+        /// <summary>
+        /// HACK: Convert int to int to fix ArgbColorsToBrush converter.
         /// </summary>
         public static readonly IValueConverter IntToInt =
             new FuncValueConverter<int, int>(x => x);
