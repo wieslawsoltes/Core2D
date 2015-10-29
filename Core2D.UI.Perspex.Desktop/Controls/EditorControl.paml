@@ -9,111 +9,115 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D">
     <UserControl.Styles>
         <Style Selector="TextBlock.default">
-            <Setter Property="TextBlock.Margin" Value="1"/>
-            <Setter Property="TextBlock.FontSize" Value="12"/>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
         <Style Selector="TextBlock.left">
-            <Setter Property="TextBlock.Margin" Value="3,1,3,1"/>
-            <Setter Property="TextBlock.FontSize" Value="12"/>
-            <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style Selector="TextBlock.center">
-            <Setter Property="TextBlock.Margin" Value="3,1,3,1"/>
-            <Setter Property="TextBlock.FontSize" Value="12"/>
-            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-            <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style Selector="TextBlock.header">
-            <Setter Property="TextBlock.Margin" Value="3,1,3,1"/>
-            <Setter Property="TextBlock.FontSize" Value="12"/>
-            <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
         </Style>
         <Style Selector="TextBox.default">
-            <Setter Property="TextBox.Margin" Value="3,1,3,1"/>
-            <Setter Property="TextBox.FontSize" Value="12"/>
-            <Setter Property="TextBox.Background" Value="#FFDEDEDE"/>
-            <Setter Property="TextBox.BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Background" Value="#FFDEDEDE"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
         <Style Selector="TextBox.left">
-            <Setter Property="TextBox.Margin" Value="3,1,3,1"/>
-            <Setter Property="TextBox.FontSize" Value="12"/>
-            <Setter Property="TextBox.Background" Value="#FFDEDEDE"/>
-            <!--<Setter Property="TextBox.TextAlignment" Value="Left"/>-->
-            <Setter Property="TextBox.VerticalAlignment" Value="Center"/>
-            <Setter Property="TextBox.BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Background" Value="#FFDEDEDE"/>
+            <!--<Setter Property="TextAlignment" Value="Left"/>-->
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
         <Style Selector="TextBox.center">
-            <Setter Property="TextBox.Margin" Value="3,1,3,1"/>
-            <Setter Property="TextBox.FontSize" Value="12"/>
-            <Setter Property="TextBox.Background" Value="#FFDEDEDE"/>
-            <!--<Setter Property="TextBox.TextAlignment" Value="Center"/>-->
-            <Setter Property="TextBox.VerticalAlignment" Value="Center"/>
-            <Setter Property="TextBox.BorderBrush" Value="Transparent"/>
-            <Setter Property="TextBox.BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Background" Value="#FFDEDEDE"/>
+            <!--<Setter Property="TextAlignment" Value="Center"/>-->
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
         <Style Selector="CheckBox.default">
-            <Setter Property="CheckBox.Margin" Value="3,1,3,1"/>
-            <Setter Property="CheckBox.FontSize" Value="12"/>
+            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
         <Style Selector="CheckBox.left">
-            <Setter Property="CheckBox.Margin" Value="3,1,3,1"/>
-            <Setter Property="CheckBox.FontSize" Value="12"/>
+            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
         <Style Selector="DropDown.default">
-            <Setter Property="DropDown.Margin" Value="3,1,3,1"/>
-            <Setter Property="DropDown.Background" Value="#FFDEDEDE"/>
-            <Setter Property="DropDown.BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="Background" Value="#FFDEDEDE"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
         <Style Selector="ListBox.default">
-            <Setter Property="ListBox.Margin" Value="0"/>
-            <Setter Property="ListBox.BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
         <Style Selector="TreeView.default">
-            <Setter Property="TreeView.Margin" Value="0"/>
-            <Setter Property="TreeView.BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
         <Style Selector="TabControl.default">
-            <Setter Property="TabControl.Margin" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
         </Style>
         <Style Selector="TabItem.property">
-            <Setter Property="TabItem.FontSize" Value="12"/>
-            <Setter Property="TabItem.FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Normal"/>
         </Style>
         <Style Selector="Border.leftTop">
-            <Setter Property="Border.Margin" Value="4,6,0,4"/>
-            <Setter Property="Border.Padding" Value="3,3,3,3"/>
-            <Setter Property="Border.BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="Border.BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="4,6,0,4"/>
+            <Setter Property="Padding" Value="3,3,3,3"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Border.leftBottom">
-            <Setter Property="Border.Margin" Value="4,4,0,2"/>
-            <Setter Property="Border.Padding" Value="3,3,3,3"/>
-            <Setter Property="Border.BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="Border.BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="4,4,0,2"/>
+            <Setter Property="Padding" Value="3,3,3,3"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Border.rightTop">
-            <Setter Property="Border.Margin" Value="0,6,4,4"/>
-            <Setter Property="Border.Padding" Value="3,3,3,3"/>
-            <Setter Property="Border.BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="Border.BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="0,6,4,4"/>
+            <Setter Property="Padding" Value="3,3,3,3"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Border.rightBottom">
-            <Setter Property="Border.Margin" Value="0,4,4,2"/>
-            <Setter Property="Border.Padding" Value="3,3,3,3"/>
-            <Setter Property="Border.BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="Border.BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="0,4,4,2"/>
+            <Setter Property="Padding" Value="3,3,3,3"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Border.drawable">
-            <Setter Property="Border.Margin" Value="0,6,0,2"/>
-            <Setter Property="Border.Padding" Value="3,3,3,3"/>
-            <Setter Property="Border.BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="Border.BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="0,6,0,2"/>
+            <Setter Property="Padding" Value="3,3,3,3"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style Selector="Border.color">
-            <Setter Property="Border.Margin" Value="3,1,3,1"/>
-            <Setter Property="Border.BorderBrush" Value="Transparent"/>
-            <Setter Property="Border.BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="3,1,3,1"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="Button.default">
+            <Setter Property="Margin" Value="3,0,3,0"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
     </UserControl.Styles>
     <UserControl.DataTemplates>
