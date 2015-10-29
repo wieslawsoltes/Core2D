@@ -1292,7 +1292,7 @@
                             Classes="default">
                             <ListBox.DataTemplates>
                                 <DataTemplate DataType="core:Record">
-                                    <TextBlock Text="{Binding Path=Id}" Classes="default"/>
+                                    <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:CoreConverters.ObjectToTypeString}}" Classes="default"/>
                                 </DataTemplate>
                             </ListBox.DataTemplates>
                         </ListBox>
