@@ -241,16 +241,17 @@
             </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:LineStyle">
-            <StackPanel>
-                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                    <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                </Grid>
-                <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
-                    <TextBlock Text="FixedLength" Classes="header" Grid.Row="0" Grid.Column="0"/>
-                    <ContentControl Content="{Binding Path=FixedLength, Mode=TwoWay}" Grid.Row="1" Grid.Column="0"/>
-                </Grid>
-            </StackPanel>
+            <TabControl Classes="default">
+                <TabItem Header="LineStyle" Classes="property">
+                    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
+                        <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="FixedLength" Classes="property">
+                    <ContentControl Content="{Binding Path=FixedLength, Mode=TwoWay}"/>
+                </TabItem>
+            </TabControl>
         </DataTemplate>
         <DataTemplate DataType="core:ShapeStyle">
             <TabControl Classes="default">
