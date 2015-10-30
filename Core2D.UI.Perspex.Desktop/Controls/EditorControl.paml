@@ -1116,46 +1116,47 @@
         <DataTemplate DataType="core:Container">
             <TabControl Classes="default">
                 <TabItem Header="Container" Classes="property">
-                    <Grid RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="Auto,*">
+                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto,*">
                         <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
                         <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                        <TextBlock Text="Width" Classes="left" Grid.Row="1" Grid.Column="0"/>
-                        <TextBox Text="{Binding Path=Width, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                        <TextBlock Text="Height" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                        <TextBox Text="{Binding Path=Height, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
-                        <TabControl Classes="default" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                        <TabControl IsVisible="{Binding IsTemplate}" Classes="default" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                            <TabItem Header="Size" Classes="property">
+                                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
+                                    <TextBlock Text="Width" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                                    <TextBox Text="{Binding Path=Width, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
+                                    <TextBlock Text="Height" Classes="left" Grid.Row="1" Grid.Column="0"/>
+                                    <TextBox Text="{Binding Path=Height, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                                </Grid>
+                            </TabItem>
                             <TabItem Header="Background" Classes="property">
                                 <ContentControl Content="{Binding Path=Background, Mode=TwoWay}"/>
                             </TabItem>
-                            <TabItem Header="Template" Classes="property">
-                                <ContentControl Content="{Binding Path=Template, Mode=TwoWay}"/>
-                            </TabItem>
-                            <TabItem Header="Properties" Classes="property">
-                                <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
-                                    <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
-                                    <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
-                                    <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Properties}">
-                                        <ItemsControl.DataTemplates>
-                                            <DataTemplate DataType="core:ShapeProperty">
-                                                <Grid VerticalAlignment="Top">
-                                                    <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ItemsControl.DataTemplates>
-                                    </ItemsControl>
-                                    <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Path=Properties}">
-                                        <ItemsControl.DataTemplates>
-                                            <DataTemplate DataType="core:ShapeProperty">
-                                                <Grid VerticalAlignment="Top">
-                                                    <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}" Classes="default"/>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ItemsControl.DataTemplates>
-                                    </ItemsControl>
-                                </Grid>
-                            </TabItem>
                         </TabControl>
+                    </Grid>
+                </TabItem>
+                <TabItem IsVisible="{Binding !IsTemplate}" Header="Properties" Classes="property">
+                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
+                        <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
+                        <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
+                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Properties}">
+                            <ItemsControl.DataTemplates>
+                                <DataTemplate DataType="core:ShapeProperty">
+                                    <Grid VerticalAlignment="Top">
+                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.DataTemplates>
+                        </ItemsControl>
+                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Path=Properties}">
+                            <ItemsControl.DataTemplates>
+                                <DataTemplate DataType="core:ShapeProperty">
+                                    <Grid VerticalAlignment="Top">
+                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}" Classes="default"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.DataTemplates>
+                        </ItemsControl>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Layers" Classes="property">
@@ -1187,7 +1188,7 @@
                         Classes="default">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:BaseShape">
-                                <TextBlock Text="{Binding Path=Name}" Classes="default"/>
+                                <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:CoreConverters.ObjectToTypeString}}" Classes="default"/>
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>
@@ -1435,8 +1436,28 @@
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Container" Classes="property">
+                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto,*">
+                        <TextBlock Text="Template" Classes="left" Grid.Row="0" Grid.Column="0"/>
+                        <DropDown
+                            Items="{Binding Path=Editor.Project.Templates}"
+                            SelectedItem="{Binding Path=Editor.Project.CurrentContainer.Template, Mode=TwoWay}"
+                            Grid.Row="0" 
+                            Grid.Column="1"
+                            Classes="default">
+                            <DropDown.DataTemplates>
+                                <DataTemplate DataType="core:Container">
+                                    <TextBlock Text="{Binding Path=Name}" Classes="default"/>
+                                </DataTemplate>
+                            </DropDown.DataTemplates>
+                        </DropDown>
+                        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                            <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}"/>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Template" Classes="property">
                     <ScrollViewer>
-                        <ContentControl Content="{Binding Path=Editor.Project.CurrentContainer, Mode=TwoWay}"/>
+                        <ContentControl Content="{Binding Path=Editor.Project.CurrentTemplate, Mode=TwoWay}"/>
                     </ScrollViewer>
                 </TabItem>
             </TabControl>
