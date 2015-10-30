@@ -236,8 +236,8 @@ namespace Core2D.UI.EtoForms
                 _state.ResetZoom(
                     _drawable.Bounds.Width,
                     _drawable.Bounds.Height,
-                    container.Width,
-                    container.Height);
+                    container.Template.Width,
+                    container.Template.Height);
             }
         }
 
@@ -252,8 +252,8 @@ namespace Core2D.UI.EtoForms
                 _state.AutoFit(
                     _drawable.Bounds.Width,
                     _drawable.Bounds.Height,
-                    container.Width,
-                    container.Height);
+                    container.Template.Width,
+                    container.Template.Height);
             }
         }
 
@@ -828,26 +828,29 @@ namespace Core2D.UI.EtoForms
 
             var container = _context.Editor.Project.CurrentContainer;
 
-            if (container.Template != null)
+            var template = container.Template;
+            if (template != null)
             {
                 DrawBackground(
                     g,
-                    container.Template.Background,
-                    container.Template.Width,
-                    container.Template.Height);
+                    template.Background,
+                    template.Width,
+                    template.Height);
 
                 renderer.Draw(
                     g,
-                    container.Template,
+                    template,
                     container.Properties,
                     null);
             }
-
-            DrawBackground(
-                g,
-                container.Background,
-                container.Width,
-                container.Height);
+            else
+            {
+                DrawBackground(
+                    g,
+                    container.Background,
+                    container.Width,
+                    container.Height);
+            }
 
             renderer.Draw(
                 g,
