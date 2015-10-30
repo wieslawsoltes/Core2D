@@ -217,6 +217,7 @@
     </Compile>
     <Compile Include="Converters\ArgbColorToBrushMultiConverter.cs" />
     <Compile Include="Converters\CoreConverters.cs" />
+    <Compile Include="Converters\RoundedDoubleToDoubleConverter.cs" />
     <Compile Include="Windows\MainWindow.paml.cs">
       <DependentUpon>MainWindow.paml</DependentUpon>
     </Compile>
