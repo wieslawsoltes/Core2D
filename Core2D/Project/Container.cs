@@ -212,33 +212,43 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="isTemplate"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        public static Container Create(string name = "Container", double width = 840, double height = 600)
+        public static Container Create(
+            string name = "Container", 
+            bool isTemplate = false, 
+            double width = 840, 
+            double height = 600)
         {
-            var c = new Container()
+            var container = new Container()
             {
                 Name = name,
-                Width = width,
-                Height = height,
-                Background = ArgbColor.Create(0x00, 0xFF, 0xFF, 0xFF),
                 Properties = ImmutableArray.Create<ShapeProperty>(),
-                Layers = ImmutableArray.Create<Layer>()
+                Layers = ImmutableArray.Create<Layer>(),
+                IsTemplate = isTemplate
             };
+            
+            if (isTemplate)
+            {
+                container.Background = ArgbColor.Create(0x00, 0xFF, 0xFF, 0xFF);
+                container.Width = width;
+                container.Height = height;
+            }
 
-            var builder = c.Layers.ToBuilder();
-            builder.Add(Layer.Create("Layer1", c));
-            builder.Add(Layer.Create("Layer2", c));
-            builder.Add(Layer.Create("Layer3", c));
-            builder.Add(Layer.Create("Layer4", c));
-            c.Layers = builder.ToImmutable();
+            var builder = container.Layers.ToBuilder();
+            builder.Add(Layer.Create("Layer1", container));
+            builder.Add(Layer.Create("Layer2", container));
+            builder.Add(Layer.Create("Layer3", container));
+            builder.Add(Layer.Create("Layer4", container));
+            container.Layers = builder.ToImmutable();
 
-            c.CurrentLayer = c.Layers.FirstOrDefault();
-            c.WorkingLayer = Layer.Create("Working", c);
-            c.HelperLayer = Layer.Create("Helper", c);
+            container.CurrentLayer = container.Layers.FirstOrDefault();
+            container.WorkingLayer = Layer.Create("Working", container);
+            container.HelperLayer = Layer.Create("Helper", container);
 
-            return c;
+            return container;
         }
     }
 }
