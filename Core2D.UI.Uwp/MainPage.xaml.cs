@@ -115,8 +115,8 @@ namespace Test.Uwp
                 _state.ResetZoom(
                     canvas.ActualWidth,
                     canvas.ActualHeight,
-                    container.Width,
-                    container.Height);
+                    container.Template.Width,
+                    container.Template.Height);
             }
         }
 
@@ -131,8 +131,8 @@ namespace Test.Uwp
                 _state.AutoFit(
                     canvas.ActualWidth,
                     canvas.ActualHeight,
-                    container.Width,
-                    container.Height);
+                    container.Template.Width,
+                    container.Template.Height);
             }
         }
 
@@ -407,26 +407,29 @@ namespace Test.Uwp
             var old = ds.Transform;
             ds.Transform = s * t;
 
-            if (container.Template != null)
+            var template = container.Template;
+            if (template != null)
             {
                 DrawBackground(
                     ds,
-                    container.Template.Background,
-                    container.Template.Width,
-                    container.Template.Height);
+                    template.Background,
+                    template.Width,
+                    template.Height);
 
                 renderer.Draw(
                     ds,
-                    container.Template,
+                    template,
                     container.Properties,
                     null);
             }
-
-            DrawBackground(
-                ds,
-                container.Background,
-                container.Width,
-                container.Height);
+            else
+            {
+                DrawBackground(
+                    ds,
+                    container.Background,
+                    container.Width,
+                    container.Height);
+            }
 
             renderer.Draw(
                 ds,
