@@ -9,8 +9,8 @@
              xmlns:converters="clr-namespace:Core2D.UI.Wpf.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="600"
-             Width="{Binding Editor.Project.CurrentContainer.Width}" 
-             Height="{Binding Editor.Project.CurrentContainer.Height}"
+             Width="{Binding Editor.Project.CurrentContainer.Template.Width}" 
+             Height="{Binding Editor.Project.CurrentContainer.Template.Height}"
              controls:LayerElement.Renderer="{Binding Editor.Renderers[0]}">
     <UserControl.InputBindings>
         <KeyBinding Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding}" Key="Delete" Modifiers=""/>
@@ -50,7 +50,7 @@
         <KeyBinding Command="{Binding Commands.DeselectAllCommand}" Key="Esc" Modifiers=""/>
     </UserControl.InputBindings>
     <UserControl.Resources>
-        <ControlTemplate x:Key="ContainerControlTemplateKey">
+        <ControlTemplate x:Key="TemplateControlTemplateKey">
             <ItemsControl ItemsSource="{Binding Layers}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -74,33 +74,89 @@
                 </ItemsControl.ItemContainerStyle>
             </ItemsControl>
         </ControlTemplate>
+        <ControlTemplate x:Key="ContainerControlTemplateKey">
+            <ItemsControl ItemsSource="{Binding Layers}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas Width="{Binding Template.Width}" Height="{Binding Template.Height}" Background="Transparent">
+                        </Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:LayerElement/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Width" Value="{Binding Path=DataContext.Template.Width, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}"/>
+                        <Setter Property="Height" Value="{Binding Path=DataContext.Template.Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Canvas}}, FallbackValue=0.0}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
+        </ControlTemplate>
     </UserControl.Resources>
-    <Border 
-        Width="{Binding Width}" 
-        Height="{Binding Height}" 
-        DataContext="{Binding Editor.Project.CurrentContainer}">
+    <Border DataContext="{Binding Editor.Project.CurrentContainer}">
         <Border.Style>
             <Style TargetType="Border">
+                <Setter Property="Width" Value="{Binding Template.Width}"/>
+                <Setter Property="Height" Value="{Binding Template.Height}"/>
                 <Setter Property="BorderBrush" Value="Transparent"/>
                 <Setter Property="BorderThickness" Value="0"/>
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding IsTemplate}" Value="True">
+                        <Setter Property="Width" Value="{Binding Width}"/>
+                        <Setter Property="Height" Value="{Binding Height}"/>
                         <Setter Property="BorderBrush" Value="Red"/>
                         <Setter Property="BorderThickness" Value="2"/>
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
         </Border.Style>
-        <Grid Width="{Binding Width}" Height="{Binding Height}" Background="Transparent">
-            <Control DataContext="{Binding Template}" Template="{StaticResource ContainerControlTemplateKey}"/>
-            <Control DataContext="{Binding}" Template="{StaticResource ContainerControlTemplateKey}"/>
+        <Grid Width="{Binding Template.Width}" Height="{Binding Template.Height}" Background="Transparent">
+            <Control DataContext="{Binding Template}">
+                <Control.Style>
+                    <Style TargetType="Control">
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Setter Property="Template" Value="{StaticResource TemplateControlTemplateKey}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Setter Property="Template" Value="{x:Null}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Control.Style>
+            </Control>
+            <Control DataContext="{Binding}" Template="{StaticResource ContainerControlTemplateKey}">
+                <Control.Style>
+                    <Style TargetType="Control">
+                        <Setter Property="Template" Value="{StaticResource ContainerControlTemplateKey}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsTemplate}" Value="True">
+                                <Setter Property="Template" Value="{StaticResource TemplateControlTemplateKey}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Control.Style>
+            </Control>
             <controls:EditorCanvas 
                     Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
                     Background="Transparent"
                     Focusable="True"
-                    FocusVisualStyle="{x:Null}"
-                    Width="{Binding Width}" 
-                    Height="{Binding Height}">
+                    FocusVisualStyle="{x:Null}">
+                <controls:EditorCanvas.Style>
+                    <Style TargetType="{x:Type controls:EditorCanvas}">
+                        <Setter Property="Width" Value="{Binding Template.Width}"/>
+                        <Setter Property="Height" Value="{Binding Template.Height}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsTemplate}" Value="True">
+                                <Setter Property="Width" Value="{Binding Width}"/>
+                                <Setter Property="Height" Value="{Binding Height}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </controls:EditorCanvas.Style>
                 <controls:LayerElement DataContext="{Binding WorkingLayer}"/>
                 <controls:LayerElement DataContext="{Binding HelperLayer}"/>
             </controls:EditorCanvas>

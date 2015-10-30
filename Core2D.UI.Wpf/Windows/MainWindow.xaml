@@ -107,7 +107,7 @@
                                 <controls:ProjectControl x:Name="projectControl"/>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable x:Name="optionsWindow" CanClose="False" ContentId="options" Title="{x:Static p:Resources.WindowTitleOptions}" AutoHideWidth="210">
-                                <ScrollViewer 
+                                <ScrollViewer Visibility="Collapsed"
                                     x:Name="optionsScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
                                     HorizontalScrollBarVisibility="Auto" 
@@ -129,9 +129,6 @@
                                         Focusable="True">
                                         <controls:DatabasesControl/>
                                     </ScrollViewer>
-                                </ad:LayoutAnchorable>
-                                <ad:LayoutAnchorable x:Name="recordsWindow" CanClose="False" ContentId="records" Title="{x:Static p:Resources.WindowTitleRecords}" AutoHideWidth="210">
-                                    <controls:RecordsControl x:Name="recordsControl"/>
                                 </ad:LayoutAnchorable>
                             </ad:LayoutAnchorablePane>
                         </ad:LayoutAnchorablePaneGroup>
@@ -156,9 +153,19 @@
                                         Focusable="False"
                                         VerticalAlignment="Stretch" 
                                         HorizontalAlignment="Stretch"
-                                        Width="{Binding Editor.Project.CurrentContainer.Width}" 
-                                        Height="{Binding Editor.Project.CurrentContainer.Height}"
                                         Tag="{Binding Editor.CancelAvailable}">
+                                        <paz:PanAndZoomBorder.Style>
+                                            <Style TargetType="{x:Type paz:PanAndZoomBorder}">
+                                                <Setter Property="Width" Value="{Binding Editor.Project.CurrentContainer.Template.Width}"/>
+                                                <Setter Property="Height" Value="{Binding Editor.Project.CurrentContainer.Template.Height}"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Editor.Project.CurrentContainer.IsTemplate}" Value="True">
+                                                        <Setter Property="Width" Value="{Binding Editor.Project.CurrentContainer.Width}"/>
+                                                        <Setter Property="Height" Value="{Binding Editor.Project.CurrentContainer.Height}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </paz:PanAndZoomBorder.Style>
                                         <controls:CanvasControl x:Name="canvasControl">
                                             <controls:CanvasControl.Style>
                                                 <Style TargetType="controls:CanvasControl">

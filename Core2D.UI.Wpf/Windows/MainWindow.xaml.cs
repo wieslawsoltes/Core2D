@@ -534,8 +534,8 @@ namespace Core2D.UI.Wpf.Windows
                 var shapes = Enumerable.Repeat(context.Editor.Renderers[0].State.SelectedShape, 1).ToList();
                 (new EmfWriter()).SetClipboard(
                     shapes,
-                    container.Width,
-                    container.Height,
+                    container.Template.Width,
+                    container.Template.Height,
                     container.Properties,
                     context.Editor.Project);
             }
@@ -545,8 +545,8 @@ namespace Core2D.UI.Wpf.Windows
                 var shapes = context.Editor.Renderers[0].State.SelectedShapes.ToList();
                 (new EmfWriter()).SetClipboard(
                     shapes,
-                    container.Width,
-                    container.Height,
+                    container.Template.Width,
+                    container.Template.Height,
                     container.Properties,
                     context.Editor.Project);
             }
@@ -1102,11 +1102,23 @@ namespace Core2D.UI.Wpf.Windows
                         && context.Editor.Project != null
                         && context.Editor.Project.CurrentContainer != null)
                     {
-                        border.AutoFit(
-                            width,
-                            height,
-                            context.Editor.Project.CurrentContainer.Width,
-                            context.Editor.Project.CurrentContainer.Height);
+                        var container = context.Editor.Project.CurrentContainer;
+                        if (container.Template == null)
+                        {
+                            border.AutoFit(
+                                width,
+                                height,
+                                container.Width,
+                                container.Height);
+                        }
+                        else
+                        {
+                            border.AutoFit(
+                                width,
+                                height,
+                                container.Template.Width,
+                                container.Template.Height);
+                        }
                     }
                 };
 
