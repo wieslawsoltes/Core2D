@@ -100,8 +100,8 @@ namespace Core2D.UI.WinForms
                 _state.ResetZoom(
                     this.Width,
                     this.Height,
-                    container.Width,
-                    container.Height);
+                    container.Template.Width,
+                    container.Template.Height);
             }
         }
 
@@ -116,8 +116,8 @@ namespace Core2D.UI.WinForms
                 _state.AutoFit(
                     this.Width,
                     this.Height,
-                    container.Width,
-                    container.Height);
+                    container.Template.Width,
+                    container.Template.Height);
             }
         }
 
@@ -214,13 +214,17 @@ namespace Core2D.UI.WinForms
             g.TranslateTransform((float)_state.PanX, (float)_state.PanY);
             g.ScaleTransform((float)_state.Zoom, (float)_state.Zoom);
 
-            if (container.Template != null)
+            var template = container.Template;
+            if (template != null)
             {
-                DrawBackground(g, container.Template.Background, container.Template.Width, container.Template.Height);
-                renderer.Draw(g, container.Template, container.Properties, null);
+                DrawBackground(g, template.Background, template.Width, template.Height);
+                renderer.Draw(g, template, container.Properties, null);
+            }
+            else
+            {
+                DrawBackground(g, container.Background, container.Width, container.Height);
             }
 
-            DrawBackground(g, container.Background, container.Width, container.Height);
             renderer.Draw(g, container, container.Properties, null);
 
             if (container.WorkingLayer != null)
