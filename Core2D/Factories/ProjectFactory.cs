@@ -94,17 +94,17 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="project"></param>
-        /// <param name="container"></param>
-        private void CreateGrid(Project project, Container container)
+        /// <param name="template"></param>
+        private void CreateGrid(Project project, Container template)
         {
             var style = project
                 .StyleLibraries.FirstOrDefault(g => g.Name == "Template")
                 .Styles.FirstOrDefault(s => s.Name == "Grid");
-            var layer = container.Layers.FirstOrDefault();
+            var layer = template.Layers.FirstOrDefault();
             var builder = layer.Shapes.ToBuilder();
             var grid = XRectangle.Create(
                 0, 0,
-                container.Width, container.Height,
+                template.Width, template.Height,
                 style,
                 project.Options.PointShape);
             grid.IsStroked = false;
@@ -142,9 +142,8 @@ namespace Core2D
         /// <returns></returns>
         public Container GetTemplate(Project project, string name)
         {
-            var container = Container.Create(name);
+            var container = Container.Create(name, true);
 
-            container.IsTemplate = true;
             container.Background = ArgbColor.Create(0xFF, 0xFF, 0xFF, 0xFF);
 
             foreach (var layer in container.Layers)
@@ -175,8 +174,7 @@ namespace Core2D
             }
 
             container.Template = project.CurrentTemplate;
-            container.Width = container.Template.Width;
-            container.Height = container.Template.Height;
+
             return container;
         }
 

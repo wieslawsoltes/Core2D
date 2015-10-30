@@ -829,9 +829,8 @@ namespace Core2D
             if (_project == null)
                 return;
             
-            var template = Container.Create(name);
-            template.IsTemplate = true;
-            
+            var template = Container.Create(name, true);
+
             if (_enableHistory)
             {
                 var previous = _project.Templates;

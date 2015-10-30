@@ -1293,8 +1293,7 @@ namespace Core2D
             }
             else
             {
-                template = Container.Create();
-                template.IsTemplate = true;
+                template = Container.Create(EditorConstants.DefaultContainerName, true);
             }
 
             _editor.AddTemplate(template);

@@ -58,6 +58,7 @@ namespace Core2D.Sample
             project.CurrentDocument = document;
 
             var container = Container.Create();
+            container.Template = Container.Create(isTemplate: true);
             editor.AddContainer(container);
             project.CurrentContainer = container;
 
