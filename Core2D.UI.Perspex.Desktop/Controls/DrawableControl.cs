@@ -177,8 +177,8 @@ namespace Core2D.UI.Perspex.Desktop.Controls
             _state.ResetZoom(
                 width,
                 height,
-                container.Width,
-                container.Height);
+                container.Template.Width,
+                container.Template.Height);
 
             context.Editor.Invalidate();
         }
@@ -206,8 +206,8 @@ namespace Core2D.UI.Perspex.Desktop.Controls
             _state.AutoFit(
                 width,
                 height,
-                container.Width,
-                container.Height);
+                container.Template.Width,
+                container.Template.Height);
 
             context.Editor.Invalidate();
         }
@@ -253,26 +253,29 @@ namespace Core2D.UI.Perspex.Desktop.Controls
             var translate = dc.PushPreTransform(Matrix.CreateTranslation(_state.PanX, _state.PanY));
             var scale = dc.PushPreTransform(Matrix.CreateScale(_state.Zoom, _state.Zoom));
 
-            if (container.Template != null)
+            var template = container.Template;
+            if (template != null)
             {
                 DrawBackground(
                     dc,
-                    container.Template.Background,
-                    container.Template.Width,
-                    container.Template.Height);
+                    template.Background,
+                    template.Width,
+                    template.Height);
 
                 renderer.Draw(
                     dc,
-                    container.Template,
+                    template,
                     container.Properties,
                     null);
             }
-
-            DrawBackground(
-                dc,
-                container.Background,
-                container.Width,
-                container.Height);
+            else
+            {
+                DrawBackground(
+                    dc,
+                    container.Background,
+                    container.Width,
+                    container.Height);
+            }
 
             renderer.Draw(
                 dc,
