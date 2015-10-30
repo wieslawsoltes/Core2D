@@ -51,7 +51,7 @@ namespace Core2D.UI.Perspex.Desktop.Converters
         /// </summary>
         public static readonly IValueConverter ObjectToTypeString =
             new FuncValueConverter<object, string>(x => x != null ? x.GetType().ToString() : "<null>");
-        
+
         /// <summary>
         /// HACK: Convert int to int to fix ArgbColorsToBrush converter.
         /// </summary>
