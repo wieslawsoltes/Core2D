@@ -56,7 +56,6 @@ namespace Core2D.UI.Wpf.PanAndZoom
                     zoom.ZoomAndPanChild(0.0, 0.0, 1.0);
                 }
             }
-
         }
 
         /// <summary>
