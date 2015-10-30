@@ -322,11 +322,11 @@ namespace Dependencies
         /// 
         /// </summary>
         /// <param name="gfx"></param>
-        /// <param name="container"></param>
-        private void DrawBackgroundInternal(Graphics gfx, Container container)
+        /// <param name="template"></param>
+        private void DrawTemplateBackgroundInternal(Graphics gfx, Container template)
         {
-            Brush brush = ToSolidBrush(container.Background);
-            var rect = Rect2.Create(0, 0, container.Width, container.Height);
+            Brush brush = ToSolidBrush(template.Background);
+            var rect = Rect2.Create(0, 0, template.Width, template.Height);
             gfx.FillRectangle(
                 brush,
                 _scaleToPage(rect.X),
@@ -365,6 +365,14 @@ namespace Dependencies
         /// <param name="r"></param>
         public void Draw(object gfx, Container container, ImmutableArray<ShapeProperty> db, Record r)
         {
+            // NOTE: Template background is drawn in drawable control.
+            //var template = container.Template;
+            //if (template != null)
+            //{
+            //    var _gfx = gfx as Graphics;
+            //    DrawTemplateBackgroundInternal(_gfx, template);
+            //}
+            
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)

@@ -193,7 +193,10 @@ namespace Dependencies
         {
             try
             {
-                using (var bitmap = new Bitmap((int)container.Width, (int)container.Height))
+                if (container == null || container.Template == null)
+                    return;
+                
+                using (var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height))
                 {
                     using (var ms = MakeMetafileStream(bitmap, container, ic))
                     {
@@ -218,7 +221,10 @@ namespace Dependencies
         /// <param name="ic"></param>
         public void Save(string path, Container container, IImageCache ic)
         {
-            using (var bitmap = new Bitmap((int)container.Width, (int)container.Height))
+            if (container == null || container.Template == null)
+                return;
+            
+            using (var bitmap = new Bitmap((int)container.Template.Width, (int)container.Template.Height))
             {
                 using (var ms = MakeMetafileStream(bitmap, container, ic))
                 {

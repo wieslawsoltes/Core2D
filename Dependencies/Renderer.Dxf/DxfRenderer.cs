@@ -77,12 +77,15 @@ namespace Dependencies
         /// <param name="container"></param>
         private void Add(DxfDocument doc, Core2D.Container container)
         {
-            _pageWidth = container.Width;
-            _pageHeight = container.Height;
-
             if (container.Template != null)
             {
+                _pageWidth = container.Template.Width;
+                _pageHeight = container.Template.Height;
                 Draw(doc, container.Template, container.Properties, null);
+            }
+            else
+            {
+                throw new NullReferenceException("Container template must be set.");
             }
 
             Draw(doc, container, container.Properties, null);

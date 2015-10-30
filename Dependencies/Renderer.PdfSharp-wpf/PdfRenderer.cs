@@ -171,8 +171,8 @@ namespace Dependencies
             using (XGraphics gfx = XGraphics.FromPdfPage(page))
             {
                 // calculate x and y page scale factors
-                double scaleX = page.Width.Value / container.Width;
-                double scaleY = page.Height.Value / container.Height;
+                double scaleX = page.Width.Value / (container.Template != null ? container.Template.Width : container.Width);
+                double scaleY = page.Height.Value / (container.Template != null ? container.Template.Height : container.Height);
                 double scale = Math.Min(scaleX, scaleY);
 
                 // set scaling function
@@ -190,15 +190,18 @@ namespace Dependencies
                     }
                     Draw(gfx, container.Template, container.Properties, null);
                 }
+                else
+                {
+                    if (container.Background.A > 0)
+                    {
+                        DrawBackgroundInternal(
+                            gfx,
+                            container.Background,
+                            Core2D.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
+                    }
+                }
 
                 // draw container contents to pdf graphics
-                if (container.Background.A > 0)
-                {
-                    DrawBackgroundInternal(
-                        gfx,
-                        container.Background,
-                        Core2D.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
-                }
                 Draw(gfx, container, container.Properties, null);
             }
 

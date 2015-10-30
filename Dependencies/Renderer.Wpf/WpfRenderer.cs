@@ -404,15 +404,15 @@ namespace Dependencies
         /// 
         /// </summary>
         /// <param name="dc"></param>
-        /// <param name="container"></param>
-        private static void DrawBackground(DrawingContext dc, Container container)
+        /// <param name="template"></param>
+        private static void DrawTemplateBackground(DrawingContext dc, Container template)
         {
-            var brush = CreateBrush(container.Background);
+            var brush = CreateBrush(template.Background);
             var rect = new Rect(
                 0,
                 0,
-                container.Width,
-                container.Height);
+                template.Width,
+                template.Height);
 
             DrawRectangleInternal(
                 dc,
@@ -465,8 +465,11 @@ namespace Dependencies
         {
             var _dc = dc as DrawingContext;
 
-            DrawBackground(_dc, container.Template);
-            DrawBackground(_dc, container);
+            var template = container.Template;
+            if (template != null)
+            {
+                DrawTemplateBackground(_dc, template);
+            }
 
             foreach (var layer in container.Layers)
             {

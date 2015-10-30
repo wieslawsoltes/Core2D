@@ -476,11 +476,11 @@ namespace Dependencies
         /// 
         /// </summary>
         /// <param name="dc"></param>
-        /// <param name="container"></param>
-        private void DrawBackgroundInternal(DrawingContext dc, Container container)
+        /// <param name="template"></param>
+        private void DrawTemplateBackgroundInternal(DrawingContext dc, Container template)
         {
-            Brush brush = ToSolidBrush(container.Background);
-            var rect = new Rect(0, 0, container.Width, container.Height);
+            Brush brush = ToSolidBrush(template.Background);
+            var rect = new Rect(0, 0, template.Width, template.Height);
             dc.FillRectangle(brush, rect);
             // TODO: brush.Dispose();
         }
@@ -514,6 +514,14 @@ namespace Dependencies
         /// <param name="r"></param>
         public void Draw(object dc, Container container, ImmutableArray<ShapeProperty> db, Record r)
         {
+            // NOTE: Template background is drawn in drawable control.
+            //var template = container.Template;
+            //if (template != null)
+            //{
+            //    var _dc = dc as DrawingContext;
+            //    DrawTemplateBackgroundInternal(_dc, template);
+            //}
+            
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
