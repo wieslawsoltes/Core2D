@@ -132,10 +132,18 @@
     <UserControl.DataTemplates>
         <!-- style -->
         <DataTemplate DataType="core:ArgbColor">
-            <Grid RowDefinitions="20,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
-                <Border Classes="color" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid RowDefinitions="20,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
+                <Border Classes="color" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
                     <Border.Background>
+                        <!--
                         <MultiBinding Converter="{Static converters:CoreConverters.ArgbColorsToBrush}">
+                            <Binding SourcePropertyPath="A" Converter="{Static converters:CoreConverters.IntToInt}"/>
+                            <Binding SourcePropertyPath="R" Converter="{Static converters:CoreConverters.IntToInt}"/>
+                            <Binding SourcePropertyPath="G" Converter="{Static converters:CoreConverters.IntToInt}"/>
+                            <Binding SourcePropertyPath="B" Converter="{Static converters:CoreConverters.IntToInt}"/>
+                        </MultiBinding>
+                        -->
+                        <MultiBinding Converter="{Static converters:ArgbColorToBrushMultiConverter.Instance}">
                             <Binding SourcePropertyPath="A" Converter="{Static converters:CoreConverters.IntToInt}"/>
                             <Binding SourcePropertyPath="R" Converter="{Static converters:CoreConverters.IntToInt}"/>
                             <Binding SourcePropertyPath="G" Converter="{Static converters:CoreConverters.IntToInt}"/>
@@ -145,12 +153,32 @@
                 </Border>
                 <TextBlock Text="A" Classes="left" Grid.Row="1" Grid.Column="0"/>
                 <TextBox Text="{Binding Path=A, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
+                <ScrollBar Classes="color" Minimum="0" Maximum="255" ViewportSize="10" Grid.Row="1" Grid.Column="2">
+                    <ScrollBar.Value>
+                        <Binding SourcePropertyPath="A" Mode="TwoWay"/>
+                    </ScrollBar.Value>
+                </ScrollBar>
                 <TextBlock Text="R" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                <TextBox Text="{Binding Path=R, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
+                <TextBox Text="{Binding Path=R, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>  
+                <ScrollBar Classes="color" Minimum="0" Maximum="255" ViewportSize="10" Grid.Row="2" Grid.Column="2">
+                    <ScrollBar.Value>
+                        <Binding SourcePropertyPath="R" Mode="TwoWay"/>
+                    </ScrollBar.Value>
+                </ScrollBar>
                 <TextBlock Text="G" Classes="left" Grid.Row="3" Grid.Column="0"/>
                 <TextBox Text="{Binding Path=G, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
+                <ScrollBar Classes="color" Minimum="0" Maximum="255" ViewportSize="10" Grid.Row="3" Grid.Column="2">
+                    <ScrollBar.Value>
+                        <Binding SourcePropertyPath="G" Mode="TwoWay"/>
+                    </ScrollBar.Value>
+                </ScrollBar>
                 <TextBlock Text="B" Classes="left" Grid.Row="4" Grid.Column="0"/>
                 <TextBox Text="{Binding Path=B, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
+                <ScrollBar Classes="color" Minimum="0" Maximum="255" ViewportSize="10" Grid.Row="4" Grid.Column="2">
+                    <ScrollBar.Value>
+                        <Binding SourcePropertyPath="B" Mode="TwoWay"/>
+                    </ScrollBar.Value>
+                </ScrollBar>
             </Grid>
         </DataTemplate>
         <DataTemplate DataType="core:ArrowStyle">
