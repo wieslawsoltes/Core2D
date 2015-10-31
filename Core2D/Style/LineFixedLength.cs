@@ -150,7 +150,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="LineFixedLength"/> instance.
         /// </summary>
         /// <param name="flags"></param>
         /// <param name="length"></param>

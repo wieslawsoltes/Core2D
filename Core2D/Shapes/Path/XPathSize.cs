@@ -20,7 +20,7 @@ namespace Core2D
         public double Height { get; set; }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XPathSize"/> instance.
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>

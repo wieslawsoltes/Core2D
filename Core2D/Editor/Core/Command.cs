@@ -69,7 +69,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="Command"/> instance.
         /// </summary>
         /// <param name="execute"></param>
         /// <param name="canExecute"></param>

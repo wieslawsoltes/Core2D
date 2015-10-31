@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// Named XGroup shapes collection.
+    /// Named <see cref="XGroup"/> shapes collection.
     /// </summary>
     public class GroupLibrary : ObservableObject
     {
@@ -24,7 +24,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets a colletion XGroup.
+        /// Gets or sets a colletion <see cref="XGroup"/>.
         /// </summary>
         public ImmutableArray<XGroup> Groups
         {
@@ -33,7 +33,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets currenly selected group from Groups collection.
+        /// Gets or sets currenly selected group from <see cref="Groups"/> collection.
         /// </summary>
         public XGroup CurrentGroup
         {
@@ -42,10 +42,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the GroupLibrary class.
+        /// Creates a new instance of the <see cref="GroupLibrary"/> class.
         /// </summary>
         /// <param name="name">The group library name.</param>
-        /// <returns>The new instance of the GroupLibrary class.</returns>
+        /// <returns>The new instance of the <see cref="GroupLibrary"/> class.</returns>
         public static GroupLibrary Create(string name)
         {
             return new GroupLibrary()

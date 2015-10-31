@@ -5,7 +5,7 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Editor export type.
     /// </summary>
     public enum ExportType
     {

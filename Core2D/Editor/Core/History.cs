@@ -8,38 +8,7 @@ using System.Text;
 namespace Core2D
 {
     /// <summary>
-    /// 
-    /// </summary>
-    internal struct UndoRedo
-    {
-        public readonly Action Undo;
-        public readonly Action Redo;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="undo"></param>
-        /// <param name="redo"></param>
-        public UndoRedo(Action undo, Action redo)
-        {
-            this.Undo = undo;
-            this.Redo = redo;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="undo"></param>
-        /// <param name="redo"></param>
-        /// <returns></returns>
-        public static UndoRedo Create(Action undo, Action redo)
-        {
-            return new UndoRedo(undo, redo);
-        }
-    }
-
-    /// <summary>
-    /// 
+    /// Undo/Redo history manager.
     /// </summary>
     public class History
     {

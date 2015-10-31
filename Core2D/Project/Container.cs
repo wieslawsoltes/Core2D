@@ -209,7 +209,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="Container"/> instance.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="isTemplate"></param>

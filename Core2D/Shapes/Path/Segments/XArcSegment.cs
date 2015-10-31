@@ -45,7 +45,7 @@ namespace Core2D
         public XSweepDirection SweepDirection { get; set; }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XArcSegment"/> instance.
         /// </summary>
         /// <param name="point"></param>
         /// <param name="size"></param>

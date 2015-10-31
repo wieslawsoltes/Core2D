@@ -75,5 +75,25 @@ namespace Core2D
                 }
             }
         }
+
+        /// <summary>
+        /// Creates a new <see cref="Data"/> instance.
+        /// </summary>
+        /// <param name="bindings"></param>
+        /// <param name="properties"></param>
+        /// <param name="record"></param>
+        /// <returns></returns>
+        public static Data Create(
+            ImmutableArray<ShapeBinding> bindings,
+            ImmutableArray<ShapeProperty> properties,
+            Record record)
+        {
+            return new Data()
+            {
+                Bindings = bindings,
+                Properties = properties,
+                Record = record
+            };
+        }
     }
 }

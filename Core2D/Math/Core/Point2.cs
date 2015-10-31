@@ -76,7 +76,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="Point2"/> instance.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>

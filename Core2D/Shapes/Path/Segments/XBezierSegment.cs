@@ -25,7 +25,7 @@ namespace Core2D
         public XPoint Point3 { get; set; }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XBezierSegment"/> instance.
         /// </summary>
         /// <param name="point1"></param>
         /// <param name="point2"></param>

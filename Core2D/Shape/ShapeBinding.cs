@@ -32,7 +32,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="ShapeBinding"/> instance.
         /// </summary>
         /// <param name="property"></param>
         /// <param name="path"></param>

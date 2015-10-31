@@ -5,7 +5,7 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Editor import type.
     /// </summary>
     public enum ImportType
     {

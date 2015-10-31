@@ -22,7 +22,7 @@ namespace Core2D
         /// </summary>
         Ellipse,
         /// <summary>
-        /// Draw tow line shapes as arrow.
+        /// Draw two line shapes as arrow.
         /// </summary>
         Arrow
     }

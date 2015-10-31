@@ -5,17 +5,17 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// The <see cref="Core2D.Value"/> command parameter object.
     /// </summary>
     public class ValueParameter
     {
         /// <summary>
-        /// 
+        /// Gets or sets the <see cref="Core2D.Value"/> object owner.
         /// </summary>
         public object Owner { get; set; }
 
         /// <summary>
-        /// 
+        /// Gets or sets the <see cref="Core2D.Value"/> object.
         /// </summary>
         public Value Value { get; set; }
     }

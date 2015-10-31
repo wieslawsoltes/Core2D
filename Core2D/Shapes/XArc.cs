@@ -151,7 +151,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XArc"/> instance.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -197,7 +197,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XArc"/> instance.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -219,7 +219,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XArc"/> instance.
         /// </summary>
         /// <param name="point1"></param>
         /// <param name="point2"></param>

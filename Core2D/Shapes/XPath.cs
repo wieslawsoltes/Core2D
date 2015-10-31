@@ -174,7 +174,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XPath"/> instance.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="style"></param>

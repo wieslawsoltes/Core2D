@@ -60,7 +60,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="ShapeStyle"/> instance.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="sa"></param>
@@ -113,7 +113,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="ShapeStyle"/> instance.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="stroke"></param>

@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Named <see cref="ShapeStyle"/> styles collection.
     /// </summary>
     public class StyleLibrary : ObservableObject
     {
@@ -15,7 +15,7 @@ namespace Core2D
         private ShapeStyle _currentStyle;
 
         /// <summary>
-        /// 
+        /// Gets or sets style library name.
         /// </summary>
         public string Name
         {
@@ -24,7 +24,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets a colletion <see cref="ShapeStyle"/>.
         /// </summary>
         public ImmutableArray<ShapeStyle> Styles
         {
@@ -33,7 +33,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets currenly selected style from <see cref="Styles"/> collection.
         /// </summary>
         public ShapeStyle CurrentStyle
         {
@@ -42,10 +42,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the <see cref="StyleLibrary"/> class.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="name">The shape library name.</param>
+        /// <returns>he new instance of the <see cref="StyleLibrary"/> class.</returns>
         public static StyleLibrary Create(string name)
         {
             return new StyleLibrary()

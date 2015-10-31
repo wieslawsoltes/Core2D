@@ -107,7 +107,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XLine"/> instance.
         /// </summary>
         /// <param name="start"></param>
         /// <param name="end"></param>
@@ -141,7 +141,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XLine"/> instance.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -177,7 +177,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XLine"/> instance.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>

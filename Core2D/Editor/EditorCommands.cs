@@ -18,26 +18,32 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand NewCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand OpenCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand CloseCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand SaveCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand SaveAsCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ExportCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -47,10 +53,12 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand ImportDataCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ExportDataCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -60,78 +68,97 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand ImportStyleCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ImportStylesCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ImportStyleLibraryCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ImportStyleLibrariesCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ImportGroupCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ImportGroupsCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ImportGroupLibraryCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ImportGroupLibrariesCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ImportTemplateCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ImportTemplatesCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ExportStyleCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ExportStylesCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ExportStyleLibraryCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ExportStyleLibrariesCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ExportGroupCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ExportGroupsCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ExportGroupLibraryCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ExportGroupLibrariesCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ExportTemplateCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -141,38 +168,47 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand UndoCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand RedoCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand CopyAsEmfCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand CutCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand CopyCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand PasteCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand DeleteCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand SelectAllCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand DeselectAllCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -182,6 +218,7 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand GroupCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -191,14 +228,17 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand BringToFrontCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand BringForwardCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand SendBackwardCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -208,14 +248,17 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand MoveUpCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand MoveDownCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand MoveLeftCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -225,50 +268,62 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand ToolNoneCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ToolSelectionCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ToolPointCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ToolLineCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ToolArcCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ToolBezierCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ToolQBezierCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ToolPathCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ToolRectangleCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ToolEllipseCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ToolTextCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ToolImageCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -278,22 +333,27 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand DefaultIsStrokedCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand DefaultIsFilledCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand DefaultIsClosedCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand DefaultIsSmoothJoinCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand SnapToGridCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -303,6 +363,7 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand AddDatabaseCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -312,6 +373,7 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand AddColumnCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -321,6 +383,7 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand AddRecordCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -335,6 +398,7 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand AddBindingCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -344,6 +408,7 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand AddPropertyCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -353,6 +418,7 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand AddGroupLibraryCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -362,6 +428,7 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand AddGroupCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -371,6 +438,7 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand AddLayerCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -380,6 +448,7 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand AddStyleLibraryCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -389,6 +458,7 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand AddStyleCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -403,23 +473,27 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand ZoomResetCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand ZoomExtentCommand { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand AddTemplateCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand RemoveTemplateCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand EditTemplateCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -434,10 +508,12 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand AddContainerCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand InsertContainerBeforeCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -447,10 +523,12 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand AddDocumentCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand InsertDocumentBeforeCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -460,10 +538,12 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand LoadWindowLayoutCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public ICommand SaveWindowLayoutCommand { get; set; }
+
         /// <summary>
         /// 
         /// </summary>

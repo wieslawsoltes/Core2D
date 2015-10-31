@@ -211,7 +211,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XGroup"/> instance.
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -232,7 +232,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XGroup"/> instance.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="shapes"></param>

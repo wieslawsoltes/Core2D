@@ -92,6 +92,10 @@ namespace Core2D
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
         [Conditional("VERBOSE")]
         private void Verbose(string text)
         {

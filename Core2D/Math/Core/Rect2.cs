@@ -50,7 +50,7 @@ namespace Core2D
         public double Bottom { get { return Y + Height; } }
 
         /// <summary>
-        /// 
+        /// Initializes a new <see cref="Rect2"/> instance.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -91,7 +91,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="Rect2"/> instance.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -117,7 +117,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="Rect2"/> instance.
         /// </summary>
         /// <param name="tl"></param>
         /// <param name="br"></param>
@@ -132,7 +132,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="Rect2"/> instance.
         /// </summary>
         /// <param name="tl"></param>
         /// <param name="br"></param>

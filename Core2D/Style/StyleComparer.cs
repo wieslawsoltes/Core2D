@@ -6,16 +6,16 @@ using System.Collections.Generic;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Defines methods to support the comparison of <see cref="ShapeStyle"/> objects for equality.
     /// </summary>
     public class StyleComparer : IEqualityComparer<ShapeStyle>
     {
         /// <summary>
-        /// 
+        /// Determines whether the specified objects are equal.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="x">The first object of type <see cref="ShapeStyle"/> to compare.</param>
+        /// <param name="y">The second object of type <see cref="ShapeStyle"/> to compare.</param>
+        /// <returns>True if the specified objects are equal; otherwise, false.</returns>
         public bool Equals(ShapeStyle x, ShapeStyle y)
         {
             if (Object.ReferenceEquals(x, y))
@@ -28,10 +28,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Returns a hash code for the specified object.
         /// </summary>
-        /// <param name="style"></param>
-        /// <returns></returns>
+        /// <param name="style">The <see cref="ShapeStyle"/> for which a hash code is to be returned.</param>
+        /// <returns> A hash code for the specified object.</returns>
         public int GetHashCode(ShapeStyle style)
         {
             if (Object.ReferenceEquals(style, null))

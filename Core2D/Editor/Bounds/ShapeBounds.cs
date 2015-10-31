@@ -8,14 +8,14 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Calculate shape bounds and provide shape hit testing capabilities.
     /// </summary>
     public static class ShapeBounds
     {
         #region Bounds
 
         /// <summary>
-        /// 
+        /// Get the bounding rectangle for <see cref="XPoint"/> shape.
         /// </summary>
         /// <param name="point"></param>
         /// <param name="treshold"></param>
@@ -33,7 +33,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Get the bounding rectangle for <see cref="XRectangle"/> shape.
         /// </summary>
         /// <param name="rectangle"></param>
         /// <param name="dx"></param>
@@ -45,7 +45,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Get the bounding rectangle for <see cref="XEllipse"/> shape.
         /// </summary>
         /// <param name="ellipse"></param>
         /// <param name="dx"></param>
@@ -57,7 +57,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Get the bounding rectangle for <see cref="XArc"/> shape.
         /// </summary>
         /// <param name="arc"></param>
         /// <param name="dx"></param>
@@ -83,7 +83,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Get the bounding rectangle for <see cref="XText"/> shape.
         /// </summary>
         /// <param name="text"></param>
         /// <param name="dx"></param>
@@ -95,7 +95,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Get the bounding rectangle for <see cref="XImage"/> shape.
         /// </summary>
         /// <param name="image"></param>
         /// <param name="dx"></param>
@@ -111,7 +111,7 @@ namespace Core2D
         #region HitTest Point
 
         /// <summary>
-        /// 
+        /// Hit test point in <see cref="XLine"/> shape bounds.
         /// </summary>
         /// <param name="line"></param>
         /// <param name="p"></param>
@@ -129,7 +129,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Hit test point in <see cref="BaseShape"/> shape bounds.
         /// </summary>
         /// <param name="shape"></param>
         /// <param name="p"></param>
@@ -379,7 +379,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Hit test point in <see cref="BaseShape"/> shapes bounds.
         /// </summary>
         /// <param name="shapes"></param>
         /// <param name="p"></param>
@@ -402,7 +402,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Hit test point in <see cref="Container"/> shapes bounds.
         /// </summary>
         /// <param name="container"></param>
         /// <param name="p"></param>
@@ -424,7 +424,7 @@ namespace Core2D
         #region HitTest Rect
 
         /// <summary>
-        /// 
+        /// Hit test rectangle in <see cref="Container"/> shapes bounds.
         /// </summary>
         /// <param name="shape"></param>
         /// <param name="rect"></param>
@@ -630,7 +630,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Hit test rectangle if intersects with any <see cref="BaseShape"/> shape bounds.
         /// </summary>
         /// <param name="shapes"></param>
         /// <param name="rect"></param>
@@ -662,7 +662,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Hit test rectangle if intersects with any <see cref="Container"/> shape bounds.
         /// </summary>
         /// <param name="container"></param>
         /// <param name="rect"></param>

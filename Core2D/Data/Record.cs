@@ -42,7 +42,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="Record"/> instance.
         /// </summary>
         /// <param name="columns"></param>
         /// <param name="values"></param>
@@ -60,7 +60,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="Record"/> instance.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="columns"></param>

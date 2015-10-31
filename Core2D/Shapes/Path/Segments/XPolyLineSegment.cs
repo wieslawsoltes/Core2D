@@ -16,7 +16,7 @@ namespace Core2D
         public IList<XPoint> Points { get; set; }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XPolyLineSegment"/> instance.
         /// </summary>
         /// <param name="points"></param>
         /// <param name="isStroked"></param>

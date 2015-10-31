@@ -168,7 +168,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="ShapeState"/> instance.
         /// </summary>
         /// <param name="flags"></param>
         /// <returns></returns>

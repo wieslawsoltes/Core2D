@@ -20,7 +20,7 @@ namespace Core2D
         private IDictionary<string, byte[]> _images;
 
         /// <summary>
-        /// 
+        /// Initializes a new <see cref="Project"/> instance.
         /// </summary>
         public Project()
         {
@@ -432,7 +432,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="Project"/> instance.
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>

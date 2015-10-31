@@ -104,10 +104,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the FontStyle class.
+        /// Creates a new <see cref="FontStyle"/> instance.
         /// </summary>
         /// <param name="flags">The style flags information applied to text.</param>
-        /// <returns>The new instance of the FontStyle class.</returns>
+        /// <returns>The new instance of the <see cref="FontStyle"/> class.</returns>
         public static FontStyle Create(FontStyleFlags flags = FontStyleFlags.Regular)
         {
             return new FontStyle()

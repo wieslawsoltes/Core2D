@@ -5,28 +5,28 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Editor helper state.
     /// </summary>
     public enum State
     {
         /// <summary>
-        /// 
+        /// None state.
         /// </summary>
         None,
         /// <summary>
-        /// 
+        /// One state.
         /// </summary>
         One,
         /// <summary>
-        /// 
+        /// Two state.
         /// </summary>
         Two,
         /// <summary>
-        /// 
+        /// Three state.
         /// </summary>
         Three,
         /// <summary>
-        /// 
+        /// Four state.
         /// </summary>
         Four
     }

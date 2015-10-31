@@ -5,16 +5,16 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// The shape move mode.
     /// </summary>
     public enum MoveMode
     {
         /// <summary>
-        /// 
+        /// Point mode.
         /// </summary>
         Point,
         /// <summary>
-        /// 
+        /// Shape mode.
         /// </summary>
         Shape
     }

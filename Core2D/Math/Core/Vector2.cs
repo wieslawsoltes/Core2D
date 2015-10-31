@@ -46,7 +46,7 @@ namespace Core2D
         #region Constructor
 
         /// <summary>
-        /// 
+        /// Initializes a new <see cref="Vector2"/> instance.
         /// </summary>
         /// <param name="value"></param>
         public Vector2(double value)
@@ -57,7 +57,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new <see cref="Vector2"/> instance.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>

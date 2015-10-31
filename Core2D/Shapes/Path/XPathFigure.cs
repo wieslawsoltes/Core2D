@@ -31,7 +31,7 @@ namespace Core2D
         public bool IsClosed { get; set; }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XPathFigure"/> instance.
         /// </summary>
         /// <param name="startPoint"></param>
         /// <param name="segments"></param>

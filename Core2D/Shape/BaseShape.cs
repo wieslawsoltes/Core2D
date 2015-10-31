@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// Base class for Core2D shapes.
+    /// Base class for shapes.
     /// </summary>
     public abstract class BaseShape : ObservableObject
     {
@@ -55,7 +55,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets flag indicating if shape is stroked.
         /// </summary>
         public bool IsStroked
         {
@@ -64,7 +64,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets flag indicating if shape is filled.
         /// </summary>
         public bool IsFilled
         {

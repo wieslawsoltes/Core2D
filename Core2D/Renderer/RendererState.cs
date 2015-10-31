@@ -92,7 +92,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new <see cref="RendererState"/> instance.
         /// </summary>
         public RendererState()
         {

@@ -209,7 +209,7 @@ namespace Core2D
         public ImageHelper ImageHelper { get; set; }
 
         /// <summary>
-        /// Creates a new Editor instance.
+        /// Creates a new <see cref="Editor"/> instance.
         /// </summary>
         /// <param name="project">The project to edit.</param>
         /// <param name="renderers">The shape renderers.</param>

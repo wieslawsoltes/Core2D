@@ -15,7 +15,7 @@ namespace Core2D
         public XPoint Point { get; set; }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XLineSegment"/> instance.
         /// </summary>
         /// <param name="point"></param>
         /// <param name="isStroked"></param>

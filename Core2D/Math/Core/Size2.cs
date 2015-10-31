@@ -20,7 +20,7 @@ namespace Core2D
         public double Height;
 
         /// <summary>
-        /// 
+        /// Initializes a new <see cref="Size2"/> instance.
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>
@@ -31,7 +31,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="Size2"/> instance.
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>

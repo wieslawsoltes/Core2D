@@ -33,7 +33,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="Document"/> instance.
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>

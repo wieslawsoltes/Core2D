@@ -179,7 +179,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="Options"/> instance.
         /// </summary>
         /// <returns></returns>
         public static Options Create()

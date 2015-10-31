@@ -5,14 +5,12 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Implementation of Andrew's monotone chain 2D convex hull algorithm.
+    /// http://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain
+    /// Asymptotic complexity O(n log n).
     /// </summary>
     public class MonotoneChain
     {
-        // Implementation of Andrew's monotone chain 2D convex hull algorithm.
-        // http://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain
-        // Asymptotic complexity O(n log n).
-
         /// <summary>
         /// 2D cross product of OA and OB vectors, i.e. z-component of their 3D cross product.
         /// Returns a positive value, if OAB makes a counter-clockwise turn,

@@ -33,7 +33,7 @@ namespace Core2D
         private XPathFigure _figure;
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XPathGeometry"/> instance.
         /// </summary>
         /// <param name="figures"></param>
         /// <param name="fillRule"></param>

@@ -51,13 +51,13 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the ArgbColor class.
+        /// Creates a new <see cref="ArgbColor"/> instance.
         /// </summary>
         /// <param name="a">The alpha color channel.</param>
         /// <param name="r">The red color channel.</param>
         /// <param name="g">The green color channel.</param>
         /// <param name="b">The blue color channel.</param>
-        /// <returns>The new instance of the ArgbColor class.</returns>
+        /// <returns>The new instance of the <see cref="ArgbColor"/> class.</returns>
         public static ArgbColor Create(
             int a = 0xFF,
             int r = 0x00,

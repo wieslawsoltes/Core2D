@@ -52,7 +52,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="Column"/> instance.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="width"></param>

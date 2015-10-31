@@ -22,7 +22,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="Value"/> instance.
         /// </summary>
         /// <param name="content"></param>
         /// <returns></returns>

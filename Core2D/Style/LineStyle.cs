@@ -31,7 +31,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="LineStyle"/> instance.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="fixedLength"></param>

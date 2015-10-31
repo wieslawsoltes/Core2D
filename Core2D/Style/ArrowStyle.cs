@@ -80,14 +80,14 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Default ArrowStyle constructor.
+        /// Default <see cref="ArrowStyle"/> constructor.
         /// </summary>
         public ArrowStyle()
         {
         }
 
         /// <summary>
-        /// Copy base style from BaseStyle source.
+        /// Copy base style from <see cref="BaseStyle"/> source.
         /// </summary>
         /// <param name="source">The BaseStyle source object.</param>
         public ArrowStyle(BaseStyle source)
@@ -109,7 +109,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the ArrowStyle class.
+        /// Creates a new <see cref="ArrowStyle"/> instance.
         /// </summary>
         /// <param name="arrowType">The arrow type.</param>
         /// <param name="isStroked">The arow shape stroke flag.</param>
@@ -134,7 +134,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the ArrowStyle class.
+        /// Creates a new <see cref="ArrowStyle"/> instance.
         /// </summary>
         /// <param name="name">The arrow style name.</param>
         /// <param name="source">The BaseStyle source object.</param>

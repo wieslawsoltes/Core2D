@@ -99,7 +99,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="TextStyle"/> instance.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="fontName"></param>

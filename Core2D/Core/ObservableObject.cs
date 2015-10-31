@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Base class for objects with observable property changes.
     /// </summary>
     public abstract class ObservableObject : INotifyPropertyChanged
     {
@@ -17,9 +17,9 @@ namespace Core2D
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// 
+        /// Notify observers about property changes.
         /// </summary>
-        /// <param name="propertyName"></param>
+        /// <param name="propertyName">The property name that changed.</param>
         public void Notify([CallerMemberName] string propertyName = null)
         {
             var handler = PropertyChanged;
@@ -30,12 +30,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Update property backing field and notify observers about property chnage.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <param name="propertyName"></param>
+        /// <typeparam name="T">The type of field.</typeparam>
+        /// <param name="field">The field to update.</param>
+        /// <param name="value">The new field value.</param>
+        /// <param name="propertyName">The property name that changed.</param>
         public void Update<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (!Equals(field, value))

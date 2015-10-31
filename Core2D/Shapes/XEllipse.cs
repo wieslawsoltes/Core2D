@@ -41,7 +41,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XEllipse"/> instance.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -82,7 +82,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XEllipse"/> instance.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -106,7 +106,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="XEllipse"/> instance.
         /// </summary>
         /// <param name="topLeft"></param>
         /// <param name="bottomRight"></param>
