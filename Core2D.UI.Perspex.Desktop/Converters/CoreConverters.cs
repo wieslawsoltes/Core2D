@@ -54,18 +54,6 @@ namespace Core2D.UI.Perspex.Desktop.Converters
             new FuncValueConverter<object, string>(x => x != null ? x.GetType().ToString() : "<null>");
 
         /// <summary>
-        /// HACK: Convert int to int to fix ArgbColorsToBrush converter.
-        /// </summary>
-        public static readonly IValueConverter IntToInt =
-            new FuncValueConverter<int, int>(x => x);
-
-        /// <summary>
-        /// HACK: Convert int to double.
-        /// </summary>
-        public static readonly IValueConverter IntToDouble =
-            new FuncValueConverter<int, double>(x => (double)x);
-
-        /// <summary>
         /// Convert ArgbColor individual A, R, G and B properties to SolidColorBrush.
         /// </summary>
         public static readonly IMultiValueConverter ArgbColorsToBrush =
