@@ -17,7 +17,7 @@ namespace Dependencies
     /// <summary>
     /// 
     /// </summary>
-    public class EmfRenderer : ObservableObject, IRenderer
+    public class WinFormsRenderer : ObservableObject, IRenderer
     {
         private bool _enableImageCache = true;
         private IDictionary<string, Image> _biCache;
@@ -46,7 +46,7 @@ namespace Dependencies
         /// 
         /// </summary>
         /// <param name="textScaleFactor"></param>
-        public EmfRenderer(double textScaleFactor = 1.0)
+        public WinFormsRenderer(double textScaleFactor = 1.0)
         {
             ClearCache(isZooming: false);
 
@@ -60,7 +60,7 @@ namespace Dependencies
         /// <returns></returns>
         public static IRenderer Create()
         {
-            return new EmfRenderer();
+            return new WinFormsRenderer();
         }
 
         /// <summary>

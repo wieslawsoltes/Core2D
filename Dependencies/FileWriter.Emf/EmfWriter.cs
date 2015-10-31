@@ -51,7 +51,7 @@ namespace Dependencies
 
                 using (g = Graphics.FromImage(mf))
                 {
-                    var r = new EmfRenderer(72.0 / 96.0);
+                    var r = new WinFormsRenderer(72.0 / 96.0);
                     r.State.ImageCache = ic;
 
                     g.SmoothingMode = SmoothingMode.HighQuality;
@@ -115,7 +115,7 @@ namespace Dependencies
 
                 using (g = Graphics.FromImage(mf))
                 {
-                    var r = new EmfRenderer(72.0 / 96.0);
+                    var r = new WinFormsRenderer(72.0 / 96.0);
                     r.State.ImageCache = ic;
 
                     g.SmoothingMode = SmoothingMode.HighQuality;

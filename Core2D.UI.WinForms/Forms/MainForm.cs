@@ -75,7 +75,7 @@ namespace Core2D.UI.WinForms
             var context = new EditorContext()
             {
                 View = this,
-                Renderers = new IRenderer[] { new EmfRenderer(72.0 / 96.0) },
+                Renderers = new IRenderer[] { new WinFormsRenderer(72.0 / 96.0) },
                 ProjectFactory = new ProjectFactory(),
                 TextClipboard = new TextClipboard(),
                 Serializer = new NewtonsoftSerializer(),
