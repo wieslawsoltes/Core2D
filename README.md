@@ -20,9 +20,9 @@ Core2D is an application for making data driven 2D diagrams.
 
 The recommended UI for Core2D is `Core2D.UI.Wpf`.
 
-* Windows 7/8/8.1/10 for `WPF`, `EtoForms.Direct2D`, `EtoForms.Gtk2`, `Perspex.Desktop` and `WinForms` builds.
+* Windows 7/8/8.1/10 for `WPF`, `Perspex.Desktop` and `WinForms` builds.
 * Windows 10 for Universal Windows Platform (UWP) build.
-* XUbuntu 15.04 for `Perspex.Desktop`, `EtoForms.Gtk2` and `WinForms` builds.
+* XUbuntu 15.04 for `Perspex.Desktop` and `WinForms` builds.
 
 The core library and editor are portable and should work on all platforms where C# is supported. For basic usage of core library see project `Core2D.Sample`.
 
@@ -36,22 +36,17 @@ The core library and editor are portable and should work on all platforms where 
 * System.Windows.Interactivity.WPF
 * Xceed.Wpf.AvalonDock
 * Xceed.Products.Wpf.Toolkit.AvalonDock
-* Eto.Forms
-* Eto.Platform.Direct2D
-* Eto.Platform.Windows
-* Eto.Platform.Gtk
 * Perspex
 * Perspex.Desktop
 
 ### NuGet Package Sources
 
 * https://www.nuget.org/api/v2/
-* https://www.myget.org/F/eto/
 * https://www.myget.org/F/perspex-nightly/api/v2
 
 ### Other Dependencies
 
-* [GTK# for .NET](http://www.mono-project.com/download/#download-win) Needed for Eto.Platform.Gtk on Windows.
+* [GTK# for .NET](http://www.mono-project.com/download/#download-win) Needed for Gtk on Windows.
 * [.net dxf Reader-Writer](http://netdxf.codeplex.com/) Run "git submodule update --init" in project directory.
 
 ## Contact
