@@ -135,20 +135,12 @@
             <Grid RowDefinitions="20,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
                 <Border Classes="color" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
                     <Border.Background>
-                        <MultiBinding Converter="{Static converters:CoreConverters.ArgbColorsToBrush}">
-                            <Binding SourcePropertyPath="A"/>
-                            <Binding SourcePropertyPath="R"/>
-                            <Binding SourcePropertyPath="G"/>
-                            <Binding SourcePropertyPath="B"/>
-                        </MultiBinding>
-                        <!--
                         <MultiBinding Converter="{Static converters:ArgbColorToBrushMultiConverter.Instance}">
                             <Binding SourcePropertyPath="A"/>
                             <Binding SourcePropertyPath="R"/>
                             <Binding SourcePropertyPath="G"/>
                             <Binding SourcePropertyPath="B"/>
                         </MultiBinding>
-                        -->
                     </Border.Background>
                 </Border>
                 <TextBlock Text="A" Classes="left" Grid.Row="1" Grid.Column="0"/>
@@ -1038,10 +1030,10 @@
                     <TreeView Items="{Binding Path=Figures}" Classes="default">
                         <TreeView.DataTemplates>
                             <TreeDataTemplate DataType="core:XPathFigure" ItemsSource="{Binding Path=Segments}">
-                                <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:CoreConverters.ObjectToTypeString}}" Classes="default"/>
+                                <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
                             </TreeDataTemplate>
                             <DataTemplate DataType="core:XPathSegment">
-                                <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:CoreConverters.ObjectToTypeString}}" Classes="default"/>
+                                <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
                             </DataTemplate>
                         </TreeView.DataTemplates>
                     </TreeView>
@@ -1249,7 +1241,7 @@
                         Classes="default">
                         <ListBox.DataTemplates>
                             <DataTemplate DataType="core:BaseShape">
-                                <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:CoreConverters.ObjectToTypeString}}" Classes="default"/>
+                                <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
                             </DataTemplate>
                         </ListBox.DataTemplates>
                     </ListBox>
@@ -1398,7 +1390,7 @@
                             Classes="default">
                             <ListBox.DataTemplates>
                                 <DataTemplate DataType="core:Record">
-                                    <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:CoreConverters.ObjectToTypeString}}" Classes="default"/>
+                                    <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
                                 </DataTemplate>
                             </ListBox.DataTemplates>
                         </ListBox>
