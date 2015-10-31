@@ -60,6 +60,7 @@
     <Compile Include="Editor\Core\RecentProject.cs" />
     <Compile Include="Editor\Core\State.cs" />
     <Compile Include="Editor\Core\Tool.cs" />
+    <Compile Include="Editor\Core\UndoRedo.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\EditorCommands.cs" />
     <Compile Include="Editor\EditorConstants.cs" />
@@ -102,7 +103,9 @@
     <Compile Include="Math\Core\Vector2.cs" />
     <Compile Include="Math\MathHelpers.cs" />
     <Compile Include="Math\MonotoneChain.cs" />
-    <Compile Include="Math\Sat.cs" />
+    <Compile Include="Math\Sat\MinimumTranslationVector.cs" />
+    <Compile Include="Math\Sat\Projection.cs" />
+    <Compile Include="Math\Sat\SeparatingAxisTheorem.cs" />
     <Compile Include="Properties\SharedAssemblyInfo.cs" />
     <Compile Include="Data\Column.cs" />
     <Compile Include="Data\Database.cs" />

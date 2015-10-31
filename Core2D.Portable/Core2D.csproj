@@ -93,6 +93,9 @@
     <Compile Include="..\Core2D\Editor\Core\Tool.cs">
       <Link>Editor\Core\Tool.cs</Link>
     </Compile>
+    <Compile Include="..\Core2D\Editor\Core\UndoRedo.cs">
+      <Link>Editor\Core\UndoRedo.cs</Link>
+    </Compile>
     <Compile Include="..\Core2D\Editor\Editor.cs">
       <Link>Editor\Editor.cs</Link>
     </Compile>
@@ -225,8 +228,14 @@
     <Compile Include="..\Core2D\Math\MonotoneChain.cs">
       <Link>Math\MonotoneChain.cs</Link>
     </Compile>
-    <Compile Include="..\Core2D\Math\Sat.cs">
-      <Link>Math\Sat.cs</Link>
+    <Compile Include="..\Core2D\Math\Sat\MinimumTranslationVector.cs">
+      <Link>Math\Sat\MinimumTranslationVector.cs</Link>
+    </Compile>
+    <Compile Include="..\Core2D\Math\Sat\Projection.cs">
+      <Link>Math\Sat\Projection.cs</Link>
+    </Compile>
+    <Compile Include="..\Core2D\Math\Sat\SeparatingAxisTheorem.cs">
+      <Link>Math\Sat\SeparatingAxisTheorem.cs</Link>
     </Compile>
     <Compile Include="..\Core2D\Project\Container.cs">
       <Link>Project\Container.cs</Link>
