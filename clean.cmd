@@ -24,9 +24,6 @@ rmdir /Q /S Dependencies\Log.Trace\obj
 rmdir /Q /S Dependencies\Renderer.Dxf\bin
 rmdir /Q /S Dependencies\Renderer.Dxf\obj
 
-rmdir /Q /S Dependencies\Renderer.EtoForms\bin
-rmdir /Q /S Dependencies\Renderer.EtoForms\obj
-
 rmdir /Q /S Dependencies\Renderer.PdfSharp-core\bin
 rmdir /Q /S Dependencies\Renderer.PdfSharp-core\obj
 
@@ -59,12 +56,6 @@ rmdir /Q /S Core2D\obj
 
 rmdir /Q /S Core2D.Sample\bin
 rmdir /Q /S Core2D.Sample\obj
-
-rmdir /Q /S Core2D.UI.EtoForms.Direct2D\bin
-rmdir /Q /S Core2D.UI.EtoForms.Direct2D\obj
-
-rmdir /Q /S Core2D.UI.EtoForms.Gtk2\bin
-rmdir /Q /S Core2D.UI.EtoForms.Gtk2\obj
 
 rmdir /Q /S Core2D.UI.Perspex.Desktop\bin
 rmdir /Q /S Core2D.UI.Perspex.Desktop\obj
