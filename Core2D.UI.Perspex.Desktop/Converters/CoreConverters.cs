@@ -60,7 +60,7 @@ namespace Core2D.UI.Perspex.Desktop.Converters
             new FuncMultiValueConverter<int, SolidColorBrush>(x =>
             {
                 var values = x.ToList();
-                if (values.Count() == 4)
+                if (values.Count == 4)
                 {
                     var color = Color.FromArgb(
                         (byte)values[0],
