@@ -32,7 +32,7 @@ namespace Core2D.UI.Perspex.Desktop.Converters
         /// <returns>The converted value.</returns>
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values.Count() == 4)
+            if (values != null && values.Count() == 4)
             {
                 for (int i = 0; i < 4; i++)
                 {
