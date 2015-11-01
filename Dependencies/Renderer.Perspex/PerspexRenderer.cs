@@ -113,10 +113,10 @@ namespace Dependencies
         private Color ToColor(ArgbColor color)
         {
             return Color.FromArgb(
-                (byte)color.A,
-                (byte)color.R,
-                (byte)color.G,
-                (byte)color.B);
+                color.A,
+                color.R,
+                color.G,
+                color.B);
         }
 
         /// <summary>

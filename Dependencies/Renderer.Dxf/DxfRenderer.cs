@@ -103,9 +103,9 @@ namespace Dependencies
         private static AciColor GetColor(Core2D.ArgbColor color)
         {
             return new AciColor(
-                (byte)color.R, 
-                (byte)color.G, 
-                (byte)color.B);
+                color.R, 
+                color.G, 
+                color.B);
         }
 
         private static short GetTransparency(Core2D.ArgbColor color)
