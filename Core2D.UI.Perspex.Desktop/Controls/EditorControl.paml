@@ -135,7 +135,7 @@
             <Grid RowDefinitions="20,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
                 <Border Classes="color" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
                     <Border.Background>
-                        <MultiBinding Converter="{Static converters:ArgbColorToBrushMultiConverter.Instance}">
+                        <MultiBinding Mode="OneWay" Converter="{Static converters:ArgbColorToBrushMultiConverter.Instance}">
                             <Binding SourcePropertyPath="A"/>
                             <Binding SourcePropertyPath="R"/>
                             <Binding SourcePropertyPath="G"/>

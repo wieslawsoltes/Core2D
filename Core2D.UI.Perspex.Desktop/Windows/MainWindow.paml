@@ -11,7 +11,7 @@
         Background="#FFFFFFFF"
         UseLayoutRounding="True">
     <Window.Title>
-        <MultiBinding Converter="{Static converters:EditorToTitleMultiConverter.Instance}">
+        <MultiBinding Mode="OneWay" Converter="{Static converters:EditorToTitleMultiConverter.Instance}">
             <Binding SourcePropertyPath="Editor.Project.Name"/>
             <Binding SourcePropertyPath="Editor.IsProjectDirty"/>
         </MultiBinding>
