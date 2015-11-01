@@ -13,7 +13,7 @@ using Perspex.Media;
 namespace Core2D.UI.Perspex.Desktop.Converters
 {
     /// <summary>
-    /// Converts a binding value object type to a string.
+    /// Converts a binding value <see cref="object"/> <see cref="Type"/> to a <see cref="string"/>.
     /// </summary>
     public class ObjectToTypeStringConverter : IValueConverter
     {
