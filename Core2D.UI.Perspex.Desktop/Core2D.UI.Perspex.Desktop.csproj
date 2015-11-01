@@ -218,7 +218,9 @@
     <Compile Include="Converters\ArgbColorToBrushMultiConverter.cs" />
     <Compile Include="Converters\ByteToDoubleConverter.cs" />
     <Compile Include="Converters\ByteToStringConverter.cs" />
+    <Compile Include="Converters\EditorToStatsMultiConverter.cs" />
     <Compile Include="Converters\EditorToTitleMultiConverter.cs" />
+    <Compile Include="Converters\ObjectToObjectConverter.cs" />
     <Compile Include="Converters\ObjectToTypeStringConverter.cs" />
     <Compile Include="Converters\RoundedDoubleToDoubleConverter.cs" />
     <Compile Include="Windows\MainWindow.paml.cs">
