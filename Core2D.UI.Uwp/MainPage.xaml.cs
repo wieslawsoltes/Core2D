@@ -374,10 +374,10 @@ namespace Test.Uwp
         private void DrawBackground(CanvasDrawingSession ds, Core2D.ArgbColor c, double width, double height)
         {
             var color = Color.FromArgb(
-                (byte)c.A,
-                (byte)c.R,
-                (byte)c.G,
-                (byte)c.B);
+                c.A,
+                c.R,
+                c.G,
+                c.B);
             var rect = Core2D.Rect2.Create(0, 0, width, height);
             ds.FillRectangle(
                 (float)rect.X,

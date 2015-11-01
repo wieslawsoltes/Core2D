@@ -9,15 +9,15 @@ namespace Core2D
     /// </summary>
     public class ArgbColor : ObservableObject
     {
-        private int _a;
-        private int _r;
-        private int _g;
-        private int _b;
+        private byte _a;
+        private byte _r;
+        private byte _g;
+        private byte _b;
 
         /// <summary>
         /// Alpha color channel.
         /// </summary>
-        public int A
+        public byte A
         {
             get { return _a; }
             set { Update(ref _a, value); }
@@ -26,7 +26,7 @@ namespace Core2D
         /// <summary>
         /// Red color channel.
         /// </summary>
-        public int R
+        public byte R
         {
             get { return _r; }
             set { Update(ref _r, value); }
@@ -35,7 +35,7 @@ namespace Core2D
         /// <summary>
         /// Green color channel.
         /// </summary>
-        public int G
+        public byte G
         {
             get { return _g; }
             set { Update(ref _g, value); }
@@ -44,7 +44,7 @@ namespace Core2D
         /// <summary>
         /// Blue color channel.
         /// </summary>
-        public int B
+        public byte B
         {
             get { return _b; }
             set { Update(ref _b, value); }
@@ -59,10 +59,10 @@ namespace Core2D
         /// <param name="b">The blue color channel.</param>
         /// <returns>The new instance of the <see cref="ArgbColor"/> class.</returns>
         public static ArgbColor Create(
-            int a = 0xFF,
-            int r = 0x00,
-            int g = 0x00,
-            int b = 0x00)
+            byte a = 0xFF,
+            byte r = 0x00,
+            byte g = 0x00,
+            byte b = 0x00)
         {
             return new ArgbColor()
             {

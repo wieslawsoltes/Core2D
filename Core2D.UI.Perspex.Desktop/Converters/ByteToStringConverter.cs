@@ -13,14 +13,14 @@ using Perspex.Media;
 namespace Core2D.UI.Perspex.Desktop.Converters
 {
     /// <summary>
-    /// Converts a binding value <see cref="object"/> <see cref="Type"/> to a <see cref="string"/>.
+    /// Converts a binding value object from <see cref="byte"/> to <see cref="string"/> and back from <see cref="string"/> to <see cref="byte"/>.
     /// </summary>
-    public class ObjectToTypeStringConverter : IValueConverter
+    public class ByteToStringConverter : IValueConverter
     {
         /// <summary>
-        /// Gets an instance of a <see cref="ObjectToTypeStringConverter"/>.
+        /// Gets an instance of a <see cref="ByteToStringConverter"/>.
         /// </summary>
-        public static readonly ObjectToTypeStringConverter Instance = new ObjectToTypeStringConverter();
+        public static readonly ByteToStringConverter Instance = new ByteToStringConverter();
 
         /// <summary>
         /// Converts a value.
@@ -32,12 +32,12 @@ namespace Core2D.UI.Perspex.Desktop.Converters
         /// <returns>The converted value.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value != null && value != PerspexProperty.UnsetValue)
+            if (value == null || value == PerspexProperty.UnsetValue || value.GetType() != typeof(byte))
             {
-                return value.GetType().ToString();
+                return PerspexProperty.UnsetValue;
             }
 
-            return PerspexProperty.UnsetValue;
+            return value.ToString();
         }
 
         /// <summary>
@@ -50,7 +50,18 @@ namespace Core2D.UI.Perspex.Desktop.Converters
         /// <returns>The converted value.</returns>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value == null || value == PerspexProperty.UnsetValue || value.GetType() != typeof(string))
+            {
+                return PerspexProperty.UnsetValue;
+            }
+
+            byte result;
+            if (byte.TryParse((string)value, out result))
+            {
+                return result;
+            }
+
+            return PerspexProperty.UnsetValue;
         }
     }
 }

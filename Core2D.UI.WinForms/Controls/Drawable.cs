@@ -177,7 +177,12 @@ namespace Core2D.UI.WinForms
         /// <param name="height"></param>
         private void DrawBackground(Graphics g, ArgbColor c, double width, double height)
         {
-            var brush = new SolidBrush(Color.FromArgb(c.A, c.R, c.G, c.B));
+            var brush = new SolidBrush(
+                Color.FromArgb(
+                    c.A, 
+                    c.R, 
+                    c.G, 
+                    c.B));
             var rect = Rect2.Create(0, 0, width, height);
             g.FillRectangle(
                 brush,

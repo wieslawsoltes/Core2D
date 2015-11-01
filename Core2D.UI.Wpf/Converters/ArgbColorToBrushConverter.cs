@@ -27,10 +27,10 @@ namespace Core2D.UI.Wpf.Converters
             {
                 var brush = new SolidColorBrush(
                     Color.FromArgb(
-                        (byte)color.A,
-                        (byte)color.R,
-                        (byte)color.G,
-                        (byte)color.B));
+                        color.A,
+                        color.R, 
+                        color.G, 
+                        color.B));
                 brush.Freeze();
                 return brush;
             }

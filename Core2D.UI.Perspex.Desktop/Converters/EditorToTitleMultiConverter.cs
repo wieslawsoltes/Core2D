@@ -40,16 +40,20 @@ namespace Core2D.UI.Perspex.Desktop.Converters
             if (values.Count() == 2)
             {
                 if (values[0].GetType() != typeof(string))
+                {
                     return DefaultTitle;
+                }
 
                 if (values[1].GetType() != typeof(bool))
+                {
                     return DefaultTitle;
+                }
 
                 string name = (string)values[0];
                 bool isDirty = (bool)values[1];
-
                 return string.Concat(name, isDirty ? "*" : "", " - ", DefaultTitle);
             }
+
             return DefaultTitle;
         }
     }

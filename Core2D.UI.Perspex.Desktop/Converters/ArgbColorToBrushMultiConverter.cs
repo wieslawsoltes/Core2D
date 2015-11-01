@@ -36,17 +36,21 @@ namespace Core2D.UI.Perspex.Desktop.Converters
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    if (values[i].GetType() != typeof(int))
+                    if (values[i].GetType() != typeof(byte))
+                    {
                         return PerspexProperty.UnsetValue;
+                    }
                 }
 
                 var color = Color.FromArgb(
-                    (byte)(int)values[0],
-                    (byte)(int)values[1],
-                    (byte)(int)values[2],
-                    (byte)(int)values[3]);
+                    (byte)values[0],
+                    (byte)values[1],
+                    (byte)values[2],
+                    (byte)values[3]);
+
                 return new SolidColorBrush(color);
             }
+
             return PerspexProperty.UnsetValue;
         }
     }
