@@ -8,12 +8,13 @@
              xmlns:core="clr-namespace:Core2D;assembly=Core2D">
     <UserControl.Styles>
         <Style Selector="TextBlock.default">
-            <Setter Property="TextBlock.Margin" Value="0"/>
-            <Setter Property="TextBlock.FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
         </Style>
         <Style Selector="CheckBox.default">
-            <Setter Property="CheckBox.Margin" Value="2"/>
-            <Setter Property="CheckBox.FontSize" Value="12"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
     </UserControl.Styles>
     <Grid ColumnDefinitions="50*,50*">
