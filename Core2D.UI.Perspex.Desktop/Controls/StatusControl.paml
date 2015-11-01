@@ -23,7 +23,18 @@
     </UserControl.Styles>
     <Grid ColumnDefinitions="Auto,*">
         <StackPanel Grid.Column="0" HorizontalAlignment="Left" Orientation="Horizontal" Margin="2">
-            <!-- TODO -->
+            <TextBlock Classes="stats">
+                <TextBlock.Text>
+                    <MultiBinding Mode="OneWay" Converter="{Static converters:EditorToStatsMultiConverter.Instance}">
+                        <Binding SourcePropertyPath="Editor.Project.Documents.Length"/>
+                        <Binding SourcePropertyPath="Editor.Project.CurrentDocument.Containers.Length"/>
+                        <Binding SourcePropertyPath="Editor.Project.CurrentContainer.Layers.Length"/>
+                        <Binding SourcePropertyPath="Editor.Project.CurrentContainer.CurrentLayer.Shapes.Length"/>
+                        <Binding SourcePropertyPath="Editor.Renderers[0].State.SelectedShape" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                        <Binding SourcePropertyPath="Editor.Renderers[0].State.SelectedShapes" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
         </StackPanel>
         <WrapPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal" Margin="2">
             <CheckBox Classes="default" Content="Stroked" IsChecked="{Binding Editor.Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
