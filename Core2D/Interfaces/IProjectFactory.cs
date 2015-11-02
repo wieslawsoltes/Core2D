@@ -5,38 +5,38 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Factory used to create new projects, documents and containers.
     /// </summary>
     public interface IProjectFactory
     {
         /// <summary>
-        /// 
+        /// Creates a new instance of the <see cref="Container"/> class.
         /// </summary>
-        /// <param name="project"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="project">The new container owner project.</param>
+        /// <param name="name">The new container name.</param>
+        /// <returns>The new instance of the <see cref="Container"/>.</returns>
         Container GetTemplate(Project project, string name);
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the <see cref="Container"/> class.
         /// </summary>
-        /// <param name="project"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="project">The new container owner project.</param>
+        /// <param name="name">The new container name.</param>
+        /// <returns>The new instance of the <see cref="Container"/>.</returns>
         Container GetContainer(Project project, string name);
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the <see cref="Document"/> class.
         /// </summary>
-        /// <param name="project"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="project">The new document owner project.</param>
+        /// <param name="name">The new document name.</param>
+        /// <returns>The new instance of the <see cref="Document"/>.</returns>
         Document GetDocument(Project project, string name);
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the <see cref="Project"/> class.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The new instance of the <see cref="Project"/>.</returns>
         Project GetProject();
     }
 }

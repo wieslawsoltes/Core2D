@@ -14,18 +14,18 @@ namespace Core2D
     public class ShapeFactory : IShapeFactory
     {
         private Editor _editor;
-        
+
         /// <summary>
-        /// Initializes a new instance of the Factory class.
+        /// Initializes a new instance of the <see cref="ShapeFactory"/> class.
         /// </summary>
-        /// <param name="editor">The current Editor instance.</param>
+        /// <param name="editor">The current <see cref="Editor"/> instance.</param>
         public ShapeFactory(Editor editor)
         {
             _editor = editor;
         }
 
         /// <summary>
-        /// Creates a new instance of the XPoint class.
+        /// Creates a new instance of the <see cref="XPoint"/> class.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -46,7 +46,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XLine class.
+        /// Creates a new instance of the <see cref="XLine"/> class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -70,7 +70,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XLine class.
+        /// Creates a new instance of the <see cref="XLine"/> class.
         /// </summary>
         /// <param name="start"></param>
         /// <param name="end"></param>
@@ -89,7 +89,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XArc class.
+        /// Creates a new instance of the <see cref="XArc"/> class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -124,7 +124,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XArc class.
+        /// Creates a new instance of the <see cref="XArc"/> class.
         /// </summary>
         /// <param name="point1"></param>
         /// <param name="point2"></param>
@@ -155,7 +155,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XBezier class.
+        /// Creates a new instance of the <see cref="XBezier"/> class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -190,7 +190,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XBezier class.
+        /// Creates a new instance of the <see cref="XBezier"/> class.
         /// </summary>
         /// <param name="point1"></param>
         /// <param name="point2"></param>
@@ -221,7 +221,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XQBezier class.
+        /// Creates a new instance of the <see cref="XQBezier"/> class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -252,7 +252,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XQBezier class.
+        /// Creates a new instance of the <see cref="XQBezier"/> class.
         /// </summary>
         /// <param name="point1"></param>
         /// <param name="point2"></param>
@@ -280,7 +280,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XPathGeometry class.
+        /// Creates a new instance of the <see cref="XPathGeometry"/> class.
         /// </summary>
         /// <param name="fillRule"></param>
         /// <returns></returns>
@@ -292,7 +292,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XPath class.
+        /// Creates a new instance of the <see cref="XPath"/> class.
         /// </summary>
         /// <param name="geometry"></param>
         /// <param name="isStroked"></param>
@@ -314,7 +314,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XRectangle class.
+        /// Creates a new instance of the <see cref="XRectangle"/> class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -344,7 +344,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XRectangle class.
+        /// Creates a new instance of the <see cref="XRectangle"/> class.
         /// </summary>
         /// <param name="topLeft"></param>
         /// <param name="bottomRight"></param>
@@ -372,7 +372,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XEllipse class.
+        /// Creates a new instance of the <see cref="XEllipse"/> class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -402,7 +402,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XEllipse class.
+        /// Creates a new instance of the <see cref="XEllipse"/> class.
         /// </summary>
         /// <param name="topLeft"></param>
         /// <param name="bottomRight"></param>
@@ -430,7 +430,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XText class.
+        /// Creates a new instance of the <see cref="XText"/> class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -457,7 +457,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XText class.
+        /// Creates a new instance of the <see cref="XText"/> class.
         /// </summary>
         /// <param name="topLeft"></param>
         /// <param name="bottomRight"></param>
@@ -482,7 +482,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XImage class.
+        /// Creates a new instance of the <see cref="XImage"/> class.
         /// </summary>
         /// <param name="path"></param>
         /// <param name="x1"></param>
@@ -515,7 +515,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new instance of the XImage class.
+        /// Creates a new instance of the <see cref="XImage"/> class.
         /// </summary>
         /// <param name="path"></param>
         /// <param name="topLeft"></param>

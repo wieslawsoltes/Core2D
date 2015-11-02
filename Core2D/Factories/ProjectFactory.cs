@@ -6,14 +6,14 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Factory used to create new projects, documents and containers.
     /// </summary>
     public class ProjectFactory : IProjectFactory
     {
         /// <summary>
-        /// 
+        /// Creates a new instance of the <see cref="StyleLibrary"/> class.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The new instance of the <see cref="StyleLibrary"/>.</returns>
         public static StyleLibrary DefaultStyleLibrary()
         {
             var sgd = StyleLibrary.Create("Default");
@@ -32,9 +32,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the <see cref="StyleLibrary"/> class.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The new instance of the <see cref="StyleLibrary"/>.</returns>
         public static StyleLibrary LinesStyleLibrary()
         {
             var sgdl = StyleLibrary.Create("Lines");
@@ -73,9 +73,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the <see cref="StyleLibrary"/> class.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The new instance of the <see cref="StyleLibrary"/>.</returns>
         public static StyleLibrary TemplateStyleLibrary()
         {
             var sgt = StyleLibrary.Create("Template");
@@ -91,12 +91,15 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the <see cref="Container"/> class.
         /// </summary>
-        /// <param name="project"></param>
-        /// <param name="template"></param>
-        private void CreateGrid(Project project, Container template)
+        /// <param name="project">The new container owner project.</param>
+        /// <param name="name">The new container name.</param>
+        /// <returns>The new instance of the <see cref="Container"/>.</returns>
+        private Container CreateGridTemplate(Project project, string name)
         {
+            var template = GetTemplate(project, name);
+
             var style = project
                 .StyleLibraries.FirstOrDefault(g => g.Name == "Template")
                 .Styles.FirstOrDefault(s => s.Name == "Grid");
@@ -117,29 +120,16 @@ namespace Core2D
             grid.State.Flags &= ~ShapeStateFlags.Printable;
             builder.Add(grid);
             layer.Shapes = builder.ToImmutable();
+
+            return template;
         }
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the <see cref="Container"/> class.
         /// </summary>
-        /// <param name="project"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        private Container CreateGridTemplate(Project project, string name)
-        {
-            var container = GetTemplate(project, name);
-
-            CreateGrid(project, container);
-
-            return container;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="project">The new container owner project.</param>
+        /// <param name="name">The new container name.</param>
+        /// <returns>The new instance of the <see cref="Container"/>.</returns>
         public Container GetTemplate(Project project, string name)
         {
             var container = Container.Create(name, true);
@@ -155,11 +145,11 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Creates a new instance of the <see cref="Container"/> class.
         /// </summary>
-        /// <param name="project"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="project">The new container owner project.</param>
+        /// <param name="name">The new container name.</param>
+        /// <returns>The new instance of the <see cref="Container"/>.</returns>
         public Container GetContainer(Project project, string name)
         {
             var container = Container.Create(name);
@@ -179,11 +169,11 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Creates a new instance of the <see cref="Document"/> class.
         /// </summary>
-        /// <param name="project"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="project">The new document owner project.</param>
+        /// <param name="name">The new document name.</param>
+        /// <returns>The new instance of the <see cref="Document"/>.</returns>
         public Document GetDocument(Project project, string name)
         {
             var document = Document.Create(name);
@@ -191,9 +181,9 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Creates a new instance of the <see cref="Project"/> class.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The new instance of the <see cref="Project"/>.</returns>
         public Project GetProject()
         {
             var project = Project.Create();

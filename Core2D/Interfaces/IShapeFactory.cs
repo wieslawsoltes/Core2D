@@ -10,7 +10,7 @@ namespace Core2D
     public interface IShapeFactory
     {
         /// <summary>
-        /// Creates a new instance of the XPoint class.
+        /// Creates a new instance of the <see cref="XPoint"/> class.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -19,7 +19,7 @@ namespace Core2D
         XPoint Point(double x, double y, bool isStandalone);
 
         /// <summary>
-        /// Creates a new instance of the XLine class.
+        /// Creates a new instance of the <see cref="XLine"/> class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -30,7 +30,7 @@ namespace Core2D
         XLine Line(double x1, double y1, double x2, double y2, bool isStroked);
 
         /// <summary>
-        /// Creates a new instance of the XLine class.
+        /// Creates a new instance of the <see cref="XLine"/> class.
         /// </summary>
         /// <param name="start"></param>
         /// <param name="end"></param>
@@ -39,7 +39,7 @@ namespace Core2D
         XLine Line(XPoint start, XPoint end, bool isStroked);
 
         /// <summary>
-        ///  Creates a new instance of the XArc class.
+        ///  Creates a new instance of the <see cref="XArc"/> class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -55,7 +55,7 @@ namespace Core2D
         XArc Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled);
 
         /// <summary>
-        ///  Creates a new instance of the XArc class.
+        ///  Creates a new instance of the <see cref="XArc"/> class.
         /// </summary>
         /// <param name="point1"></param>
         /// <param name="point2"></param>
@@ -67,7 +67,7 @@ namespace Core2D
         XArc Arc(XPoint point1, XPoint point2, XPoint point3, XPoint point4, bool isStroked, bool isFilled);
 
         /// <summary>
-        /// Creates a new instance of the XBezier class.
+        /// Creates a new instance of the <see cref="XArc"/> class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -83,7 +83,7 @@ namespace Core2D
         XBezier Bezier(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled);
 
         /// <summary>
-        /// Creates a new instance of the XBezier class.
+        /// Creates a new instance of the <see cref="XBezier"/> class.
         /// </summary>
         /// <param name="point1"></param>
         /// <param name="point2"></param>
@@ -95,7 +95,7 @@ namespace Core2D
         XBezier Bezier(XPoint point1, XPoint point2, XPoint point3, XPoint point4, bool isStroked, bool isFilled);
 
         /// <summary>
-        /// Creates a new instance of the XQBezier class.
+        /// Creates a new instance of the <see cref="XQBezier"/> class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -109,7 +109,7 @@ namespace Core2D
         XQBezier QBezier(double x1, double y1, double x2, double y2, double x3, double y3, bool isStroked, bool isFilled);
 
         /// <summary>
-        /// Creates a new instance of the XQBezier class.
+        /// Creates a new instance of the <see cref="XQBezier"/> class.
         /// </summary>
         /// <param name="point1"></param>
         /// <param name="point2"></param>
@@ -120,14 +120,14 @@ namespace Core2D
         XQBezier QBezier(XPoint point1, XPoint point2, XPoint point3, bool isStroked, bool isFilled);
 
         /// <summary>
-        /// Creates a new instance of the XPathGeometry class.
+        /// Creates a new instance of the <see cref="XPathGeometry"/> class.
         /// </summary>
         /// <param name="fillRule"></param>
         /// <returns></returns>
         XPathGeometry Geometry(XFillRule fillRule);
 
         /// <summary>
-        /// Creates a new instance of the XPath class.
+        /// Creates a new instance of the <see cref="XPath"/> class.
         /// </summary>
         /// <param name="geometry"></param>
         /// <param name="isStroked"></param>
@@ -136,7 +136,7 @@ namespace Core2D
         XPath Path(XPathGeometry geometry, bool isStroked, bool isFilled);
 
         /// <summary>
-        /// Creates a new instance of the XRectangle class.
+        /// Creates a new instance of the <see cref="XRectangle"/> class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -149,7 +149,7 @@ namespace Core2D
         XRectangle Rectangle(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text);
 
         /// <summary>
-        /// Creates a new instance of the XRectangle class.
+        /// Creates a new instance of the <see cref="XRectangle"/> class.
         /// </summary>
         /// <param name="topLeft"></param>
         /// <param name="bottomRight"></param>
@@ -160,7 +160,7 @@ namespace Core2D
         XRectangle Rectangle(XPoint topLeft, XPoint bottomRight, bool isStroked, bool isFilled, string text);
 
         /// <summary>
-        /// Creates a new instance of the XEllipse class.
+        /// Creates a new instance of the <see cref="XEllipse"/> class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -173,7 +173,7 @@ namespace Core2D
         XEllipse Ellipse(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text);
 
         /// <summary>
-        /// Creates a new instance of the XEllipse class.
+        /// Creates a new instance of the <see cref="XEllipse"/> class.
         /// </summary>
         /// <param name="topLeft"></param>
         /// <param name="bottomRight"></param>
@@ -184,7 +184,7 @@ namespace Core2D
         XEllipse Ellipse(XPoint topLeft, XPoint bottomRight, bool isStroked, bool isFilled, string text);
 
         /// <summary>
-        /// Creates a new instance of the XText class.
+        /// Creates a new instance of the <see cref="XText"/> class.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
@@ -196,7 +196,7 @@ namespace Core2D
         XText Text(double x1, double y1, double x2, double y2, string text, bool isStroked);
 
         /// <summary>
-        /// Creates a new instance of the XText class.
+        /// Creates a new instance of the <see cref="XText"/> class.
         /// </summary>
         /// <param name="topLeft"></param>
         /// <param name="bottomRight"></param>
@@ -206,7 +206,7 @@ namespace Core2D
         XText Text(XPoint topLeft, XPoint bottomRight, string text, bool isStroked);
 
         /// <summary>
-        /// Creates a new instance of the XImage class.
+        /// Creates a new instance of the <see cref="XImage"/> class.
         /// </summary>
         /// <param name="path"></param>
         /// <param name="x1"></param>
@@ -220,7 +220,7 @@ namespace Core2D
         XImage Image(string path, double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text);
 
         /// <summary>
-        /// Creates a new instance of the XImage class.
+        /// Creates a new instance of the <see cref="XImage"/> class.
         /// </summary>
         /// <param name="path"></param>
         /// <param name="topLeft"></param>
