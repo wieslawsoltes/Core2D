@@ -31,7 +31,7 @@ namespace Core2D
         /// Returns a hash code for the specified object.
         /// </summary>
         /// <param name="style">The <see cref="ShapeStyle"/> for which a hash code is to be returned.</param>
-        /// <returns> A hash code for the specified object.</returns>
+        /// <returns>A hash code for the specified object.</returns>
         public int GetHashCode(ShapeStyle style)
         {
             if (Object.ReferenceEquals(style, null))
