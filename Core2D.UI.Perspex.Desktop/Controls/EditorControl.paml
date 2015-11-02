@@ -39,7 +39,7 @@
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Background" Value="#FFDEDEDE"/>
-            <!--<Setter Property="TextAlignment" Value="Left"/>-->
+            <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
@@ -47,7 +47,7 @@
             <Setter Property="Margin" Value="3,1,3,1"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Background" Value="#FFDEDEDE"/>
-            <!--<Setter Property="TextAlignment" Value="Center"/>-->
+            <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
