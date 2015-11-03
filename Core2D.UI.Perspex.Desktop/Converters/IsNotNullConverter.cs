@@ -13,7 +13,7 @@ using Perspex.Media;
 namespace Core2D.UI.Perspex.Desktop.Converters
 {
     /// <summary>
-    /// Converts a binding value object from <see cref="object"/> to <see cref="bool"/> False if value is not equal to <see cref="null"/> otherwise return True.
+    /// Converts a binding value object from <see cref="object"/> to <see cref="bool"/> False if value is not equal to null otherwise return True.
     /// </summary>
     public class IsNotNullConverter : IValueConverter
     {
