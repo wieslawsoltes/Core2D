@@ -1,0 +1,47 @@
+﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
+<!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
+<UserControl x:Class="Core2D.UI.Perspex.Desktop.Controls.DashboardControl"
+             xmlns="https://github.com/perspex"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Core2D.UI.Perspex.Desktop;assembly=Core2D.UI.Perspex.Desktop"
+             xmlns:converters="clr-namespace:Core2D.UI.Perspex.Desktop.Converters;assembly=Core2D.UI.Perspex.Desktop"
+             xmlns:core="clr-namespace:Core2D;assembly=Core2D">
+    <UserControl.Styles>
+        <Style Selector="TextBlock.title">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="TextBlock.recent">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+        <Style Selector="TextBlock.recents">
+            <Setter Property="Margin" Value="9,6,9,6"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style Selector="Button.project">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+    </UserControl.Styles>
+    <Grid Grid.Row="1" MaxWidth="800" MaxHeight="600" RowDefinitions="0.2*,50,30,1*,30,1*,30,1*,20,0.2*" ColumnDefinitions="5*,50*,30,40*,5*">
+        <TextBlock Text="Core2D" Classes="title" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="1"/>
+        <Button Content="New Project" Classes="project" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding Path=Commands.NewCommand}"/>
+        <Button Content="Open Recent" Classes="project" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Grid.RowSpan="1" CommandParameter="{Binding Path=CurrentRecentProject.Path}" Command="{Binding Path=Commands.OpenCommand}"/>
+        <Button Content="Open Project" Classes="project" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1" Grid.RowSpan="1" Command="{Binding Path=Commands.OpenCommand}"/>
+        <TextBlock Text="recent" Classes="recent" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1"/>
+        <ListBox x:Name="recentProjects" 
+                 Items="{Binding Path=RecentProjects}" 
+                 SelectedItem="{Binding Path=CurrentRecentProject, Mode=TwoWay}"
+                 Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="5">
+            <ListBox.DataTemplates>
+                <DataTemplate DataType="core:RecentProject">
+                    <TextBlock Text="{Binding Path=Name}" Classes="recents" ToolTip.Tip="{Binding Path=Path}"/>
+                </DataTemplate>
+            </ListBox.DataTemplates>
+        </ListBox>
+    </Grid>
+</UserControl>

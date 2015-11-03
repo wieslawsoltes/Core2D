@@ -204,6 +204,10 @@
     <Compile Include="App.paml.cs">
       <DependentUpon>App.paml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DashboardControl.paml.cs">
+      <DependentUpon>DashboardControl.paml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controls\DrawableControl.cs" />
     <Compile Include="Controls\MenuControl.paml.cs">
       <DependentUpon>MenuControl.paml</DependentUpon>
@@ -289,7 +293,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\DashboardControl.paml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SharpDX.2.6.3\build\SharpDX.targets" Condition="Exists('..\packages\SharpDX.2.6.3\build\SharpDX.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
