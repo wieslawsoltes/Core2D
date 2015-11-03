@@ -4,6 +4,7 @@
              xmlns="https://github.com/perspex"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Core2D.UI.Perspex.Desktop;assembly=Core2D.UI.Perspex.Desktop"
+             xmlns:converters="clr-namespace:Core2D.UI.Perspex.Desktop.Converters;assembly=Core2D.UI.Perspex.Desktop"
              xmlns:core="clr-namespace:Core2D;assembly=Core2D">
     <Menu>
         <MenuItem Header="_File">
@@ -11,12 +12,12 @@
             <!--<Separator/>-->
             <MenuItem Header="_Open" HotKey="Ctrl+O" Command="{Binding Path=Commands.OpenCommand}"/>
             <!--<Separator/>-->
-            <MenuItem Header="_Close" HotKey="Ctrl+F4" Command="{Binding Path=Commands.CloseCommand}"/>
+            <MenuItem Header="_Close" HotKey="Ctrl+F4" Command="{Binding Path=Commands.CloseCommand}" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
             <!--<Separator/>-->
-            <MenuItem Header="_Save" HotKey="Ctrl+S" Command="{Binding Path=Commands.SaveCommand}"/>
-            <MenuItem Header="Save _As" HotKey="Ctrl+Shift+S" Command="{Binding Path=Commands.SaveAsCommand}"/>
+            <MenuItem Header="_Save" HotKey="Ctrl+S" Command="{Binding Path=Commands.SaveCommand}" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+            <MenuItem Header="Save _As" HotKey="Ctrl+Shift+S" Command="{Binding Path=Commands.SaveAsCommand}" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
             <!--<Separator/>-->
-            <MenuItem Header="_Export" HotKey="Ctrl+E" Command="{Binding Path=Commands.ExportCommand}"/>
+            <MenuItem Header="_Export" HotKey="Ctrl+E" Command="{Binding Path=Commands.ExportCommand}" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
             <!--<Separator/>-->
             <MenuItem Header="_Recent" Items="{Binding Path=RecentProjects}">
                 <MenuItem.DataTemplates>
@@ -28,7 +29,7 @@
             <!--<Separator/>-->
             <MenuItem Header="E_xit" HotKey="Alt+F4" Command="{Binding Path=Commands.ExitCommand}"/>
         </MenuItem>
-        <MenuItem Header="_Edit">
+        <MenuItem Header="_Edit" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem Header="_Undo" HotKey="Ctrl+Z" Command="{Binding Path=Commands.UndoCommand}"/>
             <MenuItem Header="_Redo" HotKey="Ctrl+Y" Command="{Binding Path=Commands.RedoCommand}"/>
             <!--<Separator/>-->
@@ -53,14 +54,14 @@
                 <MenuItem Header="Bring to _Front" HotKey="Shift++" Command="{Binding Path=Commands.BringToFrontCommand}"/>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="_View">
+        <MenuItem Header="_View" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem Header="_Zoom">
                 <MenuItem Header="_Reset Zoom" HotKey="Z" Command="{Binding Path=Commands.ZoomResetCommand}"/>
                 <!--<Separator/>-->
                 <MenuItem Header="Zoom to _Extent" HotKey="X" Command="{Binding Path=Commands.ZoomExtentCommand}"/>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="_Project">
+        <MenuItem Header="_Project" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem Header="_Add Document" Command="{Binding Path=Commands.AddDocumentCommand}" CommandParameter="{Binding Path=Editor.Project}"/>
             <!--<Separator/>-->
             <MenuItem Header="_Add Container" Command="{Binding Path=Commands.AddContainerCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDocument}"/>
@@ -183,7 +184,7 @@
                 <MenuItem Header="T_emplates..." Command="{Binding Path=Commands.ExportTemplatesCommand}" CommandParameter="{Binding Path=Editor.Project}"/>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="_Tool">
+        <MenuItem Header="_Tool" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem Header="_None" HotKey="N" Command="{Binding Path=Commands.ToolNoneCommand}"/>
             <!--<Separator/>-->
             <MenuItem Header="_Selection" HotKey="S" Command="{Binding Path=Commands.ToolSelectionCommand}"/>
@@ -212,7 +213,7 @@
             <!--<Separator/>-->
             <MenuItem Header="_Image" HotKey="I" Command="{Binding Path=Commands.ToolImageCommand}"/>
         </MenuItem>
-        <MenuItem Header="_Data">
+        <MenuItem Header="_Data" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem Header="_Import..." Command="{Binding Path=Commands.ImportDataCommand}"/>
             <!--<Separator/>-->
             <MenuItem Header="_Export..." Command="{Binding Path=Commands.ExportDataCommand}"/>
@@ -235,14 +236,14 @@
                 <MenuItem Header="Delete Co_lumn" Command="{Binding Path=Commands.RemoveColumnCommand}"/>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="Te_mplate" Items="{Binding Path=Editor.Project.Templates}">
+        <MenuItem Header="Te_mplate" Items="{Binding Path=Editor.Project.Templates}" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem.DataTemplates>
                 <DataTemplate DataType="core:Container">
                     <TextBlock Text="{Binding Path=Name}"/>
                 </DataTemplate>
             </MenuItem.DataTemplates>
         </MenuItem>
-        <MenuItem Header="_Options">
+        <MenuItem Header="_Options" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem Header="Default is Stro_ked" HotKey="K" Command="{Binding Path=Commands.DefaultIsStrokedCommand}"/>
             <MenuItem Header="Default is _Filled" HotKey="F" Command="{Binding Path=Commands.DefaultIsFilledCommand}"/>
             <!--<Separator/>-->
