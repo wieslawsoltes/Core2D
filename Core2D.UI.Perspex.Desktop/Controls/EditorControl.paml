@@ -1369,6 +1369,7 @@
                 <TabItem Header="Records" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
+                            <MenuItem Header="apply" Command="{Binding Path=Commands.ApplyRecordCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDatabase.CurrentRecord}"/>
                             <MenuItem Header="+" Command="{Binding Path=Commands.AddRecordCommand}"/>
                             <MenuItem Header="-" Command="{Binding Path=Commands.RemoveRecordCommand}"/>
                         </Menu>
@@ -1429,6 +1430,7 @@
                             </DropDown.DataTemplates>
                         </DropDown>
                         <Menu Grid.Row="3" HorizontalAlignment="Right">
+                            <MenuItem Header="apply" Command="{Binding Path=Commands.ApplyStyleCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle}"/>
                             <MenuItem Header="+" Command="{Binding Path=Commands.AddStyleCommand}"/>
                             <MenuItem Header="-" Command="{Binding Path=Commands.RemoveStyleCommand}"/>
                         </Menu>
@@ -1448,6 +1450,7 @@
                 <TabItem Header="Templates" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
+                            <MenuItem Header="apply" Command="{Binding Path=Commands.ApplyTemplateCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentTemplate}"/>
                             <MenuItem Header="edit" Command="{Binding Path=Commands.EditTemplateCommand}"/>
                             <MenuItem Header="+" Command="{Binding Path=Commands.AddTemplateCommand}"/>
                             <MenuItem Header="-" Command="{Binding Path=Commands.RemoveTemplateCommand}"/>

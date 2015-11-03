@@ -26,6 +26,7 @@ namespace Core2D
         private ITextFieldReader<Database> _csvReader;
         private ITextFieldWriter<Database> _csvWriter;
         private ImmutableArray<RecentProject> _recentProjects = ImmutableArray.Create<RecentProject>();
+        private RecentProject _currentRecentProject = default(RecentProject);
         private Container _containerToCopy = default(Container);
         private Document _documentToCopy = default(Document);
 
@@ -136,23 +137,40 @@ namespace Core2D
             get { return _recentProjects; }
             set { Update(ref _recentProjects, value); }
         }
+        
+        /// <summary>
+        ///
+        /// </summary>
+        public RecentProject CurrentRecentProject
+        {
+            get { return _currentRecentProject; }
+            set { Update(ref _currentRecentProject, value); }
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="log"></param>
         /// <param name="logFileName"></param>
-        public void InitializeEditor(ILog log = null, string logFileName = null)
+        /// <param name="createProject"></param>
+        public void InitializeEditor(ILog log = null, string logFileName = null, bool createProject = true)
         {
             try
             {
-                if (_projectFactory != null)
+                if (createProject)
                 {
-                    _editor = Editor.Create(_projectFactory.GetProject(), _renderers);
+                    if (_projectFactory != null)
+                    {
+                        _editor = Editor.Create(_projectFactory.GetProject(), _renderers);
+                    }
+                    else
+                    {
+                        _editor = Editor.Create(Project.Create(), _renderers);
+                    }
                 }
                 else
                 {
-                    _editor = Editor.Create(Project.Create(), _renderers);
+                    _editor = Editor.Create(null, _renderers);
                 }
 
                 if (log != null && logFileName != null)
@@ -436,6 +454,11 @@ namespace Core2D
                         (owner) => _editor.ResetRecord(owner),
                         (owner) => IsEditMode());
 
+                _commands.ApplyRecordCommand =
+                    Command<object>.Create(
+                        (item) => OnApplyRecord(item),
+                        (item) => IsEditMode());
+                
                 _commands.AddBindingCommand =
                     Command<object>.Create(
                         (owner) => _editor.AddBinding(owner),
@@ -505,6 +528,11 @@ namespace Core2D
                     Command.Create(
                         () => _editor.RemoveCurrentStyle(),
                         () => IsEditMode());
+
+                _commands.ApplyStyleCommand =
+                    Command<object>.Create(
+                        (item) => OnApplyStyle(item),
+                        (item) => IsEditMode());
 
                 _commands.RemoveShapeCommand =
                     Command.Create(
@@ -673,8 +701,8 @@ namespace Core2D
 
             (_commands.AddRecordCommand as Command).NotifyCanExecuteChanged();
             (_commands.RemoveRecordCommand as Command).NotifyCanExecuteChanged();
-
             (_commands.ResetRecordCommand as Command<object>).NotifyCanExecuteChanged();
+            (_commands.ApplyRecordCommand as Command<object>).NotifyCanExecuteChanged();
 
             (_commands.AddBindingCommand as Command<object>).NotifyCanExecuteChanged();
             (_commands.RemoveBindingCommand as Command<object>).NotifyCanExecuteChanged();
@@ -693,6 +721,7 @@ namespace Core2D
 
             (_commands.AddStyleCommand as Command).NotifyCanExecuteChanged();
             (_commands.RemoveStyleCommand as Command).NotifyCanExecuteChanged();
+            (_commands.ApplyStyleCommand as Command<object>).NotifyCanExecuteChanged();
 
             (_commands.AddStyleLibraryCommand as Command).NotifyCanExecuteChanged();
             (_commands.RemoveStyleLibraryCommand as Command).NotifyCanExecuteChanged();
@@ -1248,6 +1277,36 @@ namespace Core2D
                         Environment.NewLine,
                         ex.StackTrace);
                 }
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        public void OnApplyRecord(object item)
+        {
+            if (_editor.Project == null || _editor.Project.CurrentContainer == null)
+                return;
+
+            if (item is Record)
+            {
+                _editor.ApplyRecord(item as Record);
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        public void OnApplyStyle(object item)
+        {
+            if (_editor.Project == null || _editor.Project.CurrentContainer == null)
+                return;
+
+            if (item is ShapeStyle)
+            {
+                _editor.ApplyStyle(item as ShapeStyle);
             }
         }
 
@@ -2342,6 +2401,7 @@ namespace Core2D
             builder.Insert(0, RecentProject.Create(name, path));
 
             RecentProjects = builder.ToImmutable();
+            CurrentRecentProject = _recentProjects.FirstOrDefault();
         }
 
         /// <summary>
@@ -2356,12 +2416,12 @@ namespace Core2D
             try
             {
                 var json = Utf8TextFile.Read(path);
-                var recent = _serializer.Deserialize<ImmutableArray<RecentProject>>(json);
+                var recent = _serializer.Deserialize<Recent>(json);
 
                 if (recent != null)
                 {
-                    var remove = recent.Where(x => System.IO.File.Exists(x.Path) == false).ToList();
-                    var builder = recent.ToBuilder();
+                    var remove = recent.RecentProjects.Where(x => System.IO.File.Exists(x.Path) == false).ToList();
+                    var builder = recent.RecentProjects.ToBuilder();
 
                     foreach (var file in remove)
                     {
@@ -2369,6 +2429,11 @@ namespace Core2D
                     }
 
                     RecentProjects = builder.ToImmutable();
+
+                    if (System.IO.File.Exists(recent.CurrentRecentProject.Path))
+                        CurrentRecentProject = recent.CurrentRecentProject;
+                    else
+                        CurrentRecentProject = _recentProjects.FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -2394,7 +2459,8 @@ namespace Core2D
             
             try
             {
-                var json = _serializer.Serialize(_recentProjects);
+                var recent = Recent.Create(_recentProjects, _currentRecentProject);
+                var json = _serializer.Serialize(recent);
                 Utf8TextFile.Write(path, json);
             }
             catch (Exception ex)
@@ -2959,15 +3025,13 @@ namespace Core2D
             {
                 if (_editor.Renderers[0].State.SelectedShape != null)
                 {
-                    // TODO: Add history snapshot.
-                    _editor.Renderers[0].State.SelectedShape.Data.Record = record;
+                     _editor.ApplyRecord(_editor.Renderers[0].State.SelectedShape, record);
                 }
                 else if (_editor.Renderers[0].State.SelectedShapes != null && _editor.Renderers[0].State.SelectedShapes.Count > 0)
                 {
-                    // TODO: Add history snapshot.
                     foreach (var shape in _editor.Renderers[0].State.SelectedShapes)
                     {
-                        shape.Data.Record = record;
+                        _editor.ApplyRecord(shape, record);
                     }
                 }
                 else
@@ -3308,31 +3372,14 @@ namespace Core2D
         {
             try
             {
-                if (_editor.Renderers[0].State.SelectedShape != null)
+                if (_editor.Renderers[0].State.SelectedShape != null
+                    || (_editor.Renderers[0].State.SelectedShapes != null && _editor.Renderers[0].State.SelectedShapes.Count > 0))
                 {
-                    // TODO: Add history snapshot.
-                    _editor.Renderers[0].State.SelectedShape.Style = style;
-                }
-                else if (_editor.Renderers[0].State.SelectedShapes != null && _editor.Renderers[0].State.SelectedShapes.Count > 0)
-                {
-                    // TODO: Add history snapshot.
-                    foreach (var shape in _editor.Renderers[0].State.SelectedShapes)
-                    {
-                        shape.Style = style;
-                    }
+                    _editor.ApplyStyle(style);
                 }
                 else
                 {
-                    var container = _editor.Project.CurrentContainer;
-                    if (container != null)
-                    {
-                        var result = ShapeBounds.HitTest(container, new Vector2(x, y), _editor.Project.Options.HitTreshold);
-                        if (result != null)
-                        {
-                            // Add history snapshot.
-                            result.Style = style;
-                        }
-                    }
+                    _editor.ApplyStyle(style, x, y);
                 }
             }
             catch (Exception ex)

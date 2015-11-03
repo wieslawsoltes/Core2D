@@ -279,6 +279,64 @@ namespace Core2D
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project"></param>
+        /// <param name="path"></param>
+        public void Load(Project project, string path = null)
+        {
+            Deselect();
+
+            if (_renderers != null)
+            {
+                foreach (var renderer in _renderers)
+                {
+                    renderer.ClearCache(isZooming: false);
+                    renderer.State.ImageCache = project;
+                }
+            }
+
+            Project = project;
+            ProjectPath = path;
+            IsProjectDirty = false;
+
+            if (_enableObserver)
+            {
+                Observer = new Observer(this);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Unload()
+        {
+            if (_enableObserver && _project != null)
+            {
+                Observer.Remove(_project);
+            }
+
+            Deselect();
+
+            if (_renderers != null)
+            {
+                foreach (var renderer in _renderers)
+                {
+                    renderer.ClearCache(isZooming: false);
+                }
+            }
+
+            if (_project != null)
+            {
+                _project.PurgeUnusedImages(new HashSet<string>(Enumerable.Empty<string>()));
+            }
+
+            Project = null;
+            ProjectPath = string.Empty;
+            IsProjectDirty = false;
+        }
+        
+        /// <summary>
         /// Snaps value by specified snap parameter.
         /// </summary>
         /// <param name="value">The value to snap.</param>
@@ -1702,6 +1760,103 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="style"></param>
+        public void ApplyStyle(ShapeStyle style)
+        {
+            if (_project == null || _project.CurrentContainer == null)
+                return;
+            
+            var container = _project.CurrentContainer;
+            
+            if (_enableHistory)
+            {
+                if (_renderers[0].State.SelectedShape != null)
+                {
+                    var shape = _renderers[0].State.SelectedShape;
+                    var previous = shape.Style;
+                    var next = style;
+                    _history.Snapshot(previous, next, (p) => shape.Style = p);
+                    shape.Style = next;
+                }
+                else if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
+                {
+                    foreach (var shape in _renderers[0].State.SelectedShapes)
+                    {
+                        var previous = shape.Style;
+                        var next = style;
+                        _history.Snapshot(previous, next, (p) => shape.Style = p);
+                        shape.Style = next;
+                    }
+                } 
+            }
+            else
+            {
+                if (_renderers[0].State.SelectedShape != null)
+                {
+                    _renderers[0].State.SelectedShape.Style = style;
+                }
+                else if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
+                {
+                    foreach (var shape in _renderers[0].State.SelectedShapes)
+                    {
+                        shape.Style = style;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <param name="style"></param>
+        public void ApplyStyle(BaseShape shape, ShapeStyle style)
+        {
+            if (_enableHistory)
+            {
+                var previous = shape.Style;
+                var next = style;
+                _history.Snapshot(previous, next, (p) => shape.Style = p);
+                shape.Style = next;
+            }
+            else
+            {
+                shape.Style = style;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="style"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void ApplyStyle(ShapeStyle style, double x, double y)
+        {
+            if (_project == null || _project.CurrentContainer == null)
+                return;
+            
+            var container = _project.CurrentContainer;
+            var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitTreshold);
+            if (result != null)
+            {
+                if (_enableHistory)
+                {
+                    var previous = result.Style;
+                    var next = style;
+                    _history.Snapshot(previous, next, (p) => result.Style = p);
+                    result.Style = next;
+                }
+                else
+                {
+                    result.Style = style;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="template"></param>
         public void ApplyTemplate(Container template)
         {
@@ -1809,6 +1964,54 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="record"></param>
+        public void ApplyRecord(Record record)
+        {
+            if (_project == null || _project.CurrentContainer == null)
+                return;
+            
+            var container = _project.CurrentContainer;
+            
+            if (_enableHistory)
+            {
+                if (_renderers[0].State.SelectedShape != null)
+                {
+                    var shape = _renderers[0].State.SelectedShape;
+                    var previous = shape.Data.Record;
+                    var next = record;
+                    _history.Snapshot(previous, next, (p) => shape.Data.Record = p);
+                    shape.Data.Record = next;
+                }
+                else if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
+                {
+                    foreach (var shape in _renderers[0].State.SelectedShapes)
+                    {
+                        var previous = shape.Data.Record;
+                        var next = record;
+                        _history.Snapshot(previous, next, (p) => shape.Data.Record = p);
+                        shape.Data.Record = next;
+                    }
+                } 
+            }
+            else
+            {
+                if (_renderers[0].State.SelectedShape != null)
+                {
+                    _renderers[0].State.SelectedShape.Data.Record = record;
+                }
+                else if (_renderers[0].State.SelectedShapes != null && _renderers[0].State.SelectedShapes.Count > 0)
+                {
+                    foreach (var shape in _renderers[0].State.SelectedShapes)
+                    {
+                        shape.Data.Record = record;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="shape"></param>
         /// <param name="record"></param>
         public void ApplyRecord(BaseShape shape, Record record)
@@ -1829,59 +2032,30 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="project"></param>
-        /// <param name="path"></param>
-        public void Load(Project project, string path = null)
+        /// <param name="record"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void ApplyRecord(Record record, double x, double y)
         {
-            Deselect();
+            if (_project == null || _project.CurrentContainer == null)
+                return;
 
-            if (_renderers != null)
+            var container = _project.CurrentContainer;
+            var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitTreshold);
+            if (result != null)
             {
-                foreach (var renderer in _renderers)
+                if (_enableHistory)
                 {
-                    renderer.ClearCache(isZooming: false);
-                    renderer.State.ImageCache = project;
+                    var previous = result.Data.Record;
+                    var next = record;
+                    _history.Snapshot(previous, next, (p) => result.Data.Record = p);
+                    result.Data.Record = next;
+                }
+                else
+                {
+                    result.Data.Record = record;
                 }
             }
-
-            Project = project;
-            ProjectPath = path;
-            IsProjectDirty = false;
-
-            if (_enableObserver)
-            {
-                Observer = new Observer(this);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void Unload()
-        {
-            if (_enableObserver && _project != null)
-            {
-                Observer.Remove(_project);
-            }
-
-            Deselect();
-
-            if (_renderers != null)
-            {
-                foreach (var renderer in _renderers)
-                {
-                    renderer.ClearCache(isZooming: false);
-                }
-            }
-
-            if (_project != null)
-            {
-                _project.PurgeUnusedImages(new HashSet<string>(Enumerable.Empty<string>()));
-            }
-
-            Project = null;
-            ProjectPath = string.Empty;
-            IsProjectDirty = false;
         }
 
         /// <summary>
