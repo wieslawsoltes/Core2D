@@ -18,20 +18,37 @@ using Perspex.Input;
 using Perspex.Layout;
 using Perspex.Media;
 using Perspex.Media.Imaging;
+using Perspex.Markup.Xaml;
 
 namespace Core2D.UI.Perspex.Desktop.Controls
 {
     /// <summary>
     /// 
     /// </summary>
-    public class DrawableControl : Control
+    public class DrawableControl : UserControl
     {
         private ZoomState _state;
 
         /// <summary>
         /// 
         /// </summary>
-        private void Initialize()
+        public DrawableControl()
+        {
+            this.InitializeComponent();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitializeComponent()
+        {
+            PerspexXamlLoader.Load(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitializeState()
         {
             var context = this.DataContext as EditorContext;
             if (context == null)
@@ -311,7 +328,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
 
             if (_state == null)
             {
-                Initialize();
+                InitializeState();
             }
 
             Draw(context);

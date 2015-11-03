@@ -204,16 +204,17 @@
     <Compile Include="App.paml.cs">
       <DependentUpon>App.paml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DashboardControl.paml.cs">
-      <DependentUpon>DashboardControl.paml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Controls\DrawableControl.cs" />
-    <Compile Include="Controls\MenuControl.paml.cs">
-      <DependentUpon>MenuControl.paml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\EditorControl.paml.cs">
       <DependentUpon>EditorControl.paml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DashboardControl.paml.cs">
+      <DependentUpon>DashboardControl.paml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DrawableControl.paml.cs">
+      <DependentUpon>DrawableControl.paml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MenuControl.paml.cs">
+      <DependentUpon>MenuControl.paml</DependentUpon>
     </Compile>
     <Compile Include="Controls\StatusControl.paml.cs">
       <DependentUpon>StatusControl.paml</DependentUpon>
@@ -280,10 +281,16 @@
     <EmbeddedResource Include="App.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MenuControl.paml">
+    <EmbeddedResource Include="Controls\EditorControl.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\EditorControl.paml">
+    <EmbeddedResource Include="Controls\DashboardControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DrawableControl.paml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MenuControl.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StatusControl.paml">
@@ -292,9 +299,6 @@
     <EmbeddedResource Include="Windows\MainWindow.paml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Controls\DashboardControl.paml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SharpDX.2.6.3\build\SharpDX.targets" Condition="Exists('..\packages\SharpDX.2.6.3\build\SharpDX.targets')" />
