@@ -21,7 +21,7 @@ namespace Core2D.UI.Perspex.Desktop
     public class App : Application
     {
         /// <summary>
-        /// Initializes a new instance of the App class.
+        /// Initializes a new instance of the <see cref="App"/> class.
         /// </summary>
         public App()
         {

@@ -11,45 +11,45 @@ namespace Core2D.UI.Perspex.Desktop
     internal class TextClipboard : ITextClipboard
     {
         /// <summary>
-        /// 
+        /// Set clipboard text.
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="text">The text string.</param>
         public Task SetText(string text)
         {
             return App.Current.Clipboard.SetTextAsync(text);
         }
 
         /// <summary>
-        /// 
+        /// Get text from clipboard.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The text string.</returns>
         private async Task<string> GetTextAsync()
         {
             return await App.Current.Clipboard.GetTextAsync();
         }
 
         /// <summary>
-        /// 
+        /// Get text from clipboard.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The text string.</returns>
         public Task<string> GetText()
         {
             return GetTextAsync();
         }
 
         /// <summary>
-        /// 
+        /// Return true if clipboard container text string.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if clipboard container text string.</returns>
         private async Task<bool> ContainsTextAsync()
         {
             return !string.IsNullOrEmpty(await GetTextAsync());
         }
 
         /// <summary>
-        /// 
+        /// Return true if clipboard container text string.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if clipboard container text string.</returns>
         public async Task<bool> ContainsText()
         {
             return await ContainsTextAsync();

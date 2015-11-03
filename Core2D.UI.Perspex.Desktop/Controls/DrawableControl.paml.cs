@@ -23,14 +23,14 @@ using Perspex.Markup.Xaml;
 namespace Core2D.UI.Perspex.Desktop.Controls
 {
     /// <summary>
-    /// 
+    /// Interaction logic for <see cref="DrawableControl"/> xaml.
     /// </summary>
     public class DrawableControl : UserControl
     {
         private ZoomState _state;
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="DrawableControl"/> class.
         /// </summary>
         public DrawableControl()
         {
@@ -38,7 +38,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
         }
 
         /// <summary>
-        /// 
+        /// Initialize the Xaml components.
         /// </summary>
         private void InitializeComponent()
         {
@@ -46,7 +46,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
         }
 
         /// <summary>
-        /// 
+        /// Initialize <see cref="ZoomState"/> object
         /// </summary>
         private void InitializeState()
         {
@@ -147,10 +147,10 @@ namespace Core2D.UI.Perspex.Desktop.Controls
         }
 
         /// <summary>
-        /// 
+        /// Positions child elements as part of a layout pass.
         /// </summary>
-        /// <param name="finalSize"></param>
-        /// <returns></returns>
+        /// <param name="finalSize">The size available to the control.</param>
+        /// <returns>The actual size used.</returns>
         protected override Size ArrangeOverride(Size finalSize)
         {
             var context = this.DataContext as EditorContext;
@@ -172,10 +172,10 @@ namespace Core2D.UI.Perspex.Desktop.Controls
         }
 
         /// <summary>
-        /// 
+        /// Resets control zoom and pan properties.
         /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
+        /// <param name="width">The control width.</param>
+        /// <param name="height">The control height.</param>
         public void ResetZoom(double width, double height)
         {
             if (_state == null)
@@ -201,10 +201,10 @@ namespace Core2D.UI.Perspex.Desktop.Controls
         }
 
         /// <summary>
-        /// 
+        /// Autofits control using zoom and pan properties.
         /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
+        /// <param name="width">The control width.</param>
+        /// <param name="height">The control height.</param>
         public void AutoFit(double width, double height)
         {
             if (_state == null)
@@ -230,12 +230,12 @@ namespace Core2D.UI.Perspex.Desktop.Controls
         }
 
         /// <summary>
-        /// 
+        /// Draws background rectangle with specified color.
         /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="c"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
+        /// <param name="dc">The drawing context.</param>
+        /// <param name="c">The backgroud color.</param>
+        /// <param name="width">The width of background rectangle.</param>
+        /// <param name="height">The height of background rectangle.</param>
         private void DrawBackground(DrawingContext dc, ArgbColor c, double width, double height)
         {
             var color = Color.FromArgb(c.A, c.R, c.G, c.B);
@@ -246,9 +246,9 @@ namespace Core2D.UI.Perspex.Desktop.Controls
         }
 
         /// <summary>
-        /// 
+        /// Draws the current container.
         /// </summary>
-        /// <param name="dc"></param>
+        /// <param name="dc">The drawing context.</param>
         private void Draw(DrawingContext dc)
         {
             var context = this.DataContext as EditorContext;
@@ -319,9 +319,9 @@ namespace Core2D.UI.Perspex.Desktop.Controls
         }
 
         /// <summary>
-        /// 
+        /// Renders drawable control contents.
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context">The drawing context.</param>
         public override void Render(DrawingContext context)
         {
             base.Render(context);

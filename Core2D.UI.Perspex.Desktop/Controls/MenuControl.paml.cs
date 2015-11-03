@@ -14,12 +14,12 @@ using Perspex.Markup.Xaml;
 namespace Core2D.UI.Perspex.Desktop.Controls
 {
     /// <summary>
-    /// 
+    /// Interaction logic for <see cref="MenuControl"/> xaml.
     /// </summary>
     public class MenuControl : UserControl
     {
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="MenuControl"/> class.
         /// </summary>
         public MenuControl()
         {
@@ -27,7 +27,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
         }
 
         /// <summary>
-        /// 
+        /// Initialize the Xaml components.
         /// </summary>
         private void InitializeComponent()
         {

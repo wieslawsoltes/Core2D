@@ -14,12 +14,12 @@ using Perspex.Markup.Xaml;
 namespace Core2D.UI.Perspex.Desktop.Controls
 {
     /// <summary>
-    /// 
+    /// Interaction logic for <see cref="EditorControl"/> xaml.
     /// </summary>
     public class EditorControl : UserControl
     {
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="EditorControl"/> class.
         /// </summary>
         public EditorControl()
         {
@@ -27,7 +27,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
         }
 
         /// <summary>
-        /// 
+        /// Initialize the Xaml components.
         /// </summary>
         private void InitializeComponent()
         {

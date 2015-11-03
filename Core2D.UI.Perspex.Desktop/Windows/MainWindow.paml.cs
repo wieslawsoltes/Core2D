@@ -15,7 +15,7 @@ using Dependencies;
 namespace Core2D.UI.Perspex.Desktop.Windows
 {
     /// <summary>
-    /// 
+    /// Interaction logic for <see cref="MainWindow"/> xaml.
     /// </summary>
     public class MainWindow : Window, IView
     {
@@ -25,7 +25,7 @@ namespace Core2D.UI.Perspex.Desktop.Windows
         private bool _enableRecent = true;
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
         /// </summary>
         public MainWindow()
         {
@@ -37,7 +37,7 @@ namespace Core2D.UI.Perspex.Desktop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Initialize the Xaml components.
         /// </summary>
         private void InitializeComponent()
         {
@@ -57,7 +57,7 @@ namespace Core2D.UI.Perspex.Desktop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Initialize <see cref="EditorContext"/> object.
         /// </summary>
         private void InitializeContext()
         {
@@ -241,7 +241,7 @@ namespace Core2D.UI.Perspex.Desktop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Deinitialize <see cref="EditorContext"/> object.
         /// </summary>
         private void DeInitializeContext()
         {
@@ -268,9 +268,9 @@ namespace Core2D.UI.Perspex.Desktop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Get the <see cref="XImage"/> key from file path.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The image key.</returns>
         private async Task<string> OnGetImageKey()
         {
             try
@@ -301,8 +301,10 @@ namespace Core2D.UI.Perspex.Desktop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Open <see cref="Project"/> from file.
         /// </summary>
+        /// <param name="parameter"></param>
+        /// <returns>The await <see cref="Task"/>.</returns>
         private async Task OnOpen(object parameter)
         {
             try
@@ -342,7 +344,7 @@ namespace Core2D.UI.Perspex.Desktop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Save current <see cref="Project"/> to external file.
         /// </summary>
         /// <returns></returns>
         private async Task OnSave()
@@ -371,9 +373,9 @@ namespace Core2D.UI.Perspex.Desktop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Save current <see cref="Project"/> to external file.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The await <see cref="Task"/>.</returns>
         private async Task OnSaveAs()
         {
             try
@@ -404,10 +406,10 @@ namespace Core2D.UI.Perspex.Desktop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Export item object to external file.
         /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
+        /// <param name="item">The item object to export.</param>
+        /// <returns>The await <see cref="Task"/>.</returns>
         private async Task OnExport(object item)
         {
             try
@@ -480,9 +482,9 @@ namespace Core2D.UI.Perspex.Desktop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Import records into new database.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The await <see cref="Task"/>.</returns>
         private async Task OnImportData()
         {
             try
@@ -513,9 +515,9 @@ namespace Core2D.UI.Perspex.Desktop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Export records to external file.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The await <see cref="Task"/>.</returns>
         private async Task OnExportData()
         {
             try
@@ -548,9 +550,9 @@ namespace Core2D.UI.Perspex.Desktop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Update records in current database.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The await <see cref="Task"/>.</returns>
         private async Task OnUpdateData()
         {
             try
@@ -583,10 +585,11 @@ namespace Core2D.UI.Perspex.Desktop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Import item object from external file.
         /// </summary>
-        /// <param name="item"></param>
-        /// <param name="type"></param>
+        /// <param name="item">The item object to import.</param>
+        /// <param name="type">The type of item object.</param>
+        /// <returns>The await <see cref="Task"/>.</returns>
         private async Task OnImportObject(object item, ImportType type)
         {
             try
@@ -667,10 +670,11 @@ namespace Core2D.UI.Perspex.Desktop.Windows
         }
 
         /// <summary>
-        /// 
+        /// Export item object to external file.
         /// </summary>
-        /// <param name="item"></param>
-        /// <param name="type"></param>
+        /// <param name="item">The item object to export.</param>
+        /// <param name="type">The type of item object.</param>
+        /// <returns>The await <see cref="Task"/>.</returns>
         private async Task OnExportObject(object item, ExportType type)
         {
             try
