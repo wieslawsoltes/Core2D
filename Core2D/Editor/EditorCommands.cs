@@ -393,6 +393,11 @@ namespace Core2D
         /// 
         /// </summary>
         public ICommand ResetRecordCommand { get; set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommand ApplyRecordCommand { get; set; }
 
         /// <summary>
         /// 
