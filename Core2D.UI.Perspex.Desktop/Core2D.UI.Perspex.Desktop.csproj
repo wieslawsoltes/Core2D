@@ -219,6 +219,8 @@
     <Compile Include="Converters\ByteToStringConverter.cs" />
     <Compile Include="Converters\EditorToStatsMultiConverter.cs" />
     <Compile Include="Converters\EditorToTitleMultiConverter.cs" />
+    <Compile Include="Converters\IsNotNullConverter.cs" />
+    <Compile Include="Converters\IsNullConverter.cs" />
     <Compile Include="Converters\ObjectToObjectConverter.cs" />
     <Compile Include="Converters\ObjectToTypeStringConverter.cs" />
     <Compile Include="Converters\RoundedDoubleToDoubleConverter.cs" />
