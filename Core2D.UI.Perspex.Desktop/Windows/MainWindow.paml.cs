@@ -75,7 +75,7 @@ namespace Core2D.UI.Perspex.Desktop.Windows
             };
 
             _context.Renderers[0].State.EnableAutofit = true;
-            _context.InitializeEditor(new TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
+            _context.InitializeEditor(new TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName), false);
             _context.InitializeCommands();
             _context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
             _context.Editor.GetImageKey = async () => await OnGetImageKey();

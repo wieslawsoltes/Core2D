@@ -18,7 +18,8 @@
     </Window.Title>
     <Grid RowDefinitions="Auto,*,Auto">
         <controls:MenuControl Grid.Row="0"/>
-        <controls:EditorControl Grid.Row="1"/>
-        <controls:StatusControl Grid.Row="2"/>
+        <controls:EditorControl Grid.Row="1" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+        <controls:DashboardControl Grid.Row="1" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNullConverter.Instance}}"/>
+        <controls:StatusControl Grid.Row="2" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
     </Grid>
 </Window>
