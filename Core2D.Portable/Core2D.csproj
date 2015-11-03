@@ -84,6 +84,9 @@
     <Compile Include="..\Core2D\Editor\Core\PathTool.cs">
       <Link>Editor\Core\PathTool.cs</Link>
     </Compile>
+    <Compile Include="..\Core2D\Editor\Core\Recent.cs">
+      <Link>Editor\Core\Recent.cs</Link>
+    </Compile>
     <Compile Include="..\Core2D\Editor\Core\RecentProject.cs">
       <Link>Editor\Core\RecentProject.cs</Link>
     </Compile>

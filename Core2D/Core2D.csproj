@@ -57,6 +57,7 @@
     <Compile Include="Editor\Core\History.cs" />
     <Compile Include="Editor\Core\ImportType.cs" />
     <Compile Include="Editor\Core\PathTool.cs" />
+    <Compile Include="Editor\Core\Recent.cs" />
     <Compile Include="Editor\Core\RecentProject.cs" />
     <Compile Include="Editor\Core\State.cs" />
     <Compile Include="Editor\Core\Tool.cs" />
