@@ -472,6 +472,11 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        public ICommand ApplyStyleCommand { get; set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand RemoveShapeCommand { get; set; }
 
         /// <summary>
