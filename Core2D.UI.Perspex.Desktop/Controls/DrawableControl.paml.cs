@@ -141,8 +141,22 @@ namespace Core2D.UI.Perspex.Desktop.Controls
                     if (_state == null)
                         return;
 
+                    if (context == null || context.Editor == null || context.Editor.Project == null)
+                        return;
+
+                    var container = context.Editor.Project.CurrentContainer;
+                    if (container == null)
+                        return;
+
                     var p = e.GetPosition(this);
-                    _state.Wheel(p.X, p.Y, e.Delta.Y);
+                    _state.Wheel(
+                        p.X,
+                        p.Y,
+                        e.Delta.Y,
+                        this.Bounds.Width,
+                        this.Bounds.Height,
+                        container.Template.Width,
+                        container.Template.Height);
                 };
         }
 
@@ -191,7 +205,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
             if (container == null)
                 return;
 
-            _state.ResetZoom(
+            _state.CenterTo(
                 width,
                 height,
                 container.Template.Width,
@@ -220,7 +234,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
             if (container == null)
                 return;
 
-            _state.AutoFit(
+            _state.FitTo(
                 width,
                 height,
                 container.Template.Width,

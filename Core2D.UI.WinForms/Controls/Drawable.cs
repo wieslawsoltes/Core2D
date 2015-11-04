@@ -85,7 +85,18 @@ namespace Core2D.UI.WinForms
                 (sender, e) =>
                 {
                     var p = e.Location;
-                    _state.Wheel(p.X, p.Y, e.Delta);
+
+                    if (Context == null || Context.Editor.Project == null)
+                        return;
+
+                    var container = Context.Editor.Project.CurrentContainer;
+                    _state.Wheel(
+                        p.X,
+                        p.Y, e.Delta,
+                        this.Width,
+                        this.Height,
+                        container.Template.Width,
+                        container.Template.Height);
                 };
         }
 
@@ -97,7 +108,7 @@ namespace Core2D.UI.WinForms
             if (Context != null && Context.Editor.Project != null)
             {
                 var container = Context.Editor.Project.CurrentContainer;
-                _state.ResetZoom(
+                _state.CenterTo(
                     this.Width,
                     this.Height,
                     container.Template.Width,
@@ -113,7 +124,7 @@ namespace Core2D.UI.WinForms
             if (Context != null && Context.Editor.Project != null)
             {
                 var container = Context.Editor.Project.CurrentContainer;
-                _state.AutoFit(
+                _state.FitTo(
                     this.Width,
                     this.Height,
                     container.Template.Width,
@@ -179,9 +190,9 @@ namespace Core2D.UI.WinForms
         {
             var brush = new SolidBrush(
                 Color.FromArgb(
-                    c.A, 
-                    c.R, 
-                    c.G, 
+                    c.A,
+                    c.R,
+                    c.G,
                     c.B));
             var rect = Rect2.Create(0, 0, width, height);
             g.FillRectangle(
