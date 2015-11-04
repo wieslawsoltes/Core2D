@@ -20,7 +20,7 @@ namespace Core2D.UI.Perspex.Desktop.Converters
         /// <summary>
         /// Gets an instance of a <see cref="RoundedDoubleToDoubleConverter"/>.
         /// </summary>
-        public static readonly RoundedDoubleToDoubleConverter Instance = new RoundedDoubleToDoubleConverter(0);
+        public static readonly RoundedDoubleToDoubleConverter Instance = new RoundedDoubleToDoubleConverter(1);
 
         /// <summary>
         /// The number of fractional digits in the converted value.
