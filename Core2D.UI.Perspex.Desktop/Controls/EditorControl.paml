@@ -135,7 +135,7 @@
             <Grid RowDefinitions="22,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
                 <Border Classes="color" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
                     <Border.Background>
-                        <VisualBrush TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top">
+                        <VisualBrush TileMode="Tile" Stretch="None" AlignmentX="Left" AlignmentY="Top" SourceRect="0,0,20,20" DestinationRect="0,0,20,20">
                             <VisualBrush.Visual>
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel Orientation="Vertical">
