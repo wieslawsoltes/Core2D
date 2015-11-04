@@ -67,7 +67,7 @@ namespace Core2D
         public double OriginY = 0.0;
 
         /// <summary>
-        /// Initialize new instance of ZoomState class.
+        /// Initialize new instance of <see cref="ZoomState"/> class.
         /// </summary>
         /// <param name="editor">The current editor object.</param>
         public ZoomState(Editor editor)
@@ -219,7 +219,11 @@ namespace Core2D
         /// <param name="x">The X coordinate of point.</param>
         /// <param name="y">The Y coordinate of point.</param>
         /// <param name="delta">The mouse wheel delta change.</param>
-        public void Wheel(double x, double y, double delta)
+        /// <param name="pwidth">The parent panel width.</param>
+        /// <param name="pheight">The parent panel height.</param>
+        /// <param name="cwidth">The container width.</param>
+        /// <param name="cheight">The container height.</param>
+        public void Wheel(double x, double y, double delta, double pwidth, double pheight, double cwidth, double cheight)
         {
             if (_editor == null)
                 return;
@@ -229,7 +233,7 @@ namespace Core2D
             if (zoom < MinimumZoom || zoom > MaximumZoom)
                 return;
 
-            ZoomTo(zoom, x, y);
+            ZoomTo(zoom, x, y, pwidth, pheight, cwidth, cheight);
 
             _editor.Invalidate();
         }
@@ -237,28 +241,29 @@ namespace Core2D
         /// <summary>
         /// Zoom to relative point.
         /// </summary>
-        /// <param name="zoom">The new zoom value.</param>
-        /// <param name="rx">The X coordinate of relative point to zoom.</param>
-        /// <param name="ry">The Y coordinate of relative point to zoom.</param>
-        public void ZoomTo(double zoom, double rx, double ry)
+        /// <param name="zoom">The zoom value.</param>
+        /// <param name="x">The X coordinate of point to zoom.</param>
+        /// <param name="y">The Y coordinate of point to zoom.</param>
+        /// <param name="pwidth">The parent panel width.</param>
+        /// <param name="pheight">The parent panel height.</param>
+        /// <param name="cwidth">The container width.</param>
+        /// <param name="cheight">The container height.</param>
+        public void ZoomTo(double zoom, double x, double y, double pwidth, double pheight, double cwidth, double cheight)
         {
-            double ax = (rx * Zoom) + PanX;
-            double ay = (ry * Zoom) + PanY;
+            double px = (pwidth - cwidth) / 2.0;
+            double py = (pheight - cheight) / 2.0;
+            
+            double cx = x - px;
+            double cy = y - py;
+            
+            double ax = (cx * Zoom) + PanX;
+            double ay = (cy * Zoom) + PanY;
+            
             Zoom = zoom;
-            PanX = ax - (rx * Zoom);
-            PanY = ay - (ry * Zoom);
-            SetRendererZoom(Zoom);
-            SetRendererPan(PanX, PanY);
-        }
-
-        /// <summary>
-        /// Reset container zoom.
-        /// </summary>
-        public void ResetZoom()
-        {
-            Zoom = 1.0;
-            PanX = 0.0;
-            PanY = 0.0;
+            
+            PanX = ax - (cx * Zoom);
+            PanY = ay - (cy * Zoom);
+            
             SetRendererZoom(Zoom);
             SetRendererPan(PanX, PanY);
         }
@@ -266,11 +271,11 @@ namespace Core2D
         /// <summary>
         /// Reset container zoom and center container in parent panel.
         /// </summary>
-        /// <param name="pwidth">The container parent panel width.</param>
-        /// <param name="pheight">The container parent panel height.</param>
+        /// <param name="pwidth">The parent panel width.</param>
+        /// <param name="pheight">The parent panel height.</param>
         /// <param name="cwidth">The container width.</param>
         /// <param name="cheight">The container height.</param>
-        public void ResetZoom(double pwidth, double pheight, double cwidth, double cheight)
+        public void CenterTo(double pwidth, double pheight, double cwidth, double cheight)
         {
             double px = (pwidth - cwidth) / 2.0;
             double py = (pheight - cheight) / 2.0;
@@ -284,11 +289,11 @@ namespace Core2D
         /// <summary>
         /// Autofit container in parent panel.
         /// </summary>
-        /// <param name="pwidth">The container parent panel width.</param>
-        /// <param name="pheight">The container parent panel height.</param>
+        /// <param name="pwidth">The parent panel width.</param>
+        /// <param name="pheight">The parent panel height.</param>
         /// <param name="cwidth">The container width.</param>
         /// <param name="cheight">The container height.</param>
-        public void AutoFit(double pwidth, double pheight, double cwidth, double cheight)
+        public void FitTo(double pwidth, double pheight, double cwidth, double cheight)
         {
             double zoom = Math.Min(pwidth / cwidth, pheight / cheight) - 0.001;
             double px = (pwidth - (cwidth * zoom)) / 2.0;
@@ -296,6 +301,18 @@ namespace Core2D
             Zoom = zoom;
             PanX = px;
             PanY = py;
+            SetRendererZoom(Zoom);
+            SetRendererPan(PanX, PanY);
+        }
+
+        /// <summary>
+        /// Reset container pan and zoom.
+        /// </summary>
+        public void Reset()
+        {
+            Zoom = 1.0;
+            PanX = 0.0;
+            PanY = 0.0;
             SetRendererZoom(Zoom);
             SetRendererPan(PanX, PanY);
         }
