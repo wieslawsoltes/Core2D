@@ -112,7 +112,7 @@ namespace Test.Uwp
             if (_context != null && _context.Editor.Project != null)
             {
                 var container = _context.Editor.Project.CurrentContainer;
-                _state.ResetZoom(
+                _state.CenterTo(
                     canvas.ActualWidth,
                     canvas.ActualHeight,
                     container.Template.Width,
@@ -128,7 +128,7 @@ namespace Test.Uwp
             if (_context != null && _context.Editor.Project != null)
             {
                 var container = _context.Editor.Project.CurrentContainer;
-                _state.AutoFit(
+                _state.FitTo(
                     canvas.ActualWidth,
                     canvas.ActualHeight,
                     container.Template.Width,
@@ -360,7 +360,18 @@ namespace Test.Uwp
 
             if (_context.Editor.IsMoveAvailable())
             {
-                _state.Wheel(pos.X, pos.Y, delta);
+                if (_context != null && _context.Editor.Project != null)
+                {
+                    var container = _context.Editor.Project.CurrentContainer;
+                    _state.Wheel(
+                    pos.X,
+                    pos.Y,
+                    delta,
+                    canvas.ActualWidth,
+                    canvas.ActualHeight,
+                    container.Template.Width,
+                    container.Template.Height);
+                }
             }
         }
 
