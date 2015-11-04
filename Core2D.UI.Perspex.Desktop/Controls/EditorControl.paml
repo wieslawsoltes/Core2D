@@ -269,7 +269,7 @@
                     <TextBox Text="{Binding Path=FontFile, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
                     <TextBlock Text="FontSize" Classes="left" Grid.Row="3" Grid.Column="0"/>
                     <TextBox Text="{Binding Path=FontSize, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
-                    <ScrollBar Classes="slider" Minimum="0" Maximum="48" ViewportSize="1" Grid.Row="3" Grid.Column="2">
+                    <ScrollBar Classes="slider" Minimum="0" Maximum="72" ViewportSize="1" Grid.Row="3" Grid.Column="2">
                         <ScrollBar.Value>
                             <Binding SourcePropertyPath="FontSize" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                         </ScrollBar.Value>
@@ -1185,14 +1185,14 @@
                                 <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,50,*">
                                     <TextBlock Text="Width" Classes="left" Grid.Row="0" Grid.Column="0"/>
                                     <TextBox Text="{Binding Path=Width, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                                    <ScrollBar Classes="slider" Minimum="0" Maximum="4020" ViewportSize="1" Grid.Row="0" Grid.Column="2">
+                                    <ScrollBar Classes="slider" Minimum="0" Maximum="10000" ViewportSize="1" Grid.Row="0" Grid.Column="2">
                                         <ScrollBar.Value>
                                             <Binding SourcePropertyPath="Width" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                                         </ScrollBar.Value>
                                     </ScrollBar>
                                     <TextBlock Text="Height" Classes="left" Grid.Row="1" Grid.Column="0"/>
                                     <TextBox Text="{Binding Path=Height, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
-                                    <ScrollBar Classes="slider" Minimum="0" Maximum="4020" ViewportSize="1" Grid.Row="1" Grid.Column="2">
+                                    <ScrollBar Classes="slider" Minimum="0" Maximum="10000" ViewportSize="1" Grid.Row="1" Grid.Column="2">
                                         <ScrollBar.Value>
                                             <Binding SourcePropertyPath="Height" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                                         </ScrollBar.Value>
