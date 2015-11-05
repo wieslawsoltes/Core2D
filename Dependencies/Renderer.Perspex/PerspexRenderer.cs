@@ -762,26 +762,13 @@ namespace Dependencies
             var sg = new StreamGeometry();
             using (var sgc = sg.Open())
             {
-                var p1 = qbezier.Point1;
-                var p2 = qbezier.Point2;
-                var p3 = qbezier.Point3;
-                double x1 = p1.X;
-                double y1 = p1.Y;
-                double x2 = p1.X + (2.0 * (p2.X - p1.X)) / 3.0;
-                double y2 = p1.Y + (2.0 * (p2.Y - p1.Y)) / 3.0;
-                double x3 = x2 + (p3.X - p1.X) / 3.0;
-                double y3 = y2 + (p3.Y - p1.Y) / 3.0;
-                double x4 = p3.X;
-                double y4 = p3.Y;
-
                 sgc.BeginFigure(
-                    new Point(x1, y1),
+                    new Point(qbezier.Point1.X, qbezier.Point1.Y),
                     qbezier.IsFilled);
 
-                sgc.BezierTo(
-                    new Point(x2, y2),
-                    new Point(x3, y3),
-                    new Point(x4, y4));
+                sgc.QuadTo(
+                    new Point(qbezier.Point2.X, qbezier.Point2.Y),
+                    new Point(qbezier.Point3.X, qbezier.Point3.Y));
 
                 sgc.EndFigure(false);
             }
