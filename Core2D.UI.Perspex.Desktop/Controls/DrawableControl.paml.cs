@@ -97,8 +97,8 @@ namespace Core2D.UI.Perspex.Desktop.Controls
 
                     if (e.MouseButton == MouseButton.Right)
                     {
-                        this.Focus();
                         this.Cursor = new Cursor(StandardCursorType.Hand);
+                        this.Focus();
                         _state.RightDown(p.X, p.Y);
                     }
                 };
@@ -119,8 +119,8 @@ namespace Core2D.UI.Perspex.Desktop.Controls
 
                     if (e.MouseButton == MouseButton.Right)
                     {
-                        this.Focus();
                         this.Cursor = new Cursor(StandardCursorType.Arrow);
+                        this.Focus();
                         _state.RightUp(p.X, p.Y);
                     }
                 };
