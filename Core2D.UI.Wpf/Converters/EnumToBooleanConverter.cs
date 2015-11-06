@@ -2,14 +2,13 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 using System;
 using System.Globalization;
-using System.Windows.Data;
 
 namespace Core2D.UI.Wpf.Converters
 {
     /// <summary>
     /// Enum to Boolean value converter.
     /// </summary>
-    public class EnumToBooleanConverter : IValueConverter
+    public class EnumToBooleanConverter : System.Windows.Data.IValueConverter
     {
         /// <summary>
         /// Convert enum [value] to boolean, true if matches [param].
@@ -34,7 +33,7 @@ namespace Core2D.UI.Wpf.Converters
         /// <returns></returns>
         public object ConvertBack(object value, Type targetType, object param, CultureInfo culture)
         {
-            return (bool)value ? param : Binding.DoNothing;
+            return (bool)value ? param : System.Windows.Data.Binding.DoNothing;
         }
     }
 }

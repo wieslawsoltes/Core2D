@@ -17,8 +17,8 @@
     <converters:ColumnParameterConverter x:Key="ColumnParameterConverter"/>
     <converters:RecordParameterConverter x:Key="RecordParameterConverter"/>
     <converters:ValueParameterConverter x:Key="ValueParameterConverter"/>
-    <converters:ShapeBindingParameterConverter x:Key="ShapeBindingParameterConverter"/>
-    <converters:ShapePropertyParameterConverter x:Key="ShapePropertyParameterConverter"/>
+    <converters:BindingParameterConverter x:Key="BindingParameterConverter"/>
+    <converters:PropertyParameterConverter x:Key="PropertyParameterConverter"/>
     <!-- brushes -->
     <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
     <SolidColorBrush x:Key="DarkSquareColor" Color="DarkGray"/>
@@ -1250,7 +1250,7 @@
                                         Content="-" 
                                         Command="{Binding DataContext.Commands.RemoveBindingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                                         <Button.CommandParameter>
-                                            <MultiBinding Converter="{StaticResource ShapeBindingParameterConverter}">
+                                            <MultiBinding Converter="{StaticResource BindingParameterConverter}">
                                                 <Binding Path="DataContext" ElementName="bindingsItemsControls"/>
                                                 <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
                                             </MultiBinding>
@@ -1369,7 +1369,7 @@
                                         Content="-" 
                                         Command="{Binding DataContext.Commands.RemovePropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                                         <Button.CommandParameter>
-                                            <MultiBinding Converter="{StaticResource ShapePropertyParameterConverter}">
+                                            <MultiBinding Converter="{StaticResource PropertyParameterConverter}">
                                                 <Binding Path="DataContext" ElementName="propertiesItemsControls"/>
                                                 <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
                                             </MultiBinding>
@@ -3911,7 +3911,7 @@
                                         Content="-" 
                                         Command="{Binding DataContext.Commands.RemovePropertyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
                                         <Button.CommandParameter>
-                                            <MultiBinding Converter="{StaticResource ShapePropertyParameterConverter}">
+                                            <MultiBinding Converter="{StaticResource PropertyParameterConverter}">
                                                 <Binding Path="DataContext" ElementName="propertiesItemsControls"/>
                                                 <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
                                             </MultiBinding>

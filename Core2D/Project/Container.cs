@@ -15,7 +15,7 @@ namespace Core2D
         private double _width;
         private double _height;
         private ArgbColor _background;
-        private ImmutableArray<ShapeProperty> _properties;
+        private ImmutableArray<Property> _properties;
         private ImmutableArray<Layer> _layers;
         private Container _template;
         private Layer _currentLayer;
@@ -61,9 +61,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets a colletion ShapeProperty that will be used during drawing.
+        /// Gets or sets a colletion <see cref="Property"/> that will be used during drawing.
         /// </summary>
-        public ImmutableArray<ShapeProperty> Properties
+        public ImmutableArray<Property> Properties
         {
             get { return _properties; }
             set { Update(ref _properties, value); }
@@ -96,7 +96,7 @@ namespace Core2D
                     }
                     else
                     {
-                        var property = ShapeProperty.Create(name, value);
+                        var property = Property.Create(name, value);
                         Properties = Properties.Add(property);
                     }
                 }
@@ -225,7 +225,7 @@ namespace Core2D
             var container = new Container()
             {
                 Name = name,
-                Properties = ImmutableArray.Create<ShapeProperty>(),
+                Properties = ImmutableArray.Create<Property>(),
                 Layers = ImmutableArray.Create<Layer>(),
                 IsTemplate = isTemplate
             };

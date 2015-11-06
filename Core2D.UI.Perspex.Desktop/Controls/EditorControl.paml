@@ -442,7 +442,7 @@
                         <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Path" Classes="default"/>
                         <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Bindings}">
                             <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="core:ShapeBinding">
+                                <DataTemplate DataType="core:Binding">
                                     <Grid VerticalAlignment="Top">
                                         <TextBox VerticalAlignment="Center" Text="{Binding Path=Property, Mode=TwoWay}" Classes="default"/>
                                     </Grid>
@@ -451,7 +451,7 @@
                         </ItemsControl>
                         <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Path=Bindings}">
                             <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="core:ShapeBinding">
+                                <DataTemplate DataType="core:Binding">
                                     <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
                                         <TextBox VerticalAlignment="Center" Text="{Binding Path=Path, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
                                         <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1"/>
@@ -468,7 +468,7 @@
                         <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
                         <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Properties}">
                             <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="core:ShapeProperty">
+                                <DataTemplate DataType="core:Property">
                                     <Grid VerticalAlignment="Top">
                                         <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
                                     </Grid>
@@ -477,7 +477,7 @@
                         </ItemsControl>
                         <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Path=Properties}">
                             <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="core:ShapeProperty">
+                                <DataTemplate DataType="core:Property">
                                     <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
                                         <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
                                         <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1"/>
@@ -820,7 +820,7 @@
                                     <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
                                     <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=ShapesProperties}">
                                         <ItemsControl.DataTemplates>
-                                            <DataTemplate DataType="core:ShapeProperty">
+                                            <DataTemplate DataType="core:Property">
                                                 <Grid VerticalAlignment="Top">
                                                     <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
                                                 </Grid>
@@ -829,7 +829,7 @@
                                     </ItemsControl>
                                     <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Path=ShapesProperties}">
                                         <ItemsControl.DataTemplates>
-                                            <DataTemplate DataType="core:ShapeProperty">
+                                            <DataTemplate DataType="core:Property">
                                                 <Grid VerticalAlignment="Top">
                                                     <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}" Classes="default"/>
                                                 </Grid>
@@ -1212,7 +1212,7 @@
                         <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
                         <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Properties}">
                             <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="core:ShapeProperty">
+                                <DataTemplate DataType="core:Property">
                                     <Grid VerticalAlignment="Top">
                                         <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
                                     </Grid>
@@ -1221,7 +1221,7 @@
                         </ItemsControl>
                         <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Path=Properties}">
                             <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="core:ShapeProperty">
+                                <DataTemplate DataType="core:Property">
                                     <Grid VerticalAlignment="Top">
                                         <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}" Classes="default"/>
                                     </Grid>

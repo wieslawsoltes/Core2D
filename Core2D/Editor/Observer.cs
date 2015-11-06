@@ -1557,7 +1557,7 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="binding"></param>
-        public void Add(ShapeBinding binding)
+        public void Add(Binding binding)
         {
             if (binding == null)
                 return;
@@ -1570,7 +1570,7 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="binding"></param>
-        public void Remove(ShapeBinding binding)
+        public void Remove(Binding binding)
         {
             if (binding == null)
                 return;
@@ -1583,7 +1583,7 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="property"></param>
-        public void Add(ShapeProperty property)
+        public void Add(Property property)
         {
             if (property == null)
                 return;
@@ -1596,7 +1596,7 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="property"></param>
-        public void Remove(ShapeProperty property)
+        public void Remove(Property property)
         {
             if (property == null)
                 return;
@@ -1939,7 +1939,7 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="bindings"></param>
-        public void Add(IEnumerable<ShapeBinding> bindings)
+        public void Add(IEnumerable<Binding> bindings)
         {
             if (bindings == null)
                 return;
@@ -1954,7 +1954,7 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="bindings"></param>
-        public void Remove(IEnumerable<ShapeBinding> bindings)
+        public void Remove(IEnumerable<Binding> bindings)
         {
             if (bindings == null)
                 return;
@@ -1969,7 +1969,7 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="properties"></param>
-        public void Add(IEnumerable<ShapeProperty> properties)
+        public void Add(IEnumerable<Property> properties)
         {
             if (properties == null)
                 return;
@@ -1984,7 +1984,7 @@ namespace Core2D
         /// 
         /// </summary>
         /// <param name="properties"></param>
-        public void Remove(IEnumerable<ShapeProperty> properties)
+        public void Remove(IEnumerable<Property> properties)
         {
             if (properties == null)
                 return;

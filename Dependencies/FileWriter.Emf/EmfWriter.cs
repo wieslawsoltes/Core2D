@@ -33,7 +33,7 @@ namespace Dependencies
         public MemoryStream MakeMetafileStream(
             Bitmap bitmap,
             IEnumerable<BaseShape> shapes,
-            ImmutableArray<ShapeProperty> properties,
+            ImmutableArray<Property> properties,
             IImageCache ic)
         {
             var g = default(Graphics);
@@ -162,7 +162,7 @@ namespace Dependencies
             IEnumerable<BaseShape> shapes,
             double width,
             double height,
-            ImmutableArray<ShapeProperty> properties,
+            ImmutableArray<Property> properties,
             IImageCache ic)
         {
             try

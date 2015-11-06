@@ -154,59 +154,9 @@ namespace Core2D
         public Func<Task<string>> GetImageKey { get; set; }
 
         /// <summary>
-        /// 
+        /// Gets or sets editor tool helpers dictionary.
         /// </summary>
-        public SelectionHelper SelectionHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public PointHelper PointHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public LineHelper LineHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ArcHelper ArcHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public BezierHelper BezierHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public QBezierHelper QBezierHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public PathHelper PathHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public RectangleHelper RectangleHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public EllipseHelper EllipseHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public TextHelper TextHelper { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ImageHelper ImageHelper { get; set; }
+        public ImmutableDictionary<Tool, Helper> Helpers { get; set; }
 
         /// <summary>
         /// Creates a new <see cref="Editor"/> instance.
@@ -233,6 +183,21 @@ namespace Core2D
                 EnableObserver = enableObserver,
                 EnableHistory = enableHistory
             };
+
+            var helpers = ImmutableDictionary.CreateBuilder<Tool, Helper>();
+            helpers.Add(Tool.None, new NoneHelper(editor));
+            helpers.Add(Tool.Selection, new SelectionHelper(editor));
+            helpers.Add(Tool.Point, new PointHelper(editor));
+            helpers.Add(Tool.Line, new LineHelper(editor));
+            helpers.Add(Tool.Arc, new ArcHelper(editor));
+            helpers.Add(Tool.Bezier, new BezierHelper(editor));
+            helpers.Add(Tool.QBezier, new QBezierHelper(editor));
+            helpers.Add(Tool.Path, new PathHelper(editor));
+            helpers.Add(Tool.Rectangle, new RectangleHelper(editor));
+            helpers.Add(Tool.Ellipse, new EllipseHelper(editor));
+            helpers.Add(Tool.Text, new TextHelper(editor));
+            helpers.Add(Tool.Image, new ImageHelper(editor));
+            editor.Helpers = helpers.ToImmutable();
 
             editor.Project = project;
             editor.ProjectPath = string.Empty;
@@ -262,18 +227,6 @@ namespace Core2D
             {
                 editor.History = new History();
             }
-
-            editor.SelectionHelper = new SelectionHelper(editor);
-            editor.PointHelper = new PointHelper(editor);
-            editor.LineHelper = new LineHelper(editor);
-            editor.ArcHelper = new ArcHelper(editor);
-            editor.BezierHelper = new BezierHelper(editor);
-            editor.QBezierHelper = new QBezierHelper(editor);
-            editor.PathHelper = new PathHelper(editor);
-            editor.RectangleHelper = new RectangleHelper(editor);
-            editor.EllipseHelper = new EllipseHelper(editor);
-            editor.TextHelper = new TextHelper(editor);
-            editor.ImageHelper = new ImageHelper(editor);
 
             return editor;
         }
@@ -1020,7 +973,7 @@ namespace Core2D
         /// </summary>
         /// <param name="data"></param>
         /// <param name="property"></param>
-        public void AddProperty(Data data, ShapeProperty property)
+        public void AddProperty(Data data, Property property)
         {
             if (_enableHistory)
             {
@@ -1040,7 +993,7 @@ namespace Core2D
         /// </summary>
         /// <param name="data"></param>
         /// <param name="binding"></param>
-        public void AddBinding(Data data, ShapeBinding binding)
+        public void AddBinding(Data data, Binding binding)
         {
             if (_enableHistory)
             {
@@ -1060,7 +1013,7 @@ namespace Core2D
         /// </summary>
         /// <param name="container"></param>
         /// <param name="property"></param>
-        public void AddProperty(Container container, ShapeProperty property)
+        public void AddProperty(Container container, Property property)
         {
             var previous = container.Properties;
 
@@ -1203,10 +1156,10 @@ namespace Core2D
                 var data = owner as Data;
                 if (data.Bindings == null)
                 {
-                    data.Bindings = ImmutableArray.Create<ShapeBinding>();
+                    data.Bindings = ImmutableArray.Create<Binding>();
                 }
 
-                AddBinding(data, ShapeBinding.Create(property, path));
+                AddBinding(data, Binding.Create(property, path));
             }
         }
 
@@ -1225,20 +1178,20 @@ namespace Core2D
                     var data = owner as Data;
                     if (data.Properties == null)
                     {
-                        data.Properties = ImmutableArray.Create<ShapeProperty>();
+                        data.Properties = ImmutableArray.Create<Property>();
                     }
 
-                    AddProperty(data, ShapeProperty.Create(name, value));
+                    AddProperty(data, Property.Create(name, value));
                 }
                 else if (owner is Container)
                 {
                     var container = owner as Container;
                     if (container.Properties == null)
                     {
-                        container.Properties = ImmutableArray.Create<ShapeProperty>();
+                        container.Properties = ImmutableArray.Create<Property>();
                     }
 
-                    AddProperty(container, ShapeProperty.Create(name, value));
+                    AddProperty(container, Property.Create(name, value));
                 }
             }
         }
@@ -1681,10 +1634,10 @@ namespace Core2D
         /// <param name="parameter"></param>
         public void RemoveBinding(object parameter)
         {
-            if (parameter != null && parameter is ShapeBindingParameter)
+            if (parameter != null && parameter is BindingParameter)
             {
-                var owner = (parameter as ShapeBindingParameter).Owner;
-                var binding = (parameter as ShapeBindingParameter).Binding;
+                var owner = (parameter as BindingParameter).Owner;
+                var binding = (parameter as BindingParameter).Binding;
 
                 if (owner != null && owner is Data)
                 {
@@ -1713,10 +1666,10 @@ namespace Core2D
         /// <param name="parameter"></param>
         public void RemoveProperty(object parameter)
         {
-            if (parameter != null && parameter is ShapePropertyParameter)
+            if (parameter != null && parameter is PropertyParameter)
             {
-                var owner = (parameter as ShapePropertyParameter).Owner;
-                var property = (parameter as ShapePropertyParameter).Property;
+                var owner = (parameter as PropertyParameter).Owner;
+                var property = (parameter as PropertyParameter).Property;
 
                 if (owner is Data)
                 {
@@ -3128,66 +3081,7 @@ namespace Core2D
         /// <param name="y"></param>
         public void LeftDown(double x, double y)
         {
-            switch (CurrentTool)
-            {
-                case Tool.None:
-                    break;
-                case Tool.Selection:
-                    {
-                        SelectionHelper.LeftDown(x, y);
-                    }
-                    break;
-                case Tool.Point:
-                    {
-                        PointHelper.LeftDown(x, y);
-                    }
-                    break;
-                case Tool.Line:
-                    {
-                        LineHelper.LeftDown(x, y);
-                    }
-                    break;
-                case Tool.Rectangle:
-                    {
-                        RectangleHelper.LeftDown(x, y);
-                    }
-                    break;
-                case Tool.Ellipse:
-                    {
-                        EllipseHelper.LeftDown(x, y);
-                    }
-                    break;
-                case Tool.Arc:
-                    {
-                        ArcHelper.LeftDown(x, y);
-                    }
-                    break;
-                case Tool.Bezier:
-                    {
-                        BezierHelper.LeftDown(x, y);
-                    }
-                    break;
-                case Tool.QBezier:
-                    {
-                        QBezierHelper.LeftDown(x, y);
-                    }
-                    break;
-                case Tool.Text:
-                    {
-                        TextHelper.LeftDown(x, y);
-                    }
-                    break;
-                case Tool.Image:
-                    {
-                        ImageHelper.LeftDown(x, y);
-                    }
-                    break;
-                case Tool.Path:
-                    {
-                        PathHelper.LeftDown(x, y);
-                    }
-                    break;
-            }
+            Helpers[CurrentTool].LeftDown(x, y);
         }
 
         /// <summary>
@@ -3197,66 +3091,7 @@ namespace Core2D
         /// <param name="y"></param>
         public void LeftUp(double x, double y)
         {
-            switch (CurrentTool)
-            {
-                case Tool.None:
-                    break;
-                case Tool.Selection:
-                    {
-                        SelectionHelper.LeftUp(x, y);
-                    }
-                    break;
-                case Tool.Point:
-                    {
-                        PointHelper.LeftUp(x, y);
-                    }
-                    break;
-                case Tool.Line:
-                    {
-                        LineHelper.LeftUp(x, y);
-                    }
-                    break;
-                case Tool.Rectangle:
-                    {
-                        RectangleHelper.LeftUp(x, y);
-                    }
-                    break;
-                case Tool.Ellipse:
-                    {
-                        EllipseHelper.LeftUp(x, y);
-                    }
-                    break;
-                case Tool.Arc:
-                    {
-                        ArcHelper.LeftUp(x, y);
-                    }
-                    break;
-                case Tool.Bezier:
-                    {
-                        BezierHelper.LeftUp(x, y);
-                    }
-                    break;
-                case Tool.QBezier:
-                    {
-                        QBezierHelper.LeftUp(x, y);
-                    }
-                    break;
-                case Tool.Text:
-                    {
-                        TextHelper.LeftUp(x, y);
-                    }
-                    break;
-                case Tool.Image:
-                    {
-                        ImageHelper.LeftUp(x, y);
-                    }
-                    break;
-                case Tool.Path:
-                    {
-                        PathHelper.LeftUp(x, y);
-                    }
-                    break;
-            }
+            Helpers[CurrentTool].LeftUp(x, y);
         }
 
         /// <summary>
@@ -3266,66 +3101,7 @@ namespace Core2D
         /// <param name="y"></param>
         public void RightDown(double x, double y)
         {
-            switch (CurrentTool)
-            {
-                case Tool.None:
-                    break;
-                case Tool.Selection:
-                    {
-                        SelectionHelper.RightDown(x, y);
-                    }
-                    break;
-                case Tool.Point:
-                    {
-                        PointHelper.RightDown(x, y);
-                    }
-                    break;
-                case Tool.Line:
-                    {
-                        LineHelper.RightDown(x, y);
-                    }
-                    break;
-                case Tool.Rectangle:
-                    {
-                        RectangleHelper.RightDown(x, y);
-                    }
-                    break;
-                case Tool.Ellipse:
-                    {
-                        EllipseHelper.RightDown(x, y);
-                    }
-                    break;
-                case Tool.Arc:
-                    {
-                        ArcHelper.RightDown(x, y);
-                    }
-                    break;
-                case Tool.Bezier:
-                    {
-                        BezierHelper.RightDown(x, y);
-                    }
-                    break;
-                case Tool.QBezier:
-                    {
-                        QBezierHelper.RightDown(x, y);
-                    }
-                    break;
-                case Tool.Text:
-                    {
-                        TextHelper.RightDown(x, y);
-                    }
-                    break;
-                case Tool.Image:
-                    {
-                        ImageHelper.RightDown(x, y);
-                    }
-                    break;
-                case Tool.Path:
-                    {
-                        PathHelper.RightDown(x, y);
-                    }
-                    break;
-            }
+            Helpers[CurrentTool].RightDown(x, y);
         }
 
         /// <summary>
@@ -3335,66 +3111,7 @@ namespace Core2D
         /// <param name="y"></param>
         public void RightUp(double x, double y)
         {
-            switch (CurrentTool)
-            {
-                case Tool.None:
-                    break;
-                case Tool.Selection:
-                    {
-                        SelectionHelper.RightUp(x, y);
-                    }
-                    break;
-                case Tool.Point:
-                    {
-                        PointHelper.RightUp(x, y);
-                    }
-                    break;
-                case Tool.Line:
-                    {
-                        LineHelper.RightUp(x, y);
-                    }
-                    break;
-                case Tool.Rectangle:
-                    {
-                        RectangleHelper.RightUp(x, y);
-                    }
-                    break;
-                case Tool.Ellipse:
-                    {
-                        EllipseHelper.RightUp(x, y);
-                    }
-                    break;
-                case Tool.Arc:
-                    {
-                        ArcHelper.RightUp(x, y);
-                    }
-                    break;
-                case Tool.Bezier:
-                    {
-                        BezierHelper.RightUp(x, y);
-                    }
-                    break;
-                case Tool.QBezier:
-                    {
-                        QBezierHelper.RightUp(x, y);
-                    }
-                    break;
-                case Tool.Text:
-                    {
-                        TextHelper.RightUp(x, y);
-                    }
-                    break;
-                case Tool.Image:
-                    {
-                        ImageHelper.RightUp(x, y);
-                    }
-                    break;
-                case Tool.Path:
-                    {
-                        PathHelper.RightUp(x, y);
-                    }
-                    break;
-            }
+            Helpers[CurrentTool].RightUp(x, y);
         }
 
         /// <summary>
@@ -3404,66 +3121,7 @@ namespace Core2D
         /// <param name="y"></param>
         public void Move(double x, double y)
         {
-            switch (CurrentTool)
-            {
-                case Tool.None:
-                    break;
-                case Tool.Selection:
-                    {
-                        SelectionHelper.Move(x, y);
-                    }
-                    break;
-                case Tool.Point:
-                    {
-                        PointHelper.Move(x, y);
-                    }
-                    break;
-                case Tool.Line:
-                    {
-                        LineHelper.Move(x, y);
-                    }
-                    break;
-                case Tool.Rectangle:
-                    {
-                        RectangleHelper.Move(x, y);
-                    }
-                    break;
-                case Tool.Ellipse:
-                    {
-                        EllipseHelper.Move(x, y);
-                    }
-                    break;
-                case Tool.Arc:
-                    {
-                        ArcHelper.Move(x, y);
-                    }
-                    break;
-                case Tool.Bezier:
-                    {
-                        BezierHelper.Move(x, y);
-                    }
-                    break;
-                case Tool.QBezier:
-                    {
-                        QBezierHelper.Move(x, y);
-                    }
-                    break;
-                case Tool.Text:
-                    {
-                        TextHelper.Move(x, y);
-                    }
-                    break;
-                case Tool.Image:
-                    {
-                        ImageHelper.Move(x, y);
-                    }
-                    break;
-                case Tool.Path:
-                    {
-                        PathHelper.Move(x, y);
-                    }
-                    break;
-            }
+            Helpers[CurrentTool].Move(x, y);
         }
     }
 }

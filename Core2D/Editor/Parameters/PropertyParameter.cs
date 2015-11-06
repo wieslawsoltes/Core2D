@@ -5,18 +5,18 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// The <see cref="Core2D.ShapeProperty"/> command parameter object.
+    /// The <see cref="Property"/> command parameter object.
     /// </summary>
-    public class ShapePropertyParameter
+    public class PropertyParameter
     {
         /// <summary>
-        /// Gets or sets the <see cref="Core2D.ShapeProperty"/> object owner.
+        /// Gets or sets the <see cref="Property"/> object owner.
         /// </summary>
         public object Owner { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="Core2D.ShapeProperty"/> object.
+        /// Gets or sets the <see cref="Property"/> object.
         /// </summary>
-        public ShapeProperty Property { get; set; }
+        public Property Property { get; set; }
     }
 }

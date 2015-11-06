@@ -9,10 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
-using Core2D;
 
 namespace Core2D.UI.Wpf.Controls
 {
@@ -117,7 +115,7 @@ namespace Core2D.UI.Wpf.Controls
                     {
                         Header = column.Name,
                         Width = column.Width,
-                        DisplayMemberBinding = new Binding("Values[" + i + "].Content")
+                        DisplayMemberBinding = new System.Windows.Data.Binding("Values[" + i + "].Content")
                     };
                     gv.Columns.Add(gvc);
                 }

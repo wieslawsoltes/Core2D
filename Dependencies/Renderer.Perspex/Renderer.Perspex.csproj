@@ -32,49 +32,49 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Perspex.Animation">
-      <HintPath>..\..\packages\Perspex.9999.0.717-nightly\lib\portable-windows8+net45\Perspex.Animation.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.722-nightly\lib\portable-windows8+net45\Perspex.Animation.dll</HintPath>
     </Reference>
     <Reference Include="Perspex.Application">
-      <HintPath>..\..\packages\Perspex.9999.0.717-nightly\lib\portable-windows8+net45\Perspex.Application.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.722-nightly\lib\portable-windows8+net45\Perspex.Application.dll</HintPath>
     </Reference>
     <Reference Include="Perspex.Base">
-      <HintPath>..\..\packages\Perspex.9999.0.717-nightly\lib\portable-windows8+net45\Perspex.Base.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.722-nightly\lib\portable-windows8+net45\Perspex.Base.dll</HintPath>
     </Reference>
     <Reference Include="Perspex.Controls">
-      <HintPath>..\..\packages\Perspex.9999.0.717-nightly\lib\portable-windows8+net45\Perspex.Controls.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.722-nightly\lib\portable-windows8+net45\Perspex.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Perspex.Diagnostics">
-      <HintPath>..\..\packages\Perspex.9999.0.717-nightly\lib\portable-windows8+net45\Perspex.Diagnostics.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.722-nightly\lib\portable-windows8+net45\Perspex.Diagnostics.dll</HintPath>
     </Reference>
     <Reference Include="Perspex.HtmlRenderer">
-      <HintPath>..\..\packages\Perspex.9999.0.717-nightly\lib\portable-windows8+net45\Perspex.HtmlRenderer.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.722-nightly\lib\portable-windows8+net45\Perspex.HtmlRenderer.dll</HintPath>
     </Reference>
     <Reference Include="Perspex.Input">
-      <HintPath>..\..\packages\Perspex.9999.0.717-nightly\lib\portable-windows8+net45\Perspex.Input.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.722-nightly\lib\portable-windows8+net45\Perspex.Input.dll</HintPath>
     </Reference>
     <Reference Include="Perspex.Interactivity">
-      <HintPath>..\..\packages\Perspex.9999.0.717-nightly\lib\portable-windows8+net45\Perspex.Interactivity.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.722-nightly\lib\portable-windows8+net45\Perspex.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="Perspex.Layout">
-      <HintPath>..\..\packages\Perspex.9999.0.717-nightly\lib\portable-windows8+net45\Perspex.Layout.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.722-nightly\lib\portable-windows8+net45\Perspex.Layout.dll</HintPath>
     </Reference>
     <Reference Include="Perspex.Markup">
-      <HintPath>..\..\packages\Perspex.9999.0.717-nightly\lib\portable-windows8+net45\Perspex.Markup.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.722-nightly\lib\portable-windows8+net45\Perspex.Markup.dll</HintPath>
     </Reference>
     <Reference Include="Perspex.Markup.Xaml">
-      <HintPath>..\..\packages\Perspex.9999.0.717-nightly\lib\portable-windows8+net45\Perspex.Markup.Xaml.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.722-nightly\lib\portable-windows8+net45\Perspex.Markup.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="Perspex.ReactiveUI">
-      <HintPath>..\..\packages\Perspex.9999.0.717-nightly\lib\portable-windows8+net45\Perspex.ReactiveUI.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.722-nightly\lib\portable-windows8+net45\Perspex.ReactiveUI.dll</HintPath>
     </Reference>
     <Reference Include="Perspex.SceneGraph">
-      <HintPath>..\..\packages\Perspex.9999.0.717-nightly\lib\portable-windows8+net45\Perspex.SceneGraph.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.722-nightly\lib\portable-windows8+net45\Perspex.SceneGraph.dll</HintPath>
     </Reference>
     <Reference Include="Perspex.Styling">
-      <HintPath>..\..\packages\Perspex.9999.0.717-nightly\lib\portable-windows8+net45\Perspex.Styling.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.722-nightly\lib\portable-windows8+net45\Perspex.Styling.dll</HintPath>
     </Reference>
     <Reference Include="Perspex.Themes.Default">
-      <HintPath>..\..\packages\Perspex.9999.0.717-nightly\lib\portable-windows8+net45\Perspex.Themes.Default.dll</HintPath>
+      <HintPath>..\..\packages\Perspex.9999.0.722-nightly\lib\portable-windows8+net45\Perspex.Themes.Default.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Serilog.1.5.9\lib\net45\Serilog.dll</HintPath>

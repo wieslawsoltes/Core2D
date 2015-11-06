@@ -62,7 +62,7 @@ namespace Core2D
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
 
@@ -125,7 +125,7 @@ namespace Core2D
         /// <param name="value"></param>
         /// <returns></returns>
         private static bool TryToBind(
-            ImmutableArray<ShapeBinding> bindings,
+            ImmutableArray<Binding> bindings,
             Record r,
             string propertyName,
             out string value)
@@ -174,8 +174,8 @@ namespace Core2D
         /// <param name="value"></param>
         /// <returns></returns>
         private static bool TryToBind(
-            ImmutableArray<ShapeBinding> bindings,
-            ImmutableArray<ShapeProperty> db,
+            ImmutableArray<Binding> bindings,
+            ImmutableArray<Property> db,
             string propertyName,
             out string value)
         {
@@ -204,7 +204,7 @@ namespace Core2D
         /// </summary>
         /// <param name="properties"></param>
         /// <returns></returns>
-        private static object[] ToArgs(ImmutableArray<ShapeProperty> properties)
+        private static object[] ToArgs(ImmutableArray<Property> properties)
         {
             return properties.Where(x => x != null).Select(x => x.Value).ToArray();
         }
@@ -215,7 +215,7 @@ namespace Core2D
         /// <param name="db"></param>
         /// <param name="r"></param>
         /// <returns></returns>
-        public string BindToTextProperty(ImmutableArray<ShapeProperty> db, Record r)
+        public string BindToTextProperty(ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
 
@@ -292,8 +292,8 @@ namespace Core2D
                 IsStroked = isStroked,
                 Data = new Data()
                 {
-                    Bindings = ImmutableArray.Create<ShapeBinding>(),
-                    Properties = ImmutableArray.Create<ShapeProperty>()
+                    Bindings = ImmutableArray.Create<Binding>(),
+                    Properties = ImmutableArray.Create<Property>()
                 },
                 TopLeft = XPoint.Create(x1, y1, point),
                 BottomRight = XPoint.Create(x2, y2, point),
@@ -350,8 +350,8 @@ namespace Core2D
                 IsStroked = isStroked,
                 Data = new Data()
                 {
-                    Bindings = ImmutableArray.Create<ShapeBinding>(),
-                    Properties = ImmutableArray.Create<ShapeProperty>()
+                    Bindings = ImmutableArray.Create<Binding>(),
+                    Properties = ImmutableArray.Create<Property>()
                 },
                 TopLeft = topLeft,
                 BottomRight = bottomRight,

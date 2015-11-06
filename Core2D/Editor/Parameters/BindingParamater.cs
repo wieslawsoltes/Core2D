@@ -5,18 +5,18 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// The <see cref="Core2D.ShapeBinding"/> command parameter object.
+    /// The <see cref="Binding"/> command parameter object.
     /// </summary>
-    public class ShapeBindingParameter
+    public class BindingParameter
     {
         /// <summary>
-        /// Gets or sets the <see cref="Core2D.ShapeBinding"/> object owner.
+        /// Gets or sets the <see cref="Binding"/> object owner.
         /// </summary>
         public object Owner { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="Core2D.ShapeBinding"/> object.
+        /// Gets or sets the <see cref="Binding"/> object.
         /// </summary>
-        public ShapeBinding Binding { get; set; }
+        public Binding Binding { get; set; }
     }
 }

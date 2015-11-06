@@ -226,7 +226,7 @@ namespace Test.Uwp
             }
         }
 
-        public void Draw(object ds, Container container, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object ds, Container container, ImmutableArray<Property> db, Record r)
         {
             foreach (var layer in container.Layers)
             {
@@ -237,7 +237,7 @@ namespace Test.Uwp
             }
         }
 
-        public void Draw(object ds, Layer layer, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object ds, Layer layer, ImmutableArray<Property> db, Record r)
         {
             foreach (var shape in layer.Shapes)
             {
@@ -248,7 +248,7 @@ namespace Test.Uwp
             }
         }
 
-        public void Draw(object ds, XLine line, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object ds, XLine line, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             // TODO: Finish draw line implementation.
             var _ds = ds as CanvasDrawingSession;
@@ -392,7 +392,7 @@ namespace Test.Uwp
             ssLine.Dispose();
         }
 
-        public void Draw(object ds, XRectangle rectangle, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object ds, XRectangle rectangle, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _ds = ds as CanvasDrawingSession;
 
@@ -432,7 +432,7 @@ namespace Test.Uwp
             ss.Dispose();
         }
 
-        public void Draw(object ds, XEllipse ellipse, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object ds, XEllipse ellipse, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _ds = ds as CanvasDrawingSession;
 
@@ -459,7 +459,7 @@ namespace Test.Uwp
             ss.Dispose();
         }
 
-        public void Draw(object ds, XArc arc, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object ds, XArc arc, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var a = WpfArc.FromXArc(arc, dx, dy);
 
@@ -501,7 +501,7 @@ namespace Test.Uwp
             ss.Dispose();
         }
 
-        public void Draw(object ds, XBezier bezier, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object ds, XBezier bezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _ds = ds as CanvasDrawingSession;
 
@@ -542,7 +542,7 @@ namespace Test.Uwp
             ss.Dispose();
         }
 
-        public void Draw(object ds, XQBezier qbezier, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object ds, XQBezier qbezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _ds = ds as CanvasDrawingSession;
 
@@ -580,7 +580,7 @@ namespace Test.Uwp
             ss.Dispose();
         }
 
-        public void Draw(object ds, XText text, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object ds, XText text, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _ds = ds as CanvasDrawingSession;
 
@@ -662,7 +662,7 @@ namespace Test.Uwp
             format.Dispose();
         }
 
-        public void Draw(object ds, XImage image, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object ds, XImage image, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _ds = ds as CanvasDrawingSession;
 
@@ -718,7 +718,7 @@ namespace Test.Uwp
             }
         }
 
-        public void Draw(object ds, XPath path, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object ds, XPath path, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _ds = ds as CanvasDrawingSession;
 

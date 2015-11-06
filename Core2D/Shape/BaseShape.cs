@@ -96,7 +96,7 @@ namespace Core2D
         /// <param name="dy">The Y axis draw position offset.</param>
         /// <param name="db">The properties database used for binding.</param>
         /// <param name="r">The external data record used for binding.</param>
-        public abstract void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r);
+        public abstract void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r);
 
         /// <summary>
         /// Move shape position using dx,dy offset.

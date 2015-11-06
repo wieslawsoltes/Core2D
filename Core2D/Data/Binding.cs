@@ -8,7 +8,7 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    public class ShapeBinding : ObservableObject
+    public class Binding : ObservableObject
     {
         private string _property;
         private string _path;
@@ -32,14 +32,14 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new <see cref="ShapeBinding"/> instance.
+        /// Creates a new <see cref="Binding"/> instance.
         /// </summary>
         /// <param name="property"></param>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static ShapeBinding Create(string property, string path)
+        public static Binding Create(string property, string path)
         {
-            return new ShapeBinding()
+            return new Binding()
             {
                 Property = property,
                 Path = path

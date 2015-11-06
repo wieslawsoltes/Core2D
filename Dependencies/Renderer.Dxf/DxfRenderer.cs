@@ -580,7 +580,7 @@ namespace Dependencies
         /// <param name="container"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Core2D.Container container, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
+        public void Draw(object doc, Core2D.Container container, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             var _doc = doc as DxfDocument;
 
@@ -606,7 +606,7 @@ namespace Dependencies
         /// <param name="layer"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Core2D.Layer layer, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
+        public void Draw(object doc, Core2D.Layer layer, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             var _doc = doc as DxfDocument;
 
@@ -628,7 +628,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XLine line, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
+        public void Draw(object doc, Core2D.XLine line, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!line.IsStroked)
                 return;
@@ -670,7 +670,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XRectangle rectangle, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
+        public void Draw(object doc, Core2D.XRectangle rectangle, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!rectangle.IsStroked && !rectangle.IsFilled && !rectangle.IsGrid)
                 return;
@@ -702,7 +702,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XEllipse ellipse, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
+        public void Draw(object doc, Core2D.XEllipse ellipse, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!ellipse.IsStroked && !ellipse.IsFilled)
                 return;
@@ -723,7 +723,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XArc arc, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
+        public void Draw(object doc, Core2D.XArc arc, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             var _doc = doc as DxfDocument;
             var style = arc.Style;
@@ -778,7 +778,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XBezier bezier, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
+        public void Draw(object doc, Core2D.XBezier bezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!bezier.IsStroked && !bezier.IsFilled)
                 return;
@@ -843,7 +843,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XQBezier qbezier, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
+        public void Draw(object doc, Core2D.XQBezier qbezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!qbezier.IsStroked && !qbezier.IsFilled)
                 return;
@@ -906,7 +906,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XText text, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
+        public void Draw(object doc, Core2D.XText text, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             var _doc = doc as DxfDocument;
 
@@ -1035,7 +1035,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XImage image, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
+        public void Draw(object doc, Core2D.XImage image, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             var _doc = doc as DxfDocument;
 
@@ -1086,7 +1086,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XPath path, double dx, double dy, ImmutableArray<Core2D.ShapeProperty> db, Core2D.Record r)
+        public void Draw(object doc, Core2D.XPath path, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!path.IsStroked && !path.IsFilled)
                 return;

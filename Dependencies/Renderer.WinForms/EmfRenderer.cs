@@ -327,7 +327,7 @@ namespace Dependencies
         /// <param name="container"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Container container, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object gfx, Container container, ImmutableArray<Property> db, Record r)
         {
             // NOTE: Template background is drawn in drawable control.
             //var template = container.Template;
@@ -353,7 +353,7 @@ namespace Dependencies
         /// <param name="layer"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, Layer layer, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object gfx, Layer layer, ImmutableArray<Property> db, Record r)
         {
             foreach (var shape in layer.Shapes)
             {
@@ -373,7 +373,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, XLine line, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object gfx, XLine line, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = gfx as Graphics;
 
@@ -553,7 +553,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, XRectangle rectangle, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object gfx, XRectangle rectangle, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = gfx as Graphics;
 
@@ -609,7 +609,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, XEllipse ellipse, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object gfx, XEllipse ellipse, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = gfx as Graphics;
 
@@ -654,7 +654,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, XArc arc, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object gfx, XArc arc, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var a = GdiArc.FromXArc(arc, dx, dy);
             if (a.Width <= 0.0 || a.Height <= 0.0)
@@ -703,7 +703,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, XBezier bezier, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object gfx, XBezier bezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = gfx as Graphics;
 
@@ -752,7 +752,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, XQBezier qbezier, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object gfx, XQBezier qbezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = gfx as Graphics;
 
@@ -810,7 +810,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, XText text, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object gfx, XText text, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = gfx as Graphics;
 
@@ -907,7 +907,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, XImage image, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object gfx, XImage image, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = gfx as Graphics;
 
@@ -980,7 +980,7 @@ namespace Dependencies
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public void Draw(object gfx, XPath path, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public void Draw(object gfx, XPath path, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = gfx as Graphics;
 

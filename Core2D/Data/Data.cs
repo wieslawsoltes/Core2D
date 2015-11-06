@@ -11,23 +11,23 @@ namespace Core2D
     /// </summary>
     public class Data : ObservableObject
     {
-        private ImmutableArray<ShapeBinding> _bindings;
-        private ImmutableArray<ShapeProperty> _properties;
+        private ImmutableArray<Binding> _bindings;
+        private ImmutableArray<Property> _properties;
         private Record _record;
 
         /// <summary>
-        /// Gets or sets a colletion ShapeBinding that will be used during drawing.
+        /// Gets or sets a colletion <see cref="Binding"/> that will be used during drawing.
         /// </summary>
-        public ImmutableArray<ShapeBinding> Bindings
+        public ImmutableArray<Binding> Bindings
         {
             get { return _bindings; }
             set { Update(ref _bindings, value); }
         }
 
         /// <summary>
-        /// Gets or sets a colletion ShapeProperty that will be used during drawing.
+        /// Gets or sets a colletion <see cref="Property"/> that will be used during drawing.
         /// </summary>
-        public ImmutableArray<ShapeProperty> Properties
+        public ImmutableArray<Property> Properties
         {
             get { return _properties; }
             set { Update(ref _properties, value); }
@@ -69,7 +69,7 @@ namespace Core2D
                     }
                     else
                     {
-                        var property = ShapeProperty.Create(name, value);
+                        var property = Property.Create(name, value);
                         Properties = Properties.Add(property);
                     }
                 }
@@ -84,8 +84,8 @@ namespace Core2D
         /// <param name="record"></param>
         /// <returns></returns>
         public static Data Create(
-            ImmutableArray<ShapeBinding> bindings,
-            ImmutableArray<ShapeProperty> properties,
+            ImmutableArray<Binding> bindings,
+            ImmutableArray<Property> properties,
             Record record)
         {
             return new Data()

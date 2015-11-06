@@ -114,7 +114,7 @@ namespace Core2D
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
 
@@ -197,8 +197,8 @@ namespace Core2D
                 IsFilled = isFilled,
                 Data = new Data()
                 {
-                    Bindings = ImmutableArray.Create<ShapeBinding>(),
-                    Properties = ImmutableArray.Create<ShapeProperty>()
+                    Bindings = ImmutableArray.Create<Binding>(),
+                    Properties = ImmutableArray.Create<Property>()
                 },
                 Geometry = geometry
             };

@@ -9,7 +9,7 @@ namespace Core2D.UI.Wpf.Converters
     /// <summary>
     /// 
     /// </summary>
-    public class ShapeBindingParameterConverter : IMultiValueConverter
+    public class PropertyParameterConverter : IMultiValueConverter
     {
         /// <summary>
         /// 
@@ -23,10 +23,10 @@ namespace Core2D.UI.Wpf.Converters
         {
             if (values != null && values.Length == 2)
             {
-                return new ShapeBindingParameter()
+                return new PropertyParameter()
                 {
                     Owner = values[0],
-                    Binding = values[1] as ShapeBinding
+                    Property = values[1] as Property
                 };
             }
             return null;

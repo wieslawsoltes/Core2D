@@ -3090,8 +3090,8 @@ namespace Core2D
 
                         if (record.Columns.Length >= 2)
                         {
-                            point.Data.Bindings = point.Data.Bindings.Add(ShapeBinding.Create("X", record.Columns[0].Name));
-                            point.Data.Bindings = point.Data.Bindings.Add(ShapeBinding.Create("Y", record.Columns[1].Name));
+                            point.Data.Bindings = point.Data.Bindings.Add(Binding.Create("X", record.Columns[0].Name));
+                            point.Data.Bindings = point.Data.Bindings.Add(Binding.Create("Y", record.Columns[1].Name));
                         }
 
                         _editor.AddShape(point);
@@ -3107,14 +3107,14 @@ namespace Core2D
 
                         if (record.Columns.Length >= 2)
                         {
-                            line.Data.Bindings = line.Data.Bindings.Add(ShapeBinding.Create("Start.X", record.Columns[0].Name));
-                            line.Data.Bindings = line.Data.Bindings.Add(ShapeBinding.Create("Start.Y", record.Columns[1].Name));
+                            line.Data.Bindings = line.Data.Bindings.Add(Binding.Create("Start.X", record.Columns[0].Name));
+                            line.Data.Bindings = line.Data.Bindings.Add(Binding.Create("Start.Y", record.Columns[1].Name));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            line.Data.Bindings = line.Data.Bindings.Add(ShapeBinding.Create("End.X", record.Columns[2].Name));
-                            line.Data.Bindings = line.Data.Bindings.Add(ShapeBinding.Create("End.Y", record.Columns[3].Name));
+                            line.Data.Bindings = line.Data.Bindings.Add(Binding.Create("End.X", record.Columns[2].Name));
+                            line.Data.Bindings = line.Data.Bindings.Add(Binding.Create("End.Y", record.Columns[3].Name));
                         }
 
                         _editor.AddShape(line);
@@ -3130,14 +3130,14 @@ namespace Core2D
 
                         if (record.Columns.Length >= 2)
                         {
-                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(ShapeBinding.Create("TopLeft.X", record.Columns[0].Name));
-                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(ShapeBinding.Create("TopLeft.Y", record.Columns[1].Name));
+                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(Binding.Create("TopLeft.X", record.Columns[0].Name));
+                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(Binding.Create("TopLeft.Y", record.Columns[1].Name));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(ShapeBinding.Create("BottomRight.X", record.Columns[2].Name));
-                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(ShapeBinding.Create("BottomRight.Y", record.Columns[3].Name));
+                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(Binding.Create("BottomRight.X", record.Columns[2].Name));
+                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(Binding.Create("BottomRight.Y", record.Columns[3].Name));
                         }
 
                         _editor.AddShape(rectangle);
@@ -3153,14 +3153,14 @@ namespace Core2D
 
                         if (record.Columns.Length >= 2)
                         {
-                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(ShapeBinding.Create("TopLeft.X", record.Columns[0].Name));
-                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(ShapeBinding.Create("TopLeft.Y", record.Columns[1].Name));
+                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(Binding.Create("TopLeft.X", record.Columns[0].Name));
+                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(Binding.Create("TopLeft.Y", record.Columns[1].Name));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(ShapeBinding.Create("BottomRight.X", record.Columns[2].Name));
-                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(ShapeBinding.Create("BottomRight.Y", record.Columns[3].Name));
+                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(Binding.Create("BottomRight.X", record.Columns[2].Name));
+                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(Binding.Create("BottomRight.Y", record.Columns[3].Name));
                         }
 
                         _editor.AddShape(ellipse);
@@ -3176,26 +3176,26 @@ namespace Core2D
 
                         if (record.Columns.Length >= 2)
                         {
-                            arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point1.X", record.Columns[0].Name));
-                            arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point1.Y", record.Columns[1].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point1.X", record.Columns[0].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point1.Y", record.Columns[1].Name));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point2.X", record.Columns[2].Name));
-                            arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point2.Y", record.Columns[3].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point2.X", record.Columns[2].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point2.Y", record.Columns[3].Name));
                         }
 
                         if (record.Columns.Length >= 6)
                         {
-                            arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point3.X", record.Columns[4].Name));
-                            arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point3.Y", record.Columns[5].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point3.X", record.Columns[4].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point3.Y", record.Columns[5].Name));
                         }
 
                         if (record.Columns.Length >= 8)
                         {
-                            arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point4.X", record.Columns[6].Name));
-                            arc.Data.Bindings = arc.Data.Bindings.Add(ShapeBinding.Create("Point4.Y", record.Columns[7].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point4.X", record.Columns[6].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point4.Y", record.Columns[7].Name));
                         }
 
                         _editor.AddShape(arc);
@@ -3211,26 +3211,26 @@ namespace Core2D
 
                         if (record.Columns.Length >= 2)
                         {
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point1.X", record.Columns[0].Name));
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point1.Y", record.Columns[1].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point1.X", record.Columns[0].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point1.Y", record.Columns[1].Name));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point2.X", record.Columns[2].Name));
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point2.Y", record.Columns[3].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point2.X", record.Columns[2].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point2.Y", record.Columns[3].Name));
                         }
 
                         if (record.Columns.Length >= 6)
                         {
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point3.X", record.Columns[4].Name));
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point3.Y", record.Columns[5].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point3.X", record.Columns[4].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point3.Y", record.Columns[5].Name));
                         }
 
                         if (record.Columns.Length >= 8)
                         {
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point4.X", record.Columns[6].Name));
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(ShapeBinding.Create("Point4.Y", record.Columns[7].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point4.X", record.Columns[6].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point4.Y", record.Columns[7].Name));
                         }
 
                         _editor.AddShape(bezier);
@@ -3246,20 +3246,20 @@ namespace Core2D
 
                         if (record.Columns.Length >= 2)
                         {
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(ShapeBinding.Create("Point1.X", record.Columns[0].Name));
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(ShapeBinding.Create("Point1.Y", record.Columns[1].Name));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point1.X", record.Columns[0].Name));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point1.Y", record.Columns[1].Name));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(ShapeBinding.Create("Point2.X", record.Columns[2].Name));
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(ShapeBinding.Create("Point2.Y", record.Columns[3].Name));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point2.X", record.Columns[2].Name));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point2.Y", record.Columns[3].Name));
                         }
 
                         if (record.Columns.Length >= 6)
                         {
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(ShapeBinding.Create("Point3.X", record.Columns[4].Name));
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(ShapeBinding.Create("Point3.Y", record.Columns[5].Name));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point3.X", record.Columns[4].Name));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point3.Y", record.Columns[5].Name));
                         }
 
                         _editor.AddShape(qbezier);
@@ -3276,14 +3276,14 @@ namespace Core2D
 
                         if (record.Columns.Length >= 2)
                         {
-                            text.Data.Bindings = text.Data.Bindings.Add(ShapeBinding.Create("TopLeft.X", record.Columns[0].Name));
-                            text.Data.Bindings = text.Data.Bindings.Add(ShapeBinding.Create("TopLeft.Y", record.Columns[1].Name));
+                            text.Data.Bindings = text.Data.Bindings.Add(Binding.Create("TopLeft.X", record.Columns[0].Name));
+                            text.Data.Bindings = text.Data.Bindings.Add(Binding.Create("TopLeft.Y", record.Columns[1].Name));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            text.Data.Bindings = text.Data.Bindings.Add(ShapeBinding.Create("BottomRight.X", record.Columns[2].Name));
-                            text.Data.Bindings = text.Data.Bindings.Add(ShapeBinding.Create("BottomRight.Y", record.Columns[3].Name));
+                            text.Data.Bindings = text.Data.Bindings.Add(Binding.Create("BottomRight.X", record.Columns[2].Name));
+                            text.Data.Bindings = text.Data.Bindings.Add(Binding.Create("BottomRight.Y", record.Columns[3].Name));
                         }
 
                         _editor.AddShape(text);
@@ -3322,7 +3322,7 @@ namespace Core2D
                         px + width, py + height,
                         _editor.Project.CurrentStyleLibrary.CurrentStyle,
                         _editor.Project.Options.PointShape, "");
-                    var binding = ShapeBinding.Create("Text", record.Columns[i].Name);
+                    var binding = Binding.Create("Text", record.Columns[i].Name);
                     text.Data.Bindings = text.Data.Bindings.Add(binding);
                     g.AddShape(text);
 

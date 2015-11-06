@@ -157,8 +157,8 @@
     <Compile Include="Converters\EnumToBooleanConverter.cs" />
     <Compile Include="Converters\ObjectEqualityConverter.cs" />
     <Compile Include="Converters\RecordParameterConverter.cs" />
-    <Compile Include="Converters\ShapeBindingParameterConverter.cs" />
-    <Compile Include="Converters\ShapePropertyParameterConverter.cs" />
+    <Compile Include="Converters\BindingParameterConverter.cs" />
+    <Compile Include="Converters\PropertyParameterConverter.cs" />
     <Compile Include="Converters\ValueParameterConverter.cs" />
     <Compile Include="Controls\Custom\PanAndZoomBorder.cs" />
     <Compile Include="Controls\Custom\PanAndZoomGrid.cs" />

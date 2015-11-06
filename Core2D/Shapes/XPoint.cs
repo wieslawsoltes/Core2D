@@ -49,7 +49,7 @@ namespace Core2D
         /// <param name="binding"></param>
         /// <param name="r"></param>
         /// <param name="value"></param>
-        private static void BindToDouble(ShapeBinding binding, Record r, ref double value)
+        private static void BindToDouble(Binding binding, Record r, ref double value)
         {
             var columns = r.Columns;
             for (int i = 0; i < columns.Length; i++)
@@ -78,7 +78,7 @@ namespace Core2D
         /// <param name="propertyNameX"></param>
         /// <param name="propertyNameY"></param>
         private void TryToBind(
-            ImmutableArray<ShapeBinding> bindings,
+            ImmutableArray<Binding> bindings,
             Record r,
             string propertyNameX,
             string propertyNameY)
@@ -111,7 +111,7 @@ namespace Core2D
         /// <param name="propertyName"></param>
         /// <param name="bindings"></param>
         /// <param name="record"></param>
-        public void TryToBind(string propertyName, ImmutableArray<ShapeBinding> bindings, Record record)
+        public void TryToBind(string propertyName, ImmutableArray<Binding> bindings, Record record)
         {
             string propertyNameX = propertyName + ".X";
             string propertyNameY = propertyName + ".Y";
@@ -140,7 +140,7 @@ namespace Core2D
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
 
@@ -184,8 +184,8 @@ namespace Core2D
                 Style = default(ShapeStyle),
                 Data = new Data()
                 {
-                    Bindings = ImmutableArray.Create<ShapeBinding>(),
-                    Properties = ImmutableArray.Create<ShapeProperty>()
+                    Bindings = ImmutableArray.Create<Binding>(),
+                    Properties = ImmutableArray.Create<Property>()
                 },
                 X = x,
                 Y = y,

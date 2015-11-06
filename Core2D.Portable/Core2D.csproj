@@ -42,6 +42,9 @@
     <Compile Include="..\Core2D\Core\ObservableObject.cs">
       <Link>Core\ObservableObject.cs</Link>
     </Compile>
+    <Compile Include="..\Core2D\Data\Binding.cs">
+      <Link>Data\Binding.cs</Link>
+    </Compile>
     <Compile Include="..\Core2D\Data\Column.cs">
       <Link>Data\Column.cs</Link>
     </Compile>
@@ -50,6 +53,9 @@
     </Compile>
     <Compile Include="..\Core2D\Data\Database.cs">
       <Link>Data\Database.cs</Link>
+    </Compile>
+    <Compile Include="..\Core2D\Data\Property.cs">
+      <Link>Data\Property.cs</Link>
     </Compile>
     <Compile Include="..\Core2D\Data\Record.cs">
       <Link>Data\Record.cs</Link>
@@ -126,6 +132,9 @@
     <Compile Include="..\Core2D\Editor\Helpers\LineHelper.cs">
       <Link>Editor\Helpers\LineHelper.cs</Link>
     </Compile>
+    <Compile Include="..\Core2D\Editor\Helpers\NoneHelper.cs">
+      <Link>Editor\Helpers\NoneHelper.cs</Link>
+    </Compile>
     <Compile Include="..\Core2D\Editor\Helpers\PathHelper.cs">
       <Link>Editor\Helpers\PathHelper.cs</Link>
     </Compile>
@@ -153,11 +162,11 @@
     <Compile Include="..\Core2D\Editor\Parameters\RecordParameter.cs">
       <Link>Editor\Parameters\RecordParameter.cs</Link>
     </Compile>
-    <Compile Include="..\Core2D\Editor\Parameters\ShapeBindingParamater.cs">
-      <Link>Editor\Parameters\ShapeBindingParamater.cs</Link>
+    <Compile Include="..\Core2D\Editor\Parameters\BindingParamater.cs">
+      <Link>Editor\Parameters\BindingParamater.cs</Link>
     </Compile>
-    <Compile Include="..\Core2D\Editor\Parameters\ShapePropertyParameter.cs">
-      <Link>Editor\Parameters\ShapePropertyParameter.cs</Link>
+    <Compile Include="..\Core2D\Editor\Parameters\PropertyParameter.cs">
+      <Link>Editor\Parameters\PropertyParameter.cs</Link>
     </Compile>
     <Compile Include="..\Core2D\Editor\Parameters\ValueParamterer.cs">
       <Link>Editor\Parameters\ValueParamterer.cs</Link>
@@ -347,12 +356,6 @@
     </Compile>
     <Compile Include="..\Core2D\Shape\BaseShape.cs">
       <Link>Shape\BaseShape.cs</Link>
-    </Compile>
-    <Compile Include="..\Core2D\Shape\ShapeBinding.cs">
-      <Link>Shape\ShapeBinding.cs</Link>
-    </Compile>
-    <Compile Include="..\Core2D\Shape\ShapeProperty.cs">
-      <Link>Shape\ShapeProperty.cs</Link>
     </Compile>
     <Compile Include="..\Core2D\Shape\ShapeState.cs">
       <Link>Shape\ShapeState.cs</Link>

@@ -8,7 +8,7 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    public class ShapeProperty : ObservableObject
+    public class Property : ObservableObject
     {
         private string _name;
         private object _value;
@@ -32,14 +32,14 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Creates a new <see cref="ShapeProperty"/> instance.
+        /// Creates a new <see cref="Property"/> instance.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static ShapeProperty Create(string name, object value)
+        public static Property Create(string name, object value)
         {
-            return new ShapeProperty()
+            return new Property()
             {
                 Name = name,
                 Value = value

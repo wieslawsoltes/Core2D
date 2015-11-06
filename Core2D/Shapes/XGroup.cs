@@ -11,14 +11,14 @@ namespace Core2D
     /// </summary>
     public class XGroup : BaseShape
     {
-        private ImmutableArray<ShapeProperty> _shapesProperties;
+        private ImmutableArray<Property> _shapesProperties;
         private ImmutableArray<BaseShape> _shapes;
         private ImmutableArray<XPoint> _connectors;
 
         /// <summary>
         /// 
         /// </summary>
-        public ImmutableArray<ShapeProperty> ShapesProperties
+        public ImmutableArray<Property> ShapesProperties
         {
             get
             {
@@ -26,7 +26,7 @@ namespace Core2D
                 {
                     if (_shapes != null)
                     {
-                        var builder = ImmutableArray.CreateBuilder<ShapeProperty>();
+                        var builder = ImmutableArray.CreateBuilder<Property>();
 
                         foreach (var shape in _shapes)
                         {
@@ -97,7 +97,7 @@ namespace Core2D
         /// <param name="dy"></param>
         /// <param name="db"></param>
         /// <param name="r"></param>
-        public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<ShapeProperty> db, Record r)
+        public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
 
@@ -223,8 +223,8 @@ namespace Core2D
                 Style = default(ShapeStyle),
                 Data = new Data()
                 {
-                    Bindings = ImmutableArray.Create<ShapeBinding>(),
-                    Properties = ImmutableArray.Create<ShapeProperty>()
+                    Bindings = ImmutableArray.Create<Binding>(),
+                    Properties = ImmutableArray.Create<Property>()
                 },
                 Shapes = ImmutableArray.Create<BaseShape>(),
                 Connectors = ImmutableArray.Create<XPoint>()
