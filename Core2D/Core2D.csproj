@@ -65,8 +65,8 @@
     <Compile Include="Editor\Core\Tool.cs" />
     <Compile Include="Editor\Core\UndoRedo.cs" />
     <Compile Include="Editor\Editor.cs" />
-    <Compile Include="Editor\EditorCommands.cs" />
-    <Compile Include="Editor\EditorConstants.cs" />
+    <Compile Include="Editor\Commands.cs" />
+    <Compile Include="Editor\Constants.cs" />
     <Compile Include="Editor\EditorContext.cs" />
     <Compile Include="Editor\Helpers\NoneHelper.cs" />
     <Compile Include="Factories\ProjectFactory.cs" />
@@ -84,11 +84,6 @@
     <Compile Include="Editor\Helpers\TextHelper.cs" />
     <Compile Include="Interfaces\IShapeFactory.cs" />
     <Compile Include="Editor\Observer.cs" />
-    <Compile Include="Editor\Parameters\ColumnParameter.cs" />
-    <Compile Include="Editor\Parameters\RecordParameter.cs" />
-    <Compile Include="Editor\Parameters\BindingParamater.cs" />
-    <Compile Include="Editor\Parameters\PropertyParameter.cs" />
-    <Compile Include="Editor\Parameters\ValueParamterer.cs" />
     <Compile Include="Interfaces\IFileWriter.cs" />
     <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Interfaces\IProjectFactory.cs" />
