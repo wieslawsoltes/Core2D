@@ -15,7 +15,7 @@ namespace Core2D
         private double _width;
         private double _height;
         private ArgbColor _background;
-        private ImmutableArray<Property> _properties;
+        private Data _data;
         private ImmutableArray<Layer> _layers;
         private Container _template;
         private Layer _currentLayer;
@@ -61,16 +61,16 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets a colletion <see cref="Property"/> that will be used during drawing.
+        /// 
         /// </summary>
-        public ImmutableArray<Property> Properties
+        public Data Data
         {
-            get { return _properties; }
-            set { Update(ref _properties, value); }
+            get { return _data; }
+            set { Update(ref _data, value); }
         }
 
         /// <summary>
-        /// Gets or sets property Value using Name as key for Properties array values. If property with the specified key does not exist it is created.
+        /// Gets or sets property Value using Name as key for data Properties array values. If property with the specified key does not exist it is created.
         /// </summary>
         /// <param name="name">The property name value.</param>
         /// <returns>The property Value.</returns>
@@ -78,7 +78,7 @@ namespace Core2D
         {
             get
             {
-                var result = _properties.FirstOrDefault(p => p.Name == name);
+                var result = _data.Properties.FirstOrDefault(p => p.Name == name);
                 if (result != null)
                 {
                     return result.Value;
@@ -89,15 +89,15 @@ namespace Core2D
             {
                 if (value != null)
                 {
-                    var result = _properties.FirstOrDefault(p => p.Name == name);
+                    var result = _data.Properties.FirstOrDefault(p => p.Name == name);
                     if (result != null)
                     {
                         result.Value = value;
                     }
                     else
                     {
-                        var property = Property.Create(name, value);
-                        Properties = Properties.Add(property);
+                        var property = Property.Create(name, value, _data);
+                        _data.Properties = _data.Properties.Add(property);
                     }
                 }
             }
@@ -225,7 +225,11 @@ namespace Core2D
             var container = new Container()
             {
                 Name = name,
-                Properties = ImmutableArray.Create<Property>(),
+                Data = new Data()
+                {
+                    Bindings = ImmutableArray.Create<Binding>(),
+                    Properties = ImmutableArray.Create<Property>()
+                },
                 Layers = ImmutableArray.Create<Layer>(),
                 IsTemplate = isTemplate
             };
