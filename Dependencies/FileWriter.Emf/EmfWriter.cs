@@ -128,10 +128,10 @@ namespace Dependencies
 
                     if (container.Template != null)
                     {
-                        r.Draw(g, container.Template, container.Properties, null);
+                        r.Draw(g, container.Template, container.Data.Properties, null);
                     }
 
-                    r.Draw(g, container, container.Properties, null);
+                    r.Draw(g, container, container.Data.Properties, null);
                     r.ClearCache(isZooming: false);
                 }
             }

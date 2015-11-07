@@ -28,8 +28,8 @@
                 <Grid.Resources>
                     <ControlTemplate x:Key="LayersMenu">
                         <Menu Background="Transparent" HorizontalAlignment="Right">
-                            <MenuItem Command="{Binding Commands.AddLayerCommand}" Header="+"/>
-                            <MenuItem Command="{Binding Commands.RemoveLayerCommand}" Header="-"/>
+                            <MenuItem Command="{x:Static core:Commands.AddLayerCommand}" Header="+"/>
+                            <MenuItem Command="{x:Static core:Commands.RemoveLayerCommand}" Header="-"/>
                         </Menu>
                     </ControlTemplate>
                 </Grid.Resources>
@@ -52,18 +52,18 @@
                                      DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                             <MenuItem Header="_Add Layer"
                                       InputGestureText="Ctrl+N" 
-                                      Command="{Binding DataContext.Commands.AddLayerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                                      Command="{x:Static core:Commands.AddLayerCommand}"/>
                             <Separator/>
                             <MenuItem Header="_Delete" 
                                       InputGestureText="Del" 
-                                      Command="{Binding DataContext.Commands.RemoveLayerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                                      Command="{x:Static core:Commands.RemoveLayerCommand}"/>
                         </ContextMenu>
                     </controls:LayerDragAndDropListBox.Resources>
                     <controls:LayerDragAndDropListBox.InputBindings>
-                        <KeyBinding Command="{Binding DataContext.Commands.AddLayerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                        <KeyBinding Command="{x:Static core:Commands.AddLayerCommand}" 
                                     CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:LayerDragAndDropListBox}}}" 
                                     Gesture="Ctrl+N"/>
-                        <KeyBinding Command="{Binding DataContext.Commands.RemoveLayerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                        <KeyBinding Command="{x:Static core:Commands.RemoveLayerCommand}" 
                                     CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:LayerDragAndDropListBox}}}" 
                                     Gesture="Del"/>
                     </controls:LayerDragAndDropListBox.InputBindings>
@@ -129,7 +129,7 @@
                 <Grid.Resources>
                     <ControlTemplate x:Key="ShapesMenu">
                         <Menu Background="Transparent" HorizontalAlignment="Right">
-                            <MenuItem Command="{Binding Commands.RemoveShapeCommand}" Header="-"/>
+                            <MenuItem Command="{x:Static core:Commands.RemoveShapeCommand}" Header="-"/>
                         </Menu>
                     </ControlTemplate>
                 </Grid.Resources>
@@ -151,11 +151,11 @@
                                      DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                             <MenuItem Header="_Delete" 
                                       InputGestureText="Del" 
-                                      Command="{Binding DataContext.Commands.RemoveShapeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                                      Command="{x:Static core:Commands.RemoveShapeCommand}"/>
                         </ContextMenu>
                     </controls:BaseShapeDragAndDropListBox.Resources>
                     <controls:BaseShapeDragAndDropListBox.InputBindings>
-                        <KeyBinding Command="{Binding DataContext.Commands.RemoveShapeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                        <KeyBinding Command="{x:Static core:Commands.RemoveShapeCommand}" 
                                     CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:BaseShapeDragAndDropListBox}}}" 
                                     Gesture="Del"/>
                     </controls:BaseShapeDragAndDropListBox.InputBindings>

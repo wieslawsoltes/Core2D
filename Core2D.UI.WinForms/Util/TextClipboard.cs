@@ -4,17 +4,17 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Core2D.UI.WinForms.Util
+namespace Core2D.UI.WinForms
 {
     /// <summary>
-    /// Wrapper class for System.Windows.Forms.Clipboard clipboard class.
+    /// Wrapper class for <see cref="System.Windows.Forms.Clipboard"/> clipboard class.
     /// </summary>
     internal class TextClipboard : ITextClipboard
     {
         /// <summary>
-        /// 
+        /// Set clipboard text.
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="text">The text string.</param>
         public Task SetText(string text)
         {
             return Task.Run(() =>
@@ -24,9 +24,9 @@ namespace Core2D.UI.WinForms.Util
         }
 
         /// <summary>
-        /// 
+        /// Get text from clipboard.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The text string.</returns>
         public Task<string> GetText()
         {
             return Task.Run(() =>
@@ -36,9 +36,9 @@ namespace Core2D.UI.WinForms.Util
         }
 
         /// <summary>
-        /// 
+        /// Return true if clipboard contains text string.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if clipboard contains text string.</returns>
         public Task<bool> ContainsText()
         {
             return Task.Run(() =>

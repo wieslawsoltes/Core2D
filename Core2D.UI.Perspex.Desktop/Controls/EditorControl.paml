@@ -411,14 +411,17 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Columns" Classes="property">
-                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" >
-                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Columns}">
+                    <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*" >
+                        <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
+                            <MenuItem Header="+" Command="{Static core:Commands.AddColumnCommand}" CommandParameter="{Binding}"/>
+                        </Menu>
+                        <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Name" Classes="default"/>
+                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Path=Columns}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:Column">
                                     <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
                                         <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
-                                        <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1"/>
+                                        <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1" Command="{Static core:Commands.RemoveColumnCommand}" CommandParameter="{Binding}"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
@@ -433,14 +436,22 @@
         <DataTemplate DataType="core:Data">
             <TabControl Classes="default">
                 <TabItem Header="Record" Classes="property">
-                    <ContentControl Content="{Binding Path=Record, Mode=TwoWay}"/>
+                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
+                        <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding Path=Record, Converter={Static converters:IsNotNullConverter.Instance}}">
+                            <MenuItem Header="X" Command="{Static core:Commands.ResetRecordCommand}" CommandParameter="{Binding}"/>
+                        </Menu>
+                        <ContentControl Content="{Binding Path=Record, Mode=TwoWay}" Grid.Row="1"/>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="Bindings" Classes="property">
-                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
-                        <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
-                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Property" Classes="default"/>
-                        <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Path" Classes="default"/>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Bindings}">
+                    <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="50*,Auto,50*">
+                        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right">
+                            <MenuItem Header="+" Command="{Static core:Commands.AddBindingCommand}" CommandParameter="{Binding}"/>
+                        </Menu>
+                        <GridSplitter Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Width="10"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Property" Classes="default"/>
+                        <TextBlock Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Text="Path" Classes="default"/>
+                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Path=Bindings}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:Binding">
                                     <Grid VerticalAlignment="Top">
@@ -449,12 +460,12 @@
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
                         </ItemsControl>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Path=Bindings}">
+                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="2" Items="{Binding Path=Bindings}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:Binding">
                                     <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
                                         <TextBox VerticalAlignment="Center" Text="{Binding Path=Path, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
-                                        <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1"/>
+                                        <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1" Command="{Static core:Commands.RemoveBindingCommand}" CommandParameter="{Binding}"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
@@ -462,11 +473,14 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Properties" Classes="property">
-                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
-                        <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
-                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
-                        <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Properties}">
+                    <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="50*,Auto,50*">
+                        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right">
+                            <MenuItem Header="+" Command="{Static core:Commands.AddPropertyCommand}" CommandParameter="{Binding}"/>
+                        </Menu>
+                        <GridSplitter Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Width="10"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Name" Classes="default"/>
+                        <TextBlock Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Text="Value" Classes="default"/>
+                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Path=Properties}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:Property">
                                     <Grid VerticalAlignment="Top">
@@ -475,12 +489,12 @@
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
                         </ItemsControl>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Path=Properties}">
+                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="2" Items="{Binding Path=Properties}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:Property">
                                     <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
                                         <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
-                                        <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1"/>
+                                        <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1" Command="{Static core:Commands.RemovePropertyCommand}" CommandParameter="{Binding}"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
@@ -1205,30 +1219,8 @@
                         </TabControl>
                     </Grid>
                 </TabItem>
-                <TabItem IsVisible="{Binding !IsTemplate}" Header="Properties" Classes="property">
-                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
-                        <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
-                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
-                        <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Properties}">
-                            <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="core:Property">
-                                    <Grid VerticalAlignment="Top">
-                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.DataTemplates>
-                        </ItemsControl>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Path=Properties}">
-                            <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="core:Property">
-                                    <Grid VerticalAlignment="Top">
-                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}" Classes="default"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.DataTemplates>
-                        </ItemsControl>
-                    </Grid>
+                <TabItem IsVisible="{Binding !IsTemplate}" Header="Data" Classes="property">
+                    <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Layers" Classes="property">
                     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
@@ -1311,8 +1303,8 @@
                 <TabItem Header="Project" Classes="property">
                     <Grid RowDefinitions="Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
-                            <MenuItem Header="+" Command="{Binding Path=Commands.NewCommand}" CommandParameter="{Binding Path=Editor.Project.Selected}"/>
-                            <MenuItem Header="-" Command="{Binding Path=Commands.DeleteCommand}" CommandParameter="{Binding Path=Editor.Project.Selected}"/>
+                            <MenuItem Header="+" Command="{Static core:Commands.NewCommand}" CommandParameter="{Binding Path=Editor.Project.Selected}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.DeleteCommand}" CommandParameter="{Binding Path=Editor.Project.Selected}"/>
                         </Menu>
                         <ContentControl Content="{Binding Path=Editor.Project, Mode=TwoWay}" Grid.Row="1"/>
                     </Grid>
@@ -1329,8 +1321,8 @@
                 <TabItem Header="Groups" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
-                            <MenuItem Header="+" Command="{Binding Path=Commands.AddGroupLibraryCommand}"/>
-                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveGroupLibraryCommand}"/>
+                            <MenuItem Header="+" Command="{Static core:Commands.AddGroupLibraryCommand}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.RemoveGroupLibraryCommand}"/>
                         </Menu>
                         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
                             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -1348,8 +1340,8 @@
                             </DropDown.DataTemplates>
                         </DropDown>
                         <Menu Grid.Row="3" HorizontalAlignment="Right">
-                            <MenuItem Header="+" Command="{Binding Path=Commands.AddGroupCommand}"/>
-                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveGroupCommand}"/>
+                            <MenuItem Header="+" Command="{Static core:Commands.AddGroupCommand}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.RemoveGroupCommand}"/>
                         </Menu>
                         <ListBox
                             Items="{Binding Path=Editor.Project.CurrentGroupLibrary.Groups}"
@@ -1367,8 +1359,8 @@
                 <TabItem Header="Database" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
-                            <MenuItem Header="+" Command="{Binding Path=Commands.AddDatabaseCommand}"/>
-                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveDatabaseCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDatabase}"/>
+                            <MenuItem Header="+" Command="{Static core:Commands.AddDatabaseCommand}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.RemoveDatabaseCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDatabase}"/>
                         </Menu>
                         <DropDown
                             Items="{Binding Path=Editor.Project.Databases}"
@@ -1387,9 +1379,9 @@
                 <TabItem Header="Records" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
-                            <MenuItem Header="apply" Command="{Binding Path=Commands.ApplyRecordCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDatabase.CurrentRecord}"/>
-                            <MenuItem Header="+" Command="{Binding Path=Commands.AddRecordCommand}"/>
-                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveRecordCommand}"/>
+                            <MenuItem Header="apply" Command="{Static core:Commands.ApplyRecordCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDatabase.CurrentRecord}"/>
+                            <MenuItem Header="+" Command="{Static core:Commands.AddRecordCommand}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.RemoveRecordCommand}"/>
                         </Menu>
                         <DropDown
                             Items="{Binding Path=Editor.Project.Databases}"
@@ -1429,8 +1421,8 @@
                 <TabItem Header="Styles" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
-                            <MenuItem Header="+" Command="{Binding Path=Commands.AddStyleLibraryCommand}"/>
-                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveStyleLibraryCommand}"/>
+                            <MenuItem Header="+" Command="{Static core:Commands.AddStyleLibraryCommand}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.RemoveStyleLibraryCommand}"/>
                         </Menu>
                         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
                             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -1448,9 +1440,9 @@
                             </DropDown.DataTemplates>
                         </DropDown>
                         <Menu Grid.Row="3" HorizontalAlignment="Right">
-                            <MenuItem Header="apply" Command="{Binding Path=Commands.ApplyStyleCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle}"/>
-                            <MenuItem Header="+" Command="{Binding Path=Commands.AddStyleCommand}"/>
-                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveStyleCommand}"/>
+                            <MenuItem Header="apply" Command="{Static core:Commands.ApplyStyleCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle}"/>
+                            <MenuItem Header="+" Command="{Static core:Commands.AddStyleCommand}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.RemoveStyleCommand}"/>
                         </Menu>
                         <ListBox
                             Items="{Binding Path=Editor.Project.CurrentStyleLibrary.Styles}"
@@ -1468,10 +1460,10 @@
                 <TabItem Header="Templates" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
-                            <MenuItem Header="apply" Command="{Binding Path=Commands.ApplyTemplateCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentTemplate}"/>
-                            <MenuItem Header="edit" Command="{Binding Path=Commands.EditTemplateCommand}"/>
-                            <MenuItem Header="+" Command="{Binding Path=Commands.AddTemplateCommand}"/>
-                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveTemplateCommand}"/>
+                            <MenuItem Header="apply" Command="{Static core:Commands.ApplyTemplateCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentTemplate}"/>
+                            <MenuItem Header="edit" Command="{Static core:Commands.EditTemplateCommand}"/>
+                            <MenuItem Header="+" Command="{Static core:Commands.AddTemplateCommand}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.RemoveTemplateCommand}"/>
                         </Menu>
                         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
                             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>

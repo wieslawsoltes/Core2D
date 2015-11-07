@@ -12,6 +12,7 @@ namespace Core2D
     {
         private string _property;
         private string _path;
+        private Data _owner;
 
         /// <summary>
         /// 
@@ -32,17 +33,28 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Gets or sets binding owner object.
+        /// </summary>
+        public Data Owner
+        {
+            get { return _owner; }
+            set { Update(ref _owner, value); }
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Binding"/> instance.
         /// </summary>
         /// <param name="property"></param>
         /// <param name="path"></param>
+        /// <param name="owner"></param>
         /// <returns></returns>
-        public static Binding Create(string property, string path)
+        public static Binding Create(string property, string path, Data owner)
         {
             return new Binding()
             {
                 Property = property,
-                Path = path
+                Path = path,
+                Owner = owner
             };
         }
 

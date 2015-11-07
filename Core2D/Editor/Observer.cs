@@ -276,8 +276,8 @@ namespace Core2D
             if (e.PropertyName == "Properties")
             {
                 var container = sender as Container;
-                Remove(container.Properties);
-                Add(container.Properties);
+                Remove(container.Data.Properties);
+                Add(container.Data.Properties);
             }
 
             if (e.PropertyName == "Layers")
@@ -844,9 +844,9 @@ namespace Core2D
                 Add(container.Layers);
             }
 
-            if (container.Properties != null)
+            if (container.Data.Properties != null)
             {
-                Add(container.Properties);
+                Add(container.Data.Properties);
             }
 
             container.WorkingLayer.InvalidateLayer += InvalidateLayerObserver;
@@ -878,9 +878,9 @@ namespace Core2D
                 Add(container.Layers);
             }
 
-            if (container.Properties != null)
+            if (container.Data.Properties != null)
             {
-                Remove(container.Properties);
+                Remove(container.Data.Properties);
             }
 
             container.WorkingLayer.InvalidateLayer -= InvalidateLayerObserver;

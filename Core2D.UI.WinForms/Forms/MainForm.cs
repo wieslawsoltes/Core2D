@@ -10,37 +10,47 @@ using System.Drawing.Text;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Core2D.UI.WinForms.Util;
 using Dependencies;
 
 namespace Core2D.UI.WinForms
 {
     /// <summary>
-    /// 
+    /// Represents a window or dialog box that makes up an application's user interface.
     /// </summary>
     public partial class MainForm : Form, IView
     {
+        private EditorContext _context;
         private Drawable _drawable;
         private string _logFileName = "Core2D.log";
 
         /// <summary>
-        /// 
+        /// Gets or sets the view's data context.
         /// </summary>
         public object DataContext { get; set; }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="MainForm"/> class.
         /// </summary>
         public MainForm()
         {
             InitializeComponent();
 
+            SetStyle(
+                ControlStyles.AllPaintingInWmPaint
+                | ControlStyles.UserPaint
+                | ControlStyles.DoubleBuffer
+                | ControlStyles.SupportsTransparentBackColor,
+                true);
+
             InitializeContext();
+            Commands.InitializeCommonCommands(_context);
+            DataContext = _context;
+
             FormClosing += (s, e) => DeInitializeContext();
 
-            InitializePanel();
+            InitializeDrawable();
 
-            HandlePanelShorcutKeys();
+            HandleDrawableShorcutKeys();
             HandleMenuShortcutKeys();
             HandleFileDialogs();
 
@@ -61,18 +71,11 @@ namespace Core2D.UI.WinForms
         }
 
         /// <summary>
-        /// 
+        /// Initialize <see cref="EditorContext"/> object.
         /// </summary>
         private void InitializeContext()
         {
-            this.SetStyle(
-                ControlStyles.AllPaintingInWmPaint
-                | ControlStyles.UserPaint
-                | ControlStyles.DoubleBuffer
-                | ControlStyles.SupportsTransparentBackColor,
-                true);
-
-            var context = new EditorContext()
+            _context = new EditorContext()
             {
                 View = this,
                 Renderers = new IRenderer[] { new WinFormsRenderer(72.0 / 96.0) },
@@ -85,41 +88,31 @@ namespace Core2D.UI.WinForms
                 CsvWriter = new CsvHelperWriter()
             };
 
-            context.Renderers[0].State.EnableAutofit = true;
-            context.InitializeEditor(new TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
-            context.InitializeCommands();
-            context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
-            context.Editor.GetImageKey = async () => await GetImageKey();
-            context.Editor.Invalidate = () => _drawable.Invalidate();
+            _context.Renderers[0].State.EnableAutofit = true;
 
-            DataContext = context;
+            _context.InitializeEditor(new TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName));
+            _context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
+            _context.Editor.GetImageKey = async () => await GetImageKey();
+            _context.Editor.Invalidate = () => _drawable.Invalidate();
         }
 
         /// <summary>
-        /// 
+        /// Deinitialize <see cref="EditorContext"/> object.
         /// </summary>
         private void DeInitializeContext()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Dispose();
+            _context.Dispose();
         }
 
         /// <summary>
-        /// 
+        /// Initialize <see cref="Drawable"/> object.
         /// </summary>
         /// <returns></returns>
-        private void InitializePanel()
+        private void InitializeDrawable()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
             _drawable = new Drawable();
 
-            _drawable.Context = context;
+            _drawable.Context = _context;
             _drawable.Initialize();
 
             _drawable.Dock = DockStyle.Fill;
@@ -135,63 +128,49 @@ namespace Core2D.UI.WinForms
         }
 
         /// <summary>
-        /// 
+        /// Reset pan and zoom to default state.
         /// </summary>
         private void ResetZoom()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
             _drawable.ResetZoom();
-            context.Editor.Invalidate();
+            _context.Editor.Invalidate();
         }
 
         /// <summary>
-        /// 
+        /// Stretch view to the available extents.
         /// </summary>
         private void AutoFit()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
             _drawable.AutoFit();
-            context.Editor.Invalidate();
+            _context.Editor.Invalidate();
         }
 
         /// <summary>
-        /// 
+        /// Handle file dialogs <see cref="FileDialog.FileOk"/> events.
         /// </summary>
         private void HandleFileDialogs()
         {
             this.openFileDialog1.FileOk += (sender, e) =>
             {
-                var context = DataContext as EditorContext;
-                if (context == null)
-                    return;
-
                 string path = openFileDialog1.FileName;
                 int filterIndex = openFileDialog1.FilterIndex;
-                context.Open(path);
-                context.Editor.Invalidate();
+                _context.Open(path);
+                _context.Editor.Invalidate();
             };
 
             this.saveFileDialog1.FileOk += (sender, e) =>
             {
-                var context = DataContext as EditorContext;
-                if (context == null || context.Editor.Project == null)
+                if (_context.Editor.Project == null)
                     return;
 
                 string path = saveFileDialog1.FileName;
                 int filterIndex = saveFileDialog1.FilterIndex;
-                context.Save(path);
+                _context.Save(path);
             };
 
             this.saveFileDialog2.FileOk += (sender, e) =>
             {
-                var context = DataContext as EditorContext;
-                if (context == null || context.Editor.Project == null)
+                if (_context.Editor.Project == null)
                     return;
 
                 string path = saveFileDialog2.FileName;
@@ -199,11 +178,11 @@ namespace Core2D.UI.WinForms
                 switch (filterIndex)
                 {
                     case 1:
-                        context.ExportAsPdf(path, context.Editor.Project);
+                        _context.ExportAsPdf(path, _context.Editor.Project);
                         Process.Start(path);
                         break;
                     case 2:
-                        context.ExportAsDxf(path);
+                        _context.ExportAsDxf(path);
                         Process.Start(path);
                         break;
                     default:
@@ -213,15 +192,11 @@ namespace Core2D.UI.WinForms
         }
 
         /// <summary>
-        /// 
+        /// Update current <see cref="Tool"/> menu items.
         /// </summary>
         private void UpdateToolMenu()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            var tool = context.Editor.CurrentTool;
+            var tool = _context.Editor.CurrentTool;
 
             noneToolStripMenuItem.Checked = tool == Tool.None;
             selectionToolStripMenuItem.Checked = tool == Tool.Selection;
@@ -238,15 +213,14 @@ namespace Core2D.UI.WinForms
         }
 
         /// <summary>
-        /// 
+        /// Update project <see cref="Options"/> menu items.
         /// </summary>
         private void UpdateOptionsMenu()
         {
-            var context = DataContext as EditorContext;
-            if (context == null || context.Editor.Project == null)
+            if (_context.Editor.Project == null)
                 return;
 
-            var options = context.Editor.Project.Options;
+            var options = _context.Editor.Project.Options;
 
             defaultIsFilledToolStripMenuItem.Checked = options.DefaultIsFilled;
             snapToGridToolStripMenuItem.Checked = options.SnapToGrid;
@@ -254,7 +228,7 @@ namespace Core2D.UI.WinForms
         }
 
         /// <summary>
-        /// 
+        /// Handle main menu <see cref="ToolStripItem.Click"/> events.
         /// </summary>
         private void HandleMenuShortcutKeys()
         {
@@ -265,10 +239,6 @@ namespace Core2D.UI.WinForms
             saveAsToolStripMenuItem.Click += (sender, e) => OnSave();
             exportToolStripMenuItem.Click += (sender, e) => OnExport();
             exitToolStripMenuItem.Click += (sender, e) => Close();
-
-            // Edit
-
-            // TODO:
 
             // View
             resetZoomToolStripMenuItem.Click += (sender, e) => ResetZoom();
@@ -295,23 +265,22 @@ namespace Core2D.UI.WinForms
         }
 
         /// <summary>
-        /// 
+        /// Handle drawable panel <see cref="Panel.KeyDown"/> events.
         /// </summary>
-        private void HandlePanelShorcutKeys()
+        private void HandleDrawableShorcutKeys()
         {
             _drawable.KeyDown += (sender, e) =>
             {
                 if (e.Control || e.Alt || e.Shift)
                     return;
-
-                var context = DataContext as EditorContext;
-                if (context == null || context.Editor.Project == null)
+                
+                if (_context.Editor.Project == null)
                     return;
 
                 switch (e.KeyCode)
                 {
                     case Keys.Delete:
-                        context.Commands.DeleteCommand.Execute(null);
+                        Commands.DeleteCommand.Execute(null);
                         break;
                     case Keys.N:
                         OnSetToolToNone();
@@ -372,20 +341,16 @@ namespace Core2D.UI.WinForms
         }
 
         /// <summary>
-        /// 
+        /// Create new <see cref="Project"/>.
         /// </summary>
         private void OnNew()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.NewCommand.Execute(null);
-            context.Editor.Invalidate();
+            Commands.NewCommand.Execute(null);
+            _context.Editor.Invalidate();
         }
 
         /// <summary>
-        /// 
+        /// Open <see cref="Project"/> from file.
         /// </summary>
         private void OnOpen()
         {
@@ -395,264 +360,193 @@ namespace Core2D.UI.WinForms
         }
 
         /// <summary>
-        /// 
+        /// Close current <see cref="Project"/>.
         /// </summary>
         private void OnClose()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.CloseCommand.Execute(null);
-            context.Editor.Invalidate();
+            Commands.CloseCommand.Execute(null);
+            _context.Editor.Invalidate();
         }
 
         /// <summary>
-        /// 
+        /// Save current <see cref="Project"/> to external file.
         /// </summary>
         private void OnSave()
         {
-            var context = DataContext as EditorContext;
-            if (context == null || context.Editor.Project == null)
+            if (_context.Editor.Project == null)
                 return;
 
             saveFileDialog1.Filter = "Project (*.project)|*.project|All (*.*)|*.*";
             saveFileDialog1.FilterIndex = 0;
-            saveFileDialog1.FileName = context.Editor.Project.Name;
+            saveFileDialog1.FileName = _context.Editor.Project.Name;
             saveFileDialog1.ShowDialog(this);
         }
 
         /// <summary>
-        /// 
+        /// Export <see cref="Project"/> to external file.
         /// </summary>
         private void OnExport()
         {
-            var context = DataContext as EditorContext;
-            if (context == null || context.Editor.Project == null)
+            if (_context.Editor.Project == null)
                 return;
 
             saveFileDialog2.Filter = "Pdf (*.pdf)|*.pdf|Dxf (*.dxf)|*.dxf|All (*.*)|*.*";
             saveFileDialog2.FilterIndex = 0;
-            saveFileDialog2.FileName = context.Editor.Project.Name;
+            saveFileDialog2.FileName = _context.Editor.Project.Name;
             saveFileDialog2.ShowDialog(this);
         }
 
         /// <summary>
-        /// 
+        /// Set current <see cref="Tool"/> to <see cref="Tool.None"/>.
         /// </summary>
         private void OnSetToolToNone()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.ToolNoneCommand.Execute(null);
+            Commands.ToolNoneCommand.Execute(null);
             UpdateToolMenu();
         }
 
         /// <summary>
-        /// 
+        /// Set current <see cref="Tool"/> to <see cref="Tool.Selection"/>.
         /// </summary>
         private void OnSetToolToSelection()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.ToolSelectionCommand.Execute(null);
+            Commands.ToolSelectionCommand.Execute(null);
             UpdateToolMenu();
         }
 
         /// <summary>
-        /// 
+        /// Set current <see cref="Tool"/> to <see cref="Tool.Point"/>.
         /// </summary>
         private void OnSetToolToPoint()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.ToolPointCommand.Execute(null);
+            Commands.ToolPointCommand.Execute(null);
             UpdateToolMenu();
         }
 
         /// <summary>
-        /// 
+        /// Set current <see cref="Tool"/> to <see cref="Tool.Line"/>.
         /// </summary>
         private void OnSetToolToLine()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.ToolLineCommand.Execute(null);
+            Commands.ToolLineCommand.Execute(null);
             UpdateToolMenu();
         }
 
         /// <summary>
-        /// 
+        /// Set current <see cref="Tool"/> to <see cref="Tool.Arc"/>.
         /// </summary>
         private void OnSetToolToArc()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.ToolArcCommand.Execute(null);
+            Commands.ToolArcCommand.Execute(null);
             UpdateToolMenu();
         }
 
         /// <summary>
-        /// 
+        /// Set current <see cref="Tool"/> to <see cref="Tool.Bezier"/>.
         /// </summary>
         private void OnSetToolToBezier()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.ToolBezierCommand.Execute(null);
+            Commands.ToolBezierCommand.Execute(null);
             UpdateToolMenu();
         }
 
         /// <summary>
-        /// 
+        /// Set current <see cref="Tool"/> to <see cref="Tool.QBezier"/>.
         /// </summary>
         private void OnSetToolToQBezier()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.ToolQBezierCommand.Execute(null);
+            Commands.ToolQBezierCommand.Execute(null);
             UpdateToolMenu();
         }
 
         /// <summary>
-        /// 
+        /// Set current <see cref="Tool"/> to <see cref="Tool.Path"/>.
         /// </summary>
         private void OnSetToolToPath()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.ToolPathCommand.Execute(null);
+            Commands.ToolPathCommand.Execute(null);
             UpdateToolMenu();
         }
 
         /// <summary>
-        /// 
+        /// Set current <see cref="PathTool"/> to <see cref="PathTool.Move"/>.
         /// </summary>
         private void OnSetToolToMove()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.ToolMoveCommand.Execute(null);
+            Commands.ToolMoveCommand.Execute(null);
             UpdateToolMenu();
         }
 
         /// <summary>
-        /// 
+        /// Set current <see cref="Tool"/> to <see cref="Tool.Rectangle"/>.
         /// </summary>
         private void OnSetToolToRectangle()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.ToolRectangleCommand.Execute(null);
+            Commands.ToolRectangleCommand.Execute(null);
             UpdateToolMenu();
         }
 
         /// <summary>
-        /// 
+        /// Set current <see cref="Tool"/> to <see cref="Tool.Ellipse"/>.
         /// </summary>
         private void OnSetToolToEllipse()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.ToolEllipseCommand.Execute(null);
+            Commands.ToolEllipseCommand.Execute(null);
             UpdateToolMenu();
         }
 
         /// <summary>
-        /// 
+        /// Set current <see cref="Tool"/> to <see cref="Tool.Text"/>.
         /// </summary>
         private void OnSetToolToText()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.ToolTextCommand.Execute(null);
+            Commands.ToolTextCommand.Execute(null);
             UpdateToolMenu();
         }
 
         /// <summary>
-        /// 
+        /// Set current <see cref="Tool"/> to <see cref="Tool.Image"/>.
         /// </summary>
         private void OnSetToolToImage()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.ToolImageCommand.Execute(null);
+            Commands.ToolImageCommand.Execute(null);
             UpdateToolMenu();
         }
 
         /// <summary>
-        /// 
+        /// Toggle <see cref="Options.DefaultIsFilled"/> option.
         /// </summary>
         private void OnSetDefaultIsFilled()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.DefaultIsFilledCommand.Execute(null);
+            Commands.DefaultIsFilledCommand.Execute(null);
             UpdateOptionsMenu();
         }
 
         /// <summary>
-        /// 
+        /// Toggle <see cref="Options.SnapToGrid"/> option.
         /// </summary>
         private void OnSetSnapToGrid()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.SnapToGridCommand.Execute(null);
+            Commands.SnapToGridCommand.Execute(null);
             UpdateOptionsMenu();
         }
 
         /// <summary>
-        /// 
+        /// Toggle <see cref="Options.TryToConnect"/> option.
         /// </summary>
         private void OnSetTryToConnect()
         {
-            var context = DataContext as EditorContext;
-            if (context == null)
-                return;
-
-            context.Commands.TryToConnectCommand.Execute(null);
+            Commands.TryToConnectCommand.Execute(null);
             UpdateOptionsMenu();
         }
 
         /// <summary>
-        /// 
+        /// Get the <see cref="XImage"/> key from file path.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The image key.</returns>
         private async Task<string> GetImageKey()
         {
-            var context = DataContext as EditorContext;
-            if (context == null || context.Editor.Project == null)
+            if (_context.Editor.Project == null)
                 return null;
 
             openFileDialog2.Filter = "All (*.*)|*.*";
@@ -662,7 +556,7 @@ namespace Core2D.UI.WinForms
             {
                 var path = openFileDialog2.FileName;
                 var bytes = System.IO.File.ReadAllBytes(path);
-                var key = context.Editor.Project.AddImageFromFile(path, bytes);
+                var key = _context.Editor.Project.AddImageFromFile(path, bytes);
                 return await Task.Run(() => key);
             }
             return null;

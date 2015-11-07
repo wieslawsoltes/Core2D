@@ -7,7 +7,7 @@
         xmlns:converters="clr-namespace:Core2D.UI.Perspex.Desktop.Converters;assembly=Core2D.UI.Perspex.Desktop"
         xmlns:controls="clr-namespace:Core2D.UI.Perspex.Desktop.Controls;assembly=Core2D.UI.Perspex.Desktop"
         xmlns:core="clr-namespace:Core2D;assembly=Core2D"
-        Width="1320" Height="670"
+        Width="1324" Height="670"
         Background="#FFFFFFFF"
         UseLayoutRounding="True">
     <Window.Title>

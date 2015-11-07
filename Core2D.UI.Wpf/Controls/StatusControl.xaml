@@ -102,80 +102,80 @@
             <StatusBarItem.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="{x:Static p:Resources.MenuToolNone}" 
-                              Command="{Binding Commands.ToolNoneCommand}"
+                              Command="{x:Static core:Commands.ToolNoneCommand}"
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.None}}" 
                               InputGestureText="N">
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolSelection}" 
-                              Command="{Binding Commands.ToolSelectionCommand}" 
+                              Command="{x:Static core:Commands.ToolSelectionCommand}" 
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Selection}}"
                               InputGestureText="S">
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolPoint}" 
-                              Command="{Binding Commands.ToolPointCommand}"
+                              Command="{x:Static core:Commands.ToolPointCommand}"
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Point}}" 
                               InputGestureText="P">
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolLine}" 
-                              Command="{Binding Commands.ToolLineCommand}" 
+                              Command="{x:Static core:Commands.ToolLineCommand}" 
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Line}}"
                               InputGestureText="L">
                     </MenuItem>
                     <MenuItem Header="{x:Static p:Resources.MenuToolArc}" 
-                              Command="{Binding Commands.ToolArcCommand}" 
+                              Command="{x:Static core:Commands.ToolArcCommand}" 
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Arc}}"
                               InputGestureText="A">
                     </MenuItem>
                     <MenuItem Header="{x:Static p:Resources.MenuToolBezier}" 
-                              Command="{Binding Commands.ToolBezierCommand}" 
+                              Command="{x:Static core:Commands.ToolBezierCommand}" 
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Bezier}}"
                               InputGestureText="B">
                     </MenuItem>
                     <MenuItem Header="{x:Static p:Resources.MenuToolQBezier}" 
-                              Command="{Binding Commands.ToolQBezierCommand}"
+                              Command="{x:Static core:Commands.ToolQBezierCommand}"
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.QBezier}}" 
                               InputGestureText="Q">
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolPath}" 
-                              Command="{Binding Commands.ToolPathCommand}" 
+                              Command="{x:Static core:Commands.ToolPathCommand}" 
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Path}}"
                               InputGestureText="H">
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolRectangle}" 
-                              Command="{Binding Commands.ToolRectangleCommand}" 
+                              Command="{x:Static core:Commands.ToolRectangleCommand}" 
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Rectangle}}"
                               InputGestureText="R">
                     </MenuItem>
                     <MenuItem Header="{x:Static p:Resources.MenuToolEllipse}" 
-                              Command="{Binding Commands.ToolEllipseCommand}" 
+                              Command="{x:Static core:Commands.ToolEllipseCommand}" 
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Ellipse}}"
                               InputGestureText="E">
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolText}" 
-                              Command="{Binding Commands.ToolTextCommand}" 
+                              Command="{x:Static core:Commands.ToolTextCommand}" 
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Text}}"
                               InputGestureText="T">
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuToolImage}" 
-                              Command="{Binding Commands.ToolImageCommand}" 
+                              Command="{x:Static core:Commands.ToolImageCommand}" 
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Image}}"
                               InputGestureText="I">
@@ -254,32 +254,32 @@
             <StatusBarItem.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="{x:Static p:Resources.MenuPathToolLine}" 
-                              Command="{Binding Commands.ToolLineCommand}" 
+                              Command="{x:Static core:Commands.ToolLineCommand}" 
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.Line}}"
                               InputGestureText="L">
                     </MenuItem>
                     <MenuItem Header="{x:Static p:Resources.MenuPathToolArc}" 
-                              Command="{Binding Commands.ToolArcCommand}" 
+                              Command="{x:Static core:Commands.ToolArcCommand}" 
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.Arc}}"
                               InputGestureText="A">
                     </MenuItem>
                     <MenuItem Header="{x:Static p:Resources.MenuPathToolBezier}" 
-                              Command="{Binding Commands.ToolBezierCommand}" 
+                              Command="{x:Static core:Commands.ToolBezierCommand}" 
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.Bezier}}"
                               InputGestureText="B">
                     </MenuItem>
                     <MenuItem Header="{x:Static p:Resources.MenuPathToolQBezier}" 
-                              Command="{Binding Commands.ToolQBezierCommand}"
+                              Command="{x:Static core:Commands.ToolQBezierCommand}"
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.QBezier}}" 
                               InputGestureText="Q">
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="{x:Static p:Resources.MenuPathToolMove}" 
-                              Command="{Binding Commands.ToolMoveCommand}" 
+                              Command="{x:Static core:Commands.ToolMoveCommand}" 
                               IsCheckable="False"
                               IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.Move}}"
                               InputGestureText="M">

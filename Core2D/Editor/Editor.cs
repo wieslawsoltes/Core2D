@@ -1015,17 +1015,17 @@ namespace Core2D
         /// <param name="property"></param>
         public void AddProperty(Container container, Property property)
         {
-            var previous = container.Properties;
+            var previous = container.Data.Properties;
 
             if (_enableHistory)
             {
-                var next = container.Properties.Add(property);
-                _history.Snapshot(previous, next, (p) => container.Properties = p);
-                container.Properties = next;
+                var next = container.Data.Properties.Add(property);
+                _history.Snapshot(previous, next, (p) => container.Data.Properties = p);
+                container.Data.Properties = next;
             }
             else
             {
-                container.Properties = container.Properties.Add(property);
+                container.Data.Properties = container.Data.Properties.Add(property);
             }
         }
 
@@ -1039,14 +1039,15 @@ namespace Core2D
             if (_project == null)
                 return;
 
+            var db = Database.Create(name);
             var builder = ImmutableArray.CreateBuilder<Column>();
 
             for (int i = 0; i < columns; i++)
             {
-                builder.Add(Column.Create("Column" + i));
+                builder.Add(Column.Create("Column" + i, db));
             }
 
-            var db = Database.Create(name, builder.ToImmutable());
+            db.Columns = builder.ToImmutable();
 
             if (_enableHistory)
             {
@@ -1103,13 +1104,13 @@ namespace Core2D
                 if (_enableHistory)
                 {
                     var previous = db.Columns;
-                    var next = db.Columns.Add(Column.Create(name + db.Columns.Length));
+                    var next = db.Columns.Add(Column.Create(name + db.Columns.Length, db));
                     _history.Snapshot(previous, next, (p) => db.Columns = p);
                     db.Columns = next;
                 }
                 else
                 {
-                    db.Columns = db.Columns.Add(Column.Create(name + db.Columns.Length));
+                    db.Columns = db.Columns.Add(Column.Create(name + db.Columns.Length, db));
                 }
             }
         }
@@ -1128,7 +1129,8 @@ namespace Core2D
             var values = Enumerable.Repeat(value, db.Columns.Length).Select(c => Value.Create(c));
             var record = Record.Create(
                 db.Columns,
-                ImmutableArray.CreateRange<Value>(values));
+                ImmutableArray.CreateRange<Value>(values),
+                db);
 
             if (_enableHistory)
             {
@@ -1159,7 +1161,7 @@ namespace Core2D
                     data.Bindings = ImmutableArray.Create<Binding>();
                 }
 
-                AddBinding(data, Binding.Create(property, path));
+                AddBinding(data, Binding.Create(property, path, data));
             }
         }
 
@@ -1181,17 +1183,17 @@ namespace Core2D
                         data.Properties = ImmutableArray.Create<Property>();
                     }
 
-                    AddProperty(data, Property.Create(name, value));
+                    AddProperty(data, Property.Create(name, value, data));
                 }
                 else if (owner is Container)
                 {
                     var container = owner as Container;
-                    if (container.Properties == null)
+                    if (container.Data.Properties == null)
                     {
-                        container.Properties = ImmutableArray.Create<Property>();
+                        container.Data.Properties = ImmutableArray.Create<Property>();
                     }
 
-                    AddProperty(container, Property.Create(name, value));
+                    AddProperty(container, Property.Create(name, value, container.Data));
                 }
             }
         }
@@ -1547,10 +1549,10 @@ namespace Core2D
         /// <param name="parameter"></param>
         public void RemoveColumn(object parameter)
         {
-            if (parameter != null && parameter is ColumnParameter)
+            if (parameter != null && parameter is Column)
             {
-                var owner = (parameter as ColumnParameter).Owner;
-                var column = (parameter as ColumnParameter).Column;
+                var column = parameter as Column;
+                var owner = column.Owner;
 
                 if (owner is Database)
                 {
@@ -1634,14 +1636,14 @@ namespace Core2D
         /// <param name="parameter"></param>
         public void RemoveBinding(object parameter)
         {
-            if (parameter != null && parameter is BindingParameter)
+            if (parameter != null && parameter is Binding)
             {
-                var owner = (parameter as BindingParameter).Owner;
-                var binding = (parameter as BindingParameter).Binding;
+                var binding = parameter as Binding;
+                var owner = binding.Owner;
 
                 if (owner != null && owner is Data)
                 {
-                    var data = owner as Data;
+                    var data = owner;
                     if (data.Bindings != null)
                     {
                         if (_enableHistory)
@@ -1666,14 +1668,14 @@ namespace Core2D
         /// <param name="parameter"></param>
         public void RemoveProperty(object parameter)
         {
-            if (parameter != null && parameter is PropertyParameter)
+            if (parameter != null && parameter is Property)
             {
-                var owner = (parameter as PropertyParameter).Owner;
-                var property = (parameter as PropertyParameter).Property;
+                var property = parameter as Property;
+                var owner = property.Owner;
 
                 if (owner is Data)
                 {
-                    var data = owner as Data;
+                    var data = owner;
                     if (data.Properties != null)
                     {
                         if (_enableHistory)
@@ -1686,24 +1688,6 @@ namespace Core2D
                         else
                         {
                             data.Properties = data.Properties.Remove(property);
-                        }
-                    }
-                }
-                else if (owner is Container)
-                {
-                    var container = owner as Container;
-                    if (container.Properties != null)
-                    {
-                        if (_enableHistory)
-                        {
-                            var previous = container.Properties;
-                            var next = container.Properties.Remove(property);
-                            _history.Snapshot(previous, next, (p) => container.Properties = p);
-                            container.Properties = next;
-                        }
-                        else
-                        {
-                            container.Properties = container.Properties.Remove(property);
                         }
                     }
                 }

@@ -14,7 +14,6 @@ namespace Core2D
     /// </summary>
     public class EditorContext : ObservableObject, IDisposable
     {
-        private EditorCommands _commands;
         private Editor _editor;
         private IView _view;
         private IRenderer[] _renderers;
@@ -29,15 +28,6 @@ namespace Core2D
         private RecentProject _currentRecentProject = default(RecentProject);
         private Container _containerToCopy = default(Container);
         private Document _documentToCopy = default(Document);
-
-        /// <summary>
-        ///
-        /// </summary>
-        public EditorCommands Commands
-        {
-            get { return _commands; }
-            set { Update(ref _commands, value); }
-        }
 
         /// <summary>
         ///
@@ -206,552 +196,6 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        public void InitializeCommands()
-        {
-            try
-            {
-                _commands = new EditorCommands();
-
-                _commands.NewCommand =
-                    Command<object>.Create(
-                        (item) => OnNew(item),
-                        (item) => IsEditMode());
-
-                _commands.CloseCommand =
-                    Command.Create(
-                        () => OnClose(),
-                        () => IsEditMode());
-
-                _commands.ExitCommand =
-                    Command.Create(
-                        () => OnExit(),
-                        () => true);
-
-                _commands.UndoCommand =
-                    Command.Create(
-                        () => OnUndo(),
-                        () => IsEditMode() /* && CanUndo() */);
-
-                _commands.RedoCommand =
-                    Command.Create(
-                        () => OnRedo(),
-                        () => IsEditMode() /* && CanRedo() */);
-
-                _commands.CutCommand =
-                    Command<object>.Create(
-                        (item) => OnCut(item),
-                        (item) => IsEditMode() /* && CanCopy() */);
-
-                _commands.CopyCommand =
-                    Command<object>.Create(
-                        (item) => OnCopy(item),
-                        (item) => IsEditMode() /* && CanCopy() */);
-
-                _commands.PasteCommand =
-                    Command<object>.Create(
-                        (item) => OnPaste(item),
-                        (item) => IsEditMode() /* && CanPaste() */);
-
-                _commands.DeleteCommand =
-                    Command<object>.Create(
-                        (item) => OnDelete(item),
-                        (item) => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.SelectAllCommand =
-                    Command.Create(
-                        () => OnSelectAll(),
-                        () => IsEditMode());
-
-                _commands.DeselectAllCommand =
-                    Command.Create(
-                        () => OnDeselectAll(),
-                        () => IsEditMode());
-
-                _commands.ClearAllCommand =
-                    Command.Create(
-                        () => OnClearAll(),
-                        () => IsEditMode());
-
-                _commands.GroupCommand =
-                    Command.Create(
-                        () => _editor.GroupSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.UngroupCommand =
-                    Command.Create(
-                        () => _editor.UngroupSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.BringToFrontCommand =
-                    Command.Create(
-                        () => _editor.BringToFrontSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.SendToBackCommand =
-                    Command.Create(
-                        () => _editor.SendToBackSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.BringForwardCommand =
-                    Command.Create(
-                        () => _editor.BringForwardSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.SendBackwardCommand =
-                    Command.Create(
-                        () => _editor.SendBackwardSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.MoveUpCommand =
-                    Command.Create(
-                        () => _editor.MoveUpSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.MoveDownCommand =
-                    Command.Create(
-                        () => _editor.MoveDownSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.MoveLeftCommand =
-                    Command.Create(
-                        () => _editor.MoveLeftSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.MoveRightCommand =
-                    Command.Create(
-                        () => _editor.MoveRightSelected(),
-                        () => IsEditMode() /* && _editor.IsSelectionAvailable() */);
-
-                _commands.ToolNoneCommand =
-                    Command.Create(
-                        () => OnToolNone(),
-                        () => IsEditMode());
-
-                _commands.ToolSelectionCommand =
-                    Command.Create(
-                        () => OnToolSelection(),
-                        () => IsEditMode());
-
-                _commands.ToolPointCommand =
-                    Command.Create(
-                        () => OnToolPoint(),
-                        () => IsEditMode());
-
-                _commands.ToolLineCommand =
-                    Command.Create(
-                        () => OnToolLine(),
-                        () => IsEditMode());
-
-                _commands.ToolArcCommand =
-                    Command.Create(
-                        () => OnToolArc(),
-                        () => IsEditMode());
-
-                _commands.ToolBezierCommand =
-                    Command.Create(
-                        () => OnToolBezier(),
-                        () => IsEditMode());
-
-                _commands.ToolQBezierCommand =
-                    Command.Create(
-                        () => OnToolQBezier(),
-                        () => IsEditMode());
-
-                _commands.ToolPathCommand =
-                    Command.Create(
-                        () => OnToolPath(),
-                        () => IsEditMode());
-
-                _commands.ToolRectangleCommand =
-                    Command.Create(
-                        () => OnToolRectangle(),
-                        () => IsEditMode());
-
-                _commands.ToolEllipseCommand =
-                    Command.Create(
-                        () => OnToolEllipse(),
-                        () => IsEditMode());
-
-                _commands.ToolTextCommand =
-                    Command.Create(
-                        () => OnToolText(),
-                        () => IsEditMode());
-
-                _commands.ToolImageCommand =
-                    Command.Create(
-                        () => OnToolImage(),
-                        () => IsEditMode());
-
-                _commands.ToolMoveCommand =
-                    Command.Create(
-                        () => OnToolMove(),
-                        () => IsEditMode());
-
-                _commands.DefaultIsStrokedCommand =
-                    Command.Create(
-                        () => OnToggleDefaultIsStroked(),
-                        () => IsEditMode());
-
-                _commands.DefaultIsFilledCommand =
-                    Command.Create(
-                        () => OnToggleDefaultIsFilled(),
-                        () => IsEditMode());
-
-                _commands.DefaultIsClosedCommand =
-                    Command.Create(
-                        () => OnToggleDefaultIsClosed(),
-                        () => IsEditMode());
-
-                _commands.DefaultIsSmoothJoinCommand =
-                    Command.Create(
-                        () => OnToggleDefaultIsSmoothJoin(),
-                        () => IsEditMode());
-
-                _commands.SnapToGridCommand =
-                    Command.Create(
-                        () => OnToggleSnapToGrid(),
-                        () => IsEditMode());
-
-                _commands.TryToConnectCommand =
-                    Command.Create(
-                        () => OnToggleTryToConnect(),
-                        () => IsEditMode());
-
-                _commands.AddDatabaseCommand =
-                    Command.Create(
-                        () => _editor.AddDatabase(),
-                        () => IsEditMode());
-
-                _commands.RemoveDatabaseCommand =
-                    Command<object>.Create(
-                        (db) => _editor.RemoveDatabase(db),
-                        (db) => IsEditMode());
-
-                _commands.AddColumnCommand =
-                    Command<object>.Create(
-                        (owner) => _editor.AddColumn(owner),
-                        (owner) => IsEditMode());
-
-                _commands.RemoveColumnCommand =
-                    Command<object>.Create(
-                        (parameter) => _editor.RemoveColumn(parameter),
-                        (parameter) => IsEditMode());
-
-                _commands.AddRecordCommand =
-                    Command.Create(
-                        () => _editor.AddRecord(),
-                        () => IsEditMode());
-
-                _commands.RemoveRecordCommand =
-                    Command.Create(
-                        () => _editor.RemoveRecord(),
-                        () => IsEditMode());
-
-                _commands.ResetRecordCommand =
-                    Command<object>.Create(
-                        (owner) => _editor.ResetRecord(owner),
-                        (owner) => IsEditMode());
-
-                _commands.ApplyRecordCommand =
-                    Command<object>.Create(
-                        (item) => OnApplyRecord(item),
-                        (item) => IsEditMode());
-                
-                _commands.AddBindingCommand =
-                    Command<object>.Create(
-                        (owner) => _editor.AddBinding(owner),
-                        (owner) => IsEditMode());
-
-                _commands.RemoveBindingCommand =
-                    Command<object>.Create(
-                        (parameter) => _editor.RemoveBinding(parameter),
-                        (parameter) => IsEditMode());
-
-                _commands.AddPropertyCommand =
-                    Command<object>.Create(
-                        (owner) => _editor.AddProperty(owner),
-                        (owner) => IsEditMode());
-
-                _commands.RemovePropertyCommand =
-                    Command<object>.Create(
-                        (parameter) => _editor.RemoveProperty(parameter),
-                        (parameter) => IsEditMode());
-
-                _commands.AddGroupLibraryCommand =
-                    Command.Create(
-                        () => _editor.AddGroupLibrary(),
-                        () => IsEditMode());
-
-                _commands.RemoveGroupLibraryCommand =
-                    Command.Create(
-                        () => _editor.RemoveCurrentGroupLibrary(),
-                        () => IsEditMode());
-
-                _commands.AddGroupCommand =
-                    Command.Create(
-                        () => OnAddGroup(),
-                        () => IsEditMode());
-
-                _commands.RemoveGroupCommand =
-                    Command.Create(
-                        () => OnRemoveGroup(),
-                        () => IsEditMode());
-
-                _commands.AddLayerCommand =
-                    Command.Create(
-                        () => _editor.AddLayer(),
-                        () => IsEditMode());
-
-                _commands.RemoveLayerCommand =
-                    Command.Create(
-                        () => _editor.RemoveCurrentLayer(),
-                        () => IsEditMode());
-
-                _commands.AddStyleLibraryCommand =
-                    Command.Create(
-                        () => _editor.AddStyleLibrary(),
-                        () => IsEditMode());
-
-                _commands.RemoveStyleLibraryCommand =
-                    Command.Create(
-                        () => _editor.RemoveCurrentStyleLibrary(),
-                        () => IsEditMode());
-
-                _commands.AddStyleCommand =
-                    Command.Create(
-                        () => _editor.AddStyle(),
-                        () => IsEditMode());
-
-                _commands.RemoveStyleCommand =
-                    Command.Create(
-                        () => _editor.RemoveCurrentStyle(),
-                        () => IsEditMode());
-
-                _commands.ApplyStyleCommand =
-                    Command<object>.Create(
-                        (item) => OnApplyStyle(item),
-                        (item) => IsEditMode());
-
-                _commands.RemoveShapeCommand =
-                    Command.Create(
-                        () => _editor.RemoveCurrentShape(),
-                        () => IsEditMode());
-
-                _commands.AddTemplateCommand =
-                    Command.Create(
-                        () => OnAddTemplate(),
-                        () => IsEditMode());
-
-                _commands.RemoveTemplateCommand =
-                    Command.Create(
-                        () => OnRemoveTemplate(),
-                        () => IsEditMode());
-
-                _commands.EditTemplateCommand =
-                    Command.Create(
-                        () => OnEditTemplate(),
-                        () => IsEditMode());
-
-                _commands.ApplyTemplateCommand =
-                    Command<object>.Create(
-                        (item) => OnApplyTemplate(item),
-                        (item) => true);
-
-                _commands.SelectedItemChangedCommand =
-                    Command<object>.Create(
-                        (item) => OnSelectedItemChanged(item),
-                        (item) => IsEditMode());
-
-                _commands.AddContainerCommand =
-                    Command<object>.Create(
-                        (item) => OnAddContainer(item),
-                        (item) => IsEditMode());
-
-                _commands.InsertContainerBeforeCommand =
-                    Command<object>.Create(
-                        (item) => OnInsertContainerBefore(item),
-                        (item) => IsEditMode());
-
-                _commands.InsertContainerAfterCommand =
-                    Command<object>.Create(
-                        (item) => OnInsertContainerAfter(item),
-                        (item) => IsEditMode());
-
-                _commands.AddDocumentCommand =
-                    Command<object>.Create(
-                        (item) => OnAddDocument(item),
-                        (item) => IsEditMode());
-
-                _commands.InsertDocumentBeforeCommand =
-                    Command<object>.Create(
-                        (item) => OnInsertDocumentBefore(item),
-                        (item) => IsEditMode());
-
-                _commands.InsertDocumentAfterCommand =
-                    Command<object>.Create(
-                        (item) => OnInsertDocumentAfter(item),
-                        (item) => IsEditMode());
-            }
-            catch (Exception ex)
-            {
-                if (_editor != null && _editor.Log != null)
-                {
-                    _editor.Log.LogError("{0}{1}{2}",
-                        ex.Message,
-                        Environment.NewLine,
-                        ex.StackTrace);
-                }
-                else
-                {
-                    Debug.WriteLine(ex.Message);
-                    Debug.WriteLine(ex.StackTrace);
-                }
-            }
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        private void UpdateCanExecuteState()
-        {
-            (_commands.NewCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.OpenCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.CloseCommand as Command).NotifyCanExecuteChanged();
-            (_commands.SaveCommand as Command).NotifyCanExecuteChanged();
-            (_commands.SaveAsCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ExportCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExitCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.ImportDataCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportDataCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.UpdateDataCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.ImportStyleCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportStylesCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportStyleLibraryCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportStyleLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportGroupCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportGroupsCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportGroupLibraryCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportGroupLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportTemplateCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ImportTemplatesCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportStyleCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportStylesCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportStyleLibraryCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportStyleLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportGroupCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportGroupsCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportGroupLibraryCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportGroupLibrariesCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportTemplateCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ExportTemplatesCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.UndoCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RedoCommand as Command).NotifyCanExecuteChanged();
-            (_commands.CopyAsEmfCommand as Command).NotifyCanExecuteChanged();
-            (_commands.CutCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.CopyCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.PasteCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.DeleteCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.SelectAllCommand as Command).NotifyCanExecuteChanged();
-            (_commands.DeselectAllCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ClearAllCommand as Command).NotifyCanExecuteChanged();
-            (_commands.GroupCommand as Command).NotifyCanExecuteChanged();
-            (_commands.UngroupCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.BringToFrontCommand as Command).NotifyCanExecuteChanged();
-            (_commands.BringForwardCommand as Command).NotifyCanExecuteChanged();
-            (_commands.SendBackwardCommand as Command).NotifyCanExecuteChanged();
-            (_commands.SendToBackCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.MoveUpCommand as Command).NotifyCanExecuteChanged();
-            (_commands.MoveDownCommand as Command).NotifyCanExecuteChanged();
-            (_commands.MoveLeftCommand as Command).NotifyCanExecuteChanged();
-            (_commands.MoveRightCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.ToolNoneCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolSelectionCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolPointCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolLineCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolArcCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolBezierCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolQBezierCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolRectangleCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolEllipseCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolPathCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolTextCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolImageCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ToolMoveCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.DefaultIsStrokedCommand as Command).NotifyCanExecuteChanged();
-            (_commands.DefaultIsFilledCommand as Command).NotifyCanExecuteChanged();
-            (_commands.DefaultIsClosedCommand as Command).NotifyCanExecuteChanged();
-            (_commands.DefaultIsSmoothJoinCommand as Command).NotifyCanExecuteChanged();
-            (_commands.SnapToGridCommand as Command).NotifyCanExecuteChanged();
-            (_commands.TryToConnectCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.AddDatabaseCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RemoveDatabaseCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.AddColumnCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.RemoveColumnCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.AddRecordCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RemoveRecordCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ResetRecordCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.ApplyRecordCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.AddBindingCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.RemoveBindingCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.AddPropertyCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.RemovePropertyCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.AddGroupLibraryCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RemoveGroupLibraryCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.AddGroupCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RemoveGroupCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.AddLayerCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RemoveLayerCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.AddStyleCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RemoveStyleCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ApplyStyleCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.AddStyleLibraryCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RemoveStyleLibraryCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.RemoveShapeCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.ZoomResetCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ZoomExtentCommand as Command).NotifyCanExecuteChanged();
-
-            (_commands.AddTemplateCommand as Command).NotifyCanExecuteChanged();
-            (_commands.RemoveTemplateCommand as Command).NotifyCanExecuteChanged();
-            (_commands.EditTemplateCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ApplyTemplateCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.SelectedItemChangedCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.AddContainerCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.InsertContainerBeforeCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.InsertContainerAfterCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.AddDocumentCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.InsertDocumentBeforeCommand as Command<object>).NotifyCanExecuteChanged();
-            (_commands.InsertDocumentAfterCommand as Command<object>).NotifyCanExecuteChanged();
-
-            (_commands.LoadWindowLayoutCommand as Command).NotifyCanExecuteChanged();
-            (_commands.SaveWindowLayoutCommand as Command).NotifyCanExecuteChanged();
-            (_commands.ResetWindowLayoutCommand as Command).NotifyCanExecuteChanged();
-        }
-
-        /// <summary>
         ///
         /// </summary>
         public void Dispose()
@@ -798,11 +242,11 @@ namespace Core2D
                     var container = default(Container);
                     if (_projectFactory != null)
                     {
-                        container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
+                        container = _projectFactory.GetContainer(_editor.Project, Constants.DefaultContainerName);
                     }
                     else
                     {
-                        container = Container.Create(EditorConstants.DefaultContainerName);
+                        container = Container.Create(Constants.DefaultContainerName);
                     }
 
                     if (_editor.EnableHistory)
@@ -827,11 +271,11 @@ namespace Core2D
                 var container = default(Container);
                 if (_projectFactory != null)
                 {
-                    container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
+                    container = _projectFactory.GetContainer(_editor.Project, Constants.DefaultContainerName);
                 }
                 else
                 {
-                    container = Container.Create(EditorConstants.DefaultContainerName);
+                    container = Container.Create(Constants.DefaultContainerName);
                 }
 
                 if (_editor.EnableHistory)
@@ -853,11 +297,11 @@ namespace Core2D
                 var document = default(Document);
                 if (_projectFactory != null)
                 {
-                    document = _projectFactory.GetDocument(_editor.Project, EditorConstants.DefaultDocumentName);
+                    document = _projectFactory.GetDocument(_editor.Project, Constants.DefaultDocumentName);
                 }
                 else
                 {
-                    document = Document.Create(EditorConstants.DefaultDocumentName);
+                    document = Document.Create(Constants.DefaultDocumentName);
                 }
                 
                 if (_editor.EnableHistory)
@@ -1352,7 +796,7 @@ namespace Core2D
             }
             else
             {
-                template = Container.Create(EditorConstants.DefaultContainerName, true);
+                template = Container.Create(Constants.DefaultContainerName, true);
             }
 
             _editor.AddTemplate(template);
@@ -1421,11 +865,11 @@ namespace Core2D
             var container = default(Container);
             if (_projectFactory != null)
             {
-                container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
+                container = _projectFactory.GetContainer(_editor.Project, Constants.DefaultContainerName);
             }
             else
             {
-                container = Container.Create(EditorConstants.DefaultContainerName);
+                container = Container.Create(Constants.DefaultContainerName);
             }
 
             _editor.AddContainer(container);
@@ -1449,11 +893,11 @@ namespace Core2D
                 var container = default(Container);
                 if (_projectFactory != null)
                 {
-                    container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
+                    container = _projectFactory.GetContainer(_editor.Project, Constants.DefaultContainerName);
                 }
                 else
                 {
-                    container = Container.Create(EditorConstants.DefaultContainerName);
+                    container = Container.Create(Constants.DefaultContainerName);
                 }
 
                 _editor.AddContainerAt(container, index);
@@ -1478,11 +922,11 @@ namespace Core2D
                 var container = default(Container);
                 if (_projectFactory != null)
                 {
-                    container = _projectFactory.GetContainer(_editor.Project, EditorConstants.DefaultContainerName);
+                    container = _projectFactory.GetContainer(_editor.Project, Constants.DefaultContainerName);
                 }
                 else
                 {
-                    container = Container.Create(EditorConstants.DefaultContainerName);
+                    container = Container.Create(Constants.DefaultContainerName);
                 }
 
                 _editor.AddContainerAt(container, index + 1);
@@ -1502,11 +946,11 @@ namespace Core2D
             var document = default(Document);
             if (_projectFactory != null)
             {
-                document = _projectFactory.GetDocument(_editor.Project, EditorConstants.DefaultDocumentName);
+                document = _projectFactory.GetDocument(_editor.Project, Constants.DefaultDocumentName);
             }
             else
             {
-                document = Document.Create(EditorConstants.DefaultDocumentName);
+                document = Document.Create(Constants.DefaultDocumentName);
             }
             
             _editor.AddDocument(document);
@@ -1531,11 +975,11 @@ namespace Core2D
                 var document = default(Document);
                 if (_projectFactory != null)
                 {
-                    document = _projectFactory.GetDocument(_editor.Project, EditorConstants.DefaultDocumentName);
+                    document = _projectFactory.GetDocument(_editor.Project, Constants.DefaultDocumentName);
                 }
                 else
                 {
-                    document = Document.Create(EditorConstants.DefaultDocumentName);
+                    document = Document.Create(Constants.DefaultDocumentName);
                 }
 
                 _editor.AddDocumentAt(document, index);
@@ -1561,11 +1005,11 @@ namespace Core2D
                 var document = default(Document);
                 if (_projectFactory != null)
                 {
-                    document = _projectFactory.GetDocument(_editor.Project, EditorConstants.DefaultDocumentName);
+                    document = _projectFactory.GetDocument(_editor.Project, Constants.DefaultDocumentName);
                 }
                 else
                 {
-                    document = Document.Create(EditorConstants.DefaultDocumentName);
+                    document = Document.Create(Constants.DefaultDocumentName);
                 }
 
                 _editor.AddDocumentAt(document, index + 1);
@@ -2605,7 +2049,7 @@ namespace Core2D
                         // create Imported style library
                         if (_editor.Project.CurrentStyleLibrary == null)
                         {
-                            var sg = StyleLibrary.Create(EditorConstants.ImportedStyleLibraryName);
+                            var sg = StyleLibrary.Create(Constants.ImportedStyleLibraryName);
                             _editor.Project.StyleLibraries = _editor.Project.StyleLibraries.Add(sg);
                             _editor.Project.CurrentStyleLibrary = sg;
                         }
@@ -2667,7 +2111,7 @@ namespace Core2D
                         // create Imported database
                         if (_editor.Project.CurrentDatabase == null)
                         {
-                            var db = Database.Create(EditorConstants.ImportedDatabaseName, shape.Data.Record.Columns);
+                            var db = Database.Create(Constants.ImportedDatabaseName, shape.Data.Record.Columns);
                             _editor.Project.Databases = _editor.Project.Databases.Add(db);
                             _editor.Project.CurrentDatabase = db;
                         }
@@ -2893,62 +2337,62 @@ namespace Core2D
 
                         string ext = System.IO.Path.GetExtension(path);
 
-                        if (string.Compare(ext, EditorConstants.ProjectExtension, true) == 0)
+                        if (string.Compare(ext, Constants.ProjectExtension, true) == 0)
                         {
                             Open(path);
                             result = true;
                         }
-                        else if (string.Compare(ext, EditorConstants.CsvExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.CsvExtension, true) == 0)
                         {
                             ImportData(path);
                             result = true;
                         }
-                        else if (string.Compare(ext, EditorConstants.StyleExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.StyleExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project.CurrentStyleLibrary, ImportType.Style);
                             result = true;
                         }
-                        else if (string.Compare(ext, EditorConstants.StylesExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.StylesExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project.CurrentStyleLibrary, ImportType.Styles);
                             result = true;
                         }
-                        else if (string.Compare(ext, EditorConstants.StyleLibraryExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.StyleLibraryExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.StyleLibrary);
                             result = true;
                         }
-                        else if (string.Compare(ext, EditorConstants.StyleLibrariesExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.StyleLibrariesExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.StyleLibraries);
                             result = true;
                         }
-                        else if (string.Compare(ext, EditorConstants.GroupExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.GroupExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project.CurrentGroupLibrary, ImportType.Group);
                             result = true;
                         }
-                        else if (string.Compare(ext, EditorConstants.GroupsExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.GroupsExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project.CurrentGroupLibrary, ImportType.Groups);
                             result = true;
                         }
-                        else if (string.Compare(ext, EditorConstants.GroupLibraryExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.GroupLibraryExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.GroupLibrary);
                             result = true;
                         }
-                        else if (string.Compare(ext, EditorConstants.GroupLibrariesExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.GroupLibrariesExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.GroupLibraries);
                             result = true;
                         }
-                        else if (string.Compare(ext, EditorConstants.TemplateExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.TemplateExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.Template);
                             result = true;
                         }
-                        else if (string.Compare(ext, EditorConstants.TemplatesExtension, true) == 0)
+                        else if (string.Compare(ext, Constants.TemplatesExtension, true) == 0)
                         {
                             ImportObject(path, _editor.Project, ImportType.Templates);
                             result = true;
@@ -3090,8 +2534,8 @@ namespace Core2D
 
                         if (record.Columns.Length >= 2)
                         {
-                            point.Data.Bindings = point.Data.Bindings.Add(Binding.Create("X", record.Columns[0].Name));
-                            point.Data.Bindings = point.Data.Bindings.Add(Binding.Create("Y", record.Columns[1].Name));
+                            point.Data.Bindings = point.Data.Bindings.Add(Binding.Create("X", record.Columns[0].Name, point.Data));
+                            point.Data.Bindings = point.Data.Bindings.Add(Binding.Create("Y", record.Columns[1].Name, point.Data));
                         }
 
                         _editor.AddShape(point);
@@ -3107,14 +2551,14 @@ namespace Core2D
 
                         if (record.Columns.Length >= 2)
                         {
-                            line.Data.Bindings = line.Data.Bindings.Add(Binding.Create("Start.X", record.Columns[0].Name));
-                            line.Data.Bindings = line.Data.Bindings.Add(Binding.Create("Start.Y", record.Columns[1].Name));
+                            line.Data.Bindings = line.Data.Bindings.Add(Binding.Create("Start.X", record.Columns[0].Name, line.Data));
+                            line.Data.Bindings = line.Data.Bindings.Add(Binding.Create("Start.Y", record.Columns[1].Name, line.Data));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            line.Data.Bindings = line.Data.Bindings.Add(Binding.Create("End.X", record.Columns[2].Name));
-                            line.Data.Bindings = line.Data.Bindings.Add(Binding.Create("End.Y", record.Columns[3].Name));
+                            line.Data.Bindings = line.Data.Bindings.Add(Binding.Create("End.X", record.Columns[2].Name, line.Data));
+                            line.Data.Bindings = line.Data.Bindings.Add(Binding.Create("End.Y", record.Columns[3].Name, line.Data));
                         }
 
                         _editor.AddShape(line);
@@ -3130,14 +2574,14 @@ namespace Core2D
 
                         if (record.Columns.Length >= 2)
                         {
-                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(Binding.Create("TopLeft.X", record.Columns[0].Name));
-                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(Binding.Create("TopLeft.Y", record.Columns[1].Name));
+                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(Binding.Create("TopLeft.X", record.Columns[0].Name, rectangle.Data));
+                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(Binding.Create("TopLeft.Y", record.Columns[1].Name, rectangle.Data));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(Binding.Create("BottomRight.X", record.Columns[2].Name));
-                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(Binding.Create("BottomRight.Y", record.Columns[3].Name));
+                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(Binding.Create("BottomRight.X", record.Columns[2].Name, rectangle.Data));
+                            rectangle.Data.Bindings = rectangle.Data.Bindings.Add(Binding.Create("BottomRight.Y", record.Columns[3].Name, rectangle.Data));
                         }
 
                         _editor.AddShape(rectangle);
@@ -3153,14 +2597,14 @@ namespace Core2D
 
                         if (record.Columns.Length >= 2)
                         {
-                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(Binding.Create("TopLeft.X", record.Columns[0].Name));
-                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(Binding.Create("TopLeft.Y", record.Columns[1].Name));
+                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(Binding.Create("TopLeft.X", record.Columns[0].Name, ellipse.Data));
+                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(Binding.Create("TopLeft.Y", record.Columns[1].Name, ellipse.Data));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(Binding.Create("BottomRight.X", record.Columns[2].Name));
-                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(Binding.Create("BottomRight.Y", record.Columns[3].Name));
+                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(Binding.Create("BottomRight.X", record.Columns[2].Name, ellipse.Data));
+                            ellipse.Data.Bindings = ellipse.Data.Bindings.Add(Binding.Create("BottomRight.Y", record.Columns[3].Name, ellipse.Data));
                         }
 
                         _editor.AddShape(ellipse);
@@ -3176,26 +2620,26 @@ namespace Core2D
 
                         if (record.Columns.Length >= 2)
                         {
-                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point1.X", record.Columns[0].Name));
-                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point1.Y", record.Columns[1].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point1.X", record.Columns[0].Name, arc.Data));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point1.Y", record.Columns[1].Name, arc.Data));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point2.X", record.Columns[2].Name));
-                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point2.Y", record.Columns[3].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point2.X", record.Columns[2].Name, arc.Data));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point2.Y", record.Columns[3].Name, arc.Data));
                         }
 
                         if (record.Columns.Length >= 6)
                         {
-                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point3.X", record.Columns[4].Name));
-                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point3.Y", record.Columns[5].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point3.X", record.Columns[4].Name, arc.Data));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point3.Y", record.Columns[5].Name, arc.Data));
                         }
 
                         if (record.Columns.Length >= 8)
                         {
-                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point4.X", record.Columns[6].Name));
-                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point4.Y", record.Columns[7].Name));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point4.X", record.Columns[6].Name, arc.Data));
+                            arc.Data.Bindings = arc.Data.Bindings.Add(Binding.Create("Point4.Y", record.Columns[7].Name, arc.Data));
                         }
 
                         _editor.AddShape(arc);
@@ -3211,26 +2655,26 @@ namespace Core2D
 
                         if (record.Columns.Length >= 2)
                         {
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point1.X", record.Columns[0].Name));
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point1.Y", record.Columns[1].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point1.X", record.Columns[0].Name, bezier.Data));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point1.Y", record.Columns[1].Name, bezier.Data));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point2.X", record.Columns[2].Name));
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point2.Y", record.Columns[3].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point2.X", record.Columns[2].Name, bezier.Data));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point2.Y", record.Columns[3].Name, bezier.Data));
                         }
 
                         if (record.Columns.Length >= 6)
                         {
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point3.X", record.Columns[4].Name));
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point3.Y", record.Columns[5].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point3.X", record.Columns[4].Name, bezier.Data));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point3.Y", record.Columns[5].Name, bezier.Data));
                         }
 
                         if (record.Columns.Length >= 8)
                         {
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point4.X", record.Columns[6].Name));
-                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point4.Y", record.Columns[7].Name));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point4.X", record.Columns[6].Name, bezier.Data));
+                            bezier.Data.Bindings = bezier.Data.Bindings.Add(Binding.Create("Point4.Y", record.Columns[7].Name, bezier.Data));
                         }
 
                         _editor.AddShape(bezier);
@@ -3246,20 +2690,20 @@ namespace Core2D
 
                         if (record.Columns.Length >= 2)
                         {
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point1.X", record.Columns[0].Name));
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point1.Y", record.Columns[1].Name));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point1.X", record.Columns[0].Name, qbezier.Data));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point1.Y", record.Columns[1].Name, qbezier.Data));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point2.X", record.Columns[2].Name));
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point2.Y", record.Columns[3].Name));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point2.X", record.Columns[2].Name, qbezier.Data));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point2.Y", record.Columns[3].Name, qbezier.Data));
                         }
 
                         if (record.Columns.Length >= 6)
                         {
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point3.X", record.Columns[4].Name));
-                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point3.Y", record.Columns[5].Name));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point3.X", record.Columns[4].Name, qbezier.Data));
+                            qbezier.Data.Bindings = qbezier.Data.Bindings.Add(Binding.Create("Point3.Y", record.Columns[5].Name, qbezier.Data));
                         }
 
                         _editor.AddShape(qbezier);
@@ -3276,14 +2720,14 @@ namespace Core2D
 
                         if (record.Columns.Length >= 2)
                         {
-                            text.Data.Bindings = text.Data.Bindings.Add(Binding.Create("TopLeft.X", record.Columns[0].Name));
-                            text.Data.Bindings = text.Data.Bindings.Add(Binding.Create("TopLeft.Y", record.Columns[1].Name));
+                            text.Data.Bindings = text.Data.Bindings.Add(Binding.Create("TopLeft.X", record.Columns[0].Name, text.Data));
+                            text.Data.Bindings = text.Data.Bindings.Add(Binding.Create("TopLeft.Y", record.Columns[1].Name, text.Data));
                         }
 
                         if (record.Columns.Length >= 4)
                         {
-                            text.Data.Bindings = text.Data.Bindings.Add(Binding.Create("BottomRight.X", record.Columns[2].Name));
-                            text.Data.Bindings = text.Data.Bindings.Add(Binding.Create("BottomRight.Y", record.Columns[3].Name));
+                            text.Data.Bindings = text.Data.Bindings.Add(Binding.Create("BottomRight.X", record.Columns[2].Name, text.Data));
+                            text.Data.Bindings = text.Data.Bindings.Add(Binding.Create("BottomRight.Y", record.Columns[3].Name, text.Data));
                         }
 
                         _editor.AddShape(text);
@@ -3322,7 +2766,7 @@ namespace Core2D
                         px + width, py + height,
                         _editor.Project.CurrentStyleLibrary.CurrentStyle,
                         _editor.Project.Options.PointShape, "");
-                    var binding = Binding.Create("Text", record.Columns[i].Name);
+                    var binding = Binding.Create("Text", record.Columns[i].Name, text.Data);
                     text.Data.Bindings = text.Data.Bindings.Add(binding);
                     g.AddShape(text);
 

@@ -14,6 +14,7 @@ namespace Core2D
         private ImmutableArray<Binding> _bindings;
         private ImmutableArray<Property> _properties;
         private Record _record;
+        private object _owner;
 
         /// <summary>
         /// Gets or sets a colletion <see cref="Binding"/> that will be used during drawing.
@@ -43,6 +44,15 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Gets or sets data owner object.
+        /// </summary>
+        public object Owner
+        {
+            get { return _owner; }
+            set { Update(ref _owner, value); }
+        }
+
+        /// <summary>
         /// Gets or sets property Value using Name as key for Properties array values. If property with the specified key does not exist it is created.
         /// </summary>
         /// <param name="name">The property name value.</param>
@@ -69,7 +79,7 @@ namespace Core2D
                     }
                     else
                     {
-                        var property = Property.Create(name, value);
+                        var property = Property.Create(name, value, this);
                         Properties = Properties.Add(property);
                     }
                 }
@@ -82,17 +92,20 @@ namespace Core2D
         /// <param name="bindings"></param>
         /// <param name="properties"></param>
         /// <param name="record"></param>
+        /// <param name="owner"></param>
         /// <returns></returns>
         public static Data Create(
             ImmutableArray<Binding> bindings,
             ImmutableArray<Property> properties,
-            Record record)
+            Record record,
+            object owner)
         {
             return new Data()
             {
                 Bindings = bindings,
                 Properties = properties,
-                Record = record
+                Record = record,
+                Owner = owner
             };
         }
     }

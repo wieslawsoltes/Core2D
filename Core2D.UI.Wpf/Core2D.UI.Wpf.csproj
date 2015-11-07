@@ -115,6 +115,9 @@
     </Compile>
     <Compile Include="Controls\DragAndDropListBoxes\GroupConnectorsDragAndDropListBox.cs" />
     <Compile Include="Controls\DragAndDropListBoxes\GroupShapesDragAndDropListBox.cs" />
+    <Compile Include="Controls\OptionsControl.xaml.cs">
+      <DependentUpon>OptionsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RecordsControl.xaml.cs">
       <DependentUpon>RecordsControl.xaml</DependentUpon>
     </Compile>
@@ -153,13 +156,8 @@
     <Compile Include="Converters\ArgbColorToBrushMultiConverter.cs" />
     <Compile Include="Converters\BooleanToStringConverter.cs" />
     <Compile Include="Converters\BooleanToValueConverter.cs" />
-    <Compile Include="Converters\ColumnParameterConverter.cs" />
     <Compile Include="Converters\EnumToBooleanConverter.cs" />
     <Compile Include="Converters\ObjectEqualityConverter.cs" />
-    <Compile Include="Converters\RecordParameterConverter.cs" />
-    <Compile Include="Converters\BindingParameterConverter.cs" />
-    <Compile Include="Converters\PropertyParameterConverter.cs" />
-    <Compile Include="Converters\ValueParameterConverter.cs" />
     <Compile Include="Controls\Custom\PanAndZoomBorder.cs" />
     <Compile Include="Controls\Custom\PanAndZoomGrid.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -173,6 +171,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\DataControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

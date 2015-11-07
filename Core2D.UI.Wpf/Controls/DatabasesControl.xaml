@@ -5,6 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:core="clr-namespace:Core2D;assembly=Core2D"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="280">
     <Grid>
@@ -12,10 +13,10 @@
             <ControlTemplate x:Key="DatabasesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Header="database">
-                        <MenuItem Header="_Import..." Command="{Binding Commands.ImportDataCommand}" InputGestureText=""/>
+                        <MenuItem Header="_Import..." Command="{x:Static core:Commands.ImportDataCommand}" InputGestureText=""/>
                     </MenuItem>
-                    <MenuItem Command="{Binding Commands.AddDatabaseCommand}" Header="+"/>
-                    <MenuItem Command="{Binding Commands.RemoveDatabaseCommand}" CommandParameter="{Binding Editor.Project.CurrentDatabase}" Header="-"/>
+                    <MenuItem Command="{x:Static core:Commands.AddDatabaseCommand}" Header="+"/>
+                    <MenuItem Command="{x:Static core:Commands.RemoveDatabaseCommand}" CommandParameter="{Binding Editor.Project.CurrentDatabase}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
