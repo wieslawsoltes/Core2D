@@ -292,7 +292,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
                 renderer.Draw(
                     dc,
                     template,
-                    container.Properties,
+                    container.Data.Properties,
                     null);
             }
             else
@@ -307,7 +307,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
             renderer.Draw(
                 dc,
                 container,
-                container.Properties,
+                container.Data.Properties,
                 null);
 
             if (container.WorkingLayer != null)
@@ -315,7 +315,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
                 renderer.Draw(
                     dc,
                     container.WorkingLayer,
-                    container.Properties,
+                    container.Data.Properties,
                     null);
             }
 
@@ -324,7 +324,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
                 renderer.Draw(
                     dc,
                     container.HelperLayer,
-                    container.Properties,
+                    container.Data.Properties,
                     null);
             }
 
