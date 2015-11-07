@@ -87,7 +87,21 @@ namespace Core2D.UI.Wpf
             _context.View = _mainWindow;
 
             _mainWindow.DataContext = _context;
-            _mainWindow.ShowDialog();
+
+            try
+            {
+                _mainWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                if (_context.Editor.Log != null)
+                {
+                    _context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
         }
 
         /// <summary>
