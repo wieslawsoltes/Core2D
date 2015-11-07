@@ -1289,8 +1289,8 @@
                 <TabItem Header="Project" Classes="property">
                     <Grid RowDefinitions="Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
-                            <MenuItem Header="+" Command="{Binding Path=Commands.NewCommand}" CommandParameter="{Binding Path=Editor.Project.Selected}"/>
-                            <MenuItem Header="-" Command="{Binding Path=Commands.DeleteCommand}" CommandParameter="{Binding Path=Editor.Project.Selected}"/>
+                            <MenuItem Header="+" Command="{Static core:Commands.NewCommand}" CommandParameter="{Binding Path=Editor.Project.Selected}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.DeleteCommand}" CommandParameter="{Binding Path=Editor.Project.Selected}"/>
                         </Menu>
                         <ContentControl Content="{Binding Path=Editor.Project, Mode=TwoWay}" Grid.Row="1"/>
                     </Grid>
@@ -1307,8 +1307,8 @@
                 <TabItem Header="Groups" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
-                            <MenuItem Header="+" Command="{Binding Path=Commands.AddGroupLibraryCommand}"/>
-                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveGroupLibraryCommand}"/>
+                            <MenuItem Header="+" Command="{Static core:Commands.AddGroupLibraryCommand}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.RemoveGroupLibraryCommand}"/>
                         </Menu>
                         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
                             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -1326,8 +1326,8 @@
                             </DropDown.DataTemplates>
                         </DropDown>
                         <Menu Grid.Row="3" HorizontalAlignment="Right">
-                            <MenuItem Header="+" Command="{Binding Path=Commands.AddGroupCommand}"/>
-                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveGroupCommand}"/>
+                            <MenuItem Header="+" Command="{Static core:Commands.AddGroupCommand}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.RemoveGroupCommand}"/>
                         </Menu>
                         <ListBox
                             Items="{Binding Path=Editor.Project.CurrentGroupLibrary.Groups}"
@@ -1345,8 +1345,8 @@
                 <TabItem Header="Database" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
-                            <MenuItem Header="+" Command="{Binding Path=Commands.AddDatabaseCommand}"/>
-                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveDatabaseCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDatabase}"/>
+                            <MenuItem Header="+" Command="{Static core:Commands.AddDatabaseCommand}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.RemoveDatabaseCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDatabase}"/>
                         </Menu>
                         <DropDown
                             Items="{Binding Path=Editor.Project.Databases}"
@@ -1365,9 +1365,9 @@
                 <TabItem Header="Records" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
-                            <MenuItem Header="apply" Command="{Binding Path=Commands.ApplyRecordCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDatabase.CurrentRecord}"/>
-                            <MenuItem Header="+" Command="{Binding Path=Commands.AddRecordCommand}"/>
-                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveRecordCommand}"/>
+                            <MenuItem Header="apply" Command="{Static core:Commands.ApplyRecordCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentDatabase.CurrentRecord}"/>
+                            <MenuItem Header="+" Command="{Static core:Commands.AddRecordCommand}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.RemoveRecordCommand}"/>
                         </Menu>
                         <DropDown
                             Items="{Binding Path=Editor.Project.Databases}"
@@ -1407,8 +1407,8 @@
                 <TabItem Header="Styles" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
-                            <MenuItem Header="+" Command="{Binding Path=Commands.AddStyleLibraryCommand}"/>
-                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveStyleLibraryCommand}"/>
+                            <MenuItem Header="+" Command="{Static core:Commands.AddStyleLibraryCommand}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.RemoveStyleLibraryCommand}"/>
                         </Menu>
                         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
                             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
@@ -1426,9 +1426,8 @@
                             </DropDown.DataTemplates>
                         </DropDown>
                         <Menu Grid.Row="3" HorizontalAlignment="Right">
-                            <MenuItem Header="apply" Command="{Binding Path=Commands.ApplyStyleCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle}"/>
-                            <MenuItem Header="+" Command="{Binding Path=Commands.AddStyleCommand}"/>
-                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveStyleCommand}"/>
+                            <MenuItem Header="apply" Command="{Static core:Commands.ApplyStyleCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle}"/>
+                            <MenuItem Header="+" Command="{Static core:Commands.AddStyleCommand}"/>
                         </Menu>
                         <ListBox
                             Items="{Binding Path=Editor.Project.CurrentStyleLibrary.Styles}"
@@ -1446,10 +1445,10 @@
                 <TabItem Header="Templates" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,*">
                         <Menu Grid.Row="0" HorizontalAlignment="Right">
-                            <MenuItem Header="apply" Command="{Binding Path=Commands.ApplyTemplateCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentTemplate}"/>
-                            <MenuItem Header="edit" Command="{Binding Path=Commands.EditTemplateCommand}"/>
-                            <MenuItem Header="+" Command="{Binding Path=Commands.AddTemplateCommand}"/>
-                            <MenuItem Header="-" Command="{Binding Path=Commands.RemoveTemplateCommand}"/>
+                            <MenuItem Header="apply" Command="{Static core:Commands.ApplyTemplateCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentTemplate}"/>
+                            <MenuItem Header="edit" Command="{Static core:Commands.EditTemplateCommand}"/>
+                            <MenuItem Header="+" Command="{Static core:Commands.AddTemplateCommand}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.RemoveTemplateCommand}"/>
                         </Menu>
                         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="1">
                             <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
