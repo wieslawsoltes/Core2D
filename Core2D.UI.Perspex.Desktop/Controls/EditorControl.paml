@@ -411,9 +411,12 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Columns" Classes="property">
-                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*" >
-                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Columns}">
+                    <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*" >
+                        <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
+                            <MenuItem Header="+" Command="{Static core:Commands.AddColumnCommand}" CommandParameter="{Binding}"/>
+                        </Menu>
+                        <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Name" Classes="default"/>
+                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Path=Columns}">
                             <ItemsControl.DataTemplates>
                                 <DataTemplate DataType="core:Column">
                                     <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
