@@ -6,14 +6,14 @@ using System.Windows.Forms;
 namespace Core2D.UI.WinForms
 {
     /// <summary>
-    /// 
+    /// Encapsulates a Core2D WinForms application.
     /// </summary>
     internal sealed class Program
     {
         /// <summary>
-        /// 
+        /// Program entry point.
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="args">The program arguments.</param>
         [STAThread]
         private static void Main(string[] args)
         {
