@@ -69,6 +69,12 @@
     <Compile Include="..\Core2D\Editor\Bounds\ShapeBounds.cs">
       <Link>Editor\Bounds\ShapeBounds.cs</Link>
     </Compile>
+    <Compile Include="..\Core2D\Editor\Commands.cs">
+      <Link>Editor\Commands.cs</Link>
+    </Compile>
+    <Compile Include="..\Core2D\Editor\Constants.cs">
+      <Link>Editor\Constants.cs</Link>
+    </Compile>
     <Compile Include="..\Core2D\Editor\Core\Command.cs">
       <Link>Editor\Core\Command.cs</Link>
     </Compile>
@@ -108,14 +114,11 @@
     <Compile Include="..\Core2D\Editor\Editor.cs">
       <Link>Editor\Editor.cs</Link>
     </Compile>
-    <Compile Include="..\Core2D\Editor\EditorCommands.cs">
-      <Link>Editor\EditorCommands.cs</Link>
-    </Compile>
-    <Compile Include="..\Core2D\Editor\EditorConstants.cs">
-      <Link>Editor\EditorConstants.cs</Link>
-    </Compile>
     <Compile Include="..\Core2D\Editor\EditorContext.cs">
       <Link>Editor\EditorContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Core2D\Editor\Enums.cs">
+      <Link>Editor\Enums.cs</Link>
     </Compile>
     <Compile Include="..\Core2D\Editor\Helpers\ArcHelper.cs">
       <Link>Editor\Helpers\ArcHelper.cs</Link>
@@ -155,21 +158,6 @@
     </Compile>
     <Compile Include="..\Core2D\Editor\Observer.cs">
       <Link>Editor\Observer.cs</Link>
-    </Compile>
-    <Compile Include="..\Core2D\Editor\Parameters\ColumnParameter.cs">
-      <Link>Editor\Parameters\ColumnParameter.cs</Link>
-    </Compile>
-    <Compile Include="..\Core2D\Editor\Parameters\RecordParameter.cs">
-      <Link>Editor\Parameters\RecordParameter.cs</Link>
-    </Compile>
-    <Compile Include="..\Core2D\Editor\Parameters\BindingParamater.cs">
-      <Link>Editor\Parameters\BindingParamater.cs</Link>
-    </Compile>
-    <Compile Include="..\Core2D\Editor\Parameters\PropertyParameter.cs">
-      <Link>Editor\Parameters\PropertyParameter.cs</Link>
-    </Compile>
-    <Compile Include="..\Core2D\Editor\Parameters\ValueParamterer.cs">
-      <Link>Editor\Parameters\ValueParamterer.cs</Link>
     </Compile>
     <Compile Include="..\Core2D\Factories\ProjectFactory.cs">
       <Link>Factories\ProjectFactory.cs</Link>
