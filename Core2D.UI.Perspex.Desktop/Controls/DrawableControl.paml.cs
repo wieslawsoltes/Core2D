@@ -63,24 +63,6 @@ namespace Core2D.UI.Perspex.Desktop.Controls
                 AutoFit(this.Bounds.Width, this.Bounds.Height);
             }
 
-            Commands.ZoomResetCommand =
-                Command.Create(
-                    () =>
-                    {
-                        ResetZoom(this.Bounds.Width, this.Bounds.Height);
-                        context.Editor.Invalidate();
-                    },
-                    () => true);
-
-            Commands.ZoomExtentCommand =
-                Command.Create(
-                    () =>
-                    {
-                        AutoFit(this.Bounds.Width, this.Bounds.Height);
-                        context.Editor.Invalidate();
-                    },
-                    () => true);
-
             this.PointerPressed +=
                 (sender, e) =>
                 {
@@ -240,6 +222,32 @@ namespace Core2D.UI.Perspex.Desktop.Controls
                 container.Template.Width,
                 container.Template.Height);
 
+            context.Editor.Invalidate();
+        }
+
+        /// <summary>
+        /// Reset pan and zoom to default state.
+        /// </summary>
+        public void OnZoomReset()
+        {
+            var context = this.DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            ResetZoom(this.Bounds.Width, this.Bounds.Height);
+            context.Editor.Invalidate();
+        }
+
+        /// <summary>
+        /// Stretch view to the available extents.
+        /// </summary>
+        public void OnZoomExtent()
+        {
+            var context = this.DataContext as EditorContext;
+            if (context == null)
+                return;
+
+            AutoFit(this.Bounds.Width, this.Bounds.Height);
             context.Editor.Invalidate();
         }
 

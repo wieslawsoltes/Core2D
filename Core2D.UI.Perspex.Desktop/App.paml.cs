@@ -339,6 +339,30 @@ namespace Core2D.UI.Perspex.Desktop
                 Command<object>.Create(
                     async (item) => await OnExportObject(item, ExportType.Templates),
                     (item) => context.IsEditMode());
+
+            Commands.ZoomResetCommand =
+                Command.Create(
+                    () =>
+                    {
+                        var drawable = _mainWindow.FindControl<Controls.DrawableControl>("drawable");
+                        if (drawable != null)
+                        {
+                            drawable.OnZoomReset();
+                        }
+                    },
+                    () => true);
+
+            Commands.ZoomExtentCommand =
+                Command.Create(
+                    () =>
+                    {
+                        var drawable = _mainWindow.FindControl<Controls.DrawableControl>("drawable");
+                        if (drawable != null)
+                        {
+                            drawable.OnZoomExtent();
+                        }
+                    },
+                    () => true);
         }
 
         /// <summary>

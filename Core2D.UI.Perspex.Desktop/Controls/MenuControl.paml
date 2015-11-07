@@ -56,9 +56,9 @@
         </MenuItem>
         <MenuItem Header="_View" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
             <MenuItem Header="_Zoom">
-                <!--<MenuItem Header="_Reset Zoom" HotKey="Z" Command="{Static core:Commands.ZoomResetCommand}"/>-->
+                <MenuItem Header="_Reset Zoom" HotKey="Z" Command="{Static core:Commands.ZoomResetCommand}"/>
                 <!--<Separator/>-->
-                <!--<MenuItem Header="Zoom to _Extent" HotKey="X" Command="{Static core:Commands.ZoomExtentCommand}"/>-->
+                <MenuItem Header="Zoom to _Extent" HotKey="X" Command="{Static core:Commands.ZoomExtentCommand}"/>
             </MenuItem>
         </MenuItem>
         <MenuItem Header="_Project" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
