@@ -234,23 +234,23 @@ namespace Core2D.UI.WinForms
             if (template != null)
             {
                 DrawBackground(g, template.Background, template.Width, template.Height);
-                renderer.Draw(g, template, container.Properties, null);
+                renderer.Draw(g, template, container.Data.Properties, null);
             }
             else
             {
                 DrawBackground(g, container.Background, container.Width, container.Height);
             }
 
-            renderer.Draw(g, container, container.Properties, null);
+            renderer.Draw(g, container, container.Data.Properties, null);
 
             if (container.WorkingLayer != null)
             {
-                renderer.Draw(g, container.WorkingLayer, container.Properties, null);
+                renderer.Draw(g, container.WorkingLayer, container.Data.Properties, null);
             }
 
             if (container.HelperLayer != null)
             {
-                renderer.Draw(g, container.HelperLayer, container.Properties, null);
+                renderer.Draw(g, container.HelperLayer, container.Data.Properties, null);
             }
 
             g.Restore(gs);
