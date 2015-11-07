@@ -13,6 +13,7 @@ namespace Core2D
         private Guid _id;
         private ImmutableArray<Column> _columns;
         private ImmutableArray<Value> _values;
+        private Database _owner;
 
         /// <summary>
         /// 
@@ -42,20 +43,32 @@ namespace Core2D
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public Database Owner
+        {
+            get { return _owner; }
+            set { Update(ref _owner, value); }
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Record"/> instance.
         /// </summary>
         /// <param name="columns"></param>
         /// <param name="values"></param>
+        /// <param name="owner"></param>
         /// <returns></returns>
         public static Record Create(
             ImmutableArray<Column> columns,
-            ImmutableArray<Value> values)
+            ImmutableArray<Value> values,
+            Database owner)
         {
             return new Record()
             {
                 Id = Guid.NewGuid(),
                 Columns = columns,
-                Values = values
+                Values = values,
+                Owner = owner
             };
         }
 
@@ -65,17 +78,20 @@ namespace Core2D
         /// <param name="id"></param>
         /// <param name="columns"></param>
         /// <param name="values"></param>
+        /// <param name="owner"></param>
         /// <returns></returns>
         public static Record Create(
             string id,
             ImmutableArray<Column> columns,
-            ImmutableArray<Value> values)
+            ImmutableArray<Value> values,
+            Database owner)
         {
             return new Record()
             {
                 Id = Guid.Parse(id),
                 Columns = columns,
-                Values = values
+                Values = values,
+                Owner = owner
             };
         }
     }
