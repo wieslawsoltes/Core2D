@@ -14,6 +14,7 @@ namespace Core2D
         private string _name;
         private double _width;
         private bool _isVisible;
+        private Database _owner;
 
         /// <summary>
         /// 
@@ -52,14 +53,25 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Gets or sets column owner object.
+        /// </summary>
+        public Database Owner
+        {
+            get { return _owner; }
+            set { Update(ref _owner, value); }
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Column"/> instance.
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="owner"></param>
         /// <param name="width"></param>
         /// <param name="isVisible"></param>
         /// <returns></returns>
         public static Column Create(
             string name,
+            Database owner,
             double width = double.NaN,
             bool isVisible = true)
         {
@@ -68,7 +80,8 @@ namespace Core2D
                 Id = Guid.NewGuid(),
                 Name = name,
                 Width = width,
-                IsVisible = isVisible
+                IsVisible = isVisible,
+                Owner = owner
             };
         }
     }
