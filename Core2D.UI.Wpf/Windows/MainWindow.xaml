@@ -130,6 +130,9 @@
                                         <controls:DatabasesControl/>
                                     </ScrollViewer>
                                 </ad:LayoutAnchorable>
+                                <ad:LayoutAnchorable x:Name="recordsWindow" CanClose="False" ContentId="records" Title="{x:Static p:Resources.WiWindowTitleRecords}" AutoHideWidth="210">
+                                    <controls:RecordsControl x:Name="recordsControl"/>
+                                </ad:LayoutAnchorable>
                             </ad:LayoutAnchorablePane>
                         </ad:LayoutAnchorablePaneGroup>
                     </ad:LayoutAnchorablePaneGroup>
