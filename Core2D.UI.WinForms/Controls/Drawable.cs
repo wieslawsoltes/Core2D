@@ -9,19 +9,19 @@ using System.Windows.Forms;
 namespace Core2D.UI.WinForms
 {
     /// <summary>
-    /// 
+    /// Custom drawable control based on <see cref="Panel"/> control.
     /// </summary>
     internal class Drawable : Panel
     {
         private ZoomState _state;
 
         /// <summary>
-        /// 
+        /// The <see cref="EditorContext"/> object.
         /// </summary>
         public EditorContext Context { get; set; }
 
         /// <summary>
-        /// 
+        /// Initialize the <see cref="Drawable"/> panel.
         /// </summary>
         public void Initialize()
         {
@@ -101,7 +101,7 @@ namespace Core2D.UI.WinForms
         }
 
         /// <summary>
-        /// 
+        /// Reset pan and zoom to default state.
         /// </summary>
         public void ResetZoom()
         {
@@ -117,7 +117,7 @@ namespace Core2D.UI.WinForms
         }
 
         /// <summary>
-        /// 
+        /// Stretch view to the available extents.
         /// </summary>
         public void AutoFit()
         {
@@ -133,7 +133,7 @@ namespace Core2D.UI.WinForms
         }
 
         /// <summary>
-        /// 
+        /// Set <see cref="CreateParams"/> to enable <see cref="Panel"/> transparency.
         /// </summary>
         protected override CreateParams CreateParams
         {
@@ -146,17 +146,17 @@ namespace Core2D.UI.WinForms
         }
 
         /// <summary>
-        /// 
+        /// Handle OnPaintBackground events.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">The <see cref="PaintEventArgs"/> args.</param>
         protected override void OnPaintBackground(PaintEventArgs e)
         {
         }
 
         /// <summary>
-        /// 
+        /// Handle OnSizeChanged events.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">The <see cref="EventArgs"/> args.</param>
         protected override void OnSizeChanged(EventArgs e)
         {
             base.OnSizeChanged(e);
@@ -171,21 +171,21 @@ namespace Core2D.UI.WinForms
         }
 
         /// <summary>
-        /// 
+        /// Handle OnPaint events.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">The <see cref="PaintEventArgs"/> args.</param>
         protected override void OnPaint(PaintEventArgs e)
         {
             Draw(e.Graphics);
         }
 
         /// <summary>
-        /// 
+        /// Draws background rectangle with specified color.
         /// </summary>
-        /// <param name="g"></param>
-        /// <param name="c"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
+        /// <param name="g">The drawing context.</param>
+        /// <param name="c">The backgroud color.</param>
+        /// <param name="width">The width of background rectangle.</param>
+        /// <param name="height">The height of background rectangle.</param>
         private void DrawBackground(Graphics g, ArgbColor c, double width, double height)
         {
             var brush = new SolidBrush(
@@ -205,9 +205,9 @@ namespace Core2D.UI.WinForms
         }
 
         /// <summary>
-        /// 
+        /// Renders drawable control contents.
         /// </summary>
-        /// <param name="g"></param>
+        /// <param name="g">The drawing context.</param>
         private void Draw(Graphics g)
         {
             g.SmoothingMode = SmoothingMode.HighSpeed;
