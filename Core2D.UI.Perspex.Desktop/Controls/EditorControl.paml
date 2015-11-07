@@ -480,7 +480,7 @@
                                 <DataTemplate DataType="core:Property">
                                     <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
                                         <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
-                                        <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1"/>
+                                        <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1" Command="{Static core:Commands.RemovePropertyCommand}" CommandParameter="{Binding}"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
