@@ -7,7 +7,7 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    public static class EditorConstants
+    public static class Constants
     {
         /// <summary>
         /// 
