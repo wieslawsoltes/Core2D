@@ -63,7 +63,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
                 AutoFit(this.Bounds.Width, this.Bounds.Height);
             }
 
-            context.Commands.ZoomResetCommand =
+            Commands.ZoomResetCommand =
                 Command.Create(
                     () =>
                     {
@@ -72,7 +72,7 @@ namespace Core2D.UI.Perspex.Desktop.Controls
                     },
                     () => true);
 
-            context.Commands.ZoomExtentCommand =
+            Commands.ZoomExtentCommand =
                 Command.Create(
                     () =>
                     {
