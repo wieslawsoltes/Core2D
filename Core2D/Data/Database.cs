@@ -120,7 +120,7 @@ namespace Core2D
         public static Database Create(string name, IEnumerable<string[]> fields)
         {
             var db = Database.Create(name);
-            var tempColumns = fields.FirstOrDefault().Select(c => Column.Create(c));
+            var tempColumns = fields.FirstOrDefault().Select(c => Column.Create(c, db));
             var columns = ImmutableArray.CreateRange<Column>(tempColumns);
 
             if (columns.Length >= 1 && columns[0].Name == IdColumnName)
@@ -132,7 +132,8 @@ namespace Core2D
                             Record.Create(
                                 v.FirstOrDefault(),
                                 columns,
-                                ImmutableArray.CreateRange<Value>(v.Select(c => Value.Create(c)))));
+                                ImmutableArray.CreateRange<Value>(v.Select(c => Value.Create(c))), 
+                                db));
                 var records = ImmutableArray.CreateRange<Record>(tempRecords);
 
                 db.Columns = columns;
@@ -146,7 +147,8 @@ namespace Core2D
                     .Select(v =>
                             Record.Create(
                                 columns,
-                                ImmutableArray.CreateRange<Value>(v.Select(c => Value.Create(c)))));
+                                ImmutableArray.CreateRange<Value>(v.Select(c => Value.Create(c))),
+                                db));
                 var records = ImmutableArray.CreateRange<Record>(tempRecords);
 
                 db.Columns = columns;
