@@ -25,7 +25,7 @@ namespace Core2D.UI.Wpf
         private string _recentFileName = "Core2D.recent";
         private string _logFileName = "Core2D.log";
         private bool _enableRecent = true;
-        private bool _restoreLayout = false;
+        private bool _restoreLayout = true;
 
         /// <summary>
         /// Raises the <see cref="Application.Startup"/> event.
