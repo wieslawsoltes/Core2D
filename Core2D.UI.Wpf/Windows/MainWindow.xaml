@@ -107,12 +107,12 @@
                                 <controls:ProjectControl x:Name="projectControl"/>
                             </ad:LayoutAnchorable>
                             <ad:LayoutAnchorable x:Name="optionsWindow" CanClose="False" ContentId="options" Title="{x:Static p:Resources.WindowTitleOptions}" AutoHideWidth="210">
-                                <ScrollViewer Visibility="Collapsed"
+                                <ScrollViewer 
                                     x:Name="optionsScrollViewer"
                                     VerticalScrollBarVisibility="Auto" 
                                     HorizontalScrollBarVisibility="Auto" 
                                     Focusable="True">
-                                    <ContentControl Content="{Binding Editor.Project.Options}"/>
+                                    <controls:OptionsControl/>
                                 </ScrollViewer>
                             </ad:LayoutAnchorable>
                         </ad:LayoutAnchorablePane>
