@@ -436,7 +436,12 @@
         <DataTemplate DataType="core:Data">
             <TabControl Classes="default">
                 <TabItem Header="Record" Classes="property">
-                    <ContentControl Content="{Binding Path=Record, Mode=TwoWay}"/>
+                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
+                        <Menu Grid.Row="0" HorizontalAlignment="Right" IsVisible="{Binding Path=Record, Converter={Static converters:IsNotNullConverter.Instance}}">
+                            <MenuItem Header="X" Command="{Static core:Commands.ResetRecordCommand}" CommandParameter="{Binding}"/>
+                        </Menu>
+                        <ContentControl Content="{Binding Path=Record, Mode=TwoWay}" Grid.Row="1"/>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="Bindings" Classes="property">
                     <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
