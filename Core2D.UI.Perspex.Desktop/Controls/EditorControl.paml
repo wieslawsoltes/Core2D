@@ -1442,6 +1442,7 @@
                         <Menu Grid.Row="3" HorizontalAlignment="Right">
                             <MenuItem Header="apply" Command="{Static core:Commands.ApplyStyleCommand}" CommandParameter="{Binding Path=Editor.Project.CurrentStyleLibrary.CurrentStyle}"/>
                             <MenuItem Header="+" Command="{Static core:Commands.AddStyleCommand}"/>
+                            <MenuItem Header="-" Command="{Static core:Commands.RemoveStyleCommand}"/>
                         </Menu>
                         <ListBox
                             Items="{Binding Path=Editor.Project.CurrentStyleLibrary.Styles}"
