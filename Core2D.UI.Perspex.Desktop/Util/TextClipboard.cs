@@ -38,18 +38,18 @@ namespace Core2D.UI.Perspex.Desktop
         }
 
         /// <summary>
-        /// Return true if clipboard container text string.
+        /// Return true if clipboard contains text string.
         /// </summary>
-        /// <returns>True if clipboard container text string.</returns>
+        /// <returns>True if clipboard contains text string.</returns>
         private async Task<bool> ContainsTextAsync()
         {
             return !string.IsNullOrEmpty(await GetTextAsync());
         }
 
         /// <summary>
-        /// Return true if clipboard container text string.
+        /// Return true if clipboard contains text string.
         /// </summary>
-        /// <returns>True if clipboard container text string.</returns>
+        /// <returns>True if clipboard contains text string.</returns>
         public async Task<bool> ContainsText()
         {
             return await ContainsTextAsync();
