@@ -10,16 +10,6 @@ namespace Core2D
     /// </summary>
     public class XPathGeometry
     {
-        private static XFillRule[] _xFillRuleValues = (XFillRule[])Enum.GetValues(typeof(XFillRule));
-
-        /// <summary>
-        /// The XFillRule enum values.
-        /// </summary>
-        public static XFillRule[] XFillRuleValues
-        {
-            get { return _xFillRuleValues; }
-        }
-
         /// <summary>
         /// 
         /// </summary>

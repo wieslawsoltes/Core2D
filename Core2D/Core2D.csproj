@@ -68,6 +68,7 @@
     <Compile Include="Editor\Commands.cs" />
     <Compile Include="Editor\Constants.cs" />
     <Compile Include="Editor\EditorContext.cs" />
+    <Compile Include="Editor\Enums.cs" />
     <Compile Include="Editor\Helpers\NoneHelper.cs" />
     <Compile Include="Factories\ProjectFactory.cs" />
     <Compile Include="Factories\ShapeFactory.cs" />
