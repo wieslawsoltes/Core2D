@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace Core2D.UI.Wpf.Util
+namespace Core2D.UI.Wpf
 {
     /// <summary>
-    /// Wrapper class for System.Windows.Clipboard clipboard class.
+    /// Wrapper class for <see cref="System.Windows.Clipboard"/> clipboard class.
     /// </summary>
     internal class TextClipboard : ITextClipboard
     {
