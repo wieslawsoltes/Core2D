@@ -418,7 +418,7 @@
                                 <DataTemplate DataType="core:Column">
                                     <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
                                         <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="default" Grid.Column="0"/>
-                                        <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1"/>
+                                        <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1" Command="{Static core:Commands.RemoveColumnCommand}" CommandParameter="{Binding}"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.DataTemplates>
