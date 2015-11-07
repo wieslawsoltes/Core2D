@@ -666,4 +666,7 @@
   <data name="MenuProject" xml:space="preserve">
     <value>_Project</value>
   </data>
+  <data name="WiWindowTitleRecords" xml:space="preserve">
+    <value>Records</value>
+  </data>
 </root>
