@@ -1111,13 +1111,8 @@
                                         Margin="5,2,5,2" 
                                         VerticalAlignment="Center" 
                                         Content="-" 
-                                        Command="{x:Static core:Commands.RemoveColumnCommand}">
-                                        <Button.CommandParameter>
-                                            <MultiBinding Converter="{StaticResource ColumnParameterConverter}">
-                                                <Binding Path="DataContext" ElementName="columnsItemsControls"/>
-                                                <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
-                                            </MultiBinding>
-                                        </Button.CommandParameter>
+                                        Command="{x:Static core:Commands.RemoveColumnCommand}"
+                                        CommandParameter="{Binding}">
                                     </Button>
                                 </Grid>
                             </DataTemplate>
@@ -1243,13 +1238,8 @@
                                         Margin="5,0,5,0" 
                                         VerticalAlignment="Center" 
                                         Content="-" 
-                                        Command="{x:Static core:Commands.RemoveBindingCommand}">
-                                        <Button.CommandParameter>
-                                            <MultiBinding Converter="{StaticResource BindingParameterConverter}">
-                                                <Binding Path="DataContext" ElementName="bindingsItemsControls"/>
-                                                <Binding Path="DataContext" RelativeSource="{RelativeSource Self}"/>
-                                            </MultiBinding>
-                                        </Button.CommandParameter>
+                                        Command="{x:Static core:Commands.RemoveBindingCommand}"
+                                        CommandParameter="{Binding}">
                                     </Button>
                                 </Grid>
                             </DataTemplate>
