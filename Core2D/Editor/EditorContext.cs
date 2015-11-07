@@ -1874,10 +1874,15 @@ namespace Core2D
 
                     RecentProjects = builder.ToImmutable();
 
-                    if (System.IO.File.Exists(recent.CurrentRecentProject.Path))
+                    if (recent.CurrentRecentProject != null
+                        && System.IO.File.Exists(recent.CurrentRecentProject.Path))
+                    {
                         CurrentRecentProject = recent.CurrentRecentProject;
+                    }
                     else
+                    {
                         CurrentRecentProject = _recentProjects.FirstOrDefault();
+                    }
                 }
             }
             catch (Exception ex)
