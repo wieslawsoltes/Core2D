@@ -115,6 +115,9 @@
     </Compile>
     <Compile Include="Controls\DragAndDropListBoxes\GroupConnectorsDragAndDropListBox.cs" />
     <Compile Include="Controls\DragAndDropListBoxes\GroupShapesDragAndDropListBox.cs" />
+    <Compile Include="Controls\OptionsControl.xaml.cs">
+      <DependentUpon>OptionsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RecordsControl.xaml.cs">
       <DependentUpon>RecordsControl.xaml</DependentUpon>
     </Compile>
@@ -168,6 +171,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\DataControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OptionsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
