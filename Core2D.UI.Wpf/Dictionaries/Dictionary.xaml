@@ -14,11 +14,6 @@
     <converters:BooleanToStringConverter x:Key="BooleanToStarConverter" FalseValue="" TrueValue="*"/>
     <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
     <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
-    <converters:ColumnParameterConverter x:Key="ColumnParameterConverter"/>
-    <converters:RecordParameterConverter x:Key="RecordParameterConverter"/>
-    <converters:ValueParameterConverter x:Key="ValueParameterConverter"/>
-    <converters:BindingParameterConverter x:Key="BindingParameterConverter"/>
-    <converters:PropertyParameterConverter x:Key="PropertyParameterConverter"/>
     <!-- brushes -->
     <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
     <SolidColorBrush x:Key="DarkSquareColor" Color="DarkGray"/>
