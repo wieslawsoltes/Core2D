@@ -12,7 +12,7 @@ namespace Core2D
     /// <summary>
     /// 
     /// </summary>
-    public static class Commands
+    public class Commands
     {
         /// <summary>
         /// 
