@@ -428,7 +428,7 @@
                         Grid.Column="0">
                     </TextBlock>
                     <ComboBox 
-                        ItemsSource="{Binding Path=ArrowTypeValues, Mode=OneWay}" 
+                        ItemsSource="{x:Static core:Enums.ArrowTypeValues}" 
                         SelectedItem="{Binding ArrowType}" 
                         Style="{StaticResource ComboBoxStyleKey}"
                         Grid.Row="0" 
@@ -543,7 +543,7 @@
                                 Grid.Column="0" >
                             </TextBlock>
                             <ComboBox 
-                                ItemsSource="{Binding Path=LineCapValues, Mode=OneWay}" 
+                                ItemsSource="{x:Static core:Enums.LineCapValues}" 
                                 SelectedItem="{Binding LineCap}" 
                                 Style="{StaticResource ComboBoxStyleKey}"
                                 Grid.Row="0" 
@@ -704,7 +704,7 @@
                 Grid.ColumnSpan="2">
             </ContentControl>
             <ComboBox 
-                ItemsSource="{Binding Path=TextHAlignmentValues, Mode=OneWay}" 
+                ItemsSource="{x:Static core:Enums.TextHAlignmentValues}" 
                 SelectedItem="{Binding TextHAlignment}"
                 Style="{StaticResource ComboBoxStyleKey}"
                 Grid.Row="4" 
@@ -712,7 +712,7 @@
                 Grid.ColumnSpan="2">
             </ComboBox>
             <ComboBox 
-                ItemsSource="{Binding Path=TextVAlignmentValues, Mode=OneWay}" 
+                ItemsSource="{x:Static core:Enums.TextVAlignmentValues}" 
                 SelectedItem="{Binding TextVAlignment}" 
                 Style="{StaticResource ComboBoxStyleKey}"
                 Grid.Row="5" 
@@ -843,7 +843,7 @@
                                 Grid.Column="0" >
                             </TextBlock>
                             <ComboBox 
-                                ItemsSource="{Binding Path=LineCapValues, Mode=OneWay}" 
+                                ItemsSource="{x:Static core:Enums.LineCapValues}" 
                                 SelectedItem="{Binding LineCap}" 
                                 Style="{StaticResource ComboBoxStyleKey}"
                                 Grid.Row="0" 
@@ -2959,7 +2959,7 @@
                     Grid.ColumnSpan="2">
                 </CheckBox>
                 <ComboBox 
-                    ItemsSource="{Binding Path=XSweepDirectionValues, Mode=OneWay}" 
+                    ItemsSource="{x:Static core:Enums.XSweepDirectionValues}" 
                     SelectedItem="{Binding SweepDirection}" 
                     Style="{StaticResource ComboBoxStyleKey}"
                     Grid.Row="2" 
@@ -3375,7 +3375,7 @@
                     Grid.Column="0">
                 </TextBlock>
                 <ComboBox 
-                    ItemsSource="{Binding Path=XFillRuleValues, Mode=OneWay}" 
+                    ItemsSource="{x:Static core:Enums.XFillRuleValues}" 
                     SelectedItem="{Binding FillRule}" 
                     Style="{StaticResource ComboBoxStyleKey}"          
                     Grid.Row="0" 
@@ -3506,7 +3506,7 @@
                         Grid.ColumnSpan="2">
                     </TextBox>
                     <ComboBox 
-                        ItemsSource="{Binding Path=MoveModeValues, Mode=OneWay}" 
+                        ItemsSource="{x:Static core:Enums.MoveModeValues}" 
                         SelectedItem="{Binding MoveMode}" 
                         Style="{StaticResource ComboBoxStyleKey}" 
                         Grid.Row="4" 
@@ -3600,7 +3600,7 @@
                         Grid.ColumnSpan="2">
                     </CheckBox>
                     <ComboBox 
-                        ItemsSource="{Binding Path=XFillRuleValues, Mode=OneWay}" 
+                        ItemsSource="{x:Static core:Enums.XFillRuleValues}" 
                         SelectedItem="{Binding DefaultFillRule}" 
                         Style="{StaticResource ComboBoxStyleKey}"
                         Grid.Row="4" 

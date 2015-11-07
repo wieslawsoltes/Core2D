@@ -196,7 +196,7 @@
                 <TabItem Header="Arrow" Classes="property">
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,50,*">
                         <TextBlock Text="Arrow Type" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                        <DropDown Items="{Binding Path=ArrowTypeValues}" SelectedItem="{Binding Path=ArrowType, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <DropDown Items="{Static core:Enums.ArrowTypeValues}" SelectedItem="{Binding Path=ArrowType, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
                         <TextBlock Text="IsStroked" Classes="left" Grid.Row="1" Grid.Column="0"/>
                         <CheckBox IsChecked="{Binding Path=IsStroked, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
                         <TextBlock Text="IsFilled" Classes="left" Grid.Row="2" Grid.Column="0"/>
@@ -229,7 +229,7 @@
                             </ScrollBar.Value>
                         </ScrollBar>
                         <TextBlock Text="Line Cap" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                        <DropDown Items="{Binding Path=LineCapValues}" SelectedItem="{Binding Path=LineCap, Mode=TwoWay}" Classes="default" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <DropDown Items="{Static core:Enums.LineCapValues}" SelectedItem="{Binding Path=LineCap, Mode=TwoWay}" Classes="default" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
                         <TextBlock Text="Dashes" Classes="left" Grid.Row="3" Grid.Column="0"/>
                         <TextBox Text="{Binding Path=Dashes, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
                         <TextBlock Text="Dash Offset" Classes="left" Grid.Row="4" Grid.Column="0"/>
@@ -277,9 +277,9 @@
                     <TextBlock Text="FontStyle" Classes="left" Grid.Row="4" Grid.Column="0"/>
                     <ContentControl Content="{Binding Path=FontStyle, Mode=TwoWay}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
                     <TextBlock Text="HAlignment" Classes="left" Grid.Row="5" Grid.Column="0"/>
-                    <DropDown Items="{Binding Path=TextHAlignmentValues}" SelectedItem="{Binding Path=TextHAlignment, Mode=TwoWay}" Classes="default" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <DropDown Items="{Static core:Enums.TextHAlignmentValues}" SelectedItem="{Binding Path=TextHAlignment, Mode=TwoWay}" Classes="default" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
                     <TextBlock Text="VAlignment" Classes="left" Grid.Row="6" Grid.Column="0"/>
-                    <DropDown Items="{Binding Path=TextVAlignmentValues}" SelectedItem="{Binding Path=TextVAlignment, Mode=TwoWay}" Classes="default" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <DropDown Items="{Static core:Enums.TextVAlignmentValues}" SelectedItem="{Binding Path=TextVAlignment, Mode=TwoWay}" Classes="default" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"/>
                 </Grid>
             </StackPanel>
         </DataTemplate>
@@ -340,7 +340,7 @@
                             </ScrollBar.Value>
                         </ScrollBar>
                         <TextBlock Text="Line Cap" Classes="left" Grid.Row="2" Grid.Column="0"/>
-                        <DropDown Items="{Binding Path=LineCapValues}" SelectedItem="{Binding Path=LineCap, Mode=TwoWay}" Classes="default" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <DropDown Items="{Static core:Enums.LineCapValues}" SelectedItem="{Binding Path=LineCap, Mode=TwoWay}" Classes="default" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
                         <TextBlock Text="Dashes" Classes="left" Grid.Row="3" Grid.Column="0"/>
                         <TextBox Text="{Binding Path=Dashes, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
                         <TextBlock Text="Dash Offset" Classes="left" Grid.Row="4" Grid.Column="0"/>
@@ -917,7 +917,7 @@
                         <TextBlock Text="IsLargeArc" Classes="left" Grid.Row="3" Grid.Column="0"/>
                         <CheckBox IsChecked="{Binding Path=IsLargeArc, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
                         <TextBlock Text="SweepDirection" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                        <DropDown Items="{Binding Path=XSweepDirectionValues}" SelectedItem="{Binding Path=SweepDirection, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
+                        <DropDown Items="{Static core:Enums.XSweepDirectionValues}" SelectedItem="{Binding Path=SweepDirection, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Point" Classes="property">
@@ -1050,7 +1050,7 @@
                 <TabItem Header="PathGeometry" Classes="property">
                     <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*">
                         <TextBlock Text="FillRule" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                        <DropDown Items="{Binding Path=XFillRuleValues}" SelectedItem="{Binding Path=FillRule, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
+                        <DropDown Items="{Static core:Enums.XFillRuleValues}" SelectedItem="{Binding Path=FillRule, Mode=TwoWay}" Classes="default" Grid.Row="0" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Figures" Classes="property">
@@ -1101,7 +1101,7 @@
                             </ScrollBar.Value>
                         </ScrollBar>
                         <TextBlock Text="MoveMode" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                        <DropDown Items="{Binding Path=MoveModeValues}" SelectedItem="{Binding Path=MoveMode, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <DropDown Items="{Static core:Enums.MoveModeValues}" SelectedItem="{Binding Path=MoveMode, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
                         <TextBlock Text="TryToConnect" Classes="left" Grid.Row="5" Grid.Column="0"/>
                         <CheckBox IsChecked="{Binding Path=TryToConnect, Mode=TwoWay}" Classes="left" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
                     </Grid>
@@ -1117,7 +1117,7 @@
                         <TextBlock Text="IsSmoothJoin" Classes="left" Grid.Row="3" Grid.Column="0"/>
                         <CheckBox IsChecked="{Binding Path=DefaultIsSmoothJoin, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
                         <TextBlock Text="FillRule" Classes="left" Grid.Row="4" Grid.Column="0"/>
-                        <DropDown Items="{Binding Path=XFillRuleValues}" SelectedItem="{Binding Path=DefaultFillRule, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
+                        <DropDown Items="{Static core:Enums.XFillRuleValues}" SelectedItem="{Binding Path=DefaultFillRule, Mode=TwoWay}" Classes="default" Grid.Row="4" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Advanced" Classes="property">
