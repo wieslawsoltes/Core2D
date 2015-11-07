@@ -84,17 +84,18 @@ namespace Test.Uwp
 
             _context.Renderers[0].State.EnableAutofit = true;
             _context.InitializeEditor(null/*new Dependencies.TraceLog()*/);
-            _context.InitializeCommands();
             _context.Editor.Renderers[0].State.DrawShapeState.Flags = Core2D.ShapeStateFlags.Visible;
             _context.Editor.GetImageKey = async () => await Task.Run(() => _imagePath);
             _context.Editor.Invalidate = () => canvas.Invalidate();
 
-            _context.Commands.OpenCommand =
+            Core2D.Commands.InitializeCommonCommands(_context);
+
+            Core2D.Commands.OpenCommand =
                 Core2D.Command<object>.Create(
                     async (parameter) => await OnOpen(),
                     (parameter) => _context.IsEditMode());
 
-            _context.Commands.SaveAsCommand =
+            Core2D.Commands.SaveAsCommand =
                 Core2D.Command.Create(
                     async () => await OnSaveAs(),
                     () => _context.IsEditMode());
@@ -430,7 +431,7 @@ namespace Test.Uwp
                 renderer.Draw(
                     ds,
                     template,
-                    container.Properties,
+                    container.Data.Properties,
                     null);
             }
             else
@@ -445,7 +446,7 @@ namespace Test.Uwp
             renderer.Draw(
                 ds,
                 container,
-                container.Properties,
+                container.Data.Properties,
                 null);
 
             if (container.WorkingLayer != null)
@@ -453,7 +454,7 @@ namespace Test.Uwp
                 renderer.Draw(
                     ds,
                     container.WorkingLayer,
-                    container.Properties,
+                    container.Data.Properties,
                     null);
             }
 
@@ -462,7 +463,7 @@ namespace Test.Uwp
                 renderer.Draw(
                     ds,
                     container.HelperLayer,
-                    container.Properties,
+                    container.Data.Properties,
                     null);
             }
 
@@ -507,42 +508,42 @@ namespace Test.Uwp
                         break;
                     case VirtualKey.Z:
                         {
-                            _context.Commands.UndoCommand.Execute(null);
+                            Core2D.Commands.UndoCommand.Execute(null);
                         }
                         break;
                     case VirtualKey.Y:
                         {
-                            _context.Commands.RedoCommand.Execute(null);
+                            Core2D.Commands.RedoCommand.Execute(null);
                         }
                         break;
                     case VirtualKey.X:
                         {
-                            _context.Commands.CutCommand.Execute(null);
+                            Core2D.Commands.CutCommand.Execute(null);
                         }
                         break;
                     case VirtualKey.C:
                         {
-                            _context.Commands.CopyCommand.Execute(null);
+                            Core2D.Commands.CopyCommand.Execute(null);
                         }
                         break;
                     case VirtualKey.V:
                         {
-                            _context.Commands.PasteCommand.Execute(null);
+                            Core2D.Commands.PasteCommand.Execute(null);
                         }
                         break;
                     case VirtualKey.A:
                         {
-                            _context.Commands.SelectAllCommand.Execute(null);
+                            Core2D.Commands.SelectAllCommand.Execute(null);
                         }
                         break;
                     case VirtualKey.G:
                         {
-                            _context.Commands.GroupCommand.Execute(null);
+                            Core2D.Commands.GroupCommand.Execute(null);
                         }
                         break;
                     case VirtualKey.U:
                         {
-                            _context.Commands.UngroupCommand.Execute(null);
+                            Core2D.Commands.UngroupCommand.Execute(null);
                         }
                         break;
                 }
@@ -552,52 +553,52 @@ namespace Test.Uwp
                 switch (args.VirtualKey)
                 {
                     case VirtualKey.N:
-                        _context.Commands.ToolNoneCommand.Execute(null);
+                        Core2D.Commands.ToolNoneCommand.Execute(null);
                         break;
                     case VirtualKey.S:
-                        _context.Commands.ToolSelectionCommand.Execute(null);
+                        Core2D.Commands.ToolSelectionCommand.Execute(null);
                         break;
                     case VirtualKey.P:
-                        _context.Commands.ToolPointCommand.Execute(null);
+                        Core2D.Commands.ToolPointCommand.Execute(null);
                         break;
                     case VirtualKey.L:
-                        _context.Commands.ToolLineCommand.Execute(null);
+                        Core2D.Commands.ToolLineCommand.Execute(null);
                         break;
                     case VirtualKey.R:
-                        _context.Commands.ToolRectangleCommand.Execute(null);
+                        Core2D.Commands.ToolRectangleCommand.Execute(null);
                         break;
                     case VirtualKey.E:
-                        _context.Commands.ToolEllipseCommand.Execute(null);
+                        Core2D.Commands.ToolEllipseCommand.Execute(null);
                         break;
                     case VirtualKey.A:
-                        _context.Commands.ToolArcCommand.Execute(null);
+                        Core2D.Commands.ToolArcCommand.Execute(null);
                         break;
                     case VirtualKey.B:
-                        _context.Commands.ToolBezierCommand.Execute(null);
+                        Core2D.Commands.ToolBezierCommand.Execute(null);
                         break;
                     case VirtualKey.Q:
-                        _context.Commands.ToolQBezierCommand.Execute(null);
+                        Core2D.Commands.ToolQBezierCommand.Execute(null);
                         break;
                     case VirtualKey.T:
-                        _context.Commands.ToolTextCommand.Execute(null);
+                        Core2D.Commands.ToolTextCommand.Execute(null);
                         break;
                     case VirtualKey.I:
-                        _context.Commands.ToolImageCommand.Execute(null);
+                        Core2D.Commands.ToolImageCommand.Execute(null);
                         break;
                     case VirtualKey.H:
-                        _context.Commands.ToolPathCommand.Execute(null);
+                        Core2D.Commands.ToolPathCommand.Execute(null);
                         break;
                     case VirtualKey.M:
-                        _context.Commands.ToolMoveCommand.Execute(null);
+                        Core2D.Commands.ToolMoveCommand.Execute(null);
                         break;
                     case VirtualKey.F:
-                        _context.Commands.DefaultIsFilledCommand.Execute(null);
+                        Core2D.Commands.DefaultIsFilledCommand.Execute(null);
                         break;
                     case VirtualKey.G:
-                        _context.Commands.SnapToGridCommand.Execute(null);
+                        Core2D.Commands.SnapToGridCommand.Execute(null);
                         break;
                     case VirtualKey.C:
-                        _context.Commands.TryToConnectCommand.Execute(null);
+                        Core2D.Commands.TryToConnectCommand.Execute(null);
                         break;
                     case VirtualKey.Z:
                         ResetZoom();
@@ -608,7 +609,7 @@ namespace Test.Uwp
                         _context.Editor.Invalidate();
                         break;
                     case VirtualKey.Delete:
-                        _context.Commands.DeleteCommand.Execute(null);
+                        Core2D.Commands.DeleteCommand.Execute(null);
                         break;
                 }
             }
@@ -619,7 +620,7 @@ namespace Test.Uwp
         /// </summary>
         private void OnNew()
         {
-            _context.Commands.NewCommand.Execute(null);
+            Core2D.Commands.NewCommand.Execute(null);
             _context.Editor.Invalidate();
         }
 
