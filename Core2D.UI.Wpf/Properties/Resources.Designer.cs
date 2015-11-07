@@ -1706,5 +1706,14 @@ namespace Core2D.UI.Wpf.Properties {
                 return ResourceManager.GetString("WindowTitleTemplates", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Records.
+        /// </summary>
+        public static string WiWindowTitleRecords {
+            get {
+                return ResourceManager.GetString("WiWindowTitleRecords", resourceCulture);
+            }
+        }
     }
 }
