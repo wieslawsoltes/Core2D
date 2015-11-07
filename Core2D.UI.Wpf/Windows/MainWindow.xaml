@@ -24,22 +24,22 @@
         </MultiBinding>
     </Window.Title>
     <Window.InputBindings>
-        <KeyBinding Command="{Binding Commands.NewCommand}" Gesture="Ctrl+N"/>
-        <KeyBinding Command="{Binding Commands.OpenCommand}" Gesture="Ctrl+O"/>
-        <KeyBinding Command="{Binding Commands.CloseCommand}" Gesture="Ctrl+F4"/>
-        <KeyBinding Command="{Binding Commands.SaveCommand}" Gesture="Ctrl+S"/>
-        <KeyBinding Command="{Binding Commands.SaveAsCommand}" Gesture="Ctrl+Shift+S"/>
-        <KeyBinding Command="{Binding Commands.ExportCommand}" Gesture="Ctrl+E"/>
-        <KeyBinding Command="{Binding Commands.ExitCommand}" Gesture="Alt+F4"/>
-        <KeyBinding Command="{Binding Commands.UndoCommand}" Gesture="Ctrl+Z"/>
-        <KeyBinding Command="{Binding Commands.RedoCommand}" Gesture="Ctrl+Y"/>
-        <KeyBinding Command="{Binding Commands.CopyAsEmfCommand}" Gesture="Ctrl+Shift+C"/>
-        <KeyBinding Command="{Binding Commands.CutCommand}" Gesture="Ctrl+X"/>
-        <KeyBinding Command="{Binding Commands.CopyCommand}" Gesture="Ctrl+C"/>
-        <KeyBinding Command="{Binding Commands.PasteCommand}" Gesture="Ctrl+V"/>
-        <KeyBinding Command="{Binding Commands.SelectAllCommand}" Gesture="Ctrl+A"/>
-        <KeyBinding Command="{Binding Commands.GroupCommand}" Gesture="Ctrl+G"/>
-        <KeyBinding Command="{Binding Commands.UngroupCommand}" Gesture="Ctrl+U"/>
+        <KeyBinding Command="{x:Static core:Commands.NewCommand}" Gesture="Ctrl+N"/>
+        <KeyBinding Command="{x:Static core:Commands.OpenCommand}" Gesture="Ctrl+O"/>
+        <KeyBinding Command="{x:Static core:Commands.CloseCommand}" Gesture="Ctrl+F4"/>
+        <KeyBinding Command="{x:Static core:Commands.SaveCommand}" Gesture="Ctrl+S"/>
+        <KeyBinding Command="{x:Static core:Commands.SaveAsCommand}" Gesture="Ctrl+Shift+S"/>
+        <KeyBinding Command="{x:Static core:Commands.ExportCommand}" Gesture="Ctrl+E"/>
+        <KeyBinding Command="{x:Static core:Commands.ExitCommand}" Gesture="Alt+F4"/>
+        <KeyBinding Command="{x:Static core:Commands.UndoCommand}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{x:Static core:Commands.RedoCommand}" Gesture="Ctrl+Y"/>
+        <KeyBinding Command="{x:Static core:Commands.CopyAsEmfCommand}" Gesture="Ctrl+Shift+C"/>
+        <KeyBinding Command="{x:Static core:Commands.CutCommand}" Gesture="Ctrl+X"/>
+        <KeyBinding Command="{x:Static core:Commands.CopyCommand}" Gesture="Ctrl+C"/>
+        <KeyBinding Command="{x:Static core:Commands.PasteCommand}" Gesture="Ctrl+V"/>
+        <KeyBinding Command="{x:Static core:Commands.SelectAllCommand}" Gesture="Ctrl+A"/>
+        <KeyBinding Command="{x:Static core:Commands.GroupCommand}" Gesture="Ctrl+G"/>
+        <KeyBinding Command="{x:Static core:Commands.UngroupCommand}" Gesture="Ctrl+U"/>
     </Window.InputBindings>
     <Window.Resources>
         <Style TargetType="{x:Type ad:LayoutDocumentPaneControl}">

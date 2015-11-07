@@ -28,8 +28,8 @@
                 <Grid.Resources>
                     <ControlTemplate x:Key="LayersMenu">
                         <Menu Background="Transparent" HorizontalAlignment="Right">
-                            <MenuItem Command="{Binding Commands.AddLayerCommand}" Header="+"/>
-                            <MenuItem Command="{Binding Commands.RemoveLayerCommand}" Header="-"/>
+                            <MenuItem Command="{x:Static core:Commands.AddLayerCommand}" Header="+"/>
+                            <MenuItem Command="{x:Static core:Commands.RemoveLayerCommand}" Header="-"/>
                         </Menu>
                     </ControlTemplate>
                 </Grid.Resources>
@@ -129,7 +129,7 @@
                 <Grid.Resources>
                     <ControlTemplate x:Key="ShapesMenu">
                         <Menu Background="Transparent" HorizontalAlignment="Right">
-                            <MenuItem Command="{Binding Commands.RemoveShapeCommand}" Header="-"/>
+                            <MenuItem Command="{x:Static core:Commands.RemoveShapeCommand}" Header="-"/>
                         </Menu>
                     </ControlTemplate>
                 </Grid.Resources>

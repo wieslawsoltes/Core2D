@@ -13,31 +13,31 @@
     <Menu Background="Transparent">
         <MenuItem Header="{x:Static p:Resources.MenuFile}">
             <MenuItem Header="{x:Static p:Resources.MenuFileNew}" 
-                      Command="{Binding Commands.NewCommand}" CommandParameter="{Binding}" 
+                      Command="{x:Static core:Commands.NewCommand}" CommandParameter="{Binding}" 
                       InputGestureText="Ctrl+N">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuFileOpen}" 
-                      Command="{Binding Commands.OpenCommand}" 
+                      Command="{x:Static core:Commands.OpenCommand}" 
                       InputGestureText="Ctrl+O">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuFileClose}" 
-                      Command="{Binding Commands.CloseCommand}" 
+                      Command="{x:Static core:Commands.CloseCommand}" 
                       InputGestureText="Ctrl+F4">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuFileSave}" 
-                      Command="{Binding Commands.SaveCommand}" 
+                      Command="{x:Static core:Commands.SaveCommand}" 
                       InputGestureText="Ctrl+S">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuFileSaveAs}" 
-                      Command="{Binding Commands.SaveAsCommand}" 
+                      Command="{x:Static core:Commands.SaveAsCommand}" 
                       InputGestureText="Ctrl+Shift+S">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuFileExport}" 
-                      Command="{Binding Commands.ExportCommand}" 
+                      Command="{x:Static core:Commands.ExportCommand}" 
                       CommandParameter="{Binding Editor.Project}" 
                       InputGestureText="Ctrl+E">
             </MenuItem>
@@ -59,85 +59,85 @@
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuFileExit}" 
-                      Command="{Binding Commands.ExitCommand}" 
+                      Command="{x:Static core:Commands.ExitCommand}" 
                       InputGestureText="Alt+F4">
             </MenuItem>
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuEdit}">
             <MenuItem Header="{x:Static p:Resources.MenuEditUndo}" 
-                      Command="{Binding Commands.UndoCommand}" 
+                      Command="{x:Static core:Commands.UndoCommand}" 
                       InputGestureText="Ctrl+Z">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuEditRedo}" 
-                      Command="{Binding Commands.RedoCommand}" 
+                      Command="{x:Static core:Commands.RedoCommand}" 
                       InputGestureText="Ctrl+Y">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuEditCopyAsEmf}"
-                      Command="{Binding Commands.CopyAsEmfCommand}" 
+                      Command="{x:Static core:Commands.CopyAsEmfCommand}" 
                       InputGestureText="Ctrl+Shift+C">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuEditCut}" 
-                      Command="{Binding Commands.CutCommand}" 
+                      Command="{x:Static core:Commands.CutCommand}" 
                       CommandParameter="{Binding}" 
                       InputGestureText="Ctrl+X">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuEditCopy}" 
-                      Command="{Binding Commands.CopyCommand}" 
+                      Command="{x:Static core:Commands.CopyCommand}" 
                       CommandParameter="{Binding}" 
                       InputGestureText="Ctrl+C">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuEditPaste}" 
-                      Command="{Binding Commands.PasteCommand}"
+                      Command="{x:Static core:Commands.PasteCommand}"
                       CommandParameter="{Binding}" 
                       InputGestureText="Ctrl+V">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuEditDelete}" 
-                      Command="{Binding Commands.DeleteCommand}" 
+                      Command="{x:Static core:Commands.DeleteCommand}" 
                       CommandParameter="{Binding}" 
                       InputGestureText="Del">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuEditSelectAll}" 
-                      Command="{Binding Commands.SelectAllCommand}" 
+                      Command="{x:Static core:Commands.SelectAllCommand}" 
                       InputGestureText="Ctrl+A">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuEditDeselectAll}" 
-                      Command="{Binding Commands.DeselectAllCommand}" 
+                      Command="{x:Static core:Commands.DeselectAllCommand}" 
                       InputGestureText="Esc">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuEditClearAll}" 
-                      Command="{Binding Commands.ClearAllCommand}" 
+                      Command="{x:Static core:Commands.ClearAllCommand}" 
                       InputGestureText="">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuEditGroup}" 
-                      Command="{Binding Commands.GroupCommand}" 
+                      Command="{x:Static core:Commands.GroupCommand}" 
                       InputGestureText="Ctrl+G">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuEditUngroup}" 
-                      Command="{Binding Commands.UngroupCommand}" 
+                      Command="{x:Static core:Commands.UngroupCommand}" 
                       InputGestureText="Ctrl+U">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuEditOrder}">
                 <MenuItem Header="{x:Static p:Resources.MenuEditOrderSendToBack}" 
-                          Command="{Binding Commands.SendToBackCommand}" 
+                          Command="{x:Static core:Commands.SendToBackCommand}" 
                           InputGestureText="Shift+-">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuEditOrderSendBackward}" 
-                          Command="{Binding Commands.SendBackwardCommand}" 
+                          Command="{x:Static core:Commands.SendBackwardCommand}" 
                           InputGestureText="-">
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuEditOrderBringForward}" 
-                          Command="{Binding Commands.BringForwardCommand}" 
+                          Command="{x:Static core:Commands.BringForwardCommand}" 
                           InputGestureText="+">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuEditOrderBringToFront}" 
-                          Command="{Binding Commands.BringToFrontCommand}" 
+                          Command="{x:Static core:Commands.BringToFrontCommand}" 
                           InputGestureText="Shift++">
                 </MenuItem>
             </MenuItem>
@@ -145,12 +145,12 @@
         <MenuItem Header="{x:Static p:Resources.MenuView}">
             <MenuItem Header="{x:Static p:Resources.MenuViewZoom}">
                 <MenuItem Header="{x:Static p:Resources.MenuViewZoomReset}" 
-                          Command="{Binding Commands.ZoomResetCommand}" 
+                          Command="{x:Static core:Commands.ZoomResetCommand}" 
                           InputGestureText="Z">
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuViewZoomExtent}" 
-                          Command="{Binding Commands.ZoomExtentCommand}" 
+                          Command="{x:Static core:Commands.ZoomExtentCommand}" 
                           InputGestureText="X">
                 </MenuItem>
                 <Separator/>
@@ -164,56 +164,56 @@
         <MenuItem Header="{x:Static p:Resources.MenuProject}">
             <MenuItem Header="{x:Static p:Resources.MenuProjectSubMenuImport}">
                 <MenuItem Header="{x:Static p:Resources.MenuProjectImportStyle}" 
-                          Command="{Binding Commands.ImportStyleCommand}" 
+                          Command="{x:Static core:Commands.ImportStyleCommand}" 
                           CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" 
                           InputGestureText="">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectImportStyles}" 
-                          Command="{Binding Commands.ImportStylesCommand}" 
+                          Command="{x:Static core:Commands.ImportStylesCommand}" 
                           CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" 
                           InputGestureText="">
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectImportStyleLibrary}" 
-                          Command="{Binding Commands.ImportStyleLibraryCommand}" 
+                          Command="{x:Static core:Commands.ImportStyleLibraryCommand}" 
                           CommandParameter="{Binding Editor.Project}" 
                           InputGestureText="">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectImportStyleLibraries}" 
-                          Command="{Binding Commands.ImportStyleLibrariesCommand}" 
+                          Command="{x:Static core:Commands.ImportStyleLibrariesCommand}" 
                           CommandParameter="{Binding Editor.Project}" 
                           InputGestureText="">
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectImportGroup}" 
-                          Command="{Binding Commands.ImportGroupCommand}" 
+                          Command="{x:Static core:Commands.ImportGroupCommand}" 
                           CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" 
                           InputGestureText="">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectImportGroups}" 
-                          Command="{Binding Commands.ImportGroupsCommand}" 
+                          Command="{x:Static core:Commands.ImportGroupsCommand}" 
                           CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" 
                           InputGestureText="">
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectImportGroupLibrary}" 
-                          Command="{Binding Commands.ImportGroupLibraryCommand}" 
+                          Command="{x:Static core:Commands.ImportGroupLibraryCommand}" 
                           CommandParameter="{Binding Editor.Project}" 
                           InputGestureText="">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectImportGroupLibraries}" 
-                          Command="{Binding Commands.ImportGroupLibrariesCommand}" 
+                          Command="{x:Static core:Commands.ImportGroupLibrariesCommand}" 
                           CommandParameter="{Binding Editor.Project}" 
                           InputGestureText="">
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectImportTemplate}" 
-                          Command="{Binding Commands.ImportTemplateCommand}" 
+                          Command="{x:Static core:Commands.ImportTemplateCommand}" 
                           CommandParameter="{Binding Editor.Project}" 
                           InputGestureText="">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectImportTemplates}"
-                          Command="{Binding Commands.ImportTemplatesCommand}" 
+                          Command="{x:Static core:Commands.ImportTemplatesCommand}" 
                           CommandParameter="{Binding Editor.Project}" 
                           InputGestureText="">
                 </MenuItem>
@@ -221,56 +221,56 @@
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuProjectSubMenuExport}">
                 <MenuItem Header="{x:Static p:Resources.MenuProjectExportStyle}" 
-                          Command="{Binding Commands.ExportStyleCommand}" 
+                          Command="{x:Static core:Commands.ExportStyleCommand}" 
                           CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" 
                           InputGestureText="">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectExportStyles}" 
-                          Command="{Binding Commands.ExportStylesCommand}" 
+                          Command="{x:Static core:Commands.ExportStylesCommand}" 
                           CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" 
                           InputGestureText="">
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectExportStyleLibrary}" 
-                          Command="{Binding Commands.ExportStyleLibraryCommand}" 
+                          Command="{x:Static core:Commands.ExportStyleLibraryCommand}" 
                           CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" 
                           InputGestureText="">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectExportStyleLibraries}" 
-                          Command="{Binding Commands.ExportStyleLibrariesCommand}" 
+                          Command="{x:Static core:Commands.ExportStyleLibrariesCommand}" 
                           CommandParameter="{Binding Editor.Project}" 
                           InputGestureText="">
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectExportGroup}" 
-                          Command="{Binding Commands.ExportGroupCommand}" 
+                          Command="{x:Static core:Commands.ExportGroupCommand}" 
                           CommandParameter="{Binding Editor.Project.CurrentGroupLibrary.CurrentGroup}" 
                           InputGestureText="">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectExportGroups}" 
-                          Command="{Binding Commands.ExportGroupsCommand}" 
+                          Command="{x:Static core:Commands.ExportGroupsCommand}" 
                           CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" 
                           InputGestureText="">
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectExportGroupLibrary}" 
-                          Command="{Binding Commands.ExportGroupLibraryCommand}" 
+                          Command="{x:Static core:Commands.ExportGroupLibraryCommand}" 
                           CommandParameter="{Binding Editor.Project.CurrentGroupLibrary}" 
                           InputGestureText="">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectExportGroupLibraries}" 
-                          Command="{Binding Commands.ExportGroupLibrariesCommand}" 
+                          Command="{x:Static core:Commands.ExportGroupLibrariesCommand}" 
                           CommandParameter="{Binding Editor.Project}" 
                           InputGestureText="">
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectExportTemplate}" 
-                          Command="{Binding Commands.ExportTemplateCommand}" 
+                          Command="{x:Static core:Commands.ExportTemplateCommand}" 
                           CommandParameter="{Binding Editor.Project.CurrentTemplate}" 
                           InputGestureText="">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuProjectExportTemplates}" 
-                          Command="{Binding Commands.ExportTemplatesCommand}" 
+                          Command="{x:Static core:Commands.ExportTemplatesCommand}" 
                           CommandParameter="{Binding Editor.Project}" 
                           InputGestureText="">
                 </MenuItem>
@@ -278,53 +278,53 @@
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuTool}">
             <MenuItem Header="{x:Static p:Resources.MenuToolNone}" 
-                      Command="{Binding Commands.ToolNoneCommand}"
+                      Command="{x:Static core:Commands.ToolNoneCommand}"
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.None}}" 
                       InputGestureText="N">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolSelection}" 
-                      Command="{Binding Commands.ToolSelectionCommand}" 
+                      Command="{x:Static core:Commands.ToolSelectionCommand}" 
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Selection}}"
                       InputGestureText="S">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolPoint}" 
-                      Command="{Binding Commands.ToolPointCommand}"
+                      Command="{x:Static core:Commands.ToolPointCommand}"
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Point}}" 
                       InputGestureText="P">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolLine}" 
-                      Command="{Binding Commands.ToolLineCommand}" 
+                      Command="{x:Static core:Commands.ToolLineCommand}" 
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Line}}"
                       InputGestureText="L">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuToolArc}" 
-                      Command="{Binding Commands.ToolArcCommand}" 
+                      Command="{x:Static core:Commands.ToolArcCommand}" 
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Arc}}"
                       InputGestureText="A">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuToolBezier}" 
-                      Command="{Binding Commands.ToolBezierCommand}" 
+                      Command="{x:Static core:Commands.ToolBezierCommand}" 
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Bezier}}"
                       InputGestureText="B">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuToolQBezier}" 
-                      Command="{Binding Commands.ToolQBezierCommand}"
+                      Command="{x:Static core:Commands.ToolQBezierCommand}"
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.QBezier}}" 
                       InputGestureText="Q">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolPath}" 
-                      Command="{Binding Commands.ToolPathCommand}" 
+                      Command="{x:Static core:Commands.ToolPathCommand}" 
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Path}}"
                       InputGestureText="H">
@@ -332,32 +332,32 @@
             <MenuItem Header="{x:Static p:Resources.MenuPathTool}"
                       IsEnabled="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Path}}">
                 <MenuItem Header="{x:Static p:Resources.MenuPathToolLine}" 
-                      Command="{Binding Commands.ToolLineCommand}" 
+                      Command="{x:Static core:Commands.ToolLineCommand}" 
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.Line}}"
                       InputGestureText="L">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuPathToolArc}" 
-                      Command="{Binding Commands.ToolArcCommand}" 
+                      Command="{x:Static core:Commands.ToolArcCommand}" 
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.Arc}}"
                       InputGestureText="A">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuPathToolBezier}" 
-                      Command="{Binding Commands.ToolBezierCommand}" 
+                      Command="{x:Static core:Commands.ToolBezierCommand}" 
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.Bezier}}"
                       InputGestureText="B">
                 </MenuItem>
                 <MenuItem Header="{x:Static p:Resources.MenuPathToolQBezier}" 
-                      Command="{Binding Commands.ToolQBezierCommand}"
+                      Command="{x:Static core:Commands.ToolQBezierCommand}"
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.QBezier}}" 
                       InputGestureText="Q">
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="{x:Static p:Resources.MenuPathToolMove}" 
-                      Command="{Binding Commands.ToolMoveCommand}" 
+                      Command="{x:Static core:Commands.ToolMoveCommand}" 
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentPathTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:PathTool.Move}}"
                       InputGestureText="M">
@@ -365,27 +365,27 @@
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolRectangle}" 
-                      Command="{Binding Commands.ToolRectangleCommand}" 
+                      Command="{x:Static core:Commands.ToolRectangleCommand}" 
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Rectangle}}"
                       InputGestureText="R">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuToolEllipse}" 
-                      Command="{Binding Commands.ToolEllipseCommand}" 
+                      Command="{x:Static core:Commands.ToolEllipseCommand}" 
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Ellipse}}"
                       InputGestureText="E">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolText}" 
-                      Command="{Binding Commands.ToolTextCommand}" 
+                      Command="{x:Static core:Commands.ToolTextCommand}" 
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Text}}"
                       InputGestureText="T">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuToolImage}" 
-                      Command="{Binding Commands.ToolImageCommand}" 
+                      Command="{x:Static core:Commands.ToolImageCommand}" 
                       IsCheckable="False"
                       IsChecked="{Binding Path=Editor.CurrentTool, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static core:Tool.Image}}"
                       InputGestureText="I">
@@ -393,12 +393,12 @@
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuData}">
             <MenuItem Header="{x:Static p:Resources.MenuDataImport}" 
-                      Command="{Binding Commands.ImportDataCommand}" 
+                      Command="{x:Static core:Commands.ImportDataCommand}" 
                       InputGestureText="">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuDataExport}" 
-                      Command="{Binding Commands.ExportDataCommand}" 
+                      Command="{x:Static core:Commands.ExportDataCommand}" 
                       InputGestureText="">
             </MenuItem>
         </MenuItem>
@@ -430,56 +430,56 @@
             <MenuItem Header="{x:Static p:Resources.MenuOptionsDefaultIsStroked}" 
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.Project.Options.DefaultIsStroked, Mode=OneWay}"
-                      Command="{Binding Commands.DefaultIsStrokedCommand}" 
+                      Command="{x:Static core:Commands.DefaultIsStrokedCommand}" 
                       InputGestureText="K">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuOptionsDefaultIsFilled}" 
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.Project.Options.DefaultIsFilled, Mode=OneWay}"
-                      Command="{Binding Commands.DefaultIsFilledCommand}" 
+                      Command="{x:Static core:Commands.DefaultIsFilledCommand}" 
                       InputGestureText="F">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuOptionsDefaultIsClosed}" 
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.Project.Options.DefaultIsClosed, Mode=OneWay}"
-                      Command="{Binding Commands.DefaultIsClosedCommand}" 
+                      Command="{x:Static core:Commands.DefaultIsClosedCommand}" 
                       InputGestureText="D">
             </MenuItem>
             <MenuItem Header="{x:Static p:Resources.MenuOptionsDefaultIsSmoothJoin}" 
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.Project.Options.DefaultIsSmoothJoin, Mode=OneWay}"
-                      Command="{Binding Commands.DefaultIsSmoothJoinCommand}" 
+                      Command="{x:Static core:Commands.DefaultIsSmoothJoinCommand}" 
                       InputGestureText="J">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuOptionsSnapToGrid}" 
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.Project.Options.SnapToGrid, Mode=OneWay}"
-                      Command="{Binding Commands.SnapToGridCommand}" 
+                      Command="{x:Static core:Commands.SnapToGridCommand}" 
                       InputGestureText="G">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuOptionsTryToConnect}" 
                       IsCheckable="True" 
                       IsChecked="{Binding Editor.Project.Options.TryToConnect, Mode=OneWay}"
-                      Command="{Binding Commands.TryToConnectCommand}" 
+                      Command="{x:Static core:Commands.TryToConnectCommand}" 
                       InputGestureText="C">
             </MenuItem>
         </MenuItem>
         <MenuItem Header="{x:Static p:Resources.MenuWindow}">
             <MenuItem Header="{x:Static p:Resources.MenuWindowLoadLayout}" 
-                      Command="{Binding Commands.LoadWindowLayoutCommand}" 
+                      Command="{x:Static core:Commands.LoadWindowLayoutCommand}" 
                       InputGestureText="">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuWindowSaveLayout}" 
-                      Command="{Binding Commands.SaveWindowLayoutCommand}" 
+                      Command="{x:Static core:Commands.SaveWindowLayoutCommand}" 
                       InputGestureText="">
             </MenuItem>
             <Separator/>
             <MenuItem Header="{x:Static p:Resources.MenuWindowResetLayout}" 
-                      Command="{Binding Commands.ResetWindowLayoutCommand}" 
+                      Command="{x:Static core:Commands.ResetWindowLayoutCommand}" 
                       InputGestureText="">
             </MenuItem>
         </MenuItem>

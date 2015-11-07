@@ -13,8 +13,8 @@
         <Grid.Resources>
             <ControlTemplate x:Key="ProjectMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
-                    <MenuItem Command="{Binding Commands.NewCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="+"/>
-                    <MenuItem Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="-"/>
+                    <MenuItem Command="{x:Static core:Commands.NewCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="+"/>
+                    <MenuItem Command="{x:Static core:Commands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=projectTreeView}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
@@ -64,16 +64,16 @@
             </TreeView.Resources>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectedItemChanged">
-                    <i:InvokeCommandAction Command="{Binding Commands.SelectedItemChangedCommand}" CommandParameter="{Binding ElementName=projectTreeView, Path=SelectedItem}"/>
+                    <i:InvokeCommandAction Command="{x:Static core:Commands.SelectedItemChangedCommand}" CommandParameter="{Binding ElementName=projectTreeView, Path=SelectedItem}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <TreeView.InputBindings>
-                <KeyBinding Command="{Binding Commands.NewCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+N"/>
-                <KeyBinding Command="{Binding Commands.CutCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+X"/>
-                <KeyBinding Command="{Binding Commands.CopyCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+C"/>
-                <KeyBinding Command="{Binding Commands.PasteCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+V"/>
-                <KeyBinding Command="{Binding Commands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Del"/>
-                <KeyBinding Command="{Binding Commands.ExportCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+E"/>
+                <KeyBinding Command="{x:Static core:Commands.NewCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+N"/>
+                <KeyBinding Command="{x:Static core:Commands.CutCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+X"/>
+                <KeyBinding Command="{x:Static core:Commands.CopyCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+C"/>
+                <KeyBinding Command="{x:Static core:Commands.PasteCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+V"/>
+                <KeyBinding Command="{x:Static core:Commands.DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Del"/>
+                <KeyBinding Command="{x:Static core:Commands.ExportCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" Gesture="Ctrl+E"/>
             </TreeView.InputBindings>
             <TreeView.Style>
                 <Style TargetType="TreeView">

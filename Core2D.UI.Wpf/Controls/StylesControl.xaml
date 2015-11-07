@@ -5,6 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:core="clr-namespace:Core2D;assembly=Core2D"
              xmlns:controls="clr-namespace:Core2D.UI.Wpf.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="200">
@@ -13,29 +14,29 @@
             <ControlTemplate x:Key="StyleLibrariesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Header="import">
-                        <MenuItem Header="St_yle Library..." Command="{Binding Commands.ImportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
-                        <MenuItem Header="Sty_le Libraries..." Command="{Binding Commands.ImportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                        <MenuItem Header="St_yle Library..." Command="{x:Static core:Commands.ImportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                        <MenuItem Header="Sty_le Libraries..." Command="{x:Static core:Commands.ImportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
                     </MenuItem>
                     <MenuItem Header="export">
-                        <MenuItem Header="St_yle Library..." Command="{Binding Commands.ExportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
-                        <MenuItem Header="Sty_le Libraries..." Command="{Binding Commands.ExportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
+                        <MenuItem Header="St_yle Library..." Command="{x:Static core:Commands.ExportStyleLibraryCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
+                        <MenuItem Header="Sty_le Libraries..." Command="{x:Static core:Commands.ExportStyleLibrariesCommand}" CommandParameter="{Binding Editor.Project}" InputGestureText=""/>
                     </MenuItem>
-                    <MenuItem Command="{Binding Commands.AddStyleLibraryCommand}" Header="+"/>
-                    <MenuItem Command="{Binding Commands.RemoveStyleLibraryCommand}" Header="-"/>
+                    <MenuItem Command="{x:Static core:Commands.AddStyleLibraryCommand}" Header="+"/>
+                    <MenuItem Command="{x:Static core:Commands.RemoveStyleLibraryCommand}" Header="-"/>
                 </Menu>
             </ControlTemplate>
             <ControlTemplate x:Key="StylesMenu">
                 <Menu Background="Transparent" HorizontalAlignment="Right">
                     <MenuItem Header="import">
-                        <MenuItem Header="_Style..." Command="{Binding Commands.ImportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
-                        <MenuItem Header="S_tyles..." Command="{Binding Commands.ImportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
+                        <MenuItem Header="_Style..." Command="{x:Static core:Commands.ImportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
+                        <MenuItem Header="S_tyles..." Command="{x:Static core:Commands.ImportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
                     </MenuItem>
                     <MenuItem Header="export">
-                        <MenuItem Header="_Style..." Command="{Binding Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" InputGestureText=""/>
-                        <MenuItem Header="S_tyles..." Command="{Binding Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
+                        <MenuItem Header="_Style..." Command="{x:Static core:Commands.ExportStyleCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary.CurrentStyle}" InputGestureText=""/>
+                        <MenuItem Header="S_tyles..." Command="{x:Static core:Commands.ExportStylesCommand}" CommandParameter="{Binding Editor.Project.CurrentStyleLibrary}" InputGestureText=""/>
                     </MenuItem>
-                    <MenuItem Command="{Binding Commands.AddStyleCommand}" Header="+"/>
-                    <MenuItem Command="{Binding Commands.RemoveStyleCommand}" Header="-"/>
+                    <MenuItem Command="{x:Static core:Commands.AddStyleCommand}" Header="+"/>
+                    <MenuItem Command="{x:Static core:Commands.RemoveStyleCommand}" Header="-"/>
                 </Menu>
             </ControlTemplate>
         </Grid.Resources>
@@ -85,26 +86,26 @@
                              DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Header="_Add Style"
                               InputGestureText="Ctrl+N" 
-                              Command="{Binding DataContext.Commands.AddStyleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                              Command="{x:Static core:Commands.AddStyleCommand}"/>
                     <Separator/>
                     <MenuItem Header="_Delete" 
                               InputGestureText="Del" 
-                              Command="{Binding DataContext.Commands.RemoveStyleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                              Command="{x:Static core:Commands.RemoveStyleCommand}"/>
                     <Separator/>
                     <MenuItem Header="E_xport" 
                               InputGestureText="Ctrl+E" 
-                              Command="{Binding DataContext.Commands.ExportStyleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                              Command="{x:Static core:Commands.ExportStyleCommand}" 
                               CommandParameter="{Binding}"/>
                 </ContextMenu>
             </controls:ShapeStyleDragAndDropListBox.Resources>
             <controls:ShapeStyleDragAndDropListBox.InputBindings>
-                <KeyBinding Command="{Binding DataContext.Commands.AddStyleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                <KeyBinding Command="{x:Static core:Commands.AddStyleCommand}" 
                             CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ShapeStyleDragAndDropListBox}}}" 
                             Gesture="Ctrl+N"/>
-                <KeyBinding Command="{Binding DataContext.Commands.RemoveStyleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                <KeyBinding Command="{x:Static core:Commands.RemoveStyleCommand}" 
                             CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ShapeStyleDragAndDropListBox}}}" 
                             Gesture="Del"/>
-                <KeyBinding Command="{Binding DataContext.Commands.ExportStyleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                <KeyBinding Command="{x:Static core:Commands.ExportStyleCommand}" 
                             CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ShapeStyleDragAndDropListBox}}}" 
                             Gesture="Ctrl+E"/>
             </controls:ShapeStyleDragAndDropListBox.InputBindings>
