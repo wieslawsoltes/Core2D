@@ -24,7 +24,7 @@ using Dependencies;
 namespace Core2D.UI.Wpf.Windows
 {
     /// <summary>
-    /// 
+    /// Interaction logic for <see cref="MainWindow"/> xaml.
     /// </summary>
     public partial class MainWindow : Window, IView
     {
@@ -38,7 +38,7 @@ namespace Core2D.UI.Wpf.Windows
         private bool _autoRecent = true;
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
         /// </summary>
         public MainWindow()
         {
