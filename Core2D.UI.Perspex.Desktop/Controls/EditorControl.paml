@@ -1205,30 +1205,8 @@
                         </TabControl>
                     </Grid>
                 </TabItem>
-                <TabItem IsVisible="{Binding !IsTemplate}" Header="Properties" Classes="property">
-                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="50*,Auto,50*">
-                        <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10"/>
-                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Name" Classes="default"/>
-                        <TextBlock Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" Text="Value" Classes="default"/>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Items="{Binding Path=Properties}">
-                            <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="core:Property">
-                                    <Grid VerticalAlignment="Top">
-                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay}" Classes="default"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.DataTemplates>
-                        </ItemsControl>
-                        <ItemsControl VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Items="{Binding Path=Properties}">
-                            <ItemsControl.DataTemplates>
-                                <DataTemplate DataType="core:Property">
-                                    <Grid VerticalAlignment="Top">
-                                        <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay}" Classes="default"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.DataTemplates>
-                        </ItemsControl>
-                    </Grid>
+                <TabItem IsVisible="{Binding !IsTemplate}" Header="Data" Classes="property">
+                    <ContentControl Content="{Binding Path=Data, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Layers" Classes="property">
                     <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
