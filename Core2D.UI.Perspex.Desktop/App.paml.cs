@@ -66,13 +66,13 @@ namespace Core2D.UI.Perspex.Desktop
         /// <param name="args">The program arguments.</param>
         private static void Main(string[] args)
         {
-            new App().Run();
+            new App().Start();
         }
 
         /// <summary>
-        /// Initialize application context and show main window.
+        /// Initialize application context and displays main window.
         /// </summary>
-        public void Run()
+        public void Start()
         {
             InitializeContext();
             LoadRecent();
