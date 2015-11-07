@@ -181,7 +181,7 @@ namespace Core2D.UI.Wpf.Controls
                     renderer.Draw(
                         drawingContext,
                         layer,
-                        layer.Owner != null ? layer.Owner.Properties : default(ImmutableArray<Property>),
+                        layer.Owner != null ? layer.Owner.Data.Properties : default(ImmutableArray<Property>),
                         null);
                 }
             }
