@@ -15,7 +15,6 @@ using Perspex.Themes.Default;
 using Perspex.Markup;
 using Perspex.Media;
 using Dependencies;
-using Core2D.UI.Perspex.Desktop.Windows;
 
 namespace Core2D.UI.Perspex.Desktop
 {
@@ -24,8 +23,8 @@ namespace Core2D.UI.Perspex.Desktop
     /// </summary>
     public class App : Application
     {
-        public EditorContext _context;
-        public MainWindow _mainWindow;
+        private EditorContext _context;
+        private Windows.MainWindow _mainWindow;
         private string _recentFileName = "Core2D.recent";
         private string _logFileName = "Core2D.log";
         private bool _enableRecent = true;
@@ -65,42 +64,37 @@ namespace Core2D.UI.Perspex.Desktop
         /// Program entry point.
         /// </summary>
         /// <param name="args">The program arguments.</param>
-        [STAThread]
         private static void Main(string[] args)
         {
-            try
-            {
-                var app = new App();
-                app.InitializeContext();
-
-                app._mainWindow = new MainWindow();
-                app._mainWindow.Closed += (sender, e) => app.DeInitializeContext();
-                app._context.View = app._mainWindow;
-                app._mainWindow.DataContext = app._context;
-
-                app._mainWindow.Show();
-                app.Run(app._mainWindow);
-            }
-            catch (Exception ex)
-            {
-                Print(ex);
-            }
+            new App().Run();
         }
 
         /// <summary>
-        /// Print exception details.
+        /// Initialize application context and show main window.
         /// </summary>
-        /// <param name="ex">The exception object.</param>
-        private static void Print(Exception ex)
+        public void Run()
         {
-            System.Diagnostics.Debug.Print(ex.GetType().ToString());
-            System.Diagnostics.Debug.Print(ex.Message);
-            System.Diagnostics.Debug.Print(ex.StackTrace);
-            if (ex.InnerException != null)
-            {
-                System.Diagnostics.Debug.Print("Inner exception:");
-                Print(ex.InnerException);
-            }
+            InitializeContext();
+            LoadRecent();
+
+            Commands.InitializeCommonCommands(_context);
+            InitializePlatformCommands(_context);
+
+            _mainWindow = new Windows.MainWindow();
+
+            _mainWindow.Closed +=
+                (sender, e) =>
+                {
+                    SaveRecent();
+                    DeInitializeContext();
+                };
+
+            _context.View = _mainWindow;
+
+            _mainWindow.DataContext = _context;
+            _mainWindow.Show();
+
+            Run(_mainWindow);
         }
 
         /// <summary>
@@ -116,7 +110,7 @@ namespace Core2D.UI.Perspex.Desktop
         }
 
         /// <summary>
-        /// 
+        /// Load recent project files list.
         /// </summary>
         private void LoadRecent()
         {
@@ -144,7 +138,7 @@ namespace Core2D.UI.Perspex.Desktop
         }
 
         /// <summary>
-        /// 
+        /// Save recent project files list.
         /// </summary>
         private void SaveRecent()
         {
@@ -186,20 +180,16 @@ namespace Core2D.UI.Perspex.Desktop
             };
 
             _context.Renderers[0].State.EnableAutofit = true;
+
             _context.InitializeEditor(new TraceLog(), System.IO.Path.Combine(GetAssemblyPath(), _logFileName), false);
             _context.Editor.Renderers[0].State.DrawShapeState.Flags = ShapeStateFlags.Visible;
             _context.Editor.GetImageKey = async () => await OnGetImageKey();
-
-            Commands.InitializeCommonCommands(_context);
-            InitializePlatformCommands(_context);
-
-            LoadRecent();
         }
 
         /// <summary>
-        /// 
+        /// Initialize platform commands used by <see cref="EditorContext"/>.
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context">The editor context instance.</param>
         private void InitializePlatformCommands(EditorContext context)
         {
             Commands.OpenCommand =
@@ -343,8 +333,6 @@ namespace Core2D.UI.Perspex.Desktop
         /// </summary>
         public void DeInitializeContext()
         {
-            SaveRecent();
-
             _context.Dispose();
         }
 
