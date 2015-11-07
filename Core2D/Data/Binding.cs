@@ -33,7 +33,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets binding owner data object.
+        /// Gets or sets binding owner object.
         /// </summary>
         public Data Owner
         {

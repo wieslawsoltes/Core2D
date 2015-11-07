@@ -43,7 +43,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets record owner object.
         /// </summary>
         public Database Owner
         {
