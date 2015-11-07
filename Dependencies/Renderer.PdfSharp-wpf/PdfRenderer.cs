@@ -188,7 +188,7 @@ namespace Dependencies
                             container.Template.Background,
                             Core2D.Rect2.Create(0, 0, page.Width.Value / scale, page.Height.Value / scale));
                     }
-                    Draw(gfx, container.Template, container.Properties, null);
+                    Draw(gfx, container.Template, container.Data.Properties, null);
                 }
                 else
                 {
@@ -202,7 +202,7 @@ namespace Dependencies
                 }
 
                 // draw container contents to pdf graphics
-                Draw(gfx, container, container.Properties, null);
+                Draw(gfx, container, container.Data.Properties, null);
             }
 
             return page;
