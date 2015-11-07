@@ -415,7 +415,7 @@ namespace Core2D.UI.Perspex.Desktop
         /// <summary>
         /// Save current <see cref="Project"/> to external file.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The await <see cref="Task"/>.</returns>
         private async Task OnSave()
         {
             try
