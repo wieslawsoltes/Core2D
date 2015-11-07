@@ -94,7 +94,20 @@ namespace Core2D.UI.Perspex.Desktop
             _mainWindow.DataContext = _context;
             _mainWindow.Show();
 
-            Run(_mainWindow);
+            try
+            {
+                Run(_mainWindow);
+            }
+            catch (Exception ex)
+            {
+                if (_context.Editor.Log != null)
+                {
+                    _context.Editor.Log.LogError("{0}{1}{2}",
+                        ex.Message,
+                        Environment.NewLine,
+                        ex.StackTrace);
+                }
+            }
         }
 
         /// <summary>
