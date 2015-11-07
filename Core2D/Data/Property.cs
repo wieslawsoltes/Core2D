@@ -12,6 +12,7 @@ namespace Core2D
     {
         private string _name;
         private object _value;
+        private Data _owner;
 
         /// <summary>
         /// 
@@ -32,17 +33,28 @@ namespace Core2D
         }
 
         /// <summary>
+        /// Gets or sets property owner data object.
+        /// </summary>
+        public Data Owner
+        {
+            get { return _owner; }
+            set { Update(ref _owner, value); }
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Property"/> instance.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
+        /// <param name="owner"></param>
         /// <returns></returns>
-        public static Property Create(string name, object value)
+        public static Property Create(string name, object value, Data owner)
         {
             return new Property()
             {
                 Name = name,
-                Value = value
+                Value = value,
+                Owner = owner
             };
         }
 
