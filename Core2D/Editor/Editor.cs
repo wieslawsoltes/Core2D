@@ -1722,6 +1722,25 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="parameter"></param>
+        public void RemoveImageKey(object parameter)
+        {
+            if (_project == null)
+                return;
+
+            if (parameter == null)
+                return;
+
+            var key = parameter as string;
+            if (key != null)
+            {
+                _project.RemoveImage(key);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="style"></param>
         public void ApplyStyle(ShapeStyle style)
         {
