@@ -288,7 +288,7 @@ namespace Core2D
             ProjectPath = string.Empty;
             IsProjectDirty = false;
         }
-        
+
         /// <summary>
         /// Snaps value by specified snap parameter.
         /// </summary>
@@ -696,9 +696,9 @@ namespace Core2D
         {
             if (_project == null)
                 return;
-            
+
             var document = Document.Create(name);
-            
+
             if (_enableHistory)
             {
                 var previous = _project.Documents;
@@ -711,7 +711,7 @@ namespace Core2D
                 _project.Documents = _project.Documents.Add(document);
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -743,7 +743,7 @@ namespace Core2D
         {
             if (_project == null)
                 return;
-            
+
             if (_enableHistory)
             {
                 var previous = _project.Documents;
@@ -756,7 +756,7 @@ namespace Core2D
                 _project.Documents = _project.Documents.Insert(index, document);
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -765,7 +765,7 @@ namespace Core2D
         {
             if (_project == null || _project.CurrentDocument == null)
                 return;
-            
+
             var document = _project.CurrentDocument;
             var container = Container.Create(name);
 
@@ -790,7 +790,7 @@ namespace Core2D
         {
             if (_project == null || _project.CurrentDocument == null)
                 return;
-            
+
             var document = _project.CurrentDocument;
 
             if (_enableHistory)
@@ -805,7 +805,7 @@ namespace Core2D
                 document.Containers = document.Containers.Add(container);
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -815,7 +815,7 @@ namespace Core2D
         {
             if (_project == null || _project.CurrentDocument == null)
                 return;
-            
+
             var document = _project.CurrentDocument;
 
             if (_enableHistory)
@@ -830,7 +830,7 @@ namespace Core2D
                 document.Containers = document.Containers.Insert(index, container);
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -839,7 +839,7 @@ namespace Core2D
         {
             if (_project == null)
                 return;
-            
+
             var template = Container.Create(name, true);
 
             if (_enableHistory)
@@ -854,7 +854,7 @@ namespace Core2D
                 _project.Templates = _project.Templates.Add(template);
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -863,7 +863,7 @@ namespace Core2D
         {
             if (_project == null)
                 return;
-            
+
             if (_enableHistory)
             {
                 var previous = _project.Templates;
@@ -876,7 +876,7 @@ namespace Core2D
                 _project.Templates = _project.Templates.Add(template);
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -901,7 +901,7 @@ namespace Core2D
                 container.Layers = container.Layers.Add(layer);
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -1063,7 +1063,7 @@ namespace Core2D
 
             _project.CurrentDatabase = db;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -1072,7 +1072,7 @@ namespace Core2D
         {
             if (_project == null)
                 return;
-            
+
             if (_enableHistory)
             {
                 var previous = _project.Databases;
@@ -1278,7 +1278,7 @@ namespace Core2D
         {
             if (_project == null || _project.CurrentGroupLibrary == null)
                 return;
-            
+
             var gl = _project.CurrentGroupLibrary;
 
             if (_enableHistory)
@@ -1293,7 +1293,7 @@ namespace Core2D
                 gl.Groups = gl.Groups.Add(group);
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -1302,7 +1302,7 @@ namespace Core2D
         {
             if (_project == null || _project.CurrentGroupLibrary == null)
                 return;
-            
+
             var gl = _project.CurrentGroupLibrary;
             var group = XGroup.Create(name);
 
@@ -1746,9 +1746,9 @@ namespace Core2D
         {
             if (_project == null || _project.CurrentContainer == null)
                 return;
-            
+
             var container = _project.CurrentContainer;
-            
+
             if (_enableHistory)
             {
                 if (_renderers[0].State.SelectedShape != null)
@@ -1768,7 +1768,7 @@ namespace Core2D
                         _history.Snapshot(previous, next, (p) => shape.Style = p);
                         shape.Style = next;
                     }
-                } 
+                }
             }
             else
             {
@@ -1816,7 +1816,7 @@ namespace Core2D
         {
             if (_project == null || _project.CurrentContainer == null)
                 return;
-            
+
             var container = _project.CurrentContainer;
             var result = ShapeBounds.HitTest(container, new Vector2(x, y), _project.Options.HitTreshold);
             if (result != null)
@@ -1843,9 +1843,9 @@ namespace Core2D
         {
             if (_project == null || _project.CurrentContainer == null)
                 return;
-            
+
             var container = _project.CurrentContainer;
-            
+
             if (_enableHistory)
             {
                 var previous = container.Template;
@@ -1858,7 +1858,7 @@ namespace Core2D
                 container.Template = template;
             }
         }
-        
+
         /// <summary>
         /// Update the destination database using data from source database.
         /// </summary>
@@ -1868,7 +1868,7 @@ namespace Core2D
         {
             if (_project == null)
                 return;
-            
+
             if (source.Columns.Length <= 1)
                 return;
 
@@ -1950,9 +1950,9 @@ namespace Core2D
         {
             if (_project == null || _project.CurrentContainer == null)
                 return;
-            
+
             var container = _project.CurrentContainer;
-            
+
             if (_enableHistory)
             {
                 if (_renderers[0].State.SelectedShape != null)
@@ -1972,7 +1972,7 @@ namespace Core2D
                         _history.Snapshot(previous, next, (p) => shape.Data.Record = p);
                         shape.Data.Record = next;
                     }
-                } 
+                }
             }
             else
             {
