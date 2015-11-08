@@ -30,6 +30,17 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        public IEnumerable<ImageKey> Keys
+        {
+            get
+            {
+                return _images.Select(i => new ImageKey() { Key = i.Key }).ToList();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="path"></param>
         /// <param name="bytes"></param>
         /// <returns></returns>
@@ -42,6 +53,7 @@ namespace Core2D
                 return key;
 
             _images.Add(key, bytes);
+            Notify("Keys");
             return key;
         }
 
@@ -56,6 +68,7 @@ namespace Core2D
                 return;
 
             _images.Add(key, bytes);
+            Notify("Keys");
         }
 
         /// <summary>
@@ -79,6 +92,7 @@ namespace Core2D
         public void RemoveImage(string key)
         {
             _images.Remove(key);
+            Notify("Keys");
         }
 
         /// <summary>
@@ -94,6 +108,7 @@ namespace Core2D
                     _images.Remove(kvp.Key);
                 }
             }
+            Notify("Keys");
         }
 
         /// <summary>

@@ -13,6 +13,11 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        IEnumerable<ImageKey> Keys { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="path"></param>
         /// <param name="bytes"></param>
         /// <returns></returns>
