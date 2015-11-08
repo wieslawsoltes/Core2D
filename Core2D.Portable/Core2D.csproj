@@ -261,6 +261,9 @@
     <Compile Include="..\Core2D\Renderer\IImageCache.cs">
       <Link>Renderer\IImageCache.cs</Link>
     </Compile>
+    <Compile Include="..\Core2D\Renderer\ImageKey.cs">
+      <Link>Renderer\ImageKey.cs</Link>
+    </Compile>
     <Compile Include="..\Core2D\Renderer\IRenderer.cs">
       <Link>Renderer\IRenderer.cs</Link>
     </Compile>
