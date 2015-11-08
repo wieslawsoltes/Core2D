@@ -137,7 +137,7 @@ namespace Core2D
             get { return _recentProjects; }
             set { Update(ref _recentProjects, value); }
         }
-        
+
         /// <summary>
         ///
         /// </summary>
@@ -277,7 +277,7 @@ namespace Core2D
             else if (item is Document)
             {
                 var selected = item as Document;
-                
+
                 var container = default(Container);
                 if (_projectFactory != null)
                 {
@@ -313,7 +313,7 @@ namespace Core2D
                 {
                     document = Document.Create(Constants.DefaultDocumentName);
                 }
-                
+
                 if (_editor.EnableHistory)
                 {
                     var previous = _editor.Project.Documents;
@@ -335,9 +335,9 @@ namespace Core2D
                 {
                     _editor.History.Reset();
                 }
-    
+
                 _editor.Unload();
-                
+
                 if (_projectFactory != null)
                 {
                     _editor.Load(_projectFactory.GetProject(), string.Empty);
@@ -346,7 +346,7 @@ namespace Core2D
                 {
                     _editor.Load(Project.Create(), string.Empty);
                 }
-    
+
                 _editor.Invalidate();
             }
         }
@@ -733,7 +733,7 @@ namespace Core2D
                 }
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -748,7 +748,7 @@ namespace Core2D
                 _editor.ApplyRecord(item as Record);
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -802,7 +802,7 @@ namespace Core2D
             var template = default(Container);
             if (_projectFactory != null)
             {
-                 template = _projectFactory.GetTemplate(_editor.Project, "Empty");
+                template = _projectFactory.GetTemplate(_editor.Project, "Empty");
             }
             else
             {
@@ -899,7 +899,7 @@ namespace Core2D
             {
                 var selected = item as Container;
                 int index = _editor.Project.CurrentDocument.Containers.IndexOf(selected);
-                
+
                 var container = default(Container);
                 if (_projectFactory != null)
                 {
@@ -928,7 +928,7 @@ namespace Core2D
             {
                 var selected = item as Container;
                 int index = _editor.Project.CurrentDocument.Containers.IndexOf(selected);
-                
+
                 var container = default(Container);
                 if (_projectFactory != null)
                 {
@@ -962,7 +962,7 @@ namespace Core2D
             {
                 document = Document.Create(Constants.DefaultDocumentName);
             }
-            
+
             _editor.AddDocument(document);
             _editor.Project.CurrentDocument = document;
             _editor.Project.CurrentContainer = document.Containers.FirstOrDefault();
@@ -981,7 +981,7 @@ namespace Core2D
             {
                 var selected = item as Document;
                 int index = _editor.Project.Documents.IndexOf(selected);
-                
+
                 var document = default(Document);
                 if (_projectFactory != null)
                 {
@@ -1264,7 +1264,7 @@ namespace Core2D
         {
             if (_serializer == null)
                 return;
-            
+
             try
             {
                 var project = Project.Open(path, _serializer);
@@ -1299,7 +1299,7 @@ namespace Core2D
         {
             if (_serializer == null)
                 return;
-            
+
             try
             {
                 Project.Save(_editor.Project, path, _serializer);
@@ -1399,7 +1399,7 @@ namespace Core2D
         {
             if (_serializer == null)
                 return;
-            
+
             try
             {
                 switch (type)
@@ -1672,7 +1672,7 @@ namespace Core2D
         {
             if (_serializer == null)
                 return;
-            
+
             try
             {
                 switch (type)
@@ -1866,7 +1866,7 @@ namespace Core2D
         {
             if (_serializer == null)
                 return;
-            
+
             try
             {
                 var json = Utf8TextFile.Read(path);
@@ -1915,7 +1915,7 @@ namespace Core2D
         {
             if (_serializer == null)
                 return;
-            
+
             try
             {
                 var recent = Recent.Create(_recentProjects, _currentRecentProject);
@@ -2003,7 +2003,7 @@ namespace Core2D
         {
             if (_serializer == null)
                 return;
-            
+
             try
             {
                 var shapes = _serializer.Deserialize<IList<BaseShape>>(json);
@@ -2217,7 +2217,7 @@ namespace Core2D
         {
             if (_serializer == null)
                 return null;
-            
+
             try
             {
                 var json = _serializer.Serialize(group);
@@ -2256,7 +2256,7 @@ namespace Core2D
         {
             if (_serializer == null)
                 return null;
-            
+
             try
             {
                 var template = container.Template;
@@ -2297,7 +2297,7 @@ namespace Core2D
         {
             if (_serializer == null)
                 return null;
-            
+
             try
             {
                 var templates = document.Containers.Select(c => c.Template).ToArray();
@@ -2484,7 +2484,7 @@ namespace Core2D
             {
                 if (_editor.Renderers[0].State.SelectedShape != null)
                 {
-                     _editor.ApplyRecord(_editor.Renderers[0].State.SelectedShape, record);
+                    _editor.ApplyRecord(_editor.Renderers[0].State.SelectedShape, record);
                 }
                 else if (_editor.Renderers[0].State.SelectedShapes != null && _editor.Renderers[0].State.SelectedShapes.Count > 0)
                 {
