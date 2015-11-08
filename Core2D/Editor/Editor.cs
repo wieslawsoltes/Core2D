@@ -1318,7 +1318,32 @@ namespace Core2D
                 gl.Groups = gl.Groups.Add(group);
             }
         }
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        public async Task<string> AddImageKey(string path)
+        {
+            if (_project == null)
+                return null;
+
+            if (path == null || string.IsNullOrEmpty(path))
+            {
+                var key = await GetImageKey();
+                if (key == null || string.IsNullOrEmpty(key))
+                    return null;
+
+                return key;
+            }
+            else
+            {
+                var bytes = System.IO.File.ReadAllBytes(path);
+                var key = _project.AddImageFromFile(path, bytes);
+                return key;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
