@@ -1314,6 +1314,26 @@
                         <ContentControl Content="{Binding Path=Editor.Project.Options, Mode=TwoWay}"/>
                     </ScrollViewer>
                 </TabItem>
+                <TabItem Header="Images" Classes="property">
+                    <ScrollViewer>
+                        <Grid RowDefinitions="Auto,Auto,*" ColumnDefinitions="*" >
+                            <Menu Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
+                                <MenuItem Header="+" Command="{Static core:Commands.AddImageKeyCommand}"/>
+                            </Menu>
+                            <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Key" Classes="default"/>
+                            <ItemsControl VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" Items="{Binding Path=Editor.Project.Keys}">
+                                <ItemsControl.DataTemplates>
+                                    <DataTemplate DataType="core:ImageKey">
+                                        <Grid VerticalAlignment="Top" ColumnDefinitions="*,30">
+                                            <TextBox VerticalAlignment="Center" Text="{Binding Path=Key, Mode=OneWay}" Classes="default" Grid.Column="0"/>
+                                            <Button VerticalAlignment="Center" Content="-" Classes="default" Grid.Column="1" Command="{Static core:Commands.RemoveImageKeyCommand}" CommandParameter="{Binding Path=Key}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.DataTemplates>
+                            </ItemsControl>
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
             </TabControl>
         </Border>
         <Border Classes="leftBottom" Grid.Row="1" Grid.Column="0">
