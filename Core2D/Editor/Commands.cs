@@ -167,6 +167,16 @@ namespace Core2D
         /// <summary>
         /// 
         /// </summary>
+        public static ICommand AddImageKeyCommand { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static ICommand RemoveImageKeyCommand { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static ICommand UndoCommand { get; set; }
 
         /// <summary>
@@ -900,6 +910,16 @@ namespace Core2D
                     () => context.OnRemoveTemplate(),
                     () => context.IsEditMode());
 
+            AddImageKeyCommand =
+                Command.Create(
+                    async () => await context.Editor.AddImageKey(null),
+                    () => context.IsEditMode());
+
+            RemoveImageKeyCommand =
+                Command<object>.Create(
+                    (parameter) => context.Editor.RemoveImageKey(parameter),
+                    (parameter) => context.IsEditMode());
+
             EditTemplateCommand =
                 Command.Create(
                     () => context.OnEditTemplate(),
@@ -1070,6 +1090,9 @@ namespace Core2D
             (RemoveTemplateCommand as Command).NotifyCanExecuteChanged();
             (EditTemplateCommand as Command).NotifyCanExecuteChanged();
             (ApplyTemplateCommand as Command<object>).NotifyCanExecuteChanged();
+
+            (AddImageKeyCommand as Command).NotifyCanExecuteChanged();
+            (RemoveImageKeyCommand as Command<object>).NotifyCanExecuteChanged();
 
             (SelectedItemChangedCommand as Command<object>).NotifyCanExecuteChanged();
 
