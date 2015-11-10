@@ -7,20 +7,33 @@
              xmlns:converters="clr-namespace:Core2D.UI.Perspex.Desktop.Converters;assembly=Core2D.UI.Perspex.Desktop"
              xmlns:core="clr-namespace:Core2D;assembly=Core2D">
     <Menu>
-        <MenuItem Header="_File">
+        <MenuItem Header="_File" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNullConverter.Instance}}">
             <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Static core:Commands.NewCommand}"/>
             <Separator/>
             <MenuItem Header="_Open" HotKey="Ctrl+O" Command="{Static core:Commands.OpenCommand}"/>
             <Separator/>
-            <MenuItem Header="_Close" HotKey="Ctrl+F4" Command="{Static core:Commands.CloseCommand}" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
-            <Separator IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
-            <MenuItem Header="_Save" HotKey="Ctrl+S" Command="{Static core:Commands.SaveCommand}" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+            <MenuItem Header="_Recent" Items="{Binding Path=RecentProjects}">
+                <MenuItem.DataTemplates>
+                    <DataTemplate DataType="core:RecentProject">
+                        <TextBlock Text="{Binding Path=Name}" ToolTip.Tip="{Binding Path=Path}"/>
+                    </DataTemplate>
+                </MenuItem.DataTemplates>
+            </MenuItem>
             <Separator/>
-            
-            <MenuItem Header="Save _As" HotKey="Ctrl+Shift+S" Command="{Static core:Commands.SaveAsCommand}" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
-            <Separator IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
-            <MenuItem Header="_Export" HotKey="Ctrl+E" Command="{Static core:Commands.ExportCommand}" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
-            <Separator IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}"/>
+            <MenuItem Header="E_xit" HotKey="Alt+F4" Command="{Static core:Commands.ExitCommand}"/>
+        </MenuItem>
+        <MenuItem Header="_File" IsVisible="{Binding Path=Editor.Project, Converter={Static converters:IsNotNullConverter.Instance}}">
+            <MenuItem Header="_New" HotKey="Ctrl+N" Command="{Static core:Commands.NewCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Open" HotKey="Ctrl+O" Command="{Static core:Commands.OpenCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Close" HotKey="Ctrl+F4" Command="{Static core:Commands.CloseCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Save" HotKey="Ctrl+S" Command="{Static core:Commands.SaveCommand}"/>
+            <MenuItem Header="Save _As" HotKey="Ctrl+Shift+S" Command="{Static core:Commands.SaveAsCommand}"/>
+            <Separator/>
+            <MenuItem Header="_Export" HotKey="Ctrl+E" Command="{Static core:Commands.ExportCommand}"/>
+            <Separator/>
             <MenuItem Header="_Recent" Items="{Binding Path=RecentProjects}">
                 <MenuItem.DataTemplates>
                     <DataTemplate DataType="core:RecentProject">
