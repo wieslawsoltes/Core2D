@@ -1,7 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-# SharpDevelop 5.1
+# Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core2D.UI.Wpf", "Core2D.UI.Wpf\Core2D.UI.Wpf.csproj", "{12889680-3769-4914-BE60-5D09E83DF5B2}"
