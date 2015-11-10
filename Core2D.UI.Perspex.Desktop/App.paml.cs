@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Wiesław Šoltés. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-//#define SKIA
+//#define SKIA_WIN
+//#define SKIA_GTK
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,9 +16,13 @@ using Perspex.Markup.Xaml;
 using Perspex.Themes.Default;
 using Perspex.Markup;
 using Perspex.Media;
-#if SKIA
-using Perspex.Skia;
+#if SKIA_WIN
 using Perspex.Win32;
+using Perspex.Skia;
+#endif
+#if SKIA_GTK
+using Perspex.Gtk;
+using Perspex.Skia;
 #endif
 using Dependencies;
 
@@ -40,8 +45,11 @@ namespace Core2D.UI.Perspex.Desktop
         public App()
         {
             RegisterServices();
-#if SKIA
+#if SKIA_WIN
             Win32Platform.Initialize();
+            SkiaPlatform.Initialize();
+#elif SKIA_GTK
+            GtkPlatform.Initialize();
             SkiaPlatform.Initialize();
 #else
             InitializeSubsystems((int)Environment.OSVersion.Platform);
