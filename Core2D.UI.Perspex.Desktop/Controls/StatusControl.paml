@@ -45,8 +45,14 @@
             </TextBlock>
         </StackPanel>
         <WrapPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2">
-            <DropDown Classes="default" Width="110" Items="{Static core:Enums.ToolValues}" SelectedItem="{Binding Path=Editor.CurrentTool, Mode=TwoWay}"/>
-            <DropDown Classes="default" Width="110" Items="{Static core:Enums.PathToolValues}" SelectedItem="{Binding Path=Editor.CurrentPathTool, Mode=TwoWay}"/>
+            <DropDown Classes="default" 
+                      Width="110" 
+                      Items="{Static core:Enums.ToolValues}" 
+                      SelectedItem="{Binding Path=Editor.CurrentTool, Mode=TwoWay}"/>
+            <DropDown Classes="default"
+                      Width="110"
+                      Items="{Static core:Enums.PathToolValues}"
+                      SelectedItem="{Binding Path=Editor.CurrentPathTool, Mode=TwoWay}"/>
         </WrapPanel>
         <WrapPanel Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal" Margin="2">
             <CheckBox Classes="default" Content="Stroked" IsChecked="{Binding Editor.Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
