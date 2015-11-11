@@ -53,6 +53,20 @@
                       Width="110"
                       Items="{Static core:Enums.PathToolValues}"
                       SelectedItem="{Binding Path=Editor.CurrentPathTool, Mode=TwoWay}"/>
+            <!--
+            <DropDown Classes="default"
+                      Width="110"
+                      Items="{Static core:Enums.PathToolValues}"
+                      SelectedItem="{Binding Path=Editor.CurrentPathTool, Mode=TwoWay}"
+                      IsVisible="{Binding Path=Editor.CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static core:Tool.Path}}">
+                <DropDown.IsVisible>
+                    <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
+                        <Binding SourcePropertyPath="Editor.CurrentTool"/>
+                        <Binding SourcePropertyPath="{Static core:Tool.Path}"/>
+                    </MultiBinding>
+                </DropDown.IsVisible>
+            </DropDown>
+            -->
         </WrapPanel>
         <WrapPanel Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal" Margin="2">
             <CheckBox Classes="default" Content="Stroked" IsChecked="{Binding Editor.Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
