@@ -19,9 +19,17 @@
         <Style Selector="CheckBox.default">
             <Setter Property="Margin" Value="2"/>
             <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="DropDown.default">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderBrush" Value="#FFACACAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
     </UserControl.Styles>
-    <Grid ColumnDefinitions="Auto,*">
+    <Grid ColumnDefinitions="Auto,*,Auto">
         <StackPanel Grid.Column="0" HorizontalAlignment="Left" Orientation="Horizontal" Margin="2">
             <TextBlock Classes="stats">
                 <TextBlock.Text>
@@ -36,7 +44,11 @@
                 </TextBlock.Text>
             </TextBlock>
         </StackPanel>
-        <WrapPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal" Margin="2">
+        <WrapPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2">
+            <DropDown Classes="default" Width="110" Items="{Static core:Enums.ToolValues}" SelectedItem="{Binding Path=Editor.CurrentTool, Mode=TwoWay}"/>
+            <DropDown Classes="default" Width="110" Items="{Static core:Enums.PathToolValues}" SelectedItem="{Binding Path=Editor.CurrentPathTool, Mode=TwoWay}"/>
+        </WrapPanel>
+        <WrapPanel Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal" Margin="2">
             <CheckBox Classes="default" Content="Stroked" IsChecked="{Binding Editor.Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
             <CheckBox Classes="default" Content="Filled" IsChecked="{Binding Editor.Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
             <CheckBox Classes="default" Content="Closed" IsChecked="{Binding Editor.Project.Options.DefaultIsClosed, Mode=TwoWay}"/>
