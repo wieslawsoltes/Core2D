@@ -230,6 +230,8 @@
     <Compile Include="Converters\EditorToTitleMultiConverter.cs" />
     <Compile Include="Converters\IsNotNullConverter.cs" />
     <Compile Include="Converters\IsNullConverter.cs" />
+    <Compile Include="Converters\ObjectEqualityMultiConverter.cs" />
+    <Compile Include="Converters\ObjectEqualsConverter.cs" />
     <Compile Include="Converters\ObjectToObjectConverter.cs" />
     <Compile Include="Converters\ObjectToTypeStringConverter.cs" />
     <Compile Include="Converters\RoundedDoubleToDoubleConverter.cs" />
