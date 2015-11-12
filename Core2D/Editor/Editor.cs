@@ -12,7 +12,7 @@ using System.Windows.Input;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Project editor.
     /// </summary>
     public class Editor : ObservableObject
     {
@@ -131,7 +131,7 @@ namespace Core2D
         }
 
         /// <summary>
-        ///
+        /// Gets or sets invalidate action.
         /// </summary>
         public Action Invalidate
         {
@@ -159,83 +159,10 @@ namespace Core2D
         public ImmutableDictionary<Tool, Helper> Helpers { get; set; }
 
         /// <summary>
-        /// Creates a new <see cref="Editor"/> instance.
+        /// Loads project.
         /// </summary>
-        /// <param name="project">The project to edit.</param>
-        /// <param name="renderers">The shape renderers.</param>
-        /// <param name="enableObserver">Enable project observer.</param>
-        /// <param name="enableHistory">Enable project history.</param>
-        /// <param name="currentTool">The current tool.</param>
-        /// <param name="currentPathTool">The current path tool.</param>
-        /// <returns></returns>
-        public static Editor Create(
-            Project project,
-            IRenderer[] renderers = null,
-            bool enableObserver = true,
-            bool enableHistory = true,
-            Tool currentTool = Tool.Selection,
-            PathTool currentPathTool = PathTool.Line)
-        {
-            var editor = new Editor()
-            {
-                CurrentTool = currentTool,
-                CurrentPathTool = currentPathTool,
-                EnableObserver = enableObserver,
-                EnableHistory = enableHistory
-            };
-
-            var helpers = ImmutableDictionary.CreateBuilder<Tool, Helper>();
-            helpers.Add(Tool.None, new NoneHelper(editor));
-            helpers.Add(Tool.Selection, new SelectionHelper(editor));
-            helpers.Add(Tool.Point, new PointHelper(editor));
-            helpers.Add(Tool.Line, new LineHelper(editor));
-            helpers.Add(Tool.Arc, new ArcHelper(editor));
-            helpers.Add(Tool.Bezier, new BezierHelper(editor));
-            helpers.Add(Tool.QBezier, new QBezierHelper(editor));
-            helpers.Add(Tool.Path, new PathHelper(editor));
-            helpers.Add(Tool.Rectangle, new RectangleHelper(editor));
-            helpers.Add(Tool.Ellipse, new EllipseHelper(editor));
-            helpers.Add(Tool.Text, new TextHelper(editor));
-            helpers.Add(Tool.Image, new ImageHelper(editor));
-            editor.Helpers = helpers.ToImmutable();
-
-            editor.Project = project;
-            editor.ProjectPath = string.Empty;
-            editor.IsProjectDirty = false;
-
-            editor.Renderers = renderers;
-
-            if (editor.Renderers != null)
-            {
-                foreach (var renderer in editor.Renderers)
-                {
-                    if (renderer.State != null)
-                    {
-                        renderer.State.ImageCache = project;
-                    }
-                }
-            }
-
-            editor.Invalidate = () => { };
-
-            if (editor.EnableObserver)
-            {
-                editor.Observer = new Observer(editor);
-            }
-
-            if (editor.EnableHistory)
-            {
-                editor.History = new History();
-            }
-
-            return editor;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="project"></param>
-        /// <param name="path"></param>
+        /// <param name="project">The project to load.</param>
+        /// <param name="path">The project path.</param>
         public void Load(Project project, string path = null)
         {
             Deselect();
@@ -260,7 +187,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Unloads project.
         /// </summary>
         public void Unload()
         {
@@ -1345,7 +1272,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Removes the <see cref="Project.CurrentTemplate"/> object from the <see cref="Project.Templates"/> collection.
         /// </summary>
         public void RemoveCurrentTemplate()
         {
@@ -1372,7 +1299,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Removes the Project.CurrentGroupLibrary object from the Project.GroupLibraries collection.
+        /// Removes the <see cref="Project.CurrentGroupLibrary"/> object from the <see cref="Project.GroupLibraries"/> collection.
         /// </summary>
         public void RemoveCurrentGroupLibrary()
         {
@@ -1399,7 +1326,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Removes the Project.CurrentGroupLibrary.CurrentGroup object from the Project.CurrentGroupLibrary.Groups collection.
+        /// Removes the <see cref="Project.CurrentGroupLibrary"/> <see cref="GroupLibrary.CurrentGroup"/> object from the <see cref="Project.CurrentGroupLibrary"/> <see cref="GroupLibrary.Groups"/> collection.
         /// </summary>
         public void RemoveCurrentGroup()
         {
@@ -1428,7 +1355,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Removes the Container.CurrentLayer object from the Container.Layers collection.
+        /// Removes the <see cref="Project.CurrentContainer"/> <see cref="Container.CurrentLayer"/> object from the <see cref="Project.CurrentContainer"/> <see cref="Container.Layers"/> collection.
         /// </summary>
         public void RemoveCurrentLayer()
         {
@@ -1457,7 +1384,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Removes the Container.CurrentShape object from the Container.CurrentLayer.Shapes collection.
+        /// Removes the <see cref="Project.CurrentContainer"/> <see cref="Container.CurrentShape"/> object from the <see cref="Project.CurrentContainer"/> <see cref="Container.CurrentLayer"/> <see cref="Layer.Shapes"/> collection.
         /// </summary>
         public void RemoveCurrentShape()
         {
@@ -1486,7 +1413,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Removed the Project.CurrentStyleLibrary object from the Project.StyleLibraries collection.
+        /// Removes the <see cref="Project.CurrentStyleLibrary"/> object from the <see cref="Project.StyleLibraries"/> collection.
         /// </summary>
         public void RemoveCurrentStyleLibrary()
         {
@@ -1513,7 +1440,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Removes the Project.CurrentStyleLibrary.CurrentStyle object from the Project.CurrentStyleLibrary.Styles collection.
+        /// Removes the <see cref="Project.CurrentStyleLibrary"/> <see cref="StyleLibrary.CurrentStyle"/> object from the <see cref="Project.CurrentStyleLibrary"/> <see cref="StyleLibrary.Styles"/> collection.
         /// </summary>
         public void RemoveCurrentStyle()
         {
@@ -1542,9 +1469,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Removes the <see cref="Database"/> object from the <see cref="Project.Databases"/> collection.
         /// </summary>
-        /// <param name="db"></param>
+        /// <param name="db">The <see cref="Database"/> to remove.</param>
         public void RemoveDatabase(object db)
         {
             if (_project == null)
@@ -1569,9 +1496,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Removes the <see cref="Column"/> object from <see cref="Column.Owner"/> <see cref="Database.Columns"/> collection.
         /// </summary>
-        /// <param name="parameter"></param>
+        /// <param name="parameter">The <see cref="Column"/> to remove.</param>
         public void RemoveColumn(object parameter)
         {
             if (parameter != null && parameter is Column)
@@ -1601,7 +1528,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Removes the <see cref="Project.CurrentDatabase"/> <see cref="Database.CurrentRecord"/> object from the <see cref="Project.CurrentDatabase"/> <see cref="Database.Records"/> collection.
         /// </summary>
         public void RemoveRecord()
         {
@@ -1860,7 +1787,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Update the destination database using data from source database.
+        /// Update the destination <see cref="Database"/> using data from source <see cref="Database"/>.
         /// </summary>
         /// <param name="destination">The destination database.</param>
         /// <param name="source">The source database.</param>
@@ -2533,9 +2460,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Removes container object from owner document Containers collection.
+        /// Removes container object from owner document <see cref="Document.Containers"/> collection.
         /// </summary>
-        /// <param name="container">The container object to remove from document Containers collection.</param>
+        /// <param name="container">The container object to remove from document <see cref="Document.Containers"/> collection.</param>
         public void Delete(Container container)
         {
             if (_project == null || _project.Documents == null)
@@ -2563,9 +2490,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Removes document object from project Documents collection.
+        /// Removes document object from project <see cref="Project.Documents"/> collection.
         /// </summary>
-        /// <param name="document">The document object to remove from project Documents collection.</param>
+        /// <param name="document">The document object to remove from project <see cref="Project.Documents"/> collection.</param>
         public void Delete(Document document)
         {
             if (_project == null || _project.Documents == null)
@@ -3150,6 +3077,79 @@ namespace Core2D
         public void Move(double x, double y)
         {
             Helpers[CurrentTool].Move(x, y);
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="Editor"/> instance.
+        /// </summary>
+        /// <param name="project">The project to edit.</param>
+        /// <param name="renderers">The shape renderers.</param>
+        /// <param name="enableObserver">Enable project observer.</param>
+        /// <param name="enableHistory">Enable project history.</param>
+        /// <param name="currentTool">The current tool.</param>
+        /// <param name="currentPathTool">The current path tool.</param>
+        /// <returns></returns>
+        public static Editor Create(
+            Project project,
+            IRenderer[] renderers = null,
+            bool enableObserver = true,
+            bool enableHistory = true,
+            Tool currentTool = Tool.Selection,
+            PathTool currentPathTool = PathTool.Line)
+        {
+            var editor = new Editor()
+            {
+                CurrentTool = currentTool,
+                CurrentPathTool = currentPathTool,
+                EnableObserver = enableObserver,
+                EnableHistory = enableHistory
+            };
+
+            var helpers = ImmutableDictionary.CreateBuilder<Tool, Helper>();
+            helpers.Add(Tool.None, new NoneHelper(editor));
+            helpers.Add(Tool.Selection, new SelectionHelper(editor));
+            helpers.Add(Tool.Point, new PointHelper(editor));
+            helpers.Add(Tool.Line, new LineHelper(editor));
+            helpers.Add(Tool.Arc, new ArcHelper(editor));
+            helpers.Add(Tool.Bezier, new BezierHelper(editor));
+            helpers.Add(Tool.QBezier, new QBezierHelper(editor));
+            helpers.Add(Tool.Path, new PathHelper(editor));
+            helpers.Add(Tool.Rectangle, new RectangleHelper(editor));
+            helpers.Add(Tool.Ellipse, new EllipseHelper(editor));
+            helpers.Add(Tool.Text, new TextHelper(editor));
+            helpers.Add(Tool.Image, new ImageHelper(editor));
+            editor.Helpers = helpers.ToImmutable();
+
+            editor.Project = project;
+            editor.ProjectPath = string.Empty;
+            editor.IsProjectDirty = false;
+
+            editor.Renderers = renderers;
+
+            if (editor.Renderers != null)
+            {
+                foreach (var renderer in editor.Renderers)
+                {
+                    if (renderer.State != null)
+                    {
+                        renderer.State.ImageCache = project;
+                    }
+                }
+            }
+
+            editor.Invalidate = () => { };
+
+            if (editor.EnableObserver)
+            {
+                editor.Observer = new Observer(editor);
+            }
+
+            if (editor.EnableHistory)
+            {
+                editor.History = new History();
+            }
+
+            return editor;
         }
     }
 }

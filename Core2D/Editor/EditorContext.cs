@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Core2D
 {
     /// <summary>
-    ///
+    /// Project editor context.
     /// </summary>
     public class EditorContext : ObservableObject, IDisposable
     {
@@ -1837,8 +1837,8 @@ namespace Core2D
         /// <summary>
         /// Add recent project file.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="name"></param>
+        /// <param name="path">The project path.</param>
+        /// <param name="name">The project name.</param>
         private void AddRecent(string path, string name)
         {
             var q = _recentProjects.Where(x => x.Path.ToLower() == path.ToLower()).ToList();
@@ -1861,7 +1861,7 @@ namespace Core2D
         /// <summary>
         /// Load recent project files.
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">The recent projects path.</param>
         public void LoadRecent(string path)
         {
             if (_serializer == null)
@@ -1910,7 +1910,7 @@ namespace Core2D
         /// <summary>
         /// Save recent project files.
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">The recent projects path.</param>
         public void SaveRecent(string path)
         {
             if (_serializer == null)
