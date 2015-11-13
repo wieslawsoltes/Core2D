@@ -1787,7 +1787,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Update the destination <see cref="Database"/> using data from source <see cref="Database"/>.
+        /// Updates the destination <see cref="Database"/> using data from source <see cref="Database"/>.
         /// </summary>
         /// <param name="destination">The destination database.</param>
         /// <param name="source">The source database.</param>

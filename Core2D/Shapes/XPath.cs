@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Object representing path shape.
     /// </summary>
     public class XPath : BaseShape
     {
@@ -16,9 +16,9 @@ namespace Core2D
         /// Gets or sets path geometry used to draw shape.
         /// </summary>
         /// <remarks>
-        /// Geometry is based on path markup syntax.
-        /// XAML abbreviated geometry https://msdn.microsoft.com/en-us/library/ms752293(v=vs.110).aspx
-        /// SVG path specification http://www.w3.org/TR/SVG11/paths.html
+        /// Path geometry is based on path markup syntax:
+        /// - Xaml abbreviated geometry https://msdn.microsoft.com/en-us/library/ms752293(v=vs.110).aspx
+        /// - Svg path specification http://www.w3.org/TR/SVG11/paths.html
         /// </remarks>
         public XPathGeometry Geometry
         {
@@ -27,18 +27,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets all points from <see cref="XPathGeometry.Figures"/>. 
         /// </summary>
-        /// <param name="r"></param>
-        public override void Bind(Record r)
-        {
-            // TODO: Implement Bind() method.
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <returns>The <see cref="XPoint"/> array.</returns>
         public ImmutableArray<XPoint> GetAllPoints()
         {
             var builder = ImmutableArray.CreateBuilder<XPoint>();
@@ -104,16 +95,14 @@ namespace Core2D
 
             return builder.ToImmutable();
         }
+        
+        /// <inheritdoc/>
+        public override void Bind(Record r)
+        {
+            // TODO: Implement Bind() method.
+        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="renderer"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
@@ -159,11 +148,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
+        /// <inheritdoc/>
         public override void Move(double dx, double dy)
         {
             var points = this.GetAllPoints();
@@ -176,12 +161,12 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XPath"/> instance.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="style"></param>
-        /// <param name="geometry"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <returns></returns>
+        /// <param name="name">The shape name.</param>
+        /// <param name="style">The shape style.</param>
+        /// <param name="geometry">The path geometry.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <returns>The new instance of the <see cref="XPath"/> class.</returns>
         public static XPath Create(
             string name,
             ShapeStyle style,

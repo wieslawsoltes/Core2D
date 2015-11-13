@@ -5,16 +5,17 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Sweep direction used by <see cref="XArcSegment"/>.
     /// </summary>
     public enum XSweepDirection
     {
         /// <summary>
-        /// 
+        /// Clockwise sweep direction.
         /// </summary>
         Clockwise,
+        
         /// <summary>
-        /// 
+        /// Counterclockwise sweep direction.
         /// </summary>
         Counterclockwise
     }

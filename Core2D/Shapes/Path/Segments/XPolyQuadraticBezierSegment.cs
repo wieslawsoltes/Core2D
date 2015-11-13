@@ -6,22 +6,22 @@ using System.Collections.Generic;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Poly quadratic bezier path segment.
     /// </summary>
     public class XPolyQuadraticBezierSegment : XPathSegment
     {
         /// <summary>
-        /// 
+        /// Gets or sets points array.
         /// </summary>
         public IList<XPoint> Points { get; set; }
 
         /// <summary>
         /// Creates a new <see cref="XPolyQuadraticBezierSegment"/> instance.
         /// </summary>
-        /// <param name="points"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isSmoothJoin"></param>
-        /// <returns></returns>
+        /// <param name="points">The points array.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
+        /// <returns>The new instance of the <see cref="XPolyQuadraticBezierSegment"/> class.</returns>
         public static XPolyQuadraticBezierSegment Create(
             IList<XPoint> points,
             bool isStroked,

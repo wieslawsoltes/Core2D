@@ -124,12 +124,7 @@ namespace Core2D
             return template;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="Container"/> class.
-        /// </summary>
-        /// <param name="project">The new container owner project.</param>
-        /// <param name="name">The new container name.</param>
-        /// <returns>The new instance of the <see cref="Container"/>.</returns>
+        /// <inheritdoc/>
         public Container GetTemplate(Project project, string name)
         {
             var container = Container.Create(name, true);
@@ -144,12 +139,7 @@ namespace Core2D
             return container;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="Container"/> class.
-        /// </summary>
-        /// <param name="project">The new container owner project.</param>
-        /// <param name="name">The new container name.</param>
-        /// <returns>The new instance of the <see cref="Container"/>.</returns>
+        /// <inheritdoc/>
         public Container GetContainer(Project project, string name)
         {
             var container = Container.Create(name);
@@ -168,22 +158,14 @@ namespace Core2D
             return container;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="Document"/> class.
-        /// </summary>
-        /// <param name="project">The new document owner project.</param>
-        /// <param name="name">The new document name.</param>
-        /// <returns>The new instance of the <see cref="Document"/>.</returns>
+        /// <inheritdoc/>
         public Document GetDocument(Project project, string name)
         {
             var document = Document.Create(name);
             return document;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="Project"/> class.
-        /// </summary>
-        /// <returns>The new instance of the <see cref="Project"/>.</returns>
+        /// <inheritdoc/>
         public Project GetProject()
         {
             var project = Project.Create();

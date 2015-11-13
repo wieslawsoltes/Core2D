@@ -7,7 +7,7 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Object representing text string shape.
     /// </summary>
     public class XText : BaseShape
     {
@@ -16,7 +16,7 @@ namespace Core2D
         private string _text;
 
         /// <summary>
-        /// 
+        /// Gets or sets top-left corner point.
         /// </summary>
         public XPoint TopLeft
         {
@@ -25,7 +25,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets bottom-right corner point.
         /// </summary>
         public XPoint BottomRight
         {
@@ -34,7 +34,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets text string.
         /// </summary>
         public string Text
         {
@@ -42,10 +42,7 @@ namespace Core2D
             set { Update(ref _text, value); }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public override void Bind(Record r)
         {
             var record = r ?? this.Data.Record;
@@ -53,15 +50,7 @@ namespace Core2D
             _bottomRight.TryToBind("BottomRight", this.Data.Bindings, record);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="renderer"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
@@ -98,11 +87,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
+        /// <inheritdoc/>
         public override void Move(double dx, double dy)
         {
             if (!TopLeft.State.Flags.HasFlag(ShapeStateFlags.Connector))
@@ -117,13 +102,13 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try binding data record to one of <see cref="XText"/> shape properties.
         /// </summary>
-        /// <param name="bindings"></param>
-        /// <param name="r"></param>
-        /// <param name="propertyName"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="bindings">The bindings database used for binding.</param>
+        /// <param name="r">The external data record used for binding.</param>
+        /// <param name="propertyName">The target property name.</param>
+        /// <param name="value">The output string bound to data record.</param>
+        /// <returns>True if binding was successful.</returns>
         private static bool TryToBind(
             ImmutableArray<Binding> bindings,
             Record r,
@@ -166,13 +151,13 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try binding properties array to one of <see cref="XText"/> shape properties.
         /// </summary>
-        /// <param name="bindings"></param>
-        /// <param name="db"></param>
-        /// <param name="propertyName"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="bindings">The bindings database used for binding.</param>
+        /// <param name="db">The properties database used for binding.</param>
+        /// <param name="propertyName">The target property name.</param>
+        /// <param name="value">The string bound to properies.</param>
+        /// <returns>True if binding was successful.</returns>
         private static bool TryToBind(
             ImmutableArray<Binding> bindings,
             ImmutableArray<Property> db,
@@ -200,26 +185,26 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Convert shape <see cref="Property"/>'s array to arguments array.
         /// </summary>
-        /// <param name="properties"></param>
-        /// <returns></returns>
+        /// <param name="properties">The properties arry.</param>
+        /// <returns>The object arguments array.</returns>
         private static object[] ToArgs(ImmutableArray<Property> properties)
         {
             return properties.Where(x => x != null).Select(x => x.Value).ToArray();
         }
 
         /// <summary>
-        /// 
+        /// Bind properties or data record to <see cref="XText.Text"/> property.
         /// </summary>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        /// <returns></returns>
+        /// <param name="db">The properties database used for binding.</param>
+        /// <param name="r">The external data record used for binding.</param>
+        /// <returns>The string bound to properies or data record.</returns>
         public string BindToTextProperty(ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
 
-            // try to bind to internal (this.Data.Record) or external (r) data record using Bindings
+            // Try to bind to internal (this.Data.Record) or external (r) data record using Bindings.
             if (record != null
                 && this.Data.Bindings != null
                 && this.Data.Bindings.Length > 0)
@@ -232,7 +217,7 @@ namespace Core2D
                 }
             }
 
-            // try to bind to external properties database using Bindings
+            // Try to bind to external properties database using Bindings.
             if (db != null
                 && this.Data.Bindings != null
                 && this.Data.Bindings.Length > 0)
@@ -245,7 +230,7 @@ namespace Core2D
                 }
             }
 
-            // try to bind to Properties using Text as formatting
+            // Try to bind to Properties using Text as formatting.
             if (this.Data.Properties != null
                 && this.Data.Properties.Length > 0)
             {
@@ -266,16 +251,16 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XText"/> instance.
         /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="style"></param>
-        /// <param name="point"></param>
-        /// <param name="text"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="x1">The X coordinate of <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XText.BottomRight"/> corner point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XText.BottomRight"/> corner point.</param>
+        /// <param name="style">The shape style.</param>
+        /// <param name="point">The point template.</param>
+        /// <param name="text">The text string.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="name">The shape name.</param>
+        /// <returns>The new instance of the <see cref="XText"/> class.</returns>
         public static XText Create(
             double x1, double y1,
             double x2, double y2,
@@ -304,14 +289,14 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XText"/> instance.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="style"></param>
-        /// <param name="point"></param>
-        /// <param name="text"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="x">The X coordinate of <see cref="XText.TopLeft"/> and <see cref="XText.BottomRight"/> corner points.</param>
+        /// <param name="y">The Y coordinate of <see cref="XText.TopLeft"/> and <see cref="XText.BottomRight"/> corner points.</param>
+        /// <param name="style">The shape style.</param>
+        /// <param name="point">The point template.</param>
+        /// <param name="text">The text string.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="name">The shape name.</param>
+        /// <returns>The new instance of the <see cref="XText"/> class.</returns>
         public static XText Create(
             double x, double y,
             ShapeStyle style,
@@ -326,14 +311,14 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XText"/> instance.
         /// </summary>
-        /// <param name="topLeft"></param>
-        /// <param name="bottomRight"></param>
-        /// <param name="style"></param>
-        /// <param name="point"></param>
-        /// <param name="text"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="topLeft">The <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="bottomRight">The <see cref="XText.BottomRight"/> corner point.</param>
+        /// <param name="style">The shape style.</param>
+        /// <param name="point">The point template.</param>
+        /// <param name="text">The text string.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="name">The shape name.</param>
+        /// <returns>The new instance of the <see cref="XText"/> class.</returns>
         public static XText Create(
             XPoint topLeft,
             XPoint bottomRight,

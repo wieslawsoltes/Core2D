@@ -6,28 +6,28 @@ using System.Collections.Generic;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Path geometry.
     /// </summary>
     public class XPathGeometry
     {
+        private XPathFigure _currentFigure;
+        
         /// <summary>
-        /// 
+        /// Gets or sets figures collection.
         /// </summary>
         public IList<XPathFigure> Figures { get; set; }
 
         /// <summary>
-        /// 
+        /// Gets or sets fill rule.
         /// </summary>
         public XFillRule FillRule { get; set; }
-
-        private XPathFigure _figure;
 
         /// <summary>
         /// Creates a new <see cref="XPathGeometry"/> instance.
         /// </summary>
-        /// <param name="figures"></param>
-        /// <param name="fillRule"></param>
-        /// <returns></returns>
+        /// <param name="figures">The figures collection.</param>
+        /// <param name="fillRule">The fill rule.</param>
+        /// <returns>The new instance of the <see cref="XPathGeometry"/> class.</returns>
         public static XPathGeometry Create(
             IList<XPathFigure> figures,
             XFillRule fillRule)
@@ -40,30 +40,30 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Begins path figure.
         /// </summary>
-        /// <param name="startPoint"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="isClosed"></param>
+        /// <param name="startPoint">The start point.</param>
+        /// <param name="isFilled">The flag indicating whether figure is filled.</param>
+        /// <param name="isClosed">The flag indicating whether figure is closed.</param>
         public void BeginFigure(
             XPoint startPoint,
             bool isFilled = true,
             bool isClosed = true)
         {
-            _figure = XPathFigure.Create(
+            _currentFigure = XPathFigure.Create(
                 startPoint,
                 new List<XPathSegment>(),
                 isFilled,
                 isClosed);
-            Figures.Add(_figure);
+            Figures.Add(_currentFigure);
         }
 
         /// <summary>
-        /// 
+        /// Adds line sgement.
         /// </summary>
-        /// <param name="point"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isSmoothJoin"></param>
+        /// <param name="point">The end point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         public void LineTo(
             XPoint point,
             bool isStroked = true,
@@ -73,19 +73,19 @@ namespace Core2D
                 point,
                 isStroked,
                 isSmoothJoin);
-            _figure.Segments.Add(segment);
+            _currentFigure.Segments.Add(segment);
         }
 
         /// <summary>
-        /// 
+        /// Adds arc sgement.
         /// </summary>
-        /// <param name="point"></param>
-        /// <param name="size"></param>
-        /// <param name="rotationAngle"></param>
-        /// <param name="isLargeArc"></param>
-        /// <param name="sweepDirection"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isSmoothJoin"></param>
+        /// <param name="point">The end point.</param>
+        /// <param name="size">The arc size.</param>
+        /// <param name="rotationAngle">The rotation angle.</param>
+        /// <param name="isLargeArc">The is large flag.</param>
+        /// <param name="sweepDirection">The sweep direction flag.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         public void ArcTo(
             XPoint point,
             XPathSize size,
@@ -103,17 +103,17 @@ namespace Core2D
                 sweepDirection,
                 isStroked,
                 isSmoothJoin);
-            _figure.Segments.Add(segment);
+            _currentFigure.Segments.Add(segment);
         }
 
         /// <summary>
-        /// 
+        /// Adds cubic bezier sgement.
         /// </summary>
-        /// <param name="point1"></param>
-        /// <param name="point2"></param>
-        /// <param name="point3"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isSmoothJoin"></param>
+        /// <param name="point1">The first control point.</param>
+        /// <param name="point2">The second control point.</param>
+        /// <param name="point3">The end point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         public void BezierTo(
             XPoint point1,
             XPoint point2,
@@ -127,16 +127,16 @@ namespace Core2D
                 point3,
                 isStroked,
                 isSmoothJoin);
-            _figure.Segments.Add(segment);
+            _currentFigure.Segments.Add(segment);
         }
 
         /// <summary>
-        /// 
+        /// Adds quadratic bezier sgement.
         /// </summary>
-        /// <param name="point1"></param>
-        /// <param name="point2"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isSmoothJoin"></param>
+        /// <param name="point1">The control point.</param>
+        /// <param name="point2">The end point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         public void QuadraticBezierTo(
             XPoint point1,
             XPoint point2,
@@ -148,15 +148,15 @@ namespace Core2D
                 point2,
                 isStroked,
                 isSmoothJoin);
-            _figure.Segments.Add(segment);
+            _currentFigure.Segments.Add(segment);
         }
 
         /// <summary>
-        /// 
+        /// Adds poly line segment.
         /// </summary>
-        /// <param name="points"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isSmoothJoin"></param>
+        /// <param name="points">The points array.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         public void PolyLineTo(
             IList<XPoint> points,
             bool isStroked = true,
@@ -166,15 +166,15 @@ namespace Core2D
                 points,
                 isStroked,
                 isSmoothJoin);
-            _figure.Segments.Add(segment);
+            _currentFigure.Segments.Add(segment);
         }
 
         /// <summary>
-        /// 
+        /// Adds poly cubic bezier segment.
         /// </summary>
-        /// <param name="points"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isSmoothJoin"></param>
+        /// <param name="points">The points array.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         public void PolyBezierTo(
             IList<XPoint> points,
             bool isStroked = true,
@@ -184,15 +184,15 @@ namespace Core2D
                 points,
                 isStroked,
                 isSmoothJoin);
-            _figure.Segments.Add(segment);
+            _currentFigure.Segments.Add(segment);
         }
 
         /// <summary>
-        /// 
+        /// Adds poly quadratic bezier segment.
         /// </summary>
-        /// <param name="points"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isSmoothJoin"></param>
+        /// <param name="points">The points array.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
         public void PolyQuadraticBezierTo(
             IList<XPoint> points,
             bool isStroked = true,
@@ -202,7 +202,7 @@ namespace Core2D
                 points,
                 isStroked,
                 isSmoothJoin);
-            _figure.Segments.Add(segment);
+            _currentFigure.Segments.Add(segment);
         }
     }
 }

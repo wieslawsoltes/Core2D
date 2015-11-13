@@ -7,7 +7,7 @@ using System.Collections.Immutable;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Object representing grouped shapes.
     /// </summary>
     public class XGroup : BaseShape
     {
@@ -16,7 +16,7 @@ namespace Core2D
         private ImmutableArray<XPoint> _connectors;
 
         /// <summary>
-        /// 
+        /// Gets all properties from <see cref="Shapes"/> collection.
         /// </summary>
         public ImmutableArray<Property> ShapesProperties
         {
@@ -52,7 +52,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets shapes collection.
         /// </summary>
         public ImmutableArray<BaseShape> Shapes
         {
@@ -61,7 +61,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets connectors collection.
         /// </summary>
         public ImmutableArray<XPoint> Connectors
         {
@@ -69,10 +69,7 @@ namespace Core2D
             set { Update(ref _connectors, value); }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public override void Bind(Record r)
         {
             var record = r ?? this.Data.Record;
@@ -88,15 +85,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="renderer"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
@@ -142,11 +131,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
+        /// <inheritdoc/>
         public override void Move(double dx, double dy)
         {
             foreach (var shape in Shapes)
@@ -164,9 +149,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Adds <see cref="BaseShape"/> to <see cref="Shapes"/> collection.
         /// </summary>
-        /// <param name="shape"></param>
+        /// <param name="shape">The shape object.</param>
         public void AddShape(BaseShape shape)
         {
             shape.Owner = this;
@@ -175,9 +160,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Adds <see cref="XPoint"/> to <see cref="Connectors"/> collection with <see cref="ShapeStateFlags.None"/> flag set.
         /// </summary>
-        /// <param name="point"></param>
+        /// <param name="point">The point object.</param>
         public void AddConnectorAsNone(XPoint point)
         {
             point.Owner = this;
@@ -187,9 +172,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Adds <see cref="XPoint"/> to <see cref="Connectors"/> collection with <see cref="ShapeStateFlags.Input"/> flag set.
         /// </summary>
-        /// <param name="point"></param>
+        /// <param name="point">The point object.</param>
         public void AddConnectorAsInput(XPoint point)
         {
             point.Owner = this;
@@ -199,9 +184,9 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Adds <see cref="XPoint"/> to <see cref="Connectors"/> collection with <see cref="ShapeStateFlags.Output"/> flag set.
         /// </summary>
-        /// <param name="point"></param>
+        /// <param name="point">The point object.</param>
         public void AddConnectorAsOutput(XPoint point)
         {
             point.Owner = this;
@@ -213,8 +198,8 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XGroup"/> instance.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="name">The group name.</param>
+        /// <returns>The new instance of the <see cref="XGroup"/> class.</returns>
         public static XGroup Create(string name)
         {
             return new XGroup()
@@ -234,9 +219,9 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XGroup"/> instance.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="shapes"></param>
-        /// <returns></returns>
+        /// <param name="name">The group name.</param>
+        /// <param name="shapes">The shapes collection.</param>
+        /// <returns>The new instance of the <see cref="XGroup"/> class.</returns>
         public static XGroup Group(string name, IEnumerable<BaseShape> shapes)
         {
             var g = XGroup.Create(name);

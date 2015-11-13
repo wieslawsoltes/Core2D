@@ -5,22 +5,22 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Line path segment.
     /// </summary>
     public class XLineSegment : XPathSegment
     {
         /// <summary>
-        /// 
+        /// Gets or sets end point.
         /// </summary>
         public XPoint Point { get; set; }
 
         /// <summary>
         /// Creates a new <see cref="XLineSegment"/> instance.
         /// </summary>
-        /// <param name="point"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isSmoothJoin"></param>
-        /// <returns></returns>
+        /// <param name="point">The end point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
+        /// <returns>The new instance of the <see cref="XLineSegment"/> class.</returns>
         public static XLineSegment Create(
             XPoint point,
             bool isStroked,

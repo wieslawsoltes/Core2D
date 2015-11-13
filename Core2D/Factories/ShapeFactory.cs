@@ -24,13 +24,7 @@ namespace Core2D
             _editor = editor;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XPoint"/> class.
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="isStandalone"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XPoint Point(
             double x = 30, double y = 30,
             bool isStandalone = false)
@@ -45,15 +39,7 @@ namespace Core2D
             return point;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XLine"/> class.
-        /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="isStroked"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XLine Line(
             double x1 = 30, double y1 = 30,
             double x2 = 60, double y2 = 30,
@@ -69,13 +55,7 @@ namespace Core2D
             return line;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XLine"/> class.
-        /// </summary>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        /// <param name="isStroked"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XLine Line(XPoint start, XPoint end, bool isStroked = true)
         {
             var line = XLine.Create(
@@ -88,20 +68,7 @@ namespace Core2D
             return line;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XArc"/> class.
-        /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="x3"></param>
-        /// <param name="y3"></param>
-        /// <param name="x4"></param>
-        /// <param name="y4"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XArc Arc(
             double x1 = 30, double y1 = 30,
             double x2 = 60, double y2 = 60,
@@ -123,16 +90,7 @@ namespace Core2D
             return arc;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XArc"/> class.
-        /// </summary>
-        /// <param name="point1"></param>
-        /// <param name="point2"></param>
-        /// <param name="point3"></param>
-        /// <param name="point4"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XArc Arc(
             XPoint point1,
             XPoint point2,
@@ -154,20 +112,7 @@ namespace Core2D
             return arc;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XBezier"/> class.
-        /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="x3"></param>
-        /// <param name="y3"></param>
-        /// <param name="x4"></param>
-        /// <param name="y4"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XBezier Bezier(
             double x1 = 30, double y1 = 30,
             double x2 = 30, double y2 = 60,
@@ -189,16 +134,7 @@ namespace Core2D
             return bezier;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XBezier"/> class.
-        /// </summary>
-        /// <param name="point1"></param>
-        /// <param name="point2"></param>
-        /// <param name="point3"></param>
-        /// <param name="point4"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XBezier Bezier(
             XPoint point1,
             XPoint point2,
@@ -220,18 +156,7 @@ namespace Core2D
             return bezier;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XQBezier"/> class.
-        /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="x3"></param>
-        /// <param name="y3"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XQBezier QBezier(
             double x1 = 30, double y1 = 30,
             double x2 = 45, double y2 = 60,
@@ -251,15 +176,7 @@ namespace Core2D
             return qbezier;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XQBezier"/> class.
-        /// </summary>
-        /// <param name="point1"></param>
-        /// <param name="point2"></param>
-        /// <param name="point3"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XQBezier QBezier(
             XPoint point1,
             XPoint point2,
@@ -279,11 +196,7 @@ namespace Core2D
             return qbezier;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XPathGeometry"/> class.
-        /// </summary>
-        /// <param name="fillRule"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XPathGeometry Geometry(XFillRule fillRule = XFillRule.EvenOdd)
         {
             return XPathGeometry.Create(
@@ -291,13 +204,7 @@ namespace Core2D
                 fillRule);
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XPath"/> class.
-        /// </summary>
-        /// <param name="geometry"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XPath Path(
             XPathGeometry geometry,
             bool isStroked = true,
@@ -313,17 +220,7 @@ namespace Core2D
             return path;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XRectangle"/> class.
-        /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XRectangle Rectangle(
             double x1 = 30, double y1 = 30,
             double x2 = 60, double y2 = 60,
@@ -343,15 +240,7 @@ namespace Core2D
             return rectangle;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XRectangle"/> class.
-        /// </summary>
-        /// <param name="topLeft"></param>
-        /// <param name="bottomRight"></param>
-        /// /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XRectangle Rectangle(
             XPoint topLeft,
             XPoint bottomRight,
@@ -371,17 +260,7 @@ namespace Core2D
             return rectangle;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XEllipse"/> class.
-        /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XEllipse Ellipse(
             double x1 = 30, double y1 = 30,
             double x2 = 60, double y2 = 60,
@@ -401,15 +280,7 @@ namespace Core2D
             return ellipse;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XEllipse"/> class.
-        /// </summary>
-        /// <param name="topLeft"></param>
-        /// <param name="bottomRight"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XEllipse Ellipse(
             XPoint topLeft,
             XPoint bottomRight,
@@ -429,16 +300,7 @@ namespace Core2D
             return ellipse;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XText"/> class.
-        /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="text"></param>
-        /// <param name="isStroked"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XText Text(
             double x1 = 30, double y1 = 30,
             double x2 = 60, double y2 = 60,
@@ -456,14 +318,7 @@ namespace Core2D
             return txt;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XText"/> class.
-        /// </summary>
-        /// <param name="topLeft"></param>
-        /// <param name="bottomRight"></param>
-        /// <param name="text"></param>
-        /// <param name="isStroked"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XText Text(
             XPoint topLeft,
             XPoint bottomRight,
@@ -481,18 +336,7 @@ namespace Core2D
             return txt;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XImage"/> class.
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XImage Image(
             string path,
             double x1 = 30, double y1 = 30,
@@ -514,16 +358,7 @@ namespace Core2D
             return image;
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="XImage"/> class.
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="topLeft"></param>
-        /// <param name="bottomRight"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public XImage Image(
             string path,
             XPoint topLeft,

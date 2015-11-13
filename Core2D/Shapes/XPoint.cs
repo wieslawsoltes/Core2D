@@ -8,7 +8,7 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Object representing point shape.
     /// </summary>
     public class XPoint : BaseShape
     {
@@ -17,7 +17,7 @@ namespace Core2D
         private double _y;
 
         /// <summary>
-        /// 
+        /// Gets or sets point template shape.
         /// </summary>
         public BaseShape Shape
         {
@@ -26,7 +26,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets X coordinate of point.
         /// </summary>
         public double X
         {
@@ -35,7 +35,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets Y coordinate of point.
         /// </summary>
         public double Y
         {
@@ -44,11 +44,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try binding data record to one of <see cref="XPoint"/> shape properties.
         /// </summary>
-        /// <param name="binding"></param>
-        /// <param name="r"></param>
-        /// <param name="value"></param>
+        /// <param name="binding">The binding object used for binding.</param>
+        /// <param name="r">The external data record used for binding.</param>
+        /// <param name="value">The output double value bound to data record.</param>
         private static void BindToDouble(Binding binding, Record r, ref double value)
         {
             var columns = r.Columns;
@@ -71,12 +71,12 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try binding data record to one of <see cref="XPoint"/> shape properties.
         /// </summary>
-        /// <param name="bindings"></param>
-        /// <param name="r"></param>
-        /// <param name="propertyNameX"></param>
-        /// <param name="propertyNameY"></param>
+        /// <param name="bindings">The bindings database used for binding.</param>
+        /// <param name="r">The external data record used for binding.</param>
+        /// <param name="propertyNameX">The target X property name.</param>
+        /// <param name="propertyNameY">The target Y property name.</param>
         private void TryToBind(
             ImmutableArray<Binding> bindings,
             Record r,
@@ -106,11 +106,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Try binding data record to <see cref="XPoint"/> shape property.
         /// </summary>
-        /// <param name="propertyName"></param>
-        /// <param name="bindings"></param>
-        /// <param name="record"></param>
+        /// <param name="propertyName">The target property name.</param>
+        /// <param name="bindings">The bindings database used for binding.</param>
+        /// <param name="record">The external data record used for binding.</param>
         public void TryToBind(string propertyName, ImmutableArray<Binding> bindings, Record record)
         {
             string propertyNameX = propertyName + ".X";
@@ -118,10 +118,7 @@ namespace Core2D
             TryToBind(bindings, record, propertyNameX, propertyNameY);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public override void Bind(Record r)
         {
             var record = r ?? this.Data.Record;
@@ -131,15 +128,7 @@ namespace Core2D
             TryToBind(bindings, record, propertyNameX, propertyNameY);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="renderer"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
@@ -153,11 +142,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
+        /// <inheritdoc/>
         public override void Move(double dx, double dy)
         {
             X += dx;
@@ -167,11 +152,11 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XPoint"/> instance.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="shape"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        /// <param name="shape">The point template.</param>
+        /// <param name="name">The shape name.</param>
+        /// <returns>The new instance of the <see cref="XPoint"/> class.</returns>
         public static XPoint Create(
             double x = 0.0,
             double y = 0.0,
@@ -194,10 +179,10 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Calculates distance between points.
         /// </summary>
-        /// <param name="point"></param>
-        /// <returns></returns>
+        /// <param name="point">The other point</param>
+        /// <returns>The distance between points.</returns>
         public double Distance(XPoint point)
         {
             double dx = this.X - point.X;

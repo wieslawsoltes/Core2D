@@ -7,7 +7,7 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Object representing line shape.
     /// </summary>
     public class XLine : BaseShape
     {
@@ -15,7 +15,7 @@ namespace Core2D
         private XPoint _end;
 
         /// <summary>
-        /// 
+        /// Gets or sets start point.
         /// </summary>
         public XPoint Start
         {
@@ -24,7 +24,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets end point.
         /// </summary>
         public XPoint End
         {
@@ -32,10 +32,7 @@ namespace Core2D
             set { Update(ref _end, value); }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public override void Bind(Record r)
         {
             var record = r ?? this.Data.Record;
@@ -43,15 +40,7 @@ namespace Core2D
             _end.TryToBind("End", this.Data.Bindings, record);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="renderer"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
@@ -88,11 +77,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
+        /// <inheritdoc/>
         public override void Move(double dx, double dy)
         {
             if (!Start.State.Flags.HasFlag(ShapeStateFlags.Connector))
@@ -109,13 +94,13 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XLine"/> instance.
         /// </summary>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        /// <param name="style"></param>
-        /// <param name="point"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="start">The <see cref="XLine.Start"/> point.</param>
+        /// <param name="end">The <see cref="XLine.End"/> point.</param>
+        /// <param name="style">The shape style.</param>
+        /// <param name="point">The point template.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="name">The shape name.</param>
+        /// <returns>The new instance of the <see cref="XLine"/> class.</returns>
         public static XLine Create(
             XPoint start,
             XPoint end,
@@ -143,15 +128,15 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XLine"/> instance.
         /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="style"></param>
-        /// <param name="point"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="x1">The X coordinate of <see cref="XLine.Start"/> point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XLine.Start"/> point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XLine.End"/> point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XLine.End"/> point.</param>
+        /// <param name="style">The shape style.</param>
+        /// <param name="point">The point template.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="name">The shape name.</param>
+        /// <returns>The new instance of the <see cref="XLine"/> class.</returns>
         public static XLine Create(
             double x1, double y1,
             double x2, double y2,
@@ -179,13 +164,13 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XLine"/> instance.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="style"></param>
-        /// <param name="point"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="x">The X coordinate of <see cref="XLine.Start"/> and <see cref="XLine.End"/> points.</param>
+        /// <param name="y">The Y coordinate of <see cref="XLine.Start"/> and <see cref="XLine.End"/> points.</param>
+        /// <param name="style">The shape style.</param>
+        /// <param name="point">The point template.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="name">The shape name.</param>
+        /// <returns>The new instance of the <see cref="XLine"/> class.</returns>
         public static XLine Create(
             double x, double y,
             ShapeStyle style,
@@ -197,13 +182,13 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set <see cref="XLine"/> maximum length using <see cref="LineFixedLengthFlags"/>.
         /// </summary>
-        /// <param name="line"></param>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
+        /// <param name="line">The line shape.</param>
+        /// <param name="x1">The calculated X coordinate for <see cref="XLine.Start>"/> point.</param>
+        /// <param name="y1">The calculated Y coordinate for <see cref="XLine.Start>"/> point.</param>
+        /// <param name="x2">The calculated X coordinate for <see cref="XLine.End>"/> point.</param>
+        /// <param name="y2">The calculated Y coordinate for <see cref="XLine.End>"/> point.</param>
         public static void SetMaxLength(
             XLine line,
             ref double x1, ref double y1,
@@ -241,13 +226,13 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set <see cref="XLine"/> maximum length for <see cref="LineFixedLengthFlags.All"/> mode.
         /// </summary>
-        /// <param name="line"></param>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
+        /// <param name="line">The line shape.</param>
+        /// <param name="x1">The calculated X coordinate for <see cref="XLine.Start>"/> point.</param>
+        /// <param name="y1">The calculated Y coordinate for <see cref="XLine.Start>"/> point.</param>
+        /// <param name="x2">The calculated X coordinate for <see cref="XLine.End>"/> point.</param>
+        /// <param name="y2">The calculated Y coordinate for <see cref="XLine.End>"/> point.</param>
         public static void SetMaxLengthAll(
             XLine line,
             ref double x1, ref double y1,
@@ -288,11 +273,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set <see cref="XLine"/> maximum length for <see cref="LineFixedLengthFlags.Horizontal"/> mode.
         /// </summary>
-        /// <param name="line"></param>
-        /// <param name="x1"></param>
-        /// <param name="x2"></param>
+        /// <param name="line">The line shape.</param>
+        /// <param name="x1">The calculated X coordinate for <see cref="XLine.Start>"/> point.</param>
+        /// <param name="x2">The calculated X coordinate for <see cref="XLine.End>"/> point.</param>
         public static void SetMaxLengthHorizontal(XLine line, ref double x1, ref double x2)
         {
             var ls = line.Style.LineStyle;
@@ -328,11 +313,11 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Set <see cref="XLine"/> maximum length for <see cref="LineFixedLengthFlags.Vertical"/> mode.
         /// </summary>
-        /// <param name="line"></param>
-        /// <param name="y1"></param>
-        /// <param name="y2"></param>
+        /// <param name="line">The line shape.</param>
+        /// <param name="y1">The calculated Y coordinate for <see cref="XLine.Start>"/> point.</param>
+        /// <param name="y2">The calculated Y coordinate for <see cref="XLine.End>"/> point.</param>
         public static void SetMaxLengthVertical(XLine line, ref double y1, ref double y2)
         {
             var ls = line.Style.LineStyle;

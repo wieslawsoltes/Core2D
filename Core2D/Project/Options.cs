@@ -5,7 +5,7 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Project options.
     /// </summary>
     public class Options : ObservableObject
     {
@@ -163,7 +163,7 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="Options"/> instance.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The new instance of the <see cref="Options"/> class.</returns>
         public static Options Create()
         {
             var options = new Options()
@@ -208,50 +208,50 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="BaseShape"/> instance.
         /// </summary>
-        /// <param name="pss"></param>
-        /// <returns></returns>
+        /// <param name="pss">The point shape <see cref="ShapeStyle"/>.</param>
+        /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
         public static BaseShape EllipsePointShape(ShapeStyle pss)
         {
             return XEllipse.Create(-4, -4, 4, 4, pss, null, true, false);
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="BaseShape"/> instance.
         /// </summary>
-        /// <param name="pss"></param>
-        /// <returns></returns>
+        /// <param name="pss">The point shape <see cref="ShapeStyle"/>.</param>
+        /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
         public static BaseShape FilledEllipsePointShape(ShapeStyle pss)
         {
             return XEllipse.Create(-3, -3, 3, 3, pss, null, true, true);
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="BaseShape"/> instance.
         /// </summary>
-        /// <param name="pss"></param>
-        /// <returns></returns>
+        /// <param name="pss">The point shape <see cref="ShapeStyle"/>.</param>
+        /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
         public static BaseShape RectanglePointShape(ShapeStyle pss)
         {
             return XRectangle.Create(-4, -4, 4, 4, pss, null, true, false);
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="BaseShape"/> instance.
         /// </summary>
-        /// <param name="pss"></param>
-        /// <returns></returns>
+        /// <param name="pss">The point shape <see cref="ShapeStyle"/>.</param>
+        /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
         public static BaseShape FilledRectanglePointShape(ShapeStyle pss)
         {
             return XRectangle.Create(-3, -3, 3, 3, pss, null, true, true);
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="BaseShape"/> instance.
         /// </summary>
-        /// <param name="pss"></param>
-        /// <returns></returns>
+        /// <param name="pss">The point shape <see cref="ShapeStyle"/>.</param>
+        /// <returns>The new instance of the <see cref="BaseShape"/> class.</returns>
         public static BaseShape CrossPointShape(ShapeStyle pss)
         {
             var g = XGroup.Create("PointShape");

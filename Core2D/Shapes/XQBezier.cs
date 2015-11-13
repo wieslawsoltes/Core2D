@@ -7,7 +7,7 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Object representing quadratic bezier shape.
     /// </summary>
     public class XQBezier : BaseShape
     {
@@ -16,7 +16,7 @@ namespace Core2D
         private XPoint _point3;
 
         /// <summary>
-        /// 
+        /// Gets or sets start point.
         /// </summary>
         public XPoint Point1
         {
@@ -25,7 +25,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets control point.
         /// </summary>
         public XPoint Point2
         {
@@ -34,7 +34,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets end point.
         /// </summary>
         public XPoint Point3
         {
@@ -42,10 +42,7 @@ namespace Core2D
             set { Update(ref _point3, value); }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public override void Bind(Record r)
         {
             var record = r ?? this.Data.Record;
@@ -54,15 +51,7 @@ namespace Core2D
             _point3.TryToBind("Point3", this.Data.Bindings, record);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="renderer"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
@@ -105,11 +94,7 @@ namespace Core2D
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
+        /// <inheritdoc/>
         public override void Move(double dx, double dy)
         {
             if (!Point1.State.Flags.HasFlag(ShapeStateFlags.Connector))
@@ -131,18 +116,18 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XQBezier"/> instance.
         /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="x3"></param>
-        /// <param name="y3"></param>
-        /// <param name="style"></param>
-        /// <param name="point"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="x1">The X coordinate of <see cref="XQBezier.Point1"/> point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XQBezier.Point1"/> point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XQBezier.Point2"/> point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XQBezier.Point2"/> point.</param>
+        /// <param name="x3">The X coordinate of <see cref="XQBezier.Point3"/> point.</param>
+        /// <param name="y3">The Y coordinate of <see cref="XQBezier.Point3"/> point.</param>
+        /// <param name="style">The shape style.</param>
+        /// <param name="point">The point template.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <param name="name">The shape name.</param>
+        /// <returns>The new instance of the <see cref="XQBezier"/> class.</returns>
         public static XQBezier Create(
             double x1, double y1,
             double x2, double y2,
@@ -173,14 +158,14 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XQBezier"/> instance.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="style"></param>
-        /// <param name="point"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="x">The X coordinate of <see cref="XQBezier.Point1"/>, <see cref="XQBezier.Point2"/> and <see cref="XQBezier.Point3"/> points.</param>
+        /// <param name="y">The Y coordinate of <see cref="XQBezier.Point1"/>, <see cref="XQBezier.Point2"/> and <see cref="XQBezier.Point3"/> points.</param>
+        /// <param name="style">The shape style.</param>
+        /// <param name="point">The point template.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <param name="name">The shape name.</param>
+        /// <returns>The new instance of the <see cref="XQBezier"/> class.</returns>
         public static XQBezier Create(
             double x, double y,
             ShapeStyle style,
@@ -195,15 +180,15 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XQBezier"/> instance.
         /// </summary>
-        /// <param name="point1"></param>
-        /// <param name="point2"></param>
-        /// <param name="point3"></param>
-        /// <param name="style"></param>
-        /// <param name="point"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="point1">The <see cref="XQBezier.Point1"/> point.</param>
+        /// <param name="point2">The <see cref="XQBezier.Point2"/> point.</param>
+        /// <param name="point3">The <see cref="XQBezier.Point3"/> point.</param>
+        /// <param name="style">The shape style.</param>
+        /// <param name="point">The point template.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <param name="name">The shape name.</param>
+        /// <returns>The new instance of the <see cref="XQBezier"/> class.</returns>
         public static XQBezier Create(
             XPoint point1,
             XPoint point2,

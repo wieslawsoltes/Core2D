@@ -5,34 +5,34 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Bezier path segment.
     /// </summary>
     public class XBezierSegment : XPathSegment
     {
         /// <summary>
-        /// 
+        /// Gets or sets first control point.
         /// </summary>
         public XPoint Point1 { get; set; }
 
         /// <summary>
-        /// 
+        /// Gets or sets second control point.
         /// </summary>
         public XPoint Point2 { get; set; }
 
         /// <summary>
-        /// 
+        /// Gets or sets end point.
         /// </summary>
         public XPoint Point3 { get; set; }
 
         /// <summary>
         /// Creates a new <see cref="XBezierSegment"/> instance.
         /// </summary>
-        /// <param name="point1"></param>
-        /// <param name="point2"></param>
-        /// <param name="point3"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isSmoothJoin"></param>
-        /// <returns></returns>
+        /// <param name="point1">The first control point.</param>
+        /// <param name="point2">The second control point.</param>
+        /// <param name="point3">The end point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isSmoothJoin">The flag indicating whether shape is smooth join.</param>
+        /// <returns>The new instance of the <see cref="XBezierSegment"/> class.</returns>
         public static XBezierSegment Create(
             XPoint point1,
             XPoint point2,

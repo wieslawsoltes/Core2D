@@ -6,27 +6,26 @@ using System.Threading.Tasks;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Text clipboard interface.
     /// </summary>
     public interface ITextClipboard
     {
         /// <summary>
-        /// 
+        /// Return true if clipboard contains text string.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if clipboard contains text string.</returns>
         Task<bool> ContainsText();
 
         /// <summary>
-        /// 
+        /// Get text from clipboard.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The text string.</returns>
         Task<string> GetText();
 
         /// <summary>
-        /// 
+        /// Set clipboard text.
         /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <param name="text">The text string.</param>
         Task SetText(string text);
     }
 }

@@ -12,223 +12,223 @@ namespace Core2D
         /// <summary>
         /// Creates a new instance of the <see cref="XPoint"/> class.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="isStandalone"></param>
-        /// <returns></returns>
+        /// <param name="x">The X coordinate of point.</param>
+        /// <param name="y">The Y coordinate of point.</param>
+        /// <param name="isStandalone">The flag indicating whether point is stand-alone shape.</param>
+        /// <returns>The new instance of the <see cref="XPoint"/> class.</returns>
         XPoint Point(double x, double y, bool isStandalone);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XLine"/> class.
         /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="isStroked"></param>
-        /// <returns></returns>
+        /// <param name="x1">The X coordinate of <see cref="XLine.Start"/> point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XLine.Start"/> point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XLine.End"/> point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XLine.End"/> point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <returns>The new instance of the <see cref="XLine"/> class.</returns>
         XLine Line(double x1, double y1, double x2, double y2, bool isStroked);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XLine"/> class.
         /// </summary>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        /// <param name="isStroked"></param>
-        /// <returns></returns>
+        /// <param name="start">The <see cref="XLine.Start"/> point.</param>
+        /// <param name="end">The <see cref="XLine.End"/> point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <returns>The new instance of the <see cref="XLine"/> class.</returns>
         XLine Line(XPoint start, XPoint end, bool isStroked);
 
         /// <summary>
         ///  Creates a new instance of the <see cref="XArc"/> class.
         /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="x3"></param>
-        /// <param name="y3"></param>
-        /// <param name="x4"></param>
-        /// <param name="y4"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <returns></returns>
+        /// <param name="x1">The X coordinate of <see cref="XArc.Point1"/> point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XArc.Point1"/> point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XArc.Point2"/> point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XArc.Point2"/> point.</param>
+        /// <param name="x3">The X coordinate of <see cref="XArc.Point3"/> point.</param>
+        /// <param name="y3">The Y coordinate of <see cref="XArc.Point3"/> point.</param>
+        /// <param name="x4">The X coordinate of <see cref="XArc.Point4"/> point.</param>
+        /// <param name="y4">The Y coordinate of <see cref="XArc.Point4"/> point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <returns>The new instance of the <see cref="XArc"/> class.</returns>
         XArc Arc(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled);
 
         /// <summary>
-        ///  Creates a new instance of the <see cref="XArc"/> class.
+        /// Creates a new instance of the <see cref="XArc"/> class.
         /// </summary>
-        /// <param name="point1"></param>
-        /// <param name="point2"></param>
-        /// <param name="point3"></param>
-        /// <param name="point4"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <returns></returns>
+        /// <param name="point1">The <see cref="XArc.Point1"/> point.</param>
+        /// <param name="point2">The <see cref="XArc.Point2"/> point.</param>
+        /// <param name="point3">The <see cref="XArc.Point3"/> point.</param>
+        /// <param name="point4">The <see cref="XArc.Point4"/> point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <returns>The new instance of the <see cref="XArc"/> class.</returns>
         XArc Arc(XPoint point1, XPoint point2, XPoint point3, XPoint point4, bool isStroked, bool isFilled);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XArc"/> class.
         /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="x3"></param>
-        /// <param name="y3"></param>
-        /// <param name="x4"></param>
-        /// <param name="y4"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <returns></returns>
+        /// <param name="x1">The X coordinate of <see cref="XBezier.Point1"/> point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XBezier.Point1"/> point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XBezier.Point2"/> point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XBezier.Point2"/> point.</param>
+        /// <param name="x3">The X coordinate of <see cref="XBezier.Point3"/> point.</param>
+        /// <param name="y3">The Y coordinate of <see cref="XBezier.Point3"/> point.</param>
+        /// <param name="x4">The X coordinate of <see cref="XBezier.Point4"/> point.</param>
+        /// <param name="y4">The Y coordinate of <see cref="XBezier.Point4"/> point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <returns>The new instance of the <see cref="XBezier"/> class.</returns>
         XBezier Bezier(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, bool isStroked, bool isFilled);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XBezier"/> class.
         /// </summary>
-        /// <param name="point1"></param>
-        /// <param name="point2"></param>
-        /// <param name="point3"></param>
-        /// <param name="point4"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <returns></returns>
+        /// <param name="point1">The <see cref="XBezier.Point1"/> point.</param>
+        /// <param name="point2">The <see cref="XBezier.Point2"/> point.</param>
+        /// <param name="point3">The <see cref="XBezier.Point3"/> point.</param>
+        /// <param name="point4">The <see cref="XBezier.Point4"/> point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <returns>The new instance of the <see cref="XBezier"/> class.</returns>
         XBezier Bezier(XPoint point1, XPoint point2, XPoint point3, XPoint point4, bool isStroked, bool isFilled);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XQBezier"/> class.
         /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="x3"></param>
-        /// <param name="y3"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <returns></returns>
+        /// <param name="x1">The X coordinate of <see cref="XQBezier.Point1"/> point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XQBezier.Point1"/> point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XQBezier.Point2"/> point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XQBezier.Point2"/> point.</param>
+        /// <param name="x3">The X coordinate of <see cref="XQBezier.Point3"/> point.</param>
+        /// <param name="y3">The Y coordinate of <see cref="XQBezier.Point3"/> point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <returns>The new instance of the <see cref="XQBezier"/> class.</returns>
         XQBezier QBezier(double x1, double y1, double x2, double y2, double x3, double y3, bool isStroked, bool isFilled);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XQBezier"/> class.
         /// </summary>
-        /// <param name="point1"></param>
-        /// <param name="point2"></param>
-        /// <param name="point3"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <returns></returns>
+        /// <param name="point1">The <see cref="XQBezier.Point1"/> point.</param>
+        /// <param name="point2">The <see cref="XQBezier.Point2"/> point.</param>
+        /// <param name="point3">The <see cref="XQBezier.Point3"/> point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <returns>The new instance of the <see cref="XQBezier"/> class.</returns>
         XQBezier QBezier(XPoint point1, XPoint point2, XPoint point3, bool isStroked, bool isFilled);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XPathGeometry"/> class.
         /// </summary>
-        /// <param name="fillRule"></param>
-        /// <returns></returns>
+        /// <param name="fillRule">The path geometry fill rule.</param>
+        /// <returns>The new instance of the <see cref="XPathGeometry"/> class.</returns>
         XPathGeometry Geometry(XFillRule fillRule);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XPath"/> class.
         /// </summary>
-        /// <param name="geometry"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <returns></returns>
+        /// <param name="geometry">The path geometry.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <returns>The new instance of the <see cref="XPath"/> class.</returns>
         XPath Path(XPathGeometry geometry, bool isStroked, bool isFilled);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XRectangle"/> class.
         /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <param name="x1">The X coordinate of <see cref="XRectangle.TopLeft"/> corner point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XRectangle.TopLeft"/> corner point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XRectangle.BottomRight"/> corner point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XRectangle.BottomRight"/> corner point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <param name="text">The shape text string.</param>
+        /// <returns>The new instance of the <see cref="XRectangle"/> class.</returns>
         XRectangle Rectangle(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XRectangle"/> class.
         /// </summary>
-        /// <param name="topLeft"></param>
-        /// <param name="bottomRight"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <param name="topLeft">The <see cref="XRectangle.TopLeft"/> corner point.</param>
+        /// <param name="bottomRight">The <see cref="XRectangle.BottomRight"/> corner point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <param name="text">The shape text string.</param>
+        /// <returns>The new instance of the <see cref="XRectangle"/> class.</returns>
         XRectangle Rectangle(XPoint topLeft, XPoint bottomRight, bool isStroked, bool isFilled, string text);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XEllipse"/> class.
         /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <param name="x1">The X coordinate of <see cref="XEllipse.TopLeft"/> corner point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XEllipse.TopLeft"/> corner point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XEllipse.BottomRight"/> corner point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XEllipse.BottomRight"/> corner point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <param name="text">The shape text string.</param>
+        /// <returns>The new instance of the <see cref="XEllipse"/> class.</returns>
         XEllipse Ellipse(double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XEllipse"/> class.
         /// </summary>
-        /// <param name="topLeft"></param>
-        /// <param name="bottomRight"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <param name="topLeft">The <see cref="XEllipse.TopLeft"/> corner point.</param>
+        /// <param name="bottomRight">The <see cref="XEllipse.BottomRight"/> corner point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <param name="text">The shape text string.</param>
+        /// <returns>The new instance of the <see cref="XEllipse"/> class.</returns>
         XEllipse Ellipse(XPoint topLeft, XPoint bottomRight, bool isStroked, bool isFilled, string text);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XText"/> class.
         /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="text"></param>
-        /// <param name="isStroked"></param>
-        /// <returns></returns>
+        /// <param name="x1">The X coordinate of <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XText.BottomRight"/> corner point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XText.BottomRight"/> corner point.</param>
+        /// <param name="text">The shape text string.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <returns>The new instance of the <see cref="XText"/> class.</returns>
         XText Text(double x1, double y1, double x2, double y2, string text, bool isStroked);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XText"/> class.
         /// </summary>
-        /// <param name="topLeft"></param>
-        /// <param name="bottomRight"></param>
-        /// <param name="text"></param>
-        /// <param name="isStroked"></param>
-        /// <returns></returns>
+        /// <param name="topLeft">The <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="bottomRight">The <see cref="XText.BottomRight"/> corner point.</param>
+        /// <param name="text">The shape text string.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <returns>The new instance of the <see cref="XText"/> class.</returns>
         XText Text(XPoint topLeft, XPoint bottomRight, string text, bool isStroked);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XImage"/> class.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <param name="path">The image file path.</param>
+        /// <param name="x1">The X coordinate of <see cref="XImage.TopLeft"/> corner point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XImage.TopLeft"/> corner point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XImage.BottomRight"/> corner point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XImage.BottomRight"/> corner point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <param name="text">The shape text string.</param>
+        /// <returns>The new instance of the <see cref="XImage"/> class.</returns>
         XImage Image(string path, double x1, double y1, double x2, double y2, bool isStroked, bool isFilled, string text);
 
         /// <summary>
         /// Creates a new instance of the <see cref="XImage"/> class.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="topLeft"></param>
-        /// <param name="bottomRight"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <param name="path">The image file path.</param>
+        /// <param name="topLeft">The <see cref="XImage.TopLeft"/> corner point.</param>
+        /// <param name="bottomRight">The <see cref="XImage.BottomRight"/> corner point.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <param name="text">The shape text string.</param>
+        /// <returns>The new instance of the <see cref="XImage"/> class.</returns>
         XImage Image(string path, XPoint topLeft, XPoint bottomRight, bool isStroked, bool isFilled, string text);
     }
 }

@@ -7,28 +7,17 @@ using System.Linq;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Object representing ellipse shape.
     /// </summary>
     public class XEllipse : XText
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public override void Bind(Record r)
         {
             base.Bind(r ?? this.Data.Record);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="renderer"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public override void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var record = r ?? this.Data.Record;
@@ -43,17 +32,17 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XEllipse"/> instance.
         /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
-        /// <param name="x2"></param>
-        /// <param name="y2"></param>
-        /// <param name="style"></param>
-        /// <param name="point"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="text"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="x1">The X coordinate of <see cref="XEllipse.TopLeft"/> corner point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XEllipse.TopLeft"/> corner point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XEllipse.BottomRight"/> corner point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XEllipse.BottomRight"/> corner point.</param>
+        /// <param name="style">The shape style.</param>
+        /// <param name="point">The point template.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <param name="text">The text string.</param>
+        /// <param name="name">The shape name.</param>
+        /// <returns>The new instance of the <see cref="XEllipse"/> class.</returns>
         public static XEllipse Create(
             double x1, double y1,
             double x2, double y2,
@@ -84,15 +73,15 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XEllipse"/> instance.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="style"></param>
-        /// <param name="point"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="text"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="x">The X coordinate of <see cref="XEllipse.TopLeft"/> and <see cref="XEllipse.BottomRight"/> corner points.</param>
+        /// <param name="y">The Y coordinate of <see cref="XEllipse.TopLeft"/> and <see cref="XEllipse.BottomRight"/> corner points.</param>
+        /// <param name="style">The shape style.</param>
+        /// <param name="point">The point template.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <param name="text">The text string.</param>
+        /// <param name="name">The shape name.</param>
+        /// <returns>The new instance of the <see cref="XEllipse"/> class.</returns>
         public static XEllipse Create(
             double x, double y,
             ShapeStyle style,
@@ -108,15 +97,15 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XEllipse"/> instance.
         /// </summary>
-        /// <param name="topLeft"></param>
-        /// <param name="bottomRight"></param>
-        /// <param name="style"></param>
-        /// <param name="point"></param>
-        /// <param name="isStroked"></param>
-        /// <param name="isFilled"></param>
-        /// <param name="text"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="topLeft">The <see cref="XEllipse.TopLeft"/> corner point.</param>
+        /// <param name="bottomRight">The <see cref="XEllipse.BottomRight"/> corner point.</param>
+        /// <param name="style">The shape style.</param>
+        /// <param name="point">The point template.</param>
+        /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
+        /// <param name="isFilled">The flag indicating whether shape is filled.</param>
+        /// <param name="text">The text string.</param>
+        /// <param name="name">The shape name.</param>
+        /// <returns>The new instance of the <see cref="XEllipse"/> class.</returns>
         public static XEllipse Create(
             XPoint topLeft,
             XPoint bottomRight,

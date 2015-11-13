@@ -5,26 +5,26 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Path size.
     /// </summary>
     public class XPathSize
     {
         /// <summary>
-        /// 
+        /// Gets or sets width value.
         /// </summary>
         public double Width { get; set; }
 
         /// <summary>
-        /// 
+        /// Gets or sets height value.
         /// </summary>
         public double Height { get; set; }
 
         /// <summary>
         /// Creates a new <see cref="XPathSize"/> instance.
         /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <returns></returns>
+        /// <param name="width">The width value.</param>
+        /// <param name="height">The height value.</param>
+        /// <returns>The new instance of the <see cref="XPathSize"/> class.</returns>
         public static XPathSize Create(double width = 0.0, double height = 0.0)
         {
             return new XPathSize()

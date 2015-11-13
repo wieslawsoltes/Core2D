@@ -5,16 +5,16 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// File writer interface.
     /// </summary>
     public interface IFileWriter
     {
         /// <summary>
-        /// 
+        /// Save object item to a file.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="item"></param>
-        /// <param name="options"></param>
+        /// <param name="path">The file path.</param>
+        /// <param name="item">The object item.</param>
+        /// <param name="options">The options object.</param>
         void Save(string path, object item, object options);
     }
 }

@@ -5,17 +5,17 @@ using System;
 namespace Core2D
 {
     /// <summary>
-    /// 
+    /// Fill rules for <see cref="XPathGeometry"/>
     /// </summary>
     public enum XFillRule
     {
         /// <summary>
-        /// 
+        /// Nonzero fill rule.
         /// </summary>
         Nonzero,
 
         /// <summary>
-        /// 
+        /// EvenOdd fill rule.
         /// </summary>
         EvenOdd
     }

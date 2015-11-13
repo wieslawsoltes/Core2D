@@ -10,12 +10,12 @@ namespace Core2D
     public abstract class XPathSegment
     {
         /// <summary>
-        /// Gets or sets flag indicating if segment is stroked.
+        /// Gets or sets flag indicating whether segment is stroked.
         /// </summary>
         public bool IsStroked { get; set; }
 
         /// <summary>
-        /// Gets or sets flag indicating if segment is smooth join.
+        /// Gets or sets flag indicating whether segment is smooth join.
         /// </summary>
         public bool IsSmoothJoin { get; set; }
     }

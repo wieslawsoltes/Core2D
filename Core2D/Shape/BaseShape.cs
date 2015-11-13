@@ -55,7 +55,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets flag indicating if shape is stroked.
+        /// Gets or sets flag indicating whether shape is stroked.
         /// </summary>
         public bool IsStroked
         {
@@ -64,7 +64,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets flag indicating if shape is filled.
+        /// Gets or sets flag indicating whether shape is filled.
         /// </summary>
         public bool IsFilled
         {
@@ -73,7 +73,7 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Gets or sets shape data.
+        /// Gets or sets shape <see cref="Core2D.Data"/>.
         /// </summary>
         public Data Data
         {
@@ -82,13 +82,13 @@ namespace Core2D
         }
 
         /// <summary>
-        /// Binding shape properties to Record data.
+        /// Binds shape properties to <see cref="Core2D.Record"/> data.
         /// </summary>
         /// <param name="r">The external data record used for binding.</param>
         public abstract void Bind(Record r);
 
         /// <summary>
-        /// Draw shape using current renderer.
+        /// Draws shape using current <see cref="IRenderer"/>.
         /// </summary>
         /// <param name="dc">The generic drawing context object</param>
         /// <param name="renderer">The generic renderer object used to draw shape.</param>
@@ -99,7 +99,7 @@ namespace Core2D
         public abstract void Draw(object dc, IRenderer renderer, double dx, double dy, ImmutableArray<Property> db, Record r);
 
         /// <summary>
-        /// Move shape position using dx,dy offset.
+        /// Moves shape to new position using X and Y axis offset.
         /// </summary>
         /// <param name="dx">The X axis position offset.</param>
         /// <param name="dy">The Y axis position offset.</param>
