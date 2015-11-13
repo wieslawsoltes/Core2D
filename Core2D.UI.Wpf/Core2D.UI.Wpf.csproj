@@ -113,8 +113,8 @@
     <Compile Include="Controls\DataControl.xaml.cs">
       <DependentUpon>DataControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DragAndDropListBoxes\GroupConnectorsDragAndDropListBox.cs" />
-    <Compile Include="Controls\DragAndDropListBoxes\GroupShapesDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\ListBoxes\GroupConnectorsDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\ListBoxes\GroupShapesDragAndDropListBox.cs" />
     <Compile Include="Controls\OptionsControl.xaml.cs">
       <DependentUpon>OptionsControl.xaml</DependentUpon>
     </Compile>
@@ -124,11 +124,11 @@
     <Compile Include="Controls\DatabasesControl.xaml.cs">
       <DependentUpon>DatabasesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DragAndDropListBoxes\BaseShapeDragAndDropListBox.cs" />
-    <Compile Include="Controls\DragAndDropListBoxes\TemplateDragAndDropListBox.cs" />
-    <Compile Include="Controls\DragAndDropListBoxes\LayerDragAndDropListBox.cs" />
-    <Compile Include="Controls\DragAndDropListBoxes\ShapeStyleDragAndDropListBox.cs" />
-    <Compile Include="Controls\DragAndDropListBoxes\XGroupDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\ListBoxes\BaseShapeDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\ListBoxes\TemplateDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\ListBoxes\LayerDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\ListBoxes\ShapeStyleDragAndDropListBox.cs" />
+    <Compile Include="Controls\Custom\ListBoxes\XGroupDragAndDropListBox.cs" />
     <Compile Include="Controls\GroupsControl.xaml.cs">
       <DependentUpon>GroupsControl.xaml</DependentUpon>
     </Compile>
