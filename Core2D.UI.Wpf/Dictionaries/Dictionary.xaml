@@ -1,13 +1,12 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:core="clr-namespace:Core2D;assembly=Core2D"
-    xmlns:converters="clr-namespace:Core2D.UI.Wpf.Converters"
-    xmlns:controls="clr-namespace:Core2D.UI.Wpf.Controls"
-    xmlns:p="clr-namespace:Core2D.UI.Wpf.Properties">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+                    xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
+                    xmlns:converters="clr-namespace:Core2D.UI.Wpf.Converters" 
+                    xmlns:controls="clr-namespace:Core2D.UI.Wpf.Controls" 
+                    xmlns:p="clr-namespace:Core2D.UI.Wpf.Properties">
     <!-- converters -->
     <converters:ArgbColorToBrushConverter x:Key="ArgbColorToBrushConverter"/>
     <converters:ArgbColorToBrushMultiConverter x:Key="ArgbColorToBrushMultiConverter"/>
@@ -16,12 +15,10 @@
     <converters:ObjectEqualityConverter x:Key="ObjectEqualityConverter"/>
     <!-- brushes -->
     <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
-    <SolidColorBrush x:Key="DarkSquareColor" Color="DarkGray"/>
-    <SolidColorBrush x:Key="LightSquareColor" Color="LightGray"/>
     <DrawingBrush x:Key="CheckerBoard" Viewport="0,0,20,20" ViewportUnits="Absolute" Stretch="None" TileMode="Tile">
         <DrawingBrush.Drawing>
             <DrawingGroup>
-                <GeometryDrawing Brush="{DynamicResource DarkSquareColor}">
+                <GeometryDrawing Brush="DarkGray}">
                     <GeometryDrawing.Geometry>
                         <GeometryGroup>
                             <RectangleGeometry Rect="0,0,10,10"/>
@@ -29,7 +26,7 @@
                         </GeometryGroup>
                     </GeometryDrawing.Geometry>
                 </GeometryDrawing>
-                <GeometryDrawing Brush="{DynamicResource LightSquareColor}">
+                <GeometryDrawing Brush="LightGray">
                     <GeometryDrawing.Geometry>
                         <GeometryGroup>
                             <RectangleGeometry Rect="10,0,10,10"/>
@@ -43,46 +40,27 @@
     <!-- menus -->
     <ControlTemplate x:Key="BindingsMenuControlTemplateKey">
         <Menu Background="Transparent" HorizontalAlignment="Right">
-            <MenuItem
-                Command="{x:Static core:Commands.AddBindingCommand}" 
-                CommandParameter="{Binding}" 
-                Header="+">
-            </MenuItem>
+            <MenuItem Command="{x:Static core:Commands.AddBindingCommand}" CommandParameter="{Binding}" Header="+"/>
         </Menu>
     </ControlTemplate>
     <ControlTemplate x:Key="PropertiesMenuControlTemplateKey">
         <Menu Background="Transparent" HorizontalAlignment="Right">
-            <MenuItem 
-                Command="{x:Static core:Commands.AddPropertyCommand}" 
-                CommandParameter="{Binding}" 
-                Header="+">
-            </MenuItem>
+            <MenuItem Command="{x:Static core:Commands.AddPropertyCommand}" CommandParameter="{Binding}" Header="+"/>
         </Menu>
     </ControlTemplate>
     <ControlTemplate x:Key="RecordMenuControlTemplateKey">
         <Menu Background="Transparent" HorizontalAlignment="Right">
-            <MenuItem 
-                Command="{x:Static core:Commands.ResetRecordCommand}" 
-                CommandParameter="{Binding}" 
-                Header="X">
-            </MenuItem>
+            <MenuItem Command="{x:Static core:Commands.ResetRecordCommand}" CommandParameter="{Binding}" Header="X"/>
         </Menu>
     </ControlTemplate>
     <ControlTemplate x:Key="ColumnsMenuControlTemplateKey">
         <Menu Background="Transparent" HorizontalAlignment="Right">
-            <MenuItem 
-                Command="{x:Static core:Commands.AddColumnCommand}" 
-                CommandParameter="{Binding}" 
-                Header="+">
-            </MenuItem>
+            <MenuItem Command="{x:Static core:Commands.AddColumnCommand}" CommandParameter="{Binding}" Header="+"/>
         </Menu>
     </ControlTemplate>
     <!-- context menus -->
     <ContextMenu x:Key="ContainerContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-        <MenuItem 
-            Header="Te_mplate" 
-            Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-            DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Editor.Project.Templates}">
+        <MenuItem Header="Te_mplate" Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Editor.Project.Templates}">
             <MenuItem.ItemContainerStyle>
                 <Style TargetType="MenuItem">
                     <Setter Property="Header" Value="{Binding Name}"/>
@@ -105,120 +83,35 @@
             </MenuItem.ItemContainerStyle>
         </MenuItem>
         <Separator/>
-        <MenuItem 
-            Header="Insert Container Bef_ore" 
-            InputGestureText="" 
-            Command="{x:Static core:Commands.InsertContainerBeforeCommand}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <MenuItem 
-            Header="Insert Container Aft_er" 
-            InputGestureText="" 
-            Command="{x:Static core:Commands.InsertContainerAfterCommand}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
+        <MenuItem Header="Insert Container Bef_ore" InputGestureText="" Command="{x:Static core:Commands.InsertContainerBeforeCommand}" CommandParameter="{Binding}"/>
+        <MenuItem Header="Insert Container Aft_er" InputGestureText="" Command="{x:Static core:Commands.InsertContainerAfterCommand}" CommandParameter="{Binding}"/>
         <Separator/>
-        <MenuItem 
-            Header="Cu_t" 
-            InputGestureText="Ctrl+X" 
-            Command="{x:Static core:Commands.CutCommand}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <MenuItem 
-            Header="_Copy" 
-            InputGestureText="Ctrl+C" 
-            Command="{x:Static core:Commands.CopyCommand}"
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <MenuItem 
-            Header="_Paste" 
-            InputGestureText="Ctrl+V" 
-            Command="{x:Static core:Commands.PasteCommand}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
+        <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{x:Static core:Commands.CutCommand}" CommandParameter="{Binding}"/>
+        <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{x:Static core:Commands.CopyCommand}" CommandParameter="{Binding}"/>
+        <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{x:Static core:Commands.PasteCommand}" CommandParameter="{Binding}"/>
         <Separator/>
-        <MenuItem 
-            Header="_Delete" 
-            InputGestureText="Del" 
-            Command="{x:Static core:Commands.DeleteCommand}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
+        <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.DeleteCommand}" CommandParameter="{Binding}"/>
         <Separator/>
-        <MenuItem 
-            Header="E_xport" 
-            InputGestureText="Ctrl+E" 
-            Command="{x:Static core:Commands.ExportCommand}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
+        <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static core:Commands.ExportCommand}" CommandParameter="{Binding}"/>
     </ContextMenu>
     <ContextMenu x:Key="DocumentContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-        <MenuItem 
-            Header="_Add Container" 
-            InputGestureText="Ctrl+N" 
-            Command="{x:Static core:Commands.AddContainerCommand}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
+        <MenuItem Header="_Add Container" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddContainerCommand}" CommandParameter="{Binding}"/>
         <Separator/>
-        <MenuItem 
-            Header="Insert Document Bef_ore" 
-            InputGestureText="" 
-            Command="{x:Static core:Commands.InsertDocumentBeforeCommand}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <MenuItem 
-            Header="Insert Document Aft_er" 
-            InputGestureText="" 
-            Command="{x:Static core:Commands.InsertDocumentAfterCommand}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
+        <MenuItem Header="Insert Document Bef_ore" InputGestureText="" Command="{x:Static core:Commands.InsertDocumentBeforeCommand}" CommandParameter="{Binding}"/>
+        <MenuItem Header="Insert Document Aft_er" InputGestureText="" Command="{x:Static core:Commands.InsertDocumentAfterCommand}" CommandParameter="{Binding}"/>
         <Separator/>
-        <MenuItem 
-            Header="Cu_t" 
-            InputGestureText="Ctrl+X" 
-            Command="{x:Static core:Commands.CutCommand}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <MenuItem 
-            Header="_Copy" 
-            InputGestureText="Ctrl+C"
-            Command="{x:Static core:Commands.CopyCommand}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
-        <MenuItem 
-            Header="_Paste" 
-            InputGestureText="Ctrl+V" 
-            Command="{x:Static core:Commands.PasteCommand}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
+        <MenuItem Header="Cu_t" InputGestureText="Ctrl+X" Command="{x:Static core:Commands.CutCommand}" CommandParameter="{Binding}"/>
+        <MenuItem Header="_Copy" InputGestureText="Ctrl+C" Command="{x:Static core:Commands.CopyCommand}" CommandParameter="{Binding}"/>
+        <MenuItem Header="_Paste" InputGestureText="Ctrl+V" Command="{x:Static core:Commands.PasteCommand}" CommandParameter="{Binding}"/>
         <Separator/>
-        <MenuItem 
-            Header="_Delete" 
-            InputGestureText="Del" 
-            Command="{x:Static core:Commands.DeleteCommand}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
+        <MenuItem Header="_Delete" InputGestureText="Del" Command="{x:Static core:Commands.DeleteCommand}" CommandParameter="{Binding}"/>
         <Separator/>
-        <MenuItem 
-            Header="E_xport" 
-            InputGestureText="Ctrl+E" 
-            Command="{x:Static core:Commands.ExportCommand}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
+        <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static core:Commands.ExportCommand}" CommandParameter="{Binding}"/>
     </ContextMenu>
     <ContextMenu x:Key="PojectContextMenuKey" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-        <MenuItem 
-            Header="_Add Document" 
-            InputGestureText="Ctrl+N" 
-            Command="{x:Static core:Commands.AddDocumentCommand}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
+        <MenuItem Header="_Add Document" InputGestureText="Ctrl+N" Command="{x:Static core:Commands.AddDocumentCommand}" CommandParameter="{Binding}"/>
         <Separator/>
-        <MenuItem 
-            Header="E_xport" 
-            InputGestureText="Ctrl+E" 
-            Command="{x:Static core:Commands.ExportCommand}" 
-            CommandParameter="{Binding}">
-        </MenuItem>
+        <MenuItem Header="E_xport" InputGestureText="Ctrl+E" Command="{x:Static core:Commands.ExportCommand}" CommandParameter="{Binding}"/>
     </ContextMenu>
     <!-- styles -->
     <Style x:Key="TextBlockLeftStyleKey" TargetType="TextBlock">
@@ -267,20 +160,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
-            <Rectangle 
-                Fill="{StaticResource CheckerBoard}"
-                Grid.Row="0" 
-                Grid.Column="0" 
-                Grid.ColumnSpan="3" 
-                Margin="5,2,5,2"
-                Height="20">
-            </Rectangle>
-            <Rectangle 
-                Grid.Row="0" 
-                Grid.Column="0" 
-                Grid.ColumnSpan="3" 
-                Margin="5,2,5,2"
-                Height="20">
+            <Rectangle Fill="{StaticResource CheckerBoard}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,2,5,2" Height="20"/>
+            <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,2,5,2" Height="20">
                 <Rectangle.Fill>
                     <MultiBinding Converter="{StaticResource ArgbColorToBrushMultiConverter}">
                         <Binding Path="DataContext.A" RelativeSource="{RelativeSource Self}"/>
@@ -290,94 +171,18 @@
                     </MultiBinding>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock 
-                Text="A" 
-                Style="{StaticResource TextBlockCenterStyleKey}"
-                Grid.Row="1"
-                Grid.Column="0">
-            </TextBlock>
-            <TextBlock 
-                Text="R" 
-                Style="{StaticResource TextBlockCenterStyleKey}"
-                Grid.Row="2" 
-                Grid.Column="0">
-            </TextBlock>
-            <TextBlock 
-                Text="G" 
-                Style="{StaticResource TextBlockCenterStyleKey}"
-                Grid.Row="3" 
-                Grid.Column="0">
-            </TextBlock>
-            <TextBlock 
-                Text="B" 
-                Style="{StaticResource TextBlockCenterStyleKey}"
-                Grid.Row="4" 
-                Grid.Column="0">
-            </TextBlock>
-            <Slider 
-                Value="{Binding A}" 
-                Style="{StaticResource SliderStyleKey}"
-                Minimum="0" 
-                Maximum="255" 
-                TickFrequency="1" 
-                IsSnapToTickEnabled="True" 
-                Grid.Row="1" 
-                Grid.Column="1">
-            </Slider>
-            <Slider 
-                Value="{Binding R}" 
-                Style="{StaticResource SliderStyleKey}"
-                Minimum="0" 
-                Maximum="255" 
-                TickFrequency="1" 
-                IsSnapToTickEnabled="True" 
-                Grid.Row="2" 
-                Grid.Column="1">
-            </Slider>
-            <Slider 
-                Value="{Binding G}"
-                Style="{StaticResource SliderStyleKey}"
-                Minimum="0" 
-                Maximum="255" 
-                TickFrequency="1" 
-                IsSnapToTickEnabled="True" 
-                Grid.Row="3" 
-                Grid.Column="1">
-            </Slider>
-            <Slider 
-                Value="{Binding B}" 
-                Style="{StaticResource SliderStyleKey}"
-                Minimum="0" 
-                Maximum="255" 
-                TickFrequency="1" 
-                IsSnapToTickEnabled="True" 
-                Grid.Row="4" 
-                Grid.Column="1">
-            </Slider>
-            <TextBox 
-                Text="{Binding A, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxCenterStyleKey}"
-                Grid.Row="1" 
-                Grid.Column="2">
-            </TextBox>
-            <TextBox 
-                Text="{Binding R, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxCenterStyleKey}"
-                Grid.Row="2" 
-                Grid.Column="2">
-            </TextBox>
-            <TextBox 
-                Text="{Binding G, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxCenterStyleKey}"
-                Grid.Row="3" 
-                Grid.Column="2">
-            </TextBox>
-            <TextBox 
-                Text="{Binding B, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxCenterStyleKey}"
-                Grid.Row="4" 
-                Grid.Column="2">
-            </TextBox>
+            <TextBlock Text="A" Style="{StaticResource TextBlockCenterStyleKey}" Grid.Row="1" Grid.Column="0"/>
+            <TextBlock Text="R" Style="{StaticResource TextBlockCenterStyleKey}" Grid.Row="2" Grid.Column="0"/>
+            <TextBlock Text="G" Style="{StaticResource TextBlockCenterStyleKey}" Grid.Row="3" Grid.Column="0"/>
+            <TextBlock Text="B" Style="{StaticResource TextBlockCenterStyleKey}" Grid.Row="4" Grid.Column="0"/>
+            <Slider Value="{Binding A}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="1"/>
+            <Slider Value="{Binding R}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="2" Grid.Column="1"/>
+            <Slider Value="{Binding G}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="3" Grid.Column="1"/>
+            <Slider Value="{Binding B}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="255" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="4" Grid.Column="1"/>
+            <TextBox Text="{Binding A, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="1" Grid.Column="2"/>
+            <TextBox Text="{Binding R, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="2" Grid.Column="2"/>
+            <TextBox Text="{Binding G, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="3" Grid.Column="2"/>
+            <TextBox Text="{Binding B, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="4" Grid.Column="2"/>
         </Grid>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:ArrowStyle}">
@@ -397,96 +202,18 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock 
-                        Text="Arrow Type" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="0"
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="IsStroked" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="1"
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="IsFilled" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="2"
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="RadiusX" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="3" 
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="RadiusY" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="4" 
-                        Grid.Column="0">
-                    </TextBlock>
-                    <ComboBox 
-                        ItemsSource="{x:Static core:Enums.ArrowTypeValues}" 
-                        SelectedItem="{Binding ArrowType}" 
-                        Style="{StaticResource ComboBoxStyleKey}"
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </ComboBox>
-                    <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsStroked}"
-                        Style="{StaticResource CheckBoxStyleKey}"
-                        Grid.Row="1" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <CheckBox
-                        Content=""
-                        IsChecked="{Binding IsFilled}"
-                        Style="{StaticResource CheckBoxStyleKey}"
-                        Grid.Row="2" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <Slider 
-                        Value="{Binding RadiusX}"
-                        Style="{StaticResource SliderStyleKey}"
-                        Minimum="0" 
-                        Maximum="15" 
-                        TickFrequency="0.1" 
-                        SmallChange="0.1"
-                        LargeChange="1"
-                        IsSnapToTickEnabled="True" 
-                        Grid.Row="3" 
-                        Grid.Column="1">
-                    </Slider>
-                    <Slider 
-                        Value="{Binding RadiusY}" 
-                        Style="{StaticResource SliderStyleKey}"
-                        Minimum="0" 
-                        Maximum="15" 
-                        TickFrequency="0.1" 
-                        SmallChange="0.1"
-                        LargeChange="1"
-                        IsSnapToTickEnabled="True" 
-                        Grid.Row="4" 
-                        Grid.Column="1">
-                    </Slider>
-                    <TextBox 
-                        Text="{Binding RadiusX, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxCenterStyleKey}"
-                        Grid.Row="3" 
-                        Grid.Column="2">
-                    </TextBox>
-                    <TextBox
-                        Text="{Binding RadiusY, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxCenterStyleKey}"
-                        Grid.Row="4" 
-                        Grid.Column="2">
-                    </TextBox>
+                    <TextBlock Text="Arrow Type" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                    <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                    <TextBlock Text="IsFilled" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
+                    <TextBlock Text="RadiusX" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
+                    <TextBlock Text="RadiusY" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
+                    <ComboBox ItemsSource="{x:Static core:Enums.ArrowTypeValues}" SelectedItem="{Binding ArrowType}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <CheckBox Content="" IsChecked="{Binding IsFilled}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <Slider Value="{Binding RadiusX}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="15" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="3" Grid.Column="1"/>
+                    <Slider Value="{Binding RadiusY}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="15" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="4" Grid.Column="1"/>
+                    <TextBox Text="{Binding RadiusX, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="3" Grid.Column="2"/>
+                    <TextBox Text="{Binding RadiusY, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="4" Grid.Column="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Style">
@@ -506,24 +233,8 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="40"/>
                             </Grid.ColumnDefinitions>
-                            <Slider 
-                                Value="{Binding Thickness}" 
-                                Style="{StaticResource SliderStyleKey}"
-                                Minimum="0" 
-                                Maximum="50" 
-                                TickFrequency="0.1" 
-                                SmallChange="0.1" 
-                                LargeChange="1" 
-                                IsSnapToTickEnabled="True" 
-                                Grid.Row="0" 
-                                Grid.Column="0">
-                            </Slider>
-                            <TextBox 
-                                Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged}" 
-                                Style="{StaticResource TextBoxCenterStyleKey}"
-                                Grid.Row="0" 
-                                Grid.Column="1">
-                            </TextBox>
+                            <Slider Value="{Binding Thickness}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="50" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="0" Grid.Column="1"/>
                         </Grid>
                     </Expander>
                     <Expander Header="Cap" IsExpanded="False">
@@ -536,20 +247,8 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="40"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock 
-                                Text="Line Cap" 
-                                Style="{StaticResource TextBlockLeftStyleKey}"
-                                Grid.Row="0"
-                                Grid.Column="0" >
-                            </TextBlock>
-                            <ComboBox 
-                                ItemsSource="{x:Static core:Enums.LineCapValues}" 
-                                SelectedItem="{Binding LineCap}" 
-                                Style="{StaticResource ComboBoxStyleKey}"
-                                Grid.Row="0" 
-                                Grid.Column="1" 
-                                Grid.ColumnSpan="2">
-                            </ComboBox>
+                            <TextBlock Text="Line Cap" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                            <ComboBox ItemsSource="{x:Static core:Enums.LineCapValues}" SelectedItem="{Binding LineCap}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
                         </Grid>
                     </Expander>
                     <Expander Header="Dash" IsExpanded="False">
@@ -563,43 +262,11 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="40"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock 
-                                Text="Dashes" 
-                                Style="{StaticResource TextBlockLeftStyleKey}"
-                                Grid.Row="0" 
-                                Grid.Column="0">
-                            </TextBlock>
-                            <TextBlock 
-                                Text="Dash Offset" 
-                                Style="{StaticResource TextBlockLeftStyleKey}"
-                                Grid.Row="1" 
-                                Grid.Column="0">
-                            </TextBlock>
-                            <TextBox 
-                                Text="{Binding Dashes}" 
-                                Style="{StaticResource TextBoxLeftStyleKey}"
-                                Grid.Row="0" 
-                                Grid.Column="1" 
-                                Grid.ColumnSpan="2">
-                            </TextBox>
-                            <Slider 
-                                Value="{Binding DashOffset}" 
-                                Style="{StaticResource SliderStyleKey}"
-                                Minimum="0" 
-                                Maximum="15" 
-                                TickFrequency="0.1" 
-                                SmallChange="0.1"
-                                LargeChange="1"
-                                IsSnapToTickEnabled="True" 
-                                Grid.Row="1" 
-                                Grid.Column="1">
-                            </Slider>
-                            <TextBox 
-                                Text="{Binding DashOffset, UpdateSourceTrigger=PropertyChanged}" 
-                                Style="{StaticResource TextBoxCenterStyleKey}"
-                                Grid.Row="1" 
-                                Grid.Column="2">
-                            </TextBox>
+                            <TextBlock Text="Dashes" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                            <TextBlock Text="Dash Offset" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                            <TextBox Text="{Binding Dashes}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                            <Slider Value="{Binding DashOffset}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="15" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="1"/>
+                            <TextBox Text="{Binding DashOffset, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="1" Grid.Column="2"/>
                         </Grid>
                     </Expander>
                 </StackPanel>
@@ -630,95 +297,19 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
-            <TextBlock 
-                Text="FontName" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="0"
-                Grid.Column="0">
-            </TextBlock>
-            <TextBlock 
-                Text="FontFile" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="1"
-                Grid.Column="0">
-            </TextBlock>
-            <TextBlock 
-                Text="FontSize" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="2" 
-                Grid.Column="0">
-            </TextBlock>
-            <TextBlock 
-                Text="FontStyle" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="3" 
-                Grid.Column="0">
-            </TextBlock>
-            <TextBlock 
-                Text="HAlignment" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="4" 
-                Grid.Column="0">
-            </TextBlock>
-            <TextBlock 
-                Text="VAlignment" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="5" 
-                Grid.Column="0">
-            </TextBlock>
-            <Slider 
-                Value="{Binding FontSize}" 
-                Style="{StaticResource SliderStyleKey}"
-                Minimum="0" 
-                Maximum="72" 
-                TickFrequency="1" 
-                IsSnapToTickEnabled="True" 
-                Grid.Row="2" 
-                Grid.Column="1">
-            </Slider>
-            <TextBox 
-                Text="{Binding FontName, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxLeftStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2">
-            </TextBox>
-            <TextBox 
-                Text="{Binding FontFile, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxLeftStyleKey}"
-                Grid.Row="1" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2">
-            </TextBox>
-            <TextBox 
-                Text="{Binding FontSize, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxCenterStyleKey}"
-                Grid.Row="2" 
-                Grid.Column="2">
-            </TextBox>
-            <ContentControl 
-                Content="{Binding FontStyle}"
-                Margin="5,2,5,2"   
-                Grid.Row="3" 
-                Grid.Column="1"
-                Grid.ColumnSpan="2">
-            </ContentControl>
-            <ComboBox 
-                ItemsSource="{x:Static core:Enums.TextHAlignmentValues}" 
-                SelectedItem="{Binding TextHAlignment}"
-                Style="{StaticResource ComboBoxStyleKey}"
-                Grid.Row="4" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2">
-            </ComboBox>
-            <ComboBox 
-                ItemsSource="{x:Static core:Enums.TextVAlignmentValues}" 
-                SelectedItem="{Binding TextVAlignment}" 
-                Style="{StaticResource ComboBoxStyleKey}"
-                Grid.Row="5" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2">
-            </ComboBox>
+            <TextBlock Text="FontName" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+            <TextBlock Text="FontFile" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+            <TextBlock Text="FontSize" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
+            <TextBlock Text="FontStyle" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
+            <TextBlock Text="HAlignment" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
+            <TextBlock Text="VAlignment" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="5" Grid.Column="0"/>
+            <Slider Value="{Binding FontSize}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="72" TickFrequency="1" IsSnapToTickEnabled="True" Grid.Row="2" Grid.Column="1"/>
+            <TextBox Text="{Binding FontName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <TextBox Text="{Binding FontFile, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <TextBox Text="{Binding FontSize, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="2" Grid.Column="2"/>
+            <ContentControl Content="{Binding FontStyle}" Margin="5,2,5,2" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <ComboBox ItemsSource="{x:Static core:Enums.TextHAlignmentValues}" SelectedItem="{Binding TextHAlignment}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <ComboBox ItemsSource="{x:Static core:Enums.TextVAlignmentValues}" SelectedItem="{Binding TextVAlignment}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
         </Grid>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:LineStyle}">
@@ -739,22 +330,8 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <Slider
-                        Value="{Binding FixedLength.Length}" 
-                        Style="{StaticResource SliderStyleKey}"
-                        Minimum="0" 
-                        Maximum="30" 
-                        TickFrequency="0.1" 
-                        SmallChange="0.1"
-                        LargeChange="1"
-                        IsSnapToTickEnabled="True" 
-                        Grid.Column="0">
-                    </Slider>
-                    <TextBox
-                        Text="{Binding FixedLength.Length, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxCenterStyleKey}"
-                        Grid.Column="1" >
-                    </TextBox>
+                    <Slider Value="{Binding FixedLength.Length}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="30" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Column="0"/>
+                    <TextBox Text="{Binding FixedLength.Length, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Column="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="StartTrigger">
@@ -777,19 +354,8 @@
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock 
-                            Text="Name" 
-                            Style="{StaticResource TextBlockLeftStyleKey}"
-                            Grid.Row="0" 
-                            Grid.Column="0">
-                        </TextBlock>
-                        <TextBox 
-                            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                            BorderBrush="{x:Null}" 
-                            Style="{StaticResource TextBoxLeftStyleKey}" 
-                            Grid.Row="0" 
-                            Grid.Column="1">
-                        </TextBox>
+                        <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
                     </Grid>
                     <Expander Header="Stroke" IsExpanded="False">
                         <ContentControl Content="{Binding Stroke}"/>
@@ -806,24 +372,8 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="40"/>
                             </Grid.ColumnDefinitions>
-                            <Slider 
-                                Value="{Binding Thickness}" 
-                                Style="{StaticResource SliderStyleKey}"
-                                Minimum="0" 
-                                Maximum="50" 
-                                TickFrequency="0.1" 
-                                SmallChange="0.1" 
-                                LargeChange="1" 
-                                IsSnapToTickEnabled="True" 
-                                Grid.Row="0" 
-                                Grid.Column="0">
-                            </Slider>
-                            <TextBox 
-                                Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged}" 
-                                Style="{StaticResource TextBoxCenterStyleKey}"
-                                Grid.Row="0" 
-                                Grid.Column="1">
-                            </TextBox>
+                            <Slider Value="{Binding Thickness}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="50" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="0" Grid.Column="0"/>
+                            <TextBox Text="{Binding Thickness, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="0" Grid.Column="1"/>
                         </Grid>
                     </Expander>
                     <Expander Header="Cap" IsExpanded="False">
@@ -836,20 +386,8 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="40"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock 
-                                Text="Line Cap" 
-                                Style="{StaticResource TextBlockLeftStyleKey}"
-                                Grid.Row="0"
-                                Grid.Column="0" >
-                            </TextBlock>
-                            <ComboBox 
-                                ItemsSource="{x:Static core:Enums.LineCapValues}" 
-                                SelectedItem="{Binding LineCap}" 
-                                Style="{StaticResource ComboBoxStyleKey}"
-                                Grid.Row="0" 
-                                Grid.Column="1" 
-                                Grid.ColumnSpan="2">
-                            </ComboBox>
+                            <TextBlock Text="Line Cap" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                            <ComboBox ItemsSource="{x:Static core:Enums.LineCapValues}" SelectedItem="{Binding LineCap}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
                         </Grid>
                     </Expander>
                     <Expander Header="Dash" IsExpanded="False">
@@ -863,43 +401,11 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="40"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock 
-                                Text="Dashes" 
-                                Style="{StaticResource TextBlockLeftStyleKey}"
-                                Grid.Row="0" 
-                                Grid.Column="0">
-                            </TextBlock>
-                            <TextBlock 
-                                Text="Dash Offset" 
-                                Style="{StaticResource TextBlockLeftStyleKey}"
-                                Grid.Row="1" 
-                                Grid.Column="0">
-                            </TextBlock>
-                            <TextBox 
-                                Text="{Binding Dashes}" 
-                                Style="{StaticResource TextBoxLeftStyleKey}"
-                                Grid.Row="0" 
-                                Grid.Column="1" 
-                                Grid.ColumnSpan="2">
-                            </TextBox>
-                            <Slider 
-                                Value="{Binding DashOffset}" 
-                                Style="{StaticResource SliderStyleKey}"
-                                Minimum="0" 
-                                Maximum="15" 
-                                TickFrequency="0.1" 
-                                SmallChange="0.1"
-                                LargeChange="1"
-                                IsSnapToTickEnabled="True" 
-                                Grid.Row="1" 
-                                Grid.Column="1">
-                            </Slider>
-                            <TextBox 
-                                Text="{Binding DashOffset, UpdateSourceTrigger=PropertyChanged}" 
-                                Style="{StaticResource TextBoxCenterStyleKey}"
-                                Grid.Row="1" 
-                                Grid.Column="2">
-                            </TextBox>
+                            <TextBlock Text="Dashes" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                            <TextBlock Text="Dash Offset" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                            <TextBox Text="{Binding Dashes}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                            <Slider Value="{Binding DashOffset}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="15" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="1"/>
+                            <TextBox Text="{Binding DashOffset, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="1" Grid.Column="2"/>
                         </Grid>
                     </Expander>
                 </StackPanel>
@@ -909,16 +415,13 @@
             </TabItem>
             <TabItem Header="Line">
                 <StackPanel>
-                    <Expander Header="Start Arrow" 
-                              IsExpanded="False">
+                    <Expander Header="Start Arrow" IsExpanded="False">
                         <ContentControl Content="{Binding StartArrowStyle}"/>
                     </Expander>
-                    <Expander Header="End Arrow" 
-                              IsExpanded="False">
+                    <Expander Header="End Arrow" IsExpanded="False">
                         <ContentControl Content="{Binding EndArrowStyle}"/>
                     </Expander>
-                    <Expander Header="FixedLength" 
-                              IsExpanded="False">
+                    <Expander Header="FixedLength" IsExpanded="False">
                         <ContentControl Content="{Binding LineStyle}"/>
                     </Expander>
                 </StackPanel>
@@ -937,21 +440,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <GridSplitter 
-                Grid.Column="1" 
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Width="10" 
-                Background="Transparent" 
-                ResizeBehavior="PreviousAndNext" 
-                ShowsPreview="True">
-            </GridSplitter>
-            <TextBlock 
-                Grid.Column="0" 
-                Grid.Row="0" 
-                Margin="5,2,0,2" 
-                VerticalAlignment="Center" 
-                Text="Name">
+            <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10" Background="Transparent" ResizeBehavior="PreviousAndNext" ShowsPreview="True"/>
+            <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,2,0,2" VerticalAlignment="Center" Text="Name">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -963,12 +453,7 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBlock 
-                Grid.Column="2" 
-                Grid.Row="0" 
-                Margin="0,2,5,2" 
-                VerticalAlignment="Center" 
-                Text="Value">
+            <TextBlock Grid.Column="2" Grid.Row="0" Margin="0,2,5,2" VerticalAlignment="Center" Text="Value">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -980,37 +465,20 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <ItemsControl 
-                VerticalContentAlignment="Stretch" 
-                VerticalAlignment="Stretch" 
-                Grid.Row="1" 
-                Grid.Column="0"
-                ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
-                            <TextBox 
-                                Margin="5,2,0,2" VerticalAlignment="Center" 
-                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            </TextBox>
+                            <TextBox Margin="5,2,0,2" VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <ItemsControl 
-                VerticalContentAlignment="Stretch" 
-                VerticalAlignment="Stretch" 
-                Grid.Row="1" 
-                Grid.Column="2"
-                ItemsSource="{Binding Values, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Values, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="Auto" VerticalAlignment="Top">
-                            <TextBox 
-                                Margin="0,2,5,2" 
-                                VerticalAlignment="Center" 
-                                Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            </TextBox>
+                            <TextBox Margin="0,2,5,2" VerticalAlignment="Center" Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -1027,23 +495,10 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Name" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBox 
-                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                    BorderBrush="{x:Null}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}" 
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </TextBox>
+                <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
-            <Expander
-                Header="Columns" 
-                IsExpanded="True">
+            <Expander Header="Columns" IsExpanded="True">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -1072,20 +527,9 @@
                             <RowDefinition/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock 
-                            Grid.Column="0" 
-                            Grid.Row="0"
-                            Margin="5,2,5,2" 
-                            VerticalAlignment="Center" 
-                            Text="Name">
-                        </TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="Name"/>
                     </Grid>
-                    <ItemsControl 
-                        x:Name="columnsItemsControls"
-                        VerticalContentAlignment="Stretch" 
-                        VerticalAlignment="Stretch" 
-                        Grid.Row="2"
-                        ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
+                    <ItemsControl x:Name="columnsItemsControls" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" ItemsSource="{Binding Columns, UpdateSourceTrigger=PropertyChanged}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid Height="Auto" VerticalAlignment="Top">
@@ -1098,31 +542,15 @@
                                         <RowDefinition/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <TextBox 
-                                        Grid.Column="0" 
-                                        Grid.Row="0"
-                                        Margin="5,2,5,2" 
-                                        VerticalAlignment="Center" 
-                                        Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                    </TextBox>
-                                    <Button 
-                                        Grid.Column="1" 
-                                        Grid.Row="0" 
-                                        Margin="5,2,5,2" 
-                                        VerticalAlignment="Center" 
-                                        Content="-" 
-                                        Command="{x:Static core:Commands.RemoveColumnCommand}"
-                                        CommandParameter="{Binding}">
-                                    </Button>
+                                    <TextBox Grid.Column="0" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <Button Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" VerticalAlignment="Center" Content="-" Command="{x:Static core:Commands.RemoveColumnCommand}" CommandParameter="{Binding}"/>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </Grid>
             </Expander>
-            <Expander 
-                Header="Current Record" 
-                IsExpanded="True">
+            <Expander Header="Current Record" IsExpanded="True">
                 <ContentControl Content="{Binding CurrentRecord}"/>
             </Expander>
         </StackPanel>
@@ -1152,21 +580,8 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Control Template="{StaticResource BindingsMenuControlTemplateKey}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="2,0,2,0"/>
-                    <GridSplitter 
-                        Grid.Column="1" 
-                        Grid.Row="1"
-                        Grid.RowSpan="2"
-                        Width="10" 
-                        Background="Transparent" 
-                        ResizeBehavior="PreviousAndNext" 
-                        ShowsPreview="True">
-                    </GridSplitter>
-                    <TextBlock 
-                        Grid.Column="0" 
-                        Grid.Row="1" 
-                        Margin="5,2,0,2" 
-                        VerticalAlignment="Center" 
-                        Text="Property">
+                    <GridSplitter Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Width="10" Background="Transparent" ResizeBehavior="PreviousAndNext" ShowsPreview="True"/>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,2,0,2" VerticalAlignment="Center" Text="Property">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Visibility" Value="Visible"/>
@@ -1178,12 +593,7 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-                    <TextBlock 
-                        Grid.Column="2" 
-                        Grid.Row="1" 
-                        Margin="0,2,5,2" 
-                        VerticalAlignment="Center" 
-                        Text="Path">
+                    <TextBlock Grid.Column="2" Grid.Row="1" Margin="0,2,5,2" VerticalAlignment="Center" Text="Path">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Visibility" Value="Visible"/>
@@ -1195,31 +605,16 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-                    <ItemsControl 
-                        VerticalContentAlignment="Stretch" 
-                        VerticalAlignment="Stretch" 
-                        Grid.Column="0"
-                        Grid.Row="2"
-                        ItemsSource="{Binding Bindings, UpdateSourceTrigger=PropertyChanged}">
+                    <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" ItemsSource="{Binding Bindings, UpdateSourceTrigger=PropertyChanged}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid Height="Auto" VerticalAlignment="Top">
-                                    <TextBox 
-                                        Margin="5,2,0,2" 
-                                        VerticalAlignment="Center" 
-                                        Text="{Binding Path=Property, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                    </TextBox>
+                                    <TextBox Margin="5,2,0,2" VerticalAlignment="Center" Text="{Binding Path=Property, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    <ItemsControl 
-                        x:Name="bindingsItemsControls"
-                        VerticalContentAlignment="Stretch" 
-                        VerticalAlignment="Stretch" 
-                        Grid.Column="2" 
-                        Grid.Row="2"
-                        ItemsSource="{Binding Bindings, UpdateSourceTrigger=PropertyChanged}">
+                    <ItemsControl x:Name="bindingsItemsControls" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="2" ItemsSource="{Binding Bindings, UpdateSourceTrigger=PropertyChanged}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid Height="Auto" VerticalAlignment="Top">
@@ -1227,20 +622,8 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="30"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox 
-                                        Grid.Column="0" 
-                                        Margin="0,2,5,2" 
-                                        VerticalAlignment="Center" 
-                                        Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                    </TextBox>
-                                    <Button 
-                                        Grid.Column="1" 
-                                        Margin="5,0,5,0" 
-                                        VerticalAlignment="Center" 
-                                        Content="-" 
-                                        Command="{x:Static core:Commands.RemoveBindingCommand}"
-                                        CommandParameter="{Binding}">
-                                    </Button>
+                                    <TextBox Grid.Column="0" Margin="0,2,5,2" VerticalAlignment="Center" Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <Button Grid.Column="1" Margin="5,0,5,0" VerticalAlignment="Center" Content="-" Command="{x:Static core:Commands.RemoveBindingCommand}" CommandParameter="{Binding}"/>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -1259,28 +642,9 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Control 
-                        Template="{StaticResource PropertiesMenuControlTemplateKey}" 
-                        Grid.Row="0" 
-                        Grid.Column="0" 
-                        Grid.ColumnSpan="3" 
-                        Margin="2,0,2,0">
-                    </Control>
-                    <GridSplitter 
-                        Grid.Column="1" 
-                        Grid.Row="1"
-                        Grid.RowSpan="2"
-                        Width="10" 
-                        Background="Transparent" 
-                        ResizeBehavior="PreviousAndNext" 
-                        ShowsPreview="True">
-                    </GridSplitter>
-                    <TextBlock 
-                        Grid.Column="0" 
-                        Grid.Row="1" 
-                        Margin="5,2,0,2" 
-                        VerticalAlignment="Center" 
-                        Text="Name">
+                    <Control Template="{StaticResource PropertiesMenuControlTemplateKey}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="2,0,2,0"/>
+                    <GridSplitter Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Width="10" Background="Transparent" ResizeBehavior="PreviousAndNext" ShowsPreview="True"/>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,2,0,2" VerticalAlignment="Center" Text="Name">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Visibility" Value="Visible"/>
@@ -1292,12 +656,7 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-                    <TextBlock 
-                        Grid.Column="2" 
-                        Grid.Row="1" 
-                        Margin="0,2,5,2" 
-                        VerticalAlignment="Center"
-                        Text="Value">
+                    <TextBlock Grid.Column="2" Grid.Row="1" Margin="0,2,5,2" VerticalAlignment="Center" Text="Value">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Visibility" Value="Visible"/>
@@ -1309,31 +668,16 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-                    <ItemsControl 
-                        VerticalContentAlignment="Stretch" 
-                        VerticalAlignment="Stretch" 
-                        Grid.Column="0" 
-                        Grid.Row="2"
-                        ItemsSource="{Binding Properties, UpdateSourceTrigger=PropertyChanged}">
+                    <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="2" ItemsSource="{Binding Properties, UpdateSourceTrigger=PropertyChanged}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid Height="Auto" VerticalAlignment="Top">
-                                    <TextBox 
-                                        Margin="5,2,0,2" 
-                                        VerticalAlignment="Center" 
-                                        Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                    </TextBox>
+                                    <TextBox Margin="5,2,0,2" VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    <ItemsControl 
-                        x:Name="propertiesItemsControls"
-                        VerticalContentAlignment="Stretch" 
-                        VerticalAlignment="Stretch" 
-                        Grid.Column="2" 
-                        Grid.Row="2"
-                        ItemsSource="{Binding Properties, UpdateSourceTrigger=PropertyChanged}">
+                    <ItemsControl x:Name="propertiesItemsControls" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="2" ItemsSource="{Binding Properties, UpdateSourceTrigger=PropertyChanged}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid Height="Auto" VerticalAlignment="Top">
@@ -1341,20 +685,8 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="30"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox 
-                                        Grid.Column="0" 
-                                        Margin="0,2,5,2" 
-                                        VerticalAlignment="Center" 
-                                        Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                    </TextBox>
-                                    <Button 
-                                        Grid.Column="1" 
-                                        Margin="5,0,5,0" 
-                                        VerticalAlignment="Center" 
-                                        Content="-" 
-                                        Command="{x:Static core:Commands.RemovePropertyCommand}"
-                                        CommandParameter="{Binding}">
-                                    </Button>
+                                    <TextBox Grid.Column="0" Margin="0,2,5,2" VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <Button Grid.Column="1" Margin="5,0,5,0" VerticalAlignment="Center" Content="-" Command="{x:Static core:Commands.RemovePropertyCommand}" CommandParameter="{Binding}"/>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -1390,19 +722,8 @@
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock 
-                            Text="Name" 
-                            Style="{StaticResource TextBlockLeftStyleKey}"
-                            Grid.Row="0" 
-                            Grid.Column="0">
-                        </TextBlock>
-                        <TextBox 
-                            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                            BorderBrush="{x:Null}" 
-                            Style="{StaticResource TextBoxLeftStyleKey}" 
-                            Grid.Row="0" 
-                            Grid.Column="1">
-                        </TextBox>
+                        <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
                     </Grid>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -1412,18 +733,8 @@
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock 
-                            Text="X" 
-                            Style="{StaticResource TextBlockLeftStyleKey}"
-                            Grid.Row="0" 
-                            Grid.Column="0">
-                        </TextBlock>
-                        <TextBox 
-                            Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" 
-                            Style="{StaticResource TextBoxLeftStyleKey}"
-                            Grid.Row="0" 
-                            Grid.Column="1">
-                        </TextBox>
+                        <TextBlock Text="X" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding X, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
                     </Grid>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -1433,18 +744,8 @@
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock 
-                            Text="Y" 
-                            Style="{StaticResource TextBlockLeftStyleKey}"
-                            Grid.Row="0" 
-                            Grid.Column="0">
-                        </TextBlock>
-                        <TextBox 
-                            Text="{Binding Y, UpdateSourceTrigger=PropertyChanged}" 
-                            Style="{StaticResource TextBoxLeftStyleKey}"
-                            Grid.Row="0" 
-                            Grid.Column="1">
-                        </TextBox>
+                        <TextBlock Text="Y" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Y, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
                     </Grid>
                     <Expander Header="State">
                         <ContentControl Content="{Binding State}"/>
@@ -1469,19 +770,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Name" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBox 
-                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                    BorderBrush="{x:Null}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}" 
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </TextBox>
+                <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -1491,18 +781,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Style" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <ComboBox 
-                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
-                    Style="{StaticResource ComboBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
+                <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -1518,19 +798,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Expander Header="Start">
                 <ContentControl Content="{Binding Start}"/>
@@ -1559,19 +828,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Name" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBox 
-                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                    BorderBrush="{x:Null}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}" 
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </TextBox>
+                <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -1581,18 +839,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Style" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <ComboBox 
-                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
-                    Style="{StaticResource ComboBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
+                <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -1608,19 +856,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -1630,19 +867,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsFilled" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsFilled}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsFilled" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsFilled}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -1652,19 +878,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Text" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <ComboBox 
-                    IsEditable="True" 
-                    Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
-                    Style="{StaticResource ComboBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1" 
-                    VerticalAlignment="Center">
+                <TextBlock Text="Text" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox IsEditable="True" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
                     <ComboBoxItem>{0}</ComboBoxItem>
                     <ComboBoxItem>{0} {1}</ComboBoxItem>
                     <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
@@ -1690,116 +905,20 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock 
-                        Text="IsGrid" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="0"
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="OffsetX" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="1" 
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="OffsetY" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="2" 
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="CellWidth" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="3" 
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="CellHeight" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="4" 
-                        Grid.Column="0">
-                    </TextBlock>
-                    <CheckBox 
-                        Content=""
-                        IsChecked="{Binding IsGrid}"
-                        Style="{StaticResource CheckBoxStyleKey}"
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <Slider 
-                        Value="{Binding OffsetX}"
-                        Style="{StaticResource SliderStyleKey}"
-                        Minimum="0" 
-                        Maximum="60" 
-                        TickFrequency="0.1" 
-                        SmallChange="0.1"
-                        LargeChange="1"
-                        IsSnapToTickEnabled="True" 
-                        Grid.Row="1" 
-                        Grid.Column="1">
-                    </Slider>
-                    <Slider 
-                        Value="{Binding OffsetY}" 
-                        Style="{StaticResource SliderStyleKey}"
-                        Minimum="0" 
-                        Maximum="60" 
-                        TickFrequency="0.1" 
-                        SmallChange="0.1"
-                        LargeChange="1"
-                        IsSnapToTickEnabled="True" 
-                        Grid.Row="2" 
-                        Grid.Column="1">
-                    </Slider>
-                    <Slider 
-                        Value="{Binding CellWidth}"
-                        Style="{StaticResource SliderStyleKey}"
-                        Minimum="0" 
-                        Maximum="60" 
-                        TickFrequency="0.1" 
-                        SmallChange="0.1"
-                        LargeChange="1"
-                        IsSnapToTickEnabled="True" 
-                        Grid.Row="3" 
-                        Grid.Column="1">
-                    </Slider>
-                    <Slider 
-                        Value="{Binding CellHeight}" 
-                        Style="{StaticResource SliderStyleKey}"
-                        Minimum="0" 
-                        Maximum="60" 
-                        TickFrequency="0.1" 
-                        SmallChange="0.1"
-                        LargeChange="1"
-                        IsSnapToTickEnabled="True" 
-                        Grid.Row="4" 
-                        Grid.Column="1">
-                    </Slider>
-                    <TextBox 
-                        Text="{Binding OffsetX, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxCenterStyleKey}"
-                        Grid.Row="1" 
-                        Grid.Column="2">
-                    </TextBox>
-                    <TextBox
-                        Text="{Binding OffsetY, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxCenterStyleKey}"
-                        Grid.Row="2" 
-                        Grid.Column="2">
-                    </TextBox>
-                    <TextBox 
-                        Text="{Binding CellWidth, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxCenterStyleKey}"
-                        Grid.Row="3" 
-                        Grid.Column="2">
-                    </TextBox>
-                    <TextBox
-                        Text="{Binding CellHeight, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxCenterStyleKey}"
-                        Grid.Row="4" 
-                        Grid.Column="2">
-                    </TextBox>
+                    <TextBlock Text="IsGrid" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                    <TextBlock Text="OffsetX" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                    <TextBlock Text="OffsetY" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
+                    <TextBlock Text="CellWidth" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
+                    <TextBlock Text="CellHeight" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
+                    <CheckBox Content="" IsChecked="{Binding IsGrid}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <Slider Value="{Binding OffsetX}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="60" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="1"/>
+                    <Slider Value="{Binding OffsetY}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="60" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="2" Grid.Column="1"/>
+                    <Slider Value="{Binding CellWidth}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="60" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="3" Grid.Column="1"/>
+                    <Slider Value="{Binding CellHeight}" Style="{StaticResource SliderStyleKey}" Minimum="0" Maximum="60" TickFrequency="0.1" SmallChange="0.1" LargeChange="1" IsSnapToTickEnabled="True" Grid.Row="4" Grid.Column="1"/>
+                    <TextBox Text="{Binding OffsetX, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="1" Grid.Column="2"/>
+                    <TextBox Text="{Binding OffsetY, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="2" Grid.Column="2"/>
+                    <TextBox Text="{Binding CellWidth, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="3" Grid.Column="2"/>
+                    <TextBox Text="{Binding CellHeight, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxCenterStyleKey}" Grid.Row="4" Grid.Column="2"/>
                 </Grid>
             </Expander>
             <Expander Header="State">
@@ -1823,19 +942,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Name" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBox 
-                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                    BorderBrush="{x:Null}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}" 
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </TextBox>
+                <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -1845,18 +953,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Style" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <ComboBox 
-                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
-                    Style="{StaticResource ComboBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
+                <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -1872,19 +970,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -1894,19 +981,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsFilled" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsFilled}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsFilled" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsFilled}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -1916,19 +992,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Text" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <ComboBox 
-                    IsEditable="True" 
-                    Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
-                    Style="{StaticResource ComboBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1" 
-                    VerticalAlignment="Center">
+                <TextBlock Text="Text" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox IsEditable="True" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
                     <ComboBoxItem>{0}</ComboBoxItem>
                     <ComboBoxItem>{0} {1}</ComboBoxItem>
                     <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
@@ -1961,19 +1026,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Name" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBox 
-                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                    BorderBrush="{x:Null}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}" 
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </TextBox>
+                <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -1983,18 +1037,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Style" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <ComboBox 
-                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
-                    Style="{StaticResource ComboBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
+                <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -2010,19 +1054,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -2032,19 +1065,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsFilled" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsFilled}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsFilled" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsFilled}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Expander Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
@@ -2079,19 +1101,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Name" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBox 
-                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                    BorderBrush="{x:Null}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}" 
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </TextBox>
+                <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -2101,18 +1112,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Style" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <ComboBox 
-                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
-                    Style="{StaticResource ComboBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
+                <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -2128,19 +1129,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -2150,19 +1140,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsFilled" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsFilled}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsFilled" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsFilled}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Expander Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
@@ -2197,19 +1176,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Name" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBox 
-                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                    BorderBrush="{x:Null}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}" 
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </TextBox>
+                <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -2219,18 +1187,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Style" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <ComboBox 
-                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
-                    Style="{StaticResource ComboBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
+                <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -2246,19 +1204,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -2268,19 +1215,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsFilled" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsFilled}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsFilled" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsFilled}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Expander Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
@@ -2312,19 +1248,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Name" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBox 
-                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                    BorderBrush="{x:Null}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}" 
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </TextBox>
+                <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -2334,18 +1259,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Style" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <ComboBox 
-                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
-                    Style="{StaticResource ComboBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
+                <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -2361,19 +1276,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Text" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <ComboBox 
-                    IsEditable="True" 
-                    Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
-                    Style="{StaticResource ComboBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1" 
-                    VerticalAlignment="Center">
+                <TextBlock Text="Text" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox IsEditable="True" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
                     <ComboBoxItem>{0}</ComboBoxItem>
                     <ComboBoxItem>{0} {1}</ComboBoxItem>
                     <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
@@ -2406,19 +1310,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Name" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBox 
-                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                    BorderBrush="{x:Null}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}" 
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </TextBox>
+                <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -2428,18 +1321,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Style" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <ComboBox 
-                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
-                    Style="{StaticResource ComboBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
+                <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -2455,19 +1338,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -2477,19 +1349,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsFilled" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsFilled}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsFilled" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsFilled}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -2499,19 +1360,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Text" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <ComboBox 
-                    IsEditable="True" 
-                    Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
-                    Style="{StaticResource ComboBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1" 
-                    VerticalAlignment="Center">
+                <TextBlock Text="Text" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox IsEditable="True" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
                     <ComboBoxItem>{0}</ComboBoxItem>
                     <ComboBoxItem>{0} {1}</ComboBoxItem>
                     <ComboBoxItem>{0} {1} {2}</ComboBoxItem>
@@ -2519,10 +1369,7 @@
             </Grid>
             <Expander Header="Key">
                 <Grid>
-                    <TextBox 
-                        Text="{Binding Key, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxLeftStyleKey}">
-                    </TextBox>
+                    <TextBox Text="{Binding Key, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}"/>
                 </Grid>
             </Expander>
             <Expander Header="TopLeft">
@@ -2554,19 +1401,8 @@
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock 
-                            Text="Name" 
-                            Style="{StaticResource TextBlockLeftStyleKey}"
-                            Grid.Row="0" 
-                            Grid.Column="0">
-                        </TextBlock>
-                        <TextBox 
-                            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                            BorderBrush="{x:Null}" 
-                            Style="{StaticResource TextBoxLeftStyleKey}" 
-                            Grid.Row="0" 
-                            Grid.Column="1">
-                        </TextBox>
+                        <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
                     </Grid>
                     <Expander Header="Properties" IsExpanded="True">
                         <Grid>
@@ -2579,21 +1415,8 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <GridSplitter 
-                                Grid.Column="1" 
-                                Grid.Row="0"
-                                Grid.RowSpan="2"
-                                Width="10" 
-                                Background="Transparent" 
-                                ResizeBehavior="PreviousAndNext" 
-                                ShowsPreview="True">
-                            </GridSplitter>
-                            <TextBlock 
-                                Grid.Column="0"
-                                Grid.Row="0" 
-                                Margin="5,2,0,2" 
-                                VerticalAlignment="Center" 
-                                Text="Name">
+                            <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Width="10" Background="Transparent" ResizeBehavior="PreviousAndNext" ShowsPreview="True"/>
+                            <TextBlock Grid.Column="0" Grid.Row="0" Margin="5,2,0,2" VerticalAlignment="Center" Text="Name">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Visibility" Value="Visible"/>
@@ -2605,12 +1428,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBlock 
-                                Grid.Column="2" 
-                                Grid.Row="0" 
-                                Margin="0,2,5,2" 
-                                VerticalAlignment="Center" 
-                                Text="Value">
+                            <TextBlock Grid.Column="2" Grid.Row="0" Margin="0,2,5,2" VerticalAlignment="Center" Text="Value">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Visibility" Value="Visible"/>
@@ -2622,37 +1440,20 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <ItemsControl 
-                                VerticalContentAlignment="Stretch" 
-                                VerticalAlignment="Stretch" 
-                                Grid.Column="0" 
-                                Grid.Row="1"
-                                ItemsSource="{Binding ShapesProperties, UpdateSourceTrigger=PropertyChanged}">
+                            <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding ShapesProperties, UpdateSourceTrigger=PropertyChanged}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Height="Auto" VerticalAlignment="Top">
-                                            <TextBox
-                                                Margin="5,2,0,2" VerticalAlignment="Center" 
-                                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                            </TextBox>
+                                            <TextBox Margin="5,2,0,2" VerticalAlignment="Center" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </Grid>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
-                            <ItemsControl 
-                                VerticalContentAlignment="Stretch" 
-                                VerticalAlignment="Stretch" 
-                                Grid.Column="2" 
-                                Grid.Row="1"
-                                ItemsSource="{Binding ShapesProperties, UpdateSourceTrigger=PropertyChanged}">
+                            <ItemsControl VerticalContentAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" ItemsSource="{Binding ShapesProperties, UpdateSourceTrigger=PropertyChanged}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Height="Auto" VerticalAlignment="Top">
-                                            <TextBox 
-                                                Margin="0,2,5,2" 
-                                                VerticalAlignment="Center" 
-                                                Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                            </TextBox>
+                                            <TextBox Margin="0,2,5,2" VerticalAlignment="Center" Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </Grid>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -2673,23 +1474,14 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <controls:GroupShapesDragAndDropListBox 
-                        x:Name="shapesListBox"
-                        Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                        ItemsSource="{Binding Shapes}"
-                        BorderBrush="{x:Null}"
-                        Grid.Row="0">
+                    <controls:GroupShapesDragAndDropListBox x:Name="shapesListBox" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Shapes}" BorderBrush="{x:Null}" Grid.Row="0">
                         <controls:GroupShapesDragAndDropListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding}" Margin="0,5,0,5"/>
                             </DataTemplate>
                         </controls:GroupShapesDragAndDropListBox.ItemTemplate>
                     </controls:GroupShapesDragAndDropListBox>
-                    <ContentControl 
-                        Content="{Binding ElementName=shapesListBox, Path=SelectedItem}" 
-                        Grid.Row="1" 
-                        Margin="5,2,5,2">
-                    </ContentControl>
+                    <ContentControl Content="{Binding ElementName=shapesListBox, Path=SelectedItem}" Grid.Row="1" Margin="5,2,5,2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Connectors">
@@ -2698,23 +1490,14 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <controls:GroupConnectorsDragAndDropListBox 
-                        x:Name="connectorsListBox"
-                        Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                        ItemsSource="{Binding Connectors}"
-                        BorderBrush="{x:Null}"
-                        Grid.Row="0">
+                    <controls:GroupConnectorsDragAndDropListBox x:Name="connectorsListBox" Tag="{Binding DataContext.Editor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" ItemsSource="{Binding Connectors}" BorderBrush="{x:Null}" Grid.Row="0">
                         <controls:GroupConnectorsDragAndDropListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding}" Margin="0,5,0,5"/>
                             </DataTemplate>
                         </controls:GroupConnectorsDragAndDropListBox.ItemTemplate>
                     </controls:GroupConnectorsDragAndDropListBox>
-                    <ContentControl 
-                        Content="{Binding ElementName=connectorsListBox, Path=SelectedItem}" 
-                        Grid.Row="1" 
-                        Margin="5,2,5,2">
-                    </ContentControl>
+                    <ContentControl Content="{Binding ElementName=connectorsListBox, Path=SelectedItem}" Grid.Row="1" Margin="5,2,5,2"/>
                 </Grid>
             </TabItem>
         </TabControl>
@@ -2729,19 +1512,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Name" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBox 
-                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                    BorderBrush="{x:Null}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}" 
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </TextBox>
+                <TextBlock Text="Name" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -2751,18 +1523,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="Style" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <ComboBox 
-                    ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                    SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}"
-                    Style="{StaticResource ComboBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
+                <TextBlock Text="Style" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.CurrentStyleLibrary.Styles, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Style, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -2778,19 +1540,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -2800,19 +1551,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsFilled" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsFilled}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsFilled" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsFilled}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Expander Header="Geometry">
                 <ContentControl Content="{Binding Geometry}"/>
@@ -2840,32 +1580,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
-            <TextBlock 
-                Text="Width" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="0" >
-            </TextBlock>
-            <TextBlock 
-                Text="Height" 
-                Style="{StaticResource TextBlockLeftStyleKey}"
-                Grid.Row="1" 
-                Grid.Column="0" >
-            </TextBlock>
-            <TextBox 
-                Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxLeftStyleKey}"
-                Grid.Row="0" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2">
-            </TextBox>
-            <TextBox 
-                Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
-                Style="{StaticResource TextBoxLeftStyleKey}"
-                Grid.Row="1" 
-                Grid.Column="1" 
-                Grid.ColumnSpan="2">
-            </TextBox>
+            <TextBlock Text="Width" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+            <TextBlock Text="Height" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+            <TextBox Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <TextBox Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
         </Grid>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:XArcSegment}">
@@ -2878,19 +1596,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -2900,19 +1607,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsSmoothJoin" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsSmoothJoin}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsSmoothJoin" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsSmoothJoin}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -2925,47 +1621,12 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="RotationAngle" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBlock 
-                    Text="IsLargeArc" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="1"
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBlock 
-                    Text="SweepDirection" 
-                    Style="{StaticResource TextBlockLeftStyleKey}" 
-                    Grid.Row="2" 
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBox 
-                    Text="{Binding RotationAngle, UpdateSourceTrigger=PropertyChanged}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1" 
-                    Grid.ColumnSpan="2">
-                </TextBox>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsLargeArc}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="1" 
-                    Grid.Column="1" 
-                    Grid.ColumnSpan="2">
-                </CheckBox>
-                <ComboBox 
-                    ItemsSource="{x:Static core:Enums.XSweepDirectionValues}" 
-                    SelectedItem="{Binding SweepDirection}" 
-                    Style="{StaticResource ComboBoxStyleKey}"
-                    Grid.Row="2" 
-                    Grid.Column="1" 
-                    Grid.ColumnSpan="2">
-                </ComboBox>
+                <TextBlock Text="RotationAngle" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBlock Text="IsLargeArc" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                <TextBlock Text="SweepDirection" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
+                <TextBox Text="{Binding RotationAngle, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <CheckBox Content="" IsChecked="{Binding IsLargeArc}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <ComboBox ItemsSource="{x:Static core:Enums.XSweepDirectionValues}" SelectedItem="{Binding SweepDirection}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
             </Grid>
             <Expander Header="Point">
                 <ContentControl Content="{Binding Point}"/>
@@ -2985,19 +1646,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -3007,19 +1657,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsSmoothJoin" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsSmoothJoin}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsSmoothJoin" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsSmoothJoin}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Expander Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
@@ -3042,19 +1681,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -3064,19 +1692,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsSmoothJoin" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsSmoothJoin}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsSmoothJoin" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsSmoothJoin}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Expander Header="Point">
                 <ContentControl Content="{Binding Point}"/>
@@ -3093,19 +1710,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -3115,28 +1721,11 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsSmoothJoin" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsSmoothJoin}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsSmoothJoin" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsSmoothJoin}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Expander Header="Points">
-                <ListBox
-                    ItemsSource="{Binding Points}"
-                    BorderBrush="{x:Null}"
-                    BorderThickness="0"
-                    HorizontalContentAlignment="Stretch"
-                    Height="140">
-                </ListBox>
+                <ListBox ItemsSource="{Binding Points}" BorderBrush="{x:Null}" BorderThickness="0" HorizontalContentAlignment="Stretch" Height="140"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -3150,19 +1739,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -3172,27 +1750,11 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsSmoothJoin" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsSmoothJoin}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsSmoothJoin" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsSmoothJoin}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Expander Header="Points">
-                <ListBox
-                    ItemsSource="{Binding Points}"
-                    BorderBrush="{x:Null}"
-                    HorizontalContentAlignment="Stretch"
-                    Height="140">
-                </ListBox>
+                <ListBox ItemsSource="{Binding Points}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Height="140"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -3206,19 +1768,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -3228,27 +1779,11 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsSmoothJoin" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsSmoothJoin}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsSmoothJoin" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsSmoothJoin}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Expander Header="Points">
-                <ListBox
-                    ItemsSource="{Binding Points}"
-                    BorderBrush="{x:Null}"
-                    HorizontalContentAlignment="Stretch"
-                    Height="140">
-                </ListBox>
+                <ListBox ItemsSource="{Binding Points}" BorderBrush="{x:Null}" HorizontalContentAlignment="Stretch" Height="140"/>
             </Expander>
         </StackPanel>
     </DataTemplate>
@@ -3262,19 +1797,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsStroked" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsStroked}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsStroked" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -3284,19 +1808,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsSmoothJoin" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsSmoothJoin}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsSmoothJoin" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsSmoothJoin}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Expander Header="Point1">
                 <ContentControl Content="{Binding Point1}"/>
@@ -3316,19 +1829,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsFilled" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsFilled}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsFilled" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsFilled}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>
@@ -3338,19 +1840,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="IsClosed" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <CheckBox 
-                    Content=""
-                    IsChecked="{Binding IsClosed}"
-                    Style="{StaticResource CheckBoxStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </CheckBox>
+                <TextBlock Text="IsClosed" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <CheckBox Content="" IsChecked="{Binding IsClosed}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Expander Header="StartPoint">
                 <ContentControl Content="{Binding StartPoint}"/>
@@ -3368,27 +1859,12 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="FillRule" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0"
-                    Grid.Column="0">
-                </TextBlock>
-                <ComboBox 
-                    ItemsSource="{x:Static core:Enums.XFillRuleValues}" 
-                    SelectedItem="{Binding FillRule}" 
-                    Style="{StaticResource ComboBoxStyleKey}"          
-                    Grid.Row="0" 
-                    Grid.Column="1" 
-                    Grid.ColumnSpan="2">
-                </ComboBox>
+                <TextBlock Text="FillRule" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox ItemsSource="{x:Static core:Enums.XFillRuleValues}" SelectedItem="{Binding FillRule}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
             </Grid>
             <TabControl>
                 <TabItem Header="Figures">
-                    <TreeView 
-                        x:Name="tree" 
-                        ItemsSource="{Binding Figures}"
-                        Margin="5,2,5,2">
+                    <TreeView x:Name="tree" ItemsSource="{Binding Figures}" Margin="5,2,5,2">
                         <TreeView.ItemContainerStyle>
                             <Style TargetType="TreeViewItem">
                                 <Setter Property="IsExpanded" Value="True"/>
@@ -3412,12 +1888,7 @@
                     </TreeView>
                 </TabItem>
                 <TabItem Header="Selected">
-                    <ContentControl 
-                        Content="{Binding}"                
-                        DataContext="{Binding ElementName=tree, Path=SelectedItem}"
-                        Margin="5,5,5,5"
-                        Grid.Column="2">
-                    </ContentControl>
+                    <ContentControl Content="{Binding}" DataContext="{Binding ElementName=tree, Path=SelectedItem}" Margin="5,5,5,5" Grid.Column="2"/>
                 </TabItem>
             </TabControl>
         </StackPanel>
@@ -3440,87 +1911,18 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock 
-                        Text="{x:Static p:Resources.OptionsSnapToGrid}" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="0"
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="{x:Static p:Resources.OptionsSnapX}" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="1" 
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="{x:Static p:Resources.OptionsSnapY}" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="2" 
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="{x:Static p:Resources.OptionsHitTreshold}" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="3" 
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="{x:Static p:Resources.OptionsMoveMode}" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="4"
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="{x:Static p:Resources.OptionsTryToConnect}" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="5"
-                        Grid.Column="0">
-                    </TextBlock>
-                    <CheckBox 
-                        Content=""
-                        IsChecked="{Binding SnapToGrid}"
-                        Style="{StaticResource CheckBoxStyleKey}"
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <TextBox 
-                        Text="{Binding SnapX, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxLeftStyleKey}"
-                        Grid.Row="1" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </TextBox>
-                    <TextBox 
-                        Text="{Binding SnapY, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxLeftStyleKey}"
-                        Grid.Row="2" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </TextBox>
-                    <TextBox 
-                        Text="{Binding HitTreshold, UpdateSourceTrigger=PropertyChanged}" 
-                        Style="{StaticResource TextBoxLeftStyleKey}"
-                        Grid.Row="3" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </TextBox>
-                    <ComboBox 
-                        ItemsSource="{x:Static core:Enums.MoveModeValues}" 
-                        SelectedItem="{Binding MoveMode}" 
-                        Style="{StaticResource ComboBoxStyleKey}" 
-                        Grid.Row="4" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </ComboBox>
-                    <CheckBox 
-                        Content=""
-                        IsChecked="{Binding TryToConnect}"
-                        Style="{StaticResource CheckBoxStyleKey}"
-                        Grid.Row="5" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </CheckBox>
+                    <TextBlock Text="{x:Static p:Resources.OptionsSnapToGrid}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                    <TextBlock Text="{x:Static p:Resources.OptionsSnapX}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                    <TextBlock Text="{x:Static p:Resources.OptionsSnapY}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
+                    <TextBlock Text="{x:Static p:Resources.OptionsHitTreshold}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
+                    <TextBlock Text="{x:Static p:Resources.OptionsMoveMode}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
+                    <TextBlock Text="{x:Static p:Resources.OptionsTryToConnect}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="5" Grid.Column="0"/>
+                    <CheckBox Content="" IsChecked="{Binding SnapToGrid}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <TextBox Text="{Binding SnapX, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <TextBox Text="{Binding SnapY, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <TextBox Text="{Binding HitTreshold, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <ComboBox ItemsSource="{x:Static core:Enums.MoveModeValues}" SelectedItem="{Binding MoveMode}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <CheckBox Content="" IsChecked="{Binding TryToConnect}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="{x:Static p:Resources.OptionsHeaderDefaults}">
@@ -3537,76 +1939,16 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock 
-                        Text="{x:Static p:Resources.OptionsDefaultIsStroked}" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="0"
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="{x:Static p:Resources.OptionsDefaultIsFilled}" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="1"
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="{x:Static p:Resources.OptionsDefaultIsClosed}" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="2"
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="{x:Static p:Resources.OptionsDefaultIsSmoothJoin}" 
-                        Style="{StaticResource TextBlockLeftStyleKey}"
-                        Grid.Row="3"
-                        Grid.Column="0">
-                    </TextBlock>
-                    <TextBlock 
-                        Text="{x:Static p:Resources.OptionsDefaultFillRule}" 
-                        Style="{StaticResource TextBlockLeftStyleKey}" 
-                        Grid.Row="4"
-                        Grid.Column="0">
-                    </TextBlock>
-                    <CheckBox 
-                        Content=""
-                        IsChecked="{Binding DefaultIsStroked}"
-                        Style="{StaticResource CheckBoxStyleKey}"
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <CheckBox 
-                        Content=""
-                        IsChecked="{Binding DefaultIsFilled}"
-                        Style="{StaticResource CheckBoxStyleKey}"
-                        Grid.Row="1" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <CheckBox 
-                        Content=""
-                        IsChecked="{Binding DefaultIsClosed}"
-                        Style="{StaticResource CheckBoxStyleKey}"
-                        Grid.Row="2" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <CheckBox 
-                        Content=""
-                        IsChecked="{Binding DefaultIsSmoothJoin}"
-                        Style="{StaticResource CheckBoxStyleKey}"
-                        Grid.Row="3" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </CheckBox>
-                    <ComboBox 
-                        ItemsSource="{x:Static core:Enums.XFillRuleValues}" 
-                        SelectedItem="{Binding DefaultFillRule}" 
-                        Style="{StaticResource ComboBoxStyleKey}"
-                        Grid.Row="4" 
-                        Grid.Column="1" 
-                        Grid.ColumnSpan="2">
-                    </ComboBox>
+                    <TextBlock Text="{x:Static p:Resources.OptionsDefaultIsStroked}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                    <TextBlock Text="{x:Static p:Resources.OptionsDefaultIsFilled}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                    <TextBlock Text="{x:Static p:Resources.OptionsDefaultIsClosed}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="2" Grid.Column="0"/>
+                    <TextBlock Text="{x:Static p:Resources.OptionsDefaultIsSmoothJoin}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="3" Grid.Column="0"/>
+                    <TextBlock Text="{x:Static p:Resources.OptionsDefaultFillRule}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="4" Grid.Column="0"/>
+                    <CheckBox Content="" IsChecked="{Binding DefaultIsStroked}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <CheckBox Content="" IsChecked="{Binding DefaultIsFilled}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <CheckBox Content="" IsChecked="{Binding DefaultIsClosed}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <CheckBox Content="" IsChecked="{Binding DefaultIsSmoothJoin}" Style="{StaticResource CheckBoxStyleKey}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    <ComboBox ItemsSource="{x:Static core:Enums.XFillRuleValues}" SelectedItem="{Binding DefaultFillRule}" Style="{StaticResource ComboBoxStyleKey}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="{x:Static p:Resources.OptionsHeaderAdvanced}">
@@ -3629,8 +1971,7 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:Project}">
         <StackPanel>
-            <Expander Header="{x:Static p:Resources.ProjectOptions}" 
-                      IsExpanded="False">
+            <Expander Header="{x:Static p:Resources.ProjectOptions}" IsExpanded="False">
                 <ContentControl Content="{Binding Options}"/>
             </Expander>
             <Grid>
@@ -3641,13 +1982,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
-                <TextBox 
-                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0" 
-                    Grid.ColumnSpan="2">
-                </TextBox>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
             </Grid>
         </StackPanel>
     </DataTemplate>
@@ -3661,18 +1996,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="{x:Static p:Resources.DocumentName}" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBox 
-                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </TextBox>
+                <TextBlock Text="{x:Static p:Resources.DocumentName}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
         </StackPanel>
     </DataTemplate>
@@ -3686,19 +2011,8 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="{x:Static p:Resources.ContainerName}" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBox 
-                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                    BorderBrush="{x:Null}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </TextBox>
+                <TextBlock Text="{x:Static p:Resources.ContainerName}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
             </Grid>
             <Grid>
                 <Grid.Style>
@@ -3719,30 +2033,10 @@
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Text="{x:Static p:Resources.ContainerWidth}" 
-                    Style="{StaticResource TextBlockLeftStyleKey}" 
-                    Grid.Row="0" 
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBlock 
-                    Text="{x:Static p:Resources.ContainerHeight}" 
-                    Style="{StaticResource TextBlockLeftStyleKey}"
-                    Grid.Row="1" 
-                    Grid.Column="0">
-                </TextBlock>
-                <TextBox 
-                    Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}"
-                    Grid.Row="0" 
-                    Grid.Column="1">
-                </TextBox>
-                <TextBox 
-                    Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" 
-                    Style="{StaticResource TextBoxLeftStyleKey}"
-                    Grid.Row="1" 
-                    Grid.Column="1">
-                </TextBox>
+                <TextBlock Text="{x:Static p:Resources.ContainerWidth}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="0" Grid.Column="0"/>
+                <TextBlock Text="{x:Static p:Resources.ContainerHeight}" Style="{StaticResource TextBlockLeftStyleKey}" Grid.Row="1" Grid.Column="0"/>
+                <TextBox Text="{Binding Width, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="0" Grid.Column="1"/>
+                <TextBox Text="{Binding Height, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxLeftStyleKey}" Grid.Row="1" Grid.Column="1"/>
             </Grid>
             <Expander Header="{x:Static p:Resources.ContainerBackground}">
                 <Expander.Style>
@@ -3769,10 +2063,7 @@
                     </Style>
                 </Expander.Style>
                 <StackPanel>
-                    <ComboBox 
-                        ItemsSource="{Binding Path=DataContext.Editor.Project.Templates, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                        SelectedItem="{Binding Path=DataContext.Template, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" 
-                        Style="{StaticResource ComboBoxStyleKey}">
+                    <ComboBox ItemsSource="{Binding Path=DataContext.Editor.Project.Templates, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Path=DataContext.Template, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" Style="{StaticResource ComboBoxStyleKey}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -3788,19 +2079,9 @@
         </StackPanel>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:StyleLibrary}">
-        <TextBox 
-            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-            BorderBrush="{x:Null}" 
-            TextAlignment="Left" 
-            VerticalAlignment="Center">
-        </TextBox>
+        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" TextAlignment="Left" VerticalAlignment="Center"/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type core:GroupLibrary}">
-        <TextBox 
-            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-            BorderBrush="{x:Null}" 
-            TextAlignment="Left" 
-            VerticalAlignment="Center">
-        </TextBox>
+        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{x:Null}" TextAlignment="Left" VerticalAlignment="Center"/>
     </DataTemplate>
 </ResourceDictionary>

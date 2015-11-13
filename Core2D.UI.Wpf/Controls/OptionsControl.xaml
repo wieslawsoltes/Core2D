@@ -1,18 +1,14 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<UserControl x:Class="Core2D.UI.Wpf.Controls.OptionsControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+<UserControl x:Class="Core2D.UI.Wpf.Controls.OptionsControl" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Core2D.UI.Wpf.Controls"
+             xmlns:local="clr-namespace:Core2D.UI.Wpf.Controls" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <ContentControl 
-            DataContext="{Binding Editor.Project, FallbackValue={x:Null}}"
-            Content="{Binding Options}"
-            Margin="2,2,2,2">
-        </ContentControl>
+        <ContentControl DataContext="{Binding Editor.Project, FallbackValue={x:Null}}" Content="{Binding Options}" Margin="2,2,2,2"/>
     </Grid>
 </UserControl>

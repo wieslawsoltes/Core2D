@@ -1,17 +1,17 @@
 ﻿<!-- Copyright (c) Wiesław Šoltés. All rights reserved. -->
 <!-- Licensed under the MIT license. See LICENSE file in the project root for full license information. -->
-<UserControl x:Class="Core2D.UI.Wpf.Controls.CanvasControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+<UserControl x:Class="Core2D.UI.Wpf.Controls.CanvasControl" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:core="clr-namespace:Core2D;assembly=Core2D"
-             xmlns:controls="clr-namespace:Core2D.UI.Wpf.Controls"
-             xmlns:converters="clr-namespace:Core2D.UI.Wpf.Converters"
+             xmlns:core="clr-namespace:Core2D;assembly=Core2D" 
+             xmlns:controls="clr-namespace:Core2D.UI.Wpf.Controls" 
+             xmlns:converters="clr-namespace:Core2D.UI.Wpf.Converters" 
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="600"
+             d:DesignHeight="600" d:DesignWidth="600" 
              Width="{Binding Editor.Project.CurrentContainer.Template.Width}" 
-             Height="{Binding Editor.Project.CurrentContainer.Template.Height}"
+             Height="{Binding Editor.Project.CurrentContainer.Template.Height}" 
              controls:LayerElement.Renderer="{Binding Editor.Renderers[0]}">
     <UserControl.InputBindings>
         <KeyBinding Command="{x:Static core:Commands.DeleteCommand}" CommandParameter="{Binding}" Key="Delete" Modifiers=""/>
@@ -55,11 +55,7 @@
             <ItemsControl ItemsSource="{Binding Layers}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <Canvas 
-                        Width="{Binding Width}" 
-                        Height="{Binding Height}" 
-                        Background="{Binding Background, Converter={StaticResource ArgbColorToBrushConverter}}">
-                        </Canvas>
+                        <Canvas Width="{Binding Width}" Height="{Binding Height}" Background="{Binding Background, Converter={StaticResource ArgbColorToBrushConverter}}"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
@@ -79,8 +75,7 @@
             <ItemsControl ItemsSource="{Binding Layers}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <Canvas Width="{Binding Template.Width}" Height="{Binding Template.Height}" Background="Transparent">
-                        </Canvas>
+                        <Canvas Width="{Binding Template.Width}" Height="{Binding Template.Height}" Background="Transparent"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
@@ -141,11 +136,7 @@
                     </Style>
                 </Control.Style>
             </Control>
-            <controls:EditorCanvas 
-                    Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                    Background="Transparent"
-                    Focusable="True"
-                    FocusVisualStyle="{x:Null}">
+            <controls:EditorCanvas Tag="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Background="Transparent" Focusable="True" FocusVisualStyle="{x:Null}">
                 <controls:EditorCanvas.Style>
                     <Style TargetType="{x:Type controls:EditorCanvas}">
                         <Setter Property="Width" Value="{Binding Template.Width}"/>
