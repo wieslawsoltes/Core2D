@@ -1070,6 +1070,9 @@
                         </TreeView.DataTemplates>
                     </TreeView>
                 </TabItem>
+                <TabItem Header="Selected" Classes="property">
+                    <ContentControl Content="{Binding #tree.SelectedItem}"/>
+                </TabItem>
             </TabControl>
         </DataTemplate>
         <!-- project -->
