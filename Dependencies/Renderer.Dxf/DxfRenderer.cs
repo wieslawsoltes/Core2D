@@ -18,7 +18,7 @@ using netDxf.Units;
 namespace Dependencies
 {
     /// <summary>
-    /// 
+    /// Native netDxf shape renderer.
     /// </summary>
     public class DxfRenderer : Core2D.ObservableObject, Core2D.IRenderer
     {
@@ -30,9 +30,7 @@ namespace Dependencies
         private Layer _currentLayer;
         private Core2D.RendererState _state = new Core2D.RendererState();
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public Core2D.RendererState State
         {
             get { return _state; }
@@ -40,7 +38,7 @@ namespace Dependencies
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="DxfRenderer"/> class.
         /// </summary>
         public DxfRenderer()
         {
@@ -48,9 +46,9 @@ namespace Dependencies
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="DxfRenderer"/> instance.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The new instance of the <see cref="DxfRenderer"/> class.</returns>
         public static Core2D.IRenderer Create()
         {
             return new DxfRenderer();
@@ -92,6 +90,7 @@ namespace Dependencies
         }
 
         private static double LineweightFactor = 96.0 / 2540.0;
+
         private static short[] Lineweights = { -3, -2, -1, 0, 5, 9, 13, 15, 18, 20, 25, 30, 35, 40, 50, 53, 60, 70, 80, 90, 100, 106, 120, 140, 158, 200, 211 };
 
         private static short ThicknessToLineweight(double thickness)
@@ -557,10 +556,7 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="isZooming"></param>
+        /// <inheritdoc/>
         public void ClearCache(bool isZooming)
         {
             if (!isZooming)
@@ -573,16 +569,10 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="container"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object doc, Core2D.Container container, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.Container container, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _doc = doc as DxfDocument;
+            var _doc = dc as DxfDocument;
 
             foreach (var layer in container.Layers)
             {
@@ -595,20 +585,14 @@ namespace Dependencies
 
                 _currentLayer = dxfLayer;
 
-                Draw(doc, layer, db, r);
+                Draw(dc, layer, db, r);
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="layer"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object doc, Core2D.Layer layer, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.Layer layer, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _doc = doc as DxfDocument;
+            var _doc = dc as DxfDocument;
 
             foreach (var shape in layer.Shapes)
             {
@@ -619,21 +603,13 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="line"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XLine line, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XLine line, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!line.IsStroked)
                 return;
 
-            var _doc = doc as DxfDocument;
+            var _doc = dc as DxfDocument;
 
             var style = line.Style;
             var stroke = GetColor(style.Stroke);
@@ -661,21 +637,13 @@ namespace Dependencies
             _doc.AddEntity(dxfLine);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="rectangle"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XRectangle rectangle, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XRectangle rectangle, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!rectangle.IsStroked && !rectangle.IsFilled && !rectangle.IsGrid)
                 return;
 
-            var _doc = doc as DxfDocument;
+            var _doc = dc as DxfDocument;
             var style = rectangle.Style;
             var rect = Core2D.Rect2.Create(rectangle.TopLeft, rectangle.BottomRight, dx, dy);
 
@@ -693,39 +661,23 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="ellipse"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XEllipse ellipse, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XEllipse ellipse, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!ellipse.IsStroked && !ellipse.IsFilled)
                 return;
 
-            var _doc = doc as DxfDocument;
+            var _doc = dc as DxfDocument;
             var style = ellipse.Style;
             var rect = Core2D.Rect2.Create(ellipse.TopLeft, ellipse.BottomRight, dx, dy);
 
             DrawEllipseInternal(_doc, _currentLayer, ellipse.IsFilled, ellipse.IsStroked, style, ref rect);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="arc"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XArc arc, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XArc arc, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _doc = doc as DxfDocument;
+            var _doc = dc as DxfDocument;
             var style = arc.Style;
 
             var dxfEllipse = CreateEllipticalArc(arc, dx, dy);
@@ -769,21 +721,13 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="bezier"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XBezier bezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XBezier bezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!bezier.IsStroked && !bezier.IsFilled)
                 return;
 
-            var _doc = doc as DxfDocument;
+            var _doc = dc as DxfDocument;
             var style = bezier.Style;
 
             var dxfSpline = CreateCubicSpline(
@@ -834,21 +778,13 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="qbezier"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XQBezier qbezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XQBezier qbezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!qbezier.IsStroked && !qbezier.IsFilled)
                 return;
 
-            var _doc = doc as DxfDocument;
+            var _doc = dc as DxfDocument;
             var style = qbezier.Style;
 
             var dxfSpline = CreateQuadraticSpline(
@@ -897,18 +833,10 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="text"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XText text, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XText text, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _doc = doc as DxfDocument;
+            var _doc = dc as DxfDocument;
 
             var tbind = text.BindToTextProperty(db, r);
             if (string.IsNullOrEmpty(tbind))
@@ -1026,18 +954,10 @@ namespace Dependencies
             _doc.AddEntity(dxfMText);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="image"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XImage image, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XImage image, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _doc = doc as DxfDocument;
+            var _doc = dc as DxfDocument;
 
             var bytes = _state.ImageCache.GetImage(image.Key);
             if (bytes != null)
@@ -1077,21 +997,13 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="path"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object doc, Core2D.XPath path, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XPath path, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!path.IsStroked && !path.IsFilled)
                 return;
 
-            var _doc = doc as DxfDocument;
+            var _doc = dc as DxfDocument;
             var style = path.Style;
 
             ICollection<HatchBoundaryPath> bounds;

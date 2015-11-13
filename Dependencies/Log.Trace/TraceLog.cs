@@ -7,25 +7,20 @@ using Core2D;
 namespace Dependencies
 {
     /// <summary>
-    /// 
+    /// Trace message logger.
     /// </summary>
     public class TraceLog : ObservableObject, ILog
     {
         private string _lastMessage;
 
-        /// <summary>
-        ///
-        /// </summary>
+        /// <inheritdoc/>
         public string LastMessage
         {
             get { return _lastMessage; }
             set { Update(ref _lastMessage, value); }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
+        /// <inheritdoc/>
         public void Initialize(string path)
         {
             try
@@ -42,9 +37,7 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public void Close()
         {
             try
@@ -58,63 +51,42 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="message"></param>
+        /// <inheritdoc/>
         public void LogInformation(string message)
         {
             Trace.TraceInformation(message);
             LastMessage = "Information: " + message;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="format"></param>
-        /// <param name="args"></param>
+        /// <inheritdoc/>
         public void LogInformation(string format, params object[] args)
         {
             Trace.TraceInformation(format, args);
             LastMessage = "Information: " + string.Format(format, args);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="message"></param>
+        /// <inheritdoc/>
         public void LogWarning(string message)
         {
             Trace.TraceWarning(message);
             LastMessage = "Warning: " + message;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="format"></param>
-        /// <param name="args"></param>
+        /// <inheritdoc/>
         public void LogWarning(string format, params object[] args)
         {
             Trace.TraceWarning(format, args);
             LastMessage = "Warning: " + string.Format(format, args);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="message"></param>
+        /// <inheritdoc/>
         public void LogError(string message)
         {
             Trace.TraceError(message);
             LastMessage = "Error: " + message;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="format"></param>
-        /// <param name="args"></param>
+        /// <inheritdoc/>
         public void LogError(string format, params object[] args)
         {
             Trace.TraceError(format, args);

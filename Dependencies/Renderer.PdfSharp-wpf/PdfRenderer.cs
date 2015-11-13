@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 namespace Dependencies
 {
     /// <summary>
-    /// 
+    /// Native PdfSharp shape renderer.
     /// </summary>
     public class PdfRenderer : Core2D.ObservableObject, Core2D.IRenderer
     {
@@ -22,9 +22,7 @@ namespace Dependencies
         private Func<double, double> _scaleToPage;
         private Core2D.RendererState _state = new Core2D.RendererState();
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public Core2D.RendererState State
         {
             get { return _state; }
@@ -32,7 +30,7 @@ namespace Dependencies
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="PdfRenderer"/> class.
         /// </summary>
         public PdfRenderer()
         {
@@ -42,9 +40,9 @@ namespace Dependencies
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="PdfRenderer"/> instance.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The new instance of the <see cref="PdfRenderer"/> class.</returns>
         public static Core2D.IRenderer Create()
         {
             return new PdfRenderer();
@@ -411,10 +409,7 @@ namespace Dependencies
                 _scaleToPage(rect.Height));
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="isZooming"></param>
+        /// <inheritdoc/>
         public void ClearCache(bool isZooming)
         {
             if (!isZooming)
@@ -431,57 +426,37 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="container"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, Core2D.Container container, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.Container container, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             foreach (var layer in container.Layers)
             {
                 if (layer.IsVisible)
                 {
-                    Draw(gfx, layer, db, r);
+                    Draw(dc, layer, db, r);
                 }
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="layer"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, Core2D.Layer layer, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.Layer layer, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             foreach (var shape in layer.Shapes)
             {
                 if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
                 {
-                    shape.Draw(gfx, this, 0, 0, db, r);
+                    shape.Draw(dc, this, 0, 0, db, r);
                 }
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="line"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, Core2D.XLine line, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XLine line, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
             if (!line.IsStroked)
                 return;
 
-            var _gfx = gfx as XGraphics;
+            var _gfx = dc as XGraphics;
 
             XPen strokeLine = ToXPen(line.Style, _scaleToPage);
 
@@ -614,18 +589,10 @@ namespace Dependencies
             _gfx.DrawLine(strokeLine, pt1, pt2);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="rectangle"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, Core2D.XRectangle rectangle, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XRectangle rectangle, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _gfx = gfx as XGraphics;
+            var _gfx = dc as XGraphics;
 
             var rect = Core2D.Rect2.Create(
                 rectangle.TopLeft,
@@ -673,18 +640,10 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="ellipse"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, Core2D.XEllipse ellipse, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XEllipse ellipse, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _gfx = gfx as XGraphics;
+            var _gfx = dc as XGraphics;
 
             var rect = Core2D.Rect2.Create(
                 ellipse.TopLeft,
@@ -721,18 +680,10 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="arc"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, Core2D.XArc arc, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)  
-                         {
-            var _gfx = gfx as XGraphics;
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XArc arc, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)  
+        {
+            var _gfx = dc as XGraphics;
 
             var a = Core2D.GdiArc.FromXArc(arc, dx, dy);
 
@@ -778,18 +729,10 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="bezier"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, Core2D.XBezier bezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XBezier bezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _gfx = gfx as XGraphics;
+            var _gfx = dc as XGraphics;
 
             if (bezier.IsFilled)
             {
@@ -836,18 +779,10 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="qbezier"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, Core2D.XQBezier qbezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XQBezier qbezier, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _gfx = gfx as XGraphics;
+            var _gfx = dc as XGraphics;
 
             double x1 = qbezier.Point1.X;
             double y1 = qbezier.Point1.Y;
@@ -903,18 +838,10 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="text"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, Core2D.XText text, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XText text, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _gfx = gfx as XGraphics;
+            var _gfx = dc as XGraphics;
 
             var tbind = text.BindToTextProperty(db, r);
             if (string.IsNullOrEmpty(tbind))
@@ -995,18 +922,10 @@ namespace Dependencies
                 format);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="image"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, Core2D.XImage image, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XImage image, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _gfx = gfx as XGraphics;
+            var _gfx = dc as XGraphics;
 
             var rect = Core2D.Rect2.Create(
                 image.TopLeft,
@@ -1074,18 +993,10 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="path"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, Core2D.XPath path, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Core2D.XPath path, double dx, double dy, ImmutableArray<Core2D.Property> db, Core2D.Record r)
         {
-            var _gfx = gfx as XGraphics;
+            var _gfx = dc as XGraphics;
 
             var gp = path.Geometry.ToXGraphicsPath(dx, dy, _scaleToPage);
 

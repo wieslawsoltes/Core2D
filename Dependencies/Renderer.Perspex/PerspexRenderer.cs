@@ -15,7 +15,7 @@ using Core2D;
 namespace Dependencies
 {
     /// <summary>
-    /// 
+    /// Native Perspex shape renderer.
     /// </summary>
     public class PerspexRenderer : ObservableObject, IRenderer
     {
@@ -23,9 +23,7 @@ namespace Dependencies
         private IDictionary<string, Bitmap> _biCache;
         private RendererState _state = new RendererState();
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public RendererState State
         {
             get { return _state; }
@@ -43,7 +41,7 @@ namespace Dependencies
         private double _textScaleFactor;
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="PerspexRenderer"/> class.
         /// </summary>
         /// <param name="textScaleFactor"></param>
         public PerspexRenderer(double textScaleFactor = 1.0)
@@ -55,9 +53,9 @@ namespace Dependencies
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="PerspexRenderer"/> instance.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The new instance of the <see cref="PerspexRenderer"/> class.</returns>
         public static IRenderer Create()
         {
             return new PerspexRenderer();
@@ -485,10 +483,7 @@ namespace Dependencies
             // TODO: brush.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="isZooming"></param>
+        /// <inheritdoc/>
         public void ClearCache(bool isZooming)
         {
             if (!isZooming)
@@ -505,13 +500,7 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="container"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, Container container, ImmutableArray<Property> db, Record r)
         {
             // NOTE: Template background is drawn in drawable control.
@@ -531,13 +520,7 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="layer"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, Layer layer, ImmutableArray<Property> db, Record r)
         {
             foreach (var shape in layer.Shapes)
@@ -549,15 +532,7 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="line"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
@@ -571,15 +546,7 @@ namespace Dependencies
             // TODO: strokeLine.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="rectangle"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
@@ -615,15 +582,7 @@ namespace Dependencies
             // TODO: pen.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="ellipse"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
@@ -648,15 +607,7 @@ namespace Dependencies
             // TODO: pen.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="arc"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             if (!arc.IsFilled && !arc.IsStroked)
@@ -696,15 +647,7 @@ namespace Dependencies
             // TODO: pen.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="bezier"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XBezier bezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             if (!bezier.IsFilled && !bezier.IsStroked)
@@ -740,15 +683,7 @@ namespace Dependencies
             // TODO: pen.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="qbezier"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XQBezier qbezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             if (!qbezier.IsFilled && !qbezier.IsStroked)
@@ -783,15 +718,7 @@ namespace Dependencies
             // TODO: pen.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="text"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XText text, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _gfx = dc as DrawingContext;
@@ -850,15 +777,7 @@ namespace Dependencies
             ft.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="image"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
@@ -940,15 +859,7 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="path"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             if (!path.IsFilled && !path.IsStroked)

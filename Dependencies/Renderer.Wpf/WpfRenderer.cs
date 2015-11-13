@@ -17,7 +17,7 @@ using Core2D;
 namespace Dependencies
 {
     /// <summary>
-    /// 
+    /// Native Windows Presentation Foundation shape renderer.
     /// </summary>
     public class WpfRenderer : ObservableObject, IRenderer
     {
@@ -41,9 +41,7 @@ namespace Dependencies
         private IDictionary<XPath, Tuple<XPathGeometry, StreamGeometry, ShapeStyle>> _pathCache;
         private RendererState _state = new RendererState();
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public RendererState State
         {
             get { return _state; }
@@ -51,7 +49,7 @@ namespace Dependencies
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="WpfRenderer"/> class.
         /// </summary>
         public WpfRenderer()
         {
@@ -59,9 +57,9 @@ namespace Dependencies
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="WpfRenderer"/> instance.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The new instance of the <see cref="WpfRenderer"/> class.</returns>
         public static IRenderer Create()
         {
             return new WpfRenderer();
@@ -424,10 +422,7 @@ namespace Dependencies
                 ref rect);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="isZooming"></param>
+        /// <inheritdoc/>
         public void ClearCache(bool isZooming)
         {
             _styleCache = new Dictionary<ShapeStyle, Tuple<Brush, Pen>>();
@@ -454,13 +449,7 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="container"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, Container container, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
@@ -480,13 +469,7 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="layer"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, Layer layer, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
@@ -505,15 +488,7 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="line"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
@@ -716,15 +691,7 @@ namespace Dependencies
             DrawLineInternal(_dc, halfLine, strokeLine, line.IsStroked, ref pt1, ref pt2);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="rectangle"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
@@ -778,15 +745,7 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="ellipse"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
@@ -832,15 +791,7 @@ namespace Dependencies
                 rx, ry);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="arc"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
@@ -913,15 +864,7 @@ namespace Dependencies
             DrawPathGeometryInternal(_dc, half, fill, stroke, arc.IsStroked, arc.IsFilled, pg);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="bezier"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XBezier bezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
@@ -989,15 +932,7 @@ namespace Dependencies
             DrawPathGeometryInternal(_dc, half, fill, stroke, bezier.IsStroked, bezier.IsFilled, pg);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="qbezier"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XQBezier qbezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
@@ -1064,15 +999,7 @@ namespace Dependencies
             DrawPathGeometryInternal(_dc, half, fill, stroke, qbezier.IsStroked, qbezier.IsFilled, pg);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="text"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XText text, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var _dc = dc as DrawingContext;
@@ -1194,15 +1121,7 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="image"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             if (image.Key == null)
@@ -1285,15 +1204,7 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dc"></param>
-        /// <param name="path"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
+        /// <inheritdoc/>
         public void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             if (path.Geometry == null)
