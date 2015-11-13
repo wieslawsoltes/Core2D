@@ -1059,7 +1059,7 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Tree" Classes="property">
-                    <TreeView Items="{Binding Path=Figures}" Classes="default">
+                    <TreeView Name="tree" Items="{Binding Path=Figures}" Classes="default">
                         <TreeView.DataTemplates>
                             <TreeDataTemplate DataType="core:XPathFigure" ItemsSource="{Binding Path=Segments}">
                                 <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
