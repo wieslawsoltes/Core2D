@@ -18,12 +18,12 @@ using System.Windows.Shapes;
 namespace Core2D.UI.Wpf.Controls
 {
     /// <summary>
-    /// 
+    /// Interaction logic for <see cref="StatusControl"/> xaml.
     /// </summary>
     public partial class StatusControl : UserControl
     {
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="StatusControl"/> class.
         /// </summary>
         public StatusControl()
         {

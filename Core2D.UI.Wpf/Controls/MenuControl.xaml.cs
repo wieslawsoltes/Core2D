@@ -18,12 +18,12 @@ using System.Windows.Shapes;
 namespace Core2D.UI.Wpf.Controls
 {
     /// <summary>
-    /// 
+    /// Interaction logic for <see cref="MenuControl"/> xaml.
     /// </summary>
     public partial class MenuControl : UserControl
     {
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="MenuControl"/> class.
         /// </summary>
         public MenuControl()
         {

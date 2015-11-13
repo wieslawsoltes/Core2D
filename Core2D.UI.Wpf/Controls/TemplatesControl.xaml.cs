@@ -18,12 +18,12 @@ using System.Windows.Shapes;
 namespace Core2D.UI.Wpf.Controls
 {
     /// <summary>
-    /// 
+    /// Interaction logic for <see cref="TemplatesControl"/> xaml.
     /// </summary>
     public partial class TemplatesControl : UserControl
     {
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="TemplatesControl"/> class.
         /// </summary>
         public TemplatesControl()
         {

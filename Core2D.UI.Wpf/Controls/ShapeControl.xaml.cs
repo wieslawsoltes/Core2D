@@ -18,12 +18,12 @@ using System.Windows.Shapes;
 namespace Core2D.UI.Wpf.Controls
 {
     /// <summary>
-    /// 
+    /// Interaction logic for <see cref="ShapeControl"/> xaml.
     /// </summary>
     public partial class ShapeControl : UserControl
     {
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="ShapeControl"/> class.
         /// </summary>
         public ShapeControl()
         {

@@ -18,12 +18,12 @@ using System.Windows.Shapes;
 namespace Core2D.UI.Wpf.Controls
 {
     /// <summary>
-    /// 
+    /// Interaction logic for <see cref="CanvasControl"/> xaml.
     /// </summary>
     public partial class CanvasControl : UserControl
     {
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="CanvasControl"/> class.
         /// </summary>
         public CanvasControl()
         {

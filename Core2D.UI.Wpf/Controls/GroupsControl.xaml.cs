@@ -19,12 +19,12 @@ using Core2D;
 namespace Core2D.UI.Wpf.Controls
 {
     /// <summary>
-    /// 
+    /// Interaction logic for <see cref="GroupsControl"/> xaml.
     /// </summary>
     public partial class GroupsControl : UserControl
     {
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="GroupsControl"/> class.
         /// </summary>
         public GroupsControl()
         {

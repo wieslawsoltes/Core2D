@@ -18,12 +18,12 @@ using System.Windows.Shapes;
 namespace Core2D.UI.Wpf.Controls
 {
     /// <summary>
-    /// 
+    /// Interaction logic for <see cref="ContainerControl"/> xaml.
     /// </summary>
     public partial class ContainerControl : UserControl
     {
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="ContainerControl"/> class.
         /// </summary>
         public ContainerControl()
         {

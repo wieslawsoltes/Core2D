@@ -18,12 +18,12 @@ using System.Windows.Shapes;
 namespace Core2D.UI.Wpf.Controls
 {
     /// <summary>
-    /// 
+    /// Interaction logic for <see cref="RecordsControl"/> xaml.
     /// </summary>
     public partial class RecordsControl : UserControl
     {
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="RecordsControl"/> class.
         /// </summary>
         public RecordsControl()
         {
