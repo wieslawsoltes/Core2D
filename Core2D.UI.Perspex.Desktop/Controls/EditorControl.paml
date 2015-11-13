@@ -154,10 +154,10 @@
                 <Border Classes="color" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
                     <Border.Background>
                         <MultiBinding Mode="OneWay" Converter="{Static converters:ArgbColorToBrushMultiConverter.Instance}">
-                            <Binding SourcePropertyPath="A"/>
-                            <Binding SourcePropertyPath="R"/>
-                            <Binding SourcePropertyPath="G"/>
-                            <Binding SourcePropertyPath="B"/>
+                            <Binding Path="A"/>
+                            <Binding Path="R"/>
+                            <Binding Path="G"/>
+                            <Binding Path="B"/>
                         </MultiBinding>
                     </Border.Background>
                 </Border>
@@ -165,28 +165,28 @@
                 <TextBox Text="{Binding Path=A, Mode=TwoWay, Converter={Static converters:ByteToStringConverter.Instance}}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                 <ScrollBar Classes="slider" Minimum="0" Maximum="255" ViewportSize="10" Grid.Row="1" Grid.Column="2">
                     <ScrollBar.Value>
-                        <Binding SourcePropertyPath="A" Mode="TwoWay" Converter="{Static converters:ByteToDoubleConverter.Instance}"/>
+                        <Binding Path="A" Mode="TwoWay" Converter="{Static converters:ByteToDoubleConverter.Instance}"/>
                     </ScrollBar.Value>
                 </ScrollBar>
                 <TextBlock Text="R" Classes="left" Grid.Row="2" Grid.Column="0"/>
                 <TextBox Text="{Binding Path=R, Mode=TwoWay, Converter={Static converters:ByteToStringConverter.Instance}}" Classes="left" Grid.Row="2" Grid.Column="1"/>  
                 <ScrollBar Classes="slider" Minimum="0" Maximum="255" ViewportSize="10" Grid.Row="2" Grid.Column="2">
                     <ScrollBar.Value>
-                        <Binding SourcePropertyPath="R" Mode="TwoWay" Converter="{Static converters:ByteToDoubleConverter.Instance}"/>
+                        <Binding Path="R" Mode="TwoWay" Converter="{Static converters:ByteToDoubleConverter.Instance}"/>
                     </ScrollBar.Value>
                 </ScrollBar>
                 <TextBlock Text="G" Classes="left" Grid.Row="3" Grid.Column="0"/>
                 <TextBox Text="{Binding Path=G, Mode=TwoWay, Converter={Static converters:ByteToStringConverter.Instance}}" Classes="left" Grid.Row="3" Grid.Column="1"/>
                 <ScrollBar Classes="slider" Minimum="0" Maximum="255" ViewportSize="10" Grid.Row="3" Grid.Column="2">
                     <ScrollBar.Value>
-                        <Binding SourcePropertyPath="G" Mode="TwoWay" Converter="{Static converters:ByteToDoubleConverter.Instance}"/>
+                        <Binding Path="G" Mode="TwoWay" Converter="{Static converters:ByteToDoubleConverter.Instance}"/>
                     </ScrollBar.Value>
                 </ScrollBar>
                 <TextBlock Text="B" Classes="left" Grid.Row="4" Grid.Column="0"/>
                 <TextBox Text="{Binding Path=B, Mode=TwoWay, Converter={Static converters:ByteToStringConverter.Instance}}" Classes="left" Grid.Row="4" Grid.Column="1"/>
                 <ScrollBar Classes="slider" Minimum="0" Maximum="255" ViewportSize="10" Grid.Row="4" Grid.Column="2">
                     <ScrollBar.Value>
-                        <Binding SourcePropertyPath="B" Mode="TwoWay" Converter="{Static converters:ByteToDoubleConverter.Instance}"/>
+                        <Binding Path="B" Mode="TwoWay" Converter="{Static converters:ByteToDoubleConverter.Instance}"/>
                     </ScrollBar.Value>
                 </ScrollBar>
             </Grid>
@@ -205,14 +205,14 @@
                         <TextBox Text="{Binding Path=RadiusX, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
                         <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="3" Grid.Column="2">
                             <ScrollBar.Value>
-                                <Binding SourcePropertyPath="RadiusX" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                                <Binding Path="RadiusX" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                             </ScrollBar.Value>
                         </ScrollBar>
                         <TextBlock Text="RadiusY" Classes="left" Grid.Row="4" Grid.Column="0"/>
                         <TextBox Text="{Binding Path=RadiusY, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
                         <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="4" Grid.Column="2">
                             <ScrollBar.Value>
-                                <Binding SourcePropertyPath="RadiusY" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                                <Binding Path="RadiusY" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                             </ScrollBar.Value>
                         </ScrollBar>
                     </Grid>
@@ -225,7 +225,7 @@
                         <TextBox Text="{Binding Path=Thickness, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                         <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="1" Grid.Column="2">
                             <ScrollBar.Value>
-                                <Binding SourcePropertyPath="Thickness" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                                <Binding Path="Thickness" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                             </ScrollBar.Value>
                         </ScrollBar>
                         <TextBlock Text="Line Cap" Classes="left" Grid.Row="2" Grid.Column="0"/>
@@ -236,7 +236,7 @@
                         <TextBox Text="{Binding Path=DashOffset, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
                         <ScrollBar Classes="slider" Minimum="0" Maximum="20" ViewportSize="1" Grid.Row="4" Grid.Column="2">
                             <ScrollBar.Value>
-                                <Binding SourcePropertyPath="DashOffset" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                                <Binding Path="DashOffset" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                             </ScrollBar.Value>
                         </ScrollBar>
                     </Grid>
@@ -271,7 +271,7 @@
                     <TextBox Text="{Binding Path=FontSize, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
                     <ScrollBar Classes="slider" Minimum="0" Maximum="72" ViewportSize="1" Grid.Row="3" Grid.Column="2">
                         <ScrollBar.Value>
-                            <Binding SourcePropertyPath="FontSize" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                            <Binding Path="FontSize" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                         </ScrollBar.Value>
                     </ScrollBar>
                     <TextBlock Text="FontStyle" Classes="left" Grid.Row="4" Grid.Column="0"/>
@@ -291,7 +291,7 @@
                         <TextBox Text="{Binding Path=Length, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                         <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="0" Grid.Column="2">
                             <ScrollBar.Value>
-                                <Binding SourcePropertyPath="Length" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                                <Binding Path="Length" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                             </ScrollBar.Value>
                         </ScrollBar>
                         <TextBlock Text="Flags" Classes="left" Grid.Row="1" Grid.Column="0"/>
@@ -336,7 +336,7 @@
                         <TextBox Text="{Binding Path=Thickness, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                         <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="1" Grid.Column="2">
                             <ScrollBar.Value>
-                                <Binding SourcePropertyPath="Thickness" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                                <Binding Path="Thickness" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                             </ScrollBar.Value>
                         </ScrollBar>
                         <TextBlock Text="Line Cap" Classes="left" Grid.Row="2" Grid.Column="0"/>
@@ -347,7 +347,7 @@
                         <TextBox Text="{Binding Path=DashOffset, Mode=TwoWay}" Classes="left" Grid.Row="4" Grid.Column="1"/>
                         <ScrollBar Classes="slider" Minimum="0" Maximum="20" ViewportSize="1" Grid.Row="4" Grid.Column="2">
                             <ScrollBar.Value>
-                                <Binding SourcePropertyPath="DashOffset" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                                <Binding Path="DashOffset" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                             </ScrollBar.Value>
                         </ScrollBar>
                     </Grid>
@@ -1083,21 +1083,21 @@
                         <TextBox Text="{Binding Path=SnapX, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                         <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="1" Grid.Column="2">
                             <ScrollBar.Value>
-                                <Binding SourcePropertyPath="SnapX" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                                <Binding Path="SnapX" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                             </ScrollBar.Value>
                         </ScrollBar>
                         <TextBlock Text="SnapY" Classes="left" Grid.Row="2" Grid.Column="0"/>
                         <TextBox Text="{Binding Path=SnapY, Mode=TwoWay}" Classes="left" Grid.Row="2" Grid.Column="1"/>
                         <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="2" Grid.Column="2">
                             <ScrollBar.Value>
-                                <Binding SourcePropertyPath="SnapY" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                                <Binding Path="SnapY" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                             </ScrollBar.Value>
                         </ScrollBar>
                         <TextBlock Text="HitTreshold" Classes="left" Grid.Row="3" Grid.Column="0"/>
                         <TextBox Text="{Binding Path=HitTreshold, Mode=TwoWay}" Classes="left" Grid.Row="3" Grid.Column="1"/>
                         <ScrollBar Classes="slider" Minimum="0" Maximum="30" ViewportSize="1" Grid.Row="3" Grid.Column="2">
                             <ScrollBar.Value>
-                                <Binding SourcePropertyPath="HitTreshold" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                                <Binding Path="HitTreshold" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                             </ScrollBar.Value>
                         </ScrollBar>
                         <TextBlock Text="MoveMode" Classes="left" Grid.Row="4" Grid.Column="0"/>
@@ -1201,14 +1201,14 @@
                                     <TextBox Text="{Binding Path=Width, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
                                     <ScrollBar Classes="slider" Minimum="0" Maximum="10000" ViewportSize="1" Grid.Row="0" Grid.Column="2">
                                         <ScrollBar.Value>
-                                            <Binding SourcePropertyPath="Width" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                                            <Binding Path="Width" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                                         </ScrollBar.Value>
                                     </ScrollBar>
                                     <TextBlock Text="Height" Classes="left" Grid.Row="1" Grid.Column="0"/>
                                     <TextBox Text="{Binding Path=Height, Mode=TwoWay}" Classes="left" Grid.Row="1" Grid.Column="1"/>
                                     <ScrollBar Classes="slider" Minimum="0" Maximum="10000" ViewportSize="1" Grid.Row="1" Grid.Column="2">
                                         <ScrollBar.Value>
-                                            <Binding SourcePropertyPath="Height" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
+                                            <Binding Path="Height" Mode="TwoWay" Converter="{Static converters:RoundedDoubleToDoubleConverter.Instance}"/>
                                         </ScrollBar.Value>
                                     </ScrollBar>
                                 </Grid>

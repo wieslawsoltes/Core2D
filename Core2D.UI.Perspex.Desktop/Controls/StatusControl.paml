@@ -34,12 +34,12 @@
             <TextBlock Classes="stats">
                 <TextBlock.Text>
                     <MultiBinding Mode="OneWay" Converter="{Static converters:EditorToStatsMultiConverter.Instance}">
-                        <Binding SourcePropertyPath="Editor.Project.Documents.Length"/>
-                        <Binding SourcePropertyPath="Editor.Project.CurrentDocument.Containers.Length"/>
-                        <Binding SourcePropertyPath="Editor.Project.CurrentContainer.Layers.Length"/>
-                        <Binding SourcePropertyPath="Editor.Project.CurrentContainer.CurrentLayer.Shapes.Length"/>
-                        <Binding SourcePropertyPath="Editor.Renderers[0].State.SelectedShape" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
-                        <Binding SourcePropertyPath="Editor.Renderers[0].State.SelectedShapes" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                        <Binding Path="Editor.Project.Documents.Length"/>
+                        <Binding Path="Editor.Project.CurrentDocument.Containers.Length"/>
+                        <Binding Path="Editor.Project.CurrentContainer.Layers.Length"/>
+                        <Binding Path="Editor.Project.CurrentContainer.CurrentLayer.Shapes.Length"/>
+                        <Binding Path="Editor.Renderers[0].State.SelectedShape" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
+                        <Binding Path="Editor.Renderers[0].State.SelectedShapes" Converter="{Static converters:ObjectToObjectConverter.Instance}"/>
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
@@ -61,8 +61,8 @@
                       IsVisible="{Binding Path=Editor.CurrentTool, Converter={Static converters:ObjectEqualsConverter.Instance}, ConverterParameter={Static core:Tool.Path}}">
                 <DropDown.IsVisible>
                     <MultiBinding Mode="OneWay" Converter="{Static converters:ObjectEqualityMultiConverter.Instance}">
-                        <Binding SourcePropertyPath="Editor.CurrentTool"/>
-                        <Binding SourcePropertyPath="{Static core:Tool.Path}"/>
+                        <Binding Path="Editor.CurrentTool"/>
+                        <Binding Path="{Static core:Tool.Path}"/>
                     </MultiBinding>
                 </DropDown.IsVisible>
             </DropDown>

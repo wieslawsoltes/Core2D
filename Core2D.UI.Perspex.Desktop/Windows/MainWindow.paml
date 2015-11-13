@@ -12,8 +12,8 @@
         UseLayoutRounding="True">
     <Window.Title>
         <MultiBinding Mode="OneWay" Converter="{Static converters:EditorToTitleMultiConverter.Instance}">
-            <Binding SourcePropertyPath="Editor.Project.Name"/>
-            <Binding SourcePropertyPath="Editor.IsProjectDirty"/>
+            <Binding Path="Editor.Project.Name"/>
+            <Binding Path="Editor.IsProjectDirty"/>
         </MultiBinding>
     </Window.Title>
     <Grid RowDefinitions="Auto,*,Auto">
