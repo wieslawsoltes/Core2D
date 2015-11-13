@@ -185,10 +185,10 @@ namespace Core2D
         /// Set <see cref="XLine"/> maximum length using <see cref="LineFixedLengthFlags"/>.
         /// </summary>
         /// <param name="line">The line shape.</param>
-        /// <param name="x1">The calculated X coordinate for <see cref="XLine.Start>"/> point.</param>
-        /// <param name="y1">The calculated Y coordinate for <see cref="XLine.Start>"/> point.</param>
-        /// <param name="x2">The calculated X coordinate for <see cref="XLine.End>"/> point.</param>
-        /// <param name="y2">The calculated Y coordinate for <see cref="XLine.End>"/> point.</param>
+        /// <param name="x1">The calculated X coordinate for <see cref="XLine.Start"/> point.</param>
+        /// <param name="y1">The calculated Y coordinate for <see cref="XLine.Start"/> point.</param>
+        /// <param name="x2">The calculated X coordinate for <see cref="XLine.End"/> point.</param>
+        /// <param name="y2">The calculated Y coordinate for <see cref="XLine.End"/> point.</param>
         public static void SetMaxLength(
             XLine line,
             ref double x1, ref double y1,
@@ -229,10 +229,10 @@ namespace Core2D
         /// Set <see cref="XLine"/> maximum length for <see cref="LineFixedLengthFlags.All"/> mode.
         /// </summary>
         /// <param name="line">The line shape.</param>
-        /// <param name="x1">The calculated X coordinate for <see cref="XLine.Start>"/> point.</param>
-        /// <param name="y1">The calculated Y coordinate for <see cref="XLine.Start>"/> point.</param>
-        /// <param name="x2">The calculated X coordinate for <see cref="XLine.End>"/> point.</param>
-        /// <param name="y2">The calculated Y coordinate for <see cref="XLine.End>"/> point.</param>
+        /// <param name="x1">The calculated X coordinate for <see cref="XLine.Start"/> point.</param>
+        /// <param name="y1">The calculated Y coordinate for <see cref="XLine.Start"/> point.</param>
+        /// <param name="x2">The calculated X coordinate for <see cref="XLine.End"/> point.</param>
+        /// <param name="y2">The calculated Y coordinate for <see cref="XLine.End"/> point.</param>
         public static void SetMaxLengthAll(
             XLine line,
             ref double x1, ref double y1,
@@ -276,8 +276,8 @@ namespace Core2D
         /// Set <see cref="XLine"/> maximum length for <see cref="LineFixedLengthFlags.Horizontal"/> mode.
         /// </summary>
         /// <param name="line">The line shape.</param>
-        /// <param name="x1">The calculated X coordinate for <see cref="XLine.Start>"/> point.</param>
-        /// <param name="x2">The calculated X coordinate for <see cref="XLine.End>"/> point.</param>
+        /// <param name="x1">The calculated X coordinate for <see cref="XLine.Start"/> point.</param>
+        /// <param name="x2">The calculated X coordinate for <see cref="XLine.End"/> point.</param>
         public static void SetMaxLengthHorizontal(XLine line, ref double x1, ref double x2)
         {
             var ls = line.Style.LineStyle;
@@ -316,8 +316,8 @@ namespace Core2D
         /// Set <see cref="XLine"/> maximum length for <see cref="LineFixedLengthFlags.Vertical"/> mode.
         /// </summary>
         /// <param name="line">The line shape.</param>
-        /// <param name="y1">The calculated Y coordinate for <see cref="XLine.Start>"/> point.</param>
-        /// <param name="y2">The calculated Y coordinate for <see cref="XLine.End>"/> point.</param>
+        /// <param name="y1">The calculated Y coordinate for <see cref="XLine.Start"/> point.</param>
+        /// <param name="y2">The calculated Y coordinate for <see cref="XLine.End"/> point.</param>
         public static void SetMaxLengthVertical(XLine line, ref double y1, ref double y2)
         {
             var ls = line.Style.LineStyle;

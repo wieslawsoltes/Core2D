@@ -138,10 +138,10 @@ namespace Core2D
         /// <summary>
         /// Creates a new instance of the <see cref="XRectangle"/> class.
         /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="XRectangle.TopLeft"/> corner point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="XRectangle.TopLeft"/> corner point.</param>
-        /// <param name="x2">The X coordinate of <see cref="XRectangle.BottomRight"/> corner point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="XRectangle.BottomRight"/> corner point.</param>
+        /// <param name="x1">The X coordinate of <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XText.BottomRight"/> corner point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XText.BottomRight"/> corner point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The shape text string.</param>
@@ -151,8 +151,8 @@ namespace Core2D
         /// <summary>
         /// Creates a new instance of the <see cref="XRectangle"/> class.
         /// </summary>
-        /// <param name="topLeft">The <see cref="XRectangle.TopLeft"/> corner point.</param>
-        /// <param name="bottomRight">The <see cref="XRectangle.BottomRight"/> corner point.</param>
+        /// <param name="topLeft">The <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="bottomRight">The <see cref="XText.BottomRight"/> corner point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The shape text string.</param>
@@ -162,10 +162,10 @@ namespace Core2D
         /// <summary>
         /// Creates a new instance of the <see cref="XEllipse"/> class.
         /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="XEllipse.TopLeft"/> corner point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="XEllipse.TopLeft"/> corner point.</param>
-        /// <param name="x2">The X coordinate of <see cref="XEllipse.BottomRight"/> corner point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="XEllipse.BottomRight"/> corner point.</param>
+        /// <param name="x1">The X coordinate of <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XText.BottomRight"/> corner point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XText.BottomRight"/> corner point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The shape text string.</param>
@@ -175,8 +175,8 @@ namespace Core2D
         /// <summary>
         /// Creates a new instance of the <see cref="XEllipse"/> class.
         /// </summary>
-        /// <param name="topLeft">The <see cref="XEllipse.TopLeft"/> corner point.</param>
-        /// <param name="bottomRight">The <see cref="XEllipse.BottomRight"/> corner point.</param>
+        /// <param name="topLeft">The <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="bottomRight">The <see cref="XText.BottomRight"/> corner point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The shape text string.</param>
@@ -209,10 +209,10 @@ namespace Core2D
         /// Creates a new instance of the <see cref="XImage"/> class.
         /// </summary>
         /// <param name="path">The image file path.</param>
-        /// <param name="x1">The X coordinate of <see cref="XImage.TopLeft"/> corner point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="XImage.TopLeft"/> corner point.</param>
-        /// <param name="x2">The X coordinate of <see cref="XImage.BottomRight"/> corner point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="XImage.BottomRight"/> corner point.</param>
+        /// <param name="x1">The X coordinate of <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XText.BottomRight"/> corner point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XText.BottomRight"/> corner point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The shape text string.</param>
@@ -223,8 +223,8 @@ namespace Core2D
         /// Creates a new instance of the <see cref="XImage"/> class.
         /// </summary>
         /// <param name="path">The image file path.</param>
-        /// <param name="topLeft">The <see cref="XImage.TopLeft"/> corner point.</param>
-        /// <param name="bottomRight">The <see cref="XImage.BottomRight"/> corner point.</param>
+        /// <param name="topLeft">The <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="bottomRight">The <see cref="XText.BottomRight"/> corner point.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
         /// <param name="isFilled">The flag indicating whether shape is filled.</param>
         /// <param name="text">The shape text string.</param>

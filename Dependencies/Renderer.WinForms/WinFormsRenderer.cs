@@ -55,7 +55,7 @@ namespace Dependencies
         /// <summary>
         /// Creates a new <see cref="WinFormsRenderer"/> instance.
         /// </summary>
-        /// <returns>The new instance of the <see cref="WpfRWinFormsRendererenderer"/> class.</returns>
+        /// <returns>The new instance of the <see cref="WinFormsRenderer"/> class.</returns>
         public static IRenderer Create()
         {
             return new WinFormsRenderer();

@@ -84,10 +84,10 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XRectangle"/> instance.
         /// </summary>
-        /// <param name="x1">The X coordinate of <see cref="XRectangle.TopLeft"/> corner point.</param>
-        /// <param name="y1">The Y coordinate of <see cref="XRectangle.TopLeft"/> corner point.</param>
-        /// <param name="x2">The X coordinate of <see cref="XRectangle.BottomRight"/> corner point.</param>
-        /// <param name="y2">The Y coordinate of <see cref="XRectangle.BottomRight"/> corner point.</param>
+        /// <param name="x1">The X coordinate of <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="y1">The Y coordinate of <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="x2">The X coordinate of <see cref="XText.BottomRight"/> corner point.</param>
+        /// <param name="y2">The Y coordinate of <see cref="XText.BottomRight"/> corner point.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
@@ -130,8 +130,8 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XRectangle"/> instance.
         /// </summary>
-        /// <param name="x">The X coordinate of <see cref="XRectangle.TopLeft"/> and <see cref="XRectangle.BottomRight"/> corner points.</param>
-        /// <param name="y">The Y coordinate of <see cref="XRectangle.TopLeft"/> and <see cref="XRectangle.BottomRight"/> corner points.</param>
+        /// <param name="x">The X coordinate of <see cref="XText.TopLeft"/> and <see cref="XText.BottomRight"/> corner points.</param>
+        /// <param name="y">The Y coordinate of <see cref="XText.TopLeft"/> and <see cref="XText.BottomRight"/> corner points.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
@@ -154,8 +154,8 @@ namespace Core2D
         /// <summary>
         /// Creates a new <see cref="XRectangle"/> instance.
         /// </summary>
-        /// <param name="topLeft">The <see cref="XRectangle.TopLeft"/> corner point.</param>
-        /// <param name="bottomRight">The <see cref="XRectangle.BottomRight"/> corner point.</param>
+        /// <param name="topLeft">The <see cref="XText.TopLeft"/> corner point.</param>
+        /// <param name="bottomRight">The <see cref="XText.BottomRight"/> corner point.</param>
         /// <param name="style">The shape style.</param>
         /// <param name="point">The point template.</param>
         /// <param name="isStroked">The flag indicating whether shape is stroked.</param>
