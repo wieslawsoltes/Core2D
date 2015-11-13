@@ -49,7 +49,7 @@
     <Compile Include="..\..\Core2D\Properties\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="EmfRenderer.cs" />
+    <Compile Include="WinFormsRenderer.cs" />
     <Compile Include="XPathGeometryConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

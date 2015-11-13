@@ -15,7 +15,7 @@ using Core2D;
 namespace Dependencies
 {
     /// <summary>
-    /// 
+    /// Native Windows Forms shape renderer.
     /// </summary>
     public class WinFormsRenderer : ObservableObject, IRenderer
     {
@@ -23,9 +23,7 @@ namespace Dependencies
         private IDictionary<string, Image> _biCache;
         private RendererState _state = new RendererState();
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc/>
         public RendererState State
         {
             get { return _state; }
@@ -43,7 +41,7 @@ namespace Dependencies
         private double _textScaleFactor;
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="WinFormsRenderer"/> class.
         /// </summary>
         /// <param name="textScaleFactor"></param>
         public WinFormsRenderer(double textScaleFactor = 1.0)
@@ -55,9 +53,9 @@ namespace Dependencies
         }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="WinFormsRenderer"/> instance.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The new instance of the <see cref="WpfRWinFormsRendererenderer"/> class.</returns>
         public static IRenderer Create()
         {
             return new WinFormsRenderer();
@@ -300,10 +298,7 @@ namespace Dependencies
             brush.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="isZooming"></param>
+        /// <inheritdoc/>
         public void ClearCache(bool isZooming)
         {
             if (!isZooming)
@@ -320,14 +315,8 @@ namespace Dependencies
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="container"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, Container container, ImmutableArray<Property> db, Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Container container, ImmutableArray<Property> db, Record r)
         {
             // NOTE: Template background is drawn in drawable control.
             //var template = container.Template;
@@ -341,41 +330,27 @@ namespace Dependencies
             {
                 if (layer.IsVisible)
                 {
-                    Draw(gfx, layer, db, r);
+                    Draw(dc, layer, db, r);
                 }
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="layer"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, Layer layer, ImmutableArray<Property> db, Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, Layer layer, ImmutableArray<Property> db, Record r)
         {
             foreach (var shape in layer.Shapes)
             {
                 if (shape.State.Flags.HasFlag(_state.DrawShapeState.Flags))
                 {
-                    shape.Draw(gfx, this, 0, 0, db, r);
+                    shape.Draw(dc, this, 0, 0, db, r);
                 }
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="line"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, XLine line, double dx, double dy, ImmutableArray<Property> db, Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, XLine line, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
-            var _gfx = gfx as Graphics;
+            var _gfx = dc as Graphics;
 
             Brush fillLine = ToSolidBrush(line.Style.Fill);
             Pen strokeLine = ToPen(line.Style, _scaleToPage);
@@ -544,18 +519,10 @@ namespace Dependencies
             strokeEndArrow.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="rectangle"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, XRectangle rectangle, double dx, double dy, ImmutableArray<Property> db, Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, XRectangle rectangle, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
-            var _gfx = gfx as Graphics;
+            var _gfx = dc as Graphics;
 
             Brush brush = ToSolidBrush(rectangle.Style.Fill);
             Pen pen = ToPen(rectangle.Style, _scaleToPage);
@@ -600,18 +567,10 @@ namespace Dependencies
             pen.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="ellipse"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, XEllipse ellipse, double dx, double dy, ImmutableArray<Property> db, Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, XEllipse ellipse, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
-            var _gfx = gfx as Graphics;
+            var _gfx = dc as Graphics;
 
             Brush brush = ToSolidBrush(ellipse.Style.Fill);
             Pen pen = ToPen(ellipse.Style, _scaleToPage);
@@ -645,22 +604,14 @@ namespace Dependencies
             pen.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="arc"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, XArc arc, double dx, double dy, ImmutableArray<Property> db, Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, XArc arc, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
             var a = GdiArc.FromXArc(arc, dx, dy);
             if (a.Width <= 0.0 || a.Height <= 0.0)
                 return;
 
-            var _gfx = gfx as Graphics;
+            var _gfx = dc as Graphics;
 
             Brush brush = ToSolidBrush(arc.Style.Fill);
             Pen pen = ToPen(arc.Style, _scaleToPage);
@@ -694,18 +645,10 @@ namespace Dependencies
             pen.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="bezier"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, XBezier bezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, XBezier bezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
-            var _gfx = gfx as Graphics;
+            var _gfx = dc as Graphics;
 
             Brush brush = ToSolidBrush(bezier.Style.Fill);
             Pen pen = ToPen(bezier.Style, _scaleToPage);
@@ -743,18 +686,10 @@ namespace Dependencies
             pen.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="qbezier"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, XQBezier qbezier, double dx, double dy, ImmutableArray<Property> db, Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, XQBezier qbezier, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
-            var _gfx = gfx as Graphics;
+            var _gfx = dc as Graphics;
 
             Brush brush = ToSolidBrush(qbezier.Style.Fill);
             Pen pen = ToPen(qbezier.Style, _scaleToPage);
@@ -801,18 +736,10 @@ namespace Dependencies
             pen.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="text"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, XText text, double dx, double dy, ImmutableArray<Property> db, Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, XText text, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
-            var _gfx = gfx as Graphics;
+            var _gfx = dc as Graphics;
 
             var tbind = text.BindToTextProperty(db, r);
             if (string.IsNullOrEmpty(tbind))
@@ -898,18 +825,10 @@ namespace Dependencies
             font.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="image"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, XImage image, double dx, double dy, ImmutableArray<Property> db, Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, XImage image, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
-            var _gfx = gfx as Graphics;
+            var _gfx = dc as Graphics;
 
             Brush brush = ToSolidBrush(image.Style.Stroke);
 
@@ -971,18 +890,10 @@ namespace Dependencies
             brush.Dispose();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="gfx"></param>
-        /// <param name="path"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="db"></param>
-        /// <param name="r"></param>
-        public void Draw(object gfx, XPath path, double dx, double dy, ImmutableArray<Property> db, Record r)
+        /// <inheritdoc/>
+        public void Draw(object dc, XPath path, double dx, double dy, ImmutableArray<Property> db, Record r)
         {
-            var _gfx = gfx as Graphics;
+            var _gfx = dc as Graphics;
 
             var gp = path.Geometry.ToGraphicsPath(dx, dy, _scaleToPage);
 
