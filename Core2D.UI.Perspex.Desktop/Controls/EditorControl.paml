@@ -853,10 +853,36 @@
                                 </Grid>
                             </TabItem>
                             <TabItem Header="Shapes" Classes="property">
-                                <ListBox Items="{Binding Path=Shapes}" Classes="default"/>
+                                <TabControl Classes="default">
+                                    <TabItem Header="Shapes" Classes="property">
+                                        <ListBox Name="shapes" Items="{Binding Path=Shapes}" Classes="default">
+                                            <ListBox.DataTemplates>
+                                                <DataTemplate DataType="core:BaseShape">
+                                                    <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
+                                                </DataTemplate>
+                                            </ListBox.DataTemplates>
+                                        </ListBox>
+                                    </TabItem>
+                                    <TabItem Header="Selected" Classes="property">
+                                        <ContentControl Content="{Binding Path=#shapes.SelectedItem, Mode=TwoWay}"/>
+                                    </TabItem>
+                                </TabControl>
                             </TabItem>
                             <TabItem Header="Connectors" Classes="property">
-                                <ListBox Items="{Binding Path=Connectors}" Classes="default"/>
+                                <TabControl Classes="default">
+                                    <TabItem Header="Connectors" Classes="property">
+                                        <ListBox Name="connectors" Items="{Binding Path=Connectors}" Classes="default">
+                                            <ListBox.DataTemplates>
+                                                <DataTemplate DataType="core:XPoint">
+                                                    <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
+                                                </DataTemplate>
+                                            </ListBox.DataTemplates>
+                                        </ListBox>
+                                    </TabItem>
+                                    <TabItem Header="Selected" Classes="property">
+                                        <ContentControl Content="{Binding Path=#connectors.SelectedItem, Mode=TwoWay}"/>
+                                    </TabItem>
+                                </TabControl>
                             </TabItem>
                         </TabControl>
                     </Grid>
@@ -1304,26 +1330,20 @@
                     <ContentControl Content="{Binding Path=Owner, Mode=TwoWay}"/>
                 </TabItem>
                 <TabItem Header="Shapes" Classes="property">
-                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*">
-                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" Grid.Row="0">
-                            <TextBlock Text="Name" Classes="left" Grid.Row="0" Grid.Column="0"/>
-                            <TextBox Text="{Binding Path=#shapes.SelectedItem.Name, Mode=TwoWay}" Classes="left" Grid.Row="0" Grid.Column="1"/>
-                        </Grid>
-                        <TabControl Classes="default" Grid.Row="1">
-                            <TabItem Header="Shapes" Classes="property">
-                                <ListBox Name="shapes" Items="{Binding Path=Shapes}" Classes="default">
-                                    <ListBox.DataTemplates>
-                                        <DataTemplate DataType="core:BaseShape">
-                                            <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
-                                        </DataTemplate>
-                                    </ListBox.DataTemplates>
-                                </ListBox>
-                            </TabItem>
-                            <TabItem Header="Selected" Classes="property">
-                                <ContentControl Content="{Binding Path=#shapes.SelectedItem, Mode=TwoWay}"/>
-                            </TabItem>
-                        </TabControl>
-                    </Grid>
+                    <TabControl Classes="default">
+                        <TabItem Header="Shapes" Classes="property">
+                            <ListBox Name="shapes" Items="{Binding Path=Shapes}" Classes="default">
+                                <ListBox.DataTemplates>
+                                    <DataTemplate DataType="core:BaseShape">
+                                        <TextBlock Text="{Binding Mode=OneWay, Converter={Static converters:ObjectToTypeStringConverter.Instance}}" Classes="default"/>
+                                    </DataTemplate>
+                                </ListBox.DataTemplates>
+                            </ListBox>
+                        </TabItem>
+                        <TabItem Header="Selected" Classes="property">
+                            <ContentControl Content="{Binding Path=#shapes.SelectedItem, Mode=TwoWay}"/>
+                        </TabItem>
+                    </TabControl>
                 </TabItem>
             </TabControl>
         </DataTemplate>  
