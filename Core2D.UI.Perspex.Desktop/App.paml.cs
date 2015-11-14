@@ -63,8 +63,7 @@ namespace Core2D.UI.Perspex.Desktop
         /// </summary>
         private void InitializeComponent()
         {
-            var loader = new PerspexXamlLoader();
-            loader.Load(typeof(App), this);
+            PerspexXamlLoader.Load(this);
         }
 
         /// <summary>

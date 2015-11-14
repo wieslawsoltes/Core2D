@@ -6,29 +6,6 @@
              xmlns:local="clr-namespace:Core2D.UI.Perspex.Desktop;assembly=Core2D.UI.Perspex.Desktop"
              xmlns:converters="clr-namespace:Core2D.UI.Perspex.Desktop.Converters;assembly=Core2D.UI.Perspex.Desktop"
              xmlns:core="clr-namespace:Core2D;assembly=Core2D">
-    <UserControl.Styles>
-        <Style Selector="TextBlock.default">
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="FontSize" Value="12"/>
-        </Style>
-        <Style Selector="TextBlock.stats">
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-        <Style Selector="CheckBox.default">
-            <Setter Property="Margin" Value="2"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-        <Style Selector="DropDown.default">
-            <Setter Property="Margin" Value="2"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
-    </UserControl.Styles>
     <Grid ColumnDefinitions="Auto,*,Auto">
         <StackPanel Grid.Column="0" HorizontalAlignment="Left" Orientation="Horizontal" Margin="2">
             <TextBlock Classes="stats">
@@ -45,16 +22,16 @@
             </TextBlock>
         </StackPanel>
         <WrapPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="2">
-            <DropDown Classes="default" 
+            <DropDown Classes="tool" 
                       Width="110" 
                       Items="{Static core:Enums.ToolValues}" 
                       SelectedItem="{Binding Path=Editor.CurrentTool, Mode=TwoWay}"/>
-            <DropDown Classes="default"
+            <DropDown Classes="tool"
                       Width="110"
                       Items="{Static core:Enums.PathToolValues}"
                       SelectedItem="{Binding Path=Editor.CurrentPathTool, Mode=TwoWay}"/>
             <!--
-            <DropDown Classes="default"
+            <DropDown Classes="tool"
                       Width="110"
                       Items="{Static core:Enums.PathToolValues}"
                       SelectedItem="{Binding Path=Editor.CurrentPathTool, Mode=TwoWay}"
@@ -69,13 +46,13 @@
             -->
         </WrapPanel>
         <WrapPanel Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal" Margin="2">
-            <CheckBox Classes="default" Content="Stroked" IsChecked="{Binding Editor.Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
-            <CheckBox Classes="default" Content="Filled" IsChecked="{Binding Editor.Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
-            <CheckBox Classes="default" Content="Closed" IsChecked="{Binding Editor.Project.Options.DefaultIsClosed, Mode=TwoWay}"/>
-            <CheckBox Classes="default" Content="SmoothJoin" IsChecked="{Binding Editor.Project.Options.DefaultIsSmoothJoin, Mode=TwoWay}"/>
-            <CheckBox Classes="default" Content="Snap" IsChecked="{Binding Editor.Project.Options.SnapToGrid, Mode=TwoWay}"/>
-            <CheckBox Classes="default" Content="Connect" IsChecked="{Binding Editor.Project.Options.TryToConnect, Mode=TwoWay}"/>
-            <CheckBox Classes="default" Content="Auto-fit" IsChecked="{Binding Editor.Renderers[0].State.EnableAutofit, Mode=TwoWay}"/>
+            <CheckBox Classes="options" Content="Stroked" IsChecked="{Binding Editor.Project.Options.DefaultIsStroked, Mode=TwoWay}"/>
+            <CheckBox Classes="options" Content="Filled" IsChecked="{Binding Editor.Project.Options.DefaultIsFilled, Mode=TwoWay}"/>
+            <CheckBox Classes="options" Content="Closed" IsChecked="{Binding Editor.Project.Options.DefaultIsClosed, Mode=TwoWay}"/>
+            <CheckBox Classes="options" Content="SmoothJoin" IsChecked="{Binding Editor.Project.Options.DefaultIsSmoothJoin, Mode=TwoWay}"/>
+            <CheckBox Classes="options" Content="Snap" IsChecked="{Binding Editor.Project.Options.SnapToGrid, Mode=TwoWay}"/>
+            <CheckBox Classes="options" Content="Connect" IsChecked="{Binding Editor.Project.Options.TryToConnect, Mode=TwoWay}"/>
+            <CheckBox Classes="options" Content="Auto-fit" IsChecked="{Binding Editor.Renderers[0].State.EnableAutofit, Mode=TwoWay}"/>
         </WrapPanel>
     </Grid>
 </UserControl>
